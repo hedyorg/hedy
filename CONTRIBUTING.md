@@ -1,36 +1,34 @@
 Helping build Hedy
 ------------
 
-We would be grateful if you help make Hedy better! First you will want to follow the instructions below to run the code locally and configuring your machine as explained below. After that, you want to look at these things:
+We would be grateful if you want to help make Hedy better! 
+
+**How to get in touch with the team**
+Hedy is built with a team of people, and while we love people to help out, we do ask that you let us know that you want to work on something before doing so,
+(either on GitHub or on Discord) so we don't get overwhelmed with small PRs to review for issues that don't have a lot of priority. 
+
+Our main channel of communication is our [Discord](https://discord.gg/8yY7dEme9r), so please join us there and let us know that you want to help out.
+We also have bi-weekly contributors meetings on Tuesdays at 7:30 CET (dates and link are in Discord) where we discuss larger issues and plans.
+
+We hope to see you there and look forward to your contributions!
+
+If you want to get started right away, a good first step is to get Hedy running locally on your machine (see instructions below).
 
 **Open issues**
 
-First have a look at the open issues, there are three categories of issues you can work on:
-* [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project.
+To make it easier to get started, here are three categories of issues you could start with:
+* [Good first issues](https://github.com/hedyorg/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project.
 * [Bugs](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Abug) are problems that people have reported, which we want to see fixed.
 * [Approved](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Aapproved) are issues we have decided we want to move forward.
 
-All other issues should not be picked up without contacting us on Discord (see below) since these issues require more deliberation. 
-
-**Project boards**
-
-The core team (currently consisting of [Felienne](https://github.com/Felienne), [boryanagoncharenko](https://github.com/boryanagoncharenko), [Jesus Pelay](https://github.com/jpelay) and [tibiba](https://github.com/tibiba)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hello@hedy.org) to prevent us from working on the same thing.
-
-Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
-
-**Discord**
-
-We also run a Discord channel to enable users and contributors to get in touch with us, ask any questions and show off awesome Hedy related content. It is a great way for you as a contributor to stay connected and up-to-date with the Hedy project. Feel free to join the channel to get in touch with us! You can join the channel through [this](https://discord.gg/8yY7dEme9r) Discord link.
+For these types of issues it is fine to ping us on GitHub before starting the work. For all other issues, please reach out to us on Discord or join a meeting.
 
 **Discussions**
 
-The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hello@hedy.org) and read the corresponding discussion to see what has already been considered.
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture.
+If you are interested in working on topics related to an open discussion, please join a meeting to discuss the plans in detail.
 
-**For newcomers: No PR without an issue and no "issue + PR"**
-
-While we really love people to help out, we work and prioritize our work as a team and we have a lot of work still on our backlog. 'Random' pull requests can be overwhelming and not always helpful. If you want to help, please pick an open issue to work on. We have a few labeled "good first issue" to get started, or [reach out](mailto:hello@hedy.org). We are always happy to jump on a call to chat about how you can help!!
-
-Run Hedy code on your machine
+Run Hedy on your machine
 ------------
 
 If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to:
@@ -44,7 +42,7 @@ $ source .env/bin/activate
 (.env)$ pip install -r requirements.txt
 ```
 
-Or if you're on windows in a powershell window with py launcher installed:
+Or if you're on Windows in a powershell window with py launcher installed:
 ```bash
 > py -m venv .env
 > ./.env/Scripts/activate.ps1
@@ -55,7 +53,7 @@ If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
 ```
-Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`. 
+Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
 
 Additionally, some pages are known to give a type error about string concatenation. This can be fixed by creating an environment variable for the "BASE_URL" and setting it to `http://localhost:8080/`.
 
@@ -65,15 +63,19 @@ To run the unit tests:
 (.env)$ python -m pytest
 ```
 
-To run the front-end tests, you probably first need to install Cypress.
+To run the front-end tests, you need to install the NPM dependencies (which includes Cypress, the front-end test
+framework) first.
 
-To install Cypress, the front-end test framework, execute the following commands:
 ```bash
-$ cd tests
-$ npm install cypress --save-dev
+$ npm install
 ```
 
-To run the tests go to `/tests/` first.
+To run the tests go to `/tests/` first:
+
+```bash
+$ cd tests
+```
+
 You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
 An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
 
@@ -118,12 +120,12 @@ As this project is growing and multiple people are working on it, we want to mov
 pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`. 
+After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 ```git commit -m "your message" --no-verify```
 
-When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it! 
+When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it!
 
 ## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
@@ -143,20 +145,20 @@ $ npm ci
 $ build-tools/heroku/generate-typescript --watch
 ```
 
-The ```--watch``` command will keep looking for changes and automatically update the files. 
-To just keep it running while you are working on the front-end code. 
+The ```--watch``` command will keep looking for changes and automatically update the files.
+To just keep it running while you are working on the front-end code.
 If you just want to run the code once, simply remove this parameter.
-Make sure to re-load your browser (and work in incognito mode) to see the changes. 
+Make sure to re-load your browser (and work in incognito mode) to see the changes.
 These files are also automatically generated on deploy, so don't worry if you forget to generate them.
 
 ## Working on the web front-end in Tailwind
-All the styling in our front-end HTML templates is done using the Tailwind library. 
+All the styling in our front-end HTML templates is done using the Tailwind library.
 This library has generated classes for styling which we can call on HTML elements.
 To make sure you have access to all possible styling classes, generate the development css file:
 ```
 $ ./build-tools/heroku/tailwind/generate-development-css
 ```
-When merging we want to keep the CSS file as small as possible for performance reasons. 
+When merging we want to keep the CSS file as small as possible for performance reasons.
 Tailwind has a built-in ```purge``` option to only generate CSS for classes that are actually being used.
 Please run the following command so Tailwind only generated actual used classes:
 ```
@@ -214,9 +216,9 @@ When adding new Babel translations the implementation is a bit more complex, but
 
 ## Solving common merge conflicts
 When working on an issue in a branch it might happen that the main branch is updated before your contribution is finished.
-If you create a Pull Request it is possible that GitHub returns _merge conflicts_: 
+If you create a Pull Request it is possible that GitHub returns _merge conflicts_:
 you've worked on the same code as the updated part of main and GitHub in uncertain on which code to keep when merging.
-Always make sure that there are no merge conflicts when setting your PR to _Ready for Review_. 
+Always make sure that there are no merge conflicts when setting your PR to _Ready for Review_.
 In this section we describe the most common merge conflicts and how to solve them:
 
 - Conflict with `generated.css`
@@ -257,26 +259,23 @@ and then:
 docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
 ```
 
-## Testing Teacher facing features locally
+## Testing Admin facing features locally
 
-For some things like making classes you need a teacher's account and you might want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is what it looks like for PyCharm:
+For some things like making classes you need a teacher's account which you might want to test locally. 
+For that you can use the account teacher1 which is stored in the local database.
+
+If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=teacher1. It works a bit differently in each IDE, this is what it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
-
-Once you have made yourself an admin, you can access the admin interface on http://localhost:8080/admin. Go to the Users Overview, and on the users page, select the tick-mark under Teacher to make your account a teacher:
-
-![image](https://user-images.githubusercontent.com/1003685/152981987-64010e8b-a850-4178-aa51-42b0f6cd3aeb.png)
-
 
 
 Pre-release environment
 -----------------------
 
 When you have your PR accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
-
 We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
 
-Accessing logs 
+Accessing logs
 -----------------------
 
 We store programs for logging purposes on s3. If you want to access the logs, you can use this command (if you have AWS access, mainly this is a note to self for Felienne!):

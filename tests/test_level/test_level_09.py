@@ -261,38 +261,70 @@ class TestsLevel9(HedyTester):
               break
             if event.type == pygame.KEYDOWN:
               if event.unicode == 'w':
-                trtl = 25
+                __trtl = 25
                 try:
-                  trtl = int(trtl)
+                  __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'a':
-                trtl = -90
+                __trtl = -90
                 try:
-                  trtl = int(trtl)
+                  __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'd':
-                trtl = 90
+                __trtl = 90
                 try:
-                  trtl = int(trtl)
+                  __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 's':
-                trtl = 180
+                __trtl = 180
                 try:
-                  trtl = int(trtl)
+                  __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 break
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
+
+    #
+    # button tests
+    #
+
+    def test_if_button_is_pressed_print_in_repeat(self):
+        code = textwrap.dedent("""\
+        button1 is button
+        repeat 3 times
+          if button1 is pressed
+            print 'wow'""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('button1')
+        for i in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.USEREVENT:
+              if event.key == 'button1':
+                print(f'wow')
+                break
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)

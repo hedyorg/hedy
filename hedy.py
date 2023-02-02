@@ -1,6 +1,7 @@
 import textwrap
 
 import lark
+from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -178,7 +179,6 @@ class Command:
     remove_from_list = 'remove from list'
     list_access = 'at random'
     in_list = 'in list'
-    not_in_list = 'not in list'
     equality = 'is (equality)'
     repeat = 'repeat'
     for_list = 'for in'
@@ -193,6 +193,7 @@ class Command:
     bigger_equal = '>='
     not_equal = '!='
     pressed = 'pressed'
+    clear = 'clear'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -206,7 +207,6 @@ translatable_commands = {Command.print: ['print'],
                          Command.remove_from_list: ['remove', 'from'],
                          Command.list_access: ['at', 'random'],
                          Command.in_list: ['in'],
-                         Command.not_in_list: ['not in', 'not'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
@@ -246,21 +246,21 @@ commands_per_level = {
     1: ['print', 'ask', 'echo', 'turn', 'forward', 'color'],
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times', 'for'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -290,7 +290,6 @@ commands_and_types_per_level = {
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
-    Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -652,10 +651,6 @@ class TypeValidator(Transformer):
         self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
-    def not_in_list_check(self, tree):
-        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
-        return self.to_typed_tree(tree, HedyType.boolean)
-
     def equality_check(self, tree):
         if self.level < 12:
             rules = [int_to_float, int_to_string, float_to_string, input_to_string, input_to_int, input_to_float]
@@ -998,6 +993,9 @@ class UsesPyGame(Transformer):
     def ifpressed_else(self, args):
         return True
 
+    def assign_button(self, args):
+        return True
+
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -1027,8 +1025,6 @@ class AllCommands(Transformer):
             return 'while'
         if keyword == 'in_list_check':
             return 'in'
-        if keyword == 'not_in_list_check':
-            return 'not_in'
         if keyword == 'input_empty_brackets':
             return 'input'
         if keyword == 'print_empty_brackets':
@@ -1281,14 +1277,14 @@ class ConvertToPython(Transformer):
         else:
             return process_characters_needing_escape(variable_name)
 
-    def process_variable_for_fstring_padded(self, name):
+    def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {escape_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
-            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name})"
         elif ConvertToPython.is_quoted(name):
-            return f"{name}.zfill(100)"
+            return f"{name}"
 
     def make_f_string(self, args):
         argument_string = ''
@@ -1449,20 +1445,23 @@ class ConvertToPython_1(ConvertToPython):
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False)
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
     def make_color(self, parameter):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
-        transpiled = textwrap.dedent(f"""\
+    def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
+        exception = ''
+        if isinstance(parameter, str):
+            exception = self.make_catch_exception([parameter])
+        variable = self.get_fresh_var('__trtl')
+        transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
-              {variable} = int({variable})
+              {variable} = {type}({variable})
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
@@ -1471,12 +1470,41 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
             t.{command_text}({variable})""")
+
+    def make_catch_exception(self, args):
+        lists_names = []
+        list_args = []
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        # List usage comes in indexation and random choice
+        list_regex = fr"(({var_regex})+\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        for arg in args:
+            # Expressions come inside a Tree object, so unpack them
+            if isinstance(arg, Tree):
+                arg = arg.children[0]
+            for group in regex.findall(list_regex, arg):
+                if group[0] != '':
+                    list_args.append(group[0])
+                    lists_names.append(group[1])
+                else:
+                    list_args.append(group[3])
+                    lists_names.append(group[4])
+        code = ""
+        exception_text_template = gettext('catch_index_exception')
+        for i, list_name in enumerate(lists_names):
+            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
+            code += textwrap.dedent(f"""\
+            try:
+              {list_args[i]}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+        return code
 
 
 @v_args(meta=True)
@@ -1540,10 +1568,9 @@ class ConvertToPython_2(ConvertToPython_1):
                 res = regex.findall(
                     r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-
+        exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-
-        return f"print(f'{argument_string}')"
+        return exception + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1566,7 +1593,8 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         if self.is_random(value) or self.is_list(value):
-            return parameter + " = " + value
+            exception = self.make_catch_exception([value])
+            return exception + parameter + " = " + value
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
@@ -1581,11 +1609,13 @@ class ConvertToPython_2(ConvertToPython_1):
             return "time.sleep(1)"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
-            return textwrap.dedent(f"""\
-                try:
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+            return code
 
 
 @v_args(meta=True)
@@ -1608,8 +1638,9 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def process_argument(self, meta, arg):
-        # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
-        if arg.isnumeric():  # is int/float
+        # only call process_variable if arg is a string, else keep as is (ie.
+        # don't change 5 into '5', my_list[1] into 'my_list[1]')
+        if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
@@ -1666,7 +1697,8 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        return f"print(f'{argument_string}')"
+        exceptions = self.make_catch_exception(args)
+        return exceptions + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1675,6 +1707,17 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
+
+    def clear(self, meta, args):
+        return f"""extensions.clear()
+try:
+    # If turtle is being used, reset canvas
+    t.hideturtle()
+    turtle.resetscreen()
+    t.left(90)
+    t.showturtle()
+except NameError:
+    pass"""
 
 
 @v_args(meta=True)
@@ -1718,38 +1761,82 @@ else:
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} not in {arg1}"
 
-    def make_ifpressed_command(self, command):
-        if self.ifpressed_prefix_added:
-            return command
-        else:
-            command = (f"""\
+    def assign_button(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        return f"""create_button({button_name})"""
+
+    def make_ifpressed_command(self, command, button=False):
+        command_suffix = (f"""\
 while not pygame_end:
   pygame.display.update()
   event = pygame.event.wait()
   if event.type == pygame.QUIT:
     pygame_end = True
     pygame.quit()
-    break
+    break""")
+
+        if button:
+            command = f"""\
+  if event.type == pygame.USEREVENT:
+{ConvertToPython.indent(command, 4)}"""
+        else:
+            command = f"""\
   if event.type == pygame.KEYDOWN:
-{command}""")
+{ConvertToPython.indent(command, 4)}"""
+
+        if self.ifpressed_prefix_added:
+            return command
+        else:
             self.ifpressed_prefix_added = True
+            return command_suffix + "\n" + command
 
-        return command
+    def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        var_or_button = args[0]
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{ConvertToPython.indent(args[1])}
+  break""", False)
+        elif len(var_or_button) > 1:
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{ConvertToPython.indent(args[1])}
+  break""")
 
-    def ifpressed(self, met, args):
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1], 6)}
-      break""")
-
-    def ifpressed_else(self, met, args):
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1], 6)}
-      break
-    else:
-{ConvertToPython.indent(args[2], 6)}
-      break""")
+    def ifpressed_else(self, meta, args):
+        var_or_button = args[0]
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.key == {var_or_button}:
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""", False)
+        elif len(var_or_button) > 1:
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""")
 
 
 @v_args(meta=True)
@@ -1791,7 +1878,11 @@ class ConvertToPython_6(ConvertToPython_5):
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value
+                if self.is_list(value) or self.is_random(value):
+                    exception = self.make_catch_exception([value])
+                    return exception + parameter + " = " + value
+                else:
+                    return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
@@ -1860,7 +1951,7 @@ def sleep_after(commands, indent=True):
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
-        var_name = self.get_fresh_var('i')
+        var_name = self.get_fresh_var('__i__')
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
@@ -1899,23 +1990,45 @@ class ConvertToPython_8_9(ConvertToPython_7):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
-
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
+        all_lines = ConvertToPython.indent(all_lines)
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
 {all_lines}
-      break""")
+  break""")
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""")
+        else:  # otherwise we mean a button
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{all_lines}
+  break""", True)
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
+        all_lines = ConvertToPython.indent(all_lines)
 
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
 {all_lines}
-      break""")
+  break
+    """, True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break
+    """)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2018,7 +2131,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        return f"print(f'''{argument_string}''')"
+        exception = self.make_catch_exception(args)
+        return exception + f"print(f'''{argument_string}''')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -2058,10 +2172,12 @@ class ConvertToPython_12(ConvertToPython_11):
                 raise exceptions.UnquotedAssignTextException(text=args[1])
 
         if isinstance(right_hand_side, Tree):
-            return left_hand_side + " = " + right_hand_side.children[0]
+            exception = self.make_catch_exception([right_hand_side.children[0]])
+            return exception + left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return left_hand_side + " = " + right_hand_side + ""
+            exception = self.make_catch_exception([right_hand_side])
+            return exception + left_hand_side + " = " + right_hand_side + ""
 
     def var(self, meta, args):
         name = args[0]
@@ -2088,18 +2204,11 @@ class ConvertToPython_12(ConvertToPython_11):
             return self.make_forward(arg.children[0])
         return self.make_forward(float(args[0]))
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
-        transpiled = textwrap.dedent(f"""\
-            {variable} = {parameter}
-            try:
-              {variable} = float({variable})
-            except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
-            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
-        if add_sleep:
-            return sleep_after(transpiled, False)
-        return transpiled
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'float')
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
 
     def division(self, meta, args):
         return self.process_calculation(args, '/')
@@ -2120,15 +2229,8 @@ class ConvertToPython_13(ConvertToPython_12):
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
 
-        # we are generating an fstring now
-        arg0 = self.process_variable_for_fstring_padded(args[0])
-        arg1 = self.process_variable_for_fstring_padded(args[1])
-
-        # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
-        # that is to make sure that string comparison works well "ish" for numbers
-        # this at one point could be improved with a better type system, of course!
-        # the issue is that we can't do everything in here because
-        # kids submit things with the ask command that wew do not ask them to cast (yet)
+        arg0 = self.process_variable_for_comparisons(args[0])
+        arg1 = self.process_variable_for_comparisons(args[1])
 
         simple_comparison = arg0 + operator + arg1
 
@@ -2164,7 +2266,8 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
-        return "while " + args[0] + ":\n" + body
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "while " + args[0] + ":\n" + body
 
 
 @v_args(meta=True)
@@ -2176,7 +2279,21 @@ class ConvertToPython_16(ConvertToPython_15):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def change_list_item(self, meta, args):
-        return args[0] + '[' + args[1] + '-1] = ' + args[2]
+        left_side = args[0] + '[' + args[1] + '-1]'
+        right_side = args[2]
+        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
+        exception = textwrap.dedent(f"""\
+        try:
+          {left_side}
+        except IndexError:
+          raise Exception('{exception_text}')
+        """)
+        return exception + left_side + ' = ' + right_side
+
+    def ifs(self, meta, args):
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "if " + args[0] + ":\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)
@@ -2543,11 +2660,6 @@ def preprocess_blocks(code, level, lang):
         else:
             next_line_needs_indentation = False
 
-        if line_requires_indentation(line, lang):
-            next_line_needs_indentation = True
-        else:
-            next_line_needs_indentation = False
-
         # save to compare for next line
         previous_number_of_indents = current_number_of_indents
 
@@ -2598,8 +2710,6 @@ def preprocess_ifs(code, lang='en'):
                 if contains(c, line):
                     return True
             return False
-
-
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
@@ -2824,7 +2934,6 @@ def transpile_inner(input_string, level, lang="en"):
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
         has_pygame = UsesPyGame().transform(abstract_syntax_tree)
-
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

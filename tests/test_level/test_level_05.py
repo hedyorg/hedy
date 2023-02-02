@@ -493,13 +493,13 @@ class TestsLevel5(HedyTester):
         else
         print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
-        expected = textwrap.dedent("""\
-        people = ['mom', 'dad', 'Emma', 'Sophie']
-        dishwasher = random.choice(people)
-        if dishwasher == 'Sophie':
-          print(f'too bad I have to do the dishes')
-        else:
-          print(f'luckily no dishes because{dishwasher}is already washing up')""")
+        expected = HedyTester.dedent("people = ['mom', 'dad', 'Emma', 'Sophie']",
+                                     HedyTester.list_access_transpiled('random.choice(people)'),
+                                     "dishwasher = random.choice(people)",
+                                     "if dishwasher == 'Sophie':",
+                                     ("print(f'too bad I have to do the dishes')", '  '),
+                                     "else:",
+                                     ("print(f'luckily no dishes because{dishwasher}is already washing up')", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -697,8 +697,9 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
             HedyTester.turn_transpiled('direction', self.level),
             "if direction == '180':",
             (HedyTester.forward_transpiled(100, self.level), '  '))
@@ -714,9 +715,10 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)
-            if direction == '180':""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
+            "if direction == '180':",
             (HedyTester.forward_transpiled('direction', self.level), '  '),
             "else:",
             (HedyTester.turn_transpiled('direction', self.level), '  '))
@@ -729,10 +731,10 @@ class TestsLevel5(HedyTester):
         friend is friends at 2
         print friend""")
 
-        expected = textwrap.dedent("""\
-        friends = ['Hedy', 'Lola', 'Frida']
-        friend = friends[2-1]
-        print(f'{friend}')""")
+        expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
+                                     HedyTester.list_access_transpiled('friends[2-1]'),
+                                     "friend = friends[2-1]",
+                                     "print(f'{friend}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -793,7 +795,6 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
-
     def test_if_fix_nl(self):
         code = textwrap.dedent("""\
             naam is 5
@@ -816,12 +817,10 @@ class TestsLevel5(HedyTester):
             translate=False
         )
 
-
-
-
     #
     # if pressed tests
     #
+
     def test_if_pressed_x_is_letter_key(self):
         code = textwrap.dedent("""\
         if x is pressed print 'it is a letter key'""")
@@ -836,6 +835,27 @@ class TestsLevel5(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
+              print(f'it is a letter key')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_variable(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed print 'it is a letter key'""")
+
+        expected = HedyTester.dedent("""\
+        x = 'a'
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == x:
               print(f'it is a letter key')
               break""")
 
@@ -858,6 +878,7 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'x':
               print(f'first key')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
               print(f'second key')
               break""")
@@ -1202,9 +1223,11 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'ض':
               print(f'arabic')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'ש':
               print(f'hebrew')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'й':
               print(f'russian')
               break""")
@@ -1226,3 +1249,101 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.ParseException,
             extra_check_function=lambda c: c.exception.error_location[0] == 1 and c.exception.error_location[1] == 1
         )
+
+    #
+    # button tests
+    #
+    def test_button(self):
+        code = textwrap.dedent("""\
+        knop is button""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('knop')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_two_buttons(self):
+        code = textwrap.dedent("""\
+        knop1 is button
+        knop2 is button""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('knop1')
+        create_button('knop2')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_button_is_pressed_print(self):
+        code = textwrap.dedent("""\
+        PRINT is button
+        if PRINT is pressed print 'The button got pressed!'""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('PRINT')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRINT':
+              print(f'The button got pressed!')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        BUTTON1 is button
+        if BUTTON1 is pressed BUTTON2 is button""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('BUTTON1')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'BUTTON1':
+              create_button('BUTTON2')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_in_list_then_button(self):
+        code = textwrap.dedent("""\
+        buttonlist is knop1, knop2, knop3
+        x is knop1
+        if x in buttonlist x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        buttonlist = ['knop1', 'knop2', 'knop3']
+        x = 'knop1'
+        if x in buttonlist:
+          create_button(x)""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def if_x_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        if x is pressed knop is button""")
+
+        expected = HedyTester.dedent(f"""\
+        while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+                pygame_end = True
+                pygame.quit()
+                break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_x:
+                    print(f'The button got pressed!')
+                    create_button('knop')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18)

@@ -1,5 +1,5 @@
 // redefining it entirely since it has many order-depending rules (e.g ask_no_quotes should be after ask and before assign)
-command: print | ask | turtle | assign_list | add | remove | sleep | error_ask_no_quotes| assign | error_invalid_space | error_print_no_quotes | error_text_no_print |error_invalid | empty_line
+command: clear | print | ask | turtle | assign_list | add | remove | sleep | error_ask_no_quotes| assign | error_invalid_space | error_print_no_quotes | error_text_no_print |error_invalid | empty_line
 
 print: _PRINT (_print_argument)? -> print
 error_print_no_quotes: _PRINT text -> error_print_nq

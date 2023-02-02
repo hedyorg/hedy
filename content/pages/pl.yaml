@@ -22,7 +22,7 @@ sections:
     -   title: Zmiana preferowanego języka
         text: "Tworząc profil uczniowie powinni wybrać „preferowany język”. Hedy będzie zawsze włączał się w wybranym przez ucznia języku.\nW każdej chwili można zmienić język, ponownie przechodząc do „Moje konto” i „Moje ustawienia osobiste”.\nOd grudnia 2021 r. każde konto Hedy musi mieć ustawiony preferowany język.\nGdy Twoje konto lub konta Twoich uczniów zostaną utworzone przed tą datą, otrzymasz wiadomość, że brakuje wyboru preferowanego języka.\nNie martw się! Przejdź do „Mój profil” i ustaw język w ustawieniach profilu.\nDopóki nie ustawisz języka, Hedy będzie wyświetlane w języku Twojej przeglądarki, a jeśli ten język nie jest obsługiwany, w języku angielskim.\n\n**Dla osób nie mówiących po angielsku**\nNie tylko możesz zmienić język zadań na swój własny język. Możesz także wybrać język, w którym mają być słowa kluczowe (na przykład „drukuj” lub „zapytaj”).\nW ten sposób możesz nauczyć swoich uczniów kodowania za pomocą angielskich słów kluczowych, ale możesz także pozwolić im programować we własnym języku. Na przykład holenderski studenci mogą użyć polecenia „vraag” zamiast „zapytaj”.\n"
     -   title: Przechowywanie programów
-        text: "Ponieważ jesteś teraz zalogowany, zobaczysz niebieski baner z przyciskiem  \"Mój profil\" i \"Moje programy\".\nTe zakładki istnieją również dla Twoich uczniów. W \"Moje programy\" możesz znaleźć wszystkie zapisane kody.\n\nMożesz łatwo zapisać swoje projekty, nadając projektowi nazwę na białym pasku i naciskając zielony przycisk \"Zapisz kod\". \nTy (i Twoi uczniowie) możecie również udostępniać programy. Programy te zostaną opublikowane na naszej stronie eksploracji, aby każdy mógł je zobaczyć i wykorzystać. \nJeśli chcesz cofnąć udostępnianie swojego programu, przejdź do 'Moje programy' i kliknij 'Przestań udostępniać'.\n"
+        text: "Ponieważ jesteś teraz zalogowany, zobaczysz niebieski baner z przyciskiem \"Mój profil\" i \"Moje programy\".\nTe zakładki istnieją również dla Twoich uczniów. W \"Moje programy\" możesz znaleźć wszystkie zapisane kody.\n\nMożesz łatwo zapisać swoje projekty, nadając projektowi nazwę na białym pasku i naciskając zielony przycisk \"Zapisz kod\".\nTy (i Twoi uczniowie) możecie również udostępniać programy. Programy te zostaną opublikowane na naszej stronie \"Odkrywaj\", aby każdy mógł je zobaczyć i wykorzystać.\nJeśli chcesz cofnąć udostępnianie swojego programu, przejdź do 'Moje programy' i kliknij 'Przestań udostępniać'.\n"
 -   title: Nauczanie z Hedy'm
     key: nauczanie
     subsections:
@@ -123,7 +123,7 @@ sections:
                 error_code: "groceries is apples, milk, chocolate\nprint groceries\n"
                 solution_text: "To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.\n"
                 solution_code: "print apples, milk, chocolate\n\nor\n\ngroceries is apples, milk, chocolate\nprint groceries at random\n"
-        -   title: Students use the name of a variable or list as regular text.
+        -   title: Uczniowie używają nazw zmiennych lub list jak zwykłego tekstu
             example:
                 error_text: "This problem probably occured in level 2 as well. Now it can happen with lists too.\n"
                 error_code: "name is Hedy\nprint Hi my name is name\n\nor\n\nanimal is rhino, bee, swan\nprint The best animal is... animal at random\n"
@@ -135,7 +135,7 @@ sections:
                 error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
                 solution_text: "This problem is solved by adding the word at.\n"
                 solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
-        -   title: Students forget to use the print command when also using the at random command.
+        -   title: Students forget to use the print command when also using the at random command
             example:
                 error_text: "Or they will sometimes put at random at the beginning of the line.\n"
                 error_code: "fruit is apple, cherry, banana\nfruit at random\n"
@@ -147,7 +147,7 @@ sections:
                 error_code: "pizzas is funghi tonno quattro stagioni\nprint pizzas at random\n"
                 solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
             title: Students forget to use commas in their lists
-        -   title: Students try to use at random without a list.
+        -   title: Students try to use at random without a list
             example:
                 error_text: "For example\n"
                 error_code: "clubs is Manchester United\nprint clubs at random\n"
@@ -159,7 +159,7 @@ sections:
                 error_code: "names is Jake\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
                 solution_text: "There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.\n"
                 solution_code: "names is Jake, Amy\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
-        -   title: Students forget to use to/from in add/remove.
+        -   title: Students forget to use to/from in add/remove
             example:
                 error_text: "Without to/from the add/remove command won't work.\n"
                 error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
@@ -198,19 +198,19 @@ sections:
                 error_code: "horse is ask 'What is your horse called?'\nif name is Bonfire print 'cool'\nelse print 'less cool!'\n"
                 solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
                 solution_code: "horse is ask 'What is your horse called'\nif horse is Bonfire print 'cool!'\nelse print 'less cool!'\n"
-        -   title: Students still forget the quotes on both sides.
+        -   title: Students still forget the quotes on both sides
             example:
                 error_text: "If commandos can get very long and students tend to forget to use quotes.\n"
                 error_code: "if name is Hedy print fun\nelse print 'meh!\n"
                 solution_text: "Always use 2 quotes in a print command.\n"
                 solution_code: "if name is Hedy print 'fun'\nelse print 'meh!'\n"
-        -   title: Students use quotes around variable names.
+        -   title: Students use quotes around variable names
             example:
                 error_text: "In this level there are no quotes around variable names.\n"
                 error_code: "if 'name' is 'Hedy' print 'fun'\nelse print 'meh!'\n"
                 solution_text: "Remove the quotes to get the code to work.\n"
                 solution_code: "if name is Hedy print 'fun'\nelse print 'meh!\n"
-        -   title: Students use long variable names containing two words.
+        -   title: Students use long variable names containing two words
             example:
                 error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
                 error_code: "chosen door is ask 'Which door do you pick?'\n"
@@ -226,7 +226,7 @@ sections:
                 error_text: "In the example below the password is 'password'. This will result in it always being correct.\n"
                 solution_text: "Pick a different name for your variable.\n"
                 error_code: "password is ask 'What is the password?'\nif password is password print 'Access granted'\nelse print 'Acces denied!'\n"
-                solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'"
+                solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'\n"
             title: The students make the variable name the same as the value in the if statement
         level: '5'
     -   level: '6'
@@ -459,32 +459,37 @@ sections:
 title: Dokumentacja
 learn-more-sections:
 -   title: Czy lubisz Hedy?
-    text: "We love to hear from you!\n\n[Click here to send us a message](mailto:hello@hedy.org \"About Hedy\")\n"
+    text: "Podziel się z nami swoją opinią!\n[Kliknij tutaj aby wysłać do nas wiadomość](mailto:hello@hedy.org \"O Hedy\")\n"
 -   title: Found a bug?
-    text: "[Daj nam znać na GitHubie](https://github.com/Felienne/hedy/issues/new/choose)\n"
--   title: Chcesz pomóc?
-    text: "The easiest way is to help with [translating Hedy](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nBelow the current status, help us complete a language, or add a new one.\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Code week talk
-    text: "Want to know more about Hedy? Check out this talk Felienne gave at the European Code Week 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
+    text: "[Daj nam znać na GitHubie](https://github.com/hedyorg/hedy/issues/new/choose)\n"
+-   title: Co tygodniowa pogadanka nad kodem
+    text: "Chcesz się dowiedzieć więcej o Hedy? Zobacz wystąpienie Felienne na \"European Code Week 2020\" (po Angielsku):\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
 start-sections:
 -   title: Czym jest stopniowany język programowania?
     text: "Uczenie się programowania może być trudne. Nie oznacza to, że programowanie samo w sobie *jest* trudne! Ale jest wiele zasad które należy zapamiętać, zupełnie jak gdy rozpoczyna się naukę polskiego.\nPodobnie, będziesz potrzebować wiele praktyki aby nauczyć się programowania.\n\nMożesz czytać te zdania z łatwością. Ale czy pamiętasz okres rozpoczynania nauki czytania? Każda litera wymagała od ciebie czasu!\nTo prawda również w przypadku programowania, może ono być trudne na początku, ale z czasem staje się łatwiejsze!\n\nDobrą cechą Hedy jest to, że Hedy jest *stopniowany*. Oznacza to, że nie musisz uczyć się wszystkich zasad jednocześnie.\nPierwsze kilka poziomów nie ma aż tak wiele zasad, dzięki czemu swobodnie możesz przyzwyczaić się do programowania.\nNa każdym poziomie dodajemy nowe zasady, zwiększając liczbę komend które znasz. Komendy to instrukcje dla komputera.\n"
 -   title: Dlaczego Hedy jest stopniowany?
-    text: "W tym materiale wideo Felienne, twórczyni Hedy, wyjaśnia dlaczego Hedy jest stopniowany.\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/EdqT313rM40\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n"
+    text: "W tym materiale wideo Felienne, twórczyni Hedy, wyjaśnia dlaczego Hedy jest stopniowany.\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/fmF7HpU_-9k\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n"
 -   title: Dla kogo jest Hedy?
     text: "Hedy jest przeznaczony dla wszystkich dzieci pragnących nauczyć się programować! Musisz jedynie potrafić czytać po angielsku z łatwością.\n"
+-   title: "Multi-lingual programming"
+    text: |
+        While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a a new translation.
+-   title: "Built for the classroom"
+    text: |
+        Hedy is suitable for kids aged 10 and up and designed for classroom use.
+        Teachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.
 -   title: Czy potrzebuję doświadczenia z programowaniem?
     text: "Nie, nie jest to wymagane. Jednakże, jeśli programowałoś już w Scratchu lub Pythonie, niektóre z komend będą dla ciebie znajome.\n"
 -   title: Czy Hedy jest darmowy?
-    text: "Tak! Uniwersytet w Leiden pozwala nam dzielić się nim za darmo. Hedy jest także Otwartym Oprogramowaniem (Open Source), co oznacza, że każdy kto potrafi programować może pomóc nam ulepszać Hedy.\nMożesz znaleźć kod na [GitHubie](https://github.com/Felienne/hedy).\nJeśli lubisz Hedy i chcesz wnieść swój wkład, akceptujemy (i jesteśmy bardzo wdzięczni za) [dotacje](https://www.steunleiden.nl/project/hedy)!\n"
+    text: "Tak! Hedy jest także Otwartym Oprogramowaniem (Open Source), co oznacza, że każdy kto potrafi programować może pomóc nam ulepszać Hedy.\nMożesz znaleźć kod na [GitHubie](https://github.com/hedyorg/hedy).\nJeśli lubisz Hedy i chcesz wnieść swój wkład, akceptujemy (i jesteśmy bardzo wdzięczni za) [dotacje](https://github.com/sponsors/hedyorg)!\n"
 -   title: Czy muszę coś zainstalować?
     text: "Nie. Hedy działa w przeglądarce internetowej, która jest programem którego używasz aby wyświetlać tę stronę. Prawdopodobnie Chrome, Edge lub Firefox. Hedy działa również za twoim telefonie lub tablecie."
 join-sections:
 -   text: "# There are three ways in which you can support Hedy!\n"
     title: Supporting Hedy
 -   title: Improving the language
-    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/Felienne/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
+    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
 -   title: Translating Hedy
-    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
+    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/hedyorg/hedy/blob/main/TRANSLATING.md)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
 -   title: Help teachers get started
     text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"

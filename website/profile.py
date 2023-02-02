@@ -5,6 +5,7 @@ import requests
 from flask import jsonify, request, session
 from flask_babel import gettext
 
+from safe_format import safe_format
 from hedy_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES
 from utils import is_testing_request, timems, valid_email
 from website.auth import (
@@ -56,9 +57,9 @@ class ProfileModule(WebsiteModule):
             try:
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
             if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] not in ["m", "f", "o"]:
                 return gettext("gender_invalid"), 400
@@ -104,7 +105,7 @@ class ProfileModule(WebsiteModule):
                     # If user is subscribed, we remove the old email from the list and add the new one
                     if r.status_code == 200:
                         r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
-                        role = self.db.get_username_role(user["username"])
+                        self.db.get_username_role(user["username"])
                         mailchimp_subscribe_user(email, body["country"])
 
         username = user["username"]
@@ -138,8 +139,8 @@ class ProfileModule(WebsiteModule):
         remember_current_user(self.db.user_by_username(user["username"]))
         return jsonify(resp)
 
-    @route("/", methods=["GET"])
-    @requires_login
+    @ route("/", methods=["GET"])
+    @ requires_login
     def get_profile(self, user):
         print(self, user)
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.

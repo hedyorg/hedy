@@ -8,8 +8,9 @@ condition: equality_check | in_list_check
 equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER) (_SPACE | textwithoutspaces | NUMBER)*
 
 // from level 8 on ifpressed is implemented slightly differently
-ifpressed: _IF LETTER_OR_NUMERAL _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-ifpressed_else: _IF LETTER_OR_NUMERAL _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+ifpressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+ifpressed_else: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+
 // from level 8 on if is implemented slightly differently
 elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 ifpressed_elses: elses
