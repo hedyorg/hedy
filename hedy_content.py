@@ -162,8 +162,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'years',
         'calculator',
         'songs',
-        'haunted',
-        'restaurant'
+        'restaurant',
+        'haunted'
     ],
     12: [
         'default',

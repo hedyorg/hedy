@@ -915,6 +915,7 @@ adventures:
                     Maak het liedje af. Zoek de tekst op als je die niet meer weet.
 
                     ### Opdracht 2
+                    De laatste regel van het liedje is anders. Zorg dta je die regel ook print iin de `{for}`. Darr heb je een `{if}` voor nodig.
                     
                 example_code: |
                     ## 10 kleine visjes
@@ -2280,26 +2281,20 @@ adventures:
             11:
                 story_text: |
                     ## Maak je eigen restaurant
-                    Je kunt nu `{for} i {in} {range} 1 {to} 5` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
+                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
 
                     ### Opdracht
-                    Kun jij nog een inspring-uitdaging aan? Zorg dat de code werkt door de goede hoeveelheid spateis in te springen bij elke regel!
+                    Maak de restaurantcode af. Zorg dat je de bestelling van meerdere mensen kan opnemen. Print steeds netjes het nummer uit, dus 'persoon 1', 'persoon 2', enz.
+                    Weet je niet meteen hoe het moet? Kijk dan bij jouw restaurant van level 8.
+                    
+                    **(extra)** In level 9 hebben we prijzen uitgerekend in het restaurant. Dat kun je nu ook weer toevoegen.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy!'
                     {print} 'U kunt hier uw bestelling doorgeven'
                     mensen = {ask} 'Voor hoeveel personen wilt u bestellen?'
-                    {for} i {in} {range} 1 {to} mensen
-                    _ {print} i 'e bestelling:'
-                    _ eten = {ask} 'Wat wilt u eten?'
-                    _ {print} eten
-                    _ {if} eten {is} patat
-                    _ saus = {ask} 'Wat voor saus wil je?'
-                    _ {print} saus
-                    _ drinken = {ask} 'Wat wilt u drinken?'
-                    _ {print} drinken
-                    prijs = 4 * mensen
-                    {print} 'Dat wordt dan ' prijs ' euro!'
+                    {print} 'Dus u wilt bestellen voor ' mensen ' mensen.'
+                    {print} 'Laten we beginnen'
                     ```
                 start_code: "{print} 'Welkom bij McHedy!'"
             12:
@@ -2543,35 +2538,26 @@ adventures:
             11:
                 story_text: |
                     ## Spookhuis
-                    In dit level kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele `i` te gebruiken.
-                    Let op: Deze code is bijna gelijk aan die in het vorige level. Er zit een aanpassing op regel 5, waar het `{repeat}` commando is vervangen door `{for} i in {range} 1 {to} 3`.
-                    Daarnaast is regel 8 toegevoegd, waardoor de speler nu ziet in welke kamer hij zit.
+                    De speler van het spookhuis loopt door drie kamers en komt steeds een monster tegen.
+                    
+                    ### Opdracht 1
+                    Maak het programma af op de streepjes, en zorg dat je steeds laat weten in welke kamer de speler is.
+                    
+                    ### Opdracht 2
+                    Maak er een spannend avontuur van door deze stappen te volgen:
+                    
+                    1. Maak een lijst met keuzes (bijv aanvallen of wegrennen)
+                    2. Zorg dat de speler kan kiezen met een `{ask}`
+                    3. Is het antwoord goed? Dan komt het volgende monster. Is de keuze fout? Laat dat de speler weten met een `{print}`.
 
-                    ### Opdracht
-                    Maak het programma af door de juiste regel code toe te voegen. Let op: De speler moet voorbij 3 kamers zien te komen om te winnen!
+                    **(extra)** Als je de foute keuze maakt, komt er toch nog een monster! Denk na over hoe je dat zou kunnen veranderen.
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis!'
-                    speler = levend
-                    deuren = 1, 2, 3
                     monsters = zombie, vampier, mummy, reuzespin
                     _
-                        {if} speler {is} levend
-                            goededeur = deuren {at} {random}
-                            {print} 'Kamer ' i
-                            {print} 'Voor je staan drie deuren...'
-                            gekozendeur = {ask} 'Welke deur kies je?'
-                            {print} 'Jij kiest deur...' gekozendeur
-                            {sleep}
-                            {if} gekozendeur {is} goededeur
-                                {print} 'Gelukkig! Geen monster!'
-                            {else}
-                                {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
-                                speler = dood
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} speler {is} levend
-                        {print} ' Hoera! Je bent ontsnapt!'
+                        {print} 'Kamer ' i
+                        monster = monsters {at} {random}
                     ```
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
             14:
