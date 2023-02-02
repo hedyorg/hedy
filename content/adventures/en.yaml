@@ -536,7 +536,9 @@ adventures:
                     This is an example of the `{remove}` command in your story
 
                     ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+                    Copy your story from the previous levels into this level.
+                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.
+                    Add new lines of code to your story, so that all of the new commands are featured at least once in your story.
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -1289,22 +1291,17 @@ adventures:
                     ## Dishwashing
                     Do you always disagree at home about who should wash the dishes or change the litter box today?
                     Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose `{at} {random}` from the list.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
+                    {print} people {at} {random} has to do the dishes
                     ```
                 story_text_2: |
-                    ## Hack the dishwashing program!
-                    Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
-                example_code_2: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    your_name {is} {ask} Who are you?
-                    _ your_name _ people
-                    {print} _ _ _ does the dishes
-                    ```
+                    ### Exercise
+                    Make your own version of the dishwasher program. Firstly make a list of your family members.
+                    Then think of a task that needs to be done, and let the computer decide who has to do the task with the `{at} {random}` command.
+
+                    **Extra** Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
                 start_code: "{print} Who does the dishes?"
             4:
                 story_text: |
@@ -1883,8 +1880,10 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Now you only have one player, so can you add a second player?
-                    You can even use variables to name player 1 and player 2.
+                    Copy the example code and fill in the blanks to add an extra player to this game.
+
+                    **Extra** Now the players are just called player 1 and player 2. Can you add ask commands (with variables of course) to ask the players' names?
+                    This way you could create this output, for example: `James picks... paper`
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2221,29 +2220,34 @@ adventures:
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
                     Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                story_text_2: |
                     ### Exercise
-                    Can you make your own version of the random restaurant?
+                    Now make your own version of the random restaurant.
+                    Make a list of starts, mains, desserts, drinks and prices yourself.
+                    Then use `{print}` and `{at} {random}` commands to tell the costumer what will be on their menu tonight.
+
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random}, please.
                     ```
-                story_text_2: |
-                    ## Allergies
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
-
                 example_code_2: |
+                    ```
+                    {print} Welcome to your own random restaurant!
+                    starters {is} _
+                    mains {is} _
+                    desserts {is} _
+                    drinks {is} _
+                    prices {is} _
+                    _
+                    ```
+                story_text_3: |
+                    ## Allergies
+                    **Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+
+                example_code_3: |
                     ```
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
@@ -2852,25 +2856,28 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
+                example_code_2: |
                     ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
+                    _ Escape from the haunted house!
+                    _ There are 3 doors in front of you...
+                    _ _ _ Which door do you choose?
+                    _ You picked door ... choice
+                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    _ You see...
                     {sleep}
-                    {print} monsters {at} {random}
+                    _ _ _ _
                     ```
                 story_text_2: |
                     ### Exercise
-                    This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
+                    Copy the example codes and fill in the blanks to make it work!
+
+                    **Extra** This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
                     Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
                 story_text_3: |
                     ## Change the game into a tv gameshow!
+                    ### Exercise
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it?
+                    Can you do it? We have already put the first lines into the example code.
                 example_code_3: |
                     ```
                     {print} The big gameshow!

@@ -502,7 +502,9 @@ adventures:
                     Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal
 
                     ### Opdracht
-                    Kun jij de 3 nieuwe commando's `{at} {random}` , `{add} {to}` en `{remove} {from}` in jouw verhaaltje verwerken?
+                    Kopieer jouw verhaal uit het vorige level in dit level.
+                    In dit level leerde je 3 nieuwe commando's: `{at} {random}` , `{add} {to}` en `{remove} {from}`.
+                    Voeg nieuwe regels code toe aan jouw verhaal, zodat deze 3 nieuwe commando's allemaal minstens 1x gebruikt worden.
                 example_code_3: |
                     ```
                     {print} Zijn rugzak is veel te zwaar...
@@ -1203,22 +1205,17 @@ adventures:
                     ## Afwasprogramma
                     Heb jij altijd onenigheid thuis over wie vandaag de afwas moet doen of de kattenbak moet verschonen?
                     Dan kun je de computer heel eerlijk laten kiezen. Dat kun jij nu programmeren in dit level!
-                    Je maakt eerst een lijst met de leden van jouw gezin. Dan kies je met `{at} {random}` uit de lijst.
                 example_code: |
                     ```
                     mensen {is} mama, papa, Emma, Sophie
-                    {print} mensen {at} {random}
+                    {print} mensen {at} {random} doet de afwas!
                     ```
                 story_text_2: |
-                    ## Hack het afwasprogramma met {remove}
-                    Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen!
-                example_code_2: |
-                    ```
-                    mensen {is} mama, papa, Emma, Sophie
-                    jouw_naam {is} {ask} Wie ben jij?
-                    _ jouw_naam _ mensen
-                    {print} _ _ _ doet de afwas vanavond!
-                    ```
+                    ### Opdracht
+                    Maak je eigen versie van het afwasprogramma. Maak eerst een lijst van jouw gezinsleden.
+                    Daarna bedenk je een taak die gedaan moet worden en laat je de computer kiezen wie de taak moet doen met het `{at} {random}` commando.
+
+                    **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met `{remove}`.
                 start_code: "{print} Wie doet de afwas?"
             4:
                 story_text: |
@@ -1500,8 +1497,12 @@ adventures:
                     {print} speler 2 _
                 story_text_2: |
                     ### Opdracht
-                    Nu heb je maar 1 speler, dus kun jij nog een tweede speler toevoegen?
-                    Je kun zelfs nog variabelen gebruiken om de namen van de spelers te vragen en te gebruiken.
+                    Kopieer de voorbeeldcode en vul de correcte code in op het lijntje om een extra speler aan het spel toe te voegen.
+
+                    **Extra** Nu heten de spelers nog speler 1 speler 2. Kun jij met behulp van vraagcommando's (en natuurlijk variabelen) vragen naar de namen van de spelers?
+                    Daarna kun jij uitvoer maken die er bijvoorbeeld zo uitziet:
+
+                    `James kiest... papier`
             4:
                 story_text: |
                     ## Steen, papier, schaar
@@ -2054,20 +2055,28 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
                     ```
-                    gerechten {is} patat, pizza, spruitjes
-                    toetjes {is} een ijsje, appeltaart, franse stinkkaas
-                    drinken {is} cola, water, bier
+                    gerechten {is} spaghetti, spruitjes, hamburgers
+                    {print} Jij eet vanavond gerechten {at} {random} !
                     prijzen {is} 1 euro, 10 euro, 100 euro
-                    {print} Welkom bij het {random} restaurant
-                    {print} Vandaag eet u gerechten {at} {random}
-                    {print} Daarbij drinkt u drinken {at} {random}
-                    {print} En u krijgt toetjes {at} {random} achteraf
-                    {print} Dat wordt dan prijzen {at} {random}
-                    {print} Eet smakelijk!
+                    {print} Dat wordt dan prijzen {at} {random}, alstublieft.
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Nu ga je zelf een random restaurant maken.
+                    Maak nu zelf lijstjes van voorgerechten, hoofdgerechten, toetjes, drinken en prijzen.
+                    Gebruik dan het `{print}` en het `{at} {random}` commando om de klant te vertellen wat hij vanavond voorgeschoteld krijgt.
+                example_code_2: |
+                    ```
+                    voorgerechten
+                    hoofdgerechten {is} _
+                    toetjes {is} _
+                    drinken {is} _
+                    prijzen {is} _
+                    _
                     ```
                 story_text_2: |
                     ## Allergieën
-                    Vindt je klant iets niet lekker of is je klant allergisch? Haal dan een item van je menu met het `{remove}` commando.
+                    **Extra** Vindt je klant iets niet lekker of is je klant allergisch? Haal dan een item van je menu met het `{remove}` commando.
                 example_code_2: |
                     ```
                     {print} Mysterie Milkshake
@@ -2438,23 +2447,26 @@ adventures:
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
                     In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms wordt je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
                     Hedy kiest {random} of je overleeft of niet...
-                example_code: |
+                example_code_2: |
                     ```
-                    {print} Ontsnap uit het spookhuis!
-                    {print} Voor je staan drie deuren...
-                    keuze {is} {ask} Welke deur kies je?
-                    {print} Je koos deur keuze
-                    monsters {is} een zombie, een vampier, NIKS JE ONTSNAPT
-                    {print} Jij ziet...
+                    _ Ontsnap uit het spookhuis!
+                    _ Voor je staan drie deuren...
+                    _ _ _ Welke deur kies je?
+                    _ Je koos deur keuze
+                    monsters _ een zombie, een vampier, NIKS JE ONTSNAPT
+                    _ Jij ziet...
                     {sleep}
-                    {print} monsters {at} {random}
+                    _ _ _ _
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Dit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game?
+                    Kopieer de voorbeeldcode en vul de lijntjes in om het programma aan de praat te krijgen!
+
+                    **Extra** Dit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game?
                     Daarbij zijn er nu maar 3 mogelijke opties voor wat er achter de deur zit, kun jij meer monsters toevoegen aan die lijst?
                 story_text_3: |
                     ## Verander het spel in een tv prijzenshow!
+                    ### Opdracht
                     Tot slot willen we je graag uitdagen om dit spel om te bouwen tot een prijzenshow zoals op tv!
                     In prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...).
                     Kun jij een prijzenshow bouwen?
