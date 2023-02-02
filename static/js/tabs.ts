@@ -21,7 +21,7 @@ import {loadParsonsExercise} from "./parsons";
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-function resetWindow() {
+  function resetWindow() {
     $ ('#warningbox').hide ();
     $ ('#errorbox').hide ();
     $ ('#okbox').hide ();
@@ -92,7 +92,6 @@ function resetWindow() {
       $ ('#level-header input').show ();
       $ ('#parsons_code_container').hide();
       $ ('#debug_container').show();
-      $ ('#adventures-tab').css('max-height', '20em');
     }
 
 

@@ -103,6 +103,9 @@
         सुंदर_रंग {is} हरा, पीला
         रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?'
         {if} रंग {in} सुंदर_रंग {print} 'सुंदर!' {else} {print} 'मेह'
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "उद्धरण चिह्नों का उपयोग करके बिल्कुल हूबहू प्रिंट करें"
@@ -155,6 +158,9 @@
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "`{if}` कई पंक्तियों के साथ"
     explanation: "प्रश्नों के योग का उत्तर '{ask}' के साथ और देखें कि क्या यह सही है। अब हम दो लाइन प्रिंट करते हैं।"

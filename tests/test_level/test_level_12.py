@@ -119,9 +119,10 @@ class TestsLevel12(HedyTester):
             numbers is 1, 2, 4
             print numbers at random""")
 
-        expected = textwrap.dedent("""\
-            numbers = [1, 2, 4]
-            print(f'''{random.choice(numbers)}''')""")
+        expected = HedyTester.dedent("""\
+            numbers = [1, 2, 4]""",
+                                     HedyTester.list_access_transpiled('random.choice(numbers)'),
+                                     "print(f'''{random.choice(numbers)}''')")
 
         self.multi_level_tester(
             code=code,
@@ -135,9 +136,10 @@ class TestsLevel12(HedyTester):
         numbers is 5, 4, 3
         print numbers at 1""")
 
-        expected = textwrap.dedent("""\
-        numbers = [5, 4, 3]
-        print(f'''{numbers[1-1]}''')""")
+        expected = HedyTester.dedent("""\
+        numbers = [5, 4, 3]""",
+                                     HedyTester.list_access_transpiled('numbers[1-1]'),
+                                     "print(f'''{numbers[1-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == '5')
 
@@ -361,6 +363,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
+                                     HedyTester.list_access_transpiled('random.choice(directions)'),
                                      HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
@@ -453,6 +456,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
+                                     HedyTester.list_access_transpiled('random.choice(directions)'),
                                      HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
@@ -720,19 +724,34 @@ class TestsLevel12(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at 1""")
-        expected = HedyTester.dedent(
-            "n = [1, 2, 3]",
-            HedyTester.sleep_command_transpiled("n[1-1]"))
+        expected = textwrap.dedent("""\
+        n = [1, 2, 3]
+        try:
+          try:
+            n[1-1]
+          except IndexError:
+            raise Exception('catch_index_exception')
+          time.sleep(int(n[1-1]))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[1-1]}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
     def test_sleep_with_list_random(self):
+        self.maxDiff = None
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at random""")
-        expected = HedyTester.dedent(
-            "n = [1, 2, 3]",
-            HedyTester.sleep_command_transpiled("random.choice(n)"))
+        expected = textwrap.dedent("""\
+        n = [1, 2, 3]
+        try:
+          try:
+            random.choice(n)
+          except IndexError:
+            raise Exception('catch_index_exception')
+          time.sleep(int(random.choice(n)))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -797,9 +816,9 @@ class TestsLevel12(HedyTester):
         dieren is 'hond', 'kat', 'kangoeroe'
         dier is dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['hond', 'kat', 'kangoeroe']
-        dier = random.choice(dieren)""")
+        expected = HedyTester.dedent("dieren = ['hond', 'kat', 'kangoeroe']",
+                                     HedyTester.list_access_transpiled('random.choice(dieren)'),
+                                     "dier = random.choice(dieren)")
 
         self.multi_level_tester(
             code=code,
@@ -975,9 +994,10 @@ class TestsLevel12(HedyTester):
         code = textwrap.dedent("""\
         getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         getal is getallen at random""")
-        expected = textwrap.dedent("""\
-        getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        getal = random.choice(getallen)""")
+        expected = HedyTester.dedent("""\
+        getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]""",
+                                     HedyTester.list_access_transpiled('random.choice(getallen)'),
+                                     "getal = random.choice(getallen)")
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -1347,7 +1367,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
     @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
-                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+                           '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"""\
         repeat {number} times
@@ -1901,6 +1921,7 @@ class TestsLevel12(HedyTester):
               if event.unicode == 'x':
                 print(f'''first key''')
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'y':
                 print(f'''second key''')
                 break""")
@@ -1959,18 +1980,21 @@ class TestsLevel12(HedyTester):
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'a':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(-90.0, self.level),
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'd':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(90.0, self.level),
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 's':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(180.0, self.level),
@@ -2044,3 +2068,107 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle(),
             max_level=16
         )
+
+    #
+    # button tests
+    #
+    def test_button(self):
+        code = textwrap.dedent("""\
+        x = 'knop'
+        x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'knop'
+        create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18)
+
+    def test_if_button_is_pressed_print(self):
+        code = textwrap.dedent("""\
+        x = 'PRINT'
+        x is button
+        if PRINT is pressed 
+            print 'The button got pressed!'""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'PRINT'
+        create_button(x)
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRINT':
+              print(f'''The button got pressed!''')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'PRESS'
+        x is button
+        if PRESS is pressed
+            y = 'BUT'
+            y is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'PRESS'
+        create_button(x)
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRESS':
+              y = 'BUT'
+              create_button(y)
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_equality_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'knop1'
+        if 'knop1' = x
+            x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'knop1'
+        if convert_numerals('Latin', 'knop1') == convert_numerals('Latin', x):
+          create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_print_in_repeat(self):
+        code = textwrap.dedent("""\
+        x = 'but' 
+        x is button
+        repeat 3 times
+            if but is pressed
+                print 'wow'""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'but'
+        create_button(x)
+        for i in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.USEREVENT:
+              if event.key == 'but':
+                print(f'''wow''')
+                break
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)

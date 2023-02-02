@@ -28,7 +28,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 3 times forward 100"
 
         expected = HedyTester.dedent(
-            "for i in range(int('3')):",
+            "for __i__ in range(int('3')):",
             (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
@@ -37,7 +37,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 5 times print 'me wants a cookie!'"
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i__ in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -57,7 +57,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         n = '5'
-        for i in range(int(n)):
+        for __i__ in range(int(n)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -115,19 +115,19 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         n = input(f'How many times?')
-        for i in range(int(n)):
+        for __i__ in range(int(n)):
           print(f'n')
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
 
     @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
-                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+                           '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{int(number)}')):
+        for __i__ in range(int('{int(number)}')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -145,7 +145,7 @@ class TestsLevel7(HedyTester):
         repeat 10 times print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('10')):
+        for __i__ in range(int('10')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -175,7 +175,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         i = 'hallo!'
-        for _i in range(int('5')):
+        for __i__ in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)
         print(f'{i}')""")
@@ -202,7 +202,7 @@ class TestsLevel7(HedyTester):
         expected = textwrap.dedent("""\
         naam = 'Hedy'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-          for i in range(int('3')):
+          for __i__ in range(int('3')):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
 
@@ -223,7 +223,11 @@ class TestsLevel7(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
-              for i in range(int('5')):
-                print(f'do it 5 times!')
+              for __i__ in range(int('5')):
+                print(f'doe het 5 keer!')
                 time.sleep(0.1)
               break""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected)

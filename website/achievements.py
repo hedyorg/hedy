@@ -3,6 +3,7 @@ from flask_babel import gettext
 
 import hedy
 from hedyweb import AchievementTranslations
+from safe_format import safe_format
 from website import database
 from website.auth import current_user, requires_login
 
@@ -162,7 +163,7 @@ class Achievements:
         translated_achievements = []
         for achievement in session["new_achieved"]:
             percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
-            stats = gettext("percentage_achieved").format(**{"percentage": percentage})
+            stats = safe_format(gettext("percentage_achieved"), percentage=percentage)
             translated_achievements.append(
                 [translations[achievement]["title"], translations[achievement]["text"], stats]
             )

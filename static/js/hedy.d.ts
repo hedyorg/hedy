@@ -56,6 +56,10 @@ interface State {
    */
   readonly default_program_name?: string;
 
+  available_adventures?: Record<string, AvailableAdventure[]>;
+  readonly adventure_names?: Record<string, string>;
+  readonly adventures_default_order? : Record<string, string[]>;
+  readonly teacher_adventures?: Array<TeacherAdventure>;
 
   disable_run?: boolean;
 
@@ -84,4 +88,14 @@ interface Adventure {
 interface Program {
   name: string;
   code: string;
+}
+
+interface AvailableAdventure {
+  from_teacher: boolean;
+  name: string;
+}
+
+interface TeacherAdventure {
+  id: string;
+  level: string;
 }

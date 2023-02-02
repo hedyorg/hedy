@@ -1,11 +1,14 @@
 #!/bin/bash
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
-cd $scriptdir
+cd $scriptdir/../..
 
 echo "------> Validating YAML"
 
 # Validate adventure files against their schema
+#
+# We'll go into every directory that has a <xxx>.schema.json file,
+# and validate all YAML files in that same directory against the schema file.
 #
 # The error messages produced by pajv are pretty bad, but we will just
 # say that getting an error is better than getting NO error.
@@ -14,47 +17,31 @@ echo "------> Validating YAML"
 # the JSON error outputs of this tool and re-interpreting them with useful
 # error messages.
 
-
 # For magical and mysterious reasons, on GitHub actions using 'npx pajv validate' (which
 # would normally be the way to run this command), hangs. It works fine on two of my machines,
 # and also in an Ubuntu Docker container, and 'npx pajv help' works as well... but
 # 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
 # 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
 
-pajv=$scriptdir/../../node_modules/.bin/pajv
+pajv=node_modules/.bin/pajv
 
-echo "------> Validating adventures"
-cd ../../content/adventures/
-$pajv validate \
-    --errors=text \
-    -s "adventures.schema.json" \
-    -d "*.yaml"
-echo "------> Adventure yaml files are valid"
+all_schemas=$(find content -name \*.schema.json)
 
-echo "------> Validating achievements"
-cd ../../content/achievements/
-$pajv validate \
-    --errors=text \
-    -s "achievements.schema.json" \
-    -d "*.yaml"
-echo "------> Achievements yaml files are valid"
+failures=false
 
-echo "------> Validating quizzes"
-cd ../quizzes/
-$pajv validate \
-    --errors=text \
-    -s "quizzes.schema.json" \
-    -d "*.yaml"
-echo "------> Quiz yaml files are valid"
+for schema in $all_schemas; do
+    dir=$(dirname $schema)
+    echo "------> Validating $(basename $dir)"
 
-echo "------> Validating parsons"
-cd ../parsons/
-$pajv validate \
-    --errors=text \
-    -s "parsons.schema.json" \
-    -d "*.yaml"
-echo "------> Parsons yaml files are valid"
+    # Run pajv, remove all the lines that end in the word ' valid' -- those are not interesting
+    # and just add noise.
+    if ! $pajv validate --errors=text -s $schema -d "$dir/*.yaml" > validate.txt; then
+        cat validate.txt | grep -vE ' valid$' || true
+        failures=true
+    fi
+    rm validate.txt
+done
 
-# Validate-texts is producing a lot of noise and it will never fail the build outright
-# anyway (if it would, pajv would have complained earlier), so might as well disable it for now.
-# node $scriptdir/validate-texts.js $scriptdir
+if $failures; then
+    exit 1
+fi

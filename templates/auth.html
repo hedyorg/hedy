@@ -1,13 +1,20 @@
 {% extends "layout.html" %}
-<!--
-Let's add a short explanation:
-    - use the "block body" ot overwrite the complete div within the main container
-    - use the "main body" to focus on the content within the main container
-        - in this case the margins and paddings are already handled -> useful for pages with only "page content"
--->
-{% block body %}
-<div class="pt-8 px-4 pb-4 lg:px-16" id="auth_main_container">
-{% block main %}{% endblock %}
+{#
+
+Template which adds most JavaScripts and a default container which you can choose
+to use or not to use, depending on which block you fill:
+
+- block full_width_content: will give you access to the full width of the page. Use
+  this if you want to make bars that stretch the width of the screen. You are responsible
+  for setting a maximum width somewhere, for example with 'common-page-container'.
+
+- block regular_content: will give you a limited-width, padded container to put some
+  content into that doesn't need too much control over the layout.
+
+#}
+{% block full_width_content %}
+<div id="auth_main_container" class="common-page-container">
+{% block regular_content %}{% endblock %}
 </div>
 {% endblock %}
 {% block scripts %}

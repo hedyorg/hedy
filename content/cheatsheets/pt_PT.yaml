@@ -82,6 +82,9 @@
 -   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     name: '{in}'
     explanation: Check elements with `{in}`
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   explanation: "Escreve com exactidão usando aspas simples."
     demo_code: "print '5 vezes 5 é ' 5 * 5"
@@ -132,6 +135,9 @@
 -   name: '`{repeat}` with turtle'
     explanation: '{repeat} multiple lines'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    name: '{pressed}'
 9:
 -   name: "`if` with multiple lines"
     explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."

@@ -7,6 +7,10 @@
   },
   "definitions": {
     "Cheatsheets": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Cheatsheet" }
+    },
+    "Cheatsheet": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -14,7 +18,7 @@
         "example": { "type": "string" },
         "demo_code": { "type": "string" }
       },
-      "required": ["name", "explanation", "example", "demo_code"],
+      "required": ["name", "explanation", "demo_code"],
       "additionalProperties": false
     }
   }
