@@ -179,6 +179,7 @@ adventures:
                 story_text: "## История\nНа уровне 2 вы можете сделать свой рассказ более интересным. Теперь имя вашего главного героя может находиться в любом месте предложения.\n\nПравда, для этого вам придется немного доработать программу. Теперь вы должны сначала назвать имя своего главного героя.\n\nЗатем вы можете поместить это имя в любое место в предложении.\n\n## Вызов\nМожете ли вы сами составить рассказ, используя переменную? Можете ли вы добавить еще больше переменных?\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
                 start_code: '{print} Ваша история'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             4:
                 story_text: "## История\nВозможно, вы заметили, что в предыдущих уровнях все еще существует проблема. Вы пытались напечатать предложение, содержащее слово name? Например, `{print}` my name is name.\nВы можете решить эту проблему в этом уровне. Вы должны использовать кавычки для всего, что собираетесь напечатать.\n"
                 example_code: "```\nимя {is} Ганс\n{print} Имя главного героя - _ имя\n{print} имя _ сейчас собирается гулять по лесу _\n{print} имя _ немного боится _\nживотные {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987.\n{print} Он слышит звуки _ животных {at} {random}\n{print} имя _ боится, что это лес с привидениями.\n```\n"
@@ -342,6 +343,7 @@ adventures:
                 story_text: "## Камень, бумага, ножницы\nВ этом уровне вы можете попрактиковаться в использовании переменных, чтобы в следующем уровне вы могли провести игру \"Камень, ножницы, бумага\"!\n"
                 example_code: "```\n {is} {ask} камень, бумага или ножницы?\n{print} Я выбираю _\n```\n"
                 start_code: '# разместите здесь свой код'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
                 story_text: "## Камень, бумага, ножницы\n\nВ этом уровне мы можем вводить списки и выбирать из них предметы.\nСначала вы составляете список с помощью `{is}`. Затем вы можете позволить компьютеру выбрать что-то из списка с помощью `{at} {random}`{random}`.\nНапример, вы можете позволить компьютеру выбрать из списка \"камень, бумага и ножницы\"\n"
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
@@ -436,6 +438,8 @@ adventures:
                 story_text_2: "## Аллергия\nУ вашего клиента есть аллергия или ему не нравятся определенные блюда? Тогда вы можете воспользоваться командой `{remove}`, чтобы удалить его из своего меню.\n"
                 example_code_2: "```\n{print} Молочный коктейль \"Тайна\nвкусы {is} клубника, шоколад, ваниль\nаллергия {is} {ask} Есть ли у вас аллергия на какие-либо фалворы?\n_\n{print} Вы получаете молочный коктейль со вкусом {at} {random}.\n```\n"
                 start_code: '# разместите здесь свой код'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: "## Ресторан\nНа этом уровне вы должны использовать кавычки при использовании команды `{print}` или `{ask}`.\n\n## Задача\nДобавьте кавычки в этот код, чтобы он заработал! Будьте внимательны: переменные не должны заключаться в кавычки.\n"
                 example_code: "## Пример ресторана Hedy\n```\nДобавьте кавычки к этому коду _\n{print} Добро пожаловать в ресторан Hedys!\n{print} Сегодня мы подаем пиццу или лазанью.\nеда {is} {ask} Что бы вы хотели съесть?\n{print} Отличный выбор! Еда - моя любимая!\nтоппинг {is} {ask} Вы бы хотели мясо или овощи?\n{print} Еда с начинкой уже в пути!\nнапитки {is} {ask} Что бы вы хотели выпить с этим?\n{print} Спасибо за ваш заказ.\n{print} Ваша еда и напитки будут доставлены прямо сейчас!\n```\n"
@@ -666,6 +670,7 @@ adventures:
                 start_code: '# разместите здесь свой код'
                 story_text_3: "## Превратите игру в телевизионное геймшоу!\nНаконец, мы хотели бы предложить вам превратить эту игру в игровое шоу (как на телевидении), где вы выбираете дверь или чемодан, а в нем находится большая цена!\nСможете ли вы это сделать?\n"
                 example_code_3: "```\n{print} Большое игровое шоу!\n{print} Перед вами 3 чемодана...\n{print} Один из них содержит _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: "## Дом с привидениями\nВ этом уровне вы узнаете, как использовать кавычки в своих играх.\nСможете ли вы сделать свой уровень \"Дом с привидениями\" на 4?\n"
                 example_code: "```\n{print} _ Побег из дома с привидениями! _\n{print} Перед вами 3 двери... _\nвыбор {is} {ask} _ Какую дверь вы выберете? _\n{print} _ Вы выбрали дверь ... _ выбор\nмонстры {is} зомби, вампир, НИЧЕГО ВЫ НЕ ВЫБРАЛИ\n{print} Вы видите... _\n{sleep}\n{print} монстры {at} {random}\n ```\n"
