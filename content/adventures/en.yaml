@@ -246,8 +246,10 @@ adventures:
                         {print} counter
                 story_text: |-
                     ## Loops!
-                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` instead of `{repeat} 5 {times}` and use `counter` in your program.
-                    Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces).
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 5
@@ -479,7 +481,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    Now create your own story of at least 6 lines of code.
+                    This story cannot be the same as the example code.
+                    Use at least one `{ask}` and one `{echo}` command.
+                    You can make it about any topic you like.
+                    If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.
                 start_code: "{print} Your story starts here"
             2:
                 story_text: |
@@ -489,9 +495,15 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
-
+                story_text_2: |
                     ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    Now it's time to add variables to your own story that you've made in the previous level.
+                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+
+                    This code won't work in this level, because you have not used variables yet.
+                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+
+                    **Extra** Add a sleep command to your code to build up tension in your story.
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -526,7 +538,9 @@ adventures:
                     This is an example of the `{remove}` command in your story
 
                     ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+                    Copy your story from the previous levels into this level.
+                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.
+                    Add new lines of code to your story, so that all of the new commands are featured at least once in your story.
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -732,21 +746,20 @@ adventures:
                 start_code: "# place your code here"
     years:
         name: "New Year's"
-        description: "Countdown to the new year!"
+        description: "Countdown to the New Year!"
         default_save_name: "New Year's Countdown"
         levels:
             11:
                 story_text: |
-                    ## Songs
-                    In this level you can use the `{for} i {in} {range}` command to countdown to the New Year.
+                    ## Happy New Year
+                    In this level you can use the `{for}` number `{in}` `{range}` command to countdown to the New Year.
 
                     ### Exercise
                     Fill in the blanks and make the code work!
                 example_code: |
-                    ## Countdown
                     ```
-                    {for} _ {in} _ 10 {to} 1
-                        {print} i
+                    {for} number {in} {range} _ {to} _
+                        {print} number
                     {print} 'Happy New Year!'
                     ```
                 start_code: "# place your code here"
@@ -768,7 +781,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you make the parrot ask a different question? Fill in the blanks in the example!
+                    Copy the example code to your input screen by clicking on the yellow button.
+                    Make the parrot ask a different question. Fill in the blanks in the example!
+                    **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
                 example_code_2: |
                     ```
                     {print} Im Hedy the parrot
@@ -946,7 +961,7 @@ adventures:
                     
                     ### Exercise 1
                     Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
-
+                story_text_2: |
                     ### Exercise 2
                     Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
 
@@ -965,21 +980,19 @@ adventures:
             11:
                 story_text: |
                     ## Songs
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting, like the 5 little monkeys.
+                    In this level you can use the `{for}` with `{range}` to make songs that use counting, like the 5 little monkeys.
 
-                    ### Exercise
-                    Fill in the blanks and make the code work!
+                    ### Exercise 1
+                    Fill in the blanks and make the code work! If you don't remember the song text, look it up yourself.
+
+                    ### Exercise 2
+                    The final line of the song is different from the others. Print this line inside the `{for}`, and use an `{if}` to make it work correctly.
+
                 example_code: |
-                    ## 5 little monkeys
                     ```
-                    _ _ _ _ 5 _ 1
-                        {print} i ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {if} i {is} 1
-                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
-                        {else}
-                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    _ monkeys _ _ 5 _ 1
+                        {print} monkeys ' little monkeys jumping on the bed'
+                        _
                     ```
                 start_code: "# place your code here"
             12:
@@ -1277,22 +1290,17 @@ adventures:
                     ## Dishwashing
                     Do you always disagree at home about who should wash the dishes or change the litter box today?
                     Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose `{at} {random}` from the list.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
+                    {print} people {at} {random} has to do the dishes
                     ```
                 story_text_2: |
-                    ## Hack the dishwashing program!
-                    Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
-                example_code_2: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    your_name {is} {ask} Who are you?
-                    _ your_name _ people
-                    {print} _ _ _ does the dishes
-                    ```
+                    ### Exercise
+                    Make your own version of the dishwasher program. Firstly make a list of your family members.
+                    Then think of a task that needs to be done, and let the computer decide who has to do the task with the `{at} {random}` command.
+
+                    **Extra** Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
                 start_code: "{print} Who does the dishes?"
             4:
                 story_text: |
@@ -1851,6 +1859,10 @@ adventures:
                     _ {is} {ask} rock, paper, or scissors?
                     {print} I choose _
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Copy the example code to your input screen by clicking the yellow button.
+                    Finish the code by filling in the right commands on the blanks.
                 start_code: "# place your code here"
             3:
                 story_text: |
@@ -1867,8 +1879,10 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Now you only have one player, so can you add a second player?
-                    You can even use variables to name player 1 and player 2.
+                    Copy the example code and fill in the blanks to add an extra player to this game.
+
+                    **Extra** Now the players are just called player 1 and player 2. Can you add ask commands (with variables of course) to ask the players' names?
+                    This way you could create this output, for example: `James picks... paper`
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2091,6 +2105,23 @@ adventures:
                                 {print} 'That is wrong. The right answer is ' correct
                     ```
                 start_code: "# place your code here"
+            11:
+                story_text: |
+                    ## Calculator
+                    With a `{for}` you can simplify tables of multiplication practise program.
+
+                    ### Exercise 1
+                    Improve the example code such that it prints a nice multiplication table: <br> "1 times 10 is 10", "2 times 10 is 20", etc.
+
+                    ### Exercise 2
+                    Go back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.
+                example_code: |
+                    ```
+                    number = 10
+                    {for} i {in} {range} 1 to 10
+                        {print} i * number
+                    ```
+                start_code: "# place your code here"
             12:
                 story_text: |
                     ## Calculator
@@ -2159,14 +2190,18 @@ adventures:
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
-                    {ask} What would you like to order?
+                    _ What would you like to order?
                     {echo} So you would like to order
                     {print} Thanks you for your order!
                     {print} It's on its way!
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                    Copy the example code into your input screen by clicking the yellow button.
+                    Firstly, fill in the correct command on the blanks to make to code work properly.
+                    Then add at least 4 more lines of code to the restaurant program.
+                    Ask the costumer what they would like to drink and ask if they want to pay with cash or card.
+                    Lastly, think of a nice way to say goodbye to your costumer.
                 start_code: "# place your code here"
             2:
                 story_text: |
@@ -2184,18 +2219,16 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
+                    Copy your own restaurant code from to previous level to the input screen below.
+                    Fix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.
 
-                example_code_2: |
-                    ```
-                    {print} Welcome to Hedy's restaurant!
-                    {print} Today we're serving pizza or lasagna.
-                    food {is} {ask} What would you like to eat?
-                    {print} Great choice! The food is my favorite!
-                    topping {is} {ask} Would you like meat or veggies on that?
-                    {print} food with topping is on its way!
-                    drinks {is} _
-                    ```
+                    Now that your code is working again, it's time to add something more.
+                    Look at the last line of the example code: `{print} food with topping is on its way!`
+                    In this single line 2 variables have been used to create a summary of the order.
+                    Now add your own summary of the food and drinks ordered by the customer.
+
+                    **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
+
                 start_code: "# place your code here"
             3:
                 story_text: |
@@ -2203,29 +2236,34 @@ adventures:
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
                     Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                story_text_2: |
                     ### Exercise
-                    Can you make your own version of the random restaurant?
+                    Now make your own version of the random restaurant.
+                    Make a list of starts, mains, desserts, drinks and prices yourself.
+                    Then use `{print}` and `{at} {random}` commands to tell the costumer what will be on their menu tonight.
+
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random} please.
                     ```
-                story_text_2: |
-                    ## Allergies
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
-
                 example_code_2: |
+                    ```
+                    {print} Welcome to your own random restaurant!
+                    starters {is} _
+                    mains {is} _
+                    desserts {is} _
+                    drinks {is} _
+                    prices {is} _
+                    _
+                    ```
+                story_text_3: |
+                    ## Allergies
+                    **Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+
+                example_code_3: |
                     ```
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
@@ -2444,25 +2482,19 @@ adventures:
             11:
                 story_text: |
                     ## Restaurant
-                    We can use the `{for} i {in} {range} 1 {to} 5` to `{print}` the orders from multiple customers in an orderly manner.
+                    We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
 
-                    ## Challange
-                    Can you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!
+                    ### Exercise
+                    Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
+                    Are you not sure how to go about this? Have a peek at your level 8 code.
+
+                    **(extra)** In level 9 the restaurant also used prices. You can add that here too!
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 {to} people
-                    _ {print} 'Order number ' i
-                    _ food = {ask} 'What would you like to eat?'
-                    _ {print} food
-                    _ {if} food {is} fries
-                    _ sauce = {ask} 'What kind of sauce would you like with that?'
-                    _ {print} sauce
-                    _ drinks = {ask} 'What would you like to drink?'
-                    _ {print} drinks
-                    price = 4 * people
-                    {print} 'That will be ' price ' dollars, please!'
+                    {print} 'So you want to order for ' people ' people.'
+                    {print} "Let's go!"
                     ```
                 start_code: "# place your code here"
             12:
@@ -2470,7 +2502,7 @@ adventures:
                     ## Restaurant
                     From this level on you can use decimal numbers to make you menu more realistic.
 
-                    ## Challange
+                    ### Exercise
                     Can you think of a code to give your friends and family a 15% discount?
                 example_code: |
                     ```
@@ -2546,17 +2578,16 @@ adventures:
                     Like this:
                 example_code: |
                     ```
-                    {print} Hello, I'm Hedy the fortune teller!
-                    {ask} Who are you?
-                    {print} Let me take a look in my crystal ball
-                    {print} I see... I see...
-                    {echo} Your name is
+                    _ Hello, I'm Hedy the fortune teller!
+                    _ Who are you?
+                    _ Let me take a look in my crystal ball
+                    _ I see... I see...
+                    _ Your name is
                     ```
                 story_text_2: |
                     ### Exercise
-                    Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
-                    Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
-                    Take a look in level 2 to improve your fortune teller.
+                    Copy the example code into your inputscreen and fill in the blanks to make the code work.
+                    **Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.
                 start_code: "# place your code here"
             3:
                 story_text: |
@@ -2794,7 +2825,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you finish the scary story? Or make up your own haunted house story?
+                    Copy the example code to your input screen by clicking the yellow button.
+                    Now finish the story by adding at least 5 lines of code.
+                    Remember to start each line of codes with a `{print}` command.
                 start_code: "{print} How did I get here?"
             2:
                 story_text: |
@@ -2833,25 +2866,28 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
+                example_code_2: |
                     ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
+                    _ Escape from the haunted house!
+                    _ There are 3 doors in front of you...
+                    _ _ _ Which door do you choose?
+                    _ You picked door ... choice
+                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    _ You see...
                     {sleep}
-                    {print} monsters {at} {random}
+                    _ _ _ _
                     ```
                 story_text_2: |
                     ### Exercise
-                    This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
+                    Copy the example codes and fill in the blanks to make it work!
+
+                    **Extra** This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
                     Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
                 story_text_3: |
                     ## Change the game into a tv gameshow!
+                    ### Exercise
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it?
+                    Can you do it? We have already put the first lines into the example code.
                 example_code_3: |
                     ```
                     {print} The big gameshow!
@@ -2937,31 +2973,26 @@ adventures:
             11:
                 story_text: |
                     ## Haunted House
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    In this level we've changed the `{for}` command so we can tell the player where they are. 
+                    
+                    ### Exercise 1
+                    Finish the program so the player knows which room they are in.
+                    
+                    ### Exercise 2
+                    Make the program into an adventure by following these steps:
+                    
+                    1. Make a list of choices (like: fight or flight)
+                    2. Make sure the player can choose an option with `{ask}`
+                    3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. 
 
-                    ### Exercise
-                    Finish the program with the correct line of code. Mind: There are 3 rooms that the player needs to survive before they win!
+                    **(extra)** If you make a wrong choice, a monster is still shown! How could you change that?
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
                     monsters = zombie, vampire, giant spider
                     _
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                        {print} 'Room ' i
+                        monster = monsters {at} {random}
                     ```
                 start_code: "{print} 'Escape from the haunted house!'"
             14:

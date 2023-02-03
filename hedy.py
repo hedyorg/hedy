@@ -1565,6 +1565,7 @@ class ConvertToPython_2(ConvertToPython_1):
             if "random.choice" in a or "[" in a:
                 args_new.append(self.process_variable_for_fstring(a, meta.line))
             else:
+                # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
                     r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
