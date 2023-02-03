@@ -290,6 +290,10 @@ adventures:
                 story_text: "## Kalkulator\nDu kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.\nDette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.\n"
                 example_code: "```\npoengsum = 0\n{for} i {in} {range} 0 {to} 9\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    ditt_svar = 0\n    {while} ditt_svar != riktig_svar\n        {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        ditt_svar = {ask} 'Skriv inn ditt svar:'\n        {print} 'Ditt svar er ' ditt_svar\n    {print} 'Godt jobbet!'\n{print} 'Du vant!'\n```\n"
                 start_code: '# skriv koden din her'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                start_code: '# place your code here'
         name: Kalkulator
         description: Lag en kalkulator
         default_save_name: Kalkulator
@@ -523,6 +527,7 @@ adventures:
                 example_code: "## 5 små aper\n```\napene = 5, 4, 3, 2\n{for} ape {in} apene\n    {print} ape ' små aper hopper i en seng'\n    {print} 'En falt av og dunket hodet sitt'\n    {print} 'å mamma ringte doktoren og doktoren sa'\n    {print} 'INGEN FLERE APER FÅR HOPPE I EN SENG!'\n```\n\n## Baby Shark\n```\nhaiene = baby, mommy, daddy, grandma, grandpa\n{for} hai {in} haiene\n    {print} hai 'tututututudu'\n    {print} hai 'tututututudu'\n    {print} hai 'tututututudu'\n    {print} hai\n```\n## Old McDonald\n```\ndyrene = pig, dog, cow\n{for} dyret {in} dyrene\n    {if} dyret {is} pig\n        lyd = oink\n    {if} dyret {is} dog\n        lyd = woof\n    {if} dyret {is} cow\n        lyd = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' dyret\n    {print} 'E I E I O!'\n    {print} 'with a ' lyd lyd ' here'\n    {print} 'and a ' lyd lyd ' there'\n    {print} 'here a ' lyd\n    {print} 'there a ' lyd\n    {print} 'everywhere a ' lyd lyd\n```\n"
                 start_code: '# skriv koden din her'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             8:
                 story_text: "## Sanger\nPå et tidligere nivå programmerte du sangen 'Bottles of beer'. Du lagde ett vers og så måtte du kopiere verset 99 ganger. På nivå 7 kan du repetere sangen 99 ganger, bare legg til en enkel linje!\n"
                 example_code: "```\nvers = 99\n{repeat} 99 {times}\n    {print} vers ' bottles of beer on the wall'\n    {print} vers ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = vers - 1\n    {print} vers ' bottles of beer on the wall'\n```\n"
