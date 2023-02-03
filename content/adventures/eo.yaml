@@ -71,6 +71,7 @@ adventures:
                 story_text: "## Kantoj\nEn ĉi tiu nivelo vi povas facile fari la infanan kanton \"Kvin simietoj\". Ĉu vi povas fari la lastan koruson?\nVi ankaŭ povas fari la tutan beban ŝarkan kanton (inkluzive de ĉiuj aliaj ŝarkoj en la familio) en nur 6 linioj!\nAŭ vi povas fari Old McDonald kun ĉiuj malsamaj bestoj.\n"
                 example_code: "## 5 simietoj saltantaj sur la lito\n```\nsimioj = 5, 4, 3, 2\n{for} simio {in} simioj\n    {print} simio ' simietoj saltantaj sur la lito'\n    {print} 'Oni defalis kaj vundis sian kapon'\n    {print} 'Panjo vokis la kuraciston, kiu diris:'\n    {print} 'SIMIOJ NE SALTU SUR LA LITO!'\n```\n\n## Ŝarkido\n```\nŝarkoj = ŝarkido, panjo, paĉjo, avinjo, avĉjo\n{for} ŝarko {in} ŝarkoj\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko\n```\n## Maljuna McDonald\n```\nbestoj = porko, hundo, bovo\n{for} besto {in} bestoj\n    {if} besto {is} porko\n        sono = grunt\n    {if} besto {is} hundo\n        sono = boj\n    {if} besto {is} bovo\n        sono = muĝ\n    {print} 'Maljuna McDonald havis bienon'\n    {print} 'I Aj I Aj O!'\n    {print} 'kaj en la bieno estis ' besto\n    {print} 'I Aj I Aj O!'\n    {print} 'kun ' sono sono ' ĉi tie'\n    {print} 'kaj ' sono sono ' tie'\n    {print} 'jen ' sono\n    {print} 'aliloke ' sono\n    {print} 'ĉie ' sono sono\n```\n"
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             6:
                 story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetado. Foje la ripeto ankaŭ baziĝas sur kalkulado.\nEkzemple, en la konata kanto 'Boteloj da biero'. Vi povas programi tiun kanton per iom da matematiko.\n"
                 example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nVi nun povas ripeti liniojn 2 ĝis 6 tiom da fojoj, kiom vi volas, kopiante la liniojn.\n"
@@ -254,6 +255,10 @@ adventures:
                 story_text: "## Divenu la nombron\nEn ĉi tiu nivelo, vi povas programi la ludon «Divenu la nombron»\n"
                 example_code: "```\n{print} 'Divenu la nombron'\nnombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnombro = nombroj {at} {random}\nludo = 'daŭranta'\n{for} i {in} {range} 1 {to} 10\n    {if} ludo == 'daŭranta'\n        diveno = {ask} 'Kiun nombron viaopinie ĝi estas?'\n        {if} diveno > nombro\n            {print} 'Pli malgrande!'\n        {if} diveno < nombro\n            {print} 'Pli grande!'\n        {if} diveno == nombro\n            {print} 'Vi gajnas!'\n            ludo = 'finita'\n```\n"
                 start_code: '# via kodo ĉi tie'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
         description: Krei kalkulilon
         default_save_name: Kalkulilo
     restaurant:
