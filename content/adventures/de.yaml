@@ -126,9 +126,11 @@ adventures:
                     {for} Zähler {in} {range} 1 {to} 5
                         {print} Zähler
                 story_text: |-
-                    ## Schleifen! 
-                    `{print}` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `{for}`. Du kannst jetzt `{for} counter {in} {range} 1 {to} 5` schreiben anstelle von `{repeat} 5 {times}` und `counter` in deinem Programm verwenden.
-                    Probier es aus und schau, was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
+                    ## Schleifen!
+                    In diesem Level fügen wir eine neue Form des Befehls `{for}` hinzu. In früheren Leveln haben wir `{for}` mit Listen benutzt, aber wir können `{for}` auch mit Zahlen verwenden.
+                    Dies machen wir, indem wir einen Variablennamen und dann `{in}` `{range}` schreiben. Dahinter schreiben wir die Zahl bei der es losgehen soll und dann die Zahl, wo es aufhört.
+
+                    Probiere das Beispiel aus, um zu sehen was passiert! In diesem Level musst du wieder Einrückung in den Zeilen unter dem `{for}` anwenden.
                 example_code: "```\n{for} Zähler {in} {range} 1 {to} 5\n    {print} Zähler\n```\n"
             12:
                 start_code: |-
@@ -283,7 +285,7 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
-                story_text_2: "### Übung\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
+                story_text_2: "### Übung\nErstelle nun deine eigene Geschichte aus mindestens 6 Zeilen Code.\nDiese Geschichte soll nicht die gleiche sein wie im Beispiel-Code.\nBenutze mindestens einen `{ask}` und einen `{echo}` Befehl.\nDu kannst das Thema frei wählen.\nWenn dir kein Thema einfällt, nimm eines der folgenden: ins Kino gehen, ein Sportwettkampf oder ein Tag im Zoo.\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -292,9 +294,6 @@ adventures:
                     Dafür musst du aber auch ein kleines bisschen mehr programmieren. Du musst dir jetzt seinen oder ihren Namen richtig merken.
 
                     Dafür kannst du den Namen irgendwo im Satz verwenden.
-
-                    ### Übung
-                    Kannst du selbst eine Geschichte schreiben, die eine Variable verwendet? Kannst du noch mehr Variablen hinzufügen?
 
                 example_code: |-
                     ```
@@ -463,7 +462,9 @@ adventures:
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
 
                     ### Übung
-                    Kannst du die 3 neuen Befehle `{at} {random}`, `{add} {to}` und `{remove} {from}` in deiner eigenen Geschichte verwenden?
+                    Kopiere deine Geschichte aus den vorigen Leveln in dieses Level.
+                    In diesem Level hast du 3 neue Befehle gelernt: `{at} {random}` , `{add} {to}` und `{remove} {from}`.
+                    Füge neue Zeilen Code zu deiner Geschichte hinzu, sodass alle neuen Befehle mindestens ein Mal in deiner Geschichte vorkommen.
                 example_code_3: |
                     ```
                     {print} Sein Rucksack wurde viel zu schwer.
@@ -548,7 +549,7 @@ adventures:
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei\n{ask} Was ist dein Name?\n{echo}\n{echo}\n"
                 example_code_2: "```\n{print} Ich bin Hedy der Papagei\n{ask} _\n{echo}\n{echo}\n"
-                story_text_2: "### Übung\nKannst du den Papagei dazu bringen, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n"
+                story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich, indem du den gelben Knopf drückst.\nBringe den Papagei dazu, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n**Extra** Du kannst den Papagei auch mehrere Fragen stellen lassen. Tippe noch ein paar Zeilen Code unter deinen eigenen Code.\n"
             2:
                 story_text: |
                     ## Papagei
@@ -636,22 +637,19 @@ adventures:
             11:
                 story_text: |
                     ## Lieder
-                    In diesem Level nutzt du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
+                    In diesem Level nutzt du den Befehl `{for}` mit `{range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
 
-                    ### Übung
-                    Fülle die Lücken und mach, dass der Code funktioniert.
+                    ### Übung 1
+                    Fülle die Lücken und mach, dass der Code funktioniert. Falls du den Liedtext nicht kennst, schlage ihn selbst nach.
+
+                    ### Übung 2
+                    Die letzte Zeile des Liedes unterscheidet sich von den anderen. Gib diese Zeile innerhalb eine `{for}` Befehls aus und nutze `{if}` um es korrekt zum Laufen zu bringen.
 
                 example_code: |
-                    ## Fünf kleine Affen
                     ```
-                    _ _ _ _ 5 _ 1
-                        {print} i ' kleine Affen springen auf dem Bett'
-                        {print} 'Einer fiel herunter und stieß sich am Brett'
-                        {print} 'Da rief Mama den Doktor und der Doktor hat gesagt'
-                        {if} i {is} 1
-                            {print} 'BRING DIESE AFFEN ENDLICH INS BETT!'
-                        {else}
-                            {print} 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
+                    _ affen _ _ 5 _ 1
+                        {print} affen ' kleine Affen springen auf dem Bett'
+                        _
                     ```
                 start_code: "# setze hier deinen Code hin"
             10:
@@ -662,11 +660,6 @@ adventures:
                     ### Übung 1
                     Kannst du den Babyhai-Code noch kürzer machen, indem du `{for}` verwendest? Vervollständige den Beispiel-Code.
 
-                    ### Übung 2
-                    Gib das Lied Fünf kleine Affen springen auf dem Bett aus. Schlag den Text nach, falls du dich nicht daran erinnerst.
-
-                    **(extra)** Gib das Lied Old MacDonald hat 'ne Farm aus und stelle sicher, dass alle Tiere ein unterschiedliches Geräusch machen, indem du `{if}` benutzt.
-
                 example_code: |
                     ```
                     familie = Baby, Mami, Papi, Omi, Opi
@@ -675,7 +668,7 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
                 example_code_2: "```\naffen = 5, 4, 3, 2, 1\n```\n"
-                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
+                story_text_2: "### Übung 2\nGib das Lied Fünf kleine Affen springen auf dem Bett aus. Schlag den Text nach, falls du dich nicht daran erinnerst.\n\n**(extra)** Gib das Lied Old MacDonald hat 'ne Farm aus und stelle sicher, dass alle Tiere ein unterschiedliches Geräusch machen, indem du `{if}` benutzt.\n"
             8:
                 story_text: |
                     ## Lieder
@@ -1074,17 +1067,18 @@ adventures:
                 story_text: |
                     ## Abwaschen
                     Gibt es bei euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
-                    Dann kannst du den Computer völlig fair entscheiden lassen. Das kannst du in diesem Level programmieren.
-                    Zunächst legst du eine Liste deiner Familienmitglieder an. Anschließend wählst du mit `{at} {random}` zufällig jemanden von der Liste aus.
+                    Dann kannst du den Computer völlig fair entscheiden lassen. Das kannst du in diesem Level programmieren!
 
                 example_code: |
                     ```
                     Familienmitglieder {is} Mama, Papa, Emma, Sophie
-                    {print} Familienmitglieder {at} {random}
+                    {print} Familienmitglieder {at} {random} muss abwaschen
                     ```
                 story_text_2: |
-                    ## Hacke den Geschirrspüler!
-                    Keine Lust auf selbst abwaschen? Hacke das Spülmaschinenprogramm und entferne deinen Namen von der Liste mit dem `{remove}` `{from}` Befehl.
+                    ## Übung
+
+
+                    **Extra** Keine Lust auf selbst abwaschen? Hacke das Spülmaschinenprogramm und entferne deinen Namen von der Liste mit dem `{remove}` `{from}` Befehl.
 
                 start_code: "{print} Wer macht den Abwasch?"
     dice:
@@ -1343,7 +1337,7 @@ adventures:
                     {print} Ich wähle
                     ```
                 start_code: "# setze hier deinen Code hin"
-                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
+                story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich, indem du den gelben Knopf drückst.\nVervollständige den Code, indem du die richtigen Befehle in die Lücken schreibst.\n"
             15:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1529,9 +1523,9 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
             11:
-                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                example_code: "```\nzahl = 10\n{for} i {in} {range} 1 bis 10\n    {print} i * zahl\n```\n"
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
-                start_code: '# place your code here'
+                start_code: '# platziere deinen Code hier'
     restaurant:
         name: "Restaurant"
         description: "Erstelle dein eigenes virtuelles Restaurant"
@@ -1545,7 +1539,7 @@ adventures:
                 example_code: |
                     ```
                     {print} Willkommen in Hedys Restaurant 🍟
-                    {ask} Was würden Sie gerne bestellen?
+                    _ Was würden Sie gerne bestellen?
                     {echo} Sie hätten also gerne
                     {print} Danke für Ihre Bestellung!
                     {print} Kommt sofort!
@@ -1565,7 +1559,7 @@ adventures:
                     ## Restaurant
                     Ab diesem Level kannst du Dezimalzahlen verwenden, um deine Speisekarte realistischer zu machen.
 
-                    ## Herausforderung
+                    ## Übung
                     Kannst du dir Code ausdenken mit dem du deinen Freunden und deiner Familie 15% Rabatt geben kannst?
 
                 example_code: |
@@ -1596,17 +1590,8 @@ adventures:
                     ```
                     {print} 'Willkommen im Restaurant Hedy!'
                     Leute = {ask} 'Für wie viele Leute möchten Sie bestellen?'
-                    {for} i {in} {range} 1 {to} Leute
-                    _ {print} 'Bestellung Nummer ' i
-                    _ Essen = {ask} 'Was möchten Sie essen?'
-                    _ {print} Essen
-                    _ {if} Essen {is} Fritten
-                    _ Sauce = {ask} 'Welche Sauce möchten Sie dazu?'
-                    _ {print} Sauce
-                    _ Getränke = {ask} 'Was möchten Sie trinken?'
-                    _ {print} Getränke
-                    Preis = 4 * Leute
-                    {print} 'Das macht ' Preis ' Euros, bitte!'
+                    {print} 'Also möchten Sie für' Leute ' Leute bestellen.'
+                    {print} "Los geht's!"
                     ```
                 start_code: "# setze hier deinen Code hin"
             10:
@@ -1795,36 +1780,29 @@ adventures:
                     Fällt es dir schwer zu entscheiden, was du gerne zum Abendessen hättest? Du kannst das Hedy machen lassen!
                     Füge einfach Listen deiner Lieblingsgerichte (oder der von dir nicht so gemochten Gerichte) hinzu und Hedy kann zufällig für dich ein Abendessen auswählen.
                     Du kannst dir auch einen Spaß draus machen, indem du Hedy den Preis für dein Abendessen auswählen lässt! Was wird wohl rauskommen?
-                    ### Übung
-                    Kannst du deine eigene Version des Zufallsrestaurants erstellen?
 
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random} please.
                     ```
                 story_text_2: |
-                    ## Allergies
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Übung
+                    Erstelle nun deine eigene Version des Zufallsrestaurants.
+                    Erstelle selbst eine Liste aller Vorspeisen, Hauptgerichte, Nachtische, Getränke und Preise.
+                    Nutze dann `{print}` und `{at} {random}` Befehle, um dem Kunden zu sagen, was heute auf seinem Menü steht.
 
                 example_code_2: |
                     ```
-                    {print} Überraschungs-Milchshake
-                    Geschmacksrichtungen {is} Erdbeere, Schokolade, Vanille
-                    Allergien {is} {ask} Bist du allergisch gegen irgendeine Geschmacksrichtung?
+                    {print} Willkommen in deinem eigenen Zufallsrestaurant!
+                    vorspeisen {is} _
+                    hauptgerichte {is} _
+                    nachspeisen {is} _
+                    getränke {is} _
+                    preise {is} _
                     _
-                    {print} Du bekommst einen Geschmacksrichtungen {at} {random} Milchshake
                     ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
@@ -1888,11 +1866,11 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} Hallo, ich bin Hedy, die Wahrsagerin!
-                    {ask} Wer bist du?
-                    {print} Lass mich in meine Kristallkugel sehen
-                    {print} Ich sehe... Ich sehe...
-                    {echo} Du heißt
+                    _ Hallo, ich bin Hedy, die Wahrsagerin!
+                    _ Wer bist du?
+                    _ Lass mich in meine Kristallkugel sehen
+                    _ Ich sehe... Ich sehe...
+                    _ Du heißt
                     ```
 
                 start_code: "# setze hier deinen Code hin"
@@ -2178,24 +2156,10 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Entkomme aus dem Spukhaus!'
-                    Spieler {is} lebend
-                    Türen = 1, 2, 3
-                    Monster = Zombie, Vampire, Riesenspinne
+                    monsterliste = Zombie, Vampir, Riesenspinne
                     _
-                        {if} Spieler {is} lebend
-                            richtigeTür = Türen {at} {random}
-                            {print} 'Raum ' i
-                            {print} 'Es sind 3 Türen vor dir...'
-                            gewählteTür = {ask} 'Welche Tür wählst du?'
-                            {if} gewählteTür {is} richtigeTür
-                                {print} 'Keine Monster hier!'
-                            {else}
-                                {print} 'Du wirst gegessen von ' Monster {at} {random}
-                                Spieler = tot
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} Spieler {is} lebend
-                        {print} 'Großartig! Du hast überlebt!'
+                        {print} 'Raum ' i
+                        monster = monsterliste {at} {random}
                     ```
                 start_code: "{print} 'Escape from the haunted house!'"
             9:
@@ -2273,8 +2237,8 @@ adventures:
                     Lass Hedy zufällig entscheiden!
 
                 start_code: "# setze hier deinen Code hin"
-                story_text_2: "### Übung\nDiese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n"
-                story_text_3: "## Mach das Spiel zu einer Fernseh-Show!\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das?\n"
+                story_text_2: "### Übung\nKopiere den Beispiel-Code und fülle die Lücken, um ihn zum Laufen zu bringen!\n\n**Extra** Diese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n"
+                story_text_3: "## Mach das Spiel zu einer Fernseh-Show!\n### Übung\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das? Wir haben bereits die ersten Zeilen in den Beispiel-Code getan.\n"
                 example_code_3: "```\n{print} Die große Spielshow!\n{print} Es liegen 3 Koffer vor dir...\n{print} Einer enthält _\n_\n```\n"
                 example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             16:
@@ -2527,8 +2491,8 @@ adventures:
         default_save_name: Neujahrs-Countdown
         levels:
             11:
-                story_text: "## Songs\nIn diesem Level kannst du den Befehl `{for} i {in} {range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
-                example_code: "## Countdown\n```\n{for} _ {in} _ 10 {to} 1\n    {print} i\n{print} 'Frohes neues Jahr!'\n```\n"
+                story_text: "## Frohes neues Jahr\nIn diesem Level kannst du den Befehl `{for}` Zahl `{in}` `{range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
+                example_code: "```\n{for} Zahl {in} {range} _ {to} _\n    {print} Zahl\n{print} 'Frohes neues Jahr!'\n```\n"
                 start_code: '# Platziere deinen Code hier'
 #    next:
 #        name: "Was kommt als nächstes?"
