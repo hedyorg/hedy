@@ -402,6 +402,10 @@ adventures:
                 story_text: "## Калькулятор\nВы можете добавить цикл `{while}` в игру-калькулятор, которую вы научились делать в предыдущем уровне.\nЭто гарантирует, что игрок не сможет перейти к следующему вопросу {if} при неправильном ответе.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# разместите здесь свой код'
+            11:
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
         name: Калькулятор
         description: Создайте калькулятор
         default_save_name: Калькулятор
@@ -516,6 +520,7 @@ adventures:
                 example_code: "## 5 маленьких обезьянок, прыгающих на кровати\n```\nобезьянки = 5, 4, 3, 2\n{for} обезьяна {in} обезьянки\n    {print} обезьяна ' маленькие обезьянки прыгают на кровати'\n    {print} 'Один упал и ударился головой'\n    {print} 'Мама позвонила доктору, и доктор сказал'\n    {print} 'БОЛЬШЕ НИКАКИХ ОБЕЗЬЯНОК, ПРЫГАЮЩИХ НА КРОВАТИ!'\n```\n\n## Малышка Акула\n```\nакулы = ребенок, мама, папа, бабушка, дедушка\n{for} акула {in} акулы\n    {print} акула ' акула тутутутутуду'\n    {print} акула ' акула тутутутутутуду'\n    {print} акула ' акула тутутутутуду'\n    {print} акула ' акула '\n```\n## Старый Макдональд\n```\nживотные = свинья, собака, корова\n{for} животное {in} животные\n    {if} животное {is} свинья\n        звук = ойк\n    {if} животное {is} собака\n        звук = гав\n    {if} животное {is} корова\n        звук = му\n    {print} 'У старого Макдональда была ферма'\n    {print} 'E I E E I O!'\n    {print} 'и на этой ферме у него было ' животное\n    {print} 'E I E I O!'\n    {print} 'со звуком ' звук\n    {print} 'и ' звук ' там'\n    {print} 'здесь ' звук\n    {print} 'там ' звук\n    {print} 'везде ' звук звук звук\n```\n"
                 start_code: '# разместите здесь свой код'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             11:
                 story_text: "## Песни\nНа этом уровне вы можете использовать команду `{for} i {in} {range}`{in} {range}` для создания песен, в которых используется счет, например, 5 маленьких обезьянок.\n\n## Задача\nЗаполните пробелы и заставьте код работать!\n"
                 example_code: "## 5 маленьких обезьянок\n```\n_ _ _ _ 5 _ 1\n    {print} i ' маленькие обезьянки прыгают по кровати'\n    {print} 'Одна упала и ударилась головой'\n    {print} 'Мама позвонила доктору, и доктор сказал'\n    {if} i {is} 1\n        {print} 'УЛОЖИТЕ ЭТИХ ОБЕЗЬЯНОК СПАТЬ!'\n    {else}\n        {print} \"БОЛЬШЕ НИКАКИХ ОБЕЗЬЯНОК, ПРЫГАЮЩИХ НА КРОВАТИ!\n```\n"
