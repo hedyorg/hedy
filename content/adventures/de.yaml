@@ -306,6 +306,7 @@ adventures:
                     {print} Name hat Angst, dass es in diesem Wald spukt.
                     ```
                 start_code: "{print} Deine Geschichte"
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             12:
                 story_text: |-
                     ## Geschichte
@@ -1342,6 +1343,7 @@ adventures:
                     {print} Ich wähle
                     ```
                 start_code: "# setze hier deinen Code hin"
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1825,6 +1827,8 @@ adventures:
                     {print} Du bekommst einen Geschmacksrichtungen {at} {random} Milchshake
                     ```
                 start_code: "# setze hier deinen Code hin"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: |
                     ## Restaurant
@@ -2272,6 +2276,7 @@ adventures:
                 story_text_2: "### Übung\nDiese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n"
                 story_text_3: "## Mach das Spiel zu einer Fernseh-Show!\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das?\n"
                 example_code_3: "```\n{print} Die große Spielshow!\n{print} Es liegen 3 Koffer vor dir...\n{print} Einer enthält _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             16:
                 story_text: |
                     ## Spukhaus-Spiel
