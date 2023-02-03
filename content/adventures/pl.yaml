@@ -279,6 +279,7 @@ adventures:
                 story_text: "## Papier, kamień, nożyce\nNa tym poziomie możesz poćwiczyć używanie zmiennych, dzięki będziesz mógł stworzyć grę w papier, kamień, nożyce w następnym poziomie!\n"
                 example_code: "```\n_ {is} {ask} papier, kamień czy nożyce?\n{print} Ja wybrałam _\n```\n"
                 start_code: '# umieść swój kod tutaj'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
@@ -334,6 +335,8 @@ adventures:
                 example_code: "```\n{print} Witamy w Losowej Restauracji Hedy!\n{print} Jedyna taka restauracja w której wybierzemy twój obiad i jego cenę za ciebie całkowicie losowo!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} Rozpoczniesz od: starters {at} {random}\n{print} Następnie podamy: mains {at} {random}\n{print} A na deser: desserts {at} {random}\n{print} Do picia dosteniesz  drinks {at} {random} \n{print} Całość kosztuje: prices {at} {random}\n{print} Smacznego!\n```\n"
                 story_text_2: "## Alergeny\nCzy Twój klient ma jakieś alergie lub nie lubi pewnych potraw? Wtedy możesz użyć komendy `{remove}`, aby usunąć je ze swojego menu.\n"
                 example_code_2: "```\n{print} Tajemniczny shake\nsmaki {is} truskawkowy, czekoladowy, waniliowy\nalergie {is} {ask} Czy jesteś na coś uczulony?\n_\n{print} Dostaniesz  {at} {random} smami\n```\n"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 start_code: '# umieść tutaj swój kod'
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
@@ -491,6 +494,7 @@ adventures:
                 start_code: '# umieść tutaj swój kod'
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: Nawiedzony dom
         description: Ucieknij z nawiedzonego domu
         default_save_name: Nawiedzony dom
@@ -510,6 +514,7 @@ adventures:
                 story_text: "## Historyjka\nNa poziomie 2. Twoja opowieść może być znacznie zabawniejsza. Imię głównego bohatera może pojawić się w dowolnym miejscu w zdaniu.\n\nTrzeba będzie napisać nieco więcej kodu . Musisz zapytać o imię głównego bohatera zanim będziesz mógł wykorzystać je w zdaniu.\n\nPotem będziesz mógł użyć imienia w dowolnym miejscu w zdaniu.\n\n## Ćwiczenie\nCzy możesz sam stworzyć opowieść używając zmiennej? Czy możesz dodać jeszcze więcej zmiennych?\n"
                 example_code: "```\nimię {is} {ask} Jak nazywa się główny bohater?\n{print} imię biega teraz po lesie\n{print} imię trochę się boi\n{print} Nagle imię usłyszał dziwny dźwięk...\n{sleep}\n{print} imię obawia się, że las może być nawiedzony\n```"
                 start_code: '{print} Twoja historyjka'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             12:
                 story_text: "## Opowieść\nW tym poziomie możesz użyć cudzysłowy, żeby przypisac wiele słów do jednej zmiennej."
                 example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
