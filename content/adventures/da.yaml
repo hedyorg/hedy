@@ -18,6 +18,7 @@ adventures:
                 start_code: '{print} Din historie'
                 story_text: "## Story\nPå niveau 2 kan du gøre din historie sjovere. Din hovedperson kan nu være hvor som helst i sætningen.\n\nDu bliver nødt til at programmere en lille smule mere for at få det til at ske. Du skal nu først give en hovedperson et navn.\n\nSå kan du sætte det navn ind alle steder i en sætning.\n\n### Opgave\nKan du selv lave en historie hvor du bruger en variabel? Kan du tilføje endnu flere variabler?\n"
                 example_code: "```\nnavn {is} {ask} Hvad hedder hovedpersonen?\n{print} navn løber nu rundt i skoven\n{print} navn er lidt bange\n{print} Pludselig hører han en mærkelig lyd...\n{sleep}\n{print} navn er bange for at det er en hjemsøgt skov\n```"
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             5:
                 start_code: "{print} 'Her begynder din historie!'"
                 story_text: "## Historie\nPå dette niveau kan du programmere forskellige slutninger, hvilket vil gøre din historie endnu sjovere.\n\n### Opgave\nFind på to forskellige slutninger til din historie, for eksempel:\n\n- Prinsessen går gennem skoven\n- Hun møder et monster\n\n- Lykkelig slutning: Hun griber sit sværd og monstret løber hurtigt sin vej\n- Ulykkelig slutning: Monstret spiser prinsessen\n\nDu kan også sikre at et navn bliver indtastet igen. Det fungerer ligesom på det forrige niveau. Du kan kombinere det med `{if}`, og så har du allerede lavet et helt program!\n"
@@ -128,6 +129,7 @@ adventures:
                 story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
                 example_code: "```\n_ {is} {ask} rock, paper, or scissors?\n{print} I choose _\n```\n"
                 start_code: '# place your code here'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
                 story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
@@ -291,6 +293,8 @@ adventures:
                 story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
                 start_code: '# place your code here'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` or `{ask}` command.\n\n### Excercise\nAdd the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.\n"
                 example_code: "## Example Hedy Restaurant\n```\n_ Add the quotation marks to this code _\n{print} Welcome to Hedys restaurant!\n{print} Today we are serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The  food  is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food  with  topping  is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your  food  and  drinks  will be right there!\n```\n"
@@ -626,6 +630,7 @@ adventures:
                 story_text_2: "### Excercise\nThis story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# place your code here'
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             5:
                 example_code: "```\n{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you...'\ndoors {is} 1, 2, 3\nmonsters {is} werewolf, mummy, vampire, zombie\nchosen_door {is} {ask} 'Which door do you choose?'\n{print} 'You chose door...' chosen_door\n{sleep}\ncorrect_door {is} doors {at} {random}\n_ _ _ _ {print} 'Great! Youve escaped!'\n{else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}\n```\n"
                 start_code: '# place your code here'
