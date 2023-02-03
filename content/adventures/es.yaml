@@ -671,7 +671,6 @@ adventures:
                     ```
                 start_code: "{print} ¿Quien lavará los platos hoy?"
                 story_text_2: "## ¡Hackea el programa para lavar platos!\n¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con el comando `{remove}``{from}`\n"
-                example_code_2: "```\npersonas {is} mamá, papá, Genésis, María\ntu_nombre {is} {ask} ¿Quien eres tu?\n_ tu_nombre _ personas\n{print} _ _ _ lavará los platos\n```\n"
             10:
                 example_code: "```\ndías = Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo\nnombres = mamá, papá, Genésis, María\n_ día _ días\n    {print} nombres {at} {random} ' Hará los platos el ' day\n```\n"
                 story_text: "## Programa de lavado de platos\nEn este nivel puedes hacer un horario de lavado de platos incluso mejor.\n"
@@ -955,7 +954,6 @@ adventures:
                 start_code: "# pon tu código aquí"
                 example_code: "```\n{print} ¡Bienvenido al restaurante Hedy's!\n{print} Hoy estamos sirviendo pizza o lasaña.\ncomida {is} {ask} ¿Qué te gustaría comer?\n{print} ¡Muy buena elección! ¡La comida es mi favorita!\ncobertura {is} {ask} ¿Te gustaría carne o verduras en eso?\n{print} ¡La comida con cobertura está en camino!\n```\n"
                 story_text_2: "## Desafío\n¿Puedes hacer este código más elaborado? Por ejemplo, agregando bebidas a la orden, o...?\n"
-                example_code_2: "```\n{print} ¡Bienvenido al restaurante Hedy's!\n{print} Hoy estamos sirviendo pizza o lasaña.\ncomida {is} {ask} ¿Qué te gustaría comer?\n{print} ¡Muy buena elección! ¡La comida es mi favorita!\ncobertura {is} {ask} ¿Te gustaría carne o verduras en eso?\n{print} ¡La comida con cobertura está en camino!\nbebidas {is} _\n```\n"
             11:
                 story_text: |
                     ## Restaurante
@@ -1182,7 +1180,6 @@ adventures:
                 start_code: '# pon tu código aquí'
             3:
                 story_text: "## Juego de la Casa Embrujada\nEn los niveles anteriores hiciste la introducción al juego de la casa embrujada, pero como te habrás dado cuenta, la historia siempre termina en un final tenebroso.\nEn este nivel puedes hacer que tu historia sea más interactiva cambiando el resultado del juego; ¡algunas veces te comerán, otras veces escaparás!\n¡Deja que Hedy decida aleatoriamente!\n"
-                example_code: "```\n{print} ¡Escape de la casa embrujada\n{print} Hay 3 puertas...\nelección {is} {ask} ¿Qué puerta quieres escoger?\n{print} Escogiste la puerta ... elección\nmonstruos {is} un zombie, un vampiro, NADA PUDISTE ESCAPAR\n{print} Ves...\n{sleep}\n{print} monstruos {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
                 story_text_2: "## Desafío\nEsta historia es bastante simple, quizás la puedas hacer un poquito más tenebrosa agregando una historia más emocionante.\nTambién, ahora tienes resultados muy limitados, solo hay 3 opciones para lo que está al final de la puerta. ¡Quizás puedas pensar en algunos otros monstruos que agregar a la lista!\n"
                 story_text_3: "## ¡Cambia el juego en un programa de tv!\nPor último, nos gustaría desafiarte a cambiar este juego en un programa de juegos (como los de la televisión) donde escojas una puerta o un maletín ¡y contenga un gran premio!\n¿Lo puedes hacer?\n"

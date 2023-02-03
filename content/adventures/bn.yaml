@@ -959,13 +959,6 @@ adventures:
                 story_text_2: |
                     ## Hack the dishwashing program!
                     Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
-                example_code_2: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    your_name {is} {ask} Who are you?
-                    {remove} your_name {from} people
-                    {print} people {at} {random} does the dishes
-                    ```
                 start_code: "{print} Who does the dishes?"
             4:
                 story_text: |
@@ -1499,7 +1492,6 @@ adventures:
                     ```
                 start_code: "# place your code here"
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: |
                     ## Random Restaurant
@@ -2087,17 +2079,6 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
-                    ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
-                    {sleep}
-                    {print} monsters {at} {random}
-                    ```
                 story_text_2: |
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.

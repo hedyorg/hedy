@@ -1085,13 +1085,6 @@ adventures:
                     ## Hacke den Geschirrspüler!
                     Keine Lust auf selbst abwaschen? Hacke das Spülmaschinenprogramm und entferne deinen Namen von der Liste mit dem `{remove}` `{from}` Befehl.
 
-                example_code_2: |
-                    ```
-                    Familienmitglieder {is} Mama, Papa, Emma, Sophie
-                    dein_Name {is} {ask} Wer bist Du?
-                    _ dein_Name _ Familienmitglieder
-                    {print} _ _ _ ist heute mit dem Abwasch dran.
-                    ```
                 start_code: "{print} Wer macht den Abwasch?"
     dice:
         name: "Würfel"
@@ -1565,7 +1558,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\n```\n"
                 story_text_2: "### Übung\nKannst du den Code erweitern? Zum Beispiel, indem du Getränke zur Bestellung hinzufügst? Oder...?\n"
-                example_code_2: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\nGetränke {is} _\n```\n"
             12:
                 story_text: |
                     ## Restaurant
@@ -2276,17 +2268,6 @@ adventures:
                     In diesem Level kannst du die Geschichte interaktiver machen, indem du den Ausgang des Spiels änderst. Manchmal wirst du gefressen, manchmal kannst du entkommen!
                     Lass Hedy zufällig entscheiden!
 
-                example_code: |
-                    ```
-                    {print} Entkomme dem Spukhaus!
-                    {print} Vor dir sind drei Türen...
-                    Wahl {is} {ask} Welche Türe wählst du?
-                    {print} Du wählst Tür... Wahl
-                    Monster {is} ein Zombie, ein Vampir, NICHTS DU ENTKOMMST
-                    {print} Du siehst...
-                    {sleep}
-                    {print} Monster {at} {random}
-                    ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "### Übung\nDiese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n"
                 story_text_3: "## Mach das Spiel zu einer Fernseh-Show!\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das?\n"

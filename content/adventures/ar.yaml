@@ -472,7 +472,6 @@ adventures:
                 start_code: '{print} من سيغسل الأطباق؟'
                 example_code: "```\nعائلتي هي أمي، أبي، مريم، احمد\n{print} عائلتي {at} {random}\n```\n"
                 story_text_2: "## تهكير (اختراق) برنامج غسل الأطباق!\nتشعر بعدم الرغبة في غسل الأطباق اليوم؟ اخترق البرنامج وإمسح اسمك من قائمة أفراد العائلة بإستخدام الأمر `{remove}` `{from}`\n"
-                example_code_2: "```\nعائلتي هي أمي، أبي، احمد، مريم\nإسمك {is} {ask} من أنت؟\n_ إسمك _ عائلتي\n{print} _ _ _ سيغسل الأطباق\n```\n"
             10:
                 story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
@@ -623,7 +622,6 @@ adventures:
                 example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print} الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} {ask} ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print} الوجبة الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
                 start_code: '#ضع الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل بإمكانك أن تجعل الكود مفصّلًا أكثر؟ بإضافة مشروبات إلى الطلب مثلًا؟\n"
-                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print} الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
@@ -772,7 +770,6 @@ adventures:
                 example_code: "```\n{print} _ اهرب من بيت الأشباح! _\n{print} _ هناك ثلاثة ابواب أمامك _\nالخيار {is} {ask} _ ما هو رقم الباب الذي ستختاره؟ _\n{print} _ لقد اخترت الباب رقم _ الخيار\nالأشباح {is} مصاص دماء, مومياء, لا شيء\n{print} _أنت ترى..._\n{sleep}\n{print} الأشباح {at} {random}\n ```\n"
             3:
                 story_text: "## لعبة بيت الأشباح\nفي المستويات السابقة استطعت كتابة مقدمة للعبة بيت الأشباح الخاصة بك، ولكن ربما لاحظت أن القصة غالباً ما ستنتهي نهاية مروعة.\nستتمكن في هذا المستوى من جعل قصتك أكثر تفاعلاً من خلال تغيير بعض مخرجات اللعبة، في بعض الأحيان ستأكلك الأشباح ولن تستطيع الخروج من البيت وفي أحيانٍ أخرى ستنجو بالهرب!\nدع هيدي تقرر ذلك عشوائيًا!\n"
-                example_code: "```\n{print} الهروب من بيت الأشباح!\n{print} هناك ٣ أبواب أمامك...\nالإختيار {is} {ask} أيأً من الأبواب الثلاثة تختار؟\n{print} إخترت الباب رقم ... الإختيار\nالشبح {is} زومبي، مصاص دماء، لا شيء لقد استطعت الهرب\n{print} انت ترى...\n{sleep}\n{print} الشبح {at} {random}\n```\n"
                 start_code: '# اكتب الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهذه القصة تعتبر إلى حدٍ ما مباشرة، ربما يمكنك إضافة بعض الأحداث المرعبة لتجعلها أكثر إثارة.\nوكذلك الآن هذا المثال يعطيك نتائج محدودة للغاية، هناك فقط ٣ خيارات حول ما المُخبأ وراء كل باب. ربما يمكنك التفكير في المزيد من الوحوش و إضافتها للقائمة!\n"
                 story_text_3: "## تغيير اللعبة إلى برنامج تلفزيوني للألعاب!\nوأخيراً، نود أن نتحداك لتغيير هذه اللعبة إلى برنامج للألعاب (كالذي يعرض على التلفاز) حيث تختار باباً أو حقيبةً و تكون تحتوي على جائزة كبيرة!\nهل يمكنك فعلها؟\n"

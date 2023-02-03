@@ -284,7 +284,6 @@ adventures:
                 story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the toppings!\n"
                 example_code: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\n```\n"
                 story_text_2: "### Excercise\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
                 start_code: '# place your code here'
             3:
                 story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n### Excercise\nCan you make your own version of the random restaurant?\n"
@@ -395,7 +394,6 @@ adventures:
             3:
                 story_text: "## Opvask\nEr i altid uenige om hvem der skal tage opvasken eller tømme kattebakken derhjemme?\nSå kan du lade computeren vælge retfærdigt. Du kan programmere det på dette niveau!\nFørst laver du en liste med alle medlemmerne af din familie. Derefter tag fra listen med `{at} {random}`.\n"
                 story_text_2: "## Hack opvaskeprogrammet!\nHar du ikke lyst til at tage opvasken? Hack programmet ved at fjerne dit navn fra listen med `{remove}` `{from}` kommandoen.\n"
-                example_code_2: "```\npersoner {is} mor, far, Emma, Sophie\ndit_navn {is} {ask} Hvem er du?\n_ dit_navn _ personer\n{print} _ _ _ tager opvasken\n```\n"
                 example_code: "```\npersoner {is} mor, far, Emma, Sophie\n{print} personer {at} {random}\n```\n"
                 start_code: '{print} Hvem tager opvasken?'
             4:
@@ -625,7 +623,6 @@ adventures:
             3:
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "### Excercise\nThis story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# place your code here'
