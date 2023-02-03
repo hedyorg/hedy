@@ -267,6 +267,7 @@ adventures:
                 story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
                 example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
                 start_code: '# place your code here'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             9:
                 start_code: '# place your code here'
                 story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
@@ -397,6 +398,7 @@ adventures:
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
                 start_code: '{print} Your story'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             3:
                 story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
                 example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
@@ -462,6 +464,8 @@ adventures:
                 story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
                 start_code: '# place your code here'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`\n"
                 example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
@@ -584,6 +588,7 @@ adventures:
                 start_code: '# place your code here'
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: "## Haunted house\nIn this level you learn how to use quotation marks in your games.\nCan you make your Haunted House level 4 proof?\n"
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
