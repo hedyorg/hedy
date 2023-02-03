@@ -226,6 +226,7 @@ adventures:
                     ```
 
                 start_code: "{print} Aquí viene tu historia"
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             7:
                 story_text: |
                     ## Historia
@@ -842,6 +843,7 @@ adventures:
                 story_text: "## Piedra, papel o tijera\nEn este nivel puedes practicar usando las variables, ¡así puedes hacer un juego de piedra, papel o tijeras en el próximo nivel!\n"
                 example_code: "```\n_ {is} {ask} ¿piedra, papel o tijera?\n{print} Escojo _\n```\n"
                 start_code: '# pon tu codigo aquí'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## Piedra, papel o tijera\n¡Juega hazta que le ganes a la computadora! Pero primero termina el código de ejemplo...\n"
                 example_code: "```\nganó = 'no'\nopciones = 'piedra', 'papel', 'tijeras'\n{while} ganó == 'no'\n    tu_opcion = {ask} '¿Que escoges?'\n    opcion_computadora = opciones {at} {random}\n    {print} 'Escogiste ' tu_opcion\n    {print} 'La computadora escogió ' opcion_computadora\n    {if} opcion_computadora == tu_opcion\n        {print} '¡Empate!'\n    {if} opcion_computadora == 'roca' {and} tu_opcion == 'tijera'\n        {print} '¡Perdiste!'\n    {if} opcion_computadora == 'roca' {and} tu_opcion == 'papel'\n        {print} '¡Ganaste!'\n        ganó = 'sí'\n_\n```\n"
@@ -1021,6 +1023,8 @@ adventures:
                 example_code: "```\n{print} ¡Bienvenido a Hedy's Random Restaurant!\n{print} ¡El único restaurante que elegirá al azar su comida y su precio para usted!\nentradas {is} ensalada, sopa, carpaccio\nplato_principal {is} pizza, coles de Bruselas, espaguetis\npostres {is} brownies, helados, quesos franceses\nbebidas {is} cola, cerveza, agua\nprecios {is} 1 dólar, 10 dólares, 100 dólares\n{print} Comenzarás con: entradas {at} {random}\n{print} Luego serviremos: plato_principal {at} {random}\n{print} Y como postre: postres {at} {random}\n{print} Obtendrás una bebidas {at} {random} para beber\n{print} Eso será: precios {at} {random}\n{print} ¡Gracias y disfruta de tu comida!\n```\n"
                 story_text_2: "## Alergías\n¿Tu cliente tiene alguna alergía o no le gusta ciertos platos? Puedes usar el comando `{remove}` para quitarlos del menú.\n"
                 example_code_2: "```\n{print} Malteada misteriosa\nsabores {is} fresa, chocolate, vainilla\nalergías {is} {ask} ¿Eres alérgico a algún sabor?\n_\n{print} Vas a beber una malteada de sabores {at} {random}\n```\n"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             8:
                 story_text: "## Restaurante\nEn este nivel puedes hacer tu restaurant más complejo repitiendo múltiples líneas de código. Así:\n"
                 example_code: "```\n{print} '¡Bienvenido al restaurant Hedys'\npersonas = {ask} '¿Cuántas personas se nos van a unir hoy?'\n{print} '¡Genial!'\n{repeat} personas {times}\n    comida = {ask} '¿Que te gustaría ordenar?'\n    {print} comida\n{print} '¡Gracias por ordenar!'\n{print} '¡Disfruta tu comida!'\n```\n"
@@ -1184,6 +1188,7 @@ adventures:
                 story_text_2: "## Desafío\nEsta historia es bastante simple, quizás la puedas hacer un poquito más tenebrosa agregando una historia más emocionante.\nTambién, ahora tienes resultados muy limitados, solo hay 3 opciones para lo que está al final de la puerta. ¡Quizás puedas pensar en algunos otros monstruos que agregar a la lista!\n"
                 story_text_3: "## ¡Cambia el juego en un programa de tv!\nPor último, nos gustaría desafiarte a cambiar este juego en un programa de juegos (como los de la televisión) donde escojas una puerta o un maletín ¡y contenga un gran premio!\n¿Lo puedes hacer?\n"
                 example_code_3: "```\n{print} ¡El gran juego!\n{print} Hay 3 maletines en frente de ti...\n{print} Uno de ellos contiene _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: La Casa Embrujada
         description: Escapa de la casa embrujada
         default_save_name: La Casa Embrujada
