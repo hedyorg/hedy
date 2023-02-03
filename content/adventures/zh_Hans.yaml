@@ -322,6 +322,7 @@ adventures:
                 example_code: "## 5只小猴子们在上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子 {in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说'\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼 {in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪, 狗, 牛\n{for} 动物 {in} 动物们\n    {if} 动物 {is} 猪\n        声音 = 哼哼\n    {if} 动物 {is} 狗\n        声音 = 汪汪\n    {if} 动物 {is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
                 start_code: '# 在这里写你的代码'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             7:
                 story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...鲨鱼宝宝!如果你唱这首歌，其实你就是一直在唱同一句歌词。\n\n鲨鱼宝宝 tututudutudu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝\n\n你可以用`{repeat}` ，让这首歌变得更短!你能完成这个代码吗？\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
@@ -492,6 +493,10 @@ adventures:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
                 example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
