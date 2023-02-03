@@ -1,5 +1,5 @@
 command:+= assign_list | add | remove > error_invalid   
-_print_argument: (_SPACE | list_access | textwithoutspaces)*
+_print_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
 ask: var _IS _ASK ((_SPACE | text_ask)*)?
 
 assign: var _IS (list_access | text) -> assign
