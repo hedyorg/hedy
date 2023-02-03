@@ -46,6 +46,7 @@ adventures:
                 story_text: "## Tregimi\nNë nivelin e 2, ju mund ta bëni tregimin më jetë më argëtues. Emri i personazhit tuaj kryesor mund të jetë kudo në fjali.\n\nJu duhet të programoni pak më shumë për këtë. Ju tani duhet ti jepni një emër personazhit tuaj kryesor.\n\nJu mund ta përdorni atë emër kudo në fjali.\n\n## Sfidë\nA mund të bëni vetë një histori duke përdorur një ndryshore? Mund të shtoni edhe më shumë variabla?\n"
                 example_code: "```\nemri {is} {ask} Cili është emri i personazhit kryesor?\n{print} emri është tani duke vrapuar në pyll\n{print} emri është pak i frikësuar\n{print} Papritur ai dëgjon një zë të çuditshëm...\n{sleep}\n{print} emri është i frikësuar se ky pyll ka fantazma\n```"
                 start_code: '{print} Tregimi yt'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             4:
                 story_text: "## Tregimi\nMund ta keni vërejtur se ka një problem në nivelet e mëparshëm. A provuat të printoni një fjali që ka fjalën emri në të? P.sh `{print}` emri im është emri.\nMund ta zgjidhni problemin në këtë nivel. Domosdo duhet të përdorni thonjëza për të printuar.\n"
                 example_code: "```\nemri {is} Hans\n{print} _ Emri i personazhit kryesor është _ emri\n{print} emri _ tani to dë ecë në pyll _\n{print} emri _ është pak i frikësuar _\nkafshët {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ Ai dëgjon një zë të _ kafshët {at} {random}\n{print} emri _ është i frikësuar sepse ky është një pyll me fantazma _\n```\n"
@@ -114,6 +115,8 @@ adventures:
                 story_text_2: "## Alergjitë\nA ka klienti juaj alergji apo nuk i pëlqejnë disa pjata? Më pas mund të përdorni komandën `{remove}` për ta hequr atë nga menyja juaj.\n"
                 example_code_2: "```\n{print} Koktej me qumësht misterioze\nshijet {is} luleshtrydhe, çokollatë, vanilje\nalergjitë {is} {ask} A jeni alergji nga ndonjë shije?\n_\n{print} Ju keni shijet {at} {random} koktej me qumësht\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: "## Restorant\nNë këtë nivel duhet të përdorni thonjëza me komandën `{print}` pse `{ask}`.\n\n## Sfidë\nShtoni thonjëzat në këtë kod për ta bërë atë të funksionojë! Kini kujdes: variablat nuk duhet të jenë në thonjëza.\n"
                 example_code: "## Shembull Restorant Hedy\n```\n_ Add the quotation marks to this code _\n{print} Mirë se erdhët ne restorantin Hedy!\n{print} Sot ne shërbejmë pica ose lazanja.\nushqimi {is} {ask} Çfarë doni të hani?\n{print} Zgjedhje e mirë!  ushqimi  është e preferuara ime!'\nmajë {is} {ask} Dëshironi mish apo perime në të?\n{print} ushqimi  me  majë  është duke u bërë!'\npije {is} {ask} Çfarë do të dëshironit të pini me të?\n{print} Faleminderit per porosinë.\n{print} ushqimi  juaj dhe  pije  do të jenë këtu!'\n```\n"
@@ -480,6 +483,7 @@ adventures:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ti praktikoni variablat, kështu që mund ta bëni lojën gur, letër, gërshërë në nivelin tjetër!\n"
                 example_code: "```\n_ {is} {ask} gur, letër, ose gërshërë?\n{print} Unë zgjedh _\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
                 story_text: "## Gur, letër, gërshërë\n\nNë këtë nivel mund të futni një listë and të zgjidhni nga ajo.\nNë fillim e bëni një listë me komandën `{is}`. Dhe pastaj mund ta bëni që kompjuteri za zgjedhë një nga lista me komandën `{at} {random}`.\nSi për shembull, ju mund ta bëni që kompjuteri të zgjedhë gur, letër, gërshërë.\n"
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} zgjedhjet {at} {random}\n```\n"
@@ -576,6 +580,7 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
                 story_text_3: "## Ndrysho lojën në një shfaqje lojërash televizive!\nSë fundi, do të dëshironim t'ju sfidonim që ta ndryshoni këtë lojë në një shfaqje lojërash (si ato në TV) ku zgjidhni një derë ose valixhe dhe ajo përmban një çmim të madh!\nMund të bëni atë?\n"
                 example_code_3: "```\n{print} Shfaqja e madhe e lojërave!\n{print} Para jush keni 3 valixhe...\n{print} Njëri prej tyre përmban _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: "## Shtëpi e përhumbur\nNë këtë nivel ju mësoni se si të përdorni thonjëza në lojërat tuaja.\nA mund të bëni prova të nivelit 4 të Shtëpisë së Përhumbur?\n"
                 example_code: "```\n{print} _ Ik nga shtëpia e përhumbur! _\n{print} _ Ka 3 dyer perpara... _\nzgjedhja {is} {ask} _ Cilën derë zgjidhni? _\n{print} _ Zgjodhe derën ... _ zgjedhja\npërbindëshit {is} një mumje, një vampir, ASGJE JU KENI IKUR\n{print} _ E shihni... _\n{sleep}\n{print} përbindëshit {at} {random}\n ```\n"
