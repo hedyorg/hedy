@@ -243,12 +243,15 @@ adventures:
                     {print} 'Wie niet weg is, is gezien'
                 story_text: |-
                     ## Lussen!
-                    We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken!
-                    Je moet nog steeds alle regels die na `{for}` en `{if}` komen, inspringen. Dat betekent dat ze moeten beginnen met vier spaties.
+                    We gaan nu een extra vorm van de `{for}` toevoegen! In vorige levels gebruikten we de `{for}` altijd met een lijst. Maar nu mag je `{for}` ook gebruiken met getallen.
+                    We doen dat met een variabele, maar gevolgd door `{in}` en `{range}`. Daarna komt het begingetal, `{to}` en dan het eindgetal.
+
+                    Probeer het voorbeeld eens uit. Je moet nog steeds alle regels die na `{for}`komen, inspringen. Dat betekent dat ze moeten beginnen met vier spaties.
                 example_code: |
                     ```
-                    {for} teller {in} {range} 1 {to} 5
-                        {print} teller
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i
+                    {print} 'Wie niet weg is, is gezien'
                     ```
             12:
                 start_code: |-
@@ -902,6 +905,10 @@ adventures:
 
                     ### Opdracht 1
                     Kun jij baby shark printen met een `{for}`? Vul de streepjes in en maak de codes verder af.
+                story_text_2: |
+                    ### Opdracht 2
+                    Print het liedjes 10 kleine visjes met een `{for}`. Zoek de tekst op als je die niet kent.
+                    **(extra)** Print het liedje Old MacDonald had a farm. Zoek de tekst op als je die niet kent, en zorg dat alle dieren ook het goede geluid maken, met een `{if}`.
                 example_code_2: |
                     ```
                     visjes = 10, 9, 8, 7, 6, 5, 4, 3, 2
@@ -918,21 +925,17 @@ adventures:
                     ## Zing een stapelliedje!
                     In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
 
-                    ### Opdracht
-                    Kun jij het liedje aan de praat krijgen?
+                    ### Opdracht 1
+                    Maak het liedje af. Zoek de tekst op als je die niet meer weet.
+
+                    ### Opdracht 2
+                    De laatste regel van het liedje is anders. Zorg dta je die regel ook print iin de `{for}`. Darr heb je een `{if}` voor nodig.
+                    
                 example_code: |
                     ## 10 kleine visjes
                     ```
                     _ _ _ _ 10 _ 1
                         {print} i ' kleine visjes zwommen naar de zee'
-                        {print} 'Moeder zei: ik ga niet mee'
-                        {print} 'Ik blijf liever in de vieze oude sloot'
-                        {print} 'Want in de zee daar zwemmen haaien en die bijten je...'
-                        {if} i {is} 1
-                            {print} 'DOOD'
-                        {else}
-                            {print} 'Blub, blub, blub, blubblubblub'
-                            {print} 'Blubblubblub, blub, blubblubblub'
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
@@ -1717,6 +1720,23 @@ adventures:
                                 {print} 'Foutje! Het was... ' goed
                     ```
                 start_code: "# Schrijf jouw code hier"
+            11:
+                story_text: |
+                    ## Rekenmachine
+                    Met een `{for}` kan je jouw tafeloefenprogramma met nog minder regels code maken.
+
+                    ### Opdracht 1
+                    Verbeter de voorbeeldcode zodat een nette tafel geprint wordt: <br> "1 keer 10 is 10", "2 keer 10 is 20", enz.
+
+                    ### Opdracht 2
+                    Ga terug naar jouw code van level 10, en zorg dat je code `{for}` en `{range}` gebruikt.
+                example_code: |
+                    ```
+                    nummer = 10
+                    {for} i {in} {range} 1 to 10
+                        {print} i * nummer
+                    ```
+                start_code: "# Jouw code komt hier"
             12:
                 story_text: |
                     ## Rekenmachine
@@ -2287,26 +2307,20 @@ adventures:
             11:
                 story_text: |
                     ## Maak je eigen restaurant
-                    Je kunt nu `{for} i {in} {range} 1 {to} 5` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
+                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
 
                     ### Opdracht
-                    Kun jij nog een inspring-uitdaging aan? Zorg dat de code werkt door de goede hoeveelheid spateis in te springen bij elke regel!
+                    Maak de restaurantcode af. Zorg dat je de bestelling van meerdere mensen kan opnemen. Print steeds netjes het nummer uit, dus 'persoon 1', 'persoon 2', enz.
+                    Weet je niet meteen hoe het moet? Kijk dan bij jouw restaurant van level 8.
+                    
+                    **(extra)** In level 9 hebben we prijzen uitgerekend in het restaurant. Dat kun je nu ook weer toevoegen.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy!'
                     {print} 'U kunt hier uw bestelling doorgeven'
                     mensen = {ask} 'Voor hoeveel personen wilt u bestellen?'
-                    {for} i {in} {range} 1 {to} mensen
-                    _ {print} i 'e bestelling:'
-                    _ eten = {ask} 'Wat wilt u eten?'
-                    _ {print} eten
-                    _ {if} eten {is} patat
-                    _ saus = {ask} 'Wat voor saus wil je?'
-                    _ {print} saus
-                    _ drinken = {ask} 'Wat wilt u drinken?'
-                    _ {print} drinken
-                    prijs = 4 * mensen
-                    {print} 'Dat wordt dan ' prijs ' euro!'
+                    {print} 'Dus u wilt bestellen voor ' mensen ' mensen.'
+                    {print} 'Laten we beginnen'
                     ```
                 start_code: "{print} 'Welkom bij McHedy!'"
             12:
@@ -2557,35 +2571,26 @@ adventures:
             11:
                 story_text: |
                     ## Spookhuis
-                    In dit level kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele `i` te gebruiken.
-                    Let op: Deze code is bijna gelijk aan die in het vorige level. Er zit een aanpassing op regel 5, waar het `{repeat}` commando is vervangen door `{for} i in {range} 1 {to} 3`.
-                    Daarnaast is regel 8 toegevoegd, waardoor de speler nu ziet in welke kamer hij zit.
+                    De speler van het spookhuis loopt door drie kamers en komt steeds een monster tegen.
+                    
+                    ### Opdracht 1
+                    Maak het programma af op de streepjes, en zorg dat je steeds laat weten in welke kamer de speler is.
+                    
+                    ### Opdracht 2
+                    Maak er een spannend avontuur van door deze stappen te volgen:
+                    
+                    1. Maak een lijst met keuzes (bijv aanvallen of wegrennen)
+                    2. Zorg dat de speler kan kiezen met een `{ask}`
+                    3. Is het antwoord goed? Dan komt het volgende monster. Is de keuze fout? Laat dat de speler weten met een `{print}`.
 
-                    ### Opdracht
-                    Maak het programma af door de juiste regel code toe te voegen. Let op: De speler moet voorbij 3 kamers zien te komen om te winnen!
+                    **(extra)** Als je de foute keuze maakt, komt er toch nog een monster! Denk na over hoe je dat zou kunnen veranderen.
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis!'
-                    speler = levend
-                    deuren = 1, 2, 3
                     monsters = zombie, vampier, mummy, reuzespin
                     _
-                        {if} speler {is} levend
-                            goededeur = deuren {at} {random}
-                            {print} 'Kamer ' i
-                            {print} 'Voor je staan drie deuren...'
-                            gekozendeur = {ask} 'Welke deur kies je?'
-                            {print} 'Jij kiest deur...' gekozendeur
-                            {sleep}
-                            {if} gekozendeur {is} goededeur
-                                {print} 'Gelukkig! Geen monster!'
-                            {else}
-                                {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
-                                speler = dood
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} speler {is} levend
-                        {print} ' Hoera! Je bent ontsnapt!'
+                        {print} 'Kamer ' i
+                        monster = monsters {at} {random}
                     ```
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
             14:
@@ -3193,11 +3198,22 @@ adventures:
         description: Try linking a keyboard key to a command!
         default_save_name: Pressit
     years:
-        name: New Year's
-        description: Countdown to the new year!
-        default_save_name: New Year's Countdown
+        name: "Oud en Nieuw"
+        description: "Aftellen naar het nieuwe jaar"
+        default_save_name: "Oud en Nieuw"
         levels:
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
-                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Oud en Nieuw
+                    In this level kan je `{for}` en `{range}` gebruiken om af te tellen met Oud en Nieuw.
+
+                    ### Opdracht
+                    Maak de code af zodat er wordt afgeteld. Je mag zelf kiezen vanaf welk getal.
+                    Voeg ook een `{sleep}` toe zodat er steeds een tel voorbij gaat voor er een nieuw getal komt.
+                example_code: |
+                    ```
+                    {for} getal {in} {range} _ {to} _
+                        {print} getal
+                    {print} 'Gelukkig Nieuwjaar!
+                    ```
+                start_code: "# Jouw code komt hier"
