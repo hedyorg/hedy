@@ -530,6 +530,7 @@ adventures:
                 story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
                 start_code: '# place your code here'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             16:
                 story_text: |
                     ## Sing a song!
@@ -945,6 +946,10 @@ adventures:
             15:
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
+                start_code: '# place your code here'
+            11:
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
     restaurant:
         name: Étterem
