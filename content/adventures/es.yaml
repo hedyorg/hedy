@@ -423,6 +423,7 @@ adventures:
                 example_code: "## 5 Monitos saltando en la cama\n```\nmonos = 5, 4, 3, 2\n{for} mono {in} monos\n    {print} mono 'pequeños monos saltando en la cama'\n    {print} 'Uno se cayó y se golpeó la cabeza'\n    {print} 'Mamá llamó al doctor y el doctor dijo'\n    {print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'\n```\n\n## tiburón bebé\n```\ntiburones = bebé, mamá, papá, abuela, abuelo\n{for} tiburón {in} tiburones\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón 'tiburón'\n```\n## Viejo McDonald\n```\nanimales = cerdo, perro, vaca\n{for} animal {in} animales\n    {if} animal {is} cerdo\n        sonido = oink\n    {if} animal {is} perro\n        sonido = guau\n    {if} animal {is} vaca\n        sonido = mugir\n    {print} 'El viejo McDonald tenía una granja'\n    {print} '¡EIEIO!'\n    {print} 'y en esa finca tenía un' animal\n    {print} '¡EIEIO!'\n    {print} 'con un ' sonido ' aquí'\n    {print} 'y un ' sonido' ahí'\n    {print} 'aquí un' sonido\n    {print} 'hay un' sonido\n    {print} 'en todas partes un' sonido sonido\n```\n"
                 start_code: '# pon tu código aquí'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             16:
                 story_text: "## ¡Canta una canción!\nEn este nivel puedes programar una canción como la del Viejo McDonald incluso más rápido. Puedes conectar el animal con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.\nEl Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡mira!\n"
                 start_code: '# pon tu código aquí'
@@ -922,6 +923,10 @@ adventures:
                 story_text: "## Calculadora\nPuedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste en el nivel anterior.\nEsto asegura que el jugador no pueda continuar a la siguiente pregunta {if} (si) se responde incorrectamente.\n"
                 example_code: "```\npuntaje = 0\n{for} i {in} {range} 0 {to} 9\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    correcta = número1 * número2\n    respuesta = 0\n    {while} respuesta != correcta\n        {print} '¿Cuánto es ' número1 ' por ' número2 '?'\n        respuesta = {ask} 'Escribe tu respuesta:'\n        {print} 'Tu respuesta es ' respuesta\n    {print} '¡Buen trabajo!'\n{print} '¡Ganaste!'\n```\n"
                 start_code: '# pon tu código aquí'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                start_code: '# place your code here'
     restaurant:
         name: "Restaurante"
         description: "Crea tu propio restaurante virtual"
