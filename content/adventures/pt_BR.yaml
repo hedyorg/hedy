@@ -403,6 +403,7 @@ adventures:
                 example_code: "## 5 Macaquinhos pulando na cama\n```\nmacacos = 5, 4, 3, 2\n{for} macaco {in} macacos\n    {print} macaco 'macaquinhos pulando na cama'\n    {print} 'Um caiu e bateu a cabeça'\n    {print} 'Mamãe chamou o médico e o médico disse'\n    {print} 'SEM MAIS MACACOS PULANDO NA CAMA!'\n```\n\n## Tubarão bebê\n```\ntubarões = bebê, mamãe, papai, vovó, vovô\n{for} tubarão {in} tubarões\n    {print} tubarão 'tututututudu'\n    {print} tubarão 'tututututudu'\n    {print} tubarão 'tututututudu'\n    {print} tubarão\n```\n## Velho McDonald\n```\nanimais = porco, cachorro, vaca\n{for} animal {in} animais\n    {if} animal {is} porco\n        som = oink\n    {if} animal {is} cachorro\n        som = au\n    {if} animal {is} vaca\n        som = mu\n    {print} 'O velho McDonald tinha uma fazenda'\n    {print} 'I A I A O U!'\n    {print} 'e naquela fazenda ele tinha um ' animal\n    {print} 'I A I A O U!'\n    {print} 'com um ' som som ' aqui'\n    {print} 'e um ' som som ' ali'\n    {print} 'aqui um ' som\n    {print} 'lá um' som\n    {print} 'em todos os lugares um ' som som\n```\n"
                 start_code: '# coloque o seu código aqui'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             8:
                 story_text: "## Músicas\nEm um nível anterior você programou a música 'Garrafas de cerveja'. Você fez um verso e depois teve que copiar os versos 99 vezes. No nível 7 você pode repetir a música 99 vezes, apenas adicionando uma linha simples!\n"
                 example_code: "```\nverso = 99\n{repeat} 99 {times}\n     {print} verso 'garrafas de cerveja na parede'\n     {print} verso 'garrafas de cerveja'\n     {print} 'Pegue uma, passe por aí'\n     verso = verso - 1\n     {print} verso 'garrafas de cerveja na parede'\n```\n"
@@ -609,6 +610,10 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# coloque o seu código aqui'
+            11:
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
         name: Calculadora
         description: Create a calculator
         default_save_name: Calculadora
