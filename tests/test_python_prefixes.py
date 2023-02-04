@@ -15,8 +15,8 @@ convert_numerals_test_data = [
     ('Latin', -1234567890.0987654321, -1234567890.0987654321),
     ('Latin', '-١٢٣٤٥٦٧٨٩٠.٠٩٨٧٦٥٤', -1234567890.0987654321),
     ('Arabic', -1234567890.0987654321, '-١٢٣٤٥٦٧٨٩٠.٠٩٨٧٦٥٤'),
-    ('Latin', 'This is some arbitrary string', 'This is some arbitrary string'),
-    ('Arabic', 'This is some arbitrary string', 'This is some arbitrary string'),
+    ('Latin', '1 Thing, this is 1 arbitrary string', '1 Thing, this is 1 arbitrary string'),
+    ('Arabic', '1 Thing, this is 1 arbitrary string', '1 Thing, this is 1 arbitrary string'),
 ]
 
 
