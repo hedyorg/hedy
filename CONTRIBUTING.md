@@ -269,13 +269,7 @@ docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app h
 For some things like making classes you need a teacher's account which you might want to test locally. 
 For that you can use the account teacher1 which is stored in the local database.
 
-If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) have to run Hedy with the environment variable ADMIN_USER set to "admin". 
-
-```
-ADMIN_USER=admin
-```
-
-It works a bit differently in each IDE, this is what it looks like for PyCharm:
+If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=teacher1. It works a bit differently in each IDE, this is what it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
