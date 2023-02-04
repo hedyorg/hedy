@@ -5,19 +5,19 @@ root=$(cd $(dirname $0)/../.. && pwd)
 python_prefix_src_dir=$root/prefixes
 python_prefix_ts=$root/static/js/pythonPrefixes.ts
 
-truncate -s 0 $python_prefix_ts
-
-echo '/*******************************************************************************' >> $python_prefix_ts
-echo '*' >> $python_prefix_ts
-echo '* !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!' >> $python_prefix_ts
-echo '*' >> $python_prefix_ts
-echo '* Make desired changes to prefixes/{normal,pygame,turtle}.py' >> $python_prefix_ts
-echo '*' >> $python_prefix_ts
-echo '* Add/edit tests for those changes in tests/test_python_prefixes.py' >> $python_prefix_ts
-echo '*' >> $python_prefix_ts
-echo '* Run build-tools/heroku/generate-prefixes-ts to regenerate.' >> $python_prefix_ts
-echo '*' >> $python_prefix_ts
-echo '*******************************************************************************/' >> $python_prefix_ts
+cat <<EOF > $python_prefix_ts
+/*******************************************************************************
+*
+* !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!
+*
+* Make desired changes to prefixes/{normal,pygame,turtle}.py
+*
+* Add/edit tests for those changes in tests/test_python_prefixes.py
+*
+* Run build-tools/heroku/generate-prefixes-ts to regenerate.
+*
+*******************************************************************************/
+EOF
 
 for prefix in turtle pygame normal; do
   echo >> $python_prefix_ts
