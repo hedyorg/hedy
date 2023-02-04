@@ -1,9 +1,13 @@
+#!/bin/bash
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
 
 echo '-----> Creating lark grammar files'
 python3 ../../content/yaml_to_lark_utils.py
+
+echo '-----> Creating python prefixes for TypeScript'
+./generate-prefixes-ts
 
 echo '-----> Compiling TypeScript'
 ./generate-typescript
