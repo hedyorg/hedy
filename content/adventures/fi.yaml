@@ -43,7 +43,7 @@ adventures:
                 example_code_3: "```\nhienot_värit {is} vihreä, keltainen\nlempiväri {is} {ask} 'Mikä on lempivärisi?'\n{if} väri {in} hienot_värit \n{print} 'hieno!' {else} {print} 'plääh'\n```\n"
                 story_text_2: "Joskus koodista joka käyttää komentoa `{if}` tulee todella pitkää eikä se mahdu hyvin riville. Voit myös jakaa koodin kahdelle riville ja aloittaa toisen rivin komennolla `{else}` näin:\n"
                 example_code_2: "```\nname {is} {ask} 'mikä on nimesi?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Jotain muuta, joka toimii  `{if}` :n kanssa on `pressed`! Painalluksella voit linkittää minkä tahansa kirjaimen aakkostoon ja minkä tahansa numeronäppäimistön näppäimen komentoon. Jos linkität sen, ja painat näppäintä, jotain tapahtuu. Kokeile sitä!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print} '5 kertaa 5 on ' 5 * 5"
@@ -57,18 +57,18 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy on hauskaa!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hei ihmiset'\n    {print} 'Tämä tulostetaan 5 kertaa'"
-                story_text: "##  Sisennys\n`{ask}` ja `{print}` toimivat edelleen sellaisina kuin ne tunnet. Mutta `{if}`, `{else}` ja `{repeat}` ovat muuttuneet!\nVoit nyt suorittaa koodiryhmiä yhdessä, mutta sinun on *sisennettävä* koodi.\nTämä tarkoittaa neljän välilyönnin asettamista rivin alkuun. Sinun on myös sisennettävä, kun haluat vain luoda yhden rivin lohkon.\n"
+                story_text: "##  Sisennys\n`{ask}` ja `{print}` toimivat edelleen sellaisina kuin ne tunnet. Mutta `{if}`, `{else}` ja `{repeat}` ovat muuttuneet!\nVoit nyt ryhmittää useita rivejä yhteen, mutta sinun on *sisennettävä* koodi.\nTämä tarkoittaa neljän välilyönnin asettamista rivin alkuun. Sinun on myös sisennettävä, kun haluat vain luoda yhden rivin lohkon.\n"
                 example_code: "`{repeat}`-komento toimii nyt näin:\n```\n{repeat} 5 {times}\n    {print} \"Hei kaikki\"\n    {print} \"Tämä kaikki toistuu 5 kertaa\"\n```\n`{if}` ja `{else}` komennot toimivat nyt näin:\n\n```\nnimi {is} {ask} 'Mikä on nimesi?'\n{if} nimi {is} Hedy\n    {print} \"Tervetuloa Hedy\"\n    {print} \"Voit pelata tietokoneellasi!\"\n{else}\n    {print} \"TUNKEILIJA!\"\n    {print} \"Et voi käyttää tätä tietokonetta!\"\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    ruoka = {ask} 'Mitä ruokaa haluat?'\n    {if} ruoka {is} pizzaa\n        {print} 'kiva!'\n    {else}\n        {print} 'pizza on parempaa'"
                 story_text: "## Kaikki yhdessä!\nTällä tasolla voit edelleen käyttää useita rivejä `{if}` ja `{repeat}` komentojen kanssa, mutta voit myös liittää ne yhteen!\nEsimerkissä näet `{if}` -komennon `{repeat}` -komennon sisällä. Se on sallittua myös toisinpäin, `{if}` on sallittu myös `{if}`:n sisällä ja `{repeat}` -komento `{repeat}` :n sisällä.\nKokeile!\n"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
+                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'Mitä haluat?'\n    {if} food {is} pizza\n        {print} 'kivaa!'\n    {else}\n        {print} 'pitsa on parempi'\n```\n"
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
-                story_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces."
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'Rakastan ' animal"
+                story_text: "## Jokaiselle kohteelle luettelossani...\nTällä tasolla opimme uuden koodin kohteelle  `{for}`. Koodilla `{for}` voit tehdä luettelon ja käyttää kaikkia elementtejä.\n`{for}` luo lohkon, kuten `{repeat}` ja `{if}` joten kaikkien lohkon rivien on alettava välilyönneillä."
+                example_code: "```\nelukat {is} koiraa, kissaa, möykkykalaa\n{for} elukka {in} elukat\n  {print} 'Rakastan ' elukka\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+                start_code: "{for} laskin {in} {range} 1 {to} 5\n    {print} laskin"
                 story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` instead of `{repeat} 5 {times}` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
