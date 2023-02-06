@@ -8,10 +8,10 @@ adventures:
                 story_text: |
                     ## Welkom bij Hedy!
                     In Level 1 kun je de commando's `{print}`, `{ask}` en `{echo}` gebruiken.
-                    Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`. Zoals in het voorbeeld hiernaast.
-                    Je kunt het voorbeeld uittesten door op de groene knop in de hoek te klikken.
+                    Typ de code over in het programmeerveld of druk op de gele knop bij de voorbeeldcode, om de computer voor je te laten typen.
+                    Je kunt het voorbeeld uittesten door op de groene 'Voer de code uit' knop in de hoek te klikken.
 
-                    Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
+                    Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`     
 
                 start_code: "{print} hallo wereld!"
                 example_code: |
@@ -135,7 +135,7 @@ adventures:
                     {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
                     {else} {print} 'mwah'
                     ```
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Iets anders dat met `{if}` werkt, is `{pressed}`! Met `{pressed}` kun je iedere letter\nuit het alfabeth en ieder nummer op jouw keyboard koppelen aan een commando. \nAls je een koppeling maakt en die knop indrukt gebeurt er iets. Probeer maar eens!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print} '5 keer 5 is ' 5 * 5"
@@ -176,9 +176,9 @@ adventures:
                         {print} 'Dit wordt allemaal 5 keer herhaald'
                 story_text: |
                     ## Inspringen
-                    `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}` en `{repeat}` is er iets veranderd!
+                    `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}`, `{pressed}` en `{repeat}` is er iets veranderd!
                     Je kunt vanaf dit level meerdere regels samen uitvoeren. Daarvoor moet je deze regels *inspringen*, dat betekent dat ze moeten beginnen met vier spaties.
-                    Ook als je maar één regel in een `{if}`, `{else}` of `{repeat}` wil zetten, moet je inspringen!
+                    Ook als je maar één regel in een blok wilt zetten, moet je inspringen!
 
                 example_code: |
                     Zo werkt het `{repeat}` commando vanaf nu:
@@ -535,8 +535,9 @@ adventures:
             5:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je je verhaal nog leuker maken door verschillende eindes te programmeren.
+                    In dit level kun jij je verhaal nog leuker maken door verschillende eindes te programmeren.
 
+                    ## Opdracht
                     Verzin twee eindes voor je verhaal, bijvoorbeeld zo:
 
                     - De prinses loopt door het bos
@@ -551,8 +552,8 @@ adventures:
                     naam {is} {ask} 'Wie loopt er in het bos?'
                     {print} naam ' loopt door het bos'
                     {print} naam ' komt een monster tegen'
-                    einde {is} {ask} 'Wil je een goed of slecht einde?'
-                    {if} einde {is} goed {print} naam ' pakt het zwaard en het monster rent snel weg'
+                    eind {is} {ask} 'Wil je een goed of slecht einde?'
+                    {if} eind {is} goed {print} naam ' pakt het zwaard en het monster rent snel weg'
                     {else} {print} 'Het monster eet ' naam ' op'
                     ```
                 start_code: "{print} 'Hier komt straks jouw verhaal!'"
@@ -563,7 +564,7 @@ adventures:
                     Dat kun je nu in je verhaal zetten met `{repeat}`.
 
                     ### Opdracht
-                    Kun jij ook herhaling in jouw verhaal gebruiken? Ga terug naar level 6, zoek je verhaalprogramma op en kies minstens
+                    Kun jij ook herhaling in jouw verhaal gebruiken? Zoek je verhaalprogramma van level 6 op en kies minstens
                     één `{print}` regel om te herhalen.
                 example_code: |
                     ```
@@ -620,9 +621,9 @@ adventures:
                         {print} 'Robin ziet een interessant boek.'
                         boek = {ask} 'Koopt Robin het boek?'
                         {if} boek {is} ja
-                            {print} 'Robin koopt het boek en gaat naar huis'
-                        {else}
-                            {print} 'Robin verlaat de winkel en gaat naar huis'
+                            _ {print} 'Robin koopt het boek en gaat naar huis'
+                            _ {else}
+                            _ {print} 'Robin verlaat de winkel en gaat naar huis'
                     {else}
                         {print} 'Robin gaat naar huis'
                     ```
@@ -655,7 +656,10 @@ adventures:
             13:
                 story_text: |
                     ## Verhaal
-                    Door `{and}` en `{or}` te gebruiken kun je je codes een stuk inkorten. Neem bijvoorbeeld het verhaal over de draak uit de vorige levels.
+                    Door `{and}` en `{or}` te gebruiken kun je jouw codes een stuk inkorten. Neem bijvoorbeeld het verhaal over de draak uit de vorige levels.
+
+                    ## Opdracht
+                    Kun jij van jouw eigen verhaal een klein spel maken zoals dit voorbeeld?
                 example_code: |
                     ```
                     zwaard = 'kwijt'
@@ -731,7 +735,7 @@ adventures:
                     {echo}
                     {echo}
                     ```
-                start_code: "{print} Ik ben Hedy de papegaai!"
+                start_code: "```\n{print} Ik ben Hedy de papegaai!\n{ask} Wie ben jij?\n{echo}\n{echo}\n```"
             2:
                 story_text: |
                     ## Papegaai
@@ -774,7 +778,7 @@ adventures:
                     {print} Train je papegaai!
                     nieuw_woord {is} {ask} Welk woord moet je papegaai leren?
                     {add} nieuw_woord {to_list} woorden
-                    {print} 🧒: Zeg nieuw_woord , Hedy!
+                    {print} 🧒: Zeg nieuw_woord, Hedy!
                     {print} 🦜: woorden {at} {random}
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -797,6 +801,7 @@ adventures:
                 story_text: |
                     ## Papegaai
                     Beloon je papegaai als hij het nieuwe woordje zegt!
+                    Maak de code af door de 4 missende commando's in te vullen.
                 example_code: |
                     ```
                     woorden {is} lorre, Hedy
@@ -820,6 +825,8 @@ adventures:
                     ## Liedjes
                     In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
                     Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
+
+                    Tip: gebruik de 'lees voor' funtie om Hedy het liedje voor je te laten zingen. 
 
                     ### Opdracht
                     Je kunt nu regel 2 t/m 9 zo vaak herhalen als je wil door de regels te kopiëren en plakken.
@@ -1033,14 +1040,13 @@ adventures:
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
-                story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de turtle naar elke richting laten wijzen. \n\nGebruik 90 graden om een kwartslag te draaien. Een heel rondje draaien is 360 graden. \nKun jij een figuurtje tekenen met deze code? Misschien een driehoek of een cirkel?\n"
+                story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de turtle naar elke richting laten wijzen. \n\nGebruik 90 om een kwartslag te draaien, we noemen dit graden. Een heel rondje draaien is 360 graden. \n\n## Opdracht\nKun jij een figuurtje tekenen met deze code? Misschien een driehoek of een cirkel?\n"
                 example_code_2: "```\n{print} Figuren tekenen\nhoek {is} 90\n{turn} hoek\n{forward} 25\n{turn} hoek\n{forward} 25\n```\n"
             3:
                 story_text: |
                     ## Zoekende schildpad
                     Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
                     Kies met `{at} {random}` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
-
                     ### Opdracht
                     Kun jij regel 2 en 3 kopiëren en plakken om een langere random code te maken?
                 example_code: |
@@ -1060,7 +1066,7 @@ adventures:
                     In dit level moet je aanhalingstekens gebruiken bij `{print}` en `{ask}`. Ook bij het tekenen dus!
                 example_code: |
                     ```
-                    {print} 'Figuren tekenen'
+                    {print} _ Figuren tekenen _
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
@@ -1074,7 +1080,7 @@ adventures:
                     {turn} hoek
                     {forward} 25
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## Kleuren\nJe kunt de lijn ook van kleur laten wisselen met `{color}`. Kijk maar eens naar het voorbeeld.\nJe kunt het commande `{color} {white}` gebruiken om onzichtbare lijnen te tekenen. Je kunt die witte lijnen b.v. gebruiken om ergens anders op het scherm te beginnen met tekenen.\n"
             5:
                 story_text: |
                     ## Tekenen maar
@@ -1141,7 +1147,7 @@ adventures:
                 example_code: |
                     ```
                     hoek = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} hoek
                         {forward} 50
                     ```
@@ -1197,7 +1203,7 @@ adventures:
                 start_code: "# place your code here"
     dishes:
         name: "Afwas?"
-        description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
+        description: "Gebruik de computer om te kijken wie de afwas doet"
         default_save_name: "Afwas"
         levels:
             3:
@@ -1308,7 +1314,7 @@ adventures:
                     ```
                     dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
                     namen = mama, papa, Emma, Sophie
-                    for dag in dagen
+                    {for} dag {in} dagen
                         {print} 'Op ' dag ' doet ' namen {at} {random} ' de afwas.'
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1337,7 +1343,8 @@ adventures:
                     ```
                 story_text_2: |
                     ## Challenge
-                    De dobbelsteen in het voorbeeld hierboven zijn voor het spelletje regenwormen. Kun jij ook normale dobbelstenen maken? Of andere speciale dobbelstenen van een ander spel?
+                    De dobbelsteen in het voorbeeld hierboven zijn voor het spelletje regenwormen. Kun jij ook normale dobbelstenen maken? 
+                    Of andere speciale dobbelstenen van een ander spel?
             4:
                 story_text: |
                     ## Dobbelsteen
@@ -1356,7 +1363,7 @@ adventures:
                     Je kunt ook in dit level weer een dobbelsteen maken en daarbij de `{if}` gebruiken.
                     Maak de voorbeeldcode af zodat de code zegt 'Je mag stoppen met gooien' als je een regenworm hebt gegooid.
 
-                    Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken. Dat is natuurlijk ook goed. Verzin dan zelf een reactie. Bijv 'yes' bij 6 en 'jammer' bij iets anders.
+                    Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken. Dat is natuurlijk ook goed. Verzin dan zelf een reactie. Bijvoorbeeld 'yes' bij 6 en 'jammer' bij iets anders.
                 example_code: |
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
@@ -1370,19 +1377,20 @@ adventures:
                 story_text: |
                     ## Dobbelsteen
                     Je kunt nu weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
+                    Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. 
+                    Het voorbeeld doet dat voor 1 dobbelsteen.
 
-                    Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. Zo doe je dat voor 1 dobbelsteen:
+                    ## Opdracht
+                    Kun jij de code aanpassen zodat je de totale score krijgt voor 8 dobbelstenen? Je moet dan wat code kopiëren en plakken.
                 example_code: |
                     ```
                     keuzes = 1, 2, 3, 4, 5, regenworm
                     punten = 0
                     worp = keuzes {at} {random}
                     {print} 'je gooide ' worp
-                    {if} worp {is} regenworm punten = punten + 5
-                    {else} punten = punten + worp
+                    {if} worp {is} regenworm punten = punten + 5 {else} punten = punten + worp
                     {print} 'dat zijn dan ' punten ' punten'
                     ```
-                    Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
                 example_code_2: "## Kijkje vooruit\n\nIs het gelukt om de score met 8 dobbelstenen te berekenen? Daar had je dan veel knip en plak werk voor nodig, toch? Dit gaan we eenvoudiger maken in level 7!\n"
             7:
