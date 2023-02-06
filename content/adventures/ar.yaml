@@ -318,6 +318,7 @@ adventures:
                 story_text: "## القصة\nفي المستوى 2 يمكنك أن تجعل القصة الخاصة بك ممتعة أكثر.ستكون قادراً على استخدام اسم الشخصية الرئيسية في أي مكانٍ تريده في قصتك.\n\nلتتمكن من فعل ذلك، ستحتاج إلى إضافة بعض الأسطر البرمجية، ولكن أولاً يجب أن تختار اسمًا للشخصية الرئيسية، بعد ذلك ضع الاسم في الجملة التي تشاء.\n\n## تحدي\nهل تستطيع أن تصنع قصة باستخدام المتغيرات لوحدك؟ أو أن تضيف متغيرات جديدة للقصة؟\n"
                 example_code: "```\nالاسم {is} {ask} الشخصية الرئيسية في القصة هو\n{print} الاسم يتجول الآن في الغابة\n{print} الاسم خائفٌ قليلًا\n{print} لقد سمع ضوضاء رهيبة في المكان من حوله\n{sleep}\n{print} الاسم خائفٌ من أن تكون هذه الغابة مسكونة\n```"
                 start_code: '{print} قصتك'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             12:
                 story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable.\n"
                 example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
@@ -400,6 +401,7 @@ adventures:
                 example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
                 start_code: '# place your code here'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             16:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
@@ -471,7 +473,6 @@ adventures:
                 start_code: '{print} من سيغسل الأطباق؟'
                 example_code: "```\nعائلتي هي أمي، أبي، مريم، احمد\n{print} عائلتي {at} {random}\n```\n"
                 story_text_2: "## تهكير (اختراق) برنامج غسل الأطباق!\nتشعر بعدم الرغبة في غسل الأطباق اليوم؟ اخترق البرنامج وإمسح اسمك من قائمة أفراد العائلة بإستخدام الأمر `{remove}` `{from}`\n"
-                example_code_2: "```\nعائلتي هي أمي، أبي، احمد، مريم\nإسمك {is} {ask} من أنت؟\n_ إسمك _ عائلتي\n{print} _ _ _ سيغسل الأطباق\n```\n"
             10:
                 story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
@@ -540,6 +541,7 @@ adventures:
                 story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكنك التدرب على استخدام المتغيرات، حتى تتمكن من صنع لعبة حجر ورقة مقص في المستوى القادم!\n"
                 example_code: "```\n_  {is} {ask} حجر, ورقة, مقص؟\n{print} أنا أختار _\n```\n"
                 start_code: '#اكتب الكود الخاص بك هنا'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
@@ -600,6 +602,10 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# place your code here'
+            11:
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
         name: آلة حاسبة
         description: اصنع آلة حاسبة
         default_save_name: آلة حاسبة
@@ -618,7 +624,6 @@ adventures:
                 example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print} الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} {ask} ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print} الوجبة الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
                 start_code: '#ضع الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل بإمكانك أن تجعل الكود مفصّلًا أكثر؟ بإضافة مشروبات إلى الطلب مثلًا؟\n"
-                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print} الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
@@ -643,6 +648,8 @@ adventures:
                 story_text_2: "## حساسية\nهل يعاني زبونك من أي حساسية أو لا يحب نوع معين من الأطباق؟ إذاً يمكنك إستخدام الأمر `{remove}` لإزالة هذا النوع من قائمة طعامك.\n"
                 example_code_2: "```\n{print} المثلجات المتوفرة\nالنكهات هي فراولة، شوكولاتة، مانجا، فستق حلبي\nالحساسية هي {ask} هل لديك حساسية من أي نكهات؟\n_\n{print} ستحصل على النكهات {at} {random}\n```\n"
                 start_code: '# اكتب الكود الخاص بك هنا'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
@@ -767,11 +774,11 @@ adventures:
                 example_code: "```\n{print} _ اهرب من بيت الأشباح! _\n{print} _ هناك ثلاثة ابواب أمامك _\nالخيار {is} {ask} _ ما هو رقم الباب الذي ستختاره؟ _\n{print} _ لقد اخترت الباب رقم _ الخيار\nالأشباح {is} مصاص دماء, مومياء, لا شيء\n{print} _أنت ترى..._\n{sleep}\n{print} الأشباح {at} {random}\n ```\n"
             3:
                 story_text: "## لعبة بيت الأشباح\nفي المستويات السابقة استطعت كتابة مقدمة للعبة بيت الأشباح الخاصة بك، ولكن ربما لاحظت أن القصة غالباً ما ستنتهي نهاية مروعة.\nستتمكن في هذا المستوى من جعل قصتك أكثر تفاعلاً من خلال تغيير بعض مخرجات اللعبة، في بعض الأحيان ستأكلك الأشباح ولن تستطيع الخروج من البيت وفي أحيانٍ أخرى ستنجو بالهرب!\nدع هيدي تقرر ذلك عشوائيًا!\n"
-                example_code: "```\n{print} الهروب من بيت الأشباح!\n{print} هناك ٣ أبواب أمامك...\nالإختيار {is} {ask} أيأً من الأبواب الثلاثة تختار؟\n{print} إخترت الباب رقم ... الإختيار\nالشبح {is} زومبي، مصاص دماء، لا شيء لقد استطعت الهرب\n{print} انت ترى...\n{sleep}\n{print} الشبح {at} {random}\n```\n"
                 start_code: '# اكتب الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهذه القصة تعتبر إلى حدٍ ما مباشرة، ربما يمكنك إضافة بعض الأحداث المرعبة لتجعلها أكثر إثارة.\nوكذلك الآن هذا المثال يعطيك نتائج محدودة للغاية، هناك فقط ٣ خيارات حول ما المُخبأ وراء كل باب. ربما يمكنك التفكير في المزيد من الوحوش و إضافتها للقائمة!\n"
                 story_text_3: "## تغيير اللعبة إلى برنامج تلفزيوني للألعاب!\nوأخيراً، نود أن نتحداك لتغيير هذه اللعبة إلى برنامج للألعاب (كالذي يعرض على التلفاز) حيث تختار باباً أو حقيبةً و تكون تحتوي على جائزة كبيرة!\nهل يمكنك فعلها؟\n"
                 example_code_3: "```\n{print} برنامجنا الضخم للألعاب!\n{print} هناك ٣ حقائب امامك...\n{print} فقط واحدة منهم تحتوي على _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: بيت الأشباح
     piggybank:
         name: البنك الإلكتروني

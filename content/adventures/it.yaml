@@ -482,6 +482,7 @@ adventures:
                     {print} name is afraid this is a haunted forest
                     ```
                 start_code: "{print} La tua storia"
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             3:
                 story_text: |
                     ## Storia
@@ -870,6 +871,7 @@ adventures:
                     ```
                 start_code: "# place your code here"
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             11:
                 story_text: |
                     ## Songs
@@ -1133,13 +1135,6 @@ adventures:
                 story_text_2: |
                     ## Hack the dishwashing program!
                     Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
-                example_code_2: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    your_name {is} {ask} Who are you?
-                    {remove} your_name {from} people
-                    {print} people {at} {random} does the dishes
-                    ```
                 start_code: "{print} Who does the dishes?"
             4:
                 story_text: |
@@ -1374,6 +1369,7 @@ adventures:
                     {print} I choose choice
                     ```
                 start_code: "# place your code here"
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
                 story_text: |
                     ## Rock, paper, scissors
@@ -1629,6 +1625,10 @@ adventures:
                     {print} 'You win!'
                     ```
                 start_code: "# scrivi il tuo codice qui"
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                start_code: '# place your code here'
     restaurant:
         name: "Restaurant"
         description: "Crea il tuo ristorante virtuale"
@@ -1668,7 +1668,6 @@ adventures:
                     {print} Your food and drinks will be right there!
                     ```
                 start_code: "# place your code here"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
             3:
                 story_text: |
@@ -1706,6 +1705,8 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: "# place your code here"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
                     ## Restaurant
@@ -2257,17 +2258,6 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
-                    ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
-                    {sleep}
-                    {print} monsters {at} {random}
-                    ```
                 story_text_2: |
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
@@ -2279,6 +2269,7 @@ adventures:
                 start_code: "# scrivi il tuo codice qui"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: |
                     ## Haunted house

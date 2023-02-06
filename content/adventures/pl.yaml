@@ -157,6 +157,7 @@ adventures:
                 example_code: "## 5 Małych Małpek\n```\nmałpki = 5, 4, 3, 2\n{for} małpka {in} małpki\n    {print} 'Skakało na łóżku małych małpek ' małpka\n    {print} 'Nagle jedna spadłą i potłukła się'\n    {print} 'Mama do doktora dzwoni i słyszy, że'\n    {print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n```\n\n## Dziecko Rekin\n```\nrekiny = Dziecko, Mama, Tata, Babcia, Dziadek\n{for} rekin {in} rekiny\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin'\n```\n\n## Dziadek Fajną Farmę Miał\n```\nzwierzęta = Kurki, Krówki, Świnkę\n{for} zwierzę {in} zwierzęta\n    {if} zwierzę {is} Kurki\n        dźwięk = ko\n    {if} zwierzę {is} Krówki\n        dźwięk = muu\n    {if} zwierzę {is} Świnkę\n        dźwięk = chrum\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n"
                 start_code: '# umieść tutaj swój kod'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             8:
                 story_text: "## Piosenki\nW poprzednich poziomach programowałeś piosenkę \"Butelki Piwa\" (ang. Bottles of Beer). Bez użycia polecenia `{repeat}` musiałeś wiele razy skopiować wersy piosenki.\nNa tym poziomie możesz powtórzyć ten wers 99 razy poprzez dodanie jednej prostej linii kodu.\n\n### Ćwiczenie\nDodaj odpowiednie polecenia w puste miejsca i upewnij się, że kod ma poprawne wcięcia.\n"
                 example_code: "```\nwers = 99\n_ 99 {times}\n    {print} wers ' butelek piwa na ścianie'\n    {print} wers ' butelek piwa'\n    {print} 'Weź jedną i przekaż ją dalej'\n    wers = wers - 1\n    {print} wers ' butelek piwa na ścianie'\n```\n"
@@ -203,7 +204,6 @@ adventures:
                 story_text: "## Zmywarka\nCzy w domu nie zawsze zgadzasz  się z tym, kto powinien umyć naczynia lub zmienić kuwetę dzisiaj?\nW takich przypadkach możesz użyć komputera aby wybrać sprawiedliwie. Możesz zaprogramować to na tym poziomie!\nNajpierw przygotuj listę członków swojej rodziny. Następnie wybierz z listy `{at} {random}`.\n"
                 example_code: "```\nosoby {is} mama, tata, Ewa, Sofia\n{print} osoby  {at} {random}\n```\n"
                 story_text_2: "## Zhakuj program zmywarki!\nNie masz ochoty samemu zmywać naczyń? Zhakuj program usuwając swoje imię z listy za pomocą komendy `{remove}` `{from}`.\n"
-                example_code_2: "```\nosoby {is} mama, tata, Ewa, Sofia\ntwoje_imie {is} {ask} Jak masz na imię?\n_ twoje_imie  _ osoby\n{print} _ _ _ dziś zmywa\n```\n"
                 start_code: '{print} Kto dziś zmywa naczynia?'
         name: Zmywanie?
         description: Użyj komputera, aby sprawdzić, kto zmywa naczynia
@@ -279,6 +279,7 @@ adventures:
                 story_text: "## Papier, kamień, nożyce\nNa tym poziomie możesz poćwiczyć używanie zmiennych, dzięki będziesz mógł stworzyć grę w papier, kamień, nożyce w następnym poziomie!\n"
                 example_code: "```\n_ {is} {ask} papier, kamień czy nożyce?\n{print} Ja wybrałam _\n```\n"
                 start_code: '# umieść swój kod tutaj'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
@@ -320,6 +321,10 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# umieść tutaj swój kod'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                start_code: '# place your code here'
         description: Stwórz kalkulator
         default_save_name: Kalkulator
     restaurant:
@@ -330,6 +335,8 @@ adventures:
                 example_code: "```\n{print} Witamy w Losowej Restauracji Hedy!\n{print} Jedyna taka restauracja w której wybierzemy twój obiad i jego cenę za ciebie całkowicie losowo!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} Rozpoczniesz od: starters {at} {random}\n{print} Następnie podamy: mains {at} {random}\n{print} A na deser: desserts {at} {random}\n{print} Do picia dosteniesz  drinks {at} {random} \n{print} Całość kosztuje: prices {at} {random}\n{print} Smacznego!\n```\n"
                 story_text_2: "## Alergeny\nCzy Twój klient ma jakieś alergie lub nie lubi pewnych potraw? Wtedy możesz użyć komendy `{remove}`, aby usunąć je ze swojego menu.\n"
                 example_code_2: "```\n{print} Tajemniczny shake\nsmaki {is} truskawkowy, czekoladowy, waniliowy\nalergie {is} {ask} Czy jesteś na coś uczulony?\n_\n{print} Dostaniesz  {at} {random} smami\n```\n"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 start_code: '# umieść tutaj swój kod'
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
@@ -344,7 +351,6 @@ adventures:
                 example_code: "```\n{print} Witamy w restauracji Hedy!\n{print} Dziś serwujemy pizzę lub lasagne.\njedzenie {is} {ask} Co chciałbyś zjeść?\n{print} Świetny wybór! Uwielbiam jedzenie!\ndodatki {is} {ask} Chciałbyś do tego mięso czy warzywa?\n{print} Juz przygotowuje jedzenie z dodatki!\n```\n"
                 start_code: '# umieść swój tutaj'
                 story_text_2: "## Wyzwanie\nCzy możesz uczynić ten kod bardziej rozbudowanym? Na przykład dodając napoje do zamówienia? Lub...?\n"
-                example_code_2: "```\n{print} Witamy w restauracji Hedy!\n{print} Dziś serwujemy pizzę lub lasagne.\njedzenie {is} {ask} Co chciałbyś zjeść?\n{print} Świetny wybór! Uwielbiam jedzenie!\ndodatki {is} {ask} Chciałbyś do tego mięso czy warzywa?\n{print} Juz przygotowuje jedzenie z dodatki!\nnapój {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
@@ -484,19 +490,19 @@ adventures:
                 start_code: '# umieść tutaj swój kod'
             3:
                 story_text: "## Gra w nawiedzony dom\nNa poprzednich poziomach zrobiłeś wprowadzenie do gry w nawiedzony dom, ale jak mogłeś zauważyć, historia zawsze miała straszny koniec.\nNa tym poziomie możesz uczynić swoją historię bardziej interaktywną, zmieniając wynik gry; czasami zostaniesz zjedzony, czasami uciekniesz!\nNiech Hedy decyduje losowo!\n"
-                example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# umieść tutaj swój kod'
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: Nawiedzony dom
         description: Ucieknij z nawiedzonego domu
         default_save_name: Nawiedzony dom
     story:
         levels:
             10:
-                example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                story_text: "## Opowieść\nW tym poziomie możesz użyć polecenia {for} w swojej opowieści. Dzięki tej komendzie mógłbyś bardzo prosto zaprogramować część wierszyka \"Sroczka kaszkę warzyła\".\n"
+                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                story_text: "## Opowieść\nW tym poziomie możesz użyć polecenia {for} w swojej opowieści. Dzięki tej komendzie możesz bardzo prosto zaprogramować część wierszyka \"Sroczka kaszkę warzyła\".\n### Ćwiczenie\nSpójrz na <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> opowiadanie</a> jeśli go nie znasz i upewnij się, że jest wydrukowane tak jak w książce.\n"
                 start_code: '# tutaj umieść swój kod'
             1:
                 story_text: "## Stwórz opowieść\nNa poziomie 1 możesz stworzyć opowieść z różnymi postaciami które stworzysz samodzielnie.\n\nW pierwszej linii użyj polecenia `{ask}` i zapytaj kto będzie głównym bohaterem twojej opowieści.\nKolejne linie zacznij od polecenia `{print}` jeżeli chcesz wyświetlić tekst.\nUżyj polecenia `{echo}` jeżeli chcesz aby imię twojego bohatera znalazło się na końcu wypowiedzi.\n"
@@ -508,6 +514,7 @@ adventures:
                 story_text: "## Historyjka\nNa poziomie 2. Twoja opowieść może być znacznie zabawniejsza. Imię głównego bohatera może pojawić się w dowolnym miejscu w zdaniu.\n\nTrzeba będzie napisać nieco więcej kodu . Musisz zapytać o imię głównego bohatera zanim będziesz mógł wykorzystać je w zdaniu.\n\nPotem będziesz mógł użyć imienia w dowolnym miejscu w zdaniu.\n\n## Ćwiczenie\nCzy możesz sam stworzyć opowieść używając zmiennej? Czy możesz dodać jeszcze więcej zmiennych?\n"
                 example_code: "```\nimię {is} {ask} Jak nazywa się główny bohater?\n{print} imię biega teraz po lesie\n{print} imię trochę się boi\n{print} Nagle imię usłyszał dziwny dźwięk...\n{sleep}\n{print} imię obawia się, że las może być nawiedzony\n```"
                 start_code: '{print} Twoja historyjka'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             12:
                 story_text: "## Opowieść\nW tym poziomie możesz użyć cudzysłowy, żeby przypisac wiele słów do jednej zmiennej."
                 example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
