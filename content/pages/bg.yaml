@@ -47,250 +47,167 @@ sections:
 -   levels:
     -   sections:
         -   example:
-                error_text: "For example they type a sentence without using print.\n"
                 solution_text: "Научете учениците винаги да започват ред в програмата с команда.\n"
-        -   title: Учениците използват главни букви, когато пишат команди
-            example:
+        -   example:
                 error_code: "Попитай Защо кодът ми не работи?\nОтпечатай Защото използвам главни букви.\n"
-                solution_code: "попитай Защо кодът ми работи сега?\nотпечатай Защото премахнах главните букви!\n"
         -   example:
                 error_text: "Повтори се използва за повтаряне на отговор след команда попитай. Без попитай повтори няма да направи нищо.\n"
-                solution_text: "Добавате команда попитай, за да проработи.\n"
         -   title: Учениците искат тяхната дума за принтиране да е в средата на изречението
             example:
-                error_code: "попитай Кой език за програмиране е най-забавен?\nповтори е най-добрият!\n"
                 solution_code: "попитай Кой език за програмиране е най-забавен?\nповтори Най-добрият е ...\n"
         -   example:
-                error_code: "напред 300\nзавой 90\n"
                 solution_code: "forward 100\nturn 90\n"
         -   example:
-                solution_text: "To make the turtle go backwards, you use the forward command and a negative number. For example:\n"
                 error_text: "Backward is not a command.\n"
-            title: "Turtle: Students use the command backward, but that doens't exist"
     -   sections:
         -   example:
                 error_text: "Hedy can't recognize a command with a typo.\n"
-                solution_text: "Teach your students to read the error messages. This way they can find out themselves what went wrong.\n"
             title: Students make typos in their commands
         -   example:
-                error_text: "In this level students learn about variables. The ask command requires a variable as well, but students forget this.\n"
                 solution_text: "In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.\n"
         -   example:
-                error_code: "answer is ask Why doesn't echo work anymore?!\necho\n"
                 solution_text: "Use a varible instead.\n"
-            title: 'Students try to use the echo command. '
         -   example:
                 error_text: "In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.\n"
-                solution_text: "So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.\n"
         -   example:
                 error_code: "chosen door is ask Which door do you pick?\n"
-                solution_code: "chosen_door is ask which door do you pick?\n"
             title: Students use long variable names containing two words.
         -   example:
-                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
                 solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
-        level: '2'
     -   sections:
         -   example:
                 error_text: "A list can't be printed. You can only print one item from the list with at random.\n"
-                solution_text: "To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.\n"
         -   example:
                 error_text: "This problem probably occured in level 2 as well. Now it can happen with lists too.\n"
-                solution_text: "Don;t use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.\n"
             title: Students use the name of a variable or list as regular text.
         -   example:
-                solution_text: "This problem is solved by adding the word at.\n"
                 error_text: "Like in the example\n"
-        -   title: Students forget to use the print command when also using the at random command.
-            example:
+        -   example:
                 error_code: "fruit is apple, cherry, banana\nfruit at random\n"
-                solution_code: "fruit is apple, cherry, banana\nprint fruit at random\n"
         -   example:
                 error_text: "In a list items are seperated with a comma.\n"
-                solution_text: "After each item on your list, there should be a comma\n"
         -   title: Students try to use at random without a list.
             example:
-                error_code: "clubs is Manchester United\nprint clubs at random\n"
                 solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
         -   example:
-                error_text: "In the example below 'names' is not a list, but a variable. You cannot add anything to it.\n"
                 solution_text: "There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.\n"
-        -   title: Students forget to use to/from in add/remove.
-            example:
+        -   example:
                 error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
-                solution_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice to adventures\nremove dice from adventures\nprint I love adventures at random\n"
     -   level: '4'
         sections:
         -   example:
-                error_text: "In this level print and ask need a set of quotation marks. One before of the text and one after.\n"
                 solution_text: "Add the correct quotation marks.\n"
         -   example:
-                error_code: "print `Welcome to the restaurant`\nfood is ask \"What would you like to order?\"\n"
                 solution_text: "These are the correct quotation marks:\n"
-            title: Students use the wrong quotation marks
         -   example:
                 error_text: "From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.\n"
-                solution_text: "You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.\n"
     -   sections:
         -   title: Students forget to use print in an if command
             example:
-                error_code: "if name is Hedy 'Great!'\nelse 'Hedy is better!'\n"
                 solution_code: "if name is Hedy print 'Great!'\nelse print 'Hedy is better!'\n"
         -   example:
-                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
                 solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
-        -   title: Students still forget the quotes on both sides.
-            example:
+        -   example:
                 error_code: "if name is Hedy print fun\nelse print 'meh!\n"
-                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!'\n"
         -   example:
                 error_text: "In this level there are no quotes around variable names.\n"
-                solution_text: "Remove the quotes to get the code to work.\n"
         -   title: Students use long variable names containing two words.
             example:
-                error_code: "chosen door is ask 'Which door do you pick?'\n"
                 solution_code: "chosen_door is ask 'which door do you pick?'\n"
         -   example:
-                solution_text: "You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.\nAnother solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.\n"
                 solution_code: "friends is Jesse, David, Souf\nname is ask 'Who are you?'\nif name in friends print 'You are funny'\nelse print 'You are not funny'\n\nor\n\nname is ask 'Who are you?'\nif naam is Jesse print 'You are funny'\nif naam is David print 'You are funny'\nif naam is Souf print 'You are funny'\n"
-        -   title: The students make the variable name the same as the value in the if statement
-            example:
+        -   example:
                 error_code: "password is ask 'What is the password?'\nif password is password print 'Access granted'\nelse print 'Acces denied!'\n"
-                solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'"
     -   level: '6'
         sections:
         -   example:
-                error_text: "Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.\n"
                 solution_text: "In this code the output screen will print '10'.\n"
-        -   title: Students struggle with the concept of doing maths with a variable
-            example:
+        -   example:
                 solution_text: "Or take it a step further like this.\n"
-                error_text: "Some students will find it hard to do maths with variables. Try to show them very simple examples, like:\n"
     -   sections:
         -   title: Students forget one of the word of the repeat command, or they forget the print command
             example:
-                error_code: "repeat 3 times 'For he`s a jolly good fellow'\nrepeat 3 print 'Which nobody can deny!'\n"
                 solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
         -   example:
-                error_text: "In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.\n"
                 solution_text: "You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.\n"
-        -   title: Students make programs that take too long to run
-            example:
+        -   example:
                 error_code: "repeat 100 times print 'How many times can I repeat this?'\n"
-                solution_code: "repeat 20 times print 'This is enough'\n"
     -   sections:
         -   title: Students use the indentation wrong
             example:
-                error_code: "repeat 3 times\nprint 'hello'\n"
                 solution_code: "repeat 3 times\n    print 'hello'\n"
         -   example:
-                error_text: "For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.\n"
                 solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
-        -   title: Students want to nest if statements, or put if statements inside a loop
-            example:
+        -   example:
                 error_code: "birthday = ask 'Is it you birthday?'\nif birthday = yes\n    repeat 3 times\n        print 'Hip Hip Hooray!'\n"
-                solution_code: "birthday = ask 'Is it you birthday?'\nif birthday = yes\n    print 'Hip Hip Hooray!'\n    print 'Hip Hip Hooray!'\n    print 'Hip Hip Hooray!'\n"
         -   example:
                 error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
-                error_code: "repeat 100 times\n    print 'How many times can I repeat this?'\n"
         -   example:
                 error_code: "password is ask 'What is the password?'\nif password is password\n    print 'You can come in'\nelse\n    print 'You are not allowed'\n"
-                solution_code: "password is ask 'What is the password?'\nif password is 'password'\n    print 'You can come in'\nelse\n    print 'You are not allowed'\n"
             title: Students use the if command to check if the variable value is the same as the variable name
     -   sections:
-        -   title: Students make mistakes with indentation
-            example:
+        -   example:
                 error_code: "print 'Robin is walking downtown'\nlocation = ask 'Is Robin going into a shop, or does she go home?'\nif location is shop\n    print 'She enters the shop.'\n    print 'Robin sees an interesting looking book'\n    book = ask 'Does Robin buy the book?'\n        if book is yes\nprint 'Robin buys the book and goes home'\nelse\n    print 'Robin leaves the shop and goes home'\nelse\n    print 'Robin goes home'\n"
-                solution_code: "print 'Robin is walking downtown'\nlocation = ask 'Is Robin going into a shop, or does she go home?'\nif location is shop\n    print 'She enters the shop.'\n    print 'Robin sees an interesting looking book'\n    book = ask 'Does Robin buy the book?'\n    if book is yes\n        print 'Robin buys the book and goes home'\n    else\n        print 'Robin leaves the shop and goes home'\nelse\n    print 'Robin goes home'\n"
     -   sections:
         -   example:
                 error_text: "We often see that students try to print the list (in the example animals) instead of the items of the list.\n"
-                solution_text: "The word animals in the last line should be changed into animal.\n"
         -   title: Students forget the indentation
             example:
-                error_code: "animals is dog, cat, blobfish\nfor animal in animals\nprint 'I love ' animals\n"
                 solution_code: "animals is dog, cat, blobfish\nfor animal in animals\n  print 'I love ' animal\n"
-    -   level: '11'
-        sections:
+    -   sections:
         -   example:
                 error_text: "Make sure that the students use indentation.\n"
-                solution_text: "This is the correct code:\n"
         -   title: Students don't understand the i
             example:
-                error_code: "for i in range 1 to 5\nprint i\n"
                 solution_code: "for banana in range 1 to 5\n    print banana\n"
     -   sections:
-        -   title: Students forget quotation marks
-            example:
+        -   example:
                 solution_text: "This is the correct code:\n"
-                error_code: "superheroes = Spiderman, Batman, Iron Man\nsuperhero = superheroes at random\nif superhero = Batman\n    print 'IM BATMAN!'\n"
         -   example:
                 error_text: "You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.\nIn the example below, you can't do maths with the number 25, because it's in quotation marks.\n"
-                solution_text: "This is the correct code:\n"
         -   title: Students use commas instead of periods in decimal numbers
             example:
-                error_code: "print 2,5 + 2,5\n"
                 solution_code: "print 2.5 + 2.5\n"
     -   sections:
         -   example:
-                error_text: "Both commands might appear similar, but their functions are very different.\n"
                 solution_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' and time is 'yes'\n    print 'Lets play!'\n"
-        level: '13'
     -   sections:
         -   title: Students confuse the < and > signs
             example:
-                error_code: "age = ask 'How old are you?'\nif age < 12\n    print 'You are older than I am!'\n"
                 solution_code: "age = ask 'How old are you?'\nif age > 12\n    print 'You are older than I am!'\n"
         -   example:
-                error_text: "These signs are probably new for most students. Make sure to explain these signs to your students.\n"
                 solution_text: "This is the correct code:\n"
-        -   title: Students forget to use the == sign
-            example:
+        -   example:
                 error_code: "name = ask 'What is your name?'\nif name = 'Hedy'\n    print 'You are cool!'\n"
-                solution_code: "name = ask 'What is your name?'\nif name == 'Hedy'\n    print 'You are cool!'\n"
     -   sections:
         -   title: Students forget indentation in the while loop
             example:
-                error_code: "answer = 0\nwhile answer != 25\nanswer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
                 solution_code: "answer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
     -   sections:
         -   example:
-                error_text: "From this level on lists should be in brackets.\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
-        -   title: Students use the wrong brackets
-            example:
+        -   example:
                 error_code: "icecream = ('starwberry', 'chocolate'}\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
         -   example:
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
-                solution_text: "This is the correct code:\n"
         -   example:
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
-                solution_text: "This is the correct code:\n"
             title: Students still use the old at random command
         -   example:
-                error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
                 solution_text: "This is the correct code:\n"
-        level: '16'
     -   sections:
         -   title: Students use elif like else, so without a condition
             example:
-                error_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif:\n    print 'I like green'\n"
                 solution_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif color == yellow:\n    print 'yellow is alright'\nelse:\n    print 'I like green'\n"
         -   example:
-                error_text: "After each command that requires indentation, a colon should be used.\n"
                 solution_text: "This is the correct code:\n"
-    -   level: '18'
-        sections:
+    -   sections:
         -   example:
                 error_text: "Students will forget to put brackets around their text.\n"
-                solution_text: "This is the correct code:\n"
         -   title: Students will still use the ask command
             example:
-                error_code: "print('My name is Hedy!')\nname = ask('What is your name?')\nprint('So your name is ', name)\n"
                 solution_code: "print('My name is Hedy!')\nname = input('What is your name?')\nprint('So your name is ', name)\n"
         -   example:
-                solution_text: "This is the correct code:\n"
                 error_text: "They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.\n"
     title: Често допускани грешки
     key: common_mistakes
