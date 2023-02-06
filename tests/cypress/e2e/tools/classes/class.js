@@ -1,18 +1,8 @@
 import { goToTeachersPage } from "../navigation/nav";
 
-// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
-function generateRandomString(length) {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
-
 export function createClass()
 {
-    const classname = `test class ${generateRandomString(10)}`;
+    const classname = `test class ${Math.random()}`;
     
     goToTeachersPage();
     cy.wait(500);
@@ -20,9 +10,6 @@ export function createClass()
     cy.get('#create_class_button').click();
     cy.get('#modal-prompt-input').type(classname);
     cy.get('#modal-ok-button').click();
-
-    goToTeachersPage();
-    cy.wait(500);
     
     return classname;
 }
@@ -52,6 +39,13 @@ export function createClassAndAddStudents(){
     const classname = createClass();
     const students = addStudents(classname, 4);
     return {classname, students};
+}
+
+export function navigateToClass(classname) {
+    goToTeachersPage();
+    cy.wait(500);
+    cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
+    cy.wait(500);
 }
 
 export default {createClassAndAddStudents};
