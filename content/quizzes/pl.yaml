@@ -15,7 +15,7 @@ levels:
             hint: "Jest nazwany po Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Jaka komenda powoduje wyświetlenie się tekstu?"
+            question_text: "Którym z nich należy uzupełnić puste miejsca, aby pojawił się tekst Hello!"
             mp_choice_options:
             -   option: |
                     ```
@@ -77,7 +77,7 @@ levels:
             mp_choice_options:
             -   option: "Brakuje komendy `{print}` na linii 1."
                 feedback: "Zgadza się!"
-            -   option: "Komendy `{ask}` i `{echo}` są w złej kolejności."
+            -   option: "Im w linii 1 jest źle napisany."
                 feedback: "Komenda 'zapytaj' zadaje pytanie, komenda 'dołącz' wyświetla odpowiedź na to pytanie. Gdyby 'dołącz' było pierwsze, nie byłoby czego wyświetlać."
             -   option: "`{echo}` nie jest komendą."
                 feedback: "`{echo}` jest komendą, błąd znajduje się gdzie indziej."
@@ -124,12 +124,12 @@ levels:
                 {print} Fajnie! Ja też!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
+                feedback: "`{print}` w wierszu 1 jest prawidłowy."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Świetnie! Zwróciłeś uwagę!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
+                feedback: "Świetnie! Masz niezłe oko!"
+            -   option: "Linia 3 musi zaczynać się od `{print}` zamiast `{echo}`."
                 feedback: "`{echo}` jest prawidłowe."
-            -   option: "In line 4, `{print}` is spelled wrong."
+            -   option: "W wierszu 4, `{print}` jest źle napisane."
                 feedback: "Nie, błąd jest gdzieś indziej"
             correct_answer: "B"
             hint: "Sprawdź polecenia `{print}`."
@@ -137,45 +137,45 @@ levels:
         7:
             question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                {print} Welcome at Hedys restaurant!
-                {ask} What would you like to eat?
-                {echo} So you want to order ...
-                {print} Coming right up! Enjoy!
+                {print} Witamy w restauracji Hedys!
+                {ask} Co chciałbyś zjeść?
+                {echo} Więc chcesz zamówić...
+                {print} Już się robi! Smacznego!
             mp_choice_options:
             -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
-                feedback: "Are you sure something is wrong?"
+                feedback: "Czy na pewno coś jest nie tak?"
             -   option: "In line 1 `{print}` needs to be replaced with `{echo}`"
-                feedback: "Are you sure something's wrong?"
+                feedback: "Czy na pewno coś jest nie tak?"
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
-                feedback: "Are you sure something is wrong?"
-            -   option: "Nothing! This is a perfect code!"
+                feedback: "Czy na pewno coś jest nie tak?"
+            -   option: "Nic! Ten kod jest bezbłędny!"
                 feedback: "Dobrze!"
             correct_answer: "D"
             hint: "Przyjrzyj się kodowi linijka po linijce"
             question_score: '10'
         8:
-            question_text: "How do you use the `{echo}` command?"
+            question_text: "Jak korzystać z polecenia `{echo}`?"
             mp_choice_options:
-            -   option: "You can use it to `{ask}` a question."
-                feedback: "That's what `{ask}` is for!"
+            -   option: "Możesz go wykorzystać do `{ask}` pytania."
+                feedback: "Do tego właśnie służy `{ask}`!"
             -   option: "Możesz wykorzystać je do wypisana tekstu"
-                feedback: "That's what `{print}` is for!"
-            -   option: "You can use it to repeat an answer."
-                feedback: "Good job!"
-            -   option: "You can use it to make text disappear."
-                feedback: "That's not right..."
+                feedback: "Do tego właśnie służy `{print}`!"
+            -   option: "Możesz go użyć do powtórzenia odpowiedzi."
+                feedback: "Dobra robota!"
+            -   option: "Możesz go użyć, aby tekst zniknął."
+                feedback: "To nie tak..."
             correct_answer: "C"
             hint: "`{echo}` is used after an `{ask}` command."
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                {print} Hello!
-                {print} How are you doing?
-                {echo} So you are doing...
+                {print} Witam!
+                {print} Co właśnie robisz?
+                {echo} Więc robisz...
             mp_choice_options:
             -   option: "`{print}` in line 1 should be `{ask}`"
-                feedback: "No, `{print}` is right. Where is the question being asked?"
+                feedback: "Nie, `{print}` jest poprawnie. Jak jest zadawane pytanie?"
             -   option: "`{print}` in line 2 should be `{ask}`"
                 feedback: "Super!"
             -   option: "`{echo}` in line 3 should be `{ask}`"
