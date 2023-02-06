@@ -132,6 +132,7 @@ adventures:
                 story_text: "## Fortelling\nPå nivå 2 kan du gjøre fortellingen din gøyere. Hovedpersonen sitt navn kan nå være overalt i setningen.\n\nDu må programmere litt ekstra for det. Du må nå navngi hovedpersonen din først.\n\nDa kan du bruke navnet hvor som helst i en setning.\n"
                 example_code: "\n```\nnavn {is} {ask} Hva heter hovedpersonen?\n{print} navn skal nå løpe i skogen\n{print} navn er litt redd\n{print} Plutselig hører han en skummel lyd...\n{sleep}\n{print} navn er redd dette er en forhekset skog\n```\n"
                 start_code: '{print} fortellingen din'
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             12:
                 story_text: "## Fortelling\nPå dette nivået kan du bruke hermetegn for å lagre flere ord i en variabel.\n"
                 example_code: "\n```\nnavn = 'Dronningen av England'\n{print} navn ' spiste kake, da plutselig ...'\n```\n"
@@ -249,6 +250,7 @@ adventures:
                 story_text: "## Stein, saks, papir\nPå dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
                 example_code: "```\nvalg {is} _\n{print} Jeg velger valg\n```\n"
                 start_code: '# skriv koden din her'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## Stein, saks, papir\nSpill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
                 example_code: "```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = valgene {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
@@ -290,6 +292,10 @@ adventures:
                 story_text: "## Kalkulator\nDu kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.\nDette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.\n"
                 example_code: "```\npoengsum = 0\n{for} i {in} {range} 0 {to} 9\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    ditt_svar = 0\n    {while} ditt_svar != riktig_svar\n        {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        ditt_svar = {ask} 'Skriv inn ditt svar:'\n        {print} 'Ditt svar er ' ditt_svar\n    {print} 'Godt jobbet!'\n{print} 'Du vant!'\n```\n"
                 start_code: '# skriv koden din her'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                start_code: '# place your code here'
         name: Kalkulator
         description: Lag en kalkulator
         default_save_name: Kalkulator
@@ -300,7 +306,6 @@ adventures:
                 story_text: "## Restaurant\nPå nivå 2 kan du utvide din restaurant ved å bruke variabler. På nivå 1 kunne Hedy bare svare med bestillingen 1 gang og den kunne bare huske siste ting som var bestilt.\nNå kan du bruke variabler og Hedy kan huske både mat og drikke!\n"
                 example_code: "```\n{print} Velkommen til Hedys restaurant!\n{print} I dag har vi pizza og lasagne på menyen.\nmaten {is} {ask} Hva har du lyst til å spise?\n{print} Godt valg! maten er min favoritt!\ntilbehør {is} {ask} Foretrekker du vegetar eller med kjøtt?\n{print} maten med tilbehør skal bli!\ndrikken {is} {ask} Vil du ha noe å drikke med det?\n{print} Takk for bestillingen\n{print} maten og drikken kommer snart!\n```\n"
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             7:
                 example_code: "```\n{print} 'Velkommen Hedys restaurant!'\nantall_personer = {ask} 'Hvor mange personer er dere i dag?'\n{repeat} antall_personer times mat = {ask} 'Hva vil du spise?'\n{print} 'Takk for bestillingen, den er på vei!'\n```\n"
                 story_text: "## Restaurant\nPå dette nivået har du lært å bruke `{repeat}`-kommandoen til å repeterer en linje med kode et visst antall ganger.\nDu kan bruke det i din restaurant til å spørre flere gjester hva de har lyst på. Slik:\n"
@@ -354,6 +359,8 @@ adventures:
                 story_text_2: "## Allergier\nHar dine gjester noen allergier eller noen retter de ikke liker? Da kan du bruke `{remove}`-kommandoen til å fjerne ting fra menyen.\n"
                 example_code_2: "```\n{print} Mysteriemilkshake\nsmaker {is} jordbær, sjokolader, vanilje\nallergier {is} {ask} Er du allergisk til en av smakene?\n{remove} allergier {from} smaker\n{print} Du vil få en flavors {at} {random} milkshake\n```\n"
                 start_code: '# skriv koden din her'
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: "## Restaurant\nMed `{while}` kan du sørge for at kundene dine kan fortsette å bestille til de er ferdig.\n"
                 example_code: "```\n{print} 'Velkommen til McHedy'\nmer = 'ja'\n{while} mer == 'ja'\n    ønsker = {ask} 'Hva vil du bestille?'\n    {print} ønsker\n    mer = {ask} 'Vil du ha noe mer?'\n{print} 'Takk!'\n```\n"
@@ -455,11 +462,11 @@ adventures:
                 start_code: '# skriv koden din her'
             3:
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# skriv koden din her'
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: Spøkelseshus
         description: flykt fra det forheksede huset
         default_save_name: Spøkelseshus
@@ -523,6 +530,7 @@ adventures:
                 example_code: "## 5 små aper\n```\napene = 5, 4, 3, 2\n{for} ape {in} apene\n    {print} ape ' små aper hopper i en seng'\n    {print} 'En falt av og dunket hodet sitt'\n    {print} 'å mamma ringte doktoren og doktoren sa'\n    {print} 'INGEN FLERE APER FÅR HOPPE I EN SENG!'\n```\n\n## Baby Shark\n```\nhaiene = baby, mommy, daddy, grandma, grandpa\n{for} hai {in} haiene\n    {print} hai 'tututututudu'\n    {print} hai 'tututututudu'\n    {print} hai 'tututututudu'\n    {print} hai\n```\n## Old McDonald\n```\ndyrene = pig, dog, cow\n{for} dyret {in} dyrene\n    {if} dyret {is} pig\n        lyd = oink\n    {if} dyret {is} dog\n        lyd = woof\n    {if} dyret {is} cow\n        lyd = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' dyret\n    {print} 'E I E I O!'\n    {print} 'with a ' lyd lyd ' here'\n    {print} 'and a ' lyd lyd ' there'\n    {print} 'here a ' lyd\n    {print} 'there a ' lyd\n    {print} 'everywhere a ' lyd lyd\n```\n"
                 start_code: '# skriv koden din her'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             8:
                 story_text: "## Sanger\nPå et tidligere nivå programmerte du sangen 'Bottles of beer'. Du lagde ett vers og så måtte du kopiere verset 99 ganger. På nivå 7 kan du repetere sangen 99 ganger, bare legg til en enkel linje!\n"
                 example_code: "```\nvers = 99\n{repeat} 99 {times}\n    {print} vers ' bottles of beer on the wall'\n    {print} vers ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = vers - 1\n    {print} vers ' bottles of beer on the wall'\n```\n"
@@ -572,7 +580,6 @@ adventures:
                 story_text: "## Oppvasken\nEr dere alltid uenig hjemme om hvem som skal ta oppvasken eller hvem som skal rense kattedoen?\nDa kan du la datamaskinen velge helt rettferdig. Du kan programmere det på dette nivået!\nFørst må du lage en liste over folk i familien. Så velger du `{at} {random}` fra listen.\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
                 example_code: "```\nfamilie {is} mamma, pappa, Emma, Sofie\n{print} familie {at} {random}\n```\n"
                 story_text_2: "## Hack oppvaskeprogrammet!\nFøler du ikke for å ta oppvasken selv? Hack programmet til å fjerne navnet ditt fra listen.\n"
-                example_code_2: "```\nfamilie {is} mamma, pappa, Emma, Sofie\nditt_navn {is} {ask} Hvem er du?\n{remove} ditt_navn {from} familie\n{print} familie {at} {random} tar oppvasken\n```\n"
                 start_code: '{print} Hvem tar oppvasken?'
     dice:
         name: Terninger
