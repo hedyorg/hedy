@@ -11,6 +11,9 @@ export function createClass()
     cy.get('#modal-prompt-input').type(classname);
     cy.get('#modal-ok-button').click();
     
+    goToTeachersPage();
+    cy.wait(500);
+
     return classname;
 }
 
