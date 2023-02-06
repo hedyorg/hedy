@@ -599,7 +599,7 @@ adventures:
 
                     ### Exercise
                     Add repetition to your own story. Go back to your saved programs, choose your story program from level 6 and
-                    find a line containing {print} and repeat it!
+                    find a line containing `{print}` and repeat it!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -790,11 +790,13 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
-                start_code: |
+                start_code: |-
+                    ```
                     {print} Im Hedy the parrot
                     {ask} What is your name?
                     {echo}
                     {echo}
+                    ```
             2:
                 story_text: |
                     ## Parrot
@@ -2974,13 +2976,13 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the `{for}` command so we can tell the player where they are. 
-                    
+
                     ### Exercise 1
                     Finish the program so the player knows which room they are in.
-                    
+
                     ### Exercise 2
                     Make the program into an adventure by following these steps:
-                    
+
                     1. Make a list of choices (like: fight or flight)
                     2. Make sure the player can choose an option with `{ask}`
                     3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. 
