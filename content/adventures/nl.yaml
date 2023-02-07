@@ -413,6 +413,7 @@ adventures:
                 story_text: |-
                     ## Het laatste level!
                     We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
+                    Dit betekent ook dat je de Hedy code uit de level in iedere Python omgeving kunt gebruiken als je Engelse commando's gebruikt. Deed je dat tot nu toe nog niet, zet dan de knop om in het commando's menu. 
                 example_code: |
                     ```
                     {print}('Hallo!')
@@ -1397,13 +1398,13 @@ adventures:
                 story_text: |
                     ## Dobbelsteen
                     Je kunt ook in dit level weer een dobbelsteen maken. Met de `{repeat}` code kun je makkelijk een heel handje dobbelstenen rollen.
-                    Probeer de voorbeeldcode maar eens af te maken! Op de streepjes moeten meerdere commando's en tekens komen.
 
-                    Maar misschien wil jij wel een hele andere dobbelsteen maken. Dat mag natuurlijk ook!
+                    ## Opdracht
+                    Probeer de voorbeeldcode maar eens af te maken! Op de streepjes moeten meerdere commando's en tekens komen. Misschien ken jij wel een ander dobbelsteen spel dat je met `{repeat}` kunt maken.
                 example_code: |
                     ```
-                    keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {repeat} _ _ {print} _ _ _
+                    keuzes = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
             10:
@@ -3127,14 +3128,14 @@ adventures:
         levels:
             5:
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
-                story_text: "## Press it!\nIn the introduction you were also told about the new keyword ```pressed```! Using ```pressed```\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```\nhas.\nBesides printing text, there is a whole other variety of uses for ```pressed```\nFor example, you can also link turtle commands to keys! Try it!\n"
+                story_text_2: "## als anders Ingedrukt\nJe kunt ook een `{else}` commando gebruiken met `{pressed}`. Dat `{else}` commando wordt uitgevoerd wanneer je een andere toets indrukt dan je hebt gekoppeld.\n"
+                story_text: "## Toetsaanslag!\nIn de introductie is `{pressed}` als nieuwe code genoemd! \nMet `{pressed}` kun je jouw code interactiever maken. Dat betekent dat je tijdens uitvoeren invloed kunt uitoefenen op wat er wordt uitgevoerd!\nIn deze en volgende levels leer je hoe `{pressed}` werkt en wat je met `{pressed}` kunt doen.\nNaast het printen van tekst, kun je met `{pressed}` ook andere dingen besturen.\nZo kun je bijvoorbeeld ook teken commando's koppelen aan toetsen, probeer maar eens!\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# schrijf jouw code hier'
             6:
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
-                start_code: '# place your code here'
-                story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
+                example_code: "```\neerste = {ask} 'Wat is jouw eerste nummer?'\ntweede = {ask} 'Wat is jouw tweede nummer?'\n{print} 'druk o voor optellen, a voor aftrekken, d voor delen of, v voor vermenigvuldigen'\n{if} o {is} {pressed} uitkomst = eerste + tweede\n{if} a {is} {pressed} uitkomst = eerste - tweede\n{if} d {is} {pressed} uitkomst = eerste / tweede\n{if} v {is} {pressed} uitkomst = eerste * tweede\n{print}'De uitkomst is ' uitkomst\n```\n"
+                start_code: '# schrijf hier jouw code'
+                story_text: "Wist jij dat je een rekenmachine kunt maken met `{pressed}`?\nGeef de rekenmachine twee getallen en gebruikt de v voor vermenigvuldigen.\nNu hoef jij jouw eigen rekenmachine niet meer mee te nemen!\nProbeer ook andere toetsen en berekeningen. Krijg je dan een andere uitkomst?\n"
             7:
                 story_text: |
                     ## Bestuur de schildpad
@@ -3146,7 +3147,7 @@ adventures:
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
-                start_code: "# place your code here"
+                start_code: "# schrijf jouw code hier"
             9:
                 story_text: |
                     ## Oefenen met blind typen
@@ -3170,8 +3171,8 @@ adventures:
                 start_code: "#Zet jouw code hier"
             10:
                 start_code: '# place your code here'
-                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
+                story_text: "In dit level kun je de schildpad een figuur laten tekenen, hij staat er klaar voor.\nGeef de schildpad het startsignaal door x of y in te drukken.\nKun jij de schildpad ook een ander figuur laten tekenen?\n"
+                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
             11:
                 example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
@@ -3200,8 +3201,8 @@ adventures:
                 story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
                 example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
                 start_code: '# place your code here'
-        description: Try linking a keyboard key to a command!
-        default_save_name: Pressit
+        description: Probeer een knop op het toetsenbord aan een commando te koppelen!
+        default_save_name: Toetsaanslag
     years:
         name: "Oud en Nieuw"
         description: "Aftellen naar het nieuwe jaar"
