@@ -88,20 +88,20 @@ def find_mismatched_arrays(reference, other):
 
 
 def shortened(obj, depth=2):
-  """Recurse through the given structure and make strings shorter for printing,
-  as well as stopping recursion after a certain limit.
-  """
-  if isinstance(obj, str):
-    return obj if len(obj) < 60 else obj[:60] + '{...}'
-  if isinstance(obj, dict):
-    if depth == 0:
-      return '{ ' + ', '.join(sorted(obj.keys())) + ' }'
-    return {k: shortened(v, depth-1) for k, v in obj.items()}
-  if isinstance(obj, list):
-    if depth == 0:
-      return f'[ ...{len(obj)} elements... ]'
-    return [shortened(x, depth-1) for x in obj]
-  return obj
+    """Recurse through the given structure and make strings shorter for printing,
+    as well as stopping recursion after a certain limit.
+    """
+    if isinstance(obj, str):
+        return obj if len(obj) < 60 else obj[:60] + '{...}'
+    if isinstance(obj, dict):
+        if depth == 0:
+            return '{ ' + ', '.join(sorted(obj.keys())) + ' }'
+        return {k: shortened(v, depth-1) for k, v in obj.items()}
+    if isinstance(obj, list):
+        if depth == 0:
+            return f'[ ...{len(obj)} elements... ]'
+        return [shortened(x, depth-1) for x in obj]
+    return obj
 
 
 def yaml_to_string(x):
