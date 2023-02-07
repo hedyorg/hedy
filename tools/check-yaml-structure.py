@@ -6,21 +6,16 @@ from ruamel import yaml
 from io import StringIO
 
 
-# Import packages from the website app (AutoPep8 will mess this up, so disable it)
-import sys
-sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))  # noqa
-from website.yaml_file import YamlFile  # nopep8
-
 yaml_writer = yaml.YAML(typ="rt")
 
 
 def main():
     any_failure = False
     for reference_file in glob.glob('content/*/en.yaml'):
-        en = YamlFile(reference_file)
+        en = load_yaml(reference_file)
         structure_dir = path.basename(path.dirname(reference_file))
 
-        mismatches = {comparison_file: find_mismatched_arrays(en.to_dict(), YamlFile(comparison_file).to_dict())
+        mismatches = {comparison_file: find_mismatched_arrays(en, load_yaml(comparison_file))
                       for comparison_file in glob.glob(f'content/{structure_dir}/*.yaml')
                       if comparison_file != reference_file}
         mismatches = {file: mis for file, mis in mismatches.items() if mis}
@@ -104,6 +99,11 @@ def shortened(obj, depth=2):
     return obj
 
 
+def load_yaml(filename):
+  with open(filename, 'r') as f:
+    return yaml_writer.load(f)
+
+
 def yaml_to_string(x):
     strm = StringIO()
     yaml_writer.dump(x, strm)
@@ -112,7 +112,7 @@ def yaml_to_string(x):
 
 def indent(n, x):
     prefix = ' ' * n
-    return '\n'.join(prefix + l for l in x.split('\n'))
+    return '\n'.join(prefix + ln for ln in x.split('\n'))
 
 
 if __name__ == '__main__':
