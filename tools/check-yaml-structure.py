@@ -100,8 +100,8 @@ def shortened(obj, depth=2):
 
 
 def load_yaml(filename):
-  with open(filename, 'r') as f:
-    return yaml_writer.load(f)
+    with open(filename, 'r') as f:
+        return yaml_writer.load(f)
 
 
 def yaml_to_string(x):
