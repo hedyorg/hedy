@@ -95,8 +95,8 @@ adventures:
                 story_text: |
                     ## 缩进
                     `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句和 `{repeat}` 循环语句已经改变了！
-                    你现在可以执行一组代码，但你必须使用*缩进*。
-                    缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码，你也必须缩进。
+                    你现在可以执行一组代码，但你必须*缩进*代码。
+                    缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码时你也必须使用缩进。
                 example_code: "`{repeat}`命令现在是这样用的：\n```\n{repeat} 5 {times}\n    {print} '大家好'\n    {print} '这些都会重复5遍'\n```\n\n`{if}`和`{else}`命令现在是这样用的：\n```\n名字 {is} {ask} '你叫什么？'\n{if} 名字 {is} 海迪\n    {print} '你好海迪'\n    {print} '你可以玩你的电脑了！'\n{else}\n    {print} '私闯民宅！'\n    {print} '你不能使用这台电脑！'\n```\n"
             9:
                 start_code: |-
@@ -126,7 +126,7 @@ adventures:
                 start_code: |-
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
-                story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)"
+                story_text: "## 循环！\n在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。\n我们通过添加一个变量名，在其后面接着`{in}``{range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。\n\n试试这个例子，看看会发生什么! 在这一关卡中，你将需要在`{for}`语句下面的行中使用缩进。"
                 example_code: "```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
                 start_code: "{print} '十进制数字现在需要加上小数点'\n{print} 2.5 + 2.5"
@@ -221,7 +221,7 @@ adventures:
                 start_code: '{print} 你的故事'
                 story_text: "## 故事\n在第2关，你可以让你的故事更有趣些。你的主人公的名字可以放在句子里的任何位置了。\n\n为此你确实需要多写一点代码。你需要先给主人公一个名字。\n\n然后就可以把名字放在句子里的任何位置。\n"
                 example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字 现在要去森林里散步了\n{print} 名字 有点害怕\n{print} 突然，他听到一个疯狂的声音……\n{sleep}\n{print} 名字 害怕这个森林里面闹鬼\n```"
-                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
+                story_text_2: "### 练习\n现在是时候给你在上一关中制作的自己的故事添加变量了。\n进入 \"我的程序\"，寻找你的第1关故事冒险，复制代码。把代码粘贴到本关的输入屏幕中。\n\n这段代码在本关不会起作用，因为你还没有使用变量。\n把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。\n\n**另外**在你的代码中添加一个睡眠命令，在你的故事中建立起紧张感。\n"
             7:
                 start_code: "{repeat} 5 {times} {print} '救命！'"
                 story_text: "## 故事\n在故事里，有人会重复同一个词好几次。比如有人在呼救或者唱歌。\n在这一关，你可以通过`{repeat}`在故事中加入这种重复。\n"
@@ -270,7 +270,7 @@ adventures:
                 story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
                 example_code: "```\n{ask} 这个故事的主人公是（谁）\n{print}主人公现在要到森林里去散步\n{echo} 他有点害怕，\n{print} 他听到到处都有疯狂的声音\n{print} 他害怕这是一片闹鬼的森林\n```\n"
                 start_code: '{print} 你的故事从这里开始'
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: "### 练习\n现在创建至少有6行代码的你自己的故事。\n这个故事不能与示例代码相同。\n至少要使用一个`{ask}`和一个`{echo}`命令。\n你可以把它写成任何你喜欢的主题。\n如果你想不出来，可以使用我们的给你的选择：看电影、体育比赛或动物园的一天。\n"
             10:
                 story_text: "## 故事\n在这一关，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n"
                 example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物们都在看我！'\n```\n"

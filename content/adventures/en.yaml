@@ -182,7 +182,7 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, `{pressed}` and `{repeat}` have changed!
                     You can now group several lines together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
@@ -429,6 +429,7 @@ adventures:
                 story_text: |-
                     ## The last level!
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so. 
 
                 example_code: |
                     ```
@@ -599,7 +600,7 @@ adventures:
 
                     ### Exercise
                     Add repetition to your own story. Go back to your saved programs, choose your story program from level 6 and
-                    find a line containing {print} and repeat it!
+                    find a line containing `{print}` and repeat it!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -784,13 +785,14 @@ adventures:
                     Copy the example code to your input screen by clicking on the yellow button.
                     Make the parrot ask a different question. Fill in the blanks in the example!
                     **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
-                example_code_2: |
+                example_code_2: |-
                     ```
                     {print} Im Hedy the parrot
                     {ask} _
                     {echo}
                     {echo}
-                start_code: |
+                    ```
+                start_code: |-
                     {print} Im Hedy the parrot
                     {ask} What is your name?
                     {echo}
@@ -992,7 +994,6 @@ adventures:
                     ```
                     _ monkeys _ _ 5 _ 1
                         {print} monkeys ' little monkeys jumping on the bed'
-                        _
                     ```
                 start_code: "# place your code here"
             12:
@@ -1483,7 +1484,7 @@ adventures:
                     You can also make a dice again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
 
                     ### Exercise
-                    Try to finish the sample code!  **(extra)** Think of a game you know that involves a dice and program that using a `{repeat}.`
+                    Try to finish the sample code! **(extra)** Think of a game you know that involves a dice and program that using a `{repeat}`
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, 6
@@ -1531,10 +1532,9 @@ adventures:
             5:
                 story_text: |
                     ## Press it!
-                    In the introduction you were also told about the new keyword `{pressed}`! Using `{pressed}`
-                    can make coding much more interactive, and you can have live control of what is executed!
-                    In the upcoming levels you will learn how `{pressed}` makes this possible and what uses `{pressed}`
-                    has.
+                    In the introduction you were also told about the new keyword `{pressed}`! 
+                    Using `{pressed}` can make coding much more interactive, and you can have live control of what is executed!
+                    In the upcoming levels you will learn how `{pressed}` makes this possible and what uses `{pressed}` has.
                     Besides printing text, there is a whole other variety of uses for `{pressed}`
                     For example, you can also link turtle commands to keys! Try it!
                 example_code: |
@@ -1882,7 +1882,7 @@ adventures:
                     Copy the example code and fill in the blanks to add an extra player to this game.
 
                     **Extra** Now the players are just called player 1 and player 2. Can you add ask commands (with variables of course) to ask the players' names?
-                    This way you could create this output, for example: `James picks... paper`
+                    This way you could create this output, for example: James picks... paper
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2045,7 +2045,7 @@ adventures:
                     ```
                 story_text_3: |
                     ## Random numbers
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random sums on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_3: |
                     ```
@@ -2309,7 +2309,7 @@ adventures:
                     {print} 'One ' food ', coming right up!'
                     drink {is} {ask} 'What would you like to drink with that?'
                     {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
+                    anything {is} {ask} 'Would you like anything else?'
                     {print} 'Let me repeat your order...'
                     {print} 'One ' food
                     {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
@@ -2347,7 +2347,7 @@ adventures:
 
                     ### Exercise
                     You can add many more things to your virtual restaurant. For example, can you...
-                    - {ask} how many people are coming and multiply the price by that amount?
+                    - ask how many people are coming and multiply the price by that amount?
                     - add another course?
                     - give people a discount when they enter a (secret) couponcode?
                     - add a children's menu?
@@ -2974,13 +2974,13 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the `{for}` command so we can tell the player where they are. 
-                    
+
                     ### Exercise 1
                     Finish the program so the player knows which room they are in.
-                    
+
                     ### Exercise 2
                     Make the program into an adventure by following these steps:
-                    
+
                     1. Make a list of choices (like: fight or flight)
                     2. Make sure the player can choose an option with `{ask}`
                     3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. 
