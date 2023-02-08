@@ -26,8 +26,8 @@ export function addStudents(classname, count) {
     cy.wait(500);
 
     cy.wrap(students).each((student, index) => {
-        cy.get('#account_rows_container').find(`:nth-child(${(index + 1)}) > #username`).type(student);
-        cy.get('#account_rows_container').find(`:nth-child(${(index + 1)}) > #password`).type('123456');
+        cy.get('#account_rows_container').find(`:nth-child(${(index + 2)}) > #username`).type(student);
+        cy.get('#account_rows_container').find(`:nth-child(${(index + 2)}) > #password`).type('123456');
     })
     cy.get('#create_accounts_button').click();
     cy.get('#modal-yes-button').click();

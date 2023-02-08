@@ -532,13 +532,6 @@ export function add_account_placeholder(count: number | void) {
     }
 }
 
-export function reset_create_accounts_form(){
-  $('#passwords_toggle').prop('checked', false);
-  $('#download_credentials_yes').prop('checked', true);
-  $('#account_rows_container').empty();
-  add_account_placeholder(4);
-}
-
 export function generate_passwords() {
     if (!$('#passwords_toggle').is(":checked")) {
         $('.passwords_input').val('');
