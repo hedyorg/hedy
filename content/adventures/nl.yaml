@@ -886,25 +886,20 @@ adventures:
             8:
                 story_text: |
                     ## Zing een liedje!
-                    Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
+                    Nu kun je meerdere regels herhalen met `{repeat}`, wat heel fijn is in liedjes!
+                    In dit level kun je een liedje 3 keer herhalen, met maar één regel code. 
 
                     ### Opdracht
-                    Zet het juiste commando op de streepjes, en zorg dat de code op de juiste manier inspringt.
-
-                    **(extra)** Is Billie Boem gelukt? Probeer dan 10 kleine visjes.
+                    Zet het juiste commando op de streepjes, en zorg dat de code op de juiste manier inspringt. **(extra)** Is Billie Boem gelukt? Probeer dan 10 kleine visjes.
 
                 example_code: |
                     ```
                     _ 3 {times}
                     dier = {ask} 'Welk dier kies je?'
-                    {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
-                    {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
+                    {print} 'En wie rijdt er op zijn ' dier ' door de prairie? Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
                     {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
-                    {print} 'Van je hotsie knotsie knetter!'
-                    {print} 'Van je jippie jippie jeej!'
-                    {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
-                    {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
-                    {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
+                    {print} 'Van je hotsie knotsie knetter! Van je jippie jippie jeej! Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
+                    {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest, en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
                 start_code: "# Schrijf jouw code hier"
             10:
@@ -916,7 +911,8 @@ adventures:
                     Kun jij baby shark printen met een `{for}`? Vul de streepjes in en maak de codes verder af.
                 story_text_2: |
                     ### Opdracht 2
-                    Print het liedjes 10 kleine visjes met een `{for}`. Zoek de tekst op als je die niet kent.
+                    Print het liedjes 10 kleine visjes met gebruik van de lus. Zoek de tekst op als je die niet kent.
+
                     **(extra)** Print het liedje Old MacDonald had a farm. Zoek de tekst op als je die niet kent, en zorg dat alle dieren ook het goede geluid maken, met een `{if}`.
                 example_code_2: |
                     ```
@@ -941,7 +937,6 @@ adventures:
                     De laatste regel van het liedje is anders. Zorg dta je die regel ook print iin de `{for}`. Darr heb je een `{if}` voor nodig.
 
                 example_code: |
-                    ## 10 kleine visjes
                     ```
                     _ _ _ _ 10 _ 1
                         {print} i ' kleine visjes zwommen naar de zee'
@@ -1189,8 +1184,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Schildpad besturen
-                    Je kunt je schildpad nu ook met `{pressed}` besturen. 
-
+                    Je kunt je schildpad nu ook met toetsen besturen.
                     ### Opdracht 2
                     Maak de code af zodat je de schildpad ermee bestuurt: w voor vooruit, s voor achteruit, a voor links en d voor rechts. 
                     Tip: Voor links en rechts moet je drie regels code schrijven.
@@ -1223,7 +1217,7 @@ adventures:
                     Maak je eigen versie van het afwasprogramma. Maak eerst een lijst van jouw gezinsleden.
                     Daarna bedenk je een taak die gedaan moet worden en laat je de computer kiezen wie de taak moet doen met het `{at} {random}` commando.
 
-                    **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met `{remove}`.
+                    **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met `{remove}``{from}`.
                 start_code: "{print} Wie doet de afwas?"
             4:
                 story_text: |
@@ -1953,13 +1947,12 @@ adventures:
             8:
                 story_text: |
                     ## Hedy de waarzegger
-                    Weet je nog dat je in voorgaande levels een waarzegger hebt gemaakt die drie vragen kon stellen?
+                    Weet je nog dat je in voorgaande levels, met `{repeat}` een waarzegger hebt gemaakt die drie vragen kon stellen?
                     Het probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
-                    Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu een heel stuk code mag herhalen.
-                    Kijk maar:
+                    Nu is dat probleem opgelost met de nieuwe manier waarop `{repeat}` werkt en kan Hedy na een vraag meteen een antwoord printen.
 
                     ### Opdracht
-                    Voeg het juiste commando toevoegen op de streepjes?
+                    Weet jij het juiste commando voor op de streepjes?
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de waarzegger!'
@@ -2316,7 +2309,7 @@ adventures:
             11:
                 story_text: |
                     ## Maak je eigen restaurant
-                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
+                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling te tonen voor meerdere mensen.
 
                     ### Opdracht
                     Maak de restaurantcode af. Zorg dat je de bestelling van meerdere mensen kan opnemen. Print steeds netjes het nummer uit, dus 'persoon 1', 'persoon 2', enz.
@@ -3188,18 +3181,18 @@ adventures:
             14:
                 start_code: '# schrijf jouw code hier'
                 story_text: "Nu dat je vergelijkings tekens hebt geleerd, kunnen we die ook gebruiken met `{pressed}`!\nBedenk weer dat de schildpad een super sprong kan maken door op de `p` te drukken! \n\nNu echter alleen om de 5 stappen of om de 4 draaien.\n"
-                example_code: "```\nstap = 15\nlinks = -90\nrechts = 90\nterug = 180\nstappen = 5\ndraaien = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n        stappen = stappen - 1\n    {if} s {is} {pressed}\n        {turn} terug\n    {if} a {is} {pressed}\n        {turn} links\n        draaien = draaien - 1\n    {if} d {is} {pressed}\n        {turn} rechts\n        draaien = draaien - 1\n    {if} p {is} {pressed}\n        {if} stappen <= 0 {or} draaien <= 0\n            {forward} stap * 3\n            stappen = 5\n            draaien = 4\n```\n"
+                example_code: "```\nstap = 15\nlinks = -90\nrechts = 90\nterug = 180\nstappen = 5\ndraaien = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stap\n        stappen = stappen - 1\n    {if} s {is} {pressed}\n        {turn} terug\n    {if} a {is} {pressed}\n        {turn} links\n        draaien = draaien - 1\n    {if} d {is} {pressed}\n        {turn} rechts\n        draaien = draaien - 1\n    {if} p {is} {pressed}\n        {if} stappen <= 0 {or} draaien <= 0\n            {forward} stap * 3\n            stappen = 5\n            draaien = 4\n```\n"
             15:
                 start_code: '# schrijf jouw code hier'
                 example_code: "```\nstap = 15\nlinks = -90\nrechts = 90\nterug = 180\nstappen = 5\ndraaien = 2\nmoe_na = 15\n{while} moe_na > 0\n    {if} w {is} {pressed}\n        {forward} stap\n        stappen = stappen - 1\n    {if} s {is} {pressed}\n        {turn} terug\n    {if} a {is} {pressed}\n        {turn} links\n        draaien = draaien - 1\n    {if} d {is} {pressed}\n        {turn} rechts\n        draaien = draaien - 1\n    {if} p {is} {pressed}\n        {if} stappen <= 0 {or} draaien <= 0\n            {forward} stap * 4\n            stappen = 5\n            draaien = 2\n    moe_na = moe_na - 1\n```\n"
                 story_text: "Nu je ook `{while}` lussen kent, gaan we die ook met de schildpad gebruiken!\nDe schildpad kan deze keer maximaal 15 stappen of draaien maken, voordat hij moe wordt. \nProbeer zover mogelijk te komen, voordat de schildpad moe is \nJe kunt super sprongen maken na 2 draaien of 5 stappen.\n"
             17:
                 start_code: '# schrijf jouw code hier'
-                story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
+                story_text: "Nu je ook met `{elif}` kunt werken, gaan we die ook met `{pressed}` gebruiken! Let op: `{elif} ... {is} {pressed}` kan niet! Daarom gaan we het `{elif}` commando binnen een `{pressed}` commando gebruiken (dat noemen we nesten). We voegen ook `:` toe om de code te laten werken. Stel je weer voor dat de schildpad een super sprong kan maken als  jij `p` indrukt. Maar dit alleen na 5 stappen of 4 draaien.\n"
+                example_code: "```\nstap = 15\nlinks = -90\nrechts = 90\nterug = 180\nstappen = 5\ndraaien = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}:\n        {forward} stap\n        stappen = stappen - 1\n    {if} s {is} {pressed}:\n        {turn} terug\n    {if} a {is} {pressed}:\n        {turn} links\n        draaien = draaien - 1\n    {if} d {is} {pressed}:\n        {turn} rechts\n        draaien = draaien - 1\n    {if} p {is} {pressed}:\n        {if} stappen <= 0 {or} draaien <= 0:\n            {forward} stap * 3\n            stappen = 5\n            draaien = 4\n        {elif} stappen > 0:\n            {print} \"Je moet nog mee stappen maken, of draaien voordat je een super sprong kunt maken!\"\n```\n"
             16:
                 story_text: "Laten we wat gaan bewegen met een spelletje Twister!\nIedereen klaar? Druk op X voor de volgende zet!\n"
-                example_code: "```\nledematen = ['Rechter Hand', 'Linker Hand', 'Rechter Voet', 'Linker Voet']\nkleuren = ['Blauw', 'Groen', 'Rood', 'Geel']\n{repeat} 20 {times}\n    l = ledematen[{random}]\n    k = kleuren[{random}]\n    {if} x {is} {pressed}\n        {print} l + ' op ' + K + '!'\n```\n"
+                example_code: "```\nledematen = ['Rechter Hand', 'Linker Hand', 'Rechter Voet', 'Linker Voet']\nkleuren = ['Blauw', 'Groen', 'Rood', 'Geel']\n{repeat} 20 {times}\n    l = ledematen[{random}]\n    k = kleuren[{random}]\n    {if} x {is} {pressed}\n        {print} l + ' op ' + k + '!'\n```\n"
                 start_code: '# schrijf jouw code hier'
         description: Probeer een knop op het toetsenbord aan een commando te koppelen!
         default_save_name: Toetsaanslag
