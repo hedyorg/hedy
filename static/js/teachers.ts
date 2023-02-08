@@ -522,13 +522,19 @@ export function enable_level(level: string) {
     }
 }
 
-export function add_account_placeholder(count: number | void) {
-    let row = $("#account_row_unique").contents().clone();
-    
-    count = count || 5;
-    // Append count rows at once
-    for (let x = 0; x < count; x++) {
-      row.clone().appendTo("#account_rows_container");
+export function add_account_placeholder() {
+    let row = $("#account_row_unique").clone();
+    row.removeClass('hidden');
+    row.attr('id', "");
+    // Set all inputs except class to required
+    row.find(':input').each(function() {
+       if ($(this).prop('id') != 'classes') {
+           $(this).prop('required', true);
+       }
+    });
+    // Append 5 rows at once
+    for (let x = 0; x < 5; x++) {
+        row.clone().appendTo("#account_rows_container");
     }
 }
 
