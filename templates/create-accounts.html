@@ -1,6 +1,16 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
+<!-- used as a template to generate new rows for the accounts form -->
+<div id="account_row_unique" class="hidden">
+    <div class="flex flex-row w-full gap-2 items-center mb-4 account_row">
+        <input id="username" autocomplete="off" name="username" required type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+        <input id="password" autocomplete="off" name="password" required minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+        <input id="classes" name="class" value="{{current_class.name}}" disabled type="hidden">
+        <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </div>
+</div>
+
 <div>
     <h2>{{_('create_multiple_accounts')}}: {{current_class.name}}</h2>
     <div class="w-full mb-4">
@@ -79,13 +89,4 @@
         </form>
     </div>
 </div>
-
-<template id="account_row_unique">
-    <div class="flex flex-row w-full gap-2 items-center mb-4 account_row">
-        <input id="username" autocomplete="off" name="username" required type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-        <input id="password" autocomplete="off" name="password" required minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-        <input id="classes" name="class" value="{{current_class.name}}" disabled type="hidden">
-        <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-    </div>
-</template>
 {% endblock %}
