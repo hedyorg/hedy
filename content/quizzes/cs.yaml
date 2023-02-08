@@ -8,14 +8,14 @@ levels:
             -   option: "Heddy"
                 feedback: "Ten to není !"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "Tahle ne!"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "Tahle ne!"
             correct_answer: "A"
             hint: "Je pojmenován po Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Který příkaz zobrazí text?"
+            question_text: "Který příkaz je třeba doplnit místo podtržítek, aby se zobrazil text Ahoj!?"
             mp_choice_options:
             -   option: |
                     ```
@@ -25,7 +25,7 @@ levels:
             -   option: |
                     ```
                     {print}
-                     ```
+                    ```
                 feedback: "Správně!"
             -   option: |
                     ```
@@ -41,7 +41,7 @@ levels:
             hint: "_?_ Ahoj světe!"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "Jak se někoho zeptáte na jeho oblíbenou barvu?"
             mp_choice_options:
@@ -77,26 +77,26 @@ levels:
             mp_choice_options:
             -   option: "Příkaz `{print}` chybí na řádku 1."
                 feedback: "Správně!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
+            -   option: "Na řádku 1 je překlep."
+                feedback: "Na řádku 1 žádný překlep není."
             -   option: "`{echo}` není příkaz."
                 feedback: "`{echo}` je příkaz, je tu další chyba."
-            -   option: "Nic! Toto je skvělí kód!"
-                feedback: "Špatně, zkus si to zkontrolovat ještě jednou!"
+            -   option: "Nic! Toto je perfektní kód!"
+                feedback: "Špatně, zkontroluj si to ještě jednou!"
             correct_answer: "A"
             hint: "Řádek 1 se nezdá být správně"
             question_score: '10'
         5:
             question_text: "Který příkaz chybí na řádku 2?"
             code: |-
-                {ask} Co je tvůj oblíbený mazlíček?
+                {ask} Jaký je tvůj oblíbený mazlíček?
                 _?_ Tvůj oblíbený mazlíček je...
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "Ne, chcete, aby se vám odpověď zopakovala."
+                feedback: "Ne, chcete, aby vám program odpověď zopakoval."
             -   option: |
                     ```
                     Hedy
@@ -106,7 +106,7 @@ levels:
                     ```
                     {ask}
                     ```
-                feedback: "S příkazem `{ask}` se můžete ptát na otázky."
+                feedback: "Příkazem `{ask}` se můžete ptát na otázky."
             -   option: |
                     ```
                     {echo}
@@ -123,7 +123,7 @@ levels:
                 {echo} Podporuješ...
                 {print} Skvělé! Já taky!
             mp_choice_options:
-            -   option: "Na řádku 1 příkaz `{print}` by se měl nahradit příkazem `{ask}`."
+            -   option: "Na řádku 1 by měl být příkaz `{print}` nahrazen příkazem `{ask}`."
                 feedback: "`{print}` na řádku 1 je správně."
             -   option: "Na řádku 2 příkaz `{print}` by měl být nahrazen příkazem `{ask}`."
                 feedback: "Skvělé! Dával jsi pozor!"
