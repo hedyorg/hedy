@@ -83,8 +83,8 @@
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     explanation: Check elements with `{in}`
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Zkontrovat, jestli byla daná klávesa `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Zmáčknul jsi A!' {else} {print} 'Zmáčknul jsi jinou klávesu!'"
 6:
 -   explanation: Zkus si přesný výpis pomocí uvozovek.
     demo_code: print '5 krát 5 je ' 5 * 5
@@ -136,8 +136,8 @@
     explanation: '{repeat} multiple lines'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Zkontrolovat, jestli byla daná klávesa zmáčknuta `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Zmáčknul jsi A!'\n{else}\n    {print} 'Zmáčknul jsi jinou hlávesu!'"
 9:
 -   name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
@@ -184,15 +184,15 @@
 12:
 -   name: "float directly"
     explanation: "Decimal numbers"
-    demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+    demo_code: |-
+        {print} 'Vypočítat!'
+        {print} 'Dva a půl plus dva a půl je...'
         {print} 2.5 + 2.5
 -   name: "assign text"
     explanation: "Text with quotation marks after ="
-    demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
+    demo_code: |-
+        name = 'Hedy ten robot'
+        {print} 'Ahoj ' name
 -   name: "quotes after {if} comparison"
     explanation: "Text with quotation marks after {if}"
     demo_code: |
