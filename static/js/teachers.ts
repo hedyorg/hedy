@@ -8,7 +8,6 @@ import DOMPurify from 'dompurify'
     $( "input" ).change(function() {
         window.State.unsaved_changes = true;
     });
-    reset_create_accounts_form();
 })();
 
 export function create_class(class_name_prompt: string) {
