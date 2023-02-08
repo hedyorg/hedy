@@ -24,6 +24,7 @@ export function addStudents(classname, count) {
 
     cy.get('#add-student').click();
     cy.get('#create-accounts').click();
+    cy.wait(500);
     cy.wrap(students).each((student, index) => {
       cy.get(`:nth-child(${(index + 1)}) > #username`).type(student);
       cy.get(`:nth-child(${(index + 1)}) > #password`).type('123456');

@@ -37,6 +37,7 @@ describe('Is able to generate passwords', () => {
         navigateToClass(classname);
         cy.get('#add-student').click();
         cy.get('#create-accounts').click(); 
+        cy.wait(500);
         cy.get('#toggle_circle').click(); //switches the toggle on so that passwords are generated
         cy.wait(1000);
         cy.get(':nth-child(2) > #password').should('have.length.greaterThan', 0);
@@ -51,6 +52,7 @@ describe('Is able to go to logs page', () => {
         currentUrl = url;
         cy.get('#add-student').click();
         cy.get('#create-accounts').click(); 
+        cy.wait(500);
         cy.get('#back_to_class_button').click();
         cy.wait(1000);
         let statsUrl = Cypress.env('class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
@@ -83,6 +85,7 @@ describe('Is able to go to logs page', () => {
         navigateToClass(classname);
         cy.get('#add-student').click();
         cy.get('#create-accounts').click(); 
+        cy.wait(500);
         cy.get(':nth-child(2) > #username').type("student10");
         cy.get(':nth-child(2) > #password').type("123456");
         cy.wait(1000);
