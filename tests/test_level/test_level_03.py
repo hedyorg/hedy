@@ -54,6 +54,36 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_random_punctuation(self):
+        code = textwrap.dedent("""\
+        gerechten is spaghetti, spruitjes, hamburgers
+        print Jij eet vanavond gerechten at random!""")
+
+        expected = HedyTester.dedent("gerechten = ['spaghetti', 'spruitjes', 'hamburgers']",
+                                     HedyTester.list_access_transpiled("random.choice(gerechten)"),
+                                     "print(f'Jij eet vanavond {random.choice(gerechten)} !')")
+
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected
+        )
+
+    def test_print_list_random_punctuation_2(self):
+        code = textwrap.dedent("""\
+        prijzen is 1 euro, 10 euro, 100 euro
+        print Dat wordt dan prijzen at random, alstublieft.""")
+
+        expected = HedyTester.dedent("prijzen = ['1 euro', '10 euro', '100 euro']",
+                                     HedyTester.list_access_transpiled("random.choice(prijzen)"),
+                                     "print(f'Dat wordt dan {random.choice(prijzen)} , alstublieft.')")
+
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected
+        )
+
     def test_print_list_access_index(self):
         code = textwrap.dedent("""\
         dieren is Hond, Kat, Kangoeroe

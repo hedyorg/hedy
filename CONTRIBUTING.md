@@ -83,7 +83,12 @@ Do note a few things:
 * Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
 * Run pybabel before running the tests as they can also rely on exact labels
 * For the same reason, set your app to English
-
+* ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.     
+    ```
+    $ . ./.env/bin/activate  
+    (.env)$ export ADMIN_USER=admin  
+    (.env)$ python app.py
+    ```
 If you want to connect Cypress to the online dashboard, use:
 
 `npx cypress run --record --key <key here>`
@@ -120,7 +125,7 @@ As this project is growing and multiple people are working on it, we want to mov
 pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`.
+After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 ```git commit -m "your message" --no-verify```

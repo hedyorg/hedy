@@ -221,6 +221,7 @@ adventures:
                 start_code: '{print} 你的故事'
                 story_text: "## 故事\n在第2关，你可以让你的故事更有趣些。你的主人公的名字可以放在句子里的任何位置了。\n\n为此你确实需要多写一点代码。你需要先给主人公一个名字。\n\n然后就可以把名字放在句子里的任何位置。\n"
                 example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字 现在要去森林里散步了\n{print} 名字 有点害怕\n{print} 突然，他听到一个疯狂的声音……\n{sleep}\n{print} 名字 害怕这个森林里面闹鬼\n```"
+                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             7:
                 start_code: "{repeat} 5 {times} {print} '救命！'"
                 story_text: "## 故事\n在故事里，有人会重复同一个词好几次。比如有人在呼救或者唱歌。\n在这一关，你可以通过`{repeat}`在故事中加入这种重复。\n"
@@ -322,6 +323,7 @@ adventures:
                 example_code: "## 5只小猴子们在上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子 {in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说'\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼 {in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪, 狗, 牛\n{for} 动物 {in} 动物们\n    {if} 动物 {is} 猪\n        声音 = 哼哼\n    {if} 动物 {is} 狗\n        声音 = 汪汪\n    {if} 动物 {is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
                 start_code: '# 在这里写你的代码'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             7:
                 story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...鲨鱼宝宝!如果你唱这首歌，其实你就是一直在唱同一句歌词。\n\n鲨鱼宝宝 tututudutudu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝\n\n你可以用`{repeat}` ，让这首歌变得更短!你能完成这个代码吗？\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
@@ -412,7 +414,6 @@ adventures:
                 example_code: "```\n人们 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人们 {at} {random}\n```\n"
                 start_code: '{print} 谁负责洗碗？'
                 story_text_2: "## 破解洗碗程序！\n不想洗碗？破解洗碗程序，把你的名字从列表里去掉。\n"
-                example_code_2: "```\n人们 {is} 妈妈，爸爸，艾玛，索菲\n你的名字 {is} {ask} 你是谁？\n{remove} 你的名字 {from} 人们\n{print} 人们 {at} {random} 负责洗碗\n```\n"
         name: 洗碗？
         description: 用电脑决定谁来洗碗（从第2级开始）
         default_save_name: 洗碗
@@ -450,6 +451,7 @@ adventures:
                 story_text: "## 石头剪刀布\n在这一级，你可以练习使用变量，这样你就能在下一级中完成石头剪刀布游戏！\n"
                 example_code: "```\n选择 {is} _\n{print} 我选择 选择\n```\n"
                 start_code: '# 在这里写你的代码'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## 石头剪刀布\n玩到你打败电脑为止！但首先，你要补全示例代码……\n"
                 example_code: "```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} '你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n```\n"
@@ -492,6 +494,10 @@ adventures:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
                 example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
@@ -534,7 +540,6 @@ adventures:
                     ```
                 start_code: "# 将代码写在这里"
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: |
                     ## 随机餐厅
@@ -571,6 +576,8 @@ adventures:
                     {print} 你得到了一杯 口味 {at} {random} 味的奶昔
                     ```
                 start_code: "# 在这里写你的代码"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
                     ## Restaurant
@@ -1122,17 +1129,6 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
-                    ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
-                    {sleep}
-                    {print} monsters {at} {random}
-                    ```
                 story_text_2: |
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
@@ -1144,6 +1140,7 @@ adventures:
                 start_code: "# place your code here"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: |
                     ## Haunted house
