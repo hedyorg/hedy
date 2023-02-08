@@ -1806,19 +1806,19 @@ levels:
             question_score: '10'
         8:
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   feedback: That's not true.
-                option: A code must always start with a `{print}` command in the first line
+            -   option: Je kan geen 2 vragen achter elkaar zetten
+                feedback: Ja, dat mag wel
+            -   option: De variable 'leeftijd' word later gebruikt als 'jaar'
+                feedback: Goed gezien!
+            -   option: Je mag niet starten met 8 spaties, zoals in regel 4 en 5.
+                feedback: Je moet juist daar starten met 8 spaties
+            -   feedback: Dat is niet waar
+                option: Een code moet altijd op de eerste regel starten met een {print} commando.
             correct_answer: B
-            hint: The indentation is done right this time
+            hint: Het inspringen is goed gegaan deze keer
             question_score: '10'
-            question_text: What is wrong is this code?
-            code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n    if singing {is} yes\n        {repeat} years {times}\n        {print} 'Hip Hip Hooray'"
+            question_text: Wat is er mis met deze code?
+            code: "leeftijd = {ask} 'Gefeliciteerd! Hoe oud ben je?'\nzingen = {ask} 'Wil je dat we gaan zingen?'\n    if zingen {is} ja\n        {repeat} jaar {times}\n        {print} 'Hiep hiep hoera!'"
         9:
             mp_choice_options:
             -   option: None, that is not allowed
