@@ -1792,55 +1792,55 @@ levels:
         5:
             mp_choice_options:
             -   option: "```\ntoetje = {ask} 'Wat is jouw favoriete toetje?'\n{if} toetje {is} ijs\n    {repeat} 3 {times}\n    {print} 'Maar ijs is het beste!'\n```\n"
-                feedback: Don't forget the indentation after `{repeat}` commands.
+                feedback: Vergeet niet in te springen bij een `{repeat}`.
             -   option: "```\ntoetje = {ask} 'Wat is jouw favoriete toetje?'\n{if} toetje {is} ijs\n{repeat} 3 {times}\n    {print} 'Maar ijs is het beste!'\n```\n"
-                feedback: Use indentation after an `{if}` command
+                feedback: Bij `{if}` moet je inspringen?
             -   option: "```\ntoetje = {ask} 'Wat is jouw favoriete toetje?'\n{if} toetje {is} ijs\n    {repeat} 3 {times}\n        {print} 'Maar ijs is het beste!'\n```\n"
                 feedback: Perfect
             -   option: "```\n{repeat} 3 {times}\n    toetje = {ask} 'Wat is jouw favoriete toetje?'\n    {if} toetje {is} ijs\n        {repeat} 3 {times}\n        {print} 'Maar ijs is het beste!'\n```\n"
-                feedback: There are 2 `{repeat}` commands in this code.
-            question_text: Which code produced this output?
+                feedback: Er zitten twee `{repeat}` commandos in deze code.
+            question_text: Welke code maakt deze output?
             correct_answer: C
-            hint: Watch the indentation
+            hint: Let op het inspringen!
             question_score: '10'
             output: |
-              IJs
-              IJs
-              IJs
+              Maar ijs is het beste!
+              Maar ijs is het beste!
+              Maar ijs is het beste!
         6:
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: Goed! Maar er zijn er nog meer.
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: Goed! Maar er zijn er nog meer. Denk aan `{else}`!
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: Yes!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+                feedback: Niet bij `{print}`.
+            question_text: Bij welk commando('s) moet je inspringen?
             correct_answer: C
-            hint: Indentation happens on the line below some commands
+            hint: Bij sommige commando's horen spaties?
             question_score: '10'
         7:
             mp_choice_options:
-            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
-                feedback: Amazing!
-            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
-                feedback: Try again!
-            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
-                feedback: Try again
-            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
-                feedback: Try again
-            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            -   option: "```\n{if} eten {is} pizza\n    {if} grootte {is} medium\n        {if} drank {is} cola\n            prijs = prijs - 2\n```\n"
+                feedback: Goedzo!
+            -   option: "```\n{if} eten {is} pizza\n    {if} grootte {is} medium\n{if} drank {is} cola\n    prijs = prijs - 2\n```\n"
+                feedback: Twee keer `{if}` onder elkaar klopt nooit!
+            -   option: "```\n{if} eten {is} pizza\n{if} grootte {is} medium\n{if} drank {is} cola\n        prijs = prijs - 2\n```\n"
+                feedback: De tweede {if} mist nog code.
+            -   option: "```\n{if} eten {is} pizza\n    {if} grootte {is} medium\n        {if} drank {is} cola\n        prijs = prijs - 2\n```\n"
+                feedback: Bijna goed, maar... kijk eens naar die laatste regel.
+            code: "{if} eten {is} pizza\n{if} grootte {is} medium\n{if} drank {is} cola\nprijs = prijs - 2"
+            question_text: "Als je een medium pizza met cola bestelt, krijg je 2 euro korting. <br> Maar er zit een fout in de code! Hoe moet je deze debuggen?"
             correct_answer: A
-            hint: After each `{if}` command, the line below should indent
+            hint: Onder een `{if}` commando moet de regel worden ingesprongen.
             question_score: '10'
         8:
             mp_choice_options:
-            -   option: Je kan geen 2 vragen achter elkaar zetten
+            -   option: Je kan geen 2 vragen achter elkaar zetten.
                 feedback: Ja, dat mag wel
-            -   option: De variable 'leeftijd' word later gebruikt als 'jaar'
+            -   option: De variable `leeftijd` wordt later gebruikt als `jaar`.
                 feedback: Goed gezien!
             -   option: Je mag niet starten met 8 spaties, zoals in regel 4 en 5.
                 feedback: Je moet juist daar starten met 8 spaties
@@ -1850,35 +1850,40 @@ levels:
             hint: Het inspringen is goed gegaan deze keer
             question_score: '10'
             question_text: Wat is er mis met deze code?
-            code: "leeftijd = {ask} 'Gefeliciteerd! Hoe oud ben je?'\nzingen = {ask} 'Wil je dat we gaan zingen?'\n    if zingen {is} ja\n        {repeat} jaar {times}\n        {print} 'Hiep hiep hoera!'"
+            code: |-
+                leeftijd = {ask} 'Gefeliciteerd! Hoe oud ben je?'
+                zingen = {ask} 'Wil je dat we gaan zingen?'
+                if zingen {is} ja
+                    {repeat} jaar {times}
+                        {print} 'Hiep hiep hoera!'
         9:
             mp_choice_options:
-            -   option: None, that is not allowed
-                feedback: You are allowed to
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   option: Nee, dat mag niet
+                feedback: Jawel, het mag.
+            -   option: Maar 1
+                feedback: Meer keer {if} mag wel.
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+                feedback: Meer keer {if} mag wel.
+            -   option: Zoveel als je maar wel, als je maar goed inspringt.
+                feedback: Klopt!
+            question_text: Hoeveel `{if}` commando's mag je met elkaar combineren?
             correct_answer: D
-            hint: You can put an `{if}` command inside an `{if}` command.
+            hint: Je mag een `{if}` in een `{if}` zetten.
             question_score: '10'
         10:
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   feedback: Line 3 should start with 8
-                option: Line 2 and 3 should start with 4 spaces
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            question_text: Which statement is true?
-            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Great job!"
+            -   option: Alle regels moeten met 4 spaties beginnen
+                feedback: Alleen regels 2 en 3 hebben spaties nodig
+            -   feedback: Regel 3 moet met 8 spaties beginnen
+                option: Regel 2 en 3 moeten met 4 spaties beginnen
+            -   option: Regel 2 en 3 moeten met 8 spaties beginnen
+                feedback: Regel 2 moet met 4 spaties beginnen
+            -   option: Regel 2 moet met 4 spaties beginnen en regel 3 met 8 spaties
+                feedback: Klopt!
+            question_text: Wat is waar?
+            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Goedzo!"
             correct_answer: D
-            hint: The first line doens't start with any spaces
+            hint: De eerste regel hoort niet met spaties te beginnen.
             question_score: '10'
     10:
         1:

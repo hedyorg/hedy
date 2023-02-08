@@ -1999,7 +1999,7 @@ levels:
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYou'll get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "You'll get a 5 dollar discount if you order a medium pizza with coke.<br>But the code has a mistake! How to debug it?"
             code: |-
                 {if} food {is} pizza
                 {if} size {is} medium
@@ -2021,7 +2021,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 5
                     ```
-                feedback: "Try again!"
+                feedback: "The second {if} misses code!"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2029,7 +2029,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 5
                     ```
-                feedback: "Try again"
+                feedback: "Two consecutive {if}s is never correct."
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2037,7 +2037,7 @@ levels:
                             {if} drink {is} coke
                             price = price - 5
                     ```
-                feedback: "Try again"
+                feedback: "Bijna goed maar kijk eens naar die laatste regel."
             correct_answer: "A"
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
@@ -2048,7 +2048,7 @@ levels:
                 singing = {ask} 'Would you like us to sing?'
                     if singing {is} yes
                         {repeat} years {times}
-                          {print} 'Hip Hip Hooray'
+                            {print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "You can't put two questions in a row"
                 feedback: "Yes you can."
@@ -2091,7 +2091,7 @@ levels:
             -   option: "line 2 should start with 4 spaces and line 3 with 8"
                 feedback: "You are correct!"
             correct_answer: "D"
-            hint: "The first line doens't start with any spaces"
+            hint: "The first line doesn't start with any spaces"
             question_score: '10'
     11:
         1:
