@@ -263,11 +263,10 @@ def setup_language():
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
+    g.lang = session['lang']
 
     if 'keyword_lang' not in session:
-        g.keyword_lang = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
-
-    g.lang = session['lang']
+        session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
     g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
