@@ -61,9 +61,7 @@ class ForTeachersModule(WebsiteModule):
         for level in range(hedy.HEDY_MAX_LEVEL + 1):
             if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
                 slides.append(level)
-        print('*'*100)
-        print(slides)
-        print('*'*100)
+
         return render_template(
             "for-teachers.html",
             current_page="for-teachers",
