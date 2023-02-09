@@ -44,10 +44,10 @@
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap gap-2">
             {% if is_admin and class_info.teacher != username %}
-                <button class="green-btn" id="customize-class-button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
+                <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
                 <button class="green-btn" id="add-student" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
-                <button class="green-btn" id="customize-class-button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
+                <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
             <button class="green-btn" id="logs_button" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>

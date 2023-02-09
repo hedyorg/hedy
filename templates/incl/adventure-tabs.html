@@ -1,12 +1,11 @@
       {# TABS #}
       <div id="adventures">
-
         {% macro adventure_tab(tabname, title, selected, id, special) %}
             <div class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {% if special %}special_tab{% endif %}" id="{{ id }}" tabindex="0" data-tab="{{ tabname }}">
                 {{title}}
             </div>
         {% endmacro %}
-
+        
         <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
         <div class="flex flex-row w-min" id="adventures-buttons">
             {% if 'sorted_adventures' in customizations %}

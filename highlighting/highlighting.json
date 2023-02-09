@@ -765,6 +765,14 @@
                     ],
                     "next": "valRemove",
                     "unicode": true
+                },
+                {
+                    "regex": "(^ *)(__clear__)",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "unicode": true
                 }
             ],
             "value": [
@@ -1404,6 +1412,15 @@
                     ],
                     "next": "start",
                     "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
                 }
             ]
         }
@@ -1880,6 +1897,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -2380,6 +2406,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -2906,6 +2941,15 @@
                     ],
                     "next": "start",
                     "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
                 }
             ]
         }
@@ -3420,6 +3464,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -3949,6 +4002,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -4502,6 +4564,15 @@
                     ],
                     "next": "start",
                     "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
                 }
             ]
         }
@@ -5043,6 +5114,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -5608,6 +5688,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -6214,6 +6303,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -6839,6 +6937,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -7488,6 +7595,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -8162,6 +8278,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"
@@ -8879,6 +9004,15 @@
                 },
                 {
                     "regex": "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "event"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "event"

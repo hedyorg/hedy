@@ -62,7 +62,7 @@ pygame.quit()
 
 const normal_prefix =
 `# coding=utf8
-import random, time
+import random, time, extensions
 global int_saver
 global convert_numerals # needed for recursion to work
 int_saver = int
@@ -973,7 +973,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   outputDiv.append(variables);
 
   const storage = window.localStorage;
-  let skulptExternalLibraries:{[index: string]:any} = {};
+  let skulptExternalLibraries:{[index: string]:any} = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
+  };
   let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
@@ -1006,6 +1010,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   if (hasPygame){
     skulptExternalLibraries = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
       './pygame.js': {
         path: "/vendor/pygame_4_skulpt/init.js",
       },
@@ -1320,7 +1327,13 @@ function initCanvas4PyGame() {
       let div2 = document.createElement("div");
       $(div2).addClass("modal-dialog modal-lg");
       $(div2).css("display", "inline-block");
-      $(div2).width(self.width + 42);
+
+      // I'm not sure what the code below was supposed to do,
+      // but it was referring to 'self.width' which does not
+      // exist, and the result would be 'undefined + 42 == NaN'.
+      //
+      // (as any to make TypeScript allow the nonsensical addition)
+      $(div2).width(undefined as any + 42);
       $(div2).attr("role", "document");
       div1.appendChild(div2);
 

@@ -411,7 +411,7 @@ export function save_customizations(class_id: string) {
     });
 }
 
-export function remove_customizations(class_id: string, prompt: string, default_customizations: any, adventures_names: any, available_adventures: any, teacher_adventures: any) {
+export function remove_customizations(class_id: string, prompt: string) {
     modal.confirm (prompt, function () {
         $.ajax({
             type: 'DELETE',
@@ -436,12 +436,13 @@ export function remove_customizations(class_id: string, prompt: string, default_
               function() {
                 $(this).empty();
                 const level = $(this).attr('id')!.split('-')[1];
-                for (let i = 0; i < default_customizations[level].length; i++) {
+                for (let i = 0; i < adventures_default_order[level].length; i++) {
+                  // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
                   const div =
                   `
-                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${default_customizations[level][i]}" level = "${level}" from-teacher = "false">
-                    <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                    ${adventures_names[default_customizations[level][i]]}
+                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventures_default_order[level][i]}" level="${level}" from-teacher="false">
+                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                    ${adventure_names[adventures_default_order[level][i]]}
                   </div>
                   `
                   $(this).append(div);
@@ -452,7 +453,7 @@ export function remove_customizations(class_id: string, prompt: string, default_
               available_adventures[i] = [];
             }
             for (let i = 0; i < teacher_adventures.length; i++) {
-              available_adventures[teacher_adventures[i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
+              available_adventures[teacher_adventures![i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
             }
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
@@ -701,4 +702,93 @@ export function drag_list (target: any) {
       }
     };
   }
+}
+
+/**
+ * These will be copied into global variables, because that's how this file works...
+ */
+interface InitializeCustomizeClassPageOptions {
+  readonly available_adventures_level_translation: string;
+  readonly teacher_adventures: TeacherAdventure[];
+  readonly available_adventures: Record<string, AvailableAdventure[]>;
+  readonly adventures_default_order: Record<string, string[]>;
+  readonly adventure_names: Record<string, string>;
+}
+
+let available_adventures_level_translation: string;
+let teacher_adventures: TeacherAdventure[];
+let available_adventures: Record<string, AvailableAdventure[]>;
+let adventures_default_order: Record<string, string[]>;
+let adventure_names: Record<string, string>;
+
+interface AvailableAdventure {
+  from_teacher: boolean;
+  name: string;
+}
+
+interface TeacherAdventure {
+  id: string;
+  level: string;
+}
+
+export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
+  available_adventures_level_translation = options.available_adventures_level_translation;
+  teacher_adventures = options.teacher_adventures;
+  available_adventures = options.available_adventures;
+  adventures_default_order = options.adventures_default_order;
+  adventure_names = options.adventure_names;
+
+  $(document).ready(function(){
+      drag_list(document.getElementById("sortadventures"));
+
+      $('#adventures').on('change', function(){
+          var level = $(this).val() as string;
+          $("div.adventures-tab").hide();
+          $("#level-"+level).show({
+              start: function() {
+                  $(this).css('display', 'flex');
+              }
+          });
+          $('#available').empty();
+          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+          const adventures = available_adventures[level];
+          for(let i = 0; i < adventures.length; i++) {
+            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
+          }
+          drag_list(document.getElementById("level-"+level));
+      });
+
+      $('#sortadventures').on('click', 'span', (function(event){
+        event.preventDefault();
+        const adventure = $(this).parent().attr('adventure') as string;
+        const level = $(this).parent().attr('level') as string;
+        const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
+        if (!available_adventures[level]) {
+          throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
+        }
+        available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
+        $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
+        $(this).parent().remove();
+        markUnsavedChanges();
+      }));
+
+      $('#available').on('change', function(){
+          const values = ($(this).val() as string).split('-');
+          const adventure = values[0];
+          const level = values[1]
+          const from_teacher = values[2] === "true";
+          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
+          const adventure_div =
+          `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
+              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                  ${adventure_names[adventure]}
+          </div>`;
+          $('#level-'+level).append(adventure_div);
+          const index = available_adventures[level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
+          available_adventures![level].splice(index, 1);
+          $('#remove-'+adventure).remove();
+          drag_list(document.getElementById("level-"+level));
+          markUnsavedChanges();
+      });
+  });
 }
