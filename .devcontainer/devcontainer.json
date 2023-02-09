@@ -14,13 +14,23 @@
             "extensions": [
                 "ms-python.python",
                 "dirk-thomas.vscode-lark"
-            ]
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                  "bash": {
+                    "path": "/bin/bash",
+                    "overrideName": true
+                  }
+                }
+            }
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
+    "onCreateCommand": "pre-commit install && pybabel compile -f -d translations && cp -r /var/tmp/node_modules node_modules",
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "pre-commit install",
+    //"postCreateCommand": "",
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "hedy"
 }

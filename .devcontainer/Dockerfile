@@ -16,12 +16,11 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Install all binary dependencies (things that won't change due to our code changes)
 # git is needed / useful in github codespaces
-RUN apt update && apt install -y gcc git curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+# make and gcc are needed for node-gyp package
+RUN apt update && apt install -y gcc git make g++ curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
 
 
 FROM main as node_builder
-# Needed for node-gyp
-RUN apt install -y make g++
 WORKDIR /app
 COPY package* .
 RUN npm ci
@@ -34,14 +33,7 @@ RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 WORKDIR /app
 
-# Copy node modules
-COPY --from=node_builder /app/node_modules node_modules
-
-COPY . .
-
-# Fix translations
-RUN pybabel compile -f -d translations
-
-ENV BASE_URL=http://localhost:8080/
+# Copy node modules to a tmp folder
+COPY --from=node_builder /app/node_modules /var/tmp/node_modules
 
 EXPOSE 8080
