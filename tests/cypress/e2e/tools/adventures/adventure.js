@@ -13,7 +13,6 @@ export function createAdventure()
     // Click 'ok'
     cy.get('#modal-ok-button').click();
 
-    cy.wait(500);
-}
+    }
 
 export default {createAdventure};

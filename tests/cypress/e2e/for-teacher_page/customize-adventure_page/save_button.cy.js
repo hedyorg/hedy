@@ -38,8 +38,7 @@ describe('Save button test', () => {
     cy.get('#modal_alert_text')
       .should('be.visible');
 
-    cy.wait(500);
-
+    
     cy.get('#modal-confirm')
       .should('not.be.visible');
     cy.get('#modal_alert_container')

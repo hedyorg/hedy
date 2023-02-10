@@ -5,7 +5,6 @@ import {createClass} from '../../../tools/classes/class.js'
 describe('Is able to load data from different timelines', () => {
   it('Passes', () => {
     loginForTeacher();
-    cy.wait(500);
     createClass();
     cy.get(".view_class").first().click();
     cy.get('#stats_button').click();

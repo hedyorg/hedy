@@ -5,7 +5,6 @@ import {createClass} from '../../tools/classes/class.js'
 describe('Is able to go to class statistics page', () => {
   it('Passes', () => {
     loginForTeacher();
-    cy.wait(500);
     createClass();
     cy.get(".view_class").first().click(); // Press view class button
 

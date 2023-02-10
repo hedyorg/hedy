@@ -18,8 +18,7 @@ describe('Preview button test', () => {
     cy.get('#modal-content')
       .should('be.visible');
 
-    cy.wait(500);
-
+    
     // closing preview
     cy.get('#modal-preview-button')
       .should('not.be.disabled')

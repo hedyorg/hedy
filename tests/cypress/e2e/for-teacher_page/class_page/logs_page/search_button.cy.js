@@ -5,7 +5,6 @@ import {createClass} from '../../../tools/classes/class.js'
 describe('Is able to press the search button', () => {
   it('Passes', () => {
     loginForTeacher();
-    cy.wait(500);
     createClass();
     cy.get(".view_class").first().click();
     cy.get('#logs_button').click();

@@ -30,8 +30,7 @@ describe('Preview button test', () => {
       .should('not.be.disabled')
       .click();
 
-    cy.wait(500);
-
+    
     cy.get('#modal-confirm')
       .should('not.be.visible');
     cy.get('#modal-no-button')
