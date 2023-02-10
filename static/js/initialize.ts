@@ -5,7 +5,6 @@ import { logs } from './logs';
 import { initializeQuiz } from './quiz';
 import { APP_STATE } from './state';
 import { initializeTabs } from './tabs';
-import { initializeTeacherPage } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
@@ -22,8 +21,11 @@ export function initialize(options: InitializeOptions={}) {
   initializeFormSubmits();
   initializeQuiz();
   initializeTabs();
-  initializeTeacherPage();
   initializeTutorial();
+
+  // initializing the teacher/customize class pages is done in a different
+  // file. That is not great, we should be using a parameter to this function
+  // probably, but for now that is what it is.
 
   if (options.logs) {
     logs.initialize();

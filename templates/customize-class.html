@@ -198,15 +198,10 @@
 <script>
 // If we return something a pop-up will be given: "are you sure you want to leave?"
 // Best we can do as the beforeunload doesn't allow the call of functions or other methods
-$(window).bind('beforeunload', function(){
-    if (hedyApp.hasUnsavedChanges()) {
-        return " ";
-    };
-});
-
 function leaveWithConfirmation() {
     if (hedyApp.hasUnsavedChanges()) {
-        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
+        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function() {
+            hedyApp.clearUnsavedChanges();
             window.location = "/for-teachers/class/{{class_info.id}}";
         });
     } else {

@@ -130,7 +130,7 @@ export function hasUnsavedChanges() {
  */
 export function markUnsavedChanges() {
   unsavedChanges = true;
-  addEventListener('beforeunload', unloadHandler, { capture: true });
+  window.addEventListener('beforeunload', unloadHandler, { capture: true });
 }
 
 /**
@@ -139,5 +139,5 @@ export function markUnsavedChanges() {
 export function clearUnsavedChanges() {
   unsavedChanges = false;
   // MDN tells me to add and remove this listener as necessary: https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
-  removeEventListener('beforeunload', unloadHandler, { capture: true });
+  window.removeEventListener('beforeunload', unloadHandler, { capture: true });
 }

@@ -143,12 +143,15 @@ function switchToTab(tabName: string) {
       $ ('#program_name').val (tabName);
       theGlobalEditor?.setValue ("");
     } else {
-      if (adventures[tabName].default_save_name == 'intro') {
-        $('#program_name').val(`${ClientMessages.level_title} ${APP_STATE.level}`);
-      } else {
-        $('#program_name').val(`${adventures[tabName].default_save_name} - ${ClientMessages.level_title} ${APP_STATE.level}`);
+      const adventure = adventures[tabName];
+      if (adventure) {
+        if (adventure.default_save_name == 'intro') {
+          $('#program_name').val(`${ClientMessages.level_title} ${APP_STATE.level}`);
+        } else {
+          $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${APP_STATE.level}`);
+        }
+        theGlobalEditor?.setValue(adventure.start_code);
       }
-      theGlobalEditor?.setValue(adventures [tabName].start_code);
     }
   }
 

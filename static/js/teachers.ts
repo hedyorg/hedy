@@ -5,13 +5,6 @@ import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
 
-export function initializeTeacherPage() {
-    // Use this to make sure that we return a prompt when a user leaves the page without saving
-    $( "input" ).change(function() {
-      markUnsavedChanges();
-    });
-}
-
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
     $.ajax({
@@ -739,6 +732,11 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
   adventure_names = options.adventure_names;
 
   $(document).ready(function(){
+      // Use this to make sure that we return a prompt when a user leaves the page without saving
+      $( "input" ).change(function() {
+        markUnsavedChanges();
+      });
+
       drag_list(document.getElementById("sortadventures"));
 
       $('#adventures').on('change', function(){
