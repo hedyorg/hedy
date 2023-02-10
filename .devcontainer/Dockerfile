@@ -37,3 +37,4 @@ WORKDIR /app
 COPY --from=node_builder /app/node_modules /var/tmp/node_modules
 
 EXPOSE 8080
+ENV SHELL /bin/bash
