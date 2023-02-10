@@ -17,8 +17,21 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Install all binary dependencies (things that won't change due to our code changes)
 # git is needed / useful in github codespaces
 # make and gcc are needed for node-gyp package
-RUN apt update && apt install -y gcc git make g++ curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+RUN apt-get install -y gcc git make g++ curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
 
+# Fix cypress dependencies
+# https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get install -y --no-install-recommends \
+    libgtk2.0-0 \
+    libgtk-3-0 \
+    libgbm-dev \
+    libnotify-dev \
+    libgconf-2-4 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libxtst6 xauth xvfb
 
 FROM main as node_builder
 WORKDIR /app
@@ -30,8 +43,6 @@ FROM main
 # Setup python packages
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
-
-WORKDIR /app
 
 # Copy node modules to a tmp folder
 COPY --from=node_builder /app/node_modules /var/tmp/node_modules

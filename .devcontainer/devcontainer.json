@@ -1,11 +1,13 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
     "name": "Hedy",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "..",
-        "args": {}
-    },
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "forwardPorts": [
+        8080,
+        8081
+    ],
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -18,10 +20,10 @@
             "settings": {
                 "terminal.integrated.shell.linux": "bash",
                 "terminal.integrated.profiles.linux": {
-                  "bash (container default)": {
-                    "path": "/bin/bash",
-                    "overrideName": true
-                  }
+                    "bash (container default)": {
+                        "path": "/bin/bash",
+                        "overrideName": true
+                    }
                 }
             }
         }
