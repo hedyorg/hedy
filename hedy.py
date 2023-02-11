@@ -1957,6 +1957,7 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
+        self.ifpressed_prefix_added = False # add ifpressed prefix again after repeat
         return f"""for {var_name} in range(int({str(times)})):
 {ConvertToPython.indent(command)}"""
 
@@ -1981,6 +1982,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, meta, args):
@@ -2084,6 +2086,7 @@ class ConvertToPython_11(ConvertToPython_10):
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after for loop
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
@@ -2268,6 +2271,7 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
         body = sleep_after(body)
         exceptions = self.make_catch_exception([args[0]])
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after while loop
         return exceptions + "while " + args[0] + ":\n" + body
 
 
