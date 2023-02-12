@@ -434,7 +434,7 @@ export function remove_customizations(class_id: string, prompt: string) {
                   const div =
                   `
                   <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventures_default_order[level][i]}" level="${level}" from-teacher="false">
-                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
                     ${adventure_names[adventures_default_order[level][i]]}
                   </div>
                   `
@@ -778,7 +778,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
           const adventure_div =
           `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
                   ${adventure_names[adventure]}
           </div>`;
           $('#level-'+level).append(adventure_div);
