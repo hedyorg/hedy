@@ -1957,7 +1957,7 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
-        self.ifpressed_prefix_added = False # add ifpressed prefix again after repeat
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"""for {var_name} in range(int({str(times)})):
 {ConvertToPython.indent(command)}"""
 
