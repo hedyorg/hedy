@@ -2071,7 +2071,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-
+        self.ifpressed_prefix_added = False
         return f"for {times} in {args[1]}:\n{body}"
 
 
