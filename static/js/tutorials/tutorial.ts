@@ -1,4 +1,4 @@
-import {callNextIntroStep, startIntro} from "./intro";
+import {callNextIntroStep, startIntro } from "./intro";
 import {callTeacherNextStep, startTeacher} from "./teacher";
 
 // We should add this import for every level we add to the tutorial

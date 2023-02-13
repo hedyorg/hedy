@@ -75,6 +75,17 @@ strong {
   @apply text-2xl;
 }
 
+/**
+ * text-business-copy
+ *
+ * For Real Business Value(tm).
+ */
+.text-business-copy { }
+
+.text-business-copy h3:first-child { @apply mt-0; }
+
+.text-business-copy * + h3 { @apply mt-8; }
+
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
@@ -266,7 +277,7 @@ code {
 }
 
 .menubar-item {
-  @apply flex items-center flex-none cursor-pointer block border-b-4 tracking-wide mx-2 lg:mx-4;
+  @apply cursor-pointer block border-b-4 tracking-wide;
   /* Colors */
   @apply border-gray-100;
 }
@@ -683,4 +694,21 @@ input:checked ~ .toggle-path {
 @keyframes animate-keys {
   0%   {bottom:15px; font-size: 1em; opacity: 1}
   100% {bottom:100%; font-size: 4em; opacity: 0}
+}
+
+.drop-adventures-hint {
+  @apply bg-blue-100 border-blue-300;
+}
+
+.drop-adventures-active {
+  @apply bg-yellow-100 border-yellow-300;
+}
+
+.adventures-tab {
+  @apply flex flex-row w-auto overflow-x-auto overflow-y-hidden;
+  display :none;
+}
+
+.adventures-tab[style*='display: block'] {
+  display: flex !important;
 }

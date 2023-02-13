@@ -19,41 +19,61 @@
         </div>
         {{ _('customize_class_exp_2')|commonmark }}
     </div>
-    <div class="flex flex-col">
-        <h3 class="px-4">{{_('select_adventures')}}</h3>
-        <div class="border border-gray-400 py-2 px-4 rounded-lg overflow-x-scroll">
-            <table class="table-auto w-full text-center customize_adventure_overview">
-                <thead>
-                    <tr>
-                        <th class="w-40 text-left border-r border-gray-400">{{ _('adventure') }} / {{ _('level_title') }}</th>
-                        {% for i in range(1, max_level + 1) %}
-                            <th class="w-12"><button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for key, adventure in adventures.items() %}
-                     <tr>
-                        {% for name, levels in adventure.items() %}
-                            <td class="text-left adventure_keys border-t border-r border-gray-400 cursor-pointer" onclick="hedyApp.select_all_levels_adventure('{{ key }}');" adventure="{{ key }}">{{ name }}</td>
-                            {% for i in range(1, max_level + 1) %}
-                                <td class="border-t border-gray-400">
-                                    {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input cursor-pointer
-                                        {% if customizations and customizations['levels'] and i not in customizations['levels'] %} hidden{% endif %}"
-                                        adventure="{{ key }}" level="{{ i }}"
-                                        {% if (customizations and customizations['adventures'] and customizations['adventures'][key] and i in customizations['adventures'][key]) or (not customizations) %}
-                                            checked
-                                        {% endif %} type="checkbox">
-                                    {% endif %}
-                                </td>
-                            {% endfor %}
-                        {% endfor %}
-                     </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="flex flex-row border border-gray-400 rounded-lg">
+        <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
+        <div class="py-2 px-4 w-9/12 overflow-x-scroll">
+            {% for i in range(1, max_level + 1) %}
+                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
+            {% endfor %}
         </div>
     </div>
+    <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
+        <h3 class="px-4">{{_('select_adventures')}}</h3>
+        <div class="flex flex-row w-full mb-4">
+            <div class="flex flex-row justify-center items-center mr-2 w-1/12 ml-4">
+                <select class="flex flex-row py-2 px-1 mt-2 h-10 justify-center items-center text-center w-full" name="levels" id="adventures" data-cy="adventures">
+                    <option value="none" selected disabled hidden> {{_('select_a_level')}} </option>
+                    {% for i in range(1, max_level + 1) %}
+                        <option id="select-{{i}}" {% if customizations and i not in customizations['levels'] %}class="hidden"{% endif %}value="{{ i }}">{{ _('level_title') }} {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-9/12">
+                {% if customizations and customizations['sorted_adventures'] %}
+                    {% for level, adventures in customizations['sorted_adventures'].items() %}
+                        <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab">
+                            {% for adventure in adventures %}
+                               {% if adventure.name in adventure_names %}
+                                    {# Note: this code is copy/pasted in teachers.ts. If you change it here, also change it there #}
+                                    <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level="{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
+                                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                                        {{ adventure_names[adventure['name']] }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for level, adventures in adventures_default_order.items() %}
+                        <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab">
+                            {% for adventure in adventures %}
+                            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure }}" level = "{{ level }}" from-teacher = "false">
+                                <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                                {{ adventure_names[adventure] }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
+                <select class="flex flex-row py-2 px-1 w-full mt-2 h-10 justify-center items-center text-center" name="levels" id="available" data-cy="available_adventures_current_level">
+                    <option value="none" selected>{{_('available_adventures_level')}} -</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col">
             <h3 class="px-4">{{_('opening_dates')}}</h3>
@@ -67,7 +87,7 @@
                     </thead>
                     <tbody>
                         {% for i in range(1, max_level + 1) %}
-                            <tr class="{% if customizations and i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
+                            <tr class="{% if customizations and i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}" data-cy="opening_date_level_{{ i }}">
                                 <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
@@ -84,39 +104,14 @@
                 </table>
             </div>
         </div>
-        <div class="flex flex-col gap-4">
-            <div class="flex flex-col">
-                <h3 class="px-4">{{_('select_own_adventures')}}</h3>
-                <div class="border border-gray-400 py-2 px-4 rounded-lg">
-                    <table class="table-auto text-center w-full customize_own_adventure_overview">
-                        <thead>
-                            <tr>
-                                <th class="w-64 text-left border-r border-gray-400">{{ _('adventure') }}</th>
-                                <th class="w-64 border-r border-gray-400">{{ _('level_title') }}</th>
-                                <th class="w-64">{{_('select')}}?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for adventure in teacher_adventures %}
-                                <tr>
-                                    <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
-                                    <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
-                                    <td class="border-t border-gray-400 ">
-                                        <input class="teacher_adventures_checkbox" {% if adventure.id in customizations['teacher_adventures'] %}checked{% endif %} type="checkbox" id="{{ adventure.id }}">
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="flex flex-col gap- w-full">
             <div class="flex flex-col">
                 <h3 class="px-4">{{_('unlock_thresholds')}}</h3>
-                <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                <div class="border border-gray-400 py-2 px-4 rounded-lg w-full">
                     <table class="table-auto text-center w-full customize_threshold_settings">
                         <thead>
                             <tr>
-                                <th class="w-64 text-left border-r border-gray-400">{{_('option')}}</th>
+                                <th class="w-2/3 text-left border-r border-gray-400">{{_('option')}}</th>
                                 <th class="w-40">{{_('value')}}</th>
                             </tr>
                         </thead>
@@ -124,7 +119,8 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
                                 <td class="border-t border-gray-400 px-4 pt-2">
-                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" id="quiz" {% if "quiz" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
+                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" 
+                                    data-cy="quiz_input" id="quiz" {% if "quiz" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
                                 </td>
                             </tr>
                         </tbody>
@@ -183,15 +179,16 @@
                 </div>
             </div>
             {% if not (is_admin and class_info.teacher != username) %}
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 mt-4">
                     <div class="flex flex-row ml-auto gap-2">
-                        <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
-                        <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
+                        {# TODO JP: make a button that resets the adventures to the default in Hedy content #}
+                        <!-- <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button> -->
+                        <button data-cy="save_customizations" class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                     </div>
                     <div class="flex flex-row ml-auto gap-2">
-                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
+                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" data-cy="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                         {{_('remove_customization')}}</button>
-                        <button class="green-btn" onclick=validate_changes()>{{_('back_to_class')}}</button>
+                        <button class="green-btn" data-cy="back_to_class" onclick="validate_changes()">{{_('back_to_class')}}</button>
                     </div>
                 </div>
             {% endif %}
@@ -201,7 +198,7 @@
 <script>
 // If we return something a pop-up will be given: "are you sure you want to leave?"
 // Best we can do as the beforeunload doesn't allow the call of functions or other methods
-$(window).bind('beforeunload', function(){
+$(window).bind('beforeunload', () => {
     if (window.State.unsaved_changes) {
         return " ";
     };
@@ -215,5 +212,12 @@ function validate_changes() {
         window.location = "/for-teachers/class/{{class_info.id}}";
     }
 }
+window.addEventListener("DOMContentLoaded", () => {
+    hedyApp.initializeCustomizeClassPage({{_('available_adventures_level')|tojson}});
+    window.State.teacher_adventures = {{ teacher_adventures|tojson }};
+    window.State.adventures_default_order = {{ adventures_default_order|tojson }};
+    window.State.adventure_names = {{ adventure_names|tojson }};
+    window.State.available_adventures = {{ available_adventures|tojson }};
+});
 </script>
 {% endblock %}

@@ -14,7 +14,7 @@ OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
 # Files containing translations of keywords
 KEYWORDS_PATH = 'content/keywords/'
-KEYWORDS_PATTERN = '(\\w+).yaml'
+KEYWORDS_PATTERN = '(\\w+).yaml$'
 
 # Functions that collect all the rules, for all levels, of a given language
 
@@ -88,8 +88,11 @@ def get_yaml_content(file_name):
     Returns a dict.
     """
 
-    keywords_file = open(file_name, newline="", encoding='utf-8')
-    yaml_file = yaml.safe_load(keywords_file)
+    try:
+        with open(file_name, newline="", encoding='utf-8') as keywords_file:
+            yaml_file = yaml.safe_load(keywords_file)
+    except Exception as e:
+        raise RuntimeError(f'Unable to read file {file_name}') from e
     commandes = {}
     for k in yaml_file:
         commandes[str(k)] = str(yaml_file[k])
@@ -163,8 +166,10 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
     # get content
     for language_file in list_language_file:
-        language_code = re.search(KEYWORDS_PATTERN, language_file).group(1)
-        tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
+        # Only check *.yaml files
+        if m := re.search(KEYWORDS_PATTERN, language_file):
+            language_code = m.group(1)
+            tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
 
     # english is ref
     reference = tmp["en"]

@@ -66,7 +66,7 @@ adventures:
                 story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n如果你选择绿色或黄色，这段代码会打印“好看”，否则则会说“哦”。\n"
                 example_code_3: "```\n好看的颜色 {is} 绿色，黄色\n颜色 {is} {ask} '你最喜欢的颜色是什么？'\n{if} 颜色 {in} 好看的颜色 {print} '好看！'\n{else} {print} '哦'\n```\n"
                 story_text_2: "有`{if}`的代码中有些时候会很长，一行代码放不下。 <br> 你可以把代码分成两行，像这样以`{else}`开始第二行：\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "与`{if}`关键词一起用的还有 `{pressed}`！你可以通过 `{pressed}`将键盘上的任何字母或是数字键关联到一个操作命令上。在你关联完成并按下关联好的按键后，会有神奇的事情发生。试试看吧！\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
@@ -95,8 +95,8 @@ adventures:
                 story_text: |
                     ## 缩进
                     `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句和 `{repeat}` 循环语句已经改变了！
-                    你现在可以执行一组代码，但你必须使用*缩进*。
-                    缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码，你也必须缩进。
+                    你现在可以执行一组代码，但你必须*缩进*代码。
+                    缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码时你也必须使用缩进。
                 example_code: "`{repeat}`命令现在是这样用的：\n```\n{repeat} 5 {times}\n    {print} '大家好'\n    {print} '这些都会重复5遍'\n```\n\n`{if}`和`{else}`命令现在是这样用的：\n```\n名字 {is} {ask} '你叫什么？'\n{if} 名字 {is} 海迪\n    {print} '你好海迪'\n    {print} '你可以玩你的电脑了！'\n{else}\n    {print} '私闯民宅！'\n    {print} '你不能使用这台电脑！'\n```\n"
             9:
                 start_code: |-
@@ -126,7 +126,7 @@ adventures:
                 start_code: |-
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
-                story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)"
+                story_text: "## 循环！\n在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。\n我们通过添加一个变量名，在其后面接着`{in}``{range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。\n\n试试这个例子，看看会发生什么! 在这一关卡中，你将需要在`{for}`语句下面的行中使用缩进。"
                 example_code: "```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
                 start_code: "{print} '十进制数字现在需要加上小数点'\n{print} 2.5 + 2.5"
@@ -221,6 +221,7 @@ adventures:
                 start_code: '{print} 你的故事'
                 story_text: "## 故事\n在第2关，你可以让你的故事更有趣些。你的主人公的名字可以放在句子里的任何位置了。\n\n为此你确实需要多写一点代码。你需要先给主人公一个名字。\n\n然后就可以把名字放在句子里的任何位置。\n"
                 example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字 现在要去森林里散步了\n{print} 名字 有点害怕\n{print} 突然，他听到一个疯狂的声音……\n{sleep}\n{print} 名字 害怕这个森林里面闹鬼\n```"
+                story_text_2: "### 练习\n现在是时候给你在上一关中制作的自己的故事添加变量了。\n进入 \"我的程序\"，寻找你的第1关故事冒险，复制代码。把代码粘贴到本关的输入屏幕中。\n\n这段代码在本关不会起作用，因为你还没有使用变量。\n把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。\n\n**另外**在你的代码中添加一个睡眠命令，在你的故事中建立起紧张感。\n"
             7:
                 start_code: "{repeat} 5 {times} {print} '救命！'"
                 story_text: "## 故事\n在故事里，有人会重复同一个词好几次。比如有人在呼救或者唱歌。\n在这一关，你可以通过`{repeat}`在故事中加入这种重复。\n"
@@ -269,7 +270,7 @@ adventures:
                 story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
                 example_code: "```\n{ask} 这个故事的主人公是（谁）\n{print}主人公现在要到森林里去散步\n{echo} 他有点害怕，\n{print} 他听到到处都有疯狂的声音\n{print} 他害怕这是一片闹鬼的森林\n```\n"
                 start_code: '{print} 你的故事从这里开始'
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: "### 练习\n现在创建至少有6行代码的你自己的故事。\n这个故事不能与示例代码相同。\n至少要使用一个`{ask}`和一个`{echo}`命令。\n你可以把它写成任何你喜欢的主题。\n如果你想不出来，可以使用我们的给你的选择：看电影、体育比赛或动物园的一天。\n"
             10:
                 story_text: "## 故事\n在这一关，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n"
                 example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物们都在看我！'\n```\n"
@@ -281,8 +282,6 @@ adventures:
             9:
                 story_text: "## 故事\n在这一级，你可以通过嵌套，在一个 `{if}`，`{repeat}` 或 `{for}`命令里包含其它 `{if}`，`{repeat}`或`{for}` 命令。这让你有了很多选择，极大地提高了故事地互动性。\n"
                 example_code: "```\n{print} '罗宾来到了市区'\n地点 = {ask} '罗宾是要去商店还是回家？'\n{if} 地点 {is} 商店\n    {print} '她走进了商店。'\n    {print} '罗宾发现了一本有趣的书'\n    书 = {ask} '罗宾买了这本书吗？'\n    {if} 书 {is} 是\n        {print} '罗宾买了这本书，回家了'\n    {else}\n        {print} '罗宾离开商店，回家了'\n{else}\n    {print} '罗宾回了家'\n```\n"
-                story_text_2: "上面的示例非常简单，但是通过嵌套 {if}，您可以真正完善您的代码并将您的故事变成一个真正的游戏。看看这个例子！"
-                example_code_2: "## Elaborate code\n```\n剑 = 丢失\n游戏 = 进行中\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{repeat} 2 {times}\n    {if} 游戏 {is} 进行中\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} 左\n            {if} 剑 {is} 找到\n                {print} '我们的英雄遇上了一条龙！'\n                {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n                游戏 = 结束\n            {else}\n                {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n                {print} '我们的英雄被龙打败了……'\n                {print} '再试一次'\n                游戏 = 结束\n        {if} 路 {is} 右\n            {if} 剑 {is} 丢失\n                {print} '我们的英雄找到了一把剑'\n                {print} '它可能派上大用场'\n                剑 = 找到\n            {else}\n                {print} '你已经找打了剑。这里什么都没有。'\n                {print} '她走了回去'\n```\n"
                 start_code: '# 在这里写你的代码'
             8:
                 story_text: "## 故事\n在这一关，你可以在{if}命令里使用多行代码，这样就能升级你的好结局和坏结局了！\n"
@@ -323,6 +322,8 @@ adventures:
                 story_text: "## 歌曲\n在这一级中，你可以轻松地制作儿童歌曲《五只小猴子》。你能完成最后的合唱吗？\n你也可以只用6行就完成整首鲨鱼宝宝的歌曲（包括鲨鱼家族中所有其他种类的鲨鱼）！\n或者你可以用所有不同的动物制作《老麦当劳》。\n"
                 example_code: "## 5只小猴子们在上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子 {in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说'\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼 {in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪, 狗, 牛\n{for} 动物 {in} 动物们\n    {if} 动物 {is} 猪\n        声音 = 哼哼\n    {if} 动物 {is} 狗\n        声音 = 汪汪\n    {if} 动物 {is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
                 start_code: '# 在这里写你的代码'
+                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
             7:
                 story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...鲨鱼宝宝!如果你唱这首歌，其实你就是一直在唱同一句歌词。\n\n鲨鱼宝宝 tututudutudu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝\n\n你可以用`{repeat}` ，让这首歌变得更短!你能完成这个代码吗？\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
@@ -371,14 +372,16 @@ adventures:
                 example_code_2: "```\n边 = {ask} '你想要几边形？'\n角度 = 360 / 边\n{repeat} 角度 {times}\n    {turn} _\n    {forward} _\n```\n"
                 story_text_2: "## 交互\n另外，我们现在还可以改进之前的能画不同图案的程序。\n你能看出这里海龟需要转多少度吗？完成这段代码，你就能画出任何你想要的多边形！\n"
                 start_code: "边 = {ask} '我应该画几边形？'"
-            7:
-                story_text: "## 让我们来画画\n在这一级，你可以用`{repeat}`重复一行代码。\n"
-                example_code: "```\n{print} '绘图'\n{repeat} 3 {times} {forward} 10\n```\n"
-                start_code: "{print} '绘图'\n{repeat} 3 {times} {forward} 10"
             6:
                 story_text: "## 让我们来画画\n在这一级，你可以使用算术来绘制不同的图案。\n你可能在学校里学过，旋转一圈是360度。如果没学过，那你现在知道了！\n这就是为什么你可以用90度来画方形。360除以4是90。\n现在我们可以用海迪做数学，我们就能画出所有想要的图案！\n"
                 example_code: "```\n边 = {ask} '你想要画几边形？'\n角度 = 360 / 边\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n```\n"
                 start_code: "{print} '绘图'"
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
         name: 海龟
         description: 创作自己的绘画作品
         default_save_name: turtle
@@ -411,7 +414,6 @@ adventures:
                 example_code: "```\n人们 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人们 {at} {random}\n```\n"
                 start_code: '{print} 谁负责洗碗？'
                 story_text_2: "## 破解洗碗程序！\n不想洗碗？破解洗碗程序，把你的名字从列表里去掉。\n"
-                example_code_2: "```\n人们 {is} 妈妈，爸爸，艾玛，索菲\n你的名字 {is} {ask} 你是谁？\n{remove} 你的名字 {from} 人们\n{print} 人们 {at} {random} 负责洗碗\n```\n"
         name: 洗碗？
         description: 用电脑决定谁来洗碗（从第2级开始）
         default_save_name: 洗碗
@@ -449,6 +451,7 @@ adventures:
                 story_text: "## 石头剪刀布\n在这一级，你可以练习使用变量，这样你就能在下一级中完成石头剪刀布游戏！\n"
                 example_code: "```\n选择 {is} _\n{print} 我选择 选择\n```\n"
                 start_code: '# 在这里写你的代码'
+                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "## 石头剪刀布\n玩到你打败电脑为止！但首先，你要补全示例代码……\n"
                 example_code: "```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} '你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n```\n"
@@ -491,6 +494,10 @@ adventures:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
                 example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
+            11:
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
@@ -533,7 +540,6 @@ adventures:
                     ```
                 start_code: "# 将代码写在这里"
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: |
                     ## 随机餐厅
@@ -570,6 +576,8 @@ adventures:
                     {print} 你得到了一杯 口味 {at} {random} 味的奶昔
                     ```
                 start_code: "# 在这里写你的代码"
+                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
                     ## Restaurant
@@ -1121,17 +1129,6 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
-                    ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
-                    {sleep}
-                    {print} monsters {at} {random}
-                    ```
                 story_text_2: |
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
@@ -1143,6 +1140,7 @@ adventures:
                 start_code: "# place your code here"
                 story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: |
                     ## Haunted house
@@ -1336,79 +1334,6 @@ adventures:
                 story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n"
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 start_code: '# place your code here'
-    next:
-        description: What's Next?
-        name: What's next?
-        default_save_name: next
-        levels:
-            1:
-                start_code: "{print} Let's go!"
-                story_text: "## 下一步是什么？\n恭喜！你已经到达了第1级的终点。希望你已经编写了一些很棒的代码，但是关于海迪还有很多东西值得探索。\n\n在第一个级别中，您可能已经注意到 `{echo}` 命令一次只能保存一个信息位。\n例如，在餐厅探险活动中，你可以{echo}消费者想吃什么，或者想喝什么，但不能用一句话同时重复这两个问题。\n"
-                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
-                story_text_2: "如果玩家输入了一个汉堡和可乐，你不能说“那么你想要一个汉堡和可乐”，你必须分开两行。\n而且，`{echo}`命令只能把词语放在句子末尾。所以你没法说“你的汉堡马上就来！”。\n\n这在第2关中变了。在第2关，你会学到使用变量。这能让你保存多条信息，并且打印到任何你希望的地方。\n让我们前往下一关吧！\n"
-            2:
-                start_code: "{print} Let's go to the next level!"
-                story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
-            3:
-                start_code: "{print} Let's go to the next level!"
-                story_text: "## What's next?\nIn this level you've been practising with variables, but maybe you've come across this mistake.\n\nTry to run this code:\n```\nname {is} Sophie\n{print} My name is name\n```\nOf course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. \nIn the next level this problem is fixed by using quotation marks.\n"
-            4:
-                story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
-            5:
-                story_text: "## 下一个级别是什么？\n现在你已经达到了这一级的终点，所以你已经学习了`{ask}`和`{if}`。例如，您可以{ask}客人想吃什么。\n但是，您还不能计算出每个人晚餐的费用。\n\n在下一级中，我们可以在程序中使用加法，减法和乘法。通过这种方式，您可以计算每个人每一餐的费用，但您也可以添加一个折扣码，为您的朋友和家人提供折扣。\n在下一个级别中，我们的另一个选择是编写自己的数学游戏，让你的弟弟或妹妹学习乘法。\n去看看下一个级别！\n"
-                start_code: "{print} 'On to the next level!'"
-                example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
-            8:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 下一个级别是什么？\n干得好！你已经到达了另一个级别的终点！在此级别中，您已经学习了如何在 {if} 或 {repeat} 命令中使用多行代码。但是您还不能将两者结合起来...\n好消息！在下一级中，您将被允许将{if}命令嵌入{if}或{repeat}命令中。\n"
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            9:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 接下来呢？\n你做得很好！这关还有个小问题，你学会了如何重复同一行，但是如果你想让每一行略有不同又该如何。\nFor example if you want to sing the song '{if} you're happy and you know it'. It would look like this:\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
-            10:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-            11:
-                story_text: "## 接下来是什么？\n也许你已经在你的餐厅冒险活动中尝试使用小数。如果你这样做了，你可能注意到Hedy还不理解它们，总是把它们四舍五入。\n从下一级开始，你就可以使用小数啦。\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\n汉堡是5\n饮料是2\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' 总计 ' 元' 。\n```\n上面的代码有效，因为汉堡是5美元，饮料是2美元。但是，如果你多收50美分，程序就不能再工作了!就像下面的代码。\n```\n汉堡是5.50美元\n饮料是2.30美元\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' total ' 元' 。\n```\n进入下一级，让这段代码发挥作用!\n"
-            13:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 下一步是什么？ \n通过下面的程序，你可以计算出{if} （是否）你已经通过了学校的一个科目（所以，六级或以上）。 \n你可以看到这段代码的效率非常低，因为第5行的代码非常长。 \n所有从1到5的不同等级都必须单独编程。幸运的是，在下一级中，你将学习如何在没有这段很长的代码的情况下做到这一点！\n"
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
-            14:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 下一步是什么？\n在下面这个游戏中，已经有了一个代码，以确保玩家可以玩下去，只要他/她想...\n但这个代码是无效的，而且太长了。另外，{if} 玩家想玩101场而不是100场那会怎样？ \n你能玩无限场吗？ \n在下一级中，你将学习一个命令，使这一切变得更容易!\n"
-                example_code: "```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
-            15:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 下一步是什么？\n在下一级中，我们将向真正的Python代码前进。你还将学习如何找到两个列表项匹配在一起。\n这样你就可以编写一个代码，其中正确的动物被匹配到正确的声音。\n因为下面的两个代码...显然是无稽之谈!\n"
-                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
-            16:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## 下一步是什么？\n在下一个级别中，是时候使用新命令了。您可能已经注意到，在前面的一级中，只用`{if}` 和 `{else}` 有时还不够。\n例如，在此代码中：\n"
-                example_code: "```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
-                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-            6:
-                story_text: "## 下一步是什么？\n 干得好！你已经到达了这个级别的终点，这意味着你已经练习了`{if}`和`{else}`命令。你可能已经注意到你编写的代码越来越长。\n 例如，{if}您想要编写“祝你生日快乐”这首歌的程序。\n\n这是一遍又一遍地为大致相同的句子编写大量的代码。幸运的是，在下一个级别中，可以用`{repeat}`命令的解决这个问题，它允许您多次重复一行代码。\n"
-                start_code: "{print} 'On to the next level!'"
-                example_code: "```\n{print} '祝你生日快乐'\n{print} '祝你生日快乐'\n{print} '祝亲爱的Hedy生日快乐'\n{print} '祝你生日快乐'\n```\n"
-            7:
-                story_text: "## 接下来是什么？\n现在你已经学会了如何重复一行代码。这很方便，但这并不总是足够。有时你想一次重复多行代码。\n在下一级，允许你将几行代码组成一组，并一次性重复这一组代码！\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
-            12:
-                story_text: "## 下一步是什么？ \n在前面的级别中，你学会了如何将两个`{if}`命令互相嵌套。这很好用，但它确实让你编写了非常长的、不方便的代码，比如这个： \n\n在这个系统中，你必须同时给出正确的用户名和正确的密码。 \n在下一关中，你将学习`{and}` 命令，这将使这段代码变得更短，更容易理解! \n来看看吧!\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
-            18:
-                start_code: "{print} ('Great job!!!')"
-                story_text: "## 下一步是什么？ \n恭喜你！你已经到达了Hedy的最后一级。你在这里创建的代码可以被复制到真正的Python环境中，比如replit或PyCharm，你可以在那里继续学习！ \n但是请注意，Python只能读取英文命令，所以如果你一直在使用其他语言，你现在需要切换到英文。\n"
-            17:
-                story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
-                start_code: "{print} 'Lets go to the next level!'"
     parrot:
         name: 鹦鹉
         description: 创造属于你的在线宠物鹦鹉，它会学你说话！
@@ -1548,11 +1473,9 @@ adventures:
                 example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
             9:
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
                 example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
@@ -1571,10 +1494,7 @@ adventures:
                 story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
                 start_code: '# place your code here'
-            8:
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
-                start_code: '# place your code here'
+
         default_save_name: Pressit
         name: Press it!
         description: Try linking a keyboard key to a command!

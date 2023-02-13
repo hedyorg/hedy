@@ -75,6 +75,15 @@ body[dir='rtl'] #editor .ace_scroller {
     right: 32px !important;
 }
 
+/**
+ * This solves the Ace editor's background initially being white on Safari (until you click it)
+ *
+ * Not quite sure why, but it seems to help.
+ */
+.ace_scroller {
+    background-color: transparent !important;
+}
+
 #editor .ace_layer .ace_gutter-layer {
     width: 32px !important;
 }

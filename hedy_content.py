@@ -55,13 +55,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'parrot',
         'rock',
+        'haunted',
         'story',
         'turtle',
         'restaurant',
         'fortune',
-        'haunted',
-        'next',
-        'end'
     ],
     2: [
         'default',
@@ -70,23 +68,19 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'restaurant',
-        'turtle',
-        'next',
-        'end'
+        'turtle'
     ],
     3: [
         'default',
+        'dishes',
         'rock',
         'dice',
-        'dishes',
         'fortune',
         'turtle',
         'story',
         'parrot',
         'haunted',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     4: [
         'default',
@@ -98,9 +92,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     5: [
         'default',
@@ -114,9 +106,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
-        'pressit',
-        'next',
-        'end'
+        'pressit'
     ],
     6: [
         'default',
@@ -126,64 +116,54 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'calculator',
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     7: [
         'default',
         'story',
         'songs',
-        'turtle',
-        'dice',
         'dishes',
+        'dice',
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     8: [
         'default',
         'story',
-        'songs',
         'fortune',
+        'songs',
         'haunted',
         'restaurant',
-        'turtle',
-        'next',
-        'end'
+        'turtle'
     ],
     9: [
         'default',
         'rock',
         'story',
         'calculator',
-        'haunted',
         'restaurant',
-        'next',
-        'end'
+        'haunted',
+        'turtle',
+        'pressit'
     ],
     10: [
         'default',
-        'rock',
         'dishes',
+        'calculator',
+        'fortune',
+        'rock',
         'dice',
         'songs',
         'story',
-        'fortune',
         'restaurant',
-        'calculator',
-        'next',
-        'end'
     ],
     11: [
         'default',
         'years',
+        'calculator',
         'songs',
-        'haunted',
         'restaurant',
-        'next',
-        'end'
+        'haunted'
     ],
     12: [
         'default',
@@ -193,9 +173,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'calculator',
         'piggybank',
-        'secret',
-        'next',
-        'end'
+        'secret'
     ],
     13: [
         'default',
@@ -203,9 +181,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'secret',
         'rock',
         'story',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     14: [
         'default',
@@ -213,9 +189,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'piggybank',
         'quizmaster',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     15: [
         'default',
@@ -224,29 +198,21 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'rock',
         'calculator',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     16: [
         'default',
         'haunted',
         'songs',
-        'language',
-        'next',
-        'end'
+        'language'
     ],
     17: [
         'default',
         'tic',
-        'blackjack',
-        'next',
-        'end'
+        'blackjack'
     ],
     18: [
-        'default',
-        'next',
-        'end'
+        'default'
     ]
 }
 
@@ -317,15 +283,17 @@ class Commands(StructuredDataFile):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
 
 
-def deep_translate_keywords(x, kwlang):
+def deep_translate_keywords(yaml, keyword_language):
     """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
-    if isinstance(x, str):
-        return safe_format(x, **KEYWORDS.get(kwlang))
-    if isinstance(x, list):
-        return [deep_translate_keywords(e, kwlang) for e in x]
-    if isinstance(x, dict):
-        return {k: deep_translate_keywords(v, kwlang) for k, v in x.items()}
-    return x
+    if isinstance(yaml, str):
+        # this is used to localize adventures linked in slides (PR 3860)
+        yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
+        return safe_format(yaml, **KEYWORDS.get(keyword_language))
+    if isinstance(yaml, list):
+        return [deep_translate_keywords(e, keyword_language) for e in yaml]
+    if isinstance(yaml, dict):
+        return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
+    return yaml
 
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
@@ -410,9 +378,23 @@ class Tutorials(StructuredDataFile):
     def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
         if level not in ["intro", "teacher"]:
             level = int(level)
-        return deep_translate_keywords(self.file.get(level, {}).get(step), keyword_lang)
+        return deep_translate_keywords(self.file.get(level, {}).get('steps', {}).get(step), keyword_lang)
 
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Slides(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'content/slides/{self.language}.yaml')
+
+    def get_slides_for_level(self, level, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
+
+
+class NoSuchSlides:
+    def get_slides_for_level(self, level, keyword_lang):
         return {}
