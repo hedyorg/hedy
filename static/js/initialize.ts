@@ -1,20 +1,61 @@
-import { initializeApp } from './app';
+import { initializeApp, initializeCodePage, InitializeCodePageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
 import { initializeQuiz } from './quiz';
-import { APP_STATE } from './state';
+import { APP_STATE, setState } from './state';
 import { initializeTabs } from './tabs';
+import { initializeCustomizeClassPage, InitializeCustomizeClassPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
+  /**
+   * Current language
+   *
+   * Written: by every page, on page load.
+   * Used: on the code page, to do speech synthesis and to send to the server.
+   */
+  readonly lang: string;
+
+  /**
+   * Current level
+   *
+   * Written: by every page, on page load.
+   *
+   * Used: on the code page, to initialize the highlighter, to translate the program,
+   * to determine timeouts, to load the quiz iframe, to show the variable inspector,
+   * to show a debugger,  to load parsons exercises, to initialize a default save name.
+   */
+  readonly level: number | string;
+
+  /**
+   * Current keyword language
+   *
+   * Written: by every page, on page load.
+   *
+   * Used: set on the Ace editor, and then is used to do some magic that I don't
+   * quite understand.
+   */
+  readonly keyword_language: string;
+
   readonly logs?: boolean;
+
+  readonly javascriptPageOptions?: InitializePageOptions;
 }
+
+type InitializePageOptions = InitializeCodePageOptions | InitializeCustomizeClassPageOptions;
+
 
 /**
  * This function gets called by the HTML when the page is being initialized.
  */
-export function initialize(options: InitializeOptions={}) {
+export function initialize(options: InitializeOptions) {
+  setState({
+    lang: options.lang,
+    level: forceNumber(options.level),
+    keyword_language: options.keyword_language,
+  });
+
   setClientMessageLanguage(APP_STATE.lang);
 
   initializeApp();
@@ -23,12 +64,24 @@ export function initialize(options: InitializeOptions={}) {
   initializeTabs();
   initializeTutorial();
 
-  // initializing the teacher/customize class pages is done in a different
-  // file. That is not great, we should be using a parameter to this function
-  // probably, but for now that is what it is.
+  // The above initializations are often also page-specific
+  switch (options.javascriptPageOptions?.page) {
+    case 'code':
+      initializeCodePage(options.javascriptPageOptions);
+      break;
 
+    case 'customize-class':
+      initializeCustomizeClassPage(options.javascriptPageOptions);
+      break;
+  }
+
+  // FIXME: I think this might also be page-specific
   if (options.logs) {
     logs.initialize();
   }
 }
 
+function forceNumber(x: unknown): number {
+  if (typeof x === 'number') { return x; }
+  return parseInt(`${x}`, 10);
+}

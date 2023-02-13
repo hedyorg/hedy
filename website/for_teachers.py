@@ -253,6 +253,7 @@ class ForTeachersModule(WebsiteModule):
                 available_adventures[int(adventure['level'])].append(
                     {"name": adventure['id'], "from_teacher": True})
 
+
         return render_template(
             "customize-class.html",
             page_title=gettext("title_customize-class"),
@@ -265,7 +266,15 @@ class ForTeachersModule(WebsiteModule):
             available_adventures=available_adventures,
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
-        )
+            javascript_page_options=dict(
+                page='customize-class',
+                available_adventures_level_translation=_('available_adventures_level'),
+                teacher_adventures=teacher_adventures,
+                adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                adventure_names=adventure_names,
+                available_adventures=available_adventures,
+                class_id=Class['id'],
+            ))
 
     def purge_customizations(self, sorted_adventures, adventures):
         for _, adventure_list in sorted_adventures.items():

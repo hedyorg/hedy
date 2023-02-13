@@ -8,6 +8,7 @@ import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges }
 import { currentTab } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
+import { Adventure, Program } from './types';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
@@ -24,6 +25,8 @@ let pygameRunning = false;
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
+
+let adventures: Adventure[] = [];
 
 const pygame_suffix =
 `# coding=utf8
@@ -93,77 +96,34 @@ const slides_template = `
 `;
 
 
+export interface InitializeCodePageOptions {
+  readonly page: 'code';
+  adventures?: Adventure[];
+  loaded_program?: Program;
+}
+
+/**
+ * Initialize "global" parts of the main app
+ *
+ * Editor and such.
+ */
 export function initializeApp() {
   initializeSyntaxHighlighter();
+  initializeHighlightedCodeBlocks();
+}
 
+/**
+ * Initialize the actual code page
+ */
+export function initializeCodePage(options: InitializeCodePageOptions) {
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
 
+  // FIXME: This global shouldn't be necessary. Remove it.
+  adventures = options.adventures ?? [];
+
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
-
-  // Any code blocks we find inside 'turn-pre-into-ace' get turned into
-  // read-only editors (for syntax highlighting)
-  for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview)
-      .addClass('text-lg rounded overflow-x-hidden')
-      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-      .attr('lang', APP_STATE.keyword_language);
-
-    // Only turn into an editor if the editor scrolls into view
-    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-    onElementBecomesVisible(preview, () => {
-      const exampleEditor = turnIntoAceEditor(preview, true);
-
-      // Fits to content size
-      exampleEditor.setOptions({ maxLines: Infinity });
-      if ($(preview).hasClass('common-mistakes')) {
-        exampleEditor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true,
-          minLines: 5,
-        });
-      } else if ($(preview).hasClass('cheatsheet')) {
-        exampleEditor.setOptions({ minLines: 1 });
-      } else if ($(preview).hasClass('parsons')) {
-        exampleEditor.setOptions({
-          minLines: 1,
-          showGutter: false,
-          showPrintMargin: false,
-          highlightActiveLine: false
-        });
-      } else {
-        exampleEditor.setOptions({ minLines: 2 });
-      }
-
-      if (dir === "rtl") {
-          exampleEditor.setOptions({ rtl: true });
-      }
-
-      // Strip trailing newline, it renders better
-      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-      if (! $(preview).hasClass('no-copy-button')) {
-        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-        let symbol = "⇥";
-        if (dir === "rtl") {
-          symbol = "⇤";
-        }
-        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-          stopit();
-          clearOutput();
-        });
-      }
-
-      const levelStr = $(preview).attr('level');
-      if (levelStr) {
-        exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
-      }
-    });
-  }
 
   /**
    * Initialize the main editor and attach all the required event handlers
@@ -262,6 +222,73 @@ export function initializeApp() {
           $(".cheatsheet-menu").slideUp("medium");
       }
   });
+}
+
+function initializeHighlightedCodeBlocks() {
+  const dir = $("body").attr("dir");
+
+  // Any code blocks we find inside 'turn-pre-into-ace' get turned into
+  // read-only editors (for syntax highlighting)
+  for (const preview of $('.turn-pre-into-ace pre').get()) {
+    $(preview)
+      .addClass('text-lg rounded overflow-x-hidden')
+      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+      .attr('lang', APP_STATE.keyword_language);
+
+    // Only turn into an editor if the editor scrolls into view
+    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+    onElementBecomesVisible(preview, () => {
+      const exampleEditor = turnIntoAceEditor(preview, true);
+
+      // Fits to content size
+      exampleEditor.setOptions({ maxLines: Infinity });
+      if ($(preview).hasClass('common-mistakes')) {
+        exampleEditor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true,
+          minLines: 5,
+        });
+      } else if ($(preview).hasClass('cheatsheet')) {
+        exampleEditor.setOptions({ minLines: 1 });
+      } else if ($(preview).hasClass('parsons')) {
+        exampleEditor.setOptions({
+          minLines: 1,
+          showGutter: false,
+          showPrintMargin: false,
+          highlightActiveLine: false
+        });
+      } else {
+        exampleEditor.setOptions({ minLines: 2 });
+      }
+
+      if (dir === "rtl") {
+          exampleEditor.setOptions({ rtl: true });
+      }
+
+      // Strip trailing newline, it renders better
+      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
+      if (! $(preview).hasClass('no-copy-button')) {
+        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+        let symbol = "⇥";
+        if (dir === "rtl") {
+          symbol = "⇤";
+        }
+        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+          stopit();
+          clearOutput();
+        });
+      }
+
+      const levelStr = $(preview).attr('level');
+      if (levelStr) {
+        exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+      }
+    });
+  }
 }
 
 export function getHighlighter(level: number) {
@@ -622,7 +649,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
     // The name of the program might have been changed by the server, so we use the name stated by the server.
     $ ('#program_name').val (response.name);
-    APP_STATE.adventures?.map (function (adventure) {
+    adventures?.map (function (adventure) {
       if (adventure.short_name === (adventure_name || 'level')) {
         adventure.loaded_program = {name: response.name, code: code};
       }
@@ -2174,9 +2201,9 @@ export function downloadSlides(level: number) {
     var slides = innerDoc.getElementsByTagName('section');
     var slidesHTML = ''
     for (let i = 0; i < slides.length; i++) {
-      var innerIframe = slides[i].getElementsByTagName('iframe');        
+      var innerIframe = slides[i].getElementsByTagName('iframe');
       for (let j = 0; j < innerIframe.length; j++) {
-        var a = document.createElement('a');          
+        var a = document.createElement('a');
         a.href = 'https://www.hedy.org' + innerIframe[j].getAttribute('src');
         a.appendChild(document.createTextNode(a.href));
         slides[i].appendChild(a);
@@ -2184,7 +2211,7 @@ export function downloadSlides(level: number) {
       }
       slidesHTML += '\n'+ slides[i].outerHTML;
     }
-    
+
     var template = slides_template.replace('{replace}', slidesHTML);
     var zip = JSZip();
     zip.file('index.html', template);
@@ -2207,7 +2234,7 @@ function download(data: any, filename: any, type: any) {
   a.click();
   setTimeout(function() {
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);  
+    window.URL.revokeObjectURL(url);
   }, 0);
 }
 const onElementBecomesVisible = (() => {

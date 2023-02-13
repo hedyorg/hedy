@@ -3,9 +3,8 @@ import { ClientMessages } from './client-messages';
 /**
  * The global state we keep
  *
- * This is in desperate need of cleaning up!!
- *
- * This shouldn't contain as much as it does.
+ * This should contain as little as possible: preferably, we know
+ * for each bit of code what data it needs, and we pass it directly.
  */
 export interface State {
   /**
@@ -36,48 +35,6 @@ export interface State {
    * quite understand.
    */
   keyword_language: string;
-
-  /**
-   * The adventure data available on the current page
-   *
-   * Written: We set Adventure.loaded_program in app.ts to the
-   * code of the loaded program, on load.
-   *
-   * Used: when switching tabs, to set one of the programs values.
-   */
-  adventures?: Adventure[];
-
-  /**
-   * Load program info
-   *
-   * Written: on page load, if a program has been loaded by ID.
-   *
-   * Used: to initialize the code page, and the viewer.
-   */
-  loaded_program?: Program;
-}
-
-export interface Adventure {
-  example_code: string;
-  short_name: string;
-  loaded_program?: Program;
-  default_save_name: string;
-  start_code: string;
-  extra_stories?: ExtraStory[];
-  image?: string | null;
-  name: string; // Translated name
-  text?: string;
-}
-
-export interface ExtraStory {
-  example_code?: string;
-  text?: string;
-}
-
-export interface Program {
-  name: string;
-  code: string;
-  adventure_name?: string;
 }
 
 /**
@@ -94,24 +51,13 @@ const THE_STATE: State = {
  */
 export const APP_STATE: Readonly<State> = THE_STATE;
 
-const CONVERTERS: Partial<{ [K in keyof State]: (x: unknown) => State[K] }> = {
-  level: (x: unknown): number => {
-    if (typeof x === 'number') { return x; }
-    return parseInt(`${x}`, 10);
-  }
-};
-
 /**
  * Pass some state in from the HTML page
  */
-export function passStateFromHtml(stateUpdate: Partial<State>) {
+export function setState(stateUpdate: Partial<State>) {
   for (const [key, value] of Object.entries(stateUpdate)) {
-    (THE_STATE as any)[key] = ((CONVERTERS as any)[key] ?? identity)(value);
+    (THE_STATE as any)[key] = value;
   }
-}
-
-function identity<A>(x: A): A {
-  return x;
 }
 
 function unloadHandler(event: BeforeUnloadEvent) {

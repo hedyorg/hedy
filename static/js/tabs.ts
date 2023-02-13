@@ -1,7 +1,7 @@
 import { modal } from './modal';
 import { theGlobalEditor } from './app';
 import {loadParsonsExercise} from "./parsons";
-import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
+import { APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
 import { ClientMessages } from './client-messages';
 
 let _currentTab: string | undefined;

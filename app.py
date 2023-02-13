@@ -880,7 +880,12 @@ def tutorial_index():
         parsons_exercises=parsons,
         cheatsheet=cheatsheet,
         adventures_per_level=adventures_per_level,
-        blur_button_available=False)
+        blur_button_available=False,
+        # See initialize.ts
+        javascript_page_options = dict(
+            page='code',
+            adventures=adventures,
+        ))
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -1099,8 +1104,13 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures_per_level=adventures_per_level,
         cheatsheet=cheatsheet,
-        blur_button_available=False)
-
+        blur_button_available=False,
+        # See initialize.ts
+        javascript_page_options = dict(
+            page='code',
+            adventures=adventures,
+            loaded_program=loaded_program,
+        ))
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
@@ -1168,8 +1178,8 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
-    if not adventure:
+    adventures = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
+    if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level - 1 if [x for x in load_adventures_for_level(
@@ -1182,20 +1192,25 @@ def get_specific_adventure(name, level, mode):
     raw = mode == 'raw'
 
     return render_template("code-page.html",
-                           specific_adventure=True,
-                           level_nr=str(level),
-                           commands=commands,
-                           level=level,
-                           prev_level=prev_level,
-                           next_level=next_level,
-                           customizations=[],
-                           hide_cheatsheet=None,
-                           enforce_developers_mode=None,
-                           teacher_adventures=[],
-                           adventures=adventure,
-                           latest=version(),
-                           raw=raw,
-                           blur_button_available=False)
+                            specific_adventure=True,
+                            level_nr=str(level),
+                            commands=commands,
+                            level=level,
+                            prev_level=prev_level,
+                            next_level=next_level,
+                            customizations=[],
+                            hide_cheatsheet=None,
+                            enforce_developers_mode=None,
+                            teacher_adventures=[],
+                            adventures=adventures,
+                            latest=version(),
+                            raw=raw,
+                            blur_button_available=False,
+                            # See initialize.ts
+                            javascript_page_options = dict(
+                                page='code',
+                                adventures=adventures,
+                            ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
