@@ -1542,14 +1542,29 @@ export function load_variables(variables: any) {
 export function highlight_variables(variables: any) {
   if (variable_view === true) {
     variables = clean_variables(variables);
+    let re = new RegExp('');
+
     for (const i in variables) {
       if (variables[i][1]) {
         // Only highlight if the variable contains any data (and is not undefined)
         let variableName = variables[i][0];
-        let re = new RegExp(`${variableName}`, 'g')
 
-        $(`#code_editor span:contains('${variableName}')`).html(function(_, html) {
-           return html.replace(re, `<span class="ace_hedy_variable">${variableName}</span>`);
+        // @ts-ignore
+        if (window.State.level >= 4) {
+          // Make sure not to highlight text with same word - ' & " negative lookback
+          re = new RegExp(`(?<!.*'.*)(?<!.*".*)${variableName}`, 'g')
+        } else {
+          re = new RegExp(`${variableName}`, 'g')
+        }
+
+        $(`#code_editor span:contains('${variableName}')`).html(function(this, _, html) {
+          // @ts-ignore
+          if (window.State.level < 4)
+            // @ts-ignore
+            if (this.parentElement.textContent.replace($(this).text(),'').startsWith(`${variableName} is`))
+              return html;
+
+          return html.replace(re, `<span class="ace_hedy_variable">${variableName}</span>`);
         });
       }
     }
