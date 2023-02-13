@@ -40,7 +40,8 @@
     {% else %}
       <!-- Not logged in -->
       <li class="menubar-item dropdown relative z-20">
-          <a class="menubar-text border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');">
+          {# Needs a 'block' because it contains a flexbox child #}
+          <a class="menubar-text block border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>

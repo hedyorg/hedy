@@ -55,11 +55,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'parrot',
         'rock',
+        'haunted',
         'story',
         'turtle',
         'restaurant',
         'fortune',
-        'haunted'
     ],
     2: [
         'default',
@@ -72,9 +72,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     3: [
         'default',
+        'dishes',
         'rock',
         'dice',
-        'dishes',
         'fortune',
         'turtle',
         'story',
@@ -160,9 +160,10 @@ ADVENTURE_ORDER_PER_LEVEL = {
     11: [
         'default',
         'years',
+        'calculator',
         'songs',
-        'haunted',
-        'restaurant'
+        'restaurant',
+        'haunted'
     ],
     12: [
         'default',
