@@ -733,7 +733,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
   $(document).ready(function(){
       // Use this to make sure that we return a prompt when a user leaves the page without saving
-      $( "input" ).change(function() {
+      $( "input" ).on('change', function() {
         markUnsavedChanges();
       });
 

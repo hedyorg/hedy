@@ -83,7 +83,7 @@ export function request_teacher_account() {
 // *** User forms ***
 
 export function initializeFormSubmits() {
-  $('form#signup').submit(function(e) {
+  $('form#signup').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
           type: 'POST',
@@ -98,7 +98,7 @@ export function initializeFormSubmits() {
         });
   });
 
-  $('form#login').submit(function(e) {
+  $('form#login').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST',
@@ -115,7 +115,7 @@ export function initializeFormSubmits() {
     });
   });
 
-  $('form#profile').submit(function(e) {
+  $('form#profile').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST', url: '/profile',
@@ -133,7 +133,7 @@ export function initializeFormSubmits() {
     });
   });
 
-  $('form#change_password').submit(function(e) {
+  $('form#change_password').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST',
@@ -148,7 +148,7 @@ export function initializeFormSubmits() {
     });
   });
 
-  $('form#recover').submit(function(e) {
+  $('form#recover').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST', url: '/auth/recover',
@@ -162,7 +162,7 @@ export function initializeFormSubmits() {
     });
   });
 
-  $('form#reset').submit(function(e) {
+  $('form#reset').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST', url: '/auth/reset',
@@ -179,7 +179,7 @@ export function initializeFormSubmits() {
     });
   });
 
-  $('form#public_profile').submit(function(e) {
+  $('form#public_profile').on('submit', function(e) {
     e.preventDefault();
     $.ajax ({
       type: 'POST',
@@ -203,7 +203,7 @@ export function initializeFormSubmits() {
 
   // *** LOADERS ***
 
-  $("#language").change(function () {
+  $("#language").on('change', function () {
       const lang = $(this).val();
       $('#keyword_language').val("en");
       if (lang == "en" || !($('#' + lang + '_option').length)) {
