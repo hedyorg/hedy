@@ -493,13 +493,13 @@ class TestsLevel5(HedyTester):
         else
         print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
-        expected = textwrap.dedent("""\
-        people = ['mom', 'dad', 'Emma', 'Sophie']
-        dishwasher = random.choice(people)
-        if dishwasher == 'Sophie':
-          print(f'too bad I have to do the dishes')
-        else:
-          print(f'luckily no dishes because{dishwasher}is already washing up')""")
+        expected = HedyTester.dedent("people = ['mom', 'dad', 'Emma', 'Sophie']",
+                                     HedyTester.list_access_transpiled('random.choice(people)'),
+                                     "dishwasher = random.choice(people)",
+                                     "if dishwasher == 'Sophie':",
+                                     ("print(f'too bad I have to do the dishes')", '  '),
+                                     "else:",
+                                     ("print(f'luckily no dishes because{dishwasher}is already washing up')", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -697,8 +697,9 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
             HedyTester.turn_transpiled('direction', self.level),
             "if direction == '180':",
             (HedyTester.forward_transpiled(100, self.level), '  '))
@@ -714,9 +715,10 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)
-            if direction == '180':""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
+            "if direction == '180':",
             (HedyTester.forward_transpiled('direction', self.level), '  '),
             "else:",
             (HedyTester.turn_transpiled('direction', self.level), '  '))
@@ -729,10 +731,10 @@ class TestsLevel5(HedyTester):
         friend is friends at 2
         print friend""")
 
-        expected = textwrap.dedent("""\
-        friends = ['Hedy', 'Lola', 'Frida']
-        friend = friends[2-1]
-        print(f'{friend}')""")
+        expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
+                                     HedyTester.list_access_transpiled('friends[2-1]'),
+                                     "friend = friends[2-1]",
+                                     "print(f'{friend}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -834,9 +836,26 @@ class TestsLevel5(HedyTester):
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'it is a letter key')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_variable(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed print 'it is a letter key'""")
+
+        expected = HedyTester.dedent("""\
+        x = 'a'
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == x:
               print(f'it is a letter key')
               break""")
 
@@ -859,16 +878,8 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'x':
               print(f'first key')
               break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              print(f'first key')
-              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
-              print(f'second key')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'y':
               print(f'second key')
               break""")
 
@@ -890,10 +901,6 @@ class TestsLevel5(HedyTester):
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'it is a letter key')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              print(f'it is a letter key')
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
@@ -913,10 +920,6 @@ class TestsLevel5(HedyTester):
           if event.type == pygame.KEYDOWN:
             if event.unicode == '1':
               print(f'it is a number key')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == '1':
-              print(f'it is a number key')
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
@@ -935,10 +938,6 @@ class TestsLevel5(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
-              print(f'trailing spaces!')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
               print(f'trailing spaces!')
               break""")
 
@@ -1110,13 +1109,6 @@ class TestsLevel5(HedyTester):
                 HedyTester.forward_transpiled(50, self.level),
                 14, True)
               }
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              {HedyTester.indent(
-                HedyTester.forward_transpiled(50, self.level),
-                14, True)
-              }
               break""")
 
         self.multi_level_tester(
@@ -1144,13 +1136,6 @@ class TestsLevel5(HedyTester):
                 HedyTester.turn_transpiled(90, self.level),
                 14, True)
               }
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              {HedyTester.indent(
-                HedyTester.turn_transpiled(90, self.level),
-                14, True)
-              }
               break""")
 
         self.multi_level_tester(
@@ -1174,13 +1159,6 @@ class TestsLevel5(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
-              {HedyTester.indent(
-                HedyTester.turtle_color_command_transpiled('red'),
-                14, True)
-              }
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
               {HedyTester.indent(
                 HedyTester.turtle_color_command_transpiled('red'),
                 14, True)
@@ -1245,24 +1223,12 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'ض':
               print(f'arabic')
               break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'ض':
-              print(f'arabic')
-              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'ש':
               print(f'hebrew')
               break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'ש':
-              print(f'hebrew')
-              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'й':
-              print(f'russian')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'й':
               print(f'russian')
               break""")
 

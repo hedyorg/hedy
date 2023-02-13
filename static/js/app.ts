@@ -3,6 +3,7 @@ import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
+import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
@@ -10,89 +11,10 @@ let markers: Markers;
 
 let last_code: string;
 
-const turtle_prefix =
-`# coding=utf8
-import random, time, turtle
-t = turtle.Turtle()
-t.shape("turtle")
-t.hideturtle()
-t.penup()
-t.left(90)
-t.pendown()
-t.speed(3)
-t.showturtle()
-`;
-
-const pygame_prefix =
-`# coding=utf8
-import pygame
-import buttons
-pygame.init()
-canvas = pygame.display.set_mode((711,300))
-canvas.fill(pygame.Color(247, 250, 252, 255))
-pygame_end = False
-
-button_list = []
-def create_button(name):
-  if name not in button_list:
-    button_list.append(name)
-    buttons.add(name)
-
-`;
-
 const pygame_suffix =
 `# coding=utf8
 pygame_end = True
 pygame.quit()
-`;
-
-const normal_prefix =
-`# coding=utf8
-import random, time
-global int_saver
-global convert_numerals # needed for recursion to work
-int_saver = int
-def int(s):
-  if isinstance(s, str):
-    numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
-    latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
-    return int_saver(latin_numerals)
-  return(int_saver(s))
-
-def convert_numerals(alphabet, number):
-  numerals_dict_return = {
-    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
-    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
-    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
-    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
-    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
-    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
-    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
-    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
-    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
-    'Telugu':['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
-    'Burmese':['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
-    'Tibetan':['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
-    'Mongolian':['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
-    'Khmer':['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
-    'Thai':['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
-    'Lao':['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
-    'Javanese':['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
-    'Arabic':['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
-    'Persian':['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
-    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
-
-  numerals_list = numerals_dict_return[alphabet]
-  number=str(number)
-
-  number = str(number)
-  if number.isnumeric():
-    numerals_list = numerals_dict_return[alphabet]
-    all_numerals_converted = [numerals_list[int(digit)] for digit in number]
-    return ''.join(all_numerals_converted)
-  else:
-    return number
 `;
 
 // Close the dropdown menu if the user clicks outside of it
@@ -102,6 +24,37 @@ $(document).on("click", function(event){
         $(".cheatsheet-menu").slideUp("medium");
     }
 });
+
+const onElementBecomesVisible = (() => {
+  const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
+
+  function isInView(elem: HTMLElement) {
+    var docViewTop = $(window).scrollTop()!;
+    var docViewBottom = docViewTop + $(window).height()!;
+    var elemTop = $(elem).offset()!.top;
+    return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  $(window).on('scroll', () => {
+    for (let i = 0; i < SCROLL_HANDLERS.length; ) {
+      const [element, handler] = SCROLL_HANDLERS[i];
+      if (isInView(element)) {
+        handler();
+        SCROLL_HANDLERS.splice(i, 1);
+      } else {
+        i += 1;
+      }
+    }
+  });
+
+  return function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
+    if (isInView(element)) {
+      handler();
+    } else {
+      SCROLL_HANDLERS.push([element, handler]);
+    }
+  }
+})();
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -119,52 +72,62 @@ $(document).on("click", function(event){
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview).addClass('text-lg rounded');
-    // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-    $(preview).attr('lang', <string>window.State.keyword_language);
-    $(preview).addClass('overflow-x-hidden');
-    const exampleEditor = turnIntoAceEditor(preview, true);
+    $(preview)
+      .addClass('text-lg rounded overflow-x-hidden')
+      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+      .attr('lang', <string>window.State.keyword_language);
 
-    // Fits to content size
-    exampleEditor.setOptions({ maxLines: Infinity });
-    if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 5 });
-    } else if ($(preview).hasClass('cheatsheet')) {
-      exampleEditor.setOptions({ minLines: 1 });
-    } else if ($(preview).hasClass('parsons')) {
-      exampleEditor.setOptions({
-        minLines: 1,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-    } else {
-      exampleEditor.setOptions({ minLines: 2 });
-    }
+    // Only turn into an editor if the editor scrolls into view
+    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+    onElementBecomesVisible(preview, () => {
+      const exampleEditor = turnIntoAceEditor(preview, true);
 
-    if (dir === "rtl") {
-         exampleEditor.setOptions({ rtl: true });
-    }
-    // Strip trailing newline, it renders better
-    exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-    // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-    if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-      let symbol = "⇥";
-      if (dir === "rtl") {
-        symbol = "⇤";
+      // Fits to content size
+      exampleEditor.setOptions({ maxLines: Infinity });
+      if ($(preview).hasClass('common-mistakes')) {
+        exampleEditor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true,
+          minLines: 5,
+        });
+      } else if ($(preview).hasClass('cheatsheet')) {
+        exampleEditor.setOptions({ minLines: 1 });
+      } else if ($(preview).hasClass('parsons')) {
+        exampleEditor.setOptions({
+          minLines: 1,
+          showGutter: false,
+          showPrintMargin: false,
+          highlightActiveLine: false
+        });
+      } else {
+        exampleEditor.setOptions({ minLines: 2 });
       }
-      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
-        theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-        update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-        stopit();
-        clearOutput();
-      });
-    }
-    if($(preview).attr('level')){
-      let level = String($(preview).attr('level'));
-      exampleEditor.session.setMode(getHighlighter(level));
-    }
+
+      if (dir === "rtl") {
+          exampleEditor.setOptions({ rtl: true });
+      }
+      // Strip trailing newline, it renders better
+      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
+      if (! $(preview).hasClass('no-copy-button')) {
+        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+        let symbol = "⇥";
+        if (dir === "rtl") {
+          symbol = "⇤";
+        }
+        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+          stopit();
+          clearOutput();
+        });
+      }
+      if($(preview).attr('level')){
+        let level = String($(preview).attr('level'));
+        exampleEditor.session.setMode(getHighlighter(level));
+      }
+    });
   }
 
   /**
@@ -174,7 +137,7 @@ $(document).on("click", function(event){
     if (!$editor.length) return;
 
     // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
+    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
     theGlobalEditor = editor;
     theGlobalEditor.setShowPrintMargin(false);
     theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
@@ -267,51 +230,6 @@ $(document).on("click", function(event){
     return editor;
   }
 
-  /**
-   * Turn an HTML element into an Ace editor
-   */
-  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
-    if (isReadOnly) {
-      // Remove the cursor
-      editor.renderer.$cursorLayer.element.style.display = "none";
-      editor.setOptions({
-        readOnly: true,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-      // When it is the main editor -> we want to show line numbers!
-      if (element.getAttribute('id') === "editor") {
-        editor.setOptions({
-          showGutter: true
-        });
-      }
-      if ($(element).hasClass('common-mistakes')) {
-        $(element).height("22rem");
-        editor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true
-        });
-      }
-    }
-
-    // a variable which turns on(1) highlighter or turns it off(0)
-    var highlighter = 1;
-
-    if (highlighter == 1) {
-      // Everything turns into 'ace/mode/levelX', except what's in
-      // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (window.State.level) {
-        const mode = getHighlighter(window.State.level);
-        editor.session.setMode(mode);
-      }
-    }
-
-    return editor;
-  }
 })();
 
 export function getHighlighter(level: string) {
@@ -516,7 +434,18 @@ export function saveMachineFiles() {
 //   }
 //}
 
+
+// We've observed that this code may gets invoked 100s of times in quick succession. Don't
+// ever push the same achievement more than once per page load to avoid this.
+const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
+
 export function pushAchievement(achievement: string) {
+  if (ACHIEVEMENTS_PUSHED[achievement]) {
+      console.error('Achievement already pushed, this may be a programming issue: ', achievement);
+      return;
+  }
+  ACHIEVEMENTS_PUSHED[achievement] = true;
+
   $.ajax({
     type: 'POST',
     url: '/achievements/push-achievement',
@@ -983,7 +912,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   outputDiv.append(variables);
 
   const storage = window.localStorage;
-  let skulptExternalLibraries:{[index: string]:any} = {};
+  let skulptExternalLibraries:{[index: string]:any} = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
+  };
   let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
@@ -1016,6 +949,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   if (hasPygame){
     skulptExternalLibraries = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
       './pygame.js': {
         path: "/vendor/pygame_4_skulpt/init.js",
       },
@@ -1174,6 +1110,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
+    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1703,110 +1640,124 @@ function createModal(level:number ){
   let title = ErrorMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
-export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
-    if (isReadOnly) {
+
+/**
+ * Turn an HTML element into an Ace editor
+ */
+export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): AceAjax.Editor {
+  const editor = ace.edit(element);
+  editor.setTheme("ace/theme/monokai");
+  if (isReadOnly) {
+    // Remove the cursor
+    editor.renderer.$cursorLayer.element.style.display = "none";
+    editor.setOptions({
+      readOnly: true,
+      showGutter: false,
+      showPrintMargin: false,
+      highlightActiveLine: false
+    });
+    // When it is the main editor -> we want to show line numbers!
+    if (isMainEditor) {
       editor.setOptions({
-        readOnly: true,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
+        showGutter: true
       });
     }
-
-    // a variable which turns on(1) highlighter or turns it off(0)
-    var highlighter = 1;
-
-    if (highlighter == 1) {
-      // Everything turns into 'ace/mode/levelX', except what's in
-      // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (window.State.level) {
-        const mode = getHighlighter(window.State.level);
-        editor.session.setMode(mode);
-      }
-    }
-    return editor;
   }
 
-  function initializeModalEditor($editor: JQuery) {
-    if (!$editor.length) return;
-    // We expose the editor globally so it's available to other functions for resizing
-    let editor = turnIntoAceEditor($editor.get(0)!, true);
-    theModalEditor = editor;
-    error.setEditor(editor);
-    //small timeout to make sure the call with fixed code is complete.
-    setTimeout(function(){}, 2000);
+  // a variable which turns on(1) highlighter or turns it off(0)
+  var highlighter = 1;
 
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // Load existing code from session, if it exists
-    const storage = window.sessionStorage;
-    if (storage) {
-      const levelKey = $editor.data('lskey');
-        let tempIndex = 0;
-        let resultString = "";
-
-        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-          let tempString = ""
-          for (let i = 0; i < resultString.length + 1; i++) {
-            setTimeout(function() {
-              editor.setValue(tempString,tempIndex);
-              tempString += resultString[tempIndex];
-              tempIndex++;
-            }, 150 * i);
-          }
-        }
-        else{
-          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
-          editor.setValue(resultString);
-        }
+  if (highlighter == 1) {
+    // Everything turns into 'ace/mode/levelX', except what's in
+    // this table. Yes the numbers are strings. That's just JavaScript for you.
+    if (window.State.level) {
+      const mode = getHighlighter(window.State.level);
+      editor.session.setMode(mode);
     }
-
-    window.onbeforeunload = () => {
-      // The browser doesn't show this message, rather it shows a default message.
-      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return ErrorMessages['Unsaved_Changes'];
-      } else {
-        return undefined;
-      }
-    };
-
-    // *** KEYBOARD SHORTCUTS ***
-
-    let altPressed: boolean | undefined;
-
-    // alt is 18, enter is 13
-    window.addEventListener ('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!window.State.level || !window.State.lang) {
-          throw new Error('Oh no');
-        }
-        runit (window.State.level, window.State.lang, "", function () {
-          $ ('#output').focus ();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-        editor.focus ();
-        editor.navigateFileEnd ();
-      }
-    });
-    window.addEventListener ('keyup', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-    return editor;
   }
+
+  return editor;
+}
+
+function initializeModalEditor($editor: JQuery) {
+  if (!$editor.length) return;
+  // We expose the editor globally so it's available to other functions for resizing
+  let editor = turnIntoAceEditor($editor.get(0)!, true);
+  theModalEditor = editor;
+  error.setEditor(editor);
+  //small timeout to make sure the call with fixed code is complete.
+  setTimeout(function(){}, 2000);
+
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const levelKey = $editor.data('lskey');
+      let tempIndex = 0;
+      let resultString = "";
+
+      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+        let tempString = ""
+        for (let i = 0; i < resultString.length + 1; i++) {
+          setTimeout(function() {
+            editor.setValue(tempString,tempIndex);
+            tempString += resultString[tempIndex];
+            tempIndex++;
+          }, 150 * i);
+        }
+      }
+      else{
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+        editor.setValue(resultString);
+      }
+  }
+
+  window.onbeforeunload = () => {
+    // The browser doesn't show this message, rather it shows a default message.
+    if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
+      return ErrorMessages['Unsaved_Changes'];
+    } else {
+      return undefined;
+    }
+  };
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed: boolean | undefined;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      if (!window.State.level || !window.State.lang) {
+        throw new Error('Oh no');
+      }
+      runit (window.State.level, window.State.lang, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+  return editor;
+}
+
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
@@ -1912,13 +1863,6 @@ export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
   $('#image').val(image);
-}
-
-export function filter_programs() {
-  const level = $('#explore_page_level').val();
-  const adventure = $('#explore_page_adventure').val();
-  const language = $('#explore_page_language').val();
-  window.open('?level=' + level + "&adventure=" + adventure + "&lang=" + language, "_self");
 }
 
 export function filter_user_programs(username: string, own_request?: boolean) {

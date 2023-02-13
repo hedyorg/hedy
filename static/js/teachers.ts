@@ -348,25 +348,6 @@ export function save_customizations(class_id: string) {
             levels.push(<string>$(this).val());
         }
     });
-    let adventures: Record<string, string[]> = {};
-    $('.adventure_keys').each(function() {
-        const name = <string>$(this).attr('adventure') as string;
-        adventures[name] = [];
-    });
-    $('.adventure_level_input').each(function() {
-        const name = <string>$(this).attr('adventure');
-        let current_list = adventures[name];
-        if ($(this).prop("checked")) {
-            current_list.push(<string>$(this).attr('level'));
-            adventures[name] = current_list;
-        }
-    });
-    let teacher_adventures: string[] = [];
-    $('.teacher_adventures_checkbox').each(function() {
-        if ($(this).prop("checked")) {
-            teacher_adventures.push(<string>$(this).attr('id'));
-        }
-    });
     let other_settings: string[] = [];
     $('.other_settings_checkbox').each(function() {
         if ($(this).prop("checked")) {
@@ -388,16 +369,28 @@ export function save_customizations(class_id: string) {
             });
         }
     });
+    let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
+    $('#sortadventures').children().each(function() {
+        const id = $(this).attr('id')!;
+        const level = id.split('-')[1]!;
+        sorted_adventures[level] = [];
+        $('#'+id).children().each(function() {
+            const level : string = $(this).attr('level')!;
+            const adventure = $(this).attr('adventure')!;
+            const from_teacher = $(this).attr('from-teacher') === "true";
+            sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
+        });
+    });
+
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
           levels: levels,
           opening_dates: opening_dates,
-          adventures: adventures,
-          teacher_adventures: teacher_adventures,
           other_settings: other_settings,
-          level_thresholds: level_thresholds
+          level_thresholds: level_thresholds,
+          sorted_adventures: sorted_adventures
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -434,6 +427,29 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
             $('.opening_date_input').val('');
+            $('#sortadventures').children().each(
+              function() {
+                $(this).empty();
+                const level = $(this).attr('id')!.split('-')[1];
+                for (let i = 0; i < window.State.adventures_default_order![level].length; i++) {
+                  // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
+                  const div =
+                  `
+                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${window.State.adventures_default_order![level][i]}" level="${level}" from-teacher="false">
+                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                    ${window.State.adventure_names![window.State.adventures_default_order![level][i]]}
+                  </div>
+                  `
+                  $(this).append(div);
+                }
+                drag_list(document.getElementById("level-"+level));
+            });
+            for (let i = 1; i <= 18; i++) {
+              window.State.available_adventures![i] = [];
+            }
+            for (let i = 0; i < window.State.teacher_adventures!.length; i++) {
+              window.State.available_adventures![window.State.teacher_adventures![i]['level']].push({'name': window.State.teacher_adventures![i]['id'], 'from_teacher': true});
+            }
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
@@ -457,7 +473,7 @@ export function select_all_levels_adventure(adventure_name: string) {
     });
 }
 
-export function select_all_level_adventures(level: string) {
+export function enable_level(level: string) {
     window.State.unsaved_changes = true;
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
@@ -474,6 +490,21 @@ export function select_all_level_adventures(level: string) {
         $('#opening_date_level_' + level).removeClass('hidden');
         $('#opening_date_level_' + level).find('input').val('');
         $('#opening_date_level_' + level).find('input').prop({type:"text"});
+        $("#select-"+level).removeClass("hidden");
+        let shown : boolean = false;
+        $("div.adventures-tab").each(function() {
+          if($(this).attr('style') === "display: flex;") {
+            shown = true;
+          }
+        });
+        // if no level is shown, it means current level was the one selected
+        if (!shown) {
+          $("#level-"+level).show({
+            start: function() {
+                $(this).css('display', 'flex');
+            }
+        });
+        }
     } else {
         $('.adventure_level_' + level).each(function () {
             $(this).prop("checked", false);
@@ -481,7 +512,11 @@ export function select_all_level_adventures(level: string) {
         });
         $('#level_button_' + level).removeClass('green-btn');
         $('#level_button_' + level).addClass('blue-btn');
-
+        // if this level was shown, hide it
+        if($("#level-"+level).attr('style') === "display: flex;") {
+          $("div.adventures-tab").hide();
+        }
+        $("#select-"+level).addClass("hidden");
         // We also have to remove this level from the "Opening dates" section
         $('#opening_date_level_' + level).addClass('hidden');
     }
@@ -616,4 +651,106 @@ function generateRandomString(length: number) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+}
+
+// Got from https://code-boxx.com/drag-drop-sortable-list-javascript/
+export function drag_list (target: any) {
+  let items = target.getElementsByTagName("div")
+  let current : any = null;
+  for (let i of items) {
+
+    i.ondragstart = () => {
+      current = i;
+      for (let it of items) {
+        if (it != current) { it.classList.add("drop-adventures-hint"); }
+      }
+    };
+
+    i.ondragenter = () => {
+      if (i != current) { i.classList.add("drop-adventures-active"); }
+    };
+
+    i.ondragleave = () => {
+      i.classList.remove("drop-adventures-active");
+    };
+
+    i.ondragend = () => { for (let it of items) {
+        it.classList.remove("drop-adventures-hint");
+        it.classList.remove("drop-adventures-active");
+    }};
+
+    i.ondragover = (evt: any) => { evt.preventDefault(); };
+
+    i.ondrop = (evt: any) => {
+      evt.preventDefault();
+      if (i != current) {
+        let currentpos = 0, droppedpos = 0;
+        for (let it=0; it<items.length; it++) {
+          if (current == items[it]) { currentpos = it; }
+          if (i == items[it]) { droppedpos = it; }
+        }
+        if (currentpos < droppedpos) {
+          i.parentNode.insertBefore(current, i.nextSibling);
+        } else {
+          i.parentNode.insertBefore(current, i);
+        }
+      }
+    };
+  }
+}
+
+export function initializeCustomizeClassPage(available_adventures_level_translation: string) {
+
+  $(document).ready(function(){
+      $('#adventures').on('change', function(){
+          var level = $(this).val() as string;
+          $("div.adventures-tab").hide();
+          $("#level-"+level).show({
+              start: function() {
+                  $(this).css('display', 'flex');
+              }
+          });
+          $('#available').empty();
+          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+          const adventures = window.State.available_adventures![level];
+          for(let i = 0; i < adventures.length; i++) {
+            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${window.State.adventure_names![adventures[i]['name']]}</option>`);
+          }
+          drag_list(document.getElementById("level-"+level));
+      });
+  });
+
+  $('#sortadventures').on('click', 'span', (function(event){
+      event.preventDefault();
+      const adventure = $(this).parent().attr('adventure') as string;
+      const level = $(this).parent().attr('level') as string;
+      const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
+      if (!window.State.available_adventures![level]) {
+        throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
+      }
+      window.State.available_adventures![level].push({"name": adventure, "from_teacher": from_teacher});
+      $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${window.State.adventure_names![adventure]}</option>`);
+      $(this).parent().remove();
+      window.State.unsaved_changes = true;
+  }));
+  $(document).ready(function(){
+      $('#available').on('change', function(){
+          const values = ($(this).val() as string).split('-');
+          const adventure = values[0];
+          const level = values[1]
+          const from_teacher = values[2] === "true";
+          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
+          const adventure_div =
+          `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
+              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                  ${window.State.adventure_names![adventure]}
+          </div>`;
+          $('#level-'+level).append(adventure_div);
+          const index = window.State.available_adventures![level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
+          window.State.available_adventures![level].splice(index, 1);
+          $('#remove-'+adventure).remove();
+          drag_list(document.getElementById("level-"+level));
+          window.State.unsaved_changes = true;
+      });
+  });
 }

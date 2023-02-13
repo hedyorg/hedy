@@ -46,13 +46,17 @@ class QuizModule(WebsiteModule):
 
         return jsonify({}), 200
 
-    @route("/get-question/<int:level>/<int:question>", methods=["GET"])
-    def get_quiz_question(self, level, question):
+    @route("/get-question/<int:level>/<int:question>", methods=["GET"], defaults={'keyword_lang': None})
+    @route("/get-question/<int:level>/<int:question>/<keyword_lang>", methods=["GET"])
+    def get_quiz_question(self, level, question, keyword_lang):
         session["attempt"] = 0
         if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
             return gettext("question_doesnt_exist"), 400
 
-        question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
+        if keyword_lang:
+            question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, keyword_lang)
+        else:
+            question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
         return jsonify(question), 200
 
     @route("/preview-question/<int:level>/<int:question>", methods=["GET"])

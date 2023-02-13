@@ -2,41 +2,41 @@ levels:
     1:
         1:
             story: |
-                You're a customer at bakery Hedy.
-                You want into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Next, your order is being prepared.
-            code: |
-                {print} Welcome to bakery Hedy!
-                {ask} What type of pie do you want to order?
-                {echo} So you want
-                {print} Your order is being prepared!
+                Du bist Kunde der Bäckerei Hedy.
+                Du gehst in die Bäckerei und wirst vom Bäcker begrüßt.
+                Er fragt, welche Art Kuchen du bestellen möchtest.
+                Als Nächstes wird deine Bestellung zubereitet.
+            code: |-
+                {print} Willkommen in der Bäckerei Hedy!
+                {ask} Welche Art Kuchen möchtest du bestellen?
+                {echo} Also möchtest du
+                {print} Deine Bestellung wird zubereitet!
         2:
             story: |
                 You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
-            code: |
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love
+            code: |-
+                {print} Hier ist DJ Hedy
+                {ask} Seid ihr bereit zum Feiern?
+                {ask} Welches Lied möchtet ihr hören?
+                {echo} Großartige Wahl! Ich liebe
     2:
         1:
             story: |
                 You and your friends are going to watch some Netflix.
                 Show which movie you're about to watch and wish the viewers lot of fun!
-            code: |
-                {print} It is time for an evening of Netflix
-                film {is} Sonic the Hedgehog 2
-                {print} Wir werden schauen
-                {print} Have lot of fun!
+            code: |-
+                {print} Es ist Zeit für einen Netflix-Abend
+                film {is} Sonic der Igel 2
+                {print} Wir schauen film
+                {print} Viel Spaß!
         2:
             story: |
                 This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code: |
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.
-                {print} Thank you for shopping with us!
+            code: |-
+                {print} Willkommen in unserem Spielzeugladen
+                spielzeug {is} {ask} Was möchtest du kaufen?
+                {print} Das spielzeug wird zu deinem Einkaufskorb hinzugefügt.
+                {print} Danke für deinen Einkauf bei uns!
     3:
         1:
             story: |
@@ -45,58 +45,58 @@ levels:
                 Which house will you be sorted into?
                 Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
                 Let the program wait a short period before revealing your house.
-            code: |
-                {print} The new school year at Hogwarts is starting!
-                {print} The sorting hat is ready to sort you into a Hogwarts house.
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+            code: |-
+                {print} Das neue Schuljahr in Hogwarts geht los!
+                {print} Der Sortierhut ist bereit dich in eines der Häuser einzuteilen.
+                häuser {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
                 {sleep} 2
-                {print} And it is houses {at} {random}
+                {print} Und es ist häuser {at} {random}
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: |
-                essen {is} pizza, icecream, salad, sandwich
-                Belag {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
+            code: |-
+                Essen {is} Pizza, Eis, Salat, Sandwich
+                Belag {is} Schokolade, Käse, Thunfisch, Streusel
+                {print} Dein Zufallsessen ist heute...
                 {sleep} 2
-                {print} essen {at} {random} mit Belag {at} {random}
+                {print} Essen {at} {random} mit Belag {at} {random}
     4:
         1:
             story: |
                 You are the newest Pokémon trainer from Pallet Town!
                 Make a program that selects your first Pokémon.
                 Let the program wait a minute before revealing your first pokémon.
-            code: |
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+            code: |-
+                Pokémons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                {print} 'Dies wird dein erstes Pokémon!'
                 {sleep}
-                {print} pokemons {at} {random}
+                {print} Pokémons {at} {random}
         2:
             story: |
                 Create a lottery that lets you choose an extra price that you might win.
-            code: |
-                prices {is} car, hamster, 1 million euros
-                price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+            code: |-
+                Preise {is} Auto, Hamster, 1 Million Euro
+                Preis {is} {ask} 'Was möchtest du gewinnen?'
+                {add} Preis {to_list} Preise
+                {print} 'Du gewinnst ' Preise {at} {random}
     5:
         1:
             story: |
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
-            code: |
+            code: |-
                 lieblingsfilme {is} Batman, Spiderman, The Avengers, Jurassic Park
-                movie {is} {ask} 'What is your favourite movie?'
+                film {is} {ask} 'Welcher ist dein Lieblingsfilm?'
                 {if} film {in} lieblingsfilme {print} 'Du hast einen großartigen Geschmack!'
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
+                {else} {print} 'Schade, dass dein Lieblingsfilm nicht in der Liste ist, wir fügen ihn sofort hinzu!'
                 {add} film {to_list} lieblingsfilme
         2:
             story: |
                 Create a maths game.
-            code: |
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
+            code: |-
+                {print} 'Löse diese Aufgabe'
+                Antwort {is} {ask} '88 - 16 = ?'
+                {if} Antwort {is} 72 {print} 'Richtig!'
                 {else} {print} 'Falsch! Die Antwort war 72'
     6:
         1:
@@ -105,61 +105,61 @@ levels:
                 First ask the age of the user and start calculating.
                 First calculate the dogyears then the catyears.
                 Show the user the different ages.
-            code: |
-                age = {ask} 'How old are you?'
-                dog_age = age * 7
-                cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+            code: |-
+                Alter = {ask} 'Wie alt bist du?'
+                Hundealter = Alter * 7
+                Katzenalter = Alter * 5
+                {print} 'In Hundejahren bist du ' Hundealter ' Jahre alt.'
+                {print} 'In Katzenjahren bist du ' Katzenalter ' Jahre alt.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
-            code: |
-                {print} 'It is your birthday!'
-                leute = {ask} 'How many people do you want to give a slice of cake?'
+            code: |-
+                {print} 'Du hast Geburtstag!'
+                leute = {ask} 'Wievielen Leuten möchtest du ein Stück Torte geben?'
                 kuchenanzahl {is} leute/8
-                {print} 'You will have to buy ' kuchenanzahl ' cakes'
+                {print} 'Du musst ' kuchenanzahl ' Torten kaufen'
     7:
         1:
             story: |
                 In a chess tournament there are three players left.
                 Create a program that decides which two players first play against each other.
                 First print the two players who play the first match, then print against which player the winner will play.
-            code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+            code: |-
+                Spieler = Liam, Noah, Sophie
+                Spieler1 = Spieler {at} {random}
+                Spieler2 = Spieler {at} {random}
+                {print} Spieler1 ' spielt zuerst gegen ' Spieler2
+                {remove} Spieler1 {from} Spieler
+                {remove} Spieler2 {from} Spieler
+                {print} 'Der Gewinner spielt gegen ' Spieler {at} {random}
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'
-            code: |
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+            code: |-
+                {print} 'Die Räder am Bus gehen'
+                {repeat} 3 {times} {print} 'rundherum'
+                {print} 'Die Räder am Bus gehen rundherum'
+                {print} 'Durch die ganze Stadt '
     8:
         1:
             story: |
                 Du und vier weitere Freunde spielen Pokémon Go! Erstelle ein Programm, das entscheidet in welchem Team jeder von euch spielen wird.
                 Entweder rot, gelb oder blau! Nimm eine kleine Pause nachdem du ein Team angesagt hast.
-            code: |
-                teams = red, yellow, blue
+            code: |-
+                Teams = Rot, Gelb, Blau
                 {print} 'Rot, Gelb oder Blau?'
                 {repeat} 5 {times}
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}
+                  {print} 'Du bist in Team... '
+                  {print} Teams {at} {random}
                   sleep 2
         2:
             story: |
                 Drucke den Countdown für eine Runde Verstecken.
-            code: |
-                counter = 11
+            code: |-
+                Zähler = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
+                  Zähler = Zähler - 1
+                  {print} Zähler
                   {sleep} 1
-                {print} 'Ready or not here I come!'
+                {print} 'Bereit oder nicht, ich komme!'

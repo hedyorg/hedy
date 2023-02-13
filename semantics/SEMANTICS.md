@@ -3071,7 +3071,7 @@ Level 14 supports:
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
-    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+    <td>a = 1<br/>if str(a) (< | <= | > | >= | !=) str('2'):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
     <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -3352,7 +3352,7 @@ Level 15 supports:
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
-    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+    <td>a = 1<br/>if str(a) (< | <= | > | >= | !=) str('2'):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
     <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -3368,7 +3368,7 @@ Level 15 supports:
   </tr>
   <tr>
     <td>a is 0<br/>while a < 3<br>&emsp;&emsp;a is a + 1</td>
-    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+    <td>a = 0<br/>while str(a)&lt;str(3):<br/>&emsp;&emsp;a = a + 1</td>
   </tr>
 </tbody>
 </table>
@@ -3635,7 +3635,7 @@ Level 16 supports:
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
-    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+    <td>a = 1<br/>if str(a) (< | <= | > | >= | !=) str('2'):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
     <td>items is ['red', 'green']<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -3651,7 +3651,7 @@ Level 16 supports:
   </tr>
   <tr>
     <td>a is 0<br/>while a < 3<br>&emsp;&emsp;a is a + 1</td>
-    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+    <td>a = 0<br/>while str(a)&lt;str(3):<br/>&emsp;&emsp;a = a + 1</td>
   </tr>
 </tbody>
 </table>
@@ -3935,7 +3935,7 @@ Level 17 supports:
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2:<br/>&emsp;&emsp;print a</td>
-    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+    <td>a = 1<br/>if str(a) (< | <= | > | >= | !=) str('2'):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
     <td>items is ['red', 'green']<br/>selected is 'red'<br/>if selected in items:<br/>&emsp;&emsp;print 'found!'</td>
@@ -3951,7 +3951,7 @@ Level 17 supports:
   </tr>
   <tr>
     <td>a is 0<br/>while a < 3:<br>&emsp;&emsp;a is a + 1</td>
-    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+    <td>a = 0<br/>while str(a)&lt;str(3):<br/>&emsp;&emsp;a = a + 1</td>
   </tr>
 </tbody>
 </table>
