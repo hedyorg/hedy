@@ -48,7 +48,6 @@ VS Code has a great Dev Containers extension that allows you to connect the IDE 
 
 After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy. 
 
-This approach also removes the problem of making sure that the development works on all operating systems.
 
 **Local installation**
 
