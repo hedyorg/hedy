@@ -1827,7 +1827,7 @@ levels:
             question_text: "What is wrong with this code?"
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
+                   food = {ask} 'What would you like to eat?'
                    {if} food {is} fries
                        sauce = {ask} 'What sauce would you like?'
                        {print} 'One fries with ' sauce
@@ -1836,16 +1836,16 @@ levels:
                        {print} 'One pizza with ' topping
                 {print} 'Thank you for your order'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
+            -   option: "Nothing, this code is correct!"
                 feedback: "That's right!."
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
                 feedback: "You are!."
             -   option: "You don't have to use indentation twice."
                 feedback: "You always have to use indentation."
             -   option: "The indentation is wrong in the last `{if}` command."
-                feedback: "It not, though."
+                feedback: "It is not the indentation."
             correct_answer: "A"
-            hint: "all the indentation is done correctly."
+            hint: "All the indentation is done correctly."
             question_score: '10'
         2:
             question_text: "What will be printed after entering the correct password?"
@@ -1924,7 +1924,7 @@ levels:
                 size = {ask} 'What is your shoe size?'
                 {if} size {is} 38
                     {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                        {print} '❤️❤️❤️'
                     {else}
                         {print} 'You are not the one!'
                 {else}
@@ -1932,12 +1932,12 @@ levels:
             mp_choice_options:
             -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
                 feedback: "No, she gets 'You are not the one!'"
-            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+            -   option: "Cinderella with shoe size 40 gets the output '❤️❤️❤️'"
                 feedback: "No, she gets 'Ill keep looking'"
             -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
                 feedback: "That's right!"
-            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
-                feedback: "No she gets 'Ill keep looking'"
+            -   option: "Cinderella with shoe size 38 gets the output 'Ill keep looking'"
+                feedback: "No she gets '❤️❤️❤️'"
             correct_answer: "C"
             hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
             question_score: '10'
@@ -1950,24 +1950,24 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                         {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
                 feedback: "Don't forget the indentation after `{repeat}` commands."
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                     {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
                 feedback: "Use indentation after an `{if}` command"
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
@@ -1975,8 +1975,8 @@ levels:
             -   option: |
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        dessert = {ask} 'What is your favorite type of dessert?'
+                        {if} dessert {is} icecream
                             {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
@@ -1999,19 +1999,19 @@ levels:
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYou'll get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "You'll get a 5 dollar discount if you order a medium pizza with coke.<br>But the code has a mistake! How to debug it?"
             code: |-
                 {if} food {is} pizza
                 {if} size {is} medium
                 {if} drink {is} coke
-                price = price - 2
+                price = price - 5
             mp_choice_options:
             -   option: |
                     ```
                     {if} food {is} pizza
                         {if} size {is} medium
                             {if} drink {is} coke
-                                price = price - 2
+                                price = price - 5
                     ```
                 feedback: "Amazing!"
             -   option: |
@@ -2019,25 +2019,25 @@ levels:
                     {if} food {is} pizza
                         {if} size {is} medium
                     {if} drink {is} coke
-                        price = price - 2
+                        price = price - 5
                     ```
-                feedback: "Try again!"
+                feedback: "The second {if} misses code!"
             -   option: |
                     ```
                     {if} food {is} pizza
                     {if} size {is} medium
                     {if} drink {is} coke
-                            price = price - 2
+                            price = price - 5
                     ```
-                feedback: "Try again"
+                feedback: "Two consecutive {if}s is never correct."
             -   option: |
                     ```
                     {if} food {is} pizza
                         {if} size {is} medium
                             {if} drink {is} coke
-                            price = price - 2
+                            price = price - 5
                     ```
-                feedback: "Try again"
+                feedback: "Bijna goed maar kijk eens naar die laatste regel."
             correct_answer: "A"
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
@@ -2048,7 +2048,7 @@ levels:
                 singing = {ask} 'Would you like us to sing?'
                     if singing {is} yes
                         {repeat} years {times}
-                          {print} 'Hip Hip Hooray'
+                            {print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "You can't put two questions in a row"
                 feedback: "Yes you can."
@@ -2091,7 +2091,7 @@ levels:
             -   option: "line 2 should start with 4 spaces and line 3 with 8"
                 feedback: "You are correct!"
             correct_answer: "D"
-            hint: "The first line doens't start with any spaces"
+            hint: "The first line doesn't start with any spaces"
             question_score: '10'
     11:
         1:
