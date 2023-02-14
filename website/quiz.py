@@ -64,7 +64,7 @@ class QuizModule(WebsiteModule):
         if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
             return gettext("question_doesnt_exist"), 400
 
-        return render_template("preview-quiz.html", preview=True, level=level, question=question)
+        return render_template("preview-quiz.html", preview=True, level=level, question=question-1)
 
     @route("/submit_answer/", methods=["POST"])
     def submit_answer(self):
