@@ -1766,28 +1766,28 @@ levels:
              hint: Volg het juiste pad.
              question_score: '10'
         4:
-            question_text: "Which statement is true?"
+            question_text: "Wat is waar?"
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                naam = {ask} 'Hoe heet jij?'
+                maat = {ask} 'Wat is jouw schoenmaat?'
+                {if} maat {is} 38
+                    {if} naam {is} Assepoester
+                        {print} '❤️❤️❤️'
                     {else}
-                        {print} 'You are not the one!'
+                        {print} 'Jij bent niet de ware!'
                 {else}
-                    {print} 'Ill keep looking'
+                    {print} 'Ik kijk nog even verder'
             mp_choice_options:
-            -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
-                feedback: "No, she gets 'You are not the one!'"
-            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
-                feedback: "No, she gets 'Ill keep looking'"
-            -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
+            -   option: "Doornroosje met maat 38 krijgt als uitvoer 'Ik kijk nog even verder'"
+                feedback: "Nee, zij krijgt 'Jij bent niet de ware!'"
+            -   option: "Assepoester met maat 40 krijgt als uitvoer '❤️❤️❤️'"
+                feedback: "Nee, zij krijgt 'Jij bent niet de ware!'"
+            -   option: "Doornroosje met maat 40 krijgt als uitvoer 'Ik kijk nog even verder'"
                 feedback: "That's right!"
-            -   option: "Cinderella with shoe size 38 gets the output 'Ill keep looking'"
-                feedback: "No she gets 'I was looking for you'"
+            -   option: "Assepoester met maat 38 krijgt als uitvoer 'Ik kijk nog even verder'"
+                feedback: "No she gets '❤️❤️❤️'"
             correct_answer: "C"
-            hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
+            hint: "Hoe je ook heet, met maat 40 krijg je altijd 'Ik kijk nog even verder'."
             question_score: '10'
         5:
             mp_choice_options:
