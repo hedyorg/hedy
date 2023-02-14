@@ -21,18 +21,27 @@ export function createClass()
  * Make sure that at least one class exists
  *
  * Create a class if one doesn't exist already.
+ *
+ * Use as follows:
+ *
+ *      const className = await ensureClass();
+ *
+ * In an `async` function.
  */
 export function ensureClass()
 {
     const classname = `test class ${Math.random()}`;
     goToTeachersPage();
 
-    const viewClassLink = cy.getBySel('view_class_link');
-    if (viewClassLink.length === 0) {
-        return createClass();
-    } else {
-        return viewClassLink.then(x => x.text());
-    }
+    return new Promise(ok => {
+        cy.getBySel('view_class_link').then(viewClassLink => {
+            if (viewClassLink.length === 0) {
+                ok(createClass());
+            } else {
+                ok(viewClassLink.text());
+            }
+        });
+    });
 }
 
 export function addStudents(classname, count) {

@@ -3,9 +3,9 @@ import { ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
     let className;
-    beforeEach(() => {
+    beforeEach(async () => {
       loginForTeacher();
-      className = ensureClass();
+      className = await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
@@ -208,7 +208,7 @@ describe('customize class page', () => {
       })
     });
 
-    describe.only('an adventure that is hidden', () => {
+    describe('an adventure that is hidden', () => {
       const hiddenAdventure = 'parrot';
 
       beforeEach(() => {
