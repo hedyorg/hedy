@@ -3,7 +3,7 @@ import { ClientMessages } from './client-messages';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
-import JSZip from 'jszip';
+import JSZip from "jszip";
 import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
 import { currentTab } from './tabs';
 import { MessageKey } from './message-translations';
@@ -2191,7 +2191,7 @@ export function downloadSlides(level: number) {
     zip.folder("lib");
     zip.folder(`hedy-level-${level}`);
     zip.generateAsync({type: 'blob'})
-       .then(function(content) {
+       .then(function(content: any) {
           download(content, `hedy-level-${level}.zip`, "zip");
        });
   })
