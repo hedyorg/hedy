@@ -177,10 +177,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     13: [
         'default',
-        'restaurant',
         'secret',
         'rock',
-        'story',
+        'restaurant',
         'tic'
     ],
     14: [
