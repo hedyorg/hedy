@@ -1844,7 +1844,7 @@ adventures:
                     {print} 'That will be ' price ' dollars'
                     ```
                 story_text_2: |
-                    Wir nutzen `{or}` um zu sehen, ob eine der beiden Sachen im Koffer ist.
+                    Wir nutzen `{or}` um zu sehen, ob eines von zwei Dingen der Fall ist.
 
                 example_code_2: |
                     ```
@@ -2152,10 +2152,19 @@ adventures:
             11:
                 story_text: |
                     ## Spukhaus
-                    In diesem Level haben wir den Befehl zum Wiederholen verändert und wir haben eine Zeile hinzugefügt die unser Spukaus dem Spieler sagen lässt, in welchen Raum er sich befindet.
+                    In diesem Level haben wir den `{for}` Befehl verändert, um dem Spieler zu sagen, wo er ist.
 
-                    ### Übung
-                    Beende das Programm mit der richtigen Zeile Code. Beachte: Es gibt 3 Räume, die der Spieler überleben muss um zu gewinnen!
+                    ### Übung 1
+                    Vervollständige das Programm, sodass der Spieler weiß in welchem Raum er ist.
+
+                    ### Übung 2
+                    Mache ein Abenteuer aus dem Programm, indem du folgenden Schritten folgst:
+
+                    1. Erstelle eine Liste von Auswahlmöglichkeiten (wie kämpfe oder flüchte)
+                    2. Stelle sicher, dass der Spieler eine Möglichkeit auswählen kann. Nutze `{ask}`
+                    3. Ist die Antwort richtig? Dann darf er zum nächsten Monster fortfahren. Gibt er eine falsche Antwort? Lass es den Spieler mit `{print}` wissen.
+
+                    **(extra)** Wenn man eine falsche Wahl trifft, wird immer noch ein Monster angezeigt! Wie könntest du das ändern?
 
                 example_code: |
                     ```
