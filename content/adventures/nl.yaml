@@ -648,7 +648,7 @@ adventures:
                     naam = 'De Koningin van Engeland'
                     {print} naam ' zat te genieten van een lekker taartje, toen plotseling...'
                     ```
-                start_code: "# Schrijf jouw code hier"persoenen
+                start_code: "# Schrijf jouw code hier"
             15:
                 story_text: |
                     ## Verhaal
@@ -2311,7 +2311,7 @@ adventures:
                     Kun jij een manier bedenken om je vrienden en familie 15% korting te geven?
                 example_code: |
                     ```
-                    prijs = 0
+                    prijs = 0.0
                     eten = {ask} 'Wat wil je eten?'
                     drinken = {ask} 'Wat wil je drinken?'
                     {if} eten {is} 'hamburger'
@@ -2329,25 +2329,21 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
-                    In het eerste voorbeeld wordt het `{and}` commando toegevoegd.
+
+                    ### Opdracht
+                    Zet op de logische plek in het progamma een `{and}` en een `{or}`.
 
                 example_code: |
                     ```
                     prijs = 10
                     eten = {ask} 'Wat wil je eten?'
                     drinken = {ask} 'Wat wil je drinken?'
-                    {if} eten {is} 'broodje' {and} drinken {is} 'sap'
+                    {if} eten {is} 'broodje' _ drinken {is} 'sap'
                         {print} 'Dat is ons voordeelmenu'
                         prijs = prijs - 3
-                    {print} 'Dat wordt dan ' prijs ' euro'
-                    ```
-                story_text_2: |
-                    We gebruiken `{or}` om te zien of één van de twee dingen waar is.
-                example_code_2: |
-                    ```
-                    drinken = {ask} 'Wat wil je drinken?'
-                    {if} drinken {is} 'water' {or} drinken {is} 'sap'
+                    {if} drinken {is} 'water' _ drinken {is} 'sap'
                         {print} 'Dat is een gezonde keuze!'
+                    {print} 'Dat wordt dan ' prijs ' euro'
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
