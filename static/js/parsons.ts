@@ -7,11 +7,6 @@ interface ParsonsExercise {
     readonly code: string;
 }
 
-(function() {
-        // We might not need this -> is there something we want to load on page load?
-    }
-)();
-
 export function loadParsonsExercise(level: number, exercise: number) {
     $('#next_parson_button').hide();
 
@@ -82,9 +77,9 @@ function updateNextExerciseButton(level: number, exercise: number) {
     const max_exercise = <number>($('#next_parson_button').attr('max_exercise') || 1);
     // If there is another exercise: add the onclick for next exercise
     if (exercise < max_exercise) {
-        $('#next_parson_button').attr('onclick', 'hedyApp.loadParsonsExercise(' + level + ", " + (exercise+1) + ");");
+        $('#next_parson_button').on('click', () => loadParsonsExercise(level, exercise+1));
     } else {
-        $('#next_parson_button').attr('onclick', null);
+        $('#next_parson_button').off('click');
     }
 }
 
