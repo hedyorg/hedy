@@ -1721,6 +1721,23 @@ adventures:
                     {print} getal1 ' plus ' getal2 ' is ' antwoord
                     ```
                 start_code: "# Schrijf jouw code hier"
+            13:
+                story_text: |
+                    ## Rekenmachine
+                    Sommen hebben soms meerdere goede antwoorden. Bijv. de wortel van 16 is 4, maar ook -4!
+
+
+                    ### Opdracht
+                    Vraag een som met meerdere antwoorden en reken ze beide goed met `{or}`.
+
+                example_code: |
+                    ```
+                    antwoord = {ask} 'Wat is de wortel van 25?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
+                start_code: "# Schrijf jouw code hier"
+
             14:
                 story_text: |
                     ## Raad mijn getal
@@ -2330,8 +2347,13 @@ adventures:
                     ## Restaurant
                     In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
 
-                    ### Opdracht
+                    ### Opdracht 1
                     Zet op de logische plek in het progamma een `{and}` en een `{or}`.
+
+                    ### Opdracht 2
+                    Breid je restaurant uit met nog minstens één `{and}` en één `{or}`.
+                    Denk aan een speciale kortingsbon die alleen geldt voor pizza, of een gratis drankje
+                    bij friet en bij pannenkoeken. Of iets heel anders natuurlijk!
 
                 example_code: |
                     ```
