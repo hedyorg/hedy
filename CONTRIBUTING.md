@@ -100,7 +100,7 @@ $ npx cypress open
 
 You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
-### Feeding the local database
+## Feeding the local database
 
 Hedy uses a local database in developing environments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
 
@@ -273,12 +273,14 @@ If you want to try Admin features locally (for example, marking accounts as teac
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
+## What happens when I make a PR?
 
-Pre-release environment
------------------------
+When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally. 
 
-When you have your PR accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
-We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
+If the PR is approved, it will be merged with a [mergify script](https://github.com/hedyorg/hedy/blob/main/.mergify.yml). Please don't do anything (esp. don't enable auto merge), all will be handled automatically. Mergify will also tell you that when the PR is approved.
+
+When your PR is accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
+We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy. You can use [the version log](https://hedy.org/version) to see which version of Hedy lives on the website.
 
 Accessing logs
 -----------------------

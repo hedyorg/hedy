@@ -18,15 +18,15 @@ jobs:
       name: Checkout branch (with token)
       if: github.event_name == 'push'
       with:
-        fetch-depth: 1        
-        
+        fetch-depth: 1
+
         # We need to pass the token here -- the commit action below will not overwrite the token to push.
         token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
     - uses: actions/checkout@v3
       name: Checkout branch (on pull requests)
       if: github.event_name != 'push'
       with:
-        fetch-depth: 1        
+        fetch-depth: 1
     - name: Install Nodejs dependencies
       run: |
         npm ci
@@ -39,6 +39,12 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
+
+    # This is necessary for the TypeScript to contain translations
+    # from Gettex.
+    - name: Compiling Babel translations
+      run: |
+        pybabel compile -f -d translations
 
     - name: Compile TypeScript to JavaScript
       run: build-tools/heroku/generate-grammars-and-js
