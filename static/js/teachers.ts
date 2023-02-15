@@ -1,14 +1,9 @@
 import { modal } from './modal';
-import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
+import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
+import { markUnsavedChanges, clearUnsavedChanges } from './state';
+import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
-
-(function() {
-    // Use this to make sure that we return a prompt when a user leaves the page without saving
-    $( "input" ).change(function() {
-        window.State.unsaved_changes = true;
-    });
-})();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -119,7 +114,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ErrorMessages['Connection_error'], 3000, true);
+          modal.alert(ClientMessages['Connection_error'], 3000, true);
       }
     });
 }
@@ -244,8 +239,11 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 }
 
 function show_preview(content: string) {
-    const name = <string>$('#custom_adventure_name').val();
-    const level = <string>$('#custom_adventure_level').val();
+    const name = $('#custom_adventure_name').val();
+    if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
+    const level = $('#custom_adventure_level').val();
+    if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); }
+
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
     container.css('white-space', 'pre-wrap');
@@ -260,7 +258,7 @@ function show_preview(content: string) {
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
         exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-        const mode = getHighlighter(level);
+        const mode = getHighlighter(parseInt(level, 10));
         exampleEditor.session.setMode(mode);
     }
 }
@@ -377,7 +375,7 @@ export function save_customizations(class_id: string) {
         $('#'+id).children().each(function() {
             const level : string = $(this).attr('level')!;
             const adventure = $(this).attr('adventure')!;
-            const from_teacher = $(this).attr('from-teacher') === "true";
+            const from_teacher = $(this).attr('from-teacher') === "true"!;
             sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
         });
     });
@@ -399,7 +397,7 @@ export function save_customizations(class_id: string) {
           showAchievements(response.achievement, false, "");
       }
       modal.alert(response.success, 3000, false);
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -431,13 +429,13 @@ export function remove_customizations(class_id: string, prompt: string) {
               function() {
                 $(this).empty();
                 const level = $(this).attr('id')!.split('-')[1];
-                for (let i = 0; i < window.State.adventures_default_order![level].length; i++) {
+                for (let i = 0; i < adventures_default_order[level].length; i++) {
                   // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
                   const div =
                   `
-                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${window.State.adventures_default_order![level][i]}" level="${level}" from-teacher="false">
-                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                    ${window.State.adventure_names![window.State.adventures_default_order![level][i]]}
+                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventures_default_order[level][i]}" level="${level}" from-teacher="false">
+                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
+                    ${adventure_names[adventures_default_order[level][i]]}
                   </div>
                   `
                   $(this).append(div);
@@ -445,10 +443,10 @@ export function remove_customizations(class_id: string, prompt: string) {
                 drag_list(document.getElementById("level-"+level));
             });
             for (let i = 1; i <= 18; i++) {
-              window.State.available_adventures![i] = [];
+              available_adventures[i] = [];
             }
-            for (let i = 0; i < window.State.teacher_adventures!.length; i++) {
-              window.State.available_adventures![window.State.teacher_adventures![i]['level']].push({'name': window.State.teacher_adventures![i]['id'], 'from_teacher': true});
+            for (let i = 0; i < teacher_adventures.length; i++) {
+              available_adventures[teacher_adventures![i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
             }
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
@@ -458,7 +456,7 @@ export function remove_customizations(class_id: string, prompt: string) {
 }
 
 export function select_all_levels_adventure(adventure_name: string) {
-    window.State.unsaved_changes = true;
+    markUnsavedChanges();
     let first_input = true;
     let checked = true;
     $('.adventure_level_input').each(function() {
@@ -474,7 +472,7 @@ export function select_all_levels_adventure(adventure_name: string) {
 }
 
 export function enable_level(level: string) {
-    window.State.unsaved_changes = true;
+    markUnsavedChanges();
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
         $('.adventure_level_' + level).each(function(){
@@ -699,9 +697,48 @@ export function drag_list (target: any) {
   }
 }
 
-export function initializeCustomizeClassPage(available_adventures_level_translation: string) {
+/**
+ * These will be copied into global variables, because that's how this file works...
+ */
+interface InitializeCustomizeClassPageOptions {
+  readonly available_adventures_level_translation: string;
+  readonly teacher_adventures: TeacherAdventure[];
+  readonly available_adventures: Record<string, AvailableAdventure[]>;
+  readonly adventures_default_order: Record<string, string[]>;
+  readonly adventure_names: Record<string, string>;
+}
+
+let available_adventures_level_translation: string;
+let teacher_adventures: TeacherAdventure[];
+let available_adventures: Record<string, AvailableAdventure[]>;
+let adventures_default_order: Record<string, string[]>;
+let adventure_names: Record<string, string>;
+
+interface AvailableAdventure {
+  from_teacher: boolean;
+  name: string;
+}
+
+interface TeacherAdventure {
+  id: string;
+  level: string;
+}
+
+export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
+  available_adventures_level_translation = options.available_adventures_level_translation;
+  teacher_adventures = options.teacher_adventures;
+  available_adventures = options.available_adventures;
+  adventures_default_order = options.adventures_default_order;
+  adventure_names = options.adventure_names;
 
   $(document).ready(function(){
+      // Use this to make sure that we return a prompt when a user leaves the page without saving
+      $( "input" ).on('change', function() {
+        markUnsavedChanges();
+      });
+
+      drag_list(document.getElementById("sortadventures"));
+
       $('#adventures').on('change', function(){
           var level = $(this).val() as string;
           $("div.adventures-tab").hide();
@@ -712,28 +749,27 @@ export function initializeCustomizeClassPage(available_adventures_level_translat
           });
           $('#available').empty();
           $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-          const adventures = window.State.available_adventures![level];
+          const adventures = available_adventures[level];
           for(let i = 0; i < adventures.length; i++) {
-            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${window.State.adventure_names![adventures[i]['name']]}</option>`);
+            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
           }
           drag_list(document.getElementById("level-"+level));
       });
-  });
 
-  $('#sortadventures').on('click', 'span', (function(event){
-      event.preventDefault();
-      const adventure = $(this).parent().attr('adventure') as string;
-      const level = $(this).parent().attr('level') as string;
-      const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
-      if (!window.State.available_adventures![level]) {
-        throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
-      }
-      window.State.available_adventures![level].push({"name": adventure, "from_teacher": from_teacher});
-      $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${window.State.adventure_names![adventure]}</option>`);
-      $(this).parent().remove();
-      window.State.unsaved_changes = true;
-  }));
-  $(document).ready(function(){
+      $('#sortadventures').on('click', 'span', (function(event){
+        event.preventDefault();
+        const adventure = $(this).parent().attr('adventure') as string;
+        const level = $(this).parent().attr('level') as string;
+        const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
+        if (!available_adventures[level]) {
+          throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
+        }
+        available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
+        $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
+        $(this).parent().remove();
+        markUnsavedChanges();
+      }));
+
       $('#available').on('change', function(){
           const values = ($(this).val() as string).split('-');
           const adventure = values[0];
@@ -742,15 +778,15 @@ export function initializeCustomizeClassPage(available_adventures_level_translat
           // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
           const adventure_div =
           `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                  ${window.State.adventure_names![adventure]}
+              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
+                  ${adventure_names[adventure]}
           </div>`;
           $('#level-'+level).append(adventure_div);
-          const index = window.State.available_adventures![level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
-          window.State.available_adventures![level].splice(index, 1);
+          const index = available_adventures[level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
+          available_adventures![level].splice(index, 1);
           $('#remove-'+adventure).remove();
           drag_list(document.getElementById("level-"+level));
-          window.State.unsaved_changes = true;
+          markUnsavedChanges();
       });
   });
 }
