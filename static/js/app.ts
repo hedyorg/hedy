@@ -2306,7 +2306,7 @@ export function downloadSlides(level: number) {
       var innerIframe = slides[i].getElementsByTagName('iframe');        
       for (let j = 0; j < innerIframe.length; j++) {
         var a = document.createElement('a');          
-        a.href = 'https://www.hedycode.com' + innerIframe[j].getAttribute('src');
+        a.href = 'https://www.hedy.org' + innerIframe[j].getAttribute('src');
         a.appendChild(document.createTextNode(a.href));
         slides[i].appendChild(a);
         slides[i].removeChild(innerIframe[j]);
