@@ -102,6 +102,25 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_access_index_var(self):
+        code = textwrap.dedent("""\
+        index is 1
+        dieren is Hond, Kat, Kangoeroe
+        print dieren at index""")
+
+        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[1-1]'),
+                                     "print(f'{dieren[1-1]}')")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_print_list_random_fr(self):
         code = textwrap.dedent("""\
         animaux est chien, chat, kangourou
