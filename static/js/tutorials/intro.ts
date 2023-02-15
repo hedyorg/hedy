@@ -1,5 +1,6 @@
 import {pushAchievement, runit, theGlobalEditor} from "../app";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
+import { clearUnsavedChanges } from '../state';
 
 let current_step = 0;
 
@@ -78,7 +79,7 @@ function codeOutputStep() {
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
 
-  runit ("1", "en", "", function () {
+  runit (1, "en", "", function () {
     $ ('#output').focus ();
   });
 
@@ -158,7 +159,7 @@ function levelDefaultStep() {
   $('#adventures').show();
 
   // Set to false, prevent "are you sure you want to switch without saving" pop-up
-  window.State.unsaved_changes = false;
+  clearUnsavedChanges();
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
@@ -169,7 +170,7 @@ function adventureTabsStep() {
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "story") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -181,7 +182,7 @@ function parsonsTabStep() {
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "parsons") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -192,7 +193,7 @@ function quizTabStep() {
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -203,7 +204,7 @@ function saveShareStep() {
   // We should go back to the intro tab to make sure the save/share option is shown
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "default") {
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $(this).click();
     }
   });

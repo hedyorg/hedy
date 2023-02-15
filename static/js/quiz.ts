@@ -1,7 +1,7 @@
 import {modal} from "./modal";
 import {showAchievements} from "./app";
 
-(function() {
+export function initializeQuiz() {
     $('.option-block').on("click", function () {
         // Remove active attribute and hide possible answer button
         $('.option-block').removeClass('border-double border-8 active');
@@ -11,7 +11,7 @@ import {showAchievements} from "./app";
         $(this).addClass('border-double border-8 active');
         $(this).find(".submit-button").show();
     });
-})();
+}
 
 
 export function startQuiz(level: number) {
@@ -191,7 +191,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
     if (response.next_question) {
         $('#next_question_number_container').text(parseInt(question) + 1);
-        $('#next_question_button').attr('onclick', "hedyApp.loadQuizQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
+        $('#next_question_button').on('click', () => loadQuizQuestion(response.level, parseInt(question) + 1));
         $('#next_question_button').show();
     } else {
         $('#next_question_button').hide();
