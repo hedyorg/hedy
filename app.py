@@ -1580,6 +1580,7 @@ def get_highscores_page(user, filter):
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    session.pop('keyword_lang')
     return jsonify({'succes': 200})
 
 
