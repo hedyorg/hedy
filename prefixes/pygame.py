@@ -10,6 +10,7 @@ canvas.fill(pygame.Color(247, 250, 252, 255))
 pygame_end = False
 button_list = []
 
+
 def create_button(name):
     if name not in button_list:
         button_list.append(name)
