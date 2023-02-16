@@ -194,16 +194,21 @@ t.speed(3)
 t.showturtle()
 `;Pn.pygame_prefix=`# coding=utf8
 
-import os
-import pygame
-
-os.environ["SDL_VIDEODRIVER"] = "dummy"  # No real image drivers exist, set to dummy for testing
-os.environ["SDL_AUDIODRIVER"] = "disk"  # No real audio drivers exist, set to disk for testing
+import pygame  # noqa F401
+import buttons  # noqa F401
 
 pygame.init()
 canvas = pygame.display.set_mode((711, 300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
-pygame_end = True  # Set to True so that we don't get stuck in a loop during testing'
+
+pygame_end = False
+button_list = []
+
+
+def create_button(name):
+    if name not in button_list:
+        button_list.append(name)
+        buttons.add(name)
 `;Pn.normal_prefix=`# coding=utf8
 
 import random  # noqa F401
