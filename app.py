@@ -2,7 +2,6 @@
 import collections
 import copy
 import datetime
-import json
 import logging
 import re
 import os
@@ -15,7 +14,7 @@ from os import path
 
 import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   jsonify, make_response, redirect, request, send_file,
+                   jsonify, redirect, request, send_file,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -31,8 +30,8 @@ from safe_format import safe_format
 from config import config
 from flask_helpers import render_template
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES,
-                          NON_LATIN_LANGUAGES)
+                          ALL_LANGUAGES, COUNTRIES)
+
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
@@ -42,7 +41,6 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
 from website.auth import (current_user, is_admin, is_teacher,
                           login_user_from_token_cookie, requires_login, requires_teacher)
 from website.log_fetcher import log_fetcher
-from website.yaml_file import YamlFile
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -265,15 +263,11 @@ def setup_language():
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
-
     g.lang = session['lang']
+
     if 'keyword_lang' not in session:
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang in NON_LATIN_LANGUAGES:
-            g.keyword_lang = g.lang
-        else:
-            g.keyword_lang = "en"
-    else:
-        g.keyword_lang = session['keyword_lang']
+        session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
+    g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
@@ -922,7 +916,6 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = ''
-    adventure_name = ''
 
     if program_id:
         result = DATABASE.program_by_id(program_id)
@@ -941,8 +934,6 @@ def index(level, program_id):
 
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
-        if 'adventure_name' in result:
-            adventure_name = result['adventure_name']
 
     # In case of a "forced keyword language" -> load that one, otherwise: load
     # the one stored in the g object
@@ -1098,7 +1089,6 @@ def index(level, program_id):
         parsons=parsons,
         parsons_exercises=parson_exercises,
         tutorial=tutorial,
-        adventure_name=adventure_name,
         adventures_names=adventures_names,
         latest=version(),
         quiz=quiz,
@@ -1216,7 +1206,7 @@ def get_cheatsheet_page(level):
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
-    return render_template("cheatsheet.html", commands=commands, level=level)
+    return render_template("printable/cheatsheet.html", commands=commands, level=level)
 
 
 @app.route('/certificate/<username>', methods=['GET'])
@@ -1243,7 +1233,7 @@ def get_certificate_page(username):
 
     number_achievements = len(achievements)
     congrats_message = safe_format(gettext('congrats_message'), username=username)
-    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
+    return render_template("printable/certificate.html", count_programs=count_programs, quiz_score=quiz_score,
                            longest_program=longest_program, number_achievements=number_achievements,
                            quiz_level=quiz_level, congrats_message=congrats_message)
 
@@ -1667,23 +1657,6 @@ def store_parsons_order():
 
     DATABASE.store_parsons(attempt)
     return jsonify({}), 200
-
-
-@app.route('/client_messages.js', methods=['GET'])
-def client_messages():
-    # Not really nice, but we don't call this often as it is cached
-    d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(
-        f'content/client-messages/{g.lang}.yaml').to_dict())
-
-    response = make_response(render_template(
-        "client_messages.js", error_messages=json.dumps(d)))
-
-    if not is_debug_mode():
-        # Cache for longer when not developing
-        response.cache_control.max_age = 60 * 60  # Seconds
-    return response
 
 
 @app.template_global()

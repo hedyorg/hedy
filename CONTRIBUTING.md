@@ -28,8 +28,28 @@ For these types of issues it is fine to ping us on GitHub before starting the wo
 The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture.
 If you are interested in working on topics related to an open discussion, please join a meeting to discuss the plans in detail.
 
+Contributing to Hedy
+------------
+
+The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces). 
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?machine=basicLinux32gb&repo=226863521&ref=main&location=WestEurope)
+
+This will open up a VS Code instance in the browser and allow you to work on the Hedy code. This is really useful to quickly make some small and trivial changes without needing to install anything.
+
+Github Codespaces is only free for a certain amount of CPU-hours each month, so if you want to work on Hedy regularly, it might be better to run Hedy on your machine.
+
 Run Hedy on your machine
 ------------
+
+**With Docker, VSCode and its Remote Container Extension**
+
+VS Code has a great Dev Containers extension that allows you to connect the IDE to a development (docker) container. More info can be found on https://code.visualstudio.com/docs/devcontainers/containers
+
+After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy. 
+
+
+**Local installation**
 
 If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to:
 - install Python 3.7 or higher;

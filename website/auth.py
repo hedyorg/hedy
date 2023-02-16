@@ -343,7 +343,7 @@ def send_email_template(template, email, link=None, username=None):
     body += get_template_translation(template) + "\n\n"
     body += gettext("mail_goodbye")
 
-    with open("templates/base_email.html", "r", encoding="utf-8") as f:
+    with open("templates/email/base_email.html", "r", encoding="utf-8") as f:
         body_html = f.read()
 
     body_html = body_html.format(content=body)

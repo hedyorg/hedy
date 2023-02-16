@@ -299,15 +299,6 @@ adventures:
                     score = 25
                     {print} 'Jij hebt ' score ' gehaald!'
                     ```
-                story_text_6: |-
-                    **Rekenen met woorden**
-                    In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
-                example_code_6: |
-                    ```
-                    a = 'Hallo '
-                    b = 'wereld!'
-                    {print} a + b
-                    ```
             13:
                 start_code: |-
                     naam = {ask} 'hoe heet jij?'
@@ -647,44 +638,15 @@ adventures:
             12:
                 story_text: |-
                     ## Verhaal
-                    In dit level kun je aanhalingstekens gebruiken, zodat je meerdere woorden kan opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
+                    Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele.
+
+                    ### Opdracht
+                    Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
+                    Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
                     {print} naam ' zat te genieten van een lekker taartje, toen plotseling...'
-                    ```
-                start_code: "# Schrijf jouw code hier"
-            13:
-                story_text: |
-                    ## Verhaal
-                    Door `{and}` en `{or}` te gebruiken kun je jouw codes een stuk inkorten. Neem bijvoorbeeld het verhaal over de draak uit de vorige levels.
-
-                    ## Opdracht
-                    Kun jij van jouw eigen verhaal een klein spel maken zoals dit voorbeeld?
-                example_code: |
-                    ```
-                    zwaard = 'kwijt'
-                    spel = 'aan'
-                    {print} 'Onze held loopt door het bos'
-                    {print} 'Ineens komt ze bij een splitsing...'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} spel {is} 'aan'
-                            pad = {ask} 'Welk pad moet onze held kiezen?'
-                            {if} pad {is} 'links' {and} zwaard is 'gevonden'
-                                {print} 'Onze held komt een draak tegen op het pad!'
-                                {print} 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                spel = 'over'
-                            {if} pad {is} 'links' {and} zwaard is 'kwijt'
-                                {print} 'Onze held vindt een draak, maar ze heeft geen wapens!'
-                                {print} 'Onze held wordt met huid en haar verslonden...'
-                                spel = 'over'
-                            {if} pad {is} 'rechts' {and} zwaard is 'gevonden'
-                                {print} 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
-                                {print} 'Ze loopt terug'
-                            {if} pad {is} 'rechts' {and} zwaard is 'kwijt'
-                                {print} 'Onze held vindt een zwaard'
-                                {print} 'Die kan nog goed van pas komen'
-                                zwaard = 'gevonden'
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -945,7 +907,7 @@ adventures:
             12:
                 story_text: |
                     ## Zing een liedje
-                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'. Kijk maar:
+                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'.
 
                     ### Opdracht
                     Kun jij de regels beginnen met de goede hoeveelheid spaties om het liedje aan de praat te krijgen?
@@ -1589,7 +1551,10 @@ adventures:
             13:
                 story_text: |
                     ## Steen, papier, schaar
-                    Met het `{and}` commando kun je steen, papier, schaar veel netter programmeren. Kijk maar eens naar de voorbeeldcode en probeer hem zelf af te maken!
+                    Met het `{and}` commando kun je steen, papier, schaar met veel minder regels programmeren. Kijk maar eens naar de voorbeeldcode.
+
+                    ### Opdracht
+                    Maak de code af zodat bij iedere combinatie een antwoord wordt geprint.
                 example_code: |
                     ```
                     opties = 'steen', 'papier', 'schaar'
@@ -1602,7 +1567,7 @@ adventures:
                     {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'papier'
                         {print} 'Jij wint!'
                     {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'schaar'
-                        {print} 'De computer wint!'
+                        {print} _
                     _
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1738,7 +1703,16 @@ adventures:
             12:
                 story_text: |
                     ## Rekenmachine
-                    In dit level kun je ook met kommagetallen werken met de rekenmachine. Vul de lege plekken weer in om het goed te laten werken. Onthoud wel dat je geen komma gebruikt, maar een punt!
+                    In dit level kun je ook met kommagetallen werken met de rekenmachine.
+
+                    ### Opdracht 1
+                    Vul de lege plekken weer in om de rekenmachine goed te laten werken. Onthoud wel dat je geen komma gebruikt, maar een punt!
+
+                    ### Opdracht 2
+                    Maak nu weer een rekensommenoefenprogramma, maar dan met kommagetallen.
+                    Maak een lijst met getallen, kies er steeds twee uit en laat de speler het juiste antwoord invullen.
+                    Controleer natuurlijk ook of het klopt. **(extra)** Maak het progamma moeilijker met levens. Bij een fout gaat er een leven af, en na drie fouten stopt het spel.
+
                 example_code: |
                     ```
                     getal1 = {ask} 'Wat is het eerste getal?'
@@ -2003,10 +1977,13 @@ adventures:
             12:
                 story_text: |
                     ## Waarzegger
-                    In dit level kun je langere voorspellingen maken! Kun jij voorspellingen toevoegen aan het lijstje?
+                    Vanaf level 12 moet je in een lijst ook aanhalingstekens gebruiken.
+
+                    ### Opdracht
+                    Kun jij minstens twee voorspellingen toevoegen aan het lijstje?
                 example_code: |
                     ```
-                    voorspellingen = 'je glijdt uit over een bananenschil' _
+                    voorspellingen = 'je glijdt uit over een bananenschil', _
                     {print} 'Ik pak mijn glazen bol erbij...'
                     {print} 'Ik zie... Ik zie...'
                     {sleep} 2
@@ -2334,7 +2311,7 @@ adventures:
                     Kun jij een manier bedenken om je vrienden en familie 15% korting te geven?
                 example_code: |
                     ```
-                    prijs = 0
+                    prijs = 0.0
                     eten = {ask} 'Wat wil je eten?'
                     drinken = {ask} 'Wat wil je drinken?'
                     {if} eten {is} 'hamburger'
@@ -2352,25 +2329,21 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
-                    In het eerste voorbeeld wordt het `{and}` commando toegevoegd.
+
+                    ### Opdracht
+                    Zet op de logische plek in het progamma een `{and}` en een `{or}`.
 
                 example_code: |
                     ```
                     prijs = 10
                     eten = {ask} 'Wat wil je eten?'
                     drinken = {ask} 'Wat wil je drinken?'
-                    {if} eten {is} 'broodje' {and} drinken {is} 'sap'
+                    {if} eten {is} 'broodje' _ drinken {is} 'sap'
                         {print} 'Dat is ons voordeelmenu'
                         prijs = prijs - 3
-                    {print} 'Dat wordt dan ' prijs ' euro'
-                    ```
-                story_text_2: |
-                    We gebruiken `{or}` om te zien of één van de twee dingen waar is.
-                example_code_2: |
-                    ```
-                    drinken = {ask} 'Wat wil je drinken?'
-                    {if} drinken {is} 'water' {or} drinken {is} 'sap'
+                    {if} drinken {is} 'water' _ drinken {is} 'sap'
                         {print} 'Dat is een gezonde keuze!'
+                    {print} 'Dat wordt dan ' prijs ' euro'
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -2662,16 +2635,17 @@ adventures:
                 story_text: |
                     ## Spaarvarken
                     In dit avontuur kun je een digitaal spaarvarkentje maken.
+
+                    ### Opdracht
                     Maak de code af zodat je jouw zakgeld kunt tellen en kunt berekenen hoe lang het duurt voordat je iets kunt kopen!
+                    **(extra)** Misschien heb je al wat geld gespaard? Voeg een extra `{ask}` toe en trek je al gespaarde bedrag af van wat je nog moet sparen.
                 example_code: |
                     ```
                     {print} 'Het digitale spaarvarken'
                     wens = {ask} 'Wat zou je graag willen hebben?'
                     prijs = {ask} 'Hoeveel kost dat?'
-                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    sparen = prijs - gespaard
-                    weken = sparen / zakgeld
+                    weken = prijs / zakgeld
                     {print} 'Je kunt over ' _ ' weken een ' _ ' kopen!'
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -2776,31 +2750,38 @@ adventures:
             12:
                 start_code: '## Schrijf jouw code hier'
                 story_text: |
-                    ## Maak een geheime code als een geheim agent
+                    ## Geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
 
                     ### Opdracht
-                    Maak je eigen code voor jouw geheim agent. Kun jij het misschien zelfs uit meerdere variabelen laten bestaan?
+                    Maak je eigen code voor jouw geheime agent. Kun jij het misschien zelfs uit meerdere variabelen laten bestaan?
                 example_code: |
                     ```
                     naam {is} {ask} 'Hoe heet je?'
-                    {if} naam {is} 'Agent007'
-                        a {is} 'Ga naar het vliegveld '
+                    {if} naam {is} '_'
+                        plek {is} 'Ga naar het vliegveld '
                     {else}
-                        a {is} 'Ga naar het treinstation '
+                        plek {is} 'Ga naar het treinstation '
                     wachtwoord {is} {ask} 'Wat is het wachtwoord?'
-                    {if} wachtwoord {is} 'TOPSECRET'
-                        b {is} 'morgen om 02:00'
+                    {if} wachtwoord {is} _
+                        tijd {is} 'morgen om 02:00'
                     {else}
-                        b {is} 'vandaag om 10:00'
-                    {print} a + b
+                        tijd {is} 'vandaag om 10:00'
+                    {print} _ _ _
                     ```
             13:
                 start_code: '## Schrijf jouw code hier'
                 story_text: |
                     ## Geheim agent
-                    Kun jij de code afmaken door de lege stukje te vullen. Let op: de superspion moet beide antwoorden goed hebben, voordat hij de juiste geheime informatie krijgt.
+                    We kunnen nu met maar één `{if}` bekijken of het programma gebruikt wordt door de geheim agent.
+
+                    ### Opdracht 1
+                    Maak de afmaken door de lege stukje te vullen. Let op: de superspion moet beide antwoorden goed hebben, voordat hij de juiste geheime informatie krijgt.
+
+                    ### Opdracht 2
+                    We willen de vijand extra verwarren! Maak een lijst met nepantwoorden en kies, bij een fout antwoord, iets uit de lijst.
+
                 example_code: |
                     ```
                     naam {is} {ask} 'Hoe heet je?'
@@ -3102,7 +3083,7 @@ adventures:
                 story_text: "## Boter Kaas en Eieren\nIn de vorige levels was je boter kaas en eieren spel nog vervelend om te spelen. Na elke x of o die je zette vroeg het spel namelijk of je gewonnen had of niet. \nDit maakte het spel wel speelbaar, maar erg traag. In dit level heb je het `{elif}` commando geleerd, dat dit probleem kan oplossen. \nMet `{elif}` kun je Hedy laten checken of er een speler gewonnen heeft. Hiervoor heb je wel wat extra regels nodig.\n\nIn de voorbeeld code zie je dat we de voorwaarden om te winnen (3 op een rij)hebben toegevoegd. \nJe vindt ze op regel 46 tot 69. Je kunt zien dat elke keer als een speler 3 op een rij heeft, het spel de variabele spel op 'uit' zet. \nDit betekent dat de {while} lus wordt gestopt en dat het spel stopgezet wordt.\n"
                 example_code: "```\nteken = 'x'\nopen_plekken = [1, 2, 3, 4, 5, 6, 7, 8, 9]\nspel = 'aan'\nplek_1 = '.'\nplek_2 = '.'\nplek_3 = '.'\nplek_4 = '.'\nplek_5 = '.'\nplek_6 = '.'\nplek_7 = '.'\nplek_8 = '.'\nplek_9 = '.'\n{print} 'BOTER KAAS EN EIEREN!'\n{print} plek_1 plek_2 plek_3\n{print} plek_4 plek_5 plek_6\n{print} plek_7 plek_8 plek_9\n{print} ' '\n{while} spel != 'uit':\n    keuze = {ask} 'Speler ' teken ', welke plek kies jij?'\n    {if} keuze {in} open_plekken:\n        {remove} keuze {from} open_plekken\n        {if} keuze == 1:\n            plek_1 = teken\n        {if} keuze == 2:\n            plek_2 = teken\n        {if} keuze == 3:\n            plek_3 = teken\n        {if} keuze == 4:\n            plek_4 = teken\n        {if} keuze == 5:\n            plek_5 = teken\n        {if} keuze == 6:\n            plek_6 = teken\n        {if} keuze == 7:\n            plek_7 = teken\n        {if} keuze == 8:\n            plek_8 = teken\n        {if} keuze == 9:\n            plek_9 = teken\n    {else}:\n        {print} 'Die plek was al bezet'\n    {print} plek_1 plek_2 plek_3\n    {print} plek_4 plek_5 plek_6\n    {print} plek_7 plek_8 plek_9\n    {print} ' '\n    {if} plek_1 == plek_2 {and} plek_2 == plek_3 {and} plek_1 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_4 == plek_5 {and} plek_5 == plek_6 {and} plek_4 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_7 == plek_8 {and} plek_8 == plek_9 {and} plek_7 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_1 == plek_4 {and} plek_4 == plek_7 {and} plek_1 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_2 == plek_5 {and} plek_5 == plek_8 {and} plek_2 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_3 == plek_6 {and} plek_6 == plek_9 {and} plek_3 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_1 == plek_5 {and} plek_5 == plek_9 {and} plek_1 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {elif} plek_3 == plek_5 {and} plek_5 == plek_7 {and} plek_3 != '.':\n        {print} 'Speler ' teken ' wint!'\n        spel = 'uit'\n    {else}:\n        {if} teken == 'x':\n            teken = 'o'\n        {else}:\n            teken = 'x'\n```\n"
             13:
-                story_text: "## Boter Kaas en Eieren\nIn dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. Je kunt spelen met twee persoenen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). \nDe speler die als eerst 3 op een rij krijgt (horizontaal, verticaal of diagonaal) wint!\nVeel plezier!\n"
+                story_text: "## Boter Kaas en Eieren\nIn dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. Je kunt spelen met twee personen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). \nDe speler die als eerst 3 op een rij krijgt (horizontaal, verticaal of diagonaal) wint!\nVeel plezier!\n"
                 example_code: "```\nteken = 'x'\nopen_plekken = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspel = 'aan'\nplek_1 = '.'\nplek_2 = '.'\nplek_3 = '.'\nplek_4 = '.'\nplek_5 = '.'\nplek_6 = '.'\nplek_7 = '.'\nplek_8 = '.'\nplek_9 = '.'\n{print} 'BOTER KAAS EN EIEREN!'\n{print} plek_1 plek_2 plek_3\n{print} plek_4 plek_5 plek_6\n{print} plek_7 plek_8 plek_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} spel {is} 'aan'\n        keuze = {ask} 'Speler ' teken ', Welke plek kies jij?'\n        {if} keuze {in} open_plekken\n            {remove} keuze {from} open_plekken\n            {if} keuze {is} 1\n                plek_1 = teken\n            {if} keuze {is} 2\n                plek_2 = teken\n            {if} keuze {is} 3\n                plek_3 = teken\n            {if} keuze {is} 4\n                plek_4 = teken\n            {if} keuze {is} 5\n                plek_5 = teken\n            {if} keuze {is} 6\n                plek_6 = teken\n            {if} keuze {is} 7\n                plek_7 = teken\n            {if} keuze {is} 8\n                plek_8 = teken\n            {if} keuze {is} 9\n                plek_9 = teken\n        {else}\n            {print} 'Die plek was al bezet!'\n        {print} plek_1 plek_2 plek_3\n        {print} plek_4 plek_5 plek_6\n        {print} plek_7 plek_8 plek_9\n        {print} ' '\n        winnaar = {ask} 'Heb je gewonnen?'\n        {if} winnaar {is} 'ja'\n            {print} 'Goed gedaan, speler ' teken '!'\n            spel = 'uit'\n        {else}\n            {if} teken {is} 'x'\n                teken = 'o'\n            {else}\n                teken = 'x'\n```\n"
                 start_code: '##  Schrijf jouw code hier'
         description: Speel een potje Boter Kaas en Eieren!
