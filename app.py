@@ -1580,6 +1580,8 @@ def get_highscores_page(user, filter):
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
+    # on the next page load.
     session.pop('keyword_lang')
     return jsonify({'succes': 200})
 
