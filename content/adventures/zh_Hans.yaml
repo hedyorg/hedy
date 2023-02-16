@@ -305,33 +305,33 @@ adventures:
     songs:
         levels:
             8:
-                story_text: "## 歌曲\n在前面的关卡，你编程了“99瓶啤酒”。你写了一段，然后需要复制99次。在第7关，你只需要简单地增加一行代码，就能重复这首歌99次！\n"
-                example_code: "```\n段 = 99\n{repeat} 99 {times}\n    {print} 段 '瓶啤酒在墙上'\n    {print} 段 '瓶啤酒'\n    {print} '取下一瓶传下去'\n    段 = 段 - 1\n    {print} 段 '瓶啤酒在墙上'\n```\n"
+                story_text: "## 歌曲\n在上一级中，你已经为歌曲 \"啤酒瓶\"编写了程序。但由于没有`{repeat}` ，你不得不多次复制一段歌词。\n在这一级中，你只需要简单地增加一行代码，就能重复这首歌99次！\n\n### 练习\n在空白处添加正确的命令，并正确缩进代码。\n"
+                example_code: "```\n歌词= 99\n 99 {times}\n    {print} 歌词 '瓶啤酒在墙上'\n    {print} 歌词 '瓶啤酒'\n    {print} '取下一瓶传下去'\n    歌词 = 歌词 - 1\n    {print} 歌词 '瓶啤酒在墙上'\n```\n"
                 start_code: '# 在这里写你的代码'
             6:
                 story_text: "## 歌曲\n歌曲中通常包含大量重复。有时重复是基于计数的。\n比如那首著名的歌曲“啤酒瓶”中。你可以用一点数学知识来为这首歌编程。 \n\n提示：使用朗读功能，让Hedy把歌曲唱给你听! \n\n### 练习 \n现在你可以通过复制第2至第7行的内容来重复这几行歌词，你想要重复几次就可以重复几次。\n"
-                example_code: "```\n瓶 = 99\n{print} 瓶 '瓶啤酒在墙上'\n{print} 瓶 '瓶啤酒'\n{print} '取下一瓶传下去'\n瓶 = 瓶 - 1\n{print} 瓶 '瓶啤酒在墙上'\n```\n"
+                example_code: "```\n歌词 = 99\n{print} 歌词 '瓶啤酒在墙上'\n{print} 歌词 '瓶啤酒'\n{print} '取下一瓶传下去'\n歌词 = 歌词 - 1\n{print} 歌词 '瓶啤酒在墙上'\n```\n"
                 start_code: "{print} '让我们唱歌吧！'"
                 story_text_2: "## 5只小猴子在床上跳来跳去\n这首儿童歌曲从5只小猴子倒数到1只猴子。\n如果你复制第2-7行并粘贴在代码下面，你就可以唱出整首歌了！\n"
                 example_code_2: "```\n数字 = 6\n数字 = 数字 - 1\n{print} 数字 ' 小猴子在床上跳来跳去'\n{print} '有一只掉下来，撞到了头'\n{print} '妈妈叫来了医生，医生说'\n{print} '不能再有猴子在床上跳了！'\n{sleep}\n```\n"
             12:
-                story_text: "## 唱一首歌吧!\n在这首歌中，我们可以使编程变得更加容易 '{if} 你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n"
-                example_code: "```\n一组动作 = '拍拍手', '跺跺脚', '喊万岁!'\n{for} 动作 {in} 一组动作\n    {for} i {in} {range} 1 {to} 2\n        {print} '如果你很高兴，你意识到它。'\n        {print} 动作\n    {print} '如果你很高兴，你意识到它，你真的想表现出来'\n    {print} '如果你快乐并意识到它'\n    {print} 动作\n```\n"
+                story_text: "## 唱一首歌吧!\n在这首歌中，我们可以使编程变得更加容易 '如果你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n\n### 练习 \n你能在每一行中加入适量的缩进，使歌曲正确播放吗？ \n注意：不是所有的行都需要缩进\n"
+                example_code: "```\n_一组动作 = '拍拍手', '跺跺脚', '喊万岁!'\n_{for} 动作 {in} 一组动作\n_{for} i {in} {range} 1 {to} 2\n_{print} '如果你很高兴，你意识到它'\n_{print}动作\n_{print} '如果你很高兴，你意识到它，你真的想表现出来'\n_{print} '如果你快乐并意识到它'\n_print} 动作\n```\n"
                 start_code: '# 把你的代码放在这里'
             11:
-                story_text: "## 歌曲\n在这一级，你可以使用`{for} i {in} {range}`命令使用计数来创作歌曲。\n"
-                example_code: "## 5只小猴子们\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' 小猴子们在床上跳来跳去的。'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈叫来了医生，医生说'\n    {if} i {is} 1\n        {print} '把这些猴子们直接放到床上去！'\n    {else}\n        {print} '不再有猴子们在床上跳来跳去了！'\n```\n"
+                story_text: "## 歌曲\n在这一级，你可以同时使用`{for}` 和`{range}`命令 ，做一些使用计数的歌曲，如5只小猴子们。\n\n### 练习1\n填空使代码生效！如果你不记得歌曲的内容，可以自己去查。\n\n### 练习2\n这首歌的最后一行与其他的不同。将这一行打印在`{for}`语句里面 ，并使用`{if}`命令使其正确工作。\n"
+                example_code: "```\n猴子们 _ _ 5 _ 1\n    {print} 猴子们 '小猴子们在床上跳来跳去'\n```\n"
                 start_code: '# 把你的代码放在这里'
             10:
-                story_text: "## 歌曲\n在这一级中，你可以轻松地制作儿童歌曲《五只小猴子》。你能完成最后的合唱吗？\n你也可以只用6行就完成整首鲨鱼宝宝的歌曲（包括鲨鱼家族中所有其他种类的鲨鱼）！\n或者你可以用所有不同的动物制作《老麦当劳》。\n"
-                example_code: "## 5只小猴子们在上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子 {in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说'\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼 {in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪, 狗, 牛\n{for} 动物 {in} 动物们\n    {if} 动物 {is} 猪\n        声音 = 哼哼\n    {if} 动物 {is} 狗\n        声音 = 汪汪\n    {if} 动物 {is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
+                story_text: "## 歌曲\n使用`{for}`，你只需6行即可打印整首小鲨鱼的歌曲（包括家庭中的所有其他鲨鱼）！\n\n### 练习 1\n你能使用 `{for}` 命令使小鲨鱼这首歌的代码更简短吗？请完成代码范例。\n"
+                example_code: "```\n家庭成员 = 宝宝, 妈妈, 爸爸, 奶奶, 爷爷\n_ _ _ _ \n  {print} _\n```\n"
                 start_code: '# 在这里写你的代码'
-                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
-                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
+                example_code_2: "```\n猴子们 = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### 练习2\n打印歌曲《5只小猴子们在床上跳来跳去》。如果你不记得了，就查查文本。\n\n**（额外的）**打印歌曲《老麦当劳》，并确保所有的动物都发出不同的声音，使用`{if}`条件语句 。\n"
             7:
                 story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》？ 完成代码，替换空白处？ \n**Extra* 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！你能想出更多的歌曲吗？ 你能再想出一首歌曲并打印出来吗？\n"
                 example_code: "```\n{repeat} _ _{print} '小鲨鱼图图图杜杜'\n{print} '小鲨鱼'\n```\n"
-                start_code: "{print} '鲨鱼宝宝'"
+                start_code: "{print} '小鲨鱼'"
             16:
                 story_text: "## 唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
                 start_code: '# 把你的代码放在这里'
@@ -346,21 +346,21 @@ adventures:
                 start_code: "{print} 海龟赛跑！\n角度 {is} 90\n{turn} 角度\n{forward} 25"
                 example_code: "```\n答案 {is} {ask} 海龟应该走多少步？\n{forward}答案\n```\n"
                 example_code_2: "```\n{print} 正在画图\n角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
-                story_text_2: "此外，在第1级，海龟只能左转或右转。这有点无聊！\n在第2级，它可以转向任何方向。\n\n用90来转1/4圈。我们管这个叫角度。完整转一圈是360度。\n你能用这段代码来画一个图案吗？比如三角形或者圆形？\n"
+                story_text_2: "此外，在第1级，海龟只能左转或右转。这有点无聊！\n在第2级，它可以转向任何方向。\n\n用90来转1/4圈。我们管这个叫角度。完整转一圈是360度。\n\n### 练习\n你能用这段代码来画一个图案吗？比如三角形或者圆形？\n"
             1:
-                story_text: "## 让我们来画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n如果你想向后退，你可以使用`{forward}`命令，但要用一个负数。因此，比如说`{forward} -100`\n\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
+                story_text: "## 让我们来画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n\n如果你想向后退，你可以使用`{forward}`命令，但要用一个负数。因此，比如说`{forward} -100`\n\n\n### 练习\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             3:
-                story_text: "## 寻找海龟\n在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。\n使用 `{at} {random}` 从列表中选择一个值。您可以复制并粘贴第 2 行和第 3 行以创建更长的随机路径。\n"
+                story_text: "## 寻找海龟\n在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。\n使用 `{at} {random}` 从列表中选择一个值。\n### 练习\n您可以复制并粘贴第 2 行和第 3 行以创建更长的随机路径。\n"
                 example_code: "```\n角度 {is} 10, 50, 90, 150, 250\n{turn} 角度 {at} {random}\n{forward} 25\n```\n"
                 start_code: "角度 {is} 10, 50, 90, 150, 250\n{turn} 角度 {at} {random}\n{forward} 25"
             4:
                 story_text: "## 让我们来画画\n在第4级，你必须在`{print}`和`{ask}`语句中使用引号。在画画时也一样！\n"
-                example_code: "```\n{print} '正在画图'\n角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
+                example_code: "```\n{print} _ '正在画图'\n角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
                 start_code: "{print} '绘图'\n角度 {is} 90\n{turn} 角度\n{forward} 25"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## 颜色\n你也可以用命令`{color}` ，改变线条的颜色。请看这个例子。\n你还可以用命令`{color} {white}`来制作 \"看不见的 \"线条。你可以用这些白线在开始绘图前将乌龟移到屏幕的任何地方。\n"
             5:
                 story_text: "## 让我们来画画\n在第5级，你可以用`{if}`来做出选择。比如选择不同类型的图案。\n"
                 example_code: "```\n{print} '正在画图'\n图案 {is} {ask} '你想要正方形还是三角形？'\n{if} 图案 {is} 三角形 角度 {is} 120\n{else} 角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
@@ -371,7 +371,7 @@ adventures:
                     {turn} 角度
                     {forward} 25
             8:
-                story_text: "## 让我们来画画\n现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n"
+                story_text: "## 让我们来画画\n现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n\n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: "```\n角度 = 90\n{repeat} 10 {times}\n    {turn} 角度\n    {forward} 50\n```\n"
                 example_code_2: "```\n边 = {ask} '你想要几边形？'\n角度 = 360 / 边\n{repeat} 角度 {times}\n    {turn} _\n    {forward} _\n```\n"
                 story_text_2: "## 交互\n另外，我们现在还可以改进之前的能画不同图案的程序。\n你能看出这里海龟需要转多少度吗？完成这段代码，你就能画出任何你想要的多边形！\n"
@@ -1361,7 +1361,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             5:
                 story_text: "## 鹦鹉\n如果你的鹦鹉说出了正确的词，给它一些奖励！\n通过填写4个缺失的命令来完成代码。\n"
-                example_code: "```\n词汇表 {is} 叽叽喳喳, 海迪\n{print} '训练你的鹦鹉！'\n新词 {is} {ask} '你想让他们学哪个词？'\n{add} 新词 {to_list} 词汇表\n说了的词 {is} 词汇表 {at} {random}\n{print} '\U0001F9D2 海迪，说' 新词 '！'\n{print} '\U0001F99C ' 说了的词\n{if} 说了 {is} 新词 {print} '\U0001F9D2 干得好！海迪！\U0001F36A'\n{else} {print} '\U0001F9D2 不对，海迪！说' 新词\n```\n"
+                example_code: "```\n词汇表 {is} 叽叽喳喳, 海迪\n{print} '训练你的鹦鹉！'\n新词 {is} {ask} '你想让他们学哪个词？'\n{add} 新词 {to_list} 词汇表\n说了的词 {is} 词汇表 {at} {random}\n{print} '\U0001F9D2 海迪，说' 新词 '！'\n{print} '\U0001F99C ' 说了的词\n_说了的词 {is} 新词 _ '\U0001F9D2 干得好！海迪！\U0001F36A'\n_ _'\U0001F9D2 不对，海迪！说' 新词\n```\n"
                 start_code: '# 在这里写你的代码'
             4:
                 story_text: "## 鹦鹉\n在这一级中，我们必须在`{ask}` 和`{print}` 的命令中使用引号。\n你能通过添加引号来完成这段代码吗？\n"
