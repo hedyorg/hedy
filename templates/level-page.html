@@ -25,7 +25,7 @@
                 <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
                 {% for example in cheatsheet %}
                   <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-green-500">
-                    <div class="font-thin flex-grow h-min min-w-80" tabindex=0>
+                    <div class="flex-grow h-min min-w-80" tabindex=0>
                       {{ example.explanation|commonmark }}
                     </div>
                     <div class="flex-none">
