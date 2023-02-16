@@ -1957,6 +1957,7 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"""for {var_name} in range(int({str(times)})):
 {ConvertToPython.indent(command)}"""
 
@@ -1981,6 +1982,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, meta, args):
@@ -2069,7 +2071,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-
+        self.ifpressed_prefix_added = False
         return f"for {times} in {args[1]}:\n{body}"
 
 
@@ -2084,6 +2086,7 @@ class ConvertToPython_11(ConvertToPython_10):
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after for loop
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
@@ -2268,6 +2271,7 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
         body = sleep_after(body)
         exceptions = self.make_catch_exception([args[0]])
+        self.ifpressed_prefix_added = False  # add ifpressed prefix again after while loop
         return exceptions + "while " + args[0] + ":\n" + body
 
 
@@ -2689,6 +2693,24 @@ def preprocess_ifs(code, lang='en'):
         else:
             return line[0:len(command)] == command
 
+    def starts_with_after_repeat(command, line):
+        elements_in_line = line.split()
+        repeat_plus_translated = ['repeat', KEYWORDS[lang].get('repeat')]
+        times_plus_translated = ['times', KEYWORDS[lang].get('times')]
+
+        if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
+            line = ' '.join(elements_in_line[3:])
+
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                #  starts with the keyword and next character is a space
+                if line[0:len(c)] == c and (len(c) == len(line) or line[len(c)] == ' '):
+                    return True
+            return False
+        else:
+            return line[0:len(command)] == command
+
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
@@ -2711,18 +2733,19 @@ def preprocess_ifs(code, lang='en'):
                 if contains(c, line):
                     return True
             return False
+
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
 
         # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
 
             if (
-                not contains('pressed', line) and contains_any_of(commands, line)
-            ):  # and this should also (TODO) check for a second is cause that too is problematic.
+                contains_any_of(commands, line)
+            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
