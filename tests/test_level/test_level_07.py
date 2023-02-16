@@ -232,7 +232,6 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected)
 
-
     def test_if_pressed_multiple(self):
         code = textwrap.dedent("""\
             if x is pressed print 'doe het 1 keer!'
@@ -270,7 +269,6 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected,
             translate=False)
-
 
     def test_repeat_if_pressed_multiple(self):
         code = textwrap.dedent("""\
@@ -347,7 +345,6 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected,
             translate=False)
-
 
     def test_repeat_if_multiple(self):
         code = textwrap.dedent("""\
