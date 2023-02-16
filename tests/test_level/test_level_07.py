@@ -231,3 +231,150 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected)
+
+    def test_if_pressed_multiple(self):
+        code = textwrap.dedent("""\
+            if x is pressed print 'doe het 1 keer!'
+            if y is pressed print 'doe het 1 keer!'
+            if z is pressed print 'doe het 1 keer!'""")
+
+        expected = HedyTester.dedent("""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'x':
+              print(f'doe het 1 keer!')
+              break
+            else:
+              _ = 'x'
+              break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'y':
+              print(f'doe het 1 keer!')
+              break
+            else:
+              _ = 'x'
+              break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'z':
+              print(f'doe het 1 keer!')
+              break""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False)
+
+    def test_repeat_if_pressed_multiple(self):
+        code = textwrap.dedent("""\
+            repeat 3 times if x is pressed forward 15
+            repeat 3 times if y is pressed forward 15
+            repeat 3 times if z is pressed forward 15""")
+
+        expected = HedyTester.dedent("""\
+        for __i__ in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'x':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                _ = 'x'
+                break
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'y':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                _ = 'x'
+                break
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'z':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+          time.sleep(0.1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False)
+
+    def test_repeat_if_multiple(self):
+        code = textwrap.dedent("""\
+            aan is ja
+            repeat 3 times if aan is ja print 'Hedy is leuk!'
+            repeat 3 times if aan is ja print 'Hedy is leuk!'""")
+
+        expected = HedyTester.dedent("""\
+        aan = 'ja'
+        for __i__ in range(int('3')):
+          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
+            print(f'Hedy is leuk!')
+          else:
+            _ = 'x'
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
+            print(f'Hedy is leuk!')
+          time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False)
