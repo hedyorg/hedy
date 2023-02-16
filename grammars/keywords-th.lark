@@ -1,7 +1,7 @@
 _PRINT: ("แสดง" | "print") _SPACE?
-_ASK: ("ถาม" | "ask") _SPACE?
-_ECHO: ("echo" | "echo") _SPACE?
-_FORWARD: ("forward" | "forward") _SPACE?
+_ASK: ("ถามว่า" | "ask") _SPACE?
+_ECHO: ("พูด" | "echo") _SPACE?
+_FORWARD: ("เดินหน้า" | "forward") _SPACE?
 _TURN: ("เลี้ยว" | "turn") _SPACE?
 left: ("ซ้าย" | "left") _SPACE?
 right: ("ขวา" | "right") _SPACE?
@@ -17,30 +17,30 @@ red: ("แดง" | "red") _SPACE?
 white: ("ขาว" | "white") _SPACE?
 yellow: ("เหลือง" | "yellow") _SPACE?
 _IS: _SPACE ("คือ" | "is") _SPACE
-_SLEEP: ("sleep" | "sleep") _SPACE?
+_SLEEP: ("รอ" | "sleep") _SPACE?
 _ADD_LIST: ("เพิ่ม" | "add") _SPACE
-_TO_LIST: _SPACE ("to" | "to") _SPACE
-_REMOVE: ("remove" | "remove") _SPACE
+_TO_LIST: _SPACE ("ไปยัง" | "to") _SPACE
+_REMOVE: ("ลบ" | "remove") _SPACE
 _FROM: _SPACE ("จาก" | "from") _SPACE
-_AT: _SPACE ("at" | "at") _SPACE
-random: ("random" | "random") _SPACE?
-_IN: _SPACE ("ใน" | "in") _SPACE
-_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_AT: _SPACE ("แบบ" | "at") _SPACE
+random: ("สุ่ม" | "random") _SPACE?
+_IN: _SPACE ("อยู่ใน" | "in") _SPACE
+_NOT_IN: _SPACE ("ไม่อยู่ใน" | "not in") _SPACE
 _IF: ("ถ้า" | "if") _SPACE
-_ELSE: "else" | "else"
+_ELSE: "ไม่อย่างนั้น" | "else"
 _AND: _SPACE ("และ" | "and") _SPACE
-_REPEAT: ("repeat" | "repeat") _SPACE
-_TIMES: _SPACE ("times" | "times")
-_FOR: ("for" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
-_TO: _SPACE ("to" | "to") _SPACE
-_STEP: "step" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
-_INPUT: ("input" | "input")
+_REPEAT: ("ทำซ้ำ" | "repeat") _SPACE
+_TIMES: _SPACE ("ครั้ง" | "times")
+_FOR: ("ให้" | "for") _SPACE
+_RANGE: ("ช่วง" | "range") _SPACE?
+_TO: _SPACE ("จนถึง" | "to") _SPACE
+_STEP: "เดิน" | "step"
+_ELIF: _SPACE? ("หรือถ้า" | "elif") _SPACE
+_INPUT: ("รับข้อมูล" | "input")
 _OR: _SPACE ("หรือ" | "or") _SPACE
-_WHILE: ("while" | "while") _SPACE
+_WHILE: ("เมื่อไหร่ก็ตามที่" | "while") _SPACE
 _LENGTH: "ความยาว" | "length"
 _COLOR : ("สี" | "color") _SPACE?
-_PRESSED: ("pressed" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
-clear: ("clear" | "clear") _SPACE?
+_PRESSED: ("ปุ่มที่ถูกกด" | "pressed") _SPACE?
+_BUTTON: ("ปุ่ม" | "button") _SPACE?
+clear: ("ลบกระดาน" | "clear") _SPACE?
