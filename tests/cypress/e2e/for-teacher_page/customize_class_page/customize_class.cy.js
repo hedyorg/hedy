@@ -1,22 +1,28 @@
-import {loginForTeacher} from '../../tools/login/login.js'
-import { createClass } from "../../tools/classes/class";
+import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
+import { ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
-    beforeEach(() => {
+    let className;
+    beforeEach(async () => {
       loginForTeacher();
-      createClass();
+      className = await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.getBySel('customize_class_button').click(); // Press customize class button
+
+      // Remove any customizations that already exist to get the class into a predictable state
+      // This always throws up a modal dialog
+      cy.getBySel('remove_customizations_button').click({ force: true });
+      cy.getBySel('modal_yes_button').click();
     });
-  
-    it('checks the option checkboxes', () => { 
+
+    it('checks the option checkboxes', () => {
       // following code checks every single checkbox on the current page:
       cy.get('[type="checkbox"]').check({force:true})
       cy.get('[type="checkbox"]').should('be.checked')
       cy.get('[type="checkbox"]').uncheck()
       cy.get('[type="checkbox"]').should('be.not.checked')
     });
-  
+
     it('goes back to the view class page', () => {
       cy.getBySel('back_to_class')
       .should('be.visible')
@@ -31,15 +37,15 @@ describe('customize class page', () => {
       // Click on level 1
       cy.getBySel('adventures')
         .select('1')
-        .should('have.value', '1');    
-    
+        .should('have.value', '1');
+
       // level 1 should be visible and level 2 not
       cy.getBySel("level-1")
         .should('be.visible');
-    
+
       cy.getBySel("level-2")
         .should('not.be.visible');
-    
+
       // after selecting level 2 it should be visible and level 1 not
       cy.getBySel('adventures')
         .select('2')
@@ -47,7 +53,7 @@ describe('customize class page', () => {
 
       cy.getBySel("level-1")
         .should('not.be.visible');
-    
+
       cy.getBySel("level-2")
         .should('be.visible');
     });
@@ -68,11 +74,11 @@ describe('customize class page', () => {
     });
 
     it('removes the adventure and checks that it is added to the available adventures drop down and removed from the dragger', () => {
-      
+
       cy.getBySel('sortadventures')
         .children()
         .should('not.be.visible');
-      
+
       // Click on level 2
       cy.getBySel("adventures")
         .select('2')
@@ -82,21 +88,21 @@ describe('customize class page', () => {
       cy.getBySel("available_adventures_current_level")
         .children()
         .should('have.length', 1)
-    
+
       // store the name of the adventure we're going to delete
       cy.get('[data-cy="level-2"] div:first')
         .invoke('attr', 'adventure')
         .as('adventure')
-        .then(adventure => {        
+        .then(adventure => {
           // Get the first adventure, and click its remove button
           cy.get('[data-cy="level-2"] div:first span')
             .click();
-          
+
           // The available adventures dropdown should now include the new adventure
           cy.getBySel("available_adventures_current_level")
             .children()
             .should('have.length', 2);
-          
+
           // the added option should be the last
           cy.get('[data-cy="available_adventures_current_level"] option:last')
             .should('have.id', `remove-${adventure}`);
@@ -106,7 +112,7 @@ describe('customize class page', () => {
             .select(1)
             .children()
             .should('have.length', 1);
-          
+
           // the adventure should now be last
           cy.get('[data-cy="level-2"] div:last')
             .should('have.attr', 'adventure')
@@ -149,9 +155,7 @@ describe('customize class page', () => {
       .should('not.be.visible');
 
       // Click on level 1
-      cy.getBySel("adventures")
-        .select('1')
-        .should('have.value', '1');
+      selectLevel('1');
 
       // Now it should be visible
       cy.getBySel('level-1').should('be.visible');
@@ -168,11 +172,11 @@ describe('customize class page', () => {
         .eq(1)
         .invoke('attr', 'adventure')
         .as('second_adventure');
-    
+
       // Getting their values first, and then moving them around
       cy.get('@first_adventure').then(first_adventure => {
         cy.get('@second_adventure').then(second_adventure => {
-        
+
           // Move the second adventure to the first place
           cy.getBySel('level-1')
             .children()
@@ -181,20 +185,20 @@ describe('customize class page', () => {
             .siblings()
             .should('have.attr', 'class')
             .and('contain', 'drop-adventures-hint');
-    
+
           cy.getBySel('level-1')
             .children()
-            .eq(0)      
+            .eq(0)
             .trigger('drop')
             .trigger('dragend');
-          
+
           // they should be inverted now
           cy.getBySel('level-1')
             .children()
             .eq(0)
             .should('have.attr', 'adventure')
             .and('eq', second_adventure);
-            
+
           cy.getBySel('level-1')
             .children()
             .eq(1)
@@ -203,4 +207,38 @@ describe('customize class page', () => {
         })
       })
     });
+
+    describe('an adventure that is hidden', () => {
+      const hiddenAdventure = 'parrot';
+
+      beforeEach(() => {
+        selectLevel('1');
+        cy.get(`*[data-cy="level-1"] div[adventure="${hiddenAdventure}"] *[data-cy="hide"]`).click();
+      });
+
+      it('disappears from the tab list', () => {
+        cy.get(`div[adventure="${hiddenAdventure}"]`).should('not.be.visible');
+      });
+
+      it('can be re-added from the right dropdown list', () => {
+        cy.getBySel('available_adventures_current_level').children(`#remove-${hiddenAdventure}`).should('exist');
+
+        cy.getBySel('available_adventures_current_level').select(`${hiddenAdventure}-1-false`);
+
+        cy.get(`div[adventure="${hiddenAdventure}"]`).should('be.visible');
+      });
+
+      it('becomes invisible for the student', () => {
+        // FIXME: This test is hard to write, as I'd like to invite `student1`
+        // to the class, but inviting existing students takes a lot of steps...
+
+        // loginForStudent();
+      });
+    });
   });
+
+  function selectLevel(level) {
+    cy.getBySel("adventures")
+      .select(level)
+      .should('have.value', level);
+  }

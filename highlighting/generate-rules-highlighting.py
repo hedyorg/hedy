@@ -19,6 +19,30 @@ KEYWORDS_PATTERN = '(\\w+).yaml$'
 # Functions that collect all the rules, for all levels, of a given language
 
 
+def main():
+    os.chdir(os.path.dirname(__file__) + "/..")
+
+    print("Generation of translations.....................", end="")
+    language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
+    # Saving the rules in the corresponding file
+    with open(OUTPUT_PATH_TRANSLATION, "w", encoding='utf8') as file_lang:
+        file_lang.write(json.dumps(language_keywords, indent=4, ensure_ascii=False))
+    print(" Done !")
+
+    print("Generation of syntax highlighting rules........", end="")
+
+    # List of rules by level
+    levels = generate_rules()
+
+    validate_ruleset(levels)
+
+    # Saving the rules in the corresponding file
+    with open(OUTPUT_PATH_HIGHLIGHT, "w", encoding='utf8') as file_syntax:
+        file_syntax.write(json.dumps(levels, indent=4, ensure_ascii=False))
+
+    print(" Done !")
+
+
 def generate_rules():
     return [
         {'name': 'level1', 'rules': rule_level1()},
@@ -186,28 +210,5 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     return result
 
 
-os.chdir(os.path.dirname(__file__) + "/..")
-
-
-print("Generation of translations.....................", end="")
-language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
-# Saving the rules in the corresponding file
-file_lang = open(OUTPUT_PATH_TRANSLATION, "w", encoding='utf8')
-file_lang.write(json.dumps(language_keywords, indent=4, ensure_ascii=False))
-file_lang.close()
-print(" Done !")
-
-
-print("Generation of syntax highlighting rules........", end="")
-
-# List of rules by level
-levels = generate_rules()
-
-validate_ruleset(levels)
-
-# Saving the rules in the corresponding file
-file_syntax = open(OUTPUT_PATH_HIGHLIGHT, "w", encoding='utf8')
-file_syntax.write(json.dumps(levels, indent=4, ensure_ascii=False))
-file_syntax.close()
-
-print(" Done !")
+if __name__ == '__main__':
+    main()
