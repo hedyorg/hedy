@@ -299,6 +299,8 @@ adventures:
                     score = 25
                     {print} 'Jij hebt ' score ' gehaald!'
                     ```
+                story_text_6: "**Rekenen met woorden**\nIn dit level is het ook mogelijk om het + teken met teksten te gebruiken, zoals bijvoorbeeld:"
+                example_code_6: "```\na = 'Hallo '\nb = 'wereld!'\n{print} a + b\n```\n"
             13:
                 start_code: |-
                     naam = {ask} 'hoe heet jij?'
@@ -670,6 +672,10 @@ adventures:
                     {print} 'Nu kun je het huis in!'
                     ```
                 start_code: "# Schrijf jouw code hier"
+            13:
+                start_code: '# schrijf hier jouw code'
+                story_text: "## Verhaal\nDoor gebruik te maken van `{and}` en `{or}` commando's, kun jij jouw verhalen korter maken. Kijk bijvoorbeeld maar naar het draken verhaal.\n\n### Opdracht\nKun jij jouw eigen mini avonturen spelletje maken?\n"
+                example_code: "```\nzwaard = 'verloren'\nspel = 'aan'\n{print} 'Onze held loopt door het bos'\n{print} 'Het pad splits in tweeën'\n{for} i {in} {range} 0 {to} 2\n    {if} spel {is} 'aan'\n        pad = {ask} 'Welk pad moet ze kiezen?'\n        {if} pad {is} 'links' {and} zwaard {is} 'gevonden'\n            {print} 'Onze held komt een draak tegen!'\n            {print} 'Gelukkig heeft de held een zwaard bij zich om de draak te verslaan!'\n            spel = 'uit'\n        {if} pad {is} 'links' {and} zwaard {is} 'verloren'\n            {print} 'Onze held komt een draak tegen, maar heeft geen wapens!'\n            {print} 'De held wordt verslagen door de draak ...'\n            {print} 'Probeer het nog een keer'\n            spel = 'uit'\n        {if} pad {is} 'rechts' {and} zwaard {is} 'gevonden'\n            {print} 'Het zwaard is al in bezit, hier is niets meer te vinden.'\n            {print} 'De held loopt terug'\n        {if} pad {is} 'rechts' {and} zwaard {is} 'verloren'\n            {print} 'Onze held vind een zwaard'\n            {print} 'Dit zou wel eens heel handig kunnen zijn'\n            zwaard = 'gevonden'\n```\n"
     parrot:
         name: "Papegaai"
         description: "Maak je eigen online papegaai die je napraat!"
@@ -2346,6 +2352,8 @@ adventures:
                     {print} 'Dat wordt dan ' prijs ' euro'
                     ```
                 start_code: "# Schrijf jouw code hier"
+                example_code_2: "```\ndrank = {ask} 'Wat wil je drinken?'\n{if} drank {is} 'water' {or} drank {is} 'sap'\n    {print} 'Dat is een gezonde keuze'\n```\n"
+                story_text_2: "We gebruiken `{or}` om te bepalen of één van twee dingen waar is.\n"
             15:
                 story_text: |
                     ## Restaurant

@@ -1,6 +1,6 @@
 adventures:
     default:
-        name: Introduction
+        name: 簡介
         levels:
             3:
                 start_code: '{print} hello world!'
@@ -29,14 +29,14 @@ adventures:
                 story_text_6: "**Maths with words** \nIn this level it is also allowed to use the + sign with texts. For example:"
                 example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
             1:
-                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.     \n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## 歡迎來到Hedy！\n在關卡 1 中，您可以使用命令 `{print}`、`{ask}` 和 `{echo}`。\n在編程字段中輸入您的代碼。 或者按下示例代碼塊中的綠色按鈕，代碼將輸入！\n使用編程字段下方的綠色“運行代碼”按鈕自行嘗試代碼。\n\n您可以使用 `{print}` 命令將文本打印到屏幕上。     \n"
+                example_code: "```\n{print} 你好!\n{print} 歡迎來到Hedy!\n```\n"
+                story_text_2: "您還可以使用“{ask}”請求輸入，然後使用“{echo}”命令重複輸入。\n"
+                story_text_3: "讓我們開始吧！ 不知道要創建什麼？ 在下一個選項中，您將找到要構建程序的想法。\n"
+                example_code_2: "```\n{ask} 你叫什麽名字?\n{echo} 你好\n```\n"
+                start_code: '{print} 你好，世界！'
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
+                story_text: "## 變量\n在級別 2 中，我們學習了兩個新命令：`{is}` 和 `{sleep}`。\n你可以用 `{is}`來命名一個詞。 這稱為變量。 在這個例子中，我們創建了一個名為 name 的變量和一個名為 age 的變量。 您可以在代碼中的任何地方使用單詞名稱，它將被 Hedy 替換，如下所示：\n\n這樣你就不再需要 `{echo}` 命令了！\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
@@ -110,8 +110,8 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
                 story_text_3: "## Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-        description: Level explanation
-        default_save_name: intro
+        description: 關卡解釋
+        default_save_name: 介紹
     story:
         name: Story
         levels:
