@@ -42,6 +42,9 @@ for schema in $all_schemas; do
     rm validate.txt
 done
 
+# Also run the structure validator which compares en.yaml to the other languages
+python tools/check-yaml-structure.py
+
 if $failures; then
     exit 1
 fi
