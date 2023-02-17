@@ -176,10 +176,10 @@ class MissingInnerCommandException(HedyException):
 
 class InvalidAtCommandException(HedyException):
     def __init__(self, command, level, line_number):
-        super().__init__('Invalid At Command', 
-                        command=command, 
-                        level=level,                        
-                        line_number=line_number)
+        super().__init__('Invalid At Command',
+                         command=command,
+                         level=level,
+                         line_number=line_number)
 
 
 class IncompleteRepeatException(HedyException):
