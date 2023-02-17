@@ -500,24 +500,24 @@ levels:
                     ```
                     {print} preis
                     ```
-                feedback: "You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`"
+                feedback: "Du möchtest nicht das Wort `{print}` ausgeben, aber du möchtest einen Preis `{print}` aus deiner Liste `{at} {random}`"
             -   option: |
                     ```
-                    {print} prices {at} {random}
+                    {print} preise {at} {random}
                     ```
-                feedback: "Great! You've really paid attention."
+                feedback: "Großartig! Du hast wirklich aufgepasst."
             -   option: |
                     ```
-                    {print} {at} {random} price
+                    {print} {at} {random} preise
                     ```
-                feedback: "`{at} {random}` is placed behind the variable."
-            -   option: "Nothing, this code is alright."
-                feedback: "Look carefully for the mistake you missed!"
+                feedback: "`{at} {random}` wird hinter der Variablen platziert."
+            -   option: "Nichts, dieser Code ist in Ordnung."
+                feedback: "Such aufmerksam nach dem Fehler den du übersehen hast!"
             correct_answer: "B"
             hint: "Der Variablenname ist prices"
             question_score: '10'
         5:
-            question_text: "What is wrong in this code?"
+            question_text: "Wo ist der Fehler in diesem Code?"
             code: |-
                 question {is} {ask} What do you want to know?
                 {print} question
@@ -1914,7 +1914,7 @@ levels:
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "Du bekommst 5 Euro Rabatt, wenn du eine mittlere Pizza mit Cola bestellst.<br>Aber der Code hat einen Fehler! Wie kann man ihn debuggen?"
             code: |-
                 {if} food {is} pizza
                 {if} size {is} medium
@@ -1936,7 +1936,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 2
                     ```
-                feedback: "Try again!"
+                feedback: "Dem zweiten {if} fehlt Code!"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -1944,7 +1944,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: "Try again"
+                feedback: "Zwei aufeinander folgende {if}s sind nie korrekt."
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -1952,7 +1952,7 @@ levels:
                             {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: "Try again"
+                feedback: "Bijna goed maar kijk eens naar die laatste regel."
             correct_answer: "A"
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
