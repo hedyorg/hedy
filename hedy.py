@@ -1167,7 +1167,7 @@ class IsValid(Filter):
     def error_text_no_print(self, meta, args):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
-    
+
     def error_list_access_at(self, meta, args):
         error = InvalidInfo('invalid random keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
