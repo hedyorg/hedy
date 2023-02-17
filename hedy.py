@@ -823,7 +823,7 @@ class TypeValidator(Transformer):
                 # if the variable name is 'at', it's because they tried to print "at random"
                 # in a level that wasn't allowed
                 if var_name == 'at' and self.level >= 16:
-                    raise exceptions.InvalidRandomCommandException()
+                    raise exceptions.InvalidAtCommandException()
 
                 # is there a variable that is mildly similar?
                 # if so, we probably meant that one
@@ -1173,8 +1173,8 @@ class IsValid(Filter):
     def error_text_no_print(self, meta, args):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
-
-    def error_random_keyword(self, meta, args):
+    
+    def error_list_access_at(self, meta, args):
         error = InvalidInfo('invalid random keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
     # other rules are inherited from Filter
@@ -2855,7 +2855,7 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
         elif invalid_info.error_type == 'invalid random keyword':
-            raise exceptions.InvalidRandomCommandException()
+            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
