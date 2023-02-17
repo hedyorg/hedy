@@ -819,12 +819,6 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-
-                # if the variable name is 'at', it's because they tried to print "at random"
-                # in a level that wasn't allowed
-                if var_name == 'at' and self.level >= 16:
-                    raise exceptions.InvalidAtCommandException()
-
                 # is there a variable that is mildly similar?
                 # if so, we probably meant that one
 
