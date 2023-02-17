@@ -46,7 +46,7 @@
                                {% if adventure.name in adventure_names %}
                                     {# Note: this code is copy/pasted in teachers.ts. If you change it here, also change it there #}
                                     <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level="{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
-                                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
                                         {{ adventure_names[adventure['name']] }}
                                     </div>
                                 {% endif %}
@@ -58,7 +58,7 @@
                         <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab">
                             {% for adventure in adventures %}
                             <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure }}" level = "{{ level }}" from-teacher = "false">
-                                <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                                <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
                                 {{ adventure_names[adventure] }}
                             </div>
                             {% endfor %}
@@ -119,7 +119,7 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
                                 <td class="border-t border-gray-400 px-4 pt-2">
-                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" 
+                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2"
                                     data-cy="quiz_input" id="quiz" {% if "quiz" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
                                 </td>
                             </tr>
@@ -188,7 +188,7 @@
                     <div class="flex flex-row ml-auto gap-2">
                         <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" data-cy="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                         {{_('remove_customization')}}</button>
-                        <button class="green-btn" data-cy="back_to_class" onclick="validate_changes()">{{_('back_to_class')}}</button>
+                        <button class="green-btn" data-cy="back_to_class" onclick="leaveWithConfirmation()">{{_('back_to_class')}}</button>
                     </div>
                 </div>
             {% endif %}
@@ -198,26 +198,25 @@
 <script>
 // If we return something a pop-up will be given: "are you sure you want to leave?"
 // Best we can do as the beforeunload doesn't allow the call of functions or other methods
-$(window).bind('beforeunload', () => {
-    if (window.State.unsaved_changes) {
-        return " ";
-    };
-});
-function validate_changes() {
-    if(window.State.unsaved_changes) {
-        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
+function leaveWithConfirmation() {
+    if (hedyApp.hasUnsavedChanges()) {
+        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function() {
+            hedyApp.clearUnsavedChanges();
             window.location = "/for-teachers/class/{{class_info.id}}";
         });
     } else {
         window.location = "/for-teachers/class/{{class_info.id}}";
     }
 }
+
 window.addEventListener("DOMContentLoaded", () => {
-    hedyApp.initializeCustomizeClassPage({{_('available_adventures_level')|tojson}});
-    window.State.teacher_adventures = {{ teacher_adventures|tojson }};
-    window.State.adventures_default_order = {{ adventures_default_order|tojson }};
-    window.State.adventure_names = {{ adventure_names|tojson }};
-    window.State.available_adventures = {{ available_adventures|tojson }};
+    hedyApp.initializeCustomizeClassPage({
+        available_adventures_level_translation: {{_('available_adventures_level')|tojson}},
+        teacher_adventures: {{ teacher_adventures|tojson }},
+        adventures_default_order: {{ adventures_default_order|tojson }},
+        adventure_names: {{ adventure_names|tojson }},
+        available_adventures: {{ available_adventures|tojson }},
+    });
 });
 </script>
 {% endblock %}

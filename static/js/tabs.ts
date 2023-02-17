@@ -1,6 +1,10 @@
 import { modal } from './modal';
 import { theGlobalEditor } from './app';
 import {loadParsonsExercise} from "./parsons";
+import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
+import { ClientMessages } from './client-messages';
+
+let _currentTab: string | undefined;
 
 /**
  * Activate tabs
@@ -20,135 +24,19 @@ import {loadParsonsExercise} from "./parsons";
  * The active TAB is indicated by the  '.tab-selected' class, the active
  * TARGET by the *absence* of the '.hidden' class.
  */
-$(function() {
-  function resetWindow() {
-    $ ('#warningbox').hide ();
-    $ ('#errorbox').hide ();
-    $ ('#okbox').hide ();
-    const output = $('#output');
-    const variable_button = $(output).find('#variable_button');
-    const variables = $(output).find('#variables');
-    output.empty();
-    $ ('#turtlecanvas').empty ();
-    output.append(variable_button);
-    output.append(variables);
-    window.State.unsaved_changes = false;
-  }
-
-  function switchToTab(tabName: string) {
-    // Find the tab that leads to this selection, and its siblings
-    const tab = $('*[data-tab="' + tabName + '"]');
-    const allTabs = tab.siblings('*[data-tab]');
-
-    // Find the target associated with this selection, and its siblings
-    const target = $('*[data-tabtarget="' + tabName + '"]');
-    const allTargets = target.siblings('*[data-tabtarget]');
-
-    // Fix classes
-    allTabs.removeClass('tab-selected');
-    tab.addClass('tab-selected');
-
-    allTargets.addClass('hidden');
-    target.removeClass('hidden');
-
-    const adventures: Record<string, Adventure> = {};
-    window.State.adventures?.map (function(adventure: Adventure) {
-      adventures [adventure.short_name] = adventure;
-    });
-
-    const btn = document.getElementById("repair_button");
-    if (btn) {
-      btn.style.visibility = "hidden";
-    }
-    resetWindow();
-
-    if (tabName === 'quiz') {
-        // If the developer's mode is still on -> make sure we do show the tab
-        if ($('#developers_toggle').is(":checked")) {
-          $('#adventures-tab').show();
-        }
-      $ ('#adventures-tab').css('height', '');
-      $ ('#adventures-tab').css('min-height', '14em');
-      $ ('#adventures-tab').css('max-height', '100%');
-      $ ('#level-header input').hide ();
-      $ ('#editor-area').hide ();
-      $ ('#developers_toggle_container').hide ();
-      return;
-    }
-
-    if (tabName === 'parsons') {
-      $ ('#level-header input').hide ();
-      $ ('#editor').hide();
-      $ ('#editor-area').show ();
-      loadParsonsExercise(<number>(window.State.level || 1), 1);
-      $ ('#parsons_code_container').show();
-      $ ('#adventures-tab').css('height', '');
-      $ ('#adventures-tab').css('min-height', '14em');
-      $ ('#adventures-tab').css('max-height', '100%');
-      $ ('#debug_container').hide();
-      return;
-    } else {
-      $ ('#editor').show();
-      $ ('#level-header input').show ();
-      $ ('#parsons_code_container').hide();
-      $ ('#debug_container').show();
-    }
-
-
-    // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
-    if ($('#developers_toggle').is(":checked")) {
-      $('#adventures-tab').hide();
-    }
-    $('#developers_toggle_container').show ();
-    $ ('#editor-area').show ();
-
-
-    // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-    if (window.State.loaded_program && (window.State.adventure_name_onload) === tabName) {
-      $ ('#program_name').val (window.State.loaded_program.name);
-      theGlobalEditor?.setValue (window.State.loaded_program.code);
-    }
-    // If there's a loaded program for the adventure or level now selected, use it.
-    else if (adventures[tabName]?.loaded_program) {
-      $ ('#program_name').val (adventures[tabName].loaded_program!.name);
-      theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
-    }
-    // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
-    else if (window.State.default_program_name && window.State.default_program) {
-      $ ('#program_name').val(window.State.default_program_name);
-      theGlobalEditor?.setValue(window.State.default_program);
-    }
-    else {
-      if (tab.hasClass('teacher_tab')) {
-        $ ('#program_name').val (tabName);
-        window.State.adventure_name = tabName;
-        theGlobalEditor?.setValue ("");
-      } else {
-        if (adventures[tabName].default_save_name == 'intro') {
-          $('#program_name').val(window.State.level_title + ' ' + window.State.level);
-        } else {
-          $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
-        }
-        theGlobalEditor?.setValue(adventures [tabName].start_code);
-      }
-    }
-
-    window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
-    theGlobalEditor?.clearSelection();
-    theGlobalEditor?.session.clearBreakpoints();
-    // If user wants to override the unsaved program, reset unsaved_changes
-    window.State.unsaved_changes = false;
-  }
-
-  $('*[data-tab]').click(function (e) {
+export function initializeTabs() {
+  $('*[data-tab]').on('click', (e) => {
     const tab = $(e.target);
     const tabName = tab.data('tab');
 
     e.preventDefault ();
 
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
-    else switchToTab(tabName);
+    if (hasUnsavedChanges()) {
+      modal.confirm(ClientMessages['Unsaved_Changes'], () => switchToTab(tabName));
+    } else {
+      switchToTab(tabName);
+    }
 
     // Do a 'replaceState' to add a '#anchor' to the URL
     const hashFragment = tabName !== 'level' ? tabName : '';
@@ -157,8 +45,8 @@ $(function() {
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
-  if (window.State && window.State.adventure_name) {
-    switchToTab(window.State.adventure_name);
+  if (APP_STATE.loaded_program?.adventure_name) {
+    switchToTab(APP_STATE.loaded_program?.adventure_name);
   }
   else if (window.location.hash) {
     // If we have an '#anchor' in the URL, switch to that tab
@@ -173,4 +61,103 @@ $(function() {
       switchToTab(tabname);
     }
   }
-});
+}
+
+export function currentTab() {
+  return _currentTab;
+}
+
+/**
+ * Hide all things that may have been dynamically shown
+ */
+function resetWindow() {
+  $('#warningbox').hide ();
+  $('#errorbox').hide ();
+  $('#okbox').hide ();
+  $('#repair_button').hide();
+  const output = $('#output');
+  const variable_button = $(output).find('#variable_button');
+  const variables = $(output).find('#variables');
+  output.empty();
+  $('#turtlecanvas').empty();
+  output.append(variable_button);
+  output.append(variables);
+  clearUnsavedChanges();
+}
+
+function switchToTab(tabName: string) {
+  _currentTab = tabName;
+
+  // Find the tab that leads to this selection, and its siblings
+  const tab = $('*[data-tab="' + tabName + '"]');
+  const allTabs = tab.siblings('*[data-tab]');
+
+  // Find the target associated with this selection, and its siblings
+  const target = $('*[data-tabtarget="' + tabName + '"]');
+  const allTargets = target.siblings('*[data-tabtarget]');
+
+  // Fix classes
+  allTabs.removeClass('tab-selected');
+  tab.addClass('tab-selected');
+
+  allTargets.addClass('hidden');
+  target.removeClass('hidden');
+
+  const adventures: Record<string, Adventure> = {};
+  APP_STATE.adventures?.map (function(adventure: Adventure) {
+    adventures [adventure.short_name] = adventure;
+  });
+
+  resetWindow();
+
+  const isCodeTab = !(tabName === 'quiz' || tabName === 'parsons');
+
+  // .toggle(bool) sets visibility based on the boolean
+
+  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
+  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
+  $('#developers_toggle_container').toggle(isCodeTab);
+  $('#level-header input').toggle(isCodeTab);
+  $('#parsons_code_container').toggle(tabName === 'parsons');
+  $('#editor-area').toggle(isCodeTab || tabName === 'parsons');
+  $('#editor').toggle(isCodeTab);
+  $('#debug_container').toggle(isCodeTab);
+
+  if (tabName === 'parsons') {
+    loadParsonsExercise(APP_STATE.level, 1);
+    return;
+  }
+
+  // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
+  if (APP_STATE.loaded_program?.adventure_name === tabName) {
+    $ ('#program_name').val (APP_STATE.loaded_program.name);
+    theGlobalEditor?.setValue (APP_STATE.loaded_program.code);
+  }
+  // If there's a loaded program for the adventure or level now selected, use it.
+  else if (adventures[tabName]?.loaded_program) {
+    $ ('#program_name').val (adventures[tabName].loaded_program!.name);
+    theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
+  }
+  else {
+    if (tab.hasClass('teacher_tab')) {
+      $ ('#program_name').val (tabName);
+      theGlobalEditor?.setValue ("");
+    } else {
+      const adventure = adventures[tabName];
+      if (adventure) {
+        if (adventure.default_save_name == 'intro') {
+          $('#program_name').val(`${ClientMessages.level_title} ${APP_STATE.level}`);
+        } else {
+          $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${APP_STATE.level}`);
+        }
+        theGlobalEditor?.setValue(adventure.start_code);
+      }
+    }
+  }
+
+  theGlobalEditor?.clearSelection();
+  theGlobalEditor?.session.clearBreakpoints();
+
+  // If user wants to override the unsaved program, reset unsaved_changes
+  clearUnsavedChanges();
+}
