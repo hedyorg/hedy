@@ -1730,15 +1730,19 @@ adventures:
             13:
                 story_text: |
                     ## Rekenmachine
-                    Sommen hebben soms meerdere goede antwoorden. Bijv. de wortel van 16 is 4, maar ook -4!
 
+                    ### Opdracht 1
+                    Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
-                    ### Opdracht
-                    Vraag een som met meerdere antwoorden en reken ze beide goed met `{or}`.
+                    ### Opdracht 2 (extra)
+                    Sommen hebben soms meerdere goede antwoorden. Bijv. de wortel van 16 is 4, maar ook -4.
+                    Vraag om het antwoord voor een som met meerdere antwoorden en reken ze beide goed met `{or}`.
+                    Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
 
                 example_code: |
                     ```
-                    antwoord = {ask} 'Wat is de wortel van 25?'
+                    antwoord1 = {ask} 'Wat is 10 keer 7?'
+                    antwoord2 = {ask} 'Wat is 6 keer 7?'
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
@@ -2374,8 +2378,6 @@ adventures:
                     {print} 'Dat wordt dan ' prijs ' euro'
                     ```
                 start_code: "# Schrijf jouw code hier"
-                example_code_2: "```\ndrank = {ask} 'Wat wil je drinken?'\n{if} drank {is} 'water' {or} drank {is} 'sap'\n    {print} 'Dat is een gezonde keuze'\n```\n"
-                story_text_2: "We gebruiken `{or}` om te bepalen of één van twee dingen waar is.\n"
             15:
                 story_text: |
                     ## Restaurant
