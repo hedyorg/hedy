@@ -418,7 +418,7 @@ adventures:
                 story_text: "## 洗碗\n你家里是不是总是争论让谁来洗碗或者换猫砂盆？\n那么你可以让电脑来做出公平的决定。你在这一级可以写出这个程序！\n"
                 example_code: "```\n人们 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人们 {at} {random}\n```\n"
                 start_code: '{print} 谁负责洗碗？'
-                story_text_2: "### 练习\n制作你自己版本的洗碗机程序。首先列出你的家庭成员名单。\n然后想一个需要完成的任务，让计算机用{random}`{at} {random}`命令决定谁来做这个任务。\n\n**额外的**不想洗碗？用`{remove}` `{from}` 命令将你的名字从名单上删除，从而破解程序。\n"
+                story_text_2: "### 练习\n制作你自己版本的洗碗机程序。首先列出你的家庭成员名单。\n然后想一个需要完成的任务，让计算机用`{at} {random}`命令决定谁来做这个任务。\n\n**额外的**不想洗碗？用`{remove}` `{from}` 命令将你的名字从名单上删除，从而破解程序。\n"
         name: 洗碗？
         description: 用电脑决定谁来洗碗（从第2级开始）
         default_save_name: 洗碗
@@ -1465,39 +1465,39 @@ adventures:
         levels:
             14:
                 start_code: '# place your code here'
-                story_text: "Now that you learned how to use operators, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
+                story_text: "现在你学会了如何使用运算符，我们也可以用`{pressed}`!\n想象一下，海龟能够向前做一个超级跳跃动作。\n通过按`p` ，海龟可以做一个超级跳跃动作!\n但是，海龟只能每走5步或每旋转4次后再做一次跳跃动作。\n"
+                example_code: "```\n步长 = 15\n左 = -90\n右 = 90\n左右 = 180\n跳跃次数 = 5\n旋转次数 = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 步长\n        跳跃次数 = 跳跃次数 - 1\n    {if} s {is} {pressed}\n        {turn} 左右\n    {if} a {is} {pressed}\n        {turn} 左\n        旋转次数 = 旋转次数- 1\n    {if} d {is} {pressed}\n        {turn} 右\n        旋转次数 = 旋转次数 - 1\n    {if} p {is} {pressed}\n        {if} 跳跃次数 <= 0 {or} 旋转次数 <= 0\n            {forward} 步长 * 3\n            跳跃次数 = 5\n            旋转次数 = 4\n```\n"
             15:
-                story_text: "Now that you have learned about the ```while``` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
+                story_text: "现在你已经了解了`{while}` 循环语句，你可以开始在海龟身上使用它了!\n海龟现在只允许走15步或转15次，然后就会累了。\n试着在海龟疲惫之前让它走得越远越好!你可以在它走5步或者旋转2次后使用超级跳跃。\n"
                 start_code: '# place your code here'
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\nwhile tired_in > 0\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
             16:
-                start_code: '# place your code here'
-                story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
-                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
+                start_code: '# 在这里写你的代码'
+                story_text: "让我们玩扭扭乐的游戏来活动一下吧!\n当每个人都准备好后，按x键做下一个动作!\n"
+                example_code: "```\n四肢 = [“右手”、“左手”、“右脚”、“左脚”]\n颜色 = [“蓝色”、“绿色”、“红色”、“黄色”]\n{repeat} 20 {times}\n    s= 四肢[{random}]\n    y = 颜色[{random}]\n    {if} x {is} {pressed}\n        {print} s + ' 放在 ' + y + '上！'\n```\n"
             12:
-                example_code: "```\nchoose = 'You chose option: '\nprint 'A wild mouse appeared!'\nprint 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    sleep\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    sleep\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
-                start_code: '# place your code here'
-                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
+                example_code: "```\nchoose = '你选择了选项：'\n{print} '一只野生鼠出现了！'\n{print} '选择一个选项并按下代表第一个字母的按键：(n)et网, (c)at猫, (b)ag包, (r)un跑\n{if} w{is} {pressed}\n    {print} 选择+'网'\n    {print} '你试图用网子抓住老鼠...'\n    {sleep}\n    {print} '恭喜你成功了！'\n{if} m{is} {pressed}\n    {print} 选择+'猫'\n    {print} '你放出了你的猫'\n    {sleep}\n    {print} '老鼠害怕了，跑了！'\n{if} b{is} {pressed}\n    {print} 选择+'包'\n    {print} '老鼠跳进了你的包里！'\n{if} p{is} {pressed}\n    {print} 选择+'跑'\n    {print} '你安全的逃走了！'\n```\n"
+                start_code: '# 在这里写你的代码'
+                story_text: "你对电子游戏熟悉吗？你走到高高的草丛中，突然被一只非常可疑的老鼠接近。\n你会怎么做呢？\n在本级中，我们将制作一个有不同选项的小菜单。\n将文本存储到一个变量中这样对于重复使用是相当方便的。\n选项，我选你!\n"
             13:
-                story_text: "Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump if he turns left and right first!\n"
-                start_code: '# place your code here'
-                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        looked_left = 1\n    {if} d {is} {pressed}\n        turn right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
+                story_text: "现在你已经学会了如何使用`{and}` 和`{or}` ，我们也会用`{pressed}`啦!\n想象一下，海龟能够向前做一个超级跳跃。\n通过按`p`字母键，海龟可以做一个超级跳跃！\n然而，海龟只有在首先向左和向右转的情况下才能做这个跳跃动作!\n"
+                start_code: '# 在这里写你的代码'
+                example_code: "```\n步长 = 10\n左 = -90\n右 = 90\n左右 = 180\n向左看 = 0\n向右看 = 0\n{repeat} 40{times}\n    {if} w{is} {pressed}\n        {forward} 步长\n    {if} s{is} {pressed}\n        {turn} 左右\n    {if} a{is} {pressed}\n        {turn} 左\n        向左看= 1\n    {if} d{is} {pressed}\n        {turn} 右\n        向右看 = 1\n    {if} p{is} {pressed}\n        {if} 向左看{is}1{and}向右看{is} 1\n            {forward} 40\n            向左看 = 0\n            向右看= 0\n```\n"
             17:
                 story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
                 start_code: '# place your code here'
             11:
-                story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
-                example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
-                start_code: '# place your code here'
+                story_text: "现在你已经了解了`{for} ... {in} {range} ... {to} ...`规则，你也可以把它用于`{pressed}`！例如，尝试让海龟移动！每次按下相关的按钮时，海龟都会长大。 \n这样海龟每走一步都可以走得更远！\n"
+                example_code: "```\n左 =-90\n右 = 90\n左右 =180\n{for} 计数器{in} {range} 1{to} 15\n    步长 = 计数器 * 5\n    {if} w{is} {pressed}\n        {forward} 步长大小\n    {if} s{is} {pressed}\n        {turn} 左右\n    {if} a{is} {pressed}\n        {turn} 左\n    {if} d{is} {pressed}\n        {turn} ``````右\n```\n"
+                start_code: '# 在这里写你的代码'
             9:
                 start_code: '# place your code here'
-                story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
-                example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
+                story_text: "## 触摸式游戏\n现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
+                example_code: "```\n积分 = 1\n字母 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母键' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
+                example_code: "```\n距离 = 100, 80, 60, 40, 20, 10\n{if} x{is} {pressed}\n    {for} 距离{in} 距离\n        {forward} 距离\n        {turn} -90\n{if} y{is} {pressed}\n    {for} 距离{in} 距离\n        {forward} 距离\n        {turn} 90\n```\n"
                 start_code: '# place your code here'
             5:
                 story_text: "## 按下它!\n在介绍中，我们还告诉你新的关键词`{pressed}`! \n使用`{pressed}` ，可以使编码的互动性更强，你可以对执行的内容进行实时控制！\n在下一个的级别中，你将了解到`{pressed}` 是如何实现这一目标的，以及`{pressed}` 有哪些用途。\n除了打印文本之外，还有很多其他的用途。`{pressed}`\n例如，你还可以将海龟命令与按键联系起来！你可以尝试一下。试试吧!\n"
@@ -1510,8 +1510,8 @@ adventures:
                 example_code: "```\n第一个数 = {ask} '你的第一个数字是多少？'\n第二个数 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} {is} {pressed} 计算结果 = 第一个数 + 第二个数\n{if} s {is} {pressed}计算 结果 = 第一个数 - 第二个数\n{if} d {is} {pressed} 计算结果=第一个数/第二个数\n{if} m {is} {pressed} 计算结果 = 第一个数 * 第二个数\n{print} '答案是 ' 结果计算\n```\n"
                 start_code: '# place your code here'
             7:
-                story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
-                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
+                story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
                 start_code: '# place your code here'
 
         default_save_name: Pressit
