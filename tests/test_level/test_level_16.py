@@ -616,30 +616,11 @@ class TestsLevel16(HedyTester):
               break""")
 
         self.single_level_tester(code=code, expected=expected)
+    
+    @parameterized.expand(['sleep', 'number is', 'print', 'forward', 'turn'])
+    def test_at_random_express(self, command):
+        code = textwrap.dedent(f"""\
+            numbers is [1, 2, 3]
+            {command} numbers at random""")
+        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidAtCommandException)
 
-    def test_at_random_express(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            randomfruit is fruit at random
-            print randomfruit""")
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
-
-    def test_at_random_express_eq(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            randomfruit = fruit at random
-            print randomfruit""")
-        # self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
-
-    def test_at_random_print(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            print fruit at random""")
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
-
-    def test_at_random_print_2(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            print fruit[random]
-            print fruit at random""")
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
