@@ -12,7 +12,6 @@ import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.file
-import kotlinx.serialization.encodeToString
 import java.io.File
 
 class TranslateContent : CliktCommand(help = "Translate content file with DeepL") {
@@ -30,7 +29,7 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
         .required()
 
     override fun run() {
-        val files = if (contentFileOrRootDir.isFile) {
+        val filesToTranslate = if (contentFileOrRootDir.isFile) {
             sequenceOf(contentFileOrRootDir)
         } else {
             contentFileOrRootDir.walkTopDown()
@@ -38,23 +37,30 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
                     file.name.startsWith(language)
                 }
         }
-        files.forEach { file ->
+
+        // Call DeepL file by file to avoid multiple network calls
+        filesToTranslate.forEach { file ->
             val parsedYaml = Yaml.default.parseToYamlNode(file.readText())
-            val mapOfScalars = parsedYaml.yamlMap
+
+            // Hopefully no such values in the text
+            val translationSeparator = "#######"
+            val keyValueSeparator = "::::::"
+            // Result will be text constructed like
+            // <Yaml Scalar hash>::::::<Text to translate>######<Yaml Scalar Text>...
+            // Assumption that DeepL will not translate separators and hashes
+            // DeepL also keeps the new lines present in text (which is nice)
+            val textToTranslate = parsedYaml.yamlMap
                 .entries
                 .values
                 .map { it.toScalarList() }
                 .flatten()
                 .associateWith { it.content }
-
-            val translationSeparator = "#######"
-            val keyValueSeparator = "::::::"
-            val textToTranslate = mapOfScalars
                 .entries
                 .joinToString(translationSeparator) { (key, value) ->
                     "${key.hashCode()}$keyValueSeparator$value"
                 }
 
+            // Dummy call without catching errors
             val translator = Translator(authKey)
             val result = translator.translateText(
                 textToTranslate,
@@ -68,7 +74,8 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
                     hash.toInt() to value
                 }
 
-
+            // Fortunately/Unfortunately the parsed structure is read only
+            // so I have to reconstruct it with replaced translated text
             val translatedYaml = parsedYaml.yamlMap
                 .entries
                 .map {
@@ -85,24 +92,20 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
     }
 }
 
-fun YamlNode.toScalarList(): List<YamlScalar> {
-    return when (this) {
-        is YamlList -> items.map { it.toScalarList() }.flatten()
-        is YamlMap -> entries.map { it.value.toScalarList() }.flatten()
-        is YamlNull -> emptyList()
-        is YamlScalar -> listOf(this)
-        is YamlTaggedNode -> innerNode.toScalarList()
-    }
+fun YamlNode.toScalarList(): List<YamlScalar> = when (this) {
+    is YamlList -> items.map { it.toScalarList() }.flatten()
+    is YamlMap -> entries.map { it.value.toScalarList() }.flatten()
+    is YamlNull -> emptyList()
+    is YamlScalar -> listOf(this)
+    is YamlTaggedNode -> innerNode.toScalarList()
 }
 
-fun YamlNode.translate(translations: Map<Int, String>): YamlNode {
-    return when (this) {
-        is YamlList -> YamlList(items.map { it.translate(translations) }, path)
-        is YamlMap -> YamlMap(this.entries.map { it.key to it.value.translate(translations) }.toMap(), path)
-        is YamlNull -> this
-        is YamlScalar -> YamlScalar(translations[hashCode()]!!, path)
-        is YamlTaggedNode -> YamlTaggedNode(tag, innerNode.translate(translations))
-    }
+fun YamlNode.translate(translations: Map<Int, String>): YamlNode = when (this) {
+    is YamlList -> YamlList(items.map { it.translate(translations) }, path)
+    is YamlMap -> YamlMap(this.entries.map { it.key to it.value.translate(translations) }.toMap(), path)
+    is YamlNull -> this
+    is YamlScalar -> YamlScalar(translations[hashCode()]!!, path)
+    is YamlTaggedNode -> YamlTaggedNode(tag, innerNode.translate(translations))
 }
 
 TranslateContent().main(args)
