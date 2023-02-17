@@ -108,9 +108,9 @@ class TestsLevel3(HedyTester):
         dieren is Hond, Kat, Kangoeroe
         print dieren at index""")
 
-        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
-                                     HedyTester.list_access_transpiled('dieren[1-1]'),
-                                     "print(f'{dieren[1-1]}')")
+        expected = HedyTester.dedent("index = '1'\ndieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[int(index)-1]'),
+                                     "print(f'{dieren[int(index)-1]}')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
