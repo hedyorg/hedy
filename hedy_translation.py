@@ -264,6 +264,10 @@ class Translator(Visitor):
     def list_access(self, tree):
         self.add_rule("_AT", "at", tree)
 
+    def list_access_var(self, tree):
+        self.add_rule("_IS", "is", tree)
+        self.add_rule("_AT", "at", tree)
+
     def repeat(self, tree):
         self.add_rule("_REPEAT", "repeat", tree)
         self.add_rule("_TIMES", "times", tree)
