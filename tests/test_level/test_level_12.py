@@ -542,7 +542,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[1-1]}''')
+        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -676,7 +676,7 @@ class TestsLevel12(HedyTester):
             favorite is ask 'Is your fav number ' numbers at 2""")
         expected = HedyTester.dedent(
             "numbers = [1, 2, 3]",
-            HedyTester.input_transpiled('favorite', 'Is your fav number {numbers[2-1]}'))
+            HedyTester.input_transpiled('favorite', 'Is your fav number {numbers[int(2)-1]}'))
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 

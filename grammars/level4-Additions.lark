@@ -6,6 +6,7 @@ error_print_no_quotes: _PRINT text -> error_print_nq
 ask: var _IS _ASK (_print_argument)?
 error_ask_no_quotes: var _IS _ASK text  -> error_print_nq
 
+list_access: var_access _AT (INT | random | var)
 _print_argument: (_SPACE | list_access | quoted_text | var_access_print)*
 
 error_text_no_print: quoted_text

@@ -90,27 +90,8 @@ class TestsLevel3(HedyTester):
         print dieren at 1""")
 
         expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
-                                     HedyTester.list_access_transpiled('dieren[1-1]'),
-                                     "print(f'{dieren[1-1]}')")
-
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
-
-        self.multi_level_tester(
-            max_level=11,
-            code=code,
-            expected=expected,
-            extra_check_function=check_in_list
-        )
-
-    def test_print_list_access_index_var(self):
-        code = textwrap.dedent("""\
-        index is 1
-        dieren is Hond, Kat, Kangoeroe
-        print dieren at index""")
-
-        expected = HedyTester.dedent("index = '1'\ndieren = ['Hond', 'Kat', 'Kangoeroe']",
-                                     HedyTester.list_access_transpiled('dieren[int(index)-1]'),
-                                     "print(f'{dieren[int(index)-1]}')")
+                                     HedyTester.list_access_transpiled('dieren[int(1)-1]'),
+                                     "print(f'{dieren[int(1)-1]}')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
@@ -166,12 +147,12 @@ class TestsLevel3(HedyTester):
         n = ['1', '2', '3']
         try:
           try:
-            n[1-1]
+            n[int(1)-1]
           except IndexError:
             raise Exception('catch_index_exception')
-          time.sleep(int(n[1-1]))
+          time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[1-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -755,8 +736,8 @@ class TestsLevel3(HedyTester):
         l is 1, 2, 3
         print l at 3""")
         expected = HedyTester.dedent("l = ['1', '2', '3']",
-                                     HedyTester.list_access_transpiled("l[3-1]"),
-                                     "print(f'{l[3-1]}')")
+                                     HedyTester.list_access_transpiled("l[int(3)-1]"),
+                                     "print(f'{l[int(3)-1]}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
