@@ -1726,7 +1726,6 @@ except NameError:
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
-        self.ifpressed_prefix_added = False
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -1767,7 +1766,8 @@ else:
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, command, button=False):
-        command_suffix = (f"""\
+        command_prefix = (f"""\
+pygame_end = False
 while not pygame_end:
   pygame.display.update()
   event = pygame.event.wait()
@@ -1785,11 +1785,7 @@ while not pygame_end:
   if event.type == pygame.KEYDOWN:
 {ConvertToPython.indent(command, 4)}"""
 
-        if self.ifpressed_prefix_added:
-            return command
-        else:
-            self.ifpressed_prefix_added = True
-            return command_suffix + "\n" + command
+        return command_prefix + "\n" + command
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
@@ -1797,6 +1793,8 @@ while not pygame_end:
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
         if self.is_variable(var_or_button):
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == {args[0]}:
 {ConvertToPython.indent(args[1])}
   break""", False)
@@ -1807,6 +1805,8 @@ if event.key == {button_name}:
   break""", True)
         else:
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
   break""")
@@ -1957,7 +1957,6 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"""for {var_name} in range(int({str(times)})):
 {ConvertToPython.indent(command)}"""
 
@@ -1982,7 +1981,6 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, meta, args):
@@ -1998,11 +1996,15 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # if this is a variable, we assume it is a key (for now)
         if self.is_variable(var_or_key):
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == {args[0]}:
 {all_lines}
   break""")
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == '{args[0]}':
 {all_lines}
   break""")
@@ -2071,7 +2073,6 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-        self.ifpressed_prefix_added = False
         return f"for {times} in {args[1]}:\n{body}"
 
 
@@ -2086,7 +2087,6 @@ class ConvertToPython_11(ConvertToPython_10):
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after for loop
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
@@ -2271,7 +2271,6 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
         body = sleep_after(body)
         exceptions = self.make_catch_exception([args[0]])
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after while loop
         return exceptions + "while " + args[0] + ":\n" + body
 
 
