@@ -5,8 +5,7 @@
 @file:DependsOn("com.deepl.api:deepl-java:1.1.0")
 
 import com.charleskorn.kaml.*
-import com.deepl.api.Language
-import com.deepl.api.Translator
+import com.deepl.api.*
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
@@ -64,8 +63,12 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
             val translator = Translator(authKey)
             val result = translator.translateText(
                 textToTranslate,
-                Language("English", "en", true),
-                Language("Ukrainian", "uk", true),
+                "en",
+                language,
+                TextTranslationOptions().apply {
+                    isPreserveFormatting = true
+                    formality = Formality.PreferMore
+                }
             )
             val mapHashToTranslated = result.text
                 .split(translationSeparator)
@@ -86,7 +89,6 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
                 }
 
             file.setWritable(true)
-            TODO("Find a way to write node to file")
 //            file.writeText(Yaml.default.encodeToString(translatedYaml))
         }
     }
