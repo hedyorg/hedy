@@ -1,17 +1,20 @@
 import REGEX from '../../highlighting/highlighting.json';
 import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
-import { APP_STATE } from './state';
+
+export interface InitializeSyntaxHighlighterOptions {
+  readonly keywordLanguage: string;
+}
 
 /**
  * Initialize syntax highlighters
  *
  * Must be done before the first Ace editor is created
  */
-export function initializeSyntaxHighlighter() {
+export function initializeSyntaxHighlighter(options: InitializeSyntaxHighlighterOptions) {
   // import traduction
   let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
 
-  let lang = APP_STATE.keyword_language;
+  let lang = options.keywordLanguage;
 
   if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
 

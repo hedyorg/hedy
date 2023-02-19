@@ -1,10 +1,11 @@
 import { modal } from './modal';
 import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './state';
+import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
 import { AvailableAdventure, TeacherAdventure } from './types';
+import { startTeacherTutorial } from './tutorials/tutorial';
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -695,6 +696,29 @@ export function drag_list (target: any) {
         }
       }
     };
+  }
+}
+
+export interface InitializeTeacherPageOptions {
+  readonly page: 'for-teachers';
+
+  /**
+   * Whether to show the dialog box on page load
+   */
+  readonly welcome_teacher?: boolean;
+
+  /**
+   * Whether to show the tutorial on page load
+   */
+  readonly tutorial?: boolean;
+}
+
+export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
+  if (options.welcome_teacher) {
+    modal.alert(ClientMessages.teacher_welcome);
+  }
+  if (options.tutorial) {
+    startTeacherTutorial();
   }
 }
 

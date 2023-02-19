@@ -69,8 +69,11 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
-            slides=slides
-        )
+            slides=slides,
+            javascript_page_options=dict(
+                page='for-teachers',
+                welcome_teacher=welcome_teacher,
+            ))
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])

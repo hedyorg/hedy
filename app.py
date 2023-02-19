@@ -884,7 +884,10 @@ def tutorial_index():
         # See initialize.ts
         javascript_page_options = dict(
             page='code',
+            level=level,
+            lang=g.lang,
             adventures=adventures,
+            start_tutorial=True,
         ))
 
 
@@ -903,9 +906,15 @@ def teacher_tutorial(user):
         )
 
     return render_template('for-teachers.html', current_page='my-profile',
-                           page_title=gettext('title_for-teacher'), teacher_classes=teacher_classes,
-                           teacher_adventures=adventures, tutorial=True,
-                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang))
+                            page_title=gettext('title_for-teacher'),
+                            teacher_classes=teacher_classes,
+                            teacher_adventures=adventures,
+                            tutorial=True,
+                            content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang),
+                            javascript_page_options=dict(
+                                page='for-teachers',
+                                tutorial=True,
+                            ))
 
 
 # routing to index.html
@@ -1108,6 +1117,8 @@ def index(level, program_id):
         # See initialize.ts
         javascript_page_options = dict(
             page='code',
+            level=level_number,
+            lang=g.lang,
             adventures=adventures,
             loaded_program=loaded_program,
         ))
@@ -1209,6 +1220,8 @@ def get_specific_adventure(name, level, mode):
                             # See initialize.ts
                             javascript_page_options = dict(
                                 page='code',
+                                lang=g.lang,
+                                level=level,
                                 adventures=adventures,
                             ))
 

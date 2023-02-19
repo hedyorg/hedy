@@ -71,7 +71,7 @@
     <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
       <thead class="bg-gray-200">
         <tr>
-            <th class="px-4 py-2 text-center">{{_('level')}}</th>      
+            <th class="px-4 py-2 text-center">{{_('level')}}</th>
             <th class="p-2">{{_('download')}}</th>
         </tr>
       </thead>
@@ -88,17 +88,4 @@
       </tbody>
     </table>
     </div>
-
-<script>
-{% if welcome_teacher %}
-  window.onload = function() {
-    hedyApp.modal.alert('{{_('teacher_welcome')}}');
-  };
-{% endif %}
-{% if tutorial %}
-    $(document).ready(function() {
-        hedyApp.startTeacherTutorial();
-    });
-{% endif %}
-</script>
 {% endblock %}

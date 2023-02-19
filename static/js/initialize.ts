@@ -3,9 +3,7 @@ import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
 import { initializeQuiz } from './quiz';
-import { APP_STATE, setState } from './state';
-import { initializeTabs } from './tabs';
-import { initializeCustomizeClassPage, InitializeCustomizeClassPageOptions } from './teachers';
+import { initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
@@ -43,25 +41,20 @@ export interface InitializeOptions {
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
-type InitializePageOptions = InitializeCodePageOptions | InitializeCustomizeClassPageOptions;
+type InitializePageOptions = InitializeCodePageOptions | InitializeCustomizeClassPageOptions | InitializeTeacherPageOptions;
 
 
 /**
  * This function gets called by the HTML when the page is being initialized.
  */
 export function initialize(options: InitializeOptions) {
-  setState({
-    lang: options.lang,
-    level: forceNumber(options.level),
-    keyword_language: options.keyword_language,
+  setClientMessageLanguage(options.lang);
+
+  initializeApp({
+    keywordLanguage: options.keyword_language,
   });
-
-  setClientMessageLanguage(APP_STATE.lang);
-
-  initializeApp();
   initializeFormSubmits();
   initializeQuiz();
-  initializeTabs();
   initializeTutorial();
 
   // The above initializations are often also page-specific
@@ -73,15 +66,14 @@ export function initialize(options: InitializeOptions) {
     case 'customize-class':
       initializeCustomizeClassPage(options.javascriptPageOptions);
       break;
+
+    case 'for-teachers':
+      initializeTeacherPage(options.javascriptPageOptions);
+      break;
   }
 
   // FIXME: I think this might also be page-specific
   if (options.logs) {
     logs.initialize();
   }
-}
-
-function forceNumber(x: unknown): number {
-  if (typeof x === 'number') { return x; }
-  return parseInt(`${x}`, 10);
 }
