@@ -256,7 +256,6 @@ class ForTeachersModule(WebsiteModule):
                 available_adventures[int(adventure['level'])].append(
                     {"name": adventure['id'], "from_teacher": True})
 
-
         return render_template(
             "customize-class.html",
             page_title=gettext("title_customize-class"),
