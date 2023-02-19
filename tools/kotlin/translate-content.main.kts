@@ -16,6 +16,8 @@ import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
+val DEEPL_REQUEST_LIMIT = 1024 * 128
+
 class TranslateContent : CliktCommand(help = "Translate content file with DeepL") {
     private val contentFileOrRootDir: File by option("--content")
         .help("Root directory for files search or file to translate")
@@ -42,16 +44,16 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
 
         val dumperOptions = DumperOptions().apply {
             defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
-            isPrettyFlow = true
         }
         val yaml = Yaml(dumperOptions)
         // Call DeepL file by file to avoid multiple network calls
         filesToTranslate.forEach { file ->
+            echo("Translating ${file.canonicalPath}")
             val parsedYaml = yaml.load<MutableMap<Any, Any>>(file.readText())
 
             // Hopefully no such values in the text
             val translationSeparator = "#######"
-            val keyValueSeparator = "::::::"
+            val keyValueSeparator = "^^^^^^^^"
             // Result will be text constructed like
             // <Yaml Scalar hash>::::::<Text to translate>######<Yaml Scalar Text>...
             // Assumption that DeepL will not translate separators and hashes
@@ -61,38 +63,54 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
                     "${value.hashCode()}$keyValueSeparator$value"
                 }
 
-            // Dummy call without catching errors
             val translator = Translator(authKey)
-            val result = translator.translateText(
-                textToTranslate,
-                "en",
-                language,
-                TextTranslationOptions().apply {
-                    isPreserveFormatting = true
-                    formality = Formality.PreferMore
-                }
-            )
-            val mapHashToTranslated = result.text
-                .split(translationSeparator)
-                .associate {
-                    val (hash, value) = it.split(keyValueSeparator)
-                    hash.toInt() to value
-                }
+            val translationOptions = TextTranslationOptions().apply {
+                isPreserveFormatting = true
+                formality = Formality.PreferMore
+            }
+            // Dummy call without catching errors
+            if (textToTranslate.toByteArray().size < DEEPL_REQUEST_LIMIT) {
+                val result = translator.translateText(
+                    textToTranslate,
+                    "en",
+                    language,
+                    translationOptions
+                )
+                val mapHashToTranslated = result.text
+                    .split(translationSeparator)
+                    .associate {
+                        val (hash, value) = it.split(keyValueSeparator)
+                        hash.toInt() to value
+                    }
 
-            parsedYaml.translate(mapHashToTranslated)
+                parsedYaml.translate(mapHashToTranslated)
 
-            file.setWritable(true)
-            val yamlString = yaml.dump(parsedYaml)
-            file.writeText(yamlString)
+                file.setWritable(true)
+                val yamlString = yaml.dump(parsedYaml)
+                file.writeText(yamlString)
+                echo("Done!")
+            } else {
+                echo("Translation is too big")
+            }
         }
     }
 }
 
-@Suppress("UNCHECKED_CAST")
-fun Map<Any, Any>.toScalarList(): List<String> = map { (_, value) ->
+fun Map<*, *>.toScalarList(): List<String> = map { (_, value) ->
     when (value) {
         is String -> listOf(value)
-        is Map<*, *> -> (value as Map<Any, Any>).toScalarList()
+        is Map<*, *> -> value.toScalarList()
+        is List<*> -> value.toScalarList()
+        else -> emptyList()
+    }
+}.flatten()
+
+
+fun List<*>.toScalarList(): List<String> = map { value ->
+    when (value) {
+        is String -> listOf(value)
+        is Map<*, *> -> value.toScalarList()
+        is List<*> -> value.toScalarList()
         else -> emptyList()
     }
 }.flatten()
@@ -102,10 +120,23 @@ fun MutableMap<Any, Any>.translate(translations: Map<Int, String>) {
     forEach { (key, value) ->
         when (value) {
             is String -> put(key, translations[value.hashCode()]!!)
-            is Map<*, *> -> (value as MutableMap<Any, Any>).translate(translations)
+            is MutableMap<*, *> -> (value as MutableMap<Any, Any>).translate(translations)
+            is MutableList<*> -> (value as MutableList<Any>).translate(translations)
             else -> {
                 // nothing
             }
+        }
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+fun MutableList<Any>.translate(translations: Map<Int, String>): Unit = forEachIndexed { index, value ->
+    when (value) {
+        is String -> set(index, translations[value.hashCode()]!!)
+        is MutableMap<*, *> -> (value as MutableMap<Any, Any>).translate(translations)
+        is MutableList<*> -> (value as MutableList<Any>).translate(translations)
+        else -> {
+            // nothing
         }
     }
 }
