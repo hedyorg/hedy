@@ -16,7 +16,7 @@ import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
-val DEEPL_REQUEST_LIMIT = 1024 * 128
+val DEEPL_REQUEST_LIMIT = 1024 * 100
 
 class TranslateContent : CliktCommand(help = "Translate content file with DeepL") {
     private val contentFileOrRootDir: File by option("--content")
