@@ -40,12 +40,11 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
                 }
         }
 
-        val options = DumperOptions().apply {
-            isExplicitStart = true
+        val dumperOptions = DumperOptions().apply {
             defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
-            defaultScalarStyle = DumperOptions.ScalarStyle.PLAIN
+            isPrettyFlow = true
         }
-        val yaml = Yaml(options)
+        val yaml = Yaml(dumperOptions)
         // Call DeepL file by file to avoid multiple network calls
         filesToTranslate.forEach { file ->
             val parsedYaml = yaml.load<MutableMap<Any, Any>>(file.readText())
@@ -90,7 +89,7 @@ class TranslateContent : CliktCommand(help = "Translate content file with DeepL"
 }
 
 @Suppress("UNCHECKED_CAST")
-fun Map<Any, Any>.toScalarList(): List<String> = map { (key, value) ->
+fun Map<Any, Any>.toScalarList(): List<String> = map { (_, value) ->
     when (value) {
         is String -> listOf(value)
         is Map<*, *> -> (value as Map<Any, Any>).toScalarList()
