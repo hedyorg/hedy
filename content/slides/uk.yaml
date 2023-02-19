@@ -1,66 +1,115 @@
 levels:
-    0:
-        1:
-            text: "Hedy is a programming language.\n"
-            header: Welcome to Hedy!
-        2:
-            header: Programming
-            text: "Programming is giving instructions to a computer, using the language of the computer.\n\nSuch a language is called a \"programming language\".\n"
-        3:
-            header: Programming Language
-            text: "Maybe you already know some programming languages?\nSome examples are:\n* Scratch\n* Python\n* HTML\n"
-        4:
-            header: Programming
-            text: "If you can program, you can do many cool things:\n* Build interactive stories\n* Create computer drawings and draw these on paper or fabric\n* Build your own apps to use on your phone\n"
-        5:
-            header: Programming in Hedy
-            text: "In Hedy we use special codes, like `{print}`.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
-        6:
-            header: Programming in Hedy
-            text: "Code words will be shown in pink.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
-        7:
-            header: Programming in Hedy
-            text: "We start the code with the Run code button underneath the code.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
-        8:
-            header: Programming in Hedy
-            text: "Output appears on the left-hand side.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
-        9:
-            header: Programming in Hedy
-            text: "The output can also be a drawing.\n<iframe class=\"embedded-hedy\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
+  0:
     1:
-        4:
-            header: 'Hedy level 1: {echo}'
-            text: "The final text code that you can use in level 1 is `{echo}`.\n\n`{echo}` is used to repeat the answer of an `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
-        7:
-            header: Programming!
-            text: "The yellow arrow buttons can be used to copy examples.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
-        1:
-            header: Welcome to level 1!
-            text: "We will start level 1 by making stories in Hedy!\n\nWe need three text codes to create interactive stories.\n"
-        2:
-            header: 'Hedy level 1: {print}'
-            text: "The first code that you can use in level 1 is `{print}`.\n\n`{print}` is used to show text on the screen.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/1/raw\"></iframe>\n"
-        3:
-            header: 'Hedy level 1: {ask}'
-            text: "The second code that you can use in level 1 is `{ask}`.\n\n`{ask}` is used to ask a question that can be answered.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
-        5:
-            header: Programming!
-            text: "with `{print}`, `{ask}` and `{echo}` you can already create a little story.\nThis is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.\n"
-        6:
-            header: Programming!
-            text: "Adventures are shown in tabs.\n"
-            editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
-        8:
-            header: Drawing with the turtle
-            text: "Now that we have seen at text codes, we will now look at drawing codes next.\n"
-        9:
-            header: 'Drawing with the turtle: {forward}'
-            text: "`{forward}` is used to move the turtle forward.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
-        10:
-            header: 'Drawing with the turtle: {turn}'
-            text: "`{turn}` is used to make the turtle turn left or right.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
+      text: |
+        Hedy - це мова програмування.
+      header: Ласкаво просимо до Hedy!
+    2:
+      header: Програмування
+      text: |
+        Програмування - це надання інструкцій комп'ютеру, використовуючи мову комп'ютера.
+
+        Така мова називається "мовою програмування".
+    3:
+      header: Мова програмування
+      text: |
+        Може, ти вже знаєш деякі мови програмування?
+        Ось деякі приклади:
+        * Scratch
+        * Python
+        * HTML
+    4:
+      header: Програмування
+      text: |
+        Якщо ви вмієте програмувати, ви можете робити багато крутих речей:
+        * Створювати інтерактивні історії
+        * Створювати комп'ютерні малюнки та переносити їх на папір чи тканину
+        * Створювати власні додатки для використання на телефоні
+    5:
+      header: Програмування на Hedy
+      text: |
+        У Hedy ми використовуємо спеціальні коди, такі як `{print}`.
+        <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe></iframe
+    6:
+      header: Програмування на Hedy
+      text: |
+        Кодові слова будуть показані рожевим кольором.
+        <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe></iframe
+    7:
+      header: Програмування на Hedy
+      text: |
+        Запускаємо код за допомогою кнопки Запустити код під кодом.
+        <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe></iframe
+    8:
+      header: Програмування на Hedy
+      text: |
+        Вивід з'являється зліва.
+        <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe></iframe
+    9:
+      header: Програмування на Hedy
+      text: |
+        Виведенням також може бути малюнок.
+        <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe></iframe>
+  1:
+    4:
+      header: 'Hedy рівень 1: {echo}'
+      text: |2
+         Кінцевий текстовий код, який ви можете використати на рівні 1: `{echo}`.
+
+        `{echo}` використовується для повторення відповіді на `{ask}`.
+      editor: |
+        <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+    7:
+      header: Програмування!
+      text: |
+        Кнопки з жовтими стрілками можна використовувати для копіювання прикладів.
+        <iframe class="fragment" src="/hedy/1"></iframe>
+    1:
+      header: Ласкаво просимо на рівень 1!
+      text: |
+        Ми почнемо рівень 1 зі створення історій у Hedy!
+
+        Нам потрібні три текстові коди для створення інтерактивних історій.
+    2:
+      header: 'Hedy рівень 1: {print}'
+      text: |
+        Перший код, який ви можете використати на рівні 1 - це `{print}`.
+
+        `{print}` використовується для виведення тексту на екран.
+      editor: |
+        <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+    3:
+      header: 'Рівень 1: {ask}'
+      text: |
+        Другий код, який ви можете використати на рівні 1, це `{ask}`.
+
+        `{ask}` використовується для того, щоб поставити запитання, на яке можна відповісти.
+      editor: |
+        <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+    5:
+      header: Програмування!
+      text: |
+        за допомогою `{print}`, `{ask}` і `{echo}` ви вже можете створити невелику історію.
+        Це гарний час, щоб спробувати "Папугу", "Історію" та "Камінь, папір, ножиці".
+    6:
+      header: Програмування!
+      text: |
+        Пригоди показані у вкладках.
+      editor: |
+        <iframe class="fragment" src="/hedy/1"></iframe>
+    8:
+      header: Малюнок з черепахою
+      text: |
+        Тепер ми розглянули текстові коди, а тепер перейдемо до кодів малюнків.
+    9:
+      header: 'Малюнок з черепахою: {вперед}'
+      text: |
+        `{вперед}` використовується для переміщення черепахи вперед.
+      editor: |
+        <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+    10:
+      header: 'Малюнок з черепахою: {turn}'
+      text: |
+        `{turn}` використовується, щоб змусити черепаху повернутися вліво або вправо.
+      editor: |
+        <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
