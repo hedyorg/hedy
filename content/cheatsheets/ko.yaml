@@ -51,16 +51,16 @@
 12:
 -   name: float directly
     explanation: Decimal numbers.
-    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
+    demo_code: "{print} '계산하세요!'\n{print} '2.5 더하기 2.5는...'\n{print} 2.5 + 2.5"
 -   name: assign text
     explanation: Text with quotation marks after `=`
-    demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
+    demo_code: "name = '로봇 헤디'\n{print} '안녕' name"
 -   name: quotes after {if} comparison
     explanation: Text with quotation marks after `{if}`.
-    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    demo_code: "name = {ask} '누구세요?'\n{if} name = '헤디'\n    {print} '안녕하세요!'"
 -   name: quotes in list
     explanation: A list with quotation marks.
-    demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    demo_code: "superheroes = '아이언맨', '배트맨', '슈퍼맨'\n{print} superheroes {at} {random}"
 14:
 -   name: Smaller
     explanation: We use the `<` to check if the first number is smaller than the second number.
@@ -149,8 +149,8 @@
     explanation: Check elements with `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인합니다.
+    demo_code: "{if} a {is} {pressed} {print} '당신은 A를 눌렀습니다!' {else} {print} '다른 키를 눌렀습니다!'"
 7:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
@@ -175,7 +175,7 @@
     explanation: Repeat multiple lines.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인합니다.
     demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '{if} with multiple lines'
