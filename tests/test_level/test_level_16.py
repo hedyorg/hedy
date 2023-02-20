@@ -155,10 +155,10 @@ class TestsLevel16(HedyTester):
         geluksgetallen = [15, 18, 6]
         step = 1 if 1 < 3 else -1
         for म in range(1, 3 + step, step):""",
-                                     (HedyTester.list_access_transpiled('vrienden[म-1]'), '  '),
-                                     ("print(f'''het geluksgetal van {vrienden[म-1]}''')", '  '),
-                                     (HedyTester.list_access_transpiled('geluksgetallen[म-1]'), '  '),
-                                     ("print(f'''is {geluksgetallen[म-1]}''')", '  '),
+                                     (HedyTester.list_access_transpiled('vrienden[int(म)-1]'), '  '),
+                                     ("print(f'''het geluksgetal van {vrienden[int(म)-1]}''')", '  '),
+                                     (HedyTester.list_access_transpiled('geluksgetallen[int(म)-1]'), '  '),
+                                     ("print(f'''is {geluksgetallen[int(म)-1]}''')", '  '),
                                      ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(
@@ -439,6 +439,7 @@ class TestsLevel16(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_change_list_item_var(self):
+        # Must be updated with 1 -> int(1), see note in 4047
         code = textwrap.dedent("""\
         l = [1, 2]
         x = 3
@@ -447,8 +448,8 @@ class TestsLevel16(HedyTester):
         expected = HedyTester.dedent("""\
         l = [1, 2]
         x = 3""",
-                                     HedyTester.list_access_transpiled('l[int(1)-1]'),
-                                     "l[int(1)-1] = x")
+                                     HedyTester.list_access_transpiled('l[1-1]'),
+                                     "l[1-1] = x")
 
         self.single_level_tester(code=code, expected=expected)
 
