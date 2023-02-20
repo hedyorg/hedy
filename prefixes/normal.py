@@ -2,6 +2,7 @@
 
 import random  # noqa F401
 import time  # noqa F401
+import extensions # noqa F401
 
 global int_saver
 global convert_numerals  # needed for recursion to work
