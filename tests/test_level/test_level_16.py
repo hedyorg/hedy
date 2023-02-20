@@ -17,8 +17,8 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent(
             "dieren = ['Hond', 'Kat', 'Kangoeroe']",
-            HedyTester.list_access_transpiled('dieren[1-1]'),
-            "print(f'''{dieren[1-1]}''')")
+            HedyTester.list_access_transpiled('dieren[int(1)-1]'),
+            "print(f'''{dieren[int(1)-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
@@ -61,8 +61,8 @@ class TestsLevel16(HedyTester):
         expected = HedyTester.dedent("""\
                 friends = []
                 friends.append('Ashli')""",
-                                     HedyTester.list_access_transpiled('friends[1-1]'),
-                                     "print(f'''{friends[1-1]}''')")
+                                     HedyTester.list_access_transpiled('friends[int(1)-1]'),
+                                     "print(f'''{friends[int(1)-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
 
@@ -80,8 +80,8 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent(
             "dieren = ['Hond', 'Kat', 'Kangoeroe']",
-            HedyTester.list_access_transpiled('dieren[1-1]'),
-            "print(f'''{dieren[1-1]}''')")
+            HedyTester.list_access_transpiled('dieren[int(1)-1]'),
+            "print(f'''{dieren[int(1)-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
@@ -133,8 +133,8 @@ class TestsLevel16(HedyTester):
             print fruit[1]""")
         expected = HedyTester.dedent(
             "fruit = ['banaan', 'appel', 'kers']",
-            HedyTester.list_access_transpiled('fruit[1-1]'),
-            "print(f'''{fruit[1-1]}''')")
+            HedyTester.list_access_transpiled('fruit[int(1)-1]'),
+            "print(f'''{fruit[int(1)-1]}''')")
 
         self.multi_level_tester(
             code=code,
@@ -175,8 +175,8 @@ class TestsLevel16(HedyTester):
             print eerstefruit""")
         expected = HedyTester.dedent(
             "fruit = ['banaan', 'appel', 'kers']",
-            HedyTester.list_access_transpiled('fruit[1-1]'),
-            "eerstefruit = fruit[1-1]",
+            HedyTester.list_access_transpiled('fruit[int(1)-1]'),
+            "eerstefruit = fruit[int(1)-1]",
             "print(f'''{eerstefruit}''')")
 
         self.multi_level_tester(
@@ -194,12 +194,12 @@ class TestsLevel16(HedyTester):
             print optellen""")
         expected = HedyTester.dedent(
             "lijst = [1, 2, 3]",
-            HedyTester.list_access_transpiled('lijst[1-1]'),
-            HedyTester.list_access_transpiled('lijst[2-1]'),
-            "optellen = lijst[1-1] + lijst[2-1]",
-            HedyTester.list_access_transpiled('lijst[3-1]'),
+            HedyTester.list_access_transpiled('lijst[int(1)-1]'),
+            HedyTester.list_access_transpiled('lijst[int(2)-1]'),
+            "optellen = lijst[int(1)-1] + lijst[int(2)-1]",
+            HedyTester.list_access_transpiled('lijst[int(3)-1]'),
             """\
-            optellen = optellen + lijst[3-1]
+            optellen = optellen + lijst[int(3)-1]
             print(f'''{optellen}''')""")
 
         self.multi_level_tester(
@@ -237,9 +237,9 @@ class TestsLevel16(HedyTester):
         expected = HedyTester.dedent("""\
             luiaard = 'luiaard'
             dieren = ['aap', 'goat', 'fish']""",
-                                     HedyTester.list_access_transpiled('dieren[1-1]'),
+                                     HedyTester.list_access_transpiled('dieren[int(1)-1]'),
                                      """\
-            if convert_numerals('Latin', luiaard) == convert_numerals('Latin', dieren[1-1]):
+            if convert_numerals('Latin', luiaard) == convert_numerals('Latin', dieren[int(1)-1]):
               print(f'''ja''')""")
 
         self.single_level_tester(
@@ -259,9 +259,9 @@ class TestsLevel16(HedyTester):
         expected = HedyTester.dedent(f"""\
             balletje = 0
             bingo_getallen = [11, 17, 21]""",
-                                     HedyTester.list_access_transpiled('bingo_getallen[1-1]'),
+                                     HedyTester.list_access_transpiled('bingo_getallen[int(1)-1]'),
                                      f"""\
-            if convert_numerals('Latin', balletje){comparison}convert_numerals('Latin', bingo_getallen[1-1]):
+            if convert_numerals('Latin', balletje){comparison}convert_numerals('Latin', bingo_getallen[int(1)-1]):
               print(f'''ja''')""")
 
         self.single_level_tester(
@@ -278,7 +278,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[1-1]}''')
+        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -355,8 +355,8 @@ class TestsLevel16(HedyTester):
         colors1 = ['green', 'red', 'blue']
         colors2 = ['yellow', 'purple']
         colors2.append(colors1[2-1])""",
-                                     HedyTester.list_access_transpiled("colors2[3-1]"),
-                                     "print(f'''{colors2[3-1]}''')")
+                                     HedyTester.list_access_transpiled("colors2[int(3)-1]"),
+                                     "print(f'''{colors2[int(3)-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'red')  # check that 'red' was correctly appended
 
@@ -411,8 +411,8 @@ class TestsLevel16(HedyTester):
           colors2.remove(colors1[2-1])
         except:
           pass""",
-                                     HedyTester.list_access_transpiled('colors2[1-1]'),
-                                     "print(f'''{colors2[1-1]}''')")
+                                     HedyTester.list_access_transpiled('colors2[int(1)-1]'),
+                                     "print(f'''{colors2[int(1)-1]}''')")
 
         check_removed_from_list = (lambda x: HedyTester.run_code(x) == 'purple')  # check that 'red' was removed
 
@@ -447,8 +447,8 @@ class TestsLevel16(HedyTester):
         expected = HedyTester.dedent("""\
         l = [1, 2]
         x = 3""",
-                                     HedyTester.list_access_transpiled('l[1-1]'),
-                                     "l[1-1] = x")
+                                     HedyTester.list_access_transpiled('l[int(1)-1]'),
+                                     "l[int(1)-1] = x")
 
         self.single_level_tester(code=code, expected=expected)
 
