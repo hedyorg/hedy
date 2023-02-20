@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+    "name": "Hedy",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "forwardPorts": [
+        8080,
+        8081
+    ],
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python",
+                "dirk-thomas.vscode-lark"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash (container default)": {
+                        "path": "/bin/bash",
+                        "overrideName": true
+                    }
+                }
+            }
+        }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    "onCreateCommand": ".devcontainer/create.sh",
+    // Use 'postCreateCommand' to run commands after the container is created.
+    //"postCreateCommand": "",
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "hedy"
+}

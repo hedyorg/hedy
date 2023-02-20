@@ -41,7 +41,7 @@
       <!-- Not logged in -->
       <li class="menubar-item dropdown relative z-20">
           {# Needs a 'block' because it contains a flexbox child #}
-          <a class="menubar-text block border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');">
+          <a class="menubar-text block border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');" data-cy="language-dropdown">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>
@@ -55,7 +55,7 @@
               <!-- Flexbox wrapping in columns doesn't properly set the width -- we'll have to manually match max-height and width here when the list grows... -->
               <div class="flex flex-row flex-wrap w-min justify-start content-start items-start" style="max-height: 38rem; width: 39rem;">
                 {% for lang in other_languages() %}
-                    <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                    <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch-lang-{{lang.lang}}">{{ lang.sym }}</div>
                 {% endfor %}
               </div>
           </div>

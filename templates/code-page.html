@@ -27,9 +27,9 @@
 <div tabindex="0" class="p-4">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
     {% if not raw %}
-        {% include "incl-adventure-tabs.html" %}
+        {% include "incl/adventure-tabs.html" %}
     {% endif %}
-    {% include "incl-editor-and-output.html" %}
+    {% include "incl/editor-and-output.html" %}
 
     {% if latest %}
       <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
@@ -38,31 +38,16 @@
     {% endif %}
 </div>
 {% endblock %}
-{% block scripts %}
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
+{% block additional_scripts %}
   <script>
-    window.State = {};
-    window.State.lang = "{{ g.lang }}";
-    window.State.level = "{{ level }}";
-    window.State.level_title = "{{ _('level_title') }}";
-    window.State.keyword_language = "{{ get_syntax_language(g.lang) }}";
-    window.State.adventure_name = "{{ adventure_name }}";
-    // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
-    window.State.adventure_name_onload = window.State.adventure_name;
-    // We load the adventures into the js to have access to their saved programs (if any).
-    window.State.adventures = {{ adventures|tojson }};
-    {% if loaded_program %}
-        window.State.loaded_program = {{ loaded_program|tojson }};
-    {% endif %}
-    window.State.default_program_name = {{ (_('level_title') + ' ' + level_nr)|tojson }};
+    hedyApp.passStateFromHtml({
+      // We load the adventures into the js to have access to their saved programs (if any).
+      adventures: {{ adventures|tojson }},
+      {% if loaded_program %}
+      loaded_program: {{ loaded_program|tojson }},
+      {% endif %}
+    });
   </script>
-  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <!-- If we are in tutorial mode -> hide most features, slowly release them -->
   <!-- We only do this for the general tutorial, the level tutorials are loaded on a button click -->
   {% if intro_tutorial %}

@@ -96,7 +96,15 @@ class HedyTester(unittest.TestCase):
         if parse_result.has_turtle:
             code += utils.TURTLE_PREFIX_CODE
         if parse_result.has_pygame:
-            code += utils.PYGAME_PREFIX_CODE
+            pygame_test_prefix = (
+                'import os\n'
+                'os.environ["SDL_VIDEODRIVER"] = "dummy" # No real image drivers exist, set to dummy for testing\n'
+                'os.environ["SDL_AUDIODRIVER"] = "disk" # No real audio drivers exist, set to disk for testing\n'
+            ) + utils.PYGAME_PREFIX_CODE + (
+                "pygame_end = True # Set to True so that we don't get stuck in a loop during testing\n"
+            )
+
+            code += pygame_test_prefix
 
         code += parse_result.code
         # remove sleep comments to make program execution less slow
