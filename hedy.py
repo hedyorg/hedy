@@ -992,15 +992,15 @@ while not pygame_end:
     break""")
 
     regex_string_subsequent_use = (
-        "\s*# End of PyGame Event Handler"
-        "\s*pygame_end = False"
-        "\s*while not pygame_end:"
-        "\s*pygame.display.update\(\)"
-        "\s*event = pygame.event.wait\(\)"
-        "\s*if event.type == pygame.QUIT:"
-        "\s*pygame_end = True"
-        "\s*pygame.quit\(\)"
-        "\s*break"
+        r"\s*# End of PyGame Event Handler"
+        r"\s*pygame_end = False"
+        r"\s*while not pygame_end:"
+        r"\s*pygame.display.update\(\)"
+        r"\s*event = pygame.event.wait\(\)"
+        r"\s*if event.type == pygame.QUIT:"
+        r"\s*pygame_end = True"
+        r"\s*pygame.quit\(\)"
+        r"\s*break"
     )
 
     def __default__(self, args, children, meta):
