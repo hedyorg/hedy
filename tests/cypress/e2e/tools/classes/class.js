@@ -3,13 +3,13 @@ import { goToTeachersPage } from "../navigation/nav";
 export function createClass()
 {
     const classname = `test class ${Math.random()}`;
-    
+
     goToTeachersPage();
     
     cy.get('#create_class_button').click();
     cy.get('#modal-prompt-input').type(classname);
     cy.get('#modal-ok-button').click();
-    
+
     goToTeachersPage();
     
     return classname;
@@ -19,13 +19,27 @@ export function createClass()
  * Make sure that at least one class exists
  *
  * Create a class if one doesn't exist already.
+ *
+ * Use as follows:
+ *
+ *      const className = await ensureClass();
+ *
+ * In an `async` function.
  */
 export function ensureClass()
 {
+    const classname = `test class ${Math.random()}`;
     goToTeachersPage();
-    if (cy.getBySel('view_class_link').length === 0) {
-        createClass();
-    }
+
+    return new Promise(ok => {
+        cy.getBySel('view_class_link').then(viewClassLink => {
+            if (viewClassLink.length === 0) {
+                ok(createClass());
+            } else {
+                ok(viewClassLink.text());
+            }
+        });
+    });
 }
 
 export function addStudents(classname, count) {

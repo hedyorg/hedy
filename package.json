@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "build-tools/heroku/on-deploy.sh",
+    "cypress-gui": "cd tests && cypress open",
     "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\""
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "chart.js": "^3.6.2",
     "dompurify": "^2.3.5",
     "jquery-ui-dist": "^1.13.1",
+    "jszip": "^3.10.1",
     "postcss": "^8.4.5"
   }
 }

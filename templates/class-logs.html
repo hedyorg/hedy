@@ -1,6 +1,7 @@
+{% set initialize_logs = True %}
 {% extends "auth.html" %}
 
-{% from "stats-shared.html" import insert_log_search, insert_accordion_tab %}
+{% from "macros/stats-shared.html" import insert_log_search, insert_accordion_tab %}
 
 {% block regular_content %}
 <div>
@@ -13,10 +14,4 @@
     {{ insert_log_search(class_info.id, class_info.students) }}
 
 </div>
-
-<script>
-  $(function() {
-    hedyApp.logs.initialize();
-  });
-</script>
 {% endblock %}

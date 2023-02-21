@@ -25,13 +25,14 @@ set -eu
 # rather slow (think 5-10 seconds to do a compilation), and we want to
 # optimize for iteration speed in that case. That does mean that the generated
 # JavaScript is slightly different between those cases--however, the final
-# JavaScript will always be generated on deploy using the previous deploy
+# JavaScript will always be generated on deploy using the official generation
 # method.
 root=$(cd $(dirname $0)/../.. && pwd)
 
 cd $root
 
 python3 highlighting/generate-rules-highlighting.py
+python3 build-tools/heroku/generate-client-messages.py
 
 if [[ ! -f node_modules/.bin/tsc ]]; then
     echo "👉 You need to run the following command ONCE before running 'generate-typescript':" >&2

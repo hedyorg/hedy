@@ -616,3 +616,10 @@ class TestsLevel16(HedyTester):
               break""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    @parameterized.expand(['sleep', 'number is', 'print', 'forward', 'turn'])
+    def test_at_random_express(self, command):
+        code = textwrap.dedent(f"""\
+            numbers is [1, 2, 3]
+            {command} numbers at random""")
+        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidAtCommandException)
