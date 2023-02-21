@@ -66,6 +66,9 @@ class ProfileModule(WebsiteModule):
         if "country" in body:
             if not body["country"] in COUNTRIES:
                 return gettext("country_invalid"), 400
+        if "error_level" in body:
+            if not body.get('error_level') in ["1", "2", "3"]:
+                return gettext("error_level_invalid"), 400
 
         resp = {}
         if "email" in body:
@@ -111,7 +114,7 @@ class ProfileModule(WebsiteModule):
         username = user["username"]
 
         updates = {}
-        for field in ["country", "birth_year", "gender", "language", "keyword_language"]:
+        for field in ["country", "birth_year", "gender", "language", "keyword_language", "error_level"]:
             if field in body:
                 updates[field] = body[field]
             else:
