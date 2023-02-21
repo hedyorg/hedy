@@ -1,4 +1,5 @@
 import {ensureClass} from '../../../tools/classes/class.js'
+import { loginForTeacher } from '../../../tools/login/login.js';
 
 describe('Tests for stats page for a class', () => {
   beforeEach(() => {
