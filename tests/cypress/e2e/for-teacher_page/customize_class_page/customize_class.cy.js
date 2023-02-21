@@ -7,12 +7,12 @@ describe('customize class page', () => {
       loginForTeacher();
       className = await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.getBySel('customize_class_button').click(); // Press customize class button
+      cy.getBySel('customize-class-button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
       cy.getBySel('remove_customizations_button').click({ force: true });
-      cy.getBySel('modal_yes_button').click();
+      cy.getBySel('modal-yes-button').click();
     });
 
     it('checks the option checkboxes', () => {
@@ -140,7 +140,7 @@ describe('customize class page', () => {
         .should('not.be.disabled')
         .click();
 
-      cy.getBySel('modal_yes_button')
+      cy.getBySel('modal-yes-button')
         .should('be.visible')
         .click();
 
