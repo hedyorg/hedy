@@ -1813,7 +1813,7 @@ else:
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
         if self.is_variable(var_or_button):
             return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
+if event.unicode != {args[0]}:
     pygame_end = True
 if event.unicode == {args[0]}:
 {ConvertToPython.indent(args[1])}
@@ -2015,7 +2015,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # if this is a variable, we assume it is a key (for now)
         if self.is_variable(var_or_key):
             return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
+if event.unicode != {args[0]}:
     pygame_end = True
 if event.unicode == {args[0]}:
 {all_lines}
