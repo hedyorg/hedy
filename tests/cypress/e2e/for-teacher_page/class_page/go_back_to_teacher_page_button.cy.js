@@ -1,5 +1,5 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import {createClass} from '../../tools/classes/class.js'
+
 
 
 describe('Is able to go to logs page', () => {
