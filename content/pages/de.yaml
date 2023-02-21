@@ -28,7 +28,7 @@ sections:
             Sie können die Arbeit und den Fortschritt Ihrer Schüler auf der Klassenseite verfolgen.
     -   title: "Geräte"
         text: |
-            Hedy ist webbasiert, d.h. es funktioniert auf jedem Gerät mit einem Browser (Chrome, Firefox, Edge usw.), so dass Laptops, ChromeBuhks, Tablets und sogar Smartphones geeignet sind, um Hedy zu verwenden.
+            Hedy ist webbasiert, d.h. es funktioniert auf jedem Gerät mit einem Browser (Chrome, Firefox, Edge usw.), sodass Laptops, Chromebooks, Tablets und sogar Smartphones geeignet sind, um Hedy zu verwenden.
             Du musst nichts herunterladen, bevor du mit Hedy arbeitest, geh’ einfach auf die Website und schon kannst du loslegen!
     -   title: Die Hedy Community
         text: "Alle Hedy-Lehrpersonen, Programmierer und andere Fans sind auf unserem [Discord-Server](https://discord.gg/8yY7dEme9r) willkommen. Dies ist der ideale Ort, um sich über Hedy auszutauschen: wir haben Channel, wo du deine coolen Projekte und Lektionen zeigen kannst, Channel um Fehler zu melden, und Channel um sich mit anderen Lehrpersonen und dem Hedy-Team zu unterhalten.\n[Hier](https://www.youtube.com/watch?v=Lyz_Lnd-_aI) findest du ein Video darüber, wie man der Discord Community beitritt.\n"
@@ -495,7 +495,7 @@ sections:
         -   title: "Schüler verwenden lange Variablennamen bestehend aus zwei Worten"
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    Eine Variable sollte mit einem Wort benannt werden. Du kannst ein Apostroph verwenden, um zwei Wörter zu verbinden. Dies zählt als eins.
                 error_code: |
                     gewählte Tür ist frage 'Welche Tür wählst du?'
                 solution_text: |
@@ -505,46 +505,46 @@ sections:
         -   title: "Schülerinnen und Schüler möchten, dass mehrere Antworten richtig sind"
             example:
                 error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                    Zum Beispiel lässt die Schülerin oder der Schüler Hedy all seinen Freunden sagen, dass sie lustig sind, aber anderen Klassenkameraden, dass sie es nicht sind.
                 error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
+                    falls name ist Jesse, David, Souf drucke 'Du bist lustig' sonst drucke 'Du bist nicht lustig'
                 solution_text: |
                     You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
                     Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
                 solution_code: |
-                    friends is Jesse, David, Souf
-                    name is ask 'Who are you?'
-                    if name in friends print 'You are funny'
-                    else print 'You are not funny'
+                    freunde ist Jesse, David, Souf
+                    name ist frage 'Wer bist du?'
+                    falls name in freunde drucke 'Du bist lustig'
+                    sonst drucke 'Du bist nicht lustig'
 
-                    or
+                    oder
 
-                    name is ask 'Who are you?'
-                    if naam is Jesse print 'You are funny'
-                    if naam is David print 'You are funny'
-                    if naam is Souf print 'You are funny'
+                    name ist frage 'Wer bist du?'
+                    falls name ist Jesse drucke 'Du bist lustig'
+                    falls name ist David drucke 'Du bist lustig'
+                    falls name ist Souf drucke 'Du bist lustig'
         -   title: "Die Schülerinnen und Schüler machen den Variablennamen zum Gleichen wie den Wert im falls-Befehl"
             example:
                 error_text: |
                     Im Beispiel ist das Passwort 'Passwort'. Dies führt dazu, dass es immer richtig ist.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password print 'Access granted'
-                    else print 'Acces denied!'
+                    passwort ist frage 'Was ist das Passwort?'
+                    falls passwort ist passwort drucke 'Zugang gewährt'
+                    sonst drucke 'Zugang verwehrt!'
                 solution_text: |
-                    Pick a different name for your variable.
+                    Wähle einen anderen Namen für deine Variable.
                 solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                    geheimes_passwort ist frage 'Was ist das Passwort?'
+                    falls geheimes_passwort ist passwort drucke 'Zugang gewährt'
+                    sonst drucke 'Zugang verwehrt!'
     -   level: '6'
         sections:
         -   title: Schüler kämpfen mit Anführungszeichen
             example:
                 error_text: "Einige Schüler haben Probleme damit, Anführungszeichen hinzuzufügen oder nicht. Wenn du Anführungszeichen hinzufügst, wird auf dem Ausgabebildschirm buchstäblich \"5+5\" angezeigt.\n"
-                error_code: "print '5 + 5'\n"
+                error_code: "drucke '5 + 5'\n"
                 solution_text: "In diesem Code wird auf dem Ausgabebildschirm '10' angezeigt.\n"
-                solution_code: "print 5 + 5\n"
+                solution_code: "drucke 5 + 5\n"
         -   title: Schüler haben Schwierigkeiten mit dem Konzept der Mathematik mit einer Variablen
             example:
                 error_text: "Einigen Schülern fällt es schwer, mit Variablen zu rechnen. Versuchen Sie, ihnen sehr einfache Beispiele zu zeigen, wie z. B.:\n"
@@ -558,34 +558,34 @@ sections:
                 error_text: "Vergewissern Sie sich, dass die Schüler sowohl den vollständigen Wiederholungsbefehl als auch den Druckbefehl verwenden können.\n"
                 error_code: "repeat 3 times 'Denn er ist ein toller Kerl'\nrepeat 3 times 'Das kann niemand leugnen!'\n"
                 solution_text: "Dies ist der richtige Code:\n"
-                solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
-        -   title: Students try to repeat multiple lines
+                solution_code: "wiederhole 3 mal drucke 'For he`s a jolly good fellow'\nwiederhole 3 mal drucke 'Which nobody can deny!'\n"
+        -   title: Schülerinnen und Schüler versuchen mehrere Zeilen zu wiederholen
             example:
                 error_text: "In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.\n"
-                error_code: "repeat 3 times drink = ask 'What would you like to drink?'\nprint drink\n"
-                solution_text: "You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.\n"
-                solution_code: "drink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\n"
-        -   title: Students make programs that take too long to run
+                error_code: "wiederhole 3 mal getränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\n"
+                solution_text: "Du solltest ins nächste Level gehen, um mehrere Zeilen wiederholen zu können. In diesem Level wirst du alles separat drucken müssen.\n"
+                solution_code: "getränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\ngetränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\ngetränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\n"
+        -   title: Schülerinnen und Schüler erstellen Programme, die zu lang zum Ausführen brauchen
             example:
-                error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
-                error_code: "repeat 100 times print 'How many times can I repeat this?'\n"
-                solution_text: "Make sure the codes aren't too long\n"
-                solution_code: "repeat 20 times print 'This is enough'\n"
+                error_text: "In diesem Level ist es sehr leicht langen Code zu erstellen. Die Schülerinnen und Schüler dürfen keine Programme erstellen, die zu lange zum Ausführen brauchen (um unsere Server zu retten).\n"
+                error_code: "wiederhole 100 mal drucke 'Wie oft kann ich dies wiederholen?'\n"
+                solution_text: "Stelle sicher, dass der Code nicht zu lang ist\n"
+                solution_code: "wiederhole 20 mal drucke 'Dies ist genug'\n"
     -   level: '8'
         sections:
-        -   title: Students use the indentation wrong
+        -   title: Schülerinnen und Schüler benutzen die falsche Einrückung
             example:
                 error_text: "Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.\n"
-                error_code: "repeat 3 times\nprint 'hello'\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "repeat 3 times\n    print 'hello'\n"
-        -   title: Students only repeat 1 line when they wanted to repeat multiple lines
+                error_code: "wiederhole 3 mal\ndrucke 'hallo'\n"
+                solution_text: "Dies ist der korrekte Code:\n"
+                solution_code: "wiederhole 3 mal\n    drucke 'hallo'\n"
+        -   title: Schülerinnen und Schüler wiederholen nur 1 Zeile, obwohl sie mehrere Zeilen wiederholen wollten
             example:
                 error_text: "For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.\n"
-                error_code: "repeat 3 times\n    drink = ask 'What would you like to drink?'\nprint drink\n"
+                error_code: "wiederhole 3 mal\n    getränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\n"
                 solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
-                solution_code: "repeat 3 times\n    drink = ask 'What would you like to drink?'\n    print drink\n"
-        -   title: Students want to nest if statements, or put if statements inside a loop
+                solution_code: "wiederhole 3 mal\n    getränk = frage 'Was möchten Sie trinken?'\n    drucke getränk\n"
+        -   title: Schülerinnen und Schüler möchten falls-Befehle verschachteln oder falls in eine Schleife packen
             example:
                 error_text: "In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.\nIn the next level this is allowed.\n"
                 error_code: "birthday = ask 'Is it you birthday?'\nif birthday = yes\n    repeat 3 times\n        print 'Hip Hip Hooray!'\n"
