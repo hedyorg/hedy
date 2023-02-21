@@ -41,7 +41,7 @@
                 </div>
                 <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
+                    <textarea id="custom_adventure_content" data-cy="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
@@ -64,14 +64,14 @@
                 </div>
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
-                <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="submit" class="green-btn" id="save_adventure_button">{{_('save')}}</button>
-                <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
+                <button class="blue-btn" id="preview_adventure_button" data-cy="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                <button type="submit" class="green-btn" id="save_adventure_button" data-cy="save_adventure_button">{{_('save')}}</button>
+                <button type="reset" class="red-btn" id="remove_adventure_button" data-cy="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
     </div>
     <div>
-        <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
+        <button class="blue-btn" id="go_back_button" data-cy="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
 {% endblock %}
