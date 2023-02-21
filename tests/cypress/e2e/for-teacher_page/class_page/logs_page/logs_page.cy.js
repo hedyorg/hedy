@@ -1,9 +1,9 @@
-import {createClass} from '../../../tools/classes/class.js'
+import {ensureClass, ensureClass} from '../../../tools/classes/class.js'
 
 describe('Tests for logs page for a class', () => {
   beforeEach(() => {
     loginForTeacher();
-    createClass();
+    ensureClass();
     cy.getBySel('view_class_link').first().click(); // Press on view class button
     cy.getBySel('logs_button');
   });

@@ -1,11 +1,11 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import {createClass} from '../../tools/classes/class.js'
+import {ensureClass} from '../../tools/classes/class.js'
 
 
 describe('Is able to go to logs page', () => {
   it('Passes', () => {
     loginForTeacher();
-    createClass();
+    ensureClass();
     cy.get(".view_class").first().click(); // Press view class button
 
     var currentUrl = '';
