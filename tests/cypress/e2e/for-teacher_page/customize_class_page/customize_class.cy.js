@@ -1,10 +1,10 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import { createClass } from "../../tools/classes/class";
+import { createClass, ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
-      createClass();
+      ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.getBySel('customize_class_button').click(); // Press customize class button
     });
