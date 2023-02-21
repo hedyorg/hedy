@@ -559,43 +559,37 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} 欢迎来到海迪餐厅！
-                    {print} 唯一会为您随机选择餐食和价格的餐厅！
-                    前菜 {is} 沙拉, 汤, 肉片
-                    主菜 {is} 披萨, 布鲁塞尔芽菜, 意面
-                    甜点 {is} 布朗尼, 冰淇淋, 法国奶酪
-                    饮料 {is} 可乐, 啤酒, 水
-                    价格 {is} 1元, 10元, 100元
-                    {print} 您会先吃到 前菜 {at} {random}
-                    {print} 然后我们会上 主菜 {at} {random}
-                    {print} 然后甜点是 甜点 {at} {random}
-                    {print} 您可以喝 饮料 {at} {random}
-                    {print} 一共是 价格 {at} {random}
-                    {print} 谢谢，祝您用餐愉快！
+                    套餐 {is} 意大利面、抱子甘蓝、汉堡包
+                    {print}今晚有套餐{at}{random}！
+                    价格 {is} 1 欧元、10 欧元、100 欧元
+                    {print} 餐费是价格 {at} {random} 。
                     ```
                 story_text_2: |
-                    ## 过敏
-                    你的客人是否有食物过敏，或者讨厌某道菜？那么你可以用`{remove}`命令将它从你的菜单中去除。
+                    ### 练习
+                    现在制作你自己版本的随机菜单。
+                    自己制作一份包含前菜、主菜、甜点、饮料和价格的菜单。 
+                    然后使用 `{print}` 和 `{at} {random}` 命令告诉顾客今晚菜单的内容。
 
                 example_code_2: |
                     ```
-                    {print} 神秘奶昔
-                    口味 {is} 草莓, 巧克力, 香草
-                    过敏 {is} {ask} 你对什么口味过敏吗？
-                    {remove} 过敏 {from} 口味
-                    {print} 你得到了一杯 口味 {at} {random} 味的奶昔
+                    {print}欢迎来到你自己的随机餐厅！
+                    前菜 {is} _
+                    主菜 {is} _
+                    甜点 {is} _
+                    饮料 {is} _
+                    价格 {is} _
+                    _
                     ```
                 start_code: "# 在这里写你的代码"
-                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                story_text_3: "## 过敏\n**另外**你的客人是否有食物过敏，或者讨厌某道菜？那么你可以用`{remove}`命令将它从你的菜单中去除。\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
-                    ## Restaurant
-                    In this level you have to use quotation marks when using the `{print}` command.
-                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+                    ## 餐厅
+                    在此级别中，使用 `{print}` 或 `{ask}` 命令时必须使用引号。
 
-                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
-                    So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
+                    ### 练习
+                    在此代码中添加引号以使其正常工作！请注意：变量不应用引号引起来。
                 example_code: |
                     ## 海迪餐厅示例
                     ```
@@ -613,8 +607,9 @@ adventures:
             5:
                 story_text: |
                     ## 餐厅
-                    在这一关，{if}命令让你可以对你的客人{ask}，并对其回答做出不同的反应。
-                    在下面的例子里，你能看到你可以{ask}你的客人是否想听推荐，海迪会根据回答做出相应的回应。
+                    在这一级，你可以用`{if}`命令向顾客`{ask}`，并对其回答做出不同的回应。
+
+                    在下面的例子里，你能看到你可以`{ask}`顾客`{if}`想让你介绍今天的特价菜，Hedy会根据回答做出相应的回应。
 
                 example_code: |
                     ```
@@ -663,7 +658,7 @@ adventures:
 
                     ## 挑战
                     你可以给你的虚拟餐厅加上很多东西。比如，你能否……
-                    - {ask} 来了几个人，并将价格乘以人数？
+                    - 询问来了几个人，并将价格乘以人数？
                     - 增加另一道菜？
                     - 如果有人用了（秘密的）优惠码，给他一个折扣？
                     - 增加一个儿童菜单？
@@ -702,8 +697,6 @@ adventures:
                     ```
                     {print} '欢迎来到海迪餐厅！'
                     人数 = {ask} '今天来了多少人？'
-                    {repeat} 人数 times 食物 = {ask} '您想吃什么？'
-                    {print} '谢谢您的点单！马上就来！'
                     ```
                 start_code: "# 在这里写你的代码"
             8:
@@ -728,9 +721,17 @@ adventures:
             9:
                 story_text: |
                     ## 餐厅
-                    在这一关，你可以用嵌套让你的餐厅更真实更有趣！
-                    比如如果有人点了薯条，你可以 {ask} 他要不要酱，但是点披萨的就不用！
-                    看看例子，然后在你自己的虚拟餐厅里试一下。
+                    在这一级，你可以用嵌套让你的餐厅更真实更有趣！
+                    比如如果有人点了薯条，你可以 {ask} 他要不要蘸酱，但是不用问点披萨的顾客！
+
+                    ### 练习 
+                    范例代码中删除了缩进。 
+                    你能算出每行需要多少缩进才能使代码正常工作吗？ 
+                    如果顾客点了披萨，海迪不应该问顾客想要哪种蘸酱。 
+
+                    **（另外）** 餐厅不会准备所有的蘸酱。列出一个可用的蘸酱的清单，并在每个订单中回复是否有存货。 <br> 
+                    **（额外）** 披萨有配料。询问客户他们想要哪一种配料。<br>   
+                    **(extra)** 顾客要喝一杯饮料吗？也问问他们！ <br>                    
                 example_code: |
                     ```
                     {print} '欢迎来到海迪餐厅！'
@@ -742,12 +743,12 @@ adventures:
                         {print} 食物
                         {if} 食物 {is} 薯条
                             价格 = 价格 + 3
-                            酱汁 = {ask} '您的薯条要配什么酱？'
-                            {if} 酱汁 {is} 不要
+                            蘸酱= {ask} '您的薯条要配什么酱？'
+                            {if} 蘸酱 {is} 不要
                                 {print} '不要酱'
                             {else}
                                 价格 = 价格 + 1
-                                {print} '配' 酱汁
+                                {print} '配' 蘸酱
                         {if} 食物 {is} 披萨
                             价格 = 价格 + 4
                     {print} '一共' 价格 '元'
