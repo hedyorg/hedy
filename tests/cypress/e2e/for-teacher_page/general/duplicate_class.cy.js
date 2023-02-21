@@ -1,11 +1,11 @@
-import { createClass } from '../../tools/classes/class.js';
+import { ensureClass } from '../../tools/classes/class.js';
 import {loginForTeacher} from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 
 describe('Is able to click on duplicate class', () => {
   it('Passes', () => {
     loginForTeacher();
-    createClass();
+    ensureClass();
     goToTeachersPage();
 
     // Click on duplicate icon

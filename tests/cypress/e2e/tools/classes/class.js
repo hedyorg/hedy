@@ -15,8 +15,21 @@ export function createClass()
     return classname;
 }
 
+/**
+ * Make sure that at least one class exists
+ *
+ * Create a class if one doesn't exist already.
+ */
+export function ensureClass()
+{
+    goToTeachersPage();
+    if (cy.getBySel('view_class_link').length === 0) {
+        createClass();
+    }
+}
+
 export function addStudents(classname, count) {
-    const students = Array.from({length:count}, (_, index) => `student_${index}_${Math.random()}`) 
+    const students = Array.from({length:count}, (_, index) => `student_${index}_${Math.random()}`)
 
     goToTeachersPage();
     
