@@ -6,7 +6,7 @@ describe('Tests for logs page for a class', () => {
     loginForTeacher();
     ensureClass();
     cy.getBySel('view_class_link').first().click(); // Press on view class button
-    cy.getBySel('logs_button');
+    cy.getBySel('logs_button').click();
   });
     
   it('Is able to enter an exception', () => {

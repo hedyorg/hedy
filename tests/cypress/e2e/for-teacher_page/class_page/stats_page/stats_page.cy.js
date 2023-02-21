@@ -6,7 +6,7 @@ describe('Tests for stats page for a class', () => {
     loginForTeacher();
     ensureClass();
     cy.getBySel('view_class_link').first().click(); // Press on view class button
-    cy.getBySel('stats_button');
+    cy.getBySel('stats_button').click();
   });
 
   it('Is able to load data from different timelines', () => {
