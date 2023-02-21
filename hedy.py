@@ -1167,6 +1167,9 @@ class IsValid(Filter):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_list_access_at(self, meta, args):
+        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     # other rules are inherited from Filter
 
 
@@ -2867,6 +2870,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'invalid at keyword':
+            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
