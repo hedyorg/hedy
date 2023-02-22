@@ -109,11 +109,11 @@
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% block additional_scripts %}{% endblock %}
     <script>hedyApp.initialize({
-      lang: {{ g.lang|tojson }},
-      level: {{ level|tojson }},
-      keyword_language: {{ g.keyword_lang|tojson }},
+      lang: {{ g.lang|default(None)|tojson }},
+      level: {{ level|default(None)|tojson }},
+      keyword_language: {{ g.keyword_lang|default(None)|tojson }},
       {% if initialize_logs %}logs: true,{% endif %}
-      javascriptPageOptions: {{ javascript_page_options|tojson }},
+      javascriptPageOptions: {{ javascript_page_options|default(None)|tojson }},
       });</script>
     {% endblock %}
   </body>
