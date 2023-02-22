@@ -582,7 +582,7 @@ adventures:
                     _
                     ```
                 start_code: "# 在这里写你的代码"
-                story_text_3: "## 过敏\n**另外**你的客人是否有食物过敏，或者讨厌某道菜？那么你可以用`{remove}`命令将它从你的菜单中去除。\n"
+                story_text_3: "## 过敏\n**另外**你的客人是否会食物过敏，或者讨厌某道菜？那么你可以用`{remove}`命令将它从你的菜单中删除。\n"
                 example_code_3: "```\n{print} 盲盒奶昔\n味道 {is} 草莓、巧克力、香草\n过敏{is} {ask} 你是否对任何花粉过敏？\n_\n{print} 你可以得到一个 {at} {random} 奶昔\n```\n"
             4:
                 story_text: |
@@ -728,7 +728,6 @@ adventures:
                 story_text: |
                     ## 餐厅
                     在这一级，你可以用嵌套让你的餐厅更真实更有趣！
-                    比如如果有人点了薯条，你可以 {ask} 他要不要蘸酱，但是不用问点披萨的顾客！
 
                     ### 练习 
                     范例代码中删除了缩进。 
@@ -736,8 +735,8 @@ adventures:
                     如果顾客点了披萨，海迪不应该问顾客想要哪种蘸酱。 
 
                     **（另外）** 餐厅不会准备所有的蘸酱。列出一个可用的蘸酱的清单，并在每个订单中回复是否有存货。 <br> 
-                    **（额外）** 披萨有配料。询问客户他们想要哪一种配料。<br>   
-                    **(extra)** 顾客要喝一杯饮料吗？也问问他们！ <br>                    
+                    **（另外）** 披萨有配料。询问顾客他们想要哪一种配料。<br>   
+                    **（另外）** 顾客想喝一杯饮料吗？也问问他们！ <br>                    
                 example_code: |
                     ```
                     {print} '欢迎来到海迪餐厅！'
@@ -770,10 +769,9 @@ adventures:
                     完成代码，在空白处加一个`{ask}`，这样顾客就会被问到每道菜想吃什么。
                 example_code: |
                     ```
-                    上菜顺序 = 前菜, 主菜, 甜点
-                    {for} 上菜 {in} 上菜顺序
-                        食物 = {ask} '您想要吃什么' 上菜 '？'
-                        {print} '您的' 食物 '会是' 上菜
+                    全餐 = 前菜, 主菜, 甜点
+                    {for} 餐品 {in} 全餐
+                        {print} '你的上菜顺序是 ' 餐品 '?'
                     ```
                 story_text_2: |
                     ### 练习
@@ -782,33 +780,30 @@ adventures:
                     提示：有些行根本不需要任何缩进。
                 example_code_2: |
                     ```
-                    上菜顺序 = 前菜, 主菜, 甜点
+                    全餐 = 前菜, 主菜, 甜点
                     客人们 = 丁满, 彭彭
                     {for} 客人 {in} 客人们
-                        {for} 上菜 {in} 上菜顺序
-                        食物 = {ask} 客人 '，你想要吃什么' 上菜 '？'
-                        {print} 客人 '点了' 食物 '作为' 上菜
+                        {for} 餐品 {in} 全餐
+                        食物 = {ask} 客人 '，你想要吃什么' 餐品 '？'
+                        {print} 客人 '点了' 食物 '作为' 餐品
                     ```
-                start_code: "上菜顺序 = 前菜, 主菜, 甜点"
+                start_code: "全餐 = 前菜, 主菜, 甜点"
             11:
                 story_text: |
                     ## 餐厅
-                    我们可以用`{for} i {in} {range} 1 {to} 5`来按顺序`{print}`多个客人的点单。
+                    我们可以用`{for}`和`{range}`来按顺序打印多个客人的订单。
+
+                    ### 练习 
+                    完成餐厅的代码，这样就可以按顺序询问多个客人的订单了。每次都按顺序打印订单：'订单1'，'订单2'，等等。 
+                    你不确定如何去做吗？请看一下你的第8级代码吧。
+
+                     **（另外）**在第9级中，餐厅也使用了价格。你也可以在这里添加价格！
                 example_code: |
                     ```
                     {print} '欢迎来到海迪餐厅！'
-                    人数 = {ask} '您想为多少人点单？'
-                    {for} i {in} {range} 1 {to} 人数
-                        {print} i '号订单'
-                        食物 = {ask} '您想吃什么？'
-                        {print} 食物
-                        {if} 食物 {is} 薯条
-                            酱料 = {ask} '您想要什么酱？'
-                            {print} 酱料
-                        饮料 = {ask} '您想要喝什么？'
-                        {print} 饮料
-                    价格 = 4 * 人数
-                    {print} '请付' 价格 '元！'
+                    人数 = {ask} '你想为多少人点单？'
+                     {print}“所以你想为'人数'人下单。 
+                    {print}“我们走吧！” 
                     ```
                 start_code: "# 在这里写你的代码"
             12:
@@ -851,7 +846,7 @@ adventures:
                     {print} '一共' 价格 '元'
                     ```
                 story_text_2: |
-                    我们用`{or}`来判断 {if} 命令中的两个条件是否至少有一个成立。
+                    我们用`{or}`来判断命令中的两个条件是否至少有一个成立。
 
                 example_code_2: |
                     ```
@@ -887,23 +882,22 @@ adventures:
                     你有没有在天桥下让算命的给你算过命？或者有没有抽过签？
                     那你想必也知道，它们并不能真正预言你的未来。但是它们玩起来仍然很有趣！
 
-                    在接下来的关卡中，你会学到如何制作你自己的算命机器！
-                    在第1关，一开始可以简单一些，只让海迪介绍自己会算命，然后用{echo}命令让它复述玩家的回答。
+                    在接下来的几级中，你会学到如何制作你自己的算命机器！
+                    在第1级，一开始可以简单一些，只让海迪介绍自己会算命，然后用{echo}命令让它复述玩家的回答。
                     像这样：
                 example_code: |
                     ```
-                    {print} 你好，我是海迪半仙！
-                    {ask} 你叫什么？
-                    {print} 让我掐指算一算
-                    {print} 赵钱孙礼……
-                    {echo} 你的名字叫
+                    _你好，我是海迪半仙！
+                    _你叫什么？
+                    _让我掐指算一算
+                    _ 赵钱孙李……
+                    _你的名字叫
                     ```
                 story_text_2: |
-                    ## 挑战
-                    现在海迪只能说出你的名字。你能否扩充这段代码，让海迪可以算出其它东西？
-                    显然，海迪现在海不如一个好的算命师，因为它只能重复玩家给出的答案！
-                    到第2关看看怎么改进你的算命。
-                start_code: "# 在这里写你的代码"
+                    ### 练习
+                    将示例代码复制到你的输入屏幕上，并填入空白处，使代码生效。
+                    **另外**改变代码，让算命仙不仅能算出你的名字，还能算出你的年龄、你最喜欢的运动队或其他关于你的事情。
+                start_code: "# 在这里写下你的代码"
             3:
                 story_text: |
                     ## 算命
@@ -958,10 +952,10 @@ adventures:
                     Check out this example to find out how.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    {print} '我是海迪算命仙!
+                    {print} 我可以预测你明天是否会中彩票！
+                    人{is} {ask} '你是谁？
+                    {if}人{is} 海迪{print} '你肯定会中奖！🤩'{else} {print} '你运气不好！别人会中奖！😭' 
                     ```
                 story_text_2: |
                     ## Hack the program
@@ -970,12 +964,12 @@ adventures:
                     But of course, still gives you a positive answer and the other players a negative one.
                 example_code_2: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} you will win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    goodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!
-                    badanswer {is} Bad luck! Try again!, Another person will win, You lose!
-                    {if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}
+                    {print} '我是海迪算命仙！'
+                    {print} '我可以预测你明天是否会中彩票！'
+                    人{is} {ask} '你是谁？
+                    上签{is} 万岁!你赢了！，你一定会赢！，我们有一个赢家！。
+                    下签{is} 运气不好！再来一次！，另一个人将会赢，你输了！。
+                    {if} person{is} 海迪{print} 上签{at} {random} {else} {print}下签{at} {random}
                     ```
                 story_text_3: |
                     ## Challenges
@@ -1024,11 +1018,11 @@ adventures:
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} '我是海迪算命仙！'
+                    {print} '你可以问3个问题！'
+                    {repeat} 3{times} 问题 ={ask} '你想知道什么？
+                    回答=是，不是，也许
+                    {repeat} 3{times} {print} '我掐指一算...' 回答{at} {random}
                     ```
                 story_text_2: |
                     ## Challenge
