@@ -91,6 +91,10 @@ adventures:
                     Dat is handig, want nu kan je alle woorden printen die je maar wilt. Ook de woorden die je hebt gebruikt om iets in op te slaan met `{is}`.
 
                     De meeste programmeertalen gebruiken ook aanhalingstekens bij het printen, dus we komen zo al een stapje dichterbij echt programmeren!
+
+                    ### Hoge komma's
+                    Let op! Nu we de aanhalingstekens gebruiken bij `{print}` en `{ask}`, kun je aanhanlingstekens niet langer gebruiken als hoge komma.
+                    Hierdoor moet je soms de spelling aanpassen van woorden die je schrijft met een hoge komma in het meervoud. Zo schrijf je commando's nu als commandos en komma's als kommas.
                 story_text_2: |
                     ### Opdrachten worden steeds moeilijker
                     Je vindt de commando's weer links, en opdrachten in de volgende tabjes. De opdrachten worden in de opeenvolgende tabjes nu steeds iets moeilijker.
@@ -518,10 +522,17 @@ adventures:
                     ## Verhaal
                     Misschien heb je gezien dat in het vorige level nog wel een foutje zit. Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `{print}` mijn naam is naam.
                     Dat werkte niet goed! Dan krijg je: mijn Henk is Henk. Dat kun je in dit level oplossen. Daarvoor moet je wel aanhalingstekens gebruiken bij alles dat je gaat printen.
+
+                    ### Opdracht
+                    Kopieer de voorbeeldcode en maak hem kloppend door aanhalingstekens in te vullen op de lijntjes.
+
+                    ### Opdracht 2
+                    Ga terug naar het vorige level en kopieer je eigen verhaalcode. Maak de code nu kloppend voor dit level door er aanhalingstekens aan toe te voegen op de goede plekken.
+                    Let op: De variabelen die je in jouw eigen verhaal gebruikt moeten buiten de aanhalingstekens. Net als bij de tweede regel van de voorbeeldcode. Daar staat de variabele naam ook buiten de aanhalingstekens.
                 example_code: |
                     ```
-                    naam {is} Hans
-                    {print} _De naam van de hoofdpersoon {is} _ naam
+                    naam {is} {ask} _Hoe heet de hoofdpersoon_
+                    {print} _De hoofdpersoon heet _ naam
                     {print} naam _ gaat nu in het bos lopen_
                     {print} naam _ is wel een beetje bang_
                     dieren {is} 🦔, 🦉, 🐿, 🦇
@@ -779,7 +790,8 @@ adventures:
                 story_text: |
                     ## Papegaai
                     In dit level gebruiken we aanhalingstekens bij de commando's `{ask}` en `{print}`.
-                    Kun jij de code afmaken door aanhalingstekens toe te voegen?
+                    ### Opdracht
+                    Maak de code af door aanhalingstekens toe te voegen op de lijntjes.
                 example_code: |
                     ```
                     woorden {is} lorre, Hedy
@@ -1220,12 +1232,11 @@ adventures:
             4:
                 story_text: |
                     ## Afwasprogramma
-                    Met aanhalingstekens kun je je afwasprogramma mooier maken.
-                    Deze keer is de voorbeeldcode niet helemaal compleet.
-                    Maak jij de code af door op de lage streepjes de juiste commando's of tekens in te vullen?
-                    Op ieder streepje moet steeds één woord of teken komen.
+                    Met aanhalingstekens kun je je afwasprogramma beter maken.
 
-                    Tip: Vergeet de aanhalingstekens niet!
+                    ### Opdracht
+                    Vul eerst de lege plekken in de voorbeeldcode in om hem aan de praat te krijgen.
+                    Is dat gelukt? Fantastisch! Dan kun je nu je eigen code van het vorige level kopiëren en werkend maken in dit level door aanhalingstekens toe te voegen op de juiste plekken.
                 example_code: |
                     ```
                     mensen {is} mama, papa, Emma, Sophie
@@ -1328,7 +1339,7 @@ adventures:
                 example_code: |
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {print} keuzes {at} {random}
+                    {print} Jij gooit keuzes {at} {random}
                     ```
                 start_code: "{print} Wat zal de dobbelsteen deze keer aangeven?"
                 example_code_2: |
@@ -1336,19 +1347,14 @@ adventures:
                     keuze {is} _
                     ```
                 story_text_2: |
-                    ## Challenge
+                    ### Opdracht
                     De dobbelsteen in het voorbeeld hierboven zijn voor het spelletje regenwormen. Kun jij ook normale dobbelstenen maken? Of andere speciale dobbelstenen van een ander spel?
             4:
                 story_text: |
                     ## Dobbelsteen
-                    In dit level kunnen we zinnen maken met de dobbelwaarde in de zin, met aanhalingstekens natuurlijk.
-                    Deze keer is de voorbeeldcode niet helemaal compleet. Maak jij de code af?
-                example_code: |
-                    ```
-                    keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {print} _ jij gooide _
-                    {print} _ _ _ <- hier moet je het kiezen programmeren
-                    ```
+                    Ook in dit level kun je een dobbelsteen maken. Maar nu mag je het zelf proberen, zonder voorbeeld!
+                    ### Opdracht
+                    Programmeer een dobbelsteen. Tip: Weet je niet hoe? Spiek dan bij jouw dobbelsteen uit het vorige level, maar vergeet de aanhalingstekens niet.
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
             5:
                 story_text: |
@@ -1507,12 +1513,8 @@ adventures:
                 story_text: |
                     ## Steen, papier, schaar
                     In dit level kunnen we steen, papier, schaar verder programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
-                    Maak jij de code af door op de stipjes de juiste commando's of tekens in te vullen?
-                example_code: |
-                    ```
-                    keuzes {is} steen, papier, schaar
-                    {print} _ De computer koos: _ _ {at} _
-                    ```
+                    ### Opdracht
+                    Kopieer je code uit het vorige level en maak hem werkend in dit level door bij elk `{print}` en `{ask}` commando aanhalingstekens te gebruiken.
                 start_code: "{print} 'Welkom bij jouw eigen steen papier schaar!'"
             5:
                 story_text: |
@@ -1823,17 +1825,21 @@ adventures:
             4:
                 story_text: |
                     ## Hedy de Waarzegger
-                    In dit level kun je oefenen met de aanhalingstekens. Probeer dezelfde code te maken als in je vorige level, maar let op dat je de aanhalingstekens op de goede plek plaatst!
+                    In dit level kun je oefenen met de aanhalingstekens.
 
                     ### Opdracht
                     We hebben alle aanhalingstekens uit het voorbeeld verwijderd. Kun jij ze toevoegen om de code aan de praat te krijgen?
+
+                    ### Opdracht 2
+                    Kopieer je eigen spookhuiscode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
                 example_code: |
                     ```
-                    {print} _Hoi ik ben Hedy de Waarzegger!_
-                    voorspelling {is} {ask} _Wat wil je weten?_
-                    {print} _ Dit is je vraag: _ voorspelling
+                    _ Voeg aanhalingstekens toe aan deze code _
+                    {print} Hoi ik ben Hedy de Waarzegger!
+                    voorspelling {is} {ask} Wat wil je weten?
+                    {print}  Dit is je vraag:  voorspelling
                     antwoorden {is} ja, nee, misschien
-                    {print} _ Mijn glazen bol zegt..._
+                    {print} Mijn glazen bol zegt...
                     {sleep} 2
                     {print} antwoorden {at} {random}
                     ```
@@ -2088,24 +2094,25 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
-                    In dit level moet je aanhalingstekens gebruiken bij het `{print}` commando.
-                    Lukt het jou om aanhalingstekens toe te voegen aan je restaurantcode?
+                    ### Opdracht
+                    Kun jij de voorbeeldcode aan de praat krijgen?
 
-                    Let op! In vorige levels was het toegestaan om enkele aanhalingstekens (`'`) te gebruiken in de tekst, maar vanaf dit level zal Hedy denken dat dat aanhalingstekens zijn, waardoor je code niet werkt. Dus in plaats van `{print} Hedy's pizza is de lekkerste`, moet je nu typen: `{print} 'De pizza van Hedy is de lekkerste'`.
+                    ### Opdracht 2
+                    Kopieer je eigen restaurantcode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
                     ## Voorbeeld Hedy Restaurant
                     ```
-                    _Voeg aanhalingstekens toe aan deze code_
-                    {print} _Welkm bij Hedys restaurant!_
-                    {print} _Vandaag serveren we pizza of lasagna._
-                    eten {is} {ask} _Wat wil je eten?_
-                    {print} _Goede keuze! _ eten _ is mijn favoriet!_
-                    topping {is} {ask} _wil je er vlees of groeten bij?_
-                    {print} eten _ met _ topping _ wordt gemaakt!_
-                    drank {is} {ask} _Wat wil je erbij drinken?_
-                    {print} _Bedankt voor de bestelling._
-                    {print} _Jouw + eten _ en _ drank _ komen er zo aan!_
+                    _ Voeg aanhalingstekens toe aan deze code _
+                    {print} Welkm bij Hedys restaurant!
+                    {print} Vandaag serveren we pizza of lasagna.
+                    eten {is} {ask} Wat wil je eten?
+                    {print} Goede keuze!  eten  is mijn favoriet!
+                    topping {is} {ask} wil je er vlees of groeten bij?
+                    {print} eten  met  topping  wordt gemaakt!
+                    drank {is} {ask} Wat wil je erbij drinken?
+                    {print} Bedankt voor de bestelling.
+                    {print} Jouw eten  en  drank  komen er zo aan!
                     ```
             5:
                 story_text: |
@@ -2482,16 +2489,22 @@ adventures:
                 story_text: |
                     ## Spookhuis
                     In dit level heb je geleerd hoe je aanhalingstekens moet gebruiken.
-                    Kun jij je spookhuis ook in level 4 aan de praat krijgen?
+
+                    ### Opdracht
+                    Kun jij de voorbeeldcode aan de praat krijgen?
+
+                    ### Opdracht 2
+                    Kopieer je eigen spookhuiscode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
                 example_code: |
                     ```
-                    {print} _Ontsnap uit het spookhuis!_
-                    {print} _ Voor je staan drie deuren... _
-                    keuze {is} {ask} _ Welke deur kies je?_
-                    {print} _ Je koos deur keuze _
+                    _ Voeg aanhalingstekens toe aan deze code _
+                    {print} Ontsnap uit het spookhuis!
+                    {print} Voor je staan drie deuren...
+                    keuze {is} {ask} Welke deur kies je?
+                    {print} Je koos deur keuze
                     monsters {is} een zombie, een vampier, NIKS JE ONTSNAPT
-                    {print} _ Jij ziet... _
+                    {print} Jij ziet...
                     {sleep}
                     {print} monsters {at} {random}
                     ```

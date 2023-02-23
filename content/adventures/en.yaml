@@ -94,6 +94,10 @@ adventures:
                     This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
 
                     Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+
+                    ### Contractions
+                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
+                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
                 example_code: |
                     ```
                     {print} 'You need to use quotation marks from now on!'
@@ -553,10 +557,17 @@ adventures:
                     ## Story
                     You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
                     You can solve that in this level. You must use quotation marks for everything that you are going to print.
+
+                    ### Exercise
+                    Copy the example code and make it work by adding quotation marks on the lines.
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print}  _ The name of the main character is _ name
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
                     {print} name  _ is now going to walk in the woods _
                     {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -844,7 +855,8 @@ adventures:
                 story_text: |
                     ## Parrot
                     In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
-                    Can you complete the code by adding quotation marks?
+                    ### Exercise
+                    Complete the code by filling in quotation marks on the blanks.
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -1306,12 +1318,11 @@ adventures:
             4:
                 story_text: |
                     ## Dishwashing
-                    With quotation marks you can make your dishwashing planning more beautiful.
-                    This time the sample code is not quite complete.
+                    With quotation marks you can make your dishwashing program even better.
 
-                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
-
-                    Tip: Don't forget the quotation marks!
+                    ### Exercise
+                    First, fill in right symbols or commands on the blanks to make this example program work.
+                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
@@ -1417,7 +1428,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    {print} You throw choices {at} {random}
                     ```
                 story_text_2: |
                     ### Exercise
@@ -1431,14 +1442,11 @@ adventures:
             4:
                 story_text: |
                     ## Dice
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _ you threw _
-                    {print} _ _ _ <- here you have to program the choice
-                    ```
+                    In this level you can also create dice. But this time you can try it yourself, without an example code!
+
+                    ### Exercise
+                    Make your own dice in this level.
+                    Tip: If you have no idea how to make dice. Take a peek at your dice form te previous level, but don't forget to add quotation marks.
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: |
@@ -1895,13 +1903,9 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    ### Exercise
+                    Copy your code from te previous level and make it work by using quotation marks after each `{print}` or `{ask}` command.
 
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: |
@@ -2263,6 +2267,9 @@ adventures:
 
                     ### Exercise
                     Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ## Example Hedy Restaurant
                     ```
@@ -2609,11 +2616,11 @@ adventures:
                     Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
                     The quotation marks in level 3 make this possible!
 
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
-
                     ### Exercise
                     We have removed all the quotation marks from this example code, can you add them in all the right places?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
@@ -2890,15 +2897,21 @@ adventures:
                 story_text: |
                     ## Haunted house
                     In this level you learn how to use quotation marks in your games.
+
+                    ### Exercise
                     Can you make your Haunted House level 4 proof?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your haunted house code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    {print} _ Escape from the haunted house! _
-                    {print} _ There are 3 doors in front of you... _
-                    choice {is} {ask} _ Which door do you choose? _
-                    {print} _ You picked door ... _ choice
+                    _ Add quotation marks to this code _
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _ You see... _
+                    {print} You see...
                     {sleep}
                     {print} monsters {at} {random}
                      ```
