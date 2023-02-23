@@ -732,8 +732,8 @@ class TestsLevel5(HedyTester):
         print friend""")
 
         expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
-                                     HedyTester.list_access_transpiled('friends[2-1]'),
-                                     "friend = friends[2-1]",
+                                     HedyTester.list_access_transpiled('friends[int(2)-1]'),
+                                     "friend = friends[int(2)-1]",
                                      "print(f'{friend}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
