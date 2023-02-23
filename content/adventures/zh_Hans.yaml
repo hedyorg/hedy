@@ -398,7 +398,7 @@ adventures:
                 example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{else} {print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
                 story_text: "## 洗碗\n在这个级别中，您可以轻松地为整个星期制定时间表！\n\n### 锻炼\n添加第二件家务，例如吸尘或整理，并确保整个星期也分门别类。\n<br> **（额外）** 程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样才能使程序更公平？\n"
-                example_code: "```\n日期列表 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n姓名 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期列表\n    {print} 姓名{at} {random} '负责在' 日期 '洗碗'\n```\n"
+                example_code: "```\n日期列表 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n姓名 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期列表\n    {print} 姓名 {at} {random} '负责在' 日期 '洗碗'\n```\n"
                 start_code: '# 在这里写你的代码'
             7:
                 example_code: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n{repeat} _ _ {print} '洗碗工作将由' _ _ _完成\n```\n"
@@ -467,7 +467,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             13:
                 story_text: "## 石头剪刀布\n你可以用`{and}`命令缩短你的石头剪刀布代码！阅读下面的示例代码，并尝试完成它。\n"
-                example_code: "```\n选项 = '石头', '剪刀', '布'\n你的_选择 = {ask} '你选什么？'\n电脑_选择= 选项 {at} {random}\n{print} '你选了' 你的_选择\n{print} '电脑选了' 电脑选\n{if} 电脑_选择 {is} 你选\n    {print} '平局'\n{if} 电脑_选择 {is} '石头' {and} 你的_选择 {is} '布'\n    {print} '你赢了！'\n{if} 电脑_选择 {is} '石头' {and} 你的_选择 {is} '剪刀'\n    {print} '电脑赢了！'\n```\n"
+                example_code: "{print}```\n选项 = '石头', '剪刀', '布'\n你的_选择 = {ask} '你选什么？'\n电脑_选择= 选项 {at} {random}\n{print} '你选了' 你的_选择\n{print} '电脑选了' 电脑_选择\n{if} 电脑_选择 {is} 你选\n    {print} '平局'\n{if} 电脑_选择 {is} '石头' {and} 你的_选择 {is} '布'\n    {print} '你赢了！'\n{if} 电脑_选择 {is} '石头' {and} 你的_选择 {is} '剪刀'\n    {print} '电脑赢了！'\n_\n```\n"
                 start_code: '# 在这里写你的代码'
         description: 制作你自己的石头剪刀布游戏
         name: 石头剪刀布
@@ -493,7 +493,7 @@ adventures:
                 start_code: "{print} '欢迎来到这个计算器!'"
             6:
                 story_text: "## 计算器\n现在你可以做数学了，你可以自己做一个计算器！\n"
-                example_code: "```\n数1{is} {ask} “填写第一个数字：”\n数2{is} {ask} “填写第二个数字：”\n正确答案 = 数1 * 数2\n{print} 数1 ' 乘以 '数2 ' 是 ' 正确答案\n```\n"
+                example_code: "```\n数1 {is} {ask} “填写第一个数字：”\n数2 {is} {ask} “填写第二个数字：”\n正确答案 = 数1 * 数2\n{print} 数1 ' 乘以 '数2 ' 是 ' 正确答案\n```\n"
                 story_text_2: "### 练习\n上面的计算器会为你计算出答案，但你也可以编写一个程序来测试你自己的运算能力，如下所示：\n填空使其完整！\n"
                 example_code_2: "```\n正确答案 = 11 * 27\n答案 = {ask} '11乘以27是多少？'\n{if} 答案 {is} _ {print} '做得好！'\n{else} {print} '错了！是' _\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
