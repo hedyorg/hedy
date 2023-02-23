@@ -2616,8 +2616,6 @@ def preprocess_blocks(code, level, lang):
             processed_code.append('')
             continue
 
-
-
         # first encounter sets indent size for this program
         if not indent_size_adapted and leading_spaces > 0:
             indent_size = leading_spaces
