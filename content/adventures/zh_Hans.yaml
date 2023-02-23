@@ -901,8 +901,8 @@ adventures:
             3:
                 story_text: |
                     ## 算命
-                    在上一关，你创造了你的第一台算命机器，但海迪不会算任何东西，只会“{echo}”。
-                    在这一关，你可以用变量和`{at} {random}`命令来真正让海迪为你选择一个答案。比如看看这段代码：
+                    在上一级，你创造了你的第一台算命机器，但海迪不会算任何东西，只会“{echo}”。
+                    在这一级，你可以用变量和`{at} {random}`命令来真正让海迪为你选择一个答案。比如看看这段代码：
                 example_code: |4
 
                     在这个例子里，玩家可以向海迪{ask}一个是非题，然后海迪会任意选择一个答案。
@@ -921,11 +921,11 @@ adventures:
                 start_code: "# 在这里写你的代码"
             4:
                 story_text: |
-                    ## 算命先生
-                    这一关没有新的功能，但允许你练习使用引号。
-                    你可以重新编写第3关的代码，并确保在正确的地方加上引号。
+                    ## 算命仙
+                    这一级没有新的功能，但允许你练习使用引号。
+                    你可以重新编写第3级的代码，并确保在正确的地方加上引号。
 
-                    注意，在第3关中，我们不能把 "问题 "这个词既作为变量的名称，又作为一个可以打印的普通词。
+                    注意，在第3级中，我们不能把 "问题 "这个词既作为变量的名称，又作为一个可以打印的普通词。
                     第3级中引号让这成为可能！
 
                     重要的是！ 注意，现在我们使用了引号，当你在 I'm（我的） 或 What's（是什么）等缩略语中使用撇号时，海迪会感到困惑。
@@ -935,15 +935,16 @@ adventures:
                     我们已经删除了这个例子代码中的所有引号，你能在所有正确的地方加上引号吗？
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    question {is} {ask} 'What do you want to know?'
-                    {print} 'This is your question: ' question
-                    answers {is} yes, no, maybe
-                    {print} 'My crystal ball says...'
+                    _在这段代码中添加引号_
+                    {print} 我是海迪算命仙!
+                    问题{is} {ask} 你想知道什么？
+                    {print} 这是你的问题：问题
+                    答案{is} 是、不是、也许
+                    {print} 让我掐指算一算...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} 答案{at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             5:
                 story_text: |
                     ## Fortune Teller
@@ -986,30 +987,29 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'I can predict how many kids youll get when you grow up!'
-                    age = {ask} 'How old are you?'
-                    siblings = {ask} 'How many siblings do you have?'
-                    length = {ask} 'How tall are you in centimetres?'
-                    kids = length / age
-                    kids = kids - siblings
-                    {print} 'You will get ...'
+                    {print} '我是海迪算命仙！'
+                    {print} '我可以算出你以后会有多少个孩子！'
+                    年龄 ={ask} '你多大了？'
+                    siblings ={ask} '你有多少个兄弟姐妹？'
+                    长度 ={ask} '你的身高是多少厘米？'
+                    孩子 = 长度 / 年龄
+                    孩子 = 孩子 - 兄弟姐妹
+                    {print} '你将会有......'
                     {sleep}
-                    {print} kids ' kids!'
+                    {print} 孩子 ' 孩子！'
                     ```
 
-                    ## Example Silly Fortune Teller
-                    If the previous example wasn't silly enough for you, take a look at this one!
-
+                    ## 例子傻傻的算命仙
+                    如果前面的例子对你来说还不够傻，那就看看这个吧!
                     ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
+                    {print} '我是傻傻的海迪算命仙!'
+                    {print} '我将预测你有多聪明!'
+                    足球 ={ask} '用1到10打分，你热爱足球的程度是多少？'
+                    香蕉 ={ask} '你这周吃了多少根香蕉？'
+                    卫生 ={ask} '你今天洗了多少次手？'
+                    结果 = 香蕉 + 卫生
+                    结果 = 结果 * 足球
+                    {print} '你的聪明程度是百分之' 结果' 。'
                     ```
                 start_code: "# place your code here"
             7:
@@ -1025,23 +1025,21 @@ adventures:
                     {repeat} 3{times} {print} '我掐指一算...' 回答{at} {random}
                     ```
                 story_text_2: |
-                    ## Challenge
-                    As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
-                    Every time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
-                    This means you can't print all the questions this way.
+                    ### 练习
+                    这个程序范例问了三个问题，但是......没有给出三个答案。
+                    列出一个答案清单，随机打印一个答案，打印三次。自己给出一些有趣的答案。
 
-                    By using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.
-                    This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
-                    Can you do it?
-
-                    In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
+                    遗憾的是我们还不能成对地显示答案。在即将到来的级别中`{repeat}` 命令将会改变从而解决这个问题。
                 start_code: "# place your code here"
             8:
                 story_text: |
-                    ## Fortune Teller
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    ## 算命仙
+                    在前几级中，你已经学会了如何使用一行`{repeat}`命令 ，让算命仙连续回答3个问题，但我们在打印问题时遇到了问题。
+                    现在这个问题已解决了，因为有了`{repeat}` 命令的新的使用方法。
+                    在下一个例子中，你可以让你的算命仙问3个问题并且还可以打印出来!
+
+                    ### 练习
+                    你能在空白处填写正确的命令吗？
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
@@ -1070,7 +1068,7 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命师。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
+                story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命仙。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
