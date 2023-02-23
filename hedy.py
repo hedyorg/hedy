@@ -2609,12 +2609,12 @@ def preprocess_blocks(code, level, lang):
 
         leading_spaces = find_indent_length(line)
 
+        line_number += 1
+
         # ignore whitespace-only lines
         if leading_spaces == len(line):
             processed_code.append('')
             continue
-
-        line_number += 1
 
         # first encounter sets indent size for this program
         if not indent_size_adapted and leading_spaces > 0:
