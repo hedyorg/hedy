@@ -1,0 +1,43 @@
+<div id="share-modal" class="fixed w-screen h-screen z-40 inset-0">
+  <div class="absolute bg-black w-full h-full opacity-75"></div>
+  <div class="absolute flex justify-center w-full h-full">
+    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
+      <h2>Hand in assignment</h2>
+
+      <div>This turns in your assignment to your teacher <b>$NAME_HERE</b>.</div>
+
+      <div class="flex my-8 bg-yellow-200 border-yellow-500 border rounded p-4">
+        <div>
+          <span class="fa-regular fa-hand"></span>
+        </div>
+        <div class="flex-1 mx-4">
+          Make sure you are done! You will not be able to change your program anymore after you click "Hand in".
+        </div>
+      </div>
+
+      <div class="flex gap-8 items-center mt-4">
+        <button class="blue-btn"> <span class="fa-regular fa-paper-plane mr-4"></span> Hand in</button>
+        <a href="#">I'll work on it a little longer</a>
+      </div>
+
+      <div class="my-4">
+        <p>Your program has been handed in. You can't change it anymore.</p>
+        <p>Give the following link to your teacher:</p>
+      </div>
+
+      {% include 'incl/copy-url-bar.html' %}
+
+      <div class="flex justify-end mt-4">
+        <button class="blue-btn">Close</button>
+      </div>
+
+
+      <div class="absolute right-0 top-0 m-8">
+        <a href="#" title="Close popup">
+          <span class="text-3xl text-gray-400 fa-solid fa-xmark"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

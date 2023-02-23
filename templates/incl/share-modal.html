@@ -1,0 +1,57 @@
+<div id="share-modal" class="hidden fixed w-screen h-screen z-40 inset-0">
+  <div class="absolute bg-black w-full h-full opacity-75"></div>
+  <div class="absolute flex justify-center w-full h-full">
+    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
+      <h2>Share your program</h2>
+
+      <div class="grid grid-flow-row-dense gap-1 gap-x-4 w-full my-8">
+        {# Private #}
+        <div class="text-2xl col-start-1 ltr:text-right rtl:text-left text-bottom">
+          <input type="radio" id="share-private" name="public" value="0">
+        </div>
+        <div class="text-2xl col-start-2">
+          <label for="share-private">Private</label>
+        </div>
+        <div class="col-start-1"></div>
+        <div class="col-start-2">
+          Only you can see this program.
+        </div>
+
+        <div class="col-span-2 h-4"></div>
+
+        {# Private #}
+        <div class="text-2xl col-start-1 ltr:text-right rtl:text-left text-bottom">
+          <input type="radio" id="share-private" name="public" value="1">
+        </div>
+        <div class="text-2xl col-start-2">
+          <label for="share-private">Public</label>
+        </div>
+        <div class="col-start-1"></div>
+        <div class="col-start-2">
+          Other people with a link can see this program. It also can be
+          found on the Explore tab.
+        </div>
+
+        <div class="col-start-1"></div>
+        <div class="col-start-2">
+          <div class="my-4">
+            Show your program to other people by giving them the link below:
+          </div>
+
+          {% include 'incl/copy-url-bar.html' %}
+        </div>
+
+      </div>
+
+      <div class="flex justify-end">
+        <button class="blue-btn">Close</button>
+      </div>
+
+      <div class="absolute right-0 top-0 m-8">
+        <a href="#" title="Close popup">
+          <span class="text-3xl text-gray-400 fa-solid fa-xmark"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
