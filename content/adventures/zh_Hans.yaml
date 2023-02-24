@@ -1,13 +1,13 @@
 adventures:
     default:
         name: "介绍"
-        description: "关卡说明"
+        description: "级别说明"
         default_save_name: "介绍"
         levels:
             1:
                 story_text: |
                     ## 欢迎来到海迪！
-                    在第1关，你可以使用命令`{print}`、`{ask}`和`{echo}`。
+                    在第1级，你可以使用命令`{print}`、`{ask}`和`{echo}`。
                     在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮，它会为你输入代码!
                     你可以用左边编程栏下方绿色的 “运行程序” 按钮测试你的代码。
 
@@ -978,12 +978,17 @@ adventures:
                     Or you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!
                     Let your imagination do the work!
 
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             6:
                 story_text: |
-                    ## Fortune Teller
-                    In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
-                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
+                    ## 算命仙
+                    在本级中，作为一个算命仙你可以用数学帮你算命。这使你可以编造（傻傻的）公式来算命。
+                    例如，你可以算出你将来会变得多么有钱，或者你以后会有多少个孩子。
+
+
+
+                    ### 练习
+                    你能自己设计一个（傻傻的）算命机器吗？
 
                 example_code: |
                     ```
@@ -1011,7 +1016,7 @@ adventures:
                     结果 = 结果 * 足球
                     {print} '你的聪明程度是百分之' 结果' 。'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             7:
                 story_text: |
                     ## 算命仙
@@ -1030,7 +1035,7 @@ adventures:
                     列出一个答案清单，随机打印一个答案，打印三次。自己给出一些有趣的答案。
 
                     遗憾的是我们还不能成对地显示答案。在即将到来的级别中`{repeat}` 命令将会改变从而解决这个问题。
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             8:
                 story_text: |
                     ## 算命仙
@@ -1051,22 +1056,25 @@ adventures:
                        {sleep}
                        {print} '我掐指一算...' 答案{at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             10:
                 story_text: |
-                    ## Fortune Teller
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    ## 算命仙
+                    在此级中，你将学习如何为MASH（豪宅、公寓、棚屋、别墅）游戏编程。在这个游戏中，你可以一次为所有玩家预测他们的未来的住宅是什么样子的。
+
+                    ### 练习1
+                    在列表中添加两个名字，并观察当你运行这个程序时程序的输出的结果有什么变化。
                 example_code: |
                     ```
-                    houses = mansion, apartment, shack, house
-                    loves = nobody, a royal, their neighbour, their true love
-                    pets = dog, cat, elephant
-                    names = Jenna, Ryan, Jim
-                    {for} name {in} names
-                        {print} name ' lives in a ' houses {at} {random}
-                        {print} name ' will marry ' loves {at} {random}
-                        {print} name ' will get a ' pets {at} {random} ' as their pet.'
-                        {sleep}
+                    房屋 = 豪宅、公寓、棚屋、别墅
+                    喜欢 = 无人，皇室，邻居，真爱
+                    宠物 = 狗、猫、大象
+                    名字 = 珍娜、瑞安、吉姆
+                    {for} 名字{in} 名字
+                        {print} 名字 ' 住在 ' 房屋里{at} {random}
+                        {print} 名字 ' 将会和 ' 喜欢{at} {random}结婚
+                        {print} 名字 ' 将得到一个 ' 宠物{at} {random} ' 作为他们的宠物。
+                       {sleep}
                     ```
                 story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命仙。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
                 example_code_2: |
@@ -1080,7 +1088,7 @@ adventures:
                     _{print} 名字'擅长'科目{at} {random}
                     _{print} 名字'最害怕的是'害怕{at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
             12:
                 story_text: |
                     ## Fortune Teller
@@ -1093,7 +1101,7 @@ adventures:
                     {sleep}
                     {print} fortunes {at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写下你的代码"
     haunted:
         name: "Haunted House"
         description: "Escape from the haunted house"
@@ -1147,10 +1155,10 @@ adventures:
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 story_text: |
-                    ## Haunted house game
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    ## 冒险屋游戏
+                    在前面的级别中，你已经对你的冒险屋游戏做了介绍，但你可能已经注意到，故事总会有一个可怕的结局。
+                    在这一级中，你可以通过改变游戏的结局来使你的故事更具互动性；有时你会被吃掉，有时你会逃脱！
+                    让海迪随机决定吧。
                 story_text_2: |
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
