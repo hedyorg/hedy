@@ -8,7 +8,7 @@
       &nbsp;
       {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
     </div>
-    <div class="flex-1 flex border border-blue-400 divide-x divide-blue-400 rounded md:mx-16 items-center">
+    <div class="flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
       <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full py-1" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
       <button id="share_program_button" class="h-full px-2" title="Share your program">
         <span class="fa fa-star fa-regular text-2xl p-2 text-blue-500"></span>
