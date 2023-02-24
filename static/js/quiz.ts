@@ -191,7 +191,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
     if (response.next_question) {
         $('#next_question_number_container').text(parseInt(question) + 1);
-        $('#next_question_button').on('click', () => loadQuizQuestion(response.level, parseInt(question) + 1));
+        $('#next_question_button').off('click').on('click', () => loadQuizQuestion(response.level, parseInt(question) + 1));
         $('#next_question_button').show();
     } else {
         $('#next_question_button').hide();
