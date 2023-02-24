@@ -1021,7 +1021,7 @@ adventures:
                     {print} '我是海迪算命仙！'
                     {print} '你可以问3个问题！'
                     {repeat} 3 {times} 问题 ={ask} '你想知道什么？'
-                    回答=是，不是，也许
+                    回答=是，否，有可能
                     {repeat} 3{times} {print} '我掐指一算...' 回答{at} {random}
                     ```
                 story_text_2: |
@@ -1042,14 +1042,14 @@ adventures:
                     你能在空白处填写正确的命令吗？
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can {ask} me 3 questions.'
-                    answers = yes, no, maybe
-                    {repeat} 3 {times}
-                       question = {ask} 'What do you want to know?'
-                       {print} question
+                    {print} '我是海迪算命仙！'
+                    {print} '你可以问我三个问题。
+                    答案=是、否、有可能
+                    _ _ _
+                       问题 ={ask} '你想知道什么？
+                       {print} 问题
                        {sleep}
-                       {print} 'My crystal ball says...' answers {at} {random}
+                       {print} '我掐指一算...' 答案{at} {random}
                     ```
                 start_code: "# place your code here"
             10:
@@ -1071,14 +1071,14 @@ adventures:
                 story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命仙。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
                 example_code_2: |
                     ```
-                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
-                    {for} name in names
-                        {print} name ' is placed in ' houses {at} {random}
-                        {print} name ' is great at ' subjects {at} {random}
-                        {print} name 's greatest fear is ' fears {at} {random}
+                    学院 = 格兰芬多、斯莱特林、赫奇帕奇、拉文克劳
+                    科目 = 魔药学、黑魔法防御术、魔咒学、变形术
+                    害怕 = 伏地魔、蜘蛛、普通巫师等级考试不及格
+                    名字 = 哈利、罗恩、赫敏
+                    _
+                    {print} 名字'被安排在'学院'中{at} {random}
+                    _{print} 名字'擅长'科目{at} {random}
+                    _{print} 名字'最害怕的是'害怕{at} {random}
                     ```
                 start_code: "# place your code here"
             12:
@@ -1122,8 +1122,10 @@ adventures:
                     {print} ...?
                     ```
                 story_text_2: |
-                    ## Challenge
-                    Can you finish the scary story? Or make up your own haunted house story?
+                    ### 练习
+                    点击黄色按钮，将范例代码复制到你的输入屏。
+                    现在通过添加至少5行代码来完成这个故事。
+                    记住，每行代码都要以`{print}` 命令开始。
                 start_code: "{print} How did I get here?"
             2:
                 story_text: |
