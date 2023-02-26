@@ -1,7 +1,7 @@
       {# TABS #}
       <div id="adventures">
         {% macro adventure_tab(tabname, title, selected, id, tab_class) %}
-            <div class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {% if special %}special_tab{% endif %}" id="{{ id }}" tabindex="0" data-tab="{{ tabname }}">
+            <div class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}" id="{{ id }}" tabindex="0" data-tab="{{ tabname }}">
                 {{title}}
             </div>
         {% endmacro %}
