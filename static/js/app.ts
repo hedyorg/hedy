@@ -211,7 +211,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
       const programFromStorage = storage.getItem(levelKey);
       if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue(programFromStorage, 1);
+        editor.setValue(programFromStorage?.trim(), 1);
       }
 
       // When the user exits the editor, save what we have.
@@ -2026,8 +2026,8 @@ function reconfigurePageBasedOnTab(tabName: string) {
 
   // If there's a loaded program for the adventure or level now selected, load it into the code editor
   else if (theAdventures[tabName]?.loaded_program) {
-    $ ('#program_name').val (theAdventures[tabName].loaded_program!.name);
-    theGlobalEditor?.setValue (theAdventures[tabName].loaded_program!.code);
+    $ ('#program_name').val (theAdventures[tabName].loaded_program!.name?.trim());
+    theGlobalEditor?.setValue (theAdventures[tabName].loaded_program!.code?.trim());
   }
   else {
     const tab = $('*[data-tab="' + tabName + '"]');
@@ -2042,7 +2042,7 @@ function reconfigurePageBasedOnTab(tabName: string) {
         } else {
           $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${theLevel}`);
         }
-        theGlobalEditor?.setValue(adventure.start_code);
+        theGlobalEditor?.setValue(adventure.start_code?.trim());
       }
     }
   }

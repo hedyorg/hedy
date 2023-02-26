@@ -270,7 +270,7 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
             javascript_page_options=dict(
                 page='customize-class',
-                available_adventures_level_translation=_('available_adventures_level'),
+                available_adventures_level_translation=gettext('available_adventures_level'),
                 teacher_adventures=teacher_adventures,
                 adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
                 adventure_names=adventure_names,
