@@ -1066,10 +1066,10 @@ adventures:
                     在列表中添加两个名字，并观察当你运行这个程序时程序的输出的结果有什么变化。
                 example_code: |
                     ```
-                    房屋 = 豪宅、公寓、棚屋、别墅
-                    喜欢 = 无人，皇室，邻居，真爱
-                    宠物 = 狗、猫、大象
-                    名字 = 珍娜、瑞安、吉姆
+                    房屋 = 豪宅, 公寓, 棚屋, 别墅
+                    喜欢 = 无人, 皇室, 邻居, 真爱
+                    宠物 = 狗, 猫, 大象
+                    名字 = 珍娜, 瑞安, 吉姆
                     {for} 名字{in} 名字
                         {print} 名字 ' 住在 ' 房屋里 {at} {random}
                         {print} 名字 ' 将会和 ' 喜欢 {at} {random} 结婚
@@ -1495,7 +1495,7 @@ adventures:
                 story_text: "让我们玩扭扭乐的游戏来活动一下吧!\n当每个人都准备好后，按x键做下一个动作!\n"
                 example_code: "```\n四肢 = ['右手', '左手', '右脚', '左脚']\n颜色 = ['蓝色', '绿色', '红色', '黄色']\n{repeat} 20 {times}\n    s= 四肢[{random}]\n    y = 颜色[{random}]\n    {if} x {is} {pressed}\n        {print} s + ' 放在 ' + y + '上！'\n```\n"
             12:
-                example_code: "```\n选择 = '你选择了选项：'\n{print} '一只野生鼠出现了！'\n{print} '选择一个选项并按下代表第一个字母的按键：(n)et网, (c)at猫, (b)ag包, (r)un跑\n{if} w {is} {pressed}\n    {print} 选择+'网'\n    {print} '你试图用网子抓住老鼠..'\n    {sleep}\n    {print} '恭喜你成功了！'\n{if} m {is} {pressed}\n    {print} 选择+'猫'\n    {print} '你放出了你的猫'\n    {sleep}\n    {print} '老鼠害怕了，跑了！'\n{if} b {is} {pressed}\n    {print} 选择+'包'\n    {print} '老鼠跳进了你的包里！'\n{if} p {is} {pressed}\n    {print} 选择+'跑'\n    {print} '你安全的逃走了！'\n```\n"
+                example_code: "```\n选择 = '你选择了选项：'\n{print} '一只野生鼠出现了！'\n{print} '选择一个选项并按下代表第一个字母的按键：(n)et网, (c)at猫, (b)ag包, (r)un跑'\n{if} w {is} {pressed}\n    {print} 选择+'网'\n    {print} '你试图用网子抓住老鼠..'\n    {sleep}\n    {print} '恭喜你成功了！'\n{if} m {is} {pressed}\n    {print} 选择+'猫'\n    {print} '你放出了你的猫'\n    {sleep}\n    {print} '老鼠害怕了，跑了！'\n{if} b {is} {pressed}\n    {print} 选择+'包'\n    {print} '老鼠跳进了你的包里！'\n{if} p {is} {pressed}\n    {print} 选择+'跑'\n    {print} '你安全的逃走了！'\n```\n"
                 start_code: '# 在这里写你的代码'
                 story_text: "你对电子游戏熟悉吗？你走到高高的草丛中，突然被一只非常可疑的老鼠接近。\n你会怎么做呢？\n在本级中，我们将制作一个有不同选项的小菜单。\n将文本存储到一个变量中这样对于重复使用是相当方便的。\n选项，我选你!\n"
             13:
@@ -1526,7 +1526,7 @@ adventures:
                 start_code: '# 把你的代码放在这里'
             6:
                 story_text: "你知道你也可以用`{pressed}` 做一个计算器吗？\n给计算器两个数字，然后按m键进行乘法运算。\n现在你不用再带自己的计算器了!\n试试其他的键，看看会发生什么？你会得到不同的结果吗？\n"
-                example_code: "```\n第一个数 = {ask} '你的第一个数字是多少？'\n第二个数 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 第一个数 + 第二个数\n{if} s {is} {pressed} 计算 结果 = 第一个数 - 第二个数\n{if} d {is} {pressed} 计算结果 =第一个数/第二个数\n{if} m {is} {pressed} 计算结果 = 第一个数 * 第二个数\n{print} '答案是 ' 计算结果\n```\n"
+                example_code: "```\n第一个数 = {ask} '你的第一个数字是多少？'\n第二个数 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 第一个数 + 第二个数\n{if} s {is} {pressed} 计算 结果 = 第一个数 - 第二个数\n{if} d {is} {pressed} 计算结果 =第一个数 / 第二个数\n{if} m {is} {pressed} 计算结果 = 第一个数 * 第二个数\n{print} '答案是 ' 计算结果\n```\n"
                 start_code: '# 把你的代码放在这里'
             7:
                 story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
