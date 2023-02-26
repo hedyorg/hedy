@@ -134,6 +134,19 @@ class Database:
         programs = PROGRAMS.get_many({"username": username}, reverse=True)
         return [x for x in programs if x.get("level") == int(level)]
 
+    def last_level_programs_for_user(self, username, level):
+        """List level programs for the given user, newest first.
+
+        Returns: { adventure_name -> { code, name, ... } }
+        """
+        programs = self.level_programs_for_user(username, level)
+        ret = {}
+        for program in programs:
+            key = program.get('adventure_name', 'default')
+            if key not in ret or ret[key]['date'] < program['date']:
+                ret[key] = program
+        return ret
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 

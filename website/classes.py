@@ -5,7 +5,7 @@ from flask_babel import gettext
 
 import utils
 from config import config
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher
 
 from .achievements import Achievements

@@ -384,3 +384,22 @@ function getSavedRedirectPath() {
   }
   return redirect;
 }
+
+/**
+ * After the next login, redirect a user to the given path
+ *
+ * (Should be relative to the current server)
+ */
+export function redirectAfterLogin(path: string) {
+  // After `getSavedRedirectPath` we will send this to the `redirect()`
+  // function, which will always prepend a '/'
+  if (path.startsWith('/')) {
+    path = path.substring(1);
+  }
+  try {
+    localStorage.setItem('hedy-save-redirect', path);
+  } catch (e) {
+    // Storage may be full
+    console.warn(e);
+  }
+}

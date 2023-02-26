@@ -11,7 +11,7 @@ import hedy_content
 import hedyweb
 import utils
 from safe_format import safe_format
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website.auth import (
     current_user,
     is_admin,

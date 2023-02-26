@@ -6,7 +6,7 @@ from flask import g, jsonify, request
 from flask_babel import gettext
 
 import utils
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 

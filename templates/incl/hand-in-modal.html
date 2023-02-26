@@ -27,6 +27,15 @@
 
       {% include 'incl/copy-url-bar.html' %}
 
+      <div>
+        You are not in a class, so there's no need for you to hand in anything.
+      </div>
+
+      <div>
+        <p>You must be logged in to hand in an assignment.</p>
+        <a href="/login">{{_('login')}}</a>
+      </div>
+
       <div class="flex justify-end mt-4">
         <button class="blue-btn">Close</button>
       </div>

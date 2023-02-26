@@ -1,5 +1,5 @@
 from flask import session, request
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
 import datetime

@@ -9,7 +9,7 @@
       {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
     </div>
     <div class="flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
-      <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full py-1" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
+      <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full py-1" value="{{initial_adventure.save_name}}">
       <button id="share_program_button" class="h-full px-2" title="Share your program">
         <span class="fa fa-star fa-regular text-2xl p-2 text-blue-500"></span>
       </button>
@@ -39,7 +39,7 @@
           </div>
           <div class="flex-none">
             <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}"
-              onclick='hedyApp.tryPaletteCode({{example.demo_code|default(None)|tojson}});'>
+              onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
               <span class="rtl:hidden">⇥</span>
               <span class="ltr:hidden">⇤</span>
             </button>

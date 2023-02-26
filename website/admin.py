@@ -3,7 +3,7 @@ from flask_babel import gettext
 
 import hedyweb
 import utils
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website import statistics
 from website.auth import (
     create_verify_link,
