@@ -397,11 +397,11 @@ adventures:
                 story_text: "## 洗碗\n你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。\n\n你能不能完成这段代码，让它在选中你的时候打印“太糟了”，其它情况下打印“好！”？\n别忘了引号！\n"
                 example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{else} {print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
-                story_text: "## 洗碗\n在这个级别中，您可以轻松地为整个星期制定时间表！\n\n### 锻炼\n添加第二件家务，例如吸尘或整理，并确保整个星期也分门别类。\n<br> **（额外）** 程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样才能使程序更公平？\n"
+                story_text: "## 洗碗\n在这个级别中，您可以轻松地为整个星期制定时间表！\n\n### 练习\n添加第二件家务，例如吸尘或整理，并确保整个星期也分门别类。\n<br> **（额外）** 程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样才能使程序更公平？\n"
                 example_code: "```\n日期列表 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n姓名 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期列表\n    {print} 姓名 {at} {random} '负责在' 日期 '洗碗'\n```\n"
                 start_code: '# 在这里写你的代码'
             7:
-                example_code: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n{repeat} _ _ {print} '洗碗工作将由' _ _ _完成\n```\n"
+                example_code: "```\n人 = 妈妈, 爸爸, 艾玛, 索菲\n{repeat} _ _ {print} '洗碗工作将由' _ _ _完成\n```\n"
                 start_code: "{print} '谁负责洗碗？'"
                 story_text: "## 洗碗\n你可以用`{repeat}`重复一段代码。你可以以此来计算一周里谁负责洗碗。\n\n### 练习 \n使用`{repeat}` 命令来决定谁需要洗整整一周的碗。每个空格都需要填上一个命令或数字!\n **（另外）**你能想到家里的其他任务吗？改编代码，让它决定三件家务活。不要忘记打印出它所涉及的任务!\n"
             6:
@@ -485,7 +485,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             10:
                 story_text: "## 计算器 \n这个计算器游戏帮助您练习你的乘法口诀表！ \n### 练习\n你能在列表中加入更多的数字，这样你就可以练习乘法表直到10？\n"
-                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确答案\n```\n"
+                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确\n```\n"
                 start_code: '# 在这里写你的代码'
             9:
                 story_text: "## 计算器\n在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。\n\n### 练习 1\n你能完成第 10 行以使程序工作吗？\n\n### 练习 2\n输入正确或错误的答案时给出反馈。为此，请使用 `{else}` 来扩展程序。\n"
@@ -629,7 +629,7 @@ adventures:
                     {print} '谢谢您的点单。祝您用餐愉快！'
                     ```
                 story_text_2: |
-                    ## 挑战
+                    ## 练习
                     你能想出更多的问题，在顾客点餐时`{ask}` 他们，并通过使用`{if}` 命令对他们不同的应答做出合适的答复吗？
 
                 start_code: "# 在这里写你的代码"
@@ -697,7 +697,7 @@ adventures:
 
                     ### 练习
                     你能完成这段代码吗？有多少人海迪就需要重复这个问题多少次。因此，如果有5个人，这个问题需要问5次。
-                    **(另外)**用更多的问题来扩展你的代码，例如关于饮料或酱汁。
+                    **(另外)**用更多的问题来扩展你的代码，例如和饮料或酱汁有关的。
                 example_code: |
                     ```
                     {print} '欢迎来到海迪餐厅！'
@@ -973,10 +973,10 @@ adventures:
                     {if} person{is} 海迪{print} 上签{at} {random} {else} {print}下签{at} {random}
                     ```
                 story_text_3: |
-                    ## Challenges
-                    This concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!
-                    Or you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!
-                    Let your imagination do the work!
+                    ### 练习
+                    这个概念可以用来制作可能不同的程序，只要有创意就可以了！例如，你可以创造一台机器，预测你最喜欢的运动队将击败所有的竞争对手！或者你可以在墙上制作白雪公主的魔镜，告诉大家你是最美丽的人。
+                    或者你可以在墙上制作白雪公主的魔镜，告诉大家你是他们中最美丽的一个。
+                    用你的想象力去实现它吧!
 
                 start_code: "# 在这里写下你的代码"
             6:
@@ -1091,29 +1091,29 @@ adventures:
                 start_code: "# 在这里写下你的代码"
             12:
                 story_text: |
-                    ## Fortune Teller
-                    In this level you can make your fortunes multiple words. Like in this example below:
+                    ## 算命仙
+                    在这个关卡中，你可以用多个字来算命。你可以将不同的命运加入列表中吗？
                 example_code: |
                     ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
-                    {print} 'I see... I see...'
+                    命运 = '你会在香蕉皮上滑倒', _
+                    {print} '我将在我的水晶球里看一下你的未来。
+                    {print}'我看到... 我看到了......'
                     {sleep}
-                    {print} fortunes {at} {random}
+                    {print} 命运 {at} {random}
                     ```
                 start_code: "# 在这里写下你的代码"
     haunted:
-        name: "Haunted House"
+        name: "鬼屋"
         description: "Escape from the haunted house"
-        default_save_name: "Haunted House"
+        default_save_name: "鬼屋"
         levels:
             1:
                 story_text: |
-                    ## Haunted house
-                    In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
-                    If you pick the right door you'll survive, but if not a terrible monster might...
+                    ## 鬼屋
+                    在这个冒险中，你正在努力制作一个游戏，你必须通过挑选正确的门来逃离鬼屋。
+                    如果你选对了门，你就能活下来，但如果没有，一个可怕的怪物可能会...
 
-                    In level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.
+                    在第一关中，我们通过编造一个可怕的故事来开始我们的鬼屋游戏，并问玩家在鬼屋中会看到什么怪物。
                 example_code: |
                     ```
                     {print} How did I get here?
@@ -1134,7 +1134,7 @@ adventures:
                     点击黄色按钮，将范例代码复制到你的输入屏。
                     现在通过添加至少5行代码来完成这个故事。
                     记住，每行代码都要以`{print}` 命令开始。
-                start_code: "{print} How did I get here?"
+                start_code: "{print} 我如何到这的？"
             2:
                 story_text: |
                     ## Haunted House
@@ -1150,9 +1150,9 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: "monster1 {is} _"
-                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
-                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                start_code: "怪物1 {is} _"
+                story_text_2: "### 练习\n在上面的例子中，怪物是预先设定好的。所以每次运行你的代码时，输出都是一样的。\n你能不能添加`{ask}`命令来使鬼屋变得互动，让玩家选择他们遇到的怪物？\n"
+                example_code_2: "```\n怪物1 {is} _\n怪物2 {is} _\n怪物3 {is} _\n{print}你进入鬼屋\n{print} 很快，你看见了怪物1\n{print} 你跑进了另一个房间，但是在那里怪物2在等着你！\n{print} 哦 不！快往厨房跑。\n{print} 但是当你进入时你看见了怪物3攻击你！\n```\n"
             3:
                 story_text: |
                     ## 冒险屋游戏
@@ -1160,64 +1160,67 @@ adventures:
                     在这一级中，你可以通过改变游戏的结局来使你的故事更具互动性；有时你会被吃掉，有时你会逃脱！
                     让海迪随机决定吧。
                 story_text_2: |
-                    ## Challenge
-                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
-                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
+                    ### 练习
+                    复制示例代码并填入空白处，使其发挥作用！
 
-                    ## Change the game into a tv gameshow!
-                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it?
-                start_code: "# place your code here"
-                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
+                    **另外**这个故事很直接，也许你可以通过增加一个更刺激的故事来刺激它。
+                    另外，你现在的结果非常有限，门后的东西只有三个选项。也许你可以想出更多的怪物来添加到列表中
+                start_code: "# 将你的代码写在这里"
+                story_text_3: "## 把游戏改成电视游戏秀!\n### 练习\n最后，我们想挑战你，把这个游戏改成一个游戏秀（就像电视上的那些），你选择一扇门或一个手提箱，里面有一大笔钱！\n你能做到吗？我们已经在示例代码中加入了第一行。\n"
+                example_code_3: "```\n{print} 大型游戏秀\n{print} 在你面前有3个箱子...\n{print} 他们其中一个包含_\n_\n```\n"
+                example_code_2: "```\n_逃离鬼屋！\n_在你面前有3扇门......\n__你选择哪扇门？\n_你选择了门......选择\n怪物 _ 一个僵尸，一个吸血鬼，什么都没有 你已经逃出来了\n_你看...\n{sleep}.\n_ _ _ _\n```\n"
             4:
                 story_text: |
-                    ## Haunted house
-                    In this level you learn how to use quotation marks in your games.
-                    Can you make your Haunted House level 4 proof?
+                    ##鬼屋
+                    在本关中，你要学习如何在游戏中使用引号。
+                    你能证明你的 "鬼屋 "水平达到4级吗？
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
+                    {print} _逃离鬼屋！_
+                    {print} _在你面前有三个门..._
+                    choice {is} {ask} _你选择那扇门？_
+                    {print} _你选择的门 ..._ 选择
+                    monsters {is}一个僵尸，一个吸血鬼，什么都没有，你已经逃出来了
+                    {print} _你看见..._
                     {sleep}
-                    {print} monsters {at} {random}
+                    {print} 怪物{at} {random}
                      ```
 
-                start_code: "# place your code here"
+                start_code: "# 将你的代码写在这里"
             5:
                 story_text: |
-                    ## Haunted House
-                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
-                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In this level you can only win the game by picking the same door Hedy picked randomly.
+                    ## 鬼屋
+                    在这一关之前，鬼屋游戏总是要求玩家选择一扇门，但你可能已经注意到了，他们并不是真的要正确回答。
+                    如果玩家填写了一个完全随机的答案，游戏仍然可以进行，玩家甚至可能会赢（尽管没有选到门）。
+                    在这一关中，你只能通过选择海迪随机挑选的那扇门来赢得游戏。
+
+                    ### 练习
+                    你能找到缺少的4个词来完成代码吗？
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
+                    {print} '逃离鬼屋！'
+                    {print} '在你面前有三扇门...'
+                    门 {is} 1, 2, 3
+                    怪物{is} 狼人，木乃伊，吸血鬼，僵尸
+                    选择的门{is} {ask}‘你选择哪扇门？’
+                    {print} ‘你选了门...'选择的门
                     {sleep}
-                    correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    正确的门{is} 门{at} {random}
+                    _ _ _ _ {print} ‘干得漂亮！你成功逃出去了！’
+                    {else} {print} ‘哦 不！你要被一个...'怪物 {at} {random}'吃掉了
                     ```
 
-                start_code: "# place your code here"
+                start_code: "# 将你的代码写在这里"
             9:
                 story_text: |
-                    ## Haunted House
-                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+                    ## 鬼屋
+                    在这一关中，你可以使用嵌套，这可以让你的鬼屋变得更有互动性!
 
-                    ## Challenge
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                    ### 练习
+                    现在要赢得这个游戏非常困难，你能让它更容易赢得吗？
+                    如何改变你的代码，使它只有一个错误的门和两个正确的门，而不是一个正确的门和两个错误的门？
+                    提示：这意味着将变量 正确的门 改为 错误的门 ，并切换`{if}`和`{else}`代码。
+                    当然，你也可以改变故事，使其成为你自己的故事。改变怪物，或者把它变成一个你在那里可以得到一份礼物的快乐游戏节目！
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -1239,38 +1242,36 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} ’逃出鬼屋！’"
             11:
                 story_text: |
-                    ## Haunted House
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    ## 鬼屋
+                    在这个关卡中，我们改变了`{for}`命令，所以我们可以告诉玩家他们在哪里。
+
+                    ### 练习1
+                    完成这个程序，让玩家知道他们在哪个房间里。
+
+                    ### 练习2
+                    通过以下步骤使程序成为一个冒险。
+
+                    1. 制定一个选择清单（比如：战斗或逃跑）。
+                    2. 确保玩家可以用`{ask}`来选择一个选项
+                    3. 答案是否正确？那么他们可以进入下一个怪物。他们给出了错误的答案吗？用`{print}`让玩家知道。
+
+                    **（另外）**如果你做了一个错误的选择，一个怪物仍然会被显示出来！你怎么能改变这种情况？
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                    {print}"逃离鬼屋！
+                    怪物 = 僵尸, 吸血鬼, 大蜘蛛
+
+                        {print} '房间' i
+                        怪物 = 怪物们 {at} {random}.
                     ```
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} ‘逃离鬼屋！’"
             14:
                 story_text: |
-                    ## Haunted House
-                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    ## 鬼屋
+                    在这一关你可以使用 `<` 和`>`符号去向你的游戏中引入生命。
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
@@ -1294,13 +1295,13 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 将你的代码写在这里"
             16:
                 story_text: |
-                    ## Haunted House Game
-                    This haunted house game uses the connection between the lists you can use in this level.
-                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    ## 鬼屋游戏
+                    这个鬼屋游戏使用了你在这个关卡中可以使用的列表之间的关联。
+                    例如：所有属于僵尸的属性在所有列表中都是第一位，女巫第二位，吸血鬼第三位。
+                    检查下代码吧！
                 example_code: |
                     ```
                     numbers = [1, 2, 3]
@@ -1328,24 +1329,24 @@ adventures:
                         {print} bad_fate[i]
                         {print} 'GAME OVER'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 将你的代码写在这里"
     piggybank:
-        name: Piggy Bank
-        description: Count your pocketmoney!
-        default_save_name: Piggy Bank
+        name: 小猪银行
+        description: 数数你的零花钱吧！
+        default_save_name: 小猪银行
         levels:
             14:
-                story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
+                story_text: "## 小猪银行\n在这个关卡中你可以让海迪告诉你是否你存了足够的钱！\n"
                 example_code: "```\nmoney = {ask} 'How much money have you saved?'\nwish = {ask} 'How much money do you need?'\nallowance = {ask} 'How much pocket money do you get each week?'\nto_save = wish - money\nweeks = to_save / allowance\n{if} wish > money\n    {print} 'You need to save up some more!'\n    {print} 'Youll need ' weeks ' more weeks.'\n{else}\n    {print} 'Great! You have enough'\n    {print} 'Lets go shopping!'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 将你的代码写在这里'
             12:
-                story_text: "## Piggy Bank\nIn this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!\n"
+                story_text: "## 小猪银行\n在这次冒险中，你将学习如何制作一个电子版本的小猪银行。\n完成代码来计算出你有多少钱，以及你需要存多久的钱才能买到你想要的东西！\n"
                 example_code: "```\n{print} '数字存钱罐'\n愿望 = {ask} '你想买什么？'\n价格 = {ask} '这要花多少钱？'\n存款 = {ask} '你已经存了多少钱？'\n零花钱 = {ask} '你每周有多少零花钱？'\n需要_再存 = 价格 - 存款\n周数 = 需要_再存/ 零花钱\n{print} '你可以在'周数'周内买一个'愿望'。'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 将你的代码写在这里'
     quizmaster:
-        name: Quizmaster
-        description: Make your own quiz!
-        default_save_name: Quizmaster
+        name: 测验人员
+        description: 制定专属于你自己的测验！
+        default_save_name: 测验人员
         levels:
             14:
                 story_text: "## Make your own quiz\nIn this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!\nYou can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!\n"
