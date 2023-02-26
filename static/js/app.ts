@@ -115,6 +115,17 @@ export function initializeApp(options: InitializeAppOptions) {
     keywordLanguage: options.keywordLanguage,
   });
   initializeHighlightedCodeBlocks(options.keywordLanguage);
+
+  $("#search_language").on('keyup', function() {
+      let search_query = ($("#search_language").val() as string).toLowerCase();
+      $(".language").each(function(){
+          if ($(this).html().toLowerCase().includes(search_query)) {
+              $(this).show();
+          } else {
+              $(this).hide();
+          }
+      });
+  });
 }
 
 export interface InitializeCodePageOptions {
