@@ -519,61 +519,61 @@ levels:
         5:
             question_text: "Wo ist der Fehler in diesem Code?"
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                problemstellung {is} {ask} Was möchtest du wissen?
+                {print} problemstellung
+                antworten {is} ja, nein, vielleicht
+                {print} antworten {at} {random}
             mp_choice_options:
-            -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
-                feedback: "No, that's not wrong."
-            -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
-                feedback: "No that's not wrong."
-            -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
-                feedback: "No, that's not wrong."
-            -   option: "Nothing, this code is perfect"
-                feedback: "That's right!"
+            -   option: "Zeile 1 sollte `{print}` anstelle von `{ask}` enthalten"
+                feedback: "Nein, das ist nicht falsch."
+            -   option: "Zeile 2 soll `{ask}` anstelle von `{print}` enthalten"
+                feedback: "Nein das ist nicht falsch."
+            -   option: "Zeile 2 sollte antworten `{at} {random}` `{is}` ja, nein, vielleicht"
+                feedback: "Nein, das ist nicht falsch."
+            -   option: "Nichts, dieser Code ist perfekt"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "Does this code even have a mistake?"
+            hint: "Hat dieser Code überhaupt einen Fehler?"
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                problemstellung {is} {ask} Was möchtest du wissen?
+                antworten ja, nein, vielleicht
+                {print} antworten {at} {random}
             mp_choice_options:
-            -   option: "Line 2 needs to say question instead of answers"
-                feedback: "No that's not right"
-            -   option: "Line 2 needs the `{is}` command"
-                feedback: "Correct"
-            -   option: "Line 3 needs to say answer instead of answers"
-                feedback: "No the variable's called answers"
-            -   option: "Nothing! This code is great!"
-                feedback: "Actually, line 2 has a mistake."
+            -   option: "Zeile 2 soll problemstellung anstelle von antworten enthalten"
+                feedback: "Nein das stimmt nicht"
+            -   option: "Zeile 2 braucht den `{is}` Befehl"
+                feedback: "Richtig"
+            -   option: "Zeile 3 soll antwort anstelle von antworten enthalten"
+                feedback: "Nein die Variable heißt antworten"
+            -   option: "Nichts! Dieser Code ist großartig!"
+                feedback: "Tatsächlich hat Zeile 2 einen Fehler."
             correct_answer: "B"
-            hint: "There is something wrong with line 2."
+            hint: "Da stimmt etwas nicht mit Zeile 2."
             question_score: '10'
         7:
-            question_text: "What does the `{add}` command do?"
+            question_text: "Was macht der `{add}` Befehl?"
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: "The `{add}` command removes a random book from the list"
-                feedback: "The remove command removes, the add command adds"
-            -   option: "The `{add}` command adds a random book to a list"
-                feedback: "It doesn't. It adds your answer to the list!"
-            -   option: "The `{add}` command adds your favorite book to the list"
-                feedback: "Correct!"
-            -   option: "The `{add}` command prints your favorite book."
-                feedback: "No, it adds your favorite book to the list"
+            -   option: "Der `{add}` Befehl entfernt ein zufälliges Buch aus der Liste"
+                feedback: "Der entferne-Befehl entfernt, der addiere-Befehl fügt hinzu"
+            -   option: "Der `{add}` Befehl fügt ein zufälliges Buch zur Liste hinzu"
+                feedback: "Tut es nicht. Es fügt eine Antwort zur Liste hinzu!"
+            -   option: "Der `{add}` Befehl fügt dein Lieblingsbuch zur Liste hinzu"
+                feedback: "Richtig!"
+            -   option: "Der `{add}` Befehl gibt dein Lieblingsbuch aus."
+                feedback: "Nein, es fügt dein Lieblingsbuch zur Liste hinzu"
             correct_answer: "C"
-            hint: "The `{add}` command adds a book, but which one?"
+            hint: "Der `{add}` Befehl fügt ein Buch hinzu, aber welches?"
             question_score: '10'
         8:
-            question_text: "What is the output of this code?"
+            question_text: "Was ist die Ausgabe dieses Code?"
             code: |-
                 crisps {is} sea salt, paprika, sour cream
                 {remove} sea salt {from} crisps
