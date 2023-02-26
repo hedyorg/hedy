@@ -367,9 +367,9 @@ adventures:
                 example_code: "```\nكلمات {is} نعيق، هيدي\n{print} درِب ببغاءك!\nكلمة_جديدة هي {ask} ما الكلمة الجديدة التي تريد أن يتعلمها؟\n{add} كلمة_جديدة {to_list} كلمات\n{print} \U0001F9D2 تكلم كلمة_جديدة أيها الببغاء هيدي!\n{print} \U0001F99C كلمات {at} {random}\n```\n"
                 start_code: '# اكتب الكود الخاص بك هنا'
             4:
-                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
-                start_code: '# Write your code here'
+                story_text: "## الببغاء\nفي هذا المستوى يجب علينا استخدام علامات الاقتباس مع الأوامر `{ask}` و `{print}`.\nهل يمكنك إكمال الكود بإضافة علامات الاقتباس؟\n"
+                example_code: "```\nالكلمات {is} سلام! , هيدي\n{print} _ درّب الببغاء الخاص بك! _\nكلمة_جديدة {is} {ask} _ ما الكلمة التي تريد ان تعلمها للبغاء؟ _\n{add} كلمة_جديدة {to_list} الكلمات\n{print} _ \U0001F9D2 قل _ كلمة_جديدة _, هيدي!_\n{print} _ \U0001F99C _ الكلمات {at} {random}\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
     songs:
         name: غنّ أغنية!
         description: Print a song
@@ -681,7 +681,7 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## تحدي\nهل يمكنك التفكير في المزيد من الأسئلة `{ask}` على العملاء عند قيامهم بالطلب ، وتكوين ردود مختلفة على إجاباتهم باستخدام الأمر `{if}`؟\n"
             4:
-                story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`."
+                story_text: "## المطعم\n\nفي هذا المستوى عليك استخدام علامات الاقتباس مع الأمر `{print}` .\nهل تستطيع أن تجعل الكود الخاص بك من المستويات السابقة أن يعمل بالشكل الصحيح بإضافة علامات الاقتباس؟\n"
                 start_code: '# place your code here'
                 example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
     fortune:
@@ -707,9 +707,9 @@ adventures:
                 example_code: "```\n{print} 'أنا العرافة هيدي!'\n{print} 'أستطيع التنبؤ بعدد أطفالك في المستقبل عندما تكبر!'\nالسن = {ask} 'كم عمرك؟'\nالإخوة = {ask} 'كم عدد الأشقاء لديك؟'\nالطول = {ask} 'كم طولك بالسنتيمتر'\nالأطفال = الطول / السن\nالأطفال = الأطفال - الإخوة\n{print} 'سيكون لديك ...'\n{sleep}\n{print} الأطفال ' طفل!'\n```\n\n## مثال خيالي أخر للعراف\nإذا لم يكون المثال السابق خيالي وسخيف بما يكفي، أنظر للمثال التالي!\n\n```\n{print} 'أنا العرافة الخيالية هيدي!'\n{print} 'سوف أتنبأ بمدى ذكائك!'\nكرةقدم = {ask} 'بمقياس من ١ - ١٠ ما مقدار حبك لكرة القدم؟'\nموز = {ask} 'كم عدد الموز الذي أكلته هذا الإسبوع؟'\nتعقيم = {ask} 'كم مرة غسلت يدك اليوم؟'\nالنتيجة = موز + تعقيم\nالنتيجة = النتيجة * كرةقدم\n{print} 'أنت ' النتيجة ' بالمائة ذكي.'\n```\n"
                 start_code: '# أكتب الكود الخاص بك هنا'
             4:
-                example_code: "```{print} 'انا العارفة هيدي!'\nالسؤال {is} {ask} 'ماذا تريد ان تعرف ؟'\n{print} 'هذا هو السؤال : ' السؤال\nالاجابات {is} نعم، لا، ربما\n{print} 'تقول الكرة السحرية الخاصة بي...'\n{sleep} 2\n{print} الاجابات {at} {random}\n```\n"
-                story_text: "## العراف\nفي هذا المستوى لن تتعلم أوامر جديدة، لكنك ستتدرب على استخدام علامات الاقتباس. \nتستطيع إعادة كتابة الكود الخاص بك في المستوى الثالث، ولا تنسَ أن تضع علامات الاقتباس في الأماكن الصحيحة.\n\nMind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.\nThe quotation marks in level 3 make this possible!\n\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to Im or Whats.\n"
-                start_code: '# place your code here'
+                example_code: "```{print} 'انا العرافة هيدي!'\nالسؤال {is} {ask} 'ماذا تريد ان تعرف ؟'\n{print} 'هذا هو السؤال : ' السؤال\nالاجابات {is} نعم، لا، ربما\n{print} 'تقول الكرة السحرية الخاصة بي...'\n{sleep} 2\n{print} الاجابات {at} {random}\n```\n"
+                story_text: "## العراف\nفي هذا المستوى لن تتعلم أوامر جديدة، لكنك ستتدرب على استخدام علامات الاقتباس. \nتستطيع إعادة كتابة الكود الخاص بك في المستوى الثالث، ولا تنسَ أن تضع علامات الاقتباس في الأماكن الصحيحة.\n\nفي المستوى الثالث, لم نستطع استخدام كلمة ’السؤال‘ اسمًا للمتغير وإعادة استخدامها في النص مرة أخرى ككلمة عادية.\nلا تقلق! علامات الاقتباس ستجعل هذا الأمر ممكنًا!\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
             1:
                 example_code: "```\n{print} مرحبًا، انا العرافه هيدي!\n{ask} من انت؟\n{print} دعني اري في كرتي السحرية\n{print} اجل.. اجل.. لقد عرفت من انت!\n{echo} اسمك هو \n```\n"
                 story_text: "## العراف\nهل شاهدت من قبل قصة العراف الذي يرى المستقبل؟ او لعبت بالكرة السحرية التي يستخدمها العراف؟\nإذًا، انت على الأغلب تعلم انه لا يستطيع ان يرى المستقبل فعلاً.. ولكنها لاتزال لعبة ممتعة!\n\nفي المستويات القادمة ستتعلم كيفية صناعة العراف الالكتروني الخاص بك\nولكن في المستوى 1 سنبدأ بطريقة بسيطة من خلال استعمال هيدي كعرافة تستخدم`{echo}` لتعيد ترديد إجابات اللاعبين.\nكما في المثال التوضيحي:\n"
