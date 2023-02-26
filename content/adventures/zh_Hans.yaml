@@ -1070,10 +1070,10 @@ adventures:
                     喜欢 = 无人, 皇室, 邻居, 真爱
                     宠物 = 狗, 猫, 大象
                     名字 = 珍娜, 瑞安, 吉姆
-                    {for} 名字 {in} 名字
-                        {print} 名字 ' 住在 ' 房屋里 {at} {random}
-                        {print} 名字 ' 将会和 ' 喜欢 {at} {random} 结婚
-                        {print} 名字 ' 将得到一个 ' 宠物 {at} {random} ' 作为他们的宠物。'
+                    {for} name {in} 名字
+                        {print} name ' 住在 ' 房屋 {at} {random} '里'
+                        {print} name ' 将会和 ' 喜欢 {at} {random} '结婚'
+                        {print} name ' 将得到一个 ' 宠物 {at} {random} ' 作为他们的宠物。'
                         {sleep}
                     ```
                 story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命仙。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
@@ -1526,7 +1526,7 @@ adventures:
                 start_code: '# 把你的代码放在这里'
             6:
                 story_text: "你知道你也可以用`{pressed}` 做一个计算器吗？\n给计算器两个数字，然后按m键进行乘法运算。\n现在你不用再带自己的计算器了!\n试试其他的键，看看会发生什么？你会得到不同的结果吗？\n"
-                example_code: "```\n数1 = {ask} '你的第一个数字是多少？'\n数2 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 数1 + 数2\n{if} s {is} {pressed} 计算 结果 = 数1 - 数2\n{if} d {is} {pressed} 计算结果 = 数1 / 数2\n{if} m {is} {pressed} 计算结果 = 数1 * 数2\n{print} '答案是 ' 计算结果\n```\n"
+                example_code: "```\n数1 = {ask} '你的第一个数字是多少？'\n数2 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 数1 + 数2\n{if} s {is} {pressed} 计算结果 = 数1 - 数2\n{if} d {is} {pressed} 计算结果 = 数1 / 数2\n{if} m {is} {pressed} 计算结果 = 数1 * 数2\n{print} '答案是 ' 计算结果\n```\n"
                 start_code: '# 把你的代码放在这里'
             7:
                 story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
