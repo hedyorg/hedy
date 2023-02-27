@@ -575,166 +575,166 @@ levels:
         8:
             question_text: "Was ist die Ausgabe dieses Code?"
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                chips {is} Meersalz, Paprika, Saure Sahne
+                {remove} Meersalz {from} chips
+                {remove} Paprika {from} chips
+                {print} chips {at} {random}
             mp_choice_options:
-            -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
-                feedback: "Take a look at the `{remove}` commands"
+            -   option: "Das kannst du nicht sagen, weil Hedy mit `{print}` in Verbindung mit `{at} {random}` eine der 3 Geschmacksrichtungen ausgibt"
+                feedback: "Schau dir den `{remove}` Befehl an"
             -   option: "sea salt"
-                feedback: "sea salt is removed from the list"
-            -   option: "paprika"
-                feedback: "Paprika is removed from the list"
-            -   option: "sour cream"
-                feedback: "That's right!"
+                feedback: "Meersalz wird von der Liste entfernt"
+            -   option: "Paprika"
+                feedback: "Paprika wird von der Liste entfernt"
+            -   option: "Saure Sahne"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "There are 3 flavors, bit 2 are removed. Which one remains?"
+            hint: "Es gibt 3 Geschmacksrichtungen, aber 2 werden entfernt. Welche bleibt übrig?"
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                farben {is} Blau, Lila, Grün
+                gewählte_farbe {is} {ask} Welche Haarfarbe würdest du nicht haben wollen?
+                {remove} gewählte_farbe {from} farben
+                {print} Ich werde meine Haare farbe {at} {random} färben
             mp_choice_options:
-            -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
-                feedback: "Maybe you want blue hair though!"
-            -   option: "Line 3 should have an `{add}` command instead of a `{remove}` command"
-                feedback: "You want to remove the chosen color so `{remove}` is right."
-            -   option: "In line 4 the variable should be called colors instead of color"
-                feedback: "Great job!"
-            -   option: "Nothing, this is a correct code!"
-                feedback: "Find the mistake!"
+            -   option: "Zeile 3 sollte sein: `{remove}` Blau `{from}` farben"
+                feedback: "Aber vielleicht möchtest du blaues Haar!"
+            -   option: "Zeile 3 sollte einen `{add}` Befehl anstelle eines `{remove}` Befehls haben"
+                feedback: "Du möchtest die gewählte Farbe entfernen, also ist `{remove}` richtig."
+            -   option: "In Zeile 4 sollte die Variable farben sein anstelle von farbe"
+                feedback: "Großartig gemacht!"
+            -   option: "Nichts, dies ist korrekter Code!"
+                feedback: "Finde den Fehler!"
             correct_answer: "C"
-            hint: "Look at line 3"
+            hint: "Schau in Zeile 3"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "Was sollte in den Lücken sein _?_?"
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
+                gassigeher {is} Papa, Mama, Sam, Petra
+                gestern_gegangen {is} {ask} Wer ging gestern Gassi?
+                {print} gestern_gegangen sollte heute nicht erneut mit dem Hund Gassi gehen
                 _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                {print} gassigeher {at} {random} , du bist dran mit Gassi gehen!
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} walked_yesterday {from} walkers
+                    {remove} gestern_gegangen {from} gassigeher
                     ```
                 feedback: "Super!"
             -   option: |
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} gestern gegangen {to} gassigeher
                     ```
                 feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
             -   option: |
                     ```
-                    {remove} walkers {from} yesterday
+                    {remove} gassigeher {from} gestern
                     ```
-                feedback: "yesterday is not a variable"
+                feedback: "gestern ist keine Variable"
             -   option: |
                     ```
-                    {add} walked_yesterday {to} walkers
+                    {add} gestern_gegangen {to} gassigeher
                     ```
-                feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+                feedback: "Dies hat die Wahrscheinlichkeit erhöht, dass die Person die gestern ging jetzt schon wieder gehen muss. Das ist gemein."
             correct_answer: "A"
-            hint: "The person who walked the dog yesterday should be removed from the list."
+            hint: "Die Person, die gestern ging, sollte von der Liste entfernt werden."
             question_score: '10'
 
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "Welche dieser Aussagen ist wahr?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "`{print}` und `{ask}` benötigen nun Anführungszeichen"
+                feedback: "Das ist richtig"
+            -   option: "Nur `{print}` benötigt Anführungszeichen"
+                feedback: "`{ask}` benötigt ebenfalls Anführungszeichen!"
+            -   option: "`{at} {random}` funktioniert in Level 4 nicht mehr"
+                feedback: "`{at} {random}` funktioniert weiterhin"
+            -   option: "`{at} {random}` benötigt nun Anführungszeichen"
+                feedback: "Nein, aber 2 andere Befehle schon."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
+            hint: "In Level 4 benötigst du für 2 Befehle Anführungszeichen."
             question_score: '10'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "Welcher Code benutzt die richtigen Anführungszeichen?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} `hello`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "Dieses Anführungszeichen ist schräg, du brauchst ein gerades."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'hallo'
                     ```
-                feedback: "Correct"
+                feedback: "Richtig"
             -   option: |
                     ```
-                    {print} hello
+                    {print} hallo
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "Hier gibt es keine Anführungszeichen!."
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,hallo,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "Dies ist ein Komma, du brauchst Anführungszeichen."
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
+            hint: "Wähle die richtigen Anführungszeichen."
             question_score: '10'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "Wo werden die Anführungszeichen richtig benutzt?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "Bitte füge Anführungszeichen hinzu!"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "Wörter, die du ausgeben möchtest, benötigen davor und dahinter Anführungszeichen."
             -   option: |
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "Das erste Anführungszeichen sollte hinter {print} stehen"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: "Perfect!"
+                feedback: "Perfekt!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
+            hint: "Sowohl vor als auch hinter Wörtern, die du ausgeben möchtest, sollten Anführungszeichen stehen."
             question_score: '10'
         4:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
+            -   option: "Du brauchst um `{print}` herum Anführungszeichen, wie hier: `'{print}'`."
+                feedback: "Die Anführungszeichen sollten nicht um den Befehl selbst herum stehen."
+            -   option: "Du benötigst Anführungszeichen um die Wörter herum, die du ausgeben möchtest."
                 feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
-            -   option: "You can choose yourself whether to use quotation marks or not."
-                feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "Du brauchst keine Anführungszeichen, wenn du den `{ask}` Befehl benutzt"
+                feedback: "Beide, `{print}` und `{ask}` benötigen Anführungszeichen"
+            -   option: "Du kannst selbst wählen, ob du Anführungszeichen benutzt oder nicht."
+                feedback: "Leider ist Hedy strenger."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
+            hint: "Ab Level 4 musst du Anführungszeichen benutzen."
             question_score: '10'
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "Was muss geändert werden, um das Spiel zum Laufen zu bringen?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                auswahlmöglichkeiten {is} Stein, Schere, Papier
+                {print} 'auswahlmöglichkeiten {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "Schreibe nie Anführungszeichen vor den {print} Befehl."
             -   option: |
                     ```
                     {print} 'options' {at} {random}
