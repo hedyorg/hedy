@@ -8,7 +8,7 @@
 -   name: '{echo}'
     explanation: Repeat something using `{echo}`.
     demo_code: "{ask} คุณชอบสีอะไร?\n{echo} สีที่คุณชอบคือ"
--   name: '{print} emojis'
+-   name: '{print} อีโมจิ'
     demo_code: '{print} 🙋 🌍 ❗'
     explanation: Print an emoji with `{print}`.
 -   name: '{forward}'
@@ -27,9 +27,9 @@
 -   name: '{sleep}'
     explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: '{is} with turtle'
+-   name: 'ใช้ {is} กับเต่า'
     explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    demo_code: "มุม {is} 90\n{turn} มุม\n{forward} 100"
 3:
 -   name: Choose random
     explanation: สุ่มเลือกคำจากกลุ่มของคำด้วยคำสั่ง `{at}` และ `{random}`.
@@ -38,7 +38,7 @@
     explanation: '`{add}` an item `{to_list}` a list.'
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
-    explanation: "`{remove}' an item `{from}` a list."
+    explanation: "`{remove}` ของ `{from}` ลิสท์"
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 5:
 -   name: '{print}'
@@ -56,8 +56,8 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
--   explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+-   explanation: เช็คว่าปุ่มนั้นๆบนคีบอร์ด `{pressed}` หรือเปล่า
+    demo_code: "{if} a {is} {pressed} {print} 'คุณกด A!' {else} {print} 'คุณกดปุ่มอื่น!'"
     name: '{pressed}'
 8:
 -   demo_code: "{print} '5 times 5 is ' 5 * 5"
@@ -70,8 +70,8 @@
     explanation: Repeat multiple lines.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: เช็คว่าปุ่มนั้นๆบนคีบอร์ดคือ `{pressed}` หรือเปล่า
+    demo_code: "{if} a {is} {pressed}\n    {print} 'คุณกด A!'\n{else}\n    {print} 'คุณกดปุ่มอื่น!'"
 10:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.
@@ -89,16 +89,16 @@
 12:
 -   name: float directly
     explanation: Decimal numbers.
-    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
--   demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
+    demo_code: "{print} 'คิดเลขกันเถอะ!'\n{print} 'สอง กับอีกครึ่งนึง บวกด้วย สอง กับอีกครึ่งนึง คือ'\n{print} 2.5 + 2.5"
+-   demo_code: "ชื่อ = 'เฮดี้'\n{print} 'สวัสดี ' ชื่อ"
     name: assign text
     explanation: Text with quotation marks after `=`
 -   name: quotes after {if} comparison
     explanation: Text with quotation marks after `{if}`.
-    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'"
 -   name: quotes in list
     explanation: A list with quotation marks.
-    demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    demo_code: "ฮีโร่ = 'ไอร่อนแมน', 'แบทแมน', 'ซูเปอร์แมน'\n{print} ฮีโร่ {at} {random}"
 13:
 -   name: '{and}'
     explanation: Two parts both need to be correct.
@@ -126,22 +126,22 @@
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 16:
--   name: square brackets
-    explanation: Lists with square brackets.
+-   name: วงเล็บแบบเหลี่ยม
+    explanation: สร้างลิสท์โดยใช้วงเล็บแบบเหลี่ยม
     demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
 -   name: Get an item from a list
     explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
     demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
 -   name: Get a random item from a list
     explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
+    demo_code: "ผลไม้ = ['กล้วย', 'แอปเปิ้ล', 'เชอรรี่']\nกล่องสุ่มผลไม้ = ผลไม้[{random}]\n{print} กล่องสุ่มผลไม้"
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'
-    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a คือ 1'\n{elif} a == 2:\n    {print} 'a คือ 2'\n{else}:\n    {print} 'a ไม่ใช่ 1 หรือ 2'"
 -   name: '{print}'
     explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'สวัสดี!'"
 -   name: '{if}'
     explanation: We need to do the same with all of our `{if}` statements.
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
@@ -195,7 +195,7 @@
 18:
 -   name: '{print}'
     explanation: After `{print}` you need to use parentheses.
-    demo_code: "{print}('hi!')"
+    demo_code: "{print}('สวัสดี!')"
 -   name: '{range}'
     explanation: After `{range}` you need to use parentheses.
     demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"

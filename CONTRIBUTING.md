@@ -28,8 +28,28 @@ For these types of issues it is fine to ping us on GitHub before starting the wo
 The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture.
 If you are interested in working on topics related to an open discussion, please join a meeting to discuss the plans in detail.
 
+Contributing to Hedy
+------------
+
+The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces). 
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?machine=basicLinux32gb&repo=226863521&ref=main&location=WestEurope)
+
+This will open up a VS Code instance in the browser and allow you to work on the Hedy code. This is really useful to quickly make some small and trivial changes without needing to install anything.
+
+Github Codespaces is only free for a certain amount of CPU-hours each month, so if you want to work on Hedy regularly, it might be better to run Hedy on your machine.
+
 Run Hedy on your machine
 ------------
+
+**With Docker, VSCode and its Remote Container Extension**
+
+VS Code has a great Dev Containers extension that allows you to connect the IDE to a development (docker) container. More info can be found on https://code.visualstudio.com/docs/devcontainers/containers
+
+After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy. 
+
+
+**Local installation**
 
 If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to:
 - install Python 3.7 or higher;
@@ -83,7 +103,12 @@ Do note a few things:
 * Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
 * Run pybabel before running the tests as they can also rely on exact labels
 * For the same reason, set your app to English
-
+* ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.     
+    ```
+    $ . ./.env/bin/activate  
+    (.env)$ export ADMIN_USER=admin  
+    (.env)$ python app.py
+    ```
 If you want to connect Cypress to the online dashboard, use:
 
 `npx cypress run --record --key <key here>`
@@ -95,7 +120,7 @@ $ npx cypress open
 
 You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
-### Feeding the local database
+## Feeding the local database
 
 Hedy uses a local database in developing environments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
 
@@ -120,7 +145,7 @@ As this project is growing and multiple people are working on it, we want to mov
 pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`.
+After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 ```git commit -m "your message" --no-verify```
@@ -268,12 +293,14 @@ If you want to try Admin features locally (for example, marking accounts as teac
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
+## What happens when I make a PR?
 
-Pre-release environment
------------------------
+When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally. 
 
-When you have your PR accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
-We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
+If the PR is approved, it will be merged with a [mergify script](https://github.com/hedyorg/hedy/blob/main/.mergify.yml). Please don't do anything (esp. don't enable auto merge), all will be handled automatically. Mergify will also tell you that when the PR is approved.
+
+When your PR is accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
+We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy. You can use [the version log](https://hedy.org/version) to see which version of Hedy lives on the website.
 
 Accessing logs
 -----------------------

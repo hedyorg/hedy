@@ -732,8 +732,8 @@ class TestsLevel5(HedyTester):
         print friend""")
 
         expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
-                                     HedyTester.list_access_transpiled('friends[2-1]'),
-                                     "friend = friends[2-1]",
+                                     HedyTester.list_access_transpiled('friends[int(2)-1]'),
+                                     "friend = friends[int(2)-1]",
                                      "print(f'{friend}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -878,12 +878,15 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'x':
               print(f'first key')
               break
+            else:
+              _ = 'x'
+              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
               print(f'second key')
               break""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
+        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
 
     def test_if_pressed_has_enter_after_pressed(self):
         code = textwrap.dedent("""\
@@ -1223,16 +1226,22 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'ض':
               print(f'arabic')
               break
+            else:
+              _ = 'x'
+              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'ש':
               print(f'hebrew')
+              break
+            else:
+              _ = 'x'
               break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'й':
               print(f'russian')
               break""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
+        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
 
     #
     # pressed negative tests
