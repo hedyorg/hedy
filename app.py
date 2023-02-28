@@ -602,7 +602,8 @@ def translate_error(code, arguments, keyword_lang):
         'repeat']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
-    error_template = gettext('' + str(code))
+    error_level = session.get("error_level", "2")
+    error_template = gettext('' + str(code) + '_' + error_level)
 
     # Fetch tip if it exists and merge into template, since it can also contain placeholders
     # that need to be translated/highlighted
