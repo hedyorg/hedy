@@ -398,6 +398,15 @@ def get_list_from_pickle(filename):
         snippet_hashes = set()
         with open(filename, 'wb') as f:
             pickle.dump(snippet_hashes, f)
+    except pickle.UnpicklingError:
+        snippet_hashes = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(snippet_hashes, f)
+    except EOFError:
+        snippet_hashes = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(snippet_hashes, f)
+
     return snippet_hashes
 
 
