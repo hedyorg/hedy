@@ -51,6 +51,7 @@ adventures:
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
                 story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nombre {is} {ask} '¿Cómo te llamas?'
@@ -1039,7 +1040,6 @@ adventures:
             13:
                 story_text: "## Restaurante\nEn este nivel podemos usar los nuevos comandos para mejorar nuestro restaurantes.\nUsamos `{and}` para ver {if} si dos cosas son verdaderas.\n"
                 example_code: "```\nprecio = 10\ncomida = {ask} '¿Qué te gustaría comer?'\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} comida {is} 'sandwich' {and} bebidas {is} 'jugo'\n    {print} 'Ese es nuestro menú de descuento'\n    precio = precio - 3\n{print} 'Eso sería ' precio ' dólares'\n```\n"
-                story_text_2: "Usamos `{or}` para ver si una de dos cosas son verdaderas.\n"
                 start_code: '# pon tú código aquí'
     fortune:
         name: "El adivino"
