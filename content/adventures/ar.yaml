@@ -506,7 +506,6 @@ adventures:
                 example_code: "```\nالخيارات {is} ۱ ، ۲، ۳ ، ٤ ، ٥ ، دودة الارض\nالرمية {is} _\n{print} 'لديك' _ 'تم القاءها'\n{if} _ {is} دودة ارض {print} 'تستطيع التوقف عن الرمي.' _ {print} 'عليك أن تسمعه مرة أخرى!'\n```\n"
             4:
                 story_text: "## حجر النرد\nفي هذا المستوى يمكنك إنشاء جمل مفيدة باستخدام القيمة التي تظهر على حجر النرد، ولا تنسَ علامات الإقتباس.\nالمثال التوضيحي هذه المرة غير مكتمل كليًا، هل يمكنك إكماله؟\n"
-                example_code: "```\nالخيارات {is} ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} _ لقد رميت حجر النرد _\n{print} _ _ _ <- هنا يجب عليك كتابة الكود الخاص باختيار الرقم الذي سيظهر على حجر النرد\n```\n"
                 start_code: "{print} 'ما الرقم الذي سيظهر على حجر النرد هذه المرة؟'"
             3:
                 story_text: "## حجر النرد\nيمكننا الإختار من قائمة في هذا المستوى. ومع ذلك سيتولى الكومبيوتر الإختيار هذه المرة من بين أوجه حجر النرد.\nألقِ نظرة على الألعاب الموجودة في خزانتك في المنزل.\nهل يوجد ألعاب ذات نرد (خاص)؟ عندما تجد شيئاً مماثل يمكنك نسخه ايضاً في هذا الكود.\nعلى سبيل المثال، هناك لعبة تسمى نرد دودة الأرض تتكون من ٦ اوجه مرقمة من ١ إلى ٥ والأخيرة عليها دودة الأرض.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
@@ -530,7 +529,6 @@ adventures:
             4:
                 story_text: "##حجر،ورقة،مقص\nفي هذا المستوى أيضًا يمكنك برمجة لعبة حجر،ورقة،مقص. لكن إذا أردت كتابة نص يجب عليك استخدام علامات الإقتباس.\nهل يمكنك إكمال الكود بوضع الأوامر أو علامات الترقيم المناسبة في الفراغات؟\n"
                 start_code: "{print} 'أهلا بك في لعبة حجر،ورقة،مقص الخاصة بك'"
-                example_code: "```\nالخيارات {is} حجر,ورقة,مقص\n{print} _ الحاسوب اختار: _ _ {at} _\n```\n"
             3:
                 start_code: '{print} مرحبًا في لعبة حجر ورقة مقص الخاصة بك!'
                 story_text: "## حجر، ورقة، مقص\n\nفي هذا المستوى يمكننا إستخدام القوائم و الإختار منها.\nفي البداية اصنع قائمة بإستخدام `{is}`. بعد ذلك يمكنك ترك الكومبيوتر يختار شيئًا من هذه القائمة بإستخدام `{at} {random}`.\nعلى سبيل المثال، ستترك الكومبيوتر يختار من بين حجر، ورقة، أو مقص.\n"
@@ -656,7 +654,6 @@ adventures:
                 start_code: '# place your code here'
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
                 example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
                 start_code: '# place your code here'

@@ -1162,13 +1162,6 @@ adventures:
                     In diesem Level können wir Sätze mit dem Würfelwert im Satz bilden, natürlich mit Anführungszeichen.
                     Diesmal ist der Beispiel-Code nicht ganz vollständig. Kannst Du den Code vervollständigen?
 
-                example_code: |
-                    ```
-                    Würfelseiten {is} 1, 2, 3, 4, 5, Regenwurm
-                    {print} _ Der Würfel zeigt  _
-                    {print} _ _ _ <- Hier musst Du die Auswahl programmieren.
-                    ```
-
                 start_code: "{print} 'Was zeigt der Würfel diesmal?'"
             3:
                 story_text: |
@@ -1305,11 +1298,6 @@ adventures:
                     In diesem Level können wir Stein Schere Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
                     Wirst du den Code vervollständigen, indem du die richtigen Befehle oder Zeichen anstelle der Unterstriche eingibst?
 
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
                 story_text: |
@@ -1843,9 +1831,6 @@ adventures:
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
                     ```
-                story_text_2: |
-                    Wir nutzen `{or}` um zu sehen, ob eines von zwei Dingen der Fall ist.
-
                 example_code_2: |
                     ```
                     drinks = {ask} 'What would you like to drink?'

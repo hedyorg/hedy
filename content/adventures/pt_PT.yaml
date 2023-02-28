@@ -631,7 +631,6 @@ adventures:
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
                 start_code: "{print} 'What will the die indicate this time?'"
-                example_code: "## Exemplo de código Hedy\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
                 start_code: "{print} 'What will the die indicate this time?'"
@@ -688,7 +687,6 @@ adventures:
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                example_code: "## Exemplo de código Hedy\n\n```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
             3:
                 story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
                 example_code: "## Exemplo de código Hedy\n\n\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
@@ -1063,9 +1061,6 @@ adventures:
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
                     ```
-                story_text_2: |
-                    We use `{or}` to see {if} one our of two things is the case.
-
                 example_code_2: |
                     ```
                     drinks = {ask} 'What would you like to drink?'

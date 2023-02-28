@@ -765,13 +765,6 @@ adventures:
                     Αυτήν τη φορά το δείγμα κώδικα δεν είναι πλήρες. Μπορείς να ολοκληρώσεις τον κώδικα;
 
 
-                example_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    print _ έριξες _
-                    print _ _ _ <- εδώ θα πρέπει να προγραμματίσεις τη ρίψη
-                    ```
-
                 start_code: "print 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
             3:
                 story_text: |
@@ -860,11 +853,6 @@ adventures:
                     ## Πέτρα, ψαλίδι, χαρτί
                     Στο επίπεδο 3 μπορούμε να προγραμματίσουμε περαιτέρω το Πέτρα, ψαλίδι, χαρτί. Όμως αν θέλεις να προσθέσεις κείμενο, πρέπει να χρησιμοποιήσεις εισαγωγικά και εδώ. Μπορείς να συμπληρώσεις τον κώδικα τοποθετώντας τις σωστές εντολές ή χαρακτήρες στις τελίτσες;
 
-                example_code: |
-                    ```
-                    choices is πέτρα, ψαλίδι, χαρτί
-                    print _ Ο υπολογιστής επέλεξε: _ _ at _
-                    ```
                 start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!'"
             3:
                 story_text: |
@@ -1093,9 +1081,7 @@ adventures:
                 start_code: '# place your code here'
             13:
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
                 start_code: '# place your code here'
     parrot:
         name: Parrot

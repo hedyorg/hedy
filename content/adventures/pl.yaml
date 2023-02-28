@@ -214,7 +214,6 @@ adventures:
             4:
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
                 story_text: "## Kostki do gry\nNa tym poziomie możemy tworzyć zdania z wartością kostki w zdaniu, oczywiście w cudzysłowach.\nTym razem kod przykładowy nie jest do końca kompletny. Czy możesz uzupełnić kod?\n"
-                example_code: "```\nwybory {is} 1, 2, 3, 4, 5, dżdżownica\n{print} _ rzuciłeś _.\n{print} _ _ _ <- tu trzeba zaprogramować wybór\n```\n"
             10:
                 story_text: "## Kości\nCzy wszyscy zbyt długo rzucają kostką? Na tym poziomie możesz pozwolić Hedy rzucić wszystkimi kośćmi naraz!\n\n### Ćwiczenie\nZmień imiona na imiona swoich przyjaciół lub rodziny i dokończ kod, aby każdy z nich rzucił.\n"
                 example_code: "```\ngracze = Ania, Jasiek, Kasia\nwybory = 1, 2, 3, 4, 5, 6\n_ _ _ _\n    {print} gracz ' wyrzucił ' wybory {at} {random}\n    {sleep}\n```\n"
@@ -272,7 +271,6 @@ adventures:
                 start_code: "{print} 'Witamy w twoim własnym programie kamień, papier, nożyce!'"
             4:
                 story_text: "## Kamień, papier, nożyce\nNa tym poziomie możemy dodatkowo zaprogramować kamień, papier, nożyce. Jeśli chcesz dodać tekst, tutaj również musisz użyć cudzysłowów.\nCzy uzupełnisz kod, wprowadzając poprawne polecenia lub znaki w podkreśleniach?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Witamy w twoim własnym programie kamień, papier, nożyce!'"
             3:
                 story_text: "## Papier, kamień, nożyce\n\nNa tym poziomie możemy wprowadzać listy i wybierać z nich rzeczy.\nNajpierw tworzysz listę za pomocą `{is}`. Następnie możesz pozwolić komputerowi wybrać coś z listy za pomocą `{at} {random}`.\nNa przykład, możesz pozwolić komputerowi wybrać z listy papier, kamień lub nożyce.\n"
@@ -401,7 +399,6 @@ adventures:
             13:
                 story_text: "## Restauracja\nNa tym poziomie możemy wykorzystać nowe komendy do ulepszenia naszej restauracji.\nUżywamy `{and}`, aby zobaczyć {if} dwie rzeczy są w obu przypadkach.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "Używamy `{or}`, aby sprawdzić, czy zachodzi jedna z dwóch rzeczy.\n"
                 example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# umieść tutaj swój kod'
         name: Restauracja

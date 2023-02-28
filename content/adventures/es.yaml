@@ -737,7 +737,6 @@ adventures:
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
                     ¿Puedes escribir el programa, reemplazando los guiones bajos?
                 start_code: "{print} '¿Qué salió esta vez?'"
-                example_code: "```\nopciones {is} 1, 2, 3, 4, 5, gusanito\n{print} 'has tirado un ' _\n{print} _ _ _ <- agregar código aquí\n```\n"
             3:
                 story_text: |
                     ## Dados
@@ -812,11 +811,6 @@ adventures:
                     ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si ({if}) quieres imprimir texto, debes usar comillas.
                     ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
-                example_code: |
-                    ```
-                    opciones {is} piedra, papel, tijera
-                    {print} _ La computadora ha elegido: _ _ {at} _
-                    ```
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:
                 story_text: |
@@ -1045,7 +1039,6 @@ adventures:
             13:
                 story_text: "## Restaurante\nEn este nivel podemos usar los nuevos comandos para mejorar nuestro restaurantes.\nUsamos `{and}` para ver {if} si dos cosas son verdaderas.\n"
                 example_code: "```\nprecio = 10\ncomida = {ask} '¿Qué te gustaría comer?'\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} comida {is} 'sandwich' {and} bebidas {is} 'jugo'\n    {print} 'Ese es nuestro menú de descuento'\n    precio = precio - 3\n{print} 'Eso sería ' precio ' dólares'\n```\n"
-                example_code_2: "```\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} bebidas {is} 'agua' {or} bebidas {is} 'jugo'\n    {print} 'Esa es una opción saludable'\n```\n"
                 story_text_2: "Usamos `{or}` para ver si una de dos cosas son verdaderas.\n"
                 start_code: '# pon tú código aquí'
     fortune:

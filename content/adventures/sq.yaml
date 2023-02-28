@@ -146,7 +146,6 @@ adventures:
                 start_code: '# Vendoseni kodi tuaj këtu'
                 story_text: "## Restorant\nNë këtë nivel ne mund të përdorim komandat e reja për të përmirësuar restorantin tonë.\nNe përdorim komandën `{and}` të shikojmë {if}(nëse) dy gjera jane të njëjta.\n"
                 example_code: "```\nçmimi = 10\nushqimi = {ask} 'Çfarë do të dëshironit të hani?'\npije = {ask} 'Çfare do te pish?'\n{if} ushqimi {is} 'sanduiç' {and} pije {is} 'lëng'\n    {print} 'Kjo është menyja jonë e zbritjes'\n    çmimi = çmimi - 3\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n```\n"
-                story_text_2: "Ne përdorim komandën `{or}` të shikojmë nëse njëra nga 2 gjërat është e saktë.\n"
                 example_code_2: "```\npije = {ask} 'Çfarë do te pish?'\n{if} pije {is} 'uj' {or} pije {is} 'lëng'\n    {print} 'Është një zgjedhje e shëndetshme'\n```\n"
             7:
                 story_text: "## Restorant\nNë këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.\nJu mund ta përdorni atë në restorant që të `{ask}`(pyesni) disa njerëz se çfarë duan të hanë.\n\n## Sfidë\nMund të plotësoni vendet bosh? Hedy duhet ta përsërisë këtë pyetje sa herë ka njerëz. Pra, nga 5 persona, pyetja duhet bërë 5 herë.\n"
@@ -441,7 +440,6 @@ adventures:
                 story_text_2: "## Sfidë\nZarat në shembullin e mësipërm janë zare për një lojë specifike. Mund të bëni zare normale?\nApo zare të tjerë të veçantë nga një lojë tjetër?\n"
             4:
                 story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
-                example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             5:
                 story_text: "## Zare\nMund ta bëni prapë zarin në këtë nivel me komandën `{if}`.\nPërfundojeni shembullin e dhënë që kodi të thotë \"Ju mund të ndaloni së hedhuri\" sapo të keni hedhur një krimb toke.\n\nNdoshta doni që të rikrijoni një zare nga një lojë tjetër. Është në rregull! Atëherë bëni reagimin tuaj. Shembull 'po' për numrin 6 dhe 'me keqardhje' për diçka tjetër {else}.\n"
@@ -492,7 +490,6 @@ adventures:
                 story_text_2: "## Sfidë\nTani ju keni vetëm një lojtar, kështu që mund të shtoni një lojtar të dytë?\nMund të përdorni edhe variabla për të emërtuar lojtarin 1 dhe lojtarin 2.\n"
             4:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund të programoni më shumë lojën gur, letër, gërshërë. Por {if} (nëse) doni të shtoni tekst, duhet të shtoni thonjëzat gjithashtu.\nA e përfundoni kodin duke shtuar komandat e sakta ose shkronjat në vizat e poshtme?\n"
-                example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
                 start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
             10:
                 story_text: "## Gur, letër, gërshërë\nJu mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!\nMjafton të plotësoni emrat e lojtarëve.\n"

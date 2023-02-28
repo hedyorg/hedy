@@ -1251,12 +1251,6 @@ adventures:
                     ## Dice
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _ you threw _
-                    {print} _ _ _ <- here you have to program the choice
-                    ```
                 start_code: "{print} 'Che cosa indicherà il dado questa volta?'"
             5:
                 story_text: |
@@ -1392,11 +1386,6 @@ adventures:
                     In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
 
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: |
@@ -1954,9 +1943,6 @@ adventures:
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
                     ```
-                story_text_2: |
-                    We use `{or}` to see {if} one our of two things is the case.
-
                 example_code_2: |
                     ```
                     drinks = {ask} 'What would you like to drink?'
