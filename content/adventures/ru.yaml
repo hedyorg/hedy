@@ -50,6 +50,7 @@ adventures:
                 story_text: "## 'Кавычки'\nНа уровне 4 `{ask}` и `{print}` изменились.\n\nВы должны заключить текст, который хотите напечатать, в кавычки.\n\nЭто полезно, потому что теперь вы можете печатать все слова, которые хотите. Также слова, которые вы использовали для хранения чего-либо с помощью `{is}`.\n\nБольшинство языков программирования также используют кавычки при печати, так что мы становимся на шаг ближе к настоящему программированию!\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Приключения становятся все сложнее и сложнее\nПриключения становятся все сложнее и сложнее на следующих вкладках.\nПоэтому лучше всего начинать слева и двигаться вправо, чтобы все больше и больше усложнять себе задачу.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             18:
                 start_code: |-
                     имя = 'Хеди'
@@ -473,7 +474,6 @@ adventures:
             13:
                 story_text: "## Ресторан\nВ этом уровне мы можем использовать новые команды для модернизации нашего ресторана.\nМы используем `{and}`, чтобы убедиться, что {if} оба варианта верны.\n"
                 example_code: "```\nprice = 10\nеда = {ask} 'What would you like to eat?'\ndrink = {ask} 'What would you like to drink?'\n{if} еда {is} 'sandwich' {and} drink {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrink = {ask} 'What would you like to drink?'\n{if} drink {is} 'water' {or} drink {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# разместите здесь свой код'
             15:
                 story_text: "## Ресторан\nС помощью `{while}` вы можете убедиться, что ваши клиенты могут продолжать добавлять заказы, пока они не будут выполнены.\n"
