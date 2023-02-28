@@ -343,7 +343,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
     turtle:
         default_save_name: Skildpadde
@@ -471,6 +470,7 @@ adventures:
                 start_code: "{print} 'Hej verden'"
                 story_text_2: "## Eventyrerne bliver sværere og sværere\nEventyrerne bliver nu sværere og sværere i de følgende faner.\nSå det er bedst at starte fra venstre og arbejde sig mod højre for at blive udfordret mere og mere.\n"
                 story_text: "## 'Anførselstegn'\nPå niveau 4 har `{ask}` og `{print}` ændret sig.\n\nDu skal den tekst du vil printe i anførselstegn.\n\nDette er nyttigt, for nu kan du printe alle de ord du har lyst til. Du kan også printe de ord du har brugt til at gemme med `{is}`.\n\nDe fleste programmeringssprog bruger også anførselstegn til at printe, så vi kommer også tættere på rigtig programmering!\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             16:
                 start_code: "frugt = ['æble', 'banan', 'kirsebær']\n{print} frugt"
                 story_text: "## Mere og mere som ægte kode!\nVi skal lave lister på som i Python, med firkantede parenteser rundt om! Vi beholder også anførselstegn rund om hvert element som vi har lært på et tidlige niveau.\nDu kan også bruge firkantede parenteser til at udpege et sted i en liste."
