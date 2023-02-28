@@ -52,6 +52,7 @@ adventures:
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
                 example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
                 story_text_2: "## 冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边开始，向右进行，这样才能得到越来越多的挑战。\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     name {is} {ask} '你的名字是什么?'
@@ -843,12 +844,6 @@ adventures:
                         {print} '这是我们的优惠套餐'
                         价格 = 价格 - 3
                     {print} '一共' 价格 '元'
-                    ```
-                example_code_2: |
-                    ```
-                    饮料 = {ask} '您想喝什么？'
-                    {if} 饮料 {is} '水' {or} 饮料 {is} '果汁'
-                        {print} '真是个健康的选择'
                     ```
                 start_code: "# 在这里写你的代码"
             15:
