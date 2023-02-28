@@ -1,3 +1,4 @@
+import collections
 import json
 import os
 import uuid
@@ -26,6 +27,11 @@ from .database import Database
 from .website_module import WebsiteModule, route
 
 
+SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
+for lang in hedy_content.ALL_LANGUAGES.keys():
+    SLIDES[lang] = hedy_content.Slides(lang)
+
+
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, achievements: Achievements):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
@@ -50,6 +56,12 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        slides = []
+        for level in range(hedy.HEDY_MAX_LEVEL + 1):
+            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+                slides.append(level)
+
         return render_template(
             "for-teachers.html",
             current_page="for-teachers",
@@ -57,6 +69,7 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
+            slides=slides
         )
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})

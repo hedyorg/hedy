@@ -1,6 +1,6 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
-import {saveitP, showAchievements} from './app';
+import { saveitP, showAchievements } from './app';
 
 // *** Utility functions ***
 
@@ -82,123 +82,141 @@ export function request_teacher_account() {
 
 // *** User forms ***
 
-$('form#signup').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-        type: 'POST',
-        url: '/auth/signup',
-        // This should do the magic to convert to a correct JSON object
-        data: convertFormJSON($(this)),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        afterLogin({"first_time": true});
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-});
-
-$('form#login').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST',
-    url: '/auth/login',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    if (response['first_time']) {
-      return afterLogin({"first_time": true});
-    }
-    return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
-  }).fail (function (response) {
-    modal.alert(response.responseText, 3000, true);
+export function initializeFormSubmits() {
+  $('form#signup').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+          type: 'POST',
+          url: '/auth/signup',
+          // This should do the magic to convert to a correct JSON object
+          data: convertFormJSON($(this)),
+          contentType: 'application/json; charset=utf-8'
+        }).done (function () {
+          afterLogin({"first_time": true});
+        }).fail (function (response) {
+          modal.alert(response.responseText, 3000, true);
+        });
   });
-});
 
-$('form#profile').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST', url: '/profile',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    if (response.reload) {
-      modal.alert(response.message, 2000, false);
-      setTimeout (function () {location.reload ()}, 2000);
-    } else {
+  $('form#login').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST',
+      url: '/auth/login',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
+      if (response['first_time']) {
+        return afterLogin({"first_time": true});
+      }
+      return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+    });
+  });
+
+  $('form#profile').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST', url: '/profile',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
+      if (response.reload) {
+        modal.alert(response.message, 2000, false);
+        setTimeout (function () {location.reload ()}, 2000);
+      } else {
+        modal.alert(response.message, 3000, false);
+      }
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+    });
+  });
+
+  $('form#change_password').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST',
+      url: '/auth/change_password',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
       modal.alert(response.message, 3000, false);
-    }
-  }).fail (function (response) {
-    modal.alert(response.responseText, 3000, true);
+      $('form#change_password').trigger('reset');
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+    });
   });
-});
 
-$('form#change_password').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST',
-    url: '/auth/change_password',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    modal.alert(response.message, 3000, false);
-    $('form#change_password').trigger('reset');
-  }).fail (function (response) {
-    modal.alert(response.responseText, 3000, true);
+  $('form#recover').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST', url: '/auth/recover',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
+      modal.alert(response.message, 3000, false);
+      $('form#recover').trigger('reset');
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+    });
   });
-});
 
-$('form#recover').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST', url: '/auth/recover',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    modal.alert(response.message, 3000, false);
-    $('form#recover').trigger('reset');
-  }).fail (function (response) {
-    modal.alert(response.responseText, 3000, true);
-  });
-});
-
-$('form#reset').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST', url: '/auth/reset',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    modal.alert(response.message, 2000, false);
-    $('form#reset').trigger('reset');
-    setTimeout(function (){
-      redirect ('login');
-    }, 2000);
-  }).fail (function (response) {
-    modal.alert(response.responseText, 3000, true);
-  });
-});
-
-$('form#public_profile').submit(function(e) {
-  e.preventDefault();
-  $.ajax ({
-    type: 'POST',
-    url: '/auth/public_profile',
-    data: convertFormJSON($(this)),
-    contentType: 'application/json; charset=utf-8'
-  }).done (function (response) {
-    modal.alert(response.message, 2000, false);
-    if (response.achievement) {
-      showAchievements(response.achievement, true, "");
-    } else {
-      setTimeout(function () {
-        location.reload()
+  $('form#reset').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST', url: '/auth/reset',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
+      modal.alert(response.message, 2000, false);
+      $('form#reset').trigger('reset');
+      setTimeout(function (){
+        redirect ('login');
       }, 2000);
-    }
-
-  }).fail (function (response) {
-    return modal.alert(response.responseText, 3000, true);
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+    });
   });
-});
+
+  $('form#public_profile').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax ({
+      type: 'POST',
+      url: '/auth/public_profile',
+      data: convertFormJSON($(this)),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function (response) {
+      modal.alert(response.message, 2000, false);
+      if (response.achievement) {
+        showAchievements(response.achievement, true, "");
+      } else {
+        setTimeout(function () {
+          location.reload()
+        }, 2000);
+      }
+
+    }).fail (function (response) {
+      return modal.alert(response.responseText, 3000, true);
+    });
+  });
+
+  // *** LOADERS ***
+
+  $("#language").on('change', function () {
+      const lang = $(this).val();
+      $('#keyword_language').val("en");
+      if (lang == "en" || !($('#' + lang + '_option').length)) {
+        $('#keyword_lang_container').hide();
+      } else {
+        $('.keyword_lang_option').hide();
+        $('#en_option').show();
+        $('#' + lang + '_option').show();
+        $('#keyword_lang_container').show();
+      }
+  });
+
+}
 
 // *** Admin functionality ***
 
@@ -312,21 +330,6 @@ export function update_user_tags() {
     modal.alert("Tags successfully updated", 3000, false);
   });
 }
-
-// *** LOADERS ***
-
-$("#language").change(function () {
-    const lang = $(this).val();
-    $('#keyword_language').val("en");
-    if (lang == "en" || !($('#' + lang + '_option').length)) {
-      $('#keyword_lang_container').hide();
-    } else {
-      $('.keyword_lang_option').hide();
-      $('#en_option').show();
-      $('#' + lang + '_option').show();
-      $('#keyword_lang_container').show();
-    }
-});
 
 /**
  * After login:
