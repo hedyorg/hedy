@@ -147,11 +147,11 @@
             </div>
             <div class="flex flex-row items-center mb-2">
                 <label for="error_level" class="inline-block w-72">{{_('error_level')}}</label>
-                <input type="hidden" id="error_level">
+                <input type="hidden" id="error_level"{% if user_data['error_level'] %} value="user_data['error_level']" {% else %} value="2" {% endif %}>
                 <div class="flex flex-row gap-4 w-3/4 lg:w-1/2">
-                    <div class="green-btn error_level_button cursor-pointer text-center w-full" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('1');">Explanatory</div>
-                    <div class="green-btn error_level_button cursor-pointer text-center w-full" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('2');">Default</div>
-                    <div class="green-btn error_level_button cursor-pointer text-center w-full" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('3');">Pythonic</div>
+                    <div class="error_level_button cursor-pointer text-center w-full{% if user_data['error_level'] == "1"%} blue-btn {% else %} green-btn {% endif %}" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('1');">Explanatory</div>
+                    <div class="error_level_button cursor-pointer text-center w-full{% if user_data['error_level'] == "2"%} blue-btn {% else %} green-btn {% endif %}" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('2');">Default</div>
+                    <div class="error_level_button cursor-pointer text-center w-full{% if user_data['error_level'] == "3"%} blue-btn {% else %} green-btn {% endif %}" onclick="$('.error_level_button').removeClass('blue-btn');$(this).addClass('blue-btn');$('#error_level').val('3');">Pythonic</div>
                 </div>
             </div>
             <div class="flex flex-row items-center mt-4 gap-4">
