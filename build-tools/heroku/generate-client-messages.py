@@ -13,9 +13,12 @@ sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))  # 
 from website.yaml_file import YamlFile  # noqa
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
-ADDITIONAL_GETTEXT_KEYS = [
-    'level_title',
-]
+
+# Needs to include the actual gettext calls with a literal string, otherwise 'babel extract' will
+# mark the keys as obsolete and drop the translations.
+ADDITIONAL_GETTEXT_KEYS = {
+    'level_title': gettext.gettext('level_title')
+}
 
 
 def main():
