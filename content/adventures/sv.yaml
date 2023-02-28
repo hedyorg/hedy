@@ -27,6 +27,7 @@ adventures:
                 example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad måste vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
                 story_text_2: "## Äventyren blir svårare och svårare\nÄventyren blir svårare och svårare i de följande flikarna.\nDärför är det bäst att börja till vänster och jobba sig till höger för att utmaningen ska bli större och större.\n"
                 start_code: "{print} 'Hej världen'"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "namn {is} {ask} Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "## If... else....\nPå nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
@@ -496,7 +497,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
