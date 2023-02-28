@@ -1,18 +1,18 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 16:58-0400\n"
+"POT-Creation-Date: 2023-02-28 19:29+0100\n"
 "PO-Revision-Date: 2023-02-16 15:59+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
 msgstr "Ce programme contient une erreur, êtes-vous certain de vouloir le partager ?"
@@ -150,146 +150,437 @@ msgstr "Il semble que vous ne soyez pas autorisé…"
 msgid "default_500"
 msgstr "Quelque chose ne s’est pas bien passé…"
 
-msgid "Wrong Level"
-msgstr "C'était un code Hedy correct, mais pas au bon niveau. Vous avez écrit {offending_keyword} pour le niveau {working_level}. Conseil : {tip}"
+msgid "Wrong Level_1"
+msgstr ""
 
-msgid "Incomplete"
-msgstr "Oups ! Tu as oublié un morceau du code ! À la ligne {line_number}, tu dois ajouter du texte après {incomplete_command}."
+msgid "Incomplete_1"
+msgstr ""
 
-msgid "Invalid"
-msgstr "{invalid_command} n’est pas une commande du niveau {level} d’Hedy. Voulais-tu écrire {guessed_command} ?"
+msgid "Invalid_1"
+msgstr ""
 
-msgid "Invalid Space"
-msgstr "Oups ! Tu as commencé une ligne par une espace à la ligne {line_number}. Les espaces en début de ligne rendent les ordinateurs perplexes, peux-tu le supprimer ?"
+msgid "Invalid Space_1"
+msgstr ""
 
-msgid "Has Blanks"
-msgstr "Ton code est incomplet. Il contient des blancs que tu dois remplacer par du code."
+msgid "Has Blanks_1"
+msgstr ""
 
-msgid "No Indentation"
-msgstr "Tu as utilisé trop peu d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui n’est pas assez. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+msgid "No Indentation_1"
+msgstr ""
 
-msgid "Unexpected Indentation"
-msgstr "Tu as utilisé trop d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui est trop. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+msgid "Unexpected Indentation_1"
+msgstr ""
 
-msgid "Parse"
-msgstr "Le code que vous avez entré n'est pas un code Hedy valide. Il y a une erreur sur la ligne {location[0]}, à la position {location[1]}. Vous avez tapé {character_found}, mais ce n'est pas permis."
+msgid "Parse_1"
+msgstr ""
 
-msgid "Unquoted Text"
-msgstr "Attention : si tu affiche ou demande quelque chose, le texte doit commencer et se terminer par des guillemets. Il en manque quelque part."
+msgid "Unquoted Text_1"
+msgstr ""
 
-msgid "Unquoted Assignment"
-msgstr "À partir de ce niveau, le texte à droite de `is` doit être mis entre guillemets. Tu as oublié cela pour le texte {text}."
+msgid "Unquoted Assignment_1"
+msgstr ""
 
-msgid "Unquoted Equality Check"
-msgstr "Lorsque tu veux vérifier si une variable correspond à plusieurs mots, ces mots doivent être mis entre guillemets !"
+msgid "Unquoted Equality Check_1"
+msgstr ""
 
-msgid "Var Undefined"
-msgstr "Tu as essayé d’utiliser la variable {name}, mais tu ne l’as pas définie. Ou bien tu essayais d’utiliser le mot {name}, mais tu as oublié les guillemets."
+msgid "Var Undefined_1"
+msgstr ""
 
-msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgid "Access Before Assign_1"
+msgstr ""
 
-msgid "Cyclic Var Definition"
-msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+msgid "Cyclic Var Definition_1"
+msgstr ""
 
-msgid "Lonely Echo"
-msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d’abord utiliser `ask` pour demander, puis `echo`."
+msgid "Lonely Echo_1"
+msgstr ""
 
-msgid "Too Big"
-msgstr "Waouh ! Ton programme a un nombre impressionnant de lignes de code : {lines_of_code} lignes ! Mais Hedy ne peut traiter que {max_lines} lignes à ce niveau. Rends ton programme plus court et ressaie."
+msgid "Too Big_1"
+msgstr ""
 
-msgid "Invalid Argument Type"
-msgstr "Tu ne peux pas utiliser {command} avec {invalid_argument} car c’est {invalid_type}. Essaie de modifier {invalid_argument} en {allowed_types}."
+msgid "Invalid Argument Type_1"
+msgstr ""
 
-msgid "Invalid Argument"
-msgstr "Tu ne peux pas utiliser la commande {command} avec {invalid_argument}. Essaye de remplacer {invalid_argument} par {allowed_types}."
+msgid "Invalid Argument_1"
+msgstr ""
 
-msgid "Invalid Type Combination"
-msgstr "Tu ne peux pas utiliser {invalid_argument} et {invalid_argument_2} avec {command} car l'un est {invalid_type} et l'autre est {invalid_type_2}. Essaye de changer {invalid_argument} en {invalid_type_2} ou {invalid_argument_2} en {invalid_type}."
+msgid "Invalid Type Combination_1"
+msgstr ""
 
-msgid "Unsupported Float"
-msgstr "Les nombres non-entiers ne sont pas encore disponible, mais ils le seront dans quelques niveaux. Pour l'instant, change {value} en un entier."
+msgid "Unsupported Float_1"
+msgstr ""
 
-msgid "Locked Language Feature"
-msgstr "Tu utilises {concept} ! C'est génial mais {concept} n'est pas encore débloqué ! Ça sera débloqué dans les niveaux suivants."
+msgid "Locked Language Feature_1"
+msgstr ""
 
-msgid "Missing Command"
-msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
+msgid "Missing Command_1"
+msgstr ""
 
-msgid "Missing Inner Command"
-msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration {command} que tu as utilisé à la ligne {line_number}."
+msgid "Missing Inner Command_1"
+msgstr ""
 
-msgid "Incomplete Repeat"
-msgstr "Il semble que tu as oublié d'utiliser {command} avec la commande repeat qui est à la ligne {line_number}."
+msgid "Incomplete Repeat_1"
+msgstr ""
 
-msgid "Unsupported String Value"
-msgstr "Les valeurs textes ne peuvent pas contenir {invalid_value}."
+msgid "Unsupported String Value_1"
+msgstr ""
 
-msgid "Lonely Text"
-msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
+msgid "Lonely Text_1"
+msgstr ""
 
-msgid "ask_needs_var"
-msgstr "À partir du niveau 2, {ask} doit être utilisé avec une variable. Exemple : nom {is} {ask} Quel est ton nom ?"
+msgid "ask_needs_var_1"
+msgstr ""
 
-msgid "echo_out"
-msgstr "À partir du niveau 2 echo n'est plus nécessaire. Tu peux répéter un réponse avec ask et print maintenant. Exemple : nom is ask Quel est ton nom ? print hello nom"
+msgid "echo_out_1"
+msgstr ""
 
-msgid "space"
-msgstr "un espace"
+msgid "space_1"
+msgstr ""
 
-msgid "comma"
-msgstr "une virgule"
+msgid "comma_1"
+msgstr ""
 
-msgid "question mark"
-msgstr "un point d'interrogation"
+msgid "question mark_1"
+msgstr ""
 
-msgid "newline"
-msgstr "une nouvelle ligne"
+msgid "newline_1"
+msgstr ""
 
-msgid "period"
-msgstr "un point"
+msgid "period_1"
+msgstr ""
 
-msgid "exclamation mark"
-msgstr "un point d'exclamation"
+msgid "exclamation mark_1"
+msgstr ""
 
-msgid "dash"
-msgstr "un trait d'union"
+msgid "dash_1"
+msgstr ""
 
-msgid "star"
-msgstr "une étoile"
+msgid "star_1"
+msgstr ""
 
-msgid "single quotes"
-msgstr "une apostrophe"
+msgid "single quotes_1"
+msgstr ""
 
-msgid "double quotes"
-msgstr "guillemet"
+msgid "double quotes_1"
+msgstr ""
 
-msgid "slash"
-msgstr "une barre oblique"
+msgid "slash_1"
+msgstr ""
 
-msgid "string"
-msgstr "texte"
+msgid "string_1"
+msgstr ""
 
-msgid "nested blocks"
-msgstr "un bloc dans un bloc"
+msgid "nested blocks_1"
+msgstr ""
 
-msgid "or"
-msgstr "ou"
+msgid "or_1"
+msgstr ""
 
-msgid "number"
-msgstr "un nombre"
+msgid "number_1"
+msgstr ""
 
-msgid "integer"
-msgstr "un nombre"
+msgid "integer_1"
+msgstr ""
 
-msgid "float"
-msgstr "un nombre"
+msgid "float_1"
+msgstr ""
 
-msgid "list"
-msgstr "une liste"
+msgid "list_1"
+msgstr ""
 
-msgid "input"
-msgstr "saisie de {ask}"
+msgid "input_1"
+msgstr ""
+
+msgid "Invalid At Command_1"
+msgstr ""
+
+msgid "Wrong Level_2"
+msgstr ""
+
+msgid "Incomplete_2"
+msgstr ""
+
+msgid "Invalid_2"
+msgstr ""
+
+msgid "Invalid Space_2"
+msgstr ""
+
+msgid "Has Blanks_2"
+msgstr ""
+
+msgid "No Indentation_2"
+msgstr ""
+
+msgid "Unexpected Indentation_2"
+msgstr ""
+
+msgid "Parse_2"
+msgstr ""
+
+msgid "Unquoted Text_2"
+msgstr ""
+
+msgid "Unquoted Assignment_2"
+msgstr ""
+
+msgid "Unquoted Equality Check_2"
+msgstr ""
+
+msgid "Var Undefined_2"
+msgstr ""
+
+msgid "Access Before Assign_2"
+msgstr ""
+
+msgid "Cyclic Var Definition_2"
+msgstr ""
+
+msgid "Lonely Echo_2"
+msgstr ""
+
+msgid "Too Big_2"
+msgstr ""
+
+msgid "Invalid Argument Type_2"
+msgstr ""
+
+msgid "Invalid Argument_2"
+msgstr ""
+
+msgid "Invalid Type Combination_2"
+msgstr ""
+
+msgid "Unsupported Float_2"
+msgstr ""
+
+msgid "Locked Language Feature_2"
+msgstr ""
+
+msgid "Missing Command_2"
+msgstr ""
+
+msgid "Missing Inner Command_2"
+msgstr ""
+
+msgid "Incomplete Repeat_2"
+msgstr ""
+
+msgid "Unsupported String Value_2"
+msgstr ""
+
+msgid "Lonely Text_2"
+msgstr ""
+
+msgid "ask_needs_var_2"
+msgstr ""
+
+msgid "echo_out_2"
+msgstr ""
+
+msgid "space_2"
+msgstr ""
+
+msgid "comma_2"
+msgstr ""
+
+msgid "question mark_2"
+msgstr ""
+
+msgid "newline_2"
+msgstr ""
+
+msgid "period_2"
+msgstr ""
+
+msgid "exclamation mark_2"
+msgstr ""
+
+msgid "dash_2"
+msgstr ""
+
+msgid "star_2"
+msgstr ""
+
+msgid "single quotes_2"
+msgstr ""
+
+msgid "double quotes_2"
+msgstr ""
+
+msgid "slash_2"
+msgstr ""
+
+msgid "string_2"
+msgstr ""
+
+msgid "nested blocks_2"
+msgstr ""
+
+msgid "or_2"
+msgstr ""
+
+msgid "number_2"
+msgstr ""
+
+msgid "integer_2"
+msgstr ""
+
+msgid "float_2"
+msgstr ""
+
+msgid "list_2"
+msgstr ""
+
+msgid "input_2"
+msgstr ""
+
+msgid "Invalid At Command_2"
+msgstr ""
+
+msgid "Wrong Level_3"
+msgstr ""
+
+msgid "Incomplete_3"
+msgstr ""
+
+msgid "Invalid_3"
+msgstr ""
+
+msgid "Invalid Space_3"
+msgstr ""
+
+msgid "Has Blanks_3"
+msgstr ""
+
+msgid "No Indentation_3"
+msgstr ""
+
+msgid "Unexpected Indentation_3"
+msgstr ""
+
+msgid "Parse_3"
+msgstr ""
+
+msgid "Unquoted Text_3"
+msgstr ""
+
+msgid "Unquoted Assignment_3"
+msgstr ""
+
+msgid "Unquoted Equality Check_3"
+msgstr ""
+
+msgid "Var Undefined_3"
+msgstr ""
+
+msgid "Access Before Assign_3"
+msgstr ""
+
+msgid "Cyclic Var Definition_3"
+msgstr ""
+
+msgid "Lonely Echo_3"
+msgstr ""
+
+msgid "Too Big_3"
+msgstr ""
+
+msgid "Invalid Argument Type_3"
+msgstr ""
+
+msgid "Invalid Argument_3"
+msgstr ""
+
+msgid "Invalid Type Combination_3"
+msgstr ""
+
+msgid "Unsupported Float_3"
+msgstr ""
+
+msgid "Locked Language Feature_3"
+msgstr ""
+
+msgid "Missing Command_3"
+msgstr ""
+
+msgid "Missing Inner Command_3"
+msgstr ""
+
+msgid "Incomplete Repeat_3"
+msgstr ""
+
+msgid "Unsupported String Value_3"
+msgstr ""
+
+msgid "Lonely Text_3"
+msgstr ""
+
+msgid "ask_needs_var_3"
+msgstr ""
+
+msgid "echo_out_3"
+msgstr ""
+
+msgid "space_3"
+msgstr ""
+
+msgid "comma_3"
+msgstr ""
+
+msgid "question mark_3"
+msgstr ""
+
+msgid "newline_3"
+msgstr ""
+
+msgid "period_3"
+msgstr ""
+
+msgid "exclamation mark_3"
+msgstr ""
+
+msgid "dash_3"
+msgstr ""
+
+msgid "star_3"
+msgstr ""
+
+msgid "single quotes_3"
+msgstr ""
+
+msgid "double quotes_3"
+msgstr ""
+
+msgid "slash_3"
+msgstr ""
+
+msgid "string_3"
+msgstr ""
+
+msgid "nested blocks_3"
+msgstr ""
+
+msgid "or_3"
+msgstr ""
+
+msgid "number_3"
+msgstr ""
+
+msgid "integer_3"
+msgstr ""
+
+msgid "float_3"
+msgstr ""
+
+msgid "list_3"
+msgstr ""
+
+msgid "input_3"
+msgstr ""
+
+msgid "Invalid At Command_3"
+msgstr ""
 
 msgid "general"
 msgstr "Général"
@@ -318,33 +609,6 @@ msgstr "Logo de Succès"
 msgid "achievements_check_icon_alt"
 msgstr "Icône d'exploit validé"
 
-msgid "certificate"
-msgstr "Certificat de complétion"
-
-msgid "hedy_logo_alt"
-msgstr "Logo d'Hedy"
-
-msgid "fun_statistics_msg"
-msgstr "Voici quelques statistiques amusantes !"
-
-msgid "highest_level_reached"
-msgstr "Plus haut niveau atteint"
-
-msgid "highest_quiz_score"
-msgstr "Meilleur score au quiz"
-
-msgid "number_programs"
-msgstr "Nombre de programmes exécutés"
-
-msgid "longest_program"
-msgstr "Programme le plus long"
-
-msgid "number_achievements"
-msgstr "Nombres de succès"
-
-msgid "cheatsheet_title"
-msgstr "Aide-mémoire"
-
 msgid "back_to_class"
 msgstr "Retourner à la classe"
 
@@ -356,6 +620,12 @@ msgstr "Nom d'utilisateur"
 
 msgid "last_login"
 msgstr "Dernière connexion"
+
+msgid "highest_level_reached"
+msgstr "Plus haut niveau atteint"
+
+msgid "number_programs"
+msgstr "Nombre de programmes exécutés"
 
 msgid "programs"
 msgstr "Programmes"
@@ -444,9 +714,6 @@ msgstr "Rejoindre la classe"
 msgid "next_step_tutorial"
 msgstr "Prochaine étape >>>"
 
-msgid "level_title"
-msgstr "Niveau"
-
 msgid "create_multiple_accounts"
 msgstr "Créer plusieurs comptes"
 
@@ -455,9 +722,6 @@ msgstr "Sur cette page, vous pouvez créer des comptes pour plusieurs étudiants
 
 msgid "create_accounts_prompt"
 msgstr "Es-tu sur de vouloir créer ces comptes ?"
-
-msgid "class"
-msgstr "Classe"
 
 msgid "download_login_credentials"
 msgstr "Veux-tu télécharger les identifiants après la création des comptes ?"
@@ -575,6 +839,9 @@ msgstr "Choisissez les aventures"
 #, fuzzy
 msgid "select_a_level"
 msgstr "Select a level"
+
+msgid "level_title"
+msgstr "Niveau"
 
 #, fuzzy
 msgid "available_adventures_level"
@@ -732,105 +999,6 @@ msgstr "Dernier exploit gagné"
 msgid "ago"
 msgstr "{timestamp} ago"
 
-msgid "parsons_title"
-msgstr "Puzzle"
-
-msgid "quiz_tab"
-msgstr "Questionnaire"
-
-msgid "example_code_header"
-msgstr "Exemple de code Hedy"
-
-msgid "search"
-msgstr "Rechercher..."
-
-msgid "variables"
-msgstr "Variables"
-
-msgid "enter_text"
-msgstr "Saisissez votre réponse ici..."
-
-msgid "enter"
-msgstr "Entrer"
-
-#, fuzzy
-msgid "pygame_waiting_for_input"
-msgstr "Waiting for a button press..."
-
-msgid "already_program_running"
-msgstr "Il y a déjà un programme en cours, finissez d'abord celui-ci."
-
-msgid "run_code_button"
-msgstr "Exécuter le code"
-
-msgid "stop_code_button"
-msgstr "Arrêter le programme"
-
-msgid "next_exercise"
-msgstr "Exercice suivant"
-
-msgid "edit_code_button"
-msgstr "Modifier le code"
-
-msgid "repair_program_logo_alt"
-msgstr "Corriger l'icône du programmer"
-
-msgid "delete_confirm"
-msgstr "Êtes-vous sûr de vouloir supprimer le programme ?"
-
-msgid "delete"
-msgstr "Supprimer"
-
-msgid "read_code_label"
-msgstr "Lire à voix haute"
-
-msgid "regress_button"
-msgstr "Retourner au niveau {level}"
-
-#, fuzzy
-msgid "disabled_button_locked"
-msgstr "Your teacher hasn't unlocked this level yet"
-
-msgid "advance_button"
-msgstr "Aller au niveau {level}"
-
-#, fuzzy
-msgid "disabled_button_quiz"
-msgstr "Your quiz score is below the threshold, try again!"
-
-msgid "developers_mode"
-msgstr "Mode développeur"
-
-msgid "nav_start"
-msgstr "Page principale"
-
-msgid "nav_hedy"
-msgstr "Hedy"
-
-msgid "nav_explore"
-msgstr "Découvrir"
-
-msgid "for_teachers"
-msgstr "Pour les enseignants"
-
-msgid "teacher_manual"
-msgstr "Manuel de l'enseignant"
-
-msgid "program_header"
-msgstr "Mes programmes"
-
-msgid "my_achievements"
-msgstr "Mes exploits"
-
-msgid "my_account"
-msgstr "Mon compte"
-
-msgid "logout"
-msgstr "Se déconnecter"
-
-msgid "login"
-msgstr "Se connecter"
-
 msgid "welcome"
 msgstr "Bienvenue"
 
@@ -930,6 +1098,9 @@ msgstr "Enregistrer et partager le code"
 msgid "tutorial"
 msgstr "Didacticiel"
 
+msgid "cheatsheet_title"
+msgstr "Aide-mémoire"
+
 msgid "commands"
 msgstr "Commandes"
 
@@ -938,6 +1109,9 @@ msgstr "Anglais"
 
 msgid "login_long"
 msgstr "Connectez-vous à votre compte"
+
+msgid "login"
+msgstr "Se connecter"
 
 msgid "no_account"
 msgstr "Pas encore de compte ?"
@@ -963,6 +1137,9 @@ msgstr "S'abonner à la newsletter"
 msgid "nav_learn_more"
 msgstr "En savoir plus"
 
+msgid "teacher_manual"
+msgstr "Manuel de l'enseignant"
+
 msgid "privacy_terms"
 msgstr "termes de confidentialité"
 
@@ -981,12 +1158,6 @@ msgstr "Discord server"
 #, fuzzy
 msgid "translating_hedy"
 msgstr "Translating Hedy"
-
-msgid "exercise"
-msgstr "Exercice"
-
-msgid "what_should_my_code_do"
-msgstr "Que devrait faire mon code ?"
 
 msgid "teacher_account_request"
 msgstr "Vous avez une demande de compte enseignant en attente"
@@ -1066,6 +1237,9 @@ msgstr "Homme"
 msgid "other"
 msgstr "Autre"
 
+msgid "error_level"
+msgstr ""
+
 #, fuzzy
 msgid "agree_third_party"
 msgstr "I consent to being contacted by partners of Leiden University with sales opportunities (optional)"
@@ -1126,6 +1300,12 @@ msgstr "Ouvrir"
 msgid "copy_clipboard"
 msgstr "Copié avec succès dans le presse-papiers"
 
+msgid "delete_confirm"
+msgstr "Êtes-vous sûr de vouloir supprimer le programme ?"
+
+msgid "delete"
+msgstr "Supprimer"
+
 msgid "unshare_confirm"
 msgstr "Voulez-vous vraiment rendre le programme privé ?"
 
@@ -1162,51 +1342,11 @@ msgstr "Utilisateur distingué"
 msgid "contributor"
 msgstr "Contributeur"
 
+msgid "program_header"
+msgstr "Mes programmes"
+
 msgid "no_shared_programs"
 msgstr "n'a pas de programmes partagés..."
-
-msgid "quiz_logo_alt"
-msgstr "Logo du questionnaire"
-
-msgid "start_quiz"
-msgstr "Démarrer le questionnaire"
-
-msgid "go_to_first_question"
-msgstr "Aller à la question 1"
-
-msgid "question"
-msgstr "Question"
-
-msgid "hint"
-msgstr "Un indice ?"
-
-#, fuzzy
-msgid "submit_answer"
-msgstr "Answer question"
-
-msgid "feedback_success"
-msgstr "Bien !"
-
-msgid "feedback_failure"
-msgstr "Faux !"
-
-msgid "correct_answer"
-msgstr "La réponse correct est"
-
-msgid "go_to_question"
-msgstr "Aller à la question"
-
-msgid "go_to_quiz_result"
-msgstr "Aller au résultat du questionnaire"
-
-msgid "end_quiz"
-msgstr "Fin du questionnaire"
-
-msgid "score"
-msgstr "Score"
-
-msgid "get_certificate"
-msgstr "Obtenez votre certificat !"
 
 msgid "recover_password"
 msgstr "Demander une réinitialisation de mot de passe"
@@ -1294,6 +1434,157 @@ msgstr "Handed in at"
 #, fuzzy
 msgid "by"
 msgstr "by"
+
+msgid "parsons_title"
+msgstr "Puzzle"
+
+msgid "quiz_tab"
+msgstr "Questionnaire"
+
+msgid "example_code_header"
+msgstr "Exemple de code Hedy"
+
+msgid "search"
+msgstr "Rechercher..."
+
+msgid "variables"
+msgstr "Variables"
+
+msgid "enter_text"
+msgstr "Saisissez votre réponse ici..."
+
+msgid "enter"
+msgstr "Entrer"
+
+#, fuzzy
+msgid "pygame_waiting_for_input"
+msgstr "Waiting for a button press..."
+
+msgid "already_program_running"
+msgstr "Il y a déjà un programme en cours, finissez d'abord celui-ci."
+
+msgid "run_code_button"
+msgstr "Exécuter le code"
+
+msgid "stop_code_button"
+msgstr "Arrêter le programme"
+
+msgid "next_exercise"
+msgstr "Exercice suivant"
+
+msgid "edit_code_button"
+msgstr "Modifier le code"
+
+msgid "repair_program_logo_alt"
+msgstr "Corriger l'icône du programmer"
+
+msgid "read_code_label"
+msgstr "Lire à voix haute"
+
+msgid "regress_button"
+msgstr "Retourner au niveau {level}"
+
+#, fuzzy
+msgid "disabled_button_locked"
+msgstr "Your teacher hasn't unlocked this level yet"
+
+msgid "advance_button"
+msgstr "Aller au niveau {level}"
+
+#, fuzzy
+msgid "disabled_button_quiz"
+msgstr "Your quiz score is below the threshold, try again!"
+
+msgid "developers_mode"
+msgstr "Mode développeur"
+
+msgid "hedy_logo_alt"
+msgstr "Logo d'Hedy"
+
+msgid "nav_start"
+msgstr "Page principale"
+
+msgid "nav_hedy"
+msgstr "Hedy"
+
+msgid "nav_explore"
+msgstr "Découvrir"
+
+msgid "for_teachers"
+msgstr "Pour les enseignants"
+
+msgid "my_achievements"
+msgstr "Mes exploits"
+
+msgid "my_account"
+msgstr "Mon compte"
+
+msgid "logout"
+msgstr "Se déconnecter"
+
+msgid "exercise"
+msgstr "Exercice"
+
+msgid "what_should_my_code_do"
+msgstr "Que devrait faire mon code ?"
+
+msgid "quiz_logo_alt"
+msgstr "Logo du questionnaire"
+
+msgid "start_quiz"
+msgstr "Démarrer le questionnaire"
+
+msgid "go_to_first_question"
+msgstr "Aller à la question 1"
+
+msgid "question"
+msgstr "Question"
+
+msgid "hint"
+msgstr "Un indice ?"
+
+#, fuzzy
+msgid "submit_answer"
+msgstr "Answer question"
+
+msgid "feedback_success"
+msgstr "Bien !"
+
+msgid "feedback_failure"
+msgstr "Faux !"
+
+msgid "correct_answer"
+msgstr "La réponse correct est"
+
+msgid "go_to_question"
+msgstr "Aller à la question"
+
+msgid "go_to_quiz_result"
+msgstr "Aller au résultat du questionnaire"
+
+msgid "end_quiz"
+msgstr "Fin du questionnaire"
+
+msgid "score"
+msgstr "Score"
+
+msgid "get_certificate"
+msgstr "Obtenez votre certificat !"
+
+msgid "certificate"
+msgstr "Certificat de complétion"
+
+msgid "fun_statistics_msg"
+msgstr "Voici quelques statistiques amusantes !"
+
+msgid "highest_quiz_score"
+msgstr "Meilleur score au quiz"
+
+msgid "longest_program"
+msgstr "Programme le plus long"
+
+msgid "number_achievements"
+msgstr "Nombres de succès"
 
 #, fuzzy
 msgid "percentage_achieved"
@@ -1640,6 +1931,9 @@ msgstr "You didn't enter an adventure name!"
 msgid "exercise_doesnt_exist"
 msgstr "This exercise doesn't exist"
 
+msgid "error_level_invalid"
+msgstr ""
+
 msgid "profile_updated_reload"
 msgstr "Le profil a été mis a jour, la page sera rechargée."
 
@@ -1731,3 +2025,151 @@ msgstr "Hedy - Join class"
 
 #~ msgid "view"
 #~ msgstr "Voir"
+
+#~ msgid "Wrong Level"
+#~ msgstr "C'était un code Hedy correct, mais pas au bon niveau. Vous avez écrit {offending_keyword} pour le niveau {working_level}. Conseil : {tip}"
+
+#~ msgid "Incomplete"
+#~ msgstr "Oups ! Tu as oublié un morceau du code ! À la ligne {line_number}, tu dois ajouter du texte après {incomplete_command}."
+
+#~ msgid "Invalid"
+#~ msgstr "{invalid_command} n’est pas une commande du niveau {level} d’Hedy. Voulais-tu écrire {guessed_command} ?"
+
+#~ msgid "Invalid Space"
+#~ msgstr "Oups ! Tu as commencé une ligne par une espace à la ligne {line_number}. Les espaces en début de ligne rendent les ordinateurs perplexes, peux-tu le supprimer ?"
+
+#~ msgid "Has Blanks"
+#~ msgstr "Ton code est incomplet. Il contient des blancs que tu dois remplacer par du code."
+
+#~ msgid "No Indentation"
+#~ msgstr "Tu as utilisé trop peu d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui n’est pas assez. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+
+#~ msgid "Unexpected Indentation"
+#~ msgstr "Tu as utilisé trop d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui est trop. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+
+#~ msgid "Parse"
+#~ msgstr "Le code que vous avez entré n'est pas un code Hedy valide. Il y a une erreur sur la ligne {location[0]}, à la position {location[1]}. Vous avez tapé {character_found}, mais ce n'est pas permis."
+
+#~ msgid "Unquoted Text"
+#~ msgstr "Attention : si tu affiche ou demande quelque chose, le texte doit commencer et se terminer par des guillemets. Il en manque quelque part."
+
+#~ msgid "Unquoted Assignment"
+#~ msgstr "À partir de ce niveau, le texte à droite de `is` doit être mis entre guillemets. Tu as oublié cela pour le texte {text}."
+
+#~ msgid "Unquoted Equality Check"
+#~ msgstr "Lorsque tu veux vérifier si une variable correspond à plusieurs mots, ces mots doivent être mis entre guillemets !"
+
+#~ msgid "Var Undefined"
+#~ msgstr "Tu as essayé d’utiliser la variable {name}, mais tu ne l’as pas définie. Ou bien tu essayais d’utiliser le mot {name}, mais tu as oublié les guillemets."
+
+#~ msgid "Access Before Assign"
+#~ msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+
+#~ msgid "Cyclic Var Definition"
+#~ msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+
+#~ msgid "Lonely Echo"
+#~ msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d’abord utiliser `ask` pour demander, puis `echo`."
+
+#~ msgid "Too Big"
+#~ msgstr "Waouh ! Ton programme a un nombre impressionnant de lignes de code : {lines_of_code} lignes ! Mais Hedy ne peut traiter que {max_lines} lignes à ce niveau. Rends ton programme plus court et ressaie."
+
+#~ msgid "Invalid Argument Type"
+#~ msgstr "Tu ne peux pas utiliser {command} avec {invalid_argument} car c’est {invalid_type}. Essaie de modifier {invalid_argument} en {allowed_types}."
+
+#~ msgid "Invalid Argument"
+#~ msgstr "Tu ne peux pas utiliser la commande {command} avec {invalid_argument}. Essaye de remplacer {invalid_argument} par {allowed_types}."
+
+#~ msgid "Invalid Type Combination"
+#~ msgstr "Tu ne peux pas utiliser {invalid_argument} et {invalid_argument_2} avec {command} car l'un est {invalid_type} et l'autre est {invalid_type_2}. Essaye de changer {invalid_argument} en {invalid_type_2} ou {invalid_argument_2} en {invalid_type}."
+
+#~ msgid "Unsupported Float"
+#~ msgstr "Les nombres non-entiers ne sont pas encore disponible, mais ils le seront dans quelques niveaux. Pour l'instant, change {value} en un entier."
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Tu utilises {concept} ! C'est génial mais {concept} n'est pas encore débloqué ! Ça sera débloqué dans les niveaux suivants."
+
+#~ msgid "Missing Command"
+#~ msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
+
+#~ msgid "Missing Inner Command"
+#~ msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration {command} que tu as utilisé à la ligne {line_number}."
+
+#~ msgid "Incomplete Repeat"
+#~ msgstr "Il semble que tu as oublié d'utiliser {command} avec la commande repeat qui est à la ligne {line_number}."
+
+#~ msgid "Unsupported String Value"
+#~ msgstr "Les valeurs textes ne peuvent pas contenir {invalid_value}."
+
+#~ msgid "Lonely Text"
+#~ msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
+
+#~ msgid "ask_needs_var"
+#~ msgstr "À partir du niveau 2, {ask} doit être utilisé avec une variable. Exemple : nom {is} {ask} Quel est ton nom ?"
+
+#~ msgid "echo_out"
+#~ msgstr "À partir du niveau 2 echo n'est plus nécessaire. Tu peux répéter un réponse avec ask et print maintenant. Exemple : nom is ask Quel est ton nom ? print hello nom"
+
+#~ msgid "space"
+#~ msgstr "un espace"
+
+#~ msgid "comma"
+#~ msgstr "une virgule"
+
+#~ msgid "question mark"
+#~ msgstr "un point d'interrogation"
+
+#~ msgid "newline"
+#~ msgstr "une nouvelle ligne"
+
+#~ msgid "period"
+#~ msgstr "un point"
+
+#~ msgid "exclamation mark"
+#~ msgstr "un point d'exclamation"
+
+#~ msgid "dash"
+#~ msgstr "un trait d'union"
+
+#~ msgid "star"
+#~ msgstr "une étoile"
+
+#~ msgid "single quotes"
+#~ msgstr "une apostrophe"
+
+#~ msgid "double quotes"
+#~ msgstr "guillemet"
+
+#~ msgid "slash"
+#~ msgstr "une barre oblique"
+
+#~ msgid "string"
+#~ msgstr "texte"
+
+#~ msgid "nested blocks"
+#~ msgstr "un bloc dans un bloc"
+
+#~ msgid "or"
+#~ msgstr "ou"
+
+#~ msgid "number"
+#~ msgstr "un nombre"
+
+#~ msgid "integer"
+#~ msgstr "un nombre"
+
+#~ msgid "float"
+#~ msgstr "un nombre"
+
+#~ msgid "list"
+#~ msgstr "une liste"
+
+#~ msgid "input"
+#~ msgstr "saisie de {ask}"
+
+#~ msgid "class"
+#~ msgstr "Classe"
+
+#~ msgid "_"
+#~ msgstr ""
+
