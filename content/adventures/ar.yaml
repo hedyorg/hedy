@@ -116,6 +116,7 @@ adventures:
                 #             اذا لوني_المفضل في الالوان_الجميلة قول 'هذا جميل!' وإلا قول 'يا خسارة!!'
                 example_code: "\n```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \n```\n"
                 story_text_2: "## المغامرات تزداد صعوبة مع الانتقال بين علامات التبويب\nالمغامرات تزداد صعوبة في علامات التبويب المتتالية.\nلذلك من الأفضل البدأ من اليمين مع القصة ومن ثم الانتقال الى اليسار واحدة تلو الأخرى حتى تتجاوز المزيد والمزيد من التحديات.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "اسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\""
                 story_text: "## اذا .. وإلا\nفي المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين أمرين مختلفين بناء على نتيجة ذلك الفحص.\nهذا الكود يطبع واو هذا رائع! اذا ادخلت هيدي كإجابة على سؤال الاسم، بينما يطبع اه.. حسنا اذا أدخلت أي شيء اخر.\n`{ask}` و `{print}` لا يزالان يعملان كما في المستوى الرابع.\n"
@@ -654,7 +655,6 @@ adventures:
                 start_code: '# place your code here'
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
                 start_code: '# place your code here'
             8:
