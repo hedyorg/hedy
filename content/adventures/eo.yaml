@@ -329,7 +329,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprezo = 10\nmanĝaĵo = {ask} 'Kion vi volas manĝi?'\ntrinkaĵo = {ask} 'Kion vi volas trinki?'\n{if} manĝaĵo {is} 'sandviĉo' {and} trinkaĵo {is} 'suko'\n    {print} 'Jen nia rabatmenuaĵo'\n    prezo = prezo - 3\n{print} 'La totalo estas ' prezo ' spesmiloj'\n```\n"
-                example_code_2: "```\ntrinkaĵo = {ask} 'Kion vi volas trinki?'\n{if} trinkaĵo {is} 'akvo' {or} trinkaĵo {is} 'suko'\n    {print} 'Jen sana elekto'\n```\n"
                 start_code: '# via kodo ĉi tie'
             15:
                 story_text: "## Restoracio\nPer la `{while}` vi povas certigi, ke viaj klientoj povas mendadi ĝis ili finiĝos.\n"
@@ -447,6 +446,7 @@ adventures:
                 story_text: "## 'Citiloj'\nEn Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
                 example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
                 story_text_2: "## Aventuroj fariĝas pli kaj pli malfacilaj\nLa aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
                 story_text: "## Se... alie....\nEn Nivelo 5 estas io nova, la `{if}`! Per la `{if}`, oni povas elekti inter du malsamaj opcioj.\nLa jena kodo presos «bone», se vi tajpos «Hedy» kiel nomon, kaj «ba!», se vi tajpos ion alian.\n`{ask}` kaj `{print}` daŭre funkcias kiel en Nivelo 4.\n"
