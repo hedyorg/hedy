@@ -97,6 +97,7 @@ def remember_current_user(db_user):
     session["user"] = pick(db_user, "username", "email", "is_teacher")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
+    session["error_level"] = db_user.get("error_level", "2")
 
 
 def pick(d, *requested_keys):
@@ -133,6 +134,7 @@ def forget_current_user():
     session.pop("achieved", None)  # Delete session achievements if existing
     session.pop("keyword_lang", None)  # Delete session keyword language if existing
     session.pop("profile_image", None)  # Delete profile image id if existing
+    session.pop("error_level", None)
 
 
 def is_admin(user):
