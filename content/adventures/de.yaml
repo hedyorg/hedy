@@ -51,6 +51,7 @@ adventures:
                     Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\n{print} 'Ab jetzt musst du Anführungszeichen verwenden!'\nAntwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'\n{print} 'Wir müssen ' Antwort ' verwenden.'\n```\n"
                 story_text_2: "## Abenteuer werden immer schwieriger\nDie Abenteuer werden jetzt immer schwieriger in den nächsten Tabs.\nDeswegen ist es am Besten wenn du dich von links nach rechts vorarbeitest, um immer mehr herausgefordert zu werden.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     name {is} {ask} 'Wie heisst du?'
@@ -1830,12 +1831,6 @@ adventures:
                         {print} 'Thats our discount menu'
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
-                    ```
-                example_code_2: |
-                    ```
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
-                        {print} 'Thats a healthy choice'
                     ```
                 start_code: "# setze hier deinen Code hin"
     fortune:
