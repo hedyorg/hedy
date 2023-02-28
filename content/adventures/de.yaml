@@ -43,15 +43,12 @@ adventures:
                 story_text: |
                     ## 'Anführungszeichen'
                     In Level 4 haben sich `{print}` und `{ask}` geändert.
-
                     Du musst Text, den du genau so mit ausgeben möchtest, in Anführungszeichen setzen.
-
                     Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
-
                     Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\n{print} 'Ab jetzt musst du Anführungszeichen verwenden!'\nAntwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'\n{print} 'Wir müssen ' Antwort ' verwenden.'\n```\n"
-                story_text_2: "## Abenteuer werden immer schwieriger\nDie Abenteuer werden jetzt immer schwieriger in den nächsten Tabs.\nDeswegen ist es am Besten wenn du dich von links nach rechts vorarbeitest, um immer mehr herausgefordert zu werden.\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text_2: "## Kontraktionen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du Apostrophe für Kontraktionen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is.\nSchau dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu sehen.\n"
+                example_code_2: "```\n_ Das ist die falsche Verwendung von Apostrophen _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     name {is} {ask} 'Wie heisst du?'
@@ -235,7 +232,7 @@ adventures:
                 story_text: |-
                     ## Das letzte Level!
                     Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen {print} und {range} benutzen müssen.
-                    Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen. 
+                    Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen.
 
                 story_text_2: |-
                     Wenn du mehr als ein Objekt ausgeben möchtest, musst du sie mit einem Komma trennen.
@@ -400,17 +397,20 @@ adventures:
                 story_text: |
                     ## Geschichte
                     In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschichte noch spannender werden lässt.
+                    Im Beispielcode kannst du sehen, wie man zwei verschiedene Enden machen kann.
 
-                    ### Übung
-                    Denke Dir einfach eine Geschichte mit zwei möglichen Enden aus, zum Beispiel:
+                    ### Übung 1
+                    Schreibe eine neue Kurzgeschichte von mindestens sechs Codezeilen über ein Thema deiner Wahl.
+                    Keine Inspiration? Wähle eines der folgenden Themen: ein Superheld, ein langweiliger Schultag, gestrandet auf einer einsamen Insel.
 
-                    - Die Prinzessin läuft durch den Wald.
-                    - Sie begegnet einem Monster.
+                    Gib der Spielerin nun die Möglichkeit, ein gutes oder schlechtes Ende zu wählen, genau wie im Beispielcode.
+                    Programmiere beide Enden.
 
-                    - Schönes Ende: Sie zieht ihr Schwert und das Monster ergreift die Flucht.
-                    - Nicht so schönes Ende: Das Monster frisst die Prinzessin.
+                    ### Übung 2
 
-                    Du kannst auch wieder sicherstellen, dass ein Name eingegeben werden kann. Das funktioniert genau wie in den vorherigen Levels. Wenn Du das mit einem `{if}` kombinierst, dann hast Du bereits ein richtiges Programm!
+                    Kopiere die Geschichte, die du in deinem eigenen Abenteuer in den vorherigen Levels erstellt hast.
+                    Finde einen Weg, um mindestens zwei `{if}` und `{else}` Befehle in deine Geschichte einzubauen.
+                    Dies kann mit einem guten oder schlechten Ende geschehen, aber du kannst auch andere Möglichkeiten finden, die Befehle einzubauen.
 
                 example_code: |
                     ```
@@ -428,9 +428,16 @@ adventures:
                     Vielleicht ist dir aufgefallen, dass es in den vorigen Leveln noch ein Problem gab. Hast du versucht, einen Satz mit dem Wort Name zu schreiben? Z.B. `{print}` mein Name ist Name.
                     In diesem Level kannst du das lösen. Du musst alles, was du ausgeben möchtest, in einfache Anführungszeichen setzen.
 
+                    ### Übung
+                    Kopiere den Beispielcode und füge die Anführungszeichen in die Zeilen ein.
+
+                    ### Übung 2
+                    Gehe zurück zum vorherigen Level und kopiere deinen Storycode. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen einfügst.
+                    Beachte: Die Variablen in deiner eigenen Geschichte sollten außerhalb der Anführungszeichen stehen. So wie in der zweiten Zeile des Beispielcodes. In dieser Zeile wird der Variablenname außerhalb der Anführungszeichen gesetzt.
+
                 example_code: |
                     ```
-                    Name {is} Hans
+                    Name {is} {ask} _ Was ist dein Name? _
                     {print}  _ Der Name der Hauptfigur lautet _ Name
                     {print} Name  _ läuft nun in den Wald hinein _
                     {print} Name _ fürchtet sich ein wenig _
