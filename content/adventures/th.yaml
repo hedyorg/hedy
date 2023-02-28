@@ -210,6 +210,7 @@ adventures:
                 story_text: "## 'โควทข้อความ'\nในเลเวล 4 นี้ `{ask}` กับ `{print}` ถูกปรับนิดหน่อย\n\nในการจะพิมพ์ข้อความต่างๆนั้น ข้อความต้องอยู่ในโควท หรือก็คือระหว่างเครื่องหมาย ' '\n\nการทำแบบนี้จะทำให้เราพิมพ์อะไรก็ได้ และไม่ต้องกลัวว่ามันจะไปซ้ำกับชื่อตัวแปร ที่กำหนดไว้ด้วย `{is}`\n\nภาษาทั่วๆไปก็ใช้เครื่องหมาย ' ' ในการพิมพ์ข้อความต่างๆ นั่นคือเราเข้าใกล้การโค้ดดิ้งจริงๆขึ้นอีกขั้นนึงแล้ว!\n"
                 example_code: "```\n{print} 'ต้องใส่โควทตลอดนะ!'\nคำตอบ {is} {ask} 'ต้องใส่ข้อความในอะไร?'\n{print} 'ต้องใส่ข้อความไว้ใน ' คำตอบ\n```\n"
                 story_text_2: "## ด่านต่างๆจะเริ่มยากขึ้นแล้ว\nตอนนี้ด่านต่างๆจะเริ่มยากขึ้นแล้ว โดยที่ด่านในแถบฝั่งซ้ายจะง่ายกว่า ไล่ไปจนถึงด่านขวาสุดที่จะยากที่สุด\nเพราะฉะนั้นค่อยๆเริ่มทำจากซ้ายไปขวาน่าจะดีที่สุด\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "ชื่อ {is} {ask} 'เธอชื่ออะไร?'\n{if} ชื่อ {is} เฮดี้ {print} 'ว้าว!' {else} {print} 'แย่จัง'"
                 story_text: "## ถ้า ... แล้ว ...\nตอนนี้เราสามารถใช้คำสั่งใหม่ นั่นก็คือ `{if}`! เราใช้ `{if}` ในการตัดสินใจเลือกระหว่าง 2 ตัวเลือก\nโค้ดอันนี้จะบอกว่า ว้าว! ถ้าคุณบอกว่าชื่อของคุณคือ เฮดี้ แต่ไม่งั้นมันจะบอกว่า แย่จัง\n`{ask}` กับ `{print}` ยังใช้งานได้เหมือนเดิมกับในเลเวล 4\n"
@@ -505,7 +506,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
