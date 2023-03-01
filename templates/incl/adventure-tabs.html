@@ -1,7 +1,13 @@
       {# TABS #}
       <div id="adventures">
         {% macro adventure_tab(tabname, title, selected, id, tab_class) %}
-            <div class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}" id="{{ id }}" tabindex="0" data-tab="{{ tabname }}">
+            <div
+                class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
+                id="{{ id }}"
+                tabindex="0"
+                data-tab="{{ tabname }}"
+                data-bind="click: currentTab.bind($data, '{{tabname}}')"
+                >
                 {{title}}
             </div>
         {% endmacro %}
@@ -24,7 +30,11 @@
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         {% for adventure in adventures %}
-            <div data-tabtarget="{{adventure.short_name}}" {% if adventure.short_name != initial_tab %}class="hidden"{% endif %}>
+            <div
+                data-tabtarget="{{adventure.short_name}}"
+                {% if adventure.short_name != initial_tab %}class="hidden"{% endif %}
+                data-bind="visible: currentTab() == '{{adventure.short_name}}'"
+                >
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
                     <div class="max-w-prose">

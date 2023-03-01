@@ -7,7 +7,7 @@ import { hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './br
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
-import { Adventure, Program } from './types';
+import { Adventure } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
@@ -132,9 +132,17 @@ export interface InitializeCodePageOptions {
   readonly page: 'code';
   readonly level: number;
   readonly lang: string;
-  readonly adventures?: Adventure[];
-  readonly loaded_program?: Program;
+  readonly adventures: Adventure[];
   readonly start_tutorial?: boolean;
+  readonly initial_tab: string;
+}
+
+/**
+ * The ViewModel we bind to the page using KnockoutJS.
+ */
+interface CodePageViewModel {
+  readonly adventures: Adventure[];
+  readonly currentTab: KnockoutObservable<string>;
 }
 
 /**
@@ -147,6 +155,12 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
   theLevel = options.level;
   theLanguage = options.lang;
+
+  const codePageVm: CodePageViewModel = {
+    adventures: options.adventures,
+    currentTab: ko.observable(options.initial_tab),
+  };
+  ko.applyBindings(codePageVm);
 
   // Set the loaded program (directly requested by link with id) into the dictionary of adventures.
   // We will automatically switch to the tab of the loaded program and load it in response to the tab

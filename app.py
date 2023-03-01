@@ -830,8 +830,6 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
-
     # We request our own page -> also get the public_profile settings
     public_profile = None
     if not from_user:
@@ -876,7 +874,6 @@ def programs_page(user):
         page_title=gettext('title_programs'),
         current_page='programs',
         from_user=from_user,
-        adventure_names=adventures_names,
         public_profile=public_profile,
         max_level=hedy.HEDY_MAX_LEVEL)
 
@@ -932,9 +929,7 @@ def tutorial_index():
     commands = hedy.commands_per_level.get(level)
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
-
-    adventures_names = {a['short_name']: a['name'] for a in adventures}
+    initial_tab = adventures[0].short_name
 
     return render_template(
         "code-page.html",
@@ -943,13 +938,12 @@ def tutorial_index():
         level_nr=str(level),
         level=str(level),
         adventures=adventures,
-        adventures_names=adventures_names,
+        initial_tab=initial_tab,
         commands=commands,
         quiz=True,
         parsons=True if parsons else False,
         parsons_exercises=parsons,
         cheatsheet=cheatsheet,
-        adventures_per_level=adventures_per_level,
         blur_button_available=False,
         # See initialize.ts
         javascript_page_options=dict(
@@ -957,6 +951,7 @@ def tutorial_index():
             level=level,
             lang=g.lang,
             adventures=adventures,
+            initial_tab=initial_tab,
             start_tutorial=True,
         ))
 
@@ -1096,9 +1091,6 @@ def index(level, program_id):
             ))
 
     adventures_map = {a.short_name: a for a in adventures}
-    adventures_names = {a.short_name: a.name for a in adventures}
-
-    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
 
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
@@ -1146,11 +1138,9 @@ def index(level, program_id):
         parsons=parsons,
         parsons_exercises=parson_exercises,
         tutorial=tutorial,
-        adventures_names=adventures_names,
         latest=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
-        adventures_per_level=adventures_per_level,
         cheatsheet=cheatsheet,
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
@@ -1160,7 +1150,7 @@ def index(level, program_id):
             level=level_number,
             lang=g.lang,
             adventures=adventures,
-            loaded_program=loaded_program,
+            initial_tab=initial_tab,
         ))
 
 
@@ -1234,6 +1224,7 @@ def get_specific_adventure(name, level, mode):
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
     raw = mode == 'raw'
+    initial_tab = name
 
     return render_template("code-page.html",
                            specific_adventure=True,
@@ -1247,6 +1238,7 @@ def get_specific_adventure(name, level, mode):
                            enforce_developers_mode=None,
                            teacher_adventures=[],
                            adventures=adventures,
+                           initial_tab=initial_tab,
                            latest=version(),
                            raw=raw,
                            blur_button_available=False,
@@ -1256,6 +1248,7 @@ def get_specific_adventure(name, level, mode):
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
+                               initial_tab=initial_tab,
                            ))
 
 
