@@ -444,7 +444,7 @@ adventures:
                 example_code_2: "```\n{print} 你选择什么？\n{ask} 从_中选择\n{echo} 所以你的选择是：\n```\n"
             9:
                 example_code: "```\n选项 {is} 石头，剪刀，布\n你选择 {is} {ask} '你选择什么？'\n{print} '你选择了' 你选择\n计算机选择 {is} 选项 {at} {random}\n{print} '计算机选择了' 计算机选择\n{if} 计算机选择 {is} 你选择\n    {print} '平手'\n{if} 计算机选择 {is} 石头\n    {if} 你选择 {is} 布\n        {print} '你赢了！'\n    {if} 你选择 {is} 剪刀\n        {print} '你输了！'\n# 完成这段代码\n```\n"
-                story_text: "## 石头剪刀布\n在这一级，你可以用嵌套的{if}命令来编程石头剪刀布。你能完成这段代码吗？\n\n ### 练习\n你能完成代码吗？程序必须能判断赢家以及对应的组合是什么。\n\n **（另外）** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。\n"
+                story_text: "## 石头剪刀布\n在这一级，你可以用嵌套的`{if}`命令来编程石头剪刀布。你能完成这段代码吗？\n\n ### 练习\n你能完成代码吗？程序必须能判断赢家以及对应的组合是什么。\n\n **（另外）** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。\n"
                 start_code: '# 在这里写你的代码'
             10:
                 story_text: "## 石头、纸、剪子\n你觉得自己太懒了，不想自己玩游戏？让海迪帮你玩吧!\n你只需要填上玩家的名字，他们就会得到一个随机的选择。\n\n### 练习1\n完成程序，填上名字的清单。\n\n### 练习2\n增加一个电脑玩家，与每个玩家一起选择。\n\n**(另外)**回到你的代码中，决定每一轮谁赢：计算机或被点名的人。\n"
@@ -463,7 +463,7 @@ adventures:
                 story_text_2: "### 练习\n点击黄色按钮，将示例代码复制到你的输入屏幕。\n在空白处填入正确的命令，完成代码。\n"
             15:
                 story_text: "## 石头剪刀布\n玩到你打败电脑为止！但首先，你要补全示例代码……\n"
-                example_code: "```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} '你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n```\n"
+                example_code: "```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} '你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n_\n```\n"
                 start_code: '# 在这里写你的代码'
             13:
                 story_text: "## 石头剪刀布\n你可以用`{and}`命令缩短你的石头剪刀布代码！阅读下面的示例代码，并尝试完成它。\n"
@@ -555,8 +555,7 @@ adventures:
                     ## 随机餐厅
                     在选择晚饭吃什么时选择困难了吗？你可以让海迪帮你选！
                     只要将你最喜欢（或者最不喜欢）的食物加入列表，海迪就可以随机帮你选择晚饭。
-                    你也可以让海迪帮你选择晚饭的价格，来获得更多乐趣！
-                    你会得到什么？
+                    你也可以让海迪帮你选择晚饭的价格，来获得更多乐趣！你会得到什么？
 
                 example_code: |
                     ```
@@ -594,6 +593,7 @@ adventures:
                 example_code: |
                     ## 海迪餐厅示例
                     ```
+                    _在这段代码中添加引号_
                     {print} '欢迎来到海迪餐厅！'
                     {print} '今天我们提供披萨和千层面。'
                     食物 {is} {ask} '您想吃什么？'
@@ -610,7 +610,7 @@ adventures:
                     ## 餐厅
                     在这一级，你可以用`{if}`命令向顾客`{ask}`，并对其回答做出不同的回应。
 
-                    在下面的例子里，你能看到你可以`{ask}`顾客`{if}`想让你介绍今天的特价菜，Hedy会根据回答做出相应的回应。
+                    在下面的例子里，你能看到你可以`{ask}`顾客`{if}`想让你介绍今天的特价菜，海迪会根据回答做出相应的回应。
 
                 example_code: |
                     ```
@@ -1337,7 +1337,7 @@ adventures:
                 example_code: "```\nmoney = {ask} 'How much money have you saved?'\nwish = {ask} 'How much money do you need?'\nallowance = {ask} 'How much pocket money do you get each week?'\nto_save = wish - money\nweeks = to_save / allowance\n{if} wish > money\n    {print} 'You need to save up some more!'\n    {print} 'Youll need ' weeks ' more weeks.'\n{else}\n    {print} 'Great! You have enough'\n    {print} 'Lets go shopping!'\n```\n"
                 start_code: '# 在这里写下你的代码'
             12:
-                story_text: "## 小猪银行\n在这次冒险中，你将学习如何制作一个电子版本的小猪银行。\n完成代码来计算出你有多少钱，以及你需要存多久的钱才能买到你想要的东西！\n"
+                story_text: "## 小猪银行\n在这个冒险活动中，你将学习如何制作一个电子版本的小猪银行。\n完成代码来计算出你有多少钱，以及你需要存多久的钱才能买到你想要的东西！\n"
                 example_code: "```\n{print} '数字存钱罐'\n愿望 = {ask} '你想买什么？'\n价格 = {ask} '这要花多少钱？'\n存款 = {ask} '你已经存了多少钱？'\n零花钱 = {ask} '你每周有多少零花钱？'\n需要_再存 = 价格 - 存款\n周数 = 需要_再存/ 零花钱\n{print} '你可以在'周数'周内买一个'愿望'。'\n```\n"
                 start_code: '# 将你的代码写在这里'
     quizmaster:
@@ -1409,7 +1409,7 @@ adventures:
                 story_text: "## 骰子\n在第5级，你又可以做一个骰子。通过运用`{repeat}`命令，你可以轻松投出一大把骰子。\n\n### 练习\n试着补全示例代码！\n**(另外)**想一想你所知道的有关骰子的游戏，并使用`{repeat}`进行编程。\n"
                 start_code: "{print} '骰子这次会投出什么？'"
             10:
-                story_text: "## 骰子\n大家投骰子是不是要花太长时间？在这一级，你可以让海迪一次投出所有骰子！\n###练习\n把名字改成你的朋友们或者家人的名字，然后完成代码，让他们分组各自掷出。\n"
+                story_text: "## 骰子\n大家投骰子是不是要花太长时间？在这一级，你可以让海迪一次投出所有骰子！\n\n###练习\n把名字改成你的朋友们或者家人的名字，然后完成代码，让他们分组各自掷出。\n"
                 example_code: "```\n玩家们 = 安, 约翰, 杰西\n选项 = 1, 2, 3, 4, 5, 6\n_ _ _ _\n    {print} 玩家 '投出了' 选项 {at} {random}\n    {sleep}\n```\n"
                 start_code: '# 在这里写你的代码'
             6:
@@ -1510,7 +1510,7 @@ adventures:
             9:
                 start_code: '# 把你的代码放在这里'
                 story_text: "## 触摸式游戏\n现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
-                example_code: "```\n积分 = 1\n字母 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母键' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母键' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
             10:
                 story_text: "在这一关中，你可以让乌龟给你画一个图。乌龟已经跃跃欲试了。\n按下键盘上的x或y键，给乌龟一个开始的信号。\n你能让乌龟给你画出另一个图形吗？\n"
                 example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
@@ -1518,7 +1518,7 @@ adventures:
             5:
                 story_text: "## 按下它!\n在介绍中，我们还告诉你新的关键词`{pressed}`! \n使用`{pressed}` ，可以使编码的互动性更强，你可以对执行的内容进行实时控制！\n在下一个的级别中，你将了解到`{pressed}` 是如何实现这一目标的，以及`{pressed}` 有哪些用途。\n除了打印文本之外，还有很多其他的用途。`{pressed}`\n例如，你还可以将海龟命令与按键联系起来！你可以尝试一下。试试吧!\n"
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text_2: "##用if, Else  和Pressed指定一个按键\n你也可以将一个`{else}` 语句指定给`{pressed}` 。只要你按下一个你指定的按键以外的按键，`{else}` 语句就会被执行。\n"
+                story_text_2: "## 用if, Else  和Pressed指定一个按键\n你也可以将一个`{else}` 语句指定给`{pressed}` 。只要你按下一个你指定的按键以外的按键，`{else}` 语句就会被执行。\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
                 start_code: '# 把你的代码放在这里'
             6:
