@@ -776,7 +776,7 @@ levels:
                     ```
                 feedback: "Hedy wird wortwörtlich 'preise {at} {random}'' ausgeben"
             correct_answer: "A"
-            hint: "Denk scharf nach: was ist eine Variable und sollte außerhalb von Anführungszeichen stehen? Und was sind normale Wörter, die innerhalb stehen sollten?."
+            hint: "Denk scharf nach: was ist eine Variable und sollte außerhalb von Anführungszeichen stehen? Und was sind normale Wörter, die innerhalb stehen sollten?"
             question_score: '10'
         7:
             question_text: "Was stimmt mit diesem Code nicht?"
@@ -924,49 +924,49 @@ levels:
             -   option: "SECRET"
                 feedback: "Das ist nicht die richtige Antwort"
             -   option: "Falsch!"
-                feedback: "No, this is not what Hedy will print"
+                feedback: "Nein, dies ist nicht, was Hedy ausgeben wird"
             -   option: "ALARM! INTRUDER!"
-                feedback: "Great job!"
+                feedback: "Großartig gemacht!"
             correct_answer: "D"
-            hint: "Your computer will sound the alarm for intruders!"
+            hint: "Dein Computer wird bei Eindringlingen Alarm schlagen!"
             question_score: '10'
         5:
-            question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
+            question_text: "Warum wird Hedy 'ALARM! EINDINGLING' ausgeben, wenn du 'geheimnis' eintippst?"
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                passwort {is} {ask} 'Was ist das Passwort?'
+                {if} passwort {is} GEHEIMNIS {print} 'Richtig!'
+                {else} {print} 'ALARM! EINDRINGLING!'
             mp_choice_options:
-            -   option: "Because it needs to be in capitals, so SECRET"
-                feedback: "Indeed!"
-            -   option: "Because the password is alarm"
-                feedback: "No, this is not the password."
-            -   option: "Because it's spelled wrong."
-                feedback: "That's not how you spell secret"
-            -   option: "Because Hedy makes a mistake"
+            -   option: "Weil es in Großbuchstaben sein muss, also GEHEIMNIS"
+                feedback: "In der Tat!"
+            -   option: "Weil das Passwort Alarm ist"
+                feedback: "Nein, dies ist nicht das Passwort."
+            -   option: "Weil es falsch geschrieben ist."
+                feedback: "Das ist nicht wie man geheimnis schreibt"
+            -   option: "Weil Hedy Fehler macht"
                 feedback: "No, Hedy is right"
             correct_answer: "A"
-            hint: "The spelling of the word has to be exactly the same."
+            hint: "Die Rechtschreibung des Wortes muss genau gleich sein."
             question_score: '10'
         6:
-            question_text: "Which word should be on the place of the question mark in the last line?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens in der letzten Zeile stehen?"
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print} 'Ich bin Hedy die Fußballwahrsagerin!'
+                {print} 'Ich werde vorhersagen, welchen Platz dein Team am Ende belegen wird!'
+                club is {ask} 'Welcher Club ist dein Favorit?'
+                {if} club {is} ajax {print} 'Ajax wird natürlich gewinnen!'
+                _?_ {print} 'Sorry, dein Club wird auf dem letzten Platz landen...'
             mp_choice_options:
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is already in the line above"
+                feedback: "`{if}` ist bereits in der obigen Zeile"
             -   option: |
                     ```
                     {at} {random}
                     ```
-                feedback: "No, you need `{else}`."
+                feedback: "Nein, du brauchst `{else}`."
             -   option: |
                     ```
                     {else}
@@ -976,73 +976,73 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "`{print}` is already there, we need a word before it!"
+                feedback: "`{print}` ist bereits dort, wir brauchen ein Wort davor!"
             correct_answer: "C"
-            hint: "`{if}` goes together with...?"
+            hint: "`{if}` geht zusammen mit...?"
             question_score: '10'
         7:
-            question_text: "Which word should be in the place of the question mark?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens stehen?"
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} 'Ich kann vorhersagen, ob du ein Millionär sein wirst oder nicht!'
+                name {is} {ask} 'Was ist dein Name?'
+                {if} name {is} Hedy {print} 'Du wirst ein Millionär sein!'
+                {else} _?_ 'Unglücklicherweise... Kein großes Geld für dich.'
             mp_choice_options:
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is in the line above."
+                feedback: "`{if}` ist in der Zeile darüber."
             -   option: |
                     ```
                     {at} {random}
                     ```
-                feedback: "No, you don't need `{at} {random}`."
+                feedback: "Nein, du brauchst kein `{at} {random}`."
             -   option: |
                     ```
                     {else}
                     ```
-                feedback: "There already is an `{else}` command"
+                feedback: "Dort ist bereits ein `{else}` Befehl"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "Awesome!"
+                feedback: "Toll!"
             correct_answer: "D"
-            hint: "After `{else}` a `{print}` command follows"
+            hint: "Nach `{else}` folgt ein `{print}` Befehl"
             question_score: '10'
         8:
-            question_text: "Which word should be on the place of the question mark?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens stehen?"
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                Tier {is} {ask} 'Was ist dein Lieblingstier?'
+                {if} _?_ {is} Pinguin {print} 'Das ist auch mein Lieblingstier!'
+                {else} {print} 'Cool! Ich mag Pinguine.'
             mp_choice_options:
             -   option: |
                     ```
-                    favorite animal
+                    Lieblingstier
                     ```
                 feedback: "Dies ist nicht der Variablenname."
             -   option: |
                     ```
-                    animal
+                    Tier
                     ```
-                feedback: "Great job!"
+                feedback: "Großartig gemacht!"
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is already there"
+                feedback: "`{if}` ist bereits dort"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, that's not it."
+                feedback: "Nein, das ist es nicht."
             correct_answer: "B"
             hint: "Was ist der Variablenname?"
             question_score: '10'
         9:
-            question_text: "Which door should you choose to escape??"
+            question_text: "Welche Tür solltest du wählen um zu entkommen??"
             code: |-
                 {print} 'Escape from the haunted house!'
                 {print} 'There are 3 doors in front of you'
@@ -1052,18 +1052,18 @@ levels:
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
             -   option: "1"
-                feedback: "Bad choice! You're being eaten"
+                feedback: "Schlechte Wahl! Du wirst gegessen"
             -   option: "2"
-                feedback: "Super! You escaped!"
+                feedback: "Super! Du bist entkommen!"
             -   option: "3"
-                feedback: "Bad choice! You're being eaten."
-            -   option: "It's a trap, you will always be eaten!"
-                feedback: "Luckily not!"
+                feedback: "Schlechte Wahl! Du wirst gegessen."
+            -   option: "Es ist eine Falle, du wirst immer gegessen werden!"
+                feedback: "Glücklicherweise nicht!"
             correct_answer: "B"
-            hint: "One of the doors will keep you safe.."
+            hint: "Eine der Türen wird dich in Sicherheit bringen.."
             question_score: '10'
         10:
-            question_text: "Which monster is standing behind door 1?"
+            question_text: "Welches Monster steht hinter Tür 1?"
             code: |-
                 {print} 'Escape from the haunted house!'
                 {print} 'There are 3 doors in front of you'
@@ -1072,44 +1072,44 @@ levels:
                 {if} door {is} 2 {print} 'Yay, you can escape!'
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
-            -   option: "Hedy picks a random monster each time."
-                feedback: "Awesome!"
-            -   option: "vampire"
-                feedback: "Not always..."
-            -   option: "werewolf"
-                feedback: "Not always..."
-            -   option: "giant spider"
-                feedback: "Not always..."
+            -   option: "Hedy wählt jedes Mal ein zufälliges Monster."
+                feedback: "Toll!"
+            -   option: "Vampir"
+                feedback: "Nicht immer..."
+            -   option: "Werwolf"
+                feedback: "Nicht immer..."
+            -   option: "Riesenspinne"
+                feedback: "Nicht immer..."
             correct_answer: "A"
-            hint: "Mind the last 3 words... monsters `{at} {random}`..."
+            hint: "Beachte die letzten 3 Wörter... Monster `{at} {random}`..."
             question_score: '10'
     6:
         1:
-            question_text: "What's Hedy's output when you run this code?"
+            question_text: "Was gibt Hedy aus, wenn du diesen Code laufen lässt?"
             code: "{print} 2*10"
             mp_choice_options:
             -   option: "20"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             -   option: "12"
-                feedback: "No, the plus sign is used in addition"
+                feedback: "Nein, das Plus-Zeichen wird für die Addition benutzt"
             -   option: "2*10"
-                feedback: "No, Hedy will calculate the answer"
+                feedback: "Nein, Hedy wird die Antwort berechnen"
             -   option: "210"
-                feedback: "Mind it's a calculation."
+                feedback: "Beachte, dass es eine Berechnung ist."
             correct_answer: "A"
-            hint: "The `*` is used as a multiplication sign"
+            hint: "Das `*` wird als Multiplikationszeichen benutzt"
             question_score: '10'
         2:
-            question_text: "Which sign do you use for an addition?"
+            question_text: "Was benutzt du wenn du zwei Zahlen addieren möchtest?"
             mp_choice_options:
             -   option: "-"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "plus"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "*"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "+"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             correct_answer: "D"
             hint: "It's the plus sign."
             question_score: '10'
