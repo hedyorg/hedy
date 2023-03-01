@@ -1,11 +1,13 @@
 env:
   save_snippet_hashes: True
 
-name: Periodically generate hashes
+name: Update hashes
 on:
-  schedule:
-    - cron: "0 3 * * 1-5" # Run this job every workday at 3am
-  workflow_dispatch: {} # Allow running the workflow on-demand
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  
 jobs:
   build:
 
@@ -47,9 +49,10 @@ jobs:
         
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      if: github.event_name == 'push'
       with:
         commit_message: Updating hash files
-        branch: main
+        branch: ${{ github.ref_name }}
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
         GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
