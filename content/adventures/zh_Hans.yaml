@@ -1435,18 +1435,18 @@ adventures:
                 example_code: "```\n选项 = 1, 2, 3, 4, 5, 6\n{print} '用最快的速度投出6！'\n投 = 0\n次数 = 0\n{while} 投 != 6\n    投 = 选项 {at} {random}\n    {print} '你投了' 投\n    次数 = 次数 + 1\n{print} '很好！你在' 次数 '次里投出了6！'\n```\n"
                 start_code: '# 在这里写你的代码'
     secret:
-        name: SuperSpy
-        description: Make your own spy code
+        name: 超级间谍
+        description: 编写你自己的间谍代码
         default_save_name: language
         levels:
             12:
                 start_code: '## 在这里写下你的代码'
                 story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
-                example_code: "```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                example_code: "```\n名字{is} {ask} '你的名字是什么？'\nif名字{is} '特工007'\n    a{is} '去机场'\n{else}\n    a{is} '去火车站'\n密码{is} {ask} '密码是什么？'\n{if} 密码{is} 'TOPSECRET'\n    b{is} '明天02.00'\n{else}\n    b{is} '今天10.00'\n{print} a + b\n```\n"
             13:
                 start_code: '## place your code here'
                 story_text: "## 超级间谍\n你能在空白处填上正确的命令吗？注意：超级间谍必须同时回答正确两个问题，然后才能获取机密情报!\n"
-                example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
+                example_code: "```\n名字{is} {ask} '你的名字是什么？\n密码{is} {ask} '你的密码是什么？'\n{if}名字{is} '特工007' _密码{is} 'TOPSECRET'\n    {print} '02.00去机场'\n{else}\n    {print} '10.00去火车站'\n ```\n"
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
