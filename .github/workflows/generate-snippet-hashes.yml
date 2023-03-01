@@ -23,7 +23,7 @@ jobs:
         fetch-depth: 0    
         
         # We need to pass the token here -- the commit action below will not overwrite the token to push.
-        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+        token: ${{ secrets.HEDY_BOT_TOKEN }}
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
@@ -52,4 +52,4 @@ jobs:
         branch: main
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
-        GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.HEDY_BOT_TOKEN }}
