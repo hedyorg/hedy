@@ -1180,8 +1180,6 @@ class IsValid(Filter):
     # other rules are inherited from Filter
 
 
-
-
 def valid_echo(ast):
     commands = ast.children
     command_names = [x.children[0].data for x in commands]
