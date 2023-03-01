@@ -317,6 +317,7 @@ class TestsLevel18(HedyTester):
         expected = HedyTester.dedent(f"""\
         x = 'PRINT'
         create_button(x)
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -325,9 +326,12 @@ class TestsLevel18(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.USEREVENT:
+            if event.key != 'PRINT':
+                pygame_end = True
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -343,6 +347,7 @@ class TestsLevel18(HedyTester):
         x = 'but'
         create_button(x)
         for i in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -351,9 +356,12 @@ class TestsLevel18(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.USEREVENT:
+              if event.key != 'but':
+                  pygame_end = True
               if event.key == 'but':
                 print(f'''wow''')
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
