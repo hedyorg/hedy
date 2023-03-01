@@ -909,7 +909,49 @@ class TestsLevel8(HedyTester):
                 print(f'x is not pressed!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+  
+    def test_if_pressed_command_in_between(self):
+      code = textwrap.dedent("""\
+        if a is pressed
+          print 'A is pressed'
+        print 'Press another button'
+        if b is pressed
+          print 'B is pressed'""")
+      self.maxDiff = None
+      expected = textwrap.dedent("""\
+      pygame_end = False
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN:
+          if event.unicode != 'a':
+              pygame_end = True
+          if event.unicode == 'a':
+            print(f'A is pressed')
+            break
+          # End of PyGame Event Handler
+      print(f'Press another button')
+      pygame_end = False
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN:
+          if event.unicode != 'b':
+              pygame_end = True
+          if event.unicode == 'b':
+            print(f'B is pressed')
+            break
+          # End of PyGame Event Handler""")
 
+      self.multi_level_tester(code=code, expected=expected, max_level=11)
     #
     # pressed turtle tests
     #
