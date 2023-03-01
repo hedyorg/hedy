@@ -3,7 +3,7 @@ adventures:
         name: はじめに
         levels:
             2:
-                start_code: '{print} hello world!'
+                start_code: '{print} こんにちは世界！'
                 story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
@@ -59,12 +59,12 @@ adventures:
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
                 story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
             1:
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
+                example_code_2: "```\n{ask} お名前は何ですか？\n{echo} こんにちは\n```\n"
                 story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code: "```\n{print} こんにちは！\n{print} ヘディーへようこそ!\n```\n"
                 story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} こんにちは世界！'
             4:
                 start_code: "{print} 'Hello world'"
                 story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
@@ -110,15 +110,15 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-        description: Level explanation
+        description: レベルの説明
         default_save_name: intro
     story:
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: 物語
+        description: 物語
+        default_save_name: 物語
         levels:
             1:
-                start_code: '{print} Your story starts here'
+                start_code: '{print} ここでお前の物語を始めています'
                 story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
                 example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
@@ -142,7 +142,7 @@ adventures:
             8:
                 story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# ここにコードを入れてください'
             9:
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
@@ -170,7 +170,7 @@ adventures:
             15:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# ここにコードを入れてください'
     parrot:
         levels:
             1:
@@ -178,7 +178,7 @@ adventures:
                 example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Im Hedy the parrot'
                 story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print}  オウムのヘディーです。\n{ask} _\n{echo}\n{echo}\n```"
             5:
                 start_code: '# place your code here'
                 story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
