@@ -41,7 +41,7 @@
     {% endif %}
     {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
       <div class="dropdown relative">
-          <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#commands_dropdown').slideToggle('medium');">
+          <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
                   <span class="fa-solid fa-language"></span>
                   <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
           </button>
@@ -53,7 +53,7 @@
                       <tr class="text-center text-lg">
                           <td class="ltr:text-right rtl:text-left pb-2">{{_('english')}}</td>
                           <td id="keyword_toggle_container" class="pb-2">
-                              <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+                              <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer" data-cy="kwlang-switch-toggle">
                                   <div class="relative flex w-full">
                                       <input id="keyword_toggle" type="checkbox" {% if ((g.keyword_lang != "en" and not request.args.get('keyword_language')) or (request.args.get('keyword_language') and request.args.get('keyword_language') != "en")) %}checked{% endif %} onclick="hedyApp.toggle_keyword_language('{% if ((g.keyword_lang != "en" and not request.args.get('keyword_language')) or (request.args.get('keyword_language') and request.args.get('keyword_language') != "en")) %}en{% else %}{{g.lang}}{% endif %}')" class="sr-only" />
                                       <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>

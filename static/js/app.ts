@@ -3,6 +3,7 @@ import { ClientMessages } from './client-messages';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
+import JSZip from "jszip";
 import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
 import { currentTab } from './tabs';
 import { MessageKey } from './message-translations';
@@ -29,6 +30,68 @@ const pygame_suffix =
 pygame_end = True
 pygame.quit()
 `;
+
+const slides_template = `
+<!DOCTYPE html>
+<html class="sl-root decks export offline loaded">
+
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Slides Level - 1</title>
+	<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+</head>
+
+<body class="reveal-viewport theme-font-montserrat theme-color-white-blue">
+	<div class="reveal">
+		<div class="slides">
+			{replace}
+		</div>
+	</div>
+
+	<!-- Initialize the presentation -->
+	<script>
+		Reveal.initialize({
+			width: 960,
+			height: 700,
+			margin: 0.05,
+
+
+			hash: true,
+			controls: true,
+			progress: true,
+			mouseWheel: false,
+			showNotes: false,
+			slideNumber: false,
+			fragmentInURL: true,
+
+			autoSlide: 0,
+			autoSlideStoppable: true,
+
+			autoAnimateMatcher: SL.deck.AutoAnimate.matcher,
+
+			center: false,
+			shuffle: false,
+			loop: false,
+			rtl: false,
+			navigationMode: "default",
+
+			transition: "slide",
+			backgroundTransition: "slide",
+
+			highlight: {
+				escapeHTML: false
+			},
+
+			plugins: [RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight]
+		});
+	</script>
+</body>
+</html>
+`;
+
 
 export function initializeApp() {
   initializeSyntaxHighlighter();
@@ -2103,6 +2166,50 @@ const clearTimeouts = () => {
   timers = [];
 };
 
+export function downloadSlides(level: number) {
+  var iframe : any = document.getElementById(`level-${level}-slides`)!;
+  iframe.setAttribute('src',`/slides/${level}`);
+  $(`#level-${level}-slides`).on('load', function (){
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var slides = innerDoc.getElementsByTagName('section');
+    var slidesHTML = ''
+    for (let i = 0; i < slides.length; i++) {
+      var innerIframe = slides[i].getElementsByTagName('iframe');        
+      for (let j = 0; j < innerIframe.length; j++) {
+        var a = document.createElement('a');          
+        a.href = 'https://www.hedy.org' + innerIframe[j].getAttribute('src');
+        a.appendChild(document.createTextNode(a.href));
+        slides[i].appendChild(a);
+        slides[i].removeChild(innerIframe[j]);
+      }
+      slidesHTML += '\n'+ slides[i].outerHTML;
+    }
+    
+    var template = slides_template.replace('{replace}', slidesHTML);
+    var zip = JSZip();
+    zip.file('index.html', template);
+    zip.folder("lib");
+    zip.folder(`hedy-level-${level}`);
+    zip.generateAsync({type: 'blob'})
+       .then(function(content: any) {
+          download(content, `hedy-level-${level}.zip`, "zip");
+       });
+  })
+}
+
+function download(data: any, filename: any, type: any) {
+  var file = new Blob([data], {type: type});
+  var a = document.createElement("a"),
+  url = URL.createObjectURL(file);
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);  
+  }, 0);
+}
 const onElementBecomesVisible = (() => {
   const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
 

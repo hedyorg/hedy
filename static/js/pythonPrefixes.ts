@@ -53,6 +53,14 @@ export const normal_prefix =
 import random  # noqa F401
 import time  # noqa F401
 
+try:
+    import extensions  # noqa F401
+except ModuleNotFoundError:
+    # This is done because 'extensions' is not a python module but rather a Skulpt JS extension
+    # These functions are defined in skulpt-stdlib-extensions.js
+    # When running tests in test_python_prefixes it wil raise ModuleNotFoundError
+    pass
+
 global int_saver
 global convert_numerals  # needed for recursion to work
 int_saver = int

@@ -96,7 +96,7 @@ def load_adventures_for_level(level):
     Adventures are loaded in the current language, with the keywords in the code
     translated to the default (or explicitly requested) keyword language.
     """
-    keyword_lang = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+    keyword_lang = g.keyword_lang
 
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the
@@ -259,7 +259,8 @@ def setup_language():
     # Determine the user's requested language code.
     #
     # If not in the request parameters, use the browser's accept-languages
-    # header to do language negotiation.
+    # header to do language negotiation. Can be changed in the session by
+    # POSTing to `/change_language`, and be overwritten by remember_current_user().
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
@@ -267,6 +268,9 @@ def setup_language():
 
     if 'keyword_lang' not in session:
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
+    # If there is a '?keyword_language=' parameter, it overrides the current keyword lang, permanently
+    if request.args.get('keyword_language', None):
+        session['keyword_lang'] = request.args.get('keyword_language', None)
     g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
@@ -1576,6 +1580,9 @@ def get_highscores_page(user, filter):
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
+    # on the next page load.
+    session.pop('keyword_lang')
     return jsonify({'succes': 200})
 
 

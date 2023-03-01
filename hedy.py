@@ -535,7 +535,7 @@ class LookupEntryCollector(visitors.Visitor):
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{position_name}-1]'
+            name = f'{list_name}[int({position_name})-1]'
         self.add_to_lookup(name, tree, tree.meta.line, True)
 
     def change_list_item(self, tree):
@@ -634,7 +634,7 @@ class TypeValidator(Transformer):
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{tree.children[1]}-1]'
+            name = f'{list_name}[int({tree.children[1]})-1]'
         self.save_type_to_lookup(name, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
@@ -1167,6 +1167,9 @@ class IsValid(Filter):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_list_access_at(self, meta, args):
+        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     # other rules are inherited from Filter
 
 
@@ -1482,7 +1485,7 @@ class ConvertToPython_1(ConvertToPython):
         list_args = []
         var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
         # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})+\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        list_regex = fr"(({var_regex})+\[int\(({var_regex})\)-1\])|(random\.choice\(({var_regex})\))"
         for arg in args:
             # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
@@ -1636,7 +1639,7 @@ class ConvertToPython_3(ConvertToPython_2):
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + '-1]'
+            return args[0] + '[int(' + args[1] + ')-1]'
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
@@ -2605,12 +2608,12 @@ def preprocess_blocks(code, level, lang):
 
         leading_spaces = find_indent_length(line)
 
+        line_number += 1
+
         # ignore whitespace-only lines
         if leading_spaces == len(line):
             processed_code.append('')
             continue
-
-        line_number += 1
 
         # first encounter sets indent size for this program
         if not indent_size_adapted and leading_spaces > 0:
@@ -2866,6 +2869,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'invalid at keyword':
+            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))

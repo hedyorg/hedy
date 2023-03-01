@@ -47,7 +47,7 @@
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
-                  <th class="p-2">{{_('view')}}</th>
+                  <th class="p-2">{{_('preview')}}</th>
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
@@ -66,7 +66,28 @@
         {% endif %}
         <button class="green-btn mt-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('adventure_prompt')|tojson}})'>{{_('create_adventure')}}</button>
     </div>
-</div>
+    <div id="slides" class="flex flex-col items-center gap-2 pb-4 border-b">
+    <h2>Slides</h2>
+    <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
+      <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2 text-center">{{_('level')}}</th>      
+            <th class="p-2">{{_('download')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for level in slides %}
+            <tr>
+              <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/slides/{{level}}" target="_blank">{{level}}</a></td>
+              <td class="text-center p-2">
+                <iframe class="hidden" id="level-{{level}}-slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
+                <button class="green-btn mt-4 fa fa-arrow-down" id="download-slides-{{level}}" onclick="hedyApp.downloadSlides({{level}})"></button>
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
 
 <script>
 {% if welcome_teacher %}
