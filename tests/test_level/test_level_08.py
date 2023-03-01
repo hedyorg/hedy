@@ -25,6 +25,15 @@ class TestsLevel8(HedyTester):
     #
     # if command
     #
+
+    def test_if_one_line(self):
+        code = textwrap.dedent("""\
+        antwoord is 25
+        if antwoord is 100 print 'goed zo' else print 'neenee'""")
+
+        # one line if's are no longer allowed
+        self.multi_level_tester(code=code, exception=hedy.exceptions.WrongLevelException, max_level=17)
+
     def test_if_no_indentation(self):
         code = textwrap.dedent("""\
         antwoord is ask Hoeveel is 10 keer tien?
