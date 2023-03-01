@@ -65,7 +65,7 @@ adventures:
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
                 example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
-                story_text_4: "¡Algo más que funciona con `{if}` es `{pressed}`! Con `{pressed}` puedes enlazar cualquier letra en\nel alfabeto y cualquier tecla numérica de su teclado a un comando. Si lo vinculas y presionas la tecla,\nalgo va a pasar ¡Pruébalo!\n"
+                story_text_4: "¡Algo más que funciona con `{if}` es `{pressed}`! Con `{pressed}` puedes enlazar cualquier letra en el alfabeto y cualquier tecla numérica de su teclado a un comando. Si lo vinculas y presionas la tecla,\nalgo va a pasar ¡Pruébalo!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} '¡funcionó!'\n```\n"
             6:
                 start_code: "{print} '5 por 5 es ' 5 * 5"
@@ -173,7 +173,7 @@ adventures:
                 example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
-                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante."
+                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo. "
                 story_text_2: Si quieres mostrar por pantalla mas de un elemento, debes separarlos con comas.
                 example_code_2: "```\ntemperatura = 25\n{print}('Hace ', temperatura, ' grados afuera')\n```\n"
                 story_text_3: "## Input\nEl último cambio que necesitaremos para escribir en Python es cambiar `{ask}` por `{input}`."
@@ -340,7 +340,7 @@ adventures:
                 start_code: '# coloca tu código aquí'
             10:
                 story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
-                example_code: "```\nanimales = pájaro rojo, oveja negra, rana verde, pato amarillo, niño pequeño\n{print} 'oso pardo'\n{print} 'oso pardo'\n{print} '¿Qué ves?'\n{for} animal {in} animales\n    {print} 'Veo a un ' animal ' viéndome'\n    {print} animal\n    {print} animal\n    {print} '¿Qué ves?'\n{print} '¡Veo a todos los animales viéndome!'\n```\n"
+                example_code: "```\nanimales = _ , _ , _ \n{print} 'Oso pardo, Oso pardo'\n{print} '¿Qué ves?'\n```\n"
                 start_code: '# coloca tu código aquí'
     songs:
         name: "¡Canta una canción!"
@@ -421,7 +421,7 @@ adventures:
                 start_code: '# pon tu código aquí'
             10:
                 story_text: "## Canciones\nEn este nivel puedes hacer fácilmente la canción de niños 'Cinco monitos'. ¿Puedes hacer en último coro? También puedes hacer toda la canción de Baby Shark (incluyendo todos los otros tiburones en la familia) en solo 6 líneas, ¡usando solo el `{for}`!\nO puedes hacer la canción del Viejo McDonald con distintos animales.\n\n\n\n## Desafío\n¿Puedes agregar el último verso de los monos en la cama, cuando solo hay un mono restante?\n\n\n¿Puedes hacer el código de baby shark incluso más corto usando el comando `{repeat}`?\n\n¿Puedes agregar nuevos animales a la granja del Viejo McDonald?\n"
-                example_code: "## 5 Monitos saltando en la cama\n```\nmonos = 5, 4, 3, 2\n{for} mono {in} monos\n    {print} mono 'pequeños monos saltando en la cama'\n    {print} 'Uno se cayó y se golpeó la cabeza'\n    {print} 'Mamá llamó al doctor y el doctor dijo'\n    {print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'\n```\n\n## tiburón bebé\n```\ntiburones = bebé, mamá, papá, abuela, abuelo\n{for} tiburón {in} tiburones\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón ' tiburón tututututudu'\n    {print} tiburón 'tiburón'\n```\n## Viejo McDonald\n```\nanimales = cerdo, perro, vaca\n{for} animal {in} animales\n    {if} animal {is} cerdo\n        sonido = oink\n    {if} animal {is} perro\n        sonido = guau\n    {if} animal {is} vaca\n        sonido = mugir\n    {print} 'El viejo McDonald tenía una granja'\n    {print} '¡EIEIO!'\n    {print} 'y en esa finca tenía un' animal\n    {print} '¡EIEIO!'\n    {print} 'con un ' sonido ' aquí'\n    {print} 'y un ' sonido' ahí'\n    {print} 'aquí un' sonido\n    {print} 'hay un' sonido\n    {print} 'en todas partes un' sonido sonido\n```\n"
+                example_code: "```\nfamilia = bebé, mamá, papá, abuela, abuelo\n_ _ _ _ \n  {print} _\n```\n"
                 start_code: '# pon tu código aquí'
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
                 story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
@@ -1064,7 +1064,7 @@ adventures:
                     Así:
 
                 start_code: "# pon tu código aquí"
-                example_code: "```\n{print} ¡Hola, soy Hedy la adivina!\n{ask} ¿Quién es usted?\n{print} Déjame mirar en mi bola de cristal\n{print} Veo... Veo...\n{echo} Tu nombre es\n```\n"
+                example_code: "```\n_ ¡Hola, soy Hedy la adivina!\n_ ¿Quién es usted?\n_ Déjame mirar en mi bola de cristal\n_ Veo... Veo...\n_ Tu nombre es\n```\n"
                 story_text_2: "## Desafío\nHedy ahora solo te dice tu nombre. ¿Puedes expandir el código para que Hedy pueda predecir más cosas sobre ti?\nObviamente, Hedy aún no es una muy buena adivina, ¡ya que solo puede repetir las respuestas que dieron los jugadores!\nEcha un vistazo en el nivel 2 para mejorar tu adivina.\n"
             3:
                 story_text: |
@@ -1278,7 +1278,7 @@ adventures:
                 story_text: "Ahora que aprendiste a usar `{and}` y `{or}`, ¡también podemos usarlo con `{pressed}`!\nImagina que la tortuga puede hacer un supersalto hacia adelante.\n¡Al presionar `p` la tortuga puede hacer un supersalto!\nSin embargo, ¡la tortuga solo puede hacer este salto si primero gira a la izquierda y a la derecha!\n"
             14:
                 example_code: "```\ntamaño_de_paso = 15\nizquierda = -90\nderecha = 90\nalrededor = 180\ntiempo_para_salto = 5\ngiros = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n        tiempo_para_salto = tiempo_para_salto - 1\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n        giros = giros - 1\n    {if} d {is} {pressed}\n        {turn} derecha\n        giros = giros - 1\n    {if} p {is} {pressed}\n        {if} tiempo_para_salto <= 0 or giros <= 0\n            {forward} tamaño_de_paso * 3\n            tiempo_para_salto = 5\n            giros = 4\n```\n"
-                story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con`{pressed}`!\nimagina que la tortuga puede hacer un super salto hacia adelante. ¡Al pulsar ``p``, la tortuga puede hacer un\nsuper salto! Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
+                story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con`{pressed}`!\nImagina que la tortuga puede hacer un super salto hacia adelante.\n¡Al pulsar ``p``, la tortuga puede hacer un super salto!\nSin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
                 start_code: '# pon tu código aquí'
             15:
                 story_text: "Ahora que has aprendido sobre los bucles `{while}`, ¡puedes empezar a usarlos en la tortuga!\nLa tortuga ahora solo puede dar 15 pasos o girar 15 veces antes de cansarse\n¡Intenta llegar lo más lejos posible antes de que la tortuga se canse! Puedes usar tu super salto tras 2 giros\no 5 pasos.\n"
@@ -1289,7 +1289,7 @@ adventures:
                 example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
                 start_code: '# pon tu código aquí'
             17:
-                story_text: "Ahora que has aprendido a usar ```elif```, también podemos usarlo con ```pressed```. Ten en cuenta que\n```elif ... is pressed``` no es posible. Por eso vamos a anidar algunos ```elif```\nen las opciones de ```pressed```. También tuvimos que añadir ```:``` al código para que\ntodo funcione. Imagina que la tortuga puede hacer un super salto hacia adelante. Al pulsar ```p``` la\ntortuga puede hacer un super salto. Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada\n4 giros.\n"
+                story_text: "Ahora que has aprendido a usar `{elif}`, también podemos usarlo con `{pressed}`. Ten en cuenta que {is}`{elif} ... {is} {pressed}` no es posible. Por eso vamos a anidar algunos `{elif}` en las opciones de `{pressed}`. También tuvimos que añadir `:` al código para que todo funcione. Imagina que la tortuga puede hacer un super salto hacia adelante. Al pulsar `p` la tortuga puede hacer un super salto. Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros.\n"
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
                 start_code: '# pon tu código aquí'
             7:
