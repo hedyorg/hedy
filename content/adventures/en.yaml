@@ -88,22 +88,26 @@ adventures:
                 story_text: |
                     ## 'Quotation marks'
                     In level 4 `{ask}` and `{print}` have changed.
-
                     You must put text that you want to print between quotation marks.
-
                     This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-
                     Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                story_text_2: |
+                    ## Contractions
+                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
+                    Make sure to remove those apostrophes and change the spelling to I am or What is.
+                    Check out the example code to see the wrong way of using apostrophes.
                 example_code: |
                     ```
                     {print} 'You need to use quotation marks from now on!'
                     answer {is} {ask} 'What do we need to use from now on?'
                     {print} 'We need to use ' answer
                     ```
-                story_text_2: |
-                    ## Adventures are getting more and more difficult
-                    The adventures are now getting more and more difficult in the successive tabs.
-                    So it is best to start on the left and work to the right, in order to be challenged more and more.
+                example_code_2: |
+                    ```
+                    _ This is the wrong way of using apostrophes _
+                    {print} 'I'm babysitting my sister's kids'
+                    {print} 'What's more fun than that?'
+                    ```
             5:
                 start_code: |-
                     name {is} {ask} 'what is your name?'
@@ -182,7 +186,7 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, `{pressed}` and `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!
                     You can now group several lines together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
@@ -429,8 +433,7 @@ adventures:
                 story_text: |-
                     ## The last level!
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so. 
-
+                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
                 example_code: |
                     ```
                     {print}('Hello!')
@@ -556,10 +559,17 @@ adventures:
                     ## Story
                     You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
                     You can solve that in this level. You must use quotation marks for everything that you are going to print.
+
+                    ### Exercise
+                    Copy the example code and make it work by adding quotation marks on the lines.
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print}  _ The name of the main character is _ name
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
                     {print} name  _ is now going to walk in the woods _
                     {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -571,17 +581,20 @@ adventures:
                 story_text: |
                     ## Story
                     In this level you can program different endings, which will make your story even more fun.
+                    In the example code you can see how to make 2 different endings.
 
-                    ### Exercise
-                    Think of two endings for your story, for example:
+                    ### Exercise 1
+                    Write a new short story of at least 6 lines of code about a topic of your choosing.
+                    No inspiration? Choose one of these topics: a superhero, a boring school day, stranded on a desert island.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Now give the player a change to choose a happy or a bad end, just like in the example code.
+                    Program both the endings.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
+                    ### Exercise 2
+                    Copy the story you've created in your own story adventure in the previous levels.
+                    Find a way to add at least 2 `{if}` and `{else}` commands to your story.
+                    This can be with a happy or bad ending, but you can also try to find other ways to incoporate the commands.
 
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
                 example_code: |
                     ```
                     name {is} {ask} 'Who is walking in the forest?'
@@ -668,9 +681,9 @@ adventures:
                 story_text: |
                     ## Story
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
-
+                    
                     ### Exercise
-
+                    
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
 
                 example_code: |
@@ -785,14 +798,13 @@ adventures:
                     Copy the example code to your input screen by clicking on the yellow button.
                     Make the parrot ask a different question. Fill in the blanks in the example!
                     **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
-                example_code_2: |-
+                example_code_2: |
                     ```
                     {print} Im Hedy the parrot
                     {ask} _
                     {echo}
                     {echo}
-                    ```
-                start_code: |-
+                start_code: |
                     {print} Im Hedy the parrot
                     {ask} What is your name?
                     {echo}
@@ -847,7 +859,8 @@ adventures:
                 story_text: |
                     ## Parrot
                     In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
-                    Can you complete the code by adding quotation marks?
+                    ### Exercise
+                    Complete the code by filling in quotation marks on the blanks.
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -960,7 +973,7 @@ adventures:
                 story_text: |
                     ## Songs
                     With `{for}` you can print make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-
+                    
                     ### Exercise 1
                     Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
                 story_text_2: |
@@ -994,6 +1007,7 @@ adventures:
                     ```
                     _ monkeys _ _ 5 _ 1
                         {print} monkeys ' little monkeys jumping on the bed'
+                        _
                     ```
                 start_code: "# place your code here"
             12:
@@ -1306,12 +1320,11 @@ adventures:
             4:
                 story_text: |
                     ## Dishwashing
-                    With quotation marks you can make your dishwashing planning more beautiful.
-                    This time the sample code is not quite complete.
+                    With quotation marks you can make your dishwashing program even better.
 
-                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
-
-                    Tip: Don't forget the quotation marks!
+                    ### Exercise
+                    First, fill in right symbols or commands on the blanks to make this example program work.
+                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
@@ -1387,7 +1400,7 @@ adventures:
                 story_text: |
                     ## Dishwashing
                     In this level you can make a schedule for the whole week in an easy way!
-
+                    
                     ### Exercise
                     Add a second chore, such as vacuuming or tidying up, and make sure it is also divided for the whole week.
                     <br> **(extra)** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?
@@ -1396,7 +1409,7 @@ adventures:
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
                     names = mom, dad, Emma, Sophie
-                    {for} day {in} days
+                    for day in days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
                 start_code: "# place your code here"
@@ -1417,7 +1430,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    {print} You threw _ {at} {random}
                     ```
                 story_text_2: |
                     ### Exercise
@@ -1431,14 +1444,11 @@ adventures:
             4:
                 story_text: |
                     ## Dice
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _ you threw _
-                    {print} _ _ _ <- here you have to program the choice
-                    ```
+                    In this level you can also create dice. But this time you can try it yourself, without an example code!
+
+                    ### Exercise
+                    Make your own dice in this level.
+                    Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: |
@@ -1484,7 +1494,7 @@ adventures:
                     You can also make a dice again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
 
                     ### Exercise
-                    Try to finish the sample code! **(extra)** Think of a game you know that involves a dice and program that using a `{repeat}`
+                    Try to finish the sample code!  **(extra)** Think of a game you know that involves a dice and program that using a `{repeat}.`
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, 6
@@ -1495,7 +1505,7 @@ adventures:
                 story_text: |
                     ## Dice
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-
+                    
                     ### Exercise 
                     Change the names into names of your friends or family, and finish the code so they each roll.
                 example_code: |
@@ -1532,9 +1542,10 @@ adventures:
             5:
                 story_text: |
                     ## Press it!
-                    In the introduction you were also told about the new keyword `{pressed}`! 
-                    Using `{pressed}` can make coding much more interactive, and you can have live control of what is executed!
-                    In the upcoming levels you will learn how `{pressed}` makes this possible and what uses `{pressed}` has.
+                    In the introduction you were also told about the new keyword `{pressed}`! Using `{pressed}`
+                    can make coding much more interactive, and you can have live control of what is executed!
+                    In the upcoming levels you will learn how `{pressed}` makes this possible and what uses `{pressed}`
+                    has.
                     Besides printing text, there is a whole other variety of uses for `{pressed}`
                     For example, you can also link turtle commands to keys! Try it!
                 example_code: |
@@ -1882,7 +1893,7 @@ adventures:
                     Copy the example code and fill in the blanks to add an extra player to this game.
 
                     **Extra** Now the players are just called player 1 and player 2. Can you add ask commands (with variables of course) to ask the players' names?
-                    This way you could create this output, for example: James picks... paper
+                    This way you could create this output, for example: `James picks... paper`
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
@@ -1894,13 +1905,9 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    ### Exercise
+                    Copy your code from te previous level and make it work by using quotation marks after each `{print}` or `{ask}` command.
 
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: |
@@ -1955,7 +1962,7 @@ adventures:
                     ## Rock, Paper, Scissors
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
                     You only have to fill in the names of the players and they get a random choice.
-
+                    
                     ### Exercise 1
                     Finish the program by filling in a list of names.
 
@@ -2045,7 +2052,7 @@ adventures:
                     ```
                 story_text_3: |
                     ## Random numbers
-                    You can also let the computer do random sums on its own using {random}.
+                    You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_3: |
                     ```
@@ -2279,6 +2286,9 @@ adventures:
 
                     ### Exercise
                     Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ## Example Hedy Restaurant
                     ```
@@ -2309,7 +2319,7 @@ adventures:
                     {print} 'One ' food ', coming right up!'
                     drink {is} {ask} 'What would you like to drink with that?'
                     {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything else?'
+                    anything {is} {ask} 'Would you like anything {else}?'
                     {print} 'Let me repeat your order...'
                     {print} 'One ' food
                     {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
@@ -2453,7 +2463,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you'll learn how to easily ask orders for different courses.
-
+                    
                     ### Exercise 1
                     Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
                 example_code: |
@@ -2506,7 +2516,7 @@ adventures:
                     Can you think of a code to give your friends and family a 15% discount?
                 example_code: |
                     ```
-                    price = 0
+                    price = 0.0
                     food = {ask} 'What would you like to order?'
                     drink = {ask} 'What would you like to drink?'
                     {if} food {is} 'hamburger'
@@ -2526,24 +2536,20 @@ adventures:
                     In this level we can use the new commands to upgrade our restaurant.
                     We use `{and}` to see {if} two things are both the case.
 
+                    ### Exercise
+                    Fill in `{and}` and `{or}` on the right blanks.
+
                 example_code: |
                     ```
                     price = 10
                     food = {ask} 'What would you like to eat?'
                     drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
+                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
                         {print} 'Thats our discount menu'
                         price = price - 3
+                    {if} drinks {is} 'juice' _ drinks {is} 'sap'
+                        {print} 'What a healthy choice!'
                     {print} 'That will be ' price ' dollars'
-                    ```
-                story_text_2: |
-                    We use `{or}` to see if one of two things is the case.
-
-                example_code_2: |
-                    ```
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
-                        {print} 'Thats a healthy choice'
                     ```
                 start_code: "# place your code here"
             15:
@@ -2619,11 +2625,11 @@ adventures:
                     Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
                     The quotation marks in level 3 make this possible!
 
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
-
                     ### Exercise
                     We have removed all the quotation marks from this example code, can you add them in all the right places?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
@@ -2900,15 +2906,21 @@ adventures:
                 story_text: |
                     ## Haunted house
                     In this level you learn how to use quotation marks in your games.
+
+                    ### Exercise
                     Can you make your Haunted House level 4 proof?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your haunted house code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    {print} _ Escape from the haunted house! _
-                    {print} _ There are 3 doors in front of you... _
-                    choice {is} {ask} _ Which door do you choose? _
-                    {print} _ You picked door ... _ choice
+                    _ Add quotation marks to this code _
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _ You see... _
+                    {print} You see...
                     {sleep}
                     {print} monsters {at} {random}
                      ```
@@ -2974,13 +2986,13 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the `{for}` command so we can tell the player where they are. 
-
+                    
                     ### Exercise 1
                     Finish the program so the player knows which room they are in.
-
+                    
                     ### Exercise 2
                     Make the program into an adventure by following these steps:
-
+                    
                     1. Make a list of choices (like: fight or flight)
                     2. Make sure the player can choose an option with `{ask}`
                     3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. 
@@ -3140,7 +3152,8 @@ adventures:
                     Make your own program to practice your vocabulary in a new language.
 
                     ### Exercise
-                    Can you make this program for a different language? Or can you add more words to the French one?
+                    Make the code longer by adding at least 3 more words for the player to learn.
+                    **Extra** Of course, you can choose to use a different language than French. You can change to code to any language you'd like to learn.
                 example_code: |
                     ```
                     {print} 'Learn French!'
