@@ -79,6 +79,5 @@ def validate_gettext_hackfile():
         sys.exit(1)
 
 
-
 if __name__ == '__main__':
     main()
