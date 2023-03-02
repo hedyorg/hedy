@@ -852,3 +852,196 @@ levels:
             -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
                 feedback: Correct!
             -   option: The `{if}` and `{else}` commands should be in the same line.
+                feedback: No, that's not true.
+            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
+                feedback: Variable names can be similar, but they can't be 2 words...
+            correct_answer: B
+            hint: Inspect what the variables are called.
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   option: You can only fill in the word is on the `_?_`
+                feedback: You are allowed to use the `=` sign as well
+            -   feedback: Amazing!
+                option: You can fill in either the word is or the `=` sign on the `_?_`
+            -   option: You have to fill in =is= on the `_?_`
+                feedback: No, one `=` sign is enough
+            -   option: You can only use the `=` sign when working with numbers, not with words.
+                feedback: You can also use `=` with words.
+            question_text: Which statement is true?
+            code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
+            correct_answer: B
+            hint: '`{is}` and `=` are both allowed'
+            question_score: '10'
+        9:
+            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            mp_choice_options:
+            -   option: 10%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 32%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 50%
+                feedback: Super! You are 100 percent smart!
+            -   option: 100%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            correct_answer: C
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            question_score: '10'
+    7:
+        1:
+            question_score: '10'
+            question_text: How many lines can you repeat at once with the repeat command at this level?
+            mp_choice_options:
+            -   option: '0'
+                feedback: No you can repeat a line.
+            -   option: '1'
+                feedback: Correct, one line at a time
+            -   option: '2'
+                feedback: In this level only one line at a time
+            -   option: infinite
+                feedback: In this level you can only repeat one line at a time
+            correct_answer: B
+            hint: You can only repeat 1 line at a time
+        2:
+            question_text: Which code is right?
+            mp_choice_options:
+            -   option: "```\n{print} 100 {times} 'hello'\n```\n"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 'hello' 100 {times}\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: First the repeat command, then the `{print}` command
+            question_score: '10'
+        3:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} 'Hello!'"
+            mp_choice_options:
+            -   option: Right
+                feedback: No, a word is missing
+            -   option: Wrong, the word `{repeat}` is missing
+                feedback: The word `{repeat}` is there, another word is missing
+            -   option: Wrong, the word `{times}` is missing
+                feedback: The word `{times}` is there, another word is missing.
+            -   option: Wrong, the word `{print}` is missing
+                feedback: Correct
+            correct_answer: D
+            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   option: "the wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   feedback: Only the second line is repeated 3 times
+                option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
+            -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
+                feedback: All though the town! Perfect!
+            question_text: What will be the output from this code?
+            code: "{print} 'The wheels on the bus go'\n{repeat} 3 {times} {print} ' round and round'"
+            correct_answer: D
+            hint: Only 'round and round' is repeated 3 times.
+            question_score: '10'
+        4:
+            question_text: Which word is wrong in the code?
+            code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
+            mp_choice_options:
+            -   option: "```\nI'm\n```\n"
+                feedback: That's right!
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is spelled correctly'
+            -   option: "```\n{repeat}\n```\n"
+                feedback: '`{repeat}` is spelled correctly'
+            -   option: "```\n{times}\n```\n"
+                feedback: '`{times}` is spelled correctly'
+            correct_answer: A
+            hint: I'm is wrong, you can't use apostrophes
+            question_score: '10'
+        5:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
+            mp_choice_options:
+            -   option: Correct
+                feedback: That's right!
+            -   option: Wrong
+                feedback: That's not it
+            correct_answer: A
+            hint: The code is correct!
+            question_score: '10'
+        7:
+            question_text: What will be the output from this code?
+            code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
+            mp_choice_options:
+            -   option: "We will We will\nROCK YOU!"
+                feedback: "'We will' won't appear twice in the same line"
+            -   option: "We will\nWe will\nROCK YOU!"
+                feedback: Great!
+            -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
+                feedback: ROCK YOU! won't be repeated
+            -   option: "We will\nROCK YOU!"
+                feedback: Mind the repeat command
+            correct_answer: B
+            hint: Mind the `{repeat}` command.
+            question_score: '10'
+        8:
+            question_text: What Hedy code belongs to this output?
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            mp_choice_options:
+            -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: Awesome, you can't use the `{repeat}` command here.
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n"
+                feedback: Where did you leave 'Do do do do'?
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: This is not the correct order..
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: This is not the correct order..
+            hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
+            correct_answer: A
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
+                feedback: Almost! the first line needs an extra word
+            -   option: "```\n{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
+                feedback: Great!
+            -   option: "```\n{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n```\n"
+                feedback: This is not in the right order.
+            -   option: "```\n{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'\n```\n"
+                feedback: This is not in the right order.
+            question_text: What Hedy code belongs to this output?
+            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            correct_answer: B
+            hint: Mind the order of the sentences.
+            question_score: '10'
+        9:
+            question_text: What Hedy code belongs to this output?
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
+            mp_choice_options:
+            -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
+                feedback: Your repeated line is incorrect.
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```\n"
+                feedback: The `{print}` command is missing on line 3.
+            -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
+                feedback: You're missing the quotation marks
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'\n```\n"
+                feedback: Perfect
+            question_score: '10'
+            hint: "'Help!' is repeated 3 times."
+            correct_answer: D
+    8:
+        1:
+            question_text: Which output will be produced by this code?
+            code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
+            mp_choice_options:
+            -   option: "Hello\nIm Hedy!\n"
+                feedback: Everything is printed twice.
+            -   option: "Hello\nHello\nIm Hedy\n"
+                feedback: The second line is repeated twice as well.
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!\n"
+                feedback: Super!
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!\n"
