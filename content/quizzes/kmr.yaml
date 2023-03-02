@@ -1241,6 +1241,99 @@ levels:
             -   feedback: That's right!
                 option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
             question_text: Which code was used to get this output?
+            correct_answer: D
+            hint: It has to be a calculation...
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: "23\n24\n25"
+                feedback: The numbers don't appear. It doesn't say `{print}` i.
+            -   option: 23 hi 24 hi 25 hi
+                feedback: The numbers don't appear. It doesn't say `{print}` i
+            -   option: "hi\nhi\nhi"
+                feedback: Correct
+            -   feedback: No it will only appear 3 times.
+                option: The word 'hi' will appear 25 times in a row.
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            correct_answer: C
+            hint: It doesn't say `{print}` i
+            question_score: '10'
+        9:
+            mp_choice_options:
+            -   option: 1 time
+                feedback: Try again
+            -   option: 2 times
+                feedback: Try again
+            -   option: Never
+                feedback: Try again
+            -   feedback: That's right!
+                option: That depends on how old you are
+            correct_answer: D
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            question_score: '10'
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+        10:
+            question_text: Which code belongs to this output?
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: Mind the indention
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+                feedback: That's right!
+            -   feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+                option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            correct_answer: B
+            hint: Mind the indention
+            question_score: '10'
+        5:
+            question_text: What's wrong with this code?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            mp_choice_options:
+            -   option: The i in the last line need quotation marks
+                feedback: No it doesn't.
+            -   option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
+                feedback: You could use 1 to 5 just as well!
+            -   option: Line 1 needs to start with an indention.
+                feedback: Not line 1...
+            -   option: Line 2 needs to start with an indention
+                feedback: Perfect!
+            correct_answer: D
+            hint: There is something wrong with the indention
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
+                feedback: There's not always 3 people
+            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```\n"
+                feedback: The variable is not named guests
+            -   option: "```\n{for} i {in} {range} 1 {to} people\n```\n"
+                feedback: Great!
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```\n"
+                feedback: That's one order too many!
+            question_text: What should be on the place of the question mark?
+            code: "{print} 'Welcome to Hedys diner'\npeople is {ask} 'How many people will be eating here tonight?'\n_?_\n    food is {ask} 'What would you like to order?'\n    {print} food"
+            correct_answer: C
+            hint: Use the variable 'people'
+            question_score: '10'
+        6:
+            question_text: How many times does the word Hello appear on your screen when you run the code?
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: No
+            -   option: 2 times
+                feedback: No
+            -   option: 3 times
+                feedback: That's right!
+            -   option: Never
+                feedback: No
+            correct_answer: C
+            hint: 0 also counts. So 0,1,2 that's 3 times.
+            question_score: '10'
     9:
         1:
             question_text: What is wrong with this code?
@@ -1390,3 +1483,29 @@ levels:
             correct_answer: D
             hint: The first line doesn't start with any spaces
             question_score: '10'
+    10:
+        1:
+            question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
+            code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
+            mp_choice_options:
+            -   option: "```\n{for} each compliment\n```\n"
+                feedback: That's not it
+            -   option: "```\n{for} compliment {in} compliments\n```\n"
+                feedback: You deserve all those compliments!
+            -   option: "```\n{if} compliment {in} compliments\n```\n"
+                feedback: That's not it
+            -   option: "```\n{for} compliments {in} compliment\n```\n"
+                feedback: Almost there!
+            correct_answer: B
+            hint: '`{for}` each compliment in the lists of compliments...'
+            question_score: '10'
+        2:
+            question_text: Which output is correct?
+            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            mp_choice_options:
+            -   option: I love pizza
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pasta
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pancakes
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
