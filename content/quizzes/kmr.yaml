@@ -526,6 +526,75 @@ levels:
             mp_choice_options:
             -   option: "```\n{if}\n```\n"
                 feedback: '`{if}` is already in the line above'
+            -   option: "```\n{at} {random}\n```\n"
+                feedback: No, you need `{else}`.
+            -   option: "```\n{else}\n```\n"
+                feedback: Great!
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is already there, we need a word before it!'
+            correct_answer: C
+            hint: '`{if}` goes together with...?'
+            question_score: '10'
+        7:
+            question_text: Which word should be in the place of the question mark?
+            code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _?_ 'Unfortunately... No big money for you.'"
+            mp_choice_options:
+            -   option: "```\n{if}\n```\n"
+                feedback: '`{if}` is in the line above.'
+            -   option: "```\n{at} {random}\n```\n"
+                feedback: No, you don't need `{at} {random}`.
+            -   option: "```\n{else}\n```\n"
+                feedback: There already is an `{else}` command
+            -   option: "```\n{print}\n```\n"
+                feedback: Awesome!
+            correct_answer: D
+            hint: After `{else}` a `{print}` command follows
+            question_score: '10'
+        8:
+            question_text: Which word should be on the place of the question mark?
+            code: "animal {is} {ask} 'What is your favorite animal?'\n{if} _?_ {is} penguin {print} 'Thats my favorite animal too!'\n{else} {print} 'Cool! I like penguins.'"
+            mp_choice_options:
+            -   option: "```\nfavorite animal\n```\n"
+                feedback: That's not the variable name.
+            -   option: "```\nanimal\n```\n"
+                feedback: Great job!
+            -   option: "```\n{if}\n```\n"
+                feedback: '`{if}` is already there'
+            -   option: "```\n{print}\n```\n"
+                feedback: No, that's not it.
+            correct_answer: B
+            hint: What the variable name?
+            question_score: '10'
+        9:
+            question_text: Which door should you choose to escape??
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: '1'
+                feedback: Bad choice! You're being eaten
+            -   option: '2'
+                feedback: Super! You escaped!
+            -   option: '3'
+                feedback: Bad choice! You're being eaten.
+            -   option: It's a trap, you will always be eaten!
+                feedback: Luckily not!
+            correct_answer: B
+            hint: One of the doors will keep you safe..
+            question_score: '10'
+        10:
+            question_text: Which monster is standing behind door 1?
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: Hedy picks a random monster each time.
+                feedback: Awesome!
+            -   option: vampire
+                feedback: Not always...
+            -   option: werewolf
+                feedback: Not always...
+            -   option: giant spider
+                feedback: Not always...
+            correct_answer: A
+            hint: Mind the last 3 words... monsters `{at} {random}`...
+            question_score: '10'
     1:
         1:
             question_text: What's this programming language called?
@@ -669,3 +738,117 @@ levels:
             correct_answer: A
             hint: Let's go!
             question_score: '10'
+    6:
+        7:
+            correct_answer: C
+            mp_choice_options:
+            -   option: It could have been `price = 3` just as well.
+                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
+            -   option: Because Hedy doesn't understand `price = 3`.
+                feedback: Hedy would understand, but it wouldn't be right.
+            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
+                feedback: That's right!
+            -   option: Because the price is 0 dollars to begin with.
+                feedback: That's true, but not the reason
+            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = price + 15\n{if} food {is} fries price = price + 6\ndrinks is {ask} 'What would you like to drink?'\n{if} drinks {is} coke price = price + 3\n{if} drinks {is} water price = price + 1\n{print} price ' dollars please'"
+            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            question_score: '10'
+        1:
+            question_text: What's Hedy's output when you run this code?
+            code: '{print} 2*10'
+            mp_choice_options:
+            -   option: '20'
+                feedback: Correct!
+            -   option: '12'
+                feedback: No, the plus sign is used in addition
+            -   option: 2*10
+                feedback: No, Hedy will calculate the answer
+            -   option: '210'
+                feedback: Mind it's a calculation.
+            correct_answer: A
+            hint: The `*` is used as a multiplication sign
+            question_score: '10'
+        2:
+            question_text: What do you use when you want to add two numbers?
+            mp_choice_options:
+            -   option: '-'
+                feedback: That's not it
+            -   option: plus
+                feedback: That's not it
+            -   option: '*'
+                feedback: That's not it
+            -   option: +
+                feedback: Correct!
+            correct_answer: D
+            hint: It's the plus sign.
+            question_score: '10'
+        3:
+            question_text: What's Hedy's output when you run this code?
+            code: "{print} '3*10'"
+            mp_choice_options:
+            -   option: '30'
+                feedback: This would be the right answer if there were no quotation marks.
+            -   option: '13'
+                feedback: Try again..
+            -   option: 3*10
+                feedback: Correct! There are quotation marks, so Hedy will print it literally.
+            -   option: Nothing, Hedy will give an error message.
+                feedback: No, Hedy will print it literally.
+            correct_answer: C
+            hint: Mind the quotation marks!!
+            question_score: '10'
+        4:
+            question_text: Kim is 10 years old. What will Hedy print for her?
+            question_score: '10'
+            code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
+            mp_choice_options:
+            -   option: '30'
+                feedback: Mind, Hedy also prints 'Your lucky number is...'
+            -   option: '10'
+                feedback: Please try again.
+            -   option: Your lucky number is... 30
+                feedback: That's right!
+            -   option: Your lucky number is... 10
+                feedback: Her lucky number is name times age...
+            correct_answer: C
+            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+        5:
+            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
+            code: "{print} 'Welcome to Hedys!'\npeople = {ask} 'How many people are eating with us tonight?'\nprice = people * 10\n{print} 'That will be ' price 'dollar please'"
+            mp_choice_options:
+            -   option: 5 dollars
+                feedback: Unfortunately, it's not that cheap.
+            -   option: 10 dollars
+                feedback: No, it's 10 dollars each.
+            -   option: 15 dollars
+                feedback: The * means multiplication.
+            -   option: 50 dollars
+                feedback: Great!
+            correct_answer: D
+            hint: '`price` `is` `people` `times` 10'
+            question_score: '10'
+        6:
+            question_text: How much does a hamburger cost in this virtual restaurant?
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = 15\n{if} food {is} fries price = 6"
+            mp_choice_options:
+            -   option: 15 dollars
+                feedback: Super!
+            -   option: 6 dollars
+                feedback: The fries are 6 dollars
+            -   option: 0 dollars
+                feedback: The hamburger isn't free!
+            -   option: 21 dollars
+                feedback: That's the price for a hamburger and fries!
+            correct_answer: A
+            hint: Mind the fourth line.
+            question_score: '10'
+        8:
+            question_text: Why is this code incorrect?
+            code: "correct answer = 3*12\nanswer = {ask} 'What is 3 times 12?'\n{if} answer {is} correct answer {print} 'Good job!'\n{else} {print} 'No... It was ' correct answer"
+            mp_choice_options:
+            -   option: There shouldn't be quotation marks in line 2
+                feedback: No, there should be!
+            -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
+                feedback: Correct!
+            -   option: The `{if}` and `{else}` commands should be in the same line.
