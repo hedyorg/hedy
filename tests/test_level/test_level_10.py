@@ -126,10 +126,11 @@ class TestsLevel10(HedyTester):
         lijstje is kip, haan, kuiken
         if x is pressed
             for dier in lijstje
-                print 'dier'""")
+                print dier""")
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -138,11 +139,14 @@ class TestsLevel10(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
+            if event.unicode != 'x':
+                pygame_end = True
             if event.unicode == 'x':
               for dier in lijstje:
-                print(f'dier')
+                print(f'{dier}')
                 time.sleep(0.1)
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.multi_level_tester(
             code=code,
