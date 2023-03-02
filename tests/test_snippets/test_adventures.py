@@ -97,8 +97,6 @@ def collect_snippets(path, filtered_language=None):
                             except Exception as E:
                                 print(E)
 
-
-
     return Hedy_snippets
 
 # filtered_language = 'sq'
