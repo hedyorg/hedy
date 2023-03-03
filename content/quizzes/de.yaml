@@ -2202,24 +2202,24 @@ levels:
                     ```
                 feedback: "Das ist eine Bestellung zu viel!"
             correct_answer: "C"
-            hint: "Use the variable 'people'"
+            hint: "Benutze die Variable 'leute'"
             question_score: '10'
         8:
-            question_text: "What will be the output from this code?"
+            question_text: "Was wird die Ausgabe dieses Code sein?"
             code: |-
                 {for} i {in} {range} 23 {to} 25
                     {print} 'hi'
             mp_choice_options:
             -   option: "23\n24\n25"
-                feedback: "The numbers don't appear. It doesn't say `{print}` i."
+                feedback: "Die Zahlen erscheinen nicht. Es fehlt `{print}` i."
             -   option: "23 hi 24 hi 25 hi"
-                feedback: "The numbers don't appear. It doesn't say `{print}` i"
+                feedback: "Die Zahlen erscheinen nicht. Es fehlt `{print}` i"
             -   option: "hi\nhi\nhi"
-                feedback: "Correct"
-            -   option: "The word 'hi' will appear 25 times in a row."
-                feedback: "No it will only appear 3 times."
+                feedback: "Richtig"
+            -   option: "Das Wort 'hi' wird 25 Mal in Folge erscheinen."
+                feedback: "Nein, es wird nur 3 Mal erscheinen."
             correct_answer: "C"
-            hint: "It doesn't say `{print}` i"
+            hint: "Es fehlt `{print}` i"
             question_score: '10'
         9:
             question_text: "How many times does Hedy chant Hip Hip Hooray?"
