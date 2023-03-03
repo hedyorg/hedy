@@ -5,7 +5,7 @@ levels:
             mp_choice_options:
             -   option: "Hedy"
                 feedback: "做得好！"
-            -   option: "海迪"
+            -   option: "海蒂"
                 feedback: "不是这个！"
             -   option: "Haydie"
                 feedback: "不是这个！"
@@ -41,7 +41,7 @@ levels:
             hint: "_?_ 你好世界！"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "如何询问某个人最喜欢的颜色是什么？"
             mp_choice_options:
@@ -71,14 +71,14 @@ levels:
         4:
             question_text: "这段代码哪里错了？"
             code: |-
-                你好，我是海迪！
+                你好，我是海蒂！
                 {ask} 你是谁？
                 {echo} 你好……
             mp_choice_options:
             -   option: "第一行缺少了`{print}`。"
                 feedback: "正确！"
             -   option: "第一行的“Im”的写法在英语中是错误的。"
-                feedback: "我们故意把“I'm”写错成“Im”，因为海迪现在还无法理解撇号。"
+                feedback: "我们故意把“I'm”写错成“Im”，因为海蒂现在还无法理解撇号。"
             -   option: "`{echo}`不是一个命令。"
                 feedback: "`{echo}`是一个命令。错的是别的地方。"
             -   option: "没有错！这代码很完美！"
@@ -101,7 +101,7 @@ levels:
                     ```
                     Hedy
                     ```
-                feedback: "“海迪”不是一个命令。"
+                feedback: "“海蒂”不是一个命令。"
             -   option: |
                     ```
                     {ask}
@@ -118,7 +118,7 @@ levels:
         6:
             question_text: "这段代码哪里错了？"
             code: |-
-                {print} 你好，我是海迪！
+                {print} 你好，我是海蒂！
                 {print} 你支持哪支足球队？
                 {echo} 你支持……
                 {print} 酷！我也一样！
@@ -137,7 +137,7 @@ levels:
         7:
             question_text: "这段代码哪里错了？"
             code: |-
-                {print} 欢迎来到海迪餐厅！
+                {print} 欢迎来到海蒂餐厅！
                 {ask} 你想吃什么？
                 {echo} 所以你想点...
                 {print} 马上就来！好好享受！
@@ -256,30 +256,30 @@ levels:
         4:
             question_text: "如果你运行这段代码，它会输出什么？"
             code: |-
-                名字 {is} 海迪
+                名字 {is} 海蒂
                 {print} 你好，我的 名字 是 名字！
             mp_choice_options:
             -   option: "你好，我的 名字 是 名字"
-                feedback: "变量“名字”会被替换成海迪"
-            -   option: "你好，我的 名字 是 海迪"
-                feedback: "变量“名字”会被替换成海迪"
-            -   option: "你好，我的 海迪 是 名字"
-                feedback: "变量“名字”会被替换成海迪"
-            -   option: "你好，我的 海迪 是 海迪"
+                feedback: "变量“名字”会被替换成海蒂"
+            -   option: "你好，我的 名字 是 海蒂"
+                feedback: "变量“名字”会被替换成海蒂"
+            -   option: "你好，我的 海蒂 是 名字"
+                feedback: "变量“名字”会被替换成海蒂"
+            -   option: "你好，我的 海蒂 是 海蒂"
                 feedback: "正确，这个问题会在第三关解决！"
             correct_answer: "D"
-            hint: "两个“名字”都会被替换成“海迪”"
+            hint: "两个“名字”都会被替换成“海蒂”"
             question_score: '10'
         5:
             question_text: "当你使用 `{sleep}` 命令时会发生什么？"
             mp_choice_options:
             -   option: "它会让电脑变慢"
                 feedback: "幸好不会！"
-            -   option: "它会关闭海迪"
+            -   option: "它会关闭海蒂"
                 feedback: "幸好不会！"
             -   option: "程序会暂停一下，然后继续"
                 feedback: "对！"
-            -   option: "它用在程序结尾，让海迪知道程序结束了"
+            -   option: "它用在程序结尾，让海蒂知道程序结束了"
                 feedback: "不，它在代码结尾不会有任何用处"
             correct_answer: "C"
             hint: "电脑会在`{sleep}`命令处等待一秒"
@@ -289,7 +289,7 @@ levels:
             code: |-
                 {print} 最佳编程语言奖属于……
                 _?_
-                {print} 海迪！
+                {print} 海蒂！
             mp_choice_options:
             -   option: |
                     ```
@@ -423,7 +423,7 @@ levels:
             question_score: '10'
     3:
         1:
-            question_text: "你需要使用哪一个指令才能让海迪随机选择东西呢?"
+            question_text: "你需要使用哪一个指令才能让海蒂随机选择东西呢?"
             mp_choice_options:
             -   option: |
                     ```
@@ -480,7 +480,7 @@ levels:
                     ```
                     {print} 石头 {at} {random}
                     ```
-                feedback: "你或许不想要海迪每一次都 {print} 石头, 有时候你或许想要剪刀或布."
+                feedback: "你或许不想要海蒂每一次都 {print} 石头, 有时候你或许想要剪刀或布."
             -   option: |
                     ```
                     {print} options {at} {random}
@@ -1402,7 +1402,7 @@ levels:
             hint: "Mind the `{repeat}` command."
             question_score: '10'
         8:
-            question_text: "哪个海迪代码会输出这个？"
+            question_text: "哪个海蒂代码会输出这个？"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: |
@@ -1531,11 +1531,11 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "你好\n我是海迪！\n"
+            -   option: "你好\n我是海蒂！\n"
                 feedback: "Everything is printed twice."
-            -   option: "你好\n你好\n我是海迪\n"
+            -   option: "你好\n你好\n我是海蒂\n"
                 feedback: "The second line is repeated twice as well."
-            -   option: "你好\n我是海迪！\n你好\n我是海迪！\n"
+            -   option: "你好\n我是海蒂！\n你好\n我是海蒂！\n"
                 feedback: "Super!"
             -   option: "你好 \n你好 \n我是Hedy! \n我是Hedy！\"\n"
                 feedback: "Everything is printed twice"
@@ -1546,7 +1546,7 @@ levels:
             question_text: "这段代码有什么问题？"
             code: |-
                 {repeat} 5 {times}
-                {print} '海迪很酷！'
+                {print} '海蒂很酷！'
             mp_choice_options:
             -   option: "这里应该只有一行代码，不是两行。"
                 feedback: "不，应该有两行。"
@@ -1788,7 +1788,7 @@ levels:
             question_text: "输入正确的密码后会显示什么？"
             code: |-
                 密码 = {ask} '密码是什么？'
-                正确密码 = '海迪'
+                正确密码 = '海蒂'
                 {if} 密码 {is} 正确密码
                     {repeat} 2 {times}
                         {print} '做得好！'
@@ -2071,7 +2071,7 @@ levels:
                         {print} i
                         {print} '我曾经抓住一条活鱼！'
                     ```
-                feedback: "那么海迪会说“1 我曾经抓住一条活鱼！2 我曾经抓住一条活鱼！”……等等。"
+                feedback: "那么海蒂会说“1 我曾经抓住一条活鱼！2 我曾经抓住一条活鱼！”……等等。"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 5
@@ -2087,9 +2087,9 @@ levels:
             question_text: "哪段代码可以输出这个？"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
-                feedback: "这样海迪会打印0到10，而不是10到0。"
+                feedback: "这样海蒂会打印0到10，而不是10到0。"
             -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
-                feedback: "这样海迪会打印负数。"
+                feedback: "这样海蒂会打印负数。"
             -   option: "```\n{for} i {in} {range} 10 {to} 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
                 feedback: "不幸的是这样并不对。"
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"

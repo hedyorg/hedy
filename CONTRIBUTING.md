@@ -271,17 +271,21 @@ Don't worry if you make a mistake here, the files are always generated again on 
 
 ## Using Docker
 
-If you want to run the website locally, but would prefer to use Docker instead
-of installing python, you can build a container image and run it like so:
+If you want to run the website locally and would prefer to use Docker you can build a container with:
 
 ```bash
 docker build -t hedy .
 ```
 
-and then:
+and then you can run the docker container with:
 
 ```bash
-docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app --name hedy hedy 
+```
+
+After that, you can access bash inside the container with:
+```bash
+docker exec -it hedy bash
 ```
 
 ## Testing Admin facing features locally
