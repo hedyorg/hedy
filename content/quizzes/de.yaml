@@ -1797,17 +1797,17 @@ levels:
             mp_choice_options:
             -   option: "```\nGut gemacht!\nGut gemacht!\n```"
                 feedback: "Das ist es nicht!"
-            -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
-                feedback: "That's not it!"
-            -   option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
-                feedback: "That's not it!"
-            -   option: "```\nGood job!\nYou can use the computer!\nGood job!\nYou can use the computer!\n```"
+            -   option: "```\nDer Computer explodiert in 5... 4... 3... 2... 1...\n```"
+                feedback: "Das ist es nicht!"
+            -   option: "```\nGut gemacht!\nGut gemacht!\nDu kannst den Computer benutzen!\n```"
+                feedback: "Das ist es nicht!"
+            -   option: "```\nGut gemacht!\nDu kannst den Computer benutzen!\nGut gemacht!\nDu kannst den Computer benutzen!\n```"
                 feedback: "Richtig!"
             correct_answer: "D"
-            hint: "Everything under the `{repeat}` command is repeated twice."
+            hint: "Alles unter dem `{repeat}` Befehl wird zwei Mal wiederholt."
             question_score: '10'
         3:
-            question_text: "Which case should you choose to win a million dollars?"
+            question_text: "Welchen Fall solltest du wählen, um eine Million Euro zu gewinnen?"
             code: |-
                 {print} 'Choose the right case and win!'
                 case = {ask} 'Which case will you pick? 1 or 2?'
@@ -1824,19 +1824,19 @@ levels:
                          {if} action {is} open
                              {print} 'You open the case and win a million dollars!'
             mp_choice_options:
-            -   option: "case 1, sell"
-                feedback: "You don't win a million!"
-            -   option: "case 1, open"
-                feedback: "You don't win a million"
-            -   option: "case 2, sell"
-                feedback: "You don't win a million"
-            -   option: "case 2, open"
-                feedback: "Great job! You win!"
+            -   option: "Fall 1, verkaufen"
+                feedback: "Du gewinnst keine Million!"
+            -   option: "Fall 1, offen"
+                feedback: "Du gewinnst keine Million"
+            -   option: "Fall 2, verkaufen"
+                feedback: "Du gewinnst keine Million"
+            -   option: "Fall 2, offen"
+                feedback: "Großartig gemacht! Du gewinnst!"
             correct_answer: "D"
-            hint: "Follow the right path"
+            hint: "Folge dem richtigen Pfad"
             question_score: '10'
         4:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             code: |-
                 name = {ask} 'What is your name?'
                 size = {ask} 'What is your shoe size?'
@@ -1853,160 +1853,160 @@ levels:
             -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
                 feedback: "No, she gets 'Ill keep looking'"
             -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
                 feedback: "No she gets 'Ill keep looking'"
             correct_answer: "C"
             hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
             question_score: '10'
         5:
-            question_text: "Which code produced this output?"
+            question_text: "Welcher Code hat diese Ausgabe erzeugt?"
             mp_choice_options:
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    nachtisch = {ask} 'Was ist dein Lieblingsnachtisch?'
+                    {if} nachtisch {is} Eis
                         {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} 'Eis ist das Beste!'
                     ```
-                feedback: "Don't forget the indentation after `{repeat}` commands."
+                feedback: "Vergiss nicht die Einrückung nach dem `{repeat}` Befehl."
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    nachtisch = {ask} 'Was ist dein Lieblingsnachtisch?'
+                    {if} nachtisch {is} Eis
                     {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} 'Eis ist das Beste!'
                     ```
-                feedback: "Use indentation after an `{if}` command"
+                feedback: "Benutze Einrückung nach dem `{if}` Befehl"
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    nachtisch = {ask} 'Was ist dein Lieblingsnachtisch?'
+                    {if} nachtisch {is} Eis
                         {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} 'Eis ist das Beste!'
                     ```
                 feedback: "Perfekt"
             -   option: |
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        nachtisch = {ask} 'Was ist dein Lieblingsnachtisch?'
+                        {if} nachtisch {is} Eis
                             {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} 'Eis ist das Beste!'
                     ```
-                feedback: "There are 2 `{repeat}` commands in this code."
+                feedback: "Es gibt 2 `{repeat}` Befehle in diesem Code."
             correct_answer: "C"
-            hint: "Watch the indentation"
+            hint: "Beachte die Einrückung"
             question_score: '10'
-            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            output: "Eis ist das Beste!\nEis ist das Beste!\nEis ist das Beste!"
         6:
-            question_text: "After which command(s) should you use indentation (starting the next line with 4 spaces)?"
+            question_text: "Nach welchen/welchem Befehl/Befehlen solltest du Einrückung verwenden (die Zeile mit 4 Leerzeichen beginnen)?"
             mp_choice_options:
             -   option: "`{if}`"
-                feedback: "Don't forget the others"
+                feedback: "Vergiss nicht die anderen"
             -   option: "`{if}` `{repeat}`"
-                feedback: "Don't forget `{else}`!"
+                feedback: "Vergiss nicht `{else}`!"
             -   option: "`{if}` `{else}` `{repeat}`"
-                feedback: "Keep it up!"
+                feedback: "Weiter so!"
             -   option: "`{if}` `{else}` `{repeat}` `{print}`"
-                feedback: "Not with print"
+                feedback: "Nicht mit drucke"
             correct_answer: "C"
-            hint: "Indentation happens on the line below some commands"
+            hint: "Einrückung passiert in der Zeile unter manchen Befehlen"
             question_score: '10'
         7:
             question_text: "Du bekommst 5 Euro Rabatt, wenn du eine mittlere Pizza mit Cola bestellst.<br>Aber der Code hat einen Fehler! Wie kann man ihn debuggen?"
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if} essen {is} Pizza
+                {if} größe {is} medium
+                {if} getränk {is} Cola
+                preis = preis - 2
             mp_choice_options:
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                                price = price - 2
+                    {if} essen {is} Pizza
+                        {if} größe {is} medium
+                            {if} getränk {is} Cola
+                                preis = preis - 5
                     ```
-                feedback: "Amazing!"
+                feedback: "Toll!"
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                    {if} drink {is} coke
-                        price = price - 2
+                    {if} essen {is} Pizza
+                        {if} größe {is} medium
+                    {if} getränk {is} Cola
+                        preis = preis - 5
                     ```
                 feedback: "Dem zweiten {if} fehlt Code!"
             -   option: |
                     ```
-                    {if} food {is} pizza
-                    {if} size {is} medium
-                    {if} drink {is} coke
-                            price = price - 2
+                    {if} essen {is} Pizza
+                    {if} größe {is} medium
+                    {if} getränk {is} Cola
+                            preis = preis - 5
                     ```
                 feedback: "Zwei aufeinander folgende {if}s sind nie korrekt."
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                            price = price - 2
+                    {if} essen {is} Pizza
+                        {if} größe {is} medium
+                            {if} getränk {is} Cola
+                            preis = preis - 5
                     ```
-                feedback: "Bijna goed maar kijk eens naar die laatste regel."
+                feedback: "Du bist sehr gut, aber du musst dich an die letzte Regel halten."
             correct_answer: "A"
-            hint: "After each `{if}` command, the line below should indent"
+            hint: "Nach jedem `{if}` Befehl sollte die Zeile darunter eingerückt sein"
             question_score: '10'
         8:
-            question_text: "What is wrong is this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 age = {ask} 'Happy Birthday! How old are you?'
                 singing = {ask} 'Would you like us to sing?'
                     if singing {is} yes
                         {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                            {print} 'Hip Hip Hooray'
             mp_choice_options:
-            -   option: "You can't put two questions in a row"
-                feedback: "Yes you can."
+            -   option: "Du kannst nicht zwei Fragen in Folge stellen"
+                feedback: "Ja, du kannst."
             -   option: "The variable called 'age' is later on used as 'years'"
-                feedback: "Keen eye! Good job!"
-            -   option: "You're not allowed to start with 8 spaces, like line 4 and 5 do"
-                feedback: "You actually must start like that."
-            -   option: "A code must always start with a `{print}` command in the first line"
-                feedback: "That's not true."
+                feedback: "Gutes Auge! Gut gemacht!"
+            -   option: "Du darfst nicht mit 8 Leerzeichen beginnen, wie Zeile 4 und 5 es tun"
+                feedback: "Du musst tatsächlich so beginnen."
+            -   option: "Code muss immer mit einem `{print}` Befehl in der ersten Zeile beginnen"
+                feedback: "Das ist nicht wahr."
             correct_answer: "B"
-            hint: "The indentation is done right this time"
+            hint: "Die Einrückung wurde dieses Mal richtig gemacht"
             question_score: '10'
         9:
-            question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
+            question_text: "Wie viele `{if}` Befehle können in einem anderen `{if}` Befehl platziert werden?"
             mp_choice_options:
-            -   option: "None, that is not allowed"
-                feedback: "You are allowed to"
+            -   option: "Keine, das ist nicht erlaubt"
+                feedback: "Das darfst du"
             -   option: "Nur 1"
-                feedback: "You could use more if you like"
+                feedback: "Du könntest mehr nutzen, wenn du möchtest"
             -   option: "3"
-                feedback: "You could use more if you like"
-            -   option: "Infinite, as long as you keep using indentation correctly"
-                feedback: "That is true"
+                feedback: "Du könntest mehr nutzen, wenn du möchtest"
+            -   option: "Unendlich, solange du die Einrückung richtig benutzt"
+                feedback: "Das ist wahr"
             correct_answer: "D"
-            hint: "You can put an `{if}` command inside an `{if}` command."
+            hint: "Du kannst einen `{if}` Befehl in einen `{if}` Befehl schreiben."
             question_score: '10'
         10:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             code: |-
                 1 {repeat} 2 {times}
                 2 {if} level {is} 9
-                3 {print} Great job!
+                3 {print} Großartig gemacht!
             mp_choice_options:
-            -   option: "All lines should start with 4 spaces"
-                feedback: "Only line 2 and 3 start with spaces"
-            -   option: "Line 2 and 3 should start with 4 spaces"
-                feedback: "Line 3 should start with 8"
-            -   option: "Line 2 and 3 should start with 8 spaces"
-                feedback: "Line 2 should start with 4"
-            -   option: "line 2 should atart with 4 spaces and line 3 with 8"
-                feedback: "You are correct!"
+            -   option: "Alle Zeilen sollten mit 4 Leerzeichen beginnen"
+                feedback: "Nur Zeile 2 und 3 beginnen mit Leerzeichen"
+            -   option: "Zeile 2 und 3 sollte mit 4 Leerzeichen beginnen"
+                feedback: "Zeile 3 sollte mit 8 beginnen"
+            -   option: "Zeile 2 und 3 sollte mit 8 Leerzeichen beginnen"
+                feedback: "Zeile 2 sollte mit 4 beginnen"
+            -   option: "Zeile 2 sollte mit 4 Leerzeichen beginnen und Zeile 3 mit 8"
+                feedback: "Du liegst richtig!"
             correct_answer: "D"
-            hint: "The first line doens't start with any spaces"
+            hint: "Die erste Zeile beginnt nicht mit Leerzeichen"
             question_score: '10'
     11:
         1:
@@ -2056,7 +2056,7 @@ levels:
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
         3:
-            question_text: "Which code was used to get this output?"
+            question_text: "Welcher Code wurde benutzt um diese Ausgabe zu bekommen?"
             output: |-
                 1
                 2
@@ -2156,24 +2156,24 @@ levels:
             hint: "There is something wrong with the indention"
             question_score: '10'
         6:
-            question_text: "How many times does the word Hello appear on your screen when you run the code?"
+            question_text: "Wie oft erscheint das Wort Hallo in der Ausgabe, wenn du den Code ausführst?"
             code: |-
                 {for} i {in} {range} 0 {to} 2
-                    {print} 'Hello'
+                    {print} 'Hallo'
             mp_choice_options:
-            -   option: "1 time"
+            -   option: "1 Mal"
                 feedback: "No"
-            -   option: "2 times"
+            -   option: "2 Mal"
                 feedback: "No"
-            -   option: "3 times"
-                feedback: "That's right!"
-            -   option: "Never"
+            -   option: "3 Mal"
+                feedback: "Das ist richtig!"
+            -   option: "Nie"
                 feedback: "No"
             correct_answer: "C"
-            hint: "0 also counts. So 0,1,2 that's 3 times."
+            hint: "0 zählt auch. Also 0,1,2 ist 3 Mal."
             question_score: '10'
         7:
-            question_text: "What should be on the place of the question mark?"
+            question_text: "Was sollte anstelle des Fragezeichens stehen?"
             code: |-
                 {print} 'Welcome to Hedys diner'
                 people is {ask} 'How many people will be eating here tonight?'
@@ -2185,10 +2185,10 @@ levels:
                     ```
                     {for} i {in} {range} 0 {to} 3
                     ```
-                feedback: "There's not always 3 people"
+                feedback: "Es sind nicht immer 3 Leute"
             -   option: |
                     ```
-                    {for} i {in} {range} 1 {to} guests
+                    {for} i {in} {range} 1 {to} gäste
                     ```
                 feedback: "Die Variable heißt nicht guests"
             -   option: |
@@ -2200,7 +2200,7 @@ levels:
                     ```
                     {for} i {in} {range} 0 {to} people
                     ```
-                feedback: "That's one order too many!"
+                feedback: "Das ist eine Bestellung zu viel!"
             correct_answer: "C"
             hint: "Use the variable 'people'"
             question_score: '10'
