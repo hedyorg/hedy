@@ -9,9 +9,10 @@ from tests.Tester import HedyTester
 class TestsLevel18(HedyTester):
     level = 18
 
-    def test_print_brackets(self):
-        code = textwrap.dedent("""\
-      print('Hallo!')""")
+    @parameterized.expand([['(', ')'], ['（', '）']])
+    def test_print_brackets(self, bracket_open, bracket_close):
+        code = textwrap.dedent(f"""\
+      print{bracket_open}'Hallo!'{bracket_close}""")
 
         expected = textwrap.dedent("""\
       print(f'''Hallo!''')""")
@@ -70,7 +71,7 @@ class TestsLevel18(HedyTester):
         )
 
     @parameterized.expand([':', '：'])
-    def test_if_with_equals_sign(self, colon):
+    def test_if_with_dequals_sign_colon(self, colon):
         code = textwrap.dedent(f"""\
       naam is 'Hedy'
       if naam == Hedy{colon}
@@ -82,6 +83,9 @@ class TestsLevel18(HedyTester):
         print(f'''koekoek''')""")
 
         self.single_level_tester(code=code, expected=expected)
+
+
+
 
     # issue also in level 17, leaving for now.
     # def test_bigger(self):
