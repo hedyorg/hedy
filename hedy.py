@@ -1197,6 +1197,13 @@ class IsValid(Filter):
         return False, error, meta
     # other rules are inherited from Filter
 
+    # flat if no longer allowed in level 8 and up
+    def error_ifelse(self, meta, args):
+        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    # other rules are inherited from Filter
+
 
 def valid_echo(ast):
     commands = ast.children
@@ -2715,8 +2722,9 @@ def preprocess_ifs(code, lang='en'):
 
     def starts_with_after_repeat(command, line):
         elements_in_line = line.split()
-        repeat_plus_translated = ['repeat', KEYWORDS[lang].get('repeat')]
-        times_plus_translated = ['times', KEYWORDS[lang].get('times')]
+        keywords_in_lang = KEYWORDS.get(lang, KEYWORDS['en'])
+        repeat_plus_translated = ['repeat', keywords_in_lang.get('repeat')]
+        times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
@@ -2887,6 +2895,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'flat if':
+            raise exceptions.WrongLevelException(offending_keyword='if', working_level=7, tip='no_more_flat_if')
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
