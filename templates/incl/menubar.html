@@ -22,7 +22,7 @@
             </a>
         </li>
         <li class="flex-initial menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}">
-            <a class="menubar-text cursor-pointer whitespace-nowrap" onclick="$('.dropdown-menu').hide(); $('#profile-dropdown').slideToggle('medium');">
+            <a class="menubar-text cursor-pointer whitespace-nowrap" onclick="$('#profile-dropdown').slideToggle('medium');">
                 {% if session.profile_image %}
                     <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-8 lg:h-10 inline-block">
                 {% else %}
@@ -41,7 +41,7 @@
       <!-- Not logged in -->
       <li class="menubar-item dropdown relative z-20">
           {# Needs a 'block' because it contains a flexbox child #}
-          <a class="menubar-text block border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium'); $('#search_language').focus();" data-cy="language-dropdown">
+          <a class="menubar-text block border-transparent cursor-pointer" onclick="$('#language-dropdown').slideToggle('medium'); $('#search_language').focus();" data-cy="language-dropdown">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>
