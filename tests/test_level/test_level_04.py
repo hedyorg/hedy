@@ -35,6 +35,16 @@ class TestsLevel4(HedyTester):
             expected=expected)
 
     def test_print_chinese_quoted_text(self):
+        code = "print “逃离鬼屋！”"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+
+    def test_print_chinese_double_quoted_text(self):
         code = "print ‘逃离鬼屋！’"
         expected = "print(f'逃离鬼屋！')"
 
