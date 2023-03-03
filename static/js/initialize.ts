@@ -24,7 +24,7 @@ export interface InitializeOptions {
    * to determine timeouts, to load the quiz iframe, to show the variable inspector,
    * to show a debugger,  to load parsons exercises, to initialize a default save name.
    */
-  readonly level: number | string;
+  readonly level: number;
 
   /**
    * Current keyword language
@@ -51,6 +51,7 @@ export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
 
   initializeApp({
+    level: options.level,
     keywordLanguage: options.keyword_language,
   });
   initializeFormSubmits();

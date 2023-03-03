@@ -104,6 +104,7 @@ const slides_template = `
 `;
 
 export interface InitializeAppOptions {
+  readonly level: number;
   readonly keywordLanguage: string;
 }
 
@@ -111,6 +112,7 @@ export interface InitializeAppOptions {
  * Initialize "global" parts of the main app
  */
 export function initializeApp(options: InitializeAppOptions) {
+  theLevel = options.level;
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
@@ -134,7 +136,11 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   const dir = $("body").attr("dir");
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
-  theLevel = options.level;
+
+  // theLevel will already have been set during initializeApp
+  if (theLevel != options.level) {
+    throw new Error(`initializeApp set level to ${JSON.stringify(theLevel)} but initializeCodePage sets it to ${JSON.stringify(options.level)}`);
+  }
   theLanguage = options.lang;
 
   // Set the loaded program (directly requested by link with id) into the dictionary of adventures.
@@ -1657,6 +1663,9 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
       showPrintMargin: false,
       highlightActiveLine: false
     });
+    // A bit of margin looks better
+    editor.renderer.setScrollMargin(3, 3, 10, 20)
+
     // When it is the main editor -> we want to show line numbers!
     if (isMainEditor) {
       editor.setOptions({
