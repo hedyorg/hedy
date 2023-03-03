@@ -177,7 +177,6 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected)
 
-
     def test_print_double_quoted_text(self):
         code = 'print "hallo wereld!"'
         expected = "print(f'''hallo wereld!''')"
