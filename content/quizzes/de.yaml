@@ -1775,16 +1775,16 @@ levels:
             -   option: "Nichts, der Code ist korrekt!"
                 feedback: "Das ist richtig!."
             -   option: "Du darst keinen `{if}` Befehl nach einem `{ask}` Befehl verwenden."
-                feedback: "You are!."
-            -   option: "You don't have to use indentation twice."
-                feedback: "You always have to use indentation."
-            -   option: "The indentation is wrong in the last `{if}` command."
-                feedback: "It not, though."
+                feedback: "Du bist!"
+            -   option: "Du musst nicht zwei Mal Einrückung verwenden."
+                feedback: "Du musst immer Einrückung verwenden."
+            -   option: "Die Einrückung im letzten `{if}` Befehl ist falsch."
+                feedback: "Es ist nicht die Einrückung."
             correct_answer: "A"
-            hint: "all the indentation is done correctly."
+            hint: "Alle Einrückungen wurden richtig gemacht."
             question_score: '10'
         2:
-            question_text: "What will be printed after entering the correct password?"
+            question_text: "Was wird ausgegeben nachdem man das richtige Passwort eingegeben hat?"
             code: |-
                 password = {ask} 'What is the password?'
                 correct_password = Hedy
@@ -1796,7 +1796,7 @@ levels:
                     {print} 'The computer will explode in 5... 4... 3... 2... 1...'
             mp_choice_options:
             -   option: "```\nGut gemacht!\nGut gemacht!\n```"
-                feedback: "That's not it!"
+                feedback: "Das ist es nicht!"
             -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
                 feedback: "That's not it!"
             -   option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
