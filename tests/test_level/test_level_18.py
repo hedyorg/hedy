@@ -84,9 +84,6 @@ class TestsLevel18(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-
-
-
     # issue also in level 17, leaving for now.
     # def test_bigger(self):
     #     code = textwrap.dedent("""\
