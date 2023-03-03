@@ -1359,7 +1359,9 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return len(s) > 1 and ((s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"'))
+        opening_quotes = ['‘', "'", '"', "“"]
+        closing_quotes = ['’', "'", '"', "”"]
+        return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
@@ -2545,10 +2547,9 @@ def transpile(input_string, level, lang="en"):
 def translate_characters(s):
     # this method is used to make it more clear to kids what is meant in error messages
     # for example ' ' is hard to read, space is easier
-    # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
     if s == ' ':
         return 'space'
-    elif s == ',':
+    elif s == ',' or s == "،" or s == "，":
         return 'comma'
     elif s == '?':
         return 'question mark'
