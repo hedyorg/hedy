@@ -100,9 +100,9 @@ adventures:
             13:
                 start_code: "ime = {ask} 'kako se zoves?'\nuzrast = {ask} 'koliko imas godina?'\n{if} ime {is} 'Hedy' {and} uzrast {is} 2\n    {print} 'Ti si prava Hedy!'"
                 story_text: "## i... ili..?\nSada ćemo da naučimo `{and}` i `{or}`! Ako hoćeš da proveriš dve izjave, ne moraš koristiti dva puta {if} nego možeš koristiti `{and}` i `{or}`. Ako koristiš `{and}`, obe izjave, levo i desno od `{and}` moraju biti istinite. Ali možemo takodje koristiti i `{or}`. U tom slučaju samo jedna izjava mora biti tačna."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                example_code: "```\nime = {ask} 'Kako se zoveš?'\nuzrast = {ask} 'koliko imaš godina?'\n{if} ime {is} 'Hedy' {and} uzrast {is} 2\n    {print} 'Ti si prava Hedy!'\n```\n"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+                start_code: "uzrast = {ask} 'Koliko imaš godina?'\n{if} uzrast < 13\n    {print} 'Mladji si od mene!'\n{else}\n    {print} 'Stariji si od mene!'"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
