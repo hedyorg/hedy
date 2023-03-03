@@ -103,14 +103,14 @@ adventures:
                 example_code: "```\nime = {ask} 'Kako se zoveš?'\nuzrast = {ask} 'koliko imaš godina?'\n{if} ime {is} 'Hedy' {and} uzrast {is} 2\n    {print} 'Ti si prava Hedy!'\n```\n"
             14:
                 start_code: "uzrast = {ask} 'Koliko imaš godina?'\n{if} uzrast < 13\n    {print} 'Mladji si od mene!'\n{else}\n    {print} 'Stariji si od mene!'"
-                story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                story_text: "## Dobro, Bolje, Najbolje!\nNaučićemo još novih stvari. Možda to već znate iz matematike, znaci manje `<` i veće `>`.\nManje `<` proverava da li je prvi broj manji nego drugi, na primer uzrast `<` 12 proverava da li je uzrast manji od 12 godina.\nAko želiš da proveriš da li je prvi broj manji ili jednak drugom broju, možes koristiti znak manje ili jednako `<=`, na primer uzrast `<=` 11.\nZnak više `>` proverava da li je prvi broj veći nego drugi, na primer uzrast `>` 10 proverava da li je uzrast veći od 10.\nAko želiš da proveriš da li je prvi broj veći ili jednak drugom broju, možes koristiti znak veće ili jednako`>=`, na primer uzrast `>=` 11.\nOva poredjenja koristiš sa `{if}`, ovako:\n"
+                example_code: "```\nuzrast = {ask} 'Koliko imaš godina?'\n{if} uzrast > 12\n    {print} 'Stariji si od mene!'\n```\n"
+                story_text_2: "Od ovog nivoa pa nadalje, ako želiš da porediš tačno, možeš koristiti dva znaka za jednačenje `==`. Tako je u većini programskih jezika:\n"
+                example_code_2: "```\nime = {ask} 'Kako se zoveš?'\n{if} ime == 'Hedy'\n    {print} 'Super si!'\n```\n"
+                story_text_3: "Možeš takodje porediti i da li nešto *nije* jednako nečemu, koristeći ovaj znak `!=` :\n"
+                example_code_3: "```\nime = {ask} 'Kako se zoveš?'\n{if} ime != 'Hedy'\n    {print} 'Ti nisi Hedy'\n```\n"
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+                start_code: "odgovor = 0\n{while} odgovor != 25\n    odgovor = {ask} 'Koliko je 5 puta 5?'\n{print} 'Tačan odgovor je dat'"
                 story_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
                 example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
     story:
