@@ -161,25 +161,31 @@ class TestsLevel15(HedyTester):
       print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-      stop = 0
-      while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'p':
-              print(f'''press''')
+        stop = 0
+        while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
               break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 's':
-              stop = 1
-              break
-        time.sleep(0.1)
-      print(f'''Uit de loop!''')""")
+            if event.type == pygame.KEYDOWN:
+              if event.unicode != 'p':
+                  pygame_end = True
+              if event.unicode == 'p':
+                print(f'''press''')
+                break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode != 's':
+                  pygame_end = True
+              if event.unicode == 's':
+                stop = 1
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        print(f'''Uit de loop!''')""")
 
         self.multi_level_tester(
             code=code,
