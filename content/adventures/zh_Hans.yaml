@@ -485,7 +485,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             10:
                 story_text: "## 计算器 \n这个计算器游戏帮助您练习你的乘法口诀表！ \n### 练习\n你能在列表中加入更多的数字，这样你就可以练习乘法表直到10？\n"
-                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确\n```\n"
+                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确答案\n```\n"
                 start_code: '# 在这里写你的代码'
             9:
                 story_text: "## 计算器\n在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。\n\n### 练习 1\n你能完成第 10 行以使程序工作吗？\n\n### 练习 2\n输入正确或错误的答案时给出反馈。为此，请使用 `{else}` 来扩展程序。\n"
@@ -593,7 +593,7 @@ adventures:
                 example_code: |
                     ## 海蒂餐厅示例
                     ```
-                    _在这段代码中添加引号_
+                    _ 在这段代码中添加引号 _
                     {print} '欢迎来到海蒂餐厅！'
                     {print} '今天我们提供披萨和千层面。'
                     食物 {is} {ask} '您想吃什么？'
@@ -1139,9 +1139,9 @@ adventures:
                     在这个鬼屋里，你既可以用表情符号也可以用文字选择你会遇到的怪物。
                 example_code: |
                     ```
-                    怪物_1{is} 👻
-                    怪物_2{is} 🤡
-                    怪物_3{is} 👶
+                    怪物_1 {is} 👻
+                    怪物_2 {is} 🤡
+                    怪物_3 {is} 👶
                     {print} 你进入了鬼屋。
                     {print} 突然你看到怪物_1
                     {print} 你跑进另一个房间，但怪物_2正在那里等着你！
@@ -1241,7 +1241,7 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                start_code: "{print} ’逃出鬼屋！’"
+                start_code: "{print} ‘逃出鬼屋！’"
             11:
                 story_text: |
                     ## 鬼屋
