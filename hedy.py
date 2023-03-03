@@ -2715,8 +2715,9 @@ def preprocess_ifs(code, lang='en'):
 
     def starts_with_after_repeat(command, line):
         elements_in_line = line.split()
-        repeat_plus_translated = ['repeat', KEYWORDS[lang].get('repeat')]
-        times_plus_translated = ['times', KEYWORDS[lang].get('times')]
+        keywords_in_lang = KEYWORDS.get(lang, KEYWORDS['en'])
+        repeat_plus_translated = ['repeat', keywords_in_lang.get('repeat')]
+        times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
