@@ -69,10 +69,11 @@ class TestsLevel18(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    def test_if_with_equals_sign(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand([':', '：'])
+    def test_if_with_equals_sign(self, colon):
+        code = textwrap.dedent(f"""\
       naam is 'Hedy'
-      if naam == Hedy:
+      if naam == Hedy{colon}
           print('koekoek')""")
 
         expected = textwrap.dedent("""\
