@@ -1379,7 +1379,7 @@ levels:
             -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
                 feedback: "Nur die zweite Zeile wird 3 Mal wiederholt"
             -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
-                feedback: "All though the town! Perfect!"
+                feedback: "All through the town! Perfekt!"
             correct_answer: "D"
             hint: "Nur 'round and round' wird 3 Mal wiederholt."
             question_score: '10'
@@ -1579,10 +1579,10 @@ levels:
         4:
             question_text: "Welche Ausgabe ist richtig?"
             code: |-
-                {print} 'The children went:'
+                {print} 'Die Kinder riefen:'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} 'Juchuu!'
+                    {print} 'Wir fahren in den Urlaub!'
             mp_choice_options:
             -   option: "Die Kinder sagten:\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "Beachte den `{repeat}` Befehl!"
@@ -1747,20 +1747,20 @@ levels:
                 2 {if} level {is} 8
                 3 {print} 'Great job!'
             mp_choice_options:
-            -   option: "All lines should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 2 and 3 should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 2 should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 3 should start with 4 spaces"
-                feedback: "You are correct!"
+            -   option: "Alle Zeilen sollten mit 4 Leerzeichen beginnen"
+                feedback: "Das ist nicht wahr"
+            -   option: "Zeile 2 und 3 sollten mit 4 Leerzeichen beginnen"
+                feedback: "Das ist nicht wahr"
+            -   option: "Zeile 2 sollte mit 4 Leerzeichen beginnen"
+                feedback: "Das ist nicht wahr"
+            -   option: "Zeile 3 sollte mit 4 Leerzeichen beginnen"
+                feedback: "Du liegst richtig!"
             correct_answer: "D"
-            hint: "Only one line starts with 4 spaces, but which one...?"
+            hint: "Nur eine Zeile sollte mit 4 Leerzeichen beginnen, aber welche...?"
             question_score: '10'
     9:
         1:
-            question_text: "What is wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {repeat} 3 {times}
                    eten = {ask} 'What would you like to eat?'
@@ -1772,9 +1772,9 @@ levels:
                        {print} 'One pizza with ' topping
                 {print} 'That you for your order'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
-                feedback: "That's right!."
-            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
+            -   option: "Nichts, der Code ist korrekt!"
+                feedback: "Das ist richtig!."
+            -   option: "Du darst keinen `{if}` Befehl nach einem `{ask}` Befehl verwenden."
                 feedback: "You are!."
             -   option: "You don't have to use indentation twice."
                 feedback: "You always have to use indentation."
