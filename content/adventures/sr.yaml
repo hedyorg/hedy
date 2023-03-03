@@ -29,11 +29,11 @@ adventures:
                 story_text_6: "**Matematika sa rečima** \nU ovom novou je dozvoljeno koristiti znak + sa tekstom. Na primer:"
                 example_code_6: "```\na = 'Zdravo '\nb = 'svete!'\n{print} a + b\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
-                story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
+                start_code: "voće = ['jabuke', 'banane', 'višnje']\n{print} voće"
+                example_code: "```\nprijatelji = ['Marko', 'Marija', 'Milan']\nsrećni_brojevi = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'srećan broj za' prijatelji[i]\n    {print} ' je ' srećni_brojevi[i]\n```\n"
+                story_text: "## Sve više i više kao prvi kod!\nSada ćemo da napravimo liste kao što se prave u programerskom jeziku Python, sa uglastim zagradama oko liste! Takodje nastavljamo da koristimo znake navoda oko svakog elementa, kao što smo u prethodnim nivoima naučili.\nUglaste zagrade možeš koristiti i da ukažeš na tačno odredjeno mesto u listi."
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Spreman ili ne, evo me!'"
                 story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
@@ -111,8 +111,8 @@ adventures:
                 example_code_3: "```\nime = {ask} 'Kako se zoveš?'\n{if} ime != 'Hedy'\n    {print} 'Ti nisi Hedy'\n```\n"
             15:
                 start_code: "odgovor = 0\n{while} odgovor != 25\n    odgovor = {ask} 'Koliko je 5 puta 5?'\n{print} 'Tačan odgovor je dat'"
-                story_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                story_text: "##  Još petlji!\nSada ćemo naučiti novu petlju, `{while}` petlja! Nastavljamo petlju sve dok je izjava tačna.\nTako da nemoj zaboraviti da promeniš vrednost elementa u petlji.\n\nU primeru koda, nastavljamo sve dok ne dobijemo tačan odgovor.\nAko nikad ne dobijemo tačan odgovor, petlja se neće nikad prekinuti!"
+                example_code: "```\nodgovor = 0\n{while} odgovor != 25\n    odgovor = {ask} 'Koliko je 5 puta 5?'\n{print} 'Tačan odgovor je dat'\n```\n"
     story:
         levels:
             3:
