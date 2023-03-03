@@ -1,9 +1,11 @@
 import { modal } from './modal';
 import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges } from './state';
+import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
+import { AvailableAdventure, TeacherAdventure } from './types';
+import { startTeacherTutorial } from './tutorials/tutorial';
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -697,15 +699,40 @@ export function drag_list (target: any) {
   }
 }
 
+export interface InitializeTeacherPageOptions {
+  readonly page: 'for-teachers';
+
+  /**
+   * Whether to show the dialog box on page load
+   */
+  readonly welcome_teacher?: boolean;
+
+  /**
+   * Whether to show the tutorial on page load
+   */
+  readonly tutorial?: boolean;
+}
+
+export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
+  if (options.welcome_teacher) {
+    modal.alert(ClientMessages.teacher_welcome);
+  }
+  if (options.tutorial) {
+    startTeacherTutorial();
+  }
+}
+
 /**
  * These will be copied into global variables, because that's how this file works...
  */
-interface InitializeCustomizeClassPageOptions {
+export interface InitializeCustomizeClassPageOptions {
+  readonly page: 'customize-class';
   readonly available_adventures_level_translation: string;
   readonly teacher_adventures: TeacherAdventure[];
   readonly available_adventures: Record<string, AvailableAdventure[]>;
   readonly adventures_default_order: Record<string, string[]>;
   readonly adventure_names: Record<string, string>;
+  readonly class_id: string;
 }
 
 let available_adventures_level_translation: string;
@@ -713,16 +740,6 @@ let teacher_adventures: TeacherAdventure[];
 let available_adventures: Record<string, AvailableAdventure[]>;
 let adventures_default_order: Record<string, string[]>;
 let adventure_names: Record<string, string>;
-
-interface AvailableAdventure {
-  from_teacher: boolean;
-  name: string;
-}
-
-interface TeacherAdventure {
-  id: string;
-  level: string;
-}
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   available_adventures_level_translation = options.available_adventures_level_translation;
@@ -735,6 +752,21 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Use this to make sure that we return a prompt when a user leaves the page without saving
       $( "input" ).on('change', function() {
         markUnsavedChanges();
+      });
+
+      $('#back_to_class').on('click', () => {
+        function backToClass() {
+            window.location.href = `/for-teachers/class/${options.class_id}`;
+        }
+
+        if (hasUnsavedChanges()) {
+            modal.confirm(ClientMessages.unsaved_class_changes, () => {
+                clearUnsavedChanges();
+                backToClass();
+            });
+        } else {
+            backToClass();
+        }
       });
 
       drag_list(document.getElementById("sortadventures"));

@@ -15,7 +15,9 @@ from website.yaml_file import YamlFile  # noqa
 OUTPUT_FILE = 'static/js/message-translations.ts'
 
 ADDITIONAL_GETTEXT_KEYS = [
-    'level_title'
+    'level_title',
+    'unsaved_class_changes',
+    'teacher_welcome',
 ]
 
 
