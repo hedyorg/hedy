@@ -675,7 +675,7 @@ levels:
                     ```
                     {print} hallo
                     ```
-                feedback: "Hier gibt es keine Anführungszeichen!."
+                feedback: "Hier gibt es keine Anführungszeichen!"
             -   option: |
                     ```
                     {print} ,hallo,
@@ -1664,7 +1664,7 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: "Nichts, dieser Code ist richtig!"
-                feedback: "Etwas stimmt nicht!."
+                feedback: "Etwas stimmt nicht!"
             -   option: "Du darfst keinen `{if}` Befehl nach einem `{ask}` Befehl benutzen."
                 feedback: "Du bist!"
             -   option: "Du musst nicht zwei Mal Einrückung verwenden. Nur im ersten `{if}` Befehl."
@@ -1773,7 +1773,7 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: "Nichts, der Code ist korrekt!"
-                feedback: "Das ist richtig!."
+                feedback: "Das ist richtig!"
             -   option: "Du darst keinen `{if}` Befehl nach einem `{ask}` Befehl verwenden."
                 feedback: "Du bist!"
             -   option: "Du musst nicht zwei Mal Einrückung verwenden."
@@ -2222,25 +2222,25 @@ levels:
             hint: "Es fehlt `{print}` i"
             question_score: '10'
         9:
-            question_text: "How many times does Hedy chant Hip Hip Hooray?"
+            question_text: "Wie oft sagt Hedy Hip Hip Hooray?"
             code: |-
-                age = {ask} 'How old are you?'
-                {for} i {in} {range} 1 {to} age
+                alter = {ask} 'Wie alt bist du?'
+                {for} i {in} {range} 1 {to} alter
                     {print} 'Hip Hip Hoorray!'
             mp_choice_options:
-            -   option: "1 time"
-                feedback: "Try again"
-            -   option: "2 times"
-                feedback: "Try again"
-            -   option: "Never"
-                feedback: "Try again"
-            -   option: "That depends on how old you are"
-                feedback: "That's right!"
+            -   option: "1 Mal"
+                feedback: "Versuch es nochmal"
+            -   option: "2 Mal"
+                feedback: "Versuch es nochmal"
+            -   option: "Nie"
+                feedback: "Versuch es nochmal"
+            -   option: "Das hängt davon ab wie alt du bist"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` alter"
             question_score: '10'
         10:
-            question_text: "Which code belongs to this output?"
+            question_text: "Welcher Code gehört zu dieser Ausgabe?"
             output: |-
                 Baby shark tututudutudu
                 Baby shark tututudutudu
@@ -2253,30 +2253,30 @@ levels:
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "Mind the indention"
+                feedback: "Beachte die Einrückung"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 ist 4 Mal."
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 ist 4 Mal."
             correct_answer: "B"
-            hint: "Mind the indention"
+            hint: "Beachte die Einrückung"
             question_score: '10'
     10:
         1:
