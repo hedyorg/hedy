@@ -1197,6 +1197,13 @@ class IsValid(Filter):
         return False, error, meta
     # other rules are inherited from Filter
 
+    # flat if no longer allowed in level 8 and up
+    def error_ifelse(self, meta, args):
+        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    # other rules are inherited from Filter
+
 
 def valid_echo(ast):
     commands = ast.children
@@ -2888,6 +2895,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'flat if':
+            raise exceptions.WrongLevelException(offending_keyword='if', working_level=7, tip='no_more_flat_if')
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
