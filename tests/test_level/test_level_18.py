@@ -9,9 +9,10 @@ from tests.Tester import HedyTester
 class TestsLevel18(HedyTester):
     level = 18
 
-    def test_print_brackets(self):
-        code = textwrap.dedent("""\
-      print('Hallo!')""")
+    @parameterized.expand([['(', ')'], ['（', '）']])
+    def test_print_brackets(self, bracket_open, bracket_close):
+        code = textwrap.dedent(f"""\
+      print{bracket_open}'Hallo!'{bracket_close}""")
 
         expected = textwrap.dedent("""\
       print(f'''Hallo!''')""")
@@ -69,10 +70,11 @@ class TestsLevel18(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    def test_if_with_equals_sign(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand([':', '：'])
+    def test_if_with_dequals_sign_colon(self, colon):
+        code = textwrap.dedent(f"""\
       naam is 'Hedy'
-      if naam == Hedy:
+      if naam == Hedy{colon}
           print('koekoek')""")
 
         expected = textwrap.dedent("""\
