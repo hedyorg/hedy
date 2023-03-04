@@ -1723,8 +1723,8 @@ levels:
         9:
             question_text: "Welche Zeilen sollten mit 4 Leerzeichen beginnen?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music {is} rock
+                1 musik = {ask} 'Was ist dein Lieblingsmusikgenre?'
+                2 {if} musik {is} Rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
@@ -1743,9 +1743,9 @@ levels:
         10:
             question_text: "Welche Aussage ist wahr?"
             code: |-
-                1 level = {ask} 'What level are you on?'
+                1 level = {ask} 'In welchem Level bist du?'
                 2 {if} level {is} 8
-                3 {print} 'Great job!'
+                3 {print} 'Großartig gemacht!'
             mp_choice_options:
             -   option: "Alle Zeilen sollten mit 4 Leerzeichen beginnen"
                 feedback: "Das ist nicht wahr"
@@ -1763,14 +1763,14 @@ levels:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
+                   food = {ask} 'What would you like to eat?'
                    {if} food {is} fries
                        sauce = {ask} 'What sauce would you like?'
                        {print} 'One fries with ' sauce
                    {if} food {is} pizza
                        topping = {ask} 'What topping would you like?'
                        {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                {print} 'Thank you for your order'
             mp_choice_options:
             -   option: "Nichts, der Code ist korrekt!"
                 feedback: "Das ist richtig!"
@@ -1786,14 +1786,14 @@ levels:
         2:
             question_text: "Was wird ausgegeben nachdem man das richtige Passwort eingegeben hat?"
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                passwort = {ask} 'Was ist das Passwort?'
+                richtiges_passwort = Hedy
+                {if} passwort {is} richtiges_passwort
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} 'Gut gemacht!'
+                        {print} 'Du kannst den Computer benutzen!'
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} 'Der Computer explodiert in 5... 4... 3... 2... 1...'
             mp_choice_options:
             -   option: "```\nGut gemacht!\nGut gemacht!\n```"
                 feedback: "Das ist es nicht!"
@@ -1842,7 +1842,7 @@ levels:
                 size = {ask} 'What is your shoe size?'
                 {if} size {is} 38
                     {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                        {print} '❤️❤️❤️'
                     {else}
                         {print} 'You are not the one!'
                 {else}
@@ -1850,12 +1850,12 @@ levels:
             mp_choice_options:
             -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
                 feedback: "No, she gets 'You are not the one!'"
-            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+            -   option: "Cinderella with shoe size 40 gets the output '❤️❤️❤️'"
                 feedback: "No, she gets 'Ill keep looking'"
             -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
                 feedback: "Das ist richtig!"
-            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
-                feedback: "No she gets 'Ill keep looking'"
+            -   option: "Cinderella with shoe size 38 gets the output 'Ill keep looking'"
+                feedback: "No she gets '❤️❤️❤️'"
             correct_answer: "C"
             hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
             question_score: '10'
@@ -2280,93 +2280,93 @@ levels:
             question_score: '10'
     10:
         1:
-            question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"
+            question_text: "Was müssen wir in die Lücken `_?_` füllen, wenn wir jedes Kompliment ausgeben wollen?"
             code: |-
-                compliments = perfect, great job, amazing
+                komplimente = perfekt, großartig gemacht, toll
                 _?_
-                    {print} compliment
+                    {print} kompliment
             mp_choice_options:
             -   option: |
                     ```
-                    {for} each compliment
+                    {for} jedes kompliment
                     ```
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: |
                     ```
-                    {for} compliment {in} compliments
+                    {for} kompliment {in} komplimente
                     ```
-                feedback: "You deserve all those compliments!"
+                feedback: "Du verdienst all diese Komplimente!"
             -   option: |
                     ```
-                    {if} compliment {in} compliments
+                    {if} kompliment {in} komplimente
                     ```
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: |
                     ```
-                    {for} compliments {in} compliment
+                    {for} komplimente {in} kompliment
                     ```
-                feedback: "Almost there!"
+                feedback: "Fast richtig!"
             correct_answer: "B"
-            hint: "`{for}` each compliment in the lists of compliments..."
+            hint: "`{for}` jedes kompliment in der Liste der komplimente..."
             question_score: '10'
         2:
-            question_text: "Which output is correct?"
+            question_text: "Welche Ausgabe ist richtig?"
             code: |-
-                meals = pizza, pasta, pancakes
-                {for} meal {in} meals
-                    {print} 'I love ' meal
+                mahlzeiten = Pizza, Pasta, Eierkuchen
+                {for} mahlzeit {in} mahlzeiten
+                    {print} 'Ich liebe ' mahlzeit
             mp_choice_options:
-            -   option: "I love pizza"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
-            -   option: "I love pasta"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
-            -   option: "I love pancakes"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
+            -   option: "Ich liebe Pizza"
+                feedback: "Zeile 2 sagt `{for}` jede mahlzeit in der Liste der mahlzeiten. Also wird jede mahlzeit ausgegeben."
+            -   option: "Ich liebe Pasta"
+                feedback: "Zeile 2 sagt `{for}` jede mahlzeit in der Liste der mahlzeiten. Also wird jede mahlzeit ausgegeben."
+            -   option: "Ich liebe Eierkuchen"
+                feedback: "Zeile 2 sagt `{for}` jede mahlzeit in der Liste der mahlzeiten. Also wird jede mahlzeit ausgegeben."
             -   option: |-
-                    I love pizza
-                    I love pasta
-                    I love pancakes
+                    Ich liebe Pizza
+                    Ich liebe Pasta
+                    Ich liebe Eierkuchen
                 feedback: "Great!"
             correct_answer: "D"
-            hint: "Line 2 says for each meal in the list of meals. So each meal is printed."
+            hint: "Zeile 2 sagt für jede mahlzeit in der Liste der mahlzeiten. Also wird jede mahlzeit ausgegeben."
             question_score: '10'
         3:
-            question_text: "Which output is correct?"
+            question_text: "Welche Ausgabe ist richtig?"
             code: |-
-                animals = dogs, cats, hamsters, chickens
-                {for} animal {in} animals
-                    {print} animal ' are lovely pets'
+                tiere = Hunde, Katzen, Hamster, Hühner
+                {for} tier {in} tiere
+                    {print} tier ' sind schöne Haustiere'
             mp_choice_options:
-            -   option: "dogs are lovely pets"
-                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
-            -   option: "dogs, cats, hamsters, chickens are lovely pets"
-                feedback: "Each animal gets their own line in the output."
+            -   option: "Hunde sind schöne Haustiere"
+                feedback: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ge{print}t."
+            -   option: "Hunde, Katzen, Hamster, Hühner sind schöne Haustiere"
+                feedback: "Jedes tier bekommt seine eigene Zeile in der Ausgabe."
             -   option: |-
-                    dogs are lovely pets
-                    cats are lovely pets
-                    hamsters are lovely pets
-                    chickens are lovely pets
+                    Hunde sind schöne Haustiere
+                    Katzen sind schöne Haustiere
+                    Hamster sind schöne Haustiere
+                    Hühner sind schöne Haustiere
                 feedback: "Great!"
-            -   option: "You don't know yet. Because it chooses one of the animals {at} {random}."
-                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
+            -   option: "Das weißt du noch nicht. Weil es eines der Tiere {at} {random} auswählt."
+                feedback: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ge{print}t."
             correct_answer: "C"
-            hint: "Line 2 says {for} each animal in the list of animals. So each animal is printed"
+            hint: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ausgegeben"
             question_score: '10'
         4:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 groceries = apples, bread, milk
                 {for} item {in} groceries
                     {print} 'We need ' groceries
             mp_choice_options:
-            -   option: "Line 2 needs to start with 4 spaces as indentation"
-                feedback: "No it doesn't. Only line 3 needs indentation, which it has."
-            -   option: "Line 3 does not need to start with 4 spaces as indentation"
-                feedback: "Line 2 is a `{for}`command so line 3 does need to start with an indent."
+            -   option: "Zeile 2 muss mit 4 Leerzeichen als Einrückung beginnen"
+                feedback: "Nein, tut es nicht. Nur Zeile 3 braucht Einrückung. Die hat sie."
+            -   option: "Zeile 3 muss nicht mit 4 Leerzeichen als Einrückung beginnen"
+                feedback: "Zeile 2 ist ein `{for}` Befehl also braucht Zeile 3 nicht mit Einrückung beginnen."
             -   option: "Line 3 should say item instead of groceries"
-                feedback: "Good job!"
+                feedback: "Gut gemacht!"
             -   option: "Line 2 should say groceries instead of item"
-                feedback: "No it does not."
+                feedback: "Nein, tut es nicht."
             correct_answer: "C"
             hint: "Line 2 says `{for}` each item in the list of groceries"
             question_score: '10'
@@ -2379,19 +2379,19 @@ levels:
                 {for} player {in} players
                     {print} player ' throws ' _?_ {at} {random}
             mp_choice_options:
-            -   option: "players"
+            -   option: "Spieler"
                 feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
             -   option: "choices"
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             -   option: "choice"
                 feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
-            -   option: "dice"
+            -   option: "würfel"
                 feedback: "Schau dir die Namen der Variablen an."
             correct_answer: "B"
-            hint: "Hedy needs to pick a number `{at} {random}`"
+            hint: "Hedy muss eine Zahl `{at} {random}` auswählen"
             question_score: '10'
         6:
-            question_text: "Which of the answers below is a possible outcome when you run the code?"
+            question_text: "Welche der Antworten unten ist ein mögliches Resultat, wenn du den Code ausführst?"
             code: |-
                 choices = rock, paper, scissors
                 players = Kelly, Meredith
@@ -2404,81 +2404,81 @@ levels:
             -   option: |-
                     Meredith chooses scissors
                     Kelly chooses rock
-                feedback: "So close! But Kelly is first in the list, so she goes first"
+                feedback: "So nah dran! Aber Kelly ist die erste in der Liste, also ist sie zuerst dran"
             -   option: |-
                     Meredith chooses paper
-                feedback: "Kelly wants to play too!"
+                feedback: "Kelly möchte auch spielen!"
             -   option: |-
                     Kelly chooses paper
                     Meredith chooses scissors
-                feedback: "Amazing!"
+                feedback: "Toll!"
             correct_answer: "D"
-            hint: "Each player will pick an option. The player that's first on the list will go first."
+            hint: "Jede Spielerin wird eine Auswahl treffen. Die Spielerin die zuvorderst in der Liste steht beginnt."
             question_score: '10'
         7:
-            question_text: "What line should be on the _?_ in this code that decides what these people will have for dinner?"
+            question_text: "Welche Ziele sollte in die Lücken _?_ in diesem Programm, die entscheidet, was diese Leute zu Abend essen werden?"
             code: |-
-                names = Ron, Leslie, April, Andy
-                food = pasta, fries, salad
+                namen = Ron, Leslie, April, Andy
+                essen = Pasta, Pommes, Salat
                 _?_
-                    {print} name ' has to eat ' food {at} {random} ' for dinner'
+                    {print} name ' isst ' essen {at} {random} ' zu Abend'
             mp_choice_options:
             -   option: |
                     ```
-                    {for} name {in} names
+                    {for} name {in} namen
                     ```
-                feedback: "You are on fire!"
+                feedback: "Du hast einen Lauf!"
             -   option: |
                     ```
-                    {for} names {in} name
+                    {for} namen {in} name
                     ```
-                feedback: "No it should be for each name in the list nameS, so the other way around"
+                feedback: "Nein, es sollte für jeden name in der Liste nameN sein, also anders herum"
             -   option: |
                     ```
-                    {for} food {in} food
+                    {for} essen {in} essen
                     ```
-                feedback: "Each name should be told what they will have for dinner."
+                feedback: "Jedem name sollte gesagt werden, was sie zum Abendessen haben werden."
             -   option: |
                     ```
-                    {for} name {in} food
+                    {for} name {in} essen
                     ```
-                feedback: "Each name should be told what they will have for dinner."
+                feedback: "Jedem name sollte gesagt werden, was sie zum Abendessen haben werden."
             correct_answer: "A"
-            hint: "Each name should be told what they will have for dinner."
+            hint: "Jedem name sollte gesagt werden, was sie zum Abendessen haben werden."
             question_score: '10'
         8:
-            question_text: "What should be on the _?_ in this code that decides which color shirt you get?"
+            question_text: "Was sollte in den Lücken _?_ in diesem Programm stehen, was entscheidet, welche Farbe das Hemd hat, das du bekommst?"
             code: |-
-                names = Donna, Tommy, Ben
-                colors = blue, red, purple
-                {for} name {in} names
+                namen = Donna, Tommy, Ben
+                farben = Blau, Rot, Lila
+                {for} name {in} namen
                     {print} _?_
             mp_choice_options:
             -   option: |
                     ```
-                    'name gets a color shirt'
+                    'name bekommt ein farbe Hemd'
                     ```
-                feedback: "That's not it!"
+                feedback: "Das ist es nicht!"
             -   option: |
                     ```
-                    name 'gets a ' colors {at} {random} ' shirt'
+                    name 'bekommt ein ' farben {at} {random} ' Hemd'
                     ```
-                feedback: "Great job! This was a hard one!"
+                feedback: "Großartig gemacht! Dies war schwierig!"
             -   option: |
                     ```
-                    names 'gets a ' color {at} {random} ' shirt'
+                    namen 'bekommt ein ' farbe {at} {random} ' Hemd'
                     ```
-                feedback: "You want each name printed. So the first word should not be names but..."
+                feedback: "Du möchtest jeden name ausgeben. Also sollte das erste Wort nicht namen sein, sondern..."
             -   option: |
                     ```
-                    'people gets a colors shirt'
+                    'leute bekommt ein farben Hemd'
                     ```
                 feedback: "Es gibt keine Variable mit dem Namen people.."
             correct_answer: "B"
             hint: "Beachten Sie die Anführungszeichen und die Namen der Variablen"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will ask you when you run the program?"
+            question_text: "Was ist die erste Frage, die Hedy stellt, wenn du das Programm ausführst?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
@@ -2488,18 +2488,18 @@ levels:
                         {print} name ' orders ' food ' as their ' course
             mp_choice_options:
             -   option: "Timon, what would you like to eat as your appetizer?"
-                feedback: "Perfect!"
+                feedback: "Perfekt!"
             -   option: "Onno, what would you like to eat as your appetizer?"
                 feedback: "Timon is first on the list!"
             -   option: "Timon, what would you like to eat as your dessert?"
                 feedback: "Appetizers are first in the list"
-            -   option: "You don't know that. Hedy will choose `{at} {random}`."
-                feedback: "There is no `{at} {random}` in this code..."
+            -   option: "Das weißt du nicht. Hedy wird `{at} {random}` auswählen."
+                feedback: "Es gibt kein `{at} {random}` in diesem Code..."
             correct_answer: "A"
-            hint: "The first options from both lists are chosen."
+            hint: "Die jeweils ersten Möglichkeiten von beiden Listen werden gewählt."
             question_score: '10'
         10:
-            question_text: "What is true about this code?"
+            question_text: "Was ist wahr bezüglich dieses Code?"
             code: |-
                 prices = 1 million dollars, car, sandwich
                 names = Bob, Patrick, Sandy, Larry
