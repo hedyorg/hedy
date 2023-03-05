@@ -42,6 +42,25 @@ class Modal {
     $('#modal-alert').fadeOut(1000);
   }
 
+  /**
+   * Display a temporary success popup
+   */
+  public notifySuccess(message: string, timeoutMs: number = 3000) {
+    return this.alert(message, timeoutMs);
+  }
+
+  /**
+   * Display a temporary error popup
+   */
+  public notifyError(message: string, timeoutMs: number = 3000) {
+    return this.alert(message, timeoutMs, true);
+  }
+
+  /**
+   * Display a temporary popup
+   *
+   * @deprecated use notifySuccess or notifyError instead
+   */
   public alert(message: string, timeoutMs?: number, error?: boolean) {
     // Always hide possible previous alert -> make sure it is hidden
     this.hide_alert();
@@ -122,6 +141,13 @@ class Modal {
       this._timeout = undefined;
     }
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  /**
+   * modal.confirm as a promise
+   */
+  public confirmP(message: string): Promise<void> {
+    return new Promise<void>(ok => this.confirm(message, ok));
   }
 
   // The declineCb is optional, mainly for relic code support: add if needed otherwise leave empty on call

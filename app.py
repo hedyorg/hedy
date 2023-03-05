@@ -171,7 +171,12 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
 
         adventure.save_name = program.name
         adventure.start_code = program.code
-        adventure.save_info = SaveInfo(id=program.id, public=program.public, submitted=program.submitted)
+        adventure.save_info = SaveInfo(
+            id=program.id,
+            public=program.public,
+            submitted=program.submitted,
+            public_url=f'{utils.base_url()}/hedy/{program.id}/view',
+            )
 
 
 def load_customized_adventures(level, customizations, into_adventures):
@@ -428,6 +433,9 @@ def parse():
     code = body['code']
     level = int(body['level'])
 
+    program_id = body.get('program_id')
+    save_name = body.get('save_name')
+
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -465,6 +473,7 @@ def parse():
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
+
         try:
             response['Code'] = transpile_result.code
 
@@ -475,6 +484,7 @@ def parse():
                 response['has_turtle'] = True
         except Exception:
             pass
+
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
         except BaseException:
@@ -485,6 +495,12 @@ def parse():
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
+
+        # Save this program (if the user is logged in)
+        if username:
+
+
+
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex)
@@ -945,6 +961,7 @@ def tutorial_index():
         parsons_exercises=parsons,
         cheatsheet=cheatsheet,
         blur_button_available=False,
+        current_user_is_in_class=len(current_user().get('classes', [])) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -952,6 +969,7 @@ def tutorial_index():
             lang=g.lang,
             adventures=adventures,
             initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
             start_tutorial=True,
         ))
 
@@ -1144,6 +1162,7 @@ def index(level, program_id):
         cheatsheet=cheatsheet,
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
+        current_user_is_in_class=len(current_user().get('classes', [])) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -1151,6 +1170,7 @@ def index(level, program_id):
             lang=g.lang,
             adventures=adventures,
             initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
         ))
 
 
@@ -1242,6 +1262,7 @@ def get_specific_adventure(name, level, mode):
                            latest=version(),
                            raw=raw,
                            blur_button_available=False,
+                           current_user_is_in_class=len(current_user().get('classes', [])) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
                                page='code',
@@ -1249,6 +1270,7 @@ def get_specific_adventure(name, level, mode):
                                level=level,
                                adventures=adventures,
                                initial_tab=initial_tab,
+                               current_user_name=current_user()['username'],
                            ))
 
 

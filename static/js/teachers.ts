@@ -224,7 +224,7 @@ function update_db_adventure(adventure_id: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      modal.alert (response.success, 3000, false);
+      modal.notifySuccess(response.success);
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
@@ -311,7 +311,7 @@ export function change_password_student(username: string, enter_password: string
               contentType: 'application/json',
               dataType: 'json'
             }).done(function (response) {
-              modal.alert(response.success, 3000, false);
+              modal.notifySuccess(response.success);
             }).fail(function (err) {
               modal.alert(err.responseText, 3000, true);
             });
@@ -398,7 +398,7 @@ export function save_customizations(class_id: string) {
       if (response.achievement) {
           showAchievements(response.achievement, false, "");
       }
-      modal.alert(response.success, 3000, false);
+      modal.notifySuccess(response.success);
       clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
@@ -450,7 +450,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             for (let i = 0; i < teacher_adventures.length; i++) {
               available_adventures[teacher_adventures![i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
             }
-            modal.alert(response.success, 3000, false);
+            modal.notifySuccess(response.success);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
@@ -599,7 +599,7 @@ export function create_accounts(prompt: string) {
                 });
                 return;
             } else {
-                modal.alert(response.success, 3000, false);
+                modal.notifySuccess(response.success);
                 if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
                     download_login_credentials(accounts);
                 }
@@ -640,7 +640,7 @@ export function copy_join_link(link: string, success: string) {
     sampleTextarea.select();
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
-    modal.alert(success, 3000, false);
+    modal.notifySuccess(success);
 }
 
 // https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/

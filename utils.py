@@ -313,3 +313,13 @@ def customize_babel_locale(custom_locales: dict):
 def strip_accents(s):
     return ''.join(c for c in unicodedata.normalize('NFD', s)
                    if unicodedata.category(c) != 'Mn')
+
+def base_url():
+    """Return the base URL, excluding the leading slash
+
+    Returns either from configruation or otherwise from Flask.
+    """
+    if from_env := os.getenv('BASE_URL'):
+        return from_env
+
+    return request.host_url + request.root_path

@@ -7,7 +7,7 @@ import { hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './br
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
-import { Adventure } from './types';
+import { Achievement, Adventure } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
@@ -137,14 +137,7 @@ export interface InitializeCodePageOptions {
   readonly adventures: Adventure[];
   readonly start_tutorial?: boolean;
   readonly initial_tab: string;
-}
-
-/**
- * The ViewModel we bind to the page using KnockoutJS.
- */
-interface CodePageViewModel {
-  readonly adventures: Adventure[];
-  readonly currentTab: KnockoutObservable<string>;
+  readonly current_user_name?: string;
 }
 
 /**
@@ -162,20 +155,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   }
   theLanguage = options.lang;
 
-  const codePageVm: CodePageViewModel = {
-    adventures: options.adventures,
-    currentTab: ko.observable(options.initial_tab),
-  };
-  ko.applyBindings(codePageVm);
-
-  // Set the loaded program (directly requested by link with id) into the dictionary of adventures.
-  // We will automatically switch to the tab of the loaded program and load it in response to the tab
-  // switch. Seems a bit double to have 'loaded_program' twice but I don't quite understand how this
-  // is all supposed to work.
-  if (options.loaded_program?.adventure_name && theAdventures[options.loaded_program?.adventure_name]) {
-    theAdventures[options.loaded_program?.adventure_name].loaded_program = options.loaded_program;
-  }
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
   initializeDebugger({
@@ -188,8 +167,9 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   const tabs = new Tabs({
     // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
     // We click on `level` to load a program associated with level, if any.
-    initialTab: options.loaded_program?.adventure_name,
+    initialTab: options.initial_tab,
   });
+  currentTab = options.initial_tab;
 
   tabs.on('beforeSwitch', (ev) => {
     // If there are unsaved changes, we warn the user before changing tabs.
@@ -199,12 +179,19 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   });
 
   tabs.on('afterSwitch', (ev) => {
-    reconfigurePageBasedOnTab(ev.newTab);
+    currentTab = ev.newTab;
+    reconfigurePageBasedOnTab();
   });
+  reconfigurePageBasedOnTab();
 
   if (options.start_tutorial) {
     startIntroTutorial();
   }
+
+  // Share/hand in modals
+  $('#share_program_button').on('click', () => $('#share-modal').show());
+  $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
+  initializeShareProgramButtons();
 
   /**
    * Initialize the main editor and attach all the required event handlers
@@ -434,6 +421,10 @@ function clearOutput() {
 }
 
 export function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+  // Copy 'currentTab' into a variable, so that our event handlers don't mess up
+  // if the user changes tabs while we're waiting for a response
+  const adventureName = currentTab;
+
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
@@ -492,7 +483,11 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
         lang: lang,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: currentTab,
+        adventure_name: adventureName,
+
+        // Save under an existing id if this field is set
+        program_id: theAdventures[adventureName]?.save_info?.id,
+        save_name: $('#program_name').val(),
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -502,8 +497,9 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
         //storeFixedCode(response, level);
         error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
       }
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
+      showAchievements(response.achievements, false, "");
+      if (response.save_info) {
+        (theAdventures[adventureName] ?? {}).save_info = response.save_info;
       }
       if (response.Error) {
         error.show(ClientMessages['Transpile_error'], response.Error);
@@ -594,9 +590,7 @@ export function pushAchievement(achievement: string) {
     contentType: 'application/json',
     dataType: 'json'
     }).done(function(response: any) {
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
-      }
+      showAchievements(response.achievements, false, "");
   });
 }
 
@@ -618,8 +612,15 @@ export function closeAchievement() {
   $('#achievement_pop-up').removeAttr('redirect');
 }
 
-export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
-  fnAsync(achievements, 0);
+export async function showAchievements(achievements: Achievement[] | undefined, reload: boolean, redirect: string) {
+  if (!achievements || achievements.length === 0) {
+    return;
+  }
+
+  for (const achievement of achievements) {
+    await showAchievement(achievement);
+  }
+
   if (reload) {
     $('#achievement_pop-up').attr('reload', 'true');
     setTimeout(function(){
@@ -638,14 +639,7 @@ export function showAchievements(achievements: any[], reload: boolean, redirect:
   }
 }
 
-async function fnAsync(achievements: any[], index: number) {
-  await showAchievement(achievements[index]);
-  if (index < achievements.length - 1) {
-    await fnAsync(achievements, index + 1)
-  }
-}
-
-function showAchievement(achievement: any[]){
+function showAchievement(achievement: Achievement) {
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
@@ -721,19 +715,20 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
       modal.copy_alert (response.message, 5000);
     } else {
-      modal.alert(response.message, 3000, false);
+      modal.notifySuccess(response.message, 3000);
     }
-    if (response.achievements) {
-      showAchievements(response.achievements, false, "");
-    }
+    showAchievements(response.achievements, false, "");
+
     // If we succeed, we need to update the default program name & program for the currently selected tab.
     // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
     // The name of the program might have been changed by the server, so we use the name stated by the server.
     $ ('#program_name').val (response.name);
 
-    const adv = theAdventures[adventure_name || 'level'];
+    const adv = theAdventures[currentTab];
     if (adv) {
-      adv.loaded_program = {name: response.name, code: code};
+      // FIXME: What's this doing here?
+      adv.save_name = response.name;
+      adv.start_code = code;
     }
   }).fail(function(err) {
     console.error(err);
@@ -837,10 +832,8 @@ export function share_program(id: string, index: number, Public: boolean) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, false, "");
-      }
-      modal.alert (response.message, 3000, false);
+      showAchievements(response.achievement, false, "");
+      modal.notifySuccess(response.message);
       if (Public) {
         change_shared(true, index);
       } else {
@@ -862,12 +855,9 @@ export function delete_program(id: string, index: number, prompt: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, true, "");
-      } else {
-          $('#program_' + index).remove();
-      }
-      modal.alert(response.message, 3000, false);
+      showAchievements(response.achievement, true, "");
+      $('#program_' + index).remove();
+      modal.notifySuccess(response.message);
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
@@ -894,7 +884,7 @@ export function set_favourite_program(id: string, index: number, prompt: string)
       dataType: 'json'
     }).done(function(response) {
       set_favourite(index)
-      modal.alert (response.message, 3000, false);
+      modal.notifySuccess(response.message);
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
@@ -912,69 +902,36 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  $.ajax({
-    type: 'POST',
-    url: '/programs/submit',
-    data: JSON.stringify({
-      id: id
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    if (response.achievements) {
-      showAchievements(response.achievements, false, "");
-    }
+  tryCatchPopup(async () => {
+    await postJson('/programs/submit', { id });
     change_to_submitted(index);
-  }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
   });
 }
 
-export function set_explore_favourite(id: string, favourite: number) {
+export async function set_explore_favourite(id: string, favourite: number) {
   let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
   if (favourite) {
     prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
   }
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/set_hedy_choice',
-      data: JSON.stringify({
-        id: id,
-        favourite: favourite
-    }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-        modal.alert(response.message, 3000, false);
-        if (favourite == 1) {
-          $('#' + id).removeClass('text-white');
-          $('#' + id).addClass('text-yellow-500');
-        } else {
-          $('#' + id).removeClass('text-yellow-500');
-          $('#' + id).addClass('text-white');
-        }
-    }).fail(function(err) {
-        return modal.alert(err.responseText, 3000, true);
+  await modal.confirmP(prompt);
+
+  await tryCatchPopup(async () => {
+    const response = await postJson('/programs/set_hedy_choice', {
+      id: id,
+      favourite: favourite
     });
+
+    modal.notifySuccess(response.message);
+    $('#' + id).toggleClass('text-white', favourite !== 1);
+    $('#' + id).toggleClass('text-yellow-500', favourite === 1);
   });
 }
 
 export function report_program(prompt: string, id: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/report',
-      data: JSON.stringify({
-        id: id,
-    }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-        modal.alert(response.message, 3000, false);
-    }).fail(function(err) {
-        return modal.alert(err.responseText, 3000, true);
-    });
+  tryCatchPopup(async () => {
+    await modal.confirmP(prompt);
+    const response = await postJson('/programs/report', { id });
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -1000,7 +957,7 @@ export function copy_to_clipboard (string: string, prompt: string) {
 
   // Hide all modals to make sure the copy clipboard modal is hidden as well -> show alert() with feedback
   modal.hide();
-  modal.alert(prompt, 3000, false);
+  modal.notifySuccess(prompt, 3000);
 }
 
 /**
@@ -1844,26 +1801,54 @@ export function change_language(lang: string) {
     });
 }
 
+/**
+ * Post JSON, return the result on success, throw an exception on failure
+ *
+ * Automatically handles any achievements the server might send our way.
+ */
+async function postJson(url: string, data: any): Promise<any> {
+  return new Promise((ok, ko) => {
+    $.ajax({
+      type: 'POST',
+      url,
+      data,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response: any) {
+      showAchievements(response.achievement, true, "");
+
+      ok(response);
+    }).fail(function (err) {
+      ko(new Error(err.responseText));
+    });
+  });
+}
+
+/**
+ * Run a code block, show a popup if we catch an exception
+ */
+async function tryCatchPopup(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    modal.alert(e.message, 3000, true);
+  }
+}
+
 export function change_keyword_language(start_lang: string, new_lang: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/translate_keywords',
-    data: JSON.stringify({
+  tryCatchPopup(async () => {
+    const response = await postJson('/translate_keywords', {
       code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
       level: theLevel,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function (response: any) {
+    });
+
     if (response.success) {
       ace.edit('editor').setValue(response.code);
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
-  }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
   });
 }
 
@@ -2008,6 +1993,8 @@ function download(data: any, filename: any, type: any) {
 
 /**
  * Hide all things that may have been dynamically shown when switching tabs
+ *
+ * Reset the state of the editor.
  */
 function resetWindow() {
   $('#warningbox').hide ();
@@ -2021,15 +2008,15 @@ function resetWindow() {
   $('#turtlecanvas').empty();
   output.append(variable_button);
   output.append(variables);
-  clearUnsavedChanges();
+  theGlobalEditor?.clearSelection();
+  theGlobalEditor?.session.clearBreakpoints();
 }
 
-function reconfigurePageBasedOnTab(tabName: string) {
-  currentTab = tabName;
-
-  resetWindow();
-
-  const isCodeTab = !(tabName === 'quiz' || tabName === 'parsons');
+/**
+ * Update page element visibilities/states based on the state of the current tab
+ */
+function updatePageElements() {
+  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
 
   // .toggle(bool) sets visibility based on the boolean
 
@@ -2037,42 +2024,92 @@ function reconfigurePageBasedOnTab(tabName: string) {
   $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
   $('#developers_toggle_container').toggle(isCodeTab);
   $('#level-header input').toggle(isCodeTab);
-  $('#parsons_code_container').toggle(tabName === 'parsons');
-  $('#editor-area').toggle(isCodeTab || tabName === 'parsons');
+  $('#parsons_code_container').toggle(currentTab === 'parsons');
+  $('#editor-area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
+  $('#program_name_container').toggle(isCodeTab);
 
-  if (tabName === 'parsons') {
+  const adventure = theAdventures[currentTab];
+
+  // SHARING SETTINGS
+  // Star on "share" button is filled if program is already public, outlined otherwise
+  const isPublic = !!adventure.save_info?.public;
+  $('#share_program_button span')
+    .toggleClass('fa-solid', isPublic)
+    .toggleClass('fa-regular', !isPublic);
+  $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
+
+  // Show <...data-view="if-public-url"> only if we have a public url
+  $('[data-view="if-public-url"]').toggle(!!adventure.save_info?.public_url);
+  $('input[data-view="public-url"]').val(adventure.save_info?.public_url ?? '');
+
+  // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
+  const isSubmitted = !!adventure.save_info?.submitted;
+  $('#hand_in_button span')
+    .toggleClass('fa-solid', isSubmitted)
+    .toggleClass('fa-regular', !isSubmitted);
+
+  // Show <...data-view="if-submitted"> only if we have a public url
+  $('[data-view="if-submitted"]').toggle(isSubmitted);
+  $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+}
+
+/**
+ * After switching tabs, show/hide elements
+ */
+function reconfigurePageBasedOnTab() {
+  resetWindow();
+
+  updatePageElements();
+
+  if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     return;
   }
 
-  // If there's a loaded program for the adventure or level now selected, load it into the code editor
-  else if (theAdventures[tabName]?.loaded_program) {
-    $ ('#program_name').val (theAdventures[tabName].loaded_program!.name?.trim());
-    theGlobalEditor?.setValue (theAdventures[tabName].loaded_program!.code?.trim());
+  const adventure = theAdventures[currentTab];
+  if (adventure) {
+    $ ('#program_name').val(adventure.save_name);
+    theGlobalEditor?.setValue(adventure.start_code);
   }
-  else {
-    const tab = $('*[data-tab="' + tabName + '"]');
-    if (tab.hasClass('teacher_tab')) {
-      $ ('#program_name').val (tabName);
-      theGlobalEditor?.setValue ("");
-    } else {
-      const adventure = theAdventures[tabName];
-      if (adventure) {
-        if (adventure.default_save_name == 'intro') {
-          $('#program_name').val(`${ClientMessages.level_title} ${theLevel}`);
-        } else {
-          $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${theLevel}`);
-        }
-        theGlobalEditor?.setValue(adventure.start_code?.trim());
-      }
-    }
-  }
-
-  theGlobalEditor?.clearSelection();
-  theGlobalEditor?.session.clearBreakpoints();
 
   // If user wants to override the unsaved program, reset unsaved_changes
   clearUnsavedChanges();
+}
+
+/**
+ * Find the containing modal for the event target, and close it
+ *
+ * The modal will be the containing HTML element that has data-modal="true".
+ *
+ * Intended to be used from HTML: click="hedyApp.closeContainingModal(this)"
+ */
+export function closeContainingModal(target: HTMLElement) {
+  $(target).closest('[data-modal="true"]').hide();
+}
+
+function initializeShareProgramButtons() {
+  $('input[type="radio"][name="public"]').on('change', (ev) => {
+    if ((ev.target as HTMLInputElement).checked) {
+      const isPublic = $(ev.target).val() === '1' ? true : false;
+
+      tryCatchPopup(async () => {
+        const saveInfo = theAdventures[currentTab]?.save_info;
+        if (!saveInfo) {
+          throw new Error('This program does not have an id');
+        }
+
+        const response = await postJson('/programs/share', {
+          id: saveInfo.id,
+          public: isPublic,
+        });
+
+        modal.notifySuccess(response.message);
+
+        saveInfo.public = response.public;
+        updatePageElements();
+      });
+    }
+  })
 }

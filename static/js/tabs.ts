@@ -92,7 +92,7 @@ export class Tabs {
       this.tabEvents.emit('afterSwitch', { oldTab: this._currentTab, newTab: tabName });
     }
 
-    // We don't do an even for the very first tab switch
+    // We don't do a beforeSwitch event for the very first tab switch
     if (this._currentTab != '') {
       const event = this.tabEvents.emit('beforeSwitch', { oldTab: this._currentTab, newTab: tabName });
       event.then(doSwitch);

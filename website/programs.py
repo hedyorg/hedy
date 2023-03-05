@@ -1,6 +1,7 @@
 import uuid
+from typing import Optional
 
-from flask import g, jsonify, request
+from flask import g, request
 from flask_babel import gettext
 
 import hedy
@@ -11,11 +12,51 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from .flask_helpers import proper_jsonify as jsonify
+
+
+class ProgramsLogic:
+    """Logic for storing/saving programs.
+
+    This used to be inside the class below, which also handles flask
+    routes, and is being extracted out piece by piece.
+    """
+    def __init__(self, db: Database, achievements: Achievements):
+        self.db = db
+        self.achievements = achievements
+
+    def store_program(self, user, program_id: str, level: int, name: str, code: str, error: bool, overwrite: bool, adventure_name: Optional[str]):
+        stored_program = {
+            "id": program_id,
+            "session": utils.session_id(),
+            "date": utils.timems(),
+            "lang": g.lang,
+            "version": utils.version(),
+            "level": level,
+            "code": code,
+            "name": name,
+            "username": user["username"],
+            "public": 0,
+            "error": error,
+        }
+
+        if adventure_name:
+            stored_program["adventure_name"] = adventure_name
+
+        self.db.store_program(stored_program)
+        self.db.increase_user_save_count(user["username"])
+        if not overwrite:
+            self.db.increase_user_program_count(user["username"])
+        self.achievements.increase_count("saved")
+
+        self.achievements.verify_save_achievements(user["username"], adventure_name)
 
 
 class ProgramsModule(WebsiteModule):
+    """Flask routes that deal with manipulating programs."""
     def __init__(self, db: Database, achievements: Achievements):
         super().__init__("programs", __name__, url_prefix="/programs")
+        self.logic = ProgramsLogic(db, achievements)
         self.db = db
         self.achievements = achievements
 
@@ -114,48 +155,23 @@ class ProgramsModule(WebsiteModule):
                     program_public = True
                 break
 
-        stored_program = {
-            "id": program_id,
-            "session": utils.session_id(),
-            "date": utils.timems(),
-            "lang": g.lang,
-            "version": utils.version(),
-            "level": body["level"],
-            "code": body["code"],
-            "name": body["name"],
-            "username": user["username"],
-            "public": 1 if program_public else 0,
-            "error": error,
-        }
+        self.logic.store_program(
+            program_id=program_id,
+            level=body['level'],
+            code=body['code'],
+            name=body['name'],
+            user=user,
+            error=error,
+            overwrite=overwrite,
+            adventure_name=body.get('adventure_name'))
 
-        if "adventure_name" in body:
-            stored_program["adventure_name"] = body["adventure_name"]
-
-        self.db.store_program(stored_program)
-        if not overwrite:
-            self.db.increase_user_program_count(user["username"])
-        self.db.increase_user_save_count(user["username"])
-        self.achievements.increase_count("saved")
-
-        # Todo TB: Would be nice to clean-up this response (a lot) by removing all duplicate dict entries
-        if self.achievements.verify_save_achievements(
-            user["username"], "adventure_name" in body and len(body["adventure_name"]) > 2
-        ):
-            return jsonify(
-                {
-                    "message": gettext("save_success_detail"),
-                    "share_message": gettext("copy_clipboard"),
-                    "name": body["name"],
-                    "id": program_id,
-                    "achievements": self.achievements.get_earned_achievements(),
-                }
-            )
         return jsonify(
             {
                 "message": gettext("save_success_detail"),
                 "share_message": gettext("copy_clipboard"),
                 "name": body["name"],
                 "id": program_id,
+                "achievements": self.achievements.get_earned_achievements(),
             }
         )
 
@@ -186,7 +202,11 @@ class ProgramsModule(WebsiteModule):
         self.db.set_program_public_by_id(body["id"], bool(body["public"]))
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
 
-        resp = {"id": body["id"]}
+        resp = {
+            "id": body["id"],
+            "public": bool(body["public"]),
+        }
+
         if bool(body["public"]):
             resp["message"] = gettext("share_success_detail")
         else:
@@ -275,3 +295,4 @@ class ProgramsModule(WebsiteModule):
         )
 
         return {"message": gettext("report_success")}, 200
+

@@ -73,7 +73,7 @@ export function request_teacher_account() {
       type: 'GET',
       url: '/auth/request_teacher'
     }).done (function (response) {
-      modal.alert(response.message, 2000, false);
+      modal.notifySuccess(response.message);
       setTimeout (function () {location.reload ()}, 2000);
     }).fail (function (response) {
       modal.alert(response.responseText, 3000, true);
@@ -123,10 +123,10 @@ export function initializeFormSubmits() {
       contentType: 'application/json; charset=utf-8'
     }).done (function (response) {
       if (response.reload) {
-        modal.alert(response.message, 2000, false);
+        modal.notifySuccess(response.message, 2000);
         setTimeout (function () {location.reload ()}, 2000);
       } else {
-        modal.alert(response.message, 3000, false);
+        modal.notifySuccess(response.message);
       }
     }).fail (function (response) {
       modal.alert(response.responseText, 3000, true);
@@ -141,7 +141,7 @@ export function initializeFormSubmits() {
       data: convertFormJSON($(this)),
       contentType: 'application/json; charset=utf-8'
     }).done (function (response) {
-      modal.alert(response.message, 3000, false);
+      modal.notifySuccess(response.message);
       $('form#change_password').trigger('reset');
     }).fail (function (response) {
       modal.alert(response.responseText, 3000, true);
@@ -155,7 +155,7 @@ export function initializeFormSubmits() {
       data: convertFormJSON($(this)),
       contentType: 'application/json; charset=utf-8'
     }).done (function (response) {
-      modal.alert(response.message, 3000, false);
+      modal.notifySuccess(response.message);
       $('form#recover').trigger('reset');
     }).fail (function (response) {
       modal.alert(response.responseText, 3000, true);
@@ -169,7 +169,7 @@ export function initializeFormSubmits() {
       data: convertFormJSON($(this)),
       contentType: 'application/json; charset=utf-8'
     }).done (function (response) {
-      modal.alert(response.message, 2000, false);
+      modal.notifySuccess(response.message, 2000);
       $('form#reset').trigger('reset');
       setTimeout(function (){
         redirect ('login');
@@ -187,7 +187,7 @@ export function initializeFormSubmits() {
       data: convertFormJSON($(this)),
       contentType: 'application/json; charset=utf-8'
     }).done (function (response) {
-      modal.alert(response.message, 2000, false);
+      modal.notifySuccess(response.message, 2000);
       if (response.achievement) {
         showAchievements(response.achievement, true, "");
       } else {
@@ -238,7 +238,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
     }).done(function () {
       location.reload();
     }).fail(function () {
-      modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
+      modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 3000, true);
     });
   }, function () {
     // If there is a pending request, we decline the modal -> remove the teacher request

@@ -54,6 +54,11 @@ export interface SaveInfo {
    * Submitted is false, true or undefined
    */
   submitted?: boolean;
+
+  /**
+   * URL for this program if it is public
+   */
+  public_url?: string;
 }
 
 export interface ExtraStory {
@@ -70,3 +75,10 @@ export interface TeacherAdventure {
   id: string;
   level: string;
 }
+
+/**
+ * Definition of an achievement
+ *
+ * Array of [title, text, statistics].
+ */
+export type Achievement = [string, string, string];
