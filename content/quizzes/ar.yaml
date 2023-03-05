@@ -41,7 +41,7 @@ levels:
             hint: "_؟_ مرحبًا يا عالم!"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "كيف تسأل شخص ما هو لونه المفضل؟"
             mp_choice_options:
@@ -645,101 +645,101 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "اختر الجملة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "يجب استخدام علامات الاقتباس مع الأمر `{ask}` والأمر `{print}`"
+                feedback: "إجابة صحيحة."
+            -   option: "الأمر `{print}` هو الأمر الوحيد الذي يجب استخدام علامات الاقتباس معه"
+                feedback: "الأمر `{ask}` أيضًا يحتاج علامات اقتباس!"
+            -   option: "`{at} {random}` لا تعمل في المستوى الرابع"
+                feedback: "`{at} {random}` ما زالت تعمل!"
+            -   option: "يجب استخدام علامات الاقتباس مع `{at} {random}`"
+                feedback: "لا, ولكن هناك أمران يجب استخدام علامات الاقتباس معهما."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
-            question_score: '10'
+            hint: "في المستوى الرابع تحتاج لعلامات الاقتباس عند استخدام أمران من الأوامر."
+            question_score: '١٠'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "ما الكود الذي يستخدم علامات الاقتباس الصحيحة؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} `hello`
+                    {print} `مرحبًا`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "هذه ليست علامات الاقتباس الصحيحة."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'مرحبًا'
                     ```
-                feedback: "Correct"
+                feedback: "إجابة صحيحة"
             -   option: |
                     ```
-                    {print} hello
+                    {print} مرحبًا
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "لا يحتوي هذا الكود على علامات الاقتباس!"
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,مرحبًا,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "هذه فاصلة, أنت تريد علامات الاقتباس"
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
-            question_score: '10'
+            hint: "اختر علامات الاقتباس الصحيحة."
+            question_score: '١٠'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "في أي كود تم استخدام علامات الاقتباس بالشكل الصحيح؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} Hi Im Hedy
+                    {print} مرحبًا أنا هيدي
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "لا أرى علامات اقتباس هنا!"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy
+                    {print} 'مرحبًا انا هيدي
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "لا أرى إلا علامة اقتباس واحدة!"
             -   option: |
                     ```
-                    '{print} Hi Im Hedy'
+                    '{print} مرحبًا أنا هيدي'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "علامة الاقتباس الأولى يجب أن تاتي بعد الأمر {print}"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy'
+                    {print} 'مرحبًا انا هيدي'
                     ```
-                feedback: "Perfect!"
+                feedback: "رائع!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
-            question_score: '10'
+            hint: "يجب أن تكون علامات الاقتباس محيطة بالكلام الذي تريد طباعته (قبله وبعده)"
+            question_score: '١٠'
         4:
-            question_text: "Which statement is true?"
+            question_text: "اختر العبارة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
-                feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
-            -   option: "You can choose yourself whether to use quotation marks or not."
-                feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "يجب وضع علامات الاقتباس حول الأمر `{print}` هكذا `'{print}'`."
+                feedback: "علامات الاقتباس لا توضع حول الأمر نفسه."
+            -   option: "يجب وضع علامات الاقتباس حول الكلام الذي تريد طباعته."
+                feedback: "ممتاز!"
+            -   option: "الأمر `{ask}` لا يحتاج إلى علامات الاقتباس"
+                feedback: "كلا الأمرين `{print}` و `{ask}` يحتاج إلى علامات الاقتباس"
+            -   option: "لك حرية الاختيار ان تستخدم علامات الاقتباس أم لا."
+                feedback: "للأسف, هيدي قوانينها صارمة بشأن علامات الاقتباس."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
-            question_score: '10'
+            hint: "ابتداءً من المستوى الرابع عليك استخدام علامات الاقتباس."
+            question_score: '١٠'
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "ما الذي يجب تغييره في الكود كي تعمل للعبة بالشكل الصحيح؟"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                الخيارات {is} حجر, ورقة, مقص
+                {print} 'الخيارات {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
-                    '{print} options {at} {random}'
+                    '{print} الخيارات {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "احذر ان تضع علامات الاقتباس قبل الأمر {print}."
             -   option: |
                     ```
-                    {print} 'options' {at} {random}
+                    {print} 'الخيارات' {at} {random}
                     ```
-                feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
+                feedback: "الخيارات هي متغير. أنت لا تريد طباعة جملة \"الخيارات{at}{random}\" حرفياً."
             -   option: |
                     ```
                     {print} options {at} {random}
