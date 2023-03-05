@@ -76,7 +76,7 @@ export function request_teacher_account() {
       modal.notifySuccess(response.message);
       setTimeout (function () {location.reload ()}, 2000);
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
   });
 }
 
@@ -94,7 +94,7 @@ export function initializeFormSubmits() {
         }).done (function () {
           afterLogin({"first_time": true});
         }).fail (function (response) {
-          modal.alert(response.responseText, 3000, true);
+          modal.notifyError(response.responseText);
         });
   });
 
@@ -111,7 +111,7 @@ export function initializeFormSubmits() {
       }
       return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
     });
   });
 
@@ -129,7 +129,7 @@ export function initializeFormSubmits() {
         modal.notifySuccess(response.message);
       }
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
     });
   });
 
@@ -144,7 +144,7 @@ export function initializeFormSubmits() {
       modal.notifySuccess(response.message);
       $('form#change_password').trigger('reset');
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
     });
   });
 
@@ -158,7 +158,7 @@ export function initializeFormSubmits() {
       modal.notifySuccess(response.message);
       $('form#recover').trigger('reset');
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
     });
   });
 
@@ -175,7 +175,7 @@ export function initializeFormSubmits() {
         redirect ('login');
       }, 2000);
     }).fail (function (response) {
-      modal.alert(response.responseText, 3000, true);
+      modal.notifyError(response.responseText);
     });
   });
 
@@ -197,7 +197,7 @@ export function initializeFormSubmits() {
       }
 
     }).fail (function (response) {
-      return modal.alert(response.responseText, 3000, true);
+      return modal.notifyError(response.responseText);
     });
   });
 
@@ -238,7 +238,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
     }).done(function () {
       location.reload();
     }).fail(function () {
-      modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 3000, true);
+      modal.notifyError(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
     });
   }, function () {
     // If there is a pending request, we decline the modal -> remove the teacher request
@@ -304,7 +304,7 @@ export function edit_user_tags(username: string) {
     }
     $('#modal-tags').show();
   }).fail(function (response) {
-    modal.alert(response.responseText, 3000, true);
+    modal.notifyError(response.responseText);
   });
 }
 

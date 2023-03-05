@@ -428,7 +428,7 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
-      return modal.alert(disabled_prompt, 3000, true);
+      return modal.notifyError(disabled_prompt);
     } return;
   }
 
@@ -530,7 +530,7 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
     });
 
   } catch (e: any) {
-    modal.alert(e.responseText, 3000, true);
+    modal.notifyError(e.responseText);
   }
 }
 
@@ -775,7 +775,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
     });
   } catch (e: any) {
     console.error(e);
-    modal.alert(e.message, 3000, true);
+    modal.notifyError(e.message);
   }
 }
 
@@ -840,7 +840,7 @@ export function share_program(id: string, index: number, Public: boolean) {
         change_shared(false, index);
       }
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -859,7 +859,7 @@ export function delete_program(id: string, index: number, prompt: string) {
       $('#program_' + index).remove();
       modal.notifySuccess(response.message);
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -886,7 +886,7 @@ export function set_favourite_program(id: string, index: number, prompt: string)
       set_favourite(index)
       modal.notifySuccess(response.message);
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -1831,7 +1831,7 @@ async function tryCatchPopup(cb: () => void | Promise<void>) {
   try {
     return await cb();
   } catch (e: any) {
-    modal.alert(e.message, 3000, true);
+    modal.notifyError(e.message);
   }
 }
 

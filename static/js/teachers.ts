@@ -24,7 +24,7 @@ export function create_class(class_name_prompt: string) {
         window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -46,7 +46,7 @@ export function rename_class(id: string, class_name_prompt: string) {
             location.reload();
           }
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -69,7 +69,7 @@ export function duplicate_class(id: string, prompt: string) {
             location.reload();
           }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -88,7 +88,7 @@ export function delete_class(id: string, prompt: string) {
         location.reload();
       }
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -116,7 +116,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ClientMessages['Connection_error'], 3000, true);
+          modal.notifyError(ClientMessages['Connection_error']);
       }
     });
 }
@@ -135,7 +135,7 @@ export function invite_student(class_id: string, prompt: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          modal.alert(err.responseText, 3000, true);
+          modal.notifyError(err.responseText);
       });
     });
 }
@@ -154,7 +154,7 @@ export function remove_student_invite(username: string, class_id: string, prompt
       }).done(function () {
           location.reload();
       }).fail(function (err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
       });
   });
 }
@@ -173,7 +173,7 @@ export function remove_student(class_id: string, student_id: string, prompt: str
           location.reload();
       }
     }).fail(function(err) {
-        modal.alert(err.responseText, 3000, true);
+        modal.notifyError(err.responseText);
     });
   });
 }
@@ -191,7 +191,7 @@ export function create_adventure(prompt: string) {
         }).done(function(response) {
           window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -226,7 +226,7 @@ function update_db_adventure(adventure_id: string) {
     }).done(function(response) {
       modal.notifySuccess(response.success);
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -279,7 +279,7 @@ export function preview_adventure() {
     }).done(function (response) {
         show_preview(response.code);
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -293,7 +293,7 @@ export function delete_adventure(adventure_id: string, prompt: string) {
         }).done(function () {
             window.location.href = '/for-teachers';
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -313,7 +313,7 @@ export function change_password_student(username: string, enter_password: string
             }).done(function (response) {
               modal.notifySuccess(response.success);
             }).fail(function (err) {
-              modal.alert(err.responseText, 3000, true);
+              modal.notifyError(err.responseText);
             });
         });
     });
@@ -402,7 +402,7 @@ export function save_customizations(class_id: string) {
       clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -452,7 +452,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             }
             modal.notifySuccess(response.success);
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -591,7 +591,7 @@ export function create_accounts(prompt: string) {
             dataType: 'json'
         }).done(function (response) {
             if (response.error) {
-                modal.alert(response.error, 3000, true);
+                modal.notifyError(response.error);
                 $('#account_rows_container').find(':input').each(function () {
                     if ($(this).val() == response.value) {
                         $(this).addClass('border-2 border-red-500');
@@ -608,7 +608,7 @@ export function create_accounts(prompt: string) {
                 });
             }
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
