@@ -321,7 +321,7 @@ adventures:
                 # Anybody has a good idea that works well in German?
                 story_text: |
                     ## Geschichte
-                    In diesem Level kannst du den {for} Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Braunbär, Braunbär, was siehst du?" programmieren.
+                    In diesem Level kannst du den {for} Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
 
                     ### Übung
 
@@ -330,7 +330,7 @@ adventures:
                 example_code: |
                     ```
                     tiere = _ , _ , _ 
-                    {print} 'Braunbär, Braunbär'
+                    {print} 'Brauner Bär'
                     {print} 'Was siehst du?'
                     ```
                 start_code: "# setze hier deinen Code hin"
@@ -959,7 +959,7 @@ adventures:
                     {print} 'Formen zeichnen'
             9:
                 start_code: '# schreibe deinen Code hier'
-                story_text: "## Schildkröte\nNun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, können wir komplexere Figuren erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n**(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
+                story_text: "## Schildkröte\nNun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, ist es möglich, komplexere Figuren zu erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n**(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
                 story_text_2: "## Schildkrötensteuerung\nNun kannst du die Schildkröte auch auf viele weitere Arten bewegen als nur vorwärts oder rückwärts!\n### Übung 2\nVervollständige den Code, um die Schildkröte mit den Tasten zu steuern. w für vorwärts, s für rückwärts, a für links und d für rechts. \nTipp: Für links und rechts wirst du drei Zeilen Code benötigen!\n"
                 example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
