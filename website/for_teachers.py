@@ -69,8 +69,11 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
-            slides=slides
-        )
+            slides=slides,
+            javascript_page_options=dict(
+                page='for-teachers',
+                welcome_teacher=welcome_teacher,
+            ))
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
@@ -265,7 +268,15 @@ class ForTeachersModule(WebsiteModule):
             available_adventures=available_adventures,
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
-        )
+            javascript_page_options=dict(
+                page='customize-class',
+                available_adventures_level_translation=gettext('available_adventures_level'),
+                teacher_adventures=teacher_adventures,
+                adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                adventure_names=adventure_names,
+                available_adventures=available_adventures,
+                class_id=Class['id'],
+            ))
 
     def purge_customizations(self, sorted_adventures, adventures):
         for _, adventure_list in sorted_adventures.items():
