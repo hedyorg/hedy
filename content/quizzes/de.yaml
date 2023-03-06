@@ -1654,14 +1654,14 @@ levels:
         7:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                food = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                essen = {ask} 'Was würdest du gerne essen?'
+                {if} essen {is} Pommes
+                sauce = {ask} 'Welche Sauce hättest du gerne?'
+                    {print} 'Einmal Pommes mit ' sauce
+                {if} essen {is} Pizza
+                    belag = {ask} 'Welchen Belag möchtest du?'
+                    {print} 'Eine Pizza mit ' topping
+                {print} 'Vielen Dank für deine Bestellung'
             mp_choice_options:
             -   option: "Nichts, dieser Code ist richtig!"
                 feedback: "Etwas stimmt nicht!"
@@ -1763,14 +1763,14 @@ levels:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {repeat} 3 {times}
-                   food = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'Thank you for your order'
+                	essen = {ask} 'Was würdest du gerne essen?'
+                	{if} essen {is} Pommes
+                		sauce = {ask} 'Welche Sauce hättest du gerne?'
+                		{print} 'Einmal Pommes mit ' sauce
+                	{if} essen {is} Pizza
+                		belag = {ask} 'Welchen Belag möchtest du?'
+                		{print} 'Eine Pizza mit ' topping
+                {print} 'Vielen Dank für deine Bestellung'
             mp_choice_options:
             -   option: "Nichts, der Code ist korrekt!"
                 feedback: "Das ist richtig!"
@@ -1809,20 +1809,20 @@ levels:
         3:
             question_text: "Welchen Fall solltest du wählen, um eine Million Euro zu gewinnen?"
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} 'Wähle den richtigen Koffer und gewinne!'
+                koffer = {ask} 'Welchen Koffer wählst du? 1 oder 2?'
+                {if} koffer {is} 1
+                     aktion = {ask} 'Öffnen oder verkaufen?'
+                         {if} aktion {is} verkaufen
+                             {print} 'Du verkaufst deinen Koffer für 10 Euro'
+                         {if} aktion {is} öffnen
+                             {print} 'Du öffnest den Koffer und gewinnst einen Apfelkuchen'
+                {if} koffer {is} 2
+                     aktion = {ask} 'Öffnen oder verkaufen?'
+                         {if} aktion {is} verkaufen
+                             {print} 'Du verkaufst deinen Koffer für 500 Euro'
+                         {if} aktion {is} öffnen
+                             {print} 'Du öffnest den Koffer und gewinnst eine Million Euro!'
             mp_choice_options:
             -   option: "Fall 1, verkaufen"
                 feedback: "Du gewinnst keine Million!"
@@ -1838,26 +1838,26 @@ levels:
         4:
             question_text: "Welche Aussage ist wahr?"
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
+                name = {ask} 'Was ist dein Name?'
+                grösse = {ask} 'Was ist deine Schuhgrösse?'
+                {if} grösse {is} 38
+                    {if} name {is} Aschenputtel
                         {print} '❤️❤️❤️'
                     {else}
-                        {print} 'You are not the one!'
+                        {print} 'Du bist nicht die Richtige!'
                 {else}
-                    {print} 'Ill keep looking'
+                    {print} 'Ich suche weiter'
             mp_choice_options:
-            -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
-                feedback: "No, she gets 'You are not the one!'"
-            -   option: "Cinderella with shoe size 40 gets the output '❤️❤️❤️'"
-                feedback: "No, she gets 'Ill keep looking'"
-            -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
+            -   option: "Dornröschen mit Schuhgröße 38 erhält die Ausgabe \"Ich suche weiter\""
+                feedback: "Nein, sie bekommt \"Du bist nicht die Richtige!\""
+            -   option: "Aschenputtel mit Schuhgröße 40 bekommt die Ausgabe '❤️❤️❤️'"
+                feedback: "Nein, sie bekommt \"Ich suche weiter\""
+            -   option: "Dornröschen mit Schuhgröße 40 erhält die Ausgabe \"Ich suche weiter\""
                 feedback: "Das ist richtig!"
-            -   option: "Cinderella with shoe size 38 gets the output 'Ill keep looking'"
-                feedback: "No she gets '❤️❤️❤️'"
+            -   option: "Aschenputtel mit Schuhgröße 38 bekommt den Ausgang \"Ich suche weiter\""
+                feedback: "Nein, sie bekommt \"❤️❤️❤️\""
             correct_answer: "C"
-            hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
+            hint: "Egal wie du heißt, wenn du Schuhgröße 40 hast, bekommst du die Nachricht \"Ich suche weiter\"."
             question_score: '10'
         5:
             question_text: "Welcher Code hat diese Ausgabe erzeugt?"
@@ -1959,15 +1959,15 @@ levels:
         8:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                            {print} 'Hip Hip Hooray'
+                alter = {ask} 'Alles Gute zum Geburtstag! Wie alt bist du?'
+                singen = {ask} 'Möchtest du, dass wir singen?'
+                	{if} singen {is} Ja
+                		{repeat} alter {times}
+                			{print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "Du kannst nicht zwei Fragen in Folge stellen"
                 feedback: "Ja, du kannst."
-            -   option: "The variable called 'age' is later on used as 'years'"
+            -   option: "Die Variable mit der Bezeichnung \"alter\" wird später als \"jahre\" verwendet"
                 feedback: "Gutes Auge! Gut gemacht!"
             -   option: "Du darfst nicht mit 8 Leerzeichen beginnen, wie Zeile 4 und 5 es tun"
                 feedback: "Du musst tatsächlich so beginnen."
@@ -2175,11 +2175,11 @@ levels:
         7:
             question_text: "Was sollte anstelle des Fragezeichens stehen?"
             code: |-
-                {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
+                {print} 'Willkommen bei Hedys Restaurant'
+                personen {is} {ask} 'Wie viele Personen werden heute Abend hier essen?'
                 _?_
-                    food is {ask} 'What would you like to order?'
-                    {print} food
+                	essen {is} {ask} 'Was möchtest du bestellen?'
+                	{print} food
             mp_choice_options:
             -   option: |
                     ```
@@ -2355,36 +2355,36 @@ levels:
         4:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                groceries = apples, bread, milk
-                {for} item {in} groceries
-                    {print} 'We need ' groceries
+                einkäufe = Äpfel, Brot, Milch
+                {for} artikel {in} einkäufe
+                	{print} 'Wir brauchen ' einkäufe
             mp_choice_options:
             -   option: "Zeile 2 muss mit 4 Leerzeichen als Einrückung beginnen"
                 feedback: "Nein, tut es nicht. Nur Zeile 3 braucht Einrückung. Die hat sie."
             -   option: "Zeile 3 muss nicht mit 4 Leerzeichen als Einrückung beginnen"
                 feedback: "Zeile 2 ist ein `{for}` Befehl also braucht Zeile 3 nicht mit Einrückung beginnen."
-            -   option: "Line 3 should say item instead of groceries"
+            -   option: "In Zeile 3 sollte \"aritkel\" statt \"einkäufe\" stehen"
                 feedback: "Gut gemacht!"
-            -   option: "Line 2 should say groceries instead of item"
+            -   option: "In Zeile 2 muss es heißen: \"einkäufe\" anstelle von \"artikel\""
                 feedback: "Nein, tut es nicht."
             correct_answer: "C"
-            hint: "Line 2 says `{for}` each item in the list of groceries"
+            hint: "Zeile 2 lautet `{for}` jeden \"artikel\" in der Liste \"einkäufe\""
             question_score: '10'
         5:
-            question_text: "What word should be on the _?_ with these digital dice?"
+            question_text: "Welches Wort sollte beim _?_ stehen?"
             code: |-
-                {print} 'Welcome to the digital dice!'
-                players = Ann, John, Jesse
-                choices = 1, 2, 3, 4, 5, 6
-                {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                {print} 'Willkommen beim digitalen Würfel!'
+                spielerinnen = Ann, John, Jesse
+                möglichkeiten = 1, 2, 3, 4, 5, 6
+                {for} spieler {in} spielerinnen
+                    {print} spieler ' wirft ' _?_ {at} {random}
             mp_choice_options:
-            -   option: "Spieler"
-                feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
-            -   option: "choices"
+            -   option: "spielerinnen"
+                feedback: "Es würde ausgeben: \"Ann wirft Jesse\", statt \"Ann wirft 6\"."
+            -   option: "möglichkeiten"
                 feedback: "Das ist richtig!"
-            -   option: "choice"
-                feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
+            -   option: "möglichkeit"
+                feedback: "Du bist sehr nahe dran. Aber du musst Hedy aus der Liste auswählen, die \"möglichkeiten\" und nicht \"möglichkeit\" heißt..."
             -   option: "würfel"
                 feedback: "Schau dir die Namen der Variablen an."
             correct_answer: "B"
@@ -2393,14 +2393,14 @@ levels:
         6:
             question_text: "Welche der Antworten unten ist ein mögliches Resultat, wenn du den Code ausführst?"
             code: |-
-                choices = rock, paper, scissors
-                players = Kelly, Meredith
-                {for} player {in} players
-                    {print} player ' chooses ' choices {at} {random}
+                möglichkeiten = Schere, Stein, Papier
+                spielerinnen = Kelly, Meredith
+                {for} spielerin {in} spielerinnen
+                	{print} spielerin ' wählt ' möglichkeiten {at} {random}
             mp_choice_options:
             -   option: |-
-                    Kelly chooses rock
-                feedback: "Meredith wants to play too!"
+                    Kelly wählt Stein
+                feedback: "Meredith will auch mitspielen!"
             -   option: |-
                     Meredith chooses scissors
                     Kelly chooses rock
