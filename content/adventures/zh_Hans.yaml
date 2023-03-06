@@ -560,8 +560,8 @@ adventures:
                 example_code: |
                     ```
                     套餐 {is} 意大利面, 抱子甘蓝, 汉堡包
-                    {print} 今晚有 套餐 {at} {random}！
-                    价格 {is} 1 欧元, 10 欧元, 100 欧元
+                    {print} 今晚有 套餐 {at} {random} ！
+                    价格 {is} 1 欧元、10 欧元、100 欧元
                     {print} 餐费是 价格 {at} {random} 。
                     ```
                 story_text_2: |
@@ -1052,7 +1052,7 @@ adventures:
                        问题 ={ask} '你想知道什么？
                        {print} 问题
                        {sleep}
-                       {print} '我掐指一算...' 答案{at} {random}
+                       {print} '我掐指一算...' 答案 {at} {random}
                     ```
                 start_code: "# 在这里写下你的代码"
             10:
@@ -1064,14 +1064,14 @@ adventures:
                     在列表中添加两个名字，并观察当你运行这个程序时程序的输出的结果有什么变化。
                 example_code: |
                     ```
-                    房屋 = 豪宅, 公寓, 棚屋, 别墅
-                    喜欢 = 无人, 皇室, 邻居, 真爱
-                    宠物 = 狗, 猫, 大象
-                    名字 = 珍娜, 瑞安, 吉姆
-                    {for} name {in} 名字
-                        {print} name ' 住在 ' 房屋 {at} {random} '里'
-                        {print} name ' 将会和 ' 喜欢 {at} {random} '结婚'
-                        {print} name ' 将得到一个 ' 宠物 {at} {random} ' 作为他们的宠物。'
+                    房屋 = 豪宅、公寓、棚屋、别墅
+                    喜欢 = 无人，皇室，邻居，真爱
+                    宠物 = 狗、猫、大象
+                    名字们 = 珍娜、瑞安、吉姆
+                    {for} 名字 {in} 名字们
+                        {print} 名字 ' 住在 ' 房屋 {at} {random}
+                        {print} 名字 ' 将会和 ' 喜欢 {at} {random} '结婚'
+                        {print} 名字 ' 将得到一个 ' 宠物 {at} {random} ' 作为他们的宠物。'
                         {sleep}
                     ```
                 story_text_2: "### 练习2\n我们也可以做一个以哈利波特为主题的算命仙。请填空这样就可以打印出9行。\n**（另外）**将算命的主题改成其他的东西，比如你最喜欢的书、电影或电视节目。\n"
@@ -1492,7 +1492,7 @@ adventures:
             16:
                 start_code: '# 把你的代码放在这里'
                 story_text: "让我们玩扭扭乐的游戏来活动一下吧!\n当每个人都准备好后，按x键做下一个动作!\n"
-                example_code: "```\n四肢 = ['右手', '左手', '右脚', '左脚']\n颜色 = ['蓝色', '绿色', '红色', '黄色']\n{repeat} 20 {times}\n    s= 四肢[{random}]\n    y = 颜色[{random}]\n    {if} x {is} {pressed}\n        {print} s + ' 放在 ' + y + '上！'\n```\n"
+                example_code: "```\n四肢 = ['右手'、'左手'、'右脚'、'左脚']\n颜色 = ['蓝色'、'绿色'、'红色'、'黄色']\n{repeat} 20 {times}\n    s= 四肢[{random}]\n    y = 颜色[{random}]\n    {if} x {is} {pressed}\n        {print} s + ' 放在 ' + y + '上！'\n```\n"
             12:
                 example_code: "```\n选择 = '你选择了选项：'\n{print} '一只野生鼠出现了！'\n{print} '选择一个选项并按下代表第一个字母的按键：(n)et网, (c)at猫, (b)ag包, (r)un跑'\n{if} w {is} {pressed}\n    {print} 选择+'网'\n    {print} '你试图用网子抓住老鼠..'\n    {sleep}\n    {print} '恭喜你成功了！'\n{if} m {is} {pressed}\n    {print} 选择+'猫'\n    {print} '你放出了你的猫'\n    {sleep}\n    {print} '老鼠害怕了，跑了！'\n{if} b {is} {pressed}\n    {print} 选择+'包'\n    {print} '老鼠跳进了你的包里！'\n{if} p {is} {pressed}\n    {print} 选择+'跑'\n    {print} '你安全的逃走了！'\n```\n"
                 start_code: '# 在这里写你的代码'
