@@ -228,8 +228,8 @@ When adding new Babel translations the implementation is a bit more complex, but
     * When on the front-end (in a .html template) we do this like this: ```{{ _('test') }}```
     * Notice that the ```{{ }}``` characters are Jinja2 template placeholders for variables
     * When on the back-end we do this like this: ```gettext('test')```
-2. Next we run the following command to let Babel search for keys. We do not want line numbers since those will lead to lots of Weblate merge conflicts:
-    * ```pybabel extract -F babel.cfg -o messages.pot . --no-location```
+2. Next we run the following command to let Babel search for keys, it is important to locations and sort the output to minimize merge conflicts:
+    * ```pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output```
 3. We now have to add the found keys to all translation files, with the following command:
     * ```pybabel update -i messages.pot -d translations -N  --no-wrap```
 4. All keys will be automatically stored in the /translations folder
@@ -271,17 +271,21 @@ Don't worry if you make a mistake here, the files are always generated again on 
 
 ## Using Docker
 
-If you want to run the website locally, but would prefer to use Docker instead
-of installing python, you can build a container image and run it like so:
+If you want to run the website locally and would prefer to use Docker you can build a container with:
 
 ```bash
 docker build -t hedy .
 ```
 
-and then:
+and then you can run the docker container with:
 
 ```bash
-docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app --name hedy hedy 
+```
+
+After that, you can access bash inside the container with:
+```bash
+docker exec -it hedy bash
 ```
 
 ## Testing Admin facing features locally

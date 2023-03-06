@@ -26,4 +26,4 @@ turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> f
 
 ?atom: INT | _MINUS INT |var_access | error_unsupported_number | textwithoutspaces
 
-error_unsupported_number: /([-+]?(\d+[\.،,，]\d+))/ -> error_unsupported_number
+error_unsupported_number: /([-+]?(\d+[\.،,、，]\d+))/ -> error_unsupported_number
