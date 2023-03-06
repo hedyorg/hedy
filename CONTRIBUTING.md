@@ -126,14 +126,16 @@ Do note a few things:
 * Run pybabel before running the tests as they can also rely on exact labels
 * For the same reason, set your app to English
 * ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.
-    ```
+    ``` bash
     $ . ./.env/bin/activate  
     (.env)$ export ADMIN_USER=admin  
     (.env)$ python app.py
     ```
 If you want to connect Cypress to the online dashboard, use:
 
-`npx cypress run --record --key <key here>`
+```bash
+npx cypress run --record --key <key here>
+```
 
 ## Feeding the local database
 
