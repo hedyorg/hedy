@@ -1,4 +1,4 @@
-command:+= ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command
+command:+= error_ifelse | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
@@ -16,3 +16,8 @@ elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command
 ifpressed_elses: elses
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+
+
+//old 'flat' ifelse:
+error_ifelse : ifelse
+

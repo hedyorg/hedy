@@ -61,6 +61,7 @@ adventures:
                      Por isso, é melhor começares pela esquerda na história e ires avançando para a direita, para que o desafio vá aumentando, gradualmente.
                 example_code: "## Exemplo de código Hedy\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nome is ask Como te chamas?
@@ -631,7 +632,6 @@ adventures:
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
                 start_code: "{print} 'What will the die indicate this time?'"
-                example_code: "## Exemplo de código Hedy\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
                 start_code: "{print} 'What will the die indicate this time?'"
@@ -688,7 +688,6 @@ adventures:
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                example_code: "## Exemplo de código Hedy\n\n```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
             3:
                 story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
                 example_code: "## Exemplo de código Hedy\n\n\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
@@ -1062,15 +1061,6 @@ adventures:
                         {print} 'Thats our discount menu'
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
-                    ```
-                story_text_2: |
-                    We use `{or}` to see {if} one our of two things is the case.
-
-                example_code_2: |
-                    ```
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
-                        {print} 'Thats a healthy choice'
                     ```
                 start_code: "# place your code here"
             15:

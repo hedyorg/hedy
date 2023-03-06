@@ -68,6 +68,7 @@ adventures:
                 example_code: "```\n{print} 'Тепер вам потрібно використовувати лапки!'\nвідповідь {is} {ask} 'Що нам потрібно використовувати з цього моменту'\n{print} 'Нам потрібно використовувати ' відповідь\n```\n"
                 story_text: "## 'Лапки'\nНа 4-му рівні змінилися `{ask}` та `{print}`.\n\nТекст, який ви хочете надрукувати, необхідно брати в лапки.\n\nЦе корисно, тому що тепер ви можете надрукувати всі слова, які хочете. Також слова, які ви використовували для зберігання чогось за допомогою `{is}`.\n\nБільшість мов програмування також використовують лапки при наборі, тож ми також стаємо на крок ближче до справжнього програмування!\n"
                 story_text_2: "## Пригоди стають все складнішими і складнішими\nУ наступних вкладках пригоди стають все складнішими і складнішими.\nТому краще починати зліва і просуватися праворуч, щоб проходити все нові і нові випробування.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 example_code: "```\nімʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'класно' {else} {print} 'фе!'\n```\n"
                 story_text_3: "## Список\nКоли ми хочемо перевірити, чи є щось у списку, ми тепер можемо використовувати команду `{in}`.\nЦей код відображається досить гарно, якщо ви виберете зелений або жовтий колір, і навпаки, якщо оберете інший колір.\n"
@@ -299,7 +300,6 @@ adventures:
                 story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
@@ -346,7 +346,6 @@ adventures:
                 story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
@@ -469,8 +468,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "Ми використовуємо `{or}`, щоб побачити, чи має значення одна з двох речей.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
