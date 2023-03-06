@@ -519,347 +519,347 @@ levels:
         5:
             question_text: "Wo ist der Fehler in diesem Code?"
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                problemstellung {is} {ask} Was möchtest du wissen?
+                {print} problemstellung
+                antworten {is} ja, nein, vielleicht
+                {print} antworten {at} {random}
             mp_choice_options:
-            -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
-                feedback: "No, that's not wrong."
-            -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
-                feedback: "No that's not wrong."
-            -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
-                feedback: "No, that's not wrong."
-            -   option: "Nothing, this code is perfect"
-                feedback: "That's right!"
+            -   option: "Zeile 1 sollte `{print}` anstelle von `{ask}` enthalten"
+                feedback: "Nein, das ist nicht falsch."
+            -   option: "Zeile 2 soll `{ask}` anstelle von `{print}` enthalten"
+                feedback: "Nein das ist nicht falsch."
+            -   option: "Zeile 2 sollte antworten `{at} {random}` `{is}` ja, nein, vielleicht"
+                feedback: "Nein, das ist nicht falsch."
+            -   option: "Nichts, dieser Code ist perfekt"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "Does this code even have a mistake?"
+            hint: "Hat dieser Code überhaupt einen Fehler?"
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                problemstellung {is} {ask} Was möchtest du wissen?
+                antworten ja, nein, vielleicht
+                {print} antworten {at} {random}
             mp_choice_options:
-            -   option: "Line 2 needs to say question instead of answers"
-                feedback: "No that's not right"
-            -   option: "Line 2 needs the `{is}` command"
-                feedback: "Correct"
-            -   option: "Line 3 needs to say answer instead of answers"
-                feedback: "No the variable's called answers"
-            -   option: "Nothing! This code is great!"
-                feedback: "Actually, line 2 has a mistake."
+            -   option: "Zeile 2 soll problemstellung anstelle von antworten enthalten"
+                feedback: "Nein das stimmt nicht"
+            -   option: "Zeile 2 braucht den `{is}` Befehl"
+                feedback: "Richtig"
+            -   option: "Zeile 3 soll antwort anstelle von antworten enthalten"
+                feedback: "Nein die Variable heißt antworten"
+            -   option: "Nichts! Dieser Code ist großartig!"
+                feedback: "Tatsächlich hat Zeile 2 einen Fehler."
             correct_answer: "B"
-            hint: "There is something wrong with line 2."
+            hint: "Da stimmt etwas nicht mit Zeile 2."
             question_score: '10'
         7:
-            question_text: "What does the `{add}` command do?"
+            question_text: "Was macht der `{add}` Befehl?"
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: "The `{add}` command removes a random book from the list"
-                feedback: "The remove command removes, the add command adds"
-            -   option: "The `{add}` command adds a random book to a list"
-                feedback: "It doesn't. It adds your answer to the list!"
-            -   option: "The `{add}` command adds your favorite book to the list"
-                feedback: "Correct!"
-            -   option: "The `{add}` command prints your favorite book."
-                feedback: "No, it adds your favorite book to the list"
+            -   option: "Der `{add}` Befehl entfernt ein zufälliges Buch aus der Liste"
+                feedback: "Der entferne-Befehl entfernt, der addiere-Befehl fügt hinzu"
+            -   option: "Der `{add}` Befehl fügt ein zufälliges Buch zur Liste hinzu"
+                feedback: "Tut es nicht. Es fügt eine Antwort zur Liste hinzu!"
+            -   option: "Der `{add}` Befehl fügt dein Lieblingsbuch zur Liste hinzu"
+                feedback: "Richtig!"
+            -   option: "Der `{add}` Befehl gibt dein Lieblingsbuch aus."
+                feedback: "Nein, es fügt dein Lieblingsbuch zur Liste hinzu"
             correct_answer: "C"
-            hint: "The `{add}` command adds a book, but which one?"
+            hint: "Der `{add}` Befehl fügt ein Buch hinzu, aber welches?"
             question_score: '10'
         8:
-            question_text: "What is the output of this code?"
+            question_text: "Was ist die Ausgabe dieses Code?"
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                chips {is} Meersalz, Paprika, Saure Sahne
+                {remove} Meersalz {from} chips
+                {remove} Paprika {from} chips
+                {print} chips {at} {random}
             mp_choice_options:
-            -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
-                feedback: "Take a look at the `{remove}` commands"
+            -   option: "Das kannst du nicht sagen, weil Hedy mit `{print}` in Verbindung mit `{at} {random}` eine der 3 Geschmacksrichtungen ausgibt"
+                feedback: "Schau dir den `{remove}` Befehl an"
             -   option: "sea salt"
-                feedback: "sea salt is removed from the list"
-            -   option: "paprika"
-                feedback: "Paprika is removed from the list"
-            -   option: "sour cream"
-                feedback: "That's right!"
+                feedback: "Meersalz wird von der Liste entfernt"
+            -   option: "Paprika"
+                feedback: "Paprika wird von der Liste entfernt"
+            -   option: "Saure Sahne"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "There are 3 flavors, bit 2 are removed. Which one remains?"
+            hint: "Es gibt 3 Geschmacksrichtungen, aber 2 werden entfernt. Welche bleibt übrig?"
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                farben {is} Blau, Lila, Grün
+                gewählte_farbe {is} {ask} Welche Haarfarbe würdest du nicht haben wollen?
+                {remove} gewählte_farbe {from} farben
+                {print} Ich werde meine Haare farbe {at} {random} färben
             mp_choice_options:
-            -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
-                feedback: "Maybe you want blue hair though!"
-            -   option: "Line 3 should have an `{add}` command instead of a `{remove}` command"
-                feedback: "You want to remove the chosen color so `{remove}` is right."
-            -   option: "In line 4 the variable should be called colors instead of color"
-                feedback: "Great job!"
-            -   option: "Nothing, this is a correct code!"
-                feedback: "Find the mistake!"
+            -   option: "Zeile 3 sollte sein: `{remove}` Blau `{from}` farben"
+                feedback: "Aber vielleicht möchtest du blaues Haar!"
+            -   option: "Zeile 3 sollte einen `{add}` Befehl anstelle eines `{remove}` Befehls haben"
+                feedback: "Du möchtest die gewählte Farbe entfernen, also ist `{remove}` richtig."
+            -   option: "In Zeile 4 sollte die Variable farben sein anstelle von farbe"
+                feedback: "Großartig gemacht!"
+            -   option: "Nichts, dies ist korrekter Code!"
+                feedback: "Finde den Fehler!"
             correct_answer: "C"
-            hint: "Look at line 3"
+            hint: "Schau in Zeile 3"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "Was sollte in den Lücken sein _?_?"
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
+                gassigeher {is} Papa, Mama, Sam, Petra
+                gestern_gegangen {is} {ask} Wer ging gestern Gassi?
+                {print} gestern_gegangen sollte heute nicht erneut mit dem Hund Gassi gehen
                 _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                {print} gassigeher {at} {random} , du bist dran mit Gassi gehen!
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} walked_yesterday {from} walkers
+                    {remove} gestern_gegangen {from} gassigeher
                     ```
                 feedback: "Super!"
             -   option: |
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} gestern gegangen {to} gassigeher
                     ```
                 feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
             -   option: |
                     ```
-                    {remove} walkers {from} yesterday
+                    {remove} gassigeher {from} gestern
                     ```
-                feedback: "yesterday is not a variable"
+                feedback: "gestern ist keine Variable"
             -   option: |
                     ```
-                    {add} walked_yesterday {to} walkers
+                    {add} gestern_gegangen {to} gassigeher
                     ```
-                feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+                feedback: "Dies hat die Wahrscheinlichkeit erhöht, dass die Person die gestern ging jetzt schon wieder gehen muss. Das ist gemein."
             correct_answer: "A"
-            hint: "The person who walked the dog yesterday should be removed from the list."
+            hint: "Die Person, die gestern ging, sollte von der Liste entfernt werden."
             question_score: '10'
 
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "Welche dieser Aussagen ist wahr?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "`{print}` und `{ask}` benötigen nun Anführungszeichen"
+                feedback: "Das ist richtig"
+            -   option: "Nur `{print}` benötigt Anführungszeichen"
+                feedback: "`{ask}` benötigt ebenfalls Anführungszeichen!"
+            -   option: "`{at} {random}` funktioniert in Level 4 nicht mehr"
+                feedback: "`{at} {random}` funktioniert weiterhin"
+            -   option: "`{at} {random}` benötigt nun Anführungszeichen"
+                feedback: "Nein, aber 2 andere Befehle schon."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
+            hint: "In Level 4 benötigst du für 2 Befehle Anführungszeichen."
             question_score: '10'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "Welcher Code benutzt die richtigen Anführungszeichen?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} `hello`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "Dieses Anführungszeichen ist schräg, du brauchst ein gerades."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'hallo'
                     ```
-                feedback: "Correct"
+                feedback: "Richtig"
             -   option: |
                     ```
-                    {print} hello
+                    {print} hallo
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "Hier gibt es keine Anführungszeichen!."
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,hallo,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "Dies ist ein Komma, du brauchst Anführungszeichen."
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
+            hint: "Wähle die richtigen Anführungszeichen."
             question_score: '10'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "Wo werden die Anführungszeichen richtig benutzt?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "Bitte füge Anführungszeichen hinzu!"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "Wörter, die du ausgeben möchtest, benötigen davor und dahinter Anführungszeichen."
             -   option: |
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "Das erste Anführungszeichen sollte hinter {print} stehen"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: "Perfect!"
+                feedback: "Perfekt!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
+            hint: "Sowohl vor als auch hinter Wörtern, die du ausgeben möchtest, sollten Anführungszeichen stehen."
             question_score: '10'
         4:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
+            -   option: "Du brauchst um `{print}` herum Anführungszeichen, wie hier: `'{print}'`."
+                feedback: "Die Anführungszeichen sollten nicht um den Befehl selbst herum stehen."
+            -   option: "Du benötigst Anführungszeichen um die Wörter herum, die du ausgeben möchtest."
                 feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
-            -   option: "You can choose yourself whether to use quotation marks or not."
-                feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "Du brauchst keine Anführungszeichen, wenn du den `{ask}` Befehl benutzt"
+                feedback: "Beide, `{print}` und `{ask}` benötigen Anführungszeichen"
+            -   option: "Du kannst selbst wählen, ob du Anführungszeichen benutzt oder nicht."
+                feedback: "Leider ist Hedy strenger."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
+            hint: "Ab Level 4 musst du Anführungszeichen benutzen."
             question_score: '10'
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "Was muss geändert werden, um das Spiel zum Laufen zu bringen?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                auswahlmöglichkeiten {is} Stein, Schere, Papier
+                {print} 'auswahlmöglichkeiten {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "Schreibe nie Anführungszeichen vor den {print} Befehl."
             -   option: |
                     ```
                     {print} 'options' {at} {random}
                     ```
-                feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
+                feedback: "auswahlmöglichkeiten ist eine Variable. Du möchtest nicht wortwörtlich 'auswahlmöglichkeiten {at} {random}' ausgeben."
             -   option: |
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: "That's right"
-            -   option: "Nothing, the game already works!"
-                feedback: "Look carefully. There is an error."
+                feedback: "Das ist richtig"
+            -   option: "Nichts, das Spiel funktioniert bereits!"
+                feedback: "Schau genau hin. Dort ist ein Fehler."
             correct_answer: "C"
-            hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
+            hint: "Du möchtest nicht das Hedy wortwörtlich 'auswahlmöglichkeiten {at} {random}' ausgibt, du möchtest 'Stein' oder 'Papier' oder 'Schere' ausgeben."
             question_score: '10'
         6:
-            question_text: "What would be a good next line in this code?"
+            question_text: "Was wäre eine gute nächste Zeile in diesem Code?"
             code: |-
-                prices {is} 1 dollar, 100 dollars, 1 million dollars
+                preise {is} 1 Euro, 100 Euro, 1 Million Euro
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'You win...' prices {at} {random}
+                    {print} 'Du gewinnst...' preise {at} {random}
                     ```
-                feedback: "Great! You get it!"
+                feedback: "Großartig! Du kapierst es!"
             -   option: |
                     ```
-                    {print} You win... 'prices {at} {random}'
+                    {print} Du gewinnst... 'preise {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}'"
+                feedback: "Hedy wird wortwörtlich 'preise {at} {random}' ausgeben"
             -   option: |
                     ```
-                    {print} You win... prices {at} {random}
+                    {print} Du gewinnst... preise {at} {random}
                     ```
-                feedback: "You need some quotation marks!"
+                feedback: "Du brauchst einige Anführungszeichen!"
             -   option: |
                     ```
-                    {print} 'You win... prices {at} {random}'
+                    {print} 'Du gewinnst... preise {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}''"
+                feedback: "Hedy wird wortwörtlich 'preise {at} {random}'' ausgeben"
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
+            hint: "Denk scharf nach: was ist eine Variable und sollte außerhalb von Anführungszeichen stehen? Und was sind normale Wörter, die innerhalb stehen sollten?"
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                problemstellung {is} {ask} Was möchtest du wissen?
+                antworten {is} ja, nein, vielleicht
+                {print} antworten {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "Correct!"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "A variable doesn't need quotes"
-            -   option: "Quotation marks are missing in line 3"
-                feedback: "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
-            -   option: "Nothing, this code is good as is!"
-                feedback: "Look carefully. You missed a mistake!"
+            -   option: "Anführungszeichen fehlen in Zeile 1"
+                feedback: "Richtig!"
+            -   option: "Anführungszeichen fehlen in Zeile 2"
+                feedback: "Eine Variable braucht keine Anführungszeichen"
+            -   option: "Anführungszeichen fehlen in Zeile 3"
+                feedback: "Du möchtest nicht, dass Hedy wortwörtlich 'antworten {at} {random}' ausgibt, also werden hier keine Anführungszeichen gebraucht!"
+            -   option: "Nichts, dieser Code ist gut so wie er ist!"
+                feedback: "Schau genau hin. Du hast einen Fehler übersehen!"
             correct_answer: "A"
-            hint: "Check each line on whether they'd need quotation marks or not."
+            hint: "Prüfe jede Zeile, ob sie Anführungszeichen benötigen könnte oder nicht."
             question_score: '10'
         8:
-            question_text: "What would be a good next line for this code?"
+            question_text: "Was wäre eine gute nächste Zeile in diesem Code?"
             code: |-
-                {print} 'Welcome at the money show!'
-                {print} 'In front of you are 3 doors'
-                door {is} {ask} 'Which door do you choose?'
+                {print} 'Willkommen bei der Geld-Show!'
+                {print} 'Vor dir sind 3 Türen'
+                Tür {is} {ask} 'Welche Tür wählst du?'
             mp_choice_options:
             -   option: |
                     ```
-                    {print} So you pick door door
+                    {print} Also wählst du Tür Tür
                     ```
-                feedback: "We need quotation marks"
+                feedback: "Wir brauchen Anführungszeichen"
             -   option: |
                     ```
-                    {print} 'So you pick ' door door
+                    {print} 'Also wählst du ' Tür Tür
                     ```
-                feedback: "If the player chooses door 3, Hedy will say 'So you pick 3 3"
+                feedback: "Wenn der Spieler Tür 3 wählt, wird Hedy 'Also wählst du 3 3 ausgeben"
             -   option: |
                     ```
-                    {print} 'So you pick door ' door
+                    {print} 'Also wählst du Tür ' Tür
                     ```
                 feedback: "Super!"
             -   option: |
                     ```
-                    {print} 'So you pick door door'
+                    {print} 'Also wählst du Tür Tür'
                     ```
-                feedback: "Hedy will literally print 'So you pick door door"
+                feedback: "Hedy wird wortwörtlich 'Also wählst du Tür Tür ausgeben"
             correct_answer: "C"
-            hint: "The second word door should be replaced with the number, the first should still be the word door..."
+            hint: "Das zweite Wort Tür sollte mit der Nummer ersetzt werden, das erste sollte weiterhin das Wort Tür sein..."
             question_score: '10'
         9:
-            question_text: "What will never appear in your output screen?"
+            question_text: "Was wird nie im Ausgabebereich erscheinen?"
             code: |-
-                clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' is going the win the champions league'
+                clubs {is} Real Madrid, Bayern München, Manchester United, Ajax
+                {print} clubs {at} {random} ' wird die Champions League gewinnen'
             mp_choice_options:
-            -   option: "Ajax is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Real Madrid is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Bayer Munchen is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "FC Barcelona is going to win the champions league"
-                feedback: "That's right. It's not in the list"
+            -   option: "Ajax wird die Champions League gewinnen"
+                feedback: "Hedy könnte es `{print}`"
+            -   option: "Real Madrid wird die Champions League gewinnen"
+                feedback: "Hedy könnte es `{print}`"
+            -   option: "Bayern München wird die Champions League gewinnen"
+                feedback: "Hedy könnte es `{print}`"
+            -   option: "FC Barcelona wird die Champions League gewinnen"
+                feedback: "Das ist richtig. Es ist nicht in der Liste"
             correct_answer: "D"
-            hint: "What are Hedy's options to randomly pick from?"
+            hint: "Was sind Hedys Auswahlmöglichkeiten von denen zufällig gewählt wird?"
             question_score: '10'
         10:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             code: |-
-                people {is} mom, dad, Emma, Sophie
-                {print} The dishes are done by...
-                {print} people {at} {random}
+                leute {is} Mama, Papa, Emma, Sophie
+                {print} Abgewaschen wird von...
+                {print} leute {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "A list doesn't need quotation marks"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "Correct"
-            -   option: "Quotation marks are missing in both line 2 and 3"
-                feedback: "Line 3 doesn't need quotation marks because it's not printed literally"
-            -   option: "Nothing, this code has no mistakes"
-                feedback: "You missed one!"
+            -   option: "Anführungszeichen fehlen in Zeile 1"
+                feedback: "Eine Liste benötigt keine Anführungszeichen"
+            -   option: "Anführungszeichen fehlen in Zeile 2"
+                feedback: "Richtig"
+            -   option: "Anführungszeichen fehlen in Zeile 2 und 3"
+                feedback: "Zeile 3 benötigt keine Anführungszeichen, weil es nicht wortwörtlich ausgegeben wird"
+            -   option: "Nichts, dieser Code hat keine Fehler"
+                feedback: "Du hast einen übersehen!"
             correct_answer: "B"
-            hint: "One line needs quotation marks, because you want it to be printed literally."
+            hint: "Eine Zeile benötigt Anführungszeichen, weil du sie wortwörtlich ausgeben möchtest."
             question_score: '10'
     5:
         1:
@@ -876,97 +876,97 @@ levels:
             correct_answer: "D"
             hint: "Welches passt zum `{if}` Befehl?"
             question_score: '10'
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
+            code: "zahl {is} {ask} 'Was ist deine Glückszahl?'\n{if} zahl {is} 5 {print} 'Meine auch!'\n_?_ {print} 'Meine Glückszahl ist 5!'"
         2:
-            question_text: "What appears in your output screen when you type in the name Hedy?"
+            question_text: "Was erscheint im Ausgabebereich, wenn du den Namen Hedy eintippst?"
             code: |-
-                name {is} {ask} 'What is your name?'
-                {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
+                name {is} {ask} 'Was ist dein Name?'
+                {if} name {is} Hedy {print} 'Spaß' {else} {print} 'weniger Spaß'
             mp_choice_options:
-            -   option: "fun"
-                feedback: "That's right!"
-            -   option: "less fun"
-                feedback: "If the name is Hedy, it will say 'fun''"
+            -   option: "Spaß"
+                feedback: "Das ist richtig!"
+            -   option: "weniger Spaß"
+                feedback: "Wenn der Name Hedy ist, wird 'Spaß'' ausgegeben"
             -   option: "Hedy"
-                feedback: "No, it doesn't print the name"
+                feedback: "Nein, es gibt den Namen nicht aus"
             -   option: "Error"
-                feedback: "Fortunately not!"
+                feedback: "Glücklicherweise nicht!"
             correct_answer: "A"
             hint: "`{if}` name `{is}` Hedy `{print}` ...?"
             question_score: '10'
         3:
-            question_text: "What is the right password?"
+            question_text: "Was ist das richtige Passwort?"
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                passwort {is} {ask} 'Was ist das Passwort?'
+                {if} passwort {is} GEHEIMNIS {print} 'Richtig!'
+                {else} {print} 'ALARM! EINDRINGLING!'
             mp_choice_options:
-            -   option: "Correct!"
-                feedback: "This is printed when you type in the correct password"
+            -   option: "Richtig!"
+                feedback: "Dies wird ausgegeben, wenn du das richtige Passwort eintippst"
             -   option: "SECRET"
-                feedback: "That's right!'"
+                feedback: "Das ist richtig!'"
             -   option: "password"
-                feedback: "The password isn't password..."
+                feedback: "Das Passwort ist nicht Passwort..."
             -   option: "ALARM INTRUDER"
-                feedback: "This is printed when you type in the incorrect password!"
+                feedback: "Dies wird ausgegeben, wenn du das falsche Passwort eintippst!"
             correct_answer: "B"
-            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
+            hint: "`{if}` passwort `{is}` ... `{print}` 'Richtig!'!'"
             question_score: '10'
         4:
-            question_text: "What does Hedy print when you type in the wrong password?"
+            question_text: "Was gibt Hedy aus, wenn du das falsche Passwort eintippst?"
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                passwort {is} {ask} 'Was ist das Passwort?'
+                {if} passwort {is} GEHEIMNIS {print} 'Richtig!'
+                {else} {print} 'ALARM! EINDRINGLING!'
             mp_choice_options:
-            -   option: "Correct"
-                feedback: "That's printed if the correct answer is given, not the wrong one..."
+            -   option: "Richtig"
+                feedback: "Das wird ausgegeben, wenn die richtige Antwort eingegeben wurde, nicht die falsche..."
             -   option: "SECRET"
-                feedback: "That's not the right answer"
-            -   option: "Wrong!"
-                feedback: "No, this is not what Hedy will print"
+                feedback: "Das ist nicht die richtige Antwort"
+            -   option: "Falsch!"
+                feedback: "Nein, dies ist nicht, was Hedy ausgeben wird"
             -   option: "ALARM! INTRUDER!"
-                feedback: "Great job!"
+                feedback: "Großartig gemacht!"
             correct_answer: "D"
-            hint: "Your computer will sound the alarm for intruders!"
+            hint: "Dein Computer wird bei Eindringlingen Alarm schlagen!"
             question_score: '10'
         5:
-            question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
+            question_text: "Warum wird Hedy 'ALARM! EINDINGLING' ausgeben, wenn du 'geheimnis' eintippst?"
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                passwort {is} {ask} 'Was ist das Passwort?'
+                {if} passwort {is} GEHEIMNIS {print} 'Richtig!'
+                {else} {print} 'ALARM! EINDRINGLING!'
             mp_choice_options:
-            -   option: "Because it needs to be in capitals, so SECRET"
-                feedback: "Indeed!"
-            -   option: "Because the password is alarm"
-                feedback: "No, this is not the password."
-            -   option: "Because it's spelled wrong."
-                feedback: "That's not how you spell secret"
-            -   option: "Because Hedy makes a mistake"
+            -   option: "Weil es in Großbuchstaben sein muss, also GEHEIMNIS"
+                feedback: "In der Tat!"
+            -   option: "Weil das Passwort Alarm ist"
+                feedback: "Nein, dies ist nicht das Passwort."
+            -   option: "Weil es falsch geschrieben ist."
+                feedback: "Das ist nicht wie man geheimnis schreibt"
+            -   option: "Weil Hedy Fehler macht"
                 feedback: "No, Hedy is right"
             correct_answer: "A"
-            hint: "The spelling of the word has to be exactly the same."
+            hint: "Die Rechtschreibung des Wortes muss genau gleich sein."
             question_score: '10'
         6:
-            question_text: "Which word should be on the place of the question mark in the last line?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens in der letzten Zeile stehen?"
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print} 'Ich bin Hedy die Fußballwahrsagerin!'
+                {print} 'Ich werde vorhersagen, welchen Platz dein Team am Ende belegen wird!'
+                club is {ask} 'Welcher Club ist dein Favorit?'
+                {if} club {is} ajax {print} 'Ajax wird natürlich gewinnen!'
+                _?_ {print} 'Sorry, dein Club wird auf dem letzten Platz landen...'
             mp_choice_options:
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is already in the line above"
+                feedback: "`{if}` ist bereits in der obigen Zeile"
             -   option: |
                     ```
                     {at} {random}
                     ```
-                feedback: "No, you need `{else}`."
+                feedback: "Nein, du brauchst `{else}`."
             -   option: |
                     ```
                     {else}
@@ -976,73 +976,73 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "`{print}` is already there, we need a word before it!"
+                feedback: "`{print}` ist bereits dort, wir brauchen ein Wort davor!"
             correct_answer: "C"
-            hint: "`{if}` goes together with...?"
+            hint: "`{if}` geht zusammen mit...?"
             question_score: '10'
         7:
-            question_text: "Which word should be in the place of the question mark?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens stehen?"
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} 'Ich kann vorhersagen, ob du ein Millionär sein wirst oder nicht!'
+                name {is} {ask} 'Was ist dein Name?'
+                {if} name {is} Hedy {print} 'Du wirst ein Millionär sein!'
+                {else} _?_ 'Unglücklicherweise... Kein großes Geld für dich.'
             mp_choice_options:
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is in the line above."
+                feedback: "`{if}` ist in der Zeile darüber."
             -   option: |
                     ```
                     {at} {random}
                     ```
-                feedback: "No, you don't need `{at} {random}`."
+                feedback: "Nein, du brauchst kein `{at} {random}`."
             -   option: |
                     ```
                     {else}
                     ```
-                feedback: "There already is an `{else}` command"
+                feedback: "Dort ist bereits ein `{else}` Befehl"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "Awesome!"
+                feedback: "Toll!"
             correct_answer: "D"
-            hint: "After `{else}` a `{print}` command follows"
+            hint: "Nach `{else}` folgt ein `{print}` Befehl"
             question_score: '10'
         8:
-            question_text: "Which word should be on the place of the question mark?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens stehen?"
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                Tier {is} {ask} 'Was ist dein Lieblingstier?'
+                {if} _?_ {is} Pinguin {print} 'Das ist auch mein Lieblingstier!'
+                {else} {print} 'Cool! Ich mag Pinguine.'
             mp_choice_options:
             -   option: |
                     ```
-                    favorite animal
+                    Lieblingstier
                     ```
                 feedback: "Dies ist nicht der Variablenname."
             -   option: |
                     ```
-                    animal
+                    Tier
                     ```
-                feedback: "Great job!"
+                feedback: "Großartig gemacht!"
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "`{if}` is already there"
+                feedback: "`{if}` ist bereits dort"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, that's not it."
+                feedback: "Nein, das ist es nicht."
             correct_answer: "B"
             hint: "Was ist der Variablenname?"
             question_score: '10'
         9:
-            question_text: "Which door should you choose to escape??"
+            question_text: "Welche Tür solltest du wählen um zu entkommen??"
             code: |-
                 {print} 'Escape from the haunted house!'
                 {print} 'There are 3 doors in front of you'
@@ -1052,18 +1052,18 @@ levels:
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
             -   option: "1"
-                feedback: "Bad choice! You're being eaten"
+                feedback: "Schlechte Wahl! Du wirst gegessen"
             -   option: "2"
-                feedback: "Super! You escaped!"
+                feedback: "Super! Du bist entkommen!"
             -   option: "3"
-                feedback: "Bad choice! You're being eaten."
-            -   option: "It's a trap, you will always be eaten!"
-                feedback: "Luckily not!"
+                feedback: "Schlechte Wahl! Du wirst gegessen."
+            -   option: "Es ist eine Falle, du wirst immer gegessen werden!"
+                feedback: "Glücklicherweise nicht!"
             correct_answer: "B"
-            hint: "One of the doors will keep you safe.."
+            hint: "Eine der Türen wird dich in Sicherheit bringen.."
             question_score: '10'
         10:
-            question_text: "Which monster is standing behind door 1?"
+            question_text: "Welches Monster steht hinter Tür 1?"
             code: |-
                 {print} 'Escape from the haunted house!'
                 {print} 'There are 3 doors in front of you'
@@ -1072,64 +1072,64 @@ levels:
                 {if} door {is} 2 {print} 'Yay, you can escape!'
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
-            -   option: "Hedy picks a random monster each time."
-                feedback: "Awesome!"
-            -   option: "vampire"
-                feedback: "Not always..."
-            -   option: "werewolf"
-                feedback: "Not always..."
-            -   option: "giant spider"
-                feedback: "Not always..."
+            -   option: "Hedy wählt jedes Mal ein zufälliges Monster."
+                feedback: "Toll!"
+            -   option: "Vampir"
+                feedback: "Nicht immer..."
+            -   option: "Werwolf"
+                feedback: "Nicht immer..."
+            -   option: "Riesenspinne"
+                feedback: "Nicht immer..."
             correct_answer: "A"
-            hint: "Mind the last 3 words... monsters `{at} {random}`..."
+            hint: "Beachte die letzten 3 Wörter... Monster `{at} {random}`..."
             question_score: '10'
     6:
         1:
-            question_text: "What's Hedy's output when you run this code?"
+            question_text: "Was gibt Hedy aus, wenn du diesen Code laufen lässt?"
             code: "{print} 2*10"
             mp_choice_options:
             -   option: "20"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             -   option: "12"
-                feedback: "No, the plus sign is used in addition"
+                feedback: "Nein, das Plus-Zeichen wird für die Addition benutzt"
             -   option: "2*10"
-                feedback: "No, Hedy will calculate the answer"
+                feedback: "Nein, Hedy wird die Antwort berechnen"
             -   option: "210"
-                feedback: "Mind it's a calculation."
+                feedback: "Beachte, dass es eine Berechnung ist."
             correct_answer: "A"
-            hint: "The `*` is used as a multiplication sign"
+            hint: "Das `*` wird als Multiplikationszeichen benutzt"
             question_score: '10'
         2:
-            question_text: "Which sign do you use for an addition?"
+            question_text: "Was benutzt du wenn du zwei Zahlen addieren möchtest?"
             mp_choice_options:
             -   option: "-"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "plus"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "*"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "+"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             correct_answer: "D"
             hint: "It's the plus sign."
             question_score: '10'
         3:
-            question_text: "What's Hedy's output when you run this code?"
+            question_text: "Was ist Hedys Ausgabe, wenn du diesen Code ausführst?"
             code: "{print} '3*10'"
             mp_choice_options:
             -   option: "30"
-                feedback: "This would be the right answer if there were no quotation marks."
+                feedback: "Dies wäre die richtige Antwort, wenn es keine Anführungszeichen geben würde."
             -   option: "13"
-                feedback: "Try again.."
+                feedback: "Versuche es nochmal.."
             -   option: "3*10"
-                feedback: "Correct! There are quotation marks, so Hedy will print it literally."
-            -   option: "Nothing, Hedy will give an error message."
-                feedback: "No, Hedy will print it literally."
+                feedback: "Richtig! Dort sind Anführungszeichen, daher wird Hedy es wortwörtlich ausgeben."
+            -   option: "Nichts, Hedy wird eine Fehlermeldung ausgeben."
+                feedback: "Nein, Hedy wird es wortwörtlich ausgeben."
             correct_answer: "C"
-            hint: "Mind the quotation marks!!"
+            hint: "Beachte die Anführungszeichen!!"
             question_score: '10'
         4:
-            question_text: "Kim is 10 years old. What will Hedy print for her?"
+            question_text: "Kim ist 10 Jahre alt. Was wird Hedy für sie ausgeben?"
             code: |-
                 name = {ask} 'How many letters are in your name?'
                 age = {ask} 'How old are you?'
@@ -1137,37 +1137,37 @@ levels:
                 {print} 'Your lucky number is...' luckynumber
             mp_choice_options:
             -   option: "30"
-                feedback: "Mind, Hedy also prints 'Your lucky number is...'"
+                feedback: "Beachte, dass Hedy ebenfalls 'Deine Glückszahl ist...' ausgeben wird"
             -   option: "10"
-                feedback: "Please try again."
-            -   option: "Your lucky number is... 30"
-                feedback: "That's right!"
-            -   option: "Your lucky number is... 10"
-                feedback: "Her lucky number is name times age..."
+                feedback: "Bitte versuche es nochmal."
+            -   option: "Deine Glückszahl ist... 30"
+                feedback: "Das ist richtig!"
+            -   option: "Deine Glückszahl ist... 10"
+                feedback: "Ihre Glückszahl ist Name mal Alter..."
             correct_answer: "C"
-            hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
+            hint: "Kim hat 3 Buchstaben, sie ist 10 Jahre alt, also: Buchstaben mal Alter = 3*10 = 30."
             question_score: '10'
         5:
-            question_text: "If 5 people eat at this restaurant, how much do they have to pay in total?"
+            question_text: "Wenn 5 Leute im Restaurant essen, wie viel müssen sie insgesamt bezahlen?"
             code: |-
                 {print} 'Welcome to Hedys!'
                 people = {ask} 'How many people are eating with us tonight?'
                 price = people * 10
                 {print} 'That will be ' price 'dollar please'
             mp_choice_options:
-            -   option: "5 dollars"
-                feedback: "Unfortunately, it's not that cheap."
-            -   option: "10 dollars"
-                feedback: "No, it's 10 dollars each."
-            -   option: "15 dollars"
-                feedback: "The * means multiplication."
-            -   option: "50 dollars"
+            -   option: "5 Euro"
+                feedback: "Unglücklicherweise ist es nicht so billig."
+            -   option: "10 Euro"
+                feedback: "Nein, es sind 10 Euro für jeden."
+            -   option: "15 Euro"
+                feedback: "Das * bedeutet Multiplikation."
+            -   option: "50 Euro"
                 feedback: "Great!"
             correct_answer: "D"
             hint: "`price` `is` `people` `times` 10"
             question_score: '10'
         6:
-            question_text: "How much does a hamburger cost is this virtual restaurant?"
+            question_text: "Wie viel kostet ein Hamburger in diesem virtuellen Restaurant?"
             code: |-
                 {print} 'Welcome at Hedys diner'
                 food = {ask} 'What would you like to eat?'
@@ -1175,19 +1175,19 @@ levels:
                 {if} food {is} hamburger price = 15
                 {if} food {is} fries price = 6
             mp_choice_options:
-            -   option: "15 dollars"
+            -   option: "15 Euro"
                 feedback: "Super!"
-            -   option: "6 dollars"
-                feedback: "The fries are 6 dollars"
-            -   option: "0 dollars"
-                feedback: "The hamburger isn't free!"
-            -   option: "21 dollars"
-                feedback: "That's the price for a hamburger and fries!"
+            -   option: "6 Euro"
+                feedback: "Die Pommes kosten 6 Euro"
+            -   option: "0 Euro"
+                feedback: "Der Hamburger ist nicht kostenlos!"
+            -   option: "21 Euro"
+                feedback: "Das ist der Preis für einen Hamburger und Pommes!"
             correct_answer: "A"
-            hint: "Mind the fourth line."
+            hint: "Beachte die vierte Zeile."
             question_score: '10'
         7:
-            question_text: "Why does line 7 say 'price is price + 3' instead of 'price is 3'?"
+            question_text: "Warum sagt Zeile 7 'preis ist preis + 3' anstelle von 'preis ist 3'?"
             code: |-
                 {print} 'Welcome at Hedys diner'
                 food = {ask} 'What would you like to eat?'
@@ -1199,38 +1199,38 @@ levels:
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
             mp_choice_options:
-            -   option: "It could have been `price = 3` just as well."
-                feedback: "No, that's not true. Hedy needs to add 3 dollars to the total."
-            -   option: "Because Hedy doesn't understand `price = 3`."
-                feedback: "Hedy would understand, but it wouldn't be right."
-            -   option: "Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total."
-                feedback: "That's right!"
-            -   option: "Because the price is 0 dollars to begin with."
-                feedback: "That's true, but not the reason"
+            -   option: "Es könnte genauso gut `preis = 3` gewesen sein."
+                feedback: "Nein, das ist nicht wahr. Hedy muss 3 Euro zum Gesamtbetrag addieren."
+            -   option: "Weil Hedy `preis = 3` nicht versteht."
+                feedback: "Hedy würde es verstehen, aber es würde nicht richtig sein."
+            -   option: "Weil Hedy sonst die vorige Bestellung vergessen würde. Der Preis würde insgesamt 3 Euro betragen."
+                feedback: "Das ist richtig!"
+            -   option: "Weil der Preis 0 Euro ist."
+                feedback: "Das ist wahr, jedoch nicht der Grund"
             correct_answer: "C"
-            hint: "The price shouldn't be 3, but 3 dollars more than it already was"
+            hint: "Der Preis sollte nicht 3 sein, aber 3 Euro mehr als es bereits war"
             question_score: '10'
         8:
-            question_text: "Why is this code incorrect?"
+            question_text: "Warum ist dieser Code inkorrekt?"
             code: |-
                 correct answer = 3*12
                 answer = {ask} 'What is 3 times 12?'
                 {if} answer {is} correct answer {print} 'Good job!'
                 {else} {print} 'No... It was ' correct answer
             mp_choice_options:
-            -   option: "There shouldn't be quotation marks in line 2"
-                feedback: "No, there should be!"
+            -   option: "Es sollten in Zeile 2 keine Anführungszeichen stehen"
+                feedback: "Nein, dort sollten welche sein!"
             -   option: "Die Variable heißt correct answer, aber der Name einer Variablen kann nur aus einem Wort bestehen. Sie sollte also correct_answer heißen"
-                feedback: "Correct!"
-            -   option: "The `{if}` and `{else}` commands should be in the same line."
-                feedback: "No, that's not true."
-            -   option: "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer."
+                feedback: "Richtig!"
+            -   option: "Die `{if}` und `{else}` Befehle sollten in der gleichen Zeile stehen."
+                feedback: "Nein, das ist nicht wahr."
+            -   option: "Die Variable in Zeile 2 kann nicht antwort heißen, weil sie zu ähnlich zur Variable richtige antwort ist."
                 feedback: "Variablennamen können ähnlich sein, aber sie dürfen nicht aus 2 Wörtern bestehen..."
             correct_answer: "B"
-            hint: "Inspect what the variables are called."
+            hint: "Untersuche die Namen der Variablen."
             question_score: '10'
         9:
-            question_text: "Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?"
+            question_text: "Stell dir vor, du liebst Fußball eine 10, du hast 2 Bananen gegessen und hast heute 3 Mal deine Hände gewaschen. Wie schlau denkt die alberne Wahrsagerin, dass du bist?"
             code: |-
                 {print} 'Im Hedy the silly fortune teller'
                 {print} 'I will predict how smart you are!'
@@ -1242,91 +1242,91 @@ levels:
                 {print} 'You are ' result 'percent smart.'
             mp_choice_options:
             -   option: "10%"
-                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+                feedback: "(2 Bananen + 3 Hygiene) * 10 Fußball = 5*10 =?"
             -   option: "32%"
-                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+                feedback: "(2 Bananen + 3 Hygiene) * 10 Fußball = 5*10 =?"
             -   option: "50%"
-                feedback: "Super! You are 100 percent smart!"
+                feedback: "Super! Du bist 100 Prozent schlau!"
             -   option: "100%"
-                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+                feedback: "(2 Bananen + 3 Hygiene) * 10 Fußball = 5*10 =?"
             correct_answer: "C"
-            hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+            hint: "(2 Bananen + 3 Hygiene) * 10 Fußball = 5*10 =?"
             question_score: '10'
         10:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             code: |-
                 name _?_ Hedy
-                {print} name 'is walking trough the forrest'
+                {print} name 'geht durch den Wald'
             mp_choice_options:
-            -   option: "You can only fill in the word is on the `_?_`"
-                feedback: "You are allowed to use the `=` sign as well"
-            -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
-                feedback: "Amazing!"
-            -   option: "You have to fill in =is= on the `_?_`"
-                feedback: "No, one `=` sign is enough"
-            -   option: "You can only use the `=` sign when working with numbers, not with words."
-                feedback: "You can also use `=` with words."
+            -   option: "Du kannst nur das Wort ist in die Lücken `_?_` füllen"
+                feedback: "Du darfst auch das `=` Zeichen nutzen"
+            -   option: "Du kannst entweder das Wort ist oder das `=` Zeichen in die Lücken `_?_` füllen"
+                feedback: "Toll!"
+            -   option: "Du musst =ist= in Lücken `_?_` füllen"
+                feedback: "Nein, ein `=` Zeichen ist genug"
+            -   option: "Du kannst nur das `=` Zeichen verwenden, wenn du mit Zahlen arbeitest, nicht mit Wörtern."
+                feedback: "Du kannst das `=` auch mit Wörtern benutzen."
             correct_answer: "B"
-            hint: "`{is}` and `=` are both allowed"
+            hint: "`{is}` und `=` sind beide erlaubt"
             question_score: '10'
     7:
         1:
-            question_text: "How many lines can you repeat at once with the repeat command at this level?"
+            question_text: "Wie viele Zeilen Code kannst du mit einem Mal mit dem wiederhole-Befehl in diesem Level wiederholen?"
             mp_choice_options:
             -   option: "0"
-                feedback: "No you can repeat a line."
+                feedback: "Nein, du kannst eine Zeile wiederholen."
             -   option: "1"
-                feedback: "Correct, one line at a time"
+                feedback: "Richtig, eine Zeile mit einem Mal"
             -   option: "2"
-                feedback: "In this level only one line at a time"
-            -   option: "infinite"
-                feedback: "In this level you can only repeat one line at a time"
+                feedback: "In diesem Level nur eine Zeile mit einem Mal"
+            -   option: "unendlich"
+                feedback: "In diesem Level kannst du nur eine Zeile wiederholen"
             correct_answer: "B"
-            hint: "You can only repeat 1 line at a time"
+            hint: "Du kannst nur eine Zeile mit einem Mal wiederholen"
             question_score: '10'
         2:
-            question_text: "Which code is right?"
+            question_text: "Welcher Code ist richtig?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 100 {times} 'hello'
+                    {print} 100 {times} 'hallo'
                     ```
-                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hallo'"
             -   option: |
                     ```
-                    {print} {repeat} 100 {times} 'hello'
+                    {print} {repeat} 100 {times} 'hallo'
                     ```
-                feedback: "{repeat} 100 {times} {print} 'hello'"
+                feedback: "{repeat} 100 {times} {print} 'hallo'"
             -   option: |
                     ```
-                    {repeat} 'hello' 100 {times}
+                    {repeat} 'hallo' 100 {times}
                     ```
-                feedback: "{repeat} 100 {times} {print} 'hello'"
+                feedback: "{repeat} 100 {times} {print} 'hallo'"
             -   option: |
                     ```
-                    {repeat} 100 {times} {print} 'hello'
+                    {repeat} 100 {times} {print} 'hallo'
                     ```
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "First the repeat command, then the `{print}` command"
+            hint: "Erst der wiederhole-Befehl, dann der `{print}` Befehl"
             question_score: '10'
         3:
-            question_text: "Is this code right or wrong?"
-            code: "{repeat} 100 {times} 'Hello!'"
+            question_text: "Ist dieser Code richtig oder falsch?"
+            code: "{repeat} 100 {times} 'Hallo!'"
             mp_choice_options:
             -   option: "Right"
-                feedback: "No, a word is missing"
-            -   option: "Wrong, the word `{repeat}` is missing"
-                feedback: "The word `{repeat}` is there, another word is missing"
-            -   option: "Wrong, the word `{times}` is missing"
-                feedback: "The word `{times}` is there, another word is missing."
-            -   option: "Wrong, the word `{print}` is missing"
-                feedback: "Correct"
+                feedback: "Nein, ein Wort fehlt"
+            -   option: "Falsch, das Wort `{repeat}` fehlt"
+                feedback: "Das Wort `{repeat}` ist da, ein anderes Wort fehlt"
+            -   option: "Falsch, das Wort `{times}` fehlt"
+                feedback: "Das Wort `{times}` ist da, ein anderes Wort fehlt."
+            -   option: "Falsch, das Wort `{print}` fehlt"
+                feedback: "Richtig"
             correct_answer: "D"
-            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            hint: "Es sollte so sein: `{repeat}` 100 `{times}` `{print}` 'Hallo'"
             question_score: '10'
         4:
-            question_text: "Which word is wrong in the code?"
+            question_text: "Welches Wort ist falsch im Code?"
             code: |-
                 {print} 'I'm blue'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
@@ -1335,70 +1335,70 @@ levels:
                     ```
                     I'm
                     ```
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "`{print}` is spelled correctly"
+                feedback: "`{print}` ist richtig geschrieben"
             -   option: |
                     ```
                     {repeat}
                     ```
-                feedback: "`{repeat}` is spelled correctly"
+                feedback: "`{repeat}` ist richtig geschrieben"
             -   option: |
                     ```
                     {times}
                     ```
-                feedback: "`{times}` is spelled correctly"
+                feedback: "`{times}` ist richtig geschrieben"
             correct_answer: "A"
-            hint: "I'm is wrong, you can't use apostrophes"
+            hint: "I'm ist falsch, du kannst keine Apostrophe verwenden"
             question_score: '10'
         5:
-            question_text: "Is this code right or wrong?"
+            question_text: "Ist dieser Code richtig oder falsch?"
             code: |-
-                {repeat} 100 {times} {print} 'Hedy is awesome!'
+                {repeat} 100 {times} {print} 'Hedy ist toll!'
             mp_choice_options:
-            -   option: "Correct"
-                feedback: "That's right!"
-            -   option: "Wrong"
-                feedback: "That's not it"
+            -   option: "Richtig"
+                feedback: "Das ist richtig!"
+            -   option: "Falsch"
+                feedback: "Das ist es nicht"
             correct_answer: "A"
-            hint: "The code is correct!"
+            hint: "Der Code ist richtig!"
             question_score: '10'
         6:
-            question_text: "What will be the output from this code?"
+            question_text: "Was wird die Ausgabe dieses Code sein?"
             code: |-
                 {print} 'The wheels on the bus go'
                 {repeat} 3 {times} {print} ' round and round'
             mp_choice_options:
             -   option: "the wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
+                feedback: "Nur die zweite Zeile wird 3 mal wiederholt"
             -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
+                feedback: "Nur die zweite Zeile wird 3 Mal wiederholt"
             -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
+                feedback: "Nur die zweite Zeile wird 3 Mal wiederholt"
             -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
                 feedback: "All though the town! Perfect!"
             correct_answer: "D"
-            hint: "Only 'round and round' is repeated 3 times."
+            hint: "Nur 'round and round' wird 3 Mal wiederholt."
             question_score: '10'
         7:
-            question_text: "What will be the output from this code?"
+            question_text: "Was wird die Ausgabe dieses Code sein?"
             code: |-
                 {repeat} 2 {times} {print} 'We will'
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: "We will We will\nROCK YOU!"
-                feedback: "'We will' won't appear twice in the same line"
+                feedback: "'We will' wird nicht zwei Mal in einer Zeile erscheinen"
             -   option: "We will\nWe will\nROCK YOU!"
                 feedback: "Great!"
             -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
-                feedback: "ROCK YOU! won't be repeated"
+                feedback: "ROCK YOU! wird nicht wiederholt"
             -   option: "We will\nROCK YOU!"
-                feedback: "Mind the repeat command"
+                feedback: "Beachte den wiederhole-Befehl"
             correct_answer: "B"
-            hint: "Mind the `{repeat}` command."
+            hint: "Beachte den `{repeat}` Befehl."
             question_score: '10'
         8:
             question_text: "Welcher Hedy code gehört zu dieser Ausgabe?"
@@ -1412,13 +1412,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Perfect, je kan het `{repeat}` commando hier niet gebruiken."
+                feedback: "Toll, du kannst den `{repeat}` Befehl hier nicht verwenden."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
-                    {print} 'Its alright'"
-                feedback: "Waar is de 'Do do do do' gebleven?"
+                    {print} 'Its alright'
+                feedback: "Wo hast du 'Do do do do' gelassen?"
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1426,20 +1426,20 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
+                feedback: "Dies ist nicht die richtige Reihenfolge.."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {repeat} 2 {times} {print} 'Do do'
                     {print} 'And I say'
-                    {print} 'Its alright'"
+                    {print} 'Its alright'
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
-            hint: "`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
+                feedback: "Dies ist nicht die richtige Reihenfolge.."
+            hint: "`{repeat}` kann nur benutzt werden, wenn du die gleiche Zeile mehrfach in Folge ausführen möchtest."
             correct_answer: "A"
             question_score: '10'
         9:
-            question_text: "Welke Hedy code hoort bij dit resultaat ?"
+            question_text: "Welcher Hedy-Code gehört dieser Ausgabe?"
             code: |-
                 Batman flog durch Gotham.
                 Als er plötzlich jemanden schreien hörte...
@@ -1452,39 +1452,39 @@ levels:
                     ```
                     {print} 'Batman was flying through Gotham. '
                     {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} 'Help!'
+                    {repeat} 3 {times} {print} 'Please help me!'
                     ```
                 feedback: "Deine Wiederholung ist falsch."
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {repeat} 3 {times} 'Help!'
+                    {print} 'Please help me!'
                     ```
                 feedback: "Der `{print}` Befehl fehlt in Zeile 3."
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
                     {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {repeat} 3 {times} {print} Help!
+                    {print} Please help me!
                     ```
-                feedback: "Je vergeet de aanhalingstekens"
+                feedback: "Dir fehlen die Anführungszeichen"
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {repeat} 3 {times} {print} 'Help!'
+                    {print} 'Please help me!'
                     ```
-                feedback: "Perfect"
+                feedback: "Perfekt"
             question_score: '10'
-            hint: "'Help !' wordt 3x herhaald."
+            hint: "'Help!' wird 3 Mal wiederholt."
             correct_answer: "D"
         10:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Welcher Hedy-Code gehört zu dieser Ausgabe?"
             code: |-
                 if youre happy and you know it clap your hands
                 if youre happy and you know it clap your hands
@@ -1497,7 +1497,7 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: "Almost! the first line needs an extra word"
+                feedback: "Fast! Die erste Zeile braucht ein weiteres Wort"
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
@@ -1510,7 +1510,7 @@ levels:
                     {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
                     {print} 'if youre happy and you know it and you really want to show it'
                     ```
-                feedback: "This is not in the right order."
+                feedback: "Dies ist nicht die richtige Reihenfolge."
             -   option: |
                     ```
                     {repeat} 4 {times} 'if youre happy and you know it'
@@ -1518,66 +1518,66 @@ levels:
                     {print} 'and you really want to show it'
                     {print} 'clap your hands'
                     ```
-                feedback: "This is not in the right order."
+                feedback: "Dies ist nicht in der richtigen Reihenfolge."
             correct_answer: "B"
-            hint: "Mind the order of the sentences."
+            hint: "Beachte die Reihenfolge der Sätze."
             question_score: '10'
     8:
         1:
-            question_text: "Which output will be produced by this code?"
+            question_text: "Welche Ausgabe wird von diesem Code erzeugt?"
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} 'Hallo'
+                    {print} 'Ich bin Hedy!'
             mp_choice_options:
             -   option: "Hallo\nIch bin Hedy!\n"
-                feedback: "Everything is printed twice."
+                feedback: "Alles wird doppelt ausgegeben."
             -   option: "Hello\nHello\nIch bin Hedy\n"
-                feedback: "The second line is repeated twice as well."
+                feedback: "Die zweite Zeile wird ebenfalls doppelt wiederholt."
             -   option: "Hello\nIch bin Hedy!\nHello\nIch bin Hedy!\n"
                 feedback: "Super!"
             -   option: "Hello\nHello\nIch bin Hedy!\nIch bin Hedy!\n"
-                feedback: "Everything is printed twice"
+                feedback: "Alles wird doppelt ausgegeben"
             correct_answer: "C"
             hint: "Beide Zeilen werden zweimal wiederholt."
             question_score: '10'
         2:
-            question_text: "What is wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} 'Hedy ist cool!'
             mp_choice_options:
-            -   option: "This should be only one line, not 2."
-                feedback: "No it should be 2 lines."
+            -   option: "Dies sollte nur eine Zeile sein, nicht 2."
+                feedback: "Nein, es sollten 2 Zeilen sein."
             -   option: "Das `{print}`-Kommando muss entfernt werden."
-                feedback: "No, you need it."
-            -   option: "There is a spelling mistake in the `{repeat}` command."
-                feedback: "Nee, repeat is de goede spelling"
-            -   option: "The second line need to start with 4 spaces as indentation."
+                feedback: "Nein, du brauchst es."
+            -   option: "Da ist ein Schreibfehler im `{repeat}` Befehl."
+                feedback: "Nein, wiederhole ist die richtige Schreibweise"
+            -   option: "Die zweite Zeile sollte mit 4 Leerzeichen als Einrückung beginnen."
                 feedback: "Richtig!"
             correct_answer: "D"
-            hint: "Something is missing in the second line?"
+            hint: "Etwas fehlt in der zweiten Zeile?"
             question_score: '10'
         3:
-            question_text: "What output will be produced when you run this program?"
+            question_text: "Welche Ausgabe wird erzeugt, wenn du dieses Programm ausführst?"
             code: |-
                 {repeat} 3 {times}
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
             -   option: "Baby shark tututudutudu\nBaby shark\n"
-                feedback: "Mind the `{repeat}` command!"
+                feedback: "Beachte den `{repeat}` Befehl!"
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
-                feedback: "The last line has no indentation, so it's not repeated."
+                feedback: "Die letzte Zeile hat keine Einrückung, daher wird sie nicht wiederholt."
             -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "Richtig!"
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
-                feedback: "What is being repeated and what isn't."
+                feedback: "Was wird wiederholt und was nicht."
             correct_answer: "C"
-            hint: "What is being repeated and what is not?."
+            hint: "Was wird wiederholt und was nicht?."
             question_score: '10'
         4:
-            question_text: "Which output is correct?"
+            question_text: "Welche Ausgabe ist richtig?"
             code: |-
                 {print} 'The children went:'
                 {repeat} 2 {times}
@@ -1585,76 +1585,76 @@ levels:
                     {print} 'Were going on holiday!'
             mp_choice_options:
             -   option: "Die Kinder sagten:\nJuchhuu!\nWir fahren in den Urlaub!\n"
-                feedback: "Mind the `{repeat}` command !"
+                feedback: "Beachte den `{repeat}` Befehl!"
             -   option: "Die Kinder gingen:\nJuchhuu!\nWir fahren in den Urlaub!\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "Richtig!"
             -   option: "Die Kinder gingen:\nJuchhuu!\nJuchhuu!\nWir fahren in den Urlaub!\nWir fahren in den Urlaub!\n"
-                feedback: "This order is incorrect."
+                feedback: "Diese Reihenfolge ist falsch."
             -   option: "Die Kinder gingen:\nJuchhuu!\nJuchhuu!\nWir fahren in den Urlaub!\n"
-                feedback: "The last line is repeated too."
+                feedback: "Die letzte Zeile wird auch wiederholt."
             correct_answer: "B"
-            hint: "The block under the `{repeat}` command is repeated twice."
+            hint: "Der Block unter dem `{repeat}` Befehl wird zwei Mal wiederholt."
             question_score: '10'
         5:
-            question_text: "What is wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 end = {ask} 'Do you want a happy or a sad ending?'
                 {if} end {is} happy {print} 'They lived happily ever after'
                 {else} {print} 'The world exploded. The end.'
             mp_choice_options:
-            -   option: "The `{print}` commands on the last two lines should start on new lines en start with 4 spaces."
-                feedback: "That's right!"
+            -   option: "Die `{print}` Befehle in den letzten zwei Zeilen sollten in neuen Zeilen sowie mit 4 Leerzeichen beginnen."
+                feedback: "Das ist richtig!"
             -   option: "`{else}` ist kein Befehl!"
-                feedback: "It is!"
-            -   option: "Lines that start with `{if}` should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "`{ask}` is no longer a command"
-                feedback: "That's not true"
+                feedback: "Ist es!"
+            -   option: "Zeilen die mit `{if}` beginnen, sollten mit 4 Leerzeichen beginnen"
+                feedback: "Das ist nicht wahr"
+            -   option: "`{ask}` ist kein Befehl mehr"
+                feedback: "Das ist nicht wahr"
             correct_answer: "A"
-            hint: "Something is wrong with indentation"
+            hint: "Etwas stimmt mit der Einrückung nicht"
             question_score: '10'
         6:
-            question_text: "Which code was used to create this output?"
+            question_text: "Welcher Code wurde benutzt, um diese Ausgabe zu erzeugen?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
-                    {print} food
+                    {print} 'Willkommen im Restaurant Hedy'
+                    essen = {ask} 'Was möchten Sie essen?'
+                    {print} essen
                     ```
-                feedback: "You need to take 2 orders."
+                feedback: "Du musst 2 Bestellungen aufnehmen."
             -   option: |
                     ```
                     {repeat} 2 {times}
-                        {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
-                        {print} food
+                        {print} 'Willkommen im Restaurant Hedy'
+                        essen = {ask} 'Was möchten Sie essen?'
+                        {print} essen
                     ```
-                feedback: "The welcome line would be printed twice in this code too"
+                feedback: "Die Willkommenszeile würde ebenfalls zwei Mal in diesem Code ausgegeben werden"
             -   option: |
                     ```
-                    {print} 'Welcome to restaurant Hedy'
+                    {print} 'Willkommen im Restaurant Hedy'
                     {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                    {print} food
+                        essen = {ask} 'Was möchten Sie essen?'
+                    {print} essen
                     ```
-                feedback: "Now only the last order is printed."
+                feedback: "Nun wird nur die letzte Bestellung ausgegeben."
             -   option: |
                     ```
-                    {print} 'Welcome to restaurant Hedy'
+                    {print} 'Willkommen im Restaurant Hedy'
                     {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
+                        essen = {ask} 'Was möchten Sie essen?'
+                        {print} essen
                     ```
-                feedback: "Awesome!"
+                feedback: "Toll!"
             correct_answer: "D"
-            hint: "Pay attention to what sould be repeated and what should only be printed once."
+            hint: "Beachte was wiederholt werden sollte und was nur einmal ausgegeben werden sollte."
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            output: "Willkommen im Restaurant Hedy\nPizza\nHamburger"
         7:
-            question_text: "What is wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                eten = {ask} 'What would you like to eat?'
+                food = {ask} 'What would you like to eat?'
                 {if} food {is} fries
                 sauce = {ask} 'What sauce would you like?'
                     {print} 'One fries with ' sauce
@@ -1663,19 +1663,19 @@ levels:
                     {print} 'One pizza with ' topping
                 {print} 'That you for your order'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
-                feedback: "Something is wrong!."
-            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
+            -   option: "Nichts, dieser Code ist richtig!"
+                feedback: "Etwas stimmt nicht!."
+            -   option: "Du darfst keinen `{if}` Befehl nach einem `{ask}` Befehl benutzen."
                 feedback: "Du bist!"
-            -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
-                feedback: "You always have to use indentation."
-            -   option: "The indentation is wrong in the first `{if}` command."
-                feedback: "That's right."
+            -   option: "Du musst nicht zwei Mal Einrückung verwenden. Nur im ersten `{if}` Befehl."
+                feedback: "Du musst immer Einrückung verwenden."
+            -   option: "Die Einrückung ist im ersten `{if}` Befehl falsch."
+                feedback: "Das ist richtig."
             correct_answer: "D"
-            hint: "Take a careful look at the indentation."
+            hint: "Schau dir die Einrückung genau an."
             question_score: '10'
         8:
-            question_text: "In which of the codes is the indentation done right?"
+            question_text: "In welchem Programm wurde die Einrückung richtig gemacht?"
             mp_choice_options:
             -   option: |
                     ```
@@ -1686,7 +1686,7 @@ levels:
                           {else}
                               {print} 'Du liegst falsch!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Du liegst falsch!"
             -   option: |
                     ```
                     {if} antwort {is} 32
@@ -1696,7 +1696,7 @@ levels:
                     {else}
                     {print} 'Du liegst falsch!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Du liegst falsch!"
             -   option: |
                     ```
                     {if} antwort {is} 32
@@ -1706,7 +1706,7 @@ levels:
                     {else}
                         {print} 'Du liegst falsch!'
                     ```
-                feedback: "You are... right!"
+                feedback: "Du hast... recht!"
             -   option: |
                     ```
                     {if} antwort {is} 32
@@ -1716,12 +1716,12 @@ levels:
                     {else}
                         {print} 'Du liegst falsch!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Du liegst falsch!"
             correct_answer: "C"
-            hint: "What should happen if the person is right? And what else?"
+            hint: "Was sollte passieren, wenn die Person richtig liegt? Und was sonst?"
             question_score: '10'
         9:
-            question_text: "What line(s) in this code should start with 4 spaces?"
+            question_text: "Welche Zeilen sollten mit 4 Leerzeichen beginnen?"
             code: |-
                 1 music = {ask} 'What is your favorite music genre?'
                 2 {if} music {is} rock
@@ -1729,19 +1729,19 @@ levels:
                 4 {else}
                 5 {print} '👎'
             mp_choice_options:
-            -   option: "Line 2 and 4"
-                feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
-            -   option: "Only line 3"
-                feedback: "Not only 3..."
-            -   option: "Line 3, 4 and 5"
-                feedback: "Line 4 shouldn't"
-            -   option: "Line 3 and 5"
+            -   option: "Zeile 2 und 4"
+                feedback: "Die Zeilen nach dem `{if}` und `{else}` Befehl sollten mit 4 Leerzeichen beginnen"
+            -   option: "Nur in Zeile 3"
+                feedback: "Nicht nur 3..."
+            -   option: "Zeile 3, 4 und 5"
+                feedback: "Zeile 4 sollte nicht"
+            -   option: "Zeile 3 und 5"
                 feedback: "Gut gemacht!"
             correct_answer: "D"
-            hint: "The lines after an `{if}` or `{else}` command should start with 4 spaces."
+            hint: "Die Zeilen nach dem `{if}` oder `{else}` Befehl sollten mit 4 Leerzeichen beginnen."
             question_score: '10'
         10:
-            question_text: "Which statement is true?"
+            question_text: "Welche Aussage ist wahr?"
             code: |-
                 1 level = {ask} 'What level are you on?'
                 2 {if} level {is} 8
