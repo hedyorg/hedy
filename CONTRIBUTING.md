@@ -137,6 +137,16 @@ If you want to connect Cypress to the online dashboard, use:
 npx cypress run --record --key <key here>
 ```
 
+To check the front end test coverage, you can run the script:
+
+```bash
+./tests/get-code-coverage 
+```
+
+And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go (here)[https://docs.cypress.io/guides/tooling/code-coverage]
+
+The script will only do its job if all the tests pass succesfully! So take that into account.
+
 ## Feeding the local database
 
 Hedy uses a local database in developing environments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
