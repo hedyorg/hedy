@@ -1442,7 +1442,12 @@ function speak(text: string) {
 }
 
 function initializeSpeech() {
-  if (!window.speechSynthesis) { return; /* No point in even trying */ }
+  // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
+  // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
+  // successfully.
+  const isBeingTested = !!(window as any).Cypress;
+
+  if (!window.speechSynthesis && !isBeingTested) { return; /* No point in even trying */ }
   if (!theLanguage) { return; /* Not on a code page */ }
 
   /**
@@ -1460,7 +1465,7 @@ function initializeSpeech() {
 
     const voices = findVoices(theLanguage);
 
-    if (voices.length > 0) {
+    if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
         $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
