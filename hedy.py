@@ -33,6 +33,12 @@ local_keywords_enabled = True
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
+# stores what python code a line contains
+PYTHON_LINE_MAP = {}
+
+# stores what hedy code a line contains
+HEDY_LINE_MAP = {}
+
 # builtins taken from 3.11.0 docs: https://docs.python.org/3/library/functions.html
 PYTHON_BUILTIN_FUNCTIONS = [
     'abs',
@@ -1399,6 +1405,15 @@ class ConvertToPython(Transformer):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
 
+def map_rule(func):
+
+    def wrap(*args, **kwargs):
+        meta = args[1]
+        result = func(*args, **kwargs)
+        PYTHON_LINE_MAP[meta.line] = result
+        return result
+
+    return wrap
 
 @v_args(meta=True)
 @hedy_transpiler(level=1)
@@ -1428,15 +1443,18 @@ class ConvertToPython_1(ConvertToPython):
     def NEGATIVE_NUMBER(self, meta, args):
         return str(int(args[0]))
 
+    @map_rule
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "')"
 
+    @map_rule
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
+    @map_rule
     def echo(self, meta, args):
         if len(args) == 0:
             return "print(answer)"  # no arguments, just print answer
@@ -1444,17 +1462,21 @@ class ConvertToPython_1(ConvertToPython):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + " '+answer)"
 
+    @map_rule
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
+    @map_rule
     def empty_line(self, meta, args):
         return ''
 
+    @map_rule
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
         return self.make_forward(int(args[0]))
 
+    @map_rule
     def color(self, meta, args):
         if len(args) == 0:
             return "t.pencolor('black')"  # no arguments defaults to black ink
@@ -1467,6 +1489,7 @@ class ConvertToPython_1(ConvertToPython):
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.color, self.level))
 
+    @map_rule
     def turn(self, meta, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -2957,6 +2980,9 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 def transpile_inner(input_string, level, lang="en"):
     check_program_size_is_valid(input_string)
 
+    HEDY_LINE_MAP.clear()
+    PYTHON_LINE_MAP.clear()
+
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
@@ -2966,6 +2992,9 @@ def transpile_inner(input_string, level, lang="en"):
 
     # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
+
+    for line_number, line in enumerate(input_string.splitlines(), 1):
+        HEDY_LINE_MAP[line_number] = line
 
     try:
         abstract_syntax_tree = ExtractAST().transform(program_root)
@@ -2998,6 +3027,8 @@ def transpile_inner(input_string, level, lang="en"):
         if has_pygame:
             python = uses_pygame.post_process_code(python)
 
+        print(HEDY_LINE_MAP)
+        print(PYTHON_LINE_MAP)
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
