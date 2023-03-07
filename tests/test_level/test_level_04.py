@@ -34,6 +34,24 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_chinese_quoted_text(self):
+        code = "print “逃离鬼屋！”"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_chinese_double_quoted_text(self):
+        code = "print ‘逃离鬼屋！’"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
     def test_print_double_quoted_text(self):
         code = 'print "hallo wereld!"'
         expected = "print(f'hallo wereld!')"
@@ -395,6 +413,25 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_print_list_access_index_var(self):
+        code = textwrap.dedent("""\
+        index is 1
+        dieren is Hond, Kat, Kangoeroe
+        print dieren at index""")
+
+        expected = HedyTester.dedent("index = '1'\ndieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[int(index)-1]'),
+                                     "print(f'{dieren[int(index)-1]}')")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
         colors is orange, blue, green
@@ -402,7 +439,7 @@ class TestsLevel4(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {colors[1-1]}')""")
+        favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 

@@ -107,12 +107,13 @@
     <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script>
-        hedyApp.passStateFromHtml({ lang: '{{ g.lang }}', level: '{{ level }}', keyword_language: "{{ g.keyword_lang }}" });
-    </script>
     {% block additional_scripts %}{% endblock %}
     <script>hedyApp.initialize({
+      lang: {{ g.lang|default(None)|tojson }},
+      level: {{ level|default(None)|tojson }},
+      keyword_language: {{ g.keyword_lang|default(None)|tojson }},
       {% if initialize_logs %}logs: true,{% endif %}
+      javascriptPageOptions: {{ javascript_page_options|default(None)|tojson }},
       });</script>
     {% endblock %}
   </body>

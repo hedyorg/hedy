@@ -41,16 +41,17 @@ adventures:
             4:
                 start_code: "{print} 'Bonjour le monde'"
                 story_text: |
-                    ## 'Quotation marks'
+                    ## 'Guillemets'
                     `{print}` et `{ask}` changent au niveau 4.  
 
-                    Vous devez placer le texte que vous souhaitez imprimer entre guillemets.  
+                    Vous devez placer le texte à afficher entre guillemets.  
 
-                    Ceci est utile, car vous pouvez désormais imprimer tous les mots souhaités. Aussi les mots que vous avez utilisés pour stocker quelque chose avec `{is}`.  
+                    Ainsi, vous pouvez désormais faire afficher ce que vous voulez, y compris des mots que vous avez utilisés comme variables de stockage avec `{is}`.  
 
                     La plupart des langages de programmation utilisent aussi les guillemets lors des affichages, donc on fait un pas de plus en direction de la vraie programmation.
                 story_text_2: "## Les aventures deviennent de plus en plus difficiles  \nD’onglet en onglet, les aventures deviennent de plus en plus difficiles.  \nAlors commence par la gauche et poursuit vers la droite pour être toujours plus mis au défi.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nom {is} {ask} 'quel est ton nom?'
@@ -1032,12 +1033,6 @@ adventures:
                     ## Dice
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _ you threw _
-                    {print} _ _ _ <- here you have to program the choice
-                    ```
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: |
@@ -1173,11 +1168,6 @@ adventures:
                     In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
 
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: |
@@ -1734,15 +1724,6 @@ adventures:
                         {print} 'Thats our discount menu'
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
-                    ```
-                story_text_2: |
-                    We use `{or}` to see {if} one our of two things is the case.
-
-                example_code_2: |
-                    ```
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
-                        {print} 'Thats a healthy choice'
                     ```
                 start_code: "# place your code here"
             15:
