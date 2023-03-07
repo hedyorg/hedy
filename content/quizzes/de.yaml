@@ -2402,15 +2402,15 @@ levels:
                     Kelly wählt Stein
                 feedback: "Meredith will auch mitspielen!"
             -   option: |-
-                    Meredith chooses scissors
-                    Kelly chooses rock
+                    Meredith wählt Schere
+                    Kelly wählt Stein
                 feedback: "So nah dran! Aber Kelly ist die erste in der Liste, also ist sie zuerst dran"
             -   option: |-
-                    Meredith chooses paper
+                    Meredith wählt Papier
                 feedback: "Kelly möchte auch spielen!"
             -   option: |-
-                    Kelly chooses paper
-                    Meredith chooses scissors
+                    Kelly wählt Papier
+                    Meredith wählt Schere
                 feedback: "Toll!"
             correct_answer: "D"
             hint: "Jede Spielerin wird eine Auswahl treffen. Die Spielerin die zuvorderst in der Liste steht beginnt."
@@ -2480,19 +2480,19 @@ levels:
         9:
             question_text: "Was ist die erste Frage, die Hedy stellt, wenn du das Programm ausführst?"
             code: |-
-                courses = appetizer, main course, dessert
-                names = Timon, Onno
-                {for} name in names
-                    {for} course {in} courses
-                        food = {ask} name ', what would you like to eat as your ' course '?'
-                        {print} name ' orders ' food ' as their ' course
+                gänge = Vorspeise, Hauptspeise, Nachtisch
+                namen = Timon, Onno
+                {for} name {in} namen
+                	{for} gang {in} gänge
+                        	essen = {ask} name ', was würdest du gerne essen als ' gang '?'
+                        	{print} name ' bestellt ' essen ' als ' gang
             mp_choice_options:
-            -   option: "Timon, what would you like to eat as your appetizer?"
+            -   option: "Timon, was würdest du gerne essen als Vorspeise?"
                 feedback: "Perfekt!"
-            -   option: "Onno, what would you like to eat as your appetizer?"
-                feedback: "Timon is first on the list!"
-            -   option: "Timon, what would you like to eat as your dessert?"
-                feedback: "Appetizers are first in the list"
+            -   option: "Onno, was würdest du gerne als Vorspeise essen?"
+                feedback: "Timon ist der Erste in der Liste!"
+            -   option: "Timon, was würdest du gerne essen als Nachtisch?"
+                feedback: "Vorspeisen stehen als erstes in der Liste"
             -   option: "Das weißt du nicht. Hedy wird `{at} {random}` auswählen."
                 feedback: "Es gibt kein `{at} {random}` in diesem Code..."
             correct_answer: "A"
@@ -2501,15 +2501,15 @@ levels:
         10:
             question_text: "Was ist wahr bezüglich dieses Code?"
             code: |-
-                prices = 1 million dollars, car, sandwich
-                names = Bob, Patrick, Sandy, Larry
-                {for} price {in} prices
-                    {print} 'The ' price 'is won by ' names {at} {random}
+                preise = 1 Million Euro, Auto, Sandwich
+                namen = Bob, Patrick, Sandy, Larry
+                {for} preis {in} preise
+                	{print} preis ' wird von ' name {at} {random} ' gewonnen'
             mp_choice_options:
-            -   option: "Everybody will always win a price."
-                feedback: "That is not true, you could end up without a price."
-            -   option: "All the prices always go to one single person."
-                feedback: "That is not true. All the prices are given away, but to random people"
+            -   option: "Alle werden immer einen Preis gewinnen."
+                feedback: "Das ist nicht wahr, du könntest am Ende ohne einen Preis dastehen."
+            -   option: "Alle Preise werden stets an eine einzige Person vergeben."
+                feedback: "Das stimmt nicht. Alle Preise werden verteilt, aber an zufällige Personen"
             -   option: "Larry wird nie einen Preis gewinnen"
                 feedback: "Das ist nicht wahr. Larry hat die gleichen Chancen wie die anderen"
             -   option: "Jemand könnte zwei Preise gewinnen"
@@ -2521,13 +2521,13 @@ levels:
         1:
             correct_answer: D
             question_text: Welche Ausgabe ist korrekt?
-            code: "print 'three and a half plus one and a half is...'\nprint 3.5 + 1.5"
+            code: "{print} 'dreieinhalb plus eineinhalb ist...'\n{print} 3.5 + 1.5"
             mp_choice_options:
             -   option: "5\n"
                 feedback: Vergiss nicht die erste Zeile Code!
             -   option: "3.5 + 1.5\n"
                 feedback: Dieser ist es nicht!
-            -   option: "thee and a half plus one and a half is...\nfive\n"
+            -   option: "Dreieinhalb plus eineinhalb ist...\nFünf\n"
                 feedback: Schau dir die zweite Zeile genau an...
             -   option: "dreieinhalb plus eineinhalb ist...\n5\n"
                 feedback: Großartig gemacht!
@@ -2537,14 +2537,14 @@ levels:
             question_score: '10'
             question_text: Welches dieser Programme ist korrekt?
             mp_choice_options:
-            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I would like a ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\naromen {is} Vanille, Erdbeere, Schokolade\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n```"
+                feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
+            -   option: "```\n'aromen = Vanille, Erdbeere, Schokolade'\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n```"
+                feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
+            -   option: "`` `\naromen {is} 'Vanille', 'Erdbeere', 'Schokolade'\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n`` `"
                 feedback: In Ordnung!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```\n"
-                feedback: All the different values of flavors should be in quotation marks.
+            -   option: "\n```\naromen = 'Vanille, Erdbeere, Schokolade'\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n```\n"
+                feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
             correct_answer: C
             hint: Die zweite Zeile ist gleich in beiden Programmen, achte auf die erste Zeile
         3:
@@ -2563,39 +2563,39 @@ levels:
             hint: Die Anführungszeichen werden richtig benutzt
             question_score: '10'
         5:
-            hint: The correct password is TOPSECRET
+            hint: Das richtige Passwort lautet TOPSECRET
             question_text: Welche Ausgabe erhält Agent007 wenn er oder sie das richtige Passwort eingibt?
-            code: "name is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the train station '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b"
+            code: "name {is} {ask} 'Was ist dein Name?'\n{if} name {is} 'Agent007'\n\ta {is} 'Gehe zum Flughafen '\nelse\n\ta {is} 'Gehe zum Bahnhof '\npasswort {is} {ask} 'Was ist das Passwort?'\n{if} passwort {is} 'TOPSECRET'\n\tb {is} 'morgen um 02:00'\nelse\n\tb {is} 'heute um 10:00'\nprint a + b"
             mp_choice_options:
-            -   option: Go to the train station today at 10.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 02.00
-                feedback: You've cracked the code!
-            -   option: Go to the train station tomorrow at 02.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 10.00
-                feedback: The agent won't be catching any bad guys here
+            -   option: Gehe zum Bahnhof heute um 10:00
+                feedback: Der Agent wird hier keine Bösewichte erwischen
+            -   option: Gehe zum Flughafen morgen um 02:00
+                feedback: Du hast den Code geknackt!
+            -   option: Gehe zum Bahnhof morgen um 02:00
+                feedback: Der Agent wird hier keine Bösewichte erwischen
+            -   option: Gehe zum Flughafen morgen um 10:00
+                feedback: Der Agent wird hier keine Bösewichte erwischen
             correct_answer: B
             question_score: '10'
         7:
-            question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
+            question_text: Welche Ausgabe erhält eine Veganerin?
+            code: "menü = 'Kekse', 'Käse', 'Weintrauben'\n{print} \"Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\"\ndiät = {ask} \"Haben Sie irgendwelche diätetischen Einschränkungen?\n{if} diät = 'glutenfrei'\n\t{remove} 'Kekse' {from} menü\n{if} diät = 'vegan'\n\t{remove} 'Käse' {from} menü\n{print} 'Für dich habe ich mitgebracht: '\n{for} snack {in} menü\n\t{print} snack"
             mp_choice_options:
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
+            -   option: "Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\nFür dich habe ich mitgebracht:\nKekse\nWeintrauben"
                 feedback: Klasse!
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes"
+            -   option: "Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\nFür dich habe ich mitgebracht:\nWeintrauben"
                 feedback: Es gibt mehr als eine Auswahlmöglichkeit
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncheese\ngrapes"
+            -   option: "Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\nFür dich habe ich mitgebracht:\nKäse\nWeintrauben"
                 feedback: Veganer können keinen Käse haben
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes\ncookies"
-                feedback: Almost there, but look at the order of snacks in the list
+            -   option: "Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\nFür dich habe ich mitgebracht:\nWeintrauben\nKekse"
+                feedback: Fast richtig, aber beachte die Reihenfolge der Snacks in der Liste
             correct_answer: A
-            hint: What item is removed from the list when you answer 'vegan'?
+            hint: Welcher Eintrag wird aus der Liste gestrichen, wenn du "vegan" antwortest?
             question_score: '10'
         9:
             question_score: '10'
             question_text: Welcher Code soll in Zeile 1 anstelle der ???
-            code: "???\ndrucke 'Du gewinnst ' preise at random '!'"
+            code: "???\n{print} 'Du gewinnst ' preise {at} {random} '!'"
             mp_choice_options:
             -   option: "```\npreise = 'eine' 'Million' 'Euro', 'nichts'\n```"
                 feedback: Du gewinnst nichts
@@ -2609,22 +2609,22 @@ levels:
             hint: Die Elemente in der Liste sollten in Anführungszeichen stehen
         10:
             mp_choice_options:
-            -   option: for i in range 1 to 3
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
-                feedback: You are amazing!
-            -   option: repeat 3 times
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    for i in range 0 to 1\n        print 'if youre happy and you know it'\n        print action\n    print 'if youre happy and you know it and you really want to show it'\n    print 'if youre happy and you know it'\n    print action"
+            -   option: '{for} i {in} {range} 1 {to} 3'
+                feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
+            -   option: '{for} aktion {in} aktionen'
+                feedback: Du bist super!
+            -   option: '{repeat} 3 {times}'
+                feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
+            -   option: '{print} aktionen {at} {random}'
+                feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
+            question_text: Welche Codezeile soll bei ??? ausgefüllt werden um das Lied zu vervollständigen?
+            code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\t{print} aktion"
             correct_answer: B
-            hint: This is a hard one! All the actions on the list must be in the song.
+            hint: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
             question_score: '10'
         4:
             question_text: In welchen Zeilen werden Anführungszeichen gebraucht, um den Code zum Laufen zu bringen?
-            code: "print Welcome to the online shoe shop\ncategory = ask What kind of shoes are you looking for?\nif category = high heels\n  print High heels are 50% off now!"
+            code: "{print} Willkommen im Online-Schuhgeschäft\nkategorie = {ask} Welche Art von Schuhen suchen Sie?\n{if} kategorie = High Heels\n\t{print} High Heels sind jetzt 50% reduziert!"
             mp_choice_options:
             -   option: "Zeile 1 und 2\n"
                 feedback: Nein
@@ -2638,31 +2638,31 @@ levels:
             hint: Braucht Zeile 3 auch Anführungszeichen?
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
-            code: "print 'Welcome to McHedy!'\norder = ask 'Would you like a hamburger or fries?'\nif order = 'hamburger'\n  price = 12\nif order = 'fries'\n  price = 4\ndrinks = ask 'Would you like a drink with that for 2 dollars?'\nif drinks = 'yes'\n  ???\nprint 'That will be ' price ' dollar please'\n"
+            question_text: Welche Zeile soll bei ??? eingefügt werden?
+            code: "{print} 'Willkommen bei McHedy!'\nbestellung = {ask} 'Möchtest du einen Hamburger oder Pommes?'\n{if} bestellung = 'Hamburger'\n\tpreis = 12\n{if} bestellung = 'Pommes'\n\tpreis = 4\ngetränk = {ask} 'Möchtest du einen Getränk dazu für 2 Euro?'\n{if} getränk = 'Ja'\n\t???\n{print} 'Das macht dann ' preis ' Euro bitte'\n"
             mp_choice_options:
             -   option: "```\npreis = 14\n```\n"
-                feedback: What if you only order fries and a drink?
+                feedback: Was ist, wenn du nur Pommes und ein Getränk bestellst?
             -   option: "```\npreis = '14'\n```"
-                feedback: What if you only order fries and a drink?
+                feedback: Was ist, wenn du nur Pommes und ein Getränk bestellst?
             -   option: "```\npreis = preis + 2\n```"
                 feedback: Exzellent!
             -   option: "```\npreis = + 2\n```"
                 feedback: Fast richtig!
             correct_answer: C
-            hint: What if you only order fries and a drink?
+            hint: Was ist, wenn du nur Pommes und ein Getränk bestellst?
             question_score: '10'
         8:
             question_text: Welcher Code wurde verwendet, um diese Ausgabe zu erzeugen?
             code: '3.5'
             mp_choice_options:
-            -   option: "```\ndrucke '7 / 2'\n```"
+            -   option: "```\n{print} '7 / 2'\n```"
                 feedback: Nein
-            -   option: "```\ndrucke 7 / 2\n```"
+            -   option: "```\n{print} 7 / 2\n```"
                 feedback: Das ist richtig!
-            -   option: "```\ndrucke 7 : 2\n```"
+            -   option: "```\n{print} 7 : 2\n```"
                 feedback: Nein
-            -   option: "```\ndrucke 7 * 2\n```"
+            -   option: "```\n{print} 7 * 2\n```"
                 feedback: Nein
             correct_answer: B
             hint: 7 geteilt durch 2 ist 3.5
@@ -2684,19 +2684,19 @@ levels:
             hint: The item is either in the list of snacks, or in the list of drinks
             question_score: '10'
         1:
-            question_text: Which code should be filled in at the ??? ?
-            code: "name = ask 'What is your name?'\nsong = ask 'Whould you like to hear a song?'\nbirthday = ask 'Is today your birthday?'\n???\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday. dear ' name\n  print 'Happy Birthday to you!'"
+            question_text: Welcher Code soll bei ??? eingefügt werden?
+            code: "name = {ask} 'Was ist dein Name?'\nsong = {ask} 'Möchtest du einen Song hören?'\ngeburtstag = {ask} 'Ist heute dein Geburtstag?'\n???\n\t{print} 'Happy Birthday to you!'\n\t{print} 'Happy Birthday to you!'\n\t{print} 'Happy Birthday liebe/r ' name\n\t{print} 'Happy Birthday to you!'"
             mp_choice_options:
-            -   option: "```\nif birthday and song = 'yes'\n```"
+            -   option: "```\n{if} geburtstag {and} song = 'ja'\n```"
                 feedback: Fast geschafft
-            -   option: "```\nif birthday = 'yes' and name = 'Hedy'\n```"
-                feedback: Hedy only sings for you if you like to hear a song
-            -   option: "```\nif song = 'yes' and birthday = 'yes'\n```"
+            -   option: "```\n{if} geburtstag = 'ja' {and} name = 'Hedy'\n```"
+                feedback: Hedy singt nur für dich, wenn du ein Lied hören willst
+            -   option: "```\n{if} song = 'ja' {and} geburtstag = 'ja'\n```"
                 feedback: Super!
-            -   option: "```\nif song = 'yes' or birthday = 'yes'\n```"
-                feedback: Hedy only sings if both answers are yes
+            -   option: "```\n{if} song = 'ja' {or} geburtstag = 'ja'\n```"
+                feedback: Hedy singt nur, wenn beide Antworten Ja lauten
             correct_answer: C
-            hint: Hedy sings if you want to hear a song and it's you birthday
+            hint: Hedy singt, wenn du ein Lied hören willst und es dein Geburtstag ist
             question_score: '10'
         2:
             question_text: Which command is missing in the code at the place of the ??? ?
