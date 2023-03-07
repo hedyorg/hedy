@@ -177,6 +177,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     reconfigurePageBasedOnTab(ev.newTab);
   });
 
+  initializeSpeech();
+
   if (options.start_tutorial) {
     startIntroTutorial();
   }
@@ -1439,7 +1441,7 @@ function speak(text: string) {
   pushAchievement("make_some_noise");
 }
 
-(() => {
+function initializeSpeech() {
   if (!window.speechSynthesis) { return; /* No point in even trying */ }
   if (!theLanguage) { return; /* Not on a code page */ }
 
@@ -1483,7 +1485,7 @@ function speak(text: string) {
     if (!window.speechSynthesis) { return []; }
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
-})();
+}
 
 /**
  * Used on the editor page when clicking leave button
