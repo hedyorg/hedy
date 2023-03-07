@@ -202,7 +202,7 @@ adventures:
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
                 start_code: '# разместите здесь свой код'
             10:
-                story_text: "## История\nНа этом уровне вы можете использовать команду {for} в своем рассказе. Таким образом, вы можете легко запрограммировать детскую книгу \"Бурый медведь, бурый медведь, что ты видишь\"\n"
+                story_text: "## Рассказ\nНа этом уровне вы можете использовать команду {for} в своем рассказе. Таким образом, вы можете легко запрограммировать детскую книгу \"Бурый медведь, бурый медведь, что ты видишь\"\n\n### Задание\n\nПосмотрите на  <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.\n"
                 example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
                 start_code: '# разместите здесь свой код'
             12:
@@ -238,13 +238,13 @@ adventures:
 
                     '
                 story_text_2: "### Вызов\nСкопируй код примера в своё поле для ввода нажав на жёлтую кнопку.\nМожете ли вы заставить попугая задать другой вопрос? Заполните пробелы в примере!\n**Дополнительное задание** Ты так же можешь научить попугая задавать несколько вопросов. Допиши ещё несколько строк после своего кода.\n"
-                example_code_2: "```\n{print} Это попугай Хеди.\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Я попугай Хеди\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Попугай\nСоздайте своего собственного онлайн-попугая, который будет копировать вас!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Это попугай Хеди!'
+                example_code: "```\n{print} Я попугай Хеди\nИмя {is} {ask} Как тебя зовут?\n{print} Имя\n{sleep}\n{print} Курлык\n{sleep}\n{print} Имя\n```\n"
+                start_code: '{print} Я попугай Хеди!'
                 story_text_2: "## Вызов\nВы можете использовать переменные, чтобы заставить попугая произносить не только ваше имя. Можете ли вы завершить этот код?\n"
-                example_code_2: "```\n{print} Я попугай Хеди\nимя {is} {ask} как тебя зовут?\n{print} имя\n{sleep}\n{print} имя\nфамилия {is} {ask} какая у вас фамилия?\n_\n{sleep}\n_\n```\n"
+                example_code_2: "```\n{print} Я попугай Хеди\nимя {is} {ask} Как тебя зовут?\n{print} имя\n{sleep}\n{print} имя\nфамилия {is} {ask} Какая у тебя фамилия?\n_\n{sleep}\n_\n```\n"
             5:
                 story_text: "## Попугай\nВознаградите своего попугая, если он произнесет правильное слово!\nЗакончите код, заполнив 4 пропущенные команды.\n"
                 example_code: "```\nслова {is} squawk, Hedy\n{print} 'Дрессируйте своего попугая!'\nnew_word {is} {ask} 'Какому слову вы хотите их научить?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Скажи новое_слово, Хеди!'\n{print} '\U0001F99C ' said_word\n_ said_word {is} new_word _ '\U0001F9D2 Отличная работа, Хеди! \U0001F36A'\n_ _ '\U0001F9D2 Нет, Хеди! Скажи новое_слово\n```\n"
@@ -549,7 +549,17 @@ adventures:
                         {print} 'везде ' звук звук звук
                     ```
 
-                    ## Пьяный моряк\n```\nстроки = ['что делать с пьяным матросом', 'брить ему брюхо ржавой бритвой', 'посадить его в длинную лодку, пока не протрезвеет']\n{for} строка {in} строки\n    {for} i {in} {range} 1 {to} 3\n        {print} строка\n    {print} 'рано утром'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                    ## Пьяный моряк
+                    ```
+                    строки = ['что делать с пьяным матросом', 'брить ему брюхо ржавой бритвой', 'посадить его в длинную лодку, пока не протрезвеет']
+                    {for} строка {in} строки
+                        {for} i {in} {range} 1 {to} 3
+                            {print} строка
+                        {print} 'рано утром'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
                 start_code: '# разместите здесь свой код'
     turtle:
         name: Черепаха
