@@ -1403,7 +1403,9 @@ class ConvertToPython(Transformer):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
 
-<<<<<<< Updated upstream
+
+<< << << < Updated upstream
+
 
 def map_rule(func):
 
@@ -1414,8 +1416,10 @@ def map_rule(func):
         return result
 
     return wrap
-=======
->>>>>>> Stashed changes
+
+
+== == == =
+>>>>>> > Stashed changes
 
 
 @v_args(meta=True)

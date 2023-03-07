@@ -31,7 +31,7 @@ class SourceRange:
         )
 
     def __ne__(self, other):
-        return not(self == other)
+        return not (self == other)
 
     def __str__(self):
         return f'{self.from_line}/{self.from_character}-{self.to_line}/{self.to_character}'
