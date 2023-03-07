@@ -1,37 +1,10 @@
 
-class SourceCode:
-    def __init__(self, hedy, python):
-        self.hedy = hedy
-        self.python = python
-
-    def __str__(self):
-        return (
-            f'{self.hedy} <-> {self.python}'
-        )
-
-    def __repr__(self):
-        return self.__str__()
-
-
 class SourceRange:
     def __init__(self, from_line, from_character, to_line, to_character):
         self.from_line = from_line
         self.from_character = from_character
         self.to_line = to_line
         self.to_character = to_character
-
-    def __hash__(self):
-        return hash((self.from_line, self.from_character, self.to_line, self.to_character))
-
-    def __eq__(self, other):
-        return (
-            self.from_line, self.from_character, self.to_line, self.to_character
-        ) == (
-            other.from_line, other.from_character, other.to_line, other.to_character
-        )
-
-    def __ne__(self, other):
-        return not (self == other)
 
     def __str__(self):
         return f'{self.from_line}/{self.from_character}-{self.to_line}/{self.to_character}'
@@ -40,25 +13,55 @@ class SourceRange:
         return self.__str__()
 
 
+class SourceCode:
+    def __init__(self, source_range: SourceRange, code: str):
+        self.source_range = source_range
+        self.code = code
+
+    def __hash__(self):
+        return hash((
+            self.source_range.from_line, self.source_range.from_character,
+            self.source_range.to_line, self.source_range.to_character
+        ))
+
+    def __eq__(self, other):
+        return (
+            self.source_range.from_line, self.source_range.from_character,
+            self.source_range.to_line, self.source_range.to_character
+        ) == (
+            other.source_range.from_line, other.source_range.from_character,
+            other.source_range.to_line, other.source_range.to_character
+        )
+
+    def __ne__(self, other):
+        return not (self == other)
+
+    def __str__(self):
+        return f'{self.source_range} --- {self.code}'
+
+    def __repr__(self):
+        return self.__str__()
+
+
 class SourceMap:
-    SOURCE_MAP = {}
-    hedy = ''
+    map = {}
+    hedy_code = ''
 
-    def set_hedy_input(self, hedy):
-        self.hedy = hedy
+    def set_hedy_input(self, hedy_code):
+        self.hedy_code = hedy_code
 
-    def add_source(self, source_range: SourceRange, source_code: SourceCode):
-        self.SOURCE_MAP[source_range] = source_code
+    def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
+        self.map[hedy_code] = python_code
 
     def clear(self):
-        self.SOURCE_MAP.clear()
+        self.map.clear()
 
     def get_response_object(self):
         # We can use this to return an optimized object for the front-end
         pass
 
     def __str__(self):
-        return str(self.SOURCE_MAP)
+        return str(self.map)
 
 
 def source_map_rule(source_map: SourceMap):
@@ -67,13 +70,17 @@ def source_map_rule(source_map: SourceMap):
             meta = args[1]
             generated_python = function(*args, **kwargs)
 
-            source_range = SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos)
-            source = SourceCode(
-                source_map.hedy[source_range.from_character:source_range.to_character],
+            hedy_code = SourceCode(
+                SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
+                source_map.hedy_code[meta.start_pos:meta.end_pos]
+            )
+
+            python_code = SourceCode(
+                SourceRange(0, 0, 0, 0),  # this is tricky
                 generated_python
             )
 
-            source_map.add_source(source_range, source)
+            source_map.add_source(hedy_code, python_code)
 
             return generated_python
         return wrapper
