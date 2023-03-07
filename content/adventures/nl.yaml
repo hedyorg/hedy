@@ -651,8 +651,11 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
             12:
                 story_text: |-
-                    ## Verhaal
-                    In dit level kun je aanhalingstekens gebruiken, zodat je meerdere woorden kan opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
+                    Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele.
+                    
+                    ### Opdracht
+                    Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
+                    Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
@@ -662,31 +665,23 @@ adventures:
             13:
                 story_text: |
                     ## Verhaal
-                    Door `{and}` en `{or}` te gebruiken kun je je codes een stuk inkorten. Neem bijvoorbeeld het verhaal over de draak uit de vorige levels.
+                    Met `{and}` en `{or}` kun je een verhaal nog veelzijdiger maken! Je kan een speler twee vragen stellen en reageren op beide antwoorden.
+                    
+                    ### Opdracht 1
+                    Bekijk het voorbeeld en maak het af door de _ in te vullen. Voeg daarna nog minstens twee {if} codes met `{and}` of `{or}` toe.
+
+                    ### Opdracht 2
+                    Zoek een verhaal op uit een vorig level, en voeg er een `{and}` of `{or}` aan toe.
+
                 example_code: |
                     ```
-                    zwaard = 'kwijt'
-                    spel = 'aan'
                     {print} 'Onze held loopt door het bos'
                     {print} 'Ineens komt ze bij een splitsing...'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} spel {is} 'aan'
-                            pad = {ask} 'Welk pad moet onze held kiezen?'
-                            {if} pad {is} 'links' {and} zwaard is 'gevonden'
-                                {print} 'Onze held komt een draak tegen op het pad!'
-                                {print} 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                spel = 'over'
-                            {if} pad {is} 'links' {and} zwaard is 'kwijt'
-                                {print} 'Onze held vindt een draak, maar ze heeft geen wapens!'
-                                {print} 'Onze held wordt met huid en haar verslonden...'
-                                spel = 'over'
-                            {if} pad {is} 'rechts' {and} zwaard is 'gevonden'
-                                {print} 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
-                                {print} 'Ze loopt terug'
-                            {if} pad {is} 'rechts' {and} zwaard is 'kwijt'
-                                {print} 'Onze held vindt een zwaard'
-                                {print} 'Die kan nog goed van pas komen'
-                                zwaard = 'gevonden'
+                    pad = {ask} 'Welk pad moet onze held kiezen?'
+                    wapen = {ask} 'Wat voor wapen zal ze trekken?'
+                    {if} pad {is} 'links' {and} wapen is 'zwaard'
+                        _
+                    
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -949,7 +944,7 @@ adventures:
             12:
                 story_text: |
                     ## Zing een liedje
-                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'. Kijk maar:
+                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'.
 
                     ### Opdracht
                     Kun jij de regels beginnen met de goede hoeveelheid spaties om het liedje aan de praat te krijgen?
@@ -1585,8 +1580,10 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
             13:
                 story_text: |
-                    ## Steen, papier, schaar
-                    Met het `{and}` commando kun je steen, papier, schaar veel netter programmeren. Kijk maar eens naar de voorbeeldcode en probeer hem zelf af te maken!
+                    Met het `{and}` commando kun je steen, papier, schaar met veel minder regels programmeren. Kijk maar eens naar de voorbeeldcode.
+                    
+                    ### Opdracht
+                    Maak de code af zodat bij iedere combinatie een antwoord wordt geprint. Er moet dus altijd in beeld komen wie er gewonnen heeft!
                 example_code: |
                     ```
                     opties = 'steen', 'papier', 'schaar'
@@ -1599,8 +1596,7 @@ adventures:
                     {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'papier'
                         {print} 'Jij wint!'
                     {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'schaar'
-                        {print} 'De computer wint!'
-                    _
+                        _
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -2014,11 +2010,13 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
             12:
                 story_text: |
-                    ## Waarzegger
-                    In dit level kun je langere voorspellingen maken! Kun jij voorspellingen toevoegen aan het lijstje?
+                    Vanaf level 12 moet je in een lijst ook aanhalingstekens gebruiken.
+                    
+                    ### Opdracht
+                    Kun jij minstens twee voorspellingen toevoegen aan het lijstje?
                 example_code: |
                     ```
-                    voorspellingen = 'je glijdt uit over een bananenschil' _
+                    voorspellingen = 'je glijdt uit over een bananenschil', _
                     {print} 'Ik pak mijn glazen bol erbij...'
                     {print} 'Ik zie... Ik zie...'
                     {sleep} 2
@@ -2359,6 +2357,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
+                    
                     ### Opdracht
                     Zet op de logische plek in het progamma een `{and}` en een `{or}`.
                 example_code: |

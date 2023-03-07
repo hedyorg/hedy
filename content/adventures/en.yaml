@@ -697,35 +697,18 @@ adventures:
             13:
                 story_text: |
                     ## Story
-                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
+                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
 
-                    ### Exercise
-                    Can you make your own adventure minigame like this?
+                    ### Exercise 1
+                    Look at the example code and finish it. Then add at least 2 more {if} codes with `{and}` or `{or}`.
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
                     {print} 'Our hero is walking through the forest'
                     {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    path = {ask} 'Which path should she choose?'
+                    weapon = {ask} 'What weapon does she draw?'
+                    {if} path {is} 'left' {and} weapon {is} 'sword'
+                        _
                     ```
                 start_code: "# place your code here"
             15:
