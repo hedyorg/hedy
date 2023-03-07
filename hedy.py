@@ -1404,24 +1404,6 @@ class ConvertToPython(Transformer):
         return '\n'.join([' ' * spaces_amount + line for line in lines])
 
 
-<< << << < Updated upstream
-
-
-def map_rule(func):
-
-    def wrap(*args, **kwargs):
-        meta = args[1]
-        result = func(*args, **kwargs)
-        PYTHON_LINE_MAP[meta.line] = result
-        return result
-
-    return wrap
-
-
-== == == =
->>>>>> > Stashed changes
-
-
 @v_args(meta=True)
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
