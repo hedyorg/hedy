@@ -193,7 +193,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "songs": "🎵,🎶",
     "teacher_welcome": "Willkommen bei Hedy! Du bist nun eine stolze BesitzerIn eines LehrerIn Kontos, welches dir erlaubt Klassen zu erstellen und Schüler einzuladen.",
     "turtle": "🐢",
-    "unsaved_class_changes": "Es gibt ungespeicherte Änderungen, bist du dir sicher, dass du diese Seite verlassen möchtest?"
+    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "el": {
     "CheckInternet": "Ρίξε μια ματιά αν η σύνδεση σου στο Διαδίκτυο δουλεύει σωστά.",
