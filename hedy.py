@@ -1405,6 +1405,7 @@ class ConvertToPython(Transformer):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
 
+
 def map_rule(func):
 
     def wrap(*args, **kwargs):
@@ -1414,6 +1415,7 @@ def map_rule(func):
         return result
 
     return wrap
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=1)
