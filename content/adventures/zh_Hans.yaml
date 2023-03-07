@@ -44,12 +44,9 @@ adventures:
                 story_text: |
                     ## “引号”
                     在第4级目标中 `{ask}` 和 `{print}` 已更改。
-
                     你必须将要打印的文本放在单引号之间。
-
                     这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `{is}`命名并保存的词汇.
-
-                     大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
+                    大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
                 example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
                 story_text_2: "## 冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边开始，向右进行，这样才能得到越来越多的挑战。\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
@@ -95,7 +92,7 @@ adventures:
                         {print} '这句话将被打印5次'
                 story_text: |
                     ## 缩进
-                    `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句，`{pressed}`和 `{repeat}` 循环语句已经改变了！
+                    `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句，{pressed}和 `{repeat}` 循环语句已经改变了！
                     你现在可以把几行代码组合在一起，但你必须*缩进*代码。
                     缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码时你也必须使用缩进。
                 example_code: "`{repeat}`命令现在是这样用的：\n```\n{repeat} 5 {times}\n    {print} '大家好'\n    {print} '这些都会重复5遍'\n```\n\n`{if}`和`{else}`命令现在是这样用的：\n```\n名字 {is} {ask} '你叫什么？'\n{if} 名字 {is} 海蒂\n    {print} '你好海蒂'\n    {print} '你可以玩你的电脑了！'\n{else}\n    {print} '私闯民宅！'\n    {print} '你不能使用这台电脑！'\n```\n"
@@ -481,19 +478,19 @@ adventures:
                 start_code: '# 在这里写你的代码'
             12:
                 story_text: "## 计算器\n现在您可以编写一个可以计算小数的计算器。\n"
-                example_code: "```\n数1 = {ask} '第一个数字是几？'\n数2 = {ask} '第二个数字是几？'\n答案 = _\n{print} 数1 ' 加 ' 数2 '等于 ' 答案\n```\n"
+                example_code: "```\n数一 = {ask} '第一个数字是几？'\n数二 = {ask} '第二个数字是几？'\n答案 = _\n{print} 数一 ' 加 ' 数二 '等于 ' 答案\n```\n"
                 start_code: '# 在这里写你的代码'
             10:
                 story_text: "## 计算器 \n这个计算器游戏帮助您练习你的乘法口诀表！ \n### 练习\n你能在列表中加入更多的数字，这样你就可以练习乘法表直到10？\n"
-                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确答案\n```\n"
+                example_code: "```\n数字 = 1, 2, 3\n{for} 数一 {in} 数字\n    {for} 数二 {in} 数字\n        答案 = {ask} 数一 '乘以' 数二 '是多少？'\n        正确答案 = 数一 * 数二\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确答案\n```\n"
                 start_code: '# 在这里写你的代码'
             9:
                 story_text: "## 计算器\n在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。\n\n### 练习 1\n你能完成第 10 行以使程序工作吗？\n\n### 练习 2\n输入正确或错误的答案时给出反馈。为此，请使用 `{else}` 来扩展程序。\n"
-                example_code: "```\n分数 = 0\n{repeat} 10 {times}\n    一组数 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 一组数 {at} {random}\n    数2 = 一组数 {at} {random}\n    正确答案 = 数1 * 数2\n    {print} 数1 '乘以' 数2 '是多少？'\n    答案 = {ask} '在这里输入你的答案……'\n    {print} '你的答案是' 答案\n    {if} _ {is} _\n        分数 = 分数 + 1\n{print} '做得好！你的分数是' 分数 '分，满分是10分！'\n```\n"
+                example_code: "```\n分数 = 0\n{repeat} 10 {times}\n    一组数 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数一 = 一组数 {at} {random}\n    数二 = 一组数 {at} {random}\n    正确答案 = 数一 * 数二\n    {print} 数一 '乘以' 数二 '是多少？'\n    答案 = {ask} '在这里输入你的答案……'\n    {print} '你的答案是' 答案\n    {if} _ {is} _\n        分数 = 分数 + 1\n{print} '做得好！你的分数是' 分数 '分，满分是10分！'\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
             6:
                 story_text: "## 计算器\n现在你可以做数学了，你可以自己做一个计算器！\n"
-                example_code: "```\n数1 {is} {ask} '填写第一个数字：'\n数2 {is} {ask} '填写第二个数字：'\n正确答案 = 数1 * 数2\n{print} 数1 ' 乘以 '数2 ' 是 ' 正确答案\n```\n"
+                example_code: "```\n数一 {is} {ask} '填写第一个数字：'\n数二 {is} {ask} '填写第二个数字：'\n正确答案 = 数一 * 数二\n{print} 数一 ' 乘以 '数二 ' 是 ' 正确答案\n```\n"
                 story_text_2: "### 练习\n上面的计算器会为你计算出答案，但你也可以编写一个程序来测试你自己的运算能力，如下所示：\n填空使其完整！\n"
                 example_code_2: "```\n正确答案 = 11 * 27\n答案 = {ask} '11乘以27是多少？'\n{if} 答案 {is} _ {print} '做得好！'\n{else} {print} '错了！是' _\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
@@ -501,7 +498,7 @@ adventures:
                 example_code_3: "```\n被乘数= 4， 5， 6， 8\n乘数 = 1，2， 3， 4， 5， 6， 7， 8， 9， 10\n被乘数 = 被乘数 {at} {random}\n乘数 = 乘数 {at} {random}\n正确答案= 被乘数 * 乘数\n答案 = {ask} '被乘数'乘以'乘数'是多少？\n{if} 答案 {is}正确答案 {print} “正常”\n{else}{print}“错！这是'正确答案\n```\n"
             15:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一级中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不能回答下一个问题。\n"
-                example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
+                example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数一 = 数字 {at} {random}\n    数二 = 数字 {at} {random}\n    正确 = 数一 * 数二\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数一 '乘以' 数二 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
             11:
                 example_code: "```\n数字 = 10\n{for} i {in} {range} 1 to 10\n    {print} i * 数字\n```\n"
@@ -1153,8 +1150,8 @@ adventures:
                 example_code_2: "```\n怪物_1 {is} _\n怪物_2 {is} _\n怪物_3 {is} _\n{print}你进入了鬼屋。\n{print} 突然你看到了怪物_1\n{print} 你跑进了另一个房间，但是怪物_2在那里等着你！\n{print} 哦不！快往厨房跑。\n{print} 但是当你进入厨房后怪物_3攻击了你！\n```\n"
             3:
                 story_text: |
-                    ## 冒险屋游戏
-                    在前面的级别中，你已经对你的冒险屋游戏做了介绍，但你可能已经注意到，故事总会有一个可怕的结局。
+                    ## 鬼屋游戏
+                    在前面的级别中，你已经对你的鬼屋游戏做了介绍，但你可能已经注意到，故事总会有一个可怕的结局。
                     在这一级中，你可以通过改变游戏的结局来使你的故事更具互动性；有时你会被吃掉，有时你会逃脱！
                     让海蒂随机决定吧。
                 story_text_2: |
@@ -1525,7 +1522,7 @@ adventures:
                 start_code: '# 把你的代码放在这里'
             6:
                 story_text: "你知道你也可以用`{pressed}` 做一个计算器吗？\n给计算器两个数字，然后按m键进行乘法运算。\n现在你不用再带自己的计算器了!\n试试其他的键，看看会发生什么？你会得到不同的结果吗？\n"
-                example_code: "```\n数1 = {ask} '你的第一个数字是多少？'\n数2 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 数1 + 数2\n{if} s {is} {pressed} 计算结果 = 数1 - 数2\n{if} d {is} {pressed} 计算结果 = 数1 / 数2\n{if} m {is} {pressed} 计算结果 = 数1 * 数2\n{print} '答案是 ' 计算结果\n```\n"
+                example_code: "```\n数一 = {ask} '你的第一个数字是多少？'\n数二 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 数一 + 数二\n{if} s {is} {pressed} 计算结果 = 数一 - 数二\n{if} d {is} {pressed} 计算结果 = 数一 / 数二\n{if} m {is} {pressed} 计算结果 = 数一 * 数二\n{print} '答案是 ' 计算结果\n```\n"
                 start_code: '# 把你的代码放在这里'
             7:
                 story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
