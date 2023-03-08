@@ -52,8 +52,8 @@ adventures:
                 example_code_2: "```\n_这是使用撇号的错误方法 _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
-                    名字{is} {ask} '你的名字是什么?'
-                    {if}名字{is} 海蒂 {print} '酷!' {else} {print} '呵呵'
+                    名字 {is} {ask} '你的名字是什么?'
+                    {if} 名字 {is} 海蒂 {print} '酷!' {else} {print} '呵呵'
                 story_text: |
                     ## 如果（那么）......否则.....
                     `{if}`是第五级别的新东西！使用 `{if}`，你可以在两个不同的选项之间进行选择。
@@ -292,7 +292,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             4:
                 story_text: "## 故事\n你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字{is}{ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n{print}名字     _正准备走进树林_\n{print}名字 _有点害怕'\n动物们{is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n{print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: "{print} '你的故事会打印在这里！'"
             15:
                 story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} game {is} 'on'`可以让游戏一直进行到结束为止。\n或者用`{while} sword {is} 'lost'`来要求玩家必须先找到剑，才能继续游戏。\n"
