@@ -562,6 +562,7 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+
     #
     # combined tests
     #
@@ -785,6 +786,29 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
             extra_check_function=lambda c: c.exception.error_location[0] == 1
         )
+
+    def test_print_quote_gives_exception(self):
+        code = textwrap.dedent("""\
+        print 'what's your name?'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.UnquotedTextException,
+            extra_check_function=lambda c: c.exception.error_location[0] == 1
+        )
+
+    def test_ask_with_quote(self):
+        code = textwrap.dedent("""\
+        name is ask 'what's your name?'
+        print name""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.UnquotedTextException,
+            extra_check_function=lambda c: c.exception.error_location[0] == 1
+        )
+
+
 
     def test_if_equality_print_backtick_text_gives_error(self):
         code = "if 1 is 1 print `yay!` else print `nay`"
