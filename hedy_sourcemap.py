@@ -46,6 +46,7 @@ class SourceCode:
 class SourceMap:
     map = {}
     hedy_code = ''
+    python_line = 0
 
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
@@ -54,6 +55,7 @@ class SourceMap:
         self.map[hedy_code] = python_code
 
     def clear(self):
+        self.python_line = 0
         self.map.clear()
 
     def get_response_object(self):
@@ -74,12 +76,13 @@ def source_map_rule(source_map: SourceMap):
                 SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
                 source_map.hedy_code[meta.start_pos:meta.end_pos]
             )
-
+            source_map.python_line += 1
+            current_line = source_map.python_line
+            source_map.python_line += generated_python.count('\n')
             python_code = SourceCode(
-                SourceRange(0, 0, 0, 0),  # this is tricky
+                SourceRange(current_line, 0, 0, source_map.python_line),  # this is tricky
                 generated_python
             )
-
             source_map.add_source(hedy_code, python_code)
 
             return generated_python
