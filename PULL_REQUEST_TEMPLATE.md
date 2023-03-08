@@ -19,7 +19,7 @@ _Changes in detail. For example: "**Adds** translations of levels 1 to 12 to Pol
 **Fixes _issue or discussion number_**
 
 Always link the number of the issue or of the discussion that your PR concerns.
-Tip, if you use the words fixes before the issue number in this description, the related issue will automatically close then the PR is merged! 
+Tip, if you use the word `fixes` before the issue number in this description, the related issue will automatically close then the PR is merged! 
 
 **How to test**
 
