@@ -48,8 +48,8 @@ adventures:
                     这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `{is}`命名并保存的词汇.
                     大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
                 example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
-                story_text_2: "## 冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边开始，向右进行，这样才能得到越来越多的挑战。\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text_2: "## 缩写\n重要！请注意，现在我们使用引号，当您使用撇号进行收缩（如 I's 或 What's）时，Hedy会感到困惑。\n确保删除这些撇号并将拼写改为I am或What is。\n查看示例代码以了解使用撇号的错误方式。\n"
+                example_code_2: "```\n_这是使用撇号的错误方法 _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     名字{is} {ask} '你的名字是什么?'
@@ -395,7 +395,7 @@ adventures:
                 story_text: "## 洗碗\n你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。\n\n你能不能完成这段代码，让它在选中你的时候打印“太糟了”，其它情况下打印“好！”？\n别忘了引号！\n"
                 example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{else} {print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
-                story_text: "## 洗碗\n在这个级别中，您可以轻松地制定一周家庭事务安排表！\n\n### 练习\n添加第二件家务，例如吸尘或整理，并确保这件家务被分配到整周的家庭事务安排表中。\n<br> **（另外）** 如果程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样做才能使程序更公平？\n"
+                story_text: "## 洗碗\n在这一关中，你可以轻松地为整个星期制定时间表！\n\n### 练习\n增加第二项家务，例如吸尘或整理，并确保这项家务被分配到整周的家庭事务安排表中。\n<br> **(extra)** 如果程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样做才能使程序更公平？\n"
                 example_code: "```\n日期们 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n名字们 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期们\n    {print} 名字们 {at} {random} '负责在' 日期 '洗碗'\n```\n"
                 start_code: '# 在这里写你的代码'
             7:
