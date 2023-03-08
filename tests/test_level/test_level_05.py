@@ -562,10 +562,10 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-
     #
     # combined tests
     #
+
     def test_consecutive_if_statements(self):
         code = textwrap.dedent("""\
         names is Hedy, Lamar
@@ -807,8 +807,6 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
             extra_check_function=lambda c: c.exception.error_location[0] == 1
         )
-
-
 
     def test_if_equality_print_backtick_text_gives_error(self):
         code = "if 1 is 1 print `yay!` else print `nay`"
