@@ -179,15 +179,33 @@ class Database:
         return PROGRAMS.get({"id": id})
 
     def store_program(self, program):
-        """Store a program."""
+        """Store a program.
+
+        Returns the program.
+        """
         PROGRAMS.create(program)
+        return program
+
+    def update_program(self, id, updates):
+        """Update fields of an existing program.
+
+        Returns the updated state of the program.
+        """
+        return PROGRAMS.update(dict(id=id), updates)
 
     def set_program_public_by_id(self, id, public):
-        """Store a program."""
-        PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
+        """Switch a program to public or private.
+
+        Return the updated state of the program.
+        """
+        return PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id):
-        PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
+        """Switch a program to submitted.
+
+        Return the updated program state.
+        """
+        return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""

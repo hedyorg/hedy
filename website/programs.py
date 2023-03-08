@@ -13,6 +13,7 @@ from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 from .flask_helpers import proper_jsonify as jsonify
+from .types import SaveInfo, Program
 
 
 class ProgramsLogic:
@@ -25,9 +26,14 @@ class ProgramsLogic:
         self.db = db
         self.achievements = achievements
 
-    def store_program(self, user, program_id: str, level: int, name: str, code: str, error: bool, overwrite: bool, adventure_name: Optional[str]):
-        stored_program = {
-            "id": program_id,
+    def store_user_program(self, user, level: int, name: str, code: str, error: bool, program_id: Optional[str], adventure_name: Optional[str]):
+        """Store a user program (either new or overwrite an existing one).
+
+        Returns the program record.
+        """
+
+        # Some user input and a bunch of metadata
+        updates = {
             "session": utils.session_id(),
             "date": utils.timems(),
             "lang": g.lang,
@@ -36,20 +42,22 @@ class ProgramsLogic:
             "code": code,
             "name": name,
             "username": user["username"],
-            "public": 0,
             "error": error,
+            "adventure_name": adventure_name,
         }
 
-        if adventure_name:
-            stored_program["adventure_name"] = adventure_name
-
-        self.db.store_program(stored_program)
-        self.db.increase_user_save_count(user["username"])
-        if not overwrite:
+        if program_id:
+            program = self.db.update_program(program_id, updates)
+        else:
+            updates['id'] = uuid.uuid4().hex
+            program = self.db.store_program(updates)
             self.db.increase_user_program_count(user["username"])
-        self.achievements.increase_count("saved")
 
+        self.db.increase_user_save_count(user["username"])
+        self.achievements.increase_count("saved")
         self.achievements.verify_save_achievements(user["username"], adventure_name)
+
+        return program
 
 
 class ProgramsModule(WebsiteModule):
@@ -142,38 +150,34 @@ class ProgramsModule(WebsiteModule):
         # but since DynamoDB doesn't allow searching for two indexes at the same time,
         # this would require to create a special index to that effect, which is cumbersome.
         # For now, we bring all existing programs for the user and then search within them for repeated names.
-        programs = self.db.programs_for_user(user["username"]).records
-        program_id = uuid.uuid4().hex
+        program_id = None
         program_public = body.get("shared")
-        overwrite = False
-        for program in programs:
+        for program in self.db.programs_for_user(user["username"]):
             if program["name"] == body["name"]:
-                overwrite = True
                 program_id = program["id"]
-                # If a program was already shared, keep it that way
-                if program.get("public", False):
-                    program_public = True
+                program_public = program.get("public", False)
                 break
 
-        self.logic.store_program(
+        program = self.logic.store_user_program(
             program_id=program_id,
             level=body['level'],
             code=body['code'],
             name=body['name'],
             user=user,
             error=error,
-            overwrite=overwrite,
             adventure_name=body.get('adventure_name'))
 
-        return jsonify(
-            {
-                "message": gettext("save_success_detail"),
-                "share_message": gettext("copy_clipboard"),
-                "name": body["name"],
-                "id": program_id,
-                "achievements": self.achievements.get_earned_achievements(),
-            }
-        )
+        if not program_id and program_public:
+            # We store as non-public by default
+            program_public = body.get("shared")
+
+        return jsonify({
+            "message": gettext("save_success_detail"),
+            "share_message": gettext("copy_clipboard"),
+            "name": program["name"],
+            "id": program['id'],
+            "achievements": self.achievements.get_earned_achievements(),
+        })
 
     @route("/share", methods=["POST"])
     @requires_login
@@ -199,12 +203,13 @@ class ProgramsModule(WebsiteModule):
         ):
             self.db.set_favourite_program(user["username"], None)
 
-        self.db.set_program_public_by_id(body["id"], bool(body["public"]))
+        program = self.db.set_program_public_by_id(body["id"], bool(body["public"]))
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
 
         resp = {
             "id": body["id"],
             "public": bool(body["public"]),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
         }
 
         if bool(body["public"]):
@@ -228,13 +233,17 @@ class ProgramsModule(WebsiteModule):
         if not result or result["username"] != user["username"]:
             return "No such program!", 404
 
-        self.db.submit_program_by_id(body["id"])
+        program = self.db.submit_program_by_id(body["id"])
         self.db.increase_user_submit_count(user["username"])
         self.achievements.increase_count("submitted")
+        self.achievements.verify_submit_achievements(user["username"])
 
-        if self.achievements.verify_submit_achievements(user["username"]):
-            return jsonify({"achievements": self.achievements.get_earned_achievements()})
-        return jsonify({})
+        response = {
+            "message": gettext("submitted"),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+            "achievements": self.achievements.get_earned_achievements(),
+        }
+        return jsonify(response)
 
     @route("/set_favourite", methods=["POST"])
     @requires_login

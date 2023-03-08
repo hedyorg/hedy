@@ -317,9 +317,10 @@ def strip_accents(s):
 def base_url():
     """Return the base URL, excluding the leading slash
 
-    Returns either from configruation or otherwise from Flask.
+    Returns either from configuration or otherwise from Flask.
     """
-    if from_env := os.getenv('BASE_URL'):
-        return from_env
+    url = os.getenv('BASE_URL')
+    if not url:
+        url = request.host_url
 
-    return request.host_url + request.root_path
+    return url if not url.endswith('/') else url[:-1]

@@ -117,6 +117,7 @@ export function initializeApp(options: InitializeAppOptions) {
     keywordLanguage: options.keywordLanguage,
   });
   initializeHighlightedCodeBlocks(options.keywordLanguage);
+  initializeCopyToClipboard();
 
   $("#search_language").on('keyup', function() {
       let search_query = ($("#search_language").val() as string).toLowerCase();
@@ -192,6 +193,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#share_program_button').on('click', () => $('#share-modal').show());
   $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
   initializeShareProgramButtons();
+  initializeHandInButton();
 
   /**
    * Initialize the main editor and attach all the required event handlers
@@ -420,7 +422,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -474,10 +476,8 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
     removeBulb();
     console.log('Original program:\n', code);
 
-    $.ajax({
-      type: 'POST',
-      url: '/parse',
-      data: JSON.stringify({
+    try {
+      const response = await postJson('/parse', {
         level: `${level}`,
         code: code,
         lang: lang,
@@ -488,10 +488,8 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
         // Save under an existing id if this field is set
         program_id: theAdventures[adventureName]?.save_info?.id,
         save_name: $('#program_name').val(),
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response: any) {
+      });
+
       console.log('Response', response);
       if (response.Warning && $('#editor').is(":visible")) {
         //storeFixedCode(response, level);
@@ -519,38 +517,30 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
           reportClientError(level, code, err.message);
         }
       });
-    }).fail(function(xhr) {
-      console.error(xhr);
-       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      if (xhr.readyState < 4) {
+    } catch (e: any) {
+      console.error(e);
+      if (e.internetError) {
         error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
       } else {
         error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
       }
-    });
-
+    }
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
 }
 
-export function saveMachineFiles() {
-  $.ajax({
-    type: 'POST',
-    url: '/generate_machine_files',
-    data: JSON.stringify({
-      level: theLevel,
-      code: get_active_and_trimmed_code(),
-      lang: theLanguage,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-    }).done(function(response: any) {
-      if (response.filename) {
-        // Download the file
-        window.location.replace('/download_machine_files/' + response.filename);
-      }
+export async function saveMachineFiles() {
+  const response = await postJson('/generate_machine_files', {
+    level: theLevel,
+    code: get_active_and_trimmed_code(),
+    lang: theLanguage,
   });
+
+  if (response.filename) {
+    // Download the file
+    window.location.replace('/download_machine_files/' + response.filename);
+  }
 }
 
 // function storeFixedCode(response: any, level: string) {
@@ -574,24 +564,15 @@ export function saveMachineFiles() {
 // ever push the same achievement more than once per page load to avoid this.
 const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
 
-export function pushAchievement(achievement: string) {
+export async function pushAchievement(achievement: string) {
   if (ACHIEVEMENTS_PUSHED[achievement]) {
       console.error('Achievement already pushed, this may be a programming issue: ', achievement);
       return;
   }
   ACHIEVEMENTS_PUSHED[achievement] = true;
 
-  $.ajax({
-    type: 'POST',
-    url: '/achievements/push-achievement',
-    data: JSON.stringify({
-      achievement: achievement
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-    }).done(function(response: any) {
-      showAchievements(response.achievements, false, "");
-  });
+  const response = await postJson('/achievements/push-achievement', { achievement });
+  showAchievements(response.achievements, false, "");
 }
 
 export function closeAchievement() {
@@ -677,7 +658,7 @@ export function tryPaletteCode(exampleCode: string) {
   clearUnsavedChanges();
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
+async function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   clearUnsavedChanges();
   var adventure_name = currentTab;
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -686,10 +667,8 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
      level = level [0];
   }
 
-  $.ajax({
-    type: 'POST',
-    url: '/programs',
-    data: JSON.stringify({
+  try {
+    const response = await postJson('/programs', {
       level: level,
       lang:  lang,
       name:  name,
@@ -697,10 +676,8 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       shared: shared,
       force_save: force_save,
       adventure_name: adventure_name
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
+    });
+
     // If the program contains an error -> verify that the user really wants to save it and POST again
     // If we already answered this question with yes the "force_save" is true, so we skip this part
     if (response.parse_error && !force_save) {
@@ -730,7 +707,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       adv.save_name = response.name;
       adv.start_code = code;
     }
-  }).fail(function(err) {
+  } catch (err: any) {
     console.error(err);
     error.show(ClientMessages['Connection_error'], JSON.stringify(err));
     if (err.status === 403) {
@@ -738,44 +715,34 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
        localStorage.setItem ('hedy-save-redirect', 'hedy');
        window.location.pathname = '/login';
     }
-  });
+  }
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
+export async function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
   try {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/duplicate-check',
-      data: JSON.stringify({
-        name:  name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response['duplicate']) {
-        modal.confirm (response.message, function () {
-          storeProgram(level, lang, name, code, shared, false, cb);
-          pushAchievement("double_check");
+    const response = await postJson('/programs/duplicate-check', { name });
+    if (response['duplicate']) {
+      modal.confirm (response.message, function () {
+        storeProgram(level, lang, name, code, shared, false, cb);
+        pushAchievement("double_check");
+      });
+    } else {
+        storeProgram(level, lang, name, code, shared, false, cb);
+    }
+  } catch (err: any) {
+    if (err.status == 403) { // The user is not allowed -> so not logged in
+      return modal.confirm (err.responseText, function () {
+          // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+          const curTab = currentTab;
+          if (curTab && !Array.isArray(level)) {
+            level = [level, curTab];
+          }
+          localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
+          window.location.pathname = '/login';
         });
-      } else {
-         storeProgram(level, lang, name, code, shared, false, cb);
-      }
-    }).fail(function(err) {
-      if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (err.responseText, function () {
-           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-           const curTab = currentTab;
-           if (curTab && !Array.isArray(level)) {
-             level = [level, curTab];
-           }
-           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
-           window.location.pathname = '/login';
-         });
-      }
-    });
-  } catch (e: any) {
-    console.error(e);
-    modal.notifyError(e.message);
+    } else {
+      modal.notifyError(err.message);
+    }
   }
 }
 
@@ -798,69 +765,13 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
-function change_shared (shared: boolean, index: number) {
-  // Index is a front-end unique given to each program container and children
-  // This value enables us to remove, hide or show specific element without connecting to the server (again)
-  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
-  if (index == -1) {
-    return;
-  }
-  if (shared) {
-    $('#non_public_button_container_' + index).hide();
-    $('#public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).show();
-  } else {
-    $('#modal-copy-button').hide();
-    $('#public_button_container_' + index).hide();
-    $('#non_public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).hide();
-
-    // In the theoretical situation that a user unshares their favourite program -> Change UI
-    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
-    $('#favourite_program_container_' + index).addClass('text-white');
-  }
-}
-
-export function share_program(id: string, index: number, Public: boolean) {
-  $.ajax({
-      type: 'POST',
-      url: '/programs/share',
-      data: JSON.stringify({
-        id: id,
-        public: Public
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      showAchievements(response.achievement, false, "");
-      modal.notifySuccess(response.message);
-      if (Public) {
-        change_shared(true, index);
-      } else {
-        change_shared(false, index);
-      }
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
-}
-
-export function delete_program(id: string, index: number, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/delete',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      showAchievements(response.achievement, true, "");
-      $('#program_' + index).remove();
-      modal.notifySuccess(response.message);
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
+export async function delete_program(id: string, index: number, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJson('/programs/delete', { id });
+    showAchievements(response.achievement, true, "");
+    $('#program_' + index).remove();
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -872,22 +783,12 @@ function set_favourite(index: number) {
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
 
-export function set_favourite_program(id: string, index: number, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/set_favourite',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      set_favourite(index)
-      modal.notifySuccess(response.message);
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
+export async function set_favourite_program(id: string, index: number, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJson('/programs/set_favourite', { id });
+    set_favourite(index)
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -964,36 +865,23 @@ export function copy_to_clipboard (string: string, prompt: string) {
  * Do a POST with the error to the server so we can log it
  */
 function reportClientError(level: number, code: string, client_error: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/report_error',
-    data: JSON.stringify({
-      level: `${level}`,
-      code: code,
-      page: window.location.href,
-      client_error: client_error,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
+  postJson('/report_error', {
+    level: `${level}`,
+    code: code,
+    page: window.location.href,
+    client_error: client_error,
   });
 }
 
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
-
-  $.ajax({
-    type: 'POST',
-    url: '/client_exception',
-    data: JSON.stringify({
-      message: message,
-      source: source,
-      line_number: line_number,
-      column_number: column_number,
-      error: error,
-      url: window.location.href,
-      user_agent: navigator.userAgent,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
+  postJson('/client_exception', {
+    message: message,
+    source: source,
+    line_number: line_number,
+    column_number: column_number,
+    error: error,
+    url: window.location.href,
+    user_agent: navigator.userAgent,
   });
 }
 
@@ -1494,25 +1382,19 @@ export function showVariableView() {
   }
 }
 
-function store_parsons_attempt(order: Array<string>, correct: boolean) {
-  $.ajax({
-    type: 'POST',
-    url: '/store_parsons_order',
-    data: JSON.stringify({
+async function store_parsons_attempt(order: Array<string>, correct: boolean) {
+  try {
+    await postJson('/store_parsons_order', {
       level: theLevel,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function() {
-    // Let's do nothing: saving is not a user relevant action -> no feedback required
-    }).fail(function(xhr) {
-      console.error(xhr);
     });
+  } catch (e) {
+    // Let's do nothing: saving is not a user relevant action -> no feedback required
+    console.error(e);
+  };
 }
-
 
 // Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
@@ -1775,30 +1657,21 @@ export function toggle_blur_code() {
   }
 }
 
-export function change_language(lang: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/change_language',
-    data: JSON.stringify({
-      lang: lang
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response: any) {
-      if (response.succes){
-        // Check if keyword_language is set to change it to English
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get('keyword_language') !== null) {
-          urlParams.set('keyword_language', 'en');
-          window.location.search = urlParams.toString();
-        } else {
-          location.reload();
-        }
+export async function change_language(lang: string) {
+  await tryCatchPopup(async () => {
+    const response = await postJson('/change_language', { lang });
+    if (response.succes) {
+      // Check if keyword_language is set to change it to English
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      if (urlParams.get('keyword_language') !== null) {
+        urlParams.set('keyword_language', 'en');
+        window.location.search = urlParams.toString();
+      } else {
+        location.reload();
       }
-    }).fail(function(xhr) {
-      console.error(xhr);
-    });
+    }
+  });
 }
 
 /**
@@ -1811,7 +1684,7 @@ async function postJson(url: string, data: any): Promise<any> {
     $.ajax({
       type: 'POST',
       url,
-      data,
+      data: JSON.stringify(data),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function (response: any) {
@@ -1819,7 +1692,15 @@ async function postJson(url: string, data: any): Promise<any> {
 
       ok(response);
     }).fail(function (err) {
-      ko(new Error(err.responseText));
+      // Some places expect the error object to have the same attributes as
+      // the XHR object, so copy them over.
+      const error = new Error(err.responseText);
+      ko(Object.assign(error, {
+        responseText: err.responseText,
+        status: err.status,
+        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+        internetError: err.readyState < 4,
+      }));
     });
   });
 }
@@ -2031,28 +1912,29 @@ function updatePageElements() {
   $('#program_name_container').toggle(isCodeTab);
 
   const adventure = theAdventures[currentTab];
+  if (adventure) {
+    // SHARING SETTINGS
+    // Star on "share" button is filled if program is already public, outlined otherwise
+    const isPublic = !!adventure.save_info?.public;
+    $('#share_program_button span')
+      .toggleClass('fa-solid', isPublic)
+      .toggleClass('fa-regular', !isPublic);
+    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
-  // SHARING SETTINGS
-  // Star on "share" button is filled if program is already public, outlined otherwise
-  const isPublic = !!adventure.save_info?.public;
-  $('#share_program_button span')
-    .toggleClass('fa-solid', isPublic)
-    .toggleClass('fa-regular', !isPublic);
-  $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
+    // Show <...data-view="if-public-url"> only if we have a public url
+    $('[data-view="if-public-url"]').toggle(!!adventure.save_info?.public_url);
+    $('input[data-view="public-url"]').val(adventure.save_info?.public_url ?? '');
 
-  // Show <...data-view="if-public-url"> only if we have a public url
-  $('[data-view="if-public-url"]').toggle(!!adventure.save_info?.public_url);
-  $('input[data-view="public-url"]').val(adventure.save_info?.public_url ?? '');
+    // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
+    const isSubmitted = !!adventure.save_info?.submitted;
+    $('#hand_in_button span')
+      .toggleClass('fa-solid', isSubmitted)
+      .toggleClass('fa-regular', !isSubmitted);
 
-  // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
-  const isSubmitted = !!adventure.save_info?.submitted;
-  $('#hand_in_button span')
-    .toggleClass('fa-solid', isSubmitted)
-    .toggleClass('fa-regular', !isSubmitted);
-
-  // Show <...data-view="if-submitted"> only if we have a public url
-  $('[data-view="if-submitted"]').toggle(isSubmitted);
-  $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+    // Show <...data-view="if-submitted"> only if we have a public url
+    $('[data-view="if-submitted"]').toggle(isSubmitted);
+    $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+  }
 }
 
 /**
@@ -2094,8 +1976,11 @@ function initializeShareProgramButtons() {
     if ((ev.target as HTMLInputElement).checked) {
       const isPublic = $(ev.target).val() === '1' ? true : false;
 
+      // Async-safe copy of current tab
+      const adventure = currentTab;
+
       tryCatchPopup(async () => {
-        const saveInfo = theAdventures[currentTab]?.save_info;
+        const saveInfo = theAdventures[adventure]?.save_info;
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
@@ -2106,10 +1991,49 @@ function initializeShareProgramButtons() {
         });
 
         modal.notifySuccess(response.message);
-
-        saveInfo.public = response.public;
+        if (response.save_info) {
+          (theAdventures[adventure] ?? {}).save_info = response.save_info;
+        }
         updatePageElements();
       });
     }
   })
+}
+
+function initializeHandInButton() {
+  $('#do_hand_in_button').on('click', () => {
+      // Async-safe copy of current tab
+      const adventureName = currentTab;
+
+      tryCatchPopup(async () => {
+        const saveInfo = theAdventures[adventureName]?.save_info;
+        if (!saveInfo) {
+          throw new Error('This program does not have an id');
+        }
+        const response = await postJson('/programs/submit', {
+          id: saveInfo.id,
+        });
+
+        modal.notifySuccess(response.message);
+        if (response.save_info) {
+          (theAdventures[adventureName] ?? {}).save_info = response.save_info;
+        }
+        updatePageElements();
+      });
+  });
+}
+
+/**
+ * Initialize copy to clipboard buttons.
+ *
+ * For all elements with data-action="copy-to-clipboard", find the containing
+ * data-copy="container" items and an <input> in there, and copy it to the clipboard.
+ */
+function initializeCopyToClipboard() {
+  $('[data-action="copy-to-clipboard"]').on('click', (ev) => {
+    const text = $(ev.target).closest('[data-copy="container"]').find('input').val();
+    if (typeof text === 'string') {
+      copy_to_clipboard(text, ClientMessages.copy_link_to_share);
+    }
+  });
 }

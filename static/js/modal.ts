@@ -24,10 +24,6 @@ class Modal {
     window.scrollTo(0, 0);
   }
 
-  public show_alert() {
-    $('#modal-alert').fadeIn(1000);
-  }
-
   public hide() {
     $('#modal-mask').hide();
     $('#modal-content').hide();
@@ -39,7 +35,7 @@ class Modal {
   }
 
   public hide_alert() {
-    $('#modal-alert').fadeOut(1000);
+    $('#modal-alert').fadeOut(500);
   }
 
   /**
@@ -52,30 +48,22 @@ class Modal {
   /**
    * Display a temporary error popup
    */
-  public notifyError(message: string, timeoutMs: number = 3000) {
+  public notifyError(message: string, timeoutMs: number = 5000) {
     return this.alert(message, timeoutMs, true);
   }
 
   /**
    * Display a temporary popup
-   *
-   * @deprecated use notifySuccess or notifyError instead
    */
-  public alert(message: string, timeoutMs?: number, error?: boolean) {
-    // Always hide possible previous alert -> make sure it is hidden
-    this.hide_alert();
-    $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
-    $('#modal-alert-button').removeClass('text-red-500');
-    $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
-    $('#modal-alert-button').addClass('text-green-500');
-    if (error) {
-      $('#modal_alert_container').removeClass('bg-green-100 border-green-400 text-green-700');
-      $('#modal-alert-button').removeClass('text-green-500');
-      $('#modal_alert_container').addClass('bg-red-100 border-red-400 text-red-700');
-      $('#modal-alert-button').addClass('text-red-500');
-    }
+  private alert(message: string, timeoutMs?: number, error?: boolean) {
+    $('#modal_alert_container').toggleClass('bg-red-100 border-red-400 text-red-700', !!error);
+    $('#modal_alert_container').toggleClass('bg-green-100 border-green-400 text-green-700', !error);
+    $('#modal-alert-button').toggleClass('text-red-500', !!error);
+    $('#modal-alert-button').toggleClass('text-green-500', !error);
+
     $('#modal_alert_text').html(message);
-    this.show_alert();
+    $('#modal-alert').fadeIn(500);
+
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._alert_timeout) {
       clearTimeout(this._alert_timeout);

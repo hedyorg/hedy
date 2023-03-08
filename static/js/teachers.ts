@@ -715,7 +715,7 @@ export interface InitializeTeacherPageOptions {
 
 export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   if (options.welcome_teacher) {
-    modal.alert(ClientMessages.teacher_welcome);
+    modal.notifySuccess(ClientMessages.teacher_welcome, 30_000);
   }
   if (options.tutorial) {
     startTeacherTutorial();

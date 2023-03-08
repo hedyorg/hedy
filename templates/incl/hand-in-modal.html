@@ -19,8 +19,8 @@
         </div>
 
         <div class="flex gap-8 items-center mt-4">
-          <button class="blue-btn"> <span class="fa-regular fa-paper-plane mr-4"></span> Hand in</button>
-          <a href="#">I'll work on it a little longer</a>
+          <button class="blue-btn" id="do_hand_in_button"> <span class="fa-regular fa-paper-plane mr-4"></span> Hand in</button>
+          <a href="#" onclick="hedyApp.closeContainingModal(this); return false;">I'll work on it a little longer</a>
         </div>
       </div>
 
@@ -33,12 +33,20 @@
         <div data-view="if-public-url">
           {% include 'incl/copy-url-bar.html' %}
         </div>
+
+        <div class="flex justify-end mt-4">
+          <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">Close</button>
+        </div>
       </div>
 
       {% elif username %} {# logged in/in class #}
 
       <div>
         You are not in a class, so there's no need for you to hand in anything.
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">Close</button>
       </div>
 
       {% else %} {# logged in/in class #}
@@ -48,12 +56,11 @@
         <a href="/login">{{_('login')}}</a>
       </div>
 
-      {% endif %}
-
       <div class="flex justify-end mt-4">
         <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">Close</button>
       </div>
 
+      {% endif %}
 
       <div class="absolute right-0 top-0 m-8">
         <a href="#" title="Close popup" onclick="hedyApp.closeContainingModal(this); return false;">

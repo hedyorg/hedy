@@ -272,7 +272,7 @@ export function changeUserEmail(username: string, email: string) {
     }).done (function () {
       location.reload ();
     }).fail (function () {
-      modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
+      modal.notifyError(['Error when changing the email for user', username].join (' '));
     });
   });
 }
@@ -327,7 +327,7 @@ export function update_user_tags() {
   }).done(function () {
     $('#modal-mask').hide();
     $('#modal-tags').hide();
-    modal.alert("Tags successfully updated", 3000, false);
+    modal.notifySuccess("Tags successfully updated");
   });
 }
 

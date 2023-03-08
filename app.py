@@ -124,6 +124,10 @@ def load_adventures_for_level(level):
             if adventure_level.get(f'story_text_{i}', '')
         ]
 
+        default_save_name = adventure.get('default_save_name')
+        if not default_save_name or default_save_name == 'intro':
+            default_save_name = adventure['name']
+
         current_adventure = Adventure(
             short_name=short_name,
             name=adventure['name'],
@@ -132,7 +136,7 @@ def load_adventures_for_level(level):
             example_code=adventure['levels'][level].get('example_code', ""),
             extra_stories=extra_stories,
             is_teacher_adventure=False,
-            save_name=adventure.get('default_save_name', adventure['name']) + ' ' + str(level),
+            save_name=f'{default_save_name} {level}',
             start_code=adventure['levels'][level].get('start_code', ""))
 
         all_adventures.append(current_adventure)
@@ -157,7 +161,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
         return
 
     loaded_programs = {k: Program.from_database_row(r)
-        for k, r in DATABASE.last_level_programs_for_user(current_user()['username'], level)}
+        for k, r in DATABASE.last_level_programs_for_user(current_user()['username'], level).items()}
 
     # If there is a preferential program, overwrite any other one that might exist so we definitely
     # load this one.
@@ -171,12 +175,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
 
         adventure.save_name = program.name
         adventure.start_code = program.code
-        adventure.save_info = SaveInfo(
-            id=program.id,
-            public=program.public,
-            submitted=program.submitted,
-            public_url=f'{utils.base_url()}/hedy/{program.id}/view',
-            )
+        adventure.save_info = SaveInfo.from_program(program)
 
 
 def load_customized_adventures(level, customizations, into_adventures):
@@ -433,9 +432,6 @@ def parse():
     code = body['code']
     level = int(body['level'])
 
-    program_id = body.get('program_id')
-    save_name = body.get('save_name')
-
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -496,11 +492,6 @@ def parse():
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
 
-        # Save this program (if the user is logged in)
-        if username:
-
-
-
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex)
@@ -511,6 +502,21 @@ def parse():
         print(f"error transpiling {code}")
         response["Error"] = str(E)
         exception = E
+
+    # Save this program (if the user is logged in)
+    if username and body.get('save_name'):
+        program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+        program = program_logic.store_user_program(
+            user=current_user(),
+            level=level,
+            name=body.get('save_name'),
+            program_id=body.get('program_id'),
+            adventure_name=body.get('adventure_name'),
+            code=code,
+            error=exception is not None)
+
+        response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
@@ -1208,7 +1214,9 @@ def view_program(user, id):
     arguments_dict['program_id'] = id
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
-    arguments_dict['loaded_program'] = result
+    arguments_dict['initial_adventure'] = dict(result,
+        start_code=code,
+    )
     arguments_dict['editor_readonly'] = True
 
     if "submitted" in result and result['submitted']:
