@@ -819,8 +819,6 @@ class TestsLevel5(HedyTester):
             max_level=17
         )
 
-
-
     def test_if_equality_print_backtick_text_gives_error(self):
         code = "if 1 is 1 print `yay!` else print `nay`"
 
