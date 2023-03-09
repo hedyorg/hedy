@@ -893,20 +893,20 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Wat is waar?"
+            question_text: "Welk commando hoort op het lijntje?"
             mp_choice_options:
-            -   option: "In level 5 werkt `{print}` anders dan in level 4"
-                feedback: "`{print}` werkt nog hetzelfde"
-            -   option: "In level 5 werkt `{ask}` anders dan in level 4"
-                feedback: "`{ask}` werkt nog hetzelfde"
-            -   option: "In level 5 werken `{print}` en `{ask}` anders dan in level 4"
-                feedback: "Nee hoor, ze werken hetzelfde!"
-            -   option: "In level 5 werken `{print}` en `{ask}` nog hetzelfde als in level 4"
+            -   option: "`{print}`"
+                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 hefet geantwoord."
+            -   option: "`{if}`"
+                feedback: "Dat is hem niet..."
+            -   option: "`{sleep}` "
+                feedback: "Dat is hem niet..."
+            -   option: "`{else}` "
                 feedback: "Klopt!"
             correct_answer: "D"
-            hint: "Er is alleen een commando bijgekomen."
+            hint: "Het moet alleen geprint als diegene niet zelf ook 5 hefet geantwoord."
             question_score: '10'
-            code: "nummer {is} {ask} 'Wat is jouw geluksnummer?'\n{if} nummer {is} 5 {print} De mijne ook!\n_ {print} Mijn geluksnummer is 5!"
+            code: "nummer {is} {ask} 'Wat is jouw geluksnummer?'\n{if} nummer {is} 5 {print} 'De mijne ook!'\n_ {print} 'Mijn geluksnummer is 5!'"
         2:
             question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
             code: |-
@@ -981,7 +981,8 @@ levels:
                 {print} 'Hoi ik ben Hedy de voetbalvoorspeller!'
                 {print} 'Ik kan voorspellen op welke plek jouw club eindigt!'
                 club {is} {ask} 'Voor welke club ben je?'
-                {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk!' _ {print} 'Helaas jouw club wordt laatste...'
+                {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk!'
+                _ {print} 'Helaas jouw club wordt laatste...'
             mp_choice_options:
             -   option: |
                     ```
@@ -1011,7 +1012,8 @@ levels:
             code: |-
                 {print} 'Ik kan voorspellen of jij miljonair wordt!'
                 naam {is} {ask} 'Hoe heet jij?'
-                {if} naam {is} Hedy {print} 'Jij wordt miljonair!' {else} _ 'Helaas, geen miljoen voor jou.'
+                {if} naam {is} Hedy {print} 'Jij wordt miljonair!'
+                {else} _ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
             -   option: |
                     ```
@@ -1040,7 +1042,8 @@ levels:
             question_text: "Welk woord mist op de plek van het vraagteken?"
             code: |-
                 dier {is} {ask} 'Wat is je lievelingsdier?'
-                {if} _ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!' {else} {print} 'Ik houd meer van pinguins.'
+                {if} _ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!'
+                {else} {print} 'Ik houd meer van pinguins.'
             mp_choice_options:
             -   option: "lievelingsdier"
                 feedback: "Dat is niet de naam van de variabele."
@@ -1060,7 +1063,8 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies jij?'
                 monsters {is} vampier, weerwolf, reuzespin
-                {if} deur {is} 2 {print} 'Joepie! Je ontsnapt!' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
+                {if} deur {is} 2 {print} 'Joepie! Je ontsnapt!'
+                {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
             -   option: "1"
                 feedback: "Helaas... Jij wordt opgepeuzeld..."
@@ -1080,7 +1084,8 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies jij?'
                 monsters {is} vampier, weerwolf, reuzespin
-                {if} deur {is} 2 {print} 'Joepie! je ontsnapt!' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
+                {if} deur {is} 2 {print} 'Joepie! je ontsnapt!'
+                {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
             -   option: "Hedy kiest steeds een willekeurig monster dat je opeet."
                 feedback: "Geweldig!"
