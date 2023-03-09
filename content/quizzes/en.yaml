@@ -17,7 +17,7 @@ levels:
         2:
             question_text: "Which need to be filled in on the blanks to make the text Hello! appear?"
             code: |
-                ___ Hello!
+                _ Hello!
             mp_choice_options:
             -   option: |
                     ```
@@ -40,7 +40,7 @@ levels:
                     ```
                 feedback: "With `{ask}`, you can ask a question."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_ Hello world!"
             question_score: '10'
         3:
             question_text: "How do you ask what someone's favorite color is?"
@@ -77,8 +77,8 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in line 1 is missing."
                 feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
+            -   option: "The command line 2 is spelled wrong."
+                feedback: "The command is spelled correctly"
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: "Nothing! This is a perfect code!"
@@ -90,7 +90,7 @@ levels:
             question_text: "Which command is missing in line 2?"
             code: |-
                 {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                _ So your favorite pet is...
             mp_choice_options:
             -   option: |
                     ```
@@ -288,7 +288,7 @@ levels:
             question_text: "What should be on the lines?"
             code: |-
                 {print} And the award for best programming language goes to...
-                _?_
+                _
                 {print} Hedy!
             mp_choice_options:
             -   option: |
@@ -318,7 +318,7 @@ levels:
             question_text: "What command should be used on line 2?"
             code: |-
                 {print} I will explode in 3 seconds!
-                _?_
+                _
                 {print} BOOM!
             mp_choice_options:
             -   option: |
@@ -393,7 +393,7 @@ levels:
         10:
             question_text: "What command should be used on the line 1?"
             code: |-
-                flavor {is} _?_
+                flavor {is} _
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
@@ -612,12 +612,12 @@ levels:
             hint: "Look at line 3"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "What should be on the _?"
             code: |-
                 walkers {is} dad, mom, Sam, Petra
                 walked_yesterday {is} {ask} Who walked the dogs yesterday?
                 {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
+                _
                 {print} walkers {at} {random} , it's your turn to walk the dogs!
             mp_choice_options:
             -   option: |
@@ -863,11 +863,11 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Which command should be filled in on the _?_?"
+            question_text: "Which command should be filled in on the _?"
             code: |-
                 number {is} {ask} 'What is your lucky number?'
                 {if} number {is} 5 {print} 'Mine too!'
-                _?_ {print} 'My lucky number is 5!'
+                _ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: |
                     ```
@@ -970,7 +970,7 @@ levels:
                 {print} 'I will predict what place your team will end up!'
                 club is {ask} 'Which club is your favorite?'
                 {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                _ {print} 'Sorry, your club is gonna be in last place...'
             mp_choice_options:
             -   option: |
                     ```
@@ -1001,7 +1001,7 @@ levels:
                 {print} 'I can predict if you will be a millionair or not!'
                 name {is} {ask} 'Whats your name?'
                 {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {else} _ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |
                     ```
@@ -1030,7 +1030,7 @@ levels:
             question_text: "Which word should be on the place of the question mark?"
             code: |-
                 animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
+                {if} _ {is} penguin {print} 'Thats my favorite animal too!'
                 {else} {print} 'Cool! I like penguins.'
             mp_choice_options:
             -   option: |
@@ -1270,14 +1270,14 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                name _?_ Hedy
+                name _ Hedy
                 {print} name 'is walking trough the forrest'
             mp_choice_options:
-            -   option: "You can only fill in the word is on the `_?_`"
+            -   option: "You can only fill in the word is on the `_`"
                 feedback: "You are allowed to use the `=` sign as well"
-            -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
+            -   option: "You can fill in either the word is or the `=` sign on the `_`"
                 feedback: "Amazing!"
-            -   option: "You have to fill in =is= on the `_?_`"
+            -   option: "You have to fill in =is= on the `_`"
                 feedback: "No, one `=` sign is enough"
             -   option: "You can only use the `=` sign when working with numbers, not with words."
                 feedback: "You can also use `=` with words."
@@ -2097,7 +2097,7 @@ levels:
         1:
             question_text: "What word should be at the place of the question mark?"
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
@@ -2262,7 +2262,7 @@ levels:
             code: |-
                 {print} 'Welcome to Hedys diner'
                 people is {ask} 'How many people will be eating here tonight?'
-                _?_
+                _
                     food is {ask} 'What would you like to order?'
                     {print} food
             mp_choice_options:
@@ -2365,10 +2365,10 @@ levels:
             question_score: '10'
     10:
         1:
-            question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"
+            question_text: "What do we need to fill in on the `_` if we want to print each compliment?"
             code: |-
                 compliments = perfect, great job, amazing
-                _?_
+                _
                     {print} compliment
             mp_choice_options:
             -   option: |
@@ -2456,13 +2456,13 @@ levels:
             hint: "Line 2 says `{for}` each item in the list of groceries"
             question_score: '10'
         5:
-            question_text: "What word should be on the _?_ with these digital dice?"
+            question_text: "What word should be on the _ with these digital dice?"
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
                 choices = 1, 2, 3, 4, 5, 6
                 {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                    {print} player ' throws ' _ {at} {random}
             mp_choice_options:
             -   option: "players"
                 feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
@@ -2501,11 +2501,11 @@ levels:
             hint: "Each player will pick an option. The player that's first on the list will go first."
             question_score: '10'
         7:
-            question_text: "What line should be on the _?_ in this code that decides what these people will have for dinner?"
+            question_text: "What line should be on the _ in this code that decides what these people will have for dinner?"
             code: |-
                 names = Ron, Leslie, April, Andy
                 food = pasta, fries, salad
-                _?_
+                _
                     {print} name ' has to eat ' food {at} {random} ' for dinner'
             mp_choice_options:
             -   option: |
@@ -2532,12 +2532,12 @@ levels:
             hint: "Each name should be told what they will have for dinner."
             question_score: '10'
         8:
-            question_text: "What should be on the _?_ in this code that decides which color shirt you get?"
+            question_text: "What should be on the _ in this code that decides which color shirt you get?"
             code: |-
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple
                 {for} name {in} names
-                    {print} _?_
+                    {print} _
             mp_choice_options:
             -   option: |
                     ```
