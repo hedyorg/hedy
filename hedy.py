@@ -22,7 +22,7 @@ import yaml
 
 # Some useful constants
 from hedy_content import KEYWORDS
-from hedy_sourcemap import SourceMap, source_map_rule
+from hedy_sourcemap import SourceMap, source_map_rule, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
@@ -1406,6 +1406,7 @@ class ConvertToPython(Transformer):
 
 @v_args(meta=True)
 @hedy_transpiler(level=1)
+@source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
     def __init__(self, lookup, numerals_language):
@@ -1432,18 +1433,15 @@ class ConvertToPython_1(ConvertToPython):
     def NEGATIVE_NUMBER(self, meta, args):
         return str(int(args[0]))
 
-    @source_map_rule(source_map)
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "')"
 
-    @source_map_rule(source_map)
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
-    @source_map_rule(source_map)
     def echo(self, meta, args):
         if len(args) == 0:
             return "print(answer)"  # no arguments, just print answer
@@ -1451,21 +1449,17 @@ class ConvertToPython_1(ConvertToPython):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + " '+answer)"
 
-    @source_map_rule(source_map)
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
-    @source_map_rule(source_map)
     def empty_line(self, meta, args):
         return ''
 
-    @source_map_rule(source_map)
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
         return self.make_forward(int(args[0]))
 
-    @source_map_rule(source_map)
     def color(self, meta, args):
         if len(args) == 0:
             return "t.pencolor('black')"  # no arguments defaults to black ink
@@ -1478,7 +1472,6 @@ class ConvertToPython_1(ConvertToPython):
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.color, self.level))
 
-    @source_map_rule(source_map)
     def turn(self, meta, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1558,6 +1551,7 @@ class ConvertToPython_1(ConvertToPython):
 
 @v_args(meta=True)
 @hedy_transpiler(level=2)
+@source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
     def error_ask_dep_2(self, meta, args):
@@ -1670,6 +1664,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
 @v_args(meta=True)
 @hedy_transpiler(level=3)
+@source_map_transformer(source_map)
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -1715,6 +1710,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
 @v_args(meta=True)
 @hedy_transpiler(level=4)
+@source_map_transformer(source_map)
 class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
@@ -1772,6 +1768,7 @@ except NameError:
 
 @v_args(meta=True)
 @hedy_transpiler(level=5)
+@source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
@@ -1882,6 +1879,7 @@ else:
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
+@source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
     def print_ask_args(self, meta, args):
@@ -1990,6 +1988,7 @@ def sleep_after(commands, indent=True):
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
+@source_map_transformer(source_map)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
         var_name = self.get_fresh_var('__i__')
@@ -2005,6 +2004,7 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @v_args(meta=True)
 @hedy_transpiler(level=9)
+@source_map_transformer(source_map)
 class ConvertToPython_8_9(ConvertToPython_7):
 
     def command(self, meta, args):
@@ -2106,6 +2106,7 @@ if event.unicode == '{args[0]}':
 
 @v_args(meta=True)
 @hedy_transpiler(level=10)
+@source_map_transformer(source_map)
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2119,6 +2120,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
 @v_args(meta=True)
 @hedy_transpiler(level=11)
+@source_map_transformer(source_map)
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2135,6 +2137,7 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 
 @v_args(meta=True)
 @hedy_transpiler(level=12)
+@source_map_transformer(source_map)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, meta, args):
         # try all ints? return ints
@@ -2261,6 +2264,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
+@source_map_transformer(source_map)
 class ConvertToPython_13(ConvertToPython_12):
     def and_condition(self, meta, args):
         return ' and '.join(args)
@@ -2271,6 +2275,7 @@ class ConvertToPython_13(ConvertToPython_12):
 
 @v_args(meta=True)
 @hedy_transpiler(level=14)
+@source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
 
@@ -2305,6 +2310,7 @@ class ConvertToPython_14(ConvertToPython_13):
 
 @v_args(meta=True)
 @hedy_transpiler(level=15)
+@source_map_transformer(source_map)
 class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2317,6 +2323,7 @@ class ConvertToPython_15(ConvertToPython_14):
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
+@source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -2343,6 +2350,7 @@ class ConvertToPython_16(ConvertToPython_15):
 
 @v_args(meta=True)
 @hedy_transpiler(level=17)
+@source_map_transformer(source_map)
 class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2352,6 +2360,7 @@ class ConvertToPython_17(ConvertToPython_16):
 
 @v_args(meta=True)
 @hedy_transpiler(level=18)
+@source_map_transformer(source_map)
 class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
         return self.ask(meta, args)

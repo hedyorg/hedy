@@ -1,3 +1,6 @@
+import re
+from os import path
+
 
 class SourceRange:
     def __init__(self, from_line, from_character, to_line, to_character):
@@ -26,12 +29,12 @@ class SourceCode:
 
     def __eq__(self, other):
         return (
-            self.source_range.from_line, self.source_range.from_character,
-            self.source_range.to_line, self.source_range.to_character
-        ) == (
-            other.source_range.from_line, other.source_range.from_character,
-            other.source_range.to_line, other.source_range.to_character
-        )
+                   self.source_range.from_line, self.source_range.from_character,
+                   self.source_range.to_line, self.source_range.to_character
+               ) == (
+                   other.source_range.from_line, other.source_range.from_character,
+                   other.source_range.to_line, other.source_range.to_character
+               )
 
     def __ne__(self, other):
         return not (self == other)
@@ -62,8 +65,21 @@ class SourceMap:
         # We can use this to return an optimized object for the front-end
         pass
 
+    def print_source_map(self, d, indent=0):
+        for key, value in d.items():
+            print('\t' * indent + str(key) + ':')
+            if isinstance(value, dict):
+                self.print_source_map(value, indent + 1)
+            else:
+                code_lines = str(value).splitlines()
+                code_lines = ['\t' * (indent + 1) + str(x) for x in code_lines]
+                code = "\n".join(code_lines)
+                print(code)
+            print('')
+
     def __str__(self):
-        return str(self.map)
+        self.print_source_map(self.map)
+        return str()
 
 
 def source_map_rule(source_map: SourceMap):
@@ -76,15 +92,29 @@ def source_map_rule(source_map: SourceMap):
                 SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
                 source_map.hedy_code[meta.start_pos:meta.end_pos]
             )
+
             source_map.python_line += 1
             current_line = source_map.python_line
             source_map.python_line += generated_python.count('\n')
+
             python_code = SourceCode(
-                SourceRange(current_line, 0, 0, source_map.python_line),  # this is tricky
+                SourceRange(current_line, 0, source_map.python_line, 0),  # this is tricky
                 generated_python
             )
-            source_map.add_source(hedy_code, python_code)
 
+            source_map.add_source(hedy_code, python_code)
             return generated_python
+
         return wrapper
+
     return decorator
+
+
+def source_map_transformer(source_map: SourceMap):
+    def decorate(cls):
+        for rule in cls.__dict__:
+            if rule == 'command' and callable(getattr(cls, rule)):
+                setattr(cls, rule, source_map_rule(source_map)(getattr(cls, rule)))
+        return cls
+
+    return decorate
