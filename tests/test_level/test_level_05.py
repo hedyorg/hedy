@@ -802,10 +802,11 @@ class TestsLevel5(HedyTester):
         name is ask 'what's your name?'
         print name""")
 
-        self.single_level_tester(
+        self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1
+            extra_check_function=lambda c: c.exception.error_location[0] == 1,
+            max_level=17
         )
 
     def test_if_equality_print_backtick_text_gives_error(self):
