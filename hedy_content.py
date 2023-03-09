@@ -149,12 +149,12 @@ ADVENTURE_ORDER_PER_LEVEL = {
     10: [
         'default',
         'dishes',
-        'calculator',
         'fortune',
         'rock',
         'dice',
         'songs',
         'story',
+        'calculator',
         'restaurant',
     ],
     11: [
@@ -181,7 +181,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'rock',
         'restaurant',
-
+        'calculator'
         # 'tic'
     ],
     14: [

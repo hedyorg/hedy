@@ -2115,10 +2115,30 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                     ```
                 start_code: "# place your code here"
+            13:
+                story_text: |
+                    ## Calculator
+
+                    ### Exercise 1
+                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+
+                    ### Exercise 2 (extra)
+                    Sometimes, calculations have multiple correct answers. For example, the square root of 16 is 4, but also -4.
+                    Ask for something with multiple correct answers and determine if it is correct using `{or}`.
+                    Emtoy the programming field and create your own solution.
+
+                example_code: |
+                    ```
+                    answer1 = {ask} 'What is 10 times 7?'
+                    answer2 = {ask} 'What is 6 times 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
+                start_code: "# Schrijf jouw code hier"
             14:
                 story_text: |
                     ## Guess which number
-                    In this level you can programm the game 'Guess which number'
+                    In this level you can program the game 'Guess which number'
                 example_code: |
                     ```
                     {print} 'Guess which number'
@@ -2507,22 +2527,25 @@ adventures:
             13:
                 story_text: |
                     ## Restaurant
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    In this level you will learn new commands to extend your code even further.
+
+                    ### Task 1
+                    Place a `{and}` and a `{or}` in the logical place in the program.
+
+                    ### Exercise 2
+                    Expand your restaurant with at least one more `{and}` and one `{or}`.
+                    For example, create a special discount coupon that only applies to pizza, or give your customer a free drink
+                    with fries and pancakes. Or something completely different of course!
 
                     ### Exercise
                     Fill in `{and}` and `{or}` on the right blanks.
 
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
+                        {print} 'That is our discount menu'
                         price = price - 3
-                    {if} drinks {is} 'juice' _ drinks {is} 'sap'
-                        {print} 'What a healthy choice!'
+                    {if} drinks {is} 'water' _ drinks {is} 'juice'
+                        {print} 'That is a healthy choice'
                     {print} 'That will be ' price ' dollars'
                     ```
                 start_code: "# place your code here"
