@@ -106,7 +106,7 @@ def collect_snippets(path, filtered_language=None):
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language)]
 #
-# level = 4
+level = 5
 if level:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
