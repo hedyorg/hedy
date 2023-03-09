@@ -143,7 +143,7 @@ To check the front end test coverage, you can run the script:
 ./tests/get-code-coverage 
 ```
 
-And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go (here)[https://docs.cypress.io/guides/tooling/code-coverage]
+And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go [here](https://docs.cypress.io/guides/tooling/code-coverage)
 
 The script will only do its job if all the tests pass successfully! So take that into account.
 
