@@ -1741,15 +1741,15 @@ adventures:
 
                     ### Opdracht 2
                     Maak nu weer een rekensommenoefenprogramma, maar dan met kommagetallen.
-                    Maak een lijst met getallen, kies er steeds twee uit en laat de speler het juiste antwoord invullen.
+                    Maak een lijst met getallen, kies er steeds twee uit, maak er een som mee en laat de speler het juiste antwoord invullen.
                     Controleer natuurlijk ook of het klopt. **(extra)** Maak het progamma moeilijker met levens. Bij een fout gaat er een leven af, en na drie fouten stopt het spel.
 
                 example_code: |
                     ```
                     getal1 = {ask} 'Wat is het eerste getal?'
                     getal2 = {ask} 'Wat is het tweede getal?'
-                    antwoord = getal1 + getal2
-                    {print} getal1 ' plus ' getal2 ' is ' antwoord
+                    antwoord = _
+                    {print} getal1 ' plus ' getal2 ' is ' _
                     ```
                 start_code: "# Schrijf jouw code hier"
             13:
@@ -2819,8 +2819,12 @@ adventures:
                     ## Geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
-                    ### Opdracht
-                    Maak je eigen code voor jouw geheime agent. Kun jij het misschien zelfs uit meerdere variabelen laten bestaan?
+                    
+                    ### Opdracht 1
+                    Maak je eigen code voor jouw geheime agent. Laat beiden onderdelen zien aan de echte spion.
+                    ### Opdracht 2
+                    Voeg nog een derde vraag toe en maak jouw wachtwoord langer met bijv een kledingstuk of een voorwerp!                 
+
                 example_code: |
                     ```
                     naam {is} {ask} 'Hoe heet je?'
@@ -2833,7 +2837,7 @@ adventures:
                         tijd {is} 'morgen om 02:00'
                     {else}
                         tijd {is} 'vandaag om 10:00'
-                    {print} _ _ _
+                    {print} _ _
                     ```
             13:
                 start_code: '## Schrijf jouw code hier'
@@ -2841,9 +2845,10 @@ adventures:
                     ## Geheim agent
                     We kunnen nu met maar één `{if}` bekijken of het programma gebruikt wordt door de geheim agent.
                     ### Opdracht 1
-                    Maak de afmaken door de lege stukje te vullen. Let op: de superspion moet beide antwoorden goed hebben, voordat hij de juiste geheime informatie krijgt.
+                    Maak de code af door het lege stukje te vullen. Let op: de superspion moet beide antwoorden goed hebben, voordat hij de juiste geheime informatie krijgt.
                     ### Opdracht 2
                     We willen de vijand extra verwarren! Maak een lijst met nepantwoorden en kies, bij een fout antwoord, iets uit de lijst.
+                    **(extra)** Voeg een extra vraag toe zoals in level 12.
                 example_code: |
                     ```
                     naam {is} {ask} 'Hoe heet je?'
