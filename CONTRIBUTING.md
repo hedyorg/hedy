@@ -89,36 +89,63 @@ framework) first.
 ```bash
 $ npm install
 ```
+**Running the front end tests**
 
-To run the tests go to `/tests/` first:
+We use [Cypress](https://docs.cypress.io/guides/overview/why-cypress) as our front end testing tool. To run the front-end tests you need to go to `/tests/` first:
 
 ```bash
 $ cd tests
 ```
+To run all of the tests you can run this command:
 
-You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
-An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
+```bash
+$ npx cypress run
+```
+For the tests to be truly reproducible, you need to clean the database first and put our tests data there, for that you can need to run the `feed_dev_database.sh` script.
+
+You can also run a particular set of tests on the command line with the following command: 
+
+```bash
+npx cypress run --spec "[path to test(s)]"
+```
+
+An example of running the tests for the login page would be:
+
+```bash
+npx cypress run --spec "cypress/e2e/login_page/*"
+```
+If you want to see the Cypress panel and see the tests visually, you can run this command in the `/tests` folder:
+
+```
+npx cypress open
+```
+
+You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
 Do note a few things:
-* Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
 * Run pybabel before running the tests as they can also rely on exact labels
 * For the same reason, set your app to English
-* ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.     
-    ```
+* ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.
+    ``` bash
     $ . ./.env/bin/activate  
     (.env)$ export ADMIN_USER=admin  
     (.env)$ python app.py
     ```
 If you want to connect Cypress to the online dashboard, use:
 
-`npx cypress run --record --key <key here>`
-
-You can also open the Cypress panel, using this in `/tests`:
-```
-$ npx cypress open
+```bash
+npx cypress run --record --key <key here>
 ```
 
-You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+To check the front end test coverage, you can run the script:
+
+```bash
+./tests/get-code-coverage 
+```
+
+And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go (here)[https://docs.cypress.io/guides/tooling/code-coverage]
+
+The script will only do its job if all the tests pass succesfully! So take that into account.
 
 ## Feeding the local database
 
