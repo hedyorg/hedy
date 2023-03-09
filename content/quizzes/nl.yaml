@@ -119,13 +119,13 @@ levels:
             question_text: "Wat is er mis met deze code?"
             code: |-
                 {print} Hoi ik ben Hedy!
-                aks Voor welke voetbalclub ben jij?
+                {print} Voor welke voetbalclub ben jij?
                 {echo} Jij bent voor...
                 {print} Cool! Ik ook!
             mp_choice_options:
             -   option: "In regel 1 moet het `{print}` commando worden vervangen door `{ask}`."
                 feedback: "`{print}` in regel 1 is goed, let op de spelling van de commando's"
-            -   option: "In regel 2 is `{ask}` fout gespeld."
+            -   option: "In regel 2 moet het `{print}` commando worden vervangen door `{ask}`."
                 feedback: "Goed opgelet!"
             -   option: "Regel 3 moet beginnen met `{print}` in plaats van `{echo}`."
                 feedback: "`{echo}` is goed! Kijk naar de spelling van de commando's."
@@ -140,7 +140,7 @@ levels:
                 {print} Welkom bij Restaurant Hedy!
                 {ask} Wat wilt u eten?
                 {echo} Dus u wilt graag...
-                {print} Komt er aan! Eet smakelijk!"
+                {print} Komt er aan! Eet smakelijk!
             mp_choice_options:
             -   option: "In regel 1 moest `{ask}` staan in plaats van `{print}`"
                 feedback: "Weet je zeker dat er iets mis is?"
@@ -158,7 +158,7 @@ levels:
             mp_choice_options:
             -   option: "Met `{echo}` stel je een vraag"
                 feedback: "Dat doe je met `{ask}`"
-            -   option: "Met `{echo}` laat je tekst verschijnen"
+            -   option: "`{echo}` werkt hetzelfde als `{print}`"
                 feedback: "Dat doe je met `{print}`"
             -   option: "Met `{echo}` herhaal je een gegeven antwoord"
                 feedback: "Goed zo!"
@@ -186,13 +186,27 @@ levels:
             hint: "met `{ask}` kun je iets vragen"
             question_score: '10'
         10:
-            question_text: "Heb je zin om naar level 2 te gaan?"
+            question_text: "Wat staat er in je uitvoerscherm nadat je deze code hebt uitgevoerd?"
+            code: |
+              {ask} Heb je zin om naar level 2 te gaan?
+              {echo}
+              {echo}
             mp_choice_options:
-            -   option: "Ja!"
-                feedback: "Mooizo! Op naar level 2!"
-            -   option: "Nee"
-                feedback: "Jammer..."
-            correct_answer: "A"
+            -   option: |
+                  Heb je zin om naar level 2 te gaan?
+                feedback: "Het echo commando laat ook iets zien!"
+            -   option: |
+                  Ja!
+                  Ja!
+                feedback: "Goed opgelet"
+            -   option: |
+                  Ja!
+                feedback: "De eerste regel wordt ook geprint"
+            -   option: |
+                  Heb je zin om naar level 2 te gaan?
+                  Ja!
+                feedback: "De vraag blijft niet staan en echo staat er 2x."
+            correct_answer: "B"
             hint: "Op naar level 2!"
             question_score: '10'
     2:
