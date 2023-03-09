@@ -472,7 +472,7 @@ levels:
                 feedback: "Good job!"
             -   option: "Line 1 needs to start with `{print}`."
                 feedback: "No, you don't need `{print}`"
-            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
+            -   option: "Line 2 needs to say 'animal' instead of 'animals'"
                 feedback: "animals is correct."
             -   option: "`{at} {random}` is spelled incorrectly"
                 feedback: "`{at} {random}` is the correct spelling"
@@ -659,15 +659,27 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "Which of these codes is correct?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
+            -   option: |
+                  ```
+                  {print} 'Im very excited to take this quiz!'
+                  ```
                 feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
+            -   option: |
+                  ```
+                  {print} Im very excited to take this quiz!
+                  ```
                 feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
+            -   option: |
+                  ```
+                  {print} 'I'm very excited to take this quiz!'
+                  ```
                 feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
+            -   option: |
+                  ```
+                  {print} 'I'm very excited to take this quiz!
+                  ```
                 feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."

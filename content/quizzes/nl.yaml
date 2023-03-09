@@ -474,7 +474,7 @@ levels:
                 feedback: "Nee, je hebt geen `{print}` nodig."
             -   option: "In regel 2 moet 'dier' staan in plaats van 'dieren',"
                 feedback: "Dieren is goed."
-            -   option: "`{at} {random}` is fout gespeld, het moet `et rendom` zijn"
+            -   option: "`{at} {random}` is fout, het moet alleen {random} zijn"
                 feedback: "`{at} {random}` is de goede spelling"
             correct_answer: "A"
             hint: "De fout zit in regel 1"
@@ -629,10 +629,10 @@ levels:
             question_text: "Wat moet er op de streepjes komen te staan?"
             code: |-
                 keuzes {is} papa, mama, Sam, Petra
-                keuze_gisteren {is} {ask} Wie heeft gisteren de honden uitgelaten?
+                keuze_gisteren {is} {ask} Wie heeft gisteren de hond uitgelaten?
                 {print} keuze_gisteren hoeft vandaag dan niet nog een keer!
                 _
-                {print} keuzes {at} {random} is vandaag aan de beurt om de honden uit te laten!
+                {print} keuzes {at} {random} is vandaag aan de beurt om de hond uit te laten!
             mp_choice_options:
             -   option: |
                     ```
@@ -659,29 +659,57 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Wat is waar?"
+            question_text: "Welke code is correct?"
             mp_choice_options:
-            -   option: "In level 4 werkt `{print}` anders"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedys restaurant:'
+                  {print} 'Van s ochtends vroeg tot s avonds laat!'
+                  ```
                 feedback: "Correct, je hebt aanhalingstekens nodig"
-            -   option: "In level 4 werkt `{ask}` anders dan in level 2"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedy's restaurant:'
+                  {print} Van 's ochtends vroeg tot 's avonds laat!
+                  ```
                 feedback: "Ask werkt nog hetzelfde"
-            -   option: "In level 4 werkt `{at} {random}` anders dan in level 2"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedys restaurant:
+                  {print} Van s ochtends vroeg tot s avonds laat!'
+                  ```
                 feedback: "`{at} {random}` werkt nog hetzelfde"
-            -   option: "In level 4 werkt alles nog hetzelfde als in level 2"
+            -   option: |
+                  ```
+                  {print} Openingstijden van Hedy's restaurant:
+                  {print} Van 's ochtends vroeg tot 's avonds laat!
+                  ```
                 feedback: "Nee, een commando is anders."
             correct_answer: "A"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
             question_score: '10'
         2:
-            question_text: "Welk aanhalingsteken gebruik je bij het `{print}` commando?"
+            question_text: "Waar worden de juiste aanhalingstekens gebruikt bij het `{print}` commando?"
             mp_choice_options:
-            -   option: "`"
-                feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
-            -   option: "'"
+            -   option: |
+                  ```
+                  {print} `Dit zijn de juiste aanhalingstekens!`
+                  ```
+                feedback: "Dit zijn schuine aanhalingstekens."
+            -   option: |
+                  ```
+                  {print} 'Dit zijn de juiste aanhalingstekens!'
+                  ```
                 feedback: "Juist!"
-            -   option: "\""
-                feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
-            -   option: ","
+            -   option: |
+                  ```
+                  {print} ~Dit zijn de juiste aanhalingstekens!~
+                  ```
+                feedback: "Dit zijn geen aanhalingstekens."
+            -   option: |
+                  ```
+                  {print} ,Dit zijn de juiste aanhalingstekens!,
+                  ```
                 feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Kies het goede aanhalingsteken."
@@ -715,7 +743,7 @@ levels:
         4:
             question_text: "Welke stelling is waar?"
             mp_choice_options:
-            -   option: "Als je een tekst wil printen moeten er dubbele aanhalingstekens voor en na de tekst staan."
+            -   option: "Als je een tekst wil printen moeten er aanhalingstekens voor en na het commando staan."
                 feedback: "Enkele aanhalingstekens zijn genoeg"
             -   option: "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan."
                 feedback: "Super!"
