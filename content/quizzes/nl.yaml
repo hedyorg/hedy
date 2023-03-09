@@ -896,7 +896,7 @@ levels:
             question_text: "Welk commando hoort op het lijntje?"
             mp_choice_options:
             -   option: "`{print}`"
-                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 hefet geantwoord."
+                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 heeft geantwoord."
             -   option: "`{if}`"
                 feedback: "Dat is hem niet..."
             -   option: "`{sleep}` "
@@ -976,7 +976,7 @@ levels:
             hint: "De spelling moet precies hetzelfde zijn."
             question_score: '10'
         6:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Hoi ik ben Hedy de voetbalvoorspeller!'
                 {print} 'Ik kan voorspellen op welke plek jouw club eindigt!'
@@ -1008,7 +1008,7 @@ levels:
             hint: "In level 5 leer je 2 nieuwe commando's `{if}` en...?"
             question_score: '10'
         7:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Ik kan voorspellen of jij miljonair wordt!'
                 naam {is} {ask} 'Hoe heet jij?'
@@ -1036,10 +1036,10 @@ levels:
                     ```
                 feedback: "Top!"
             correct_answer: "D"
-            hint: "Na `{else}` volgt nog een `{print}`"
+            hint: "Na `{else}` hoort nog een `{print}`"
             question_score: '10'
         8:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 dier {is} {ask} 'Wat is je lievelingsdier?'
                 {if} _ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!'
