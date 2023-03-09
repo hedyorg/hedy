@@ -3022,6 +3022,7 @@ def transpile_inner(input_string, level, lang="en"):
         if has_pygame:
             python = uses_pygame.post_process_code(python)
 
+        source_map.set_python_output(python)
         print(source_map)
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
