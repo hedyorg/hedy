@@ -687,7 +687,11 @@ adventures:
             12:
                 story_text: |-
                     ## Story
-                    In this level you can use the quotation marks to save multiple words in a variable.
+                    In this level quotation marks will be needed to save multiple words in a variable.
+                    
+                    ### Exercise
+                    
+                    Find a story from a previous level, any level is ok. Now make sure quotation marks are added in the right places.
                 example_code: |
                     ```
                     name = 'The Queen of England'
@@ -991,7 +995,7 @@ adventures:
 
                     ### Exercise
                     Can you add the right amount of indentation to each line to make the song play correctly?
-                    Mind: Not all lines need indentation
+                    Tip: Not all lines need indentation
                 example_code: |
                     ```
                     _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
@@ -2106,7 +2110,17 @@ adventures:
             12:
                 story_text: |
                     ## Calculator
-                    Now you can make a calculator that works for decimal numbers. Fill in the blanks to get it to work properly!
+                    In this level, you can make a calculator that works for decimal numbers. 
+
+                    ### Exercise 1
+                    Fill out the blanks to complete the calculator. Remember to use a period and not a comma for decimal numbers.
+
+                    ### Exercise 2
+                    Maak nu weer een rekensommenoefenprogramma, maar dan met kommagetallen.
+                    Maak een lijst met getallen, kies er steeds twee uit en laat de speler het juiste antwoord invullen.
+                    Controleer natuurlijk ook of het klopt. **(extra)** Maak het progamma moeilijker met levens. Bij een fout gaat er een leven af, en na drie fouten stopt het spel.
+
+
                 example_code: |
                     ```
                     number1 = {ask} 'What is the first number?'
@@ -2788,12 +2802,16 @@ adventures:
                 start_code: "# place your code here"
             12:
                 story_text: |
-                    ## Fortune Teller
-                    In this level you can make your fortunes multiple words. Can you add more different fortunes to the list?
+                    ## Fortune Teller               
+                    From level 12 on, you will also have to use quotation marks in lists, before and after each item. 
+
+                    ### Exercise 
+                    Add two predictions to the list
+
                 example_code: |
                     ```
                     fortunes = 'you will slip on a banana peel', _
-                    {print} 'I will take a look in my crystall ball for your future.'
+                    {print} 'I will take a look in my crystal ball for your future.'
                     {print} 'I see... I see...'
                     {sleep}
                     {print} fortunes {at} {random}
@@ -3214,7 +3232,7 @@ adventures:
             13:
                 story_text: |
                     ## Superspy
-                    Can you fill in the right command on the blank? Mind: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    Can you fill in the right command on the blank? Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
