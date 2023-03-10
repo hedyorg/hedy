@@ -311,7 +311,9 @@ adventures:
                         {print} 'Jij bent de echte Hedy!'
                 story_text: |-
                     ## En... Of?
-                    We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. Beide dingen moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij moet er één van de twee waar zijn.
+                    We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. 
+                    
+                    Beide kanten moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij hoeft er maar één van de twee waar zijn.
                 example_code: |
                     ```
                     naam = {ask} 'hoe heet jij?'
@@ -1585,7 +1587,7 @@ adventures:
                     Met het `{and}` commando kun je steen, papier, schaar met veel minder regels programmeren. Kijk maar eens naar de voorbeeldcode.
                     
                     ### Opdracht
-                    Maak de code af zodat bij iedere combinatie een antwoord wordt geprint. Er moet dus altijd in beeld komen wie er gewonnen heeft!
+                    Maak de code af zodat bij iedere combinatie een antwoord wordt geprint. Er moet dus altijd in beeld komen wie er gewonnen heeft! Voer je code een paar keer uit om te kijken of er altijd een winner gekozen wordt.
                 example_code: |
                     ```
                     opties = 'steen', 'papier', 'schaar'
@@ -1760,8 +1762,8 @@ adventures:
                     Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
                     ### Opdracht 2 (extra)
-                    Sommen hebben soms meerdere goede antwoorden. Bijv. de wortel van 16 is 4, maar ook -4.
-                    Vraag om het antwoord voor een som met meerdere antwoorden en reken ze beide goed met `{or}`.
+                    Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
+                    Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
                     Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
 
                 example_code: |

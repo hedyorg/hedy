@@ -313,7 +313,9 @@ adventures:
                         {print} 'You are the real Hedy!'
                 story_text: |-
                     ## And... Or..?
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. 
+                    
+                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -705,6 +707,9 @@ adventures:
 
                     ### Exercise 1
                     Look at the example code and finish it. Then add at least 2 more {if} codes with `{and}` or `{or}`.
+                    
+                    ### Exercise 2
+                    Find a story from a previous level, and add one `{and}` or `{or}`.
                 example_code: |
                     ```
                     {print} 'Our hero is walking through the forest'
@@ -1959,7 +1964,10 @@ adventures:
             13:
                 story_text: |
                     ## Rock, paper, scissors
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
+                                        
+                    ### Opdracht
+                    Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed. 
 
                 example_code: |
                     ```
@@ -2138,9 +2146,9 @@ adventures:
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
                     ### Exercise 2 (extra)
-                    Sometimes, calculations have multiple correct answers. For example, the square root of 16 is 4, but also -4.
-                    Ask for something with multiple correct answers and determine if it is correct using `{or}`.
-                    Emtoy the programming field and create your own solution.
+                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                    Empty the programming field and create your own solution.
 
                 example_code: |
                     ```
@@ -2544,16 +2552,13 @@ adventures:
                     ## Restaurant
                     In this level you will learn new commands to extend your code even further.
 
-                    ### Task 1
+                    ### Exercise 1
                     Place a `{and}` and a `{or}` in the logical place in the program.
 
                     ### Exercise 2
                     Expand your restaurant with at least one more `{and}` and one `{or}`.
                     For example, create a special discount coupon that only applies to pizza, or give your customer a free drink
                     with fries and pancakes. Or something completely different of course!
-
-                    ### Exercise
-                    Fill in `{and}` and `{or}` on the right blanks.
 
                 example_code: |
                     ```
@@ -3240,7 +3245,14 @@ adventures:
             13:
                 story_text: |
                     ## Superspy
-                    Can you fill in the right command on the blank? Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`. 
+                    
+                    ### Exercise 1
+                    Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    
+                    Opdracht 2
+                    We want confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answewr is given.
+
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
