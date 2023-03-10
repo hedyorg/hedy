@@ -890,6 +890,8 @@ def programs_page(user):
              }
         )
 
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+
     return render_template(
         'programs.html',
         programs=programs,
@@ -897,6 +899,7 @@ def programs_page(user):
         current_page='programs',
         from_user=from_user,
         public_profile=public_profile,
+        adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL)
 
 
