@@ -336,6 +336,23 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
+    def test_assign_to_list_access(self):
+        code = textwrap.dedent("""\
+            field = '.', '.', '.', '.', '.', '.'
+            field at 1 = 'x'
+            print field at 1""")
+
+        expected = textwrap.dedent("""\
+            field = ['.', '.', '.', '.', '.', '.']
+            field[int(1)-1] = 'x'
+            try:
+              field[int(1)-1]
+            except IndexError:
+              raise Exception('catch_index_exception')
+            print(f'''{field[int(1)-1]}''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
     def test_print_calc(self):
         code = textwrap.dedent("""\
             var is 5
