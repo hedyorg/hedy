@@ -466,10 +466,10 @@ adventures:
                 start_code: '{print} salut lume!'
             4:
                 start_code: "{print} 'Salut lume'"
-                story_text: "## 'Apostrofuri'\nLa nivelul 4 `{ask}` și `{print}` s-au schimbat.\n\nTrebuie să puneți textul pe care doriți să-l afișați între apostrofuri.\n\nAcest lucru este util, deoarece acum puteți tipări toate cuvintele dorite. De asemenea, cuvintele pe care le-ați folosit pentru a stoca ceva cu `{is}`.\n\nMajoritatea limbajelor de programare folosesc apostrofuri sau ghilimele pentru afișare, așa că suntem cu un pas mai aproape de programarea reală!\n"
+                story_text: "## 'Apostrofuri'\nLa nivelul 4 `{intreabă}` și `{printează}` s-au schimbat.\n\nTrebuie să puneți textul pe care doriți să-l afișați între apostrofuri.\n\nAcest lucru este util, deoarece acum puteți tipări toate cuvintele dorite. De asemenea, cuvintele pe care le-ați folosit pentru a stoca ceva cu `{este}`.\n\nMajoritatea limbajelor de programare folosesc apostrofuri sau ghilimele pentru afișare, așa că suntem cu un pas mai aproape de programarea reală!\n"
                 example_code: "```\n{print} 'Trebuie să folosești apostrofuri de acum înainte!'\nrăspuns {is} {ask} 'Ce trebuie să folosim de acum înainte?'\n{print} 'Trebuie să folosim' răspuns\n```\n"
-                story_text_2: "## Aventurile devin din ce în ce mai dificile\nAventurile devin acum din ce în ce mai dificile în filele succesive.\nAșa că cel mai bine este să începi din stânga și să lucrezi spre dreapta, pentru provocări din ce în ce mai mari.\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text_2: "## Contracții\nImportant! AtențieMind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to I am or What is.\nCheck out the example code to see the wrong way of using apostrophes.\n"
+                example_code_2: "```\n_ Această metodă de a utiliza apostrofuri este incorectă _\n{print} 'Am grijă de copii surorii mele'\n{print} 'Ce altceva este mai distractiv ?'\n```\n"
             11:
                 start_code: "{for} contor {in} {range} 1 {to} 5\n    {print} contor"
                 story_text: "## Bucle!\nîn acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.\nFacem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul de la care se termină.\n\nÎncercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`."
@@ -560,7 +560,7 @@ adventures:
                 story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
         description: Explicația nivelului
-        default_save_name: intro
+        default_save_name: introducere
     fortune:
         name: Fortune teller
         description: Let Hedy predict the future
