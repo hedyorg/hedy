@@ -353,6 +353,28 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
+    def test_if_and_list_access(self):
+        code = textwrap.dedent("""\
+        player = 'x'
+        choice = 1
+        field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+        
+        if field at choice = '.'
+            field at choice = player
+        else
+            print 'illegal move!'""")
+
+        expected = textwrap.dedent("""\
+        player = 'x'
+        choice = 1
+        field = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+        if convert_numerals('Latin', field[int(choice)-1]) == convert_numerals('Latin', '.'):
+          field[int(choice)-1] = player
+        else:
+          print(f'''illegal move!''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
     def test_print_calc(self):
         code = textwrap.dedent("""\
             var is 5
