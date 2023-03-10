@@ -21,12 +21,15 @@ class ProgramsLogic:
 
     This used to be inside the class below, which also handles flask
     routes, and is being extracted out piece by piece.
+
+    This could maybe have been in the Database class, but it also uses
+    Achievements and stuff.
     """
     def __init__(self, db: Database, achievements: Achievements):
         self.db = db
         self.achievements = achievements
 
-    def store_user_program(self, user, level: int, name: str, code: str, error: bool, program_id: Optional[str], adventure_name: Optional[str]):
+    def store_user_program(self, user, level: int, name: str, code: str, error: bool, program_id: Optional[str], adventure_name: Optional[str], set_public: Optional[bool]):
         """Store a user program (either new or overwrite an existing one).
 
         Returns the program record.
@@ -45,6 +48,9 @@ class ProgramsLogic:
             "error": error,
             "adventure_name": adventure_name,
         }
+
+        if set_public is not None:
+            updates['public'] = 1 if set_public else 0
 
         if program_id:
             program = self.db.update_program(program_id, updates)
@@ -131,32 +137,41 @@ class ProgramsModule(WebsiteModule):
             return "name must be a string", 400
         if not isinstance(body.get("level"), int):
             return "level must be an integer", 400
-        if not isinstance(body.get("shared"), bool):
+        if 'program_id' in body and not isinstance(body.get("program_id"), str):
+            return "program_id must be a string", 400
+        if 'shared' in body and not isinstance(body.get("shared"), bool):
             return "shared must be a boolean", 400
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
                 return "if present, adventure_name must be a string", 400
 
-        error = False
-        try:
-            hedy.transpile(body.get("code"), body.get("level"), g.lang)
-        except BaseException:
-            error = True
-            if not body.get("force_save", True):
-                return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+        error = None
+        program_id = body.get('program_id')
 
-        # We check if a program with a name `xyz` exists in the database for the username.
-        # It'd be ideal to search by username & program name,
-        # but since DynamoDB doesn't allow searching for two indexes at the same time,
-        # this would require to create a special index to that effect, which is cumbersome.
-        # For now, we bring all existing programs for the user and then search within them for repeated names.
-        program_id = None
+        # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
-        for program in self.db.programs_for_user(user["username"]):
-            if program["name"] == body["name"]:
-                program_id = program["id"]
-                program_public = program.get("public", False)
-                break
+
+        if not program_id:
+            # Legacy save mode: overwrite a program with the same name if it already exists
+            # (Not sure when this is used)
+            for program in self.db.programs_for_user(user["username"]):
+                if program["name"] == body["name"]:
+                    program_id = program["id"]
+                    program_public = program.get("public", False)
+                    break
+
+        if program_public:
+            # If a program is marked as public, we need to know whether it contains
+            # an error or not. Parse it here and add the status.
+            # WARNING: compiling is expensive! We may regret doing this on every save, especially
+            # when saves become common!
+            try:
+                hedy.transpile(body.get("code"), body.get("level"), g.lang)
+                error = False
+            except BaseException:
+                error = True
+                if not body.get("force_save", True):
+                    return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
 
         program = self.logic.store_user_program(
             program_id=program_id,
@@ -165,17 +180,15 @@ class ProgramsModule(WebsiteModule):
             name=body['name'],
             user=user,
             error=error,
+            set_public=program_public,
             adventure_name=body.get('adventure_name'))
-
-        if not program_id and program_public:
-            # We store as non-public by default
-            program_public = body.get("shared")
 
         return jsonify({
             "message": gettext("save_success_detail"),
             "share_message": gettext("copy_clipboard"),
             "name": program["name"],
             "id": program['id'],
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         })
 

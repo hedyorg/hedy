@@ -35,6 +35,7 @@ let theAdventures: Record<string, Adventure> = {};
 let theLevel: number = 0;
 let theLanguage: string = '';
 let currentTab: string;
+let theUserIsLoggedIn: boolean;
 
 const pygame_suffix =
 `# coding=utf8
@@ -148,6 +149,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
 
+  theUserIsLoggedIn = !!options.current_user_name;
+
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
   // theLevel will already have been set during initializeApp
@@ -174,9 +177,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   tabs.on('beforeSwitch', (ev) => {
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (hasUnsavedChanges()) {
-      modal.confirm(ClientMessages['Unsaved_Changes'], ev.deferEvent());
-    }
+    saveIfNecessary();
   });
 
   tabs.on('afterSwitch', (ev) => {
@@ -431,7 +432,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
       return modal.notifyError(disabled_prompt);
-    } return;
+    }
+    return;
   }
 
   // Make sure to stop previous PyGame event listeners
@@ -476,6 +478,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     removeBulb();
     console.log('Original program:\n', code);
 
+    const adventure = theAdventures[adventureName];
+
     try {
       const response = await postJson('/parse', {
         level: `${level}`,
@@ -486,18 +490,20 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         adventure_name: adventureName,
 
         // Save under an existing id if this field is set
-        program_id: theAdventures[adventureName]?.save_info?.id,
-        save_name: $('#program_name').val(),
+        program_id: adventure?.save_info?.id,
+        save_name: saveNameFromInput(),
       });
 
       console.log('Response', response);
+
       if (response.Warning && $('#editor').is(":visible")) {
         //storeFixedCode(response, level);
         error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
       }
       showAchievements(response.achievements, false, "");
-      if (response.save_info) {
-        (theAdventures[adventureName] ?? {}).save_info = response.save_info;
+      if (adventure && response.save_info) {
+        adventure.save_info = response.save_info;
+        adventure.start_code = code;
       }
       if (response.Error) {
         error.show(ClientMessages['Transpile_error'], response.Error);
@@ -542,23 +548,6 @@ export async function saveMachineFiles() {
     window.location.replace('/download_machine_files/' + response.filename);
   }
 }
-
-// function storeFixedCode(response: any, level: string) {
-//   if (response.FixedCode) {
-//     sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-//     showBulb(level);
-//   }
-// }
-
-// function showBulb(level: string){
-//   const parsedlevel = parseInt(level)
-//   if(parsedlevel <= 2){
-//     const repair_button = $('#repair_button');
-//     repair_button.show();
-//     repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
-//   }
-//}
-
 
 // We've observed that this code may gets invoked 100s of times in quick succession. Don't
 // ever push the same achievement more than once per page load to avoid this.
@@ -1977,10 +1966,12 @@ function initializeShareProgramButtons() {
       const isPublic = $(ev.target).val() === '1' ? true : false;
 
       // Async-safe copy of current tab
-      const adventure = currentTab;
+      const adventureName = currentTab;
 
       tryCatchPopup(async () => {
-        const saveInfo = theAdventures[adventure]?.save_info;
+        await saveIfNecessary();
+
+        const saveInfo = theAdventures[adventureName]?.save_info;
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
@@ -1992,7 +1983,7 @@ function initializeShareProgramButtons() {
 
         modal.notifySuccess(response.message);
         if (response.save_info) {
-          (theAdventures[adventure] ?? {}).save_info = response.save_info;
+          (theAdventures[adventureName] ?? {}).save_info = response.save_info;
         }
         updatePageElements();
       });
@@ -2006,6 +1997,8 @@ function initializeHandInButton() {
       const adventureName = currentTab;
 
       tryCatchPopup(async () => {
+        await saveIfNecessary();
+
         const saveInfo = theAdventures[adventureName]?.save_info;
         if (!saveInfo) {
           throw new Error('This program does not have an id');
@@ -2036,4 +2029,56 @@ function initializeCopyToClipboard() {
       copy_to_clipboard(text, ClientMessages.copy_link_to_share);
     }
   });
+}
+
+function saveNameFromInput(): string {
+  return $('#program_name').val() as string;
+}
+
+function programNeedsSaving(adventureName: string) {
+  const adventure = theAdventures[adventureName];
+  if (!adventure) {
+    return false;
+  }
+
+  return theGlobalEditor.getValue() !== adventure.start_code;
+}
+
+async function saveIfNecessary() {
+  // Async-safe copy of current tab
+  const adventureName = currentTab;
+  const adventure = theAdventures[adventureName];
+  if (!programNeedsSaving(adventureName) || !adventure) {
+    return;
+  }
+
+  const code = theGlobalEditor.getValue();
+  const saveName = saveNameFromInput();
+
+  const localStorageKey = `save-${adventureName}-${theLevel}`;
+
+  if (theUserIsLoggedIn) {
+    const response = await postJson('/programs', {
+      level: theLevel,
+      lang:  theLanguage,
+      name:  saveName,
+      code:  code,
+      adventure_name: adventureName,
+      program_id: adventure.save_info?.id,
+      // We pass 'public' in here to save the backend a lookup
+      share: adventure.save_info?.public,
+    });
+
+    // Record that we saved successfully
+    adventure.start_code = code;
+    if (response.save_info) {
+      adventure.save_info = response.save_info;
+    }
+    localStorage.removeItem(localStorageKey);
+  } else {
+    localStorage.setItem(localStorageKey, JSON.stringify({
+      saveName,
+      code
+    }));
+  }
 }
