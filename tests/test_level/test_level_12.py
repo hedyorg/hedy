@@ -358,7 +358,6 @@ class TestsLevel12(HedyTester):
         player = 'x'
         choice = 1
         field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-        
         if field at choice = '.'
             field at choice = player
         else
