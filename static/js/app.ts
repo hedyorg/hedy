@@ -3,7 +3,6 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
 import JSZip from "jszip";
-import { hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
@@ -168,23 +167,32 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     language: options.lang,
   });
 
+  const anchor = window.location.hash.substring(1);
+
   const tabs = new Tabs({
     // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
     // We click on `level` to load a program associated with level, if any.
-    initialTab: options.initial_tab,
+    initialTab: anchor in theAdventures ? anchor : options.initial_tab,
   });
-  currentTab = options.initial_tab;
 
-  tabs.on('beforeSwitch', (ev) => {
+  tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
   });
 
   tabs.on('afterSwitch', (ev) => {
     currentTab = ev.newTab;
+    const adventure = theAdventures[currentTab];
+
+    // Load initial code from local storage, if available
+    const programFromLs = localLoad(currentTabLsKey());
+    if (programFromLs && adventure) {
+      adventure.start_code = programFromLs.code;
+      adventure.save_name = programFromLs.saveName;
+    }
+
     reconfigurePageBasedOnTab();
   });
-  reconfigurePageBasedOnTab();
 
   if (options.start_tutorial) {
     startIntroTutorial();
@@ -195,6 +203,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
   initializeShareProgramButtons();
   initializeHandInButton();
+
+  window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
 
   /**
    * Initialize the main editor and attach all the required event handlers
@@ -215,18 +225,17 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     // Load existing code from session, if it exists
     const storage = window.sessionStorage;
     if (storage) {
-      const levelKey = $editor.data('lskey');
       const loadedProgram = $editor.data('loaded-program');
 
       // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-      const programFromStorage = storage.getItem(levelKey);
+      const programFromStorage = storage.getItem(currentTabLsKey());
       if (loadedProgram !== 'True' && programFromStorage) {
         editor.setValue(programFromStorage?.trim(), 1);
       }
 
       // When the user exits the editor, save what we have.
       editor.on('blur', function(_e: Event) {
-        storage.setItem(levelKey, editor.getValue());
+        storage.setItem(currentTabLsKey(), editor.getValue());
       });
 
       if (dir === "rtl") {
@@ -242,7 +251,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
         askPromptOpen = false;
         $ ('#runit').css('background-color', '');
-        markUnsavedChanges();
 
         clearErrors(editor);
         //removing the debugging state when loading in the editor
@@ -276,6 +284,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       }
     });
     window.addEventListener ('keyup', function (ev) {
+      triggerAutomaticSave();
       const keyCode = ev.keyCode;
       if (keyCode === 18) {
         altPressed = false;
@@ -452,7 +461,6 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
-      clearUnsavedChanges(); // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -481,6 +489,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     const adventure = theAdventures[adventureName];
 
     try {
+      cancelPendingAutomaticSave();
       const response = await postJson('/parse', {
         level: `${level}`,
         code: code,
@@ -644,11 +653,9 @@ export function tryPaletteCode(exampleCode: string) {
       $('#editor').attr('lang', 'en');
       update_view("main_editor_keyword_selector", "en");
   }
-  clearUnsavedChanges();
 }
 
 async function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
-  clearUnsavedChanges();
   var adventure_name = currentTab;
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
   if (Array.isArray(level)) {
@@ -1344,17 +1351,6 @@ function speak(text: string) {
   }
 })();
 
-/**
- * Used on the editor page when clicking leave button
- */
-export function prompt_unsaved(cb: () => void) {
-  if (!hasUnsavedChanges()) return cb();
-  modal.confirm(ClientMessages['Unsaved_Changes'], () => {
-    clearUnsavedChanges();
-    cb();
-  });
-}
-
 export function load_quiz(level: string) {
   $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
@@ -1496,7 +1492,7 @@ function showSuccesMessage(){
 }
 
 function createModal(level:number ){
-  let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
@@ -1543,20 +1539,17 @@ function initializeModalEditor($editor: JQuery) {
   let editor = turnIntoAceEditor($editor.get(0)!, true);
   theModalEditor = editor;
   error.setEditor(editor);
-  //small timeout to make sure the call with fixed code is complete.
-  setTimeout(function(){}, 2000);
 
   window.Range = ace.require('ace/range').Range // get reference to ace/range
 
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
   if (storage) {
-    const levelKey = $editor.data('lskey');
       let tempIndex = 0;
       let resultString = "";
 
-      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))){
+        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
         let tempString = ""
         for (let i = 0; i < resultString.length + 1; i++) {
           setTimeout(function() {
@@ -1567,7 +1560,7 @@ function initializeModalEditor($editor: JQuery) {
         }
       }
       else{
-        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
         editor.setValue(resultString);
       }
   }
@@ -1669,13 +1662,15 @@ export async function change_language(lang: string) {
  * Automatically handles any achievements the server might send our way.
  */
 async function postJson(url: string, data: any): Promise<any> {
+  // FIXME: This should be using the fetch() API with keepalive: true, so
+  // that it can submit a final save when the user leaves the page.
   return new Promise((ok, ko) => {
     $.ajax({
       type: 'POST',
       url,
       data: JSON.stringify(data),
       contentType: 'application/json',
-      dataType: 'json'
+      dataType: 'json',
     }).done(function (response: any) {
       showAchievements(response.achievement, true, "");
 
@@ -1911,6 +1906,7 @@ function updatePageElements() {
     $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
+    $('[data-view="if-public"]').toggle(!!adventure.save_info?.public);
     $('[data-view="if-public-url"]').toggle(!!adventure.save_info?.public_url);
     $('input[data-view="public-url"]').val(adventure.save_info?.public_url ?? '');
 
@@ -1944,9 +1940,6 @@ function reconfigurePageBasedOnTab() {
     $ ('#program_name').val(adventure.save_name);
     theGlobalEditor?.setValue(adventure.start_code);
   }
-
-  // If user wants to override the unsaved program, reset unsaved_changes
-  clearUnsavedChanges();
 }
 
 /**
@@ -2041,7 +2034,25 @@ function programNeedsSaving(adventureName: string) {
     return false;
   }
 
-  return theGlobalEditor.getValue() !== adventure.start_code;
+  // We need to save if the content changed, OR if we are logged in but
+  // the program doesn't have an ID yet (indication
+  return theGlobalEditor.getValue() !== adventure.start_code || !adventure.save_info?.id;
+}
+
+/**
+ * (Re)set a timer to trigger a save in N second
+ */
+let saveTimer: number | undefined;
+function triggerAutomaticSave() {
+  const saveSeconds = 20;
+  cancelPendingAutomaticSave();
+  saveTimer = window.setTimeout(() => saveIfNecessary(), saveSeconds * 1000);
+}
+
+function cancelPendingAutomaticSave() {
+  if (saveTimer) {
+    window.clearTimeout(saveTimer);
+  }
 }
 
 async function saveIfNecessary() {
@@ -2052,10 +2063,10 @@ async function saveIfNecessary() {
     return;
   }
 
+  console.info('Saving program automatically...');
+
   const code = theGlobalEditor.getValue();
   const saveName = saveNameFromInput();
-
-  const localStorageKey = `save-${adventureName}-${theLevel}`;
 
   if (theUserIsLoggedIn) {
     const response = await postJson('/programs', {
@@ -2074,11 +2085,31 @@ async function saveIfNecessary() {
     if (response.save_info) {
       adventure.save_info = response.save_info;
     }
-    localStorage.removeItem(localStorageKey);
+    localDelete(currentTabLsKey());
   } else {
-    localStorage.setItem(localStorageKey, JSON.stringify({
-      saveName,
-      code
-    }));
+    localSave(currentTabLsKey(), { saveName, code });
+    adventure.start_code = code;
   }
+}
+
+function localSave(key: string, data: any) {
+  window.localStorage?.setItem(key, JSON.stringify(data));
+}
+
+function localDelete(key: string) {
+  window.localStorage?.removeItem(key);
+}
+
+function localLoad(key: string): any {
+  const value = window.localStorage?.getItem(key);
+  try {
+    return value ? JSON.parse(value) : undefined;
+  } catch (e) {
+    // Invalid JSON or summin'
+    return undefined;
+  }
+}
+
+function currentTabLsKey() {
+  return `save-${currentTab}-${theLevel}`;
 }

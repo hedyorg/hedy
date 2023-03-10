@@ -106,7 +106,12 @@ export class Tabs {
   }
 
   public on(key: Parameters<typeof this.tabEvents.on>[0], handler: Parameters<typeof this.tabEvents.on>[1]) {
-    return this.tabEvents.on(key, handler);
+    const ret = this.tabEvents.on(key, handler);
+    // Immediately invoke afterSwitch when it's being registered
+    if (key === 'afterSwitch') {
+      this.tabEvents.emit('afterSwitch', { oldTab: '', newTab: this._currentTab });
+    }
+    return ret;
   }
 }
 
