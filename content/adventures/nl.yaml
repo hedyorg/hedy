@@ -3159,7 +3159,7 @@ adventures:
                     De speler die als eerst 3 op een rij heeft (horizontaal, verticaal of diagonaal) wint!
                     
                     ### Opdracht 1
-                    Dit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst of een plek wel beschikbaar is door te kijken in vrije_plekken. Zo niet, waarschuw de speler dan.
+                    Dit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.
                     
                     ### Opdracht 2
                     Het spel kan ook niet zelf besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.
@@ -3168,21 +3168,20 @@ adventures:
                     Spelen met een vriend(innet)je kan niet altijd! Programmeer jij een computertegenstander om tegen te spelen?
                 example_code: |
                     ```
-                    player = 'x'
-                    available_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    speler = 'x'
+                    veld = '.', '.', '.', '.', '.', '.', '.', '.', '.'
                     
                     {for} i in {range} 1 {to} 9
-                        choice = {ask} 'Speler ' player ', Welke plek kies jij?'
-                        field at choice = player
+                        keuze = {ask} 'Speler ' speler ' welke plek kies jij?'
+                        veld at keuze = speler
                         clear
-                        print field at 1 field at 2 field at 3
-                        print field at 4 field at 5 field at 6
-                        print field at 7 field at 8 field at 9
-                        {if} player is 'x'
-                            player = 'o'
+                        print veld at 1 veld at 2 veld at 3
+                        print veld at 4 veld at 5 veld at 6
+                        print veld at 7 veld at 8 veld at 9
+                        {if} speler is 'x'
+                            speler = 'o'
                         {else}
-                            player = 'x'
+                            speler = 'x'
                     ```
                 start_code: '##  Schrijf jouw code hier'
         description: Speel een potje Boter Kaas en Eieren!
