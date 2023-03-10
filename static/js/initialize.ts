@@ -1,4 +1,4 @@
-import { initializeApp, initializeCodePage, InitializeCodePageOptions } from './app';
+import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
@@ -41,7 +41,11 @@ export interface InitializeOptions {
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
-type InitializePageOptions = InitializeCodePageOptions | InitializeCustomizeClassPageOptions | InitializeTeacherPageOptions;
+type InitializePageOptions =
+  | InitializeCodePageOptions
+  | InitializeCustomizeClassPageOptions
+  | InitializeTeacherPageOptions
+  | InitializeViewProgramPageOptions;
 
 
 /**
@@ -70,6 +74,10 @@ export function initialize(options: InitializeOptions) {
 
     case 'for-teachers':
       initializeTeacherPage(options.javascriptPageOptions);
+      break;
+
+    case 'view-program':
+      initializeViewProgramPage(options.javascriptPageOptions);
       break;
   }
 
