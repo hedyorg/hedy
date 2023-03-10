@@ -9,7 +9,7 @@ import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
 import { Achievement, Adventure } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
-import { onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
+import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
 
 export let theGlobalEditor: AceAjax.Editor;
@@ -192,6 +192,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     }
 
     reconfigurePageBasedOnTab();
+    checkNow();
   });
 
   if (options.start_tutorial) {
