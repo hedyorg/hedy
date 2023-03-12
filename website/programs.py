@@ -29,7 +29,15 @@ class ProgramsLogic:
         self.db = db
         self.achievements = achievements
 
-    def store_user_program(self, user, level: int, name: str, code: str, error: bool, program_id: Optional[str], adventure_name: Optional[str], set_public: Optional[bool]):
+    def store_user_program(self,
+                           user,
+                           level: int,
+                           name: str,
+                           code: str,
+                           error: bool,
+                           program_id: Optional[str]=None,
+                           adventure_name: Optional[str]=None,
+                           set_public: Optional[bool]=None):
         """Store a user program (either new or overwrite an existing one).
 
         Returns the program record.

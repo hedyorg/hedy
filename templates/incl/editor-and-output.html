@@ -40,6 +40,13 @@
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <div class="w-full flex-1 flex flex-col">
+        <!-- Status warning -->
+        <div data-view="if-submitted"
+          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+          {{_('submitted_header')}}
+        </div>
+
+        <!-- The actual editor -->
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
           class="w-full flex-1 text-lg rounded">{{initial_adventure.start_code}}</div>

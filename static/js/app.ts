@@ -12,6 +12,9 @@ import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
 
+// const MOVE_CURSOR_TO_BEGIN = -1;
+const MOVE_CURSOR_TO_END = 1;
+
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 let markers: Markers;
@@ -184,11 +187,13 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    // Load initial code from local storage, if available
-    const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
-      adventure.start_code = programFromLs.code;
-      adventure.save_name = programFromLs.saveName;
+    if (!theUserIsLoggedIn) {
+      // Load initial code from local storage, if available
+      const programFromLs = localLoad(currentTabLsKey());
+      if (programFromLs && adventure) {
+        adventure.start_code = programFromLs.code;
+        adventure.save_name = programFromLs.saveName;
+      }
     }
 
     reconfigurePageBasedOnTab();
@@ -205,7 +210,10 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   initializeShareProgramButtons();
   initializeHandInButton();
 
+  // Save if user navigates away
   window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
+  // Save if program name is changed
+  $('#program_name').on('blur', () => saveIfNecessary());
 
   /**
    * Initialize the main editor and attach all the required event handlers
@@ -231,7 +239,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
       const programFromStorage = storage.getItem(currentTabLsKey());
       if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue(programFromStorage?.trim(), 1);
+        editor.setValue(programFromStorage?.trim(), MOVE_CURSOR_TO_END);
       }
 
       // When the user exits the editor, save what we have.
@@ -357,7 +365,9 @@ function initializeHighlightedCodeBlocks(keywordLanguage: string) {
           symbol = "⇤";
         }
         $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+          if (!theGlobalEditor?.getReadOnly()) {
+            theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
+          }
           update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
           stopit();
           clearOutput();
@@ -645,10 +655,11 @@ function removeBulb(){
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  var editor = ace.edit("editor");
+  if (theGlobalEditor?.getReadOnly()) {
+    return;
+  }
 
-  var MOVE_CURSOR_TO_END = 1;
-  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  theGlobalEditor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -1711,7 +1722,7 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
     });
 
     if (response.success) {
-      ace.edit('editor').setValue(response.code);
+      ace.edit('editor').setValue(response.code, MOVE_CURSOR_TO_END);
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
@@ -1895,6 +1906,7 @@ function updatePageElements() {
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
+  theGlobalEditor.setReadOnly(false);
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
@@ -1920,6 +1932,8 @@ function updatePageElements() {
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+
+    theGlobalEditor.setReadOnly(isSubmitted);
   }
 }
 
@@ -1939,7 +1953,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor?.setValue(adventure.start_code);
+    theGlobalEditor?.setValue(adventure.start_code, MOVE_CURSOR_TO_END);
   }
 }
 
@@ -2036,8 +2050,11 @@ function programNeedsSaving(adventureName: string) {
   }
 
   // We need to save if the content changed, OR if we are logged in but
-  // the program doesn't have an ID yet (indication
-  return theGlobalEditor.getValue() !== adventure.start_code || !adventure.save_info?.id;
+  // the program doesn't have an ID yet. Submitted programs are never saved again.
+  const programChanged = theGlobalEditor.getValue() !== adventure.start_code;
+  const nameChanged = $('#program_name').val() !== adventure.save_name;
+  const programWasNeverSavedBefore = theUserIsLoggedIn && !adventure.save_info?.id;
+  return (programChanged || nameChanged || programWasNeverSavedBefore) && !adventure.save_info?.submitted;
 }
 
 /**
