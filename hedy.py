@@ -22,7 +22,7 @@ import yaml
 
 # Some useful constants
 from hedy_content import KEYWORDS
-from hedy_sourcemap import SourceMap, source_map_rule, source_map_transformer
+from hedy_sourcemap import SourceMap, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100

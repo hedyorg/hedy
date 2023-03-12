@@ -1,6 +1,3 @@
-import re
-from os import path
-
 
 class SourceRange:
     def __init__(self, from_line, from_character, to_line, to_character):
