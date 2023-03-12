@@ -29,12 +29,12 @@ class SourceCode:
 
     def __eq__(self, other):
         return (
-                   self.source_range.from_line, self.source_range.from_character,
-                   self.source_range.to_line, self.source_range.to_character
-               ) == (
-                   other.source_range.from_line, other.source_range.from_character,
-                   other.source_range.to_line, other.source_range.to_character
-               )
+            self.source_range.from_line, self.source_range.from_character,
+            self.source_range.to_line, self.source_range.to_character
+        ) == (
+            other.source_range.from_line, other.source_range.from_character,
+            other.source_range.to_line, other.source_range.to_character
+        )
 
     def __ne__(self, other):
         return not (self == other)
