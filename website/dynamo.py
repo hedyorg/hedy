@@ -258,7 +258,7 @@ class Table:
 
         Iterating over all elements can take a long time, make sure you have a timeout in the loop
         somewhere!"""
-        return QueryIterator(self, key, reverse=reverse)
+        return GetManyIterator(self, key, reverse=reverse)
 
     @querylog.timed_as("db_create")
     def create(self, data):
@@ -1021,50 +1021,109 @@ class ExponentialBackoff:
 
 
 class QueryIterator:
-    """Iterate over a set of query results, automatically proceeding to the next result page if necessary.
+    """Iterate over a set of query results, keeping track of a database and client side
+    pagination token at the same time.
 
-    Wrapper around query_many that automatically paginates.
+    _do_fetch() should be overridden, and use self.pagination_token to
+    paginate on the database.
     """
+    def __init__(self, pagination_token=None):
+        drop_initial = self._analyze_pagination_token(pagination_token)
+        self.page = None
 
-    def __init__(self, table, key, reverse=False):
-        self.table = table
-        self.key = key
-        self.reverse = reverse
-        self.pagination_token = None
-        self._fetch_next_page(None)
+        # Eat records according to the amount we needed to drop
+        i = 0
+        while not self.eof and i < drop_initial:
+            i += 1
+            self.advance()
+
+    def _fetch_next_page(self):
+        self.i = 0
+        self.page = self._do_fetch()
+        if not isinstance(self.page, ResultPage):
+            raise RuntimeError('_do_fetch must return a ResultPage')
+
+    def _do_fetch(self):
+        raise NotImplementedError('_do_fetch should be implemented')
 
     @property
     def eof(self):
+        if self.page is None:
+            self._fetch_next_page()
         return self.i >= len(self.page)
 
-    def next(self):
+    def advance(self):
+        if self.page is None:
+            self._fetch_next_page()
+            return
+
         self.i += 1
         if self.eof and self.page.next_page_token:
-            self._fetch_next_page(self.page.next_page_token)
+            self.pagination_token = self.page.next_page_token
+            self._fetch_next_page()
 
     @property
     def current(self):
+        if self.page is None:
+            self._fetch_next_page()
         if self.eof:
             raise RuntimeError('At eof')
         return self.page[self.i]
 
-    def _fetch_next_page(self, pagination_token):
-        self.page = self.table.get_many(self.key, reverse=self.reverse, pagination_token=pagination_token)
-        self.i = 0
-
     def __iter__(self):
-        return self
-
-    def __next__(self):
-        self.next()
-        if self.eof:
-            raise StopIteration()
-        return self.current
-
-    def __len__(self):
-        return len(self.page)
+        return PythonQueryIterator(self)
 
     def __nonzero__(self):
         return not self.eof
 
     __bool__ = __nonzero__
+
+    def _analyze_pagination_token(self, x):
+        """Turn a pagination token into a DB part and a client part.
+
+        Return the number part.
+        """
+        if not x:
+            self.pagination_token = None
+            return 0
+
+        parts = x.split('@')
+        self.pagination_token = parts[0]
+        return int(parts[1])
+
+    @property
+    def next_page_token(self):
+        if self.eof:
+            return None
+        return f'{self.pagination_token}@{self.i}'
+
+
+class PythonQueryIterator:
+    """Implements the Python iterator protocol, which is slightly different
+    from the Java (eof/current/advance) iterator protocol.
+    """
+    def __init__(self, iter):
+        self.iter = iter
+
+    def __next__(self):
+        self.iter.advance()
+        if self.iter.eof:
+            raise StopIteration()
+        return self.iter.current
+
+
+class GetManyIterator(QueryIterator):
+    """Iterate over a set of query results, automatically proceeding to the next result page if necessary.
+
+    Wrapper around query_many that automatically paginates.
+    """
+
+    def __init__(self, table, key, reverse=False, limit=None, pagination_token=None):
+        self.table = table
+        self.key = key
+        self.reverse = reverse
+        self.limit = limit
+        super().__init__(pagination_token)
+
+    def _do_fetch(self):
+        return self.table.get_many(self.key, reverse=self.reverse, limit=self.limit, pagination_token=self.pagination_token)

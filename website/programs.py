@@ -85,6 +85,7 @@ class ProgramsModule(WebsiteModule):
     @route("/list", methods=["GET"])
     @requires_login
     def list_programs(self, user):
+        # Filter by level, adventure, submitted, paginated.
         return {"programs": self.db.programs_for_user(user["username"]).records}
 
     @route("/delete/", methods=["POST"])

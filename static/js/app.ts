@@ -132,6 +132,11 @@ export function initializeApp(options: InitializeAppOptions) {
           }
       });
   });
+
+  // All input elements with data-autosubmit="true" automatically submit their enclosing form
+  $('*[data-autosubmit="true"]').on('change', (ev) => {
+    $(ev.target).closest('form').trigger('submit');
+  });
 }
 
 export interface InitializeCodePageOptions {
@@ -1743,17 +1748,6 @@ export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
   $('#image').val(image);
-}
-
-export function filter_user_programs(username: string, own_request?: boolean) {
-  const level = $('#user_program_page_level').val();
-  const adventure = $('#user_program_page_adventure').val();
-  const filter = $('input[name="submitted"]:checked').val();
-  if (own_request) {
-    window.open('?level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
-  } else {
-    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
-  }
 }
 
 export function filter_admin() {

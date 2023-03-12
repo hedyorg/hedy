@@ -15,7 +15,7 @@ from os import path
 
 import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   redirect, request, send_file,
+                   redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -857,23 +857,21 @@ def programs_page(user):
     if not from_user:
         public_profile = DATABASE.get_public_profile_settings(username)
 
-    level = request.args.get('level', default=None, type=str)
-    adventure = request.args.get('adventure', default=None, type=str)
+    level = request.args.get('level', default=None, type=str) or None
+    adventure = request.args.get('adventure', default=None, type=str) or None
+    page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
+    submitted = True if filter == 'submitted' else None
 
-    level = None if level == "null" else level
-    adventure = None if adventure == "null" else adventure
-
-    if level or adventure:
-        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
-    else:
-        result = DATABASE.programs_for_user(from_user or username)
+    result = DATABASE.filtered_programs_for_user(from_user or username,
+                                                 level=level,
+                                                 adventure=adventure,
+                                                 submitted=submitted,
+                                                 pagination_token=page,
+                                                 limit=10)
 
     programs = []
     for item in result:
-        # If we filter on the submitted programs -> skip the onces that are not submitted
-        if filter == "submitted" and not item.get('submitted'):
-            continue
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
@@ -892,6 +890,9 @@ def programs_page(user):
 
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
+    print(result.next_page_token)
+    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)) if result.next_page_token else None
+
     return render_template(
         'programs.html',
         programs=programs,
@@ -900,7 +901,8 @@ def programs_page(user):
         from_user=from_user,
         public_profile=public_profile,
         adventure_names=adventure_names,
-        max_level=hedy.HEDY_MAX_LEVEL)
+        max_level=hedy.HEDY_MAX_LEVEL,
+        next_page_url=next_page_url)
 
 
 @app.route('/logs/query', methods=['POST'])

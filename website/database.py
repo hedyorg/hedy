@@ -154,17 +154,25 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level, adventure):
-        programs = PROGRAMS.get_many({"username": username}, reverse=True)
-        if level:
-            programs = [x for x in programs if x.get("level") == int(level)]
-        if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get("adventure_name") == ""]
-            else:
-                programs = [x for x in programs if x.get("adventure_name") == adventure]
-        return programs
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, limit=None, pagination_token=None):
+        ret = []
+
+        # FIXME: Query by index, the current behavior is slow for many programs
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username}, reverse=True, limit=limit, pagination_token=pagination_token)
+        for program in programs:
+            if level and program.get('level') != int(level): continue
+            if adventure:
+                if adventure == 'default' and program.get('adventure_name') != '': continue
+                if adventure != 'default' and program.get('adventure_name') != adventure: continue
+            if submitted is not None:
+                if program.get('submitted') != submitted: continue
+
+            ret.append(program)
+
+            if len(ret) >= limit:
+                break
+
+        return dynamo.ResultPage(ret, programs.next_page_token)
 
     def public_programs_for_user(self, username):
         # Only return programs that are public but not submitted
