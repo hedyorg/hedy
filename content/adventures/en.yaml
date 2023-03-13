@@ -409,10 +409,10 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                 story_text: |-
-                    ## Elif
+                    ## {elif}
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
                 example_code: |
                     ```
@@ -432,7 +432,7 @@ adventures:
                     {print}('My name is ', name)
                 story_text: |-
                     ## The last level!
-                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
                     It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
                 example_code: |
                     ```
@@ -2213,7 +2213,7 @@ adventures:
             2:
                 story_text: |
                     ## Restaurant
-                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
+                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only `{echo}` the order once and only remember the last thing that was ordered.
                     Now you can use variables and Hedy can remember both the food and the toppings!
                 example_code: |
                     ```
@@ -2580,7 +2580,7 @@ adventures:
                     Then you probably know that they can't really predict your future, but it's still fun to play!
 
                     In the upcoming levels you can learn how to create your own fortune telling machine!
-                    In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.
+                    In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her `{echo}` the players' answers.
                     Like this:
                 example_code: |
                     ```
@@ -2598,7 +2598,7 @@ adventures:
             3:
                 story_text: |
                     ## Fortune Teller
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
+                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only `{echo}`.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |4
 
@@ -3530,11 +3530,11 @@ adventures:
                     ## Tic Tac Toe
                     In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
                     This made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.
-                    To use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
+                    To use the `{elif}` to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
 
                     In the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).
                     You can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.
-                    This means that the {while} loop will be stopped and the game ends.
+                    This means that the `{while}` loop will be stopped and the game ends.
 
                 example_code: |
                     ```
