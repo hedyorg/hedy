@@ -208,10 +208,10 @@ adventures:
                         {print} i
                     {print} 'Bereit oder nicht, ich komme!'
                 story_text: |-
-                    ## sofalls
+                    ## {elif}
                     Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
-                    In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für {else} {if} und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
+                    In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für `{else}` `{if}` und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
                     Probier es mal aus!
                 example_code: |
                     ```
@@ -231,7 +231,7 @@ adventures:
                     {print}('Ich heiße ', name)
                 story_text: |-
                     ## Das letzte Level!
-                    Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen {print} und {range} benutzen müssen.
+                    Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen `{print}` und `{range}` benutzen müssen.
                     Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen.
 
                 story_text_2: |-
@@ -1549,7 +1549,7 @@ adventures:
             2:
                 story_text: |
                     ## Restaurant
-                    In Level 2 konntest du dein Restaurant mit Variablen erweitern. In Level 1 konnte Hedy nur die Bestellung einmal wiedergeben ({echo}) und sich nur das merken, was zuletzt bestellt wurde.
+                    In Level 2 konntest du dein Restaurant mit Variablen erweitern. In Level 1 konnte Hedy nur die Bestellung einmal wiedergeben (mit `{echo}`) und sich nur das merken, was zuletzt bestellt wurde.
                     Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch den Belag merken!
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\n```\n"
@@ -1863,7 +1863,7 @@ adventures:
                     Dann weißt du bestimmt, dass sie nicht wirklich die Zukunft vorhersagen können, aber dass es trotzdem Spaß macht.
 
                     In den nächsten Leveln kannst du lernen, wie du deine eigene Wahrsagemaschine erstellst!
-                    In Level 1 kannst du einfach anfangen, indem du Hedy sich als Wahrsagerin vorstellen lässt und sie die Antwort des Spielers mit {echo} ausgibst.
+                    In Level 1 kannst du einfach anfangen, indem du Hedy sich als Wahrsagerin vorstellen lässt und sie die Antwort des Spielers mit `{echo}` ausgibst.
                     So wie hier:
 
                 example_code: |
@@ -2063,7 +2063,7 @@ adventures:
             3:
                 story_text: |
                     ## Wahrsagerin
-                    Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sonder nur {echo}.
+                    Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sonder nur `{echo}`.
                     In diesem Level kannst du Variablen und den `{at} {random}` Befehl benutzen, um Hedy wirklich eine Antwort für dich auswählen zu lassen. Schau dir zum Beispiel diesen Code an:
 
                 example_code: |4
@@ -2436,7 +2436,7 @@ adventures:
                 example_code: "```\nzeichen = 'x'\noffene_stellen = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus'\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1\n            stelle_1 = zeichen\n        {if} wahl == 2\n            stelle_2 = zeichen\n        {if} wahl == 3\n            stelle_3 = zeichen\n        {if} wahl == 4\n            stelle_4 = zeichen\n        {if} wahl == 5\n            stelle_5 = zeichen\n        {if} wahl == 6\n            stelle_6 = zeichen\n        {if} wahl == 7\n            stelle_7 = zeichen\n        {if} wahl == 8\n            stelle_8 = zeichen\n        {if} wahl == 9\n            stelle_9 = zeichen\n    {else}\n        {print} 'Die Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    gewinner = {ask} 'Hast du gewonnen?'\n    {if} gewinner == 'ja'\n        {print} 'Gut gemacht, Spieler ' zeichen '!'\n        spiel = 'aus'\n    {else}\n        {if} zeichen == 'x'\n            zeichen = 'o'\n        {else}\n            zeichen = 'x'\n```\n"
             17:
                 start_code: '## gib deinen Code hier ein'
-                story_text: "## Tic Tac Toe\nIn den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird.\nDas bedeutet, dass die {while}-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
+                story_text: "## Tic Tac Toe\nIn den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird.\nDas bedeutet, dass die `{while}`-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
                 example_code: "```\nzeichen = 'x'\noffene_stellen = [1, 2, 3, 4, 5, 6, 7, 8, 9]\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus':\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen:\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1:\n            stelle_1 = zeichen\n        {if} wahl == 2:\n            stelle_2 = zeichen\n        {if} wahl == 3:\n            stelle_3 = zeichen\n        {if} wahl == 4:\n            stelle_4 = zeichen\n        {if} wahl == 5:\n            stelle_5 = zeichen\n        {if} wahl == 6:\n            stelle_6 = zeichen\n        {if} wahl == 7:\n            stelle_7 = zeichen\n        {if} wahl == 8:\n            stelle_8 = zeichen\n        {if} wahl == 9:\n            stelle_9 = zeichen\n    {else}:\n        {print} 'Diese Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    {if} stelle_1 == stelle_2 {and} stelle_2 == stelle_3 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_4 == stelle_5 {and} stelle_5 == stelle_6 {and} stelle_4 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_7 == stelle_8 {and} stelle_8 == stelle_9 {and} stelle_7 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_4 {and} stelle_4 == stelle_7 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_2 == stelle_5 {and} stelle_5 == stelle_8 {and} stelle_2 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_6 {and} stelle_6 == stelle_9 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_5 {and} stelle_5 == stelle_9 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_5 {and} stelle_5 == stelle_7 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {else}:\n        {if} zeichen == 'x':\n            zeichen = 'o'\n        {else}:\n            zeichen = 'x'\n```\n"
     blackjack:
         name: Blackjack
