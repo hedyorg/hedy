@@ -164,7 +164,7 @@ levels:
             -   option: "Du kannst es verwenden, um Text verschwinden zu lassen."
                 feedback: "Das ist nicht richtig..."
             correct_answer: "C"
-            hint: "`{echo}` is used after an `{ask}` command."
+            hint: "`{echo}` wird nach einem `{ask}` Befehl benutzt."
             question_score: '10'
         9:
             question_text: "Was ist an diesem Code falsch?"
@@ -246,7 +246,7 @@ levels:
             -   option: "Marleen geht auf den Markt."
                 feedback: "Der zweite Teil des Satzes wird nicht ausgelassen!"
             -   option: "Marleen geht auf den Markt und kauft einen Apfel."
-                feedback: "Right on!"
+                feedback: "Richtig!"
             -   option: "Marleen geht auf den Markt und Marleen kauft einen Apfel."
                 feedback: "Sie wird nicht durch name ersetzt"
             correct_answer: "C"
@@ -255,8 +255,8 @@ levels:
         4:
             question_text: "Was wird auf dem Ausgabebildschirm angezeigt, wenn du diesen Code ausführst?"
             code: |-
-                name {is} Hedy
-                {print} Hi my name is name!
+                Name {is} Hedy
+                {print} Hi mein Name ist Name!
             mp_choice_options:
             -   option: "Hi my name is name"
                 feedback: "Der Variablenname wird durch Hedy ersetzt"
@@ -368,7 +368,7 @@ levels:
                     ```
                     age {is} Wie alt bist du?
                     ```
-                feedback: "Where is the `{ask}` command?"
+                feedback: "Wo ist der `{ask}` Befehl?"
             correct_answer: "C"
             hint: "Der Variablenname sollte an erster Stelle stehen"
             question_score: '10'
@@ -381,7 +381,7 @@ levels:
             -   option: "Zeile 1 sollte lauten: dogs `{is}` animals"
                 feedback: "Der Variablenname ist animal"
             -   option: "Zeile 1 sollte lauten: animal `{is}` dogs"
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: "Zeile 2 sollte lauten: `{print}` I love animals"
                 feedback: "Der Variablenname ist animal"
             -   option: "Zeile 2 sollte lauten: `{sleep}` I love animals"
@@ -465,7 +465,7 @@ levels:
             hint: "In Zeile 1 hat sich ein Fehler eingeschlichen"
             question_score: '10'
         3:
-            question_text: "How do you fix the mistake in line 2 of this code?"
+            question_text: "Wie beseitigt man den Fehler in Zeile 2?"
             code: |-
                 optionen {is} Schere, Stein, Papier
                 {print} Schere, Stein, Papier {at} {random}
@@ -556,10 +556,10 @@ levels:
         7:
             question_text: "Was macht der `{add}` Befehl?"
             code: |-
-                books {is} Harry Potter, The Hobbit, Green Eggs and Ham
-                your_book {is} {ask} What is your favorite book?
-                {add} your_book {to} books
-                {print} books {at} {random}
+                bücher {is} Harry Potter, The Hobbit, Green Eggs and Ham
+                dein_buch {is} {ask} Was ist dein Lieblingsbuch?
+                {add} dein_buch {to} bücher
+                {print} bücher {at} {random}
             mp_choice_options:
             -   option: "Der `{add}` Befehl entfernt ein zufälliges Buch aus der Liste"
                 feedback: "Der entferne-Befehl entfernt, der addiere-Befehl fügt hinzu"
@@ -628,7 +628,7 @@ levels:
                     ```
                     {remove} gestern gegangen {to} gassigeher
                     ```
-                feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
+                feedback: "`{remove} {from}` oder `{add} {to}`, nicht `{remove} {to}`"
             -   option: |
                     ```
                     {remove} gassigeher {from} gestern
@@ -863,7 +863,7 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "What is true?"
+            question_text: "Welcher Befehl sollte in die Lücken _?_?"
             mp_choice_options:
             -   option: "```\n{print}\n```\n"
                 feedback: "Es gibt schon einen `{print}` Befehl."
@@ -872,7 +872,7 @@ levels:
             -   option: "```\n{sleep}\n```\n"
                 feedback: "Das ist es nicht!"
             -   option: "```\n{else}\n```\n"
-                feedback: "Correct!"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
             hint: "Welches passt zum `{if}` Befehl?"
             question_score: '10'
@@ -944,7 +944,7 @@ levels:
             -   option: "Weil es falsch geschrieben ist."
                 feedback: "Das ist nicht wie man geheimnis schreibt"
             -   option: "Weil Hedy Fehler macht"
-                feedback: "No, Hedy is right"
+                feedback: "Nein, Hedy hat recht"
             correct_answer: "A"
             hint: "Die Rechtschreibung des Wortes muss genau gleich sein."
             question_score: '10'
@@ -971,7 +971,7 @@ levels:
                     ```
                     {else}
                     ```
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: |
                     ```
                     {print}
@@ -1111,7 +1111,7 @@ levels:
             -   option: "+"
                 feedback: "Richtig!"
             correct_answer: "D"
-            hint: "It's the plus sign."
+            hint: "Es ist das Pluszeichen."
             question_score: '10'
         3:
             question_text: "Was ist Hedys Ausgabe, wenn du diesen Code ausführst?"
@@ -1162,9 +1162,9 @@ levels:
             -   option: "15 Euro"
                 feedback: "Das * bedeutet Multiplikation."
             -   option: "50 Euro"
-                feedback: "Great!"
+                feedback: "Großartig!"
             correct_answer: "D"
-            hint: "`price` `is` `people` `times` 10"
+            hint: "preis ist leute mal 10"
             question_score: '10'
         6:
             question_text: "Wie viel kostet ein Hamburger in diesem virtuellen Restaurant?"
@@ -1392,7 +1392,7 @@ levels:
             -   option: "We will We will\nROCK YOU!"
                 feedback: "'We will' wird nicht zwei Mal in einer Zeile erscheinen"
             -   option: "We will\nWe will\nROCK YOU!"
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
                 feedback: "ROCK YOU! wird nicht wiederholt"
             -   option: "We will\nROCK YOU!"
@@ -1504,7 +1504,7 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: |
                     ```
                     {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
@@ -2010,7 +2010,7 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "What word should be at the place of the question mark?"
+            question_text: "Welches Wort sollte anstelle des Fragezeichens stehen?"
             code: |-
                 {for} i {in} _?_ 1 {to} 10
                     {print} i
@@ -2019,41 +2019,41 @@ levels:
                     ```
                     counter
                     ```
-                feedback: "No"
+                feedback: "Nein"
             -   option: |
                     ```
                     {range}
                     ```
-                feedback: "Correct"
+                feedback: "Richtig"
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "No"
+                feedback: "Nein"
             -   option: |
                     ```
                     {for}
                     ```
-                feedback: "No"
+                feedback: "Nein"
             correct_answer: "B"
-            hint: "What did you learn in this level?"
+            hint: "Was hast du in diesem Level gelernt?"
             question_score: '10'
         2:
-            question_text: "What will be the output from this code?"
+            question_text: "Was wird die Ausgabe dieses Code sein?"
             code: |-
                 {for} i {in} {range} 1 {to} 3
                     {print} i
             mp_choice_options:
             -   option: "1\n2\n3"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             -   option: "1 2 3"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "1, 2, 3"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             -   option: "123"
-                feedback: "That's not it"
+                feedback: "Das ist es nicht"
             correct_answer: "A"
-            hint: "How do the numbers appear in the screen?"
+            hint: "Wie erscheinen die Zahlen auf dem Bildschirm?"
             question_score: '10'
         3:
             question_text: "Welcher Code wurde benutzt um diese Ausgabe zu bekommen?"
@@ -2071,33 +2071,33 @@ levels:
                         {print} i
                     {print} 'Once I caught a fish alive!'
                     ```
-                feedback: "Perfect"
+                feedback: "Perfekt"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 5
                     {print} i
                     {print} 'Once I caught a fish alive!'
                     ```
-                feedback: "This code won't work. You need an indent after {for}."
+                feedback: "Dieser Code wird nicht funktionieren. Du brauchst Einrückung nach {for}."
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 5
                         {print} i
                         {print} 'Once I caught a fish alive!'
                     ```
-                feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
+                feedback: "Nun wird Hedy 1 Once I caught a fish alive!, 2 Once I caught a fish alive! usw. zählen."
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 5
                         {print} 'i'
                     {print} 'Once I caught a fish alive!'
                     ```
-                feedback: "i is a variable and shouldn't have quotation marks"
+                feedback: "i ist eine Variable und sollte Anführungszeichen haben"
             correct_answer: "A"
-            hint: "First all the numbers, then the sentence"
+            hint: "Erst alle Zahlen und dann den Satz"
             question_score: '10'
         4:
-            question_text: "Which code was used to get this output?"
+            question_text: "Welcher Code wurde benutzt um diese Ausgabe zu erzeugen?"
             output: |-
                 10
                 9
@@ -2116,44 +2116,44 @@ levels:
                     {for} i {in} {range} 0 {to} 10
                         {print} i
                     ```
-                feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
+                feedback: "Jetzt gibt Hedy die Zahlen 0 bis 10 aus anstelle von 10 bis 0."
             -   option: |
                     ```
                     {for} i {in} {range} 0 to 10
                         {print} - i
                     ```
-                feedback: "Hedy would print negative numbers in this case."
+                feedback: "Hedy würde in diesem Fall negative Zahlen ausgeben."
             -   option: |
                     ```
                     {for} i {in} {range} 10 to 0
                         {print} 10 9 8 7 6 5 4 3 2 1 0
                     ```
-                feedback: "Unfortunately this does not exist."
+                feedback: "Leider existiert dies nicht."
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 10
                         {print} 10 - i
                     ```
-                feedback: "That's right!"
+                feedback: "Das ist richtig!"
             correct_answer: "D"
-            hint: "It has to be a calculation..."
+            hint: "Es muss eine Berechnung sein..."
             question_score: '10'
         5:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {for} i {in} {range} 1 {to} 10
                 {print} i
             mp_choice_options:
             -   option: "The i in the last line need quotation marks"
-                feedback: "No it doesn't."
+                feedback: "Nein, tut es nicht."
             -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
-                feedback: "You could use 1 to 5 just as well!"
+                feedback: "Du könntest genauso gut 1 bis 5 verwenden!"
             -   option: "Line 1 needs to start with an indention."
-                feedback: "Not line 1..."
+                feedback: "Nicht Zeile 1..."
             -   option: "Line 2 needs to start with an indention"
-                feedback: "Perfect!"
+                feedback: "Perfekt!"
             correct_answer: "D"
-            hint: "There is something wrong with the indention"
+            hint: "Da stimmt etwas mit der Einrückung nicht"
             question_score: '10'
         6:
             question_text: "Wie oft erscheint das Wort Hallo in der Ausgabe, wenn du den Code ausführst?"
@@ -2162,13 +2162,13 @@ levels:
                     {print} 'Hallo'
             mp_choice_options:
             -   option: "1 Mal"
-                feedback: "No"
+                feedback: "Nein"
             -   option: "2 Mal"
-                feedback: "No"
+                feedback: "Nein"
             -   option: "3 Mal"
                 feedback: "Das ist richtig!"
             -   option: "Nie"
-                feedback: "No"
+                feedback: "Nein"
             correct_answer: "C"
             hint: "0 zählt auch. Also 0,1,2 ist 3 Mal."
             question_score: '10'
@@ -2195,7 +2195,7 @@ levels:
                     ```
                     {for} i {in} {range} 1 {to} people
                     ```
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} people
@@ -2326,7 +2326,7 @@ levels:
                     Ich liebe Pizza
                     Ich liebe Pasta
                     Ich liebe Eierkuchen
-                feedback: "Great!"
+                feedback: "Großartig!"
             correct_answer: "D"
             hint: "Zeile 2 sagt für jede mahlzeit in der Liste der mahlzeiten. Also wird jede mahlzeit ausgegeben."
             question_score: '10'
@@ -2346,7 +2346,7 @@ levels:
                     Katzen sind schöne Haustiere
                     Hamster sind schöne Haustiere
                     Hühner sind schöne Haustiere
-                feedback: "Great!"
+                feedback: "Großartig!"
             -   option: "Das weißt du noch nicht. Weil es eines der Tiere {at} {random} auswählt."
                 feedback: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ge{print}t."
             correct_answer: "C"
