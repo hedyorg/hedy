@@ -10,11 +10,16 @@
             </div>
             {# image for large screens #}
             <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
-                <div id="logo-code-overlay" class="absolute z-10 text-4xl h-full flex gap-4 items-center justify-center translate-y-6" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
-                    <span style="color: #ff6188;">{{_('print')}}</span>
-                    <span class="text-white">{{_('hello!')}}</span>
-                </div>
-                <img class="absolute drop-shadow-lg" src="images/hero-graphic-empty.png" style="max-width: 600px; bottom: -170px;">
+                {% if no-image %}
+                    <div id="logo-code-overlay" class="absolute z-10 text-4xl h-full flex gap-4 items-center justify-center translate-y-6" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
+                        <span style="color: #ff6188;">{{_('print')}}</span>
+                        <span class="text-white">{{_('hello!')}}</span>
+                    </div>
+                    <img class="absolute drop-shadow-lg" src="images/hero-graphic-empty.png" style="max-width: 600px; bottom: -170px;">
+                {% else %}
+                   <img class="absolute drop-shadow-lg" src="images/hero-graphic-{{ g.lang }}.png" style="max-width: 600px; bottom: -170px;">
+                {% endif %}
+
             </div>
             {# image for small screens #}
             <div class="md:hidden flex-none">
