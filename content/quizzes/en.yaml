@@ -199,11 +199,11 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "You can use the {print} command to ask questions."
+            -   option: "You can use the `{print}` command to ask questions."
                 feedback: "That is what ask is for"
-            -   option: "You can use the {ask} command to echo answers."
+            -   option: "You can use the `{ask}` command to echo answers."
                 feedback: "That is not true"
-            -   option: "With the {print} command you can make text appear"
+            -   option: "With the `{print}` command you can make text appear"
                 feedback: "Good"
             -   option: "With the {sleep} command, you can remove text from the screen."
                 feedback: "That's not how `{sleep}` works."
@@ -701,7 +701,7 @@ levels:
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "The first quotation mark should be behind the word `{print}`"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
@@ -734,7 +734,7 @@ levels:
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "Never put the quotation mark in front of the `{print}` command."
             -   option: |
                     ```
                     {print} 'options' {at} {random}
