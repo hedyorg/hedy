@@ -315,6 +315,7 @@ class TestsLevel11(HedyTester):
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -323,9 +324,12 @@ class TestsLevel11(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 'p':
+                  pygame_end = True
               if event.unicode == 'p':
                 print(f'press')
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.single_level_tester(

@@ -29,7 +29,7 @@
                       {{ example.explanation|commonmark }}
                     </div>
                     <div class="flex-none">
-                      <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}" onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
+                      <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}" onclick='hedyApp.tryPaletteCode({{example.demo_code|default(None)|tojson}});'>
                         <span class="rtl:hidden">⇥</span>
                         <span class="ltr:hidden">⇤</span>
                       </button>

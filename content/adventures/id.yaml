@@ -58,6 +58,7 @@ adventures:
                     Kebanyakan bahasa pemrograman juga menggunakan tanda kutip ketika menampilkan, jadi sebenarnya kita satu langkah lebih dekat dengan pemrograman yang sebenarnya!
                 example_code: "```\n{print}'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Petualangan semakin luas dan semakin sulit\nPetualangan sekarang semakin luas dan semakin sulit di tab yang berurutan.\nJadi yang terbaik adalah memulai dari kiri dan bekerja ke kanan, agar semakin tertantang.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nama is ask 'siapa nama kamu?'
@@ -844,12 +845,6 @@ adventures:
                     Pada level 3 kita dapat membuat kalimat-kalimat dengan nilai dadu didalamnya, menggunakan tanda kutip satu tentunya.
                     Kali ini kode contoh belum sempurna. Dapatkah kamu menyempurnakannya?
 
-                example_code: |
-                    ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    print _ you threw _
-                    print _ _ _ <- disini kamu harus memprogram pilihannya
-                    ```
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             3:
                 story_text: |-
@@ -931,11 +926,6 @@ adventures:
                     Pada level 3 kamu bisa memprogram permainan batu gunting kertas dengan lebih komprehensif. Tapi jika kamu mau menambahkan teks, kamu harus menggunakan tanda kutip satu disini.
                     Apakah kamu bisa melengkapi kode berikut dengan memasukkan perintah atau karakter yang benar sebagai pengganti garis bawah?
 
-                example_code: |
-                    ```
-                    pilihan is batu, gunting, kertas
-                    print _ Komputer memilih: _ _ at _
-                    ```
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             3:
                 story_text: |-
@@ -1292,9 +1282,7 @@ adventures:
                 start_code: '# place your code here'
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"

@@ -981,6 +981,28 @@ class UsesTurtle(Transformer):
 
 
 class UsesPyGame(Transformer):
+    command_prefix = (f"""\
+pygame_end = False
+while not pygame_end:
+  pygame.display.update()
+  event = pygame.event.wait()
+  if event.type == pygame.QUIT:
+    pygame_end = True
+    pygame.quit()
+    break""")
+
+    regex_string_subsequent_use = (
+        r"\s*# End of PyGame Event Handler"
+        r"\s*pygame_end = False"
+        r"\s*while not pygame_end:"
+        r"\s*pygame.display.update\(\)"
+        r"\s*event = pygame.event.wait\(\)"
+        r"\s*if event.type == pygame.QUIT:"
+        r"\s*pygame_end = True"
+        r"\s*pygame.quit\(\)"
+        r"\s*break"
+    )
+
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
@@ -995,6 +1017,9 @@ class UsesPyGame(Transformer):
 
     def assign_button(self, args):
         return True
+
+    def post_process_code(self, code):
+        return re.sub(self.regex_string_subsequent_use, '', code)
 
 
 class AllCommands(Transformer):
@@ -1172,6 +1197,13 @@ class IsValid(Filter):
         return False, error, meta
     # other rules are inherited from Filter
 
+    # flat if no longer allowed in level 8 and up
+    def error_ifelse(self, meta, args):
+        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    # other rules are inherited from Filter
+
 
 def valid_echo(ast):
     commands = ast.children
@@ -1334,7 +1366,9 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return len(s) > 1 and ((s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"'))
+        opening_quotes = ['‘', "'", '"', "“"]
+        closing_quotes = ['’', "'", '"', "”"]
+        return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
@@ -1729,7 +1763,6 @@ except NameError:
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
-        self.ifpressed_prefix_added = False
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -1770,29 +1803,18 @@ else:
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, command, button=False):
-        command_suffix = (f"""\
-while not pygame_end:
-  pygame.display.update()
-  event = pygame.event.wait()
-  if event.type == pygame.QUIT:
-    pygame_end = True
-    pygame.quit()
-    break""")
-
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+    # End of PyGame Event Handler"""
         else:
             command = f"""\
   if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+    # End of PyGame Event Handler"""
 
-        if self.ifpressed_prefix_added:
-            return command
-        else:
-            self.ifpressed_prefix_added = True
-            return command_suffix + "\n" + command
+        return UsesPyGame.command_prefix + "\n" + command
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
@@ -1800,16 +1822,22 @@ while not pygame_end:
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
         if self.is_variable(var_or_button):
             return self.make_ifpressed_command(f"""\
+if event.unicode != {args[0]}:
+    pygame_end = True
 if event.unicode == {args[0]}:
 {ConvertToPython.indent(args[1])}
   break""", False)
         elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
+if event.key != {button_name}:
+    pygame_end = True
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
   break""", True)
         else:
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
   break""")
@@ -1822,8 +1850,7 @@ if event.key == {var_or_button}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}
-  break""", False)
+{ConvertToPython.indent(args[2])}""", False)
         elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
@@ -1831,16 +1858,14 @@ if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}
-  break""", True)
+{ConvertToPython.indent(args[2])}""", True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}
-  break""")
+{ConvertToPython.indent(args[2])}""")
 
 
 @v_args(meta=True)
@@ -1960,7 +1985,6 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"""for {var_name} in range(int({str(times)})):
 {ConvertToPython.indent(command)}"""
 
@@ -1985,7 +2009,6 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after repeat
         return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, meta, args):
@@ -2001,17 +2024,23 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # if this is a variable, we assume it is a key (for now)
         if self.is_variable(var_or_key):
             return self.make_ifpressed_command(f"""\
+if event.unicode != {args[0]}:
+    pygame_end = True
 if event.unicode == {args[0]}:
 {all_lines}
   break""")
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
+if event.unicode != '{args[0]}':
+    pygame_end = True
 if event.unicode == '{args[0]}':
 {all_lines}
   break""")
         else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
+if event.key != {button_name}:
+    pygame_end = True
 if event.key == {button_name}:
 {all_lines}
   break""", True)
@@ -2044,7 +2073,6 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        args += ["  break\n"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
@@ -2074,7 +2102,6 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-        self.ifpressed_prefix_added = False
         return f"for {times} in {args[1]}:\n{body}"
 
 
@@ -2089,7 +2116,6 @@ class ConvertToPython_11(ConvertToPython_10):
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after for loop
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
@@ -2274,7 +2300,6 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
         body = sleep_after(body)
         exceptions = self.make_catch_exception([args[0]])
-        self.ifpressed_prefix_added = False  # add ifpressed prefix again after while loop
         return exceptions + "while " + args[0] + ":\n" + body
 
 
@@ -2529,10 +2554,10 @@ def transpile(input_string, level, lang="en"):
 def translate_characters(s):
     # this method is used to make it more clear to kids what is meant in error messages
     # for example ' ' is hard to read, space is easier
-    # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
+    commas = [',', "،", "，", "、"]
     if s == ' ':
         return 'space'
-    elif s == ',':
+    elif s in commas:
         return 'comma'
     elif s == '?':
         return 'question mark'
@@ -2698,8 +2723,9 @@ def preprocess_ifs(code, lang='en'):
 
     def starts_with_after_repeat(command, line):
         elements_in_line = line.split()
-        repeat_plus_translated = ['repeat', KEYWORDS[lang].get('repeat')]
-        times_plus_translated = ['times', KEYWORDS[lang].get('times')]
+        keywords_in_lang = KEYWORDS.get(lang, KEYWORDS['en'])
+        repeat_plus_translated = ['repeat', keywords_in_lang.get('repeat')]
+        times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
@@ -2870,6 +2896,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'flat if':
+            raise exceptions.WrongLevelException(offending_keyword='if', working_level=7, tip='no_more_flat_if')
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:
@@ -2961,8 +2989,15 @@ def transpile_inner(input_string, level, lang="en"):
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
-        has_turtle = UsesTurtle().transform(abstract_syntax_tree)
-        has_pygame = UsesPyGame().transform(abstract_syntax_tree)
+        uses_turtle = UsesTurtle()
+        has_turtle = uses_turtle.transform(abstract_syntax_tree)
+
+        uses_pygame = UsesPyGame()
+        has_pygame = uses_pygame.transform(abstract_syntax_tree)
+
+        if has_pygame:
+            python = uses_pygame.post_process_code(python)
+
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

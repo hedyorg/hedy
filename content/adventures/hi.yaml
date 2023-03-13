@@ -89,9 +89,10 @@ adventures:
                     इसलिए कहानी के साथ बाईं ओर शुरू करना और दाईं ओर काम करना सबसे अच्छा है, ताकि अधिक से अधिक चुनौती दी जा सके।
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## रोमांच अधिक कठिन होता जा रहा है\nक्रमिक टैब में रोमांच अब और अधिक कठिन होता जा रहा है।\nइसलिए अधिक से अधिक चुनौतियों का सामना करने के लिए, बाईं ओर से शुरू करना और दाईं ओर काम करना सबसे अच्छा है।\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
-                    नाम {is} {ask} आपका नाम क्या है?
+                    नाम {is} {ask} 'आपका नाम क्या है?'
                     {if} नाम {is} हेडी {print} 'कूल!' {else} {print} 'मेह'
                 story_text: |-
                     `{ask}` {and} `{print}` अभी भी वैसे ही काम करते हैं जैसे उन्होंने स्तर 4 में किया था।
@@ -944,12 +945,6 @@ adventures:
                     ## Dice
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _ you threw _
-                    {print} _ _ _ <- here you have to program the choice
-                    ```
                 start_code: "{print} 'What will the die indicate this time?'"
             3:
                 story_text: |
@@ -1112,11 +1107,6 @@ adventures:
                     ## Rock, paper, scissors
                     In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chose: _ _ {at} _
-                    ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
                 story_text: |
@@ -1640,15 +1630,6 @@ adventures:
                         {print} 'Thats our discount menu'
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
-                    ```
-                story_text_2: |
-                    We use `{or}` to see {if} one our of two things is the case.
-
-                example_code_2: |
-                    ```
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
-                        {print} 'Thats a healthy choice'
                     ```
                 start_code: "# place your code here"
             15:

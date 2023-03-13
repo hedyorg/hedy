@@ -51,6 +51,7 @@ adventures:
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
                 story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nombre {is} {ask} '¿Cómo te llamas?'
@@ -173,7 +174,7 @@ adventures:
                 example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
-                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo. "
+                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
                 story_text_2: Si quieres mostrar por pantalla mas de un elemento, debes separarlos con comas.
                 example_code_2: "```\ntemperatura = 25\n{print}('Hace ', temperatura, ' grados afuera')\n```\n"
                 story_text_3: "## Input\nEl último cambio que necesitaremos para escribir en Python es cambiar `{ask}` por `{input}`."
@@ -263,7 +264,7 @@ adventures:
                     nombre {is} {ask} '¿Quién camina por el bosque?'
                     {print} nombre ' camina por el bosque'
                     {print} nombre ' encuentra un monstruo'
-                    fín {is} {ask} ¿Quieres un final bueno o malo?
+                    fín {is} {ask} '¿Quieres un final bueno o malo?'
                     {if} final {is} bueno {print} nombre ' coge la espada y el monstruo huye rápidamente'
                     {else} {print} 'El monstruo se come' nombre
                     ```
@@ -737,7 +738,6 @@ adventures:
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
                     ¿Puedes escribir el programa, reemplazando los guiones bajos?
                 start_code: "{print} '¿Qué salió esta vez?'"
-                example_code: "```\nopciones {is} 1, 2, 3, 4, 5, gusanito\n{print} 'has tirado un ' _\n{print} _ _ _ <- agregar código aquí\n```\n"
             3:
                 story_text: |
                     ## Dados
@@ -782,7 +782,7 @@ adventures:
                     {echo} has elegido:
                     ```
 
-                start_code: "{print} ¡Bienvenide a tu propio piedra, papel o tijera!"
+                start_code: "{print} ¡Bienvenide a tu propio piedra, papel o tijera!\n{ask} ?Que escoges?\n"
                 story_text_2: "## Desafío\nEn lugar de usar palabras, puedes también usar emojis: ✊✋✌\n¿Puedes hacer el código usando emojis?\n"
                 example_code_2: "```\n{print} ¿Qué escoges?\n{ask} escoge _\n{echo} tu elección fue\n```\n"
             5:
@@ -812,11 +812,6 @@ adventures:
                     ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si ({if}) quieres imprimir texto, debes usar comillas.
                     ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
-                example_code: |
-                    ```
-                    opciones {is} piedra, papel, tijera
-                    {print} _ La computadora ha elegido: _ _ {at} _
-                    ```
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:
                 story_text: |
@@ -1045,8 +1040,6 @@ adventures:
             13:
                 story_text: "## Restaurante\nEn este nivel podemos usar los nuevos comandos para mejorar nuestro restaurantes.\nUsamos `{and}` para ver {if} si dos cosas son verdaderas.\n"
                 example_code: "```\nprecio = 10\ncomida = {ask} '¿Qué te gustaría comer?'\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} comida {is} 'sandwich' {and} bebidas {is} 'jugo'\n    {print} 'Ese es nuestro menú de descuento'\n    precio = precio - 3\n{print} 'Eso sería ' precio ' dólares'\n```\n"
-                example_code_2: "```\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} bebidas {is} 'agua' {or} bebidas {is} 'jugo'\n    {print} 'Esa es una opción saludable'\n```\n"
-                story_text_2: "Usamos `{or}` para ver si una de dos cosas son verdaderas.\n"
                 start_code: '# pon tú código aquí'
     fortune:
         name: "El adivino"
@@ -1322,7 +1315,7 @@ adventures:
                 start_code: '# coloque aquí su código'
                 story_text: "## ¡Presiónelo!\n¡En la introducción también se le informó acerca de la nueva palabra clave `{pressed}`! Usando `{pressed}`\npuede hacer que la codificación sea mucho más interactiva, ¡y puede tener control en vivo de lo que se ejecuta!\nEn los próximos niveles, aprenderá cómo `{pressed}` lo hace posible y qué utiliza `{pressed}`.\nposee.\nAdemás de imprimir texto, hay toda una variedad de usos para `{pressed}`\nPor ejemplo, ¡también puede vincular los comandos de tortuga a las teclas! ¡Intentalo!\n"
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-        name: ¡Presiónalo!
+        name: Presiónalo
         description: ¡Intenta vincular una tecla del teclado a un comando!
         default_save_name: Presione
     years:

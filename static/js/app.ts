@@ -1,13 +1,17 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
-
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
 import JSZip from "jszip";
-import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
-import { currentTab } from './tabs';
+import { hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './browser-helpers/unsaved-changes';
+import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
+import { Adventure, Program } from './types';
+import { startIntroTutorial } from './tutorials/tutorial';
+import { loadParsonsExercise } from './parsons';
+import { onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
+import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
@@ -24,6 +28,13 @@ let pygameRunning = false;
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
+
+// Many bits of code all over this file need this information globally.
+// Not great but it'll do for now until we refactor this file some more.
+let theAdventures: Record<string, Adventure> = {};
+let theLevel: number = 0;
+let theLanguage: string = '';
+let currentTab: string;
 
 const pygame_suffix =
 `# coding=utf8
@@ -92,15 +103,202 @@ const slides_template = `
 </html>
 `;
 
+export interface InitializeAppOptions {
+  readonly level: number;
+  readonly keywordLanguage: string;
+}
 
-export function initializeApp() {
-  initializeSyntaxHighlighter();
+/**
+ * Initialize "global" parts of the main app
+ */
+export function initializeApp(options: InitializeAppOptions) {
+  theLevel = options.level;
+  initializeSyntaxHighlighter({
+    keywordLanguage: options.keywordLanguage,
+  });
+  initializeHighlightedCodeBlocks(options.keywordLanguage);
 
+  // Close the dropdown menu if the user clicks outside of it
+  $(document).on("click", function(event){
+      if(!$(event.target).closest(".dropdown").length){
+          $(".dropdown-menu").slideUp("medium");
+          $(".cheatsheet-menu").slideUp("medium");
+      }
+  });
+}
+
+export interface InitializeCodePageOptions {
+  readonly page: 'code';
+  readonly level: number;
+  readonly lang: string;
+  readonly adventures?: Adventure[];
+  readonly loaded_program?: Program;
+  readonly start_tutorial?: boolean;
+}
+
+/**
+ * Initialize the actual code page
+ */
+export function initializeCodePage(options: InitializeCodePageOptions) {
   // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("body").attr("dir");
+  theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
+
+  // theLevel will already have been set during initializeApp
+  if (theLevel != options.level) {
+    throw new Error(`initializeApp set level to ${JSON.stringify(theLevel)} but initializeCodePage sets it to ${JSON.stringify(options.level)}`);
+  }
+  theLanguage = options.lang;
+
+  // Set the loaded program (directly requested by link with id) into the dictionary of adventures.
+  // We will automatically switch to the tab of the loaded program and load it in response to the tab
+  // switch. Seems a bit double to have 'loaded_program' twice but I don't quite understand how this
+  // is all supposed to work.
+  if (options.loaded_program?.adventure_name && theAdventures[options.loaded_program?.adventure_name]) {
+    theAdventures[options.loaded_program?.adventure_name].loaded_program = options.loaded_program;
+  }
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
+
+  const tabs = new Tabs({
+    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+    // We click on `level` to load a program associated with level, if any.
+    initialTab: options.loaded_program?.adventure_name,
+  });
+
+  tabs.on('beforeSwitch', (ev) => {
+    // If there are unsaved changes, we warn the user before changing tabs.
+    if (hasUnsavedChanges()) {
+      modal.confirm(ClientMessages['Unsaved_Changes'], ev.deferEvent());
+    }
+  });
+
+  tabs.on('afterSwitch', (ev) => {
+    reconfigurePageBasedOnTab(ev.newTab);
+  });
+
+  initializeSpeech();
+
+  if (options.start_tutorial) {
+    startIntroTutorial();
+  }
+
+}
+
+export interface InitializeViewProgramPageOptions {
+  readonly page: 'view-program';
+  readonly level: number;
+  readonly lang: string;
+}
+
+export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
+  theLevel = options.level;
+  theLanguage = options.lang;
+
+  // We need to enable the main editor for the program page as well
+  initializeMainEditor($('#editor'));
+}
+
+/**
+ * Initialize the main editor and attach all the required event handlers
+ */
+function initializeMainEditor($editor: JQuery) {
+  if (!$editor.length) return;
+
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
+  theGlobalEditor = editor;
+  theGlobalEditor.setShowPrintMargin(false);
+  theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
+  error.setEditor(editor);
+  markers = new Markers(theGlobalEditor);
+
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const levelKey = $editor.data('lskey');
+    const loadedProgram = $editor.data('loaded-program');
+
+    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+    const programFromStorage = storage.getItem(levelKey);
+    if (loadedProgram !== 'True' && programFromStorage) {
+      editor.setValue(programFromStorage?.trim(), 1);
+    }
+
+    // When the user exits the editor, save what we have.
+    editor.on('blur', function(_e: Event) {
+      storage.setItem(levelKey, editor.getValue());
+    });
+
+    if ($("body").attr("dir") === "rtl") {
+        editor.setOptions({ rtl: true });
+    }
+
+    // If prompt is shown and user enters text in the editor, hide the prompt.
+    editor.on('change', function () {
+      if (askPromptOpen) {
+        stopit();
+        editor.focus(); // Make sure the editor has focus, so we can continue typing
+      }
+      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+      askPromptOpen = false;
+      $ ('#runit').css('background-color', '');
+      markUnsavedChanges();
+
+      clearErrors(editor);
+      //removing the debugging state when loading in the editor
+      stopDebug();
+    });
+  }
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed: boolean | undefined;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      if (!theLevel || !theLanguage) {
+        throw new Error('Oh no');
+      }
+      runit (theLevel, theLanguage, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+
+  // *** Debugger ***
+  initializeDebugger({
+    editor: theGlobalEditor,
+    markers,
+    level: theLevel,
+    language: theLanguage,
+  });
+
+  return editor;
+}
+
+function initializeHighlightedCodeBlocks(keywordLanguage: string) {
+  const dir = $("body").attr("dir");
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
@@ -108,7 +306,7 @@ export function initializeApp() {
     $(preview)
       .addClass('text-lg rounded overflow-x-hidden')
       // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-      .attr('lang', APP_STATE.keyword_language);
+      .attr('lang', keywordLanguage);
 
     // Only turn into an editor if the editor scrolls into view
     // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
@@ -164,104 +362,6 @@ export function initializeApp() {
       }
     });
   }
-
-  /**
-   * Initialize the main editor and attach all the required event handlers
-   */
-  function initializeMainEditor($editor: JQuery) {
-    if (!$editor.length) return;
-
-    // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
-    theGlobalEditor = editor;
-    theGlobalEditor.setShowPrintMargin(false);
-    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
-    error.setEditor(editor);
-    markers = new Markers(theGlobalEditor);
-
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // Load existing code from session, if it exists
-    const storage = window.sessionStorage;
-    if (storage) {
-      const levelKey = $editor.data('lskey');
-      const loadedProgram = $editor.data('loaded-program');
-
-      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-      const programFromStorage = storage.getItem(levelKey);
-      if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue(programFromStorage, 1);
-      }
-
-      // When the user exits the editor, save what we have.
-      editor.on('blur', function(_e: Event) {
-        storage.setItem(levelKey, editor.getValue());
-      });
-
-      if (dir === "rtl") {
-         editor.setOptions({ rtl: true });
-      }
-
-      // If prompt is shown and user enters text in the editor, hide the prompt.
-      editor.on('change', function () {
-        if (askPromptOpen) {
-          stopit();
-          editor.focus(); // Make sure the editor has focus, so we can continue typing
-        }
-        if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-        askPromptOpen = false;
-        $ ('#runit').css('background-color', '');
-        markUnsavedChanges();
-
-        clearErrors(editor);
-        //removing the debugging state when loading in the editor
-        stopDebug();
-      });
-    }
-
-    // *** KEYBOARD SHORTCUTS ***
-
-    let altPressed: boolean | undefined;
-
-    // alt is 18, enter is 13
-    window.addEventListener ('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!APP_STATE.level || !APP_STATE.lang) {
-          throw new Error('Oh no');
-        }
-        runit (APP_STATE.level, APP_STATE.lang, "", function () {
-          $ ('#output').focus ();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-        editor.focus ();
-        editor.navigateFileEnd ();
-      }
-    });
-    window.addEventListener ('keyup', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-    return editor;
-  }
-
-
-  // Close the dropdown menu if the user clicks outside of it
-  $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
-      }
-  });
 }
 
 export function getHighlighter(level: number) {
@@ -384,7 +484,7 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
         lang: lang,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: currentTab(),
+        adventure_name: currentTab,
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -435,9 +535,9 @@ export function saveMachineFiles() {
     type: 'POST',
     url: '/generate_machine_files',
     data: JSON.stringify({
-      level: APP_STATE.level,
+      level: theLevel,
       code: get_active_and_trimmed_code(),
-      lang: APP_STATE.lang,
+      lang: theLanguage,
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -577,7 +677,7 @@ export function tryPaletteCode(exampleCode: string) {
 
 function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   clearUnsavedChanges();
-  var adventure_name = currentTab();
+  var adventure_name = currentTab;
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
   if (Array.isArray(level)) {
      adventure_name = level [1];
@@ -622,11 +722,11 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
     // The name of the program might have been changed by the server, so we use the name stated by the server.
     $ ('#program_name').val (response.name);
-    APP_STATE.adventures?.map (function (adventure) {
-      if (adventure.short_name === (adventure_name || 'level')) {
-        adventure.loaded_program = {name: response.name, code: code};
-      }
-    });
+
+    const adv = theAdventures[adventure_name || 'level'];
+    if (adv) {
+      adv.loaded_program = {name: response.name, code: code};
+    }
   }).fail(function(err) {
     console.error(err);
     error.show(ClientMessages['Connection_error'], JSON.stringify(err));
@@ -661,7 +761,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       if (err.status == 403) { // The user is not allowed -> so not logged in
         return modal.confirm (err.responseText, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-           const curTab = currentTab();
+           const curTab = currentTab;
            if (curTab && !Array.isArray(level)) {
              level = [level, curTab];
            }
@@ -1067,7 +1167,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      const level = Number(APP_STATE.level) || 0;
+      const level = theLevel;
       if (hasTurtle || hasPygame) {
         // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
         return (6000000);
@@ -1356,9 +1456,14 @@ function speak(text: string) {
   pushAchievement("make_some_noise");
 }
 
-(() => {
-  if (!window.speechSynthesis) { return; /* No point in even trying */ }
-  if (!APP_STATE.lang) { return; /* Not on a code page */ }
+function initializeSpeech() {
+  // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
+  // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
+  // successfully.
+  const isBeingTested = !!(window as any).Cypress;
+
+  if (!window.speechSynthesis && !isBeingTested) { return; /* No point in even trying */ }
+  if (!theLanguage) { return; /* Not on a code page */ }
 
   /**
    * Show the "speak" checkbox if we find that we have speech support for the
@@ -1373,9 +1478,9 @@ function speak(text: string) {
   const timer = setInterval(function() {
     attempts += 1;
 
-    const voices = findVoices(APP_STATE.lang ?? '');
+    const voices = findVoices(theLanguage);
 
-    if (voices.length > 0) {
+    if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
         $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
@@ -1400,7 +1505,7 @@ function speak(text: string) {
     if (!window.speechSynthesis) { return []; }
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
-})();
+}
 
 /**
  * Used on the editor page when clicking leave button
@@ -1429,112 +1534,12 @@ export function showVariableView() {
   }
 }
 
-//Feature flag for variable and values view
-var variable_view = false;
-
-if(APP_STATE.level != null){
-  let level = Number(APP_STATE.level);
-  variable_view = level >= 2;
-  hide_if_no_variables();
-}
-
-function hide_if_no_variables(){
-  if($('#variables #variable-list li').length == 0){
-    $('#variable_button').hide();
-  }
-  else{
-    $('#variable_button').show();
-  }
-}
-
-//Hides the HTML DIV for variables if feature flag is false
-if (!variable_view) {
-  $('#variables').hide();
-  $('#variable_button').hide();
-}
-
-//Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
-var step_debugger = false;
-if(APP_STATE.level != null){
-  let level = Number(APP_STATE.level);
-  step_debugger = level <= 7;
-}
-
-//Hides the debug button if feature flag is false
-if (!step_debugger) {
-  $('#debug_button').hide();
-}
-
-export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
-  }
-}
-
-export function load_variables(variables: any) {
-  if (variable_view === true) {
-    variables = clean_variables(variables);
-    const variableList = $('#variable-list');
-    variableList.empty();
-    for (const i in variables) {
-      // Only append if the variable contains any data (and is not undefined)
-      if (variables[i][1]) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
-      }
-    }
-    hide_if_no_variables();
-  }
-}
-
-// Color-coding string, numbers, booleans and lists
-// This will be cool to use in the future!
-// Just change the colors to use it
-function special_style_for_variable(variable: Variable) {
-  let result = '';
-  let parsedVariable = parseInt(variable.v as string);
-  if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
-   }
-   if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
-   }
-   if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
-   }
-   if (variable.tp$name == 'list'){
-    result =  "#ffffff";
-   }
-   return result;
-}
-
-//hiding certain variables from the list unwanted for users
-function clean_variables(variables: Record<string, Variable>) {
-  const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let name = unfixReserved(variable);
-      let newTuple = [name, variables[variable].v, extraStyle];
-      new_variables.push(newTuple);
-    }
-  }
-  return new_variables;
-}
-
-function unfixReserved(name: string) {
-  return name.replace(/_\$rw\$$/, "");
-}
-
 function store_parsons_attempt(order: Array<string>, correct: boolean) {
   $.ajax({
     type: 'POST',
     url: '/store_parsons_order',
     data: JSON.stringify({
-      level: APP_STATE.level,
+      level: theLevel,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
@@ -1597,24 +1602,7 @@ export function get_active_and_trimmed_code() {
     console.error(e);
   }
 
-  // ignore the lines with a breakpoint in it.
-  const breakpoints = getBreakpoints(editor);
-  let code = theGlobalEditor.getValue();
-  const storage = window.localStorage;
-  const debugLines = storage.getItem('debugLine');
-
-  if (code) {
-    let lines = code.split('\n');
-    if(debugLines != null){
-      lines = lines.slice(0, parseInt(debugLines) + 1);
-    }
-    for (let i = 0; i < lines.length; i++) {
-      if (breakpoints[i] == BP_DISABLED_LINE) {
-        lines[i] = '';
-      }
-    }
-    code = lines.join('\n');
-  }
+  const code = returnLinesWithoutBreakpoints(theGlobalEditor);
 
   return code;
 }
@@ -1697,6 +1685,9 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
       showPrintMargin: false,
       highlightActiveLine: false
     });
+    // A bit of margin looks better
+    editor.renderer.setScrollMargin(3, 3, 10, 20)
+
     // When it is the main editor -> we want to show line numbers!
     if (isMainEditor) {
       editor.setOptions({
@@ -1707,8 +1698,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
 
   // Everything turns into 'ace/mode/levelX', except what's in
   // this table. Yes the numbers are strings. That's just JavaScript for you.
-  if (APP_STATE.level) {
-    const mode = getHighlighter(APP_STATE.level);
+  if (theLevel) {
+    const mode = getHighlighter(theLevel);
     editor.session.setMode(mode);
   }
 
@@ -1762,7 +1753,7 @@ function initializeModalEditor($editor: JQuery) {
       return;
     }
     if (keyCode === 13 && altPressed) {
-      runit (APP_STATE.level, APP_STATE.lang, "", function () {
+      runit (theLevel, theLanguage, "", function () {
         $ ('#output').focus ();
       });
     }
@@ -1858,7 +1849,7 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
       code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
-      level: APP_STATE.level
+      level: theLevel,
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -1931,205 +1922,6 @@ export function filter_admin() {
   window.open('?' + queryString, '_self');
 }
 
-/**
- * Add types for the gutter event
- */
-interface GutterMouseDownEvent {
-  readonly domEvent: MouseEvent;
-  readonly clientX: number;
-  readonly clientY: number;
-  readonly editor: AceAjax.Editor;
-
-  getDocumentPosition(): AceAjax.Position;
-  stop(): void;
-}
-
-/**
- * The '@types/ace' package has the type of breakpoints incorrect
- *
- * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
- * but can be something you pick yourself.
- */
-function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
-  return editor.session.getBreakpoints() as unknown as Breakpoints;
-}
-
-type Breakpoints = Record<number, string>;
-
-/**
- * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
- */
-const BP_DISABLED_LINE = 'ace_breakpoint';
-
-function get_shift_key(event: Event | undefined) {
-  // @ts-ignore
-  if (event.shiftKey) {
-    return true;
-  } return false;
-}
-
-if ($("#editor").length) {
-  var editor: AceAjax.Editor = ace.edit("editor");
-  editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
-    const target = e.domEvent.target as HTMLElement;
-
-    // Not actually the gutter
-    if (target.className.indexOf("ace_gutter-cell") == -1)
-      return;
-
-    if (e.clientX > 25 + target.getBoundingClientRect().left)
-      return;
-
-    const breakpoints = getBreakpoints(e.editor);
-
-    let row = e.getDocumentPosition().row;
-    if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
-      // If the shift key is pressed mark all rows between the current one and the first one above that is a debug line
-      if (get_shift_key(event)) {
-        let highest_key = row;
-        for (const key in breakpoints) {
-          const number_key = parseInt(key);
-          if (number_key < row) {
-            highest_key = number_key;
-          }
-        }
-        for (let i = highest_key; i <= row; i++) {
-          e.editor.session.setBreakpoint(i, BP_DISABLED_LINE);
-        }
-      } else {
-        e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
-      }
-    } else {
-      e.editor.session.clearBreakpoint(row);
-    }
-    e.stop();
-  });
-
-  editor.session.on('changeBreakpoint', () => updateBreakpointVisuals(editor));
-}
-
-/**
- * Render markers for all lines that have breakpoints
- *
- * (Breakpoints mean "disabled lines" in Hedy).
- */
-function updateBreakpointVisuals(editor: AceAjax.Editor) {
-  const breakpoints = getBreakpoints(editor);
-
-  const disabledLines = Object.entries(breakpoints)
-    .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-    .map(([line, _]) => line)
-    .map(x => parseInt(x, 10));
-
-  markers.strikethroughLines(disabledLines);
-}
-
-function debugRun() {
-  let language = APP_STATE.lang ?? APP_STATE.keyword_language;
-  if (APP_STATE.level != null && language != null) {
-    runit(APP_STATE.level, language, "", function () {
-      $('#output').focus();
-    });
-  }
-}
-
-export function startDebug() {
-  if (step_debugger === true) {
-    var debugButton = $("#debug_button");
-    debugButton.hide();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
-
-    runButtonContainer.hide();
-    continueButton.show();
-    stopButton.show();
-    resetButton.show();
-
-    incrementDebugLine();
-  }
-}
-
-export function resetDebug() {
-  if (step_debugger === true) {
-    var storage = window.localStorage;
-    var continueButton = $("#debug_continue");
-    continueButton.show();
-
-    storage.setItem("debugLine", "0");
-    clearDebugVariables();
-    markCurrentDebuggerLine();
-    debugRun();
-  }
-}
-
-export function stopDebug() {
-  if (step_debugger === true) {
-    var debugButton = $("#debug_button");
-    debugButton.show();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
-
-    runButtonContainer.show();
-    continueButton.hide();
-    stopButton.hide();
-    resetButton.hide();
-
-    var storage = window.localStorage;
-    storage.removeItem("debugLine");
-
-    clearDebugVariables();
-    markCurrentDebuggerLine();
-  }
-}
-
-function clearDebugVariables() {
-  var storage = window.localStorage;
-  var keysToRemove = {...localStorage};
-
-  for (var key in keysToRemove) {
-    if (key.includes("prompt-")) {
-      storage.removeItem(key);
-    }
-  }
-}
-
-export function incrementDebugLine() {
-  var storage = window.localStorage;
-  var debugLine = storage.getItem("debugLine");
-
-  const nextDebugLine = debugLine == null
-    ? 0
-    : parseInt(debugLine, 10) + 1;
-
-  storage.setItem("debugLine", nextDebugLine.toString());
-  markCurrentDebuggerLine();
-
-  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
-  if (nextDebugLine < lengthOfEntireEditor) {
-    debugRun();
-  } else {
-    stopDebug();
-  }
-}
-
-function markCurrentDebuggerLine() {
-  if (!step_debugger) { return; }
-
-  const storage = window.localStorage;
-  var debugLine = storage?.getItem("debugLine");
-
-  if (debugLine != null) {
-    var debugLineNumber = parseInt(debugLine, 10);
-    markers.setDebuggerCurrentLine(debugLineNumber);
-  } else {
-    markers.setDebuggerCurrentLine(undefined);
-  }
-}
-
 export function hide_editor() {
   $('#fold_in_toggle_container').hide();
   $('#code_editor').toggle();
@@ -2174,9 +1966,9 @@ export function downloadSlides(level: number) {
     var slides = innerDoc.getElementsByTagName('section');
     var slidesHTML = ''
     for (let i = 0; i < slides.length; i++) {
-      var innerIframe = slides[i].getElementsByTagName('iframe');        
+      var innerIframe = slides[i].getElementsByTagName('iframe');
       for (let j = 0; j < innerIframe.length; j++) {
-        var a = document.createElement('a');          
+        var a = document.createElement('a');
         a.href = 'https://www.hedy.org' + innerIframe[j].getAttribute('src');
         a.appendChild(document.createTextNode(a.href));
         slides[i].appendChild(a);
@@ -2184,7 +1976,7 @@ export function downloadSlides(level: number) {
       }
       slidesHTML += '\n'+ slides[i].outerHTML;
     }
-    
+
     var template = slides_template.replace('{replace}', slidesHTML);
     var zip = JSZip();
     zip.file('index.html', template);
@@ -2207,36 +1999,77 @@ function download(data: any, filename: any, type: any) {
   a.click();
   setTimeout(function() {
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);  
+    window.URL.revokeObjectURL(url);
   }, 0);
 }
-const onElementBecomesVisible = (() => {
-  const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
 
-  function isInView(elem: HTMLElement) {
-    var docViewTop = $(window).scrollTop()!;
-    var docViewBottom = docViewTop + $(window).height()!;
-    var elemTop = $(elem).offset()!.top;
-    return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+/**
+ * Hide all things that may have been dynamically shown when switching tabs
+ */
+function resetWindow() {
+  $('#warningbox').hide ();
+  $('#errorbox').hide ();
+  $('#okbox').hide ();
+  $('#repair_button').hide();
+  const output = $('#output');
+  const variable_button = $(output).find('#variable_button');
+  const variables = $(output).find('#variables');
+  output.empty();
+  $('#turtlecanvas').empty();
+  output.append(variable_button);
+  output.append(variables);
+  clearUnsavedChanges();
+}
+
+function reconfigurePageBasedOnTab(tabName: string) {
+  currentTab = tabName;
+
+  resetWindow();
+
+  const isCodeTab = !(tabName === 'quiz' || tabName === 'parsons');
+
+  // .toggle(bool) sets visibility based on the boolean
+
+  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
+  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
+  $('#developers_toggle_container').toggle(isCodeTab);
+  $('#level-header input').toggle(isCodeTab);
+  $('#parsons_code_container').toggle(tabName === 'parsons');
+  $('#editor-area').toggle(isCodeTab || tabName === 'parsons');
+  $('#editor').toggle(isCodeTab);
+  $('#debug_container').toggle(isCodeTab);
+
+  if (tabName === 'parsons') {
+    loadParsonsExercise(theLevel, 1);
+    return;
   }
 
-  $(window).on('scroll', () => {
-    for (let i = 0; i < SCROLL_HANDLERS.length; ) {
-      const [element, handler] = SCROLL_HANDLERS[i];
-      if (isInView(element)) {
-        handler();
-        SCROLL_HANDLERS.splice(i, 1);
-      } else {
-        i += 1;
+  // If there's a loaded program for the adventure or level now selected, load it into the code editor
+  else if (theAdventures[tabName]?.loaded_program) {
+    $ ('#program_name').val (theAdventures[tabName].loaded_program!.name?.trim());
+    theGlobalEditor?.setValue (theAdventures[tabName].loaded_program!.code?.trim());
+  }
+  else {
+    const tab = $('*[data-tab="' + tabName + '"]');
+    if (tab.hasClass('teacher_tab')) {
+      $ ('#program_name').val (tabName);
+      theGlobalEditor?.setValue ("");
+    } else {
+      const adventure = theAdventures[tabName];
+      if (adventure) {
+        if (adventure.default_save_name == 'intro') {
+          $('#program_name').val(`${ClientMessages.level_title} ${theLevel}`);
+        } else {
+          $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${theLevel}`);
+        }
+        theGlobalEditor?.setValue(adventure.start_code?.trim());
       }
     }
-  });
-
-  return function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
-    if (isInView(element)) {
-      handler();
-    } else {
-      SCROLL_HANDLERS.push([element, handler]);
-    }
   }
-})();
+
+  theGlobalEditor?.clearSelection();
+  theGlobalEditor?.session.clearBreakpoints();
+
+  // If user wants to override the unsaved program, reset unsaved_changes
+  clearUnsavedChanges();
+}

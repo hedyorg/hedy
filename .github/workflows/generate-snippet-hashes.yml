@@ -46,9 +46,10 @@ jobs:
         build-tools/github/validate --all
         
     - name: Commit changed files
-      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Updating hash files
+        commit_author: hedybot <noreply@hedy.org>
         branch: main
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)

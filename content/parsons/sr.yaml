@@ -1,0 +1,57 @@
+levels:
+    1:
+        1:
+            story: "You're a customer at bakery Hedy.\nYou walk into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
+            code: "{print} Welcome to bakery Hedy!\n{ask} What type of pie do you want to order?\n{echo} So you want\n{print} Your order is being prepared!"
+        2:
+            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
+            code: "{print} This is DJ Hedy\n{ask} Are you ready to party?\n{ask} What song would you like to hear?\n{echo} Great choice! I love"
+    2:
+        1:
+            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
+            code: "{print} It is time for an evening of Netflix\nfilm {is} Sonic the Hedgehog 2\n{print} We're going to watch film\n{print} Have lot of fun!"
+        2:
+            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
+            code: "{print} Welcome to our toystore\ntoy {is} {ask} What would you like to buy?\n{print} The toy is added to your shopping cart.\n{print} Thank you for shopping with us!"
+    3:
+        1:
+            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
+            code: "{print} The new school year at Hogwarts is starting!\n{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} And it is houses {at} {random}"
+        2:
+            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
+            code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
+    4:
+        1:
+            story: "You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n"
+            code: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle\n{print} 'This is going to be your first Pokémon!'\n{sleep}\n{print} pokemons {at} {random}"
+        2:
+            story: "Create a lottery that lets you choose an extra price that you might win.\n"
+            code: "prices {is} car, hamster, 1 million euros\nprice {is} {ask} 'What would you like to win?'\n{add} price {to_list} prices\n{print} 'You won a ' prices {at} {random}"
+    5:
+        1:
+            story: "Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n"
+            code: "favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park\nmovie {is} {ask} 'What is your favourite movie?'\n{if} movie {in} favorite_movies {print} 'You have great taste!'\n{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'\n{add} movie {to_list} favorite_movies"
+        2:
+            story: "Create a maths game.\n"
+            code: "{print} 'Solve this problem'\nanswer {is} {ask} '88 - 16 = ?'\n{if} answer {is} 72 {print} 'Correct!'\n{else} {print} 'Wrong! The answer was 72'"
+    6:
+        1:
+            story: "Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n"
+            code: "age = {ask} 'How old are you?'\ndog_age = age * 7\ncat_age = age * 5\n{print} 'In dog years you are ' dog_age ' years old.'\n{print} 'In cat years you are ' cat_age ' years old.'"
+        2:
+            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\n"
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount {is} people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
+    7:
+        1:
+            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n"
+            code: "players = Liam, Noah, Sophie\nplayer1 = players {at} {random}\nplayer2 = players {at} {random}\n{print} player1 ' first plays against ' player2\n{remove} player1 {from} players\n{remove} player2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+        2:
+            story: "Create the song 'The wheels on the bus go round and round'\n"
+            code: "{print} 'the wheels on the bus go'\n{repeat} 3 {times} {print} 'round and round'\n{print} 'the wheels of the bus go round and round'\n{print} 'all through the town '"
+    8:
+        1:
+            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team.\n"
+            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    sleep 2"
+        2:
+            story: "Print the countdown for a game of hide and seek.\n"
+            code: "counter = 11\n{repeat} 10 {times}\n    counter = counter - 1\n    {print} counter\n    {sleep} 1\n{print} 'Ready or not here I come!'"

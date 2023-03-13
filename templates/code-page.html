@@ -38,23 +38,3 @@
     {% endif %}
 </div>
 {% endblock %}
-{% block additional_scripts %}
-  <script>
-    hedyApp.passStateFromHtml({
-      // We load the adventures into the js to have access to their saved programs (if any).
-      adventures: {{ adventures|tojson }},
-      {% if loaded_program %}
-      loaded_program: {{ loaded_program|tojson }},
-      {% endif %}
-    });
-  </script>
-  <!-- If we are in tutorial mode -> hide most features, slowly release them -->
-  <!-- We only do this for the general tutorial, the level tutorials are loaded on a button click -->
-  {% if intro_tutorial %}
-    <script>
-      $(document).ready(function() {
-        hedyApp.startIntroTutorial();
-      });
-    </script>
-  {% endif %}
-{% endblock %}

@@ -14,5 +14,6 @@ export * from './logs';
 export * from './tutorials/tutorial';
 export * from './quiz';
 export * from './teachers';
-export * from './state';
+export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
+export * from './debugging';

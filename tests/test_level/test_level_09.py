@@ -222,6 +222,7 @@ class TestsLevel9(HedyTester):
                 print 'doe het 5 keer!'""")
 
         expected = HedyTester.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -230,11 +231,14 @@ class TestsLevel9(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
+            if event.unicode != 'x':
+                pygame_end = True
             if event.unicode == 'x':
               for i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -250,8 +254,9 @@ class TestsLevel9(HedyTester):
             if s is pressed
                 turn 180""")
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(f"""\
         for i in range(int('10')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -260,42 +265,42 @@ class TestsLevel9(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 'w':
+                  pygame_end = True
               if event.unicode == 'w':
-                __trtl = 25
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
+                {HedyTester.indent(
+                  HedyTester.forward_transpiled(25, self.level),
+                  16, True)
+                }
                 break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 'a':
+                  pygame_end = True
               if event.unicode == 'a':
-                __trtl = -90
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                {HedyTester.indent(
+                  HedyTester.turn_transpiled(-90, self.level),
+                  16, True)
+                }
                 break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 'd':
+                  pygame_end = True
               if event.unicode == 'd':
-                __trtl = 90
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                {HedyTester.indent(
+                  HedyTester.turn_transpiled(90, self.level),
+                  16, True)
+                }
                 break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 's':
+                  pygame_end = True
               if event.unicode == 's':
-                __trtl = 180
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                {HedyTester.indent(
+                  HedyTester.turn_transpiled(180, self.level),
+                  16, True)
+                }
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
@@ -314,6 +319,7 @@ class TestsLevel9(HedyTester):
         expected = HedyTester.dedent(f"""\
         create_button('button1')
         for i in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -322,9 +328,12 @@ class TestsLevel9(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.USEREVENT:
+              if event.key != 'button1':
+                  pygame_end = True
               if event.key == 'button1':
                 print(f'wow')
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)

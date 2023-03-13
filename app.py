@@ -880,7 +880,15 @@ def tutorial_index():
         parsons_exercises=parsons,
         cheatsheet=cheatsheet,
         adventures_per_level=adventures_per_level,
-        blur_button_available=False)
+        blur_button_available=False,
+        # See initialize.ts
+        javascript_page_options=dict(
+            page='code',
+            level=level,
+            lang=g.lang,
+            adventures=adventures,
+            start_tutorial=True,
+        ))
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -898,9 +906,15 @@ def teacher_tutorial(user):
         )
 
     return render_template('for-teachers.html', current_page='my-profile',
-                           page_title=gettext('title_for-teacher'), teacher_classes=teacher_classes,
-                           teacher_adventures=adventures, tutorial=True,
-                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang))
+                           page_title=gettext('title_for-teacher'),
+                           teacher_classes=teacher_classes,
+                           teacher_adventures=adventures,
+                           tutorial=True,
+                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang),
+                           javascript_page_options=dict(
+                               page='for-teachers',
+                               tutorial=True,
+                           ))
 
 
 # routing to index.html
@@ -1099,7 +1113,15 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures_per_level=adventures_per_level,
         cheatsheet=cheatsheet,
-        blur_button_available=False)
+        blur_button_available=False,
+        # See initialize.ts
+        javascript_page_options=dict(
+            page='code',
+            level=level_number,
+            lang=g.lang,
+            adventures=adventures,
+            loaded_program=loaded_program,
+        ))
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
@@ -1156,7 +1178,13 @@ def view_program(user, id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
 
-    return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
+    return render_template("view-program-page.html",
+                           blur_button_available=True,
+                           javascript_page_options=dict(
+                               page='view-program',
+                               lang=g.lang,
+                               level=int(result['level'])),
+                           **arguments_dict)
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
@@ -1168,8 +1196,8 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
-    if not adventure:
+    adventures = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
+    if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level - 1 if [x for x in load_adventures_for_level(
@@ -1192,10 +1220,17 @@ def get_specific_adventure(name, level, mode):
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
                            teacher_adventures=[],
-                           adventures=adventure,
+                           adventures=adventures,
                            latest=version(),
                            raw=raw,
-                           blur_button_available=False)
+                           blur_button_available=False,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                           ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})

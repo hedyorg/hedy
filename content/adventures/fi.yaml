@@ -35,6 +35,7 @@ adventures:
                 story_text: "## 'Lainausmerkit'\nTasolla 4 `{ask}` ja `{print}` ovat muuttuneet.\n\nSinun on laitettava teksti, jonka haluat tulostaa, lainausmerkkien väliin.\n\nTämä on hyödyllistä, koska nyt voit tulostaa kaikki haluamasi sanat. Myös sanat, joita käytit tallentaaksesi jotain komennolla `{is}`.\n\nUseimmat ohjelmointikielet käyttävät lainausmerkkejä myös tulostettaessa, joten pääsemme myös askeleen lähemmäs oikeaa ohjelmointia!\n"
                 example_code: "```\n{print} \"Tästä lähtien on käytettävä lainausmerkkejä!\"\nvastaus {is} {ask} 'Mitä meidän on käytettävä tästä lähtien?'\n{print} \"Meidän on käytettävä \" vastaus\n```\n"
                 story_text_2: "## Seikkailut muuttuvat yhä vaikeammiksi\nSeikkailut muuttuvat nyt yhä vaikeammiksi kun siirryt eteenpäin välilehdillä.\nKannattaa siis aloittaa vasemmalta ja edetä oikealle, jotta voit haastaa itseäsi aina vähän enemmän.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nimi {is} {ask} 'Mikä on nimesi?'\n{if} nimi {is} Hedy {print} 'hienoa!' {else} {print} 'plääh'"
                 story_text: "## Jos... muuten....\nTasolla 5 on jotain uutta, komento `{if}`! Komennon `{if}` avulla voit valita kahden eri vaihtoehdon välillä.\nTämä koodi tulostaa hienoa! jos kirjoitat nimeksi Hedy, ja boo! jos kirjoitat jotain muuta.\n`{ask}` ja `{print}` toimivat edelleen kuten tasolla 4.\n"
@@ -311,8 +312,6 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see if one our of two things is the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything else?'\n{print} 'Thank you!'\n```\n"
@@ -587,7 +586,6 @@ adventures:
                 start_code: '{print} What will the die indicate this time?'
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
@@ -634,7 +632,6 @@ adventures:
                 start_code: '{print} Welcome to your own rock scissors paper!'
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             9:
                 example_code: "```\nchoices {is} rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n# finish this code\n```\n"

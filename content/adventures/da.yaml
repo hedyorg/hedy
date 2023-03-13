@@ -138,7 +138,6 @@ adventures:
                 start_code: '{print} Welcome to your own rock scissors paper!'
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             5:
                 story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see if they are the same or different.\nWill you finish the code?\n"
@@ -344,8 +343,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see if one our of two things is the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
     turtle:
         default_save_name: Skildpadde
@@ -456,7 +453,6 @@ adventures:
                 start_code: '{print} Hvad vil terningen vise denne gang?'
             4:
                 story_text: "## Ternigner\nPå dette niveau kan vi lave sætninger med terningeværdien i en sætning, med anførselstegn selvfølgelig.\nDenne gang er kodeeksemplet ikke helt færdigt. Kan du færdiggøre den?\n"
-                example_code: "```\nmuligheder {is} 1, 2, 3, 4, 5, regnorm\n{print} _ du slog _\n{print} _ _ _ <- her skal du programmere udfaldet\n```\n"
                 start_code: "{print} 'Hvad vil terningen vise denne gang?'"
         name: Terninger
         description: Lav din egen terning
@@ -474,6 +470,7 @@ adventures:
                 start_code: "{print} 'Hej verden'"
                 story_text_2: "## Eventyrerne bliver sværere og sværere\nEventyrerne bliver nu sværere og sværere i de følgende faner.\nSå det er bedst at starte fra venstre og arbejde sig mod højre for at blive udfordret mere og mere.\n"
                 story_text: "## 'Anførselstegn'\nPå niveau 4 har `{ask}` og `{print}` ændret sig.\n\nDu skal den tekst du vil printe i anførselstegn.\n\nDette er nyttigt, for nu kan du printe alle de ord du har lyst til. Du kan også printe de ord du har brugt til at gemme med `{is}`.\n\nDe fleste programmeringssprog bruger også anførselstegn til at printe, så vi kommer også tættere på rigtig programmering!\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             16:
                 start_code: "frugt = ['æble', 'banan', 'kirsebær']\n{print} frugt"
                 story_text: "## Mere og mere som ægte kode!\nVi skal lave lister på som i Python, med firkantede parenteser rundt om! Vi beholder også anførselstegn rund om hvert element som vi har lært på et tidlige niveau.\nDu kan også bruge firkantede parenteser til at udpege et sted i en liste."

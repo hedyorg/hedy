@@ -30,6 +30,7 @@ adventures:
                 story_text: "## 'Quotation marks'\nPå nivå 4 har `{ask}` og`{print}` blitt endret.\n\nDu må fra nå av legge tekst du vil skrive ut mellom fnutter.\n\nDette er nyttig, fordi nå kan du skrive ut alle ordene du vil. Også de ordene du har brukt til å lagre noe med `{is}`.\n\nDe fleste programmeringsspråk bruker også fnutter når de skriver ut ting, så vi går altså enda et steg nærmere ekte programmering!\n"
                 example_code: "```\n{print} 'Du må bruke fnutter fra nå av!'\nsvar {is} {ask} 'Hva må vi bruke fra nå av?'\n{print} 'Vi må bruke' svar\n```\n"
                 story_text_2: "## Eventyrene blir mer og mer vanskelig\nEventyrene blir mer og mer vanskelig nå i de rosa fanene.\nSå det er lurest å starte til venstre med Fortellingen, og jobbe seg mot høyre. På denne måten får du mer og mer utfordring for hvert eventyr.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
                 story_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
@@ -238,7 +239,6 @@ adventures:
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             4:
                 story_text: "## Stein, saks, papir\nPå dette nivået kan vi programmere videre på stein, saks, papir. Om du vil legge til tekst må du bruke fnutter her også.\nKan du fullføre koden ved å fylle ut de riktige kommandoene og tengene der det er streker?\n"
-                example_code: "```\nvalgene {is} stein, saks, papir\n{print} _ Datamaskinen valgte: _ _ {at} _\n```\n"
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             3:
                 story_text: "## Stein, saks, papir\n\nPå dette nivået kan vi lage lister og velge ting fra de.\nDu kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.\nFor eksempel så kan du la datamaskinen velge mellom stein, saks og papir.\n"
@@ -368,8 +368,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nPå dette nivået kan vi bruke de nye kommandoen til å oppgradere restauranten vår.\nVi bruker `{and}`til å se om to ting begge stemmer.\n"
                 example_code: "```\npris = 100\nønsket_mat = {ask} 'Hva vil du ha å spise?'\nønsket_drikke = {ask} 'Hva ønsker du å drikke til maten?'\n{if} ønsket_mat {is} 'toast' {and} ønsket_drikke {is} 'juice'\n    {print} 'Det er på tilbudsmenyen'\n    pris = pris - 30\n{print} 'Det blir ' pris ' kroner'\n```\n"
-                story_text_2: "Vi bruker `{or}` til å sjekke om ihvertfall en av to ting stemmer.\n"
-                example_code_2: "```\nønsket_drikke = {ask} 'Hva vil du ha å drikke?'\n{if} ønsket_drikke {is} 'vann' {or} ønsket_drikke {is} 'juice'\n    {print} 'Det er et sunt valg'\n```\n"
                 start_code: '# skriv koden din her'
         name: Restaurant
         description: Lag din egen virtuelle restaurant
@@ -605,7 +603,6 @@ adventures:
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             4:
                 story_text: "## Terning\nPå dette nivået kan vi lage setninger med terningens verdi i setningen, med fnutter så klart.\nDenne gangen er ikke eksempelkoden helt ferdig. Kan du fullføre koden?\n"
-                example_code: "```\nvalgene {is} 1, 2, 3, 4, 5, makk\n{print} _ du trillet _\n{print} _ _ _ <- her må du programmere et valg\n```\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             3:
                 story_text: "## Terninger\nPå dette nivået kan vi velge fra en liste. Med det kan vi la datamaskinen velge en side av en terning.\nTa en titt på spillene du har i skapet hjemme.\nEr det spill der med en (spesiell) terning? Du kan også kopiere den med denne koden.\nFor eksempel, en terning fra spillet Earthworms med tallene 1 til 5 og en makk på\n\n![Terning fra Earthworms med 1 til 5 og en makk på](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"

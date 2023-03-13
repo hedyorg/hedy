@@ -55,6 +55,7 @@ adventures:
                     A legtöbb programozási nyelv idézőjelet használ a kiíratáshoz, így egy kicsit közelebb kerülünk az igazi programozáshoz!
                 example_code: "```\n{print} \"Mostantól idézőjeleket kell használni!\"\nválasz {is} {ask} \"Miket kell mostantól használni?\"\n{print} válasz \" kell használni.\"\n```\n"
                 story_text_2: "## A feladatok egyre nehezebbek lesznek\nA feladatok egyre nehezebbé válnak az egymást követő füleken.\nA legjobb, ha a baloldalon kezded és így haladsz jobbra a nagyobb kihívást jelentő feladatok felé.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     név {is} {ask} "Hogy hívnak?"
@@ -734,12 +735,6 @@ adventures:
                     A 3. szinten mondatokat készíthetünk a változó értékével, természetesen idézőjelekkel.
                     Ezúttal a minta kód nem egészen teljes. Be tudod fejezni a kódot?
                 start_code: print 'Mit dobunk ezúttal?'
-                example_code: |-
-                    ```
-                    dobasok is 1, 2, 3, 4, 5, earthworm
-                    print _ te jössz _
-                    print _ _ _ <- itt kell beprogramozni a dobást
-                    ```
             3:
                 start_code: print Mit dobunk ezúttal?
                 story_text: |-
@@ -825,11 +820,6 @@ adventures:
                     hozzáadni, akkor itt is idézőjeleket kell használnod.
                     Egészítsd ki a kódot úgy, hogy a helyes parancsokat vagy karaktereket írd be a
                     aláhúzásokra?
-                example_code: |-
-                    ```
-                    valasztas is kő, papír, olló
-                    print _ A számítógép ezt választotta: _ _ at _
-                    ```
             3:
                 story_text: |
                     ## Kő, papír, olló
@@ -1221,8 +1211,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
     turtle:
         name: Teknős

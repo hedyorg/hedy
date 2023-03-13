@@ -28,6 +28,7 @@ adventures:
                 story_text: "## 'Ülakomad'\nNeljandal tasemel muutuvad käsud `{ask}` ja `{print}`.\n\nTeksti, mille sa tahad ekraanile kirjutada, pead sa panema ülakomade vahele.\n\nSee on kasulik, kuna nüüd sa saad igasugust teksti ekraanile kirjutada. Näiteks nagu sõnu, mida sa kasutad muutujanimena `{is}` käsus.\n\nEnamik programmeerimiskeeli kasutab kas ülakomasid või jutumärke teksti edasiandmiseks, nii et me oleme juba samm lähemal päris programmeerimise juurde!\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Seiklused muutuvad aina raskemaks\nJärgmistel sakkidel muutuvad seiklused aina raskemaks.\nSeega on parem looga algust teha vasakul, liikudes edasi paremale, võttes vastu raskemaid väljakutseid.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe!' {else} {print} 'mhh'"
                 story_text: "## Kui... muidu....\n5. tasemel leiame midagi uut: `{if}`! `{if}` abil saad valida kahe vóimaluse vahel.\nSee kood prindib kena, kui sisestad nimeks Hedy ja boo! kui sisestad midagi muud.\n`{ask}` ja `{print}` töötavad ikka samamoodi nagu 4. tasemel.\n"
@@ -308,7 +309,6 @@ adventures:
                 start_code: '# place your code here'
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
@@ -355,7 +355,6 @@ adventures:
                 story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             13:
                 story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
@@ -470,8 +469,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
