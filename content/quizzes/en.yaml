@@ -2836,26 +2836,26 @@ levels:
             question_text: "Which code should be filled in in line 1 at the ???"
             code: |-
                 ???
-                {print} 'You won ' prices {at} {random} '!'
+                {print} 'You won ' prizes {at} {random} '!'
             mp_choice_options:
             -   option: |-
                     ```
-                    prices = 'one' 'million' 'dollars', 'nothing'
+                    prizes = 'one' 'million' 'dollars', 'nothing'
                     ```
                 feedback: "You won nothing"
             -   option: |-
                     ```
-                    prices = 'one million dollars, nothing'
+                    prizes = 'one million dollars, nothing'
                     ```
                 feedback: "You won nothing"
             -   option: |-
                     ```
-                    prices = 'one million dollars', 'nothing'
+                    prizes = 'one million dollars', 'nothing'
                     ```
                 feedback: "Winner!"
             -   option: |-
                     ```
-                    'prices' = 'one million dollars', 'nothing'
+                    'prizes' = 'one million dollars', 'nothing'
                     ```
                 feedback: "You one nothing"
             correct_answer: "C"
