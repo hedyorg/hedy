@@ -198,11 +198,11 @@ levels:
         1:
             question_text: "Welche Aussage ist wahr?"
             mp_choice_options:
-            -   option: "Du kannst den {print} Befehl benutzen, um Fragen zu stellen."
+            -   option: "Du kannst den `{print}` Befehl benutzen, um Fragen zu stellen."
                 feedback: "Dazu ist frage da"
-            -   option: "Du kannst den {ask} Befehl benutzen um eine Antwort auszugeben."
+            -   option: "Du kannst den `{ask}` Befehl benutzen um eine Antwort auszugeben."
                 feedback: "Das ist nicht richtig"
-            -   option: "Mit dem {print} Befehl kannst du Text erscheinen lassen"
+            -   option: "Mit dem `{print}` Befehl kannst du Text erscheinen lassen"
                 feedback: "Gut"
             -   option: "Mit dem {sleep} Befehl kannst du Text vom Bildschirm entfernen."
                 feedback: "So funktioniert `{sleep}` nicht."
@@ -701,7 +701,7 @@ levels:
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "Das erste Anführungszeichen sollte hinter {print} stehen"
+                feedback: "Das erste Anführungszeichen sollte hinter `{print}` stehen"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
@@ -734,7 +734,7 @@ levels:
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Schreibe nie Anführungszeichen vor den {print} Befehl."
+                feedback: "Schreibe nie Anführungszeichen vor den `{print}`-Befehl."
             -   option: |
                     ```
                     {print} 'options' {at} {random}
