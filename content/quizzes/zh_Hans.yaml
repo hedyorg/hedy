@@ -3,7 +3,7 @@ levels:
         1:
             question_text: "这门编程语言叫什么？"
             mp_choice_options:
-            -   option: "Hedy"
+            -   option: "海蒂"
                 feedback: "做得好！"
             -   option: "海蒂"
                 feedback: "不是这个！"
@@ -41,7 +41,7 @@ levels:
             hint: "_?_ 你好世界！"
             question_score: '10'
             code: |
-                ___ Hello!
+                ___ 你好！
         3:
             question_text: "如何询问某个人最喜欢的颜色是什么？"
             mp_choice_options:
@@ -206,7 +206,7 @@ levels:
             -   option: "你可以用`{print}`命令显示文本"
                 feedback: "不错"
             -   option: "你可以用 {sleep} 命令清除屏幕上的文本。"
-                feedback: "这不是sleep的作用。"
+                feedback: "这不是`{sleep}`的作用。"
             correct_answer: "C"
             hint: "`{print}`的作用仍然和第1关中一样"
             question_score: '10'
@@ -868,14 +868,14 @@ levels:
             mp_choice_options:
             -   option: "In level 5 `{print}` works differently than in level 4"
                 feedback: "`{print}` is still the same"
-            -   option: "In level 5 `{ask}` works differently than in level 4"
-                feedback: "`{ask}` is still the same"
-            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
+            -   option: "```\n{if}\n```\n"
+                feedback: "在上面一行里使用了 `{if}` 命令。"
+            -   option: "```\n{sleep}\n```\n"
                 feedback: "`No these commands remain the same"
-            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+            -   option: "```\n{else}\n```\n"
                 feedback: "Correct!"
             correct_answer: "D"
-            hint: "We have only learned a new command in level 5."
+            hint: "哪一个可以与`{if}`命令一起使用？"
             question_score: '10'
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
@@ -1937,7 +1937,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 2
                     ```
-                feedback: "Try again!"
+                feedback: "第二个{if} 命令是错误代码！"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -1945,7 +1945,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: "Try again"
+                feedback: "不可以连续使用两个 {if}命令， 这样是错误的 。"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -1960,11 +1960,11 @@ levels:
         8:
             question_text: "What is wrong is this code?"
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                年龄={ask} ‘生日快乐!你多大了？’
+                唱歌={ask}‘你想让我们唱歌吗？’
+                	{if} 唱歌{is} 是
+                		{repeat}岁{times}
+                			{print}‘加油’
             mp_choice_options:
             -   option: "You can't put two questions in a row"
                 feedback: "Yes you can."
@@ -2090,7 +2090,7 @@ levels:
                 feedback: "这样海蒂会打印0到10，而不是10到0。"
             -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
                 feedback: "这样海蒂会打印负数。"
-            -   option: "```\n{for} i {in} {range} 10 {to} 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
+            -   option: "```\n{for} i {in} {range}10到0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
                 feedback: "不幸的是这样并不对。"
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
                 feedback: "对！"
@@ -2139,11 +2139,11 @@ levels:
         7:
             question_text: "What should be on the place of the question mark?"
             code: |-
-                {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
+                {print}‘欢迎来到海蒂快餐店’
+                人 {is} {ask}‘今晚有多少人会在这里吃饭？’
                 _?_
-                    food is {ask} 'What would you like to order?'
-                    {print} food
+                	食物{is} {ask}‘你想点些什么？’
+                	{print}食物
             mp_choice_options:
             -   option: |
                     ```
@@ -2438,14 +2438,14 @@ levels:
             hint: "Mind the quotation marks and the names of the variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
+            question_text: "当你运行程序时海蒂会问你的第一个问题是什么？"
             code: |-
-                courses = appetizer, main course, dessert
-                names = Timon, Onno
-                {for} name in names
-                    {for} course {in} courses
-                        food = {ask} name ', what would you like to eat as your ' course '?'
-                        {print} name ' orders ' food ' as their ' course
+                套餐=前菜，主菜，甜点
+                名字们 = 蒂蒙、奥诺
+                {for} 名字 {in} 名字们
+                	{for}菜{in}套餐
+                        	食物 = {ask}名字‘，你想吃哪道’菜‘？’
+                        	{print} 名字‘点的’菜‘是’食物
             mp_choice_options:
             -   option: "Timon, what would you like to eat as your appetizer?"
                 feedback: "Perfect!"
@@ -2480,7 +2480,7 @@ levels:
     12:
         1:
             question_text: Which output is correct?
-            code: "print 'three and a half plus one and a half is...'\nprint 3.5 + 1.5"
+            code: "{print} ‘三点五加一点五是......’\n{print}3.5 + 1.5"
             mp_choice_options:
             -   option: "5\n"
                 feedback: Don't forget the first line of code!
@@ -2496,13 +2496,13 @@ levels:
         2:
             question_text: Which of these codes is correct?
             mp_choice_options:
-            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\n口味 {is} 香草、草莓、巧克力\n{print} '我想要一个 ' 口味 {at} {random} ' 蛋糕。'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\n口味=香草、草莓、巧克力\n{print} '我想要一个 ' 口味 {at} {random} ' 蛋糕。'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\n口味=香草、草莓、巧克力\n{print} '我想要一个 ' 口味 {at} {random} ' 蛋糕。'\n```"
                 feedback: Alright!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```\n"
+            -   option: "\n```\n口味=香草、草莓、巧克力\n{print} '我想要一个 ' 口味 {at} {random} ' 蛋糕。'\n```\n"
                 feedback: All the different values of flavors should be in quotation marks.
             correct_answer: C
             hint: The second line is the same in each code, pay attention to the first line
@@ -2524,7 +2524,7 @@ levels:
             question_score: '10'
         4:
             question_text: In which lines are quotation marks needed to get the code to work?
-            code: "print Welcome to the online shoe shop\ncategory = ask What kind of shoes are you looking for?\nif category = high heels\n  print High heels are 50% off now!"
+            code: "{print} 欢迎来到网上鞋店\n类别 = {ask}你在寻找什么样的鞋子？\n{if}类别 = 高跟鞋\n\t{print}高跟鞋现在打五折！"
             mp_choice_options:
             -   option: "Line 1 and 2\n"
                 feedback: No
@@ -2539,7 +2539,7 @@ levels:
             question_score: '10'
         5:
             question_text: What output does Agent007 get when they put in the correct password?
-            code: "name is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the train station '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b"
+            code: "姓名{is} {ask}‘你叫什么名字？’\n{if} 姓名{is}‘特工007’\n\ta{is} ‘去机场’\n否则\n\ta{is} ‘去火车站’\n密码{is} {ask} ‘密码是什么？’\n{if} 密码{is} 'TOPSECRET'\n\tb{is}‘明天02.00点’\n否则\n\tb{is} ‘今天10.00点’\n打印a + b"
             mp_choice_options:
             -   option: Go to the train station today at 10.00
                 feedback: The agent won't be catching any bad guys here
@@ -2554,7 +2554,7 @@ levels:
             question_score: '10'
         6:
             question_text: Which line should be filled in at the ???
-            code: "print 'Welcome to McHedy!'\norder = ask 'Would you like a hamburger or fries?'\nif order = 'hamburger'\n  price = 12\nif order = 'fries'\n  price = 4\ndrinks = ask 'Would you like a drink with that for 2 dollars?'\nif drinks = 'yes'\n  ???\nprint 'That will be ' price ' dollar please'\n"
+            code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n\t？？？\n{print}‘请付’price‘元， 谢谢！’\n"
             mp_choice_options:
             -   option: "```\nprice = 14\n```\n"
                 feedback: What if you only order fries and a drink?
@@ -2569,7 +2569,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
+            code: "菜单 = '饼干', '奶酪', '葡萄'\n{print}“今天是我的生日！我带了一些零食！”\n饮食 = {ask} '你有什么饮食限制吗？'\n{if} 饮食 = '无麸质'\n{remove} '饼干' {from} 菜单\n{if} 饮食 = '素食主义者'\n{remove} '奶酪' {from} 菜单\n{print} '我给你带了：'\n{for}零食{in}菜单\n{print} 零食"
             mp_choice_options:
             -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
                 feedback: Terrific!
@@ -2586,13 +2586,13 @@ levels:
             question_text: Which code was used to create this output?
             code: '3.5'
             mp_choice_options:
-            -   option: "```\nprint '7 / 2'\n```"
+            -   option: "```\n{print}‘7 / 2’\n```"
                 feedback: No
-            -   option: "```\nprint 7 / 2\n```"
+            -   option: "```\n{print} 7 / 2\n```"
                 feedback: That is right!
-            -   option: "```\nprint 7 : 2\n```"
+            -   option: "```\n{print} 7 : 2\n```"
                 feedback: No
-            -   option: "```\nprint 7 * 2\n```"
+            -   option: "```\n{print} 7 * 2\n```"
                 feedback: No
             correct_answer: B
             hint: 7 devided by 2 is 3.5
