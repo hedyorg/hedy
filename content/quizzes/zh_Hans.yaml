@@ -2440,7 +2440,7 @@ levels:
         9:
             question_text: "当你运行程序时海蒂会问你的第一个问题是什么？"
             code: |-
-                套餐=开胃菜，主菜，甜点
+                套餐=前菜，主菜，甜点
                 名字们 = 蒂蒙、奥诺
                 {for} 名字 {in} 名字们
                 	{for}菜{in}套餐
@@ -2539,7 +2539,7 @@ levels:
             question_score: '10'
         5:
             question_text: What output does Agent007 get when they put in the correct password?
-            code: "name is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the train station '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b"
+            code: "姓名{is} {ask}‘你叫什么名字？’\n{if} 姓名{is}‘特工007’\n\ta{is} ‘去机场’\n否则\n\ta{is} ‘去火车站’\n密码{is} {ask} ‘密码是什么？’\n{if} 密码{is} 'TOPSECRET'\n\tb{is}‘明天02.00点’\n否则\n\tb{is} ‘今天10.00点’\n打印a + b"
             mp_choice_options:
             -   option: Go to the train station today at 10.00
                 feedback: The agent won't be catching any bad guys here
@@ -2554,7 +2554,7 @@ levels:
             question_score: '10'
         6:
             question_text: Which line should be filled in at the ???
-            code: "print 'Welcome to McHedy!'\norder = ask 'Would you like a hamburger or fries?'\nif order = 'hamburger'\n  price = 12\nif order = 'fries'\n  price = 4\ndrinks = ask 'Would you like a drink with that for 2 dollars?'\nif drinks = 'yes'\n  ???\nprint 'That will be ' price ' dollar please'\n"
+            code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n\t？？？\n{print}‘请付’price‘元， 谢谢！’\n"
             mp_choice_options:
             -   option: "```\nprice = 14\n```\n"
                 feedback: What if you only order fries and a drink?
@@ -2569,7 +2569,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
+            code: "菜单 = '饼干', '奶酪', '葡萄'\n{print}“今天是我的生日！我带了一些零食！”\n饮食 = {ask} '你有什么饮食限制吗？'\n{if} 饮食 = '无麸质'\n{remove} '饼干' {from} 菜单\n{if} 饮食 = '素食主义者'\n{remove} '奶酪' {from} 菜单\n{print} '我给你带了：'\n{for}零食{in}菜单\n{print} 零食"
             mp_choice_options:
             -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
                 feedback: Terrific!
@@ -2586,13 +2586,13 @@ levels:
             question_text: Which code was used to create this output?
             code: '3.5'
             mp_choice_options:
-            -   option: "```\nprint '7 / 2'\n```"
+            -   option: "```\n{print}‘7 / 2’\n```"
                 feedback: No
-            -   option: "```\nprint 7 / 2\n```"
+            -   option: "```\n{print} 7 / 2\n```"
                 feedback: That is right!
-            -   option: "```\nprint 7 : 2\n```"
+            -   option: "```\n{print} 7 : 2\n```"
                 feedback: No
-            -   option: "```\nprint 7 * 2\n```"
+            -   option: "```\n{print} 7 * 2\n```"
                 feedback: No
             correct_answer: B
             hint: 7 devided by 2 is 3.5
