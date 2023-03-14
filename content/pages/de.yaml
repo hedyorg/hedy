@@ -290,42 +290,42 @@ sections:
         -   title: "Schülerinnen und Schüler versuchen ganze Listen zu drucken"
             example:
                 error_text: |
-                    Eine Liste kann nicht gedruckt werden. Du kannst nur ein Element der Liste ausgeben mit at random.
+                    Eine Liste kann nicht gedruckt werden. Du kannst nur ein Element der Liste ausgeben mit `{at}` `{random}`.
                 error_code: |
                     einkäufe ist Äpfel, Milch, Schokolade
                     drucke einkäufe
                 solution_text: |
-                    Um eine Liste aller Einkäufe auszugeben, musst du sie nur nach einem drucke-Befehl platzieren. Sonst kannst du die Liste ausgeben, indem du at random nutzt.
+                    Um eine Liste aller Einkäufe auszugeben, musst du sie nur nach einem `{print}`-Befehl platzieren. Sonst kannst du die Liste ausgeben, indem du `{at}` `{random}` nutzt.
                 solution_code: |
-                    drucke Äpfel, Milch, Schokolade
+                    {print} Äpfel, Milch, Schokolade
 
                     oder
 
-                    einkäufe ist Äpfel, Milch, Schokolade
-                    drucke einkäufe at random
+                    einkäufe {is} Äpfel, Milch, Schokolade
+                    {print} einkäufe {at} {random}
         -   title: "Schülerinnen und Schüler nutzen den Namen einer Variablen oder Liste als ganz normalen Text"
             example:
                 error_text: |
                     Dieses Problem ist wahrscheinlich auch in Level 2 aufgetreten. Nun kann es auch mit Listen passieren.
                 error_code: |
-                    Name ist Hedy
-                    drucke Hi mein Name ist Name
+                    name {is} Hedy
+                    {print} Hi mein Name ist name
 
                     oder
 
-                    Tier ist Nashorn, Biene, Schwan
-                    drucke Das beste Tier ist... Tier at random
+                    tier {is} Nashorn, Biene, Schwan
+                    {print} Das beste Tier ist... tier {at} {random}
                 solution_text: |
                     Verwende die Namen von Variablen oder Listen nicht in regulärem Text zur Ausgabe. In Level 4 wird dieses Problem mit Anführungszeichen gelöst.
                 solution_code: |
-                    Name ist Hedy
-                    drucke Hi ich bin Name
+                    name {is} Hedy
+                    {print} Hi ich bin name
 
                     oder
 
-                    tiere ist Nashorn, Biene, Schwan
-                    drucke Das beste Tier ist... tiere at random
-        -   title: "Schülerinnen und Schüler vergessen at random"
+                    tiere {is} Nashorn, Biene, Schwan
+                    {print} Das beste Tier ist... tiere {at} {random}
+        -   title: "Schülerinnen und Schüler vergessen `{at}` `{random}`"
             example:
                 error_text: |
                     Wie im Beispiel
@@ -335,70 +335,70 @@ sections:
                 solution_text: |
                     Dieses Problem wird durch das Hinzufügen des Wortes at gelöst.
                 solution_code: |
-                    vögel ist Spatz, Möwe, Rotkehlchen
-                    drucke vögel at random
-        -   title: "Schülerinnen und Schüler vergessen den Ausgabebefehl zu nutzen während sie auch den zufällig-Befehl benutzen"
+                    vögel {is} Spatz, Möwe, Rotkehlchen
+                    {print} vögel {at} {random}
+        -   title: "Schülerinnen und Schüler vergessen den `{print}` Befehl zu nutzen während sie auch den `{at}` `{random}` Befehl benutzen"
             example:
                 error_text: |
-                    Oder manchmal schreiben sie at random an den Beginn der Zeile.
+                    Oder manchmal schreiben sie `{at}` `{random}` an den Beginn der Zeile.
                 error_code: |
-                    obst ist Apfel, Kirsche, Banane
-                    obst at random
+                    obst {is} Apfel, Kirsche, Banane
+                    obst {at} {random}
                 solution_text: |
                     Betone ggü. deinen Schülerinnen und Schülern, dass man immer drucke braucht um Text auszugeben.
                 solution_code: |
-                    obst ist Apfel, Kirsche, Banane
-                    drucke obst at random
+                    obst {is} Apfel, Kirsche, Banane
+                    {print} obst {at} {random}
         -   title: "Schülerinnen und Schüler vergessen Kommas in ihren Listen zu benutzen"
             example:
                 error_text: |
                     In einer Liste werden Elemente mit einem Komma getrennt.
                 error_code: |
-                    pizzas ist funghi tonno quattro stagioni
-                    drucke pizzas at random
+                    pizzas {is} funghi tonno quattro stagioni
+                    {print} pizzas {at} {random}
                 solution_text: |
                     Nach jedem Element in deiner Liste sollte ein Komma sein
                 solution_code: |
                     pizzas ist funghi, tonno, quattro stagioni
                     drucke pizzas at random
-        -   title: "Schülerinnen und Schüler versuchen den zufällig-Befehl ohne eine Liste zu verwenden"
+        -   title: "Schülerinnen und Schüler versuchen den `{at}` `{random}` Befehl ohne eine Liste zu verwenden"
             example:
                 error_text: |
                     Zum Beispiel
                 error_code: |
-                    clubs ist Manchester United
-                    drucke clubs at random
+                    clubs {is} Manchester United
+                    {print} clubs {at} {random}
                 solution_text: |
                     Hedy kann nichts at random drucken, weil keine Liste existiert von der gewählt werden kann.
                 solution_code: |
-                    clubs ist Manchester United, Bayrn Munchen, FC Barcelona
-                    drucke clubs at random
+                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
+                    {print} clubs {at} {random}
         -   title: "Schülerinnen und Schüler versuchen add/remove ohne eine Liste zu verwenden "
             example:
                 error_text: |
                     Im unteren Beispiel ist "Namen" keine Liste, aber eine Variable. Du kannst nichts hinzufügen.
                 error_code: |
-                    Namen ist Jake
-                    dein_name ist frage Wer bist du?
-                    add dein_name to Namen
-                    drucke Namen at random
+                    namen {is} Jake
+                    dein_name {is} {ask} Wer bist du?
+                    {add} dein_name {to} namen
+                    {print} namen {at} {random}
                 solution_text: |
                     Es muss zuerst eine Liste geben, daher musst du einen zweiten Namen hinzufügen, um aus Namen eine Liste zu machen, z.B. Amy. Wenn du Amy nicht in deiner Liste möchtest, kannst du sie sofort danach entfernen.
                 solution_code: |
-                    Namen ist Jake, Amy
-                    dein_name ist frage Wer bist du?
-                    füge dein_name zu Namen
-                    drucke Namen at random
+                    namen {is} Jake, Amy
+                    dein_name {is} {ask} Wer bist du?
+                    {add} dein_name {to} namen
+                    {print} namen {at} {random}
         -   title: "Schülerinnen und Schüler vergessen zu/aus beim addiere/entferne zu verwenden"
             example:
                 error_text: |
                     Ohne zu/von funktionieren füge/entferne-Befehle nicht.
                 error_code: |
-                    Abenteuer ist Geschichte, Papagei, Würfel
-                    wahl ist Welches Abenteuer gefällt dir am Besten?
-                    füge wahl
-                    entferne Würfel
-                    drucke Ich mag Abenteuer at random
+                    abenteuer {is} Geschichte, Papagei, Würfel
+                    wahl {is} Welches Abenteuer gefällt dir am Besten?
+                    {add} wahl
+                    {remove} Würfel
+                    {print} Ich mag Abenteuer {at} {random}
                 solution_text: |
                     Hedy muss wissen zu welcher Liste ein Element hinzugefügt oder entfernt werden soll.
                 solution_code: |
@@ -647,10 +647,10 @@ sections:
         sections:
         -   title: Schülerinnen und Schüler vergessen Anführungszeichen
             example:
-                error_code: "superhelden = Spiderman, Batman, Iron Man\nsuperheld = superhelden at random\nfalls superheld = Batman\n    drucke 'IM BATMAN!'\n"
+                error_code: "superhelden = Spiderman, Batman, Iron Man\nsuperheld = superhelden {at} {random}\n{if} superheld = Batman\n    {print} 'IM BATMAN!'\n"
                 error_text: "Schülerinnen und Schüler brauchen nun mehr Anführungszeichen als in vorigen Leveln. In diesem Beispiel wurden Anführungszeichen in der Liste und im falls-Befehl vergessen.\n"
                 solution_text: "Dies ist der korrekte Code:\n"
-                solution_code: "superhelden = 'Spiderman', 'Batman', 'Iron Man'\nsuperheld = superhelden at random\nfalls superheld ist 'Batman'\n    drucke 'IM BATMAN!'\n"
+                solution_code: "superhelden = 'Spiderman', 'Batman', 'Iron Man'\nsuperheld = superhelden {at} {random}\n{if} superheld {is} 'Batman'\n    {print} 'IM BATMAN!'\n"
         -   title: Schülerinnen und Schüler nutzen Anführungszeichen bei Zahlen, die sie für Berechnungen verwenden wollen
             example:
                 error_text: "Du kannst Anführungszeichen um Zahlen verwenden, aber nur falls du möchtest, dass der Computer denkt, dass es Text ist. Dies bedeutet, dass du keine Berechnungen mit den Zahlen machen kannst.\nIm Beispiel unten kannst du keine Berechnungen mit der Zahl 25 machen, weil sie in Anführungszeichen steht.\n"
