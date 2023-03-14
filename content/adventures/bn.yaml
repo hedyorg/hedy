@@ -34,7 +34,7 @@ adventures:
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |
-                    নাম is ask আপনার নাম কি?
+                    নাম is ask 'আপনার নাম কি?'
                     if নাম is হেডি print 'ভালো!' else print 'মন্দ'
                 story_text: "স্তর 3 তিনের মতই `ask` আর `print` ঠিক একই  ভাবেই কাজ করবে | স্তর 4 চার থেকে `if` যুক্ত হয়ে যায়"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
@@ -120,15 +120,7 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                story_text_6: |-
-                    **Maths with words**
-                    In this level it is also allowed to use the + sign with texts. For example:
-                example_code_6: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
+
             13:
                 start_code: |-
                     name = {ask} 'what is your name?'
