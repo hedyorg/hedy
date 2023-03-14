@@ -200,7 +200,7 @@ levels:
             question_text: "哪一句话是对的？"
             mp_choice_options:
             -   option: "你可以用`{print}`命令来提问。"
-                feedback: "这是`{ask}`的作用"
+                feedback: "这是提问的作用"
             -   option: "你可以用 {ask} 命令来复述回答。"
                 feedback: "不是的"
             -   option: "你可以用`{print}`命令显示文本"
@@ -777,7 +777,7 @@ levels:
                     ```
                 feedback: "Hedy will literally print 'prices {at} {random}''"
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
+            hint: "仔细想想：什么是变量？我们应该把它放在引号外吗？放在引号里面的普通的词汇有哪些？"
             question_score: '10'
         7:
             question_text: "What's wrong with this code?"
@@ -860,24 +860,24 @@ levels:
             -   option: "Nothing, this code has no mistakes"
                 feedback: "You missed one!"
             correct_answer: "B"
-            hint: "One line needs quotation marks, because you want it to be printed literally."
+            hint: "有一行需要加引号，因为你想逐字打印它。"
             question_score: '10'
     5:
         1:
-            question_text: "What is true?"
+            question_text: "应该在_?_上填写哪个命令？"
             mp_choice_options:
-            -   option: "In level 5 `{print}` works differently than in level 4"
-                feedback: "`{print}` is still the same"
+            -   option: "```\n{print}\n```\n"
+                feedback: "已经有一个 `{print}` 命令了。"
             -   option: "```\n{if}\n```\n"
                 feedback: "在上面一行里使用了 `{if}` 命令。"
             -   option: "```\n{sleep}\n```\n"
-                feedback: "`No these commands remain the same"
+                feedback: "不是这个！"
             -   option: "```\n{else}\n```\n"
-                feedback: "Correct!"
+                feedback: "这就对了!"
             correct_answer: "D"
             hint: "哪一个可以与`{if}`命令一起使用？"
             question_score: '10'
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
+            code: "数字 {is} {ask} '你的幸运数字是多少？'\n{if} 数字 {is} 5 {print} '我也是！'\n_?_ {print} '我的幸运数字是 5！'"
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
             code: |-
@@ -2599,7 +2599,7 @@ levels:
             question_score: '10'
         9:
             question_text: Which code should be filled in in line 1 at the ???
-            code: "???\nprint 'You won ' prices at random '!'"
+            code: "？？？\n{print} ‘你赢了’奖品{at} {random} ‘！’"
             mp_choice_options:
             -   option: "```\nprices = 'one' 'million' 'dollars', 'nothing'\n```"
                 feedback: You won nothing
@@ -2614,15 +2614,15 @@ levels:
             question_score: '10'
         10:
             question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    for i in range 0 to 1\n        print 'if youre happy and you know it'\n        print action\n    print 'if youre happy and you know it and you really want to show it'\n    print 'if youre happy and you know it'\n    print action"
+            code: "动作们=‘拍手’， ‘跺脚’，‘喊万岁！’   \n？？？\n\t{for} i{in} 范围 0{to} 1\n\t\t{print} ‘如果你很高兴，你也知道’\n\t\t{print} 动作\n\t{print} ‘如果你很高兴，你也知道，而且你真的想表现出来’\n\t{print} ‘如果你很高兴，你也知道’\n\t{print} 动作"
             mp_choice_options:
-            -   option: for i in range 1 to 3
+            -   option: '{for} i {in} {range} 1 {to} 3'
                 feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
+            -   option: '{for} 动作 {in} 动作们'
                 feedback: You are amazing!
-            -   option: repeat 3 times
+            -   option: '{repeat} 3 {times}'
                 feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
+            -   option: '{print} 动作们 {at} {random}'
                 feedback: This is a hard one! All the actions on the list must be in the song.
             correct_answer: B
             hint: This is a hard one! All the actions on the list must be in the song.
@@ -2630,15 +2630,15 @@ levels:
     13:
         1:
             question_text: Which code should be filled in at the ??? ?
-            code: "name = ask 'What is your name?'\nsong = ask 'Whould you like to hear a song?'\nbirthday = ask 'Is today your birthday?'\n???\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday. dear ' name\n  print 'Happy Birthday to you!'"
+            code: "名字 ={ask} ‘你叫什么名字？’\n歌曲 ={ask} ‘你想听一首歌吗？’\n生日 ={ask} ‘今天是你的生日吗？’\n？？？\n\t{print} ‘祝你生日快乐！’\n\t{print} ‘祝你生日快乐！’\n\t{print} ‘祝亲爱的’名字‘生日快乐’\n\t{print} ‘祝你生日快乐！’"
             mp_choice_options:
-            -   option: "```\nif birthday and song = 'yes'\n```"
+            -   option: "```\n{if}生日{and} 歌曲= ‘是’\n```"
                 feedback: Almost there
-            -   option: "```\nif birthday = 'yes' and name = 'Hedy'\n```"
+            -   option: "```\n{if} 生日=‘是’{and}名字=‘海蒂’\n```"
                 feedback: Hedy only sings for you if you like to hear a song
-            -   option: "```\nif song = 'yes' and birthday = 'yes'\n```"
+            -   option: "```\n{if}歌曲=‘是’ {and}生日= ‘是’\n```"
                 feedback: Super!
-            -   option: "```\nif song = 'yes' or birthday = 'yes'\n```"
+            -   option: "```\n{if}歌曲=‘是’ {or}生日= ‘是’\n```"
                 feedback: Hedy only sings if both answers are yes
             correct_answer: C
             hint: Hedy sings if you want to hear a song and it's you birthday
