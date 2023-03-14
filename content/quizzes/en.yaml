@@ -77,7 +77,7 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in line 1 is missing."
                 feedback: "Correct!"
-            -   option: "The command line 2 is spelled wrong."
+            -   option: "The command in line 2 is spelled wrong."
                 feedback: "The command is spelled correctly."
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
@@ -2287,7 +2287,7 @@ levels:
             question_text: "What should be on the place of the question mark?"
             code: |-
                 {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
+                people {is} {ask} 'How many people will be eating here tonight?'
                 _
                     food {is} {ask} 'What would you like to order?'
                     {print} food
@@ -3125,13 +3125,13 @@ levels:
                 9  if chocolate = 'no' and sprinkles = 'no'
                 10     print 'Just plain icecream, coming up!'
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles = 'yes'"
+            -   option: "Line 3 should be: {if} chocolate = 'yes' {and} sprinkles = 'yes'"
                 feedback: "Correct!"
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles = 'no'"
+            -   option: "Line 3 should be: {if} chocolate = 'no' {and} sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles = 'yes'"
+            -   option: "Line 5 should be: {if} chocolate = 'yes' {and} sprinkles = 'yes'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles = 'no'"
+            -   option: "Line 7 should be: {if} chocolate = 'yes' {and} sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
             correct_answer: "A"
             hint: "There is a mistake in line 3"
