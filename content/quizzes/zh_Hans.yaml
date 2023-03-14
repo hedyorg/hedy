@@ -78,7 +78,7 @@ levels:
             -   option: "第一行缺少了`{print}`。"
                 feedback: "正确！"
             -   option: "第一行的“Im”的写法在英语中是错误的。"
-                feedback: "我们故意把“I'm”写错成“Im”，因为海蒂现在还无法理解撇号。"
+                feedback: "该命令的拼写是正确的。"
             -   option: "`{echo}`不是一个命令。"
                 feedback: "`{echo}`是一个命令。错的是别的地方。"
             -   option: "没有错！这代码很完美！"
@@ -158,7 +158,7 @@ levels:
             mp_choice_options:
             -   option: "你可以用它来`{ask}` 一个问题。"
                 feedback: "这是`{ask}`的作用！"
-            -   option: "你可以用它打印文本。"
+            -   option: "您可以像 `{print}` 一样使用它。"
                 feedback: "这是`{print}`的作用！"
             -   option: "你可以用它复述一个答案。"
                 feedback: "做得好！"
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
@@ -215,7 +215,7 @@ levels:
             mp_choice_options:
             -   option: "你可以用`{print}`命令来提问。"
                 feedback: "这是提问的作用"
-            -   option: "你可以用 {ask} 命令来复述回答。"
+            -   option: "你可以用`{ask}`命令来复述答案。"
                 feedback: "不是的"
             -   option: "你可以用`{print}`命令显示文本"
                 feedback: "不错"
@@ -662,13 +662,13 @@ levels:
         1:
             question_text: "Which of these is true?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
+            -   option: "```\n{print} ‘我很高兴参加这次测验！’\n```\n"
                 feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
+            -   option: "```\n{print} ‘我很高兴参加这次测验！’\n```\n"
                 feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
+            -   option: "```\n{print} ‘我很高兴参加这次测验！’\n```\n"
                 feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
+            -   option: "```\n{print} ‘我很高兴参加这次测验！’\n```\n"
                 feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
@@ -690,7 +690,7 @@ levels:
                     ```
                     {print} hello
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "这里没有引号！"
             -   option: |
                     ```
                     {print} ,hello,
@@ -716,7 +716,7 @@ levels:
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "第一个引号应位于单词 `{print}` 后面"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
@@ -749,7 +749,7 @@ levels:
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "千万不要把引号放在`{print}` 命令的前面。"
             -   option: |
                     ```
                     {print} 'options' {at} {random}
@@ -1273,11 +1273,11 @@ levels:
                 name _?_ Hedy
                 {print} name 'is walking trough the forrest'
             mp_choice_options:
-            -   option: "You can only fill in the word is on the `_?_`"
+            -   option: "您只能在`_`上填写单词"
                 feedback: "You are allowed to use the `=` sign as well"
-            -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
+            -   option: "您可以在 `_` 上填写单词 ' is ' 或 `=` 符号"
                 feedback: "Amazing!"
-            -   option: "You have to fill in =is= on the `_?_`"
+            -   option: "你必须在 `_` 上填写 =是="
                 feedback: "No, one `=` sign is enough"
             -   option: "You can only use the `=` sign when working with numbers, not with words."
                 feedback: "You can also use `=` with words."
@@ -1456,12 +1456,12 @@ levels:
         9:
             question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                蝙蝠侠正在高谭市上空飞行。
+                当他突然听到有人在尖叫...
+                救命啊!
+                救命啊！
+                救命！
+                请帮助我！
             mp_choice_options:
             -   option: |
                     ```
@@ -1679,7 +1679,7 @@ levels:
                 {print} '这些是你点的'
             mp_choice_options:
             -   option: "没有错。这段代码是正确的！"
-                feedback: "有地方错了！。"
+                feedback: "有地方出错了！"
             -   option: "`{ask}`命令后面不能用`{if}`命令。"
                 feedback: "可以用！"
             -   option: "不需要缩进两次。只有第一个`{if}`命令需要缩进。"
@@ -1788,9 +1788,9 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: "Nothing this code is correct!"
-                feedback: "That's right!."
+                feedback: "这是正确的！"
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
+                feedback: "可以用！"
             -   option: "You don't have to use indentation twice."
                 feedback: "You always have to use indentation."
             -   option: "The indentation is wrong in the last `{if}` command."
@@ -1929,7 +1929,7 @@ levels:
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "如果你点了一个中等大小的比萨和一杯可乐，你会得到5元的折扣。<br>但这段代码中存在一个错误！如何调试这段代码？"
             code: |-
                 {if} food {is} pizza
                 {if} size {is} medium
@@ -1967,7 +1967,7 @@ levels:
                             {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: "Try again"
+                feedback: "差不多是正确的不过请看最后一行。"
             correct_answer: "A"
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
@@ -2154,7 +2154,7 @@ levels:
             question_text: "What should be on the place of the question mark?"
             code: |-
                 {print}‘欢迎来到海蒂快餐店’
-                人 {is} {ask}‘今晚有多少人会在这里吃饭？’
+                人 是 {ask}‘今晚有多少人会在这里吃饭？’
                 _?_
                 	食物{is} {ask}‘你想点些什么？’
                 	{print}食物
