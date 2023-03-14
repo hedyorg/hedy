@@ -314,7 +314,7 @@ adventures:
                 story_text: |-
                     ## And... Or..?
                     We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. 
-                    
+
                     If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
@@ -690,9 +690,9 @@ adventures:
                 story_text: |-
                     ## Story
                     In this level quotation marks will be needed to save multiple words in a variable.
-                    
+
                     ### Exercise
-                    
+
                     Find a story from a previous level, any level is ok. Now make sure quotation marks are added in the right places.
                 example_code: |
                     ```
@@ -707,7 +707,7 @@ adventures:
 
                     ### Exercise 1
                     Look at the example code and finish it. Then add at least 2 more {if} codes with `{and}` or `{or}`.
-                    
+
                     ### Exercise 2
                     Find a story from a previous level, and add one `{and}` or `{or}`.
                 example_code: |
@@ -1965,9 +1965,9 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
-                                        
-                    ### Opdracht
-                    Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed. 
+
+                    ### Exercise
+                    Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed.
 
                 example_code: |
                     ```
@@ -2118,7 +2118,7 @@ adventures:
             12:
                 story_text: |
                     ## Calculator
-                    In this level, you can make a calculator that works for decimal numbers. 
+                    In this level, you can make a calculator that works for decimal numbers.
 
                     ### Exercise 1
                     Fill out the blanks to complete the calculator. Remember to use a period and not a comma for decimal numbers.
@@ -2127,7 +2127,6 @@ adventures:
                     Create a new mathematics practice program, but now use decimal numbers.
                     Create a list of numbers, choose two to multiple and let the player answer.
                     And of course you have to validate the answer! **(extra)** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
-                                       
 
 
                 example_code: |
@@ -2157,7 +2156,7 @@ adventures:
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
-                start_code: "# Schrijf jouw code hier"
+                start_code: "# Write your code here"
             14:
                 story_text: |
                     ## Guess which number
@@ -2807,11 +2806,11 @@ adventures:
                     ```
                 start_code: "# place your code here"
             12:
-                story_text: |
-                    ## Fortune Teller               
-                    From level 12 on, you will also have to use quotation marks in lists, before and after each item. 
+                story_text: |-
+                    ## Fortune Teller
+                    From level 12 on, you will also have to use quotation marks in lists, before and after each item.
 
-                    ### Exercise 
+                    ### Exercise
                     Add two predictions to the list
 
                 example_code: |
@@ -3099,10 +3098,10 @@ adventures:
                 story_text: |
                     ## Piggy Bank
                     In this adventure you learn how to make a digital piggy bank.
-                    
-                    ### Exercise 
+
+                    ### Exercise
                     Finish the code to calculate how much money you have and how long you need to save up to buy what you want!
-                    **(extra)** Maybe you have already saved some money? Deduct that from the amount you will have to save up. 
+                    **(extra)** Maybe you have already saved some money? Deduct that from the amount you will have to save up.
 
                 example_code: |
                     ```
@@ -3223,8 +3222,8 @@ adventures:
                     If the enemy tries to crack the code, they will get some false info to waste their time.
 
                     ### Exercise 1
-                    Make your own secret code for your superspy and return both parts only to the real spy?
-                    
+                    Make your own secret code for your superspy and return both parts only to the real spy.
+
                     ### Exercise 2
                     Add a third component to the code, like a piece of clothing or an object.
                 example_code: |
@@ -3239,19 +3238,19 @@ adventures:
                         b {is} 'tomorrow at 02.00'
                     {else}
                         b {is} 'today at 10.00'
-                    {print} _ _ 
+                    {print} _ _ _
                     ```
                 start_code: "## place your code here"
             13:
                 story_text: |
                     ## Superspy
-                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`. 
-                    
+                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`.
+
                     ### Exercise 1
                     Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
-                    
-                    Opdracht 2
-                    We want confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answewr is given.
+
+                    ### Exercise 2
+                    We want confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answer is given.
 
                 example_code: |
                     ```
@@ -3374,12 +3373,12 @@ adventures:
                     ## Tic Tac Toe
                     In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
                     The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
-                    
+
                     ### Exercise 1
                     The game works, but it has some issues. For example, any player can pick any field, even one already taken! Use an `{if}` whether the spot is taken, and if so, warn the player.
-                    
+
                     ### Exercise 2
-                    The game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol. 
+                    The game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol.
 
                     ### Exercise 3 (extra)
                     You don't always have a friend to play with. Can you create a computer opponent?
@@ -3387,20 +3386,20 @@ adventures:
                     ```
                     player = 'x'
                     field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-                    
-                    {for} i in {range} 1 {to} 9
+
+                    {for} i {in} {range} 1 {to} 9
                         choice = {ask} 'Player ' player ' what spot do you choose?'
-                        field at choice = player
+                        field {at} choice = player
                         {clear}
-                        print field at 1 field at 2 field at 3
-                        print field at 4 field at 5 field at 6
-                        print field at 7 field at 8 field at 9
+                        print field {at} 1 field {at} 2 field {at} 3
+                        print field {at} 4 field {at} 5 field {at} 6
+                        print field {at} 7 field {at} 8 field {at} 9
                         {if} player = 'x'
                             player = 'o'
                         {else}
                             player = 'x'
                     ```
-                start_code: '##  Write your code here'
+                start_code: '## Write your code here'
             14:
                 story_text: |
                     ## Tic Tac Toe
