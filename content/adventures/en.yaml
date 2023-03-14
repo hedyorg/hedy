@@ -3391,11 +3391,11 @@ adventures:
                     {for} i in {range} 1 {to} 9
                         choice = {ask} 'Player ' player ' what spot do you choose?'
                         field at choice = player
-                        clear
+                        {clear}
                         print field at 1 field at 2 field at 3
                         print field at 4 field at 5 field at 6
                         print field at 7 field at 8 field at 9
-                        {if} player is 'x'
+                        {if} player == 'x'
                             player = 'o'
                         {else}
                             player = 'x'
