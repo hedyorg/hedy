@@ -78,7 +78,7 @@ levels:
             -   option: "`{print}` in line 1 is missing."
                 feedback: "Correct!"
             -   option: "The command line 2 is spelled wrong."
-                feedback: "The command is spelled correctly"
+                feedback: "The command is spelled correctly."
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: "Nothing! This is a perfect code!"
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
@@ -662,24 +662,24 @@ levels:
             question_text: "Which of these codes is correct?"
             mp_choice_options:
             -   option: |
-                  ```
-                  {print} 'Im very excited to take this quiz!'
-                  ```
+                    ```
+                    {print} 'Im very excited to take this quiz!'
+                    ```
                 feedback: "That's right"
             -   option: |
-                  ```
-                  {print} Im very excited to take this quiz!
-                  ```
+                    ```
+                    {print} Im very excited to take this quiz!
+                    ```
                 feedback: "`{ask}` needs quotation marks too!"
             -   option: |
-                  ```
-                  {print} 'I'm very excited to take this quiz!'
-                  ```
+                    ```
+                    {print} 'I'm very excited to take this quiz!'
+                    ```
                 feedback: "`{at} {random}` still works"
             -   option: |
-                  ```
-                  {print} 'I'm very excited to take this quiz!
-                  ```
+                    ```
+                    {print} 'I'm very excited to take this quiz!
+                    ```
                 feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
