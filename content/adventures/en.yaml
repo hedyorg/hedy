@@ -1320,15 +1320,15 @@ adventures:
                 story_text: |
                     ## Dishwashing
                     With the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
-
+                    ### Exercise
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
                     dishwasher {is} people {at} {random}
-                    {if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ 
-                    {else} {print} 'luckily no dishes because' _ 'is already washing up'
+                    _ dishwasher {is} Sophie {print} _ too bad I have to do the dishes _
+                    _ {print} 'luckily no dishes because' _ 'is already washing up'
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             6:
@@ -1436,16 +1436,18 @@ adventures:
             5:
                 story_text: |
                     ## Dice
-                    You can also make a die again in this level using the `{if}`.
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+                    We are going to add the `{if}` and `{else}` commands to our dice!
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.
+                    ### Exercise
+                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm. It should say "You have to throw again" if you've thrown anything else.
+                    **Extra** Maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.
                 example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} _
-                    {print} 'you have' _ 'thrown'
-                    {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
+                    throw {is} choices at random
+                    {print} 'you have thrown' choices
+                    _ throw {is} earthworm {print} 'You can stop throwing.'
+                    _ {print} 'You have to throw it again!'
                     ```
                 start_code: "{print} 'What will the die indicate this time?'"
             6:
@@ -1895,17 +1897,19 @@ adventures:
             5:
                 story_text: |
                     ## Rock, paper, scissors
-                    In this level we can determine who won.
-                    For that you need the new `{if}` code.
+                    In this level we can determine whether it's a tie or not. For that you need the new `{if}` code.
 
-                    Save your choice with the name of choice and the choice of computer as computer choice.
-                    Then you can use `{if}` to see if they are the same or different.
-                    Will you finish the code?
+                    ## Exercise
+                    Finish the code by filling in the blanks:
+                    * Let the computer pick a random option
+                    * Ask the player what they want to choose
+                    * Fill in the correct variables in line 4 and 5
+                    * Programm line 6 so that Hedy can check whether it's a tie or not.
                 example_code: |
                     ```
                     options {is} rock, paper, scissors
                     computer_choice {is} _
-                    choice {is} {ask} 'What do you choose?'
+                    choice {is} _
                     {print} 'you chose ' _
                     {print} 'computer chose ' _
                     {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'

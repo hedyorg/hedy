@@ -140,7 +140,7 @@ adventures:
                     {else} {print} 'mwah'
                     ```
                 story_text_4: "Iets anders dat met `{if}` werkt, is `{pressed}`! Met `{pressed}` kun je iedere letter\nuit het alfabet en ieder nummer op jouw toetsenbord koppelen aan een commando. \nDan kun je programmeren wat er gebeurt als je die toets indrukt. Probeer maar eens!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+                example_code_4: "```\n{if} x {is} {pressed} {print} 'Het werkt!'\n```\n"
             6:
                 start_code: "{print} '5 keer 5 is ' 5 * 5"
                 story_text: |
@@ -1243,15 +1243,15 @@ adventures:
                 story_text: |
                     ## Afwasprogramma
                     Met de `{if}` kun je jouw programma nu nog leuker maken. Je kan je programma laten reageren op de keuze.
-
+                    ### Opdracht
                     Maak jij de code af zodat het 'chips' {print} als jij aan de beurt bent, en anders 'yes!'?
                     Vergeet de aanhalingstekens niet!
                 example_code: |
                     ```
                     mensen {is} mama, papa, Emma, Sophie
                     afwasser {is} mensen {at} {random}
-                    {if} afwasser {is} Sophie {print} _ chips ik moet de afwas doen _
-                    {else} {print} ' gelukkig geen afwas want ' _ ' wast al af'
+                    _ afwasser {is} Sophie {print} _ chips ik moet de afwas doen _
+                    _ {print} ' gelukkig geen afwas want ' _ ' wast al af'
                     ```
                 start_code: "{print} 'Wie doet de afwas?'"
             6:
@@ -1355,10 +1355,10 @@ adventures:
             5:
                 story_text: |
                     ## Dobbelsteen
-                    Je kunt ook in dit level weer een dobbelsteen maken en daarbij de `{if}` gebruiken.
-                    Maak de voorbeeldcode af zodat de code zegt 'Je mag stoppen met gooien' als je een regenworm hebt gegooid.
-
-                    Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken. Dat is natuurlijk ook goed. Verzin dan zelf een reactie. Bijv 'yes' bij 6 en 'jammer' bij iets anders.
+                    Je kunt ook in dit level weer een dobbelsteen maken en daarbij de `{if}` en `{else}` gebruiken.
+                    ### Opdracht
+                    Maak de code af zodat de code zegt 'Je mag stoppen met gooien' als je een regenworm hebt gegooid. Hij moet 'je moet nog een keer gooien' antwoorden als je iets anders hebt gegooid dan een regenworm.
+                    **Extra** Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken. Dat is natuurlijk ook goed. Verzin dan zelf een reactie. Bijv 'yes' bij 6 en 'jammer' bij iets anders.
                 example_code: |
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
@@ -1515,17 +1515,21 @@ adventures:
             5:
                 story_text: |
                     ## Steen, papier, schaar
-                    In level 5 kunnen we gaan bepalen wie er gewonnen heeft.
+                    In level 5 kunnen we gaan bepalen of het gelijkspel is.
                     Daarvoor heb je de nieuwe `{if}` code nodig.
 
-                    Sla jouw keuze op met de naam keuze en de keuze van de computer als computerkeuze.
-                    Dan kun je met `{if}` kijken of ze hetzelfde zijn of verschillend.
-                    Maak jij de code af?
+                    ## Opdracht
+                    Maak de codes af door de lijntjes in te vullen.
+                    * Laat de computer een willekeurige keuze maken
+                    * Vraag naar de keuze van de speler
+                    * Vul de juiste variabelen in op regel 4 en 5.
+                    * Programmeer regel 6 zodat er gecheckt wordt of het gelijkspel is.
+
                 example_code: |
                     ```
                     opties {is} steen, papier, schaar
                     computerkeuze {is} _
-                    keuze {is} {ask} 'Wat kies jij?'
+                    keuze {is} _
                     {print} 'jij koos ' _
                     {print} 'computer koos ' _
                     {if} _ {is} _ {print} 'gelijkspel!' {else} {print} 'geen gelijkspel'
