@@ -325,42 +325,42 @@ sections:
         -   title: "Students try to print whole lists"
             example:
                 error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
+                    A list can't be printed. You can only print one item from the list with {at} {random}.
                 error_code: |
                     groceries is apples, milk, chocolate
                     print groceries
                 solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
+                    To print a list of all the groceries, you simply need to put them after a `{print}` command. Else you can use the list to print one item with `{at}` `{random}`.
                 solution_code: |
-                    print apples, milk, chocolate
+                    {print} apples, milk, chocolate
 
                     or
 
-                    groceries is apples, milk, chocolate
-                    print groceries at random
+                    groceries {is} apples, milk, chocolate
+                    {print} groceries {at} {random}
         -   title: "Students use the name of a variable or list as regular text"
             example:
                 error_text: |
                     This problem probably occured in level 2 as well. Now it can happen with lists too.
                 error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                    name {is} Hedy
+                    {print} Hi my name is name
 
                     or
 
-                    animal is rhino, bee, swan
-                    print The best animal is... animal at random
+                    animal {is} rhino, bee, swan
+                    {print} The best animal is... animal {at} {random}
                 solution_text: |
                     Don't use the names of variables or lists in regular text to print. In level 4 this problem is solved with quotation marks.
                 solution_code: |
-                    name is Hedy
-                    print Hi I'm name
+                    name {is} Hedy
+                    {print} Hi I'm name
 
                     or
 
-                    animals is rhino, bee, swan
-                    print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+                    animals {is} rhino, bee, swan
+                    {print} The best animal is... animals {at} {random}
+        -   title: "Students forget `{at}` in `{at}` `{random}`"
             example:
                 error_text: |
                     Like in the example
@@ -370,70 +370,70 @@ sections:
                 solution_text: |
                     This problem is solved by adding the word at.
                 solution_code: |
-                    birds is sparrow, seagull, robin
-                    print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+                    birds {is} sparrow, seagull, robin
+                    {print} birds {at} {random}
+        -   title: "Students forget to use the `{print}` command when also using the `{at}` `{random}` command"
             example:
                 error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
+                    Or they will sometimes put `{at}` `{random}` at the beginning of the line.
                 error_code: |
-                    fruit is apple, cherry, banana
-                    fruit at random
+                    fruit {is} apple, cherry, banana
+                    fruit {at} {random}
                 solution_text: |
                     Emphasize to your students that you always need a print to print text.
                 solution_code: |
-                    fruit is apple, cherry, banana
-                    print fruit at random
+                    fruit {is} apple, cherry, banana
+                    {print} fruit {at} {random}
         -   title: "Students forget to use commas in their lists"
             example:
                 error_text: |
                     In a list items are seperated with a comma.
                 error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
+                    pizzas {is} funghi tonno quattro stagioni
+                    {print} pizzas {at} {random}
                 solution_text: |
                     After each item on your list, there should be a comma
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-        -   title: "Students try to use at random without a list"
+        -   title: "Students try to use `{at}` `{random}` without a list"
             example:
                 error_text: |
                     For example
                 error_code: |
-                    clubs is Manchester United
-                    print clubs at random
+                    clubs {is} Manchester United
+                    {print} clubs {at} {random}
                 solution_text: |
                     Hedy can't print anything at random, because there is no list to choose from.
                 solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
+                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
+                    {print} clubs {at} {random}
         -   title: "Students try to use add/remove without a list "
             example:
                 error_text: |
                     In the example below 'names' is not a list, but a variable. You cannot add anything to it.
                 error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    names {is} Jake
+                    your_name {is} {ask} Who are you?
+                    {add} your_name {to} names
+                    {print} names {at} {random}
                 solution_text: |
                     There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
                 solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    names {is} Jake, Amy
+                    your_name {is} {ask} Who are you?
+                    {add} your_name {to} names
+                    {print} names {at} {random}
         -   title: "Students forget to use to/from in add/remove"
             example:
                 error_text: |
                     Without to/from the add/remove command won't work.
                 error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
+                    adventures {is} story, parrot, dice
+                    choice {is} Which adventure do you like best?
+                    {add} choice
+                    {remove} dice
+                    {print} I love adventures {at} {random}
                 solution_text: |
                     Hedy has to know which list the item should be added to/removed from.
                 solution_code: |
@@ -824,17 +824,17 @@ sections:
                     Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
                 error_code: |
                     superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes at random
-                    if superhero = Batman
-                        print 'IM BATMAN!'
+                    superhero = superheroes {at} {random}
+                    {if} superhero = Batman
+                        {print} 'IM BATMAN!'
 
                 solution_text: |
                     This is the correct code:
                 solution_code: |
                     superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes at random
-                    if superhero is 'Batman'
-                        print 'IM BATMAN!'
+                    superhero = superheroes {at} {random}
+                    {if} superhero {is} 'Batman'
+                        {print} 'IM BATMAN!'
         -   title: "Students use quotation marks on numbers they want to use for calculations"
             example:
                 error_text: |
