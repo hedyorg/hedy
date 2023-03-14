@@ -305,15 +305,6 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                story_text_6: |-
-                    **Maths with words** 
-                    In this level it is also allowed to use the + sign with texts. For example:
-                example_code_6: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
             13:
                 start_code: |-
                     name = {ask} 'what is your name?'
@@ -322,7 +313,9 @@ adventures:
                         {print} 'You are the real Hedy!'
                 story_text: |-
                     ## And... Or..?
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. 
+                    
+                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -394,7 +387,7 @@ adventures:
                 story_text: |-
                     ## More and more like real code!
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    You can use the square brackets as well to point out a place in the lists.
+                    We use square brackets to point out a place in a list. The {at} command can not be used anymore.
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
@@ -696,7 +689,11 @@ adventures:
             12:
                 story_text: |-
                     ## Story
-                    In this level you can use the quotation marks to save multiple words in a variable.
+                    In this level quotation marks will be needed to save multiple words in a variable.
+                    
+                    ### Exercise
+                    
+                    Find a story from a previous level, any level is ok. Now make sure quotation marks are added in the right places.
                 example_code: |
                     ```
                     name = 'The Queen of England'
@@ -706,35 +703,21 @@ adventures:
             13:
                 story_text: |
                     ## Story
-                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
+                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
 
-                    ### Exercise
-                    Can you make your own adventure minigame like this?
+                    ### Exercise 1
+                    Look at the example code and finish it. Then add at least 2 more {if} codes with `{and}` or `{or}`.
+                    
+                    ### Exercise 2
+                    Find a story from a previous level, and add one `{and}` or `{or}`.
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
                     {print} 'Our hero is walking through the forest'
                     {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    path = {ask} 'Which path should she choose?'
+                    weapon = {ask} 'What weapon does she draw?'
+                    {if} path {is} 'left' {and} weapon {is} 'sword'
+                        _
                     ```
                 start_code: "# place your code here"
             15:
@@ -1017,7 +1000,7 @@ adventures:
 
                     ### Exercise
                     Can you add the right amount of indentation to each line to make the song play correctly?
-                    Mind: Not all lines need indentation
+                    Tip: Not all lines need indentation
                 example_code: |
                     ```
                     _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
@@ -1985,7 +1968,10 @@ adventures:
             13:
                 story_text: |
                     ## Rock, paper, scissors
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
+                                        
+                    ### Opdracht
+                    Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed. 
 
                 example_code: |
                     ```
@@ -2136,19 +2122,50 @@ adventures:
             12:
                 story_text: |
                     ## Calculator
-                    Now you can make a calculator that works for decimal numbers. Fill in the blanks to get it to work properly!
+                    In this level, you can make a calculator that works for decimal numbers. 
+
+                    ### Exercise 1
+                    Fill out the blanks to complete the calculator. Remember to use a period and not a comma for decimal numbers.
+
+                    ### Exercise 2
+                    Create a new mathematics practice program, but now use decimal numbers.
+                    Create a list of numbers, choose two to multiple and let the player answer.
+                    And of course you have to validate the answer! **(extra)** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
+                                       
+
+
                 example_code: |
                     ```
                     number1 = {ask} 'What is the first number?'
                     number2 = {ask} 'What is the second number?'
                     answer = _
-                    {print} number1 ' plus ' number2 ' is ' answer
+                    {print} number1 ' plus ' number2 ' is ' _
                     ```
                 start_code: "# place your code here"
+            13:
+                story_text: |
+                    ## Calculator
+
+                    ### Exercise 1
+                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+
+                    ### Exercise 2 (extra)
+                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                    Empty the programming field and create your own solution.
+
+                example_code: |
+                    ```
+                    answer1 = {ask} 'What is 10 times 7?'
+                    answer2 = {ask} 'What is 6 times 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
+                start_code: "# Schrijf jouw code hier"
             14:
                 story_text: |
                     ## Guess which number
-                    In this level you can programm the game 'Guess which number'
+                    In this level you can program the game 'Guess which number'
                 example_code: |
                     ```
                     {print} 'Guess which number'
@@ -2537,22 +2554,22 @@ adventures:
             13:
                 story_text: |
                     ## Restaurant
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    In this level you will learn new commands to extend your code even further.
 
-                    ### Exercise
-                    Fill in `{and}` and `{or}` on the right blanks.
+                    ### Exercise 1
+                    Place a `{and}` and a `{or}` in the logical place in the program.
+
+                    ### Exercise 2
+                    Expand your restaurant with at least one more `{and}` and one `{or}`.
+                    For example, create a special discount coupon that only applies to pizza, or give your customer a free drink
+                    with fries and pancakes. Or something completely different of course!
 
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
+                        {print} 'That is our discount menu'
                         price = price - 3
-                    {if} drinks {is} 'juice' _ drinks {is} 'sap'
-                        {print} 'What a healthy choice!'
+                    {if} drinks {is} 'water' _ drinks {is} 'juice'
+                        {print} 'That is a healthy choice'
                     {print} 'That will be ' price ' dollars'
                     ```
                 start_code: "# place your code here"
@@ -2795,12 +2812,16 @@ adventures:
                 start_code: "# place your code here"
             12:
                 story_text: |
-                    ## Fortune Teller
-                    In this level you can make your fortunes multiple words. Can you add more different fortunes to the list?
+                    ## Fortune Teller               
+                    From level 12 on, you will also have to use quotation marks in lists, before and after each item. 
+
+                    ### Exercise 
+                    Add two predictions to the list
+
                 example_code: |
                     ```
                     fortunes = 'you will slip on a banana peel', _
-                    {print} 'I will take a look in my crystall ball for your future.'
+                    {print} 'I will take a look in my crystal ball for your future.'
                     {print} 'I see... I see...'
                     {sleep}
                     {print} fortunes {at} {random}
@@ -3082,7 +3103,11 @@ adventures:
                 story_text: |
                     ## Piggy Bank
                     In this adventure you learn how to make a digital piggy bank.
+                    
+                    ### Exercise 
                     Finish the code to calculate how much money you have and how long you need to save up to buy what you want!
+                    **(extra)** Maybe you have already saved some money? Deduct that from the amount you will have to save up. 
+
                 example_code: |
                     ```
                     {print} 'The digital piggy bank'
@@ -3201,27 +3226,37 @@ adventures:
                     In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
                     If the enemy tries to crack the code, they will get some false info to waste their time.
 
-                    ### Exercise
-                    Make your own secret code for your superspy. Can you make it consist of even more variables?
+                    ### Exercise 1
+                    Make your own secret code for your superspy and return both parts only to the real spy?
+                    
+                    ### Exercise 2
+                    Add a third component to the code, like a piece of clothing or an object.
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} 'Agent007'
+                    if name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '
                     password {is} {ask} 'What is the password?'
-                    {if} password {is} 'TOPSECRET'
+                    {if} password {is} _
                         b {is} 'tomorrow at 02.00'
                     {else}
                         b {is} 'today at 10.00'
-                    {print} a + b
+                    {print} _ _ 
                     ```
                 start_code: "## place your code here"
             13:
                 story_text: |
                     ## Superspy
-                    Can you fill in the right command on the blank? Mind: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`. 
+                    
+                    ### Exercise 1
+                    Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    
+                    Opdracht 2
+                    We want confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answewr is given.
+
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
@@ -3343,65 +3378,33 @@ adventures:
                     ## Tic Tac Toe
                     In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
                     The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
+                    
+                    ### Exercise 1
+                    The game works, but it has some issues. For example, any player can pick any field, even one already taken! Use an `{if}` whether the spot is taken, and if so, warn the player.
+                    
+                    ### Exercise 2
+                    The game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol. 
+
+                    ### Exercise 3 (extra)
+                    You don't always have a friend to play with. Can you create a computer opponent?
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} game {is} 'on'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice {is} 1
-                                    spot_1 = sign
-                                {if} choice {is} 2
-                                    spot_2 = sign
-                                {if} choice {is} 3
-                                    spot_3 = sign
-                                {if} choice {is} 4
-                                    spot_4 = sign
-                                {if} choice {is} 5
-                                    spot_5 = sign
-                                {if} choice {is} 6
-                                    spot_6 = sign
-                                {if} choice {is} 7
-                                    spot_7 = sign
-                                {if} choice {is} 8
-                                    spot_8 = sign
-                                {if} choice {is} 9
-                                    spot_9 = sign
-                            {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
-                            {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner {is} 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
-                            {else}
-                                {if} sign {is} 'x'
-                                    sign = 'o'
-                                {else}
-                                    sign = 'x'
+                    player = 'x'
+                    field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    
+                    {for} i in {range} 1 {to} 9
+                        choice = {ask} 'Player ' player ' what spot do you choose?'
+                        field at choice = player
+                        {clear}
+                        print field at 1 field at 2 field at 3
+                        print field at 4 field at 5 field at 6
+                        print field at 7 field at 8 field at 9
+                        {if} player = 'x'
+                            player = 'o'
+                        {else}
+                            player = 'x'
                     ```
-                start_code: "## place your code here"
+                start_code: '##  Write your code here'
             14:
                 story_text: |
                     ## Tic Tac Toe
