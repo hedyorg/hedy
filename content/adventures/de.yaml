@@ -1032,16 +1032,16 @@ adventures:
                 story_text: |
                     ## Abwaschen
                     Mit dem Befehl `{if}` kannst Du noch etwas mehr Spaß haben, wenn Du die Auswahl auswertest. Du kannst Dein Programm auf die Auswahl, die der Computer trifft, reagieren lassen.
-
+                    ### Übung
                     Kannst Du den Code so vervollständigen, dass er "So ein Pech" ausgibt, wenn Du dran bist und ansonsten "Zum Glück!"?
                     Vergiss die Anführungszeichen nicht!
 
                 example_code: |
                     ```
-                    Leute {is} Mama, Papa, Emma, Sophie
-                    Tellerwäscher {is} Leute {at} {random}
-                    {if} Tellerwäscher {is} Sophie {print} _ So ein Pech. Ich muss abwaschen. _ 
-                    {else} {print} 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
+                    leute {is} Mama, Papa, Emma, Sophie
+                    tellerwäscher {is} leute {at} {random}
+                    _ tellerwäscher {is} Sophie {print} _ So ein Pech. Ich muss abwaschen. _
+                    _ {print} 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
                     ```
                 start_code: "{print} 'Wer macht den Abwasch?'"
             4:
@@ -1140,17 +1140,19 @@ adventures:
             5:
                 story_text: |
                     ## Würfel
-                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `{if}`.
-                    Vervollständige den Beispiel-Code, sodass er ausgibt "Du kannst aufhören zu würfeln", sobald Du einen Regenwurm gewürfelt hast.
+                    Wir werden die `{if}` und `{else}` Befehle zu unseren Würfeln hinzufügen!
 
-                    Vielleicht möchtest Du auch einen Würfel aus einem ganz anderen Spiel nachbauen. Das ist auch super! Dann überlege Dir selbst eine Reaktion. Zum Beispiel 'ja' bei einer 6 und 'schade' für alles andere.
+                    ### Übung
+                    Vervollständige den Beispiel-Code, sodass der Code sagt "Du kannst aufhören zu werfen", sobald du einen Regenwurm gewürfelt hast. Er sollte "Du musst nochmal werfen" ausgeben, falls du etwas anderes gewürfelt hast.
+                    **Extra** Vielleicht möchtest Du auch einen Würfel aus einem ganz anderen Spiel nachbauen. Das ist auch super! Dann überlege dir selbst eine Reaktion. Zum Beispiel 'ja' bei einer 6 und 'schade' für alles andere.
 
                 example_code: |
                     ```
-                    Würfelseiten {is} 1, 2, 3, 4, 5, Regenwurm
-                    Wurf {is} _
-                    {print} 'Du hast ' _ ' gewürfelt'
-                    {if} _ {is} Regenwurm {print} 'Du kannst aufhören zu würfeln.' _ {print} 'Du musst es nochmal hören!'
+                    würfelseiten {is} 1, 2, 3, 4, 5, Regenwurm
+                    wurf {is} würfelseiten {at} {random}
+                    {print} 'Du hast gewürfelt: ' würfelseiten
+                    _ wurf {is} Regenwurm {print} 'Du kannst aufhören zu würfeln.'
+                    _ {print} 'Du musst nochmal würfeln!'
                     ```
                 start_code: "{print} 'Was zeigt der Würfel diesmal?'"
             4:
@@ -1272,18 +1274,20 @@ adventures:
             5:
                 story_text: |
                     ## Stein, Schere, Papier
-                    In diesem Level können wir bestimmen wer gewonnen hat.
-                    Dafür brauchst du den neuen `{if}` Code.
+                    In diesem Level können wir bestimmen, ob es unentschieden war oder nicht. Dafür brauchst du den neuen `{if}` Code.
 
-                    Speichere deine Wahl unter dem Variablennamen Wahl und die Wahl des Computers als Computerwahl.
-                    Dann kannst du `{if}` benutzen, um zu bestimmen, ob sie gleich oder verschieden sind.
-                    Wirst du den Code vervollständigen?
+                    ### Übung
+                    Vervollständige den Code, indem du die Lücken füllst.
+                    * Lass den Computer eine zufällige Wahl treffen
+                    * Frage den Spieler, was er wählt
+                    * Fülle die korrekten Variablen in Zeile 4 und 5
+                    * Programmiere Zeile 6 so, dass Hedy prüfen kann, ob es unentschieden war oder nicht
 
                 example_code: |
                     ```
-                    Auswahl {is} Schere, Stein, Papier
-                    Computer_Wahl {is} _
-                    deine_Wahl {is} {ask} Was wählst du?
+                    auswahl {is} Schere, Stein, Papier
+                    computer_wahl {is} _
+                    deine_wahl {is} _
                     {print} 'Du wählst ' _
                     {print} 'Der Computer wählte ' _
                     {if} _ {is} _ {print} 'Unentschieden!' {else} {print} 'kein Unentschieden'
