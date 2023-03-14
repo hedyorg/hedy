@@ -17,7 +17,7 @@ levels:
         2:
             question_text: "Which need to be filled in on the blanks to make the text Hello! appear?"
             code: |
-                ___ Hello!
+                _ Hello!
             mp_choice_options:
             -   option: |
                     ```
@@ -40,7 +40,7 @@ levels:
                     ```
                 feedback: "With `{ask}`, you can ask a question."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_ Hello world!"
             question_score: '10'
         3:
             question_text: "How do you ask what someone's favorite color is?"
@@ -77,8 +77,8 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in line 1 is missing."
                 feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
+            -   option: "The command line 2 is spelled wrong."
+                feedback: "The command is spelled correctly"
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: "Nothing! This is a perfect code!"
@@ -90,7 +90,7 @@ levels:
             question_text: "Which command is missing in line 2?"
             code: |-
                 {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                _ So your favorite pet is...
             mp_choice_options:
             -   option: |
                     ```
@@ -158,7 +158,7 @@ levels:
             mp_choice_options:
             -   option: "You can use it to `{ask}` a question."
                 feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to print text."
+            -   option: "You can use it exactly the same way as `{print}`."
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
                 feedback: "Good job!"
@@ -186,13 +186,27 @@ levels:
             hint: "`{ask}` allows you to ask a question"
             question_score: '10'
         10:
-            question_text: "Are you ready for level 2?"
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+              {ask} Are you ready to go to level 2?
+              {echo}
+              {echo}
             mp_choice_options:
-            -   option: "Yes!"
-                feedback: "Great! Let's go to the next level!"
-            -   option: "No"
-                feedback: "What a shame... You can practice some more in level 1!"
-            correct_answer: "A"
+            -   option: |
+                  Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                  Yes!
+                  Yes!
+                feedback: "Great job!"
+            -   option: |
+                  Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                  Are you ready to go to level 2?
+                  Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
             hint: "Let's go!"
             question_score: '10'
     2:
@@ -288,7 +302,7 @@ levels:
             question_text: "What should be on the lines?"
             code: |-
                 {print} And the award for best programming language goes to...
-                _?_
+                _
                 {print} Hedy!
             mp_choice_options:
             -   option: |
@@ -318,7 +332,7 @@ levels:
             question_text: "What command should be used on line 2?"
             code: |-
                 {print} I will explode in 3 seconds!
-                _?_
+                _
                 {print} BOOM!
             mp_choice_options:
             -   option: |
@@ -393,7 +407,7 @@ levels:
         10:
             question_text: "What command should be used on the line 1?"
             code: |-
-                flavor {is} _?_
+                flavor {is} _
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
@@ -458,7 +472,7 @@ levels:
                 feedback: "Good job!"
             -   option: "Line 1 needs to start with `{print}`."
                 feedback: "No, you don't need `{print}`"
-            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
+            -   option: "Line 2 needs to say 'animal' instead of 'animals'"
                 feedback: "animals is correct."
             -   option: "`{at} {random}` is spelled incorrectly"
                 feedback: "`{at} {random}` is the correct spelling"
@@ -612,12 +626,12 @@ levels:
             hint: "Look at line 3"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "What should be on the _?"
             code: |-
                 walkers {is} dad, mom, Sam, Petra
                 walked_yesterday {is} {ask} Who walked the dogs yesterday?
                 {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
+                _
                 {print} walkers {at} {random} , it's your turn to walk the dogs!
             mp_choice_options:
             -   option: |
@@ -645,15 +659,27 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "Which of these codes is correct?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
+            -   option: |
+                  ```
+                  {print} 'Im very excited to take this quiz!'
+                  ```
                 feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
+            -   option: |
+                  ```
+                  {print} Im very excited to take this quiz!
+                  ```
                 feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
+            -   option: |
+                  ```
+                  {print} 'I'm very excited to take this quiz!'
+                  ```
                 feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
+            -   option: |
+                  ```
+                  {print} 'I'm very excited to take this quiz!
+                  ```
                 feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
@@ -863,11 +889,11 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Which command should be filled in on the _?_?"
+            question_text: "Which command should be filled in on the _?"
             code: |-
                 number {is} {ask} 'What is your lucky number?'
                 {if} number {is} 5 {print} 'Mine too!'
-                _?_ {print} 'My lucky number is 5!'
+                _ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: |
                     ```
@@ -970,7 +996,7 @@ levels:
                 {print} 'I will predict what place your team will end up!'
                 club is {ask} 'Which club is your favorite?'
                 {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                _ {print} 'Sorry, your club is gonna be in last place...'
             mp_choice_options:
             -   option: |
                     ```
@@ -1001,7 +1027,7 @@ levels:
                 {print} 'I can predict if you will be a millionair or not!'
                 name {is} {ask} 'Whats your name?'
                 {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {else} _ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |
                     ```
@@ -1030,7 +1056,7 @@ levels:
             question_text: "Which word should be on the place of the question mark?"
             code: |-
                 animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
+                {if} _ {is} penguin {print} 'Thats my favorite animal too!'
                 {else} {print} 'Cool! I like penguins.'
             mp_choice_options:
             -   option: |
@@ -1270,14 +1296,14 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                name _?_ Hedy
+                name _ Hedy
                 {print} name 'is walking trough the forrest'
             mp_choice_options:
-            -   option: "You can only fill in the word is on the `_?_`"
+            -   option: "You can only fill in the word is on the `_`"
                 feedback: "You are allowed to use the `=` sign as well"
-            -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
+            -   option: "You can fill in either the word is or the `=` sign on the `_`"
                 feedback: "Amazing!"
-            -   option: "You have to fill in =is= on the `_?_`"
+            -   option: "You have to fill in =is= on the `_`"
                 feedback: "No, one `=` sign is enough"
             -   option: "You can only use the `=` sign when working with numbers, not with words."
                 feedback: "You can also use `=` with words."
@@ -1292,7 +1318,7 @@ levels:
                 feedback: "No you can repeat a line."
             -   option: "1"
                 feedback: "Correct, one line at a time"
-            -   option: "2"
+            -   option: "3"
                 feedback: "In this level only one line at a time"
             -   option: "infinite"
                 feedback: "In this level you can only repeat one line at a time"
@@ -1466,7 +1492,7 @@ levels:
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'When suddenly he heard someone screaming!'
                     {print} 'Help!'
                     {repeat} 3 {times} {print} 'Please help me!'
                     ```
@@ -1474,7 +1500,7 @@ levels:
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'When suddenly he heard someone screaming!'
                     {repeat} 3 {times} 'Help!'
                     {print} 'Please help me!'
                     ```
@@ -1482,7 +1508,7 @@ levels:
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
+                    {print} When suddenly he heard someone screaming!
                     {repeat} 3 {times} {print} Help!
                     {print} Please help me!
                     ```
@@ -1490,7 +1516,7 @@ levels:
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'When suddenly he heard someone screaming!'
                     {repeat} 3 {times} {print} 'Help!'
                     {print} 'Please help me!'
                     ```
@@ -1499,7 +1525,7 @@ levels:
             hint: "'Help!' is repeated 3 times."
             correct_answer: "D"
         10:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Which code belongs to this output?"
             code: |-
                 if youre happy and you know it clap your hands
                 if youre happy and you know it clap your hands
@@ -2046,9 +2072,9 @@ levels:
             code: |-
                 age = {ask} 'Happy Birthday! How old are you?'
                 singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                            {print} 'Hip Hip Hooray'
+                	{if} singing {is} yes
+                		{repeat} years {times}
+                			{print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "You can't put two questions in a row"
                 feedback: "Yes you can."
@@ -2097,7 +2123,7 @@ levels:
         1:
             question_text: "What word should be at the place of the question mark?"
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
@@ -2262,8 +2288,8 @@ levels:
             code: |-
                 {print} 'Welcome to Hedys diner'
                 people is {ask} 'How many people will be eating here tonight?'
-                _?_
-                    food is {ask} 'What would you like to order?'
+                _
+                    food {is} {ask} 'What would you like to order?'
                     {print} food
             mp_choice_options:
             -   option: |
@@ -2365,10 +2391,10 @@ levels:
             question_score: '10'
     10:
         1:
-            question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"
+            question_text: "What do we need to fill in on the `_` if we want to print each compliment?"
             code: |-
                 compliments = perfect, great job, amazing
-                _?_
+                _
                     {print} compliment
             mp_choice_options:
             -   option: |
@@ -2456,13 +2482,13 @@ levels:
             hint: "Line 2 says `{for}` each item in the list of groceries"
             question_score: '10'
         5:
-            question_text: "What word should be on the _?_ with these digital dice?"
+            question_text: "What word should be on the _ with these digital dice?"
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
                 choices = 1, 2, 3, 4, 5, 6
                 {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                    {print} player ' throws ' _ {at} {random}
             mp_choice_options:
             -   option: "players"
                 feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
@@ -2501,11 +2527,11 @@ levels:
             hint: "Each player will pick an option. The player that's first on the list will go first."
             question_score: '10'
         7:
-            question_text: "What line should be on the _?_ in this code that decides what these people will have for dinner?"
+            question_text: "What line should be on the _ in this code that decides what these people will have for dinner?"
             code: |-
                 names = Ron, Leslie, April, Andy
                 food = pasta, fries, salad
-                _?_
+                _
                     {print} name ' has to eat ' food {at} {random} ' for dinner'
             mp_choice_options:
             -   option: |
@@ -2532,12 +2558,12 @@ levels:
             hint: "Each name should be told what they will have for dinner."
             question_score: '10'
         8:
-            question_text: "What should be on the _?_ in this code that decides which color shirt you get?"
+            question_text: "What should be on the _ in this code that decides which color shirt you get?"
             code: |-
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple
                 {for} name {in} names
-                    {print} _?_
+                    {print} _
             mp_choice_options:
             -   option: |
                     ```
@@ -2567,10 +2593,10 @@ levels:
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
-                {for} name in names
-                    {for} course {in} courses
-                        food = {ask} name ', what would you like to eat as your ' course '?'
-                        {print} name ' orders ' food ' as their ' course
+                {for} name {in} names
+                	{for} course {in} courses
+                        	food = {ask} name ', what would you like to eat as your ' course '?'
+                        	{print} name ' orders ' food ' as their ' course
             mp_choice_options:
             -   option: "Timon, what would you like to eat as your appetizer?"
                 feedback: "Perfect!"
@@ -2606,8 +2632,8 @@ levels:
         1:
             question_text: "Which output is correct?"
             code: |-
-                print 'three and a half plus one and a half is...'
-                print 3.5 + 1.5
+                {print} 'three and a half plus one and a half is...'
+                {print} 3.5 + 1.5
             mp_choice_options:
             -   option: |
                     5
@@ -2631,27 +2657,27 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    flavors is vanilla, strawberry, chocolate
-                    print 'I would like a ' flavors at random ' cake.'
+                    flavors {is} vanilla, strawberry, chocolate
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             -   option: |-
                     ```
                     'flavors = vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             -   option: |-
                     ```
                     flavors = 'vanilla', 'strawberry', 'chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
                     ```
                 feedback: "Alright!"
             -   option: |4
 
                     ```
                     flavors = 'vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
@@ -2681,10 +2707,10 @@ levels:
         4:
             question_text: "In which lines are quotation marks needed to get the code to work?"
             code: |-
-                print Welcome to the online shoe shop
-                category = ask What kind of shoes are you looking for?
-                if category = high heels
-                  print High heels are 50% off now!
+                {print} Welcome to the online shoe shop
+                category = {ask} What kind of shoes are you looking for?
+                {if} category = high heels
+                	{print} High heels are 50% off now!
             mp_choice_options:
             -   option: |
                     Line 1 and 2
@@ -2704,16 +2730,16 @@ levels:
         5:
             question_text: "What output does Agent007 get when they put in the correct password?"
             code: |-
-                name is ask 'What is your name?'
-                if name is 'Agent007'
-                    a is 'Go to the airport '
+                name {is} {ask} 'What is your name?'
+                {if} name {is} 'Agent007'
+                	a {is} 'Go to the airport '
                 else
-                    a is 'Go to the train station '
-                password is ask 'What is the password?'
-                if password is 'TOPSECRET'
-                    b is 'tomorrow at 02.00'
+                	a {is} 'Go to the train station '
+                password {is} {ask} 'What is the password?'
+                {if} password {is} 'TOPSECRET'
+                	b {is} 'tomorrow at 02.00'
                 else
-                    b is 'today at 10.00'
+                	b {is} 'today at 10.00'
                 print a + b
             mp_choice_options:
             -   option: "Go to the train station today at 10.00"
@@ -2730,16 +2756,16 @@ levels:
         6:
             question_text: "Which line should be filled in at the ???"
             code: |
-                print 'Welcome to McHedy!'
-                order = ask 'Would you like a hamburger or fries?'
-                if order = 'hamburger'
-                  price = 12
-                if order = 'fries'
-                  price = 4
-                drinks = ask 'Would you like a drink with that for 2 dollars?'
-                if drinks = 'yes'
-                  ???
-                print 'That will be ' price ' dollar please'
+                {print} 'Welcome to McHedy!'
+                order = {ask} 'Would you like a hamburger or fries?'
+                {if} order = 'hamburger'
+                	price = 12
+                {if} order = 'fries'
+                	price = 4
+                drinks = {ask} 'Would you like a drink with that for 2 dollars?'
+                {if} drinks = 'yes'
+                	???
+                {print} 'That will be ' price ' dollar please'
             mp_choice_options:
             -   option: |
                     ```
@@ -2768,15 +2794,15 @@ levels:
             question_text: "Which output does a vegan get?"
             code: |-
                 menu = 'cookies', 'cheese', 'grapes'
-                print "It's my birthday! I`ve brought some snacks!"
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'gluten free'
-                    remove 'cookies' from menu
-                if diet = 'vegan'
-                    remove 'cheese' from menu
-                print 'For you I have brought: '
-                for snack in menu
-                    print snack
+                {print} "It's my birthday! I`ve brought some snacks!"
+                diet = {ask} 'Do you have any dietary restrictions?'
+                {if} diet = 'gluten free'
+                	{remove} 'cookies' {from} menu
+                {if} diet = 'vegan'
+                	{remove} 'cheese' {from} menu
+                {print} 'For you I have brought: '
+                {for} snack {in} menu
+                	{print} snack
             mp_choice_options:
             -   option: |-
                     It's my birthday! I've brought some snacks!
@@ -2811,22 +2837,22 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    print '7 / 2'
+                    {print} '7 / 2'
                     ```
                 feedback: "No"
             -   option: |-
                     ```
-                    print 7 / 2
+                    {print} 7 / 2
                     ```
                 feedback: "That is right!"
             -   option: |-
                     ```
-                    print 7 : 2
+                    {print} 7 : 2
                     ```
                 feedback: "No"
             -   option: |-
                     ```
-                    print 7 * 2
+                    {print} 7 * 2
                     ```
                 feedback: "No"
             correct_answer: "B"
@@ -2836,26 +2862,26 @@ levels:
             question_text: "Which code should be filled in in line 1 at the ???"
             code: |-
                 ???
-                print 'You won ' prices at random '!'
+                {print} 'You won ' prizes {at} {random} '!'
             mp_choice_options:
             -   option: |-
                     ```
-                    prices = 'one' 'million' 'dollars', 'nothing'
+                    prizes = 'one' 'million' 'dollars', 'nothing'
                     ```
                 feedback: "You won nothing"
             -   option: |-
                     ```
-                    prices = 'one million dollars, nothing'
+                    prizes = 'one million dollars, nothing'
                     ```
                 feedback: "You won nothing"
             -   option: |-
                     ```
-                    prices = 'one million dollars', 'nothing'
+                    prizes = 'one million dollars', 'nothing'
                     ```
                 feedback: "Winner!"
             -   option: |-
                     ```
-                    'prices' = 'one million dollars', 'nothing'
+                    'prizes' = 'one million dollars', 'nothing'
                     ```
                 feedback: "You one nothing"
             correct_answer: "C"
@@ -2866,20 +2892,20 @@ levels:
             code: |-
                 actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                 ???
-                    for i in range 0 to 1
-                        print 'if youre happy and you know it'
-                        print action
-                    print 'if youre happy and you know it and you really want to show it'
-                    print 'if youre happy and you know it'
-                    print action
+                	{for} i {in} range 0 {to} 1
+                		{print} 'if youre happy and you know it'
+                		{print} action
+                	{print} 'if youre happy and you know it and you really want to show it'
+                	{print} 'if youre happy and you know it'
+                	{print} action
             mp_choice_options:
-            -   option: "for i in range 1 to 3"
+            -   option: "{for} i {in} {range} 1 {to} 3"
                 feedback: "This is a hard one! All the actions on the list must be in the song."
-            -   option: "for action in actions"
+            -   option: "{for} action {in} actions"
                 feedback: "You are amazing!"
-            -   option: "repeat 3 times"
+            -   option: "{repeat} 3 {times}"
                 feedback: "This is a hard one! All the actions on the list must be in the song."
-            -   option: "print actions at random"
+            -   option: "{print} actions {at} {random}"
                 feedback: "This is a hard one! All the actions on the list must be in the song."
             correct_answer: "B"
             hint: "This is a hard one! All the actions on the list must be in the song."
@@ -2888,33 +2914,33 @@ levels:
         1:
             question_text: "Which code should be filled in at the ??? ?"
             code: |-
-                name = ask 'What is your name?'
-                song = ask 'Whould you like to hear a song?'
-                birthday = ask 'Is today your birthday?'
+                name = {ask} 'What is your name?'
+                song = {ask} 'Whould you like to hear a song?'
+                birthday = {ask} 'Is today your birthday?'
                 ???
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday. dear ' name
-                  print 'Happy Birthday to you!'
+                	{print} 'Happy Birthday to you!'
+                	{print} 'Happy Birthday to you!'
+                	{print} 'Happy Birthday dear ' name
+                	{print} 'Happy Birthday to you!'
             mp_choice_options:
             -   option: |-
                     ```
-                    if birthday and song = 'yes'
+                    {if} birthday {and} song = 'yes'
                     ```
                 feedback: "Almost there"
             -   option: |-
                     ```
-                    if birthday = 'yes' and name = 'Hedy'
+                    {if} birthday = 'yes' {and} name = 'Hedy'
                     ```
                 feedback: "Hedy only sings for you if you like to hear a song"
             -   option: |-
                     ```
-                    if song = 'yes' and birthday = 'yes'
+                    {if} song = 'yes' {and} birthday = 'yes'
                     ```
                 feedback: "Super!"
             -   option: |-
                     ```
-                    if song = 'yes' or birthday = 'yes'
+                    {if} song = 'yes' {or} birthday = 'yes'
                     ```
                 feedback: "Hedy only sings if both answers are yes"
             correct_answer: "C"
@@ -3099,13 +3125,13 @@ levels:
                 9  if chocolate = 'no' and sprinkles = 'no'
                 10     print 'Just plain icecream, coming up!'
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles = 'yes'"
                 feedback: "Correct!"
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles = 'yes'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
             correct_answer: "A"
             hint: "There is a mistake in line 3"

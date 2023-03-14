@@ -64,7 +64,7 @@ adventures:
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
-                    nome is ask Como te chamas?
+                    nome is ask 'Como te chamas?'
                     if nome is Hedy print 'Fixe!' else print 'pff'
                 story_text: |
                     `ask` e `print` funcionam como no nível 4.
@@ -78,7 +78,7 @@ adventures:
                      Também no nível 5 as tarefas que vais encontrar nos separadores estão a tornar-se mais difíceis. Por isso, completa-as da esquerda para a direita.
                 example_code: |-
                     ```
-                    nome is ask Como te chamas?
+                    nome is ask 'Como te chamas?'
                     if nome is Hedy print 'Fixe!' else print 'boo!'
                     ```
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
@@ -219,15 +219,7 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                story_text_6: |-
-                    **Maths with words**
-                    In this level it is also allowed to use the + sign with texts. For example:
-                example_code_6: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
+
             13:
                 start_code: |-
                     name = ask 'what is your name?'
@@ -439,7 +431,7 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             5:
                 story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
-                example_code: "## Exemplo de código Hedy\n\n```\nname {is} {ask} Who is walking in the forest?\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} Would you like a good or a bad ending?\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
+                example_code: "## Exemplo de código Hedy\n\n```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
                 start_code: "{print} 'Here your story will start!'"
             13:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
