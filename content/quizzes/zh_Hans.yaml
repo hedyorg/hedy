@@ -186,14 +186,28 @@ levels:
             hint: "`{ask}`让你能提出一个问题"
             question_score: '10'
         10:
-            question_text: "准备好进入第2关了？"
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+              {ask} Are you ready to go to level 2?
+              {echo}
+              {echo}
             mp_choice_options:
-            -   option: "是的！"
-                feedback: "好！让我们进入下一关！"
-            -   option: "没有"
-                feedback: "丢人……你可以在第一关里再练习一下！"
-            correct_answer: "A"
-            hint: "走起！"
+            -   option: |
+                  Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                  Yes!
+                  Yes!
+                feedback: "Great job!"
+            -   option: |
+                  Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                  Are you ready to go to level 2?
+                  Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
+            hint: "Let's go!"
             question_score: '10'
     2:
         1:
