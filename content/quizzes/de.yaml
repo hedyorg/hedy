@@ -1950,7 +1950,7 @@ levels:
                     {if} getränk {is} Cola
                         preis = preis - 5
                     ```
-                feedback: "Dem zweiten {if} fehlt Code!"
+                feedback: "Dem zweiten `{if}` fehlt Code!"
             -   option: |
                     ```
                     {if} essen {is} Pizza
@@ -1958,7 +1958,7 @@ levels:
                     {if} getränk {is} Cola
                             preis = preis - 5
                     ```
-                feedback: "Zwei aufeinander folgende {if}s sind nie korrekt."
+                feedback: "Zwei aufeinander folgende `{if}`s sind nie korrekt."
             -   option: |
                     ```
                     {if} essen {is} Pizza
@@ -2692,7 +2692,7 @@ levels:
                 feedback: Großartig gemacht!
             -   option: in
                 feedback: Nein
-            -   option: falls
+            -   option: '{if}'
                 feedback: Nein
             correct_answer: B
             hint: Das Produkt ist entweder in der Liste der Snacks oder in der Liste der Getränke
@@ -2744,7 +2744,7 @@ levels:
             question_score: '10'
         4:
             question_text: Welche Zeile Code sollte dieser Zeile im Stein-Schere-Papier-Spiel folgen?
-            code: falls computer_wahl ist 'Stein' und deine_wahl ist 'Papier'
+            code: "{if} computer_wahl {is} 'Stein' {and} deine_wahl {is} 'Papier'"
             mp_choice_options:
             -   option: drucke 'du gewinnst'
                 feedback: Du gewinnst!
@@ -2774,7 +2774,7 @@ levels:
             question_score: '10'
         6:
             question_text: Welche Aussage über diesen Code ist wahr?
-            code: "drucke 'Lass mich raten, welches Familienmitglied du bist!'\nbrille = frage 'Trägst du eine Brille?'\nweiblich = frage 'Bist du weiblich?'\nfalls brille = 'ja' und weiblich = 'ja'\n    drucke 'Du musst Sophie sein!'\nfalls brille = 'nein' und weiblich = 'ja'\n   drucke 'Du musst Marleen sein!'\nfalls brille = 'ja' und weiblich = 'nein'\n    drucke 'Du musst Wouter sein!'\nfalls brille = 'nein' und weiblich = 'nein'\n    drucke 'Du musst Michael sein!'"
+            code: "{print} 'Lass mich raten, welches Familienmitglied du bist!'\nbrille = {ask} 'Trägst du eine Brille?'\nweiblich = {ask} 'Bist du weiblich?'\n{if} brille = 'ja' {and} weiblich = 'ja'\n    {print} 'Du musst Sophie sein!'\n{if} brille = 'nein' {and} weiblich = 'ja'\n   {print} 'Du musst Marleen sein!'\n{if} brille = 'ja' {and} weiblich = 'nein'\n    {print} 'Du musst Wouter sein!'\n{if} brille = 'nein' {and} weiblich = 'nein'\n    {print} 'Du musst Michael sein!'"
             mp_choice_options:
             -   option: Michael ist ein Junge mit Brille
                 feedback: Versuche es nochmal
