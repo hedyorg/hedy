@@ -2047,7 +2047,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 5
                     ```
-                feedback: "The second {if} misses code!"
+                feedback: "The second `{if}` misses code!"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2055,7 +2055,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 5
                     ```
-                feedback: "Two consecutive {if}s is never correct."
+                feedback: "Two consecutive `{if}`s is never correct."
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2989,7 +2989,7 @@ levels:
         4:
             question_text: "Which line of code should follow this line in rock-paper-scissors game?"
             code: |-
-                if computer_choice is 'rock' and your_choice is 'paper'
+                {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
             mp_choice_options:
             -   option: "print 'you win'"
                 feedback: "You win!"
@@ -3022,17 +3022,17 @@ levels:
         6:
             question_text: "Which statement about this code is true?"
             code: |-
-                print 'Let me guess which family member you are!'
-                glasses = ask 'Do you wear glasses?'
-                female = ask 'Are you female?'
-                if glasses = 'yes' and female = 'yes'
-                    print 'You must be Sophie!'
-                if glasses = 'no' and female = 'yes'
-                   print 'You must be Marleen!'
-                if glasses = 'yes' and female = 'no'
-                    print 'You must be Wouter!'
-                if glasses = 'no' and female = 'no'
-                    print 'You must be Michael!'
+                {print} 'Let me guess which family member you are!'
+                glasses = {ask} 'Do you wear glasses?'
+                female = {ask} 'Are you female?'
+                {if} glasses = 'yes' {and} female = 'yes'
+                    {print} 'You must be Sophie!'
+                {if} glasses = 'no' {and} female = 'yes'
+                   {print} 'You must be Marleen!'
+                {if} glasses = 'yes' {and} female = 'no'
+                    {print} 'You must be Wouter!'
+                {if} glasses = 'no' {and} female = 'no'
+                    {print} 'You must be Michael!'
             mp_choice_options:
             -   option: "Michael is a boy with glasses"
                 feedback: "Try again"
@@ -3159,7 +3159,7 @@ levels:
                 feedback: "Great job!"
             -   option: "in"
                 feedback: "No"
-            -   option: "if"
+            -   option: "{if}"
                 feedback: "No"
             correct_answer: "B"
             hint: "The item is either in the list of snacks, or in the list of drinks"
