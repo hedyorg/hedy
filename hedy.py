@@ -798,7 +798,7 @@ class TypeValidator(Transformer):
                 result = {k: v for k, v in result.items()}
                 command = ' '.join([v.strip() for v in result.values() if v is not None])
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
-                                                          invalid_argument=variable, allowed_types=allowed_types)
+                                                          invalid_argument=variable, allowed_types=allowed_types, line_number=meta.line)
         return arg_type
 
     def get_type(self, tree):

@@ -99,12 +99,13 @@ class CyclicVariableDefinitionException(HedyException):
 
 
 class InvalidArgumentTypeException(HedyException):
-    def __init__(self, command, invalid_type, allowed_types, invalid_argument):
+    def __init__(self, command, invalid_type, allowed_types, invalid_argument, line_number):
         super().__init__('Invalid Argument Type',
                          command=command,
                          invalid_type=invalid_type,
                          allowed_types=allowed_types,
-                         invalid_argument=invalid_argument)
+                         invalid_argument=invalid_argument,
+                         line_number=line_number)
 
 
 class InvalidTypeCombinationException(HedyException):
