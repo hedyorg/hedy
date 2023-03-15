@@ -95,9 +95,10 @@ class UndefinedVarException(HedyException):
 
 
 class CyclicVariableDefinitionException(HedyException):
-    def __init__(self, variable):
+    def __init__(self, variable, line_number):
         super().__init__('Cyclic Var Definition',
-                         variable=variable)
+                         variable=variable,
+                         line_number=line_number)
 
 
 class InvalidArgumentTypeException(HedyException):
