@@ -22,7 +22,9 @@ class HedyException(Exception):
         Returns either an array of [row, col] or just [row].
 
         If 'location' is part of the keyword arguments, return that.
-        Otherwise, if 'line_number' is part of the keyword arguments, return that instead.
+        Otherwise, if 'line_number' is part of the keyword arguments, return that instead
+        wrapped in a list so we are sure the return type is always a list.
+
         """
         if 'location' in self.arguments:
             return self.arguments['location']
@@ -69,7 +71,6 @@ class ParseException(HedyException):
         # should move it to hedyexception?
         self.fixed_code = fixed_code
 
-
 class UnquotedEqualityCheck(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
@@ -82,6 +83,7 @@ class AccessBeforeAssign(HedyException):
         super().__init__('Access Before Assign',
                          name=name,
                          access_line_number=access_line_number,
+                         line_number=access_line_number,
                          definition_line_number=definition_line_number)
 
 
