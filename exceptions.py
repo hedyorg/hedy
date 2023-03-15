@@ -71,6 +71,7 @@ class ParseException(HedyException):
         # should move it to hedyexception?
         self.fixed_code = fixed_code
 
+
 class UnquotedEqualityCheck(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
