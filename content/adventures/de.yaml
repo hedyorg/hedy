@@ -155,7 +155,7 @@ adventures:
                         {print} 'Du bist die echte Hedy!'
                 story_text: |-
                     ## Und... oder...?
-                    Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei Mal {if} verwenden, sondern kannst `{and}` und `{or}` benutzen. 
+                    Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei Mal `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen.
 
                     Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
                 example_code: "```\nname = {ask} 'Wie heißt du?'\nalter = {ask} 'Wie alt bist du?'\n{if} name {is} 'Hedy' {and} alter {is} 2\n    {print} 'Du bist die echte Hedy!'\n```\n"
@@ -357,7 +357,7 @@ adventures:
             8:
                 story_text: |
                     ## Geschichte
-                    In diesem Level kannst du mehrere Zeilen zu einem {if}-Befehl hinzufügen. So kannst du deine guten und schlechten Enden etwas erweitern.
+                    In diesem Level kannst du mehrere Zeilen zu einem `{if}`-Befehl hinzufügen. So kannst du deine guten und schlechten Enden etwas erweitern.
 
                     ### Übung 1
                     Der Beispiel-Code zeigt zwei verschiedene Enden; eines bei dem die Figuren in eine Zeitmaschine springen und eines wo sie es nicht tun.
@@ -365,7 +365,7 @@ adventures:
                     **(extra)** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
 
                     ### Übung 2
-                    Gehe zurück zu deinen gespeicherten Programmen und wähle deine Geschichte-Programm aus Level 5 aus. Schreibe nun ein gutes und ein schlechtes Ende mit jeweils mindestens drei Zeilen Länge! 
+                    Gehe zurück zu deinen gespeicherten Programmen und wähle deine Geschichte-Programm aus Level 5 aus. Schreibe nun ein gutes und ein schlechtes Ende mit jeweils mindestens drei Zeilen Länge!
 
                 example_code: |
                     ```
@@ -513,7 +513,7 @@ adventures:
                     Durch die Verwendung der Befehle `{and}` und `{or}` kannst du deine Geschichten vielseitiger gestalten. Du kannst zwei Fragen stellen und auf die Kombination der Antworten antworten.
 
                     ### Übung 1
-                    Sieh dir den Beispielcode an und beenden ihn. Füge dann mindestens 2 weitere {if} Codes mit `{and}` oder `{or}` hinzu.
+                    Sieh dir den Beispiel-Code an und vervollständige ihn. Füge dann mindestens 2 weitere `{if}` Befehle mit `{and}` oder `{or}` hinzu.
 
                     ### Übung 2
                     Suche eine Geschichte aus einem vorherigen Level und füge ein `{and}` oder ein `{or}` hinzu.
@@ -1293,7 +1293,7 @@ adventures:
                     {if} _ {is} _ {print} 'Unentschieden!' {else} {print} 'kein Unentschieden'
                     ```
 
-                    Ersetze die Unterstriche (_) mit dem richtigen Code, um zu sehen {if} das Spiel unentschieden ausgeht.
+                    Ersetze die Unterstriche (_) mit dem richtigen Code, um zu sehen, ob das Spiel unentschieden ausgeht.
 
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             4:
@@ -1508,7 +1508,7 @@ adventures:
                 story_text: |
                     ## Taschenrechner
                     Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
-                    Dies stellt sicher, dass der Spieler nicht zur nächsten Frage weiterkommt, {if} er falsch antwortet.
+                    Dies stellt sicher, dass der Spieler nicht zur nächsten Frage weiterkommt, wenn er falsch antwortet.
 
                 example_code: |
                     ```
