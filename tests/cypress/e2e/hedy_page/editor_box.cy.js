@@ -1,7 +1,13 @@
 import {goToHedyPage} from "../tools/navigation/nav";
-
+const YAML = require('js-yaml')
 describe('Is able to type in the editor box', () => {
-    it('Passes', () => {
+  it('This might work', () => {
+    cy.readFile('../content/adventures/en.yaml').then((yamlString) =>{
+      var adventures = YAML.load(yamlString)
+      cy.log(adventures.adventures.default.levels['1'].example_code);
+    })
+  });  
+  it('Passes', () => {
       goToHedyPage();
       // click on textaread to get focus
       cy.getBySel('language-dropdown').click();
