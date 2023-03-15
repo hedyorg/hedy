@@ -1465,7 +1465,7 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.color, self.level))
+                                                          allowed_types=get_allowed_types(Command.color, self.level), line_number=meta.line)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1479,7 +1479,7 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.turn, self.level))
+                                                          allowed_types=get_allowed_types(Command.turn, self.level), line_number=meta.line)
 
     def make_turn(self, parameter):
         return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
