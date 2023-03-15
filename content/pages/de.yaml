@@ -446,10 +446,10 @@ sections:
                     drucke 'Und Hedy`s ist erlaubt'
     -   level: '5'
         sections:
-        -   title: "Schülerinnen und Schüler vergessen drucke innerhalb eines falls-Befehls zu verwenden"
+        -   title: "Schülerinnen und Schüler vergessen `{print}` innerhalb eines `{if}`-Befehls zu verwenden"
             example:
                 error_text: |
-                    Schülerinnen und Schüler vergessen nach einem falls oder sonst einen zweiten Befehl wie drucke oder frage zu verwenden.
+                    Schülerinnen und Schüler vergessen nach einem `{if}` oder `{else}` einen zweiten Befehl wie `{print}` oder `{ask}` zu verwenden.
                 error_code: |
                     falls name ist Hedy 'Großartig!'
                     sonst 'Hedy ist besser!'
@@ -527,7 +527,7 @@ sections:
                     falls name ist Jesse drucke 'Du bist lustig'
                     falls name ist David drucke 'Du bist lustig'
                     falls name ist Souf drucke 'Du bist lustig'
-        -   title: "Die Schülerinnen und Schüler machen den Variablennamen zum Gleichen wie den Wert im falls-Befehl"
+        -   title: "Die Schülerinnen und Schüler machen den Variablennamen zum Gleichen wie den Wert im `{if}`-Befehl"
             example:
                 error_text: |
                     Im Beispiel ist das Passwort 'Passwort'. Dies führt dazu, dass es immer richtig ist.
@@ -538,9 +538,9 @@ sections:
                 solution_text: |
                     Wähle einen anderen Namen für deine Variable.
                 solution_code: |
-                    geheimes_passwort ist frage 'Was ist das Passwort?'
-                    falls geheimes_passwort ist passwort drucke 'Zugang gewährt'
-                    sonst drucke 'Zugang verwehrt!'
+                    geheimes_passwort {is} {ask} 'Was ist das Passwort?'
+                    falls geheimes_passwort {is} passwort {print} 'Zugang gewährt'
+                    {else} {print} 'Zugang verwehrt!'
     -   level: '6'
         sections:
         -   title: Schülerinnen und Schüler kämpfen mit Anführungszeichen
@@ -589,9 +589,9 @@ sections:
                 error_code: "wiederhole 3 mal\n    getränk = frage 'Was möchten Sie trinken?'\ndrucke getränk\n"
                 solution_text: "Im korrekten Code beginnt die dritte Zeile auch mit Einrückung. Auf diese Weise gehört sie zum wiederhole-Block und wird daher 3 mal wiederholt.\nZeige deinen Schülerinnen und Schülern diese Unterschiede, um ihnen dabei zu helfen zu verstehen, warum wir Einrückung brauchen, um unsere Programme zum Laufen zu bringen.\n"
                 solution_code: "wiederhole 3 mal\n    getränk = frage 'Was möchten Sie trinken?'\n    drucke getränk\n"
-        -   title: Schülerinnen und Schüler möchten falls-Befehle verschachteln oder falls in eine Schleife packen
+        -   title: Schülerinnen und Schüler möchten `{if}`-Befehle verschachteln oder `{if}` in eine Schleife packen
             example:
-                error_text: "In diesem Level dürfen die Schülerinnen und Schüler noch keine falls-Befehle in andere falls-Befehle oder Wiederholungsschleifen stecken.\nIm nächsten Level ist dies erlaubt.\n"
+                error_text: "In diesem Level dürfen die Schülerinnen und Schüler noch keine `{if}`-Befehle in andere `{if}`-Befehle oder Wiederholungsschleifen stecken.\nIm nächsten Level ist dies erlaubt.\n"
                 error_code: "geburtstag = frage 'Hast du Geburtstag?'\nfalls geburtstag = ja\n    wiederhole 3 mal\n        drucke 'Hip Hip Hooray!'\n"
                 solution_text: "Dies ist der korrekte Code für dieses Level:\n"
                 solution_code: "geburtstag = frage 'Hast du Geburtstag?'\nfalls geburtstag = ja\n    drucke 'Hip Hip Hooray!'\n    drucke 'Hip Hip Hooray!'\n    drucke 'Hip Hip Hooray!'\n"
@@ -601,19 +601,19 @@ sections:
                 error_code: "wiederhole 100 mal\n    drucke 'Wie oft kann ich dies wiederholen?'\n"
                 solution_text: "Stelle sicher, dass die Programme nicht zu lange laufen\n"
                 solution_code: "wiederhole 20 mal\n    drucke 'Dies ist genug'\n"
-        -   title: Die Schülerinnen und Schüler nutzen den falls-Befehl, um zu prüfen, ob der Variablenwert das Gleiche ist wie der Variablenname
+        -   title: Die Schülerinnen und Schüler nutzen den `{if}`-Befehl, um zu prüfen, ob der Variablenwert das Gleiche ist wie der Variablenname
             example:
                 error_text: "Wir haben diesen Fehler bei einigen unserer Schülerinnen und Schüler gesehen. Sie erstellen ein Passwort für ihren Computer, verwenden als Passwort jedoch 'Passwort'.\nIn Zeile 2 wird der Computer beauftragt zu prüfen, ob die Variable passwort das Gleiche ist wie die Variable passwort, also sich selbst. Was bedeutet, dass die Antwort immer ja ist.\nAlso wird mit diesem Code die Antwort immer 'Du kannst reinkommen' sein, was auch immer der Spieler einträgt.\n"
                 error_code: "passwort ist frage 'Was ist das Passwort?'\nfalls passwort ist passwort\n    drucke 'Du kannst reinkommen'\nsonst\n    drucke 'Du hast keine Erlaubnis'\n"
-                solution_text: "Du kannst diesen Fehler beheben, indem du Anführungszeichen hinzufügst. Auf diese Weise weiß der Computer, dass das zweite Passwort ein Zeichenkettenwert (also normaler Text) ist und kein Variablenname.\n"
+                solution_text: "Du kannst diesen Fehler beheben, indem du Anführungszeichen hinzufügst. Auf diese Weise weiß der Computer, dass das zweite Passwort eine Zeichenkette (also normaler Text) ist und kein Variablenname.\n"
                 solution_code: "passwort ist frage 'Was ist das Passwort?'\nfalls passwort ist 'passwort'\n    drucke 'Du kannst reinkommen'\nsonst\n    drucke 'Du hast keine Erlaubnis'\n"
     -   level: '9'
         sections:
         -   title: Schülerinnen und Schüler machen Fehler bei der Einrückung
             example:
-                error_text: "Der schwerste Teil an diesem Level ist, die Einrückung hinzubekommen. Schülerinnen und Schüler lieben es, falls-Befehle zu verschachteln, manchmal sogar innerhalb anderer verschachtelter falls-Befehle. Mit der Einrückung Schritt zu halten kann ziemlich schwer sein.\n"
+                error_text: "Der schwerste Teil an diesem Level ist, die Einrückung hinzubekommen. Schülerinnen und Schüler lieben es, `{if}`-Befehle zu verschachteln, manchmal sogar innerhalb anderer verschachtelter `{if}`-Befehle. Mit der Einrückung Schritt zu halten kann ziemlich schwer sein.\n"
                 error_code: "drucke 'Robin geht in die Stadt'\nort = frage 'Geht Robin in den Laden, oder geht sie nach Hause?'\nfalls ort ist Laden\n    drucke 'Sie betritt den Laden.'\n    drucke 'Robin sieht ein interessant aussehendes Buch'\n    buch = frage 'Kauft Robin das Buch?'\n        falls buch ist ja\ndrucke 'Robin kauft das Buch und geht nach Hause'\nsonst\n    drucke 'Robin verlässt den Laden und geht nach Hause'\nsonst\n    drucke 'Robin geht nach Hause'\n"
-                solution_text: "Dies ist der korrekte Code. Versuche all die verschiedenen Konstruktionen im Blick zu behalten, wenn du falls-Befehle in andere falls-Befehle steckst.\n"
+                solution_text: "Dies ist der korrekte Code. Versuche all die verschiedenen Konstruktionen im Blick zu behalten, wenn du `{if}`-Befehle in andere `{if}`-Befehle steckst.\n"
                 solution_code: "drucke 'Robin geht in die Stadt'\nort = frage 'Geht Robin in den Laden, oder geht sie nach Hause?'\nfalls ort ist Laden\n    drucke 'Sie betritt den Laden.'\n    drucke 'Robin sieht ein interessant aussehendes Buch'\n    buch = frage 'Kauft Robin das Buch?'\n    falls buch ist ja\n        drucke 'Robin kauft das Buch und geht nach Hause'\n    sonst\n        drucke 'Robin verlässt den Laden und geht nach Hause'\nsonst\n    drucke 'Robin geht nach Hause'\n"
     -   level: '10'
         sections:
@@ -648,7 +648,7 @@ sections:
         -   title: Schülerinnen und Schüler vergessen Anführungszeichen
             example:
                 error_code: "superhelden = Spiderman, Batman, Iron Man\nsuperheld = superhelden {at} {random}\n{if} superheld = Batman\n    {print} 'IM BATMAN!'\n"
-                error_text: "Schülerinnen und Schüler brauchen nun mehr Anführungszeichen als in vorigen Leveln. In diesem Beispiel wurden Anführungszeichen in der Liste und im falls-Befehl vergessen.\n"
+                error_text: "Schülerinnen und Schüler brauchen nun mehr Anführungszeichen als in vorigen Leveln. In diesem Beispiel wurden Anführungszeichen in der Liste und im `{if}`-Befehl vergessen.\n"
                 solution_text: "Dies ist der korrekte Code:\n"
                 solution_code: "superhelden = 'Spiderman', 'Batman', 'Iron Man'\nsuperheld = superhelden {at} {random}\n{if} superheld {is} 'Batman'\n    {print} 'IM BATMAN!'\n"
         -   title: Schülerinnen und Schüler nutzen Anführungszeichen bei Zahlen, die sie für Berechnungen verwenden wollen
@@ -732,14 +732,14 @@ sections:
                 solution_text: "Dies ist der korrekte Code:\n"
                 solution_code: "eis = ['Erdbeer', 'Schokoladen']\ndrucke 'Ich liebe ' eis[zufällig] 'eis'\n"
     -   sections:
-        -   title: Schülerinnen und Schüler benutzen sofalls wie sonst, also ohne Bedingung
+        -   title: Schülerinnen und Schüler benutzen `{elif}` wie `{else}`, also ohne Bedingung
             example:
-                error_text: "Der sofalls Befehl benötigt eine Bedingung dahinter. Er kann nicht wie sonst benutzt werden, ohne Bedingung.\n"
-                error_code: "farbe = frage 'Was ist deine Lieblingsfarbe?'\nfalls farbe == 'grün':\n    drucke 'Grün ist nett'\nsofalls:\n    drucke 'Ich mag grün'\n"
+                error_text: "Der `{elif}` Befehl benötigt eine Bedingung dahinter. Er kann nicht wie `{else}` benutzt werden, ohne Bedingung.\n"
+                error_code: "farbe = {ask} 'Was ist deine Lieblingsfarbe?'\n{falls} farbe == 'grün':\n    {print} 'Grün ist nett'\n{elif}:\n    {print} 'Ich mag grün'\n"
                 solution_text: "Dies ist der korrekte Code:\n"
-                solution_code: "farbe = frage 'Was ist deine Lieblingsfarbe?'\nfalls farbe == 'grün':\n    drucke 'grün ist nett'\nsofalls farbe == gelb:\n    drucke 'gelb ist OK'\nsonst:\n    drucke 'Ich mag grün'\n"
+                solution_code: "farbe = {ask} 'Was ist deine Lieblingsfarbe?'\n{if} farbe == 'grün':\n    {print} 'grün ist nett'\n{elif} farbe == gelb:\n    {print} 'gelb ist OK'\n{else}:\n    {print} 'Ich mag grün'\n"
         -   example:
-                error_code: "antwort = frage 'Wie geht es dir?'\nfalls antwort ist 'großartig'\n    drucke 'Ich auch!'\nsofalls antwort ist 'schlecht'\n    drucke 'Lass mich dich aufheitern!'\nsonst\n    drucke 'Großartig!'\n"
+                error_code: "antwort = {ask} 'Wie geht es dir?'\n{if} antwort {is} 'großartig'\n    {print} 'Ich auch!'\n{elif} antwort {is} 'schlecht'\n    {print} 'Lass mich dich aufheitern!'\n{else}\n    {print} 'Großartig!'\n"
                 solution_text: "Dies ist der korrekte Code:\n"
                 error_text: "Nach jedem Befehl der Einrückung verlangt, sollte ein Doppelpunkt verwendet werden.\n"
                 solution_code: "antwort = frage 'Wie geht es dir?'\nfalls antwort ist 'großartig':\n    drucke 'Ich auch!'\nsofalls antwort ist 'schlecht':\n    drucke 'Lass mich dich aufheitern!'\nsonst:\n    drucke 'Großartig!'\n"
