@@ -868,7 +868,8 @@ class TypeValidator(Transformer):
             match = matches[0]
             if not match.type_:
                 if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
-                    raise exceptions.CyclicVariableDefinitionException(variable=match.name, line_number=match.tree.meta.line)
+                    raise exceptions.CyclicVariableDefinitionException(
+                        variable=match.name, line_number=match.tree.meta.line)
                 else:
                     match.currently_inferring = True
                     try:
