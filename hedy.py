@@ -1553,12 +1553,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
+        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var", meta.line)
 
     def error_echo_dep_2(self, meta, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'echo', "echo_out")
+        raise hedy.exceptions.WrongLevelException(1, 'echo', "echo_out", meta.line)
 
     def color(self, meta, args):
         if len(args) == 0:
@@ -2899,7 +2899,11 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
         elif invalid_info.error_type == 'flat if':
-            raise exceptions.WrongLevelException(offending_keyword='if', working_level=7, tip='no_more_flat_if')
+            raise exceptions.WrongLevelException(
+                offending_keyword='if',
+                working_level=7,
+                tip='no_more_flat_if',
+                line_number=invalid_info.line)
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         else:

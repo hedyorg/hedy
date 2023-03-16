@@ -728,7 +728,8 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=3,
-            exception=hedy.exceptions.WrongLevelException
+            exception=hedy.exceptions.WrongLevelException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
         )
 
     def test_ask_without_argument_gives_error(self):

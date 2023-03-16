@@ -32,7 +32,11 @@ class TestsLevel8(HedyTester):
         if antwoord is 100 print 'goed zo' else print 'neenee'""")
 
         # one line if's are no longer allowed
-        self.multi_level_tester(code=code, exception=hedy.exceptions.WrongLevelException, max_level=17)
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.WrongLevelException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            max_level=17)
 
     def test_if_no_indentation(self):
         code = textwrap.dedent("""\
