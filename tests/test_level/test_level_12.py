@@ -936,7 +936,20 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
-            exception=hedy.exceptions.UnquotedAssignTextException
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
+        )
+
+    def test_assign_string_without_quotes_line_2(self):
+        code = textwrap.dedent("""\
+        print 'lalala'
+        name is Harry""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     @parameterized.expand(HedyTester.quotes)

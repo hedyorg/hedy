@@ -226,8 +226,8 @@ class UnquotedTextException(HedyException):
 
 
 class UnquotedAssignTextException(HedyException):
-    def __init__(self, text):
-        super().__init__('Unquoted Assignment', text=text)
+    def __init__(self, text, line_number):
+        super().__init__('Unquoted Assignment', text=text, line_number=line_number)
 
 
 class LonelyEchoException(HedyException):

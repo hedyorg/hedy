@@ -616,7 +616,9 @@ class TypeValidator(Transformer):
             self.save_type_to_lookup(tree.children[0].children[0], type_)
         except hedy.exceptions.UndefinedVarException as ex:
             if self.level >= 12:
-                raise hedy.exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
+                raise hedy.exceptions.UnquotedAssignTextException(
+                    text=ex.arguments['name'],
+                    line_number=tree.meta.line)
             else:
                 raise
 
@@ -2204,7 +2206,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
             if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(
                     right_hand_side) or ConvertToPython.is_random(right_hand_side)):
-                raise exceptions.UnquotedAssignTextException(text=args[1])
+                raise exceptions.UnquotedAssignTextException(
+                    text=args[1],
+                    line_number=meta.line)
 
         if isinstance(right_hand_side, Tree):
             exception = self.make_catch_exception([right_hand_side.children[0]])
