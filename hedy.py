@@ -2912,7 +2912,8 @@ def is_program_valid(program_root, input_string, level, lang):
                     arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg)
+                                                                   invalid_argument=arg,
+                                                                   line_number=invalid_info.line)
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
             elif closest is None:

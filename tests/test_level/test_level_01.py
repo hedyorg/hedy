@@ -477,7 +477,10 @@ class TestsLevel1(HedyTester):
 
     def test_turn_with_text_gives_error(self):
         code = "turn koekoek"
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
+            exception=hedy.exceptions.InvalidArgumentException)
 
     #
     # comment tests
