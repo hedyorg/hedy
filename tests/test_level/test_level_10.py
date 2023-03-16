@@ -53,6 +53,7 @@ class TestsLevel10(HedyTester):
         self.multi_level_tester(
             max_level=16,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
 

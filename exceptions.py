@@ -236,8 +236,8 @@ class LonelyEchoException(HedyException):
 
 
 class CodePlaceholdersPresentException(HedyException):
-    def __init__(self):
-        super().__init__('Has Blanks')
+    def __init__(self, line_number):
+        super().__init__('Has Blanks', line_number=line_number)
 
 
 class NoIndentationException(HedyException):

@@ -1208,7 +1208,7 @@ class IsValid(Filter):
 
     # other rules are inherited from Filter
 
-
+@v_args(meta=True)
 def valid_echo(ast):
     commands = ast.children
     command_names = [x.children[0].data for x in commands]
@@ -1216,7 +1216,7 @@ def valid_echo(ast):
 
     # no echo is always ok!
 
-    # otherwise, both have to be in the list and echo shold come after
+    # otherwise, both have to be in the list and echo should come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
         'echo') > command_names.index('ask')
 
@@ -2636,7 +2636,7 @@ def preprocess_blocks(code, level, lang):
     next_line_needs_indentation = False
     for line in lines:
         if ' _ ' in line or line == '_':
-            raise hedy.exceptions.CodePlaceholdersPresentException
+            raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
 
         leading_spaces = find_indent_length(line)
 
@@ -2792,9 +2792,15 @@ def preprocess_ifs(code, lang='en'):
     return "\n".join(processed_code)
 
 
-def contains_blanks(code):
-    return (" _ " in code) or (" _" in code) or ("_ " in code) or (" _\n" in code)
-
+def location_of_first_blank(code_snippet):
+    # returns 0 if the code does not contain _
+    # otherwise returns the first location (line) of the blank
+    lines = code_snippet.split('\n')
+    for i in range(len(lines)):
+        code = lines[i]
+        if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
+            return i+1
+    return 0
 
 def check_program_size_is_valid(input_string):
     number_of_lines = input_string.count('\n')
@@ -2806,8 +2812,9 @@ def check_program_size_is_valid(input_string):
 def process_input_string(input_string, level, lang, escape_backslashes=True):
     result = input_string.replace('\r\n', '\n')
 
-    if contains_blanks(result):
-        raise exceptions.CodePlaceholdersPresentException()
+    location = location_of_first_blank(result)
+    if location > 0:
+        raise exceptions.CodePlaceholdersPresentException(line_number=location)
 
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
