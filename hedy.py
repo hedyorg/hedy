@@ -770,7 +770,8 @@ class TypeValidator(Transformer):
         if prom_left_type != prom_right_type:
             left_arg = tree.children[0].children[0]
             right_arg = tree.children[1].children[0]
-            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type, tree.meta.line)
+            raise hedy.exceptions.InvalidTypeCombinationException(
+                command, left_arg, right_arg, left_type, right_type, tree.meta.line)
         return prom_left_type, prom_right_type
 
     def validate_args_type_allowed(self, command, children, meta):
