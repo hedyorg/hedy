@@ -113,13 +113,14 @@ class InvalidArgumentTypeException(HedyException):
 
 
 class InvalidTypeCombinationException(HedyException):
-    def __init__(self, command, arg1, arg2, type1, type2):
+    def __init__(self, command, arg1, arg2, type1, type2, line_number):
         super().__init__('Invalid Type Combination',
                          command=command,
                          invalid_argument=arg1,
                          invalid_argument_2=arg2,
                          invalid_type=type1,
-                         invalid_type_2=type2)
+                         invalid_type_2=type2,
+                         line_number=line_number)
 
 
 class InvalidArgumentException(HedyException):
