@@ -1605,7 +1605,7 @@ levels:
                 feedback: "No it should be 2 lines."
             -   option: "This `{print}` command has to be removed."
                 feedback: "No, you need it."
-            -   option: "There is a spelling mistake in the `{repeat}` command."
+            -   option: "`{repeat}` is not a command."
                 feedback: "No, repeat is the correct spelling"
             -   option: "The second line needs to start with 4 spaces as indentation."
                 feedback: "Correct!"
@@ -1920,17 +1920,17 @@ levels:
                 {print} 'Choose the right case and win!'
                 case = {ask} 'Which case will you pick? 1 or 2?'
                 {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
+                    action = {ask} 'Open it or sell it?'
+                        {if} action {is} sell
+                            {print} 'You sell your case for 10 dollars'
+                        {if} action {is} open
+                            {print} 'You open the case and win an apple pie'
                 {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                    action = {ask} 'Open it or sell it?'
+                        {if} action {is} sell
+                            {print} 'You sell the case for 500 dollars'
+                        {if} action {is} open
+                            {print} 'You open the case and win a million dollars!'
             mp_choice_options:
             -   option: "case 1, sell"
                 feedback: "You don't win a million!"
@@ -2658,26 +2658,26 @@ levels:
             -   option: |-
                     ```
                     flavors is vanilla, strawberry, chocolate
-                    print 'I would like a ' flavors at random ' cake.'
+                    print 'I like ' flavors at random ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             -   option: |-
                     ```
                     'flavors = vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    print 'I like ' flavors at random ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             -   option: |-
                     ```
                     flavors = 'vanilla', 'strawberry', 'chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    print 'I like ' flavors at random ' cake.'
                     ```
                 feedback: "Alright!"
             -   option: |4
 
                     ```
                     flavors = 'vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    print 'I like ' flavors at random ' cake.'
                     ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
@@ -2754,7 +2754,7 @@ levels:
             hint: "The correct password is TOPSECRET"
             question_score: '10'
         6:
-            question_text: "Which line should be filled in at the ???"
+            question_text: "Which line should be filled in at the _?"
             code: |
                 print 'Welcome to McHedy!'
                 order = ask 'Would you like a hamburger or fries?'
@@ -2764,7 +2764,7 @@ levels:
                   price = 4
                 drinks = ask 'Would you like a drink with that for 2 dollars?'
                 if drinks = 'yes'
-                  ???
+                  _
                 print 'That will be ' price ' dollar please'
             mp_choice_options:
             -   option: |
@@ -2859,9 +2859,9 @@ levels:
             hint: "7 devided by 2 is 3.5"
             question_score: '10'
         9:
-            question_text: "Which code should be filled in in line 1 at the ???"
+            question_text: "Which code should be filled in in line 1 at the _?"
             code: |-
-                ???
+                _
                 print 'You won ' prices at random '!'
             mp_choice_options:
             -   option: |-
@@ -2888,10 +2888,10 @@ levels:
             hint: "The items on the list should be in quotation marks"
             question_score: '10'
         10:
-            question_text: "Which line of code should be filled in at the ??? to complete the song ?"
+            question_text: "Which line of code should be filled in at the _ to complete the song ?"
             code: |-
                 actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                ???
+                _
                     for i in range 0 to 1
                         print 'if youre happy and you know it'
                         print action
@@ -2912,12 +2912,12 @@ levels:
             question_score: '10'
     13:
         1:
-            question_text: "Which code should be filled in at the ??? ?"
+            question_text: "Which code should be filled in at the _ ?"
             code: |-
                 name = ask 'What is your name?'
                 song = ask 'Whould you like to hear a song?'
                 birthday = ask 'Is today your birthday?'
-                ???
+                _
                   print 'Happy Birthday to you!'
                   print 'Happy Birthday to you!'
                   print 'Happy Birthday. dear ' name
@@ -2947,11 +2947,11 @@ levels:
             hint: "Hedy sings if you want to hear a song and it's you birthday"
             question_score: '10'
         2:
-            question_text: "Which command is missing in the code at the place of the ??? ?"
+            question_text: "Which command is missing in the code at the place of the _ ?"
             code: |-
                 menu = 'cheese', 'sausage rolls', 'cookies'
                 diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'vegan' ??? diet = 'halal'
+                if diet = 'vegan' _ diet = 'halal'
                     remove 'sausage rolls' from menu
             mp_choice_options:
             -   option: "and"
@@ -3137,7 +3137,7 @@ levels:
             hint: "There is a mistake in line 3"
             question_score: '10'
         10:
-            question_text: "Which command needs to be in line 8 at the place of the ??? ?"
+            question_text: "Which command needs to be in line 8 at the place of the _ ?"
             code: |-
                 print 'Welcome to the product finder of this supermarkt'
                 item is ask 'What product are you looking for?'
@@ -3146,20 +3146,20 @@ levels:
                 snacks = 'chips', 'nuts', 'dips'
                 frozen = 'fries', 'icecream', 'pizza'
                 fruit = 'bananas', 'apples', 'oranges'
-                if item in snacks ??? item in drinks
+                if item in snacks _ item in drinks
                     print 'This item is in aile 3'
-                if item in bakery or item in bakery
+                if item in bakery or item in frozen
                     print 'This item in in the back of the store'
                 if item in fruit
                     print 'The fruit is sold near the register'
             mp_choice_options:
-            -   option: "and"
+            -   option: "`{and}`"
                 feedback: "There are no items that are both the list of snacks and the list of drinks"
-            -   option: "or"
+            -   option: "`{or}`"
                 feedback: "Great job!"
-            -   option: "in"
+            -   option: "`{in}`"
                 feedback: "No"
-            -   option: "if"
+            -   option: "`{if}`"
                 feedback: "No"
             correct_answer: "B"
             hint: "The item is either in the list of snacks, or in the list of drinks"
