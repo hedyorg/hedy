@@ -1208,6 +1208,7 @@ class IsValid(Filter):
 
     # other rules are inherited from Filter
 
+
 @v_args(meta=True)
 def valid_echo(ast):
     commands = ast.children
@@ -2801,6 +2802,7 @@ def location_of_first_blank(code_snippet):
         if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
             return i+1
     return 0
+
 
 def check_program_size_is_valid(input_string):
     number_of_lines = input_string.count('\n')
