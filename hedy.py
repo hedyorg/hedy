@@ -2798,8 +2798,9 @@ def location_of_first_blank(code_snippet):
     lines = code_snippet.split('\n')
     for i in range(len(lines)):
         code = lines[i]
-        if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
-            return i+1
+        if len(code) > 0:
+            if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
+                return i+1
     return 0
 
 def check_program_size_is_valid(input_string):
