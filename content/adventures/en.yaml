@@ -142,6 +142,7 @@ adventures:
                     {else} {print} 'boo!'
                     ```
                 story_text_4: |
+                    ## Pressed
                     Something else that works with `{if}` is `{pressed}`! With `{pressed}` you can link any letter in the alphabet and any number key on your keyboard to a command. If you link it, and press the key, something will happen. Try it out!
                 example_code_4: |
                     ```
@@ -1163,6 +1164,13 @@ adventures:
                 story_text: |
                     ## Let's draw
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
+                story_text_2: |
+                    ### Exercise
+                    Fill in the correct numbers in this code to get it to work.
+                    After you've done that, you can try to add the option backwards.
+
+                    **Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.
+                    This way you could add even more directions like Northeast and Southwest etc.
                 example_code: |
                     ```
                     {print} 'Drawing Figures'
@@ -1177,6 +1185,13 @@ adventures:
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    ```
+                example_code_2: |
+                    ```
+                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
+                    if direction is left turn _
+                    if direction is right turn _
+                    forward 100
                     ```
                 start_code: |-
                     {print} 'Drawing Figures'
