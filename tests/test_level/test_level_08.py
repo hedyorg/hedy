@@ -245,10 +245,11 @@ class TestsLevel8(HedyTester):
         n is 1, 2
         if m is n
           print 'success!'""")
-
+        # FH Mar 2023: waarom is dit fout?
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -261,6 +262,7 @@ class TestsLevel8(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -272,6 +274,7 @@ class TestsLevel8(HedyTester):
         self.multi_level_tester(
             max_level=16,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -284,6 +287,7 @@ class TestsLevel8(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -674,7 +678,11 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'n'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException, max_level=17)
+        self.multi_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            max_level=17)
 
     def test_repeat_with_list_variable_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -682,7 +690,11 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'n'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException, max_level=15)
+        self.multi_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            max_level=15)
 
     def test_repeat_ask(self):
         code = textwrap.dedent("""\

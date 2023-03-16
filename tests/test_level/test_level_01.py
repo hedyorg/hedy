@@ -378,7 +378,8 @@ class TestsLevel1(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_multiple_forward_without_arguments(self):
