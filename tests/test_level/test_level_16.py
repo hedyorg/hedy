@@ -476,7 +476,7 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidTypeCombinationException,
-            max_level=17,
+            max_level=16,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
