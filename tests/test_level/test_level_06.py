@@ -780,7 +780,8 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.CyclicVariableDefinitionException
+            exception=hedy.exceptions.CyclicVariableDefinitionException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     #
