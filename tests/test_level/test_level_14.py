@@ -399,6 +399,7 @@ class TestsLevel14(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=15,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=exceptions.InvalidTypeCombinationException
         )
 

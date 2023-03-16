@@ -473,8 +473,12 @@ class TestsLevel16(HedyTester):
         if 1 is color
             print 'success!'""")
 
-        with self.assertRaises(hedy.exceptions.InvalidTypeCombinationException):
-            hedy.transpile(code, self.level)
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidTypeCombinationException,
+            max_level=17,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
 
     @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
     def test_not_equal(self, arg):

@@ -1803,6 +1803,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidTypeCombinationException)
 
     def test_concat_quoted_string_and_int_gives_type_error(self):
@@ -1810,6 +1811,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidTypeCombinationException)
 
     @parameterized.expand(['-', '*', '/'])
