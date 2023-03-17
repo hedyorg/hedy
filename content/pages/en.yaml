@@ -325,42 +325,42 @@ sections:
         -   title: "Students try to print whole lists"
             example:
                 error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
+                    A list can't be printed. You can only print one item from the list with {at} {random}.
                 error_code: |
                     groceries is apples, milk, chocolate
                     print groceries
                 solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
+                    To print a list of all the groceries, you simply need to put them after a `{print}` command. Else you can use the list to print one item with `{at}` `{random}`.
                 solution_code: |
-                    print apples, milk, chocolate
+                    {print} apples, milk, chocolate
 
                     or
 
-                    groceries is apples, milk, chocolate
-                    print groceries at random
+                    groceries {is} apples, milk, chocolate
+                    {print} groceries {at} {random}
         -   title: "Students use the name of a variable or list as regular text"
             example:
                 error_text: |
                     This problem probably occured in level 2 as well. Now it can happen with lists too.
                 error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                    name {is} Hedy
+                    {print} Hi my name is name
 
                     or
 
-                    animal is rhino, bee, swan
-                    print The best animal is... animal at random
+                    animal {is} rhino, bee, swan
+                    {print} The best animal is... animal {at} {random}
                 solution_text: |
                     Don't use the names of variables or lists in regular text to print. In level 4 this problem is solved with quotation marks.
                 solution_code: |
-                    name is Hedy
-                    print Hi I'm name
+                    name {is} Hedy
+                    {print} Hi I'm name
 
                     or
 
-                    animals is rhino, bee, swan
-                    print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+                    animals {is} rhino, bee, swan
+                    {print} The best animal is... animals {at} {random}
+        -   title: "Students forget `{at}` in `{at}` `{random}`"
             example:
                 error_text: |
                     Like in the example
@@ -370,70 +370,70 @@ sections:
                 solution_text: |
                     This problem is solved by adding the word at.
                 solution_code: |
-                    birds is sparrow, seagull, robin
-                    print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+                    birds {is} sparrow, seagull, robin
+                    {print} birds {at} {random}
+        -   title: "Students forget to use the `{print}` command when also using the `{at}` `{random}` command"
             example:
                 error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
+                    Or they will sometimes put `{at}` `{random}` at the beginning of the line.
                 error_code: |
-                    fruit is apple, cherry, banana
-                    fruit at random
+                    fruit {is} apple, cherry, banana
+                    fruit {at} {random}
                 solution_text: |
                     Emphasize to your students that you always need a print to print text.
                 solution_code: |
-                    fruit is apple, cherry, banana
-                    print fruit at random
+                    fruit {is} apple, cherry, banana
+                    {print} fruit {at} {random}
         -   title: "Students forget to use commas in their lists"
             example:
                 error_text: |
                     In a list items are seperated with a comma.
                 error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
+                    pizzas {is} funghi tonno quattro stagioni
+                    {print} pizzas {at} {random}
                 solution_text: |
                     After each item on your list, there should be a comma
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-        -   title: "Students try to use at random without a list"
+        -   title: "Students try to use `{at}` `{random}` without a list"
             example:
                 error_text: |
                     For example
                 error_code: |
-                    clubs is Manchester United
-                    print clubs at random
+                    clubs {is} Manchester United
+                    {print} clubs {at} {random}
                 solution_text: |
                     Hedy can't print anything at random, because there is no list to choose from.
                 solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
+                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
+                    {print} clubs {at} {random}
         -   title: "Students try to use add/remove without a list "
             example:
                 error_text: |
                     In the example below 'names' is not a list, but a variable. You cannot add anything to it.
                 error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    names {is} Jake
+                    your_name {is} {ask} Who are you?
+                    {add} your_name {to} names
+                    {print} names {at} {random}
                 solution_text: |
                     There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
                 solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    names {is} Jake, Amy
+                    your_name {is} {ask} Who are you?
+                    {add} your_name {to} names
+                    {print} names {at} {random}
         -   title: "Students forget to use to/from in add/remove"
             example:
                 error_text: |
                     Without to/from the add/remove command won't work.
                 error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
+                    adventures {is} story, parrot, dice
+                    choice {is} Which adventure do you like best?
+                    {add} choice
+                    {remove} dice
+                    {print} I love adventures {at} {random}
                 solution_text: |
                     Hedy has to know which list the item should be added to/removed from.
                 solution_code: |
@@ -481,10 +481,10 @@ sections:
                     print 'And you`re able to do this'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: "Students forget to use `{print}` in an `{if}` command"
             example:
                 error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
+                    After students use `{if}` or `{else}` they forget to use a second command like `{print}` or `{ask}`.
                 error_code: |
                     if name is Hedy 'Great!'
                     else 'Hedy is better!'
@@ -562,7 +562,7 @@ sections:
                     if naam is Jesse print 'You are funny'
                     if naam is David print 'You are funny'
                     if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+        -   title: "The students make the variable name the same as the value in the `{if}` statement"
             example:
                 error_text: |
                     In the example below the password is 'password'. This will result in it always being correct.
@@ -573,9 +573,9 @@ sections:
                 solution_text: |
                     Pick a different name for your variable.
                 solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                    secret_password {is} {ask} 'What is the password'
+                    {if} secret_password {is} password {print} 'Access granted!'
+                    {else} {print} 'Access denied!'
     -   level: '6'
         sections:
         -   title: "Students struggle with quotation marks"
@@ -674,10 +674,10 @@ sections:
                     repeat 3 times
                         drink = ask 'What would you like to drink?'
                         print drink
-        -   title: "Students want to nest if statements, or put if statements inside a loop"
+        -   title: "Students want to nest `{if}` statements, or put `{if}` statements inside a loop"
             example:
                 error_text: |
-                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
+                    In this level students aren't allowed yet to put `{if}` statements inside other `{if}` statements or inside repeat loops.
                     In the next level this is allowed.
                 error_code: |
                     birthday = ask 'Is it you birthday?'
@@ -704,7 +704,7 @@ sections:
                 solution_code: |
                     repeat 20 times
                         print 'This is enough'
-        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+        -   title: "Students use the `{if}` command to check if the variable value is the same as the variable name"
             example:
                 error_text: |
                     We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
@@ -717,7 +717,7 @@ sections:
                     else
                         print 'You are not allowed'
                 solution_text: |
-                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
+                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `{if} password {is} 'password'` is a string value (so normal text) and not the variable name.
                 solution_code: |
                     password is ask 'What is the password?'
                     if password is 'password'
@@ -729,7 +729,7 @@ sections:
         -   title: "Students make mistakes with indentation"
             example:
                 error_text: |
-                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                    The hardest part about this level is getting the indentation right. Students love nesting `{if}` statements, sometimes even inside other nested `{if}` statements. Keeping track of indentation can get pretty tough.
                 error_code: |
                     print 'Robin is walking downtown'
                     location = ask 'Is Robin going into a shop, or does she go home?'
@@ -744,7 +744,7 @@ sections:
                     else
                         print 'Robin goes home'
                 solution_text: |
-                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
+                    This is the correct code. Try to keep track of all the different constructions when putting `{if}` statements inside other `{if}` statements.
                 solution_code: |
                     print 'Robin is walking downtown'
                     location = ask 'Is Robin going into a shop, or does she go home?'
@@ -821,20 +821,20 @@ sections:
         -   title: "Students forget quotation marks"
             example:
                 error_text: |
-                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
+                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the `{if}` command.
                 error_code: |
                     superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes at random
-                    if superhero = Batman
-                        print 'IM BATMAN!'
+                    superhero = superheroes {at} {random}
+                    {if} superhero = Batman
+                        {print} 'IM BATMAN!'
 
                 solution_text: |
                     This is the correct code:
                 solution_code: |
                     superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes at random
-                    if superhero is 'Batman'
-                        print 'IM BATMAN!'
+                    superhero = superheroes {at} {random}
+                    {if} superhero {is} 'Batman'
+                        {print} 'IM BATMAN!'
         -   title: "Students use quotation marks on numbers they want to use for calculations"
             example:
                 error_text: |
@@ -1008,38 +1008,38 @@ sections:
                     print 'I love ' icecream[random] ' icecream'
     -   level: '17'
         sections:
-        -   title: "Students use elif like else, so without a condition"
+        -   title: "Students use `{elif}` like `{else}`, so without a condition"
             example:
                 error_text: |
-                    The elif command needs a condition behind it. It cannot be used like else, without a condition.
+                    The `{elif}` command needs a condition behind it. It cannot be used like `{else}`, without a condition.
                 error_code: |
                     color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif:
-                        print 'I like green'
+                    {if} color == 'green':
+                        {print} 'green is nice'
+                    {elif}:
+                        {print} 'I like green'
                 solution_text: |
                     This is the correct code:
                 solution_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif color == yellow:
-                        print 'yellow is alright'
-                    else:
-                        print 'I like green'
+                    color = {ask} 'What is your favorite color?'
+                    {if} color == 'green':
+                        {print} 'green is nice'
+                    {elif} color == yellow:
+                        {print} 'yellow is alright'
+                    {else}:
+                        {print} 'I like green'
         -   title: "Students forget the colon"
             example:
                 error_text: |
                     After each command that requires indentation, a colon should be used.
                 error_code: |
                     answer = ask 'How are you doing?'
-                    if answer is 'great'
-                        print 'Me too!'
-                    elif answer is 'bad'
-                        print 'Let me cheer you up!'
-                    else
-                        print 'Im great!'
+                    {if} answer {is} 'great'
+                        {print} 'Me too!'
+                    {elif} answer {is} 'bad'
+                        {print} 'Let me cheer you up!'
+                    {else}
+                        {print} 'Im great!'
                 solution_text: |
                     This is the correct code:
                 solution_code: |

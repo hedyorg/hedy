@@ -77,8 +77,8 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in line 1 is missing."
                 feedback: "Correct!"
-            -   option: "The command line 2 is spelled wrong."
-                feedback: "The command is spelled correctly"
+            -   option: "The command in line 2 is spelled wrong."
+                feedback: "The command is spelled correctly."
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: "Nothing! This is a perfect code!"
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
@@ -213,11 +213,11 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "You can use the {print} command to ask questions."
+            -   option: "You can use the `{print}` command to ask questions."
                 feedback: "That is what ask is for"
-            -   option: "You can use the {ask} command to echo answers."
+            -   option: "You can use the `{ask}` command to echo answers."
                 feedback: "That is not true"
-            -   option: "With the {print} command you can make text appear"
+            -   option: "With the `{print}` command you can make text appear"
                 feedback: "Good"
             -   option: "With the {sleep} command, you can remove text from the screen."
                 feedback: "That's not how `{sleep}` works."
@@ -662,24 +662,24 @@ levels:
             question_text: "Which of these codes is correct?"
             mp_choice_options:
             -   option: |
-                  ```
-                  {print} 'Im very excited to take this quiz!'
-                  ```
+                    ```
+                    {print} 'Im very excited to take this quiz!'
+                    ```
                 feedback: "That's right"
             -   option: |
-                  ```
-                  {print} Im very excited to take this quiz!
-                  ```
+                    ```
+                    {print} Im very excited to take this quiz!
+                    ```
                 feedback: "`{ask}` needs quotation marks too!"
             -   option: |
-                  ```
-                  {print} 'I'm very excited to take this quiz!'
-                  ```
+                    ```
+                    {print} 'I'm very excited to take this quiz!'
+                    ```
                 feedback: "`{at} {random}` still works"
             -   option: |
-                  ```
-                  {print} 'I'm very excited to take this quiz!
-                  ```
+                    ```
+                    {print} 'I'm very excited to take this quiz!
+                    ```
                 feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
@@ -727,7 +727,7 @@ levels:
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "The first quotation mark should be behind the word `{print}`"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
@@ -760,7 +760,7 @@ levels:
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "Never put the quotation mark in front of the `{print}` command."
             -   option: |
                     ```
                     {print} 'options' {at} {random}
@@ -2047,7 +2047,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 5
                     ```
-                feedback: "The second {if} misses code!"
+                feedback: "The second `{if}` misses code!"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2055,7 +2055,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 5
                     ```
-                feedback: "Two consecutive {if}s is never correct."
+                feedback: "Two consecutive `{if}`s is never correct."
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2287,7 +2287,7 @@ levels:
             question_text: "What should be on the place of the question mark?"
             code: |-
                 {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
+                people {is} {ask} 'How many people will be eating here tonight?'
                 _
                     food {is} {ask} 'What would you like to order?'
                     {print} food
@@ -2989,7 +2989,7 @@ levels:
         4:
             question_text: "Which line of code should follow this line in rock-paper-scissors game?"
             code: |-
-                if computer_choice is 'rock' and your_choice is 'paper'
+                {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
             mp_choice_options:
             -   option: "print 'you win'"
                 feedback: "You win!"
@@ -3022,17 +3022,17 @@ levels:
         6:
             question_text: "Which statement about this code is true?"
             code: |-
-                print 'Let me guess which family member you are!'
-                glasses = ask 'Do you wear glasses?'
-                female = ask 'Are you female?'
-                if glasses = 'yes' and female = 'yes'
-                    print 'You must be Sophie!'
-                if glasses = 'no' and female = 'yes'
-                   print 'You must be Marleen!'
-                if glasses = 'yes' and female = 'no'
-                    print 'You must be Wouter!'
-                if glasses = 'no' and female = 'no'
-                    print 'You must be Michael!'
+                {print} 'Let me guess which family member you are!'
+                glasses = {ask} 'Do you wear glasses?'
+                female = {ask} 'Are you female?'
+                {if} glasses = 'yes' {and} female = 'yes'
+                    {print} 'You must be Sophie!'
+                {if} glasses = 'no' {and} female = 'yes'
+                   {print} 'You must be Marleen!'
+                {if} glasses = 'yes' {and} female = 'no'
+                    {print} 'You must be Wouter!'
+                {if} glasses = 'no' {and} female = 'no'
+                    {print} 'You must be Michael!'
             mp_choice_options:
             -   option: "Michael is a boy with glasses"
                 feedback: "Try again"
@@ -3125,13 +3125,13 @@ levels:
                 9  if chocolate = 'no' and sprinkles = 'no'
                 10     print 'Just plain icecream, coming up!'
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles = 'yes'"
+            -   option: "Line 3 should be: {if} chocolate = 'yes' {and} sprinkles = 'yes'"
                 feedback: "Correct!"
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles = 'no'"
+            -   option: "Line 3 should be: {if} chocolate = 'no' {and} sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles = 'yes'"
+            -   option: "Line 5 should be: {if} chocolate = 'yes' {and} sprinkles = 'yes'"
                 feedback: "This is not what I ordered!"
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles = 'no'"
+            -   option: "Line 7 should be: {if} chocolate = 'yes' {and} sprinkles = 'no'"
                 feedback: "This is not what I ordered!"
             correct_answer: "A"
             hint: "There is a mistake in line 3"
@@ -3159,7 +3159,7 @@ levels:
                 feedback: "Great job!"
             -   option: "in"
                 feedback: "No"
-            -   option: "if"
+            -   option: "{if}"
                 feedback: "No"
             correct_answer: "B"
             hint: "The item is either in the list of snacks, or in the list of drinks"
