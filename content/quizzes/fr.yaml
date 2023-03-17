@@ -150,28 +150,14 @@ levels:
             hint: "`{ask}` te permet de poser une question"
             question_score: '10'
         10:
-            question_text: "Which output will be in your outputscreen after you've run this code?"
-            code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+            question_text: "Es-tu prêt pour le niveau 2 ?"
             mp_choice_options:
-            -   option: |
-                  Are you ready to go to level 2?
-                feedback: "There are two echo commands"
-            -   option: |
-                  Yes!
-                  Yes!
-                feedback: "Great job!"
-            -   option: |
-                  Yes!
-                feedback: "There are two echo commands"
-            -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
-                feedback: "There are two echo commands"
-            correct_answer: "B"
-            hint: "Let's go!"
+            -   option: "Oui !"
+                feedback: "Super ! Passons au niveau suivant !"
+            -   option: "Non"
+                feedback: "Quel dommage... Tu peux t'entraîner un peu plus au niveau 1 !"
+            correct_answer: "A"
+            hint: "Allons-y !"
             question_score: '10'
     2:
         1:

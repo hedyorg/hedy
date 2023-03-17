@@ -26,7 +26,7 @@ I have an idea for what you should build or improve!
 
 Great! We have multiple ways of monitoring ideas.
 
-If it is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
+If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
 
 * Error messages that need to be improved
 * Crashes or bugs

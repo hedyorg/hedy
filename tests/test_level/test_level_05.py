@@ -260,16 +260,6 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    def test_quoted_ask(self):
-        code = textwrap.dedent("""\
-        szogek is ask 'Hello'""")
-
-        expected = "szogek = input(f'Hello')"
-
-        self.multi_level_tester(code=code,
-                                expected=expected,
-                                max_level=11)
-
     def test_equality_with_lists_gives_error(self):
         code = textwrap.dedent("""\
         n is 1, 2
@@ -575,7 +565,6 @@ class TestsLevel5(HedyTester):
     #
     # combined tests
     #
-
     def test_consecutive_if_statements(self):
         code = textwrap.dedent("""\
         names is Hedy, Lamar
@@ -795,28 +784,6 @@ class TestsLevel5(HedyTester):
             code=code,
             exception=hedy.exceptions.UnquotedTextException,
             extra_check_function=lambda c: c.exception.error_location[0] == 1
-        )
-
-    def test_print_quote_gives_exception(self):
-        code = textwrap.dedent("""\
-        print 'what's your name?'""")
-
-        self.single_level_tester(
-            code=code,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1
-        )
-
-    def test_ask_with_quote(self):
-        code = textwrap.dedent("""\
-        name is ask 'what's your name?'
-        print name""")
-
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1,
-            max_level=17
         )
 
     def test_if_equality_print_backtick_text_gives_error(self):

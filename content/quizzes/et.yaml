@@ -74,29 +74,15 @@ levels:
             question_text: How do you use the `{echo}` command?
             question_score: '10'
         10:
-            question_text: "Which output will be in your outputscreen after you've run this code?"
-            code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
             mp_choice_options:
-            -   option: |
-                  Are you ready to go to level 2?
-                feedback: "There are two echo commands"
-            -   option: |
-                  Yes!
-                  Yes!
-                feedback: "Great job!"
-            -   option: |
-                  Yes!
-                feedback: "There are two echo commands"
-            -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
-                feedback: "There are two echo commands"
-            correct_answer: "B"
-            hint: "Let's go!"
+            -   feedback: Great! Let's go to the next level!
+                option: Yes!
+            -   option: No
+                feedback: What a shame... You can practice some more in level 1!
+            correct_answer: A
+            hint: Let's go!
             question_score: '10'
+            question_text: Are you ready for level 2?
         2:
             question_text: Milline käsk kirjutab teksti ekraanile?
             mp_choice_options:

@@ -106,9 +106,9 @@ def collect_snippets(path, filtered_language=None):
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language)]
 #
-# level = 5
-# if level:
-#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+# level = 4
+if level:
+    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.

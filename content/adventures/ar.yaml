@@ -206,6 +206,8 @@ adventures:
                 example_code_4: "```\nاسمك = {ask} \"ما اسمك؟\"\n{if} اسمك = \"هيدي\"\n    {print} \"مرحباً صديقي!\"\n```\n"
                 story_text_5: "**الأرقام ليست بحاجة الى علامات اقتباس**\nلسنا بحاجة الى استعمال علامات الاقتباس عند تخزين الارقام في الكود باستخدام `=`:\n"
                 example_code_5: "```\nالنتيجة = ٢٥\n{print} \" نتيجة الاختبار هو \" النتيجة\n```\n"
+                story_text_6: "**استعمال العلامات الحسابية مع الكلمات**\nمن المسموح استعمال علامة الجمع + مع النصوص في هذا المستوى. على سبيل المثال:"
+                example_code_6: "```\nأ = \"مرحباً \"\nب= \"أيها العالم!\"\n{print} أ + ب\n```\n"
             13:
                 start_code: "اسمك = {ask} \"ما اسمك؟\"\nعمرك = {ask} \"ما عمرك؟\"\n{if} اسمك=\"هيدي\" {and} عمرك=٢\n    {print} \"أنت بالفعل هيدي الحقيقي!\""
                 story_text: "## و ... أو ..؟\nسنتعلم الان عن استعمال الأوامر `{and}` و `{or}`! اذا كنا نريد فحص أمرين في نفس الوقت لسنا بحاجة الى استعمال الأمر \"اذا\" مرتين، بل يمكننا أن نستعمل `{and}` و `{or}`. اذا استعملنا الأمر `{and}` بين الفحصين: يجب أن يكون كلا الفحصين (على اليمين واليسار) صحيحين من أجل تنفيذ الكود المتضمن في الأمر \"اذا\". أما اذا استعملنا الأمر `{or}` بين الفحصين: عندها يكفي أن يكون فحص واحد منهم صحيحاً لتنفيذ الكود المتضمن في الأمر \"اذا\"."
@@ -603,10 +605,6 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
-            13:
-                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
-                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
-                start_code: '# Schrijf jouw code hier'
         name: آلة حاسبة
         description: اصنع آلة حاسبة
         default_save_name: آلة حاسبة

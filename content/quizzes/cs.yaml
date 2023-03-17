@@ -186,28 +186,14 @@ levels:
             hint: "Příkaz `{ask}` umožňuje pokládat otázky"
             question_score: '10'
         10:
-            question_text: "Which output will be in your outputscreen after you've run this code?"
-            code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+            question_text: "Jste přípraveni na úroveň 2?"
             mp_choice_options:
-            -   option: |
-                  Are you ready to go to level 2?
-                feedback: "There are two echo commands"
-            -   option: |
-                  Yes!
-                  Yes!
-                feedback: "Great job!"
-            -   option: |
-                  Yes!
-                feedback: "There are two echo commands"
-            -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
-                feedback: "There are two echo commands"
-            correct_answer: "B"
-            hint: "Let's go!"
+            -   option: "Ano!"
+                feedback: "Skvělé! Pojďme na další úroveň!"
+            -   option: "Ne"
+                feedback: "Škoda... Můžete si procvičit více z úrovně 1!"
+            correct_answer: "A"
+            hint: "Pojďme na to!"
             question_score: '10'
     2:
         1:

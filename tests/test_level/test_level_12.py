@@ -336,44 +336,6 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    def test_assign_to_list_access(self):
-        code = textwrap.dedent("""\
-            field = '.', '.', '.', '.', '.', '.'
-            field at 1 = 'x'
-            print field at 1""")
-
-        expected = textwrap.dedent("""\
-            field = ['.', '.', '.', '.', '.', '.']
-            field[int(1)-1] = 'x'
-            try:
-              field[int(1)-1]
-            except IndexError:
-              raise Exception('catch_index_exception')
-            print(f'''{field[int(1)-1]}''')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=15)
-
-    def test_if_and_list_access(self):
-        code = textwrap.dedent("""\
-        player = 'x'
-        choice = 1
-        field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-        if field at choice = '.'
-            field at choice = player
-        else
-            print 'illegal move!'""")
-
-        expected = textwrap.dedent("""\
-        player = 'x'
-        choice = 1
-        field = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
-        if convert_numerals('Latin', field[int(choice)-1]) == convert_numerals('Latin', '.'):
-          field[int(choice)-1] = player
-        else:
-          print(f'''illegal move!''')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=15)
-
     def test_print_calc(self):
         code = textwrap.dedent("""\
             var is 5

@@ -107,7 +107,7 @@
     explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
     demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
 -   name: '{sleep}'
-    explanation: '`{sleep}`는 Hedy가 (몇) 초 동안 일시 중지하도록 합니다.'
+    explanation: Let Hedy pause for a (couple of) second(s).
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   name: '{is} with turtle'
     explanation: Give a number a name using `{is}`. You can choose the name yourself.
@@ -117,7 +117,7 @@
     explanation: Choose a random word from a group with `{at}` and `{random}`.
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
-    explanation: 목록에 항목을 추가합니다.
+    explanation: Add an item to a list.
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
     explanation: Remove an item from a list.
@@ -176,7 +176,7 @@
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
     explanation: 키보드의 주어진 키가 `{pressed}`인지 확인합니다.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'A 키를 눌렀습니다!'\n{else}\n    {print} '다른 키를 눌렀습니다!'"
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '{if} with multiple lines'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.

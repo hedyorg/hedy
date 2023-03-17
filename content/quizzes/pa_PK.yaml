@@ -31,28 +31,14 @@ levels:
             hint: '`{ask}` allows you to ask a question'
             question_score: '10'
         10:
-            question_text: "Which output will be in your outputscreen after you've run this code?"
-            code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
             mp_choice_options:
-            -   option: |
-                  Are you ready to go to level 2?
-                feedback: "There are two echo commands"
-            -   option: |
-                  Yes!
-                  Yes!
-                feedback: "Great job!"
-            -   option: |
-                  Yes!
-                feedback: "There are two echo commands"
-            -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
-                feedback: "There are two echo commands"
-            correct_answer: "B"
-            hint: "Let's go!"
+            -   option: Yes!
+                feedback: Great! Let's go to the next level!
+            -   feedback: What a shame... You can practice some more in level 1!
+                option: No
+            correct_answer: A
+            question_text: Are you ready for level 2?
+            hint: Let's go!
             question_score: '10'
         1:
             question_text: What's this programming language called?
