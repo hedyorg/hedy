@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 12:45+0100\n"
-"PO-Revision-Date: 2023-02-28 21:40+0000\n"
-"Last-Translator: Aleksandr Dinu <aluuu@husa.su>\n"
+"POT-Creation-Date: 2023-03-17 22:00+0100\n"
+"PO-Revision-Date: 2023-03-12 03:54+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
@@ -45,8 +45,9 @@ msgstr "You cannot use the command {command} with {invalid_argument} . Try chang
 msgid "Invalid Argument Type"
 msgstr "You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}."
 
+#, fuzzy
 msgid "Invalid At Command"
-msgstr ""
+msgstr "The {at} command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
 
 #, fuzzy
 msgid "Invalid Space"
@@ -138,9 +139,8 @@ msgstr "You've earned an achievement!"
 msgid "achievements"
 msgstr "достижения"
 
-#, fuzzy
 msgid "achievements_check_icon_alt"
-msgstr "You've earned an achievement!"
+msgstr "Достижение"
 
 msgid "achievements_logo_alt"
 msgstr "Логотип достижений"
@@ -236,9 +236,8 @@ msgstr "All students visible in class highscores"
 msgid "already_account"
 msgstr "Already have an account?"
 
-#, fuzzy
 msgid "already_program_running"
-msgstr "Start programming"
+msgstr "Какая-то программа уже исполняется, подождите когда она закончит выполнение."
 
 #, fuzzy
 msgid "already_teacher"
@@ -350,6 +349,9 @@ msgstr "The list of selected classes is invalid"
 msgid "comma"
 msgstr "запятая"
 
+msgid "commands"
+msgstr "Команды"
+
 msgid "congrats_message"
 msgstr "Поздравляем, {username}, вы завершили Hedy!"
 
@@ -364,9 +366,8 @@ msgstr "Вкладчик"
 msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
 
-#, fuzzy
 msgid "copy_join_link"
-msgstr "Please copy and paste this link into a new tab:"
+msgstr "Скопировать пригласительную ссылку"
 
 #, fuzzy
 msgid "copy_link_success"
@@ -472,9 +473,8 @@ msgstr "Select levels for your class by pressing the \"level buttons\""
 msgid "customize_class_step_2"
 msgstr "\"Checkboxes\" will appear for the adventures available for the chosen levels"
 
-#, fuzzy
 msgid "customize_class_step_3"
-msgstr "Select the adventures you want to make available"
+msgstr "Выстройте прикючения в том порядке, в котором вы хотите чтобы они появлялеись на этом уровне. В меню \"доступные приключения\" вы найдёте приключения не включённые в этот уровень."
 
 #, fuzzy
 msgid "customize_class_step_4"
@@ -579,7 +579,7 @@ msgstr "Download"
 
 #, fuzzy
 msgid "download_login_credentials"
-msgstr ""
+msgstr "Do you want to download the login credentials after the accounts creation?"
 
 msgid "duplicate"
 msgstr "Дубликат"
@@ -601,6 +601,9 @@ msgstr "Please enter a valid email."
 
 msgid "end_quiz"
 msgstr "Окончание викторины"
+
+msgid "english"
+msgstr "Английский"
 
 msgid "enter"
 msgstr "Войти"
@@ -691,15 +694,15 @@ msgstr "Forgot your password?"
 
 #, fuzzy
 msgid "from_another_teacher"
-msgstr ""
+msgstr "From another teacher"
 
 #, fuzzy
 msgid "from_magazine_website"
-msgstr ""
+msgstr "From a magazine or website"
 
 #, fuzzy
 msgid "from_video"
-msgstr ""
+msgstr "From a video"
 
 #, fuzzy
 msgid "fun_statistics_msg"
@@ -748,11 +751,11 @@ msgstr "Go to my profile"
 
 #, fuzzy
 msgid "heard_about_hedy"
-msgstr ""
+msgstr "How have you heard about Hedy?"
 
 #, fuzzy
 msgid "heard_about_invalid"
-msgstr ""
+msgstr "Please select a valid way you heard about us."
 
 msgid "hedy_achievements"
 msgstr "Достижения Хеди"
@@ -783,7 +786,7 @@ msgstr "Скрыть шпаргалку"
 
 #, fuzzy
 msgid "hide_keyword_switcher"
-msgstr ""
+msgstr "Hide keyword switcher"
 
 msgid "hide_parsons"
 msgstr "Скрыть головоломку"
@@ -992,9 +995,8 @@ msgstr "Welcome to Hedy"
 msgid "mailing_title"
 msgstr "Subscribe to the Hedy newsletter"
 
-#, fuzzy
 msgid "main_subtitle"
-msgstr "A gradual programming language"
+msgstr "Поэтапный язык программирования"
 
 msgid "main_title"
 msgstr "Хеди"
@@ -1051,6 +1053,9 @@ msgstr "a new line"
 msgid "next_exercise"
 msgstr "Следующее упражнение"
 
+msgid "next_page"
+msgstr ""
+
 #, fuzzy
 msgid "next_step_tutorial"
 msgstr "Next step >>>"
@@ -1068,8 +1073,9 @@ msgstr "There are no accounts to create."
 msgid "no_certificate"
 msgstr "Этот пользователь не заработал сертификат о прохождении Hedy"
 
+#, fuzzy
 msgid "no_more_flat_if"
-msgstr ""
+msgstr "Starting in level 8, the line after {if} needs to start with 4 spaces."
 
 #, fuzzy
 msgid "no_programs"
@@ -1151,7 +1157,7 @@ msgstr "Другие настройки"
 
 #, fuzzy
 msgid "other_source"
-msgstr ""
+msgstr "Other"
 
 #, fuzzy
 msgid "other_text"
@@ -1330,7 +1336,7 @@ msgstr "Логотип викторины"
 
 #, fuzzy
 msgid "quiz_score"
-msgstr ""
+msgstr "Quiz score"
 
 msgid "quiz_tab"
 msgstr "Викторина"
@@ -1517,11 +1523,11 @@ msgstr "слэш"
 
 #, fuzzy
 msgid "social_media"
-msgstr ""
+msgstr "Social media"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
-msgstr ""
+msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
 msgid "space"
 msgstr "пространство"
@@ -1546,6 +1552,10 @@ msgstr "Начать викторину"
 #, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "Start teacher tutorial"
+
+#, fuzzy
+msgid "step_title"
+msgstr "Assignment"
 
 msgid "stop_code_button"
 msgstr "Остановить программу"
@@ -1740,6 +1750,9 @@ msgstr "Translating Hedy"
 msgid "try_it"
 msgstr "Попробуйте"
 
+msgid "tutorial"
+msgstr "Учебник"
+
 msgid "tutorial_code_snippet"
 msgstr ""
 "{print} Здравствуй мир!\n"
@@ -1906,21 +1919,9 @@ msgstr ""
 #~ msgid "class"
 #~ msgstr "Класс"
 
-#~ msgid "commands"
-#~ msgstr "Команды"
-
-#~ msgid "english"
-#~ msgstr "Английский"
-
 #~ msgid "save_code_button"
 #~ msgstr "Сохранить код"
 
 #~ msgid "share_code_button"
 #~ msgstr "Save & share code"
-
-#~ msgid "step_title"
-#~ msgstr "Assignment"
-
-#~ msgid "tutorial"
-#~ msgstr "Учебник"
 

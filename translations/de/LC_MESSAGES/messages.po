@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 12:45+0100\n"
-"PO-Revision-Date: 2023-02-18 14:39+0000\n"
+"POT-Creation-Date: 2023-03-17 22:00+0100\n"
+"PO-Revision-Date: 2023-03-14 11:30+0000\n"
 "Last-Translator: Armor Games <armorgames@protonmail.com>\n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid "Invalid Argument Type"
 msgstr "Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen weil es ein {invalid_type} ist. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr ""
+msgstr "Der {at} Befehl darf ab Level 16 nicht mehr verwendet werden. Du kannst eckige Klammern benutzen, um ein Element aus einer Liste zu verwenden, zum Beispiel `freunde[i]`, `glückszahlen[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Hoppla! Du hast Zeile {line_number} mit einem Leerzeichen begonnen. Leerzeichen bringen Computer durcheinander. Kannst du es entfernen?"
@@ -51,7 +51,7 @@ msgid "Locked Language Feature"
 msgstr "Du benutzt {concept}! Das ist toll, aber {concept} ist noch nicht freigeschaltet! Es wird in einem späteren Level freigeschaltet."
 
 msgid "Lonely Echo"
-msgstr "Du hast ein echo vor einem ask verwendet, oder ein echo ohne ask. Benutze zuerst ein ask um eine Eingabe zu bekommen, danach echo."
+msgstr "Du hast ein `{echo}` vor einem `{ask}` verwendet, oder ein `{echo}` ohne `{ask}`. Benutze zuerst ein `{ask}` um eine Eingabe zu bekommen, danach `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Es sieht so aus als ob du vergessen hast einen Befehl für deinen Text in Zeile {line_number} zu verwenden"
@@ -81,7 +81,7 @@ msgid "Unquoted Equality Check"
 msgstr "Wenn Du prüfen willst, ob eine Variable gleich mehreren Wörtern ist, musst Du die Wörter in Anführungszeichen setzen!"
 
 msgid "Unquoted Text"
-msgstr "Achtung. Wenn du etwas fragst oder druckst, sollte der Text mit einem Anführungszeichen beginnen und enden. Du hast irgendwo eines vergessen."
+msgstr "Achtung. Wenn du etwas `{ask}` oder `{print}`, sollte der Text mit einem Anführungszeichen beginnen und enden. Du hast beim Text {unquotedtext} etwas vergessen."
 
 msgid "Unsupported Float"
 msgstr "Nicht-ganze Zahlen werden noch nicht unterstützt, sie werden es aber in ein paar Leveln. Für den Moment ändere {value} in eine ganze Zahl um."
@@ -213,7 +213,7 @@ msgid "are_you_sure"
 msgstr "Bist du sicher? Du kannst diese Aktion nicht rückgängig machen."
 
 msgid "ask_needs_var"
-msgstr "Ab Level 2 muss {ask} mit einer Variable benutzt werden. Beispiel: Name {is} {ask} Wie heißt du?"
+msgstr "Ab Level 2 muss `{ask}` mit einer Variable benutzt werden. Beispiel: Name {is} {ask} Wie heißt du?"
 
 msgid "available_adventures_level"
 msgstr "Verfügbare Abenteuer-Level"
@@ -280,6 +280,9 @@ msgstr "Die Liste ausgewählter Klassen ist ungültig"
 
 msgid "comma"
 msgstr "ein Komma"
+
+msgid "commands"
+msgstr "Befehle"
 
 msgid "congrats_message"
 msgstr "Herzlichen Glückwunsch, {username}, Du hast Hedy abgeschlossen!"
@@ -471,7 +474,7 @@ msgid "duplicate"
 msgstr "Duplizieren"
 
 msgid "echo_out"
-msgstr "Ab Level 2 wird {echo} nicht mehr gebraucht. Du kannst jetzt eine Antwort mit {aks} und {print} wiedergeben. Beispiel: Name ist {ask} Wie heißt Du? {print} Hallo Name"
+msgstr "Ab Level 2 wird `{echo}` nicht mehr gebraucht. Du kannst jetzt eine Antwort mit `{aks}` und `{print}` wiedergeben. Beispiel: Name ist {ask} Wie heißt Du? {print} Hallo Name"
 
 msgid "edit_code_button"
 msgstr "Programm ändern"
@@ -484,6 +487,9 @@ msgstr "itte eine gültige E-mail-Adresse eingeben."
 
 msgid "end_quiz"
 msgstr "Quiz-Ende"
+
+msgid "english"
+msgstr "Englisch"
 
 msgid "enter"
 msgstr "Eingeben"
@@ -882,6 +888,9 @@ msgstr "eine neue Zeile"
 msgid "next_exercise"
 msgstr "Nächste Übung"
 
+msgid "next_page"
+msgstr ""
+
 msgid "next_step_tutorial"
 msgstr "Nächster Schritt >>>"
 
@@ -898,7 +907,7 @@ msgid "no_certificate"
 msgstr "Dieser Nutzer hat noch kein Hedy Abschlusszertifikat"
 
 msgid "no_more_flat_if"
-msgstr ""
+msgstr "Ab Level 8 muss die Zeile nach {if} mit 4 Leerzeichen beginnen."
 
 msgid "no_programs"
 msgstr "Du hast noch kein Programm."
@@ -1299,6 +1308,9 @@ msgstr "Quiz starten"
 msgid "start_teacher_tutorial"
 msgstr "Starte Lehranleitung"
 
+msgid "step_title"
+msgstr "Aufgabe"
+
 msgid "stop_code_button"
 msgstr "Programm stoppen"
 
@@ -1467,6 +1479,9 @@ msgstr "Hedy übersetzen"
 msgid "try_it"
 msgstr "Probier es aus"
 
+msgid "tutorial"
+msgstr "Anleitung"
+
 msgid "tutorial_code_snippet"
 msgstr ""
 "print Hallo Welt!\n"
@@ -1613,21 +1628,9 @@ msgstr ""
 #~ msgid "class"
 #~ msgstr "Klasse"
 
-#~ msgid "commands"
-#~ msgstr "Befehle"
-
-#~ msgid "english"
-#~ msgstr "Englisch"
-
 #~ msgid "save_code_button"
 #~ msgstr "Code speichern"
 
 #~ msgid "share_code_button"
 #~ msgstr "Code speichern & teilen"
-
-#~ msgid "step_title"
-#~ msgstr "Aufgabe"
-
-#~ msgid "tutorial"
-#~ msgstr "Anleitung"
 
