@@ -896,7 +896,7 @@ levels:
             question_text: "Welk commando hoort op het lijntje?"
             mp_choice_options:
             -   option: "`{print}`"
-                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 hefet geantwoord."
+                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 heeft geantwoord."
             -   option: "`{if}`"
                 feedback: "Dat is hem niet..."
             -   option: "`{sleep}` "
@@ -976,7 +976,7 @@ levels:
             hint: "De spelling moet precies hetzelfde zijn."
             question_score: '10'
         6:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Hoi ik ben Hedy de voetbalvoorspeller!'
                 {print} 'Ik kan voorspellen op welke plek jouw club eindigt!'
@@ -1008,7 +1008,7 @@ levels:
             hint: "In level 5 leer je 2 nieuwe commando's `{if}` en...?"
             question_score: '10'
         7:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Ik kan voorspellen of jij miljonair wordt!'
                 naam {is} {ask} 'Hoe heet jij?'
@@ -1036,10 +1036,10 @@ levels:
                     ```
                 feedback: "Top!"
             correct_answer: "D"
-            hint: "Na `{else}` volgt nog een `{print}`"
+            hint: "Na `{else}` hoort nog een `{print}`"
             question_score: '10'
         8:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 dier {is} {ask} 'Wat is je lievelingsdier?'
                 {if} _ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!'
@@ -1564,7 +1564,7 @@ levels:
                 feedback: "Helaas. In level 8 moet het wel op twee regels."
             -   option: "Het woord `{print}` moet weg, dat is niet nodig"
                 feedback: "Helaas. Het `{print}` commando is wel nodig."
-            -   option: "`{repeat}` is fout gespeld, het moet `repeet` zijn."
+            -   option: "`{repeat}` is geen commando."
                 feedback: "Nee, `{repeat}` is de goede spelling"
             -   option: "De tweede regel moet inspringen met 4 spaties."
                 feedback: "Juist!"
@@ -1655,7 +1655,7 @@ levels:
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            output: "Welcome bij restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Wat is er mis met deze code?"
             code: |-
@@ -1754,7 +1754,7 @@ levels:
             mp_choice_options:
             -   option: "Alle regels moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
-            -   option: "Regel 2 en 4 moeten beginnen met 4 spaties"
+            -   option: "Regel 2 en 3 moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
             -   option: "Regel 2 moet beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
@@ -1804,7 +1804,7 @@ levels:
                  feedback: Je wint geen miljoen
              -   option: Koffer 2, open
                  feedback: Goed gedaan! Jij wint!
-             code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n     {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
+             code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
              correct_answer: D
              question_text: Welke koffer moet je kiezen om een miljoen euro te winnen?
              hint: Volg het juiste pad.
@@ -1982,7 +1982,7 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {for} each compliment
+                    {for} elk compliment
                     ```
                 feedback: "Helaas"
             -   option: |
@@ -2164,24 +2164,16 @@ levels:
                     {print} i
             mp_choice_options:
             -   option: |
-                    ```
-                    rang
-                    ```
+                    `{if}`
                 feedback: "Nee, helaas"
             -   option: |
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: "Correct"
             -   option: |
-                    ```
-                    ragne
-                    ```
+                    `{for}`
                 feedback: "Nee, helaas"
             -   option: |
-                    ```
-                    ranch
-                    ```
+                    `{ask}`
                 feedback: "Nee, helaas"
             correct_answer: "B"
             hint: "Wat is de juiste spelling?"
@@ -2261,7 +2253,7 @@ levels:
             -   option: |
                     ```
                     {for} i {in} {range} 10 {to} 0
-                        {print} i
+                        {print} 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     ```
                 feedback: "Dit kan helaas niet."
             -   option: |
@@ -2324,7 +2316,7 @@ levels:
                 feedback: "Er zijn niet altijd 3 mensen"
             -   option: |
                     ```
-                    {for} i {in} {range} 1 tot mensen
+                    {for} i {in} {range} 1 tot gasten
                     ```
                 feedback: "Bijna... Niet tot maar {to}!"
             -   option: |
@@ -2459,13 +2451,13 @@ levels:
         2:
             question_text: Which of these codes is correct?
             mp_choice_options:
-            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: Alright!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```\n"
+            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```\n"
                 feedback: All the different values of flavors should be in quotation marks.
             correct_answer: C
             hint: The second line is the same in each code, pay attention to the first line
