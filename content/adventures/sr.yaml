@@ -71,8 +71,6 @@ adventures:
                 example_code_3: "```\nlepe_boje {is} zelena, žuta\nomiljena_boja {is} {ask} 'Koja je tvoja omiljena boja?'\n{if} omiljena_boja {in} lepe_boje {print} 'super!'\n{else} {print} 'bla!'\n```\n"
                 story_text_2: "Ponekad kod sa `{if}` postane jako dugačak i zbog toga ne może da stane u jednu liniju na ekranu. <br> Možeš takodje podeliti kod u dve linije, počevši drugu liniju sa `{else}` ovako:\n"
                 example_code_2: "```\nime {is} {ask} 'Kako se zoveš?'\n{if} ime {is} Hedy {print} 'super!'\n{else} {print} 'bla!'\n```\n"
-                story_text_4: "Još nešto što radi sa `{if}` je `{pressed}`! Sa `{pressed}` možeš povezati bilo koje slovo i bilo koji broj na tastaturi sa bilo kojom komandom. Ako ih povežeš, i pritisneš tipku na tastaturi, nešto će se desiti. Probaj!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'radi!'\n```\n"
             6:
                 start_code: "{print} '5 puta 5 je ' 5 * 5"
                 story_text: "## 1 + 1\n U ovom nivou naučićeš nešto novo: sada možeš da vršiš i matematičke operacije.\n\n Sabiranje je lako, pišeš isto kao i u matematici: `5 + 5` na primer. Oduzimanje je takodje lako, `5 - 5`.\n\n Množenje je malo drugačije, jer ne postoji znak puta na tastaturi. \n Zato množimo sa zvezdicom na tipki iznad broja 8: `5 * 5`. Čitaj kao \"5 puta 5\" to najbolje pomaže da zapamtiš.\n"
@@ -239,8 +237,7 @@ adventures:
     turtle:
         levels:
             9:
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
                 start_code: '# place your code here'

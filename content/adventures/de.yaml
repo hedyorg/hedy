@@ -63,8 +63,6 @@ adventures:
                 example_code_3: "```\nschöne_farben {is} grün, gelb\nfarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'\n{if} farbe {in} schöne_farben {print} 'schön!'\n{else} {print} 'na ja'\n```\n"
                 story_text_2: "Manchmal wird Code mit einem `{if}` ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Zeilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy {print} 'schön'\n{else} {print} 'buh!'\n```\n"
-                story_text_4: "Etwas anderes das mit `{if}` funktioniert, ist `{pressed}`! Mit `{pressed}` kannst du jeden beliebigen Buchstaben des Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst, wird etwas passieren. Probiere es aus!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'es hat geklappt!'\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
                 story_text: |
@@ -959,8 +957,6 @@ adventures:
                 start_code: '# schreibe deinen Code hier'
                 story_text: "## Schildkröte\nNun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, ist es möglich, komplexere Figuren zu erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n**(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Schildkrötensteuerung\nNun kannst du die Schildkröte auch auf viele weitere Arten bewegen als nur vorwärts oder rückwärts!\n### Übung 2\nVervollständige den Code, um die Schildkröte mit den Tasten zu steuern. w für vorwärts, s für rückwärts, a für links und d für rechts. \nTipp: Für links und rechts wirst du drei Zeilen Code benötigen!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
     dishes:
         name: "Abwasch?"
         description: "Nutze den Computer, um zu sehen, wer abwäscht"

@@ -139,8 +139,6 @@ adventures:
                     {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
                     {else} {print} 'mwah'
                     ```
-                story_text_4: "## Ingedrukt\nIets anders dat met `{if}` werkt, is `{pressed}`! Met `{pressed}` kun je iedere letter\nuit het alfabet en ieder nummer op jouw toetsenbord koppelen aan een commando. \nDan kun je programmeren wat er gebeurt als je die toets indrukt. Probeer maar eens!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'Het werkt!'\n```\n"
             6:
                 start_code: "{print} '5 keer 5 is ' 5 * 5"
                 story_text: |
@@ -1195,21 +1193,6 @@ adventures:
                         {color} {white}
                         {forward} 50
                         {color} {black}
-                    ```
-                story_text_2: |
-                    ## Schildpad besturen
-                    Je kunt je schildpad nu ook met `{pressed}` besturen. 
-
-                    ### Opdracht 2
-                    Maak de code af zodat je de schildpad ermee bestuurt: w voor vooruit, s voor achteruit, a voor links en d voor rechts. 
-                    Tip: Voor links en rechts moet je drie regels code schrijven.
-                example_code_2: |
-                    ```
-                    {repeat} 40 {times}
-                        {if} w {is} {pressed}
-                            {forward} 10
-                        {if} a {is} {pressed}
-                            _ _
                     ```
                 start_code: "# place your code here"
     dishes:

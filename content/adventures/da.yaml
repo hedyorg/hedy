@@ -384,8 +384,6 @@ adventures:
             9:
                 story_text: "## Skildpadde\nNu hvor vi kan bruge `{repeat}` inden i en `{repeat}`, kan vi lave mere komplekse figurer.\n\n### Opgave 1\nDenne kode skaber tre sorte trekanter og fem lyserøde firkanter.\n\n **(ekstra)** Lav en figur du selv vælger bestående af mindst to forskellige former.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Skildpaddestyring\nDu kan også bevæge skildpadden på mange andre måder end frem og tilbage!\n### Opgave 2\nFærdiggør koden så du kan styre skildpadden med taster. w til fremad, s til baglæns, a til venstre og d til højre. \nTip: Til højre og venstre, får du brug for 3 linjer kode!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
                 start_code: '# placer din kode her'
         name: Skildpadde
         description: Lav din egen tegning
@@ -510,8 +508,6 @@ adventures:
                 story_text_3: "## Lists\nNår vi vil tjekke om noget er i en liste, kan vi nu bruge `{in}` kommandoen.\nDenne kode printer flot! hvis du vælger grøn eller gul, og ellers kedeligt.\n"
                 story_text_2: "Nogle gang kan kode med `{if}` blive virkelig lang og ikke passe på en linie. <br> Du må gerne dele koden over to linjer, og begynde anden linje med `{else}` sådan her:\n"
                 example_code_2: "```\nnavn {is} {ask} 'hvad hedder du?'\n{if} navn {is} Hedy {print} 'lækkert'\n{else} {print} 'buh!'\n```\n"
-                story_text_4: "Noget andet der virker med `{if}` er `{pressed}`! Med `{pressed}` kan du forbinde et hvert bogstav i alfabetet og enhver taltast på dit tastatur til en kommando. Hvis du forbinder den, og trykker på tasten, vil noget ske. Prøv det!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'det virkede!'\n```\n"
             6:
                 story_text: "## 1 + 1\nPå dette niveau lærer du noget nyt: du kan nu også regne.\n\n Plus er nemt, du skriver det som i matematik: `5 + 5` for eksempel. Minus virker også fint, det er `5 - 5`.\n\n Gange er en smule anderledes, for der er ikke noget gange symbol på dit tastatur. Prøv at lede, den er der virkelig ikke!\n Der for ganger vi med stjernen ved siden af ø: `5 * 5`. Læs det som \"5 gange 5\" det hjælper dig med at huske det.\n"
                 example_code: "```\n{print} '5 plus 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 gange 5 er ' 5 * 5\n```\n"

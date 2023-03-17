@@ -223,8 +223,7 @@ adventures:
                 example_code_3: "```\nצבעים_יפים {is} ירוק, צהוב\nצבע_אהוב {is} {ask} 'מה הצבע האהוב עליך?'\n{if} צבע_אהוב {in} צבעים_יפים {print} 'יפה!'\n{else} {print} 'שיהיה'\n```\n"
                 story_text_2: "לפעמים, קוד עם פקודות `{if}` נהיה ארוך מדי לשורה אחת. <br> אם זה קורה, אפשר לרדת שורה לפני הפקודה `{else}`, וככה לחלק את השורה לשתיים. לדוגמה:\n"
                 example_code_2: "```\nשם {is} {ask} 'איך קוראים לך?'\n{if} שם {is} הדי {print} 'נחמד'\n{else} {print} 'בוז!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             7:
                 start_code: "{repeat} 3 {times} {print} 'איזה כיף בהדי!'"
                 story_text: "## שלב 7! שלב 7!\nשלב 7 מוסיף את הפקודה `{repeat}`. תוכלו להשתמש ב-`{repeat}` כדי להריץ את אותה שורת קוד כמה פעמים.\n"
@@ -394,8 +393,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         description: Use the computer to see who does the dishes (Start at level 2)

@@ -84,8 +84,6 @@ adventures:
                     ```
                 story_text_2: "Às vezes, o código com um `{if}` fica muito longo e não se encaixa bem na linha. <br> Você também pode dividir o código em duas linhas, começando a segunda linha com `{else}` assim:\n"
                 example_code_2: "```\nnome {is} {ask} 'qual o seu nome?'\n{if} nome {is} Hedy {print} 'legal'\n{else} {print} 'não tão legal!'\n```\n"
-                story_text_4: "Algo mais que funciona com `{if}` é `{pressed}`! Com `{pressed}` você pode vincular qualquer letra do alfabeto e qualquer tecla numérica em seu teclado a um comando. Se você ligá-lo, e pressionar a tecla, algo acontecerá. Experimente-o!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print} '5 vezes 5 é ' 5 * 5"
                 story_text: |
@@ -460,8 +458,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Tartaruga
         description: Faça o seu próprio desenho

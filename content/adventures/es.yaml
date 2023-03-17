@@ -66,8 +66,6 @@ adventures:
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
                 example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
-                story_text_4: "¡Algo más que funciona con `{if}` es `{pressed}`! Con `{pressed}` puedes enlazar cualquier letra en el alfabeto y cualquier tecla numérica de su teclado a un comando. Si lo vinculas y presionas la tecla,\nalgo va a pasar ¡Pruébalo!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} '¡funcionó!'\n```\n"
             6:
                 start_code: "{print} '5 por 5 es ' 5 * 5"
                 story_text: |
@@ -594,8 +592,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         name: "¿Platos?"

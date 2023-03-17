@@ -92,8 +92,6 @@ adventures:
                 example_code_3: "```\nкрасивые_цвета {is} зеленый, желтый\nцвет {is} {ask} 'Какой ваш любимый цвет?'\n{if} цвет {in} красивые_цвета {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Иногда код с `{if}` становится очень длинным и не помещается на строке. <br> Вы также можете разделить код на две строки, начав вторую строку с `{else}` следующим образом:\n"
                 example_code_2: "```\nимя {is} {ask} 'как тебя зовут?'\n{if} имя {is} Хеди {print} 'мило'\n{else} {print} 'boo!'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
-                story_text_4: "Еще одно средство, которое работает с `{if}`, - это `{pressed}`! С помощью `{pressed}` вы можете связать любую букву алфавита и любую цифровую клавишу на клавиатуре с командой. Если вы свяжете их и нажмете клавишу, то что-то произойдет. Попробуйте!\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: "## Уровень 7! Уровень 7!\nУровень 7 добавляет команду `{repeat}`. `{repeat}` можно использовать для многократного выполнения одной строки кода.\n"
@@ -599,8 +597,7 @@ adventures:
                 example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: "angles = {ask} 'Сколько углов я должен нарисовать?'"
             9:
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
