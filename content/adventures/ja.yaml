@@ -48,8 +48,7 @@ adventures:
                 example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                story_text_6: "**Maths with words** \nIn this level it is also allowed to use the + sign with texts. For example:"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
+
             13:
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
@@ -429,6 +428,10 @@ adventures:
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# place your code here'
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Calculator
         description: Create a calculator
         default_save_name: Calculator
