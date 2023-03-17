@@ -125,7 +125,6 @@ adventures:
                 example_code: "\n```\nاسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\"\n```\n"
                 story_text_3: "## القوائم\nعندما نريد أن نفحص وجود عنصر معين في قائمة، يمكننا استخدام الأمر `{in}` مع الأمر `{if}`.\nهذا المثال البرمجي يطبع كلمة جميل! على الشاشة اذا أدخلت برتقالي أو وردي، بينما يطبع \"يا خسارة!\" على الشاشة اذا أدخلت أي كلمة أخرى.\n"
                 example_code_3: "```\nالالوان_الجميلة {is} الأخضر، الأصفر\nاللون {is} {ask} \"ما لونك المفضل؟\"\n{if} اللون {in} الالوان_الجميلة {print} \"جميل!\"\n{else} {print} \"يا خسارة!\"\n```\n"
-                example_code_4: "```\nاذا ادخلت س اطبع \"إنه يعمل!\"\n```\n"
             6:
                 start_code: "{print} \"٥ ضرب ٥ يساوي \" ٥*٥"
                 story_text: "## ١+١\nفي هذا المستوى يمكنك أن تتعلم شيئاً جديداً: القيام بالعمليات الحسابية.\n\nعملية الجمع تتم بسهولة كما في الحساب: `٥+٥` على سبيل المثال. كذلك اشارة السالب للطرح تعمل جيداً بنفس الطريقة، `٥-٥`.\n\nعملية الضرب مختلفة بعض الشيء، لأنه لا يوجد اشارة الضرب المعروفة لديك في لوحة المفاتيح (يمكنك البحث الان!).\nلذلك نقوم بعملية الضرب من خلال اشارة الإجامة أو النجمة الصغيرة الموجودة في لوحة المفاتيح فوق الرقم ٨ عادة: `٥*٥` ونقرأها هكذا \"٥ ضرب ٥\" لتتذكرها بسهولة.\n"
@@ -440,6 +439,8 @@ adventures:
                 story_text: "## فلنرسم!\nفي المستوى الخامس يمكننا الاختيار بناء على فحص معين من خلال الأمر `{if}`. على سبيل المثال الإحتيار بين عدة أنواع من أشكال الرسم.\n"
                 example_code: "\n\n```\n{print} \"رسم الأشكال\"\nالشكل {is} {ask} \"هل تريد مربعاً أم مثلثاً؟\"\n{if} الشكل {is} مثلث الزاوية هي ١٢٠\n{else} الزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n```\n"
                 start_code: "{print} \"رسم الأشكال\"\nالشكل {is} {ask} \"هل تريد مربعاً أم مثلثاً؟\"\n{if} الشكل {is} مثلث الزاوية هي ١٢٠\n{else} الزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             6:
                 story_text: "## فلنرسم!\nفي هذا المستوى يمكننا استخدام الحساب لنرسم أشكالاً مختلفة.\nقد تكون تعلمت في المدرسة أن الإستدارة بشكل دائرة كاملة تساوي ٣٦٠ درجة. اذا لم تتعلم ذلك من قبل فأنت الآن تعرف!\nلذلك أيضا نستخدم ٩٠درجة من أجل رسم مربع. ٣٦٠مقسومة على ٤ تساوي ٩٠.\nبما أننا نستطيع القيام بالعمليات الحسابية في هيدي، يمكننا رسم كل الأشكال التي نريد!\n"
                 example_code: "## مصال توضيحي\n\n```\nعدد_الزوايا = {ask} \"كم عدد الزوايا المطلوبة؟\"\nالزاوية = ٣٦٠ / عدد_الزوايا\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n```\n"
