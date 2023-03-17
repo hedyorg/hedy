@@ -1027,6 +1027,7 @@ class QueryIterator:
     _do_fetch() should be overridden, and use self.pagination_token to
     paginate on the database.
     """
+
     def __init__(self, pagination_token=None):
         drop_initial = self._analyze_pagination_token(pagination_token)
         self.page = None
@@ -1102,6 +1103,7 @@ class PythonQueryIterator:
     """Implements the Python iterator protocol, which is slightly different
     from the Java (eof/current/advance) iterator protocol.
     """
+
     def __init__(self, iter):
         self.iter = iter
 

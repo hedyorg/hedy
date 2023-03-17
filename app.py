@@ -145,8 +145,8 @@ def load_adventures_for_level(level):
     adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
     index_map = {v: i for i, v in enumerate(adventures_order)}
     all_adventures.sort(key=lambda pair: index_map.get(
-            pair['short_name'],
-            len(adventures_order)))
+        pair['short_name'],
+        len(adventures_order)))
 
     return all_adventures
 
@@ -161,7 +161,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
         return
 
     loaded_programs = {k: Program.from_database_row(r)
-        for k, r in DATABASE.last_level_programs_for_user(current_user()['username'], level).items()}
+                       for k, r in DATABASE.last_level_programs_for_user(current_user()['username'], level).items()}
 
     # If there is a preferential program, overwrite any other one that might exist so we definitely
     # load this one.
@@ -171,7 +171,8 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
     # Copy them into the adventures array
     for adventure in into_adventures:
         program = loaded_programs.get(adventure.short_name)
-        if not program: continue
+        if not program:
+            continue
 
         adventure.save_name = program.name
         adventure.start_code = program.code
@@ -196,7 +197,7 @@ def load_customized_adventures(level, customizations, into_adventures):
         adventure = DATABASE.get_adventure(adv_id)
         try:
             adventure['content'] = safe_format(adventure['content'],
-                                                        **hedy_content.KEYWORDS.get(g.keyword_lang))
+                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
             # We don't want teacher being able to break the student UI -> pass this adventure
             pass
@@ -205,7 +206,7 @@ def load_customized_adventures(level, customizations, into_adventures):
             short_name=adv_id,
             name=adventure['name'],
             save_name=adventure['name'] + ' ' + str(level),
-            start_code='', # Teacher adventures don't seem to have this
+            start_code='',  # Teacher adventures don't seem to have this
             text=adventure['content'],
             is_teacher_adventure=True))
 
@@ -219,7 +220,8 @@ def load_customized_adventures(level, customizations, into_adventures):
         adventure_map = {a['short_name']: a for a in into_adventures}
 
         # Replace entire list
-        into_adventures[:] = [adventure_map[select['name']] for select in order_for_this_level if select['name'] in adventure_map]
+        into_adventures[:] = [adventure_map[select['name']]
+                              for select in order_for_this_level if select['name'] in adventure_map]
 
 
 @babel.localeselector
@@ -516,7 +518,6 @@ def parse():
             error=exception is not None)
 
         response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
-
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
@@ -891,7 +892,8 @@ def programs_page(user):
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
     print(result.next_page_token)
-    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)) if result.next_page_token else None
+    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+                            ) if result.next_page_token else None
 
     return render_template(
         'programs.html',
@@ -1220,8 +1222,8 @@ def view_program(user, id):
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['initial_adventure'] = dict(result,
-        start_code=code,
-    )
+                                               start_code=code,
+                                               )
     arguments_dict['editor_readonly'] = True
 
     if "submitted" in result and result['submitted']:
@@ -2080,9 +2082,12 @@ def current_user_allowed_to_see_program(program):
     user = current_user()
 
     # These are all easy
-    if program.get('public'): return True
-    if user['username'] == program['username']: return True
-    if is_admin(user): return True
+    if program.get('public'):
+        return True
+    if user['username'] == program['username']:
+        return True
+    if is_admin(user):
+        return True
 
     if is_teacher(user) and program['username'] in DATABASE.get_teacher_students(user['username']):
         return True

@@ -6,7 +6,6 @@ import flask
 from jinja2 import Undefined, Markup
 
 
-
 @querylog.timed
 def render_template(filename, **kwargs):
     """A copy of Flask's render_template that is timed."""

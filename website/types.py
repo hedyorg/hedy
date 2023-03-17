@@ -66,7 +66,7 @@ class SaveInfo:
             public=program.public,
             submitted=program.submitted,
             public_url=f'{utils.base_url()}/hedy/{program.id}/view' if program.public or program.submitted else None,
-            )
+        )
 
 
 @dataclass
