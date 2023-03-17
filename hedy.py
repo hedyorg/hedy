@@ -2033,6 +2033,7 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args += ["  break\n"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
