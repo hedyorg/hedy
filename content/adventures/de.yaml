@@ -89,7 +89,7 @@ adventures:
                         {print} 'Das wird 5 mal ausgegeben'
                 story_text: |
                     ## Einrückung
-                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`, `{else}`, {pressed} und `{repeat}` haben sich verändert!
+                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`, `{else}` und `{repeat}` haben sich verändert!
                     Du kannst jetzt mehrere Zeilen gruppieren, aber du musst den Code dafür *einrücken*.
                     Das bedeutet, dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
                 example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
@@ -585,6 +585,8 @@ adventures:
                 story_text: |
                     ## Papagei
                     Belohne deinen Papagei, wenn er das richtige Wort sagt!
+
+                    ### Übung
                     Vervollständige den Code, indem du die 4 fehlenden Befehle ergänzt.
 
                 example_code: |
@@ -884,8 +886,8 @@ adventures:
                     {if} Form {is} Dreieck Winkel {is} 120 {else} Winkel {is} 90
                     {turn} Winkel
                     {forward} 25
-                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
-                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\nrichtung {is} {ask} 'Möchtest du links, rechts oder geradeaus gehen?'\n{if} richtung {is} left {turn} _\n{if} richtung {is} right {turn} _\n{forward} 100\n```\n"
+                story_text_2: "### Übung\nFülle die richtigen Zahlen in die Lücken in diesem Code, um ihn zum Laufen zu bringen.\nNachdem du das getan hast, kannst du versuchen die Option rückwärts hinzuzufügen.\n\n**Extra** Anstelle von \"links\" und \"rechts\", ändere das Programm so, dass es Nord, Ost, Süd und West benutzt.\nAuf diese Weise kannst du sogar noch mehr Richtungen, wie z.B. Nordost und Südwest, hinzufügen.\n"
             8:
                 story_text: |
                     ## Lass uns zeichnen
@@ -1774,7 +1776,7 @@ adventures:
                     ```
 
                 start_code: "# setze hier deinen Code hin"
-                story_text_2: "### Übung\nFallen dir noch mehr Fragen ein, die du den Kundinnen oder Kunden stellen kannst (`{ask}`), wenn sie bestellen? Und kannst du dir ein paar Antworten auf ihre Fragen ausdenken, indem du den `{if}` Befehl verwendest?\n"
+                story_text_2: "### Übung\nDer Code oben zeigt ein Beispiel wie du programmieren könntest, dass du ein Gericht auf der Speisekarte nicht mehr vorrätig hat in deinem Restaurant.\nKopiere deinen eigenen Restaurant-Code aus den vorigen Leveln. Denk dir ein Problem für dein Restaurant aus und programmiere es, wie im Beispiel.\nZum Beispiel könntest du ebenfalls ein Gericht nicht mehr vorrätig haben oder du könntest keine Kreditkarten akzeptieren oder die Eismaschine ist kaputt.\n\n**Extra** Hast du das Problem programmiert und angemessene Antworten programmiert? Dann versuche mehr `{if}` und `{else}` Befehle in deinem Code zu verwenden.\nVersuche ein `{if}` nach jedem `{ask}` Befehl hinzuzufügen, um dein Programm so interaktiv wie möglich zu machen.\n"
             4:
                 story_text: |
                     ## Restaurant
@@ -2026,10 +2028,10 @@ adventures:
                     ```
 
                 story_text_2: |
-                    ## Hacke das Programm
-                    Ersetze Hedy mit deinem eigenen Namen in der letzten Zeile, und Hedy wird immer vorhersagen dass du die Lottery gewinnen wirst und die anderen nicht!
-                    Natürlich könnte das den anderen Spielern etwas verdächtig vorkommen... Um das zu vermeiden, kannst du sicherstellen, dass Hedy für jedes Mal wenn das Programm läuft eine unterschiedliche Antwort gibt.
-                    Aber natürlich so, dass du einen positive Antwort und deine Mitspieler eine negative Antwort bekommen.
+                    ### Hacke das Programm
+                    Ersetze Hedy mit deinem eigenen Namen in der letzten Zeile, und Hedy wird immer vorhersagen, dass du die Lotterie gewinnen wirst und die anderen nicht!
+                    Natürlich könnte das den anderen Spielern etwas verdächtig vorkommen... Um das zu vermeiden, kannst du sicherstellen, dass Hedy für jedes Mal, wenn das Programm läuft, eine unterschiedliche Antwort gibt.
+                    Aber natürlich so, dass du eine positive Antwort und deine Mitspieler eine negative Antwort bekommen.
 
                 example_code_2: |
                     ```
@@ -2042,7 +2044,7 @@ adventures:
                     ```
 
                 start_code: "# setze hier deinen Code hin"
-                story_text_3: "### Übung\nMit diesem Konzept können viele verschieden Programme geschrieben werden, dafür musst du nur ein bisschen kreativ werden! Du könntest zum Beispiel eine Maschine bauen die vorhersagt, dass deine Lieblingsmannschaft alle gegnerischen Teams schlagen wird!\nOder du könntest den sprechenden Spiegel der bösen Königin aus Schneewittchen machen, der jedem sagst dass du der Schönste oder die Schönste im ganzen Land bist!\nLass deiner Fantasie freien Lauf!\n"
+                story_text_3: "### Übung\nBenutze folgendes, um dein eigenes Programm zu machen. Sei kreativ! Zum Beispiel könntest du ein Programm schreiben, das vorhersagt, dass\n* dein Lieblingsteam alle Konkurrenten besiegt!\n* dein Lieblingsfilm bei der Filmnacht gewählt wird!\n* du Tickets für deine Lieblingsshow gewinnst!\n* du bist die Schönste / der Schönste im ganzen Land, wie bei Schneewittchens magischem Spiegel.\nLass deine Vorstellungskraft arbeiten!\n\nDein Programm muss mindestens 10 Zeilen und mindestens einen `{if}` und `{else}` Befehl haben.\n"
             4:
                 story_text: |
                     ## Wahrsagerin
