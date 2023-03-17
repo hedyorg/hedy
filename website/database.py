@@ -131,6 +131,8 @@ class Database:
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
+        # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = PROGRAMS.get_many({"username": username}, reverse=True)
         return [x for x in programs if x.get("level") == int(level)]
 
@@ -158,6 +160,7 @@ class Database:
         ret = []
 
         # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = dynamo.GetManyIterator(PROGRAMS, {"username": username}, reverse=True, limit=limit, pagination_token=pagination_token)
         for program in programs:
             if level and program.get('level') != int(level): continue
@@ -190,8 +193,13 @@ class Database:
         """Store a program.
 
         Returns the program.
+
+        Add an additional indexable field: 'username_level'.
         """
+        program = dict(program,
+            username_level=f"{program.get('username')}-{program.get('level')}")
         PROGRAMS.create(program)
+
         return program
 
     def update_program(self, id, updates):
