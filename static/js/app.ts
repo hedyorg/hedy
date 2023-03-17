@@ -122,6 +122,14 @@ export function initializeApp(options: InitializeAppOptions) {
   initializeHighlightedCodeBlocks(options.keywordLanguage);
   initializeCopyToClipboard();
 
+  // Close the dropdown menu if the user clicks outside of it
+  $(document).on("click", function(event){
+      if(!$(event.target).closest(".dropdown").length){
+          $(".dropdown-menu").slideUp("medium");
+          $(".cheatsheet-menu").slideUp("medium");
+      }
+  });
+
   $("#search_language").on('keyup', function() {
       let search_query = ($("#search_language").val() as string).toLowerCase();
       $(".language").each(function(){
@@ -153,9 +161,6 @@ export interface InitializeCodePageOptions {
  * Initialize the actual code page
  */
 export function initializeCodePage(options: InitializeCodePageOptions) {
-  // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("body").attr("dir");
-
   theUserIsLoggedIn = !!options.current_user_name;
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
@@ -168,12 +173,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
-  initializeDebugger({
-    editor: theGlobalEditor,
-    markers,
-    level: options.level,
-    language: options.lang,
-  });
 
   const anchor = window.location.hash.substring(1);
 
@@ -205,6 +204,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     checkNow();
   });
 
+  initializeSpeech();
+
   if (options.start_tutorial) {
     startIntroTutorial();
   }
@@ -217,105 +218,123 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   // Save if user navigates away
   window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
+
   // Save if program name is changed
   $('#program_name').on('blur', () => saveIfNecessary());
+}
 
-  /**
-   * Initialize the main editor and attach all the required event handlers
-   */
-  function initializeMainEditor($editor: JQuery) {
-    if (!$editor.length) return;
+export interface InitializeViewProgramPageOptions {
+  readonly page: 'view-program';
+  readonly level: number;
+  readonly lang: string;
+}
 
-    // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
-    theGlobalEditor = editor;
-    theGlobalEditor.setShowPrintMargin(false);
-    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
-    error.setEditor(editor);
-    markers = new Markers(theGlobalEditor);
+export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
+  theLevel = options.level;
+  theLanguage = options.lang;
 
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
+  // We need to enable the main editor for the program page as well
+  initializeMainEditor($('#editor'));
+}
 
-    // Load existing code from session, if it exists
-    const storage = window.sessionStorage;
-    if (storage) {
-      const loadedProgram = $editor.data('loaded-program');
+/**
+ * Initialize the main editor and attach all the required event handlers
+ */
+function initializeMainEditor($editor: JQuery) {
+  if (!$editor.length) return;
 
-      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-      const programFromStorage = storage.getItem(currentTabLsKey());
-      if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue(programFromStorage?.trim(), MOVE_CURSOR_TO_END);
-      }
+  // Set const value to determine the current page direction -> useful for ace editor settings
+  const dir = $("body").attr("dir");
 
-      // When the user exits the editor, save what we have.
-      editor.on('blur', function(_e: Event) {
-        storage.setItem(currentTabLsKey(), editor.getValue());
-      });
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
+  theGlobalEditor = editor;
+  theGlobalEditor.setShowPrintMargin(false);
+  theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
+  error.setEditor(editor);
+  markers = new Markers(theGlobalEditor);
 
-      if (dir === "rtl") {
-         editor.setOptions({ rtl: true });
-      }
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
 
-      // If prompt is shown and user enters text in the editor, hide the prompt.
-      editor.on('change', function () {
-        if (askPromptOpen) {
-          stopit();
-          editor.focus(); // Make sure the editor has focus, so we can continue typing
-        }
-        if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-        askPromptOpen = false;
-        $ ('#runit').css('background-color', '');
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const loadedProgram = $editor.data('loaded-program');
 
-        clearErrors(editor);
-        //removing the debugging state when loading in the editor
-        stopDebug();
-      });
+    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+    const programFromStorage = storage.getItem(currentTabLsKey());
+    if (loadedProgram !== 'True' && programFromStorage) {
+      editor.setValue(programFromStorage?.trim(), MOVE_CURSOR_TO_END);
     }
 
-    // *** KEYBOARD SHORTCUTS ***
-
-    let altPressed: boolean | undefined;
-
-    // alt is 18, enter is 13
-    window.addEventListener ('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!options.level || !options.lang) {
-          throw new Error('Oh no');
-        }
-        runit (options.level, options.lang, "", function () {
-          $ ('#output').focus ();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-        editor.focus ();
-        editor.navigateFileEnd ();
-      }
+    // When the user exits the editor, save what we have.
+    editor.on('blur', function(_e: Event) {
+      storage.setItem(currentTabLsKey(), editor.getValue());
     });
-    window.addEventListener ('keyup', function (ev) {
-      triggerAutomaticSave();
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
+
+    if (dir === "rtl") {
+        editor.setOptions({ rtl: true });
+    }
+
+    // If prompt is shown and user enters text in the editor, hide the prompt.
+    editor.on('change', function () {
+      if (askPromptOpen) {
+        stopit();
+        editor.focus(); // Make sure the editor has focus, so we can continue typing
       }
+      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+      askPromptOpen = false;
+      $ ('#runit').css('background-color', '');
+
+      clearErrors(editor);
+      //removing the debugging state when loading in the editor
+      stopDebug();
     });
-    return editor;
   }
 
+  // *** KEYBOARD SHORTCUTS ***
 
-  // Close the dropdown menu if the user clicks outside of it
-  $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
+  let altPressed: boolean | undefined;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      if (!theLevel || !theLanguage) {
+        throw new Error('Oh no');
       }
+      runit (theLevel, theLanguage, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
   });
+  window.addEventListener ('keyup', function (ev) {
+    triggerAutomaticSave();
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+
+  // *** Debugger ***
+  initializeDebugger({
+    editor: theGlobalEditor,
+    markers,
+    level: theLevel,
+    language: theLanguage,
+  });
+
+  return editor;
 }
 
 function initializeHighlightedCodeBlocks(keywordLanguage: string) {
@@ -1322,8 +1341,13 @@ function speak(text: string) {
   pushAchievement("make_some_noise");
 }
 
-(() => {
-  if (!window.speechSynthesis) { return; /* No point in even trying */ }
+function initializeSpeech() {
+  // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
+  // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
+  // successfully.
+  const isBeingTested = !!(window as any).Cypress;
+
+  if (!window.speechSynthesis && !isBeingTested) { return; /* No point in even trying */ }
   if (!theLanguage) { return; /* Not on a code page */ }
 
   /**
@@ -1341,7 +1365,7 @@ function speak(text: string) {
 
     const voices = findVoices(theLanguage);
 
-    if (voices.length > 0) {
+    if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
         $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
@@ -1366,7 +1390,7 @@ function speak(text: string) {
     if (!window.speechSynthesis) { return []; }
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
-})();
+}
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');

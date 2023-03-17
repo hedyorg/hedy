@@ -29,15 +29,14 @@ adventures:
                 start_code: "{print} 'Hej världen'"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
-                start_code: "namn {is} {ask} Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
+                start_code: "namn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "## If... else....\nPå nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
                 example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt' {else} {print} 'buu!'\n```\n"
                 story_text_3: "## Listor\nNär vi vill kontrollera om någonting finns i en lista så kan vi använda `{in}`-kommandot.\nDen här koden skriver snyggt! om du väljer grön eller gul och meh om du väljer någonting annat.\n"
                 example_code_3: "```\nsnygga_färger {is} grön, gul\nfavorit_färg {is} {ask} 'Vad är din favoritfärg?'\n{if} favorit_färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Ibland blir kod där du använder `{if}` riktigt lång och passar inte in på raden så bra.<br>Du kan också dela upp koden på två rader där den andra raden börjar med `{else}` så här:\n"
                 example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 story_text: "## 1 + 1\n På den här nivån lär du dig någonting nytt: du kan nu räkna.\n\n Plus är enkelt, du skriver det som i matteboken: `5 + 5` till exempel. Minus fungerar också bra, du skriver `5 - 5`.\n\n Multiplikation (gånger) är lite annorlunda för det finns inget gångertecken på ditt tangentbord. Leta så får du se! \nDärför använder vi stjärnan som finns om du håller ned skift och trycker på tangenten till höger om 'ä': `5 * 5`. Läs det som \"5 gånger 5\", det hjälper dig minnas det bäst.\n"
                 example_code_2: "```\nnamn = Hedy\nsvar = 20 + 4\n```\n"
@@ -74,8 +73,6 @@ adventures:
                 example_code_4: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn = 'Roboten Hedy'\n    {print} 'Hejsan!'\n```\n"
                 story_text_5: "**Nummer behöver inte citattecken**\nDu använder inte citattecken för nummer i `=`:\n"
                 example_code_5: "```\npoäng = 25\n{print} 'Du fick ' poäng\n```\n"
-                story_text_6: "**Matematik med ord** \nI denna nivå är det också tillåtet att använda +-tecknet med texter. Till exempel:"
-                example_code_6: "```\na = 'Hej '\nb = 'världen!'\n{print} a + b\n```\n"
                 example_code_2: "```\nnamn = 'Roboten Hedy'\n{print} 'Hej ' namn\n```\n"
                 story_text_3: "**Alla saker i listor behöver också citattecken**\nListor är texter, så de behöver också citattecken. Tänk på att varje enskild sak i listan har sina egna citattecken.\nDet låter dig spara två ord som 1 sak i listan, till exempel \"En robot\".\n"
             13:
@@ -278,8 +275,7 @@ adventures:
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
                 start_code: "{print} 'Drawing figures'"
             9:
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
@@ -432,6 +428,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                start_code: '# Schrijf jouw code hier'
     restaurant:
         levels:
             4:

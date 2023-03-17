@@ -1233,7 +1233,13 @@ def view_program(user, id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
 
-    return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
+    return render_template("view-program-page.html",
+                           blur_button_available=True,
+                           javascript_page_options=dict(
+                               page='view-program',
+                               lang=g.lang,
+                               level=int(result['level'])),
+                           **arguments_dict)
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})

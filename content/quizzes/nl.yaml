@@ -15,11 +15,9 @@ levels:
             hint: "We beginnen met een simpele vraag."
             question_score: '10'
         2:
-            question_text: "Welk commando moet je invullen op de streepjes om Hallo! te laten verschijnen in je uitvoerscherm?"
+            question_text: "Welk commando moet je invullen op het streepje om Hallo! te laten verschijnen in je uitvoerscherm?"
             code: |
-              ```
-              ___ Hallo!
-              ```
+              _ Hallo!
             mp_choice_options:
             -   option: |
                     ```
@@ -42,7 +40,7 @@ levels:
                     ```
                 feedback: "Met `{ask}` kun je een vraag stellen..."
             correct_answer: "B"
-            hint: "_?_ Hallo wereld!"
+            hint: "_ Hallo wereld!"
             question_score: '10'
         3:
             question_text: "Hoe vraag je: Wat is je lievelingskleur?"
@@ -79,9 +77,9 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in regel 1 mist."
                 feedback: "Goedzo!"
-            -   option: "`{ask}` in regel 2 is fout gespeld, het moet `aks` zijn."
+            -   option: "Het commando in regel 2 is fout gespeld."
                 feedback: "{ask} is goed gespeld."
-            -   option: "`{echo}` is geen commando in level 1."
+            -   option: "`{echo}` is geen commando."
                 feedback: "`{echo}` is goed, er is een ander foutje"
             -   option: "Niets! De code is goed!"
                 feedback: "Er zit een foutje in, kijk goed!"
@@ -92,7 +90,7 @@ levels:
             question_text: "Welk commando mist in regel 2?"
             code: |-
                 {ask} Wat is jouw lievelingsdier?
-                _?_ Dus jouw lievelingsdier is...
+                _ Dus jouw lievelingsdier is...
             mp_choice_options:
             -   option: |
                     ```
@@ -121,13 +119,13 @@ levels:
             question_text: "Wat is er mis met deze code?"
             code: |-
                 {print} Hoi ik ben Hedy!
-                aks Voor welke voetbalclub ben jij?
+                {print} Voor welke voetbalclub ben jij?
                 {echo} Jij bent voor...
                 {print} Cool! Ik ook!
             mp_choice_options:
             -   option: "In regel 1 moet het `{print}` commando worden vervangen door `{ask}`."
                 feedback: "`{print}` in regel 1 is goed, let op de spelling van de commando's"
-            -   option: "In regel 2 is `{ask}` fout gespeld."
+            -   option: "In regel 2 moet het `{print}` commando worden vervangen door `{ask}`."
                 feedback: "Goed opgelet!"
             -   option: "Regel 3 moet beginnen met `{print}` in plaats van `{echo}`."
                 feedback: "`{echo}` is goed! Kijk naar de spelling van de commando's."
@@ -142,7 +140,7 @@ levels:
                 {print} Welkom bij Restaurant Hedy!
                 {ask} Wat wilt u eten?
                 {echo} Dus u wilt graag...
-                {print} Komt er aan! Eet smakelijk!"
+                {print} Komt er aan! Eet smakelijk!
             mp_choice_options:
             -   option: "In regel 1 moest `{ask}` staan in plaats van `{print}`"
                 feedback: "Weet je zeker dat er iets mis is?"
@@ -160,7 +158,7 @@ levels:
             mp_choice_options:
             -   option: "Met `{echo}` stel je een vraag"
                 feedback: "Dat doe je met `{ask}`"
-            -   option: "Met `{echo}` laat je tekst verschijnen"
+            -   option: "`{echo}` werkt hetzelfde als `{print}`"
                 feedback: "Dat doe je met `{print}`"
             -   option: "Met `{echo}` herhaal je een gegeven antwoord"
                 feedback: "Goed zo!"
@@ -188,13 +186,27 @@ levels:
             hint: "met `{ask}` kun je iets vragen"
             question_score: '10'
         10:
-            question_text: "Heb je zin om naar level 2 te gaan?"
+            question_text: "Wat staat er in je uitvoerscherm nadat je deze code hebt uitgevoerd?"
+            code: |
+              {ask} Heb je zin om naar level 2 te gaan?
+              {echo}
+              {echo}
             mp_choice_options:
-            -   option: "Ja!"
-                feedback: "Mooizo! Op naar level 2!"
-            -   option: "Nee"
-                feedback: "Jammer..."
-            correct_answer: "A"
+            -   option: |
+                  Heb je zin om naar level 2 te gaan?
+                feedback: "Het echo commando laat ook iets zien!"
+            -   option: |
+                  Ja!
+                  Ja!
+                feedback: "Goed opgelet"
+            -   option: |
+                  Ja!
+                feedback: "De eerste regel wordt ook geprint"
+            -   option: |
+                  Heb je zin om naar level 2 te gaan?
+                  Ja!
+                feedback: "De vraag blijft niet staan en echo staat er 2x."
+            correct_answer: "B"
             hint: "Op naar level 2!"
             question_score: '10'
     2:
@@ -290,7 +302,7 @@ levels:
             question_text: "Welk commando moet op de streepjes?"
             code: |-
                 {print} En de prijs voor leukste programmeertaal gaat naar...
-                _?_
+                _
                 {print} Hedy!
             mp_choice_options:
             -   option: |
@@ -320,7 +332,7 @@ levels:
             question_text: "Welke code moet er op het streepje staan?"
             code: |-
                 {print} Ik ontplof over 3 seconden!
-                _?_
+                _
                 {print} BOEM!
             mp_choice_options:
             -   option: |
@@ -395,7 +407,7 @@ levels:
         10:
             question_text: "Welk commando moet er op de lijntjes?"
             code: |-
-                smaak {is} _?_
+                smaak {is} _
                 {print} Jouw favoriete ijs is...
                 {sleep} 2
                 {print} smaak
@@ -462,7 +474,7 @@ levels:
                 feedback: "Nee, je hebt geen `{print}` nodig."
             -   option: "In regel 2 moet 'dier' staan in plaats van 'dieren',"
                 feedback: "Dieren is goed."
-            -   option: "`{at} {random}` is fout gespeld, het moet `et rendom` zijn"
+            -   option: "`{at} {random}` is fout, het moet alleen {random} zijn"
                 feedback: "`{at} {random}` is de goede spelling"
             correct_answer: "A"
             hint: "De fout zit in regel 1"
@@ -617,10 +629,10 @@ levels:
             question_text: "Wat moet er op de streepjes komen te staan?"
             code: |-
                 keuzes {is} papa, mama, Sam, Petra
-                keuze_gisteren {is} {ask} Wie heeft gisteren de honden uitgelaten?
+                keuze_gisteren {is} {ask} Wie heeft gisteren de hond uitgelaten?
                 {print} keuze_gisteren hoeft vandaag dan niet nog een keer!
-                _?_
-                {print} keuzes {at} {random} is vandaag aan de beurt om de honden uit te laten!
+                _
+                {print} keuzes {at} {random} is vandaag aan de beurt om de hond uit te laten!
             mp_choice_options:
             -   option: |
                     ```
@@ -647,29 +659,57 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Wat is waar?"
+            question_text: "Welke code is correct?"
             mp_choice_options:
-            -   option: "In level 4 werkt `{print}` anders"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedys restaurant:'
+                  {print} 'Van s ochtends vroeg tot s avonds laat!'
+                  ```
                 feedback: "Correct, je hebt aanhalingstekens nodig"
-            -   option: "In level 4 werkt `{ask}` anders dan in level 2"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedy's restaurant:'
+                  {print} Van 's ochtends vroeg tot 's avonds laat!
+                  ```
                 feedback: "Ask werkt nog hetzelfde"
-            -   option: "In level 4 werkt `{at} {random}` anders dan in level 2"
+            -   option: |
+                  ```
+                  {print} 'Openingstijden van Hedys restaurant:
+                  {print} Van s ochtends vroeg tot s avonds laat!'
+                  ```
                 feedback: "`{at} {random}` werkt nog hetzelfde"
-            -   option: "In level 4 werkt alles nog hetzelfde als in level 2"
+            -   option: |
+                  ```
+                  {print} Openingstijden van Hedy's restaurant:
+                  {print} Van 's ochtends vroeg tot 's avonds laat!
+                  ```
                 feedback: "Nee, een commando is anders."
             correct_answer: "A"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
             question_score: '10'
         2:
-            question_text: "Welk aanhalingsteken gebruik je bij het `{print}` commando?"
+            question_text: "Waar worden de juiste aanhalingstekens gebruikt bij het `{print}` commando?"
             mp_choice_options:
-            -   option: "`"
-                feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
-            -   option: "'"
+            -   option: |
+                  ```
+                  {print} `Dit zijn de juiste aanhalingstekens!`
+                  ```
+                feedback: "Dit zijn schuine aanhalingstekens."
+            -   option: |
+                  ```
+                  {print} 'Dit zijn de juiste aanhalingstekens!'
+                  ```
                 feedback: "Juist!"
-            -   option: "\""
-                feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
-            -   option: ","
+            -   option: |
+                  ```
+                  {print} ~Dit zijn de juiste aanhalingstekens!~
+                  ```
+                feedback: "Dit zijn geen aanhalingstekens."
+            -   option: |
+                  ```
+                  {print} ,Dit zijn de juiste aanhalingstekens!,
+                  ```
                 feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Kies het goede aanhalingsteken."
@@ -703,7 +743,7 @@ levels:
         4:
             question_text: "Welke stelling is waar?"
             mp_choice_options:
-            -   option: "Als je een tekst wil printen moeten er dubbele aanhalingstekens voor en na de tekst staan."
+            -   option: "Als je een tekst wil printen moeten er aanhalingstekens voor en na het commando staan."
                 feedback: "Enkele aanhalingstekens zijn genoeg"
             -   option: "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan."
                 feedback: "Super!"
@@ -853,20 +893,20 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Wat is waar?"
+            question_text: "Welk commando hoort op het lijntje?"
             mp_choice_options:
-            -   option: "In level 5 werkt `{print}` anders dan in level 4"
-                feedback: "`{print}` werkt nog hetzelfde"
-            -   option: "In level 5 werkt `{ask}` anders dan in level 4"
-                feedback: "`{ask}` werkt nog hetzelfde"
-            -   option: "In level 5 werken `{print}` en `{ask}` anders dan in level 4"
-                feedback: "Nee hoor, ze werken hetzelfde!"
-            -   option: "In level 5 werken `{print}` en `{ask}` nog hetzelfde als in level 4"
+            -   option: "`{print}`"
+                feedback: "Het moet alleen geprint als diegene niet zelf ook 5 heeft geantwoord."
+            -   option: "`{if}`"
+                feedback: "Dat is hem niet..."
+            -   option: "`{sleep}` "
+                feedback: "Dat is hem niet..."
+            -   option: "`{else}` "
                 feedback: "Klopt!"
             correct_answer: "D"
-            hint: "Er is alleen een commando bijgekomen."
+            hint: "Het moet alleen geprint als diegene niet zelf ook 5 hefet geantwoord."
             question_score: '10'
-            code: "nummer {is} {ask} 'Wat is jouw geluksnummer?'\n{if} nummer {is} 5 {print} De mijne ook!\n_?_ {print} Mijn geluksnummer is 5!"
+            code: "nummer {is} {ask} 'Wat is jouw geluksnummer?'\n{if} nummer {is} 5 {print} 'De mijne ook!'\n_ {print} 'Mijn geluksnummer is 5!'"
         2:
             question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
             code: |-
@@ -936,12 +976,13 @@ levels:
             hint: "De spelling moet precies hetzelfde zijn."
             question_score: '10'
         6:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Hoi ik ben Hedy de voetbalvoorspeller!'
                 {print} 'Ik kan voorspellen op welke plek jouw club eindigt!'
                 club {is} {ask} 'Voor welke club ben je?'
-                {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk!' _?_ {print} 'Helaas jouw club wordt laatste...'
+                {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk!'
+                _ {print} 'Helaas jouw club wordt laatste...'
             mp_choice_options:
             -   option: |
                     ```
@@ -967,11 +1008,12 @@ levels:
             hint: "In level 5 leer je 2 nieuwe commando's `{if}` en...?"
             question_score: '10'
         7:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 {print} 'Ik kan voorspellen of jij miljonair wordt!'
                 naam {is} {ask} 'Hoe heet jij?'
-                {if} naam {is} Hedy {print} 'Jij wordt miljonair!' {else} _?_ 'Helaas, geen miljoen voor jou.'
+                {if} naam {is} Hedy {print} 'Jij wordt miljonair!'
+                {else} _ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
             -   option: |
                     ```
@@ -994,13 +1036,14 @@ levels:
                     ```
                 feedback: "Top!"
             correct_answer: "D"
-            hint: "Na `{else}` volgt nog een `{print}`"
+            hint: "Na `{else}` hoort nog een `{print}`"
             question_score: '10'
         8:
-            question_text: "Welk woord mist op de plek van het vraagteken?"
+            question_text: "Welk woord mist op de plek van het lage streepje?"
             code: |-
                 dier {is} {ask} 'Wat is je lievelingsdier?'
-                {if} _?_ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!' {else} {print} 'Ik houd meer van pinguins.'
+                {if} _ {is} pinguin {print} 'Dat is ook mijn lievelingsdier!'
+                {else} {print} 'Ik houd meer van pinguins.'
             mp_choice_options:
             -   option: "lievelingsdier"
                 feedback: "Dat is niet de naam van de variabele."
@@ -1020,7 +1063,8 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies jij?'
                 monsters {is} vampier, weerwolf, reuzespin
-                {if} deur {is} 2 {print} 'Joepie! Je ontsnapt!' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
+                {if} deur {is} 2 {print} 'Joepie! Je ontsnapt!'
+                {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
             -   option: "1"
                 feedback: "Helaas... Jij wordt opgepeuzeld..."
@@ -1040,7 +1084,8 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies jij?'
                 monsters {is} vampier, weerwolf, reuzespin
-                {if} deur {is} 2 {print} 'Joepie! je ontsnapt!' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
+                {if} deur {is} 2 {print} 'Joepie! je ontsnapt!'
+                {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
             -   option: "Hedy kiest steeds een willekeurig monster dat je opeet."
                 feedback: "Geweldig!"
@@ -1190,7 +1235,7 @@ levels:
             mp_choice_options:
             -   option: "Er moeten geen aanhalingstekens staan op regel 2"
                 feedback: "Helaas, die moeten er wel staan!"
-            -   option: "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goedeantwoord zijn."
+            -   option: "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goede_antwoord zijn."
                 feedback: "Correct!"
             -   option: "De `{if}` en `{else}` moeten per se op dezelfde regel staan"
                 feedback: "Nee, dat is niet waar."
@@ -1225,14 +1270,14 @@ levels:
         10:
             question_text: "Welke stelling is waar?"
             code: |-
-                naam _?_ Hedy
+                naam _ Hedy
                 print naam 'loopt door het bos'
             mp_choice_options:
-            -   option: "Op de _?_ mag je alleen is invullen"
+            -   option: "Op de _ mag je alleen is invullen"
                 feedback: "Vanaf dit level mag je ook een = gebruiken"
-            -   option: "Op de _?_ mag je = invullen, maar is werkt ook"
+            -   option: "Op de _ mag je = invullen, maar is werkt ook"
                 feedback: "Prima!"
-            -   option: "Op de _?_ moet je =is= invullen."
+            -   option: "Op de _ moet je =is= invullen."
                 feedback: "Nee, een = teken is genoeg"
             -   option: "Je mag alleen een = gebruiken bij getallen, niet bij woorden."
                 feedback: "= kun je ook gebruiken bij woorden"
@@ -1241,44 +1286,44 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: "Wat is de juiste spelling van het commando herhalen?"
+            question_text: "Hoeveel regels kun je herhalen per `{repeat}` commando in dit level?"
             mp_choice_options:
-            -   option: |
-                    ```
-                    repaet
-                    ```
-                feedback: "fout gespeld"
-            -   option: |
-                    ```
-                    repete
-                    ```
-                feedback: "fout gespeld"
-            -   option: |
-                    ```
-                    repite
-                    ```
-                feedback: "fout gespeld"
-            -   option: |
-                    ``` 
-                    {repeat}
-                    ```
-                feedback: "Juist"
+            -   option: "0"
+                feedback: "Je kunt een regel herhalen"
+            -   option: "1"
+                feedback: "Goed!"
+            -   option: "3"
+                feedback: "Je kunt een regel herhalen"
+            -   option: "Oneindig"
+                feedback: "Je kunt een regel herhalen per commando "
             correct_answer: "D"
-            hint: "Je spelt: `{repeat}`"
+            hint: "Let op: per commando!"
             question_score: '10'
         2:
-            question_text: "Welk aanhalingsteken gebruik je bij het `{print}` commando?"
+            question_text: "Welke code klopt?"
             mp_choice_options:
-            -   option: "`"
-                feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
-            -   option: "'"
-                feedback: "Juist!"
-            -   option: "\""
-                feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
-            -   option: ","
-                feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
-            correct_answer: "B"
-            hint: "Je spelt: `{repeat}`"
+              - option: |
+                  ```
+                  {print} 100 {times} 'hallo'
+                  ```
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hallo'"
+              - option: |
+                  ```
+                  {print} {repeat} 100 {times} 'hallo'
+                  ```
+                feedback: "{repeat} 100 {times} {print} 'hallo'"
+              - option: |
+                  ```
+                  {repeat} 'hallo' 100 {times}
+                  ```
+                feedback: "{repeat} 100 {times} {print} 'hallo'"
+              - option: |
+                  ```
+                  {repeat} 100 {times} {print} 'hallo'
+                  ```
+                feedback: "That's right!"
+            correct_answer: "D"
+            hint: "Eerst het `{repeat}` commando, dan het `{print}` commando"
             question_score: '10'
         3:
             question_text: "Is deze code goed of fout"
@@ -1390,7 +1435,6 @@ levels:
             correct_answer: "A"
             hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
             question_score: '10'
-
         8:
             question_text: "Welke Hedy code hoort bij dit resultaat"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
@@ -1432,43 +1476,43 @@ levels:
         9:
             question_text: "Welke Hedy code hoort bij dit resultaat?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
+                Batman vloog over Gotham.
+                Plots hoorde hij geroep...
                 Help!
                 Help!
                 Help!
-                Please help me!
+                Help me alsjeblieft!
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'Batman vloog over Gotham. '
+                    {print} 'Plots hoorde hij geroep...'
                     {print} 'Help!'
-                    {repeat} 3 {times} {print} 'Please help me!'
+                    {repeat} 3 {times} {print} 'Help me alsjeblieft!'
                     ```
                 feedback: "Je herhaalt de verkeerde regel"
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'Batman vloog over Gotham.'
+                    {print} 'Plots hoorde hij geroep...'
                     {repeat} 3 {times} 'Help!'
-                    {print} 'Please help me!'
+                    {print} 'Help me alsjeblieft!'
                     ```
                 feedback: "Het commando `{print}` mist op regel 3"
             -   option: |
                     ```
-                    {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
+                    {print} Batman vloog over Gotham.
+                    {print} Plots hoorde hij geroep...
                     {repeat} 3 {times} {print} Help!
-                    {print} Please help me!
+                    {print} Help me alsjeblieft!
                     ```
                 feedback: "Je vergeet de aanhalingstekens"
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'Batman vloog over Gotham.'
+                    {print} 'Plots hoorde hij geroep...'
                     {repeat} 3 {times} {print} 'Help!'
-                    {print} 'Please help me!'
+                    {print} 'Help me alsjeblieft!'
                     ```
                 feedback: "Perfect"
             question_score: '10'
@@ -1488,7 +1532,7 @@ levels:
                 feedback: "Correct!"
             -   option: "hoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy"
                 feedback: "hoi wordt niet geprint."
-            correct_answer: C
+            correct_answer: "C"
             question_score: '10'
             hint: Let op wat er wordt herhaald.
     8:
@@ -1520,7 +1564,7 @@ levels:
                 feedback: "Helaas. In level 8 moet het wel op twee regels."
             -   option: "Het woord `{print}` moet weg, dat is niet nodig"
                 feedback: "Helaas. Het `{print}` commando is wel nodig."
-            -   option: "`{repeat}` is fout gespeld, het moet `repeet` zijn."
+            -   option: "`{repeat}` is geen commando."
                 feedback: "Nee, `{repeat}` is de goede spelling"
             -   option: "De tweede regel moet inspringen met 4 spaties."
                 feedback: "Juist!"
@@ -1611,7 +1655,7 @@ levels:
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            output: "Welcome bij restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Wat is er mis met deze code?"
             code: |-
@@ -1710,7 +1754,7 @@ levels:
             mp_choice_options:
             -   option: "Alle regels moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
-            -   option: "Regel 2 en 4 moeten beginnen met 4 spaties"
+            -   option: "Regel 2 en 3 moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
             -   option: "Regel 2 moet beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
@@ -1760,7 +1804,7 @@ levels:
                  feedback: Je wint geen miljoen
              -   option: Koffer 2, open
                  feedback: Goed gedaan! Jij wint!
-             code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n     {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
+             code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
              correct_answer: D
              question_text: Welke koffer moet je kiezen om een miljoen euro te winnen?
              hint: Volg het juiste pad.
@@ -1930,15 +1974,15 @@ levels:
             hint: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
             question_score: '10'
         3:
-            question_text: "Wat moet er op _?_ komen te staan?"
+            question_text: "Wat moet er op _ komen te staan?"
             code: |-
                 complimentjes = super, goedzo, top
-                _?_
+                _
                     {print} compliment
             mp_choice_options:
             -   option: |
                     ```
-                    {for} each compliment
+                    {for} elk compliment
                     ```
                 feedback: "Helaas"
             -   option: |
@@ -1978,13 +2022,13 @@ levels:
             hint: "Kijk goed naar regel 2"
             question_score: '10'
         5:
-            question_text: "Welk woord moet op je invullen op _?_ bij deze digitale dobbelsteen?"
+            question_text: "Welk woord moet op je invullen op _ bij deze digitale dobbelsteen?"
             code: |-
                 {print} 'Welkom bij de digitale dobbelsteen!'
                 spelers = Anne, Jonneke, Jessie, Ilona
                 keuzes = 1, 2, 3, 4, 5, 6
                 {for} speler {in} spelers
-                    {print} speler ' gooit ' _?_ {at} {random}
+                    {print} speler ' gooit ' _ {at} {random}
             mp_choice_options:
             -   option: "speler"
                 feedback: "Dan komt er te staan 'Anne gooit Ilona'. Dat is niet de bedoeling!"
@@ -2023,11 +2067,11 @@ levels:
             hint: "Elke speler kiest een optie. De speler die als eerste op het lijstje staat, wordt als eerst geprint."
             question_score: '10'
         7:
-            question_text: "Wat moet er op de _?_ staan in deze code die bepaalt wat je vanavond eet?"
+            question_text: "Wat moet er op de _ staan in deze code die bepaalt wat je vanavond eet?"
             code: |-
                 namen = Ron, Leslie, April, Andy
                 eten = pasta, friet, salade
-                _?_
+                _
                     {print} naam ' eet vanavond ' eten {at} {random}
             mp_choice_options:
             -   option: |
@@ -2054,12 +2098,12 @@ levels:
             hint: "Elke naam moet weten wat hij/zij vanavond eet."
             question_score: '10'
         8:
-            question_text: "Wat moet er op _?_ staan bij deze code die bepaalt wat voor kleur shirt je draagt?"
+            question_text: "Wat moet er op _ staan bij deze code die bepaalt wat voor kleur shirt je draagt?"
             code: |-
                 namen = Donna, Tommy, Ben
                 kleuren = blauw, rood, geel
                 {for} naam {in} namen
-                    {print} _?_
+                    {print} _
             mp_choice_options:
             -   option: "'naam krijgt een kleur shirt'"
                 feedback: "Dat is hem niet!"
@@ -2116,28 +2160,20 @@ levels:
         1:
             question_text: "Welk woord moet op de plek van het vraagteken?"
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
-                    ```
-                    rang
-                    ```
+                    `{if}`
                 feedback: "Nee, helaas"
             -   option: |
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: "Correct"
             -   option: |
-                    ```
-                    ragne
-                    ```
+                    `{for}`
                 feedback: "Nee, helaas"
             -   option: |
-                    ```
-                    ranch
-                    ```
+                    `{ask}`
                 feedback: "Nee, helaas"
             correct_answer: "B"
             hint: "Wat is de juiste spelling?"
@@ -2217,7 +2253,7 @@ levels:
             -   option: |
                     ```
                     {for} i {in} {range} 10 {to} 0
-                        {print} i
+                        {print} 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     ```
                 feedback: "Dit kan helaas niet."
             -   option: |
@@ -2269,7 +2305,7 @@ levels:
             code: |-
                 {print} 'Welkom in restaurant Hedy'
                 mensen {is} {ask} 'Met hoeveel mensen komt u vanavond dineren?'
-                _?_
+                _
                     eten {is} {ask} 'Wat wilt u bestellen?'
                     {print} eten
             mp_choice_options:
@@ -2280,7 +2316,7 @@ levels:
                 feedback: "Er zijn niet altijd 3 mensen"
             -   option: |
                     ```
-                    {for} i {in} {range} 1 tot mensen
+                    {for} i {in} {range} 1 tot gasten
                     ```
                 feedback: "Bijna... Niet tot maar {to}!"
             -   option: |
@@ -2415,13 +2451,13 @@ levels:
         2:
             question_text: Which of these codes is correct?
             mp_choice_options:
-            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
+            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
                 feedback: Alright!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```\n"
+            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```\n"
                 feedback: All the different values of flavors should be in quotation marks.
             correct_answer: C
             hint: The second line is the same in each code, pay attention to the first line
@@ -2656,13 +2692,13 @@ levels:
             question_text: What is wrong with this code?
             code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles = 'no'"
                 feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles = 'no'"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles = 'yes'"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles = 'no'"
                 feedback: This is not what I ordered!
             correct_answer: A
             hint: There is a mistake in line 3

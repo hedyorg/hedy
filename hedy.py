@@ -2554,9 +2554,10 @@ def transpile(input_string, level, lang="en"):
 def translate_characters(s):
     # this method is used to make it more clear to kids what is meant in error messages
     # for example ' ' is hard to read, space is easier
+    commas = [',', "،", "，", "、"]
     if s == ' ':
         return 'space'
-    elif s == ',' or s == "،" or s == "，":
+    elif s in commas:
         return 'comma'
     elif s == '?':
         return 'question mark'

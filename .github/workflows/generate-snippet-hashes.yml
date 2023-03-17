@@ -4,7 +4,7 @@ env:
 name: Periodically generate hashes
 on:
   schedule:
-    - cron: "0 3 * * 1-5" # Run this job every workday at 3am
+    - cron: "0 3 * * *" # Run this job every day at 3am
   workflow_dispatch: {} # Allow running the workflow on-demand
 jobs:
   build:
@@ -46,7 +46,7 @@ jobs:
         build-tools/github/validate --all
         
     - name: Commit changed files
-      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Updating hash files
         commit_author: hedybot <noreply@hedy.org>

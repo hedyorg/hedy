@@ -66,6 +66,12 @@ export interface ExtraStory {
   text?: string;
 }
 
+export interface Program {
+  name: string;
+  code: string;
+  adventure_name?: string;
+}
+
 export interface AvailableAdventure {
   from_teacher: boolean;
   name: string;

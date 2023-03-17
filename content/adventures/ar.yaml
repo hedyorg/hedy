@@ -206,8 +206,6 @@ adventures:
                 example_code_4: "```\nاسمك = {ask} \"ما اسمك؟\"\n{if} اسمك = \"هيدي\"\n    {print} \"مرحباً صديقي!\"\n```\n"
                 story_text_5: "**الأرقام ليست بحاجة الى علامات اقتباس**\nلسنا بحاجة الى استعمال علامات الاقتباس عند تخزين الارقام في الكود باستخدام `=`:\n"
                 example_code_5: "```\nالنتيجة = ٢٥\n{print} \" نتيجة الاختبار هو \" النتيجة\n```\n"
-                story_text_6: "**استعمال العلامات الحسابية مع الكلمات**\nمن المسموح استعمال علامة الجمع + مع النصوص في هذا المستوى. على سبيل المثال:"
-                example_code_6: "```\nأ = \"مرحباً \"\nب= \"أيها العالم!\"\n{print} أ + ب\n```\n"
             13:
                 start_code: "اسمك = {ask} \"ما اسمك؟\"\nعمرك = {ask} \"ما عمرك؟\"\n{if} اسمك=\"هيدي\" {and} عمرك=٢\n    {print} \"أنت بالفعل هيدي الحقيقي!\""
                 story_text: "## و ... أو ..؟\nسنتعلم الان عن استعمال الأوامر `{and}` و `{or}`! اذا كنا نريد فحص أمرين في نفس الوقت لسنا بحاجة الى استعمال الأمر \"اذا\" مرتين، بل يمكننا أن نستعمل `{and}` و `{or}`. اذا استعملنا الأمر `{and}` بين الفحصين: يجب أن يكون كلا الفحصين (على اليمين واليسار) صحيحين من أجل تنفيذ الكود المتضمن في الأمر \"اذا\". أما اذا استعملنا الأمر `{or}` بين الفحصين: عندها يكفي أن يكون فحص واحد منهم صحيحاً لتنفيذ الكود المتضمن في الأمر \"اذا\"."
@@ -448,10 +446,10 @@ adventures:
                 example_code: "## مصال توضيحي\n\n```\nعدد_الزوايا = {ask} \"كم عدد الزوايا المطلوبة؟\"\nالزاوية = ٣٦٠ / عدد_الزوايا\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n{forward} ٥٠\n{turn} الزاوية\n```\n"
                 start_code: "{print} \"رسم الأشكال\""
             9:
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         levels:
@@ -605,6 +603,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                start_code: '# Schrijf jouw code hier'
         name: آلة حاسبة
         description: اصنع آلة حاسبة
         default_save_name: آلة حاسبة
@@ -679,8 +681,8 @@ adventures:
                 story_text_2: "## تحدي\nهل يمكنك التفكير في المزيد من الأسئلة `{ask}` على العملاء عند قيامهم بالطلب ، وتكوين ردود مختلفة على إجاباتهم باستخدام الأمر `{if}`؟\n"
             4:
                 story_text: "## المطعم\n\nفي هذا المستوى عليك استخدام علامات الاقتباس مع الأمر `{print}` .\nهل تستطيع أن تجعل الكود الخاص بك من المستويات السابقة أن يعمل بالشكل الصحيح بإضافة علامات الاقتباس؟\n"
-                start_code: '# place your code here'
-                example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
+                start_code: '#ضع الكود الخاص بك هنا'
+                example_code: "```\n_ أضف علامات الاقتباس إلى هذا الكود _\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nلوجبة {is}{ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask}هل تفضل الصلصة باللحم أم بالخضار؟\n{print} الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} {ask} ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print} الوجبة الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
     fortune:
         name: العراف
         levels:

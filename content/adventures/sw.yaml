@@ -41,15 +41,14 @@ adventures:
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
-                start_code: "lugha is ask Lugha ya taifi ni kipi?\nif lugha is Kiswahili print 'umepatia!' else print 'umekosea'"
+                start_code: "lugha is ask 'Lugha ya taifi ni kipi?'\nif lugha is Kiswahili print 'umepatia!' else print 'umekosea'"
                 story_text: "`ask` na `print` zitabaki kama tulivio zitumia kiwango cha tatu. Kiwango cha nne tutasoma jinsi ya kitumia neno `if`."
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
                 story_text: "Matumizi ya `ask`, `print` na `if` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
@@ -99,8 +98,7 @@ adventures:
                 example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+
             13:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
                 story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
@@ -207,7 +205,7 @@ adventures:
             5:
                 start_code: "{print} 'Here your story will start!'"
                 story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
-                example_code: "```\nname {is} {ask} Who is walking in the forest?\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} Would you like a good or a bad ending?\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
+                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
             4:
                 start_code: "{print} 'Your story will be printed here!'"
                 story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
@@ -373,10 +371,10 @@ adventures:
                 start_code: "{print} 'Drawing figures'\n"
             9:
                 start_code: '# place your code here'
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+
         name: Turtle
         description: Make your own drawing
         default_save_name: turtle
@@ -481,6 +479,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Calculator
         description: Create a calculator
         default_save_name: Calculator

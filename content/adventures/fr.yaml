@@ -41,12 +41,12 @@ adventures:
             4:
                 start_code: "{print} 'Bonjour le monde'"
                 story_text: |
-                    ## 'Quotation marks'
+                    ## 'Guillemets'
                     `{print}` et `{ask}` changent au niveau 4.  
 
-                    Vous devez placer le texte que vous souhaitez imprimer entre guillemets.  
+                    Vous devez placer le texte à afficher entre guillemets.  
 
-                    Ceci est utile, car vous pouvez désormais imprimer tous les mots souhaités. Aussi les mots que vous avez utilisés pour stocker quelque chose avec `{is}`.  
+                    Ainsi, vous pouvez désormais faire afficher ce que vous voulez, y compris des mots que vous avez utilisés comme variables de stockage avec `{is}`.  
 
                     La plupart des langages de programmation utilisent aussi les guillemets lors des affichages, donc on fait un pas de plus en direction de la vraie programmation.
                 story_text_2: "## Les aventures deviennent de plus en plus difficiles  \nD’onglet en onglet, les aventures deviennent de plus en plus difficiles.  \nAlors commence par la gauche et poursuit vers la droite pour être toujours plus mis au défi.\n"
@@ -66,8 +66,6 @@ adventures:
                 example_code_3: "```\njolies_couleurs {is} vert, jaune\ncouleur_préférée {is} {ask} 'Quelle est ta couleur préférée ?'\n{if} couleur_préférée {in} jolies_couleurs {print} 'joli !'\n{else} {print} 'mouais'\n```\n"
                 story_text_2: "Parfois, le code avec un `{if}` devient vraiment long et ne tient plus très bien dans la zone de texte. Tu peux alors le répartir sur deux lignes en commençant la seconde au `{else}`, comme ceci :\n"
                 example_code_2: "```\nnom {is} {ask} 'quel est ton nom ?'\n{if} nom {is} Hedy {print} 'chouette'\n{else} {print} 'moins amusant !'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'ça fonctionne!'\n```\n"
-                story_text_4: "Quelque chose qui fonctionne quand `{if}` est `{pressed}`! Avec `{pressed}` tu peux lier une lettre de l'alphabet et un nombre sur ton clavier via une commande. Si tu les lies, et que tu appuies sur la touche, quelque chose va se passer. Essaie !\n"
             6:
                 start_code: "{print} '5 fois 5 font ' 5 * 5"
                 story_text: |
@@ -161,8 +159,6 @@ adventures:
                 example_code_4: "```\nnom = {ask} 'Quel est ton nom?'\n{if} nom = 'Hedy le Robot'\n    {print} 'Salut toi !'\n```\n"
                 story_text_5: "**Les nombres n'ont pas besoins de guillemets**  \nPour les nombres, tu n'utilises pas les guillemets dans les  `=` :\n"
                 example_code_5: "```\nscore = 25\n{print} 'Ton score est  ' score\n```\n"
-                story_text_6: "**Des maths avec les mots**   \nDans ce niveau, on autorise l'utilisation du signe + avec les textes. Par exemple :"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
             13:
                 start_code: "nom = {ask} 'Quel est ton nom ?'\nage = {ask} 'Quel est ton age?'\n{if} nom {is} 'Hedy' {and} age {is} 2\n    {print} 'Tu es la vraie Hedy!'"
                 story_text: "## And... Or.. ?\nNous allons maintenant apprendre `{and}` et `{or}` ! Si tu souhaite verifier deux affirmations, tu n'as pas à utiliser deux {if}, à la place, tu peux utiliser `{and}` et `{or}`. Si tu utilise `{and}`, les deux affirmations à gauche et à droite du `{and}` doivent être vraies. On peut utiliser `{or}` aussi. Il est alors nécessaire qu'une seule des affirmations soit correcte."
@@ -895,8 +891,7 @@ adventures:
             9:
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         name: "Dishes?"
@@ -1400,6 +1395,10 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"

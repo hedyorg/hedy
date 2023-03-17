@@ -186,7 +186,7 @@
                         <button data-cy="save_customizations" class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                     </div>
                     <div class="flex flex-row ml-auto gap-2">
-                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" data-cy="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
+                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" data-cy="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|default(None)|tojson}})'>
                         {{_('remove_customization')}}</button>
                         <button id='back_to_class' class="green-btn" data-cy="back_to_class">{{_('back_to_class')}}</button>
                     </div>

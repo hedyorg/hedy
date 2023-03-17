@@ -41,7 +41,7 @@ levels:
             hint: "_؟_ مرحبًا يا عالم!"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "كيف تسأل شخص ما هو لونه المفضل؟"
             mp_choice_options:
@@ -186,14 +186,28 @@ levels:
             hint: "`{ask}` يمكنك من طرح سؤال"
             question_score: '10'
         10:
-            question_text: "هل أنت مستعد للمستوى الثاني؟"
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+              {ask} Are you ready to go to level 2?
+              {echo}
+              {echo}
             mp_choice_options:
-            -   option: "أجل!"
-                feedback: "رائع! هيا بنا لإستكشاف المستوى التالي!"
-            -   option: "لا"
-                feedback: "يمكنك ممارسة المزيد في المستوى الأول!"
-            correct_answer: "A"
-            hint: "هيا بنا!"
+            -   option: |
+                  Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                  Yes!
+                  Yes!
+                feedback: "Great job!"
+            -   option: |
+                  Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                  Are you ready to go to level 2?
+                  Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
+            hint: "Let's go!"
             question_score: '10'
     2:
         1:
@@ -645,222 +659,222 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "اختر الجملة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "يجب استخدام علامات الاقتباس مع الأمر `{ask}` والأمر `{print}`"
+                feedback: "إجابة صحيحة."
+            -   option: "الأمر `{print}` هو الأمر الوحيد الذي يجب استخدام علامات الاقتباس معه"
+                feedback: "الأمر `{ask}` أيضًا يحتاج علامات اقتباس!"
+            -   option: "`{at} {random}` لا تعمل في المستوى الرابع"
+                feedback: "`{at} {random}` ما زالت تعمل!"
+            -   option: "يجب استخدام علامات الاقتباس مع `{at} {random}`"
+                feedback: "لا, ولكن هناك أمران يجب استخدام علامات الاقتباس معهما."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
-            question_score: '10'
+            hint: "في المستوى الرابع تحتاج لعلامات الاقتباس عند استخدام أمران من الأوامر."
+            question_score: '١٠'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "ما الكود الذي يستخدم علامات الاقتباس الصحيحة؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} `hello`
+                    {print} `مرحبًا`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "هذه ليست علامات الاقتباس الصحيحة."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'مرحبًا'
                     ```
-                feedback: "Correct"
+                feedback: "إجابة صحيحة"
             -   option: |
                     ```
-                    {print} hello
+                    {print} مرحبًا
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "لا يحتوي هذا الكود على علامات الاقتباس!"
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,مرحبًا,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "هذه فاصلة, أنت تريد علامات الاقتباس"
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
-            question_score: '10'
+            hint: "اختر علامات الاقتباس الصحيحة."
+            question_score: '١٠'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "في أي كود تم استخدام علامات الاقتباس بالشكل الصحيح؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} Hi Im Hedy
+                    {print} مرحبًا أنا هيدي
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "لا أرى علامات اقتباس هنا!"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy
+                    {print} 'مرحبًا انا هيدي
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "لا أرى إلا علامة اقتباس واحدة!"
             -   option: |
                     ```
-                    '{print} Hi Im Hedy'
+                    '{print} مرحبًا أنا هيدي'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "علامة الاقتباس الأولى يجب أن تاتي بعد الأمر {print}"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy'
+                    {print} 'مرحبًا انا هيدي'
                     ```
-                feedback: "Perfect!"
+                feedback: "رائع!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
-            question_score: '10'
+            hint: "يجب أن تكون علامات الاقتباس محيطة بالكلام الذي تريد طباعته (قبله وبعده)"
+            question_score: '١٠'
         4:
-            question_text: "Which statement is true?"
+            question_text: "اختر العبارة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
-                feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
-            -   option: "You can choose yourself whether to use quotation marks or not."
-                feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "يجب وضع علامات الاقتباس حول الأمر `{print}` هكذا `'{print}'`."
+                feedback: "علامات الاقتباس لا توضع حول الأمر نفسه."
+            -   option: "يجب وضع علامات الاقتباس حول الكلام الذي تريد طباعته."
+                feedback: "ممتاز!"
+            -   option: "الأمر `{ask}` لا يحتاج إلى علامات الاقتباس"
+                feedback: "كلا الأمرين `{print}` و `{ask}` يحتاج إلى علامات الاقتباس"
+            -   option: "لك حرية الاختيار ان تستخدم علامات الاقتباس أم لا."
+                feedback: "للأسف, هيدي قوانينها صارمة بشأن علامات الاقتباس."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
-            question_score: '10'
+            hint: "ابتداءً من المستوى الرابع عليك استخدام علامات الاقتباس."
+            question_score: '١٠'
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "ما الذي يجب تغييره في الكود كي تعمل للعبة بالشكل الصحيح؟"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                الخيارات {is} حجر, ورقة, مقص
+                {print} 'الخيارات {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
-                    '{print} options {at} {random}'
+                    '{print} الخيارات {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "احذر ان تضع علامات الاقتباس قبل الأمر {print}."
             -   option: |
                     ```
-                    {print} 'options' {at} {random}
+                    {print} 'الخيارات' {at} {random}
                     ```
-                feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
+                feedback: "الخيارات هي متغير. أنت لا تريد طباعة جملة \"الخيارات{at}{random}\" حرفياً."
             -   option: |
                     ```
-                    {print} options {at} {random}
+                    {print} الخيارات {at} {random}
                     ```
-                feedback: "That's right"
-            -   option: "Nothing, the game already works!"
-                feedback: "Look carefully. There is an error."
+                feedback: "إجابة صحيحة, أحسنت!"
+            -   option: "لا شيء, اللعبة تعمل بالشكل الصحيح!"
+                feedback: "انظر جيدًا. هناك خطأ في الكود."
             correct_answer: "C"
             hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
-            question_score: '10'
+            question_score: '١٠'
         6:
             question_text: "What would be a good next line in this code?"
             code: |-
-                prices {is} 1 dollar, 100 dollars, 1 million dollars
+                الجوائز {is} ١ دولار, ١٠٠ دولارات, مليون دولار
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'You win...' prices {at} {random}
+                    {print} 'لقد ربحت ...' الجوائز {at} {random}
                     ```
-                feedback: "Great! You get it!"
+                feedback: "أحسنت! إجابة صحيحة!"
             -   option: |
                     ```
-                    {print} You win... 'prices {at} {random}'
+                    {print} لقد ربحت... 'الجوائز {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}'"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"الجوائز{at}{random}\""
             -   option: |
                     ```
-                    {print} You win... prices {at} {random}
+                    {print} لقد ربحت... الجوائز {at} {random}
                     ```
-                feedback: "You need some quotation marks!"
+                feedback: "تحتاج إلى علامات الاقتباس!"
             -   option: |
                     ```
-                    {print} 'You win... prices {at} {random}'
+                    {print} 'لقد ربحت... الجوائز {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}''"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"الجوائز {at}{random}\""
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
-            question_score: '10'
+            hint: "فكّر جيدًا قبل الإجابة, فرّق بين المتغير الذي لا ينبغي وضعه داخل علامات اقتباس والكلمات العادية التي يجب وضعها داخل علامات اقتباس عند الطباعة"
+            question_score: '١٠'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                السؤال {is} {ask} ماذا تريد أن تعرف؟
+                الإجابات {is} نعم, لا, ربما
+                {print} الإجابات {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "Correct!"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "A variable doesn't need quotes"
-            -   option: "Quotation marks are missing in line 3"
-                feedback: "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
-            -   option: "Nothing, this code is good as is!"
-                feedback: "Look carefully. You missed a mistake!"
+            -   option: "علامات الاقتباس مفقودة في السطر الأول"
+                feedback: "صحيح!"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني"
+                feedback: "المتغير لا يحتاج إلى علامات الاقتباس"
+            -   option: "علامات الاقتباس مفقودة في السطر الثالث"
+                feedback: "أنت لا تريد هيدي أن تطبع عبارة\"الإجابات بشكل عشوائي\" لذلك لا حاجة لعلامات الاقتباس هنا!"
+            -   option: "لا شيء, الكود يبدو جيدًا كما هو!"
+                feedback: "انظر جيدًا, هناك خطأ في الكود!"
             correct_answer: "A"
-            hint: "Check each line on whether they'd need quotation marks or not."
-            question_score: '10'
+            hint: "تفقد كل سط إن كان بحاجة علامات الاقتباس أم لا."
+            question_score: '١٠'
         8:
-            question_text: "What would be a good next line for this code?"
+            question_text: "ما هو السطر المناسب ليكمل الكود التالي؟"
             code: |-
-                {print} 'Welcome at the money show!'
-                {print} 'In front of you are 3 doors'
-                door {is} {ask} 'Which door do you choose?'
+                {print} 'أهلًا بك في عرض الأموال'
+                {print} 'امامك ثلاثة أبواب'
+                الباب {is} {ask} 'أي باب ستختار؟'
             mp_choice_options:
             -   option: |
                     ```
-                    {print} So you pick door door
+                    {print} إذًا, لقد اخترت الباب الباب
                     ```
-                feedback: "We need quotation marks"
+                feedback: "ينقصنا علامات الاقتباس"
             -   option: |
                     ```
-                    {print} 'So you pick ' door door
+                    {print} 'إذًا لقد اخترت ' الباب الباب
                     ```
-                feedback: "If the player chooses door 3, Hedy will say 'So you pick 3 3"
+                feedback: "إذا اختار اللاعب الباب 3, هيدي ستطبع \"إذًا لقد اخترت\" 3 3"
             -   option: |
                     ```
-                    {print} 'So you pick door ' door
+                    {print} 'إذًا لقد اخترت الباب ' الباب
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {print} 'So you pick door door'
+                    {print} 'إذًا لقد اخترت الباب الباب'
                     ```
-                feedback: "Hedy will literally print 'So you pick door door"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"لقد اخترت الباب الباب\""
             correct_answer: "C"
-            hint: "The second word door should be replaced with the number, the first should still be the word door..."
-            question_score: '10'
+            hint: "المتغير \"الباب\" يجب أن تطبع قيمته كرقم..."
+            question_score: '١٠'
         9:
-            question_text: "What will never appear in your output screen?"
+            question_text: "ما الخيار الذي لن يظهر على الشاشة أبدًا؟"
             code: |-
-                clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' is going the win the champions league'
+                النوادي_الرياضية {is} ريال مدريد, بايرين ميونيخ, مانشستر يونايتيد, اجاكس
+                {print} النوادي_الرياضية {at} {random} ' سيفوز في دوري أبطال أوروبا'
             mp_choice_options:
-            -   option: "Ajax is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Real Madrid is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Bayer Munchen is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "FC Barcelona is going to win the champions league"
-                feedback: "That's right. It's not in the list"
+            -   option: "اجاكس سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "ريال مدريد سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "بايرين ميونيخ سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "نادي برشلونة سيفوز في دوري أبطال أوروبا"
+                feedback: "إجابة صحيحة, نادي برشلونة ليس من ضمن القائمة"
             correct_answer: "D"
-            hint: "What are Hedy's options to randomly pick from?"
-            question_score: '10'
+            hint: "ما هي الخيارات التي ستختار منها هيدي عشوائيًا؟"
+            question_score: '١٠'
         10:
-            question_text: "Which statement is true?"
+            question_text: "اختر الإجابة الصحيحة مما يلي:"
             code: |-
-                people {is} mom, dad, Emma, Sophie
-                {print} The dishes are done by...
-                {print} people {at} {random}
+                الأشخاص {is} الأم, الأب, إيمان, صوفي
+                {print} غسل الأطباق سيكون على...
+                {print} الأشخاص {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "A list doesn't need quotation marks"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "Correct"
-            -   option: "Quotation marks are missing in both line 2 and 3"
-                feedback: "Line 3 doesn't need quotation marks because it's not printed literally"
-            -   option: "Nothing, this code has no mistakes"
-                feedback: "You missed one!"
+            -   option: "علامات الاقتباس مفقودة في السطر الأول"
+                feedback: "القائمة لا تحتاج إلى علامات الاقتباس"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني"
+                feedback: "صحيح"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني والثالث"
+                feedback: "لا نحتاج إلى علامات الاقتباس عند طباعة المتغيرات"
+            -   option: "لا شيء, الكود لا يحتوي على أخطاء"
+                feedback: "ركّز جيّدًا ستجد خطأ!"
             correct_answer: "B"
-            hint: "One line needs quotation marks, because you want it to be printed literally."
-            question_score: '10'
+            hint: "أحد السطور يحتاج إلى علامات اقتباس, لأننا نريد طباعته حرفيًا."
+            question_score: '١٠'
     5:
         1:
             question_text: "What is true?"
