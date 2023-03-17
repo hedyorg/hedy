@@ -165,8 +165,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         default_save_name: Turtle
     dishes:
@@ -504,9 +503,7 @@ adventures:
                 story_text_3: "## Liste\nCând vrem să verificăm dacă ceva există într-o listă, acum putem folosi comanda `{in}`.\nAcest cod afișează frumos! daca alegi verde sau galben, iar altfel așa și-așa.\n"
                 example_code_3: "```\nculori_frumoase {is} verde, galben\nculoare_preferată {is} {ask} 'Care este culoarea ta preferată?'\n{if} culoare_preferată {in} culor_frumoase {print} 'frumos!'\n{else} {print} 'așa și-așa'\n```\n"
                 story_text_2: "Uneori, codul cu un `{if}` devine foarte lung și nu se potrivește bine pe linie. <br> Poți împărți codul pe două linii, începând cu a doua linie cu `{else}` astfel:\n"
-                story_text_4: "Un alt lucru care funcționează cu `{if}` este `{pressed}`! Cu `{pressed}` poți lega orice literă din alfabet și orice tastă numerică de pe tastatură la o comandă. Dacă le legi și apoi apeși tasta, se va întâmpla ceva. Încercați!\n"
                 example_code_2: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos'\n{else} {print} 'huo!'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'a funcționat!'\n```\n"
             6:
                 start_code: "{print} '5 ori 5 face ' 5 * 5"
                 story_text: "## 1 + 1\n În acest nivel înveți ceva nou: acum poți face și calcule aritmetice.\n\n Plusul este ușor, se scrie ca la matematică: de exemplu `5 + 5`. Minusul funcționează și el la fel de bine, este `5 - 5`.\n\n Cu înmulțirea este un pic diferit, deoarece nu există simbolul de înmulțire pe tastatură. Caută-l, chiar nu există!\n De aceea înmulțim cu asteriscul de deasupra lui 8: `5 * 5`. Citește asta ca \"5 ori 5\", te va ajuta să o reții mai ușor.\n"

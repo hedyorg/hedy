@@ -141,12 +141,6 @@ adventures:
                     {if} name {is} Hedy {print} 'nice'
                     {else} {print} 'boo!'
                     ```
-                story_text_4: |
-                    Something else that works with `{if}` is `{pressed}`! With `{pressed}` you can link any letter in the alphabet and any number key on your keyboard to a command. If you link it, and press the key, something will happen. Try it out!
-                example_code_4: |
-                    ```
-                    {if} x {is} {pressed} {print} 'it worked!'
-                    ```
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
@@ -186,7 +180,7 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}` and `{repeat}` have changed!
                     You can now group several lines together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
@@ -858,6 +852,8 @@ adventures:
                 story_text: |
                     ## Parrot
                     Reward your parrot if it says the correct word!
+
+                    ### Exercise
                     Finish the code by filling in the 4 missing commands.
                 example_code: |
                     ```
@@ -1161,6 +1157,13 @@ adventures:
                 story_text: |
                     ## Let's draw
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
+                story_text_2: |
+                    ### Exercise
+                    Fill in the correct numbers in this code to get it to work.
+                    After you've done that, you can try to add the option backwards.
+
+                    **Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.
+                    This way you could add even more directions like Northeast and Southwest etc.
                 example_code: |
                     ```
                     {print} 'Drawing Figures'
@@ -1175,6 +1178,13 @@ adventures:
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    ```
+                example_code_2: |
+                    ```
+                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
+                    if direction is left turn _
+                    if direction is right turn _
+                    forward 100
                     ```
                 start_code: |-
                     {print} 'Drawing Figures'
@@ -1262,20 +1272,6 @@ adventures:
                         {color} {white}
                         {forward} 50
                         {color} {black}
-                    ```
-                story_text_2: |
-                    ## Turtle Control
-                    You can now also move the turtle in many more ways than only forward or backwards!
-                    ### Exercise 2
-                    Finish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. 
-                    Tip: For left and right, you will need to use three lines of code!
-                example_code_2: |
-                    ```
-                    {repeat} 40 {times}
-                        {if} w {is} {pressed}
-                            {forward} 10
-                        {if} a {is} {pressed}
-                            _ _
                     ```
                 start_code: "# place your code here"
     dishes:
@@ -1899,7 +1895,7 @@ adventures:
                     ## Rock, paper, scissors
                     In this level we can determine whether it's a tie or not. For that you need the new `{if}` code.
 
-                    ## Exercise
+                    ### Exercise
                     Finish the code by filling in the blanks:
                     * Let the computer pick a random option
                     * Ask the player what they want to choose
@@ -2348,7 +2344,12 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you think of more questions to `{ask}` the customers when they are ordering, and make up different responses to their answers by using the `{if}` command?
+                    The code above shows an example of how you could program that you've run out of a menu item in your restaurant.
+                    Copy your own restaurant code from the previous levels. Create a problem in your restaurant and code it, like the example code did.
+                    For instance, you could also run out of a menu item, or you don't take credit cards, or the ice cream machine is broken.
+
+                    **Extra** Have you programmed the problem and programmed appropriate responses? Then try to add more `{if}` and `{else}` commands into your code.
+                    Try to add an `{if}` after every `{ask}` command in your code to make the code as interactive as possible!
 
                 start_code: "# place your code here"
             6:
@@ -2676,7 +2677,7 @@ adventures:
                     {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone else will win!😭'
                     ```
                 story_text_2: |
-                    ## Hack the program
+                    ### Hack the program
                     Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!
                     Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.
                     But of course, still gives you a positive answer and the other players a negative one.
@@ -2690,10 +2691,15 @@ adventures:
                     {if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercises
-                    This concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!
-                    Or you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!
+                    ### Exercise
+                    Use this to make your own program, be creative! For example you could create a code that predicts that:
+                    * your favorite sports team will beat all the competitors!
+                    * your favorite movie will be chosen for movie night!
+                    * you win tickets to your favorite show!
+                    * you are the fairest of them all, like Snow White's magic mirror.
                     Let your imagination do the work!
+
+                    Your program has to exist of at least 10 lines of code and need to have at least one `{if}` and `{else}` command.
 
                 start_code: "# place your code here"
             6:

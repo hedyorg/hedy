@@ -127,8 +127,7 @@ adventures:
                     ```
                 story_text_3: "## Liste\nQuando vogliamo controllare se qualcosa è in una lista, ora possiamo usare il comando `{in}` .\nQuesto codice stampa carino! se scegli il verde o il giallo, e mah altrimenti.\n"
                 example_code_2: "```\nnome {is} {ask} 'come ti chiami?'\n{if} nome {is} Hedy {print} 'che bello!'\n{else} {print} 'buu!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 start_code: "print '5 per 5 è ' 5 * 5"
                 story_text: |
@@ -1104,11 +1103,11 @@ adventures:
                 start_code: |-
                     angles = {ask} 'How many angles should I draw?'
             9:
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+
     dishes:
         name: "Piatti?"
         description: "Use the computer to see who does the dishes (Start at level 2)"

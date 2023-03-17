@@ -66,8 +66,6 @@ adventures:
                 example_code_3: "```\njolies_couleurs {is} vert, jaune\ncouleur_préférée {is} {ask} 'Quelle est ta couleur préférée ?'\n{if} couleur_préférée {in} jolies_couleurs {print} 'joli !'\n{else} {print} 'mouais'\n```\n"
                 story_text_2: "Parfois, le code avec un `{if}` devient vraiment long et ne tient plus très bien dans la zone de texte. Tu peux alors le répartir sur deux lignes en commençant la seconde au `{else}`, comme ceci :\n"
                 example_code_2: "```\nnom {is} {ask} 'quel est ton nom ?'\n{if} nom {is} Hedy {print} 'chouette'\n{else} {print} 'moins amusant !'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'ça fonctionne!'\n```\n"
-                story_text_4: "Quelque chose qui fonctionne quand `{if}` est `{pressed}`! Avec `{pressed}` tu peux lier une lettre de l'alphabet et un nombre sur ton clavier via une commande. Si tu les lies, et que tu appuies sur la touche, quelque chose va se passer. Essaie !\n"
             6:
                 start_code: "{print} '5 fois 5 font ' 5 * 5"
                 story_text: |
@@ -893,8 +891,7 @@ adventures:
             9:
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         name: "Dishes?"

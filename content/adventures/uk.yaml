@@ -75,8 +75,6 @@ adventures:
                 start_code: "імʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'круто!' {else} {print} 'пф'"
                 story_text: "## Якщо... то....\nУ 5 рівні з'явилося дещо нове - `{if}`! За допомогою `{if}` ви можете вибирати між двома різними варіантами.\nЦей код чудово друкується, якщо ви введете Hedy як ім'я, і бум! Якщо ви введете щось інше.\n`{ask}` і `{print}` все ще працюють так само як і на 4-му рівні.\n"
                 example_code_2: "```\nімʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'класно'\n{else} {print} 'фе!'\n```\n"
-                story_text_4: "Ще щось, що працює з `{if}`is `{pressed}`! За допомогою `{pressed}` Ви можете зв’язати будь-яку літеру алфавіту та будь-яку цифрову клавішу на клавіатурі до команди. Якщо зв’язати його та натиснути клавішу, щось станеться. Спробуй!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'це спрацювало!'\n```\n"
             10:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
                 story_text: "## `{for}`\nУ цьому рівні ми вивчаємо новий код, який називається `{for}`. За допомогою `{for}` можна скласти список і використовувати всі елементи.\n`{for}` створює блок, як і `{repeat}` та `{if}`, тому всі рядки в блоці повинні починатися з пробілів."
@@ -247,8 +245,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         description: Make your own drawing
         default_save_name: Turtle

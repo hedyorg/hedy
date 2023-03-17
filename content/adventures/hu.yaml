@@ -75,8 +75,7 @@ adventures:
                 example_code: "```\nnév {is} {ask} \"Hogy hívnak?\"\n{if} név {is} Hedy {print} \"klassz\" {else} {print} \"fúj!\"\n```\n"
                 story_text_3: "## Listák\nHa el szeretnénk dönteni, hogy valami benne van-e egy listában, mostantól használhatjuk az `{in}` parancsot.\nEz a program kiírja, hogy szép! ha zöldet vagy sárgát választasz, és elégedetlen, ha mást.\n"
                 example_code_3: "```\nszép_színek {is} zöld, sárga\nkedvenc_szín {is} {ask} \"Mi a kedvenc színed?\"\n{if} kedvenc_szín {in} szép_színek {print} \"szép!\"\n{else} {print} \"ajaj\"\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+
             6:
                 start_code: "{print} \"5-ször 5 az \" 5 * 5"
                 story_text: |
@@ -1375,8 +1374,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     fortune:
         name: Jósnő

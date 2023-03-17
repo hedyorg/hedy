@@ -106,8 +106,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Turtle
     dishes:
@@ -218,8 +217,6 @@ adventures:
                 example_code_3: "```\nสีที่สวย {is} เขียว, เหลือง\nสีที่ชอบ {is} {ask} 'เธอชอบสีอะไร?'\n{if} สีที่ชอบ {in} สีที่สวย {print} 'สวย!'\n{else} {print} 'ไม่สวยเลย'\n```\n"
                 story_text_2: "แต่บางครั้งคำสั่ง `{if}` จะยาวขึ้นๆเรื่อยๆ จนเลยบรรทัดไป <br> เราเลยอาจจะแบ่งเป็นสองบรรทัดตรงคำสั่ง `{else}`\n"
                 example_code_2: "```\nชื่อ {is} {ask} 'เธอชื่ออะไร?'\n{if} ชื่อ {is} เฮดี้ {print} 'เย้!'\n{else} {print} 'แย่จัง'\n```\n"
-                story_text_4: "อีกอย่างคือเราใช้ `{if}` กับ `{pressed}` ได้ด้วย โดยคำสั่ง `{pressed}` จะรับข้อมูลจากคีบอร์ด ถ้าคุณใช้คำสั่ง `{pressed}` แล้วกดตัวอักษรนั้นๆบนคีบอร์ด จะเกิดอะไรขึ้นกันนะ\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'เย้!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
                 story_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
