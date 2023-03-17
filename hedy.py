@@ -991,18 +991,6 @@ while not pygame_end:
     pygame.quit()
     break""")
 
-    regex_string_subsequent_use = (
-        r"\s*# End of PyGame Event Handler"
-        r"\s*pygame_end = False"
-        r"\s*while not pygame_end:"
-        r"\s*pygame.display.update\(\)"
-        r"\s*event = pygame.event.wait\(\)"
-        r"\s*if event.type == pygame.QUIT:"
-        r"\s*pygame_end = True"
-        r"\s*pygame.quit\(\)"
-        r"\s*break"
-    )
-
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
@@ -1017,9 +1005,6 @@ while not pygame_end:
 
     def assign_button(self, args):
         return True
-
-    def post_process_code(self, code):
-        return re.sub(self.regex_string_subsequent_use, '', code)
 
 
 class AllCommands(Transformer):
@@ -2994,9 +2979,6 @@ def transpile_inner(input_string, level, lang="en"):
 
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
-
-        if has_pygame:
-            python = uses_pygame.post_process_code(python)
 
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
