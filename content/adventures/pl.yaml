@@ -325,6 +325,10 @@ adventures:
                 example_code: "```\nliczba = 10\n{for} i {in} {range} 1 do 10\n    {print} i * liczba\n```\n"
                 story_text: "## Kalkulator\nDzięki `{for}` można uprościć program ćwiczeniowy tabliczki mnożenia.\n\n### Ćwiczenie 1\nPopraw przykładowy kod tak, aby drukował ładną tabliczkę mnożenia: <br> \"1 razy 10 to 10\", \"2 razy 10 to 20\" itd.\n\n### Ćwiczenie 2\nWróć do swojego kodu mnożenia na poziomie 10 i zmodyfikuj go tak, aby używał `{for}` i `{range}`.\n"
                 start_code: '# umieść tutaj swój kod'
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         description: Stwórz kalkulator
         default_save_name: Kalkulator
     restaurant:

@@ -498,6 +498,10 @@ adventures:
                 example_code: "```\n数字 = 10\n{for} i {in} {range} 1 to 10\n    {print} i * 数字\n```\n"
                 start_code: '# 将你的代码写在这里'
                 story_text: "## 计算器\n使用 `{for}`你可以简化乘法运算表的程序。\n\n### 练习 1\n改进范例代码，使其打印出一个漂亮的乘法表：<br> “1 乘以 10 是 10”、“2 乘以 10 是 20”等。\n\n### 练习 2\n返回到你在 10 级完成的乘法运算表程序，并使用 `{for}` 和 `{range}`对其进行修改。\n"
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
