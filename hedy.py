@@ -1791,7 +1791,7 @@ else:
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False):
+    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
@@ -1803,7 +1803,10 @@ else:
 {ConvertToPython.indent(command, 4)}
     # End of PyGame Event Handler"""
 
-        return UsesPyGame.command_prefix + "\n" + command
+        if add_command_prefix:
+            return UsesPyGame.command_prefix + "\n" + command
+        else:
+            return "\n" + command
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
@@ -1814,7 +1817,7 @@ if event.key == {var_or_button}:
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""", False)
+  break""", button=False)
         elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
@@ -1823,7 +1826,7 @@ if event.key == {button_name}:
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""", True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
@@ -1831,7 +1834,7 @@ if event.unicode == '{args[0]}':
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""")
+  break""", button=False)
 
 
 @v_args(meta=True)
@@ -1992,18 +1995,18 @@ class ConvertToPython_8_9(ConvertToPython_7):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}
-  break""")
+  break""", button=False)
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break""")
+  break""", button=False)
         else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break""", True)
+  break""", button=True)
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2017,13 +2020,13 @@ if event.key == {button_name}:
 if event.key == {button_name}:
 {all_lines}
   break
-    """, True)
+    """, button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
   break
-    """)
+    """, button=False)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2271,17 +2274,17 @@ class ConvertToPython_15(ConvertToPython_14):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {ConvertToPython.indent(args[1])}
-  break""", False)
+  break""", button=False)
         elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
-  break""", True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""")
+  break""", button=False)
 
 
 @v_args(meta=True)
@@ -2317,6 +2320,30 @@ class ConvertToPython_17(ConvertToPython_16):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+    def ifpressed_elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines)
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        else:  # otherwise we mean a button
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{all_lines}
+  break""", button=True, add_command_prefix=False)
 
 
 @v_args(meta=True)
