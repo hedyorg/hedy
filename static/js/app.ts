@@ -11,6 +11,8 @@ import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
+import { localDelete, localLoad, localSave } from './local';
+import { initializeLoginLinks } from './auth';
 
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
@@ -145,6 +147,8 @@ export function initializeApp(options: InitializeAppOptions) {
   $('*[data-autosubmit="true"]').on('change', (ev) => {
     $(ev.target).closest('form').trigger('submit');
   });
+
+  initializeLoginLinks();
 }
 
 export interface InitializeCodePageOptions {
@@ -689,108 +693,6 @@ export function tryPaletteCode(exampleCode: string) {
       $('#editor').attr('lang', 'en');
       update_view("main_editor_keyword_selector", "en");
   }
-}
-
-async function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
-  var adventure_name = currentTab;
-  // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
-  if (Array.isArray(level)) {
-     adventure_name = level [1];
-     level = level [0];
-  }
-
-  try {
-    const response = await postJson('/programs', {
-      level: level,
-      lang:  lang,
-      name:  name,
-      code:  code,
-      shared: shared,
-      force_save: force_save,
-      adventure_name: adventure_name
-    });
-
-    // If the program contains an error -> verify that the user really wants to save it and POST again
-    // If we already answered this question with yes the "force_save" is true, so we skip this part
-    if (response.parse_error && !force_save) {
-      modal.confirm(response.message, function() {
-        return storeProgram(level, lang, name, code, shared, true, cb);
-      });
-      return;
-    }
-    // The auth functions use this callback function.
-    if (cb) return response.Error ? cb (response) : cb (null, response);
-    if (shared) {
-      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
-      modal.copy_alert (response.message, 5000);
-    } else {
-      modal.notifySuccess(response.message, 3000);
-    }
-    showAchievements(response.achievements, false, "");
-
-    // If we succeed, we need to update the default program name & program for the currently selected tab.
-    // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
-    // The name of the program might have been changed by the server, so we use the name stated by the server.
-    $ ('#program_name').val (response.name);
-
-    const adv = theAdventures[currentTab];
-    if (adv) {
-      // FIXME: What's this doing here?
-      adv.save_name = response.name;
-      adv.start_code = code;
-    }
-  } catch (err: any) {
-    console.error(err);
-    error.show(ClientMessages['Connection_error'], JSON.stringify(err));
-    if (err.status === 403) {
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
-       localStorage.setItem ('hedy-save-redirect', 'hedy');
-       window.location.pathname = '/login';
-    }
-  }
-}
-
-export async function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
-  try {
-    const response = await postJson('/programs/duplicate-check', { name });
-    if (response['duplicate']) {
-      modal.confirm (response.message, function () {
-        storeProgram(level, lang, name, code, shared, false, cb);
-        pushAchievement("double_check");
-      });
-    } else {
-        storeProgram(level, lang, name, code, shared, false, cb);
-    }
-  } catch (err: any) {
-    if (err.status == 403) { // The user is not allowed -> so not logged in
-      return modal.confirm (err.responseText, function () {
-          // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-          const curTab = currentTab;
-          if (curTab && !Array.isArray(level)) {
-            level = [level, curTab];
-          }
-          localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
-          window.location.pathname = '/login';
-        });
-    } else {
-      modal.notifyError(err.message);
-    }
-  }
-}
-
-/**
- * The 'saveit' function, as an async function
- */
-export function saveitP(level: number | [number, string], lang: string, name: string, code: string, shared: boolean) {
-  return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, shared,(err, response) => {
-      if (err) {
-        ko(err);
-      } else {
-        ok(response);
-      }
-    });
-  });
 }
 
 export function viewProgramLink(programId: string) {
@@ -2125,24 +2027,6 @@ async function saveIfNecessary() {
   } else {
     localSave(currentTabLsKey(), { saveName, code });
     adventure.start_code = code;
-  }
-}
-
-function localSave(key: string, data: any) {
-  window.localStorage?.setItem(key, JSON.stringify(data));
-}
-
-function localDelete(key: string) {
-  window.localStorage?.removeItem(key);
-}
-
-function localLoad(key: string): any {
-  const value = window.localStorage?.getItem(key);
-  try {
-    return value ? JSON.parse(value) : undefined;
-  } catch (e) {
-    // Invalid JSON or summin'
-    return undefined;
   }
 }
 

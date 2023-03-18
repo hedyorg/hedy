@@ -1,11 +1,32 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
-import { saveitP, showAchievements } from './app';
+import { showAchievements } from './app';
+import { localLoadOnce, localSave } from './local';
+
+const REDIRECT_AFTER_LOGIN_KEY = 'login-redirect';
 
 // *** Utility functions ***
 
 interface Dict<T> {
-    [key: string]: T;
+  [key: string]: T;
+}
+
+/**
+ * Links to the login page redirect back to the page you come from,
+ * by storing the origin address in localstorage (because our login
+ * form works via JavaScript/AJAX).
+ */
+export function initializeLoginLinks() {
+  $('a[href="/login"]').on('click', () => {
+    comeBackHereAfterLogin();
+    // Allow the default navigation operation
+  });
+}
+
+export function comeBackHereAfterLogin() {
+  localSave(REDIRECT_AFTER_LOGIN_KEY, {
+    url: window.location.toString(),
+  });
 }
 
 function convertFormJSON(form: JQuery<HTMLElement>) {
@@ -35,12 +56,12 @@ function redirect(where: string) {
 
 // *** User POST without data ***
 
-export function logout() {
+export async function logout() {
   $.ajax ({
     type: 'POST',
     url: '/auth/logout'
   }).done (function () {
-    redirect('login');
+    window.location.reload();
   });
 }
 
@@ -334,18 +355,15 @@ export function update_user_tags() {
 /**
  * After login:
  *
- * - Check if there's a saved program in localstorage. If so, save it.
+ * - Redirect to a stored URL if present in Local Storage.
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
 async function afterLogin(loginData: Dict<boolean>) {
-  const savedProgramString = localStorage.getItem('hedy-first-save');
-  const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
-
-  if (savedProgram) {
-    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3], savedProgram[4]);
-    localStorage.removeItem('hedy-first-save');
-    return redirect('programs');
+  const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
+  if (url) {
+    window.location = url;
+    return;
   }
 
   const joinClassString = localStorage.getItem('hedy-join');
@@ -353,11 +371,6 @@ async function afterLogin(loginData: Dict<boolean>) {
   if (joinClass) {
     localStorage.removeItem('hedy-join');
     return join_class(joinClass.id, joinClass.name);
-  }
-
-  const savedPath = getSavedRedirectPath();
-  if (savedPath) {
-    return redirect(savedPath);
   }
 
   // If the user logs in for the first time -> redirect to the landing-page after signup
@@ -375,31 +388,4 @@ async function afterLogin(loginData: Dict<boolean>) {
   }
   // Otherwise, redirect to the programs page
   redirect('landing-page');
-}
-
-function getSavedRedirectPath() {
-  const redirect = localStorage.getItem('hedy-save-redirect');
-  if (redirect) {
-    localStorage.removeItem('hedy-save-redirect');
-  }
-  return redirect;
-}
-
-/**
- * After the next login, redirect a user to the given path
- *
- * (Should be relative to the current server)
- */
-export function redirectAfterLogin(path: string) {
-  // After `getSavedRedirectPath` we will send this to the `redirect()`
-  // function, which will always prepend a '/'
-  if (path.startsWith('/')) {
-    path = path.substring(1);
-  }
-  try {
-    localStorage.setItem('hedy-save-redirect', path);
-  } catch (e) {
-    // Storage may be full
-    console.warn(e);
-  }
 }
