@@ -1795,7 +1795,7 @@ else:
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}    
+{ConvertToPython.indent(command, 4)}
     # End of PyGame Event Handler"""
         else:
             command = f"""\
