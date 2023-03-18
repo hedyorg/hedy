@@ -1,6 +1,6 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
-import { modal, error, success } from './modal';
+import { modal, error, success, tryCatchPopup } from './modal';
 import { Markers } from './markers';
 import JSZip from "jszip";
 import { Tabs } from './tabs';
@@ -13,6 +13,7 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
+import { postJson } from './comm';
 
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
@@ -529,7 +530,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     try {
       cancelPendingAutomaticSave();
-      const response = await postJson('/parse', {
+      const response = await postJsonWithAchievements('/parse', {
         level: `${level}`,
         code: code,
         lang: lang,
@@ -585,7 +586,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 }
 
 export async function saveMachineFiles() {
-  const response = await postJson('/generate_machine_files', {
+  const response = await postJsonWithAchievements('/generate_machine_files', {
     level: theLevel,
     code: get_active_and_trimmed_code(),
     lang: theLanguage,
@@ -608,7 +609,7 @@ export async function pushAchievement(achievement: string) {
   }
   ACHIEVEMENTS_PUSHED[achievement] = true;
 
-  const response = await postJson('/achievements/push-achievement', { achievement });
+  const response = await postJsonWithAchievements('/achievements/push-achievement', { achievement });
   showAchievements(response.achievements, false, "");
 }
 
@@ -702,7 +703,7 @@ export function viewProgramLink(programId: string) {
 export async function delete_program(id: string, index: number, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
-    const response = await postJson('/programs/delete', { id });
+    const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
     $('#program_' + index).remove();
     modal.notifySuccess(response.message);
@@ -720,7 +721,7 @@ function set_favourite(index: number) {
 export async function set_favourite_program(id: string, index: number, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
-    const response = await postJson('/programs/set_favourite', { id });
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
     set_favourite(index)
     modal.notifySuccess(response.message);
   });
@@ -738,7 +739,7 @@ function change_to_submitted (index: number) {
 
 export function submit_program (id: string, index: number) {
   tryCatchPopup(async () => {
-    await postJson('/programs/submit', { id });
+    await postJsonWithAchievements('/programs/submit', { id });
     change_to_submitted(index);
   });
 }
@@ -751,7 +752,7 @@ export async function set_explore_favourite(id: string, favourite: number) {
   await modal.confirmP(prompt);
 
   await tryCatchPopup(async () => {
-    const response = await postJson('/programs/set_hedy_choice', {
+    const response = await postJsonWithAchievements('/programs/set_hedy_choice', {
       id: id,
       favourite: favourite
     });
@@ -765,7 +766,7 @@ export async function set_explore_favourite(id: string, favourite: number) {
 export function report_program(prompt: string, id: string) {
   tryCatchPopup(async () => {
     await modal.confirmP(prompt);
-    const response = await postJson('/programs/report', { id });
+    const response = await postJsonWithAchievements('/programs/report', { id });
     modal.notifySuccess(response.message);
   });
 }
@@ -799,7 +800,7 @@ export function copy_to_clipboard (string: string, prompt: string) {
  * Do a POST with the error to the server so we can log it
  */
 function reportClientError(level: number, code: string, client_error: string) {
-  postJson('/report_error', {
+  postJsonWithAchievements('/report_error', {
     level: `${level}`,
     code: code,
     page: window.location.href,
@@ -808,7 +809,7 @@ function reportClientError(level: number, code: string, client_error: string) {
 }
 
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
-  postJson('/client_exception', {
+  postJsonWithAchievements('/client_exception', {
     message: message,
     source: source,
     line_number: line_number,
@@ -1312,7 +1313,7 @@ export function showVariableView() {
 
 async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
-    await postJson('/store_parsons_order', {
+    await postJsonWithAchievements('/store_parsons_order', {
       level: theLevel,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
@@ -1584,7 +1585,7 @@ export function toggle_blur_code() {
 
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
-    const response = await postJson('/change_language', { lang });
+    const response = await postJsonWithAchievements('/change_language', { lang });
     if (response.succes) {
       // Check if keyword_language is set to change it to English
       const queryString = window.location.search;
@@ -1604,48 +1605,15 @@ export async function change_language(lang: string) {
  *
  * Automatically handles any achievements the server might send our way.
  */
-async function postJson(url: string, data: any): Promise<any> {
-  // FIXME: This should be using the fetch() API with keepalive: true, so
-  // that it can submit a final save when the user leaves the page.
-  return new Promise((ok, ko) => {
-    $.ajax({
-      type: 'POST',
-      url,
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      dataType: 'json',
-    }).done(function (response: any) {
-      showAchievements(response.achievement, true, "");
-
-      ok(response);
-    }).fail(function (err) {
-      // Some places expect the error object to have the same attributes as
-      // the XHR object, so copy them over.
-      const error = new Error(err.responseText);
-      ko(Object.assign(error, {
-        responseText: err.responseText,
-        status: err.status,
-        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-        internetError: err.readyState < 4,
-      }));
-    });
-  });
-}
-
-/**
- * Run a code block, show a popup if we catch an exception
- */
-async function tryCatchPopup(cb: () => void | Promise<void>) {
-  try {
-    return await cb();
-  } catch (e: any) {
-    modal.notifyError(e.message);
-  }
+async function postJsonWithAchievements(url: string, data: any): Promise<any> {
+  const response = await postJson(url, data);
+  showAchievements(response.achievement, true, "");
+  return response;
 }
 
 export function change_keyword_language(start_lang: string, new_lang: string) {
   tryCatchPopup(async () => {
-    const response = await postJson('/translate_keywords', {
+    const response = await postJsonWithAchievements('/translate_keywords', {
       code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
@@ -1904,7 +1872,7 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
 
-        const response = await postJson('/programs/share', {
+        const response = await postJsonWithAchievements('/programs/share', {
           id: saveInfo.id,
           public: isPublic,
         });
@@ -1931,7 +1899,7 @@ function initializeHandInButton() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-        const response = await postJson('/programs/submit', {
+        const response = await postJsonWithAchievements('/programs/submit', {
           id: saveInfo.id,
         });
 
@@ -2007,7 +1975,7 @@ async function saveIfNecessary() {
   const saveName = saveNameFromInput();
 
   if (theUserIsLoggedIn) {
-    const response = await postJson('/programs', {
+    const response = await postJsonWithAchievements('/programs', {
       level: theLevel,
       lang:  theLanguage,
       name:  saveName,

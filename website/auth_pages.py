@@ -408,8 +408,8 @@ class AuthModule(WebsiteModule):
 
         return jsonify({"message": gettext("password_resetted")}), 200
 
-    @ route("/request_teacher", methods=["GET"])
-    @ requires_login
+    @route("/request_teacher", methods=["POST"])
+    @requires_login
     def request_teacher_account(self, user):
         account = self.db.user_by_username(user["username"])
         if account.get("is_teacher"):

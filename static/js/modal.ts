@@ -245,3 +245,14 @@ export const error = {
 }
 
 export const modal = new Modal();
+
+/**
+ * Run a code block, show a popup if we catch an exception
+ */
+export async function tryCatchPopup(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    modal.notifyError(e.message);
+  }
+}
