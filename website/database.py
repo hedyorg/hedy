@@ -350,7 +350,7 @@ class Database:
         if adventure_filter:
             filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
 
-        programs = dynamo.QueryIterator(PROGRAMS, {'public': 1}, reverse=True)
+        programs = dynamo.GetManyIterator(PROGRAMS, {'public': 1}, reverse=True)
 
         # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
         # the programs match the filter. This works because they all have a 'matching' date field
