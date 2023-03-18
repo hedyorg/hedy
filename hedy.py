@@ -2909,7 +2909,8 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
         elif invalid_info.error_type == 'ifpressed missing else':
-            raise exceptions.MissingElseForPressitException(command='ifpressed_else', level=level, line_number=invalid_info.line)
+            raise exceptions.MissingElseForPressitException(
+                command='ifpressed_else', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
