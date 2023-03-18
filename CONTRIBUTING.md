@@ -1,11 +1,11 @@
 Helping build Hedy
 ------------
 
-We would be grateful if you want to help make Hedy better! 
+We would be grateful if you want to help make Hedy better!
 
 **How to get in touch with the team**
 Hedy is built with a team of people, and while we love people to help out, we do ask that you let us know that you want to work on something before doing so,
-(either on GitHub or on Discord) so we don't get overwhelmed with small PRs to review for issues that don't have a lot of priority. 
+(either on GitHub or on Discord) so we don't get overwhelmed with small PRs to review for issues that don't have a lot of priority.
 
 Our main channel of communication is our [Discord](https://discord.gg/8yY7dEme9r), so please join us there and let us know that you want to help out.
 We also have bi-weekly contributors meetings on Tuesdays at 7:30 CET (dates and link are in Discord) where we discuss larger issues and plans.
@@ -31,7 +31,7 @@ If you are interested in working on topics related to an open discussion, please
 Contributing to Hedy
 ------------
 
-The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces). 
+The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?machine=basicLinux32gb&repo=226863521&ref=main&location=WestEurope)
 
@@ -46,7 +46,7 @@ Run Hedy on your machine
 
 VS Code has a great Dev Containers extension that allows you to connect the IDE to a development (docker) container. More info can be found on https://code.visualstudio.com/docs/devcontainers/containers
 
-After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy. 
+After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy.
 
 
 **Local installation**
@@ -103,7 +103,7 @@ $ npx cypress run
 ```
 For the tests to be truly reproducible, you need to clean the database first and put our tests data there, for that you can need to run the `feed_dev_database.sh` script.
 
-You can also run a particular set of tests on the command line with the following command: 
+You can also run a particular set of tests on the command line with the following command:
 
 ```bash
 npx cypress run --spec "[path to test(s)]"
@@ -127,8 +127,8 @@ Do note a few things:
 * For the same reason, set your app to English
 * ensure the `ADMIN_USER` environment variable is set to `admin` before starting the app. e.g.
     ``` bash
-    $ . ./.env/bin/activate  
-    (.env)$ export ADMIN_USER=admin  
+    $ . ./.env/bin/activate
+    (.env)$ export ADMIN_USER=admin
     (.env)$ python app.py
     ```
 If you want to connect Cypress to the online dashboard, use:
@@ -140,7 +140,7 @@ npx cypress run --record --key <key here>
 To check the front end test coverage, you can run the script:
 
 ```bash
-./tests/get-code-coverage 
+./tests/get-code-coverage
 ```
 
 And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go (here)[https://docs.cypress.io/guides/tooling/code-coverage]
@@ -204,29 +204,47 @@ Make sure to reload your browser (and work in incognito mode) to see the changes
 These files are also automatically generated on deploy, so don't worry if you forget to generate them.
 
 ## Working on the web front-end in Tailwind
-All the styling in our front-end HTML templates is done using the Tailwind library.
-This library has generated classes for styling which we can apply to HTML elements.
-To make sure you have access to all possible styling classes, generate the development CSS file:
+
+All the styling in our front-end HTML templates is done using the [Tailwind
+library](https://tailwindcss.com/docs/installation).  This library has generated
+classes for styling which we can apply to HTML elements.
+
+You normally do not need to think about this. During development, a multi-megabyte
+CSS file will be served that contains most classes. During deployment, a minimized CSS
+file is automatically produced.
+
+You may need to regenerate the develompent CSS file if you want to do one of the following things:
+
+* Want to use a *conditional* Tailwind class (for example, a class that starts with `hover:`).
+  Write the class in the HTML, then regenerate the CSS.
+* Want to add custom classes to `styles.css`.
+
+Run the following command to regenerate the development CSS file:
+
 ```bash
 $ ./build-tools/heroku/tailwind/generate-development-css
 ```
-When merging we want to keep the CSS file as small as possible for performance reasons.
-Tailwind has a built-in `purge` option to only generate CSS for classes that are actually being used.
-Please run the following command so Tailwind only generates used classes:
-```bash
-$ ./build-tools/heroku/tailwind/generate-css
-```
+
 For all possible styling classes and more, take a look at their [website](https://tailwindcss.com).
-If you want to combine different Tailwind classes into one class or one element, we can do this in the `/build-tool/heroku/tailwind/styles.css` file.
-By using the `@apply` attribute we can assign classes to other styling. For example, we styled the `<h1>` element with multiple Tailwind classes like this:
+
+If you want to combine different Tailwind classes into one class or one element,
+we can do this in the `/build-tool/heroku/tailwind/styles.css` file.  By using
+the `@apply` attribute we can assign classes to other styling. For example, we
+styled the `<h1>` element with multiple Tailwind classes like this:
+
 ```css
 h1 {
   @apply font-extralight text-4xl;
 }
 ```
-If you want to use styling that is not available in the Tailwind library this can be added to the `static/css/additional.css` file.
-But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
-Also, please refrain from using inline CSS styling, as this makes the templates hard to read, maintain and alter.
+
+If you want to use styling without running a Tailwind build and without using
+Tailwind classes, add it to `static/css/additional.css` file. But please, try to
+use the Tailwind classes as much as possible as these are optimized and keep our
+code base consistent and readable.
+
+Also, please refrain from using inline CSS styling, as this makes the templates
+hard to read, maintain and alter.
 
 ## Working with translations
 
@@ -307,7 +325,7 @@ docker build -t hedy .
 and then you can run the docker container with:
 
 ```bash
-docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app --name hedy hedy 
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app --name hedy hedy
 ```
 
 After that, you can access bash inside the container with:
@@ -317,7 +335,7 @@ docker exec -it hedy bash
 
 ## Testing Admin facing features locally
 
-For some things like making classes you need a teacher's account which you might want to test locally. 
+For some things like making classes you need a teacher's account which you might want to test locally.
 For that you can use the account `teacher1` which is stored in the local database.
 
 If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) you have to run Hedy with the environment variable `ADMIN_USER` set to your username, e.g. `ADMIN_USER=teacher1`. It works a bit differently in each IDE, this is what it looks like for PyCharm:
@@ -326,7 +344,7 @@ If you want to try Admin features locally (for example, marking accounts as teac
 
 ## What happens when I make a PR?
 
-When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally. 
+When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally.
 
 If the PR is approved, it will be merged with a [mergify script](https://github.com/hedyorg/hedy/blob/main/.mergify.yml). Please don't do anything (esp. don't enable auto merge), all will be handled automatically. Mergify will also tell you that when the PR is approved.
 
