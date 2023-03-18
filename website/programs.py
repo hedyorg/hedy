@@ -25,6 +25,7 @@ class ProgramsLogic:
     This could maybe have been in the Database class, but it also uses
     Achievements and stuff.
     """
+
     def __init__(self, db: Database, achievements: Achievements):
         self.db = db
         self.achievements = achievements
@@ -35,9 +36,9 @@ class ProgramsLogic:
                            name: str,
                            code: str,
                            error: bool,
-                           program_id: Optional[str]=None,
-                           adventure_name: Optional[str]=None,
-                           set_public: Optional[bool]=None):
+                           program_id: Optional[str] = None,
+                           adventure_name: Optional[str] = None,
+                           set_public: Optional[bool] = None):
         """Store a user program (either new or overwrite an existing one).
 
         Returns the program record.
@@ -76,6 +77,7 @@ class ProgramsLogic:
 
 class ProgramsModule(WebsiteModule):
     """Flask routes that deal with manipulating programs."""
+
     def __init__(self, db: Database, achievements: Achievements):
         super().__init__("programs", __name__, url_prefix="/programs")
         self.logic = ProgramsLogic(db, achievements)
@@ -326,4 +328,3 @@ class ProgramsModule(WebsiteModule):
         )
 
         return {"message": gettext("report_success")}, 200
-

@@ -161,14 +161,19 @@ class Database:
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username}, reverse=True, limit=limit, pagination_token=pagination_token)
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+                                          reverse=True, limit=limit, pagination_token=pagination_token)
         for program in programs:
-            if level and program.get('level') != int(level): continue
+            if level and program.get('level') != int(level):
+                continue
             if adventure:
-                if adventure == 'default' and program.get('adventure_name') != '': continue
-                if adventure != 'default' and program.get('adventure_name') != adventure: continue
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    continue
+                if adventure != 'default' and program.get('adventure_name') != adventure:
+                    continue
             if submitted is not None:
-                if program.get('submitted') != submitted: continue
+                if program.get('submitted') != submitted:
+                    continue
 
             ret.append(program)
 
@@ -197,7 +202,7 @@ class Database:
         Add an additional indexable field: 'username_level'.
         """
         program = dict(program,
-            username_level=f"{program.get('username')}-{program.get('level')}")
+                       username_level=f"{program.get('username')}-{program.get('level')}")
         PROGRAMS.create(program)
 
         return program
