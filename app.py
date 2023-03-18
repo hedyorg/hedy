@@ -959,6 +959,7 @@ def tutorial_index():
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
     initial_tab = adventures[0].short_name
+    initial_adventure = adventures[0]
 
     return render_template(
         "code-page.html",
@@ -972,6 +973,7 @@ def tutorial_index():
         quiz=True,
         parsons=True if parsons else False,
         parsons_exercises=parsons,
+        initial_adventure=initial_adventure,
         cheatsheet=cheatsheet,
         blur_button_available=False,
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
