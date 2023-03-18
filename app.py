@@ -974,7 +974,7 @@ def tutorial_index():
         parsons_exercises=parsons,
         cheatsheet=cheatsheet,
         blur_button_available=False,
-        current_user_is_in_class=len(current_user().get('classes', [])) > 0,
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -1175,7 +1175,7 @@ def index(level, program_id):
         cheatsheet=cheatsheet,
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
-        current_user_is_in_class=len(current_user().get('classes', [])) > 0,
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -1283,7 +1283,7 @@ def get_specific_adventure(name, level, mode):
                            latest=version(),
                            raw=raw,
                            blur_button_available=False,
-                           current_user_is_in_class=len(current_user().get('classes', [])) > 0,
+                           current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
                                page='code',
