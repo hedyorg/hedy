@@ -166,6 +166,8 @@ class TestsLevel15(HedyTester):
               break
             # End of PyGame Event Handler""")
 
+        self.multi_level_tester(code, expected=expected, max_level=16)
+
     def test_if_pressed_works_in_while_loop(self):
         code = textwrap.dedent("""\
       stop is 0
