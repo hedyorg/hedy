@@ -8,32 +8,29 @@ root=$(cd $(dirname $0)/.. && pwd)
 cd $root
 
 rm -rf __instrumented__
+mkdir -p __instrumented__
 
 # Compile the typescript
 echo "Compiling Typescript..."
-npx tsc --outDir __tmp__
 
-npx esbuild __tmp__/static/js/index.js \
+echo "Instrumenting code..."
+npx nyc instrument --compact=false static/js __instrumented__/ts
+
+# We need to use the instrumented code when running cypress
+mv static/js/appbundle.js static/js/appbundle_orig.js
+
+npx esbuild ./__instrumented__/ts \
     --bundle \
     --sourcemap \
-    --minify \
     --target=es2017 \
     --global-name=hedyApp \
     --platform=browser \
     --outfile=static/js/appbundle.js "$@"
 
-echo "Instrumenting code..."
-npx nyc instrument --compact=false static/js __instrumented__
-
-# We need to use the instrumented code when running cypress
-mv static/js/appbundle.js static/js/appbundle_orig.js
-mv __instrumented__/appbundle.js static/js/appbundle.js
-
 echo "Running cypress tests..."
 cd tests
 npx cypress run
 
-rm -rf ../__tmp__
 rm -rf ../static/js/appbundle.js
 
 mv ../static/js/appbundle_orig.js ../static/js/appbundle.js
