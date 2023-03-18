@@ -2019,14 +2019,12 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break
-    """, button=True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break
-    """, button=False)
+  break""", button=False)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2036,7 +2034,7 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        args += ["  break\n"]
+        args += ["  break"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]

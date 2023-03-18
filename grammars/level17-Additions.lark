@@ -1,6 +1,6 @@
 // We add the : at the end of if and else and elif and for/while
 
-command:+= ifpressed (ifpressed_elifs)* ifpressed_elses? -= ifpressed ifpressed_elses? | ifs (elifs)* elses? -= ifs elses?
+command:+= ifpressed (ifpressed_elifs)* ifpressed_elses? | ifs (elifs)* elses? -= ifs elses?
 // These will be handled by the preprocessor step in the merger
 // It will find the appropiate function for this anotation and modify it accordingly
 ifpressed_else<needs_colon>

@@ -146,9 +146,25 @@ class TestsLevel15(HedyTester):
             exception=exceptions.NoIndentationException
         )
 
-    #
-    # pressed with while loop tests
-    #
+    def test_if_pressed_without_else_works(self):
+        code = textwrap.dedent("""\
+        if p is pressed
+            print 'press'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'p':
+              print(f'''press''')
+              break
+            # End of PyGame Event Handler""")
 
     def test_if_pressed_works_in_while_loop(self):
         code = textwrap.dedent("""\
@@ -172,14 +188,19 @@ class TestsLevel15(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN:
-              if event.unicode != 'p':
-                  pygame_end = True
               if event.unicode == 'p':
                 print(f'''press''')
                 break
+              # End of PyGame Event Handler
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
             if event.type == pygame.KEYDOWN:
-              if event.unicode != 's':
-                  pygame_end = True
               if event.unicode == 's':
                 stop = 1
                 break

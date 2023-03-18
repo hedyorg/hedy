@@ -589,10 +589,6 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_turtle(),
         )
 
-    #
-    # if pressed tests
-    #
-
     def test_if_pressed_with_list_and_for(self):
         code = textwrap.dedent("""\
         lijstje is ['kip', 'haan', 'kuiken']
@@ -611,8 +607,6 @@ class TestsLevel16(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
-            if event.unicode != 'x':
-                pygame_end = True
             if event.unicode == 'x':
               for dier in lijstje:
                 print(f'''dier''')

@@ -310,7 +310,9 @@ class TestsLevel11(HedyTester):
         code = textwrap.dedent("""\
         for i in range 1 to 10
             if p is pressed
-                print 'press'""")
+                print 'press'
+            else
+                print 'no!'""")
 
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(10) else -1
@@ -324,12 +326,13 @@ class TestsLevel11(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN:
-              if event.unicode != 'p':
-                  pygame_end = True
               if event.unicode == 'p':
                 print(f'press')
                 break
-              # End of PyGame Event Handler
+              # End of PyGame Event Handler    
+              else:
+                print(f'no!')
+                break
           time.sleep(0.1)""")
 
         self.single_level_tester(
