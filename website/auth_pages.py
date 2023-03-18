@@ -77,18 +77,19 @@ class AuthModule(WebsiteModule):
             session["profile_image"] = public_profile.get("image", 1)
 
         # Make an empty response to make sure we have one
-        resp = make_response()
+        resp_body = {}
 
         if is_admin(user):
-            resp = make_response({"admin": True})
+            resp_body = {"admin": True}
         elif user.get("is_teacher"):
-            resp = make_response({"teacher": True})
+            resp_body = {"teacher": True}
 
         # If the user is a student (and has a related teacher) and the verification is still pending -> first login
         if user.get("teacher") and user.get("verification_pending"):
             self.db.update_user(user["username"], {"verification_pending": None})
-            resp = make_response({"first_time": True})
+            resp_body = {"first_time": True}
 
+        resp = make_response(resp_body)
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.

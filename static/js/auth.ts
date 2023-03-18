@@ -2,7 +2,7 @@ import { modal, tryCatchPopup } from './modal';
 import { join_class } from './teachers';
 import { showAchievements } from './app';
 import { localLoadOnce, localSave } from './local';
-import { postUrl, postJson } from './comm';
+import { postNoResponse, postJson } from './comm';
 
 const REDIRECT_AFTER_LOGIN_KEY = 'login-redirect';
 
@@ -58,7 +58,7 @@ function redirect(where: string) {
 // *** User POST without data ***
 
 export async function logout() {
-  await postUrl('/auth/logout');
+  await postNoResponse('/auth/logout');
   window.location.reload();
 }
 
@@ -66,21 +66,21 @@ export async function logout() {
 // As with the current flow one can destroy an account by "accidentally" making an empty POST to /auth/destroy
 export function destroy(confirmation: string) {
   modal.confirm (confirmation, async () => {
-    await postUrl('/auth/destroy');
+    await postNoResponse('/auth/destroy');
     redirect('');
   });
 }
 
 export function destroy_public(confirmation: string) {
   modal.confirm (confirmation, async () => {
-    await postUrl('/auth/destroy_public');
+    await postNoResponse('/auth/destroy_public');
     redirect ('my-profile');
   });
 }
 
 export async function request_teacher_account() {
   tryCatchPopup(async () => {
-    const response = await postUrl('/auth/request_teacher');
+    const response = await postJson('/auth/request_teacher');
     modal.notifySuccess(response.message);
     setTimeout (function () {location.reload ()}, 2000);
   });
@@ -92,7 +92,7 @@ export function initializeFormSubmits() {
   $('form#signup').on('submit', async function (e) {
     e.preventDefault();
     tryCatchPopup(async () => {
-      await postJson('/auth/signup', convertFormJSON($(this)));
+      await postNoResponse('/auth/signup', convertFormJSON($(this)));
       afterLogin({"first_time": true});
     });
   });

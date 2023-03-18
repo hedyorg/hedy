@@ -1,31 +1,32 @@
 /**
  * Post JSON, return the result on success, throw an exception on failure
  */
-export function postJson(url: string, data: any): Promise<any> {
+export function postJson(url: string, data?: any): Promise<any> {
   // FIXME: This should be using the fetch() API with keepalive: true, so
   // that it can submit a final save when the user leaves the page.
   return new Promise((ok, ko) => {
     $.ajax({
       type: 'POST',
       url,
-      data: JSON.stringify(data),
-      contentType: 'application/json',
+      ...(data ? { data: JSON.stringify(data) } : {}),
+      contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-    }).done(function (response: any) {
+    }).done((response: any) => {
       ok(response);
-    }).fail(function (err) {
+    }).fail((err) => {
       ko(ajaxError(err));
     });
   });
 }
 
-export function postUrl(url: string): Promise<any> {
-  return new Promise((ok, ko) => {
+export function postNoResponse(url: string, data?: any): Promise<void> {
+  return new Promise<void>((ok, ko) => {
     $.ajax ({
       type: 'POST',
       url,
-    }).done (function (response: any) {
-      ok(response);
+      ...(data ? { data: JSON.stringify(data) } : {}),
+    }).done (() => {
+      ok();
     }).fail((err) => {
       ko(ajaxError(err));
     });

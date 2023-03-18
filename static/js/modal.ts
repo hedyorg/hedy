@@ -253,6 +253,7 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
   try {
     return await cb();
   } catch (e: any) {
+    console.log('Error', e);
     modal.notifyError(e.message);
   }
 }
