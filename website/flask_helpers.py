@@ -3,7 +3,7 @@ import json
 from . import querylog
 
 import flask
-from jinja2 import Undefined, Markup
+from jinja2 import Undefined
 
 
 @querylog.timed

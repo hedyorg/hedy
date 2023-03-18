@@ -156,7 +156,8 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, limit=None, pagination_token=None):
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+                                   limit=None, pagination_token=None):
         ret = []
 
         # FIXME: Query by index, the current behavior is slow for many programs

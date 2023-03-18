@@ -1128,4 +1128,7 @@ class GetManyIterator(QueryIterator):
         super().__init__(pagination_token)
 
     def _do_fetch(self):
-        return self.table.get_many(self.key, reverse=self.reverse, limit=self.limit, pagination_token=self.pagination_token)
+        return self.table.get_many(self.key,
+                                   reverse=self.reverse,
+                                   limit=self.limit,
+                                   pagination_token=self.pagination_token)
