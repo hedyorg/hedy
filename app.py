@@ -261,6 +261,8 @@ def setup_language():
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation. Can be changed in the session by
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
+    if lang_from_request := request.args.get('language', None):
+        session['lang'] = lang_from_request
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
