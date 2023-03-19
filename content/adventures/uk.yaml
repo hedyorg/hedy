@@ -152,18 +152,18 @@ adventures:
                 start_code: '# розмістіть свій код тут'
             10:
                 story_text: "## Історія\nНа цьому рівні ви можете використовувати команду {for} у своїй історії. Таким чином ви можете легко запрограмувати дитячу книжку 'Бурий ведмедик, бурий ведмедик, що ти бачиш'.\n\n### Вправа\n\nПодивіться на <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\">історію</a> , якщо ви її не знаєте, і переконайтеся, що вона надрукована так, як у книжці.\n"
-                example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                start_code: '# place your code here'
+                example_code: "```\nзвіри = _ , _ , _\n{print} 'Бурий ведмідь, Бурий ведмідь'\n{print} 'Що ти бачиш?'\n```\n"
+                start_code: '# розмістіть свій код тут'
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable."
-                example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Історія\nНа цьому рівні лапки знадобляться для збереження кількох слів у змінній.\n\n### Вправа\n\nЗнайдіть історію з попереднього рівня, підійде будь-який рівень. Тепер переконайтеся, що лапки додані в потрібних місцях."
+                example_code: "```\nхто = 'Королева Англії'\n{print} хто ' їла шматок торта, як раптом...'\n```\n"
+                start_code: '# розмістіть свій код тут'
             13:
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
-                example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Історія\nВикористовуючи команди `{and}` та `{or}`, ви можете зробити свої історії більш універсальними. Ви можете поставити два запитання і відреагувати на комбінацію відповідей.\n\n### Вправа 1\nПодивіться на приклад коду і закінчіть його. Потім додайте ще принаймні 2 коди `{if}` з `{and}` або `{or}`.\n\n### Вправа 2\nЗнайдіть історію з попереднього рівня і додайте до неї один `{and}` або `{or}`.\n"
+                example_code: "```\n{print} 'Наша геройка йде лісом'\n{print} 'Стежка розділяється на дві частини'\nшлях = {ask} 'Яку стежку їй обрати?'\nзброя = {ask} 'Яку зброю вона витягне?'\n{if} шлях {is} 'лівий' {and} зброя {is} 'меч'\n    _\n```\n"
+                start_code: '# розмістіть свій код тут'
             15:
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
+                story_text: "## Історія\nВикористання циклу `{while}` може зробити ваші історії цікавішими. Наприклад, ви можете використати `{while} гра {is} 'продовжується'`, щоб гравець міг грати, доки гра не закінчиться.\nАбо ви можете використати `{while} меч {is} 'загублен'`, щоб гравець не міг продовжити гру, поки не знайде щось.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
                 start_code: '# place your code here'
         description: Створіть коротку історію
