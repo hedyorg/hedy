@@ -390,8 +390,8 @@ def set_security_headers(response):
 @app.teardown_request
 def teardown_request_finish_logging(exc):
     log_record = querylog.finish_global_log_record(exc)
-    if is_debug_mode():
-        logger.debug(repr(log_record.as_data()))
+    #if is_debug_mode():
+    #    logger.debug(repr(log_record.as_data()))
 
 
 # If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment

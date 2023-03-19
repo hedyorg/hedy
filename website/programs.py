@@ -169,13 +169,16 @@ class ProgramsModule(WebsiteModule):
         # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
 
+        print('A', program_public)
+
         if not program_id:
             # Legacy save mode: overwrite a program with the same name if it already exists
             # (Not sure when this is used)
             for program in self.db.programs_for_user(user["username"]):
                 if program["name"] == body["name"]:
                     program_id = program["id"]
-                    program_public = program.get("public", False)
+                    if program_public is None:
+                        program_public = program.get("public", False)
                     break
 
         if program_public:
@@ -190,6 +193,8 @@ class ProgramsModule(WebsiteModule):
                 error = True
                 if not body.get("force_save", True):
                     return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+
+        print('Going into logic')
 
         program = self.logic.store_user_program(
             program_id=program_id,
