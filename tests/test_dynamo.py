@@ -373,9 +373,6 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(ret, expected)
 
 
-
-
-
 class TestSortKeysAgainstAws(unittest.TestCase):
     """Test that the operations send out appropriate Dynamo requests."""
 
