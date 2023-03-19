@@ -1034,16 +1034,16 @@ adventures:
 
                     ### Opdracht 1
                     De dronken zeeman van level 16 staat hier als voorbeeldcode. Die is dus fout in dit level.
-                    Zorg jij dat alles weer werkt?
+                    Zorg jij dat alles weer werkt? Om je te helpen hebben we op de plekken van _sommige_ fouten een _ neergezet.
 
                     ### Opdracht 2
                     Zoek nu ook je OldMacDonald lied op uit level 16, en verbeter dat.
                 example_code: |
                     ```
                     coupletten = ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
-                    {for} couplet {in} coupletten
-                        {for} i {in} {range} 1 {to} 3
-                            {print} couplet
+                    {for} couplet {in} coupletten _
+                        {for} i {in} {range} 1 {to} 3 _
+                            {print} _ couplet _
                         {print} 's morgens in de vroegte'
                         {for} i {in} {range} 1 {to} 3
                             {print} 'HELA HUP! daar gaat ie!'

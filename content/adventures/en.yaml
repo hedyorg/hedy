@@ -735,6 +735,28 @@ adventures:
                     {print} 'Now you can enter the house!'
                     ```
                 start_code: "# place your code here"
+            18:
+                story_text: |
+                     ## Story
+                     We are going to print another story, but now we have to use brackets with `{print}`.
+
+                     ### Exercise 1
+                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                story_text_2: |
+                     ### Exercise 2
+                     We have already prepared an `{input}` for you. First, use the `name` variable in your story.
+                     Then add a second `{ask}` and use that variable as well.
+                     Tip: Remember the commas in a `{print}` between text and variables!
+                example_code: |
+                    ```
+                    {print}('Welcome to this story!')
+                    ```
+                example_code_2: |
+                    ```
+                    naam = {input}("What's your name?")
+                    {print}('Welcome to this story!')
+                    ```
+                start_code: "# Schrijf jouw code hier"
     years:
         name: "New Year's"
         description: "Countdown to the New Year!"
@@ -1045,6 +1067,29 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: "# place your code here"
+            18:
+                story_text: |
+                    ## Sing a song!
+                    In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
+
+                    ### Exercise 1
+                    The Drunken sailor song is given as sample code, but not yet working.
+                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
+
+                    ### Exercise 2
+                    Now also look up your Old MacDonald song from level 16, and correct it.
+                example_code: |
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines _
+                        {for} i {in} {range} 1 {to} 3 _
+                            {print} _ line _
+                        {print} 'early in the morning'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
+                start_code: "# Schrijf jouw code hier"
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
