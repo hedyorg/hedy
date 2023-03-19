@@ -75,7 +75,7 @@ levels:
             story: |
                 Crea una lotería que te permita elegir un premio extra que puedas ganar.
             code: |-
-                premios {is} carro, hamster, 1 millón de euros
+                premios {is} coche, hamster, 1 millón de euros
                 premio {is} {ask} '¿Qué te gustaría ganar?'
                 {add} premio {to_list} premios
                 {print} 'Ganaste un ' premios {at} {random}

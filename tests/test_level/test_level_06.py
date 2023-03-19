@@ -586,6 +586,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -688,6 +689,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -700,6 +702,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -712,6 +715,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -772,6 +776,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -780,7 +785,8 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.CyclicVariableDefinitionException
+            exception=hedy.exceptions.CyclicVariableDefinitionException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     #
