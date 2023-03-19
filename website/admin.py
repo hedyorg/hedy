@@ -3,7 +3,7 @@ from flask_babel import gettext
 
 import hedyweb
 import utils
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website import statistics
 from website.auth import (
     create_verify_link,
@@ -122,6 +122,7 @@ class AdminModule(WebsiteModule):
             keyword_language_filter=keyword_language,
             next_page_token=users.next_page_token,
             current_page="admin",
+            javascript_page_options=dict(page='admin-users'),
         )
 
     @route("/classes", methods=["GET"])
@@ -169,7 +170,12 @@ class AdminModule(WebsiteModule):
     @route("/stats", methods=["GET"])
     @requires_admin
     def get_admin_stats_page(self, user):
-        return render_template("admin/admin-stats.html", page_title=gettext("title_admin"), current_page="admin")
+        return render_template("admin/admin-stats.html",
+                               page_title=gettext("title_admin"),
+                               current_page="admin",
+                               javascript_page_options=dict(
+                                   page='admin-stats',
+                               ))
 
     @route("/logs", methods=["GET"])
     @requires_admin

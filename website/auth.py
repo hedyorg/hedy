@@ -94,18 +94,28 @@ def password_hash(password, salt):
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def remember_current_user(db_user):
     session["user-ttl"] = times() + 5 * 60
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "classes")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
 
 def pick(d, *requested_keys):
-    return {key: d.get(key, None) for key in requested_keys}
+    return {key: force_json_serializable_type(d.get(key, None)) for key in requested_keys}
+
+
+def force_json_serializable_type(x):
+    """Turn the given value into something that can be stored in a session.
+
+    May not be the same type, but it'll be Close Enough(tm).
+    """
+    if isinstance(x, set):
+        return list(x)
+    return x
 
 
 # Retrieve the current user from the Flask session.
 #
-# If the current user is to old, as determined by the time-to-live, we repopulate from the database.
+# If the current user is too old, as determined by the time-to-live, we repopulate from the database.
 def current_user():
     now = times()
     user = session.get("user", {"username": "", "email": ""})

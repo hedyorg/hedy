@@ -3,88 +3,113 @@
 {% block full_width_content %}
 {% if not raw %}
 <div id="level-header" class="bg-blue-200">
-  <div class="ltr:pl-8 rtl:pr-8 py-2 flex items-center w-full max-w-screen-2xl mx-auto">
-    <div class="tracking-wide text-xl font-extralight py-2 ltr:mr-8 rtl:ml-8 mt-1 whitespace-nowrap">
+  <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
+    <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
       {{ _('level_title') }} {{ level_nr }}
       &nbsp;
       {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
     </div>
-    <div class="w-full flex flex-wrap items-center justify-end ltr:ml-auto rtl:mr-auto gap-2 ltr:mr-4 rtl:ml-4">
-      <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
-      <input type="submit" id="save_program_button" class="green-btn cursor-pointer" value="{{_('save_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_active_and_trimmed_code(), false);">
-      <input type="submit" id="share_program_button" class="green-btn cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_active_and_trimmed_code(), true);">
-      {% if tutorial %}
-          <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
-      {% endif %}
-      {% if not hide_cheatsheet and cheatsheet %}
-        <div class="dropdown relative">
-              <button class="green-btn font-semibold rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button" onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
-                  <span>{{ "🤔" }}</span>
-                  <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
-              </button>
-            <div class="dropdown-menu dropdown-green z-20 mt-2" id="cheatsheet_dropdown" style="display: none; padding: 0px !important;">
-                <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
-                {% for example in cheatsheet %}
-                  <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-green-500">
-                    <div class="flex-grow h-min min-w-80" tabindex=0>
-                      {{ example.explanation|commonmark }}
-                    </div>
-                    <div class="flex-none">
-                      <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}" onclick='hedyApp.tryPaletteCode({{example.demo_code|default(None)|tojson}});'>
-                        <span class="rtl:hidden">⇥</span>
-                        <span class="ltr:hidden">⇤</span>
-                      </button>
-                    </div>
-                  </div>
-                {% endfor %}
-            </div>
+    <div class="flex-1">
+      <div id="program_name_container" class="flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
+        <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full py-1" value="{{initial_adventure.save_name}}">
+        <button id="share_program_button" class="h-full" title="Share your program">
+          <span class="fa-solid fa-arrow-up-from-bracket text-2xl p-2 px-4 w-14 text-blue-500"></span>
+        </button>
+        <button id="hand_in_button" class="h-full" title="Hand in your assignment">
+          <span class="fa-regular fa-paper-plane text-2xl p-2 px-4 w-14 text-blue-500"></span>
+        </button>
+      </div>
+    </div>
+    {% if tutorial %}
+    <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
+    {% endif %}
+    {% if not hide_cheatsheet and cheatsheet %}
+    <div class="dropdown relative">
+      <button class="green-btn font-semibold rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
+        onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
+        <span>{{ "🤔" }}</span>
+        <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </button>
+      <div class="dropdown-menu dropdown-green z-20 mt-2" id="cheatsheet_dropdown"
+        style="display: none; padding: 0px !important;">
+        <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
+        {% for example in cheatsheet %}
+        <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-green-500">
+          <div class="flex-grow h-min min-w-80" tabindex=0>
+            {{ example.explanation|commonmark }}
+          </div>
+          <div class="flex-none">
+            <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}"
+              onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
+              <span class="rtl:hidden">⇥</span>
+              <span class="ltr:hidden">⇤</span>
+            </button>
+          </div>
         </div>
+        {% endfor %}
+      </div>
+    </div>
     {% endif %}
     {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
       <div class="dropdown relative">
-          <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
-                  <span class="fa-solid fa-language"></span>
-                  <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
-          </button>
-          <div class="dropdown-menu dropdown-green z-20 mt-2" id="commands_dropdown" {% if not request.args.get('keyword_language') %}style="display: none;"{% endif %}>
-                <h2 class="px-4 pt-2">{{_('commands')}}</h2>
-                <!-- If the current language is non-english and supports keywords: show a two column table -->
-                <table class="mx-4 my-2" cellpadding="4">
-                  <thead>
-                      <tr class="text-center text-lg">
-                          <td class="ltr:text-right rtl:text-left pb-2">{{_('english')}}</td>
-                          <td id="keyword_toggle_container" class="pb-2">
-                              <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer" data-cy="kwlang-switch-toggle">
-                                  <div class="relative flex w-full">
-                                      <input id="keyword_toggle" type="checkbox" {% if ((g.keyword_lang != "en" and not request.args.get('keyword_language')) or (request.args.get('keyword_language') and request.args.get('keyword_language') != "en")) %}checked{% endif %} onclick="hedyApp.toggle_keyword_language('{% if ((g.keyword_lang != "en" and not request.args.get('keyword_language')) or (request.args.get('keyword_language') and request.args.get('keyword_language') != "en")) %}en{% else %}{{g.lang}}{% endif %}')" class="sr-only" />
-                                      <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-                                      <div class="toggle-circle absolute w-4 h-4 bg-green-600 rounded-full shadow transition"></div>
-                                  </div>
-                              </label>
-                          </td>
-                          <td class="ltr:text-left rtl:text-right pb-2">{{ current_language().sym }}</td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for command in commands %}
-                          <tr>
-                              <td class="ltr:text-right rtl:text-left"><code>{{ command }}</code></td>
-                              <td class="text-center">⟷</td>
-                              <td class="ltr:text-left rtl:text-right"><code>{{  translate_command(command) }}</code></td>
-                          </tr>
-                      {% endfor %}
-                  </tbody>
-                </table>
-          </div>
+        <button class="green-btn font-semibold rounded inline-flex items-center gap-2"
+          onclick="$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
+          <span class="fa-solid fa-language"></span>
+          <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </button>
+        <div class="dropdown-menu dropdown-green z-20 mt-2" id="commands_dropdown" {% if not
+          request.args.get('keyword_language') %}style="display: none;" {% endif %}>
+          <h2 class="px-4 pt-2">{{_('commands')}}</h2>
+          <!-- If the current language is non-english and supports keywords: show a two column table -->
+          <table class="mx-4 my-2" cellpadding="4">
+            <thead>
+              <tr class="text-center text-lg">
+                <td class="ltr:text-right rtl:text-left pb-2">{{_('english')}}</td>
+                <td id="keyword_toggle_container" class="pb-2">
+                  <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer"
+                    data-cy="kwlang-switch-toggle">
+                    <div class="relative flex w-full">
+                      <input id="keyword_toggle" type="checkbox" {% if ((g.keyword_lang !="en" and not
+                        request.args.get('keyword_language')) or (request.args.get('keyword_language') and
+                        request.args.get('keyword_language') !="en" )) %}checked{% endif %}
+                        onclick="hedyApp.toggle_keyword_language('{% if ((g.keyword_lang != " en" and not
+                        request.args.get('keyword_language')) or (request.args.get('keyword_language') and
+                        request.args.get('keyword_language') !="en" )) %}en{% else %}{{g.lang}}{% endif %}')"
+                        class="sr-only" />
+                      <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                      <div class="toggle-circle absolute w-4 h-4 bg-green-600 rounded-full shadow transition"></div>
+                    </div>
+                  </label>
+                </td>
+                <td class="ltr:text-left rtl:text-right pb-2">{{ current_language().sym }}</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for command in commands %}
+              <tr>
+                <td class="ltr:text-right rtl:text-left"><code>{{ command }}</code></td>
+                <td class="text-center">⟷</td>
+                <td class="ltr:text-left rtl:text-right"><code>{{  translate_command(command) }}</code></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     {% endif %}
-    </div>
-  </div>
+  </div> <!-- container -->
 </div><!-- blue bar -->
 {% endif %}
 
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>
+
+{% include 'incl/share-modal.html' %}
+{% include 'incl/hand-in-modal.html' %}
 
 {% endblock %}
