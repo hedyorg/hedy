@@ -390,8 +390,8 @@ def set_security_headers(response):
 @app.teardown_request
 def teardown_request_finish_logging(exc):
     log_record = querylog.finish_global_log_record(exc)
-    # if is_debug_mode():
-    #    logger.debug(repr(log_record.as_data()))
+    if is_debug_mode():
+        logger.debug(repr(log_record.as_data()))
 
 
 # If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment
@@ -1290,6 +1290,7 @@ def get_specific_adventure(name, level, mode):
                            current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
+
                                page='code',
                                lang=g.lang,
                                level=level,
