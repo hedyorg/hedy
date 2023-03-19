@@ -1070,7 +1070,8 @@ class QueryIterator:
         self.i += 1
         if self.i >= len(self.page) and self.page.next_page_token:
             self.pagination_token = self.page.next_page_token
-            if self.pagination_token is None: self.have_eof = True
+            if self.pagination_token is None:
+                self.have_eof = True
 
             # Reset self.page, so we don't retrieve the next page unnecessarily
             # but the next lookup will fetch it
