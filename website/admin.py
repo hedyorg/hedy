@@ -173,7 +173,7 @@ class AdminModule(WebsiteModule):
                                page_title=gettext("title_admin"),
                                current_page="admin",
                                javascript_page_options=dict(
-                                page='admin-stats',
+                                   page='admin-stats',
                                ))
 
     @route("/logs", methods=["GET"])
