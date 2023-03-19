@@ -10,7 +10,7 @@
             </div>
             {# image for large screens #}
             <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
-                {% if no-image %}
+                {% if not custom_logo %}
                     <div id="logo-code-overlay" class="absolute z-10 text-4xl h-full flex gap-4 items-center justify-center translate-y-6" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
                         <span style="color: #ff6188;">{{_('print')}}</span>
                         <span class="text-white">{{_('hello!')}}</span>
