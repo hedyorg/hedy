@@ -64,6 +64,7 @@ class TestsLevel11(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=15,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_for_loop_with_string_var_gives_type_error(self):
@@ -76,6 +77,7 @@ class TestsLevel11(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=16,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_for_loop_multiline_body(self):
