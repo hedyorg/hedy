@@ -39,6 +39,7 @@ async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
       ...(data ? { body: JSON.stringify(data) } : {}),
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json; charset=utf-8',
       },
     });
   } catch (err: any) {

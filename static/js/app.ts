@@ -609,8 +609,12 @@ export async function pushAchievement(achievement: string) {
   }
   ACHIEVEMENTS_PUSHED[achievement] = true;
 
-  const response = await postJsonWithAchievements('/achievements/push-achievement', { achievement });
-  showAchievements(response.achievements, false, "");
+  try {
+    const response = await postJson('/achievements/push-achievement', { achievement });
+    showAchievements(response.achievements, false, "");
+  } catch {
+    // This might fail commonly with a 403 (not logged in). Ignore any errors anyway.
+  }
 }
 
 export function closeAchievement() {
