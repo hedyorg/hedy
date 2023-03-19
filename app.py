@@ -1223,6 +1223,7 @@ def get_specific_adventure(name, level, mode):
                            adventures=adventures,
                            latest=version(),
                            raw=raw,
+                           menu=not raw,
                            blur_button_available=False,
                            # See initialize.ts
                            javascript_page_options=dict(

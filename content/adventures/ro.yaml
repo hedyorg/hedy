@@ -152,6 +152,8 @@ adventures:
                 start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
                 story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
@@ -165,8 +167,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         default_save_name: Turtle
     dishes:
@@ -371,6 +372,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# place your code here'
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Calculator
         description: Create a calculator
         default_save_name: Calculator
@@ -500,9 +505,7 @@ adventures:
                 story_text_3: "## Liste\nCând vrem să verificăm dacă ceva există într-o listă, acum putem folosi comanda `{in}`.\nAcest cod afișează frumos! daca alegi verde sau galben, iar altfel așa și-așa.\n"
                 example_code_3: "```\nculori_frumoase {is} verde, galben\nculoare_preferată {is} {ask} 'Care este culoarea ta preferată?'\n{if} culoare_preferată {in} culor_frumoase {print} 'frumos!'\n{else} {print} 'așa și-așa'\n```\n"
                 story_text_2: "Uneori, codul cu un `{if}` devine foarte lung și nu se potrivește bine pe linie. <br> Poți împărți codul pe două linii, începând cu a doua linie cu `{else}` astfel:\n"
-                story_text_4: "Un alt lucru care funcționează cu `{if}` este `{pressed}`! Cu `{pressed}` poți lega orice literă din alfabet și orice tastă numerică de pe tastatură la o comandă. Dacă le legi și apoi apeși tasta, se va întâmpla ceva. Încercați!\n"
                 example_code_2: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos'\n{else} {print} 'huo!'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'a funcționat!'\n```\n"
             6:
                 start_code: "{print} '5 ori 5 face ' 5 * 5"
                 story_text: "## 1 + 1\n În acest nivel înveți ceva nou: acum poți face și calcule aritmetice.\n\n Plusul este ușor, se scrie ca la matematică: de exemplu `5 + 5`. Minusul funcționează și el la fel de bine, este `5 - 5`.\n\n Cu înmulțirea este un pic diferit, deoarece nu există simbolul de înmulțire pe tastatură. Caută-l, chiar nu există!\n De aceea înmulțim cu asteriscul de deasupra lui 8: `5 * 5`. Citește asta ca \"5 ori 5\", te va ajuta să o reții mai ușor.\n"
@@ -733,7 +736,7 @@ adventures:
                 example_code: |
                     simbol = 'x'
                     locuri = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-                    
+
                     {for} i in {range} 1 {to} 9
                         alegere = {ask} 'Player ' simbol ' what spot do you choose?'
                         locuri at alegere = player

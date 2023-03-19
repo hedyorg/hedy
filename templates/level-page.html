@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block full_width_content %}
+{% if not raw %}
 <div id="level-header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex items-center w-full max-w-screen-2xl mx-auto">
     <div class="tracking-wide text-xl font-extralight py-2 ltr:mr-8 rtl:ml-8 mt-1 whitespace-nowrap">
@@ -80,6 +81,8 @@
     </div>
   </div>
 </div><!-- blue bar -->
+{% endif %}
+
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>

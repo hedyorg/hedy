@@ -99,5 +99,5 @@ class TestsTranslationLevel4(HedyTester):
             code=code,
             max_level=11,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(ask)
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2 and self.exception_command(ask)
         )
