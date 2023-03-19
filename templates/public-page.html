@@ -1,8 +1,8 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-    <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
-        <div class="w-1/3 mr-4 h-full flex items-center justify-center">
+    <div id="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
+        <div class="h-full flex items-center justify-center">
             <div class="container flex flex-col items-center">
                 {% if user_info.image %}
                     <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
@@ -16,9 +16,9 @@
                 {% endif %}
             </div>
         </div>
-        <div class="flex flex-col gap-1 w-full h-full">
+        <div class="flex flex-col gap-1 w-full h-full max-w-3xl md:justify-center">
             {% if user_info.tags %}
-                <div class="flex flex-row mx-2 gap-2">
+                <div class="w-full flex flex-row mx-2 gap-2">
                     {% for tag in user_info.tags %}
                         <!-- Todo TB: Might be nice to automate this a bit in the future (works fine for now) 08-22 -->
                         {% if tag == "teacher" %}
@@ -35,8 +35,8 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
-                <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+            <div class="w-full bg-blue-200 flex flex-col rounded-lg border border-black">
+                <div class="w-full h-12 flex flex-row items-center bg-blue-600 rounded-t-lg px-4 font-medium">
                     <div class="text-white tracking-wide text-4xl">{{user_info.username[0]|upper}}{{user_info.username[1:]}}</div>
                     {% if user_achievements['achieved'] and 'hedy_certificate' in user_achievements['achieved'] %}
                         <div class="text-white tracking-wide text-4xl">👑</div>
@@ -46,29 +46,29 @@
                     {% endif %}
                 </div>
                 {% if user_info.personal_text %}
-                    <div class="my-auto px-16 text-xl italic" rel="noreferrer">
+                    <div class="my-4 px-8 text-xl italic flex flex-col justify-center h-full" rel="noreferrer">
                         {{ user_info.personal_text }}
                     </div>
                 {% endif %}
                 {% if achievements %}
                     <div class="mt-auto">
-                        <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
+                        <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
                             {% if user_achievements.run_programs %}
-                                <div>{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
+                                <div class="profile-nametag__stats">{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
                             {% else %}
-                                <div>0 {{_('amount_created')}}</div>
+                                <div class="profile-nametag__stats">0 {{_('amount_created')}}</div>
                             {% endif %}
-                            <div class="mx-2">|</div>
+                            <div class="h-8 w-px border-r border-white relative"></div>
                             {% if user_achievements.saved_programs %}
-                                <div>{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
+                                <div class="profile-nametag__stats">{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
                             {% else %}
-                                <div>0 {{_('amount_saved')}}</div>
+                                <div class="profile-nametag__stats">0 {{_('amount_saved')}}</div>
                             {% endif %}
-                            <div class="mx-2">|</div>
+                            <div class="h-8 w-px border-r border-white relative"></div>
                             {% if user_achievements.submitted_programs %}
-                                <div>{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
+                                <div class="profile-nametag__stats">{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
                             {% else %}
-                                <div>0 {{_('amount_submitted')}}</div>
+                                <div class="profile-nametag__stats">0 {{_('amount_submitted')}}</div>
                             {% endif %}
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             </div>
         </div>
         {% if last_achieved %}
-        <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
+        <div class="text-center rounded-lg bg-yellow-400 aspect-[2/3] h-64 border border-black self-center">
             <h3>{{_('last_achievement')}}</h3>
             <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}" alt="{{_('achievements_logo_alt')}}">
             <h4>{{ achievements[last_achieved].title }}</h4>
