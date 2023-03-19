@@ -1809,5 +1809,6 @@ def tearDownModule():
         auth_helper.given_specific_user_is_logged_in(username)
         auth_helper.destroy_current_user()
 
+
 def remove_keys(dct, *keys):
     return {k: v for k, v in dct.items() if k not in keys}
