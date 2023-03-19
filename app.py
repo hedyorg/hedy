@@ -1286,6 +1286,7 @@ def get_specific_adventure(name, level, mode):
                            initial_adventure=initial_adventure,
                            latest=version(),
                            raw=raw,
+                           menu=not raw,
                            blur_button_available=False,
                            current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts

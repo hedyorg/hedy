@@ -46,3 +46,16 @@ describe('The view program page', () => {
       .and('have.class', 'ace_keyword');
   })
 })
+
+describe('The raw program page', () => {
+  beforeEach(() => {
+    cy.visit('/adventure/story/1/raw');
+  });
+
+  it('has syntax highlighting', () => {
+    cy.get('#editor')
+      .contains('print')
+      .should('be.visible')
+      .and('have.class', 'ace_keyword');
+  });
+});

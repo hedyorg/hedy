@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block full_width_content %}
+{% if not raw %}
 <div id="level-header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
@@ -102,6 +103,8 @@
     {% endif %}
   </div> <!-- container -->
 </div><!-- blue bar -->
+{% endif %}
+
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>

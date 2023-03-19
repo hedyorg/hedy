@@ -315,11 +315,12 @@ class TestsLevel17(HedyTester):
 
     def test_if_in_list_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
-    items is 'red'
-    if 'red' in items:
-        a is 1""")
+        items is 'red'
+        if 'red' in items:
+            a is 1""")
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -349,6 +350,7 @@ class TestsLevel17(HedyTester):
       c is 1""")
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidTypeCombinationException
         )
 
@@ -381,6 +383,7 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -429,6 +432,7 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=exceptions.InvalidTypeCombinationException
         )
 
