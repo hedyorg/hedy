@@ -1474,62 +1474,6 @@ adventures:
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
                 example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
                 start_code: '# place your code here'
-    pressit:
-        levels:
-            14:
-                start_code: '# 把你的代码放在这里'
-                story_text: "现在你学会了如何使用运算符，我们也可以用`{pressed}`!\n想象一下，海龟能够向前做一个超级跳跃动作。\n通过按`p` ，海龟可以做一个超级跳跃动作!\n但是，海龟只能每走5步或每旋转4次后再做一次跳跃动作。\n"
-                example_code: "```\n步长 = 15\n向左 = -90\n向右 = 90\n向后 = 180\n跳跃次数 = 5\n旋转次数 = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 步长\n        跳跃次数 = 跳跃次数 - 1\n    {if} s {is} {pressed}\n        {turn} 向后\n    {if} a {is} {pressed}\n        {turn} 向左\n        旋转次数 = 旋转次数- 1\n    {if} d {is} {pressed}\n        {turn} 向右\n        旋转次数 = 旋转次数 - 1\n    {if} p {is} {pressed}\n        {if} 跳跃次数 <= 0 {or} 旋转次数 <= 0\n            {forward} 步长 * 3\n            跳跃次数 = 5\n            旋转次数 = 4\n```\n"
-            15:
-                story_text: "现在你已经了解了`{while}` 循环语句，你可以开始在海龟身上使用它了!\n海龟现在只允许走15步或转15次，然后就会耗尽体力值。\n试着在海龟体力值耗尽之前让它走得越远越好！你可以在它走5步或者旋转2次后使用超级跳跃。\n"
-                start_code: '# 把你的代码放在这里'
-                example_code: "```\n步长 = 15\n向左 = -90\n向右 = 90\n向后 = 180\n跳跃次数 = 5\n旋转次数 = 2\n体力值= 15\n{while} 体力值 > 0\n    {if} w {is} {pressed}\n        {forward} 步长\n        跳跃次数 = 跳跃次数 - 1\n    {if} s {is} {pressed}\n        {turn}向后\n    {if} a {is} {pressed}\n        {turn} 向左\n        旋转次数 = 旋转次数 - 1\n    {if} d {is} {pressed}\n        {turn} 向右\n        旋转次数 = 旋转次数 - 1\n    {if} p {is} {pressed}\n        {if} 跳跃次数 <= 0 {or} 旋转次数 <= 0\n            {forward}步长*4\n            跳跃次数 = 5\n            旋转次数= 2\n    体力值 = 体力值 - 1\n```\n"
-            16:
-                start_code: '# 把你的代码放在这里'
-                story_text: "让我们玩扭扭乐的游戏来活动一下吧!\n当每个人都准备好后，按x键做下一个动作!\n"
-                example_code: "```\n四肢 = ['右手'、'左手'、'右脚'、'左脚']\n颜色 = ['蓝色'、'绿色'、'红色'、'黄色']\n{repeat} 20 {times}\n    s= 四肢[{random}]\n    y = 颜色[{random}]\n    {if} x {is} {pressed}\n        {print} s + ' 放在 ' + y + '上！'\n```\n"
-            12:
-                example_code: "```\n选择 = '你选择了选项：'\n{print} '一只野生鼠出现了！'\n{print} '选择一个选项并按下代表第一个字母的按键：(n)et网, (c)at猫, (b)ag包, (r)un跑'\n{if} w {is} {pressed}\n    {print} 选择+'网'\n    {print} '你试图用网子抓住老鼠..'\n    {sleep}\n    {print} '恭喜你成功了！'\n{if} m {is} {pressed}\n    {print} 选择+'猫'\n    {print} '你放出了你的猫'\n    {sleep}\n    {print} '老鼠害怕了，跑了！'\n{if} b {is} {pressed}\n    {print} 选择+'包'\n    {print} '老鼠跳进了你的包里！'\n{if} p {is} {pressed}\n    {print} 选择+'跑'\n    {print} '你安全的逃走了！'\n```\n"
-                start_code: '# 在这里写你的代码'
-                story_text: "你对电子游戏熟悉吗？你走到高高的草丛中，突然被一只非常可疑的老鼠接近。\n你会怎么做呢？\n在本级中，我们将制作一个有不同选项的小菜单。\n将文本存储到一个变量中这样对于重复使用是相当方便的。\n选项，我选你!\n"
-            13:
-                story_text: "现在你已经学会了如何使用`{and}` 和`{or}` ，我们也会用`{pressed}`啦!\n想象一下，海龟能够向前做一个超级跳跃。\n通过按`p`字母键，海龟可以做一个超级跳跃！\n然而，海龟只有在首先向左和向右转的情况下才能做这个跳跃动作!\n"
-                start_code: '# 在这里写你的代码'
-                example_code: "```\n步长 = 10\n向左 = -90\n向右 = 90\n向后 = 180\n向左看 = 0\n向右看 = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 步长\n    {if} s {is} {pressed}\n        {turn} 向后\n    {if} a {is} {pressed}\n        {turn} 向左\n        向左看= 1\n    {if} d {is} {pressed}\n        {turn} 向右\n        向右看 = 1\n    {if} p {is} {pressed}\n        {if} 向左看 {is} 1 {and} 向右看 {is} 1\n            {forward} 40\n            向左看 = 0\n            向右看= 0\n```\n"
-            17:
-                story_text: "现在你已经学会了如何使用 `{elif}`，我们也可以将其与 `{pressed}` 一起使用！请注意，不能这样一起使用`{elif} ... {is} {pressed}`！这就是为什么我们要在 `{pressed}` 选项中嵌套一些 `{elif}` 语句。我们还必须在代码中添加冒号 `:` 才能使一切正常工作！想象一下，海龟能够向前做一个超级跳跃动作。通过按`p`，海龟可以做一个超级跳跃动作！但是，只能每走5 步或每转4次跳一次。\n"
-                example_code: "```\n步长 = 15\n向左 = -90\n向右 = 90\n向后 = 180\n跳跃次数 = 5\n旋转次数 = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}:\n        {forward} 步长\n        跳跃次数 = 跳跃次数 - 1\n    {if} s {is} {pressed}:\n        {turn} 向后\n    {if} a {is} {pressed}:\n        {turn} 向左\n        旋转次数 = 旋转次数 - 1\n    {if} d {is} {pressed}:\n        {turn} 向右\n        旋转次数 = 旋转次数 - 1\n    {if} p {is} {pressed}:\n        {if} 跳跃次数 <= 0 {or} 旋转次数 <= 0:\n            {forward} 步长 * 3\n            跳跃次数 = 5\n            旋转次数 = 4\n        {elif} 跳跃次数 > 0:\n            {print} '你需要先多走几步或旋转，才能进行超级跳跃！'\n```\n"
-                start_code: '# 把你的代码放在这里'
-            11:
-                story_text: "现在你已经了解了`{for} ... {in} {range} ... {to} ...`规则，你也可以把它用于`{pressed}`！例如，尝试让海龟移动！每次按下相关的按钮时，海龟都会长大。 \n这样海龟每走一步都可以走得更远！\n"
-                example_code: "```\n向左 =-90\n向右 = 90\n向后 =180\n{for} 计数器 {in} {range} 1 {to} 15\n    步长 = 计数器 * 5\n    {if} w {is} {pressed}\n        {forward} 步长\n    {if} s {is} {pressed}\n        {turn} 向后\n    {if} a {is} {pressed}\n        {turn} 向左\n    {if} d {is} {pressed}\n        {turn} 向右\n```\n"
-                start_code: '# 在这里写你的代码'
-            9:
-                start_code: '# 把你的代码放在这里'
-                story_text: "## 触摸式游戏\n现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
-                example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
-            10:
-                story_text: "在这一关中，你可以让乌龟给你画一个图。乌龟已经跃跃欲试了。\n按下键盘上的x或y键，给乌龟一个开始的信号。\n你能让乌龟给你画出另一个图形吗？\n"
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
-                start_code: '# 把你的代码放在这里'
-            5:
-                story_text: "## 按下它!\n在介绍中，我们还告诉你新的关键词`{pressed}`! \n使用`{pressed}` ，可以使编码的互动性更强，你可以对执行的内容进行实时控制！\n在下一个的级别中，你将了解到`{pressed}` 是如何实现这一目标的，以及`{pressed}` 有哪些用途。\n除了打印文本之外，还有很多其他的用途。`{pressed}`\n例如，你还可以将海龟命令与按键联系起来！你可以尝试一下。试试吧!\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text_2: "## 用if, Else  和Pressed指定一个按键\n你也可以将一个`{else}` 语句指定给`{pressed}` 。只要你按下一个你指定的按键以外的按键，`{else}` 语句就会被执行。\n"
-                example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# 把你的代码放在这里'
-            6:
-                story_text: "你知道你也可以用`{pressed}` 做一个计算器吗？\n给计算器两个数字，然后按m键进行乘法运算。\n现在你不用再带自己的计算器了!\n试试其他的键，看看会发生什么？你会得到不同的结果吗？\n"
-                example_code: "```\n数一 = {ask} '你的第一个数字是多少？'\n数二 = {ask} '你的第二个数字是多少？'\n{print} '按a加，s减，d除，m乘'\n{if} a {is} {pressed} 计算结果 = 数一 + 数二\n{if} s {is} {pressed} 计算结果 = 数一 - 数二\n{if} d {is} {pressed} 计算结果 = 数一 / 数二\n{if} m {is} {pressed} 计算结果 = 数一 * 数二\n{print} '答案是 ' 计算结果\n```\n"
-                start_code: '# 把你的代码放在这里'
-            7:
-                story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-                start_code: '# 把你的代码放在这里'
-
-        default_save_name: 报道
-        name: 按键
-        description: 试试把键盘键和命令联系起来吧！
     years:
         name: 新年
         description: 新年倒计时!
