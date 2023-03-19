@@ -62,6 +62,13 @@ class ProgramsLogic:
             updates['public'] = 1 if set_public else 0
 
         if program_id:
+            # FIXME: This should turn into a conditional update
+            current_prog = self.db.program_by_id(program_id)
+            if not current_prog:
+                raise RuntimeError(f'No program with id: {program_id}')
+            if current_prog['username'] != updates['username']:
+                raise RuntimeError('Cannot overwrite other user\'s program')
+
             program = self.db.update_program(program_id, updates)
         else:
             updates['id'] = uuid.uuid4().hex

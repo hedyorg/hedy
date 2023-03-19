@@ -355,13 +355,13 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
 
         expected = [dict(id='key', sort=i + 1) for i in range(N)]
 
-        # Query everything at once
+        # Query everything at once, using the Python iterator protocol
         self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'))), expected)
 
-        # Query paginated
+        # Query paginated, using the Python iterator protocol
         self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), limit=3)), expected)
 
-        # Reuse the client-side pager every time
+        # Reuse the client-side pager every time, using the Python iterator protocol
         ret = []
         token = None
         while True:
@@ -372,8 +372,13 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
                 break
         self.assertEqual(ret, expected)
 
-
-
+        # Also test using the eof/current/advance protocol
+        ret = []
+        many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+        while many:
+            ret.append(many.current)
+            many.advance()
+        self.assertEqual(ret, expected)
 
 
 class TestSortKeysAgainstAws(unittest.TestCase):

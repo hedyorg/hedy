@@ -202,9 +202,9 @@ class Database:
 
         Add an additional indexable field: 'username_level'.
         """
-        program = dict(program,
-                       username_level=f"{program.get('username')}-{program.get('level')}")
-        PROGRAMS.create(program)
+        PROGRAMS.create(
+            dict(program,
+                 username_level=f"{program.get('username')}-{program.get('level')}"))
 
         return program
 
@@ -375,7 +375,7 @@ class Database:
             # I don't really care.
             for flt in filters:
                 while flt and flt.current['date'] > program['date']:
-                    flt.next()
+                    flt.advance()
 
             # Include the current program in the result set if it is now the front item in each filter.
             if all((flt and flt.current['id'] == program['id']) for flt in filters):
