@@ -2,7 +2,7 @@ levels:
     5:
         2:
             story: "Crea un joc de matemàtiques.\n"
-            code: "{print} \"Resol aquest problema\"\nrespon {is} {ask} '88 - 16 = ?'\n{if} resposta {is} 72 {print} \"Correcte!\"\n{else} {print} \"Incorrecte! La resposta era 72'"
+            code: "{print} 'Resol aquest problema'\nrespon {is} {ask} '88 - 16 = ?'\n{if} resposta {is} 72 {print} 'Correcte!'\n{else} {print} 'Incorrecte! La resposta era 72'"
         1:
             story: "Feu un programa que comprove si la vostra pel·lícula preferida ja és a la llista de l'ordinador.\nSi és així, imprimiu que teniu un bon gust, en cas contrari, afegiu la pel·lícula a la llista.\n"
             code: "pelicules_preferides {is} Batman, Spiderman, The Avengers, Jurassic Park\npel·lícula {is} {ask} \"Quina és la teva pel·lícula preferida?\"\n{if} pel·lícula {in} pelicules_preferides {print} \"Teniu molt bon gust!\"\n{else} {print} \"Llàstima que la teva pel·lícula preferida no estigui a la llista, l'afegirem de seguida!\"\n{add} pel·lícula {to_list} pelicules_preferides"
@@ -30,7 +30,7 @@ levels:
     2:
         1:
             story: "Tu i els teus amics veureu Netflix.\nMostra quina pel·lícula estàs a punt de veure i desitja molta diversió als espectadors!\n"
-            code: "{print} És hora d'una nit de Netflix\nla pel·lícula {is} Sonic the Hedgehog 2\n{print} Veurem una pel·lícula\n{print} Diverteix-te molt!"
+            code: "{print} És hora d'una nit de Netflix\nla pellícula {is} Sonic the Hedgehog 2\n{print} Veurem una pellícula\n{print} Diverteix-te molt!"
         2:
             story: "Aquesta és la botiga web d'una botiga de joguines. Creeu un programa on els clients puguin afegir un article al seu carretó de la compra.\n"
             code: "{print} Benvingut a la nostra botiga de joguines\njoguina {is} {ask} Què t'agradaria comprar?\n{print} La joguina s'afegeix a la cistella de la compra.\n{print} Gràcies per comprar amb nosaltres!"
@@ -40,11 +40,11 @@ levels:
             code: "{print} El nou curs escolar a Hogwarts comença!\n{print} El barret de classificació està llest per classificar-vos a una casa de Hogwarts.\ncases {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} I són cases {at} {random}"
         2:
             story: "Creeu un programa que esculli un àpat a l'atzar per a vosaltres. Fes una llista de menjar i una llista de complements i deixa que el programa decideixi què tindràs!\n"
-            code: "el menjar {is} pizza, gelat, amanida, sandvitx\nla cobertura {is} xocolata, formatge, tonyina, ruixats\n{print} El vostre àpat aleatori d'avui és...\n{sleep} 2\n{print} menjar {at} {random} amb cobertura {at} {random}"
+            code: "el_menjar {is} pizza, gelat, amanida, sandvitx\nla_cobertura {is} xocolata, formatge, tonyina, ruixats\n{print} El vostre àpat aleatori d'avui és...\n{sleep} 2\n{print} el_menjar {at} {random} amb la_cobertura {at} {random}"
     4:
         1:
             story: "Ets l'entrenador Pokémon més nou de Pallet Town!\nFes un programa que seleccioni el teu primer Pokémon.\nDeixa que el programa esperi un minut abans de revelar el teu primer pokémon.\n"
-            code: "pokemon {is} Pikachu, Charmander, Bulbasaur, Squirtle\n{print} \"Aquest serà el teu primer Pokémon!\"\n{sleep}\n{print} pokemons {at} {random}"
+            code: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle\n{print} 'Aquest serà el teu primer Pokémon!'\n{sleep}\n{print} pokemons {at} {random}"
         2:
             story: "Creeu una loteria que us permeti triar un preu addicional que podríeu guanyar.\n"
             code: "preus {is} cotxe, hàmster, 1 milió d'euros\npreu {is} {ask} \"Què t'agradaria guanyar?\"\n{add} preu {to_list} preus\n{print} \"Has guanyat un\" preus {at} {random}"
