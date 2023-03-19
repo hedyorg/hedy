@@ -310,7 +310,7 @@ adventures:
                 story_text: |-
                     ## En... Of?
                     We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. 
-                    
+
                     Beide kanten moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij hoeft er maar één van de twee waar zijn.
                 example_code: |
                     ```
@@ -655,9 +655,9 @@ adventures:
             12:
                 story_text: |-
                     ## Verhaal
-                    
+
                     Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
-                    
+
                     ### Opdracht
                     Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
                     Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
@@ -671,7 +671,7 @@ adventures:
                 story_text: |
                     ## Verhaal
                     Met `{and}` en `{or}` kun je een verhaal nog veelzijdiger maken! Je kan een speler twee vragen stellen en reageren op beide antwoorden.
-                    
+
                     ### Opdracht 1
                     Bekijk het voorbeeld en maak het af door de _ in te vullen. Voeg daarna nog minstens twee {if} codes met `{and}` of `{or}` toe.
 
@@ -686,7 +686,7 @@ adventures:
                     wapen = {ask} 'Wat voor wapen zal ze trekken?'
                     {if} pad {is} 'links' {and} wapen is 'zwaard'
                         _
-                    
+
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -1162,6 +1162,7 @@ adventures:
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: |
                     ## Tekenen maar
@@ -1630,7 +1631,7 @@ adventures:
             13:
                 story_text: |
                     Met het `{and}` commando kun je steen, papier, schaar met veel minder regels programmeren. Kijk maar eens naar de voorbeeldcode.
-                    
+
                     ### Opdracht
                     Maak de code af zodat bij iedere combinatie een antwoord wordt geprint. Er moet dus altijd in beeld komen wie er gewonnen heeft! Voer je code een paar keer uit om te kijken of er altijd een winner gekozen wordt.
                 example_code: |
@@ -2085,7 +2086,7 @@ adventures:
             12:
                 story_text: |
                     Vanaf level 12 moet je in een lijst ook aanhalingstekens gebruiken.
-                    
+
                     ### Opdracht
                     Kun jij minstens twee voorspellingen toevoegen aan het lijstje?
                 example_code: |
@@ -2132,7 +2133,7 @@ adventures:
                     {print} Vandaag serveren we pizza of lasagne.
                     eten {is} {ask} Wat wilt u eten?
                     {print} Heerlijk! eten is ook mijn favoriet!
-                    topping {is} {ask} Wilt eten met groente of vlees?
+                    topping {is} {ask} Wilt u eten met groente of vlees?
                     {print} eten met topping komt eraan!
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -2876,7 +2877,7 @@ adventures:
                     ## Geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
-                    
+
                     ### Opdracht 1
                     Maak je eigen code voor jouw geheime agent. Laat beiden onderdelen zien aan de echte spion.
                     ### Opdracht 2
@@ -3212,10 +3213,10 @@ adventures:
                     In dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. 
                     Je speelt met twee personen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). 
                     De speler die als eerst 3 op een rij heeft (horizontaal, verticaal of diagonaal) wint!
-                    
+
                     ### Opdracht 1
                     Dit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.
-                    
+
                     ### Opdracht 2
                     Het spel kan ook niet zelf besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.
 
@@ -3225,7 +3226,7 @@ adventures:
                     ```
                     speler = 'x'
                     veld = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-                    
+
                     {for} i in {range} 1 {to} 9
                         keuze = {ask} 'Speler ' speler ' welke plek kies jij?'
                         veld at keuze = speler

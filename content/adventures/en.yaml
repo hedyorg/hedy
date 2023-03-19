@@ -1227,9 +1227,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
                 start_code: |-
                     {print} 'Drawing Figures'
