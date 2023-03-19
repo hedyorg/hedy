@@ -423,6 +423,11 @@ body[dir='rtl'] .right-hand-shadow {
   @apply border-blue-300;
 }
 
+.active-bluebar-btn {
+  @apply bg-blue-300;
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 10 / 0.3);
+}
+
 /* TB: We shouldn't ever do this, all this dynamic handling can already be fixed with Tailwind! */
 @screen lg {
   .tab {

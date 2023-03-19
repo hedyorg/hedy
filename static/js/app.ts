@@ -1805,9 +1805,8 @@ function updatePageElements() {
     // SHARING SETTINGS
     // Star on "share" button is filled if program is already public, outlined otherwise
     const isPublic = !!adventure.save_info?.public;
-    $('#share_program_button span')
-      .toggleClass('fa-solid', isPublic)
-      .toggleClass('fa-regular', !isPublic);
+    $('#share_program_button')
+      .toggleClass('active-bluebar-btn', isPublic);
     $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
@@ -1817,9 +1816,8 @@ function updatePageElements() {
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
     const isSubmitted = !!adventure.save_info?.submitted;
-    $('#hand_in_button span')
-      .toggleClass('fa-solid', isSubmitted)
-      .toggleClass('fa-regular', !isSubmitted);
+    $('#hand_in_button')
+      .toggleClass('active-bluebar-btn', isSubmitted);
 
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
