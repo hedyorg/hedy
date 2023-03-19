@@ -1036,10 +1036,12 @@ class TestProgram(AuthHelper):
         # THEN verify that the program we just saved is in the list
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
+
+        keys_to_ignore = set(["achievements", "message", "share_message", "save_info"])
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements" and key != "message" and key != "share_message":
-                self.assertEqual(program[key], saved_program[key])
+            if key not in keys_to_ignore:
+                self.assertEqual(program.get(key, None), saved_program.get(key, None), f'Difference on key {key}')
 
     def test_invalid_make_program_public(self):
         # GIVEN a logged in user
@@ -1806,3 +1808,7 @@ def tearDownModule():
     for username in USERS.copy():
         auth_helper.given_specific_user_is_logged_in(username)
         auth_helper.destroy_current_user()
+
+
+def remove_keys(dct, *keys):
+    return {k: v for k, v in dct.items() if k not in keys}

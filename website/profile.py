@@ -142,7 +142,6 @@ class ProfileModule(WebsiteModule):
     @ route("/", methods=["GET"])
     @ requires_login
     def get_profile(self, user):
-        print(self, user)
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
 
