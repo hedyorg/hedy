@@ -2,8 +2,11 @@
  * Post JSON, return the result on success, throw an exception on failure
  */
 export function postJson(url: string, data?: any): Promise<any> {
-  // FIXME: This should be using the fetch() API with keepalive: true, so
-  // that it can submit a final save when the user leaves the page.
+  // Use the fetch API, if available
+  if (window.fetch !== undefined) {
+    return postJsonUsingFetch(url, data);
+  }
+
   return new Promise((ok, ko) => {
     $.ajax({
       type: 'POST',
@@ -17,6 +20,42 @@ export function postJson(url: string, data?: any): Promise<any> {
       ko(ajaxError(err));
     });
   });
+}
+
+/**
+ * Use the fetch API
+ *
+ * Using this API, we can set `keepalive: true`, which will make the API call
+ * complete even if the user navigates away from the page. This way, we can do
+ * a "just-in-time" save of users programs while the page unloads.
+ */
+async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
+  let response;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      keepalive: true,
+      ...(data ? { body: JSON.stringify(data) } : {}),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  } catch (err: any) {
+    throw Object.assign(new Error(err.message), {
+      internetError: true,
+    });
+  }
+
+  if (response.status !== 200) {
+    const responseText = await response.text();
+    throw Object.assign(new Error(responseText), {
+      responseText: responseText,
+      status: response.status,
+    });
+  }
+
+  return response.json();
 }
 
 export function postNoResponse(url: string, data?: any): Promise<void> {

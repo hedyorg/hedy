@@ -1,9 +1,10 @@
+import { initializeAdminUserPage, InitializeAdminUsersPageOptions } from './admin';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
 import { initializeQuiz } from './quiz';
-import { InitializeAdminStatsOptions, stats } from './statistics';
+import { InitializeAdminStatsOptions, InitializeClassStatsPageOptions, stats } from './statistics';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
@@ -49,6 +50,8 @@ type InitializePageOptions =
   | InitializeViewProgramPageOptions
   | InitializeClassOverviewPageOptions
   | InitializeAdminStatsOptions
+  | InitializeAdminUsersPageOptions
+  | InitializeClassStatsPageOptions
   ;
 
 
@@ -90,6 +93,14 @@ export function initialize(options: InitializeOptions) {
 
     case 'admin-stats':
       stats.initializeAdminStats();
+      break;
+
+    case 'class-stats':
+      stats.initializeClassStats();
+      break;
+
+    case 'admin-users':
+      initializeAdminUserPage(options.javascriptPageOptions);
       break;
   }
 

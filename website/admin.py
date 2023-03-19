@@ -122,6 +122,7 @@ class AdminModule(WebsiteModule):
             keyword_language_filter=keyword_language,
             next_page_token=users.next_page_token,
             current_page="admin",
+            javascript_page_options=dict(page='admin-users'),
         )
 
     @route("/classes", methods=["GET"])

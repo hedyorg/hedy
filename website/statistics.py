@@ -48,6 +48,7 @@ class StatisticsModule(WebsiteModule):
             class_info={"id": class_id, "students": students},
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='class-stats'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])

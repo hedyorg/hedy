@@ -12,6 +12,10 @@ export interface InitializeAdminStatsOptions {
   readonly page: 'admin-stats';
 }
 
+export interface InitializeClassStatsPageOptions {
+  readonly page: 'class-stats';
+}
+
 export const stats = {
   getProgramStats: function (weeksBack: number, element: any) {
     if (element.classList.contains('active')) {
