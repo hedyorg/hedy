@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-03 19:20+0100\n"
-"PO-Revision-Date: 2023-03-12 03:54+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-03-19 13:30+0000\n"
+"Last-Translator: Aleksandr Dinu <aluuu@husa.su>\n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,9 @@ msgstr ""
 
 msgid "Access Before Assign"
 msgstr ""
-"You tried to use the variable {name} on line {access_line_number}, but you "
-"set it on line {definition_line_number}. Set a variable before using it."
+"Вы использовали переменную {name} на строке {access_line_number}, но вы "
+"присваиваете ей значение на строке {definition_line_number}. Присвойте "
+"значение до того как используете переменную."
 
 #, fuzzy
 msgid "Cyclic Var Definition"
@@ -26,62 +27,53 @@ msgstr ""
 "The name {variable} needs to be set before you can use it on the right-hand "
 "side of the is command"
 
-#, fuzzy
 msgid "Has Blanks"
 msgstr ""
-"Your code is incomplete. It contains blanks that you have to replace with "
-"code."
+"Ваша программа не готова. В ней есть пробелы, на место которых нужно вписать "
+"код."
 
-#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
-"text behind {incomplete_command}."
+"Ой-ой! На строке {line_number} нужно дописать что-то ещё после "
+"{incomplete_command}."
 
-#, fuzzy
 msgid "Incomplete Repeat"
 msgstr ""
-"It looks like you forgot to use {command} with the repeat command you used "
-"on line {line_number}."
+"Похоже вы забыли использовать какую-нибудь ещё команду вместе с командой "
+"{repeat} на строке {line_number}."
 
-#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} is not a Hedy level {level} command. Did you mean "
-"{guessed_command}?"
+"{invalid_command} - это не команда Хеди с уровня {level}. Может вы имели "
+"ввиду {guessed_command}?"
 
-#, fuzzy
 msgid "Invalid Argument"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument} . Try changing "
-"{invalid_argument} to {allowed_types}."
+"Вы не можете использовать команду {command} с {invalid_argument} . "
+"Попробуйте заменить {invalid_argument} на {allowed_types}."
 
-#, fuzzy
 msgid "Invalid Argument Type"
 msgstr ""
-"You cannot use {command} with {invalid_argument} because it is "
-"{invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+"Вы не можете использовать команду {command} с {invalid_argument} потому что "
+"это {invalid_type}. Замените {invalid_argument} на {allowed_types}."
 
-#, fuzzy
 msgid "Invalid At Command"
 msgstr ""
-"The {at} command may not be used from level 16 onward. You can use square "
-"brackets to use an element from a list, for example `friends[i]`, "
-"`lucky_numbers[{random}]`."
+"Команду {at} нельзя использовать начиная с уровня 16. Используйте квадратные "
+"скобки для того чтобы обратиться к элементу списка, например `друзья[i]`, "
+"`счастливые_числа[{random}]`."
 
-#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! You started a line with a space on line {line_number}. Spaces confuse "
-"computers, can you remove it?"
+"Ой-ой! Вы начали код с пробела на строке {line_number}. Этот пробел может "
+"запутать компьютер, можете удалить его?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
 msgstr ""
-"You cannot use {invalid_argument} and {invalid_argument_2} with {command} "
-"because one is {invalid_type} and the other is {invalid_type_2}. Try "
-"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to "
-"{invalid_type}."
+"Вы не можете использовать {invalid_argument} и {invalid_argument_2} с "
+"командой {command} потому что первый - {invalid_type} и второй - "
+"{invalid_type_2}. Замените {invalid_argument} на {invalid_type_2} или "
+"{invalid_argument_2} на {invalid_type}."
 
 #, fuzzy
 msgid "Locked Language Feature"
@@ -198,9 +190,8 @@ msgstr ""
 "username and mail address needs to be unique and the password needs to be "
 "<b>at least</b> 6 characters."
 
-#, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "У вас новое достижение!"
 
 msgid "achievements"
 msgstr "достижения"
@@ -221,20 +212,17 @@ msgstr "Create student accounts"
 msgid "admin"
 msgstr "Администратор"
 
-#, fuzzy
 msgid "advance_button"
-msgstr "Go to level {level}"
+msgstr "На уровень {level}"
 
 msgid "adventure"
 msgstr "Приключения"
 
-#, fuzzy
 msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
+msgstr "У вас уже есть приключение с этим названием."
 
-#, fuzzy
 msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
+msgstr "Вы не ввели название приключения!"
 
 #, fuzzy
 msgid "adventure_exp_1"
@@ -257,37 +245,30 @@ msgstr ""
 "adventure. To view the adventure on a dedicated page, select \"view\" from "
 "the teachers page."
 
-#, fuzzy
 msgid "adventure_id_invalid"
-msgstr "This adventure id is invalid."
+msgstr "Неверный идентификатор приключения."
 
-#, fuzzy
 msgid "adventure_length"
-msgstr "Your adventure has to be at least 20 characters."
+msgstr "Название приключения должно состоять из минимум 20 символов."
 
-#, fuzzy
 msgid "adventure_name_invalid"
-msgstr "This adventure name is invalid."
+msgstr "Название приключения неверно."
 
-#, fuzzy
 msgid "adventure_prompt"
-msgstr "Please enter the name of the adventure"
+msgstr "Пожалуйста введите название приключения"
 
-#, fuzzy
 msgid "adventure_terms"
-msgstr "I agree that my adventure might be made publicly available on Hedy."
+msgstr ""
+"Я соглашаюсь с тем, что моё приключение будет доступно всем на сайте Хеди."
 
-#, fuzzy
 msgid "adventure_updated"
-msgstr "The adventure has been updated!"
+msgstr "Приключение было обновлено!"
 
-#, fuzzy
 msgid "ago"
-msgstr "{timestamp} ago"
+msgstr "{timestamp} назад"
 
-#, fuzzy
 msgid "agree_invalid"
-msgstr "You have to agree with the privacy terms."
+msgstr "Я соглашаюсь с условиями конфиденциальности."
 
 #, fuzzy
 msgid "agree_third_party"
@@ -295,9 +276,8 @@ msgstr ""
 "I consent to being contacted by partners of Leiden University with sales "
 "opportunities (optional)"
 
-#, fuzzy
 msgid "agree_with"
-msgstr "I agree to the"
+msgstr "Я соглашаюсь с"
 
 msgid "ajax_error"
 msgstr "Произошла ошибка, пожалуйста, попробуйте еще раз."
@@ -309,21 +289,18 @@ msgstr "Все"
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
 
-#, fuzzy
 msgid "already_account"
-msgstr "Already have an account?"
+msgstr "У вас уже есть учётная запись?"
 
 msgid "already_program_running"
 msgstr ""
 "Какая-то программа уже исполняется, подождите когда она закончит выполнение."
 
-#, fuzzy
 msgid "already_teacher"
-msgstr "You already have a teacher account."
+msgstr "У вас уже есть преподавательская учётная запись."
 
-#, fuzzy
 msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
+msgstr "Вы уже запросили преподавательскую учётную запись."
 
 msgid "amount_created"
 msgstr "созданных программ"
@@ -334,13 +311,11 @@ msgstr "сохранённых программ"
 msgid "amount_submitted"
 msgstr "представленных программ"
 
-#, fuzzy
 msgid "answer_invalid"
-msgstr "Your password is invalid."
+msgstr "Ваш пароль неверен."
 
-#, fuzzy
 msgid "are_you_sure"
-msgstr "Are you sure? You cannot revert this action."
+msgstr "Вы уверены? Это действие невозможно будет отменить или откатить."
 
 #, fuzzy
 msgid "ask_needs_var"
@@ -356,13 +331,11 @@ msgstr "Available adventures level"
 msgid "back_to_class"
 msgstr "Go back to class"
 
-#, fuzzy
 msgid "back_to_teachers_page"
-msgstr "Go back to teachers page"
+msgstr "Назад на страницу преподавателя"
 
-#, fuzzy
 msgid "become_a_sponsor"
-msgstr "Become a sponsor"
+msgstr "Станьте спонсором"
 
 msgid "birth_year"
 msgstr "Год рождения"
@@ -370,9 +343,8 @@ msgstr "Год рождения"
 msgid "by"
 msgstr "от"
 
-#, fuzzy
 msgid "cancel"
-msgstr "Cancel"
+msgstr "Отменить"
 
 #, fuzzy
 msgid "catch_index_exception"
@@ -384,9 +356,8 @@ msgstr ""
 msgid "certificate"
 msgstr "Certificate of Completion"
 
-#, fuzzy
 msgid "certified_teacher"
-msgstr "Certified teacher"
+msgstr "Сертифицированный преподаватель"
 
 msgid "change_password"
 msgstr "Изменить пароль"
@@ -721,7 +692,7 @@ msgid "error_logo_alt"
 msgstr "Логотип ошибки"
 
 msgid "example_code_header"
-msgstr "Example Hedy code"
+msgstr "Пример кода"
 
 #, fuzzy
 msgid "exclamation mark"
@@ -1291,11 +1262,10 @@ msgstr "Other"
 msgid "other_text"
 msgstr "Another text language"
 
-#, fuzzy
 msgid "overwrite_warning"
 msgstr ""
-"You already have a program with this name, saving this program will "
-"overwrite the old one. Are you sure?"
+"У вас уже есть программа с таким наванием. Вы точно хотите перезаписать уже "
+"существующую программу?"
 
 msgid "page"
 msgstr "страница"
@@ -1590,9 +1560,8 @@ msgstr ""
 "You need to have an account to save your program. Would you like to login "
 "now?"
 
-#, fuzzy
 msgid "save_success_detail"
-msgstr "Program saved successfully."
+msgstr "Программа сохранена."
 
 msgid "score"
 msgstr "Счёт"
@@ -1646,9 +1615,8 @@ msgstr "My personal settings"
 msgid "share"
 msgstr "Поделиться"
 
-#, fuzzy
 msgid "share_code_button"
-msgstr "Save & share code"
+msgstr "Сохранить и поделиться кодом"
 
 #, fuzzy
 msgid "share_confirm"
