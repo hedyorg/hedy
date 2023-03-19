@@ -807,7 +807,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           const adventure = values[0];
           const level = values[1]
           const from_teacher = values[2] === "true";
-          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
+          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there
           const adventure_div =
           `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
               <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
@@ -820,5 +820,25 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           drag_list(document.getElementById("level-"+level));
           markUnsavedChanges();
       });
+  });
+}
+
+/**
+ * These will be copied into global variables, because that's how this file works...
+ */
+export interface InitializeClassOverviewPageOptions {
+  readonly page: 'class-overview';
+}
+
+export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
+  $('.attribute').change(function() {
+    const attribute = $(this).attr('id');
+    if(!(this as HTMLInputElement).checked) {
+        $('#' + attribute + '_header').hide();
+        $('.' + attribute + '_cell').hide();
+    } else {
+        $('#' + attribute + '_header').show();
+        $('.' + attribute + '_cell').show();
+    }
   });
 }

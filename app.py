@@ -142,7 +142,7 @@ def load_adventures_for_level(level):
         all_adventures.append(current_adventure)
 
     # Sort the adventures based on the default ordering
-    adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
+    adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
     index_map = {v: i for i, v in enumerate(adventures_order)}
     all_adventures.sort(key=lambda pair: index_map.get(
         pair['short_name'],
@@ -1255,19 +1255,20 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventures = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
+    adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.get('short_name') == name] else False
+        level - 1) if x.short_name == name] else False
     next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.get('short_name') == name] else False
+        level + 1) if x.short_name == name] else False
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
     raw = mode == 'raw'
     initial_tab = name
+    initial_adventure = adventures[0]
 
     return render_template("code-page.html",
                            specific_adventure=True,
@@ -1282,6 +1283,7 @@ def get_specific_adventure(name, level, mode):
                            teacher_adventures=[],
                            adventures=adventures,
                            initial_tab=initial_tab,
+                           initial_adventure=initial_adventure,
                            latest=version(),
                            raw=raw,
                            blur_button_available=False,

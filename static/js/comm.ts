@@ -24,6 +24,7 @@ export function postNoResponse(url: string, data?: any): Promise<void> {
     $.ajax ({
       type: 'POST',
       url,
+      contentType: 'application/json; charset=utf-8',
       ...(data ? { data: JSON.stringify(data) } : {}),
     }).done (() => {
       ok();

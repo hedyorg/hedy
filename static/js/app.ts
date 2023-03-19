@@ -604,7 +604,7 @@ const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
 
 export async function pushAchievement(achievement: string) {
   if (ACHIEVEMENTS_PUSHED[achievement]) {
-      console.error('Achievement already pushed, this may be a programming issue: ', achievement);
+      console.warn('Achievement already pushed, this may be a programming issue: ', achievement);
       return;
   }
   ACHIEVEMENTS_PUSHED[achievement] = true;

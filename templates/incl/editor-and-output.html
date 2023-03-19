@@ -238,6 +238,7 @@
 </div>
 {% endif %}
 <script>
+// FIXME: Stop using inline JavaScript
 document.addEventListener('DOMContentLoaded', (event) => {
      function handleDragStart(e){
          this.style.opacity = 0.4;
@@ -309,6 +310,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
 {% if enforce_developers_mode %}
 <script>
+// FIXME: Stop using inline JavaScript
 $(document).ready(function () {
     hedyApp.toggle_developers_mode(true);
 });

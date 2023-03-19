@@ -179,6 +179,7 @@ class ForTeachersModule(WebsiteModule):
                 "name": Class["name"],
                 "id": Class["id"],
             },
+            javascript_page_options=dict(page="class-overview"),
         )
 
     @route("/customize-class/<class_id>", methods=["GET"])
