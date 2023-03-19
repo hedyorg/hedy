@@ -26,8 +26,6 @@ adventures:
                 story_text_3: "**Svi elementi u listi takodje moraju imati znake navoda**\nListe su tekst, tako da im trebaju znaci navoda takodje. Obrati pažnju da svaki pojedinačni element u listi ima znake navoda.\nOvo ti omogućava da sačuvaš dve reči kao jedan element u listu, na primer 'Hari Poter'.\n"
                 example_code_3: "```\nsuperheroji = 'Spajdermen', 'Betmen', 'Kapetan Amerika'\n{print} superheroji {at} {random}\n```\n"
                 story_text_4: "**Sav tekst posle `{if}` poredjenja takodje mora imati navodnike**\n"
-                story_text_6: "**Matematika sa rečima** \nU ovom novou je dozvoljeno koristiti znak + sa tekstom. Na primer:"
-                example_code_6: "```\na = 'Zdravo '\nb = 'svete!'\n{print} a + b\n```\n"
             16:
                 start_code: "voće = ['jabuke', 'banane', 'višnje']\n{print} voće"
                 example_code: "```\nprijatelji = ['Marko', 'Marija', 'Milan']\nsrećni_brojevi = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'srećan broj za' prijatelji[i]\n    {print} ' je ' srećni_brojevi[i]\n```\n"
@@ -73,8 +71,6 @@ adventures:
                 example_code_3: "```\nlepe_boje {is} zelena, žuta\nomiljena_boja {is} {ask} 'Koja je tvoja omiljena boja?'\n{if} omiljena_boja {in} lepe_boje {print} 'super!'\n{else} {print} 'bla!'\n```\n"
                 story_text_2: "Ponekad kod sa `{if}` postane jako dugačak i zbog toga ne może da stane u jednu liniju na ekranu. <br> Možeš takodje podeliti kod u dve linije, počevši drugu liniju sa `{else}` ovako:\n"
                 example_code_2: "```\nime {is} {ask} 'Kako se zoveš?'\n{if} ime {is} Hedy {print} 'super!'\n{else} {print} 'bla!'\n```\n"
-                story_text_4: "Još nešto što radi sa `{if}` je `{pressed}`! Sa `{pressed}` možeš povezati bilo koje slovo i bilo koji broj na tastaturi sa bilo kojom komandom. Ako ih povežeš, i pritisneš tipku na tastaturi, nešto će se desiti. Probaj!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'radi!'\n```\n"
             6:
                 start_code: "{print} '5 puta 5 je ' 5 * 5"
                 story_text: "## 1 + 1\n U ovom nivou naučićeš nešto novo: sada možeš da vršiš i matematičke operacije.\n\n Sabiranje je lako, pišeš isto kao i u matematici: `5 + 5` na primer. Oduzimanje je takodje lako, `5 - 5`.\n\n Množenje je malo drugačije, jer ne postoji znak puta na tastaturi. \n Zato množimo sa zvezdicom na tipki iznad broja 8: `5 * 5`. Čitaj kao \"5 puta 5\" to najbolje pomaže da zapamtiš.\n"
@@ -116,17 +112,17 @@ adventures:
     story:
         levels:
             3:
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animal {at} {random}\n```\n"
-                story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
-                example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story.\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n\n### Exercise\nCopy your story from the previous levels into this level.\nIn this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.\nAdd new lines of code to your story, so that all of the new commands are featured at least once in your story.\n"
+                example_code_3: "```\n{print} Njegov ranac je postao previše težak.\n{print} Unutra je bila flaša sa vodom, baterijska lampa i cigla.\nranac {is} vida, lampa, cigla\notpad {is} {ask} Šta bi iz torbe trebalo izbaciti?\n{remove} otpad {from} ranac\n```\n"
+                start_code: '{print} Tvoja priča'
+                example_code_2: "```\n{print} On čuje zvuk\nživotinje {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nživotinja {is} {ask} Šta misliš da je to?\n{add} životinja {to_list} životinje\n{print} to je bila životinjal {at} {random}\n```\n"
+                story_text: "## Priča\nU nivou 3 možeš osmisliti priču da bude još zanimljivija. Možeš odabrati bilo koje čudovište, životinju ili bilo koju drugu prepreku, ovako:\n"
+                example_code: "```\nživotinje {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} On sada cuje zvuk životinje {at} {random}\n```\n"
+                story_text_2: "Komanda `{add}` ti takodje može biti korisna u tvojoj priči.\n"
+                story_text_3: "Ovo je primer komande `{remove}` u tvojoj priči\n\n### Vežbanje\nPrekopiraj tvoju priču iz prethodnog nivoa u ovaj nivo.\nU ovom novou si naučio 3 nove komande `{at} {random}` , `{add} {to}` i `{remove} {from}`.\nDodaj nove linije koda u svoju priču, tako da iskoristiš svaku komandu bar jednom.\n"
             4:
-                example_code: "```\nname {is} {ask} _ What is your name? _\n{print}  _ The main character is called _ name\n{print} name  _ is now going to walk in the woods _\n{print} name _ is a bit scared _\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ He hears the sound of a _ animals {at} {random}\n{print} name _ is afraid this is a haunted forest _\n```\n"
-                start_code: "{print} 'Your story will be printed here!'"
-                story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n\n### Exercise\nCopy the example code and make it work by adding quotation marks on the lines.\n\n### Exercise 2\nGo back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.\nMind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.\n"
+                example_code: "```\nime {is} {ask} _ Kako se zoveš? _\n{print}  _ Glavni junak se zove _ ime\n{print} ime  _ ide sada da šeta u šumu _\n{print} ime _ je pomalo uplašen _\nživotinje {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ On čuje zvuk koji pravi _ životinje {at} {random}\n{print} ime _ se boji da je šuma ukleta _\n```\n"
+                start_code: "{print} 'Tvoja priča će biti ištampana ovde!'"
+                story_text: "## Priča\nMožda su primetio da još uvek postoji problem u prethodnim nivoima. Da li si probao da ištampaš rečenicu koja u sebi sadrži reč ime? `{print}` moje ime je ime.\nTo možeš rešiti u ovom nivou. Moraš koristiti znake navoda za sve šo planiraš da štampaš.\n\n### Vežbanje 1\nKopiraj primer koda i dodaj znake navoda da bi proradio.\n\n### Vežbanje 2\nIdi nazad u prethodni nivo i kopiraj kod svoje priče. Dodaj znake navoda na odgovarajućim mestima kako bi kod proradio i u ovom nivou.\nObrati pažnju: Promenljive u tvojoj priči ne bi trebale da se nalaze izmedju znaka navoda. Baš kao druga linije koda u primeru. U toj liniji promenljiva ime se nalazi izvan znaka navoda.\n"
             10:
                 start_code: '# place your code here'
                 story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.\n\n### Exercise\n\nLook at <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> if you do not know it, and make sure it is printed as in the book.\n"
@@ -142,15 +138,15 @@ adventures:
             1:
                 story_text: "## Osmisli priču\nU nivou 1 možeš da osmisliš priču sa različitim glavnim junacima koje ćeš sam uneti.\n\nNa prvoj liniji, koristi `{ask}` i upitaj ko će biti glavni junak priče.\n\nPosle te prve linije, počni sa `{print}` ako rečenica treba da bude ištampana.\nKoristi `{echo}` ako želiš da tvoj glavni junak bude na kraju rečenice.\n"
                 example_code: "```\n{ask} Glavni junak priče je\n{print} Glavni junak će sada da ide da prošeta u šumu\n{echo} On je pomalo uplašen,\n{print} Čuje neobične zvuke svuda unaokolo\n{print} Boji se da je ovo ukleta šuma\n```\n"
-                story_text_2: "### Exercise\nNow create your own story of at least 6 lines of code.\nThis story cannot be the same as the example code.\nUse at least one `{ask}` and one `{echo}` command.\nYou can make it about any topic you like.\nIf you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.\n"
-                start_code: '{print} Your story starts here'
+                story_text_2: "### Vežbanje\nSada osmisli svoju pricu sa najmanje 6 linija koda.\nOva priča ne sme biti ista kao kod iz primera.\nKoristi bar jednu komandu `{ask}` i jednu komandu `{echo}`.\nMožeš odabrati bilo koju temu.\nAko ne možeš da smisliš baš ni jednu, upotrebi neku od naših tema: odlazak u bioskop, sportska utakmica ili dan u zološkom vrtu.\n"
+                start_code: '{print} Tvoja priča počinje ovde'
             2:
-                story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
-                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
-                example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
-                start_code: '{print} Your story'
+                story_text: "## Priča\nU nivou 2 možeš učiniti da tvoje priče budu još zabavnijim. Ime tvog glavnog junaka se sada može nalaziti bilo gde u rečenici.\n\nMada, za to moraš isprogramirati malo dodatnog koda. Glavnog junaka moraš sada imenovati prvo.\n\nOnda možeš staviti ime bilo gde u rečenici.\n"
+                story_text_2: "### Vežbanje\nSada je vreme da dodaš promenljive u tvoju priču koju si osmislio u prethodnom nivou.\nIdi u 'Moji programi', potraži svoju priču o avanturi u nivou 1 i prekopiraj kod. Dodaj taj kod u ekran za unos u ovom nivou.\n\nOvaj kod neće raditi u ovom novou, jer još uvek nisi koristio promenljive.\nPromeni komande `{ask}` i `{echo}` u svom kodu u tačan oblik koji si naučio u ovom nivou.\n\n**Dodatno** Dodaj komandu sleep u svoj kod da bi podigao napetost u svojoj priči.\n"
+                example_code: "```\nime {is} {ask} Kako se glavni junak zove?\n{print} ime će sada da trči u šumi\n{print} ime je pomalo uplašen\n{print} On odjednom čuje neobičan zvuk...\n{sleep}\n{print} ime je uplašen da je ovo ukleta šuma\n```"
+                start_code: '{print} Tvoja priča'
             5:
-                story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\nIn the example code you can see how to make 2 different endings.\n\n### Exercise 1\nWrite a new short story of at least 6 lines of code about a topic of your choosing.\nNo inspiration? Choose one of these topics: a superhero, a boring school day, stranded on a desert island.\n\nNow give the player a change to choose a happy or a bad end, just like in the example code.\nProgram both the endings.\n\n### Exercise 2\nCopy the story you've created in your own story adventure in the previous levels.\nFind a way to add at least 2 `{if}` and `{else}` commands to your story.\nThis can be with a happy or bad ending, but you can also try to find other ways to incoporate the commands.\n"
+                story_text: "## Priča\nU ovom nivou možeš isprogramirati različite završetke, koji će učiniti da tvoja priča bude još zanimljivija.\nU primeru kod možeš videti kako možeš osmisliti dva različita završetka.\n\n### Vežba 1\nNapiši novu kratku priču sa bar 6 linija koda u vezi teme koju si odabrao.\nNemas ideju? Odaberi onda jednu od ovih tema: superheroji, dosadan dan u školi, sam na napuštenom ostrvu.\n\nSada daj opciju da igrač odabere srećan ili nesrećan kraj priče, kao što je u primeru.\nIsprogramiraj oba završetka.\n\n### Vežba 2\nIskopiraj priču koju si osmislio u svojoj avanturi u prethodnim nivoima.\nPronadji način da dodaš bar po dve komande `{if}` i `{else}` u svoju priču.\nMože biti sa srećnim ili nesrećnim završetkom, ali možeš i na druge načine upotrebiti ove komande.\n"
                 example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name ' walks through the forest'\n{print} name ' encounters a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name ' takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats ' name\n```\n"
                 start_code: "{print} 'Here your story will start!'"
             7:
@@ -241,8 +237,7 @@ adventures:
     turtle:
         levels:
             9:
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
                 start_code: '# place your code here'
@@ -449,6 +444,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
         name: Calculator
         description: Create a calculator
         default_save_name: Calculator
