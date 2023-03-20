@@ -18,7 +18,6 @@ from website.auth import (
     password_hash,
     remember_current_user,
     requires_login,
-    requires_login_redirect,
     send_email_template,
 )
 
