@@ -6,7 +6,7 @@ from flask_babel import gettext
 import utils
 from config import config
 from website.flask_helpers import render_template
-from website.auth import current_user, is_teacher, requires_login, requires_teacher
+from website.auth import current_user, is_teacher, requires_login, requires_teacher, refresh_current_user_from_db
 
 from .achievements import Achievements
 from .database import Database
@@ -134,6 +134,7 @@ class ClassModule(WebsiteModule):
             return gettext("join_prompt"), 403
 
         self.db.add_student_to_class(Class["id"], current_user()["username"])
+        refresh_current_user_from_db()
         # We only want to remove the invite if the user joins the class with an actual pending invite
         invite = self.db.get_username_invite(current_user()["username"])
         if invite and invite.get("class_id") == body["id"]:
@@ -154,6 +155,7 @@ class ClassModule(WebsiteModule):
             return gettext("ajax_error"), 400
 
         self.db.remove_student_from_class(Class["id"], student_id)
+        refresh_current_user_from_db()
         achievement = None
         if Class["teacher"] == user["username"]:
             achievement = self.achievements.add_single_achievement(user["username"], "detention")

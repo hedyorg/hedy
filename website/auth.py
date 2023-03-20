@@ -94,9 +94,10 @@ def password_hash(password, salt):
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def remember_current_user(db_user):
     session["user-ttl"] = times() + 5 * 60
-    session["user"] = pick(db_user, "username", "email", "is_teacher", "classes")
+    session["user"] = pick(db_user, "username", "email", "is_teacher")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
+    session["classes"] = db_user.get("classes") or set()
 
 
 def pick(d, *requested_keys):
@@ -118,17 +119,23 @@ def force_json_serializable_type(x):
 # If the current user is too old, as determined by the time-to-live, we repopulate from the database.
 def current_user():
     now = times()
-    user = session.get("user", {"username": "", "email": ""})
     ttl = session.get("user-ttl", None)
     if ttl is None or now >= ttl:
-        username = user["username"]
-        if username:
-            db_user = g.db.user_by_username(username)
-            if not db_user:
-                raise RuntimeError(f"Cannot find current user in db anymore: {username}")
-            remember_current_user(db_user)
+        refresh_current_user_from_db()
 
+    user = session.get("user", {"username": "", "email": ""})
     return user
+
+
+def refresh_current_user_from_db():
+    """Refresh the cached session data for the current user from the database."""
+    user = session.get("user", {"username": "", "email": ""})
+    username = user["username"]
+    if username:
+        db_user = g.db.user_by_username(username)
+        if not db_user:
+            raise RuntimeError(f"Cannot find current user in db anymore: {username}")
+        remember_current_user(db_user)
 
 
 def is_user_logged_in():
