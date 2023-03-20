@@ -29,9 +29,11 @@ npx esbuild ./__instrumented__/ts \
 
 echo "Running cypress tests..."
 cd tests
-npx cypress run
+! npx cypress run
 
 rm -rf ../static/js/appbundle.js
+rm -rf ../__instrumented__
+rm -rf ../__tmp__
 
 mv ../static/js/appbundle_orig.js ../static/js/appbundle.js
 
