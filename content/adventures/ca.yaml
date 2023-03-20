@@ -4,12 +4,12 @@ adventures:
         default_save_name: introduir
         levels:
             1:
-                example_code: "```\n{print} Hola!\n{print} Benvingut o benviguda a Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
-                story_text: "## Benvingut/Benvinguda a Hedy!\nAl Nivell 1 pots fer servir les ordres `{print}`, `{ask}` i `{echo}`.\nTecleja el teu codi al espai de programació. O prém el butó verd al bloc de codi d'exemple, i el codi s'escriurà de manera automàtica!\nProva tú mateix/a el codi amb el botó verd \"Executar\" a sota del espai de programació.\n\nPots fer sortir un missatge a la pantalla fent servir la ordre `{print}`.     \n"
+                example_code: "```\n{print} Hola!\n{print} Benvingut/benviguda a Hedy!\n```\n"
+                story_text_2: "També podeu demanar entrada amb `{ask}` i repetir-ho amb una ordre `{echo}`.\n"
+                story_text_3: "Comencem! No saps què crear? A les següents pestanyes trobareu idees per crear programes.\n"
+                example_code_2: "```\n{ask} Com et dius?\n{echo} hola\n```\n"
+                start_code: '{print} hola món!'
+                story_text: "## Benvingut/Benvinguda a Hedy!\nAl Nivell 1 pots fer servir les ordres `{print}`, `{ask}` i `{echo}`.\nTecleja el teu codi a l'espai de programació. O prem el botó verd al bloc de codi d'exemple, i el codi s'escriurà de manera automàtica!\nProva tú mateix/a el codi amb el botó verd \"Executar\" a sota de l'espai de programació.\n\nPots fer sortir un missatge a la pantalla fent servir la ordre `{print}`.     \n"
             18:
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
@@ -19,10 +19,10 @@ adventures:
                 story_text_3: "## Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                story_text: "## Les variables\nAl nivell 2 aprenem dues ordres noves: `{is}` i `{sleep}`.\nPodeu anomenar una paraula amb `{is}`. Això s'anomena variable. En aquest exemple hem fet una variable anomenada nom i una variable anomenada edat. Podeu utilitzar el nom de la paraula a qualsevol part del vostre codi i serà substituït per Hedy, com aquest:\n\nD'aquesta manera, ja no necessiteu l'ordre `{echo}`!\n"
+                example_code: "```\nnom {is} Hedy\nedat {is} 15\n{print} nom té edat anys\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+                example_code_2: "```\nconstesta {is} {ask} Com et dius?\n{print} Hola resposta\n```\n"
                 story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
                 example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: '{print} hello world!'
@@ -31,9 +31,9 @@ adventures:
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
                 story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} hola món!'
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: "{print} 'Hola món'"
                 story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left and work to the right, in order to be challenged more and more.\n"
@@ -49,7 +49,7 @@ adventures:
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                example_code_2: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
                 story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
@@ -262,6 +262,8 @@ adventures:
                 story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
                 start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"

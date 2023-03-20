@@ -29,7 +29,8 @@ describe('The view program page', () => {
     programName = Math.random().toString(36);
     cy.get('#program_name').clear().type(programName);
     cy.get('#share_program_button').click();
-    cy.get('#modal-copy-button').click();
+    cy.get('#share-public').click();
+    cy.get('button[data-action="copy-to-clipboard"]').click();
 
     const urlFromClipboard = await new Promise((ok) =>
       cy.window().then((win) =>
@@ -45,3 +46,16 @@ describe('The view program page', () => {
       .and('have.class', 'ace_keyword');
   })
 })
+
+describe('The raw program page', () => {
+  beforeEach(() => {
+    cy.visit('/adventure/story/1/raw');
+  });
+
+  it('has syntax highlighting', () => {
+    cy.get('#editor')
+      .contains('print')
+      .should('be.visible')
+      .and('have.class', 'ace_keyword');
+  });
+});

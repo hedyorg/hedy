@@ -518,6 +518,8 @@ adventures:
                 start_code: "{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
                 story_text: "## Kreslíme\nV páté úrovni můžete provést volbu pomocí příkazu `{if}`. Například mezi různými typy obrazců.\n"
                 example_code: "## Ukázka kódu Hedy\n\n```\n{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             8:
                 story_text: "## Kreslíme\nNyní, když můžeme opakovat několik řádků, můžeme snadněji vytvářet obrazce.\nÚhel nastavíme pouze jednou a pak tuto proměnnou použijeme v příkazu `{repeat}`.\n"
                 example_code: "## Ukázka kódu Hedy\n\n```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"

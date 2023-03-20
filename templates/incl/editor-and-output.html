@@ -40,10 +40,16 @@
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <div class="w-full flex-1 flex flex-col">
+        <!-- Status warning -->
+        <div data-view="if-submitted"
+          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+          {{_('submitted_header')}}
+        </div>
+
+        <!-- The actual editor -->
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
-        data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code|trim}}</div>
+          class="w-full flex-1 text-lg rounded">{{initial_adventure.start_code}}</div>
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
             {% for i in range(1, 11) %}
                 <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
@@ -168,18 +174,20 @@
                 <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
         {% endif %}
       </div>
+      {% if not raw %}
       <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
           <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
           <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
             <option value="">🤫</option>
           </select>
       </div>
+      {% endif %}
     </div>
     <div class="order-5">
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
-              <button class="green-btn" id="prev_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+              <a class="green-btn" id="prev_level_button" href="{{ hedy_link(prev_level, 1) }}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
             {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}
                   <div class="relative">
 
@@ -192,7 +200,7 @@
                   </div>
             {% endif %}
             {% if next_level and (not customizations or next_level in customizations['available_levels']) %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+                <a class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" href="{{ hedy_link(next_level, 1) }}">{{_('advance_button')|replace("{level}", next_level)}}</a>
             {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
                 <div class="relative">
                     <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
@@ -208,10 +216,10 @@
            {% if not raw %}
                   <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
                     {% if prev_level %}
-                      <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+                      <a class="green-btn" href="/adventure/{{ adventures[0].short_name}}/{{prev_level}}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
                     {% endif %}
                     {% if next_level %}
-                    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    <a class="green-btn ltr:ml-1 rtl:mr-1" href="/adventure/{{ adventures[0].short_name}}/{{next_level}}">{{_('advance_button')|replace("{level}", next_level)}}</a>
                     {% endif %}
                   </div>
             {% endif %}
@@ -232,6 +240,7 @@
 </div>
 {% endif %}
 <script>
+// FIXME: Stop using inline JavaScript
 document.addEventListener('DOMContentLoaded', (event) => {
      function handleDragStart(e){
          this.style.opacity = 0.4;
@@ -303,6 +312,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
 {% if enforce_developers_mode %}
 <script>
+// FIXME: Stop using inline JavaScript
 $(document).ready(function () {
     hedyApp.toggle_developers_mode(true);
 });

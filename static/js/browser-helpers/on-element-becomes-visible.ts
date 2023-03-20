@@ -7,7 +7,7 @@ function isInView(elem: HTMLElement) {
   return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
 }
 
-$(window).on('scroll', () => {
+export function checkNow() {
   for (let i = 0; i < SCROLL_HANDLERS.length; ) {
     const [element, handler] = SCROLL_HANDLERS[i];
     if (isInView(element)) {
@@ -17,7 +17,9 @@ $(window).on('scroll', () => {
       i += 1;
     }
   }
-});
+}
+
+$(window).on('scroll', checkNow);
 
 export function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
   if (isInView(element)) {

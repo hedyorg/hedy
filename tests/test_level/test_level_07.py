@@ -80,14 +80,20 @@ class TestsLevel7(HedyTester):
         n is 'test'
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_list_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 1, 2, 3
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
