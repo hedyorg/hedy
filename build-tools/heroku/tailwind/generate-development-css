@@ -13,6 +13,5 @@ if [[ "${1:-}" == "--watch" ]]; then
   npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/$targetfile --watch
 else
   npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/$targetfile
-  npx minify $staticdir/css/$targetfile > $staticdir/css/$targetfile.min
-  mv $staticdir/css/$targetfile{.min,}
+  # Not minifying on purpose, to reduce merge conflicts if this file ever changes
 fi
