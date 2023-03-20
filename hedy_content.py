@@ -210,7 +210,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'blackjack'
     ],
     18: [
-        'default'
+        'default',
+        'story',
+        'songs'
     ]
 }
 

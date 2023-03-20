@@ -32,6 +32,6 @@ export function tutorialPopup(current_level: string, step: number) {
       $('#tutorial_text').text(response.text);
       $('#tutorial-pop-up').fadeIn(800);
   }).fail(function(response) {
-    modal.alert(response.responseText, 3000, true);
+    modal.notifyError(response.responseText);
   });
 }

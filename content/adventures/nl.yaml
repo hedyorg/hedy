@@ -310,7 +310,7 @@ adventures:
                 story_text: |-
                     ## En... Of?
                     We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. 
-                    
+
                     Beide kanten moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij hoeft er maar één van de twee waar zijn.
                 example_code: |
                     ```
@@ -407,8 +407,11 @@ adventures:
                     {print}('Mijn naam is ', naam)
                 story_text: |-
                     ## Het laatste level!
-                    We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-                    Dit betekent ook dat je de Hedy code uit de level in iedere Python omgeving kunt gebruiken als je Engelse commando's gebruikt. Deed je dat tot nu toe nog niet, zet dan de knop om in het commando's menu.
+                    We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij `{print}` en bij `{range}`.
+
+                    Dit betekent ook dat je de Hedy code uit de level in iedere Python omgeving kunt gebruiken als je Engelse commando's gebruikt.
+
+                    Deed je dat tot nu toe nog niet, zet dan de knop om in het commando's menu.
                 example_code: |
                     ```
                     {print}('Hallo!')
@@ -652,9 +655,9 @@ adventures:
             12:
                 story_text: |-
                     ## Verhaal
-                    
+
                     Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
-                    
+
                     ### Opdracht
                     Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
                     Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
@@ -668,7 +671,7 @@ adventures:
                 story_text: |
                     ## Verhaal
                     Met `{and}` en `{or}` kun je een verhaal nog veelzijdiger maken! Je kan een speler twee vragen stellen en reageren op beide antwoorden.
-                    
+
                     ### Opdracht 1
                     Bekijk het voorbeeld en maak het af door de _ in te vullen. Voeg daarna nog minstens twee {if} codes met `{and}` of `{or}` toe.
 
@@ -683,7 +686,7 @@ adventures:
                     wapen = {ask} 'Wat voor wapen zal ze trekken?'
                     {if} pad {is} 'links' {and} wapen is 'zwaard'
                         _
-                    
+
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -705,6 +708,28 @@ adventures:
                         {else}
                             {print} 'Helaas, ze liggen niet bij de ' locatie
                     {print} 'Nu kun je het huis in!'
+                    ```
+                start_code: "# Schrijf jouw code hier"
+            18:
+                story_text: |
+                    ## Verhaal
+                    We gaan weer een verhaal printen, maar we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
+
+                    ### Opdracht 1
+                    Maak een verhaal van minstens 5 zinnen. Je hoeft `naam` nog niet te gebruiken.
+                story_text_2: |
+                    ### Opdracht 2
+                    We hebben al een `{input}` voor jou klaargezet. Gebruik eerst de variabele `naam` in je verhaal.
+                    Voeg daarna een tweede `{ask}` toe en gebruik die variabele ook.
+                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
+                example_code: |
+                    ```
+                    {print}('Welkom bij dit verhaal!')
+                    ```
+                example_code_2: |
+                    ```
+                    naam = {input}('Hoe heet jij?')
+                    {print}('Welkom bij dit verhaal!')
                     ```
                 start_code: "# Schrijf jouw code hier"
     parrot:
@@ -1002,6 +1027,29 @@ adventures:
                         {print} 's morgens in de vroegte'
                     ```
                 start_code: "# Schrijf jouw code hier"
+            18:
+                story_text: |
+                    ## Zing een lied!
+                    In level 16 hebben we liedjes met lijsten gemaakt. Maar, deze codes doen het nu niet meer goed. De dubbele punten uit level 17 en de haakjes uit level 18 moeten er nog bij.
+
+                    ### Opdracht 1
+                    De dronken zeeman van level 16 staat hier als voorbeeldcode. Die is dus fout in dit level.
+                    Zorg jij dat alles weer werkt? Om je te helpen hebben we op de plekken van _sommige_ fouten een _ neergezet.
+
+                    ### Opdracht 2
+                    Zoek nu ook je OldMacDonald lied op uit level 16, en verbeter dat.
+                example_code: |
+                    ```
+                    coupletten = ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
+                    {for} couplet {in} coupletten _
+                        {for} i {in} {range} 1 {to} 3 _
+                            {print} _ couplet _
+                        {print} 's morgens in de vroegte'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'HELA HUP! daar gaat ie!'
+                        {print} 's morgens in de vroegte'
+                    ```
+                start_code: "# Schrijf jouw code hier"
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
@@ -1114,6 +1162,7 @@ adventures:
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: |
                     ## Tekenen maar
@@ -1582,7 +1631,7 @@ adventures:
             13:
                 story_text: |
                     Met het `{and}` commando kun je steen, papier, schaar met veel minder regels programmeren. Kijk maar eens naar de voorbeeldcode.
-                    
+
                     ### Opdracht
                     Maak de code af zodat bij iedere combinatie een antwoord wordt geprint. Er moet dus altijd in beeld komen wie er gewonnen heeft! Voer je code een paar keer uit om te kijken of er altijd een winner gekozen wordt.
                 example_code: |
@@ -2037,7 +2086,7 @@ adventures:
             12:
                 story_text: |
                     Vanaf level 12 moet je in een lijst ook aanhalingstekens gebruiken.
-                    
+
                     ### Opdracht
                     Kun jij minstens twee voorspellingen toevoegen aan het lijstje?
                 example_code: |
@@ -2084,7 +2133,7 @@ adventures:
                     {print} Vandaag serveren we pizza of lasagne.
                     eten {is} {ask} Wat wilt u eten?
                     {print} Heerlijk! eten is ook mijn favoriet!
-                    topping {is} {ask} Wilt eten met groente of vlees?
+                    topping {is} {ask} Wilt u eten met groente of vlees?
                     {print} eten met topping komt eraan!
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -2828,7 +2877,7 @@ adventures:
                     ## Geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
-                    
+
                     ### Opdracht 1
                     Maak je eigen code voor jouw geheime agent. Laat beiden onderdelen zien aan de echte spion.
                     ### Opdracht 2
@@ -3164,10 +3213,10 @@ adventures:
                     In dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. 
                     Je speelt met twee personen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). 
                     De speler die als eerst 3 op een rij heeft (horizontaal, verticaal of diagonaal) wint!
-                    
+
                     ### Opdracht 1
                     Dit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.
-                    
+
                     ### Opdracht 2
                     Het spel kan ook niet zelf besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.
 
@@ -3177,7 +3226,7 @@ adventures:
                     ```
                     speler = 'x'
                     veld = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-                    
+
                     {for} i in {range} 1 {to} 9
                         keuze = {ask} 'Speler ' speler ' welke plek kies jij?'
                         veld at keuze = speler

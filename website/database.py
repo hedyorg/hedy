@@ -131,8 +131,23 @@ class Database:
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
+        # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = PROGRAMS.get_many({"username": username}, reverse=True)
         return [x for x in programs if x.get("level") == int(level)]
+
+    def last_level_programs_for_user(self, username, level):
+        """List level programs for the given user, newest first.
+
+        Returns: { adventure_name -> { code, name, ... } }
+        """
+        programs = self.level_programs_for_user(username, level)
+        ret = {}
+        for program in programs:
+            key = program.get('adventure_name', 'default')
+            if key not in ret or ret[key]['date'] < program['date']:
+                ret[key] = program
+        return ret
 
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
@@ -141,17 +156,32 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level, adventure):
-        programs = PROGRAMS.get_many({"username": username}, reverse=True)
-        if level:
-            programs = [x for x in programs if x.get("level") == int(level)]
-        if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get("adventure_name") == ""]
-            else:
-                programs = [x for x in programs if x.get("adventure_name") == adventure]
-        return programs
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+                                   limit=None, pagination_token=None):
+        ret = []
+
+        # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+                                          reverse=True, limit=limit, pagination_token=pagination_token)
+        for program in programs:
+            if level and program.get('level') != int(level):
+                continue
+            if adventure:
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    continue
+                if adventure != 'default' and program.get('adventure_name') != adventure:
+                    continue
+            if submitted is not None:
+                if program.get('submitted') != submitted:
+                    continue
+
+            ret.append(program)
+
+            if len(ret) >= limit:
+                break
+
+        return dynamo.ResultPage(ret, programs.next_page_token)
 
     def public_programs_for_user(self, username):
         # Only return programs that are public but not submitted
@@ -166,15 +196,38 @@ class Database:
         return PROGRAMS.get({"id": id})
 
     def store_program(self, program):
-        """Store a program."""
-        PROGRAMS.create(program)
+        """Store a program.
+
+        Returns the program.
+
+        Add an additional indexable field: 'username_level'.
+        """
+        PROGRAMS.create(
+            dict(program,
+                 username_level=f"{program.get('username')}-{program.get('level')}"))
+
+        return program
+
+    def update_program(self, id, updates):
+        """Update fields of an existing program.
+
+        Returns the updated state of the program.
+        """
+        return PROGRAMS.update(dict(id=id), updates)
 
     def set_program_public_by_id(self, id, public):
-        """Store a program."""
-        PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
+        """Switch a program to public or private.
+
+        Return the updated state of the program.
+        """
+        return PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id):
-        PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
+        """Switch a program to submitted.
+
+        Return the updated program state.
+        """
+        return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
@@ -297,7 +350,7 @@ class Database:
         if adventure_filter:
             filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
 
-        programs = dynamo.QueryIterator(PROGRAMS, {'public': 1}, reverse=True)
+        programs = dynamo.GetManyIterator(PROGRAMS, {'public': 1}, reverse=True)
 
         # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
         # the programs match the filter. This works because they all have a 'matching' date field
@@ -322,7 +375,7 @@ class Database:
             # I don't really care.
             for flt in filters:
                 while flt and flt.current['date'] > program['date']:
-                    flt.next()
+                    flt.advance()
 
             # Include the current program in the result set if it is now the front item in each filter.
             if all((flt and flt.current['id'] == program['id']) for flt in filters):
