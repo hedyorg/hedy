@@ -18,6 +18,7 @@ from website.auth import (
     password_hash,
     remember_current_user,
     requires_login,
+    requires_login_redirect,
     send_email_template,
 )
 
@@ -139,8 +140,8 @@ class ProfileModule(WebsiteModule):
         remember_current_user(self.db.user_by_username(user["username"]))
         return jsonify(resp)
 
-    @ route("/", methods=["GET"])
-    @ requires_login
+    @route("/", methods=["GET"])
+    @requires_login
     def get_profile(self, user):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
