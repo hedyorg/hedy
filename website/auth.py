@@ -212,6 +212,7 @@ def requires_login_redirect(f):
 
     return inner
 
+
 def requires_admin(f):
     """Similar to 'requires_login', but also tests that the user is an admin.
 
