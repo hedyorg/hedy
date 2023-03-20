@@ -97,7 +97,7 @@ def remember_current_user(db_user):
     session["user"] = pick(db_user, "username", "email", "is_teacher")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
-    session["classes"] = db_user.get("classes") or set()
+    session["classes"] = db_user.get("classes") or []
 
 
 def pick(d, *requested_keys):
