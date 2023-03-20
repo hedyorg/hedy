@@ -15,9 +15,11 @@
         <button id="share_program_button" class="h-full" title="Share your program">
           <span class="fa-solid fa-arrow-up-from-bracket text-2xl p-2 px-4 w-14 text-blue-500"></span>
         </button>
-        <button id="hand_in_button" class="h-full" title="Hand in your assignment">
-          <span class="fa-regular fa-paper-plane text-2xl p-2 px-4 w-14 text-blue-500"></span>
-        </button>
+          {% if current_user_is_in_class %}
+            <button id="hand_in_button" class="h-full" title="Hand in your assignment">
+              <span class="fa-regular fa-paper-plane text-2xl p-2 px-4 w-14 text-blue-500"></span>
+            </button>
+          {% endif %}
       </div>
     </div>
     {% if tutorial %}
