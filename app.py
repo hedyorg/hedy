@@ -375,6 +375,13 @@ def enrich_context_with_user_info():
     return data
 
 
+@app.context_processor
+def add_generated_css_file():
+    return {
+        "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
+    }
+
+
 @app.after_request
 def set_security_headers(response):
     security_headers = {
