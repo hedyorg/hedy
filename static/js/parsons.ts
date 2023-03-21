@@ -29,7 +29,7 @@ export function loadParsonsExercise(level: number, exercise: number) {
         showExercise(response);
         updateNextExerciseButton(level, exercise);
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 

@@ -365,6 +365,8 @@ adventures:
                     {if} 图形 {is} 三角形 角度 {is} 120 {else} 角度 {is} 90
                     {turn} 角度
                     {forward} 25
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             8:
                 story_text: "## 让我们来画画\n现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n\n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: "```\n角度 = 90\n{repeat} 4 {times}\n    {turn} 角度\n    {forward} 50\n```\n"
