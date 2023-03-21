@@ -12,11 +12,11 @@
     <div class="flex-1">
       <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
         <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full" value="{{initial_adventure.save_name}}">
-        <button id="share_program_button" class="h-full hover:bg-blue-100" title="Share your program">
+        <button id="share_program_button" class="h-full hover:bg-blue-100" title="{{_('share_your_program')}}">
           <span class="fa-solid fa-arrow-up-from-bracket text-2xl p-2 px-4 w-14 text-blue-500"></span>
         </button>
         {% if current_user_is_in_class %}
-        <button id="hand_in_button" class="h-full hover:bg-blue-100" title="Hand in your assignment">
+        <button id="hand_in_button" class="h-full hover:bg-blue-100" title="{{_('hand_in_exercise')}}">
           <span class="fa-regular fa-paper-plane text-2xl p-2 px-4 w-14 text-blue-500"></span>
         </button>
         {% endif %}
