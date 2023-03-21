@@ -10,7 +10,7 @@ import boto3
 import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
-from flask import g, request, session
+from flask import g, request, session, redirect
 from flask_babel import force_locale, gettext
 
 import utils
@@ -196,6 +196,24 @@ def requires_login(f):
     def inner(*args, **kws):
         if not is_user_logged_in():
             return utils.error_page(error=403)
+        # The reason we pass by keyword argument is to make this
+        # work logically both for free-floating functions as well
+        # as [unbound] class methods.
+        return f(*args, user=current_user(), **kws)
+
+    return inner
+
+
+def requires_login_redirect(f):
+    """Decoractor to indicate that a particular route requires the user to be logged in.
+
+    If the user is not logged in, they will be redirected to the front page.
+    """
+
+    @wraps(f)
+    def inner(*args, **kws):
+        if not is_user_logged_in():
+            return redirect('/')
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
