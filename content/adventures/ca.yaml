@@ -11,8 +11,8 @@ adventures:
                 start_code: '{print} hola món!'
                 story_text: "## Benvingut/Benvinguda a Hedy!\nAl Nivell 1 pots fer servir les ordres `{print}`, `{ask}` i `{echo}`.\nTecleja el teu codi a l'espai de programació. O prem el botó verd al bloc de codi d'exemple, i el codi s'escriurà de manera automàtica!\nProva tú mateix/a el codi amb el botó verd \"Executar\" a sota de l'espai de programació.\n\nPots fer sortir un missatge a la pantalla fent servir la ordre `{print}`.     \n"
             18:
-                example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
+                example_code: "```\n{print}('Hola!')\n{for} i {in} {range}(1, 10):\n    {print}('Aquesta és la línia ', i)\n```\n"
+                start_code: "nom = 'Hedy'\n{print}('Em dic ', nom)"
                 story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
@@ -112,9 +112,9 @@ adventures:
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
         name: Introducció
     story:
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: Història
+        description: Història
+        default_save_name: Història
         levels:
             3:
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
@@ -123,7 +123,7 @@ adventures:
                 story_text_2: "The command `{add}` can also come in handy in your story.\n"
                 example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animal {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n\n## Challenge\nCan you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?\n"
-                start_code: '{print} Your story'
+                start_code: '{print} La teva història'
             7:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
                 story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n\n## Challenge\nCan you make your own story with repitition?\n"
@@ -147,7 +147,7 @@ adventures:
                 start_code: '{print} Your story starts here'
             2:
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n\n## Challenge\nCan you make a story using a variable yourself? Can you add even more variables?\n"
-                start_code: '{print} Your story'
+                start_code: '{print} La teva història'
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
                 story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             4:
