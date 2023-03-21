@@ -29,11 +29,14 @@ npx esbuild ./__instrumented__/ts \
 
 echo "Running cypress tests..."
 cd tests
+# The ! means that even if the tests fail, the script won't exit. Instead it'll continue it's execution and clean the
+# files generated during the script. You can understand this as a way to override -e just in this line. More info here:
+# https://stackoverflow.com/questions/47261313/whats-the-meaning-of-a-before-a-command-in-the-shell
+
 ! npx cypress run
 
 rm -rf ../static/js/appbundle.js
 rm -rf ../__instrumented__
-rm -rf ../__tmp__
 
 mv ../static/js/appbundle_orig.js ../static/js/appbundle.js
 
