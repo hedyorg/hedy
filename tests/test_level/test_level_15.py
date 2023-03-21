@@ -215,3 +215,38 @@ class TestsLevel15(HedyTester):
             max_level=16,
             expected=expected,
         )
+
+    def test_if_pressed_multiple_lines_body(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'x'
+            print 'lalalalala'
+        else
+            print 'not x'
+            print 'lalalalala'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'x':
+              print(f'''x''')
+              print(f'''lalalalala''')
+              break
+            # End of PyGame Event Handler    
+            else:
+              print(f'''not x''')
+              print(f'''lalalalala''')
+              break""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+        )

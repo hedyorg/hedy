@@ -2274,21 +2274,24 @@ class ConvertToPython_15(ConvertToPython_14):
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
         var_or_button = args[0]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
         if self.is_variable(var_or_button):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
-{ConvertToPython.indent(args[1])}
+{body}
   break""", button=False)
         elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
+{body}
   break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
+{body}
   break""", button=False)
 
 
