@@ -11,6 +11,7 @@ import string
 import random
 import uuid
 import unicodedata
+import traceback
 
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
@@ -266,7 +267,7 @@ def markdown_to_html_tags(markdown):
     return soup.find_all()
 
 
-def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
+def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
     if error not in [403, 404, 500]:
         error = 404
     default = gettext('default_404')
@@ -277,7 +278,9 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error, "error": default}), error
+        return jsonify({"code": error,
+                        "error": default,
+                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
 
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or ui_message or '', default=default), error
