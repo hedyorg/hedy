@@ -682,6 +682,7 @@ def translate_error(code, arguments, keyword_lang):
         'character_found',
         'concept',
         'tip',
+        'else',
         'command',
         'print',
         'ask',
@@ -696,6 +697,7 @@ def translate_error(code, arguments, keyword_lang):
         'variable',
         'invalid_value',
         'print',
+        'else',
         'ask',
         'echo',
         'is',
@@ -718,6 +720,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments["print"] = "print"
     arguments["ask"] = "ask"
     arguments["echo"] = "echo"
+    arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
 
