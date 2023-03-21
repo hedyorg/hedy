@@ -1155,7 +1155,6 @@ def index(level, program_id):
 
     print(current_user())
 
-
     commands = hedy.commands_per_level.get(level)
     return render_template(
         "code-page.html",
