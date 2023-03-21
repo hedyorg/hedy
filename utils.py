@@ -278,7 +278,9 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error, "error": default, "exception": traceback.format_exception(exception) if exception else None}), error
+        return jsonify({"code": error,
+                        "error": default,
+                        "exception": traceback.format_exception(exception, None, None) if exception else None}), error
 
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or ui_message or '', default=default), error
