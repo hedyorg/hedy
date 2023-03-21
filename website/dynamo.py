@@ -533,7 +533,7 @@ class AwsDynamoStorage(TableStorage):
         value_updates = {k: v for k, v in updates.items() if not isinstance(v, DynamoUpdate)}
         special_updates = {k: v.to_dynamo() for k, v in updates.items() if isinstance(v, DynamoUpdate)}
 
-        return self.db.update_item(
+        response = self.db.update_item(
             TableName=make_table_name(self.db_prefix, table_name),
             Key=self._encode(key),
             AttributeUpdates={
@@ -543,6 +543,7 @@ class AwsDynamoStorage(TableStorage):
             # Return the full new item after update
             ReturnValues='ALL_NEW',
         )
+        return self._decode(response.get('Attributes', {}))
 
     def delete(self, table_name, key):
         return self.db.delete_item(TableName=make_table_name(self.db_prefix, table_name), Key=self._encode(key))
