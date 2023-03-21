@@ -1153,7 +1153,6 @@ def index(level, program_id):
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
 
-    print(current_user())
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
