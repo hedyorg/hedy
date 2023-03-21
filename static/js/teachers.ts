@@ -370,7 +370,7 @@ export function save_customizations(class_id: string) {
         }
     });
     let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('#sortadventures').children().each(function() {
+    $('[id^=level-]').each(function() {
         const id = $(this).attr('id')!;
         const level = id.split('-')[1]!;
         sorted_adventures[level] = [];
@@ -491,20 +491,15 @@ export function enable_level(level: string) {
         $('#opening_date_level_' + level).find('input').val('');
         $('#opening_date_level_' + level).find('input').prop({type:"text"});
         $("#select-"+level).removeClass("hidden");
-        let shown : boolean = false;
-        $("div.adventures-tab").each(function() {
-          if($(this).attr('style') === "display: flex;") {
-            shown = true;
-          }
-        });
-        // if no level is shown, it means current level was the one selected
-        if (!shown) {
+        if ($("#disabled").hasClass('flex') && $("#disabled").val() == level) {
+          $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
           $("#level-"+level).show({
             start: function() {
-                $(this).css('display', 'flex');
-            }
-        });
-        }
+              $(this).addClass('flex');
+              $(this).removeClass('hidden');
+            }          
+          });         
+        }        
     } else {
         $('.adventure_level_' + level).each(function () {
             $(this).prop("checked", false);
@@ -513,8 +508,9 @@ export function enable_level(level: string) {
         $('#level_button_' + level).removeClass('green-btn');
         $('#level_button_' + level).addClass('blue-btn');
         // if this level was shown, hide it
-        if($("#level-"+level).attr('style') === "display: flex;") {
-          $("div.adventures-tab").hide();
+        if($("#level-"+level).hasClass('flex')) {
+          $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
+          $("#disabled").removeClass('hidden').addClass('flex').removeAttr('style').val(level);
         }
         $("#select-"+level).addClass("hidden");
         // We also have to remove this level from the "Opening dates" section
@@ -773,10 +769,14 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
       $('#adventures').on('change', function(){
           var level = $(this).val() as string;
-          $("div.adventures-tab").hide();
+          $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
+          if ($("#disabled").hasClass('flex')) {
+            $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
+          }
           $("#level-"+level).show({
               start: function() {
-                  $(this).css('display', 'flex');
+                  $(this).addClass('flex');
+                  $(this).removeClass('hidden');
               }
           });
           $('#available').empty();
