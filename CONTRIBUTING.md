@@ -213,7 +213,7 @@ You normally do not need to think about this. During development, a multi-megaby
 CSS file will be served that contains most classes. During deployment, a minimized CSS
 file is automatically produced.
 
-You may need to regenerate the develompent CSS file if you want to do one of the following things:
+You may need to regenerate the development CSS file if you want to do one of the following things:
 
 * Want to use a *conditional* Tailwind class (for example, a class that starts with `hover:`).
   Write the class in the HTML, then regenerate the CSS.
