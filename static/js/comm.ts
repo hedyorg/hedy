@@ -39,7 +39,7 @@ async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
       ...(data ? { body: JSON.stringify(data) } : {}),
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'Accept': 'application/json; charset=utf-8',
+        'Accept': 'application/json',
       },
     });
   } catch (err: any) {
@@ -49,9 +49,27 @@ async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
   }
 
   if (response.status !== 200) {
-    const responseText = await response.text();
-    throw Object.assign(new Error(responseText), {
-      responseText: responseText,
+    // The error message is:
+    // - response.error, if the response can be parsed as JSON
+    // - A generic error message if the response is too big (indicating we're probably getting an HTML page back here)
+    // - Otherwise the response text itself
+    let errorMessage = await response.text();
+
+    try {
+      const parsed = JSON.parse(errorMessage);
+      if (parsed.error) {
+        errorMessage = parsed.error;
+      }
+    } catch {
+      // Not JSON, so probably either plain text or HTML. Check for a sane length, otherwise put a placeholder text here.
+      // (No need to translate, this should be very rare.)
+      if (errorMessage.length > 500) {
+        errorMessage = `the server responded with an error (${response.status} ${response.statusText})`;
+      }
+    }
+
+    throw Object.assign(new Error(errorMessage), {
+      responseText: errorMessage,
       status: response.status,
     });
   }

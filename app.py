@@ -1380,7 +1380,7 @@ def not_found(exception):
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.error_page(error=500)
+    return utils.error_page(error=500, exception=exception)
 
 
 @app.route('/signup', methods=['GET'])
