@@ -275,7 +275,7 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     elif error == 500:
         default = gettext('default_500')
 
-    if request.accept_mimetypes.accept_json:
+    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
         return jsonify({"code": error, "error": default}), error
 
