@@ -94,12 +94,13 @@ def password_hash(password, salt):
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def remember_current_user(db_user):
     session["user-ttl"] = times() + 5 * 60
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
+    # Prepare the cached user object
+    session["user"] = pick(db_user, "username", "email", "is_teacher")
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
-    session["classes"] = list(db_user.get("classes", []))
+    session["user"]["classes"] = list(db_user.get("classes", []))
 
 
 def pick(d, *requested_keys):
