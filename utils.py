@@ -280,7 +280,7 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
         # Produce a JSON response instead of an HTML response
         return jsonify({"code": error,
                         "error": default,
-                        "exception": traceback.format_exception(exception, None, None) if exception else None}), error
+                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
 
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or ui_message or '', default=default), error
