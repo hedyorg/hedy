@@ -39,12 +39,13 @@ class Program:
 
     @staticmethod
     def from_database_row(r):
+        """Convert a database row into a typed Program object."""
         return Program(
-            name=r['name'],
-            code=r['code'],
-            date=r['date'],
+            name=r.get('name', ''),
+            code=r.get('code', ''),
+            date=r.get('date', 0),
             adventure_name=r.get('adventure_name', 'default'),
-            id=r.get('id'),
+            id=r.get('id', ''),
             public=r.get('public'),
             submitted=r.get('submitted'))
 
