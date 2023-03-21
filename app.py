@@ -40,7 +40,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
 from website.types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -843,7 +843,7 @@ def achievements_page():
 
 
 @app.route('/programs', methods=['GET'])
-@requires_login
+@requires_login_redirect
 def programs_page(user):
     username = user['username']
     if not username:
@@ -1387,7 +1387,7 @@ def not_found(exception):
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.error_page(error=500)
+    return utils.error_page(error=500, exception=exception)
 
 
 @app.route('/signup', methods=['GET'])
@@ -1436,7 +1436,7 @@ def reset_page():
 
 
 @app.route('/my-profile', methods=['GET'])
-@requires_login
+@requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
