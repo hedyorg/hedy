@@ -32,6 +32,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -133,6 +134,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -179,7 +181,11 @@ class TestsLevel3(HedyTester):
             n is 1, 2, 3
             sleep n""")
 
-        self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
     # assign tests
@@ -347,6 +353,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -377,6 +384,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -407,6 +415,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=10,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -437,6 +446,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -609,13 +619,17 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
-    def test_acess_before_assign_with_random(self):
+    def test_access_before_assign_with_random(self):
         code = textwrap.dedent("""\
         print colors at random
         colors is green, red, blue""")
 
-        with self.assertRaises(hedy.exceptions.AccessBeforeAssign):
-            hedy.transpile(code, self.level)
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            exception=hedy.exceptions.AccessBeforeAssign,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
+        )
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
@@ -656,6 +670,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -668,6 +683,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -680,6 +696,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -692,6 +709,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -706,6 +724,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -717,6 +736,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.UndefinedVarException
         )
 
@@ -728,6 +748,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 

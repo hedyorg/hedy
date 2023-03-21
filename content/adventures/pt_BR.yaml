@@ -84,8 +84,6 @@ adventures:
                     ```
                 story_text_2: "Às vezes, o código com um `{if}` fica muito longo e não se encaixa bem na linha. <br> Você também pode dividir o código em duas linhas, começando a segunda linha com `{else}` assim:\n"
                 example_code_2: "```\nnome {is} {ask} 'qual o seu nome?'\n{if} nome {is} Hedy {print} 'legal'\n{else} {print} 'não tão legal!'\n```\n"
-                story_text_4: "Algo mais que funciona com `{if}` é `{pressed}`! Com `{pressed}` você pode vincular qualquer letra do alfabeto e qualquer tecla numérica em seu teclado a um comando. Se você ligá-lo, e pressionar a tecla, algo acontecerá. Experimente-o!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print} '5 vezes 5 é ' 5 * 5"
                 story_text: |
@@ -447,6 +445,8 @@ adventures:
                 story_text: "## Vamos desenhar\nNo nível 5 você pode fazer uma escolha com `{if}`. Por exemplo, entre diferentes tipos de figuras.\n"
                 example_code: "```\n{print} 'Desenhando Figuras'\nfigura {is} {ask} 'Você quer um quadrado ou um triângulo?'\n{if} figura {is} triângulo ângulo {is} 120\n{else} ângulo {is} 90\n{turn} ângulo\n{forward} 25\n{turn} ângulo\n{forward} 25\n{turn} ângulo\n{forward} 25\n{turn} ângulo\n{forward} 25\n```\n"
                 start_code: "{print} 'Desenhando Figuras'\nfigura {is} {ask} 'Você quer um quadrado ou um triângulo?'\n{if} figura {is} triângulo ângulo {is} 120 {else} ângulo {is} 90\n{turn} ângulo\n{forward} 25"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             8:
                 story_text: "## Vamos desenhar\nAgora que podemos repetir várias linhas, podemos fazer figuras com mais facilidade.\nNós só temos que definir o ângulo uma vez e então usar essa variável no `{repeat}`.\n"
                 example_code: "```\nângulo = 90\n{repeat} 10 {times}\n    {turn} ângulo\n    {forward} 50\n```\n"
@@ -460,8 +460,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Tartaruga
         description: Faça o seu próprio desenho
@@ -612,6 +611,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
         name: Calculadora
         description: Create a calculator
         default_save_name: Calculadora

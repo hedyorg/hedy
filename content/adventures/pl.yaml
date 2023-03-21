@@ -39,8 +39,6 @@ adventures:
                 example_code_3: "```\nładne_kolory {is} zielony, żółty\nkolor {is} {ask} 'Jaki jest twój ulubiony kolor?'\n{if} kolor {in} ładne_kolory {print} 'śliczny!'\n{else} {print} 'eh'\n```\n"
                 story_text_2: "Czasami kod z `{if}` robi się bardzo długi i nie mieści się w linii.<br> Możesz podzielić kod na dwie linie, zaczynając drugą linię od `{else}` w taki sposób:\n"
                 example_code_2: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło'\n{else} {print} 'bu!'\n```\n"
-                story_text_4: "Coś innego co działa z poleceniem `{if}` jest polecenie `{pressed}`! Przy użyciu `{pressed}` możesz przypisać dowolną literę alfabetu lub liczbę ze swojej klawiatury do dowolnego polecenia. Coś się stanie jeżeli je przypiszesz i naciśniesz ten klawisz. Spróbuj teraz!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'Udało się!'\n```\n"
             6:
                 start_code: "{print} '5 razy 5 to' 5 * 5"
                 story_text: "## 1 + 1\n W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.\n \n Dodawanie jest proste, możesz je zapisać tak jak w matematyce: na przykład `5 + 5`. Odejmowanie też jest proste, to po prostu `5 - 5`.\n \n Mnożenie jest trochę inne, ponieważ nie ma znaku mnożenia na twojej klawiaturze. Poszukaj, naprawdę go nie ma!\n Z tego powodu mnożymy za pomocą gwiazdki nad 8: `5 * 5`. Czytaj to jako „5 razy 5”, tak lepiej zapamiętasz.\n"
@@ -327,6 +325,10 @@ adventures:
                 example_code: "```\nliczba = 10\n{for} i {in} {range} 1 do 10\n    {print} i * liczba\n```\n"
                 story_text: "## Kalkulator\nDzięki `{for}` można uprościć program ćwiczeniowy tabliczki mnożenia.\n\n### Ćwiczenie 1\nPopraw przykładowy kod tak, aby drukował ładną tabliczkę mnożenia: <br> \"1 razy 10 to 10\", \"2 razy 10 to 20\" itd.\n\n### Ćwiczenie 2\nWróć do swojego kodu mnożenia na poziomie 10 i zmodyfikuj go tak, aby używał `{for}` i `{range}`.\n"
                 start_code: '# umieść tutaj swój kod'
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         description: Stwórz kalkulator
         default_save_name: Kalkulator
     restaurant:
@@ -622,6 +624,8 @@ adventures:
                 story_text: "## Rysujmy\nNa poziomie 5 możesz dokonywać wyboru przy użyciu polecenia `{if}`. Przykładem takiego wyboru byłby wybór pomiędzy różnymi typami figur do narysowania.\n"
                 example_code: "```\n{print} 'Rysowanie Figur'\nfigura {is} {ask} 'Chcesz kwadrat czy trójkąt?'\n{if} figura {is} trójkąt kąt {is} 120\n{else} kąt {is} 90\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n```\n"
                 start_code: "{print} 'Rysujemy figury'\nfigura {is} {ask} 'Czy chciałbyś narysować kwadrat czy też trójkąt?'\n{if} figura {is} trójkąt kąt {is} 120 {else} kąt {is} 90\n{turn} kąt\n{forward} 25"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             8:
                 story_text: "## Rysujemy\nDzięki naszej nowo nabytej umiejętności powtarzania wielu linii kodu możemy rysować figury w jeszcze prostszy sposób.\nWystarczy, że ustawimy kąt tylko raz i potem użyjemy go jako zmienną wewnątrz polecenia `{repeat}`.\n\n### Ćwiczenie 1\nPrzykładowy kod tworzy kwadrat. Zmień kod tak, aby tworzył inną figurę, np. trójkąt lub sześciokąt.\nWymaga to zmiany w dwóch liniach kodu.\nPodpowiedź: Całe koło to 360 stopni.\n\n### Ćwiczenie 2\nTeraz stwórz rysunek składający się z co najmniej dwóch wielokątów.\n"
                 example_code: "```\nkąt = 90\n{repeat} 4 {times}\n    {turn} kąt\n    {forward} 50\n```\n"
@@ -633,8 +637,6 @@ adventures:
                 example_code: "```\nkątów = {ask} 'Ile chcesz kątów?'\nkąt = 360 / kątów\n{forward} 50\n{turn} kąt\n{forward} 50\n{turn} kąt\n{forward} 50\n{turn} kąt\n{forward} 50\n{turn} kąt\n{forward} 50\n{turn} kąt\n{forward} 50 \n{turn} kąt\n```\n"
                 start_code: "{print} 'Rysujemy figury'"
             9:
-                story_text_2: "## Kontrola żółwia\nMożesz teraz kontrolować żółwia na wiele innych sposobów niż tylko do przodu lub do tyłu!\n### Ćwiczenie 2\nUzupełnij kod, aby móc kontrolować żółwia za pomocą klawiszy. \"w\" do przodu, \"s\" do tyłu, \"a\" w lewo i \"d\"  w prawo.\nWskazówka:  Do poruszania w lewo i prawo, potrzebujesz tylko trzech linii kodu!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
                 start_code: '# umieść tutaj swój kod'
                 story_text: "## Żółw\nSkoro potrafimy używać `{repeat}` wewnątrz `{repeat}`, możemy tworzyć bardziej złożone figury.\n\n### Ćwiczenie 1\nTen kod tworzy trzy czarne trójkąty, zmień to na pięć różowych kwadratów.\n\n**(dodatkowe zadanie)** Stwórz własną figurę składającą się z co najmniej dwóch różnych kształtów.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"

@@ -91,8 +91,7 @@ adventures:
                 story_text_3: "## Seznamy\nPokud chceš skontrolovat jestli se něco nachází v seznamu, můžeš na to použít příkaz `{in}`.\nTento program vypíše pěkné! pokud si vybereš barvy zelená anebo žlutá, a nic-moc pokud si vybereš jinačí.\n"
                 story_text_2: "Někdy je kód za příkazem `{if}` příliš dlouhý a nevejde se dobře na jeden řádek. <br> Proto lze takový kód rozdělit na více řádků, začínajíc druhý řádek s `{else}` takhle:\n"
                 example_code_2: "```\njméno {is} {ask} 'Jaké je tvé jméno?'\n{if} jméno {is} Hedy {print} 'pěkné'\n{else} {print} 'já mám hezčí!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 start_code: print '5 krát 5 je ' 5 * 5
                 story_text: |-
@@ -519,6 +518,8 @@ adventures:
                 start_code: "{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
                 story_text: "## Kreslíme\nV páté úrovni můžete provést volbu pomocí příkazu `{if}`. Například mezi různými typy obrazců.\n"
                 example_code: "## Ukázka kódu Hedy\n\n```\n{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             8:
                 story_text: "## Kreslíme\nNyní, když můžeme opakovat několik řádků, můžeme snadněji vytvářet obrazce.\nÚhel nastavíme pouze jednou a pak tuto proměnnou použijeme v příkazu `{repeat}`.\n"
                 example_code: "## Ukázka kódu Hedy\n\n```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
@@ -552,8 +553,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     dishes:
         levels:
@@ -702,6 +702,10 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
         name: Calculator
         default_save_name: Calculator
     restaurant:

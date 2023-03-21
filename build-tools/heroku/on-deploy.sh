@@ -22,7 +22,7 @@ cd $scriptdir
 # for CSS classes in the HTML templates and JavaScript files).
 
 echo '-----> Doing a Tailwind build'
-tailwind/generate-css
+tailwind/generate-prod-css
 
 echo '-----> Compiling Babel translations'
 (cd ../.. && pybabel compile -f -d translations)

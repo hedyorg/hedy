@@ -11,7 +11,7 @@ import hedy_content
 import hedyweb
 import utils
 from safe_format import safe_format
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website.auth import (
     current_user,
     is_admin,
@@ -179,6 +179,7 @@ class ForTeachersModule(WebsiteModule):
                 "name": Class["name"],
                 "id": Class["id"],
             },
+            javascript_page_options=dict(page="class-overview"),
         )
 
     @route("/customize-class/<class_id>", methods=["GET"])

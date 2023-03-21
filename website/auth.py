@@ -10,7 +10,7 @@ import boto3
 import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
-from flask import g, request, session
+from flask import g, request, session, redirect
 from flask_babel import force_locale, gettext
 
 import utils
@@ -94,31 +94,51 @@ def password_hash(password, salt):
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def remember_current_user(db_user):
     session["user-ttl"] = times() + 5 * 60
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
+    # Prepare the cached user object
+    session["user"] = pick(db_user, "username", "email", "is_teacher")
+    # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
+    session["user"]["classes"] = list(db_user.get("classes", []))
+
 
 def pick(d, *requested_keys):
-    return {key: d.get(key, None) for key in requested_keys}
+    return {key: force_json_serializable_type(d.get(key, None)) for key in requested_keys}
+
+
+def force_json_serializable_type(x):
+    """Turn the given value into something that can be stored in a session.
+
+    May not be the same type, but it'll be Close Enough(tm).
+    """
+    if isinstance(x, set):
+        return list(x)
+    return x
 
 
 # Retrieve the current user from the Flask session.
 #
-# If the current user is to old, as determined by the time-to-live, we repopulate from the database.
+# If the current user is too old, as determined by the time-to-live, we repopulate from the database.
 def current_user():
     now = times()
-    user = session.get("user", {"username": "", "email": ""})
     ttl = session.get("user-ttl", None)
     if ttl is None or now >= ttl:
-        username = user["username"]
-        if username:
-            db_user = g.db.user_by_username(username)
-            if not db_user:
-                raise RuntimeError(f"Cannot find current user in db anymore: {username}")
-            remember_current_user(db_user)
+        refresh_current_user_from_db()
 
+    user = session.get("user", {"username": "", "email": ""})
     return user
+
+
+def refresh_current_user_from_db():
+    """Refresh the cached session data for the current user from the database."""
+    user = session.get("user", {"username": "", "email": ""})
+    username = user["username"]
+    if username:
+        db_user = g.db.user_by_username(username)
+        if not db_user:
+            raise RuntimeError(f"Cannot find current user in db anymore: {username}")
+        remember_current_user(db_user)
 
 
 def is_user_logged_in():
@@ -177,6 +197,24 @@ def requires_login(f):
     def inner(*args, **kws):
         if not is_user_logged_in():
             return utils.error_page(error=403)
+        # The reason we pass by keyword argument is to make this
+        # work logically both for free-floating functions as well
+        # as [unbound] class methods.
+        return f(*args, user=current_user(), **kws)
+
+    return inner
+
+
+def requires_login_redirect(f):
+    """Decoractor to indicate that a particular route requires the user to be logged in.
+
+    If the user is not logged in, they will be redirected to the front page.
+    """
+
+    @wraps(f)
+    def inner(*args, **kws):
+        if not is_user_logged_in():
+            return redirect('/')
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
