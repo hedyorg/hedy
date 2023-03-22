@@ -427,7 +427,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
             $('.opening_date_input').val('');
-            $('#sortadventures').children().each(
+            $('[id^=level-]').each(
               function() {
                 $(this).empty();
                 const level = $(this).attr('id')!.split('-')[1];
