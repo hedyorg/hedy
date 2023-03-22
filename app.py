@@ -128,18 +128,20 @@ def load_adventures_for_level(level):
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
 
-        current_adventure = Adventure(
-            short_name=short_name,
-            name=adventure['name'],
-            image=adventure.get('image', None),
-            text=adventure['levels'][level].get('story_text', ""),
-            example_code=adventure['levels'][level].get('example_code', ""),
-            extra_stories=extra_stories,
-            is_teacher_adventure=False,
-            save_name=f'{default_save_name} {level}',
-            start_code=adventure['levels'][level].get('start_code', ""))
+        # only add adventures that have been added to the adventure list of this level
+        if short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
+            current_adventure = Adventure(
+                short_name=short_name,
+                name=adventure['name'],
+                image=adventure.get('image', None),
+                text=adventure['levels'][level].get('story_text', ""),
+                example_code=adventure['levels'][level].get('example_code', ""),
+                extra_stories=extra_stories,
+                is_teacher_adventure=False,
+                save_name=f'{default_save_name} {level}',
+                start_code=adventure['levels'][level].get('start_code', ""))
 
-        all_adventures.append(current_adventure)
+            all_adventures.append(current_adventure)
 
     # Sort the adventures based on the default ordering
     adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
