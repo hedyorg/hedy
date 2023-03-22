@@ -34,6 +34,24 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_chinese_quoted_text(self):
+        code = "print “逃离鬼屋！”"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_chinese_double_quoted_text(self):
+        code = "print ‘逃离鬼屋！’"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
     def test_print_double_quoted_text(self):
         code = 'print "hallo wereld!"'
         expected = "print(f'hallo wereld!')"
@@ -188,6 +206,7 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
 

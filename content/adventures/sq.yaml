@@ -92,6 +92,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# place your code here'
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Kalkulatori
         description: Krijoni një kalkulator
         default_save_name: Kalkulatori
@@ -146,8 +150,6 @@ adventures:
                 start_code: '# Vendoseni kodi tuaj këtu'
                 story_text: "## Restorant\nNë këtë nivel ne mund të përdorim komandat e reja për të përmirësuar restorantin tonë.\nNe përdorim komandën `{and}` të shikojmë {if}(nëse) dy gjera jane të njëjta.\n"
                 example_code: "```\nçmimi = 10\nushqimi = {ask} 'Çfarë do të dëshironit të hani?'\npije = {ask} 'Çfare do te pish?'\n{if} ushqimi {is} 'sanduiç' {and} pije {is} 'lëng'\n    {print} 'Kjo është menyja jonë e zbritjes'\n    çmimi = çmimi - 3\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n```\n"
-                story_text_2: "Ne përdorim komandën `{or}` të shikojmë nëse njëra nga 2 gjërat është e saktë.\n"
-                example_code_2: "```\npije = {ask} 'Çfarë do te pish?'\n{if} pije {is} 'uj' {or} pije {is} 'lëng'\n    {print} 'Është një zgjedhje e shëndetshme'\n```\n"
             7:
                 story_text: "## Restorant\nNë këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.\nJu mund ta përdorni atë në restorant që të `{ask}`(pyesni) disa njerëz se çfarë duan të hanë.\n\n## Sfidë\nMund të plotësoni vendet bosh? Hedy duhet ta përsërisë këtë pyetje sa herë ka njerëz. Pra, nga 5 persona, pyetja duhet bërë 5 herë.\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nnjerëzit = {ask} 'Sa njerëz po na bashkohen sot?'\n{repeat} _ {times} ushqimi = {ask} 'Çfarë doni të hani?'\n{print} 'Faleminderit për porosinë tuaj. Është duke u bërë!'\n```\n"
@@ -264,6 +266,8 @@ adventures:
                 story_text: "## Le të vizatojmë\nNë nivelin 5 ju mund të bëni një zgjidhje me komandën `{if}`. Si për shembull ndërmjet dy lloje të figurave.\n"
                 example_code: "```\n{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120\n{else} këndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120 {else} këndi {is} 90\n{turn} këndi\n{forward} 25"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             6:
                 story_text: "## Le të vizatojmë\nNë këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.\nMund të keni mësuar në shkollë se nëse ktheni komplet rreth ,është 360 shkalle. Nëse jo, tani e dini!\nPër këtë shkak përdorni 90 shkallë për një katror. 360 pjesëtuar me 4 është 90.\nTani mund të bëjmë matematikë me Hady, mund të vizatojmë të gjithë figurat që duam!\n"
                 example_code: "```\nkëndet = {ask} 'Sa kënde doni?'\nkëndi = 360 / këndet\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n```\n"
@@ -277,8 +281,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Breshka
     default:
@@ -291,8 +294,7 @@ adventures:
                 example_code_3: "```\nnjgjyrat_e_bukura {is} gjelbër, verdhë\nnjgjyrat_e_preferuara {is} {ask} 'Cila është ngjyra juaj e preferuar?'\n{if} njgjyrat_e_preferuara {in} njgjyrat_e_bukura {print} 'bukur!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Nganjëherë kodi në komandën `{if}` bëhet shumë i gjatë dhe nuk e nxen rreshti. <br> Ju gjithashtu mund ta ndani kodin në dy rreshta, duke filluar rreshtin e dytë te komanda `{else}` ja kështu:\n"
                 example_code_2: "```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy {print} 'bukur'\n{else} {print} 'boo!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             18:
                 example_code_3: "```\n{print}('Emri im është Hedy!')\nemri = {input}('Si e keni emrin?')\n{print}('Kështu që emri yt është ', emri)\n```\n"
                 start_code: "emri = 'Hedy'\n{print}('Emri im është ', emri)"
@@ -327,6 +329,7 @@ adventures:
                 story_text: "## 'Thonjëzat'\nNë nivelin 4 `{ask}` dhe `{print}` komandat kanë ndryshuar.\n\nJu duhet ta vendoni tekstin që doni ta printoni në thonjëza.\n\nKjo është e dobishme, sepse tani mund të printoni të gjitha fjalët që doni. Gjithashtu edhe fjalët që dikur i ruajtët me komandën `{is}`.\n\nShumica e gjuhëve programore përdorin thonjëza kur printojnë, kështu që ne jemi një hap më afër programimit real!\n"
                 example_code: "```\n{print} 'Ju duhet të përdorni thonjëya prej tash e tutje!'\npërgjigja {is} {ask} 'Çfarë duhet të përdorim prej tani e tutje?'\n{print} 'Ne duhet të përdorim ' përgjigja\n```\n"
                 story_text_2: "## Aventurat po bëhen më shumë të vështira \nAventurat po bëhen shumë e më shumë të vështira në skedarët e ardhshëm.\nKështu që është më mirë të filloni nga e majta dhe shkoni në të djathtë, me qëllim që të sfidoheni shumë e më shumë.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             6:
                 start_code: "{print} '5 herë 5 është ' 5 * 5"
                 story_text: "## 1 + 1\n Në këtë nivel ju do të mësoni diçka të re: ju tash mund të kalkuloni.\n\n Plusi është i lehtë, mund ta shkruani si në matematik: për shembull `5 + 5`. Gjithashtu punon edhe minusi, është `5 - 5`.\n\n Shumëzimi është pak më ndryshe, sepse nuk keni shumëzim në tastierë. Kërkojeni, sigurisht nuk është!\n Kjo është përse ne shumëzojmë me yll që gjendet tek numri 8 lartë në tastierë: (mbajeni shtypur shift, pastaj shtypni numrin 8) `5 * 5`. Lexoni at si \"5 herë 5\" kjo do ju ndihmojë që ta mbani mend.\n"
@@ -365,8 +368,6 @@ adventures:
                 example_code_4: "```\nemri= {ask} 'Si e ke emrin?'\n{if} emri = 'Hedy roboti'\n    {print} 'Përshëndetje!'\n```\n"
                 story_text_5: "**Numrat nuk kanë nevojë të kenë thonjëza**\nPër numrat, ju nuk keni nevojë të përdorni thonjëza në `=`:\n"
                 example_code_5: "```\nrezultati= 25\n{print} 'Ju keni ' rezultati\n```\n"
-                story_text_6: "**Matematikë me fjalë** \nNë këtë nivel gjithashtu është e lejuar që të përdorni shenjën + me tekst. Si për shembull:"
-                example_code_6: "```\na = 'Përshëndetje'\nb = 'botë!'\n{print} a + b\n```\n"
             13:
                 start_code: "emri = {ask} 'Si e ke emrin?'\nmosha = {ask} 'Sa vjeçar jeni?'\n{if} emri {is} 'Hedy' {and} mosha {is} 2\n    {print} 'Ju jeni Hedy i vërtetë!'"
                 story_text: "## Dhe... Ose...?\nNe tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë."
@@ -441,7 +442,6 @@ adventures:
                 story_text_2: "## Sfidë\nZarat në shembullin e mësipërm janë zare për një lojë specifike. Mund të bëni zare normale?\nApo zare të tjerë të veçantë nga një lojë tjetër?\n"
             4:
                 story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
-                example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             5:
                 story_text: "## Zare\nMund ta bëni prapë zarin në këtë nivel me komandën `{if}`.\nPërfundojeni shembullin e dhënë që kodi të thotë \"Ju mund të ndaloni së hedhuri\" sapo të keni hedhur një krimb toke.\n\nNdoshta doni që të rikrijoni një zare nga një lojë tjetër. Është në rregull! Atëherë bëni reagimin tuaj. Shembull 'po' për numrin 6 dhe 'me keqardhje' për diçka tjetër {else}.\n"
@@ -492,7 +492,6 @@ adventures:
                 story_text_2: "## Sfidë\nTani ju keni vetëm një lojtar, kështu që mund të shtoni një lojtar të dytë?\nMund të përdorni edhe variabla për të emërtuar lojtarin 1 dhe lojtarin 2.\n"
             4:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund të programoni më shumë lojën gur, letër, gërshërë. Por {if} (nëse) doni të shtoni tekst, duhet të shtoni thonjëzat gjithashtu.\nA e përfundoni kodin duke shtuar komandat e sakta ose shkronjat në vizat e poshtme?\n"
-                example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
                 start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
             10:
                 story_text: "## Gur, letër, gërshërë\nJu mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!\nMjafton të plotësoni emrat e lojtarëve.\n"

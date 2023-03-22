@@ -473,8 +473,12 @@ class TestsLevel16(HedyTester):
         if 1 is color
             print 'success!'""")
 
-        with self.assertRaises(hedy.exceptions.InvalidTypeCombinationException):
-            hedy.transpile(code, self.level)
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidTypeCombinationException,
+            max_level=16,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
 
     @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
     def test_not_equal(self, arg):
@@ -513,6 +517,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -541,6 +546,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -570,6 +576,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -602,6 +609,7 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -610,11 +618,14 @@ class TestsLevel16(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
+            if event.unicode != 'x':
+                pygame_end = True
             if event.unicode == 'x':
               for dier in lijstje:
                 print(f'''dier''')
                 time.sleep(0.1)
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
 

@@ -55,6 +55,7 @@ adventures:
                     A legtöbb programozási nyelv idézőjelet használ a kiíratáshoz, így egy kicsit közelebb kerülünk az igazi programozáshoz!
                 example_code: "```\n{print} \"Mostantól idézőjeleket kell használni!\"\nválasz {is} {ask} \"Miket kell mostantól használni?\"\n{print} válasz \" kell használni.\"\n```\n"
                 story_text_2: "## A feladatok egyre nehezebbek lesznek\nA feladatok egyre nehezebbé válnak az egymást követő füleken.\nA legjobb, ha a baloldalon kezded és így haladsz jobbra a nagyobb kihívást jelentő feladatok felé.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     név {is} {ask} "Hogy hívnak?"
@@ -74,8 +75,7 @@ adventures:
                 example_code: "```\nnév {is} {ask} \"Hogy hívnak?\"\n{if} név {is} Hedy {print} \"klassz\" {else} {print} \"fúj!\"\n```\n"
                 story_text_3: "## Listák\nHa el szeretnénk dönteni, hogy valami benne van-e egy listában, mostantól használhatjuk az `{in}` parancsot.\nEz a program kiírja, hogy szép! ha zöldet vagy sárgát választasz, és elégedetlen, ha mást.\n"
                 example_code_3: "```\nszép_színek {is} zöld, sárga\nkedvenc_szín {is} {ask} \"Mi a kedvenc színed?\"\n{if} kedvenc_szín {in} szép_színek {print} \"szép!\"\n{else} {print} \"ajaj\"\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+
             6:
                 start_code: "{print} \"5-ször 5 az \" 5 * 5"
                 story_text: |
@@ -191,15 +191,6 @@ adventures:
                     ```
                     pontszám = 25
                     {print} pontszám " pontot értél el"
-                    ```
-                story_text_6: |-
-                    **Matek szavakkal**
-                    Ezen a szinten szabad használni a + jelet szöveggel. Például:
-                example_code_6: |
-                    ```
-                    a = "Helló "
-                    b = "világ!"
-                    {print} a + b
                     ```
             13:
                 start_code: |-
@@ -734,12 +725,6 @@ adventures:
                     A 3. szinten mondatokat készíthetünk a változó értékével, természetesen idézőjelekkel.
                     Ezúttal a minta kód nem egészen teljes. Be tudod fejezni a kódot?
                 start_code: print 'Mit dobunk ezúttal?'
-                example_code: |-
-                    ```
-                    dobasok is 1, 2, 3, 4, 5, earthworm
-                    print _ te jössz _
-                    print _ _ _ <- itt kell beprogramozni a dobást
-                    ```
             3:
                 start_code: print Mit dobunk ezúttal?
                 story_text: |-
@@ -825,11 +810,6 @@ adventures:
                     hozzáadni, akkor itt is idézőjeleket kell használnod.
                     Egészítsd ki a kódot úgy, hogy a helyes parancsokat vagy karaktereket írd be a
                     aláhúzásokra?
-                example_code: |-
-                    ```
-                    valasztas is kő, papír, olló
-                    print _ A számítógép ezt választotta: _ _ at _
-                    ```
             3:
                 story_text: |
                     ## Kő, papír, olló
@@ -952,6 +932,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                start_code: '# Schrijf jouw code hier'
     restaurant:
         name: Étterem
         default_save_name: Étterem
@@ -1221,8 +1205,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
     turtle:
         name: Teknős
@@ -1352,6 +1334,8 @@ adventures:
                     turn szog
                     forward 25
                     ```
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             4:
                 story_text: |-
                     ## Rajz
@@ -1392,8 +1376,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
     fortune:
         name: Jósnő
@@ -1714,7 +1697,7 @@ adventures:
                 example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n## Challenge\nNow it's very hard to win this game, can you make it easier to win?\nFor example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?\n"
             16:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
-                example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
+                example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# place your code here'
             2:
                 story_text: |

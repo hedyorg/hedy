@@ -13,12 +13,19 @@ sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))  # 
 from website.yaml_file import YamlFile  # noqa
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
+
+# Every key you add here must also be added to content/client-messages.txt
 ADDITIONAL_GETTEXT_KEYS = [
     'level_title',
+    'unsaved_class_changes',
+    'teacher_welcome',
+    'copy_link_to_share',
 ]
 
 
 def main():
+    validate_gettext_hackfile()
+
     translations = {}
     message_keys = set()
 
@@ -53,6 +60,27 @@ def main():
         f.write('export type MessageKey = ' + ' | '.join(f"'{k}'" for k in sorted(message_keys)) + '\n')
         f.write('export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = ' +
                 json.dumps(translations, indent=2, sort_keys=True, ensure_ascii=False) + ';\n')
+
+
+def validate_gettext_hackfile():
+    """Check that the client-messages.txt file has keys for each of our "additional" keys.
+
+    If we don't do this, babel will not find the keys when it does an extract.
+    """
+    filename = path.join(path.dirname(__file__), '..', '..', 'content', 'client-messages.txt')
+    with open(filename) as f:
+        messages = set(x.strip() for x in f.read().split('\n'))
+
+    oopsie = False
+
+    for additional_key in ADDITIONAL_GETTEXT_KEYS:
+        gettext_line = f"gettext('{additional_key}')"
+        if gettext_line not in messages:
+            oopsie = True
+            print(f'Put the following line into content/client-messages.txt:   {gettext_line}')
+
+    if oopsie:
+        sys.exit(1)
 
 
 if __name__ == '__main__':

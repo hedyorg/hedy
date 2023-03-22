@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
-    <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+    <link rel="stylesheet" href="{{static(generated_css_file)}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="icon" type="image/png" href="{{static('/images/Hedy-logo-96x96.png')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
@@ -85,7 +85,7 @@
     <div id="achievement_pop-up" class="z-30 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
         <div class="absolute top-2 right-2 cursor-pointer" onclick="hedyApp.closeAchievement();">
             <svg class="fill-current h-8 w-8 text-blue-600" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <title>Close</title>
+            <title>{{_('close')}}</title>
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
             </svg>
         </div>
@@ -97,22 +97,23 @@
             <div id="achievement_reached_statics" class="text-sm text-gray-500" class="italic">&lt;achievement_reached_statics&gt;</div>
         </div>
     </div>
+    {% block scripts %}
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    {% block scripts %}
     <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script>
-        hedyApp.passStateFromHtml({ lang: '{{ g.lang }}', level: '{{ level }}', keyword_language: "{{ g.keyword_lang }}" });
-    </script>
     {% block additional_scripts %}{% endblock %}
+    {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
     <script>hedyApp.initialize({
+      lang: {{ g.lang|tojson|safe }},
+      level: {{ level|tojson|safe }},
+      keyword_language: {{ g.keyword_lang|tojson|safe }},
       {% if initialize_logs %}logs: true,{% endif %}
+      javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
       });</script>
     {% endblock %}
   </body>

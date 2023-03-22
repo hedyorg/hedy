@@ -4,7 +4,7 @@
 <div id="modal-tags" class="hidden fixed z-50 py-4 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">
     <div class="absolute top-2 right-2" onclick="$('#modal-tags').hide();$('#modal-mask').hide();">
         <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <title>Close</title>
+            <title>{{_('close')}}</title>
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
         </svg>
     </div>
@@ -178,39 +178,4 @@
   <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
   {% endif %}
 </div>
-<script>
-    $(document).ready(function() {
-        $('.attribute').change(function() {
-            const attribute = $(this).attr('id');
-            if(!this.checked) {
-                $('#' + attribute + '_header').hide();
-                $('.' + attribute + '_cell').hide();
-            } else {
-                $('#' + attribute + '_header').show();
-                $('.' + attribute + '_cell').show();
-            }
-        });
-        // Todo TB: Not sure why I wrote this code here instead of in a .ts file -> re-structure this someday (08-22)
-        $('#admin_filter_category').change(function() {
-           $('.filter_input').hide();
-           if ($('#admin_filter_category').val() == "email" || $('#admin_filter_category').val() == "username") {
-               $('#email_filter_input').show();
-           } else if ($('#admin_filter_category').val() == "language") {
-               $('#language_filter_input').show();
-           } else if ($('#admin_filter_category').val() == "keyword_language") {
-                $('#keyword_language_filter_input').show();
-           } else {
-               $('#date_filter_input').show();
-           }
-        });
-
-        $('#next_page_btn').click(function() {
-            // Copy the token into the hidden input field, then submit the form
-            var token = $('#next_page_btn').data('page_token');
-            console.log(token);
-            $('#hidden-page-input').attr('value', token);
-            $('#filterform').submit();
-        });
-    });
-</script>
 {% endblock %}

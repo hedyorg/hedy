@@ -1,6 +1,6 @@
 import {pushAchievement, runit, theGlobalEditor} from "../app";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
-import { clearUnsavedChanges } from '../state';
+import { clearUnsavedChanges } from '../browser-helpers/unsaved-changes';
 
 let current_step = 0;
 

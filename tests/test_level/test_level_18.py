@@ -9,9 +9,10 @@ from tests.Tester import HedyTester
 class TestsLevel18(HedyTester):
     level = 18
 
-    def test_print_brackets(self):
-        code = textwrap.dedent("""\
-      print('Hallo!')""")
+    @parameterized.expand([['(', ')'], ['（', '）']])
+    def test_print_brackets(self, bracket_open, bracket_close):
+        code = textwrap.dedent(f"""\
+      print{bracket_open}'Hallo!'{bracket_close}""")
 
         expected = textwrap.dedent("""\
       print(f'''Hallo!''')""")
@@ -69,10 +70,11 @@ class TestsLevel18(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    def test_if_with_equals_sign(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand([':', '：'])
+    def test_if_with_dequals_sign_colon(self, colon):
+        code = textwrap.dedent(f"""\
       naam is 'Hedy'
-      if naam == Hedy:
+      if naam == Hedy{colon}
           print('koekoek')""")
 
         expected = textwrap.dedent("""\
@@ -317,6 +319,7 @@ class TestsLevel18(HedyTester):
         expected = HedyTester.dedent(f"""\
         x = 'PRINT'
         create_button(x)
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -325,9 +328,12 @@ class TestsLevel18(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.USEREVENT:
+            if event.key != 'PRINT':
+                pygame_end = True
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -343,6 +349,7 @@ class TestsLevel18(HedyTester):
         x = 'but'
         create_button(x)
         for i in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -351,9 +358,12 @@ class TestsLevel18(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.USEREVENT:
+              if event.key != 'but':
+                  pygame_end = True
               if event.key == 'but':
                 print(f'''wow''')
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)

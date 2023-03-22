@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir
+
+staticdir=../../../static
+targetfile=generated.css
+
+if [[ "${1:-}" == "--watch" ]]; then
+  echo "👀 Running Tailwind compilation in watch mode. 👀"
+  npx tailwindcss build -c $scriptdir/tailwind.config.js -i styles.css -o $staticdir/css/$targetfile --watch
+else
+  npx tailwindcss build -c $scriptdir/tailwind.config.js -i styles.css -o $staticdir/css/$targetfile
+  npx minify $staticdir/css/$targetfile > $staticdir/css/$targetfile.min
+  mv $staticdir/css/$targetfile{.min,}
+fi

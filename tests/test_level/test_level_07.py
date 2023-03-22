@@ -80,14 +80,20 @@ class TestsLevel7(HedyTester):
         n is 'test'
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_list_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 1, 2, 3
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
@@ -214,6 +220,7 @@ class TestsLevel7(HedyTester):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
 
         expected = HedyTester.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -222,11 +229,14 @@ class TestsLevel7(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
+            if event.unicode != 'x':
+                pygame_end = True
             if event.unicode == 'x':
               for __i__ in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(
             code=code,
@@ -239,6 +249,7 @@ class TestsLevel7(HedyTester):
             if z is pressed print 'doe het 1 keer!'""")
 
         expected = HedyTester.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -252,18 +263,19 @@ class TestsLevel7(HedyTester):
               break
             else:
               _ = 'x'
-              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
               print(f'doe het 1 keer!')
               break
             else:
               _ = 'x'
-              break
           if event.type == pygame.KEYDOWN:
+            if event.unicode != 'z':
+                pygame_end = True
             if event.unicode == 'z':
               print(f'doe het 1 keer!')
-              break""")
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(
             code=code,
@@ -278,6 +290,7 @@ class TestsLevel7(HedyTester):
 
         expected = HedyTester.dedent("""\
         for __i__ in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -297,9 +310,10 @@ class TestsLevel7(HedyTester):
                 break
               else:
                 _ = 'x'
-                break
+              # End of PyGame Event Handler
           time.sleep(0.1)
         for __i__ in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -319,9 +333,10 @@ class TestsLevel7(HedyTester):
                 break
               else:
                 _ = 'x'
-                break
+              # End of PyGame Event Handler
           time.sleep(0.1)
         for __i__ in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -330,6 +345,8 @@ class TestsLevel7(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN:
+              if event.unicode != 'z':
+                  pygame_end = True
               if event.unicode == 'z':
                 __trtl = 15
                 try:
@@ -339,6 +356,7 @@ class TestsLevel7(HedyTester):
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
+              # End of PyGame Event Handler
           time.sleep(0.1)""")
 
         self.single_level_tester(

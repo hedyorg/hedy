@@ -1,11 +1,11 @@
 Helping build Hedy
 ------------
 
-We would be grateful if you want to help make Hedy better! 
+We would be grateful if you want to help make Hedy better!
 
 **How to get in touch with the team**
 Hedy is built with a team of people, and while we love people to help out, we do ask that you let us know that you want to work on something before doing so,
-(either on GitHub or on Discord) so we don't get overwhelmed with small PRs to review for issues that don't have a lot of priority. 
+(either on GitHub or on Discord) so we don't get overwhelmed with small PRs to review for issues that don't have a lot of priority.
 
 Our main channel of communication is our [Discord](https://discord.gg/8yY7dEme9r), so please join us there and let us know that you want to help out.
 We also have bi-weekly contributors meetings on Tuesdays at 7:30 CET (dates and link are in Discord) where we discuss larger issues and plans.
@@ -25,13 +25,13 @@ For these types of issues it is fine to ping us on GitHub before starting the wo
 
 **Discussions**
 
-The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture.
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into an issue, like big new features or overhauls of the language or architecture.
 If you are interested in working on topics related to an open discussion, please join a meeting to discuss the plans in detail.
 
 Contributing to Hedy
 ------------
 
-The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces). 
+The easiest way to get a working development environment to work on Hedy is through [Github Codespaces](https://github.com/features/codespaces).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?machine=basicLinux32gb&repo=226863521&ref=main&location=WestEurope)
 
@@ -46,7 +46,7 @@ Run Hedy on your machine
 
 VS Code has a great Dev Containers extension that allows you to connect the IDE to a development (docker) container. More info can be found on https://code.visualstudio.com/docs/devcontainers/containers
 
-After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy. 
+After opening this repo in VS Code, they will ask whether you want to open this folder in a container. Do this and you will have a working environment in which you can develop Hedy.
 
 
 **Local installation**
@@ -59,7 +59,7 @@ Then, here's how to get started once you have downloaded or cloned the code:
 ```bash
 $ python3 -m venv .env
 $ source .env/bin/activate
-(.env)$ pip install -r requirements.txt
+(.env) $ pip install -r requirements.txt
 ```
 
 Or if you're on Windows in a powershell window with py launcher installed:
@@ -71,7 +71,7 @@ Or if you're on Windows in a powershell window with py launcher installed:
 
 If you want to run the website version locally, run:
 ```bash
-(.env)$ python app.py
+(.env) $ python app.py
 ```
 Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
 
@@ -80,7 +80,7 @@ Additionally, some pages are known to give a type error about string concatenati
 To run the unit tests:
 
 ```bash
-(.env)$ python -m pytest
+(.env) $ python -m pytest
 ```
 
 To run the front-end tests, you need to install the NPM dependencies (which includes Cypress, the front-end test
@@ -89,36 +89,63 @@ framework) first.
 ```bash
 $ npm install
 ```
+**Running the front end tests**
 
-To run the tests go to `/tests/` first:
+We use [Cypress](https://docs.cypress.io/guides/overview/why-cypress) as our front end testing tool. To run the front-end tests you need to go to `/tests/` first:
 
 ```bash
 $ cd tests
 ```
+To run all of the tests you can run this command:
 
-You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
-An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
+```bash
+$ npx cypress run
+```
+For the tests to be truly reproducible, you need to clean the database first and put our tests data there, for that you can need to run the `feed_dev_database.sh` script.
+
+You can also run a particular set of tests on the command line with the following command:
+
+```bash
+npx cypress run --spec "[path to test(s)]"
+```
+
+An example of running the tests for the login page would be:
+
+```bash
+npx cypress run --spec "cypress/e2e/login_page/*"
+```
+If you want to see the Cypress panel and see the tests visually, you can run this command in the `/tests` folder:
+
+```bash
+npx cypress open
+```
+
+You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
 Do note a few things:
-* Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
-* Run pybabel before running the tests as they can also rely on exact labels
+* Run `pybabel` before running the tests as they can also rely on exact labels
 * For the same reason, set your app to English
-* ensure the ADMIN_USER environment variable is set to `admin` before starting the app. e.g.     
-    ```
-    $ . ./.env/bin/activate  
-    (.env)$ export ADMIN_USER=admin  
+* ensure the `ADMIN_USER` environment variable is set to `admin` before starting the app. e.g.
+    ``` bash
+    $ . ./.env/bin/activate
+    (.env)$ export ADMIN_USER=admin
     (.env)$ python app.py
     ```
 If you want to connect Cypress to the online dashboard, use:
 
-`npx cypress run --record --key <key here>`
-
-You can also open the Cypress panel, using this in `/tests`:
-```
-$ npx cypress open
+```bash
+npx cypress run --record --key <key here>
 ```
 
-You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+To check the front end test coverage, you can run the script:
+
+```bash
+./tests/get-code-coverage
+```
+
+And then go open the `index.html` file located in `tests/coverage/lcov-report`, for more information about how this all works you can go (here)[https://docs.cypress.io/guides/tooling/code-coverage]
+
+The script will only do its job if all the tests pass successfully! So take that into account.
 
 ## Feeding the local database
 
@@ -134,21 +161,21 @@ The password to all of the accounts is 123456
 
 To feed the dev database with the data in this one, you can run:
 
-```
+```bash
 bash feed_dev_database.sh
 ```
 
 ## Python code styling
 As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 120 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands. The pre-commit hook is available for installation once you run `requirements.txt`:
 
-```
-pre-commit install
+```bash
+(.env) $ pre-commit install
 ```
 
 After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
-```git commit -m "your message" --no-verify```
+`git commit -m "your message" --no-verify`
 
 When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it!
 
@@ -166,40 +193,58 @@ bundle by running:
 # You only need to run 'npm ci' once to install the tools
 $ npm ci
 
-# Afterwards run this:
-$ build-tools/heroku/generate-typescript --watch
+# Afterwards run this (requires Python virtual environment):
+(.env) $ build-tools/heroku/generate-typescript --watch
 ```
 
-The ```--watch``` command will keep looking for changes and automatically update the files.
-To just keep it running while you are working on the front-end code.
+The `--watch` parameter makes the command keep looking for changes and automatically updating the files.
+It's a good idea to keep it running while you are working on the front-end code.
 If you just want to run the code once, simply remove this parameter.
-Make sure to re-load your browser (and work in incognito mode) to see the changes.
+Make sure to reload your browser (and work in incognito mode) to see the changes.
 These files are also automatically generated on deploy, so don't worry if you forget to generate them.
 
 ## Working on the web front-end in Tailwind
-All the styling in our front-end HTML templates is done using the Tailwind library.
-This library has generated classes for styling which we can call on HTML elements.
-To make sure you have access to all possible styling classes, generate the development css file:
-```
+
+All the styling in our front-end HTML templates is done using the [Tailwind
+library](https://tailwindcss.com/docs/installation).  This library has generated
+classes for styling which we can apply to HTML elements.
+
+You normally do not need to think about this. During development, a multi-megabyte
+CSS file will be served that contains most classes. During deployment, a minimized CSS
+file is automatically produced.
+
+You may need to regenerate the development CSS file if you want to do one of the following things:
+
+* Use a *conditional* Tailwind class (for example, a class that starts with `hover:`).
+  Write the class in the HTML, then regenerate the CSS.
+* Add custom classes to `styles.css`.
+
+Run the following command to regenerate the development CSS file:
+
+```bash
 $ ./build-tools/heroku/tailwind/generate-development-css
 ```
-When merging we want to keep the CSS file as small as possible for performance reasons.
-Tailwind has a built-in ```purge``` option to only generate CSS for classes that are actually being used.
-Please run the following command so Tailwind only generated actual used classes:
-```
-$ ./build-tools/heroku/tailwind/generate-css
-```
+
 For all possible styling classes and more, take a look at their [website](https://tailwindcss.com).
-If you want to combine different Tailwind classes into one class or one element, we can do this in the ```/build-tool/heroku/tailwind/styles.css``` file.
-By using the ```@apply``` attribute we can assign classes to other styling. For example, we styled the ```<h1>``` element with multiple Tailwind classes like this:
-```
+
+If you want to combine different Tailwind classes into one class or one element,
+we can do this in the `/build-tool/heroku/tailwind/styles.css` file.  By using
+the `@apply` attribute we can assign classes to other styling. For example, we
+styled the `<h1>` element with multiple Tailwind classes like this:
+
+```css
 h1 {
   @apply font-extralight text-4xl;
 }
 ```
-If you want to use styling that is not available in the Tailwind library this can be added to the ```static/css/additional.css``` file.
-But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
-Also, please refrain from using inline CSS styling, as this makes the templates hard to read, maintain and alter.
+
+If you want to use styling without running a Tailwind build and without using
+Tailwind classes, add it to `static/css/additional.css` file. But please, try to
+use the Tailwind classes as much as possible as these are optimized and keep our
+code base consistent and readable.
+
+Also, please refrain from using inline CSS styling, as this makes the templates
+hard to read, maintain and alter.
 
 ## Working with translations
 
@@ -212,7 +257,7 @@ If you see placeholders with underscores one the website instead of proper texts
 
 ![image](https://user-images.githubusercontent.com/1003685/187742388-27fe3f28-5692-4f42-be0e-93bb9c1131be.png)
 
-That means you will have to run pybabel once:
+That means you will have to run `pybabel` once:
 
 `pybabel compile -f -d translations`
 
@@ -220,23 +265,23 @@ That means you will have to run pybabel once:
 
 When adding new content or implementing a feature that requires new translations you need to manually add these translation keys.
 
-When adding YAML translations please add these to the corresponding YAML file in the ```/content``` folder.
-Make sure that you comform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the English YAML file. Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
+When adding YAML translations please add these to the corresponding YAML file in the `/content` folder.
+Make sure that you conform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the English YAML file. Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
 
-When adding new Babel translations the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
+When adding new Babel translations the implementation is a bit more complex, but don't worry! It should all work fine with the following steps:
 1. First we add the translation "placeholder" to either the front-end or back-end
-    * When on the front-end (in a .html template) we do this like this: ```{{ _('test') }}```
-    * Notice that the ```{{ }}``` characters are Jinja2 template placeholders for variables
-    * When on the back-end we do this like this: ```gettext('test')```
-2. Next we run the following command to let Babel search for keys. We do not want line numbers since those will lead to lots of Weblate merge conflicts:
-    * ```pybabel extract -F babel.cfg -o messages.pot . --no-location```
+    * When on the front-end (in a `.html` template) we do this like this: `{{ _('test') }}`
+    * Notice that the `{{ }}` characters are Jinja2 template placeholders for variables
+    * When on the back-end we do this like this: `gettext('test')`
+2. Next we run the following command to let Babel search for keys, it is important to locations and sort the output to minimize merge conflicts:
+    * `pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output`
 3. We now have to add the found keys to all translation files, with the following command:
-    * ```pybabel update -i messages.pot -d translations -N  --no-wrap```
+    * `pybabel update -i messages.pot -d translations -N  --no-wrap`
 4. All keys will be automatically stored in the /translations folder
-5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
+5. Search for the .po files for the languages you know and find the empty `msgstr` for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
 7. If you want to test it locally, run:
-    * ```pybabel compile -f -d translations```
+    * `pybabel compile -f -d translations`
 8. This action will also always be run on deployment to make sure the translations are up-to-date
 
 ## Solving common merge conflicts
@@ -254,48 +299,52 @@ In this section we describe the most common merge conflicts and how to solve the
 When having a merge conflict with the `generated.css` file this is probably the result of you working on CSS code and updating files with the Tailwind script.
 While working on this the file is updated on the `main` branch as well. In this case you can simply accept your own branch when a conflict occurs.
 If your PR still needs a review, make sure to run the Tailwind script again after the conflicts are solved.
-Don't worry if you make a mistake here, the files are always generated again on deploy. Making sure they are always up-to-date.
+Don't worry if you make a mistake here, the files are always generated again on deploy so they are always up-to-date on the live server.
 
 #### Conflict with some (or all of the) `.po files`
-When having a merge conflict with (some of) the .po files this is probably the result of you working with the Babel translations.
-When adding a new translatable string all .po files are updated and the _Last revision_ header of each file is updated as well.
+When having a merge conflict with (some of) the `.po` files this is probably the result of you working with the Babel translations.
+When adding a new translatable string all `.po` files are updated and the `_Last revision_` header of each file is updated as well.
 As Weblate automatically updates these files as well it might happen that another branch already merge into main triggered Weblate, resulting in merge conflicts in your branch.
 These headers don't have influence on the functionality, but it is good practice to keep the main branch header when solving these conflicts.
-The po files are **not** generated on deploy, so we should be careful to correctly merge these.
+The `.po` files are **not** generated on deploy, so we must be careful to correctly merge these.
 
 #### Conflict with `appbundle.js` and `appbundle.js.map`
 When having a merge conflict with the `appbundle` files this is probably the result of you working on TypeScript code and updating the files.
 While working on this the file is updated on the `main` branch as well. In this case you can simply accept your own branch when a conflict occurs.
 If your PR still needs a review, make sure to run the TypeScript script again after the conflicts are solved.
-Don't worry if you make a mistake here, the files are always generated again on deploy. Making sure they are always up-to-date.
+Don't worry if you make a mistake here, the files are always generated again on deploy so they are always up-to-date on the live server.
 
 ## Using Docker
 
-If you want to run the website locally, but would prefer to use Docker instead
-of installing python, you can build a container image and run it like so:
+If you want to run the website locally and would prefer to use Docker you can build a container with:
 
 ```bash
 docker build -t hedy .
 ```
 
-and then:
+and then you can run the docker container with:
 
 ```bash
-docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app --name hedy hedy
+```
+
+After that, you can access bash inside the container with:
+```bash
+docker exec -it hedy bash
 ```
 
 ## Testing Admin facing features locally
 
-For some things like making classes you need a teacher's account which you might want to test locally. 
-For that you can use the account teacher1 which is stored in the local database.
+For some things like making classes you need a teacher's account which you might want to test locally.
+For that you can use the account `teacher1` which is stored in the local database.
 
-If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=teacher1. It works a bit differently in each IDE, this is what it looks like for PyCharm:
+If you want to try Admin features locally (for example, marking accounts as teacher or updating tags) you have to run Hedy with the environment variable `ADMIN_USER` set to your username, e.g. `ADMIN_USER=teacher1`. It works a bit differently in each IDE, this is what it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
 ## What happens when I make a PR?
 
-When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally. 
+When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally.
 
 If the PR is approved, it will be merged with a [mergify script](https://github.com/hedyorg/hedy/blob/main/.mergify.yml). Please don't do anything (esp. don't enable auto merge), all will be handled automatically. Mergify will also tell you that when the PR is approved.
 

@@ -1,6 +1,6 @@
 1:
 -   explanation: "用`{print}`打印一些东西。"
-    demo_code: "{print} 你好欢迎来到海迪!"
+    demo_code: "{print} 你好欢迎来到海蒂!"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
     demo_code: "{ask} 你最喜欢的颜色是什么？"
@@ -22,7 +22,7 @@
 2:
 -   explanation: "用`{is}`来给一个词命名以便在程序中使用这个词。你可以自己选择这个名字。"
     demo_code: |-
-        名字 {is} 海迪
+        名字 {is} 海蒂
         {print} 欢迎名字
     name: '{is}'
 -   explanation: "用`{ask}` 提出问题。 注意！ 现在你需要用`{is}` 给答案命名。"
@@ -31,7 +31,7 @@
         {print} 颜色是我最喜欢的颜色！
     name: '{ask}'
 -   name: '{sleep}'
-    explanation: '`{sleep}` 会让海迪暂停几秒钟。'
+    explanation: '`{sleep}` 会让海蒂暂停几秒钟。'
     demo_code: "{print} 让我考虑一秒钟......\n{sleep}\n{print} 嗯，我还需要3秒钟.....\n{sleep} 3\n{print} 找到了！我找到了！"
 -   demo_code: "角度 {is} 90\n{turn} 角度\n{forward} 100"
     name: '海龟绘图与 {is}'
@@ -50,11 +50,11 @@
     explanation: '`{remove}` 一个项目 `{from}` 一个列表。'
 4:
 -   explanation: "打印的内容要用单引号标注清楚。"
-    demo_code: "{print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海蒂。'"
     name: '{print}'
 -   explanation: "给一段文本命名，并不带引号`{print}`出这段文本。"
     demo_code: |-
-        名字 {is} 海迪
+        名字 {is} 海蒂
         {print} '我的名字是 ' 名字
     name: '{is}'
 -   explanation: "用 `{ask}`提出问题。"
@@ -64,7 +64,7 @@
     name: '{ask}'
 5:
 -   explanation: "打印的内容要用引号标注清楚。"
-    demo_code: "{print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海蒂。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
     demo_code: |-
@@ -94,7 +94,7 @@
         答案 = {ask} '10加10等于几?'
         {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
     name: '{ask}'
--   name: "海龟绘图的 {ask} 和 {if}"
+-   name: "海龟绘图的`{ask}` 和 `{if}`命令"
     explanation: "询问使用者想要多少度。"
     demo_code: |-
         角度 = {ask} '多少度？'
@@ -102,7 +102,7 @@
         {forward} 50
 7:
 -   explanation: "打印的内容要用单引号标注清楚。"
-    demo_code: "{print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海蒂。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
     demo_code: |-
@@ -184,9 +184,9 @@
 -   name: "文本赋值"
     explanation: "`=`后带引号的文本"
     demo_code: |-
-        name= '海迪机器人'
+        name= '海蒂机器人'
         {print} '你好，' name
--   name: "{if} 比较后的引号"
+-   name: "`{if}`比较后的引号"
     explanation: "`{if}`之后的带引号文本。"
     demo_code: |-
         name = {ask} '你是谁？'

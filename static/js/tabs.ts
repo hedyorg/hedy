@@ -1,13 +1,20 @@
-import { modal } from './modal';
-import { theGlobalEditor } from './app';
-import {loadParsonsExercise} from "./parsons";
-import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
-import { ClientMessages } from './client-messages';
+import { EventEmitter } from './event-emitter';
 
-let _currentTab: string | undefined;
+export interface SwitchTabsEvent {
+  readonly oldTab: string;
+  readonly newTab: string;
+}
 
+export interface TabEvents {
+  beforeSwitch: SwitchTabsEvent;
+  afterSwitch: SwitchTabsEvent;
+}
+
+export interface TabOptions {
+  readonly initialTab?: string;
+}
 /**
- * Activate tabs
+ * Tabs
  *
  * Protocol:
  *
@@ -24,140 +31,87 @@ let _currentTab: string | undefined;
  * The active TAB is indicated by the  '.tab-selected' class, the active
  * TARGET by the *absence* of the '.hidden' class.
  */
-export function initializeTabs() {
-  $('*[data-tab]').on('click', (e) => {
-    const tab = $(e.target);
-    const tabName = tab.data('tab');
+export class Tabs {
+  private _currentTab: string = '';
 
-    e.preventDefault ();
-
-    // If there are unsaved changes, we warn the user before changing tabs.
-    if (hasUnsavedChanges()) {
-      modal.confirm(ClientMessages['Unsaved_Changes'], () => switchToTab(tabName));
-    } else {
-      switchToTab(tabName);
-    }
-
-    // Do a 'replaceState' to add a '#anchor' to the URL
-    const hashFragment = tabName !== 'level' ? tabName : '';
-    if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
+  private tabEvents = new EventEmitter<TabEvents>({
+    beforeSwitch: true,
+    afterSwitch: true,
   });
 
-  // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-  // We click on `level` to load a program associated with level, if any.
-  if (APP_STATE.loaded_program?.adventure_name) {
-    switchToTab(APP_STATE.loaded_program?.adventure_name);
-  }
-  else if (window.location.hash) {
-    // If we have an '#anchor' in the URL, switch to that tab
-    const hashFragment = window.location.hash.replace(/^#/, '');
-    if (hashFragment) {
-      switchToTab(hashFragment);
+  constructor(options: TabOptions={}) {
+    $('*[data-tab]').on('click', (e) => {
+      const tab = $(e.target);
+      const tabName = tab.data('tab') as string;
+
+      e.preventDefault();
+      this.switchToTab(tabName);
+    });
+
+    // Determine initial tab
+    // 1. Given by code
+    // 2. In the URL
+    // 3. Otherwise the first one we find
+    let initialTab = options.initialTab;
+    if (!initialTab && window.location.hash) {
+      const hashFragment = window.location.hash.replace(/^#/, '');
+      initialTab = hashFragment;
     }
-  } else {
-    // If this is not the case: open the first tab we find
-    let tabname = $('.tab:first').attr('data-tab');
-    if (tabname) {
-      switchToTab(tabname);
+    if (!initialTab) {
+      initialTab = $('.tab:first').attr('data-tab');
+    }
+
+    if (initialTab) {
+      this.switchToTab(initialTab);
     }
   }
-}
 
-export function currentTab() {
-  return _currentTab;
-}
+  public switchToTab(tabName: string) {
+    const doSwitch = () => {
+      this._currentTab = tabName;
 
-/**
- * Hide all things that may have been dynamically shown
- */
-function resetWindow() {
-  $('#warningbox').hide ();
-  $('#errorbox').hide ();
-  $('#okbox').hide ();
-  $('#repair_button').hide();
-  const output = $('#output');
-  const variable_button = $(output).find('#variable_button');
-  const variables = $(output).find('#variables');
-  output.empty();
-  $('#turtlecanvas').empty();
-  output.append(variable_button);
-  output.append(variables);
-  clearUnsavedChanges();
-}
+      // Do a 'replaceState' to add a '#anchor' to the URL
+      const hashFragment = tabName !== 'level' ? tabName : '';
+      if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
 
-function switchToTab(tabName: string) {
-  _currentTab = tabName;
+      // Find the tab that leads to this selection, and its siblings
+      const tab = $('*[data-tab="' + tabName + '"]');
+      const allTabs = tab.siblings('*[data-tab]');
 
-  // Find the tab that leads to this selection, and its siblings
-  const tab = $('*[data-tab="' + tabName + '"]');
-  const allTabs = tab.siblings('*[data-tab]');
+      // Find the target associated with this selection, and its siblings
+      const target = $('*[data-tabtarget="' + tabName + '"]');
+      const allTargets = target.siblings('*[data-tabtarget]');
 
-  // Find the target associated with this selection, and its siblings
-  const target = $('*[data-tabtarget="' + tabName + '"]');
-  const allTargets = target.siblings('*[data-tabtarget]');
+      // Fix classes
+      allTabs.removeClass('tab-selected');
+      tab.addClass('tab-selected');
 
-  // Fix classes
-  allTabs.removeClass('tab-selected');
-  tab.addClass('tab-selected');
+      allTargets.addClass('hidden');
+      target.removeClass('hidden');
 
-  allTargets.addClass('hidden');
-  target.removeClass('hidden');
+      this.tabEvents.emit('afterSwitch', { oldTab: this._currentTab, newTab: tabName });
+    }
 
-  const adventures: Record<string, Adventure> = {};
-  APP_STATE.adventures?.map (function(adventure: Adventure) {
-    adventures [adventure.short_name] = adventure;
-  });
-
-  resetWindow();
-
-  const isCodeTab = !(tabName === 'quiz' || tabName === 'parsons');
-
-  // .toggle(bool) sets visibility based on the boolean
-
-  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
-  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
-  $('#developers_toggle_container').toggle(isCodeTab);
-  $('#level-header input').toggle(isCodeTab);
-  $('#parsons_code_container').toggle(tabName === 'parsons');
-  $('#editor-area').toggle(isCodeTab || tabName === 'parsons');
-  $('#editor').toggle(isCodeTab);
-  $('#debug_container').toggle(isCodeTab);
-
-  if (tabName === 'parsons') {
-    loadParsonsExercise(APP_STATE.level, 1);
-    return;
-  }
-
-  // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-  if (APP_STATE.loaded_program?.adventure_name === tabName) {
-    $ ('#program_name').val (APP_STATE.loaded_program.name);
-    theGlobalEditor?.setValue (APP_STATE.loaded_program.code);
-  }
-  // If there's a loaded program for the adventure or level now selected, use it.
-  else if (adventures[tabName]?.loaded_program) {
-    $ ('#program_name').val (adventures[tabName].loaded_program!.name);
-    theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
-  }
-  else {
-    if (tab.hasClass('teacher_tab')) {
-      $ ('#program_name').val (tabName);
-      theGlobalEditor?.setValue ("");
+    // We don't do a beforeSwitch event for the very first tab switch
+    if (this._currentTab != '') {
+      const event = this.tabEvents.emit('beforeSwitch', { oldTab: this._currentTab, newTab: tabName });
+      event.then(doSwitch);
     } else {
-      const adventure = adventures[tabName];
-      if (adventure) {
-        if (adventure.default_save_name == 'intro') {
-          $('#program_name').val(`${ClientMessages.level_title} ${APP_STATE.level}`);
-        } else {
-          $('#program_name').val(`${adventure.default_save_name} - ${ClientMessages.level_title} ${APP_STATE.level}`);
-        }
-        theGlobalEditor?.setValue(adventure.start_code);
-      }
+      doSwitch();
     }
   }
 
-  theGlobalEditor?.clearSelection();
-  theGlobalEditor?.session.clearBreakpoints();
+  public get currentTab() {
+    return this._currentTab;
+  }
 
-  // If user wants to override the unsaved program, reset unsaved_changes
-  clearUnsavedChanges();
+  public on(key: Parameters<typeof this.tabEvents.on>[0], handler: Parameters<typeof this.tabEvents.on>[1]) {
+    const ret = this.tabEvents.on(key, handler);
+    // Immediately invoke afterSwitch when it's being registered
+    if (key === 'afterSwitch') {
+      this.tabEvents.emit('afterSwitch', { oldTab: '', newTab: this._currentTab });
+    }
+    return ret;
+  }
 }
+

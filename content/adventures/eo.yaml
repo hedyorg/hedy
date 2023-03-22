@@ -128,6 +128,8 @@ adventures:
                 story_text: "## Ni desegnu\nEn Nivelo 5, oni povas fari elekton per `{if}`. Ekzemple, inter diversaj specoj de figuroj.\n"
                 example_code: "```\n{print} 'Desegnante figurojn'\nfiguro {is} {ask} 'Ĉu vi deziras kvadraton aŭ triangulon?'\n{if} figuro {is} triangulo angulo {is} 120\n{else} angulo {is} 90\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n```\n"
                 start_code: "{print} 'Desegnante figurojn'\nfiguro {is} {ask} 'Ĉu vi deziras kvadraton aŭ triangulon?'\n{if} figuro {is} triangulo angulo {is} 120 {else} angulo {is} 90\n{turn} angulo\n{forward} 25"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: "## Ni desegnu\nEn ĉi tiu nivelo vi povas uzi kalkulojn por desegni malsamajn figurojn.\nVi eble lernis en la lernejo, ke turni plenan cirklon estas 360 gradoj. Se ne, nun vi scias!\nTial vi ankaŭ uzas 90 gradojn por kvadrato. 360 dividita per 4 estas 90.\nNun kiam ni povas fari matematikon kun Hedy, ni povas desegni ĉiujn figurojn, kiujn ni volas!\n"
                 example_code: "```\nanguloj = {ask} 'Kiom da anguloj vi deziras?'\nangulo = 360 / anguloj\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n```\n"
@@ -141,8 +143,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Testudo
         description: Faru vian propran desegnaĵon
@@ -203,7 +204,6 @@ adventures:
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             4:
                 story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo ni povas plu programi rokon, paperon, tondilon. Sed se vi volas aldoni tekston, vi devas uzi citilojn ankaŭ ĉi tie.\nĈu vi kompletigas la kodon enmetante la ĝustajn komandojn aŭ signojn sur la substrekoj?<!--{if}-->\n"
-                example_code: "```\nelektoj {is} roko, papero, tondilo\n{print} _ La komputilo elektis la jenon: _ _ {at} _\n```\n"
                 start_code: "{print} 'Bonvenon al ludo de roko, papero kaj tondilo!'"
             5:
                 story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo ni povas determini kiu venkis.\nPor tio vi bezonas la novan kodon `{if}`.\n\nKonservu vian elekton kun la elektonomo kaj la elekto de komputilo kiel komputila elekto.\nTiam vi povas uzi `{if}` por vidi {if} ili estas samaj aŭ malsamaj.\nĈu vi finos la kodon?\n"
@@ -260,6 +260,10 @@ adventures:
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
         description: Krei kalkulilon
         default_save_name: Kalkulilo
     restaurant:
@@ -330,8 +334,6 @@ adventures:
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
                 example_code: "```\nprezo = 10\nmanĝaĵo = {ask} 'Kion vi volas manĝi?'\ntrinkaĵo = {ask} 'Kion vi volas trinki?'\n{if} manĝaĵo {is} 'sandviĉo' {and} trinkaĵo {is} 'suko'\n    {print} 'Jen nia rabatmenuaĵo'\n    prezo = prezo - 3\n{print} 'La totalo estas ' prezo ' spesmiloj'\n```\n"
-                story_text_2: "Oni uzas `{or}` (ofte kun ` {if}`) por kontroli, ĉu almenaŭ unu el du kondiĉoj veras.\n"
-                example_code_2: "```\ntrinkaĵo = {ask} 'Kion vi volas trinki?'\n{if} trinkaĵo {is} 'akvo' {or} trinkaĵo {is} 'suko'\n    {print} 'Jen sana elekto'\n```\n"
                 start_code: '# via kodo ĉi tie'
             15:
                 story_text: "## Restoracio\nPer la `{while}` vi povas certigi, ke viaj klientoj povas mendadi ĝis ili finiĝos.\n"
@@ -449,6 +451,7 @@ adventures:
                 story_text: "## 'Citiloj'\nEn Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
                 example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
                 story_text_2: "## Aventuroj fariĝas pli kaj pli malfacilaj\nLa aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
+                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
                 story_text: "## Se... alie....\nEn Nivelo 5 estas io nova, la `{if}`! Per la `{if}`, oni povas elekti inter du malsamaj opcioj.\nLa jena kodo presos «bone», se vi tajpos «Hedy» kiel nomon, kaj «ba!», se vi tajpos ion alian.\n`{ask}` kaj `{print}` daŭre funkcias kiel en Nivelo 4.\n"
@@ -457,8 +460,7 @@ adventures:
                 example_code_3: "```\nbelaj_koloroj {is} verda, flava\nŝatata_koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} ŝatata_koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
                 story_text_2: "Kelkfoje kodo kun `{if}` estas tro longa por unu linio.<br>Oni ankaŭ povas dividi la kodon inter du linioj, komencante la duan linion ĉe la `{else}` jene:\n"
                 example_code_2: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone'\n{else} {print} 'ba!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 start_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
                 story_text: "## 1 + 1\n En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.\n\n La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.\n\n La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!\n Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.\n"
@@ -497,8 +499,6 @@ adventures:
                 example_code_4: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo = 'Hedy la Roboto'\n    {print} 'Saluton!'\n```\n"
                 story_text_5: "**Nombroj ne bezonas citilojn**\nPor nombroj, vi ne uzas citilojn en la `=`:\n"
                 example_code_5: "```\npoentaro = 25\n{print} 'Via poentaro estas ' poentaro\n```\n"
-                story_text_6: "**Matematiko kun vortoj**\nEn ĉi tiu nivelo estas ankaŭ permesite uzi la signon + kun tekstoj. Ekzemple:"
-                example_code_6: "```\na = 'Saluton '\nb = 'mondo!'\n{print} a + b\n```\n"
             13:
                 start_code: "nomo = {ask} 'Kio estas via nomo?'\naĝo = {ask} 'Kio estas via aĝo?'\n{if} nomo {is} 'Hedy' {and} aĝo {is} 2\n    {print} 'Vi estas la vera Hedy!'"
                 story_text: "## Kaj… aŭ…?\nNi nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo devas esti vera."
@@ -573,7 +573,6 @@ adventures:
                 example_code_2: "```\nchoices {is} _\n```\n"
             4:
                 story_text: "## Ĵetkuboj\nEn ĉi tiu nivelo ni povas fari frazojn kun la die valoro en la frazo, kun citaĵoj kompreneble.\nĈi-foje la ekzempla kodo ne estas tute kompleta. Ĉu vi povas fini la kodon?\n"
-                example_code: "```\nelektoj {is} 1, 2, 3, 4, 5, lumbriko\n{print} _ la rezulto de via ĵeto estas _\n{print} _ _ _ <- jen vi programu la elektadon\n```\n"
                 start_code: "{print} 'Kion indikos la ĵetkubo ĉi-foje?'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
