@@ -476,14 +476,14 @@ export function select_all_levels_adventure(adventure_name: string) {
 export function enable_level(level: string) {
     markUnsavedChanges();
     // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('blue-btn')) {
+    if ($('#level_button_' + level).hasClass('gray-btn')) {
         $('.adventure_level_' + level).each(function(){
             $(this).removeClass('hidden');
             if ($(this).is(':enabled')) {
                 $(this).prop("checked", true);
             }
         });
-        $('#level_button_' + level).removeClass('blue-btn');
+        $('#level_button_' + level).removeClass('gray-btn');
         $('#level_button_' + level).addClass('green-btn');
 
         // We also have to add this level to the "Opening dates" section
@@ -506,7 +506,7 @@ export function enable_level(level: string) {
             $(this).addClass('hidden');
         });
         $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('blue-btn');
+        $('#level_button_' + level).addClass('gray-btn');
         // if this level was shown, hide it
         if($("#level-"+level).hasClass('flex')) {
           $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
