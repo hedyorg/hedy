@@ -199,6 +199,17 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
+    def test_assign_catalan_var_name(self):
+        code = textwrap.dedent("""\
+            pel·lícula is Sonic the Hedgehog 2
+            print 'Veurem una ' pel·lícula""")
+
+        expected = textwrap.dedent("""\
+            pel·lícula = 'Sonic the Hedgehog 2'
+            print(f'Veurem una {pel·lícula}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_place_holder_no_space(self):
         # same as print for level 4
         code = "print _Escape from the haunted house!_"
