@@ -200,6 +200,15 @@ describe('customize class page', () => {
       })
     });
 
+    it ('Disabling current level displays a message', () => {      
+      cy.getBySel('level-1').should('be.visible');
+      cy.getBySel('disabled_message').should('not.be.visible');
+      
+      cy.getBySel('enable_level_1').click();
+      cy.getBySel('level-1').should('not.be.visible');
+      cy.getBySel('disabled_message').should('be.visible');
+    })
+
     describe('an adventure that is hidden', () => {
       const hiddenAdventure = 'parrot';
 

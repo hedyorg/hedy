@@ -23,7 +23,7 @@
         <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
         <div class="py-2 px-4 w-9/12 overflow-x-scroll">
             {% for i in range(1, max_level + 1) %}
-                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
+                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
             {% endfor %}
         </div>
     </div>
@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-9/12">
-                <div class="flex flex-1 align-center items-center bg-gray-300 rounded-lg mt-2 hidden" id="disabled">
+                <div class="flex flex-1 align-center items-center bg-gray-300 rounded-lg mt-2 hidden" id="disabled" data-cy="disabled_message">
                     <p class="flex-1 items-center justify-center text-center">{{_('level_disabled')}}</p>
                 </div>
                 {% if customizations and customizations['sorted_adventures'] %}
