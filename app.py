@@ -189,41 +189,39 @@ def load_customized_adventures(level, customizations, into_adventures):
     a bit expensive and since we've already done that in the caller, we pass
     it in here.
 
-    Mutates the 'into_adventures' list in-place
+    Mutates the 'into_adventures' list in-place. On entry, it is the list of
+    default `Adventure` objects in the default order. On exit, it may have been
+    reordered and enhanced with teacher-written adventures.
     """
-    # Add teacher adventures
-    # [ <str>id ]
-    teacher_adventures = customizations.get('teacher_adventures', [])
-    for adv_id in teacher_adventures:
-        # FIXME: This should be a batch-get on the collection
-        adventure = DATABASE.get_adventure(adv_id)
-        try:
-            adventure['content'] = safe_format(adventure['content'],
-                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
-        except BaseException:
-            # We don't want teacher being able to break the student UI -> pass this adventure
-            pass
-
-        into_adventures.append(Adventure(
-            short_name=adv_id,
-            name=adventure['name'],
-            save_name=adventure['name'] + ' ' + str(level),
-            start_code='',  # Teacher adventures don't seem to have this
-            text=adventure['content'],
-            is_teacher_adventure=True))
-
-    # Select a subset of available adventures, in the right order.
+    # First find the list of all teacher adventures for the current level,
+    # batch-get all of them, then put them into the adventures array in the correct
+    # location.
 
     # { <str>level -> [ { <str>name, <bool>from_teacher ] }
     # 'name' is either a shortname or an ID into the teacher table
     sorted_adventures = customizations.get('sorted_adventures', {})
     order_for_this_level = sorted_adventures.get(str(level), [])
-    if order_for_this_level:
-        adventure_map = {a['short_name']: a for a in into_adventures}
+    if not order_for_this_level: return  # Nothing to do
 
-        # Replace entire list
-        into_adventures[:] = [adventure_map[select['name']]
-                              for select in order_for_this_level if select['name'] in adventure_map]
+    adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
+    teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
+    builtin_adventure_map = {a.short_name: a for a in into_adventures}
+    print(teacher_adventure_map)
+
+    # Replace `into_adventures`
+    into_adventures[:] = []
+    for a in order_for_this_level:
+        if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
+            try:
+                db_row['content'] = safe_format(db_row['content'],
+                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+            except Exception:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
+
+            into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
+        if not a['from_teacher']:
+            into_adventures.append(builtin_adventure_map[a['name']])
 
 
 @babel.localeselector
@@ -1051,8 +1049,6 @@ def index(level, program_id):
 
         loaded_program = Program.from_database_row(result)
 
-    # In case of a "forced keyword language" -> load that one, otherwise: load
-    # the one stored in the g object
     adventures = load_adventures_for_level(level)
 
     # Initially all levels are available -> strip those for which conditions
