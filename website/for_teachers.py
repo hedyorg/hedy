@@ -211,7 +211,7 @@ class ForTeachersModule(WebsiteModule):
             teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
 
         available_adventures = {}
-
+        min_level = 1
         if customizations:
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
@@ -225,7 +225,7 @@ class ForTeachersModule(WebsiteModule):
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": adventure, "from_teacher": False})
                 available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
-
+            min_level = min(customizations['levels'])
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
@@ -269,6 +269,7 @@ class ForTeachersModule(WebsiteModule):
             available_adventures=available_adventures,
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
+            min_level=min_level,
             javascript_page_options=dict(
                 page='customize-class',
                 available_adventures_level_translation=gettext('available_adventures_level'),
