@@ -543,7 +543,7 @@ class Database:
 
     def batch_get_adventures(self, adventure_ids):
         """From a list of adventure ids, return a map of { id -> adventure }."""
-        keys = { id: {"id": id} for id in adventure_ids }
+        keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
     def delete_adventure(self, adventure_id):

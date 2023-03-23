@@ -95,4 +95,3 @@ class Adventure:
             start_code='',  # Teacher adventures don't seem to have this
             text=row['content'],
             is_teacher_adventure=True)
-

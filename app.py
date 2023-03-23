@@ -201,7 +201,8 @@ def load_customized_adventures(level, customizations, into_adventures):
     # 'name' is either a shortname or an ID into the teacher table
     sorted_adventures = customizations.get('sorted_adventures', {})
     order_for_this_level = sorted_adventures.get(str(level), [])
-    if not order_for_this_level: return  # Nothing to do
+    if not order_for_this_level:
+        return  # Nothing to do
 
     adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
     teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
