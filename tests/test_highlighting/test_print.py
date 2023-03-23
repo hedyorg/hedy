@@ -79,7 +79,7 @@ class HighlighterTestPrint(HighlightTester):
     def test_print_incomplete2(self, level):
         self.assert_highlighted_chr(
             "print 'hello world! var at random",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            "KKKKK TTTTTTSTTTTTTSTTTSTTSTTTTTT",
             level=level, lang='en')
 
     @parameterized.expand([
