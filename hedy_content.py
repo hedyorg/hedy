@@ -52,6 +52,8 @@ ADVENTURE_NAMES = [
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [
         'default',
+        'print_command',
+        'ask_command',
         'parrot',
         'rock',
         'haunted',

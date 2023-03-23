@@ -8,28 +8,10 @@ adventures:
                 story_text: |
                     ## Welcome to Hedy!
                     In Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.
-                    Type your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!
+                    Type your code in the programming field. Or press the yellow button in the example code block, and the code will be typed for you!
                     Try the code yourself with the green 'Run code' button under the programming field.
 
-                    You can print text to the screen using the `{print}` command.     
-
-                example_code: |
-                    ```
-                    {print} Hello!
-                    {print} Welcome to Hedy!
-                    ```
-
-                story_text_2: |
-                    You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.
-
-                story_text_3: |
-                    Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.
-                example_code_2: |
-                    ```
-                    {ask} What is your name?
-                    {echo} hello
-                    ```
-
+                    Go to the next tab to learn your first command!
                 start_code: "{print} hello world!"
             2:
                 story_text: |
@@ -448,6 +430,63 @@ adventures:
                     {print}('So your name is ', name)
                     ```
 
+    print_command:
+        name: "print"
+        despription: "introduction print command"
+        default-save_name: "print_command"
+        levels:
+            1:
+                story_text: |
+                    ## The print command
+                    You can print text to the screen using the `{print}` command.
+                story_text_2: |
+                    ### Exercise
+                    In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
+                    In this exercise you will see a blank space. You have to fill in the command in the place of the blank space.
+
+                    Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
+                    Have fun!
+                example_code: |
+                    ```
+                    {print} Hi there, programmer!
+                    {print} Welcome to Hedy!
+                    ```
+                example_code_2: |
+                    ```
+                    _ Hello!
+                    ```
+    ask_command:
+        name: "Ask"
+        description: "Introduction ask command"
+        default_save_name: "ask_command"
+        levels:
+            1:
+                story_text: |
+                    ## The ask command
+                    Now that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:
+                example_code: |
+                    ```
+                    {print} Hello!
+                    {ask} What is your name?
+                    ```
+                story_text_2: |
+                    ## The echo command
+                    If you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.
+                story_text_3: |
+                    ### Exercise
+                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
+                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                example_code_2: |
+                    ```
+                    {print} Hello!
+                    {ask} What is your name?
+                    {echo} hello
+                    ```
+                example_code_3: |
+                    ```
+                    _ How are you doing?
+                    _
+                    ```
     story:
         name: "Story"
         description: "Story"
