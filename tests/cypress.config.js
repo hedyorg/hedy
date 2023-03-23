@@ -4,6 +4,7 @@ module.exports = defineConfig({
   projectId: 'a1fbb9',
   watchForFileChanges: false,
   video: false,
+  redirectionLimit: 100,
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
