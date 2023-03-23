@@ -2404,153 +2404,284 @@ levels:
             output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     12:
         1:
-            correct_answer: D
-            question_text: Which output is correct?
-            code: "print 'three and a half plus one and a half is...'\nprint 3.5 + 1.5"
+            question_text: "Welke output klopt?"
+            code: |-
+                {print} 'drie en een half plus anderhalf is...'
+                {print} 3.5 + 1.5
             mp_choice_options:
-            -   option: "5\n"
-                feedback: Don't forget the first line of code!
-            -   option: "3.5 + 1.5\n"
-                feedback: This is not the one!
-            -   option: "thee and a half plus one and a half is...\nfive\n"
-                feedback: Take a close look at the second line...
-            -   option: "three and a half plus one and a half is...\n5\n"
-                feedback: Great job!
-            hint: Both lines are printed!
-            question_score: '10'
-        7:
-            correct_answer: A
-            question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
-            mp_choice_options:
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
-                feedback: Terrific!
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes"
-                feedback: There's more options than just one
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncheese\ngrapes"
-                feedback: A vegan person can't have cheese
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes\ncookies"
-                feedback: Almost there, but look at the order of snacks in the list
-            hint: What item is removed from the list when you answer 'vegan'?
-            question_score: '10'
-        10:
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    for i in range 0 to 1\n        print 'if youre happy and you know it'\n        print action\n    print 'if youre happy and you know it and you really want to show it'\n    print 'if youre happy and you know it'\n    print action"
-            mp_choice_options:
-            -   option: for i in range 1 to 3
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
-                feedback: You are amazing!
-            -   option: repeat 3 times
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            correct_answer: B
-            hint: This is a hard one! All the actions on the list must be in the song.
+            -   option: |
+                    5
+                feedback: "Vergeet de eerste regel code niet!"
+            -   option: |
+                    3.5 + 1.5
+                feedback: "Dit is niet de goede"
+            -   option: |
+                    drie en een half plus anderhalf is...
+                    vijf
+                feedback: "Kijk goed naar de tweede regel.."
+            -   option: |
+                    drie en een half plus anderhalf is...
+                    5
+                feedback: "Goed gedaan!"
+            correct_answer: "D"
+            hint: "Beide regels hebben een print commando!"
             question_score: '10'
         2:
-            question_text: Which of these codes is correct?
+            question_text: "Welk van deze codes is correct?"
             mp_choice_options:
-            -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I like ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I like ' flavors at random ' cake.'\n```"
-                feedback: Alright!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I like ' flavors at random ' cake.'\n```\n"
-                feedback: All the different values of flavors should be in quotation marks.
-            correct_answer: C
-            hint: The second line is the same in each code, pay attention to the first line
+            -   option: |-
+                  ```
+                  smaken =  vanille, aarbeien, chocolade
+                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                  ```
+                feedback: "Alle smaakjes moeten binnen aanhalingstekens."
+            -   option: |-
+                  ```
+                  'smaken = vanille, aarbeien, chocolade'
+                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                  ```
+                feedback: "Alle smaakjes moeten binnen aanhalingstekens"
+            -   option: |-
+                  ```
+                  smaken =  'vanille', 'aarbeien', 'chocolade'
+                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                  ```
+                feedback: "Goed!"
+            -   option: |-
+                  ```
+                  smaken = 'vanille, aarbeien, chocolade'
+                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                  ```
+                feedback: "All the different values of flavors should be in quotation marks."
+            correct_answer: "C"
+            hint: "The second line is the same in each code, pay attention to the first line"
             question_score: '10'
         3:
-            question_text: What's wrong with this code?
-            code: "favorite_animal = ask 'What is your favorite animal?'\nprint 'I like ' favoriteanimal ' too!'"
+            question_text: "Wat is er mis met deze code?"
+            code: |-
+                leukste_dier = ask 'Wat vind jij het leukste dier?'
+                print 'Ik hou ook van ' leukstedier
             mp_choice_options:
-            -   option: "The name of the variable is different in line 1 than in line 2.\n"
-                feedback: Correct!
-            -   option: "The quotation marks aren't used correctly in line 2\n"
-                feedback: That's not true
-            -   option: "You can't use the = sign when using an ask command\n"
-                feedback: That's not true
-            -   option: "Nothing is wrong.\n"
-                feedback: That's not true
-            correct_answer: A
-            hint: The quotation marks are used correctly
+            -   option: |
+                    De naam van de variabele is anders in regel 1 dan in regel 2.
+                feedback: "Correct!"
+            -   option: |
+                    De aanhalingstekens zijn in regel 2 verkeerd gebruikt.
+                feedback: "Nee hoor"
+            -   option: |
+                    Je mag het = teken niet gebruiken na een {ask} commando.
+                feedback: "Dat is niet waar"
+            -   option: |
+                    Er is niets verkeerd.
+                feedback: "Dat is niet waar"
+            correct_answer: "A"
+            hint: "De aanhalingstekens zijn correct"
             question_score: '10'
         4:
-            question_text: In which lines are quotation marks needed to get the code to work?
-            code: "print Welcome to the online shoe shop\ncategory = ask What kind of shoes are you looking for?\nif category = high heels\n  print High heels are 50% off now!"
+            question_text: "In which lines are quotation marks needed to get the code to work?"
+            code: |-
+                {print} Welcome to the online shoe shop
+                category = {ask} What kind of shoes are you looking for?
+                {if} category = high heels
+                	{print} High heels are 50% off now!
             mp_choice_options:
-            -   option: "Line 1 and 2\n"
-                feedback: No
-            -   option: "Line 1, 2 and 3\n"
-                feedback: No
-            -   option: "Line 1, 2 and 4\n"
-                feedback: No
-            -   option: "All of the lines\n"
-                feedback: Perfect!
-            correct_answer: D
-            hint: Does line 3 need quotation marks too?
+            -   option: |
+                    Line 1 and 2
+                feedback: "No"
+            -   option: |
+                    Line 1, 2 and 3
+                feedback: "No"
+            -   option: |
+                    Line 1, 2 and 4
+                feedback: "No"
+            -   option: |
+                    All of the lines
+                feedback: "Perfect!"
+            correct_answer: "D"
+            hint: "Does line 3 need quotation marks too?"
             question_score: '10'
         5:
-            question_text: What output does Agent007 get when they put in the correct password?
-            code: "name is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the train station '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b"
+            question_text: "What output does Agent007 get when they put in the correct password?"
+            code: |-
+                name {is} {ask} 'What is your name?'
+                {if} name {is} 'Agent007'
+                	a {is} 'Go to the airport '
+                else
+                	a {is} 'Go to the train station '
+                password {is} {ask} 'What is the password?'
+                {if} password {is} 'TOPSECRET'
+                	b {is} 'tomorrow at 02.00'
+                else
+                	b {is} 'today at 10.00'
+                print a + b
             mp_choice_options:
-            -   option: Go to the train station today at 10.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 02.00
-                feedback: You've cracked the code!
-            -   option: Go to the train station tomorrow at 02.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 10.00
-                feedback: The agent won't be catching any bad guys here
-            correct_answer: B
-            hint: The correct password is TOPSECRET
+            -   option: "Go to the train station today at 10.00"
+                feedback: "The agent won't be catching any bad guys here"
+            -   option: "Go to the airport tomorrow at 02.00"
+                feedback: "You've cracked the code!"
+            -   option: "Go to the train station tomorrow at 02.00"
+                feedback: "The agent won't be catching any bad guys here"
+            -   option: "Go to the airport tomorrow at 10.00"
+                feedback: "The agent won't be catching any bad guys here"
+            correct_answer: "B"
+            hint: "The correct password is TOPSECRET"
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
-            code: "print 'Welcome to McHedy!'\norder = ask 'Would you like a hamburger or fries?'\nif order = 'hamburger'\n  price = 12\nif order = 'fries'\n  price = 4\ndrinks = ask 'Would you like a drink with that for 2 dollars?'\nif drinks = 'yes'\n  ???\nprint 'That will be ' price ' dollar please'\n"
+            question_text: "Which line should be filled in at the ???"
+            code: |
+                {print} 'Welcome to McHedy!'
+                order = {ask} 'Would you like a hamburger or fries?'
+                {if} order = 'hamburger'
+                	price = 12
+                {if} order = 'fries'
+                	price = 4
+                drinks = {ask} 'Would you like a drink with that for 2 dollars?'
+                {if} drinks = 'yes'
+                	???
+                {print} 'That will be ' price ' dollar please'
             mp_choice_options:
-            -   option: "```\nprice = 14\n```\n"
-                feedback: What if you only order fries and a drink?
-            -   option: "```\nprice = '14'\n```"
-                feedback: What if you only order fries and a drink?
-            -   option: "```\nprice = price + 2\n```"
-                feedback: Excellent!
-            -   option: "```\nprice = + 2\n```"
-                feedback: Almost there!
-            correct_answer: C
-            hint: What if you only order fries and a drink?
+            -   option: |
+                    ```
+                    price = 14
+                    ```
+                feedback: "What if you only order fries and a drink?"
+            -   option: |-
+                    ```
+                    price = '14'
+                    ```
+                feedback: "What if you only order fries and a drink?"
+            -   option: |-
+                    ```
+                    price = price + 2
+                    ```
+                feedback: "Excellent!"
+            -   option: |-
+                    ```
+                    price = + 2
+                    ```
+                feedback: "Almost there!"
+            correct_answer: "C"
+            hint: "What if you only order fries and a drink?"
+            question_score: '10'
+        7:
+            question_text: "Which output does a vegan get?"
+            code: |-
+                menu = 'cookies', 'cheese', 'grapes'
+                {print} "It's my birthday! I`ve brought some snacks!"
+                diet = {ask} 'Do you have any dietary restrictions?'
+                {if} diet = 'gluten free'
+                	{remove} 'cookies' {from} menu
+                {if} diet = 'vegan'
+                	{remove} 'cheese' {from} menu
+                {print} 'For you I have brought: '
+                {for} snack {in} menu
+                	{print} snack
+            mp_choice_options:
+            -   option: |-
+                    It's my birthday! I've brought some snacks!
+                    For you I have brought:
+                    cookies
+                    grapes
+                feedback: "Terrific!"
+            -   option: |-
+                    It's my birthday! I've brought some snacks!
+                    For you I have brought:
+                    grapes
+                feedback: "There's more options than just one"
+            -   option: |-
+                    It's my birthday! I've brought some snacks!
+                    For you I have brought:
+                    cheese
+                    grapes
+                feedback: "A vegan person can't have cheese"
+            -   option: |-
+                    It's my birthday! I've brought some snacks!
+                    For you I have brought:
+                    grapes
+                    cookies
+                feedback: "Almost there, but look at the order of snacks in the list"
+            correct_answer: "A"
+            hint: "What item is removed from the list when you answer 'vegan'?"
             question_score: '10'
         8:
-            question_text: Which code was used to create this output?
-            code: '3.5'
+            question_text: "Which code was used to create this output?"
+            code: |-
+                3.5
             mp_choice_options:
-            -   option: "```\nprint '7 / 2'\n```"
-                feedback: No
-            -   option: "```\nprint 7 / 2\n```"
-                feedback: That is right!
-            -   option: "```\nprint 7 : 2\n```"
-                feedback: No
-            -   option: "```\nprint 7 * 2\n```"
-                feedback: No
-            correct_answer: B
-            hint: 7 devided by 2 is 3.5
+            -   option: |-
+                    ```
+                    {print} '7 / 2'
+                    ```
+                feedback: "No"
+            -   option: |-
+                    ```
+                    {print} 7 / 2
+                    ```
+                feedback: "That is right!"
+            -   option: |-
+                    ```
+                    {print} 7 : 2
+                    ```
+                feedback: "No"
+            -   option: |-
+                    ```
+                    {print} 7 * 2
+                    ```
+                feedback: "No"
+            correct_answer: "B"
+            hint: "7 devided by 2 is 3.5"
             question_score: '10'
         9:
-            question_text: Which code should be filled in in line 1 at the ???
-            code: "???\nprint 'You won ' prices at random '!'"
+            question_text: "Which code should be filled in in line 1 at the ???"
+            code: |-
+                ???
+                {print} 'You won ' prizes {at} {random} '!'
             mp_choice_options:
-            -   option: "```\nprices = 'one' 'million' 'dollars', 'nothing'\n```"
-                feedback: You won nothing
-            -   option: "```\nprices = 'one million dollars, nothing'\n```"
-                feedback: You won nothing
-            -   option: "```\nprices = 'one million dollars', 'nothing'\n```"
-                feedback: Winner!
-            -   option: "```\n'prices' = 'one million dollars', 'nothing'\n```"
-                feedback: You one nothing
-            correct_answer: C
-            hint: The items on the list should be in quotation marks
+            -   option: |-
+                    ```
+                    prizes = 'one' 'million' 'dollars', 'nothing'
+                    ```
+                feedback: "You won nothing"
+            -   option: |-
+                    ```
+                    prizes = 'one million dollars, nothing'
+                    ```
+                feedback: "You won nothing"
+            -   option: |-
+                    ```
+                    prizes = 'one million dollars', 'nothing'
+                    ```
+                feedback: "Winner!"
+            -   option: |-
+                    ```
+                    'prizes' = 'one million dollars', 'nothing'
+                    ```
+                feedback: "You one nothing"
+            correct_answer: "C"
+            hint: "The items on the list should be in quotation marks"
+            question_score: '10'
+        10:
+            question_text: "Which line of code should be filled in at the ??? to complete the song ?"
+            code: |-
+                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                ???
+                	{for} i {in} range 0 {to} 1
+                		{print} 'if youre happy and you know it'
+                		{print} action
+                	{print} 'if youre happy and you know it and you really want to show it'
+                	{print} 'if youre happy and you know it'
+                	{print} action
+            mp_choice_options:
+            -   option: "{for} i {in} {range} 1 {to} 3"
+                feedback: "This is a hard one! All the actions on the list must be in the song."
+            -   option: "{for} action {in} actions"
+                feedback: "You are amazing!"
+            -   option: "{repeat} 3 {times}"
+                feedback: "This is a hard one! All the actions on the list must be in the song."
+            -   option: "{print} actions {at} {random}"
+                feedback: "This is a hard one! All the actions on the list must be in the song."
+            correct_answer: "B"
+            hint: "This is a hard one! All the actions on the list must be in the song."
             question_score: '10'
     13:
         4:
