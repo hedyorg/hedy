@@ -85,3 +85,13 @@ class Adventure:
 
     def __getitem__(self, key):
         return getattr(self, key)
+
+    @staticmethod
+    def from_teacher_adventure_database_row(row):
+        return Adventure(
+            short_name=row['id'],
+            name=row['name'],
+            save_name=row['name'],
+            start_code='',  # Teacher adventures don't seem to have this
+            text=row['content'],
+            is_teacher_adventure=True)

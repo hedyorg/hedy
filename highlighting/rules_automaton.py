@@ -357,12 +357,12 @@ def rule_level4():
             'unicode': True
         }, {
             'regex': '\"[^\"]*$',
-            'token': 'constant.character',
+            'token': 'text',
             'next': 'start',
             'unicode': True
         }, {
             'regex': "\'[^\']*$",
-            'token': 'constant.character',
+            'token': 'text',
             'next': 'start',
             'unicode': True
         }],

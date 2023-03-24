@@ -194,6 +194,11 @@ strong {
   @apply bg-blue-500 text-white border-blue-700;
 }
 
+.gray-btn {
+  @apply btn-shape;
+  @apply bg-gray-500 text-white border-gray-700;
+}
+
 .blue-btn:hover {
   @apply bg-blue-400 border-blue-500;
 }
@@ -710,8 +715,7 @@ input:checked ~ .toggle-path {
 }
 
 .adventures-tab {
-  @apply flex flex-row w-auto overflow-x-auto overflow-y-hidden;
-  display :none;
+  @apply flex-row w-auto overflow-x-auto overflow-y-hidden;  
 }
 
 .adventures-tab[style*='display: block'] {
