@@ -2787,9 +2787,10 @@ def preprocess_ifs(code, lang='en'):
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+            excluded_commands = ["pressed"]
 
             if (
-                contains_any_of(commands, line)
+                contains_any_of(commands, line) and not contains_any_of(excluded_commands, line)
             ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 

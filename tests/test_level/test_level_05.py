@@ -1254,6 +1254,16 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.MissingElseForPressitException,
         )
 
+    def test_if_pressed_missing_else_gives_error_with_new_line(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'hi!'\n\n""")
+
+        self.multi_level_tester(
+            max_level=7,
+            code=code,
+            exception=hedy.exceptions.MissingElseForPressitException,
+        )
+
     #
     # button tests
     #
