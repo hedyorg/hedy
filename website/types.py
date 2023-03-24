@@ -30,6 +30,13 @@ class Program:
     name: str
     code: str
     date: int
+
+    # The adventure name this program was written under
+    #
+    # - For built-in adventures, the short_name of the adventure
+    # - For teacher-written adventures:
+    #    - either the `id` of the teacher adventure (new); or
+    #    - the (display) `name` of the teacher adventure (old)
     adventure_name: str
     public: Optional[int] = None
     submitted: Optional[bool] = None
