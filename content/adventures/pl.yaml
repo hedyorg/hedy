@@ -80,7 +80,7 @@ adventures:
             13:
                 start_code: "imię = {ask} 'Jak masz na imię?'\nwiek = {ask} 'Ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    {print} 'Naprawdę jesteś Hedy!'"
                 example_code: "```\nimię = {ask} 'Jak masz na imię?'\nwiek = {ask} 'Ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    {print} 'Naprawdę jesteś Hedy!'\n```\n"
-                story_text: "## I... Lub..?\nNauczysz się teraz o `{and}` i `{or}`! Jeśli chcesz sprawdzić dwa wyrażenia, nie musisz używać dwóch poleceń {if}, w zamian możesz użyć `{and}` i `{or}`. Jeśli użyjesz `{and}`, oba wyrażenia, przed i po `{and}` muszą być prawdziwie. Można też użyć `{or}`. W takim przypadku wystarczy że jedno z wyrażeń będzie prawdziwe."
+                story_text: "## I... Lub..?\nNauczysz się teraz o `{and}` i `{or}`! Jeśli chcesz sprawdzić dwa wyrażenia, nie musisz używać dwóch poleceń `{if}`, w zamian możesz użyć `{and}` i `{or}`.\n\nJeśli użyjesz `{and}`, oba wyrażenia, przed i po `{and}`, muszą być prawdziwie. Można też użyć `{or}`. W takim przypadku wystarczy że jedno z wyrażeń będzie prawdziwe."
             14:
                 start_code: "wiek = {ask} 'Ile masz lat?'\n{if} wiek < 13\n    {print} 'Jesteś młodszy niż ja!'\n{else}\n    {print} 'Jesteś starszy niż ja!'"
                 story_text: "## Duży, Większy, Największy\nW tej lekcji nauczymy się zastosowania nowych operatorów logicznych, które możesz pamiętać z lekcji matematyki: operatory `<` i `>`.\nOperator `<` sprawdza czy pierwsza liczba jest mniejsza od drugiej liczby, na przykład wiek `<` 12 sprawdza czy wiek jest mniejszy niż 12.\nJeżeli chcesz sprawdzić czy pierwsza liczba jest mniejsza lub równa drugiej liczbie możesz użyć operator `<=`, na przykład wiek `<=` 11, który sprawdza czy wiek jest mniejszy lub równy 11.\nOperator `>` sprawdza czy pierwsza liczba jest większa od drugiej liczby, na przykład punkty `>` 10 sprawdza czy punkty są większe od 10.\nJeżeli chcesz sprawdzić, czy pierwsza liczba jest większa lub równa drugiej liczbie możesz użyć `>=`, na przykład punkty `>=` 11, który sprawdza czy punkty są większe lub równe 11.\nMożesz użyć tych operatorów logicznych w `{if}`, na przykład:\n"
@@ -96,10 +96,10 @@ adventures:
             16:
                 example_code: "```\nprzyjaciele = ['Ahmed', 'Bogdan', 'Cayden']\nszczęśliwe_liczby = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'szczęśliwa liczba ' przyjaciele[i]\n    {print} 'to ' szczęśliwe_liczby[i]\n```\n"
                 start_code: "owoce = ['jabłko', 'banan', 'czereśnia']\n{print} owoce"
-                story_text: "## Coraz bliżej prawdziwego kodu!\nTym razem stworzymy listy w sposób podobny do Pythona. Te listy mają kwadratowe nawiasy dookoła listy! Dodatkowo, zostawimy też cudzysłowie dookoła każdego elementu listy tak jak się nauczyliśmy w poprzednich poziomach.\nMożesz również użyć kwadratowych nawiasów żeby wybrać konkretny element z listy."
+                story_text: "## Coraz bliżej prawdziwego kodu!\nTym razem stworzymy listy w sposób podobny do Pythona. Te listy mają kwadratowe nawiasy dookoła listy! Dodatkowo, zostawimy też cudzysłowie dookoła każdego elementu listy tak jak się nauczyliśmy w poprzednich poziomach.\nNawiasów kwadratowych używamy również do wybrania konkretnego elementu z listy. Polecenie `{at}` nie może już być używane."
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Szukam!'"
-                story_text: "## Elif\nTeraz zmienimy trochę wcięcie. Za każdym razem, gdy potrzebujemy wcięcia, potrzebujemy `:` w linii przed wcięciem.\n\nNa tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` (elif) to skrót od {else} {if} (else if) i potrzebujesz go, gdy chcesz zrobić 3 (lub więcej!) opcji.\nSprawdź to!"
+                story_text: "## {elif}\nTeraz zmienimy nieco wcięcia. Za każdym razem, gdy potrzebujemy wciąć kod, potrzebujemy `:` w linii przed wcięciem.\n\nNa tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` to połączenie `{else}` i `{if}` i potrzebujesz go, gdy chcesz zrobić 3 (lub więcej!) opcji.\nSprawdź to!"
                 example_code: "```\nnagrody = ['milion złotch', 'szarlotkę', 'nic']\ntwoja_nagraoda = nagrody[{random}]\n{print} 'Wygrywasz ' twoja_nagraoda\n{if} twoja_nagraoda == 'milion złotch' :\n    {print} 'O tak! Jesteś bogaty!'\n{elif} twoja_nagraoda == 'szarlotkę' :\n    {print} 'Pyszna szarlotka!'\n{else}:\n    {print} 'Powodzenia następnym razem ...'\n```\n"
             18:
                 start_code: |-
@@ -107,8 +107,8 @@ adventures:
                     {print}('Mam na imię ', imię)
                 story_text: |-
                     ## Ostatni poziom!
-                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że od teraz musimy używać nawiasów z {print} i {range}.
-                    Oznacza to również, że jeśli używasz angielskich wersji poleceń możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona. Jeśli jeszcze tego nie zrobiłeś, możesz przełączyć język w menu poleceń, aby to zrobić. 
+                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że od teraz musimy używać nawiasów z `{print}` i `{range}`.
+                    Oznacza to również, że jeśli używasz angielskich wersji poleceń możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona. Jeśli jeszcze tego nie zrobiłeś, możesz przełączyć język w menu poleceń, aby to zrobić.
 
                 example_code: |
                     ```
@@ -542,8 +542,8 @@ adventures:
                 example_code: "```\nimię {is} {ask} 'Kto idzie przez las?'\n{print} imię ' idzie przez las'\n{print} imię ' spotyka potwora'\nzakończenie {is} {ask} 'Czy chciałbyś dobre czy złe zakończenie?'\n{if} zakończenie {is} dobre {print} imię ' wyciąga miecz i potwór ucieka'\n{else} {print} 'Potwór zjada ' imię\n```\n"
                 start_code: "{print} 'Tutaj jest początek Twojej opowieści!'"
             4:
-                story_text: "## Opowieść\nMogłeś zauważyć, że w poprzednich poziomach ciągle jest pewnie problem. Czy próbowałeś napisać zdanie które zawierało słowo “imię”? Na przykład: `{print}` moje imię to imię.\nW tym poziomie możesz rozwiązać ten problem. Wystarczy, że użyjesz cudzysłowia dookoła tekstu, który chciałbyś wyświetlić.\n"
-                example_code: "```\nimię {is} Hans\n{print} _ Główny bohater ma na imię _ imię\n{print} imię _ idzie na spacer do lasu _\n{print} imię _ jest strachliwy _\nzwierzęta {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ Słyszy dźwięk _ zwierzęta {at} {random}\n{print} name _ obawia się, że jest w nawiedzonym lesie _\n```\n"
+                story_text: "## Opowieść\nMogłeś zauważyć, że w poprzednich poziomach ciągle jest pewnie problem. Czy próbowałeś napisać zdanie które zawierało słowo “imię”? Na przykład: `{print}` moje imię to imię.\nW tym poziomie możesz rozwiązać ten problem. Wystarczy, że użyjesz cudzysłowia dookoła tekstu, który chciałbyś wyświetlić.\n\n### Ćwiczenie\nSkopiuj przykładowy kod i popraw go dodając cudzysłowy do linii.\n\n### Ćwiczenie 2\nWróć do poprzedniego poziomu i skopiuj kod z opowieści. Spraw by kod działał w tym poziomie dodając cudzysłowy w odpowiednie miejsca.\nZwróć uwagę, że zmienne w twojej opowieści powinny być poza cudzysłowami. Podobnie jak w drugiej linii kodu przykładowego. W tej linii nazwa zmiennej wstawiona poza cudzysłowami.\n"
+                example_code: "```\nimię {is} {ask}_ Jakie jest twoje imię? _\n{print}  _ Głównym bohaterem jest _ imię\n{print} imię _ idzie na spacer do lasu _\n{print} imię _ nieco się boi _\nzwierzęta {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ Słyszy dźwięk _ zwierzęta {at} {random}\n{print} name _ obawia się, że jest w nawiedzonym lesie _\n```\n"
                 start_code: "{print} 'Twoja opowieść będzie tutaj napisana!'"
             3:
                 story_text: "## Historyjka\nNa poziomie 3. Twoja historyjka może być jeszcze zabawniejsza. Możesz wybrać losowo potwora, zwierzę oraz inne utrudnienia, tak jak w przykładzie:\n"
