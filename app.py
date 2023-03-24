@@ -517,17 +517,21 @@ def parse():
 
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
-        program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
-        program = program_logic.store_user_program(
-            user=current_user(),
-            level=level,
-            name=body.get('save_name'),
-            program_id=body.get('program_id'),
-            adventure_name=body.get('adventure_name'),
-            code=code,
-            error=exception is not None)
+        try:
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+            program = program_logic.store_user_program(
+                user=current_user(),
+                level=level,
+                name=body.get('save_name'),
+                program_id=body.get('program_id'),
+                adventure_name=body.get('adventure_name'),
+                code=code,
+                error=exception is not None)
 
-        response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+            response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+        except programs.NotYourProgramError:
+            # No permissions to overwrite, no biggie
+            pass
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({

@@ -67,7 +67,7 @@ class ProgramsLogic:
             if not current_prog:
                 raise RuntimeError(f'No program with id: {program_id}')
             if current_prog['username'] != updates['username']:
-                raise RuntimeError('Cannot overwrite other user\'s program')
+                raise NotYourProgramError('Cannot overwrite other user\'s program')
 
             program = self.db.update_program(program_id, updates)
         else:
@@ -338,3 +338,7 @@ class ProgramsModule(WebsiteModule):
         )
 
         return {"message": gettext("report_success")}, 200
+
+
+class NotYourProgramError(RuntimeError):
+    pass
