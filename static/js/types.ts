@@ -37,11 +37,21 @@ export interface Adventure {
   /**
    * If the current program is from a save, some additional
    * information about the save.
+   *
+   * Either a ServerSaveInfo object if the program was loaded from a server save,
+   * or the string 'local-storage' if the program was loaded from local storage.
    */
-  save_info?: SaveInfo;
+  save_info?: ServerSaveInfo | 'local-storage';
 }
 
-export interface SaveInfo {
+/**
+ * Whether the given field is actually a SaveInfo object
+ */
+export function isServerSaveInfo(x: Adventure['save_info']): x is ServerSaveInfo {
+  return !!x && typeof x === 'object' && !!x.id;
+}
+
+export interface ServerSaveInfo {
   /** Identifier of the program in the database */
   id: string;
 
