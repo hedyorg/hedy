@@ -203,12 +203,6 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
-   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
-   // The values in this case are the class id's for which we need to update the class customizations
-   let classes = new Array();
-   $(".customize_adventure_class_checkbox:checked").each(function () {
-     classes.push($(this).val());
-   });
 
     $.ajax({
       type: 'POST',
@@ -218,7 +212,6 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
@@ -497,9 +490,9 @@ export function enable_level(level: string) {
             start: function() {
               $(this).addClass('flex');
               $(this).removeClass('hidden');
-            }          
-          });         
-        }        
+            }
+          });
+        }
     } else {
         $('.adventure_level_' + level).each(function () {
             $(this).prop("checked", false);
@@ -767,7 +760,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
       drag_list(document.getElementById("sortadventures"));
 
-      $('#adventures').on('change', function(){
+      $('#levels-dropdown').on('change', function(){
           var level = $(this).val() as string;
           $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
           if ($("#disabled").hasClass('flex')) {
@@ -779,12 +772,9 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
                   $(this).removeClass('hidden');
               }
           });
-          $('#available').empty();
-          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-          const adventures = available_adventures[level];
-          for(let i = 0; i < adventures.length; i++) {
-            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-          }
+
+          addAllAvailableAdventures(level);
+
           drag_list(document.getElementById("level-"+level));
       });
 
@@ -820,7 +810,23 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           drag_list(document.getElementById("level-"+level));
           markUnsavedChanges();
       });
+
+      addAllAvailableAdventures($('#levels-dropdown').val() as string);
   });
+
+  /**
+   * Put all available adventures into the dropdown
+   *
+   * They get removed from this list later on in some way that I don't quite get.
+   */
+  function addAllAvailableAdventures(level: string) {
+    $('#available').empty();
+    $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+    const adventures = available_adventures[level];
+    for(let i = 0; i < adventures.length; i++) {
+      $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
+    }
+  }
 }
 
 /**
