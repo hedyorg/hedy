@@ -1159,3 +1159,18 @@ class GetManyIterator(QueryIterator):
                                    reverse=self.reverse,
                                    limit=self.limit,
                                    pagination_token=self.pagination_token)
+
+
+class ScanIterator(QueryIterator):
+    """Iterate over a table scan, automatically proceeding to the next result page if necessary.
+
+    Wrapper around scan that automatically paginates.
+    """
+
+    def __init__(self, table, limit=None, pagination_token=None):
+        self.table = table
+        self.limit = limit
+        super().__init__(pagination_token)
+
+    def _do_fetch(self):
+        return self.table.scan(limit=self.limit, pagination_token=self.pagination_token)

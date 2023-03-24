@@ -233,10 +233,6 @@ class ForTeachersModule(WebsiteModule):
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
 
-        teacher_adventures_formatted = []
-        for adventure in teacher_adventures:
-            teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
-
         available_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
 
         if customizations:
@@ -273,7 +269,7 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page='customize-class',
                 available_adventures_level_translation=gettext('available_adventures_level'),
-                teacher_adventures=teacher_adventures,
+                teacher_adventures=teacher_adventures_formatted,
                 adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
                 adventure_names=adventure_names,
                 available_adventures=available_adventures,
@@ -499,8 +495,6 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_length"), 400
         if not isinstance(body.get("public"), bool):
             return gettext("public_invalid"), 400
-        if not isinstance(body.get("classes"), list):
-            return gettext("classes_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure or current_adventure["creator"] != user["username"]:
@@ -529,17 +523,6 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_adventure(body["id"], adventure)
-
-        # Once the adventure is correctly stored we have to update all class customizations
-        # This is once again an expensive operation, we have to retrieve all teacher customizations
-        # Then check if something is changed with the current situation, if so -> update in database
-        Classes = self.db.get_teacher_classes(user["username"])
-        for Class in Classes:
-            # If so, the adventure should be in the class
-            if Class.get("id") in body.get("classes", []):
-                self.db.add_adventure_to_class_customizations(Class.get("id"), body.get("id"))
-            else:
-                self.db.remove_adventure_from_class_customizations(Class.get("id"), body.get("id"))
 
         return {"success": gettext("adventure_updated")}, 200
 

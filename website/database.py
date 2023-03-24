@@ -30,10 +30,45 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
     dynamo.Index('teacher'),
     dynamo.Index('link'),
 ])
+
+# A custom teacher adventure
+# - id (str): id of the adventure
+# - content (str): adventure text
+# - creator (str): username (of a teacher account, hopefully)
+# - date (int): timestamp of last update
+# - level (int | str): level number, sometimes as an int, sometimes as a str
+# - name (str): adventure name
+# - public (bool): whether it can be shared
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
+
+# Class customizations
+#
+# Various columns with different meanings:
+#
+# These I'm quite sure about:
+#
+# - id (str): the identifier of the class this customization set applies to
+# - levels (int[]): the levels available in this class
+# - opening_dates ({ str -> str }): key is level nr as string, value is an ISO date
+# - other_settings (str[]): string list with values like "hide_quiz", "hide_parsons"
+# - sorted_adventures ({ str -> { from_teacher: bool, name: str }[] }):
+#     for every level (key as string) the adventures to show, in order. If from_teacher
+#     is False, the name of a built-in adventure. If from_teacher is true, name is the
+#     id of a adventure in the ADVENTURES table. The id may refer to an adventure that
+#     has been deleted. In that case, it should be ignored.
+#
+# These not so much:
+#
+# - level_thresholds ({ "quiz" -> int }): TODO don't know what this does
+# - adventures: ({ str -> int[] }): probably a map indicating, for each adventure, what
+#      levels it should be available in. It's sort of redundant with sorted_adventures,
+#      so I'm not sure why it exists.
+# - teacher_adventures (str[]): a list of all ids of the adventures that have been made
+#      available to this class. This list is deprecated, all adventures a teacher created
+#      are now automatically available to all of their classes.
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id")
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
@@ -506,15 +541,13 @@ class Database:
     def get_adventure(self, adventure_id):
         return ADVENTURES.get({"id": adventure_id})
 
+    def batch_get_adventures(self, adventure_ids):
+        """From a list of adventure ids, return a map of { id -> adventure }."""
+        keys = {id: {"id": id} for id in adventure_ids}
+        return ADVENTURES.batch_get(keys) if keys else {}
+
     def delete_adventure(self, adventure_id):
-        # If we delete an adventure -> also delete is from possible class customizations
-        teacher = self.get_adventure(adventure_id).get("creator", "")
         ADVENTURES.delete({"id": adventure_id})
-        for Class in self.get_teacher_classes(teacher, True):
-            customizations = self.get_class_customizations(Class.get("id"))
-            if customizations and adventure_id in customizations.get("teacher_adventures", []):
-                customizations["teacher_adventures"].remove(adventure_id)
-                self.update_class_customizations(customizations)
 
     def store_adventure(self, adventure):
         """Store an adventure."""
@@ -589,26 +622,6 @@ class Database:
 
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({"id": class_id})
-
-    def add_adventure_to_class_customizations(self, class_id, adventure_id):
-        customizations = self.get_class_customizations(class_id)
-        if not customizations:
-            customizations = {"id": class_id, "teacher_adventures": [adventure_id]}
-        elif adventure_id not in customizations.get("teacher_adventures", []):
-            customizations["teacher_adventures"] = customizations.get("teacher_adventures", []) + [adventure_id]
-        # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
-        else:
-            return None
-        CUSTOMIZATIONS.put(customizations)
-
-    def remove_adventure_from_class_customizations(self, class_id, adventure_id):
-        customizations = self.get_class_customizations(class_id)
-        # If there are no customizations, leave as it is -> only perform an action if it is already stored on the class
-        if not customizations:
-            return None
-        elif adventure_id in customizations.get("teacher_adventures", []):
-            customizations["teacher_adventures"].remove(adventure_id)
-            CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
