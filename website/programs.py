@@ -169,16 +169,6 @@ class ProgramsModule(WebsiteModule):
         # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
 
-        if not program_id:
-            # Legacy save mode: overwrite a program with the same name if it already exists
-            # (Not sure when this is used)
-            for program in self.db.programs_for_user(user["username"]):
-                if program.get("name", '') == body["name"]:
-                    program_id = program["id"]
-                    if program_public is None:
-                        program_public = program.get("public", False)
-                    break
-
         if program_public:
             # If a program is marked as public, we need to know whether it contains
             # an error or not. Parse it here and add the status.
