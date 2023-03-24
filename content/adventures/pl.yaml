@@ -28,9 +28,9 @@ adventures:
             4:
                 start_code: "{print} 'Witaj świecie'"
                 example_code: "```\n{print} 'Od teraz musisz używać cudzysłowów!'\nodpowiedź {is} {ask} 'Czego od teraz musimy używać?'\n{print} 'Musimy używać ' odpowiedź\n```\n"
-                story_text: "## 'Cuzdzysłowy'\nW poziomie 4 `{ask}` i `{print}` zmieniły się.\n\nMusisz umieścić w cudzysłowach tekst, który chcesz wyświetlić.\n\nJest to przydatne, ponieważ teraz możesz wyświetlić na ekranie wszystkie słowa, które chcesz. Również słowa, których użyłeś, aby przechować coś za pomocą `{is}`.\n\nWiększość języków programowania również używa cudzysłowów podczas wyświetlania tekstu, a więc jesteśmy o jeden krok bliżej prawdziwego programowania!\n"
-                story_text_2: "## Przygody stają się coraz trudniejsze\nOd teraz przygody w kolejnych zakładkach stają się coraz trudniejsze.\nNajlepiej zacząć od lewej strony i rozwiązywać je w prawą stronę tak, aby przechodzić do coraz trudniejszych wyzwań.\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text: "## 'Cuzdzysłowy'\nW poziomie 4 `{ask}` i `{print}` zmieniły się.\nMusisz umieścić w cudzysłowach tekst, który chcesz wyświetlić.\nJest to przydatne, ponieważ teraz możesz wyświetlić na ekranie wszystkie słowa, które chcesz. Również słowa, których użyłeś, aby przechować coś za pomocą `{is}`.\nWiększość języków programowania również używa cudzysłowów podczas wyświetlania tekstu, a więc jesteśmy o jeden krok bliżej prawdziwego programowania!\n"
+                story_text_2: "## Apostrofy\nWażne! Zwróć uwagę, że teraz, gdy używamy apostrofów i cudzysłowów, Hedy może nie zrozumieć gdy użyjesz ich wewnątrz tekstu np. w wyrażeniu „alfabet Morse'a”.\nPamiętaj by na razie nie stosować takich konstrukcji.\nKod po prawej prezentuje niepoprawne użycie apostrofów w Hedy.\n"
+                example_code_2: "```\n_ To jest niepoprawny sposób użycia apostrofów _\n{print} 'Alfabet Morse'a jest bardzo przydatny'\n{print} 'Chcesz wziąć udał w Giro d'Italia?'\n```\n"
             5:
                 start_code: "imię {is} {ask} 'Jak masz na imię?'\n{if} imię {is} Hedy {print} 'super!' {else} {print} 'eh'"
                 story_text: "## Jeżeli... w przeciwnym razie...\nW poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.\nTen kod wyświetla „to miło”, jeśli wprowadzisz imię Hedy, w przeciwnym wypadku wyświetli „bu!”.\n`{ask}` i `{print}` działają w dalszym ciągu tak jak w poziomie 4.\n"
@@ -51,7 +51,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy to zabawa!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Siema ludziska'\n    {print} 'To zostanie wypisane 5 razy'"
-                story_text: "## Wcięcia\n`{ask}` i `{print}` wciąż działają tak jak je poznałeś do tej pory. Ale `{if}`, `{else}`, `{pressed}` i `{repeat}` zmieniły się!\nOd teraz możesz zgrupować kilka linii kodu, ale musisz wtedy *wciąć* ten kod.\nTo znaczy dodać cztery spacje na początku linii. Będziesz musiał również wciąć kod, kiedy będziesz chciał utworzyć blok złożony z tylko 1 linii.\n"
+                story_text: "## Wcięcia\n`{ask}` i `{print}` wciąż działają tak jak je poznałeś do tej pory. Ale `{if}`, `{else}` i `{repeat}` zmieniły się!\nOd teraz możesz zgrupować kilka linii kodu, ale musisz wtedy *wciąć* ten kod.\nTo znaczy dodać cztery spacje na początku linii. Będziesz musiał również wciąć kod, kiedy będziesz chciał utworzyć blok złożony z tylko 1 linii.\n"
                 example_code: "Zobacz jak działa polecenie `{repeat}`:\n```\n{repeat} 5 {times}\n    {print} 'Cześć wszystkim'\n    {print} 'Całość powtórzona 5 razy'\n```\nZobacz jak działa polecenie `{if}` oraz `{else}`:\n\n```\nimie {is} {ask} 'Jak masz na imię?'\n{if} imie {is} Karol\n    {print} 'Cześć Karol'\n    {print} 'Możesz pograć na swoim komputerze!'\n{else}\n    {print} 'INTRUZ!'\n    {print} 'Nie możesz używać tego komputera!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    jedzenie = {ask} 'Co byś zjadł?'\n    {if} jedzenie {is} pizza\n        {print} 'super!'\n    {else}\n        {print} 'pizza jest lepsza'"
