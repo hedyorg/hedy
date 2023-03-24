@@ -207,7 +207,6 @@ def load_customized_adventures(level, customizations, into_adventures):
     adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
     teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
     builtin_adventure_map = {a.short_name: a for a in into_adventures}
-    print(teacher_adventure_map)
 
     # Replace `into_adventures`
     into_adventures[:] = []
@@ -221,8 +220,8 @@ def load_customized_adventures(level, customizations, into_adventures):
                 pass
 
             into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
-        if not a['from_teacher']:
-            into_adventures.append(builtin_adventure_map[a['name']])
+        if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
+            into_adventures.append(adv)
 
 
 @babel.localeselector
