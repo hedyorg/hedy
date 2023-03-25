@@ -50,8 +50,8 @@ adventures:
                     La mayoría de lenguajes de programación usan comillas para imprimir, ¡entonces nos estamos acercando cada vez más a programación de verdad!
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
-                story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text_2: "## Contracciones\nImportante! Recuerda que como estamos usando comillas, Hedy se confunde cuando utilizamos el apóstrofo para contracciones como I'm o What's. Asegúrate que quites estos apóstrofes y cambies las palabras a I am o What is.\nDirígete a los ejemplos de código para ver el mal uso de los apóstrofes.\n"
+                example_code_2: "```\n_ Así es como no se debería usar los apostrofes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nombre {is} {ask} '¿Cómo te llamas?'
@@ -95,9 +95,9 @@ adventures:
                         {print} 'Esto se va a mostrar 5 veces'
                 story_text: |
                     ## Sangría
-                    `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}`, {pressed} y `{repeat}` han cambiado.
+                    `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}` y `{repeat}` han cambiado.
                     Ahora puedes agrupar varias líneas, pero tendrás que *sangrar* el código.
-                    Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una línea.
+                    Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una sola línea.
                 example_code: |
                     Así es como funciona ahora el comando `{repeat}`:
                     ```
