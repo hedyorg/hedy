@@ -2,11 +2,11 @@ levels:
     1:
         1:
             story: |
-                You're a customer at bakery Hedy.
-                You want into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Next, your order is being prepared.
-            code: |
+                Вы - клиент пекарни "Хеди".
+                Вы входите в пекарню, и вас приветствует пекарь.
+                Он спрашивает, какой пирог вы хотите заказать.
+                Далее ваш заказ готовится.
+            code: |-
                 {print} Добро пожаловать в пекарню Хеди!
                 {ask} Какой тип пирога вы хотите заказать?
                 {echo} Так вы хотите.
@@ -14,11 +14,11 @@ levels:
         2:
             story: |
                 You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
-            code: |
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love
+            code: |-
+                {print} Это DJ Hedy
+                {ask} Вы готовы к вечеринке?
+                {ask} Какую песню вы хотели бы услышать?
+                {echo} Отличный выбор! Я люблю
     2:
         1:
             story: |
@@ -32,11 +32,11 @@ levels:
         2:
             story: |
                 This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code: |
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.
-                {print} Thank you for shopping with us!
+            code: |-
+                {print} Добро пожаловать в наш магазин игрушек
+                игрушка {is} {ask} Что бы вы хотели купить?
+                {print} Игрушка добавлена в вашу корзину.
+                {print} Спасибо за покупки с нами!
     3:
         1:
             story: |
@@ -54,10 +54,10 @@ levels:
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: |
-                еда {is} pizza, icecream, salad, sandwich
-                начинками {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
+            code: |-
+                еда {is} пицца, мороженое, салат, сэндвич
+                начинки {is} шоколад, сыр, тунец, посыпка
+                {print} Ваша случайная еда на сегодня...
                 {sleep} 2
                 {print} еда {at} {random} с начинками {at} {random}
     4:
@@ -66,19 +66,19 @@ levels:
                 You are the newest Pokémon trainer from Pallet Town!
                 Make a program that selects your first Pokémon.
                 Let the program wait a minute before revealing your first pokémon.
-            code: |
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+            code: |-
+                покемоны {is} Пикачу, Чармандер, Бульбасаур, Сквиртл
+                {print} 'Это будет твой первый покемон!'
                 {sleep}
-                {print} pokemons {at} {random}
+                {print} покемоны {at} {random}
         2:
             story: |
                 Create a lottery that lets you choose an extra price that you might win.
-            code: |
-                prices {is} car, hamster, 1 million euros
-                price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+            code: |-
+                призы {is} автомобиль, хомяк, 1 миллион евро
+                приз {is} {ask} 'Что бы вы хотели выиграть?
+                {add} приз {to_list} призы
+                {print} 'Вы выиграли ' призы {at} {random}
     5:
         1:
             story: |
@@ -93,10 +93,10 @@ levels:
         2:
             story: |
                 Create a maths game.
-            code: |
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
+            code: |-
+                {print} 'Решите эту задачу'
+                ответ {is} {ask} '88 - 16 = ?'
+                {if} ответ {is} 72 {print} 'Верно!'
                 {else} {print} 'Неправильно! Ответ был 72'
     6:
         1:
@@ -114,11 +114,11 @@ levels:
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
-            code: |
-                {print} 'It is your birthday!'
-                человек = {ask} 'How many people do you want to give a slice of cake?'
-                количество_пирожных {is} человек/8
-                {print} 'You will have to buy ' количество_пирожных ' cakes'
+            code: |-
+                {print} 'Сегодня твой день рождения!'
+                people = {ask} 'Скольким людям вы хотите дать по кусочку торта?'
+                cakes_amount {is} people/8
+                {print} 'Вам придется купить ' cakes_amount ' торты'
     7:
         1:
             story: |
@@ -136,30 +136,30 @@ levels:
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'
-            code: |
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+            code: |-
+                {print} 'колеса автобуса едут'
+                {repeat} 3 {times} {print} 'туда-сюда'
+                {print} 'колеса автобуса едут туда-сюда'
+                {print} 'по всему городу'
     8:
         1:
             story: |
                 Вы и еще четыре друга играете в Pokémon Go! Создайте программу, которая решает, в какой команде будет играть каждый из вас.
                 Либо в красную, желтую или синюю! Сделайте небольшую паузу после объявления команды.
-            code: |
-                teams = red, yellow, blue
+            code: |-
+                команды = красный, желтый, синий
                 {print} 'Красный, желтый или синий?'
                 {repeat} 5 {times}
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}
-                  sleep 2
+                    {print} 'Вы выбраны в команду... '
+                    {print} команды {at} {random}
+                    сон 2
         2:
             story: |
                 Напечатайте обратный отсчет для игры в прятки.
-            code: |
-                counter = 11
+            code: |-
+                счётчик = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
-                  {sleep} 1
-                {print} 'Ready or not here I come!'
+                    счетчик = счетчик - 1
+                    {print} счётчик
+                    {sleep} 1
+                {print} 'Готов или нет, но я иду!
