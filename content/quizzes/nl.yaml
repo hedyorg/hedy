@@ -2478,133 +2478,133 @@ levels:
             hint: "De aanhalingstekens zijn correct"
             question_score: '10'
         4:
-            question_text: "In which lines are quotation marks needed to get the code to work?"
+            question_text: "In welke regels zijn aanhalingstekens nodig om de code te laten werken?"
             code: |-
-                {print} Welcome to the online shoe shop
-                category = {ask} What kind of shoes are you looking for?
-                {if} category = high heels
-                	{print} High heels are 50% off now!
+                {print} Welkom in de schoenenwebshop
+                categorie = {ask} Wat voor schoenen zoek je?
+                {if} categorie = hakken
+                	{print} Hakken hebben 50% korting!
             mp_choice_options:
             -   option: |
-                    Line 1 and 2
-                feedback: "No"
+                    Regel 1 en 2
+                feedback: "Helaas"
             -   option: |
-                    Line 1, 2 and 3
-                feedback: "No"
+                    Regel 1, 2 en 3
+                feedback: "Helaas"
             -   option: |
-                    Line 1, 2 and 4
-                feedback: "No"
+                    Regel 1, 2 en 4
+                feedback: "Helaas"
             -   option: |
-                    All of the lines
+                    Alle regels
                 feedback: "Perfect!"
             correct_answer: "D"
-            hint: "Does line 3 need quotation marks too?"
+            hint: "Heeft regel 3 aanhalingstekens nodig?"
             question_score: '10'
         5:
-            question_text: "What output does Agent007 get when they put in the correct password?"
+            question_text: " Welke uitvoer krijgt Agent007 als hij het juiste wachtwoord invoert?"
             code: |-
-                name {is} {ask} 'What is your name?'
-                {if} name {is} 'Agent007'
-                	a {is} 'Go to the airport '
+                naam {is} {ask} 'Wat is je naam?'
+                {if} naam {is} 'Agent007'
+                	a {is} 'Ga naar het vliegveld '
+                {else}
+                	a {is} 'Ga naar het station  '
+                wachtwoord {is} {ask} 'Wat is het wachtwoord'
+                {if} wachtwoord {is} 'GEHEIM'
+                	b {is} 'morgen om 02.00'
                 else
-                	a {is} 'Go to the train station '
-                password {is} {ask} 'What is the password?'
-                {if} password {is} 'TOPSECRET'
-                	b {is} 'tomorrow at 02.00'
-                else
-                	b {is} 'today at 10.00'
+                	b {is} 'vandaag om 10.00'
                 print a + b
             mp_choice_options:
-            -   option: "Go to the train station today at 10.00"
-                feedback: "The agent won't be catching any bad guys here"
-            -   option: "Go to the airport tomorrow at 02.00"
-                feedback: "You've cracked the code!"
-            -   option: "Go to the train station tomorrow at 02.00"
-                feedback: "The agent won't be catching any bad guys here"
-            -   option: "Go to the airport tomorrow at 10.00"
-                feedback: "The agent won't be catching any bad guys here"
+            -   option: "Ga naar het station vandaag om 10.00"
+                feedback: "Daar zal de agent geen schurken vangen"
+            -   option: "Ga naar het vliegveld morgen om 02.00"
+                feedback: "Goedzo! Je hebt de schurken gevangen!"
+            -   option: "Ga naar het station morgen om 02.00"
+                feedback: "Daar zal de agent geen schurken vangen"
+            -   option: "Ga naar het vliegveld morgen om 10.00"
+                feedback: "Daar zal de agent geen schurken vangen"
             correct_answer: "B"
-            hint: "The correct password is TOPSECRET"
+            hint: "Het goede wachtwoord is GEHEIM"
             question_score: '10'
         6:
-            question_text: "Which line should be filled in at the ???"
+            question_text: "Welke regel hoort op de _ ?"
             code: |
-                {print} 'Welcome to McHedy!'
-                order = {ask} 'Would you like a hamburger or fries?'
-                {if} order = 'hamburger'
-                	price = 12
-                {if} order = 'fries'
-                	price = 4
-                drinks = {ask} 'Would you like a drink with that for 2 dollars?'
-                {if} drinks = 'yes'
-                	???
-                {print} 'That will be ' price ' dollar please'
+                {print} 'Welkom bij McHedy!'
+                bestelling = {ask} 'Wil je een hamburger of friet?'
+                {if} bestelling = 'hamburger'
+                	prijs = 12
+                {if} bestelling = 'friet'
+                	prijs = 4
+                drankje = {ask} 'Wil je daar een drankje bij voor 2 euro?'
+                {if} drankje = 'ja'
+                	_
+                {print} 'Dat is dan ' prijs ' euro, alstublieft'
             mp_choice_options:
             -   option: |
                     ```
-                    price = 14
+                    prijs = 14
                     ```
-                feedback: "What if you only order fries and a drink?"
+                feedback: "Wat als je frietjes en een drankje wil?"
             -   option: |-
                     ```
-                    price = '14'
+                    prijs = '14'
                     ```
-                feedback: "What if you only order fries and a drink?"
+                feedback: "Wat als je frietjes en een drankje wil?"
             -   option: |-
                     ```
-                    price = price + 2
+                    prijs = prijs + 2
                     ```
-                feedback: "Excellent!"
+                feedback: "Fantastisch!"
             -   option: |-
                     ```
-                    price = + 2
+                    prijs = + 2
                     ```
-                feedback: "Almost there!"
+                feedback: "Bijna!"
             correct_answer: "C"
-            hint: "What if you only order fries and a drink?"
+            hint: "Wat als je alleen frietjes en een drankje wil?"
             question_score: '10'
         7:
-            question_text: "Which output does a vegan get?"
+            question_text: "Welke uitvoer krijgt een vegan?"
             code: |-
-                menu = 'cookies', 'cheese', 'grapes'
-                {print} "It's my birthday! I`ve brought some snacks!"
-                diet = {ask} 'Do you have any dietary restrictions?'
-                {if} diet = 'gluten free'
-                	{remove} 'cookies' {from} menu
-                {if} diet = 'vegan'
-                	{remove} 'cheese' {from} menu
-                {print} 'For you I have brought: '
+                menu = 'koekjes', 'kaas', 'druiven'
+                {print} "Ik ben jarig! Ik trakteer!"
+                dieet = {ask} 'Heb je dieetwensen?'
+                {if} dieet = 'glutenvrij'
+                	{remove} 'koekjes' {from} menu
+                {if} dieet = 'vegan'
+                	{remove} 'kaas' {from} menu
+                {print} 'Voor jou heb ik: '
                 {for} snack {in} menu
                 	{print} snack
             mp_choice_options:
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cookies
-                    grapes
-                feedback: "Terrific!"
+                    Ik ben jarig! Ik trakteer!
+                    Voor jou heb ik:
+                    koekjes
+                    druiven
+                feedback: "Super!"
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                feedback: "There's more options than just one"
+                    Ik ben jarig! Ik trakteer!
+                    Voor jou heb ik:
+                    druiven
+                feedback: "Er zijn meer opties dan 1"
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cheese
-                    grapes
-                feedback: "A vegan person can't have cheese"
+                    Ik ben jarig! Ik trakteer!
+                    Voor jou heb ik:
+                    kaas
+                    druiven
+                feedback: "De kaas is niet vegan"
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                    cookies
-                feedback: "Almost there, but look at the order of snacks in the list"
+                    Ik ben jarig! Ik trakteer!
+                    Voor jou heb ik:
+                    druiven
+                    koekjes
+                feedback: "Bijna, maar let op de volgorde"
             correct_answer: "A"
-            hint: "What item is removed from the list when you answer 'vegan'?"
+            hint: "Welk item wordt verwijderd bij het antwoord 'vegan'?"
             question_score: '10'
         8:
-            question_text: "Which code was used to create this output?"
+            question_text: "Welke code zorgt voor deze uitvoer?"
             code: |-
                 3.5
             mp_choice_options:
@@ -2612,76 +2612,76 @@ levels:
                     ```
                     {print} '7 / 2'
                     ```
-                feedback: "No"
+                feedback: "Nee"
             -   option: |-
                     ```
                     {print} 7 / 2
                     ```
-                feedback: "That is right!"
+                feedback: "Dat klopt!"
             -   option: |-
                     ```
                     {print} 7 : 2
                     ```
-                feedback: "No"
+                feedback: "Nee"
             -   option: |-
                     ```
                     {print} 7 * 2
                     ```
-                feedback: "No"
+                feedback: "Nee"
             correct_answer: "B"
-            hint: "7 devided by 2 is 3.5"
+            hint: "7 gedeeld door 2 is 3.5"
             question_score: '10'
         9:
-            question_text: "Which code should be filled in in line 1 at the ???"
+            question_text: "Welke code moet ingevuld worden op de _?"
             code: |-
-                ???
-                {print} 'You won ' prizes {at} {random} '!'
+                _
+                {print} 'Jij wint ' prijzen {at} {random} '!'
             mp_choice_options:
             -   option: |-
                     ```
-                    prizes = 'one' 'million' 'dollars', 'nothing'
+                    prijzen = 'een' 'miljoen' 'euro', 'niets'
                     ```
-                feedback: "You won nothing"
+                feedback: "Zo win je helaas geen prijzen"
             -   option: |-
                     ```
-                    prizes = 'one million dollars, nothing'
+                    prizes = 'een miljoen euro, niets'
                     ```
-                feedback: "You won nothing"
+                feedback: "Zo win je niets"
             -   option: |-
                     ```
-                    prizes = 'one million dollars', 'nothing'
+                    prizes = 'one miljoen euro', 'niets'
                     ```
-                feedback: "Winner!"
+                feedback: "Winnaar!"
             -   option: |-
                     ```
-                    'prizes' = 'one million dollars', 'nothing'
+                    'prizes' = 'een miljoen euro', 'niets'
                     ```
-                feedback: "You one nothing"
+                feedback: "Zo win je niets"
             correct_answer: "C"
-            hint: "The items on the list should be in quotation marks"
+            hint: "De items op de lijst moeten tussen aanhalingstekens"
             question_score: '10'
         10:
-            question_text: "Which line of code should be filled in at the ??? to complete the song ?"
+            question_text: "Welke regel code moet ingevuld worden op de _ ?"
             code: |-
-                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                acties = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                 ???
                 	{for} i {in} range 0 {to} 1
                 		{print} 'if youre happy and you know it'
-                		{print} action
+                		{print} actie
                 	{print} 'if youre happy and you know it and you really want to show it'
                 	{print} 'if youre happy and you know it'
-                	{print} action
+                	{print} actie
             mp_choice_options:
             -   option: "{for} i {in} {range} 1 {to} 3"
-                feedback: "This is a hard one! All the actions on the list must be in the song."
-            -   option: "{for} action {in} actions"
-                feedback: "You are amazing!"
+                feedback: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
+            -   option: "{for} actie {in} acties"
+                feedback: "Je bent geweldig!"
             -   option: "{repeat} 3 {times}"
-                feedback: "This is a hard one! All the actions on the list must be in the song."
-            -   option: "{print} actions {at} {random}"
-                feedback: "This is a hard one! All the actions on the list must be in the song."
+                feedback: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
+            -   option: "{print} acties {at} {random}"
+                feedback: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
             correct_answer: "B"
-            hint: "This is a hard one! All the actions on the list must be in the song."
+            hint: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
             question_score: '10'
     13:
         4:
