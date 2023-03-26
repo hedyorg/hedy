@@ -171,8 +171,13 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
         loaded_programs[preferential_program.adventure_name] = preferential_program
 
     # Copy them into the adventures array
+    #
+    # For every adventure, find a program in the `loaded_programs` dictionary.
+    # Since the program may be saved under either the id or the actual name, check both.
     for adventure in into_adventures:
         program = loaded_programs.get(adventure.short_name)
+        if not program:
+            program = loaded_programs.get(adventure.name)
         if not program:
             continue
 

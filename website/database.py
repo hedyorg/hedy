@@ -172,7 +172,7 @@ class Database:
         return [x for x in programs if x.get("level") == int(level)]
 
     def last_level_programs_for_user(self, username, level):
-        """List level programs for the given user, newest first.
+        """Return the most recent program for the given user at a given level.
 
         Returns: { adventure_name -> { code, name, ... } }
         """
