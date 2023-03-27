@@ -57,9 +57,9 @@ levels:
             code: |-
                 еда {is} пицца, мороженое, салат, сэндвич
                 начинки {is} шоколад, сыр, тунец, посыпка
-                {print} Ваша случайная еда на сегодня...
+                {print} Ваша случайная на сегодня...
                 {sleep} 2
-                {print} еда {at} {random} с начинками {at} {random}
+                {print} еда {at} {random} с начинки {at} {random}
     4:
         1:
             story: |
@@ -76,7 +76,7 @@ levels:
                 Create a lottery that lets you choose an extra price that you might win.
             code: |-
                 призы {is} автомобиль, хомяк, 1 миллион евро
-                приз {is} {ask} 'Что бы вы хотели выиграть?
+                приз {is} {ask} 'Что бы вы хотели выиграть?'
                 {add} приз {to_list} призы
                 {print} 'Вы выиграли ' призы {at} {random}
     5:
@@ -138,8 +138,8 @@ levels:
                 Create the song 'The wheels on the bus go round and round'
             code: |-
                 {print} 'колеса автобуса едут'
-                {repeat} 3 {times} {print} 'туда-сюда'
-                {print} 'колеса автобуса едут туда-сюда'
+                {repeat} 3 {times} {print} 'туда сюда'
+                {print} 'колеса автобуса едут туда сюда'
                 {print} 'по всему городу'
     8:
         1:
@@ -152,14 +152,14 @@ levels:
                 {repeat} 5 {times}
                     {print} 'Вы выбраны в команду... '
                     {print} команды {at} {random}
-                    сон 2
+                    {sleep} 2
         2:
             story: |
                 Напечатайте обратный отсчет для игры в прятки.
             code: |-
                 счётчик = 11
                 {repeat} 10 {times}
-                    счетчик = счетчик - 1
+                    счётчик = счётчик - 1
                     {print} счётчик
                     {sleep} 1
-                {print} 'Готов или нет, но я иду!
+                {print} 'Готов или нет, но я иду!'
