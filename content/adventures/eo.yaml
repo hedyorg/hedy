@@ -63,6 +63,12 @@ adventures:
                 story_text: "## Rakonto\nUzante la komandojn `{and}` kaj `{or}`, oni povas mallongigi siajn rakontojn. Ekzemple, rigardu la jenan rakonton pri drakoj.\n"
                 example_code: "```\nglavo = 'perdita'\nludo = 'daŭranta'\n{print} 'Nia heroo promenas tra la arbaro'\n{print} 'La vojo forkiĝas en du vojojn'\n{for} i {in} {range} 0 {to} 2\n    {if} ludo {is} 'daŭranta'\n        vojo = {ask} 'Kiun vojon ŝi elektu?'\n        {if} vojo {is} 'maldekstra' {and} glavo {is} 'trovita'\n            {print} 'Nia heroo renkontas drakon!'\n            {print} 'Feliĉe nia heroo havas glavon por venki la beston!'\n            ludo = 'finita'\n        {if} vojo {is} 'maldekstra' {and} glavo {is} 'perdita'\n            {print} 'Nia heroo trovas drakon, sed ŝi ne havas armilojn!'\n            {print} 'Nian heroon venkas la drako…'\n            {print} 'Provu denove'\n            ludo = 'finita'\n        {if} vojo {is} 'dekstra' {and} glavo {is} 'trovita'\n            {print} 'Vi jam trovis la glavon. Ĉi tie restas nenio.'\n            {print} 'Ŝi reiras'\n        {if} vojo {is} 'dekstra' {and} glavo {is} 'perdita'\n            {print} 'Nia heroo trovas glavon'\n            {print} 'Ĉi tio povus esti tre oportuna'\n            glavo = 'trovita'\n```\n"
                 start_code: '# via kodo ĉi tie'
+            18:
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Rakonto
         description: Rakonto
     songs:
@@ -99,6 +105,10 @@ adventures:
                 story_text: "## Kantu kanton!\nEn ĉi tiu nivelo, vi povas programi kanton kiel OldMacDonald eĉ pli rapide. Vi povas konekti la ĝustan beston al la ĝusta sono simple metante ilin en la sama loko en la listo.\nLa Ebria Maristo ankaŭ estas rapide farita en ĉi tiu nivelo. Vi nur bezonas 8 liniojn por la tuta kanto, kontrolu ĝin!\n"
                 example_code: "## Maljuna MacDonald\n```\nbestoj = ['porko', 'hundo', 'bovo']\nsonoj = ['oink', 'woof', 'muĝ']\n{for} i {in} {range} 1 {to} 3\n    besto = bestoj[i]\n    sono = sonoj[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sono sono ' here'\n    {print} 'and a ' sono sono ' there'\n    {print} 'here a ' sono\n    {print} 'there a ' sono\n    {print} 'everywhere a ' sono sono\n```\n\n## Drunken Sailor\n```\nlinioj = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} linio {in} linioj\n    {for} i {in} {range} 1 {to} 3\n        {print} linio\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# via kodo ĉi tie'
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Kantu!
         description: Presi kanton
         default_save_name: Kanto
@@ -128,6 +138,8 @@ adventures:
                 story_text: "## Ni desegnu\nEn Nivelo 5, oni povas fari elekton per `{if}`. Ekzemple, inter diversaj specoj de figuroj.\n"
                 example_code: "```\n{print} 'Desegnante figurojn'\nfiguro {is} {ask} 'Ĉu vi deziras kvadraton aŭ triangulon?'\n{if} figuro {is} triangulo angulo {is} 120\n{else} angulo {is} 90\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n```\n"
                 start_code: "{print} 'Desegnante figurojn'\nfiguro {is} {ask} 'Ĉu vi deziras kvadraton aŭ triangulon?'\n{if} figuro {is} triangulo angulo {is} 120 {else} angulo {is} 90\n{turn} angulo\n{forward} 25"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 story_text: "## Ni desegnu\nEn ĉi tiu nivelo vi povas uzi kalkulojn por desegni malsamajn figurojn.\nVi eble lernis en la lernejo, ke turni plenan cirklon estas 360 gradoj. Se ne, nun vi scias!\nTial vi ankaŭ uzas 90 gradojn por kvadrato. 360 dividita per 4 estas 90.\nNun kiam ni povas fari matematikon kun Hedy, ni povas desegni ĉiujn figurojn, kiujn ni volas!\n"
                 example_code: "```\nanguloj = {ask} 'Kiom da anguloj vi deziras?'\nangulo = 360 / anguloj\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n```\n"
@@ -141,8 +153,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Testudo
         description: Faru vian propran desegnaĵon
@@ -259,6 +270,10 @@ adventures:
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
         description: Krei kalkulilon
         default_save_name: Kalkulilo
     restaurant:
@@ -455,8 +470,7 @@ adventures:
                 example_code_3: "```\nbelaj_koloroj {is} verda, flava\nŝatata_koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} ŝatata_koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
                 story_text_2: "Kelkfoje kodo kun `{if}` estas tro longa por unu linio.<br>Oni ankaŭ povas dividi la kodon inter du linioj, komencante la duan linion ĉe la `{else}` jene:\n"
                 example_code_2: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone'\n{else} {print} 'ba!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             6:
                 start_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
                 story_text: "## 1 + 1\n En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.\n\n La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.\n\n La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!\n Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.\n"
@@ -495,8 +509,6 @@ adventures:
                 example_code_4: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo = 'Hedy la Roboto'\n    {print} 'Saluton!'\n```\n"
                 story_text_5: "**Nombroj ne bezonas citilojn**\nPor nombroj, vi ne uzas citilojn en la `=`:\n"
                 example_code_5: "```\npoentaro = 25\n{print} 'Via poentaro estas ' poentaro\n```\n"
-                story_text_6: "**Matematiko kun vortoj**\nEn ĉi tiu nivelo estas ankaŭ permesite uzi la signon + kun tekstoj. Ekzemple:"
-                example_code_6: "```\na = 'Saluton '\nb = 'mondo!'\n{print} a + b\n```\n"
             13:
                 start_code: "nomo = {ask} 'Kio estas via nomo?'\naĝo = {ask} 'Kio estas via aĝo?'\n{if} nomo {is} 'Hedy' {and} aĝo {is} 2\n    {print} 'Vi estas la vera Hedy!'"
                 story_text: "## Kaj… aŭ…?\nNi nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo devas esti vera."

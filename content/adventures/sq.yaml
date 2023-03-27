@@ -55,6 +55,12 @@ adventures:
                 story_text: "## Tregimi\nNë këtë nivel mund të programoni përfundime të ndryshme, që do ta bëje tregimin tuaj më argëtues.\n\n## Sfidë\nMendoni dy përfundime të tregimit tuaj, si për shembull:\n\n- Princesha ecën nëpër pyll\n- Ajo përplaset me një bishë\n\n- Përfundimi i lumtur: Ajo merë shpatën e saj dhe bisha ikën menjëherë\n- Përfundimi i keq: Bisha e hanë princeshën\n\nJu gjithashtu mund të siguroni se një emër mund të përdoret prapë. Kjo punon si edhe në nivelet e mëparshme. Mund ta kombinoni me komandën `{if}`, dhe pastaj keni bërë një program të tërë!\n"
                 example_code: "```\nemri {is} {ask} 'Kush ecën në pyll?'\n{print} emri 'ecën nëpër pyll'\n{print} emri ' përballet me një bishë'\npërfundimi {is} {ask} 'A doni përfundim të lumtur apo të keq?'\n{if} përfundimi {is} lumtur {print} emri ' merë shpatën dhe bisha ikën menjëherë'\n{else} {print} 'Bisha hanë ' emri\n```\n"
                 start_code: "{print} 'Tregimi juaj do të fillojë këtu!'"
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Tregim
         description: Tregim
         default_save_name: Tregim
@@ -92,6 +98,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# place your code here'
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: Kalkulatori
         description: Krijoni një kalkulator
         default_save_name: Kalkulatori
@@ -234,6 +244,10 @@ adventures:
                 story_text: "## Këndo një këngë!\nNë këtë nivel, ju mund ta programoni një këngë si Mek Donald i vjetër edhe më shpejtë. Ju mund ta lidhni kafshën e saktë me zërin e saktë thjeshtë duke i vënë me një vend në listë.\nMarinari i dehur gjithashtu mund të bëhet shpejtë. Ju duhet vetëm 8 rreshta për të gjithë këngën, shiheni!\n"
                 example_code: "## Mek Donald i vjetër\n```\nkafshët = ['derri', 'qeni', 'lopa']\nzërat = ['oink', 'auf', 'muuu']\n{for} i {in} {range} 1 {to} 3\n    kafsha = kafshët[i]\n    zëri = zërat[i]\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishtë një ' kafsha\n    {print} 'E I E I O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri ' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n\n## Marinari i dehur\n```\nrreshtat = ['Çfarë duhet të bëjmë me marinarin e dehur', 'Rruajeni barkun e tij me brisk të ndryshkur', 'futeni në një varg derisa të jetë esëll']\n{for} rreshti {in} rreshtat\n    {for} i {in} {range} 1 {to} 3\n        {print} rreshti\n    {print} 'herët në mëngjes'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Eheei dhe ja ku ngritet'\n    {print} 'herët në mëngjes'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         description: Bëje vizatimin tënd
         default_save_name: Breshka
@@ -262,6 +276,8 @@ adventures:
                 story_text: "## Le të vizatojmë\nNë nivelin 5 ju mund të bëni një zgjidhje me komandën `{if}`. Si për shembull ndërmjet dy lloje të figurave.\n"
                 example_code: "```\n{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120\n{else} këndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120 {else} këndi {is} 90\n{turn} këndi\n{forward} 25"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             6:
                 story_text: "## Le të vizatojmë\nNë këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.\nMund të keni mësuar në shkollë se nëse ktheni komplet rreth ,është 360 shkalle. Nëse jo, tani e dini!\nPër këtë shkak përdorni 90 shkallë për një katror. 360 pjesëtuar me 4 është 90.\nTani mund të bëjmë matematikë me Hady, mund të vizatojmë të gjithë figurat që duam!\n"
                 example_code: "```\nkëndet = {ask} 'Sa kënde doni?'\nkëndi = 360 / këndet\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n```\n"
@@ -275,8 +291,7 @@ adventures:
             9:
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
                 start_code: '# place your code here'
         name: Breshka
     default:
@@ -289,8 +304,7 @@ adventures:
                 example_code_3: "```\nnjgjyrat_e_bukura {is} gjelbër, verdhë\nnjgjyrat_e_preferuara {is} {ask} 'Cila është ngjyra juaj e preferuar?'\n{if} njgjyrat_e_preferuara {in} njgjyrat_e_bukura {print} 'bukur!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Nganjëherë kodi në komandën `{if}` bëhet shumë i gjatë dhe nuk e nxen rreshti. <br> Ju gjithashtu mund ta ndani kodin në dy rreshta, duke filluar rreshtin e dytë te komanda `{else}` ja kështu:\n"
                 example_code_2: "```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy {print} 'bukur'\n{else} {print} 'boo!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
+
             18:
                 example_code_3: "```\n{print}('Emri im është Hedy!')\nemri = {input}('Si e keni emrin?')\n{print}('Kështu që emri yt është ', emri)\n```\n"
                 start_code: "emri = 'Hedy'\n{print}('Emri im është ', emri)"
@@ -364,8 +378,6 @@ adventures:
                 example_code_4: "```\nemri= {ask} 'Si e ke emrin?'\n{if} emri = 'Hedy roboti'\n    {print} 'Përshëndetje!'\n```\n"
                 story_text_5: "**Numrat nuk kanë nevojë të kenë thonjëza**\nPër numrat, ju nuk keni nevojë të përdorni thonjëza në `=`:\n"
                 example_code_5: "```\nrezultati= 25\n{print} 'Ju keni ' rezultati\n```\n"
-                story_text_6: "**Matematikë me fjalë** \nNë këtë nivel gjithashtu është e lejuar që të përdorni shenjën + me tekst. Si për shembull:"
-                example_code_6: "```\na = 'Përshëndetje'\nb = 'botë!'\n{print} a + b\n```\n"
             13:
                 start_code: "emri = {ask} 'Si e ke emrin?'\nmosha = {ask} 'Sa vjeçar jeni?'\n{if} emri {is} 'Hedy' {and} mosha {is} 2\n    {print} 'Ju jeni Hedy i vërtetë!'"
                 story_text: "## Dhe... Ose...?\nNe tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë."

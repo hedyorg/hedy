@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 19:20+0100\n"
-"PO-Revision-Date: 2023-03-11 21:41+0000\n"
-"Last-Translator: Armor Games <armorgames@protonmail.com>\n"
+"POT-Creation-Date: 2023-03-18 14:54+0100\n"
+"PO-Revision-Date: 2023-03-23 09:50+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.2-dev\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.11.0\n"
 
 msgid "Access Before Assign"
 msgstr ""
@@ -82,8 +82,9 @@ msgstr ""
 
 msgid "Lonely Echo"
 msgstr ""
-"Du hast ein echo vor einem ask verwendet, oder ein echo ohne ask. Benutze "
-"zuerst ein ask um eine Eingabe zu bekommen, danach echo."
+"Du hast ein `{echo}` vor einem `{ask}` verwendet, oder ein `{echo}` ohne "
+"`{ask}`. Benutze zuerst ein `{ask}` um eine Eingabe zu bekommen, danach "
+"`{echo}`."
 
 msgid "Lonely Text"
 msgstr ""
@@ -134,8 +135,9 @@ msgstr ""
 
 msgid "Unquoted Text"
 msgstr ""
-"Achtung. Wenn du etwas fragst oder druckst, sollte der Text mit einem "
-"Anführungszeichen beginnen und enden. Du hast irgendwo eines vergessen."
+"Achtung. Wenn du etwas `{ask}` oder `{print}`, sollte der Text mit einem "
+"Anführungszeichen beginnen und enden. Du hast beim Text {unquotedtext} etwas "
+"vergessen."
 
 msgid "Unsupported Float"
 msgstr ""
@@ -293,8 +295,8 @@ msgstr "Bist du sicher? Du kannst diese Aktion nicht rückgängig machen."
 
 msgid "ask_needs_var"
 msgstr ""
-"Ab Level 2 muss {ask} mit einer Variable benutzt werden. Beispiel: Name {is} "
-"{ask} Wie heißt du?"
+"Ab Level 2 muss `{ask}` mit einer Variable benutzt werden. Beispiel: Name "
+"{is} {ask} Wie heißt du?"
 
 msgid "available_adventures_level"
 msgstr "Verfügbare Abenteuer-Level"
@@ -360,6 +362,9 @@ msgstr "Klassenstatistik"
 
 msgid "classes_invalid"
 msgstr "Die Liste ausgewählter Klassen ist ungültig"
+
+msgid "close"
+msgstr "Schließen"
 
 msgid "comma"
 msgstr "ein Komma"
@@ -586,9 +591,9 @@ msgstr "Duplizieren"
 
 msgid "echo_out"
 msgstr ""
-"Ab Level 2 wird {echo} nicht mehr gebraucht. Du kannst jetzt eine Antwort "
-"mit {aks} und {print} wiedergeben. Beispiel: Name ist {ask} Wie heißt Du? "
-"{print} Hallo Name"
+"Ab Level 2 wird `{echo}` nicht mehr gebraucht. Du kannst jetzt eine Antwort "
+"mit `{aks}` und `{print}` wiedergeben. Beispiel: Name ist {ask} Wie heißt "
+"Du? {print} Hallo Name"
 
 msgid "edit_code_button"
 msgstr "Programm ändern"
@@ -720,6 +725,9 @@ msgstr "Passwörter erzeugen"
 msgid "get_certificate"
 msgstr "Hol dir dein Zertifikat!"
 
+msgid "give_link_to_teacher"
+msgstr "Gib den folgenden Link an deine Lehrerin oder deinen Lehrer weiter:"
+
 msgid "go_back_to_main"
 msgstr "Zurück zur Hauptseite"
 
@@ -734,6 +742,12 @@ msgstr "Gehe zum Quiz-Ergebnis"
 
 msgid "goto_profile"
 msgstr "Mein Profil"
+
+msgid "hand_in"
+msgstr "Einreichen"
+
+msgid "hand_in_assignment"
+msgstr "Lösung abgeben"
 
 msgid "heard_about_hedy"
 msgstr "Wie hast du von Hedy erfahren?"
@@ -797,6 +811,9 @@ msgstr "Bestenliste"
 
 msgid "hint"
 msgstr "Hinweis?"
+
+msgid "ill_work_some_more"
+msgstr "Ich werde noch ein wenig weiter dran arbeiten"
 
 msgid "image_invalid"
 msgstr "Das gewählte Bild ist ungültig."
@@ -885,6 +902,9 @@ msgstr "Link"
 
 msgid "list"
 msgstr "eine Liste"
+
+msgid "logged_in_to_share"
+msgstr "Du musst eingeloggt sein, um Programme zu speichern und zu teilen."
 
 msgid "login"
 msgstr "Anmelden"
@@ -1000,6 +1020,11 @@ msgstr "Eine mitwachsende Programmiersprache"
 msgid "main_title"
 msgstr "Hedy"
 
+msgid "make_sure_you_are_done"
+msgstr ""
+"Stelle sicher, dass du fertig bist! Du wirst dein Programm nicht mehr ändern "
+"können, nach du \"Abgeben\" geklickt hast."
+
 msgid "male"
 msgstr "männlich"
 
@@ -1048,6 +1073,9 @@ msgstr "eine neue Zeile"
 msgid "next_exercise"
 msgstr "Nächste Übung"
 
+msgid "next_page"
+msgstr "Nächste Seite"
+
 msgid "next_step_tutorial"
 msgstr "Nächster Schritt >>>"
 
@@ -1093,6 +1121,13 @@ msgstr "Dieses Hedy Programm gibt es nicht!"
 msgid "not_enrolled"
 msgstr "Du bist anscheinend nicht für diesen Unterricht angemeldet!"
 
+msgid "not_in_class_no_handin"
+msgstr ""
+"Du bist in keiner Klasse, also besteht keine Notwendigkeit etwas abgeben."
+
+msgid "not_logged_in_handin"
+msgstr "Du musst eingeloggt sein, um eine Lösung abzugeben."
+
 msgid "not_teacher"
 msgstr "Du bist anscheinend nicht die Lehrkraft!"
 
@@ -1110,6 +1145,9 @@ msgstr "Anzahl von Programmen"
 
 msgid "ok"
 msgstr "OK"
+
+msgid "only_you_can_see"
+msgstr "Nur du kannst dieses Programm sehen."
 
 msgid "open"
 msgstr "Öffnen"
@@ -1189,6 +1227,11 @@ msgstr "Das Passwort muss aus mindestens sechs Zeichen bestehen."
 msgid "pending_invites"
 msgstr "Ausstehende Einladungen"
 
+msgid "people_with_a_link"
+msgstr ""
+"Andere, die einen Link haben, können dieses Programm sehen. Es kann auch auf "
+"der Entdecke-Seite gefunden werden."
+
 msgid "percentage"
 msgstr "Anteil"
 
@@ -1221,6 +1264,9 @@ msgstr "Bisherige Newsletter anzeigen"
 
 msgid "privacy_terms"
 msgstr "Privatsphäre"
+
+msgid "private"
+msgstr "Privat"
 
 msgid "profile_logo_alt"
 msgstr "Profil-Symbol."
@@ -1262,6 +1308,9 @@ msgstr "Eingereichte Programme"
 
 msgid "prompt_join_class"
 msgstr "Willst du dieser Klasse beitreten?"
+
+msgid "public"
+msgstr "Öffentlich"
 
 msgid "public_invalid"
 msgstr "Diese Einverständnisauswahl ist ungültig"
@@ -1384,9 +1433,6 @@ msgstr "Programm ausführen"
 msgid "save"
 msgstr "Speichern"
 
-msgid "save_code_button"
-msgstr "Code speichern"
-
 msgid "save_parse_warning"
 msgstr ""
 "Dieses Programm enthält einen Fehler, bist du dir sicher, dass du es "
@@ -1444,14 +1490,17 @@ msgstr "Meine persönlichen Einstellungen"
 msgid "share"
 msgstr "Teilen"
 
-msgid "share_code_button"
-msgstr "Code speichern & teilen"
+msgid "share_by_giving_link"
+msgstr "Zeige dein Programm anderen, indem du ihnen den Link unten gibst:"
 
 msgid "share_confirm"
 msgstr "Bist du dir sicher, das Programm zu veröffentlichen?"
 
 msgid "share_success_detail"
 msgstr "Programm erfolgreich geteilt."
+
+msgid "share_your_program"
+msgstr "Teile dein Programm"
 
 msgid "signup_student_or_teacher"
 msgstr "Bist du Schüler(in) oder Lehrperson?"
@@ -1585,6 +1634,9 @@ msgstr ""
 "{ask} Wie ist dein Name?\n"
 "{echo} also ist dein Name \n"
 "</pre>"
+
+msgid "this_turns_in_assignment"
+msgstr "Dies gibt deine Lösung an deine Lehrerin oder deinen Lehrer ab."
 
 msgid "title"
 msgstr "Titel"
@@ -1788,6 +1840,17 @@ msgstr "Dein zuletzt gespeichertes Programm"
 msgid "your_personal_text"
 msgstr "Dein persönlicher Text..."
 
+msgid "your_program"
+msgstr "Dein Programm"
+
+#, fuzzy
+msgid "level_disabled"
+msgstr "Level disabled"
+
+#, fuzzy
+msgid "hand_in_exercise"
+msgstr "Hand in exercise"
+
 #~ msgid "create_account_explanation"
 #~ msgstr "Dein eigenes Konto erlaubt es dir, deine Programme zu speichern."
 
@@ -1817,3 +1880,9 @@ msgstr "Dein persönlicher Text..."
 
 #~ msgid "class"
 #~ msgstr "Klasse"
+
+#~ msgid "save_code_button"
+#~ msgstr "Code speichern"
+
+#~ msgid "share_code_button"
+#~ msgstr "Code speichern & teilen"

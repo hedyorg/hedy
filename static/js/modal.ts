@@ -24,10 +24,6 @@ class Modal {
     window.scrollTo(0, 0);
   }
 
-  public show_alert() {
-    $('#modal-alert').fadeIn(1000);
-  }
-
   public hide() {
     $('#modal-mask').hide();
     $('#modal-content').hide();
@@ -39,24 +35,35 @@ class Modal {
   }
 
   public hide_alert() {
-    $('#modal-alert').fadeOut(1000);
+    $('#modal-alert').fadeOut(500);
   }
 
-  public alert(message: string, timeoutMs?: number, error?: boolean) {
-    // Always hide possible previous alert -> make sure it is hidden
-    this.hide_alert();
-    $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
-    $('#modal-alert-button').removeClass('text-red-500');
-    $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
-    $('#modal-alert-button').addClass('text-green-500');
-    if (error) {
-      $('#modal_alert_container').removeClass('bg-green-100 border-green-400 text-green-700');
-      $('#modal-alert-button').removeClass('text-green-500');
-      $('#modal_alert_container').addClass('bg-red-100 border-red-400 text-red-700');
-      $('#modal-alert-button').addClass('text-red-500');
-    }
+  /**
+   * Display a temporary success popup
+   */
+  public notifySuccess(message: string, timeoutMs: number = 3000) {
+    return this.alert(message, timeoutMs);
+  }
+
+  /**
+   * Display a temporary error popup
+   */
+  public notifyError(message: string, timeoutMs: number = 5000) {
+    return this.alert(message, timeoutMs, true);
+  }
+
+  /**
+   * Display a temporary popup
+   */
+  private alert(message: string, timeoutMs?: number, error?: boolean) {
+    $('#modal_alert_container').toggleClass('bg-red-100 border-red-400 text-red-700', !!error);
+    $('#modal_alert_container').toggleClass('bg-green-100 border-green-400 text-green-700', !error);
+    $('#modal-alert-button').toggleClass('text-red-500', !!error);
+    $('#modal-alert-button').toggleClass('text-green-500', !error);
+
     $('#modal_alert_text').html(message);
-    this.show_alert();
+    $('#modal-alert').fadeIn(500);
+
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._alert_timeout) {
       clearTimeout(this._alert_timeout);
@@ -122,6 +129,13 @@ class Modal {
       this._timeout = undefined;
     }
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  /**
+   * modal.confirm as a promise
+   */
+  public confirmP(message: string): Promise<void> {
+    return new Promise<void>(ok => this.confirm(message, ok));
   }
 
   // The declineCb is optional, mainly for relic code support: add if needed otherwise leave empty on call
@@ -231,3 +245,15 @@ export const error = {
 }
 
 export const modal = new Modal();
+
+/**
+ * Run a code block, show a popup if we catch an exception
+ */
+export async function tryCatchPopup(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    console.log('Error', e);
+    modal.notifyError(e.message);
+  }
+}

@@ -194,6 +194,11 @@ strong {
   @apply bg-blue-500 text-white border-blue-700;
 }
 
+.gray-btn {
+  @apply btn-shape;
+  @apply bg-gray-500 text-white border-gray-700;
+}
+
 .blue-btn:hover {
   @apply bg-blue-400 border-blue-500;
 }
@@ -366,7 +371,7 @@ input:disabled {
 }
 
 input[type=checkbox], input[type=radio] {
-  @apply appearance-none border border-gray-400 w-4 h-4;
+  @apply appearance-none border border-gray-700 w-5 h-5;
 }
 
 input[type=radio] {
@@ -421,6 +426,11 @@ body[dir='rtl'] .right-hand-shadow {
 
 .special_tab {
   @apply border-blue-300;
+}
+
+.active-bluebar-btn {
+  @apply bg-blue-300;
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 10 / 0.3);
 }
 
 /* TB: We shouldn't ever do this, all this dynamic handling can already be fixed with Tailwind! */
@@ -705,10 +715,13 @@ input:checked ~ .toggle-path {
 }
 
 .adventures-tab {
-  @apply flex flex-row w-auto overflow-x-auto overflow-y-hidden;
-  display :none;
+  @apply flex-row w-auto overflow-x-auto overflow-y-hidden;  
 }
 
 .adventures-tab[style*='display: block'] {
   display: flex !important;
+}
+
+.profile-nametag__stats {
+  @apply text-center w-full flex flex-row justify-center items-stretch
 }

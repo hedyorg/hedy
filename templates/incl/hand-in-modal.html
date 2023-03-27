@@ -1,0 +1,73 @@
+<div id="hand-in-modal" data-modal="true" class="hidden fixed w-screen h-screen z-40 inset-0">
+  <div class="absolute bg-black w-full h-full opacity-75" onclick="hedyApp.closeContainingModal(this)"></div>
+  <div class="absolute flex justify-center w-full h-full">
+    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
+      <h2>{{_('hand_in_exercise')}}</h2>
+
+      {% if username and current_user_is_in_class %}
+
+      <div data-view="if-not-submitted">
+        <div>{{_('this_turns_in_assignment')}}</div>
+
+        <div class="flex my-8 bg-yellow-200 border-yellow-500 border rounded p-4">
+          <div>
+            <span class="fa-regular fa-hand"></span>
+          </div>
+          <div class="flex-1 mx-4">
+            {{_('make_sure_you_are_done')}}
+          </div>
+        </div>
+
+        <div class="flex gap-8 items-center mt-4">
+          <button class="blue-btn" id="do_hand_in_button"> <span class="fa-regular fa-paper-plane mr-4"></span> {{_('hand_in')}}</button>
+          <a href="#" onclick="hedyApp.closeContainingModal(this); return false;">{{_('ill_work_some_more')}}</a>
+        </div>
+      </div>
+
+      <div data-view="if-submitted">
+        <div class="my-4">
+          <p>{{_('submitted_header')}}</p>
+          <p>{{_('give_link_to_teacher')}}</p>
+        </div>
+
+        <div data-view="if-public-url">
+          {% include 'incl/copy-url-bar.html' %}
+        </div>
+
+        <div class="flex justify-end mt-4">
+          <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">{{_('close')}}</button>
+        </div>
+      </div>
+
+      {% elif username %} {# logged in/in class #}
+
+      <div>
+        {{_('not_in_class_no_handin')}}
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">{{_('close')}}</button>
+      </div>
+
+      {% else %} {# logged in/in class #}
+
+      <div class="mt-8">
+        <p>{{_('not_logged_in_handin')}}</p>
+        <p><a href="/login">{{_('login')}}</a></p>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">{{_('close')}}</button>
+      </div>
+
+      {% endif %}
+
+      <div class="absolute right-0 top-0 m-8">
+        <a href="#" title="Close popup" onclick="hedyApp.closeContainingModal(this); return false;">
+          <span class="text-3xl text-gray-400 fa-solid fa-xmark"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

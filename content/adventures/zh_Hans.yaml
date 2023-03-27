@@ -64,8 +64,6 @@ adventures:
                 story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n如果你选择绿色或黄色，这段代码会打印“好看”，否则则会说“哦”。\n"
                 example_code_3: "```\n好看的颜色 {is} 绿色，黄色\n颜色 {is} {ask} '你最喜欢的颜色是什么？'\n{if} 颜色 {in} 好看的颜色 {print} '好看！'\n{else} {print} '哦'\n```\n"
                 story_text_2: "有`{if}`的代码中有些时候会很长，一行代码放不下。 <br> 你可以把代码分成两行，像这样以`{else}`开始第二行：\n"
-                story_text_4: "与`{if}`关键词一起用的还有 `{pressed}`！你可以通过 `{pressed}`将键盘上的任何字母或是数字键关联到一个操作命令上。在你关联完成并按下关联好的按键后，会有神奇的事情发生。试试看吧！\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
                 story_text: |
@@ -138,8 +136,6 @@ adventures:
                 story_text_4: "**在`{if}`中比较的所有文本也都需要引号**\n"
                 example_code_4: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 = '海蒂机器人'\n    {print} '你好啊！'\n```\n"
                 story_text_5: "**数字不需要引号**\n对于数字，你不需要在`=`中加上引号：\n"
-                story_text_6: "**数学与文本**\n在此级别中，还允许将 + 号与文本一起使用。例如："
-                example_code_6: "```\na = '你好 '\nb = '世界！'\n{print} a + b\n```\n"
             13:
                 start_code: |-
                     名字 = {ask} '你叫什么名字?'
@@ -298,6 +294,12 @@ adventures:
                 story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} game {is} 'on'`可以让游戏一直进行到结束为止。\n或者用`{while} sword {is} 'lost'`来要求玩家必须先找到剑，才能继续游戏。\n"
                 example_code: "```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
                 start_code: '# 在这里写你的代码'
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: 故事
         description: 故事
         default_save_name: 故事
@@ -335,6 +337,10 @@ adventures:
                 story_text: "## 唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
                 start_code: '# 把你的代码放在这里'
                 example_code: "## 老麦当劳\n```\n动物们 = ['猪', '狗', '牛']\n声音们 = ['哼哼', '汪汪', '哞']\n{for} i {in} {range} 1 {to} 3\n    动物 = 动物们[i]\n    声音 = 声音们[i]\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音 声音\n```\n\n## 醉酒的水手\n```\n句子们 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子 {in} 句子们\n    {for} i {in} {range} 1 {to} 3\n        {print} 句子\n    {print} '一大清早'\n    {for} i {in} {range} 1 {to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
+            18:
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                start_code: '# Schrijf jouw code hier'
         name: 唱支歌！
         description: 打印一首歌
         default_save_name: 歌
@@ -369,6 +375,8 @@ adventures:
                     {if} 图形 {is} 三角形 角度 {is} 120 {else} 角度 {is} 90
                     {turn} 角度
                     {forward} 25
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             8:
                 story_text: "## 让我们来画画\n现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n\n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: "```\n角度 = 90\n{repeat} 4 {times}\n    {turn} 角度\n    {forward} 50\n```\n"
@@ -382,8 +390,6 @@ adventures:
             9:
                 story_text: "## 海龟\n我们现在可以在 `{repeat}`中使用 `{repeat}`了，我们可以创建更复杂的图形了。\n\n### 练习1\n这段代码能画三个黑色的三角形，把它改成能画出五个粉红色方块。\n\n**（另外）** 你自己编码画出一个的至少由两种不同图形类型组成的图形。\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## 控制乌龟\n你现在还可以用更多的方式来移动乌龟，而不仅仅是向前或向后移动!\n### 练习2\n完成代码，这样你就可以用按键来控制乌龟了。w代表前进，s代表后退，a代表左，d代表右。\n提示：对于左和右，你将需要使用三行代码!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
                 start_code: '#将你的代码放在这里'
         name: 海龟
         description: 创作自己的绘画作品
@@ -504,6 +510,10 @@ adventures:
                 example_code: "```\n数字 = 10\n{for} i {in} {range} 1 to 10\n    {print} i * 数字\n```\n"
                 start_code: '# 将你的代码写在这里'
                 story_text: "## 计算器\n使用 `{for}`你可以简化乘法运算表的程序。\n\n### 练习 1\n改进范例代码，使其打印出一个漂亮的乘法表：<br> “1 乘以 10 是 10”、“2 乘以 10 是 20”等。\n\n### 练习 2\n返回到你在 10 级完成的乘法运算表程序，并使用 `{for}` 和 `{range}`对其进行修改。\n"
+            13:
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                start_code: '# Schrijf jouw code hier'
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
@@ -1305,7 +1315,7 @@ adventures:
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
                     {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'

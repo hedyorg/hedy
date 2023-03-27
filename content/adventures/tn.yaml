@@ -25,8 +25,7 @@ adventures:
                 story_text: "## fa ... faese....\nMo legatong la botlhano gona le sengwe se sesha, the `{if}`! ka `{if}` oka ikgethela mo ditshwetsong tse pedi tse di farologanyeng.\ncode ee printa bontle faoka tsenya Hedy ele leina, le boo! faoka tsenya sepe se sele.\n`{ask}` and `{print}` di ntse di bereka jaaka ko legatong labone.\n"
                 example_code: "```\nleina {is} {ask} 'leina la gago ke mang'\n{if} leina {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## mananeo\nFa rebatla go bona kakoba gore sengwe se teng mo lenaneong, reka dirisa `{in}` command.\ncode e e printa bontle! if o kgetha botala kana lephutshe kana meh.\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+
             6:
                 start_code: "{print} '5 ntsifatsa ka 5 ke ' 5 * 5"
                 story_text: "## 1 + 1\n Mo legatong le, o tla ithuta sengwe se sesha: Gape otlaa dirisa dipalo.\n\n Go thakanya go motlhofo, o kwala lotshwao la teng fela jaaka la dipallo: `5 + 5` jaana. Go fokotsa go bereka sentle, go tshwana le `5 - 5`.\n\n Gontsifatsa go farologana go le sekae ka gore ga gona lotshwao la gontsifatsa fago tobediwang sebala makgolo. O kanna wa senka, galeyo!\n Ke kamoo fare ntsifatsa re dirisa asterisk fagodimo 8: `5 * 5`. Go balega ele \"5 ntsifatsa ka 5\" mo go ka go thusa go gakologelwa botoka.\n"
@@ -85,8 +84,6 @@ adventures:
                 example_code_2: "```\nLeina = 'Hedy wa Robot'\n{print} 'dumela ' leina\n```\n"
                 story_text_3: "**Dikarolo tsotlhe mo lenaneong di tlhoka go tsenngwa mo ditsejwaneng**\nMananeo ke mafoko, ka jalo a thoka ditsejwana le one. Dira gore karolo nngwe le nngwe mo lenaneong ena le ditsejwana.\nSe se go letlelela go boloka mafoko a mabedi jaaka selo sele sengwefela mo lenaneong, sekai 'Iron Man'.\n"
                 example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                example_code_6: "```\na = 'Dumela '\nb = 'lefatshe!'\n{print} a + b\n```\n"
-                story_text_6: "**Dipalo ka mafoko** \nMo legatong le go letlelesega go dirisa lotshwao la + ka mafoko. Sekai:"
             13:
                 start_code: "leina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'o dingwaga tse kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy wa nnete!'"
                 story_text: "## And... kana..?\nMo legatong le, retile go ithuta `{and}` le `{or}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
@@ -170,6 +167,12 @@ adventures:
                 story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable."
                 example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
                 start_code: '# place your code here'
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
         description: Story
         default_save_name: Story
     parrot:
@@ -235,6 +238,10 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Sing a song!
         description: Print a song
         default_save_name: Song
@@ -254,6 +261,8 @@ adventures:
                 start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
                 story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
             6:
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
@@ -278,8 +287,7 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
-                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
-                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+
         name: Turtle
         description: Make your own drawing
         default_save_name: Turtle
@@ -432,6 +440,10 @@ adventures:
                 story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
                 start_code: '# place your code here'
+            13:
+                example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
+                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                start_code: '# Schrijf jouw code hier'
     restaurant:
         levels:
             2:
@@ -599,7 +611,7 @@ adventures:
                 start_code: '# place your code here'
             16:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
-                example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[{random}]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mansion'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
+                example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[{random}]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mansion'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# place your code here'
     piggybank:
         name: Piggy Bank

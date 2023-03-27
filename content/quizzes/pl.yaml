@@ -38,10 +38,10 @@ levels:
                     ```
                 feedback: "Za pomocą `{ask}` możesz zadać pytanie."
             correct_answer: "B"
-            hint: "_?_ Witaj świecie!"
+            hint: "_ Witaj świecie!"
             question_score: '10'
             code: |
-              ___ Hello!
+                _ Witaj!
         3:
             question_text: "Jak zapytasz, jaki jest mój ulubiony kolor?"
             mp_choice_options:
@@ -77,8 +77,8 @@ levels:
             mp_choice_options:
             -   option: "Brakuje komendy `{print}` na linii 1."
                 feedback: "Zgadza się!"
-            -   option: "Im w linii 1 jest źle napisany."
-                feedback: "Komenda 'zapytaj' zadaje pytanie, komenda 'dołącz' wyświetla odpowiedź na to pytanie. Gdyby 'dołącz' było pierwsze, nie byłoby czego wyświetlać."
+            -   option: "Polecenie w linii 2 jest źle napisane."
+                feedback: "Polecenie jest napisane poprawnie."
             -   option: "`{echo}` nie jest komendą."
                 feedback: "`{echo}` jest komendą, błąd znajduje się gdzie indziej."
             -   option: "Nic! Ten kod jest bezbłędny!"
@@ -89,8 +89,8 @@ levels:
         5:
             question_text: "Jakiej komendy brakuje na linii 2?"
             code: |-
-                {ask} Jak nazywa się twój pies?
-                _?_ Twój pies nazywa się...
+                {ask} Jakie jest twoje ulubione zwierzę?
+                _ Więc twoje ulubione zwierzę to...
             mp_choice_options:
             -   option: |
                     ```
@@ -158,7 +158,7 @@ levels:
             mp_choice_options:
             -   option: "Możesz go wykorzystać do `{ask}` pytania."
                 feedback: "Do tego właśnie służy `{ask}`!"
-            -   option: "Możesz wykorzystać je do wypisana tekstu"
+            -   option: "Możesz korzystać z niego tak samo jak z `{print}`."
                 feedback: "Do tego właśnie służy `{print}`!"
             -   option: "Możesz go użyć do powtórzenia odpowiedzi."
                 feedback: "Dobra robota!"
@@ -179,21 +179,35 @@ levels:
             -   option: "`{print}` in line 2 should be `{ask}`"
                 feedback: "Super!"
             -   option: "`{echo}` in line 3 should be `{ask}`"
-                feedback: "No, `{echo}` is right. Where is the question being asked?"
-            -   option: "Nothing. This is a perfect code!"
-                feedback: "Look carefully for the mistake..."
+                feedback: "Nie, `{echo}` jest poprawne. Gdzie jest zadane pytanie?"
+            -   option: "Nic. Ten kod jest idealny!"
+                feedback: "Dokładnie poszukaj błędu..."
             correct_answer: "B"
-            hint: "`{ask}` allows you to ask a question"
+            hint: "`{ask}` pozwala Ci zadać pytanie"
             question_score: '10'
         10:
-            question_text: "Are you ready for level 2?"
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
-            -   option: "Yes!"
-                feedback: "Great! Let's go to the next level!"
-            -   option: "No"
-                feedback: "What a shame... You can practice some more in level 1!"
-            correct_answer: "A"
-            hint: "Wyśmienicie!"
+            -   option: |
+                    Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                    Yes!
+                    Yes!
+                feedback: "Great job!"
+            -   option: |
+                    Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                    Are you ready to go to level 2?
+                    Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
+            hint: "Let's go!"
             question_score: '10'
     2:
         1:

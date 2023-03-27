@@ -92,7 +92,7 @@ export class Tabs {
       this.tabEvents.emit('afterSwitch', { oldTab: this._currentTab, newTab: tabName });
     }
 
-    // We don't do an even for the very first tab switch
+    // We don't do a beforeSwitch event for the very first tab switch
     if (this._currentTab != '') {
       const event = this.tabEvents.emit('beforeSwitch', { oldTab: this._currentTab, newTab: tabName });
       event.then(doSwitch);
@@ -106,7 +106,12 @@ export class Tabs {
   }
 
   public on(key: Parameters<typeof this.tabEvents.on>[0], handler: Parameters<typeof this.tabEvents.on>[1]) {
-    return this.tabEvents.on(key, handler);
+    const ret = this.tabEvents.on(key, handler);
+    // Immediately invoke afterSwitch when it's being registered
+    if (key === 'afterSwitch') {
+      this.tabEvents.emit('afterSwitch', { oldTab: '', newTab: this._currentTab });
+    }
+    return ret;
   }
 }
 

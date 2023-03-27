@@ -94,7 +94,7 @@
         答案 = {ask} '10加10等于几?'
         {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
     name: '{ask}'
--   name: "海龟绘图的 {ask} 和 {if}"
+-   name: "海龟绘图的`{ask}` 和 `{if}`命令"
     explanation: "询问使用者想要多少度。"
     demo_code: |-
         角度 = {ask} '多少度？'
@@ -186,7 +186,7 @@
     demo_code: |-
         name= '海蒂机器人'
         {print} '你好，' name
--   name: "{if} 比较后的引号"
+-   name: "`{if}`比较后的引号"
     explanation: "`{if}`之后的带引号文本。"
     demo_code: |-
         name = {ask} '你是谁？'
