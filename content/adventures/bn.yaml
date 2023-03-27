@@ -514,6 +514,12 @@ adventures:
                     {print} 'Now you can enter the house!'
                     ```
                 start_code: "# place your code here"
+            18:
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
     parrot:
         name: "Parrot"
         description: "Create your own online pet parrot that will copy you!"
@@ -761,6 +767,10 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: "# place your code here"
+            18:
+                start_code: '# Schrijf jouw code hier'
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
     turtle:
         name: "Turtle"
         description: "Make your own drawing"

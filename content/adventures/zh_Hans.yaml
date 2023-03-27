@@ -294,6 +294,12 @@ adventures:
                 story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} game {is} 'on'`可以让游戏一直进行到结束为止。\n或者用`{while} sword {is} 'lost'`来要求玩家必须先找到剑，才能继续游戏。\n"
                 example_code: "```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
                 start_code: '# 在这里写你的代码'
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
         name: 故事
         description: 故事
         default_save_name: 故事
@@ -331,6 +337,10 @@ adventures:
                 story_text: "## 唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
                 start_code: '# 把你的代码放在这里'
                 example_code: "## 老麦当劳\n```\n动物们 = ['猪', '狗', '牛']\n声音们 = ['哼哼', '汪汪', '哞']\n{for} i {in} {range} 1 {to} 3\n    动物 = 动物们[i]\n    声音 = 声音们[i]\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音 声音\n```\n\n## 醉酒的水手\n```\n句子们 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子 {in} 句子们\n    {for} i {in} {range} 1 {to} 3\n        {print} 句子\n    {print} '一大清早'\n    {for} i {in} {range} 1 {to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
+            18:
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                start_code: '# Schrijf jouw code hier'
         name: 唱支歌！
         description: 打印一首歌
         default_save_name: 歌

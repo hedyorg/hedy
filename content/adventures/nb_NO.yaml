@@ -167,6 +167,12 @@ adventures:
                 story_text: "## Fortelling\nVed å bruke `{and}` og `{or}` kommandoene, kan du korte ned historier. For eksempel, sjekk ut historien om dragen.\n"
                 example_code: "```\nsverd = 'tapt'\nspill = 'i gang'\n{print} 'Helten vår går gjennom skogen'\n{print} 'Veien deler seg i to'\n{for} i {in} {range} 0 {to} 2\n    {if} spill {is} 'i gang'\n        vei = {ask} 'Hvilken vei skal hun velge?'\n        {if} vei {is} 'venstre' {and} sverd {is} 'funnet'\n            {print} 'Helten vår støter på en drage!'\n            {print} 'Heldigvis har helten et sverd til å beseire beistet'\n            spill = 'ferdig'\n        {if} vei {is} 'venstre' {and} sverd {is} 'tapt'\n            {print} 'Helten vår støter på en drage, men hun har ingen våpen!'\n            {print} 'Helten vår blir tatt av monsteret...'\n            {print} 'Prøv igjen'\n            spill = 'ferdig'\n        {if} vei {is} 'høyre' {and} sverd {is} 'funnet'\n            {print} 'Du har allerede funnet sverdet, det er ikke noe mer her'\n            {print} 'Hun går tilbake'\n        {if} vei {is} 'høyre' {and} sverd {is} 'tapt'\n            {print} 'Helten vår finner et sverdy'\n            {print} 'Dette kan være veldig hendig'\n            sverd = 'funnet'\n```\n"
                 start_code: '# skriv koden din her'
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                start_code: '# Schrijf jouw code hier'
         description: Fortelling
         default_save_name: Fortelling
     turtle:
@@ -549,6 +555,10 @@ adventures:
                 story_text: "## Sing a song!\nPå dette nivået kan du programmere en sang som \"Old MacDonald\" enda raskere. Du kan knytte sammen det riktige dyret til den riktige lyden ved å putte de på den samme plassen i listen.\n\"The Drunken Sailor\" er også rask å lage på dette nivået. Du trenger bare 8 linjer for hele sangen, sjekk det ut!\n"
                 example_code: "## Old MacDonald\n```\ndyrene = ['pig', 'dog', 'cow']\nlydene = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    dyret = dyrene[i]\n    lyden = lydene[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' dyret\n    {print} 'E I E I O!'\n    {print} 'with a ' lyden lyden ' here'\n    {print} 'and a ' lyden lyden ' there'\n    {print} 'here a ' lyden\n    {print} 'there a ' lyden\n    {print} 'everywhere a ' lyden lyden\n```\n\n## Drunken Sailor\n```\nlinjene = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} linjen {in} linjene\n    {for} i {in} {range} 1 {to} 3\n        {print} linjen\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# skriv koden din her'
+            18:
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                start_code: '# Schrijf jouw code hier'
     dishes:
         name: Retter?
         description: Bruk datamaskinen til å se hvem som skal ta oppvasken (Start på nivå 2)
