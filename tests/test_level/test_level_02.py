@@ -570,6 +570,28 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
+    def test_assign_omas(self):
+        code = textwrap.dedent("""\
+            oma is Hedy
+            print oma's aan de top, zoals oma!""")
+
+        expected = textwrap.dedent("""\
+            oma = 'Hedy'
+            print(f'oma\\'s aan de top, zoals {oma}!')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
+
+    def test_assign_ukranian_var_name(self):
+        code = textwrap.dedent("""\
+            ім'я is Hedy
+            print You are ім'я""")
+
+        expected = textwrap.dedent("""\
+            ім_я = 'Hedy'
+            print(f'You are {ім_я}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
+
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = '14'"

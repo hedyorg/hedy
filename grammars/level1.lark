@@ -59,7 +59,7 @@ textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a ne
 NAME: LETTER_OR_UNDERSCORE LETTER_OR_NUMERAL*
 
 LETTER_OR_UNDERSCORE: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
-LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·']+/
 
 // Internal symbol added by the preprocess_blocks function to indicate the end of blocks
 _END_BLOCK: "#ENDBLOCK"

@@ -210,6 +210,17 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_assign_ukranian_var_name(self):
+        code = textwrap.dedent("""\
+            ім'я is Hedy
+            print 'You are ' ім'я""")
+
+        expected = textwrap.dedent("""\
+            ім_я = 'Hedy'
+            print(f'You are {ім_я}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_place_holder_no_space(self):
         # same as print for level 4
         code = "print _Escape from the haunted house!_"
