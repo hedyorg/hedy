@@ -372,12 +372,13 @@ def get_suggestions_for_language(lang, level):
 
 def escape_var(var):
     # reserved words may not be used for variable names, nor may they contain quotes
-    if type(var) is Tree:
-        return var
-
     var_name = var.name if type(var) is LookupEntry else var
-    return "_" + var_name \
-        if var_name in reserved_words else var_name.replace("'", "_")
+    escaped_var = "_" + var_name if var_name in reserved_words else var_name
+
+    if str(escaped_var) == escaped_var:  # check if this is a string or Token
+        return escaped_var.replace("'", "_")
+    else:
+        return escaped_var
 
 
 def closest_command(invalid_command, known_commands, threshold=2):
