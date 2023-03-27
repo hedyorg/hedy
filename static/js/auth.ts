@@ -192,12 +192,13 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   }
   modal.confirm (text, async () => {
     try {
-      await postJson('/admin/markAsTeacher', {
+      await postNoResponse('/admin/markAsTeacher', {
         username: username,
         is_teacher: is_teacher,
       });
       location.reload();
-    } catch {
+    } catch (e) {
+      console.error(e);
       modal.notifyError(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
     }
   }, async () => {

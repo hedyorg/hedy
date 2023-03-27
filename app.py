@@ -171,8 +171,13 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
         loaded_programs[preferential_program.adventure_name] = preferential_program
 
     # Copy them into the adventures array
+    #
+    # For every adventure, find a program in the `loaded_programs` dictionary.
+    # Since the program may be saved under either the id or the actual name, check both.
     for adventure in into_adventures:
         program = loaded_programs.get(adventure.short_name)
+        if not program:
+            program = loaded_programs.get(adventure.name)
         if not program:
             continue
 
@@ -189,41 +194,39 @@ def load_customized_adventures(level, customizations, into_adventures):
     a bit expensive and since we've already done that in the caller, we pass
     it in here.
 
-    Mutates the 'into_adventures' list in-place
+    Mutates the 'into_adventures' list in-place. On entry, it is the list of
+    default `Adventure` objects in the default order. On exit, it may have been
+    reordered and enhanced with teacher-written adventures.
     """
-    # Add teacher adventures
-    # [ <str>id ]
-    teacher_adventures = customizations.get('teacher_adventures', [])
-    for adv_id in teacher_adventures:
-        # FIXME: This should be a batch-get on the collection
-        adventure = DATABASE.get_adventure(adv_id)
-        try:
-            adventure['content'] = safe_format(adventure['content'],
-                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
-        except BaseException:
-            # We don't want teacher being able to break the student UI -> pass this adventure
-            pass
-
-        into_adventures.append(Adventure(
-            short_name=adv_id,
-            name=adventure['name'],
-            save_name=adventure['name'] + ' ' + str(level),
-            start_code='',  # Teacher adventures don't seem to have this
-            text=adventure['content'],
-            is_teacher_adventure=True))
-
-    # Select a subset of available adventures, in the right order.
+    # First find the list of all teacher adventures for the current level,
+    # batch-get all of them, then put them into the adventures array in the correct
+    # location.
 
     # { <str>level -> [ { <str>name, <bool>from_teacher ] }
     # 'name' is either a shortname or an ID into the teacher table
     sorted_adventures = customizations.get('sorted_adventures', {})
     order_for_this_level = sorted_adventures.get(str(level), [])
-    if order_for_this_level:
-        adventure_map = {a['short_name']: a for a in into_adventures}
+    if not order_for_this_level:
+        return  # Nothing to do
 
-        # Replace entire list
-        into_adventures[:] = [adventure_map[select['name']]
-                              for select in order_for_this_level if select['name'] in adventure_map]
+    adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
+    teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
+    builtin_adventure_map = {a.short_name: a for a in into_adventures}
+
+    # Replace `into_adventures`
+    into_adventures[:] = []
+    for a in order_for_this_level:
+        if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
+            try:
+                db_row['content'] = safe_format(db_row['content'],
+                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+            except Exception:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
+
+            into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
+        if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
+            into_adventures.append(adv)
 
 
 @babel.localeselector
@@ -518,17 +521,21 @@ def parse():
 
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
-        program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
-        program = program_logic.store_user_program(
-            user=current_user(),
-            level=level,
-            name=body.get('save_name'),
-            program_id=body.get('program_id'),
-            adventure_name=body.get('adventure_name'),
-            code=code,
-            error=exception is not None)
+        try:
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+            program = program_logic.store_user_program(
+                user=current_user(),
+                level=level,
+                name=body.get('save_name'),
+                program_id=body.get('program_id'),
+                adventure_name=body.get('adventure_name'),
+                code=code,
+                error=exception is not None)
 
-        response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+            response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+        except programs.NotYourProgramError:
+            # No permissions to overwrite, no biggie
+            pass
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
@@ -1051,8 +1058,6 @@ def index(level, program_id):
 
         loaded_program = Program.from_database_row(result)
 
-    # In case of a "forced keyword language" -> load that one, otherwise: load
-    # the one stored in the g object
     adventures = load_adventures_for_level(level)
 
     # Initially all levels are available -> strip those for which conditions
