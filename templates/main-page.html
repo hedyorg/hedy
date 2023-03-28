@@ -11,7 +11,7 @@
             {# image for large screens #}
             <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
                 {% if not custom_logo %}
-                    <div id="logo-code-overlay" class="absolute z-10 text-4xl h-full flex gap-4 items-center justify-center translate-y-6" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
+                    <div id="logo-code-overlay" class="absolute z-10 {% if (_('print_logo')|length + _('hello_logo')|length) > 15 %}text-2xl translate-y-8{% elif (_('print_logo')|length + _('hello_logo')|length) > 11 %}text-3xl translate-y-8{% else %}text-4xl translate-y-6{% endif %} h-full flex gap-4 items-center justify-center" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
                         <span style="color: #ff6188;">{{_('print_logo')}}</span>
                         <span class="text-white">{{_('hello_logo')}}</span>
                     </div>
