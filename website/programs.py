@@ -1,6 +1,7 @@
 import uuid
+from typing import Optional
 
-from flask import g, jsonify, request
+from flask import g, request
 from flask_babel import gettext
 
 import hedy
@@ -11,17 +12,89 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from .flask_helpers import proper_jsonify as jsonify
+from .types import SaveInfo, Program
+
+
+class ProgramsLogic:
+    """Logic for storing/saving programs.
+
+    This used to be inside the class below, which also handles flask
+    routes, and is being extracted out piece by piece.
+
+    This could maybe have been in the Database class, but it also uses
+    Achievements and stuff.
+    """
+
+    def __init__(self, db: Database, achievements: Achievements):
+        self.db = db
+        self.achievements = achievements
+
+    def store_user_program(self,
+                           user,
+                           level: int,
+                           name: str,
+                           code: str,
+                           error: bool,
+                           program_id: Optional[str] = None,
+                           adventure_name: Optional[str] = None,
+                           set_public: Optional[bool] = None):
+        """Store a user program (either new or overwrite an existing one).
+
+        Returns the program record.
+        """
+
+        # Some user input and a bunch of metadata
+        updates = {
+            "session": utils.session_id(),
+            "date": utils.timems(),
+            "lang": g.lang,
+            "version": utils.version(),
+            "level": level,
+            "code": code,
+            "name": name,
+            "username": user["username"],
+            "error": error,
+            "adventure_name": adventure_name,
+        }
+
+        if set_public is not None:
+            updates['public'] = 1 if set_public else 0
+
+        if program_id:
+            # FIXME: This should turn into a conditional update
+            current_prog = self.db.program_by_id(program_id)
+            if not current_prog:
+                raise RuntimeError(f'No program with id: {program_id}')
+            if current_prog['username'] != updates['username']:
+                raise NotYourProgramError('Cannot overwrite other user\'s program')
+
+            program = self.db.update_program(program_id, updates)
+        else:
+            updates['id'] = uuid.uuid4().hex
+            program = self.db.store_program(updates)
+            self.db.increase_user_program_count(user["username"])
+
+        self.db.increase_user_save_count(user["username"])
+        self.achievements.increase_count("saved")
+        self.achievements.verify_save_achievements(user["username"], adventure_name)
+
+        return program
 
 
 class ProgramsModule(WebsiteModule):
+    """Flask routes that deal with manipulating programs."""
+
     def __init__(self, db: Database, achievements: Achievements):
         super().__init__("programs", __name__, url_prefix="/programs")
+        self.logic = ProgramsLogic(db, achievements)
         self.db = db
         self.achievements = achievements
 
     @route("/list", methods=["GET"])
     @requires_login
     def list_programs(self, user):
+        # Filter by level, adventure, submitted, paginated.
         return {"programs": self.db.programs_for_user(user["username"]).records}
 
     @route("/delete/", methods=["POST"])
@@ -82,82 +155,53 @@ class ProgramsModule(WebsiteModule):
             return "name must be a string", 400
         if not isinstance(body.get("level"), int):
             return "level must be an integer", 400
-        if not isinstance(body.get("shared"), bool):
+        if 'program_id' in body and not isinstance(body.get("program_id"), str):
+            return "program_id must be a string", 400
+        if 'shared' in body and not isinstance(body.get("shared"), bool):
             return "shared must be a boolean", 400
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
                 return "if present, adventure_name must be a string", 400
 
-        error = False
-        try:
-            hedy.transpile(body.get("code"), body.get("level"), g.lang)
-        except BaseException:
-            error = True
-            if not body.get("force_save", True):
-                return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+        error = None
+        program_id = body.get('program_id')
 
-        # We check if a program with a name `xyz` exists in the database for the username.
-        # It'd be ideal to search by username & program name,
-        # but since DynamoDB doesn't allow searching for two indexes at the same time,
-        # this would require to create a special index to that effect, which is cumbersome.
-        # For now, we bring all existing programs for the user and then search within them for repeated names.
-        programs = self.db.programs_for_user(user["username"]).records
-        program_id = uuid.uuid4().hex
+        # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
-        overwrite = False
-        for program in programs:
-            if program["name"] == body["name"]:
-                overwrite = True
-                program_id = program["id"]
-                # If a program was already shared, keep it that way
-                if program.get("public", False):
-                    program_public = True
-                break
 
-        stored_program = {
-            "id": program_id,
-            "session": utils.session_id(),
-            "date": utils.timems(),
-            "lang": g.lang,
-            "version": utils.version(),
-            "level": body["level"],
-            "code": body["code"],
-            "name": body["name"],
-            "username": user["username"],
-            "public": 1 if program_public else 0,
-            "error": error,
-        }
+        if program_public:
+            # If a program is marked as public, we need to know whether it contains
+            # an error or not. Parse it here and add the status.
+            # WARNING: compiling is expensive! We may regret doing this on every save, especially
+            # when saves become common!
+            try:
+                hedy.transpile(body.get("code"), body.get("level"), g.lang)
+                error = False
+            except BaseException:
+                error = True
+                if not body.get("force_save", True):
+                    return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
 
-        if "adventure_name" in body:
-            stored_program["adventure_name"] = body["adventure_name"]
+        print('Going into logic')
 
-        self.db.store_program(stored_program)
-        if not overwrite:
-            self.db.increase_user_program_count(user["username"])
-        self.db.increase_user_save_count(user["username"])
-        self.achievements.increase_count("saved")
+        program = self.logic.store_user_program(
+            program_id=program_id,
+            level=body['level'],
+            code=body['code'],
+            name=body['name'],
+            user=user,
+            error=error,
+            set_public=program_public,
+            adventure_name=body.get('adventure_name'))
 
-        # Todo TB: Would be nice to clean-up this response (a lot) by removing all duplicate dict entries
-        if self.achievements.verify_save_achievements(
-            user["username"], "adventure_name" in body and len(body["adventure_name"]) > 2
-        ):
-            return jsonify(
-                {
-                    "message": gettext("save_success_detail"),
-                    "share_message": gettext("copy_clipboard"),
-                    "name": body["name"],
-                    "id": program_id,
-                    "achievements": self.achievements.get_earned_achievements(),
-                }
-            )
-        return jsonify(
-            {
-                "message": gettext("save_success_detail"),
-                "share_message": gettext("copy_clipboard"),
-                "name": body["name"],
-                "id": program_id,
-            }
-        )
+        return jsonify({
+            "message": gettext("save_success_detail"),
+            "share_message": gettext("copy_clipboard"),
+            "name": program["name"],
+            "id": program['id'],
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+            "achievements": self.achievements.get_earned_achievements(),
+        })
 
     @route("/share", methods=["POST"])
     @requires_login
@@ -183,10 +227,15 @@ class ProgramsModule(WebsiteModule):
         ):
             self.db.set_favourite_program(user["username"], None)
 
-        self.db.set_program_public_by_id(body["id"], bool(body["public"]))
+        program = self.db.set_program_public_by_id(body["id"], bool(body["public"]))
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
 
-        resp = {"id": body["id"]}
+        resp = {
+            "id": body["id"],
+            "public": bool(body["public"]),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+        }
+
         if bool(body["public"]):
             resp["message"] = gettext("share_success_detail")
         else:
@@ -208,13 +257,17 @@ class ProgramsModule(WebsiteModule):
         if not result or result["username"] != user["username"]:
             return "No such program!", 404
 
-        self.db.submit_program_by_id(body["id"])
+        program = self.db.submit_program_by_id(body["id"])
         self.db.increase_user_submit_count(user["username"])
         self.achievements.increase_count("submitted")
+        self.achievements.verify_submit_achievements(user["username"])
 
-        if self.achievements.verify_submit_achievements(user["username"]):
-            return jsonify({"achievements": self.achievements.get_earned_achievements()})
-        return jsonify({})
+        response = {
+            "message": gettext("submitted"),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+            "achievements": self.achievements.get_earned_achievements(),
+        }
+        return jsonify(response)
 
     @route("/set_favourite", methods=["POST"])
     @requires_login
@@ -275,3 +328,7 @@ class ProgramsModule(WebsiteModule):
         )
 
         return {"message": gettext("report_success")}, 200
+
+
+class NotYourProgramError(RuntimeError):
+    pass

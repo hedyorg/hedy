@@ -843,6 +843,14 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level4", lang='en')
 
+    def test_4_22(self):
+        self.assert_highlighted_chr_multi_line(
+            "print 'Did i forget something?",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
+            'print "Did i forget something?',
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
+            level="level4", lang='en')
+
     def test_5_1(self):
         self.assert_highlighted_chr_multi_line(
             "name is ask 'what is your name?'",
@@ -1145,6 +1153,14 @@ class HighlighterTestWebSite(HighlightTester):
         self.assert_highlighted_chr(
             "print 'On to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
+            level="level5", lang='en')
+
+    def test_5_24(self):
+        self.assert_highlighted_chr_multi_line(
+            "print 'Did i forget something?",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
+            'print "Did i forget something?',
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
             level="level5", lang='en')
 
     def test_6_1(self):

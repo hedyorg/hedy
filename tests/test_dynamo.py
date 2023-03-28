@@ -346,6 +346,40 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             dict(id='key', sort=3, n=1),
         ])
 
+    def test_get_many_iterator(self):
+        N = 10
+
+        for i in range(N):
+            self.insert(
+                dict(id='key', sort=i + 1))
+
+        expected = [dict(id='key', sort=i + 1) for i in range(N)]
+
+        # Query everything at once, using the Python iterator protocol
+        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'))), expected)
+
+        # Query paginated, using the Python iterator protocol
+        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), limit=3)), expected)
+
+        # Reuse the client-side pager every time, using the Python iterator protocol
+        ret = []
+        token = None
+        while True:
+            many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+            ret.append(next(iter(many)))
+            token = many.next_page_token
+            if not token:
+                break
+        self.assertEqual(ret, expected)
+
+        # Also test using the eof/current/advance protocol
+        ret = []
+        many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+        while many:
+            ret.append(many.current)
+            many.advance()
+        self.assertEqual(ret, expected)
+
 
 class TestSortKeysAgainstAws(unittest.TestCase):
     """Test that the operations send out appropriate Dynamo requests."""

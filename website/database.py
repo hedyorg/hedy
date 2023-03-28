@@ -30,10 +30,45 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
     dynamo.Index('teacher'),
     dynamo.Index('link'),
 ])
+
+# A custom teacher adventure
+# - id (str): id of the adventure
+# - content (str): adventure text
+# - creator (str): username (of a teacher account, hopefully)
+# - date (int): timestamp of last update
+# - level (int | str): level number, sometimes as an int, sometimes as a str
+# - name (str): adventure name
+# - public (bool): whether it can be shared
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
+
+# Class customizations
+#
+# Various columns with different meanings:
+#
+# These I'm quite sure about:
+#
+# - id (str): the identifier of the class this customization set applies to
+# - levels (int[]): the levels available in this class
+# - opening_dates ({ str -> str }): key is level nr as string, value is an ISO date
+# - other_settings (str[]): string list with values like "hide_quiz", "hide_parsons"
+# - sorted_adventures ({ str -> { from_teacher: bool, name: str }[] }):
+#     for every level (key as string) the adventures to show, in order. If from_teacher
+#     is False, the name of a built-in adventure. If from_teacher is true, name is the
+#     id of a adventure in the ADVENTURES table. The id may refer to an adventure that
+#     has been deleted. In that case, it should be ignored.
+#
+# These not so much:
+#
+# - level_thresholds ({ "quiz" -> int }): TODO don't know what this does
+# - adventures: ({ str -> int[] }): probably a map indicating, for each adventure, what
+#      levels it should be available in. It's sort of redundant with sorted_adventures,
+#      so I'm not sure why it exists.
+# - teacher_adventures (str[]): a list of all ids of the adventures that have been made
+#      available to this class. This list is deprecated, all adventures a teacher created
+#      are now automatically available to all of their classes.
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id")
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
@@ -131,8 +166,23 @@ class Database:
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
+        # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = PROGRAMS.get_many({"username": username}, reverse=True)
         return [x for x in programs if x.get("level") == int(level)]
+
+    def last_level_programs_for_user(self, username, level):
+        """Return the most recent program for the given user at a given level.
+
+        Returns: { adventure_name -> { code, name, ... } }
+        """
+        programs = self.level_programs_for_user(username, level)
+        ret = {}
+        for program in programs:
+            key = program.get('adventure_name', 'default')
+            if key not in ret or ret[key]['date'] < program['date']:
+                ret[key] = program
+        return ret
 
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
@@ -141,17 +191,32 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level, adventure):
-        programs = PROGRAMS.get_many({"username": username}, reverse=True)
-        if level:
-            programs = [x for x in programs if x.get("level") == int(level)]
-        if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get("adventure_name") == ""]
-            else:
-                programs = [x for x in programs if x.get("adventure_name") == adventure]
-        return programs
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+                                   limit=None, pagination_token=None):
+        ret = []
+
+        # FIXME: Query by index, the current behavior is slow for many programs
+        # (See https://github.com/hedyorg/hedy/issues/4121)
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+                                          reverse=True, limit=limit, pagination_token=pagination_token)
+        for program in programs:
+            if level and program.get('level') != int(level):
+                continue
+            if adventure:
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    continue
+                if adventure != 'default' and program.get('adventure_name') != adventure:
+                    continue
+            if submitted is not None:
+                if program.get('submitted') != submitted:
+                    continue
+
+            ret.append(program)
+
+            if len(ret) >= limit:
+                break
+
+        return dynamo.ResultPage(ret, programs.next_page_token)
 
     def public_programs_for_user(self, username):
         # Only return programs that are public but not submitted
@@ -166,15 +231,38 @@ class Database:
         return PROGRAMS.get({"id": id})
 
     def store_program(self, program):
-        """Store a program."""
-        PROGRAMS.create(program)
+        """Store a program.
+
+        Returns the program.
+
+        Add an additional indexable field: 'username_level'.
+        """
+        PROGRAMS.create(
+            dict(program,
+                 username_level=f"{program.get('username')}-{program.get('level')}"))
+
+        return program
+
+    def update_program(self, id, updates):
+        """Update fields of an existing program.
+
+        Returns the updated state of the program.
+        """
+        return PROGRAMS.update(dict(id=id), updates)
 
     def set_program_public_by_id(self, id, public):
-        """Store a program."""
-        PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
+        """Switch a program to public or private.
+
+        Return the updated state of the program.
+        """
+        return PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id):
-        PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
+        """Switch a program to submitted.
+
+        Return the updated program state.
+        """
+        return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
@@ -297,7 +385,7 @@ class Database:
         if adventure_filter:
             filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
 
-        programs = dynamo.QueryIterator(PROGRAMS, {'public': 1}, reverse=True)
+        programs = dynamo.GetManyIterator(PROGRAMS, {'public': 1}, reverse=True)
 
         # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
         # the programs match the filter. This works because they all have a 'matching' date field
@@ -322,7 +410,7 @@ class Database:
             # I don't really care.
             for flt in filters:
                 while flt and flt.current['date'] > program['date']:
-                    flt.next()
+                    flt.advance()
 
             # Include the current program in the result set if it is now the front item in each filter.
             if all((flt and flt.current['id'] == program['id']) for flt in filters):
@@ -453,15 +541,13 @@ class Database:
     def get_adventure(self, adventure_id):
         return ADVENTURES.get({"id": adventure_id})
 
+    def batch_get_adventures(self, adventure_ids):
+        """From a list of adventure ids, return a map of { id -> adventure }."""
+        keys = {id: {"id": id} for id in adventure_ids}
+        return ADVENTURES.batch_get(keys) if keys else {}
+
     def delete_adventure(self, adventure_id):
-        # If we delete an adventure -> also delete is from possible class customizations
-        teacher = self.get_adventure(adventure_id).get("creator", "")
         ADVENTURES.delete({"id": adventure_id})
-        for Class in self.get_teacher_classes(teacher, True):
-            customizations = self.get_class_customizations(Class.get("id"))
-            if customizations and adventure_id in customizations.get("teacher_adventures", []):
-                customizations["teacher_adventures"].remove(adventure_id)
-                self.update_class_customizations(customizations)
 
     def store_adventure(self, adventure):
         """Store an adventure."""
@@ -536,26 +622,6 @@ class Database:
 
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({"id": class_id})
-
-    def add_adventure_to_class_customizations(self, class_id, adventure_id):
-        customizations = self.get_class_customizations(class_id)
-        if not customizations:
-            customizations = {"id": class_id, "teacher_adventures": [adventure_id]}
-        elif adventure_id not in customizations.get("teacher_adventures", []):
-            customizations["teacher_adventures"] = customizations.get("teacher_adventures", []) + [adventure_id]
-        # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
-        else:
-            return None
-        CUSTOMIZATIONS.put(customizations)
-
-    def remove_adventure_from_class_customizations(self, class_id, adventure_id):
-        customizations = self.get_class_customizations(class_id)
-        # If there are no customizations, leave as it is -> only perform an action if it is already stored on the class
-        if not customizations:
-            return None
-        elif adventure_id in customizations.get("teacher_adventures", []):
-            customizations["teacher_adventures"].remove(adventure_id)
-            CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)

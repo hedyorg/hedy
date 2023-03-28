@@ -1,9 +1,11 @@
+import { initializeAdminUserPage, InitializeAdminUsersPageOptions } from './admin';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
 import { initializeQuiz } from './quiz';
-import { initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
+import { InitializeAdminStatsOptions, InitializeClassStatsPageOptions, stats } from './statistics';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
@@ -45,7 +47,12 @@ type InitializePageOptions =
   | InitializeCodePageOptions
   | InitializeCustomizeClassPageOptions
   | InitializeTeacherPageOptions
-  | InitializeViewProgramPageOptions;
+  | InitializeViewProgramPageOptions
+  | InitializeClassOverviewPageOptions
+  | InitializeAdminStatsOptions
+  | InitializeAdminUsersPageOptions
+  | InitializeClassStatsPageOptions
+  ;
 
 
 /**
@@ -76,8 +83,24 @@ export function initialize(options: InitializeOptions) {
       initializeTeacherPage(options.javascriptPageOptions);
       break;
 
+    case 'class-overview':
+      initializeClassOverviewPage(options.javascriptPageOptions);
+      break;
+
     case 'view-program':
       initializeViewProgramPage(options.javascriptPageOptions);
+      break;
+
+    case 'admin-stats':
+      stats.initializeAdminStats();
+      break;
+
+    case 'class-stats':
+      stats.initializeClassStats();
+      break;
+
+    case 'admin-users':
+      initializeAdminUserPage(options.javascriptPageOptions);
       break;
   }
 

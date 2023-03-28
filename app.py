@@ -1,20 +1,21 @@
 # coding=utf-8
 import collections
 import copy
-import datetime
 import logging
-import re
+import datetime
 import os
+import re
 import sys
-import textwrap
 import traceback
+import textwrap
 import zipfile
+from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
 
 import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   jsonify, redirect, request, send_file,
+                   redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -28,7 +29,7 @@ import hedyweb
 import utils
 from safe_format import safe_format
 from config import config
-from flask_helpers import render_template
+from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
@@ -39,8 +40,9 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
+from website.types import Adventure, Program, ExtraStory, SaveInfo
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -60,6 +62,8 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 babel = Babel(app)
+
+app.template_filter('tojson')(proper_tojson)
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
@@ -91,61 +95,138 @@ ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
 
 def load_adventures_for_level(level):
-    """Load the adventures for the given level.
+    """Load the adventures available to the current user at the given level.
+
+    These are the default adventures, with the customizations implied
+    by any class they are a part of. We also load any programs the user has
+    that apply to the current level.
 
     Adventures are loaded in the current language, with the keywords in the code
     translated to the default (or explicitly requested) keyword language.
     """
     keyword_lang = g.keyword_lang
 
-    loaded_programs = {}
-    # If user is logged in, we iterate their programs that belong to the
-    # current level. Out of these, we keep the latest created program for both
-    # the level mode(no adventure) and for each of the adventures.
-    if current_user()['username']:
-        user_programs = DATABASE.level_programs_for_user(
-            current_user()['username'], level)
-        for program in user_programs:
-            program_key = 'default' if not program.get(
-                'adventure_name') else program['adventure_name']
-            if (program_key not in loaded_programs or loaded_programs[program_key]['date'] < program['date']):
-                loaded_programs[program_key] = program
-
     all_adventures = []
     adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
-        if level not in adventure['levels']:
+        adventure_level = adventure['levels'].get(level, None)
+        if not adventure_level:
             continue
-        current_adventure = {
-            'short_name': short_name,
-            'name': adventure['name'],
-            'image': adventure.get('image', None),
-            'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text', ""),
-            'example_code': adventure['levels'][level].get('example_code', ""),
-            'start_code': adventure['levels'][level].get('start_code', ""),
-            'loaded_program': '' if not loaded_programs.get(short_name) else {
-                'name': loaded_programs.get(short_name)['name'],
-                'code': loaded_programs.get(short_name)['code']
-            }
-        }
+
         # Sometimes we have multiple text and example_code -> iterate these and add as well!
-        extra_stories = []
-        for i in range(2, 10):
-            extra_story = {}
-            if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get(
-                    'story_text_' + str(i))
-                if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get(
-                        'example_code_' + str(i))
-                extra_stories.append(extra_story)
-            else:
-                break
-        current_adventure['extra_stories'] = extra_stories
-        all_adventures.append(current_adventure)
+
+        extra_stories = [
+            ExtraStory(
+                text=adventure_level.get(f'story_text_{i}'),
+                example_code=adventure_level.get(f'example_code_{i}'))
+            for i in range(2, 10)
+            if adventure_level.get(f'story_text_{i}', '')
+        ]
+
+        default_save_name = adventure.get('default_save_name')
+        if not default_save_name or default_save_name == 'intro':
+            default_save_name = adventure['name']
+
+        # only add adventures that have been added to the adventure list of this level
+        if short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
+            current_adventure = Adventure(
+                short_name=short_name,
+                name=adventure['name'],
+                image=adventure.get('image', None),
+                text=adventure['levels'][level].get('story_text', ""),
+                example_code=adventure['levels'][level].get('example_code', ""),
+                extra_stories=extra_stories,
+                is_teacher_adventure=False,
+                save_name=f'{default_save_name} {level}',
+                start_code=adventure['levels'][level].get('start_code', ""))
+
+            all_adventures.append(current_adventure)
+
+    # Sort the adventures based on the default ordering
+    adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+    index_map = {v: i for i, v in enumerate(adventures_order)}
+    all_adventures.sort(key=lambda pair: index_map.get(
+        pair['short_name'],
+        len(adventures_order)))
+
     return all_adventures
+
+
+def load_saved_programs(level, into_adventures, preferential_program: Optional[Program]):
+    """Load saved previous saved programs by the current user into the given adventures array.
+
+    Mutates the adventures in-place, by setting the 'save_name', 'start_code'
+    and 'save_info' attributes of adventures.
+    """
+    if not current_user()['username']:
+        return
+
+    loaded_programs = {k: Program.from_database_row(r)
+                       for k, r in DATABASE.last_level_programs_for_user(current_user()['username'], level).items()}
+
+    # If there is a preferential program, overwrite any other one that might exist so we definitely
+    # load this one.
+    if preferential_program:
+        loaded_programs[preferential_program.adventure_name] = preferential_program
+
+    # Copy them into the adventures array
+    #
+    # For every adventure, find a program in the `loaded_programs` dictionary.
+    # Since the program may be saved under either the id or the actual name, check both.
+    for adventure in into_adventures:
+        program = loaded_programs.get(adventure.short_name)
+        if not program:
+            program = loaded_programs.get(adventure.name)
+        if not program:
+            continue
+
+        adventure.save_name = program.name
+        adventure.start_code = program.code
+        adventure.save_info = SaveInfo.from_program(program)
+
+
+def load_customized_adventures(level, customizations, into_adventures):
+    """Load the teacher customizations into the set of adventures.
+
+    It would have been nicer if the complete set of adventures had come
+    out of 'load_adventures_for_level', but looking up customizations is
+    a bit expensive and since we've already done that in the caller, we pass
+    it in here.
+
+    Mutates the 'into_adventures' list in-place. On entry, it is the list of
+    default `Adventure` objects in the default order. On exit, it may have been
+    reordered and enhanced with teacher-written adventures.
+    """
+    # First find the list of all teacher adventures for the current level,
+    # batch-get all of them, then put them into the adventures array in the correct
+    # location.
+
+    # { <str>level -> [ { <str>name, <bool>from_teacher ] }
+    # 'name' is either a shortname or an ID into the teacher table
+    sorted_adventures = customizations.get('sorted_adventures', {})
+    order_for_this_level = sorted_adventures.get(str(level), [])
+    if not order_for_this_level:
+        return  # Nothing to do
+
+    adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
+    teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
+    builtin_adventure_map = {a.short_name: a for a in into_adventures}
+
+    # Replace `into_adventures`
+    into_adventures[:] = []
+    for a in order_for_this_level:
+        if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
+            try:
+                db_row['content'] = safe_format(db_row['content'],
+                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+            except Exception:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
+
+            into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
+        if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
+            into_adventures.append(adv)
 
 
 @babel.localeselector
@@ -261,6 +342,8 @@ def setup_language():
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation. Can be changed in the session by
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
+    if lang_from_request := request.args.get('language', None):
+        session['lang'] = lang_from_request
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
@@ -297,6 +380,13 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     return data
+
+
+@app.context_processor
+def add_generated_css_file():
+    return {
+        "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
+    }
 
 
 @app.after_request
@@ -395,6 +485,7 @@ def parse():
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
+
         try:
             response['Code'] = transpile_result.code
 
@@ -405,6 +496,7 @@ def parse():
                 response['has_turtle'] = True
         except Exception:
             pass
+
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
         except BaseException:
@@ -415,6 +507,7 @@ def parse():
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
+
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex)
@@ -425,6 +518,24 @@ def parse():
         print(f"error transpiling {code}")
         response["Error"] = str(E)
         exception = E
+
+    # Save this program (if the user is logged in)
+    if username and body.get('save_name'):
+        try:
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+            program = program_logic.store_user_program(
+                user=current_user(),
+                level=level,
+                name=body.get('save_name'),
+                program_id=body.get('program_id'),
+                adventure_name=body.get('adventure_name'),
+                code=code,
+                error=exception is not None)
+
+            response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+        except programs.NotYourProgramError:
+            # No permissions to overwrite, no biggie
+            pass
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
@@ -743,7 +854,7 @@ def achievements_page():
 
 
 @app.route('/programs', methods=['GET'])
-@requires_login
+@requires_login_redirect
 def programs_page(user):
     username = user['username']
     if not username:
@@ -760,30 +871,26 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
-
     # We request our own page -> also get the public_profile settings
     public_profile = None
     if not from_user:
         public_profile = DATABASE.get_public_profile_settings(username)
 
-    level = request.args.get('level', default=None, type=str)
-    adventure = request.args.get('adventure', default=None, type=str)
+    level = request.args.get('level', default=None, type=str) or None
+    adventure = request.args.get('adventure', default=None, type=str) or None
+    page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
+    submitted = True if filter == 'submitted' else None
 
-    level = None if level == "null" else level
-    adventure = None if adventure == "null" else adventure
-
-    if level or adventure:
-        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
-    else:
-        result = DATABASE.programs_for_user(from_user or username)
+    result = DATABASE.filtered_programs_for_user(from_user or username,
+                                                 level=level,
+                                                 adventure=adventure,
+                                                 submitted=submitted,
+                                                 pagination_token=page,
+                                                 limit=10)
 
     programs = []
     for item in result:
-        # If we filter on the submitted programs -> skip the onces that are not submitted
-        if filter == "submitted" and not item.get('submitted'):
-            continue
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
@@ -800,15 +907,22 @@ def programs_page(user):
              }
         )
 
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+
+    print(result.next_page_token)
+    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+                            ) if result.next_page_token else None
+
     return render_template(
         'programs.html',
         programs=programs,
         page_title=gettext('title_programs'),
         current_page='programs',
         from_user=from_user,
-        adventure_names=adventures_names,
         public_profile=public_profile,
-        max_level=hedy.HEDY_MAX_LEVEL)
+        adventure_names=adventure_names,
+        max_level=hedy.HEDY_MAX_LEVEL,
+        next_page_url=next_page_url)
 
 
 @app.route('/logs/query', methods=['POST'])
@@ -862,9 +976,8 @@ def tutorial_index():
     commands = hedy.commands_per_level.get(level)
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
-
-    adventures_names = {a['short_name']: a['name'] for a in adventures}
+    initial_tab = adventures[0].short_name
+    initial_adventure = adventures[0]
 
     return render_template(
         "code-page.html",
@@ -873,20 +986,23 @@ def tutorial_index():
         level_nr=str(level),
         level=str(level),
         adventures=adventures,
-        adventures_names=adventures_names,
+        initial_tab=initial_tab,
         commands=commands,
         quiz=True,
         parsons=True if parsons else False,
         parsons_exercises=parsons,
+        initial_adventure=initial_adventure,
         cheatsheet=cheatsheet,
-        adventures_per_level=adventures_per_level,
         blur_button_available=False,
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
             level=level,
             lang=g.lang,
             adventures=adventures,
+            initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
             start_tutorial=True,
         ))
 
@@ -933,38 +1049,16 @@ def index(level, program_id):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    loaded_program = ''
+    loaded_program = None
 
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result:
+        if not result or not current_user_allowed_to_see_program(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
-        user = current_user()
-        public_program = result.get('public')
-        # Verify that the program is either public, the current user is the
-        # creator, teacher or the user is admin
-        if not public_program and user['username'] != result['username'] and not is_admin(user):
-            if ((not is_teacher(user)) or (is_teacher(user)
-                                           and result['username'] not in
-                                           DATABASE.get_teacher_students(user['username']))):
-                return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+        loaded_program = Program.from_database_row(result)
 
-        loaded_program = {'code': result['code'], 'name': result['name'],
-                          'adventure_name': result.get('adventure_name')}
-
-    # In case of a "forced keyword language" -> load that one, otherwise: load
-    # the one stored in the g object
     adventures = load_adventures_for_level(level)
-
-    # Sort the adventures based on the ordering defined
-    adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
-    index_map = {v: i for i, v in enumerate(adventures_order)}
-    adventures = sorted(
-        adventures,
-        key=lambda pair: index_map.get(
-            pair['short_name'],
-            len(adventures_order)))
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
@@ -1026,40 +1120,26 @@ def index(level, program_id):
     customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
-    teacher_adventures = []
-    # Todo: TB It would be nice to improve this by using level as a sort key
-    if 'sorted_adventures' in customizations:
-        sorted_adventures = customizations['sorted_adventures']
-        adventures_level = sorted_adventures.get(str(level), [])
-        for adventure in adventures_level:
-            if adventure['from_teacher']:
-                current_adventure = DATABASE.get_adventure(adventure['name'])
-                try:
-                    current_adventure['content'] = safe_format(current_adventure['content'],
-                                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
-                except BaseException:
-                    # We don't want teacher being able to break the student UI -> pass this adventure
-                    pass
-                teacher_adventures.append(current_adventure)
+    load_customized_adventures(level, customizations, adventures)
+    load_saved_programs(level, adventures, loaded_program)
+    initial_tab = adventures[0].short_name
 
-    elif 'teacher_adventures' in customizations:
-        for adventure in customizations.get('teacher_adventures', []):
-            current_adventure = DATABASE.get_adventure(adventure)
-            if current_adventure.get('level') == str(level):
-                try:
-                    current_adventure['content'] = safe_format(current_adventure['content'],
-                                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
-                except BaseException:
-                    # We don't want teacher being able to break the student UI -> pass this adventure
-                    pass
-                teacher_adventures.append(current_adventure)
-    adventures_names = {}
-    for adventure in adventures:
-        adventures_names[adventure['short_name']] = adventure['name']
-    for adventure in teacher_adventures:
-        adventures_names[adventure['id']] = adventure['name']
+    if loaded_program:
+        # Make sure that there is an adventure(/tab) for a loaded program, otherwise make one
+        initial_tab = loaded_program.adventure_name
+        if not any(a.short_name == loaded_program.adventure_name for a in adventures):
+            adventures.append(Adventure(
+                short_name=loaded_program.adventure_name,
+                # This is not great but we got nothing better :)
+                name=gettext('your_program'),
+                text='',
+                example_code='',
+                start_code=loaded_program.code,
+                save_name=loaded_program.name,
+                is_teacher_adventure=False,
+            ))
 
-    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
+    adventures_map = {a.short_name: a for a in adventures}
 
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
@@ -1100,27 +1180,28 @@ def index(level, program_id):
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
-        teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventures=adventures,
+        initial_tab=initial_tab,
         commands=commands,
         parsons=parsons,
         parsons_exercises=parson_exercises,
         tutorial=tutorial,
-        adventures_names=adventures_names,
         latest=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
-        adventures_per_level=adventures_per_level,
         cheatsheet=cheatsheet,
         blur_button_available=False,
+        initial_adventure=adventures_map[initial_tab],
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
             level=level_number,
             lang=g.lang,
             adventures=adventures,
-            loaded_program=loaded_program,
+            initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
         ))
 
 
@@ -1129,16 +1210,8 @@ def index(level, program_id):
 def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
-    if not result:
+    if not result or not current_user_allowed_to_see_program(result):
         return utils.error_page(error=404, ui_message=gettext('no_such_program'))
-
-    public_program = result.get('public')
-    # Verify that the program is either public, the current user is the
-    # creator, teacher or the user is admin
-    if not public_program and user['username'] != result['username'] and not is_admin(user):
-        if (not is_teacher(user)) or (is_teacher(user)
-                                      and result['username'] not in DATABASE.get_teacher_students(user['username'])):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
     # The program is valid, verify if the creator also have a public profile
     result['public_profile'] = True if DATABASE.get_public_profile_settings(
@@ -1166,7 +1239,9 @@ def view_program(user, id):
     arguments_dict['program_id'] = id
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
-    arguments_dict['loaded_program'] = result
+    arguments_dict['initial_adventure'] = dict(result,
+                                               start_code=code,
+                                               )
     arguments_dict['editor_readonly'] = True
 
     if "submitted" in result and result['submitted']:
@@ -1196,18 +1271,20 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventures = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
+    adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.get('short_name') == name] else False
+        level - 1) if x.short_name == name] else False
     next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.get('short_name') == name] else False
+        level + 1) if x.short_name == name] else False
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
     raw = mode == 'raw'
+    initial_tab = name
+    initial_adventure = adventures[0]
 
     return render_template("code-page.html",
                            specific_adventure=True,
@@ -1221,16 +1298,22 @@ def get_specific_adventure(name, level, mode):
                            enforce_developers_mode=None,
                            teacher_adventures=[],
                            adventures=adventures,
+                           initial_tab=initial_tab,
+                           initial_adventure=initial_adventure,
                            latest=version(),
                            raw=raw,
                            menu=not raw,
                            blur_button_available=False,
+                           current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
+
                                page='code',
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
+                               initial_tab=initial_tab,
+                               current_user_name=current_user()['username'],
                            ))
 
 
@@ -1313,7 +1396,7 @@ def not_found(exception):
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.error_page(error=500)
+    return utils.error_page(error=500, exception=exception)
 
 
 @app.route('/signup', methods=['GET'])
@@ -1362,7 +1445,7 @@ def reset_page():
 
 
 @app.route('/my-profile', methods=['GET'])
-@requires_login
+@requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
@@ -1404,7 +1487,7 @@ def get_research(filename):
 
 
 @app.route('/favicon.ico')
-def favicon(page):
+def favicon():
     abort(404)
 
 
@@ -2014,6 +2097,28 @@ def teacher_invitation(code):
     session['welcome-teacher'] = True
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
+
+
+def current_user_allowed_to_see_program(program):
+    """Check if the current user is allowed to see the given program.
+
+    Verify that the program is either public, the current user is the
+    creator, teacher or the user is admin.
+    """
+    user = current_user()
+
+    # These are all easy
+    if program.get('public'):
+        return True
+    if user['username'] == program['username']:
+        return True
+    if is_admin(user):
+        return True
+
+    if is_teacher(user) and program['username'] in DATABASE.get_teacher_students(user['username']):
+        return True
+
+    return False
 
 
 app.register_blueprint(auth_pages.AuthModule(DATABASE))

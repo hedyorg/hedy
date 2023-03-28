@@ -1,12 +1,4 @@
 #!/bin/bash
-# Generate a DEVELOPMENT copy of generated.css
-#
-# This is the version that should always be checked in. It is based on the FULL
-# Tailwind config, so that developers can always program against all classes without
-# having to worry about regenerating the CSS.
-#
-# At deployment time, we will use the stripping config build to make sure the generated
-# CSS file ends up small.
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
@@ -14,7 +6,12 @@ cd $scriptdir
 echo "👉 Generating CSS with all features enabled. This file's goan' be big!" >&2
 
 staticdir=../../../static
+targetfile=generated.full.css
 
-npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/generated.css
-npx minify $staticdir/css/generated.css > $staticdir/css/generated.css.min
-mv $staticdir/css/generated.css{.min,}
+if [[ "${1:-}" == "--watch" ]]; then
+  echo "👀 Running Tailwind compilation in watch mode. 👀"
+  npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/$targetfile --watch
+else
+  npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/$targetfile
+  # Not minifying on purpose, to reduce merge conflicts if this file ever changes
+fi
