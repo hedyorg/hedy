@@ -29,7 +29,7 @@ adventures:
                 story_text: "## Рівень 7! Сьомий рівень!\nРівень 7 додає команду `{repeat}`.  Команда `{repeat}` може бути використана для виконання одного рядка коду декілька разів.\n"
             8:
                 example_code: "Ось як тепер працює команда `{repeat}`:\n```\n{repeat} 5 {times}\n    {print} 'Всім привіт'\n    {print} 'Це все повторюється 5 разів'\n```\nА ось як команди `{if}` і `{else}` тепер працюють:\n\n```\nімʼя {is} {ask} 'Як тебе звати?'\n{if} імʼя {is} Хейді\n    {print} 'Вітаємо Хейді'\n    {print} 'Можеш гратися на своєму компʼютері!'\n{else}\n    {print} 'ПОРУШНИК!'\n    {print} 'Не можеш користуватись цим компʼютером!'\n```\n"
-                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють так, як ви їх знаєте. Але `{if}`, `{else}`, {pressed} і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.\nЦе означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
+                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють так, як ви їх знаєте. Але `{if}`, `{else}`, і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.\nЦе означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
@@ -152,20 +152,26 @@ adventures:
                 start_code: '# розмістіть свій код тут'
             10:
                 story_text: "## Історія\nНа цьому рівні ви можете використовувати команду {for} у своїй історії. Таким чином ви можете легко запрограмувати дитячу книжку 'Бурий ведмедик, бурий ведмедик, що ти бачиш'.\n\n### Вправа\n\nПодивіться на <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\">історію</a> , якщо ви її не знаєте, і переконайтеся, що вона надрукована так, як у книжці.\n"
-                example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                start_code: '# place your code here'
+                example_code: "```\nзвіри = _ , _ , _\n{print} 'Бурий ведмідь, Бурий ведмідь'\n{print} 'Що ти бачиш?'\n```\n"
+                start_code: '# розмістіть свій код тут'
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable."
-                example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Історія\nНа цьому рівні лапки знадобляться для збереження кількох слів у змінній.\n\n### Вправа\n\nЗнайдіть історію з попереднього рівня, підійде будь-який рівень. Тепер переконайтеся, що лапки додані в потрібних місцях."
+                example_code: "```\nхто = 'Королева Англії'\n{print} хто ' їла шматок торта, як раптом...'\n```\n"
+                start_code: '# розмістіть свій код тут'
             13:
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
-                example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Історія\nВикористовуючи команди `{and}` та `{or}`, ви можете зробити свої історії більш універсальними. Ви можете поставити два запитання і відреагувати на комбінацію відповідей.\n\n### Вправа 1\nПодивіться на приклад коду і закінчіть його. Потім додайте ще принаймні 2 коди `{if}` з `{and}` або `{or}`.\n\n### Вправа 2\nЗнайдіть історію з попереднього рівня і додайте до неї один `{and}` або `{or}`.\n"
+                example_code: "```\n{print} 'Наша геройка йде лісом'\n{print} 'Стежка розділяється на дві частини'\nшлях = {ask} 'Яку стежку їй обрати?'\nзброя = {ask} 'Яку зброю вона витягне?'\n{if} шлях {is} 'лівий' {and} зброя {is} 'меч'\n    _\n```\n"
+                start_code: '# розмістіть свій код тут'
             15:
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
-                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Історія\nВикористання циклу `{while}` може зробити ваші історії цікавішими. Наприклад, ви можете використати `{while} гра {is} 'продовжується'`, щоб гравець міг грати, доки гра не закінчиться.\nАбо ви можете використати `{while} меч {is} 'загублен'`, щоб гравець не міг продовжити гру, поки не знайде щось.\n"
+                example_code: "```\nключі = 'загублені'\n{print} 'Ви стоїте у своєму саду і загубили ключі.'\n{print} 'Де ви хочете їх шукати?'\n{print} 'Ви можете вибрати: дерево, клумба, камінь, поштова скринька'\n{while} ключі == 'загублені'\n    місце = {ask} 'Де ви хочете шукати?'\n    {if} місце == 'клумба'\n        {print} 'Ось вони!'\n        ключі = 'знайдено'\n    {else}\n        {print} 'Ні, їх немає в ' місце\n{print} 'Тепер ви можете зайти в будинок!'\n```\n"
+                start_code: '# розмістіть свій код тут'
+            18:
+                story_text: "## Історія\nМи збираємося надрукувати ще одну історію, але тепер нам потрібно використовувати дужки з `{print}`.\n\n### Вправа 1\nСтворіть історію щонайменше з 5 речень. Поки що не обов'язково використовувати 'ім\\'я'.\n"
+                story_text_2: "### Вправа 2\nМи вже підготували для вас `{input}`. Спочатку використайте змінну `{ім\\'я}` у вашій історії.\nПотім додайте друге `{ask}` і також використовуйте цю змінну.\nПорада: Пам'ятайте про коми у `{print}` між текстом і змінними!\n"
+                start_code: '# Напишіть свій код тут'
+                example_code: "```\n{print}('Ласкаво просимо до цієї історії!')\n```\n"
+                example_code_2: "```\nname = {input}('Як тебе звати?')\n{print}('Ласкаво просимо до цієї історії!')\n```\n"
         description: Створіть коротку історію
         default_save_name: Історія
     songs:
@@ -203,6 +209,10 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
+            18:
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                start_code: '# Schrijf jouw code hier'
         description: Print a song
         default_save_name: Song
     turtle:
@@ -643,18 +653,26 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
     parrot:
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: Папуга
+        description: Створіть власного домашнього папугу, який буде копіювати вас!
+        default_save_name: Папуга
         levels:
             1:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
-                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text: "## Папуга\nСтворіть власного домашнього папугу, який буде копіювати вас!\n"
+                example_code: "```\n{print} Я - папуга Хеди.\n{ask} Як тебе звати?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} Я - папуга Хедi.
+
+                    {ask} Як тебе звати?
+
+                    {echo}
+
+                    {echo}
+
+                    '
+                story_text_2: "### Вправа\nСкопіюйте приклад коду на екран введення, натиснувши на жовту кнопку.\nЗмусьте папугу поставити інше запитання. Заповніть пропуски у прикладі!\n**Додатково** Ви також можете дозволити папузі ставити кілька запитань. Введіть ще кілька рядків коду під вашим власним кодом.\n"
+                example_code_2: "```\n{print} Я - папуга Хедi.\n{ask} _\n{echo}\n{echo}\n```\n"
             2:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
+                story_text: "## Папуга\nСтворіть власного домашнього папугу, який буде копіювати вас!\n"
                 example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
                 start_code: '{print} Im Hedy the parrot!'
                 story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
@@ -681,11 +699,11 @@ adventures:
                 example_code: "```\n{print} 'Make your own quiz'\npoints_a = 0\npoints_b = 0\n{print} 'Question'\n{print} 'Answer option A'\n{print} 'Answer option B'\nanswer = {ask} 'Which answer?'\n{if} answer == 'A'\n    points_a = points_a + 1\n{if} answer == 'B'\n    points_b = points_b + 1\n{print} 'End of the quiz!'\n{print} 'Lets see the results!'\n{if} points_a > points_b\n    {print} 'You belong to the A club'\n{if} points_b > points_a\n    {print} 'You belong to the B club'\n```\n"
                 start_code: '# place your code here'
     years:
-        name: New Year's
-        description: Countdown to the new year!
+        name: Новий рік
+        description: Зворотний відлік до Нового року!
         levels:
             11:
-                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
-                start_code: '# place your code here'
-        default_save_name: New Year's Countdown
+                example_code: "```\n{for} номер {in} {range} _ {to} _\n    {print} номер\n{print}'З Новим роком!'\n```\n"
+                story_text: "## З Новим роком\nУ цьому рівні ви можете використовувати команду `{for}` число `{in}` `{range}` для зворотного відліку до Нового року.\n\n### Вправа\nЗаповніть пропуски і змусьте код працювати!\n"
+                start_code: '# розмістіть свій код тут'
+        default_save_name: Новорічний відлік

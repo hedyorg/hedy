@@ -50,8 +50,8 @@ adventures:
                     La mayoría de lenguajes de programación usan comillas para imprimir, ¡entonces nos estamos acercando cada vez más a programación de verdad!
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
-                story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                story_text_2: "## Contracciones\nImportante! Recuerda que como estamos usando comillas, Hedy se confunde cuando utilizamos el apóstrofo para contracciones como I'm o What's. Asegúrate que quites estos apóstrofes y cambies las palabras a I am o What is.\nDirígete a los ejemplos de código para ver el mal uso de los apóstrofes.\n"
+                example_code_2: "```\n_ Así es como no se debería usar los apostrofes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     nombre {is} {ask} '¿Cómo te llamas?'
@@ -95,9 +95,9 @@ adventures:
                         {print} 'Esto se va a mostrar 5 veces'
                 story_text: |
                     ## Sangría
-                    `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}`, {pressed} y `{repeat}` han cambiado.
+                    `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}` y `{repeat}` han cambiado.
                     Ahora puedes agrupar varias líneas, pero tendrás que *sangrar* el código.
-                    Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una línea.
+                    Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una sola línea.
                 example_code: |
                     Así es como funciona ahora el comando `{repeat}`:
                     ```
@@ -339,6 +339,12 @@ adventures:
                 story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
                 example_code: "```\nanimales = _ , _ , _ \n{print} 'Oso pardo, Oso pardo'\n{print} '¿Qué ves?'\n```\n"
                 start_code: '# coloca tu código aquí'
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                start_code: '# Schrijf jouw code hier'
     songs:
         name: "¡Canta una canción!"
         description: "Imprime una canción"
@@ -426,6 +432,10 @@ adventures:
                 story_text: "## ¡Canta una canción!\nEn este nivel puedes programar una canción como la del Viejo McDonald incluso más rápido. Puedes conectar el animal con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.\nEl Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡mira!\n"
                 start_code: '# pon tu código aquí'
                 example_code: "## El Viejo MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Marinero borracho\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         name: "La tortuga"
         description: "Haz tu propio dibujo"

@@ -604,56 +604,56 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
             question_score: '10'
         1:
-            question_text: What's this programming language called?
+            question_text: Com es diu aquesta llengua de programació?
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: Bona feina!
             -   option: Heddy
-                feedback: Not this one!
+                feedback: Aquest no!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Aquest no!
             -   option: Heidi
-                feedback: Not this one!
+                feedback: Aquest no!
             correct_answer: A
             hint: It's named after Hedy Lamarr.
             question_score: '10'
         2:
             question_text: Which need to be filled in on the blanks to make the text Hello! appear?
             code: |
-              ___ Hello!
+                _ Hola!
             mp_choice_options:
             -   option: "```\n{echo}\n```\n"
                 feedback: '`{echo}` repeats a given answer.'
             -   option: "```\n{print}\n```\n"
-                feedback: Correct!
-            -   option: "```\nhello\n```\n"
-                feedback: Hello isn't a command.
+                feedback: Correcte!
+            -   option: "```\nhola\n```\n"
+                feedback: Hola no és una ordre.
             -   option: "```\n{ask}\n```\n"
                 feedback: With `{ask}`, you can ask a question.
             correct_answer: B
-            hint: _?_ Hello world!
+            hint: _ Hola món!
             question_score: '10'
         3:
             question_text: How do you ask what someone's favorite color is?
@@ -662,22 +662,22 @@ levels:
                 feedback: "`{print}` prints text, but it doesn't ask questions."
             -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
                 feedback: You only need one command, not two.
-            -   option: "```\n{ask} What is your favorite color?\n```\n"
-                feedback: Great!
-            -   option: "```\n{echo} What is your favorite color?\n```\n"
+            -   option: "```\n{ask} Quin és el teu color preferit?\n```\n"
+                feedback: Genial!
+            -   option: "```\n{echo} Quin és el teu color preferit?\n```\n"
                 feedback: '`{echo}` repeats your answer back to you.'
             correct_answer: C
             hint: You can ask something with the `{ask}` command
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
-            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            question_text: Què falla en aquest codi?
+            code: "Hola em dic Hedy!\n{ask} Com et dius?\n{echo} Hola..."
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
-            -   option: Im in line 1 is spelled wrong.
+            -   option: 'Falta un `{print}` a la línia 1.'
+                feedback: Correcte!
+            -   option: L'ordre de la línia 2 està mal escrita.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: "`{echo}` isn't a command."
+            -   option: "`{echo}` no és una ordre."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: Nothing! This is a perfect code!
                 feedback: Wrong, look carefully!
@@ -689,18 +689,18 @@ levels:
             -   option: "```\n{print}\n```\n"
                 feedback: No, you would like the answer to be repeated back to you.
             -   option: "```\nHedy\n```\n"
-                feedback: Hedy isn't a command.
+                feedback: Hedy no és una ordre.
             -   option: "```\n{ask}\n```\n"
                 feedback: With `{ask}` you can ask a question.
             -   option: "```\n{echo}\n```\n"
-                feedback: Right on!
+                feedback: Endavant!
             question_text: Which command is missing in line 2?
-            code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
+            code: "{ask} Quin és el teu animal preferit?\n_ Així que el teu animal preferit és..."
             correct_answer: D
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Què falla en aquest codi?
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
@@ -708,7 +708,7 @@ levels:
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
                 feedback: Great! You paid attention!
             -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
-                feedback: '`{echo}` is correct.'
+                feedback: '`{echo}` és correcte.'
             -   option: In line 4, `{print}` is spelled wrong.
                 feedback: No, there is a mistake somewhere else
             correct_answer: B
@@ -722,9 +722,9 @@ levels:
                 feedback: Are you sure something's wrong?
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: Are you sure something is wrong?
-            -   option: Nothing! This is a perfect code!
-                feedback: Correct!
-            question_text: What's wrong with this code?
+            -   option: Res! Aquest codi és perfecte!
+                feedback: Correcte!
+            question_text: Què falla en aquest codi?
             code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
             correct_answer: D
             hint: Check the code line by line
@@ -737,7 +737,7 @@ levels:
             -   option: You can use it to print text.
                 feedback: That's what `{print}` is for!
             -   option: You can use it to repeat an answer.
-                feedback: Good job!
+                feedback: Bona feina!
             -   option: You can use it to make text disappear.
                 feedback: That's not right...
             correct_answer: C
@@ -749,12 +749,12 @@ levels:
             -   feedback: No, `{print}` is right. Where is the question being asked?
                 option: '`{print}` in line 1 should be `{ask}`'
             -   option: '`{print}` in line 2 should be `{ask}`'
-                feedback: Super!
+                feedback: Súper!
             -   option: '`{echo}` in line 3 should be `{ask}`'
                 feedback: No, `{echo}` is right. Where is the question being asked?
             -   option: Nothing. This is a perfect code!
                 feedback: Look carefully for the mistake...
-            code: "{print} Hello!\n{print} How are you doing?\n{echo} So you are doing..."
+            code: "{print} Hola!\n{print} Com estàs?\n{echo} Així que estàs.."
             question_score: '10'
             correct_answer: B
             hint: '`{ask}` allows you to ask a question'

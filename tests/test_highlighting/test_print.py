@@ -54,6 +54,50 @@ class HighlighterTestPrint(HighlightTester):
         ("level16"),
         ("level17"),
     ])
+    def test_print3(self, level):
+        self.assert_highlighted_chr(
+            'print "hello world!"',
+            "KKKKK SSSSSSSSSSSSSS",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print4(self, level):
+        self.assert_highlighted_chr(
+            "print «hello world!»",
+            "KKKKK SSSSSSSSSSSSSS",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
     def test_print_incomplete1(self, level):
         self.assert_highlighted_chr(
             "print 'hello world!' var at random",
@@ -79,6 +123,50 @@ class HighlighterTestPrint(HighlightTester):
     def test_print_incomplete2(self, level):
         self.assert_highlighted_chr(
             "print 'hello world! var at random",
+            "KKKKK TTTTTTSTTTTTTSTTTSTTSTTTTTT",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete3(self, level):
+        self.assert_highlighted_chr(
+            'print "hello world! var at random',
+            "KKKKK TTTTTTSTTTTTTSTTTSTTSTTTTTT",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete4(self, level):
+        self.assert_highlighted_chr(
+            "print «hello world! var at random",
             "KKKKK TTTTTTSTTTTTTSTTTSTTSTTTTTT",
             level=level, lang='en')
 

@@ -912,7 +912,6 @@ def programs_page(user):
 
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-    print(result.next_page_token)
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
@@ -1528,7 +1527,11 @@ def main_page():
     if sections:
         content.append(dict(style='columns', columns=sections))
 
-    return render_template('main-page.html', page_title=gettext('title_start'),
+    custom_logo = False
+    if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
+        custom_logo = True
+
+    return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
                            current_page='start', content=content)
 
 
