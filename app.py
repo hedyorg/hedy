@@ -909,7 +909,6 @@ def programs_page(user):
 
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-    print(result.next_page_token)
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
