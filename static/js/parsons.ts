@@ -103,9 +103,9 @@ function shuffle_code_lines(code: string) {
     let shuffled: Record<string, string> = {};
     let keys = Object.keys(code_lines);
     fisherYatesShuffle(keys);
-    for (const k of keys) {
-        shuffled[k] = code_lines[k];
-    }
+    keys.forEach((k, i) => {
+        shuffled[i] = code_lines[k];
+    });
     return shuffled;
 }
 
