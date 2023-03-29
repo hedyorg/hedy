@@ -526,6 +526,12 @@ adventures:
                         _
                     ```
                 start_code: "# setze hier deinen Code hin"
+            18:
+                example_code: "```\n{print}('Willkommen in dieser Geschichte!')\n```\n"
+                story_text: "## Geschichte\nWir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.\n\n### Übung 1\nErstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.\n"
+                story_text_2: "### Übung 2\nWir haben bereits einen `{input}` Befehl für dich vorbereitet. Benutze zuerst die `name` Variable in deiner Geschichte.\nFüge dann einen zweiten `{ask}` Befehl hinzu und benutze diese Variable ebenfalls.\nTipp: Denke an die Kommas im `{print}` Befehl zwischen Text und Variablen!\n"
+                example_code_2: "```\nname = {input}(\"Wie ist dein Name?\")\n{print}('Willkommen in dieser Geschichte!')\n```\n"
+                start_code: '# platziere deinen Code hier'
     parrot:
         name: "Papagei"
         description: "Erschaffe Dir deinen eigenen zahmen Papageien, der Dir alles nachplappert!"
@@ -771,6 +777,10 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: "# setze hier deinen Code hin"
+            18:
+                start_code: '# Schreibe deinen Code hier'
+                story_text: "## Sing ein Lied!\nIn Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.\n\n### Übung 1\nDas Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.\nKannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.\n\n### Übung 2\nSchau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.\n"
+                example_code: "```\nzeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} zeile {in} zeilen _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ zeile _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         name: "Schildkröte"
         description: "Mal dein eigenes Bild"
@@ -2283,7 +2293,7 @@ adventures:
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
                     {print} 'You are standing in front of an old mension'
                     {print} 'Something is not right here'

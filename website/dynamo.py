@@ -41,9 +41,17 @@ class TableStorage(metaclass=ABCMeta):
         ...
 
     def put(self, table_name, key, data):
+        """Put the given data under the given key.
+
+        Does not need to return anything.
+        """
         ...
 
     def update(self, table_name, key, updates):
+        """Update the given record, identified by a key, with updates.
+
+        Must return the updated state of the record.
+        """
         ...
 
     def delete(self, table_name, key):
@@ -270,6 +278,7 @@ class Table:
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self._extract_key(data), data)
+        return data
 
     def put(self, data):
         """An alias for 'create', if calling create reads uncomfortably."""
@@ -518,20 +527,23 @@ class AwsDynamoStorage(TableStorage):
         return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
-        return self.db.put_item(TableName=make_table_name(self.db_prefix, table_name), Item=self._encode(data))
+        self.db.put_item(TableName=make_table_name(self.db_prefix, table_name), Item=self._encode(data))
 
     def update(self, table_name, key, updates):
         value_updates = {k: v for k, v in updates.items() if not isinstance(v, DynamoUpdate)}
         special_updates = {k: v.to_dynamo() for k, v in updates.items() if isinstance(v, DynamoUpdate)}
 
-        return self.db.update_item(
+        response = self.db.update_item(
             TableName=make_table_name(self.db_prefix, table_name),
             Key=self._encode(key),
             AttributeUpdates={
                 **self._encode_updates(value_updates),
                 **special_updates,
             },
+            # Return the full new item after update
+            ReturnValues='ALL_NEW',
         )
+        return self._decode(response.get('Attributes', {}))
 
     def delete(self, table_name, key):
         return self.db.delete_item(TableName=make_table_name(self.db_prefix, table_name), Key=self._encode(key))
@@ -1147,3 +1159,18 @@ class GetManyIterator(QueryIterator):
                                    reverse=self.reverse,
                                    limit=self.limit,
                                    pagination_token=self.pagination_token)
+
+
+class ScanIterator(QueryIterator):
+    """Iterate over a table scan, automatically proceeding to the next result page if necessary.
+
+    Wrapper around scan that automatically paginates.
+    """
+
+    def __init__(self, table, limit=None, pagination_token=None):
+        self.table = table
+        self.limit = limit
+        super().__init__(pagination_token)
+
+    def _do_fetch(self):
+        return self.table.scan(limit=self.limit, pagination_token=self.pagination_token)

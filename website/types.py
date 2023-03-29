@@ -30,6 +30,13 @@ class Program:
     name: str
     code: str
     date: int
+
+    # The adventure name this program was written under
+    #
+    # - For built-in adventures, the short_name of the adventure
+    # - For teacher-written adventures:
+    #    - either the `id` of the teacher adventure (new); or
+    #    - the (display) `name` of the teacher adventure (old)
     adventure_name: str
     public: Optional[int] = None
     submitted: Optional[bool] = None
@@ -39,12 +46,13 @@ class Program:
 
     @staticmethod
     def from_database_row(r):
+        """Convert a database row into a typed Program object."""
         return Program(
-            name=r['name'],
-            code=r['code'],
-            date=r['date'],
+            name=r.get('name', ''),
+            code=r.get('code', ''),
+            date=r.get('date', 0),
             adventure_name=r.get('adventure_name', 'default'),
-            id=r.get('id'),
+            id=r.get('id', ''),
             public=r.get('public'),
             submitted=r.get('submitted'))
 
@@ -84,3 +92,13 @@ class Adventure:
 
     def __getitem__(self, key):
         return getattr(self, key)
+
+    @staticmethod
+    def from_teacher_adventure_database_row(row):
+        return Adventure(
+            short_name=row['id'],
+            name=row['name'],
+            save_name=row['name'],
+            start_code='',  # Teacher adventures don't seem to have this
+            text=row['content'],
+            is_teacher_adventure=True)

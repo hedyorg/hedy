@@ -24,10 +24,12 @@ def rule_all(level):
     # complete
     list_rules.append({'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start', 'unicode': True})
     list_rules.append({'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': "«[^»]*»", 'token': 'constant.character', 'next': 'start', 'unicode': True})
 
     # incomplete
-    list_rules.append({'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start', 'unicode': True})
-    list_rules.append({'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': '\"[^\"]*$', 'token': 'text', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': "\'[^\']*$", 'token': 'text', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': "«[^»]*$", 'token': 'text', 'next': 'start', 'unicode': True})
 
     # Rule for blanks marks :
     list_rules.append({'regex': '_\\?_', 'token': 'invalid', 'next': 'start', 'unicode': True})
