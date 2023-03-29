@@ -1524,7 +1524,11 @@ def main_page():
     if sections:
         content.append(dict(style='columns', columns=sections))
 
-    return render_template('main-page.html', page_title=gettext('title_start'),
+    custom_logo = False
+    if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
+        custom_logo = True
+
+    return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
                            current_page='start', content=content)
 
 
