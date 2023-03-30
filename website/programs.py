@@ -182,8 +182,6 @@ class ProgramsModule(WebsiteModule):
                 if not body.get("force_save", True):
                     return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
 
-        print('Going into logic')
-
         program = self.logic.store_user_program(
             program_id=program_id,
             level=body['level'],
