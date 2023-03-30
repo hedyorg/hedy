@@ -114,3 +114,325 @@ levels:
                `{turn}` is used to make the turtle turn left or right.
             editor: |
                <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+
+    2:
+        1:
+          header: "Welcome to level 2"
+          text: |
+            In this level you will learn to use variables.
+
+            A variable is a word that can be used to store informatie.
+
+            For example: a name, age or favorite sports team.
+        2:
+          header: "Variables"
+          text: |
+            To make or 'set' a variable we use the `{is}` command
+          editor: |
+            <iframe class="fragment" src="/adventure/default/1/raw"></iframe>
+        3:
+          header: "Interactive"
+          text: |
+            We can also set a variable by asking questions.
+
+            The answer to the question is stored in the variable.
+
+            This way we don't need the `{echo}` command.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        4:
+          header: "Multiple variables"
+          text: |
+            Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        5:
+          header: "Sleep"
+          text: |
+            You can also use the `{sleep}` command to pause the code for a while.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        6:
+          header: "Sleep 5"
+          text: |
+            You can add a number after the `{sleep}` command if you want the pause to be longer.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+    3:
+        1:
+          header: "Welcome to level 3"
+          text: |
+            In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
+        2:
+          header: "Making a list"
+          text: |
+            You make a list with `{is}`.
+
+            Seperate the items on your list with a comma.
+          editor: |
+            <iframe class="fragment" src="/adventure/default/3/raw"></iframe>
+        3:
+          header: "At random"
+          text: |
+            You can use the list with the `{at}` `{random}` command.
+            The computer will randomly pick one item of the list.
+            Every time you run this code the output will differ.
+          editor: |
+            <iframe class="fragment" src="/adventure/dishes/3/raw"></iframe>
+        4:
+          header: "At random in a sentence"
+          text: |
+            You can use the `{at}` `{random}` command in a sentence as well.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        5:
+          header: "Add to"
+          text: |
+            You can add items to a list with the `{add}` `{to}` command.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        6:
+          header: "Add to"
+          text: |
+            You can also use the `{add}` `{to}` command in combination with the `{ask}` command.
+            This way you can let the player decide what to add to the list.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        7:
+          header: "Remove from"
+          text: |
+            The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
+            This command removes an item from a list.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+    4:
+        1:
+          header: "Welcome to level 4"
+          text: |
+            In this level you will learn how to use quotation marks.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        2:
+          header: "Problem"
+          text: |
+            In the previous levels, you might have come across this problem:
+        3:
+          header: "Fixing it with quotation marks"
+          text: |
+            In this level we will fix this problem by using quotation marks.
+
+            This also makes our code look more like 'real' Python code.
+        4:
+          header: "Quotation marks with print"
+          text: |
+              Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
+          editor: |
+            <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+        5:
+          header: "Quotation marks with ask"
+          text: |
+            This also goes for the `{ask}` command.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        6:
+          header: "Quotation marks and variables"
+          text: |
+            You do not want variable names to be printed on the screen.
+            This is why variables should be left out of the quotation marks, like this:
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        7:
+          header: "Quotation marks and variables"
+          text: |
+            When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
+            The rest of the sentence however, does need quotation marks. That looks like this:
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        8:
+          header: "Quotation marks and contractions"
+          text: |
+            Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
+            Take a look at this example:
+          editor: |
+            <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+
+    5:
+        1:
+          header: "Welcome to level 5"
+          text: |
+            In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.
+        2:
+          header: "if"
+          text: |
+            The `{if}` command allows you to choose between two options.
+            In this example the computer will print 'nice' if the given answer is Hedy.
+            If the answer is not Hedy, the computer will do nothing.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        3:
+          header: "Don't forget to print"
+          text: |
+            When using the `{if}` command, don't forget to use the `{print}` command.
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        4:
+          header: "else"
+          text: |
+            When using an `{if}` command, you can also add an `{else}` command.
+            If the answer is Hedy, the computer will print 'nice'.
+            But if the answer is something else the computer will print 'not as nice'
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        5:
+          header: "Long lines"
+          text: |
+            You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
+
+            You can choose to seperate commands and put them on 2 lines, like this:
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+        6:
+          header: 'Another new command'
+          text: |
+            If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
+
+            With `{in}` you can let the computer check if an item is in a list, for example:
+          editor: |
+            <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+
+
+
+
+    6:
+      1:
+        header: "Welcome to level 6"
+        text: |
+          In this level we are adding maths to our codes.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      2:
+        header: "Addition"
+        text: |
+          If you want to calculate an addition, simply use the plus sign.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      3:
+        header: "Subtraction"
+        text: |
+          If you want to subtract, you can use the minus sign.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      4:
+        header: "Multiplication"
+        text: |
+          If you want to do multiplications, you can use the asterisk.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      5:
+        header: "Division"
+        text: |
+          You can use the slash for division.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      6:
+        header: "Summary"
+        text: |
+          In summary, you can use +, -, * and / to do maths.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      7:
+        header: "The = symbol"
+        text: |
+          From now on you can also use the = symbol instead of the `{is}` command.
+          This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
+      8:
+        header: "Calculations with variables"
+        text: |
+          You can use calculations with numbers, but you can also use variables to do calculations, like this:
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+    7:
+      1:
+        header: "Welcome to level 7"
+        text: |
+          In this level you will learn how to repeat a line of code as many times a you'd like.
+      2:
+        header: "repeat 3 times"
+        text: |
+          If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
+          If you want to repeat the line more times, simply change the number.
+        editor: |
+          <iframe class="fragment" src="/adventure/default/7/raw"></iframe>
+      3:
+        header: "Don't forget the print command"
+        text: |
+          When using the repeat command, do not forget the `{print}` command.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      4:
+        header: "Repeat an ask command"
+        text: |
+          You can also repeat an `{ask}` command multiple times.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+
+
+
+
+
+
+    8:
+      1:
+        header: "Welcome to level 8"
+        text:
+          In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+      2:
+        header: "if commands before"
+        text: |
+          In the previous levels, the `{repeat}` command looked like this:
+
+          You could only repeat one line of code.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      3:
+        header: "if commands now"
+        text: |
+          In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
+          You do this by using indentation.
+
+          Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      4:
+        header: "if commands now"
+        text: |
+          If you want to, you can continue after the `{repeat}` command without indentation.
+          The lines that do not start with indentation will not be repeated.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      5:
+        header: "if and else before"
+        text: |
+          The same goes for the `{if}` and `{else}` commands.
+          These were the commands before:
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      6:
+        header: "if and else now"
+        text: |
+          These are the `{if}` and `{else}` commands now.
+          Each line after the `{if}` and `{else}` commands start with indentation.
+        editor:
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      7:
+        header: "stopping the indentation"
+        text: |
+          Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      8:
+        header: "if statements inside if statements"
+        text: |
+          You might have thought of trying to put an if command inside a repeat command, or inside another if command.
+          For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+
