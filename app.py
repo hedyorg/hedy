@@ -909,7 +909,6 @@ def programs_page(user):
 
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-    print(result.next_page_token)
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
@@ -1525,7 +1524,11 @@ def main_page():
     if sections:
         content.append(dict(style='columns', columns=sections))
 
-    return render_template('main-page.html', page_title=gettext('title_start'),
+    custom_logo = False
+    if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
+        custom_logo = True
+
+    return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
                            current_page='start', content=content)
 
 
@@ -1764,8 +1767,8 @@ def store_parsons_order():
     # Validations
     if not isinstance(body, dict):
         return 'body must be an object', 400
-    if not isinstance(body.get('level'), str):
-        return 'level must be a string', 400
+    if not isinstance(body.get('level'), int):
+        return 'level must be an integer', 400
     if not isinstance(body.get('exercise'), str):
         return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
