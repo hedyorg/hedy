@@ -20,24 +20,16 @@ levels:
                 _ Hello!
             mp_choice_options:
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "`{echo}` repeats a given answer."
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Correct!"
             -   option: |
-                    ```
-                    hello
-                    ```
+                    `hello`
                 feedback: "Hello isn't a command."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "With `{ask}`, you can ask a question."
             correct_answer: "B"
             hint: "_ Hello world!"
@@ -93,24 +85,16 @@ levels:
                 _ So your favorite pet is...
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "No, you would like the answer to be repeated back to you."
             -   option: |
-                    ```
-                    Hedy
-                    ```
+                    `Hedy`
                 feedback: "Hedy isn't a command."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "With `{ask}` you can ask a question."
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "Right on!"
             correct_answer: "D"
             hint: "You want to see the answer at the end of line 2..."
@@ -306,24 +290,16 @@ levels:
                 {print} Hedy!
             mp_choice_options:
             -   option: |
-                    ```
-                    {sleep}
-                    ```
+                    `{sleep}`
                 feedback: "Perfect!"
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "There is nothing to repeat back here"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "There is no text there to `{print}` there"
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "There is no question there to be asked"
             correct_answer: "A"
             hint: "Pause for dramatic effect..."
@@ -437,27 +413,19 @@ levels:
             question_score: '10'
     3:
         1:
-            question_text: "What command do you use to let Hedy pick something arbitrarily?"
+            question_text: "What command(s) do you use to let Hedy pick something arbitrarily?"
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "`{print}` is used to print text"
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "`{ask}` is used to ask a question"
             -   option: |
-                    ```
-                    {is}
-                    ```
+                    `{is}`
                 feedback: "`{is}` is used to make a list"
             -   option: |
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "Arbitrarily means without a plan or randomly."
@@ -896,24 +864,16 @@ levels:
                 _ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "There already is a `{print}` command."
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "The `{if}` command is used in the line above."
             -   option: |
-                    ```
-                    {sleep}
-                    ```
+                    `{sleep}`
                 feedback: "That's not it!"
             -   option: |
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: "That's right!"
             correct_answer: "D"
             hint: "Which one goes together with the `{if}` command?"
@@ -1030,24 +990,16 @@ levels:
                 {else} _ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "`{if}` is in the line above."
             -   option: |
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: "No, you don't need `{at} {random}`."
             -   option: |
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: "There already is an `{else}` command"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Awesome!"
             correct_answer: "D"
             hint: "After `{else}` a `{print}` command follows"
@@ -1070,14 +1022,10 @@ levels:
                     ```
                 feedback: "Great job!"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "`{if}` is already there"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "No, that's not it."
             correct_answer: "B"
             hint: "What the variable name?"
@@ -1378,19 +1326,13 @@ levels:
                     ```
                 feedback: "That's right!"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "`{print}` is spelled correctly"
             -   option: |
-                    ```
-                    {repeat}
-                    ```
+                    `{repeat}`
                 feedback: "`{repeat}` is spelled correctly"
             -   option: |
-                    ```
-                    {times}
-                    ```
+                    `{times}`
                 feedback: "`{times}` is spelled correctly"
             correct_answer: "A"
             hint: "I'm is wrong, you can't use apostrophes"
@@ -2132,19 +2074,13 @@ levels:
                     ```
                 feedback: "No"
             -   option: |
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: "Correct"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "No"
             -   option: |
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: "No"
             correct_answer: "B"
             hint: "What did you learn in this level?"
@@ -2954,13 +2890,13 @@ levels:
                 if diet = 'vegan' ??? diet = 'halal'
                     remove 'sausage rolls' from menu
             mp_choice_options:
-            -   option: "and"
+            -   option: "`{and}`"
                 feedback: "You don't have to be vegan and muslim"
-            -   option: "or"
+            -   option: "`{or}`"
                 feedback: "Great thinking!"
-            -   option: " + "
+            -   option: " `+` "
                 feedback: "No"
-            -   option: "print"
+            -   option: "`{print}`"
                 feedback: "No"
             correct_answer: "B"
             hint: "Neither vegans nor muslims can eat sausage rolls."
@@ -3153,13 +3089,13 @@ levels:
                 if item in fruit
                     print 'The fruit is sold near the register'
             mp_choice_options:
-            -   option: "and"
+            -   option: "`{and}`"
                 feedback: "There are no items that are both the list of snacks and the list of drinks"
-            -   option: "or"
+            -   option: "`{or}`"
                 feedback: "Great job!"
-            -   option: "in"
+            -   option: "`{in}`"
                 feedback: "No"
-            -   option: "{if}"
+            -   option: "`{if}`"
                 feedback: "No"
             correct_answer: "B"
             hint: "The item is either in the list of snacks, or in the list of drinks"
