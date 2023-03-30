@@ -147,10 +147,10 @@ adventures:
                 start_code: '{print} Tvoja priča'
             5:
                 story_text: "## Priča\nU ovom nivou možeš isprogramirati različite završetke, koji će učiniti da tvoja priča bude još zanimljivija.\nU primeru kod možeš videti kako možeš osmisliti dva različita završetka.\n\n### Vežba 1\nNapiši novu kratku priču sa bar 6 linija koda u vezi teme koju si odabrao.\nNemas ideju? Odaberi onda jednu od ovih tema: superheroji, dosadan dan u školi, sam na napuštenom ostrvu.\n\nSada daj opciju da igrač odabere srećan ili nesrećan kraj priče, kao što je u primeru.\nIsprogramiraj oba završetka.\n\n### Vežba 2\nIskopiraj priču koju si osmislio u svojoj avanturi u prethodnim nivoima.\nPronadji način da dodaš bar po dve komande `{if}` i `{else}` u svoju priču.\nMože biti sa srećnim ili nesrećnim završetkom, ali možeš i na druge načine upotrebiti ove komande.\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name ' walks through the forest'\n{print} name ' encounters a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name ' takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats ' name\n```\n"
-                start_code: "{print} 'Here your story will start!'"
+                example_code: "```\nime {is} {ask} Ko šeta šumom?'\n{print} ime ' šeta šumom'\n{print} ime ' susreće čudovište'\nkraj {is} {ask} 'Da li želiš srećan ili nesrećan završetak?'\n{if} kraj {is} srećan {print} ime ' uzima mač i čudovište beži glavom bez obzira'\n{else} {print} 'Čudovište pojede ' ime\n```\n"
+                start_code: "{print} 'Ovde će tvoja priča početi!'"
             7:
-                story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n\n### Exercise\nAdd repetition to your own story. Go back to your saved programs, choose your story program from level 6 and\nfind a line containing `{print}` and repeat it!\n"
+                story_text: "## Priča\nU priči, neko će ponoviti reči nekoliko puta. Na primer, kada neko zove u pomoć ili peva pesmu.\nU ovom nivou ovakva ponavljanja staviti u svoju priču sa`{repeat}`.\n\n### Vežbanje\nDodaj ponavljanja u svoju priču. Vrati se do svojih sačuvanih programa, odaberi priču iz nivoa 6 i \npronadji liniju sa komandom `{print}` i ponovi je!\n"
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
