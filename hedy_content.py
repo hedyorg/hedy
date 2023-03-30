@@ -64,10 +64,14 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     2: [
         'default',
+        'is_command',
         'rock',
+        'ask_command',
+        'rock_2',
+        'haunted',
+        'sleep_command',
         'parrot',
         'story',
-        'haunted',
         'restaurant',
         'turtle'
     ],

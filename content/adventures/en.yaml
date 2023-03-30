@@ -13,35 +13,27 @@ adventures:
 
                     Go to the next tab to learn your first command!
                 start_code: "{print} hello world!"
+
             2:
                 story_text: |
-                    ## Variables
-                    In level 2 we learn two new commands: `{is}` and `{sleep}`.
-                    You can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
-
-                    This way you no longer need the `{echo}` command!
-
+                    ## Level 2
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
                     ```
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
                 story_text_2: |
-                    `{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:
-                example_code_2: |
-                    ```
-                    answer {is} {ask} What is your name?
-                    {print} Hello answer
-                    ```
-                story_text_3: |
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
-                example_code_3: |
-                    ```
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
-                    ```
+                    If the player types a hamburger and coke, you can't say "so you would like a hamburger and coke", but you have to make two separate line.
+                    Also, the `{echo}` command only echoes the word at the end of the sentence. So you can't say "your hamburger is coming right up!".
+
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 start_code: "{print} hello world!"
             3:
                 story_text: |
@@ -456,7 +448,7 @@ adventures:
                     _ Hello!
                     ```
     ask_command:
-        name: "Ask"
+        name: "ask"
         description: "Introduction ask command"
         default_save_name: "ask_command"
         levels:
@@ -486,6 +478,75 @@ adventures:
                     ```
                     _ How are you doing?
                     _
+                    ```
+            2:
+                story_text: |
+                    ## The ask command
+                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
+                    We can use variabeles to store the answers to our questions and this way we can use the aswer to multiple questions in our codes.
+                    Check it out:
+
+                    This way your code is becoming interactive!
+                example_code: |
+                    ```
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    In the previous tab you have practised with setting variables with the `{is}` command.
+                    You have created at least 3 variables and used them with a print command.
+                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
+
+                    Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
+                example_code_2: |
+                    ```
+                    favorite_animals is ask What is your favorite animal?
+                    print I like favorite_animals
+                    ```
+    is_command:
+        name: "is"
+        description: "introducing is command"
+        defaul_save_name: "is_command"
+        levels:
+            2:
+                story_text: |
+                    ## Variables
+                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                example_code: |
+                    ```
+                    name {is} Hedy
+                    age {is} 15
+                    {print} name is age years old
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Time to make your own variables!
+                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
+                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
+
+                example_code_2: |
+                    ```
+                    favorite_animals is _
+                    {print} I like favorite_animals
+                    ```
+                start_code: "name is Hedy"
+    sleep_command:
+        name: "sleep"
+        description: "introducing sleep command"
+        defaul_save_name: "sleep_command"
+        levels:
+            2:
+                story_text: |
+                    ## The sleep command
+                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                example_code: |
+                    ```
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
                     ```
     story:
         name: "Story"
@@ -850,32 +911,24 @@ adventures:
             2:
                 story_text: |
                     ## Parrot
-                    Create your own online pet parrot that will copy you!
+                    In the previous level you've made a parrot that will repeat after you. In this level we'll make the parrot interactive using a variable and `{ask}` command.
+                    We will also make the parrot more life-like by adding `{sleep}` commands after something is said.
                 example_code: |
                     ```
                     {print} Im Hedy the parrot
-                    name {is} {ask} whats your name?
+                    name _ _ what is your name?
                     {print} name
-                    {sleep}
+                    _
                     {print} squawk
-                    {sleep}
+                    _
                     {print} name
                     ```
                 story_text_2: |
                     ### Exercise
-                    You can use variables to make the parrot say more than only your name. Can you complete this code?
-                example_code_2: |
-                    ```
-                    {print} Im Hedy the parrot
-                    name {is} {ask} whats your name?
-                    {print} name
-                    {sleep}
-                    {print} name
-                    surname {is} {ask} whats your surname?
-                    _
-                    {sleep}
-                    _
-                    ```
+                    Firstly, finish line 2 with an `{is}` and an `{ask}` command.
+                    Then fill in a `{sleep}` command on line 4 and 6 to let the parrot stay quiet for a little bit.
+
+                    **Extra** Can you make the parrot ask for more then only your name by adding more lines of code?
                 start_code: "{print} Im Hedy the parrot!"
             3:
                 story_text: |
@@ -1895,6 +1948,23 @@ adventures:
                                 {print} "you need to take more steps or turns before you can superjump!"
                     ```
                 start_code: "# place your code here"
+    rock_2:
+        name: "Rock, paper, scissors 2"
+        description: "Part 2 of rock, paper, scissors"
+        default_save_name: "rock_2"
+        levels:
+            2:
+                story_text: |
+                    ## Rock, paper, scissors part 2
+                    Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!
+
+                    ### Exercise
+                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
+                example_code: |
+                    ```
+                    choice is _
+                    {print} I choose choice
+                    ```
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
@@ -1929,16 +1999,14 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-
+                    ### Exercise
+                    Finish the code by filling in the **variable** on the blanks.
+                    This game is not very interactive, but no worries! In the next tab you'll learn how to use variables with the `{ask}` command to make your game interactive!
                 example_code: |
                     ```
-                    _ {is} {ask} rock, paper, or scissors?
+                    choice is rock
                     {print} I choose _
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Copy the example code to your input screen by clicking the yellow button.
-                    Finish the code by filling in the right commands on the blanks.
                 start_code: "# place your code here"
             3:
                 story_text: |
@@ -2960,7 +3028,8 @@ adventures:
                     monster_3 {is} 👶
                     {print} You enter the haunted house.
                     {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
@@ -2975,7 +3044,8 @@ adventures:
                     monster_3 {is} _
                     {print} You enter the haunted house.
                     {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
