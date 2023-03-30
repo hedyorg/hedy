@@ -53,14 +53,18 @@ function updateHeader(exercise: number) {
 }
 
 function showExercise(response: ParsonsExercise) {
-    const code_lines = shuffle_code_lines(response.code);
-    let counter = 0;
+    const code_lines = parse_code_string_into_dict(response.code);
+    let keys = Object.keys(code_lines);
+
     // Hide all containers, show the onces relevant dynamically
     $('.parsons_start_line_container').hide();
     $('.parsons_goal_line_container').hide();
 
-    for (const [key, valueObj] of Object.entries(code_lines)) {
-        counter += 1;
+    fisherYatesShuffle(keys);
+
+    keys.forEach((key, i) => {
+        const valueObj = code_lines[key];   
+        const counter = i + 1;     
         // Temp output to console to make sure TypeScript compiles
         ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
         $('#start_parsons_div_' + counter).attr('index', key);
@@ -69,7 +73,8 @@ function showExercise(response: ParsonsExercise) {
 
         $('#parsons_start_line_container_' + counter).show();
         $('#parsons_goal_line_container_' + counter).show();
-    }
+    });
+
     $('#parsons_explanation_story').text(response.story);
 }
 
@@ -95,18 +100,6 @@ function parse_code_string_into_dict(code: string) {
         code_lines[index+1] = splitted_code[index]
     }
     return code_lines;
-}
-
-// https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
-function shuffle_code_lines(code: string) {
-    const code_lines = parse_code_string_into_dict(code);
-    let shuffled: Record<string, string> = {};
-    let keys = Object.keys(code_lines);
-    fisherYatesShuffle(keys);
-    keys.forEach((k, i) => {
-        shuffled[i] = code_lines[k];
-    });
-    return shuffled;
 }
 
 /**
