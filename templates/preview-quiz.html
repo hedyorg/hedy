@@ -2,8 +2,15 @@
 {% block regular_content %}
     {% include 'incl/quiz.html' %}
     <script>
-        // FIXME: Stop using inline JavaScript
-      $(document).ready(function() {
+      function ready(fn) {
+        if (document.readyState !== 'loading'){
+          fn();
+        } else {
+          document.addEventListener('DOMContentLoaded', fn);
+        }
+      }
+
+      ready(function () {
         hedyApp.loadQuizQuestion({{ level }}, {{ question + 1 }});
       });
     </script>
