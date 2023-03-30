@@ -1767,8 +1767,8 @@ def store_parsons_order():
     # Validations
     if not isinstance(body, dict):
         return 'body must be an object', 400
-    if not isinstance(body.get('level'), str):
-        return 'level must be a string', 400
+    if not isinstance(body.get('level'), int):
+        return 'level must be an integer', 400
     if not isinstance(body.get('exercise'), str):
         return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
