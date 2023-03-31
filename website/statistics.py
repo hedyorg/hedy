@@ -66,7 +66,7 @@ class StatisticsModule(WebsiteModule):
             "class-live-stats.html",
             class_info={"id": class_id, "students": students},
             current_page="my-profile",
-            page_title=gettext("title_class statistics"),
+            page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-stats'),
         )
 

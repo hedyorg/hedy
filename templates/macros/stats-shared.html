@@ -130,8 +130,13 @@
 
 {% macro insert_struggle_list_item(text) %}
 
-  <div class="">
-    <li class="border-solid border-2 border-black rounded p-2 cursor-pointer hover:bg-gray-100">{{text}}</li>
-  </div>
+    <li class="w-full border-solid border-2 border-black rounded p-2">
+      <h3 class="cursor-pointer hover:text-gray-600">
+        {{text}}
+      </h3>
+      <p>
+        Small Text
+      </p>
+    </li>
 
 {% endmacro %}
