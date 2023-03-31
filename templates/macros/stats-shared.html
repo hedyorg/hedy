@@ -119,3 +119,19 @@
   <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
 </div>
 {% endmacro %}
+
+{% macro insert_student_list_item(text) %}
+
+  <div>
+    <li class="p-2">{{text}}</li>
+  </div>
+
+{% endmacro %}
+
+{% macro insert_struggle_list_item(text) %}
+
+  <div class="list_elem">
+    <li class="border-solid border-2 border-black rounded p-2 ">{{text}}</li>
+  </div>
+
+{% endmacro %}
