@@ -5,27 +5,13 @@ from . import aws_helpers, log_queue
 logger = logging.getLogger(__name__)
 
 class NullLogger:
-    """A jsonbin logger that doesn't actually do anything."""
+    """A logger that doesn't actually do anything."""
 
     def log(self, obj):
         pass
 
-class MultiParseLogger:
-    """A logger that forwards to other loggers."""
-
-    def __init__(self, *loggers):
-        self.loggers = loggers
-
-    def log(self, obj):
-        for _logger in self.loggers:
-            _logger.log(obj)
-
 class S3ParseLogger:
     """A logger that logs to S3.
-
-    - Well then why is it in a file called 'jsonbin.py'?
-
-    - Legacy, young grasshopper. Legacy.
     """
 
     @staticmethod
