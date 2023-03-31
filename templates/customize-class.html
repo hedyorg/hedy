@@ -19,7 +19,7 @@
         </div>
         {{ _('customize_class_exp_2')|commonmark }}
     </div>
-    <div class="flex flex-row border border-gray-400 rounded-lg">
+     <div class="hidden flex-row border border-gray-400 rounded-lg">
         <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
         <div class="py-2 px-4 w-9/12 overflow-x-scroll">
             {% for i in range(1, max_level + 1) %}
@@ -99,20 +99,41 @@
                         <tr>
                             <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
                             <th class="w-full">{{_('opening_date')}}</th>
+                            <th class="w-auto">Disable</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in range(1, max_level + 1) %}
-                            <tr class="{% if customizations and i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}" data-cy="opening_date_level_{{ i }}">
+                            <tr class="opening_date_container">
                                 <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
-                                       {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
-                                        type="date" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"
-                                       {% else %}
-                                        type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
+                                           id="opening_date_level_{{ i }}" data-cy="opening_date_level_{{ i }}"
+                                       {% if customizations %}                                            
+                                            {% if i in customizations['levels'] %}                                                
+                                                {% if i|string in customizations['opening_dates'] %}
+                                                    type="date" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"                                                    
+                                                {% else %}
+                                                    type="text" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})" placeholder="{{_('directly_available')}}"
+                                                {% endif %}
+                                            {% else %}
+                                                type="text" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})" placeholder="Disabled" disabled
+                                            {% endif %}
+                                        {% else %}
+                                            type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}" onchange="hedyApp.test({{i}})"
                                        {% endif %}
                                        class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                                </td>
+                                <td class="border-r border-t border-gray-400">
+                                    <label class="switch">
+                                        <input type="checkbox" id="enable_level_{{ i }}" onchange="hedyApp.enable_level({{i}})" 
+                                                {% if (customizations and i in customizations['levels']) or not customizations %}
+                                                    checked
+                                                {% endif %}
+                                                level="{{ i }}"
+                                                >
+                                        <span class="slider round"></span>
+                                      </label>
                                 </td>
                             </tr>
                         {% endfor %}

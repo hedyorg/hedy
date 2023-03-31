@@ -7072,6 +7072,10 @@ code {
   width: 16.666667%;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .w-2\/3 {
   width: 66.666667%;
 }
@@ -7201,10 +7205,6 @@ code {
 
 .w-60 {
   width: 15rem;
-}
-
-.w-auto {
-  width: auto;
 }
 
 .w-0\.5 {
@@ -30958,7 +30958,7 @@ ol {
 
 input:disabled {
   --tw-border-opacity: 1;
-  border-color: rgb(160 174 192 / var(--tw-border-opacity));
+  border-color: rgb(203 213 224 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 224 / var(--tw-bg-opacity));
 }
@@ -31566,6 +31566,71 @@ input:checked ~ .toggle-path {
   align-items: stretch;
   justify-content: center;
   text-align: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 224 / var(--tw-bg-opacity));
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  --tw-bg-opacity: 1;
+  background-color: rgb(72 187 120 / var(--tw-bg-opacity));
+}
+
+input:checked + .slider:before {
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input:disabled::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(74 85 104 / var(--tw-text-opacity));
+}
+
+input:disabled::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(74 85 104 / var(--tw-text-opacity));
 }
 
 .hover\:border-blue-600:hover {

@@ -336,9 +336,9 @@ export function show_doc_section(section_key: string) {
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
     let levels: (string | undefined)[] = [];
-    $('.level-select-button').each(function() {
-        if ($(this).hasClass("green-btn")) {
-            levels.push(<string>$(this).val());
+    $('[id^=enable_level_]').each(function() {
+        if ($(this).is(":checked")) {
+            levels.push(<string>$(this).attr('level'));
         }
     });
     let other_settings: string[] = [];
@@ -355,12 +355,9 @@ export function save_customizations(class_id: string) {
     });
 
     let opening_dates: Record<string, string> = {};
-    $('.opening_date_container').each(function() {
-        if ($(this).is(":visible")) {
-            $(this).find(':input').each(function () {
-                opening_dates[$(this).attr('level') as string] = $(this).val() as string;
-            });
-        }
+    $('[id^=opening_date_level_]').each(function() {
+      opening_dates[$(this).attr('level') as string] = $(this).val() as string;
+      
     });
     let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
     $('[id^=level-]').each(function() {
@@ -374,7 +371,7 @@ export function save_customizations(class_id: string) {
             sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
         });
     });
-
+    console.log(opening_dates);
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
@@ -468,47 +465,38 @@ export function select_all_levels_adventure(adventure_name: string) {
 
 export function enable_level(level: string) {
     markUnsavedChanges();
-    // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('gray-btn')) {
-        $('.adventure_level_' + level).each(function(){
-            $(this).removeClass('hidden');
-            if ($(this).is(':enabled')) {
-                $(this).prop("checked", true);
-            }
-        });
-        $('#level_button_' + level).removeClass('gray-btn');
-        $('#level_button_' + level).addClass('green-btn');
-
-        // We also have to add this level to the "Opening dates" section
-        $('#opening_date_level_' + level).removeClass('hidden');
-        $('#opening_date_level_' + level).find('input').val('');
-        $('#opening_date_level_' + level).find('input').prop({type:"text"});
-        $("#select-"+level).removeClass("hidden");
-        if ($("#disabled").hasClass('flex') && $("#disabled").val() == level) {
-          $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
-          $("#level-"+level).show({
-            start: function() {
-              $(this).addClass('flex');
-              $(this).removeClass('hidden');
-            }
-          });
-        }
+    if ($('#enable_level_' + level).is(':checked')) {
+      $('#opening_date_level_' + level).prop('disabled', false)
+                                      .attr('type', 'text')
+                                      .attr("placeholder", "Directly open")
+                                      .removeClass('bg-green-300')
+                                      .removeClass('border-green-300')
+                                      .addClass('bg-gray-200')
+                                      .addClass('border-gray-200')
     } else {
-        $('.adventure_level_' + level).each(function () {
-            $(this).prop("checked", false);
-            $(this).addClass('hidden');
-        });
-        $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('gray-btn');
-        // if this level was shown, hide it
-        if($("#level-"+level).hasClass('flex')) {
-          $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
-          $("#disabled").removeClass('hidden').addClass('flex').removeAttr('style').val(level);
-        }
-        $("#select-"+level).addClass("hidden");
-        // We also have to remove this level from the "Opening dates" section
-        $('#opening_date_level_' + level).addClass('hidden');
+      $('#opening_date_level_' + level).prop('disabled', true)
+                                       .attr('type', 'text')
+                                       .attr("placeholder", "Disabled")
+                                       .val('');
     }
+}
+
+export function test(level: string) {  
+  var date_string : string = $('#opening_date_level_' + level).val() as string;
+  var input_date = new Date(date_string);
+  var today_date = new Date();
+  if (input_date > today_date) {
+    $('#opening_date_level_' + level).removeClass('bg-gray-200')
+                                     .removeClass('border-gray-200')
+                                     .addClass('bg-green-300')
+                                     .addClass('border-green-300')
+
+  } else {
+    $('#opening_date_level_' + level).removeClass('bg-green-300')
+                                     .removeClass('border-green-300')
+                                     .addClass('bg-gray-200')
+                                     .addClass('border-gray-200');
+  }
 }
 
 export function add_account_placeholder() {
@@ -757,6 +745,10 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
             backToClass();
         }
       });
+
+      $('[id^=opening_date_level_]').each(function() {
+        test($(this).attr('level')!);
+      })
 
       drag_list(document.getElementById("sortadventures"));
 
