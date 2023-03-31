@@ -19,7 +19,7 @@
 
     <!-- Card 1 Progress indicator  -->
     <div class="flex justify-center">
-        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg dark:bg-neutral-700" id="card1_progress">
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress">
             <h2 class="text-center">Progress Indicator</h2>
             <img class="w-full" src="/images/progress.png">
         </div>
@@ -32,7 +32,7 @@
                   Student List
                 </h2>
                 <!-- Card 2 Student List    -->
-                <div class="rounded-lg bg-blue-200 shadow-lg dark:bg-neutral-700 p-6 h-60 overflow-auto" id="card2_list">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-60 overflow-auto" id="card2_list">
                     <div class="w-full text-left">
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
@@ -51,16 +51,14 @@
                   Students who are struggling
                 </h2>
                 <!-- Card 3 Misconceptions feed -->
-                <div class="rounded-lg bg-blue-200 shadow-lg dark:bg-neutral-700 p-6 h-60 overflow-auto" id="card3_misconceptions">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-60 overflow-auto" id="card3_misconceptions">
                   <div class="w-full text-left">
-                      <ul class="max-w-md space-y-1 list-none list-inside dark:text-gray-400">
+                      <ul class="max-w-md space-y-1 list-none list-inside">
+                          <li class="border-solid border-2 border-black rounded p-2 hover:bg-red-500 !important cursor-pointer">Test</li>
                           {{ insert_struggle_list_item('Enrico needs help at Lv. 1') }}
                           {{ insert_struggle_list_item('Jantje needs help at Lv. 1') }}
                           {{ insert_struggle_list_item('2 People need help') }}
                       </ul>
-                      <p class="list_elem">
-                        Test
-                      </p>
                   </div>
                 </div>
             </div>
