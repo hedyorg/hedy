@@ -36,7 +36,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
-                     cdn, classes, database, for_teachers, jsonbin, parsons,
+                     cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
@@ -328,9 +328,8 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = jsonbin.MultiParseLogger(
-    jsonbin.JsonBinLogger.from_env_vars(),
-    jsonbin.S3ParseLogger.from_env_vars())
+parse_logger = s3_logger.MultiParseLogger(
+    s3_logger.S3ParseLogger.from_env_vars())
 querylog.LOG_QUEUE.set_transmitter(
     aws_helpers.s3_querylog_transmitter_from_env())
 
