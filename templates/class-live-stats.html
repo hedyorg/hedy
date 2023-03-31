@@ -5,44 +5,60 @@
 {% block regular_content %}
 
 <div>
+    <!--  Back to class button  -->
     <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
       {{_('back_to_class')}}
     </button>
 
+    <!-- Title  -->
     <div class="flex flex-col gap-4">
         <div class="font-bold font-slab text-sky-600 text-2xl">
             <h1>RADboard</h1>
         </div>
     </div>
 
+    <!-- Card 1 Progress indicator  -->
     <div class="flex justify-center">
-      <div
-        class="block max-w-7xl rounded-lg bg-blue-200 p-6 shadow-lg dark:bg-neutral-700">
-        <h2 class="text-center">
-          Progress Indicator
-        </h2>
-      <img class="w-full" src="/images/progress.png">
-      </div>
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg dark:bg-neutral-700" id="card1_progress">
+            <h2 class="text-center">Progress Indicator</h2>
+            <img class="w-full" src="/images/progress.png">
+        </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
-        <div class="flex justify-center" id="col1">
-          <div
-            class="block max-w-7xl rounded-lg bg-blue-200 p-6 shadow-lg dark:bg-neutral-700">
-            <h2 class="text-center">
-              Student List
-            </h2>
-              <p>Test</p>
-          </div>
-        </div>
-        <div class="flex justify-center" id="col2">
-          <div
-            class="block max-w-7xl rounded-lg bg-blue-200 p-6 shadow-lg dark:bg-neutral-700">
-            <h2 class="text-center">
-              Students who are struggling
-            </h2>
-              <p>Test</p>
-          </div>
+    <div class="justify-center w-full max-w-8xl">
+        <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
+            <div id="col1">
+                <h2 class="text-center">
+                  Student List
+                </h2>
+                <!-- Card 2 Student List    -->
+                <div class="rounded-lg bg-blue-200 shadow-lg dark:bg-neutral-700 p-6 h-60 overflow-auto" id="card2_list">
+                    <div class="w-full">
+                        <div class="text-left overflow-auto">
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
+                              tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
+                              Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec
+                              nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper.
+                              Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue.
+                              Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue.
+                          </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="col2">
+                <h2 class="text-center">
+                  Students who are struggling
+                </h2>
+                <!-- Card 3 Misconceptions feed    -->
+                <div class="rounded-lg bg-blue-200 shadow-lg dark:bg-neutral-700 p-6 h-60 overflow-auto" id="card3_misconceptions">
+                  <div class="w-full">
+                      <p class="text-left">Lorem ipsum</p>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
 
