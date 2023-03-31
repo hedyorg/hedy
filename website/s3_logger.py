@@ -4,11 +4,13 @@ from . import aws_helpers, log_queue
 
 logger = logging.getLogger(__name__)
 
+
 class NullLogger:
     """A logger that doesn't actually do anything."""
 
     def log(self, obj):
         pass
+
 
 class S3ParseLogger:
     """A logger that logs to S3.
@@ -25,6 +27,7 @@ class S3ParseLogger:
 
     def log(self, obj):
         S3_LOG_QUEUE.add(obj)
+
 
 S3_LOG_QUEUE = log_queue.LogQueue("parse", batch_window_s=300)
 S3_LOG_QUEUE.try_load_emergency_saves()
