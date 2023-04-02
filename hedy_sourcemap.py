@@ -1,3 +1,4 @@
+import json
 import re
 from os import path
 
@@ -96,8 +97,12 @@ class SourceMap:
         self.map.clear()
 
     def get_response_object(self):
-        # We can use this to return an optimized object for the front-end
-        pass
+        response_map = dict()
+
+        for hedy_source_code, python_source_code in self.map.items():
+            response_map[str(hedy_source_code.source_range)] = str(python_source_code.source_range)
+
+        return response_map
 
     def print_source_map(self, d, indent=0):
         for key, value in d.items():

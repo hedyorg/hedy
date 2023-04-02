@@ -2571,7 +2571,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
 
 
 def transpile(input_string, level, lang="en"):
@@ -3044,8 +3044,7 @@ def transpile_inner(input_string, level, lang="en"):
             python = uses_pygame.post_process_code(python)
 
         source_map.set_python_output(python)
-        print(source_map)
-        return ParseResult(python, has_turtle, has_pygame)
+        return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.

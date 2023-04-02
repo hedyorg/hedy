@@ -486,6 +486,7 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
+            response['source_map'] = transpile_result.source_map
 
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
