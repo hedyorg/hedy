@@ -13,6 +13,7 @@ export interface TabEvents {
 export interface TabOptions {
   readonly initialTab?: string;
 }
+
 /**
  * Tabs
  *
@@ -33,6 +34,7 @@ export interface TabOptions {
  */
 export class Tabs {
   private _currentTab: string = '';
+  private revealed = new Set<string>();
 
   private tabEvents = new EventEmitter<TabEvents>({
     beforeSwitch: true,
@@ -68,6 +70,7 @@ export class Tabs {
 
   public switchToTab(tabName: string) {
     const doSwitch = () => {
+      const oldTab = this._currentTab;
       this._currentTab = tabName;
 
       // Do a 'replaceState' to add a '#anchor' to the URL
@@ -89,7 +92,16 @@ export class Tabs {
       allTargets.addClass('hidden');
       target.removeClass('hidden');
 
-      this.tabEvents.emit('afterSwitch', { oldTab: this._currentTab, newTab: tabName });
+      this.tabEvents.emit('afterSwitch', { oldTab, newTab: tabName });
+
+      // Emit some events that can be used by HTMX
+      // tab:firstReveal -- only do this once
+      if (!this.revealed.has(tabName)) {
+        target[0].dispatchEvent(new Event('tab:firstReveal'));
+        this.revealed.add(tabName);
+      }
+      // tab:reveal -- do this every time
+      target[0].dispatchEvent(new Event('tab:reveal'));
     }
 
     // We don't do a beforeSwitch event for the very first tab switch
