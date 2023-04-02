@@ -64,18 +64,15 @@ class SourceMap:
 
     def set_python_output(self, python_code):
         self.python_code = python_code
-        previous_start_index = 0
 
         for hedy_source_code, python_source_code in self.map.items():
-            start_index = python_code.find(python_source_code.code, previous_start_index)
+            start_index = python_code.find(python_source_code.code)
             start_line = python_code[0:start_index].count('\n') + 1
 
             code_char_length = len(python_source_code.code)
             end_index = start_index + code_char_length
             code_line_length = python_code[start_index:end_index].count('\n')
             end_line = start_line + code_line_length
-
-            previous_start_index += code_char_length
 
             python_source_code.source_range = SourceRange(
                 start_line, start_index, end_line, end_index
