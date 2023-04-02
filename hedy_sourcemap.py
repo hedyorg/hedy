@@ -57,7 +57,7 @@ class SourceMap:
         with open(path.join(script_dir, "grammars-Total", "level18.en-Total.lark"), "r", encoding="utf-8") as file:
             grammar_text = file.read()
 
-        self.grammar_rules = re.findall('(\w+):', grammar_text)
+        self.grammar_rules = re.findall(r"(\w+):", grammar_text)
 
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
