@@ -42,15 +42,12 @@ adventures:
                 story_text: |
                     ## 'Comillas'
                     En el nivel 4 `{ask}` y `{print}` han cambiado.
-
                     Debes poner el texto que quieres imprimir entre comillas.
-
                     Esto es útil porque ahora puedes imprimir todas las palabras que quieras. También las palabras que usaste para guardar algo con `{is}`.
-
                     La mayoría de lenguajes de programación usan comillas para imprimir, ¡entonces nos estamos acercando cada vez más a programación de verdad!
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
-                story_text_2: "## Contracciones\nImportante! Recuerda que como estamos usando comillas, Hedy se confunde cuando utilizamos el apóstrofo para contracciones como I'm o What's. Asegúrate que quites estos apóstrofes y cambies las palabras a I am o What is.\nDirígete a los ejemplos de código para ver el mal uso de los apóstrofes.\n"
+                story_text_2: "## Contracciones\nImportante! Recuerda que como estamos usando comillas, Hedy se confunde cuando utilizamos el apóstrofo para contracciones como I'm o What's. \nAsegúrate que quites estos apóstrofes y cambies las palabras a I am o What is.\nDirígete a los ejemplos de código para ver el mal uso de los apóstrofes.\n"
                 example_code_2: "```\n_ Así es como no se debería usar los apostrofes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
@@ -128,9 +125,12 @@ adventures:
                 start_code: "{for} contador {in} {range} 1 {to} 5\n    {print} contador"
                 story_text: '## Bucles
 
-                    `{print}` funciona igual pero añadimos una nueva forma del `{for}`. Ahora puedes escribir `{for} counter {in} {range} 1 {to} 5` en vez de `{repeat} 5 {times}` y utilizar `counter` en tu programa.
+                    En este nivel, añadimos una nueva forma para el `{for}`. En anteriores niveles, usabamos `{for}` con una lista, pero tambien podemos usar  `{for}` con numeros.
 
-                    ¡Pruébalo para ver qué pasa! Recuerda usar indentaciones después de las instrucciones `{for}` y `{if}` (Eso significa empezar una línea con cuatro espacios).'
+                    Hacemos eso añadiendo un nombre para la variable, seguida de `{in}` `{range}`. Despues ecribimos el numero para comenzar at, se utiliza `{to}` y el numero para terminar at.
+
+
+                    Prueba el ejemplo para ver lo que ocurre! Nuevamente en este nivel, deberá usar sangrías en las líneas debajo de las declaraciones `{for}`.'
                 example_code: "```\n{for} contador {in} {range} 1 {to} 5\n    {print} contador\n```\n"
             12:
                 start_code: "{print} 'los números decimales ahora necesitan usar un punto'\n{print} 2.5 + 2.5"
@@ -146,7 +146,7 @@ adventures:
                 example_code_5: "```\npuntuacion = 25\n{print} 'Tu puntación es ' puntuacion \n```\n"
             13:
                 start_code: "nombre = {ask} '¿Cuál es tu nombre?'\nedad = {ask} '¿Cuántos años tienes?'\n{if} nombre {is} 'Hedy' {and} edad {is} 2\n    {print} '¡Eres la verdadera Hedy!'"
-                story_text: "## Y... O..?\n¡Ahora vamos a aprender sobre `{and}` y `{or}`! Si quieres comprobar dos condiciones, no necesitas utilizar dos {if} sino que puedes utilizar `{and}` y `{or}`. Si utilizas `{and}`, ambas condiciones, a derecha e izquierda del `{and}`, deberán ser ciertas. También puedes utilizar `{or}`, en cuyo caso solo una debe ser cierta."
+                story_text: "## Y... O..?\n¡Ahora vamos a aprender sobre `{and}` y `{or}`! Si quieres comprobar dos condiciones, no necesitas utilizar dos`{if}` si no que puedes utilizar `{and}` y `{or}`. \n\nSi utilizas `{and}`, ambas condiciones, a derecha e izquierda del `{and}`, deberán ser ciertas. También puedes utilizar `{or}`, en cuyo caso solo una debe ser cierta."
                 example_code: "```\nname = {ask} '¿Cuál es tu nombre?'\nage = {ask} '¿Qué edad tienes?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} '¡Eres la verdadera Hedy!'\n```\n"
             14:
                 start_code: "age = {ask} '¿Qué edad tienes?'\n{if} age < 13\n    {print} '¡Eres más joven que yo!'\n{else}\n    {print} '¡Eres mayor que yo!'"
@@ -162,15 +162,15 @@ adventures:
                 example_code: "```\nrespuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} '¿Cuánto es 5 por 5?'\n{print} 'Una respuesta correcta ha sido dada'\n```\n"
             16:
                 start_code: "fruta = ['manzana', 'banana', 'cereza']\n{print} fruta"
-                story_text: "## ¡Cada vez nos acercamos más al código profesional!\nVamos a hacer listas como en Python, ¡con corchetes ('[]') alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista."
+                story_text: "## ¡Cada vez nos acercamos más al código profesional!\nVamos a hacer listas como en Python, ¡con corchetes ('[]') alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista. El comando {at} no puede ser usado mas."
                 example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
-                story_text: "## Elif\nAhora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de {else} {if} y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
+                story_text: "## {elif}\nAhora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de `{else}` `{if}` y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
                 example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
-                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
+                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con `{print}` y `{range}` de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
                 story_text_2: Si quieres mostrar por pantalla mas de un elemento, debes separarlos con comas.
                 example_code_2: "```\ntemperatura = 25\n{print}('Hace ', temperatura, ' grados afuera')\n```\n"
                 story_text_3: "## Input\nEl último cambio que necesitaremos para escribir en Python es cambiar `{ask}` por `{input}`."
@@ -200,7 +200,7 @@ adventures:
                     ```
 
                 start_code: "{print} Aquí comienza tu historia"
-                story_text_2: "## Desafío\n¿Puedes crear tu propia historia en Hedy utilizando `{print}` , `{ask}` y `{echo}`?\n"
+                story_text_2: "### ejercicio\nAhora crea tu propia historia de un minimo de 6 lineas de codigo.\nEsta historia no puede ser la misma que el codigo de ejemplo.\nUtiliza minimo un comando `{ask}` y un comando `{echo}`.\nLo puedes hacer sobre cualquier tema que quieras.\nSi no se te ocurre ningun tema, usa uno de estos: en el cine, un partido o un día en el zoologico.\n"
             2:
                 story_text: |
                     ## Una historia
@@ -209,9 +209,6 @@ adventures:
                     Para eso debes realizar un poquito más de programación. Debes dar primero un nombre al protagonista de tu historia.
 
                     Puedes luego usar este nombre en las oraciones que siguen.
-
-                    ## Desafío
-                    ¿Puedes crear una historia con una variable? ¿Puedes añadir aún más variables?
                 example_code: |-
                     ```
                     nombre {is} {ask} Cómo se llama el protagonista?
@@ -223,7 +220,7 @@ adventures:
                     ```
 
                 start_code: "{print} Aquí viene tu historia"
-                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
+                story_text_2: "### Ejercicio\nAhora es momento de añadir variables a la historia que hiciste en el nivel anterior.\nve a 'Mis Programas', busca tu historia del nivel 1 y copia el codigo. Pegua el código en tu pantalla de entrada en este nivel.\n\nEste codigo no funcionará en este nivel por que no has usado variables aún.\nCambia los comandos `{ask}` y los comandos `{echo}` en tu codigo a la forma correcta que aprendiste en este nivel.\n\n**Extra** añade un comando de suspensión a tu codigo para crear tension en la historia.\n"
             7:
                 story_text: |
                     ## Historia
@@ -231,7 +228,8 @@ adventures:
                     Eso lo puedes hacer ahora en el nivel 6 usando `{repeat}`.
 
                     ### Desafío
-                    Añade repetición a tu propia historia. En tu carpeta de historias guardadas, abre la del Nivel 6, encuentra una línea que contenga {print} y repítela.
+                    Añade repetición a tu propia historia. En tu carpeta de historias guardadas, abre la del Nivel 6, 
+                    encuentra una línea que contenga `{print}` y repítela.
                 example_code: |
                     ```
                     {print} 'La princesa grita pidiendo ayuda'
@@ -244,17 +242,19 @@ adventures:
                 story_text: |
                     ##Historia
                     En este nivel puedes programar distintos finales, lo que hará que tu historia sea aún más interesante.
+                    En el codigo de ejemplo puedes ver como hacer 2 finales diferentes.
 
-                    ## Desafío
-                    Escribe una historia con dos finales, por ejemplo:
+                    ### Ejercicio 1
+                    Escribe una nueva historia con 6 lineas de codigo por lo menos, sobreun tema de tu elección.
+                    Sin inspiración? Escoje uno de estos temas: un superheroe, un día aburrido en la escuela, varado en una isla desierta.
 
-                    - La princesa camina por el bosque
-                    - Ella se topa con un monstruo
+                    Ahora dale al jugador la oportunidad de esoger una final bueno o malo, como en el codigo de ejemplo.
+                    Programa ambos finales.
 
-                    - Final feliz: Ella desenfunda su espada y el monstruo se va corriendo
-                    - Final triste: El monstruo se come a la princesa
-
-                    También puedes asegurarte de que sea posible introducir un nombre de nuevo. Eso sigue funcionando igual que en niveles anteriores. Puedes combinar eso con un `{if}`, y con ello habrás creado un programa entero.
+                    ### Ejercicio 2
+                    copia la historia que has creado en los nieles anteriores.
+                    Encuentra una forma de añadir por lo menos 2 comandos `{if}` y 2 comandos `{else}` a tu historia.
+                    Estos pueden ser finales buenos o malos, pero puedes buscar otras formas de incorporar los comandos.
                 example_code: |
                     ```
                     nombre {is} {ask} '¿Quién camina por el bosque?'
@@ -270,9 +270,16 @@ adventures:
                     ## Una historia
                     Quizá te hayas dado cuenta que aún hay un problema en los niveles anteriores. ¿Has intentado mostrar por pantalla una frase que contenga la palabra nombre? por ejemplo `{print}` mi nombre es nombre.
                     Puedes solucionar ese problema en este nivel. Debes utilizar comillas para todo lo que quieras mostrar por pantalla.
+
+                    ### Ejercicio
+                    Copia el codigo de ejemplo y hazlo funcionar añadiendo comillas en las lineas .
+
+                    ### Ejercicio 2
+                    Ve al nivel anterior y copia el codigo de tu historia. Haz funcionar el codigo en esta historia añadiendo comillas en los lugares correctos.
+                    Recuerda: Las variables en tu propia historia tienen que estar fuera de las comillas. Como en la segunda linea de el codigo de ejemplo. En esa linea el nombre de la variable esta situado fuera de las comillas.
                 example_code: |
                     ```
-                    nombre {is} Carlos
+                    nombre {is}{ask} _Cual es tu nombre_
                     {print}  _ El protagonista de esta historia es _ nombre
                     {print} nombre  _ está caminando por el bosque _
                     {print} nombre _ está un poco asustado _
@@ -305,8 +312,10 @@ adventures:
                 story_text_3: |
                     Este es un ejemplo del comando `{remove}` en tu historia
 
-                    ## Desafío
-                    ¿Puedes utilizar los 3 nuevos comandos `{at} {random}` , `{add} {to}` y `{remove} {from}` en tu historia?
+                    ### Desafío
+                    Copia tu historia the los niveles anteriores en este nivel.
+                    En este nivel aprendiste tres nuevos comandos `{at} {random}` , `{add} {to}` y `{remove} {from}`.
+                    Añade nuevas lineas de codigo a tu historia para que todos los nuevos comandos estén por lo menos una vez en tu codigo.
                 example_code_3: |
                     ```
                     {print} Su mochila se hizo muy pesada.
@@ -316,15 +325,15 @@ adventures:
                     {remove} botar {from} bolso
                     ```
             9:
-                story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos `{if}`, `{repeat}` o `{for}` dentro de otros comandos `{if}`, `{repeat}` o `{for}`. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
+                story_text: "## Historia\nEn este nivel puedes usar los comandos `{if}` y `{repeat}`  dentro de otros comandos `{if}` y `{repeat}`.\nEsto te da muchas opciones y te ayuda a hacer tu historia mas interactiva.\n\n### Ejercicio 1\nTermina el codigo de forma que `{if}` funcione correctamente.\n\n### Ejercicio 2\nAgrega un comando `{if}` y `{else}` en la parte que Robin va a casa tambien.\n\n### Ejercicio 3\nVuelve a tu historia del nivel 8 y usa por lo menos dos `{if}` dentro de otro`{if}`\n"
                 example_code: "```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
                 start_code: '# coloca tú código aquí'
             12:
-                story_text: "## Historia\nEn este nivel puedes usar las comillas para almacenar múltiples palabras en una variable."
+                story_text: "## Historia\nEn este nivel puedes usar las comillas para almacenar múltiples palabras en una variable.\n\n### Ejercicio\n\nEncuentra una historia de un nivel anterior, cualquier nivel esta bien. Ahora asegurate que las comillas estén en el lugar correcto."
                 example_code: "```\nnombre = 'La Reina de Inglaterra'\n{print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'\n```\n"
                 start_code: '# coloca tu código aquí'
             8:
-                story_text: "## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos {if}, de esta manera puedes mejorar tu final triste o feliz.\n\n## Desafío 1\nEl código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta los espacios vacíos con al menos una frase por final. \n**(extra)** Haz la historia más larga. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n###Desafío 2\nVuelve a tus historias guardadas y escoge la del Nivel 5. Escribe un final bueno y uno malo de al menos tres líneas cada uno. \n"
+                story_text: "`{if}`## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos `{if}`, de esta manera puedes mejorar tu final triste o feliz.\n\n### Ejercicio 1\nEl código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta los espacios vacíos con al menos una frase por final. \n**(extra)** Haz la historia más larga. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n### Ejercicio 2\nVuelve a tus historias guardadas y escoge la del Nivel 5. Escribe un final bueno y uno malo de al menos tres líneas cada uno.\n"
                 example_code: "```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} _\n{else}\n    {print} '¡Oh, no! Richard es demasiado lento...\n    {print} _\n```\n"
                 start_code: '# coloca tu código aquí'
             15:
@@ -333,10 +342,10 @@ adventures:
                 start_code: '# coloca tú código aquí'
             13:
                 example_code: "```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} camino {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            juego = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
-                story_text: "## Historia\nUsando los comandos `{and}` y `{or}` puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n\n## Desafío\n¿Puedes hacer tu propio mini-juego de aventura?\n"
+                story_text: "## Historia\nUsando los comandos `{and}` y `{or}` puedes hacer tus historias mas versátiles. Puedes hacer dos preguntas y responder a la combinación de respuestas.\n\n### Ejercicio 1\nMira el codigo de ejemplo de este nivel y completalo. Luego añade por lo menos 2 `{if}` con `{and}` o `{or}`.\n\n### Ejercicio 2\nEncuentra una historia de un nivel anterior y añade un `{and}` o `{or}`.\n"
                 start_code: '# coloca tu código aquí'
             10:
-                story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
+                story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n\n\n### Ejercicio\n\nmira en <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> la historia </a> si no la conoces, asegurate que este igual que el libro.\n"
                 example_code: "```\nanimales = _ , _ , _ \n{print} 'Oso pardo, Oso pardo'\n{print} '¿Qué ves?'\n```\n"
                 start_code: '# coloca tu código aquí'
             18:
