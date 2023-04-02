@@ -1,3 +1,6 @@
+import re
+from os import path
+
 
 class SourceRange:
     def __init__(self, from_line, from_character, to_line, to_character):
@@ -47,6 +50,14 @@ class SourceMap:
     map = dict()
     hedy_code = ''
     python_code = ''
+
+    def __init__(self):
+        script_dir = path.abspath(path.dirname(__file__))
+
+        with open(path.join(script_dir, "grammars-Total", "level18.en-Total.lark"), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+
+        self.grammar_rules = re.findall('(\w+):', grammar_text)
 
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
@@ -125,7 +136,7 @@ def source_map_rule(source_map: SourceMap):
 def source_map_transformer(source_map: SourceMap):
     def decorate(cls):
         for rule in cls.__dict__:
-            if rule == 'command' and callable(getattr(cls, rule)):
+            if rule in source_map.grammar_rules:
                 setattr(cls, rule, source_map_rule(source_map)(getattr(cls, rule)))
         return cls
 
