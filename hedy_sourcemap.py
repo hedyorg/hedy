@@ -52,9 +52,7 @@ class SourceMap:
     python_code = ''
 
     def __init__(self):
-        script_dir = path.abspath(path.dirname(__file__))
-
-        with open(path.join(script_dir, "grammars-Total", "level18.en-Total.lark"), "r", encoding="utf-8") as file:
+        with open("./grammars-Total/level18.en-Total.lark", "r", encoding="utf-8") as file:
             grammar_text = file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
