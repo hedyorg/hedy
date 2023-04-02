@@ -52,10 +52,14 @@ class SourceMap:
     python_code = ''
 
     def __init__(self):
-        script_dir = path.abspath(path.dirname('hedy.py'))
+        script_dir = path.abspath(path.dirname(__file__))
 
-        with open(path.join(script_dir, "grammars-Total", "level18.en-Total.lark"), "r", encoding="utf-8") as file:
+        with open(path.join(script_dir, "grammars", "level1.lark"), "r", encoding="utf-8") as file:
             grammar_text = file.read()
+
+        for i in range(2, 19):
+            with open(path.join(script_dir, "grammars", f'level{i}-Additions.lark'), "r", encoding="utf-8") as file:
+                grammar_text += '\n' + file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
 
