@@ -3,7 +3,7 @@
     <head>
         <title>{% if page_title %}{{page_title}}{% else %}Hedy{% endif %}</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
-        <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+        <link rel="stylesheet" href="{{static(generated_css_file)}}">
         <link rel="stylesheet" href="{{static('/css/additional.css')}}">
         <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
         <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
@@ -29,6 +29,7 @@
             </div>
         </div>
         <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="{{static('/vendor/knockout-3.5.1.js')}}" type="text/javascript" crossorigin="anonymous"></script>
         <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
         <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
         <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>

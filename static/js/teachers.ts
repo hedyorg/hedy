@@ -24,7 +24,7 @@ export function create_class(class_name_prompt: string) {
         window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -46,7 +46,7 @@ export function rename_class(id: string, class_name_prompt: string) {
             location.reload();
           }
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -69,7 +69,7 @@ export function duplicate_class(id: string, prompt: string) {
             location.reload();
           }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -88,7 +88,7 @@ export function delete_class(id: string, prompt: string) {
         location.reload();
       }
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -116,7 +116,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ClientMessages['Connection_error'], 3000, true);
+          modal.notifyError(ClientMessages['Connection_error']);
       }
     });
 }
@@ -135,7 +135,7 @@ export function invite_student(class_id: string, prompt: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          modal.alert(err.responseText, 3000, true);
+          modal.notifyError(err.responseText);
       });
     });
 }
@@ -154,7 +154,7 @@ export function remove_student_invite(username: string, class_id: string, prompt
       }).done(function () {
           location.reload();
       }).fail(function (err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
       });
   });
 }
@@ -173,7 +173,7 @@ export function remove_student(class_id: string, student_id: string, prompt: str
           location.reload();
       }
     }).fail(function(err) {
-        modal.alert(err.responseText, 3000, true);
+        modal.notifyError(err.responseText);
     });
   });
 }
@@ -191,7 +191,7 @@ export function create_adventure(prompt: string) {
         }).done(function(response) {
           window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -203,12 +203,6 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
-   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
-   // The values in this case are the class id's for which we need to update the class customizations
-   let classes = new Array();
-   $(".customize_adventure_class_checkbox:checked").each(function () {
-     classes.push($(this).val());
-   });
 
     $.ajax({
       type: 'POST',
@@ -218,15 +212,14 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      modal.alert (response.success, 3000, false);
+      modal.notifySuccess(response.success);
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -279,7 +272,7 @@ export function preview_adventure() {
     }).done(function (response) {
         show_preview(response.code);
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -293,7 +286,7 @@ export function delete_adventure(adventure_id: string, prompt: string) {
         }).done(function () {
             window.location.href = '/for-teachers';
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -311,9 +304,9 @@ export function change_password_student(username: string, enter_password: string
               contentType: 'application/json',
               dataType: 'json'
             }).done(function (response) {
-              modal.alert(response.success, 3000, false);
+              modal.notifySuccess(response.success);
             }).fail(function (err) {
-              modal.alert(err.responseText, 3000, true);
+              modal.notifyError(err.responseText);
             });
         });
     });
@@ -370,7 +363,7 @@ export function save_customizations(class_id: string) {
         }
     });
     let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('#sortadventures').children().each(function() {
+    $('[id^=level-]').each(function() {
         const id = $(this).attr('id')!;
         const level = id.split('-')[1]!;
         sorted_adventures[level] = [];
@@ -398,11 +391,11 @@ export function save_customizations(class_id: string) {
       if (response.achievement) {
           showAchievements(response.achievement, false, "");
       }
-      modal.alert(response.success, 3000, false);
+      modal.notifySuccess(response.success);
       clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -427,7 +420,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
             $('.opening_date_input').val('');
-            $('#sortadventures').children().each(
+            $('[id^=level-]').each(
               function() {
                 $(this).empty();
                 const level = $(this).attr('id')!.split('-')[1];
@@ -450,9 +443,9 @@ export function remove_customizations(class_id: string, prompt: string) {
             for (let i = 0; i < teacher_adventures.length; i++) {
               available_adventures[teacher_adventures![i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
             }
-            modal.alert(response.success, 3000, false);
+            modal.notifySuccess(response.success);
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -476,14 +469,14 @@ export function select_all_levels_adventure(adventure_name: string) {
 export function enable_level(level: string) {
     markUnsavedChanges();
     // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('blue-btn')) {
+    if ($('#level_button_' + level).hasClass('gray-btn')) {
         $('.adventure_level_' + level).each(function(){
             $(this).removeClass('hidden');
             if ($(this).is(':enabled')) {
                 $(this).prop("checked", true);
             }
         });
-        $('#level_button_' + level).removeClass('blue-btn');
+        $('#level_button_' + level).removeClass('gray-btn');
         $('#level_button_' + level).addClass('green-btn');
 
         // We also have to add this level to the "Opening dates" section
@@ -491,19 +484,14 @@ export function enable_level(level: string) {
         $('#opening_date_level_' + level).find('input').val('');
         $('#opening_date_level_' + level).find('input').prop({type:"text"});
         $("#select-"+level).removeClass("hidden");
-        let shown : boolean = false;
-        $("div.adventures-tab").each(function() {
-          if($(this).attr('style') === "display: flex;") {
-            shown = true;
-          }
-        });
-        // if no level is shown, it means current level was the one selected
-        if (!shown) {
+        if ($("#disabled").hasClass('flex') && $("#disabled").val() == level) {
+          $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
           $("#level-"+level).show({
             start: function() {
-                $(this).css('display', 'flex');
+              $(this).addClass('flex');
+              $(this).removeClass('hidden');
             }
-        });
+          });
         }
     } else {
         $('.adventure_level_' + level).each(function () {
@@ -511,10 +499,11 @@ export function enable_level(level: string) {
             $(this).addClass('hidden');
         });
         $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('blue-btn');
+        $('#level_button_' + level).addClass('gray-btn');
         // if this level was shown, hide it
-        if($("#level-"+level).attr('style') === "display: flex;") {
-          $("div.adventures-tab").hide();
+        if($("#level-"+level).hasClass('flex')) {
+          $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
+          $("#disabled").removeClass('hidden').addClass('flex').removeAttr('style').val(level);
         }
         $("#select-"+level).addClass("hidden");
         // We also have to remove this level from the "Opening dates" section
@@ -591,7 +580,7 @@ export function create_accounts(prompt: string) {
             dataType: 'json'
         }).done(function (response) {
             if (response.error) {
-                modal.alert(response.error, 3000, true);
+                modal.notifyError(response.error);
                 $('#account_rows_container').find(':input').each(function () {
                     if ($(this).val() == response.value) {
                         $(this).addClass('border-2 border-red-500');
@@ -599,7 +588,7 @@ export function create_accounts(prompt: string) {
                 });
                 return;
             } else {
-                modal.alert(response.success, 3000, false);
+                modal.notifySuccess(response.success);
                 if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
                     download_login_credentials(accounts);
                 }
@@ -608,7 +597,7 @@ export function create_accounts(prompt: string) {
                 });
             }
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -640,7 +629,7 @@ export function copy_join_link(link: string, success: string) {
     sampleTextarea.select();
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
-    modal.alert(success, 3000, false);
+    modal.notifySuccess(success);
 }
 
 // https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
@@ -715,7 +704,7 @@ export interface InitializeTeacherPageOptions {
 
 export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   if (options.welcome_teacher) {
-    modal.alert(ClientMessages.teacher_welcome);
+    modal.notifySuccess(ClientMessages.teacher_welcome, 30_000);
   }
   if (options.tutorial) {
     startTeacherTutorial();
@@ -771,20 +760,21 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
       drag_list(document.getElementById("sortadventures"));
 
-      $('#adventures').on('change', function(){
+      $('#levels-dropdown').on('change', function(){
           var level = $(this).val() as string;
-          $("div.adventures-tab").hide();
+          $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
+          if ($("#disabled").hasClass('flex')) {
+            $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
+          }
           $("#level-"+level).show({
               start: function() {
-                  $(this).css('display', 'flex');
+                  $(this).addClass('flex');
+                  $(this).removeClass('hidden');
               }
           });
-          $('#available').empty();
-          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-          const adventures = available_adventures[level];
-          for(let i = 0; i < adventures.length; i++) {
-            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-          }
+
+          addAllAvailableAdventures(level);
+
           drag_list(document.getElementById("level-"+level));
       });
 
@@ -807,7 +797,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           const adventure = values[0];
           const level = values[1]
           const from_teacher = values[2] === "true";
-          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
+          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there
           const adventure_div =
           `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
               <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
@@ -820,5 +810,41 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           drag_list(document.getElementById("level-"+level));
           markUnsavedChanges();
       });
+
+      addAllAvailableAdventures($('#levels-dropdown').val() as string);
+  });
+
+  /**
+   * Put all available adventures into the dropdown
+   *
+   * They get removed from this list later on in some way that I don't quite get.
+   */
+  function addAllAvailableAdventures(level: string) {
+    $('#available').empty();
+    $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+    const adventures = available_adventures[level];
+    for(let i = 0; i < adventures.length; i++) {
+      $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
+    }
+  }
+}
+
+/**
+ * These will be copied into global variables, because that's how this file works...
+ */
+export interface InitializeClassOverviewPageOptions {
+  readonly page: 'class-overview';
+}
+
+export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
+  $('.attribute').change(function() {
+    const attribute = $(this).attr('id');
+    if(!(this as HTMLInputElement).checked) {
+        $('#' + attribute + '_header').hide();
+        $('.' + attribute + '_cell').hide();
+    } else {
+        $('#' + attribute + '_header').show();
+        $('.' + attribute + '_cell').show();
+    }
   });
 }

@@ -27,7 +27,7 @@ export function startQuiz(level: number) {
     }).done(function() {
         loadQuizQuestion(level, 1);
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -64,7 +64,7 @@ export function loadQuizQuestion(level: number, question: number) {
         highlightQuestionBar(question);
         loadHint(response.hint);
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -168,7 +168,7 @@ export function answerQuestion(answer_number: number) {
             updateHeader(question || "", false);
         }
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -242,7 +242,7 @@ export function showQuizResults(level: number) {
             showAchievements(response.achievements, false, "");
         }
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
