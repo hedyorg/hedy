@@ -131,7 +131,8 @@ class AdminModule(WebsiteModule):
         classes = [
             {
                 "name": Class.get("name"),
-                "teacher": self.db.user_by_username(Class.get("teacher")).get("email"), # replace email by username for easier communication
+                # replace email by username for easier communication
+                "teacher": self.db.user_by_username(Class.get("teacher")).get("email"),
                 "created": utils.localized_date_format(Class.get("date")),
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
@@ -139,7 +140,6 @@ class AdminModule(WebsiteModule):
             }
             for Class in self.db.all_classes()
         ]
-
 
         classes = sorted(classes, key=lambda d: d.get("stats").get("week").get("runs"), reverse=True)
 
