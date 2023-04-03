@@ -149,6 +149,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'rock',
         'dice',
+        'turtle',
         'songs',
         'story',
         'calculator',
