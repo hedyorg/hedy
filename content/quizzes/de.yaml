@@ -2714,9 +2714,9 @@ levels:
             question_score: '10'
         2:
             question_text: Welcher Befehl fehlt an der Stelle der ??? ?
-            code: "menü = 'Käse', 'Wurstbrötchen', 'Kekse'\nernährung = frage 'Haben Sie irgendwelche Ernährungseinschränkungen?'\nfalls ernährung = 'vegan' ??? ernährung = 'halal'\n    entferne 'Wurstbrötchen' aus menü"
+            code: "menü = 'Käse', 'Wurstbrötchen', 'Kekse'\nernährung = {ask} 'Haben Sie irgendwelche Ernährungseinschränkungen?'\n{if} ernährung = 'vegan' ??? ernährung = 'halal'\n    {remove} 'Wurstbrötchen' aus menü"
             mp_choice_options:
-            -   option: und
+            -   option: '`{and}`'
                 feedback: Du musst nicht vegan oder muslimisch sein
             -   option: oder
                 feedback: Großartiges Denken!
