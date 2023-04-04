@@ -1475,6 +1475,72 @@ adventures:
                     {print} 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
                     ```
                 start_code: "# Schrijf jouw code hier"
+    pressit:
+        name: Toetsaanslag
+        levels:
+            5:
+                story_text: |
+                    ## Toetsen indrukken
+                    In dit level leren we nog een commando: `{pressed}`.
+                    Met `{pressed}` kun je toetsen op het toetsenbord gebruiken om te bepalen welken stukjes code er worden uitgevoerd.
+
+                    ### Opdracht
+                     Bekijk het voorbeeld en voeg nog een regel toe die op toetsen reageert. 
+
+                example_code: |
+                    ```
+                    {print} 'Wil je een goed (g) of slecht (a) einde?'
+                    {if} g {is} {pressed} {print} 'Ze leefden nog lang en gelukkig ❤'
+                    {else} print 'De prins werd opgegeten door een nijlpaard 😭'
+                    ```
+                story_text_2: |
+                    ## Tekenen
+                    Je kan iedere code koppelen aan een toets, ook de tekenschildpad.
+
+                    ### Exercise
+                    Kopieer de regels code zodat je een grotere tekening kan maken.
+
+                example_code_2: |
+                    ```
+                    {if} y {is} {pressed} {forward} 15
+                    {else} {turn} 90
+                    ```
+                start_code: "# Jouw code komt hier"
+
+            6:
+                example_code: "```\neerste = {ask} 'Wat is jouw eerste nummer?'\ntweede = {ask} 'Wat is jouw tweede nummer?'\n{print} 'druk o voor optellen, a voor aftrekken, d voor delen of, v voor vermenigvuldigen'\n{if} o {is} {pressed} uitkomst = eerste + tweede\n{if} a {is} {pressed} uitkomst = eerste - tweede\n{if} d {is} {pressed} uitkomst = eerste / tweede\n{if} v {is} {pressed} uitkomst = eerste * tweede\n{print}'De uitkomst is ' uitkomst\n```\n"
+                start_code: '# schrijf hier jouw code'
+                story_text: "Wist jij dat je een rekenmachine kunt maken met `{pressed}`?\nGeef de rekenmachine twee getallen en gebruikt de v voor vermenigvuldigen.\nNu hoef jij jouw eigen rekenmachine niet meer mee te nemen!\nProbeer ook andere toetsen en berekeningen. Krijg je dan een andere uitkomst?\n"
+            7:
+                story_text: |
+                    ## Bestuur de schildpad
+                    Nu je `{repeat}` hebt geleerd kunnen we meerdere keren kijken of er een toets is ingedrukt. Dat kan je gebruiken om de schildpad te besturen.
+                    ### Opdracht
+                    De voorbeeldcode kijkt één keer of er een toets is ingedrukt. Pas de code aan zodat dat vaker gebeurt en maak er dan een mooie tekening meer.
+                example_code: |
+                    ```
+                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
+                    ```
+                start_code: "# schrijf jouw code hier"
+            9:
+                story_text: |
+                    ## Oefenen met blind typen
+                    We kunnen nu met `{pressed}` een programma maken om typen te oefenen.
+                    ### Opdracht
+                    Maak de code af. Er moet steeds een willekeurige letter worden gekozen. Doe je het goed dan krijg je een punt erbij, bij een foute toets gaan er twee punten af!
+                example_code: |
+                    ```
+                    punten = 1
+                    letters = a, b, c, d, e
+                    {repeat} 10 {times}
+                        letter = _ _ _
+                        {print} 'Typ de letter ' letter
+                        {if} letter {is} {pressed}
+                        _
+                        _
+                        _
+                    ```
+                start_code: "# schrijf jouw code hier"
     rock:
         name: "Steen, papier, schaar"
         description: "Maak jouw eigen steen, papier, schaar spel"
