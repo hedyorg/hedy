@@ -83,6 +83,42 @@ class StatisticsModule(WebsiteModule):
             javascript_page_options=dict(page='class-live-stats'),
         )
 
+    @route("/live_stats/class/<class_id>/student", methods=["GET"])
+    @requires_login
+    def show_student(self, user, class_id):
+        """ Shows information about an individual student when they
+        are selected in the student list.
+        """
+        class_ = self.db.get_class(class_id)
+        students = sorted(class_.get("students", []))
+
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+        if student not in students:
+            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+
+        return render_template(
+            "student-space.html",
+            class_info={"id": class_id, "students": students},
+            current_page='my-profile',
+            page_title=gettext("title_class live_statistics"),
+            javascript_page_options=dict(page='class-live-stats')
+        )
+
     @route("/logs/class/<class_id>", methods=["GET"])
     @requires_login
     def render_class_logs(self, user, class_id):

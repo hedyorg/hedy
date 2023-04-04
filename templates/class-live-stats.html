@@ -30,6 +30,10 @@
         </button>
     </div>
 
+    <!-- Space where we show individual students, otherwise empty -->
+    {% block student_space %}
+    {% endblock %}
+
 
     <div class="justify-center w-full max-w-8xl">
         <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
@@ -45,7 +49,11 @@
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
                                     <div>
-                                        <li class="p-0">{{s.username}}</li>
+                                        <li class="p-0">
+                                            <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
+                                                {{s.username}}
+                                            </a>
+                                        </li>
                                     </div>
                                 {% endfor %}
                             </ul>
@@ -54,7 +62,9 @@
                             <h4 class="pb-4">Current Level</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
-                                    {{ insert_student_list_item(s.highest_level) }}
+                                    <div>
+                                        <li class="p-0">{{s.highest_level}}</li>
+                                    </div>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -72,9 +82,9 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-64 overflow-auto" id="card3_misconceptions">
                   <div class="w-full text-left">
                       <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Student 1 needs help at Lv. 1') }}
-                          {{ insert_struggle_list_item('Student 3 needs help at Lv. 1') }}
-                          {{ insert_struggle_list_item('2 Students need help') }}
+                          {{ insert_struggle_list_item('Student 1 needs help at Lv. 1', 'They have an issue with X' ) }}
+                          {{ insert_struggle_list_item('Student 3 needs help at Lv. 1', 'They have an issue with X') }}
+                          {{ insert_struggle_list_item('2 Students need help', 'They have an issue with X') }}
                       </ul>
                   </div>
                 </div>
