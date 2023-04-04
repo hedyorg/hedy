@@ -44,8 +44,9 @@ class StatisticsModule(WebsiteModule):
 
         students = sorted(class_.get("students", []))
         return render_template(
-            "class-stats.html",
+            "new-class-stats.html",
             class_info={"id": class_id, "students": students},
+
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
             javascript_page_options=dict(page='class-stats'),
