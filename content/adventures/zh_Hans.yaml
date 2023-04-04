@@ -426,6 +426,20 @@ adventures:
         name: 洗碗？
         description: 用电脑决定谁来洗碗
         default_save_name: 洗碗
+    pressit:
+        default_save_name: 报道
+        name: 按键
+        description: 试试把键盘键和命令联系起来吧！
+        levels:
+            7:
+                story_text: "## 控制海龟\n现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。\n\n### 练习\n这个例子的代码只检查一次按键。改变代码，使你可以多次按下按键，并使用使用代码画出美丽的图案。\n"
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                start_code: '# 把你的代码放在这里'
+            9:
+                start_code: '# 把你的代码放在这里'
+                story_text: "## 触摸式游戏\n现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
+                example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+
     rock:
         levels:
             5:
