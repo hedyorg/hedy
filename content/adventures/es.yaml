@@ -778,12 +778,12 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Presionado
-                    En este nivel hay otra nueva palabra clave: `{pressed}`!
-                    Con `{pressed}` puede usar las teclas de su teclado para controlar qué líneas se usan.
+                    ## Presionada
+                    ¡En este nivel hay otra nueva palabra clave: `{pressed}`!
+                    Con `{pressed}` puedes usar las teclas de tu teclado para controlar qué líneas se usarán.
                     
                     ### Desafío
-                    Mire el ejemplo y agregue una línea más de código que reaccione al presionar una tecla.
+                    Mira el ejemplo y agrega una línea más de código que reaccione al presionar una tecla.
 
                 example_code: |
                      ```
@@ -792,22 +792,53 @@ adventures:
                      {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
                      ```
                 story_text_2: |
-                     ## Con tortuga
-                     También puede vincular los comandos de tortuga a las teclas.
+                     ## Con la tortuga
+                     También puedes enlazar los comandos de la tortuga a teclas del teclado.
 
                      ### Desafío
-                     Copie las líneas varias veces para que pueda crear un dibujo más grande.
+                     Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
 
                 example_code_2: |
                      ```
                      {if} y {is} {pressed} {forward} 15
                      {else} {turn} 90
                      ```
-                start_code: "# coloque su código aquí"
+                start_code: "# pon tu código aquí"
             7:
-                start_code: '# coloque su código aquí'
-                story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a `{pressed}` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la `{repeat}`,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
-                example_code: "```\n{repeat} 3 {times} {if} w {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                story_text: |
+                    ## Presionada
+                    Ahora que ya has aprendido acerca de `{repeat}`, podemos presionar las teclas múltiples veces.
+                    Puedes usarlo para hacer que la tortuga camine hacia adelante y gire.
+
+                    ### Ejercicio
+                    El código que viste en el nivel 5 solamente comprueba la tecla una sola vez. Copia el código de ejemplo y agregále un `{repeat}`, así podrás presionar la tecla múltiples veces.
+                    Usa este código para dibujar algo bonito.
+                example_code: |
+                    ```
+                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
+                    ```
+                start_code: "# pon tu código aquí"
+            9:
+                story_text: |
+                    ## ¡Práctica escribir a ciegas!
+                    Ahora que sabes como combinar sentencias, puedes crear una herramienta de escritura a ciegas con `{pressed}`
+                    
+                    ### Ejercicio                    
+                    Termina el código. Cada vez una letra aleatoria va a ser escogida, la cual debes presionar. Obtienes un punto cuando presionas la tecla correcta, y una deducción de dos puntos cuando presionas una tecla equivocada.
+                    **(extra)** Limpia la pantalla luego de cada letra, y muestra al usuario cuántos puntos han obtenido.
+                example_code: |
+                    ```
+                    puntos = 0
+                    letras = a, b, c, d, e
+                    {repeat} 10 {times}
+                        letra = _ _ _
+                        {print} 'Presiona la letra ' letra
+                        {if} letra {is} {pressed}
+                        _
+                        _
+                        _
+                    ```
+                start_code: "# place your code here"
     rock:
         name: "Piedra, papel o tijera"
         description: "Crea tu propio juego de piedra, papel y tijera"
