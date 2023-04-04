@@ -699,6 +699,26 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   }
 }
 
+function setLevelStateIndicator(level: string) {
+  $('[id^=level-state-]').addClass('hidden');
+          
+  if ($('#opening_date_level_' + level).is(':disabled')) {
+    $('#level-state-disabled').removeClass('hidden');
+  } else if($('#opening_date_level_' + level).val() === ''){
+    $('#level-state-accessible').removeClass('hidden');
+  } else {
+    var date_string : string = $('#opening_date_level_' + level).val() as string;
+    var input_date = new Date(date_string);
+    var today_date = new Date();
+    if (input_date > today_date) {              
+      $('#opening_date').text(date_string);
+      $('#level-state-future').removeClass('hidden');
+    } else {
+      $('#level-state-accessible').removeClass('hidden');
+    }
+  }
+}
+
 /**
  * These will be copied into global variables, because that's how this file works...
  */
@@ -764,7 +784,8 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
                   $(this).removeClass('hidden');
               }
           });
-
+          
+          setLevelStateIndicator(level);
           addAllAvailableAdventures(level);
 
           drag_list(document.getElementById("level-"+level));
