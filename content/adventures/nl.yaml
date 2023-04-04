@@ -1497,7 +1497,7 @@ adventures:
                     ## Tekenen
                     Je kan iedere code koppelen aan een toets, ook de tekenschildpad.
 
-                    ### Exercise
+                    ### Opdracht
                     Kopieer de regels code zodat je een grotere tekening kan maken.
 
                 example_code_2: |
@@ -1506,15 +1506,11 @@ adventures:
                     {else} {turn} 90
                     ```
                 start_code: "# Jouw code komt hier"
-
-            6:
-                example_code: "```\neerste = {ask} 'Wat is jouw eerste nummer?'\ntweede = {ask} 'Wat is jouw tweede nummer?'\n{print} 'druk o voor optellen, a voor aftrekken, d voor delen of, v voor vermenigvuldigen'\n{if} o {is} {pressed} uitkomst = eerste + tweede\n{if} a {is} {pressed} uitkomst = eerste - tweede\n{if} d {is} {pressed} uitkomst = eerste / tweede\n{if} v {is} {pressed} uitkomst = eerste * tweede\n{print}'De uitkomst is ' uitkomst\n```\n"
-                start_code: '# schrijf hier jouw code'
-                story_text: "Wist jij dat je een rekenmachine kunt maken met `{pressed}`?\nGeef de rekenmachine twee getallen en gebruikt de v voor vermenigvuldigen.\nNu hoef jij jouw eigen rekenmachine niet meer mee te nemen!\nProbeer ook andere toetsen en berekeningen. Krijg je dan een andere uitkomst?\n"
             7:
                 story_text: |
                     ## Bestuur de schildpad
                     Nu je `{repeat}` hebt geleerd kunnen we meerdere keren kijken of er een toets is ingedrukt. Dat kan je gebruiken om de schildpad te besturen.
+                    
                     ### Opdracht
                     De voorbeeldcode kijkt één keer of er een toets is ingedrukt. Pas de code aan zodat dat vaker gebeurt en maak er dan een mooie tekening meer.
                 example_code: |
@@ -1526,6 +1522,7 @@ adventures:
                 story_text: |
                     ## Oefenen met blind typen
                     We kunnen nu met `{pressed}` een programma maken om typen te oefenen.
+                    
                     ### Opdracht
                     Maak de code af. Er moet steeds een willekeurige letter worden gekozen. Doe je het goed dan krijg je een punt erbij, bij een foute toets gaan er twee punten af!
                 example_code: |

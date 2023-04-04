@@ -1212,6 +1212,37 @@ adventures:
                     {print} 'Ja! Du hast in ' Versuche ' Versuchen eine 6 gewürfelt.'
                     ```
                 start_code: "# setze hier deinen Code hin"
+    pressit:
+        name: Tastengedrücke
+        description: Versuche eine Taste an einen Befehl zu binden!
+        default_save_name: Drückes
+        levels:
+            5:
+                start_code: '# platziere deinen Code hier'
+                story_text: "## Drück es!\nIn diezer Level wurde dir das neue Schlüsselwort `{pressed}` mitgeteilt! Mit `{pressed}`\nkannst du deinen Code interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\n### Übung\nSehen Sie sich das Beispiel an und fügen Sie eine weitere Zeile hinzu, die auf Tasten reagiert."
+                example_code_2: "```\n{if} x {is} {pressed} {forward} 50\n{else} {turn} 90\n```\n"
+                example_code: |
+                    ```
+                    {print} 'Willst du ein gutes (g) oder ein schlechtes (a) Ende?'
+                    {if} g {is} {pressed} {print} 'Sie lebten glücklich bis ans Ende ihrer Tage ❤'
+                    {else} print 'Der Prinz wurde von einem Nilpferd gefressen 😭'
+                    ```
+                story_text_2: |
+                    ## Zeichnen
+                    Sie können jeden Code mit einem Schlüssel verknüpfen, einschließlich der Zeichenschildkröte.
+                    
+                    ### Übung
+                    Kopieren Sie die Codezeilen, damit Sie eine größere Zeichnung erstellen können.
+
+            7:
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                start_code: '# Platziere deinen Code hier'
+                story_text: "## Die Schildkröte steuern\nNun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
+            9:
+                start_code: '# platziere deinen Code hier'
+                story_text: "## Blindtippspiel\nNun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
+                example_code: "```\nPunkte = 1\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
+
     rock:
         name: "Schere, Stein, Papier"
         description: "Mache dein eigenes Schere, Stein, Papier-Spiel"
