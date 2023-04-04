@@ -13,3 +13,5 @@ elifs: _EOL _ELIF _conditions _COLON _EOL (_SPACE command) (_EOL _SPACE command)
 for_list<needs_colon>
 for_loop<needs_colon>
 while_loop<needs_colon>
+
+define: _DEFINE function_name (_SPACE _USING arguments)? _COLON _EOL _SPACE (command | return) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK
