@@ -18,9 +18,9 @@
     </div>
 
     <!-- Card 1 Progress indicator  -->
-    <div class="flex justify-center">
+    <div class="justify-center">
+        <h2 class="text-center">Progress Indicator</h2>
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress">
-            <h2 class="text-center">Progress Indicator</h2>
             <img class="w-full" src="/images/progress.png">
         </div>
     </div>
@@ -43,13 +43,18 @@
                         <div class="w-full text-left" id="name-col">
                             <h4 class="pb-4">Name</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
-                              {{ insert_student_list_item('Enrico') }}
-                              {{ insert_student_list_item('Jantje') }}
-                              {{ insert_student_list_item('Gandhi') }}
+                                {% for s in class_info.students %}
+                                    {{ insert_student_list_item(s.username) }}
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="w-full text-left" id="progress-col">
-                            <h4 class="pb-4">Progress</h4>
+                            <h4 class="pb-4">Current Level</h4>
+                            <ul class="max-w-md space-y-1 list-none list-inside">
+                                {% for s in class_info.students %}
+                                    {{ insert_student_list_item(s.highest_level) }}
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
 
@@ -65,9 +70,9 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-64 overflow-auto" id="card3_misconceptions">
                   <div class="w-full text-left">
                       <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Enrico needs help at Lv. 1') }}
-                          {{ insert_struggle_list_item('Jantje needs help at Lv. 1') }}
-                          {{ insert_struggle_list_item('2 People need help') }}
+                          {{ insert_struggle_list_item('Student 1 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('Student 3 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('2 Students need help') }}
                       </ul>
                   </div>
                 </div>
