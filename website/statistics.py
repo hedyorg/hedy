@@ -54,6 +54,13 @@ class StatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
+
+        collapse = request.args.get("collapse", default="True", type=str)
+        if collapse == "True":
+            collapse = True
+        else:
+            collapse = False
+
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -77,7 +84,7 @@ class StatisticsModule(WebsiteModule):
             )
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students},
+            class_info={"id": class_id, "students": students, "collapse": collapse},
             current_page="my-profile",
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats'),
