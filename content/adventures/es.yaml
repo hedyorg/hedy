@@ -780,7 +780,7 @@ adventures:
                 story_text: |
                     ## Presionado
                     En este nivel hay otra nueva palabra clave: `{pressed}`!
-                    Con `{presionado}` puede usar las teclas de su teclado para controlar qué líneas se usan.
+                    Con `{pressed}` puede usar las teclas de su teclado para controlar qué líneas se usan.
                     
                     ### Desafío
                     Mire el ejemplo y agregue una línea más de código que reaccione al presionar una tecla.
@@ -807,11 +807,7 @@ adventures:
             7:
                 start_code: '# coloque su código aquí'
                 story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a `{pressed}` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la `{repeat}`,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
-                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
-            9:
-                story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
-                example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
-                start_code: '# pon tu código aquí'
+                example_code: "```\n{repeat} 3 {times} {if} w {is} {pressed} {forward} 15 {else} {turn {90}\n```\n"
     rock:
         name: "Piedra, papel o tijera"
         description: "Crea tu propio juego de piedra, papel y tijera"
