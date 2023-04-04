@@ -1777,13 +1777,13 @@ levels:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {repeat} 3 {times}
-                	essen = {ask} 'Was würdest du gerne essen?'
-                	{if} essen {is} Pommes
-                		sauce = {ask} 'Welche Sauce hättest du gerne?'
-                		{print} 'Einmal Pommes mit ' sauce
-                	{if} essen {is} Pizza
-                		belag = {ask} 'Welchen Belag möchtest du?'
-                		{print} 'Eine Pizza mit ' topping
+                    essen = {ask} 'Was würdest du gerne essen?'
+                    {if} essen {is} Pommes
+                        sauce = {ask} 'Welche Sauce hättest du gerne?'
+                        {print} 'Einmal Pommes mit ' sauce
+                    {if} essen {is} Pizza
+                        belag = {ask} 'Welchen Belag möchtest du?'
+                        {print} 'Eine Pizza mit ' topping
                 {print} 'Vielen Dank für deine Bestellung'
             mp_choice_options:
             -   option: "Nichts, der Code ist korrekt!"
@@ -1975,9 +1975,9 @@ levels:
             code: |-
                 alter = {ask} 'Alles Gute zum Geburtstag! Wie alt bist du?'
                 singen = {ask} 'Möchtest du, dass wir singen?'
-                	{if} singen {is} Ja
-                		{repeat} alter {times}
-                			{print} 'Hip Hip Hooray'
+                    {if} singen {is} Ja
+                        {repeat} alter {times}
+                            {print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "Du kannst nicht zwei Fragen in Folge stellen"
                 feedback: "Ja, du kannst."
@@ -2371,7 +2371,7 @@ levels:
             code: |-
                 einkäufe = Äpfel, Brot, Milch
                 {for} artikel {in} einkäufe
-                	{print} 'Wir brauchen ' einkäufe
+                    {print} 'Wir brauchen ' einkäufe
             mp_choice_options:
             -   option: "Zeile 2 muss mit 4 Leerzeichen als Einrückung beginnen"
                 feedback: "Nein, tut es nicht. Nur Zeile 3 braucht Einrückung. Die hat sie."
@@ -2410,7 +2410,7 @@ levels:
                 möglichkeiten = Schere, Stein, Papier
                 spielerinnen = Kelly, Meredith
                 {for} spielerin {in} spielerinnen
-                	{print} spielerin ' wählt ' möglichkeiten {at} {random}
+                    {print} spielerin ' wählt ' möglichkeiten {at} {random}
             mp_choice_options:
             -   option: |-
                     Kelly wählt Stein
@@ -2497,9 +2497,9 @@ levels:
                 gänge = Vorspeise, Hauptspeise, Nachtisch
                 namen = Timon, Onno
                 {for} name {in} namen
-                	{for} gang {in} gänge
-                        	essen = {ask} name ', was würdest du gerne essen als ' gang '?'
-                        	{print} name ' bestellt ' essen ' als ' gang
+                    {for} gang {in} gänge
+                            essen = {ask} name ', was würdest du gerne essen als ' gang '?'
+                            {print} name ' bestellt ' essen ' als ' gang
             mp_choice_options:
             -   option: "Timon, was würdest du gerne essen als Vorspeise?"
                 feedback: "Perfekt!"
@@ -2518,7 +2518,7 @@ levels:
                 preise = 1 Million Euro, Auto, Sandwich
                 namen = Bob, Patrick, Sandy, Larry
                 {for} preis {in} preise
-                	{print} preis ' wird von ' name {at} {random} ' gewonnen'
+                    {print} preis ' wird von ' name {at} {random} ' gewonnen'
             mp_choice_options:
             -   option: "Alle werden immer einen Preis gewinnen."
                 feedback: "Das ist nicht wahr, du könntest am Ende ohne einen Preis dastehen."
