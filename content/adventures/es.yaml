@@ -771,6 +771,47 @@ adventures:
                 story_text: "## Dados\n¿Todo el mundo está tardando mucho lanzando el dado? ¡En este nivel puedes lanzar todos los dados a la vez!\n¿Puedes rellenar los espacios con la línea de código correcta?\n"
                 example_code: "```\njugadores = Ana, Juan, Pedro\nopciones = 1, 2, 3, 4, 5, 6\n _ \n{print} jugador ' tiró un ' opciones {at} {random}\n{sleep}\n```\n"
                 start_code: '# Coloca tu código aquí'
+    pressit:
+        name: Presiónalo
+        description: ¡Intenta vincular una tecla del teclado a un comando!
+        default_save_name: Presione
+        levels:
+            5:
+                 texto_de_la_historia: |
+                     ## Presionado
+                     En este nivel hay otra nueva palabra clave: `{pressed}`!
+                     Con `{presionado}` puede usar las teclas de su teclado para controlar qué líneas se usan.
+
+                     ### Desafío
+                     Mire el ejemplo y agregue una línea más de código que reaccione al presionar una tecla.
+
+                 código_ejemplo: |
+                     ```
+                     {print} '¿Quieres un final bueno (g) o malo (b)?'
+                     {if} g {is} {pressed} {print} 'Vivieron felices para siempre ❤'
+                     {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
+                     ```
+                 historia_texto_2: |
+                     ## Con tortuga
+                     También puede vincular los comandos de tortuga a las teclas.
+
+                     ### Desafío
+                     Copie las líneas varias veces para que pueda crear un dibujo más grande.
+
+                 código_ejemplo_2: |
+                     ```
+                     {if} y {is} {pressed} {forward} 15
+                     {else} {turno} 90
+                     ```
+                 start_code: "# coloque su código aquí"
+            7:
+                start_code: '# coloque su código aquí'
+                story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a `{pressed}` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la `{repeat}`,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
+                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
+            9:
+                story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
+                example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
+                start_code: '# pon tu código aquí'
     rock:
         name: "Piedra, papel o tijera"
         description: "Crea tu propio juego de piedra, papel y tijera"

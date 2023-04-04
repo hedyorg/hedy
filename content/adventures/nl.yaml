@@ -1477,6 +1477,8 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
     pressit:
         name: Toetsaanslag
+        description: Koppel een toets aan code
+        default_save_name: Toetsaanslag
         levels:
             5:
                 story_text: |
@@ -1491,7 +1493,7 @@ adventures:
                     ```
                     {print} 'Wil je een goed (g) of slecht (a) einde?'
                     {if} g {is} {pressed} {print} 'Ze leefden nog lang en gelukkig ❤'
-                    {else} print 'De prins werd opgegeten door een nijlpaard 😭'
+                    {else} {print} 'De prins werd opgegeten door een nijlpaard 😭'
                     ```
                 story_text_2: |
                     ## Tekenen

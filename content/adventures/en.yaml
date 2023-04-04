@@ -1563,7 +1563,7 @@ adventures:
     pressit:
         name: "Key presses"
         description: "Try linking a keyboard key to a command!"
-        default_save_name: "Pressit"
+        default_save_name: "Pressed"
         levels:
             5:
                 story_text: |
@@ -1578,7 +1578,7 @@ adventures:
                     ```
                     {print} 'Do you want a good (g) or bad (b) ending?'
                     {if} g {is} {pressed} {print} 'They lived happily ever after ❤'
-                    {else} print 'The prince was eaten by a hippopotamus 😭'
+                    {else} {print} 'The prince was eaten by a hippopotamus 😭'
                     ```
                 story_text_2: |
                     ## With turtle
