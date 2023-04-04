@@ -575,7 +575,8 @@ class LookupEntryCollector(visitors.Visitor):
         function_name = tree.children[0].children[0]
         args_str = ""
         if len(tree.children) > 1:
-            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in tree.children[1].children)
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
+                                 for x in tree.children[1].children)
         self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
     def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
@@ -2141,10 +2142,10 @@ class ConvertToPython_11(ConvertToPython_10):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         return "def " + args[0] + "():\n" + body
-    
+
     def call(self, meta, args):
         return f"""{args[0]}()"""
-    
+
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
@@ -2163,18 +2164,20 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 class ConvertToPython_12(ConvertToPython_11):
     def define(self, meta, args):
         function_name = args[0]
-        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(args[1], Tree) and args[1].data == "arguments" else ""
+        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(
+            args[1], Tree) and args[1].data == "arguments" else ""
 
         lines = []
         for line in args[1 if args_str == "" else 2:]:
             if isinstance(line, Tree) and line.data == "return":
-                lines.append("return " + str(line.children[0] if not isinstance(line.children[0], Tree) else line.children[0].children[0]))
+                lines.append(
+                    "return " + str(line.children[0] if not isinstance(line.children[0], Tree) else line.children[0].children[0]))
             else:
                 lines.append(line)
         body = "\n".join(ConvertToPython.indent(x) for x in lines)
 
         return f"def {function_name}({args_str}):\n{body}"
-    
+
     def call(self, meta, args):
         args_str = ""
         if len(args) > 1:
