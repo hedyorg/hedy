@@ -56,10 +56,16 @@ class StatisticsModule(WebsiteModule):
     def render_live_stats(self, user, class_id):
 
         collapse = request.args.get("collapse", default="True", type=str)
-        if collapse == "True":
-            collapse = True
-        else:
-            collapse = False
+        collapse = _determine_bool(collapse)
+
+        show_c1 = request.args.get("show_c1", default="True", type=str)
+        show_c1 = _determine_bool(show_c1)
+
+        show_c2 = request.args.get("show_c2", default="True", type=str)
+        show_c2 = _determine_bool(show_c2)
+
+        show_c3 = request.args.get("show_c3", default="True", type=str)
+        show_c3 = _determine_bool(show_c3)
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -84,7 +90,8 @@ class StatisticsModule(WebsiteModule):
             )
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse},
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
             current_page="my-profile",
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats'),
@@ -97,10 +104,7 @@ class StatisticsModule(WebsiteModule):
         are selected in the student list.
         """
         collapse = request.args.get("collapse", default="True", type=str)
-        if collapse == "True":
-            collapse = True
-        else:
-            collapse = False
+        collapse = _determine_bool(collapse)
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -419,6 +423,12 @@ def _calc_error_rate(fail, success):
     failed = fail or 0
     successful = success or 0
     return (failed * 100) / max(1, failed + successful)
+
+
+def _determine_bool(bool_str):
+    if bool_str == "True":
+        return True
+    return False
 
 
 def get_general_class_stats(students):

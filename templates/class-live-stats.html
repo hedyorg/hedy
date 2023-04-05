@@ -21,15 +21,34 @@
     <!-- Card 1 Progress indicator collapsed version -->
     <div class="justify-center">
         <h2 class="text-center">Progress Indicator</h2>
+        <div class="float-right relative pr-2 pt-1">
+            {% if class_info.show_c1 %}
+            <a class="no-underline text-black rounded hover:bg-blue-600"
+               href="/live_stats/class/{{class_info.id}}?show_c1=False&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
+                ☝️ Hide
+            </a>
+            {% else %}
+            <a class="no-underline text-black rounded hover:bg-blue-600"
+               href="/live_stats/class/{{class_info.id}}?show_c1=True&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
+                👇 Show
+            </a>
+            {% endif %}
+        </div>
+
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_col">
+            {% if class_info.show_c1 %}
             <img class="w-full" src="/images/progress.png">
+
+            <div class="relative">
+                <button class="green-btn absolute top-0 right-0" id="expand"
+                        onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=False&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
+                    Expand
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
-    <div class="relative">
-        <button class="green-btn absolute top-0 right-0" id="expand" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=False'">
-            Expand
-        </button>
-    </div>
+
     {% else %}
     <!-- Card 1 Progress indicator expanded version -->
     <div class="justify-center">
@@ -39,7 +58,7 @@
         </div>
     </div>
     <div class="relative">
-        <button class="green-btn absolute top-0 right-0" id="collapse" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True'">
+        <button class="green-btn absolute top-0 right-0" id="collapse" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
             Collapse
         </button>
     </div>
@@ -58,8 +77,22 @@
                   Student List
                 </h2>
                 <!-- Card 2 Student List    -->
-                <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-64 overflow-auto" id="card2_list">
-                    <div class="grid grid-cols-2">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
+                    <div class="float-right relative pr-2 pt-2">
+                        {% if class_info.show_c2 %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
+                            👇 Show
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% if class_info.show_c2 %}
+                    <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
                             <h4 class="pb-4">Name</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
@@ -85,8 +118,7 @@
                             </ul>
                         </div>
                     </div>
-
-
+                    {% endif %}
                 </div>
             </div>
 
@@ -95,14 +127,29 @@
                   Students who are struggling
                 </h2>
                 <!-- Card 3 Misconceptions feed -->
-                <div class="rounded-lg bg-blue-200 shadow-lg p-6 h-64 overflow-auto" id="card3_misconceptions">
-                  <div class="w-full text-left">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
+                    <div class="float-right relative pr-2 pt-1">
+                        {% if class_info.show_c3 %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                            👇 Show
+                        </a>
+                        {% endif %}
+                    </div>
+                {% if class_info.show_c3 %}
+                  <div class="w-full text-left p-6">
                       <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Student 1 needs help at Lv. 1', 'They have an issue with X' ) }}
-                          {{ insert_struggle_list_item('Student 3 needs help at Lv. 1', 'They have an issue with X') }}
-                          {{ insert_struggle_list_item('2 Students need help', 'They have an issue with X') }}
+                          {{ insert_struggle_list_item('They have an issue with X', 'Student 1 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('They have an issue with Y', 'Student 3 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('They have an issue with Z', '2 Students need help') }}
                       </ul>
                   </div>
+                {% endif %}
                 </div>
             </div>
         </div>
