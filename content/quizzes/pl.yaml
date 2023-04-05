@@ -18,24 +18,16 @@ levels:
             question_text: "Którym z nich należy uzupełnić puste miejsca, aby pojawił się tekst Hello!"
             mp_choice_options:
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "`{echo}` wyświetla odpowiedź do zadanego wcześniej pytania."
             -   option: |
-                    ```
-                    {print}
-                     ```
+                    `{print}`
                 feedback: "Zgadza się!"
             -   option: |
-                    ```
-                    witaj
-                    ```
+                    `witaj`
                 feedback: "'witaj' nie jest komendą."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "Za pomocą `{ask}` możesz zadać pytanie."
             correct_answer: "B"
             hint: "_ Witaj świecie!"
@@ -93,24 +85,16 @@ levels:
                 _ Więc twoje ulubione zwierzę to...
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Nie, imię psa powinno zostać wyświetlone."
             -   option: |
-                    ```
-                    Hedy
-                    ```
+                    `Hedy`
                 feedback: "Hedy nie jest komendą."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "Komenda `{ask}` zadaje pytanie, nie wyświetla odpowiedzi."
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "W punkt!"
             correct_answer: "D"
             hint: "Linia 2 powinna wyświetlać odpowiedź na wcześniejsze pytanie..."
@@ -186,7 +170,7 @@ levels:
             hint: "`{ask}` pozwala Ci zadać pytanie"
             question_score: '10'
         10:
-            question_text: "Which output will be in your outputscreen after you've run this code?"
+            question_text: "Co pojawi się na wyjściu po uruchomieniu tego programu?"
             code: |
                 {ask} Are you ready to go to level 2?
                 {echo}
@@ -211,16 +195,16 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: "Which statement is true?"
+            question_text: "Które zdanie jest prawdziwe?"
             mp_choice_options:
-            -   option: "Możesz wykorzystać polecenie {print} do zadania pytania."
+            -   option: "Możesz wykorzystać polecenie `{print}` do zadania pytania."
                 feedback: "Po to jest polecenie ask"
-            -   option: "Możesz wykorzystać polecenie {ask} do powtórzenia odpowiedzi"
+            -   option: "Możesz wykorzystać polecenie `{ask}` do powtórzenia odpowiedzi."
                 feedback: "To jest nie prawda"
-            -   option: "Poleceniem {print} możesz wyświetlić jakiś tekst"
-                feedback: "Good"
+            -   option: "Poleceniem `{print}` możesz wyświetlić jakiś tekst"
+                feedback: "Dobrze"
             -   option: "Poleceniem {sleep}, możesz usunąć tekst z ekranu."
-                feedback: "No one command doesn't work anymore."
+                feedback: "Polecenie `{sleep}` tak nie działa."
             correct_answer: "C"
             hint: "`{print}` dalej działa tak samo jak na poziomie 1"
             question_score: '10'
@@ -241,17 +225,17 @@ levels:
                     ```
                     {ask} Jak się nazywasz?
                     ```
-                feedback: "This worked in level 1, but in level 2 and up it works differently."
+                feedback: "To działało w poziomie 1, ale w poziomie 2 i późniejszych działa ono inaczej."
             -   option: |
                     ```
                     {ask} Jak się nazywasz? {is} imię
                     ```
                 feedback: "Komendy się zgadzają, ale są w złej kolejności!"
             correct_answer: "A"
-            hint: "`{ask}` doesn't work like in level 1"
+            hint: "`{ask}` nie działa tak jak w poziomie 1"
             question_score: '10'
         3:
-            question_text: "What appears on your output screen when you run this code?"
+            question_text: "Co pojawi się na wyjściu po uruchomieniu tego programu?"
             code: |-
                 name {is} Marleen
                 {print} name goes to the market and she buys an apple.
