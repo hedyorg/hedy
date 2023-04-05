@@ -62,18 +62,18 @@ adventures:
                     {print} animals {at} {random}
                     ```
 
-                start_code: "{print} hello world!"
+                start_code: "{print} Merhaba dünya!"
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: "{print} 'Merhaba dünya'"
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
+                    ## 'Alıntı işaretleri'
+                    4.seviyede,  `{ask}` ve`{print}` konutları değiştirildi. 
 
-                    You must put text that you want to print between quotation marks.
+                    Yazdırmak istediğiniz metni tırnak işaretleri arasına almalısınız.
 
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
+                    Bu kullanışlıdır, çünkü artık istediğiniz tüm kelimeleri yazdırabilirsiniz. Ayrıca bir şeyi depolamak için `{is}` kullanabilirsiniz.
 
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                    Çoğu programlama dili de yazdırırken tırnak işaretleri kullanır, bu nedenle gerçek programlamaya bir adım daha yaklaşıyoruz!
                 example_code: |
                     ```
                     {print} 'You need to use quotation marks from now on!'
@@ -81,10 +81,12 @@ adventures:
                     {print} 'We need to use ' answer
                     ```
                 story_text_2: |
-                    ## Adventures are getting more and more difficult
-                    The adventures are now getting more and more difficult in the successive tabs.
-                    So it is best to start on the left with the story, and work to the right, in order to be challenged more and more.
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                    ##  İş biraz karışıyor !
+
+                    Artık  tırnak işaretleri kullandığımıza göre, İstanbul'dan gibi kısaltmalar için kesme işareti kullandığınızda Hedy'nin kafası karışacaktır.
+                    Bu kesme işaretlerini kaldırdığınızdan ve İstanbuldan veya İstanbul dan olarak değiştirdiğinizden emin olun.
+                    Kesme işaretinin hatalı kullanımını gösteren örnek kodu inceleyin.
+                example_code_2: "```\n_ Kesme işaretinin hatalı kullanımı  _\n{print} 'İstanbul'dan gelen Ahmet'in getirdikleri.'\n{print} 'Mine'den gelen kargo kırılmış!'\n```\n"
             5:
                 start_code: |-
                     name {is} {ask} 'what is your name?'
