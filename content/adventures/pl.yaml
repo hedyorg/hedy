@@ -245,6 +245,19 @@ adventures:
         name: Kostka do gry
         description: Stwórz własną kostkę do gry
         default_save_name: Kostka do gry
+    pressit:
+        name: Naciśnięcia klawiszy
+        description: Spróbuj przypisać przycisk klawiatury do polecenia!
+        default_save_name: Naciśnij
+        levels:
+            7:
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                story_text: "## Kontrola żółwia\nSkoro już nauczyłeś się polecenia `{repeat}` możesz naciskać klawisze wiele razy! Dzięki temu możesz sprawić, że żółw będzie chodził do przodu i obracał się.\n\n### Ćwiczenie\nPrzykładowy kod sprawdza tylko raz, czy klawisz jest naciśnięty. Zmień kod tak, aby można było naciskać klawisze wiele razy i użyj kodu, aby narysować coś ładnego.\n"
+                start_code: '# umieść tutaj swój kod'
+            9:
+                start_code: '# umieść tutaj swój kod'
+                story_text: "## Gra w bezwzrokowe pisanie.\nTeraz gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie pisania bezwzrokowego za pomocą `{pressed}`.\n\n### Ćwiczenie\nDokończ kod. Za każdym razem program ma wybrać losową literę, którą należy nacisnąć. Otrzymujesz punkt za prawidłowy klawisz i odjęcie dwóch punktów za niewłaściwy klawisz.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored."
+                example_code: "```\npunkty = 1\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera \n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
     rock:
         default_save_name: Kamień
         levels:
@@ -801,61 +814,6 @@ adventures:
                 story_text: "## Stwórz grę w blackjacka\nBlackjack to prosta gra karciana, w której musisz zdobyć jak najwięcej 21 punktów. Dostajesz dwie karty. Każda karta ma swoją wartość liczbową, a figury (walet, królowa i król) są warte 10 punktów.\nAs jest wart 1 lub 11 punktów (do wyboru). Rozdający, twój przeciwnik, również otrzymuje dwie karty.\nJeśli chcesz, możesz zdobyć kolejną kartę, a jej punkty zostaną dodane do Twojej sumy. Rozdający może również wybrać inną kartę.\nUważaj, aby nie zdobyć więcej niż 21 punktów, ponieważ jeśli to zrobisz, przegrywasz!\nGracz, który zbliży się do liczby 21, nie przekraczając jej, wygrywa!\n\nBaw się dobrze!\n"
                 example_code: "```\n{print} 'BLACKJACK'\nkarty = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Walet', 'Królowa','Król', 'As']\npunkty = 0\npunkty_krupiera = 0\nkarta_1 = karty[{random}]\nkarta_2 = karty[{random}]\nkarta_3 = karty [{random}]\nkarta_krupiera_1 = karty[{random}]\nkarta_krupiera_2 = karty[{random}]\nkarta_krupiera_3 = karty[{random}]\n# Punkty za kartę 1\n{if} karta_1 == 'Walet' {or} karta_1 == 'Królowa' {or} karta_1 == 'Król':\n    punkty = punkty + 10\n{elif} karta_1 == 'As':\n    punkty = punkty + 11\n{else}:\n    punkty = punkty + karta_1\n# Punkty za kartę 2\n{if} karta_2 == 'Walet' {or} karta_2 == 'Królowa' {or} karta_2 == 'Król':\n    punkty = punkty + 10\n{elif} karta_2 == 'As':\n    punkty = punkty + 11\n{else}:\n    punkty = punkty + karta_2\n# Punkty za kartę krupiera 1\n{if} karta_krupiera_1 == 'Walet' {or} karta_krupiera_1 == 'Królowa' {or} karta_krupiera_1 == 'Król':\n    punkty_krupiera = punkty_krupiera + 10\n{elif} karta_krupiera_1 == 'As':\n    punkty_krupiera = punkty_krupiera + 11\n{else}:\n    punkty_krupiera = punkty_krupiera + karta_krupiera_1\n# Punkty za kartę krupiera 2\n{if} karta_krupiera_2 == 'Walet' {or} karta_krupiera_2 == 'Królowa' {or} karta_krupiera_2 == 'Król':\n    punkty_krupiera = punkty_krupiera + 10\n{elif} karta_krupiera_2 == 'As':\n    punkty_krupiera = punkty_krupiera + 11\n{else}:\n    punkty_krupiera = punkty_krupiera + karta_krupiera_2\n# Dwa Asy\n{if} karta_1 == 'As' {and} karta_2 == 'As':\n    punkty = 12\n{if} karta_krupiera_1 == 'As' {and} karta_krupiera_2 == 'As':\n    punkty_krupiera = 12\n# Tablica wyników\n{print} 'Trzymasz karty ' karta_1 ' i ' karta_2 ' (' punkty ' punktów)'\n{print} 'Krupier trzyma ' karta_krupiera_1 ' i ' karta_krupiera_2 ' (' punkty_krupiera ' punktów)'\n# Dodatkowa karta dla gracza\nhit = {ask} 'Czy chcesz dobrać kartę?'\n{if} hit == 'tak':\n    {if} karta_3 == 'Walet' {or} karta_3 == 'Królowa' {or} karta_3 == 'Król':\n        punkty = punkty + 10\n    {elif} karta_3 == 'As':\n        {if} punkty > 11:\n            punkty = punkty + 11\n        {else}:\n            punkty = punkty + 1\n    {else}:\n        punkty = punkty + karta_3\n    {print} 'Dostajesz dodatkowo ' karta_3 ' (' punkty ' punktów)'\n{else}:\n    {print} 'Bez dodatkowych kart'\n# Zwycięzca\n{if} punkty > 21 {or} punkty_krupiera > punkty {or} punkty_krupiera == 21:\n    {print} 'Przegrywasz'\n{elif} punkty_krupiera < 17:\n    {print} 'Krupier dobiera dodatkową kartę. Jest to... ' karta_krupiera_3\n    {if} karta_krupiera_3 == 'Walet' {or} karta_krupiera_3 == 'Królowa' {or} karta_krupiera_3 == 'Król':\n        punkty_krupiera = punkty_krupiera + 10\n    {elif} karta_krupiera_3 == 'As':\n        {if} punkty_krupiera < 11:\n            punkty_krupiera = punkty_krupiera + 11\n        {else}:\n            punkty_krupiera = punkty_krupiera + 1\n    {else}:\n        punkty_krupiera = punkty_krupiera + karta_krupiera_3\n    {print} 'Krupier ma ' punkty_krupiera ' punktów teraz'\n    {if} punkty_krupiera < 21 {and} punkty_krupiera > punkty:\n        {print} 'Przegrywasz'\n    {else}:\n        {print} 'Wygrywasz'\n{elif} punkty > punkty_krupiera {and} punkty < 21:\n    {print} 'Wygrywasz!'\n```\n"
         default_save_name: Blackjack
-    pressit:
-        name: Naciśnięcia klawiszy
-        description: Spróbuj przypisać przycisk klawiatury do polecenia!
-        default_save_name: Naciśnij
-        levels:
-            5:
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text: "## Naciśnij!\nWe wprowadzeniu wspomnieliśmy również o nowym poleceniu `{pressed}`. \nWykorzystanie `{pressed}` pozwala na stworzenie interaktywnego kodu, który możesz kontrolować w czasie rzeczywistym. \nW kolejnych poziomach dowiesz się jak korzystać z `{pressed}` i do czego wykorzystać `{pressed}`.\nOprócz wyświetlania tekstu istnieje wiele innych możliwości wykorzystania `{pressed}`.\nNa przykład możesz również powiązać polecenia żółwia z klawiszami! Spróbuj!\n"
-                story_text_2: "## Naciśnięcie klawiszu innego niż przypisany\nMożesz również użyć polecenia `{else}` w poleceniu `{pressed}`. Polecenie `{else}` zostanie wykonane gdy naciśniesz klawisz inny niż ten, który przypisałeś.\n"
-                example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# umieść tutaj swój kod'
-            6:
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\n{print} 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Czy wiesz, że możesz również stworzyć kalkulator używając polecenia `{pressed}`?\nWprowadź do kalkulatora dwa liczby i naciśnij klawisz m, aby pomnożyć.\nTeraz nie musisz zabierać własnego kalkulatora!\nSpróbuj innych klawiszy i zobacz, co się stanie! Czy otrzymałeś inny wynik?\n"
-            7:
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-                story_text: "## Kontrola żółwia\nSkoro już nauczyłeś się polecenia `{repeat}` możesz naciskać klawisze wiele razy! Dzięki temu możesz sprawić, że żółw będzie chodził do przodu i obracał się.\n\n### Ćwiczenie\nPrzykładowy kod sprawdza tylko raz, czy klawisz jest naciśnięty. Zmień kod tak, aby można było naciskać klawisze wiele razy i użyj kodu, aby narysować coś ładnego.\n"
-                start_code: '# umieść tutaj swój kod'
-            9:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "## Gra w bezwzrokowe pisanie.\nTeraz gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie pisania bezwzrokowego za pomocą `{pressed}`.\n\n### Ćwiczenie\nDokończ kod. Za każdym razem program ma wybrać losową literę, którą należy nacisnąć. Otrzymujesz punkt za prawidłowy klawisz i odjęcie dwóch punktów za niewłaściwy klawisz.\n"
-                example_code: "```\npunkty = 1\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera \n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
-            10:
-                story_text: "W tym poziomie możesz narysować figurę przy użyciu żółwia. Żółw nie może się doczekać żeby sie ruszyć.\nDaj żółwiowi sygnał startowy poprzez naciśnięcie przycisku x lub y na klawiaturze.\nCzy możesz zrobić, żeby żółw narysował inną figurę?\n"
-                start_code: '# umieść tutaj swój kod'
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
-            11:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro już się nauczyłeś polecenia `{for} ... {in} {range} ... {to} ...`, możesz teraz go wykorzystać z poleceniem `{pressed}`.\nNa przykład, spróbuj ruszyć żółwiem. Żółw rośnie każdym razem gdy naciśniesz przypisany klawisz.\nW ten sposób żółw może ruszać się coraz dalej z każdym krokiem.\n"
-                example_code: "```\nlewo = -90\nprawo = 90\nzwrot = 180\n{for} licznik {in} {range} 1 {to} 15\n    krok = licznik * 5\n    {if} w {is} {pressed}\n        {forward} krok\n    {if} s {is} {pressed}\n        {turn} zwrot\n    {if} a {is} {pressed}\n        {turn} lewo\n    {if} d {is} {pressed}\n        {turn} prawo\n```\n"
-            12:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Czy znasz się na grach komputerowych? W jednej z nich gdy wejdziesz w trawę zostajesz napadnięty przez \nbardzo podejrzaną mysz. Co wtedy robisz?\nNa tym poziomie zrobimy małe menu gry z różnymi opcjami.\nPrzypisanie tekstu do zmiennej może być bardzo przydatne gdy chce się ten tekst użyć wielokrotnie.\nOpcja, wybieram Ciebie!\n"
-                example_code: "```\nchoose = 'You chose option: '\n{print} 'A wild mouse appeared!'\n{print} 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    {sleep}\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    {sleep}\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
-            13:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro potrafisz już użyć poleceń `{and}` oraz `{or}` możesz też użyć je razem z poleceniem `{pressed}`.\nWyobraź sobie, że żółw potrafi zrobić bardzo długi skok w przód\npo przyciśnięciu przycisku `p`.\nZanim żółw może wykonać taki bardzo długi skok, żółw musi najpierw skręcić w lewo i w prawo.\n"
-                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        looked_left = 1\n    {if} d {is} {pressed}\n        {turn} right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left {is} 1 {and} looked_right {is} 1\n            {forward} 40\n            looked_left = 0\n            looked_right = 0\n```\n"
-            15:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro nauczyłeś się o pętlach `{while}`, możesz ich zacząć używać ich na żółwiu!\nŻółw może teraz wykonać tylko 15 kroków lub obrócić się 15 razy zanim się zmęczy!\nSpróbuj dotrzeć jak najdalej zanim żółw się zmęczy! Możesz użyć swojego super skoku po 2 obrotach \nlub po 5 krokach.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\n{while} tired_in > 0\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
-            16:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Spróbujmy się trochę poruszyć z grą w Twister!\nGdy wszyscy będą gotowi, naciśnij klawisz x, aby przejść do następnego ruchu!\n"
-                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\n{repeat} 20 {times}\n    l = limbs[{random}]\n    c = colours[{random}]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
-            17:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Teraz gdy nauczyłeś się korzystać z `{elif}`, możemy używać go również z `{pressed}`! Pamiętaj, `{elif} ... {is} {pressed}` nie jest możliwe! Dlatego zamierzamy zagnieździć niektóre instrukcje `{elif}` w opcjach `{pressed}`. Musieliśmy również dodać `:` do kodu, aby wszystko działało! Wyobraź sobie, że żółw jest w stanie wykonać super skok do przodu. Naciskając `p` żółw może wykonać super skok! Jednak żółw może wykonać ten skok tylko co 5 kroków lub co 4 tury.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}:\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        {turn} around\n    {if} a {is} {pressed}:\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 {or} spins <= 0:\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            {print} \"you need to take more steps or turns before you can superjump!\"\n```\n"
-            14:
-                story_text: "Skoro już nauczyłeś się używać operatorów, możesz użyć również ich z poleceniem `{pressed}`!\nWyobraź sobie żółwia, który może skakać do przodu.\nPrzytrzymując klawisz `p` żółw może wykonać skok do przodu!\nJednakże żółw może wykonać ten skok tylko co 5 kroków lub co 4 obroty.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
-                start_code: '# umieść tutaj swój kod'
     years:
         name: Nowy Rok
         description: Odliczanie do Nowego Roku!
