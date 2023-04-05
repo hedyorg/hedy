@@ -370,7 +370,7 @@ adventures:
                 example_code: |
                     ```
                     verso = 99
-                    _99 {times}
+                    _ 99 {times}
                     {print} verso 'botellas de cerveza en la pared'
                     {print} verso 'botellas de cerveza'
                     {print} 'Toma uno, pásalo'
@@ -672,7 +672,6 @@ adventures:
                     lavador {is} Sofía {print} _ oh no, hoy me toca lavar los platos_
                     {print} 'por suerte no debo lavar los platos porque' _ 'los lavará hoy!'
                     ```
-
                 start_code: "{print} '¿Quien lavará los platos hoy?'"
             4:
                 story_text: |
@@ -948,7 +947,7 @@ adventures:
                 example_code: "```\npuntaje = 0\n{for} i {in} {range} 0 {to} 9\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    correcta = número1 * número2\n    respuesta = 0\n    {while} respuesta != correcta\n        {print} '¿Cuánto es ' número1 ' por ' número2 '?'\n        respuesta = {ask} 'Escribe tu respuesta:'\n        {print} 'Tu respuesta es ' respuesta\n    {print} '¡Buen trabajo!'\n{print} '¡Ganaste!'\n```\n"
                 start_code: '# pon tu código aquí'
             11:
-                example_code: "```\nnumero = 10\n{for} i {in} {range} 1 al 10\n    {print} i * numero\n```\n"
+                example_code: "```\nnumero = 10\n{for} i {in} {range} 1 al 10\n    {print} i * numero\n```"
                 story_text: "## Calculador\nCon `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el codigo de ejemplo para que\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# pon tu codigo aquí'
             13:
@@ -1308,7 +1307,7 @@ adventures:
             15:
                 story_text: "Ahora que has aprendido sobre los bucles `{while}`, ¡puedes empezar a usarlos en la tortuga!\nLa tortuga ahora solo puede dar 15 pasos o girar 15 veces antes de cansarse\n¡Intenta llegar lo más lejos posible antes de que la tortuga se canse! Puedes usar tu super salto tras 2 giros\no 5 pasos.\n"
                 start_code: '# pon tu código aquí'
-                example_code: "```\nstepsize = 15\nderecha = -90\nizquierda = 90\nalrededor = 180\ntiempo de salto = 5\nvueltas = 2\ncansado_en = 15\nmientras cansado_en> 0\n    {if} w {is} {pressed}\n        adelante stepsize\n        tiempo de salto= tiempo de salto - 1\n    {if} s {is} {pressed}\n        voltear\n    {if} a {is} {pressed}\n        voltear a la derecha\n        vuelta = vuelta - 1\n    {if} d {is} {pressed}\n        voltear a la izquierda\n        vueltas = vueltas - 1\n    {if} p {is} {pressed}\n        {if} tiempo de salto <= 0 o vueltas <= 0\n            adelante stepsize * 4\n            tiempo de salto= 5\n            vueltas= 2\n    cansado_en = cansado_en - 1\n```\n"
+                example_code: "```\nstepsize = 15\nderecha = -90\nizquierda = 90\nalrededor = 180\ntiempo de salto = 5\nvueltas = 2\ncansado_en = 15\nmientras cansado_en> 0\n    {if} w {is} {pressed}\n        adelante stepsize\n        tiempo de salto= tiempo de salto - 1\n    {if} s {is} {pressed}\n        voltear\n    {if} a {is} {pressed}\n        voltear a la derecha\n        vuelta = vuelta - 1\n    {if} d {is} {pressed}\n        voltear a la izquierda\n        vueltas = vueltas - 1\n    {if} p {is} {pressed}\n        {if} tiempo de salto <= 0 o vueltas <= 0\n            adelante stepsize * 4\n            tiempo de salto= 5\n            vueltas= 2\n    cansado_en = cansado_en - 1\n```"
             16:
                 story_text: "Vamos a movernos un poco con un juego de Twister!\n¡Si te sientes preparado/a, pulsa la tecla x para el siguiente movimiento!\n"
                 example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
