@@ -135,7 +135,7 @@ levels:
             -   option: "Nic! Ten kod jest bezbłędny!"
                 feedback: "Dobrze!"
             correct_answer: "D"
-            hint: "Przyjrzyj się kodowi linijka po linijce"
+            hint: "Przyjrzyj się kodowi linia po linii"
             question_score: '10'
         8:
             question_text: "Jak korzystać z polecenia `{echo}`?"
@@ -237,36 +237,36 @@ levels:
         3:
             question_text: "Co pojawi się na wyjściu po uruchomieniu tego programu?"
             code: |-
-                name {is} Marleen
-                {print} name goes to the market and she buys an apple.
+                imię {is} Marlena
+                {print} imię idzie na rynek i kupuje jabłko.
             mp_choice_options:
-            -   option: "name goes to the market and she buys an apple."
-                feedback: "The word name is replaced with Marleen"
-            -   option: "Marleen goes to the market."
-                feedback: "The second part of the sentence isn't left out!"
-            -   option: "Marleen goes to the market and she buys an apple."
+            -   option: "imię idzie na rynek i kupuje jabłko."
+                feedback: "Wyraz imię jest zastąpiony przez Marlena"
+            -   option: "Marlena idzie na rynek."
+                feedback: "Nie brakuje drugiej części zdania!"
+            -   option: "Marlena idzie na rynek i kupuje jabłko."
                 feedback: "W punkt!"
-            -   option: "Marleen goes to the market and Marleen buys an apple."
-                feedback: "She is not replaced with the name"
+            -   option: "Marlena idzie na rynek i Marlena kupuje jabłko."
+                feedback: "Ona nie jest zastępowana przez imię"
             correct_answer: "C"
-            hint: "The word name is replaced with Marleen"
+            hint: "Wyraz imię jest zastępowany przez Marlena"
             question_score: '10'
         4:
-            question_text: "What will you see on the output screen when you run this code?"
+            question_text: "Co pojawi się na wyjściu po uruchomieniu tego programu?"
             code: |-
                 name {is} Hedy
                 {print} Hi my name is name!
             mp_choice_options:
             -   option: "Hi my name is name"
-                feedback: "The variable name is replaced with Hedy"
+                feedback: "Zmienna imię jest zamieniona na Hedy"
             -   option: "Hi my name is Hedy"
-                feedback: "The variable name is replaced with Hedy"
+                feedback: "Zmienna imię jest zamieniona na Hedy"
             -   option: "Hi my Hedy is name"
-                feedback: "The variable name is replaced with Hedy"
+                feedback: "Zmienna imię jest zamieniona na Hedy"
             -   option: "Hi my Hedy is Hedy"
-                feedback: "Correct, this mistake will be fixed in level 3!"
+                feedback: "Zgadza się, ten błąd zostanie naprawiony w poziomie 3!"
             correct_answer: "D"
-            hint: "'name' is being replaced with 'Hedy' in both places"
+            hint: "'imię' jest zamienione na 'Hedy' w obu miejscach"
             question_score: '10'
         5:
             question_text: "Co się stanie, gdy użyjesz komendy `{sleep}`?"
@@ -280,144 +280,136 @@ levels:
             -   option: "Nic, taka komenda nie istnieje"
                 feedback: "Taka komenda istnieje i jest całkiem użyteczna"
             correct_answer: "C"
-            hint: "The computer waits for a second at the `{sleep}` command"
+            hint: "Komputer czeka przez sekundę przy poleceniu `{sleep}`"
             question_score: '10'
         6:
-            question_text: "What should be on the lines?"
+            question_text: "Co powinno być napisane w brakujących liniach?"
             code: |-
-                {print} And the award for best programming language goes to...
-                _?_
+                {print} A nagrodę na najlepszy język programowania zdobywa...
+                _
                 {print} Hedy!
             mp_choice_options:
             -   option: |
-                    ```
-                    {sleep}
-                    ```
-                feedback: "Perfect!"
+                    `{sleep}`
+                feedback: "Perfekcyjnie!"
             -   option: |
-                    ```
-                    {echo}
-                    ```
-                feedback: "There is nothing to repeat back here"
+                    `{echo}`
+                feedback: "Nie ma tu nic do powtórzenia"
             -   option: |
-                    ```
-                    {print}
-                    ```
-                feedback: "There is no text there to `{print}` there"
+                    `{print}`
+                feedback: "Nie ma tu nic do napisania"
             -   option: |
-                    ```
-                    {ask}
-                    ```
-                feedback: "There is no question there to be asked"
+                    `{ask}`
+                feedback: "Nie ma tu żadnego pytania do zadania"
             correct_answer: "A"
-            hint: "Pause for dramatic effect..."
+            hint: "Pauza dla dramatycznego efektu..."
             question_score: '10'
         7:
             question_text: "Jakiej komendy brakuje na linii 2?"
             code: |-
-                {print} I will explode in 3 seconds!
-                _?_
-                {print} BOOM!
+                {print} Wybuchnę za 3 sekundy!
+                _
+                {print} BUM!
             mp_choice_options:
             -   option: |
                     ```
                     {print} 3
                     ```
-                feedback: "You don't need to `{print}`"
+                feedback: "Nie musisz nic pisać"
             -   option: |
                     ```
                     {sleep} 3
                     ```
-                feedback: "Perfect!"
+                feedback: "Perfekcyjnie!"
             -   option: |
                     ```
                     {sleep}
                     ```
-                feedback: "This way the bomb will explode in 1 second"
+                feedback: "Wtedy bomba wybuchnie za 1 sekundę"
             -   option: |
                     ```
                     {sleep} {sleep} {sleep}
                     ```
-                feedback: "Make it easier on yourself by using the number 3"
+                feedback: "Uprość sobie sprawę korzystając z liczby 3"
             correct_answer: "B"
-            hint: "You want the computer to wait for 3 seconds"
+            hint: "Chcesz by komputer czekał przez 3 sekundy"
             question_score: '10'
         8:
-            question_text: "How would you correct the first line of code?"
+            question_text: "Jak należy poprawić pierwszą linię kodu?"
             code: |-
-                {ask} {is} How old are you?
-                {print} age
+                {ask} {is} Ile masz lat?
+                {print} wiek
             mp_choice_options:
             -   option: |
                     ```
-                    age {ask} {is} How old are you?
+                    wiek {ask} {is} Ile masz lat?
                     ```
-                feedback: "That is the wrong order"
+                feedback: "To nie jest poprawna kolejność"
             -   option: |
                     ```
-                    {ask} {is} age How old are you?
+                    {ask} {is} wiek Ile masz lat?
                     ```
-                feedback: "That is the wrong order"
+                feedback: "To nie jest poprawna kolejność"
             -   option: |
                     ```
-                    age {is} {ask} How old are you?
+                    wiek {is} {ask} Ile masz lat?
                     ```
-                feedback: "You get it!"
+                feedback: "Masz to!"
             -   option: |
                     ```
-                    age {is} How old are you?
+                    wiek {is} Ile masz lat?
                     ```
                 feedback: "Where is the `{ask}` command?"
             correct_answer: "C"
-            hint: "The variable name should come first"
+            hint: "Nazwa zmiennej powinna być najpierw"
             question_score: '10'
         9:
-            question_text: "What is going wrong in this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                dogs {is} animal
-                {print} I love animal
+                psy {is} zwierzę
+                {print} Kocham zwierzę
             mp_choice_options:
-            -   option: "Line 1 should say: dogs `{is}` animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 1 should say: animal `{is}` dogs"
+            -   option: "W linii 1 powinno być: psy `{is}` zwierzęta"
+                feedback: "Nazwa zmiennej to zwierzę"
+            -   option: "W linii 1 powinno być: zwierzę `{is}` psy"
                 feedback: "Great!"
-            -   option: "Line 2 should say: `{print}` I love animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 2 should say: `{sleep}` I love animals"
-                feedback: "Sleep is not used to `{print}` text"
+            -   option: "W linii 2 powinno być: `{print}` Kocham zwierzęta"
+                feedback: "Nazwa zmiennej to zwierzę"
+            -   option: "W linii 2 powinno być: `{sleep}` Kocham zwierzęta"
+                feedback: "Spanie nie napisze tekstu"
             correct_answer: "B"
-            hint: "You want to `{print}` 'I love dogs'"
+            hint: "Chcesz napisać „Kocham psy”"
             question_score: '10'
         10:
-            question_text: "What command should be used on the line 1?"
+            question_text: "Jakie polecenie powinno być użyte w linii 1?"
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                smak {is} _
+                {print} Twoje ulubione lody to...
                 {sleep}
-                {print} flavor
+                {print} smak
             mp_choice_options:
             -   option: |
                     ```
                     {sleep} 3
                     ```
-                feedback: "You want to know the favorite flavor!"
+                feedback: "Chcesz poznać ulubiony smak!"
             -   option: |
                     ```
-                    {print} strawberries
+                    {print} truskawkowe
                     ```
-                feedback: "You do not want a `{print}` command at the middle of the line..."
+                feedback: "Nie chcesz polecenia `{print}` w połowie linii..."
             -   option: |
                     ```
-                    strawberries, chocolate, vanilla
+                    truskawkowe, czekoladowe, waniliowe
                     ```
-                feedback: "This way you are making a list. You don't want that now."
+                feedback: "W ten sposób tworzysz listę. Nie chcesz teraz tego zrobić."
             -   option: |
                     ```
-                    {ask} What flavor icecream do you like?
+                    {ask} Jakie są twoje ulubione lody?
                     ```
-                feedback: "That's right!"
+                feedback: "Zgadza się!"
             correct_answer: "D"
-            hint: "You want to `{ask}` a question"
+            hint: "Chcesz zadać pytanie"
             question_score: '10'
     3:
         1:
