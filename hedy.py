@@ -1313,7 +1313,13 @@ class ConvertToPython(Transformer):
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
-        is_function = isinstance(variable_name, str) and re.match(r'.+\(.*\)$', variable_name)
+
+        is_function = False
+        if isinstance(variable_name, str):
+            pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
+            match = re.match(pattern, variable_name)
+            is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+
         return escape_var(variable_name) in all_names_before_access_line or is_function
 
     def process_variable(self, arg, access_line_number=100):
