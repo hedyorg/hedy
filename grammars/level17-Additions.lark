@@ -14,4 +14,10 @@ for_list<needs_colon>
 for_loop<needs_colon>
 while_loop<needs_colon>
 
-define: _DEFINE function_name (_SPACE _USING arguments)? _COLON _EOL _SPACE (command | return) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK
+// FUNCTIONS ======================================== =============================
+?ifs_2: _IF _conditions _COLON _EOL (_SPACE (command | return)) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK -> ifs
+?elses_2: _EOL (_SPACE)* _ELSE (_SPACE)* _COLON _EOL (_SPACE (command | return)) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK -> elses
+?elifs_2: _EOL _ELIF _conditions _COLON _EOL (_SPACE (command | return)) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK -> elifs
+?ifelses_2: (ifs_2 | ifs_2 (elifs_2)* elses_2?) -> command
+define: _DEFINE function_name (_SPACE _USING arguments)? _COLON _EOL _SPACE (command | return | ifelses_2) (_EOL _SPACE (command | return | ifelses_2))* _EOL? _END_BLOCK
+// ================================================================================

@@ -13,11 +13,14 @@ not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
 ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER
 
 // FUNCTIONS ======================================== =============================
-define: _DEFINE function_name (_SPACE _USING arguments)? _EOL _SPACE (command | return) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK
-?return: _RETURN (call | list_access | atom | expression) -> return
+define: _DEFINE function_name (_SPACE _USING arguments)? _EOL _SPACE (command | return | ifelses_2) (_EOL _SPACE (command | return | ifelses_2))* _EOL? _END_BLOCK
+?return: _RETURN (call | _print_argument)? -> returns
 ?expression:+= call
 assign_list: var (_IS| _EQUALS) (call|text_in_quotes|NUMBER) (_COMMA (call|text_in_quotes|NUMBER))+
 command: call | clear | print | turtle | add | remove | sleep | ifpressed_else | ifpressed | ifs | ask | error_ask_no_quotes | assign_button | assign_list | assign | error_text_no_print | empty_line | repeat | error_repeat_no_print | error_repeat_no_times | error_ifelse | ifpressed ifpressed_elses? | ifs elses? | for_list | for_loop
 turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces | expression))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces | call))? -> color
-// ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER
+
+?ifs_2: _IF _conditions _EOL (_SPACE (command | return)) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK -> ifs
+?elses_2: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE (command | return)) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK -> elses
+?ifelses_2: (ifs_2 | ifs_2 elses_2?)->command
 // ================================================================================

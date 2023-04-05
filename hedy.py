@@ -168,11 +168,6 @@ PREPROCESS_RULES = {
 
 
 class Command:
-    define = 'define',
-    call = 'call',
-    using = 'using',
-    withs = 'with',
-    returns = 'return',
     print = 'print'
     ask = 'ask'
     echo = 'echo'
@@ -273,12 +268,6 @@ command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
-    Command.define: {
-        11: [HedyType.string],
-    },
-    Command.call: {
-        11: [HedyType.string],
-    },
     Command.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -1324,8 +1313,8 @@ class ConvertToPython(Transformer):
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
-
-        return escape_var(variable_name) in all_names_before_access_line
+        is_function = isinstance(variable_name, str) and re.match(r'.+\(.*\)$', variable_name)
+        return escape_var(variable_name) in all_names_before_access_line or is_function
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -2169,11 +2158,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
         lines = []
         for line in args[1 if args_str == "" else 2:]:
-            if isinstance(line, Tree) and line.data == "return":
-                lines.append(
-                    "return " + str(line.children[0] if not isinstance(line.children[0], Tree) else line.children[0].children[0]))
-            else:
-                lines.append(line)
+            lines.append(line)
         body = "\n".join(ConvertToPython.indent(x) for x in lines)
 
         return f"def {function_name}({args_str}):\n{body}"
@@ -2322,6 +2307,11 @@ class ConvertToPython_13(ConvertToPython_12):
 @v_args(meta=True)
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
+    def returns(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        exception = self.make_catch_exception(args)
+        return exception + f"return f'''{argument_string}'''"
+    
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])

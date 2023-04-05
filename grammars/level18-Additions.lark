@@ -7,7 +7,7 @@ print_empty_brackets: _PRINT _LEFT_BRACKET _RIGHT_BRACKET
 input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)
 input: var (_IS | _EQUALS) _INPUT (_LEFT_BRACKET  ((quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))*) _RIGHT_BRACKET)?
 for_loop: _FOR var _IN _RANGE _LEFT_BRACKET (POSITIVE_NUMBER | var_access) _COMMA (NUMBER | var_access) (_COMMA (POSITIVE_NUMBER | var_access))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-define: _DEF function_name _LEFT_BRACKET (arguments)? _RIGHT_BRACKET _COLON _EOL _SPACE (command | return) (_EOL _SPACE (command | return))* _EOL? _END_BLOCK
+define: _DEF function_name _LEFT_BRACKET (arguments)? _RIGHT_BRACKET _COLON _EOL _SPACE (command | return | ifelses_2) (_EOL _SPACE (command | return | ifelses_2))* _EOL? _END_BLOCK
 call: function_name _LEFT_BRACKET (arguments)? _RIGHT_BRACKET
 
 ?print_expression: NUMBER | var_access | expression

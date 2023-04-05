@@ -9,7 +9,8 @@ define fruit
 define fruit_2
     print "fruit2"
     
-call fruit
+for i in range 1 to 3
+    call fruit
 ```
 
 ## LEVEL 12
@@ -21,11 +22,11 @@ define fruit using a, b, c, d
     print "fruit " b
 
 define fruit_2 using x, y
-    print "fruit2: " x " " y
+    print "fruit2: " y " " x
     
 f = 'C'
 g = 4.0
-call fruit with 100, "A", f, g
+call fruit with 5 + 4.4, "A", f, g
 ```
 
 ## LEVEL 14
@@ -40,10 +41,3 @@ print call squares with num
 
 print call squares with 3.3
 ```
-
-## Bugs
-- cannot return inside if/else statement yet
-
-- Calling a function inside a print with a quoted text argument does not work
-
-- Cannot return expressions / String concatenation yet
