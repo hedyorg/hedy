@@ -103,8 +103,18 @@ class StatisticsModule(WebsiteModule):
         """ Shows information about an individual student when they
         are selected in the student list.
         """
+
         collapse = request.args.get("collapse", default="True", type=str)
         collapse = _determine_bool(collapse)
+
+        show_c1 = request.args.get("show_c1", default="True", type=str)
+        show_c1 = _determine_bool(show_c1)
+
+        show_c2 = request.args.get("show_c2", default="True", type=str)
+        show_c2 = _determine_bool(show_c2)
+
+        show_c3 = request.args.get("show_c3", default="True", type=str)
+        show_c3 = _determine_bool(show_c3)
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -130,7 +140,8 @@ class StatisticsModule(WebsiteModule):
 
         return render_template(
             "student-space.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse},
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
             current_page='my-profile',
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats')
