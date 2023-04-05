@@ -696,7 +696,7 @@ adventures:
                 start_code: "{print} ¿Quien lavará los platos hoy?"
                 story_text_2: "## Ejercicio\nHaz tu propia version del programa.Primero haz una lista de los miembros de tu familia.\nLuego piensa en una tarea que tenga que ser hecha, y deja que la computadora decida quien debe hacer la tarea con el comando `{at} {random}`.\n\n**Extra**No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con `{remove}``{from}`.\n"
             10:
-                example_code: "```\ndías = Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo\nnombres = mamá, papá, Emma, Sofía\npor día en días\n    {print} nombres {at} {random} ' Hará los platos el ' día\n```\n"
+                example_code: "```\ndías = Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo\nnombres = mamá, papá, Emma, Sofía\n{for} día en días\n    {print} nombres {at} {random} ' Hará los platos el ' día\n```"
                 story_text: "## Programa de lavado de platos\nEn este nivel puedes hacer un horario de lavado de platos de forma facíl.\n\n### Ejercicio\nAgrega una tarea secundaria, como aspirar o planchar, y recuerda que tambien sea dividido para toda la semana.\n<br>**(extra)**El programa no es justo, puedes tener mala suerte y lavar toda la semana. Como puedes hacer el programa mas justo?\n"
                 start_code: '# pon tu código aquí'
     dice:
@@ -947,7 +947,7 @@ adventures:
                 example_code: "```\npuntaje = 0\n{for} i {in} {range} 0 {to} 9\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    correcta = número1 * número2\n    respuesta = 0\n    {while} respuesta != correcta\n        {print} '¿Cuánto es ' número1 ' por ' número2 '?'\n        respuesta = {ask} 'Escribe tu respuesta:'\n        {print} 'Tu respuesta es ' respuesta\n    {print} '¡Buen trabajo!'\n{print} '¡Ganaste!'\n```\n"
                 start_code: '# pon tu código aquí'
             11:
-                example_code: "```\nnumero = 10\n{for} i {in} {range} 1 al 10\n    {print} i * numero\n```"
+                example_code: "```\nnumero = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * numero\n```\n"
                 story_text: "## Calculador\nCon `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el codigo de ejemplo para que\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# pon tu codigo aquí'
             13:
@@ -1304,10 +1304,6 @@ adventures:
                 example_code: "```\ntamaño_de_paso = 15\nizquierda = -90\nderecha = 90\nalrededor = 180\ntiempo_para_salto = 5\ngiros = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n        tiempo_para_salto = tiempo_para_salto - 1\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n        giros = giros - 1\n    {if} d {is} {pressed}\n        {turn} derecha\n        giros = giros - 1\n    {if} p {is} {pressed}\n        {if} tiempo_para_salto <= 0 or giros <= 0\n            {forward} tamaño_de_paso * 3\n            tiempo_para_salto = 5\n            giros = 4\n```\n"
                 story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con`{pressed}`!\nImagina que la tortuga puede hacer un super salto hacia adelante.\n¡Al pulsar ``p``, la tortuga puede hacer un super salto!\nSin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
                 start_code: '# pon tu código aquí'
-            15:
-                story_text: "Ahora que has aprendido sobre los bucles `{while}`, ¡puedes empezar a usarlos en la tortuga!\nLa tortuga ahora solo puede dar 15 pasos o girar 15 veces antes de cansarse\n¡Intenta llegar lo más lejos posible antes de que la tortuga se canse! Puedes usar tu super salto tras 2 giros\no 5 pasos.\n"
-                start_code: '# pon tu código aquí'
-                example_code: "```\nstepsize = 15\nderecha = -90\nizquierda = 90\nalrededor = 180\ntiempo de salto = 5\nvueltas = 2\ncansado_en = 15\nmientras cansado_en> 0\n    {if} w {is} {pressed}\n        adelante stepsize\n        tiempo de salto= tiempo de salto - 1\n    {if} s {is} {pressed}\n        voltear\n    {if} a {is} {pressed}\n        voltear a la derecha\n        vuelta = vuelta - 1\n    {if} d {is} {pressed}\n        voltear a la izquierda\n        vueltas = vueltas - 1\n    {if} p {is} {pressed}\n        {if} tiempo de salto <= 0 o vueltas <= 0\n            adelante stepsize * 4\n            tiempo de salto= 5\n            vueltas= 2\n    cansado_en = cansado_en - 1\n```"
             16:
                 story_text: "Vamos a movernos un poco con un juego de Twister!\n¡Si te sientes preparado/a, pulsa la tecla x para el siguiente movimiento!\n"
                 example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
