@@ -18,24 +18,16 @@ levels:
             question_text: "Welche müssen in die Lücken gefüllt werden, um den Text Hello! erscheinen zu lassen?"
             mp_choice_options:
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "`{echo}` wiederholt eine gegebene Antwort."
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Richtig!"
             -   option: |
-                    ```
-                    hallo
-                    ```
+                    `hello`
                 feedback: "Hallo ist kein Befehl."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "Mit `{ask}` kannst du eine Frage stellen."
             correct_answer: "B"
             hint: "_ Hallo Welt!"
@@ -92,24 +84,16 @@ levels:
                 _ Also ist dein Lieblingstier...
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Nein, du möchtest, dass dir die Antwort laut zurückgegeben wird."
             -   option: |
-                    ```
-                    Hedy
-                    ```
+                    `Hedy`
                 feedback: "Hedy ist kein Befehl."
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "Mit `{ask}` kannst du fragen stellen."
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "Richtig!"
             correct_answer: "D"
             hint: "Du möchtest die Antwort am Ende von Zeile 2 sehen..."
@@ -305,24 +289,16 @@ levels:
                 {print} Hedy!
             mp_choice_options:
             -   option: |
-                    ```
-                    {sleep}
-                    ```
+                    `{sleep}`
                 feedback: "Perfekt!"
             -   option: |
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: "Hier gibt es nichts zu wiederholen"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Es gibt hier keinen Text für `{print}`"
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "Es gibt keine Frage, die gestellt wird"
             correct_answer: "A"
             hint: "Pause für dramatischen Effekt..."
@@ -436,27 +412,19 @@ levels:
             question_score: '10'
     3:
         1:
-            question_text: "Mit welchem Befehl kann Hedy etwas Zufälliges auswählen?"
+            question_text: "Mit welchen Befehlen kann Hedy etwas Zufälliges auswählen?"
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "`{print}` wird verwendet, um Texte auszugeben"
             -   option: |
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: "`{ask}` wird verwendet, um Fragen zu stellen"
             -   option: |
-                    ```
-                    {is}
-                    ```
+                    `{is}`
                 feedback: "`{is}` wird verwendet, um eine Liste zu erstellen"
             -   option: |
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: "Korrekt!"
             correct_answer: "D"
             hint: "Zufällig bedeutet ohne Plan."
@@ -879,13 +847,13 @@ levels:
         1:
             question_text: "Welcher Befehl sollte in die Lücken _?"
             mp_choice_options:
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{print}`\n"
                 feedback: "Es gibt schon einen `{print}` Befehl."
-            -   option: "```\n{if}\n```\n"
+            -   option: "`{if}`\n"
                 feedback: "Der `{if}` Befehl wird in der Zeile darüber benutzt."
-            -   option: "```\n{sleep}\n```\n"
+            -   option: "`{sleep}`\n"
                 feedback: "Das ist es nicht!"
-            -   option: "```\n{else}\n```\n"
+            -   option: "`{else}`\n"
                 feedback: "Das ist richtig!"
             correct_answer: "D"
             hint: "Welches passt zum `{if}` Befehl?"
@@ -1003,24 +971,16 @@ levels:
                 {else} _ 'Unglücklicherweise... Kein großes Geld für dich.'
             mp_choice_options:
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "`{if}` ist in der Zeile darüber."
             -   option: |
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: "Nein, du brauchst kein `{at} {random}`."
             -   option: |
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: "Dort ist bereits ein `{else}` Befehl"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Toll!"
             correct_answer: "D"
             hint: "Nach `{else}` folgt ein `{print}` Befehl"
@@ -1043,14 +1003,10 @@ levels:
                     ```
                 feedback: "Großartig gemacht!"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "`{if}` ist bereits dort"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "Nein, das ist es nicht."
             correct_answer: "B"
             hint: "Was ist der Variablenname?"
@@ -1351,19 +1307,13 @@ levels:
                     ```
                 feedback: "Das ist richtig!"
             -   option: |
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: "`{print}` ist richtig geschrieben"
             -   option: |
-                    ```
-                    {repeat}
-                    ```
+                    `{repeat}`
                 feedback: "`{repeat}` ist richtig geschrieben"
             -   option: |
-                    ```
-                    {times}
-                    ```
+                    `{times}`
                 feedback: "`{times}` ist richtig geschrieben"
             correct_answer: "A"
             hint: "I'm ist falsch, du kannst keine Apostrophe verwenden"
@@ -2035,19 +1985,13 @@ levels:
                     ```
                 feedback: "Nein"
             -   option: |
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: "Richtig"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "Nein"
             -   option: |
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: "Nein"
             correct_answer: "B"
             hint: "Was hast du in diesem Level gelernt?"
@@ -2190,33 +2134,33 @@ levels:
             question_text: "Was sollte anstelle des Fragezeichens stehen?"
             code: |-
                 {print} 'Willkommen bei Hedys Restaurant'
-                personen {is} {ask} 'Wie viele Personen werden heute Abend hier essen?'
+                personen = {ask} 'Wie viele Personen werden heute Abend hier essen?'
                 _
-                    essen {is} {ask} 'Was möchtest du bestellen?'
+                    essen = {ask} 'Was möchtest du bestellen?'
                     {print} essen
             mp_choice_options:
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                     ```
-                feedback: "Es sind nicht immer 3 Leute"
+                feedback: "Es sind nicht immer 3 Personen"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} gäste
                     ```
-                feedback: "Die Variable heißt nicht guests"
+                feedback: "Die Variable heißt nicht gäste"
             -   option: |
                     ```
-                    {for} i {in} {range} 1 {to} people
+                    {for} i {in} {range} 1 {to} personen
                     ```
                 feedback: "Großartig!"
             -   option: |
                     ```
-                    {for} i {in} {range} 0 {to} people
+                    {for} i {in} {range} 0 {to} personen
                     ```
                 feedback: "Das ist eine Bestellung zu viel!"
             correct_answer: "C"
-            hint: "Benutze die Variable 'leute'"
+            hint: "Benutze die Variable 'personen'"
             question_score: '10'
         8:
             question_text: "Was wird die Ausgabe dieses Code sein?"
@@ -2352,7 +2296,7 @@ levels:
                     {print} tier ' sind schöne Haustiere'
             mp_choice_options:
             -   option: "Hunde sind schöne Haustiere"
-                feedback: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ge{print}t."
+                feedback: "Zeile 2 sagt {for} jedes tier in der Liste der tiere. Also wird jedes tier ausgegeben."
             -   option: "Hunde, Katzen, Hamster, Hühner sind schöne Haustiere"
                 feedback: "Jedes tier bekommt seine eigene Zeile in der Ausgabe."
             -   option: |-
@@ -2376,7 +2320,7 @@ levels:
             -   option: "Zeile 2 muss mit 4 Leerzeichen als Einrückung beginnen"
                 feedback: "Nein, tut es nicht. Nur Zeile 3 braucht Einrückung. Die hat sie."
             -   option: "Zeile 3 muss nicht mit 4 Leerzeichen als Einrückung beginnen"
-                feedback: "Zeile 2 ist ein `{for}` Befehl also braucht Zeile 3 nicht mit Einrückung beginnen."
+                feedback: "Zeile 2 ist ein `{for}` Befehl also muss Zeile 3 mit Einrückung beginnen."
             -   option: "In Zeile 3 sollte \"aritkel\" statt \"einkäufe\" stehen"
                 feedback: "Gut gemacht!"
             -   option: "In Zeile 2 muss es heißen: \"einkäufe\" anstelle von \"artikel\""
@@ -2485,9 +2429,9 @@ levels:
                 feedback: "Du möchtest jeden name ausgeben. Also sollte das erste Wort nicht namen sein, sondern..."
             -   option: |
                     ```
-                    'leute bekommt ein farben Hemd'
+                    leute ' bekommt ein farben Hemd'
                     ```
-                feedback: "Es gibt keine Variable mit dem Namen people.."
+                feedback: "Es gibt keine Variable mit dem Namen leute.."
             correct_answer: "B"
             hint: "Beachten Sie die Anführungszeichen und die Namen der Variablen"
             question_score: '10'
@@ -2555,7 +2499,7 @@ levels:
                 feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
             -   option: "```\n'aromen = Vanille, Erdbeere, Schokolade'\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n```"
                 feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
-            -   option: "```\ngeschmacksrichtungen = 'Vanille', 'Erdbeer', 'Schokoladen'\n{print} 'Ich möchte einen ' geschmacksrichtungen {at} {random} '-Kuchen.'\n```"
+            -   option: "```\naromen = 'Vanille', 'Erdbeer', 'Schokoladen'\n{print} 'Ich möchte einen ' aromen {at} {random} '-Kuchen.'\n```"
                 feedback: In Ordnung!
             -   option: "\n```\naromen = 'Vanille, Erdbeere, Schokolade'\n{print} 'Ich möchte einen ' aromen {at} {random} ' Kuchen. '\n```\n"
                 feedback: Alle unterschiedlichen Werte von aromen sollten in Anführungszeichen sein.
@@ -2563,13 +2507,13 @@ levels:
             hint: Die zweite Zeile ist gleich in beiden Programmen, achte auf die erste Zeile
         3:
             question_text: Was stimmt mit diesem Code nicht?
-            code: "lieblings_tier = frage 'Was ist dein Lieblingstier?'\ndrucke 'Ich mag ' lieblingstier ' auch!'"
+            code: "lieblings_tier = {ask} 'Was ist dein Lieblingstier?'\n{print} 'Ich mag ' lieblingstier ' auch!'"
             mp_choice_options:
             -   option: "Der Name der Variablen ist in Zeile 1 ein anderer als in Zeile 2.\n"
                 feedback: Richtig!
             -   option: "Die Anführungszeichen werden in Zeile 2 nicht richtig benutzt\n"
                 feedback: Das ist nicht wahr
-            -   option: "Du kannst das = Zeichen nicht verwenden, wenn du einen frage-Befehl benutzt\n"
+            -   option: "Du kannst das = Zeichen nicht verwenden, wenn du einen {ask}-Befehl benutzt\n"
                 feedback: Das stimmt nicht
             -   option: "Nichts ist falsch.\n"
                 feedback: Das stimmt nicht
@@ -2623,13 +2567,29 @@ levels:
             hint: Die Elemente in der Liste sollten in Anführungszeichen stehen
         10:
             mp_choice_options:
-            -   option: '{for} i {in} {range} 1 {to} 3'
+            -   option: '```
+
+                    {for} i {in} {range} 1 {to} 3
+
+                    ```'
                 feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
-            -   option: '{for} aktion {in} aktionen'
+            -   option: '```
+
+                    {for} aktion {in} aktionen
+
+                    ```'
                 feedback: Du bist super!
-            -   option: '{repeat} 3 {times}'
+            -   option: '```
+
+                    {repeat} 3 {times}
+
+                    ```'
                 feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
-            -   option: '{print} aktionen {at} {random}'
+            -   option: '```
+
+                    {print} aktionen {at} {random}
+
+                    ```'
                 feedback: Das ist eine schwierige Aufgabe! Alle Aktionen aus der Liste müssen im Lied vorkommen.
             question_text: Welche Codezeile soll bei ??? ausgefüllt werden um das Lied zu vervollständigen?
             code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\t{print} aktion"
@@ -2684,15 +2644,15 @@ levels:
     13:
         10:
             question_text: Welcher Befehl muss in Zeile 8 anstelle der ??? stehen?
-            code: "drucke 'Willkommen beim Produktfinder dieses Supermarkts'\nprodukt ist frage 'Welches Produkt suchen Sie?'\nbäckerei = 'Brot', 'Brötchen', 'Muffins'\ngetränke = 'Sprudel', 'Wasser', 'Limo'\nsnacks = 'Chips', 'Nüsse', 'Dips'\ngefroren = 'Pommes', 'Eis', 'Pizza'\nobst = 'Bananen', 'Äpfel', 'Orangen'\nfalls produkt in snacks ??? produkt in getränke\n    drucke 'Dieses Produkt ist in Gang 3'\nfalls produkt in bäckerei or produkt in bäckerei\n    drucke 'Dieses Produkt ist ganz hinten im Laden'\nfalls produkt in obst\n    drucke 'Das Obst ist in der Nähe der Kasse'"
+            code: "{print} 'Willkommen beim Produktfinder dieses Supermarkts'\nprodukt = {ask} 'Welches Produkt suchen Sie?'\nbäckerei = 'Brot', 'Brötchen', 'Muffins'\ngetränke = 'Sprudel', 'Wasser', 'Limo'\nsnacks = 'Chips', 'Nüsse', 'Dips'\ngefroren = 'Pommes', 'Eis', 'Pizza'\nobst = 'Bananen', 'Äpfel', 'Orangen'\n{if} produkt {in} snacks ??? produkt {in} getränke\n    {print} 'Dieses Produkt ist in Gang 3'\n{if} produkt {in} bäckerei {or} produkt {in} bäckerei\n    {print} 'Dieses Produkt ist ganz hinten im Laden'\n{if} produkt {in} obst\n    {print} 'Das Obst ist in der Nähe der Kasse'"
             mp_choice_options:
-            -   option: und
+            -   option: '`{and}`'
                 feedback: Es gibt keine Produkte die sowohl in der Liste der Snacks als auch in der Liste der Getränke sind
-            -   option: oder
+            -   option: '`{or}`'
                 feedback: Großartig gemacht!
-            -   option: in
+            -   option: '`{in}`'
                 feedback: Nein
-            -   option: '{if}'
+            -   option: '`{if}`'
                 feedback: Nein
             correct_answer: B
             hint: Das Produkt ist entweder in der Liste der Snacks oder in der Liste der Getränke
@@ -2714,24 +2674,24 @@ levels:
             question_score: '10'
         2:
             question_text: Welcher Befehl fehlt an der Stelle der ??? ?
-            code: "menü = 'Käse', 'Wurstbrötchen', 'Kekse'\nernährung = frage 'Haben Sie irgendwelche Ernährungseinschränkungen?'\nfalls ernährung = 'vegan' ??? ernährung = 'halal'\n    entferne 'Wurstbrötchen' aus menü"
+            code: "menü = 'Käse', 'Wurstbrötchen', 'Kekse'\nernährung = {ask} 'Haben Sie irgendwelche Ernährungseinschränkungen?'\n{if} ernährung = 'vegan' ??? ernährung = 'halal'\n    {remove} 'Wurstbrötchen' {from} menü"
             mp_choice_options:
-            -   option: und
+            -   option: '`{and}`'
                 feedback: Du musst nicht vegan oder muslimisch sein
-            -   option: oder
+            -   option: '`{or}`'
                 feedback: Großartiges Denken!
-            -   option: ' + '
+            -   option: ' `+` '
                 feedback: Nein
-            -   option: drucke
+            -   option: '`{print}`'
                 feedback: Nein
             correct_answer: B
             hint: Weder Veganer noch Muslime können Wurstbrötchen essen.
             question_score: '10'
         3:
             question_text: Welche Ausgabe bekommt das Mitglied ohne Rabatt-Code?
-            code: "mitglied = frage 'Haben Sie eine Mitgliedskarte?'\nrabatt = frage 'Haben Sie einen Rabatt-Code?'\nfalls mitglied = 'ja' oder rabatt = 'ja'\n    drucke 'Sie bekommen einen Apfelkuchen kostenlos!'\nsonst\n    drucke 'Das sind 5 Euro bitte'"
+            code: "mitglied = {ask} 'Hast du eine Mitgliedskarte?'\nrabatt = {ask} 'Hast du einen Rabatt-Code?'\n{if} mitglied = 'ja' {or} rabatt = 'ja'\n    {print} 'Du bekommst einen kostenlosen Apfelkuchen!'\n{else}\n    {print} 'Das sind 5 Euro bitte'"
             mp_choice_options:
-            -   option: Sie bekommen einen Kuchen kostenlos!
+            -   option: Du bekommst einen kostenlosen Apfelkuchen!
                 feedback: Großartig gemacht!
             -   option: Das sind 5 Euro bitte
                 feedback: Das ist nicht wahr
@@ -2740,26 +2700,26 @@ levels:
             -   option: Es gibt keinen Weg es herauszufinden
                 feedback: Gibt es! Lies die Frage genau
             correct_answer: A
-            hint: Beachte den Befehl 'oder' in Zeile 3
+            hint: Beachte den Befehl `{or}` in Zeile 3
             question_score: '10'
         4:
             question_text: Welche Zeile Code sollte dieser Zeile im Stein-Schere-Papier-Spiel folgen?
             code: "{if} computer_wahl {is} 'Stein' {and} deine_wahl {is} 'Papier'"
             mp_choice_options:
-            -   option: drucke 'du gewinnst'
+            -   option: "```\n{print} 'du gewinnst'\n```"
                 feedback: Du gewinnst!
-            -   option: drucke 'du verlierst'
+            -   option: "```\n{print} 'du verlierst'\n```"
                 feedback: Du verlierst!
-            -   option: drucke 'unentschieden'
+            -   option: "```\n{print} 'unentschieden'\n```"
                 feedback: Es ist nur unentschieden, wenn beide gleich sind
-            -   option: drucke 'versuche es nochmal'
+            -   option: "```\n{print} 'versuche es nochmal'\n```"
                 feedback: Versuche es nochmal!
             correct_answer: A
             hint: Papier schlägt Stein
             question_score: '10'
         5:
             question_text: Welche Aussage über diesen Code ist wahr?
-            code: "falls name = 'Cinderella' und schuhgröße = '38'\n    drucke 'Du bist meine einzig wahre Liebe!'"
+            code: "{if} name = 'Cinderella' {and} schuhgröße = '38'\n    {print} 'Du bist meine einzig wahre Liebe!'"
             mp_choice_options:
             -   option: Jede Person mit Schuhgröße 38 ist die einzig wahre Liebe dieses Prinzen
                 feedback: Der Prinz ist etwas wählerischer!
@@ -2789,7 +2749,7 @@ levels:
             question_score: '10'
         7:
             question_text: Welche Aussage ist falsch?
-            code: "drucke 'Danke, dass du mir mit den Haustieren hilfst'\ndrucke 'Hier ist ein Programm, das hilft, sie zu füttern'\ntier ist frage 'Welches Tier ist es?'\nfarbe ist frage 'Welche Farbe hat es?'\nfalls tier ist 'Katze' und farbe = 'grau'\n    drucke 'Das ist Abby. Sie isst 3 Schaufeln Katzenfutter'\nfalls tier ist 'Katze' und farbe = 'orange'\n    drucke 'Das ist Milo. Er isst 4 Schaufeln Katzenfutter'\nfalls tier ist 'Vogel' oder farbe ist 'schwarz'\n    drucke 'Ich habe sie heute morgen gefüttert! Sie brauchen heute kein Futter mehr'\nfalls tier ist 'Hamster' und farbe ist 'braun'\n    drucke 'Du kannst ihm ein Stück Möhre geben'"
+            code: "{print} 'Danke, dass du mir mit den Haustieren hilfst'\n{print} 'Hier ist ein Programm, das hilft, sie zu füttern'\ntier = {ask} 'Welches Tier ist es?'\nfarbe = {ask} 'Welche Farbe hat es?'\n{if} tier = 'Katze' {and} farbe = 'grau'\n    {print} 'Das ist Abby. Sie isst 3 Schaufeln Katzenfutter'\n{if} tier = 'Katze' {and} farbe = 'orange'\n    {print} 'Das ist Milo. Er isst 4 Schaufeln Katzenfutter'\n{if} tier = 'Vogel' {or} farbe = 'schwarz'\n    {print} 'Ich habe sie heute morgen gefüttert! Sie brauchen heute kein Futter mehr'\n{if} tier = 'Hamster' {and} farbe = 'braun'\n    {print} 'Du kannst ihm ein Stück Möhre geben'"
             mp_choice_options:
             -   option: Die graue Katze heißt Abby
                 feedback: Dies ist wahr!
@@ -2804,7 +2764,7 @@ levels:
             question_score: '10'
         8:
             question_text: Welche Ausgabe erhältst du, wenn du Popcorn bestellst, aber kein Getränk?
-            code: "drucke 'Willkommen im Kino'\npopcorn = frage 'Möchtest du Popcorn?'\ngetränk = frage 'Möchtest du ein Getränk?'\nfalls popcorn = 'ja' und getränk = 'ja'\n    drucke 'Das macht 8 Euro bitte'\nfalls popcorn = 'nein' und getränk = 'ja'\n   drucke 'Das macht 3 Euro bitte'\nfalls popcorn = 'ja' und getränk = 'nein'\n    drucke 'Das macht 5 Euro bitte'\nfalls popcorn = 'nein' und getränk = 'nein'\n    drucke 'OK'\ndrucke 'Viel Spaß beim Film'"
+            code: "{print} 'Willkommen im Kino'\npopcorn = {ask} 'Möchtest du Popcorn?'\ngetränk = {ask} 'Möchtest du ein Getränk?'\n{if} popcorn = 'ja' {and} getränk = 'ja'\n    {print} 'Das macht 8 Euro bitte'\n{if} popcorn = 'nein' {and} getränk = 'ja'\n   {print} 'Das macht 3 Euro bitte'\n{if} popcorn = 'ja' {and} getränk = 'nein'\n    {print} 'Das macht 5 Euro bitte'\n{if} popcorn = 'nein' {and} getränk = 'nein'\n    {print} 'OK'\n{print} 'Viel Spaß beim Film'"
             mp_choice_options:
             -   option: "Willkommen im Kino\nDas macht 8 Euro bitte\nViel Spaß beim Film"
                 feedback: Du hast zu viel bezahlt!
@@ -2819,7 +2779,7 @@ levels:
             question_score: '10'
         9:
             question_text: Was stimmt mit diesem Code nicht?
-            code: "1  schokolade = frage 'Möchtest du Schokoladen-Sauce auf deinem Eis?'\n2  streusel = frage 'Möchtest du Streusel auf deinem Eis?'\n3  falls schokolade und streusel = 'ja'\n4      drucke 'Eis mit Schokoladen-Sauce und Streuseln, kommt sofort!'\n5  falls schokolade = 'ja' und streusel = 'nein'\n6      drucke 'Eis mit Schokoladen-Sauce, kommt sofort!'\n7  falls schokolade = 'nein' und streusel = 'ja'\n8      drucke 'Eis mit Streuseln, kommt sofort'\n9  falls schokolade = 'nein' und streusel = 'nein'\n10     drucke 'Einfach nur Eis, kommt sofort!'"
+            code: "1  schokolade = {ask} 'Möchtest du Schokoladen-Sauce auf deinem Eis?'\n2  streusel = {ask} 'Möchtest du Streusel auf deinem Eis?'\n3  {if} schokolade {and} streusel = 'ja'\n4      {print} 'Eis mit Schokoladen-Sauce und Streuseln, kommt sofort!'\n5  {if} schokolade = 'ja' {and} streusel = 'nein'\n6      {print} 'Eis mit Schokoladen-Sauce, kommt sofort!'\n7  {if} schokolade = 'nein' {and} streusel = 'ja'\n8      {print} 'Eis mit Streuseln, kommt sofort'\n9  {if} schokolade = 'nein' {and} streusel = 'nein'\n10     {print} 'Einfach nur Eis, kommt sofort!'"
             mp_choice_options:
             -   option: "Zeile 3 sollte sein: {if} schokolade = 'ja' {and} streusel = 'nein'"
                 feedback: Richtig!
