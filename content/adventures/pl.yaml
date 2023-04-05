@@ -258,6 +258,12 @@ adventures:
                 start_code: '# umieść tutaj swój kod'
                 story_text: "## Gra w bezwzrokowe pisanie.\nTeraz gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie pisania bezwzrokowego za pomocą `{pressed}`.\n\n### Ćwiczenie\nDokończ kod. Za każdym razem program ma wybrać losową literę, którą należy nacisnąć. Otrzymujesz punkt za prawidłowy klawisz i odjęcie dwóch punktów za niewłaściwy klawisz.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored."
                 example_code: "```\npunkty = 1\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera \n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
+            5:
+                start_code: '# place your code here'
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                story_text: "## Pressed\nIn this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
+                story_text_2: "## With turtle\nYou can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
+                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
     rock:
         default_save_name: Kamień
         levels:
