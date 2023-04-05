@@ -501,7 +501,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "songs": "🎵,🎶",
     "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
     "turtle": "🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    "unsaved_class_changes": "Biztosan elhagyod ezt az oldalt? Mentetlen változtatásaid vannak, amik így elveszhetnek."
   },
   "id": {
     "CheckInternet": "Cobalah cek apakah internet kamu berjalan dengan baik.",
