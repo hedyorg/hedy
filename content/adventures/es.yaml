@@ -1342,6 +1342,10 @@ adventures:
                 start_code: '# coloque aquí su código'
                 story_text: "## ¡Presiónelo!\n¡En la introducción también se le informó acerca de la nueva palabra clave `{pressed}`! Usando `{pressed}`\npuede hacer que la codificación sea mucho más interactiva, ¡y puede tener control en vivo de lo que se ejecuta!\nEn los próximos niveles, aprenderá cómo `{pressed}` lo hace posible y qué utiliza `{pressed}`.\nposee.\nAdemás de imprimir texto, hay toda una variedad de usos para `{pressed}`\nPor ejemplo, ¡también puede vincular los comandos de tortuga a las teclas! ¡Intentalo!\n"
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
+            15:
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\n{while} tired_in > 0\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
+                start_code: '# place your code here'
+                story_text: "Now that you have learned about the `{while}` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
         name: Presiónalo
         description: ¡Intenta vincular una tecla del teclado a un comando!
         default_save_name: Presione
