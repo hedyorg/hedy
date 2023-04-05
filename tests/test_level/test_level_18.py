@@ -328,42 +328,9 @@ class TestsLevel18(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.USEREVENT:
-            if event.key != 'PRINT':
-                pygame_end = True
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
               break
             # End of PyGame Event Handler""")
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_if_button_is_pressed_print_in_repeat(self):
-        code = textwrap.dedent("""\
-        x = 'but' 
-        x is button
-        repeat 3 times
-            if but is pressed:
-                print('wow')""")
-
-        expected = HedyTester.dedent(f"""\
-        x = 'but'
-        create_button(x)
-        for i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.USEREVENT:
-              if event.key != 'but':
-                  pygame_end = True
-              if event.key == 'but':
-                print(f'''wow''')
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)

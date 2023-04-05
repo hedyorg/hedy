@@ -791,6 +791,74 @@ adventures:
                 story_text: "## Dados\n¿Todo el mundo está tardando mucho lanzando el dado? ¡En este nivel puedes lanzar todos los dados a la vez!\n¿Puedes rellenar los espacios con la línea de código correcta?\n"
                 example_code: "```\njugadores = Ana, Juan, Pedro\nopciones = 1, 2, 3, 4, 5, 6\n _ \n{print} jugador ' tiró un ' opciones {at} {random}\n{sleep}\n```\n"
                 start_code: '# Coloca tu código aquí'
+    pressit:
+        name: Presiónalo
+        description: ¡Intenta vincular una tecla del teclado a un comando!
+        default_save_name: Presione
+        levels:
+            5:
+                story_text: |
+                    ## Presionada
+                    ¡En este nivel hay otra nueva palabra clave: `{pressed}`!
+                    Con `{pressed}` puedes usar las teclas de tu teclado para controlar qué líneas se usarán.
+                    
+                    ### Desafío
+                    Mira el ejemplo y agrega una línea más de código que reaccione al presionar una tecla.
+
+                example_code: |
+                     ```
+                     {print} '¿Quieres un final bueno (g) o malo (b)?'
+                     {if} g {is} {pressed} {print} 'Vivieron felices para siempre ❤'
+                     {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
+                     ```
+                story_text_2: |
+                     ## Con la tortuga
+                     También puedes enlazar los comandos de la tortuga a teclas del teclado.
+
+                     ### Desafío
+                     Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
+
+                example_code_2: |
+                     ```
+                     {if} y {is} {pressed} {forward} 15
+                     {else} {turn} 90
+                     ```
+                start_code: "# pon tu código aquí"
+            7:
+                story_text: |
+                    ## Presionada
+                    Ahora que ya has aprendido acerca de `{repeat}`, podemos presionar las teclas múltiples veces.
+                    Puedes usarlo para hacer que la tortuga camine hacia adelante y gire.
+
+                    ### Ejercicio
+                    El código que viste en el nivel 5 solamente comprueba la tecla una sola vez. Copia el código de ejemplo y agregále un `{repeat}`, así podrás presionar la tecla múltiples veces.
+                    Usa este código para dibujar algo bonito.
+                example_code: |
+                    ```
+                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
+                    ```
+                start_code: "# pon tu código aquí"
+            9:
+                story_text: |
+                    ## ¡Práctica escribir a ciegas!
+                    Ahora que sabes como combinar sentencias, puedes crear una herramienta de escritura a ciegas con `{pressed}`
+                    
+                    ### Ejercicio                    
+                    Termina el código. Cada vez una letra aleatoria va a ser escogida, la cual debes presionar. Obtienes un punto cuando presionas la tecla correcta, y una deducción de dos puntos cuando presionas una tecla equivocada.
+                    **(extra)** Limpia la pantalla luego de cada letra, y muestra al usuario cuántos puntos han obtenido.
+                example_code: |
+                    ```
+                    puntos = 0
+                    letras = a, b, c, d, e
+                    {repeat} 10 {times}
+                        letra = _ _ _
+                        {print} 'Presiona la letra ' letra
+                        {if} letra {is} {pressed}
+                        _
+                        _
+                        _
+                    ```
+                start_code: "# place your code here"
     rock:
         name: "Piedra, papel o tijera"
         description: "Crea tu propio juego de piedra, papel y tijera"
@@ -1293,62 +1361,6 @@ adventures:
             17:
                 story_text: "## Crea un juego de Blackjack\nBlackjack es un juego simple de cartas en el cual debes acercarte lo máximo posible a 21. Recibes dos cartas. El valor de cada carta es el número que llevan, la Jota, Reina y Rey valen 10 puntos.\nEl As vale 1 o 11 puntos (puedes elegir). El repartidor, tu oponente, también obtiene dos cartas.\nSi quieres, puedes obtener otra carta, y sus puntos se sumarán al total. El repartidor también puede obtener otra carta.\nPero ten mucho cuidado de no pasarte de 21 puntos, porque si lo haces, ¡Pierdes!\n¡El jugador que se acerque mas a 21 sin pasarse gana!\n\n¡Buena suerte!\n"
                 example_code: "```\n{print} 'BLACKJACK'\ncartas = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jota', 'Reina','Rey', 'As']\npuntos = 0\npuntos_dealer = 0\ncarta_1 = cartas[{random}]\ncarta_2 = cartas[{random}]\ncarta_3 = cartas [{random}]\ncarta_dealer_1 = cartas[{random}]\ncarta_dealer_2 = cartas[{random}]\ncarta_dealer_3 = cartas[{random}]\n# Puntos por carta 1\n{if} carta_1 == 'Jota' {or} carta_1 == 'Reina' {or} carta_1 == 'Rey':\n    puntos = puntos + 10\n{elif} carta_1 == 'As':\n    puntos = puntos + 11\n{else}:\n    puntos = puntos + carta_1\n# Puntos por carta 2\n{if} carta_2 == 'Jota' {or} carta_2 == 'Reina' {or} carta_2 == 'Rey':\n    puntos = puntos + 10\n{elif} carta_2 == 'As':\n    puntos = puntos + 11\n{else}:\n    puntos = puntos + carta_2\n# Puntos para el dealer por la carta 1\n{if} carta_dealer_1 == 'Jota' {or} carta_dealer_1 == 'Reina' {or} carta_dealer_1 == 'Rey':\n    puntos_dealer = puntos_dealer + 10\n{elif} carta_dealer_1 == 'As':\n    puntos_dealer = puntos_dealer + 11\n{else}:\n    puntos_dealer = puntos_dealer + carta_dealer_1\n# Puntos para el dealer por la carta 2\n{if} carta_dealer_2 == 'Jota' {or} carta_dealer_2 == 'Reina' {or} carta_dealer_2 == 'Rey':\n    puntos_dealer = puntos_dealer + 10\n{elif} carta_dealer_2 == 'As':\n    puntos_dealer = puntos_dealer + 11\n{else}:\n    puntos_dealer = puntos_dealer + carta_dealer_2\n# Dos ases\n{if} carta_1 == 'As' {and} carta_2 == 'As':\n    puntos = 12\n{if} carta_dealer_1 == 'As' {and} carta_dealer_2 == 'As':\n    puntos_dealer = 12\n# Puntaje\n{print} 'Tienes un ' carta_1 ' y un ' carta_2 ' (' puntos ' puntos)'\n{print} 'El dealer tene un ' carta_dealer_1 ' y un ' carta_dealer_2 ' (' puntos_dealer ' puntos)'\n# Carta extra para el dealer\nagarrar = {ask} '¿Quieres una carta extra?'\n{if} agarrar == 'si':\n    {if} carta_3 == 'Jota' {or} carta_3 == 'Reina' {or} carta_3 == 'Rey':\n        puntos = puntos + 10\n    {elif} carta_3 == 'As':\n        {if} puntos > 11:\n            puntos = puntos + 11\n        {else}:\n            puntos = puntos + 1\n    {else}:\n        puntos = puntos + carta_3\n    print 'Tienes un' carta_3 ' extra (' puntos ' puntos)'\n{else}:\n    print 'Sin cartas extra'\n# Ganador\n{if} puntos > 21 {or} puntos_dealer > puntos {or} puntos_dealer == 21:\n    {print} 'Perdiste'\n{elif} puntos_dealer < 17:\n    {print} 'El dealer toma una carta extra. Es un... ' carta_dealer_3\n    {if} carta_dealer_3 == 'Jota' {or} carta_dealer_3 == 'Reina' {or} carta_dealer_3 == 'Rey':\n        puntos_dealer = puntos_dealer + 10\n    {elif} carta_dealer_3 == 'As':\n        {if} puntos_dealer < 11:\n            puntos_dealer = puntos_dealer + 11\n        {else}:\n            puntos_dealer = puntos_dealer + 1\n    {else}:\n        puntos_dealer = puntos_dealer + carta_dealer_3\n    {print} 'El dealer tiene ' puntos_dealer ' puntos ahora'\n    {if} puntos_dealer < 21 {and} puntos_dealer > puntos:\n        {print} 'Pierdes'\n    {else}:\n        {print} 'Ganas'\n{elif} puntos > puntos_dealer {and} puntos < 21:\n    {print} '¡Ganaste!'\n```\n"
-                start_code: '# pon tu código aquí'
-    pressit:
-        levels:
-            13:
-                example_code: "```\ntamaño_de_paso = 10\nizquierda = -90\nderecha = 90\nalrededor = 180\nmirado_izquierda = 0\nmiró_a_la_derecha = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} un {is} {pressed}\n        {turn} izquierda\n        mirado_izquierda = 1\n    {if} d {is} {pressed}\n        {turn} derecha\n        miró_a_la_derecha = 1\n    {if} p {is} {pressed}\n        {if} mirado_izquierda {is} 1 {and} miró_a_la_derecha {is} 1\n            {forward} 40\n            mirado_izquierda = 0\n            miró_a_la_derecha = 0\n```\n"
-                start_code: '# pon tu código aquí'
-                story_text: "Ahora que aprendiste a usar `{and}` y `{or}`, ¡también podemos usarlo con `{pressed}`!\nImagina que la tortuga puede hacer un supersalto hacia adelante.\n¡Al presionar `p` la tortuga puede hacer un supersalto!\nSin embargo, ¡la tortuga solo puede hacer este salto si primero gira a la izquierda y a la derecha!\n"
-            14:
-                example_code: "```\ntamaño_de_paso = 15\nizquierda = -90\nderecha = 90\nalrededor = 180\ntiempo_para_salto = 5\ngiros = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n        tiempo_para_salto = tiempo_para_salto - 1\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n        giros = giros - 1\n    {if} d {is} {pressed}\n        {turn} derecha\n        giros = giros - 1\n    {if} p {is} {pressed}\n        {if} tiempo_para_salto <= 0 or giros <= 0\n            {forward} tamaño_de_paso * 3\n            tiempo_para_salto = 5\n            giros = 4\n```\n"
-                story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con`{pressed}`!\nImagina que la tortuga puede hacer un super salto hacia adelante.\n¡Al pulsar ``p``, la tortuga puede hacer un super salto!\nSin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
-                start_code: '# pon tu código aquí'
-            16:
-                story_text: "Vamos a movernos un poco con un juego de Twister!\n¡Si te sientes preparado/a, pulsa la tecla x para el siguiente movimiento!\n"
-                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
-                start_code: '# pon tu código aquí'
-            17:
-                story_text: "Ahora que has aprendido a usar `{elif}`, también podemos usarlo con `{pressed}`. Ten en cuenta que {is}`{elif} ... {is} {pressed}` no es posible. Por eso vamos a anidar algunos `{elif}` en las opciones de `{pressed}`. También tuvimos que añadir `:` al código para que todo funcione. Imagina que la tortuga puede hacer un super salto hacia adelante. Al pulsar `p` la tortuga puede hacer un super salto. Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
-                start_code: '# pon tu código aquí'
-            7:
-                start_code: '# coloque su código aquí'
-                story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a `{pressed}` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la `{repeat}`,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
-                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
-            9:
-                story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
-                example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
-                start_code: '# pon tu código aquí'
-            10:
-                story_text: "En este nivel puedes hacer que la tortuga te dibuje una figura. La tortuga está ansiosa por empezar.\nDale la señal de inicio a la tortuga pulsando la tecla x o y de tu teclado.\n¿Puedes hacer que la tortuga te dibuje otra figura?\n"
-                example_code: "```\ndistancias = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distancia {in} distancias\n        {forward} distancia\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distancia {in} distancias\n        {forward} distancia\n        {turn} 90\n```\n"
-                start_code: '# pon tu código aquí'
-            11:
-                story_text: "Ahora que conoce la regla `{for} ... {in} {range} ... {to} ...`, puede usarla para `{pressed}`\n¡también! por ejemplo, ¡intenta mover la tortuga! La tortuga crece cada vez que presionas un botón vinculado.\n¡De esta manera la tortuga puede avanzar más a cada paso!\n"
-                example_code: "```\nizquierda = -90\nderecha = 90\nalrededor = 180\n{for} contador {in} {range} 1 {to} 15\n    tamaño_de_paso = contador * 5\n    {if} w {is} {forward}\n        {forward} tamaño_de_paso\n    {if} s {is} {forward}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n    {if} d {is} {pressed} \n        {turn} derecha\n```\n"
-                start_code: '# pon tu código aquí'
-            12:
-                story_text: "¿Tienes experiencia con los videojuegos? Entras en una hierba alta y de la nada se te acerca\nun ratón muy sospechoso. ¿Qué harías?\nEn este nivel crearemos un pequeño menú con diferentes opciones.\nAlmacenar texto en una variable es muy útil para repetir su uso.\nOpción, ¡te elijo a ti!\n"
-                example_code: "```\nelegir = 'Has elegido la opción: '\n{print} '¡Apareció un ratón salvaje!'\n{print} 'Elige una opción y pulsa la primera letra: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} elegir + 'red'\n    {print} 'Intentas atrapar al ratón con una red..'\n    {sleep}\n    {print} '¡Enhorabuena lo has conseguido!'\n{if} c {is} {pressed}\n    {print} elegir + 'cat'\n    {print} 'Envías a tu gato'\n    {sleep}\n    {print} '¡El ratón se asustó y huyó!'\n{if} b {is} {pressed}\n    {print} elegir + 'bag'\n    {print} '¡El ratón saltó a tu bolsa!'\n{if} r {is} {pressed}\n    {print} elegir + 'run'\n    {print} '¡Has escapado sano y salvo!'\n```\n"
-                start_code: '# pon tu código aquí'
-            6:
-                start_code: '# coloque su código aquí'
-                story_text: "¿Sabías que también puedes hacer una calculadora con la tecla `{pressed}`?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nprimero = {ask} '¿Cuál es tu primer número?'\nsegundo = {ask} '¿Cuál es tu segundo número?'\n{print} 'presione a para sumar, s para restar, d para dividir, m para multiplicar'\n{if} un {is} {pressed} resultado = primero + segundo\n{if} s {is} {pressed} resultado = primero - segundo\n{if} d {is} {pressed} resultado = primero / segundo\n{if} m {is} {pressed} resultado = primero * segundo\n{print}'La respuesta es' resultado\n```\n"
-            5:
-                story_text_2: "## Si se presiona más\nTambién puede asignar una instrucción `{else}` a `{pressed}`. La instrucción `{else}` se ejecutará cada vez que presione una tecla que no sea la tecla que asignó.\n"
-                example_code_2: "```\n{if} y {is} {pressed} {print} '¡Genial! ¡Presionaste la tecla y!'\n{else} {print} '¡Oh, no! No presionaste la tecla y.\n```\n"
-                start_code: '# coloque aquí su código'
-                story_text: "## ¡Presiónelo!\n¡En la introducción también se le informó acerca de la nueva palabra clave `{pressed}`! Usando `{pressed}`\npuede hacer que la codificación sea mucho más interactiva, ¡y puede tener control en vivo de lo que se ejecuta!\nEn los próximos niveles, aprenderá cómo `{pressed}` lo hace posible y qué utiliza `{pressed}`.\nposee.\nAdemás de imprimir texto, hay toda una variedad de usos para `{pressed}`\nPor ejemplo, ¡también puede vincular los comandos de tortuga a las teclas! ¡Intentalo!\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-            15:
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\n{while} tired_in > 0\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
-                start_code: '# place your code here'
-                story_text: "Now that you have learned about the `{while}` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
-        name: Presiónalo
-        description: ¡Intenta vincular una tecla del teclado a un comando!
-        default_save_name: Presione
     years:
         name: Año Nuevo
         description: ¡Cuenta regresiva para el año nuevo!
