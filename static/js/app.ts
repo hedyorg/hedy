@@ -920,15 +920,26 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+    let pygameModal = $('#pygame-modal');
 
     const codeContainsInputFunctionBeforePygame = new RegExp(
       "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
     ).test(code);
 
-    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
-      $('#pygame-modal').show();
+    if (!codeContainsInputFunctionBeforePygame) {
+      pygameModal.show();
     }
 
+    if (hasTurtle) {
+      pygameModal.addClass('absolute');
+      pygameModal.addClass('bottom-0');
+      pygameModal.addClass('w-full');
+    } else {
+      pygameModal.removeClass('absolute');
+      pygameModal.removeClass('bottom-0');
+      pygameModal.removeClass('w-full');
+    }
+    
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
