@@ -577,15 +577,15 @@ adventures:
                 example_code: "```\nklucze = 'zgubione'\n{print} 'Stoisz w ogrodzie i zgubiłeś swoje klucze.' \n{print} 'Gdzie chcesz ich poszukać?'\n{print} 'Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy'\n{while} klucze == 'zgubione'\n    miejsce = {ask} 'Gdzie chcesz popatrzeć?'\n    {if} miejsce == 'doniczka'\n        {print} 'Tutaj są!'\n        klucze = 'znalezione'\n    {else}\n        {print} 'Nie, nie ma ich w ' miejsce\n{print} 'Teraz możesz wejść do domu!'\n```\n"
                 start_code: '# tutaj umieść swój kod'
             13:
-                story_text: "## Opowieść\nUżywając poleceń `{and}` oraz `{or}` możesz uczynić swoje opowieści bardziej wszechstronnymi. Możesz zadać dwa pytanai y odpowiedzieć na kombinację odpowiedzi.\n### Ćwiczenie 1\nPopatrz na przykładowy kod i dokończ go. Następnie dodaj co najmniej 2 kody `{if}` z `{and}` lub `{or}`.\n### Ćwiczenie 2\nOdnajdź opowieść z poprzedniego poziomu i dodaj jeden `{and}` lub `{or}`.\n"
+                story_text: "## Opowieść\nUżywając poleceń `{and}` oraz `{or}` możesz uczynić swoje opowieści bardziej wszechstronnymi. Możesz zadać dwa pytania i odpowiedzieć na kombinację odpowiedzi.\n\n### Ćwiczenie 1\nPopatrz na przykładowy kod i dokończ go. Następnie dodaj co najmniej 2 polecenia `{if}` z poleceniami `{and}` lub `{or}`.\n\n### Ćwiczenie 2\nOdnajdź opowieść z poprzedniego poziomu i dodaj jedno polecenie `{and}` lub `{or}`.\n"
                 example_code: "```\n{print} 'Nasz bohater idzie przez las'\n{print} 'Ścieżka rozdziela się'\nścieżka = {ask} 'Którą ścieżkę powinna wybrać?'\nbroń ={ask} 'Jaką broń wyciąga?'\n{if} ścieżka {is} 'lewo' {and} broń {is} 'miecz'\n\t_\n```\n"
                 start_code: '# tutaj umieść swój kod'
             18:
                 story_text: "## Opowieść\nNapiszemy kolejną opowieść, ale teraz musimy użyć nawiasów z `{print}`.\n\n\n### Ćwiczenie 1\nStwórz opowieść składającą się z co najmniej 5 zdań. Nie musisz użyć 'imię' jeszcze.\n"
-                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
-                example_code: "```\n{print}('Welcome to this story!')\n```\n"
-                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
-                start_code: '# Schrijf jouw code hier'
+                story_text_2: "### Ćwiczenie 2\nPrzygotowaliśmy już dla ciebie polecenie `{input}`. Najpierw użyj zmiennej `imię` w twojej opowieści.\nNastępnie dodaj drugie polecenie `{ask}` i użyj również tej zmiennej.\nWskazówka: Pamiętaj o przecinkach w poleceniu `{print}` pomiędzy tekstem a zmiennymi!\n"
+                example_code: "```\n{print}('Witamy w tej opowieści!')\n```\n"
+                example_code_2: "```\nimię = {input}(\"Jak się nazywasz?\")\n{print}('Witamy w tej opowieści!')\n```\n"
+                start_code: '# tutaj napisz swój kod'
         name: Historyjka
         description: Stwórz krótką historyjkę
         default_save_name: Historyjka
@@ -603,9 +603,11 @@ adventures:
 
                     {echo}
 
-                    {echo}'
+                    {echo}
+
+                    '
                 story_text_2: "### Ćwiczenie\nSkopiuj przykładowy kod na ekran wprowadzania, klikając żółty przycisk.\nSpraw, aby papuga zadała inne pytanie. Uzupełnij puste miejsca w przykładzie!\n**Dodatkowo** Możesz także pozwolić papudze zadawać wiele pytań. Wpisz więcej wierszy kodu pod własnym kodem.\n"
-                example_code_2: "```\n{print} Jestem papuga Hedy\n{ask} _\n{echo}\n{echo}\n```"
+                example_code_2: "```\n{print} Jestem papuga Hedy\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papuga\nStwórz swoją własną cyfrową papugę, która będzie po tobie powtarzać cokolwiek powiesz!\n"
                 example_code: "```\n{print} Jestem papuga Hedy\nimię {is} {ask} jak masz na imię?\n{print} imię\n{sleep}\n{print} ara\n{sleep}\n{print} imię\n```\n"
