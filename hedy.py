@@ -2311,7 +2311,7 @@ class ConvertToPython_14(ConvertToPython_13):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
         return exception + f"return f'''{argument_string}'''"
-    
+
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])
