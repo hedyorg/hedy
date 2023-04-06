@@ -6,7 +6,7 @@ import JSZip from "jszip";
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
-import { Achievement, Adventure } from './types';
+import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
@@ -196,13 +196,12 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    if (!theUserIsLoggedIn) {
-      // Load initial code from local storage, if available
-      const programFromLs = localLoad(currentTabLsKey());
-      if (programFromLs && adventure) {
-        adventure.start_code = programFromLs.code;
-        adventure.save_name = programFromLs.saveName;
-      }
+    // Load initial code from local storage, if available
+    const programFromLs = localLoad(currentTabLsKey());
+    if (programFromLs && adventure) {
+      adventure.start_code = programFromLs.code;
+      adventure.save_name = programFromLs.saveName;
+      adventure.save_info = 'local-storage';
     }
 
     reconfigurePageBasedOnTab();
@@ -539,7 +538,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         adventure_name: adventureName,
 
         // Save under an existing id if this field is set
-        program_id: adventure?.save_info?.id,
+        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
         save_name: saveNameFromInput(),
       });
 
@@ -921,15 +920,26 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+    let pygameModal = $('#pygame-modal');
 
     const codeContainsInputFunctionBeforePygame = new RegExp(
       "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
     ).test(code);
 
-    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
-      $('#pygame-modal').show();
+    if (!codeContainsInputFunctionBeforePygame) {
+      pygameModal.show();
     }
 
+    if (hasTurtle) {
+      pygameModal.addClass('absolute');
+      pygameModal.addClass('bottom-0');
+      pygameModal.addClass('w-full');
+    } else {
+      pygameModal.removeClass('absolute');
+      pygameModal.removeClass('bottom-0');
+      pygameModal.removeClass('w-full');
+    }
+    
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
@@ -1802,20 +1812,24 @@ function updatePageElements() {
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
+    const saveInfo: ServerSaveInfo = isServerSaveInfo(adventure.save_info)
+      ? adventure.save_info
+      : { id : '*dummy*' };
+
     // SHARING SETTINGS
     // Star on "share" button is filled if program is already public, outlined otherwise
-    const isPublic = !!adventure.save_info?.public;
+    const isPublic = !!saveInfo.public;
     $('#share_program_button')
       .toggleClass('active-bluebar-btn', isPublic);
     $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
-    $('[data-view="if-public"]').toggle(!!adventure.save_info?.public);
-    $('[data-view="if-public-url"]').toggle(!!adventure.save_info?.public_url);
-    $('input[data-view="public-url"]').val(adventure.save_info?.public_url ?? '');
+    $('[data-view="if-public"]').toggle(isPublic);
+    $('[data-view="if-public-url"]').toggle(!!saveInfo.public_url);
+    $('input[data-view="public-url"]').val(saveInfo.public_url ?? '');
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
-    const isSubmitted = !!adventure.save_info?.submitted;
+    const isSubmitted = !!saveInfo.submitted;
     $('#hand_in_button')
       .toggleClass('active-bluebar-btn', isSubmitted);
 
@@ -1864,12 +1878,12 @@ function initializeShareProgramButtons() {
       const isPublic = $(ev.target).val() === '1' ? true : false;
 
       // Async-safe copy of current tab
-      const adventureName = currentTab;
+      const adventure = theAdventures[currentTab];
 
       tryCatchPopup(async () => {
         await saveIfNecessary();
 
-        const saveInfo = theAdventures[adventureName]?.save_info;
+        const saveInfo = isServerSaveInfo(adventure?.save_info) ? adventure?.save_info : undefined;
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
@@ -1881,7 +1895,7 @@ function initializeShareProgramButtons() {
 
         modal.notifySuccess(response.message);
         if (response.save_info) {
-          (theAdventures[adventureName] ?? {}).save_info = response.save_info;
+          adventure.save_info = response.save_info;
         }
         updatePageElements();
       });
@@ -1892,12 +1906,12 @@ function initializeShareProgramButtons() {
 function initializeHandInButton() {
   $('#do_hand_in_button').on('click', () => {
       // Async-safe copy of current tab
-      const adventureName = currentTab;
+      const adventure = theAdventures[currentTab];
 
       tryCatchPopup(async () => {
         await saveIfNecessary();
 
-        const saveInfo = theAdventures[adventureName]?.save_info;
+        const saveInfo = isServerSaveInfo(adventure?.save_info) ? adventure.save_info : undefined;
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
@@ -1907,7 +1921,7 @@ function initializeHandInButton() {
 
         modal.notifySuccess(response.message);
         if (response.save_info) {
-          (theAdventures[adventureName] ?? {}).save_info = response.save_info;
+          adventure.save_info = response.save_info;
         }
         updatePageElements();
       });
@@ -1939,12 +1953,15 @@ function programNeedsSaving(adventureName: string) {
     return false;
   }
 
-  // We need to save if the content changed, OR if we are logged in but
-  // the program doesn't have an ID yet. Submitted programs are never saved again.
+  // We need to save if the content changed, OR if we have the opportunity to
+  // save a program that was loaded from local storage to the server.
+  // (Submitted programs are never saved again).
   const programChanged = theGlobalEditor.getValue() !== adventure.start_code;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
-  const programWasNeverSavedBefore = theUserIsLoggedIn && !adventure.save_info?.id;
-  return (programChanged || nameChanged || programWasNeverSavedBefore) && !adventure.save_info?.submitted;
+  const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
+  const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
 }
 
 /**
@@ -1977,15 +1994,16 @@ async function saveIfNecessary() {
   const saveName = saveNameFromInput();
 
   if (theUserIsLoggedIn) {
+    const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
     const response = await postJsonWithAchievements('/programs', {
       level: theLevel,
       lang:  theLanguage,
       name:  saveName,
       code:  code,
       adventure_name: adventureName,
-      program_id: adventure.save_info?.id,
+      program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
-      share: adventure.save_info?.public,
+      share: saveInfo?.public,
     });
 
     // Record that we saved successfully

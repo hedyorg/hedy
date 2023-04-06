@@ -1,7 +1,7 @@
 2:
 -   name: '{is}'
     explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-    demo_code: "name {is} Hedy\n{print} welcome name"
+    demo_code: "nom {is} Hedy\n{print} hola nom"
 -   name: '{ask}'
     explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
     demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
@@ -22,7 +22,7 @@
     explanation: '`{remove}` an item `{from}` a list.'
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 5:
--   demo_code: "{print} 'Hello welcome to Hedy.'"
+-   demo_code: "{print} 'Hola benvingut a Hedy.'"
     name: '{print}'
     explanation: Print exactly using quotation marks.
 -   name: '{ask}'
@@ -43,7 +43,7 @@
 6:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    demo_code: "{print} '5 per 5 és ' 5 * 5"
 -   name: '{ask}'
     explanation: Ask for a calculation and check whether it is correct.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
@@ -56,7 +56,7 @@
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
     explanation: Ask something with `{ask}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    demo_code: "color = {ask} 'Quin és el teu color preferit?'\n{print} color ' és el teu preferit!'"
 -   name: '{if}'
     explanation: Make a choice with `{if}`.
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
@@ -115,15 +115,15 @@
 1:
 -   name: '{print}'
     explanation: Print something with `{print}`.
-    demo_code: '{print} Hello welcome to Hedy!'
+    demo_code: '{print} Hola, benvingut a Hedy!'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
+    explanation: Pregunta alguna cosa amb `{ask}`.
+    demo_code: '{ask} Quin és el teu color preferit?'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
-    demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+    explanation: Repeteix el que vulguis usant `{echo}`.
+    demo_code: "{ask} Quin és el teu color preferit?\n{echo} així que el teu color preferit és el"
+-   name: '{print} emoticones'
+    explanation: Imprimeix un emoticona amb `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
@@ -134,7 +134,7 @@
 4:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    demo_code: "{print} 'Hola benvingut a Hedy.'"
 -   name: '{is}'
     explanation: Give a name to some text and `{print}` without quotation marks.
     demo_code: "name {is} Hedy\n{print} 'my name is ' name"
@@ -144,7 +144,7 @@
 8:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    demo_code: "{print} '5 per 5 és ' 5 * 5"
 -   name: '{ask}'
     explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
@@ -164,7 +164,7 @@
 10:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    demo_code: "{print} '5 per 5 és ' 5 * 5"
 -   name: '{for} with a list'
     explanation: Print all things in a list.
     demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"

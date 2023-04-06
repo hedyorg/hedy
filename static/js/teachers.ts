@@ -203,12 +203,6 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
-   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
-   // The values in this case are the class id's for which we need to update the class customizations
-   let classes = new Array();
-   $(".customize_adventure_class_checkbox:checked").each(function () {
-     classes.push($(this).val());
-   });
 
     $.ajax({
       type: 'POST',
@@ -218,7 +212,6 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
@@ -370,7 +363,7 @@ export function save_customizations(class_id: string) {
         }
     });
     let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('#sortadventures').children().each(function() {
+    $('[id^=level-]').each(function() {
         const id = $(this).attr('id')!;
         const level = id.split('-')[1]!;
         sorted_adventures[level] = [];
@@ -427,7 +420,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
             $('.opening_date_input').val('');
-            $('#sortadventures').children().each(
+            $('[id^=level-]').each(
               function() {
                 $(this).empty();
                 const level = $(this).attr('id')!.split('-')[1];
@@ -476,14 +469,14 @@ export function select_all_levels_adventure(adventure_name: string) {
 export function enable_level(level: string) {
     markUnsavedChanges();
     // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('blue-btn')) {
+    if ($('#level_button_' + level).hasClass('gray-btn')) {
         $('.adventure_level_' + level).each(function(){
             $(this).removeClass('hidden');
             if ($(this).is(':enabled')) {
                 $(this).prop("checked", true);
             }
         });
-        $('#level_button_' + level).removeClass('blue-btn');
+        $('#level_button_' + level).removeClass('gray-btn');
         $('#level_button_' + level).addClass('green-btn');
 
         // We also have to add this level to the "Opening dates" section
@@ -491,19 +484,14 @@ export function enable_level(level: string) {
         $('#opening_date_level_' + level).find('input').val('');
         $('#opening_date_level_' + level).find('input').prop({type:"text"});
         $("#select-"+level).removeClass("hidden");
-        let shown : boolean = false;
-        $("div.adventures-tab").each(function() {
-          if($(this).attr('style') === "display: flex;") {
-            shown = true;
-          }
-        });
-        // if no level is shown, it means current level was the one selected
-        if (!shown) {
+        if ($("#disabled").hasClass('flex') && $("#disabled").val() == level) {
+          $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
           $("#level-"+level).show({
             start: function() {
-                $(this).css('display', 'flex');
+              $(this).addClass('flex');
+              $(this).removeClass('hidden');
             }
-        });
+          });
         }
     } else {
         $('.adventure_level_' + level).each(function () {
@@ -511,10 +499,11 @@ export function enable_level(level: string) {
             $(this).addClass('hidden');
         });
         $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('blue-btn');
+        $('#level_button_' + level).addClass('gray-btn');
         // if this level was shown, hide it
-        if($("#level-"+level).attr('style') === "display: flex;") {
-          $("div.adventures-tab").hide();
+        if($("#level-"+level).hasClass('flex')) {
+          $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
+          $("#disabled").removeClass('hidden').addClass('flex').removeAttr('style').val(level);
         }
         $("#select-"+level).addClass("hidden");
         // We also have to remove this level from the "Opening dates" section
@@ -771,20 +760,21 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
       drag_list(document.getElementById("sortadventures"));
 
-      $('#adventures').on('change', function(){
+      $('#levels-dropdown').on('change', function(){
           var level = $(this).val() as string;
-          $("div.adventures-tab").hide();
+          $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
+          if ($("#disabled").hasClass('flex')) {
+            $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
+          }
           $("#level-"+level).show({
               start: function() {
-                  $(this).css('display', 'flex');
+                  $(this).addClass('flex');
+                  $(this).removeClass('hidden');
               }
           });
-          $('#available').empty();
-          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-          const adventures = available_adventures[level];
-          for(let i = 0; i < adventures.length; i++) {
-            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-          }
+
+          addAllAvailableAdventures(level);
+
           drag_list(document.getElementById("level-"+level));
       });
 
@@ -820,7 +810,23 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           drag_list(document.getElementById("level-"+level));
           markUnsavedChanges();
       });
+
+      addAllAvailableAdventures($('#levels-dropdown').val() as string);
   });
+
+  /**
+   * Put all available adventures into the dropdown
+   *
+   * They get removed from this list later on in some way that I don't quite get.
+   */
+  function addAllAvailableAdventures(level: string) {
+    $('#available').empty();
+    $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+    const adventures = available_adventures[level];
+    for(let i = 0; i < adventures.length; i++) {
+      $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
+    }
+  }
 }
 
 /**

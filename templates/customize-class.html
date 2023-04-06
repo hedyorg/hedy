@@ -23,25 +23,36 @@
         <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
         <div class="py-2 px-4 w-9/12 overflow-x-scroll">
             {% for i in range(1, max_level + 1) %}
-                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
+                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}gray-btn{% endif %} w-12" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
             {% endfor %}
         </div>
     </div>
     <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
         <h3 class="px-4">{{_('select_adventures')}}</h3>
         <div class="flex flex-row w-full mb-4">
-            <div class="flex flex-row justify-center items-center mr-2 w-1/12 ml-4">
-                <select class="flex flex-row py-2 px-1 mt-2 h-10 justify-center items-center text-center w-full" name="levels" id="adventures" data-cy="adventures">
-                    <option value="none" selected disabled hidden> {{_('select_a_level')}} </option>
+            <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
+                <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="levels" id="levels-dropdown" data-cy="adventures">
                     {% for i in range(1, max_level + 1) %}
-                        <option id="select-{{i}}" {% if customizations and i not in customizations['levels'] %}class="hidden"{% endif %}value="{{ i }}">{{ _('level_title') }} {{ i }}</option>
+                        <option id="select-{{i}}" {% if customizations and i not in customizations['levels'] %}
+                                                    class="hidden"
+                                                  {% endif %}
+                                value="{{ i }}"   {% if i == min_level %} selected {% endif %}>
+                                    {{ _('level_title') }} {{ i }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>
             <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-9/12">
+                <div class="flex flex-1 align-center items-center bg-gray-300 rounded-lg mt-2 hidden" id="disabled" data-cy="disabled_message">
+                    <p class="flex-1 items-center justify-center text-center">{{_('level_disabled')}}</p>
+                </div>
                 {% if customizations and customizations['sorted_adventures'] %}
                     {% for level, adventures in customizations['sorted_adventures'].items() %}
-                        <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab">
+                        <div id="level-{{ level }}" data-cy="level-{{ level }}" {% if level|int == min_level %}
+                                                                                    class="adventures-tab flex"
+                                                                                {% else %}
+                                                                                     class="adventures-tab hidden"
+                                                                                {% endif %}>
                             {% for adventure in adventures %}
                                {% if adventure.name in adventure_names %}
                                     {# Note: this code is copy/pasted in teachers.ts. If you change it here, also change it there #}
@@ -55,7 +66,12 @@
                     {% endfor %}
                 {% else %}
                     {% for level, adventures in adventures_default_order.items() %}
-                        <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab">
+                        <div id="level-{{ level }}" data-cy="level-{{ level }}" {% if level|int == 1 %}
+                                                                                    class="adventures-tab flex"
+                                                                                {% else %}
+                                                                                    class="adventures-tab hidden"
+                                                                                {% endif %}
+                                                                                >
                             {% for adventure in adventures %}
                             <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure }}" level = "{{ level }}" from-teacher = "false">
                                 <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
@@ -67,7 +83,7 @@
                 {% endif %}
             </div>
             <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
-                <select class="flex flex-row py-2 px-1 w-full mt-2 h-10 justify-center items-center text-center" name="levels" id="available" data-cy="available_adventures_current_level">
+                <select class="py-2 px-1 w-full mt-2 h-10 text-center" name="levels" id="available" data-cy="available_adventures_current_level">
                     <option value="none" selected>{{_('available_adventures_level')}} -</option>
                 </select>
             </div>

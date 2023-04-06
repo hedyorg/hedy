@@ -67,7 +67,7 @@ class ProgramsLogic:
             if not current_prog:
                 raise RuntimeError(f'No program with id: {program_id}')
             if current_prog['username'] != updates['username']:
-                raise RuntimeError('Cannot overwrite other user\'s program')
+                raise NotYourProgramError('Cannot overwrite other user\'s program')
 
             program = self.db.update_program(program_id, updates)
         else:
@@ -169,16 +169,6 @@ class ProgramsModule(WebsiteModule):
         # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
 
-        if not program_id:
-            # Legacy save mode: overwrite a program with the same name if it already exists
-            # (Not sure when this is used)
-            for program in self.db.programs_for_user(user["username"]):
-                if program.get("name", '') == body["name"]:
-                    program_id = program["id"]
-                    if program_public is None:
-                        program_public = program.get("public", False)
-                    break
-
         if program_public:
             # If a program is marked as public, we need to know whether it contains
             # an error or not. Parse it here and add the status.
@@ -191,8 +181,6 @@ class ProgramsModule(WebsiteModule):
                 error = True
                 if not body.get("force_save", True):
                     return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
-
-        print('Going into logic')
 
         program = self.logic.store_user_program(
             program_id=program_id,
@@ -338,3 +326,7 @@ class ProgramsModule(WebsiteModule):
         )
 
         return {"message": gettext("report_success")}, 200
+
+
+class NotYourProgramError(RuntimeError):
+    pass

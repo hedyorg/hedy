@@ -147,10 +147,10 @@ adventures:
                 start_code: '{print} Tvoja priča'
             5:
                 story_text: "## Priča\nU ovom nivou možeš isprogramirati različite završetke, koji će učiniti da tvoja priča bude još zanimljivija.\nU primeru kod možeš videti kako možeš osmisliti dva različita završetka.\n\n### Vežba 1\nNapiši novu kratku priču sa bar 6 linija koda u vezi teme koju si odabrao.\nNemas ideju? Odaberi onda jednu od ovih tema: superheroji, dosadan dan u školi, sam na napuštenom ostrvu.\n\nSada daj opciju da igrač odabere srećan ili nesrećan kraj priče, kao što je u primeru.\nIsprogramiraj oba završetka.\n\n### Vežba 2\nIskopiraj priču koju si osmislio u svojoj avanturi u prethodnim nivoima.\nPronadji način da dodaš bar po dve komande `{if}` i `{else}` u svoju priču.\nMože biti sa srećnim ili nesrećnim završetkom, ali možeš i na druge načine upotrebiti ove komande.\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name ' walks through the forest'\n{print} name ' encounters a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name ' takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats ' name\n```\n"
-                start_code: "{print} 'Here your story will start!'"
+                example_code: "```\nime {is} {ask} 'Ko šeta šumom?'\n{print} ime ' šeta šumom'\n{print} ime ' susreće čudovište'\nkraj {is} {ask} 'Da li želiš srećan ili nesrećan završetak?'\n{if} kraj {is} srećan {print} ime ' uzima mač i čudovište beži glavom bez obzira'\n{else} {print} 'Čudovište pojede ' ime\n```\n"
+                start_code: "{print} 'Ovde će tvoja priča početi!'"
             7:
-                story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n\n### Exercise\nAdd repetition to your own story. Go back to your saved programs, choose your story program from level 6 and\nfind a line containing `{print}` and repeat it!\n"
+                story_text: "## Priča\nU priči, neko će ponoviti reči nekoliko puta. Na primer, kada neko zove u pomoć ili peva pesmu.\nU ovom nivou ovakva ponavljanja staviti u svoju priču sa`{repeat}`.\n\n### Vežbanje\nDodaj ponavljanja u svoju priču. Vrati se do svojih sačuvanih programa, odaberi priču iz nivoa 6 i \npronadji liniju sa komandom `{print}` i ponovi je!\n"
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
@@ -165,6 +165,12 @@ adventures:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n\n### Exercise\nCan you make your own adventure minigame like this?\n"
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
+            18:
+                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                example_code: "```\n{print}('Welcome to this story!')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                start_code: '# Schrijf jouw code hier'
         name: Priča
         description: Priča
         default_save_name: Priča
@@ -231,6 +237,10 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
+            18:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Sing a song!
         description: Print a song
         default_save_name: Song
@@ -312,61 +322,6 @@ adventures:
         name: Dishes?
         description: Use the computer to see who does the dishes
         default_save_name: Dishes
-    pressit:
-        name: Key presses
-        levels:
-            11:
-                story_text: "Now that you have learned of the `{for} ... {in} {range} ... {to} ...` rule, you can use it for `{pressed}`\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
-                example_code: "```\nleft = -90\nright = 90\naround = 180\n{for} counter {in} {range} 1 {to} 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n    {if} d {is} {pressed}\n        {turn} right\n```\n"
-                start_code: '# place your code here'
-            15:
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\n{while} tired_in > 0\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
-                start_code: '# place your code here'
-                story_text: "Now that you have learned about the `{while}` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
-            16:
-                story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
-                start_code: '# place your code here'
-                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\n{repeat} 20 {times}\n    l = limbs[{random}]\n    c = colours[{random}]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
-            5:
-                story_text: "## Press it!\nIn the introduction you were also told about the new keyword `{pressed}`! Using `{pressed}`\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how `{pressed}` makes this possible and what uses `{pressed}`\nhas.\nBesides printing text, there is a whole other variety of uses for `{pressed}`\nFor example, you can also link turtle commands to keys! Try it!\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text_2: "## If Else Pressed\nYou can also assign an `{else}` statement to `{pressed}`. The `{else}` statement will be executed whenever you press a key other than the key you assigned.\n"
-                example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# place your code here'
-            10:
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
-                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
-                start_code: '# place your code here'
-            6:
-                story_text: "Did you know you can also make a calculator using `{pressed}`?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\n{print} 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print} 'The answer is ' result\n```\n"
-                start_code: '# place your code here'
-            7:
-                story_text: "## Controlling the turtle\nNow that you have learned about `{repeat}`, we can press keys multiple times! You can use it to make the turtle walk forward and turn.\n\n### Exercise\nThe example code only checks the key once. Change the code so that you can press the keys many times, and use use code to draw something nice.\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-                start_code: '# place your code here'
-            9:
-                story_text: "## Touch type game\nNow that you know how to combine statements, you can create a touch type tool with `{pressed}`. \n\n### Exercise\nFinish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.\n"
-                example_code: "```\npoints = 1\nletters = a, b, c, d, e\n{repeat} 10 {times}\n    letter = _ _ _ \n    {print} 'Press the letter ' letter\n    {if} letter {is} {pressed}\n    _\n    _\n    _\n```\n"
-                start_code: '# place your code here'
-            12:
-                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
-                example_code: "```\nchoose = 'You chose option: '\n{print} 'A wild mouse appeared!'\n{print} 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    {sleep}\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    {sleep}\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
-                start_code: '# place your code here'
-            13:
-                story_text: "Now that you learned how to use `{and}` and `{or}`, we can use it with `{pressed}`too!\nImagine the turtle being able to do a superjump forward.\nBy pressing `p` the turtle can make a superjump!\nHowever, the turtle can only do this jump if he turns left and right first!\n"
-                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        looked_left = 1\n    {if} d {is} {pressed}\n        {turn} right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left {is} 1 {and} looked_right {is} 1\n            {forward} 40\n            looked_left = 0\n            looked_right = 0\n```\n"
-                start_code: '# place your code here'
-            14:
-                story_text: "Now that you learned how to use operators, we can use it with `{pressed}` too!\nImagine the turtle being able to do a superjump forward.\nBy pressing `p` the turtle can make a superjump!\nHowever, the turtle can only do this jump every 5 steps or every 4 turns\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
-                start_code: '# place your code here'
-            17:
-                story_text: "Now that you learned how to use `{elif}`, we can use it with `{pressed}`too! Be aware, `{elif} ... {is} {pressed}` is not possible! That is why we are going to nest some `{elif}` statements into the `{pressed}` options. We also had to add `:` to the code to make everything work! Imagine the turtle being able to do a superjump forward. By pressing `p` the turtle can make a superjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}:\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        {turn} around\n    {if} a {is} {pressed}:\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 {or} spins <= 0:\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            {print} \"you need to take more steps or turns before you can superjump!\"\n```\n"
-                start_code: '# place your code here'
-        description: Try linking a keyboard key to a command!
-        default_save_name: Pressit
     rock:
         levels:
             4:
