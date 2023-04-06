@@ -13,7 +13,6 @@ adventures:
 
                     Go to the next tab to learn your first command!
                 start_code: "{print} hello world!"
-
             2:
                 story_text: |
                     ## Level 2
@@ -37,25 +36,11 @@ adventures:
                 start_code: "{print} hello world!"
             3:
                 story_text: |
-                    ## Make a list!
-                    In level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.
-
-                example_code: |
-                    ```
-                    animals {is} dog, cat, kangaroo
-                    {print} animals {at} {random}
-                    ```
-
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-
-                example_code_2: |
-                    ```
-                    animals {is} dog, cat, kangaroo
-                    {add} penguin {to_list} animals
-                    {remove} cat {from} animals
-                    {print} animals {at} {random}
-                    ```
-
+                    ## Welcome to level 3
+                    In the previous level you've learned what a variable is and how you can use it to make your adventures more interactive.
+                    But... that's not the only thing you can do with variables! You can also use variables to make lists.
+                    And you can even let Hedy pick a random word out of a list, which allows you to make real games!
+                    Take a quick look at the next tab!
                 start_code: "{print} hello world!"
             4:
                 start_code: "{print} 'Hello world'"
@@ -533,6 +518,84 @@ adventures:
                     {print} I like favorite_animals
                     ```
                 start_code: "name is Hedy"
+    random_command:
+        name: "at random"
+        description: "introducing at random command"
+        default_save_name: "random_command"
+        levels:
+            3:
+                story_text:  |
+                   ## At random
+                   In this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.
+                example_code: |
+                    ```
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
+                story_text_2: |
+                    You can use the `{at} {random}` command in a sentence as well.
+                example_code_2: |
+                    ```
+                    food {is} sandwich, slice of pizza, salad, burrito
+                    {print} I am going to have a food {at} {random} for lunch.
+                    ```
+                start_code: |
+                    ```
+                    animals {is} dog, cat, kangaroo
+                    {print} animals {at} {random}
+                    ```
+                story_text_3: |
+                    ### Exercise
+                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
+                    Can you do it? We have already put the first lines into the example code.
+                example_code_3: |
+                    ```
+                    {print} The big gameshow!
+                    {print} There are 3 suitcases in front of you...
+                    chosen {is} {ask} Which suitcase do you choose?
+                    prices {is} _
+                    _
+                    ```
+
+    add_remove_command:
+        name: "add and remove"
+        description: "introducing add to and remove from"
+        default_save_name: "add_remove_command"
+        levels:
+            3:
+                story_text: |
+                    ## Add to
+                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                example_code: |
+                    ```
+                    animals {is} dog, cat, kangaroo
+                    like {is} {ask} What is your favorite animal?
+                    {add} like {to_list} animals
+                    {print} I choose animals {at} {random}
+                    ```
+                story_text_2: |
+                    ## Remove from
+                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                example_code_2: |
+                    ```
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
+                    ```
+                story_text_3: |
+                    ### Exercise
+                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                example_code_3: |
+                    ```
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    hope {is} {ask} What flavor are you hoping for?
+                    _
+                    allergies {is} {ask} Are you allergic to any flavors?
+                    _
+                    {print} You get a flavors {at} {random} milkshake
+                    ```
     sleep_command:
         name: "sleep"
         description: "introducing sleep command"
@@ -935,13 +998,13 @@ adventures:
                     ## Parrot
                     Teach your parrot a new word with `{add}`.
                     ### Exercise
-                    How can you make your parrot say multiple words?
+                    Can you add the `{add} {to}` command to get the code to work?
                 example_code: |
                     ```
                     words {is} squawk, Hedy
                     {print} Train your parrot!
                     new_word {is} {ask} Which word do you want to teach them?
-                    {add} new_word {to_list} words
+                    _ new_word _ words
                     {print} 🧒 Say new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -1784,27 +1847,22 @@ adventures:
             3:
                 story_text: |
                     ## Rock, paper, scissors
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
-
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    {print} choices _
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Copy the example code and fill in the blanks to add an extra player to this game.
-
-                    **Extra** Now the players are just called player 1 and player 2. Can you add ask commands (with variables of course) to ask the players' names?
-                    This way you could create this output, for example: `James picks... paper`
+                    **Extra** Make a two player game. Firstly ask the two players to fill in their names. Then let the computer randomly pick their choices.
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} player 1 chooses... choices {at} {random}
-                    {print} player 2 _
+                    player_1 {is} {ask} Name of player 1:
+                    _
                     ```
                 start_code: "{print} Welcome to your own rock scissors paper!"
             4:
@@ -2207,18 +2265,6 @@ adventures:
                     prices {is} _
                     _
                     ```
-                story_text_3: |
-                    ## Allergies
-                    **Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
-
-                example_code_3: |
-                    ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    allergies {is} {ask} Are you allergic to any falvors?
-                    _
-                    {print} You get a flavors {at} {random} milkshake
-                    ```
                 start_code: "# place your code here"
             4:
                 story_text: |
@@ -2546,9 +2592,7 @@ adventures:
                     ## Fortune Teller
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only `{echo}`.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2829,7 +2873,14 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code_2: |
+
+                    ### Exercise
+                    Copy the example codes and fill in the blanks to make it work!
+
+                    **Extra** This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
+                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
+
+                example_code: |
                     ```
                     _ Escape from the haunted house!
                     _ There are 3 doors in front of you...
@@ -2839,24 +2890,6 @@ adventures:
                     _ You see...
                     {sleep}
                     _ _ _ _
-                    ```
-                story_text_2: |
-                    ### Exercise
-                    Copy the example codes and fill in the blanks to make it work!
-
-                    **Extra** This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
-                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
-                story_text_3: |
-                    ## Change the game into a tv gameshow!
-                    ### Exercise
-                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it? We have already put the first lines into the example code.
-                example_code_3: |
-                    ```
-                    {print} The big gameshow!
-                    {print} There are 3 suitcases in front of you...
-                    {print} One of them contains _
-                    _
                     ```
                 start_code: "# place your code here"
             4:
