@@ -57,13 +57,16 @@ class StatisticsModule(WebsiteModule):
 
         collapse = request.args.get("collapse", default="True", type=str)
         collapse = _determine_bool(collapse)
-
+        
+        # card 1 boolean
         show_c1 = request.args.get("show_c1", default="True", type=str)
         show_c1 = _determine_bool(show_c1)
-
+        
+        # card 2 boolean
         show_c2 = request.args.get("show_c2", default="True", type=str)
         show_c2 = _determine_bool(show_c2)
-
+        
+        # card 3 boolean
         show_c3 = request.args.get("show_c3", default="True", type=str)
         show_c3 = _determine_bool(show_c3)
 
