@@ -29,7 +29,7 @@ adventures:
             16:
                 start_code: "voće = ['jabuke', 'banane', 'višnje']\n{print} voće"
                 example_code: "```\nprijatelji = ['Marko', 'Marija', 'Milan']\nsrećni_brojevi = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'srećan broj za' prijatelji[i]\n    {print} ' je ' srećni_brojevi[i]\n```\n"
-                story_text: "## Sve više i više kao prvi kod!\nSada ćemo da napravimo liste kao što se prave u programerskom jeziku Python, sa uglastim zagradama oko liste! Takodje nastavljamo da koristimo znake navoda oko svakog elementa, kao što smo u prethodnim nivoima naučili.\nUglaste zagrade možeš koristiti i da ukažeš na tačno odredjeno mesto u listi."
+                story_text: "## Sve više i više kao prvi kod!\nSada ćemo da napravimo liste kao što se prave u programerskom jeziku Python, sa uglastim zagradama oko liste! Takodje nastavljamo da koristimo znake navoda oko svakog elementa, kao što smo u prethodnim nivoima naučili.\nUglaste zagrade možeš koristiti i da ukažeš na tačno odredjeno mesto u listi. Komanda {at} se više ne može koristiti."
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Spreman ili ne, evo me!'"
                 story_text: "## Inače ako\nSada ćemo malo da izmenimo uvlačenje reda. Svaki put kada nam treba uvučeni red, potrebne su nam i dve tačke `:` na kraju prethodnog reda.\n\nU ovom nivou možeš takodje koristiti i novu komandu: `{elif}`. `{elif}` je skraćeno za {else} {if} i treba ti kada želiš da napraviš 3 (ili više!) opcije.\nUveri se!"
@@ -83,7 +83,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy je zabava!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Zdravo ljudi'\n    {print} 'Ovo će biti ištampano 5 puta'"
-                story_text: "## Uvlačenje reda\n`{ask}` i `{print}` i dalje rade kao što ih znamo. Ali `{if}`, `{else}`, {pressed} i `{repeat}` su promenjeni!\nSada možeš da grupišeš nekoliko linija zajedno, ali moraćeš da uvučeš kod.\nTo znači pravljenje četiri razmaka na početku linije. Takodje ćeš morati da uvučeš red kada želiš da napraviš odeljak od jedne linije koda.\n"
+                story_text: "## Uvlačenje reda\n`{ask}` i `{print}` i dalje rade kao što ih znamo. Ali `{if}`, `{else}`, i `{repeat}` su promenjeni!\nSada možeš da grupišeš nekoliko linija zajedno, ali moraćeš da uvučeš kod.\nTo znači pravljenje četiri razmaka na početku linije. Takodje ćeš morati da uvučeš red kada želiš da napraviš odeljak od jedne linije koda.\n"
                 example_code: "Ovo je kako komanda `{repeat}` radi sad:\n```\n{repeat} 5 {times}\n    {print} 'Zdravo svima'\n    {print} 'Ovo je sve ponovljeno 5 puta'\n```\nOvo je kako komande `{if}` i `{else}` rade sada:\n\n```\nime {is} {ask} 'Kako se zoveš?'\n{if} ime {is} Hedy\n    {print} 'Dobrodošla Hedy'\n    {print} 'Možeš se igrati na svom računaru!'\n{else}\n    {print} 'ULJEZ!'\n    {print} 'Ne možeš koristiti ovaj računar!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    hrana = {ask} 'Sta želiš?'\n    {if} hrana {is} pica\n        {print} 'super!'\n    {else}\n        {print} 'pica je bolja'"
@@ -95,7 +95,7 @@ adventures:
                 example_code: "```\n{for} brojač {in} {range} 1 {to} 5\n    {print} brojač\n```\n"
             13:
                 start_code: "ime = {ask} 'kako se zoves?'\nuzrast = {ask} 'koliko imas godina?'\n{if} ime {is} 'Hedy' {and} uzrast {is} 2\n    {print} 'Ti si prava Hedy!'"
-                story_text: "## i... ili..?\nSada ćemo da naučimo `{and}` i `{or}`! Ako hoćeš da proveriš dve izjave, ne moraš koristiti dva puta {if} nego možeš koristiti `{and}` i `{or}`. Ako koristiš `{and}`, obe izjave, levo i desno od `{and}` moraju biti istinite. Ali možemo takodje koristiti i `{or}`. U tom slučaju samo jedna izjava mora biti tačna."
+                story_text: "## i... ili..?\nSada ćemo da naučimo `{and}` i `{or}`! Ako hoćeš da proveriš dve izjave, ne moraš koristiti dva puta {if} nego možeš koristiti `{and}` i `{or}`.\nAko koristiš `{and}`, obe izjave, levo i desno od `{and}` moraju biti istinite. Ali možemo takodje koristiti i `{or}`. U tom slučaju samo jedna izjava mora biti tačna."
                 example_code: "```\nime = {ask} 'Kako se zoveš?'\nuzrast = {ask} 'koliko imaš godina?'\n{if} ime {is} 'Hedy' {and} uzrast {is} 2\n    {print} 'Ti si prava Hedy!'\n```\n"
             14:
                 start_code: "uzrast = {ask} 'Koliko imaš godina?'\n{if} uzrast < 13\n    {print} 'Mladji si od mene!'\n{else}\n    {print} 'Stariji si od mene!'"
