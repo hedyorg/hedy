@@ -1,21 +1,160 @@
 {% extends "auth.html" %}
 
-{% from "macros/stats-shared.html" import insert_accordion_tab %}
+{% from "macros/stats-shared.html" import insert_struggle_list_item %}
 
 {% block regular_content %}
 
 <div>
+    <!--  Back to class button  -->
     <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
       {{_('back_to_class')}}
     </button>
 
+    <!-- Title  -->
     <div class="flex flex-col gap-4">
-        <div class="flex flex-row items-center gap-2">
+        <div class="font-bold font-slab text-sky-600 text-2xl">
             <h1>RADboard</h1>
         </div>
-      <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-        <p>Stay tuned for cool live action features brought to you by the RADboard team, consisting of only cool people.</p>
-      </div>
+    </div>
+
+    {% if class_info.collapse %}
+    <!-- Card 1 Progress indicator collapsed version -->
+    <div class="justify-center">
+        <h2 class="text-center">Progress Indicator</h2>
+        <div class="float-right relative pr-2 pt-1">
+            {% if class_info.show_c1 %}
+            <a class="no-underline text-black rounded hover:bg-blue-600"
+               href="/live_stats/class/{{class_info.id}}?show_c1=False&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
+                ☝️ Hide
+            </a>
+            {% else %}
+            <a class="no-underline text-black rounded hover:bg-blue-600"
+               href="/live_stats/class/{{class_info.id}}?show_c1=True&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
+                👇 Show
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_col">
+            {% if class_info.show_c1 %}
+            <img class="w-full" src="/images/progress.png">
+            {% endif %}
+        </div>
+    </div>
+    {% if class_info.show_c1 %}
+    <div class="relative">
+        <button class="green-btn absolute top-0 right-0" id="expand"
+                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=False&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
+            Expand
+        </button>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <!-- Card 1 Progress indicator expanded version -->
+    <div class="justify-center">
+        <h2 class="text-center">Progress Indicator</h2>
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_exp">
+            <img class="w-full" src="/images/progress2.png">
+        </div>
+    </div>
+    <div class="relative">
+        <button class="green-btn absolute top-0 right-0" id="collapse" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
+            Collapse
+        </button>
+    </div>
+    {% endif %}
+
+
+    <!-- Space where we show individual students, otherwise empty -->
+    {% block student_space %}
+    {% endblock %}
+
+
+    <div class="justify-center w-full max-w-8xl">
+        <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
+            <div id="col1">
+                <h2 class="text-center">
+                  Student List
+                </h2>
+                <!-- Card 2 Student List    -->
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
+                    <div class="float-right relative pr-2 pt-2">
+                        {% if class_info.show_c2 %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
+                            👇 Show
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% if class_info.show_c2 %}
+                    <div class="grid grid-cols-2 p-2">
+                        <div class="w-full text-left" id="name-col">
+                            <h4 class="pb-4">Name</h4>
+                            <ul class="max-w-md space-y-1 list-none list-inside">
+                                {% for s in class_info.students %}
+                                    <div>
+                                        <li class="p-0">
+                                            <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
+                                                {{s.username}}
+                                            </a>
+                                        </li>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="w-full text-left" id="progress-col">
+                            <h4 class="pb-4">Current Level</h4>
+                            <ul class="max-w-md space-y-1 list-none list-inside">
+                                {% for s in class_info.students %}
+                                    <div>
+                                        <li class="p-0">{{s.highest_level}}</li>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div id="col2">
+                <h2 class="text-center">
+                  Students who are struggling
+                </h2>
+                <!-- Card 3 Misconceptions feed -->
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
+                    <div class="float-right relative pr-2 pt-1">
+                        {% if class_info.show_c3 %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                            👇 Show
+                        </a>
+                        {% endif %}
+                    </div>
+                {% if class_info.show_c3 %}
+                  <div class="w-full text-left p-6">
+                      <ul class="max-w-md space-y-1 list-none list-inside">
+                          {{ insert_struggle_list_item('They have an issue with X', 'Student1 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('They have an issue with Y', 'Student3 needs help at Lv. 1') }}
+                          {{ insert_struggle_list_item('They have an issue with Z', '2 Students need help') }}
+                      </ul>
+                  </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

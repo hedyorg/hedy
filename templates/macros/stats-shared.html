@@ -119,3 +119,17 @@
   <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
 </div>
 {% endmacro %}
+
+{% macro insert_struggle_list_item(header, subtext) %}
+
+    <li class="relative w-full border-solid border-2 border-black rounded p-2">
+      <h3 class="cursor-pointer hover:text-white">
+        {{header}}
+      </h3>
+      <p>
+        {{subtext}}
+      </p>
+      <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student({{_('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
+    </li>
+
+{% endmacro %}

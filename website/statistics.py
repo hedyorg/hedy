@@ -54,6 +54,22 @@ class StatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
+
+        collapse = request.args.get("collapse", default="True", type=str)
+        collapse = _determine_bool(collapse)
+
+        # card 1 boolean
+        show_c1 = request.args.get("show_c1", default="True", type=str)
+        show_c1 = _determine_bool(show_c1)
+
+        # card 2 boolean
+        show_c2 = request.args.get("show_c2", default="True", type=str)
+        show_c2 = _determine_bool(show_c2)
+
+        # card 3 boolean
+        show_c3 = request.args.get("show_c3", default="True", type=str)
+        show_c3 = _determine_bool(show_c3)
+
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -62,12 +78,76 @@ class StatisticsModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         students = sorted(class_.get("students", []))
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students},
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
             current_page="my-profile",
-            page_title=gettext("title_class statistics"),
-            javascript_page_options=dict(page='class-stats'),
+            page_title=gettext("title_class live_statistics"),
+            javascript_page_options=dict(page='class-live-stats'),
+        )
+
+    @route("/live_stats/class/<class_id>/student", methods=["GET"])
+    @requires_login
+    def show_student(self, user, class_id):
+        """ Shows information about an individual student when they
+        are selected in the student list.
+        """
+
+        collapse = request.args.get("collapse", default="True", type=str)
+        collapse = _determine_bool(collapse)
+
+        show_c1 = request.args.get("show_c1", default="True", type=str)
+        show_c1 = _determine_bool(show_c1)
+
+        show_c2 = request.args.get("show_c2", default="True", type=str)
+        show_c2 = _determine_bool(show_c2)
+
+        show_c3 = request.args.get("show_c3", default="True", type=str)
+        show_c3 = _determine_bool(show_c3)
+
+        class_ = self.db.get_class(class_id)
+        students = sorted(class_.get("students", []))
+
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+        if student not in students:
+            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+
+        return render_template(
+            "student-space.html",
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+            current_page='my-profile',
+            page_title=gettext("title_class live_statistics"),
+            javascript_page_options=dict(page='class-live-stats')
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
@@ -357,6 +437,12 @@ def _calc_error_rate(fail, success):
     failed = fail or 0
     successful = success or 0
     return (failed * 100) / max(1, failed + successful)
+
+
+def _determine_bool(bool_str):
+    if bool_str == "True":
+        return True
+    return False
 
 
 def get_general_class_stats(students):
