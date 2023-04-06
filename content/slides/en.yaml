@@ -384,7 +384,7 @@ levels:
     8:
       1:
         header: "Welcome to level 8"
-        text:
+        text: |
           In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
       2:
         header: "if commands before"
@@ -435,4 +435,61 @@ levels:
         text: |
           You might have thought of trying to put an if command inside a repeat command, or inside another if command.
           For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+
+
+    9:
+      1:
+        header: "Welcome to level 9"
+        text: |
+          In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
+
+          You can even put a `{repeat}`command within another `{repeat}`  command.
+      2:
+        header: "Multiple lines after `{repeat}`"
+        text: |
+          You are allowed to use mulptiple lines after `{repeat}`.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      3:
+        header: "Indentation matters!"
+        text: |
+          Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+          Look at the differeneces between this code and the next slide.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      4:
+        header: "Indentation matters!"
+        text: |
+          The only thing that changes is the indentation.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      5:
+        header: "Multipe lines after `{if}`"
+        text: |
+          You can also use multiple lines after `{if}`
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      6:
+        header: "Indentation matters"
+        text: |
+          Indentation is still very important and can make a big difference in the code.
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      7:
+        header: "An `{if}` inside a `{repeat}`"
+        text: |
+          Now that you can use multiple lines of code after these command, you can also put them within each other.
+          Check it out:
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      8:
+        header: "The other way around"
+        editor: |
+          <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+      9:
+        header: "Mind the indentation"
+        text: |
+          Mind that the fourth line of this code starts with 8 spaces of indentation.
+        editor: |
+          <iframe class="fragment" src="/adventure/default/9/raw"></iframe>
 
