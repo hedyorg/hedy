@@ -18,8 +18,6 @@ import exceptions
 import program_repair
 
 
-
-
 # Some useful constants
 from hedy_content import KEYWORDS
 
@@ -2668,11 +2666,11 @@ def preprocess_blocks(code, level, lang):
             if leading_spaces < current_number_of_indents * indent_size:
                 fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                 raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                             indent_size=indent_size, fixed_code=fixed_code)
+                                                        indent_size=indent_size, fixed_code=fixed_code)
             else:
                 fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                 raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                           indent_size=indent_size, fixed_code=fixed_code)
+                                                      indent_size=indent_size, fixed_code=fixed_code)
 
         # happy path, multiple of 4 spaces:
         current_number_of_indents = leading_spaces // indent_size
@@ -2684,17 +2682,17 @@ def preprocess_blocks(code, level, lang):
             # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+                                                  indent_size=indent_size, fixed_code=fixed_code)
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size, fixed_code=fixed_code)
+                                                    indent_size=indent_size, fixed_code=fixed_code)
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+                                                  indent_size=indent_size, fixed_code=fixed_code)
 
         if current_number_of_indents < previous_number_of_indents:
             # we are dedenting ('jumping back) so we need to and an end-block
@@ -2942,9 +2940,9 @@ def is_program_valid(program_root, input_string, level, lang):
                 if invalid_command_en == Command.turn:
                     arg = invalid_info.arguments[0][0]
                     raise exceptions.InvalidArgumentException(command=invalid_info.command,
-                                                                   allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg,
-                                                                   line_number=invalid_info.line)
+                                                              allowed_types=get_allowed_types(Command.turn, level),
+                                                              invalid_argument=arg,
+                                                              line_number=invalid_info.line)
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
             elif closest is None:
