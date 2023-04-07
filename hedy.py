@@ -556,9 +556,13 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def define(self, tree):
+        # add function name to lookup
         self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
-        for x in (c for c in tree.children[1].children if isinstance(c, Tree)):
-            self.add_to_lookup(x.children[0], tree.children[1], tree.meta.line)
+
+        # add arguments to lookup
+        if tree.children[1].data == 'arguments':
+            for x in (c for c in tree.children[1].children if isinstance(c, Tree)):
+                self.add_to_lookup(x.children[0], tree.children[1], tree.meta.line)
 
     def call(self, tree):
         function_name = tree.children[0].children[0]
