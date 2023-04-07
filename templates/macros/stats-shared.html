@@ -120,12 +120,14 @@
 </div>
 {% endmacro %}
 
-{% macro insert_struggle_list_item(header, subtext) %}
+{% macro insert_struggle_list_item(header, subtext, link) %}
 
     <li class="relative w-full border-solid border-2 border-black rounded p-2">
-      <h3 class="cursor-pointer hover:text-white">
-        {{header}}
-      </h3>
+      <a class="no-underline"  href="{{ link }}">
+        <h3 class="cursor-pointer hover:text-white">
+          {{header}}
+        </h3>
+      </a>
       <p>
         {{subtext}}
       </p>
