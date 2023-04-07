@@ -1,5 +1,8 @@
 from definition import SPACE, START_WORD, get_translated_keyword
 
+# These keywords will be highlighted a different color
+SECONDARY_COLOR_WORDS = ['define', 'def', 'call']
+
 # extra rules for ask
 ask_after_is = {
     "regex": START_WORD + get_translated_keyword("is") + SPACE + get_translated_keyword("ask"),
