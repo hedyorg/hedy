@@ -1,24 +1,24 @@
-import textwrap
-
-import lark
-from flask_babel import gettext
-from lark import Lark
-from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
-from lark import Tree, Transformer, visitors, v_args
 from os import path
-
-import warnings
-import hedy
-import hedy_translation
-from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
+from dataclasses import dataclass, field
 from collections import namedtuple
+import textwrap
+import utils
 import re
 import regex
-from dataclasses import dataclass, field
+import warnings
+import yaml
+
+from flask_babel import gettext
+from lark import Lark, Tree, Transformer, visitors, v_args
+from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
+
+import hedy_translation
+from hedy_content import ALL_KEYWORD_LANGUAGES
 import exceptions
 import program_repair
-import yaml
+
+
+
 
 # Some useful constants
 from hedy_content import KEYWORDS
@@ -614,9 +614,9 @@ class TypeValidator(Transformer):
         try:
             type_ = self.get_type(tree.children[1])
             self.save_type_to_lookup(tree.children[0].children[0], type_)
-        except hedy.exceptions.UndefinedVarException as ex:
+        except exceptions.UndefinedVarException as ex:
             if self.level >= 12:
-                raise hedy.exceptions.UnquotedAssignTextException(
+                raise exceptions.UnquotedAssignTextException(
                     text=ex.arguments['name'],
                     line_number=tree.meta.line)
             else:
@@ -772,7 +772,7 @@ class TypeValidator(Transformer):
         if prom_left_type != prom_right_type:
             left_arg = tree.children[0].children[0]
             right_arg = tree.children[1].children[0]
-            raise hedy.exceptions.InvalidTypeCombinationException(
+            raise exceptions.InvalidTypeCombinationException(
                 command, left_arg, right_arg, left_type, right_type, tree.meta.line)
         return prom_left_type, prom_right_type
 
@@ -813,7 +813,7 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
+                raise exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
         if tree.data == 'var_access_print':
             var_name = tree.children[0]
@@ -827,17 +827,17 @@ class TypeValidator(Transformer):
                 # we first check if the list of vars is empty since that is cheaper than stringdistancing.
                 # TODO: Can be removed since fall back handles that now
                 if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(
+                    raise exceptions.UnquotedTextException(
                         level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
                 else:
                     # TODO: decide when this runs for a while whether this distance small enough!
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
+                            raise exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
                     # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(
+                    raise exceptions.UnquotedTextException(
                         level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
@@ -1285,7 +1285,7 @@ class ConvertToPython(Transformer):
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
             definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
-            raise hedy.exceptions.AccessBeforeAssign(
+            raise exceptions.AccessBeforeAssign(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
@@ -1545,12 +1545,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var", meta.line)
+        raise exceptions.WrongLevelException(1, 'ask', "ask_needs_var", meta.line)
 
     def error_echo_dep_2(self, meta, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'echo', "echo_out", meta.line)
+        raise exceptions.WrongLevelException(1, 'echo', "echo_out", meta.line)
 
     def color(self, meta, args):
         if len(args) == 0:
@@ -2646,7 +2646,7 @@ def preprocess_blocks(code, level, lang):
     next_line_needs_indentation = False
     for line in lines:
         if ' _ ' in line or line == '_':
-            raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
+            raise exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
 
         leading_spaces = find_indent_length(line)
 
@@ -2667,33 +2667,33 @@ def preprocess_blocks(code, level, lang):
             # there is inconsistent indentation, not sure if that is too much or too little!
             if leading_spaces < current_number_of_indents * indent_size:
                 fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                              indent_size=indent_size, fixed_code=fixed_code)
             else:
                 fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                            indent_size=indent_size, fixed_code=fixed_code)
 
         # happy path, multiple of 4 spaces:
         current_number_of_indents = leading_spaces // indent_size
-        if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-            raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+        if current_number_of_indents > 1 and level == LEVEL_STARTING_INDENTATION:
+            raise exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
             # we are indenting, but this line is not following* one that even needs indenting, raise
             # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+            raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                        indent_size=indent_size, fixed_code=fixed_code)
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+            raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                          indent_size=indent_size, fixed_code=fixed_code)
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+            raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                        indent_size=indent_size, fixed_code=fixed_code)
 
         if current_number_of_indents < previous_number_of_indents:
@@ -2837,7 +2837,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
         result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
-    if level >= hedy.LEVEL_STARTING_INDENTATION:
+    if level >= LEVEL_STARTING_INDENTATION:
         result = preprocess_blocks(result, level, lang)
 
     return result
@@ -2848,7 +2848,7 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
-    except lark.UnexpectedEOF:
+    except UnexpectedEOF:
         lines = input_string.split('\n')
         last_line = len(lines)
         raise exceptions.UnquotedEqualityCheck(line_number=last_line)
@@ -2941,7 +2941,7 @@ def is_program_valid(program_root, input_string, level, lang):
                 invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
                 if invalid_command_en == Command.turn:
                     arg = invalid_info.arguments[0][0]
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                    raise exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg,
                                                                    line_number=invalid_info.line)
@@ -3042,5 +3042,5 @@ def transpile_inner(input_string, level, lang="en"):
 def execute(input_string, level):
     python = transpile(input_string, level)
     if python.has_turtle:
-        raise exceptions.HedyException("hedy.execute doesn't support turtle")
+        raise exceptions.HedyException("execute doesn't support turtle")
     exec(python.code)

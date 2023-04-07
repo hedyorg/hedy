@@ -13,7 +13,7 @@ from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
 
-import static_babel_content
+
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for,
                    send_from_directory, session)
@@ -26,7 +26,9 @@ import hedy
 import hedy_content
 import hedy_translation
 import hedyweb
+import static_babel_content
 import utils
+
 from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
