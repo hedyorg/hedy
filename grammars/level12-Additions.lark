@@ -16,9 +16,9 @@ text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUO
 
 
 // FUNCTIONS ======================================== =============================
-define: _DEFINE function_name (_SPACE _USING arguments)? _EOL _SPACE command (_EOL _SPACE command)* _EOL? _END_BLOCK
+define: _DEFINE function_name (_SPACE _USING arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 call: _CALL function_name (_SPACE _WITH arguments)?
 
 ?arguments: argument (_COMMA argument)* -> arguments
-?argument: (var_access | atom | expression | list_access)
+?argument: atom | expression | list_access
 // ================================================================================
