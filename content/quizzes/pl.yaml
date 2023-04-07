@@ -413,53 +413,45 @@ levels:
             question_score: '10'
     3:
         1:
-            question_text: "What command do you use to let Hedy pick something arbitrarily?"
+            question_text: "Którego polecenia (bądź poleceń) możesz użyć by Hedy wybrała coś losowo?"
             mp_choice_options:
             -   option: |
-                    ```
-                    {print}
-                    ```
-                feedback: "`{print}` is used to print text"
+                    `{print}`
+                feedback: "`{print}` jest używane do pisania tekstu"
             -   option: |
-                    ```
-                    {ask}
-                    ```
-                feedback: "`{ask}` is used to ask a question"
+                    `{ask}`
+                feedback: "`{ask}` jest używane do zadawania pytań"
             -   option: |
-                    ```
-                    {is}
-                    ```
-                feedback: "`{is}` is used to make a list"
+                    `{is}`
+                feedback: "`{is}` używa się do tworzenia list"
             -   option: |
-                    ```
-                    {at} {random}
-                    ```
-                feedback: "Correct!"
+                    `{at}` `{random}`
+                feedback: "Zgadza się!"
             correct_answer: "D"
-            hint: "Arbitrarily means without a plan or randomly."
+            hint: "Losowo znaczy bez uprzedniego planu, przypadkowo."
             question_score: '10'
         2:
-            question_text: "What's wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                animals {is} dog cat cow
-                {print} animals {at} {random}
+                zwierzęta {is} pies kot krowa
+                {print} zwierzęta {at} {random}
             mp_choice_options:
-            -   option: "You need commas in line 1: dog, cat, cow."
-                feedback: "Good job!"
-            -   option: "Line 1 needs to start with `{print}`."
-                feedback: "No, you don't need `{print}`"
-            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
-                feedback: "animals is correct."
-            -   option: "`{at} {random}` is spelled incorrectly"
-                feedback: "`{at} {random}` is the correct spelling"
+            -   option: "Brakuje przecinków w linii 1: pies, kot, krowa."
+                feedback: "Dobra robota!"
+            -   option: "Linia 1 musi zaczynać się od `{print}`."
+                feedback: "Nie, `{print}` nie jest potrzebne"
+            -   option: "W linii 2 trzeba napisać „zwierzę” zamiast „zwierzęta”"
+                feedback: "Napis zwierzęta jest poprawny."
+            -   option: "`{at} {random}` jest napisane niepoprawnie"
+                feedback: "`{at} {random}` to poprawna pisownia"
             correct_answer: "A"
-            hint: "There's something wrong in line 1"
+            hint: "Coś nie zgadza się w linii 1"
             question_score: '10'
         3:
             question_text: "How do you fix the mistake in line 2 of this code?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} rock, paper, scissors {at} {random}
+                opcje {is} kamień, papier, nożyce
+                {print} kamień, papier, nożyce {at} {random}
             mp_choice_options:
             -   option: |
                     ```
