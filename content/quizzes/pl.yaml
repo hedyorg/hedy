@@ -457,47 +457,47 @@ levels:
                     ```
                     {at} {random} {print} options
                     ```
-                feedback: "You're almost there. The order of the words isn't right yet."
+                feedback: "Prawie się udało. Kolejność słów nie jest jeszcze poprawna."
             -   option: |
                     ```
-                    {print} rock {at} {random}
+                    {print} kamień {at} {random}
                     ```
-                feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
+                feedback: "Nie chcesz by Hedy zawsze wykonywało {print} kamień, czasami chcesz też nożyce i papier."
             -   option: |
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: "Very good!"
-            -   option: "Nothing, the code is correct!"
-                feedback: "Look carefully for the mistake"
+                feedback: "Bardzo dobrze!"
+            -   option: "Nic, kod jest poprawny!"
+                feedback: "Dokładnie poszukaj błędu"
             correct_answer: "C"
-            hint: "The variable (the list) is called options."
+            hint: "Zmienna (lista) nazywa się opcje."
             question_score: '10'
         4:
-            question_text: "What should change in line 2 to print a random price?"
+            question_text: "Co powinno zmienić się w linii 2 by program wypisywał losową cenę?"
             code: |-
-                prices {is} 1 dollar, 100 dollar, 1 million dollar
-                {print} price {at} {random}
+                ceny {is} 1 złoty, 100 złotych, 1 milion złotych
+                {print} cena {at} {random}
             mp_choice_options:
             -   option: |
                     ```
-                    {print} price
+                    {print} cena
                     ```
-                feedback: "You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`"
+                feedback: "Nie chcesz napisać słowa cena, ale chcesz napisać jedną z cen losowo (`{at} {random}`)"
             -   option: |
                     ```
-                    {print} prices {at} {random}
+                    {print} ceny {at} {random}
                     ```
-                feedback: "Great! You've really paid attention."
+                feedback: "Świetnie! Faktycznie skupiasz się na materiale."
             -   option: |
                     ```
-                    {print} {at} {random} price
+                    {print} {at} {random} cena
                     ```
-                feedback: "`{at} {random}` is placed behind the variable."
-            -   option: "Nothing, this code is alright."
-                feedback: "Look carefully for the mistake you missed!"
+                feedback: "`{at} {random}` pisane jest przed zmienną."
+            -   option: "Nic, kod jest poprawny."
+                feedback: "Przyjrzyj się dokładnie by znaleźć błąd!"
             correct_answer: "B"
-            hint: "The variable name is prices"
+            hint: "Nazwa zmiennej to ceny"
             question_score: '10'
         5:
             question_text: "What is wrong in this code?"
