@@ -49,9 +49,9 @@ adventures:
                     Ainsi, vous pouvez désormais faire afficher ce que vous voulez, y compris des mots que vous avez utilisés comme variables de stockage avec `{is}`.  
 
                     La plupart des langages de programmation utilisent aussi les guillemets lors des affichages, donc on fait un pas de plus en direction de la vraie programmation.
-                story_text_2: "## Les aventures deviennent de plus en plus difficiles  \nD’onglet en onglet, les aventures deviennent de plus en plus difficiles.  \nAlors commence par la gauche et poursuit vers la droite pour être toujours plus mis au défi.\n"
+                story_text_2: "## Élisions\nAttention ! Maintenant que nous utilisons des guillemets, Hedy ne comprendra pas quand vous utiliserez l'apostrophe pour des élisions comme \"J'ai\" ou \"T'es\".\nPrenez bien soin de retirer ces apostrophes en modifiant l'orthographe en faveur de \"J ai\" ou \"Tu es\".\nConsultez le code exemple pour un contre-exemple d'utilisation des apostrophes.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                example_code_2: "```\n_ Ceci est un contre-exemple de l'utilisation des apostrophes _\n{print} 'J'ai la responsabilité des enfants de ma soeur'\n{print} 'Qu'est-ce qui peut être plus amusant que ça ?'\n```\n"
             5:
                 start_code: |-
                     nom {is} {ask} 'quel est ton nom?'
@@ -95,7 +95,7 @@ adventures:
                         {print} 'Ceci sera affiché 5 fois'
                 story_text: |
                     ## Indentation
-                    `{ask}` et `{print}` fonctionnent comme tu y es habitué. Mais `{if}`, `{else}`, {pressed} et `{repeat}` ont changé!
+                    `{ask}` et `{print}` fonctionnent comme tu y es habitué. Mais `{if}`,  `{else}` et `{repeat}` ont changé !
                     Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois *indenter* ces commandes.
                     Cela veut dire que tu dois mettre 4 espaces au début des lignes. Tu devras aussi indenter même si tu veux créer un bloc d'une seule ligne.
                 example_code: |
@@ -145,7 +145,7 @@ adventures:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: "## Boucle !\n`{print}` fonctionne encore comme avant, mais on a ajouté une nouvelle forme pour le `{for}`. Tu peux maintenant taper `{for} counter {in} {range} 1 {to} 5` à la place de `{repeat} 5 {times}` et utiliser `counter` dans ton programme. \nEssaie-le et regarde le résultat ! Rappelle-toi que tu dois encore toujours indenter toutes les lignes après les `{for}` et les `{if}` (cela signifie qu'elles doivent commencer par quatre espaces)."
+                story_text: "## Boucles !\nDans ce niveau, on a ajouté une nouvelle forme pour le `{for}`. Dans les précédents niveaux, on utilisait `{for}` pour les listes. Tu peux maintenant utiliser `{for}` pour les nombres.\nÇa fonctionne en ajoutant un nom de variable suivi de `{in}` `{range}`. On écrit ensuite le nombre de départ, `{to}` et celui de fin. T\n\nEssaie-le et regarde le résultat ! Rappelle-toi que dans ce niveau, tu dois toujours indenter toutes les lignes après les `{for}`."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
                 start_code: "{print} 'on utilise un point pour les nombres décimaux'\n{print} 2.5 + 2.5"
@@ -161,7 +161,7 @@ adventures:
                 example_code_5: "```\nscore = 25\n{print} 'Ton score est  ' score\n```\n"
             13:
                 start_code: "nom = {ask} 'Quel est ton nom ?'\nage = {ask} 'Quel est ton age?'\n{if} nom {is} 'Hedy' {and} age {is} 2\n    {print} 'Tu es la vraie Hedy!'"
-                story_text: "## And... Or.. ?\nNous allons maintenant apprendre `{and}` et `{or}` ! Si tu souhaite verifier deux affirmations, tu n'as pas à utiliser deux {if}, à la place, tu peux utiliser `{and}` et `{or}`. Si tu utilise `{and}`, les deux affirmations à gauche et à droite du `{and}` doivent être vraies. On peut utiliser `{or}` aussi. Il est alors nécessaire qu'une seule des affirmations soit correcte."
+                story_text: "## And... Or.. ?\nNous allons maintenant apprendre `{and}` et `{or}` ! Si tu souhaite verifier deux affirmations, tu n'as pas à utiliser deux `{if}`, à la place, tu peux utiliser `{and}` et `{or}`.\nSi tu utilise `{and}`, les deux affirmations à gauche et à droite du `{and}` doivent être vraies. On peut utiliser `{or}` aussi: une seule des affirmation doit être correcte dans ce cas-là."
                 example_code: "```\nnom = {ask} 'Quel est ton nom ?'\nage = {ask} 'Quel est ton age ?'\n{if} nom {is} 'Hedy' {and} age {is} 2\n    {print} 'Tu est la vraie Hedy!'\n```\n"
             14:
                 start_code: "age = {ask} 'Quel est ton age?'\n{if} age < 13\n    {print} 'Tu es plus jeune que moi!'\n{else}\n    {print} 'tu es plus vieille que moi!'"
