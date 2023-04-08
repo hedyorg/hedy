@@ -13,7 +13,7 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
-import { postJson } from './comm';
+import { postJson, fetchText } from './comm';
 
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
@@ -981,6 +981,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
       return ((hasSleep) ? 20000 : 5000);
     }) ()
+  });
+
+  (Sk as any).builtins.load_url = new Sk.builtin.func((url_text:any) => {
+    const ret = fetchText(url_text);
+    return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
   });
 
   return Sk.misceval.asyncToPromise(() =>

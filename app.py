@@ -485,7 +485,10 @@ def parse():
                 exception = ex
 
         try:
-            response['Code'] = transpile_result.code
+            t = textwrap.dedent("""\
+            print(load_url('https://raw.githubusercontent.com/ebertmi/skulpt/epy_build/src/file.js'))
+            """)
+            response['Code'] = t + transpile_result.code
 
             if transpile_result.has_pygame:
                 response['has_pygame'] = True

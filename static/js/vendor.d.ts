@@ -21,6 +21,10 @@ declare const Sk: {
     files: Record<string, string>;
   };
 
+  ffi: {
+    remapToPy(x: any): any;
+  };
+
   python3: any;
 
   configure(options: any): void;
