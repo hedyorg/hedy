@@ -2087,7 +2087,7 @@ class TestsLevel12(HedyTester):
         simple_function_3('A', a, 1.0)
         simple_function_3('B', a, 1.0)
         simple_function_3('C', a, 1.0)""")
-        
+
         output = textwrap.dedent("""\
         simple_function_3 - 1
         test1
