@@ -20,5 +20,5 @@ define: _DEFINE function_name (_SPACE _USING arguments)? _EOL (_SPACE command) (
 call: _CALL function_name (_SPACE _WITH arguments)?
 
 ?arguments: argument (_COMMA argument)* -> arguments
-?argument: atom | expression | list_access
+?argument: expression | atom | list_access
 // ================================================================================

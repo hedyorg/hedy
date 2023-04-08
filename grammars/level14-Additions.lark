@@ -15,7 +15,7 @@ not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
 // FUNCTIONS ======================================== =============================
 command:+= return
 ?return: _RETURN (_print_argument)? -> returns
-?expression:+= call
+?simple_expression:+= call
 ?turtle_color:+= call
 
 add: _ADD_LIST (call | some_spaces) _TO_LIST var_access
