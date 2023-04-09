@@ -172,6 +172,9 @@ class StatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -186,10 +189,12 @@ class StatisticsModule(WebsiteModule):
                 }
             )
 
+        result = self.db.filtered_programs_for_user(student, limit=10)
+
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result},
             current_page='my-profile',
             page_title=gettext("title_class live_statistics_popup")
         )
