@@ -2,9 +2,21 @@
 
 {% block popup_content %}
 
-<div class="absolute top-0 left-0 bg-white bg-transparent">
+<div>
 
-<h1>Test</h1>
+</div>
+
+<div class="w-full h-full absolute mt-36 top-0 left-0 bg-white bg-opacity-80">
+    <div class="relative justify-center m-36 pt-10 min-h-full ">
+      <h2 class="text-center">Pop Up</h2>
+      <div class="w-full max-w-8xl p-2 rounded-lg bg-blue-200 shadow-lg opacity-100" id="card1_progress">
+        <a class="no-underline float-right" href="/live_stats/class/{{class_info.id}}">❌</a>
+          <div class="pt-10 px-2 pb-2">
+              <p>Test</p>
+          </div>
+        </p>
+      </div>
+  </div>
 </div>
 
 {% endblock %}

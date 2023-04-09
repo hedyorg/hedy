@@ -156,6 +156,10 @@ class StatisticsModule(WebsiteModule):
         """
         Handles the rendering of the pop up items in misconception detection list.
         """
+
+        collapse = request.args.get("collapse", default="True", type=str)
+        collapse = _determine_bool(collapse)
+
         show_c1 = request.args.get("show_c1", default="True", type=str)
         show_c1 = _determine_bool(show_c1)
 
@@ -184,7 +188,7 @@ class StatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students,
+            class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
             current_page='my-profile',
             page_title=gettext("title_class live_statistics_popup")
