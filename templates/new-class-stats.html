@@ -4,7 +4,7 @@
 <div>
 
     <div class="flex relative">
-        <div class="mx-auto "><h1>Class: </h1></div>
+        <div class="mx-auto "><h1>Class: {{ class_info.name }}</h1></div>
         <button class="green-btn ml-auto" id="to_class_button"
                 onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
           {{_('back_to_class')}}
@@ -14,74 +14,78 @@
     <div class="shadow-md stats mt-4 p-2">
         <div class="flex flex-wrap justify-center">
             {% for student in class_info.students %}
-                <div class="student-tile shadow inline-block border px-6 py-2 m-4 hover:bg-green-400 rounded-lg transition-all duration-500 ease-in-out"
-                     onclick="this.classList.add('bg-green-400'); tileClicked(event, '{{ student }}')">
-                    <p class="font-bold text-lg">{{ student }}</p>
-                    <p>Success rate: </p>
-                    <p>Success rate: </p>
-                    <p>Highest level: </p>
-                    <p>Quiz Avg: </p>
+                <div class="student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 hover:bg-green-400 rounded-lg transition-all duration-500 ease-in-out"
+                     onclick="this.classList.add('bg-green-400'); studentTileClicked(event, {{ student|tojson }})">
+                    <p class="select-none font-bold text-lg">{{ student.username }}</p>
+                    <p class="select-none">Success rate: </p>
+                    <p class="select-none"> Highest level: {{ student.highest_level }}</p>
+                    <p class="select-none">Quiz Avg: {{ student.average_quiz }}</p>
                 </div>
             {% endfor %}
         </div>
-        <div id="big-tile" class="hidden w-3/4 shadow-2xl border p-2 mx-auto rounded-lg"></div>
+        <div id="expanded-student-tile" class="hidden w-3/4 shadow-2xl border p-2 mx-auto rounded-lg"></div>
     </div>
 
 </div>
 
 <script>
-  $(function() {
+$(function() {
     hedyApp.stats.initializeClassStats();
-  });
+});
 
-function tileClicked(event, student) {
-    // This removes all active green color student-tiles
+function studentTileClicked(event,student) {
+    // removing active green color when clicking student-tile
     let tiles = document.querySelectorAll('.student-tile');
     tiles.forEach(function(tile) {
         tile.classList.remove('bg-green-400');
-        let textElements = tile.querySelectorAll('p');
-        textElements.forEach(function(textElement) {
+        let studentTileText = tile.querySelectorAll('.student-tile p');
+        studentTileText.forEach(function(textElement) {
             textElement.style.color = 'black';
         });
     });
 
-    // This adds an active green color to student-tile
-    let clickedElement = event.target;
-    if (clickedElement["tagName"] === 'P') {
-        clickedElement = clickedElement["parentElement"];
+    // adding an active green color to student-tile
+    let clickedStudentTile = event.target;
+    if (clickedStudentTile.tagName === 'P') {
+        clickedStudentTile = clickedStudentTile.parentElement;
     }
-    clickedElement["classList"].add('bg-green-400');
-    let textElements = clickedElement.querySelectorAll('p');
-    textElements.forEach(function(textElement) {
+    clickedStudentTile.classList.add('bg-green-400');
+    let studentTileText = clickedStudentTile.querySelectorAll('.student-tile p');
+    studentTileText.forEach(function(textElement) {
         textElement.style.color = 'white';
     });
 
-    let bigTile = document.getElementById('big-tile');
-    bigTile.innerHTML = '<p class="font-bold text-lg">' + student + '</p>' +
-                        '<p>Success overall: </p>' +
-                        '<p>Highest level: </p>' +
-                        '<p>Quiz avg: </p><br>' +
-                        '<p>Success rate highest level(x): </p>' +
-                        '<p>Quiz score highest level(x): </p>';
+    let bigTile = document.getElementById('expanded-student-tile');
+    bigTile.innerHTML =
+        '<p class="font-bold text-lg">' + student.username + '</p>' +
+        '<p>Success overall: </p>' +
+        '<p>Highest level: ' + student.highest_level + '</p>' +
+        '<p>Quiz avg: ' + student.average_quiz + '</p></br>' +
+        '<p>Success rate highest level(x): </p>' +
+        '<p>Quiz score highest level(x): </p>';
     bigTile.classList.remove('hidden');
 }
 
+
+
 let studentTiles = document.querySelectorAll('.student-tile');
+// highlighting when mousing over/out student-tile
 studentTiles.forEach(function(tile) {
     tile.addEventListener('mouseover', function() {
-        let textElements = tile.querySelectorAll('p');
-        textElements.forEach(function(textElement) {
+        let studentTileText = tile.querySelectorAll('.student-tile p');
+        studentTileText.forEach(function(textElement) {
             textElement.style.color = 'white';
         });
     });
     tile.addEventListener('mouseout', function() {
         if (!tile.classList.contains('bg-green-400')) {
-            let textElements = tile.querySelectorAll('p');
-            textElements.forEach(function(textElement) {
+            let studentTileText = tile.querySelectorAll('.student-tile p');
+            studentTileText.forEach(function(textElement) {
                 textElement.style.color = 'black';
             });
         }
     });
 });
+
 </script>
 {% endblock %}

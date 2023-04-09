@@ -44,12 +44,64 @@ class StatisticsModule(WebsiteModule):
 
         students = sorted(class_.get("students", []))
         return render_template(
-            "new-class-stats.html",
+            "class-stats.html",
             class_info={"id": class_id, "students": students},
 
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
             javascript_page_options=dict(page='class-stats'),
+        )
+
+    # [work in progress] method for implementing the new class stats page
+    # Method for retrieving student information for a specific class
+    @route("/stats/class/new-<class_id>", methods=["GET"])
+    @requires_login
+    def render_new_class_stats(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = []
+        for student_username in class_.get("students", []):
+            student = self.db.user_by_username(student_username)
+            programs = self.db.programs_for_user(student_username)
+
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            average_quiz_scores = "-"
+            if len(quiz_scores) != 0:
+                for i in quiz_scores:
+                    num_finished_quizzes = (i['finished'])
+                    total_quiz_score = (i['scores'][0])
+                    average_quiz_scores = total_quiz_score / num_finished_quizzes
+
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+
+            students.append(
+                {
+                    "username": student_username,
+                    "last_login": student["last_login"],
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                    "average_quiz": average_quiz_scores,
+                }
+            )
+
+        students = sorted(students, key=lambda d: d.get("username", 0))
+
+        return render_template(
+            "new-class-stats.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "name": class_["name"],
+            },
+            current_page="my-profile",
+            page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='new-class-stats'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])

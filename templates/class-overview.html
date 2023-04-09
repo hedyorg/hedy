@@ -50,6 +50,7 @@
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+            <button class="green-btn" id="new-stats_button" onclick="window.location.href = '/stats/class/new-{{class_info.id}}'">{{_('new_class_stats')}}</button>
             <button class="green-btn" id="logs_button" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
         </div>
         <div class="flex ltr:ml-auto rtl:mr-auto">
