@@ -2,6 +2,7 @@
  * Custom integrations we have with HTMX
  */
 import { initializeHighlightedCodeBlocks, showAchievements } from './app';
+import { ClientMessages } from './client-messages';
 import { modal } from './modal';
 import { Achievement } from './types';
 
@@ -55,8 +56,7 @@ htmx.on('htmx:responseError', (ev) => {
 });
 
 htmx.on('htmx:sendError', () => {
-    // FIXME: Translate
-    modal.notifyError('Could not contact server. Internet problems?');
+    modal.notifyError(`${ClientMessages.Connection_error} ${ClientMessages.CheckInternet}`);
 });
 
 

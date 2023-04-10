@@ -93,15 +93,6 @@ export class Tabs {
       target.removeClass('hidden');
 
       this.tabEvents.emit('afterSwitch', { oldTab, newTab: tabName });
-
-      // Emit some events that can be used by HTMX
-      // tab:firstReveal -- only do this once
-      if (!this.revealed.has(tabName)) {
-        target[0].dispatchEvent(new Event('tab:firstReveal'));
-        this.revealed.add(tabName);
-      }
-      // tab:reveal -- do this every time
-      target[0].dispatchEvent(new Event('tab:reveal'));
     }
 
     // We don't do a beforeSwitch event for the very first tab switch
