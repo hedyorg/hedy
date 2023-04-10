@@ -1,7 +1,10 @@
-<div class="grid grid-center gap-8 py-8">
-    <div class="text-center italic text-4xl">{{_('quiz_tab')}} {{_('level_title')}} {{ level }}</div>
-    <div class="bg-green-200 p-8">
-        <img class="rounded-full w-72 border-white border-8 mx-auto" src="{{ static('/images/quiz_logo.jpg') }}" alt="{{_('quiz_logo_alt')}}">
+{# HTMX target for embedded mode #}
+<div hx-target="this">
+    <div class="grid grid-center gap-8 py-8">
+        <div class="text-center italic text-4xl">{{_('quiz_tab')}} {{_('level_title')}} {{ level }}</div>
+        <div class="bg-green-200 p-8">
+            <img class="rounded-full w-72 border-white border-8 mx-auto" src="{{ static('/images/quiz_logo.jpg') }}" alt="{{_('quiz_logo_alt')}}">
+        </div>
+        <button class="green-btn mx-auto w-96 h-24 text-4xl" hx-post="/quiz/begin/{{level}}">{{_('start_quiz')}}</button>
     </div>
-    <button class="green-btn mx-auto w-96 h-24 text-4xl" hx-post="/quiz/begin/{{level}}">{{_('start_quiz')}}</button>
 </div>
