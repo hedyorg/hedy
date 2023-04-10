@@ -141,9 +141,16 @@ class StatisticsModule(WebsiteModule):
                 }
             )
 
+        # Get data for selected student
+        programs = self.db.programs_for_user(student)
+        quiz_scores = self.db.get_quiz_stats([student])
+        finished_quizzes = any("finished" in x for x in quiz_scores)
+        highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+        selected_student = { "username": student, "programs": len(programs), "highest_level": highest_quiz }
+
         return render_template(
             "student-space.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
+            class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
             current_page='my-profile',
             page_title=gettext("title_class live_statistics"),
