@@ -146,7 +146,7 @@ class StatisticsModule(WebsiteModule):
         quiz_scores = self.db.get_quiz_stats([student])
         finished_quizzes = any("finished" in x for x in quiz_scores)
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-        selected_student = { "username": student, "programs": len(programs), "highest_level": highest_quiz }
+        selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
         return render_template(
             "student-space.html",
