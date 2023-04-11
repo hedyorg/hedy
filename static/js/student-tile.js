@@ -16,27 +16,21 @@ function expandStudentTile(student) {
     bigTile.classList.remove('hidden');
 }
 
+function hideStudentTile() {
+    $('#expanded-student-tile').addClass('hidden');
+}
+
 function studentTileClicked(event, student) {
-    // removing active green color when clicking student-tile
-    let tiles = document.querySelectorAll('.student-tile');
-    tiles.forEach(function (tile) {
-        tile.classList.remove('bg-green-400');
-        let studentTileText = tile.querySelectorAll('.student-tile p');
-        studentTileText.forEach(function (textElement) {
-            textElement.style.color = 'black';
-        });
-    });
+    const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
-    // adding an active green color to student-tile
-    let clickedStudentTile = event.target;
-    if (clickedStudentTile.tagName === 'P') {
-        clickedStudentTile = clickedStudentTile.parentElement;
+    // Remove 'selected' attribute from all student tiles
+    $('.student-tile').removeClass('selected');
+
+    // Select the currently clicked tile, or unselect if it was already selected
+    if (currentlySelected) {
+        hideStudentTile();
+    } else {
+        $(event.target).closest('.student-tile').addClass('selected');
+        expandStudentTile(student);
     }
-    clickedStudentTile.classList.add('bg-green-400');
-    let studentTileText = clickedStudentTile.querySelectorAll('.student-tile p');
-    studentTileText.forEach(function (textElement) {
-        textElement.style.color = 'white';
-    });
-
-    expandStudentTile(student);
 }

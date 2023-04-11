@@ -715,7 +715,7 @@ input:checked ~ .toggle-path {
 }
 
 .adventures-tab {
-  @apply flex-row w-auto overflow-x-auto overflow-y-hidden;  
+  @apply flex-row w-auto overflow-x-auto overflow-y-hidden;
 }
 
 .adventures-tab[style*='display: block'] {
@@ -724,4 +724,8 @@ input:checked ~ .toggle-path {
 
 .profile-nametag__stats {
   @apply text-center w-full flex flex-row justify-center items-stretch
+}
+
+.student-tile.selected {
+  @apply bg-green-400 text-white;
 }
