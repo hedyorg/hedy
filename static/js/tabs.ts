@@ -34,7 +34,6 @@ export interface TabOptions {
  */
 export class Tabs {
   private _currentTab: string = '';
-  private revealed = new Set<string>();
 
   private tabEvents = new EventEmitter<TabEvents>({
     beforeSwitch: true,
