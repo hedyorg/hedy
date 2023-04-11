@@ -219,7 +219,9 @@ class TestsLevel9(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed
             repeat 5 times
-                print 'doe het 5 keer!'""")
+                print 'doe het 5 keer!'
+        else
+            print '1 keertje'""")
 
         expected = HedyTester.dedent("""\
         pygame_end = False
@@ -231,79 +233,17 @@ class TestsLevel9(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
-            if event.unicode != 'x':
-                pygame_end = True
             if event.unicode == 'x':
               for i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
               break
-            # End of PyGame Event Handler""")
+            # End of PyGame Event Handler    
+            else:
+              print(f'1 keertje')
+              break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
-
-    def test_if_pressed_repeat_turtle_moves_multiple_keys(self):
-        code = textwrap.dedent("""\
-        repeat 10 times
-            if w is pressed
-                forward 25
-            if a is pressed
-                turn -90
-            if d is pressed
-                turn 90
-            if s is pressed
-                turn 180""")
-
-        expected = HedyTester.dedent(f"""\
-        for i in range(int('10')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode != 'w':
-                  pygame_end = True
-              if event.unicode == 'w':
-                {HedyTester.indent(
-                  HedyTester.forward_transpiled(25, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode != 'a':
-                  pygame_end = True
-              if event.unicode == 'a':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(-90, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode != 'd':
-                  pygame_end = True
-              if event.unicode == 'd':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(90, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode != 's':
-                  pygame_end = True
-              if event.unicode == 's':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(180, self.level),
-                  16, True)
-                }
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)""")
-
-        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
 
     #
     # button tests
@@ -314,7 +254,9 @@ class TestsLevel9(HedyTester):
         button1 is button
         repeat 3 times
           if button1 is pressed
-            print 'wow'""")
+            print 'wow'
+          else
+            print 'nah'""")
 
         expected = HedyTester.dedent(f"""\
         create_button('button1')
@@ -328,12 +270,13 @@ class TestsLevel9(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.USEREVENT:
-              if event.key != 'button1':
-                  pygame_end = True
               if event.key == 'button1':
                 print(f'wow')
                 break
-              # End of PyGame Event Handler
+              # End of PyGame Event Handler    
+              else:
+                print(f'nah')
+                break
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)

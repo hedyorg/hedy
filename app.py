@@ -36,7 +36,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
-                     cdn, classes, database, for_teachers, jsonbin, parsons,
+                     cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
@@ -328,9 +328,7 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = jsonbin.MultiParseLogger(
-    jsonbin.JsonBinLogger.from_env_vars(),
-    jsonbin.S3ParseLogger.from_env_vars())
+parse_logger = s3_logger.S3ParseLogger.from_env_vars()
 querylog.LOG_QUEUE.set_transmitter(
     aws_helpers.s3_querylog_transmitter_from_env())
 
@@ -693,6 +691,7 @@ def translate_error(code, arguments, keyword_lang):
         'character_found',
         'concept',
         'tip',
+        'else',
         'command',
         'print',
         'ask',
@@ -707,6 +706,7 @@ def translate_error(code, arguments, keyword_lang):
         'variable',
         'invalid_value',
         'print',
+        'else',
         'ask',
         'echo',
         'is',
@@ -729,6 +729,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments["print"] = "print"
     arguments["ask"] = "ask"
     arguments["echo"] = "echo"
+    arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
 
@@ -909,7 +910,6 @@ def programs_page(user):
 
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-    print(result.next_page_token)
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
@@ -1525,7 +1525,11 @@ def main_page():
     if sections:
         content.append(dict(style='columns', columns=sections))
 
-    return render_template('main-page.html', page_title=gettext('title_start'),
+    custom_logo = False
+    if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
+        custom_logo = True
+
+    return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
                            current_page='start', content=content)
 
 
@@ -1764,8 +1768,8 @@ def store_parsons_order():
     # Validations
     if not isinstance(body, dict):
         return 'body must be an object', 400
-    if not isinstance(body.get('level'), str):
-        return 'level must be a string', 400
+    if not isinstance(body.get('level'), int):
+        return 'level must be an integer', 400
     if not isinstance(body.get('exercise'), str):
         return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
