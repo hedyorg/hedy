@@ -40,22 +40,3 @@ function studentTileClicked(event, student) {
 
     expandStudentTile(student);
 }
-
-let studentTiles = document.querySelectorAll('.student-tile');
-// highlighting when mousing over/out student-tile
-studentTiles.forEach(function (tile) {
-    tile.addEventListener('mouseover', function () {
-        let studentTileText = tile.querySelectorAll('.student-tile p');
-        studentTileText.forEach(function (textElement) {
-            textElement.style.color = 'white';
-        });
-    });
-    tile.addEventListener('mouseout', function () {
-        if (!tile.classList.contains('bg-green-400')) {
-            let studentTileText = tile.querySelectorAll('.student-tile > p');
-            studentTileText.forEach(function (textElement) {
-                textElement.style.color = 'black';
-            });
-        }
-    });
-});
