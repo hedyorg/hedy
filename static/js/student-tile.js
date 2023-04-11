@@ -1,12 +1,18 @@
 function expandStudentTile(student) {
+    const average_quiz = student.average_quiz;
+    const success_rate_highest_level = student.success_rate_highest_level;
+    const success_rate_overall = student.success_rate_overall;
+    const highest_level_quiz = student.highest_level_quiz;
+    const highest_level_quiz_score = student.highest_level_quiz_score;
+
     let bigTile = document.getElementById('expanded-student-tile');
     bigTile.innerHTML =
         '<p class="font-bold text-lg">' + student.username + '</p>' +
-        '<p>Success overall: </p>' +
-        '<p>Highest level: ' + student.highest_level + '</p>' +
-        '<p>Quiz avg: ' + student.average_quiz + '</p></br>' +
-        '<p>Success rate highest level(x): </p>' +
-        '<p>Quiz score highest level(x): </p>';
+        '<p>Success overall:  ' + success_rate_overall + '</p>' +
+        '<p>Highest level: ' + highest_level_quiz + '</p>' +
+        '<p>Quiz avg: ' + average_quiz + '</p></br>' +
+        '<p>Success rate highest level' + '(' + highest_level_quiz + '): ' + success_rate_highest_level + '</p>' +
+        '<p>Quiz score highest level' + '(' + highest_level_quiz + '): ' + highest_level_quiz_score + '</p>';
     bigTile.classList.remove('hidden');
 }
 

@@ -13,11 +13,12 @@
     <div class="shadow-md stats mt-4 p-2">
         <div class="flex flex-wrap justify-center">
             {% for student in class_info.students %}
-                <div class="student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 hover:bg-green-400 rounded-lg transition-all duration-500 ease-in-out"
-                     onclick="this.classList.add('bg-green-400'); studentTileClicked(event, {{ student|tojson }})">
+                <div class=" group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
+                transition-all duration-500 ease-in-out hover:bg-green-400"
+                     onclick="studentTileClicked(event, {{ student|tojson }})">
                     <p class="select-none font-bold text-lg">{{ student.username }}</p>
-                    <p class="select-none">Success rate: </p>
-                    <p class="select-none"> Highest level: {{ student.highest_level }}</p>
+                    <p class="select-none">Success rate: {{ student.success_rate_highest_level }}</p>
+                    <p class="select-none"> Highest level: {{ student.highest_level_quiz }}</p>
                     <p class="select-none">Quiz Avg: {{ student.average_quiz }}</p>
                 </div>
             {% endfor %}
@@ -26,7 +27,6 @@
     </div>
 
 </div>
-
 <script type="text/javascript" src="/js/student-tile.js">
 $(function() {
     hedyApp.stats.initializeClassStats();

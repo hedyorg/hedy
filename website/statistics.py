@@ -71,22 +71,44 @@ class StatisticsModule(WebsiteModule):
 
             quiz_scores = self.db.get_quiz_stats([student_username])
             average_quiz_scores = "-"
+            success_rate_overall = "-"
             if len(quiz_scores) != 0:
-                for i in quiz_scores:
-                    num_finished_quizzes = (i['finished'])
-                    total_quiz_score = (i['scores'][0])
+                num_finished_quizzes = 0
+                total_quiz_score = 0
+                success_rate_overall = 0
+                for level_quiz_score in quiz_scores:
+                    print(level_quiz_score)
+
+                    num_finished_quizzes += (level_quiz_score['finished'])
+                    total_quiz_score += (level_quiz_score.get("scores")[0])
                     average_quiz_scores = total_quiz_score / num_finished_quizzes
 
+                    success_rate_overall += (level_quiz_score['finished'] / level_quiz_score['started'] * 100)
+
+                success_rate_overall /= num_finished_quizzes
+                success_rate_overall = round(success_rate_overall, ndigits=0)
+
             finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
+
+            success_rate_highest_level = '-'
+            if finished_quizzes:
+                highest_level_started = ([x.get("started") for x in quiz_scores if x.get("level") == highest_level_quiz])
+                highest_level_finished = ([x.get("finished") for x in quiz_scores if x.get("level") == highest_level_quiz])
+                success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
+                success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
             students.append(
                 {
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
-                    "highest_level": highest_quiz,
+                    "success_rate_highest_level": success_rate_highest_level,
+                    "success_rate_overall": success_rate_overall,
                     "average_quiz": average_quiz_scores,
+                    "highest_level_quiz": highest_level_quiz,
+                    "highest_level_quiz_score": highest_level_quiz_score,
                 }
             )
 
