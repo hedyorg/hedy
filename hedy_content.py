@@ -100,6 +100,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'story',
         'rock',
+        'pressit',
         'parrot',
         'turtle',
         'haunted',
@@ -121,6 +122,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'songs',
         'dishes',
+        'pressit',
         'dice',
         'fortune',
         'restaurant'
@@ -138,6 +140,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'rock',
         'story',
+        'pressit',
         'calculator',
         'restaurant',
         'haunted',
