@@ -189,7 +189,10 @@ class StatisticsModule(WebsiteModule):
                 }
             )
 
-        result = self.db.filtered_programs_for_user(student, limit=10)
+        if student:
+            result = self.db.filtered_programs_for_user(student, limit=10)
+        else:
+            result = []
 
         return render_template(
             "class-live-popup.html",
