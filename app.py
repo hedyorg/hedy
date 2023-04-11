@@ -400,6 +400,7 @@ def add_hx_detection():
         "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
     }
 
+
 @app.after_request
 def hx_triggers(response):
     """For HTMX Requests, push any pending achievements in the session to the client.
@@ -412,7 +413,7 @@ def hx_triggers(response):
 
     achs = session.pop('pending_achievements', [])
     if achs:
-        response.headers.set('HX-Trigger', json.dumps({ 'displayAchievements': achs }))
+        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
     return response
 
 

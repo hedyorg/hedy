@@ -21,6 +21,7 @@ NO_SUCH_QUESTION = 'No such question'
 
 class QuizLogic:
     """Business logic for quiz-related things."""
+
     def __init__(self, db: Database):
         self.db = db
 
@@ -78,7 +79,6 @@ class QuizModule(WebsiteModule):
         self.save_progress(progress)
 
         return self.current_question()
-
 
     @route("/submit_answer", methods=["POST"])
     def submit_answer(self):
@@ -263,7 +263,8 @@ class QuizModule(WebsiteModule):
         The current session's keyword language is used, and an override is possible if
         requested.
         """
-        q = self.my_quiz().get_quiz_data_for_level_question(level, question, request.args.get('keyword_lang_override', g.keyword_lang))
+        q = self.my_quiz().get_quiz_data_for_level_question(
+            level, question, request.args.get('keyword_lang_override', g.keyword_lang))
         return Question.from_yaml(question, q) if q else None
 
     def current_progress_and_question(self):
@@ -279,13 +280,13 @@ class QuizModule(WebsiteModule):
         return progress, question
 
 
-
 @dataclass
 class Choice:
     number: int
     text: str
     feedback: str
     code: Optional[str] = None
+
 
 @dataclass
 class Question:
@@ -330,7 +331,7 @@ class QuizProgress:
     level: int
     question: int
     attempt_id: str  # Identifier of the entire quiz
-    question_attempt: int # How often we tried to answer the current question
+    question_attempt: int  # How often we tried to answer the current question
     total_score: int
     correctly_answered_questions_numbers: List[int] = field(default_factory=list)
     last_wrong_answer: Optional[int] = None
