@@ -483,7 +483,7 @@ class TestsLevel14(HedyTester):
         test_function_3(5)
         print(f'''''')
         test_function_3(6)""")
-        
+
         output = textwrap.dedent("""\
         Test function 1
         Test function 2

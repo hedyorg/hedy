@@ -2041,11 +2041,9 @@ class TestsLevel12(HedyTester):
             print "simple_function_1 - 1"
             m = "simple_function_1 - 2"
             print m
-
         define simple_function_2 using param
             print "simple_function_2 - 1"
             print param
-            
         define simple_function_3 using param_a, param_b, param_c
             if param_a = "A"
                 print "simple_function_3 - 1"
@@ -2087,7 +2085,7 @@ class TestsLevel12(HedyTester):
         simple_function_3('A', a, 1.0)
         simple_function_3('B', a, 1.0)
         simple_function_3('C', a, 1.0)""")
-        
+
         output = textwrap.dedent("""\
         simple_function_3 - 1
         test1
