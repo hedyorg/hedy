@@ -102,7 +102,7 @@ class StatisticsModule(WebsiteModule):
 
     @route("/live_stats/class/<class_id>/student", methods=["GET"])
     @requires_login
-    def show_student(self, user, class_id):
+    def render_student_details(self, user, class_id):
         """ Shows information about an individual student when they
         are selected in the student list.
         """
@@ -155,6 +155,58 @@ class StatisticsModule(WebsiteModule):
             current_page='my-profile',
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats')
+        )
+
+    @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
+    @requires_login
+    def render_pop_up(self, user, class_id):
+        """
+        Handles the rendering of the pop up items in misconception detection list.
+        """
+
+        collapse = request.args.get("collapse", default="True", type=str)
+        collapse = _determine_bool(collapse)
+
+        show_c1 = request.args.get("show_c1", default="True", type=str)
+        show_c1 = _determine_bool(show_c1)
+
+        show_c2 = request.args.get("show_c2", default="True", type=str)
+        show_c2 = _determine_bool(show_c2)
+
+        show_c3 = request.args.get("show_c3", default="True", type=str)
+        show_c3 = _determine_bool(show_c3)
+
+        class_ = self.db.get_class(class_id)
+        students = sorted(class_.get("students", []))
+
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+
+        if student:
+            result = self.db.filtered_programs_for_user(student, limit=10)
+        else:
+            result = []
+
+        return render_template(
+            "class-live-popup.html",
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result},
+            current_page='my-profile',
+            page_title=gettext("title_class live_statistics_popup")
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
