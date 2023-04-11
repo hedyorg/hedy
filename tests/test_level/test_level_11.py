@@ -376,7 +376,7 @@ class TestsLevel11(HedyTester):
         for i in range(int(1), int(2) + step, step):
           simple_function()
           time.sleep(0.1)""")
-        
+
         output = textwrap.dedent("""\
         test
         test
