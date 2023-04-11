@@ -96,7 +96,7 @@
     demo_code: |-
         resposta = {ask} 'Quanto é 10 mais 10?'
         {if} resposta {is} 20 {print} 'Acertou!' {else} {print} 'Ops'
--   name: "{ask} e {if} com tartaruga"
+-   name: "`{ask}` e `{if}` com tartaruga"
     explanation: "Pergunte ao usuário quantos ângulos ele deseja."
     demo_code: |-
         ângulos = {ask} 'Quantos ângulos?'
@@ -189,7 +189,7 @@
         nome = 'Hedy a Robô'
         {print} 'Olá ' nome
 -   demo_code: "nome = {ask} 'Quem é você?'\n{if} nome = 'Hedy'\n    {print} 'Olá!'"
-    name: aspas simples depois da comparação com {if}
+    name: aspas simples depois da comparação com `{if}`
     explanation: Texto com aspas simples depois de `{if}`.
 -   name: texto com aspas dentro de uma lista
     explanation: Uma lista com aspas simples.
