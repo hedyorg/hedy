@@ -89,13 +89,17 @@ class StatisticsModule(WebsiteModule):
                 success_rate_overall = round(success_rate_overall, ndigits=0)
 
             finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_level_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
+            highest_level_quiz = max([x.get("level")
+                                     for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get(
+                "level") == highest_level_quiz]) if finished_quizzes else "-"
 
             success_rate_highest_level = '-'
             if finished_quizzes:
-                highest_level_started = ([x.get("started") for x in quiz_scores if x.get("level") == highest_level_quiz])
-                highest_level_finished = ([x.get("finished") for x in quiz_scores if x.get("level") == highest_level_quiz])
+                highest_level_started = ([x.get("started")
+                                         for x in quiz_scores if x.get("level") == highest_level_quiz])
+                highest_level_finished = ([x.get("finished")
+                                          for x in quiz_scores if x.get("level") == highest_level_quiz])
                 success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
                 success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
