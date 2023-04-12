@@ -95,27 +95,33 @@
                     {% if class_info.show_c2 %}
                     <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
-                            <h4 class="pb-4">Name</h4>
+                            <h4 class="mb-4">Name</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
                                     <div>
-                                        <li class="p-0">
+                                        <li class="my-2">
                                             <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
+
                                         </li>
                                     </div>
                                 {% endfor %}
                             </ul>
                         </div>
                         <div class="w-full text-left" id="progress-col">
-                            <h4 class="pb-4">Current Level</h4>
+                            <h4 class="mb-4">Adventure Progress</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
-                                {% for s in class_info.students %}
+                                <li id="s1"><img src="/images/new_media_lab/student1.png"></li>
+                                <li id="s2"><img src="/images/new_media_lab/student2.png"></li>
+                                <li id="s3"><img src="/images/new_media_lab/student3.png"></li>
+                                <li id="s4"><img src="/images/new_media_lab/student4.png"></li>
+                                <li id="s5"><img src="/images/new_media_lab/student5.png"></li>
+                                <!-- {% for s in class_info.students %}
                                     <div>
                                         <li class="p-0">{{s.highest_level}}</li>
                                     </div>
-                                {% endfor %}
+                                {% endfor %} -->
                             </ul>
                         </div>
                     </div>
