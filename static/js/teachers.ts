@@ -371,7 +371,6 @@ export function save_customizations(class_id: string) {
             sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
         });
     });
-    console.log(opening_dates);
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
@@ -472,12 +471,16 @@ export function enable_level(level: string) {
                                       .removeClass('bg-green-300')
                                       .removeClass('border-green-300')
                                       .addClass('bg-gray-200')
-                                      .addClass('border-gray-200')
+                                      .addClass('border-gray-200');
     } else {
       $('#opening_date_level_' + level).prop('disabled', true)
                                        .attr('type', 'text')
                                        .attr("placeholder", "Disabled")
                                        .val('');
+    }
+
+    if ($('#level-' + level).is(':visible')) {
+      setLevelStateIndicator(level);
     }
 }
 
@@ -489,13 +492,17 @@ export function test(level: string) {
     $('#opening_date_level_' + level).removeClass('bg-gray-200')
                                      .removeClass('border-gray-200')
                                      .addClass('bg-green-300')
-                                     .addClass('border-green-300')
+                                     .addClass('border-green-300');
 
   } else {
     $('#opening_date_level_' + level).removeClass('bg-green-300')
                                      .removeClass('border-green-300')
                                      .addClass('bg-gray-200')
                                      .addClass('border-gray-200');
+  }
+
+  if ($('#level-' +  level).is(':visible')) {
+    setLevelStateIndicator(level);
   }
 }
 
