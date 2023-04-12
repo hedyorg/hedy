@@ -78,21 +78,14 @@
                   Student List
                 </h2>
                 <!-- Card 2 Student List    -->
+                {% if class_info.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative pr-2 pt-2">
-                        {% if class_info.show_c2 %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
                             ☝️ Hide
                         </a>
-                        {% else %}
-                        <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
-                            👇 Show
-                        </a>
-                        {% endif %}
                     </div>
-                    {% if class_info.show_c2 %}
                     <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
                             <h4 class="mb-4">Name</h4>
@@ -125,8 +118,17 @@
                             </ul>
                         </div>
                     </div>
-                    {% endif %}
                 </div>
+                {% else %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
+                    <div class="float-right relative pr-2 pt-1">
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
+                        👇 Show
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
 
             <div id="col2">
@@ -134,21 +136,14 @@
                   Students who are struggling
                 </h2>
                 <!-- Card 3 Misconceptions feed -->
+                {% if class_info.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative pr-2 pt-1">
-                        {% if class_info.show_c3 %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
                             ☝️ Hide
                         </a>
-                        {% else %}
-                        <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
-                            👇 Show
-                        </a>
-                        {% endif %}
                     </div>
-                {% if class_info.show_c3 %}
                   <div class="w-full text-left p-6">
                       <ul class="max-w-md space-y-1 list-none list-inside">
                           {{ insert_struggle_list_item('Common error X detected', 'Student1 needs help at Lv. 1', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
@@ -156,6 +151,14 @@
                           {{ insert_struggle_list_item('Common error Z detected', '2 Students need help', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
                       </ul>
                   </div>
+                {% else %}
+                    <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
+                        <div class="float-right relative pr-2 pt-1">
+                            <a class="no-underline text-black rounded hover:bg-blue-600"
+                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                            👇 Show
+                            </a>
+                        </div>
                 {% endif %}
                 </div>
             </div>
