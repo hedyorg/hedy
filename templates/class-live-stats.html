@@ -144,13 +144,14 @@
                             ☝️ Hide
                         </a>
                     </div>
-                  <div class="w-full text-left p-6">
+                    <div class="w-full text-left p-6">
                       <ul class="max-w-md space-y-1 list-none list-inside">
                           {{ insert_struggle_list_item('Common error X detected', 'Student1 needs help at Lv. 1', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
                           {{ insert_struggle_list_item('Common error Y detected', 'Student3 needs help at Lv. 1', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
                           {{ insert_struggle_list_item('Common error Z detected', '2 Students need help', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
                       </ul>
                   </div>
+                </div>
                 {% else %}
                     <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
                         <div class="float-right relative pr-2 pt-1">
@@ -159,9 +160,8 @@
                             👇 Show
                             </a>
                         </div>
+                    </div>
                 {% endif %}
-                </div>
-            </div>
         </div>
     </div>
 
