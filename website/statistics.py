@@ -5,6 +5,8 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import hedy
+import hedy_content
 import utils
 from website.flask_helpers import render_template
 from website import querylog
@@ -51,6 +53,7 @@ class StatisticsModule(WebsiteModule):
             javascript_page_options=dict(page='class-stats'),
         )
 
+
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
@@ -77,6 +80,7 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        # Data for student list
         students = sorted(class_.get("students", []))
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -91,10 +95,32 @@ class StatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+
+        # Data for student overview card
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+            customizations=customizations,
+            adventures=adventures,
+            adventure_names=adventure_names,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            min_level=min(customizations['levels']),
             current_page="my-profile",
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats'),
@@ -148,10 +174,31 @@ class StatisticsModule(WebsiteModule):
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
+        # Data for student overview card
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
         return render_template(
             "student-space.html",
             class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+                        customizations=customizations,
+            adventures=adventures,
+            adventure_names=adventure_names,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            min_level=min(customizations['levels']),
             current_page='my-profile',
             page_title=gettext("title_class live_statistics"),
             javascript_page_options=dict(page='class-live-stats')
@@ -201,10 +248,31 @@ class StatisticsModule(WebsiteModule):
         else:
             result = []
 
+        # Data for student overview card
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result},
+            customizations=customizations,
+            adventures=adventures,
+            adventure_names=adventure_names,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            min_level=min(customizations['levels']),
             current_page='my-profile',
             page_title=gettext("title_class live_statistics_popup")
         )
