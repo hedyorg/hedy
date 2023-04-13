@@ -276,6 +276,10 @@ def initialize_session():
     utils.session_id()
     login_user_from_token_cookie()
 
+    g.user = current_user()
+    querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
