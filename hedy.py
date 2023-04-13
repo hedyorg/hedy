@@ -2796,7 +2796,7 @@ def preprocess_ifs(code, lang='en'):
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else _ is x"
+                line = line + " else x__x__x__x is 'x'"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)
@@ -2832,7 +2832,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
+    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level < 8:
         result = preprocess_ifs(result, lang)
 
