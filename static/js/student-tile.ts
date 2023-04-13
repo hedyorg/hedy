@@ -1,11 +1,11 @@
-function expandStudentTile(student) {
+function expandStudentTile(student: any) {
     const average_quiz = student.average_quiz;
     const success_rate_highest_level = student.success_rate_highest_level;
     const success_rate_overall = student.success_rate_overall;
     const highest_level_quiz = student.highest_level_quiz;
     const highest_level_quiz_score = student.highest_level_quiz_score;
 
-    let bigTile = document.getElementById('expanded-student-tile');
+    let bigTile = document.getElementById('expanded-student-tile')!;
     bigTile.innerHTML =
         '<p class="font-bold text-lg">' + student.username + '</p>' +
         '<p>Success overall:  ' + success_rate_overall + '</p>' +
@@ -20,7 +20,7 @@ function hideStudentTile() {
     $('#expanded-student-tile').addClass('hidden');
 }
 
-function studentTileClicked(event, student) {
+function studentTileClicked(event: any, student: any) {
     const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
     // Remove 'selected' attribute from all student tiles
