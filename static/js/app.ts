@@ -939,7 +939,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       pygameModal.removeClass('bottom-0');
       pygameModal.removeClass('w-full');
     }
-    
+
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
@@ -1044,7 +1044,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
-    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+    scrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1141,6 +1141,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           return false;
         });
         $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
       });
     } else {
       return new Promise(function (ok) {
@@ -1431,9 +1434,12 @@ function getConfettiForAdventure(adventure: MessageKey){
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
-export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+/**
+ * Scroll the output to bottom immediately
+ */
+function scrollOutputToBottom() {
+  const outputDiv = $('#output');
+  outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
 }
 
 export function modalStepOne(level: number){
