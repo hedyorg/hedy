@@ -100,7 +100,7 @@ class QuizModule(WebsiteModule):
         if save_to_db:
             username = current_user()["username"] or f"anonymous:{utils.session_id()}"
             self.db.record_quiz_answer(
-                session["quiz-attempt-id"],
+                progress.attempt_id,
                 username=username,
                 level=progress.level,
                 is_correct=is_correct,
