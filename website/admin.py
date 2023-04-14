@@ -132,7 +132,8 @@ class AdminModule(WebsiteModule):
             {
                 "name": Class.get("name"),
                 # replace email by username for easier communication
-                "teacher": self.db.user_by_username(Class.get("teacher")).get("email"),
+                "teacher": Class.get("teacher"),
+                "email": self.db.user_by_username(Class.get("teacher")).get("email"),
                 "created": utils.localized_date_format(Class.get("date")),
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
