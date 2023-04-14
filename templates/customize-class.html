@@ -3,7 +3,7 @@
 {% block regular_content %}
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
-    <div>
+    <!-- <div>
         {{ _('customize_class_exp_1')|commonmark }}
         <div class="border border-gray-400 w-full lg:w-3/4 rounded-lg px-2 py-1 my-2">
             <ol class="list-inside">
@@ -18,7 +18,7 @@
             </ol>
         </div>
         {{ _('customize_class_exp_2')|commonmark }}
-    </div>
+    </div> -->
     <div class="hidden flex-row border border-gray-400 rounded-lg">
         <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
         <div class="py-2 px-4 w-9/12 overflow-x-scroll">
@@ -101,8 +101,9 @@
             <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
                 <select class="py-2 px-1 w-full mt-2 h-10 text-center" name="levels" id="available"
                     data-cy="available_adventures_current_level">
-                    <option value="none" selected>{{_('available_adventures_level')}} -</option>
+                    <option value="none" selected disabled>Adventures</option>
                 </select>
+                <button class="green-btn w-1/2 mt-2 ml-2"><i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
     </div>

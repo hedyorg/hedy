@@ -739,14 +739,14 @@ export interface InitializeCustomizeClassPageOptions {
   readonly class_id: string;
 }
 
-let available_adventures_level_translation: string;
+//let available_adventures_level_translation: string;
 let teacher_adventures: TeacherAdventure[];
 let available_adventures: Record<string, AvailableAdventure[]>;
 let adventures_default_order: Record<string, string[]>;
 let adventure_names: Record<string, string>;
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
-  available_adventures_level_translation = options.available_adventures_level_translation;
+  //available_adventures_level_translation = options.available_adventures_level_translation;
   teacher_adventures = options.teacher_adventures;
   available_adventures = options.available_adventures;
   adventures_default_order = options.adventures_default_order;
@@ -841,7 +841,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
    */
   function addAllAvailableAdventures(level: string) {
     $('#available').empty();
-    $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
+    $('#available').append(`<option value="none" selected disabled>Adventures</option>`);
     const adventures = available_adventures[level];
     for(let i = 0; i < adventures.length; i++) {
       $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
