@@ -18,7 +18,10 @@ beforeEach(() => {
  *
  * Each of the pages renders a specific element with a page counter index,
  * which advances by 1 every page. We can therefore wait for that element to
- * appear, and then we'll know the page has completed async rendering.
+ * appear, and then we'll know the page has completed async rendering. After
+ * we know the page has rendered, we can inspect what's visible to us, and
+ * do an appropriate thing (declare victory, click the perfunctory "next" button,
+ * or click a random answer).
  */
 it('can complete the quiz by randomly clicking buttons', () => {
   cy.get('*[data-cy="start-quiz"]').click();
