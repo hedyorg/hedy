@@ -24,7 +24,7 @@ class QuizLogic:
     def __init__(self, db: Database):
         self.db = db
 
-    def quiz_threshold_for_user(self, username):
+    def quiz_threshold_for_user(self):
         """Return the minimum quiz percentage the given user has to achieve to pass the quiz."""
         customizations = self.db.get_student_class_customizations(current_user()['username'])
         return customizations.get('level_thresholds', {}).get('quiz', 0)
@@ -112,6 +112,7 @@ class QuizModule(WebsiteModule):
             progress.correctly_answered(question)
         else:
             progress.incorrectly_answered(question.get_choice(answer))
+        progress.advance_cypress_page_counter()
 
         question_finished = is_correct or progress.question_attempt >= MAX_ATTEMPTS
         if question_finished and progress.question == question_count:
@@ -147,6 +148,7 @@ class QuizModule(WebsiteModule):
     def next_question(self):
         """Advance the progress object and redirect to the next question."""
         progress, _ = self.current_progress_and_question()
+        progress.advance_cypress_page_counter()
         progress.next_question()
         self.save_progress(progress)
 
@@ -174,7 +176,7 @@ class QuizModule(WebsiteModule):
         # If you are in a class and the teacher has set quiz completion requirements, we check
         # them here and hide the "next level" button if you haven't met them.
         if current_user()['username']:
-            threshold = self.logic.quiz_threshold_for_user(current_user()['username'])
+            threshold = self.logic.quiz_threshold_for_user()
             if score_percent < threshold:
                 # No next level for you
                 next_level = None
@@ -183,6 +185,7 @@ class QuizModule(WebsiteModule):
 
         return render_template('quiz/hx-review-quiz.html',
                                next_level=next_level,
+                               progress=progress,
                                retake_quiz_level=retake_quiz_level,
                                get_certificate=get_certificate,
                                score_percent=score_percent)
@@ -337,6 +340,10 @@ class QuizProgress:
     wrong_answer_feedback: Optional[str] = None
     is_preview: Optional[bool] = None
 
+    # We have this solely so that we can make a cypress click-through test that is reliable
+    # without 'cy.wait()'s everywhere.
+    cypress_page_counter: List[int] = field(default=0)
+
     def correctly_answered(self, question: Question):
         """Update the progress' state in response to a correct answer."""
         if question.number not in self.correctly_answered_questions_numbers:
@@ -357,6 +364,9 @@ class QuizProgress:
         self.question_attempt = 0
         self.last_wrong_answer = None
         self.wrong_answer_feedback = None
+
+    def advance_cypress_page_counter(self):
+        self.cypress_page_counter += 1
 
     @property
     def correct_answers_so_far(self):

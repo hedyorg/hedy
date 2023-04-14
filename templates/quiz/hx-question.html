@@ -1,6 +1,8 @@
 {% extends hx_layout %}
 {% block regular_content %}
 
+<input type="hidden" data-cy="ctr:{{progress.cypress_page_counter}}">
+
 <div class="my-10">
     {% include "quiz/incl-question-progress.html" %}
     <div>
@@ -61,6 +63,7 @@
                     {{container_colors.next()}}
                     {% if choice.number == progress.last_wrong_answer %}incorrect-option{% endif %}
                     "
+                    data-cy="quiz-choice"
                     _="on click if I do not match .incorrect-option then
                         add .hidden to .pick-answer-button
                         remove .hidden from .pick-answer-button in me
@@ -82,8 +85,7 @@
                     <form>
                         <input type="hidden" name="answer" value="{{choice.number}}">
                         <button class="pick-answer-button hidden blue-btn absolute px-4 py-2 w-56" style="bottom: -30px; right: 10px"
-                            hx-post="/quiz/submit_answer"
-                            hx-disable-element="self">{{_('submit_answer')}}</button>
+                            hx-post="/quiz/submit_answer">{{_('submit_answer')}}</button>
                     </form>
                 </div>
                 {% if progress.wrong_answer_feedback %}

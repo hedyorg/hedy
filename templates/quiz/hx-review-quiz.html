@@ -1,8 +1,10 @@
 {% extends hx_layout %}
 {% block regular_content %}
 
+<input type="hidden" data-cy="ctr:{{progress.cypress_page_counter}}">
+
     <div class="flex flex-col justify-center items-center my-10 gap-4">
-        <div class="text-gray-500 text-2xl">{{_('end_quiz')}}</div>
+        <div class="text-gray-500 text-2xl" data-cy="quiz-done">{{_('end_quiz')}}</div>
         <div class="font-semibold text-4xl text-blue-800 font-slab">{{_('score')}}</div>
         <div class="border-4 border-yellow-600 rounded-full h-40 w-40 flex items-center bg-yellow-300 justify-center">
             <div class="text-yellow-600 font-bold text-6xl text-center">
