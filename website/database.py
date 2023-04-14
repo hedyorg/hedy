@@ -131,7 +131,7 @@ class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
 
-        Uses a DynamoDB update to add to the exising record.
+        Uses a DynamoDB update to add to the exising record. Expects answer to be A, B, C etc.
         """
         key = {
             "user": username,
@@ -631,6 +631,11 @@ class Database:
         return customizations
 
     def get_student_class_customizations(self, user):
+        """Return customizations for the very first class this user is part of.
+
+        If the user is part of multiple classes, they will only get the customizations
+        of the first class.
+        """
         student_classes = self.get_student_classes(user)
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
