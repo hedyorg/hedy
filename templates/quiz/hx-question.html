@@ -57,10 +57,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 mb-8 w-full max-w-screen-lg mx-auto">
             {% for choice in question.choices %}
             <div>
-                <div class="turn-pre-into-ace relative py-4 px-1 border-4 rounded-lg shadow-lg
+                <div class="turn-pre-into-ace relative py-4 px-1 border-4 rounded-lg shadow-lg transition
                     {{container_colors.next()}}
                     {% if choice.number == progress.last_wrong_answer %}incorrect-option{% endif %}
-                    transition
                     "
                     _="on click if I do not match .incorrect-option then
                         add .hidden to .pick-answer-button
