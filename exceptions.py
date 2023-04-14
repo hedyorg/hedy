@@ -271,3 +271,11 @@ class LockedLanguageFeatureException(HedyException):
 class UnsupportedStringValue(HedyException):
     def __init__(self, invalid_value):
         super().__init__('Unsupported String Value', invalid_value=invalid_value)
+
+
+class MissingElseForPressitException(HedyException):
+    def __init__(self, command, level, line_number):
+        super().__init__('Pressit Missing Else',
+                         command=command,
+                         level=level,
+                         line_number=line_number)

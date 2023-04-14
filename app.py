@@ -400,6 +400,7 @@ def add_hx_detection():
         "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
     }
 
+
 @app.after_request
 def hx_triggers(response):
     """For HTMX Requests, push any pending achievements in the session to the client.
@@ -412,7 +413,7 @@ def hx_triggers(response):
 
     achs = session.pop('pending_achievements', [])
     if achs:
-        response.headers.set('HX-Trigger', json.dumps({ 'displayAchievements': achs }))
+        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
     return response
 
 
@@ -720,6 +721,7 @@ def translate_error(code, arguments, keyword_lang):
         'character_found',
         'concept',
         'tip',
+        'else',
         'command',
         'print',
         'ask',
@@ -734,6 +736,7 @@ def translate_error(code, arguments, keyword_lang):
         'variable',
         'invalid_value',
         'print',
+        'else',
         'ask',
         'echo',
         'is',
@@ -756,6 +759,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments["print"] = "print"
     arguments["ask"] = "ask"
     arguments["echo"] = "echo"
+    arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
 

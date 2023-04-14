@@ -2,7 +2,7 @@
 
 Hedy is a gradual programming language aimed at teaching programming and teaching Python. It teaches using different levels. The first level just offers printing text and asking for input. This level is meant to introduce learners to the idea of a programming language, and the environment. From there, Hedy builds up to include more complex syntax and additional concepts.
 
-![image](https://user-images.githubusercontent.com/38155424/156551654-fe6ae62e-e52a-444f-abdb-d776fe8dd7b7.png)
+<img width="1617" alt="image" src="https://user-images.githubusercontent.com/1003685/230636245-668ef2a1-c38b-47cf-84e4-0896ee6a72e8.png">
 
 The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 
