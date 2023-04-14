@@ -5,7 +5,8 @@
     <h1>Classes overview</h1>
     <button type="reset" class="green-btn" id="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
-<h4 class="text-center">Total amount of shown classes: {{ classes|length }}</h4>
+<h4 class="text-center">Total amount of shown classes: {{ classes|length }} <br>
+ Total amount of active classes this week: {{ active_classes|length }}
 <div class="program w-full mx-auto border-solid border-2 border-orange-400 rounded p-4">
   <table class="table-auto w-full text-sm">
     <thead>
@@ -22,6 +23,7 @@
           <td id="overview_header">Class overview</td>
       </tr>
     </thead>
+
     <tbody>
       {% for class in classes %}
           <tr>

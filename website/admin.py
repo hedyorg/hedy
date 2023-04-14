@@ -141,9 +141,11 @@ class AdminModule(WebsiteModule):
             for Class in self.db.all_classes()
         ]
 
+        active_classes = [x for x in classes if x.get("stats").get("week").get("runs") > 0]
+
         classes = sorted(classes, key=lambda d: d.get("stats").get("week").get("runs"), reverse=True)
 
-        return render_template("admin/admin-classes.html", classes=classes, page_title=gettext("title_admin"))
+        return render_template("admin/admin-classes.html", active_classes=active_classes, classes=classes, page_title=gettext("title_admin"))
 
     @route("/adventures", methods=["GET"])
     @requires_admin
