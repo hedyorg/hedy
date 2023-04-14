@@ -100,7 +100,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Szukam!'"
                 story_text: "## {elif}\nTeraz zmienimy nieco wcięcia. Za każdym razem, gdy potrzebujemy wciąć kod, potrzebujemy `:` w linii przed wcięciem.\n\nNa tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` to połączenie `{else}` i `{if}` i potrzebujesz go, gdy chcesz zrobić 3 (lub więcej!) opcji.\nSprawdź to!"
-                example_code: "```\nnagrody = ['milion złotch', 'szarlotkę', 'nic']\ntwoja_nagraoda = nagrody[{random}]\n{print} 'Wygrywasz ' twoja_nagraoda\n{if} twoja_nagraoda == 'milion złotch' :\n    {print} 'O tak! Jesteś bogaty!'\n{elif} twoja_nagraoda == 'szarlotkę' :\n    {print} 'Pyszna szarlotka!'\n{else}:\n    {print} 'Powodzenia następnym razem ...'\n```\n"
+                example_code: "```\nnagrody = ['milion złotych', 'szarlotkę', 'nic']\ntwoja_nagroda = nagrody[{random}]\n{print} 'Wygrywasz ' twoja_nagroda\n{if} twoja_nagroda == 'milion złotych' :\n    {print} 'O tak! Jesteś bogaty!'\n{elif} twoja_nagroda == 'szarlotkę' :\n    {print} 'Pyszna szarlotka!'\n{else}:\n    {print} 'Powodzenia następnym razem ...'\n```\n"
             18:
                 start_code: |-
                     imię = 'Hedy'
@@ -143,12 +143,12 @@ adventures:
         default_save_name: Piosenka
         levels:
             12:
-                story_text: "## Zaśpiewaj piosenkę\nW tej piosence jeszcze prościej zaprogramujemy 'jeśli jesteś dziś szczęśliwy w dłonie klaszcz'. To wszystko dzięki temu, że wszystkie akcjie możemy przypisać do zmiennej. Na przykład:\n\n### Ćwiczenie\nCzy potrafisz dodać odpowiednią długość wcięcia do każdej linii kodu żeby ta piosenka była zaśpiewana poprawnie?\nZwróć uwagę, że nie wszystkie linie kodu wymagają wcięcia.\n"
+                story_text: "## Zaśpiewaj piosenkę!\nW tej piosence jeszcze prościej zaprogramujemy 'jeśli jesteś dziś szczęśliwy w dłonie klaszcz'. To wszystko dzięki temu, że wszystkie akcje możemy przypisać do zmiennej. Zobacz jak:\n\n### Ćwiczenie\nCzy potrafisz dodać odpowiednią długość wcięcia do każdej linii kodu żeby ta piosenka była zaśpiewana poprawnie?\nWskazówka: Nie wszystkie linie kodu wymagają wcięcia.\n"
                 example_code: "```\nakcje = 'w dłonie klaszcz', 'tupnij tak', 'klepnij się'\n{for} akcja {in} akcje\n    {for} i {in} {range} 1 {to} 2\n        {print} 'jeśli jesteś dziś szczęśliwy'\n        {print} akcja\n    {print} 'jeśli jesteś dziś szczęśliwy, w sercu pokój masz prawdziwy'\n    {print} 'jeśli jesteś dziś szczęśliwy'\n    {print} akcja\n```\n"
                 start_code: '# umieść tutaj swój kod'
             11:
                 story_text: "## Piosenki\nNa tym poziomie możesz użyć `{for}` z `{range}`, aby tworzyć piosenki, które wykorzystują liczenie, takie jak 5 małych małpek.\n\n### Ćwiczenie 1\nWypełnij puste pola i spraw, aby kod działał! Jeśli nie pamiętasz tekstu piosenki, poszukaj go sam.\n\n### Ćwiczenie 2\nOstatnia linijka piosenki różni się od pozostałych. Wydrukuj ten wiersz wewnątrz `{for}` i użyj `{if}`, aby działał poprawnie.\n"
-                example_code: "```\n_ małpki _ _ 5 _ 1\n    {print} małpki 'małe małpki skaczące po łóżku'\n```\n"
+                example_code: "```\n_ małpki _ _ 5 _ 1\n    {print} małpki 'małe małpki skaczące po łóżku'\n    _\n```\n"
                 start_code: '# umieść swój kod tutaj'
             10:
                 story_text: "## Piosenki\nDzięki `{for}` możesz wydrukować całą piosenkę „Baby Shark” (w tym wszystkie inne rekiny w rodzinie) w zaledwie 6 liniach!\n\n### Ćwiczenie 1\nCzy możesz jeszcze bardziej skrócić kod „Baby Shark” za pomocą polecenia `{for}`? Dokończ przykładowy kod.\n"
@@ -172,21 +172,21 @@ adventures:
                 example_code_2: "```\nnumer = 6\nnumer = numer - 1\n{print} 'Skakało na łóżku małych małpek ' numer\n{print} 'Nagle jedna spadła i potłukła się'\n{print} 'Mama do doktora dzwoni i słyszy, że'\n{print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n{sleep}\n```\n"
             16:
                 story_text: "## Zaśpiewaj piosenkę!\nNa tym poziomie możesz jeszcze szybciej zaprogramować utwór taki jak „Dziadek Fajną Farmę Miał”. Możesz połączyć odpowiednie zwierzę z odpowiednim dźwiękiem, po prostu umieszczając je w tym samym miejscu na liście.\n„Morskie Opowieści” (ang.: Drunken Sailor) jest również szybko tworzony na tym poziomie. Potrzebujesz tylko 8 linii do całej piosenki, sprawdź to!\n"
-                example_code: "## Dziadek Fajną Farmę Miał.\n```\nzwierzęta = ['Kurki', 'Krówki', 'Świnkę']\ndźwięki = ['ko', 'muu', 'chrum']\n{for} i {in} {range} 1 {to} 3\n    zwierzę = zwierzęta[i]\n    dźwięk = dźwięki[i]\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n\n## Pijany marynarz\n```\nwersy = ['Co zrobimy z pijanym marynarzem?', 'Zgolim mu brzuch żyletką tępą,', 'Wsadzim go w łódź aż wytrzeźwieje,']\n{for} wers {in} wersy\n    {for} i {in} {range} 1 {to} 3\n        {print} wers\n    {print} 'Wcześnie o poranku!'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hej ho i już się wznosi,'\n    {print} 'Wcześnie o poranku!'\n```\n"
+                example_code: "## Dziadek Fajną Farmę Miał.\n```\nzwierzęta = ['Kurki', 'Krówki', 'Świnkę']\ndźwięki = ['ko', 'muu', 'chrum']\n{for} i {in} {range} 1 {to} 3\n    zwierzę = zwierzęta[i]\n    dźwięk = dźwięki[i]\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu'\n    {print} 'i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu,'\n    {print} dźwięk ' tam,'\n    {print} 'ciągle tylko ' dźwięk dźwięk\n```\n\n## Pijany marynarz\n```\nwersy = ['Co zrobimy z pijanym marynarzem?', 'Zgolim mu brzuch żyletką tępą,', 'Wsadzim go w łódź aż wytrzeźwieje,']\n{for} wers {in} wersy\n    {for} i {in} {range} 1 {to} 3\n        {print} wers\n    {print} 'Wcześnie o poranku!'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hej ho i już się wznosi,'\n    {print} 'Wcześnie o poranku!'\n```\n"
                 start_code: '# umieść tutaj swój kod'
             18:
-                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
-                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# Schrijf jouw code hier'
+                story_text: "## Zaśpiewaj piosenkę!\nW poziomie 16 stworzyliśmy piosenki przy użyciu list. Te programy nie będą już działały poprawnie w tym poziomie. Dwukropki z poziomu 17 i nawiasy kwadratowe z poziomu 18 muszą zostać dodane.\n\n### Ćwiczenie 1\nPiosenka o pijanym marynarzu ma przykładowy kod, ale jeszcze nie działa.\nCzy możesz się upewnić, że wszystko znów zacznie działać? By Ci pomóc powstawialiśmy _ w _niektórych_ miejscach z błędami.\n\n### Ćwiczenie 2\nTeraz znajdź swoją piosenkę o dziadku z farmą z poziomu 16 i popraw ją.\n"
+                example_code: "```\nwersy = ['Co zrobimy z pijanym marynarzem?', 'Zgolim mu brzuch żyletką tępą,', 'Wsadzim go w łódź aż wytrzeźwieje,']\n{for} wers {in} wersy _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ wers _\n    {print} 'Wcześnie o poranku!'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hej ho i już się wznosi,'\n    {print} 'Wcześnie o poranku!'\n```\n"
+                start_code: '# Tutaj wpisz swój kod'
     dishes:
         levels:
             5:
                 start_code: "{print} 'Kto zmywa naczynia?'"
-                story_text: "## Mycie naczyń\nDzięki poleceniu `{if}` możesz mieć teraz trochę więcej zabawy z wyborami w twoich programach. Możesz teraz zrobić, żeby twój program reagował na odpowiedzi.\n\nCzy potrafisz dokończyć program który wyświetla \"o, nie...\" gdy jest Twoja tura, oraz który wyświetla \"tak!\" gdy to nie jest Twoja tura?\nNie zapomnij cudzysłowów!\n"
-                example_code: "```\nludzie {is} mama, tata, Agnieszka, ty\nkto_zmywa {is} ludzie {at} {random}\n{if} kto_zmywa {is} ty {print} _ o, nie... Twoja kolej zmywania naczyń _\n{else} {print} 'całe szczęście ' _ ' myje naczynia'\n````\n"
+                story_text: "## Mycie naczyń\nDzięki poleceniu `{if}` możesz mieć teraz trochę więcej zabawy z wyborami w twoich programach. Możesz teraz sprawić, by twój program reagował na wybory podjęte przez komputer.\n### Ćwiczenie\nCzy potrafisz dokończyć program, tak by wyświetlał \"o, nie...\" gdy jest Twoja kolej, a w przeciwnym przypadku wyświetlał „tak!”?\nNie zapomnij cudzysłowów!\n"
+                example_code: "```\nludzie {is} mama, tata, Agnieszka, Zosia\nzmywarka {is} ludzie {at} {random}\n_ kto_zmywa {is} Zosia {print} _ o, nie... Moja kolej zmywania naczyń _\n_ {print} 'całe szczęście ' _ ' myje naczynia'\n````\n"
             10:
                 story_text: "## Zmywanie naczyń\nNa tym poziomie w prosty sposób ułożysz plan na cały tydzień!\n\n### Ćwiczenie\nDodaj drugie zadanie, takie jak odkurzanie lub sprzątanie, i upewnij się, że jest ono również podzielone na cały tydzień.\n<br> **Dodatkowo** Program nie jest sprawiedliwy, można mieć pecha i zmywać cały tydzień. Jak uczynić program bardziej sprawiedliwym?\n"
-                example_code: "```\ndni = Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela\nimiona = mama, tata, Agnieszka, ty\n{for} dzień {in} dni\n    {print} imiona {at} {random} ' myje naczynia w ' dzień\n```\n"
+                example_code: "```\ndni = Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela\nimiona = mama, tata, Agnieszka, Zosia\n{for} dzień {in} dni\n    {print} imiona {at} {random} ' myje naczynia w ' dzień\n```\n"
                 start_code: '# umieść tutaj swój kod'
             7:
                 story_text: "## Zmywanie naczyń\nPrzy użyciu komendy `{repeat}` możesz powtórzyć fragmenty kodu. Możesz to wykorzystać do ustalenia kto będzie zmywał naczynia przez kilka dni!\n### Ćwiczenie\nUżyj komendy `{repeat}` aby wylosować kto będzie mył naczynia przez cały tydzień. Każde puste miejsce musi być wypełnione jedną komendą lub liczbą!\n**(dodatkowe ćwiczenie)** Czy możesz wymyślić inne prace domowe? Przygotuj kod, który wylosuje trzy prace domowe. Nie zapomnij napisać, o co chodzi!\n"
@@ -199,7 +199,7 @@ adventures:
                 example_code_2: "```\nludzie = mama, tata, Agnieszka, ty\nkto_zmywa = ludzie {at} {random}\n{print} 'Naczynia w poniedziałek myje: ' kto_zmywa\n{remove} kto_zmywa {from} ludzie\nkto_zmywa = ludzie {at} {random}\n{print} 'Naczynia we wtorek myje: ' kto_zmywa\n{remove} kto_zmywa {from} ludzie\nkto_zmywa = ludzie {at} {random}\n```\n"
                 start_code: "{print} 'Kto zmywa naczynia?'"
             4:
-                story_text: "## Mycie naczyń\nŻeby upiększyć swój plan mycia naczyń możesz użyć cudzysłowów.\nTym razem Twój przykładowy kod nie jest w pełni ukończony.\n\nCzy potrafisz dokończyć ten kod uzupełniając puste miejsca? Każde puste miejsce musi być zastąpione przy użyciu jednego słowa lub symbolu.\n\nWskazówka: Nie zapomnij cudzysłowów!\n"
+                story_text: "## Mycie naczyń\nKorzystając z cudzysłowów możesz sprawić, że twój program o zmywaniu naczyń będzie jeszcze lepszy.\n\n## Ćwczenie\nNajpierw uzupełnij puste miejsca symbolami lub poleceniami, tak by przykładowy program zaczął działać.\nUdało Ci się? Super! Teraz skopiuj swój własny kod z poprzedniego poziomu i spraw by zaczął działać w tym poziomie dodając cudzysłowy w odpowiednich miejscach.\n"
                 example_code: "```\nludzie {is} mama, tata, Emma, Sophie\n{print} _ naczynia są myte przez _\n{sleep}\n{print} ludzie {at} _\n```\n"
                 start_code: "{print} 'Kto zmywa naczynia?'"
             3:
@@ -214,13 +214,13 @@ adventures:
         levels:
             4:
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
-                story_text: "## Kostki do gry\nNa tym poziomie możemy tworzyć zdania z wartością kostki w zdaniu, oczywiście w cudzysłowach.\nTym razem kod przykładowy nie jest do końca kompletny. Czy możesz uzupełnić kod?\n"
+                story_text: "## Kostki do gry\nW tym poziomie możesz stworzyć kostki do gry. Ale tym razem spróbuj zrobić to samodzielnie, bez przykładowego kodu!\n\n### Ćwiczenie\nStwórz własne kostki do gry.\nWskazówka: Jeśli nie masz pojęcia jak stworzyć kostki do gry, spójrz na te z poprzedniego poziomu, ale nie zapomnij dodać cudzysłowów.\n"
             10:
                 story_text: "## Kości\nCzy wszyscy zbyt długo rzucają kostką? Na tym poziomie możesz pozwolić Hedy rzucić wszystkimi kośćmi naraz!\n\n### Ćwiczenie\nZmień imiona na imiona swoich przyjaciół lub rodziny i dokończ kod, aby każdy z nich rzucił.\n"
                 example_code: "```\ngracze = Ania, Jasiek, Kasia\nwybory = 1, 2, 3, 4, 5, 6\n_ _ _ _\n    {print} gracz ' wyrzucił ' wybory {at} {random}\n    {sleep}\n```\n"
                 start_code: '# umieść tutaj swój kod'
             7:
-                story_text: "## Kości\nNa poziomie 5 już mogłeś zrobić kostkę do gry. Przy pomocy polecenia `{repeat}` możesz łatwo rzucić ręką pełną kostek.\n\n### Ćwiczenie\nSpróbuj ukończyć przykładowy kod! **Dodatkowo** Zastanów się nad grą, którą znasz, i która wymaga kostki i zaprogramuj ją przy pomocy polecenia `{repeat}`\n"
+                story_text: "## Kości\nNa poziomie 5 już mogłeś zrobić kostkę do gry. Przy pomocy polecenia `{repeat}` możesz łatwo rzucić ręką pełną kostek.\n\n### Ćwiczenie\nSpróbuj ukończyć przykładowy kod! **Dodatkowo** Zastanów się nad grą, którą znasz, i która wymaga kostki i zaprogramuj ją przy pomocy polecenia `{repeat}`.\n"
                 example_code: "```\nwybory = 1, 2, 3, 4, 5, 6\n_ _ _ _ _ _ _\n```\n"
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             6:
@@ -229,12 +229,12 @@ adventures:
                 example_code_2: "## Wgląd w przyszłość\n\nCzy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania, prawda? W poziomie 7 ułatwimy to!\n"
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             5:
-                story_text: "## Kostki do gry\nW tym poziomie możesz stworzyć kostkę do gry używając polecenia `{if}`.\nUzupełnij kod przykładowy tak, aby kod mówił \"Możesz przestać rzucać\" gdy wyrzuciłeś gąsienicę.\n\nMoże chcesz stworzyć kostkę do gry z całkowicie innej gry? To też jest w porządku! W takim razie wymyśl swoją własną reakcję. Na przykład \"tak\" dla 6 i \"szkoda\" dla czegoś innego.\n"
-                example_code: "```\nwybory {is} 1, 2, 3, 4, 5, dżdżownica\nrzut {is} _.\n{print} 'rzuciłeś ' _ \n{if} _ {is} dżdżownica {print} 'Możesz przestać rzucać' _ {print} 'Musisz to usłyszeć jeszcze raz!'\n```\n"
+                story_text: "## Kostki do gry\nTeraz dodamy polecenia `{if}` oraz `{else}` do naszych kości!\n\n### Ćwiczenie\nUzupełnij kod przykładowy tak, aby kod napisał „Możesz przestać rzucać” gdy wyrzucona zostanie gąsienica. W przypadku gdy zostanie wyrzucone coś innego powinien napisać „Musisz rzucić ponownie”.\n**Dodatkowo** Może chcesz stworzyć kostkę do gry z całkowicie innej gry? To też jest w porządku! W takim razie wymyśl swoją własną reakcję. Na przykład „tak” dla 6 i „szkoda” dla czegoś innego.\n"
+                example_code: "```\nwybory {is} 1, 2, 3, 4, 5, dżdżownica\nrzut {is} wybory {at} {random}\n{print} 'wyrzucono ' rzut\n_ rzut {is} dżdżownica {print} 'Możesz przestać rzucać.'\n_ {print} 'Musisz rzucić jeszcze raz!'\n```\n"
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             3:
                 story_text: "## Kostka do gry\nNa tym poziomie posiadamy możliwość wyboru z listy. Dzięki temu możemy pozwolić komputerowi wybrać jedną ze stron kostki.\nZerknij na gry, które masz w swojej szafie w domu.\nCzy są tam gry z (specjalną) kostką? Możesz ją również skopiować przy pomocy tego kodu.\nNa przykład kostka do gry Gąsienice z liczbami od 1 do 5 i wężem na niej.\n\n![Kostka do gry Gąsienice z liczbami od 1 do 5 i gąsienicą na niej](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nwybory {is} 1, 2, 3, 4, 5, dżdżownica\n{print} wybory {at} {random}\n```\n"
+                example_code: "```\nwybory {is} 1, 2, 3, 4, 5, dżdżownica\n{print} Wyrzucono _ {at} {random}\n```\n"
                 start_code: '{print} Jaka wartość wypadnie na kostce tym razem?'
                 example_code_2: "```\nwybór {is} _\n```\n"
                 story_text_2: "### Ćwiczenie\nKości w przykładzie powyżej są kośćmi do specjalnej gry. Czy możesz zrobić normalną kość do gry?\nLub inne specjalne kości z innej gry?\n"
@@ -245,6 +245,25 @@ adventures:
         name: Kostka do gry
         description: Stwórz własną kostkę do gry
         default_save_name: Kostka do gry
+    pressit:
+        name: Naciśnięcia klawiszy
+        description: Spróbuj przypisać przycisk klawiatury do polecenia!
+        default_save_name: Naciśnięty
+        levels:
+            7:
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                story_text: "## Kontrola żółwia\nSkoro już nauczyłeś się polecenia `{repeat}` możesz naciskać klawisze wiele razy! Dzięki temu możesz sprawić, że żółw będzie chodził do przodu i obracał się.\n\n### Ćwiczenie\nPrzykładowy kod sprawdza tylko raz, czy klawisz jest naciśnięty. Zmień kod tak, aby można było naciskać klawisze wiele razy i użyj kodu, aby narysować coś ładnego.\n"
+                start_code: '# umieść tutaj swój kod'
+            9:
+                start_code: '# umieść tutaj swój kod'
+                story_text: "## Gra w bezwzrokowe pisanie.\nTeraz gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie pisania bezwzrokowego za pomocą `{pressed}`.\n\n### Ćwiczenie\nDokończ kod. Za każdym razem program ma wybrać losową literę, którą należy nacisnąć. Otrzymujesz punkt za prawidłowy klawisz i odjęcie dwóch punktów za niewłaściwy klawisz.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored."
+                example_code: "```\npunkty = 1\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera \n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
+            5:
+                start_code: '# tutaj wpisz swój kod'
+                example_code: "```\n{print} 'Wolisz dobre (d) czy złe (z) zakończenie?'\n{if} d {is} {pressed} {print} 'I żyli długo i szczęśliwie ❤'\n{else} {print} 'Książę został zjedzony przez hipopotama \U0001F62D'\n```\n"
+                story_text: "## Naciśnięty\nW tym poziomie pojawia się kolejne nowe polecenie: `{pressed}`!\nDzięki poleceniu `{pressed}` możesz użyć przycisków na swojej klawiaturze by kontrolować które linie zostaną użyte.\n\n### Ćwiczenie\nSpójrz na przykładowy kod i dodaj jedną więcej linię która reaguje na naciśnięcie przycisku.\n"
+                story_text_2: "## Z żółwiem\nMożesz również przypisać polecenia żółwia do klawiszy.\n\n### Ćwiczenie\nSkopiuj linie kilka razy by móc stworzyć większy rysunek.\n"
+                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
     rock:
         default_save_name: Kamień
         levels:
@@ -558,15 +577,15 @@ adventures:
                 example_code: "```\nklucze = 'zgubione'\n{print} 'Stoisz w ogrodzie i zgubiłeś swoje klucze.' \n{print} 'Gdzie chcesz ich poszukać?'\n{print} 'Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy'\n{while} klucze == 'zgubione'\n    miejsce = {ask} 'Gdzie chcesz popatrzeć?'\n    {if} miejsce == 'doniczka'\n        {print} 'Tutaj są!'\n        klucze = 'znalezione'\n    {else}\n        {print} 'Nie, nie ma ich w ' miejsce\n{print} 'Teraz możesz wejść do domu!'\n```\n"
                 start_code: '# tutaj umieść swój kod'
             13:
-                story_text: "## Opowieść\nUżywając poleceń `{and}` oraz `{or}` możesz skrócić swoje opowieści. Na przykład, zobacz opowieść o smoku.\n\n### Ćwiczenie\nCzy potrafisz zrobić podobną grę przygodową?\n"
-                example_code: "```\nmiecz = 'zgubiony'\ngra = 'w trakcie'\n{print} 'Nasz bohater idzie przez las'\n{print} 'Ścieżka rozdziela się na dwie strony'\n{for} i {in} {range} 0 {to} 2\n    {if} gra {is} 'w trakcie'\n        ścieżka = {ask} 'Którą ścieżkę powinien wybrać?'\n        {if} ścieżka {is} 'lewo' {and} miecz {is} 'znaleziony'\n            {print} 'Nasz bohater natrafia na smoka!'\n            {print} 'Na szczęście nasz bohater ma miecz, którym pokona bestię!'\n            game = 'skończona'\n        {if} ścieżka {is} 'lewo' {and} miecz {is} 'zgubiony'\n            {print} 'Nasz bohater znajduje smoka, ale nie ma żadnej broni!'\n            {print} 'Nasz bohater zostaje pokonany przez smoka...'\n            {print} 'Spróbuj jeszcze raz'\n            game = 'skończona'\n        {if} ścieżka {is} 'praow' {and} miecz {is} 'znaleziony'\n            {print} 'Znalazłeś już miecz. Nic tu już nie zostało.'\n            {print} 'She walks back'\n        {if} ścieżka {is} 'right' {and} miecz {is} 'zgubiony'\n            {print} 'Nasz bohater znalazł miecz.'\n            {print} 'To może się bardzo przydać'\n            miecz = 'znaleziony'\n```\n"
+                story_text: "## Opowieść\nUżywając poleceń `{and}` oraz `{or}` możesz uczynić swoje opowieści bardziej wszechstronnymi. Możesz zadać dwa pytania i odpowiedzieć na kombinację odpowiedzi.\n\n### Ćwiczenie 1\nPopatrz na przykładowy kod i dokończ go. Następnie dodaj co najmniej 2 polecenia `{if}` z poleceniami `{and}` lub `{or}`.\n\n### Ćwiczenie 2\nOdnajdź opowieść z poprzedniego poziomu i dodaj jedno polecenie `{and}` lub `{or}`.\n"
+                example_code: "```\n{print} 'Nasz bohater idzie przez las'\n{print} 'Ścieżka rozdziela się'\nścieżka = {ask} 'Którą ścieżkę powinna wybrać?'\nbroń ={ask} 'Jaką broń wyciąga?'\n{if} ścieżka {is} 'lewo' {and} broń {is} 'miecz'\n\t_\n```\n"
                 start_code: '# tutaj umieść swój kod'
             18:
-                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
-                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
-                example_code: "```\n{print}('Welcome to this story!')\n```\n"
-                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
-                start_code: '# Schrijf jouw code hier'
+                story_text: "## Opowieść\nNapiszemy kolejną opowieść, ale teraz musimy użyć nawiasów z `{print}`.\n\n\n### Ćwiczenie 1\nStwórz opowieść składającą się z co najmniej 5 zdań. Nie musisz użyć 'imię' jeszcze.\n"
+                story_text_2: "### Ćwiczenie 2\nPrzygotowaliśmy już dla ciebie polecenie `{input}`. Najpierw użyj zmiennej `imię` w twojej opowieści.\nNastępnie dodaj drugie polecenie `{ask}` i użyj również tej zmiennej.\nWskazówka: Pamiętaj o przecinkach w poleceniu `{print}` pomiędzy tekstem a zmiennymi!\n"
+                example_code: "```\n{print}('Witamy w tej opowieści!')\n```\n"
+                example_code_2: "```\nimię = {input}(\"Jak się nazywasz?\")\n{print}('Witamy w tej opowieści!')\n```\n"
+                start_code: '# tutaj napisz swój kod'
         name: Historyjka
         description: Stwórz krótką historyjkę
         default_save_name: Historyjka
@@ -584,9 +603,11 @@ adventures:
 
                     {echo}
 
-                    {echo}'
+                    {echo}
+
+                    '
                 story_text_2: "### Ćwiczenie\nSkopiuj przykładowy kod na ekran wprowadzania, klikając żółty przycisk.\nSpraw, aby papuga zadała inne pytanie. Uzupełnij puste miejsca w przykładzie!\n**Dodatkowo** Możesz także pozwolić papudze zadawać wiele pytań. Wpisz więcej wierszy kodu pod własnym kodem.\n"
-                example_code_2: "```\n{print} Jestem papuga Hedy\n{ask} _\n{echo}\n{echo}\n```"
+                example_code_2: "```\n{print} Jestem papuga Hedy\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papuga\nStwórz swoją własną cyfrową papugę, która będzie po tobie powtarzać cokolwiek powiesz!\n"
                 example_code: "```\n{print} Jestem papuga Hedy\nimię {is} {ask} jak masz na imię?\n{print} imię\n{sleep}\n{print} ara\n{sleep}\n{print} imię\n```\n"
@@ -598,11 +619,11 @@ adventures:
                 example_code: "```\nsłowa {is} ara, Hedy\n{print} Naucz twoją papugę!\nnowe_słowo {is} {ask} Jakiego słowa chcesz ja nauczyć?\n{add} nowe_słowo {to_list} słowa\n{print} \U0001F9D2 Powiedz nowe_słowo , Hedy!\n{print} \U0001F99C słowa {at} {random}\n```\n"
                 start_code: '# tutaj umieść swój kod'
             5:
-                story_text: "## Papuga\nPamiętaj, żeby wynagrodzić swoją papugę jeżeli powie poprawne słowo.\nUzupełnij brakujące 4 polecenia żeby dokończyć kod.\n"
+                story_text: "## Papuga\nDaj swojej papudze nagrodę jeżeli powie poprawne słowo.\n\n### Ćwiczenie\nDokończ kod uzupełniając 4 brakujące polecenia.\n"
                 example_code: "```\nsłowa {is} kra, Hedy\n{print} 'Wytresuj swoją papugę!'\nnowe_słowo {is} {ask} 'Jakie słowo chciałbyś ją nauczyć?'\n{add} nowe_słowo {to_list} słowa\npowiedziane_słowo {is} słowa {at} {random}\n{print} '\U0001F9D2 Powiedz ' nowe_słowo ', Hedy!'\n{print} '\U0001F99C ' powiedziane_słowo\n_ powiedziane_słowo {is} nowe_słowo _ '\U0001F9D2 Świetnie, Hedy! \U0001F36A'\n_ _ '\U0001F9D2 Nie, Hedy! Powiedz ' nowe_słowo\n```\n"
                 start_code: '# tutaj umieść swój kod'
             4:
-                story_text: "## Papuga\nW tym poziomie musimy użyć cudzysłowy z poleceniami `{ask}` and `{print}`.\nCzy potrafisz dokończyć kod poprzez dodanie cudzysłowów?\n"
+                story_text: "## Papuga\nW tym poziomie musimy użyć cudzysłowy z poleceniami `{ask}` and `{print}`.\n### Ćwiczenie\nDokończ kod poprzez dodanie cudzysłowów w pustych miejscach.\n"
                 example_code: "```\nsłowa {is} kra, Hedy\n{print} _ Wytresuj swoją papugę! _\nnowe_słowo {is} {ask} _ Jakie słowo chciałbyś ją nauczyć? _\n{add} nowe_słowo {to_list} słowa\n{print} _ \U0001F9D2 Powiedz _ nowe_słowo _, Hedy!_\n{print} _ \U0001F99C _ słowa {at} {random}\n```\n"
                 start_code: '# tutaj umieść swój kod'
     turtle:
@@ -634,8 +655,8 @@ adventures:
                 story_text: "## Rysujmy\nNa poziomie 5 możesz dokonywać wyboru przy użyciu polecenia `{if}`. Przykładem takiego wyboru byłby wybór pomiędzy różnymi typami figur do narysowania.\n"
                 example_code: "```\n{print} 'Rysowanie Figur'\nfigura {is} {ask} 'Chcesz kwadrat czy trójkąt?'\n{if} figura {is} trójkąt kąt {is} 120\n{else} kąt {is} 90\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n```\n"
                 start_code: "{print} 'Rysujemy figury'\nfigura {is} {ask} 'Czy chciałbyś narysować kwadrat czy też trójkąt?'\n{if} figura {is} trójkąt kąt {is} 120 {else} kąt {is} 90\n{turn} kąt\n{forward} 25"
-                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
-                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Ćwiczenie\nWpisz poprawne liczby w tym kodzie tak by zaczął działać.\nGdy to już zrobisz, możesz spróbować dodać możliwość cofania się.\n\n**Dodatkowo** Zamiast używać „prawo” i „lewo” zmień program by używał „Północ”, „Wschód”, „Południe” i „Zachód”.\nW ten sposób możesz dodać nawet więcej kierunków, jak na przykład, „Północny wschód” czy „Południowy zachód”.\n"
+                example_code_2: "```\nkierunek {is} {ask} 'Chcesz iść w „prawo”, w „lewo” czy „naprzód”?'\n{if} kierunek {is} lewo {turn} _\n{if} kierunek {is} prawo {turn} _\n{forward} 100\n```\n"
             8:
                 story_text: "## Rysujemy\nDzięki naszej nowo nabytej umiejętności powtarzania wielu linii kodu możemy rysować figury w jeszcze prostszy sposób.\nWystarczy, że ustawimy kąt tylko raz i potem użyjemy go jako zmienną wewnątrz polecenia `{repeat}`.\n\n### Ćwiczenie 1\nPrzykładowy kod tworzy kwadrat. Zmień kod tak, aby tworzył inną figurę, np. trójkąt lub sześciokąt.\nWymaga to zmiany w dwóch liniach kodu.\nPodpowiedź: Całe koło to 360 stopni.\n\n### Ćwiczenie 2\nTeraz stwórz rysunek składający się z co najmniej dwóch wielokątów.\n"
                 example_code: "```\nkąt = 90\n{repeat} 4 {times}\n    {turn} kąt\n    {forward} 50\n```\n"
@@ -801,61 +822,6 @@ adventures:
                 story_text: "## Stwórz grę w blackjacka\nBlackjack to prosta gra karciana, w której musisz zdobyć jak najwięcej 21 punktów. Dostajesz dwie karty. Każda karta ma swoją wartość liczbową, a figury (walet, królowa i król) są warte 10 punktów.\nAs jest wart 1 lub 11 punktów (do wyboru). Rozdający, twój przeciwnik, również otrzymuje dwie karty.\nJeśli chcesz, możesz zdobyć kolejną kartę, a jej punkty zostaną dodane do Twojej sumy. Rozdający może również wybrać inną kartę.\nUważaj, aby nie zdobyć więcej niż 21 punktów, ponieważ jeśli to zrobisz, przegrywasz!\nGracz, który zbliży się do liczby 21, nie przekraczając jej, wygrywa!\n\nBaw się dobrze!\n"
                 example_code: "```\n{print} 'BLACKJACK'\nkarty = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Walet', 'Królowa','Król', 'As']\npunkty = 0\npunkty_krupiera = 0\nkarta_1 = karty[{random}]\nkarta_2 = karty[{random}]\nkarta_3 = karty [{random}]\nkarta_krupiera_1 = karty[{random}]\nkarta_krupiera_2 = karty[{random}]\nkarta_krupiera_3 = karty[{random}]\n# Punkty za kartę 1\n{if} karta_1 == 'Walet' {or} karta_1 == 'Królowa' {or} karta_1 == 'Król':\n    punkty = punkty + 10\n{elif} karta_1 == 'As':\n    punkty = punkty + 11\n{else}:\n    punkty = punkty + karta_1\n# Punkty za kartę 2\n{if} karta_2 == 'Walet' {or} karta_2 == 'Królowa' {or} karta_2 == 'Król':\n    punkty = punkty + 10\n{elif} karta_2 == 'As':\n    punkty = punkty + 11\n{else}:\n    punkty = punkty + karta_2\n# Punkty za kartę krupiera 1\n{if} karta_krupiera_1 == 'Walet' {or} karta_krupiera_1 == 'Królowa' {or} karta_krupiera_1 == 'Król':\n    punkty_krupiera = punkty_krupiera + 10\n{elif} karta_krupiera_1 == 'As':\n    punkty_krupiera = punkty_krupiera + 11\n{else}:\n    punkty_krupiera = punkty_krupiera + karta_krupiera_1\n# Punkty za kartę krupiera 2\n{if} karta_krupiera_2 == 'Walet' {or} karta_krupiera_2 == 'Królowa' {or} karta_krupiera_2 == 'Król':\n    punkty_krupiera = punkty_krupiera + 10\n{elif} karta_krupiera_2 == 'As':\n    punkty_krupiera = punkty_krupiera + 11\n{else}:\n    punkty_krupiera = punkty_krupiera + karta_krupiera_2\n# Dwa Asy\n{if} karta_1 == 'As' {and} karta_2 == 'As':\n    punkty = 12\n{if} karta_krupiera_1 == 'As' {and} karta_krupiera_2 == 'As':\n    punkty_krupiera = 12\n# Tablica wyników\n{print} 'Trzymasz karty ' karta_1 ' i ' karta_2 ' (' punkty ' punktów)'\n{print} 'Krupier trzyma ' karta_krupiera_1 ' i ' karta_krupiera_2 ' (' punkty_krupiera ' punktów)'\n# Dodatkowa karta dla gracza\nhit = {ask} 'Czy chcesz dobrać kartę?'\n{if} hit == 'tak':\n    {if} karta_3 == 'Walet' {or} karta_3 == 'Królowa' {or} karta_3 == 'Król':\n        punkty = punkty + 10\n    {elif} karta_3 == 'As':\n        {if} punkty > 11:\n            punkty = punkty + 11\n        {else}:\n            punkty = punkty + 1\n    {else}:\n        punkty = punkty + karta_3\n    {print} 'Dostajesz dodatkowo ' karta_3 ' (' punkty ' punktów)'\n{else}:\n    {print} 'Bez dodatkowych kart'\n# Zwycięzca\n{if} punkty > 21 {or} punkty_krupiera > punkty {or} punkty_krupiera == 21:\n    {print} 'Przegrywasz'\n{elif} punkty_krupiera < 17:\n    {print} 'Krupier dobiera dodatkową kartę. Jest to... ' karta_krupiera_3\n    {if} karta_krupiera_3 == 'Walet' {or} karta_krupiera_3 == 'Królowa' {or} karta_krupiera_3 == 'Król':\n        punkty_krupiera = punkty_krupiera + 10\n    {elif} karta_krupiera_3 == 'As':\n        {if} punkty_krupiera < 11:\n            punkty_krupiera = punkty_krupiera + 11\n        {else}:\n            punkty_krupiera = punkty_krupiera + 1\n    {else}:\n        punkty_krupiera = punkty_krupiera + karta_krupiera_3\n    {print} 'Krupier ma ' punkty_krupiera ' punktów teraz'\n    {if} punkty_krupiera < 21 {and} punkty_krupiera > punkty:\n        {print} 'Przegrywasz'\n    {else}:\n        {print} 'Wygrywasz'\n{elif} punkty > punkty_krupiera {and} punkty < 21:\n    {print} 'Wygrywasz!'\n```\n"
         default_save_name: Blackjack
-    pressit:
-        name: Naciśnięcia klawiszy
-        description: Spróbuj przypisać przycisk klawiatury do polecenia!
-        default_save_name: Naciśnij
-        levels:
-            5:
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text: "## Naciśnij!\nWe wprowadzeniu wspomnieliśmy również o nowym poleceniu `{pressed}`. \nWykorzystanie `{pressed}` pozwala na stworzenie interaktywnego kodu, który możesz kontrolować w czasie rzeczywistym. \nW kolejnych poziomach dowiesz się jak korzystać z `{pressed}` i do czego wykorzystać `{pressed}`.\nOprócz wyświetlania tekstu istnieje wiele innych możliwości wykorzystania `{pressed}`.\nNa przykład możesz również powiązać polecenia żółwia z klawiszami! Spróbuj!\n"
-                story_text_2: "## Naciśnięcie klawiszu innego niż przypisany\nMożesz również użyć polecenia `{else}` w poleceniu `{pressed}`. Polecenie `{else}` zostanie wykonane gdy naciśniesz klawisz inny niż ten, który przypisałeś.\n"
-                example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# umieść tutaj swój kod'
-            6:
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\n{print} 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Czy wiesz, że możesz również stworzyć kalkulator używając polecenia `{pressed}`?\nWprowadź do kalkulatora dwa liczby i naciśnij klawisz m, aby pomnożyć.\nTeraz nie musisz zabierać własnego kalkulatora!\nSpróbuj innych klawiszy i zobacz, co się stanie! Czy otrzymałeś inny wynik?\n"
-            7:
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-                story_text: "## Kontrola żółwia\nSkoro już nauczyłeś się polecenia `{repeat}` możesz naciskać klawisze wiele razy! Dzięki temu możesz sprawić, że żółw będzie chodził do przodu i obracał się.\n\n### Ćwiczenie\nPrzykładowy kod sprawdza tylko raz, czy klawisz jest naciśnięty. Zmień kod tak, aby można było naciskać klawisze wiele razy i użyj kodu, aby narysować coś ładnego.\n"
-                start_code: '# umieść tutaj swój kod'
-            9:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "## Gra w bezwzrokowe pisanie.\nTeraz gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie pisania bezwzrokowego za pomocą `{pressed}`.\n\n### Ćwiczenie\nDokończ kod. Za każdym razem program ma wybrać losową literę, którą należy nacisnąć. Otrzymujesz punkt za prawidłowy klawisz i odjęcie dwóch punktów za niewłaściwy klawisz.\n"
-                example_code: "```\npunkty = 1\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera \n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
-            10:
-                story_text: "W tym poziomie możesz narysować figurę przy użyciu żółwia. Żółw nie może się doczekać żeby sie ruszyć.\nDaj żółwiowi sygnał startowy poprzez naciśnięcie przycisku x lub y na klawiaturze.\nCzy możesz zrobić, żeby żółw narysował inną figurę?\n"
-                start_code: '# umieść tutaj swój kod'
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distance {in} distances\n        {forward} distance\n        {turn} 90\n```\n"
-            11:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro już się nauczyłeś polecenia `{for} ... {in} {range} ... {to} ...`, możesz teraz go wykorzystać z poleceniem `{pressed}`.\nNa przykład, spróbuj ruszyć żółwiem. Żółw rośnie każdym razem gdy naciśniesz przypisany klawisz.\nW ten sposób żółw może ruszać się coraz dalej z każdym krokiem.\n"
-                example_code: "```\nlewo = -90\nprawo = 90\nzwrot = 180\n{for} licznik {in} {range} 1 {to} 15\n    krok = licznik * 5\n    {if} w {is} {pressed}\n        {forward} krok\n    {if} s {is} {pressed}\n        {turn} zwrot\n    {if} a {is} {pressed}\n        {turn} lewo\n    {if} d {is} {pressed}\n        {turn} prawo\n```\n"
-            12:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Czy znasz się na grach komputerowych? W jednej z nich gdy wejdziesz w trawę zostajesz napadnięty przez \nbardzo podejrzaną mysz. Co wtedy robisz?\nNa tym poziomie zrobimy małe menu gry z różnymi opcjami.\nPrzypisanie tekstu do zmiennej może być bardzo przydatne gdy chce się ten tekst użyć wielokrotnie.\nOpcja, wybieram Ciebie!\n"
-                example_code: "```\nchoose = 'You chose option: '\n{print} 'A wild mouse appeared!'\n{print} 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    {sleep}\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    {sleep}\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
-            13:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro potrafisz już użyć poleceń `{and}` oraz `{or}` możesz też użyć je razem z poleceniem `{pressed}`.\nWyobraź sobie, że żółw potrafi zrobić bardzo długi skok w przód\npo przyciśnięciu przycisku `p`.\nZanim żółw może wykonać taki bardzo długi skok, żółw musi najpierw skręcić w lewo i w prawo.\n"
-                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        looked_left = 1\n    {if} d {is} {pressed}\n        {turn} right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left {is} 1 {and} looked_right {is} 1\n            {forward} 40\n            looked_left = 0\n            looked_right = 0\n```\n"
-            15:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Skoro nauczyłeś się o pętlach `{while}`, możesz ich zacząć używać ich na żółwiu!\nŻółw może teraz wykonać tylko 15 kroków lub obrócić się 15 razy zanim się zmęczy!\nSpróbuj dotrzeć jak najdalej zanim żółw się zmęczy! Możesz użyć swojego super skoku po 2 obrotach \nlub po 5 krokach.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\n{while} tired_in > 0\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
-            16:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Spróbujmy się trochę poruszyć z grą w Twister!\nGdy wszyscy będą gotowi, naciśnij klawisz x, aby przejść do następnego ruchu!\n"
-                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\n{repeat} 20 {times}\n    l = limbs[{random}]\n    c = colours[{random}]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
-            17:
-                start_code: '# umieść tutaj swój kod'
-                story_text: "Teraz gdy nauczyłeś się korzystać z `{elif}`, możemy używać go również z `{pressed}`! Pamiętaj, `{elif} ... {is} {pressed}` nie jest możliwe! Dlatego zamierzamy zagnieździć niektóre instrukcje `{elif}` w opcjach `{pressed}`. Musieliśmy również dodać `:` do kodu, aby wszystko działało! Wyobraź sobie, że żółw jest w stanie wykonać super skok do przodu. Naciskając `p` żółw może wykonać super skok! Jednak żółw może wykonać ten skok tylko co 5 kroków lub co 4 tury.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}:\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        {turn} around\n    {if} a {is} {pressed}:\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 {or} spins <= 0:\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            {print} \"you need to take more steps or turns before you can superjump!\"\n```\n"
-            14:
-                story_text: "Skoro już nauczyłeś się używać operatorów, możesz użyć również ich z poleceniem `{pressed}`!\nWyobraź sobie żółwia, który może skakać do przodu.\nPrzytrzymując klawisz `p` żółw może wykonać skok do przodu!\nJednakże żółw może wykonać ten skok tylko co 5 kroków lub co 4 obroty.\n"
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        {turn} right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 {or} spins <= 0\n            {forward} stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
-                start_code: '# umieść tutaj swój kod'
     years:
         name: Nowy Rok
         description: Odliczanie do Nowego Roku!

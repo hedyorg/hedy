@@ -995,18 +995,6 @@ while not pygame_end:
     pygame.quit()
     break""")
 
-    regex_string_subsequent_use = (
-        r"\s*# End of PyGame Event Handler"
-        r"\s*pygame_end = False"
-        r"\s*while not pygame_end:"
-        r"\s*pygame.display.update\(\)"
-        r"\s*event = pygame.event.wait\(\)"
-        r"\s*if event.type == pygame.QUIT:"
-        r"\s*pygame_end = True"
-        r"\s*pygame.quit\(\)"
-        r"\s*break"
-    )
-
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
@@ -1021,9 +1009,6 @@ while not pygame_end:
 
     def assign_button(self, args):
         return True
-
-    def post_process_code(self, code):
-        return re.sub(self.regex_string_subsequent_use, '', code)
 
 
 class AllCommands(Transformer):
@@ -1206,6 +1191,10 @@ class IsValid(Filter):
         error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_ifpressed_missing_else(self, meta, args):
+        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     # other rules are inherited from Filter
 
 
@@ -1371,8 +1360,8 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        opening_quotes = ['‘', "'", '"', "“"]
-        closing_quotes = ['’', "'", '"', "”"]
+        opening_quotes = ['‘', "'", '"', "“", "«"]
+        closing_quotes = ['’', "'", '"', "”", "»"]
         return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
@@ -1609,7 +1598,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
@@ -1807,7 +1796,7 @@ else:
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False):
+    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
@@ -1819,33 +1808,10 @@ else:
 {ConvertToPython.indent(command, 4)}
     # End of PyGame Event Handler"""
 
-        return UsesPyGame.command_prefix + "\n" + command
-
-    def ifpressed(self, meta, args):
-        button_name = self.process_variable(args[0], meta.line)
-        var_or_button = args[0]
-        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button):
-            return self.make_ifpressed_command(f"""\
-if event.unicode != {args[0]}:
-    pygame_end = True
-if event.unicode == {args[0]}:
-{ConvertToPython.indent(args[1])}
-  break""", False)
-        elif len(var_or_button) > 1:
-            return self.make_ifpressed_command(f"""\
-if event.key != {button_name}:
-    pygame_end = True
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+        if add_command_prefix:
+            return UsesPyGame.command_prefix + "\n" + command
         else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
-    pygame_end = True
-if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
-  break""")
+            return "\n" + command
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
@@ -1855,7 +1821,8 @@ if event.key == {var_or_button}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""", False)
+{ConvertToPython.indent(args[2])}
+  break""", button=False)
         elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
@@ -1863,14 +1830,16 @@ if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""", True)
+{ConvertToPython.indent(args[2])}
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""")
+{ConvertToPython.indent(args[2])}
+  break""", button=False)
 
 
 @v_args(meta=True)
@@ -2029,26 +1998,20 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # if this is a variable, we assume it is a key (for now)
         if self.is_variable(var_or_key):
             return self.make_ifpressed_command(f"""\
-if event.unicode != {args[0]}:
-    pygame_end = True
 if event.unicode == {args[0]}:
 {all_lines}
-  break""")
+  break""", button=False)
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
-    pygame_end = True
 if event.unicode == '{args[0]}':
 {all_lines}
-  break""")
+  break""", button=False)
         else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
-if event.key != {button_name}:
-    pygame_end = True
 if event.key == {button_name}:
 {all_lines}
-  break""", True)
+  break""", button=True)
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2061,14 +2024,12 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break
-    """, True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break
-    """)
+  break""", button=False)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2078,6 +2039,7 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args += ["  break"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
@@ -2309,6 +2271,29 @@ class ConvertToPython_15(ConvertToPython_14):
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":\n" + body
 
+    def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        var_or_button = args[0]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{body}
+  break""", button=False)
+        elif len(var_or_button) > 1:
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{body}
+  break""", button=True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{body}
+  break""", button=False)
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
@@ -2343,6 +2328,30 @@ class ConvertToPython_17(ConvertToPython_16):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+    def ifpressed_elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines)
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        else:  # otherwise we mean a button
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{all_lines}
+  break""", button=True, add_command_prefix=False)
 
 
 @v_args(meta=True)
@@ -2778,9 +2787,10 @@ def preprocess_ifs(code, lang='en'):
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+            excluded_commands = ["pressed"]
 
             if (
-                contains_any_of(commands, line)
+                contains_any_of(commands, line) and not contains_any_of(excluded_commands, line)
             ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
@@ -2920,6 +2930,9 @@ def is_program_valid(program_root, input_string, level, lang):
                 line_number=invalid_info.line)
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'ifpressed missing else':
+            raise exceptions.MissingElseForPressitException(
+                command='ifpressed_else', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
@@ -3015,9 +3028,6 @@ def transpile_inner(input_string, level, lang="en"):
 
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
-
-        if has_pygame:
-            python = uses_pygame.post_process_code(python)
 
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
