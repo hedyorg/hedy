@@ -846,7 +846,7 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Python'):
           print(f'ook leuk')
         else:
