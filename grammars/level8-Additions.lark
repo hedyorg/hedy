@@ -1,4 +1,4 @@
-command:+= error_ifelse | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse
+command:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
@@ -10,6 +10,7 @@ equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces 
 // from level 8 on ifpressed is implemented slightly differently
 ifpressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 ifpressed_else: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+error_ifpressed_missing_else: ifpressed
 
 // from level 8 on if is implemented slightly differently
 elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

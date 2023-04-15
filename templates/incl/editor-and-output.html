@@ -54,7 +54,7 @@
             {% for i in range(1, 11) %}
                 <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
                     <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                    <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="no-copy-button goal_parsons parsons text-sm"></pre>
+                    <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm"></pre>
                 </div>
             {% endfor %}
         </div>
@@ -134,11 +134,11 @@
           <form>
             <div class="my-2 flex">
               <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
-              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+              <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
             </div>
           </form>
         </div>
-        <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+        <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
