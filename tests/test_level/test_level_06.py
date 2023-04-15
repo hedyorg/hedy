@@ -828,7 +828,7 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy'):
           print(f'nice!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
