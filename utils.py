@@ -1,4 +1,4 @@
-from flask import session, request, jsonify
+from flask import session, request, jsonify, make_response
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -275,6 +275,11 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
         default = gettext('default_403')
     elif error == 500:
         default = gettext('default_500')
+
+    hx_request = bool(request.headers.get('Hx-Request'))
+    if hx_request:
+        # For HTMX-request, just return the error as plain text body
+        return make_response(f'{default} {exception}', error)
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
