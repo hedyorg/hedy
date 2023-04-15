@@ -592,7 +592,7 @@ class TestsLevel5(HedyTester):
         if name == 'Hedy':
           print(f'nice!')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
@@ -609,7 +609,7 @@ class TestsLevel5(HedyTester):
         if antw == 'schaar':
           print(f'gelijk spel!')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         print(f'test')""")
 
         self.single_level_tester(code=code,
@@ -630,11 +630,11 @@ class TestsLevel5(HedyTester):
         if eten == 'friet':
           saus = input(f'Welke saus wilt u bij de friet?')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         if eten == 'pizza':
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
@@ -671,7 +671,7 @@ class TestsLevel5(HedyTester):
         if naam == 'Hedy':
           print(f'leuk')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         if naam == 'Python':
           print(f'ook leuk')
         else:
@@ -842,7 +842,7 @@ class TestsLevel5(HedyTester):
         if naam == '5':
           print(f'leuk')
         else:
-          x__x__x__x is 5
+          x__x__x__x = '5'
         print(f'minder leuk!')""")
 
         self.multi_level_tester(

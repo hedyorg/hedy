@@ -2796,7 +2796,7 @@ def preprocess_ifs(code, lang='en'):
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else x__x__x__x is 'x'"
+                line = line + " else x__x__x__x is 5"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)

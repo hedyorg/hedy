@@ -419,7 +419,7 @@ class TestsLevel7(HedyTester):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
-            x__x__x__x is 5
+            x__x__x__x = '5'
           time.sleep(0.1)
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
