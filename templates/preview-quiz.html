@@ -1,9 +1,0 @@
-{% extends "auth.html" %}
-{% block regular_content %}
-    {% include 'quiz.html' %}
-    <script>
-      $(document).ready(function() {
-        hedyApp.loadQuizQuestion({{ level }}, {{ question + 1 }});
-      });
-    </script>
-{% endblock %}

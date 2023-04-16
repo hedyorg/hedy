@@ -1,19 +1,19 @@
 levels:
     1:
         1:
-            code: |
-                {print} Welcome to bakery Hedy!
-                {ask} What type of pie do you want to order?
-                {echo} So you want
-                {print} Your order is being prepared!
-            story: You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n
+            code: |-
+                {print} ยินดีต้อนรับสู่เฮดี้เบเกอรี่
+                {ask} คุณอยากได้พายแบบไหน
+                {echo} คุณอยากได้พาย
+                {print} พนักงานกำลังเตรียมให้ครับ!
+            story: "คุณเป็นลูกค้าของเฮดี้เบเกอรี่\nคุณเดินเข้าไปในร้าน คุยกับพนักงาน\nเขาถามว่า คุณอยากกินพายแบบไหน\nแล้วพนักงานก็เริ่มอบพายของคุณ\n"
         2:
-            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
-            code: |
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love
+            story: "คุณเป็นดีเจของวันนี้ แต่ขี้เกียจทำงานเลยจะเขียนโปรแกรมที่ถามว่า พร้อมปาร์ตี้ยัง?! แล้วก็ถามว่าอยากฟังเพลงอะไร\n"
+            code: |-
+                {print} นี่คือดีเจเฮดี้!
+                {ask} พร้อมปาร์ตี้กันรึยัง?
+                {ask} อยากฟังเพลงอะไร?
+                {echo} โอเคเลย ดีเจเฮดี้ก็ชอบเพลง
     4:
         2:
             story: Create a lottery that lets you choose an extra price that you might win.\n
@@ -31,19 +31,19 @@ levels:
                 {print} pokemons {at} {random}
     2:
         1:
-            story: You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n
-            code: |
-                {print} It is time for an evening of Netflix
-                film {is} Sonic the Hedgehog 2
-                {print} We're going to film
-                {print} Have lot of fun!'
+            story: "คุณและเพื่อนกำลังจะดูเน็ตฟลิกกัน\nแต่จะดูเรื่องอะไรนะ? บอกชื่อเรื่องที่จะดูหน่อย และอย่าลืมบอกเพื่อนให้สนุกกับหนังที่จะดูด้วย!\n"
+            code: |-
+                {print} ถึงเวลา มาดูเน็ตฟลิกกัน
+                หนัง {is} โซนิก ภาค 2
+                {print} เราจะดู หนัง
+                {print} มันจะต้องสนุกแน่ๆ!
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
-            code: |
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.
-                {print} Thank you for shopping with us!'
+            story: "นี่คือเว็บขายของเล่น สร้างโปรแกรมที่ให้ลูกค้าเพิ่มของลงตะกร้าให้หน่อยสิ\n"
+            code: |-
+                {print} ยินดีต้อนรับสู่ร้านขายของเล่น
+                ของเล่น {is} {ask} วันนี้มาซื้ออะไรครับ?
+                {print} ของเล่น ถูกเพิ่มลงตะกร้าเรียบร้อย
+                {print} ขอบคุณที่ใช้บริการ!
     6:
         2:
             code: |

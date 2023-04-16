@@ -1,40 +1,968 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-17 13:16-0400\n"
-"PO-Revision-Date: 2023-01-22 10:04+0000\n"
-"Last-Translator: Tomasz Mikuś <mikus.tomasz@gmail.com>\n"
-"Language-Team: pl <LL@li.org>\n"
+"POT-Creation-Date: 2023-04-11 15:55+0200\n"
+"PO-Revision-Date: 2023-04-06 07:18+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: pl\n"
+"Language-Team: pl <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15.1\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.11.0\n"
 
-msgid "program_contains_error"
-msgstr "Ten program zawiera błędy, czy na pewno chcesz go udostępnić?"
+#, fuzzy
+msgid "Access Before Assign"
+msgstr "Próbowano użyć zmiennej {name} na linii {access_line_number}, ale stworzoną ją na linii {definition_line_number}. Stwórz zmienną przed jej użyciem."
 
-msgid "title_achievements"
-msgstr "Hedy - Moje osiągnięcia"
+msgid "Cyclic Var Definition"
+msgstr "Zmienna {variable} musi zostać ustawiona zanim będzie można użyć jej po prawej stronie tej komendy."
 
-msgid "not_teacher"
-msgstr "Wygląda na to, że nie jesteś nauczycielem!"
+msgid "Has Blanks"
+msgstr "Twój kod nie jest skończony. Posiada miejsca które trzeba wypełnić."
 
-msgid "not_enrolled"
-msgstr "Wygląda na to, że nie jesteś członkiem tej klasy!"
+msgid "Incomplete"
+msgstr "Ups! Zapomniałeś o odrobinie kodu! W linii {line_number}, musisz dodać tekst po {incomplete_command}."
 
-msgid "title_programs"
-msgstr "Hedy - Moje programy"
+msgid "Incomplete Repeat"
+msgstr "Wygląda na to, że zapomniano użyć komendy z poleceniem {repeat} w linii {line_number}."
 
-msgid "unauthorized"
-msgstr "Nie masz dostępu do tej strony"
+msgid "Invalid"
+msgstr "{invalid_command} nie jest komendą z {level} poziomu Hedy. Czy miałeś na myśli {guessed_command}?"
 
-msgid "title_for-teacher"
-msgstr "Hedy - Dla nauczycieli"
+msgid "Invalid Argument"
+msgstr "Nie możesz użyć komendy {command} z {invalid_argument} . Spróbuj zmienić typ {invalid_argument} na {allowed_types}."
+
+msgid "Invalid Argument Type"
+msgstr "Nie możesz użyć komendy {command} z {invalid_argument}, ponieważ jest ona typu {invalid_type}. Spróbuj zmienić {invalid_argument} na {allowed_types}."
+
+#, fuzzy
+msgid "Invalid At Command"
+msgstr "The {at} command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
+
+msgid "Invalid Space"
+msgstr "Ups! Linia numer {line_number} zaczyna się od spacji. Spacje są dziwne dla komputerów, czy można ją usunąć?"
+
+msgid "Invalid Type Combination"
+msgstr "Nie możesz użyć {invalid_argument} oraz {invalid_argument_2} z {command} ponieważ pierwszy jest typu {invalid_type}, a drugi jest typu {invalid_type_2}. Spróbuj zmienić {invalid_argument} na {invalid_type_2} lub {invalid_argument_2} na {invalid_type}."
+
+msgid "Locked Language Feature"
+msgstr "Używasz {concept}! To super, ale {concept} nie jest jeszcze odblokowany! Będzie odblokowany na następnym poziomie."
+
+msgid "Lonely Echo"
+msgstr "Użyłeś {echo} przed {ask} lub {echo} bez {ask}. Umieść {ask} przed {echo}."
+
+msgid "Lonely Text"
+msgstr "Wygląda na to, że zapomniano użyć komendy z tekstem w linii {line_number}"
+
+msgid "Missing Command"
+msgstr "Wygląda na to, że zapomniano użyć komendy w linii {line_number}."
+
+msgid "Missing Inner Command"
+msgstr "Wygląda na to, że zapomniano użyć komendy z słowem {command} użytym w linii {line_number}."
+
+msgid "No Indentation"
+msgstr "Użyto zbyt mało spacji w linii {line_number}. Użyto {leading_spaces} spacji, to za mało. Rozpocznij każdy blok o {indent_size} spacji dalej niż linia powyżej."
+
+msgid "Parse"
+msgstr "Kod który wprowadzono nie jest poprawnym kodem Hedy. W linii {location[0]} jest błąd, w pozycji {location[1]}. Użyto {character_found}, co nie jest dozwolone."
+
+#, fuzzy
+msgid "Pressit Missing Else"
+msgstr "You forgot to add what happens when you press a different key, add an {else} to your code"
+
+msgid "Too Big"
+msgstr "Wow! Twój program ma aż {lines_of_code} linii kodu! Ale możemy przetworzyć tylko {max_lines} linii na tym poziomie. Zmniejsz swój program, i spróbuj ponownie."
+
+msgid "Unexpected Indentation"
+msgstr "Użyto zbyt dużo spacji w linii {line_number}. Użyto {leading_spaces} spacji, to za dużo. Rozpocznij każdy blok {indent_size} spacji dalej niż poprzednia linia."
+
+msgid "Unquoted Assignment"
+msgstr "Od tego poziomu, tekst po `{is}` będzie musiał być między apostrofami. Zapomniano o tym przy tekście {text}."
+
+msgid "Unquoted Equality Check"
+msgstr "Jeśli chcesz sprawdzić, czy zmienna jest równa wielu słowom, słowa powinny być pomiędzy apostrofami!"
+
+msgid "Unquoted Text"
+msgstr "Uważaj. Jeżeli chcesz coś wypisać, tekst powinien zaczynać i kończyć się apostrofem. Zapomniano o tym dla tekstu {unquotedtext}."
+
+msgid "Unsupported Float"
+msgstr "Liczby niecałkowita nie są jeszcze dostępne, ale będą za kilka poziomów. Na teraz, zmień {value} na liczbę całkowitą."
+
+msgid "Unsupported String Value"
+msgstr "Wartości tekstowe nie mogą zawierać {invalid_value}."
+
+msgid "Var Undefined"
+msgstr "Próbowano użyć zmiennej {name}, ale nie została ona ustawiona. Jest też możliwe, że próbowano użyć słowa {name}, ale zapomniano o apostrofach."
+
+msgid "Wrong Level"
+msgstr "To był poprawny kod Hedy, ale nie dla tego poziomu. Użyto {offending_keyword} dla poziomu {working_level}. Porada: {tip}"
+
+msgid "account_overview"
+msgstr "Przegląd konta"
+
+msgid "accounts_created"
+msgstr "Konta zostały utworzone pomyślnie."
+
+msgid "accounts_intro"
+msgstr "Na tej stronie możesz utworzyć konta dla wielu uczniów jednocześnie. Możliwe jest również bezpośrednie dodanie ich do jednej z twoich klas. Wciskając zielony + znajdujący się po prawej stronie na dole strony możesz dodać dodatkowe rzędy. Możesz usunąć rząd poprzez wcisnięcie odpowiadającego mu czerwonego krzyżyka. Upewnij się, że żaden z rzędów nie jest pusty gdy wciskasz \"Utwórz wiele kont\". Miej na uwadze, że każda nazwa użytkownika i każdy adres email muszą być unikalne, oraz, że hasła muszą składać się z <b>co najmniej</b> 6 znaków."
+
+msgid "achievement_earned"
+msgstr "Otrzymałeś nowe osiągnięcie!"
+
+msgid "achievements"
+msgstr "osiągnięcia"
+
+msgid "achievements_check_icon_alt"
+msgstr "Ikona uzyskanego osiągnięcia"
+
+msgid "achievements_logo_alt"
+msgstr "Osiągnięcia - logo"
+
+msgid "add_students"
+msgstr "Dodaj uczniów"
+
+msgid "add_students_options"
+msgstr "Dodaj opcje ucznia"
+
+msgid "admin"
+msgstr "Administrator"
+
+msgid "advance_button"
+msgstr "Przejdź do poziomu {level}"
+
+msgid "adventure"
+msgstr "Przygoda"
+
+msgid "adventure_duplicate"
+msgstr "Posiadasz już przygodę o tej nazwie."
+
+msgid "adventure_empty"
+msgstr "Nie podałeś nazwy przygody!"
+
+msgid "adventure_exp_1"
+msgstr "Typ twojej przygody jest po prawej stronie. Po stworzeniu przygody możesz ją dodać do jednej z Twoich klas w zakładce \"Personalizacje\". Jeśli chcesz dodać polecenie do swojej przygody możesz użyć tagu `code`, na przykład:"
+
+msgid "adventure_exp_2"
+msgstr "Jeżeli chcesz pokazać uczniom dłuższe fragmenty kodu możesz użyc tagów `pre`, na przykład:"
+
+msgid "adventure_exp_3"
+msgstr "Pamiętaj, żeby zawsze otaczać słowa kluczowe / polecenia symbolami `{` i `}`. Możesz użyć przycisku \"podgląd\" aby zobaczyć jak wygląda Twoja przygoda. Aby zobaczyć przygodę na dedykowanej stronie, wybierz \"podgląd\" z menu na stronie nauczyciela."
+
+msgid "adventure_id_invalid"
+msgstr "Ten identyfikator przygody jest nieprawidłowy."
+
+msgid "adventure_length"
+msgstr "Treść twojej przygody musi składać się przynajmniej z 20 znaków."
+
+msgid "adventure_name_invalid"
+msgstr "Ta nazwa przygody jest nieprawidłowa."
+
+msgid "adventure_prompt"
+msgstr "Podaj nazwę przygody"
+
+msgid "adventure_terms"
+msgstr "Zgadzam się, że moja przygoda może być udostępniona publicznie na Hedy."
+
+msgid "adventure_updated"
+msgstr "Przygoda została zaktualizowana!"
+
+msgid "ago"
+msgstr "{timestamp} temu"
+
+msgid "agree_invalid"
+msgstr "Musisz zgodzić się z zasadami polityki prywatności."
+
+msgid "agree_third_party"
+msgstr "Zgadzam się na kontakt z partnerami Uniwersytetu Leiden w celu uzyskania informacji o ofertach handlowych"
+
+msgid "agree_with"
+msgstr "Zgadzam się na"
+
+msgid "ajax_error"
+msgstr "Wystąpił błąd, proszę spróbować ponownie."
+
+msgid "all"
+msgstr "Wszystkie"
+
+msgid "all_class_highscores"
+msgstr "Wszyscy uczniowie są widoczni na klasowej liście najlepszych wyników"
+
+msgid "already_account"
+msgstr "Posiadasz już konto?"
+
+msgid "already_program_running"
+msgstr "Jakiś program właśnie się wykonuje, zakończ go, zanim uruchomisz kolejny."
+
+msgid "already_teacher"
+msgstr "Już posiadasz konto nauczyciela."
+
+msgid "already_teacher_request"
+msgstr "Już masz oczekujące rządanie otrzymania konta nauczyciela."
+
+msgid "amount_created"
+msgstr "utworzonych programów"
+
+msgid "amount_saved"
+msgstr "zapisanych programów"
+
+msgid "amount_submitted"
+msgstr "nadesłanych programów"
+
+msgid "answer_invalid"
+msgstr "Twoje hasło jest niepoprawne."
+
+msgid "are_you_sure"
+msgstr "Czy jesteś pewien? Ta operacja jest nieodwracalna."
+
+msgid "ask_needs_var"
+msgstr "Od poziomu 2, {ask} musi być użyty razem ze zmienną. Przykład: imię {is} {ask} Jak się nazywasz?"
+
+msgid "available_adventures_level"
+msgstr "Poziom dostępnych przygód"
+
+msgid "back_to_class"
+msgstr "Powróć do klasy"
+
+msgid "back_to_teachers_page"
+msgstr "Wróć na stronę nauczyciela"
+
+msgid "become_a_sponsor"
+msgstr "Zostań sponsorem"
+
+msgid "birth_year"
+msgstr "Rok urodzenia"
+
+msgid "by"
+msgstr "przez"
+
+msgid "cancel"
+msgstr "Anuluj"
+
+msgid "catch_index_exception"
+msgstr "Próbowałeś dostać się do elementu listy {list_name}, ale jest ona pusta albo indeks który podałeś nie istnieje."
+
+msgid "certificate"
+msgstr "Certyfikat ukończenia"
+
+msgid "certified_teacher"
+msgstr "Certyfikowany nauczyciel"
+
+msgid "change_password"
+msgstr "Zmień hasło"
+
+msgid "cheatsheet_title"
+msgstr "Ściągawka"
+
+msgid "class_already_joined"
+msgstr "Już jesteś uczeniem tej klasy"
+
+msgid "class_customize_success"
+msgstr "Personalizacje zostaly zapisane pomyślnie."
+
+msgid "class_logs"
+msgstr "Logi"
+
+msgid "class_name_duplicate"
+msgstr "Już masz klasę z taką nazwą."
+
+msgid "class_name_empty"
+msgstr "Nie wpisałeś nazwy klasy!"
+
+msgid "class_name_invalid"
+msgstr "Ta nazwa klasy jest nieprawidłowa."
+
+msgid "class_name_prompt"
+msgstr "Podaj proszę nazwę nowej klasy"
+
+msgid "class_stats"
+msgstr "Statystyki klasy"
+
+#, fuzzy
+msgid "close"
+msgstr "Sluiten"
+
+msgid "comma"
+msgstr "przecinek"
+
+msgid "commands"
+msgstr "Polecenia"
+
+msgid "congrats_message"
+msgstr "Gratulacje, {username}, ukończyłeś Hedy!"
+
+msgid "content_invalid"
+msgstr "Ta przygoda jest nieprawidłowa."
+
+msgid "contributor"
+msgstr "Współautor"
+
+msgid "copy_clipboard"
+msgstr "Pomyślnie skopiowano do schowka"
+
+msgid "copy_join_link"
+msgstr "Skopiuj link do dołączenia"
+
+msgid "copy_link_success"
+msgstr "Link udostępniania skopiowany do schowka"
+
+msgid "copy_link_to_share"
+msgstr "Skopiuj udostępniający link"
+
+msgid "copy_mail_link"
+msgstr "Proszę skopiować i wkleić ten link do nowej zakładki przeglądarki:"
+
+msgid "correct_answer"
+msgstr "Poprawna odpowiedź to"
+
+msgid "country"
+msgstr "Kraj"
+
+msgid "country_invalid"
+msgstr "Proszę wybrać poprawny kraj."
+
+msgid "country_title"
+msgstr "Państwo"
+
+msgid "create_account"
+msgstr "Utwórz konto"
+
+msgid "create_accounts"
+msgstr "Utwórz wiele kont"
+
+msgid "create_accounts_prompt"
+msgstr "Czy na pewno chcesz utworzyć te konta?"
+
+msgid "create_adventure"
+msgstr "Utwórz przygodę"
+
+msgid "create_class"
+msgstr "Utwórz nową klasę"
+
+msgid "create_multiple_accounts"
+msgstr "Utwórz wiele kont"
+
+msgid "create_public_profile"
+msgstr "Utwórz publiczny profil"
+
+msgid "create_question"
+msgstr "Czy chciałbyś stworzyć?"
+
+msgid "create_student_account"
+msgstr "Utwórz konto"
+
+msgid "create_student_account_explanation"
+msgstr "Możesz zapisywać swoje programy."
+
+msgid "create_teacher_account"
+msgstr "Utwórz konto nauczyciela"
+
+msgid "create_teacher_account_explanation"
+msgstr "Z kontem nauczyciela możesz zapisywać swoje programy i przeglądać wyniki swoich uczniów."
+
+msgid "creator"
+msgstr "Autor"
+
+msgid "current_password"
+msgstr "Obecne hasło"
+
+msgid "customization_deleted"
+msgstr "Personalizacje zostaly usunięte pomyślnie."
+
+msgid "customize_adventure"
+msgstr "Dostosuj przygodę"
+
+msgid "customize_class"
+msgstr "Dostosuj klasę"
+
+msgid "customize_class_exp_1"
+msgstr "Cześć! Na tej stronie możesz dostosować swoją klasę. Wybierając poziomy i przygody, możesz wybrać to, co może zobaczyć Twój uczeń. Możesz także dodawać własne przygody do poziomów. Wszystkie poziomy i domyślne przygody zostaną wybrane domyślnie. <b>Uwaga:</b> Nie każda przygoda jest dostępna na każdym poziomie! Dostosuj ustawienia w następujący sposób:"
+
+msgid "customize_class_exp_2"
+msgstr "Zawsze możesz zmienić te ustawienia później. Przykładowo, możesz udostępnić określone przygody lub poziomy podczas nauczania w klasie. W ten sposób możesz łatwo określić poziom i przygody, nad którymi będą pracować Twoi uczniowie. Jeśli chcesz, aby wszystko było dostępne dla swojej klasy, po prostu usuń całkowicie usunąć całe dostosowanie."
+
+msgid "customize_class_step_1"
+msgstr "Dostosuj zajęcia"
+
+msgid "customize_class_step_2"
+msgstr "\"Pola wyboru\" pojawią się dla przygód dostępnych dla wybranych poziomów"
+
+msgid "customize_class_step_3"
+msgstr "Posegreguj przygody w kolejnosci w jakiej chciałbyś, żeby były wyświetlone w tym poziomie. Menu \"Dostępne przygody\" zawiera wszystkie przygody, które nie zostały przypisane do tego poziomu."
+
+msgid "customize_class_step_4"
+msgstr "Menu \"Dostępne przygody\" zawiera również wszystkie Twoje przygody. Po dodaniu ich możesz je przesuwać obok pozostałych przygód."
+
+msgid "customize_class_step_5"
+msgstr "Dodaj własne przygody"
+
+msgid "customize_class_step_6"
+msgstr "Wybierz daty rozpoczęcia dla każdego poziomu (możesz też pozostawić to pole puste)"
+
+msgid "customize_class_step_7"
+msgstr "Inne ustawienia"
+
+msgid "customize_class_step_8"
+msgstr "Wybierz \"Zapisz\" -> I gotowe!"
+
+msgid "dash"
+msgstr "myślnik"
+
+msgid "default_403"
+msgstr "Wygląda na to, że nie masz wystarczających uprawnień..."
+
+msgid "default_404"
+msgstr "Nie byliśmy w stanie znaleźć tej strony..."
+
+msgid "default_500"
+msgstr "Coś poszło nie tak..."
+
+msgid "delete"
+msgstr "Usuń"
+
+msgid "delete_adventure_prompt"
+msgstr "Czy jesteś pewien, że chcesz usunąć tę przygodę?"
+
+msgid "delete_class_prompt"
+msgstr "Czy jesteś pewien, że chcesz usunąć tą klasę?"
+
+msgid "delete_confirm"
+msgstr "Czy na pewno chcesz usunąć ten program?"
+
+msgid "delete_invite"
+msgstr "Usuń zaproszenie"
+
+msgid "delete_invite_prompt"
+msgstr "Czy jesteś pewien że chcesz usunąć to zaproszenia?"
+
+msgid "delete_public"
+msgstr "Usuń profil publiczny"
+
+msgid "delete_success"
+msgstr "Program został usunięty pomyślnie."
+
+msgid "destroy_profile"
+msgstr "Usuń profil"
+
+msgid "developers_mode"
+msgstr "Tryb programisty"
+
+msgid "directly_available"
+msgstr "Zawsze dostępne"
+
+msgid "disabled_button_locked"
+msgstr "Twój nauczyciel jeszcze nie odblokował tego poziomu"
+
+msgid "disabled_button_quiz"
+msgstr "Twój wynik quizu jest poniżej oczekiwanego poziomu. Spróbuj ponownie!"
+
+msgid "discord_server"
+msgstr "Serwer Discord"
+
+msgid "distinguished_user"
+msgstr "Wyróżniony użytkownik"
+
+msgid "double quotes"
+msgstr "cudzysłów"
+
+msgid "download"
+msgstr "Pobierz"
+
+msgid "download_login_credentials"
+msgstr "Czy chcesz pobrać dane logowania po utworzeniu kont?"
+
+msgid "duplicate"
+msgstr "Duplikuj"
+
+msgid "echo_out"
+msgstr "Od poziomu 2, {echo} nie jest potrzebne. Teraz możesz powtarzać odpowiedź za pomocą {ask} oraz {print}. Przykład: imię {is} {ask} Jak się nazywasz? {print} Cześć imię"
+
+msgid "edit_code_button"
+msgstr "Edytuj kod"
+
+msgid "email"
+msgstr "Email"
+
+msgid "email_invalid"
+msgstr "Proszę podać poprawny adres email."
+
+msgid "end_quiz"
+msgstr "Koniec quizu"
+
+msgid "english"
+msgstr "Angielski"
+
+msgid "enter"
+msgstr "Zatwierdź"
+
+msgid "enter_password"
+msgstr "Wprowadź nowe hasło dla"
+
+msgid "enter_text"
+msgstr "Wprowadź swoją odpowiedź tutaj..."
+
+msgid "error_logo_alt"
+msgstr "Logo błędu"
+
+msgid "example_code_header"
+msgstr "Przykładowy kod"
+
+msgid "exclamation mark"
+msgstr "wykrzyknik"
+
+msgid "exercise"
+msgstr "Ćwiczenie"
+
+msgid "exercise_doesnt_exist"
+msgstr "Nie można znaleźć tego ćwiczenia"
+
+msgid "exists_email"
+msgstr "Ten email jest już w użyciu."
+
+msgid "exists_username"
+msgstr "Ta nazwa użytkownika jest już w użyciu."
+
+msgid "experience_invalid"
+msgstr "Proszę wybrać poprawne doświadczenie, wybierz (Tak, Nie)."
+
+msgid "expiration_date"
+msgstr "Data wygaśnięcia"
+
+msgid "explore_explanation"
+msgstr "Na tej stronie możesz przeglądnąc programy stworzone przez innych użytkowników Hedy. Możesz filtrować te programy pod kątem poziomów i typów przygód. Kliknij na \"Wyświetl program\", żeby otworzyć program i go uruchomić. Programy z czerwonym nagłówkiem zawierają pomyłki. Możesz je otworzyć ale nie będziesz mógł ich uruchomić z powodu tego błędu. Oczywiście możesz spróbować naprawić ten problem! Jeżeli twórca tego programu ma publiczny profil możesz kliknąć na jego nazwę użytkownika, żeby otworzyć jego profil. Znajdziesz tam wszystkie udostępnione programy stworzone przez tego użytkownika oraz więcej rzeczy!"
+
+msgid "explore_programs"
+msgstr "Exploruj programy"
+
+msgid "explore_programs_logo_alt"
+msgstr "Ikona odkrywania programów"
+
+msgid "favourite_confirm"
+msgstr "Czy jesteś pewien, że chcesz ustawić ten program jako ulubiony?"
+
+msgid "favourite_program"
+msgstr "Ulubiony program"
+
+msgid "favourite_program_invalid"
+msgstr "Twój wybrany ulubiony program jest niewłaściwy."
+
+msgid "favourite_success"
+msgstr "Program został ustawiony jako ulubiony."
+
+msgid "feedback_failure"
+msgstr "Źle!"
+
+msgid "feedback_success"
+msgstr "Dobrze!"
+
+msgid "female"
+msgstr "Żeńska"
+
+msgid "float"
+msgstr "liczba"
+
+msgid "for_teachers"
+msgstr "Dla nauczycieli"
+
+msgid "forgot_password"
+msgstr "Zapomniałeś hasła?"
+
+msgid "from_another_teacher"
+msgstr "Od innego nauczyciela"
+
+msgid "from_magazine_website"
+msgstr "Z gazety lub strony internetowej"
+
+msgid "from_video"
+msgstr "Z filmiku"
+
+msgid "fun_statistics_msg"
+msgstr "Trochę ciekawych statystyk!"
+
+msgid "gender"
+msgstr "Płeć"
+
+msgid "gender_invalid"
+msgstr "Proszę wybrać poprawną płeć, wybierz (Żeńska, Męska, Inna)."
+
+msgid "general"
+msgstr "Ogólne"
+
+msgid "general_settings"
+msgstr "Ustawienia ogólne"
+
+msgid "generate_passwords"
+msgstr "Wygeneruj hasła"
+
+msgid "get_certificate"
+msgstr "Otrzymaj certyfikat!"
+
+#, fuzzy
+msgid "give_link_to_teacher"
+msgstr "Give the following link to your teacher:"
+
+msgid "go_back_to_main"
+msgstr "Powróć do strony głównej"
+
+msgid "go_to_first_question"
+msgstr "Przejdź do pytania 1"
+
+msgid "go_to_question"
+msgstr "Przejdź do pytania"
+
+msgid "go_to_quiz_result"
+msgstr "Idź do wyników quizu"
+
+msgid "goto_profile"
+msgstr "Idź do mój profil"
+
+#, fuzzy
+msgid "hand_in"
+msgstr "Hand in"
+
+#, fuzzy
+msgid "hand_in_exercise"
+msgstr "Hand in exercise"
+
+msgid "heard_about_hedy"
+msgstr "Jak usłyszałeś o Hedy?"
+
+msgid "heard_about_invalid"
+msgstr "Proszę wybrać poprawny sposób w jaki o nas usłyszałeś."
+
+msgid "hedy_achievements"
+msgstr "Moje osiągnięcia"
+
+msgid "hedy_choice_title"
+msgstr "Wybór Hedy"
+
+msgid "hedy_logo_alt"
+msgstr "Logo Hedy"
+
+msgid "hedy_on_github"
+msgstr "Hedy na Githubie"
+
+msgid "hedy_tutorial_logo_alt"
+msgstr "Ikona instruktażu Hedy"
+
+msgid "hello_logo"
+msgstr "Hej!"
+
+msgid "hello_world"
+msgstr "Witaj, świecie!"
+
+msgid "hidden"
+msgstr "Ukryty"
+
+msgid "hide_cheatsheet"
+msgstr "Ukryj ściągawkę"
+
+msgid "hide_keyword_switcher"
+msgstr "Ukryj zmieniarkę poleceń"
+
+msgid "hide_parsons"
+msgstr "Ukryj łamigłówkę"
+
+msgid "hide_quiz"
+msgstr "Ukryj quiz"
+
+msgid "highest_level_reached"
+msgstr "Najwyższy osiągnięty poziom"
+
+msgid "highest_quiz_score"
+msgstr "Największy wynik z Quizu"
+
+msgid "highscore_explanation"
+msgstr "Na tej stronie możesz zobaczyć aktualne najlepsze wyniki w oparciu o ilość zebranych osiągnięć. Zobacz ranking dla wszystkich użytkowników, swojego kraju lub klasy. Kliknij nazwę użytkownika, aby wyświetlić jego profil publiczny."
+
+msgid "highscore_no_public_profile"
+msgstr "Nie posiadasz publicznego profilu w związku z czym nie jesteś wyświetlony na liście rekordowych wyników. Czy chciałbyś stworzyć publiczny profil?"
+
+msgid "highscores"
+msgstr "Rekordy"
+
+msgid "hint"
+msgstr "Podpowiedź?"
+
+#, fuzzy
+msgid "ill_work_some_more"
+msgstr "I'll work on it a little longer"
+
+msgid "image_invalid"
+msgstr "Wybrany obraz jest niewłaściwy."
+
+msgid "input"
+msgstr "wejście z {ask}"
+
+msgid "integer"
+msgstr "liczba"
+
+msgid "invalid_class_link"
+msgstr "Niepoprawny link dołączenia do klasy."
+
+msgid "invalid_teacher_invitation_code"
+msgstr "Kod zaproszenia nauczyciela jest niewłaściwy. Aby zostać nauczycielem, skontaktuj się z hello@hedy.org."
+
+msgid "invalid_tutorial_step"
+msgstr "Niewłaściwy stopień poradnika"
+
+msgid "invalid_username_password"
+msgstr "Niepoprawna nazwa użytkownika lub hasło."
+
+msgid "invite_by_username"
+msgstr "Zaproś za pomocą nazwy użytkownika"
+
+msgid "invite_date"
+msgstr "Data zaproszenia"
+
+msgid "invite_message"
+msgstr "Otrzymałeś zaproszenie dołączenia do klasy"
+
+msgid "invite_prompt"
+msgstr "Wprowadź nazwę użytkownika"
+
+msgid "join_class"
+msgstr "Dołącz do klasy"
+
+msgid "join_prompt"
+msgstr "Potrzebujesz konta aby dołączyć do klasy. Czy chcesz się teraz zalogować?"
+
+msgid "keyword_language_invalid"
+msgstr "Proszę wybrać poprawny język słów kluczowych (wybierz angielski lub twój własny język)."
+
+msgid "language_invalid"
+msgstr "Proszę wybrać poprawny język."
+
+msgid "languages"
+msgstr "Których języków programowania używałeś wcześniej?"
+
+msgid "last_achievement"
+msgstr "Ostatnie zdobyte osiągnięcie"
+
+msgid "last_edited"
+msgstr "Ostatnio edytowano"
+
+msgid "last_login"
+msgstr "Ostatnie logowanie"
+
+msgid "last_update"
+msgstr "Ostatnia aktualizacja"
+
+msgid "lastname"
+msgstr "Nazwisko"
+
+msgid "leave_class"
+msgstr "Opuść klasę"
+
+msgid "level"
+msgstr "Poziom"
+
+#, fuzzy
+msgid "level_disabled"
+msgstr "Level disabled"
+
+msgid "level_invalid"
+msgstr "Ten poziom Hedy jest nieprawidłowy."
+
+msgid "level_not_class"
+msgstr "Ten poziom nie jest jeszcze dostępny w twojej klasie"
+
+msgid "level_title"
+msgstr "Poziom"
+
+msgid "link"
+msgstr "Link"
+
+msgid "list"
+msgstr "lista"
+
+#, fuzzy
+msgid "logged_in_to_share"
+msgstr "You must be logged in to save and share a program."
+
+msgid "login"
+msgstr "Zaloguj się"
+
+msgid "login_long"
+msgstr "Zaloguj się do konta"
+
+msgid "logout"
+msgstr "Wyloguj się"
+
+msgid "longest_program"
+msgstr "Najdłuższy program"
+
+msgid "mail_change_password_body"
+msgstr ""
+"Twoje hasło Hedy zostało zmienione. Jeśli to zrobiłeś, wszystko jest w porządku.\n"
+"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając na tę wiadomość e-mail."
+
+msgid "mail_change_password_subject"
+msgstr "Twoje hasło Hedy zostało zmienione"
+
+msgid "mail_error_change_processed"
+msgstr "Wysyłanie emaila z potwierdzeniem nie powiodło się, ale zmiany zostały poprawnie zapisane."
+
+msgid "mail_goodbye"
+msgstr ""
+"Powodzenia w programowaniu!\n"
+"Zespół Hedy"
+
+msgid "mail_hello"
+msgstr "Witaj {username}!"
+
+msgid "mail_recover_password_body"
+msgstr ""
+"Klikając ten link, możesz ustawić nowe hasło Hedy. Ten link jest ważny przez <b>4</b> godziny.\n"
+"Jeśli nie wymagałeś resetowania hasła, zignoruj ten e-mail: {link}"
+
+msgid "mail_recover_password_subject"
+msgstr "Poproś o zresetowanie hasła."
+
+msgid "mail_reset_password_body"
+msgstr ""
+"Twoje hasło Hedy zostało zresetowane do nowego. Jeśli to zrobiłeś, wszystko jest w porządku.\n"
+"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając na tę wiadomość e-mail."
+
+msgid "mail_reset_password_subject"
+msgstr "Twoje hasło Hedy zostało zresetowane"
+
+msgid "mail_welcome_teacher_body"
+msgstr ""
+"<strong>Witaj!</strong>\n"
+"Gratulujemy założenia nowego konta nauczyciela Hedy. Witamy w światowej społeczności nauczycieli Hedy!\n"
+"\n"
+"<strong>Co mogą robić nauczyciele</strong>\n"
+"Konto nauczyciela daje nowe możliwości.\n"
+"\n"
+"1. Dodatkowe wyjaśnienia są dostępne w <a href=\"https://hedy.org/for-teachers/manual\">poradniku nauczyciela</a>.\n"
+"2. Za pomocą konta nauczyciela masz możliwość tworzenia zajęć. Twoi uczniowie mogą dołączyć do twoich zajęć, a ty możesz zobaczyć ich postępy. Zajęcia są prowadzone i zarządzane przez <a href=\"https://hedycode.com/for-teachers\">stronę nauczyciela</a>.\n"
+"3. Masz możliwość pełnego dostosowania swoich zajęć - możesz odblokowywać i zablokowywać poziomy, włączać i wyłączać przygody oraz tworzyć własne przygody!\n"
+"\n"
+"<strong>Dołącz do naszej społeczności online!</strong>\n"
+"Zapraszamy wszystkich nauczycieli, programistów i innych fanów Hedy do dołączenia do naszego <a href=\"https://discord.gg/8yY7dEme9r\">serwera Discord</a>. To idealne miejsce do rozmowy o Hedy: mamy kanały, na których możesz pokazać swoje fajne projekty i lekcje, kanały do zgłaszania błędów oraz kanały do czatowania z innymi nauczycielami i zespołem Hedy.\n"
+"\n"
+"<strong>Jak pytać o pomoc </strong>\n"
+"Jeśli coś jest niejasne, daj nam znać na DIscord, lub <a href=\"mailto: hello@hedy.org\">wyślij nam maila</a>.\n"
+"\n"
+"<strong>Jak zgłaszać błędy</strong>\n"
+"W Discordzie mamy kanał do zgłaszania błędów o nazwie #bugs. To idealne miejsce, aby poinformować nas o problemach, z którymi się spotykasz. Jeśli wiesz, jak korzystać z GitHub, możesz tam otworzyć <a href=\"https://github.com/Felienne/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>.\n"
+
+msgid "mail_welcome_teacher_subject"
+msgstr "Twoje konto nauczyciela Hedy jest gotowe"
+
+msgid "mail_welcome_verify_body"
+msgstr ""
+"Twoje konto Hedy zostało utworzone. Witaj!\n"
+"Proszę kliknąć na ten link żeby zweryfikować swój adres email: {link}"
+
+msgid "mail_welcome_verify_subject"
+msgstr "Witaj w Hedy"
+
+msgid "mailing_title"
+msgstr "Zasubskrybuj builetyn informacyjny Hedy"
+
+msgid "main_subtitle"
+msgstr "Stopniowany język programowania"
+
+msgid "main_title"
+msgstr "Hedy"
+
+#, fuzzy
+msgid "make_sure_you_are_done"
+msgstr "Make sure you are done! You will not be able to change your program anymore after you click \"Hand in\"."
+
+msgid "male"
+msgstr "Męska"
+
+msgid "mandatory_mode"
+msgstr "Obowiązkowy tryb deweloperski"
+
+msgid "my_account"
+msgstr "Moje konto"
+
+msgid "my_achievements"
+msgstr "Moje osiągnięcia"
+
+msgid "my_adventures"
+msgstr "Moje przygody"
+
+msgid "my_classes"
+msgstr "Moje klasy"
+
+msgid "my_messages"
+msgstr "Moje wiadomości"
+
+msgid "name"
+msgstr "Imię"
+
+msgid "nav_explore"
+msgstr "Odkrywaj"
+
+msgid "nav_hedy"
+msgstr "Hedy"
+
+msgid "nav_learn_more"
+msgstr "Dowiedz się więcej"
+
+msgid "nav_start"
+msgstr "Dom"
+
+msgid "nested blocks"
+msgstr "blok w bloku"
+
+msgid "new_password"
+msgstr "Nowe hasło"
+
+msgid "newline"
+msgstr "nowa linia"
+
+msgid "next_exercise"
+msgstr "Następne ćwiczenie"
+
+#, fuzzy
+msgid "next_page"
+msgstr "Next page"
+
+msgid "next_step_tutorial"
+msgstr "Dalej >>>"
+
+msgid "no"
+msgstr "Nie"
+
+msgid "no_account"
+msgstr "Nie masz konta?"
+
+msgid "no_accounts"
+msgstr "Nie ma więcej kont do stworzenia."
+
+msgid "no_certificate"
+msgstr "Ten użytkownik uzyskał Certyfikat Ukończenia Hedy"
+
+#, fuzzy
+msgid "no_more_flat_if"
+msgstr "Starting in level 8, the line after {if} needs to start with 4 spaces."
+
+msgid "no_programs"
+msgstr "Nie masz jeszcze żadnych programów."
+
+msgid "no_public_profile"
+msgstr "Nie masz jeszcze opisu profilu publicznego..."
+
+msgid "no_shared_programs"
+msgstr "nie ma udostępnionych programów..."
+
+msgid "no_such_adventure"
+msgstr "Ta przygoda nie istnieje!"
+
+msgid "no_such_class"
+msgstr "Nie istnieje taka klasa Hedy."
+
+msgid "no_such_highscore"
+msgstr "Wyniki"
 
 msgid "no_such_level"
 msgstr "Nie ma takiego poziomu!"
@@ -42,318 +970,184 @@ msgstr "Nie ma takiego poziomu!"
 msgid "no_such_program"
 msgstr "Nie ma takiego programu!"
 
-msgid "level_not_class"
-msgstr "Ten poziom nie jest jeszcze dostępny w twojej klasie"
-
-msgid "quiz_threshold_not_reached"
-msgstr "Nie wykonano quizu potrzebnego do odblokowania tego poziomu"
-
-msgid "no_such_adventure"
-msgstr "Ta przygoda nie istnieje!"
-
-msgid "user_inexistent"
-msgstr "Ten użytkownik nie istnieje"
-
-msgid "no_certificate"
-msgstr "Ten użytkownik uzyskał Certyfikat Ukończenia Hedy"
-
-msgid "congrats_message"
-msgstr "Gratulacje, {username}, ukończyłeś Hedy!"
-
-msgid "page_not_found"
-msgstr "Nie możemy odnaleźć tej strony!"
-
-msgid "title_signup"
-msgstr "Hedy - Utwórz konto"
-
-msgid "title_login"
-msgstr "Hedy - Logowanie"
-
-msgid "title_recover"
-msgstr "Hedy - Odzyskaj konto"
-
-msgid "title_reset"
-msgstr "Hedy - Zresetuj hasło"
-
-msgid "title_my-profile"
-msgstr "Hedy - Moje konto"
-
-msgid "title_start"
-msgstr "Hedy - Stopniowany język programowania"
-
-msgid "title_learn-more"
-msgstr "Hedy - Dowiedz się więcej"
-
-msgid "title_privacy"
-msgstr "Hedy - Polityka prywatności"
-
-msgid "title_landing-page"
-msgstr "Witaj w Hedy!"
-
-msgid "title_explore"
-msgstr "Hedy - Odkrywaj"
-
-msgid "no_such_highscore"
-msgstr "Wyniki"
-
-msgid "translate_error"
-msgstr ""
-"Coś poszło nie tak podczas tłumaczenia tego programu. Spróbuj uruchomić "
-"program, aby sprawdzić czy ma błąd. Kod z błędami nie może być "
-"przetłumaczony."
-
-msgid "tutorial_code_snippet"
-msgstr ""
-"{print} Witaj świecie!\n"
-"{print} Uczę się Hedy z poradnikiem!"
-
-msgid "invalid_tutorial_step"
-msgstr "Niewłaściwy stopień poradnika"
-
-msgid "tutorial_title_not_found"
-msgstr "Nie możemy odnaleźć tego punktu poradnika"
-
-msgid "tutorial_message_not_found"
-msgstr "Nie mogliśmy znaleźć oczekiwanego punktu poradnika..."
-
-msgid "ajax_error"
-msgstr "Wystąpił błąd, proszę spróbować ponownie."
-
-msgid "image_invalid"
-msgstr "Wybrany obraz jest niewłaściwy."
-
-msgid "personal_text_invalid"
-msgstr "Twój tekst jest nieprawidłowy."
-
-msgid "favourite_program_invalid"
-msgstr "Twój wybrany ulubiony program jest niewłaściwy."
-
-msgid "public_profile_updated"
-msgstr "Profil publiczny został zaktualizowany, strona zastanie przeładowana."
-
-msgid "user_not_private"
-msgstr "Ten użytkownik nie istnieje lub nie posiada publicznego profilu"
-
-msgid "see_certificate"
-msgstr "Zobacz certyfikat {username}!"
-
-msgid "invalid_teacher_invitation_code"
-msgstr ""
-"Kod zaproszenia nauczyciela jest niewłaściwy. Aby zostać nauczycielem, "
-"skontaktuj się z hello@hedy.org."
-
-msgid "catch_index_exception"
-msgstr ""
-"Próbowałeś dostać się do elementu listy {list_name}, ale jest ona pusta albo "
-"indeks który podałeś nie istnieje."
-
-msgid "default_404"
-msgstr "Nie byliśmy w stanie znaleźć tej strony..."
-
-msgid "default_403"
-msgstr "Wygląda na to, że nie masz wystarczających uprawnień..."
-
-msgid "default_500"
-msgstr "Coś poszło nie tak..."
-
-msgid "Wrong Level"
-msgstr ""
-"To był poprawny kod Hedy, ale nie dla tego poziomu. Użyto "
-"{offending_keyword} dla poziomu {working_level}. Porada: {tip}"
-
-msgid "Incomplete"
-msgstr ""
-"Ups! Zapomniałeś o odrobinie kodu! W linii {line_number}, musisz dodać tekst "
-"po {incomplete_command}."
-
-msgid "Invalid"
-msgstr ""
-"{invalid_command} nie jest komendą z {level} poziomu Hedy. Czy miałeś na "
-"myśli {guessed_command}?"
-
-msgid "Invalid Space"
-msgstr ""
-"Ups! Linia numer {line_number} zaczyna się od spacji. Spacje są dziwne dla "
-"komputerów, czy można ją usunąć?"
-
-msgid "Has Blanks"
-msgstr "Twój kod nie jest skończony. Posiada miejsca które trzeba wypełnić."
-
-msgid "No Indentation"
-msgstr ""
-"Użyto zbyt mało spacji w linii {line_number}. Użyto {leading_spaces} spacji, "
-"to za mało. Rozpocznij każdy blok o {indent_size} spacji dalej niż linia "
-"powyżej."
-
-msgid "Unexpected Indentation"
-msgstr ""
-"Użyto zbyt dużo spacji w linii {line_number}. Użyto {leading_spaces} spacji, "
-"to za dużo. Rozpocznij każdy blok {indent_size} spacji dalej niż poprzednia "
-"linia."
-
-msgid "Parse"
-msgstr ""
-"Kod który wprowadzono nie jest poprawnym kodem Hedy. W linii {location[0]} "
-"jest błąd, w pozycji {location[1]}. Użyto {character_found}, co nie jest "
-"dozwolone."
-
-msgid "Unquoted Text"
-msgstr ""
-"Uważaj. Jeżeli chcesz coś wypisać, tekst powinien zaczynać i kończyć się "
-"apostrofem. Zapomniano o tym dla tekstu {unquotedtext}."
-
-msgid "Unquoted Assignment"
-msgstr ""
-"Od tego poziomu, tekst po `{is}` będzie musiał być między apostrofami. "
-"Zapomniano o tym przy tekście {text}."
-
-msgid "Unquoted Equality Check"
-msgstr ""
-"Jeśli chcesz sprawdzić, czy zmienna jest równa wielu słowom, słowa powinny "
-"być pomiędzy apostrofami!"
-
-msgid "Var Undefined"
-msgstr ""
-"Próbowano użyć zmiennej {name}, ale nie została ona ustawiona. Jest też "
-"możliwe, że próbowano użyć słowa {name}, ale zapomniano o apostrofach."
-
-msgid "Access Before Assign"
-msgstr ""
-"Próbowano użyć zmiennej {name} na linii {access_line_number}, ale stworzoną "
-"ją na linii {definition_line_number}. Stwórz zmienną przed jej użyciem."
-
-msgid "Cyclic Var Definition"
-msgstr ""
-"Zmienna {variable} musi zostać ustawiona zanim będzie można użyć jej po "
-"prawej stronie tej komendy."
-
-msgid "Lonely Echo"
-msgstr ""
-"Użyłeś {echo} przed {ask} lub {echo} bez {ask}. Umieść {ask} przed {echo}."
-
-msgid "Too Big"
-msgstr ""
-"Wow! Twój program ma aż {lines_of_code} linii kodu! Ale możemy przetworzyć "
-"tylko {max_lines} linii na tym poziomie. Zmniejsz swój program, i spróbuj "
-"ponownie."
-
-msgid "Invalid Argument Type"
-msgstr ""
-"Nie możesz użyć komendy {command} z {invalid_argument}, ponieważ jest ona "
-"typu {invalid_type}. Spróbuj zmienić {invalid_argument} na {allowed_types}."
-
-msgid "Invalid Argument"
-msgstr ""
-"Nie możesz użyć komendy {command} z {invalid_argument} . Spróbuj zmienić typ "
-"{invalid_argument} na {allowed_types}."
-
-msgid "Invalid Type Combination"
-msgstr ""
-"Nie możesz użyć {invalid_argument} oraz {invalid_argument_2} z {command} "
-"ponieważ pierwszy jest typu {invalid_type}, a drugi jest typu "
-"{invalid_type_2}. Spróbuj zmienić {invalid_argument} na {invalid_type_2} lub "
-"{invalid_argument_2} na {invalid_type}."
-
-msgid "Unsupported Float"
-msgstr ""
-"Liczby niecałkowita nie są jeszcze dostępne, ale będą za kilka poziomów. Na "
-"teraz, zmień {value} na liczbę całkowitą."
-
-msgid "Locked Language Feature"
-msgstr ""
-"Używasz {concept}! To super, ale {concept} nie jest jeszcze odblokowany! "
-"Będzie odblokowany na następnym poziomie."
-
-msgid "Missing Command"
-msgstr "Wygląda na to, że zapomniano użyć komendy w linii {line_number}."
-
-msgid "Missing Inner Command"
-msgstr ""
-"Wygląda na to, że zapomniano użyć komendy z słowem {command} użytym w linii "
-"{line_number}."
-
-msgid "Incomplete Repeat"
-msgstr ""
-"Wygląda na to, że zapomniano użyć komendy z poleceniem {repeat} w linii "
-"{line_number}."
-
-msgid "Unsupported String Value"
-msgstr "Wartości tekstowe nie mogą zawierać {invalid_value}."
-
-msgid "Lonely Text"
-msgstr ""
-"Wygląda na to, że zapomniano użyć komendy z tekstem w linii {line_number}"
-
-msgid "ask_needs_var"
-msgstr ""
-"Od poziomu 2, {ask} musi być użyty razem ze zmienną. Przykład: imię {is} "
-"{ask} Jak się nazywasz?"
-
-msgid "echo_out"
-msgstr ""
-"Od poziomu 2, {echo} nie jest potrzebne. Teraz możesz powtarzać odpowiedź za "
-"pomocą {ask} oraz {print}. Przykład: imię {is} {ask} Jak się nazywasz? "
-"{print} Cześć imię"
-
-msgid "space"
-msgstr "spacja"
-
-msgid "comma"
-msgstr "przecinek"
-
-msgid "question mark"
-msgstr "znak zapytania"
-
-msgid "newline"
-msgstr "nowa linia"
-
-msgid "period"
-msgstr "kropka"
-
-msgid "exclamation mark"
-msgstr "wykrzyknik"
-
-msgid "dash"
-msgstr "myślnik"
-
-msgid "star"
-msgstr "gwiazda"
-
-msgid "single quotes"
-msgstr "pojedynczy cudzysłów"
-
-msgid "double quotes"
-msgstr "cudzysłów"
-
-msgid "slash"
-msgstr "ukośnik"
-
-msgid "string"
-msgstr "tekst"
-
-msgid "nested blocks"
-msgstr "blok w bloku"
-
-msgid "or"
-msgstr "lub"
+msgid "not_enrolled"
+msgstr "Wygląda na to, że nie jesteś członkiem tej klasy!"
+
+#, fuzzy
+msgid "not_in_class_no_handin"
+msgstr "You are not in a class, so there's no need for you to hand in anything."
+
+#, fuzzy
+msgid "not_logged_in_handin"
+msgstr "You must be logged in to hand in an assignment."
+
+msgid "not_teacher"
+msgstr "Wygląda na to, że nie jesteś nauczycielem!"
 
 msgid "number"
 msgstr "liczba"
 
-msgid "integer"
-msgstr "liczba"
+msgid "number_achievements"
+msgstr "Liczba osiągnięć"
 
-msgid "float"
-msgstr "liczba"
+msgid "number_lines"
+msgstr "Numer linii"
 
-msgid "list"
-msgstr "lista"
+msgid "number_programs"
+msgstr "Liczba programów"
 
-msgid "input"
-msgstr "wejście z {ask}"
+msgid "ok"
+msgstr "OK"
 
-msgid "general"
-msgstr "Ogólne"
+#, fuzzy
+msgid "only_you_can_see"
+msgstr "Only you can see this program."
+
+msgid "open"
+msgstr "Otwórz"
+
+msgid "opening_date"
+msgstr "Data rozpoczęcia"
+
+msgid "opening_dates"
+msgstr "Daty rozpoczęcia"
+
+msgid "option"
+msgstr "Opcja"
+
+msgid "or"
+msgstr "lub"
+
+msgid "other"
+msgstr "Inna"
+
+msgid "other_block"
+msgstr "Inny język blokowy"
+
+msgid "other_settings"
+msgstr "Inne ustawienia"
+
+msgid "other_source"
+msgstr "Inne"
+
+msgid "other_text"
+msgstr "Inny język tekstowy"
+
+msgid "overwrite_warning"
+msgstr "Już posiadasz zapisany program o tej samej nazwie. Zapisanie tego programu nadpisze poprzeni program. Czy chcesz kontunować?"
+
+msgid "page"
+msgstr "strona"
+
+msgid "page_not_found"
+msgstr "Nie możemy odnaleźć tej strony!"
+
+msgid "parsons_title"
+msgstr "Łamigłówka"
+
+msgid "password"
+msgstr "Hasło"
+
+msgid "password_change_not_allowed"
+msgstr "Nie możesz zmienić hasła tego użytkownika."
+
+msgid "password_change_prompt"
+msgstr "Jesteś pewien że chcesz zmienić hasło?"
+
+msgid "password_change_success"
+msgstr "Hasło twojego ucznia zostało zmienione."
+
+msgid "password_invalid"
+msgstr "Twoje hasło jest niepoprawne."
+
+msgid "password_repeat"
+msgstr "Powtórz hasło"
+
+msgid "password_resetted"
+msgstr "Twoje hasło zostało zresetowane. Zostajesz przekierowany do strony logowania."
+
+msgid "password_six"
+msgstr "Twoje hasło musi zawierać co najmniej sześć znaków."
+
+msgid "password_updated"
+msgstr "Hasło zostało zaktualizowane."
+
+msgid "passwords_six"
+msgstr "Wszystkie hasła muszą mieć co najmniej sześć znaków."
+
+msgid "pending_invites"
+msgstr "Oczekujące zaproszenia"
+
+#, fuzzy
+msgid "people_with_a_link"
+msgstr "Other people with a link can see this program. It also can be found on the \"Explore\" page."
+
+msgid "percentage"
+msgstr "odsetek"
+
+msgid "percentage_achieved"
+msgstr "Osiągnięte przez {percentage}% użytkowników"
+
+msgid "period"
+msgstr "kropka"
+
+msgid "personal_text"
+msgstr "Opis"
+
+msgid "personal_text_invalid"
+msgstr "Twój tekst jest nieprawidłowy."
+
+msgid "postfix_classname"
+msgstr "Postfix nazwy klasy"
+
+msgid "preferred_keyword_language"
+msgstr "Preferowany język słów kluczowych"
+
+msgid "preferred_language"
+msgstr "Preferowany język"
+
+msgid "preview"
+msgstr "Podgląd"
+
+msgid "previous_campaigns"
+msgstr "Wyświetl poprzednie kampanie"
+
+msgid "print_logo"
+msgstr "napisz"
+
+msgid "privacy_terms"
+msgstr "polityka prywatności"
+
+#, fuzzy
+msgid "private"
+msgstr "Private"
+
+msgid "profile_logo_alt"
+msgstr "Ikona profilu."
+
+msgid "profile_picture"
+msgstr "Obrazek profilowy"
+
+msgid "profile_updated"
+msgstr "Profil został zaktualizowany."
+
+msgid "profile_updated_reload"
+msgstr "Profil został zaktualizowany, strona zostanie ponownie załadowana."
+
+msgid "program_contains_error"
+msgstr "Ten program zawiera błędy, czy na pewno chcesz go udostępnić?"
+
+msgid "program_header"
+msgstr "Moje programy"
+
+msgid "programming_experience"
+msgstr "Czy masz doświadczenie z programowaniem?"
+
+msgid "programming_invalid"
+msgstr "Proszę wybrać poprawny język programowania."
+
+msgid "programs"
+msgstr "Programy"
 
 msgid "programs_created"
 msgstr "Stworzone programy"
@@ -364,227 +1158,302 @@ msgstr "Zapisane programy"
 msgid "programs_submitted"
 msgstr "Przesłane programy"
 
-msgid "teacher"
-msgstr "Nauczyciel"
+msgid "prompt_join_class"
+msgstr "Czy chcesz dołączyć do tej klasy?"
 
-msgid "hidden"
-msgstr "Ukryty"
+#, fuzzy
+msgid "public"
+msgstr "Public"
 
-msgid "hedy_achievements"
-msgstr "Moje osiągnięcia"
+msgid "public_invalid"
+msgstr "Niepoprawna wartość zgody"
 
-msgid "achievements_logo_alt"
-msgstr "Osiągnięcia - logo"
+msgid "public_profile"
+msgstr "Profil publiczny"
 
-msgid "achievements_check_icon_alt"
-msgstr "Ikona uzyskanego osiągnięcia"
+msgid "public_profile_info"
+msgstr "Poprzez zaznaczenie tego pola wyboru zgadzam się na zrobienie mojego profilu widocznym dla wszystkich użytkowników platformy. Uważaj, żeby nie udostępniać swoich danych osobowych jak swoje imię oraz adres domowy ponieważ wszyscy mogą to zobaczyć!"
 
-msgid "certificate"
-msgstr "Certyfikat ukończenia"
+msgid "public_profile_updated"
+msgstr "Profil publiczny został zaktualizowany, strona zastanie przeładowana."
 
-msgid "hedy_logo_alt"
-msgstr "Logo Hedy"
+msgid "pygame_waiting_for_input"
+msgstr "Oczekuje na naciśnięcie przycisku..."
 
-msgid "fun_statistics_msg"
-msgstr "Trochę ciekawych statystyk!"
+msgid "question"
+msgstr "Pytanie"
 
-msgid "number_programs"
-msgstr "Liczba programów"
+msgid "question mark"
+msgstr "znak zapytania"
 
-msgid "highest_quiz_score"
-msgstr "Największy wynik z Quizu"
+msgid "question_doesnt_exist"
+msgstr "Pytanie nie istnieje"
 
-msgid "longest_program"
-msgstr "Najdłuższy program"
+msgid "question_invalid"
+msgstr "Twój token jest nieprawidłowy."
 
-msgid "number_achievements"
-msgstr "Liczba osiągnięć"
+msgid "quiz_logo_alt"
+msgstr "Logo quizu"
 
-msgid "cheatsheet_title"
-msgstr "Ściągawka"
+msgid "quiz_score"
+msgstr "Wynik quizu"
 
-msgid "back_to_class"
-msgstr "Powróć do klasy"
+msgid "quiz_tab"
+msgstr "Quiz"
 
-msgid "class_name_prompt"
-msgstr "Podaj proszę nazwę nowej klasy"
+msgid "quiz_threshold_not_reached"
+msgstr "Nie wykonano quizu potrzebnego do odblokowania tego poziomu"
 
-msgid "username"
-msgstr "Nazwa użytkownika"
+msgid "read_code_label"
+msgstr "Czytaj na głos"
 
-msgid "last_login"
-msgstr "Ostatnie logowanie"
+msgid "recent"
+msgstr "Moje najnowsze programy"
 
-msgid "highest_level_reached"
-msgstr "Najwyższy osiągnięty poziom"
+msgid "recover_password"
+msgstr "Zarządaj zmiany hasła"
 
-msgid "programs"
-msgstr "Programy"
-
-msgid "password"
-msgstr "Hasło"
+msgid "regress_button"
+msgstr "Powróć do poziomu {level}"
 
 msgid "remove"
 msgstr "Usuń"
 
-msgid "page"
-msgstr "strona"
+msgid "remove_customization"
+msgstr "Usuń ustawienia tej klasy"
 
-msgid "enter_password"
-msgstr "Wprowadź nowe hasło dla"
-
-msgid "password_change_prompt"
-msgstr "Jesteś pewien że chcesz zmienić hasło?"
+msgid "remove_customizations_prompt"
+msgstr "Czy jesteś pewien, że chcesz usunąć konfigurację tej klasy?"
 
 msgid "remove_student_prompt"
 msgstr "Czy na pewno chcesz usunąć tego ucznia z klasy?"
 
-msgid "add_students"
-msgstr "Dodaj uczniów"
+msgid "repair_program_logo_alt"
+msgstr "Ikona naprawy programu"
 
-msgid "customize_class"
-msgstr "Dostosuj klasę"
+msgid "repeat_match_password"
+msgstr "Powtórzone hasło nie zgadza się z nowym hasłem."
 
-msgid "class_stats"
-msgstr "Statystyki klasy"
+msgid "repeat_new_password"
+msgstr "Powtórz nowe hasło"
 
-msgid "class_logs"
-msgstr "Logi"
+msgid "report_failure"
+msgstr "Ten program nie istnieje lub nie jest udostępniony publicznie"
 
-msgid "back_to_teachers_page"
-msgstr "Wróć na stronę nauczyciela"
+msgid "report_program"
+msgstr "Czy jesteś pewien, że chcesz zgłosić ten program?"
 
-msgid "add_students_options"
-msgstr "Dodaj opcje ucznia"
+msgid "report_success"
+msgstr "Ten program został zgłoszony"
 
-msgid "copy_link_success"
-msgstr "Link udostępniania skopiowany do schowka"
+msgid "request_teacher"
+msgstr "Czy chciałbyś aplikować o konto nauczyciela?"
 
-msgid "copy_join_link"
-msgstr "Skopiuj link do dołączenia"
+msgid "request_teacher_account"
+msgstr "Aplikuj o konto nauczyciela"
 
-msgid "invite_prompt"
-msgstr "Wprowadź nazwę użytkownika"
+msgid "required_field"
+msgstr "Pola oznaczone * są wymagane"
 
-msgid "invite_by_username"
-msgstr "Zaproś za pomocą nazwy użytkownika"
+msgid "reset_adventure_prompt"
+msgstr "Czy jesteś pewien, że chcesz zresetować wybrane przygody?"
 
-msgid "create_accounts"
-msgstr "Utwórz wiele kont"
+msgid "reset_adventures"
+msgstr "Resetuj wybrane przygody"
 
-msgid "pending_invites"
-msgstr "Oczekujące zaproszenia"
-
-msgid "invite_date"
-msgstr "Data zaproszenia"
-
-msgid "expiration_date"
-msgstr "Data wygaśnięcia"
-
-msgid "delete_invite_prompt"
-msgstr "Czy jesteś pewien że chcesz usunąć to zaproszenia?"
-
-msgid "class_already_joined"
-msgstr "Już jesteś uczeniem tej klasy"
-
-msgid "error_logo_alt"
-msgstr "Logo błędu"
-
-msgid "goto_profile"
-msgstr "Idź do mój profil"
-
-msgid "prompt_join_class"
-msgstr "Czy chcesz dołączyć do tej klasy?"
-
-msgid "join_prompt"
-msgstr ""
-"Potrzebujesz konta aby dołączyć do klasy. Czy chcesz się teraz zalogować?"
-
-msgid "join_class"
-msgstr "Dołącz do klasy"
-
-msgid "next_step_tutorial"
-msgstr "Dalej >>>"
-
-msgid "level_title"
-msgstr "Poziom"
-
-msgid "create_multiple_accounts"
-msgstr "Utwórz wiele kont"
-
-msgid "accounts_intro"
-msgstr ""
-"Na tej stronie możesz utworzyć konta dla wielu uczniów jednocześnie. Możliwe "
-"jest również bezpośrednie dodanie ich do jednej z twoich klas. Wciskając "
-"zielony + znajdujący się po prawej stronie na dole strony możesz dodać "
-"dodatkowe rzędy. Możesz usunąć rząd poprzez wcisnięcie odpowiadającego mu "
-"czerwonego krzyżyka. Upewnij się, że żaden z rzędów nie jest pusty gdy "
-"wciskasz \"Utwórz wiele kont\". Miej na uwadze, że każda nazwa użytkownika i "
-"każdy adres email muszą być unikalne, oraz, że hasła muszą składać się z "
-"<b>co najmniej</b> 6 znaków."
-
-msgid "create_accounts_prompt"
-msgstr "Czy na pewno chcesz utworzyć te konta?"
-
-msgid "class"
-msgstr "Klasa"
-
-msgid "download_login_credentials"
-msgstr "Czy chcesz pobrać dane logowania po utworzeniu kont?"
-
-msgid "yes"
-msgstr "Tak"
-
-msgid "no"
-msgstr "Nie"
-
-msgid "generate_passwords"
-msgstr "Wygeneruj hasła"
-
-msgid "postfix_classname"
-msgstr "Postfix nazwy klasy"
+msgid "reset_password"
+msgstr "Zresetuj hasło"
 
 msgid "reset_view"
 msgstr "Reset"
 
-msgid "customize_adventure"
-msgstr "Dostosuj przygodę"
+msgid "retrieve_adventure_error"
+msgstr "Nie możesz otworzyć tej przygody!"
 
-msgid "update_adventure_prompt"
-msgstr "Czy na pewno chcesz zaktualizować to wyzwanie?"
+msgid "retrieve_class_error"
+msgstr "Tylko uczniowie mogą pobrać listę klas"
 
-msgid "general_settings"
-msgstr "Ustawienia ogólne"
+msgid "run_code_button"
+msgstr "Uruchom kod"
 
-msgid "name"
+msgid "save"
+msgstr "Zapisz"
+
+msgid "save_parse_warning"
+msgstr "Ten program zawiera błędy. Czy jesteś pewien, że chcesz go zapisać?"
+
+msgid "save_prompt"
+msgstr "Aby zapisać program musisz mieć konto użytkownika. Czy chciałbyś się zalogować teraz?"
+
+msgid "save_success_detail"
+msgstr "Program został zapisany pomyślnie."
+
+msgid "score"
+msgstr "Wynik"
+
+msgid "search"
+msgstr "Szukaj..."
+
+msgid "search_button"
+msgstr "Szukaj"
+
+msgid "see_certificate"
+msgstr "Zobacz certyfikat {username}!"
+
+msgid "select"
+msgstr "Wybierz"
+
+msgid "select_adventures"
+msgstr "Wybierz przygody"
+
+msgid "select_levels"
+msgstr "Wybierz poziomy"
+
+msgid "self_removal_prompt"
+msgstr "Czy jesteś pewien, że chcesz opuścić klasę?"
+
+msgid "send_password_recovery"
+msgstr "Wyślij mi link do odzyskania hasła"
+
+msgid "sent_by"
+msgstr "To zaproszenie zostało wysłane przez"
+
+msgid "sent_password_recovery"
+msgstr "Niedługo powinieneś otrzymać email z instrukcjami jak zresetować swoje hasło."
+
+msgid "settings"
+msgstr "Moje ustawienia osobiste"
+
+msgid "share"
+msgstr "Udostępnij"
+
+#, fuzzy
+msgid "share_by_giving_link"
+msgstr "Show your program to other people by giving them the link below:"
+
+msgid "share_confirm"
+msgstr "Czy na pewno chcesz uczynić ten program publicznym?"
+
+msgid "share_success_detail"
+msgstr "Program został udostępniony pomyślnie."
+
+#, fuzzy
+msgid "share_your_program"
+msgstr "Share your program"
+
+msgid "signup_student_or_teacher"
+msgstr "Czy jesteś uczniem czy nauczycielem?"
+
+msgid "single quotes"
+msgstr "pojedynczy cudzysłów"
+
+msgid "slash"
+msgstr "ukośnik"
+
+msgid "social_media"
+msgstr "Media społecznościowe"
+
+msgid "something_went_wrong_keyword_parsing"
+msgstr "Wystąpił problem z Twoją przygodą. Czy wszystkie polecenia są oznaczone symbolami `{` i `}`?"
+
+msgid "space"
+msgstr "spacja"
+
+msgid "star"
+msgstr "gwiazda"
+
+msgid "start_hedy_tutorial"
+msgstr "Rozpocznij instruktaż Hedy"
+
+msgid "start_programming"
+msgstr "Zacznij programować"
+
+msgid "start_programming_logo_alt"
+msgstr "Ikona rozpoczęcia programowania"
+
+msgid "start_quiz"
+msgstr "Zacznij quiz"
+
+msgid "start_teacher_tutorial"
+msgstr "Rozpocznij instruktaż dla nauczyciela"
+
+msgid "step_title"
+msgstr "Zadanie domowe"
+
+msgid "stop_code_button"
+msgstr "Zatrzymaj program"
+
+msgid "string"
+msgstr "tekst"
+
+msgid "student_already_in_class"
+msgstr "Ten uczeń już jest w Twojej klasie."
+
+msgid "student_already_invite"
+msgstr "Ten uczeń został już zaproszony do klasy."
+
+msgid "student_not_existing"
+msgstr "Ten użytkownik nie został znaleziony w systemie."
+
+msgid "student_signup_header"
+msgstr "Uczeń"
+
+msgid "students"
+msgstr "uczniowie"
+
+msgid "submission_time"
+msgstr "Data wręczenia"
+
+msgid "submit_answer"
+msgstr "Odpowiedz na pytanie"
+
+msgid "submit_program"
+msgstr "Wyślij"
+
+msgid "submit_warning"
+msgstr "Czy jesteś pewien, że chcesz wysłać ten program?"
+
+msgid "submitted"
+msgstr "Wysłane"
+
+msgid "submitted_header"
+msgstr "Ten program został wysłany i nie może zostać zmieniony."
+
+msgid "subscribe"
+msgstr "Zasubskrybuj"
+
+msgid "subscribe_newsletter"
+msgstr "Zasubskrybuj do biuletynu informacyjnego"
+
+msgid "surname"
 msgstr "Imię"
 
-msgid "level"
-msgstr "Poziom"
+msgid "teacher"
+msgstr "Nauczyciel"
 
-msgid "adventure_exp_1"
-msgstr ""
-"Typ twojej przygody jest po prawej stronie. Po stworzeniu przygody możesz ją "
-"dodać do jednej z Twoich klas w zakładce \"Personalizacje\". Jeśli chcesz "
-"dodać polecenie do swojej przygody możesz użyć tagu `code`, na przykład:"
+msgid "teacher_account_request"
+msgstr "Masz nierozstrzygnięte rządanie konta nauczyciela"
 
-msgid "adventure_exp_2"
-msgstr ""
-"Jeżeli chcesz pokazać uczniom dłuższe fragmenty kodu możesz użyc tagów "
-"`pre`, na przykład:"
+msgid "teacher_account_success"
+msgstr "Pomyślnie wysłałeś rządanie konta nauczyciela."
 
-msgid "hello_world"
-msgstr "Witaj, świecie!"
+msgid "teacher_invalid"
+msgstr "Twoja wartość nauczyciela jest niepoprawna."
 
-msgid "adventure_exp_3"
-msgstr ""
-"Pamiętaj, żeby zawsze otaczać słowa kluczowe / polecenia symbolami `{` i `}"
-"`. Możesz użyć przycisku \"podgląd\" aby zobaczyć jak wygląda Twoja "
-"przygoda. Aby zobaczyć przygodę na dedykowanej stronie, wybierz \"podgląd\" "
-"z menu na stronie nauczyciela."
+msgid "teacher_invitation_require_login"
+msgstr "Żeby ustawić Twoje konto jako konto nauczyciela musisz się najpierw zalogować. Jeżeli nie masz konta, proszę stworzyć nowe."
 
-msgid "adventure"
-msgstr "Przygoda"
+msgid "teacher_manual"
+msgstr "Instrukcja dla nauczyciela"
+
+msgid "teacher_signup_header"
+msgstr "Nauczyciel"
+
+msgid "teacher_tutorial_logo_alt"
+msgstr "Ikona instruktażu dla nauczyciela"
+
+msgid "teacher_welcome"
+msgstr "Witaj w Hedy! Jesteś teraz dumnym posiadaczem konta nauczyciela, które pozwala Ci na tworzenie klas i zapraszanie uczniów."
 
 msgid "template_code"
 msgstr ""
@@ -598,827 +1467,152 @@ msgstr ""
 "{echo} twoje imię to\n"
 "</pre>"
 
-msgid "adventure_terms"
-msgstr ""
-"Zgadzam się, że moja przygoda może być udostępniona publicznie na Hedy."
-
-msgid "directly_add_adventure_to_classes"
-msgstr "Czy chcesz dodać tę przygodę bezpośrednio do jednej z Twoich klas?"
-
-msgid "preview"
-msgstr "Podgląd"
-
-msgid "save"
-msgstr "Zapisz"
-
-msgid "delete_adventure_prompt"
-msgstr "Czy jesteś pewien, że chcesz usunąć tę przygodę?"
-
-msgid "customize_class_exp_1"
-msgstr ""
-"Cześć! Na tej stronie możesz dostosować swoją klasę. Wybierając poziomy i "
-"przygody, możesz wybrać to, co może zobaczyć Twój uczeń. Możesz także "
-"dodawać własne przygody do poziomów. Wszystkie poziomy i domyślne przygody "
-"zostaną wybrane domyślnie. <b>Uwaga:</b> Nie każda przygoda jest dostępna na "
-"każdym poziomie! Dostosuj ustawienia w następujący sposób:"
-
-msgid "customize_class_step_1"
-msgstr "Dostosuj zajęcia"
-
-msgid "customize_class_step_2"
-msgstr ""
-"\"Pola wyboru\" pojawią się dla przygód dostępnych dla wybranych poziomów"
-
-msgid "customize_class_step_3"
-msgstr ""
-"Posegreguj przygody w kolejnosci w jakiej chciałbyś, żeby były wyświetlone w "
-"tym poziomie. Menu \"Dostępne przygody\" zawiera wszystkie przygody, które "
-"nie zostały przypisane do tego poziomu."
-
-msgid "customize_class_step_4"
-msgstr ""
-"Menu \"Dostępne przygody\" zawiera również wszystkie Twoje przygody. Po "
-"dodaniu ich możesz je przesuwać obok pozostałych przygód."
-
-msgid "customize_class_step_5"
-msgstr "Dodaj własne przygody"
-
-msgid "customize_class_step_6"
-msgstr ""
-"Wybierz daty rozpoczęcia dla każdego poziomu (możesz też pozostawić to pole "
-"puste)"
-
-msgid "customize_class_step_7"
-msgstr "Inne ustawienia"
-
-msgid "customize_class_step_8"
-msgstr "Wybierz \"Zapisz\" -> I gotowe!"
-
-msgid "customize_class_exp_2"
-msgstr ""
-"Zawsze możesz zmienić te ustawienia później. Przykładowo, możesz udostępnić "
-"określone przygody lub poziomy podczas nauczania w klasie. W ten sposób "
-"możesz łatwo określić poziom i przygody, nad którymi będą pracować Twoi "
-"uczniowie. Jeśli chcesz, aby wszystko było dostępne dla swojej klasy, po "
-"prostu usuń całkowicie usunąć całe dostosowanie."
-
-msgid "select_levels"
-msgstr "Wybierz poziomy"
-
-msgid "select_adventures"
-msgstr "Wybierz przygody"
-
-msgid "select_a_level"
-msgstr "Wybierz poziom"
-
-msgid "available_adventures_level"
-msgstr "Poziom dostępnych przygód"
-
-msgid "opening_dates"
-msgstr "Daty rozpoczęcia"
-
-msgid "opening_date"
-msgstr "Data rozpoczęcia"
-
-msgid "directly_available"
-msgstr "Zawsze dostępne"
-
-msgid "unlock_thresholds"
-msgstr "Wymagania do odblokowania następnego poziomu"
-
-msgid "option"
-msgstr "Opcja"
-
-msgid "value"
-msgstr "Wartość"
-
-msgid "quiz_score"
-msgstr "Wynik quizu"
-
-msgid "percentage"
-msgstr "odsetek"
-
-msgid "other_settings"
-msgstr "Inne ustawienia"
-
-msgid "select"
-msgstr "Wybierz"
-
-msgid "mandatory_mode"
-msgstr "Obowiązkowy tryb deweloperski"
-
-msgid "all_class_highscores"
-msgstr "Wszyscy uczniowie są widoczni na klasowej liście najlepszych wyników"
-
-msgid "hide_cheatsheet"
-msgstr "Ukryj ściągawkę"
-
-msgid "hide_keyword_switcher"
-msgstr "Ukryj zmieniarkę poleceń"
-
-msgid "hide_quiz"
-msgstr "Ukryj quiz"
-
-msgid "hide_parsons"
-msgstr "Ukryj łamigłówkę"
-
-msgid "reset_adventure_prompt"
-msgstr "Czy jesteś pewien, że chcesz zresetować wybrane przygody?"
-
-msgid "reset_adventures"
-msgstr "Resetuj wybrane przygody"
-
-msgid "remove_customizations_prompt"
-msgstr "Czy jesteś pewien, że chcesz usunąć konfigurację tej klasy?"
-
-msgid "remove_customization"
-msgstr "Usuń ustawienia tej klasy"
-
-msgid "unsaved_class_changes"
-msgstr ""
-"Strona zawiera niezapisane zmiany. Czy jesteś pewien, że chcesz wyjść bez "
-"zapisania zmian?"
-
-msgid "go_back_to_main"
-msgstr "Powróć do strony głównej"
-
-msgid "explore_programs"
-msgstr "Exploruj programy"
-
-msgid "explore_explanation"
-msgstr ""
-"Na tej stronie możesz przeglądnąc programy stworzone przez innych "
-"użytkowników Hedy. Możesz filtrować te programy pod kątem poziomów i typów "
-"przygód. Kliknij na \"Wyświetl program\", żeby otworzyć program i go "
-"uruchomić. Programy z czerwonym nagłówkiem zawierają pomyłki. Możesz je "
-"otworzyć ale nie będziesz mógł ich uruchomić z powodu tego błędu. Oczywiście "
-"możesz spróbować naprawić ten problem! Jeżeli twórca tego programu ma "
-"publiczny profil możesz kliknąć na jego nazwę użytkownika, żeby otworzyć "
-"jego profil. Znajdziesz tam wszystkie udostępnione programy stworzone przez "
-"tego użytkownika oraz więcej rzeczy!"
-
-msgid "hedy_choice_title"
-msgstr "Wybór Hedy"
-
-msgid "number_lines"
-msgstr "Numer linii"
-
-msgid "creator"
-msgstr "Autor"
-
-msgid "view_program"
-msgstr "Wyświetl program"
-
-msgid "report_program"
-msgstr "Czy jesteś pewien, że chcesz zgłosić ten program?"
-
-msgid "my_classes"
-msgstr "Moje klasy"
-
-msgid "students"
-msgstr "uczniowie"
-
-msgid "duplicate"
-msgstr "Duplikuj"
-
-msgid "delete_class_prompt"
-msgstr "Czy jesteś pewien, że chcesz usunąć tą klasę?"
-
-msgid "create_class"
-msgstr "Utwórz nową klasę"
-
-msgid "my_adventures"
-msgstr "Moje przygody"
-
-msgid "last_update"
-msgstr "Ostatnia aktualizacja"
-
-msgid "view"
-msgstr "Wyświetl"
-
-msgid "edit"
-msgstr "Edytuj"
-
-msgid "adventure_prompt"
-msgstr "Podaj nazwę przygody"
-
-msgid "create_adventure"
-msgstr "Utwórz przygodę"
-
-msgid "teacher_welcome"
-msgstr ""
-"Witaj w Hedy! Jesteś teraz dumnym posiadaczem konta nauczyciela, które "
-"pozwala Ci na tworzenie klas i zapraszanie uczniów."
-
-msgid "highscores"
-msgstr "Rekordy"
-
-msgid "highscore_explanation"
-msgstr ""
-"Na tej stronie możesz zobaczyć aktualne najlepsze wyniki w oparciu o ilość "
-"zebranych osiągnięć. Zobacz ranking dla wszystkich użytkowników, swojego "
-"kraju lub klasy. Kliknij nazwę użytkownika, aby wyświetlić jego profil "
-"publiczny."
-
-msgid "highscore_no_public_profile"
-msgstr ""
-"Nie posiadasz publicznego profilu w związku z czym nie jesteś wyświetlony na "
-"liście rekordowych wyników. Czy chciałbyś stworzyć publiczny profil?"
-
-msgid "create_public_profile"
-msgstr "Utwórz publiczny profil"
-
-msgid "whole_world"
-msgstr "Świat"
-
-msgid "your_class"
-msgstr "Twoja klasa"
-
-msgid "achievements"
-msgstr "osiągnięcia"
-
-msgid "country_title"
-msgstr "Państwo"
-
-msgid "last_achievement"
-msgstr "Ostatnie zdobyte osiągnięcie"
-
-msgid "ago"
-msgstr "{timestamp} temu"
-
-msgid "parsons_title"
-msgstr "Łamigłówka"
-
-msgid "quiz_tab"
-msgstr "Quiz"
-
-msgid "example_code_header"
-msgstr "Przykładowy kod"
-
-msgid "search"
-msgstr "Szukaj..."
-
-msgid "variables"
-msgstr "Zmienne"
-
-msgid "enter_text"
-msgstr "Wprowadź swoją odpowiedź tutaj..."
-
-msgid "enter"
-msgstr "Zatwierdź"
-
-msgid "pygame_waiting_for_input"
-msgstr "Oczekuje na naciśnięcie przycisku..."
-
-msgid "already_program_running"
-msgstr ""
-"Jakiś program właśnie się wykonuje, zakończ go, zanim uruchomisz kolejny."
-
-msgid "run_code_button"
-msgstr "Uruchom kod"
-
-msgid "stop_code_button"
-msgstr "Zatrzymaj program"
-
-msgid "next_exercise"
-msgstr "Następne ćwiczenie"
-
-msgid "edit_code_button"
-msgstr "Edytuj kod"
-
-msgid "repair_program_logo_alt"
-msgstr "Ikona naprawy programu"
-
-msgid "delete_confirm"
-msgstr "Czy na pewno chcesz usunąć ten program?"
-
-msgid "delete"
-msgstr "Usuń"
-
-msgid "read_code_label"
-msgstr "Czytaj na głos"
-
-msgid "regress_button"
-msgstr "Powróć do poziomu {level}"
-
-msgid "disabled_button_locked"
-msgstr "Twój nauczyciel jeszcze nie odblokował tego poziomu"
-
-msgid "advance_button"
-msgstr "Przejdź do poziomu {level}"
-
-msgid "disabled_button_quiz"
-msgstr "Twój wynik quizu jest poniżej oczekiwanego poziomu. Spróbuj ponownie!"
-
-msgid "developers_mode"
-msgstr "Tryb programisty"
-
-msgid "nav_start"
-msgstr "Dom"
-
-msgid "nav_hedy"
-msgstr "Hedy"
-
-msgid "nav_explore"
-msgstr "Odkrywaj"
-
-msgid "for_teachers"
-msgstr "Dla nauczycieli"
-
-msgid "teacher_manual"
-msgstr "Instrukcja dla nauczyciela"
-
-msgid "program_header"
-msgstr "Moje programy"
-
-msgid "my_achievements"
-msgstr "Moje osiągnięcia"
-
-msgid "my_account"
-msgstr "Moje konto"
-
-msgid "logout"
-msgstr "Wyloguj się"
-
-msgid "login"
-msgstr "Zaloguj się"
-
-msgid "welcome"
-msgstr "Witaj"
-
-msgid "welcome_back"
-msgstr "Witaj spowrotem"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Ikona instruktażu dla nauczyciela"
-
-msgid "start_teacher_tutorial"
-msgstr "Rozpocznij instruktaż dla nauczyciela"
-
-msgid "hedy_tutorial_logo_alt"
-msgstr "Ikona instruktażu Hedy"
-
-msgid "start_hedy_tutorial"
-msgstr "Rozpocznij instruktaż Hedy"
-
-msgid "start_programming_logo_alt"
-msgstr "Ikona rozpoczęcia programowania"
-
-msgid "start_programming"
-msgstr "Zacznij programować"
-
-msgid "explore_programs_logo_alt"
-msgstr "Ikona odkrywania programów"
-
-msgid "your_account"
-msgstr "Twój profil"
-
-msgid "profile_logo_alt"
-msgstr "Ikona profilu."
-
-msgid "no_public_profile"
-msgstr "Nie masz jeszcze opisu profilu publicznego..."
-
-msgid "create_question"
-msgstr "Czy chciałbyś stworzyć?"
-
-msgid "amount_created"
-msgstr "utworzonych programów"
-
-msgid "amount_saved"
-msgstr "zapisanych programów"
-
-msgid "amount_submitted"
-msgstr "nadesłanych programów"
-
-msgid "your_last_program"
-msgstr "Poprzednio zapisany program"
-
-msgid "ok"
-msgstr "OK"
-
-msgid "cancel"
-msgstr "Anuluj"
-
-msgid "copy_link_to_share"
-msgstr "Skopiuj udostępniający link"
-
-msgid "achievement_earned"
-msgstr "Otrzymałeś nowe osiągnięcie!"
-
-msgid "mailing_title"
-msgstr "Zasubskrybuj builetyn informacyjny Hedy"
-
-msgid "email"
-msgstr "Email"
-
-msgid "surname"
-msgstr "Imię"
-
-msgid "lastname"
-msgstr "Nazwisko"
-
-msgid "country"
-msgstr "Kraj"
-
-msgid "subscribe"
-msgstr "Zasubskrybuj"
-
-msgid "required_field"
-msgstr "Pola oznaczone * są wymagane"
-
-msgid "previous_campaigns"
-msgstr "Wyświetl poprzednie kampanie"
-
-msgid "step_title"
-msgstr "Zadanie domowe"
-
-msgid "save_code_button"
-msgstr "Zapisz kod"
-
-msgid "share_code_button"
-msgstr "Zapisz i udostępnij kod"
-
-msgid "tutorial"
-msgstr "Instruktaż"
-
-msgid "commands"
-msgstr "Polecenia"
-
-msgid "english"
-msgstr "Angielski"
-
-msgid "login_long"
-msgstr "Zaloguj się do konta"
-
-msgid "no_account"
-msgstr "Nie masz konta?"
-
-msgid "create_account"
-msgstr "Utwórz konto"
-
-msgid "forgot_password"
-msgstr "Zapomniałeś hasła?"
-
-msgid "main_title"
-msgstr "Hedy"
-
-msgid "main_subtitle"
-msgstr "Stopniowany język programowania"
-
-msgid "try_it"
-msgstr "Wypróbuj"
-
-msgid "subscribe_newsletter"
-msgstr "Zasubskrybuj do biuletynu informacyjnego"
-
-msgid "nav_learn_more"
-msgstr "Dowiedz się więcej"
-
-msgid "privacy_terms"
-msgstr "polityka prywatności"
-
-msgid "hedy_on_github"
-msgstr "Hedy na Githubie"
-
-msgid "become_a_sponsor"
-msgstr "Zostań sponsorem"
-
-msgid "discord_server"
-msgstr "Serwer Discord"
-
-msgid "translating_hedy"
-msgstr "Tłumaczenie Hedy"
-
-msgid "exercise"
-msgstr "Ćwiczenie"
-
-msgid "what_should_my_code_do"
-msgstr "Co powinien robić mój kod?"
-
-msgid "teacher_account_request"
-msgstr "Masz nierozstrzygnięte rządanie konta nauczyciela"
-
-msgid "account_overview"
-msgstr "Przegląd konta"
-
-msgid "my_messages"
-msgstr "Moje wiadomości"
-
-msgid "invite_message"
-msgstr "Otrzymałeś zaproszenie dołączenia do klasy"
-
-msgid "sent_by"
-msgstr "To zaproszenie zostało wysłane przez"
-
-msgid "delete_invite"
-msgstr "Usuń zaproszenie"
-
-msgid "public_profile"
-msgstr "Profil publiczny"
-
-msgid "visit_own_public_profile"
-msgstr "Odwiedź swój publiczny profil"
-
-msgid "profile_picture"
-msgstr "Obrazek profilowy"
-
-msgid "personal_text"
-msgstr "Opis"
-
-msgid "your_personal_text"
-msgstr "Opis..."
-
-msgid "favourite_program"
-msgstr "Ulubiony program"
-
-msgid "public_profile_info"
-msgstr ""
-"Poprzez zaznaczenie tego pola wyboru zgadzam się na zrobienie mojego profilu "
-"widocznym dla wszystkich użytkowników platformy. Uważaj, żeby nie "
-"udostępniać swoich danych osobowych jak swoje imię oraz adres domowy "
-"ponieważ wszyscy mogą to zobaczyć!"
-
-msgid "update_public"
-msgstr "Zaktualizuj profil publiczny"
-
-msgid "are_you_sure"
-msgstr "Czy jesteś pewien? Ta operacja jest nieodwracalna."
-
-msgid "delete_public"
-msgstr "Usuń profil publiczny"
-
-msgid "self_removal_prompt"
-msgstr "Czy jesteś pewien, że chcesz opuścić klasę?"
-
-msgid "leave_class"
-msgstr "Opuść klasę"
-
-msgid "settings"
-msgstr "Moje ustawienia osobiste"
-
-msgid "birth_year"
-msgstr "Rok urodzenia"
-
-msgid "preferred_language"
-msgstr "Preferowany język"
-
-msgid "preferred_keyword_language"
-msgstr "Preferowany język słów kluczowych"
-
-msgid "gender"
-msgstr "Płeć"
-
-msgid "female"
-msgstr "Żeńska"
-
-msgid "male"
-msgstr "Męska"
-
-msgid "other"
-msgstr "Inna"
-
-msgid "agree_third_party"
-msgstr ""
-"Zgadzam się na kontakt z partnerami Uniwersytetu Leiden w celu uzyskania "
-"informacji o ofertach handlowych"
-
-msgid "update_profile"
-msgstr "Zaktualizuj profil"
-
-msgid "destroy_profile"
-msgstr "Usuń profil"
-
-msgid "change_password"
-msgstr "Zmień hasło"
-
-msgid "current_password"
-msgstr "Obecne hasło"
-
-msgid "new_password"
-msgstr "Nowe hasło"
-
-msgid "repeat_new_password"
-msgstr "Powtórz nowe hasło"
-
-msgid "request_teacher"
-msgstr "Czy chciałbyś aplikować o konto nauczyciela?"
-
-msgid "request_teacher_account"
-msgstr "Aplikuj o konto nauczyciela"
-
-msgid "recent"
-msgstr "Moje najnowsze programy"
-
-msgid "all"
-msgstr "Wszystkie"
-
-msgid "submitted"
-msgstr "Wysłane"
-
-msgid "search_button"
-msgstr "Szukaj"
-
-msgid "submitted_header"
-msgstr "Ten program został wysłany i nie może zostać zmieniony."
+#, fuzzy
+msgid "this_turns_in_assignment"
+msgstr "This turns in your assignment to your teacher."
 
 msgid "title"
 msgstr "Tytuł"
 
-msgid "last_edited"
-msgstr "Ostatnio edytowano"
-
-msgid "favourite_confirm"
-msgstr "Czy jesteś pewien, że chcesz ustawić ten program jako ulubiony?"
-
-msgid "open"
-msgstr "Otwórz"
-
-msgid "copy_clipboard"
-msgstr "Pomyślnie skopiowano do schowka"
-
-msgid "unshare_confirm"
-msgstr "Czy na pewno chcesz uczynić ten program prywatnym?"
-
-msgid "unshare"
-msgstr "Przestań udostępniać"
-
-msgid "submit_warning"
-msgstr "Czy jesteś pewien, że chcesz wysłać ten program?"
-
-msgid "submit_program"
-msgstr "Wyślij"
-
-msgid "share_confirm"
-msgstr "Czy na pewno chcesz uczynić ten program publicznym?"
-
-msgid "share"
-msgstr "Udostępnij"
-
-msgid "no_programs"
-msgstr "Nie masz jeszcze żadnych programów."
-
-msgid "write_first_program"
-msgstr "Napisz swój pierwszy program!"
-
-msgid "certified_teacher"
-msgstr "Certyfikowany nauczyciel"
-
-msgid "admin"
-msgstr "Administrator"
-
-msgid "distinguished_user"
-msgstr "Wyróżniony użytkownik"
-
-msgid "contributor"
-msgstr "Współautor"
-
-msgid "no_shared_programs"
-msgstr "nie ma udostępnionych programów..."
-
-msgid "quiz_logo_alt"
-msgstr "Logo quizu"
-
-msgid "start_quiz"
-msgstr "Zacznij quiz"
-
-msgid "go_to_first_question"
-msgstr "Przejdź do pytania 1"
-
-msgid "question"
-msgstr "Pytanie"
-
-msgid "hint"
-msgstr "Podpowiedź?"
-
-msgid "submit_answer"
-msgstr "Odpowiedz na pytanie"
-
-msgid "feedback_success"
-msgstr "Dobrze!"
-
-msgid "feedback_failure"
-msgstr "Źle!"
-
-msgid "correct_answer"
-msgstr "Poprawna odpowiedź to"
-
-msgid "go_to_question"
-msgstr "Przejdź do pytania"
-
-msgid "go_to_quiz_result"
-msgstr "Idź do wyników quizu"
-
-msgid "end_quiz"
-msgstr "Koniec quizu"
-
-msgid "score"
-msgstr "Wynik"
-
-msgid "get_certificate"
-msgstr "Otrzymaj certyfikat!"
-
-msgid "recover_password"
-msgstr "Zarządaj zmiany hasła"
-
-msgid "send_password_recovery"
-msgstr "Wyślij mi link do odzyskania hasła"
-
-msgid "reset_password"
-msgstr "Zresetuj hasło"
-
-msgid "password_repeat"
-msgstr "Powtórz hasło"
-
-msgid "signup_student_or_teacher"
-msgstr "Czy jesteś uczniem czy nauczycielem?"
-
-msgid "student_signup_header"
-msgstr "Uczeń"
-
-msgid "teacher_signup_header"
-msgstr "Nauczyciel"
-
-msgid "create_teacher_account"
-msgstr "Utwórz konto nauczyciela"
-
-msgid "create_student_account"
-msgstr "Utwórz konto"
-
-msgid "create_teacher_account_explanation"
-msgstr ""
-"Z kontem nauczyciela możesz zapisywać swoje programy i przeglądać wyniki "
-"swoich uczniów."
-
-msgid "create_student_account_explanation"
-msgstr "Możesz zapisywać swoje programy."
-
-msgid "heard_about_hedy"
-msgstr "Jak usłyszałeś o Hedy?"
-
-msgid "from_another_teacher"
-msgstr "Od innego nauczyciela"
-
-msgid "social_media"
-msgstr "Media społecznościowe"
-
-msgid "from_video"
-msgstr "Z filmiku"
-
-msgid "from_magazine_website"
-msgstr "Z gazety lub strony internetowej"
-
-msgid "other_source"
-msgstr "Inne"
-
-msgid "programming_experience"
-msgstr "Czy masz doświadczenie z programowaniem?"
-
-msgid "languages"
-msgstr "Których języków programowania używałeś wcześniej?"
-
-msgid "other_block"
-msgstr "Inny język blokowy"
-
-msgid "other_text"
-msgstr "Inny język tekstowy"
-
-msgid "agree_with"
-msgstr "Zgadzam się na"
-
-msgid "already_account"
-msgstr "Posiadasz już konto?"
-
-msgid "teacher_invitation_require_login"
-msgstr ""
-"Żeby ustawić Twoje konto jako konto nauczyciela musisz się najpierw "
-"zalogować. Jeżeli nie masz konta, proszę stworzyć nowe."
-
-msgid "submission_time"
-msgstr "Data wręczenia"
-
-msgid "by"
-msgstr "przez"
-
-msgid "percentage_achieved"
-msgstr "Osiągnięte przez {percentage}% użytkowników"
+msgid "title_achievements"
+msgstr "Hedy - Moje osiągnięcia"
 
 msgid "title_admin"
 msgstr "Hedy - Strona Administratora"
 
+msgid "title_class logs"
+msgstr "Hedy - Dołącz do klasy"
+
+msgid "title_class statistics"
+msgstr "Moje statystyki"
+
+msgid "title_class-overview"
+msgstr "Hedy - Informacje o klasie"
+
+msgid "title_customize-adventure"
+msgstr "Hedy - Spersonalizuj przygodę"
+
+msgid "title_customize-class"
+msgstr "Hedy - Spersonalizuj klasę"
+
+msgid "title_explore"
+msgstr "Hedy - Odkrywaj"
+
+msgid "title_for-teacher"
+msgstr "Hedy - Dla nauczycieli"
+
+msgid "title_join-class"
+msgstr "Hedy - Dołącz do klasy"
+
+msgid "title_landing-page"
+msgstr "Witaj w Hedy!"
+
+msgid "title_learn-more"
+msgstr "Hedy - Dowiedz się więcej"
+
+msgid "title_login"
+msgstr "Hedy - Logowanie"
+
+msgid "title_my-profile"
+msgstr "Hedy - Moje konto"
+
+msgid "title_privacy"
+msgstr "Hedy - Polityka prywatności"
+
+msgid "title_programs"
+msgstr "Hedy - Moje programy"
+
+msgid "title_recover"
+msgstr "Hedy - Odzyskaj konto"
+
+msgid "title_reset"
+msgstr "Hedy - Zresetuj hasło"
+
+msgid "title_signup"
+msgstr "Hedy - Utwórz konto"
+
+msgid "title_start"
+msgstr "Hedy - Stopniowany język programowania"
+
+msgid "title_view-adventure"
+msgstr "Hedy - Wyświetl przygodę"
+
+msgid "token_invalid"
+msgstr "Twój token jest nieprawidłowy."
+
+msgid "too_many_attempts"
+msgstr "Przekroczyłeś dozwoloną ilość prób"
+
+msgid "translate_error"
+msgstr "Coś poszło nie tak podczas tłumaczenia tego programu. Spróbuj uruchomić program, aby sprawdzić czy ma błąd. Kod z błędami nie może być przetłumaczony."
+
+msgid "translating_hedy"
+msgstr "Tłumaczenie Hedy"
+
+msgid "try_it"
+msgstr "Wypróbuj"
+
+msgid "tutorial"
+msgstr "Instruktaż"
+
+msgid "tutorial_code_snippet"
+msgstr ""
+"{print} Witaj świecie!\n"
+"{print} Uczę się Hedy z poradnikiem!"
+
+msgid "tutorial_message_not_found"
+msgstr "Nie mogliśmy znaleźć oczekiwanego punktu poradnika..."
+
+msgid "tutorial_title_not_found"
+msgstr "Nie możemy odnaleźć tego punktu poradnika"
+
+msgid "unauthorized"
+msgstr "Nie masz dostępu do tej strony"
+
+msgid "unique_usernames"
+msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
+
+msgid "unlock_thresholds"
+msgstr "Wymagania do odblokowania następnego poziomu"
+
+msgid "unsaved_class_changes"
+msgstr "Strona zawiera niezapisane zmiany. Czy jesteś pewien, że chcesz wyjść bez zapisania zmian?"
+
+msgid "unshare"
+msgstr "Przestań udostępniać"
+
+msgid "unshare_confirm"
+msgstr "Czy na pewno chcesz uczynić ten program prywatnym?"
+
+msgid "unshare_success_detail"
+msgstr "Program przestał być udostępniony."
+
+msgid "update_adventure_prompt"
+msgstr "Czy na pewno chcesz zaktualizować to wyzwanie?"
+
+msgid "update_profile"
+msgstr "Zaktualizuj profil"
+
+msgid "update_public"
+msgstr "Zaktualizuj profil publiczny"
+
+msgid "user"
+msgstr "Nazwa użytkownika"
+
+msgid "user_inexistent"
+msgstr "Ten użytkownik nie istnieje"
+
+msgid "user_not_private"
+msgstr "Ten użytkownik nie istnieje lub nie posiada publicznego profilu"
+
+msgid "username"
+msgstr "Nazwa użytkownika"
+
+msgid "username_empty"
+msgstr "Nie wpisałeś nazwy użytkownika!"
+
 msgid "username_invalid"
 msgstr "Niepoprawna nazwa użytkownika."
-
-msgid "teacher_invalid"
-msgstr "Twoja wartość nauczyciela jest niepoprawna."
-
-msgid "email_invalid"
-msgstr "Proszę podać poprawny adres email."
-
-msgid "mail_error_change_processed"
-msgstr ""
-"Wysyłanie emaila z potwierdzeniem nie powiodło się, ale zmiany zostały "
-"poprawnie zapisane."
 
 msgid "username_special"
 msgstr "Nazwa użytkownika nie może zawierać `:` lub `@`."
@@ -1426,345 +1620,59 @@ msgstr "Nazwa użytkownika nie może zawierać `:` lub `@`."
 msgid "username_three"
 msgstr "Nazwa użytkownika musi zawierać co najmniej trzy znaki."
 
-msgid "password_invalid"
-msgstr "Twoje hasło jest niepoprawne."
+msgid "usernames_exist"
+msgstr "Jedna lub więcej nazw użytkownika są już zajęte."
 
-msgid "passwords_six"
-msgstr "Wszystkie hasła muszą mieć co najmniej sześć znaków."
+msgid "value"
+msgstr "Wartość"
 
-msgid "mail_welcome_verify_body"
-msgstr ""
-"Twoje konto Hedy zostało utworzone. Witaj!\n"
-"Proszę kliknąć na ten link żeby zweryfikować swój adres email: {link}"
+msgid "variables"
+msgstr "Zmienne"
 
-msgid "mail_change_password_body"
-msgstr ""
-"Twoje hasło Hedy zostało zmienione. Jeśli to zrobiłeś, wszystko jest w "
-"porządku.\n"
-"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając "
-"na tę wiadomość e-mail."
+msgid "view_program"
+msgstr "Wyświetl program"
 
-msgid "mail_recover_password_body"
-msgstr ""
-"Klikając ten link, możesz ustawić nowe hasło Hedy. Ten link jest ważny przez "
-"<b>4</b> godziny.\n"
-"Jeśli nie wymagałeś resetowania hasła, zignoruj ten e-mail: {link}"
+msgid "visit_own_public_profile"
+msgstr "Odwiedź swój publiczny profil"
 
-msgid "mail_reset_password_body"
-msgstr ""
-"Twoje hasło Hedy zostało zresetowane do nowego. Jeśli to zrobiłeś, wszystko "
-"jest w porządku.\n"
-"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając "
-"na tę wiadomość e-mail."
+msgid "welcome"
+msgstr "Witaj"
 
-msgid "mail_welcome_teacher_body"
-msgstr ""
-"<strong>Witaj!</strong>\n"
-"Gratulujemy założenia nowego konta nauczyciela Hedy. Witamy w światowej "
-"społeczności nauczycieli Hedy!\n"
-"\n"
-"<strong>Co mogą robić nauczyciele</strong>\n"
-"Konto nauczyciela daje nowe możliwości.\n"
-"\n"
-"1. Dodatkowe wyjaśnienia są dostępne w <a href=\"https://hedy.org/for-"
-"teachers/manual\">poradniku nauczyciela</a>.\n"
-"2. Za pomocą konta nauczyciela masz możliwość tworzenia zajęć. Twoi "
-"uczniowie mogą dołączyć do twoich zajęć, a ty możesz zobaczyć ich postępy. "
-"Zajęcia są prowadzone i zarządzane przez <a href=\"https://hedycode.com/for-"
-"teachers\">stronę nauczyciela</a>.\n"
-"3. Masz możliwość pełnego dostosowania swoich zajęć - możesz odblokowywać i "
-"zablokowywać poziomy, włączać i wyłączać przygody oraz tworzyć własne "
-"przygody!\n"
-"\n"
-"<strong>Dołącz do naszej społeczności online!</strong>\n"
-"Zapraszamy wszystkich nauczycieli, programistów i innych fanów Hedy do "
-"dołączenia do naszego <a href=\"https://discord.gg/8yY7dEme9r\">serwera "
-"Discord</a>. To idealne miejsce do rozmowy o Hedy: mamy kanały, na których "
-"możesz pokazać swoje fajne projekty i lekcje, kanały do zgłaszania błędów "
-"oraz kanały do czatowania z innymi nauczycielami i zespołem Hedy.\n"
-"\n"
-"<strong>Jak pytać o pomoc </strong>\n"
-"Jeśli coś jest niejasne, daj nam znać na DIscord, lub <a href=\"mailto: "
-"hello@hedy.org\">wyślij nam maila</a>.\n"
-"\n"
-"<strong>Jak zgłaszać błędy</strong>\n"
-"W Discordzie mamy kanał do zgłaszania błędów o nazwie #bugs. To idealne "
-"miejsce, aby poinformować nas o problemach, z którymi się spotykasz. Jeśli "
-"wiesz, jak korzystać z GitHub, możesz tam otworzyć <a href=\"https://github."
-"com/Felienne/hedy/issues/new?assignees=&labels=&template=bug_report.md&title="
-"%5BBUG%5D\">issue</a>.\n"
+msgid "welcome_back"
+msgstr "Witaj spowrotem"
 
-msgid "mail_welcome_verify_subject"
-msgstr "Witaj w Hedy"
+msgid "what_should_my_code_do"
+msgstr "Co powinien robić mój kod?"
 
-msgid "mail_change_password_subject"
-msgstr "Twoje hasło Hedy zostało zmienione"
+msgid "whole_world"
+msgstr "Świat"
 
-msgid "mail_recover_password_subject"
-msgstr "Poproś o zresetowanie hasła."
-
-msgid "mail_reset_password_subject"
-msgstr "Twoje hasło Hedy zostało zresetowane"
-
-msgid "mail_welcome_teacher_subject"
-msgstr "Twoje konto nauczyciela Hedy jest gotowe"
-
-msgid "user"
-msgstr "Nazwa użytkownika"
-
-msgid "mail_hello"
-msgstr "Witaj {username}!"
-
-msgid "mail_goodbye"
-msgstr ""
-"Powodzenia w programowaniu!\n"
-"Zespół Hedy"
-
-msgid "copy_mail_link"
-msgstr "Proszę skopiować i wkleić ten link do nowej zakładki przeglądarki:"
-
-msgid "link"
-msgstr "Link"
-
-msgid "invalid_username_password"
-msgstr "Niepoprawna nazwa użytkownika lub hasło."
-
-msgid "repeat_match_password"
-msgstr "Powtórzone hasło nie zgadza się z nowym hasłem."
-
-msgid "language_invalid"
-msgstr "Proszę wybrać poprawny język."
-
-msgid "agree_invalid"
-msgstr "Musisz zgodzić się z zasadami polityki prywatności."
-
-msgid "keyword_language_invalid"
-msgstr ""
-"Proszę wybrać poprawny język słów kluczowych (wybierz angielski lub twój "
-"własny język)."
+msgid "write_first_program"
+msgstr "Napisz swój pierwszy program!"
 
 msgid "year_invalid"
 msgstr "Proszę wprowadzić rok pomiędzy 1900 i {current_year}."
 
-msgid "gender_invalid"
-msgstr "Proszę wybrać poprawną płeć, wybierz (Żeńska, Męska, Inna)."
+msgid "yes"
+msgstr "Tak"
 
-msgid "country_invalid"
-msgstr "Proszę wybrać poprawny kraj."
+msgid "your_account"
+msgstr "Twój profil"
 
-msgid "heard_about_invalid"
-msgstr "Proszę wybrać poprawny sposób w jaki o nas usłyszałeś."
+msgid "your_class"
+msgstr "Twoja klasa"
 
-msgid "experience_invalid"
-msgstr "Proszę wybrać poprawne doświadczenie, wybierz (Tak, Nie)."
+msgid "your_last_program"
+msgstr "Poprzednio zapisany program"
 
-msgid "programming_invalid"
-msgstr "Proszę wybrać poprawny język programowania."
+msgid "your_personal_text"
+msgstr "Opis..."
 
-msgid "exists_username"
-msgstr "Ta nazwa użytkownika jest już w użyciu."
-
-msgid "exists_email"
-msgstr "Ten email jest już w użyciu."
-
-msgid "token_invalid"
-msgstr "Twój token jest nieprawidłowy."
-
-msgid "password_six"
-msgstr "Twoje hasło musi zawierać co najmniej sześć znaków."
-
-msgid "password_change_not_allowed"
-msgstr "Nie możesz zmienić hasła tego użytkownika."
-
-msgid "password_change_success"
-msgstr "Hasło twojego ucznia zostało zmienione."
-
-msgid "password_updated"
-msgstr "Hasło zostało zaktualizowane."
-
-msgid "sent_password_recovery"
-msgstr ""
-"Niedługo powinieneś otrzymać email z instrukcjami jak zresetować swoje hasło."
-
-msgid "password_resetted"
-msgstr ""
-"Twoje hasło zostało zresetowane. Zostajesz przekierowany do strony logowania."
-
-msgid "already_teacher"
-msgstr "Już posiadasz konto nauczyciela."
-
-msgid "already_teacher_request"
-msgstr "Już masz oczekujące rządanie otrzymania konta nauczyciela."
-
-msgid "teacher_account_success"
-msgstr "Pomyślnie wysłałeś rządanie konta nauczyciela."
-
-msgid "class_name_invalid"
-msgstr "Ta nazwa klasy jest nieprawidłowa."
-
-msgid "class_name_empty"
-msgstr "Nie wpisałeś nazwy klasy!"
-
-msgid "class_name_duplicate"
-msgstr "Już masz klasę z taką nazwą."
-
-msgid "no_such_class"
-msgstr "Nie istnieje taka klasa Hedy."
-
-msgid "invalid_class_link"
-msgstr "Niepoprawny link dołączenia do klasy."
-
-msgid "title_join-class"
-msgstr "Hedy - Dołącz do klasy"
-
-msgid "username_empty"
-msgstr "Nie wpisałeś nazwy użytkownika!"
-
-msgid "student_not_existing"
-msgstr "Ten użytkownik nie został znaleziony w systemie."
-
-msgid "student_already_in_class"
-msgstr "Ten uczeń już jest w Twojej klasie."
-
-msgid "student_already_invite"
-msgstr "Ten uczeń został już zaproszony do klasy."
-
-msgid "retrieve_class_error"
-msgstr "Tylko uczniowie mogą pobrać listę klas"
-
-msgid "title_class-overview"
-msgstr "Hedy - Informacje o klasie"
-
-msgid "title_customize-class"
-msgstr "Hedy - Spersonalizuj klasę"
-
-msgid "customization_deleted"
-msgstr "Personalizacje zostaly usunięte pomyślnie."
-
-msgid "class_customize_success"
-msgstr "Personalizacje zostaly zapisane pomyślnie."
-
-msgid "no_accounts"
-msgstr "Nie ma więcej kont do stworzenia."
-
-msgid "unique_usernames"
-msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
-
-msgid "usernames_exist"
-msgstr "Jedna lub więcej nazw użytkownika są już zajęte."
-
-msgid "accounts_created"
-msgstr "Konta zostały utworzone pomyślnie."
-
-msgid "retrieve_adventure_error"
-msgstr "Nie możesz otworzyć tej przygody!"
-
-msgid "title_view-adventure"
-msgstr "Hedy - Wyświetl przygodę"
-
-msgid "title_customize-adventure"
-msgstr "Hedy - Spersonalizuj przygodę"
-
-msgid "adventure_id_invalid"
-msgstr "Ten identyfikator przygody jest nieprawidłowy."
-
-msgid "adventure_name_invalid"
-msgstr "Ta nazwa przygody jest nieprawidłowa."
-
-msgid "level_invalid"
-msgstr "Ten poziom Hedy jest nieprawidłowy."
-
-msgid "content_invalid"
-msgstr "Ta przygoda jest nieprawidłowa."
-
-msgid "adventure_length"
-msgstr "Treść twojej przygody musi składać się przynajmniej z 20 znaków."
-
-msgid "public_invalid"
-msgstr "Niepoprawna wartość zgody"
-
-msgid "classes_invalid"
-msgstr "Wybrano niepoprawną wartość z listy klas"
-
-msgid "adventure_duplicate"
-msgstr "Posiadasz już przygodę o tej nazwie."
-
-msgid "something_went_wrong_keyword_parsing"
-msgstr ""
-"Wystąpił problem z Twoją przygodą. Czy wszystkie polecenia są oznaczone "
-"symbolami `{` i `}`?"
-
-msgid "adventure_updated"
-msgstr "Przygoda została zaktualizowana!"
-
-msgid "adventure_empty"
-msgstr "Nie podałeś nazwy przygody!"
-
-msgid "exercise_doesnt_exist"
-msgstr "Nie można znaleźć tego ćwiczenia"
-
-msgid "profile_updated_reload"
-msgstr "Profil został zaktualizowany, strona zostanie ponownie załadowana."
-
-msgid "profile_updated"
-msgstr "Profil został zaktualizowany."
-
-msgid "delete_success"
-msgstr "Program został usunięty pomyślnie."
-
-msgid "save_prompt"
-msgstr ""
-"Aby zapisać program musisz mieć konto użytkownika. Czy chciałbyś się "
-"zalogować teraz?"
-
-msgid "overwrite_warning"
-msgstr ""
-"Już posiadasz zapisany program o tej samej nazwie. Zapisanie tego programu "
-"nadpisze poprzeni program. Czy chcesz kontunować?"
-
-msgid "save_parse_warning"
-msgstr "Ten program zawiera błędy. Czy jesteś pewien, że chcesz go zapisać?"
-
-msgid "save_success_detail"
-msgstr "Program został zapisany pomyślnie."
-
-msgid "share_success_detail"
-msgstr "Program został udostępniony pomyślnie."
-
-msgid "unshare_success_detail"
-msgstr "Program przestał być udostępniony."
-
-msgid "favourite_success"
-msgstr "Program został ustawiony jako ulubiony."
-
-msgid "report_failure"
-msgstr "Ten program nie istnieje lub nie jest udostępniony publicznie"
-
-msgid "report_success"
-msgstr "Ten program został zgłoszony"
-
-msgid "question_doesnt_exist"
-msgstr "Pytanie nie istnieje"
-
-msgid "question_invalid"
-msgstr "Twój token jest nieprawidłowy."
-
-msgid "answer_invalid"
-msgstr "Twoje hasło jest niepoprawne."
-
-msgid "too_many_attempts"
-msgstr "Przekroczyłeś dozwoloną ilość prób"
-
-msgid "title_class statistics"
-msgstr "Moje statystyki"
-
-msgid "title_class logs"
-msgstr "Hedy - Dołącz do klasy"
+msgid "your_program"
+msgstr "Twój program"
 
 #~ msgid "create_account_explanation"
-#~ msgstr ""
-#~ "Posiadanie swojego własnego konta pozwala ci na zapisanie swoich "
-#~ "programów."
+#~ msgstr "Posiadanie swojego własnego konta pozwala ci na zapisanie swoich programów."
 
 #~ msgid "only_teacher_create_class"
 #~ msgstr "Tylko nauczyciele mogą tworzyć klasy!"
@@ -1783,3 +1691,31 @@ msgstr "Hedy - Dołącz do klasy"
 
 #~ msgid "select_own_adventures"
 #~ msgstr "Wybierz własne przygody"
+
+#~ msgid "edit"
+#~ msgstr "Edytuj"
+
+#~ msgid "view"
+#~ msgstr "Wyświetl"
+
+#~ msgid "class"
+#~ msgstr "Klasa"
+
+#~ msgid "save_code_button"
+#~ msgstr "Zapisz kod"
+
+#~ msgid "share_code_button"
+#~ msgstr "Zapisz i udostępnij kod"
+
+#~ msgid "classes_invalid"
+#~ msgstr "Wybrano niepoprawną wartość z listy klas"
+
+#~ msgid "directly_add_adventure_to_classes"
+#~ msgstr "Czy chcesz dodać tę przygodę bezpośrednio do jednej z Twoich klas?"
+
+#~ msgid "hand_in_assignment"
+#~ msgstr "Hand in assignment"
+
+#~ msgid "select_a_level"
+#~ msgstr "Wybierz poziom"
+

@@ -8,17 +8,31 @@
     </div>
     <div class="copy-container text-business-copy" id="teacher_documentation">
         <div class="flex gap-8">
-            <div class="flex-0 w-1/4 text-links-plain rounded-md bg-gray-200 p-4">
+            <div class="flex-0 text-links-plain rounded-md bg-gray-200 p-4">
                 {# Section nav #}
                 {% for key, title in section_titles %}
                 {% if key == section_key %}
-                    <div class="font-bold my-2"><a href="/for-teachers/manual/{{key}}"><i class="fa-solid fa-chevron-down w-4"></i> {{ title }}</a></div>
+                    <div class="font-bold my-2">
+                        <a href="/for-teachers/manual/{{key}}">
+                            <div class="flex flex-row items-center gap-2">
+                                <i class="fa-solid fa-chevron-down w-4"></i>
+                                <span>{{ title }}</span>
+                            </div>
+                        </a>
+                    </div>
                     {# Subsection nav #}
                     {% for title in subsection_titles %}
                         <div class="ltr:ml-8 rtl:mr-8 text-sm"><a href="#{{title|slugify}}">· {{ title }}</a></div>
                     {% endfor %}
                 {% else %}
-                    <div class="my-2"><a href="/for-teachers/manual/{{key}}"><i class="fa-solid fa-chevron-right w-4"></i> {{ title }}</a></div>
+                    <div class="my-2">
+                        <a href="/for-teachers/manual/{{key}}">
+                            <div class="flex flex-row items-center gap-2">
+                                <i class="fa-solid fa-chevron-right w-4"></i>
+                                <span>{{ title }}</span>
+                            </div>
+                        </a>
+                    </div>
                 {% endif %}
                 {% endfor %}
             </div>
@@ -46,17 +60,17 @@
                             {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
                                 <p>{{ mistake_section.example.error_text|commonmark }}</p>
                                 <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
                                 </div>
                                 <p>{{ mistake_section.example.solution_text|commonmark }}</p>
                                 <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
                                 </div>
                             {% else %}
                                 <p>{{ mistake_section.text|commonmark }}</p>
                                 {% if mistake_section.code %}
                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                            <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+                                            <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
                                         </div>
                                 {% endif %}
                             {% endif %}

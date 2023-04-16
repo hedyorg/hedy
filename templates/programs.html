@@ -5,31 +5,31 @@
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
   <div class="w-full mb-8" id="program_filter">
-    <form onsubmit="event.preventDefault (); hedyApp.filter_user_programs({% if from_user %}'{{ from_user }}', false{% else %}'', true{% endif %});">
+    <form>
+        <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
         <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
-            <select id="user_program_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                <option disabled selected value="">{{_('level')}}</option>
+            <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; {{_('level')}} &mdash;</option>
                 {% for i in range(1, (max_level + 1)) %}
                     <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                 {% endfor %}
             </select>
-            <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                <option disabled selected value="">{{ _('adventure') }}</option>
+            <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
                 {% for adventure_key, name in adventure_names.items() %}
                     <option value="{{ adventure_key }}" {% if request.args.get('adventure') == adventure_key %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
             <div class="flex flex-col mx-2">
                 <div class="flex flex-row items-center gap-2">
-                    <input type="radio" name="submitted" value="all" {% if request.args.get('filter') != "submitted" %}checked{% endif %}>
+                    <input type="radio" name="filter" value="all" {% if request.args.get('filter') != "submitted" %}checked{% endif %} data-autosubmit="true">
                     <label for="all">{{_('all')}}</label>
                 </div>
                 <div class="flex flex-row items-center gap-2">
-                    <input type="radio" name="submitted" value="submitted" {% if request.args.get('filter') == "submitted" %}checked{% endif %}>
+                    <input type="radio" name="filter" value="submitted" {% if request.args.get('filter') == "submitted" %}checked{% endif %} data-autosubmit="true">
                     <label for="submitted">{{_('submitted')}}</label>
                 </div>
             </div>
-            <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{_('reset_view')}}</button>
             <button type="submit" class="green-btn">{{_('search_button')}}</button>
         </div>
     </form>
@@ -70,7 +70,7 @@
             {% endif %}
         </div>
         <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}" class="no-copy-button">{{program.code }}</pre>
+          <pre level="{{ program.level }}">{{program.code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
@@ -97,19 +97,11 @@
     <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{_('write_first_program')}}</button>
   </p>
   {% endif %}
+  {% if next_page_url %}
+  <p>
+    <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
+  </p>
+  {% endif %}
   </div>
 </div>
-{% endblock %}
-{% block scripts %}
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
-  <script>
-      window.State = {};
-      window.State.lang = "{{ g.lang }}";
-      window.State.level = "{{ level }}";
-      window.State.keyword_language = "{{ g.keyword_lang }}";
-  </script>
-  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}

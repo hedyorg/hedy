@@ -1,7 +1,7 @@
 import {modal} from "./modal";
 import {showAchievements} from "./app";
 
-(function() {
+export function initializeQuiz() {
     $('.option-block').on("click", function () {
         // Remove active attribute and hide possible answer button
         $('.option-block').removeClass('border-double border-8 active');
@@ -11,7 +11,7 @@ import {showAchievements} from "./app";
         $(this).addClass('border-double border-8 active');
         $(this).find(".submit-button").show();
     });
-})();
+}
 
 
 export function startQuiz(level: number) {
@@ -27,7 +27,7 @@ export function startQuiz(level: number) {
     }).done(function() {
         loadQuizQuestion(level, 1);
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -64,7 +64,7 @@ export function loadQuizQuestion(level: number, question: number) {
         highlightQuestionBar(question);
         loadHint(response.hint);
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -168,7 +168,7 @@ export function answerQuestion(answer_number: number) {
             updateHeader(question || "", false);
         }
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 
@@ -191,7 +191,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
     if (response.next_question) {
         $('#next_question_number_container').text(parseInt(question) + 1);
-        $('#next_question_button').attr('onclick', "hedyApp.loadQuizQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
+        $('#next_question_button').off('click').on('click', () => loadQuizQuestion(response.level, parseInt(question) + 1));
         $('#next_question_button').show();
     } else {
         $('#next_question_button').hide();
@@ -242,7 +242,7 @@ export function showQuizResults(level: number) {
             showAchievements(response.achievements, false, "");
         }
     }).fail(function(err) {
-       modal.alert(err.responseText, 3000, true);
+       modal.notifyError(err.responseText);
     });
 }
 

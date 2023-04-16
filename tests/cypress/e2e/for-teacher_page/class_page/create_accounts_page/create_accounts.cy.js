@@ -18,7 +18,7 @@ describe('Is able to add rows to create more accounts', () => {
 
 describe('Is able to create new accounts for class', () => {
   it('Passes', () => {
-    cy.get('#back_to_class_button').click();
+    navigateToClass(classname);
     cy.get('.username_cell').should(($div) => {
       const text = $div.text();
       expect(text).include(students[0]);

@@ -57,6 +57,10 @@ lang = None
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
 
+# # level = 5
+# if level:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
 if os.getenv('CI') and (lang):

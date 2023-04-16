@@ -1,9 +1,21 @@
-import { modal } from './modal';
-import { theGlobalEditor } from './app';
-import {loadParsonsExercise} from "./parsons";
+import { EventEmitter } from './event-emitter';
+
+export interface SwitchTabsEvent {
+  readonly oldTab: string;
+  readonly newTab: string;
+}
+
+export interface TabEvents {
+  beforeSwitch: SwitchTabsEvent;
+  afterSwitch: SwitchTabsEvent;
+}
+
+export interface TabOptions {
+  readonly initialTab?: string;
+}
 
 /**
- * Activate tabs
+ * Tabs
  *
  * Protocol:
  *
@@ -20,157 +32,88 @@ import {loadParsonsExercise} from "./parsons";
  * The active TAB is indicated by the  '.tab-selected' class, the active
  * TARGET by the *absence* of the '.hidden' class.
  */
-$(function() {
-  function resetWindow() {
-    $ ('#warningbox').hide ();
-    $ ('#errorbox').hide ();
-    $ ('#okbox').hide ();
-    const output = $('#output');
-    const variable_button = $(output).find('#variable_button');
-    const variables = $(output).find('#variables');
-    output.empty();
-    $ ('#turtlecanvas').empty ();
-    output.append(variable_button);
-    output.append(variables);
-    window.State.unsaved_changes = false;
-  }
+export class Tabs {
+  private _currentTab: string = '';
 
-  function switchToTab(tabName: string) {
-    // Find the tab that leads to this selection, and its siblings
-    const tab = $('*[data-tab="' + tabName + '"]');
-    const allTabs = tab.siblings('*[data-tab]');
-
-    // Find the target associated with this selection, and its siblings
-    const target = $('*[data-tabtarget="' + tabName + '"]');
-    const allTargets = target.siblings('*[data-tabtarget]');
-
-    // Fix classes
-    allTabs.removeClass('tab-selected');
-    tab.addClass('tab-selected');
-
-    allTargets.addClass('hidden');
-    target.removeClass('hidden');
-
-    const adventures: Record<string, Adventure> = {};
-    window.State.adventures?.map (function(adventure: Adventure) {
-      adventures [adventure.short_name] = adventure;
-    });
-
-    const btn = document.getElementById("repair_button");
-    if (btn) {
-      btn.style.visibility = "hidden";
-    }
-    resetWindow();
-
-    if (tabName === 'quiz') {
-        // If the developer's mode is still on -> make sure we do show the tab
-        if ($('#developers_toggle').is(":checked")) {
-          $('#adventures-tab').show();
-        }
-      $ ('#adventures-tab').css('height', '');
-      $ ('#adventures-tab').css('min-height', '14em');
-      $ ('#adventures-tab').css('max-height', '100%');
-      $ ('#level-header input').hide ();
-      $ ('#editor-area').hide ();
-      $ ('#developers_toggle_container').hide ();
-      return;
-    }
-
-    if (tabName === 'parsons') {
-      $ ('#level-header input').hide ();
-      $ ('#editor').hide();
-      $ ('#editor-area').show ();
-      loadParsonsExercise(<number>(window.State.level || 1), 1);
-      $ ('#parsons_code_container').show();
-      $ ('#adventures-tab').css('height', '');
-      $ ('#adventures-tab').css('min-height', '14em');
-      $ ('#adventures-tab').css('max-height', '100%');
-      $ ('#debug_container').hide();
-      return;
-    } else {
-      $ ('#editor').show();
-      $ ('#level-header input').show ();
-      $ ('#parsons_code_container').hide();
-      $ ('#debug_container').show();
-    }
-
-
-    // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
-    if ($('#developers_toggle').is(":checked")) {
-      $('#adventures-tab').hide();
-    }
-    $('#developers_toggle_container').show ();
-    $ ('#editor-area').show ();
-
-
-    // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-    if (window.State.loaded_program && (window.State.adventure_name_onload) === tabName) {
-      $ ('#program_name').val (window.State.loaded_program.name);
-      theGlobalEditor?.setValue (window.State.loaded_program.code);
-    }
-    // If there's a loaded program for the adventure or level now selected, use it.
-    else if (adventures[tabName]?.loaded_program) {
-      $ ('#program_name').val (adventures[tabName].loaded_program!.name);
-      theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
-    }
-    // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
-    else if (window.State.default_program_name && window.State.default_program) {
-      $ ('#program_name').val(window.State.default_program_name);
-      theGlobalEditor?.setValue(window.State.default_program);
-    }
-    else {
-      if (tab.hasClass('teacher_tab')) {
-        $ ('#program_name').val (tabName);
-        window.State.adventure_name = tabName;
-        theGlobalEditor?.setValue ("");
-      } else {
-        if (adventures[tabName].default_save_name == 'intro') {
-          $('#program_name').val(window.State.level_title + ' ' + window.State.level);
-        } else {
-          $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
-        }
-        theGlobalEditor?.setValue(adventures [tabName].start_code);
-      }
-    }
-
-    window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
-    theGlobalEditor?.clearSelection();
-    theGlobalEditor?.session.clearBreakpoints();
-    // If user wants to override the unsaved program, reset unsaved_changes
-    window.State.unsaved_changes = false;
-  }
-
-  $('*[data-tab]').click(function (e) {
-    const tab = $(e.target);
-    const tabName = tab.data('tab');
-
-    e.preventDefault ();
-
-    // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
-    else switchToTab(tabName);
-
-    // Do a 'replaceState' to add a '#anchor' to the URL
-    const hashFragment = tabName !== 'level' ? tabName : '';
-    if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
+  private tabEvents = new EventEmitter<TabEvents>({
+    beforeSwitch: true,
+    afterSwitch: true,
   });
 
-  // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-  // We click on `level` to load a program associated with level, if any.
-  if (window.State && window.State.adventure_name) {
-    switchToTab(window.State.adventure_name);
-  }
-  else if (window.location.hash) {
-    // If we have an '#anchor' in the URL, switch to that tab
-    const hashFragment = window.location.hash.replace(/^#/, '');
-    if (hashFragment) {
-      switchToTab(hashFragment);
+  constructor(options: TabOptions={}) {
+    $('*[data-tab]').on('click', (e) => {
+      const tab = $(e.target);
+      const tabName = tab.data('tab') as string;
+
+      e.preventDefault();
+      this.switchToTab(tabName);
+    });
+
+    // Determine initial tab
+    // 1. Given by code
+    // 2. In the URL
+    // 3. Otherwise the first one we find
+    let initialTab = options.initialTab;
+    if (!initialTab && window.location.hash) {
+      const hashFragment = window.location.hash.replace(/^#/, '');
+      initialTab = hashFragment;
     }
-  } else {
-    // If this is not the case: open the first tab we find
-    let tabname = $('.tab:first').attr('data-tab');
-    if (tabname) {
-      switchToTab(tabname);
+    if (!initialTab) {
+      initialTab = $('.tab:first').attr('data-tab');
+    }
+
+    if (initialTab) {
+      this.switchToTab(initialTab);
     }
   }
-});
+
+  public switchToTab(tabName: string) {
+    const doSwitch = () => {
+      const oldTab = this._currentTab;
+      this._currentTab = tabName;
+
+      // Do a 'replaceState' to add a '#anchor' to the URL
+      const hashFragment = tabName !== 'level' ? tabName : '';
+      if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
+
+      // Find the tab that leads to this selection, and its siblings
+      const tab = $('*[data-tab="' + tabName + '"]');
+      const allTabs = tab.siblings('*[data-tab]');
+
+      // Find the target associated with this selection, and its siblings
+      const target = $('*[data-tabtarget="' + tabName + '"]');
+      const allTargets = target.siblings('*[data-tabtarget]');
+
+      // Fix classes
+      allTabs.removeClass('tab-selected');
+      tab.addClass('tab-selected');
+
+      allTargets.addClass('hidden');
+      target.removeClass('hidden');
+
+      this.tabEvents.emit('afterSwitch', { oldTab, newTab: tabName });
+    }
+
+    // We don't do a beforeSwitch event for the very first tab switch
+    if (this._currentTab != '') {
+      const event = this.tabEvents.emit('beforeSwitch', { oldTab: this._currentTab, newTab: tabName });
+      event.then(doSwitch);
+    } else {
+      doSwitch();
+    }
+  }
+
+  public get currentTab() {
+    return this._currentTab;
+  }
+
+  public on(key: Parameters<typeof this.tabEvents.on>[0], handler: Parameters<typeof this.tabEvents.on>[1]) {
+    const ret = this.tabEvents.on(key, handler);
+    // Immediately invoke afterSwitch when it's being registered
+    if (key === 'afterSwitch') {
+      this.tabEvents.emit('afterSwitch', { oldTab: '', newTab: this._currentTab });
+    }
+    return ret;
+  }
+}
+

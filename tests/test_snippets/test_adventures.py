@@ -77,29 +77,29 @@ def collect_snippets(path, filtered_language=None):
                             # Code snippets inside example code
                             try:
                                 example_code = utils.markdown_to_html_tags(level['example_code'])
+                                for tag in example_code:
+                                    if tag.name != 'pre' or not tag.contents[0]:
+                                        continue
+                                    code_snippet_counter += 1
+                                    try:
+                                        code = tag.contents[0].contents[0]
+                                    except BaseException:
+                                        print("Code container is empty...")
+                                        continue
+
+                                    snippet = Snippet(
+                                        filename=f,
+                                        level=level_number,
+                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                        code=code,
+                                        adventure_name=adventure_name)
+                                    Hedy_snippets.append(snippet)
                             except Exception as E:
                                 print(E)
-                            for tag in example_code:
-                                if tag.name != 'pre' or not tag.contents[0]:
-                                    continue
-                                code_snippet_counter += 1
-                                try:
-                                    code = tag.contents[0].contents[0]
-                                except BaseException:
-                                    print("Code container is empty...")
-                                    continue
-
-                                snippet = Snippet(
-                                    filename=f,
-                                    level=level_number,
-                                    field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
-                                    code=code,
-                                    adventure_name=adventure_name)
-                                Hedy_snippets.append(snippet)
 
     return Hedy_snippets
 
-# filtered_language = 'te'
+# filtered_language = 'sq'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 
@@ -107,8 +107,8 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adven
                                                        filtered_language=filtered_language)]
 #
 # level = 5
-if level:
-    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+# if level:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.

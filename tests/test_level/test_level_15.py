@@ -146,9 +146,27 @@ class TestsLevel15(HedyTester):
             exception=exceptions.NoIndentationException
         )
 
-    #
-    # pressed with while loop tests
-    #
+    def test_if_pressed_without_else_works(self):
+        code = textwrap.dedent("""\
+        if p is pressed
+            print 'press'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'p':
+              print(f'''press''')
+              break
+            # End of PyGame Event Handler""")
+
+        self.multi_level_tester(code, expected=expected, max_level=16)
 
     def test_if_pressed_works_in_while_loop(self):
         code = textwrap.dedent("""\
@@ -161,8 +179,54 @@ class TestsLevel15(HedyTester):
       print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-      stop = 0
-      while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+        stop = 0
+        while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'p':
+                print(f'''press''')
+                break
+              # End of PyGame Event Handler
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 's':
+                stop = 1
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        print(f'''Uit de loop!''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+        )
+
+    def test_if_pressed_multiple_lines_body(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'x'
+            print 'lalalalala'
+        else
+            print 'not x'
+            print 'lalalalala'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -171,15 +235,15 @@ class TestsLevel15(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
-            if event.unicode == 'p':
-              print(f'''press''')
+            if event.unicode == 'x':
+              print(f'''x''')
+              print(f'''lalalalala''')
               break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 's':
-              stop = 1
-              break
-        time.sleep(0.1)
-      print(f'''Uit de loop!''')""")
+            # End of PyGame Event Handler    
+            else:
+              print(f'''not x''')
+              print(f'''lalalalala''')
+              break""")
 
         self.multi_level_tester(
             code=code,

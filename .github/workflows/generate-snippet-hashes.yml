@@ -4,7 +4,7 @@ env:
 name: Periodically generate hashes
 on:
   schedule:
-    - cron: "0 3 * * 1-5" # Run this job every workday at 3am
+    - cron: "0 3 * * *" # Run this job every day at 3am
   workflow_dispatch: {} # Allow running the workflow on-demand
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         fetch-depth: 0    
         
         # We need to pass the token here -- the commit action below will not overwrite the token to push.
-        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+        token: ${{ secrets.HEDY_BOT_TOKEN }}
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
@@ -46,10 +46,11 @@ jobs:
         build-tools/github/validate --all
         
     - name: Commit changed files
-      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Updating hash files
+        commit_author: hedybot <noreply@hedy.org>
         branch: main
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
-        GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.HEDY_BOT_TOKEN }}

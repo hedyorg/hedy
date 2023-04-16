@@ -535,7 +535,7 @@ class LookupEntryCollector(visitors.Visitor):
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{position_name}-1]'
+            name = f'{list_name}[int({position_name})-1]'
         self.add_to_lookup(name, tree, tree.meta.line, True)
 
     def change_list_item(self, tree):
@@ -616,7 +616,9 @@ class TypeValidator(Transformer):
             self.save_type_to_lookup(tree.children[0].children[0], type_)
         except hedy.exceptions.UndefinedVarException as ex:
             if self.level >= 12:
-                raise hedy.exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
+                raise hedy.exceptions.UnquotedAssignTextException(
+                    text=ex.arguments['name'],
+                    line_number=tree.meta.line)
             else:
                 raise
 
@@ -634,7 +636,7 @@ class TypeValidator(Transformer):
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{tree.children[1]}-1]'
+            name = f'{list_name}[int({tree.children[1]})-1]'
         self.save_type_to_lookup(name, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
@@ -770,7 +772,8 @@ class TypeValidator(Transformer):
         if prom_left_type != prom_right_type:
             left_arg = tree.children[0].children[0]
             right_arg = tree.children[1].children[0]
-            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
+            raise hedy.exceptions.InvalidTypeCombinationException(
+                command, left_arg, right_arg, left_type, right_type, tree.meta.line)
         return prom_left_type, prom_right_type
 
     def validate_args_type_allowed(self, command, children, meta):
@@ -798,7 +801,7 @@ class TypeValidator(Transformer):
                 result = {k: v for k, v in result.items()}
                 command = ' '.join([v.strip() for v in result.values() if v is not None])
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
-                                                          invalid_argument=variable, allowed_types=allowed_types)
+                                                          invalid_argument=variable, allowed_types=allowed_types, line_number=meta.line)
         return arg_type
 
     def get_type(self, tree):
@@ -868,7 +871,8 @@ class TypeValidator(Transformer):
             match = matches[0]
             if not match.type_:
                 if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
-                    raise exceptions.CyclicVariableDefinitionException(variable=match.name)
+                    raise exceptions.CyclicVariableDefinitionException(
+                        variable=match.name, line_number=match.tree.meta.line)
                 else:
                     match.currently_inferring = True
                     try:
@@ -981,6 +985,16 @@ class UsesTurtle(Transformer):
 
 
 class UsesPyGame(Transformer):
+    command_prefix = (f"""\
+pygame_end = False
+while not pygame_end:
+  pygame.display.update()
+  event = pygame.event.wait()
+  if event.type == pygame.QUIT:
+    pygame_end = True
+    pygame.quit()
+    break""")
+
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
@@ -1167,9 +1181,24 @@ class IsValid(Filter):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_list_access_at(self, meta, args):
+        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+    # other rules are inherited from Filter
+
+    # flat if no longer allowed in level 8 and up
+    def error_ifelse(self, meta, args):
+        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    def error_ifpressed_missing_else(self, meta, args):
+        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     # other rules are inherited from Filter
 
 
+@v_args(meta=True)
 def valid_echo(ast):
     commands = ast.children
     command_names = [x.children[0].data for x in commands]
@@ -1177,7 +1206,7 @@ def valid_echo(ast):
 
     # no echo is always ok!
 
-    # otherwise, both have to be in the list and echo shold come after
+    # otherwise, both have to be in the list and echo should come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
         'echo') > command_names.index('ask')
 
@@ -1331,7 +1360,9 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return len(s) > 1 and ((s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"'))
+        opening_quotes = ['‘', "'", '"', "“", "«"]
+        closing_quotes = ['’', "'", '"', "”", "»"]
+        return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
@@ -1428,7 +1459,7 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.color, self.level))
+                                                          allowed_types=get_allowed_types(Command.color, self.level), line_number=meta.line)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1442,7 +1473,7 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.turn, self.level))
+                                                          allowed_types=get_allowed_types(Command.turn, self.level), line_number=meta.line)
 
     def make_turn(self, parameter):
         return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
@@ -1482,7 +1513,7 @@ class ConvertToPython_1(ConvertToPython):
         list_args = []
         var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
         # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})+\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        list_regex = fr"(({var_regex})+\[int\(({var_regex})\)-1\])|(random\.choice\(({var_regex})\))"
         for arg in args:
             # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
@@ -1514,12 +1545,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
+        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var", meta.line)
 
     def error_echo_dep_2(self, meta, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'echo', "echo_out")
+        raise hedy.exceptions.WrongLevelException(1, 'echo', "echo_out", meta.line)
 
     def color(self, meta, args):
         if len(args) == 0:
@@ -1567,7 +1598,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
@@ -1636,7 +1667,7 @@ class ConvertToPython_3(ConvertToPython_2):
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + '-1]'
+            return args[0] + '[int(' + args[1] + ')-1]'
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
@@ -1726,7 +1757,6 @@ except NameError:
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
-        self.ifpressed_prefix_added = False
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -1766,50 +1796,22 @@ else:
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False):
-        command_suffix = (f"""\
-while not pygame_end:
-  pygame.display.update()
-  event = pygame.event.wait()
-  if event.type == pygame.QUIT:
-    pygame_end = True
-    pygame.quit()
-    break""")
-
+    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+    # End of PyGame Event Handler"""
         else:
             command = f"""\
   if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+    # End of PyGame Event Handler"""
 
-        if self.ifpressed_prefix_added:
-            return command
+        if add_command_prefix:
+            return UsesPyGame.command_prefix + "\n" + command
         else:
-            self.ifpressed_prefix_added = True
-            return command_suffix + "\n" + command
-
-    def ifpressed(self, meta, args):
-        button_name = self.process_variable(args[0], meta.line)
-        var_or_button = args[0]
-        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button):
-            return self.make_ifpressed_command(f"""\
-if event.unicode == {args[0]}:
-{ConvertToPython.indent(args[1])}
-  break""", False)
-        elif len(var_or_button) > 1:
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
-  break""")
+            return "\n" + command
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
@@ -1820,7 +1822,7 @@ if event.key == {var_or_button}:
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""", False)
+  break""", button=False)
         elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
@@ -1829,7 +1831,7 @@ if event.key == {button_name}:
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""", True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
@@ -1837,7 +1839,7 @@ if event.unicode == '{args[0]}':
   break
 else:
 {ConvertToPython.indent(args[2])}
-  break""")
+  break""", button=False)
 
 
 @v_args(meta=True)
@@ -1998,18 +2000,18 @@ class ConvertToPython_8_9(ConvertToPython_7):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}
-  break""")
+  break""", button=False)
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break""")
+  break""", button=False)
         else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break""", True)
+  break""", button=True)
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2022,14 +2024,12 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break
-    """, True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break
-    """)
+  break""", button=False)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2039,7 +2039,7 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        args += ["  break\n"]
+        args += ["  break"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
@@ -2069,7 +2069,6 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-
         return f"for {times} in {args[1]}:\n{body}"
 
 
@@ -2170,7 +2169,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
             if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(
                     right_hand_side) or ConvertToPython.is_random(right_hand_side)):
-                raise exceptions.UnquotedAssignTextException(text=args[1])
+                raise exceptions.UnquotedAssignTextException(
+                    text=args[1],
+                    line_number=meta.line)
 
         if isinstance(right_hand_side, Tree):
             exception = self.make_catch_exception([right_hand_side.children[0]])
@@ -2270,6 +2271,29 @@ class ConvertToPython_15(ConvertToPython_14):
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":\n" + body
 
+    def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        var_or_button = args[0]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{body}
+  break""", button=False)
+        elif len(var_or_button) > 1:
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{body}
+  break""", button=True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{body}
+  break""", button=False)
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
@@ -2304,6 +2328,30 @@ class ConvertToPython_17(ConvertToPython_16):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+    def ifpressed_elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines)
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        else:  # otherwise we mean a button
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{all_lines}
+  break""", button=True, add_command_prefix=False)
 
 
 @v_args(meta=True)
@@ -2522,10 +2570,10 @@ def transpile(input_string, level, lang="en"):
 def translate_characters(s):
     # this method is used to make it more clear to kids what is meant in error messages
     # for example ' ' is hard to read, space is easier
-    # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
+    commas = [',', "،", "，", "、"]
     if s == ' ':
         return 'space'
-    elif s == ',':
+    elif s in commas:
         return 'comma'
     elif s == '?':
         return 'question mark'
@@ -2598,16 +2646,16 @@ def preprocess_blocks(code, level, lang):
     next_line_needs_indentation = False
     for line in lines:
         if ' _ ' in line or line == '_':
-            raise hedy.exceptions.CodePlaceholdersPresentException
+            raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
 
         leading_spaces = find_indent_length(line)
+
+        line_number += 1
 
         # ignore whitespace-only lines
         if leading_spaces == len(line):
             processed_code.append('')
             continue
-
-        line_number += 1
 
         # first encounter sets indent size for this program
         if not indent_size_adapted and leading_spaces > 0:
@@ -2689,6 +2737,25 @@ def preprocess_ifs(code, lang='en'):
         else:
             return line[0:len(command)] == command
 
+    def starts_with_after_repeat(command, line):
+        elements_in_line = line.split()
+        keywords_in_lang = KEYWORDS.get(lang, KEYWORDS['en'])
+        repeat_plus_translated = ['repeat', keywords_in_lang.get('repeat')]
+        times_plus_translated = ['times', keywords_in_lang.get('times')]
+
+        if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
+            line = ' '.join(elements_in_line[3:])
+
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                #  starts with the keyword and next character is a space
+                if line[0:len(c)] == c and (len(c) == len(line) or line[len(c)] == ' '):
+                    return True
+            return False
+        else:
+            return line[0:len(command)] == command
+
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
@@ -2711,18 +2778,20 @@ def preprocess_ifs(code, lang='en'):
                 if contains(c, line):
                     return True
             return False
+
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
 
         # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+            excluded_commands = ["pressed"]
 
             if (
-                not contains('pressed', line) and contains_any_of(commands, line)
-            ):  # and this should also (TODO) check for a second is cause that too is problematic.
+                contains_any_of(commands, line) and not contains_any_of(excluded_commands, line)
+            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
@@ -2734,8 +2803,16 @@ def preprocess_ifs(code, lang='en'):
     return "\n".join(processed_code)
 
 
-def contains_blanks(code):
-    return (" _ " in code) or (" _" in code) or ("_ " in code) or (" _\n" in code)
+def location_of_first_blank(code_snippet):
+    # returns 0 if the code does not contain _
+    # otherwise returns the first location (line) of the blank
+    lines = code_snippet.split('\n')
+    for i in range(len(lines)):
+        code = lines[i]
+        if len(code) > 0:
+            if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
+                return i+1
+    return 0
 
 
 def check_program_size_is_valid(input_string):
@@ -2748,8 +2825,9 @@ def check_program_size_is_valid(input_string):
 def process_input_string(input_string, level, lang, escape_backslashes=True):
     result = input_string.replace('\r\n', '\n')
 
-    if contains_blanks(result):
-        raise exceptions.CodePlaceholdersPresentException()
+    location = location_of_first_blank(result)
+    if location > 0:
+        raise exceptions.CodePlaceholdersPresentException(line_number=location)
 
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
@@ -2844,6 +2922,17 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'flat if':
+            raise exceptions.WrongLevelException(
+                offending_keyword='if',
+                working_level=7,
+                tip='no_more_flat_if',
+                line_number=invalid_info.line)
+        elif invalid_info.error_type == 'invalid at keyword':
+            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'ifpressed missing else':
+            raise exceptions.MissingElseForPressitException(
+                command='ifpressed_else', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
@@ -2854,7 +2943,8 @@ def is_program_valid(program_root, input_string, level, lang):
                     arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg)
+                                                                   invalid_argument=arg,
+                                                                   line_number=invalid_info.line)
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
             elif closest is None:
@@ -2933,8 +3023,12 @@ def transpile_inner(input_string, level, lang="en"):
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
-        has_turtle = UsesTurtle().transform(abstract_syntax_tree)
-        has_pygame = UsesPyGame().transform(abstract_syntax_tree)
+        uses_turtle = UsesTurtle()
+        has_turtle = uses_turtle.transform(abstract_syntax_tree)
+
+        uses_pygame = UsesPyGame()
+        has_pygame = uses_pygame.transform(abstract_syntax_tree)
+
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
