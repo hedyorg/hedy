@@ -61,6 +61,10 @@ strong {
 .copy-container { @apply max-w-screen-lg mx-auto; }
 .copy-container-wide { @apply max-w-screen-xl mx-auto; }
 
+.text-display-copy, .text-business-copy {
+  @apply leading-relaxed;
+}
+
 /* Apply somewhat fancy styles to running text (good for landing page copy) */
 .text-display-copy h2 {
   text-align: center;
@@ -204,6 +208,7 @@ strong {
 }
 
 /* Styles only for use in MarkDown blocks */
+/* NOTE: I'm pretty sure we don't render class="markdown" anymore anywhere */
 .markdown {
   @apply text-xl text-gray-800 leading-normal;
 }
@@ -377,7 +382,19 @@ ol {
 
 .text-display-copy ul, .text-display-copy ol,
 .text-business-copy ul, .text-business-copy ol {
-  margin-left: 2em;
+  @apply ml-10;
+}
+.text-adventure-copy ul, .text-adventure-copy ol {
+  @apply ml-8;
+}
+
+.text-display-copy ul li + li, .text-display-copy ol li + li,
+.text-business-copy ul li + li, .text-business-copy ol li + li {
+  @apply mt-2;
+}
+
+.text-adventure-copy ul li + li, .text-adventure-copy ol li + li {
+  @apply mt-1;
 }
 
 /* AUTH */
