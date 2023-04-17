@@ -146,9 +146,9 @@
                     </div>
                     <div class="w-full text-left p-6">
                       <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Common error X detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Y detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Z detected 2 times', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
+                          {{ insert_struggle_list_item('Common error X detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c1') }}
+                          {{ insert_struggle_list_item('Common error Y detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c2') }}
+                          {{ insert_struggle_list_item('Common error Z detected 2 times', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c3') }}
                       </ul>
                   </div>
                 </div>

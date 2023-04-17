@@ -491,3 +491,8 @@ function updateChart(elementId: string, datasets: any[] ) {
   ch.data.datasets = datasets;
   ch.update();
 }
+
+function removeStruggleElements(element: string) {
+  const el = document.getElementById(element);
+  
+}
