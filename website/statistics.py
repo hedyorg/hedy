@@ -159,9 +159,9 @@ class StatisticsModule(WebsiteModule):
 
     @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
     @requires_login
-    def render_pop_up(self, user, class_id):
+    def common_error_details(self, user, class_id):
         """
-        Handles the rendering of the pop up items in misconception detection list.
+        Handles the rendering of the common error items in the common errors detection list.
         """
 
         collapse = request.args.get("collapse", default="True", type=str)
@@ -208,6 +208,11 @@ class StatisticsModule(WebsiteModule):
             current_page='my-profile',
             page_title=gettext("title_class live_statistics_popup")
         )
+
+    @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
+    @requires_login
+    def remove_common_error_item(self, user, class_id, error_id):
+        return {}, 200
 
     @route("/logs/class/<class_id>", methods=["GET"])
     @requires_login

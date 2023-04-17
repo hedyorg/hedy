@@ -498,7 +498,7 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   modal.confirm(prompt, function(){
     $.ajax({
       type: 'DELETE',
-      url: '/class/' + class_id + '/error/' + error_id,
+      url: '/live_stats/class/' + class_id + '/error/' + error_id,
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
