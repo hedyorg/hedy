@@ -78,81 +78,90 @@
                   Student List
                 </h2>
                 <!-- Card 2 Student List    -->
+                {% if class_info.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative pr-2 pt-2">
-                        {% if class_info.show_c2 %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
                             ☝️ Hide
                         </a>
-                        {% else %}
-                        <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
-                            👇 Show
-                        </a>
-                        {% endif %}
                     </div>
-                    {% if class_info.show_c2 %}
                     <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
-                            <h4 class="pb-4">Name</h4>
+                            <h4 class="mb-4">Name</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
                                     <div>
-                                        <li class="p-0">
+                                        <li class="my-2">
                                             <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
+
                                         </li>
                                     </div>
                                 {% endfor %}
                             </ul>
                         </div>
                         <div class="w-full text-left" id="progress-col">
-                            <h4 class="pb-4">Current Level</h4>
+                            <h4 class="mb-4">Adventure Progress</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
-                                {% for s in class_info.students %}
+                                <li id="s1"><img src="/images/new_media_lab/student1.png"></li>
+                                <li id="s2"><img src="/images/new_media_lab/student2.png"></li>
+                                <li id="s3"><img src="/images/new_media_lab/student3.png"></li>
+                                <li id="s4"><img src="/images/new_media_lab/student4.png"></li>
+                                <li id="s5"><img src="/images/new_media_lab/student5.png"></li>
+                                <!-- {% for s in class_info.students %}
                                     <div>
                                         <li class="p-0">{{s.highest_level}}</li>
                                     </div>
-                                {% endfor %}
+                                {% endfor %} -->
                             </ul>
                         </div>
                     </div>
-                    {% endif %}
                 </div>
+                {% else %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
+                    <div class="float-right relative pr-2 pt-1">
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
+                        👇 Show
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
 
             <div id="col2">
                 <h2 class="text-center">
-                  Students who are struggling
+                  Common Errors
                 </h2>
                 <!-- Card 3 Misconceptions feed -->
+                {% if class_info.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative pr-2 pt-1">
-                        {% if class_info.show_c3 %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
                             ☝️ Hide
                         </a>
-                        {% else %}
-                        <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
-                            👇 Show
-                        </a>
-                        {% endif %}
                     </div>
-                {% if class_info.show_c3 %}
-                  <div class="w-full text-left p-6">
+                    <div class="w-full text-left p-6">
                       <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Common error X detected', 'Student1 needs help at Lv. 1', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Y detected', 'Student3 needs help at Lv. 1', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Z detected', '2 Students need help', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
+                          {{ insert_struggle_list_item('Common error X detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
+                          {{ insert_struggle_list_item('Common error Y detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
+                          {{ insert_struggle_list_item('Common error Z detected 2 times', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
                       </ul>
                   </div>
-                {% endif %}
                 </div>
-            </div>
+                {% else %}
+                    <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
+                        <div class="float-right relative pr-2 pt-1">
+                            <a class="no-underline text-black rounded hover:bg-blue-600"
+                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                            👇 Show
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
         </div>
     </div>
 
