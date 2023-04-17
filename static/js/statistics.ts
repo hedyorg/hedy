@@ -1,4 +1,6 @@
 import { Chart, registerables } from 'chart.js';
+import {modal} from "./modal";
+import {showAchievements} from "./app";
 Chart.register(...registerables);
 
 
@@ -492,7 +494,21 @@ function updateChart(elementId: string, datasets: any[] ) {
   ch.update();
 }
 
-function removeStruggleElements(element: string) {
-  const el = document.getElementById(element);
-  
+export function resolve_student(class_id: string, error_id: string, prompt: string) {
+  modal.confirm(prompt, function(){
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + class_id + '/error/' + error_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, true, "");
+      } else {
+          location.reload();
+      }
+    }).fail(function(err) {
+        modal.notifyError(err.responseText);
+    });
+  });
 }

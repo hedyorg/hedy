@@ -131,7 +131,7 @@
       <p>
         {{subtext}}
       </p>
-      <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student({{_('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
+      <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.stats.resolve_student({{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
     </li>
 
 {% endmacro %}
