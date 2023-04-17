@@ -263,6 +263,10 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
         # Todo: set active in db to 0 so item isn't rendered anymore, also reload the database so changes are applied
+
+        # need to get the common error item from the db
+        # dynamo.Table(self.common_error_db, "common_errors", "class_id").update({"class_id": class_id}, {"active": 0})
+
         return {}, 200
 
 
