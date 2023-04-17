@@ -131,7 +131,9 @@ class AdminModule(WebsiteModule):
         classes = [
             {
                 "name": Class.get("name"),
+                # replace email by username for easier communication
                 "teacher": Class.get("teacher"),
+                "email": self.db.user_by_username(Class.get("teacher")).get("email"),
                 "created": utils.localized_date_format(Class.get("date")),
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
@@ -140,9 +142,14 @@ class AdminModule(WebsiteModule):
             for Class in self.db.all_classes()
         ]
 
+        active_classes = [x for x in classes if x.get("stats").get("week").get("runs") > 0]
+
         classes = sorted(classes, key=lambda d: d.get("stats").get("week").get("runs"), reverse=True)
 
-        return render_template("admin/admin-classes.html", classes=classes, page_title=gettext("title_admin"))
+        return render_template("admin/admin-classes.html",
+                               active_classes=active_classes,
+                               classes=classes,
+                               page_title=gettext("title_admin"))
 
     @route("/adventures", methods=["GET"])
     @requires_admin
