@@ -120,15 +120,3 @@
 </div>
 {% endmacro %}
 
-{% macro insert_struggle_list_item(header, class_id, link, ident) %}
-
-    <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
-      <a class="no-underline"  href="{{ link }}">
-        <h3 class="cursor-pointer hover:text-white">
-          {{header}}
-        </h3>
-      </a>
-      <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student("{{ class_id }}", "1", {{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
-    </li>
-
-{% endmacro %}

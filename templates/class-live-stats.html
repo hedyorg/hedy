@@ -1,7 +1,5 @@
 {% extends "auth.html" %}
 
-{% from "macros/stats-shared.html" import insert_struggle_list_item %}
-
 {% block regular_content %}
 
 <div>
@@ -145,11 +143,18 @@
                         </a>
                     </div>
                     <div class="w-full text-left p-6 mt-1">
-                      <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Common error X detected once', class_info.id, "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c1') }}
-                          {{ insert_struggle_list_item('Common error Y detected once', class_info.id, "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c2') }}
-                          {{ insert_struggle_list_item('Common error Z detected 2 times', class_info.id, "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c3') }}
-                      </ul>
+                        <ul class="max-w-md space-y-1 list-none list-inside">
+                            {% for error_entry in class_info.common_errors.errors %}
+                                <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
+                                  <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3 }}'>
+                                    <h3 class="cursor-pointer hover:text-white">
+                                      {{error_entry.header}}
+                                    </h3>
+                                  </a>
+                                  <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student("{{ class_id }}", "1", {{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                   </div>
                 </div>
                 {% else %}

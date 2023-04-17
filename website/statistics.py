@@ -10,7 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
-import dynamo
+from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -125,15 +125,19 @@ class StatisticsModule(WebsiteModule):
 
 class LiveStatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
-        super().__init__("stats", __name__)
+        super().__init__("live-stats", __name__)
         self.db = db
-        dynamo.MemoryStorage("dev_database.json")
+        # loads in the error data from the json file,
+        self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
+
+        # retrieve common errors from the database, but only for the correct class_id
+        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -159,10 +163,10 @@ class LiveStatisticsModule(WebsiteModule):
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
+                        "common_errors": common_errors},
             current_page="my-profile",
-            page_title=gettext("title_class live_statistics"),
-            javascript_page_options=dict(page='class-live-stats'),
+            page_title=gettext("title_class live_statistics")
         )
 
     @route("/live_stats/class/<class_id>/student", methods=["GET"])
@@ -173,6 +177,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
+        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -206,10 +211,9 @@ class LiveStatisticsModule(WebsiteModule):
         return render_template(
             "student-space.html",
             class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "common_errors": common_errors},
             current_page='my-profile',
-            page_title=gettext("title_class live_statistics"),
-            javascript_page_options=dict(page='class-live-stats')
+            page_title=gettext("title_class live_statistics")
         )
 
     @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
@@ -220,6 +224,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
+        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -249,9 +254,9 @@ class LiveStatisticsModule(WebsiteModule):
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result},
-            current_page='my-profile',
-            page_title=gettext("title_class live_statistics_popup")
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result,
+                        "common_errors": common_errors},
+            current_page='my-profile'
         )
 
     @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
