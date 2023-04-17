@@ -21,7 +21,7 @@
     <!-- Card 1 Progress indicator collapsed version -->
     <div class="justify-center">
         <h2 class="text-center">Progress Indicator</h2>
-        <div class="float-right relative pr-2 pt-1">
+        <div class="float-right relative m-2">
             {% if class_info.show_c1 %}
             <a class="no-underline text-black rounded hover:bg-blue-600"
                href="/live_stats/class/{{class_info.id}}?show_c1=False&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
@@ -80,7 +80,7 @@
                 <!-- Card 2 Student List    -->
                 {% if class_info.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
-                    <div class="float-right relative pr-2 pt-2">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
                             ☝️ Hide
@@ -121,7 +121,7 @@
                 </div>
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
-                    <div class="float-right relative pr-2 pt-1">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
                         👇 Show
@@ -138,13 +138,13 @@
                 <!-- Card 3 Misconceptions feed -->
                 {% if class_info.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
-                    <div class="float-right relative pr-2 pt-1">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
                             ☝️ Hide
                         </a>
                     </div>
-                    <div class="w-full text-left p-6">
+                    <div class="w-full text-left p-6 mt-1">
                       <ul class="max-w-md space-y-1 list-none list-inside">
                           {{ insert_struggle_list_item('Common error X detected once', class_info.id, "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c1') }}
                           {{ insert_struggle_list_item('Common error Y detected once', class_info.id, "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3, 'c2') }}
@@ -154,7 +154,7 @@
                 </div>
                 {% else %}
                     <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
-                        <div class="float-right relative pr-2 pt-1">
+                        <div class="float-right relative m-2">
                             <a class="no-underline text-black rounded hover:bg-blue-600"
                             href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
                             👇 Show
@@ -162,6 +162,7 @@
                         </div>
                     </div>
                 {% endif %}
+            </div>
         </div>
     </div>
 
@@ -169,8 +170,4 @@
     {% endblock %}
 </div>
 
-
-
 {% endblock %}
-
-
