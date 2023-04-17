@@ -55,20 +55,7 @@ class StatisticsModule(WebsiteModule):
     @requires_login
     def render_live_stats(self, user, class_id):
 
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        # card 1 boolean
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        # card 2 boolean
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        # card 3 boolean
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
+        collapse, show_c1, show_c2, show_c3 = _args_checks()
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -107,17 +94,7 @@ class StatisticsModule(WebsiteModule):
         are selected in the student list.
         """
 
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
+        collapse, show_c1, show_c2, show_c3 = _args_checks()
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -164,17 +141,7 @@ class StatisticsModule(WebsiteModule):
         Handles the rendering of the common error items in the common errors detection list.
         """
 
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
+        collapse, show_c1, show_c2, show_c3 = _args_checks()
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -507,6 +474,25 @@ def _determine_bool(bool_str):
     if bool_str == "True":
         return True
     return False
+
+
+def _args_checks():
+    """
+    Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
+    """
+    collapse = request.args.get("collapse", default="True", type=str)
+    collapse = _determine_bool(collapse)
+
+    show_c1 = request.args.get("show_c1", default="True", type=str)
+    show_c1 = _determine_bool(show_c1)
+
+    show_c2 = request.args.get("show_c2", default="True", type=str)
+    show_c2 = _determine_bool(show_c2)
+
+    show_c3 = request.args.get("show_c3", default="True", type=str)
+    show_c3 = _determine_bool(show_c3)
+
+    return collapse, show_c1, show_c2, show_c3
 
 
 def get_general_class_stats(students):

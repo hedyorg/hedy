@@ -73,11 +73,11 @@
 
     <div class="justify-center w-full max-w-8xl">
         <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
+            <!-- Card 2 Student List    -->
             <div id="col1">
                 <h2 class="text-center">
                   Student List
                 </h2>
-                <!-- Card 2 Student List    -->
                 {% if class_info.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative m-2">
@@ -131,11 +131,11 @@
                 {% endif %}
             </div>
 
+            <!-- Card 3 Common Errors -->
             <div id="col2">
                 <h2 class="text-center">
                   Common Errors
                 </h2>
-                <!-- Card 3 Misconceptions feed -->
                 {% if class_info.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative m-2">
@@ -153,14 +153,14 @@
                   </div>
                 </div>
                 {% else %}
-                    <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
-                        <div class="float-right relative m-2">
-                            <a class="no-underline text-black rounded hover:bg-blue-600"
-                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
-                            👇 Show
-                            </a>
-                        </div>
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
+                    <div class="float-right relative m-2">
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                        👇 Show
+                        </a>
                     </div>
+                </div>
                 {% endif %}
             </div>
         </div>
