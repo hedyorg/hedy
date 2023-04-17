@@ -1975,7 +1975,14 @@ function programNeedsSaving(adventureName: string) {
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
-  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
 
 /**
