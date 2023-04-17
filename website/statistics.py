@@ -10,6 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
+import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -50,6 +51,83 @@ class StatisticsModule(WebsiteModule):
             page_title=gettext("title_class statistics"),
             javascript_page_options=dict(page='class-stats'),
         )
+
+    @route("/logs/class/<class_id>", methods=["GET"])
+    @requires_login
+    def render_class_logs(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = sorted(class_.get("students", []))
+        return render_template(
+            "class-logs.html",
+            class_info={"id": class_id, "students": students},
+            current_page="my-profile",
+            page_title=gettext("title_class logs"),
+        )
+
+    @route("/class-stats/<class_id>", methods=["GET"])
+    @requires_login
+    def get_class_stats(self, user, class_id):
+        start_date = request.args.get("start", default=None, type=str)
+        end_date = request.args.get("end", default=None, type=str)
+
+        cls = self.db.get_class(class_id)
+        students = cls.get("students", [])
+        if not cls or not students or (cls["teacher"] != user["username"] and not is_admin(user)):
+            return "No such class or class empty", 403
+
+        program_data = self.db.get_program_stats(students, start_date, end_date)
+        quiz_data = self.db.get_quiz_stats(students, start_date, end_date)
+        data = program_data + quiz_data
+
+        per_level_data = _aggregate_for_keys(data, [level_key])
+        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
+        per_level_per_student = _aggregate_for_keys(data, [username_key, level_key])
+        per_week_per_student = _aggregate_for_keys(data, [username_key, week_key])
+
+        response = {
+            "class": {
+                "per_level": _to_response_per_level(per_level_data),
+                "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
+            },
+            "students": {
+                "per_level": _to_response(per_level_per_student, "level", lambda e: e["id"], _to_response_level_name),
+                "per_week": _to_response(per_week_per_student, "week", lambda e: e["id"]),
+            },
+        }
+        return jsonify(response)
+
+    @route("/program-stats", methods=["GET"])
+    @requires_admin
+    def get_program_stats(self, user):
+        start_date = request.args.get("start", default=None, type=str)
+        end_date = request.args.get("end", default=None, type=str)
+
+        ids = [e.value for e in UserType]
+        program_runs_data = self.db.get_program_stats(ids, start_date, end_date)
+        quiz_data = self.db.get_quiz_stats(ids, start_date, end_date)
+        data = program_runs_data + quiz_data
+
+        per_level_data = _aggregate_for_keys(data, [level_key])
+        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
+
+        response = {
+            "per_level": _to_response_per_level(per_level_data),
+            "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
+        }
+        return jsonify(response)
+
+
+class LiveStatisticsModule(WebsiteModule):
+    def __init__(self, db: Database):
+        super().__init__("stats", __name__)
+        self.db = db
+        dynamo.MemoryStorage("dev_database.json")
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
@@ -180,76 +258,6 @@ class StatisticsModule(WebsiteModule):
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
         return {}, 200
-
-    @route("/logs/class/<class_id>", methods=["GET"])
-    @requires_login
-    def render_class_logs(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        students = sorted(class_.get("students", []))
-        return render_template(
-            "class-logs.html",
-            class_info={"id": class_id, "students": students},
-            current_page="my-profile",
-            page_title=gettext("title_class logs"),
-        )
-
-    @route("/class-stats/<class_id>", methods=["GET"])
-    @requires_login
-    def get_class_stats(self, user, class_id):
-        start_date = request.args.get("start", default=None, type=str)
-        end_date = request.args.get("end", default=None, type=str)
-
-        cls = self.db.get_class(class_id)
-        students = cls.get("students", [])
-        if not cls or not students or (cls["teacher"] != user["username"] and not is_admin(user)):
-            return "No such class or class empty", 403
-
-        program_data = self.db.get_program_stats(students, start_date, end_date)
-        quiz_data = self.db.get_quiz_stats(students, start_date, end_date)
-        data = program_data + quiz_data
-
-        per_level_data = _aggregate_for_keys(data, [level_key])
-        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
-        per_level_per_student = _aggregate_for_keys(data, [username_key, level_key])
-        per_week_per_student = _aggregate_for_keys(data, [username_key, week_key])
-
-        response = {
-            "class": {
-                "per_level": _to_response_per_level(per_level_data),
-                "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
-            },
-            "students": {
-                "per_level": _to_response(per_level_per_student, "level", lambda e: e["id"], _to_response_level_name),
-                "per_week": _to_response(per_week_per_student, "week", lambda e: e["id"]),
-            },
-        }
-        return jsonify(response)
-
-    @route("/program-stats", methods=["GET"])
-    @requires_admin
-    def get_program_stats(self, user):
-        start_date = request.args.get("start", default=None, type=str)
-        end_date = request.args.get("end", default=None, type=str)
-
-        ids = [e.value for e in UserType]
-        program_runs_data = self.db.get_program_stats(ids, start_date, end_date)
-        quiz_data = self.db.get_quiz_stats(ids, start_date, end_date)
-        data = program_runs_data + quiz_data
-
-        per_level_data = _aggregate_for_keys(data, [level_key])
-        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
-
-        response = {
-            "per_level": _to_response_per_level(per_level_data),
-            "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
-        }
-        return jsonify(response)
 
 
 def add(username, action):
