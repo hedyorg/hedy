@@ -262,6 +262,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
+        # Todo: set active in db to 0 so item isn't rendered anymore, also reload the database so changes are applied
         return {}, 200
 
 
