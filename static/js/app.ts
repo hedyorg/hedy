@@ -1965,7 +1965,7 @@ function programNeedsSaving(adventureName: string) {
   // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
   // "Run" button will always save regardless of size.
   const wasSavedBefore = adventure.save_info !== undefined;
-  const suspiciouslySmallFraction = 0.1;
+  const suspiciouslySmallFraction = 0.5;
   const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
 
   return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
