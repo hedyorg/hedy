@@ -2,95 +2,117 @@
 
 {% block regular_content %}
 <div>
-    {% if achievement %}
-    <script>
-    $(function() {
-        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+  {% if achievement %}
+  <script>
+    $(function () {
+      hedyApp.showAchievements({{ achievement| safe }}, false, "");
     });
-    </script>
-    {% endif %}
+  </script>
+  {% endif %}
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-row items-center gap-2">
+      <h1>{{ class_info.name }}</h1><span class="cursor-pointer"
+        onclick='hedyApp.rename_class("{{class_info.id}}", {{_(' class_name_prompt')|default(None)|tojson}})'>✏️</span>
+    </div>
+    <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+      <table class="table-auto w-full text-sm">
+        <thead>
+          <tr class="font-bold text-left">
+            <th id="username_header">{{_('username')}}</th>
+            <th id="last_login_header">{{_('last_login')}}</th>
+            <th id="highest_level_header">{{_('highest_level_reached')}}</th>
+            <th id="amount_programs_header">{{_('number_programs')}}</th>
+            <th id="overview_header">{{_('programs')}}</th>
+            <th id="change_password_header" class="text-center">{{_('password')}}</th>
+            <th id="remove_student_header" class="text-center">{{_('remove')}}</th>
+          </tr>
+        </thead>
+        <tbody id="class-user-table">
+          {% for student in class_info.students %}
+          <tr>
+            <td class="username_cell">{{student.username}}</td>
+            <td class="last_login_cell">{{student.last_login}}</td>
+            <td class="highest_level_cell">{{student.highest_level}}</td>
+            <td class="amount_programs_cell">{{student.programs}}</td>
+            <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s
+                {{_('page')}}</a></td>
+            <td class="change_password_cell text-center"><a href="#" class="no-underline"
+                onclick='hedyApp.change_password_student("{{student.username}}", {{_('
+                enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>✏️</a>
+            </td>
+            <td class="remove_student_cell text-center"><a href="#" class="no-underline" id="remove-student"
+                onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('
+                remove_student_prompt')|default(None)|tojson}})'>🗑️</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     <div class="flex flex-col gap-4">
-        <div class="flex flex-row items-center gap-2">
-            <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
-        </div>
-      <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-          <table class="table-auto w-full text-sm">
+      <div class="flex flex-wrap gap-2">
+        {% if is_admin and class_info.teacher != username %}
+        <button class="green-btn" id="customize-class-button" data-cy="customize_class_button"
+          onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View
+          customizations</button>
+        {% else %}
+        <button class="green-btn" id="add-student"
+          onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
+        <button class="green-btn" id="customize-class-button" data-cy="customize_class_button"
+          onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
+        {% endif %}
+        <button class="green-btn" id="stats_button"
+          onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+        <button class="green-btn" id="logs_button"
+          onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
+        <button class="green-btn" id="grid_overview_button"
+          onclick="window.location.href = '/grid_overview/class/{{class_info.id}}'">{{_('grid_overview')}}</button>
+
+      </div>
+      <div class="flex ltr:ml-auto rtl:mr-auto">
+        <button class="blue-btn" id="go_back_to_teacher_page_button"
+          onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
+      </div>
+    </div>
+    <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
+      <h2 class="my-4 pt-4">{{_('add_students_options')}}</h2>
+      <div class="flex flex-row gap-2">
+        <button class="green-btn" id="copy-join-link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('
+          copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
+        <button class="green-btn" id="invite-student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('
+          invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
+        <button class="green-btn" id="create-accounts"
+          onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+      </div>
+    </div>
+    {% if invites %}
+    <div class="border-t border-gray-500 pt-4">
+      <h2>{{_('pending_invites')}}</h2>
+      <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
+        <table class="table-auto text-sm">
           <thead>
             <tr class="font-bold text-left">
-              <th id="username_header">{{_('username')}}</th>
-              <th id="last_login_header">{{_('last_login')}}</th>
-              <th id="highest_level_header">{{_('highest_level_reached')}}</th>
-              <th id="amount_programs_header">{{_('number_programs')}}</th>
-              <th id="overview_header">{{_('programs')}}</th>
-              <th id="change_password_header" class="text-center">{{_('password')}}</th>
-              <th id="remove_student_header" class="text-center">{{_('remove')}}</th>
+              <th class="ltr:pr-4 rtl:pl-4">{{_('username')}}</th>
+              <th class="w-40">{{_('invite_date')}}</th>
+              <th class="w-40">{{_('expiration_date')}}</th>
+              <th class="px-4 text-center">{{_('remove')}}</th>
             </tr>
           </thead>
-          <tbody id="class-user-table">
-            {% for student in class_info.students %}
-              <tr>
-                <td class="username_cell">{{student.username}}</td>
-                <td class="last_login_cell">{{student.last_login}}</td>
-                <td class="highest_level_cell">{{student.highest_level}}</td>
-                <td class="amount_programs_cell">{{student.programs}}</td>
-                <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
-                <td class="change_password_cell text-center"><a href="#" class="no-underline" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>✏️</a></td>
-                <td class="remove_student_cell text-center"><a href="#" class="no-underline" id="remove-student" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|default(None)|tojson}})'>🗑️</a></td>
-              </tr>
+          <tbody>
+            {% for invite in invites %}
+            <tr>
+              <td>{{invite.username}}</td>
+              <td>{{invite.timestamp}}</td>
+              <td>{{invite.expire_timestamp}}</td>
+              <td class="text-center"><a href="#"
+                  onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('
+                  delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>
+            </tr>
             {% endfor %}
           </tbody>
-          </table>
+        </table>
       </div>
-      <div class="flex flex-col gap-4">
-        <div class="flex flex-wrap gap-2">
-            {% if is_admin and class_info.teacher != username %}
-                <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
-            {% else %}
-                <button class="green-btn" id="add-student" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
-                <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-            {% endif %}
-            <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
-            <button class="green-btn" id="logs_button" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
-        </div>
-        <div class="flex ltr:ml-auto rtl:mr-auto">
-            <button class="blue-btn" id="go_back_to_teacher_page_button" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-        </div>
-      </div>
-      <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
-          <h2 class="my-4 pt-4">{{_('add_students_options')}}</h2>
-          <div class="flex flex-row gap-2">
-            <button class="green-btn" id="copy-join-link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
-            <button class="green-btn" id="invite-student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
-            <button class="green-btn" id="create-accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
-          </div>
-      </div>
-      {% if invites %}
-        <div class="border-t border-gray-500 pt-4">
-          <h2>{{_('pending_invites')}}</h2>
-          <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
-            <table class="table-auto text-sm">
-            <thead>
-                <tr class="font-bold text-left">
-                    <th class="ltr:pr-4 rtl:pl-4">{{_('username')}}</th>
-                    <th class="w-40">{{_('invite_date')}}</th>
-                    <th class="w-40">{{_('expiration_date')}}</th>
-                    <th class="px-4 text-center">{{_('remove')}}</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for invite in invites %}
-                <tr>
-                    <td>{{invite.username}}</td>
-                    <td>{{invite.timestamp}}</td>
-                    <td>{{invite.expire_timestamp}}</td>
-                    <td class="text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            </table>
-          </div>
-        </div>
-      {% endif %}
     </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
