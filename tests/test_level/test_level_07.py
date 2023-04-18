@@ -437,5 +437,4 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            output=output,
-            translate=False)
+            output=output)
