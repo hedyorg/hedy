@@ -596,7 +596,7 @@ class TestsLevel5(HedyTester):
         if name in names:
           print(f'nice!')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_onno_3372(self):
         code = textwrap.dedent("""\
@@ -613,8 +613,7 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_restaurant_example(self):
         code = textwrap.dedent("""\
@@ -638,8 +637,7 @@ class TestsLevel5(HedyTester):
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -656,8 +654,7 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -678,8 +675,7 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk!')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -700,7 +696,7 @@ class TestsLevel5(HedyTester):
         else:
           print(f'meh')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_turn_if_forward(self):
         code = textwrap.dedent("""\
@@ -946,7 +942,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_has_enter_after_pressed(self):
         code = textwrap.dedent("""\
@@ -1242,7 +1238,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
