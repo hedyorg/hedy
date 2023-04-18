@@ -92,7 +92,7 @@
                     <p>{{ favourite_program.name }}</p>
                 </div>
                 <div class="relative px-4 mb-4">
-                    <pre class="no-copy-button max-h-full" level="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
+                    <pre class="max-h-full" level="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
                 </div>
             </div>
         {% endif %}
@@ -104,7 +104,7 @@
                             <p>{{ program.name }}</p>
                         </div>
                         <div class="relative px-4 mb-4">
-                            <pre class="no-copy-button" level="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
+                            <pre level="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
                         </div>
                     </div>
                 {% endif %}

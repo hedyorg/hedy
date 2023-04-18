@@ -14,6 +14,7 @@ from .database import Database
 from .website_module import WebsiteModule, route
 from .flask_helpers import proper_jsonify as jsonify
 from .types import SaveInfo, Program
+from . import querylog
 
 
 class ProgramsLogic:
@@ -78,6 +79,9 @@ class ProgramsLogic:
         self.db.increase_user_save_count(user["username"])
         self.achievements.increase_count("saved")
         self.achievements.verify_save_achievements(user["username"], adventure_name)
+
+        querylog.log_value(program_id=program['id'],
+                           adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
 
         return program
 
