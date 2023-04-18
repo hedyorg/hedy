@@ -27,11 +27,12 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-8 shadow-md">
         {% for adventure in adventures %}
             <div
-                data-tabtarget="{{adventure.short_name}}"
-                {% if adventure.short_name != initial_tab %}class="hidden"{% endif %}
+                data-tabtarget="{{adventure.short_name}}" class="
+                {% if adventure.short_name != initial_tab %}hidden{% endif %}
+                turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
@@ -66,18 +67,15 @@
           </div>
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden">
+            <div data-tabtarget="parsons" class="hidden turn-pre-into-ace p-4">
                 <div>
                     {% include 'incl/parsons.html' %}
                 </div>
             </div>
         {% endif %}
-        <!-- Add the tabtarget for the quiz -->
         {% if quiz %}
             <div data-tabtarget="quiz" class="hidden">
-                <div>
-                    {% include 'incl/quiz.html' %}
-                </div>
+                {% include 'quiz/incl-begin.html' %}
             </div>
         {% endif %}
       </div>
