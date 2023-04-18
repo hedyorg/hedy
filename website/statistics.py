@@ -274,7 +274,6 @@ class LiveStatisticsModule(WebsiteModule):
         """
         common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
         for i in range(len(common_errors['errors'])):
-            print("Iter:", i, common_errors['errors'][i]['id'] == error_id)
             if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
                 common_errors['errors'][i]['active'] = 0
                 self.ERRORS.put(common_errors)
