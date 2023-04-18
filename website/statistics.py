@@ -127,17 +127,22 @@ class LiveStatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("live-stats", __name__)
         self.db = db
-        # loads in the error data from the json file,
+        self.__error_db_load()
+
+    def __error_db_load(self):
+        """Loads the error data from the json file. Function mainly exists in order to
+        quickly call it again whenever the database needs to be read again for updating purposes.
+        """
         self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
+        self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
-
         # retrieve common errors from the database, but only for the correct class_id
-        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        common_errors = self.ERRORS.get({"class_id": class_id})
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -177,7 +182,8 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
-        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        # retrieve common errors from the database, but only for the correct class_id
+        common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -224,7 +230,8 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
-        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        # retrieve common errors from the database, but only for the correct class_id
+        common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -262,10 +269,17 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
-        # Todo: set active in db to 0 so item isn't rendered anymore, also reload the database so changes are applied
-
-        # need to get the common error item from the db
-        # dynamo.Table(self.common_error_db, "common_errors", "class_id").update({"class_id": class_id}, {"active": 0})
+        """"
+        Removes the common error item by setting the active flag to 0.
+        """
+        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        for i in range(len(common_errors['errors'])):
+            print("Iter:", i, common_errors['errors'][i]['id'] == error_id)
+            if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
+                common_errors['errors'][i]['active'] = 0
+                self.ERRORS.put(common_errors)
+                self.__error_db_load()
+                break
 
         return {}, 200
 
