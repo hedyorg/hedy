@@ -76,8 +76,6 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
-                </div>
-                {% endfor %}
                 {% else %}
                     {% for level, adventures in adventures_default_order.items() %}
                         <div id="level-{{ level }}" data-cy="level-{{ level }}" {% if level|int == 1 %}
@@ -94,8 +92,6 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
-                </div>
-                {% endfor %}
                 {% endif %}
             </div>
             <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
