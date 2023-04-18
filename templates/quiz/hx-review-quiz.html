@@ -1,0 +1,40 @@
+{% extends hx_layout %}
+{% block regular_content %}
+
+<input type="hidden" data-cy="ctr:{{progress.cypress_page_counter}}">
+
+    <div class="flex flex-col justify-center items-center my-10 gap-4">
+        <div class="text-gray-500 text-2xl" data-cy="quiz-done">{{_('end_quiz')}}</div>
+        <div class="font-semibold text-4xl text-blue-800 font-slab">{{_('score')}}</div>
+        <div class="border-4 border-yellow-600 rounded-full h-40 w-40 flex items-center bg-yellow-300 justify-center">
+            <div class="text-yellow-600 font-bold text-6xl text-center">
+                {{score_percent}}
+            </div>
+        </div>
+    </div>
+    {% if get_certificate %}
+        <div>
+            <p class="text-3xl font-bold tracking-wide text-blue-900 text-center justify-center" id="question_feedback_text_container">Congragulations! You have completed Hedy!</p>
+            <div class="container flex flex-col py-4 px-4 items-center justify-center">
+                <a href="/certificate/{{username}}" target="_blank" class="green-btn text-white px-8 py-4">
+                    {{ _('get_certificate') }}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    {% if next_level %}
+        <div class="flex py-4 px-4 bg-blue-200 justify-end border-t-4 border-blue-400">
+            <a href="/hedy/{{next_level}}" class="green-btn text-2xl px-8 py-4">
+                {{_('advance_button')|replace("{level}", next_level)}}
+            </a>
+        </div>
+    {% endif %}
+    {% if retake_quiz_level %}
+        <div class="flex py-4 px-4 bg-blue-200 justify-end border-t-4 border-blue-400">
+            <button hx-post="/quiz/begin/{{retake_quiz_level}}" class="green-btn text-2xl px-8 py-4">
+                {{_('disabled_button_quiz')}}
+            </button>
+        </div>
+    {% endif %}
+
+{% endblock %}

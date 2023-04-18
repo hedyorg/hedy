@@ -70,7 +70,7 @@
             {% endif %}
         </div>
         <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}" class="no-copy-button">{{program.code }}</pre>
+          <pre level="{{ program.level }}">{{program.code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>

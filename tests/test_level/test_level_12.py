@@ -2034,3 +2034,71 @@ class TestsLevel12(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_simple_function(self):
+        code = textwrap.dedent("""\
+        define simple_function_1 using parameter
+            print "simple_function_1 - 1"
+            m = "simple_function_1 - 2"
+            print m
+        define simple_function_2 using param
+            print "simple_function_2 - 1"
+            print param
+        define simple_function_3 using param_a, param_b, param_c
+            if param_a = "A"
+                print "simple_function_3 - 1"
+                print param_b
+            else
+                print "simple_function_3 - 2"
+                if param_a = "B"
+                    print "simple_function_3 - 2A"
+                    print param_b
+                else
+                    print "simple_function_3 - 2B"
+                    print param_c
+        a = "test1"
+        call simple_function_3 with "A", a, 1.0
+        call simple_function_3 with "B", a, 1.0
+        call simple_function_3 with "C", a, 1.0""")
+
+        expected = textwrap.dedent("""\
+        def simple_function_1(parameter):
+          print(f'''simple_function_1 - 1''')
+          m = 'simple_function_1 - 2'
+          print(f'''{m}''')
+        def simple_function_2(param):
+          print(f'''simple_function_2 - 1''')
+          print(f'''{param}''')
+        def simple_function_3(param_a, param_b, param_c):
+          if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'A'):
+            print(f'''simple_function_3 - 1''')
+            print(f'''{param_b}''')
+          else:
+            print(f'''simple_function_3 - 2''')
+            if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'B'):
+              print(f'''simple_function_3 - 2A''')
+              print(f'''{param_b}''')
+            else:
+              print(f'''simple_function_3 - 2B''')
+              print(f'''{param_c}''')
+        a = 'test1'
+        simple_function_3('A', a, 1.0)
+        simple_function_3('B', a, 1.0)
+        simple_function_3('C', a, 1.0)""")
+
+        output = textwrap.dedent("""\
+        simple_function_3 - 1
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2A
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2B
+        1.0""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            max_level=16
+        )
