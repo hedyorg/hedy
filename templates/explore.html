@@ -54,7 +54,7 @@
                                   {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 12 %} text-sm{% endif %}">{{ program.username|truncate(18) }}</a>
                               </div>
                              <div class="relative px-4">
-                                 <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
+                                 <pre level="{{ program.level }}">{{ program.code }}</pre>
                              </div>
                              <div class="mt-auto mb-2 flex items-center justify-around">
                                 <button class="blue-btn px-2 border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
@@ -89,7 +89,7 @@
                           {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 12 %} text-sm{% endif %}">{{ program.username|truncate(18) }}</a>
                       </div>
                      <div class="relative px-4">
-                         <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
+                         <pre level="{{ program.level }}">{{ program.code }}</pre>
                      </div>
                      <div class="mt-auto mb-2 flex items-center justify-around">
                         <button class="blue-btn px-2 border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>

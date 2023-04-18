@@ -176,6 +176,24 @@ class Translator(Visitor):
         self.input_string = input_string
         self.rules = []
 
+    def define(self, tree):
+        self.add_rule("_DEFINE", "define", tree)
+
+    def defs(self, tree):
+        self.add_rule("_DEF", "def", tree)
+
+    def call(self, tree):
+        self.add_rule("_CALL", "call", tree)
+
+    def using(self, tree):
+        self.add_rule("_USING", "using", tree)
+
+    def withs(self, tree):
+        self.add_rule("_WITH", "with", tree)
+
+    def returns(self, tree):
+        self.add_rule("_RETURN", "return", tree)
+
     def print(self, tree):
         self.add_rule("_PRINT", "print", tree)
 
