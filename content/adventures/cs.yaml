@@ -6,7 +6,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Vítej v Hedy! 
                     V první úrovni můžeš používat příkazy `{print}`, `{ask}` a `{echo}`.
                     Zapiš svůj kód do levého okna. Nebo stiskni žluté tlačítko v ukázce kódu, které kód zapíše za tebe.
                     Kód si vždy vyzkoušej pomocí zeleného tlačítka 'Spustit kód' pod levým programovým polem.
@@ -61,7 +60,6 @@ adventures:
 
                     Většina programovacích jazyků také používá při vypisování uvozovky, takže se dostáváme zase o krok blíže ke skutečnému programování!
 
-                    ## Úkoly jsou čím dál, tím obtížnější
                     Příkazy najdeš opět vlevo a úkoly v záložkách.
                     Obtížnost zadání se stupňuje, proto je nejlepší začít s příběhem vlevo a pokračovat doprava, abys měl*a postupně větší výzvy.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
@@ -83,7 +81,6 @@ adventures:
 
                      Tento kód vypíše Ahoj!, pokud jako jméno zadáš Hedy, a Ráda tě poznávám!, pokud odpovíš něco jiného.
 
-                     ## Úkoly jsou čím dál, tím těžší
 
                      Také ve 4. úrovni jsou zadání v záložkách postupně obtížnější. Proto na nich pracuj zleva doprava.
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
@@ -186,7 +183,6 @@ adventures:
                     print 'decimal numbers now need to use a dot'
                     print 2.5 + 2.5
                 story_text: |-
-                    ## Čísla a text
                     Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Všechen text odteď musí být ohraničen uvozovkami**\nNa této úrovni také musíte použít uvozovky když ukládáte text do proměnné pomocí  `=`:\n"
@@ -331,7 +327,6 @@ adventures:
                     naam = 'Hedy'
                     {print}('My name is ', naam)
                 story_text: |-
-                    ## The last level!
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
                 example_code: |
@@ -349,7 +344,6 @@ adventures:
                     ```
 
                 story_text_3: |-
-                    ##  Input
                     The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
                 example_code_3: |
@@ -369,7 +363,6 @@ adventures:
                 start_code: '# place your code here'
             3:
                 story_text: |
-                    ## Story
                     In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
 
                 example_code: |
