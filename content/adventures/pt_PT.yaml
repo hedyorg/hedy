@@ -600,7 +600,7 @@ adventures:
                 start_code: "{print} 'Who does the dishes?'"
             3:
                 story_text: "Do you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                example_code: "\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
                 start_code: '{print} Who does the dishes?'
                 story_text_2: "Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
     dice:
