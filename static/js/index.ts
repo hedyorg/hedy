@@ -17,3 +17,4 @@ export * from './teachers';
 export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
+import './student-tile'

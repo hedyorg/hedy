@@ -20,7 +20,7 @@ function hideStudentTile() {
     $('#expanded-student-tile').addClass('hidden');
 }
 
-function studentTileClicked(event: any, student: any) {
+export function studentTileClicked(event: any, student: any): void {
     const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
     // Remove 'selected' attribute from all student tiles
