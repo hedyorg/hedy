@@ -195,43 +195,43 @@ adventures:
         description: Faru vian propran ludon de roko, papero kaj tondilo
         levels:
             1:
-                story_text: "## Roko, papero, tondilo\nEn Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».\n\nPer `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.\n"
+                story_text: "En Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».\n\nPer `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.\n"
                 example_code: "```\n{print} kion vi elektas?\n{ask} elektu el roko, papero aŭ tondilo\n{echo} do via elekto estis:\n```\nAnstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
                 story_text_2: "### Exercise\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             2:
-                story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
+                story_text: "En ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
                 example_code: "```\nelekto {is} _\n{print} Mi elektas elekto\n```\n"
                 start_code: '# via kodo ĉi tie'
                 story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
-                story_text: "## Roko, papero, tondilo\n\nEn ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.\nVi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.\nEkzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.\n"
+                story_text: "\nEn ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.\nVi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.\nEkzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.\n"
                 example_code: "```\nelektoj {is} roko, papero, tondilo\n{print} elektoj {at} {random}\n```\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
                 story_text_2: "### Exercise\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             4:
-                story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo ni povas plu programi rokon, paperon, tondilon. Sed se vi volas aldoni tekston, vi devas uzi citilojn ankaŭ ĉi tie.\nĈu vi kompletigas la kodon enmetante la ĝustajn komandojn aŭ signojn sur la substrekoj?<!--{if}-->\n"
+                story_text: "En ĉi tiu nivelo ni povas plu programi rokon, paperon, tondilon. Sed se vi volas aldoni tekston, vi devas uzi citilojn ankaŭ ĉi tie.\nĈu vi kompletigas la kodon enmetante la ĝustajn komandojn aŭ signojn sur la substrekoj?<!--{if}-->\n"
                 start_code: "{print} 'Bonvenon al ludo de roko, papero kaj tondilo!'"
             5:
-                story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo ni povas determini kiu venkis.\nPor tio vi bezonas la novan kodon `{if}`.\n\nKonservu vian elekton kun la elektonomo kaj la elekto de komputilo kiel komputila elekto.\nTiam vi povas uzi `{if}` por vidi {if} ili estas samaj aŭ malsamaj.\nĈu vi finos la kodon?\n"
+                story_text: "En ĉi tiu nivelo ni povas determini kiu venkis.\nPor tio vi bezonas la novan kodon `{if}`.\n\nKonservu vian elekton kun la elektonomo kaj la elekto de komputilo kiel komputila elekto.\nTiam vi povas uzi `{if}` por vidi {if} ili estas samaj aŭ malsamaj.\nĈu vi finos la kodon?\n"
                 example_code: "```\nopcioj {is} roko, papero, tondilo\nkomputila_elekto {is} _\nelekto {is} {ask} 'Kion vi elektas?'\n{print} 'vi elektis' _\n{print} 'komputilo elektis' _\n{if} _ {is} _ {print} 'vana partio!' {else} {print} 'nevana partio'\n```\n\nPlenigu la ĝustan kodon en la spacoj por kontroli, ĉu la partio estas vana.\n"
                 start_code: "{print} 'Bonvenon al ludo de roko, papero kaj tondilo!'"
             9:
-                story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo, vi povas programi la tutan ludon de roko, papero kaj tondilo ingante la {if}-komandojn. Ĉu vi povas fini la kodon?\n"
+                story_text: "En ĉi tiu nivelo, vi povas programi la tutan ludon de roko, papero kaj tondilo ingante la {if}-komandojn. Ĉu vi povas fini la kodon?\n"
                 example_code: "```\nelektoj {is} roko, papero, tondilo\nvia_elekto {is} {ask} 'Kion vi elektas?'\n{print} 'Vi elektas ' via_elekto 'n'\nkomputila_elekto {is} elektoj {at} {random}\n{print} 'La komputilo elektas ' komputila_elekto 'n'\n{if} komputila_elekto {is} via_elekto\n    {print} 'Vana partio'\n{if} komputila_elekto {is} roko\n    {if} via_elekto {is} papero\n        {print} 'Vi gajnas!'\n    {if} via_elekto {is} tondilo\n        {print} 'Vi malgajnas!'\n# finu ĉi tiun kodon\n```\n"
                 start_code: '# via kodo ĉi tie'
             10:
-                story_text: "## Roko, Papero, Tondilo\nĈu vi estas tro maldiligenta por ludi la ludon mem? Lasu Hedy ludi ĝin por vi!\n"
+                story_text: "Ĉu vi estas tro maldiligenta por ludi la ludon mem? Lasu Hedy ludi ĝin por vi!\n"
                 example_code: "```\nelektoj = roko, papero, tondilo\nludantoj = Margareto, Miĥaelo\n{for} ludanto {in} ludantoj\n     {print} ludanto ' elektas la jenon: ' elektoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
             13:
-                story_text: "## Roko, papero, tondilo\nPer la komando `{and}`, vi povas mallongigi vian kodon por la ludo! Rigardu la jenan ekzemplokodon kaj provu kompletigi ĝin.\n"
+                story_text: "Per la komando `{and}`, vi povas mallongigi vian kodon por la ludo! Rigardu la jenan ekzemplokodon kaj provu kompletigi ĝin.\n"
                 example_code: "```\nopcioj = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = opcioj {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'Vi gajnas!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'La komputilo gajnas!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             15:
-                story_text: "## Roko, Papero, Tondilo\nLudu ĝis vi gajnos! Sed unue, kompletigu la ekzemplan kodon…\n"
+                story_text: "Ludu ĝis vi gajnos! Sed unue, kompletigu la ekzemplan kodon…\n"
                 example_code: "```\ngajnis = 'ne'\nopcioj = 'roko', 'papero', 'tondilo'\n{while} gajnis == 'ne'\n    via_elekto = {ask} 'Kion vi elektas?'\n    komputila_elekto = opcioj {at} {random}\n    {print} 'vi elektis ' via_elekto 'n'\n    {print} 'la komputilo elektis ' komputila_elekto 'n'\n    {if} komputila_elekto == via_elekto\n        {print} 'Vana partio!'\n    {if} komputila_elekto == 'roko' {and} via_elekto == 'tondilo'\n        {print} 'Vi perdas la partion!'\n    {if} komputila_elekto == 'roko' {and} via_elekto == 'papero'\n        {print} 'Vi gajnas la partion!'\n        gajnis = 'jes'\n```\n"
                 start_code: '# via kodo ĉi tie'
     calculator:
@@ -514,7 +514,7 @@ adventures:
                 example_code: "```\nnomo = {ask} 'kio estas via nomo?'\naĝo = {ask} 'kia estas via aĝo?'\n{if} nomo {is} 'Hedy' {and} aĝo {is} 2\n    {print} 'Vi estas la vera Hedy!'\n```\n"
             14:
                 start_code: "aĝo = {ask} 'Kia estas via aĝo?'\n{if} aĝo < 13\n    {print} 'Vi estas malpli aĝa ol mi!'\n{else}\n    {print} 'Vi estas pli aĝa ol mi!'"
-                story_text: "## Granda, pli granda, plej granda!\nNi lernos pli da novaj sintaksaĵoj. Vi eble jam konas ilin pro matematiko: la `<` kaj `>`.\nLa `<` kontrolas, ĉu la unua nombro estas pli malgranda ol la dua: ekzemple `aĝo < 12` kontrolas, ĉu `aĝo` estas pli malgranda ol `12`.\nSe vi volas kontroli, ĉu la unua nombro estas pli malgranda aŭ egala al la dua, vi povas uzi `<=`: ekzemple, `aĝo <= 11`.\nLa `>` kontrolas, ĉu la unua nombro estas pli granda ol la dua: ekzemple, `poentaro > 10` kontrolas, ĉu `poentaro` estas pli granda ol `10`.\nSe oni volas kontroli, ĉu la unua nombro estas pli granda aŭ egala al la dua, oni povas uzi `>=`: ekzemple, `poentaro >= 11`.\nOni uzas tiujn komparojn en `{if}` jene:\n"
+                story_text: "Ni lernos pli da novaj sintaksaĵoj. Vi eble jam konas ilin pro matematiko: la `<` kaj `>`.\nLa `<` kontrolas, ĉu la unua nombro estas pli malgranda ol la dua: ekzemple `aĝo < 12` kontrolas, ĉu `aĝo` estas pli malgranda ol `12`.\nSe vi volas kontroli, ĉu la unua nombro estas pli malgranda aŭ egala al la dua, vi povas uzi `<=`: ekzemple, `aĝo <= 11`.\nLa `>` kontrolas, ĉu la unua nombro estas pli granda ol la dua: ekzemple, `poentaro > 10` kontrolas, ĉu `poentaro` estas pli granda ol `10`.\nSe oni volas kontroli, ĉu la unua nombro estas pli granda aŭ egala al la dua, oni povas uzi `>=`: ekzemple, `poentaro >= 11`.\nOni uzas tiujn komparojn en `{if}` jene:\n"
                 example_code: "```\naĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo > 12\n    {print} 'Vi estas pli aĝa ol mi!'\n```\n"
                 story_text_2: "Ekde ĉi tiu nivelo, se oni volas precize kompari, oni povas uzi du egalsignojn, simile al multaj programlingvoj:\n"
                 example_code_2: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo == 'Hedy'\n    {print} 'Bonege!'\n```\n"

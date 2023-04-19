@@ -126,7 +126,7 @@ adventures:
                 example_code: "```\n{for} contador {in} {range} 1 {to} 5\n    {print} contador\n```\n"
             12:
                 start_code: "{print} 'los números decimales ahora necesitan usar un punto'\n{print} 2.5 + 2.5"
-                story_text: "## Números y textos\n**Números decimales**\nHasta ahora, Hedy no permitía números decimales como 1.5, pero a partir de ahora sí lo permitiremos. Fíjate que los ordenadores utilizan el punto `.` para los decimales, no la coma."
+                story_text: "**Números decimales**\nHasta ahora, Hedy no permitía números decimales como 1.5, pero a partir de ahora sí lo permitiremos. Fíjate que los ordenadores utilizan el punto `.` para los decimales, no la coma."
                 example_code_2: "```\nnombre = 'Hedy el Robot'\n{print} 'Hola ' nombre\n```\n"
                 example_code: "```\n{print} 'Dos y medio más dos y medio es...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Todos los textos deben ir entre comillas**.\nA partir de este nivel también tendrás que usar comillas cuando guardes un texto con `=`:\n"
@@ -951,10 +951,10 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} '¡Bienvenide a tu propia calculadora!'"
-                story_text_3: "## Números aleatorios\nTambién puedes hacer que la computadora haga sumas aleatorias por su propia cuenta.\nAsí es como puedes escoger un número de tablas para practicar, y de ahí puedes tener siempre una suma diferente:\n"
+                story_text_3: "También puedes hacer que la computadora haga sumas aleatorias por su propia cuenta.\nAsí es como puedes escoger un número de tablas para practicar, y de ahí puedes tener siempre una suma diferente:\n"
                 example_code_3: "```\ntablas = 4, 5, 6, 8\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabla = tablas {at} {random}\nnúmero = números {at} {random}\nrespuesta_correcta = tabla * número\nrespuesta = {ask} 'cuanto es ' tabla ' por ' número '?'\n{if} respuesta {is} respuesta_correcta {print} 'bien'\n{else} {print} '¡no! la respuesta correcta es ' respuesta_correcta\n```\n"
             14:
-                story_text: "## Adivina el número\nEn este nivel puedes programar el juego 'Adivina el número'\n"
+                story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
                 example_code: "```\n{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        intento = {ask} '¿Que número piensas que es?'\n        {if} intento > número\n            {print} '¡Muy alto!'\n        {if} intento < número\n            {print} '!Muy bajo!'\n        {if} intento == número\n            {print} '¡Ganaste!'\n            juego = 'terminó'\n```\n"
                 start_code: '# pon tú código aquí'
             12:

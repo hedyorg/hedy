@@ -225,42 +225,42 @@ adventures:
         levels:
             9:
                 start_code: '# skriv koden din her'
-                story_text: "## Stein, saks, papir\nPå dette nivået kan du programmere hele stein, saks, papir ved å plassere `{if}`-kommandoer inni `{if}`-kommandoer. Kan du fullføre koden?\n"
+                story_text: "På dette nivået kan du programmere hele stein, saks, papir ved å plassere `{if}`-kommandoer inni `{if}`-kommandoer. Kan du fullføre koden?\n"
                 example_code: "```\nvalgene {is} stein, saks, papir\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'Du valgte ' ditt_valg\ndatamaskinens_valg {is} valgene {at} {random}\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} stein\n    {if} ditt_valg {is} papir\n        {print} 'Du vant!'\n    {if} ditt_valg {is} saks\n        {print} 'Du tapte!'\n```\n"
             1:
-                story_text: "## Stein, saks, papir\nPå nivå 1 kan du starte med spillet stein, saks, papir.\n\nMed `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.\n"
+                story_text: "På nivå 1 kan du starte med spillet stein, saks, papir.\n\nMed `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.\n"
                 example_code: "\n```\n{print} hva velger du?\n{ask} velg mellom stein, saks, papir\n{echo} du valgte:\n```\nIstedenfor å bruke ord så kan du selvfølgelig bruke emoji: ✊✋✌\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
                 story_text_2: "### Exercise\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             10:
-                story_text: "## Stein, saks, papir\nEr du for lat til å spille spillet selv? La Hedy spille det for deg!\n"
+                story_text: "Er du for lat til å spille spillet selv? La Hedy spille det for deg!\n"
                 example_code: "```\nvalgene = stein, saks, papir\nspillere = Maren, Magnus\n{for} spiller {in} spillere\n     {print} spiller ' velger ' valgene {at} {random}\n```\n"
                 start_code: '# skriv koden din her'
             5:
-                story_text: "## Stein, saks, papir\nPå dette nivået kan vi bestemme hvem som vant.\nTil det trenger vi den nye `{if}`-koden.\n\nTa vare på ditt valg og datamaskinens valg.\nSå kan du bruke `{if}` for å se om de er det samme eller forskjellig.\nKan du fullføre koden?\n"
+                story_text: "På dette nivået kan vi bestemme hvem som vant.\nTil det trenger vi den nye `{if}`-koden.\n\nTa vare på ditt valg og datamaskinens valg.\nSå kan du bruke `{if}` for å se om de er det samme eller forskjellig.\nKan du fullføre koden?\n"
                 example_code: "```\nvalgene {is} stein, saks, papir\ndatamaskin_valg {is} _\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'du velger ' _\n{print} 'datamaskinen velger ' _\n{if} _ {is} _ {print} 'uavgjort!' {else} {print} 'ikke uavgjort'\n```\n\nFyll ut resten av koden der det er linjer for å se om det er uavgjort.\n"
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             4:
-                story_text: "## Stein, saks, papir\nPå dette nivået kan vi programmere videre på stein, saks, papir. Om du vil legge til tekst må du bruke fnutter her også.\nKan du fullføre koden ved å fylle ut de riktige kommandoene og tengene der det er streker?\n"
+                story_text: "På dette nivået kan vi programmere videre på stein, saks, papir. Om du vil legge til tekst må du bruke fnutter her også.\nKan du fullføre koden ved å fylle ut de riktige kommandoene og tengene der det er streker?\n"
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             3:
-                story_text: "## Stein, saks, papir\n\nPå dette nivået kan vi lage lister og velge ting fra de.\nDu kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.\nFor eksempel så kan du la datamaskinen velge mellom stein, saks og papir.\n"
+                story_text: "\nPå dette nivået kan vi lage lister og velge ting fra de.\nDu kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.\nFor eksempel så kan du la datamaskinen velge mellom stein, saks og papir.\n"
                 example_code: "\n```\nvalgene {is} stein, saks, papir\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
                 story_text_2: "### Exercise\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
-                story_text: "## Stein, saks, papir\nPå dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
+                story_text: "På dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
                 example_code: "```\nvalg {is} _\n{print} Jeg velger valg\n```\n"
                 start_code: '# skriv koden din her'
                 story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
-                story_text: "## Stein, saks, papir\nSpill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
+                story_text: "Spill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
                 example_code: "```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = valgene {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
                 start_code: '# skriv koden din her'
             13:
-                story_text: "## Stein, saks, papir\nMed `{and}`-kommandoen kan du korte ned stein, saks, papir-koden din! Sjekk ut eksempelkoden under og prøv å fullføre den.\n"
+                story_text: "Med `{and}`-kommandoen kan du korte ned stein, saks, papir-koden din! Sjekk ut eksempelkoden under og prøv å fullføre den.\n"
                 example_code: "```\nvalgene = 'stein', 'saks', 'papir'\nditt_valg = {ask} 'Hva velger du?'\ndatamaskinens_valg = valgene {at} {random}\n{print} 'Du valgte ' ditt_valg\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} 'stein' {and} ditt_valg {is} 'papir'\n    {print} 'Du vant!'\n{if} datamaskinens_valg {is} 'stein' {and} ditt_valg {is} 'saks'\n    {print} 'Datamaskinen vant!'\n```\n"
                 start_code: '# skriv koden din her'
         name: Stein, saks, papir
