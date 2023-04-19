@@ -358,7 +358,7 @@ adventures:
                 example_code_2: "```\n_ courses = appetizer, main course, dessert\n_ names = Timon, Onno\n_ {for} name {in} names\n_ {for} course {in} courses\n_ food = {ask} name ', what would you like to eat as your ' course '?'\n_ {print} name ' orders ' food ' as their ' course\n```\n"
             11:
                 start_code: '# place your code here'
-                story_text: "We can use the `{for} i {in} {range} 1 {to} 5` to `{print}` the orders from multiple customers in an orderly manner.\n\n## Challange\nCan you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!\n"
+                story_text: "We can use the `{for} i {in} {range} 1 {to} 5` to `{print}` the orders from multiple customers in an orderly manner.\n\n### Exercise\nCan you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!\n"
                 example_code: "```\n{print} 'Welcome to Restaurant Hedy!'\npeople = {ask} 'For how many people would you like to order?'\n{for} i {in} {range} 1 {to} people\n_ {print} 'Order number ' i\n_ food = {ask} 'What would you like to eat?'\n_ {print} food\n_ {if} food {is} fries\n_ sauce = {ask} 'What kind of sauce would you like with that?'\n_ {print} sauce\n_ drinks = {ask} 'What would you like to drink?'\n_ {print} drinks\nprice = 4 * people\n{print} 'That will be ' price ' dollars, please!'\n```\n"
             5:
                 example_code: "```\n{print} 'Welcome to Hedys restaurant!'\nspecial {is} {ask} 'Would you like to hear our specials today?'\n{if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'One ' food ', coming right up!'\ndrink {is} {ask} 'What would you like to drink with that?'\n{if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'\nanything {is} {ask} 'Would you like anything {else}?'\n{print} 'Let me repeat your order...'\n{print} 'One ' food\n{if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink\n{if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything\n{print} 'Thank you for your order and enjoy your meal!'\n```\n"
@@ -394,7 +394,7 @@ adventures:
                 example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\nprice = 0\n{repeat} people {times}\n_ food = {ask} 'What would you like to order?'\n_ {print} food\n_ {if} food {is} fries\n_ price = price + 3\n_ sauce = {ask} 'What kind of sauce would you like with your fries?'\n_ {if} sauce {is} no\n_ {print} 'no sauce'\n_ {else}\n_ price = price + 1\n_ {print} 'with ' sauce\n_ {if} food {is} pizza\n_ price = price + 4\n{print} 'That will be ' price ' dollar'\n{print} 'Enjoy your meal!'\n```\n"
                 start_code: '# place your code here'
             12:
-                story_text: "From this level on you can use decimal numbers to make you menu more realistic.\n\n## Challange\nCan you think of a code to give your friends and family a 15% discount?\n"
+                story_text: "From this level on you can use decimal numbers to make you menu more realistic.\n\n### Exercise\nCan you think of a code to give your friends and family a 15% discount?\n"
                 example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
                 start_code: '# place your code here'
             13:
@@ -427,7 +427,7 @@ adventures:
                 start_code: "{print} 'Salut lume'"
                 story_text: "La nivelul 4 `{intreabă}` și `{printează}` s-au schimbat.\n\nTrebuie să puneți textul pe care doriți să-l afișați între apostrofuri.\n\nAcest lucru este util, deoarece acum puteți tipări toate cuvintele dorite. De asemenea, cuvintele pe care le-ați folosit pentru a stoca ceva cu `{este}`.\n\nMajoritatea limbajelor de programare folosesc apostrofuri sau ghilimele pentru afișare, așa că suntem cu un pas mai aproape de programarea reală!\n"
                 example_code: "```\n{print} 'Trebuie să folosești apostrofuri de acum înainte!'\nrăspuns {is} {ask} 'Ce trebuie să folosim de acum înainte?'\n{print} 'Trebuie să folosim' răspuns\n```\n"
-                story_text_2: "## Contracții\nImportant! Intrucât de acum inainte vom folosi ghilimele, Hedy va confunda ghilimelele cu apostroful. \nValabil doar pentru limba engleza. În românește nu exista contracții cu ghilimele și apostrof.\n"
+                story_text_2: "Important! Intrucât de acum inainte vom folosi ghilimele, Hedy va confunda ghilimelele cu apostroful. \nValabil doar pentru limba engleza. În românește nu exista contracții cu ghilimele și apostrof.\n"
                 example_code_2: "```\n_ Această metodă de a utiliza apostrofuri este incorectă _\n{print} 'Am grijă de copii surorii mele'\n{print} 'Ce altceva este mai distractiv ?'\n```\n"
             11:
                 start_code: "{for} contor {in} {range} 1 {to} 5\n    {print} contor"
@@ -472,11 +472,11 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy e distractiv!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Salut oameni buni'\n    {print} 'Aceasta va fi afișată de 5 ori'"
-                story_text: "## Indentație\n`{ask}` și `{print}` funcționează în continuare așa cum le cunoști. Dar `{if}`, `{else}`, {pressed} și `{repeat}` s-au schimbat!\nAcum poți grupa mai multe linii împreună, dar va trebui să *indentezi* codul.\nAsta înseamnă să pui patru spații la începutul liniei. De asemenea, va trebui să indentezi atunci când dorești doar să creezi un bloc de o linie.\n"
+                story_text: "`{ask}` și `{print}` funcționează în continuare așa cum le cunoști. Dar `{if}`, `{else}`, {pressed} și `{repeat}` s-au schimbat!\nAcum poți grupa mai multe linii împreună, dar va trebui să *indentezi* codul.\nAsta înseamnă să pui patru spații la începutul liniei. De asemenea, va trebui să indentezi atunci când dorești doar să creezi un bloc de o linie.\n"
                 example_code: "Iată cum funcționează comanda `{repeat}` acum:\n```\n{repeat} 5 {times}\n    {print} 'Salut tuturor'\n    {print} 'Totul se repetă de 5 ori'\n```\nIată cum funcționează acum comanda `{if}` și `{else}`:\n\n```\nnume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy\n    {print} 'Bun venit Hedy'\n    {print} 'Te poți juca pe calculatorul tău!'\n{else}\n    {print} 'INTRUS!'\n    {print} 'Nu puteți folosi acest calculator!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mâncare = {ask} 'Ce dorești?'\n    {if} mâncare {is} pizza\n        {print} 'grozav!'\n    {else}\n        {print} 'pizza e mai bună'"
-                story_text: "##  Toate împreună acum!\nÎn acest nivel nu numai că poți folosi mai multe linii cu `{if}` și `{repeat}`, dar le poți combina!\nÎn exemplu vezi o comandă `{if}` într-o comandă `{repeat}`. Este permis și invers, de asemenea un `{if}` este permis într-un `{if}` și un `{repeat}` într-un `{repeat}`.\nÎncearcă!\n"
+                story_text: "În acest nivel nu numai că poți folosi mai multe linii cu `{if}` și `{repeat}`, dar le poți combina!\nÎn exemplu vezi o comandă `{if}` într-o comandă `{repeat}`. Este permis și invers, de asemenea un `{if}` este permis într-un `{if}` și un `{repeat}` într-un `{repeat}`.\nÎncearcă!\n"
                 example_code: "```\n{repeat} 3 {times}\n    mâncare = {ask} 'Ce dorești?'\n    {if} mâncare {is} pizza\n        {print} 'grozav!'\n    {else}\n        {print} 'pizza e mai bună'\n```\n"
             10:
                 start_code: "animale {is} câine, pisică, biban\n{for} animal {in} animale\n  {print} 'Îmi place' animal"
@@ -484,7 +484,7 @@ adventures:
                 example_code: "```\nanimale {is} câine, pisică, biban\n{for} animal {in} animale\n  {print} 'Îmi place' animal\n```\n"
             12:
                 start_code: "{print} 'numerele zecimale au acum nevoie de un punct'\n{print} 2.5 + 2.5"
-                story_text: "## Numere și texte\n**Numere zecimale**\nPână acum, Hedy nu permitea numere zecimale precum 1.5, dar acum permite asta. Rețineți că folosim `.` pentru numere zecimale, nu virgulă."
+                story_text: "**Numere zecimale**\nPână acum, Hedy nu permitea numere zecimale precum 1.5, dar acum permite asta. Rețineți că folosim `.` pentru numere zecimale, nu virgulă."
                 example_code: "```\n{print} 'Doi și jumătate plus doi și jumătate face...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Toate textele trebuie să fie între apostrofuri**\nDe la acest nivel, va trebui să utilizați apostrofuri și atunci când stocați un text cu `=`:\n"
                 example_code_2: "```\nnume = 'Hedy Robotul'\n{print} 'Salut ' nume\n```\n"

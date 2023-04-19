@@ -124,7 +124,7 @@ adventures:
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             3:
-                story_text: "## Serĉanta testudo\nEn ĉi tiu nivelo, oni povas uzi `{at} {random}` kun la desegnanta testudo. Hazarda elekto igas la testudon marŝi laŭ malsamaj vojoj ĉiufoje.\nUzu `{at} {random}` por elekti valoron el listo. Vi povas kopii kaj alglui liniojn 2 kaj 3 por krei pli longan hazardan vojon.\n"
+                story_text: "En ĉi tiu nivelo, oni povas uzi `{at} {random}` kun la desegnanta testudo. Hazarda elekto igas la testudon marŝi laŭ malsamaj vojoj ĉiufoje.\nUzu `{at} {random}` por elekti valoron el listo. Vi povas kopii kaj alglui liniojn 2 kaj 3 por krei pli longan hazardan vojon.\n"
                 example_code: "```\nanguloj {is} 10, 50, 90, 150, 250\n{turn} anguloj {at} {random}\n{forward} 25\n```\n"
                 start_code: "anguloj {is} 10, 50, 90, 150, 250\n{turn} anguloj {at} {random}\n{forward} 25"
             4:
@@ -175,7 +175,7 @@ adventures:
             6:
                 story_text: "Kiom ofte ĉiuj lavos la telerojn? Ĉu tio estas justa? Vi povas kalkuli tion en ĉi tiu nivelo.\n"
                 example_code: "```\nhomoj = panjo, paĉjo, Emilio, Sofio\nemilio_lavoj = 0\nlavonto = homoj {at} {random}\n{print} 'La lavonto estas' lavonto\n{if} lavonto {is} Emilio emilio_lavoj = emilio_lavoj + 1\n{print} 'Emilio lavos la telerojn ĉi-semajne' emilio_lavoj 'fojojn'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Faru ĝin justa\nSe vi estas ege malbonŝanca, la antaŭa programo eble elektos vin al la pladoj por la tuta semajno! Tio ne estas justa!\nPor krei pli justan sistemon vi povas uzi la komandon `{remove}` por forigi la elektitan personon el la listo. Tiel vi ne devas refari la pladojn ĝis ĉiuj havas turnon.\n\nLundo kaj mardo estas pretaj por vi! Ĉu vi povas aldoni la reston de la semajno?\nKaj... ĉu vi povas elpensi solvon por kiam via listo estas malplena?\n"
+                story_text_2: "Se vi estas ege malbonŝanca, la antaŭa programo eble elektos vin al la pladoj por la tuta semajno! Tio ne estas justa!\nPor krei pli justan sistemon vi povas uzi la komandon `{remove}` por forigi la elektitan personon el la listo. Tiel vi ne devas refari la pladojn ĝis ĉiuj havas turnon.\n\nLundo kaj mardo estas pretaj por vi! Ĉu vi povas aldoni la reston de la semajno?\nKaj... ĉu vi povas elpensi solvon por kiam via listo estas malplena?\n"
                 example_code_2: "```\nhomoj = panjo, paĉjo, Emilio, Sofio\nlavonto = homoj {at} {random}\n{print} 'Lunde la telerojn lavos: ' lavonto\n{remove} lavonto {from} homoj\nlavonto = homoj {at} {random}\n{print} 'Marde la telerojn lavos: ' lavonto\n{remove} lavonto {from} homoj\nlavonto = homoj {at} {random}\n```\n"
                 start_code: "{print} 'Kiu lavos la telerojn?'"
             7:
@@ -459,7 +459,7 @@ adventures:
                 start_code: "{print} 'Saluton, mondo'"
                 story_text: "En Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
                 example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
-                story_text_2: "## Aventuroj fariĝas pli kaj pli malfacilaj\nLa aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
+                story_text_2: "La aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
@@ -486,11 +486,11 @@ adventures:
                 example_code: "Jen kiel la komando `{repeat}` funkcias nun:\n```\n{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen ĉio ripetota 5 fojojn'\n```\nJen kiel la komandoj `{if}` kaj `{else}` funkcias nun:\n\n```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy\n    {print} 'Bonvenon Hedy'\n    {print} 'Vi povas ludi per via komputilo!'\n{else}\n    {print} 'ENTRUDULO!'\n    {print} 'Vi ne rajtas uzi ĉi tiun komputilon!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'Bonege!'\n    {else}\n        {print} 'Pico estas preferinda.'"
-                story_text: "## Ĉio kune nun!\nEn ĉi tiu nivelo, oni povas ne nur uzi plurajn liniojn kun `{if}` kaj `{repeat}`, sed oni ankaŭ povas kunmeti ilin!\nLa jena ekzemplo enhavas `{if}`-blokon ene de `{repeat}`-bloko. La mala ordo estas ankaŭ permesata, kaj ankaŭ `{if}` ene de `{if}` kaj `{repeat}` ene de `{repeat}`.\nProvu tion!\n"
+                story_text: "En ĉi tiu nivelo, oni povas ne nur uzi plurajn liniojn kun `{if}` kaj `{repeat}`, sed oni ankaŭ povas kunmeti ilin!\nLa jena ekzemplo enhavas `{if}`-blokon ene de `{repeat}`-bloko. La mala ordo estas ankaŭ permesata, kaj ankaŭ `{if}` ene de `{if}` kaj `{repeat}` ene de `{repeat}`.\nProvu tion!\n"
                 example_code: "```\n{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'bone!'\n    {else}\n        {print} 'vi preferu picon'\n```\n"
             10:
                 start_code: "bestoj {is} hundo, kato, fiŝo\n{for} besto {in} bestoj\n  {print} 'Mi amas ' besto 'n'"
-                story_text: "## Por ĉiu elemento en mia listo…\nEn ĉi tiu nivelo, ni lernas novan kodon nomitan `{for}`. Per `{for}` oni povas fari liston kaj uzi ĉiujn elementojn.\n`{for}` kreas blokon simile al `{repeat}` kaj `{if}`; do ĉiuj linioj en la bloko devas komenci per spacetoj."
+                story_text: "En ĉi tiu nivelo, ni lernas novan kodon nomitan `{for}`. Per `{for}` oni povas fari liston kaj uzi ĉiujn elementojn.\n`{for}` kreas blokon simile al `{repeat}` kaj `{if}`; do ĉiuj linioj en la bloko devas komenci per spacetoj."
                 example_code: "```\nbestoj {is} hundo, kato, fiŝo\n{for} besto {in} bestoj\n  {print} 'Mi amas ' besto 'n'\n```\n"
             11:
                 start_code: "{for} nombro {in} {range} 1 {to} 5\n    {print} nombro"

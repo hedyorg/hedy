@@ -107,7 +107,7 @@ adventures:
                     ```
             9:
                 start_code: "{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres comer?'\n    {if} comida {is} 'pizza'\n        {print} '¡bien!'\n    {else}\n        {print} 'pizza es mejor'"
-                story_text: "## ¡Todo junto ahora!\nEn este nivel no solo puedes usar múltiples líneas con `{if}` y `{repeat}`, ¡pero también los puedes usar juntos!\nEn el ejemplo puedes ver un comando `{if}` dentro de un `{repeat}`. También está permitido de forma contraria, y un `{if}` también está permitido dentro de un `{if}` y un `{repeat}` dentro de un `{repeat}`.\nGive it a try!\n"
+                story_text: "En este nivel no solo puedes usar múltiples líneas con `{if}` y `{repeat}`, ¡pero también los puedes usar juntos!\nEn el ejemplo puedes ver un comando `{if}` dentro de un `{repeat}`. También está permitido de forma contraria, y un `{if}` también está permitido dentro de un `{if}` y un `{repeat}` dentro de un `{repeat}`.\nGive it a try!\n"
                 example_code: "```\n{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres?'\n    {if} comida {is} pizza\n        {print} '¡bien!'\n    {else}\n        {print} 'mejor pizza'\n```\n"
             10:
                 story_text: "En este nivel vamos a aprender un nuevo código llamado `{for}`. Con `{for}` Puedes hacer una lista y usar todos sus elementos.\n`{for}` crea un bloque, como `{repeat}` y `{if}` por lo que todas las líneas del bloque necesitan empezar con espacios."
@@ -154,7 +154,7 @@ adventures:
                 example_code: "```\nrespuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} '¿Cuánto es 5 por 5?'\n{print} 'Una respuesta correcta ha sido dada'\n```\n"
             16:
                 start_code: "fruta = ['manzana', 'banana', 'cereza']\n{print} fruta"
-                story_text: "## ¡Cada vez nos acercamos más al código profesional!\nVamos a hacer listas como en Python, ¡con corchetes ('[]') alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista. El comando {at} no puede ser usado mas."
+                story_text: "Vamos a hacer listas como en Python, ¡con corchetes ('[]') alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista. El comando {at} no puede ser usado mas."
                 example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
@@ -162,7 +162,7 @@ adventures:
                 example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
-                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con `{print}` y `{range}` de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
+                story_text: "¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con `{print}` y `{range}` de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
                 story_text_2: Si quieres mostrar por pantalla mas de un elemento, debes separarlos con comas.
                 example_code_2: "```\ntemperatura = 25\n{print}('Hace ', temperatura, ' grados afuera')\n```\n"
                 story_text_3: "El último cambio que necesitaremos para escribir en Python es cambiar `{ask}` por `{input}`."
@@ -409,7 +409,7 @@ adventures:
                 story_text_2: "Esta canción de niños cuenta desde 5 monos hasta un mono.\n¡Si copias las líneas 2 a 7 debajo del código, puedes cantar toda la canción!\n"
             12:
                 example_code: "```\n_ acciones = 'aplaude', 'mueve los pies así', '¡grita hurra!'\n_ {for} accion {in} acciones\n_ {for} i {in} {range} 1 {to} 2\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n_ {print} 'Si en verdad estas contento tu sonrisa es el reflejo'\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n```\n"
-                story_text: "## ¡Canta una canción!\nEn esta canción podemos hacer aún más fácil programar 'si eres feliz y lo sabes, aplaude'. Porque podemos poner todas las acciones en una variable, compruébalo:\n\n### Ejercicio\n¿Puedes añadir la cantidad correcta de sangría a cada línea para que la canción se reproduzca correctamente?\nNota: No todas las líneas necesitan sangría\n"
+                story_text: "En esta canción podemos hacer aún más fácil programar 'si eres feliz y lo sabes, aplaude'. Porque podemos poner todas las acciones en una variable, compruébalo:\n\n### Ejercicio\n¿Puedes añadir la cantidad correcta de sangría a cada línea para que la canción se reproduzca correctamente?\nNota: No todas las líneas necesitan sangría\n"
                 start_code: '# pon tu código aquí'
             11:
                 story_text: "En este nivel, podrás usar el comando `{for}` con `{range}` para crear canciones que utilizan cuentas, como cinco pequeños monitos.\n\n### Ejercicio 1\n¡Rellena los espacios y haz que el código funcione! Si no recuerdas la letra de la canción, buscala!\n\n### Ejercicio 2\nLa ultima linea de la cancion es diferente de las demás. Escribe esta linea dentro de `{for}`, y usa `{if}` para hacer que funcione correctamente.\n"
@@ -422,7 +422,7 @@ adventures:
                 example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
                 story_text_2: "### Ejercicio 2\nEscribe la cancion 5 pequeños monos saltando en la cama. Mira el texto sin no lo recuerdas.\n\n**(extra)** Escribe la cancion el viejo MacDonald tenia una granja, y asegurate que todos los animales hagan sonidos diferentes usando `{if}`.\n"
             16:
-                story_text: "## ¡Canta una canción!\nEn este nivel puedes programar una canción como la del Viejo McDonald incluso más rápido. Puedes conectar el animal con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.\nEl Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡mira!\n"
+                story_text: "En este nivel puedes programar una canción como la del Viejo McDonald incluso más rápido. Puedes conectar el animal con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.\nEl Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡mira!\n"
                 start_code: '# pon tu código aquí'
                 example_code: "```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Marinero borracho\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
             18:
@@ -1218,7 +1218,7 @@ adventures:
                 story_text: "En los niveles anteriores hiciste la introducción al juego de la casa embrujada, pero como te habrás dado cuenta, la historia siempre termina en un final tenebroso.\nEn este nivel puedes hacer que tu historia sea más interactiva cambiando el resultado del juego; ¡algunas veces te comerán, otras veces escaparás!\n¡Deja que Hedy decida aleatoriamente!\n"
                 start_code: '# pon tu código aquí'
                 story_text_2: "Esta historia es bastante simple, quizás la puedas hacer un poquito más tenebrosa agregando una historia más emocionante.\nTambién, ahora tienes resultados muy limitados, solo hay 3 opciones para lo que está al final de la puerta. ¡Quizás puedas pensar en algunos otros monstruos que agregar a la lista!\n"
-                story_text_3: "## ¡Cambia el juego en un programa de tv!\nPor último, nos gustaría desafiarte a cambiar este juego en un programa de juegos (como los de la televisión) donde escojas una puerta o un maletín ¡y contenga un gran premio!\n¿Lo puedes hacer?\n"
+                story_text_3: "Por último, nos gustaría desafiarte a cambiar este juego en un programa de juegos (como los de la televisión) donde escojas una puerta o un maletín ¡y contenga un gran premio!\n¿Lo puedes hacer?\n"
                 example_code_3: "```\n{print} ¡El gran juego!\n{print} Hay 3 maletines en frente de ti...\n{print} Uno de ellos contiene _\n_\n```\n"
                 example_code_2: "```\n_ Escapa de la casa embrujada!\n_ Hay tres puertas en frente tuyo...\n_ _ _Que puerta vas a elegir?\n_ Elegiste la puerta... desición \nmonstruos _ un zombie, un vampiro, NADA QUE ESCAPARÁS\n_Ya ves...\n{sleep}\n_ _ _ _\n```\n"
         name: La Casa Embrujada

@@ -230,7 +230,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} "Aki bújt, aki nem, megyek!"
-                story_text: "## Egyébként-ha\nMost egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk.\n\nEzen a szinten egy új parancsot is használhatsz: `{elif}`. Az `{elif}` az {else} {if} rövidítése, és szükséged lesz rá, ha 3 (vagy több!) alternatívát szeretnél használni.\nPróbáld ki!"
+                story_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk.\n\nEzen a szinten egy új parancsot is használhatsz: `{elif}`. Az `{elif}` az {else} {if} rövidítése, és szükséged lesz rá, ha 3 (vagy több!) alternatívát szeretnél használni.\nPróbáld ki!"
                 example_code: "```\nárak = [\"1 milliárd forint\", \"egy almás pite\", \"semmi\"]\nsorsolt_ár = árak[{random}]\n{print} \"Nyereményed \" sorsolt_ár\n{if} sorsolt_ár == \"1 milliárd forint\":\n    {print} \"Éljen! Gazdag vagy!\"\n{elif} sorsolt_ár == \"egy almás pite\":\n    {print} \"Szuper! Almás pite!\"\n{else}:\n    {print} \"Több szerencsét legközelebb...\"\n```\n"
             18:
                 start_code: |-
