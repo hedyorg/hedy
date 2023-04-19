@@ -182,7 +182,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
-        # retrieve common errors from the database, but only for the correct class_id
+        # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
@@ -224,13 +224,13 @@ class LiveStatisticsModule(WebsiteModule):
 
     @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
     @requires_login
-    def common_error_details(self, user, class_id):
+    def render_common_error_items(self, user, class_id):
         """
         Handles the rendering of the common error items in the common errors detection list.
         """
 
         collapse, show_c1, show_c2, show_c3 = _args_checks()
-        # retrieve common errors from the database, but only for the correct class_id
+        # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
