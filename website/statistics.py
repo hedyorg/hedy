@@ -179,6 +179,8 @@ class LiveStatisticsModule(WebsiteModule):
         """ Shows information about an individual student when they
         are selected in the student list.
         """
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         # Retrieve common errors from the database for class
@@ -191,6 +193,25 @@ class LiveStatisticsModule(WebsiteModule):
         student = request.args.get("student", default=None, type=str)
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+
+        result = self.db.filtered_programs_for_user(student)
+        student_programs = []
+        for item in result:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 4 lines to show as preview to the user
+            code = "\n".join(item['code'].split("\n")[:4])
+            student_programs.append(
+                {'id': item['id'],
+                 'code': code,
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
 
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -218,6 +239,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={"id": class_id, "students": students,
                         "student": selected_student, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            student_programs=student_programs,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
