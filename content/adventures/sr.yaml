@@ -133,7 +133,7 @@ adventures:
                 start_code: '# ispiši svoj kod ovde'
             15:
                 start_code: '# place your code here'
-                story_text: "`{while} game {is} 'on'`## Priča\nKoristeći petlju `{while}` tvoje priče mogu biti zanimljivije. Na primer, možeš koristiti `{while} game {is} 'on'` da bi mogao da igraš sve dok se igra ne završi.\n\nIli možeš upotrebiti `{while} sword {is} 'lost'` da igrač ne može da nastavi igru sve dok ne nadje nešto.\n"
+                story_text: "`{while} game {is} 'on'Koristeći petlju `{while}` tvoje priče mogu biti zanimljivije. Na primer, možeš koristiti `{while} game {is} 'on'` da bi mogao da igraš sve dok se igra ne završi.\n\nIli možeš upotrebiti `{while} sword {is} 'lost'` da igrač ne može da nastavi igru sve dok ne nadje nešto.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
             1:
                 story_text: "U nivou 1 možeš da osmisliš priču sa različitim glavnim junacima koje ćeš sam uneti.\n\nNa prvoj liniji, koristi `{ask}` i upitaj ko će biti glavni junak priče.\n\nPosle te prve linije, počni sa `{print}` ako rečenica treba da bude ištampana.\nKoristi `{echo}` ako želiš da tvoj glavni junak bude na kraju rečenice.\n"
