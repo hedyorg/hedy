@@ -167,9 +167,8 @@ class LiveStatisticsModule(WebsiteModule):
             )
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
-                        "common_errors": common_errors},
+            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -216,8 +215,9 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "student-space.html",
-            class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "common_errors": common_errors},
+            class_info={"id": class_id, "students": students,
+                        "student": selected_student, "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -260,9 +260,9 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result,
+            class_info={"id": class_id, "students": students, "program_results": result,
                         "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             current_page='my-profile'
         )
 
