@@ -1,7 +1,5 @@
 {% extends "auth.html" %}
 
-{% from "macros/stats-shared.html" import insert_struggle_list_item %}
-
 {% block regular_content %}
 
 <div>
@@ -21,7 +19,7 @@
     <!-- Card 1 Progress indicator collapsed version -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
-        <div class="float-right relative pr-2 pt-1">
+        <div class="float-right relative m-2">
             {% if class_info.show_c1 %}
             <a class="no-underline text-black rounded hover:bg-blue-600"
                href="/live_stats/class/{{class_info.id}}?show_c1=False&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}">
@@ -73,14 +71,14 @@
 
     <div class="justify-center w-full max-w-8xl">
         <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
+            <!-- Card 2 Student List    -->
             <div id="col1">
                 <h2 class="text-center">
                   Student List
                 </h2>
-                <!-- Card 2 Student List    -->
                 {% if class_info.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
-                    <div class="float-right relative pr-2 pt-2">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=False&show_c3={{class_info.show_c3}}">
                             ☝️ Hide
@@ -121,7 +119,7 @@
                 </div>
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
-                    <div class="float-right relative pr-2 pt-1">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2=True&show_c3={{class_info.show_c3}}">
                         👇 Show
@@ -131,37 +129,47 @@
                 {% endif %}
             </div>
 
+            <!-- Card 3 Common Errors -->
             <div id="col2">
                 <h2 class="text-center">
                   Common Errors
                 </h2>
-                <!-- Card 3 Misconceptions feed -->
                 {% if class_info.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
-                    <div class="float-right relative pr-2 pt-1">
+                    <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=False">
                             ☝️ Hide
                         </a>
                     </div>
-                    <div class="w-full text-left p-6">
-                      <ul class="max-w-md space-y-1 list-none list-inside">
-                          {{ insert_struggle_list_item('Common error X detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Y detected once', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                          {{ insert_struggle_list_item('Common error Z detected 2 times', '', "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3) }}
-                      </ul>
+                    <div class="w-full text-left p-6 mt-1">
+                        <ul class="max-w-md space-y-1 list-none list-inside">
+                            {% for error_entry in class_info.common_errors.errors %}
+                                {% if error_entry.active == 1 %}
+                                    <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
+                                      <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~class_info.show_c1~"&show_c2="~class_info.show_c2~"&show_c3="~class_info.show_c3 }}'>
+                                        <h3 class="cursor-pointer hover:text-white">
+                                          {{error_entry.header}}
+                                        </h3>
+                                      </a>
+                                      <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{error_entry.id}}", {{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                   </div>
                 </div>
                 {% else %}
-                    <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
-                        <div class="float-right relative pr-2 pt-1">
-                            <a class="no-underline text-black rounded hover:bg-blue-600"
-                            href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
-                            👇 Show
-                            </a>
-                        </div>
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
+                    <div class="float-right relative m-2">
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}?show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3=True">
+                        👇 Show
+                        </a>
                     </div>
+                </div>
                 {% endif %}
+            </div>
         </div>
     </div>
 
@@ -169,8 +177,4 @@
     {% endblock %}
 </div>
 
-
-
 {% endblock %}
-
-

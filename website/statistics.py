@@ -10,6 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
+from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -49,164 +50,6 @@ class StatisticsModule(WebsiteModule):
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
             javascript_page_options=dict(page='class-stats'),
-        )
-
-    @route("/live_stats/class/<class_id>", methods=["GET"])
-    @requires_login
-    def render_live_stats(self, user, class_id):
-
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        # card 1 boolean
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        # card 2 boolean
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        # card 3 boolean
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
-
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        students = sorted(class_.get("students", []))
-        for student_username in class_.get("students", []):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-        return render_template(
-            "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
-            current_page="my-profile",
-            page_title=gettext("title_class live_statistics"),
-            javascript_page_options=dict(page='class-live-stats'),
-        )
-
-    @route("/live_stats/class/<class_id>/student", methods=["GET"])
-    @requires_login
-    def render_student_details(self, user, class_id):
-        """ Shows information about an individual student when they
-        are selected in the student list.
-        """
-
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
-
-        class_ = self.db.get_class(class_id)
-        students = sorted(class_.get("students", []))
-
-        # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
-        if student not in students:
-            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
-
-        for student_username in class_.get("students", []):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-
-        # Get data for selected student
-        programs = self.db.programs_for_user(student)
-        quiz_scores = self.db.get_quiz_stats([student])
-        finished_quizzes = any("finished" in x for x in quiz_scores)
-        highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-        selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
-
-        return render_template(
-            "student-space.html",
-            class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3},
-            current_page='my-profile',
-            page_title=gettext("title_class live_statistics"),
-            javascript_page_options=dict(page='class-live-stats')
-        )
-
-    @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
-    @requires_login
-    def render_pop_up(self, user, class_id):
-        """
-        Handles the rendering of the pop up items in misconception detection list.
-        """
-
-        collapse = request.args.get("collapse", default="True", type=str)
-        collapse = _determine_bool(collapse)
-
-        show_c1 = request.args.get("show_c1", default="True", type=str)
-        show_c1 = _determine_bool(show_c1)
-
-        show_c2 = request.args.get("show_c2", default="True", type=str)
-        show_c2 = _determine_bool(show_c2)
-
-        show_c3 = request.args.get("show_c3", default="True", type=str)
-        show_c3 = _determine_bool(show_c3)
-
-        class_ = self.db.get_class(class_id)
-        students = sorted(class_.get("students", []))
-
-        # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
-
-        for student_username in class_.get("students", []):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-
-        if student:
-            result = self.db.filtered_programs_for_user(student, limit=10)
-        else:
-            result = []
-
-        return render_template(
-            "class-live-popup.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result},
-            current_page='my-profile',
-            page_title=gettext("title_class live_statistics_popup")
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
@@ -278,6 +121,166 @@ class StatisticsModule(WebsiteModule):
             "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
         }
         return jsonify(response)
+
+
+class LiveStatisticsModule(WebsiteModule):
+    def __init__(self, db: Database):
+        super().__init__("live-stats", __name__)
+        self.db = db
+        self.__error_db_load()
+
+    def __error_db_load(self):
+        """Loads the error data from the json file. Function mainly exists in order to
+        quickly call it again whenever the database needs to be read again for updating purposes.
+        """
+        self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
+        self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
+
+    @route("/live_stats/class/<class_id>", methods=["GET"])
+    @requires_login
+    def render_live_stats(self, user, class_id):
+
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        # Retrieve common errors from the database for class
+        common_errors = self.ERRORS.get({"class_id": class_id})
+
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = sorted(class_.get("students", []))
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+        return render_template(
+            "class-live-stats.html",
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
+                        "common_errors": common_errors},
+            current_page="my-profile",
+            page_title=gettext("title_class live_statistics")
+        )
+
+    @route("/live_stats/class/<class_id>/student", methods=["GET"])
+    @requires_login
+    def render_student_details(self, user, class_id):
+        """ Shows information about an individual student when they
+        are selected in the student list.
+        """
+
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        # Retrieve common errors from the database for class
+        common_errors = self.ERRORS.get({"class_id": class_id})
+
+        class_ = self.db.get_class(class_id)
+        students = sorted(class_.get("students", []))
+
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+        if student not in students:
+            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+
+        # Get data for selected student
+        programs = self.db.programs_for_user(student)
+        quiz_scores = self.db.get_quiz_stats([student])
+        finished_quizzes = any("finished" in x for x in quiz_scores)
+        highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+        selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
+
+        return render_template(
+            "student-space.html",
+            class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "common_errors": common_errors},
+            current_page='my-profile',
+            page_title=gettext("title_class live_statistics")
+        )
+
+    @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
+    @requires_login
+    def render_common_error_items(self, user, class_id):
+        """
+        Handles the rendering of the common error items in the common errors detection list.
+        """
+
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        # Retrieve common errors from the database for class
+        common_errors = self.ERRORS.get({"class_id": class_id})
+
+        class_ = self.db.get_class(class_id)
+        students = sorted(class_.get("students", []))
+
+        # retrieve username of student in question via args
+        student = request.args.get("student", default=None, type=str)
+
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                }
+            )
+
+        if student:
+            result = self.db.filtered_programs_for_user(student, limit=10)
+        else:
+            result = []
+
+        return render_template(
+            "class-live-popup.html",
+            class_info={"id": class_id, "students": students, "collapse": collapse,
+                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result,
+                        "common_errors": common_errors},
+            current_page='my-profile'
+        )
+
+    @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
+    @requires_login
+    def remove_common_error_item(self, user, class_id, error_id):
+        """"
+        Removes the common error item by setting the active flag to 0.
+        """
+        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        for i in range(len(common_errors['errors'])):
+            if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
+                common_errors['errors'][i]['active'] = 0
+                self.ERRORS.put(common_errors)
+                self.__error_db_load()
+                break
+
+        return {}, 200
 
 
 def add(username, action):
@@ -502,6 +505,25 @@ def _determine_bool(bool_str):
     if bool_str == "True":
         return True
     return False
+
+
+def _check_dashboard_display_args():
+    """
+    Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
+    """
+    collapse = request.args.get("collapse", default="True", type=str)
+    collapse = _determine_bool(collapse)
+
+    show_c1 = request.args.get("show_c1", default="True", type=str)
+    show_c1 = _determine_bool(show_c1)
+
+    show_c2 = request.args.get("show_c2", default="True", type=str)
+    show_c2 = _determine_bool(show_c2)
+
+    show_c3 = request.args.get("show_c3", default="True", type=str)
+    show_c3 = _determine_bool(show_c3)
+
+    return collapse, show_c1, show_c2, show_c3
 
 
 def get_general_class_stats(students):
