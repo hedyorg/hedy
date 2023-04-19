@@ -61,6 +61,10 @@ strong {
 .copy-container { @apply max-w-screen-lg mx-auto; }
 .copy-container-wide { @apply max-w-screen-xl mx-auto; }
 
+.text-display-copy, .text-business-copy {
+  @apply leading-relaxed;
+}
+
 /* Apply somewhat fancy styles to running text (good for landing page copy) */
 .text-display-copy h2 {
   text-align: center;
@@ -204,6 +208,7 @@ strong {
 }
 
 /* Styles only for use in MarkDown blocks */
+/* NOTE: I'm pretty sure we don't render class="markdown" anymore anywhere */
 .markdown {
   @apply text-xl text-gray-800 leading-normal;
 }
@@ -250,8 +255,18 @@ pre {
   white-space: pre-wrap;
 }
 
+/**
+ * A container for Ace editors that adds a little padding around it
+ *
+ * (It looks nicer if the text isn't all the way up to the margin
+ */
+.ace-container {
+  background-color: #272822;
+  @apply p-2 rounded;
+}
+
 /* Code in a fenced code block (``` in MarkDown) */
-pre code {
+pre, pre code {
   font-size: 100%;
   color: white;
 }
@@ -358,11 +373,28 @@ code {
 /* Lists */
 
 ul {
-    list-style: disc outside none;
+  list-style: disc outside none;
 }
 
 ol {
-    list-style: decimal outside none;
+  list-style: decimal outside none;
+}
+
+.text-display-copy ul, .text-display-copy ol,
+.text-business-copy ul, .text-business-copy ol {
+  @apply ml-10;
+}
+.text-adventure-copy ul, .text-adventure-copy ol {
+  @apply ml-8;
+}
+
+.text-display-copy ul li + li, .text-display-copy ol li + li,
+.text-business-copy ul li + li, .text-business-copy ol li + li {
+  @apply mt-2;
+}
+
+.text-adventure-copy ul li + li, .text-adventure-copy ol li + li {
+  @apply mt-1;
 }
 
 /* AUTH */
@@ -648,9 +680,9 @@ input:checked ~ .toggle-path {
   @apply bg-gray-600;
 }
 
-/* Quiz styling */
-.option-block {
-  @apply w-full relative block align-top;
+.focused-option {
+  @apply border-double border-8 active;
+  @apply scale-110;
 }
 
 /* Not really nice, but we have to use the !important attribute to overwrite the current style */
@@ -662,32 +694,8 @@ input:checked ~ .toggle-path {
 /* Also not really nice, but with the relic quiz code still an improvement */
 .quiz-icons {
   @apply h-14 w-14 relative;
-  top: -30px;
+  top: -40px;
   left: -10px;
-}
-
-/* Todo: There will be a moment where we want to re-write this to Tailwind as well */
-.submit-button {
-  display: none;
-  min-width: 80px;
-  min-height: 40px;
-  color: rgb(236, 236, 236);
-  background-color:#4299e1;
-  border-color: #1267a6;
-  position: absolute;
-  right: 10px;
-  bottom: -20px;
-  padding: 4px 10px;
-  border-radius: 0.25rem;
-  border-bottom-width: 4px;
-}
-
-.step {
-  @apply flex py-2 gap-1 w-full rounded-lg items-center justify-center;
-}
-
-.current {
-  @apply text-white bg-blue-600 !important;
 }
 
 .animate-keys {

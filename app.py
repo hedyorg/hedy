@@ -2,6 +2,7 @@
 import collections
 import copy
 import logging
+import json
 import datetime
 import os
 import re
@@ -389,6 +390,35 @@ def add_generated_css_file():
     return {
         "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
     }
+
+
+@app.context_processor
+def add_hx_detection():
+    """Detect when a request is sent by HTMX.
+
+    A template may decide to render things differently when it is vs. when it isn't.
+    """
+    hx_request = bool(request.headers.get('Hx-Request'))
+    return {
+        "hx_request": hx_request,
+        "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
+    }
+
+
+@app.after_request
+def hx_triggers(response):
+    """For HTMX Requests, push any pending achievements in the session to the client.
+
+    Use the HX-Trigger header, which will trigger events on the client. There is a listener
+    there which will respond to the 'displayAchievements' event.
+    """
+    if not request.headers.get('HX-Request'):
+        return response
+
+    achs = session.pop('pending_achievements', [])
+    if achs:
+        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
+    return response
 
 
 @app.after_request

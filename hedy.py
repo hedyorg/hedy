@@ -147,7 +147,7 @@ reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 indent_keywords = {}
 for lang, keywords in KEYWORDS.items():
     indent_keywords[lang] = []
-    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else']:
+    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else', 'define', 'def']:
         indent_keywords[lang].append(keyword)  # always also check for En
         indent_keywords[lang].append(keywords.get(keyword))
 
@@ -253,14 +253,14 @@ commands_per_level = {
     8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -554,6 +554,23 @@ class LookupEntryCollector(visitors.Visitor):
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
+
+    def define(self, tree):
+        # add function name to lookup
+        self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
+
+        # add arguments to lookup
+        if tree.children[1].data == 'arguments':
+            for x in (c for c in tree.children[1].children if isinstance(c, Tree)):
+                self.add_to_lookup(x.children[0], tree.children[1], tree.meta.line)
+
+    def call(self, tree):
+        function_name = tree.children[0].children[0]
+        args_str = ""
+        if len(tree.children) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
+                                 for x in tree.children[1].children)
+        self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
     def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
         entry = LookupEntry(name, tree, linenumber, skip_hashing)
@@ -1290,7 +1307,13 @@ class ConvertToPython(Transformer):
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
 
-        return escape_var(variable_name) in all_names_before_access_line
+        is_function = False
+        if isinstance(variable_name, str):
+            pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
+            match = re.match(pattern, variable_name)
+            is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+
+        return escape_var(variable_name) in all_names_before_access_line or is_function
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -2075,6 +2098,15 @@ class ConvertToPython_10(ConvertToPython_8_9):
 @v_args(meta=True)
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
+    def define(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+        return "def " + args[0] + "():\n" + body
+
+    def call(self, meta, args):
+        return f"""{args[0]}()"""
+
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
@@ -2091,6 +2123,24 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 @v_args(meta=True)
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
+    def define(self, meta, args):
+        function_name = args[0]
+        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(
+            args[1], Tree) and args[1].data == "arguments" else ""
+
+        lines = []
+        for line in args[1 if args_str == "" else 2:]:
+            lines.append(line)
+        body = "\n".join(ConvertToPython.indent(x) for x in lines)
+
+        return f"def {function_name}({args_str}):\n{body}"
+
+    def call(self, meta, args):
+        args_str = ""
+        if len(args) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+        return f"{args[0]}({args_str})"
+
     def number(self, meta, args):
         # try all ints? return ints
         try:
@@ -2229,6 +2279,11 @@ class ConvertToPython_13(ConvertToPython_12):
 @v_args(meta=True)
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
+    def returns(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        exception = self.make_catch_exception(args)
+        return exception + f"return f'''{argument_string}'''"
+
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])
