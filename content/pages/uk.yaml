@@ -188,7 +188,7 @@ sections:
                 solution_code: "name is Hedy\nprint Hi I'm name\n\nor\n\nanimals is rhino, bee, swan\nprint The best animal is... animals at random\n"
         -   title: Students forget at in at random
             example:
-                error_text: "Like in the example\n"
+                error_text: "Як у прикладі\n"
                 error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
                 solution_text: "This problem is solved by adding the word at.\n"
                 solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
@@ -205,7 +205,7 @@ sections:
                 solution_text: "After each item on your list, there should be a comma\n"
                 solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
         -   example:
-                error_text: "For example\n"
+                error_text: "Наприклад\n"
                 error_code: "clubs is Manchester United\nprint clubs at random\n"
                 solution_text: "Hedy can't print anything at random, because there is no list to choose from.\n"
                 solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
@@ -272,7 +272,7 @@ sections:
             example:
                 error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
                 error_code: "chosen door is ask 'Which door do you pick?'\n"
-                solution_text: "Add an underscore.\n"
+                solution_text: "Додати підкреслення\n"
                 solution_code: "chosen_door is ask 'which door do you pick?'\n"
         -   title: Students want multiple answers to be correct
             example:
@@ -288,10 +288,10 @@ sections:
                 solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'\n"
     -   sections:
         -   example:
-                error_code: "print '5 + 5'\n"
+                error_code: "друкуй '5 + 5'\n"
                 error_text: "Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.\n"
                 solution_text: "In this code the output screen will print '10'.\n"
-                solution_code: "print 5 + 5\n"
+                solution_code: "друкуй 5 + 5\n"
             title: Students struggle with quotation marks
         -   title: Students struggle with the concept of doing maths with a variable
             example:
@@ -305,7 +305,7 @@ sections:
             example:
                 error_text: "Make sure that the students know to use both the full repeat command and the print command.\n"
                 error_code: "repeat 3 times 'For he`s a jolly good fellow'\nrepeat 3 print 'Which nobody can deny!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
         -   title: Students try to repeat multiple lines
             example:
@@ -326,7 +326,7 @@ sections:
             example:
                 error_text: "Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.\n"
                 error_code: "repeat 3 times\nprint 'hello'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "repeat 3 times\n    print 'hello'\n"
         -   title: Students only repeat 1 line when they wanted to repeat multiple lines
             example:
@@ -380,7 +380,7 @@ sections:
             example:
                 error_text: "Make sure that the students use indentation.\n"
                 error_code: "for i in range 1 to 5\nprint i\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "for i in range 1 to 5\n    print i\n"
         -   title: Students don't understand the i
             example:
@@ -393,19 +393,19 @@ sections:
             example:
                 error_text: "Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.\n"
                 error_code: "superheroes = Spiderman, Batman, Iron Man\nsuperhero = superheroes at random\nif superhero = Batman\n    print 'IM BATMAN!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "superheroes = 'Spiderman', 'Batman', 'Iron Man'\nsuperhero = superheroes at random\nif superhero is 'Batman'\n    print 'IM BATMAN!'\n"
         -   example:
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 error_text: "You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.\nIn the example below, you can't do maths with the number 25, because it's in quotation marks.\n"
                 error_code: "score = '25'\nanswer is ask 'Do you want a point?'\nif answer is 'yes'\n    score = score + 1\n    print score\n"
                 solution_code: "score = 25\nanswer is ask 'Do you want a point?'\nif answer is 'yes'\n    score = score + 1\n    print score\n"
             title: Students use quotation marks on numbers they want to use for calculations
         -   example:
                 error_text: "Decimal numbers can be used from this level on, but you can't use commas.\n"
-                error_code: "print 2,5 + 2,5\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "print 2.5 + 2.5\n"
+                error_code: "друкуй 2,5 + 2,5\n"
+                solution_text: "Ось правильний код:\n"
+                solution_code: "друкуй 2.5 + 2.5\n"
             title: Students use commas instead of periods in decimal numbers
         level: '12'
     -   level: '13'
@@ -422,16 +422,16 @@ sections:
             example:
                 error_text: "Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.\n"
                 error_code: "age = ask 'How old are you?'\nif age < 12\n    print 'You are older than I am!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "age = ask 'How old are you?'\nif age > 12\n    print 'You are older than I am!'\n"
         -   title: Students use the wrong signs for `!=` `<=` and `>=`
             example:
                 error_text: "These signs are probably new for most students. Make sure to explain these signs to your students.\n"
                 error_code: "name = ask 'What is your name?'\nif name =< 'Hedy'\n    print 'You are not Hedy'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "name = ask 'What is your name?'\nif name != 'Hedy'\n    print 'You are not Hedy'\n"
         -   example:
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "name = ask 'What is your name?'\nif name == 'Hedy'\n    print 'You are cool!'\n"
                 error_text: "In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.\n"
                 error_code: "name = ask 'What is your name?'\nif name = 'Hedy'\n    print 'You are cool!'\n"
@@ -442,7 +442,7 @@ sections:
             example:
                 error_text: "Indentation is often hard for students.\n"
                 error_code: "answer = 0\nwhile answer != 25\nanswer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "answer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
     -   level: '16'
         sections:
@@ -450,35 +450,35 @@ sections:
             example:
                 error_text: "From this level on lists should be in brackets.\n"
                 error_code: "icecream = 'starwberry', 'chocolate'\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
         -   title: Students use the wrong brackets
             example:
                 error_text: "From this level on lists should be in brackets.\n"
                 error_code: "icecream = ('starwberry', 'chocolate'}\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
         -   title: Students forget the quotation marks while focussing on the brackets
             example:
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
                 error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
         -   example:
                 error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream at random ' icecream'\n"
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
             title: Students still use the old at random command
         -   title: Students forget the quotation marks while focussing on the brackets
             example:
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
                 error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
     -   sections:
         -   example:
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 error_text: "The elif command needs a condition behind it. It cannot be used like else, without a condition.\n"
                 error_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif:\n    print 'I like green'\n"
                 solution_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif color == yellow:\n    print 'yellow is alright'\nelse:\n    print 'I like green'\n"
@@ -487,7 +487,7 @@ sections:
             example:
                 error_text: "After each command that requires indentation, a colon should be used.\n"
                 error_code: "answer = ask 'How are you doing?'\nif answer is 'great'\n    print 'Me too!'\nelif answer is 'bad'\n    print 'Let me cheer you up!'\nelse\n    print 'Im great!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "answer = ask 'How are you doing?'\nif answer is 'great':\n    print 'Me too!'\nelif answer is 'bad':\n    print 'Let me cheer you up!'\nelse:\n    print 'Im great!'\n"
         level: '17'
     -   level: '18'
@@ -496,29 +496,29 @@ sections:
             example:
                 error_text: "Students will forget to put brackets around their text.\n"
                 error_code: "print 'my name is Hedy!'\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "print('my name is Hedy!')\n"
+                solution_text: "Ось правильний код:\n"
+                solution_code: "друкуй('мене звуть Hedy!')\n"
         -   title: Students will still use the ask command
             example:
                 error_text: "The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "print('My name is Hedy!')\nname = input('What is your name?')\nprint('So your name is ', name)\n"
                 error_code: "print('My name is Hedy!')\nname = ask('What is your name?')\nprint('So your name is ', name)\n"
         -   title: Students might use the brackets as quotation marks
             example:
                 error_text: "They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.\n"
                 error_code: "temperature = 25\nprint('It is ') temperature ('degrees outside')\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Ось правильний код:\n"
                 solution_code: "temperature = 25\nprint('It is ', temperature, 'degrees outside')\n"
     title: Часті помилки
     key: типові_помилки
     intro: "Ви можете вчитися на своїх помилках, особливо в кодуванні!\nРоблення помилок неминуче, і це чудова можливість вчитися, але для вчителів може бути складним завданням знайти правильне виправлення помилки!\nОсобливо тому, що коди стають все довшими в міру просування рівнів. Ось чому ми склали список із частими помилками на кожному рівні та способами їх вирішення.\n"
 learn-more-sections:
--   title: Do you like Hedy?
+-   title: Приєднатися до Спільноти Hedy
     text: "We love to hear from you!\n[Click here to send us a message](mailto:hello@hedy.org \"About Hedy\")\n"
 -   text: "[Let us know on GitHub](https://github.com/hedyorg/hedy/issues/new/choose)\n"
-    title: Found a bug?
--   title: Code week talk
+    title: Глибоке занурення!
+-   title: Hedy у новинах
     text: "Want to know more about Hedy? Check out this talk Felienne gave at the European Code Week 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
 start-sections:
 -   title: "Textual programming made easy!"
@@ -562,7 +562,7 @@ start-sections:
 
 join-sections:
 -   text: "# There are three ways in which you can support Hedy!\n"
-    title: Supporting Hedy
+    title: Підтримати Hedy
 -   title: Improving the language
     text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
 -   title: Translating Hedy
