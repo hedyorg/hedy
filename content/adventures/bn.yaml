@@ -38,7 +38,7 @@ adventures:
                     if নাম is হেডি print 'ভালো!' else print 'মন্দ'
                 story_text: "স্তর 3 তিনের মতই `ask` আর `print` ঠিক একই  ভাবেই কাজ করবে | স্তর 4 চার থেকে `if` যুক্ত হয়ে যায়"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                story_text_3: "When we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
@@ -497,7 +497,7 @@ adventures:
             18:
                 example_code: "```\n{print}('Welcome to this story!')\n```\n"
                 start_code: '# Schrijf jouw code hier'
-                story_text: "## Story\nWe are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
                 story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
                 example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
     parrot:
@@ -565,7 +565,7 @@ adventures:
                 start_code: "# place your code here"
             4:
                 start_code: '# Write your code here'
-                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                story_text: "In this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
     songs:
         name: "Sing a song!"
@@ -815,7 +815,7 @@ adventures:
                     {forward} 25
 
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             5:
                 story_text: |
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
@@ -897,7 +897,7 @@ adventures:
             9:
 
                 start_code: '# place your code here'
-                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                story_text: "Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
     dishes:
         name: "Dishes?"
@@ -1367,12 +1367,12 @@ adventures:
                 start_code: "# place your code here"
             11:
                 example_code: "```\nnumber = 10\n{for} i {in} {range} 1 to 10\n    {print} i * number\n```\n"
-                story_text: "## Calculator\nWith a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
+                story_text: "With a `{for}` you can simplify tables of multiplication practise program.\n\n### Exercise 1\nImprove the example code such that it prints a nice multiplication table: <br> \"1 times 10 is 10\", \"2 times 10 is 20\", etc.\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# place your code here'
             13:
                 example_code: "```\nanswer1 = {ask} 'What is 10 times 7?'\nanswer2 = {ask} 'What is 6 times 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Schrijf jouw code hier'
-                story_text: "## Calculator\n\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
+                story_text: "\n### Exercise 1\nLet's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.\n\n### Exercise 2 (extra)\nSometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.\nAsk for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.\nEmpty the programming field and create your own solution.\n"
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
@@ -1444,7 +1444,7 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: "# place your code here"
-                story_text_3: "## Allergies\n**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                story_text_3: "**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
@@ -2654,16 +2654,16 @@ adventures:
         levels:
             5:
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-                story_text: "## Pressed\nIn this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
+                story_text: "In this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
                 example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
                 start_code: '# place your code here'
-                story_text_2: "## With turtle\nYou can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
+                story_text_2: "You can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
             7:
-                story_text: "## Pressed\nNow that you have learned about `{repeat}`, we can press keys multiple times.\nYou can use it to make the turtle walk forward and turn.\n\n### Exercise\nThe code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.\nUse this code to draw something nice.\n"
+                story_text: "Now that you have learned about `{repeat}`, we can press keys multiple times.\nYou can use it to make the turtle walk forward and turn.\n\n### Exercise\nThe code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.\nUse this code to draw something nice.\n"
                 start_code: '# place your code here'
                 example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
             9:
-                story_text: "## Touch type game\nNow that you know how to combine statements, you can create a touch type tool with `{pressed}`.\n\n### Exercise\nFinish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored.\n"
+                story_text: "Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.\n\n### Exercise\nFinish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored.\n"
                 start_code: '# place your code here'
                 example_code: "```\npoints = 0\nletters = a, b, c, d, e\n{repeat} 10 {times}\n    letter = _ _ _\n    {print} 'Press the letter ' letter\n    {if} letter {is} {pressed}\n    _\n    _\n    _\n```\n"
         description: Try linking a keyboard key to a command!
