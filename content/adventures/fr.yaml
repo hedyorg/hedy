@@ -11,10 +11,10 @@ adventures:
                     Essaye le code toi-même avec le bouton vert "exécuter le code" situé sous le champ de programmation.
 
                     Tu peux afficher du texte à l'écran en utilisant la commande `{print}`.     
-                start_code: "{print} bonjour le monde !"
+                start_code: "{print} bonjour le  !"
                 example_code: "```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
                 story_text_2: "Tu peux aussi demander une entrée avec `{ask}` et la répéter avec une commande `{echo}`.\n"
-                example_code_2: "```\n{ask} Quel est ton nom ?\n{echo} bonjour\n```\n"
+                example_code_2: "```\n{ask} Quel est ton nmondeom ?\n{echo} bonjour\n```\n"
                 story_text_3: "Commençons  ! Tu ne sais pas quoi créer ? Tu trouveras des idées de programmes à réaliser dans les onglets suivants.\n"
             2:
                 story_text: |
@@ -45,9 +45,9 @@ adventures:
                     Ainsi, vous pouvez désormais faire afficher ce que vous voulez, y compris des mots que vous avez utilisés comme variables de stockage avec `{is}`.  
 
                     La plupart des langages de programmation utilisent aussi les guillemets lors des affichages, donc on fait un pas de plus en direction de la vraie programmation.
-                story_text_2: "## Les aventures deviennent de plus en plus difficiles  \nD’onglet en onglet, les aventures deviennent de plus en plus difficiles.  \nAlors commence par la gauche et poursuit vers la droite pour être toujours plus mis au défi.\n"
+                story_text_2: "## Élisions\nAttention ! Maintenant que nous utilisons des guillemets, Hedy ne comprendra pas quand vous utiliserez l'apostrophe pour des élisions comme \"J'ai\" ou \"T'es\".\nPrenez bien soin de retirer ces apostrophes en modifiant l'orthographe en faveur de \"J ai\" ou \"Tu es\".\nConsultez le code exemple pour un contre-exemple d'utilisation des apostrophes.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                example_code_2: "```\n_ Ceci est un contre-exemple de l'utilisation des apostrophes _\n{print} 'J'ai la responsabilité des enfants de ma soeur'\n{print} 'Qu'est-ce qui peut être plus amusant que ça ?'\n```\n"
             5:
                 start_code: |-
                     nom {is} {ask} 'quel est ton nom?'
@@ -135,7 +135,7 @@ adventures:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: "## Boucle !\n`{print}` fonctionne encore comme avant, mais on a ajouté une nouvelle forme pour le `{for}`. Tu peux maintenant taper `{for} counter {in} {range} 1 {to} 5` à la place de `{repeat} 5 {times}` et utiliser `counter` dans ton programme. \nEssaie-le et regarde le résultat ! Rappelle-toi que tu dois encore toujours indenter toutes les lignes après les `{for}` et les `{if}` (cela signifie qu'elles doivent commencer par quatre espaces)."
+                story_text: "## Boucles !\nDans ce niveau, on a ajouté une nouvelle forme pour le `{for}`. Dans les précédents niveaux, on utilisait `{for}` pour les listes. Tu peux maintenant utiliser `{for}` pour les nombres.\nÇa fonctionne en ajoutant un nom de variable suivi de `{in}` `{range}`. On écrit ensuite le nombre de départ, `{to}` et celui de fin. T\n\nEssaie-le et regarde le résultat ! Rappelle-toi que dans ce niveau, tu dois toujours indenter toutes les lignes après les `{for}`."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
                 start_code: "{print} 'on utilise un point pour les nombres décimaux'\n{print} 2.5 + 2.5"
@@ -151,7 +151,7 @@ adventures:
                 example_code_5: "```\nscore = 25\n{print} 'Ton score est  ' score\n```\n"
             13:
                 start_code: "nom = {ask} 'Quel est ton nom ?'\nage = {ask} 'Quel est ton age?'\n{if} nom {is} 'Hedy' {and} age {is} 2\n    {print} 'Tu es la vraie Hedy!'"
-                story_text: "## And... Or.. ?\nNous allons maintenant apprendre `{and}` et `{or}` ! Si tu souhaite verifier deux affirmations, tu n'as pas à utiliser deux {if}, à la place, tu peux utiliser `{and}` et `{or}`. Si tu utilise `{and}`, les deux affirmations à gauche et à droite du `{and}` doivent être vraies. On peut utiliser `{or}` aussi. Il est alors nécessaire qu'une seule des affirmations soit correcte."
+                story_text: "## And... Or.. ?\nNous allons maintenant apprendre `{and}` et `{or}` ! Si tu souhaite verifier deux affirmations, tu n'as pas à utiliser deux `{if}`, à la place, tu peux utiliser `{and}` et `{or}`.\nSi tu utilise `{and}`, les deux affirmations à gauche et à droite du `{and}` doivent être vraies. On peut utiliser `{or}` aussi: une seule des affirmation doit être correcte dans ce cas-là."
                 example_code: "```\nnom = {ask} 'Quel est ton nom ?'\nage = {ask} 'Quel est ton age ?'\n{if} nom {is} 'Hedy' {and} age {is} 2\n    {print} 'Tu est la vraie Hedy!'\n```\n"
             14:
                 start_code: "age = {ask} 'Quel est ton age?'\n{if} age < 13\n    {print} 'Tu es plus jeune que moi!'\n{else}\n    {print} 'tu es plus vieille que moi!'"
@@ -2606,3 +2606,22 @@ adventures:
                 story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
                 example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
                 start_code: '# place your code here'
+    pressit:
+        levels:
+            5:
+                story_text_2: "## With turtle\nYou can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
+                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Pressed\nIn this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
+            9:
+                story_text: "## Touch type game\nNow that you know how to combine statements, you can create a touch type tool with `{pressed}`.\n\n### Exercise\nFinish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored.\n"
+                start_code: '# place your code here'
+                example_code: "```\npoints = 0\nletters = a, b, c, d, e\n{repeat} 10 {times}\n    letter = _ _ _\n    {print} 'Press the letter ' letter\n    {if} letter {is} {pressed}\n    _\n    _\n    _\n```\n"
+            7:
+                start_code: '# place your code here'
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                story_text: "## Pressed\nNow that you have learned about `{repeat}`, we can press keys multiple times.\nYou can use it to make the turtle walk forward and turn.\n\n### Exercise\nThe code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.\nUse this code to draw something nice.\n"
+        default_save_name: Pressed
+        name: Key presses
+        description: Try linking a keyboard key to a command!

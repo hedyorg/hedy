@@ -1,0 +1,20 @@
+    {% if question_count %}
+    <div class="mx-auto w-fit flex items-center justify-around">
+        {% for i in range(1, question_count + 1) %}
+        <div class="w-14">
+            <div class="rounded-full text-sm text-white text-center leading-6
+            {% if i == question.number %}
+            w-6 h-6 bg-blue-600
+            {% elif i in correct_answers_so_far %}
+            w-4 h-4 bg-green-500
+            {% elif i in incorrect_answers_so_far %}
+            w-4 h-4 bg-red-500
+            {% else %}
+            w-2 h-2 bg-gray-400
+            {% endif %}
+            ">{% if i == question.number %}{{ i }}{% endif %}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+

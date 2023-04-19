@@ -429,6 +429,12 @@ adventures:
                 story_text: "## 触摸式游戏\n现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
                 example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
 
+            5:
+                start_code: '# place your code here'
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                story_text: "## Pressed\nIn this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
+                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
+                story_text_2: "## With turtle\nYou can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
     rock:
         levels:
             5:
