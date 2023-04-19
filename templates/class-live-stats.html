@@ -43,7 +43,7 @@
     </div>
     {% if class_info.show_c1 %}
     <div class="relative">
-        <button class="green-btn absolute top-0 right-0" id="expand"
+        <button class="blue-btn absolute top-0 right-0" id="expand"
                 onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=False&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
             Expand
         </button>
@@ -52,16 +52,16 @@
 
     {% else %}
     <!-- Card 1 Progress indicator expanded version -->
+    <div class="relative">
+        <button class="blue-btn absolute top-0 right-0" id="collapse" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
+            Collapse
+        </button>
+    </div>
     <div class="justify-center">
         <h2 class="text-center">Progress Indicator</h2>
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_exp">
             <img class="w-full" src="/images/new_media_lab/progress2.png">
         </div>
-    </div>
-    <div class="relative">
-        <button class="green-btn absolute top-0 right-0" id="collapse" onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True&show_c1={{class_info.show_c1}}&show_c2={{class_info.show_c2}}&show_c3={{class_info.show_c3}}'">
-            Collapse
-        </button>
     </div>
     {% endif %}
 
