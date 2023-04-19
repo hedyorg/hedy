@@ -4,7 +4,7 @@ adventures:
             1:
                 example_code_2: "```\n{ask} Vad heter du?\n{echo} hej\n```\n"
                 start_code: '{print} hej världen!'
-                story_text: "## Välkommen till Hedy!\nPå nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.     \n"
+                story_text: "På nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.     \n"
                 example_code: "```\n{print} Hej!\n{print} Välkommen till Hedy!\n```\n"
                 story_text_2: "Du kan också be om en inmatning med `{ask}` och skriva ut det igen med ett `{echo}`-kommando.\n"
                 story_text_3: "Låt oss börja! Vet du inte vad du vill skapa? I de följande flikarna så hittar du idéer på program du kan bygga.\n"
@@ -17,7 +17,7 @@ adventures:
                 example_code_3: "```\n{print} Min favoritfärg är...\n{sleep} 2\n{print} grön!\n```\n"
                 start_code: '{print} hej världen!'
             3:
-                story_text: "## Gör en lista!\nPå nivå 3 kan du göra en lista. Du kan låta datorn välja någonting slumpvalt ur den listan. Det gör du med `{at} {random}`.\n"
+                story_text: "På nivå 3 kan du göra en lista. Du kan låta datorn välja någonting slumpvalt ur den listan. Det gör du med `{at} {random}`.\n"
                 example_code: "```\ndjur {is} hund, katt, känguru\n{print} djur {at} {random}\n```\n"
                 story_text_2: Du kan också lägga till saker till listan med `{add}` och ta bort dem med `{remove}`.
                 example_code_2: "```\ndjur {is} hund, katt, känguru\n{add} pingvin {to_list} djur\n{remove} katt {from} djur\n{print} djur {at} {random}\n```\n"
@@ -25,7 +25,7 @@ adventures:
             4:
                 story_text: "På nivå 4 ändras hur du änvänder `{ask}` och `{print}`.\n\nDu måste nu skriva text som du vill skriva ut på skärmen mellan citattecken.\n\nDet är användbart därför att du nu kan skriva ut alla ord, även de ord som du använt som variabler för att lagra någonting med `{is}`.\n\nDe flesta programmeringsspråk använder sig av citattecken när någonting ska skrivas ut, så vi tar också ett steg närmare riktig programmering!\n"
                 example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad måste vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
-                story_text_2: "## Äventyren blir svårare och svårare\nÄventyren blir svårare och svårare i de följande flikarna.\nDärför är det bäst att börja till vänster och jobba sig till höger för att utmaningen ska bli större och större.\n"
+                story_text_2: "Äventyren blir svårare och svårare i de följande flikarna.\nDärför är det bäst att börja till vänster och jobba sig till höger för att utmaningen ska bli större och större.\n"
                 start_code: "{print} 'Hej världen'"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
@@ -45,7 +45,7 @@ adventures:
                 story_text_2: "Vi ändrar också på hur man sparar någonting i en variabel! Nu kan du använda `=` istället för `{is}` när du sparar ett namn eller ett nummer i en variabel. Så här:\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy är roligt!'"
-                story_text: "## Nivå 7! Nivå 7!\nNivå 7 lägger till `{repeat}` kommandot.  `{repeat}` kan användas för att köra en kodrad flera gånger.\n"
+                story_text: "Nivå 7 lägger till `{repeat}` kommandot.  `{repeat}` kan användas för att köra en kodrad flera gånger.\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy är roligt!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hej allihopa'\n    {print} 'Det här kommer att skrivas 5 gånger'"
@@ -53,7 +53,7 @@ adventures:
                 example_code: "Så här fungerar `{repeat}`-kommandot nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej allihop'\n    {print} 'Allt det här kommer att repeteras 5 gånger'\n```\nSå här fungerar `{if}` och `{else}` nu:\n\n```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n{else}\n    {print} 'INKRÄKTARE!'\n    {print} 'Du får inte använda den här datorn!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'gott!'\n    {else}\n        {print} 'pizza är godare'"
-                story_text: "## Allt på en gång!\nPå den här nivån kan du inte bara använda multipla (flera) rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet kan du se ett `{if}`-kommando med ett `{repeat}`-kommando i. Det är också tillåtet att göra tvärtom. Ett `{if}` är också tillåtet i ett `{if}` och ett `{repeat}` i ett `{repeat}`.\nTesta lite!\n"
+                story_text: "På den här nivån kan du inte bara använda multipla (flera) rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet kan du se ett `{if}`-kommando med ett `{repeat}`-kommando i. Det är också tillåtet att göra tvärtom. Ett `{if}` är också tillåtet i ett `{if}` och ett `{repeat}` i ett `{repeat}`.\nTesta lite!\n"
                 example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'härligt!'\n    {else}\n        {print} 'pizza är godare'\n```\n"
             10:
                 start_code: "alla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
@@ -101,7 +101,7 @@ adventures:
                 story_text: "Vi kommer nu ändra indenteringen en aning. Varje gång vi behöver en indentering så behöver vi också en `:` på slutet av raden före indenteringen.\n\nFrån denna nivå kan du också använda ett nytt kommando: `{elif}`. `{elif}` är kort för {else} {if} och du kommer behöva den om du vill göra 3 (eller fler!) alternativ.\nKolla in!"
             18:
                 start_code: "namn = 'Hedy'\n{print}('Mitt namn är ', namn)"
-                story_text: "## Den sista nivån!\nVi har nått fram till äkta Python-kod! Det betyder att vi måste använda parenteser med {print} och {range} i fortsättningen."
+                story_text: "Vi har nått fram till äkta Python-kod! Det betyder att vi måste använda parenteser med {print} och {range} i fortsättningen."
                 example_code: "```\n{print}('Hej!')\n{for} i {in} {range}(1, 10):\n    {print}('Detta är rad ', i)\n```\n"
                 story_text_2: Om du vill skriva ut mer än en sak så måste du separera dem med kommatecken.
                 example_code_2: "```\ntemperatur = 25\n{print}('Det är ', temperature, ' grader utomhus')\n```\n"
@@ -113,7 +113,7 @@ adventures:
     story:
         levels:
             1:
-                story_text: "## Gör en berättelse\nPå nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.\n\nPå första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.\n\nEfter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.\nDu använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.\n"
+                story_text: "På nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.\n\nPå första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.\n\nEfter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.\nDu använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.\n"
                 example_code: "```\n{ask} Huvudkaraktären av denna berättelse är\n{print} Nu kommer huvudkaraktären ta en promenad i skogen\n{echo} Han är lite rädd,\n{print} Han hör galna ljud överallt\n{print} Han är rädd för att detta är en hemsökt skog\n```\n"
                 start_code: '{print} Din berättelse börjar här'
                 story_text_2: "### Exercise\nKan du nu skriva din egen historia i Hedy med `{print}` , `{ask}` och `{echo}`?\n"
@@ -366,7 +366,7 @@ adventures:
                 story_text: "Play until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
             1:
-                story_text: "## Sten, sax, påse\nI nivå 1 kan du börja med ett sten, sax, påse-spel.\n\nMed `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.\n"
+                story_text: "I nivå 1 kan du börja med ett sten, sax, påse-spel.\n\nMed `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
                 story_text_2: "Istället för att använda ord skulle man kunna använda emojier: ✊✋✌\nKan du skriva en kod med emojier?\n"

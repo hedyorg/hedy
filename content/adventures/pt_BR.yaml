@@ -54,7 +54,7 @@ adventures:
 
                     A maioria das linguagens de programação também usa aspas simples ao imprimir, então também estamos nos aproximando da programação real!
                 example_code: "```\n{print} 'Você precisa usar aspas de agora em diante!'\nresposta {is} {ask} 'O que precisamos usar de agora em diante?'\n{print} 'Precisamos usar ' resposta\n```\n"
-                story_text_2: "## As aventuras estão ficando cada vez mais difíceis\nAs aventuras estão ficando cada vez mais difíceis na sequência de abas.\nPortanto, é melhor começar pela esquerda e seguir para a direita, para ser desafiado cada vez mais.\n"
+                story_text_2: "As aventuras estão ficando cada vez mais difíceis na sequência de abas.\nPortanto, é melhor começar pela esquerda e seguir para a direita, para ser desafiado cada vez mais.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
@@ -222,7 +222,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Preparado(a) ou não, aqui vou eu!'
-                story_text: "## Senãose\nAgora vamos mudar um pouco a indentação. Toda vez que precisamos de um recuo, precisamos de `:` na linha antes do recuo.\n\nNeste nível você também pode usar um novo comando: `{elif}`. `{elif}` é a abreviação de {else} {if} e você precisa dele quando quiser fazer 3 (ou mais!) opções.\nConfira!"
+                story_text: "Agora vamos mudar um pouco a indentação. Toda vez que precisamos de um recuo, precisamos de `:` na linha antes do recuo.\n\nNeste nível você também pode usar um novo comando: `{elif}`. `{elif}` é a abreviação de {else} {if} e você precisa dele quando quiser fazer 3 (ou mais!) opções.\nConfira!"
                 example_code: "```\nprêmios = ['1 milhão de reais', 'uma torta de maça', 'nada']\nseu_prêmio = prêmios[{random}]\n{print} 'Você ganhou ' seu_prêmio\n{if} seu_prêmio == '1 milhão de reais' :\n    {print} 'Isso! Você ficou rico(a)!'\n{elif} seu_prêmio == 'uma torta de maça' :\n    {print} 'Legal, uma torta de maça!'\n{else}:\n    {print} 'Mais sorte da próxima vez..'\n```\n"
             18:
                 start_code: |-
@@ -380,7 +380,7 @@ adventures:
                 story_text: "As músicas geralmente contêm muita repetição. Por exemplo... Bebê Tubarão! Se você canta, você continua cantando a mesma coisa:\n\nBebê tubarão tututudutudu <br>\nBebê tubarão tututudutudu <br>\nBebê tubarão tututudutudu <br>\nTubarão bebê\n\nVocê pode fazer esta música muito mais curta com um `{repeat}`! Você pode terminar o código?\n"
                 start_code: "{print} 'Bebê Tubarão'"
             12:
-                story_text: "## Cante uma canção!\nNesta música podemos tornar ainda mais fácil programar '{if} você está feliz e sabe disso, bata palmas'. Uma vez que podemos colocar todas as ações em uma variável, confira:\n"
+                story_text: "Nesta música podemos tornar ainda mais fácil programar '{if} você está feliz e sabe disso, bata palmas'. Uma vez que podemos colocar todas as ações em uma variável, confira:\n"
                 example_code: "```\nações = 'bater palmas', 'bater os pés', 'gritar Hurra!'\n{for} ação {in} ações\n    {for} i {in} {range} 1 {to} 2\n        {print} 'se você está feliz e sabe disso'\n        {print} ação\n    {print} 'se você está feliz e sabe disso e realmente quer demonstrar'\n    {print} 'se você está feliz e sabe disso'\n    {print} ação\n```\n"
                 start_code: '# coloque o seu código aqui'
             11:
@@ -404,7 +404,7 @@ adventures:
                 story_text_2: "This children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
                 example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             16:
-                story_text: "## Cante uma canção!\nNeste nível, você pode programar uma música como Velho MacDonald ainda mais rapidamente. Você pode conectar o animal certo ao som certo simplesmente colocando-os no mesmo lugar na lista.\nO Marinheiro Bêbado também é feito rapidamente neste nível. Você só precisa de 8 linhas para a música inteira, confira!\n"
+                story_text: "Neste nível, você pode programar uma música como Velho MacDonald ainda mais rapidamente. Você pode conectar o animal certo ao som certo simplesmente colocando-os no mesmo lugar na lista.\nO Marinheiro Bêbado também é feito rapidamente neste nível. Você só precisa de 8 linhas para a música inteira, confira!\n"
                 start_code: '# coloque o seu código aqui'
                 example_code: "```\nanimais = ['porco', 'cachorro', 'vaca']\nsons = ['oinc', 'au', 'mu']\n{for} i {in} {range} 1 {to} 3\n     animal = animais[i]\n     som = sons[i]\n     {print} 'O velho McDonald tinha uma fazenda'\n     {print} 'I A I A O!'\n     {print} 'e naquela fazenda ele tinha um ' animal\n     {print} 'I A I A O!'\n     {print} 'com um ' som som ' aqui'\n     {print} 'e um ' som som ' ali'\n     {print} 'aqui um ' som\n     {print} 'lá um' som\n     {print} 'em todos os lugares um ' som som\n```\n\n## Marinheiro Bêbado\n```\nlinhas = ['o que devemos fazer com o marinheiro bêbado', 'raspar sua barriga com uma navalha enferrujada', 'colocá-lo em um longo barco até que ele fique sóbrio']\n{for} linha {in} linhas\n    {for} i {in} {range} 1 {to} 3\n        {print} linha\n    {print} 'no início da manhã'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'e assim se levanta a âncora'\n    {print} 'no início da manhã'\n```\n"
             18:
@@ -445,7 +445,7 @@ adventures:
             8:
                 story_text: "Agora que podemos repetir várias linhas, podemos fazer figuras com mais facilidade.\nNós só temos que definir o ângulo uma vez e então usar essa variável no `{repeat}`.\n"
                 example_code: "```\nângulo = 90\n{repeat} 10 {times}\n    {turn} ângulo\n    {forward} 50\n```\n"
-                story_text_2: "## Interação\nAlém disso, agora podemos melhorar o programa que desenha diferentes figuras.\nVocê consegue descobrir até onde a tartaruga tem que virar aqui? Termine o código e você pode desenhar qualquer polígono que quiser!\n"
+                story_text_2: "Além disso, agora podemos melhorar o programa que desenha diferentes figuras.\nVocê consegue descobrir até onde a tartaruga tem que virar aqui? Termine o código e você pode desenhar qualquer polígono que quiser!\n"
                 example_code_2: "```\nângulos = {ask} 'Quantos ângulos eu deve desenhar?'\nângulo= 360 / ângulos\n{repeat} ângulo {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: "ângulos = {ask} 'Quantos ângulos eu devo desenhar?'"
             6:

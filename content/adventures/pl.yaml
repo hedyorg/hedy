@@ -710,7 +710,7 @@ adventures:
         default_save_name: language
         levels:
             12:
-                story_text: "## Utwórz tajny kod jak superszpieg\nW tej przygodzie możesz stworzyć swój własny kod superszpiegowski. Zaszyfruj wiadomość, którą może rozszyfrować tylko właściwy agent.\nJeśli wróg spróbuje złamać kod, otrzyma fałszywe informacje, aby zmarnować swój czas.\n\n### Ćwiczenie\nUtwórz własny tajny kod dla swojego superszpiega. Czy możesz sprawić, by składał się z jeszcze większej liczby zmiennych?\n"
+                story_text: "W tej przygodzie możesz stworzyć swój własny kod superszpiegowski. Zaszyfruj wiadomość, którą może rozszyfrować tylko właściwy agent.\nJeśli wróg spróbuje złamać kod, otrzyma fałszywe informacje, aby zmarnować swój czas.\n\n### Ćwiczenie\nUtwórz własny tajny kod dla swojego superszpiega. Czy możesz sprawić, by składał się z jeszcze większej liczby zmiennych?\n"
                 example_code: "```\nimię {is} {ask} 'Jak masz na imię?'\nif imię {is} 'Agent007'\n    a {is} 'Jedź na lotnisko '\n{else}\n    a {is} 'Idź na dworzec kolejowy'\nhasło {is} {ask} 'Jakie jest hasło?'\n{if} hasło {is} 'TOPSECRET'\n    b {is} 'jutro o 02.00'\n{else}\n    b {is} 'dziś o 10.00'\n{print} a + b\n```\n"
                 start_code: '## umieść tutaj swój kod'
             13:
