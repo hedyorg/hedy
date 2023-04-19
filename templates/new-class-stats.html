@@ -15,7 +15,7 @@
             {% for student in class_info.students %}
                 <div class=" group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
                 transition-all duration-500 ease-in-out hover:bg-green-400 hover:text-white"
-                     onclick="studentTileClicked(event, {{ student|tojson }})">
+                     onclick="hedyApp.studentTileClicked(event, {{ student|tojson }})">
                     <p class="select-none font-bold text-lg">{{ student.username }}</p>
                     <p class="select-none">Success rate: {{ student.success_rate_highest_level }}</p>
                     <p class="select-none"> Highest level: {{ student.highest_level_quiz }}</p>
@@ -27,7 +27,7 @@
     </div>
 
 </div>
-<script type="text/javascript" src="/js/student-tile.ts">
+<script>
 $(function() {
     hedyApp.stats.initializeClassStats();
 });
