@@ -60,17 +60,17 @@
                             {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
                                 <p>{{ mistake_section.example.error_text|commonmark }}</p>
                                 <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
                                 </div>
                                 <p>{{ mistake_section.example.solution_text|commonmark }}</p>
                                 <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
                                 </div>
                             {% else %}
                                 <p>{{ mistake_section.text|commonmark }}</p>
                                 {% if mistake_section.code %}
                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                            <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+                                            <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
                                         </div>
                                 {% endif %}
                             {% endif %}
