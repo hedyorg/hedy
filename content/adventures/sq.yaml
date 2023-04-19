@@ -110,12 +110,12 @@ adventures:
         default_save_name: Restorant
         levels:
             1:
-                story_text: "## Restorant\n Në nivelin 1 ju mund të bëni restorantin tuaj virtual dhe të merrni porosi nga klientët.\n"
+                story_text: " Në nivelin 1 ju mund të bëni restorantin tuaj virtual dhe të merrni porosi nga klientët.\n"
                 example_code: "```\n{print} Mirë se erdhët në Restorantin e Hedy-it\U0001F35F\n{ask} Çfarë doni të porositni?\n{echo} Pra ju doni të porositni\n{print} Faleminderit për porosinë tuaj!\n{print} Është duke u bërë!\n```\n"
                 story_text_2: "A mendoni rreshta tjerë që mund të shtoni në kodin e restorantit? Si për shembull, a mund ta {ask}(pyesni) klientit se çfarë do të pijë, tregojuni çmimin, ose uroj atyre një vakt të këndshëm?\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             2:
-                story_text: "## Restorant\nNë nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm mund të përdorte komandën {echo} dhe të shfaq porosinë një herë dhe vetëm e mban mend porosinë e fundit.\nTani mund të përdorni variabla dhe Hedy mund të mbaje mend ushqimin dhe ëmëlsirat!\n"
+                story_text: "Në nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm mund të përdorte komandën {echo} dhe të shfaq porosinë një herë dhe vetëm e mban mend porosinë e fundit.\nTani mund të përdorni variabla dhe Hedy mund të mbaje mend ushqimin dhe ëmëlsirat!\n"
                 example_code: "```\n{print} Mirë se erdhët ne Restorantin e Hedy-it!\n{print} Sot ne shërbejmë pica ose lazanja.\nushqimi {is} {ask} Çfarë doni të hani?\n{print} Zgjedhje e mirë! Ky ushqim është e kam të preferuar!\nmajë {is} {ask} Dëshironi mish apo perime në të?\n{print} ushqimi me majë është duke u bërë!\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
                 story_text_2: "A mund ta bëni këtë kod më të përpunuar? Për shembull duke shtuar pije në porosi? Apo...?\n"
@@ -128,53 +128,53 @@ adventures:
                 story_text_3: "**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
-                story_text: "## Restorant\nNë këtë nivel duhet të përdorni thonjëza me komandën `{print}` pse `{ask}`.\n\n## Sfidë\nShtoni thonjëzat në këtë kod për ta bërë atë të funksionojë! Kini kujdes: variablat nuk duhet të jenë në thonjëza.\n"
-                example_code: "## Shembull Restorant Hedy\n```\n_ Add the quotation marks to this code _\n{print} Mirë se erdhët ne restorantin Hedy!\n{print} Sot ne shërbejmë pica ose lazanja.\nushqimi {is} {ask} Çfarë doni të hani?\n{print} Zgjedhje e mirë!  ushqimi  është e preferuara ime!'\nmajë {is} {ask} Dëshironi mish apo perime në të?\n{print} ushqimi  me  majë  është duke u bërë!'\npije {is} {ask} Çfarë do të dëshironit të pini me të?\n{print} Faleminderit per porosinë.\n{print} ushqimi  juaj dhe  pije  do të jenë këtu!'\n```\n"
+                story_text: "Në këtë nivel duhet të përdorni thonjëza me komandën `{print}` pse `{ask}`.\n\n## Sfidë\nShtoni thonjëzat në këtë kod për ta bërë atë të funksionojë! Kini kujdes: variablat nuk duhet të jenë në thonjëza.\n"
+                example_code: "```\n_ Add the quotation marks to this code _\n{print} Mirë se erdhët ne restorantin Hedy!\n{print} Sot ne shërbejmë pica ose lazanja.\nushqimi {is} {ask} Çfarë doni të hani?\n{print} Zgjedhje e mirë!  ushqimi  është e preferuara ime!'\nmajë {is} {ask} Dëshironi mish apo perime në të?\n{print} ushqimi  me  majë  është duke u bërë!'\npije {is} {ask} Çfarë do të dëshironit të pini me të?\n{print} Faleminderit per porosinë.\n{print} ushqimi  juaj dhe  pije  do të jenë këtu!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             5:
-                story_text: "## Restorant\nNë këtë nivel komanda `{if}` ju lejon që të `{ask}`(pyesni) klientët tuaj dhe të trajtoni përgjigje të ndryshme.\nNë shembullin më poshtë, ju mund ta shikoni që mund ta `{ask}`(pyesni) klientin `{if}`(nëse) duan ta dëgjojnë specialitetin dhe Hedy mund të përgjigjet varësisht çka thotë klienti .\n"
+                story_text: "Në këtë nivel komanda `{if}` ju lejon që të `{ask}`(pyesni) klientët tuaj dhe të trajtoni përgjigje të ndryshme.\nNë shembullin më poshtë, ju mund ta shikoni që mund ta `{ask}`(pyesni) klientin `{if}`(nëse) duan ta dëgjojnë specialitetin dhe Hedy mund të përgjigjet varësisht çka thotë klienti .\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nspecialitet {is} {ask} 'A doni të dëgjoni specilialitetin tonë sotë?'\n{if} specialitet {is} po {print} 'E veçanta e sotme është mishi i pulës dhe orizi.' {else} {print} 'Ska problem.'\nushqimi {is} {ask} 'Çfarë dëshironi të hani?'\n{print} 'Një ' ushqimi ', është duke arritur!'\npije {is} {ask} 'Çfarë dëshironi të pini?'\n{if} pije {is} kola {print} 'Më falni, nuk kemi kola!' {else} {print} 'Zgjedhje e mirë!'\nçfarëdo {is} {ask} 'A dëshironi diçka {else}(tjetër)?'\n{print} 'Më lejo të përsërisë porosinë tuaj...'\n{print} 'Një ' ushqimi\n{if} pije {is} kola {print} 'dhe...' {else} {print} 'Një ' pije\n{if} çfarëdo {is} jo {print} 'Kjo ishte!' {else} {print} 'Një ' çfarëdo\n{print} 'Faleminderit për porosinë tuaj dhe shijoni ushqimin tuaj!'\n```\n"
                 story_text_2: "A mendoni për më shumë pyetje që të `{ask}`(pyesni) klientin kur ata porositin, dhe bëni trajtime të ndryshme përgjigjeve të atyre me komandën `{if}`?\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             6:
-                story_text: "## Restorant\nNë këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.\n"
+                story_text: "Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.\n"
                 example_code: "\nJu mund ta bëni një kod të thjeshtë për restorant, si kështu:\n```\n{print} 'Mirë se erdhët në Restorant Hedy'\n{print} 'Kjo është menu-ja jonë:'\n{print} 'Kurset tona kryesore janë pica, lazanja ose spageti'\nkryesore = {ask} 'Cilin pjatë kryesore do të dëshironit?'\nçmimi = 0\n{if} kryesore {is} pica çmimi = 10\n{if} kryesore {is} lazanja çmimi = 12\n{if} kryesore {is} spageti çmimi = 8\n{print} 'Ju keni porositur ' kryesore\n{print} 'Kjo do të kushtojë ' çmimi ' lekë.'\n{print} 'Faleminderit, shijoni vaktin tuaj!'\n```\n"
                 story_text_2: "But you can also add many more things to your virtual restaurant, for example more courses.\n\n## Sfidë\nMund të shtoni shumë gjëra të tjera në restorantin tuaj virtual. Për shembull, a mund të...\n- {ask}(pyetni) sa njerëz vijnë dhe e shumëzojnë çmimin me atë shumë?\n- shtoni një kurs tjetër?\n- jepni njerëzve një zbritje kur ata futin një kod kuponi (sekret).?\n- shtoni një menu për fëmijë?\n- mendoni për gjëra të tjera argëtuese për të shtuar?\n"
                 example_code_2: "\nNë këtë shembull janë tre kurse, të cilat kërkojnë më shumë kod dhe më shumë shtesa në llogaritjen e çmimit.\n```\n{print} 'Mirë se erdhët në restorantin Hedy'\n{print} 'Këtu është menu-ja jonë:'\n{print} 'Fillestarët tanë janë sallatë, supë ose karpaçio'\n{print} 'Kurset tona kryesore janë pica, lazanja ose spageti'\n{print} 'Ëmbëlsirat tona janë brownie, akullore ose milkshake'\nfillimi = {ask} 'Cilin starter do të dëshironit të kishit?'\nkryesore = {ask} 'Cilin pjatë kryesore do të dëshironit?'\nëmbëlsirë = {ask} 'Cilën ëmbëlsirë zgjidhni?'\nçmimi = 0\n{if} fillimi {is} supë çmimi = çmimi + 6 {else} çmimi = çmimi + 7\n{if} kryesore {is} pica çmimi = çmimi + 10\n{if} kryesore {is} lazanja çmimi = çmimi + 12\n{if} kryesore {is} spageti çmimi = çmimi + 8\n{if} ëmbëlsirë {is} brownie price = price + 7\n{if} ëmbëlsirë {is} akullore çmimi = çmimi + 5\n{if} ëmbëlsirë {is} milkshake çmimi = çmimi + 4\n{print} 'Ju keni porositur ' fillimi ', ' kryesore ' dhe ' ëmbëlsirë\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n{print} 'Faleminderit, shijoni vaktin tuaj!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             10:
                 story_text_2: "Sigurisht, mund të porosisni edhe për shumë njerëz!\nA mund të shtoni sasinë e saktë të hapësirave para rreshtit për ta bërë kodin të funksionojë siç duhet?\nKËSHILLA: disa rreshta nuk kanë nevojë fare për ndonjë dhëmbëzim.\n"
-                story_text: "## Restorant\nNë këtë nivel do të mësoni se si të {ask} (pyesni) me lehtësi për porositë e mysafirëve tuaj në një kod të shkurtër.\n"
+                story_text: "Në këtë nivel do të mësoni se si të {ask} (pyesni) me lehtësi për porositë e mysafirëve tuaj në një kod të shkurtër.\n"
                 example_code: "```\nkurset = meze, pjatë kryesore, ëmbëlsirë\n{for} kurs {in} kurset\n    ushqimi = {ask} 'Çfarë do të dëshironit të hani si ' kurs ' tuaj?'\n    {print} ushqimi ' do të jetë ' kurs\n```\n"
                 example_code_2: "```\n_ kurset = meze, pjatë kryesore, ëmbëlsirë\n_ emrat = Timi, Onati\n_ {for} emri {in} emrat\n_ {for} kurs {in} kurset\n_ ushqimi = {ask} emri ', çfarë do të dëshironit të hani si 'kurs' tuaj?'\n_ {print} emri ' porositën ' ushqimi ' si ' kurs\n```\n"
                 start_code: kurset = meze, pjatë kryesore, ëmbëlsirë
             11:
                 start_code: '# Vendoseni kodin tuaj këtu'
-                story_text: "## Restorant\nMund ta përdorim `{for} i {in} {range} 1 {to} 5` për të `{print}` porositë nga shumë klientë në mënyrë të rregullt.\n\n## Challange\nCan you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!\n"
+                story_text: "Mund ta përdorim `{for} i {in} {range} 1 {to} 5` për të `{print}` porositë nga shumë klientë në mënyrë të rregullt.\n\n## Challange\nCan you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nnjerëzit = {ask} 'Për sa persona dëshironi të porosisni?'\n{for} i {in} {range} 1 {to} njerëzit\n_ {print} 'Porosija numër ' i\n_ ushqimi = {ask} 'Çfarë do të dëshironit të hani?'\n_ {print} ushqimi\n_ {if} ushqimi {is} patate\n_ salcë = {ask} 'Çfarë lloj salce do të dëshironit me të?'\n_ {print} sauce\n_ pije = {ask} 'Çfarë dëshironi të pini?'\n_ {print} pijet\nçmimi = 4 * njerëzit\n{print} 'Kjo do të jetë ' çmimi ' lekë!'\n```\n"
             13:
                 start_code: '# Vendoseni kodi tuaj këtu'
-                story_text: "## Restorant\nNë këtë nivel ne mund të përdorim komandat e reja për të përmirësuar restorantin tonë.\nNe përdorim komandën `{and}` të shikojmë {if}(nëse) dy gjera jane të njëjta.\n"
+                story_text: "Në këtë nivel ne mund të përdorim komandat e reja për të përmirësuar restorantin tonë.\nNe përdorim komandën `{and}` të shikojmë {if}(nëse) dy gjera jane të njëjta.\n"
                 example_code: "```\nçmimi = 10\nushqimi = {ask} 'Çfarë do të dëshironit të hani?'\npije = {ask} 'Çfare do te pish?'\n{if} ushqimi {is} 'sanduiç' {and} pije {is} 'lëng'\n    {print} 'Kjo është menyja jonë e zbritjes'\n    çmimi = çmimi - 3\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n```\n"
             7:
-                story_text: "## Restorant\nNë këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.\nJu mund ta përdorni atë në restorant që të `{ask}`(pyesni) disa njerëz se çfarë duan të hanë.\n\n## Sfidë\nMund të plotësoni vendet bosh? Hedy duhet ta përsërisë këtë pyetje sa herë ka njerëz. Pra, nga 5 persona, pyetja duhet bërë 5 herë.\n"
+                story_text: "Në këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.\nJu mund ta përdorni atë në restorant që të `{ask}`(pyesni) disa njerëz se çfarë duan të hanë.\n\n## Sfidë\nMund të plotësoni vendet bosh? Hedy duhet ta përsërisë këtë pyetje sa herë ka njerëz. Pra, nga 5 persona, pyetja duhet bërë 5 herë.\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nnjerëzit = {ask} 'Sa njerëz po na bashkohen sot?'\n{repeat} _ {times} ushqimi = {ask} 'Çfarë doni të hani?'\n{print} 'Faleminderit për porosinë tuaj. Është duke u bërë!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             8:
-                story_text: "## Restorant\nNë këtë nivel mund ta bëni restorantin tuaj virtual më të përpunuar duke përsëritur disa rreshta kodi. Si kështu:\n"
+                story_text: "Në këtë nivel mund ta bëni restorantin tuaj virtual më të përpunuar duke përsëritur disa rreshta kodi. Si kështu:\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nnjerëzit = {ask} 'Sa njerëz do të na bashkohen sot?'\n{print} 'Mirë!'\n{repeat} njerëzit {times}\n    ushqimi = {ask} 'Çfarë doni të porositni?'\n    {print} ushqimi\n{print} 'Faleminderit për porosinë!'\n{print} 'Enjoy your meal!'\n```\n"
                 story_text_2: "Sigurisht, ky kod mund të zgjerohet me më shumë artikuj në meny, duke ofruar pije dhe/ose kurse të shumta, kështu që mos ngurroni të shtoni sa më shumë opsione që dëshironi!\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             9:
-                story_text: "## Restorant\nNë këtë nivel ju mund të përdorni komandë ndër komandë për ta bërë restorantin tuaj më realist dhe më argëtues!\nPër shembull, ju do të kërkoni salcë nëse dikush porosit patate të skuqura, por nuk do të kërkoni nëse dikush porosit pica!\n\n## Sfidë\nKjo është një sfidë për trurinakët e vërtetë! Çdo rresht që ka nevojë për hapësirë përpara i është dhënë një vijë bosh.\nA mund të kuptoni se sa hapësirë para rreshti i nevojitet çdo rreshti në mënyrë që kodi të funksionojë siç duhet?\nPaç fat!\nKËSHILLA: Nëse klienti porosit pica, Hedy nuk duhet të pyesë se çfarë salce dëshiron klienti.\n"
+                story_text: "Në këtë nivel ju mund të përdorni komandë ndër komandë për ta bërë restorantin tuaj më realist dhe më argëtues!\nPër shembull, ju do të kërkoni salcë nëse dikush porosit patate të skuqura, por nuk do të kërkoni nëse dikush porosit pica!\n\n## Sfidë\nKjo është një sfidë për trurinakët e vërtetë! Çdo rresht që ka nevojë për hapësirë përpara i është dhënë një vijë bosh.\nA mund të kuptoni se sa hapësirë para rreshti i nevojitet çdo rreshti në mënyrë që kodi të funksionojë siç duhet?\nPaç fat!\nKËSHILLA: Nëse klienti porosit pica, Hedy nuk duhet të pyesë se çfarë salce dëshiron klienti.\n"
                 example_code: "```\n{print} 'Mirë se erdhët në Restorant Hedy!'\nnjerëzit = {ask} 'Sa njerëz do të na bashkohen sot?'\n{print} 'Mirë!'\nçmimi = 0\n{repeat} njerëzit {times}\n_ ushqimi = {ask} 'Çfarë dëshironi të porosisni?'\n_ {print} ushqimi\n_ {if} ushqimi {is} patate\n_ çmimi = çmimi + 3\n_ salcë = {ask} 'Çfarë lloj salce do të dëshironit me patatet tuaja?'\n_ {if} salcë {is} jo\n_ {print} 'ska salcë'\n_ {else}\n_ çmimi = çmimi + 1\n_ {print} 'me ' salcë\n_ {if} ushqimi {is} pica\n_ çmimi = çmimi + 4\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n{print} 'Të bëftë mirë!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             12:
-                story_text: "## Restorant\nNga ky nivel e tutje, mund të përdorni numra dhjetorë për ta bërë menu-në tuaj më realiste.\n\n## Sfidë\nA mund të mendoni për një kod për t'u dhënë miqve dhe familjes suaj një zbritje prej 15%?\n"
+                story_text: "Nga ky nivel e tutje, mund të përdorni numra dhjetorë për ta bërë menu-në tuaj më realiste.\n\n## Sfidë\nA mund të mendoni për një kod për t'u dhënë miqve dhe familjes suaj një zbritje prej 15%?\n"
                 example_code: "```\nçmimi = 0\nushqimi = {ask} 'Çfarë dëshironi të porosisni?'\npije = {ask} 'Cfare do te pish?'\n{if} ushqimi {is} 'hamburger'\n    çmimi = çmimi + 6.50\n{if} pije {is} 'pica'\n    çmimi = çmimi + 5.75\n{if} pije {is} 'uj'\n    çmimi = çmimi + 1.20\n{if} pije {is} 'kola'\n    çmimi = çmimi + 2.35\n{print} 'Kjo do të jetë ' çmimi ' lekë'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
-                story_text: "## Restorant\nMe komandën `{while}` mund të siguroheni që klientët tuaj të mund të vazhdojnë të shtojnë porosi derisa të mbarojnë.\n"
+                story_text: "Me komandën `{while}` mund të siguroheni që klientët tuaj të mund të vazhdojnë të shtojnë porosi derisa të mbarojnë.\n"
                 example_code: "```\n{print} 'Mirë se vini në McHedy'\nmë_shumë = 'po'\n{while} më_shumë == 'po'\n    porosia = {ask} 'Çfarë dëshironi të porosisni?'\n    {print} porosia\n    më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'\n{print} 'Falemenderit!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
         name: Restorant
@@ -246,7 +246,7 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             18:
                 start_code: '# Schrijf jouw code hier'
-                story_text: "## Sing a song!\nIn level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
+                story_text: "In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
                 example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         description: Bëje vizatimin tënd
@@ -271,7 +271,7 @@ adventures:
                 example_code: "```\n{print} _ Duke vizatuar figura _\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} 'Duke vizatuar figura'\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Ngjyra\nJu gjithashtu mund të ndryshoni ngjyrën e rreshtave me komandën `{color}`. Shikoni shembullin.\nJu gjithashtu mund të përdorni komandën `{color} {white}` për të bërë vija \"të padukshme\". Ju mund t'i përdorni këto vija të bardha për të lëvizur breshkën kudo në ekran përpara se të filloni të vizatoni.\n"
+                story_text_2: "Ju gjithashtu mund të ndryshoni ngjyrën e rreshtave me komandën `{color}`. Shikoni shembullin.\nJu gjithashtu mund të përdorni komandën `{color} {white}` për të bërë vija \"të padukshme\". Ju mund t'i përdorni këto vija të bardha për të lëvizur breshkën kudo në ekran përpara se të filloni të vizatoni.\n"
             5:
                 story_text: "Në nivelin 5 ju mund të bëni një zgjidhje me komandën `{if}`. Si për shembull ndërmjet dy lloje të figurave.\n"
                 example_code: "```\n{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120\n{else} këndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
@@ -308,7 +308,7 @@ adventures:
             18:
                 example_code_3: "```\n{print}('Emri im është Hedy!')\nemri = {input}('Si e keni emrin?')\n{print}('Kështu që emri yt është ', emri)\n```\n"
                 start_code: "emri = 'Hedy'\n{print}('Emri im është ', emri)"
-                story_text: "## Niveli i fundit!\nNe mbërritëm në kodin e vërtetë të gjuhës Python! Kjo do të thotë se duhet të përdorim kllapa në komandën {print} dhe {range} prej tani."
+                story_text: "Ne mbërritëm në kodin e vërtetë të gjuhës Python! Kjo do të thotë se duhet të përdorim kllapa në komandën {print} dhe {range} prej tani."
                 example_code: "``` \n{print}('Përshëndetje!')\n{for} i {in} {range}(1, 10):\n    {print}('Ky është rreshti ', i)\n```\n"
                 story_text_2: Nëse doni të printoni më shumë se një artikull, duhet ti ndani artikujt me presje.
                 example_code_2: "```\ntemperatura = 25\n{print} ('Temperatura është ', temperatura , 'shkallë jashtë')\n```\n"
@@ -368,7 +368,7 @@ adventures:
                 example_code: "```\n{for} numërues {in} {range} 1 {to} 5\n    {print} numërues\n```\n"
             12:
                 start_code: "{print} 'numrat decimal duhet të kenë pika'\n{print} 2.5 + 2.5"
-                story_text: "## Numrat dhe tekstet\n**Numrat decimal**\nDeri tani, Hedy nuk lejoji numrat decimal si 1.5, por tani ne e lejojmë këtë. Mbani mend se kompjuterët e përdorin `.` për numra decimal."
+                story_text: "**Numrat decimal**\nDeri tani, Hedy nuk lejoji numrat decimal si 1.5, por tani ne e lejojmë këtë. Mbani mend se kompjuterët e përdorin `.` për numra decimal."
                 example_code: "```\n{print} 'Dy e gjysmë plus dy e gjysme është...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Të gjitha tekstet duhet të jenë në thonjëza**\nPër këtë nivel ju do të duhet të përdorni thonjëza kur e ruani një tekst me `=`:\n"
                 example_code_2: "```\nemri = 'Hedy robiti'\n{print} 'Përshëndetje' emri\n```\n"
@@ -528,7 +528,7 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
                 story_text: "Në këtë nivel do të mësoni të (fshehurazi) t'i ktheni shanset në favorin tuaj, kur përdorni fallxhoren!\nDuke përdorur `{if}` dhe `{else}` mund të siguroheni që gjithmonë do të merrni një foto të mirë, ndërsa njerëzit e tjerë mund të mos kenë.\nShikoni këtë shembull për të zbuluar se si.\n"
                 example_code: "```\n{print} 'Jam Hedy fallxhori!'\n{print} 'Mund të parashikoj nëse do të fitosh llotarinë nesër!'\nperson {is} {ask} 'Kush jeni ju?'\n{if} person {is} Hedy {print} 'Ju sigurisht do të fitoni!\U0001F929' {else} {print} 'Fat i keq! Dikush tjetër do të fitojë!\U0001F62D'\n```\n"
-                story_text_2: "## Hakoni programim\nZëvendëso Hedy me emrin tënd në rreshtin e fundit dhe Hedy gjithmonë do të parashikojë që ti do të fitosh lotarinë dhe të tjerët jo!\nSigurisht që kjo mund të ngrejë disa dyshime te lojtarët e tjerë... Për ta shmangur këtë, mund të siguroheni që Hedy të japë përgjigje të ndryshme sa herë që ekzekutoni kodin.\nPor sigurisht, prapë ju jep një përgjigje pozitive dhe lojtarët e tjerë një negative.\n"
+                story_text_2: "Zëvendëso Hedy me emrin tënd në rreshtin e fundit dhe Hedy gjithmonë do të parashikojë që ti do të fitosh lotarinë dhe të tjerët jo!\nSigurisht që kjo mund të ngrejë disa dyshime te lojtarët e tjerë... Për ta shmangur këtë, mund të siguroheni që Hedy të japë përgjigje të ndryshme sa herë që ekzekutoni kodin.\nPor sigurisht, prapë ju jep një përgjigje pozitive dhe lojtarët e tjerë një negative.\n"
                 example_code_2: "```\n{print} 'Jam Hedy fallxhori!'\n{print} 'Mund të parashikoj nëse do të fitosh llotarinë nesër!'\nperson {is} {ask} 'Kush jeni ju?'\npërgjigje_mirë {is} Urraa! Ju fitoni!, Ju sigurisht do të fitoni!, Ne kemi një fitues!\npërgjigje_keqe {is} Fati i keq! Provoni përsëri!, Dikush tjetër do të fitoje, Ju humbët!\n{if} person {is} Hedy {print} përgjigje_mirë {at} {random} {else} {print} përgjigje_keqe {at} {random}\n```\n"
                 story_text_3: "Ky koncept mund të përdoret për të bërë programe të ndryshme, thjesht jini krijues! Për shembull, ju mund të krijoni një makinë që parashikon se ekipi juaj i preferuar sportiv do të mundë të gjithë konkurrentët!\nOse mund të bësh pasqyrën magjike të Borëbardhës në mur, për t'u thënë të gjithëve se je më e bukura nga të gjithë!\nLëreni imagjinatën tuaj të bëjë punën!\n"
             6:
@@ -542,7 +542,7 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             8:
                 start_code: '# Vendoseni kodin tuaj këtu'
-                story_text: "## Fortune Teller\nNë nivelet e mëparshme keni mësuar se si të përdorni `{repeat}` për ta bërë fallxhoren t'u përgjigjet 3 pyetjeve me radhë, por ne patëm një problem me printimin e pyetjeve.\nTani ai problem është zgjidhur, për shkak të mënyrës së re të përdorimit të komandës `{repeat}`.\nNë shembullin tjetër mund të pyesni fallxhoren tuaj 3 pyetje dhe gjithashtu t'i printoni ato!\n\n## Sfidë\nA mund ta plotësoni saktë komandën `{repeat}` në vendet bosh?\n"
+                story_text: "Në nivelet e mëparshme keni mësuar se si të përdorni `{repeat}` për ta bërë fallxhoren t'u përgjigjet 3 pyetjeve me radhë, por ne patëm një problem me printimin e pyetjeve.\nTani ai problem është zgjidhur, për shkak të mënyrës së re të përdorimit të komandës `{repeat}`.\nNë shembullin tjetër mund të pyesni fallxhoren tuaj 3 pyetje dhe gjithashtu t'i printoni ato!\n\n## Sfidë\nA mund ta plotësoni saktë komandën `{repeat}` në vendet bosh?\n"
                 example_code: "```\n{print} 'Jam Hedy fallxhori!'\n{print} 'Ju mund të pyetni 3 pyetje.'\npërgjigja = po, jo, ndoshta\n_ _ _\n   pyetja = {ask} 'Çfarë doni të dini?'\n   {print} pyetja\n   {sleep}\n   {print} 'Topi im i kristaltë thotë...' përgjigja {at} {random}\n```\n"
             1:
                 story_text: "A keni qenë ndonjëherë në një karnaval dhe të është parashikuar e ardhmja nga një fallxhore? Apo keni luajtur ndonjëherë me një top magjik tetë?\nAtëherë ju ndoshta e dini se ata nuk mund ta parashikojnë vërtetë të ardhmen tuaj, por është akoma argëtuese të luash!\n\nNë nivelet e ardhshme mund të mësoni se si të krijoni makinën tuaj të tregimit të fatit!\nNë nivelin 1 mund të filloni lehtësisht duke e lënë Hedy-n të prezantohet si një fallxhore dhe ta lini të {echo} përgjigjet e lojtarëve.\nSi kjo:\n"
@@ -651,7 +651,7 @@ adventures:
         default_save_name: Super spiuni
         levels:
             13:
-                story_text: "## Super spiuni\nA mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!\n"
+                story_text: "A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!\n"
                 start_code: '## Vendoseni kodin tuaj këtu'
                 example_code: "```\nemri {is} {ask} 'Cili është emri juaj?'\nfjalëkalimi {is} {ask} \"Cili është fjalëkalimi juaj?\"\n{if} emri {is} 'Agent007' _ fjalëkalimi {is} 'TOPSECRET'\n     {print} 'Shko në aeroport në orën 02:00'\n{else}\n     {print} 'Shko në stacionin e trenit në orën 10:00'\n ```\n"
             12:
@@ -718,8 +718,8 @@ adventures:
         default_save_name: New Year's Countdown
         levels:
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n### Exercise\nFill in the blanks and make the code work!\n"
-                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
+                story_text: "In this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n### Exercise\nFill in the blanks and make the code work!\n"
+                example_code: "```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
                 start_code: '# place your code here'
     pressit:
         levels:

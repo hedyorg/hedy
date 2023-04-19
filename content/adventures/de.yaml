@@ -43,7 +43,7 @@ adventures:
                     Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
                     Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\n{print} 'Ab jetzt musst du Anführungszeichen verwenden!'\nantwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'\n{print} 'Wir müssen ' antwort ' verwenden.'\n```\n"
-                story_text_2: "## Kontraktionen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du Apostrophe für Kontraktionen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is.\nSchau dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu sehen.\n"
+                story_text_2: "Wichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du Apostrophe für Kontraktionen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is.\nSchau dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu sehen.\n"
                 example_code_2: "```\n_ Dies ist die falsche Verwendung der Apostrophe _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
@@ -54,7 +54,7 @@ adventures:
                     Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst.
                     `{ask}` und `{print}` funktionieren immer noch wie in Level 4.
                 example_code: "```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy {print} 'Schön' {else} {print} 'Buh!'\n```\n"
-                story_text_3: "## Listen\nWenn wir überprüfen möchten ob etwas in einer Liste ist, können wir das mit dem Befehl `{in}` machen.\nDieser Code gibt schön! aus wenn du grün oder gelb auswählst, und na ja wenn du dich für eine andere Farbe entscheidest.\n"
+                story_text_3: "Wenn wir überprüfen möchten ob etwas in einer Liste ist, können wir das mit dem Befehl `{in}` machen.\nDieser Code gibt schön! aus wenn du grün oder gelb auswählst, und na ja wenn du dich für eine andere Farbe entscheidest.\n"
                 example_code_3: "```\nschöne_farben {is} grün, gelb\nfarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'\n{if} farbe {in} schöne_farben {print} 'schön!'\n{else} {print} 'na ja'\n```\n"
                 story_text_2: "Manchmal wird Code mit einem `{if}` ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Zeilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy {print} 'schön'\n{else} {print} 'buh!'\n```\n"
@@ -697,7 +697,7 @@ adventures:
                     ```
 
                 start_code: "{print} 'Lass uns singen!'"
-                story_text_2: "## 5 Kleine Affen springen auf dem Bett\nDieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
+                story_text_2: "Dieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
                 example_code_2: "```\nnummer = 6\nnummer = nummer - 1\n{print} nummer ' kleine Affen springen auf dem Bett'\n{print} 'Einer fiel runter und stieß sich den Kopf'\n{print} 'Mama rief den Arzt und der Arzt sagte'\n{print} 'KEINE KLEINEN AFFEN SPRINGEN MEHR AUF DEM BETT!'\n{sleep}\n```\n"
             16:
                 story_text: |
@@ -735,7 +735,7 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             18:
                 start_code: '# Schreibe deinen Code hier'
-                story_text: "## Sing ein Lied!\nIn Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.\n\n### Übung 1\nDas Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.\nKannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.\n\n### Übung 2\nSchau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.\n"
+                story_text: "In Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.\n\n### Übung 1\nDas Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.\nKannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.\n\n### Übung 2\nSchau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.\n"
                 example_code: "```\nzeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} zeile {in} zeilen _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ zeile _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         name: "Schildkröte"
@@ -820,7 +820,7 @@ adventures:
                     {turn} Winkel
                     {forward} 25
 
-                story_text_2: "## Farben\nDu kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.\n"
+                story_text_2: "Du kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
@@ -1174,7 +1174,7 @@ adventures:
                 story_text: "## Die Schildkröte steuern\nNun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
             9:
                 start_code: '# platziere deinen Code hier'
-                story_text: "## Blindtippspiel\nNun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
+                story_text: "Nun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
                 example_code: "```\nPunkte = 1\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
 
     rock:
@@ -1464,7 +1464,7 @@ adventures:
 
                 start_code: "{print} 'Willkommen bei diesem Taschenrechner!'"
                 example_code_3: "```\nTabellen = 4, 5, 6, 8\nNummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nTabelle = Tabellen {at} {random}\nNummer = Nummern {at} {random}\nrichtige_antwort = Tabelle * Nummer\nAntwort = {ask} 'Wie viel ist ' Tabelle ' mal ' Nummer '?'\n{if} Antwort {is} richtige_antwort {print} 'okay'\n{else} {print} 'Fehler! Es war ' richtige_antwort\n```\n"
-                story_text_3: "## Zufallszahlen\nDu kannst den Computer auch allein zufällige Summen rechnen lassen, indem du zufällig benutzt.\nSo wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.\n"
+                story_text_3: "Du kannst den Computer auch allein zufällige Summen rechnen lassen, indem du zufällig benutzt.\nSo wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.\n"
             15:
                 story_text: |
                     Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
@@ -1489,12 +1489,12 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             11:
                 example_code: "```\nzahl = 10\n{for} i {in} {range} 1 bis 10\n    {print} i * zahl\n```\n"
-                story_text: "## Taschenrechner\nMit einem `{for}` kannst du das Multiplikationsprogramm vereinfachen.\n\n### Übung 1\nVerbessere den Beispiel-Code, sodass es eine nette Multiplikationstabelle ausgibt: \"1 mal 10 is 10\", \"2 mal 10 ist 20\", usw.\n\n### Übung 2\nGehe zurück zu deinem Level 10 Multiplikations-Code und verändere ihn, sodass er ein `{for}` und `{range}` benutzt.\n"
+                story_text: "Mit einem `{for}` kannst du das Multiplikationsprogramm vereinfachen.\n\n### Übung 1\nVerbessere den Beispiel-Code, sodass es eine nette Multiplikationstabelle ausgibt: \"1 mal 10 is 10\", \"2 mal 10 ist 20\", usw.\n\n### Übung 2\nGehe zurück zu deinem Level 10 Multiplikations-Code und verändere ihn, sodass er ein `{for}` und `{range}` benutzt.\n"
                 start_code: '# platziere deinen Code hier'
             13:
                 example_code: "```\nantwort1 = {ask} 'Was ist 10 mal 7?'\nantwort2 = {ask} 'Was ist 6 mal 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Schreib deinen Code hier'
-                story_text: "## Taschenrechner\n\n### Übung 1\nWir wollen das Übungsprogramm etwas schwieriger gestalten. Der Spieler muss nun zwei Fragen richtig beantworten. Fülle die Lücken aus, um das Programm zu vervollständigen.\n\n### Übung 2 (extra)\nManchmal gibt es bei Berechnungen mehrere richtige Antworten. Zum Beispiel kann 10 durch 5 und durch 2 geteilt werden. Die Frage \"Welche Zahl teilt 10?\" kann also durch 2 und durch 5 beantwortet werden.\nFrage nach einer Berechnung, die mehrere richtige Antworten hat, bitte die Spielerin, sie zu beantworten, und bestimme mit `{or}`, ob die Antwort richtig ist.\nLeere das Programmierfeld und erstelle deine eigene Lösung.\n"
+                story_text: "\n### Übung 1\nWir wollen das Übungsprogramm etwas schwieriger gestalten. Der Spieler muss nun zwei Fragen richtig beantworten. Fülle die Lücken aus, um das Programm zu vervollständigen.\n\n### Übung 2 (extra)\nManchmal gibt es bei Berechnungen mehrere richtige Antworten. Zum Beispiel kann 10 durch 5 und durch 2 geteilt werden. Die Frage \"Welche Zahl teilt 10?\" kann also durch 2 und durch 5 beantwortet werden.\nFrage nach einer Berechnung, die mehrere richtige Antworten hat, bitte die Spielerin, sie zu beantworten, und bestimme mit `{or}`, ob die Antwort richtig ist.\nLeere das Programmierfeld und erstelle deine eigene Lösung.\n"
     restaurant:
         name: "Restaurant"
         description: "Erstelle dein eigenes virtuelles Restaurant"
@@ -1767,7 +1767,7 @@ adventures:
                     _
                     ```
                 start_code: "# setze hier deinen Code hin"
-                story_text_3: "## Allergien\n**Extra** Hat dein Gast irgendwelche Allergien oder eine Abneigung gegenüber bestimmten Gerichten? Dann kannst du den `{remove}` Befehl verwenden, um es von der Speisekarte zu entfernen.\n"
+                story_text_3: "**Extra** Hat dein Gast irgendwelche Allergien oder eine Abneigung gegenüber bestimmten Gerichten? Dann kannst du den `{remove}` Befehl verwenden, um es von der Speisekarte zu entfernen.\n"
                 example_code_3: "```\n{print} Geheim-Milch-Shake\nsorten {is} Erdbeer, Schokolade, Vanille\nallergien {is} {ask} Bist du allergisch gegenüber einer Sorte?\n_\n{print} Du bekommst einen sorten {at} {random} Milch-Shake\n```\n"
             15:
                 story_text: |
@@ -2344,7 +2344,7 @@ adventures:
         default_save_name: Sprache
         levels:
             12:
-                story_text: "## Erstelle einen Geheimcode wie ein Superspion\nIn diesem Abenteuer kannst du deinen eigenen Superspion-Code erstellen. Verschlüssele eine Nachricht, die nur der richtige Agent entschlüsseln kann.\nWenn der Feind versucht, den Code zu knacken, wird er falsche Informationen erhalten, um seine Zeit zu verschwenden.\n\n### Übung 1\nErstelle deinen eigenen Geheimcode für deinen Superspion und gib beide Teile nur an den echten Spion zurück.\n\n### Übung 2\nFüge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.\n"
+                story_text: "In diesem Abenteuer kannst du deinen eigenen Superspion-Code erstellen. Verschlüssele eine Nachricht, die nur der richtige Agent entschlüsseln kann.\nWenn der Feind versucht, den Code zu knacken, wird er falsche Informationen erhalten, um seine Zeit zu verschwenden.\n\n### Übung 1\nErstelle deinen eigenen Geheimcode für deinen Superspion und gib beide Teile nur an den echten Spion zurück.\n\n### Übung 2\nFüge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.\n"
                 example_code: "```\nName {is} {ask} 'Wie heißt du?'\nif Name {is} '_'\n    a {is} 'Geh zum Flughafen '\n{else}\n    a {is} 'Geh zum Bahnhof '\nPasswort {is}  {ask} 'Wie lautet das Passwort?'\n{if} Passwort {is} _\n    b {is} 'Morgen um 2 Uhr'\n{else}\n    b {is} 'Morgen um 10 Uhr'\n{print} _ _ _\n```\n"
                 start_code: '## setze hier deinen Code hin'
             13:
@@ -2389,7 +2389,7 @@ adventures:
         default_save_name: Neujahrs-Countdown
         levels:
             11:
-                story_text: "## Frohes neues Jahr\nIn diesem Level kannst du den Befehl `{for}` Zahl `{in}` `{range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
+                story_text: "In diesem Level kannst du den Befehl `{for}` Zahl `{in}` `{range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
                 example_code: "```\n{for} Zahl {in} {range} _ {to} _\n    {print} Zahl\n{print} 'Frohes neues Jahr!'\n```\n"
                 start_code: '# Platziere deinen Code hier'
 #    next:
