@@ -140,7 +140,7 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def render_live_stats(self, user, class_id):
 
-        collapse, show_c1, show_c2, show_c3 = _args_checks()
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -181,7 +181,7 @@ class LiveStatisticsModule(WebsiteModule):
         are selected in the student list.
         """
 
-        collapse, show_c1, show_c2, show_c3 = _args_checks()
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -229,7 +229,7 @@ class LiveStatisticsModule(WebsiteModule):
         Handles the rendering of the common error items in the common errors detection list.
         """
 
-        collapse, show_c1, show_c2, show_c3 = _args_checks()
+        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -507,7 +507,7 @@ def _determine_bool(bool_str):
     return False
 
 
-def _args_checks():
+def _check_dashboard_display_args():
     """
     Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
     """
