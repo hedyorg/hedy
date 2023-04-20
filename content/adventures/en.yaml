@@ -45,27 +45,22 @@ adventures:
             4:
                 start_code: "{print} 'Hello world'"
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
-                story_text_2: |
-                    ## Contractions
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to I am or What is.
-                    Check out the example code to see the wrong way of using apostrophes.
+                    In the previous levels you've been practising with variables, but you may have come across this problem.
+                    You might have tried to run a code like this:
+
+                    Of course you wanted to print
+
+                    `My name is Sophie`
+
+                    but Hedy prints
+
+                    `My Sophie is Sophie`.
+
+                    In this level this problem is fixed by using quotation marks.
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
-                    ```
-                example_code_2: |
-                    ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
+                    name {is} Sophie
+                    {print} My name is name
                     ```
             5:
                 story_text: |
@@ -388,6 +383,35 @@ adventures:
                     {print}('So your name is ', name)
                     ```
 
+    quotation_marks:
+        name: "'quotation marks'"
+        description: "Introduction quotation marks"
+        default_save_name: "quotation_marks"
+        levels:
+            4:
+                story_text: |
+                    ## 'Quotation marks'
+                    In level 4 `{ask}` and `{print}` have changed.
+                    You must put text that you want to print between quotation marks.
+                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
+                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                story_text_2: |
+                    ## Contractions
+                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
+                    Make sure to remove those apostrophes and change the spelling to I am or What is.
+                    Check out the example code to see the wrong way of using apostrophes.
+                example_code: |
+                    ```
+                    {print} 'You need to use quotation marks from now on!'
+                    answer {is} {ask} 'What do we need to use from now on?'
+                    {print} 'We need to use ' answer
+                    ```
+                example_code_2: |
+                    ```
+                    _ This is the wrong way of using apostrophes _
+                    {print} 'I'm babysitting my sister's kids'
+                    {print} 'What's more fun than that?'
+                    ```
     print_command:
         name: "print"
         description: "Introduction print command"
@@ -2320,7 +2344,6 @@ adventures:
                     ### Exercise 2
                     Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
-                    ## Example Hedy Restaurant
                     ```
                     _ Add the quotation marks to this code _
                     {print} Welcome to Restaurant Chez Hedy!

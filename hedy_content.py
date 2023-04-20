@@ -91,6 +91,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     4: [
         'default',
+        'quotation_marks',
         'rock',
         'dice',
         'dishes',
