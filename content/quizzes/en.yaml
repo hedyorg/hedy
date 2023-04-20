@@ -3100,8 +3100,212 @@ levels:
             correct_answer: "B"
             hint: "The item is either in the list of snacks, or in the list of drinks"
             question_score: '10'
-
-
+    14:
+        1:
+            question_text: "Which statement is true about this rollercoaster?"
+            code: |
+              length = {ask} 'Please fill in your lenth in cm'
+              {if} length > 120
+                  {print} 'Sorry, you cannot go on this rollercoaster.'
+              {else}
+                  {print} 'Enjoy the ride'
+            mp_choice_options:
+            -   option: "You must be taller than 120 cm to go on the rollercoaster"
+                feedback: "True!"
+            -   option: "You must be taller than 119 cm to go on the rollercoaster"
+                feedback: "If you are 120 cm you won't get in"
+            -   option: "You must be shorter than 120 cm to go on the rollercoaster"
+                feedback: "> means greater than"
+            -   option: "There are no length restrictions to go on the rollercoaster "
+                feedback: "There are."
+                correct_answer: "A"
+                hint: "> means greater than"
+                question_score: "10"
+        2:
+            question_text: "Which symbols should be filled in on the blanks?"
+            code: |
+                guests = {ask} 'How many people are at the party?'
+                {if} guests _ 130
+                    {print} 'You can come in!'
+                {if} guests _ 130
+                    {print} 'Im sorry, the club is full. You have to wait for a guest to leave'
+            mp_choice_options:
+            -   option: " > and < "
+                feedback: "That's not it"
+            -   option: "= and >="
+                feedback: "That's not it"
+            -   option: "< and >="
+                feedback: "You are right"
+            -   option: "+ and =="
+                feedback: "That's not it"
+                correct_answer: "C"
+                hint: "There are 130 people allowed in the club"
+                question_score: "10"
+        3:
+            question_text: "What should be filled in in the blanks?"
+            code: |
+                {print} Whoever gets the most points wins!
+                {if} points_player_1 < points_player_2
+                    {print} _
+            mp_choice_options:
+            -   option: "'player 1 wins'"
+                feedback: "player 2 wins"
+            -   option: "'player 2 wins'"
+                feedback: "You win!"
+            -   option: "'player 2 loses'"
+                feedback: "player 2 wins"
+            -   option: "'its a tie'"
+                feedback: "No it's not"
+                correct_answer: "B"
+                hint: "You win the game by having the most points"
+                question_score: "10"
+        4:
+            question_text: "What's wrong with this code?"
+            code: |
+              price = 10
+              buy = {ask} Whould you like to buy this teddybear?
+              money = {ask} 'How much money do you have?'
+              {if} money >= price and buy == 'yes'
+                  {print} 'You should buy the bear!'
+              {else}
+                  {print} 'You shouldn't buy this bear!'
+            mp_choice_options:
+            -   option: "They should have used == instead of = in line 1"
+                feedback: "No that's not it"
+            -   option: "They should have used quotation marks in line 2"
+                feedback: "You are correct"
+            -   option: "They should have used = instead of == in line 4"
+                feedback: "No that's not it"
+            -   option: "They should have used the <= symbol instead of >= in line 4"
+                feedback: "No that's not it"
+                correct_answer: "B"
+                hint: "The symbols are right"
+                question_score: "10"
+        5:
+            question_text: "Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? "
+            code: |
+              age = {ask} How old are you?
+              ticket = {ask} Do you have a ticket?
+              {if} age _ and ticket == 'yes'
+                  {print} 'You can enter the movie theater'
+              {else}
+                  {print} 'You can't come in'
+            mp_choice_options:
+            -   option: "> 12"
+                feedback: "12 year olds are allowed too"
+            -   option: ">= 12"
+                feedback: "Great!"
+            -   option: "< 12"
+                feedback: "These kids are too young!"
+            -   option: "<= 12"
+                feedback: "These kids are too young"
+                correct_answer: "B"
+                hint: "> means greater than"
+                question_score: "10"
+        6:
+            question_text: "How many times do you have to say you are annoyed before this annoying game stops?"
+            code: |
+              lifes = 2
+              {repeat} 10 times
+                  {if} lifes =! 0
+                    answer {ask} 'Are you annoyed yet?'
+                    {if} answer == 'yes'
+                        lifes = lifes - 1
+            mp_choice_options:
+            -   option: "10 times"
+                feedback: "It stops after 2 times"
+            -   option: "0 times"
+                feedback: "It stops after 2 times"
+            -   option: "1 time"
+                feedback: "It stops after 2 times"
+            -   option: "2 times"
+                feedback: "That is correct"
+                correct_answer: "D"
+                hint: "=! means 'is not'"
+                question_score: "10"
+        7:
+            question_text: "What should be filled in on the 3 blanks?"
+            code: |
+              print 'Guess which number'
+              numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+              number = numbers at random
+              game = 'on'
+              for i in range 1 to 10
+                  if game == 'on'
+                      guess = ask 'Which number do you think it is?'
+                      if guess < number
+                          print _
+                      if guess > number
+                          print _
+                      if guess == number
+                          print _
+                          game = 'over'
+            mp_choice_options:
+            -   option: "'Lower' 'Higher' 'You win!'"
+                feedback: "That's not quite right."
+            -   option: "'Higher' 'Lower' 'You win!'"
+                feedback: "You win!"
+            -   option: "'You win!' 'Lower!' 'Higher'"
+                feedback: "That's not quite right."
+            -   option: "'Lower!' 'You win!' 'Higher!'"
+                feedback: "That's not quite right."
+                correct_answer: "B"
+                hint: "The last one should say you win."
+                question_score: "10"
+        8:
+            question_text: "Which symbol should be used on the blank?"
+            code: |
+              name _ {ask} 'Who are you?'
+              {if} name == 'Hedy'
+                  {print} 'Me too!'
+            mp_choice_options:
+            -   option: ">-"
+                feedback: "This is not a symbol."
+            -   option: "=="
+                feedback: "We are not comparing anything, just asking."
+            -   option: "=!"
+                feedback: "We are not comparing anything, just asking"
+            -   option: "="
+                feedback: "Right!"
+                correct_answer: "D"
+                hint: "We are not comparing anything, we are just asking a name."
+                question_score: "10"
+        9:
+            question_text: "How many pieces of chocolate will give you a stomachache according to this fitbit?"
+            code: |
+              chocolate = {ask} 'How many pieces of chocolate have you eaten?'
+                {if} chocolate =< 2
+                    {print} 'Thats a healthy amount'
+                {if} chocolate > 2 and chocolate =< 8
+                    {print} 'Thats a bit much'
+                {if} chocolate > 8
+                    {print} You will get a stomachache!
+            mp_choice_options:
+            -   option: "1 or more"
+                feedback: "No"
+            -   option: "2 or more"
+                feedback: "No"
+            -   option: "8 or more"
+                feedback: "Almost"
+            -   option: "9 or more"
+                feedback: "Great!"
+                correct_answer: "D"
+                hint: "> 8 means more than 8. "
+                question_score: "10"
+        10:
+            question_text: "Which of these codes has used the correct = or == symbol?"
+            mp_choice_options:
+            -   option: "{if} name = Hedy"
+                feedback: "No"
+            -   option: "{if} age = 24"
+                feedback: "No"
+            -   option: "answer = {ask} 'What is your answer'"
+                feedback: "Yes!"
+            -   option: "answer == {ask} 'How are you doing?'"
+                feedback: "No"
+                correct_answer: "C"
+                hint: "When you are comparing two answers you should use =="
+                question_score: "10"
 # Empty format for a question to use later
 #        10:
 #            question_text:
