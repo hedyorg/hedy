@@ -77,27 +77,27 @@ adventures:
                     name {is} {ask} 'what is your name?'
                     {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
-                    ## 1 + 1
-                     In this level you learn something new: you can now also calculate.
+                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
+                    What you can't yet do though, is calculate the price for everyone's dinner.
 
-                     The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
+                    Another option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.
+                    Go see for yourself!
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    ```
-                story_text_2: |
-                    We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
-                example_code_2: |
-                    ```
-                    name = Hedy
-                    answer = 20 + 4
+                    food_price {is} 0
+                    drink_price {is} 0
+                    total_price {is} 0
+                    {print} 'Welcome to McHedy'
+                    order {is} {ask} 'What would you like to eat?'
+                    {if} order {is} hamburger food_price {is} 5
+                    {if} order {is} fries food_price {is} 2
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {is} water drink_price {is} 0
+                    else drink_price {is} 3
+                    total_price {is} food_price + drink_price
+                    {print} 'That will be ' total_price ' dollars, please'
                     ```
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
@@ -383,35 +383,6 @@ adventures:
                     {print}('So your name is ', name)
                     ```
 
-    quotation_marks:
-        name: "'quotation marks'"
-        description: "Introduction quotation marks"
-        default_save_name: "quotation_marks"
-        levels:
-            4:
-                story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
-                story_text_2: |
-                    ## Contractions
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to I am or What is.
-                    Check out the example code to see the wrong way of using apostrophes.
-                example_code: |
-                    ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
-                    ```
-                example_code_2: |
-                    ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
-                    ```
     print_command:
         name: "print"
         description: "Introduction print command"
@@ -677,6 +648,63 @@ adventures:
                     answer is ask 'What is your favorite animal?'
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
+                    ```
+    quotation_marks:
+        name: "'quotation marks'"
+        description: "Introduction quotation marks"
+        default_save_name: "quotation_marks"
+        levels:
+            4:
+                story_text: |
+                    ## 'Quotation marks'
+                    In level 4 `{ask}` and `{print}` have changed.
+                    You must put text that you want to print between quotation marks.
+                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
+                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                story_text_2: |
+                    ## Contractions
+                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
+                    Make sure to remove those apostrophes and change the spelling to I am or What is.
+                    Check out the example code to see the wrong way of using apostrophes.
+                example_code: |
+                    ```
+                    {print} 'You need to use quotation marks from now on!'
+                    answer {is} {ask} 'What do we need to use from now on?'
+                    {print} 'We need to use ' answer
+                    ```
+                example_code_2: |
+                    ```
+                    _ This is the wrong way of using apostrophes _
+                    {print} 'I'm babysitting my sister's kids'
+                    {print} 'What's more fun than that?'
+                    ```
+    maths:
+        name: "maths"
+        description: "Introducing maths"
+        default_save_name: "maths"
+        levels:
+            6:
+                start_code: "{print} '5 times 5 is ' 5 * 5"
+                story_text: |
+                    ## 1 + 1
+                    In this level you learn something new: you can now also calculate.
+
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                example_code: |
+                    ```
+                    {print} '5 plus 5 is ' 5 + 5
+                    {print} '5 minus 5 is ' 5 - 5
+                    {print} '5 times 5 is ' 5 * 5
+                    ```
+                story_text_2: |
+                    We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
+                example_code_2: |
+                    ```
+                    name = Hedy
+                    answer = 20 + 4
                     ```
     story:
         name: "Story"
@@ -2087,8 +2115,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    ## Random numbers
-                    You can also let the computer do random sums on its own using random.
+                    **Extra** You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_3: |
                     ```
@@ -2378,7 +2405,15 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    But you can also add many more things to your virtual restaurant, for example more courses.
 
+                    ### Exercise
+                    You can add many more things to your virtual restaurant. For example, can you...
+                    - ask how many people are coming and multiply the price by that amount?
+                    - add another course?
+                    - give people a discount when they enter a (secret) couponcode?
+                    - add a children's menu?
+                    - think of other fun things to add?
                 example_code: |4
 
                     You can make a simple restaurant code, like this:
@@ -2392,40 +2427,6 @@ adventures:
                     {if} main {is} lasagne price = 12
                     {if} main {is} spaghetti price = 8
                     {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
-                story_text_2: |
-                    But you can also add many more things to your virtual restaurant, for example more courses.
-
-                    ### Exercise
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - ask how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
-                example_code_2: |4
-
-                    In this example there are three courses, which requires more code and more additions in calculating the price.
-                    ```
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our starters are salad, soup, or carpaccio'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    {print} 'Our desserts are brownie, icecream, or milkshake'
-                    starter = {ask} 'Which starter would you like to have?'
-                    main = {ask} 'Which main course would you like?'
-                    dessert = {ask} 'Which dessert do you pick?'
-                    price = 0
-                    {if} starter {is} soup price = price + 6 {else} price = price + 7
-                    {if} main {is} pizza price = price + 10
-                    {if} main {is} lasagne price = price + 12
-                    {if} main {is} spaghetti price = price + 8
-                    {if} dessert {is} brownie price = price + 7
-                    {if} dessert {is} icecream price = price + 5
-                    {if} dessert {is} milkshake price = price + 4
-                    {print} 'You have ordered ' starter ' , ' main ' and ' dessert
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
@@ -2731,19 +2732,6 @@ adventures:
                     {print} 'You will get ...'
                     {sleep}
                     {print} kids ' kids!'
-                    ```
-
-                    ## Example Silly Fortune Teller
-                    If the previous example wasn't silly enough for you, take a look at this one!
-                    ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
                     ```
                 start_code: "# place your code here"
             7:
