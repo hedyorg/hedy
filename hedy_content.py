@@ -103,17 +103,19 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     5: [
         'default',
+        'if_command',
         'language',
         'dice',
         'dishes',
         'story',
         'rock',
-        'pressit',
         'parrot',
-        'turtle',
         'haunted',
+        'in_command',
         'restaurant',
-        'fortune'
+        'fortune',
+        'pressit',
+        'turtle'
     ],
     6: [
         'default',

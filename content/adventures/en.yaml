@@ -68,38 +68,19 @@ adventures:
                     {print} 'What's more fun than that?'
                     ```
             5:
+                story_text: |
+                    In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
+                    But it's not really interactive, the player doesn't have any influence on what happens in the game.
+
+                    In this level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.
+                    So let's go to next tab for the new command!
+                example_code: |
+                    ```
+                    password {is} {ask} 'What is the correct password?'
+                    ```
                 start_code: |-
                     name {is} {ask} 'what is your name?'
                     {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
-                story_text: |
-                    ## If... else....
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
-                example_code: |
-                    ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
-                    ```
-                story_text_3: |
-                    ## Lists
-                    When we want to check if something is in a list, we can now use the `{in}` command.
-                    This code prints pretty! if you choose green or yellow, and meh otherwise.
-                example_code_3: |
-                    ```
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
-                    ```
-                story_text_2: |
-                    Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
-                example_code_2: |
-                    ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
-                    ```
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
@@ -610,6 +591,68 @@ adventures:
                     {print} My favorite colour is...
                     {sleep} 2
                     {print} green!
+                    ```
+    if_command:
+        name: "if and else"
+        description: "Introducing the if command"
+        default save name: "if_command"
+        levels:
+            5:
+                story_text: |
+                    ## If... else....
+                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
+                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
+                    `{ask}` and `{print}` still work like they did in level 4.
+                example_code: |
+                    ```
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    ```
+                story_text_2: |
+                    Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
+                example_code_2: |
+                    ```
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
+                    {else} {print} 'boo!'
+                    ```
+                story_text_3: |
+                    ### Exercise
+                    Try to create your own code with `{if}` and `{else}`. You can use the example code if you want.
+                example_code_3: |
+                    ```
+                    answer {is} {ask} '2 + 2 = ?'
+                    _ _ _ 4 _ 'Great job!'
+                    _ _ 'No 2 + 2 = 4'
+                    ```
+    in_command:
+        name: "in"
+        description: "Introducing the in command"
+        default save name: "in_command"
+        levels:
+            5:
+                story_text: |
+                    ## Lists
+                    When we want to check if something is in a list, we can now use the `{in}` command.
+                    This code prints pretty! if you choose green or yellow, and meh otherwise.
+                example_code: |
+                    ```
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
+                    ```
+
+                story_text_2: |
+                    ### Exercise
+                    Finish the example code by filling in the blanks with commands that you've learned.
+                    When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
+                example_code_2: |
+                    ```
+                    animals is dog, cow, sheep
+                    answer is ask 'What is your favorite animal?'
+                    _ answer _ animals _ 'Mine too!'
+                    _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
     story:
         name: "Story"
@@ -2293,35 +2336,20 @@ adventures:
                 start_code: "# place your code here"
             5:
                 story_text: |
-                    ## Restaurant
-                    In this level the `{if}` command allows you to `{ask}` your customers questions and give different responses to the answers.
-                    In the example below, you see that you can `{ask}` the customer `{if}` they want to hear the specials and Hedy can respond accordingly.
-
-                example_code: |
-                    ```
-                    {print} 'Welcome to Restaurant Chez Hedy!'
-                    special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'One ' food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with that?'
-                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything else?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'One ' food
-                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy your meal!'
-                    ```
-                story_text_2: |
                     ### Exercise
-                    The code above shows an example of how you could program that you've run out of a menu item in your restaurant.
+                    The example code shows how you could program that you've run out of a menu item in your restaurant.
                     Copy your own restaurant code from the previous levels. Create a problem in your restaurant and code it, like the example code did.
                     For instance, you could also run out of a menu item, or you don't take credit cards, or the ice cream machine is broken.
 
                     **Extra** Have you programmed the problem and programmed appropriate responses? Then try to add more `{if}` and `{else}` commands into your code.
                     Try to add an `{if}` after every `{ask}` command in your code to make the code as interactive as possible!
-
+                example_code: |
+                    ```
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
+                    ```
                 start_code: "# place your code here"
             6:
                 story_text: |
@@ -2633,34 +2661,20 @@ adventures:
                     ```
                 start_code: "# place your code here"
             5:
-                story_text: |
-                    ## Fortune Teller
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict if youll win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone else will win!😭'
-                    ```
-                story_text_2: |
-                    ### Hack the program
-                    Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!
-                    Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.
-                    But of course, still gives you a positive answer and the other players a negative one.
-                example_code_2: |
-                    ```
-                    {print} 'Im Hedy the fortune teller!'
+                    friends {is} Jordan, Lucy, Dave
                     {print} 'I can predict if you will win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
-                    goodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!
-                    badanswer {is} Bad luck! Try again!, Another person will win, You lose!
-                    {if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
-                story_text_3: |
+                story_text: |
                     ### Exercise
+                    In the example code you see how to make a fortune teller program that allows you to tip the odds in your favor. This cheating program always tells you that you will win the lottery, but your friends will never win.
+
                     Use this to make your own program, be creative! For example you could create a code that predicts that:
                     * your favorite sports team will beat all the competitors!
                     * your favorite movie will be chosen for movie night!
