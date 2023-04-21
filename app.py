@@ -27,6 +27,7 @@ import hedy
 import hedy_content
 import hedy_translation
 import hedyweb
+import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
@@ -63,7 +64,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 babel = Babel(app)
-
+jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)

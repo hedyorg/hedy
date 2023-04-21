@@ -4,6 +4,7 @@ import os
 import uuid
 
 from flask import g, jsonify, request, session
+import jinja_partials
 from flask_babel import gettext
 
 import hedy
@@ -266,6 +267,7 @@ class ForTeachersModule(WebsiteModule):
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
             min_level=min_level,
+            class_id=Class['id'],
             javascript_page_options=dict(
                 page='customize-class',
                 available_adventures_level_translation=gettext('available_adventures_level'),
@@ -275,6 +277,81 @@ class ForTeachersModule(WebsiteModule):
                 available_adventures=available_adventures,
                 class_id=Class['id'],
             ))
+
+    @route("/change-level", methods=["GET"])
+    @requires_login
+    def change_dropdown_level(self, user):
+        class_id = request.args.get('class_id')
+        level = request.args.get('level')
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        teacher_adventures_formatted = []
+        for adventure in teacher_adventures:
+            teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
+
+        available_adventures = {}
+        # min_level = 1
+        if customizations:
+            # in case this class has thew new way to select adventures
+            if 'sorted_adventures' in customizations:
+                self.purge_customizations(customizations['sorted_adventures'], adventures)
+                available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+            # it uses the old way so convert it to the new one
+            elif 'adventures' in customizations:
+                customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+                for adventure, levels in customizations['adventures'].items():
+                    for level in levels:
+                        customizations['sorted_adventures'][str(level)].append(
+                            {"name": adventure, "from_teacher": False})
+                available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+#            min_level = min(customizations['levels'])
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        available_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
+
+        if customizations:
+            # in case this class has thew new way to select adventures
+            if 'sorted_adventures' in customizations:
+                self.purge_customizations(customizations['sorted_adventures'], adventures)
+                available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+            # it uses the old way so convert it to the new one
+            elif 'adventures' in customizations:
+                customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+                for adventure, levels in customizations['adventures'].items():
+                    for level in levels:
+                        customizations['sorted_adventures'][str(level)].append(
+                            {"name": adventure, "from_teacher": False})
+                available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+        else:
+            for adventure in teacher_adventures:
+                available_adventures[int(adventure['level'])].append(
+                    {"name": adventure['id'], "from_teacher": True})
+
+        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
+                                             level=level,
+                                             customizations=customizations,
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             adventure_names=adventure_names,
+                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                                             class_id=class_id)
 
     def purge_customizations(self, sorted_adventures, adventures):
         for _, adventure_list in sorted_adventures.items():

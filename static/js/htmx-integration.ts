@@ -5,6 +5,7 @@ import { initializeHighlightedCodeBlocks, showAchievements } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
 import { Achievement } from './types';
+import Sortable = require("sortablejs");
 
 declare const htmx: typeof import('./htmx');
 
@@ -38,6 +39,11 @@ htmx.defineExtension('disable-element', {
  */
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content);
+    var sortable : HTMLElement =  content.querySelector('.sortable') as HTMLElement;
+    new Sortable(sortable, {
+        animation: 150,
+        ghostClass: 'blue-background-class'
+    })
 });
 
 interface HtmxEvent {
