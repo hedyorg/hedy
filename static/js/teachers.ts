@@ -484,7 +484,7 @@ export function enable_level(level: string) {
     }
 }
 
-export function test(level: string) {  
+export function setDateLevelInputColor(level: string) {  
   var date_string : string = $('#opening_date_level_' + level).val() as string;
   var input_date = new Date(date_string);
   var today_date = new Date();
@@ -774,64 +774,64 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       });
 
       $('[id^=opening_date_level_]').each(function() {
-        test($(this).attr('level')!);
+        setDateLevelInputColor($(this).attr('level')!);
       })
 
       drag_list(document.getElementById("sortadventures"));
 
-      $('#levels-dropdown').on('change', function(){
-          var level = $(this).val() as string;
-          $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
-          if ($("#disabled").hasClass('flex')) {
-            $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
-          }
-          $("#level-"+level).show({
-              start: function() {
-                  $(this).addClass('flex');
-                  $(this).removeClass('hidden');
-              }
-          });
+      // $('#levels-dropdown').on('change', function(){
+      //     var level = $(this).val() as string;
+      //     $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
+      //     if ($("#disabled").hasClass('flex')) {
+      //       $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
+      //     }
+      //     $("#level-"+level).show({
+      //         start: function() {
+      //             $(this).addClass('flex');
+      //             $(this).removeClass('hidden');
+      //         }
+      //     });
           
-          setLevelStateIndicator(level);
-          addAllAvailableAdventures(level);
+      //     setLevelStateIndicator(level);
+      //     addAllAvailableAdventures(level);
 
-          drag_list(document.getElementById("level-"+level));
-      });
+      //     // drag_list(document.getElementById("level-"+level));
+      // });
 
-      $('#sortadventures').on('click', 'span', (function(event){
-        event.preventDefault();
-        const adventure = $(this).parent().attr('adventure') as string;
-        const level = $(this).parent().attr('level') as string;
-        const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
-        if (!available_adventures[level]) {
-          throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
-        }
-        available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
-        $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
-        $(this).parent().remove();
-        markUnsavedChanges();
-      }));
+      // $('#sortadventures').on('click', 'span', (function(event){
+      //   event.preventDefault();
+      //   const adventure = $(this).parent().attr('adventure') as string;
+      //   const level = $(this).parent().attr('level') as string;
+      //   const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
+      //   if (!available_adventures[level]) {
+      //     throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
+      //   }
+      //   available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
+      //   $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
+      //   $(this).parent().remove();
+      //   markUnsavedChanges();
+      // }));
 
-      $('#available').on('change', function(){
-          const values = ($(this).val() as string).split('-');
-          const adventure = values[0];
-          const level = values[1]
-          const from_teacher = values[2] === "true";
-          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there
-          const adventure_div =
-          `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
-                  ${adventure_names[adventure]}
-          </div>`;
-          $('#level-'+level).append(adventure_div);
-          const index = available_adventures[level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
-          available_adventures![level].splice(index, 1);
-          $('#remove-'+adventure).remove();
-          drag_list(document.getElementById("level-"+level));
-          markUnsavedChanges();
-      });
+      // $('#available').on('change', function(){
+      //     const values = ($(this).val() as string).split('-');
+      //     const adventure = values[0];
+      //     const level = values[1]
+      //     const from_teacher = values[2] === "true";
+      //     // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there
+      //     const adventure_div =
+      //     `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
+      //         <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
+      //             ${adventure_names[adventure]}
+      //     </div>`;
+      //     $('#level-'+level).append(adventure_div);
+      //     const index = available_adventures[level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
+      //     available_adventures![level].splice(index, 1);
+      //     $('#remove-'+adventure).remove();
+      //     drag_list(document.getElementById("level-"+level));
+      //     markUnsavedChanges();
+      // });
 
-      addAllAvailableAdventures($('#levels-dropdown').val() as string);
+      // addAllAvailableAdventures($('#levels-dropdown').val() as string);
   });
 
   /**
@@ -839,14 +839,14 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
    *
    * They get removed from this list later on in some way that I don't quite get.
    */
-  function addAllAvailableAdventures(level: string) {
-    $('#available').empty();
-    $('#available').append(`<option value="none" selected disabled>Adventures</option>`);
-    const adventures = available_adventures[level];
-    for(let i = 0; i < adventures.length; i++) {
-      $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-    }
-  }
+  // function addAllAvailableAdventures(level: string) {
+  //   $('#available').empty();
+  //   $('#available').append(`<option value="none" selected disabled>Adventures</option>`);
+  //   const adventures = available_adventures[level];
+  //   for(let i = 0; i < adventures.length; i++) {
+  //     $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
+  //   }
+  // }
 }
 
 /**
