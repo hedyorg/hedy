@@ -128,9 +128,9 @@ levels:
             code: |-
                 gracze = Władek, Tadek, Zofia
                 gracz1 = gracze {at} {random}
+                {remove} gracz1 {from} gracze
                 gracz2 = gracze {at} {random}
                 {print} gracz1 ' rozpoczyna grę z ' gracz2
-                {remove} gracz1 {from} gracze
                 {remove} gracz2 {from} gracze
                 {print} 'Zwycięzca gra przeciwko ' gracze {at} {random}
         2:
