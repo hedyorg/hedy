@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 10:45+0200\n"
-"PO-Revision-Date: 2023-03-23 09:50+0000\n"
+"POT-Creation-Date: 2023-04-11 15:55+0200\n"
+"PO-Revision-Date: 2023-04-06 07:18+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: hu\n"
 "Language-Team: hu <LL@li.org>\n"
@@ -14,33 +14,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "A {name} nevű változót a {access_line_number}. sorban próbáltad használni, de csak a {definition_line_number}. sorban hoztad létre. A változókat előbb létre kell hoznod, csak utána tudod használni őket."
 
 #, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name {variable} needs to be set before you can use it on the right-hand side of the is command"
+msgstr "Először be kell állítanod a {variable} nevű változó értékét, csak utána tudod az {is} parancs jobb oldalán használni"
 
 msgid "Has Blanks"
 msgstr "A kódod hiányos. Tartalmaz üres helyeket, amelyeket kóddal kell helyettesíteni."
 
 msgid "Incomplete"
-msgstr "Hoppá! Elfelejtettél egy kis kódot! A(z) {line_number}. sorban, szöveget kell beírnod a {incomplete_command} mögé."
+msgstr "Hoppá! Elfelejtettél egy kis kódot! A(z) {line_number}. sorban, szöveget kell beírnod a(z) {incomplete_command} parancs mögé."
 
 #, fuzzy
 msgid "Incomplete Repeat"
 msgstr "It looks like you forgot to use {command} with the repeat command you used on line {line_number}."
 
 msgid "Invalid"
-msgstr "{invalid_command} Nem Hedy szint {level} parancs. Erre gondoltál {guessed_command}?"
+msgstr "{invalid_command}: Nem {level}. szintű Hedy parancs. A(z) {guessed_command} parancsra gondoltál?"
 
 #, fuzzy
 msgid "Invalid Argument"
-msgstr "You cannot use the command {command} with {invalid_argument} . Try changing {invalid_argument} to {allowed_types}."
+msgstr "A(z) {command} parancsot nem lehet a(z) {invalid_argument} argumentummal használni. Próbáld meg '{invalid_argument}' típusát megváltoztatni valamelyikre ezek közül: {allowed_types}."
 
 #, fuzzy
 msgid "Invalid Argument Type"
-msgstr "You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+msgstr "A(z) {command} parancsot nem lehet a(z) {invalid_argument} argumentummal használni, mert az {invalid_type} típusú. Próbáld meg '{invalid_argument}' típusát megváltoztatni valamelyikre ezek közül: {allowed_types}."
 
 #, fuzzy
 msgid "Invalid At Command"
@@ -62,11 +63,11 @@ msgstr "Echo -t használtál kérdezés előtt, vagy echo-t kérdés nélkül. E
 
 #, fuzzy
 msgid "Lonely Text"
-msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
+msgstr "A(z) {line_number}. sorban csak szöveg van, úgy tűnik elfelejtettél parancsot írni oda."
 
 #, fuzzy
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr "Úgy tűnik, elfelejtettél parancsot írni a(z) {line_number}. sorba."
 
 #, fuzzy
 msgid "Missing Inner Command"
@@ -79,8 +80,12 @@ msgstr "You used too few spaces in line {line_number}. You used {leading_spaces}
 msgid "Parse"
 msgstr "A kód, amit beírtál, nem érvényes Hedy kód. Hiba van a következő sorban: {location[0]}, a következő helyen: {location[1]}. Ezt írtad: {character_found}, de ez nem megengedett"
 
+#, fuzzy
+msgid "Pressit Missing Else"
+msgstr "You forgot to add what happens when you press a different key, add an {else} to your code"
+
 msgid "Too Big"
-msgstr "Azta! A program lenyűgöző {lines_of_code} kódsorral rendelkezik! De ezen a szinten csak {max_lines} sort dolgozhatunk fel. Csökkentsd a programot, és próbáld újra."
+msgstr "Azta! A program lenyűgözően hosszú, {lines_of_code} kódsorral rendelkezik! De ezen a szinten legfeljebb csak {max_lines} sort dolgozhatunk fel. Rövidítsd le a programot, és próbáld újra."
 
 #, fuzzy
 msgid "Unexpected Indentation"
@@ -109,11 +114,11 @@ msgid "Var Undefined"
 msgstr "Ki akartad íratni: {name}, de nem adtál neki értéket."
 
 msgid "Wrong Level"
-msgstr "Ez helyes Hedy-kód volt, de nem a megfelelő szinten. Írtál {offending_keyword} a szinthez {working_level}. Tipp: {tip}."
+msgstr "Ez helyes Hedy-kód volt, de nem a megfelelő szinten. A(z) {working_level}. szinten még nem lehet a(z) {offending_keyword} parancsot használni. Hátha ez segít: {tip}."
 
 #, fuzzy
 msgid "account_overview"
-msgstr "Account overview"
+msgstr "Fiók áttekintő"
 
 #, fuzzy
 msgid "accounts_created"
@@ -125,23 +130,23 @@ msgstr "On this page you can create accounts for multiple students at the same t
 
 #, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "Új eredményt értél el!"
 
 #, fuzzy
 msgid "achievements"
-msgstr "achievements"
+msgstr "eredmények"
 
 #, fuzzy
 msgid "achievements_check_icon_alt"
-msgstr "You've earned an achievement!"
+msgstr "Új eredményt értél el!"
 
 #, fuzzy
 msgid "achievements_logo_alt"
-msgstr "achievements"
+msgstr "eredmények"
 
 #, fuzzy
 msgid "add_students"
-msgstr "tanulók"
+msgstr "tanulók hozzáadása"
 
 #, fuzzy
 msgid "add_students_options"
@@ -152,7 +157,7 @@ msgid "admin"
 msgstr "Admin"
 
 msgid "advance_button"
-msgstr "Menj tovább: szint {level}"
+msgstr "Menj tovább: {level}. szint"
 
 msgid "adventure"
 msgstr "Kaland"
@@ -705,15 +710,15 @@ msgstr "Elfelejtetted a jelszavad?"
 
 #, fuzzy
 msgid "from_another_teacher"
-msgstr "From another teacher"
+msgstr "Egy másik tanártól"
 
 #, fuzzy
 msgid "from_magazine_website"
-msgstr "From a magazine or website"
+msgstr "Egy magazinból vagy honlapról"
 
 #, fuzzy
 msgid "from_video"
-msgstr "From a video"
+msgstr "Egy videóból"
 
 #, fuzzy
 msgid "fun_statistics_msg"
@@ -724,7 +729,7 @@ msgstr "Neme"
 
 #, fuzzy
 msgid "gender_invalid"
-msgstr "Please select a valid gender, choose (Female, Male, Other)."
+msgstr "Kérlek válassz egy érvényes nemet ezek közül: férfi, nő, egyéb."
 
 #, fuzzy
 msgid "general"
@@ -775,15 +780,15 @@ msgstr "Hand in exercise"
 
 #, fuzzy
 msgid "heard_about_hedy"
-msgstr "How have you heard about Hedy?"
+msgstr "Honnan hallottál a Hedyről?"
 
 #, fuzzy
 msgid "heard_about_invalid"
-msgstr "Please select a valid way you heard about us."
+msgstr "Kérlek egy érvényes lehetőség kiválasztásával add meg, hogy honnan hallottál a Hedyről."
 
 #, fuzzy
 msgid "hedy_achievements"
-msgstr "My achievements"
+msgstr "Eredményeim"
 
 #, fuzzy
 msgid "hedy_choice_title"
@@ -795,7 +800,7 @@ msgstr "Hedy logo"
 
 #, fuzzy
 msgid "hedy_on_github"
-msgstr "Hedy on Github"
+msgstr "Hedy a Githubon"
 
 #, fuzzy
 msgid "hedy_tutorial_logo_alt"
@@ -829,7 +834,7 @@ msgid "hide_quiz"
 msgstr "Hide quiz"
 
 msgid "highest_level_reached"
-msgstr "A legnagyobb elért szint"
+msgstr "A legmagasabb elért szint"
 
 #, fuzzy
 msgid "highest_quiz_score"
@@ -845,11 +850,11 @@ msgstr "You don't have a public profile and are therefore not listed on the high
 
 #, fuzzy
 msgid "highscores"
-msgstr "Score"
+msgstr "Pontszám"
 
 #, fuzzy
 msgid "hint"
-msgstr "Hint?"
+msgstr "Segítség?"
 
 #, fuzzy
 msgid "ill_work_some_more"
@@ -861,11 +866,11 @@ msgstr "Your chosen image is invalid."
 
 #, fuzzy
 msgid "input"
-msgstr "input from ask"
+msgstr "kérdésre adott válasz"
 
 #, fuzzy
 msgid "integer"
-msgstr "a number"
+msgstr "szám"
 
 #, fuzzy
 msgid "invalid_class_link"
@@ -892,7 +897,7 @@ msgstr "Invite date"
 
 #, fuzzy
 msgid "invite_message"
-msgstr "You have received an invitation to join class"
+msgstr "Meghívót kaptál, hogy csatlakozz egy osztályhoz"
 
 #, fuzzy
 msgid "invite_prompt"
@@ -1068,28 +1073,28 @@ msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
 
 msgid "my_account"
-msgstr "Profilom"
+msgstr "Fiókom"
 
 #, fuzzy
 msgid "my_achievements"
-msgstr "My achievements"
+msgstr "Eredményeim"
 
 #, fuzzy
 msgid "my_adventures"
-msgstr "My adventures"
+msgstr "Kalandjaim"
 
 msgid "my_classes"
 msgstr "Osztályaim"
 
 #, fuzzy
 msgid "my_messages"
-msgstr "My messages"
+msgstr "Üzeneteim"
 
 msgid "name"
 msgstr "Név"
 
 msgid "nav_explore"
-msgstr "Explore"
+msgstr "Felfedezés"
 
 #, fuzzy
 msgid "nav_hedy"
@@ -1113,11 +1118,11 @@ msgstr "új sor"
 
 #, fuzzy
 msgid "next_exercise"
-msgstr "Next exercise"
+msgstr "Következő feladat"
 
 #, fuzzy
 msgid "next_page"
-msgstr "Next page"
+msgstr "Következő oldal"
 
 #, fuzzy
 msgid "next_step_tutorial"
@@ -1230,7 +1235,7 @@ msgid "or"
 msgstr "or"
 
 msgid "other"
-msgstr "Más"
+msgstr "Egyéb"
 
 msgid "other_block"
 msgstr "Más blokkprogramozási nyelv"
@@ -1468,7 +1473,7 @@ msgid "recover_password"
 msgstr "Kérj jelszó-visszaállítást "
 
 msgid "regress_button"
-msgstr "Menj vissza: szint {level}"
+msgstr "Menj vissza: {level}. szint"
 
 #, fuzzy
 msgid "remove"
@@ -1647,7 +1652,7 @@ msgstr "csillag"
 
 #, fuzzy
 msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
+msgstr "Hedy bemutató indítása"
 
 #, fuzzy
 msgid "start_programming"
@@ -1673,7 +1678,7 @@ msgstr "Kód mentése"
 
 #, fuzzy
 msgid "string"
-msgstr "text"
+msgstr "szöveg"
 
 #, fuzzy
 msgid "student_already_in_class"
@@ -1689,7 +1694,7 @@ msgstr "This username doesn't exist."
 
 #, fuzzy
 msgid "student_signup_header"
-msgstr "Student"
+msgstr "Tanuló"
 
 msgid "students"
 msgstr "tanulók"
@@ -1700,7 +1705,7 @@ msgstr "Beküldve ekkor:"
 
 #, fuzzy
 msgid "submit_answer"
-msgstr "Answer question"
+msgstr "Válasz beküldése"
 
 #, fuzzy
 msgid "submit_program"
@@ -1788,63 +1793,63 @@ msgstr "Cím"
 
 #, fuzzy
 msgid "title_achievements"
-msgstr "Hedy - My achievements"
+msgstr "Hedy - Eredményeim"
 
 #, fuzzy
 msgid "title_admin"
-msgstr "Hedy - Administrator page"
+msgstr "Hedy - Admin oldal"
 
 #, fuzzy
 msgid "title_class logs"
-msgstr "Hedy - Join class"
+msgstr "Hedy - Csatlakozás osztályhoz"
 
 #, fuzzy
 msgid "title_class statistics"
-msgstr "My statistics"
+msgstr "Statisztikáim"
 
 #, fuzzy
 msgid "title_class-overview"
-msgstr "Hedy - Class overview"
+msgstr "Hedy - Osztály áttekintő"
 
 #, fuzzy
 msgid "title_customize-adventure"
-msgstr "Hedy - Customize adventure"
+msgstr "Hedy - Kaland beállításai"
 
 #, fuzzy
 msgid "title_customize-class"
-msgstr "Hedy - Customize class"
+msgstr "Hedy - Osztály beállításai"
 
 #, fuzzy
 msgid "title_explore"
-msgstr "Hedy - Explore"
+msgstr "Hedy - Felfedezés"
 
 #, fuzzy
 msgid "title_for-teacher"
-msgstr "Hedy - For teachers"
+msgstr "Hedy - Tanároknak"
 
 #, fuzzy
 msgid "title_join-class"
-msgstr "Hedy - Join class"
+msgstr "Hedy - Csatlakozás osztályhoz"
 
 #, fuzzy
 msgid "title_landing-page"
-msgstr "Welcome to Hedy!"
+msgstr "Üdvözlünk a Hedy oldalán!"
 
 #, fuzzy
 msgid "title_learn-more"
-msgstr "Hedy - Learn more"
+msgstr "Hedy - Tudj meg többet"
 
 #, fuzzy
 msgid "title_login"
-msgstr "Hedy - Login"
+msgstr "Hedy - Bejelentkezés"
 
 #, fuzzy
 msgid "title_my-profile"
-msgstr "Hedy - My account"
+msgstr "Hedy - Fiókom"
 
 #, fuzzy
 msgid "title_privacy"
-msgstr "Hedy - Privacy terms"
+msgstr "Hedy - Adatvédelmi megállapodás"
 
 #, fuzzy
 msgid "title_programs"
@@ -1868,11 +1873,11 @@ msgstr "Hedy - A fokozatos programnyelv"
 
 #, fuzzy
 msgid "title_view-adventure"
-msgstr "Hedy - View adventure"
+msgstr "Hedy - Kaland megnyitása"
 
 #, fuzzy
 msgid "token_invalid"
-msgstr "Your token is invalid."
+msgstr "Érvénytelen token."
 
 #, fuzzy
 msgid "too_many_attempts"
@@ -1884,7 +1889,7 @@ msgstr "Valami baj történt a kód fordítása közben. Próbáld meg futtatni,
 
 #, fuzzy
 msgid "translating_hedy"
-msgstr "Translating Hedy"
+msgstr "A Hedy fordítása"
 
 #, fuzzy
 msgid "try_it"
@@ -1900,15 +1905,15 @@ msgstr "Súgó elrejtése"
 
 #, fuzzy
 msgid "tutorial_message_not_found"
-msgstr "You have received an invitation to join class"
+msgstr "Meghívót kaptál, hogy csatlakozz egy osztályhoz"
 
 #, fuzzy
 msgid "tutorial_title_not_found"
-msgstr "We could not find that page!"
+msgstr "Sajnos nem találjuk ezt az oldalt!"
 
 #, fuzzy
 msgid "unauthorized"
-msgstr "You don't have access rights for this page"
+msgstr "Ez az oldal számodra nem elérhető"
 
 #, fuzzy
 msgid "unique_usernames"
@@ -1933,14 +1938,14 @@ msgstr "Program megosztása megszüntetve"
 
 #, fuzzy
 msgid "update_adventure_prompt"
-msgstr "Are you sure you want to update this adventure?"
+msgstr "Biztosan frissíted ezt a kalandot?"
 
 msgid "update_profile"
 msgstr "Profil frissítése"
 
 #, fuzzy
 msgid "update_public"
-msgstr "Update public profile"
+msgstr "Nyilvános profil frissítése"
 
 #, fuzzy
 msgid "user"
@@ -1966,14 +1971,14 @@ msgid "username_invalid"
 msgstr "Érvénytelen felhasználónév."
 
 msgid "username_special"
-msgstr "A felhaszálónévben nem lehet`:` vagy `@`."
+msgstr "A felhaszálónévben nem lehet `:` vagy `@`."
 
 msgid "username_three"
 msgstr "A felhasználónévnek legalább három karaktert kell tartalmaznia."
 
 #, fuzzy
 msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgstr "Egy vagy több felhasználónév már létezik, nem hozható létre újra."
 
 #, fuzzy
 msgid "value"
@@ -2005,7 +2010,7 @@ msgstr "What should my code do?"
 
 #, fuzzy
 msgid "whole_world"
-msgstr "The world"
+msgstr "Az egész világ"
 
 msgid "write_first_program"
 msgstr "Írd meg az első programodat!"
@@ -2083,4 +2088,3 @@ msgstr "Your program"
 
 #~ msgid "select_a_level"
 #~ msgstr "Select a level"
-

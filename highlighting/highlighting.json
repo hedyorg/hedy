@@ -4442,6 +4442,24 @@
                     "unicode": true
                 },
                 {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
                     "regex": "(__comma__)",
                     "token": [
                         "keyword"
@@ -5002,6 +5020,42 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -5588,6 +5642,42 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -6200,6 +6290,51 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -6837,6 +6972,51 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -7500,6 +7680,51 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -8179,6 +8404,51 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__using__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
@@ -8901,6 +9171,24 @@
                 },
                 {
                     "regex": "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__def__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
+                    "token": [
+                        "text",
+                        "support.function"
+                    ],
+                    "next": "start",
+                    "unicode": true
+                },
+                {
+                    "regex": "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
