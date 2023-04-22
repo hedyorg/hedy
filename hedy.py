@@ -3054,6 +3054,7 @@ def transpile_inner(input_string, level, lang="en"):
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
 
         source_map.set_python_output(python)
+        print(source_map)
         return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

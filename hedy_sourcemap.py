@@ -77,6 +77,7 @@ class SourceMap:
 
             for i in range(python_code_mapped.count(python_source_code.code)):
                 start_index = python_code.find(python_source_code.code, start_index+code_char_length)
+                start_index = max(0, start_index)
                 start_line = python_code[0:start_index].count('\n') + 1
 
             end_index = start_index + code_char_length
