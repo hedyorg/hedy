@@ -29,8 +29,40 @@
             {% endfor %}
         </div>
     </div>
-    
-    {{ render_partial('customize-class/sortable-adventures.html', customizations=customizations, max_level=max_level, adventure_names=adventure_names, adventures_default_order=adventures_default_order, class_id=class_id, level=min_level) }}
+    <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
+        <h3 class="px-4">{{_('select_adventures')}}</h3>
+        <div id="level-state-accessible" class="leading-6 ml-4 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <span>Level accessible</span>
+        </div>
+        <div id="level-state-disabled" class="leading-6 ml-4 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <span>Level disabled</span>
+        </div>
+        <div id="level-state-future" class="leading-6 ml-4 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <span>Level opens on</span>
+            <span id="opening_date"></span>
+        </div>
+        <div class="flex flex-row w-full mb-4">
+            <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
+                <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="levels" id="levels-dropdown"
+                    data-cy="adventures">
+                    {% for i in range(1, max_level + 1) %}
+                    <option id="select-{{i}}" value="{{ i }}" {% if i == min_level %} selected {% endif %} hx-get="/for-teachers/change-level?level={{i}}" hx-target="#test-adventures">
+                        {{ _('level_title') }} {{ i }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            {{ render_partial('customize-class/sortable-adventures.html', 
+                               customizations=customizations, 
+                               max_level=max_level, 
+                               adventure_names=adventure_names, 
+                               adventures_default_order=adventures_default_order,
+                               class_id=class_id, 
+                               level=min_level, 
+                               available_adventures=available_adventures)
+            }}
+        </div>       
+    </div>
 
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col">
