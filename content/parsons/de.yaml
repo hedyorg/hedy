@@ -128,9 +128,9 @@ levels:
             code: |-
                 Spieler = Liam, Noah, Sophie
                 Spieler1 = Spieler {at} {random}
+                {remove} Spieler1 {from} Spieler
                 Spieler2 = Spieler {at} {random}
                 {print} Spieler1 ' spielt zuerst gegen ' Spieler2
-                {remove} Spieler1 {from} Spieler
                 {remove} Spieler2 {from} Spieler
                 {print} 'Der Gewinner spielt gegen ' Spieler {at} {random}
         2:
