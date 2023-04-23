@@ -7,22 +7,27 @@
       <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
         <a class="no-underline float-right p-2" href="/live_stats/class/{{class_info.id}}">❌</a>
         <!-- Title columns -->
-          <p>{{student_programs}}</p>
-        <div class="grid grid-cols-4 px-5">
-            <div class="w-full text-left" id="name-col">
-              <h4>Name: {{student.username}}</h4>
-            </div>
-            <div class="w-full text-left" id="quiz-col">
-              <h4>Highest level reached: {{student.highest_level}}</h4>
-            </div>
-            <div class="w-full text-left" id="level-col">
-              <h4>Current level: {{student_programs[0].level}}</h4>
-            </div>
-            <!-- Current Adventure is essentially the adventure where the last run was done -->
-            <div class="w-full text-left" id="adv-col">
-              <h4>Current adventure: {{adventure_names.get(student_programs[0].adventure_name)}}</h4>
-            </div>
+        <div class="pt-4 pl-4">
+            <table class="content-center text-left table-auto">
+                <thead>
+                    <tr>
+                        <th class="w-64 text-blue-600">{{_('name')}}</th>
+                        <th class="w-64 text-blue-600">{{_('level')}}</th>
+                        <th class="w-64 text-blue-600">{{_('current_level')}}</th>
+                        <th class="w-64 text-blue-600">{{_('adventure')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{student.username}}</td>
+                        <td>{{_('level')}} {{ student.highest_level }}</td>
+                        <td>{{_('level')}} {{ student_programs[0].level }}</td>
+                        <td>{{adventure_names.get(student_programs[0].adventure_name)}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
         <!-- Graph with fails and successful runs -->
@@ -32,8 +37,9 @@
             </div>
 
             <!-- Last ran code -->
-            <div>
-                <p>{{student_programs[0].code}}</p>
+            <div class="w-full text-center turn-pre-into-ace mb-4">
+                <h5 class="font-normal pb-1">Last program</h5>
+                <pre level="{{ student_programs[0].level }}">{{student_programs[0].code }}</pre>
             </div>
 
             <!-- Last error message  -->
