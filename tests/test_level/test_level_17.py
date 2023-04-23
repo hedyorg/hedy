@@ -536,7 +536,6 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-
     def test_source_map(self):
         code = textwrap.dedent("""\
         for i in range 1 to 10:

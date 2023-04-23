@@ -251,7 +251,6 @@ class TestsLevel15(HedyTester):
             expected=expected,
         )
 
-
     def test_source_map(self):
         code = textwrap.dedent("""\
         answer = 0
