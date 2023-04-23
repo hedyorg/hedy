@@ -96,6 +96,8 @@ class SourceMap:
 
     def clear(self):
         self.map.clear()
+        self.hedy_code = ''
+        self.python_code = ''
 
     def get_response_object(self):
         response_map = dict()

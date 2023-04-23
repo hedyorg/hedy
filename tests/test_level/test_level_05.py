@@ -1314,3 +1314,22 @@ class TestsLevel5(HedyTester):
             # End of PyGame Event Handler""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'Do you want a good (g) or bad (b) ending?'
+        if g is pressed print 'They lived happily ever after ❤'
+        else print 'The prince was eaten by a hippopotamus 😭'""")
+
+        expected_source_map = {
+            "1/0-1/49": "1/0-1/51",
+            "1/0-3/160": "1/0-17/467",
+            "2/66-2/105": "12/301-12/342",
+            "2/50-3/159": "2/52-17/467",
+            "3/111-3/159": "15/371-15/421"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

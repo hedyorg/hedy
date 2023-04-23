@@ -510,3 +510,29 @@ class TestsLevel14(HedyTester):
             output=output,
             max_level=16
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        age = ask 'How old are you?'
+        if age < 13
+            print 'You are younger than me!'
+        else
+            print 'You are older than me!'""")
+
+        expected_source_map = {
+            "1/0-1/3": "1/0-1/3",
+            "1/0-1/28": "1/0-8/135",
+            "1/0-5/136": "1/0-12/286",
+            "2/32-2/35": "3/44-3/47",
+            "2/32-2/40": "9/139-9/199",
+            "2/29-3/86": "9/136-10/241",
+            "2/29-5/135": "9/136-12/286",
+            "3/45-3/77": "10/203-10/241",
+            "3/86-5/135": "10/241-12/286",
+            "5/96-5/126": "12/250-12/286"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

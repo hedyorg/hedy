@@ -1084,3 +1084,35 @@ class TestsLevel8(HedyTester):
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'Welcome to Restaurant Chez Hedy!'
+        people = ask 'How many people will be joining us today?'
+        print 'Great!'
+        repeat people times
+            food = ask 'What would you like to order?'
+            print food
+        print 'Thank you for ordering!'
+        print 'Enjoy your meal!'""")
+
+        expected_source_map = {
+            "1/0-1/40": "1/0-1/42",
+            "1/0-8/261": "1/0-9/296",
+            "2/41-2/47": "2/43-2/49",
+            "2/41-2/97": "2/43-2/103",
+            "3/98-3/112": "3/104-3/120",
+            "4/120-4/126": "2/69-2/75",
+            "4/113-6/203": "4/121-7/235",
+            "5/137-5/141": "5/152-5/156",
+            "5/137-5/179": "5/152-5/198",
+            "6/190-6/194": "6/210-6/214",
+            "6/184-6/194": "6/201-6/217",
+            "7/204-7/235": "8/236-8/269",
+            "8/236-8/260": "9/270-9/296"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

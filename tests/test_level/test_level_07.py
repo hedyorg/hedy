@@ -439,3 +439,22 @@ class TestsLevel7(HedyTester):
             expected=expected,
             output=output,
             translate=False)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'The prince kept calling for help'
+        repeat 5 times print 'Help!'
+        print 'Why is nobody helping me?'""")
+
+        expected_source_map = {
+            "1/0-1/40": "1/0-1/42",
+            "1/0-3/104": "1/0-5/144",
+            "2/56-2/69": "3/75-3/90",
+            "2/41-2/69": "2/43-4/108",
+            "3/70-3/103": "5/109-5/144"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

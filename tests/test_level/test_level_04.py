@@ -708,3 +708,23 @@ class TestsLevel4(HedyTester):
             pass""")
 
         self.multi_level_tester(code=code, expected=expected)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'You need to use quotation marks from now on!'
+        answer is ask 'What do we need to use from now on?'
+        print 'We need to use ' answer""")
+
+        expected_source_map = {
+            "1/0-1/52": "1/0-1/54",
+            "1/0-3/136": "1/0-3/143",
+            "2/53-2/59": "2/55-2/61",
+            "2/53-2/104": "2/55-2/109",
+            "3/129-3/135": "3/134-3/140",
+            "3/105-3/135": "3/110-3/143"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

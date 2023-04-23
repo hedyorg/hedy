@@ -642,3 +642,23 @@ class TestsLevel1(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['invalid_command'] == 'aks',
             max_level=17,
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print Hallo welkom bij Hedy!
+        forward 50
+        ask Wat is je lievelingskleur
+        echo je lievelingskleur is""")
+
+        expected_source_map = {
+            "1/0-1/28": "1/0-1/31",
+            "1/0-4/97": "1/0-10/491",
+            "2/29-2/39": "2/32-8/408",
+            "3/40-3/69": "9/409-9/452",
+            "4/70-4/96": "10/453-10/491"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )
