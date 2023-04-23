@@ -3,6 +3,13 @@ from os import path
 
 
 class SourceRange:
+    """
+    A class used to represent source code ranges
+
+    The source code range is made out of:
+    from_line (int), from_character (int), to_line (int), to_character (int)
+    """
+
     def __init__(self, from_line, from_character, to_line, to_character):
         self.from_line = from_line
         self.from_character = from_character
@@ -17,6 +24,13 @@ class SourceRange:
 
 
 class SourceCode:
+    """
+    A class used to represent Hedy/Python source code
+
+    The source code range is made out of:
+    a source_range (SourceRange) and the code (str)
+    """
+
     def __init__(self, source_range: SourceRange, code: str):
         self.source_range = source_range
         self.code = code
@@ -47,6 +61,17 @@ class SourceCode:
 
 
 class SourceMap:
+    """
+    A class used to represent the Hedy - Python source map.
+
+    The map contains entries in the form of:
+    SourceCode object (Hedy) - SourceCode object (Python)
+
+    the string representation of the sourcemap is defined as:
+    [Start line]-[Start Character]/[End line]-[End Character] :
+        [Code]
+    """
+
     map = dict()
     hedy_code = ''
     python_code = ''
@@ -78,7 +103,7 @@ class SourceMap:
 
             for i in range(python_code_mapped.count(python_source_code.code)):
                 start_index = python_code.find(python_source_code.code, start_index+code_char_length)
-                start_index = max(0, start_index)
+                start_index = max(0, start_index)  # not found (-1) means that start_index = 0
                 start_line = python_code[0:start_index].count('\n') + 1
 
             end_index = start_index + code_char_length
@@ -125,6 +150,10 @@ class SourceMap:
 
 
 def source_map_rule(source_map: SourceMap):
+    """ A decorator function that should decorator the transformer method (grammar rule)
+        the decorator adds the hedy code & python code to the map when the transformer method (grammar rule) is used
+    """
+
     def decorator(function):
         def wrapper(*args, **kwargs):
             meta = args[1]
@@ -150,6 +179,13 @@ def source_map_rule(source_map: SourceMap):
 
 
 def source_map_transformer(source_map: SourceMap):
+    """ A decorator function that should decorate a transformer class
+
+        This is used for convenience, instead of adding source_map_rule to all methods,
+        source_map_transformer needs only to be added to the transformer class.
+        This decorator add source_map_rule to all appropriate methods.
+    """
+
     def decorate(cls):
         for rule in cls.__dict__:
             if rule in source_map.grammar_rules:
