@@ -8,24 +8,39 @@
         <a class="no-underline float-right p-2" href="/live_stats/class/{{class_info.id}}">❌</a>
         <!-- Title columns -->
           <p>{{student_programs}}</p>
-        <div class="grid grid-cols-2 px-5">
-          <div class="w-full text-left" id="name-col">
-              <h4>Name: {{class_info.student.username}}</h4>
-          </div>
-          <div class="w-full text-left" id="level-col">
-              <h4>Current level: {{class_info.student.highest_level}}</h4>
-          </div>
+        <div class="grid grid-cols-4 px-5">
+            <div class="w-full text-left" id="name-col">
+              <h4>Name: {{student.username}}</h4>
+            </div>
+            <div class="w-full text-left" id="quiz-col">
+              <h4>Highest level reached: {{student.highest_level}}</h4>
+            </div>
+            <div class="w-full text-left" id="level-col">
+              <h4>Current level: {{student_programs[0].level}}</h4>
+            </div>
+            <!-- Current Adventure is essentially the adventure where the last run was done -->
+            <div class="w-full text-left" id="adv-col">
+              <h4>Current adventure: {{adventure_names.get(student_programs[0].adventure_name)}}</h4>
+            </div>
         </div>
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
-          <div class="w-full text-center" id="runs-over-time">
-            <h5 class="font-normal pb-1">Runs over time</h5>
-            <div class="flex justify-center"><img class="p-2" src="/images/new_media_lab/runs-over-time.png"></div>
-          </div>
-          <div class="w-full text-center" id="last-error">
-            <h5 class="font-normal pb-1">Last error</h5>
-            <div class="flex justify-center"><img class="p-2" src="/images/new_media_lab/last-error.png"></div>
-          </div>
+        <!-- Graph with fails and successful runs -->
+            <div class="w-full text-center" id="runs-over-time">
+                <h5 class="font-normal pb-1">Runs over time</h5>
+                <div class="flex justify-center"><img class="p-2" src="/images/new_media_lab/runs-over-time.png"></div>
+            </div>
+
+            <!-- Last ran code -->
+            <div>
+                <p>{{student_programs[0].code}}</p>
+            </div>
+
+            <!-- Last error message  -->
+            <div class="w-full text-center" id="last-error">
+                <h5 class="font-normal pb-1">Last error</h5>
+                <div class="flex justify-center"><img class="p-2" src="/images/new_media_lab/last-error.png"></div>
+            </div>
         </div>
       </div>
   </div>

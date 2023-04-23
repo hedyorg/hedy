@@ -10,6 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
+import hedy_content
 from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -194,25 +195,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        result = self.db.filtered_programs_for_user(student)
-        student_programs = []
-        for item in result:
-            date = utils.delta_timestamp(item['date'])
-            # This way we only keep the first 4 lines to show as preview to the user
-            code = "\n".join(item['code'].split("\n")[:4])
-            student_programs.append(
-                {'id': item['id'],
-                 'code': code,
-                 'date': date,
-                 'level': item['level'],
-                 'name': item['name'],
-                 'adventure_name': item.get('adventure_name'),
-                 'submitted': item.get('submitted'),
-                 'public': item.get('public'),
-                 'number_lines': item['code'].count('\n') + 1
-                 }
-            )
-
+        # get data for all students
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -234,12 +217,35 @@ class LiveStatisticsModule(WebsiteModule):
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
+        # load in all program data for that specific student
+        student_programs = []
+        for item in programs:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 10 lines to show as preview to the user
+            code = "\n".join(item['code'].split("\n")[:20])
+            student_programs.append(
+                {'id': item['id'],
+                 'code': code,
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
+
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+
         return render_template(
             "student-space.html",
             class_info={"id": class_id, "students": students,
-                        "student": selected_student, "common_errors": common_errors},
+                        "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            student=selected_student,
             student_programs=student_programs,
+            adventure_names=adventure_names,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -259,7 +265,7 @@ class LiveStatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
 
         # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
+        selected_student = request.args.get("student", default=None, type=str)
 
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -275,16 +281,12 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
 
-        if student:
-            result = self.db.filtered_programs_for_user(student, limit=10)
-        else:
-            result = []
-
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students, "program_results": result,
+            class_info={"id": class_id, "students": students,
                         "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            student=selected_student,
             current_page='my-profile'
         )
 
