@@ -834,8 +834,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: string, has
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
-  // Show source map
-  console.log(sourceMap);
+  // Currently, we don't do anything with the sourcemap
+  if (sourceMap){}
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = outputDiv.find('#variable_button');
