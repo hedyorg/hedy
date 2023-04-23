@@ -62,6 +62,7 @@ class SourceMap:
                 grammar_text += '\n' + file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
+        self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
 
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
