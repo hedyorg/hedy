@@ -445,7 +445,6 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, translate=False)
 
-
     def test_if_equality_print_else_linebreak_print(self):
         # line break after else is allowed
         code = textwrap.dedent("""\
