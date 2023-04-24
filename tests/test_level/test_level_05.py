@@ -4,8 +4,6 @@ from tests.Tester import HedyTester
 from parameterized import parameterized
 
 
-
-
 class TestsLevel5(HedyTester):
     level = 5
     '''
