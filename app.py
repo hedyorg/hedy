@@ -732,6 +732,7 @@ def translate_error(code, arguments, keyword_lang):
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
     arguments_that_require_highlighting = [
         'command',
@@ -745,6 +746,7 @@ def translate_error(code, arguments, keyword_lang):
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
@@ -767,6 +769,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
+    arguments["if"] = "if"
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():

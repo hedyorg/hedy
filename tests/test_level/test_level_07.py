@@ -419,7 +419,7 @@ class TestsLevel7(HedyTester):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
-            _ = 'x'
+            x__x__x__x = '5'
           time.sleep(0.1)
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
@@ -437,8 +437,7 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            output=output,
-            translate=False)
+            output=output)
 
     def test_source_map(self):
         code = textwrap.dedent("""\
