@@ -854,7 +854,6 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 
-
     def test_two_ifs_assign(self):
         code = textwrap.dedent("""\
         order is fries
@@ -868,7 +867,6 @@ class TestsLevel6(HedyTester):
           price = '5'
         drink = 'water'
         print(f'{drink}')""")
-
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 
