@@ -828,11 +828,11 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy'):
           print(f'nice!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+        self.multi_level_tester(max_level=7, code=code, expected=expected)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -846,13 +846,13 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Python'):
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+        self.multi_level_tester(max_level=7, code=code, expected=expected)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
