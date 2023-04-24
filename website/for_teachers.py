@@ -356,9 +356,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in teacher_adventures:
                 available_adventures[int(adventure['level'])].append(
                     {"name": adventure['id'], "from_teacher": True})
-        print('*'*100)
-        print(customizations['sorted_adventures'])
-        print('*'*100)
+
         return customizations, adventure_names, available_adventures, min_level
 
     def purge_customizations(self, sorted_adventures, adventures):
@@ -420,8 +418,6 @@ class ForTeachersModule(WebsiteModule):
             return "Opening dates must be a dict", 400
         if not isinstance(body.get("level_thresholds"), dict):
             return "Level thresholds must be a dict", 400
-        if not isinstance(body.get("sorted_adventures"), dict):
-            return "Adventures must be a dict", 400
         # Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body["levels"]]
 
@@ -447,13 +443,14 @@ class ForTeachersModule(WebsiteModule):
                     return "Quiz threshold value is invalid", 400
             level_thresholds[name] = value
 
+        customizations = self.db.get_class_customizations(class_id)
         customizations = {
             "id": class_id,
             "levels": levels,
             "opening_dates": opening_dates,
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
-            "sorted_adventures": body["sorted_adventures"]
+            "sorted_adventures": customizations["sorted_adventures"]
         }
 
         self.db.update_class_customizations(customizations)

@@ -28,7 +28,8 @@
             {% for adventure in available_adventures[level|int] %}
                 <option hx-post="/for-teachers/add-adventure?adventure_id={{ adventure['name'] }}&level={{ level }}" 
                         hx-target="#adventure-dragger"
-                        hx-indicator="#indicator"> 
+                        hx-indicator="#indicator"
+                        hx-trigger="click"> 
                             {{ adventure_names[adventure['name']] }} 
                 </option>
             {% endfor %}

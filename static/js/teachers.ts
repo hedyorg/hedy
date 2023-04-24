@@ -359,18 +359,6 @@ export function save_customizations(class_id: string) {
       opening_dates[$(this).attr('level') as string] = $(this).val() as string;
       
     });
-    let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('[id^=level-]').each(function() {
-        const id = $(this).attr('id')!;
-        const level = id.split('-')[1]!;
-        sorted_adventures[level] = [];
-        $('#'+id).children().each(function() {
-            const level : string = $(this).attr('level')!;
-            const adventure = $(this).attr('adventure')!;
-            const from_teacher = $(this).attr('from-teacher') === "true"!;
-            sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
-        });
-    });
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
@@ -378,8 +366,7 @@ export function save_customizations(class_id: string) {
           levels: levels,
           opening_dates: opening_dates,
           other_settings: other_settings,
-          level_thresholds: level_thresholds,
-          sorted_adventures: sorted_adventures
+          level_thresholds: level_thresholds
       }),
       contentType: 'application/json',
       dataType: 'json'
