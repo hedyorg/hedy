@@ -42,7 +42,7 @@ htmx.onLoad((content) => {
     var sortable : HTMLElement =  content.querySelector('.sortable') as HTMLElement;
     new Sortable(sortable, {
         animation: 150,
-        ghostClass: 'blue-background-class'
+        ghostClass: 'drop-adventures-active'
     })
 });
 
