@@ -2851,7 +2851,7 @@ def preprocess_ifs(code, lang='en'):
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else _ is x"
+                line = line + " else x__x__x__x is 5"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)
@@ -2877,7 +2877,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
@@ -2887,8 +2887,8 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
-    if level >= 5 and level <= 8:
+    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
