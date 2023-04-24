@@ -866,7 +866,7 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', order) == convert_numerals('Latin', 'fries'):
           price = '5'
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         drink = 'water'
         print(f'{drink}')""")
 
