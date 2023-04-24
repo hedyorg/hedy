@@ -17,7 +17,7 @@ adventures:
                 story_text_2: "### Exercise\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
                 start_code: '{print} Your story starts here'
                 story_text: "In level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
-                example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
+                example_code: "```\n{ask} Personajul principal al poveștii este\n{print} Personajul principal merge acum prin pădure\n{echo} E un pic speriat,\n{print} Aude tot felul de zgomote oriunde\n{print} Ii este frica de o pădure bântuita\n```\n"
             2:
                 story_text: "In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n\n### Exercise\nCan you make a story using a variable yourself? Can you add even more variables?\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
@@ -61,9 +61,9 @@ adventures:
                 story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
                 story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
                 example_code: "```\n{print}('Welcome to this story!')\n```\n"
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: Poveste
+        description: Poveste
+        default_save_name: Poveste
     parrot:
         levels:
             2:
@@ -430,24 +430,24 @@ adventures:
                 story_text_2: "Important! Intrucât de acum inainte vom folosi ghilimele, Hedy va confunda ghilimelele cu apostroful. \nValabil doar pentru limba engleza. În românește nu exista contracții cu ghilimele și apostrof.\n"
                 example_code_2: "```\n_ Această metodă de a utiliza apostrofuri este incorectă _\n{print} 'Am grijă de copii surorii mele'\n{print} 'Ce altceva este mai distractiv ?'\n```\n"
             11:
-                start_code: "{for} contor {in} {range} 1 {to} 5\n    {print} contor"
-                story_text: "în acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.\nFacem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul de la care se termină.\n\nÎncercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`."
-                example_code: "```\n{for} contor {in} {range} 1 {to} 5\n    {print} contor\n```\n"
+                start_code: "{for} număr {in} {range} 1 {to} 5\n    {print} număr"
+                story_text: "In acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.\nFacem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul la care se termină.\n\nÎncercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`."
+                example_code: "```\n{for} număr {in} {range} 1 {to} 5\n    {print} număr\n```\n"
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Cine nu-i gata il iau cu lopata!'"
+                story_text: "De acum vom modifica un pic indentarea. De fiecare dată când avem nevoie de indentare vom folosi`:` la linia înainte de indentare.\n\nIn acest nivel poți deasemenea folosi și o comandă nouă: `{elif}`. `{elif}`  este prescurtarea pentru`{else}` `{if}` și ai nevoie de aceasta când vrei să ai 3 (sau mai multe) opțiuni.\nIncearcă!\n"
+                example_code: "```\nprețuri = ['1 milion dolari', 'o plăcintă de mere', 'nimic']\nprețul_tău = prețuri[{random}]\n{print} 'Ai câștigat ' prețul_tău\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
+                start_code: "nume = 'Hedy'\n{print}('Numele meu este ', nume)"
+                story_text: "We arrived at real Python code! That means we need to use parentheses with 1`{print}` and 2`{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
+                example_code: "```\n{print}('Salutări!')\n{for} i {in} {range}(1, 10):\n    {print}('Aceasta este linia ', i)\n```\n"
+                story_text_2: Dacă vrei să printezi mai multe elemente trebuie sa le separi prin virgulă.
+                example_code_2: "```\ntemperatură = 25\n{print}('Este ', temperatură, ' grade afară')\n```\n"
                 story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                example_code_3: "```\n{print}('Numele meu este Hedy!')\nnume = {input}('Cum te numești?')\n{print}('Deci numele tău este ', nume)\n```\n"
             1:
                 story_text: "În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.\nIntrodu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!\nÎncearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.\n\nPoți afișa text pe ecran folosind comanda `{print}`.     \n"
-                example_code: "```\n{print} Salut!\n{print} Bine ai venit la Hedy!\n```\n"
+                example_code: "```\n{print} Salutări!\n{print} Bine ai venit la Hedy!\n```\n"
                 story_text_2: "Poți cere introducerea unui text cu `{ask}` și poți repeta textul introdus cu comanda `{echo}`.\n"
                 story_text_3: "Să începem! Nu știi ce să creezi? Vei găsi idei de programe pe care le poți construi în următoarele pagini.\n"
                 example_code_2: "```\n{ask} Cum te numești?\n{echo} Salut\n```\n"
@@ -476,20 +476,20 @@ adventures:
                 example_code: "Iată cum funcționează comanda `{repeat}` acum:\n```\n{repeat} 5 {times}\n    {print} 'Salut tuturor'\n    {print} 'Totul se repetă de 5 ori'\n```\nIată cum funcționează acum comanda `{if}` și `{else}`:\n\n```\nnume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy\n    {print} 'Bun venit Hedy'\n    {print} 'Te poți juca pe calculatorul tău!'\n{else}\n    {print} 'INTRUS!'\n    {print} 'Nu puteți folosi acest calculator!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mâncare = {ask} 'Ce dorești?'\n    {if} mâncare {is} pizza\n        {print} 'grozav!'\n    {else}\n        {print} 'pizza e mai bună'"
-                story_text: "În acest nivel nu numai că poți folosi mai multe linii cu `{if}` și `{repeat}`, dar le poți combina!\nÎn exemplu vezi o comandă `{if}` într-o comandă `{repeat}`. Este permis și invers, de asemenea un `{if}` este permis într-un `{if}` și un `{repeat}` într-un `{repeat}`.\nÎncearcă!\n"
+                story_text: "În acest nivel nu numai că poți folosi mai multe linii cu `{if}` și `{repeat}`, dar le și poți combina!\nÎn exemplu vezi o comandă `{if}` într-o comandă `{repeat}`. Este permis și invers, de asemenea un `{if}` este permis într-un `{if}` și un `{repeat}` într-un `{repeat}`.\nÎncearcă!\n"
                 example_code: "```\n{repeat} 3 {times}\n    mâncare = {ask} 'Ce dorești?'\n    {if} mâncare {is} pizza\n        {print} 'grozav!'\n    {else}\n        {print} 'pizza e mai bună'\n```\n"
             10:
-                start_code: "animale {is} câine, pisică, biban\n{for} animal {in} animale\n  {print} 'Îmi place' animal"
-                story_text: "În acest nivel învățăm un nou cod numit `{for}`. Cu `{for}` poți face o listă și poți folosi toate elementele.\n`{for}` creează un bloc, la fel ca `{repeat}` și `{if}`, deci toate liniile din bloc trebuie să înceapă cu spații."
-                example_code: "```\nanimale {is} câine, pisică, biban\n{for} animal {in} animale\n  {print} 'Îmi place' animal\n```\n"
+                start_code: "animale {is} câine, pisică, pește\n{for} animal {in} animale\n  {print} 'Îmi place' animal"
+                story_text: "În acest nivel învățăm un nouă comandă numită `{for}`. Cu `{for}` poți face o listă și poți folosi toate elementele.\n`{for}` creează un bloc, la fel ca `{repeat}` și `{if}`, deci toate liniile din bloc trebuie să înceapă cu spații."
+                example_code: "```\nanimale {is} câine, pisică, pește\n{for} animal {in} animale\n  {print} 'Îmi place' animal\n```\n"
             12:
                 start_code: "{print} 'numerele zecimale au acum nevoie de un punct'\n{print} 2.5 + 2.5"
                 story_text: "**Numere zecimale**\nPână acum, Hedy nu permitea numere zecimale precum 1.5, dar acum permite asta. Rețineți că folosim `.` pentru numere zecimale, nu virgulă."
                 example_code: "```\n{print} 'Doi și jumătate plus doi și jumătate face...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**Toate textele trebuie să fie între apostrofuri**\nDe la acest nivel, va trebui să utilizați apostrofuri și atunci când stocați un text cu `=`:\n"
+                story_text_2: "**Toate textele trebuie să fie între apostrofuri**\nDe la acest nivel, va trebui să utilizați ghilimele și atunci când stocați un text cu `=`:\n"
                 example_code_2: "```\nnume = 'Hedy Robotul'\n{print} 'Salut ' nume\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nListele au text, așa că este necesar să folosiți ghilimelele. Atenție fiecare obiect din listă este pus între ghilimele. \nAcestă posibilitate vă dă ocazia sa salvați două cuvinte ca și un singur obiect în listă, de exemplu: 'Omul de fier'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                story_text_3: "**Toate elementele în listă au nevoie de ghilimele**\nListele au text, așa că este necesar să folosiți ghilimelele. Atenție fiecare obiect din listă este pus între ghilimele. \nAcestă posibilitate vă dă ocazia sa salvați două cuvinte ca și un singur obiect în listă, de exemplu: 'Omul de fier'.\n"
+                example_code_3: "```\neroifantastici = 'Omul păianjen', 'Batman', 'Omul de fier'\n{print} eroifantastici {at} {random}\n```\n"
                 story_text_4: "**Textul complet după comanda de comparație `{if}` necesită ghilimele**\n"
                 example_code_4: "```\nnume = {ask} 'Cum te numești?'\n{if} nume = 'Hedy Robotul'\n    {print} 'Salut!'\n```\n"
                 story_text_5: "**Numerele nu necesită ghilimele**\nPentru numere, nu trebuie să folosești ghilimele în semnul: `=`:\n"
@@ -497,7 +497,7 @@ adventures:
 
             13:
                 start_code: "nume = {ask} 'cum te numești?'\nvârsta = {ask} 'ce vârsta ai?'\n{if} nume {is} 'Hedy' {and} vârsta {is} 2\n    {print} 'Tu ești adevăratul program Hedy!'"
-                story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
+                story_text: "Acum vom invăța: `{and}` și `{or}`! Dacă vrei să verifici două propoziții nu trebuie să folosești de două ori `{if}` dar poți folosi `{and}` și `{or}`.\n\nDacă folosești`{and}`, ambele propoziții din stânga și dreapta, de o parte și de alta`{and}` trebuie să fie adevărate. Putem folosi și`{or}`. În cazul acesta doar o propoziție trebuie să fie adevărată."
                 example_code: "```\nnume = {ask} 'cum te numești?'\nvârsta = {ask} 'ce vârstă ai?'\n{if} nume {is} 'Hedy' {and} vârsta {is} 2\n    {print} 'Tu ești adevăratul program Hedy!'\n```\n"
             14:
                 start_code: "vârsta = {ask} 'Ce vârsta ai?'\n{if} vârsta < 13\n    {print} 'Ești mai tânăr(ă) decât mine!'\n{else}\n    {print} 'Ești mai in vârstă decât mine!'"
@@ -508,13 +508,13 @@ adventures:
                 story_text_3: "In momentum in care două lucruri nu punt identice, le poți compara folosind simbolul: `!=` astfel:\n"
                 example_code_3: "```\nnume = {ask} 'Cum te numești?'\n{if} nume != 'Hedy'\n    {print} 'Nu ești Hedy'\n```\n"
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+                start_code: "răspuns = 0\n{while} răspuns != 25\n    răspuns = {ask} 'Cât face  5 ori 5?'\n{print} 'Am dat un răspuns corect'"
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                example_code: "```\nrăspuns = 0\n{while} răspuns != 25\n    răspuns = {ask} 'Cât face 5 ori 5?'\n{print} 'Am dat un răspuns corect'\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "fruct = ['măr', 'banană', 'cireașă']\n{print} fruct"
+                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The 1{at} command can not be used anymore."
+                example_code: "```\nprieteni = ['Ahmed', 'Ben', 'Cayden']\nnumere_norocoase = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'numerele norocoase ale ' prieteni[i]\n    {print} 'is ' numere_norocoase[i]\n```\n"
         description: Explicația nivelului
         default_save_name: introducere
     fortune:
@@ -678,7 +678,7 @@ adventures:
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '# place your code here'
             15:
-                start_code: '# place your code here'
+                start_code: '# scrie programul tău aici'
                 story_text: "In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.\nCheck it out:\n"
                 example_code: "```\nsimbol = 'x'\nlocuri_deschise = 1, 2, 3, 4, 5, 6, 7, 8, 9\njocul = 'deschis'\nloc_1 = '.'\nloc_2 = '.'\nloc_3 = '.'\nloc_4 = '.'\nloc_5 = '.'\nloc_6 = '.'\nloc_7 = '.'\nloc_8 = '.'\nloc_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} loc_1 loc_2 loc_3\n{print} loc_4 loc_5 loc_6\n{print} loc_7 loc_8 loc_9\n{print} ' '\n{while} jocul != 'terminat'\n    alegere = {ask} 'Jucator ' simbol ', care loc?'\n    {if} alegere {in} locuri_deschise\n        {remove} alegere {from} locuri_deschise\n        {if} alegere == 1\n            loc_1 = simbol\n        {if} alegere == 2\n            loc_2 = simbol\n        {if} alegere == 3\n            loc_3 = simbol\n        {if} alegere == 4\n            loc_4 = simbol\n        {if} alegere == 5\n            loc_5 = simbol\n        {if} alegere == 6\n            loc_6 = simbol\n        {if} alegere == 7\n            loc_7 = simbol\n        {if} alegere == 8\n            loc_8 = simbol\n        {if} alegere == 9\n            loc_9 = simbol\n    {else}\n        {print} 'Locul acesta este deja ocupat'\n    {print} loc_1 loc_2 loc_3\n    {print} loc_4 loc_5 loc_6\n    {print} loc_7 loc_8 loc_9\n    {print} ' '\n    câștigător = {ask} 'Ai câștigat?'\n    {if} câștigator == 'da'\n        {print} 'Felicitări, jucător ' simbol '!'\n        jocul = 'terminat'\n    {else}\n        {if} simbol == 'x'\n            simbol = 'o'\n        {else}\n            simbol = 'x'\n```\n"
             14:
@@ -764,7 +764,7 @@ adventures:
                             {else}:
                                 simbol = 'x'
                     ```
-                start_code: '# scrie codul tău aici'
+                start_code: '# scrie programul tău aici'
         description: Play a game of Tic Tac Toe!
         name: Tic Tac Toe
     years:
