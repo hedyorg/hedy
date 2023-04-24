@@ -99,9 +99,9 @@ levels:
             code: |
                 lojtarët = Lisa, Nora, Sara
                 lojtari1 = lojtarët {at} {random}
+                {remove} lojtari1 {from} lojtarët
                 lojtari2 = lojtarët {at} {random}
                 {print} lojtari1 ' luan kundër ' lojtari2
-                {remove} lojtari1 {from} lojtarët
                 {remove} lojtari2 {from} lojtarët
                 {print} 'The winner plays against ' lojtarët {at} {random}
         2:
