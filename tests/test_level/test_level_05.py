@@ -415,6 +415,22 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
+    def test_two_ifs_assign(self):
+        code = textwrap.dedent("""\
+        order is fries
+        if order is fries price is 5
+        drink is water
+        print drink""")
+
+        expected = textwrap.dedent("""\
+        order = 'fries'
+        if order == 'fries':
+          price = '5'
+        drink = 'water'
+        print(f'{drink}')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
     def test_if_equality_print_else_linebreak_print(self):
         # line break after else is allowed
         code = textwrap.dedent("""\
