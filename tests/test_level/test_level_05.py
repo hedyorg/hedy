@@ -424,7 +424,7 @@ class TestsLevel5(HedyTester):
         if 'order' == 'fries':
           price = '5'
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         drink = 'water'""")
 
         self.single_level_tester(code=code, expected=expected, translate=False)
@@ -439,7 +439,7 @@ class TestsLevel5(HedyTester):
         if 'order' == 'fries':
           price = '5'
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         drink = 'water'
         print(f'{drink}')""")
 
