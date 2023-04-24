@@ -622,11 +622,11 @@ class TestsLevel5(HedyTester):
         if name == 'Hedy':
           print(f'nice!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_onno_3372(self):
         code = textwrap.dedent("""\
@@ -639,12 +639,11 @@ class TestsLevel5(HedyTester):
         if antw == 'schaar':
           print(f'gelijk spel!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_restaurant_example(self):
         code = textwrap.dedent("""\
@@ -660,16 +659,15 @@ class TestsLevel5(HedyTester):
         if eten == 'friet':
           saus = input(f'Welke saus wilt u bij de friet?')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if eten == 'pizza':
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected, translate=False)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -686,8 +684,7 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -701,15 +698,14 @@ class TestsLevel5(HedyTester):
         if naam == 'Hedy':
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if naam == 'Python':
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -730,7 +726,7 @@ class TestsLevel5(HedyTester):
         else:
           print(f'meh')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_turn_if_forward(self):
         code = textwrap.dedent("""\
@@ -872,7 +868,7 @@ class TestsLevel5(HedyTester):
         if naam == '5':
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'minder leuk!')""")
 
         self.multi_level_tester(
@@ -976,7 +972,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_has_enter_after_pressed(self):
         code = textwrap.dedent("""\
@@ -1272,7 +1268,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
