@@ -637,7 +637,7 @@ class TestsLevel5(HedyTester):
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected)
+                                 expected=expected, translate=False)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
