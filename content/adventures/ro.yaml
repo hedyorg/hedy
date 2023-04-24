@@ -411,21 +411,21 @@ adventures:
         levels:
             2:
                 example_code_3: "```\n{print} Culoarea mea preferată este...\n{sleep} 2\n{print} verde!\n```\n"
-                story_text: "În nivelul 2 învățăm două comenzi noi: `{is}` și `{sleep}`.\nPoți să dai un nume unui cuvânt cu `{is}`. Aceasta se numește o variabilă. În acest exemplu am creat o variabilă numită nume si o variabilă numită vârstă. Poți folosi cuvântul nume oriunde in cod și va fi înlocuit de Hedy, astfel:\n\nAcum nu mai ai nevoie de comanda `{echo}`!\n"
+                story_text: "În nivelul 2 învățăm două comenzi noi: `{is}` și `{sleep}`.\nPoți să dai un nume unui cuvânt cu `{is}`. Aceasta se numește o variabilă. În acest exemplu am creat o variabilă numită nume si o variabilă numită vârstă. Poți folosi cuvântul nume oriunde în programul tău și va fi înlocuit de Hedy, astfel:\n\nAcum nu mai ai nevoie de comanda `{echo}`!\n"
                 example_code: "```\nnume {is} Hedy\nvârstă {is} 15\n{print} nume are vârstă ani\n```\n"
                 story_text_2: "`{print}` funcționează în continuare la fel, dar comanda `{ask}` s-a schimbat. Trebuie să folosiți o variabilă și în comanda `{ask}`. Arată așa:\n"
                 example_code_2: "```\nrăspuns {is} {ask} Cum te numești?\n{print} Salut răspuns\n```\n"
-                story_text_3: "O altă comandă nouă la acest nivel este `{sleep}`, care întrerupe programul tău pentru o secundă. Dacă introduci un număr după comanda {sleep}, programul se întrerupe pentru acel număr de secunde.\n"
+                story_text_3: "O altă comandă nouă la acest nivel este `{sleep}`, care întrerupe programul tău pentru o secundă. Dacă introduci un număr după comanda {sleep}, programul face o pauză pentru acel număr de secunde.\n"
                 start_code: '{print} salutări!'
             3:
                 story_text: "În nivelul 3 poți face o listă. Poți lăsa calculatorul să aleagă ceva aleatoriu din listă. Faci acest lucru cu `{at} {random}`.\n"
                 example_code: "```\nanimale {is} câine, pisică, cangur\n{print} animale {at} {random}\n```\n"
                 story_text_2: De asemenea, poți adăuga elemente în listă cu `{add}` și elimina elemente cu `{remove}`.
                 example_code_2: "```\nanimale {is} câine, pisică, cangur\n{add} pinguin {to_list} animale\n{remove} pisică {from} animale\n{print} animale {at} {random}\n```\n"
-                start_code: '{print} salut lume!'
+                start_code: '{print} salutări!'
             4:
-                start_code: "{print} 'Salut lume'"
-                story_text: "La nivelul 4 `{intreabă}` și `{printează}` s-au schimbat.\n\nTrebuie să puneți textul pe care doriți să-l afișați între apostrofuri.\n\nAcest lucru este util, deoarece acum puteți tipări toate cuvintele dorite. De asemenea, cuvintele pe care le-ați folosit pentru a stoca ceva cu `{este}`.\n\nMajoritatea limbajelor de programare folosesc apostrofuri sau ghilimele pentru afișare, așa că suntem cu un pas mai aproape de programarea reală!\n"
+                start_code: "{print} 'Salutări'"
+                story_text: "In nivelul 4 `{ask}` și `{print}` s-au schimbat.\nTrebuie sa adaugi textul pe care dorești sa îl printezi între ghilimele.\nAcest lucru este folositor, pentru că acum poți printa toate cuvintele pe care le dorești. De asemenea și cuvintele pe care le stocai cu `{is}`.\nMajoritatea limbajelor de programare folosesc ghilimele când trebuie să printezi, deci acum ești cu un pas mai aproape de programarea reală!\n"
                 example_code: "```\n{print} 'Trebuie să folosești apostrofuri de acum înainte!'\nrăspuns {is} {ask} 'Ce trebuie să folosim de acum înainte?'\n{print} 'Trebuie să folosim' răspuns\n```\n"
                 story_text_2: "Important! Intrucât de acum inainte vom folosi ghilimele, Hedy va confunda ghilimelele cu apostroful. \nValabil doar pentru limba engleza. În românește nu exista contracții cu ghilimele și apostrof.\n"
                 example_code_2: "```\n_ Această metodă de a utiliza apostrofuri este incorectă _\n{print} 'Am grijă de copii surorii mele'\n{print} 'Ce altceva este mai distractiv ?'\n```\n"
@@ -449,30 +449,30 @@ adventures:
                 story_text: "În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.\nIntrodu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!\nÎncearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.\n\nPoți afișa text pe ecran folosind comanda `{print}`.     \n"
                 example_code: "```\n{print} Salut!\n{print} Bine ai venit la Hedy!\n```\n"
                 story_text_2: "Poți cere introducerea unui text cu `{ask}` și poți repeta textul introdus cu comanda `{echo}`.\n"
-                story_text_3: "Să pornim! Nu știi ce să creezi? Vei găsi idei de programe pe care le poți construi în următoarele pagini.\n"
+                story_text_3: "Să începem! Nu știi ce să creezi? Vei găsi idei de programe pe care le poți construi în următoarele pagini.\n"
                 example_code_2: "```\n{ask} Cum te numești?\n{echo} Salut\n```\n"
                 start_code: '{print} salutări!'
             5:
                 start_code: "nume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy {print} 'super!' {else} {print} 'moa'"
-                story_text: "La nivelul 5 există ceva nou, `{if}`! Cu `{if}` puteți alege între două opțiuni diferite.\nAcest cod afișează frumos dacă introduci Hedy ca nume și bau! dacă introduci altceva.\n`{ask}` și `{print}` încă funcționează ca la nivelul 4.\n"
+                story_text: "La nivelul 5 există ceva nou, `{if}`! Cu `{if}` puteți alege între două opțiuni diferite.\nAcest program afișează frumos dacă introduci Hedy ca nume și bau! dacă introduci altceva.\n`{ask}` și `{print}` încă funcționează ca la nivelul 4.\n"
                 example_code: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos' {else} {print} 'bau!'\n```\n"
                 story_text_3: "Când vrem să verificăm dacă ceva există într-o listă, acum putem folosi comanda `{in}`.\nAcest cod afișează frumos! daca alegi verde sau galben, iar altfel așa și-așa.\n"
                 example_code_3: "```\nculori_frumoase {is} verde, galben\nculoare_preferată {is} {ask} 'Care este culoarea ta preferată?'\n{if} culoare_preferată {in} culor_frumoase {print} 'frumos!'\n{else} {print} 'așa și-așa'\n```\n"
                 story_text_2: "Uneori, codul cu un `{if}` devine foarte lung și nu se potrivește bine pe linie. <br> Poți împărți codul pe două linii, începând cu a doua linie cu `{else}` astfel:\n"
-                example_code_2: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos'\n{else} {print} 'huo!'\n```\n"
+                example_code_2: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos'\n{else} {print} 'bau!'\n```\n"
             6:
                 start_code: "{print} '5 ori 5 face ' 5 * 5"
-                story_text: " În acest nivel înveți ceva nou: acum poți face și calcule aritmetice.\n\n Plusul este ușor, se scrie ca la matematică: de exemplu `5 + 5`. Minusul funcționează și el la fel de bine, este `5 - 5`.\n\n Cu înmulțirea este un pic diferit, deoarece nu există simbolul de înmulțire pe tastatură. Caută-l, chiar nu există!\n De aceea înmulțim cu asteriscul de deasupra lui 8: `5 * 5`. Citește asta ca \"5 ori 5\", te va ajuta să o reții mai ușor.\n"
+                story_text: "In acest nivel inveți ceva nou: poți face calcule aritmetice.\n\nSimbolul adună este ușor, poți scrie ca și la matematică: `5 + 5` de exemplu. Semnul minus este ușor, `5 - 5`.\n\nSimbolul pentru inmulțire este altfel pentru că nu există pe tastatură. Uită-te, chiar nu există!\nDe aceea inmulțim folosind simbolul asterisc deasupra lui 8: 3`5 * 5`. Citește-l ca și \"5 ori 5\", asta te ajută să îți amintești.\n"
                 example_code: "```\n{print} '5 plus 5 face ' 5 + 5\n{print} '5 minus 5 face ' 5 - 5\n{print} '5 ori 5 face ' 5 * 5\n```\n"
                 example_code_2: "```\nnume = Hedy\nrăspuns = 20 + 4\n```\n"
                 story_text_2: "De asemenea, facem o schimbare la stocarea unui cuvânt într-o variabilă! Acum poți folosi `=` în loc de `{is}` atunci când stochezi un nume sau un număr într-o variabilă, astfel:\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy e distractiv!'"
-                story_text: "Nivelul 7 adaugă comanda `{repeat}`. `{repeat}` poate fi folosită pentru a executa o linie de cod de mai multe ori.\n"
+                story_text: "Nivelul 7 adaugă comanda `{repeat}`. `{repeat}` poate fi folosită pentru a executa o linie din program de mai multe ori.\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy e distractiv!'\n```\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Salut oameni buni'\n    {print} 'Aceasta va fi afișată de 5 ori'"
-                story_text: "`{ask}` și `{print}` funcționează în continuare așa cum le cunoști. Dar `{if}`, `{else}`, {pressed} și `{repeat}` s-au schimbat!\nAcum poți grupa mai multe linii împreună, dar va trebui să *indentezi* codul.\nAsta înseamnă să pui patru spații la începutul liniei. De asemenea, va trebui să indentezi atunci când dorești doar să creezi un bloc de o linie.\n"
+                start_code: "{repeat} 5 {times}\n    {print} 'Salutări'\n    {print} 'Aceasta va fi afișată de 5 ori'"
+                story_text: "`{ask}` și `{print}` funcționează în continuare așa cum le cunoști. Dar `{if}`, `{else}` și `{repeat}` s-au schimbat!\nAcum poți grupa mai multe linii împreună, dar va trebui să *indentezi* programul.\nAsta înseamnă să pui patru spații la începutul liniei. De asemenea, va trebui să indentezi atunci când dorești doar să creezi un bloc de o linie.\n"
                 example_code: "Iată cum funcționează comanda `{repeat}` acum:\n```\n{repeat} 5 {times}\n    {print} 'Salut tuturor'\n    {print} 'Totul se repetă de 5 ori'\n```\nIată cum funcționează acum comanda `{if}` și `{else}`:\n\n```\nnume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy\n    {print} 'Bun venit Hedy'\n    {print} 'Te poți juca pe calculatorul tău!'\n{else}\n    {print} 'INTRUS!'\n    {print} 'Nu puteți folosi acest calculator!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mâncare = {ask} 'Ce dorești?'\n    {if} mâncare {is} pizza\n        {print} 'grozav!'\n    {else}\n        {print} 'pizza e mai bună'"
