@@ -2825,7 +2825,7 @@ def preprocess_ifs(code, lang='en'):
         if lang in ALL_KEYWORD_LANGUAGES:
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
-                if line.count(' ' + c + ' ') >= 2: #surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                if line.count(' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -2853,7 +2853,7 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line))  and not contains_any_of(excluded_commands, line)
+                (contains_any_of(commands, line) or contains_two('is', line)) and not contains_any_of(excluded_commands, line)
             ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
