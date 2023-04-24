@@ -331,7 +331,7 @@ adventures:
                 start_code: "{print} 'Who does the dishes?'"
             10:
                 story_text: "In this level you can make a schedule for the whole week in an easy way!\n\n### Exercise\nAdd a second chore, such as vacuuming or tidying up, and make sure it is also divided for the whole week.\n<br> **(extra)** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?\n"
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\nfor day in days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
+                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
                 start_code: '# place your code here'
     dice:
         name: Dice

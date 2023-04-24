@@ -502,7 +502,7 @@ adventures:
             14:
                 start_code: "vârsta = {ask} 'Ce vârsta ai?'\n{if} vârsta < 13\n    {print} 'Ești mai tânăr(ă) decât mine!'\n{else}\n    {print} 'Ești mai in vârstă decât mine!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nvârsta = {ask} 'Ce vârstă ai?'\n{if} vârstă > 12\n    {print} 'Ești mai în vârstă decât mine!'\n```\n"
+                example_code: "```\nvârsta = {ask} 'Ce vârstă ai?'\n{if} vârsta > 12\n    {print} 'Ești mai în vârstă decât mine!'\n```\n"
                 story_text_2: "Incepând cu acest nivel, dacă dorești să faci comparații exacte, poți folosi două semne de egal. Așa arată cum functionează alte limbaje de programare:\n"
                 example_code_2: "```\nnume = {ask} 'Cum te numești?'\n{if} nume == 'Hedy'\n    {print} 'Ești tare!'\n```\n"
                 story_text_3: "In momentum in care două lucruri nu punt identice, le poți compara folosind simbolul: `!=` astfel:\n"
@@ -701,15 +701,15 @@ adventures:
                     locul_7 = '.'
                     locul_8 = '.'
                     locul_9 = '.'
-                    1{print} 'X și O!'
-                    2{print} locul_1 locul_2 locul_3
-                    3{print} locul_4 locul_5 locul_6
-                    4{print} locul_7 locul_8 locul_9
-                    5{print} ' '
-                    6{while} jocul != 'terminat':
-                        alegere = 7{ask} 'Jucător ' simbol ', care loc?'
-                        8{if} alegere 9{in} locuri_libere:
-                            0{remove} alegere {from} locuri_libere
+                    {print} 'X și O!'
+                    {print} locul_1 locul_2 locul_3
+                    {print} locul_4 locul_5 locul_6
+                    {print} locul_7 locul_8 locul_9
+                    {print} ' '
+                    {while} jocul != 'terminat':
+                        alegere = {ask} 'Jucător ' simbol ', care loc?'
+                        {if} alegere {in} locuri_libere:
+                            {remove} alegere {from} locuri_libere
                             {if} alegere == 1:
                                 locul_1 = simbol
                             {if} alegere == 2:
@@ -746,7 +746,7 @@ adventures:
                         {elif} locul_1 == locul_4 {and} locul_4 == locul_7 {and} locul_1 != '.':
                             {print} 'Jucătorul ' simbol ' câștigă!'
                             jocul = 'terminat'
-                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
+                        {elif} locul_2 == locul_5 {and} locul_5 == locul_8 {and} locul_2 != '.':
                             {print} 'Jucătorul ' simbol ' câștigă!'
                             jocul = 'terminat'
                         {elif} locul_3 == locul_6 {and} locul_6 == locul_9 {and} locul_3 != '.':
