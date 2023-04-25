@@ -854,6 +854,24 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
+    def test_two_ifs_assign(self):
+        code = textwrap.dedent("""\
+        order is fries
+        if order is fries price is 5
+        drink is water
+        print drink""")
+
+        expected = textwrap.dedent("""\
+        order = 'fries'
+        if convert_numerals('Latin', order) == convert_numerals('Latin', 'fries'):
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'
+        print(f'{drink}')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
         names is Hedy, Lamar

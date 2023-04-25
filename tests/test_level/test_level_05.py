@@ -167,12 +167,20 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
 
+    def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
+        code = textwrap.dedent("""\
+        naam is James
+        if naam is James Bond print 'shaken' 
+        print naam""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
+
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
         if naam is James Bond naam is 'Pietjansma'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space(self, q):
@@ -414,6 +422,36 @@ class TestsLevel5(HedyTester):
           print(f'biertje!')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+    def test_two_ifs_assign_no_following(self):
+        code = textwrap.dedent("""\
+        if order is fries price is 5
+        drink is water""")
+
+        expected = textwrap.dedent("""\
+        if 'order' == 'fries':
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'""")
+
+        self.single_level_tester(code=code, expected=expected, translate=False)
+
+    def test_two_ifs_assign_following(self):
+        code = textwrap.dedent("""\
+        if order is fries price is 5
+        drink is water
+        print drink""")
+
+        expected = textwrap.dedent("""\
+        if 'order' == 'fries':
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'
+        print(f'{drink}')""")
+
+        self.single_level_tester(code=code, expected=expected, translate=False)
 
     def test_if_equality_print_else_linebreak_print(self):
         # line break after else is allowed
