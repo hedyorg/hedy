@@ -75,7 +75,7 @@
                         <svg class="quiz-icons" viewBox="0 0 50 50">{{ svg_contents.next()|safe }}</svg>
                     </div>
                     <div class="pt-8 px-2 mx-2 mb-2 text-lg no-copy-button">
-                        {{choice.text|nl2br|commonmark}}
+                        {{choice.text|commonmark}}
                     </div>
 
                     {% if choice.code %}
