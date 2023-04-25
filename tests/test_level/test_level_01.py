@@ -3,6 +3,31 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
+from hypothesis import given
+import hypothesis.strategies
+
+hedy_to_python = [
+    ("print hallo", "print('hallo')", ),
+    ("ask Wat?", "answer = input('Wat?')", 1)
+    ("echo", "print(answer)", 2),
+    ("echo wie is de burgemeester van wezel", "print('wie is de burgemeester van wezel '+answer)", 2)
+]
+
+
+@given(code_tuple=hypothesis.strategies.sampled_from(hedy_to_python))
+def test_mapping_one_line(code_tuple):
+    hedy_code, python = code_tuple
+    assert hedy.transpile(hedy_code, level=1).code == python
+
+
+# @given(code_tuples=hypothesis.strategies.permutations(tuple(hedy_to_python_mapping.items())))
+# def test_mapping_combination(code_tuples):
+#
+#     hedy_code = '\n'.join([x for x, y in code_tuples])
+#     python = '\n'.join([y for x, y in code_tuples])
+#
+#     assert hedy.transpile(hedy_code, level=1).code == python
+
 
 class TestsLevel1(HedyTester):
     level = 1
