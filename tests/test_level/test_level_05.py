@@ -167,12 +167,20 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
 
+    def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
+        code = textwrap.dedent("""\
+        naam is James
+        if naam is James Bond print 'shaken' 
+        print naam""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
+
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
         if naam is James Bond naam is 'Pietjansma'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space(self, q):
