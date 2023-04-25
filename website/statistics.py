@@ -5,6 +5,7 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import hedy_content
 import utils
 from website.flask_helpers import render_template
 from website import querylog
@@ -165,11 +166,19 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
                         "common_errors": common_errors},
+            adventures=adventures,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
