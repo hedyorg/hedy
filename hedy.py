@@ -2853,8 +2853,9 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line)) and not contains_any_of(excluded_commands, line)
-            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
+                (contains_any_of(commands, line) or contains_two('is', line))
+                and not contains_any_of(excluded_commands, line)
+            ):
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
