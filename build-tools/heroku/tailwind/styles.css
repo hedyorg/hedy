@@ -771,3 +771,16 @@ input:checked + .slider:before {
 input:disabled::placeholder {
   @apply text-gray-700
 }
+
+
+
+.htmx-indicator.my-indicator{
+  opacity:0;
+  transition: opacity 0ms ease-in;
+}
+.htmx-request .my-indicator{
+  opacity:1;
+}
+.htmx-request.my-indicator{
+  opacity:1;
+}
