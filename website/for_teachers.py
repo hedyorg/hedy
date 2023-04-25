@@ -389,15 +389,75 @@ class ForTeachersModule(WebsiteModule):
                 is_teacher_adventure = True
         return is_teacher_adventure
 
-    @route("/customize-class/<class_id>", methods=["DELETE"])
+    @route("/restore-customizations", methods=["POST"])
     @requires_teacher
-    def delete_customizations(self, user, class_id):
+    def restore_customizations_to_default(self, user):
+        class_id = request.args.get('class_id')
+        level = request.args.get('level')
+
         Class = self.db.get_class(class_id)
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
         if not Class or Class["teacher"] != user["username"]:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        self.db.delete_class_customizations(class_id)
-        return {"success": gettext("customization_deleted")}, 200
+        customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        sorted_adventures = {}
+        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+
+        customizations = {
+            "id": class_id,
+            "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+            "opening_dates": {},
+            "other_settings": [],
+            "level_thresholds": {},
+            "sorted_adventures": sorted_adventures
+        }
+        self.db.update_class_customizations(customizations)
+
+        for adventure in teacher_adventures:
+            available_adventures[int(adventure['level'])].append(
+                {"name": adventure['id'], "from_teacher": True})
+
+        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
+                                             level=level,
+                                             customizations=customizations,
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             adventure_names=adventure_names,
+                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                                             available_adventures=available_adventures,
+                                             class_id=session['class_id'])
+
+    @route("/restore-adventures-to-default", methods=["POST"])
+    @requires_teacher
+    def restore_adventures_to_default(self, user):
+        class_id = request.args.get('class_id')
+        level = request.args.get('level')
+        Class = self.db.get_class(class_id)
+
+        if not Class or Class["teacher"] != user["username"]:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        sorted_adventures = {}
+        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+
+        customizations['sorted_adventures'] = sorted_adventures
+        available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+        self.db.update_class_customizations(customizations)
+
+        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
+                                             level=level,
+                                             customizations=customizations,
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             adventure_names=adventure_names,
+                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                                             available_adventures=available_adventures,
+                                             class_id=session['class_id'])
 
     @route("/customize-class/<class_id>", methods=["POST"])
     @requires_teacher
