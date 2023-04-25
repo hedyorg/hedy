@@ -62,12 +62,12 @@ adventures:
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
                 story_text: |
-                     这一级我们会学到一些新内容：现在你可以做计算啦。
+                    这一级我们会学到一些新内容：现在你可以做计算啦。
 
-                     加法运算很简单，和数学公式里一样，比如`5 + 5`。减法运算也一样，就是`5 - 5`。
+                    加法运算很简单，和数学公式里一样，比如`5 + 5`。减法运算也一样，就是`5 - 5`。
 
-                     乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下，真的没有！
-                     所以我们用数字8上面的星号表示乘法： `5 * 5`。把它读作“5乘5”会有利于你记住它。
+                    乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下，真的没有！
+                    所以我们用数字8上面的星号表示乘法： `5 * 5`。把它读作“5乘5”会有利于你记住它。
                 example_code: "```\n{print} '5 加 5 是 ' 5 + 5\n{print} '5 减 5 是 ' 5 - 5\n{print} '5 乘 5 是 ' 5 * 5\n```\n"
                 story_text_2: "我们还改变了在变量中存储词语的方式！现在，要在变量中保存名字或者数字时，你可以用`=`代替`{is}`，像这样：\n"
                 example_code_2: "```\n名字 = 海蒂\n答案 = 20 + 4\n```\n"
@@ -252,7 +252,7 @@ adventures:
                 start_code: "{print} 你的故事"
             13:
                 story_text: "通过使用`{and}`和`{or}`命令，你可以把故事写得更短。比如这个龙的故事。\n\n### 练习 \n你能像这样制作你自己的迷你冒险游戏吗？\n"
-                example_code: "```\n剑 = '丢失'\n游戏 = '进行中'\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{for} i {in} {range} 0 {to} 2\n    {if} 游戏 {is} '进行中'\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} '左' {and} 剑 {is} '找到'\n            {print} '我们的英雄遇上了一条龙！'\n            {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n            游戏 = '结束'\n        {if} 路 {is} '左' {and} 剑 {is} '丢失'\n            {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n            {print} '我们的英雄被龙打败了……'\n            {print} '再试一次'\n            游戏 = '结束'\n        {if} 路 {is} '右' {and} 剑 {is} '找到'\n            {print} '你已经找打了剑。这里什么都没有。'\n            {print} '她走了回去'\n        {if} 路 {is} '右' {and} 剑 {is} '丢失'\n            {print} '我们的英雄找到了一把剑'\n            {print} '它可能派上大用场'\n            剑 = '找到'\n```\n"
+                example_code: "```\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n路 = {ask} '她应该选择哪条路呢？'\n武器 = {ask} '她画的是什么武器？'\n{for} i {in} {range} 0 {to} 2\n{if} 路 {is} '左' {and} 武器 {is} '剑'\n    _\n```\n"
                 start_code: '# 在这里写你的代码'
             1:
                 story_text: "在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
@@ -285,10 +285,10 @@ adventures:
                 start_code: '# 在这里写你的代码'
             18:
                 story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
-                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
-                example_code: "```\n{print}('Welcome to this story!')\n```\n"
-                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
-                start_code: '# Schrijf jouw code hier'
+                story_text_2: "### 练习 2\n我们已经为您准备了一个 `{input}`。 首先，在您的故事中使用 `name` 变量。\n然后，请添加第二个 `{ask}` 并使用该变量。\n提示：记得文本和变量之间 `{print}` 中的逗号！\n"
+                example_code: "```\n{print}('欢迎来到这个故事！')\n```\n"
+                example_code_2: "```\nnaam = {input}(\"你叫什么名字？\")\n{print}('欢迎来到这个故事！')\n```\n"
+                start_code: '# 在此处键入代码'
         name: 故事
         description: 故事
         default_save_name: 故事
@@ -327,9 +327,9 @@ adventures:
                 start_code: '# 把你的代码放在这里'
                 example_code: "```\n动物们 = ['猪', '狗', '牛']\n声音们 = ['哼哼', '汪汪', '哞']\n{for} i {in} {range} 1 {to} 3\n    动物 = 动物们[i]\n    声音 = 声音们[i]\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音 声音\n```\n\n```\n句子们 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子 {in} 句子们\n    {for} i {in} {range} 1 {to} 3\n        {print} 句子\n    {print} '一大清早'\n    {for} i {in} {range} 1 {to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
             18:
-                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                example_code: "```\nlines = ['我们应该如何处理醉酒的水手'，'用生锈的剃刀剃他的肚子'，'让他躺在船上醒酒']\n{for} 行 {in} 行 _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ 行 _\n     {print} '凌晨'\n     {for} i {in} {range} 1 {to} 3\n         {print} 'way hay and up she rises'\n     {print} '凌晨'\n```\n"
                 story_text: "In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# 在此处键入代码'
         name: 唱支歌！
         description: 打印一首歌
         default_save_name: 歌
@@ -364,8 +364,8 @@ adventures:
                     {if} 图形 {is} 三角形 角度 {is} 120 {else} 角度 {is} 90
                     {turn} 角度
                     {forward} 25
-                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
-                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### 练习\n在此代码中输入正确的数字使其工作。\n完成后，您可以尝试向后添加选项。\n\n**额外** 请勿使用“左”和“右”，而是用北、东、南和西重新制作程序。\n这样您就可以添加更多方向，例如东北和西南等。\n"
+                example_code_2: "```\n方向 {is} {ask} '你想向左走、向右走还是一直向前走？'\n{if} 方向 {is} 左 {turn} _\n{if} 方向 {is} 右 {turn} _\n{forward} 100\n```\n"
             8:
                 story_text: "现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n\n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: "```\n角度 = 90\n{repeat} 4 {times}\n    {turn} 角度\n    {forward} 50\n```\n"
@@ -388,7 +388,7 @@ adventures:
             5:
                 start_code: "{print} '谁负责洗碗？'"
                 story_text: "你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。\n\n你能不能完成这段代码，让它在选中你的时候打印“太糟了”，其它情况下打印“好！”？\n别忘了引号！\n"
-                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{else} {print} '运气真好，' _ '把碗洗了'\n```\n"
+                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
                 story_text: "在这一关中，你可以轻松地为整个星期制定时间表！\n\n### 练习\n增加第二项家务，例如吸尘或整理，并确保这项家务被分配到整周的家庭事务安排表中。\n<br> **(extra)** 如果程序不公平的话，你可能会倒霉到整个星期都在洗碗。 你怎样做才能使程序更公平？\n"
                 example_code: "```\n日期们 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n名字们 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期们\n    {print} 名字们 {at} {random} '负责在' 日期 '洗碗'\n```\n"
@@ -416,7 +416,7 @@ adventures:
         description: 用电脑决定谁来洗碗
         default_save_name: 洗碗
     pressit:
-        default_save_name: 报道
+        default_save_name: 按下
         name: 按键
         description: 试试把键盘键和命令联系起来吧！
         levels:
@@ -430,8 +430,8 @@ adventures:
                 example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
 
             5:
-                start_code: '# place your code here'
-                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                start_code: '# 在此处键入代码'
+                example_code: "```\n{print} '你想要好 (g) 还是坏 (b) 结局？'\n{if} g {is} {pressed} {print} '从此以后，他们幸福地生活在一起了 ❤'\n{else} {print} '王子被河马给吃了\U0001F62D'\n```\n"
                 story_text: "In this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
                 story_text_2: "You can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
@@ -1400,7 +1400,7 @@ adventures:
                 example_code_2: "\n你计算出8个骰子的点数了吗？这需要大量复制粘贴，对吗？在第7级，我们会让它更简单！\n"
                 start_code: "{print} '骰子这次会投出什么？'"
             5:
-                example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n投 {is} _\n{print} '你投出了' _\n{if} _ {is} 蚯蚓 {print} '你不用再投了' _ {print} '你需要再来一次！'\n```\n"
+                example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n投 {is} _选择 {at} {random}\n{print} “你投出了”选择\n_ 投 {is} 蚯蚓 {print} '你可以停止投掷了。'\n_ {print} '你得重新投一次！'\n```\n"
                 story_text: "在这一级，你可以用`{if}`再制作一个骰子。\n补全示例代码，让它在你投出蚯蚓的时候说“你不用再投了”。\n\n不过也许你想要重新搞一个别的游戏里的完全不同的骰子。那也没关系！你只要做出对应的回应，比如在投出6的时候说“好”，投出其他的时候说“可惜”。\n"
                 start_code: "{print} '骰子这次会投出什么？'"
             4:
