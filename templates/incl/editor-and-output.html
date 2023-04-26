@@ -1,5 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
+    {% if raw %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-0 mb-0">
+    {% else %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
+    {% endif %}
+
     <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
      <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
          <span>→</span>
