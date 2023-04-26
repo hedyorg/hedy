@@ -10,6 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
+import exceptions as hedy_exceptions
 from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy_content
 from . import dynamo
@@ -238,6 +239,8 @@ class LiveStatisticsModule(WebsiteModule):
                  'error_message': _get_error_info(item['code'], item['level'], item['lang'])
                  }
             )
+
+        print("Error thing:", student_programs[0]['error_message'].error_location)
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
@@ -571,7 +574,7 @@ def _get_error_info(code, level, lang='en'):
 
         # checks whether any error production nodes are present in the parse tree
         is_program_valid(program_root, input_string, level, lang)
-    except BaseException as exc:
+    except hedy_exceptions.HedyException as exc:
         return exc
     return None
 
