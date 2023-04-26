@@ -559,18 +559,20 @@ def _get_error_info(code, level, lang='en'):
     the code produced an error or not, in order to get the error we have to rerun the code
     through some hedy logic.
     """
-    check_program_size_is_valid(code)
+    try:
+        check_program_size_is_valid(code)
 
-    level = int(level)
-    if level > HEDY_MAX_LEVEL:
-        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+        level = int(level)
+        if level > HEDY_MAX_LEVEL:
+            raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
-    input_string = process_input_string(code, level, lang)
-    program_root = parse_input(input_string, level, lang)
+        input_string = process_input_string(code, level, lang)
+        program_root = parse_input(input_string, level, lang)
 
-    # checks whether any error production nodes are present in the parse tree
-    is_program_valid(program_root, input_string, level, lang)
-
+        # checks whether any error production nodes are present in the parse tree
+        is_program_valid(program_root, input_string, level, lang)
+    except BaseException as exc:
+        return exc
     return None
 
 
