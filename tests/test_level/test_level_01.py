@@ -7,26 +7,66 @@ from hypothesis import given
 import hypothesis.strategies
 
 hedy_to_python = [
-    ("print hallo", "print('hallo')", ),
-    ("ask Wat?", "answer = input('Wat?')", 1)
+    ("print", "print('')", -1),
+    ("print hallo", "print('hallo')", -1),
+    ("ask Wat?", "answer = input('Wat?')", 1),
     ("echo", "print(answer)", 2),
     ("echo wie is de burgemeester van wezel", "print('wie is de burgemeester van wezel '+answer)", 2)
 ]
 
+generated_arguments = hypothesis.strategies.text(min_size=1, max_size=5)
+
+templates = [
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("ask <P>", 1),
+    ("echo <P>", 2)
+]
 
 @given(code_tuple=hypothesis.strategies.sampled_from(hedy_to_python))
 def test_mapping_one_line(code_tuple):
-    hedy_code, python = code_tuple
+    hedy_code, python, order = code_tuple
     assert hedy.transpile(hedy_code, level=1).code == python
 
+def valid_permutation(lines):
+    orders = [order for _, _, order in lines]
+    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
 
-# @given(code_tuples=hypothesis.strategies.permutations(tuple(hedy_to_python_mapping.items())))
-# def test_mapping_combination(code_tuples):
-#
-#     hedy_code = '\n'.join([x for x, y in code_tuples])
-#     python = '\n'.join([y for x, y in code_tuples])
-#
-#     assert hedy.transpile(hedy_code, level=1).code == python
+    lijst = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+
+    return all(lijst)
+
+def valid_permutation2(lines):
+    orders = [order for _, order in lines]
+    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
+
+    lijst = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+
+    return all(lijst)
+
+@given(code_tuples=hypothesis.strategies.permutations(hedy_to_python))
+def test_mapping_combination(code_tuples):
+    if valid_permutation(code_tuples):
+
+        hedy_code = '\n'.join([x for x, y, z in code_tuples])
+        python = '\n'.join([y for x, y, z in code_tuples])
+
+        print(hedy_code)
+
+        assert hedy.transpile(hedy_code, level=1).code == python
+@given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
+def test_template_combination(code_tuples, d):
+    if valid_permutation2(code_tuples):
+        hedy_code = '\n'.join([line.replace("<P>", d.draw(hypothesis.strategies.text(min_size=1, max_size=10))) for line, _ in code_tuples])
+
+        try:
+            hedy.transpile(hedy_code, level=1).code
+        except:
+            print(hedy_code)
+            assert False
+
+
 
 
 class TestsLevel1(HedyTester):
