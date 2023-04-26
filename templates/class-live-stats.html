@@ -84,7 +84,7 @@
                             ☝️ Hide
                         </a>
                     </div>
-                    <div class="grid grid-cols-2 p-2">
+                    <!-- <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
                             <h4 class="mb-4">Name</h4>
                             <ul class="max-w-md space-y-1 list-none list-inside">
@@ -108,14 +108,28 @@
                                 <li id="s3"><img src="/images/new_media_lab/student3.png"></li>
                                 <li id="s4"><img src="/images/new_media_lab/student4.png"></li>
                                 <li id="s5"><img src="/images/new_media_lab/student5.png"></li>
-                                <!-- {% for s in class_info.students %}
+                                ---extra comment {% for s in class_info.students %}
                                     <div>
                                         <li class="p-0">{{s.highest_level}}</li>
                                     </div>
-                                {% endfor %} -->
+                                {% endfor %} ----extra comment
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    <table class="table-auto w-full lg:w-9/10 border-separate space-y-6 border border-black rounded-lg">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="px-4 py-2 text-left">{{_('name')}}</th>
+                                <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
+                                <th class="p-2">{{_('Adventure Progress')}}</th>
+                            </tr>
+                        </thead>
+                          <tbody>
+                            {% for s in class_info.students %}
+                            <tr><td class="px-4 py-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">{{s.username}}</a></td></tr>
+                            {% endfor %}  
+                          </tbody>
+                    </table>
                 </div>
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
