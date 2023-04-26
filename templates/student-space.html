@@ -8,7 +8,7 @@
         <a class="no-underline float-right p-2" href="/live_stats/class/{{class_info.id}}">❌</a>
         <!-- Title columns -->
         <div class="m-auto ml-14 flex pt-4 pl-4">
-            <table class="text-left table-auto w-full ">
+            <table class="text-left table-auto">
                 <thead>
                     <tr>
                         <th class="w-64 text-blue-600">{{_('name')}}</th>
@@ -19,8 +19,13 @@
                 <tbody>
                     <tr>
                         <td>{{student.username}}</td>
+                        {% if student_programs %}
                         <td>{{_('level')}} {{ student_programs[0].level }}</td>
                         <td>{{adventure_names.get(student_programs[0].adventure_name)}}</td>
+                        {% else %}
+                        <td>{{_('empty')}}</td>
+                        <td>{{_('empty')}}</td>
+                        {% endif %}
                     </tr>
                 </tbody>
             </table>
@@ -37,7 +42,11 @@
             <!-- Last ran code -->
             <div class="w-full text-center turn-pre-into-ace mb-4">
                 <h5 class="font-normal pb-1">Last program</h5>
-                <pre level="{{ student_programs[0].level }}">{{student_programs[0].code }}</pre>
+                {% if student_programs %}
+                    <pre level="{{ student_programs[0].level }}">{{student_programs[0].code }}</pre>
+                {% else %}
+                    <p>No program run yet</p>
+                {% endif %}
             </div>
 
             <!-- Last error message  -->
