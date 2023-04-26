@@ -54,7 +54,7 @@
         <!-- The actual editor -->
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          class="w-full flex-1 text-lg rounded">{{initial_adventure.start_code}}</div>
+          class="w-full flex-1 text-lg rounded max-h-13">{{initial_adventure.start_code}}</div> Huh 12 = mini, 13 = giga?!
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
             {% for i in range(1, 11) %}
                 <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
@@ -127,7 +127,7 @@
             </div>
         </div>
       <!-- tabindex=0 makes the div focusable -->
-      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto max-h-20" style="min-height: 3rem;"></div>
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
       <div id="inline-modal" class="flex-0">
         <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
@@ -135,6 +135,7 @@
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">Header</p>
           </div>
+          <!--Body-->
           <!--Body-->
           <form>
             <div class="my-2 flex">
