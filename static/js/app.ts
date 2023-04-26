@@ -849,7 +849,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
