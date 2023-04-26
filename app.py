@@ -1852,6 +1852,17 @@ def translate_command(command):
 
 
 @app.template_filter()
+def markdown_retain_newlines(x):
+    """Force newlines in to the input MarkDown string to be rendered as <br>"""
+    # This works by adding two spaces before every newline. That's a signal to MarkDown
+    # that the newlines should be forced.
+    #
+    # Nobody is going to type this voluntarily to distinguish between linebreaks line by
+    # line, but you can use this filter to do this for all line breaks.
+    return x.replace('\n', '  \n')
+
+
+@app.template_filter()
 def nl2br(x):
     """Turn newlines into <br>"""
     # The input to this object will either be a literal string or a 'Markup' object.
