@@ -414,8 +414,9 @@ class ForTeachersModule(WebsiteModule):
             "level_thresholds": {},
             "sorted_adventures": sorted_adventures
         }
-        self.db.update_class_customizations(customizations)
 
+        self.db.update_class_customizations(customizations)
+        available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
         for adventure in teacher_adventures:
             available_adventures[int(adventure['level'])].append(
                 {"name": adventure['id'], "from_teacher": True})
