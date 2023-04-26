@@ -116,7 +116,7 @@
                             </ul>
                         </div>
                     </div> -->
-                    <table class="table-auto w-full lg:w-9/10 border-separate space-y-6 border border-black rounded-lg">
+                    <table class="table-auto w-full border-separate space-y-6 border border-black rounded-lg">
                         <thead class="bg-gray-200">
                             <tr>
                                 <th class="px-4 py-2 text-left">{{_('name')}}</th>
@@ -124,11 +124,15 @@
                                 <th class="p-2">{{_('Adventure Progress')}}</th>
                             </tr>
                         </thead>
-                          <tbody>
+                        <tbody>
                             {% for s in class_info.students %}
-                            <tr><td class="px-4 py-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">{{s.username}}</a></td></tr>
-                            {% endfor %}  
-                          </tbody>
+                            <tr>
+                                <td class="px-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">{{s.username}}</a></td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
                     </table>
                 </div>
                 {% else %}
