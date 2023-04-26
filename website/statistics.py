@@ -10,6 +10,7 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
+from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy_content
 from . import dynamo
 from .database import Database
@@ -232,7 +233,9 @@ class LiveStatisticsModule(WebsiteModule):
                  'adventure_name': item.get('adventure_name'),
                  'submitted': item.get('submitted'),
                  'public': item.get('public'),
-                 'number_lines': item['code'].count('\n') + 1
+                 'number_lines': item['code'].count('\n') + 1,
+                 'error': item['error'],
+                 'error_message': _get_error_info(item['code'], item['level'], item['lang'])
                  }
             )
 
@@ -548,6 +551,27 @@ def _check_dashboard_display_args():
     show_c3 = _determine_bool(show_c3)
 
     return collapse, show_c1, show_c2, show_c3
+
+
+def _get_error_info(code, level, lang='en'):
+    """
+    Returns the server error given the code. Since the database only stores whether
+    the code produced an error or not, in order to get the error we have to rerun the code
+    through some hedy logic.
+    """
+    check_program_size_is_valid(code)
+
+    level = int(level)
+    if level > HEDY_MAX_LEVEL:
+        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+
+    input_string = process_input_string(code, level, lang)
+    program_root = parse_input(input_string, level, lang)
+
+    # checks whether any error production nodes are present in the parse tree
+    is_program_valid(program_root, input_string, level, lang)
+
+    return None
 
 
 def get_general_class_stats(students):
