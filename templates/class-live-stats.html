@@ -38,28 +38,30 @@
             {% if class_info.show_c1 %}
             <div class="dark:bg-gray-700 dark:border-gray-600">
                 <div class="w-full">
-                    <div class="grid grid-cols-9 gap-1 p-1 mx-auto my-2 bg-gray-100 rounded-lg dark:bg-gray-600 divide-x" role="group">
+                    <div class="grid grid-flow-col auto-cols-max place-content-between overflow-auto p-1 mx-auto my-2 bg-gray-100 rounded-lg" role="group">
                         <!-- Buttons -->
-                        {% for key, adventure in adventures.items() %}{% for name, levels in adventure.items() %}
-                            {% if 1 == levels[0] %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
+                        {% for level, adventure_list in adventures.items() %}
+                        {% if level|int == 1 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
+                            {% for adventure in adventure_list %}
                             <div class="flex flex-col items-center content-center place-content-between">
                                 <button type="button" class="px-5 py-1.5 text-sm font-medium text-gray-900 rounded-lg">
-                                    {{ name }}
+                                    {{ adventure["name"] }}
                                 </button>
-                                <div class="flex justify-center pb-1 my-2">
-                                    <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">X</span>
-                                    <span class="border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">Y</span>
-                                </div>
+                                <div class="flex flex-col justify-center pb-1 my-2">
+                                    <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">10</span>
+                                    <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">5</span>
+                                </div> 
                             </div>
-                            {% endif %}
-                        {% endfor %}{% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        {% endfor %}
                         <div class="flex flex-col items-center content-center place-content-between">
                             <button type="button" class="w-full px-5 py-1.5 text-sm font-medium text-white bg-green-600 rounded-lg">
                                 Quiz
                             </button>
-                            <div class="flex justify-center pb-1 my-2">
-                                <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">X</span>
-                                <span class="border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">Y</span>
+                            <div class="flex flex-col justify-center pb-1 my-2">
+                                <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">3</span>
+                                <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">4</span>
                             </div>
                         </div>
                     </div>
@@ -138,7 +140,6 @@
                                             <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
-
                                         </li>
                                     </div>
                                 {% endfor %}

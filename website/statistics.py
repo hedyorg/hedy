@@ -172,13 +172,17 @@ class LiveStatisticsModule(WebsiteModule):
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations)
 
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
                         "common_errors": common_errors},
-            adventures=adventures,
+            adventures=available_adventures,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -223,10 +227,21 @@ class LiveStatisticsModule(WebsiteModule):
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations)
+
         return render_template(
             "student-space.html",
             class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "common_errors": common_errors},
+            adventures=available_adventures,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -267,11 +282,22 @@ class LiveStatisticsModule(WebsiteModule):
         else:
             result = []
 
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations)
+
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "collapse": collapse,
                         "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result,
                         "common_errors": common_errors},
+            adventures=available_adventures,
             current_page='my-profile'
         )
 
@@ -533,6 +559,30 @@ def _check_dashboard_display_args():
     show_c3 = _determine_bool(show_c3)
 
     return collapse, show_c1, show_c2, show_c3
+
+
+def get_available_adventures(adventures, teacher_adventures, customizations):
+    teacher_adventures_formatted = {}
+    for adventure in teacher_adventures:
+        teacher_adventures_formatted[adventure['id']] = adventure["name"]
+
+    selected_adventures = {}
+    for level, adventure_list in customizations['sorted_adventures'].items():
+        adventures_for_level = []
+        for adventure in list(adventure_list):
+            adventure_key = adventure['name']
+
+            if adventure['from_teacher']:
+                adventure_name = teacher_adventures_formatted[adventure_key]
+                adventures_for_level.append({"id": adventure_key, "name":  adventure_name})
+
+            if not adventure['from_teacher'] and adventure_key in adventures:
+                adventure_name = list(adventures[adventure_key].keys())[0]
+                adventures_for_level.append({"id": adventure_key, "name":  adventure_name})
+
+        selected_adventures[level] = adventures_for_level
+
+    return selected_adventures
 
 
 def get_general_class_stats(students):
