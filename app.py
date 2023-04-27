@@ -1275,7 +1275,7 @@ def get_specific_adventure(name, level, mode):
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = None #we are not rendering buttons in raw, no lookup needed here
+    prev_level = None  # we are not rendering buttons in raw, no lookup needed here
     next_level = None
 
     # Add the commands to enable the language switcher dropdown
