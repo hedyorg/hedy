@@ -1275,10 +1275,8 @@ def get_specific_adventure(name, level, mode):
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.short_name == name] else False
-    next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.short_name == name] else False
+    prev_level = None #we are not rendering buttons in raw, no lookup needed here
+    next_level = None
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
