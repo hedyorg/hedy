@@ -557,6 +557,19 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_assign_catalan_var_name(self):
+        code = textwrap.dedent("""\
+            print És hora una nit de Netflix
+            pel·lícula is Sonic the Hedgehog 2
+            print Veurem una pel·lícula""")
+
+        expected = textwrap.dedent("""\
+            print(f'És hora una nit de Netflix')
+            pel·lícula = 'Sonic the Hedgehog 2'
+            print(f'Veurem una {pel·lícula}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
+
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = '14'"

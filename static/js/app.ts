@@ -39,6 +39,7 @@ let askPromptOpen = false;
 let theAdventures: Record<string, Adventure> = {};
 let theLevel: number = 0;
 let theLanguage: string = '';
+let theKeywordLanguage: string = 'en';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
 
@@ -119,10 +120,11 @@ export interface InitializeAppOptions {
  */
 export function initializeApp(options: InitializeAppOptions) {
   theLevel = options.level;
+  theKeywordLanguage = options.keywordLanguage;
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
-  initializeHighlightedCodeBlocks(options.keywordLanguage);
+  initializeHighlightedCodeBlocks(document.body);
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -181,10 +183,12 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const anchor = window.location.hash.substring(1);
 
+  const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
+
   const tabs = new Tabs({
     // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
     // We click on `level` to load a program associated with level, if any.
-    initialTab: anchor in theAdventures ? anchor : options.initial_tab,
+    initialTab: validAnchor ?? options.initial_tab,
   });
 
   tabs.on('beforeSwitch', () => {
@@ -198,7 +202,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     // Load initial code from local storage, if available
     const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
       adventure.start_code = programFromLs.code;
       adventure.save_name = programFromLs.saveName;
       adventure.save_info = 'local-storage';
@@ -341,72 +346,75 @@ function initializeMainEditor($editor: JQuery) {
   return editor;
 }
 
-function initializeHighlightedCodeBlocks(keywordLanguage: string) {
+export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview)
-      .addClass('text-lg rounded overflow-x-hidden')
-      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-      .attr('lang', keywordLanguage);
+  for (const container of $(where).find('.turn-pre-into-ace').get()) {
+    for (const preview of $(container).find('pre').get()) {
+      $(preview)
+        .addClass('text-lg rounded overflow-x-hidden')
+        // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+        .attr('lang', theKeywordLanguage);
 
-    // Only turn into an editor if the editor scrolls into view
-    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-    onElementBecomesVisible(preview, () => {
-      const exampleEditor = turnIntoAceEditor(preview, true);
+      // Only turn into an editor if the editor scrolls into view
+      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+      onElementBecomesVisible(preview, () => {
+        const exampleEditor = turnIntoAceEditor(preview, true);
 
-      // Fits to content size
-      exampleEditor.setOptions({ maxLines: Infinity });
-      if ($(preview).hasClass('common-mistakes')) {
-        exampleEditor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true,
-          minLines: 5,
-        });
-      } else if ($(preview).hasClass('cheatsheet')) {
-        exampleEditor.setOptions({ minLines: 1 });
-      } else if ($(preview).hasClass('parsons')) {
-        exampleEditor.setOptions({
-          minLines: 1,
-          showGutter: false,
-          showPrintMargin: false,
-          highlightActiveLine: false
-        });
-      } else {
-        exampleEditor.setOptions({ minLines: 2 });
-      }
-
-      if (dir === "rtl") {
-          exampleEditor.setOptions({ rtl: true });
-      }
-
-      // Strip trailing newline, it renders better
-      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-      if (! $(preview).hasClass('no-copy-button')) {
-        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-        let symbol = "⇥";
-        if (dir === "rtl") {
-          symbol = "⇤";
+        // Fits to content size
+        exampleEditor.setOptions({ maxLines: Infinity });
+        if ($(preview).hasClass('common-mistakes')) {
+          exampleEditor.setOptions({
+            showGutter: true,
+            showPrintMargin: true,
+            highlightActiveLine: true,
+            minLines: 5,
+          });
+        } else if ($(preview).hasClass('cheatsheet')) {
+          exampleEditor.setOptions({ minLines: 1 });
+        } else if ($(preview).hasClass('parsons')) {
+          exampleEditor.setOptions({
+            minLines: 1,
+            showGutter: false,
+            showPrintMargin: false,
+            highlightActiveLine: false
+          });
+        } else {
+          exampleEditor.setOptions({ minLines: 2 });
         }
-        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-          if (!theGlobalEditor?.getReadOnly()) {
-            theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
-          }
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-          stopit();
-          clearOutput();
-        });
-      }
 
-      const levelStr = $(preview).attr('level');
-      if (levelStr) {
-        exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
-      }
-    });
+        if (dir === "rtl") {
+            exampleEditor.setOptions({ rtl: true });
+        }
+
+        // Strip trailing newline, it renders better
+        exampleEditor.setValue(exampleEditor.getValue().trimRight(), -1);
+        // And add an overlay button to the editor if requested via a show-copy-button class, either
+        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          let symbol = "⇥";
+          if (dir === "rtl") {
+            symbol = "⇤";
+          }
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+            if (!theGlobalEditor?.getReadOnly()) {
+              theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
+            }
+            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+            stopit();
+            clearOutput();
+          });
+        }
+
+        const levelStr = $(preview).attr('level');
+        if (levelStr) {
+          exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+        }
+      });
+    }
   }
 }
 
@@ -849,7 +857,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -920,13 +932,24 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+    let pygameModal = $('#pygame-modal');
 
     const codeContainsInputFunctionBeforePygame = new RegExp(
       "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
     ).test(code);
 
-    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
-      $('#pygame-modal').show();
+    if (!codeContainsInputFunctionBeforePygame) {
+      pygameModal.show();
+    }
+
+    if (hasTurtle) {
+      pygameModal.addClass('absolute');
+      pygameModal.addClass('bottom-0');
+      pygameModal.addClass('w-full');
+    } else {
+      pygameModal.removeClass('absolute');
+      pygameModal.removeClass('bottom-0');
+      pygameModal.removeClass('w-full');
     }
 
     document.onkeydown = animateKeys;
@@ -1033,7 +1056,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
-    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+    scrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1130,6 +1153,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           return false;
         });
         $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
       });
     } else {
       return new Promise(function (ok) {
@@ -1420,9 +1446,12 @@ function getConfettiForAdventure(adventure: MessageKey){
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
-export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+/**
+ * Scroll the output to bottom immediately
+ */
+function scrollOutputToBottom() {
+  const outputDiv = $('#output');
+  outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
 }
 
 export function modalStepOne(level: number){
@@ -1451,6 +1480,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
   const editor = ace.edit(element);
   editor.setTheme("ace/theme/monokai");
   if (isReadOnly) {
+    editor.setValue(editor.getValue().trimRight(), -1);
     // Remove the cursor
     editor.renderer.$cursorLayer.element.style.display = "none";
     editor.setOptions({
@@ -1950,7 +1980,14 @@ function programNeedsSaving(adventureName: string) {
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
-  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
 
 /**
@@ -1981,6 +2018,7 @@ async function saveIfNecessary() {
 
   const code = theGlobalEditor.getValue();
   const saveName = saveNameFromInput();
+
 
   if (theUserIsLoggedIn) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;

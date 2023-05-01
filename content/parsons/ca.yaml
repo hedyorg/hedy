@@ -51,7 +51,7 @@ levels:
     7:
         1:
             story: "En un torneig d'escacs queden tres jugadors.\nCreeu un programa que decideixi quins dos jugadors juguen primer l'un contra l'altre.\nPrimer imprimiu els dos jugadors que juguen el primer partit, després imprimiu contra quin jugador jugarà el guanyador.\n"
-            code: "jugadors = Liam, Noah, Sophie\njugador1 = jugadors {at} {random}\njugador2 = jugadors {at} {random}\n{print} jugador1 ' juga primer contra ' jugador2\n{remove} jugador1 {from} jugadors\n{remove} jugador2 {from} jugadors\n{print} 'El guanyador juga contra ' jugadors {at} {random}"
+            code: "jugadors = Liam, Noah, Sophie\njugador1 = jugadors {at} {random}\n{remove} jugador1 {from} jugadors\njugador2 = jugadors {at} {random}\n{print} jugador1 ' juga primer contra ' jugador2\n{remove} jugador2 {from} jugadors\n{print} 'El guanyador juga contra ' jugadors {at} {random}"
         2:
             story: "Crea la cançó \"Les rodes de l'autobús fan voltes i voltes\"\n"
             code: "{print} \"les rodes de l'autobús van\"\n{repeat} 3 {times} {print} \"volt i rodó\"\n{print} \"les rodes de l'autobús fan voltes\"\n{print} \"per tota la ciutat\""

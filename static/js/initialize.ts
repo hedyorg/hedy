@@ -3,7 +3,6 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeQuiz } from './quiz';
 import { InitializeAdminStatsOptions, InitializeClassStatsPageOptions, stats } from './statistics';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
@@ -66,7 +65,6 @@ export function initialize(options: InitializeOptions) {
     keywordLanguage: options.keyword_language,
   });
   initializeFormSubmits();
-  initializeQuiz();
   initializeTutorial();
 
   // The above initializations are often also page-specific

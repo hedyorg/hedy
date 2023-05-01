@@ -84,9 +84,9 @@ levels:
             code: |-
                 spelare = Liam, Noah, Sophie
                 spelare1 = spelare {at} {random}
+                {remove} spelare1 {from} spelare
                 spelare2 = spelare {at} {random}
                 {print} spelare1 ' spelar först mot ' spelare2
-                {remove} spelare1 {from} spelare
                 {remove} spelare2 {from} spelare
                 {print} 'Vinnaren spelar mot ' spelare {at} {random}
         2:
@@ -100,8 +100,8 @@ levels:
         1:
             story: "Du och dina vänner ska titta på Netflix.\nVisa vilken film du ska titta på och önska tittarna mycket roligt!\n"
             code: |-
-                {print} Det är dags för en Netflix-kväll
-                film {is} Sonic the Hedgehog 2
+                {print} Det är dags för en Netflixkväll
+                filmen {is} Sonic the Hedgehog 2
                 {print} Vi ska se film
                 {print} Ha det så roligt!
         2:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-28 10:45+0200\n"
-"PO-Revision-Date: 2023-03-23 09:50+0000\n"
+"POT-Creation-Date: 2023-04-11 15:55+0200\n"
+"PO-Revision-Date: 2023-04-06 07:18+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: nl\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -18,14 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
-msgstr "Je gebruikt de variabele {name} op regel {access_line_number}, maar die stel je in op regel {definition_line_number}. Stel iedere variabele in voor je die gebruikt."
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
 msgstr "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een is mag gebruiken."
 
+#, fuzzy
 msgid "Has Blanks"
-msgstr "Let op! Jouw code is nog niet compleet. Er staat nog een laag streepje in, daar moet jij de juiste code nog invullen."
+msgstr "Your code is incomplete. It contains blanks that you have to replace with code."
 
 msgid "Incomplete"
 msgstr "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter {incomplete_command} nog tekst komen."
@@ -75,6 +77,10 @@ msgstr "Je hebt te weinig spaties voor regel {line_number} gebruikt. Er staan {l
 
 msgid "Parse"
 msgstr "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte {character_found}, maar dat mag op die plek niet."
+
+#, fuzzy
+msgid "Pressit Missing Else"
+msgstr "Je moet ook nog instellen wat er gebeurt als je geen toets indrukt. Voeg daarvoor een {else} toe aan je programma"
 
 msgid "Too Big"
 msgstr "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
@@ -955,7 +961,7 @@ msgstr "This user hasn't earned the Hedy Certificate of Completion"
 
 #, fuzzy
 msgid "no_more_flat_if"
-msgstr "Starting in level 8, the line after {if} needs to start with 4 spaces."
+msgstr "Vanaf level 8 moet de code na {if} op de volgende regel komen en beginnen met 4 spaties."
 
 msgid "no_programs"
 msgstr "Nog geen programma's."

@@ -2,6 +2,7 @@
 import collections
 import copy
 import logging
+import json
 import datetime
 import os
 import re
@@ -36,7 +37,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
-                     cdn, classes, database, for_teachers, jsonbin, parsons,
+                     cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
@@ -276,6 +277,10 @@ def initialize_session():
     utils.session_id()
     login_user_from_token_cookie()
 
+    g.user = current_user()
+    querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -328,9 +333,7 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = jsonbin.MultiParseLogger(
-    jsonbin.JsonBinLogger.from_env_vars(),
-    jsonbin.S3ParseLogger.from_env_vars())
+parse_logger = s3_logger.S3ParseLogger.from_env_vars()
 querylog.LOG_QUEUE.set_transmitter(
     aws_helpers.s3_querylog_transmitter_from_env())
 
@@ -387,6 +390,35 @@ def add_generated_css_file():
     return {
         "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
     }
+
+
+@app.context_processor
+def add_hx_detection():
+    """Detect when a request is sent by HTMX.
+
+    A template may decide to render things differently when it is vs. when it isn't.
+    """
+    hx_request = bool(request.headers.get('Hx-Request'))
+    return {
+        "hx_request": hx_request,
+        "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
+    }
+
+
+@app.after_request
+def hx_triggers(response):
+    """For HTMX Requests, push any pending achievements in the session to the client.
+
+    Use the HX-Trigger header, which will trigger events on the client. There is a listener
+    there which will respond to the 'displayAchievements' event.
+    """
+    if not request.headers.get('HX-Request'):
+        return response
+
+    achs = session.pop('pending_achievements', [])
+    if achs:
+        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
+    return response
 
 
 @app.after_request
@@ -693,11 +725,13 @@ def translate_error(code, arguments, keyword_lang):
         'character_found',
         'concept',
         'tip',
+        'else',
         'command',
         'print',
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
     arguments_that_require_highlighting = [
         'command',
@@ -707,9 +741,11 @@ def translate_error(code, arguments, keyword_lang):
         'variable',
         'invalid_value',
         'print',
+        'else',
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
@@ -729,8 +765,10 @@ def translate_error(code, arguments, keyword_lang):
     arguments["print"] = "print"
     arguments["ask"] = "ask"
     arguments["echo"] = "echo"
+    arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
+    arguments["if"] = "if"
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
@@ -1274,10 +1312,8 @@ def get_specific_adventure(name, level, mode):
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.short_name == name] else False
-    next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.short_name == name] else False
+    prev_level = None  # we are not rendering buttons in raw, no lookup needed here
+    next_level = None
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
@@ -1811,6 +1847,17 @@ def other_keyword_language():
 def translate_command(command):
     # Return the translated command found in KEYWORDS, if not found return the command itself
     return hedy_content.KEYWORDS[g.lang].get(command, command)
+
+
+@app.template_filter()
+def markdown_retain_newlines(x):
+    """Force newlines in to the input MarkDown string to be rendered as <br>"""
+    # This works by adding two spaces before every newline. That's a signal to MarkDown
+    # that the newlines should be forced.
+    #
+    # Nobody is going to type this voluntarily to distinguish between linebreaks line by
+    # line, but you can use this filter to do this for all line breaks.
+    return x.replace('\n', '  \n')
 
 
 @app.template_filter()

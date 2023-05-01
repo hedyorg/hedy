@@ -147,7 +147,7 @@ reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 indent_keywords = {}
 for lang, keywords in KEYWORDS.items():
     indent_keywords[lang] = []
-    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else']:
+    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else', 'define', 'def']:
         indent_keywords[lang].append(keyword)  # always also check for En
         indent_keywords[lang].append(keywords.get(keyword))
 
@@ -253,14 +253,14 @@ commands_per_level = {
     8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -554,6 +554,23 @@ class LookupEntryCollector(visitors.Visitor):
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
+
+    def define(self, tree):
+        # add function name to lookup
+        self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
+
+        # add arguments to lookup
+        if tree.children[1].data == 'arguments':
+            for x in (c for c in tree.children[1].children if isinstance(c, Tree)):
+                self.add_to_lookup(x.children[0], tree.children[1], tree.meta.line)
+
+    def call(self, tree):
+        function_name = tree.children[0].children[0]
+        args_str = ""
+        if len(tree.children) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
+                                 for x in tree.children[1].children)
+        self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
     def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
         entry = LookupEntry(name, tree, linenumber, skip_hashing)
@@ -995,18 +1012,6 @@ while not pygame_end:
     pygame.quit()
     break""")
 
-    regex_string_subsequent_use = (
-        r"\s*# End of PyGame Event Handler"
-        r"\s*pygame_end = False"
-        r"\s*while not pygame_end:"
-        r"\s*pygame.display.update\(\)"
-        r"\s*event = pygame.event.wait\(\)"
-        r"\s*if event.type == pygame.QUIT:"
-        r"\s*pygame_end = True"
-        r"\s*pygame.quit\(\)"
-        r"\s*break"
-    )
-
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
@@ -1021,9 +1026,6 @@ while not pygame_end:
 
     def assign_button(self, args):
         return True
-
-    def post_process_code(self, code):
-        return re.sub(self.regex_string_subsequent_use, '', code)
 
 
 class AllCommands(Transformer):
@@ -1206,6 +1208,10 @@ class IsValid(Filter):
         error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_ifpressed_missing_else(self, meta, args):
+        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     # other rules are inherited from Filter
 
 
@@ -1301,7 +1307,13 @@ class ConvertToPython(Transformer):
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
 
-        return escape_var(variable_name) in all_names_before_access_line
+        is_function = False
+        if isinstance(variable_name, str):
+            pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
+            match = re.match(pattern, variable_name)
+            is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+
+        return escape_var(variable_name) in all_names_before_access_line or is_function
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -1609,7 +1621,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
@@ -1807,7 +1819,7 @@ else:
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False):
+    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
@@ -1819,33 +1831,10 @@ else:
 {ConvertToPython.indent(command, 4)}
     # End of PyGame Event Handler"""
 
-        return UsesPyGame.command_prefix + "\n" + command
-
-    def ifpressed(self, meta, args):
-        button_name = self.process_variable(args[0], meta.line)
-        var_or_button = args[0]
-        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button):
-            return self.make_ifpressed_command(f"""\
-if event.unicode != {args[0]}:
-    pygame_end = True
-if event.unicode == {args[0]}:
-{ConvertToPython.indent(args[1])}
-  break""", False)
-        elif len(var_or_button) > 1:
-            return self.make_ifpressed_command(f"""\
-if event.key != {button_name}:
-    pygame_end = True
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+        if add_command_prefix:
+            return UsesPyGame.command_prefix + "\n" + command
         else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
-    pygame_end = True
-if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
-  break""")
+            return "\n" + command
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
@@ -1855,7 +1844,8 @@ if event.key == {var_or_button}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""", False)
+{ConvertToPython.indent(args[2])}
+  break""", button=False)
         elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
@@ -1863,14 +1853,16 @@ if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""", True)
+{ConvertToPython.indent(args[2])}
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
   break
 else:
-{ConvertToPython.indent(args[2])}""")
+{ConvertToPython.indent(args[2])}
+  break""", button=False)
 
 
 @v_args(meta=True)
@@ -2029,26 +2021,20 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # if this is a variable, we assume it is a key (for now)
         if self.is_variable(var_or_key):
             return self.make_ifpressed_command(f"""\
-if event.unicode != {args[0]}:
-    pygame_end = True
 if event.unicode == {args[0]}:
 {all_lines}
-  break""")
+  break""", button=False)
         elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
-if event.unicode != '{args[0]}':
-    pygame_end = True
 if event.unicode == '{args[0]}':
 {all_lines}
-  break""")
+  break""", button=False)
         else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
-if event.key != {button_name}:
-    pygame_end = True
 if event.key == {button_name}:
 {all_lines}
-  break""", True)
+  break""", button=True)
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2061,14 +2047,12 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
-  break
-    """, True)
+  break""", button=True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
-  break
-    """)
+  break""", button=False)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2078,6 +2062,7 @@ if event.unicode == '{args[0]}':
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args += ["  break"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
@@ -2113,6 +2098,15 @@ class ConvertToPython_10(ConvertToPython_8_9):
 @v_args(meta=True)
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
+    def define(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+        return "def " + args[0] + "():\n" + body
+
+    def call(self, meta, args):
+        return f"""{args[0]}()"""
+
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
@@ -2129,6 +2123,24 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 @v_args(meta=True)
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
+    def define(self, meta, args):
+        function_name = args[0]
+        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(
+            args[1], Tree) and args[1].data == "arguments" else ""
+
+        lines = []
+        for line in args[1 if args_str == "" else 2:]:
+            lines.append(line)
+        body = "\n".join(ConvertToPython.indent(x) for x in lines)
+
+        return f"def {function_name}({args_str}):\n{body}"
+
+    def call(self, meta, args):
+        args_str = ""
+        if len(args) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+        return f"{args[0]}({args_str})"
+
     def number(self, meta, args):
         # try all ints? return ints
         try:
@@ -2267,6 +2279,11 @@ class ConvertToPython_13(ConvertToPython_12):
 @v_args(meta=True)
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
+    def returns(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        exception = self.make_catch_exception(args)
+        return exception + f"return f'''{argument_string}'''"
+
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])
@@ -2309,6 +2326,29 @@ class ConvertToPython_15(ConvertToPython_14):
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":\n" + body
 
+    def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        var_or_button = args[0]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{body}
+  break""", button=False)
+        elif len(var_or_button) > 1:
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{body}
+  break""", button=True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{body}
+  break""", button=False)
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
@@ -2343,6 +2383,30 @@ class ConvertToPython_17(ConvertToPython_16):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+    def ifpressed_elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines)
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""", button=False, add_command_prefix=False)
+        else:  # otherwise we mean a button
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{all_lines}
+  break""", button=True, add_command_prefix=False)
 
 
 @v_args(meta=True)
@@ -2757,6 +2821,14 @@ def preprocess_ifs(code, lang='en'):
         else:
             return command in line
 
+    def contains_two(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                if line.count(' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    return True
+            return False
+
     def contains_any_of(commands, line):
         # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -2778,15 +2850,17 @@ def preprocess_ifs(code, lang='en'):
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+            excluded_commands = ["pressed"]
 
             if (
-                contains_any_of(commands, line)
-            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
+                (contains_any_of(commands, line) or contains_two('is', line))
+                and not contains_any_of(excluded_commands, line)
+            ):
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else _ is x"
+                line = line + " else x__x__x__x is 5"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)
@@ -2812,7 +2886,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
@@ -2822,8 +2896,8 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
-    if level >= 5 and level <= 8:
+    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
@@ -2920,6 +2994,9 @@ def is_program_valid(program_root, input_string, level, lang):
                 line_number=invalid_info.line)
         elif invalid_info.error_type == 'invalid at keyword':
             raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'ifpressed missing else':
+            raise exceptions.MissingElseForPressitException(
+                command='ifpressed_else', level=level, line_number=invalid_info.line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
@@ -3015,9 +3092,6 @@ def transpile_inner(input_string, level, lang="en"):
 
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
-
-        if has_pygame:
-            python = uses_pygame.post_process_code(python)
 
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
