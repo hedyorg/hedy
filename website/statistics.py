@@ -592,7 +592,15 @@ def _translate_error(error_class, lang):
     imports and moving those functions to util.py is cumbersome (but not impossible) given the integration with other
     functions in app.py
     """
+    class_args = error_class.arguments
+
     error_template = gettext('' + str(error_class.error_code))
+
+    # check if argument is substring of error_template, if so replace
+    for k, v in class_args.items():
+        if f'{{{k}}}' in error_template:
+            error_template = error_template.replace(f'{{{k}}}', str(v))
+
     return error_template
 
 
