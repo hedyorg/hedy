@@ -237,12 +237,10 @@ class LiveStatisticsModule(WebsiteModule):
                  'submitted': item.get('submitted'),
                  'public': item.get('public'),
                  'number_lines': item['code'].count('\n') + 1,
-                 'error': item['error'],
-                 'error_message': _translate_error(error_class, item['lang']) if error_class else None
+                 'error_message': _translate_error(error_class, item['lang']) if error_class else None,
+                 'error_header': 'Oops'  # TODO: get proper header message, e.g. Transpile_error
                  }
             )
-        if student_programs and student_programs[0]['error_message']:
-            print("Error thing:", student_programs[0]['error_message'])
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
@@ -588,7 +586,7 @@ def _translate_error(error_class, lang):
     student details
     screen.
 
-    Lots of this code is duplicate from app.hedy_error_to_response but importing app.py leads to circular
+    A part of this code is duplicate from app.hedy_error_to_response but importing app.py leads to circular
     imports and moving those functions to util.py is cumbersome (but not impossible) given the integration with other
     functions in app.py
     """
