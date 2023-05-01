@@ -225,10 +225,12 @@ class LiveStatisticsModule(WebsiteModule):
             date = utils.delta_timestamp(item['date'])
             # This way we only keep the first 10 lines to show as preview to the user
             code = "\n".join(item['code'].split("\n")[:20])
+            error_class = _get_error_info(item['code'], item['level'], item['lang'])
             student_programs.append(
                 {'id': item['id'],
                  'code': code,
                  'date': date,
+                 'lang': item['lang'],
                  'level': item['level'],
                  'name': item['name'],
                  'adventure_name': item.get('adventure_name'),
@@ -236,11 +238,11 @@ class LiveStatisticsModule(WebsiteModule):
                  'public': item.get('public'),
                  'number_lines': item['code'].count('\n') + 1,
                  'error': item['error'],
-                 'error_message': _get_error_info(item['code'], item['level'], item['lang'])
+                 'error_message': _translate_error(error_class, item['lang']) if error_class else None
                  }
             )
-
-        print("Error thing:", student_programs[0]['error_message'].error_location)
+        if student_programs and student_programs[0]['error_message']:
+            print("Error thing:", student_programs[0]['error_message'])
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
@@ -558,7 +560,7 @@ def _check_dashboard_display_args():
 
 def _get_error_info(code, level, lang='en'):
     """
-    Returns the server error given the code. Since the database only stores whether
+    Returns the server error given the code written by the student. Since the database only stores whether
     the code produced an error or not, in order to get the error we have to rerun the code
     through some hedy logic.
     """
@@ -577,6 +579,21 @@ def _get_error_info(code, level, lang='en'):
     except hedy_exceptions.HedyException as exc:
         return exc
     return None
+
+
+def _translate_error(error_class, lang):
+    """
+    Translates the error code to the given language.
+    This is because the error code needs to be passed through the translation things in order to give more info on the
+    student details
+    screen.
+
+    Lots of this code is duplicate from app.hedy_error_to_response but importing app.py leads to circular
+    imports and moving those functions to util.py is cumbersome (but not impossible) given the integration with other
+    functions in app.py
+    """
+    error_template = gettext('' + str(error_class.error_code))
+    return error_template
 
 
 def get_general_class_stats(students):

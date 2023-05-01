@@ -53,7 +53,7 @@
             <div class="w-full text-center" id="last-error">
                 <h5 class="font-normal pb-1">Last error</h5>
                 <div class="flex justify-center">
-                {% if student_programs %}
+                {% if student_programs and student_programs[0].error_message %}
                 <p>{{ student_programs[0].error_message }}</p>
                 {% endif %}
                 </div>
