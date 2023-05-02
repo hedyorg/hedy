@@ -2,6 +2,10 @@
 
 {% block student_space %}
 
+    <script>
+        window.onload=getRunsOvertime()
+    </script>
+
   <div class="justify-center pt-10 min-h-full">
       <h2 class="text-center">Student Details</h2>
       <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
@@ -36,7 +40,7 @@
         <!-- Graph with fails and successful runs -->
             <div class="w-full text-center" id="runs-over-time">
                 <h5 class="font-normal pb-1">Runs over time</h5>
-                <div class="flex justify-center"><img class="p-2" src="/images/new_media_lab/runs-over-time.png"></div>
+                <canvas id="runsOverTime" width="200" height="200"></canvas>
             </div>
 
             <!-- Last ran code -->
