@@ -2890,27 +2890,27 @@ levels:
           1  chocolade = {ask} 'Wil je chocosaus op je ijs?'
           2  spikkels = {ask} 'Wil je spikkels op je ijs?'
           3  {if} chocolade {and} spikkels = 'ja'
-          4      {print} 'Ijs met chocosaus en spikkels, komt eraan!'
+          4      {print} 'IJs met chocosaus en spikkels, komt eraan!'
           5  {if} chocolade = 'ja' {and} spikkels = 'nee'
-          6      {print} 'Ijs met chocosaus, komt eraan!'
+          6      {print} 'IJs met chocosaus, komt eraan!'
           7  {if} chocolade = 'nee' {and} spikkels = 'ja'
-          8      {print} 'Ijs met spikkels, komt eraan!'
+          8      {print} 'IJs met spikkels, komt eraan!'
           9  {if} chocolade = 'nee' {and} spikkels = 'nee'
-          10     {print} 'Ijs zonder fratsen, komt eraan!'
+          10     {print} 'IJs zonder fratsen, komt eraan!'
         mp_choice_options:
-          - option: "Regel 3 moet zijn: {if} chocolade = 'ja' {and} spikkels = 'ja'"
+          - option: "Regel 3 moet zijn: \n```\n {if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
             feedback: "Correct!"
-          - option: "Regel 3 moet zijn: {if} chocolade = 'nee' {and} spikkels = 'nee'"
+          - option: "Regel 3 moet zijn:  \n```\n{if} chocolade = 'nee' {and} spikkels = 'nee'\n```\n"
             feedback: "Dit heb ik niet besteld!"
-          - option: "Regel 5 moet zijn: {if} chocolade = 'ja' {and} spikkels = 'ja'"
+          - option: "Regel 5 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
             feedback: "Dit heb ik niet besteld!"
-          - option: "Regel 7 moet zijn: {if} chocolade = 'ja' {and} spikkels = 'nee'"
+          - option: "Regel 7 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'nee'\n```\n"
             feedback: "Dit heb ik niet besteld!"
         correct_answer: "A"
         hint: "Er is iets mis met regel 3"
         question_score: '10'
       10:
-        question_text: "Wat moet er op de _ in regel 8 worden ingevuld ?"
+        question_text: "Wat moet er op de _ in regel 8 worden ingevuld?"
         code: |-
           {print} 'Vind het product in de supermarkt!'
           item = {ask} 'Wat zoekt u?'
