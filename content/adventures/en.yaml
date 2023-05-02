@@ -393,6 +393,7 @@ adventures:
                     ```
                     _ Hello!
                     ```
+                start_code: ""
     ask_command:
         name: "ask"
         description: "Introduction ask command"
@@ -559,6 +560,7 @@ adventures:
                     _
                     {print} You get a flavors {at} {random} milkshake
                     ```
+                start_code: ""
     sleep_command:
         name: "sleep"
         description: "introducing sleep command"
@@ -574,10 +576,11 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
+                start_code: ""
     if_command:
         name: "if and else"
         description: "Introducing the if command"
-        default save name: "if_command"
+        default_save_name: "if_command"
         levels:
             5:
                 story_text: |
@@ -607,10 +610,11 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
+                start_code: ""
     in_command:
         name: "in"
         description: "Introducing the in command"
-        default save name: "in_command"
+        default_save_name: "in_command"
         levels:
             5:
                 story_text: |
@@ -636,6 +640,7 @@ adventures:
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
+                start_code: ""
     quotation_marks:
         name: "'quotation marks'"
         description: "Introduction quotation marks"
@@ -665,6 +670,7 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
+                start_code: ""
     maths:
         name: "maths"
         description: "Introducing maths"
@@ -1824,6 +1830,7 @@ adventures:
                     choice is _
                     {print} I choose choice
                     ```
+                start_code: ""
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
