@@ -2846,9 +2846,9 @@ levels:
         hint: "Wat is NIET waar?"
         question_score: '10'
       8:
-        question_text: "Welke output krijg je ald je alleen popcorn besteld?"
+        question_text: "Welke output krijg je als je alleen popcorn bestelt?"
         code: |-
-          {print} 'Welcome in de bioscoop'
+          {print} 'Welkom in de bioscoop'
           popcorn = {ask} 'Wil je wat popcorn?'
           drinken = {ask} 'Wil je een drankje?'
           {if} popcorn = 'ja' {and} drinken = 'ja'
@@ -2874,12 +2874,12 @@ levels:
           - option: |-
               Welkom in de bioscoop
               3 euro alstublieft
-              Fijne voorstelling~!
+              Fijne voorstelling!
             feedback: "Dat is niet genoeg geld!"
           - option: |-
               Welkom in de bioscoop
               Ok
-              fijne voorstelling!
+              Fijne voorstelling!
             feedback: "Je moet wel betalen voor de popcorn!"
         correct_answer: "B"
         hint: "popcorn = ja en drinken = nee"
