@@ -249,6 +249,8 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
+        data = []
+
         return render_template(
             "class-live-student.html",
             class_info={"id": class_id, "students": students,
@@ -258,6 +260,7 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventure_names=adventure_names,
+            data=data,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )

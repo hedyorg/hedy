@@ -1,10 +1,12 @@
 {% extends "class-live-stats.html" %}
 
-{% block student_space %}
-
+{% block additional_scripts %}
     <script>
-        window.onload=getRunsOvertime()
+            window.onload=hedyApp.getRunsOverTime({{ data }});
     </script>
+{% endblock %}
+
+{% block student_space %}
 
   <div class="justify-center pt-10 min-h-full">
       <h2 class="text-center">Student Details</h2>
@@ -80,5 +82,6 @@
         </div>
       </div>
   </div>
+
 
 {% endblock %}

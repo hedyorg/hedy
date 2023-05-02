@@ -513,12 +513,9 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   });
 }
 
-export function getRunsOvertime(data: any[]) {
+export function getRunsOverTime(data: any[]) {
 
-  data = [{
-    run: [1, 2, 3, 4],
-    status: [0, 1, 1, 0]
-  }];
+  data = [[0, 1], [1, 0]]
 
   initChart('runsOverTime', 'line', 'Runs Over Time',
       'Runs', null, false, false)
@@ -526,11 +523,8 @@ export function getRunsOvertime(data: any[]) {
   const ch = Chart.getChart('runsOverTime')!;
   ch.data.datasets = [{
     label: 'runs',
-    data: data,
-    parsing: {
-      xAxisKey: 'run',
-      yAxisKey: 'status',
-    }
-  }]
+    data: data
+  }];
+  ch.update();
 
 }
