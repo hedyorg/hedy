@@ -75,7 +75,6 @@ adventures:
                     {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
             6:
                 story_text: |
-
                     Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
                     What you can't yet do though, is calculate the price for everyone's dinner.
 
@@ -97,6 +96,7 @@ adventures:
                     total_price {is} food_price + drink_price
                     {print} 'That will be ' total_price ' dollars, please'
                     ```
+                start_code: "# place your code here"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: |
