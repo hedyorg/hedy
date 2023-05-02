@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/simple.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/sky.css')}}">
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
@@ -15,7 +15,7 @@
     <div class="reveal">
       <div class="slides">
           {% for index, slide in slides.items() %}
-            <section data-markdown style="text-align: left; height: 1018px; left: 91.5px; top: 0px;">
+            <section data-markdown style="text-align: left; height: 1018px; font-size:0.8em">
                 {{ slide['header'] }}
                 <textarea data-template>
                     ### {{ slide['header'] }}
