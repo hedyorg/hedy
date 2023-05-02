@@ -15,7 +15,8 @@ from logging.config import dictConfig as logConfig
 from os import path
 
 import static_babel_content
-from flask import (Flask, Markup, Response, abort, after_this_request, g,
+from markupsafe import Markup
+from flask import (Flask, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
