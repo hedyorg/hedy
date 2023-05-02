@@ -144,6 +144,8 @@ class LiveStatisticsModule(WebsiteModule):
     def render_live_stats(self, user, class_id):
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -172,6 +174,7 @@ class LiveStatisticsModule(WebsiteModule):
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -186,6 +189,8 @@ class LiveStatisticsModule(WebsiteModule):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -238,17 +243,18 @@ class LiveStatisticsModule(WebsiteModule):
                  'public': item.get('public'),
                  'number_lines': item['code'].count('\n') + 1,
                  'error_message': _translate_error(error_class, item['lang']) if error_class else None,
-                 'error_header': 'Oops'  # TODO: get proper header message, e.g. Transpile_error
+                 'error_header': 'Oops'  # TODO: get proper header message that gets translated, e.g. Transpile_error
                  }
             )
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
         return render_template(
-            "student-space.html",
+            "class-live-student.html",
             class_info={"id": class_id, "students": students,
                         "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
             student=selected_student,
             student_programs=student_programs,
             adventure_names=adventure_names,
@@ -264,6 +270,8 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -292,6 +300,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={"id": class_id, "students": students,
                         "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
             student=selected_student,
             current_page='my-profile'
         )
@@ -600,6 +609,22 @@ def _translate_error(error_class, lang):
             error_template = error_template.replace(f'{{{k}}}', str(v))
 
     return error_template
+
+
+def _build_url_args(**kwargs):
+    """Builds a string of the url arguments used in the html file for routing.
+    This avoids lots of code duplication in the html file as well as making it easier to add/remove/change url
+    arguments.
+    """
+    url_args = ""
+    c = 0
+    for key, value in kwargs.items():
+        if c == 0:
+            url_args += f"{key}={value}"
+            c += 1
+        else:
+            url_args += f"&{key}={value}"
+    return url_args
 
 
 def get_general_class_stats(students):

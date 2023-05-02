@@ -22,12 +22,12 @@
         <div class="float-right relative m-2">
             {% if dashboard_options.show_c1 %}
             <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?show_c1=False&show_c2={{dashboard_options.show_c2}}&show_c3={{dashboard_options.show_c3}}">
+               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
                 ☝️ Hide
             </a>
             {% else %}
             <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?show_c1=True&show_c2={{dashboard_options.show_c2}}&show_c3={{dashboard_options.show_c3}}">
+               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
                 👇 Show
             </a>
             {% endif %}
@@ -42,7 +42,7 @@
     {% if dashboard_options.show_c1 %}
     <div class="relative">
         <button class="blue-btn absolute top-0 right-0" id="expand"
-                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=False&show_c1={{dashboard_options.show_c1}}&show_c2={{dashboard_options.show_c2}}&show_c3={{dashboard_options.show_c3}}'">
+                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=True", "collapse=False") }}'">
             Expand
         </button>
     </div>
@@ -52,7 +52,7 @@
     <!-- Card 1 Progress indicator expanded version -->
     <div class="relative">
         <button class="blue-btn absolute top-0 right-0" id="collapse"
-                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?collapse=True&show_c1={{dashboard_options.show_c1}}&show_c2={{dashboard_options.show_c2}}&show_c3={{dashboard_options.show_c3}}'">
+                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=False", "collapse=True") }}'">
             Collapse
         </button>
     </div>
@@ -81,7 +81,7 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{dashboard_options.show_c1}}&show_c2=False&show_c3={{dashboard_options.show_c3}}">
+                           href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
                             ☝️ Hide
                         </a>
                     </div>
@@ -92,7 +92,7 @@
                                 {% for s in class_info.students %}
                                     <div>
                                         <li class="my-2">
-                                            <a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">
+                                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}&student={{s.username}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
 
@@ -122,7 +122,7 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
                     <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
-                        href="/live_stats/class/{{class_info.id}}?show_c1={{dashboard_options.show_c1}}&show_c2=True&show_c3={{dashboard_options.show_c3}}">
+                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
                         👇 Show
                         </a>
                     </div>
@@ -139,7 +139,7 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
-                           href="/live_stats/class/{{class_info.id}}?show_c1={{dashboard_options.show_c1}}&show_c2={{dashboard_options.show_c2}}&show_c3=False">
+                           href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
                             ☝️ Hide
                         </a>
                     </div>
@@ -148,7 +148,7 @@
                             {% for error_entry in class_info.common_errors.errors %}
                                 {% if error_entry.active == 1 %}
                                     <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
-                                      <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?show_c1="~dashboard_options.show_c1~"&show_c2="~dashboard_options.show_c2~"&show_c3="~dashboard_options.show_c3 }}'>
+                                      <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?"~ dashboard_options_args}}'>
                                         <h3 class="cursor-pointer hover:text-white">
                                           {{error_entry.header}}
                                         </h3>
@@ -164,7 +164,7 @@
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
                     <div class="float-right relative m-2">
                         <a class="no-underline text-black rounded hover:bg-blue-600"
-                        href="/live_stats/class/{{class_info.id}}?show_c1={{dashboard_options.show_c1}}&show_c2={{dashboard_options.show_c2}}&show_c3=True">
+                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
                         👇 Show
                         </a>
                     </div>
