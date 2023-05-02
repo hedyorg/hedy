@@ -2,10 +2,12 @@ from collections import namedtuple
 from datetime import date
 from enum import Enum
 
-from flask import g, jsonify, request
+from flask import g, jsonify, request, session
 from flask_babel import gettext
 
 import utils
+import hedy_content
+import hedy
 from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
@@ -111,12 +113,65 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
         students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        class_info = self.db.get_class_customizations(class_id)
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for adventure in class_adventures.items():
+            new_list = []
+            for el in adventure[1]:
+                if not el['name'] == 'next':
+                    new_list.append(el['name'])
+            class_adventures_formatted[adventure[0]] = class_adventures_formatted.get(adventure[0], []) + new_list
+
+        for level in class_adventures_formatted.items():
+            index = 0
+            for adventure_per_level in level[1]:
+                class_adventures_formatted[level[0]][index] = adventure_names[adventure_per_level]
+                index += 1
+
+        teacher_adventures_formatted = []
+        for adventure in teacher_adventures:
+            teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
+
         return render_template(
             "class-grid.html",
-            class_info={"id": class_id, "students": students},
-            current_page="my-profile",
+            class_info={"id": class_id, "students": students, "name": class_["name"]},
+            current_page="grid_overview",
+            max_level=hedy.HEDY_MAX_LEVEL,
+            teacher_adventures=teacher_adventures_formatted,
+            class_adventures=class_adventures_formatted,
             page_title=gettext("title_class grid_overview"),
+        )
+
+    @route("/grid-overview/change-level", methods=["GET"])
+    @requires_login
+    def change_dropdown_level(self, user):
+        level = request.args.get('level')
+        class_adventures, _ = self.get_class_info(user, session['class_id'])
+        print(level)
+
+        return render_template(
+            'class-grid.html',
+            class_adventures=class_adventures,
+            level=level,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+            class_id=session['class_id']
         )
 
     @route("/program-stats", methods=["GET"])

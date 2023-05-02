@@ -137,10 +137,33 @@ body[dir='rtl'] #editor .ace_gutter-layer > * {
     z-index: 20
 }
 
-.coming-soon{
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#grid-table td,
+#grid-table th {
+  width: 100px;
+}
+
+/* Set the height of each row */
+#grid-table tr {
+  height: 50px;
+}
+
+/* Remove any default padding and margin from the table */
+#grid-table,
+#grid-table td,
+#grid-table th {
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+/* Add some padding and a border to the table cells */
+#grid-table td,
+#grid-table th {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Add some background color to the header row */
+#grid-table {
+  width: 100%;
 }
