@@ -52,11 +52,11 @@ class StatisticsModule(WebsiteModule):
             javascript_page_options=dict(page='class-stats'),
         )
 
-    # [work in progress] method for implementing the new class stats page
+    # [work in progress] method for implementing the version 1 of class stats page
     # Method for retrieving student information for a specific class
-    @route("/stats/class/new-<class_id>", methods=["GET"])
+    @route("/stats/class/<class_id>-v1", methods=["GET"])
     @requires_login
-    def render_new_class_stats(self, user, class_id):
+    def render_class_stats_v1(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -90,16 +90,16 @@ class StatisticsModule(WebsiteModule):
 
             finished_quizzes = any("finished" in x for x in quiz_scores)
             highest_level_quiz = max([x.get("level")
-                                     for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+                                      for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
             highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get(
                 "level") == highest_level_quiz]) if finished_quizzes else "-"
 
             success_rate_highest_level = '-'
             if finished_quizzes:
                 highest_level_started = ([x.get("started")
-                                         for x in quiz_scores if x.get("level") == highest_level_quiz])
-                highest_level_finished = ([x.get("finished")
                                           for x in quiz_scores if x.get("level") == highest_level_quiz])
+                highest_level_finished = ([x.get("finished")
+                                           for x in quiz_scores if x.get("level") == highest_level_quiz])
                 success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
                 success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
@@ -119,7 +119,7 @@ class StatisticsModule(WebsiteModule):
         students = sorted(students, key=lambda d: d.get("username", 0))
 
         return render_template(
-            "new-class-stats.html",
+            "class-stats-v1.html",
             class_info={
                 "id": class_id,
                 "students": students,
@@ -127,7 +127,85 @@ class StatisticsModule(WebsiteModule):
             },
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
-            javascript_page_options=dict(page='new-class-stats'),
+            javascript_page_options=dict(page='class-stats-v1'),
+        )
+
+    # [work in progress] method for implementing the version 2 of class stats page
+    # Method for retrieving student information for a specific class
+    @route("/stats/class/<class_id>-v2", methods=["GET"])
+    @requires_login
+    def render_class_stats_v2(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = []
+        for student_username in class_.get("students", []):
+            student = self.db.user_by_username(student_username)
+            programs = self.db.programs_for_user(student_username)
+
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            average_quiz_scores = "-"
+            success_rate_overall = "-"
+            if len(quiz_scores) != 0:
+                num_finished_quizzes = 0
+                total_quiz_score = 0
+                success_rate_overall = 0
+                for level_quiz_score in quiz_scores:
+                    print(level_quiz_score)
+
+                    num_finished_quizzes += (level_quiz_score['finished'])
+                    total_quiz_score += (level_quiz_score.get("scores")[0])
+                    average_quiz_scores = total_quiz_score / num_finished_quizzes
+
+                    success_rate_overall += (level_quiz_score['finished'] / level_quiz_score['started'] * 100)
+
+                success_rate_overall /= num_finished_quizzes
+                success_rate_overall = round(success_rate_overall, ndigits=0)
+
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_level_quiz = max([x.get("level")
+                                      for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get(
+                "level") == highest_level_quiz]) if finished_quizzes else "-"
+
+            success_rate_highest_level = '-'
+            if finished_quizzes:
+                highest_level_started = ([x.get("started")
+                                          for x in quiz_scores if x.get("level") == highest_level_quiz])
+                highest_level_finished = ([x.get("finished")
+                                           for x in quiz_scores if x.get("level") == highest_level_quiz])
+                success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
+                success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
+
+            students.append(
+                {
+                    "username": student_username,
+                    "last_login": student["last_login"],
+                    "programs": len(programs),
+                    "success_rate_highest_level": success_rate_highest_level,
+                    "success_rate_overall": success_rate_overall,
+                    "average_quiz": average_quiz_scores,
+                    "highest_level_quiz": highest_level_quiz,
+                    "highest_level_quiz_score": highest_level_quiz_score,
+                }
+            )
+
+        students = sorted(students, key=lambda d: d.get("username", 0))
+
+        return render_template(
+            "class-stats-v2.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "name": class_["name"],
+            },
+            current_page="my-profile",
+            page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='class-stats-v2'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
