@@ -4,7 +4,7 @@ levels:
             question_text: "What's this programming language called?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "Aferin!"
             -   option: "Heddy"
                 feedback: "Not this one!"
             -   option: "Haydie"
@@ -41,7 +41,7 @@ levels:
             hint: "_?_ Hello world!"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "How do you ask what someone's favorite color is?"
             mp_choice_options:
@@ -161,7 +161,7 @@ levels:
             -   option: "You can use it to `{print}` text."
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
-                feedback: "Good job!"
+                feedback: "Aferin!"
             -   option: "You can use it to make text disappear."
                 feedback: "That's not right..."
             correct_answer: "C"
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
@@ -469,7 +469,7 @@ levels:
                 {print} animals {at} {random}
             mp_choice_options:
             -   option: "You need commas in line 1: dog, cat, cow."
-                feedback: "Good job!"
+                feedback: "Aferin!"
             -   option: "Line 1 needs to start with `{print}`."
                 feedback: "No, you don't need `{print}`"
             -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
@@ -1276,7 +1276,7 @@ levels:
             -   option: "You can only fill in the word is on the `_?_`"
                 feedback: "You are allowed to use the `=` sign as well"
             -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
-                feedback: "Amazing!"
+                feedback: "İnanılmaz!"
             -   option: "You have to fill in =is= on the `_?_`"
                 feedback: "No, one `=` sign is enough"
             -   option: "You can only use the `=` sign when working with numbers, not with words."
@@ -1943,7 +1943,7 @@ levels:
                             {if} drink {is} coke
                                 price = price - 2
                     ```
-                feedback: "Amazing!"
+                feedback: "İnanılmaz!"
             -   option: |
                     ```
                     {if} food {is} pizza
@@ -2379,7 +2379,7 @@ levels:
             -   option: "Line 3 does not need to start with 4 spaces as indentation"
                 feedback: "Line 2 is a `{for}`command so line 3 does need to start with an indent."
             -   option: "Line 3 should say item instead of groceries"
-                feedback: "Good job!"
+                feedback: "Aferin!"
             -   option: "Line 2 should say groceries instead of item"
                 feedback: "No it does not."
             correct_answer: "C"
@@ -2426,7 +2426,7 @@ levels:
             -   option: |-
                     Kelly chooses paper
                     Meredith chooses scissors
-                feedback: "Amazing!"
+                feedback: "İnanılmaz!"
             correct_answer: "D"
             hint: "Each player will pick an option. The player that's first on the list will go first."
             question_score: '10'
@@ -2795,7 +2795,7 @@ levels:
             -   option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
                 feedback: You have paid too much!
             -   option: "Welcome to the movie theater\nThat will be 5 dollars please\nEnjoy the movie"
-                feedback: Amazing!
+                feedback: İnanılmaz!
             -   option: "Welcome to the movie theater\nThat will be 3 dollars please\nEnjoy the movie"
                 feedback: That's not enough money!
             -   option: "Welcome to the movie theater\nOk\nEnjoy the movie"
@@ -2807,13 +2807,13 @@ levels:
             question_text: What is wrong with this code?
             code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
             correct_answer: A
             hint: There is a mistake in line 3

@@ -1,12 +1,12 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "Hogy hívják ezt a programnyelvet?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "Szép munka!"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "Ez nem a jó válasz!"
             -   option: "Haydie"
                 feedback: "Not this one!"
             -   option: "Heidi"
@@ -41,7 +41,7 @@ levels:
             hint: "_?_ Hello world!"
             question_score: '10'
             code: |
-              ___ Hello!
+                ___ Hello!
         3:
             question_text: "How do you ask what someone's favorite color is?"
             mp_choice_options:
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Which output will be in your outputscreen after you've run this code?"
             code: |
-              {ask} Are you ready to go to level 2?
-              {echo}
-              {echo}
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Are you ready to go to level 2?
+                    Are you ready to go to level 2?
                 feedback: "There are two echo commands"
             -   option: |
-                  Yes!
-                  Yes!
+                    Yes!
+                    Yes!
                 feedback: "Great job!"
             -   option: |
-                  Yes!
+                    Yes!
                 feedback: "There are two echo commands"
             -   option: |
-                  Are you ready to go to level 2?
-                  Yes!
+                    Are you ready to go to level 2?
+                    Yes!
                 feedback: "There are two echo commands"
             correct_answer: "B"
             hint: "Let's go!"
@@ -2807,13 +2807,13 @@ levels:
             question_text: What is wrong with this code?
             code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
             correct_answer: A
             hint: There is a mistake in line 3
