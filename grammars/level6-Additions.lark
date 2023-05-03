@@ -8,7 +8,7 @@ _if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
 
-equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (textwithoutspaces | quoted_text | INT)
+equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
 
 condition:+= equality_check -= equality_check
 

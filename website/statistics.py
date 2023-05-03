@@ -5,7 +5,10 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import exceptions as hedy_exceptions
+from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy_content
+
 import utils
 from website.flask_helpers import render_template
 from website import querylog
@@ -142,6 +145,8 @@ class LiveStatisticsModule(WebsiteModule):
     def render_live_stats(self, user, class_id):
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -179,9 +184,9 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
-                        "common_errors": common_errors},
+            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
             adventures=available_adventures,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
@@ -193,8 +198,12 @@ class LiveStatisticsModule(WebsiteModule):
         """ Shows information about an individual student when they
         are selected in the student list.
         """
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -206,6 +215,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
+        # Get data for all students
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -227,6 +237,33 @@ class LiveStatisticsModule(WebsiteModule):
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
+        # Load in all program data for that specific student
+        student_programs = []
+        for item in programs:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 10 lines to show as preview to the user
+            code = "\n".join(item['code'].split("\n")[:20])
+            error_class = _get_error_info(item['code'], item['level'], item['lang'])
+            student_programs.append(
+                {'id': item['id'],
+                 'code': code,
+                 'date': date,
+                 'lang': item['lang'],
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1,
+                 'error_message': _translate_error(error_class, item['lang']) if error_class else None,
+                 'error_header': 'Oops'  # TODO: get proper header message that gets translated, e.g. Transpile_error
+                 }
+            )
+
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+
+        data = []
+
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -238,10 +275,15 @@ class LiveStatisticsModule(WebsiteModule):
         available_adventures = get_available_adventures(adventures, teacher_adventures, customizations)
 
         return render_template(
-            "student-space.html",
-            class_info={"id": class_id, "students": students, "student": selected_student, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "common_errors": common_errors},
+            "class-live-student.html",
+            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
+            student=selected_student,
+            student_programs=student_programs,
             adventures=available_adventures,
+            adventure_names=adventure_names,
+            data=data,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -254,14 +296,16 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
-        # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
+        # Retrieve username of student in question via args
+        selected_student = request.args.get("student", default=None, type=str)
 
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -277,11 +321,6 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
 
-        if student:
-            result = self.db.filtered_programs_for_user(student, limit=10)
-        else:
-            result = []
-
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -294,10 +333,11 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students, "collapse": collapse,
-                        "show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "program_results": result,
-                        "common_errors": common_errors},
+            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options_args=dashboard_options_args,
             adventures=available_adventures,
+            student=selected_student,
             current_page='my-profile'
         )
 
@@ -583,6 +623,69 @@ def get_available_adventures(adventures, teacher_adventures, customizations):
         selected_adventures[level] = adventures_for_level
 
     return selected_adventures
+
+
+def _get_error_info(code, level, lang='en'):
+    """
+    Returns the server error given the code written by the student. Since the database only stores whether
+    the code produced an error or not, in order to get the error we have to rerun the code
+    through some hedy logic.
+    """
+    try:
+        check_program_size_is_valid(code)
+
+        level = int(level)
+        if level > HEDY_MAX_LEVEL:
+            raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+
+        input_string = process_input_string(code, level, lang)
+        program_root = parse_input(input_string, level, lang)
+
+        # Checks whether any error production nodes are present in the parse tree
+        is_program_valid(program_root, input_string, level, lang)
+    except hedy_exceptions.HedyException as exc:
+        return exc
+    return None
+
+
+def _translate_error(error_class, lang):
+    """
+    Translates the error code to the given language.
+    This is because the error code needs to be passed through the translation things in order to give more info on the
+    student details
+    screen.
+
+    A part of this code is duplicate from app.hedy_error_to_response but importing app.py leads to circular
+    imports and moving those functions to util.py is cumbersome (but not impossible) given the integration with other
+    functions in app.py
+    """
+    class_args = error_class.arguments
+
+    error_template = gettext('' + str(error_class.error_code))
+
+    # Check if argument is substring of error_template, if so replace
+    for k, v in class_args.items():
+        if f'{{{k}}}' in error_template:
+            error_template = error_template.replace(f'{{{k}}}', str(v))
+
+    return error_template
+
+
+def _build_url_args(**kwargs):
+    """
+    Builds a string of the url arguments used in the html file for routing.
+    This avoids lots of code duplication in the html file as well as making it easier to add/remove/change url
+    arguments.
+    """
+    url_args = ""
+    c = 0
+    for key, value in kwargs.items():
+        if c == 0:
+            url_args += f"{key}={value}"
+            c += 1
+        else:
+            url_args += f"&{key}={value}"
+    return url_args
 
 
 def get_general_class_stats(students):
