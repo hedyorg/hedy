@@ -58,10 +58,17 @@
     {% else %}
     <!-- Card 1 Progress indicator expanded version -->
     <div class="relative">
+        {% if dashboard_options.student %}
+        <button class="blue-btn absolute top-0 right-0" id="collapse"
+                onclick="window.location.href = '/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace("collapse=False", "collapse=True") }}'">
+            Collapse
+        </button>
+        {% else %}
         <button class="blue-btn absolute top-0 right-0" id="collapse"
                 onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=False", "collapse=True") }}'">
             Collapse
         </button>
+        {% endif %}
     </div>
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
@@ -98,19 +105,17 @@
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
                                     <div>
-                                        {% if dashboard_options.student %}
                                         <li class="my-2">
+                                        {% if dashboard_options.student %}
                                             <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
-                                        </li>
                                         {% else %}
-                                        <li class="my-2">
                                             <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
-                                        </li>
                                         {% endif %}
+                                        </li>
                                     </div>
                                 {% endfor %}
                             </ul>
