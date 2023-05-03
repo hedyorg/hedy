@@ -1,11 +1,11 @@
 <div class="flex flex-row w-full" id="adventure-dragger">
-    <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-9/12">   
+    <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-10/12">   
         <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab flex sortable" 
             hx-trigger="end"
             hx-post="/for-teachers/sort-adventures?level={{ level }}"
             hx-target="#adventure-dragger" 
             hx-include="[name='adventure']"
-            hx-indicator="#indicator">                
+            hx-indicator="#indicator">
                 {% for adventure in customizations['sorted_adventures'][level|string] %}
                     {% if adventure.name in adventure_names %}
                         <div class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative">
@@ -17,23 +17,21 @@
                             {# Hidden input so we can send the adventures names in the request to the server #}
                             <input type="hidden" value="{{ adventure['name'] }}" name="adventure">
                         </div>
-                    {% endif %} 
+                    {% endif %}
                 {% endfor %}
-        </div>        
+        </div>
     </div>
-    <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
-        <select class="py-2 px-1 w-full mt-2 h-10 text-center" name="levels" id="available"
-            data-cy="available_adventures_current_level">
-            <option value="none" selected disabled>Adventures</option>
-            {% for adventure in available_adventures[level|int] %}
-                <option hx-post="/for-teachers/add-adventure?adventure_id={{ adventure['name'] }}&level={{ level }}" 
-                        hx-target="#adventure-dragger"
-                        hx-indicator="#indicator"
-                        hx-trigger="click"> 
-                            {{ adventure_names[adventure['name']] }} 
-                </option>
-            {% endfor %}
-        </select>
-        <button class="green-btn w-1/2 mt-2 ml-2"><i class="fa-solid fa-plus"></i></button>
-    </div>
+    <select class="py-2 px-1 w-full mt-2 h-10 text-center ml-2 w-2/12 mr-4" name="adventure_id" id="available"
+            data-cy="available_adventures_current_level"
+            hx-post="/for-teachers/add-adventure/level/{{ level }}"                
+            hx-target="#adventure-dragger"
+            hx-trigger="change"
+            hx-indicator="#indicator">
+        <option value="none" selected disabled>Adventures</option>
+        {% for adventure in available_adventures[level|int] %}
+            <option value="{{ adventure['name'] }}"> 
+                {{ adventure_names[adventure['name']] }} 
+            </option>
+        {% endfor %}
+    </select>    
 </div>

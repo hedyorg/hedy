@@ -382,7 +382,7 @@ export function save_customizations(class_id: string) {
     });
 }
 
-export function restore_customization_to_default(class_id: string, prompt: string) {
+export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
@@ -390,7 +390,7 @@ export function restore_customization_to_default(class_id: string, prompt: strin
       let active_level = active_level_id.split('-')[1]
       htmx.ajax(
         'POST',
-        `/for-teachers/restore-customizations?class_id=${class_id}&level=${active_level}`,
+        `/for-teachers/restore-customizations?level=${active_level}`,
         '#adventure-dragger'
       ).then(() => {
         // Restore all the options other than the adventures.
@@ -417,7 +417,7 @@ export function restore_customization_to_default(class_id: string, prompt: strin
     });
 }
 
-export function restore_adventures_to_default(class_id: string, prompt: string) {
+export function restore_adventures_to_default(prompt: string) {
   modal.confirm (prompt, function () {
     // We need to know the current level that is selected by the user
     // So we can know which level to draw in the template  
@@ -425,7 +425,7 @@ export function restore_adventures_to_default(class_id: string, prompt: string) 
     let active_level = active_level_id.split('-')[1]
     htmx.ajax(
       'POST',
-      `/for-teachers/restore-adventures-to-default?class_id=${class_id}&level=${active_level}`,
+      `/for-teachers/restore-adventures-to-default?level=${active_level}`,
       '#adventure-dragger'
     ).then(() => {
       modal.notifySuccess(ClientMessages.adventures_restored);          

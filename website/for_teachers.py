@@ -4,7 +4,7 @@ import os
 import uuid
 
 from flask import g, jsonify, request, session
-import jinja_partials
+from jinja_partials import render_partial
 from flask_babel import gettext
 
 import hedy
@@ -191,6 +191,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
         session['class_id'] = class_id
         customizations, adventure_names, available_adventures, min_level = self.get_class_info(user, class_id)
 
@@ -207,35 +208,40 @@ class ForTeachersModule(WebsiteModule):
             min_level=min_level,
             class_id=class_id,
             javascript_page_options=dict(
-                page='customize-class',
-                available_adventures_level_translation=gettext('available_adventures_level'),
-                teacher_adventures=[{}],
-                adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                adventure_names=adventure_names,
-                available_adventures=available_adventures,
-                class_id=Class['id'],
+                page='customize-class'
             ))
 
     @route("/change-level", methods=["GET"])
     @requires_login
     def change_dropdown_level(self, user):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
         level = request.args.get('level')
         customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
-    @route("/add-adventure", methods=["POST"])
+    @route("/add-adventure/level/<level>", methods=["POST"])
     @requires_login
-    def add_adventure(self, user):
-        adventure_id = request.args.get('adventure_id')
-        level = request.args.get('level')
+    def add_adventure(self, user, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        adventure_id = request.form.get('adventure_id')
         customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
@@ -244,18 +250,24 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
     @route("/remove-adventure", methods=["POST"])
     @requires_login
     def remove_adventure_from_class(self, user):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
         adventure_id = request.args.get('adventure_id')
         level = request.args.get('level')
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
@@ -265,18 +277,24 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
     @route("/sort-adventures", methods=["POST"])
     @requires_login
     def sort_adventures_in_class(self, user):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
         customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
         level = request.args.get('level')
         adventures = request.form.getlist('adventure')
@@ -287,14 +305,14 @@ class ForTeachersModule(WebsiteModule):
             customizations['sorted_adventures'][level].append({'name': adventure, 'from_teacher': is_teacher_adventure})
         self.db.update_class_customizations(customizations)
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
     def get_class_info(self, user, class_id):
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -392,7 +410,7 @@ class ForTeachersModule(WebsiteModule):
     @route("/restore-customizations", methods=["POST"])
     @requires_teacher
     def restore_customizations_to_default(self, user):
-        class_id = request.args.get('class_id')
+        class_id = session['class_id']
         level = request.args.get('level')
 
         Class = self.db.get_class(class_id)
@@ -421,14 +439,14 @@ class ForTeachersModule(WebsiteModule):
             available_adventures[int(adventure['level'])].append(
                 {"name": adventure['id'], "from_teacher": True})
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
     @route("/restore-adventures-to-default", methods=["POST"])
     @requires_teacher
@@ -451,14 +469,14 @@ class ForTeachersModule(WebsiteModule):
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
         self.db.update_class_customizations(customizations)
 
-        return jinja_partials.render_partial('customize-class/sortable-adventures.html',
-                                             level=level,
-                                             customizations=customizations,
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             adventure_names=adventure_names,
-                                             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-                                             available_adventures=available_adventures,
-                                             class_id=session['class_id'])
+        return render_partial('customize-class/sortable-adventures.html',
+                              level=level,
+                              customizations=customizations,
+                              max_level=hedy.HEDY_MAX_LEVEL,
+                              adventure_names=adventure_names,
+                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              available_adventures=available_adventures,
+                              class_id=session['class_id'])
 
     @route("/customize-class/<class_id>", methods=["POST"])
     @requires_teacher

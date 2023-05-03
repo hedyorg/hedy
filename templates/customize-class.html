@@ -31,26 +31,29 @@
     </div>
     <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
         <h3 class="px-4">{{_('select_adventures')}}</h3>
-        <div id="state-accessible" class="leading-6 ml-4 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-            <span>Level accessible</span>
-        </div>
-        <div id="state-disabled" class="leading-6 ml-4 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-            <span>Level disabled</span>
-        </div>
-        <div id="state-future" class="leading-6 ml-4 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-            <span>Level opens on</span>
-            <span id="opening_date"></span>
-        </div>
+        <div class="flex flex-row">
+            <div id="state-accessible" class="leading-6 ml-4 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>Level accessible</span>
+            </div>
+            <div id="state-disabled" class="leading-6 ml-4 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>Level disabled</span>
+            </div>
+            <div id="state-future" class="leading-6 ml-4 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>Level opens on</span>
+                <span id="opening_date"></span>
+            </div>
+            <div id="indicator" class="htmx-indicator custom-indicator ml-4">Updating <i class="fa fa-spinner fa-spin"></i> </div>
+        </div>        
         <div class="flex flex-row w-full mb-4">
             <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
-                <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="levels" id="levels-dropdown"
-                    data-cy="adventures">
+                <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" id="levels-dropdown"
+                        data-cy="adventures"
+                        hx-get="/for-teachers/change-level"
+                        hx-target="#adventure-dragger" 
+                        hx-trigger="click"
+                        hx-indicator="#indicator">
                     {% for i in range(1, max_level + 1) %}
-                    <option id="select-{{i}}" value="{{ i }}" {% if i == min_level %} selected {% endif %} 
-                            hx-get="/for-teachers/change-level?level={{ i }}" 
-                            hx-target="#adventure-dragger" 
-                            hx-indicator="#indicator"
-                            hx-trigger="click">
+                    <option id="select-{{i}}" value="{{ i }}" {% if i == min_level %} selected {% endif %}>
                         {{ _('level_title') }} {{ i }}
                     </option>
                     {% endfor %}
@@ -65,7 +68,7 @@
                                level=min_level, 
                                available_adventures=available_adventures)
             }}
-        </div>       
+        </div>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-4">
@@ -203,8 +206,7 @@
             <div class="flex flex-col gap-2 mt-4">
                 <div class="flex flex-row ml-auto gap-2">
                     {# TODO JP: make a button that resets the adventures to the default in Hedy content #}
-                    <button class="yellow-btn text-white" onclick="hedyApp.restore_adventures_to_default('{{ class_info.id }}', 
-                            {{ _('reset_adventure_prompt')|default(None)|tojson }})">
+                    <button class="yellow-btn text-white" onclick="hedyApp.restore_adventures_to_default({{ _('reset_adventure_prompt')|default(None)|tojson }})">
                                 {{_('reset_adventures')}}
                     </button>
                     <button data-cy="save_customizations" class="blue-btn"
@@ -215,8 +217,7 @@
                 <div class="flex flex-row ml-auto gap-2">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}"
                         id="remove_customizations_button" data-cy="remove_customizations_button"
-                        onclick='hedyApp.restore_customization_to_default("{{class_info.id}}", 
-                        {{_('remove_customizations_prompt')|default(None)|tojson}})'>
+                        onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
                             {{_('remove_customization')}}
                     </button>
                     <button id='back_to_class' class="green-btn" data-cy="back_to_class">{{_('back_to_class')}}</button>
