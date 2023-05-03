@@ -3,37 +3,23 @@
 <div class="flex flex-col gap-2">
   <h2>{{_('Grid overview')}}: {{class_info.name}}</h2>
   <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
-    <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="levels" id="menu">
+    <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" value = "{{ i }}" id="menu" hx-get="/grid_overview/class/{{ class_info.id }}/level" hx-target="#level" hx-trigger="change">
         {% for i in range(1, max_level + 1) %}
-            <option name="selected_level" id="select-{{i}}"
-                    value="{{ i }}" hx-trigger="change" hx-get="/grid-overview/change-level?level={{ i }}" hx-target="#level" {% if i == min_level %} selected {% endif %} >
-                        {{ _('level_title') }} {{ i }}
+            <option id="select-{{i}}" value="{{ i }}">
+                {{ _('level_title') }} {{ i }}
             </option>
         {% endfor %}
     </select>
   </div>
-  <div>
-    <table id="grid-table">
-      <thead>
-        <tr>
-          <th>Students</th>
-          {% for adventure in class_adventures[level]%}                   
-            <th>{{ adventure }}</th>
-          {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in class_info['students']%}
-          <tr>
-            <th>{{ student }}</th>
-            {% for adventure in class_adventures[level]%}
-              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked"></th>
-            {% endfor %}
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  {{ render_partial('customize-grid/grid-levels.html',
+                    class_info=class_info,
+                    max_level=max_level, 
+                    adventure_names=adventure_names, 
+                    adventures_default_order=adventures_default_order,
+                    class_id=class_id, 
+                    level='1', 
+                    class_adventures=class_adventures)
+  }}
   <div class="flex flex-col gap-2 mt-4">
     <div class="flex flex-row ml-auto gap-2">
         <button class="blue-btn">{{_('save')}}</button>

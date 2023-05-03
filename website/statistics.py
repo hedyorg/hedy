@@ -2,12 +2,13 @@ from collections import namedtuple
 from datetime import date
 from enum import Enum
 
-from flask import g, jsonify, request, session
+from flask import g, jsonify, request
 from flask_babel import gettext
 
 import utils
 import hedy_content
 import hedy
+import jinja_partials
 from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
@@ -109,14 +110,64 @@ class StatisticsModule(WebsiteModule):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
-        class_ = self.db.get_class(class_id)
+        students, class_, teacher_adventures_formatted, class_adventures_formatted = self.get_grid_info(user, class_id)
+
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        return render_template(
+            "class-grid.html",
+            class_info={"id": class_id, "students": students, "name": class_["name"]},
+            current_page="grid_overview",
+            max_level=hedy.HEDY_MAX_LEVEL,
+            teacher_adventures=teacher_adventures_formatted,
+            class_adventures=class_adventures_formatted,
+            page_title=gettext("title_class grid_overview"),
+        )
+
+    @route("/grid_overview/class/<class_id>/level", methods=["GET"])
+    @requires_login
+    def change_dropdown_level(self, user, class_id):
+        level = request.args.get('level')
+        students, class_, teacher_adventures_formatted, class_adventures_formatted = self.get_grid_info(user, class_id)
+
+        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             current_page="grid_overview",
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             teacher_adventures=teacher_adventures_formatted,
+                                             class_adventures=class_adventures_formatted,
+                                             page_title=gettext("title_class grid_overview"),
+                                             )
+
+    @route("/program-stats", methods=["GET"])
+    @requires_admin
+    def get_program_stats(self, user):
+        start_date = request.args.get("start", default=None, type=str)
+        end_date = request.args.get("end", default=None, type=str)
+
+        ids = [e.value for e in UserType]
+        program_runs_data = self.db.get_program_stats(ids, start_date, end_date)
+        quiz_data = self.db.get_quiz_stats(ids, start_date, end_date)
+        data = program_runs_data + quiz_data
+
+        per_level_data = _aggregate_for_keys(data, [level_key])
+        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
+
+        response = {
+            "per_level": _to_response_per_level(per_level_data),
+            "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
+        }
+        return jsonify(response)
+
+    def get_grid_info(self, user, class_id):
+        class_ = self.db.get_class(class_id)
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         class_info = self.db.get_class_customizations(class_id)
@@ -148,51 +199,7 @@ class StatisticsModule(WebsiteModule):
         for adventure in teacher_adventures:
             teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
 
-        return render_template(
-            "class-grid.html",
-            class_info={"id": class_id, "students": students, "name": class_["name"]},
-            current_page="grid_overview",
-            max_level=hedy.HEDY_MAX_LEVEL,
-            teacher_adventures=teacher_adventures_formatted,
-            class_adventures=class_adventures_formatted,
-            page_title=gettext("title_class grid_overview"),
-        )
-
-    @route("/grid-overview/change-level", methods=["GET"])
-    @requires_login
-    def change_dropdown_level(self, user):
-        level = request.args.get('level')
-        class_adventures, _ = self.get_class_info(user, session['class_id'])
-        print(level)
-
-        return render_template(
-            'class-grid.html',
-            class_adventures=class_adventures,
-            level=level,
-            max_level=hedy.HEDY_MAX_LEVEL,
-            adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
-            class_id=session['class_id']
-        )
-
-    @route("/program-stats", methods=["GET"])
-    @requires_admin
-    def get_program_stats(self, user):
-        start_date = request.args.get("start", default=None, type=str)
-        end_date = request.args.get("end", default=None, type=str)
-
-        ids = [e.value for e in UserType]
-        program_runs_data = self.db.get_program_stats(ids, start_date, end_date)
-        quiz_data = self.db.get_quiz_stats(ids, start_date, end_date)
-        data = program_runs_data + quiz_data
-
-        per_level_data = _aggregate_for_keys(data, [level_key])
-        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
-
-        response = {
-            "per_level": _to_response_per_level(per_level_data),
-            "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
-        }
-        return jsonify(response)
+        return students, class_, teacher_adventures_formatted, class_adventures_formatted
 
 
 def add(username, action):

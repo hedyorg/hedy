@@ -1,0 +1,22 @@
+<div id="level">
+    <table id="grid-table">
+      <thead>
+        <tr>
+          <th>Students</th>
+          {% for adventure in class_adventures[level]%}                   
+            <th>{{ adventure }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in class_info['students']%}
+          <tr>
+            <th>{{ student }}</th>
+            {% for adventure in class_adventures[level]%}
+              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked"></th>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
