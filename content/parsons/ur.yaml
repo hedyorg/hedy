@@ -26,9 +26,9 @@ levels:
             code: |
                 players = Liam, Noah, Sophie
                 player1 = players {at} {random}
+                {remove} player1 {from} players
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
                 {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n

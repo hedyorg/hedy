@@ -167,12 +167,20 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
 
+    def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
+        code = textwrap.dedent("""\
+        naam is James
+        if naam is James Bond print 'shaken' 
+        print naam""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
+
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
         if naam is James Bond naam is 'Pietjansma'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space(self, q):
@@ -415,6 +423,36 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
+    def test_two_ifs_assign_no_following(self):
+        code = textwrap.dedent("""\
+        if order is fries price is 5
+        drink is water""")
+
+        expected = textwrap.dedent("""\
+        if 'order' == 'fries':
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'""")
+
+        self.single_level_tester(code=code, expected=expected, translate=False)
+
+    def test_two_ifs_assign_following(self):
+        code = textwrap.dedent("""\
+        if order is fries price is 5
+        drink is water
+        print drink""")
+
+        expected = textwrap.dedent("""\
+        if 'order' == 'fries':
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'
+        print(f'{drink}')""")
+
+        self.single_level_tester(code=code, expected=expected, translate=False)
+
     def test_if_equality_print_else_linebreak_print(self):
         # line break after else is allowed
         code = textwrap.dedent("""\
@@ -592,11 +630,11 @@ class TestsLevel5(HedyTester):
         if name == 'Hedy':
           print(f'nice!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_onno_3372(self):
         code = textwrap.dedent("""\
@@ -609,12 +647,11 @@ class TestsLevel5(HedyTester):
         if antw == 'schaar':
           print(f'gelijk spel!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_restaurant_example(self):
         code = textwrap.dedent("""\
@@ -630,16 +667,15 @@ class TestsLevel5(HedyTester):
         if eten == 'friet':
           saus = input(f'Welke saus wilt u bij de friet?')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if eten == 'pizza':
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected, translate=False)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -656,8 +692,7 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -671,15 +706,14 @@ class TestsLevel5(HedyTester):
         if naam == 'Hedy':
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if naam == 'Python':
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected,
-                                 translate=False)
+                                 expected=expected)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -700,7 +734,7 @@ class TestsLevel5(HedyTester):
         else:
           print(f'meh')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_turn_if_forward(self):
         code = textwrap.dedent("""\
@@ -842,7 +876,7 @@ class TestsLevel5(HedyTester):
         if naam == '5':
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         print(f'minder leuk!')""")
 
         self.multi_level_tester(
@@ -946,7 +980,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_has_enter_after_pressed(self):
         code = textwrap.dedent("""\
@@ -1242,7 +1276,7 @@ class TestsLevel5(HedyTester):
               break
             # End of PyGame Event Handler""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7, translate=False)
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
