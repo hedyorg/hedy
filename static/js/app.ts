@@ -946,7 +946,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       pygameModal.removeClass('bottom-0');
       pygameModal.removeClass('w-full');
     }
-    
+
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
@@ -1051,7 +1051,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
-    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+    scrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1148,6 +1148,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           return false;
         });
         $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
       });
     } else {
       return new Promise(function (ok) {
@@ -1438,9 +1441,12 @@ function getConfettiForAdventure(adventure: MessageKey){
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
-export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+/**
+ * Scroll the output to bottom immediately
+ */
+function scrollOutputToBottom() {
+  const outputDiv = $('#output');
+  outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
 }
 
 export function modalStepOne(level: number){
@@ -1969,7 +1975,14 @@ function programNeedsSaving(adventureName: string) {
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
-  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
 
 /**

@@ -1202,7 +1202,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Program_too_long": "Your program takes too long to run.",
     "ServerError": "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hello@hedy.org. In the meantime, try something a little different and take another look at the examples. Thanks!",
     "Transpile_error": "We can't run your program.",
-    "Transpile_success": "Good job!\nAmazing!\nWell done!\nExcellent!\nYou did great!",
+    "Transpile_success": "Aferin!\nİnanılmaz!\nWell done!\nExcellent!\nYou did great!",
     "Transpile_warning": "Warning!",
     "Unsaved_Changes": "You have an unsaved program. Do you want to leave without saving it?",
     "adventures_restored": "The default adventures have been restored!",

@@ -5,13 +5,15 @@
     <h1>Classes overview</h1>
     <button type="reset" class="green-btn" id="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
-<h4 class="text-center">Total amount of shown classes: {{ classes|length }}</h4>
+<h4 class="text-center">Total amount of shown classes: {{ classes|length }} <br>
+ Total amount of active classes this week: {{ active_classes|length }}
 <div class="program w-full mx-auto border-solid border-2 border-orange-400 rounded p-4">
   <table class="table-auto w-full text-sm">
     <thead>
       <tr class="font-bold">
           <td id="classname_header">Class name</td>
           <td id="teacher_header">Teacher</td>
+          <td id="email_header">Email</td>
           <td id="created_header">Created</td>
           <td id="students_header">Students</td>
           <td id="runs_week_header">Runs this week</td>
@@ -22,11 +24,13 @@
           <td id="overview_header">Class overview</td>
       </tr>
     </thead>
+
     <tbody>
       {% for class in classes %}
           <tr>
             <td class="classname_cell">{{class.name}}</td>
             <td class="teacher_cell">{{class.teacher}}</td>
+            <td class="email_cell">{{class.email}}</td>
             <td class="created_cell">{{class.created}}</td>
             <td class="students_cell">{{class.students}}</td>
             <td class="runs_week_cell">{{class.stats.week.runs}}</td>
