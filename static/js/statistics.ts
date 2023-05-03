@@ -514,15 +514,39 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
 }
 
 export function getRunsOverTime(data: any[]) {
-  data = [[0, 1], [1, 0]]
+  data = [0, 1, 1, 0];
+  const ctx = document.getElementById("runsOverTime") as HTMLCanvasElement;
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['1', '2', '3', '4'],
+      datasets: [{
+        label: 'runs',
+        data: data,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(0, 0, 0, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+            y: {
+              ticks: {
+                callback: function(index) {
+                  // Hide every 2nd tick label
+                  if (index === 0) {
+                    return 'Fail'
+                  }
+                  else if (index === 1){
+                    return 'Success'
+                  }
+                  return ''
+                },
+              }
+            },
+        }
+    }
+  });
 
-  initChart('runsOverTime', 'line', 'Runs Over Time',
-      'Runs', null, false, false)
-
-  const ch = Chart.getChart('runsOverTime')!;
-  ch.data.datasets = [{
-    label: 'runs',
-    data: data
-  }];
-  ch.update();
+  chart.update();
 }
