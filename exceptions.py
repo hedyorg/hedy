@@ -279,3 +279,7 @@ class MissingElseForPressitException(HedyException):
                          command=command,
                          level=level,
                          line_number=line_number)
+
+class NestedFunctionException(HedyException):
+    def __init__(self):
+        super().__init__('Nested Function')
