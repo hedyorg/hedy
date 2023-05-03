@@ -36,33 +36,33 @@
         <!-- Adventures -->
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_col">
             {% if class_info.show_c1 %}
-            <div class="dark:bg-gray-700 dark:border-gray-600">
-                <div class="w-full">
-                    <div class="grid grid-flow-col auto-cols-max place-content-between overflow-auto p-1 mx-auto my-2 bg-gray-100 rounded-lg" role="group">
-                        <!-- Buttons -->
-                        {% for level, adventure_list in adventures.items() %}
-                        {% if level|int == 1 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
-                            {% for adventure in adventure_list %}
-                            <div class="flex flex-col items-center content-center place-content-between">
-                                <button type="button" class="px-5 py-1.5 text-sm font-medium text-gray-900 rounded-lg">
-                                    {{ adventure["name"] }}
-                                </button>
-                                <div class="flex flex-col justify-center pb-1 my-2">
-                                    <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">10</span>
-                                    <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">5</span>
-                                </div> 
-                            </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% endfor %}
+            <div class="w-full">
+                {% set selected_level = 2 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
+                <p class="font-semibold">Level: {{selected_level}}</p>
+                <div class="grid grid-flow-col auto-cols-max place-content-between overflow-auto p-1 mx-auto my-2 rounded-lg" role="group">
+                    <!-- Buttons -->
+                    {% for level, adventure_list in adventures.items() %}
+                    {% if level|int == selected_level %} 
+                        {% for adventure in adventure_list %}
                         <div class="flex flex-col items-center content-center place-content-between">
-                            <button type="button" class="w-full px-5 py-1.5 text-sm font-medium text-white bg-green-600 rounded-lg">
-                                Quiz
+                            <button type="button" class="px-5 py-1.5 text-sm font-medium text-gray-900 rounded-lg bg-gray-100">
+                                {{ adventure["name"] }}
                             </button>
                             <div class="flex flex-col justify-center pb-1 my-2">
-                                <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">3</span>
-                                <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">4</span>
-                            </div>
+                                <span class="border-2 w-8 text-center bg-gray-100 border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">10</span>
+                                <!-- <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">5</span> -->
+                            </div> 
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    <div class="flex flex-col items-center content-center place-content-between">
+                        <button type="button" class="w-full px-5 py-1.5 text-sm font-medium text-white bg-green-600 rounded-lg">
+                            Quiz
+                        </button>
+                        <div class="flex flex-col justify-center pb-1 my-2">
+                            <span class="border-2 w-8 text-center border-black text-black text-xs font-medium mr-2 px-2 py-1 bg-gray-100 rounded-full">3</span>
+                            <!-- <span class="mt-1 border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">4</span> -->
                         </div>
                     </div>
                 </div>
@@ -73,10 +73,10 @@
                     <div><span class="border-2 border-black bg-white text-black text-xs font-medium px-1 py-1 rounded-full">Nr.</span></div>
                     <p class="text-xs font-semibold mt-1 ml-1">In progress</p>
                 </div>
-                <div class="flex m-1 ml-2">
+                <!-- <div class="flex m-1 ml-2">
                     <div><span class="border-2 border-green-600 bg-green-200 text-black text-xs font-medium px-1 py-1 rounded-full">Nr.</span></div>
                     <p class="text-xs font-semibold mt-1 ml-1">Completed</p>
-                </div>
+                </div> -->
             </div>
             {% endif %}
         </div>
@@ -104,7 +104,47 @@
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_exp">
-            <img class="w-full" src="/images/new_media_lab/progress2.png">
+            {% if class_info.show_c1 %}
+            <div class="w-full overflow-auto max-h-screen">
+                {% for level, adventure_list in adventures.items() %}
+                    <p class="font-semibold">Level {{level}}</p>
+                    <div class="grid grid-flow-col auto-cols-max place-content-between overflow-auto p-1 mx-auto my-2 rounded-lg" role="group">
+                        <!-- Buttons -->
+                            {% for adventure in adventure_list %}
+                            <div class="flex flex-col items-center content-center place-content-between">
+                                <button type="button" class="px-5 py-1.5 text-sm font-medium text-gray-900 rounded-lg bg-gray-100">
+                                    {{ adventure["name"] }}
+                                </button>
+                                <div class="flex flex-row justify-center pb-1 my-2">
+                                    <span class="border-2 w-8 text-center border-black bg-gray-100 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">10</span>
+                                    <!-- <span class="border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">5</span> -->
+                                </div> 
+                            </div>
+                            {% endfor %}
+                        <div class="flex flex-col items-center content-center place-content-between">
+                            <button type="button" class="w-full px-5 py-1.5 text-sm font-medium text-white bg-green-600 rounded-lg">
+                                Quiz
+                            </button>
+                            <div class="flex flex-row justify-center pb-1 my-2">
+                                <span class="border-2 w-8 text-center bg-gray-100 border-black text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">3</span>
+                                <!-- <span class="border-2 w-8 text-center border-green-600 bg-green-200 text-black text-xs font-medium mr-2 px-2 py-1 rounded-full">4</span> -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Legend -->
+            <div class="mt-5 flex">
+                <div class="flex m-1">
+                    <div><span class="border-2 border-black bg-white text-black text-xs font-medium px-1 py-1 rounded-full">Nr.</span></div>
+                    <p class="text-xs font-semibold mt-1 ml-1">In progress</p>
+                </div>
+                <!-- <div class="flex m-1 ml-2">
+                    <div><span class="border-2 border-green-600 bg-green-200 text-black text-xs font-medium px-1 py-1 rounded-full">Nr.</span></div>
+                    <p class="text-xs font-semibold mt-1 ml-1">Completed</p>
+                </div> -->
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endif %}
