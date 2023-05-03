@@ -143,8 +143,9 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def render_live_stats(self, user, class_id):
 
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
+                                                 student=student)
 
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
@@ -173,7 +174,8 @@ class LiveStatisticsModule(WebsiteModule):
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
+                               "collapse": collapse, "student": student},
             dashboard_options_args=dashboard_options_args,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
@@ -188,8 +190,9 @@ class LiveStatisticsModule(WebsiteModule):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
+                                                 student=student)
 
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
@@ -198,7 +201,6 @@ class LiveStatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
 
         # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
@@ -255,7 +257,8 @@ class LiveStatisticsModule(WebsiteModule):
             "class-live-student.html",
             class_info={"id": class_id, "students": students,
                         "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse,
+                               "student": student},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
             student_programs=student_programs,
@@ -272,17 +275,15 @@ class LiveStatisticsModule(WebsiteModule):
         Handles the rendering of the common error items in the common errors detection list.
         """
 
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
+                                                 student=student)
 
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
-
-        # Retrieve username of student in question via args
-        selected_student = request.args.get("student", default=None, type=str)
 
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -302,9 +303,9 @@ class LiveStatisticsModule(WebsiteModule):
             "class-live-popup.html",
             class_info={"id": class_id, "students": students,
                         "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse,
+                               "student": student},
             dashboard_options_args=dashboard_options_args,
-            student=selected_student,
             current_page='my-profile'
         )
 
@@ -565,7 +566,9 @@ def _check_dashboard_display_args():
     show_c3 = request.args.get("show_c3", default="True", type=str)
     show_c3 = _determine_bool(show_c3)
 
-    return collapse, show_c1, show_c2, show_c3
+    student = request.args.get("student", default=None, type=str)
+
+    return collapse, show_c1, show_c2, show_c3, student
 
 
 def _get_error_info(code, level, lang='en'):

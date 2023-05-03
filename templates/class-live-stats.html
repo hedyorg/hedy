@@ -41,10 +41,17 @@
     </div>
     {% if dashboard_options.show_c1 %}
     <div class="relative">
+        {% if dashboard_options.student %}
+        <button class="blue-btn absolute top-0 right-0" id="expand"
+                onclick="window.location.href = '/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace("collapse=True", "collapse=False") }}'">
+            Expand
+        </button>
+        {% else %}
         <button class="blue-btn absolute top-0 right-0" id="expand"
                 onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=True", "collapse=False") }}'">
             Expand
         </button>
+        {% endif %}
     </div>
     {% endif %}
 
@@ -91,12 +98,19 @@
                             <ul class="max-w-md space-y-1 list-none list-inside">
                                 {% for s in class_info.students %}
                                     <div>
+                                        {% if dashboard_options.student %}
                                         <li class="my-2">
-                                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}&student={{s.username}}" class="text-black hover:text-white" id="show-student">
+                                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
-
                                         </li>
+                                        {% else %}
+                                        <li class="my-2">
+                                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
+                                                {{s.username}}
+                                            </a>
+                                        </li>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                             </ul>
