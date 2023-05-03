@@ -514,7 +514,6 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
 }
 
 export function getRunsOverTime(data: any[]) {
-
   data = [[0, 1], [1, 0]]
 
   initChart('runsOverTime', 'line', 'Runs Over Time',
@@ -526,5 +525,4 @@ export function getRunsOverTime(data: any[]) {
     data: data
   }];
   ch.update();
-
 }

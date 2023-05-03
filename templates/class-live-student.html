@@ -39,7 +39,7 @@
 
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
-        <!-- Graph with fails and successful runs -->
+            <!-- Graph with fails and successful runs over time -->
             <div class="w-full text-center" id="runs-over-time">
                 <h5 class="font-normal pb-1">Runs over time</h5>
                 <canvas id="runsOverTime" width="200" height="200"></canvas>
@@ -49,7 +49,7 @@
             <div class="w-full text-center turn-pre-into-ace mb-4">
                 <h5 class="font-normal pb-1">Last program</h5>
                 {% if student_programs %}
-                    <pre level="{{ student_programs[0].level }}">{{student_programs[0].code }}</pre>
+                    <pre level="{{ student_programs[0].level }}">{{ student_programs[0].code }}</pre>
                 {% else %}
                     <p>No program run yet</p>
                 {% endif %}
@@ -60,7 +60,6 @@
                 <h5 class="font-normal pb-1">Last error</h5>
                 <div class="flex justify-center">
                 {% if student_programs and student_programs[0].error_message %}
-
                     <div id="errorbox-info"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
                       <div class="flex">
@@ -82,6 +81,5 @@
         </div>
       </div>
   </div>
-
 
 {% endblock %}

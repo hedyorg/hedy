@@ -202,7 +202,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        # get data for all students
+        # Get data for all students
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -224,7 +224,7 @@ class LiveStatisticsModule(WebsiteModule):
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
 
-        # load in all program data for that specific student
+        # Load in all program data for that specific student
         student_programs = []
         for item in programs:
             date = utils.delta_timestamp(item['date'])
@@ -281,7 +281,7 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
-        # retrieve username of student in question via args
+        # Retrieve username of student in question via args
         selected_student = request.args.get("student", default=None, type=str)
 
         for student_username in class_.get("students", []):
@@ -584,7 +584,7 @@ def _get_error_info(code, level, lang='en'):
         input_string = process_input_string(code, level, lang)
         program_root = parse_input(input_string, level, lang)
 
-        # checks whether any error production nodes are present in the parse tree
+        # Checks whether any error production nodes are present in the parse tree
         is_program_valid(program_root, input_string, level, lang)
     except hedy_exceptions.HedyException as exc:
         return exc
@@ -606,7 +606,7 @@ def _translate_error(error_class, lang):
 
     error_template = gettext('' + str(error_class.error_code))
 
-    # check if argument is substring of error_template, if so replace
+    # Check if argument is substring of error_template, if so replace
     for k, v in class_args.items():
         if f'{{{k}}}' in error_template:
             error_template = error_template.replace(f'{{{k}}}', str(v))
@@ -615,7 +615,8 @@ def _translate_error(error_class, lang):
 
 
 def _build_url_args(**kwargs):
-    """Builds a string of the url arguments used in the html file for routing.
+    """
+    Builds a string of the url arguments used in the html file for routing.
     This avoids lots of code duplication in the html file as well as making it easier to add/remove/change url
     arguments.
     """
