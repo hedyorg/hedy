@@ -14,6 +14,7 @@ templates = [
     ("echo <P>", 2)
 ]
 
+
 def valid_permutation(lines):
     orders = [order for _, order in lines]
     significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
@@ -22,13 +23,14 @@ def valid_permutation(lines):
 
     return all(list)
 
+
 @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
 def test_template_combination(code_tuples, d):
     excluded_chars = ["_", "#", '\n', '\r']
     random_print_argument = hypothesis.strategies.text(
-                    alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
-                    min_size=1,
-                    max_size=10)
+        alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+        min_size=1,
+        max_size=10)
 
     if valid_permutation(code_tuples):
         lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
@@ -39,8 +41,6 @@ def test_template_combination(code_tuples, d):
         except:
             print(hedy_code)
             assert False
-
-
 
 
 class TestsLevel1(HedyTester):
