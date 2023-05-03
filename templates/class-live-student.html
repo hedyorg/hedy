@@ -14,35 +14,39 @@
         <a class="no-underline float-right p-2" href="/live_stats/class/{{class_info.id}}?{{dashboard_options_args}}">❌</a>
         <!-- Title columns -->
         <div class="m-auto ml-14 flex pt-4 pl-4">
-            <table class="text-left table-auto">
-                <thead>
-                    <tr>
-                        <th class="w-64 text-blue-600">{{_('name')}}</th>
-                        <th class="w-64 text-blue-600">{{_('level')}}</th>
-                        <th class="w-64 text-blue-600">{{_('adventure')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{student.username}}</td>
-                        {% if student_programs %}
-                        <td>{{_('level')}} {{ student_programs[0].level }}</td>
-                        <td>{{adventure_names.get(student_programs[0].adventure_name)}}</td>
-                        {% else %}
-                        <td>{{_('empty')}}</td>
-                        <td>{{_('empty')}}</td>
-                        {% endif %}
-                    </tr>
-                </tbody>
-            </table>
+            <div class="flex flex-row">
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold mr-2">{{_('name')}}</p>
+                  {{student.username}}
+              </div>
+            {% if student_programs %}
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}}</p>
+                  {{_('level')}} {{ student_programs[0].level }}
+              </div>
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold mr-2 ml-4">{{_('adventure')}}</p>
+                  {{adventure_names.get(student_programs[0].adventure_name)}}
+              </div>
+            {% else %}
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}}</p>
+                    {{_('level')}} {{ student_programs[0].level }}
+                </div>
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold mr-2 ml-4">{{_('adventure')}}</p>
+                    {{adventure_names.get(student_programs[0].adventure_name)}}
+                </div>
+            {% endif %}
+            </div>
         </div>
 
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
             <!-- Graph with fails and successful runs over time -->
-            <div class="w-full text-center" id="runs-over-time">
+            <div class="w-full text-center p-2" id="runs-over-time">
                 <h5 class="font-normal pb-1">Runs over time</h5>
-                <canvas id="runsOverTime" width="200" height="200"></canvas>
+                <canvas id="runsOverTime" width="150" height="100"></canvas>
             </div>
 
             <!-- Last ran code -->
@@ -61,7 +65,7 @@
                 <div class="flex justify-center">
                 {% if student_programs and student_programs[0].error_message %}
                     <div id="errorbox-info"
-                      class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
+                      class="flex-0 z-20 m-2 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
                       <div class="flex">
                         <div class="py-1">
                           <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
