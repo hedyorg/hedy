@@ -512,3 +512,17 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
     });
   });
 }
+
+export function getRunsOverTime(data: any[]) {
+  data = [[0, 1], [1, 0]]
+
+  initChart('runsOverTime', 'line', 'Runs Over Time',
+      'Runs', null, false, false)
+
+  const ch = Chart.getChart('runsOverTime')!;
+  ch.data.datasets = [{
+    label: 'runs',
+    data: data
+  }];
+  ch.update();
+}
