@@ -655,7 +655,7 @@ templates = [
     ("print <P>", -1),
     ("print <P>", -1),
     ("print <P>", -1),
-    ("turn left", -1), # arguments for turn and forward could also be randomly sampled
+    ("turn left", -1),  # arguments for turn and forward could also be randomly sampled
     ("turn right", -1),
     ("forward 200", -1),
     ("forward -200", -1),
@@ -682,9 +682,9 @@ class TestsHypothesisLevel1(HedyTester):
     def test_template_combination(self, code_tuples, d):
         excluded_chars = ["_", "#", '\n', '\r']
         random_print_argument = hypothesis.strategies.text(
-                        alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
-                        min_size=1,
-                        max_size=10)
+            alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+            min_size=1,
+            max_size=10)
 
         if valid_permutation(code_tuples):
             lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
@@ -700,5 +700,3 @@ class TestsHypothesisLevel1(HedyTester):
 
             all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
             self.assertEqual(expected_commands, all_commands)
-
-
