@@ -416,7 +416,7 @@ adventures:
                 story_text_2: "`{print}` funcționează în continuare la fel, dar comanda `{ask}` s-a schimbat. Trebuie să folosiți o variabilă și în comanda `{ask}`. Arată așa:\n"
                 example_code_2: "```\nrăspuns {is} {ask} Cum te numești?\n{print} Salut răspuns\n```\n"
                 story_text_3: "O altă comandă nouă la acest nivel este `{sleep}`, care întrerupe programul tău pentru o secundă. Dacă introduci un număr după comanda {sleep}, programul se întrerupe pentru acel număr de secunde.\n"
-                start_code: '{print} salut lume!'
+                start_code: '{print} salutări!'
             3:
                 story_text: "În nivelul 3 poți face o listă. Poți lăsa calculatorul să aleagă ceva aleatoriu din listă. Faci acest lucru cu `{at} {random}`.\n"
                 example_code: "```\nanimale {is} câine, pisică, cangur\n{print} animale {at} {random}\n```\n"
@@ -449,9 +449,9 @@ adventures:
                 story_text: "În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.\nIntrodu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!\nÎncearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.\n\nPoți afișa text pe ecran folosind comanda `{print}`.     \n"
                 example_code: "```\n{print} Salut!\n{print} Bine ai venit la Hedy!\n```\n"
                 story_text_2: "Poți cere introducerea unui text cu `{ask}` și poți repeta textul introdus cu comanda `{echo}`.\n"
-                story_text_3: "Să pornim! Nu știi ce să creezi? Vei găsi idei de programe pe care le poți construi în următoarele file.\n"
-                example_code_2: "```\n{ask} Cum te numești?\n{echo} salut\n```\n"
-                start_code: '{print} salut lume!'
+                story_text_3: "Să pornim! Nu știi ce să creezi? Vei găsi idei de programe pe care le poți construi în următoarele pagini.\n"
+                example_code_2: "```\n{ask} Cum te numești?\n{echo} Salut\n```\n"
+                start_code: '{print} salutări!'
             5:
                 start_code: "nume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy {print} 'super!' {else} {print} 'moa'"
                 story_text: "La nivelul 5 există ceva nou, `{if}`! Cu `{if}` puteți alege între două opțiuni diferite.\nAcest cod afișează frumos dacă introduci Hedy ca nume și bau! dacă introduci altceva.\n`{ask}` și `{print}` încă funcționează ca la nivelul 4.\n"
@@ -488,25 +488,25 @@ adventures:
                 example_code: "```\n{print} 'Doi și jumătate plus doi și jumătate face...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Toate textele trebuie să fie între apostrofuri**\nDe la acest nivel, va trebui să utilizați apostrofuri și atunci când stocați un text cu `=`:\n"
                 example_code_2: "```\nnume = 'Hedy Robotul'\n{print} 'Salut ' nume\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                story_text_3: "**All items in lists need quotation marks too**\nListele au text, așa că este necesar să folosiți ghilimelele. Atenție fiecare obiect din listă este pus între ghilimele. \nAcestă posibilitate vă dă ocazia sa salvați două cuvinte ca și un singur obiect în listă, de exemplu: 'Omul de fier'.\n"
                 example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+                story_text_4: "**Textul complet după comanda de comparație `{if}` necesită ghilimele**\n"
+                example_code_4: "```\nnume = {ask} 'Cum te numești?'\n{if} nume = 'Hedy Robotul'\n    {print} 'Salut!'\n```\n"
+                story_text_5: "**Numerele nu necesită ghilimele**\nPentru numere, nu trebuie să folosești ghilimele în semnul: `=`:\n"
+                example_code_5: "```\nscorul = 25\n{print} 'Rezultatul ' scorul\n```\n"
 
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+                start_code: "nume = {ask} 'cum te numești?'\nvârsta = {ask} 'ce vârsta ai?'\n{if} nume {is} 'Hedy' {and} vârsta {is} 2\n    {print} 'Tu ești adevăratul program Hedy!'"
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                example_code: "```\nnume = {ask} 'cum te numești?'\nvârsta = {ask} 'ce vârstă ai?'\n{if} nume {is} 'Hedy' {and} vârsta {is} 2\n    {print} 'Tu ești adevăratul program Hedy!'\n```\n"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+                start_code: "vârsta = {ask} 'Ce vârsta ai?'\n{if} vârsta < 13\n    {print} 'Ești mai tânăr(ă) decât mine!'\n{else}\n    {print} 'Ești mai in vârstă decât mine!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                example_code: "```\nvârsta = {ask} 'Ce vârstă ai?'\n{if} vârsta > 12\n    {print} 'Ești mai în vârstă decât mine!'\n```\n"
+                story_text_2: "Incepând cu acest nivel, dacă dorești să faci comparații exacte, poți folosi două semne de egal. Așa arată cum functionează alte limbaje de programare:\n"
+                example_code_2: "```\nnume = {ask} 'Cum te numești?'\n{if} nume == 'Hedy'\n    {print} 'Ești tare!'\n```\n"
+                story_text_3: "In momentum in care două lucruri nu punt identice, le poți compara folosind simbolul: `!=` astfel:\n"
+                example_code_3: "```\nnume = {ask} 'Cum te numești?'\n{if} nume != 'Hedy'\n    {print} 'Nu ești Hedy'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
@@ -680,28 +680,90 @@ adventures:
             15:
                 start_code: '# place your code here'
                 story_text: "In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.\nCheck it out:\n"
-                example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
+                example_code: "```\nsimbol = 'x'\nlocuri_deschise = 1, 2, 3, 4, 5, 6, 7, 8, 9\njocul = 'deschis'\nloc_1 = '.'\nloc_2 = '.'\nloc_3 = '.'\nloc_4 = '.'\nloc_5 = '.'\nloc_6 = '.'\nloc_7 = '.'\nloc_8 = '.'\nloc_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} loc_1 loc_2 loc_3\n{print} loc_4 loc_5 loc_6\n{print} loc_7 loc_8 loc_9\n{print} ' '\n{while} jocul != 'terminat'\n    alegere = {ask} 'Jucator ' simbol ', care loc?'\n    {if} alegere {in} locuri_deschise\n        {remove} alegere {from} locuri_deschise\n        {if} alegere == 1\n            loc_1 = simbol\n        {if} alegere == 2\n            loc_2 = simbol\n        {if} alegere == 3\n            loc_3 = simbol\n        {if} alegere == 4\n            loc_4 = simbol\n        {if} alegere == 5\n            loc_5 = simbol\n        {if} alegere == 6\n            loc_6 = simbol\n        {if} alegere == 7\n            loc_7 = simbol\n        {if} alegere == 8\n            loc_8 = simbol\n        {if} alegere == 9\n            loc_9 = simbol\n    {else}\n        {print} 'Locul acesta este deja ocupat'\n    {print} loc_1 loc_2 loc_3\n    {print} loc_4 loc_5 loc_6\n    {print} loc_7 loc_8 loc_9\n    {print} ' '\n    câștigător = {ask} 'Ai câștigat?'\n    {if} câștigator == 'da'\n        {print} 'Felicitări, jucător ' simbol '!'\n        jocul = 'terminat'\n    {else}\n        {if} simbol == 'x'\n            simbol = 'o'\n        {else}\n            simbol = 'x'\n```\n"
             14:
                 story_text: "In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Tic Tac Toe game, like this:\n"
                 start_code: '# place your code here'
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
             17:
-                story_text: "In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
+                story_text: "In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the 1`{elif}` command, that could solve that problem.\nTo use the 2`{elif}` to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the 3`{while}` loop will be stopped and the game ends.\n"
                 example_code: |
+                    ```
                     simbol = 'x'
-                    locuri = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-
-                    {for} i in {range} 1 {to} 9
-                        alegere = {ask} 'Player ' simbol ' what spot do you choose?'
-                        locuri at alegere = player
-                        {clear}
-                        print locuri at 1 locuri at 2 locuri at 3
-                        print locuri at 4 locuri at 5 locuri at 6
-                        print locuri at 7 locuri at 8 locuri at 9
-                        {if} simbol = 'x'
-                            simbol = 'o'
-                        {else}
-                            simbol = 'x'
+                    locuri_libere = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    jocul = 'începe'
+                    locul_1 = '.'
+                    locul_2 = '.'
+                    locul_3 = '.'
+                    locul_4 = '.'
+                    locul_5 = '.'
+                    locul_6 = '.'
+                    locul_7 = '.'
+                    locul_8 = '.'
+                    locul_9 = '.'
+                    {print} 'X și O!'
+                    {print} locul_1 locul_2 locul_3
+                    {print} locul_4 locul_5 locul_6
+                    {print} locul_7 locul_8 locul_9
+                    {print} ' '
+                    {while} jocul != 'terminat':
+                        alegere = {ask} 'Jucător ' simbol ', care loc?'
+                        {if} alegere {in} locuri_libere:
+                            {remove} alegere {from} locuri_libere
+                            {if} alegere == 1:
+                                locul_1 = simbol
+                            {if} alegere == 2:
+                                locul_2 = simbol
+                            {if} alegere == 3:
+                                locul_3 = simbol
+                            {if} alegere == 4:
+                                locul_4 = simbol
+                            {if} alegere == 5:
+                                locul_5 = simbol
+                            {if} alegere == 6:
+                                locul_6 = simbol
+                            {if} alegere == 7:
+                                locul_7 = simbol
+                            {if} alegere == 8:
+                                locul_8 = simbol
+                            {if} alegere == 9:
+                                locul_9 = simbol
+                        {else}:
+                            {print} 'Locul acesta este deja ocupat'
+                        {print} locul_1 locul_2 locul_3
+                        {print} locul_4 locul_5 locul_6
+                        {print} locul_7 locul_8 locul_9
+                        {print} ' '
+                        {if} locul_1 == locul_2 {and} locul_2 == locul_3 {and} locul_1 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_4 == locul_5 {and} locul_5 == locul_6 {and} locul_4 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_7 == locul_8 {and} locul_8 == locul_9 {and} locul_7 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_1 == locul_4 {and} locul_4 == locul_7 {and} locul_1 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_2 == locul_5 {and} locul_5 == locul_8 {and} locul_2 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_3 == locul_6 {and} locul_6 == locul_9 {and} locul_3 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_1 == locul_5 {and} locul_5 == locul_9 {and} locul_1 != '.':
+                            {print} 'Jucătorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {elif} locul_3 == locul_5 {and} locul_5 == locul_7 {and} locul_3 != '.':
+                            {print} 'Jucatorul ' simbol ' câștigă!'
+                            jocul = 'terminat'
+                        {else}:
+                            {if} simbol == 'x':
+                                simbol = 'o'
+                            {else}:
+                                simbol = 'x'
+                    ```
                 start_code: '# scrie codul tău aici'
         description: Play a game of Tic Tac Toe!
         name: Tic Tac Toe
