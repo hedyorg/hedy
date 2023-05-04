@@ -676,7 +676,6 @@ def valid_permutation(lines):
 class TestsHypothesisLevel1(HedyTester):
     level = 1
 
-
     @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
     @settings(deadline=None, max_examples=100)
     # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
