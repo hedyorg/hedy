@@ -2,22 +2,6 @@
 {% block regular_content %}
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
-    <!-- <div>
-        {{ _('customize_class_exp_1')|commonmark }}
-        <div class="border border-gray-400 w-full lg:w-3/4 rounded-lg px-2 py-1 my-2">
-            <ol class="list-inside">
-                <li>{{_('customize_class_step_1')}}</li>
-                <li>{{_('customize_class_step_2')}}</li>
-                <li>{{_('customize_class_step_3')}}</li>
-                <li>{{_('customize_class_step_4')}}</li>
-                <li>{{_('customize_class_step_5')}}</li>
-                <li>{{_('customize_class_step_6')}}</li>
-                <li>{{_('customize_class_step_7')}}</li>
-                <li>{{_('customize_class_step_8')}}</li>
-            </ol>
-        </div>
-        {{ _('customize_class_exp_2')|commonmark }}
-    </div> -->
     <div class="hidden flex-row border border-gray-400 rounded-lg">
         <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
         <div class="py-2 px-4 w-9/12 overflow-x-scroll">
@@ -33,16 +17,16 @@
         <h3 class="px-4">{{_('select_adventures')}}</h3>
         <div class="flex flex-row">
             <div id="state-accessible" class="leading-6 ml-4 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-                <span>Level accessible</span>
+                <span>{{_('level_accessible')}}</span>
             </div>
             <div id="state-disabled" class="leading-6 ml-4 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-                <span>Level disabled</span>
+                <span>{{_('level_disabled')}}</span>
             </div>
             <div id="state-future" class="leading-6 ml-4 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
-                <span>Level opens on</span>
+                <span>{{_('level_future')}}</span>
                 <span id="opening_date"></span>
             </div>
-            <div id="indicator" class="htmx-indicator custom-indicator ml-4">Updating <i class="fa fa-spinner fa-spin"></i> </div>
+            <div id="indicator" class="htmx-indicator custom-indicator ml-4">{{_('updating')}} <i class="fa fa-spinner fa-spin"></i> </div>
         </div>        
         <div class="flex flex-row w-full mb-4">
             <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
@@ -80,7 +64,7 @@
                         <tr>
                             <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
                             <th class="w-full">{{_('opening_date')}}</th>
-                            <th class="w-auto">Disable</th>
+                            <th class="w-auto">{{_('disable')}}</th>
                         </tr>
                     </thead>
                     <tbody>
