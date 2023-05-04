@@ -1627,31 +1627,35 @@ levels:
             hint: "Er is iets mis met het inspringen..."
             question_score: '10'
         6:
-            question_text: "Welke code hoort bij deze uitvoer?"
-            mp_choice_options:
-            -   option: |
-                    {print} 'Welkom bij restaurant Hedy'
+            question_text: "Wat is de uitvoer van de volgende code als er pannenkoeken worden besteld?"
+            code: |-
+                {print} 'Welkom bij restaurant Hedy'
+                {repeat} 2 {times}
                     eten {is} {ask} 'Wat wilt u bestellen?'
                     {print} eten
+            mp_choice_options:
+            -   option: |
+                    Welkom bij restaurant Hedy
+                    Pannenkoeken
                 feedback: "Hier zit geen herhaling in, er zijn twee bestellingen."
             -   option: |
-                    {repeat} 2 {times}
-                        {print} 'Welkom bij restaurant Hedy'
-                        eten {is} {ask} 'Wat wilt u bestellen?'
-                        {print} eten
+                    Welkom bij restaurant Hedy
+                    Welkom bij restaurant Hedy
+                    Pannenkoeken
+                    Pannenkoeken
                 feedback: "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy' 2x"
             -   option: |
-                    {print} 'Welkom bij restaurant Hedy'
-                    {repeat} 2 {times}
-                        eten {is} {ask} 'Wat wilt u bestellen?'
-                    {print} eten
-                feedback: "De code is bijna goed, maar het eten moet ook 2x geprint worden."
+                    Welkom bij restaurant Hedy
+                    Wat wilt u bestellen?
+                    Wat wilt u bestellen?
+                    Pannenkoeken
+                    Pannenkoeken
+                feedback: "Dat is bijna goed, maar 'Wat wilt u bestellen?' wordt niet geprint."
             -   option: |
-                    {print} 'Welkom bij restaurant Hedy'
-                    {repeat} 2 {times}
-                        eten {is} {ask} 'Wat wilt u bestellen?'
-                        {print} eten
-                feedback: "Goed gezien!"
+                    Welkom bij restaurant Hedy
+                    Pannenkoeken
+                    Pannenkoeken
+                feedback:  "Goed gezien!"
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'

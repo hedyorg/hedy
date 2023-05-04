@@ -1276,20 +1276,38 @@ levels:
             hint: Something is wrong with indentation
             question_score: '10'
         6:
-            question_text: Which code was used to create this output?
+            question_text: "What will be the output of this code when we enter pancakes?"
+            code: |-
+                {print} 'Welcome to restaurant Hedy'
+                {repeat} 2 {times}
+                    food {is} {ask} 'What do you want to eat?'
+                    {print} food
             mp_choice_options:
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\nfood = {ask} 'What whould you like to eat?'\n{print} food\n```\n"
-                feedback: You need to take 2 orders.
-            -   option: "```\n{repeat} 2 {times}\n    {print} 'Welcome to restaurant Hedy'\n    food = {ask} 'What whould you like to eat?'\n    {print} food\n```\n"
-                feedback: The welcome line would be printed twice in this code too
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n{print} food\n```\n"
-                feedback: Now only the last order is printed.
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
-                feedback: Awesome!
-            correct_answer: D
-            hint: Pay attention to what sould be repeated and what should only be printed once.
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Pancakes
+                feedback: "There is no repetition in this answer."
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "This answer also repeats the welcome message"
+            -   option: |
+                    Welcome to restaurant Hedy
+                    What do you want to eat?
+                    What do you want to eat?
+                    Pancakes
+                    Pancakes
+                feedback: "Almost! But look at the question, it is not repeated."
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback:  "Well done!"
+            correct_answer: "D"
+            hint: "The first sentence and question will not be repeated"
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: What is wrong with this code?
             code: "eten = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'That you for your order'"
