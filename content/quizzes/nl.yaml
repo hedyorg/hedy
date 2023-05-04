@@ -17,7 +17,7 @@ levels:
         2:
             question_text: "Welk commando moet je invullen op het streepje om Hallo! te laten verschijnen in je uitvoerscherm?"
             code: |
-              _ Hallo!
+                _ Hallo!
             mp_choice_options:
             -   option: |
                     ```
@@ -188,23 +188,23 @@ levels:
         10:
             question_text: "Wat staat er in je uitvoerscherm nadat je deze code hebt uitgevoerd?"
             code: |
-              {ask} Heb je zin om naar level 2 te gaan?
-              {echo}
-              {echo}
+                {ask} Heb je zin om naar level 2 te gaan?
+                {echo}
+                {echo}
             mp_choice_options:
             -   option: |
-                  Heb je zin om naar level 2 te gaan?
+                    Heb je zin om naar level 2 te gaan?
                 feedback: "Het echo commando laat ook iets zien!"
             -   option: |
-                  Ja!
-                  Ja!
+                    Ja!
+                    Ja!
                 feedback: "Goed opgelet"
             -   option: |
-                  Ja!
+                    Ja!
                 feedback: "De eerste regel wordt ook geprint"
             -   option: |
-                  Heb je zin om naar level 2 te gaan?
-                  Ja!
+                    Heb je zin om naar level 2 te gaan?
+                    Ja!
                 feedback: "De vraag blijft niet staan en echo staat er 2x."
             correct_answer: "B"
             hint: "Op naar level 2!"
@@ -662,28 +662,28 @@ levels:
             question_text: "Welke code is correct?"
             mp_choice_options:
             -   option: |
-                  ```
-                  {print} 'Openingstijden van Hedys restaurant:'
-                  {print} 'Van s ochtends vroeg tot s avonds laat!'
-                  ```
+                    ```
+                    {print} 'Openingstijden van Hedys restaurant:'
+                    {print} 'Van s ochtends vroeg tot s avonds laat!'
+                    ```
                 feedback: "Correct, je hebt aanhalingstekens nodig"
             -   option: |
-                  ```
-                  {print} 'Openingstijden van Hedy's restaurant:'
-                  {print} Van 's ochtends vroeg tot 's avonds laat!
-                  ```
+                    ```
+                    {print} 'Openingstijden van Hedy's restaurant:'
+                    {print} Van 's ochtends vroeg tot 's avonds laat!
+                    ```
                 feedback: "Ask werkt nog hetzelfde"
             -   option: |
-                  ```
-                  {print} 'Openingstijden van Hedys restaurant:
-                  {print} Van s ochtends vroeg tot s avonds laat!'
-                  ```
+                    ```
+                    {print} 'Openingstijden van Hedys restaurant:
+                    {print} Van s ochtends vroeg tot s avonds laat!'
+                    ```
                 feedback: "`{at} {random}` werkt nog hetzelfde"
             -   option: |
-                  ```
-                  {print} Openingstijden van Hedy's restaurant:
-                  {print} Van 's ochtends vroeg tot 's avonds laat!
-                  ```
+                    ```
+                    {print} Openingstijden van Hedy's restaurant:
+                    {print} Van 's ochtends vroeg tot 's avonds laat!
+                    ```
                 feedback: "Nee, een commando is anders."
             correct_answer: "A"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
@@ -692,24 +692,24 @@ levels:
             question_text: "Waar worden de juiste aanhalingstekens gebruikt bij het `{print}` commando?"
             mp_choice_options:
             -   option: |
-                  ```
-                  {print} `hallo`
-                  ```
+                    ```
+                    {print} `hallo`
+                    ```
                 feedback: "Dit zijn schuine aanhalingstekens."
             -   option: |
-                  ```
-                  {print} 'hallo!'
-                  ```
+                    ```
+                    {print} 'hallo!'
+                    ```
                 feedback: "Juist!"
             -   option: |
-                  ```
-                  {print} hallo
-                  ```
+                    ```
+                    {print} hallo
+                    ```
                 feedback: "Er staan ​​hier geen aanhalingstekens."
             -   option: |
-                  ```
-                  {print} ,hallo,
-                  ```
+                    ```
+                    {print} ,hallo,
+                    ```
                 feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Kies het goede aanhalingsteken."
@@ -1302,25 +1302,25 @@ levels:
         2:
             question_text: "Welke code klopt?"
             mp_choice_options:
-              - option: |
-                  ```
-                  {print} 100 {times} 'hallo'
-                  ```
+            -   option: |
+                    ```
+                    {print} 100 {times} 'hallo'
+                    ```
                 feedback: "`{repeat}` 100 `{times}` `{print}` 'hallo'"
-              - option: |
-                  ```
-                  {print} {repeat} 100 {times} 'hallo'
-                  ```
+            -   option: |
+                    ```
+                    {print} {repeat} 100 {times} 'hallo'
+                    ```
                 feedback: "{repeat} 100 {times} {print} 'hallo'"
-              - option: |
-                  ```
-                  {repeat} 'hallo' 100 {times}
-                  ```
+            -   option: |
+                    ```
+                    {repeat} 'hallo' 100 {times}
+                    ```
                 feedback: "{repeat} 100 {times} {print} 'hallo'"
-              - option: |
-                  ```
-                  {repeat} 100 {times} {print} 'hallo'
-                  ```
+            -   option: |
+                    ```
+                    {repeat} 100 {times} {print} 'hallo'
+                    ```
                 feedback: "That's right!"
             correct_answer: "D"
             hint: "Eerst het `{repeat}` commando, dan het `{print}` commando"
@@ -1655,11 +1655,10 @@ levels:
                     Welkom bij restaurant Hedy
                     Pannenkoeken
                     Pannenkoeken
-                feedback:  "Goed gezien!"
+                feedback: "Goed gezien!"
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'
-            output: "Welcome bij restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Wat is er mis met deze code?"
             code: |-
@@ -1799,20 +1798,20 @@ levels:
             correct_answer: D
             hint: Alles onder het commando `{repeat}` wordt twee keer herhaald.
         3:
-             mp_choice_options:
-             -   option: Koffer 1, verkopen
-                 feedback: Je wint geen miljoen!
-             -   option: Koffer 1, open
-                 feedback: Je wint geen miljoen
-             -   option: Koffer 2, verkopen
-                 feedback: Je wint geen miljoen
-             -   option: Koffer 2, open
-                 feedback: Goed gedaan! Jij wint!
-             code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
-             correct_answer: D
-             question_text: Welke koffer moet je kiezen om een miljoen euro te winnen?
-             hint: Volg het juiste pad.
-             question_score: '10'
+            mp_choice_options:
+            -   option: Koffer 1, verkopen
+                feedback: Je wint geen miljoen!
+            -   option: Koffer 1, open
+                feedback: Je wint geen miljoen
+            -   option: Koffer 2, verkopen
+                feedback: Je wint geen miljoen
+            -   option: Koffer 2, open
+                feedback: Goed gedaan! Jij wint!
+            code: "{print} 'Kies de juiste koffer en win!'\nkoffer = {ask} 'Welke koffer kies jij? 1 of 2?'\n{if} koffer {is} 1\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n         {print} 'U verkoopt uw koffer voor 10 euro'\n    {if} actie {is} open\n        {print} 'Je opent de koffer en wint een appeltaart'\n{if} koffer {is} 2\n    actie = {ask} 'Openen of verkopen?'\n    {if} actie {is} verkopen\n        {print} 'Jij verkoop de koffer voor 500 dollar'\n    {if} action {is} open\n        {print} 'Je opent de koffer en wint een miljoen dollar!'"
+            correct_answer: D
+            question_text: Welke koffer moet je kiezen om een miljoen euro te winnen?
+            hint: Volg het juiste pad.
+            question_score: '10'
         4:
             question_text: "Wat is waar?"
             code: |-
@@ -1852,9 +1851,9 @@ levels:
             hint: Let op het inspringen!
             question_score: '10'
             output: |
-              Maar ijs is het beste!
-              Maar ijs is het beste!
-              Maar ijs is het beste!
+                Maar ijs is het beste!
+                Maar ijs is het beste!
+                Maar ijs is het beste!
         6:
             mp_choice_options:
             -   option: '`{if}`'
@@ -2434,28 +2433,28 @@ levels:
             question_text: "Welk van deze codes is correct?"
             mp_choice_options:
             -   option: |-
-                  ```
-                  smaken =  vanille, aarbeien, chocolade
-                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
-                  ```
+                    ```
+                    smaken =  vanille, aarbeien, chocolade
+                    {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                    ```
                 feedback: "Alle smaakjes moeten binnen aanhalingstekens."
             -   option: |-
-                  ```
-                  'smaken = vanille, aarbeien, chocolade'
-                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
-                  ```
+                    ```
+                    'smaken = vanille, aarbeien, chocolade'
+                    {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                    ```
                 feedback: "Alle smaakjes moeten binnen aanhalingstekens"
             -   option: |-
-                  ```
-                  smaken =  'vanille', 'aarbeien', 'chocolade'
-                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
-                  ```
+                    ```
+                    smaken =  'vanille', 'aarbeien', 'chocolade'
+                    {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                    ```
                 feedback: "Goed!"
             -   option: |-
-                  ```
-                  smaken = 'vanille, aarbeien, chocolade'
-                  {print} 'Ik wil ' smaken {at} {random} 'ijs.'
-                  ```
+                    ```
+                    smaken = 'vanille, aarbeien, chocolade'
+                    {print} 'Ik wil ' smaken {at} {random} 'ijs.'
+                    ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
             hint: "The second line is the same in each code, pay attention to the first line"
@@ -2688,256 +2687,256 @@ levels:
             hint: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
             question_score: '10'
     13:
-      1:
-        question_text: "Wat moet worden ingevuld op de _ ?"
-        code: |-
-          naam = {ask} 'Hoe heet je?'
-          lied = {ask} 'Wil je een liedje horen?'
-          jarig = {ask} 'Ben je jarig vandaag?'
-          _
-              {print} 'Happy Birthday to you!'
-              {print} 'Happy Birthday to you!'
-              {print} 'Happy Birthday dear ' naam
-              {print} 'Happy Birthday to you!'
-        mp_choice_options:
-          - option: |-
-              ```
-              {if} jarig {and} lied = 'ja'
-              ```
-            feedback: "Bijna!"
-          - option: |-
-              ```
-              {if} jarig = 'ja' {and} naam = 'Hedy'
-              ```
-            feedback: "Hedy zingt alleen als jij dat wil"
-          - option: |-
-              ```
-              {if} lied = 'ja' {and} jarig = 'ja'
-              ```
-            feedback: "Super!"
-          - option: |-
-              ```
-              {if} lied = 'ja' {or} jarig = 'ja'
-              ```
-            feedback: "Hedy zingt alleen als beide antwoorden ja zijn"
-        correct_answer: "C"
-        hint: "Hedy zingt alleen als je jarig bent en een liedje wil horen"
-        question_score: '10'
-      2:
-        question_text: "Welk commando mist op de _ ?"
-        code: |-
-          menu = 'kaas', 'worstenbroodje', 'koekjes'
-          dieet = {ask} 'heb je dieetwensen?'
-          {if} dieet = 'vegan' _ dieet = 'halal'
-              {remove} 'worstenbroodje' {from} menu
-        mp_choice_options:
-          - option: "`{and}`"
-            feedback: "Je hoeft niet vegan èn moslim te zijn"
-          - option: "`{or}`"
-            feedback: "Goed bedacht!"
-          - option: " `+` "
-            feedback: "Nee"
-          - option: "`{print}`"
-            feedback: "Nee"
-        correct_answer: "B"
-        hint: "Vegans en moslims eten allebei geen worstenbroodjes."
-        question_score: '10'
-      3:
-        question_text: "Welke uitvoer krijgt een lid zonder kortingcode?"
-        code: |-
-          lid = {ask} 'Heb je een lidmaatschapskaart?'
-          korting = {ask} 'Heb je een kortingscode?'
-          {if} lid = 'ja' {or} discount = 'ja'
-              {print} 'Je krijgt een gratis appeltaart!'
-          {else}
-              {print} 'Dat wordt dan 5 euro, alstublieft'
-        mp_choice_options:
-          - option: "Je krijgt een gratis appeltaart!!"
-            feedback: "Goed gedaan!"
-          - option: "Dat wordt dan 5 euro, alstublieft"
-            feedback: "Dat klopt niet"
-          - option: "Deze code klopt niet en geeft dus geen uitvoer"
-            feedback: "Er is niks mis met deze code"
-          - option: "Dat kun je niet weten"
-            feedback: "Zeker wel! Lees de code goed."
-        correct_answer: "A"
-        hint: "Let op het `{or}` commando in regel 3"
-        question_score: '10'
-      4:
-        question_text: "Wat moet de volgende regel zijn in dit steen papier schaar spel?"
-        code: |-
-          {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'papier'
-        mp_choice_options:
-          - option: "```\n{print} 'Jij wint'\n```"
-            feedback: "Jij wint!"
-          - option: "```\n{print} 'Jij verliest'\n```"
-            feedback: "Je verliest!"
-          - option: "```\n{print} 'Gelijkspel'\n```"
-            feedback: "Je hebt alleen gelijkspel als je hetzelfde kiest"
-          - option: "```\n{print} 'Probeer opnieuw'\n```"
-            feedback: "Probeer opnieuw!"
-        correct_answer: "A"
-        hint: "Papier verslaat steen"
-        question_score: '10'
-      5:
-        question_text: "Welke stelling over deze code is waar?"
-        code: |-
-          {if} naam = 'Assepoester' {and} schoenmaat = '38'
-              {print} 'Jij bent de ware!'
-        mp_choice_options:
-          - option: "Iedereen met schoenmaat 38 is de ware"
-            feedback: "De prins is wel iets kieskeuriger!"
-          - option: "Iedereen die Assepoester heet is de ware"
-            feedback: "De prins is wel iets kieskeuriger!"
-          - option: "Iedereen die Assepoester heet en schoenmaat 38 heeft is de ware"
-            feedback: "Fantastisch!"
-          - option: "Iedereen die geen Assepoester heet en geen schoenmaat 38 heeft is de ware"
-            feedback: "De prins is wel iets kieskeuriger!"
-        correct_answer: "C"
-        hint: "Beide statemenst moeten waar zijn"
-        question_score: '10'
-      6:
-        question_text: "Welke stelling over deze code is waar?"
-        code: |-
-          {print} 'Laat me raden welk familielid jij bent!'
-          bril = {ask} 'Draag je een bril?'
-          vrouw = {ask} 'Ben jij een vrouw?'
-          {if} bril = 'ja' {and} vrouw = 'ja'
-              {print} 'Jij bent Sophie!'
-          {if} bril = 'nee' {and} vrouw = 'ja'
-             {print} 'Jij bent Marleen!'
-          {if} bril = 'ja' {and} vrouw = 'nee'
-              {print} 'Jij bent Wouter!'
-          {if} bril = 'nee' {and} vrouw = 'nee'
-              {print} 'Jij bent Michael!'
-        mp_choice_options:
-          - option: "Michael is een man met een bril"
-            feedback: "Helaas"
-          - option: "Marleen is een vrouw met een bril"
-            feedback: "Helaas"
-          - option: "Wouter is een vrouw met een bril"
-            feedback: "Helaas"
-          - option: "Sophie is een vrouw met een bril"
-            feedback: "Goedzo!"
-        correct_answer: "D"
-        hint: "Kijk goed! Of heb je een bril nodig?"
-        question_score: '10'
-      7:
-        question_text: "Welke stelling is FOUT ?"
-        code: |-
-          {print} 'Lief dat je me met mijn huisdieren wil helpen'
-          {print} 'Hier is een programma om ze te helpen voeren'
-          dier = {ask} 'Wat voor dier is het?'
-          kleur = {ask} 'Welke kleur heeft het?'
-          {if} dier = 'cat' {and} kleur = 'grijs'
-              {print} 'Dit is Abby. Zij krijgt 3 scheppen kattenbrokjes'
-          {if} dier = 'kat' {and} kleur = 'oranje'
-              {print} 'Dat is Milo. Hij eet 4 scheppen kattenbrokjes'
-          {if} dier = 'vogel' {or} kleur = 'zwart'
-              {print} 'Deze heeft al genoeg gehad! Niet voeren!'
-          {if} dier = 'hamster' {and} kleur = 'bruin'
-              {print} 'Hij mag een stukje wortel'
-        mp_choice_options:
-          - option: "De grijze kat heet Abby"
-            feedback: "Klopt wel!"
-          - option: "Milo de oranje kat eet 4 scheppen brokjes"
-            feedback: "Klopt wel!"
-          - option: "De zwarte hamster moet een stukje wortel krijgen"
-            feedback: "Goed gedaan!"
-          - option: "Het gele vogeltje heeft genoeg gehad"
-            feedback: "Klopt wel!"
-        correct_answer: "C"
-        hint: "Wat is NIET waar?"
-        question_score: '10'
-      8:
-        question_text: "Welke output krijg je als je alleen popcorn bestelt?"
-        code: |-
-          {print} 'Welkom in de bioscoop'
-          popcorn = {ask} 'Wil je wat popcorn?'
-          drinken = {ask} 'Wil je een drankje?'
-          {if} popcorn = 'ja' {and} drinken = 'ja'
-              {print} '8 euro alstublieft'
-          {if} popcorn = 'nee' {and} drinken = 'ja'
-             {print} '3 euro alstublieft'
-          {if} popcorn = 'ja' {and} drinken = 'nee'
-              {print} '5 euro alstublieft'
-          {if} popcorn = 'nee' {and} drinken = 'nee'
-              {print} 'Ok'
-          {print} 'Fijne voorstelling!'
-        mp_choice_options:
-          - option: |-
-              Welkom in de bioscoop
-              8 euro alstublieft
-              Fijne voorstelling!
-            feedback: "Je betaalt te veel!"
-          - option: |-
-              Welkom in de bioscoop
-              5 euro alstublieft
-              Fijne voorstelling!
-            feedback: "Wow!"
-          - option: |-
-              Welkom in de bioscoop
-              3 euro alstublieft
-              Fijne voorstelling!
-            feedback: "Dat is niet genoeg geld!"
-          - option: |-
-              Welkom in de bioscoop
-              Ok
-              Fijne voorstelling!
-            feedback: "Je moet wel betalen voor de popcorn!"
-        correct_answer: "B"
-        hint: "popcorn = ja en drinken = nee"
-        question_score: '10'
-      9:
-        question_text: "Wat is er mis met deze code?"
-        code: |-
-          1  chocolade = {ask} 'Wil je chocosaus op je ijs?'
-          2  spikkels = {ask} 'Wil je spikkels op je ijs?'
-          3  {if} chocolade {and} spikkels = 'ja'
-          4      {print} 'IJs met chocosaus en spikkels, komt eraan!'
-          5  {if} chocolade = 'ja' {and} spikkels = 'nee'
-          6      {print} 'IJs met chocosaus, komt eraan!'
-          7  {if} chocolade = 'nee' {and} spikkels = 'ja'
-          8      {print} 'IJs met spikkels, komt eraan!'
-          9  {if} chocolade = 'nee' {and} spikkels = 'nee'
-          10     {print} 'IJs zonder fratsen, komt eraan!'
-        mp_choice_options:
-          - option: "Regel 3 moet zijn: \n```\n {if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
-            feedback: "Correct!"
-          - option: "Regel 3 moet zijn:  \n```\n{if} chocolade = 'nee' {and} spikkels = 'nee'\n```\n"
-            feedback: "Dit heb ik niet besteld!"
-          - option: "Regel 5 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
-            feedback: "Dit heb ik niet besteld!"
-          - option: "Regel 7 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'nee'\n```\n"
-            feedback: "Dit heb ik niet besteld!"
-        correct_answer: "A"
-        hint: "Er is iets mis met regel 3"
-        question_score: '10'
-      10:
-        question_text: "Wat moet er op de _ in regel 8 worden ingevuld?"
-        code: |-
-          {print} 'Vind het product in de supermarkt!'
-          item = {ask} 'Wat zoekt u?'
-          bakkerij = 'brood', 'bolletjes', 'muffins'
-          drinken = 'cola', 'water', 'limonade'
-          snacks = 'chips', 'nootjes', 'dipsaus'
-          vriezer = 'friet', 'roomijs', 'pizza'
-          fruit = 'bananen', 'appels', 'mandarijnen'
-          {if} item {in} snacks _ item {in} drinken
-              {print} 'Dit item vindt u in gangpad 3'
-          {if} item {in} bakkerij {or} item {in} vriezer
-              {print} 'Dit item vindt u achterin de winkel'
-          {if} item {in} fruit
-              {print} 'Het fruit ligt bij de kassa'
-        mp_choice_options:
-          - option: "`{and}`"
-            feedback: "Er zijn geen items die op beide lijsten staan"
-          - option: "`{or}`"
-            feedback: "Geweldig!"
-          - option: "`{in}`"
-            feedback: "Nee"
-          - option: "`{if}`"
-            feedback: "Nee"
-        correct_answer: "B"
-        hint: "Het item staat niet op meerdere lijsten, dus je kunt geen `{and}` gebruiken"
-        question_score: '10'
+        1:
+            question_text: "Wat moet worden ingevuld op de _ ?"
+            code: |-
+                naam = {ask} 'Hoe heet je?'
+                lied = {ask} 'Wil je een liedje horen?'
+                jarig = {ask} 'Ben je jarig vandaag?'
+                _
+                    {print} 'Happy Birthday to you!'
+                    {print} 'Happy Birthday to you!'
+                    {print} 'Happy Birthday dear ' naam
+                    {print} 'Happy Birthday to you!'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    {if} jarig {and} lied = 'ja'
+                    ```
+                feedback: "Bijna!"
+            -   option: |-
+                    ```
+                    {if} jarig = 'ja' {and} naam = 'Hedy'
+                    ```
+                feedback: "Hedy zingt alleen als jij dat wil"
+            -   option: |-
+                    ```
+                    {if} lied = 'ja' {and} jarig = 'ja'
+                    ```
+                feedback: "Super!"
+            -   option: |-
+                    ```
+                    {if} lied = 'ja' {or} jarig = 'ja'
+                    ```
+                feedback: "Hedy zingt alleen als beide antwoorden ja zijn"
+            correct_answer: "C"
+            hint: "Hedy zingt alleen als je jarig bent en een liedje wil horen"
+            question_score: '10'
+        2:
+            question_text: "Welk commando mist op de _ ?"
+            code: |-
+                menu = 'kaas', 'worstenbroodje', 'koekjes'
+                dieet = {ask} 'heb je dieetwensen?'
+                {if} dieet = 'vegan' _ dieet = 'halal'
+                    {remove} 'worstenbroodje' {from} menu
+            mp_choice_options:
+            -   option: "`{and}`"
+                feedback: "Je hoeft niet vegan èn moslim te zijn"
+            -   option: "`{or}`"
+                feedback: "Goed bedacht!"
+            -   option: " `+` "
+                feedback: "Nee"
+            -   option: "`{print}`"
+                feedback: "Nee"
+            correct_answer: "B"
+            hint: "Vegans en moslims eten allebei geen worstenbroodjes."
+            question_score: '10'
+        3:
+            question_text: "Welke uitvoer krijgt een lid zonder kortingcode?"
+            code: |-
+                lid = {ask} 'Heb je een lidmaatschapskaart?'
+                korting = {ask} 'Heb je een kortingscode?'
+                {if} lid = 'ja' {or} discount = 'ja'
+                    {print} 'Je krijgt een gratis appeltaart!'
+                {else}
+                    {print} 'Dat wordt dan 5 euro, alstublieft'
+            mp_choice_options:
+            -   option: "Je krijgt een gratis appeltaart!!"
+                feedback: "Goed gedaan!"
+            -   option: "Dat wordt dan 5 euro, alstublieft"
+                feedback: "Dat klopt niet"
+            -   option: "Deze code klopt niet en geeft dus geen uitvoer"
+                feedback: "Er is niks mis met deze code"
+            -   option: "Dat kun je niet weten"
+                feedback: "Zeker wel! Lees de code goed."
+            correct_answer: "A"
+            hint: "Let op het `{or}` commando in regel 3"
+            question_score: '10'
+        4:
+            question_text: "Wat moet de volgende regel zijn in dit steen papier schaar spel?"
+            code: |-
+                {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'papier'
+            mp_choice_options:
+            -   option: "```\n{print} 'Jij wint'\n```"
+                feedback: "Jij wint!"
+            -   option: "```\n{print} 'Jij verliest'\n```"
+                feedback: "Je verliest!"
+            -   option: "```\n{print} 'Gelijkspel'\n```"
+                feedback: "Je hebt alleen gelijkspel als je hetzelfde kiest"
+            -   option: "```\n{print} 'Probeer opnieuw'\n```"
+                feedback: "Probeer opnieuw!"
+            correct_answer: "A"
+            hint: "Papier verslaat steen"
+            question_score: '10'
+        5:
+            question_text: "Welke stelling over deze code is waar?"
+            code: |-
+                {if} naam = 'Assepoester' {and} schoenmaat = '38'
+                    {print} 'Jij bent de ware!'
+            mp_choice_options:
+            -   option: "Iedereen met schoenmaat 38 is de ware"
+                feedback: "De prins is wel iets kieskeuriger!"
+            -   option: "Iedereen die Assepoester heet is de ware"
+                feedback: "De prins is wel iets kieskeuriger!"
+            -   option: "Iedereen die Assepoester heet en schoenmaat 38 heeft is de ware"
+                feedback: "Fantastisch!"
+            -   option: "Iedereen die geen Assepoester heet en geen schoenmaat 38 heeft is de ware"
+                feedback: "De prins is wel iets kieskeuriger!"
+            correct_answer: "C"
+            hint: "Beide statemenst moeten waar zijn"
+            question_score: '10'
+        6:
+            question_text: "Welke stelling over deze code is waar?"
+            code: |-
+                {print} 'Laat me raden welk familielid jij bent!'
+                bril = {ask} 'Draag je een bril?'
+                vrouw = {ask} 'Ben jij een vrouw?'
+                {if} bril = 'ja' {and} vrouw = 'ja'
+                    {print} 'Jij bent Sophie!'
+                {if} bril = 'nee' {and} vrouw = 'ja'
+                   {print} 'Jij bent Marleen!'
+                {if} bril = 'ja' {and} vrouw = 'nee'
+                    {print} 'Jij bent Wouter!'
+                {if} bril = 'nee' {and} vrouw = 'nee'
+                    {print} 'Jij bent Michael!'
+            mp_choice_options:
+            -   option: "Michael is een man met een bril"
+                feedback: "Helaas"
+            -   option: "Marleen is een vrouw met een bril"
+                feedback: "Helaas"
+            -   option: "Wouter is een vrouw met een bril"
+                feedback: "Helaas"
+            -   option: "Sophie is een vrouw met een bril"
+                feedback: "Goedzo!"
+            correct_answer: "D"
+            hint: "Kijk goed! Of heb je een bril nodig?"
+            question_score: '10'
+        7:
+            question_text: "Welke stelling is FOUT ?"
+            code: |-
+                {print} 'Lief dat je me met mijn huisdieren wil helpen'
+                {print} 'Hier is een programma om ze te helpen voeren'
+                dier = {ask} 'Wat voor dier is het?'
+                kleur = {ask} 'Welke kleur heeft het?'
+                {if} dier = 'cat' {and} kleur = 'grijs'
+                    {print} 'Dit is Abby. Zij krijgt 3 scheppen kattenbrokjes'
+                {if} dier = 'kat' {and} kleur = 'oranje'
+                    {print} 'Dat is Milo. Hij eet 4 scheppen kattenbrokjes'
+                {if} dier = 'vogel' {or} kleur = 'zwart'
+                    {print} 'Deze heeft al genoeg gehad! Niet voeren!'
+                {if} dier = 'hamster' {and} kleur = 'bruin'
+                    {print} 'Hij mag een stukje wortel'
+            mp_choice_options:
+            -   option: "De grijze kat heet Abby"
+                feedback: "Klopt wel!"
+            -   option: "Milo de oranje kat eet 4 scheppen brokjes"
+                feedback: "Klopt wel!"
+            -   option: "De zwarte hamster moet een stukje wortel krijgen"
+                feedback: "Goed gedaan!"
+            -   option: "Het gele vogeltje heeft genoeg gehad"
+                feedback: "Klopt wel!"
+            correct_answer: "C"
+            hint: "Wat is NIET waar?"
+            question_score: '10'
+        8:
+            question_text: "Welke output krijg je als je alleen popcorn bestelt?"
+            code: |-
+                {print} 'Welkom in de bioscoop'
+                popcorn = {ask} 'Wil je wat popcorn?'
+                drinken = {ask} 'Wil je een drankje?'
+                {if} popcorn = 'ja' {and} drinken = 'ja'
+                    {print} '8 euro alstublieft'
+                {if} popcorn = 'nee' {and} drinken = 'ja'
+                   {print} '3 euro alstublieft'
+                {if} popcorn = 'ja' {and} drinken = 'nee'
+                    {print} '5 euro alstublieft'
+                {if} popcorn = 'nee' {and} drinken = 'nee'
+                    {print} 'Ok'
+                {print} 'Fijne voorstelling!'
+            mp_choice_options:
+            -   option: |-
+                    Welkom in de bioscoop
+                    8 euro alstublieft
+                    Fijne voorstelling!
+                feedback: "Je betaalt te veel!"
+            -   option: |-
+                    Welkom in de bioscoop
+                    5 euro alstublieft
+                    Fijne voorstelling!
+                feedback: "Wow!"
+            -   option: |-
+                    Welkom in de bioscoop
+                    3 euro alstublieft
+                    Fijne voorstelling!
+                feedback: "Dat is niet genoeg geld!"
+            -   option: |-
+                    Welkom in de bioscoop
+                    Ok
+                    Fijne voorstelling!
+                feedback: "Je moet wel betalen voor de popcorn!"
+            correct_answer: "B"
+            hint: "popcorn = ja en drinken = nee"
+            question_score: '10'
+        9:
+            question_text: "Wat is er mis met deze code?"
+            code: |-
+                1  chocolade = {ask} 'Wil je chocosaus op je ijs?'
+                2  spikkels = {ask} 'Wil je spikkels op je ijs?'
+                3  {if} chocolade {and} spikkels = 'ja'
+                4      {print} 'IJs met chocosaus en spikkels, komt eraan!'
+                5  {if} chocolade = 'ja' {and} spikkels = 'nee'
+                6      {print} 'IJs met chocosaus, komt eraan!'
+                7  {if} chocolade = 'nee' {and} spikkels = 'ja'
+                8      {print} 'IJs met spikkels, komt eraan!'
+                9  {if} chocolade = 'nee' {and} spikkels = 'nee'
+                10     {print} 'IJs zonder fratsen, komt eraan!'
+            mp_choice_options:
+            -   option: "Regel 3 moet zijn: \n```\n {if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
+                feedback: "Correct!"
+            -   option: "Regel 3 moet zijn:  \n```\n{if} chocolade = 'nee' {and} spikkels = 'nee'\n```\n"
+                feedback: "Dit heb ik niet besteld!"
+            -   option: "Regel 5 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
+                feedback: "Dit heb ik niet besteld!"
+            -   option: "Regel 7 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'nee'\n```\n"
+                feedback: "Dit heb ik niet besteld!"
+            correct_answer: "A"
+            hint: "Er is iets mis met regel 3"
+            question_score: '10'
+        10:
+            question_text: "Wat moet er op de _ in regel 8 worden ingevuld?"
+            code: |-
+                {print} 'Vind het product in de supermarkt!'
+                item = {ask} 'Wat zoekt u?'
+                bakkerij = 'brood', 'bolletjes', 'muffins'
+                drinken = 'cola', 'water', 'limonade'
+                snacks = 'chips', 'nootjes', 'dipsaus'
+                vriezer = 'friet', 'roomijs', 'pizza'
+                fruit = 'bananen', 'appels', 'mandarijnen'
+                {if} item {in} snacks _ item {in} drinken
+                    {print} 'Dit item vindt u in gangpad 3'
+                {if} item {in} bakkerij {or} item {in} vriezer
+                    {print} 'Dit item vindt u achterin de winkel'
+                {if} item {in} fruit
+                    {print} 'Het fruit ligt bij de kassa'
+            mp_choice_options:
+            -   option: "`{and}`"
+                feedback: "Er zijn geen items die op beide lijsten staan"
+            -   option: "`{or}`"
+                feedback: "Geweldig!"
+            -   option: "`{in}`"
+                feedback: "Nee"
+            -   option: "`{if}`"
+                feedback: "Nee"
+            correct_answer: "B"
+            hint: "Het item staat niet op meerdere lijsten, dus je kunt geen `{and}` gebruiken"
+            question_score: '10'
