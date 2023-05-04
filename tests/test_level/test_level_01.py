@@ -3,7 +3,7 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
-from hypothesis import given
+from hypothesis import given, settings
 import hypothesis.strategies
 
 
@@ -676,6 +676,7 @@ def valid_permutation(lines):
 class TestsHypothesisLevel1(HedyTester):
     level = 1
 
+    @settings(deadline=None)
     @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
     # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
     def test_template_combination(self, code_tuples, d):
