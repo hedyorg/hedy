@@ -6,41 +6,6 @@ from tests.Tester import HedyTester
 from hypothesis import given
 import hypothesis.strategies
 
-templates = [
-    ("print <P>", -1),
-    ("print <P>", -1),
-    ("print <P>", -1),
-    ("ask <P>", 1),
-    ("echo <P>", 2)
-]
-
-def valid_permutation(lines):
-    orders = [order for _, order in lines]
-    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
-
-    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
-
-    return all(list)
-
-@given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
-def test_template_combination(code_tuples, d):
-    excluded_chars = ["_", "#", '\n', '\r']
-    random_print_argument = hypothesis.strategies.text(
-                    alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
-                    min_size=1,
-                    max_size=10)
-
-    if valid_permutation(code_tuples):
-        lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
-        hedy_code = '\n'.join(lines)
-
-        try:
-            hedy.transpile(hedy_code, level=1).code
-        except:
-            print(hedy_code)
-            assert False
-
-
 
 
 class TestsLevel1(HedyTester):
@@ -51,6 +16,7 @@ class TestsLevel1(HedyTester):
      * combined tests
      * markup tests
      * negative tests
+     * hypothesis tests
 
     Naming conventions are like this:
      * single keyword positive tests are just keyword or keyword_special_case
@@ -681,3 +647,45 @@ class TestsLevel1(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['invalid_command'] == 'aks',
             max_level=17,
         )
+
+
+templates = [
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("turn left", -1), # arguments for turn and forward could also be randomly sampled
+    ("turn right", -1),
+    ("forward 200", -1),
+    ("forward -200", -1),
+    ("ask <P>", 1),
+    ("echo <P>", 2),
+    ("ask <P>", 3),
+    ("echo <P>", 4)
+]
+
+def valid_permutation(lines):
+    orders = [order for _, order in lines]
+    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
+    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    return all(list)
+
+class TestsHypothesisLevel1(HedyTester):
+    level = 1
+
+    @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
+    def test_template_combination(self, code_tuples, d):
+        excluded_chars = ["_", "#", '\n', '\r']
+        random_print_argument = hypothesis.strategies.text(
+                        alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+                        min_size=1,
+                        max_size=10)
+
+        if valid_permutation(code_tuples):
+            lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
+
+            self.single_level_tester(
+                code='\n'.join(lines),
+                translate=False
+            )
+
+
