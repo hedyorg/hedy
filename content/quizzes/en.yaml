@@ -3122,21 +3122,22 @@ levels:
                 hint: "> means greater than"
                 question_score: "10"
         2:
-            question_text: "Which symbols should be filled in on the blanks?"
+            question_text: "Which symbols should be filled in on the two blanks?"
             code: |
                 guests = {ask} 'How many people are at the party?'
                 {if} guests _ 130
                     {print} 'You can come in!'
                 {if} guests _ 130
-                    {print} 'Im sorry, the club is full. You have to wait for a guest to leave'
+                    {print} 'Im sorry, the club is full. '
+                    {print} 'You have to wait for a guest to leave'
             mp_choice_options:
-            -   option: " > and < "
+            -   option: "> and <"
                 feedback: "That's not it"
-            -   option: "= and >="
+            -   option: "`=` and >="
                 feedback: "That's not it"
             -   option: "< and >="
                 feedback: "You are right"
-            -   option: "+ and =="
+            -   option: " `+` and `==`"
                 feedback: "That's not it"
                 correct_answer: "C"
                 hint: "There are 130 people allowed in the club"
@@ -3144,7 +3145,7 @@ levels:
         3:
             question_text: "What should be filled in in the blanks?"
             code: |
-                {print} Whoever gets the most points wins!
+                {print} 'Whoever gets the most points wins!'
                 {if} points_player_1 < points_player_2
                     {print} _
             mp_choice_options:
@@ -3163,20 +3164,20 @@ levels:
             question_text: "What's wrong with this code?"
             code: |
               price = 10
-              buy = {ask} Whould you like to buy this teddybear?
-              money = {ask} 'How much money do you have?'
+              buy = {ask} 'Would you like to buy this teddy bear?'
+              money = {ask} How much money do you have?
               {if} money >= price and buy == 'yes'
-                  {print} 'You should buy the bear!'
+                  {print} 'You can buy the bear!'
               {else}
-                  {print} 'You shouldn't buy this bear!'
+                  {print} 'You cannot buy this bear!'
             mp_choice_options:
-            -   option: "They should have used == instead of = in line 1"
+            -   option: "In line 1 == should be used instead of ="
                 feedback: "No that's not it"
-            -   option: "They should have used quotation marks in line 2"
+            -   option: "Line 2 misses quotation marks"
                 feedback: "You are correct"
-            -   option: "They should have used = instead of == in line 4"
+            -   option: "In line 4 = should have been used instead of =="
                 feedback: "No that's not it"
-            -   option: "They should have used the <= symbol instead of >= in line 4"
+            -   option: "In line 4 <= should have been used instead of >="
                 feedback: "No that's not it"
                 correct_answer: "B"
                 hint: "The symbols are right"
@@ -3184,8 +3185,8 @@ levels:
         5:
             question_text: "Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? "
             code: |
-              age = {ask} How old are you?
-              ticket = {ask} Do you have a ticket?
+              age = {ask} 'How old are you?'
+              ticket = {ask} 'Do you have a ticket?'
               {if} age _ and ticket == 'yes'
                   {print} 'You can enter the movie theater'
               {else}
@@ -3205,12 +3206,12 @@ levels:
         6:
             question_text: "How many times do you have to say you are annoyed before this annoying game stops?"
             code: |
-              lifes = 2
+              lives = 2
               {repeat} 10 times
-                  {if} lifes =! 0
-                    answer {ask} 'Are you annoyed yet?'
-                    {if} answer == 'yes'
-                        lifes = lifes - 1
+                  {if} lives != 0
+                      answer = {ask} 'Are you annoyed yet?'
+                  {if} answer == 'yes'
+                      lives = lives - 1
             mp_choice_options:
             -   option: "10 times"
                 feedback: "It stops after 2 times"
@@ -3221,24 +3222,24 @@ levels:
             -   option: "2 times"
                 feedback: "That is correct"
                 correct_answer: "D"
-                hint: "=! means 'is not'"
+                hint: "!= means 'is not'"
                 question_score: "10"
         7:
             question_text: "What should be filled in on the 3 blanks?"
             code: |
-              print 'Guess which number'
+              {print} 'Guess which number'
               numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-              number = numbers at random
+              number = numbers {at} {random}
               game = 'on'
-              for i in range 1 to 10
-                  if game == 'on'
-                      guess = ask 'Which number do you think it is?'
-                      if guess < number
-                          print _
-                      if guess > number
-                          print _
-                      if guess == number
-                          print _
+              {for} i {in} {range} 1 {to} 10
+                  {if} game == 'on'
+                      guess = {ask} 'Which number do you think it is?'
+                      {if} guess < number
+                          {print} _
+                      {if} guess > number
+                          {print} _
+                      {if} guess == number
+                          {print} _
                           game = 'over'
             mp_choice_options:
             -   option: "'Lower' 'Higher' 'You win!'"
