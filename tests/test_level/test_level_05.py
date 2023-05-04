@@ -22,17 +22,18 @@ class TestsLevel5(HedyTester):
     #
     # if tests
     #
-    def test_if_equality_linebreak_print(self):
+    @parameterized.expand(HedyTester.commands_level_4)
+    def test_if_equality_linebreak_print(self, hedy, python):
         # line breaks after if-condition are allowed
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(f"""\
         naam is Hedy
         if naam is Hedy
-        print 'leuk'""")
+        {hedy}""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         naam = 'Hedy'
         if naam == 'Hedy':
-          print(f'leuk')""")
+          {python}""")
 
         self.single_level_tester(code=code, expected=expected)
 

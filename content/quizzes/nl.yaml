@@ -2688,155 +2688,256 @@ levels:
             hint: "Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied."
             question_score: '10'
     13:
-        4:
-            correct_answer: A
-            question_text: Which line of code should follow this line in rock-paper-scissors game?
-            code: if computer_choice is 'rock' and your_choice is 'paper'
-            mp_choice_options:
-            -   option: print 'you win'
-                feedback: You win!
-            -   option: print 'you lose'
-                feedback: You lose!
-            -   option: print 'tie'
-                feedback: It's only a tie if both choices are the same
-            -   option: print 'try again'
-                feedback: Try again!
-            hint: Paper beats rock
-            question_score: '10'
-        7:
-            hint: Read the last 4 lines carefully
-            question_score: '10'
-            question_text: Which statement is false?
-            code: "print 'Thank you for helping me take care of my pets'\nprint 'Here is a program to help feed them'\nanimal is ask 'What kind of animal are they?'\ncolor is ask 'What colour are they?'\nif animal is 'cat' and color = 'grey'\n    print 'That is Abby. She eats 3 scoops of cat nibbles'\nif animal is 'cat' and color = 'orange'\n    print 'That is Milo. He eats 4 scoops of cat nibbles'\nif animal is 'bird' or color is 'black'\n    print 'I fed them this moring! They do not need more food today'\nif animal is 'hamster' and color is 'brown'\n    print 'You can feed them a piece of carrot'"
-            mp_choice_options:
-            -   option: The grey cat is called Abby
-                feedback: This is true!
-            -   option: Milo the orange cat eats 4 scoops of cat nibbles
-                feedback: This is true
-            -   option: The black hamster needs to be fed a piece of carrot
-                feedback: Great job!
-            -   option: The yellow bird was fed this morning
-                feedback: This is true
-            correct_answer: C
-        10:
-            question_score: '10'
-            question_text: Which command needs to be in line 8 at the place of the ??? ?
-            code: "print 'Welcome to the product finder of this supermarkt'\nitem is ask 'What product are you looking for?'\nbakery = 'bread', 'buns', 'muffins'\ndrinks = 'soda', 'water', 'lemonade'\nsnacks = 'chips', 'nuts', 'dips'\nfrozen = 'fries', 'icecream', 'pizza'\nfruit = 'bananas', 'apples', 'oranges'\nif item in snacks ??? item in drinks\n    print 'This item is in aile 3'\nif item in bakery or item in bakery\n    print 'This item in in the back of the store'\nif item in fruit\n    print 'The fruit is sold near the register'"
-            mp_choice_options:
-            -   option: and
-                feedback: There are no items that are both the list of snacks and the list of drinks
-            -   option: or
-                feedback: Great job!
-            -   option: in
-                feedback: No
-            -   option: if
-                feedback: No
-            correct_answer: B
-            hint: The item is either in the list of snacks, or in the list of drinks
-        1:
-            question_text: Which code should be filled in at the ??? ?
-            code: "name = ask 'What is your name?'\nsong = ask 'Whould you like to hear a song?'\nbirthday = ask 'Is today your birthday?'\n???\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday. dear ' name\n  print 'Happy Birthday to you!'"
-            mp_choice_options:
-            -   option: "```\nif birthday and song = 'yes'\n```"
-                feedback: Almost there
-            -   option: "```\nif birthday = 'yes' and name = 'Hedy'\n```"
-                feedback: Hedy only sings for you if you like to hear a song
-            -   option: "```\nif song = 'yes' and birthday = 'yes'\n```"
-                feedback: Super!
-            -   option: "```\nif song = 'yes' or birthday = 'yes'\n```"
-                feedback: Hedy only sings if both answers are yes
-            correct_answer: C
-            hint: Hedy sings if you want to hear a song and it's you birthday
-            question_score: '10'
-        2:
-            question_text: Which command is missing in the code at the place of the ??? ?
-            code: "menu = 'cheese', 'sausage rolls', 'cookies'\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'vegan' ??? diet = 'halal'\n    remove 'sausage rolls' from menu"
-            mp_choice_options:
-            -   option: and
-                feedback: You don't have to be vegan and muslim
-            -   option: or
-                feedback: Great thinking!
-            -   option: ' + '
-                feedback: No
-            -   option: print
-                feedback: No
-            correct_answer: B
-            hint: Neither vegans nor muslims can eat sausage rolls.
-            question_score: '10'
-        3:
-            question_text: Which output is given to a member without a discount code?
-            code: "member = ask 'Do you have a membership card?'\ndiscount = ask 'Do you have a discount code?'\nif member = 'yes' or discount = 'yes'\n    print 'You get a free apple pie!'\nelse\n    print 'That will be 5 dollars please'"
-            mp_choice_options:
-            -   option: You get a free pie!
-                feedback: Great job!
-            -   option: That will be 5 dollars please
-                feedback: That is not true
-            -   option: This code won't work, so there is no output
-                feedback: There is nothing wrong with the code
-            -   option: There is no way of knowing
-                feedback: There is! Read the question carefully
-            correct_answer: A
-            hint: Mind the command 'or' in line 3
-            question_score: '10'
-        5:
-            question_text: Which statement is true about this code?
-            code: "if name = 'Cinderella' and shoe_size = '38'\n    print 'You are my one true love!'"
-            mp_choice_options:
-            -   option: Every person with shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person named Cinderella is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person that is named Cinderella and has shoe size 38 is this prince's one true love
-                feedback: Fantastic!
-            -   option: Every person that's not named Cinderella and does not have shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            correct_answer: C
-            hint: Both statements have to be true
-            question_score: '10'
-        6:
-            question_text: Which statement about this code is true?
-            code: "print 'Let me guess which family member you are!'\nglasses = ask 'Do you wear glasses?'\nfemale = ask 'Are you female?'\nif glasses = 'yes' and female = 'yes'\n    print 'You must be Sophie!'\nif glasses = 'no' and female = 'yes'\n   print 'You must be Marleen!'\nif glasses = 'yes' and female = 'no'\n    print 'You must be Wouter!'\nif glasses = 'no' and female = 'no'\n    print 'You must be Michael!'"
-            mp_choice_options:
-            -   option: Michael is a boy with glasses
-                feedback: Try again
-            -   option: Marleen is a girl with glasses
-                feedback: Try again
-            -   option: Wouter is a boy without glasses
-                feedback: Try again
-            -   option: Sophie is a girl with glasses
-                feedback: Great job!
-            correct_answer: D
-            hint: Take a good look! Or do you need glasses?
-            question_score: '10'
-        8:
-            question_text: What output do you get if you order popcorn but no drink?
-            code: "print 'Welcome to the movie theater'\npopcorn = ask 'Would you like some popcorn?'\ndrink = ask 'Would you like a drink?'\nif popcorn = 'yes' and drink = 'yes'\n    print 'That will be 8 dollars please'\nif popcorn = 'no' and drink = 'yes'\n   print 'That will be 3 dollars please'\nif popcorn = 'yes' and drink = 'no'\n    print 'That will be 5 dollars please'\nif popcorn = 'no' and drink = 'no'\n    print 'Ok'\nprint 'Enjoy the movie'"
-            mp_choice_options:
-            -   option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
-                feedback: You have paid too much!
-            -   option: "Welcome to the movie theater\nThat will be 5 dollars please\nEnjoy the movie"
-                feedback: Amazing!
-            -   option: "Welcome to the movie theater\nThat will be 3 dollars please\nEnjoy the movie"
-                feedback: That's not enough money!
-            -   option: "Welcome to the movie theater\nOk\nEnjoy the movie"
-                feedback: You have to pay for your popcorn!
-            correct_answer: B
-            hint: popcorn = yes and drink = no
-            question_score: '10'
-        9:
-            question_text: What is wrong with this code?
-            code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
-            mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles = 'no'"
-                feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles = 'no'"
-                feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles = 'yes'"
-                feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles = 'no'"
-                feedback: This is not what I ordered!
-            correct_answer: A
-            hint: There is a mistake in line 3
-            question_score: '10'
-
-            
+      1:
+        question_text: "Wat moet worden ingevuld op de _ ?"
+        code: |-
+          naam = {ask} 'Hoe heet je?'
+          lied = {ask} 'Wil je een liedje horen?'
+          jarig = {ask} 'Ben je jarig vandaag?'
+          _
+              {print} 'Happy Birthday to you!'
+              {print} 'Happy Birthday to you!'
+              {print} 'Happy Birthday dear ' naam
+              {print} 'Happy Birthday to you!'
+        mp_choice_options:
+          - option: |-
+              ```
+              {if} jarig {and} lied = 'ja'
+              ```
+            feedback: "Bijna!"
+          - option: |-
+              ```
+              {if} jarig = 'ja' {and} naam = 'Hedy'
+              ```
+            feedback: "Hedy zingt alleen als jij dat wil"
+          - option: |-
+              ```
+              {if} lied = 'ja' {and} jarig = 'ja'
+              ```
+            feedback: "Super!"
+          - option: |-
+              ```
+              {if} lied = 'ja' {or} jarig = 'ja'
+              ```
+            feedback: "Hedy zingt alleen als beide antwoorden ja zijn"
+        correct_answer: "C"
+        hint: "Hedy zingt alleen als je jarig bent en een liedje wil horen"
+        question_score: '10'
+      2:
+        question_text: "Welk commando mist op de _ ?"
+        code: |-
+          menu = 'kaas', 'worstenbroodje', 'koekjes'
+          dieet = {ask} 'heb je dieetwensen?'
+          {if} dieet = 'vegan' _ dieet = 'halal'
+              {remove} 'worstenbroodje' {from} menu
+        mp_choice_options:
+          - option: "`{and}`"
+            feedback: "Je hoeft niet vegan èn moslim te zijn"
+          - option: "`{or}`"
+            feedback: "Goed bedacht!"
+          - option: " `+` "
+            feedback: "Nee"
+          - option: "`{print}`"
+            feedback: "Nee"
+        correct_answer: "B"
+        hint: "Vegans en moslims eten allebei geen worstenbroodjes."
+        question_score: '10'
+      3:
+        question_text: "Welke uitvoer krijgt een lid zonder kortingcode?"
+        code: |-
+          lid = {ask} 'Heb je een lidmaatschapskaart?'
+          korting = {ask} 'Heb je een kortingscode?'
+          {if} lid = 'ja' {or} discount = 'ja'
+              {print} 'Je krijgt een gratis appeltaart!'
+          {else}
+              {print} 'Dat wordt dan 5 euro, alstublieft'
+        mp_choice_options:
+          - option: "Je krijgt een gratis appeltaart!!"
+            feedback: "Goed gedaan!"
+          - option: "Dat wordt dan 5 euro, alstublieft"
+            feedback: "Dat klopt niet"
+          - option: "Deze code klopt niet en geeft dus geen uitvoer"
+            feedback: "Er is niks mis met deze code"
+          - option: "Dat kun je niet weten"
+            feedback: "Zeker wel! Lees de code goed."
+        correct_answer: "A"
+        hint: "Let op het `{or}` commando in regel 3"
+        question_score: '10'
+      4:
+        question_text: "Wat moet de volgende regel zijn in dit steen papier schaar spel?"
+        code: |-
+          {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'papier'
+        mp_choice_options:
+          - option: "```\n{print} 'Jij wint'\n```"
+            feedback: "Jij wint!"
+          - option: "```\n{print} 'Jij verliest'\n```"
+            feedback: "Je verliest!"
+          - option: "```\n{print} 'Gelijkspel'\n```"
+            feedback: "Je hebt alleen gelijkspel als je hetzelfde kiest"
+          - option: "```\n{print} 'Probeer opnieuw'\n```"
+            feedback: "Probeer opnieuw!"
+        correct_answer: "A"
+        hint: "Papier verslaat steen"
+        question_score: '10'
+      5:
+        question_text: "Welke stelling over deze code is waar?"
+        code: |-
+          {if} naam = 'Assepoester' {and} schoenmaat = '38'
+              {print} 'Jij bent de ware!'
+        mp_choice_options:
+          - option: "Iedereen met schoenmaat 38 is de ware"
+            feedback: "De prins is wel iets kieskeuriger!"
+          - option: "Iedereen die Assepoester heet is de ware"
+            feedback: "De prins is wel iets kieskeuriger!"
+          - option: "Iedereen die Assepoester heet en schoenmaat 38 heeft is de ware"
+            feedback: "Fantastisch!"
+          - option: "Iedereen die geen Assepoester heet en geen schoenmaat 38 heeft is de ware"
+            feedback: "De prins is wel iets kieskeuriger!"
+        correct_answer: "C"
+        hint: "Beide statemenst moeten waar zijn"
+        question_score: '10'
+      6:
+        question_text: "Welke stelling over deze code is waar?"
+        code: |-
+          {print} 'Laat me raden welk familielid jij bent!'
+          bril = {ask} 'Draag je een bril?'
+          vrouw = {ask} 'Ben jij een vrouw?'
+          {if} bril = 'ja' {and} vrouw = 'ja'
+              {print} 'Jij bent Sophie!'
+          {if} bril = 'nee' {and} vrouw = 'ja'
+             {print} 'Jij bent Marleen!'
+          {if} bril = 'ja' {and} vrouw = 'nee'
+              {print} 'Jij bent Wouter!'
+          {if} bril = 'nee' {and} vrouw = 'nee'
+              {print} 'Jij bent Michael!'
+        mp_choice_options:
+          - option: "Michael is een man met een bril"
+            feedback: "Helaas"
+          - option: "Marleen is een vrouw met een bril"
+            feedback: "Helaas"
+          - option: "Wouter is een vrouw met een bril"
+            feedback: "Helaas"
+          - option: "Sophie is een vrouw met een bril"
+            feedback: "Goedzo!"
+        correct_answer: "D"
+        hint: "Kijk goed! Of heb je een bril nodig?"
+        question_score: '10'
+      7:
+        question_text: "Welke stelling is FOUT ?"
+        code: |-
+          {print} 'Lief dat je me met mijn huisdieren wil helpen'
+          {print} 'Hier is een programma om ze te helpen voeren'
+          dier = {ask} 'Wat voor dier is het?'
+          kleur = {ask} 'Welke kleur heeft het?'
+          {if} dier = 'cat' {and} kleur = 'grijs'
+              {print} 'Dit is Abby. Zij krijgt 3 scheppen kattenbrokjes'
+          {if} dier = 'kat' {and} kleur = 'oranje'
+              {print} 'Dat is Milo. Hij eet 4 scheppen kattenbrokjes'
+          {if} dier = 'vogel' {or} kleur = 'zwart'
+              {print} 'Deze heeft al genoeg gehad! Niet voeren!'
+          {if} dier = 'hamster' {and} kleur = 'bruin'
+              {print} 'Hij mag een stukje wortel'
+        mp_choice_options:
+          - option: "De grijze kat heet Abby"
+            feedback: "Klopt wel!"
+          - option: "Milo de oranje kat eet 4 scheppen brokjes"
+            feedback: "Klopt wel!"
+          - option: "De zwarte hamster moet een stukje wortel krijgen"
+            feedback: "Goed gedaan!"
+          - option: "Het gele vogeltje heeft genoeg gehad"
+            feedback: "Klopt wel!"
+        correct_answer: "C"
+        hint: "Wat is NIET waar?"
+        question_score: '10'
+      8:
+        question_text: "Welke output krijg je als je alleen popcorn bestelt?"
+        code: |-
+          {print} 'Welkom in de bioscoop'
+          popcorn = {ask} 'Wil je wat popcorn?'
+          drinken = {ask} 'Wil je een drankje?'
+          {if} popcorn = 'ja' {and} drinken = 'ja'
+              {print} '8 euro alstublieft'
+          {if} popcorn = 'nee' {and} drinken = 'ja'
+             {print} '3 euro alstublieft'
+          {if} popcorn = 'ja' {and} drinken = 'nee'
+              {print} '5 euro alstublieft'
+          {if} popcorn = 'nee' {and} drinken = 'nee'
+              {print} 'Ok'
+          {print} 'Fijne voorstelling!'
+        mp_choice_options:
+          - option: |-
+              Welkom in de bioscoop
+              8 euro alstublieft
+              Fijne voorstelling!
+            feedback: "Je betaalt te veel!"
+          - option: |-
+              Welkom in de bioscoop
+              5 euro alstublieft
+              Fijne voorstelling!
+            feedback: "Wow!"
+          - option: |-
+              Welkom in de bioscoop
+              3 euro alstublieft
+              Fijne voorstelling!
+            feedback: "Dat is niet genoeg geld!"
+          - option: |-
+              Welkom in de bioscoop
+              Ok
+              Fijne voorstelling!
+            feedback: "Je moet wel betalen voor de popcorn!"
+        correct_answer: "B"
+        hint: "popcorn = ja en drinken = nee"
+        question_score: '10'
+      9:
+        question_text: "Wat is er mis met deze code?"
+        code: |-
+          1  chocolade = {ask} 'Wil je chocosaus op je ijs?'
+          2  spikkels = {ask} 'Wil je spikkels op je ijs?'
+          3  {if} chocolade {and} spikkels = 'ja'
+          4      {print} 'IJs met chocosaus en spikkels, komt eraan!'
+          5  {if} chocolade = 'ja' {and} spikkels = 'nee'
+          6      {print} 'IJs met chocosaus, komt eraan!'
+          7  {if} chocolade = 'nee' {and} spikkels = 'ja'
+          8      {print} 'IJs met spikkels, komt eraan!'
+          9  {if} chocolade = 'nee' {and} spikkels = 'nee'
+          10     {print} 'IJs zonder fratsen, komt eraan!'
+        mp_choice_options:
+          - option: "Regel 3 moet zijn: \n```\n {if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
+            feedback: "Correct!"
+          - option: "Regel 3 moet zijn:  \n```\n{if} chocolade = 'nee' {and} spikkels = 'nee'\n```\n"
+            feedback: "Dit heb ik niet besteld!"
+          - option: "Regel 5 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'ja'\n```\n"
+            feedback: "Dit heb ik niet besteld!"
+          - option: "Regel 7 moet zijn:  \n```\n{if} chocolade = 'ja' {and} spikkels = 'nee'\n```\n"
+            feedback: "Dit heb ik niet besteld!"
+        correct_answer: "A"
+        hint: "Er is iets mis met regel 3"
+        question_score: '10'
+      10:
+        question_text: "Wat moet er op de _ in regel 8 worden ingevuld?"
+        code: |-
+          {print} 'Vind het product in de supermarkt!'
+          item = {ask} 'Wat zoekt u?'
+          bakkerij = 'brood', 'bolletjes', 'muffins'
+          drinken = 'cola', 'water', 'limonade'
+          snacks = 'chips', 'nootjes', 'dipsaus'
+          vriezer = 'friet', 'roomijs', 'pizza'
+          fruit = 'bananen', 'appels', 'mandarijnen'
+          {if} item {in} snacks _ item {in} drinken
+              {print} 'Dit item vindt u in gangpad 3'
+          {if} item {in} bakkerij {or} item {in} vriezer
+              {print} 'Dit item vindt u achterin de winkel'
+          {if} item {in} fruit
+              {print} 'Het fruit ligt bij de kassa'
+        mp_choice_options:
+          - option: "`{and}`"
+            feedback: "Er zijn geen items die op beide lijsten staan"
+          - option: "`{or}`"
+            feedback: "Geweldig!"
+          - option: "`{in}`"
+            feedback: "Nee"
+          - option: "`{if}`"
+            feedback: "Nee"
+        correct_answer: "B"
+        hint: "Het item staat niet op meerdere lijsten, dus je kunt geen `{and}` gebruiken"
+        question_score: '10'
