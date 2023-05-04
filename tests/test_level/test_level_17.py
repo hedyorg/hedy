@@ -535,3 +535,12 @@ class TestsLevel17(HedyTester):
               break""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function:
+            define nested_function:
+                print 1
+        call simple_function""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)
