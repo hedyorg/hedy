@@ -40,10 +40,12 @@ htmx.defineExtension('disable-element', {
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content);
     var sortable : HTMLElement =  content.querySelector('.sortable') as HTMLElement;
-    new Sortable(sortable, {
-        animation: 150,
-        ghostClass: 'drop-adventures-active'
-    })
+    if (sortable !== null ) {
+        new Sortable(sortable, {
+            animation: 150,
+            ghostClass: 'drop-adventures-active'
+        })
+    }
 });
 
 interface HtmxEvent {

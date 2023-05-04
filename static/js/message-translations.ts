@@ -903,7 +903,6 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "ro": {
-    "adventures_restored": "The default adventures have been restored!",
     "CheckInternet": "Verifică dacă ai semnal la internet.",
     "Connection_error": "Nu am putut contacta serverul.",
     "Empty_output": "Acest program funcționează dar nu printează nimic. Adaugă o comandă de printare sau folosește țestoasa să obții un rezultat.",
@@ -916,6 +915,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "Excelent!\nExtraordinar!\nFoarte bine!\nExcelent!\nFoarte bine!",
     "Transpile_warning": "Atenție!",
     "Unsaved_Changes": "Ai un program care nu este salvat. Dorești să ieși fără salvare?",
+    "adventures_restored": "The default adventures have been restored!",
     "copy_link_to_share": "Copy link to share",
     "customization_deleted": "Customizations successfully deleted.",
     "dice": "🎲",
