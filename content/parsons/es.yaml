@@ -128,9 +128,9 @@ levels:
             code: |-
                 jugadores = Liam, Noah, Sophie
                 jugador1 = jugadores {at} {random}
+                {remove} jugador1 {from} jugadores
                 jugador2 = jugadores {at} {random}
                 {print} jugador1 ' se enfrentará primero a ' jugador2
-                {remove} jugador1 {from} jugadores
                 {remove} jugador2 {from} jugadores
                 {print} 'El ganador se enfrentará a ' jugadores {at} {random}
         2:
