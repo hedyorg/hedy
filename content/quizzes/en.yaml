@@ -3225,7 +3225,7 @@ levels:
                 hint: "!= means 'is not'"
                 question_score: "10"
         7:
-            question_text: "What should be filled in on the 3 blanks?"
+            question_text: "What should be filled in on the three blanks?"
             code: |
               {print} 'Guess which number'
               numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -3242,13 +3242,13 @@ levels:
                           {print} _
                           game = 'over'
             mp_choice_options:
-            -   option: "'Lower' 'Higher' 'You win!'"
+            -   option: "'Lower' and 'Higher' and 'You win!'"
                 feedback: "That's not quite right."
             -   option: "'Higher' 'Lower' 'You win!'"
                 feedback: "You win!"
-            -   option: "'You win!' 'Lower!' 'Higher'"
+            -   option: "'You win!' and 'Lower!' and 'Higher'"
                 feedback: "That's not quite right."
-            -   option: "'Lower!' 'You win!' 'Higher!'"
+            -   option: "'Lower!' and 'You win!' and 'Higher!'"
                 feedback: "That's not quite right."
                 correct_answer: "B"
                 hint: "The last one should say you win."
@@ -3260,7 +3260,7 @@ levels:
               {if} name == 'Hedy'
                   {print} 'Me too!'
             mp_choice_options:
-            -   option: ">-"
+            -   option: ">="
                 feedback: "This is not a symbol."
             -   option: "=="
                 feedback: "We are not comparing anything, just asking."
@@ -3272,15 +3272,15 @@ levels:
                 hint: "We are not comparing anything, we are just asking a name."
                 question_score: "10"
         9:
-            question_text: "How many pieces of chocolate will give you a stomachache according to this fitbit?"
+            question_text: "How many pieces of chocolate will give you a stomach ache according to this fitbit?"
             code: |
               chocolate = {ask} 'How many pieces of chocolate have you eaten?'
-                {if} chocolate =< 2
-                    {print} 'Thats a healthy amount'
+                {if} chocolate <= 2
+                    {print} 'That is a healthy amount'
                 {if} chocolate > 2 and chocolate =< 8
-                    {print} 'Thats a bit much'
+                    {print} 'That is a bit much'
                 {if} chocolate > 8
-                    {print} You will get a stomachache!
+                    {print} 'You will get a stomach ache!'
             mp_choice_options:
             -   option: "1 or more"
                 feedback: "No"
@@ -3291,7 +3291,7 @@ levels:
             -   option: "9 or more"
                 feedback: "Great!"
                 correct_answer: "D"
-                hint: "> 8 means more than 8. "
+                hint: "> 8 means more than 8"
                 question_score: "10"
         10:
             question_text: "Which of these codes has used the correct = or == symbol?"
