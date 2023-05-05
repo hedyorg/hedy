@@ -1628,43 +1628,38 @@ levels:
             hint: "Something is wrong with indentation"
             question_score: '10'
         6:
-            question_text: "Which code was used to create this output?"
+            question_text: "What will be the output of this code when we enter pancakes?"
+            code: |-
+                {print} 'Welcome to restaurant Hedy'
+                {repeat} 2 {times}
+                    food {is} {ask} 'What do you want to eat?'
+                    {print} food
             mp_choice_options:
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
-                    {print} food
-                    ```
-                feedback: "You need to take 2 orders."
+                    Welcome to restaurant Hedy
+                    Pancakes
+                feedback: "There is no repetition in this answer."
             -   option: |
-                    ```
-                    {repeat} 2 {times}
-                        {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
-                        {print} food
-                    ```
-                feedback: "The welcome line would be printed twice in this code too"
+                    Welcome to restaurant Hedy
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "This answer also repeats the welcome message"
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                    {print} food
-                    ```
-                feedback: "Now only the last order is printed."
+                    Welcome to restaurant Hedy
+                    What do you want to eat?
+                    What do you want to eat?
+                    Pancakes
+                    Pancakes
+                feedback: "Almost! But look at the question, it is not repeated."
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                    ```
-                feedback: "Потрясающе!"
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback:  "Well done!"
             correct_answer: "D"
-            hint: "Pay attention to what sould be repeated and what should only be printed once."
+            hint: "The first sentence and question will not be repeated"
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Что не так с этим кодом?"
             code: |-
@@ -2806,13 +2801,13 @@ levels:
             question_text: Что не так с этим кодом?
             code: "1 шоколад = спросить \"Хотите шоколадный соус к мороженому?\".\n2 sprinkles = спросить \"Хотите ли вы посыпать мороженое посыпкой?\".\n3 if chocolate and sprinkles = 'yes'\n4 print 'Мороженое с шоколадным соусом и посыпкой, скоро будет!'\n5 если шоколад = \"да\" и посыпки = \"нет\n6 выведите 'Мороженое с шоколадным соусом, скоро будет!\n7 если шоколад = \"нет\" и посыпка = \"да\n8 выведите 'Мороженое с посыпкой, скоро будет'\n9 если шоколад = \"нет\" и посыпка = \"нет\n10 выведите 'Обычное мороженое, скоро будет!"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Правильно!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
             correct_answer: "A"
             hint: There is a mistake in line 3
