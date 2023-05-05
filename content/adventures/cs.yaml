@@ -29,11 +29,11 @@ adventures:
                     ```
 
                     `print` stále funguje jako v úrovni 1 a už nepotřebuješ `echo`.
-                start_code: print Ahoj světe!
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                start_code: '{print} Ahoj světe!'
+                example_code: "```\njméno {is} Hedy\nvěk {is} 15\n{print} jméno je věk let\n```\n"
                 story_text_2: "`{print}` funguje stále stejně, ale příkaz `{ask}` se změnil. I u příkazu `{ask}` musíš použít proměnnou. Bude to vypadat takhle:\n"
                 example_code_2: "```\njméno {is} {ask} Jak se jmenuješ?\n{print} Ahoj jméno\n```\n"
-                story_text_3: "Další nový příkaz této úrovně je `{sleep}`, který tvůj program na jednu vteřinu zastaví. Pokud za příkaz {sleep} napíšeš číslo, program se zstaví na právě tolik vteřin.\n"
+                story_text_3: "Další nový příkaz této úrovně je `{sleep}`, který tvůj program na jednu vteřinu zastaví. Pokud za příkaz {sleep} napíšeš číslo, program se zastaví na právě tolik vteřin.\n"
                 example_code_3: "```\n{print} Moje oblíbená barva je...\n{sleep} 2\n{print} zelená!\n```\n"
             3:
                 story_text: |-
@@ -44,46 +44,30 @@ adventures:
                     ```
 
                     Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
-                start_code: print Ahoj světe!
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                start_code: '{print} Ahoj světe!'
+                example_code: "```\nzvířata {is} pes, kočka, klokan\n{print} zvířata {at} {random}\n```\n"
                 story_text_2: Také můžeš přidat položky do seznamu příkazem `{add}` a odstranit je příkazem `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                example_code_2: "```\nzvířata {is} pes, kočka, klokan\n{add} tučňák {to_list} zvířata\n{remove} kočka {from} zvířata\n{print} zvířata {at} {random}\n```\n"
             4:
-                start_code: print 'Ahoj světe!'
-                story_text: |2
-
-                    V úrovni 4 se mění `ask` a `print`.
-
+                start_code: "{print} 'Ahoj světe!'"
+                story_text: |
+                    V úrovni 4 se mění `{ask}` a `{print}`.
                     Text, který chceš vytisknout, teď musíš dát do uvozovek.
-
-                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `is`.
-
+                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil/a pomocí `{is}`.
                     Většina programovacích jazyků také používá při vypisování uvozovky, takže se dostáváme zase o krok blíže ke skutečnému programování!
-
-                    Příkazy najdeš opět vlevo a úkoly v záložkách.
-                    Obtížnost zadání se stupňuje, proto je nejlepší začít s příběhem vlevo a pokračovat doprava, abys měl*a postupně větší výzvy.
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "V každé další záložce na tebe čekají těžší a těžší ůkoly.\nNejlepší je začít s příběhem který je nalevo, a pokračovat napravo, pokud chceš větší výzvu.\n"
+                example_code: "```\n{print} 'Odteď musíte používat uvozovky!'\nodpověď {is} {ask} \"Co musíme od teď používat?\n{print} 'Musíme používat ' odpověď\n```\n"
+                story_text_2: "Důležité! Pamatujte, že když teď používáme uvozovky, Hedy bude zmatená, když použijete apostrof například pro anglické výrazy jako \"I'm\" nebo \"What's\".\nNezapomeňte tyto apostrofy odstranit a změnit pravopis na \"I am\" nebo \"What is\".\nPodívejte se na příklad kódu, abyste viděli nesprávný způsob použití apostrofů.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
-                    jmeno is ask 'Jak se jmenuješ?'
-                    if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
-                story_text: |-
-                    `ask` a` print` fungují stále jako na úrovni 4.
+                    jméno {is} {ask} 'Jak se jmenuješ?'
+                    {if} jméno {is} Hedy {print} 'Super!' {else} {print} 'Hm.'
+                story_text: |
+                    V úrovni 5 je něco nového, `{if}`! S `{if}` si můžete vybrat ze dvou různých možností.
+                    Tento kód vypíše "Pěkně!" , pokud zadáte Hedy, nebo "Fůj!", pokud zadáte něco jiného.
 
-                     V úrovni 5 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
-
-                     ```
-                     jmeno is ask 'Jak se jmenuješ?'
-                     if jmeno is Hedy print 'Ahoj!' else print 'Ráda tě poznávám!'
-                     ```
-
-                     Tento kód vypíše Ahoj!, pokud jako jméno zadáš Hedy, a Ráda tě poznávám!, pokud odpovíš něco jiného.
-
-
-                     Také ve 4. úrovni jsou zadání v záložkách postupně obtížnější. Proto na nich pracuj zleva doprava.
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                    `{ask}` a `{print}` stále fungují stejně jako v úrovni 4.
+                example_code: "```\njméno {is} {ask} 'jak se jmenuješ?'\n{if} jméno {is} Hedy {print} 'Pěkně!' {else} {print} 'Fůj!'\n```\n"
                 example_code_3: "```\npěkné_barvy {is} zelená, žlutá\nbarva {is} {ask} 'Co je tvoje oblíbená barva?'\n{if} barva {in} pěkné_barvy {print} 'pěkné!'\n{else} {print} 'nic-moc'\n```\n"
                 story_text_3: "Pokud chceš skontrolovat jestli se něco nachází v seznamu, můžeš na to použít příkaz `{in}`.\nTento program vypíše pěkné! pokud si vybereš barvy zelená anebo žlutá, a nic-moc pokud si vybereš jinačí.\n"
                 story_text_2: "Někdy je kód za příkazem `{if}` příliš dlouhý a nevejde se dobře na jeden řádek. <br> Proto lze takový kód rozdělit na více řádků, začínajíc druhý řádek s `{else}` takhle:\n"
