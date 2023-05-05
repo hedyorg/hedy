@@ -1072,13 +1072,13 @@ levels:
         2:
             question_text: "Was benutzt du wenn du zwei Zahlen addieren möchtest?"
             mp_choice_options:
-            -   option: "-"
+            -   option: "`-`"
                 feedback: "Das ist es nicht"
             -   option: "plus"
                 feedback: "Das ist es nicht"
-            -   option: "*"
+            -   option: "`*`"
                 feedback: "Das ist es nicht"
-            -   option: "+"
+            -   option: "`+`"
                 feedback: "Richtig!"
             correct_answer: "D"
             hint: "Es ist das Pluszeichen."
@@ -1578,43 +1578,20 @@ levels:
             hint: "Etwas stimmt mit der Einrückung nicht"
             question_score: '10'
         6:
-            question_text: "Welcher Code wurde benutzt, um diese Ausgabe zu erzeugen?"
+            question_text: Which code was used to create this output?
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
             mp_choice_options:
-            -   option: |
-                    ```
-                    {print} 'Willkommen im Restaurant Hedy'
-                    essen = {ask} 'Was möchten Sie essen?'
-                    {print} essen
-                    ```
-                feedback: "Du musst 2 Bestellungen aufnehmen."
-            -   option: |
-                    ```
-                    {repeat} 2 {times}
-                        {print} 'Willkommen im Restaurant Hedy'
-                        essen = {ask} 'Was möchten Sie essen?'
-                        {print} essen
-                    ```
-                feedback: "Die Willkommenszeile würde ebenfalls zwei Mal in diesem Code ausgegeben werden"
-            -   option: |
-                    ```
-                    {print} 'Willkommen im Restaurant Hedy'
-                    {repeat} 2 {times}
-                        essen = {ask} 'Was möchten Sie essen?'
-                    {print} essen
-                    ```
-                feedback: "Nun wird nur die letzte Bestellung ausgegeben."
-            -   option: |
-                    ```
-                    {print} 'Willkommen im Restaurant Hedy'
-                    {repeat} 2 {times}
-                        essen = {ask} 'Was möchten Sie essen?'
-                        {print} essen
-                    ```
-                feedback: "Toll!"
-            correct_answer: "D"
-            hint: "Beachte was wiederholt werden sollte und was nur einmal ausgegeben werden sollte."
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\nfood = {ask} 'What would you like to eat?'\n{print} food\n```\n"
+                feedback: You need to take 2 orders.
+            -   option: "```\n{repeat} 2 {times}\n    {print} 'Welcome to restaurant Hedy'\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
+                feedback: The welcome line would be printed twice in this code too
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n{print} food\n```\n"
+                feedback: Now only the last order is printed.
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
+                feedback: Awesome!
+            correct_answer: D
+            hint: Pay attention to what sould be repeated and what should only be printed once.
             question_score: '10'
-            output: "Willkommen im Restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Was stimmt mit diesem Code nicht?"
             code: |-

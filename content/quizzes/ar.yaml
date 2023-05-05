@@ -1116,13 +1116,13 @@ levels:
         2:
             question_text: "Which sign do you use for an addition?"
             mp_choice_options:
-            -   option: "-"
+            -   option: "`-`"
                 feedback: "That's not it"
             -   option: "plus"
                 feedback: "That's not it"
-            -   option: "*"
+            -   option: "`*`"
                 feedback: "That's not it"
-            -   option: "+"
+            -   option: "`+`"
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "It's the plus sign."
@@ -1628,43 +1628,38 @@ levels:
             hint: "Something is wrong with indentation"
             question_score: '10'
         6:
-            question_text: "Which code was used to create this output?"
+            question_text: "What will be the output of this code when we enter pancakes?"
+            code: |-
+                {print} 'Welcome to restaurant Hedy'
+                {repeat} 2 {times}
+                    food {is} {ask} 'What do you want to eat?'
+                    {print} food
             mp_choice_options:
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
-                    {print} food
-                    ```
-                feedback: "You need to take 2 orders."
+                    Welcome to restaurant Hedy
+                    Pancakes
+                feedback: "There is no repetition in this answer."
             -   option: |
-                    ```
-                    {repeat} 2 {times}
-                        {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
-                        {print} food
-                    ```
-                feedback: "The welcome line would be printed twice in this code too"
+                    Welcome to restaurant Hedy
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "This answer also repeats the welcome message"
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                    {print} food
-                    ```
-                feedback: "Now only the last order is printed."
+                    Welcome to restaurant Hedy
+                    What do you want to eat?
+                    What do you want to eat?
+                    Pancakes
+                    Pancakes
+                feedback: "Almost! But look at the question, it is not repeated."
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                    ```
-                feedback: "Awesome!"
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback:  "Well done!"
             correct_answer: "D"
-            hint: "Pay attention to what sould be repeated and what should only be printed once."
+            hint: "The first sentence and question will not be repeated"
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "What is wrong with this code?"
             code: |-
