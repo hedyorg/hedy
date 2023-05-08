@@ -34,6 +34,8 @@ ADVENTURE_NAMES = [
     'restaurant',
     'story',
     'songs',
+    'songs_functions',
+    'turtle_functions',
     'turtle',
     'dishes',
     'dice',
@@ -162,6 +164,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'years',
         'calculator',
         'songs',
+        'songs_functions',
+        'turtle_functions',
         'restaurant',
         'haunted'
     ],

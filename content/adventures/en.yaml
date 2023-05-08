@@ -850,6 +850,28 @@ adventures:
                     _ _ '🧒 No, Hedy! Say ' new_word
                     ```
                 start_code: "# place your code here"
+    songs_functions:
+        name: "Sing a song with functions!"
+        description: "Print a song"
+        default_save_name: "Song-2"
+        levels:
+            11:
+                story_text: |
+                    Songs contain a lot of repetition. We can capture it with a function!
+
+                    ### Exercise
+                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                example_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+            
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} twinkle
+                    ```
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -1039,6 +1061,38 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: "# place your code here"
+    turtle_functions:
+        name: "Draw with functions!"
+        description: "Draw"
+        default_save_name: "Turtle-2"
+        levels:
+            11:
+                story_text: |
+                    We can use functions to draw more complex figures with less code.
+
+                    ### Exercise 1
+                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+                    
+                    ### Exercise 2
+                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+                    
+                    ### Exercise 3
+                    Create your own drawing with different figures. 
+                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                example_code: |
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
+
+                    ```
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
