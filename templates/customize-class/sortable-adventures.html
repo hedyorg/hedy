@@ -8,7 +8,7 @@
             hx-indicator="#indicator">
                 {% for adventure in customizations['sorted_adventures'][level|string] %}
                     {% if adventure.name in adventure_names %}
-                        <div class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative">
+                        <div class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure['name'] }}">
                             <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
                                   hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure['name'] }}&level={{ level }}" 
                                   hx-target="#adventure-dragger"

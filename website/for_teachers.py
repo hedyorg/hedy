@@ -208,7 +208,8 @@ class ForTeachersModule(WebsiteModule):
             min_level=min_level,
             class_id=class_id,
             javascript_page_options=dict(
-                page='customize-class'
+                page='customize-class',
+                class_id=class_id
             ))
 
     @route("/change-level", methods=["GET"])
