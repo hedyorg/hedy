@@ -26,9 +26,6 @@ def proper_json_dumps(x, **kwargs):
     return json.dumps(x, cls=EnhancedJSONEncoder, **kwargs)
 
 
-
-
-
 def proper_jsonify(x):
     """Replaces Flask's standard 'jsonify()' function.
     """
@@ -67,6 +64,7 @@ def strip_nones(x):
 
 class JinjaCompatibleJsonProvider(JSONProvider):
     """A JSON provider for Flask 2.3+ that removes Nones and Jinja Undefineds."""
+
     def dumps(self, obj, **kwargs):
         return proper_json_dumps(obj, **kwargs)
 
