@@ -19,7 +19,7 @@ describe('customize class page', () => {
       // following code checks every single checkbox on the current page:
       cy.get('[type="checkbox"]').check({force:true})
       cy.get('[type="checkbox"]').should('be.checked')
-      cy.get('[type="checkbox"]').uncheck()
+      cy.get('[type="checkbox"]').uncheck({force: true})
       cy.get('[type="checkbox"]').should('be.not.checked')
     });
 
@@ -210,7 +210,7 @@ describe('customize class page', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
       
-      cy.getBySel('enable_level_1').uncheck();      
+      cy.getBySel('enable_level_1').uncheck({force: true});      
       cy.get('#state-disabled').should('be.visible');
     })
 
