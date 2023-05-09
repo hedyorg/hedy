@@ -553,7 +553,7 @@ class TestAuth(AuthHelper):
                     'token': self.user['verify_token']}),
             expect_http_code=302,
             return_headers=True)
-        self.assertEqual(headers['location'], HOST + 'landing-page')
+        self.assertEqual(headers['location'], '/landing-page')
 
         # WHEN attepting to verify the user again (the operation should be idempotent)
         # THEN (again) receive a redirect from the server taking us to `/landing-page`
