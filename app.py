@@ -17,7 +17,7 @@ from os import path
 import static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g,
-                   redirect, request, send_file, url_for,
+                   redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -31,7 +31,7 @@ import hedyweb
 import utils
 from safe_format import safe_format
 from config import config
-from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify, JinjaCompatibleJsonProvider
+from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
