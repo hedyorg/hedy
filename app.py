@@ -1245,8 +1245,13 @@ def index_level():
     if current_user()['username']:
         highest_quiz = get_highest_quiz_level(current_user()['username'])
         # This function returns the character '-' in case there are no finished quizes
-        highest_level = 0 if highest_quiz == '-' else highest_quiz
-        return index(highest_level + 1, None)
+        if highest_quiz == '-':
+            level_rendered = 1
+        elif highest_quiz == hedy.HEDY_MAX_LEVEL:
+            level_rendered = hedy.HEDY_MAX_LEVEL
+        else:
+            level_rendered = highest_quiz + 1
+        return index(level_rendered, None)
     else:
         return index(1, None)
 
