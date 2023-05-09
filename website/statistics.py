@@ -251,7 +251,14 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-        data = []
+        # get data for graph from db, db conveniently stores amount of errors for student
+        data = self.db.get_program_stats([selected_student['username']], None, None)
+        data = _aggregate_for_keys(data, [level_key])
+        print("-" * 30)
+        print('MyData')
+        print(data)
+        print("-"*30)
+        data = _collect_graph_data(data, window_size=5, student=selected_student)
 
         return render_template(
             "class-live-student.html",
@@ -312,7 +319,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
-        """"
+        """
         Removes the common error item by setting the active flag to 0.
         """
         common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
@@ -632,6 +639,13 @@ def _build_url_args(**kwargs):
         else:
             url_args += f"&{key}={value}"
     return url_args
+
+
+def _collect_graph_data(graph_hist, window_size, student):
+    """
+    Collects data to be shown in the line graph.
+    """
+    return []
 
 
 def get_general_class_stats(students):
