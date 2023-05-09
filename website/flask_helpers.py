@@ -48,6 +48,7 @@ def strip_nones(x):
 
 class JinjaCompatibleJsonProvider(JSONProvider):
     """A JSON provider for Flask 2.3+ that removes Nones and Jinja Undefineds."""
+
     def dumps(self, obj, **kwargs):
         return proper_json_dumps(obj, **kwargs)
 
