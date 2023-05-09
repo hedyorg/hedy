@@ -31,7 +31,7 @@ import hedyweb
 import utils
 from safe_format import safe_format
 from config import config
-from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
+from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
@@ -63,6 +63,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
+app.json = JinjaCompatibleJsonProvider(app)
 babel = Babel(app)
 
 app.template_filter('tojson')(proper_tojson)
