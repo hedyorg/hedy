@@ -521,10 +521,9 @@ export function getRunsOverTime(data: any[], labels: any[]) {
     data: {
       labels: labels.map(String),
       datasets: [{
-        label: '',
         data: data,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(0, 0, 0, 1)',
+        backgroundColor: 'rgba(0, 0, 255, 1)',
+        borderColor: 'rgba(0, 0, 255, 0.6)',
         borderWidth: 1
       }]
     },
