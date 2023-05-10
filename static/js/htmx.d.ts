@@ -20,7 +20,7 @@ export function addClass(elt: Element, clazz: string, delay?: number): void;
  * @param path the URL path to make the AJAX
  * @param element the element to target (defaults to the **body**)
  */
-export function ajax(verb: string, path: string, element: Element): Promise;
+export function ajax(verb: string, path: string, element: Element): Promise<void>;
 
 /**
  * Issues an htmx-style AJAX request
