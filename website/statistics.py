@@ -189,14 +189,14 @@ class LiveStatisticsModule(WebsiteModule):
                     data.append(last_adventure[0])
             last_adventures.append(data)
 
-        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
-            adventures=available_adventures,
+            adventures=adventures,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -292,7 +292,7 @@ class LiveStatisticsModule(WebsiteModule):
                     data.append(last_adventure[0])
             last_adventures.append(data)
 
-        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         return render_template(
             "class-live-student.html",
@@ -301,7 +301,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
             student_programs=student_programs,
-            adventures=available_adventures,
+            adventures=adventures,
             adventure_names=adventure_names,
             data=data,
             current_page='my-profile',
@@ -359,14 +359,14 @@ class LiveStatisticsModule(WebsiteModule):
                     data.append(last_adventure[0])
             last_adventures.append(data)
 
-        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
-            adventures=available_adventures,
+            adventures=adventures,
             student=selected_student,
             current_page='my-profile'
         )
@@ -631,7 +631,14 @@ def _check_dashboard_display_args():
     return collapse, show_c1, show_c2, show_c3
 
 
-def get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
+def _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
+    """
+    Returns the available adventures for all levels, given the possible adventures per level,
+    the teacher (adventures) and customization. Also adds how many students are currently in
+    progress for each adventure.
+
+    { level: [ { id, name, in_progress } ] }
+    """
     teacher_adventures_formatted = {}
     for adventure in teacher_adventures:
         teacher_adventures_formatted[adventure['id']] = adventure["name"]
