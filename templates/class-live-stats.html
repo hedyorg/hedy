@@ -56,7 +56,14 @@
                         <li class="mr-1">
                             <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
                                 Quiz
-                                <span class="ml-1 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0</span>
+                                {% set in_progress = quiz_info[selected_level]["students_in_progress"]|length %}
+                                {% set finished = quiz_info[selected_level]["students_finished"]|length %}
+                                {% if in_progress != 0 %}
+                                <span class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ in_progress }}</span>
+                                {% endif %}
+                                {% if finished != 0 %}
+                                <span class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">{{ finished }}</span>
+                                {% endif %}
                             </div>
                         </li>
                     </ul>
@@ -68,6 +75,10 @@
                 <div class="flex m-1">
                     <div><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
                     <p class="text-xs font-semibold text-gray-700 mt-1">In progress</p>
+                </div>
+                <div class="flex m-1 ml-3">
+                    <div><span class="bg-green-600 text-white  text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
+                    <p class="text-xs font-semibold text-green-800 mt-1">Quiz finished</p>
                 </div>
             </div>
             {% endif %}

@@ -191,12 +191,28 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
+
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
+            quiz_info=quiz_info,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -294,6 +310,21 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
+
         return render_template(
             "class-live-student.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
@@ -302,6 +333,7 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventures=adventures,
+            quiz_info=quiz_info,
             adventure_names=adventure_names,
             data=data,
             current_page='my-profile',
@@ -361,12 +393,28 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
+
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
+            quiz_info=quiz_info,
             student=selected_student,
             current_page='my-profile'
         )
@@ -674,6 +722,27 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
         selected_adventures[level] = adventures_for_level
 
     return selected_adventures
+
+
+def _get_quiz_info(quiz_stats):
+    """
+    Returns quiz info for each level containing the students in progress (started but not finished)
+    and the students that finished the quiz.
+
+    { level: { students_in_progress, students_finished } }
+    """
+    quiz_info = {}
+    for level in range(1, HEDY_MAX_LEVEL+1):
+        students_in_progress, students_finished = [], []
+        for stats in quiz_stats:
+            if level in stats.get("in_progress"):
+                students_in_progress.append(stats.get("student"))
+            elif level in stats.get("finished"):
+                students_finished.append(stats.get("student"))
+
+        quiz_info[level] = {"students_in_progress": students_in_progress, "students_finished": students_finished}
+
+    return quiz_info
 
 
 def _get_error_info(code, level, lang='en'):
