@@ -42,10 +42,12 @@
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
             <!-- Graph with fails and successful runs over time -->
-            <div class="w-full text-center p-2" id="runs-over-time">
-                <h5 class="font-normal pb-1">Runs over time</h5>
-                <canvas id="runsOverTime" width="150" height="100"></canvas>
+            <div class="w-full text-center p-2">
+                <h5 class="font-normal mr-2">Runs over time</h5>
+                <canvas id="runsOverTime" width="120" height="40"></canvas>
             </div>
+
+
 
             <!-- Last ran code -->
             <div class="w-full text-center turn-pre-into-ace mb-4">
@@ -80,6 +82,7 @@
                 {% endif %}
                 </div>
             </div>
+            <a class="text-black font-light no-underline float-right" href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}">Refresh🔄</a>
         </div>
       </div>
   </div>
