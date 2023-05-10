@@ -1074,9 +1074,8 @@ def teacher_tutorial(user):
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
     try:
         level = int(level)
