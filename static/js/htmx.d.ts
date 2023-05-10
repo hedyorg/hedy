@@ -31,7 +31,7 @@ export function ajax(verb: string, path: string, element: Element): Promise<void
  * @param path the URL path to make the AJAX
  * @param selector a selector for the target
  */
-export function ajax(verb: string, path: string, selector: string): Promise;
+export function ajax(verb: string, path: string, selector: string): Promise<void>;
 
 /**
  * Issues an htmx-style AJAX request
@@ -46,7 +46,7 @@ export function ajax(
     verb: string,
     path: string,
     context: Partial<{ source: any; event: any; handler: any; target: any; values: any; headers: any }>
-): Promise;
+): Promise<void>;
 
 /**
  * Finds the closest matching element in the given elements parentage, inclusive of the element
