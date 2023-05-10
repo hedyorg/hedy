@@ -781,8 +781,9 @@ class Database:
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
         p_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
+
         chart_history = []
-        if 'chart_history' in p_stats.records[0].keys():
+        if p_stats.records and 'chart_history' in p_stats.records[0].keys():
             chart_history = p_stats.records[0]['chart_history']
         slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
 
