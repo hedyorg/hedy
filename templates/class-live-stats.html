@@ -37,7 +37,7 @@
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
-                {% set selected_level = 2 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
+                {% set selected_level = 1 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
                 <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
@@ -47,14 +47,14 @@
                         <li class="mr-1">
                             <div class="inline-block p-4 text-gray-700">
                                 {{ adventure["name"] }}
-                                <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">10</span>
+                                <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{adventure["in_progress"]}}</span>
                             </div>
                         </li>                        
                         {% endfor %}
                         <li class="mr-1">
                             <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
                                 Quiz
-                                <span class="ml-1 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">10</span>
+                                <span class="ml-1 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0</span>
                             </div>
                         </li>
                     </ul>

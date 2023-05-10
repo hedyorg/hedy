@@ -143,7 +143,6 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
-
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
 
@@ -173,6 +172,15 @@ class LiveStatisticsModule(WebsiteModule):
             )
 
         # Data for student overview card
+        last_adventures = []
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            data = []
+            for student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
+                if last_adventure:
+                    data.append(last_adventure[0])
+            last_adventures.append(data)
+
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
@@ -180,7 +188,7 @@ class LiveStatisticsModule(WebsiteModule):
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
 
-        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations)
+        available_adventures = get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         return render_template(
             "class-live-stats.html",
@@ -195,7 +203,8 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/student", methods=["GET"])
     @requires_login
     def render_student_details(self, user, class_id):
-        """ Shows information about an individual student when they
+        """
+        Shows information about an individual student when they
         are selected in the student list.
         """
         if not is_teacher(user) and not is_admin(user):
@@ -601,7 +610,7 @@ def _check_dashboard_display_args():
     return collapse, show_c1, show_c2, show_c3
 
 
-def get_available_adventures(adventures, teacher_adventures, customizations):
+def get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
     teacher_adventures_formatted = {}
     for adventure in teacher_adventures:
         teacher_adventures_formatted[adventure['id']] = adventure["name"]
@@ -612,13 +621,27 @@ def get_available_adventures(adventures, teacher_adventures, customizations):
         for adventure in list(adventure_list):
             adventure_key = adventure['name']
 
+            number_in_progress = last_adventures[int(level) - 1].count(adventure_key)
+
             if adventure['from_teacher']:
                 adventure_name = teacher_adventures_formatted[adventure_key]
-                adventures_for_level.append({"id": adventure_key, "name":  adventure_name})
+                adventures_for_level.append(
+                    {
+                        "id": adventure_key,
+                        "name":  adventure_name,
+                        "in_progress": number_in_progress
+                    }
+                )
 
             if not adventure['from_teacher'] and adventure_key in adventures:
                 adventure_name = list(adventures[adventure_key].keys())[0]
-                adventures_for_level.append({"id": adventure_key, "name":  adventure_name})
+                adventures_for_level.append(
+                    {
+                        "id": adventure_key,
+                        "name":  adventure_name,
+                        "in_progress": number_in_progress
+                    }
+                )
 
         selected_adventures[level] = adventures_for_level
 
