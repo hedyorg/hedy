@@ -543,7 +543,12 @@ export function getRunsOverTime(data: any[], labels: any[]) {
                 },
               }
             },
+        },
+      plugins: {
+        legend: {
+            display: false
         }
+      }
     }
   });
 

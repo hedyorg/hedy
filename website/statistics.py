@@ -253,7 +253,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # get data for graph from db, db conveniently stores amount of errors for student
         data = self.db.get_program_stats([selected_student['username']], None, None)
-        data, labels = _collect_graph_data(data, window_size=5)
+        data, labels = _collect_graph_data(data, window_size=10)
 
         return render_template(
             "class-live-student.html",
