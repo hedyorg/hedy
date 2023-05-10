@@ -47,7 +47,9 @@
                         <li class="mr-1">
                             <div class="inline-block p-4 text-gray-700">
                                 {{ adventure["name"] }}
-                                <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{adventure["in_progress"]}}</span>
+                                {% if adventure["in_progress"] != 0 %}
+                                    <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{ adventure["in_progress"] }}</span>
+                                {% endif %}
                             </div>
                         </li>                        
                         {% endfor %}
