@@ -513,16 +513,27 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   });
 }
 
-export function getRunsOverTime(data: any[], labels: any[]) {
+export function InitLineChart(data: any[], labels: any[]){
   const ctx = document.getElementById("runsOverTime") as HTMLCanvasElement;
-
-  var chart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels.map(String),
       datasets: [{
         data: data,
-        backgroundColor: 'rgba(0, 0, 255, 1)',
+        fill: false,
+        pointBackgroundColor: function(context) {
+                    var index = context.dataIndex;
+                    var value = context.dataset.data[index];
+                    if (value === 0) {
+                    return 'red'
+                    }
+                    else if (value === 1){
+                      return 'green'
+                    }
+                    return 'blue'
+                },
+        // backgroundColor: 'rgba(0, 0, 255, 1)',
         borderColor: 'rgba(0, 0, 255, 0.6)',
         borderWidth: 1
       }]
@@ -551,6 +562,33 @@ export function getRunsOverTime(data: any[], labels: any[]) {
       }
     }
   });
+}
 
+export function getRunsOverTime(data: any[], labels: any[]) {
+  const chart = Chart.getChart("runsOverTime")!;
+  chart.data.labels = labels.map(String);
+
+  var datasets = [{
+    data: data,
+    fill: false,
+    pointBackgroundColor: function(context:any) {
+                var index = context.dataIndex;
+                var value = context.dataset.data[index];
+                if (value === 0) {
+                return 'red'
+                }
+                else if (value === 1){
+                  return 'green'
+                }
+                return 'blue'
+            },
+    // backgroundColor: 'rgba(0, 0, 255, 1)',
+    borderColor: 'rgba(0, 0, 255, 0.6)',
+    borderWidth: 1
+  }]
+
+  chart.data.datasets = datasets;
   chart.update();
 }
+
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

@@ -1,11 +1,5 @@
 {% extends "class-live-stats.html" %}
 
-{% block additional_scripts %}
-    <script>
-            window.onload=hedyApp.getRunsOverTime({{ data }}, {{ labels }});
-    </script>
-{% endblock %}
-
 {% block student_space %}
 
   <div class="justify-center pt-10 min-h-full">
@@ -87,4 +81,14 @@
       </div>
   </div>
 
+{% endblock %}
+
+{% block additional_scripts %}
+    <script>
+            hedyApp.InitLineChart({{ data }}, {{ labels }});
+            // interval to refresh data
+            hedyApp.sleep(60000).then(() => {
+                window.location.reload();
+            });
+    </script>
 {% endblock %}
