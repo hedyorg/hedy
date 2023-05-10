@@ -126,7 +126,7 @@ QUIZ_STATS = dynamo.Table(
     storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
 
-# Program stats also includes a boolean array indicating the order of succesfull and non-succesful runs.
+# Program stats also includes a boolean array indicating the order of successful and non-successful runs.
 # In order to not flood the database, this history array can maximally have 100 entries.
 MAX_CHART_HISTORY_SIZE = 100
 

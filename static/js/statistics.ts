@@ -513,15 +513,15 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   });
 }
 
-export function getRunsOverTime(data: any[]) {
-  data = [0, 1, 1, 0];
+export function getRunsOverTime(data: any[], labels: any[]) {
   const ctx = document.getElementById("runsOverTime") as HTMLCanvasElement;
+
   var chart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['1', '2', '3', '4'],
+      labels: labels.map(String),
       datasets: [{
-        label: 'runs',
+        label: '',
         data: data,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(0, 0, 0, 1)',

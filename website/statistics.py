@@ -253,12 +253,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # get data for graph from db, db conveniently stores amount of errors for student
         data = self.db.get_program_stats([selected_student['username']], None, None)
-        data = _aggregate_for_keys(data, [level_key])
-        print("-" * 30)
-        print('MyData')
-        print(data)
-        print("-"*30)
-        data = _collect_graph_data(data, window_size=5, student=selected_student)
+        data, labels = _collect_graph_data(data, window_size=5)
 
         return render_template(
             "class-live-student.html",
@@ -271,6 +266,7 @@ class LiveStatisticsModule(WebsiteModule):
             student_programs=student_programs,
             adventure_names=adventure_names,
             data=data,
+            labels=labels,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -641,11 +637,21 @@ def _build_url_args(**kwargs):
     return url_args
 
 
-def _collect_graph_data(graph_hist, window_size, student):
+def _collect_graph_data(data, window_size=5):
     """
-    Collects data to be shown in the line graph.
+    Collects data to be shown in the line graph and limits it to the window size.
     """
-    return []
+    graph_data, labels = [], []
+    c = 0
+    for week in data:
+        if 'chart_history' in week.keys():
+            graph_data += week['chart_history']
+            labels += list(range(c+1, c + 1 + len(week['chart_history'])))
+            c += len(week['chart_history'])
+
+    slice = window_size if len(graph_data) > window_size else 0
+
+    return graph_data[-slice:], labels[-slice:]
 
 
 def get_general_class_stats(students):

@@ -2,7 +2,7 @@
 
 {% block additional_scripts %}
     <script>
-            window.onload=hedyApp.getRunsOverTime({{ data }});
+            window.onload=hedyApp.getRunsOverTime({{ data }}, {{ labels }});
     </script>
 {% endblock %}
 
