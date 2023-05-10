@@ -39,8 +39,9 @@ htmx.defineExtension('disable-element', {
  */
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content);
-    var sortable : HTMLElement =  content.querySelector('.sortable') as HTMLElement;
-    if (sortable !== null ) {
+    var sortables =  content.querySelectorAll('.sortable');
+    for (let i = 0; i < sortables.length; i++) {
+        var sortable = sortables[i] as HTMLElement;
         new Sortable(sortable, {
             animation: 150,
             ghostClass: 'drop-adventures-active'
