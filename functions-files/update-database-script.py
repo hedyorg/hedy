@@ -14,7 +14,7 @@ table_name = 'programs'
 response = dynamodb.scan(
     TableName=table_name,
     ProjectionExpression='id, #lvl',
-    ExpressionAttributeNames = expression_attribute_names
+    ExpressionAttributeNames=expression_attribute_names
 )
 
 sorted_list = sorted(response['Items'], key=lambda k: int(k['level']['N']), reverse=True)
@@ -22,7 +22,7 @@ sorted_list = sorted(response['Items'], key=lambda k: int(k['level']['N']), reve
 for item in sorted_list:
     program_id = item['id']['S']
     current_level = int(item['level']['N'])
-    
+
     if current_level >= 15:
         new_level = current_level + 3
     elif current_level >= 13:
