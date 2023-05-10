@@ -565,7 +565,7 @@ class TestAuth(AuthHelper):
                     'token': self.user['verify_token']}),
             expect_http_code=302,
             return_headers=True)
-        self.assertEqual(headers['location'], HOST + 'landing-page')
+        self.assertEqual(headers['location'], '/landing-page')
 
         # WHEN retrieving profile to see that the user is no longer marked with
         # `verification_pending`
