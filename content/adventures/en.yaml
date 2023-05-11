@@ -155,205 +155,108 @@ adventures:
                     ```
                 start_code: "{print} 'Lets go to the next tab!'"
             11:
-                start_code: |-
-                    {for} counter {in} {range} 1 {to} 5
-                        {print} counter
-                story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
-                example_code: |
-                    ```
-                    {for} counter {in} {range} 1 {to} 5
-                        {print} counter
-                    ```
+                story_text: |
+                    You have reached level 10, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
+                start_code: "{print} 'Lets go to the next tab!'"
             12:
-                start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
-                story_text: |-
-                    **Decimal numbers**
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                story_text: |
+                    Maybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.
+                    From this level on you can use decimal numbers.
                 example_code: |
                     ```
-                    {print} 'Two and a half plus two and a half is...'
-                    {print} 2.5 + 2.5
+                    burger = 5
+                    drink = 2
+                    total = burger + drink
+                    print 'You have ordered a burger and a drink'
+                    print 'That costs ' total ' dollars please'
                     ```
-                story_text_2: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
-                example_code_2: |
-                    ```
-                    name = 'Hedy the Robot'
-                    {print} 'Hello ' name
-                    ```
-                story_text_3: |
-                    **All items in lists need quotation marks too**
-                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
-                example_code_3: |
-                    ```
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    {print} superheroes {at} {random}
-                    ```
-                story_text_4: |
-                    **All text after `{if}` comparisons need quotation marks too**
-                example_code_4: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
-                    ```
-                story_text_5: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
-                example_code_5: |
-                    ```
-                    score = 25
-                    {print} 'You got ' score
-                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             13:
-                start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
-                story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
-
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
-                example_code: |
-                    ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
-                    ```
-            14:
-                start_code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
-                example_code: |
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-                    ```
-                story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
-                example_code_2: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name == 'Hedy'
-                        {print} 'You are cool!'
-                    ```
-                story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
-                example_code_3: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-                    ```
-            15:
-                start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
+                    In the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
 
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
-                example_code: |
-                    ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                    ```
-            16:
-                start_code: |-
-                    fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit
-                story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. The {at} command can not be used anymore.
-                example_code: |
-                    ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
-                    ```
-            17:
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
-                story_text: |
-                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
-
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
+                    In this system you have to give both the correct username and the correct password.
+                    In this level you will learn the `{and}` command that will make this code a lot shorter and more understandable!
                     Check it out!
                 example_code: |
                     ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
+                    username = {ask} 'What is your username?'
+                    password = {ask} 'What is your password?'
+                    {if} username {is} 'Hedy'
+                        {if} password {is} 'secret'
+                            {print} 'Welcome Hedy!'
+                        {else}
+                            {print} 'Access denied'
+                    {else}
+                        {print} 'Access denied!'
                     ```
-            18:
-                start_code: |-
-                    name = 'Hedy'
-                    {print}('My name is ', name)
-                story_text: |-
-                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
-                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
+                start_code: "{print} 'Lets go to the next level!'"
+            14:
+                story_text: |
+                    With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
+                    You can see this code is extremely inefficient, due to the very long code in line 5.
+                    All the different grades from 1 to 5 had to be programmed separately. Lucky for you, in this level you'll learn how to do this without this extremely long code!
                 example_code: |
                     ```
-                    {print}('Hello!')
-                    {for} i {in} {range}(1, 10):
-                        {print}('This is line ', i)
+                    first_grade = {ask} 'What score did you get on your first test?'
+                    second_grade = {ask} 'What score did you get on your second test?'
+                    added = first_grade + second_grade
+                    mean_grade = added / 2
+                    {if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5
+                        {print} 'Oh no! You have failed the subject...'
+                    {else}
+                        {print} 'Great! You have passed the subject!'
                     ```
-
-                story_text_2: |-
-                    If you want to print more than one item, you need to separate them by commas.
-
-                example_code_2: |
+                start_code: "{print} 'Lets go to the next tab'"
+            15:
+                story_text: |
+                    In this game below a code has been made to make sure the player can play on as long as they want...
+                    But the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?
+                    You can't play to infinity?
+                    In this level you will learn a command that makes all of this a lot easier!
+                example_code: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, ' degrees outside')
+                    game {is} 'on'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} game {is} 'on'
+                            answer = {ask} 'Do you want to continue?'
+                            {if} answer {is} 'no'
+                                game {is} 'over'
+                            {if} answer {is} 'yes'
+                                {print} 'Ok we will continue'
                     ```
-
-                story_text_3: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
-
-                example_code_3: |
+                start_code: "{print} 'Lets go to the next level!'"
+            16:
+                story_text: |
+                    In this level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
+                    This way you can program a code in which the correct animal is matched to the right sound.
+                    Because the two codes below... Are obviously nonsense!
+                example_code: |
                     ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
+                    animals = 'chicken', 'horse', 'cow'
+                    sounds = 'cluck', 'neigh', 'moo'
+                    {for} animal {in} animals
+                        {print} 'A ' animal ' says ' sounds {at} {random}
                     ```
+                    You could also try to make it work this way, but....
+                    ```
+                    animals = 'chicken', 'horse', 'cow'
+                    sounds = 'cluck', 'neigh', 'moo'
+                    {for} animal {in} animals
+                        {for} sound {in} sounds
+                            {print} 'A ' animal ' says ' sound
+                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
+            17:
+                story_text: |
+                    You have almost reached the last level of Hedy, well done! In this level you will learn a real Python way to use `{print}`.
+                start_code: "{print} 'Lets go to the next level!'"
+            18:
+                story_text: |
+                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
+                    Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
+                start_code: "{print} ('Great job!!!')"
 
     print_command:
         name: "print"
@@ -381,6 +284,47 @@ adventures:
                     _ Hello!
                     ```
                 start_code: ""
+            17:
+                start_code: |-
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Ready or not, here I come!'
+                story_text: |
+                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
+                example_code: |
+                    ```
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Ready or not, here I come!'
+                    ```
+            18:
+                start_code: |-
+                    name = 'Hedy'
+                    {print}('My name is ', name)
+                story_text: |-
+                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
+                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
+                example_code: |
+                    ```
+                    {print}('Hello!')
+                    {for} i {in} {range}(1, 10):
+                        {print}('This is line ', i)
+                    ```
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+                example_code_2: |
+                    ```
+                    temperature = 25
+                    {print}('It is ', temperature, ' degrees outside')
+                    ```
+                story_text_3: |-
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
     ask_command:
         name: "ask"
         description: "Introduction ask command"
@@ -443,7 +387,7 @@ adventures:
                     ```
                 start_code: ""
     is_command:
-        name: "Variables"
+        name: "is"
         description: "introducing is command"
         default_save_name: "is_command"
         levels:
@@ -469,8 +413,44 @@ adventures:
                     {print} I like favorite_animals
                     ```
                 start_code: "name is Hedy"
+            14:
+                start_code: |-
+                    age = {ask} 'How old are you?'
+                    {if} age < 13
+                        {print} 'You are younger than me!'
+                    {else}
+                        {print} 'You are older than me!'
+                story_text: |
+                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
+                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
+                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
+                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
+                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
+                    You use these comparisons in an `{if}`, like this:
+                example_code: |
+                    ```
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
+                    ```
+                story_text_2: |
+                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
+                example_code_2: |
+                    ```
+                    name = {ask} 'What is your name?'
+                    {if} name == 'Hedy'
+                        {print} 'You are cool!'
+                    ```
+                story_text_3: |
+                    You can also compare if something is *not* equal to something else using `!=` like this:
+                example_code_3: |
+                    ```
+                    name = {ask} 'What is your name?'
+                    {if} name != 'Hedy'
+                        {print} 'You are not Hedy'
+                    ```
     random_command:
-        name: "at random"
+        name: "random"
         description: "introducing at random command"
         default_save_name: "random_command"
         levels:
@@ -508,6 +488,21 @@ adventures:
                     _
                     ```
 
+            16:
+                start_code: |-
+                    fruit = ['apple', 'banana', 'cherry']
+                    {print} fruit[random]
+                story_text: |-
+                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
+                    We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
+                example_code: |
+                    ```
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} 'the lucky number of ' friends[i]
+                        {print} 'is ' lucky_numbers[i]
+                    ```
     add_remove_command:
         name: "add and remove"
         description: "introducing add to and remove from"
@@ -681,6 +676,41 @@ adventures:
                     {print} 'What's more fun than that?'
                     ```
                 start_code: ""
+            12:
+                story_text: |
+                    **All texts need to be in quotation marks**
+                    For this level on you will also have to use quotation marks when storing a text with `=`:
+                example_code: |
+                    ```
+                    name = 'Hedy the Robot'
+                    {print} 'Hello ' name
+                    ```
+                story_text_2: |
+                    **All items in lists need quotation marks too**
+                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
+                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
+                example_code_2: |
+                    ```
+                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    {print} superheroes {at} {random}
+                    ```
+                story_text_3: |
+                    **All text after `{if}` comparisons need quotation marks too**
+                example_code_3: |
+                    ```
+                    name = {ask} 'What is your name?'
+                    {if} name = 'Hedy the Robot'
+                        {print} 'Hi there!'
+                    ```
+                story_text_4: |
+                    **Numbers don't need quotation marks**
+                    For numbers, you do not use quotation marks in the `=`:
+                example_code_4: |
+                    ```
+                    score = 25
+                    {print} 'You got ' score
+                    ```
+                start_code: ""
     repeat_command:
         name: "Repeat"
         description: "repeat command"
@@ -804,6 +834,20 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
+            11:
+                start_code: |-
+                    {for} counter {in} {range} 1 {to} 5
+                        {print} counter
+                story_text: |-
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                example_code: |
+                    ```
+                    {for} counter {in} {range} 1 {to} 5
+                        {print} counter
+                    ```
     maths:
         name: "maths"
         description: "Introducing maths"
@@ -832,6 +876,88 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
+            12:
+                start_code: |-
+                    {print} 'decimal numbers now need to use a dot'
+                    {print} 2.5 + 2.5
+                story_text: |-
+                    **Decimal numbers**
+                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                example_code: |
+                    ```
+                    {print} 'Two and a half plus two and a half is...'
+                    {print} 2.5 + 2.5
+                    ```
+    and_or_command:
+        name: "and or"
+        description: "introducing and or"
+        default_save_name: "and or"
+        levels:
+            13:
+                start_code: |-
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
+                story_text: |-
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+
+                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                example_code: |
+                    ```
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
+                    ```
+
+    while_command:
+        name: "while"
+        description: "while"
+        default_save_name: "while_command"
+        levels:
+            15:
+                start_code: |-
+                    answer = 0
+                    {while} answer != 25
+                        answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
+                story_text: |-
+                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
+                    So don't forget to change the value in the loop.
+
+                    In the example code, we continue until a correct answer has been given.
+                    If the correct answer is never given, the loop never ends!
+                example_code: |
+                    ```
+                    answer = 0
+                    {while} answer != 25
+                        answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
+                    ```
+    elif_command:
+        name: "elif"
+        description: "elif"
+        default_save_name: "elif"
+        levels:
+            17:
+                story_text: |
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
+                    Check it out!
+                example_code: |
+                    ```
+                    prices = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_price = prices[{random}]
+                    {print} 'You win ' your_price
+                    {if} your_price == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_price == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
+                    {else}:
+                        {print} 'Better luck next time..'
+                    ```
+                start_code: ""
+
     story:
         name: "Story"
         description: "Story"

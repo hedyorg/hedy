@@ -178,6 +178,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     11: [
         'default',
+        'for_command',
         'years',
         'calculator',
         'songs',
@@ -186,6 +187,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     12: [
         'default',
+        'maths',
+        'quotation_marks',
         'story',
         'fortune',
         'songs',
@@ -196,6 +199,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     13: [
         'default',
+        'and_or_command',
         'secret',
         'story',
         'rock',
@@ -205,6 +209,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     14: [
         'default',
+        'is_command',
         'haunted',
         'calculator',
         'piggybank',
@@ -213,6 +218,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     15: [
         'default',
+        'while_command',
         'restaurant',
         'story',
         'dice',
@@ -222,17 +228,21 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     16: [
         'default',
+        'random_command',
         'haunted',
         'songs',
         'language'
     ],
     17: [
         'default',
+        'print_command',
+        'elif_command',
         'tic',
         'blackjack'
     ],
     18: [
         'default',
+        'print_command',
         'story',
         'songs'
     ]
