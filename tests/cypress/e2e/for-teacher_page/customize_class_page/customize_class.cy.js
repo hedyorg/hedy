@@ -34,7 +34,6 @@ describe('customize class page', () => {
     });
 
     it('level 1 should be visible by default, and the level dropdown changes which adventures are displayed', () => {
-      cy.intercept('/change-level*').as('changeLevel')
       // Click on level 1
       cy.getBySel('adventures')
         .select('1', {force: true})  

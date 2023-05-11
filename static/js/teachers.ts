@@ -400,8 +400,7 @@ export function restore_customization_to_default(prompt: string) {
         $('.opening_date_input').prop("type", "text")
                                 .blur()
                                 .val('')
-                                .prop('disabled', false)
-                                .attr('placeholder', ClientMessages.directly_available)
+                                .prop('disabled', false)                                
                                 .attr('placeholder', ClientMessages.directly_available)
                                 .each(function() {         
                                       if($(this).hasClass('bg-green-300')) {

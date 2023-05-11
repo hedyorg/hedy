@@ -212,7 +212,7 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    @route("/change-level", methods=["GET"])
+    @route("/get-customization-level", methods=["GET"])
     @requires_login
     def change_dropdown_level(self, user):
         if not is_teacher(user) and not is_admin(user):
