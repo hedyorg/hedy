@@ -1074,10 +1074,8 @@ def teacher_tutorial(user):
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
     try:
         level = int(level)
@@ -1087,7 +1085,6 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
-
     if program_id:
         result = DATABASE.program_by_id(program_id)
         if not result or not current_user_allowed_to_see_program(result):
@@ -1240,6 +1237,22 @@ def index(level, program_id):
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
         ))
+
+
+@app.route('/hedy', methods=['GET'])
+def index_level():
+    if current_user()['username']:
+        highest_quiz = get_highest_quiz_level(current_user()['username'])
+        # This function returns the character '-' in case there are no finished quizes
+        if highest_quiz == '-':
+            level_rendered = 1
+        elif highest_quiz == hedy.HEDY_MAX_LEVEL:
+            level_rendered = hedy.HEDY_MAX_LEVEL
+        else:
+            level_rendered = highest_quiz + 1
+        return index(level_rendered, None)
+    else:
+        return index(1, None)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
