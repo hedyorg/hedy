@@ -153,12 +153,13 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     9: [
         'default',
+        'repeat_command',
         'rock',
         'story',
-        'pressit',
         'calculator',
         'restaurant',
         'haunted',
+        'pressit',
         'turtle'
     ],
     10: [

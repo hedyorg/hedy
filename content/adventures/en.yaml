@@ -125,26 +125,19 @@ adventures:
                     ```
                 start_code: "{print} 'Lets go to the next tab!'"
             9:
-                start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat commando in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
             10:
                 start_code: |-
                     animals {is} dog, cat, blobfish
@@ -723,6 +716,27 @@ adventures:
                     {repeat} 5 {times}
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
+                    ```
+            9:
+                start_code: |-
+                    {repeat} 3 {times}
+                        food = {ask} 'What do you want?'
+                        {if} food {is} pizza
+                            {print} 'nice!'
+                        {else}
+                            {print} 'pizza is better'
+                story_text: |
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
+                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
+                    Give it a try!
+                example_code: |
+                    ```
+                    {repeat} 3 {times}
+                        food = {ask} 'What do you want?'
+                        {if} food {is} pizza
+                            {print} 'nice!'
+                        {else}
+                            {print} 'pizza is better'
                     ```
     repeat_command_2:
         name: "Repeat 2"
@@ -2133,7 +2147,7 @@ adventures:
                     Can you finish line 10 to make to program work?
 
                     ### Exercise 2
-                    Give the played feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
+                    Give the player feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
                 example_code: |
                     ```
                     score = 0
