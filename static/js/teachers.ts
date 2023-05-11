@@ -416,30 +416,14 @@ export function restore_customization_to_default(prompt: string) {
     });
 }
 
-export function restore_adventures_to_default(prompt: string) {
-  modal.confirm (prompt, function () {
-    // We need to know the current level that is selected by the user
-    // So we can know which level to draw in the template  
-    let active_level_id : string = $('[id^=level-]')[0].id;
-    let active_level = active_level_id.split('-')[1]
-    htmx.ajax(
-      'POST',
-      `/for-teachers/restore-adventures-to-default?level=${active_level}`,
-      '#adventure-dragger'
-    ).then(() => {
-      modal.notifySuccess(ClientMessages.adventures_restored);          
-    })
-  });
-}
-
 export function enable_level(level: string) {
     markUnsavedChanges();
     if ($('#enable_level_' + level).is(':checked')) {
       $('#opening_date_level_' + level).prop('disabled', false)
                                       .attr('type', 'text')
                                       .attr("placeholder", ClientMessages.directly_available)
-                                      .removeClass('bg-green-300')                                      
-                                      .addClass('bg-gray-200')                                      
+                                      .removeClass('bg-green-300')
+                                      .addClass('bg-gray-200')
     } else {
       $('#opening_date_level_' + level).prop('disabled', true)
                                        .attr('type', 'text')
@@ -452,7 +436,7 @@ export function enable_level(level: string) {
     }
 }
 
-export function setDateLevelInputColor(level: string) {  
+export function setDateLevelInputColor(level: string) {
   var date_string : string = $('#opening_date_level_' + level).val() as string;
   var input_date = new Date(date_string);
   var today_date = new Date();
@@ -461,7 +445,7 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-green-300')
 
   } else {
-    $('#opening_date_level_' + level).removeClass('bg-green-300')                                     
+    $('#opening_date_level_' + level).removeClass('bg-green-300')
                                      .addClass('bg-gray-200')
   }
 
@@ -626,7 +610,7 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 
 function setLevelStateIndicator(level: string) {
   $('[id^=state-]').addClass('hidden');
-          
+
   if ($('#opening_date_level_' + level).is(':disabled')) {
     $('#state-disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
@@ -635,7 +619,7 @@ function setLevelStateIndicator(level: string) {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
-    if (input_date > today_date) {              
+    if (input_date > today_date) {
       $('#opening_date').text(date_string);
       $('#state-future').removeClass('hidden');
     } else {
@@ -673,10 +657,10 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
 
       $('[id^=opening_date_level_]').each(function() {
         setDateLevelInputColor($(this).attr('level')!);
-      })    
+      })
 
       $('#levels-dropdown').on('change', function(){
-          var level = $(this).val() as string;                   
+          var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
   });

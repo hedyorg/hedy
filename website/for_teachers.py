@@ -224,7 +224,7 @@ class ForTeachersModule(WebsiteModule):
         level = request.args.get('level')
         customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -251,7 +251,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -278,7 +278,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -306,7 +306,7 @@ class ForTeachersModule(WebsiteModule):
             customizations['sorted_adventures'][level].append({'name': adventure, 'from_teacher': is_teacher_adventure})
         self.db.update_class_customizations(customizations)
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -440,7 +440,7 @@ class ForTeachersModule(WebsiteModule):
             available_adventures[int(adventure['level'])].append(
                 {"name": adventure['id'], "from_teacher": True})
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -449,11 +449,10 @@ class ForTeachersModule(WebsiteModule):
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
-    @route("/restore-adventures-to-default", methods=["POST"])
+    @route("/restore-adventures/level/<level>", methods=["POST"])
     @requires_teacher
-    def restore_adventures_to_default(self, user):
-        class_id = request.args.get('class_id')
-        level = request.args.get('level')
+    def restore_adventures_to_default(self, user, level):
+        class_id = session['class_id']
         Class = self.db.get_class(class_id)
 
         if not Class or Class["teacher"] != user["username"]:
@@ -470,7 +469,7 @@ class ForTeachersModule(WebsiteModule):
         available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
         self.db.update_class_customizations(customizations)
 
-        return render_partial('customize-class/sortable-adventures.html',
+        return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               max_level=hedy.HEDY_MAX_LEVEL,
@@ -478,6 +477,22 @@ class ForTeachersModule(WebsiteModule):
                               adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
+
+    @route("/restore-adventures-modal/level/<level>", methods=["GET"])
+    @requires_teacher
+    def get_restore_adventures_modal(self, user, level):
+        Class = self.db.get_class(session['class_id'])
+        if not Class or Class["teacher"] != user["username"]:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text = gettext('reset_adventure_prompt')
+        htmx_endpoint = f'/for-teachers/restore-adventures/level/{level}'
+        htmx_target = "#adventure-dragger"
+
+        return render_partial('modal/hx-modal-confirm.html',
+                              modal_text=modal_text,
+                              htmx_endpoint=htmx_endpoint,
+                              htmx_target=htmx_target)
 
     @route("/customize-class/<class_id>", methods=["POST"])
     @requires_teacher

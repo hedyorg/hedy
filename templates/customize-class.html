@@ -1,4 +1,4 @@
-{% extends hx_layout %}
+{% extends "auth.html" %}
 {% block regular_content %}
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>    
@@ -32,7 +32,7 @@
                     {% endfor %}
                 </select>
             </div>
-            {{ render_partial('customize-class/sortable-adventures.html', 
+            {{ render_partial('customize-class/hx-sortable-adventures.html', 
                                customizations=customizations, 
                                max_level=max_level, 
                                adventure_names=adventure_names, 
@@ -179,10 +179,6 @@
             {% if not (is_admin and class_info.teacher != username) %}
             <div class="flex flex-col gap-2 mt-4">
                 <div class="flex flex-row ml-auto gap-2">
-                    {# TODO JP: make a button that resets the adventures to the default in Hedy content #}
-                    <button class="yellow-btn text-white" onclick="hedyApp.restore_adventures_to_default({{ _('reset_adventure_prompt')|default(None)|tojson }})">
-                                {{_('reset_adventures')}}
-                    </button>
                     <button data-cy="save_customizations" class="blue-btn"
                             onclick="hedyApp.save_customizations('{{class_info.id}}')">
                                 {{_('save')}}
