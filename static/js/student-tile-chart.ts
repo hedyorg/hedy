@@ -2,7 +2,7 @@ import {Chart} from "chart.js";
 
 let studentTileChart: Chart<"bar", number[], string>;
 
-function expandStudentTileChart(student: any){
+function expandStudentTileChart(student: any, levels: string[]){
 
     let bigTile = document.getElementById('expanded-student-tile')!;
     let studentName = document.getElementById('studentName')!;
@@ -12,13 +12,16 @@ function expandStudentTileChart(student: any){
         studentTileChart.destroy();
     }
 
+    let studentLevels: string[] = levels
+    let studentProgression: number[] = [12, 19, 3, 5, 2, 3]
+
     studentTileChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: studentLevels,
             datasets: [{
                 label: 'Program Progression (%)',
-                data: [12, 19, 3, 5, 2, 3],
+                data: studentProgression,
                 borderWidth: 1
             }]
         },
@@ -39,7 +42,7 @@ function hideStudentTileChart() {
     $('#expanded-student-tile').addClass('hidden');
 }
 
-export function studentTileChartClicked(event: any, student: any): void {
+export function studentTileChartClicked(event: any, student: any, levels: string[]): void {
     const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
     // Remove 'selected' attribute from all student tiles
@@ -50,7 +53,7 @@ export function studentTileChartClicked(event: any, student: any): void {
         hideStudentTileChart();
     } else {
         $(event.target).closest('.student-tile').addClass('selected');
-        expandStudentTileChart(student);
+        expandStudentTileChart(student, levels);
     }
 }
 

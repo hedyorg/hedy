@@ -5,6 +5,7 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import hedy
 import utils
 from website.flask_helpers import render_template
 from website import querylog
@@ -142,12 +143,16 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        levels = []
+        for i in range(1, hedy.HEDY_MAX_LEVEL + 1):
+            levels.append(i)
+
         students = []
         for student_username in class_.get("students", []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-
             quiz_scores = self.db.get_quiz_stats([student_username])
+
             average_quiz_scores = "-"
             success_rate_overall = "-"
             if len(quiz_scores) != 0:
@@ -155,8 +160,6 @@ class StatisticsModule(WebsiteModule):
                 total_quiz_score = 0
                 success_rate_overall = 0
                 for level_quiz_score in quiz_scores:
-                    print(level_quiz_score)
-
                     num_finished_quizzes += (level_quiz_score['finished'])
                     total_quiz_score += (level_quiz_score.get("scores")[0])
                     average_quiz_scores = total_quiz_score / num_finished_quizzes
@@ -202,6 +205,7 @@ class StatisticsModule(WebsiteModule):
                 "id": class_id,
                 "students": students,
                 "name": class_["name"],
+                "levels": levels,
             },
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
