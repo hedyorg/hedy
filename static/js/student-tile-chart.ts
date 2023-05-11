@@ -2,9 +2,10 @@ import {Chart} from "chart.js";
 
 let studentTileChart: Chart<"bar", number[], string>;
 
-function expandStudentTileChart(){
+function expandStudentTileChart(student: any){
 
     let bigTile = document.getElementById('expanded-student-tile')!;
+    let studentName = document.getElementById('studentName')!;
     let ctx = document.getElementById('studentProgressionChart') as HTMLCanvasElement;
 
     if (studentTileChart != null) {
@@ -30,6 +31,7 @@ function expandStudentTileChart(){
         }
     });
 
+    studentName.textContent = student.username;
     bigTile.classList.remove('hidden');
 }
 
@@ -37,7 +39,7 @@ function hideStudentTileChart() {
     $('#expanded-student-tile').addClass('hidden');
 }
 
-export function studentTileChartClicked(event: any): void {
+export function studentTileChartClicked(event: any, student: any): void {
     const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
     // Remove 'selected' attribute from all student tiles
@@ -48,7 +50,7 @@ export function studentTileChartClicked(event: any): void {
         hideStudentTileChart();
     } else {
         $(event.target).closest('.student-tile').addClass('selected');
-        expandStudentTileChart();
+        expandStudentTileChart(student);
     }
 }
 
