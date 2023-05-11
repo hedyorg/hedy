@@ -130,13 +130,15 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     7: [
         'default',
+        'repeat_command',
         'story',
         'songs',
         'dishes',
-        'pressit',
         'dice',
+        'repeat_command_2',
         'fortune',
-        'restaurant'
+        'restaurant',
+        'pressit'
     ],
     8: [
         'default',

@@ -98,13 +98,23 @@ adventures:
                     ```
                 start_code: "# place your code here"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: |
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
+                    Great job! You've reached the next level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.
+                    For example if you want to program 'Happy Birthday'.
+
+                    That's a lot of code for mainly the same words over and over again. Luckily in the next tab you'll learn a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
                     ```
+                start_code: |
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
             8:
                 start_code: |-
                     {repeat} 5 {times}
@@ -671,6 +681,53 @@ adventures:
                     {print} 'What's more fun than that?'
                     ```
                 start_code: ""
+    repeat_command:
+        name: "Repeat"
+        description: "repeat command"
+        default_save_name: "repeat_command"
+        levels:
+            7:
+                story_text: |
+                    ## Repeat! Repeat! Repeat!
+                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
+
+                    ### Exercise
+                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
+                example_code: |
+                    ```
+                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    ```
+                start_code: |
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+    repeat_command_2:
+        name: "Repeat 2"
+        description: "repeat command 2"
+        default_save_name: "repeat_command_2"
+        levels:
+            7:
+                story_text: |
+                    ## Repeat with other commands and with variables
+                    You have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?
+                    In this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.
+                story_text_2: |
+                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
+                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
+                example_code: |
+                    ```
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                    ```
+                example_code_2: |
+                    ```
+                    {print} 'Yay! It is your birthday!'
+                    age = {ask} 'How old are you now?'
+                    {repeat} age {times} {print} 'Hip Hip Hurray!'
+                    ```
+                start_code: ""
     maths:
         name: "maths"
         description: "Introducing maths"
@@ -861,7 +918,7 @@ adventures:
                     ### Exercise 1
                     The example code shows two different endings; one where the characters jump in a time machine and one where they do not.
                     Complete the blanks with at least one sentence per ending.
-                    **(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.
+                    **Extra** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.
 
                     ### Exercise 2
                     Go back to your saved programs, choose your story program from level 5. Now write a good and a bad ending of at least three lines long each!
@@ -1200,7 +1257,7 @@ adventures:
                     ### Exercise 2
                     Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
 
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
+                    **Extra** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
                 example_code_2: |
                     ```
                     monkeys = 5, 4, 3, 2, 1
@@ -1491,7 +1548,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **(extra)** We can now improve the program that draws different figures. Finish the code and you can draw any polygon you'd like!
+                    **Extra** We can now improve the program that draws different figures. Finish the code and you can draw any polygon you'd like!
 
                 example_code_2: |
                     ```
@@ -1510,7 +1567,7 @@ adventures:
                     ### Exercise 1
                     This code creates three black triangles, change that into five pink squares.
 
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: |
                     ```
                     {color} {black}
@@ -1611,7 +1668,7 @@ adventures:
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for multiple days!
                     ### Exercise
                     Use the `{repeat}` command to decide on who needs to wash the dishes for an entire week. Each blank needs to be filled with one command or number!
-                    **(extra)** Can you think of other tasks in the house? Adapt the code so it decides on three household chores. Do not forget to print what tasks it concerns!
+                    **Extra** Can you think of other tasks in the house? Adapt the code so it decides on three household chores. Do not forget to print what tasks it concerns!
                 example_code: |
                     ```
                     people = mom, dad, Emma, Sophie
@@ -1624,7 +1681,7 @@ adventures:
 
                     ### Exercise
                     Add a second chore, such as vacuuming or tidying up, and make sure it is also divided for the whole week.
-                    <br> **(extra)** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?
+                    <br> **Extra** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?
 
                 example_code: |
                     ```
@@ -1708,10 +1765,10 @@ adventures:
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
-                    You can also make a dice again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
+                    You can also make a dice again in this level. With the `{repeat}` code you can easily roll a whole hand of dice.
 
                     ### Exercise
-                    Try to finish the sample code!  **(extra)** Think of a game you know that involves a dice and program that using a `{repeat}`.
+                    Try to finish the sample code!  **Extra** Think of a game you know that involves a dice and program that using a `{repeat}`.
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, 6
@@ -1799,7 +1856,7 @@ adventures:
 
                     ### Exercise
                     Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
-                    **(extra)** Clear the screen after each letter, and show the user how many points they have scored.
+                    **Extra** Clear the screen after each letter, and show the user how many points they have scored.
 
                 example_code: |
                     ```
@@ -1929,7 +1986,7 @@ adventures:
                     ### Exercise
                     Can you finish the code? The program must tell who has won for every combination.
 
-                    **(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
+                    **Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -1958,7 +2015,7 @@ adventures:
                     ### Exercise 2
                     Add a computer player that chooses with each player.
 
-                    **(extra)** Go back to your code and decide who wins in each round: the computer or the named person.
+                    **Extra** Go back to your code and decide who wins in each round: the computer or the named person.
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -2114,7 +2171,7 @@ adventures:
                     ### Exercise 2
                     Create a new mathematics practice program, but now use decimal numbers.
                     Create a list of numbers, choose two to multiple and let the player answer.
-                    And of course you have to validate the answer! **(extra)** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
+                    And of course you have to validate the answer! **Extra** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
 
 
                 example_code: |
@@ -2131,7 +2188,7 @@ adventures:
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -2341,7 +2398,7 @@ adventures:
 
                     ### Exercise
                     Can you complete the code? Hedy needs to repeat this question as many times as there are people. So if there are 5 people, the question needs to be asked 5 times.
-                    **(extra)** Expand your code with more questions, for example about drinks or sauce.
+                    **Extra** Expand your code with more questions, for example about drinks or sauce.
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy'
@@ -2365,7 +2422,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
-                    **(extra)** Add even more items, as many options as you like!
+                    **Extra** Add even more items, as many options as you like!
                 start_code: "# place your code here"
             9:
                 story_text: |
@@ -2376,9 +2433,9 @@ adventures:
                     Can you figure out how much indentation each line needs in order for the code to work properly?
                     If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.
 
-                    **(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>
-                    **(extra)** Pizzas have toppings. Ask customers what they want.<br>
-                    **(extra)** Do customers want a drink? Ask them too! <br>                    
+                    **Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>
+                    **Extra** Pizzas have toppings. Ask customers what they want.<br>
+                    **Extra** Do customers want a drink? Ask them too! <br>
 
                 example_code: |
                     ```
@@ -2440,7 +2497,7 @@ adventures:
                     Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
                     Are you not sure how to go about this? Have a peek at your level 8 code.
 
-                    **(extra)** In level 9 the restaurant also used prices. You can add that here too!
+                    **Extra** In level 9 the restaurant also used prices. You can add that here too!
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
@@ -2627,21 +2684,16 @@ adventures:
                 start_code: "# place your code here"
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Exercise
+                    Finish this program that tells you if your crush loves you back or not.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can ask 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} 'I have a flower with magic petals'
+                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'
+                    amount = {ask} 'How many petals do you want to pick?'
+                    options = they love you, they love you not
+                    _ _ _ _ options {at} {random}
                     ```
-                story_text_2: |
-                    ### Exercise
-                    The example program asks three questions but... Does not give three answers.
-                    Make a list of answers and print a random one, three times. Think of fun answers yourself.
-
-                    Sadly we cannot yet show the answers pairwise. In the upcoming levels the layout of `{repeat}` command will change, soving that problem.
                 start_code: "# place your code here"
             8:
                 story_text: |
@@ -2684,7 +2736,7 @@ adventures:
                 story_text_2: |
                     ### Exercise 2
                     We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **(extra)** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
@@ -2892,7 +2944,7 @@ adventures:
                     2. Make sure the player can choose an option with `{ask}`
                     3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. 
 
-                    **(extra)** If you make a wrong choice, a monster is still shown! How could you change that?
+                    **Extra** If you make a wrong choice, a monster is still shown! How could you change that?
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2973,7 +3025,7 @@ adventures:
 
                     ### Exercise
                     Finish the code to calculate how much money you have and how long you need to save up to buy what you want!
-                    **(extra)** Maybe you have already saved some money? Deduct that from the amount you will have to save up.
+                    **Extra** Maybe you have already saved some money? Deduct that from the amount you will have to save up.
 
                 example_code: |
                     ```
@@ -3244,7 +3296,7 @@ adventures:
                     ### Exercise 2
                     The game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol.
 
-                    ### Exercise 3 (extra)
+                    ### Exercise 3 Extra
                     You don't always have a friend to play with. Can you create a computer opponent?
                 example_code: |
                     ```
@@ -3561,7 +3613,7 @@ adventures:
 #            6:
 #                story_text: |
 ##                     Great job! You've reached the end of this level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.
-#                     For example {if} you want to program 'Happy Birthday'.
+#                     For example if you want to program 'Happy Birthday'.
 #
 #                    That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
 #                example_code: |
