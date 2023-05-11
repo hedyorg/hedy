@@ -139,19 +139,21 @@ adventures:
                     {else}
                         {print} 'Maybe you should practice some more in the previous level'
             10:
-                start_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-                story_text: |-
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
+                story_text: |
+                    You're doing great! In the previous levels we still faced a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
+                    For example if you want to sing the song 'if you're happy and you know it'. It would look like this:
+
+                    If you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.
+                    In this level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!
+                    Please take a look!
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    {repeat} 2 {times}
+                        {print} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
                     ```
+                start_code: "{print} 'Lets go to the next tab!'"
             11:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
@@ -765,6 +767,43 @@ adventures:
                     ```
                 start_code: ""
             8:
+                story_text: |
+                    ### In the block or not?
+                    In this level you have to think carefully which lines of code should be in the block and which shouldn't.
+                    For example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.
+                    This means the last line shouldn't start with indentation as it doesn't belong to the block.
+                    If you do start the last line with indentation the song will turn out wrong.
+
+                    ## Exercise
+                    Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
+                example_code: |
+                    ```
+                    _ {print} 'Do you know the muffin man?'
+                    _ {repeat} 2 {times}
+                    _ {print} 'The muffin man'
+                    _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
+                    ```
+                start_code: ""
+    for_command:
+        name: "for"
+        description: "for command"
+        default_save_name: "for"
+        levels:
+            10:
+                start_code: |-
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                        {print} 'I love ' animal
+                story_text: |-
+                    ## For
+                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                example_code: |
+                    ```
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                        {print} 'I love ' animal
+                    ```
     maths:
         name: "maths"
         description: "Introducing maths"
@@ -1814,9 +1853,8 @@ adventures:
                 start_code: "{print} 'What will the dice indicate this time?'"
             10:
                 story_text: |
+                    ### Exercise
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-
-                    ### Exercise 
                     Change the names into names of your friends or family, and finish the code so they each roll.
                 example_code: |
                     ```
@@ -2043,22 +2081,13 @@ adventures:
                 start_code: "# place your code here"
             10:
                 story_text: |
-                    Feeling too lazy to play the game yourself? Let Hedy play it for you!
-                    You only have to fill in the names of the players and they get a random choice.
-
-                    ### Exercise 1
-                    Finish the program by filling in a list of names.
-
-                    ### Exercise 2
-                    Add a computer player that chooses with each player.
-
-                    **Extra** Go back to your code and decide who wins in each round: the computer or the named person.
+                    ### Exercise
+                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the {for} command properly to get the game to work?
                 example_code: |
                     ```
-                    choices = rock, paper, scissors
+                    choices = _
                     players = _
-                    {for} player {in} players
-                         {print} player ' chooses ' choices {at} {random}
+                    {for} _
                     ```
                 start_code: "# place your code here"
             13:
@@ -2754,36 +2783,20 @@ adventures:
                 story_text: |
                     In this level you'll learn how to program the game MASH (mansion, apartment, shack, house). In this game you can predict for all the players at once, what their future will look like.
 
-                    ### Exercise 1
-                    Add two names to the list and see how the output of the program changes when you run it.
+                    ### Exercise
+                    Fil in the blanks by using the new command that you've learned this level.
                 example_code: |
                     ```
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
                     pets = dog, cat, elephant
                     names = Jenna, Ryan, Jim
-                    {for} name {in} names
+                    _
                         {print} name ' lives in a ' houses {at} {random}
                         {print} name ' will marry ' loves {at} {random}
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                story_text_2: |
-                    ### Exercise 2
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
-                example_code_2: |
-                    ```
-                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
-                    _
-                    _ {print} name ' is placed in ' houses {at} {random}
-                    _ {print} name ' is great at ' subjects {at} {random}
-                    _ {print} name 's greatest fear is ' fears {at} {random}
-                    ```
-                start_code: "# place your code here"
             12:
                 story_text: |-
                     From level 12 on, you will also have to use quotation marks in lists, before and after each item.
@@ -2798,6 +2811,28 @@ adventures:
                     {print} 'I see... I see...'
                     {sleep}
                     {print} fortunes {at} {random}
+                    ```
+                start_code: "# place your code here"
+    harry_potter:
+        name: "Harry Potter"
+        description: "Harry Potter adventures"
+        default_save_name: "Harry Potter"
+        levels:
+            10:
+                story_text: |
+                    ### Exercise
+                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
+                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                example_code: |
+                    ```
+                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
+                    subjects = potions, defence against the dark arts, charms, transfiguration
+                    fears = Voldemort, spiders, failing your OWL test
+                    names = Harry, Ron, Hermione
+                    _
+                    _ {print} name ' is placed in ' houses {at} {random}
+                    _ {print} name ' is great at ' subjects {at} {random}
+                    _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
                 start_code: "# place your code here"
     haunted:
