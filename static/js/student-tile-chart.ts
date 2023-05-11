@@ -22,13 +22,33 @@ function expandStudentTileChart(student: any, levels: string[]){
             datasets: [{
                 label: 'Program Progression (%)',
                 data: studentProgression,
-                borderWidth: 1
+                borderWidth: 1,
+                borderColor: '#36A2EB',
+                backgroundColor: '#9BD0F5',
             }]
         },
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Adventure Progression of a student',
+                    font: {
+                        size: 24,
+                    }
+                },
+            },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Levels",
+                        font: {
+                            size: 15
+                        }
+                    },
                 }
             }
         }
