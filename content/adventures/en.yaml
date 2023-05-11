@@ -116,32 +116,14 @@ adventures:
                     {print} 'happy birthday dear Hedy'
                     {print} 'happy birthday to you'
             8:
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello folks'
-                        {print} 'This will be printed 5 times'
                 story_text: |
-                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}` and `{repeat}` have changed!
-                    You can now group several lines together, but you will have to *indent* the code.
-                    That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
+                    Now you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.
+                    This level allows you to group a couple of lines of code, and repeat that little group of lines all at once!
                 example_code: |
-                    This is how the `{repeat}` command works now:
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This is all repeated 5 times'
+                    {repeat} 5 {times} {print} 'In the next tab you can repeat multiple lines of code at once!'
                     ```
-                    This is how the `{if}` and `{else}` command work now:
-
-                    ```
-                    name {is} {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                        {print} 'You can play on your computer!'
-                    {else}
-                        {print} 'INTRUDER!'
-                        {print} 'You cannot use this computer!'
-                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             9:
                 start_code: |-
                     {repeat} 3 {times}
@@ -588,7 +570,7 @@ adventures:
                     ```
                 start_code: ""
     if_command:
-        name: "if and else"
+        name: "if else"
         description: "Introducing the if command"
         default_save_name: "if_command"
         levels:
@@ -621,6 +603,29 @@ adventures:
                     _ _ 'No 2 + 2 = 4'
                     ```
                 start_code: ""
+            8:
+                start_code: |
+                    ```
+                    name {is} {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                        {print} 'You can play on your computer!'
+                    ```
+                example_code: |
+                    ```
+                    name {is} {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                        {print} 'You can play on your computer!'
+                    ```
+                story_text: |
+                    ## If... Else...
+                    You have learned to repeat a block of lines of code after a `{repeat}` command.
+                    Now you can also use indentation to make blocks after a {if} or {else} command.
+                    Check out the example code.
+
+                    ### Exercise
+                    Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
     in_command:
         name: "in"
         description: "Introducing the in command"
@@ -702,6 +707,23 @@ adventures:
                     {print} 'happy birthday to you'
                     {print} 'happy birthday dear Hedy'
                     {print} 'happy birthday to you'
+            8:
+                start_code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
+                story_text: |
+                    ### Repeat commands and indentation
+                    In this level you can repeat multiple lines of code with only 1 repeat command.
+                    You do this by making a block of lines that you want to repeat.
+                    The lines in this block will need **indentation** .
+                    That means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.
+                example_code: |
+                    ```
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This is all repeated 5 times'
+                    ```
     repeat_command_2:
         name: "Repeat 2"
         description: "repeat command 2"
@@ -728,6 +750,7 @@ adventures:
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
                 start_code: ""
+            8:
     maths:
         name: "maths"
         description: "Introducing maths"
@@ -2697,9 +2720,7 @@ adventures:
                 start_code: "# place your code here"
             8:
                 story_text: |
-                    In the previous levels you've learned how to use `{repeat}` to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the `{repeat}` command.
-                    In the next example you can have your fortune teller ask 3 questions and also print them!
+                    In the next example you can have your fortune teller ask multiple questions and also print them!
 
                     ### Exercise
                     Can you fill in right command on the blanks?

@@ -142,9 +142,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     8: [
         'default',
-        'story',
+        'repeat_command',
         'fortune',
         'songs',
+        'if_command',
+        'story',
         'haunted',
         'restaurant',
         'turtle'
