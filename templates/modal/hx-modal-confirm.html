@@ -9,11 +9,12 @@
                     class="green-btn block m-4 w-40 pb-4 pt-4" 
                     hx-post="{{ htmx_endpoint }}"
                     hx-target="{{ htmx_target }}"
-                    _="on click trigger closeModal">
+                    {% if htmx_indicator is defined %}hx-indicator="{{ htmx_indicator }}" {% endif %}
+                    _="on click trigger closeModal ">
                 {{_('yes')}}
             </button>
             <button class="red-btn block m-4 w-40 pb-4 pt-4"
-                    _="on click trigger closeModal">
+                    _="on click trigger closeModal ">
                     {{_('no')}}
             </button>
         </div>
