@@ -3,7 +3,6 @@ import {Chart} from "chart.js";
 let studentTileChart: Chart<"bar", number[], string>;
 
 function expandStudentTileChart(student: any, levels: string[]){
-
     let bigTile = document.getElementById('expanded-student-tile')!;
     let studentName = document.getElementById('studentName')!;
     let ctx = document.getElementById('studentProgressionChart') as HTMLCanvasElement;
@@ -12,10 +11,17 @@ function expandStudentTileChart(student: any, levels: string[]){
         studentTileChart.destroy();
     }
 
-    let studentLevels: string[] = levels
-    let studentProgression: number[] = [12, 19, 3, 5, 2, 3]
+    let studentLevels: string[] = levels;
+    let studentProgression: number[] = [12, 19, 3, 5, 2, 3];
 
-    studentTileChart = new Chart(ctx, {
+    studentTileChart = createNewChart(ctx, studentLevels, studentProgression);
+
+    studentName.textContent = student.username;
+    bigTile.classList.remove('hidden');
+}
+
+function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"bar", number[], string> {
+    return new Chart(ctx, {
         type: 'bar',
         data: {
             labels: studentLevels,
@@ -53,9 +59,6 @@ function expandStudentTileChart(student: any, levels: string[]){
             }
         }
     });
-
-    studentName.textContent = student.username;
-    bigTile.classList.remove('hidden');
 }
 
 function hideStudentTileChart() {
