@@ -82,16 +82,6 @@ export interface Program {
   adventure_name?: string;
 }
 
-export interface AvailableAdventure {
-  from_teacher: boolean;
-  name: string;
-}
-
-export interface TeacherAdventure {
-  id: string;
-  level: string;
-}
-
 /**
  * Definition of an achievement
  *
