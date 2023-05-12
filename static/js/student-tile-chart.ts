@@ -2,25 +2,7 @@ import {Chart} from "chart.js";
 
 let studentTileChart: Chart<"bar", number[], string>;
 
-function expandStudentTileChart(student: any, levels: string[]){
-    let bigTile = document.getElementById('expanded-student-tile')!;
-    let studentName = document.getElementById('studentName')!;
-    let ctx = document.getElementById('studentProgressionChart') as HTMLCanvasElement;
-
-    if (studentTileChart != null) {
-        studentTileChart.destroy();
-    }
-
-    let studentLevels: string[] = levels;
-    let studentProgression: number[] = [12, 19, 3, 5, 2, 3];
-
-    studentTileChart = createNewChart(ctx, studentLevels, studentProgression);
-
-    studentName.textContent = student.username;
-    bigTile.classList.remove('hidden');
-}
-
-function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"bar", number[], string> {
+function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"bar", number[], string> {
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -61,6 +43,25 @@ function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], student
     });
 }
 
+function expandStudentTileChart(student: any, levels: string[]){
+    let bigTile = document.getElementById('expanded-student-tile')!;
+    let studentName = document.getElementById('studentName')!;
+    let ctx = document.getElementById('studentProgressionChart') as HTMLCanvasElement;
+
+    // Ensure that the studentTileChart (chart bar) is reset each time a different student tile is clicked
+    if (studentTileChart != null) {
+        studentTileChart.destroy();
+    }
+
+    let studentLevels: string[] = levels;
+    let studentProgression: number[] = [12, 19, 3, 5, 2, 3];
+
+    studentTileChart = createNewProgressionChart(ctx, studentLevels, studentProgression);
+
+    studentName.textContent = student.username;
+    bigTile.classList.remove('hidden');
+}
+
 function hideStudentTileChart() {
     $('#expanded-student-tile').addClass('hidden');
 }
@@ -80,3 +81,11 @@ export function studentTileChartClicked(event: any, student: any, levels: string
     }
 }
 
+export function loadQuizChartClicked() {
+    let ctx = document.getElementById('studentQuizChart') as HTMLCanvasElement;
+
+    let studentLevels: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"];
+    let studentProgression: number[] = [12, 19, 3, 5, 2, 3];
+
+    createNewProgressionChart(ctx, studentLevels, studentProgression);
+}

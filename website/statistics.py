@@ -153,6 +153,13 @@ class StatisticsModule(WebsiteModule):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
 
+            programs_ran_per_level = []
+            for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
+                programs_ran_per_level.append([])
+                for program in programs:
+                    if program['level'] == level:
+                        programs_ran_per_level[level - 1].append(program['name'])
+
             average_quiz_scores = "-"
             success_rate_overall = "-"
             if len(quiz_scores) != 0:
@@ -163,7 +170,6 @@ class StatisticsModule(WebsiteModule):
                     num_finished_quizzes += (level_quiz_score['finished'])
                     total_quiz_score += (level_quiz_score.get("scores")[0])
                     average_quiz_scores = total_quiz_score / num_finished_quizzes
-
                     success_rate_overall += (level_quiz_score['finished'] / level_quiz_score['started'] * 100)
 
                 success_rate_overall /= num_finished_quizzes
@@ -174,7 +180,6 @@ class StatisticsModule(WebsiteModule):
                                       for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
             highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get(
                 "level") == highest_level_quiz]) if finished_quizzes else "-"
-
             success_rate_highest_level = '-'
             if finished_quizzes:
                 highest_level_started = ([x.get("started")
@@ -189,6 +194,7 @@ class StatisticsModule(WebsiteModule):
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
+                    "programs_ran_per_level": programs_ran_per_level,
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
                     "average_quiz": average_quiz_scores,
