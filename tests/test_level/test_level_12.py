@@ -2118,6 +2118,34 @@ class TestsLevel12(HedyTester):
             price = price + 2.35
         print 'That will be ' price ' dollar, please'""")
 
+        expected_code = textwrap.dedent("""\
+        price = 0.0
+        food = input(f'''What would you like to order?''')
+        try:
+          food = int(food)
+        except ValueError:
+          try:
+            food = float(food)
+          except ValueError:
+            pass
+        drink = input(f'''What would you like to drink?''')
+        try:
+          drink = int(drink)
+        except ValueError:
+          try:
+            drink = float(drink)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'hamburger'):
+          price = price + 6.5
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'pizza'):
+          price = price + 5.75
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'water'):
+          price = price + 1.2
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'soda'):
+          price = price + 2.35
+        print(f'''That will be {price} dollar, please''')""")
+
         expected_source_map = {
             "1/0-1/5": "1/0-1/5",
             "1/0-1/11": "1/0-1/11",
@@ -2154,7 +2182,5 @@ class TestsLevel12(HedyTester):
             "12/316-12/361": "26/716-26/765"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

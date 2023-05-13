@@ -445,6 +445,13 @@ class TestsLevel7(HedyTester):
         repeat 5 times print 'Help!'
         print 'Why is nobody helping me?'""")
 
+        expected_code = textwrap.dedent("""\
+        print(f'The prince kept calling for help')
+        for __i__ in range(int('5')):
+          print(f'Help!')
+          time.sleep(0.1)
+        print(f'Why is nobody helping me?')""")
+
         expected_source_map = {
             "1/0-1/40": "1/0-1/42",
             "1/0-3/104": "1/0-5/144",
@@ -453,7 +460,5 @@ class TestsLevel7(HedyTester):
             "3/70-3/103": "5/109-5/144"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

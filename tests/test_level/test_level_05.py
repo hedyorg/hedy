@@ -1355,6 +1355,25 @@ class TestsLevel5(HedyTester):
         if g is pressed print 'They lived happily ever after ❤'
         else print 'The prince was eaten by a hippopotamus 😭'""")
 
+        expected_code = textwrap.dedent("""\
+        print(f'Do you want a good (g) or bad (b) ending?')
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'g':
+              print(f'They lived happily ever after ❤')
+              break
+            else:
+              print(f'The prince was eaten by a hippopotamus 😭')
+              break
+            # End of PyGame Event Handler""")
+
         expected_source_map = {
             "1/0-1/49": "1/0-1/51",
             "1/0-3/160": "1/0-17/467",
@@ -1363,7 +1382,5 @@ class TestsLevel5(HedyTester):
             "3/111-3/159": "15/371-15/421"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

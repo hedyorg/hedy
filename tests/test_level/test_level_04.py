@@ -715,6 +715,11 @@ class TestsLevel4(HedyTester):
         answer is ask 'What do we need to use from now on?'
         print 'We need to use ' answer""")
 
+        expected_code = textwrap.dedent("""\
+        print(f'You need to use quotation marks from now on!')
+        answer = input(f'What do we need to use from now on?')
+        print(f'We need to use {answer}')""")
+
         expected_source_map = {
             "1/0-1/52": "1/0-1/54",
             "1/0-3/136": "1/0-3/143",
@@ -724,7 +729,5 @@ class TestsLevel4(HedyTester):
             "3/105-3/135": "3/110-3/143"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

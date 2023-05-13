@@ -542,6 +542,13 @@ class TestsLevel17(HedyTester):
             print i
         print 'Ready or not, here I come!'""")
 
+        excepted_code = textwrap.dedent("""\
+        step = 1 if 1 < 10 else -1
+        for i in range(1, 10 + step, step):
+          print(f'''{i}''')
+          time.sleep(0.1)
+        print(f'''Ready or not, here I come!''')""")
+
         expected_source_map = {
             "1/4-1/5": "1/9-1/10",
             "1/0-2/44": "1/0-4/100",
@@ -551,7 +558,5 @@ class TestsLevel17(HedyTester):
             "3/45-3/79": "5/101-5/141"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

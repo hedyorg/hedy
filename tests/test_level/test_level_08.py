@@ -1096,6 +1096,17 @@ class TestsLevel8(HedyTester):
         print 'Thank you for ordering!'
         print 'Enjoy your meal!'""")
 
+        expected_code = textwrap.dedent("""\
+        print(f'Welcome to Restaurant Chez Hedy!')
+        people = input(f'How many people will be joining us today?')
+        print(f'Great!')
+        for i in range(int(people)):
+          food = input(f'What would you like to order?')
+          print(f'{food}')
+          time.sleep(0.1)
+        print(f'Thank you for ordering!')
+        print(f'Enjoy your meal!')""")
+
         expected_source_map = {
             "1/0-1/40": "1/0-1/42",
             "1/0-8/261": "1/0-9/296",
@@ -1112,7 +1123,5 @@ class TestsLevel8(HedyTester):
             "8/236-8/260": "9/270-9/296"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

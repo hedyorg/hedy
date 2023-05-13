@@ -519,6 +519,20 @@ class TestsLevel14(HedyTester):
         else
             print 'You are older than me!'""")
 
+        excepted_code = textwrap.dedent("""\
+        age = input(f'''How old are you?''')
+        try:
+          age = int(age)
+        except ValueError:
+          try:
+            age = float(age)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', age)<convert_numerals('Latin', 13):
+          print(f'''You are younger than me!''')
+        else:
+          print(f'''You are older than me!''')""")
+
         expected_source_map = {
             "1/0-1/3": "1/0-1/3",
             "1/0-1/28": "1/0-8/135",
@@ -532,7 +546,5 @@ class TestsLevel14(HedyTester):
             "5/96-5/126": "12/250-12/286"
         }
 
-        self.source_map_tester(
-            code=code,
-            expected_source_map=expected_source_map,
-        )
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
