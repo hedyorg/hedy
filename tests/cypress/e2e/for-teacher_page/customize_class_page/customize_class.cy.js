@@ -36,7 +36,7 @@ describe('customize class page', () => {
     it('level 1 should be visible by default, and the level dropdown changes which adventures are displayed', () => {
       // Click on level 1
       cy.getBySel('adventures')
-        .select('1', {force: true})  
+        .select('1', {force: true})
         .should('have.value', '1');
 
       // level 1 should be visible and level 2 shouldn't exist
@@ -79,8 +79,8 @@ describe('customize class page', () => {
       cy.getBySel('quiz_input').type("50").should("have.value", "50");
     });
 
-    
-    it('removes the adventure and checks that it is added to the available adventures drop down and removed from the dragger', () => {      
+
+    it('removes the adventure and checks that it is added to the available adventures drop down and removed from the dragger', () => {
 
       // Click on level 2
       cy.getBySel("adventures")
@@ -114,14 +114,14 @@ describe('customize class page', () => {
           // after selecting the adventure, it shouldn't be among the options
           cy.getBySel("available_adventures_current_level")
             .select(`${adventure}`, {force: true})
-          
+
           cy.getBySel("available_adventures_current_level")
             .children()
             .should('have.length', 1);
 
           // the adventure should now be last
           cy.get('[data-cy="level-2"] div:last input')
-            .should('have.value', `${adventure}`)            
+            .should('have.value', `${adventure}`)
       });
     });
 
@@ -149,12 +149,12 @@ describe('customize class page', () => {
     it('FIXME: selects two adventures and swaps them using drag and drop', () => {
       /**
        * FIXME: Since We changed the library that handles the drag and drop,
-       * this test is harder to make into work, since the Cypress documentation, 
-       * and the documentation of the library are no use. 
+       * this test is harder to make into work, since the Cypress documentation,
+       * and the documentation of the library are no use.
        */
-      
+
       /*
-      
+
       // Click on level 1
       selectLevel('1');
 
@@ -189,7 +189,7 @@ describe('customize class page', () => {
             .eq(0)
             .trigger('drop')
             .trigger('dragend');
-          
+
           // they should be inverted now
           cy.getBySel('level-1')
             .children()
@@ -205,11 +205,11 @@ describe('customize class page', () => {
     */
     });
 
-    it ('Disabling current level displays a message', () => {      
+    it('Disabling current level displays a message', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
-      
-      cy.getBySel('enable_level_1').uncheck({force: true});      
+
+      cy.get('#enable_level_1').uncheck();
       cy.get('#state-disabled').should('be.visible');
     })
 
