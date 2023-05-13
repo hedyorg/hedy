@@ -202,7 +202,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     // Load initial code from local storage, if available
     const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
       adventure.start_code = programFromLs.code;
       adventure.save_name = programFromLs.saveName;
       adventure.save_info = 'local-storage';
@@ -859,7 +860,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: string, has
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -2016,6 +2021,7 @@ async function saveIfNecessary() {
 
   const code = theGlobalEditor.getValue();
   const saveName = saveNameFromInput();
+
 
   if (theUserIsLoggedIn) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;

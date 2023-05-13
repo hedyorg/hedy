@@ -40,6 +40,9 @@ class HedyTester(unittest.TestCase):
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
     quotes = ["'", '"']
+    commands_level_4 = [("print 'hello'", "print(f'hello')"),
+                        ("name is ask 'who?'", "name = input(f'who?')"),
+                        ('name is Harry', "name = 'Harry'")]
 
     @classmethod
     def setUpClass(cls):

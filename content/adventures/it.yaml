@@ -35,7 +35,7 @@ adventures:
                     Nel livello 2 impariamo due nuovi comandi: `{is}` e `{sleep}`.
                     Puoi dare un nome ad una parola con `{is}`. Si dice variabile. In questo esempio creiamo una variabile chiamata nome e una variabile chiamata età. Puoi usare la parola nome ovunque nel tuo codice e verrà sostituita da Hedy, in questo modo:
 
-                    In questo modo non hai più più bisogno del comando `{echo}`!
+                    In questo modo non hai più bisogno del comando `{echo}`!
 
                 example_code: |
                     ```
@@ -85,12 +85,8 @@ adventures:
                 start_code: "{print} 'Ciao mondo'"
                 story_text: |
                     `{print}` e `{ask}` cambiano al livello 4.
-
-
                     È necessario inserire il testo che si desidera stampare tra virgolette.
-
                     Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `{is}`.
-
                     La maggior parte dei linguaggi di programmazione utilizza anche le virgolette durante la stampa, quindi ci stiamo avvicinando anche alla programmazione reale!
 
 
@@ -103,7 +99,7 @@ adventures:
                 story_text_2: |
                     Le avventure diventano sempre più difficili andando avanti nelle tab.
                     È meglio iniziare da sinistra e andare verso destra per aumentare la difficoltà gradualmente.
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
+                example_code_2: "```\n_ Questo è il modo sbagliato di usale le apostrofi\n_\n{print} 'Sto facendola babysitter al figlio di mia sorella'\n{print} 'cos'è più divertente di questo?\n```\n"
             5:
                 start_code: |-
                     nome  {is} {ask} 'Come ti chiami?'
@@ -125,13 +121,12 @@ adventures:
             6:
                 start_code: "print '5 per 5 è ' 5 * 5"
                 story_text: |
-                    `ask`,` print` e `if` funzionano ancora come nei livelli 5.
-                    Ma nel livello 6 c'è qualcosa di nuovo, ora puoi anche calcolare.
+                    In questo livello imparerai qualcosa di nuovo: ora puoi anche calcolare.
 
-                    Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
+                    Il più è facile, lo scrivi come in matematica: `5 + 5` per esempio. Anche il segno meno funziona, come in `5 - 5`.
 
-                    I tempi sono un po 'diversi, perché non ci sono orari sulla tastiera. Basta cercare, non c'è davvero!
-                    Questo è il motivo per cui eseguiamo i tempi con l'asterisco sopra 8: `5 * 5`. Leggilo come "5 per 5", quindi lo ricorderai nel modo più semplice.
+                    Il per è un po' diverso, perché non c'è il simbolo per sulla tastiera. Basta cercare, non c'è davvero!
+                    Questo è il motivo per cui eseguiamo le moltiplicazioni con l'asterisco: `5 * 5`. Leggilo come "5 per 5", lo ricorderai più semplicemente.
 
                 example_code: |-
                     ```
@@ -1218,7 +1213,7 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |
+                example_code_2: |2
 
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
@@ -1294,7 +1289,7 @@ adventures:
                 start_code: "# place your code here"
                 story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
-                story_text: |
+                story_text: |2
 
                     In this level we can enter lists and choose things from them.
                     You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
@@ -1544,7 +1539,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -1659,7 +1654,7 @@ adventures:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |4
+                example_code: |2
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -1684,7 +1679,7 @@ adventures:
                     - give people a discount when they enter a (secret) couponcode?
                     - add a children's menu?
                     - think of other fun things to add?
-                example_code_2: |4
+                example_code_2: |2
 
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
@@ -1776,7 +1771,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |4
+                story_text_2: |2
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -1889,7 +1884,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
+                example_code: |2
 
                     In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```

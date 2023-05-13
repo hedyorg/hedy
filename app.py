@@ -27,6 +27,7 @@ import hedy
 import hedy_content
 import hedy_translation
 import hedyweb
+import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
@@ -63,7 +64,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 babel = Babel(app)
-
+jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
@@ -1075,10 +1076,8 @@ def teacher_tutorial(user):
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
     try:
         level = int(level)
@@ -1088,7 +1087,6 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
-
     if program_id:
         result = DATABASE.program_by_id(program_id)
         if not result or not current_user_allowed_to_see_program(result):
@@ -1243,6 +1241,22 @@ def index(level, program_id):
         ))
 
 
+@app.route('/hedy', methods=['GET'])
+def index_level():
+    if current_user()['username']:
+        highest_quiz = get_highest_quiz_level(current_user()['username'])
+        # This function returns the character '-' in case there are no finished quizes
+        if highest_quiz == '-':
+            level_rendered = 1
+        elif highest_quiz == hedy.HEDY_MAX_LEVEL:
+            level_rendered = hedy.HEDY_MAX_LEVEL
+        else:
+            level_rendered = highest_quiz + 1
+        return index(level_rendered, None)
+    else:
+        return index(1, None)
+
+
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
 def view_program(user, id):
@@ -1313,10 +1327,8 @@ def get_specific_adventure(name, level, mode):
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.short_name == name] else False
-    next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.short_name == name] else False
+    prev_level = None  # we are not rendering buttons in raw, no lookup needed here
+    next_level = None
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)

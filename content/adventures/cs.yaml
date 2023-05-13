@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Vysvětlení ůrovně"
+        description: "Vysvětlení úrovně"
         default_save_name: "intro"
         levels:
             1:
@@ -11,10 +11,10 @@ adventures:
                     Kód si vždy vyzkoušej pomocí zeleného tlačítka 'Spustit kód' pod levým programovým polem.
 
                     Můžeš vypsat text na obrazovku užitím příkazu `{print}`.     
-                start_code: print Ahoj světe!
+                start_code: '{print} Ahoj světe!'
                 example_code: "```\n{print} Ahoj!\n{print} Vítám tě v  Hedy!\n```\n"
                 example_code_2: "```\n{ask} Jaké je tvé jméno?\n{echo} Ahoj\n```\n"
-                story_text_2: "Můžete také požádat o vstup pomocí `{ask}` a zopakovat jej zpět pomocí příkazu `{echo}`.\nZkuste znovu kód vlevo.\n\nNevíte, co vytvořit? Na dalších kartách najdete nápady na programy ke sestavení.\n"
+                story_text_2: "Můžete také požádat o vstup pomocí `{ask}` a zopakovat jej zpět pomocí příkazu `{echo}`.\n"
                 story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
             2:
                 story_text: |-
@@ -50,7 +50,7 @@ adventures:
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: print 'Ahoj světe!'
-                story_text: |4
+                story_text: |2
 
                     V úrovni 4 se mění `ask` a `print`.
 

@@ -3,6 +3,9 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
+from hypothesis import given, settings
+import hypothesis.strategies
+
 
 class TestsLevel1(HedyTester):
     level = 1
@@ -12,6 +15,7 @@ class TestsLevel1(HedyTester):
      * combined tests
      * markup tests
      * negative tests
+     * hypothesis tests
 
     Naming conventions are like this:
      * single keyword positive tests are just keyword or keyword_special_case
