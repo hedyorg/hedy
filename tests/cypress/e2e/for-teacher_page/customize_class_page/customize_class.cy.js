@@ -209,7 +209,7 @@ describe('customize class page', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
-      cy.get('#enable_level_1').uncheck();
+      cy.get('#enable_level_1').click();
       cy.get('#state-disabled').should('be.visible');
     })
 
