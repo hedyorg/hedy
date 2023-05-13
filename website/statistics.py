@@ -153,12 +153,18 @@ class StatisticsModule(WebsiteModule):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
 
+            # check the programs that the student has run each level
             programs_ran_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
                 programs_ran_per_level.append([])
                 for program in programs:
                     if program['level'] == level:
                         programs_ran_per_level[level - 1].append(program['name'])
+
+            # count the number of programs that the student has run each level
+            for i in range(len(programs_ran_per_level)):
+                programs_ran_per_level[i] = len(programs_ran_per_level[i])
+            print(programs_ran_per_level)
 
             average_quiz_scores = "-"
             success_rate_overall = "-"

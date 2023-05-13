@@ -20,7 +20,7 @@ $(document).ready(function() {
             {% for student in class_info.students %}
                 <div class=" group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
                 transition-all duration-500 ease-in-out hover:bg-green-400 hover:text-white"
-                     onclick="hedyApp.studentTileChartClicked(event, {{ student|tojson }},{{ class_info.levels }})">
+                     onclick="hedyApp.studentTileChartClicked(event, {{ student|tojson }},{{ class_info.levels }}, {{ student.programs_ran_per_level }} )">
                     <p class="select-none font-bold text-lg">{{ student.username }}</p>
                     <canvas id="studentQuizChart"></canvas>
                 </div>
