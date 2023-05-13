@@ -159,9 +159,12 @@ def source_map_rule(source_map: SourceMap):
             meta = args[1]
             generated_python = function(*args, **kwargs)
 
+            hedy_code_input = source_map.hedy_code[meta.start_pos:meta.end_pos]
+            hedy_code_input = hedy_code_input.replace('#ENDBLOCK', '')  # ENDBLOCK is not part of the Hedy code, remove
+
             hedy_code = SourceCode(
                 SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
-                source_map.hedy_code[meta.start_pos:meta.end_pos]
+                hedy_code_input
             )
 
             python_code = SourceCode(
