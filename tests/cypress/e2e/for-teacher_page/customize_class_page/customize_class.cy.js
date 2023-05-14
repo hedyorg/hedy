@@ -85,7 +85,6 @@ describe('customize class page', () => {
       // Click on level 2
       cy.getBySel("adventures")
         .select('2', {force: true})
-        .select('2', {force: true})
         .should('have.value', '2');
 
       // The available adventures dropdown should only include the default option
@@ -94,12 +93,12 @@ describe('customize class page', () => {
         .should('have.length', 1)
 
       // store the name of the adventure we're going to delete
-      cy.get('[data-cy="level-2"] div:first input')
+      cy.get('[data-cy="level-2"] .tab:first input')
         .invoke('attr', 'value')
         .as('adventure')
         .then(adventure => {
           // Get the first adventure, and click its remove button
-          cy.get('[data-cy="level-2"] div:first span')
+          cy.get('[data-cy="level-2"] .tab:first [data-cy="hide"]')
             .click();
 
           // The available adventures dropdown should now include the new adventure
@@ -120,7 +119,7 @@ describe('customize class page', () => {
             .should('have.length', 1);
 
           // the adventure should now be last
-          cy.get('[data-cy="level-2"] div:last input')
+          cy.get('[data-cy="level-2"] .tab:last input')
             .should('have.value', `${adventure}`)
       });
     });
