@@ -7,6 +7,7 @@ import os
 import re
 import sys
 
+
 def scan_pofiles(root):
     """Return True if there are any problems."""
     ret = False
@@ -19,6 +20,7 @@ def scan_pofiles(root):
 
 
 PAT = re.compile('^(?:#~ )?msgid "(.*)"')
+
 
 def scan_file(filename):
     with open(filename, 'r', encoding='utf-8') as f:
@@ -47,8 +49,6 @@ def scan_file(filename):
             print('')
 
     return True
-
-
 
 
 if __name__ == '__main__':
