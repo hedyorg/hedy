@@ -205,7 +205,7 @@ describe('customize class page', () => {
     */
     });
 
-    it.only('Disabling current level displays a message', () => {
+    it('Disabling current level displays a message', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
