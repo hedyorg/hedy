@@ -45,10 +45,7 @@ describe('customize class page', () => {
       cy.getBySel("level-2")
         .should('not.exist');
 
-      // after selecting level 2 it should be visible and level 1 not
-      // doing it twice to trigger the reload
       cy.getBySel('adventures')
-        .select('2')
         .select('2')
         .should('have.value', '2');
 
