@@ -16,9 +16,9 @@ describe('customize class page', () => {
 
     it('checks the option checkboxes', () => {
       // following code checks every single checkbox on the current page:
-      cy.get('[type="checkbox"]').parent('.switch').click()
+      cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
       cy.get('[type="checkbox"]').should('be.not.checked')
-      cy.get('[type="checkbox"]').parent('.switch').click()
+      cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
       cy.get('[type="checkbox"]').should('be.checked')
     });
 
