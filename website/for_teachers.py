@@ -395,7 +395,7 @@ class ForTeachersModule(WebsiteModule):
 
         for adventure in teacher_adventures:
             if {"name": adventure['id'], "from_teacher": True} not in \
-                    customizations['sorted_adventures'][adventure['level']]:
+                    customizations['sorted_adventures'][str(adventure['level'])]:
                 available_adventures[int(adventure['level'])].append(
                     {"name": adventure['id'], "from_teacher": True})
 
