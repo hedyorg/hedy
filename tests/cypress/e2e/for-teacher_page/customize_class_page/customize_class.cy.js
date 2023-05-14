@@ -2,24 +2,23 @@ import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
-    let className;
     beforeEach(async () => {
       loginForTeacher();
-      className = await ensureClass();
+      await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
-      cy.getBySel('remove_customizations_button').click({ force: true });
+      cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
     });
 
     it('checks the option checkboxes', () => {
       // following code checks every single checkbox on the current page:
-      cy.get('[type="checkbox"]').check({force:true})
+      cy.get('[type="checkbox"]').check()
       cy.get('[type="checkbox"]').should('be.checked')
-      cy.get('[type="checkbox"]').uncheck({force: true})
+      cy.get('[type="checkbox"]').uncheck()
       cy.get('[type="checkbox"]').should('be.not.checked')
     });
 
@@ -36,7 +35,7 @@ describe('customize class page', () => {
     it('level 1 should be visible by default, and the level dropdown changes which adventures are displayed', () => {
       // Click on level 1
       cy.getBySel('adventures')
-        .select('1', {force: true})
+        .select('1')
         .should('have.value', '1');
 
       // level 1 should be visible and level 2 shouldn't exist
@@ -49,8 +48,8 @@ describe('customize class page', () => {
       // after selecting level 2 it should be visible and level 1 not
       // doing it twice to trigger the reload
       cy.getBySel('adventures')
-        .select('2', {force: true})
-        .select('2', {force: true})
+        .select('2')
+        .select('2')
         .should('have.value', '2');
 
       cy.get("*[data-cy='level-2']")
@@ -84,43 +83,49 @@ describe('customize class page', () => {
 
       // Click on level 2
       cy.getBySel("adventures")
-        .select('2', {force: true})
+        .select('2')
         .should('have.value', '2');
 
+      // Finding this makes sure that level-2 has been loaded
+      cy.get('[data-cy="level-2"]');
+
       // The available adventures dropdown should only include the default option
+      // but it may also have teacher-specific adventures
       cy.getBySel("available_adventures_current_level")
         .children()
-        .should('have.length', 1)
+        .then($children => $children.length)
+        .as('startLength')
+        .then(startLength => {
+          // store the name of the adventure we're going to delete
+          cy.get('[data-cy="level-2"] div:first input')
+            .invoke('attr', 'value')
+            .as('adventure')
+            .then(adventure => {
+              // Get the first adventure, and click its remove button
+              cy.get('[data-cy="level-2"] div:first [data-cy="hide"]')
+                .click();
 
-      // store the name of the adventure we're going to delete
-      cy.get('[data-cy="level-2"] .tab:first input')
-        .invoke('attr', 'value')
-        .as('adventure')
-        .then(adventure => {
-          // Get the first adventure, and click its remove button
-          cy.get('[data-cy="level-2"] .tab:first [data-cy="hide"]')
-            .click();
+              // The available adventures dropdown should now include the new adventure
+              cy.getBySel("available_adventures_current_level")
+                .children()
+                .should('have.length', startLength + 1);
 
-          // The available adventures dropdown should now include the new adventure
-          cy.getBySel("available_adventures_current_level")
-            .children()
-            .should('have.length', 2);
+              // the added option should be the last
+              cy.get('[data-cy="available_adventures_current_level"] option:last')
+                .should('have.value', `${adventure}`);
 
-          // the added option should be the last
-          cy.get('[data-cy="available_adventures_current_level"] option:last')
-            .should('have.value', `${adventure}`);
+              // after selecting the adventure, it shouldn't be among the options
+              cy.getBySel("available_adventures_current_level")
+                .select(`${adventure}`)
 
-          // after selecting the adventure, it shouldn't be among the options
-          cy.getBySel("available_adventures_current_level")
-            .select(`${adventure}`, {force: true})
+              cy.getBySel("available_adventures_current_level")
+                .children()
+                .should('have.length', startLength);
 
-          cy.getBySel("available_adventures_current_level")
-            .children()
-            .should('have.length', 1);
-
-          // the adventure should now be last
-          cy.get('[data-cy="level-2"] .tab:last input')
-            .should('have.value', `${adventure}`)
+              // the adventure should now be last
+              cy.get('[data-cy="level-2"] div:last input')
+                .should('have.value', `${adventure}`)
+          });
       });
     });
 
@@ -243,6 +248,6 @@ describe('customize class page', () => {
 
   function selectLevel(level) {
     cy.getBySel("adventures")
-      .select(level, {force: true})
+      .select(level)
       .should('have.value', level);
   }
