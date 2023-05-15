@@ -156,13 +156,16 @@
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
     <div class="order-2 md:order-4" id="code_related_buttons">
+      <div id="not-logged-in-warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+        {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
+      </div>
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
-        <div id="saveFilesContainer">
-          <button id="saveFiles" class="green-btn hidden" onclick="hedyApp.saveMachineFiles();">💾</button>
+        <div id="saveFilesContainer" class="hidden">
+          <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
