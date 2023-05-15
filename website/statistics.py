@@ -155,16 +155,30 @@ class StatisticsModule(WebsiteModule):
 
             # check the programs that the student has run each level
             programs_ran_per_level = []
+            quizzes_ran_per_level = []
+            average_quiz_score_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
                 programs_ran_per_level.append([])
+                quizzes_ran_per_level.append([])
                 for program in programs:
                     if program['level'] == level:
                         programs_ran_per_level[level - 1].append(program['name'])
 
+                for quiz_score in quiz_scores:
+                    if quiz_score['level'] == level:
+                        quizzes_ran_per_level[level - 1].append(quiz_score["scores"][0])
+
+                # for index in range(len(quizzes_ran_per_level)):
+                #     quizzes_per_level = quizzes_ran_per_level[index]
+                #     average_quiz_per_level = 0
+                #     for quiz in quizzes_per_level:
+                #         average_quiz_per_level += quiz
+                #     average_quiz_score_per_level.append(average_quiz_per_level)
+
+
             # count the number of programs that the student has run each level
             for i in range(len(programs_ran_per_level)):
                 programs_ran_per_level[i] = len(programs_ran_per_level[i])
-            print(programs_ran_per_level)
 
             average_quiz_scores = "-"
             success_rate_overall = "-"
@@ -172,11 +186,16 @@ class StatisticsModule(WebsiteModule):
                 num_finished_quizzes = 0
                 total_quiz_score = 0
                 success_rate_overall = 0
-                for level_quiz_score in quiz_scores:
-                    num_finished_quizzes += (level_quiz_score['finished'])
-                    total_quiz_score += (level_quiz_score.get("scores")[0])
+                for index in range(1, len(quiz_scores) + 1):
+                    score_level = quiz_scores[index - 1].get("scores")[0]
+                    finished_quiz = quiz_scores[index - 1]['finished']
+                    started_quiz = quiz_scores[index - 1]['started']
+
+                    num_finished_quizzes += finished_quiz
+                    total_quiz_score += score_level
                     average_quiz_scores = total_quiz_score / num_finished_quizzes
-                    success_rate_overall += (level_quiz_score['finished'] / level_quiz_score['started'] * 100)
+
+                    success_rate_overall += finished_quiz / started_quiz * 100
 
                 success_rate_overall /= num_finished_quizzes
                 success_rate_overall = round(success_rate_overall, ndigits=0)
@@ -201,6 +220,7 @@ class StatisticsModule(WebsiteModule):
                     "last_login": student["last_login"],
                     "programs": len(programs),
                     "programs_ran_per_level": programs_ran_per_level,
+                    "quizzes_ran_per_level": quizzes_ran_per_level,
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
                     "average_quiz": average_quiz_scores,
