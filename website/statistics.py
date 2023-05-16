@@ -193,7 +193,6 @@ class LiveStatisticsModule(WebsiteModule):
         collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
                                                  student=student)
-
         # Retrieve common errors from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
 
@@ -570,6 +569,7 @@ def _check_dashboard_display_args():
     show_c3 = _determine_bool(show_c3)
 
     student = request.args.get("student", default=None, type=str)
+    student = None if student == "None" else student
 
     return collapse, show_c1, show_c2, show_c3, student
 

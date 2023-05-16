@@ -21,15 +21,30 @@
         <h2 class="text-center">Class Overview</h2>
         <div class="float-right relative m-2">
             {% if dashboard_options.show_c1 %}
-            <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
-                ☝️ Hide
-            </a>
+                {% if dashboard_options.student %}
+                <a class="no-underline text-black rounded hover:bg-blue-600"
+                   href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                    ☝️ Hide
+                </a>
+                {% else %}
+                <a class="no-underline text-black rounded hover:bg-blue-600"
+                   href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                    ☝️ Hide
+                </a>
+                {% endif %}
             {% else %}
-            <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
-                👇 Show
-            </a>
+                {% if dashboard_options.student %}
+                <a class="no-underline text-black rounded hover:bg-blue-600"
+                   href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                    👇 Show
+                </a>
+                {% else %}
+                <a class="no-underline text-black rounded hover:bg-blue-600"
+                   href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                    👇 Show
+                </a>
+                {% endif %}
+
             {% endif %}
         </div>
 
@@ -94,10 +109,18 @@
                 {% if dashboard_options.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
                             ☝️ Hide
                         </a>
+                        {% endif %}
+
                     </div>
                     <div class="grid grid-cols-2 p-2">
                         <div class="w-full text-left" id="name-col">
@@ -140,10 +163,17 @@
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
+                        👇 Show
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
                         👇 Show
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
@@ -157,10 +187,17 @@
                 {% if dashboard_options.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
                             ☝️ Hide
                         </a>
+                        {% endif %}
                     </div>
                     <div class="w-full text-left p-6 mt-1">
                         <ul class="max-w-md space-y-1 list-none list-inside">
@@ -182,10 +219,17 @@
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
+                        👇 Show
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
                         👇 Show
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
