@@ -20,7 +20,7 @@ function createNewQuizChart(ctx: HTMLCanvasElement, studentLevels: string[], stu
             plugins: {
                 title: {
                     display: true,
-                    text: 'Average Quiz of a student',
+                    text: 'Average Quiz',
                     font: {
                         size: 24,
                     }
@@ -61,7 +61,7 @@ function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string
             plugins: {
                 title: {
                     display: true,
-                    text: 'Adventure Progression of a student',
+                    text: 'Level Progression',
                     font: {
                         size: 24,
                     }
@@ -122,6 +122,8 @@ export function studentTileChartClicked(event: any, student: any, levels: string
 
 export function loadQuizChart(levels: string[], studentQuizProgression: number[]) {
     const ctx = document.getElementById('student-quiz-chart') as HTMLCanvasElement;
+
+    console.log(studentQuizProgression)
 
     // Ensure that the studentTileChart (chart bar) is reset each time a different student tile is clicked
     if (studentTileQuizChart != null) {

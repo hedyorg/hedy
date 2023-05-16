@@ -1,11 +1,6 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-<script>
-$(document).ready( function () {
-    hedyApp.loadQuizChart({{ class_info.levels }})
-});
-</script>
 <div>
     <div class="flex relative">
         <div class="mx-auto "><h1>Class: {{ class_info.name }}</h1></div>
@@ -20,10 +15,10 @@ $(document).ready( function () {
             {% for student in class_info.students %}
                 <div id="static-student-tile" class="group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
                 transition-all duration-500 ease-in-out hover:bg-green-400 hover:text-white"
-                     onclick="hedyApp.loadQuizChart({{ class_info.levels }}, {{ class_info.quizzes_ran_per_level }})
+                     onclick="hedyApp.loadQuizChart({{ class_info.levels }}, {{ student.average_quizzes_ran_per_level }})
                              hedyApp.studentTileChartClicked(event, {{ student|tojson }},{{ class_info.levels }}, {{ student.programs_ran_per_level }} )">
                     <p id="static-student-name" class="select-none font-bold text-lg">{{ student.username }}</p>
-                    <canvas id="student-quiz-chart"></canvas>
+                    <canvas width="400" height="300" id="student-quiz-chart"></canvas>
                 </div>
             {% endfor %}
         </div>

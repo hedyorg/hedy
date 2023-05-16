@@ -1,3 +1,4 @@
+import statistics
 from collections import namedtuple
 from datetime import date
 from enum import Enum
@@ -149,32 +150,43 @@ class StatisticsModule(WebsiteModule):
 
         students = []
         for student_username in class_.get("students", []):
+            print(student_username)
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
+            quiz_scores = self.db.get_quiz_stats(student_username)
 
             # check the programs that the student has run each level
             programs_ran_per_level = []
             quizzes_ran_per_level = []
-            average_quiz_score_per_level = []
+            average_quizzes_ran_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
                 programs_ran_per_level.append([])
                 quizzes_ran_per_level.append([])
+
+                # append the programs obtained on each level
                 for program in programs:
                     if program['level'] == level:
                         programs_ran_per_level[level - 1].append(program['name'])
 
+                # append the scores obtained on each level
                 for quiz_score in quiz_scores:
                     if quiz_score['level'] == level:
                         quizzes_ran_per_level[level - 1].append(quiz_score["scores"][0])
 
-                # for index in range(len(quizzes_ran_per_level)):
-                #     quizzes_per_level = quizzes_ran_per_level[index]
-                #     average_quiz_per_level = 0
-                #     for quiz in quizzes_per_level:
-                #         average_quiz_per_level += quiz
-                #     average_quiz_score_per_level.append(average_quiz_per_level)
+                # average the quiz scores on each level
+                if not quizzes_ran_per_level[level - 1]:
+                    average_quizzes_ran_per_level.append(0)
+                else:
+                    if len(quizzes_ran_per_level[level - 1]) == 1:
+                        average_quizzes_ran_per_level.append(quizzes_ran_per_level[level - 1][0])
+                    if len(quizzes_ran_per_level[level - 1]) > 1:
+                        average_quiz_score_per_level = 0
+                        for index in range(1, len(quizzes_ran_per_level[level - 1]) + 1):
+                            quiz_scores_per_level = quizzes_ran_per_level[level - 1][index - 1]
+                            average_quiz_score_per_level += quiz_scores_per_level
 
+                        average_quiz_score_per_level /= (len(quizzes_ran_per_level[level - 1]))
+                        average_quizzes_ran_per_level.append(int(average_quiz_score_per_level))
 
             # count the number of programs that the student has run each level
             for i in range(len(programs_ran_per_level)):
@@ -214,15 +226,18 @@ class StatisticsModule(WebsiteModule):
                 success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
                 success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
+            print(f'Average quizzes per level: {average_quizzes_ran_per_level}')
+            print(f'Programs ran per level: {programs_ran_per_level}')
+
             students.append(
                 {
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
                     "programs_ran_per_level": programs_ran_per_level,
-                    "quizzes_ran_per_level": quizzes_ran_per_level,
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
+                    "average_quizzes_ran_per_level": average_quizzes_ran_per_level,
                     "average_quiz": average_quiz_scores,
                     "highest_level_quiz": highest_level_quiz,
                     "highest_level_quiz_score": highest_level_quiz_score,
