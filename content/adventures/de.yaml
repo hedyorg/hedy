@@ -6,7 +6,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Willkommen bei Hedy!
                     In Level 1 kannst du die Befehle `{print}`, `{ask}` und `{echo}` verwenden.
                     Tippe den Code in das Programmierfeld. Oder drücke den grünen Knopf beim Beispielcode um ihn in dein Programm zu übernehmen!
                     Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
@@ -19,7 +18,6 @@ adventures:
                 story_text_3: "Lass uns loslegen! Weißt du nicht was du programmieren sollst? In den nächsten Tabs warten Ideen für Programme auf dich.\n"
             2:
                 story_text: |
-                    ## Variablen
                     In Level 2 lernen wir zwei neue Befehle: `{is}` und `{sleep}`.
                     Du kannst ein Wort mit `{is}` benennen. Das nennt man eine Variable. In diesem Beispiel haben wir eine Variable name und eine Variable alter erstellt. Du kannst das Wort name irgendwo in deinem Code verwenden und es wird dann durch Hedy ersetzt, und zwar so:
 
@@ -32,7 +30,6 @@ adventures:
                 example_code_3: "```\n{print} Meine Lieblingsfarbe ist...\n{sleep} 2\n{print} grün!\n```\n"
             3:
                 story_text: |
-                    ## Erstelle eine Liste!
                     In Level 3 kannst du eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `{at} {random}`. Es bedeutet: Wähle ein Element an zufälliger Stelle in der Liste aus.
                 start_code: "{print} Hallo Welt!"
                 example_code: "```\ntiere {is} Hund, Katze, Känguru\n{print} tiere {at} {random}\n```\n"
@@ -41,32 +38,29 @@ adventures:
             4:
                 start_code: "{print} 'Hallo Welt'"
                 story_text: |
-                    ## 'Anführungszeichen'
                     In Level 4 haben sich `{print}` und `{ask}` geändert.
                     Du musst Text, den du genau so mit ausgeben möchtest, in Anführungszeichen setzen.
                     Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
                     Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\n{print} 'Ab jetzt musst du Anführungszeichen verwenden!'\nantwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'\n{print} 'Wir müssen ' antwort ' verwenden.'\n```\n"
-                story_text_2: "## Kontraktionen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du Apostrophe für Kontraktionen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is.\nSchau dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu sehen.\n"
+                story_text_2: "Wichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du Apostrophe für Kontraktionen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is.\nSchau dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu sehen.\n"
                 example_code_2: "```\n_ Dies ist die falsche Verwendung der Apostrophe _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
                     name {is} {ask} 'Wie heisst du?'
                     {if} name {is} Hedy {print} 'Toll!' {else} {print} 'Blöd'
                 story_text: |
-                    ## Falls... sonst...
                     In Level 5 gibt es etwas Neues, nämlich das `{if}`! Mit `{if}` kannst du zwischen zwei verschiedenen Möglichkeiten wählen.
                     Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst.
                     `{ask}` und `{print}` funktionieren immer noch wie in Level 4.
                 example_code: "```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy {print} 'Schön' {else} {print} 'Buh!'\n```\n"
-                story_text_3: "## Listen\nWenn wir überprüfen möchten ob etwas in einer Liste ist, können wir das mit dem Befehl `{in}` machen.\nDieser Code gibt schön! aus wenn du grün oder gelb auswählst, und na ja wenn du dich für eine andere Farbe entscheidest.\n"
+                story_text_3: "Wenn wir überprüfen möchten ob etwas in einer Liste ist, können wir das mit dem Befehl `{in}` machen.\nDieser Code gibt schön! aus wenn du grün oder gelb auswählst, und na ja wenn du dich für eine andere Farbe entscheidest.\n"
                 example_code_3: "```\nschöne_farben {is} grün, gelb\nfarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'\n{if} farbe {in} schöne_farben {print} 'schön!'\n{else} {print} 'na ja'\n```\n"
                 story_text_2: "Manchmal wird Code mit einem `{if}` ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Zeilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy {print} 'schön'\n{else} {print} 'buh!'\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
                 story_text: |
-                    ## 1 + 1
                     In diesem Level lernst du etwas Neues: Du kannst jetzt auch rechnen.
 
                     Das Plus ist leicht, das schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
@@ -79,7 +73,6 @@ adventures:
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy macht Spaß!'"
                 story_text: |
-                    ## Level 7! Level 7!
                     In Level 7 kommt der Befehl `{repeat}` dazu. Mit `{repeat}` kannst du eine Zeile Code mehrmals ausführen.
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy macht Spaß!'\n```\n"
             8:
@@ -88,7 +81,6 @@ adventures:
                         {print} 'Hallo Leute'
                         {print} 'Das wird 5 mal ausgegeben'
                 story_text: |
-                    ## Einrückung
                     `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`, `{else}` und `{repeat}` haben sich verändert!
                     Du kannst jetzt mehrere Zeilen gruppieren, aber du musst den Code dafür *einrücken*.
                     Das bedeutet, dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
@@ -102,7 +94,6 @@ adventures:
                         {else}
                             {print} 'Pizza ist besser'
                 story_text: |
-                    ## Jetzt alles zusammen!
                     In diesem Level kannst du nicht nur mehrere Zeilen mit `{if}` und `{repeat}` verwenden, du kannst sie auch kombinieren!
                     Im Beispiel siehst du einen `{if}` Befehl innerhalb eines `{repeat}` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `{if}` innerhalb eines anderen `{if}` Befehls erlaubt, genau wie `{repeat}` in einem anderen `{repeat}` Befehl.
                     Versuch es mal!
@@ -113,7 +104,6 @@ adventures:
                     {for} tier {in} tiere
                       {print} 'Ich mag' tier
                 story_text: |-
-                    ## Für jedes Element in meiner Liste...
                     In diesem Level lernen wir den neuen Befehl `{for}`. Mit `{for}` kannst du eine Liste machen und alle ihre Elemente verwenden.
                     `{for}` erstellt einen Block, so wie `{repeat}` und `{if}`, daher müssen alle Zeilen in dem Block mit Leerzeichen beginnen.
                 example_code: "```\ntiere {is} Hund, Katze, Kugelfisch\n{for} tier {in} tiere\n  {print} 'Ich mag ' tier\n```\n"
@@ -122,7 +112,6 @@ adventures:
                     {for} zähler {in} {range} 1 {to} 5
                         {print} zähler
                 story_text: |-
-                    ## Schleifen!
                     In diesem Level fügen wir eine neue Form des Befehls `{for}` hinzu. In früheren Leveln haben wir `{for}` mit Listen benutzt, aber wir können `{for}` auch mit Zahlen verwenden.
                     Dies machen wir, indem wir einen Variablennamen und dann `{in}` `{range}` schreiben. Dahinter schreiben wir die Zahl bei der es losgehen soll, `{to}` und dann die Zahl, wo es aufhört.
 
@@ -133,7 +122,6 @@ adventures:
                     {print} 'Dezimalzahlen benötigen jetzt einen Punkt'
                     {print} 2.5 + 2.5
                 story_text: |-
-                    ## Zahlen und Texte
                     **Dezimalzahlen**
                     Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1,5 verwenden, aber jetzt geht das. Denke jedoch daran, dass Hedy (wie viele andere Programmiersprachen auch) anstatt des Kommas einen Punkt (`.`) verwendet.
                 example_code: "```\n{print} 'Zweieinhalb plus zweieinhalb macht...'\n{print} 2.5 + 2.5\n```\n"
@@ -152,7 +140,6 @@ adventures:
                     {if} name {is} 'Hedy' {and} alter {is} 2
                         {print} 'Du bist die echte Hedy!'
                 story_text: |-
-                    ## Und... oder...?
                     Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei Mal `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen.
 
                     Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
@@ -165,7 +152,6 @@ adventures:
                     {else}
                         {print} 'Du bist älter als ich!'
                 story_text: |
-                    ## Groß, größer, am größten!
                     Wir lernen weitere neue Elemente kennen! Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen.
                     Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, so überprüft Alter `<` 12 zum Beispiel, ob Alter kleiner als 12 ist.
                     Wenn du überprüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kannst du `<=` verwenden, zum Beispiel Alter `<=` 11.
@@ -184,7 +170,6 @@ adventures:
                         antwort = {ask} 'Wieviel ist 5 mal 5?'
                         {print} 'Das ist die richtge Antwort!'
                 story_text: |-
-                    ## Mehr Schleifen!
                     Wir lernen eine neue Schleife kennen, die `{while}`-Schleife! Wir setzen die Schleife so lange fort, wie die Aussage wahr ist!
                     Also vergiss nicht den Wert innerhalb der Schleife zu ändern.
 
@@ -196,7 +181,6 @@ adventures:
                     obst = ['Apfel', 'Banane', 'Kirsche']
                     {print} obst
                 story_text: |-
-                    ## Wir kommen dem richtigem Code immer näher!
                     Wir setzen jetzt eckige Klammern um Listen, so wie das in Python gemacht wird! Außerdem müssen wir jetzt einfache Anführungszeichen (') um jedes Element einer Liste setzen, wie wir es in den vorherigen Leveln gelernt haben.
                     Wir nutzen eckige Klammern um auf eine Stelle in einer Liste zu zeigen. Der {at} Befehl kann nicht mehr benutzt werden.
                 example_code: "```\nfreunde = ['Ahmed', 'Ben', 'Clemens']\nglückszahlen = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'Die Glückszahl von ' freunde[i]\n    {print} 'ist ' glückszahlen[i]\n```\n"
@@ -206,7 +190,6 @@ adventures:
                         {print} i
                     {print} 'Bereit oder nicht, ich komme!'
                 story_text: |-
-                    ## {elif}
                     Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
                     In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für `{else}` `{if}` und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
@@ -228,7 +211,6 @@ adventures:
                     name = 'Hedy'
                     {print}('Ich heiße ', name)
                 story_text: |-
-                    ## Das letzte Level!
                     Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen `{print}` und `{range}` benutzen müssen.
                     Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen.
 
@@ -242,7 +224,6 @@ adventures:
                     ```
 
                 story_text_3: |-
-                    ## Eingabe
                     Die letzte Änderung, die wir vornehmen müssen, um Python-Code zu erhalten, ist die Änderung von `{ask}` zu `{input}`.
 
                 example_code_3: |
@@ -264,7 +245,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Schreibe eine Geschichte
                     In Level 1 kannst du die Hauptfigur deiner Geschichte ändern, indem du ihren Namen selbst eingibst.
 
                     Nutze `{ask}` in der ersten Zeile um zu fragen, wer der Hauptcharakter der Geschichte sein soll.
@@ -285,7 +265,6 @@ adventures:
                 story_text_2: "### Übung\nErstelle nun deine eigene Geschichte aus mindestens 6 Zeilen Code.\nDiese Geschichte soll nicht die gleiche sein wie im Beispiel-Code.\nBenutze mindestens einen `{ask}` und einen `{echo}` Befehl.\nDu kannst das Thema frei wählen.\nWenn dir kein Thema einfällt, nimm eines der folgenden: ins Kino gehen, ein Sportwettkampf oder ein Tag im Zoo.\n"
             2:
                 story_text: |
-                    ## Schreibe eine Geschichte
                     In Level 2 kannst du deine Geschichte noch etwas spannender machen. Der Name deiner Hauptfigur kann nun an jeder Stelle im Satz auftauchen.
 
                     Dafür musst du aber auch ein kleines bisschen mehr programmieren. Du musst dir jetzt seinen oder ihren Namen richtig merken.
@@ -305,7 +284,6 @@ adventures:
                 story_text_2: "### Übung\nNun ist es an der Zeit Variablen zu deiner eigenen Geschichte aus dem vorigen Level hinzu zu fügen.\nGehe zu \"Meine Programme\", suche dein Level 1 Geschichten-Abenteuer und kopiere den Code. Füge den Code in den Eingabebereich in diesem Level ein.\n\nDieser Code wird nicht funktionieren, weil du noch keine Variablen benutzt hast.\nÄndere den `{ask}` Befehl und den `{echo}` Befehl in deinem Code in die richtige Form, die du in diesem Level gelernt hast.\n\n**Extra** Füge deinem Code den warte-Befehl hinzu, um Spannung in deiner Geschichte aufzubauen.\n"
             12:
                 story_text: |-
-                    ## Geschichte
                     In diesem Level werden Anführungszeichen benötigt, um mehrere Wörter in einer Variablen zu speichern.
 
                     ### Übung
@@ -322,7 +300,6 @@ adventures:
                 # Frankly, this section translates to German awfully.
                 # Anybody has a good idea that works well in German?
                 story_text: |
-                    ## Geschichte
                     In diesem Level kannst du den {for} Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
 
                     ### Übung
@@ -338,7 +315,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             9:
                 story_text: |
-                    ## Geschichte
                     In diesem Level kannst du `{if}` und `{repeat}` innerhalb anderer `{if}` und `{repeat}` Befehle verwenden.
                     Das eröffnet dir viele Möglichkeiten und hilft dir, deine Geschichte wirklich interaktiv werden zu lassen.
 
@@ -354,7 +330,6 @@ adventures:
                 example_code: "```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein interessant aussehendes Buch'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n    _ {print} 'Robin kauft das Buch und geht nach Hause.'\n    _ {else}\n    _ {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
             8:
                 story_text: |
-                    ## Geschichte
                     In diesem Level kannst du mehrere Zeilen zu einem `{if}`-Befehl hinzufügen. So kannst du deine guten und schlechten Enden etwas erweitern.
 
                     ### Übung 1
@@ -379,7 +354,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
-                    ## Geschichte
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
                     Solche Wiederholungen kannst du mit dem Befehl `{repeat}` in diesem Level in deine Geschichte einfügen.
 
@@ -397,7 +371,6 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Hilfe!'"
             5:
                 story_text: |
-                    ## Geschichte
                     In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschichte noch spannender werden lässt.
                     Im Beispielcode kannst du sehen, wie man zwei verschiedene Enden machen kann.
 
@@ -425,7 +398,6 @@ adventures:
                 start_code: "{print} 'Deine Geschichte beginnt genau hier.'"
             4:
                 story_text: |
-                    ## Geschichte
                     Vielleicht ist dir aufgefallen, dass es in den vorigen Leveln noch ein Problem gab. Hast du versucht, einen Satz mit dem Wort Name zu schreiben? Z.B. `{print}` mein Name ist Name.
                     In diesem Level kannst du das lösen. Du musst alles, was du ausgeben möchtest, in einfache Anführungszeichen setzen.
 
@@ -449,7 +421,6 @@ adventures:
                 start_code: "{print} 'Deine Geschichte wird hier gedruckt!'"
             3:
                 story_text: |
-                    ## Geschichte
                     In Level 3 wird es etwas witziger. Du kannst nun etwas ganz zufälliges zu Deiner Geschichte hinzufügen. Ein beliebiges Monster, ein Tier oder ein Hindernis. Das funktioniert so:
                 start_code: "{print} Deine Geschichte"
                 example_code: |
@@ -485,7 +456,6 @@ adventures:
                     ```
             15:
                 story_text: |
-                    ## Geschichte
                     Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit `{while} Spiel {is} 'läuft'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
                     Oder du lässt die Spieler mit `{while} Schwert {is} 'verloren'` so lange weiter suchen, bis sie etwas finden.
 
@@ -507,7 +477,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             13:
                 story_text: |
-                    ## Geschichte
                     Durch die Verwendung der Befehle `{and}` und `{or}` kannst du deine Geschichten vielseitiger gestalten. Du kannst zwei Fragen stellen und auf die Kombination der Antworten antworten.
 
                     ### Übung 1
@@ -528,7 +497,7 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             18:
                 example_code: "```\n{print}('Willkommen in dieser Geschichte!')\n```\n"
-                story_text: "## Geschichte\nWir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.\n\n### Übung 1\nErstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.\n"
+                story_text: "Wir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.\n\n### Übung 1\nErstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.\n"
                 story_text_2: "### Übung 2\nWir haben bereits einen `{input}` Befehl für dich vorbereitet. Benutze zuerst die `name` Variable in deiner Geschichte.\nFüge dann einen zweiten `{ask}` Befehl hinzu und benutze diese Variable ebenfalls.\nTipp: Denke an die Kommas im `{print}` Befehl zwischen Text und Variablen!\n"
                 example_code_2: "```\nname = {input}(\"Wie ist dein Name?\")\n{print}('Willkommen in dieser Geschichte!')\n```\n"
                 start_code: '# platziere deinen Code hier'
@@ -539,7 +508,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Papagei
                     Erschaffe Dir deinen eigenen zahmen Papageien, der Dir alles nachplappert!
 
                 example_code: |
@@ -554,7 +522,6 @@ adventures:
                 story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich, indem du den gelben Knopf drückst.\nBringe den Papagei dazu, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n**Extra** Du kannst den Papagei auch mehrere Fragen stellen lassen. Tippe noch ein paar Zeilen Code unter deinen eigenen Code.\n"
             2:
                 story_text: |
-                    ## Papagei
                     Lass Deinen zahmen Papageien noch etwas echter klingen!
 
                 example_code: |
@@ -572,7 +539,6 @@ adventures:
                 example_code_2: "```\n{print} Ich bin Hedy der Papagei\nname {is} {ask} Wie heißt du?\n{print} name\n{sleep}\n{print} name\nNachname {is} {ask} Wie ist dein Nachname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
-                    ## Papagei
                     Bringe Deinem Papageien mit dem Befehl `{add}` neue Wörter bei.
                     ### Übung
                     Wie kannst Du deinen Papagei dazu bringen, mehrere Wörter zu sagen?
@@ -589,7 +555,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
-                    ## Papagei
                     Belohne deinen Papagei, wenn er das richtige Wort sagt!
 
                     ### Übung
@@ -609,7 +574,7 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
             4:
-                story_text: "## Papagei\nIn diesem Level müssen wir Anführungszeichen bei den Befehlen `{ask}` und `{print}` benutzen.\n### Übung\nVervollständige den Code, indem du Anführungszeichen in die Lücken füllst?\n"
+                story_text: "In diesem Level müssen wir Anführungszeichen bei den Befehlen `{ask}` und `{print}` benutzen.\n### Übung\nVervollständige den Code, indem du Anführungszeichen in die Lücken füllst?\n"
                 example_code: "```\nwörter {is} krächz, Hedy\n{print} _ Trainiere deinen Papagei! _\nneues_wort {is} {ask} _ Welches Wort möchtest du ihm beibringen? _\n{add} neues_wort {to_list} wörter\n{print} _ \U0001F9D2 Sage _ neues_wort _, Hedy!_\n{print} _ \U0001F99C _ wörter {at} {random}\n```\n"
                 start_code: '# Schreibe deinen Code hier'
     songs:
@@ -619,7 +584,6 @@ adventures:
         levels:
             12:
                 story_text: |
-                    ## Sing ein Lied!
                     Jetzt machen wir es uns richtig einfach und programmieren 'Wenn du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es dir an:
 
                     ### Übung
@@ -640,7 +604,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             11:
                 story_text: |
-                    ## Lieder
                     In diesem Level nutzt du den Befehl `{for}` mit `{range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
 
                     ### Übung 1
@@ -658,7 +621,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             10:
                 story_text: |
-                    ## Lieder
                     Mit `{for}` kannst du den ganzen Babyhai-Song (inklusive aller anderen Haie in der Familie) in nur 6 Zeilen Code ausgeben.
 
                     ### Übung 1
@@ -675,7 +637,6 @@ adventures:
                 story_text_2: "### Übung 2\nGib das Lied Fünf kleine Affen springen auf dem Bett aus. Schlag den Text nach, falls du dich nicht daran erinnerst.\n\n**(extra)** Gib das Lied Old MacDonald hat 'ne Farm aus und stelle sicher, dass alle Tiere ein unterschiedliches Geräusch machen, indem du `{if}` benutzt.\n"
             8:
                 story_text: |
-                    ## Lieder
                     In einem vorigen Level hast du das Lied über die Bierflaschen programmiert. Aber ohne den `{repeat}` Befehl musstest du die Strophen viele Male kopieren.
                     In diesem Level kannst du das Lied 99 mal wiederholen, indem du nur eine einfache Zeile hinzufügst!
 
@@ -695,7 +656,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
-                    ## Lieder
                     In Liedern wiederholt sich oft einiges. So auch im Lied "Baby Hai"! Wenn du es singst, singst du eigentlich immer das gleiche:
 
                     Baby Hai tututudutudu <br>
@@ -717,7 +677,6 @@ adventures:
                 start_code: "{print} 'Baby Hai'"
             6:
                 story_text: |
-                    ## Lieder
                     In Liedern wiederholt sich oft einiges. Manchmal basiert die Wiederholung auch darauf, dass etwas gezählt wird.
                     So zum Beispiel im Lied über die Bierflaschen. Dies ist eigentlich ein englisches Lied und hat den Titel "99 bottles of beer". Dieses Lied kannst du mit ein klein wenig Mathematik programmieren.
 
@@ -738,16 +697,14 @@ adventures:
                     ```
 
                 start_code: "{print} 'Lass uns singen!'"
-                story_text_2: "## 5 Kleine Affen springen auf dem Bett\nDieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
+                story_text_2: "Dieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
                 example_code_2: "```\nnummer = 6\nnummer = nummer - 1\n{print} nummer ' kleine Affen springen auf dem Bett'\n{print} 'Einer fiel runter und stieß sich den Kopf'\n{print} 'Mama rief den Arzt und der Arzt sagte'\n{print} 'KEINE KLEINEN AFFEN SPRINGEN MEHR AUF DEM BETT!'\n{sleep}\n```\n"
             16:
                 story_text: |
-                    ## Lieder
                     In diesem Level kannst Du 'Old MacDonald hat ne Farm' sogar noch schneller programmieren. Du kannst jedem Tier das richtige Geräusch zuordnen, indem Du sie an die selbe Stelle einer Liste speicherst.
                     Vielleicht kennst Du ja auch schon das englischsprachige Lied 'The Drunken Sailor'. Hierfür benötigst Du nur 8 Zeilen Code. Sieh es Dir an!
 
                 example_code: |
-                    ## Old MacDonald hat ne Farm
                     ```
                     Tiere = ['Schweine', 'Hunde', 'Kühe']
                     Geräusche = ['grunz', 'wuff', 'muh']
@@ -765,7 +722,6 @@ adventures:
                         {print} 'überall ein ' Geräusch Geräusch
                     ```
 
-                    ## Drunken Sailor
                     ```
                     Zeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} Zeile {in} Zeilen
@@ -779,7 +735,7 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             18:
                 start_code: '# Schreibe deinen Code hier'
-                story_text: "## Sing ein Lied!\nIn Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.\n\n### Übung 1\nDas Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.\nKannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.\n\n### Übung 2\nSchau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.\n"
+                story_text: "In Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.\n\n### Übung 1\nDas Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.\nKannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.\n\n### Übung 2\nSchau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.\n"
                 example_code: "```\nzeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} zeile {in} zeilen _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ zeile _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         name: "Schildkröte"
@@ -788,7 +744,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Lass uns zeichnen
                     Du kannst mit Hedy auch zeichnen. Indem Du Drehungen und Linien kombinierst, kannst Du ein Quadrat oder eine Treppe zeichnen.
 
                     Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit `{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn.
@@ -813,7 +768,6 @@ adventures:
                     {turn} {left}
             2:
                 story_text: |
-                    ## Schildkröte
                     In diesen level kann du Variablen nutzen, um die Schildkröte interaktiv zu machen. Du kannst zum Beispiel die Spieler fragen, wie viele Schritte die Schildkröte machen soll.
 
                 example_code: |
@@ -830,7 +784,6 @@ adventures:
                 example_code_2: "```\n{print} Figuren werden gezeichnet\nwinkel {is} 90\n{turn} winkel\n{forward} 25\n{turn} winkel\n{forward} 25\n```\n"
             3:
                 story_text: |
-                    ## Suchende Schildkröte
                     In diesem Level kannst Du `{at} {random}` nutzen, während die Schildkröte etwas zeichnet. Durch eine zufällige Wahl nimmt die Schildkröte jedes Mal einen anderen Weg.
                     Nutze `{at} {random}` um einen zufälligen Wert aus einer Liste zu wählen.
                     ### Übung
@@ -849,7 +802,6 @@ adventures:
                     {forward} 25
             4:
                 story_text: |
-                    ## Lass uns zeichnen
                     In Level 4 musst Du bei `{print}` und `{ask}` Anführungszeichen nutzen. Das gilt auch für's Zeichnen!
 
                 example_code: |
@@ -868,11 +820,10 @@ adventures:
                     {turn} Winkel
                     {forward} 25
 
-                story_text_2: "## Farben\nDu kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.\n"
+                story_text_2: "Du kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
-                    ## Lass uns zeichnen
                     In Level 5 kannst Du mit dem Befehl `{if}` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
 
                 example_code: |
@@ -900,7 +851,6 @@ adventures:
                 story_text_2: "### Übung\nFülle die richtigen Zahlen in die Lücken in diesem Code, um ihn zum Laufen zu bringen.\nNachdem du das getan hast, kannst du versuchen die Option rückwärts hinzuzufügen.\n\n**Extra** Anstelle von \"links\" und \"rechts\", ändere das Programm so, dass es Nord, Ost, Süd und West benutzt.\nAuf diese Weise kannst du sogar noch mehr Richtungen, wie z.B. Nordost und Südwest, hinzufügen.\n"
             8:
                 story_text: |
-                    ## Lass uns zeichnen
                     Jetzt, da wir einzelne Linien wiederholen können, fällt uns das Zeichnen einzelner Formen leichter.
                     Wir setzen den Winkel einmalig und nutzen dann die Variable im `{repeat}`.
 
@@ -934,7 +884,6 @@ adventures:
                     Ecken = {ask} 'Wie viele Ecken soll die Form haben?'
             6:
                 story_text: |
-                    ## Lass uns zeichnen!
                     In diesem Level nutzen wir Berechnungen, um verschiedene Formen zu zeichnen.
                     Du hast vielleicht schon gelernt, dass eine komplette Umdrehung 360° sind. Falls nicht, dann weißt Du es jetzt!
                     Deswegen benutzen wir immer 90° für ein Rechteck. 360 geteilt durch 4 ist 90.
@@ -961,7 +910,7 @@ adventures:
                     {print} 'Formen zeichnen'
             9:
                 start_code: '# schreibe deinen Code hier'
-                story_text: "## Schildkröte\nNun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, ist es möglich, komplexere Figuren zu erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n**(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
+                story_text: "Nun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, ist es möglich, komplexere Figuren zu erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n**(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
     dishes:
         name: "Abwasch?"
@@ -970,7 +919,6 @@ adventures:
         levels:
             10:
                 story_text: |
-                    ## Abwaschen
                     In diesem Level kannst du einen Ablauf für die ganze Woche auf eine einfache Art und Weise erstellen!
 
                     ### Übung
@@ -987,7 +935,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
-                    ## Abwaschen
                     Mit dem Befehl `{repeat}` kannst du Code-Zeilen wiederholen. Das kannst du nutzen, um für mehrere Tage zu berechnen, wer abwäscht.
                     ### Übung
                     Benutze den `{repeat}` Befehl um zu entscheiden wer die ganze Woche abwaschen muss. Jede Lücke muss mit einem Befehl oder einer Zahl gefüllt werden!
@@ -1001,7 +948,6 @@ adventures:
                 start_code: "{print} 'Wer macht den Abwasch?'"
             6:
                 story_text: |
-                    ## Abwaschen
                     Wer ist wie oft mit dem Abwasch dran? Ist es gerecht verteilt? In diesem Level kannst Du mitzählen.
 
                 example_code: |
@@ -1018,7 +964,6 @@ adventures:
                     Kannst Du den Code für eine ganze Woche schreiben?
 
                 story_text_2: |
-                    ## Mache es gerecht
                     Wenn Du ganz großes Pech hast, könnte Dich das vorigen Programm für die ganze Woche als Abwäscher bestimmen. Das ist ungerecht!
                     Um das System gerechter zu gestalten, kannst Du mit dem Befehl `{remove}` die ausgewählt Person von der Liste entfernen. Auf diese Weise musst Du nicht nochmal abwaschen, bis jeder einmal dran war.
 
@@ -1040,7 +985,6 @@ adventures:
                 start_code: "{print} 'Wer wäscht ab?'"
             5:
                 story_text: |
-                    ## Abwaschen
                     Mit dem Befehl `{if}` kannst Du noch etwas mehr Spaß haben, wenn Du die Auswahl auswertest. Du kannst Dein Programm auf die Auswahl, die der Computer trifft, reagieren lassen.
                     ### Übung
                     Kannst Du den Code so vervollständigen, dass er "So ein Pech" ausgibt, wenn Du dran bist und ansonsten "Zum Glück!"?
@@ -1056,7 +1000,6 @@ adventures:
                 start_code: "{print} 'Wer macht den Abwasch?'"
             4:
                 story_text: |
-                    ## Abwaschen
                     Mit Anführungszeichen kannst du dein Abwaschprogramm noch besser machen.
 
                     ### Übung
@@ -1072,7 +1015,6 @@ adventures:
                 start_code: "{print} 'Wer macht den Abwasch?'"
             3:
                 story_text: |
-                    ## Abwaschen
                     Gibt es bei euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
                     Dann kannst du den Computer völlig fair entscheiden lassen. Das kannst du in diesem Level programmieren!
 
@@ -1096,7 +1038,6 @@ adventures:
         levels:
             10:
                 story_text: |
-                    ## Würfel
                     Brauchen alle zu lange, um zu würfeln? In diesem Level kannst du Hedy alle Würfel auf einmal werfen lassen.
 
                     ### Übung
@@ -1113,7 +1054,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
-                    ## Würfel
                     Auch in Level 5 kannst du wieder einen Würfel programmieren. Mit dem Befehl `{repeat}` kannst du ganz einfach eine ganze Handvoll Würfel werfen.
 
                     ### Übung
@@ -1127,7 +1067,6 @@ adventures:
                 start_code: "{print} 'Was wird der Würfel diesmal anzeigen?'"
             6:
                 story_text: |
-                    ## Würfel
                     Hier kannst Du auch wieder der Regenwurmwürfel erstellen, aber hier kannst Du dazu auch noch berechnen, wie viele Punkte gewürfelt wurden.
                     Vielleicht weißt Du ja, dass der Wurm 5 Punkte zählt. Jetzt kannst Du nach jedem Wurf direkt berechnen, wie viele Punkte Du bekommst.
                     Hier ist der Code zur Berechnung der Punkte für einen Würfel:
@@ -1146,10 +1085,9 @@ adventures:
                     ```
 
                 start_code: "{print} 'Was wird der Würfel diesmal anzeigen?'"
-                example_code_2: "## Vorschau\n\nIst es dir gelungen, die Gesamtpunktzahl für 8 Würfel auszurechnen? Dafür musstest du ganz schön viel hin und her kopieren, oder?In Level 7 machen wir das einfacher!\n"
+                example_code_2: "\nIst es dir gelungen, die Gesamtpunktzahl für 8 Würfel auszurechnen? Dafür musstest du ganz schön viel hin und her kopieren, oder?In Level 7 machen wir das einfacher!\n"
             5:
                 story_text: |
-                    ## Würfel
                     Wir werden die `{if}` und `{else}` Befehle zu unseren Würfeln hinzufügen!
 
                     ### Übung
@@ -1167,7 +1105,6 @@ adventures:
                 start_code: "{print} 'Was zeigt der Würfel diesmal?'"
             4:
                 story_text: |
-                    ## Würfel
                     In diesem Level kannst du auch Würfel erstellen. Aber dieses Mal kannst du es selbst versuchen, ohne Beispiel-Code!
 
                     ### Übung
@@ -1177,7 +1114,6 @@ adventures:
                 start_code: "{print} 'Was zeigt der Würfel diesmal?'"
             3:
                 story_text: |
-                    ## Würfel
                     In diesem Level können wir von einer Liste wählen. Damit können wir den Computer eine Seite des Würfels wählen lassen.
                     Schaut mal in die Brettspiele in Eurem Schrank zu Hause.
                     Haben einige davon (besondere) Würfel? Die kannst Du auch mit diesem Code nachbauen.
@@ -1196,7 +1132,6 @@ adventures:
                 example_code_2: "```\nAuswahlmöglichkeiten {is} _\n```\n"
             15:
                 story_text: |
-                    ## Würfel
                     In diesem Spiel musst Du in möglichst wenig Versuchen eine 6 würfeln.
 
                 example_code: |
@@ -1219,7 +1154,7 @@ adventures:
         levels:
             5:
                 start_code: '# platziere deinen Code hier'
-                story_text: "## Drück es!\nIn diezer Level wurde dir das neue Schlüsselwort `{pressed}` mitgeteilt! Mit `{pressed}`\nkannst du deinen Code interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\n### Übung\nSehen Sie sich das Beispiel an und fügen Sie eine weitere Zeile hinzu, die auf Tasten reagiert."
+                story_text: "In diezer Level wurde dir das neue Schlüsselwort `{pressed}` mitgeteilt! Mit `{pressed}`\nkannst du deinen Code interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\n### Übung\nSehen Sie sich das Beispiel an und fügen Sie eine weitere Zeile hinzu, die auf Tasten reagiert."
                 example_code_2: "```\n{if} x {is} {pressed} {forward} 50\n{else} {turn} 90\n```\n"
                 example_code: |
                     ```
@@ -1228,7 +1163,6 @@ adventures:
                     {else} print 'Der Prinz wurde von einem Nilpferd gefressen 😭'
                     ```
                 story_text_2: |
-                    ## Zeichnen
                     Sie können jeden Code mit einem Schlüssel verknüpfen, einschließlich der Zeichenschildkröte.
                     
                     ### Übung
@@ -1237,10 +1171,10 @@ adventures:
             7:
                 example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
                 start_code: '# Platziere deinen Code hier'
-                story_text: "## Die Schildkröte steuern\nNun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
+                story_text: "Nun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
             9:
                 start_code: '# platziere deinen Code hier'
-                story_text: "## Blindtippspiel\nNun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
+                story_text: "Nun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
                 example_code: "```\nPunkte = 1\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
 
     rock:
@@ -1250,7 +1184,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Schere, Stein, Papier
                     In Level 1 kannst du mit einem Schere, Stein, Papier-Spiel beginnen.
 
                     Mit `{ask}` kannst du eine Wahl treffen und mit `{echo}` kannst du diese Wahl wiederholen.
@@ -1266,7 +1199,6 @@ adventures:
                 example_code_2: "```\n{print} Was wählst du?\n{ask} Wähle aus _\n{echo} Also war deine Wahl:\n```\n"
             10:
                 story_text: |
-                    ## Schere, Stein, Papier
                     Bist du zu faul, um das Spiel selbst zu spielen? Lass Hedy es für dich spielen!
                     Du musst nur die Namen der Spieler ausfüllen und sie bekommen eine zufällige Auswahl.
 
@@ -1288,7 +1220,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             9:
                 story_text: |
-                    ## Stein, Schere, Papier
                     In diesem Level kannst du das ganze Stein-Schere-Papier-Programm programmieren, indem du `{if}` Befehle verschachtelst.
 
                     ### Übung
@@ -1314,7 +1245,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
-                    ## Stein, Schere, Papier
                     In diesem Level können wir bestimmen, ob es unentschieden war oder nicht. Dafür brauchst du den neuen `{if}` Code.
 
                     ### Übung
@@ -1339,7 +1269,6 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             4:
                 story_text: |
-                    ## Stein, Schere, Papier
                     In diesem Level können wir Stein Schere Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
                     ### Übung
                     Kopiere deinen Code aus dem vorigen Level und bring ihn mit Hilfe von Anführungszeichen nach jedem `{print}` oder `{ask}` Befehl zum Laufen.
@@ -1347,7 +1276,6 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
                 story_text: |
-                    ## Rock, paper, scissors
 
                     In this level we can enter lists and choose things from them.
                     You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
@@ -1363,7 +1291,6 @@ adventures:
                 example_code_2: "```\nAuswahl {is} Stein, Schere, Papier\n{print} Spieler 1 wählt... Auswahl {at} {random}\n{print} Spieler 2 _\n```\n"
             2:
                 story_text: |
-                    ## Schere, Stein, Papier
                     In diesem Level kannst du üben, Variablen zu benutzen, damit du im nächsten Level das Spiel Schere, Stein, Papier machen kannst!
 
                 example_code: |
@@ -1375,7 +1302,6 @@ adventures:
                 story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich, indem du den gelben Knopf drückst.\nVervollständige den Code, indem du die richtigen Befehle in die Lücken schreibst.\n"
             15:
                 story_text: |
-                    ## Schere, Stein, Papier
                     Spiele, bis du den Computer besiegst! Aber mach zuerst den Beispiel-Code fertig...
 
                 example_code: |
@@ -1399,7 +1325,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             13:
                 story_text: |
-                    ## Schere, Stein, Papier
                     Mit dem Befehl `{and}` kannst du deinen Schere, Stein, Papier Code kürzen! Sieh dir den Beispielcode an.
 
                     ### Übung
@@ -1428,7 +1353,6 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Zahlen raten
                     In diesem Level kannst du das Spiel 'Zahlen raten' programmieren
 
                 example_code: |
@@ -1451,7 +1375,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             12:
                 story_text: |
-                    ## Taschenrechner
                     In diesem Level kannst du einen Taschenrechner bauen, der mit Dezimalzahlen arbeitet.
 
                     ### Übung 1
@@ -1472,7 +1395,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             10:
                 story_text: |
-                    ## Taschenrechner
                     Dieses Taschenrechnerspiel hilft dir deine Multiplikationstabellen zu üben!
                     ### Übung
                     Kannst du mehr Nummern zur Liste hinzufügen, um alle Malfolgen bis 10 zu üben?
@@ -1492,7 +1414,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             9:
                 story_text: |
-                    ## Taschenrechner
                     In Level 6 hast du einen Taschenrechner erstellt. In diesem Level kannst du den Code erweitern, so dass er mehrere Fragen stellt.
 
                     ### Übung 1
@@ -1519,7 +1440,6 @@ adventures:
                 start_code: "{print} 'Welcome to this calculator!'"
             6:
                 story_text: |
-                    ## Taschenrechner
                     Nun da du die Mathematik beherrscht, kannst du selbst einen Taschenrechner erstellen!
 
                 example_code: |
@@ -1544,10 +1464,9 @@ adventures:
 
                 start_code: "{print} 'Willkommen bei diesem Taschenrechner!'"
                 example_code_3: "```\nTabellen = 4, 5, 6, 8\nNummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nTabelle = Tabellen {at} {random}\nNummer = Nummern {at} {random}\nrichtige_antwort = Tabelle * Nummer\nAntwort = {ask} 'Wie viel ist ' Tabelle ' mal ' Nummer '?'\n{if} Antwort {is} richtige_antwort {print} 'okay'\n{else} {print} 'Fehler! Es war ' richtige_antwort\n```\n"
-                story_text_3: "## Zufallszahlen\nDu kannst den Computer auch allein zufällige Summen rechnen lassen, indem du zufällig benutzt.\nSo wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.\n"
+                story_text_3: "Du kannst den Computer auch allein zufällige Summen rechnen lassen, indem du zufällig benutzt.\nSo wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.\n"
             15:
                 story_text: |
-                    ## Taschenrechner
                     Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
                     Dies stellt sicher, dass der Spieler nicht zur nächsten Frage weiterkommt, wenn er falsch antwortet.
 
@@ -1570,12 +1489,12 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             11:
                 example_code: "```\nzahl = 10\n{for} i {in} {range} 1 bis 10\n    {print} i * zahl\n```\n"
-                story_text: "## Taschenrechner\nMit einem `{for}` kannst du das Multiplikationsprogramm vereinfachen.\n\n### Übung 1\nVerbessere den Beispiel-Code, sodass es eine nette Multiplikationstabelle ausgibt: \"1 mal 10 is 10\", \"2 mal 10 ist 20\", usw.\n\n### Übung 2\nGehe zurück zu deinem Level 10 Multiplikations-Code und verändere ihn, sodass er ein `{for}` und `{range}` benutzt.\n"
+                story_text: "Mit einem `{for}` kannst du das Multiplikationsprogramm vereinfachen.\n\n### Übung 1\nVerbessere den Beispiel-Code, sodass es eine nette Multiplikationstabelle ausgibt: \"1 mal 10 is 10\", \"2 mal 10 ist 20\", usw.\n\n### Übung 2\nGehe zurück zu deinem Level 10 Multiplikations-Code und verändere ihn, sodass er ein `{for}` und `{range}` benutzt.\n"
                 start_code: '# platziere deinen Code hier'
             13:
                 example_code: "```\nantwort1 = {ask} 'Was ist 10 mal 7?'\nantwort2 = {ask} 'Was ist 6 mal 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Schreib deinen Code hier'
-                story_text: "## Taschenrechner\n\n### Übung 1\nWir wollen das Übungsprogramm etwas schwieriger gestalten. Der Spieler muss nun zwei Fragen richtig beantworten. Fülle die Lücken aus, um das Programm zu vervollständigen.\n\n### Übung 2 (extra)\nManchmal gibt es bei Berechnungen mehrere richtige Antworten. Zum Beispiel kann 10 durch 5 und durch 2 geteilt werden. Die Frage \"Welche Zahl teilt 10?\" kann also durch 2 und durch 5 beantwortet werden.\nFrage nach einer Berechnung, die mehrere richtige Antworten hat, bitte die Spielerin, sie zu beantworten, und bestimme mit `{or}`, ob die Antwort richtig ist.\nLeere das Programmierfeld und erstelle deine eigene Lösung.\n"
+                story_text: "\n### Übung 1\nWir wollen das Übungsprogramm etwas schwieriger gestalten. Der Spieler muss nun zwei Fragen richtig beantworten. Fülle die Lücken aus, um das Programm zu vervollständigen.\n\n### Übung 2 (extra)\nManchmal gibt es bei Berechnungen mehrere richtige Antworten. Zum Beispiel kann 10 durch 5 und durch 2 geteilt werden. Die Frage \"Welche Zahl teilt 10?\" kann also durch 2 und durch 5 beantwortet werden.\nFrage nach einer Berechnung, die mehrere richtige Antworten hat, bitte die Spielerin, sie zu beantworten, und bestimme mit `{or}`, ob die Antwort richtig ist.\nLeere das Programmierfeld und erstelle deine eigene Lösung.\n"
     restaurant:
         name: "Restaurant"
         description: "Erstelle dein eigenes virtuelles Restaurant"
@@ -1583,7 +1502,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Restaurant
                     Im ersten Level kannst du dein eigenes virtuelles Restaurant erstellen, und die Bestellungen deiner Gäste aufnehmen.
 
                 example_code: |
@@ -1598,7 +1516,6 @@ adventures:
                 story_text_2: "### Übung\nKopiere den Beispiel-Code in den Eingabebereich, indem du den gelben Knopf drückst.\nFülle zuerst die Lücken mit den richtigen Befehlen, um den Code zum Laufen zu bringen.\nFüge dann mindestens 4 zusätzliche Zeilen zum Restaurant-Programm hinzu.\nFrage die Gäste, was sie trinken möchten und frage, ob sie in bar oder mit Karte zahlen möchten.\nDenke die zum Schluss eine nette Verabschiedung für deine Gäste aus.\n"
             2:
                 story_text: |
-                    ## Restaurant
                     In Level 2 konntest du dein Restaurant mit Variablen erweitern. In Level 1 konnte Hedy nur die Bestellung einmal wiedergeben (mit `{echo}`) und sich nur das merken, was zuletzt bestellt wurde.
                     Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch den Belag merken!
                 start_code: "# setze hier deinen Code hin"
@@ -1606,10 +1523,8 @@ adventures:
                 story_text_2: "### Übung\nKopiere deinen eigenen Restaurant-Code aus dem vorigen Level in den unteren Eingabebereich.\nRepariere den Code, indem du die {ask} und {echo} Befehle ersetzt und Variablen benutzt, wie du in diesem Level gelernt hast.\n\nNun da dein Code wieder läuft, ist es Zeit etwas Weiteres hinzu zu fügen.\nSchau dir die letzte Zeile des Beispiel-Codes an: `{print} essen mit belag ist auf dem Weg!`\nIn dieser einzelnen Zeile wurden 2 Variablen benutzt, um die Bestellung zusammen zu fassen.\nFüge nun deine eigene Zusammenfassung der Essen- und Getränkebestellung deiner Gäste hinzu.\n\n**Extra** Nun da du gelernt hast Variablen zu benutzen, kannst du so viele Variablen in einer Zeile nutzen wie du magst. Kannst du mehr Variablen zu deinem Code hinzufügen, wie hier essen oder zum Mitnehmen, bar oder Karte, mit oder ohne Strohhalm usw.?\n"
             12:
                 story_text: |
-                    ## Restaurant
                     Ab diesem Level kannst du Dezimalzahlen verwenden, um deine Speisekarte realistischer zu machen.
 
-                    ## Übung
                     Kannst du dir Code ausdenken mit dem du deinen Freunden und deiner Familie 15% Rabatt geben kannst?
 
                 example_code: |
@@ -1630,7 +1545,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             11:
                 story_text: |
-                    ## Restaurant
                     Wir können `{for}` mit `{range}` nutzen, um die Bestellungen mehrerer Gäste ordentlich auszugeben.
 
                     ### Übung
@@ -1649,7 +1563,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             10:
                 story_text: |
-                    ## Restaurant
                     In diesem Level wirst du lernen, wie du leicht nach Bestellungen für verschiedene Gänge fragst.
 
                     ### Übung 1
@@ -1682,7 +1595,6 @@ adventures:
                 start_code: "Gänge = Vorspeise, Hauptspeise, Dessert"
             9:
                 story_text: |
-                    ## Restaurant
                     In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!
 
                     ### Übung
@@ -1719,14 +1631,12 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             8:
                 story_text: |
-                    ## Restaurant
                     In diesem Level kannst du dein virtuelles Restaurant ausbauen, indem du mehrere Zeilen Code wiederholst. Das geht so:
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} 'Willkommen im Restaurant Chez Hedy!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{print} 'Großartig!'\n{repeat} Gäste {times}\n    Essen = {ask} 'Was würden Sie gerne bestellen?'\n    {print} Essen\n{print} 'Danke für Ihre Bestellung!'\n{print} 'Guten Appetit!'\n```\n"
                 story_text_2: "### Übung\nDieser Code kann mit mehr Gerichten auf der Karte erweitert werden, zum Beispiel einem Getränkeangebot, und/oder mehreren Gängen oder Nachtisch. Füge mindestens ein Gericht hinzu.\n**(extra)** Füge so viele Gerichte hinzu wie du magst!\n"
             7:
                 story_text: |
-                    ## Restaurant
                     In diesem Level hast du gelernt, wie du den Befehl `{repeat}` verwenden kannst, um eine Codezeile um eine bestimmte Anzahl zu wiederholen.
                     Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenswünschen zu fragen (`{ask}`).
 
@@ -1737,7 +1647,6 @@ adventures:
                 example_code: "```\n{print} 'Willkommen im Restaurant Chez Hedy'\nGäste = {ask} 'Wie viele Leute kommen heute zu uns?'\n```\n"
             6:
                 story_text: |
-                    ## Restaurant
                     In diesem Level kannst du Mathe verwenden um den Gesamtpreis einer Bestellung auszurechnen. Da macht dein virtuelles Restaurant realistischer.
 
                 example_code: |4
@@ -1795,7 +1704,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
-                    ## Restaurant
                     In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
                     In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
 
@@ -1820,7 +1728,6 @@ adventures:
                 story_text_2: "### Übung\nDer Code oben zeigt ein Beispiel wie du programmieren könntest, dass du ein Gericht auf der Speisekarte nicht mehr vorrätig hat in deinem Restaurant.\nKopiere deinen eigenen Restaurant-Code aus den vorigen Leveln. Denk dir ein Problem für dein Restaurant aus und programmiere es, wie im Beispiel.\nZum Beispiel könntest du ebenfalls ein Gericht nicht mehr vorrätig haben oder du könntest keine Kreditkarten akzeptieren oder die Eismaschine ist kaputt.\n\n**Extra** Hast du das Problem programmiert und angemessene Antworten programmiert? Dann versuche mehr `{if}` und `{else}` Befehle in deinem Code zu verwenden.\nVersuche ein `{if}` nach jedem `{ask}` Befehl hinzuzufügen, um dein Programm so interaktiv wie möglich zu machen.\n"
             4:
                 story_text: |
-                    ## Restaurant
                     In diesem Level musst du Anführungszeichen verwenden, wenn du die Befehle `{print}` oder `{ask}`benutzt.
 
                     ### Übung 1
@@ -1829,10 +1736,9 @@ adventures:
                     ### Übung 2
                     Gehe zurück zum vorigen Level und kopiere deinen Restaurant-Code. Bringe diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
                 start_code: "# setze hier deinen Code hin"
-                example_code: "## Beispiel für Hedy's Restaurant\n```\n_ Füge Anführungszeichen in diesen Code ein _\n{print} Willkommen im Restaurant Chez Hedy!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Die  Essen  ist mein Favorit!\nBelag {is} {ask} Hätten Sie gerne Fleisch oder Gemüse als Belag?\n{print} Essen  mit  Belag  ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihre  Essen  und  Getränke  kommen sofort!\n```\n"
+                example_code: "```\n_ Füge Anführungszeichen in diesen Code ein _\n{print} Willkommen im Restaurant Chez Hedy!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Die  Essen  ist mein Favorit!\nBelag {is} {ask} Hätten Sie gerne Fleisch oder Gemüse als Belag?\n{print} Essen  mit  Belag  ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihre  Essen  und  Getränke  kommen sofort!\n```\n"
             3:
                 story_text: |
-                    ## Zufallsrestaurant
                     Fällt es dir schwer zu entscheiden, was du gerne zum Abendessen hättest? Du kannst das Hedy machen lassen!
                     Füge einfach Listen deiner Lieblingsgerichte (oder der von dir nicht so gemochten Gerichte) hinzu und Hedy kann zufällig für dich ein Abendessen auswählen.
                     Du kannst dir auch einen Spaß draus machen, indem du Hedy den Preis für dein Abendessen auswählen lässt! Was wird wohl rauskommen?
@@ -1861,11 +1767,10 @@ adventures:
                     _
                     ```
                 start_code: "# setze hier deinen Code hin"
-                story_text_3: "## Allergien\n**Extra** Hat dein Gast irgendwelche Allergien oder eine Abneigung gegenüber bestimmten Gerichten? Dann kannst du den `{remove}` Befehl verwenden, um es von der Speisekarte zu entfernen.\n"
+                story_text_3: "**Extra** Hat dein Gast irgendwelche Allergien oder eine Abneigung gegenüber bestimmten Gerichten? Dann kannst du den `{remove}` Befehl verwenden, um es von der Speisekarte zu entfernen.\n"
                 example_code_3: "```\n{print} Geheim-Milch-Shake\nsorten {is} Erdbeer, Schokolade, Vanille\nallergien {is} {ask} Bist du allergisch gegenüber einer Sorte?\n_\n{print} Du bekommst einen sorten {at} {random} Milch-Shake\n```\n"
             15:
                 story_text: |
-                    ## Restaurant
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
                 example_code: |
@@ -1881,7 +1786,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             13:
                 story_text: |
-                    ## Restaurant
                     In diesem Level lernst du neue Befehle, mit denen du deinen Code noch weiter ausbauen kannst.
 
                     ### Übung 1
@@ -1908,7 +1812,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Wahrsagerin
                     Warst du schon mal auf dem Rummel und hast dir die Zukunft von einer Wahrsagerin vorhersagen lassen? Oder hast du schon mal mit einer magischen schwarzen Kugel gespielt?
                     Dann weißt du bestimmt, dass sie nicht wirklich die Zukunft vorhersagen können, aber dass es trotzdem Spaß macht.
 
@@ -1929,7 +1832,6 @@ adventures:
                 story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich und fülle die Lücken, um den Code zum Laufen zu bringen.\n**Extra** Ändere den Code und lasse die Wahrsagerin nicht nur deinen Namen vorhersagen, sondern auch dein Alter, dein Lieblingssport-Team oder etwas anderes über dich.\n"
             12:
                 story_text: |-
-                    ## Wahrsager
                     Ab Level 12 musst du auch in Listen Anführungszeichen vor und nach jedem Element verwenden.
 
                     ### Übung
@@ -1946,7 +1848,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             10:
                 story_text: |
-                    ## Wahrsagerin
                     In diesem Level wirst du lernen, das englische Spiel MASH zu programmieren. In diesem Spiel geht es darum, für alle Spieler die Zukunft vorauszusagen. Auf Englisch stehen die Buchstaben für mansion, apartment, shack, und house, was auf Deutsch Schloss, Wohnung, Schuppen und Haus bedeutet.
 
                     ### Übung 1
@@ -1980,7 +1881,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             8:
                 story_text: |
-                    ## Wahrsagerin
                     In den vorigen Leveln hast du gelernt `{repeat}` zu nutzen, um die Wahrsagerin 3 Fragen in Folge beantworten zu lassen, aber wir hatten ein Problem die Fragen anzuzeigen.
                     Jetzt ist das Problem gelöst, weil wir den neuen Weg den `{repeat}` Befehl zu benutzen nutzen.
                     Im nächsten Beispiel kannst du die Wahrsagerin 3 Fragen stellen lassen und sie auch anzeigen!
@@ -2002,7 +1902,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
-                    ## Fortune Teller
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
 
                 example_code: |
@@ -2017,7 +1916,6 @@ adventures:
                 story_text_2: "### Übung\nDas Beispielprogramm stellt drei Fragen, aber gibt nicht drei Antworten.\nErstelle eine Liste von Antworten und gib eine zufällige Antwort dreifach aus. Denk dir selbst spaßige Antworten aus.\n\nLeider können wir die Antworten noch nicht paarweise anzeigen. In den nächsten Leveln wird sich der Aufbau des `{repeat}` Befehls ändern und dieses Problem lösen.\n"
             6:
                 story_text: |
-                    ## Wahrsagerin
                     In diesem Level können wir Mathe in deinen Vorhersagen als Wahrsagerin verwenden. Das ermöglicht es dir (alberne) Formeln zur Berechnung der Zukunft zu erfinden.
                     Zum Beispiel könntest du ausrechnen wie reich du einmal wirst oder wie viele Kinder du haben wirst, wenn du erwachsen bist.
 
@@ -2040,7 +1938,6 @@ adventures:
                     {print} Kinder ' Kinder!'
                     ```
 
-                    ## Beispiel Alberne Wahrsagerin
                     Wenn das vorige Beispiel dir nicht albern genug war, schau dir dieses an!
                     ```
                     {print} 'Ich bin Hedy die alberne Wahrsagerin!'
@@ -2055,7 +1952,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
-                    ## Fortune Teller
                     In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
                     By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
                     Check out this example to find out how.
@@ -2088,7 +1984,6 @@ adventures:
                 story_text_3: "### Übung\nBenutze folgendes, um dein eigenes Programm zu machen. Sei kreativ! Zum Beispiel könntest du ein Programm schreiben, das vorhersagt, dass\n* dein Lieblingsteam alle Konkurrenten besiegt!\n* dein Lieblingsfilm bei der Filmnacht gewählt wird!\n* du Tickets für deine Lieblingsshow gewinnst!\n* du bist die Schönste / der Schönste im ganzen Land, wie bei Schneewittchens magischem Spiegel.\nLass deine Vorstellungskraft arbeiten!\n\nDein Programm muss mindestens 10 Zeilen und mindestens einen `{if}` und `{else}` Befehl haben.\n"
             4:
                 story_text: |
-                    ## Wahrsagerin
                     Dieses Level hat keine neuen Funktionen, aber gibt dir die Möglichkeit ein wenig mit Anführungszeichen zu üben.
                     Du kannst deinen Code aus Level 3 neu machen, aber achte darauf Anführungszeichen an den richtigen Stellen hinzuzufügen!
 
@@ -2115,7 +2010,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             3:
                 story_text: |
-                    ## Wahrsagerin
                     Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sonder nur `{echo}`.
                     In diesem Level kannst du Variablen und den `{at} {random}` Befehl benutzen, um Hedy wirklich eine Antwort für dich auswählen zu lassen. Schau dir zum Beispiel diesen Code an:
 
@@ -2140,7 +2034,6 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Spukhaus
                     In diesem Abenteuer arbeiten wir an einem Spiel, in dem du aus einem Geisterhaus entkommen musst, indem du die richtigen Türen wählst.
                     Wenn du die richtige Tür wählst, überlebst du, aber wenn nicht, könnte ein schreckliches Monster…
 
@@ -2165,7 +2058,6 @@ adventures:
                 story_text_2: "### Übung\nKopiere den Beispiel-Code in deinen Eingabebereich, indem du den gelben Knopf drückst.\nBeende nun die Geschichte, indem du mindestens 5 Zeilen zum Code hinzufügst.\nDenke daran, dass du jede Zeile mit einem `{print}` Befehl beginnst.\n"
             2:
                 story_text: |
-                    ## Spukhaus
                     In diesem Spukhaus kannst du Monster mit Emojis auswählen. Natürlich kannst du auch Wörter verwenden.
                 start_code: "monster1 {is} _"
                 example_code: "```\nMonster_1 {is} \U0001F47B\nMonster_2 {is} \U0001F921\nMonster_3 {is} \U0001F476\n{print} Du gehst ins Spukhaus.\n{print} Plötzlich siehst du ein Monster_1\n{print} Du läufst in den anderen Raum, aber ein Monster_2 wartet dort auf dich!\n{print} Oh nein! Schnell flitzt du in die Küche.\n{print} Aber als du reinkommst greift dich Monster_3 an!\n```\n"
@@ -2173,7 +2065,6 @@ adventures:
                 example_code_2: "```\nMonster1 {is} _\nMonster2 {is} _\nMonster3 {is} _\n{print} Du betrittst das Spukhaus.\n{print} Plötzlich siehst du ein Monster1\n{print} Du rennst in den anderen Raum, aber ein Monster2 wartet dort auf dich!\n{print} Oh nein! Schnell in die Küche.\n{print} Aber als du hineingehst attackiert dich Monster3 !\n```\n"
             14:
                 story_text: |
-                    ## Spukhaus
                     In diesem Level kannst du die Symbole `<` und `>` verwenden um deinen Spielen Leben hinzuzufügen.
 
                 example_code: |
@@ -2202,7 +2093,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             11:
                 story_text: |
-                    ## Spukhaus
                     In diesem Level haben wir den `{for}` Befehl verändert, um dem Spieler zu sagen, wo er ist.
 
                     ### Übung 1
@@ -2228,7 +2118,6 @@ adventures:
                 start_code: "{print} 'Escape from the haunted house!'"
             9:
                 story_text: |
-                    ## Spukhaus
                     In diesem Level kannst du Verschachtelung verwenden, um das Spukhaus noch interaktiver zu machen!
 
                     ### Übung
@@ -2262,7 +2151,6 @@ adventures:
                 start_code: "{print} 'Escape from the haunted house!'"
             5:
                 story_text: |
-                    ## Spukhaus
                     Bis zu diesem Level hat das Spukaus den Spieler immer gefragt durch welche Tür er gehen will, aber wie du vielleicht gemerkt hast, musste der Spieler nicht wirklich richtig antworten.
                     Wenn der Spieler einfach irgendetwas eingeben hat, ging das Spiel trotzdem weiter und der Spieler konnte sogar gewinnen (obwohl er gar keine Tür gewählt hat).
                     In diesem Level kannst du nur gewinnen, wenn du die gleiche Tür wählst die Hedy zufällig ausgesucht hat.
@@ -2287,7 +2175,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             4:
                 story_text: |
-                    ## Spukhaus
                     In diesem Level lernst du mit Anführungszeichen umzugehen.
 
                     ### Übung 1
@@ -2300,19 +2187,17 @@ adventures:
                 example_code: "```\n_ Füge Anführungszeichen zu diesem Code hinzu _\n{print} Entkomme dem Spukhaus!\n{print} Vor dir sind drei Türen...\nWahl {is} {ask} Welche Tür wählst du?\n{print} Du nimmst Tür ... Wahl\nMonster {is} ein Zombie, ein Vampir, NICHTS DU BIST ENTKOMMEN\n{print} Du siehst...\n{sleep}\n{print} Monster {at} {random}\n```\n"
             3:
                 story_text: |
-                    ## Spukhaus-Spiel
                     In den vorherigen Leveln hast du eine Einleitung ins Spukhaus-Spiel gemacht, aber wie du vielleicht gemerkt hast war das Ender der Geschichte immer schrecklich.
                     In diesem Level kannst du die Geschichte interaktiver machen, indem du den Ausgang des Spiels änderst. Manchmal wirst du gefressen, manchmal kannst du entkommen!
                     Lass Hedy zufällig entscheiden!
 
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "### Übung\nKopiere den Beispiel-Code und fülle die Lücken, um ihn zum Laufen zu bringen!\n\n**Extra** Diese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n"
-                story_text_3: "## Mach das Spiel zu einer Fernseh-Show!\n### Übung\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das? Wir haben bereits die ersten Zeilen in den Beispiel-Code getan.\n"
+                story_text_3: "### Übung\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das? Wir haben bereits die ersten Zeilen in den Beispiel-Code getan.\n"
                 example_code_3: "```\n{print} Die große Spielshow!\n{print} Es liegen 3 Koffer vor dir...\n{print} Einer enthält _\n_\n```\n"
                 example_code_2: "```\n_ Entkomme aus dem Spukhaus!\n_ Vor dir sind 3 Türen...\n_ _ _ Welche Tür wählst du?\n_ Du wähltest ... wahl\nmonster _ ein Zombie, ein Vampir, NICHTS DU ENTKAMST\n_ Du siehst...\n{sleep}\n_ _ _ _\n```\n"
             16:
                 story_text: |
-                    ## Spukhaus-Spiel
                     Dieses Spukhaus-Spiel verwendet die Verbindung zwischen Listen, die du in diesem Level verwenden kannst.
                     Zum Beispiel kommen alle Eigenschaften, die zu Zombies gehören, als Erstes in der Liste, dann die Hexen und als drittes die Vampire.
                     Schau dir mal den Code an!
@@ -2352,7 +2237,6 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Sparschwein
                     In diesem Level kannst du dir von Hedy sagen lassen, ob du genug Geld gespart hast!
 
                 example_code: |
@@ -2372,7 +2256,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
             12:
                 story_text: |
-                    ## Sparschwein
                     In diesem Abenteuer lernst du, wie man ein digitales Sparschwein herstellt.
 
                     ### Übung
@@ -2398,7 +2281,6 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Mache dein eigenes Quiz
                     In diesem Abenteuer kannst du dein eigenes Quiz machen! Füll alle Lücken aus, füge mehr Fragen hinzu und hab Spaß bei deinem eigenen Quiz!
                     Du kannst das Quiz machen über was du möchtest: dein Hobby, dein Lieblingstier, dein Lieblingsbuch, eigentlich über alles!
 
@@ -2431,7 +2313,6 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Lerne eine neue Sprache
                     Schreibe dein eigenes Programm, um Vokabeln in einer neuen Sprache zu üben.
 
                     ### Übung
@@ -2441,7 +2322,6 @@ adventures:
                 example_code: "```\n{print} 'Lerne Französisch!'\nKatze {is} {ask} '\U0001F431'\n{if} Katze {is} chat {print} 'Großartig!'\n{else} {print} 'Nein, Katze heißt chat'\nFrosch {is} {ask} '\U0001F438'\n{if} Frosch {is} grenouille {print} 'Super!'\n{else} {print} 'Nein, Frosch heißt grenouille'\n```\n"
             16:
                 story_text: |
-                    ## Lerne eine neue Sprache
                     Schreibe dein eigenes Programm dien Vokabular in einer neuen Sprache zu lernen.
 
                 example_code: |
@@ -2464,13 +2344,13 @@ adventures:
         default_save_name: Sprache
         levels:
             12:
-                story_text: "## Erstelle einen Geheimcode wie ein Superspion\nIn diesem Abenteuer kannst du deinen eigenen Superspion-Code erstellen. Verschlüssele eine Nachricht, die nur der richtige Agent entschlüsseln kann.\nWenn der Feind versucht, den Code zu knacken, wird er falsche Informationen erhalten, um seine Zeit zu verschwenden.\n\n### Übung 1\nErstelle deinen eigenen Geheimcode für deinen Superspion und gib beide Teile nur an den echten Spion zurück.\n\n### Übung 2\nFüge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.\n"
+                story_text: "In diesem Abenteuer kannst du deinen eigenen Superspion-Code erstellen. Verschlüssele eine Nachricht, die nur der richtige Agent entschlüsseln kann.\nWenn der Feind versucht, den Code zu knacken, wird er falsche Informationen erhalten, um seine Zeit zu verschwenden.\n\n### Übung 1\nErstelle deinen eigenen Geheimcode für deinen Superspion und gib beide Teile nur an den echten Spion zurück.\n\n### Übung 2\nFüge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.\n"
                 example_code: "```\nName {is} {ask} 'Wie heißt du?'\nif Name {is} '_'\n    a {is} 'Geh zum Flughafen '\n{else}\n    a {is} 'Geh zum Bahnhof '\nPasswort {is}  {ask} 'Wie lautet das Passwort?'\n{if} Passwort {is} _\n    b {is} 'Morgen um 2 Uhr'\n{else}\n    b {is} 'Morgen um 10 Uhr'\n{print} _ _ _\n```\n"
-                start_code: '## setze hier deinen Code hin'
+                start_code: '# setze hier deinen Code hin'
             13:
-                story_text: "## Superspy\nWir können den Superspy-Code mit `{and}` vereinfachen, so dass wir nur einen `{if}` benötigen.\n\n### Übung 1\nVervollständige den Code, indem du den richtigen Befehl in das leere Feld einträgst. Tipp: Der Superspion muss BEIDE Fragen richtig beantworten, bevor er die vertraulichen Informationen erhält!\n\n### Übung 2\nWir wollen den Gegner noch mehr verwirren! Erstelle eine Liste mit falschen Antworten und wähle eine zufällig aus, wenn eine falsche Antwort gegeben wird.\n"
+                story_text: "Wir können den Superspy-Code mit `{and}` vereinfachen, so dass wir nur einen `{if}` benötigen.\n\n### Übung 1\nVervollständige den Code, indem du den richtigen Befehl in das leere Feld einträgst. Tipp: Der Superspion muss BEIDE Fragen richtig beantworten, bevor er die vertraulichen Informationen erhält!\n\n### Übung 2\nWir wollen den Gegner noch mehr verwirren! Erstelle eine Liste mit falschen Antworten und wähle eine zufällig aus, wenn eine falsche Antwort gegeben wird.\n"
                 example_code: "```\nName {is} {ask} 'Wie heißt du?'\nPasswort {is} {ask} 'Wie lautet dein Passwort?'\n{if} Name {is} 'Agent007' _ Passwort {is} 'STRENGGEHEIM'\n    {print} 'Gehe um 2 Uhr zum Flughafen'\n{else}\n    {print}  'Gehe um 10 Uhr zum Bahnhof'\n ```\n"
-                start_code: '## setze hier deinen Code hin'
+                start_code: '# setze hier deinen Code hin'
         name: Superspion
         description: Schreibe deinen eigenen Spion-Code
     tic:
@@ -2479,20 +2359,20 @@ adventures:
         default_save_name: Tic
         levels:
             13:
-                story_text: "## Tic Tac Toe\nIn diesem Abenteuer kannst du ein Spiel Tic Tac Toe programmieren. Du kannst mit zwei Personen spielen. Abwechselnd wählst du die Nummer des Feldes (1 - 9), auf das du dein Zeichen (x oder o) setzen willst.\nDer erste Spieler, der drei in einer Reihe (waagerecht, senkrecht oder diagonal) hat, gewinnt!\n\n### Übung 1\nDas Spiel funktioniert, aber es hat einige Probleme. Zum Beispiel kann sich jede Spielerin ein beliebiges Feld aussuchen, sogar ein bereits besetztes! Verwende `{if}`, um festzustellen, ob das Feld schon besetzt ist, und wenn ja, warne die Spielerin.\n\n### Übung 2\nDas Spiel entscheidet auch nicht, wer gewonnen hat. Du musst dies hinzufügen, indem du prüfst, ob drei Felder in einer Reihe das gleiche Symbol haben.\n\n### Übung 3 (extra)\nDu hast nicht immer einen Freund, mit dem du spielen kannst. Kannst du einen Computergegner erstellen?\n"
+                story_text: "In diesem Abenteuer kannst du ein Spiel Tic Tac Toe programmieren. Du kannst mit zwei Personen spielen. Abwechselnd wählst du die Nummer des Feldes (1 - 9), auf das du dein Zeichen (x oder o) setzen willst.\nDer erste Spieler, der drei in einer Reihe (waagerecht, senkrecht oder diagonal) hat, gewinnt!\n\n### Übung 1\nDas Spiel funktioniert, aber es hat einige Probleme. Zum Beispiel kann sich jede Spielerin ein beliebiges Feld aussuchen, sogar ein bereits besetztes! Verwende `{if}`, um festzustellen, ob das Feld schon besetzt ist, und wenn ja, warne die Spielerin.\n\n### Übung 2\nDas Spiel entscheidet auch nicht, wer gewonnen hat. Du musst dies hinzufügen, indem du prüfst, ob drei Felder in einer Reihe das gleiche Symbol haben.\n\n### Übung 3 (extra)\nDu hast nicht immer einen Freund, mit dem du spielen kannst. Kannst du einen Computergegner erstellen?\n"
                 example_code: "```\nspieler = 'x'\nfeld = '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    wahl = {ask} 'Spieler ' spieler ' welchen Platz wählst du?'\n    feld {at} wahl = spieler\n    {clear}\n    print feld {at} 1 feld {at} 2 feld {at} 3\n    drucke feld {at} 4 feld {at} 5 feld {at} 6\n    print feld {at} 7 feld {at} 8 feld {at} 9\n    {if} spieler = 'x'\n        spieler = 'o'\n    {else}\n        spieler = 'x'\n```\n"
-                start_code: '## Schreib deinen Code hier'
+                start_code: '# Schreib deinen Code hier'
             14:
-                start_code: '## Schreibe deinen Code hier'
-                story_text: "## Tic Tac Toe\nIn den vorigen Levels hast du ein Tic Tac Toe-Spiel kreiert. Jetzt weißt du, wie du das =-Symbol, das ==-Symbol und das !=-Symbol nutzen kannst.\nDu kannst dieses Wissen in deinem neuen Tic Tac Toe-Spiel zum Beispiel so anwenden:\n"
+                start_code: '# Schreibe deinen Code hier'
+                story_text: "In den vorigen Levels hast du ein Tic Tac Toe-Spiel kreiert. Jetzt weißt du, wie du das =-Symbol, das ==-Symbol und das !=-Symbol nutzen kannst.\nDu kannst dieses Wissen in deinem neuen Tic Tac Toe-Spiel zum Beispiel so anwenden:\n"
                 example_code: "```\nzeichen = 'x'\noffene_stellen = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} spiel != 'aus'\n        wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n        {if} wahl {in} offene_stellen\n            {remove} wahl {from} offene_stellen\n            {if} wahl == 1\n                stelle_1 = zeichen\n            {if} wahl == 2\n                stelle_2 = zeichen\n            {if} wahl == 3\n                stelle_3 = zeichen\n            {if} wahl == 4\n                stelle_4 = zeichen\n            {if} wahl == 5\n                stelle_5 = zeichen\n            {if} wahl == 6\n                stelle_6 = zeichen\n            {if} wahl == 7\n                stelle_7 = zeichen\n            {if} wahl == 8\n                stelle_8 = zeichen\n            {if} wahl == 9\n                stelle_9 = zeichen\n        {else}\n            {print} 'Die Stelle ist schon besetzt'\n        {print} stelle_1 stelle_2 stelle_3\n        {print} stelle_4 stelle_5 stelle_6\n        {print} stelle_7 stelle_8 stelle_9\n        {print} ' '\n        gewinner = {ask} 'Hast du gewonnen?'\n        {if} gewinner == 'ja'\n            {print} 'Gut gemacht, Spieler ' zeichen '!'\n            spiel = 'aus'\n        {else}\n            {if} zeichen == 'x'\n                zeichen = 'o'\n            {else}\n                zeichen = 'x'\n```\n"
             15:
-                start_code: '## füge hier deinen Code ein'
-                story_text: "## Tic Tac Toe\nIn diesem Level kannst du dein Tic Tac Toe-Spiel mit der {while}-Schleife verbessern. Mit dieser Schleife kannst du `{if} game != 'over'` und `{for} i {in} {range} 1 {to} 9` in eine einfache Zeile zusammenführen.\nProbiere es gleich aus:\n"
+                start_code: '# füge hier deinen Code ein'
+                story_text: "In diesem Level kannst du dein Tic Tac Toe-Spiel mit der {while}-Schleife verbessern. Mit dieser Schleife kannst du `{if} game != 'over'` und `{for} i {in} {range} 1 {to} 9` in eine einfache Zeile zusammenführen.\nProbiere es gleich aus:\n"
                 example_code: "```\nzeichen = 'x'\noffene_stellen = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus'\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1\n            stelle_1 = zeichen\n        {if} wahl == 2\n            stelle_2 = zeichen\n        {if} wahl == 3\n            stelle_3 = zeichen\n        {if} wahl == 4\n            stelle_4 = zeichen\n        {if} wahl == 5\n            stelle_5 = zeichen\n        {if} wahl == 6\n            stelle_6 = zeichen\n        {if} wahl == 7\n            stelle_7 = zeichen\n        {if} wahl == 8\n            stelle_8 = zeichen\n        {if} wahl == 9\n            stelle_9 = zeichen\n    {else}\n        {print} 'Die Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    gewinner = {ask} 'Hast du gewonnen?'\n    {if} gewinner == 'ja'\n        {print} 'Gut gemacht, Spieler ' zeichen '!'\n        spiel = 'aus'\n    {else}\n        {if} zeichen == 'x'\n            zeichen = 'o'\n        {else}\n            zeichen = 'x'\n```\n"
             17:
-                start_code: '## gib deinen Code hier ein'
-                story_text: "## Tic Tac Toe\nIn den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird.\nDas bedeutet, dass die `{while}`-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
+                start_code: '# gib deinen Code hier ein'
+                story_text: "In den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird.\nDas bedeutet, dass die `{while}`-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
                 example_code: "```\nzeichen = 'x'\noffene_stellen = [1, 2, 3, 4, 5, 6, 7, 8, 9]\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus':\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen:\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1:\n            stelle_1 = zeichen\n        {if} wahl == 2:\n            stelle_2 = zeichen\n        {if} wahl == 3:\n            stelle_3 = zeichen\n        {if} wahl == 4:\n            stelle_4 = zeichen\n        {if} wahl == 5:\n            stelle_5 = zeichen\n        {if} wahl == 6:\n            stelle_6 = zeichen\n        {if} wahl == 7:\n            stelle_7 = zeichen\n        {if} wahl == 8:\n            stelle_8 = zeichen\n        {if} wahl == 9:\n            stelle_9 = zeichen\n    {else}:\n        {print} 'Diese Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    {if} stelle_1 == stelle_2 {and} stelle_2 == stelle_3 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_4 == stelle_5 {and} stelle_5 == stelle_6 {and} stelle_4 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_7 == stelle_8 {and} stelle_8 == stelle_9 {and} stelle_7 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_4 {and} stelle_4 == stelle_7 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_2 == stelle_5 {and} stelle_5 == stelle_8 {and} stelle_2 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_6 {and} stelle_6 == stelle_9 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_5 {and} stelle_5 == stelle_9 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_5 {and} stelle_5 == stelle_7 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {else}:\n        {if} zeichen == 'x':\n            zeichen = 'o'\n        {else}:\n            zeichen = 'x'\n```\n"
     blackjack:
         name: Blackjack
@@ -2500,7 +2380,7 @@ adventures:
         default_save_name: Blackjack
         levels:
             17:
-                story_text: "## Erstelle ein Blackjack-Spiel\nBlackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten zahl und die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte Wert.\nDas Ass is entweder 1 oder 11 Punkte wert (das kannst du dir aussuchen). Der Kartengeber, dein Gegner, erhält auch zwei Karten.\nWenn du möchtest, kannst du noch eine Karte ziehen und ihre Punkte werden zu deinen dazugerechnet. Der Kartengeber darf auch noch eine Karte ziehen.\nAber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!\nDer Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!\n\nViel Spaß!\n"
+                story_text: "Blackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten zahl und die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte Wert.\nDas Ass is entweder 1 oder 11 Punkte wert (das kannst du dir aussuchen). Der Kartengeber, dein Gegner, erhält auch zwei Karten.\nWenn du möchtest, kannst du noch eine Karte ziehen und ihre Punkte werden zu deinen dazugerechnet. Der Kartengeber darf auch noch eine Karte ziehen.\nAber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!\nDer Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!\n\nViel Spaß!\n"
                 example_code: "```\n{print} 'BLACKJACK'\nkarten = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Bube', 'Dame','König', 'As']\npunkte = 0\ngeber_punkte = 0\nkarte_1 = karten[{random}]\nkarte_2 = karten[{random}]\nkarte_3 = karten[{random}]\ngeber_karte_1 = karten[{random}]\ngeber_karte_2 = karten[{random}]\ngeber_karte_3 = karten[{random}]\n# Punkte für Karte 1\n{if} karte_1 == 'Bube' {or} karte_1 == 'Dame' {or} karte_1 == 'König':\n    punkte = punkte + 10\n{elif} karte_1 == 'As':\n    punkte = punkte + 11\n{else}:\n    punkte = punkte + karte_1\n# Punkte für Karte 2\n{if} karte_2 == 'Bube' {or} karte_2 == 'Dame' {or} karte_2 == 'König':\n    punkte = punkte + 10\n{elif} karte_2 == 'As':\n    punkte = punkte + 11\n{else}:\n    punkte = punkte + karte_2\n# Punkte für Geberkarte 1\n{if} geber_karte_1 == 'Bube' {or} geber_karte_1 == 'Dame' {or} geber_karte_1 == 'König':\n    geber_punkte = geber_punkte + 10\n{elif} geber_karte_1 == 'As':\n    geber_punkte = geber_punkte + 11\n{else}:\n    geber_punkte = geber_punkte + geber_karte_1\n# Punkte für Geberkarte 2\n{if} geber_karte_2 == 'Bube' {or} geber_karte_2 == 'Dame' {or} geber_karte_2 == 'König':\n    geber_punkte = geber_punkte + 10\n{elif} geber_karte_2 == 'As':\n    geber_punkte = geber_punkte + 11\n{else}:\n    geber_punkte = geber_punkte + geber_karte_2\n# Zwei As\n{if} card_1 == 'As' {and} card_2 == 'As':\n    punkte = 12\n{if} geber_karte_1 == 'As' {and} geber_karte_2 == 'As':\n    geber_punkte = 12\n# Zwischenstand\n{print} 'Du hast ' karte_1 ' und ' karte_2 ' (' punkte ' Punkte)'\n{print} 'Der Geber hat ' geber_karte_1 ' und ' geber_karte_2 ' (' geber_punkte ' Punkte)'\n# Extra Karte für den Spieler\nextra = {ask} 'Möchtest du eine extra Karte?'\n{if} extra == 'ja':\n    {if} karte_3 == 'Bube' {or} karte_3 == 'Dame' {or} karte_3 == 'König':\n        punkte = punkte + 10\n    {elif} karte_3 == 'Ace':\n        {if} punkte > 11:\n            punkte = punkte + 11\n        {else}:\n            punkte = punkte + 1\n    {else}:\n        punkte = punkte + karte_3\n    {print} 'Du hast extra ' karte_3 ' (' punkte ' Punkte)'\n{else}:\n    {print} 'Keine extra Karten'\n# Gewinner\n{if} punkte > 21 {or} geber_punkte > punkte {or} geber_punkte == 21:\n    {print} 'Du verlierst'\n{elif} geber_punkte < 17:\n    {print} 'Der Geber nimmt eine extra Karte. Es ist eine... ' geber_karte_3\n    {if} geber_karte_3 == 'Bube' {or} geber_karte_3 == 'Dame' {or} geber_karte_3 == 'König':\n        geber_punkte = geber_punkte + 10\n    {elif} geber_karte_3 == 'As':\n        {if} geber_punkte < 11:\n            geber_punkte = geber_punkte + 11\n        {else}:\n            geber_punkte = geber_punkte + 1\n    {else}:\n        geber_punkte = geber_punkte + geber_karte_3\n    {print} 'Der Geber hat jetzt ' geber_punkte ' Punkte'\n    {if} geber_punkte < 21 {and} geber_punkte > punkte:\n        {print} 'Du verlierst'\n    {else}:\n        {print} 'Du gewinnst'\n{elif} punkte > geber_punkte {and} punkte < 21:\n    {print} 'Du gewinnst!'\n```\n"
                 start_code: '# Schreibe deinen Code hier'
     years:
@@ -2509,7 +2389,7 @@ adventures:
         default_save_name: Neujahrs-Countdown
         levels:
             11:
-                story_text: "## Frohes neues Jahr\nIn diesem Level kannst du den Befehl `{for}` Zahl `{in}` `{range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
+                story_text: "In diesem Level kannst du den Befehl `{for}` Zahl `{in}` `{range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
                 example_code: "```\n{for} Zahl {in} {range} _ {to} _\n    {print} Zahl\n{print} 'Frohes neues Jahr!'\n```\n"
                 start_code: '# Platziere deinen Code hier'
 #    next:
@@ -2519,8 +2399,7 @@ adventures:
 #        levels:
 #            1:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Herzlichen Glückwunsch! Du bist zum Ende von Level 1 gekommen. Hoffentlich hast du schon jetzt ein paar coole Codes geschrieben, aber bei Hedy gibt es noch eine Menge zu entdecken.
+##                    Herzlichen Glückwunsch! Du bist zum Ende von Level 1 gekommen. Hoffentlich hast du schon jetzt ein paar coole Codes geschrieben, aber bei Hedy gibt es noch eine Menge zu entdecken.
 #                    Im ersten Level hast du vielleicht gemerkt, dass der `{echo}` Befehl nur eine Information auf einmal speichern kann.
 #                    Im Restaurant-Abenteuer zum Beispiel konntest du nur entweder wiedergeben was der Kunde essen wollte, oder was er trinken wollte, aber nicht beides in einem Satz.
 #                start_code: "{print} Let's go!"
@@ -2528,16 +2407,14 @@ adventures:
 #                story_text_2: "Wenn der Spieler einen Hamburger und ein Cola eintippt, kannst du nicht \"Sie hätten also gerne einen Hamburger und ein Cola\" sagen , sondern musst zwei eigene Zeilen schreiben. \nAußerdem gibt der `{echo}` Befehl nur das letzte Wort des Satzes zurück. Du kannst also nicht \"Ihr Hamburger kommt sofort!\" sagen.\n\nDas ändert sich ab Level 2. In Level 2 lernst du, mit Variablen zu arbeiten, die es dir erlauben, mehrere Informationsfragmente zu speichern und sie dort wo du willst auszugeben.\nAlso gleich weiter zu Level 2!\n"
 #            2:
 #                story_text: |
-#                    ## Was kommt als nächstes?
-#                    In diesem Level hast du gelernt was eine Variable ist und wie du sie benutzen kannst um deine Abenteuer interaktiver zu machen.
+##                    In diesem Level hast du gelernt was eine Variable ist und wie du sie benutzen kannst um deine Abenteuer interaktiver zu machen.
 #                    Aber... das ist nicht das Einzige was du mit Variablen anfangen kannst! Du kannst Variablen auch verwenden um Listen zu machen.
 #                    Und du kannst sogar Hedy ein zufälliges Wort aus einer Liste auswählen lassen, womit du richtige Spiele machen kannst!
 #                    Schau dir dafür einfach mal das nächste Level an!
 #                start_code: "{print} Let's go to the next level!"
 #            3:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    In diesem Level hast du mit Variablen geübt, aber vielleicht bist du diesem Fehler über den Weg gelaufen.
+##                    In diesem Level hast du mit Variablen geübt, aber vielleicht bist du diesem Fehler über den Weg gelaufen.
 #                    Probier mal diesen Code aus:
 #                    ```
 #                    Name {is} Sophie
@@ -2548,8 +2425,7 @@ adventures:
 #                start_code: "{print} Let's go to the next level!"
 #            4:
 #                story_text: |
-#                    ## What's next?
-#                    In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
+##                    In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
 #                    But it's not really interactive, the player doesn't have any influence on what happens in the game.
 #                    In the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.
 #                    So let's take a peak!
@@ -2559,40 +2435,35 @@ adventures:
 #                start_code: "{print} 'Lets go to the next level!'"
 #            5:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Du bist jetzt am Ende dieses Levels angekommen. Dabei hast du `{ask}` and `{if}` gelernt. Zum Beispiel kannst du jetzt Gäste fragen, was sie gerne essen würden.
+##                    Du bist jetzt am Ende dieses Levels angekommen. Dabei hast du `{ask}` and `{if}` gelernt. Zum Beispiel kannst du jetzt Gäste fragen, was sie gerne essen würden.
 #                    Du kannst aber noch nicht den Preis für das Abendessen von jedem ausrechnen.
 #                    Das nächste Level ermöglicht es, Addition, Subtraktion und Multiplikation in deinen Programmen zu verwenden. So kannst du die Preise im Restaurant ausrechnen, aber du könntest auch Geheimcode einfügen der deinen Freunden und deiner Familie einen Rabatt gibt.
 #                    Eine andere Möglichkeit im nächsten Level ist ein eigenes Mathespiel zu programmieren, für deinen kleinen Bruder oder deine kleine Schwester, damit sie Multiplikation üben.
 #                    Schau es dir selbst an, im nächsten Level!
 #                start_code: "{print} 'On to the next level!'"
-#                example_code: "## Freigetränke!\n```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
+#                example_code: "```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
 #            6:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Gut gemacht! Du hast das Ende dieses Levels erreicht, was bedeutet dass du mit `{if}` und `{else}` geübt hast. Vielleicht ist dir aufgefallen, dass deine Codes immer länger und länger werden.
+##                    Gut gemacht! Du hast das Ende dieses Levels erreicht, was bedeutet dass du mit `{if}` und `{else}` geübt hast. Vielleicht ist dir aufgefallen, dass deine Codes immer länger und länger werden.
 #                    Zum Beispiel wenn du 'Zum Geburtstag viel Glück' programmieren möchtest.
 #                    Das ist eine Menge Code, dafür das eigentlich nur die Gleichen Wörter immer wieder kommen. Zum Glück gibt es im nächsten Level eine Lösung dafür, den `{repeat}` Befehl, der es dir erlaubt eine Zeile Code mehrmals zu wiederholen.
 #                start_code: "{print} 'On to the next level!'"
 #                example_code: "```\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag liebe Hedy'\n {print} 'Zum Geburtstag viel Glück'\n```\n"
 #            7:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Jetzt hast du gelernt, wie du eine Zeile Code wiederholen kannst. Das wird sich noch als nützlich erweisen, reicht aber nicht immer aus. Manchmal musst du mehrere Zeilen auf einmal wiederholen.
+##                    Jetzt hast du gelernt, wie du eine Zeile Code wiederholen kannst. Das wird sich noch als nützlich erweisen, reicht aber nicht immer aus. Manchmal musst du mehrere Zeilen auf einmal wiederholen.
 #                    Das nächste Level erlaubt dir, ein paar Zeilen Code zu einer Gruppe zusammenzufügen und diese kleine Gruppe dann auf einmal zu wiederholen!
 #                start_code: "{print} 'Lets go to the next level!'"
 #                example_code: "```\n{repeat} 5 {times} {print} 'Im nächsten Level kannst du mehrere Zeilen Code auf einmal wiederholen!'\n```\n"
 #            8:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Gut gemacht! Du hast den Schluss eines weiteren Levels erreicht! In diesem Level hast du gelernt, mehrere Zeilen Code in einem {if} oder {repeat} Befehl zu verwenden. Noch kannst du nicht beide kombinieren...
+##                    Gut gemacht! Du hast den Schluss eines weiteren Levels erreicht! In diesem Level hast du gelernt, mehrere Zeilen Code in einem {if} oder {repeat} Befehl zu verwenden. Noch kannst du nicht beide kombinieren...
 #                    Aber es gibt gute Neuigkeiten! Im nächsten Level wirst du ein {if} in ein {if} setzen dürfen, oder in einen {repeat} Befehl.
 #                start_code: "{print} 'Lets go to the next level!'"
 #                example_code: "```\nAntwort = {ask} 'Würdest du gerne zum nächsten Level gehen?'\n{if} Antwort {is} ja\n    {print} 'Toll! Du kannst den {repeat} Befehl im {if} Befehl verwenden!'\n    {print} 'Juhuu!'\n    {print} 'Juhuu!'\n    {print} 'Juhuu!'\n{else}\n    {print} 'Okay, du darfst noch ein bisschen hier bleiben!'\n```\n"
 #            9:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Du machst das super! In diesem Level begegnet uns noch ein kleines Problem. Du hast das Wiederholen einer Zeile gelernt, aber was wenn du eine Zeile ein wenig ändern wolltest?
+##                    Du machst das super! In diesem Level begegnet uns noch ein kleines Problem. Du hast das Wiederholen einer Zeile gelernt, aber was wenn du eine Zeile ein wenig ändern wolltest?
 #                    Wenn du zum Beispiel das Lied 'if you're happy and you know it' singen würdest, sähe das so aus:
 #                    Wenn du auch noch den nächsten Verse 'stomp your feet' wolltest, und den nächsten, und den nächsten, dann müsstest du den Code komplett ändern.
 #                    Im nächsten Level lernst du den `{for}` Befehl, der es dir erlaubt eine Liste von Aktionen zu machen und den Code jedes Mal mit einer anderen Aktion zu wiederholen!
@@ -2601,21 +2472,18 @@ adventures:
 #                example_code: "```\n{repeat} 2 {times}\n    {print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n{print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist'\n{print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n```\n"
 #            10:
 #                story_text: |
-#                    ## What's next?
-#                    You have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+##                    You have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
 #                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
 #                start_code: "{print} 'Lets go to the next level!'"
 #            11:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Vielleicht hast du im Restaurant-Abenteuer schon einmal versucht, Dezimalzahlen zu verwenden. Falls ja, hast du vielleicht bemerkt, dass Hedy diese noch nicht verstanden und immer abgerundet hat.
+##                    Vielleicht hast du im Restaurant-Abenteuer schon einmal versucht, Dezimalzahlen zu verwenden. Falls ja, hast du vielleicht bemerkt, dass Hedy diese noch nicht verstanden und immer abgerundet hat.
 #                    Ab dem nächsten Level kannst du Dezimalzahlen verwenden.
 #                start_code: "{print} 'Lets go to the next level!'"
 #                example_code: "```\nburger {is} 5\ndrink {is} 2\ntotal {is} burger + drink\n{print} 'Du hast einen Burger und ein Getränk bestellt'\n{print} 'Das macht dann bitte ' total ' Euro'\n```\nDer Code oben funktioniert, weil der Burger 5 Dollar und das Getränk 2 Dollar kostet. Wenn du aber 50 Cent mehr verrechnest, funktioniert das Programm nicht mehr! So wie im unteren Code:\n```\nburger {is} 5,50\ndrink {is} 2,30\ntotal {is} burger + drink\n{print} 'Du hast einen Burger und ein Getränk bestellt'\n{print} 'Das macht dann bitte ' total ' Euro'\n```\nGeh zum nächsten Level, um diesen Code zum Laufen zu bringen!\n"
 #            12:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    In den letzten Leveln hast du gelernt, wie du zwei `{if}` Befehle ineinanderfügen kannst. Das funktioniert soweit gut, aber so bekommst du ziemlich lange und unhandliche Codes, so wie diesen hier:
+##                    In den letzten Leveln hast du gelernt, wie du zwei `{if}` Befehle ineinanderfügen kannst. Das funktioniert soweit gut, aber so bekommst du ziemlich lange und unhandliche Codes, so wie diesen hier:
 #                    In diesem System musst du sowohl den richtigen Nutzernamen als auch das richtige Passwort angeben.
 #                    Im nächsten Level lernst du den Befehl `{and}`, der deinen Code ein ganzes Stück kürzer und verständlicher machen wird!
 #                    Sieh für dich selbst!
@@ -2623,16 +2491,14 @@ adventures:
 #                example_code: "```\nNutzername {is} {ask} 'Was ist dein Nutzername?'\nPasswort {is} {ask} 'Was ist dein Passwort?'\n{if} Nutzername {is} 'Hedy'\n    {if} Passwort {is} 'geheim'\n        {print} 'Willkommen Hedy!'\n    {else}\n        {print} 'Zugang gesperrt!'\n{else}\n    {print} 'Zugang gesperrt!'\n```\n"
 #            13:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Mit dem Programm unten kannst du ausrechnen, ob du eine Schulaufgabe bestanden hast (dafür brauchst du sechs oder mehr Punkte).
+##                    Mit dem Programm unten kannst du ausrechnen, ob du eine Schulaufgabe bestanden hast (dafür brauchst du sechs oder mehr Punkte).
 #                    Wie du siehst, ist der Code super ineffizient, wegen des sehr langen Codes in der fünften Zeile.
 #                    Alle unterschiedlichen Punktzahlen von 1 bis 5 mussten einzeln programmiert werden. Zum Glück lernst du im nächsten Level wie du das ohne extrem langen Code hinbekommst!
 #                start_code: "{print} 'Lets go to the next level!'"
 #                example_code: "```\nErste_Punktzahl = {ask} 'Wie viele Punkte hast du im ersten Test?'\nZweite_Punktzahl = {ask} 'Wie viele Punkte hast du im zweiten Test?'\nSumme {is} Erste_Punktzahl + Zweite_Punktzahl\nDurchschnitt {is} Summe / 2\n{if} Durchschnitt = 1 {or} Durchschnitt = 2 {or} Durchschnitt = 3 {or} Durchschnitt = 4 {or} Durchschnitt = 5\n    {print} 'Oh nein! Du bist durchgefallen...'\n{else}\n    {print} 'Juhuu! Du hast bestanden!'\n```\n"
 #            14:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    In diesem Spiel unten wurde der Code so gemacht, dass der Spieler solange spielen kann wie er oder sie möchte...
+##                    In diesem Spiel unten wurde der Code so gemacht, dass der Spieler solange spielen kann wie er oder sie möchte...
 #                    Aber der Code ist ineffizient und viel zu lang. Und was, wenn der Spieler 101 Spiele und nicht 100 spielen möchte?
 #                    Kann man nicht bis unendlich spielen?
 #                    Im nächsten Level lernst du einen Befehl der das alles ein ganzes Stück einfacher macht.
@@ -2640,28 +2506,24 @@ adventures:
 #                example_code: "```\nSpiel {is} 'läuft'\n{for} i {in} {range} 1 {to} 100\n    {if} Spiel {is} 'läuft'\n        Antwort = {ask} 'Möchtest du weiterspielen?'\n        {if} Antwort {is} 'nein'\n            Spiel {is} 'vorbei'\n        {if} Antwort {is} 'ja'\n            {print} 'Ok dann machen wir weiter.'\n```\n"
 #            15:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Im nächsten Level werden wir uns ein bisschen mehr in Richtung echten Python-Code bewegen. Du wirst lernen wie sich zwei Listen zusammenfügen lassen.
+##                    Im nächsten Level werden wir uns ein bisschen mehr in Richtung echten Python-Code bewegen. Du wirst lernen wie sich zwei Listen zusammenfügen lassen.
 #                    So kannst du Code programmieren in dem einem Tier das entsprechende Tiergeräusch zugeordnet wird.
 #                    Weil die beiden Codes unten... sind einfach nur Quatsch!
 #                start_code: "{print} 'Lets go to the next level!'"
 #                example_code: "```\nTiere = 'Huhn', 'Pferd', 'Kuh'\nGeräusche = 'Gack', 'Wieh', 'Muh'\n{for} Tier {in} Tiere\n    {print} 'Ein ' Tier ' macht ' Geräusche {at} {random}\n```\nSo kannst du es auch hinbekommen, aber....\n```\nTiere = 'Huhn', 'Pferd', 'Kuh'\nGeräusche = 'Gack', 'Wieh', 'Muh'\n{for} Tier {in} Tiere\n    {for} Geräusch {in} Geräusche\n        {print} 'Ein ' Tier ' macht ' Geräusch\n```\n"
 #            16:
 #                story_text: |
-#                    ## Was kommt als Nächstes?
-#                    Im nächsten Level wird es Zeit für einen neuen Befehl. Vielleicht ist dir in den vorherigen Leveln schon aufgefallen, dass `{if}` und `{else}`manchmal nicht ausreichen.
+##                    Im nächsten Level wird es Zeit für einen neuen Befehl. Vielleicht ist dir in den vorherigen Leveln schon aufgefallen, dass `{if}` und `{else}`manchmal nicht ausreichen.
 #                    Schau dir zum Beispiel mal diesen Code an:
 #                start_code: "{print} 'Lets go to the next level!'"
 #                story_text_2: In diesem Code wäre es toll, zweimal ein `{else}` zu haben, damit du eine Option für den Brokkoli und eine für die Grünen Bohnen haben kannst. Das nächste Level bringt den Befehl `{elif}` mit, der genau das möglich macht! Also nichts wie los zum nächsten Level!
 #                example_code: "```\n{print} 'Was gibt es heute zum Abendessen?'\nMöglichkeiten = ['Pizza', 'Brokkoli', 'Grüne Bohnen']\nWahl = Möglichkeiten {at} {random}\n{if} Wahl = 'Pizza'\n    {print} 'Lecker! Pizza!'\n{else}\n    {print} 'Igitt...'\n```\n"
 #            17:
 #                story_text: |
-#                    ## What's next?
-#                    In the next level you will learn a real Python way to use `{print}`.
+##                    In the next level you will learn a real Python way to use `{print}`.
 #                start_code: "{print} 'Lets go to the next level!'"
 #            18:
 #                story_text: |
-#                    ## Was kommt als nächstes?
-#                    Herzlichen Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den du geschrieben hast, kann in echte Python-Umgebungen wie Replit oder PyCharm kopiert werden, wo du dann weiterüben kannst!
+##                    Herzlichen Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den du geschrieben hast, kann in echte Python-Umgebungen wie Replit oder PyCharm kopiert werden, wo du dann weiterüben kannst!
 #                    Beachte jedoch, dass Python nur englische Befehle auslesen kann. Wenn du sonst also mit anderen Sprachen gearbeitet hast, musst du jetzt auch Englisch wechseln.
 #                start_code: "{print} ('Great job!!!')"

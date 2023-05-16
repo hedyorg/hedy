@@ -2821,6 +2821,14 @@ def preprocess_ifs(code, lang='en'):
         else:
             return command in line
 
+    def contains_two(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                if line.count(' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    return True
+            return False
+
     def contains_any_of(commands, line):
         # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -2845,13 +2853,14 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                contains_any_of(commands, line) and not contains_any_of(excluded_commands, line)
-            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
+                (contains_any_of(commands, line) or contains_two('is', line))
+                and not contains_any_of(excluded_commands, line)
+            ):
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else _ is x"
+                line = line + " else x__x__x__x is 5"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)
@@ -2877,7 +2886,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
@@ -2887,8 +2896,8 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
-    if level >= 5 and level <= 8:
+    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
