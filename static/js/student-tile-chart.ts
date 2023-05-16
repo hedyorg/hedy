@@ -29,6 +29,7 @@ function createNewQuizChart(ctx: HTMLCanvasElement, studentLevels: string[], stu
             scales: {
                 y: {
                     beginAtZero: true,
+                    max: 100
                 },
                 x: {
                     title: {
@@ -44,14 +45,14 @@ function createNewQuizChart(ctx: HTMLCanvasElement, studentLevels: string[], stu
     });
 }
 
-function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"bar", number[], string> {
+function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgramProgression: number[]): Chart<"bar", number[], string> {
     return new Chart(ctx, {
         type: 'bar',
         data: {
             labels: studentLevels,
             datasets: [{
                 label: 'Program progression per level (%)',
-                data: studentProgression,
+                data: studentProgramProgression,
                 borderWidth: 1,
                 borderColor: '#36A2EB',
                 backgroundColor: '#9BD0F5',
@@ -70,6 +71,7 @@ function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string
             scales: {
                 y: {
                     beginAtZero: true,
+                    max: 10,
                 },
                 x: {
                     title: {

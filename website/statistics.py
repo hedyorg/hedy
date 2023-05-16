@@ -70,8 +70,8 @@ class StatisticsModule(WebsiteModule):
         for student_username in class_.get("students", []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-
             quiz_scores = self.db.get_quiz_stats([student_username])
+
             average_quiz_scores = "-"
             success_rate_overall = "-"
             if len(quiz_scores) != 0:
@@ -79,8 +79,6 @@ class StatisticsModule(WebsiteModule):
                 total_quiz_score = 0
                 success_rate_overall = 0
                 for level_quiz_score in quiz_scores:
-                    print(level_quiz_score)
-
                     num_finished_quizzes += (level_quiz_score['finished'])
                     total_quiz_score += (level_quiz_score.get("scores")[0])
                     average_quiz_scores = total_quiz_score / num_finished_quizzes
@@ -150,10 +148,10 @@ class StatisticsModule(WebsiteModule):
 
         students = []
         for student_username in class_.get("students", []):
-            print(student_username)
+            print(f'Student: {student_username}')
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
 
             # check the programs that the student has run each level
             programs_ran_per_level = []
@@ -226,9 +224,6 @@ class StatisticsModule(WebsiteModule):
                 success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
                 success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
-            print(f'Average quizzes per level: {average_quizzes_ran_per_level}')
-            print(f'Programs ran per level: {programs_ran_per_level}')
-
             students.append(
                 {
                     "username": student_username,
@@ -245,6 +240,10 @@ class StatisticsModule(WebsiteModule):
             )
 
         students = sorted(students, key=lambda d: d.get("username", 0))
+
+        for student in students:
+            print(student.get('username'))
+            print(student.get('average_quizzes_ran_per_level'))
 
         return render_template(
             "class-stats-v2.html",
