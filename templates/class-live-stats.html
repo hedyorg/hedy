@@ -16,7 +16,7 @@
     </div>
 
     {% if dashboard_options.collapse %}
-    <!-- Card 1: Class Overview (collapsed) -->
+    <!-- Card 1: Class Overview -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
         <!-- Hide / Show -->
@@ -33,10 +33,10 @@
             </a>
             {% endif %}
         </div>
-        <!-- Adventures -->
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
+                <!-- Levels selector -->
                 <div class="flex justify-center">
                     <div>
                         {% for i in range(1, max_level + 1) %}
@@ -45,12 +45,11 @@
                     </div>
                     <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
                 </div>
-
+                <!-- Adventures per level -->
                 {% for selected_level in class_info.class_overview.selected_levels %}
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
-                    <!-- Buttons -->
                     {% for level, adventure_list in adventures.items() %}{% if level|int == selected_level %}
                         {% for adventure in adventure_list %}
                         <li class="mr-1">
