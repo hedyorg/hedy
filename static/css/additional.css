@@ -167,3 +167,17 @@ body[dir='rtl'] #editor .ace_gutter-layer > * {
 #grid-table {
   width: 100%;
 }
+
+.disabledCheckBox {
+  position: relative;
+}
+
+.disabledCheckBox::before {
+  content: '✕';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  text-align: center;
+}

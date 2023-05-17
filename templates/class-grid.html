@@ -3,7 +3,7 @@
 <div class="flex flex-col gap-2">
   <h2>{{_('Grid overview')}}: {{class_info.name}}</h2>
   <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
-    <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" value = "{{ i }}" id="menu" hx-get="/grid_overview/class/{{ class_info.id }}/level" hx-target="#level" hx-trigger="change">
+    <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" id="menu" hx-get="/grid_overview/class/{{ class_info.id }}/level" hx-target="#level" hx-trigger="change">
         {% for i in range(1, max_level + 1) %}
             <option id="select-{{i}}" value="{{ i }}">
                 {{ _('level_title') }} {{ i }}
@@ -18,12 +18,11 @@
                     adventures_default_order=adventures_default_order,
                     class_id=class_id, 
                     level='1', 
-                    class_adventures=class_adventures)
+                    class_adventures=class_adventures,
+                    ticked_adventures=ticked_adventures,
+                    matrix_values=matrix_values)
   }}
   <div class="flex flex-col gap-2 mt-4">
-    <div class="flex flex-row ml-auto gap-2">
-        <button class="blue-btn">{{_('save')}}</button>
-    </div>
     <div class="flex flex-row ml-auto gap-2">
       <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
         {{_('back_to_class')}}
