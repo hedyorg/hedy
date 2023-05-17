@@ -13,24 +13,24 @@
         <div class="m-auto ml-14 flex pt-4 pl-4">
             <div class="flex flex-row">
               <div class="flex flex-row p-2">
-                  <p class="text-blue-600 font-bold mr-2">{{_('name')}}</p>
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('name')}}</p>
                   {{student.username}}
               </div>
             {% if student_programs %}
               <div class="flex flex-row p-2">
-                  <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}}</p>
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
                   {{ student_programs[0].level }}
               </div>
               <div class="flex flex-row p-2">
-                  <p class="text-blue-600 font-bold mr-2 ml-4">{{_('adventure')}}</p>
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
                   {{adventure_names.get(student_programs[0].adventure_name)}}
               </div>
             {% else %}
                 <div class="flex flex-row p-2">
-                    <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}}</p>
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
                 </div>
                 <div class="flex flex-row p-2">
-                    <p class="text-blue-600 font-bold mr-2 ml-4">{{_('adventure')}}</p>
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
                 </div>
             {% endif %}
             </div>
@@ -40,7 +40,7 @@
         <div class="grid grid-cols-3 p-5">
             <!-- Graph with fails and successful runs over time -->
             <div class="w-full text-center p-2">
-                <h5 class="font-normal mr-2">Runs over time</h5>
+                <h5 class="font-normal ltr:mr-2 rtl:ml-2">Runs over time</h5>
                 <canvas id="runsOverTime" width="120" height="40"></canvas>
             </div>
 
