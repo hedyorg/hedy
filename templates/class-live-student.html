@@ -23,7 +23,11 @@
               </div>
               <div class="flex flex-row p-2">
                   <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
-                  {{adventure_names.get(student_programs[0].adventure_name)}}
+                    {% if adventure_names.get(student_programs[0].adventure_name) %}
+                        {{adventure_names.get(student_programs[0].adventure_name)}}
+                    {% else %}
+                        {{student_programs[0].name}}
+                    {% endif %}
               </div>
             {% else %}
                 <div class="flex flex-row p-2">
