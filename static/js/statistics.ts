@@ -513,39 +513,6 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   });
 }
 
-export function enable_level_class_overview(level: string) {
-  if ($('#level_button_' + level).hasClass('gray-btn')) {
-      $('#level_button_' + level).removeClass('gray-btn');
-      $('#level_button_' + level).addClass('green-btn');
-  } else {
-      $('#level_button_' + level).removeClass('green-btn');
-      $('#level_button_' + level).addClass('gray-btn');
-  }
-}
-
-export function select_levels_class_overview(class_id: string) {
-  let levels: (string | undefined)[] = [];
-  $('.level-select-button').each(function() {
-      if ($(this).hasClass("green-btn")) {
-          levels.push(<string>$(this).val());
-      }
-  });
-
-  $.ajax({
-    type: 'POST',
-    url: '/live_stats/class/' + class_id,
-    data: JSON.stringify({
-        levels: levels
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function () {
-    location.reload();
-  }).fail(function (err) {
-    modal.notifyError(err.responseText);
-  });
-}
-
 export function getRunsOverTime(data: any[]) {
   data = [[0, 1], [1, 0]]
 
