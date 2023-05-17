@@ -37,8 +37,17 @@
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
-                {% set selected_level = 1 %} <!-- TODO: make adjustable for specific levels (currently hardcoded to 1) -->
-                <p class="text-blue-600 font-bold mr-2 ml-4">{{_('level')}} {{ selected_level }}</p>
+                <div class="flex justify-center">
+                    <div>
+                        {% for i in range(1, max_level + 1) %}
+                            <button class="level-select-button {% if i in class_info.class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
+                        {% endfor %}
+                    </div>
+                    <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
+                </div>
+
+                {% for selected_level in class_info.class_overview.selected_levels %}
+                <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
                     <!-- Buttons -->
@@ -69,6 +78,7 @@
                     </ul>
                     {% endif %}{% endfor %}
                 </div>
+                {%endfor%}
             </div>
             <!-- Legend -->
             <div class="mt-5 flex">

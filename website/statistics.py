@@ -139,6 +139,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
         self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
         self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
+        self.CLASS_OVERVIEW = dynamo.Table(self.common_error_db, "class_overview", "class_id")
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
@@ -146,8 +147,9 @@ class LiveStatisticsModule(WebsiteModule):
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
 
-        # Retrieve common errors from the database for class
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -208,11 +210,17 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             quiz_info=quiz_info,
+            max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -230,8 +238,9 @@ class LiveStatisticsModule(WebsiteModule):
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
 
-        # Retrieve common errors from the database for class
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -327,7 +336,12 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-student.html",
-            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
@@ -335,7 +349,7 @@ class LiveStatisticsModule(WebsiteModule):
             adventures=adventures,
             quiz_info=quiz_info,
             adventure_names=adventure_names,
-            data=data,
+            max_level=HEDY_MAX_LEVEL,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -350,8 +364,9 @@ class LiveStatisticsModule(WebsiteModule):
         collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
 
-        # Retrieve common errors from the database for class
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -410,12 +425,18 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students, "common_errors": common_errors},
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             quiz_info=quiz_info,
             student=selected_student,
+            max_level=HEDY_MAX_LEVEL,
             current_page='my-profile'
         )
 
@@ -432,6 +453,23 @@ class LiveStatisticsModule(WebsiteModule):
                 self.ERRORS.put(common_errors)
                 self.__error_db_load()
                 break
+
+        return {}, 200
+
+    @route("/live_stats/class/<class_id>", methods=["POST"])
+    @requires_login
+    def select_levels(self, user, class_id):
+        """"
+        Stores the selected levels in the class overview in the database.
+        """
+        body = request.json
+        levels = [int(i) for i in body["levels"]]
+
+        class_overview = dynamo.Table(self.common_error_db, "class_overview", "class_id").get({"class_id": class_id})
+        class_overview['selected_levels'] = levels
+
+        self.CLASS_OVERVIEW.update({"class_id": class_id}, class_overview)
+        self.__error_db_load()
 
         return {}, 200
 
