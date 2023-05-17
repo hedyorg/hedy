@@ -3,12 +3,12 @@
 {% block regular_content %}
 
 <div>
-    <!--  Back to class button  -->
+    <!-- Back to class button -->
     <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
       {{_('back_to_class')}}
     </button>
 
-    <!-- Title  -->
+    <!-- Title -->
     <div class="flex flex-col gap-4">
         <div class="font-bold font-slab text-sky-600 text-2xl">
             <h1>RADboard</h1>
@@ -16,9 +16,10 @@
     </div>
 
     {% if dashboard_options.collapse %}
-    <!-- Card 1 Progress indicator collapsed version -->
+    <!-- Card 1: Class Overview (collapsed) -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
+        <!-- Hide / Show -->
         <div class="float-right relative m-2">
             {% if dashboard_options.show_c1 %}
             <a class="no-underline text-black rounded hover:bg-blue-600"
@@ -32,47 +33,78 @@
             </a>
             {% endif %}
         </div>
-
-        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_col">
+        <!-- Adventures -->
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
-            <img class="w-full" src="/images/new_media_lab/progress.png">
+            <div class="w-full">
+                <div class="flex justify-center">
+                    <div>
+                        {% for i in range(1, max_level + 1) %}
+                            <button class="level-select-button {% if i in class_info.class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
+                        {% endfor %}
+                    </div>
+                    <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
+                </div>
+
+                {% for selected_level in class_info.class_overview.selected_levels %}
+                <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
+                <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
+                    <ul class="flex flex-wrap -mb-px list-none">
+                    <!-- Buttons -->
+                    {% for level, adventure_list in adventures.items() %}{% if level|int == selected_level %}
+                        {% for adventure in adventure_list %}
+                        <li class="mr-1">
+                            <div class="inline-block p-4 text-gray-700">
+                                {{ adventure["name"] }}
+                                {% if adventure["in_progress"] != 0 %}
+                                    <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{ adventure["in_progress"] }}</span>
+                                {% endif %}
+                            </div>
+                        </li>                        
+                        {% endfor %}
+                        <li class="mr-1">
+                            <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
+                                Quiz
+                                {% set in_progress = quiz_info[selected_level]["students_in_progress"]|length %}
+                                {% set finished = quiz_info[selected_level]["students_finished"]|length %}
+                                {% if in_progress != 0 %}
+                                <span class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ in_progress }}</span>
+                                {% endif %}
+                                {% if finished != 0 %}
+                                <span class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">{{ finished }}</span>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                    {% endif %}{% endfor %}
+                </div>
+                {%endfor%}
+            </div>
+            <!-- Legend -->
+            <div class="mt-5 flex">
+                <div class="flex m-1">
+                    <div><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
+                    <p class="text-xs font-semibold text-gray-700 mt-1">In progress</p>
+                </div>
+                <div class="flex m-1 ml-3">
+                    <div><span class="bg-green-600 text-white  text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
+                    <p class="text-xs font-semibold text-green-800 mt-1">Quiz finished</p>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
-    {% if dashboard_options.show_c1 %}
-    <div class="relative">
-        <button class="blue-btn absolute top-0 right-0" id="expand"
-                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=True", "collapse=False") }}'">
-            Expand
-        </button>
-    </div>
-    {% endif %}
-
-    {% else %}
-    <!-- Card 1 Progress indicator expanded version -->
-    <div class="relative">
-        <button class="blue-btn absolute top-0 right-0" id="collapse"
-                onclick="window.location.href = '/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace("collapse=False", "collapse=True") }}'">
-            Collapse
-        </button>
-    </div>
-    <div class="justify-center">
-        <h2 class="text-center">Class Overview</h2>
-        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_progress_exp">
-            <img class="w-full" src="/images/new_media_lab/progress2.png">
-        </div>
-    </div>
     {% endif %}
 
 
-    <!-- Space where we show individual students, otherwise empty -->
+    <!-- Space for Student Details card, otherwise empty -->
     {% block student_space %}
     {% endblock %}
 
 
     <div class="justify-center w-full max-w-8xl">
         <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
-            <!-- Card 2 Student List    -->
+            <!-- Card 2: Student List -->
             <div id="col1">
                 <h2 class="text-center">
                   Student List
@@ -95,7 +127,6 @@
                                             <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}&student={{s.username}}" class="text-black hover:text-white" id="show-student">
                                                 {{s.username}}
                                             </a>
-
                                         </li>
                                     </div>
                                 {% endfor %}
@@ -149,7 +180,7 @@
                 {% endif %}
             </div>
 
-            <!-- Card 3 Common Errors -->
+            <!-- Card 3: Common Errors -->
             <div id="col2">
                 <h2 class="text-center">
                   Common Errors
