@@ -176,7 +176,6 @@ class LiveStatisticsModule(WebsiteModule):
             )
             student_names.append(student_username)
 
-
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -222,8 +221,8 @@ class LiveStatisticsModule(WebsiteModule):
             },
             dashboard_options={
                 "show_c1": show_c1,
-                "show_c2": show_c2, 
-                "show_c3": show_c3, 
+                "show_c2": show_c2,
+                "show_c3": show_c3,
                 "student": student
             },
             dashboard_options_args=dashboard_options_args,
@@ -354,8 +353,8 @@ class LiveStatisticsModule(WebsiteModule):
             "class-live-student.html",
             dashboard_options={
                 "show_c1": show_c1,
-                "show_c2": show_c2, 
-                "show_c3": show_c3, 
+                "show_c2": show_c2,
+                "show_c3": show_c3,
                 "student": student
             },
             class_info={
@@ -456,8 +455,8 @@ class LiveStatisticsModule(WebsiteModule):
             },
             dashboard_options={
                 "show_c1": show_c1,
-                "show_c2": show_c2, 
-                "show_c3": show_c3, 
+                "show_c2": show_c2,
+                "show_c3": show_c3,
                 "student": student
             },
             dashboard_options_args=dashboard_options_args,
