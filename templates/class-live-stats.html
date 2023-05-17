@@ -40,13 +40,13 @@
                 <div class="flex justify-center">
                     <div>
                         {% for i in range(1, max_level + 1) %}
-                            <button class="level-select-button {% if i in class_info.class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
+                            <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
                         {% endfor %}
                     </div>
                     <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
                 </div>
                 <!-- Adventures per level -->
-                {% for selected_level in class_info.class_overview.selected_levels %}
+                {% for selected_level in class_overview.selected_levels %}
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
@@ -64,8 +64,8 @@
                         <li class="mr-1">
                             <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
                                 Quiz
-                                {% set in_progress = quiz_info[selected_level]["students_in_progress"]|length %}
-                                {% set finished = quiz_info[selected_level]["students_finished"]|length %}
+                                {% set in_progress = class_overview.quiz_info[selected_level]["students_in_progress"]|length %}
+                                {% set finished = class_overview.quiz_info[selected_level]["students_finished"]|length %}
                                 {% if in_progress != 0 %}
                                 <span class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ in_progress }}</span>
                                 {% endif %}

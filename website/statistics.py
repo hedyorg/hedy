@@ -175,7 +175,6 @@ class LiveStatisticsModule(WebsiteModule):
             )
             student_names.append(student_username)
 
-
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -216,14 +215,16 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student_names=student_names,
             adventures=adventures,
-            quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
@@ -344,16 +345,18 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
-            student_names = student_names,
+            student_names=student_names,
             student_programs=student_programs,
             adventures=adventures,
-            quiz_info=quiz_info,
             adventure_names=adventure_names,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile',
@@ -435,15 +438,17 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
-            quiz_info=quiz_info,
             student=selected_student,
-            student_names= student_names,
+            student_names=student_names,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile'
         )
