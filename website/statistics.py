@@ -5,14 +5,15 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import exceptions as hedy_exceptions
+from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
+import hedy_content
+
 import utils
 from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
-import exceptions as hedy_exceptions
-from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
-import hedy_content
 from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -138,17 +139,18 @@ class LiveStatisticsModule(WebsiteModule):
         """
         self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
         self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
+        self.CLASS_OVERVIEW = dynamo.Table(self.common_error_db, "class_overview", "class_id")
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
 
-        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
-                                                 student=student)
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
-        # Retrieve common errors from the database for class
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -157,6 +159,7 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        student_names = []
         students = sorted(class_.get("students", []))
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -171,12 +174,63 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+            student_names.append(student_username)
+
+
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
+        last_adventures = []
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            data = []
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
+                if last_adventure:
+                    data.append(last_adventure[0])
+            last_adventures.append(data)
+
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
+
         return render_template(
             "class-live-stats.html",
-            class_info={"id": class_id, "students": students, "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3,
-                               "collapse": collapse, "student": student},
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2, 
+                "show_c3": show_c3, 
+                "student": student
+            },
             dashboard_options_args=dashboard_options_args,
+            student_names=student_names,  # just the names of student and no auxiliary information
+            adventures=adventures,
+            quiz_info=quiz_info,
+            max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -184,17 +238,20 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/student", methods=["GET"])
     @requires_login
     def render_student_details(self, user, class_id):
-        """ Shows information about an individual student when they
+        """
+        Shows information about an individual student when they
         are selected in the student list.
         """
+
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
-        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
-                                                 student=student)
-        # Retrieve common errors from the database for class
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -203,8 +260,10 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
+        print("render_student_details1")
         # Get data for all students
-        for student_username in class_.get("students", []):
+        student_names = []
+        for student_username in sorted(class_.get("students", [])):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
             # Verify if the user did finish any quiz before getting the max() of the finished levels
@@ -217,6 +276,9 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+            student_names.append(student_username)
+
+        print("render_student_details2")
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -224,7 +286,6 @@ class LiveStatisticsModule(WebsiteModule):
         finished_quizzes = any("finished" in x for x in quiz_scores)
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
-
         # Load in all program data for that specific student
         student_programs = []
         for item in programs:
@@ -251,21 +312,68 @@ class LiveStatisticsModule(WebsiteModule):
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
         # get data for graph from db, db conveniently stores amount of errors for student
-        data = self.db.get_program_stats([selected_student['username']], None, None)
-        data, labels = _collect_graph_data(data, window_size=10)
+        graph_data = self.db.get_program_stats([selected_student['username']], None, None)
+        graph_data, graph_labels = _collect_graph_data(graph_data, window_size=10)
+
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
+        last_adventures = []
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            _data = []
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
+                if last_adventure:
+                    _data.append(last_adventure[0])
+            last_adventures.append(_data)
+
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
 
         return render_template(
             "class-live-student.html",
-            class_info={"id": class_id, "students": students,
-                        "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse,
-                               "student": student},
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2, 
+                "show_c3": show_c3, 
+                "student": student
+            },
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
+            student_names=student_names,
             student_programs=student_programs,
+            adventures=adventures,
+            quiz_info=quiz_info,
             adventure_names=adventure_names,
-            data=data,
-            labels=labels,
+            data=graph_data,
+            labels=graph_labels,
+            max_level=HEDY_MAX_LEVEL,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
         )
@@ -277,17 +385,18 @@ class LiveStatisticsModule(WebsiteModule):
         Handles the rendering of the common error items in the common errors detection list.
         """
 
-        collapse, show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse,
-                                                 student=student)
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
-        # Retrieve common errors from the database for class
+        # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
+        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
-        for student_username in class_.get("students", []):
+        student_names = []
+        for student_username in sorted(class_.get("students", [])):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
             # Verify if the user did finish any quiz before getting the max() of the finished levels
@@ -300,14 +409,62 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+            student_names.append(student_username)
+
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
+        last_adventures = []
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            data = []
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
+                if last_adventure:
+                    data.append(last_adventure[0])
+            last_adventures.append(data)
+
+        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+
+        quiz_stats = []
+        for student_username in class_.get("students", []):
+            quiz_stats_student = self.db.get_quiz_stats([student_username])
+            quiz_in_progress = [x.get("level") for x in quiz_stats_student
+                                if x.get("started") and not x.get("finished")]
+            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
+            quiz_stats.append(
+                {
+                    "student": student_username,
+                    "in_progress": quiz_in_progress,
+                    "finished": quiz_finished
+                }
+            )
+        quiz_info = _get_quiz_info(quiz_stats)
 
         return render_template(
             "class-live-popup.html",
-            class_info={"id": class_id, "students": students,
-                        "common_errors": common_errors},
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse,
-                               "student": student},
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors,
+                "class_overview": class_overview
+            },
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2, 
+                "show_c3": show_c3, 
+                "student": student
+            },
             dashboard_options_args=dashboard_options_args,
+            adventures=adventures,
+            quiz_info=quiz_info,
+            student_names=student_names,
+            max_level=HEDY_MAX_LEVEL,
             current_page='my-profile'
         )
 
@@ -321,9 +478,26 @@ class LiveStatisticsModule(WebsiteModule):
         for i in range(len(common_errors['errors'])):
             if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
                 common_errors['errors'][i]['active'] = 0
-                self.ERRORS.put(common_errors)
+                self.ERRORS.update({"class_id": class_id}, common_errors)
                 self.__error_db_load()
                 break
+
+        return {}, 200
+
+    @route("/live_stats/class/<class_id>", methods=["POST"])
+    @requires_login
+    def select_levels(self, user, class_id):
+        """"
+        Stores the selected levels in the class overview in the database.
+        """
+        body = request.json
+        levels = [int(i) for i in body["levels"]]
+
+        class_overview = dynamo.Table(self.common_error_db, "class_overview", "class_id").get({"class_id": class_id})
+        class_overview['selected_levels'] = levels
+
+        self.CLASS_OVERVIEW.update({"class_id": class_id}, class_overview)
+        self.__error_db_load()
 
         return {}, 200
 
@@ -556,9 +730,6 @@ def _check_dashboard_display_args():
     """
     Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
     """
-    collapse = request.args.get("collapse", default="True", type=str)
-    collapse = _determine_bool(collapse)
-
     show_c1 = request.args.get("show_c1", default="True", type=str)
     show_c1 = _determine_bool(show_c1)
 
@@ -571,7 +742,73 @@ def _check_dashboard_display_args():
     student = request.args.get("student", default=None, type=str)
     student = None if student == "None" else student
 
-    return collapse, show_c1, show_c2, show_c3, student
+    return show_c1, show_c2, show_c3, student
+
+
+def _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
+    """
+    Returns the available adventures for all levels, given the possible adventures per level,
+    the teacher (adventures) and customization. Also adds how many students are currently in
+    progress for each adventure.
+
+    { level: [ { id, name, in_progress } ] }
+    """
+    teacher_adventures_formatted = {}
+    for adventure in teacher_adventures:
+        teacher_adventures_formatted[adventure['id']] = adventure["name"]
+
+    selected_adventures = {}
+    for level, adventure_list in customizations['sorted_adventures'].items():
+        adventures_for_level = []
+        for adventure in list(adventure_list):
+            adventure_key = adventure['name']
+
+            number_in_progress = last_adventures[int(level) - 1].count(adventure_key)
+
+            if adventure['from_teacher']:
+                adventure_name = teacher_adventures_formatted[adventure_key]
+                adventures_for_level.append(
+                    {
+                        "id": adventure_key,
+                        "name":  adventure_name,
+                        "in_progress": number_in_progress
+                    }
+                )
+
+            if not adventure['from_teacher'] and adventure_key in adventures:
+                adventure_name = list(adventures[adventure_key].keys())[0]
+                adventures_for_level.append(
+                    {
+                        "id": adventure_key,
+                        "name":  adventure_name,
+                        "in_progress": number_in_progress
+                    }
+                )
+
+        selected_adventures[level] = adventures_for_level
+
+    return selected_adventures
+
+
+def _get_quiz_info(quiz_stats):
+    """
+    Returns quiz info for each level containing the students in progress (started but not finished)
+    and the students that finished the quiz.
+
+    { level: { students_in_progress, students_finished } }
+    """
+    quiz_info = {}
+    for level in range(1, HEDY_MAX_LEVEL+1):
+        students_in_progress, students_finished = [], []
+        for stats in quiz_stats:
+            if level in stats.get("in_progress"):
+                students_in_progress.append(stats.get("student"))
+            elif level in stats.get("finished"):
+                students_finished.append(stats.get("student"))
+
+        quiz_info[level] = {"students_in_progress": students_in_progress, "students_finished": students_finished}
+
+    return quiz_info
 
 
 def _get_error_info(code, level, lang='en'):
