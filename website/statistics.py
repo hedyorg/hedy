@@ -450,7 +450,7 @@ class LiveStatisticsModule(WebsiteModule):
         for i in range(len(common_errors['errors'])):
             if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
                 common_errors['errors'][i]['active'] = 0
-                self.ERRORS.put(common_errors)
+                self.ERRORS.update({"class_id": class_id}, common_errors)
                 self.__error_db_load()
                 break
 
