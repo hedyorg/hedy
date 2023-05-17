@@ -202,7 +202,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     // Load initial code from local storage, if available
     const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
       adventure.start_code = programFromLs.code;
       adventure.save_name = programFromLs.saveName;
       adventure.save_info = 'local-storage';
@@ -856,7 +857,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -1975,7 +1980,14 @@ function programNeedsSaving(adventureName: string) {
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
-  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
 
 /**
@@ -2006,6 +2018,7 @@ async function saveIfNecessary() {
 
   const code = theGlobalEditor.getValue();
   const saveName = saveNameFromInput();
+
 
   if (theUserIsLoggedIn) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;

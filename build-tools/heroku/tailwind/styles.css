@@ -61,6 +61,10 @@ strong {
 .copy-container { @apply max-w-screen-lg mx-auto; }
 .copy-container-wide { @apply max-w-screen-xl mx-auto; }
 
+.text-display-copy, .text-business-copy {
+  @apply leading-relaxed;
+}
+
 /* Apply somewhat fancy styles to running text (good for landing page copy) */
 .text-display-copy h2 {
   text-align: center;
@@ -204,6 +208,7 @@ strong {
 }
 
 /* Styles only for use in MarkDown blocks */
+/* NOTE: I'm pretty sure we don't render class="markdown" anymore anywhere */
 .markdown {
   @apply text-xl text-gray-800 leading-normal;
 }
@@ -368,16 +373,33 @@ code {
 /* Lists */
 
 ul {
-    list-style: disc outside none;
+  list-style: disc outside none;
 }
 
 ol {
-    list-style: decimal outside none;
+  list-style: decimal outside none;
+}
+
+.text-display-copy ul, .text-display-copy ol,
+.text-business-copy ul, .text-business-copy ol {
+  @apply ml-10;
+}
+.text-adventure-copy ul, .text-adventure-copy ol {
+  @apply ml-8;
+}
+
+.text-display-copy ul li + li, .text-display-copy ol li + li,
+.text-business-copy ul li + li, .text-business-copy ol li + li {
+  @apply mt-2;
+}
+
+.text-adventure-copy ul li + li, .text-adventure-copy ol li + li {
+  @apply mt-1;
 }
 
 /* AUTH */
 input:disabled {
-  @apply border-gray-500 bg-gray-400;
+  @apply bg-gray-400;
 }
 
 input[type=checkbox], input[type=radio] {
@@ -710,4 +732,77 @@ input:checked ~ .toggle-path {
 
 .profile-nametag__stats {
   @apply text-center w-full flex flex-row justify-center items-stretch
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  @apply bg-gray-400;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  @apply bg-green-500  
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input:disabled::placeholder {
+  @apply text-gray-700
+}
+
+
+
+.htmx-indicator.custom-indicator{
+  opacity:0;
+  transition: opacity 0ms ease-in;
+}
+.htmx-request .custom-indicator{
+  opacity:1;
+}
+.htmx-request.custom-indicator{
+  opacity:1;
 }
