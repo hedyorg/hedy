@@ -144,8 +144,9 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
@@ -175,7 +176,6 @@ class LiveStatisticsModule(WebsiteModule):
             )
             student_names.append(student_username)
 
-
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -188,8 +188,8 @@ class LiveStatisticsModule(WebsiteModule):
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
             data = []
-            for student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
                     data.append(last_adventure[0])
             last_adventures.append(data)
@@ -219,9 +219,14 @@ class LiveStatisticsModule(WebsiteModule):
                 "common_errors": common_errors,
                 "class_overview": class_overview
             },
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2,
+                "show_c3": show_c3,
+                "student": student
+            },
             dashboard_options_args=dashboard_options_args,
-            student_names=student_names,
+            student_names=student_names,  # just the names of student and no auxiliary information
             adventures=adventures,
             quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
@@ -236,11 +241,12 @@ class LiveStatisticsModule(WebsiteModule):
         Shows information about an individual student when they
         are selected in the student list.
         """
+
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
@@ -250,13 +256,13 @@ class LiveStatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
 
         # retrieve username of student in question via args
-        student = request.args.get("student", default=None, type=str)
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
+        print("render_student_details1")
         # Get data for all students
         student_names = []
-        for student_username in class_.get("students", []):
+        for student_username in sorted(class_.get("students", [])):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
             # Verify if the user did finish any quiz before getting the max() of the finished levels
@@ -270,6 +276,8 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
             student_names.append(student_username)
+
+        print("render_student_details2")
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -302,7 +310,9 @@ class LiveStatisticsModule(WebsiteModule):
 
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
-        data = []
+        # get data for graph from db, db conveniently stores amount of errors for student
+        graph_data = self.db.get_program_stats([selected_student['username']], None, None)
+        graph_data, graph_labels = _collect_graph_data(graph_data, window_size=10)
 
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -315,12 +325,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
-            data = []
-            for student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
+            _data = []
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
-            last_adventures.append(data)
+                    _data.append(last_adventure[0])
+            last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
@@ -341,20 +351,27 @@ class LiveStatisticsModule(WebsiteModule):
 
         return render_template(
             "class-live-student.html",
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2,
+                "show_c3": show_c3,
+                "student": student
+            },
             class_info={
                 "id": class_id,
                 "students": students,
                 "common_errors": common_errors,
                 "class_overview": class_overview
             },
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
-            student_names = student_names,
+            student_names=student_names,
             student_programs=student_programs,
             adventures=adventures,
             quiz_info=quiz_info,
             adventure_names=adventure_names,
+            data=graph_data,
+            labels=graph_labels,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile',
             page_title=gettext("title_class live_statistics")
@@ -367,8 +384,8 @@ class LiveStatisticsModule(WebsiteModule):
         Handles the rendering of the common error items in the common errors detection list.
         """
 
-        collapse, show_c1, show_c2, show_c3 = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, collapse=collapse)
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
@@ -377,10 +394,8 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
-        # Retrieve username of student in question via args
-        selected_student = request.args.get("student", default=None, type=str)
         student_names = []
-        for student_username in class_.get("students", []):
+        for student_username in sorted(class_.get("students", [])):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
             # Verify if the user did finish any quiz before getting the max() of the finished levels
@@ -407,8 +422,8 @@ class LiveStatisticsModule(WebsiteModule):
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
             data = []
-            for student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
                     data.append(last_adventure[0])
             last_adventures.append(data)
@@ -438,12 +453,16 @@ class LiveStatisticsModule(WebsiteModule):
                 "common_errors": common_errors,
                 "class_overview": class_overview
             },
-            dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2,
+                "show_c3": show_c3,
+                "student": student
+            },
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             quiz_info=quiz_info,
-            student=selected_student,
-            student_names= student_names,
+            student_names=student_names,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile'
         )
@@ -451,7 +470,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>/error/<error_id>", methods=["DELETE"])
     @requires_login
     def remove_common_error_item(self, user, class_id, error_id):
-        """"
+        """
         Removes the common error item by setting the active flag to 0.
         """
         common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
@@ -710,9 +729,6 @@ def _check_dashboard_display_args():
     """
     Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
     """
-    collapse = request.args.get("collapse", default="True", type=str)
-    collapse = _determine_bool(collapse)
-
     show_c1 = request.args.get("show_c1", default="True", type=str)
     show_c1 = _determine_bool(show_c1)
 
@@ -722,7 +738,10 @@ def _check_dashboard_display_args():
     show_c3 = request.args.get("show_c3", default="True", type=str)
     show_c3 = _determine_bool(show_c3)
 
-    return collapse, show_c1, show_c2, show_c3
+    student = request.args.get("student", default=None, type=str)
+    student = None if student == "None" else student
+
+    return show_c1, show_c2, show_c3, student
 
 
 def _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
@@ -852,6 +871,23 @@ def _build_url_args(**kwargs):
         else:
             url_args += f"&{key}={value}"
     return url_args
+
+
+def _collect_graph_data(data, window_size=5):
+    """
+    Collects data to be shown in the line graph and limits it to the window size.
+    """
+    graph_data, labels = [], []
+    c = 0
+    for week in data:
+        if 'chart_history' in week.keys():
+            graph_data += week['chart_history']
+            labels += list(range(c+1, c + 1 + len(week['chart_history'])))
+            c += len(week['chart_history'])
+
+    slice = window_size if len(graph_data) > window_size else 0
+
+    return graph_data[-slice:], labels[-slice:]
 
 
 def get_general_class_stats(students):

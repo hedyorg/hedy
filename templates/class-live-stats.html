@@ -3,36 +3,51 @@
 {% block regular_content %}
 
 <div>
-    <!-- Back to class button -->
+    <!--  Back to class button  -->
     <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
       {{_('back_to_class')}}
     </button>
 
-    <!-- Title -->
+    <!-- Title  -->
     <div class="flex flex-col gap-4">
         <div class="font-bold font-slab text-sky-600 text-2xl">
             <h1>RADboard</h1>
         </div>
     </div>
 
-    {% if dashboard_options.collapse %}
-    <!-- Card 1: Class Overview -->
+    <!-- Card 1 Progress indicator collapsed version -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
         <!-- Hide / Show -->
         <div class="float-right relative m-2">
             {% if dashboard_options.show_c1 %}
-            <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
-                ☝️ Hide
-            </a>
+                {% if dashboard_options.student %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600"
+                       href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                        ☝️ Hide
+                    </a>
+                {% else %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600"
+                       href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                        ☝️ Hide
+                    </a>
+                {% endif %}
             {% else %}
-            <a class="no-underline text-black rounded hover:bg-blue-600"
-               href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
-                👇 Show
-            </a>
+                {% if dashboard_options.student %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600"
+                       href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                        👇 Show
+                    </a>
+                {% else %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600"
+                       href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                        👇 Show
+                    </a>
+                {% endif %}
+
             {% endif %}
         </div>
+
         <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
@@ -50,32 +65,34 @@
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
-                    {% for level, adventure_list in adventures.items() %}{% if level|int == selected_level %}
-                        {% for adventure in adventure_list %}
-                        <li class="mr-1">
-                            <div class="inline-block p-4 text-gray-700">
-                                {{ adventure["name"] }}
-                                {% if adventure["in_progress"] != 0 %}
-                                    <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{ adventure["in_progress"] }}</span>
-                                {% endif %}
-                            </div>
-                        </li>                        
-                        {% endfor %}
-                        <li class="mr-1">
-                            <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
-                                Quiz
-                                {% set in_progress = quiz_info[selected_level]["students_in_progress"]|length %}
-                                {% set finished = quiz_info[selected_level]["students_finished"]|length %}
-                                {% if in_progress != 0 %}
-                                <span class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ in_progress }}</span>
-                                {% endif %}
-                                {% if finished != 0 %}
-                                <span class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">{{ finished }}</span>
-                                {% endif %}
-                            </div>
-                        </li>
+                    {% for level, adventure_list in adventures.items() %}
+                        {% if level|int == selected_level %}
+                            {% for adventure in adventure_list %}
+                            <li class="mr-1">
+                                <div class="inline-block p-4 text-gray-700">
+                                    {{ adventure["name"] }}
+                                    {% if adventure["in_progress"] != 0 %}
+                                        <span class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">{{ adventure["in_progress"] }}</span>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                            <li class="mr-1">
+                                <div class="inline-block p-4 text-green-700 border-b-4 border-green-600">
+                                    Quiz
+                                    {% set in_progress = quiz_info[selected_level]["students_in_progress"]|length %}
+                                    {% set finished = quiz_info[selected_level]["students_finished"]|length %}
+                                    {% if in_progress != 0 %}
+                                    <span class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ in_progress }}</span>
+                                    {% endif %}
+                                    {% if finished != 0 %}
+                                    <span class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">{{ finished }}</span>
+                                    {% endif %}
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                     </ul>
-                    {% endif %}{% endfor %}
                 </div>
                 {%endfor%}
             </div>
@@ -93,8 +110,6 @@
             {% endif %}
         </div>
     </div>
-    {% endif %}
-
 
     <!-- Space for Student Details card, otherwise empty -->
     {% block student_space %}
@@ -103,7 +118,7 @@
 
     <div class="justify-center w-full max-w-8xl">
         <div class="grid grid-cols-2 gap-4 my-8" id="columns_grid">
-            <!-- Card 2: Student List -->
+            <!-- Card 2 Student List    -->
             <div id="col1">
                 <h2 class="text-center">
                   Student List
@@ -111,42 +126,19 @@
                 {% if dashboard_options.show_c2 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
                             ☝️ Hide
                         </a>
+                        {% endif %}
                     </div>
-                    <!-- <div class="grid grid-cols-2 p-2">
-                        <div class="w-full text-left" id="name-col">
-                            <h4 class="mb-4">Name</h4>
-                            <ul class="max-w-md space-y-1 list-none list-inside">
-                                {% for s in class_info.students %}
-                                    <div>
-                                        <li class="my-2">
-                                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}&student={{s.username}}" class="text-black hover:text-white" id="show-student">
-                                                {{s.username}}
-                                            </a>
-                                        </li>
-                                    </div>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="w-full text-left" id="progress-col">
-                            <h4 class="mb-4">Adventure Progress</h4>
-                            <ul class="max-w-md space-y-1 list-none list-inside">
-                                <li id="s1"><img src="/images/new_media_lab/student1.png"></li>
-                                <li id="s2"><img src="/images/new_media_lab/student2.png"></li>
-                                <li id="s3"><img src="/images/new_media_lab/student3.png"></li>
-                                <li id="s4"><img src="/images/new_media_lab/student4.png"></li>
-                                <li id="s5"><img src="/images/new_media_lab/student5.png"></li>
-                                ---extra comment {% for s in class_info.students %}
-                                    <div>
-                                        <li class="p-0">{{s.highest_level}}</li>
-                                    </div>
-                                {% endfor %} ----extra comment
-                            </ul>
-                        </div>
-                    </div> -->
+
                     <table class="table-auto w-full border-separate space-y-6 border border-black rounded-lg">
                         <thead class="bg-gray-200">
                             <tr>
@@ -158,28 +150,46 @@
                         <tbody>
                             {% for s in student_names %}
                             <tr>
-                                <td class="px-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s}}" class="text-black hover:text-white" id="show-student">{{s}}</p></a></td>
-                                <td><button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-purple-700"></button>
+                                <td class="px-2">
+                                    {% if dashboard_options.student %}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s)}}" class="text-black hover:text-white" id="show-student">
+                                            {{s}}
+                                        </a>
+                                    {% else %}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s)}}" class="text-black hover:text-white" id="show-student">
+                                            {{s}}
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-purple-700">
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
-
                         </tbody>
                     </table>
                 </div>
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
+                        👇 Show
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
                         👇 Show
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
             </div>
 
-            <!-- Card 3: Common Errors -->
+            <!-- Card 3 Common Errors -->
             <div id="col2">
                 <h2 class="text-center">
                   Common Errors
@@ -187,10 +197,17 @@
                 {% if dashboard_options.show_c3 %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
+                            ☝️ Hide
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
                             ☝️ Hide
                         </a>
+                        {% endif %}
                     </div>
                     <div class="w-full text-left p-6 mt-1">
                         <ul class="max-w-md space-y-1 list-none list-inside">
@@ -212,10 +229,17 @@
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
                     <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
+                        👇 Show
+                        </a>
+                        {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
                         👇 Show
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
