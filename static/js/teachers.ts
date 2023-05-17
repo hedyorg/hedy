@@ -4,8 +4,9 @@ import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './br
 import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
-import { AvailableAdventure, TeacherAdventure } from './types';
 import { startTeacherTutorial } from './tutorials/tutorial';
+
+declare const htmx: typeof import('./htmx');
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -336,9 +337,9 @@ export function show_doc_section(section_key: string) {
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
     let levels: (string | undefined)[] = [];
-    $('.level-select-button').each(function() {
-        if ($(this).hasClass("green-btn")) {
-            levels.push(<string>$(this).val());
+    $('[id^=enable_level_]').each(function() {
+        if ($(this).is(":checked")) {
+            levels.push(<string>$(this).attr('level'));
         }
     });
     let other_settings: string[] = [];
@@ -353,28 +354,11 @@ export function save_customizations(class_id: string) {
             level_thresholds[$(this).attr('id') as string] = $(this).val() as string;
         }
     });
-
     let opening_dates: Record<string, string> = {};
-    $('.opening_date_container').each(function() {
-        if ($(this).is(":visible")) {
-            $(this).find(':input').each(function () {
-                opening_dates[$(this).attr('level') as string] = $(this).val() as string;
-            });
-        }
+    $('[id^=opening_date_level_]').each(function() {
+      opening_dates[$(this).attr('level') as string] = $(this).val() as string;
     });
-    let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('[id^=level-]').each(function() {
-        const id = $(this).attr('id')!;
-        const level = id.split('-')[1]!;
-        sorted_adventures[level] = [];
-        $('#'+id).children().each(function() {
-            const level : string = $(this).attr('level')!;
-            const adventure = $(this).attr('adventure')!;
-            const from_teacher = $(this).attr('from-teacher') === "true"!;
-            sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
-        });
-    });
-
+    // Not sending the adventures because the adventures are automatically saved in the database
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
@@ -382,8 +366,7 @@ export function save_customizations(class_id: string) {
           levels: levels,
           opening_dates: opening_dates,
           other_settings: other_settings,
-          level_thresholds: level_thresholds,
-          sorted_adventures: sorted_adventures
+          level_thresholds: level_thresholds
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -399,116 +382,76 @@ export function save_customizations(class_id: string) {
     });
 }
 
-export function remove_customizations(class_id: string, prompt: string) {
+export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-class/' + class_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function (response) {
-            $('#remove_customizations_button').addClass('hidden');
-            $('.adventure_level_input').show();
-            $('.adventure_level_input').prop('checked', true);
-            $('.teacher_adventures_checkbox').prop('checked', false);
-            $('.other_settings_checkbox').prop('checked', false);
-            $('.level-select-button').removeClass('blue-btn');
-            $('.level-select-button').addClass('green-btn');
-            $('.opening_date_container').removeClass('hidden');
+      // We need to know the current level that is selected by the user
+      // so we can know which level to draw in the template  
+      let active_level_id : string = $('[id^=level-]')[0].id;
+      let active_level = active_level_id.split('-')[1]
+      htmx.ajax(
+        'POST',
+        `/for-teachers/restore-customizations?level=${active_level}`,
+        '#adventure-dragger'
+      ).then(() => {
+        // Restore all the options other than the adventures.
+        // The adventures will be restored to the default using an HTMX call to the server
+        $('.other_settings_checkbox').prop('checked', false);
+        // Remove the value from all input fields -> reset to text to show placeholder
+        $('.opening_date_input').prop("type", "text")
+                                .blur()
+                                .val('')
+                                .prop('disabled', false)                                
+                                .attr('placeholder', ClientMessages.directly_available)
+                                .each(function() {         
+                                      if($(this).hasClass('bg-green-300')) {
+                                        $(this).removeClass('bg-green-300')
+                                              .addClass('bg-gray-200')
+                                      }
+                                });
 
-            // Remove the value from all input fields -> reset to text to show placeholder
-            $('.opening_date_input').prop("type", "text");
-            $('.opening_date_input').blur();
-            $('.opening_date_input').val('');
-            $('[id^=level-]').each(
-              function() {
-                $(this).empty();
-                const level = $(this).attr('id')!.split('-')[1];
-                for (let i = 0; i < adventures_default_order[level].length; i++) {
-                  // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
-                  const div =
-                  `
-                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventures_default_order[level][i]}" level="${level}" from-teacher="false">
-                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
-                    ${adventure_names[adventures_default_order[level][i]]}
-                  </div>
-                  `
-                  $(this).append(div);
-                }
-                drag_list(document.getElementById("level-"+level));
-            });
-            for (let i = 1; i <= 18; i++) {
-              available_adventures[i] = [];
-            }
-            for (let i = 0; i < teacher_adventures.length; i++) {
-              available_adventures[teacher_adventures![i]['level']].push({'name': teacher_adventures[i]['id'], 'from_teacher': true});
-            }
-            modal.notifySuccess(response.success);
-        }).fail(function (err) {
-            modal.notifyError(err.responseText);
-        });
-    });
-}
-
-export function select_all_levels_adventure(adventure_name: string) {
-    markUnsavedChanges();
-    let first_input = true;
-    let checked = true;
-    $('.adventure_level_input').each(function() {
-        const name = <string>$(this).attr('adventure');
-        if (name == adventure_name && $(this).is(":visible")) {
-            if (first_input) {
-                checked = $(this).prop("checked");
-                first_input = false;
-            }
-            $(this).prop("checked", !checked);
-        }
+        $('[id^=enable_level_]').prop('checked', true);                
+        setLevelStateIndicator(active_level);
+        modal.notifySuccess(ClientMessages.customization_deleted);          
+      })
     });
 }
 
 export function enable_level(level: string) {
     markUnsavedChanges();
-    // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('gray-btn')) {
-        $('.adventure_level_' + level).each(function(){
-            $(this).removeClass('hidden');
-            if ($(this).is(':enabled')) {
-                $(this).prop("checked", true);
-            }
-        });
-        $('#level_button_' + level).removeClass('gray-btn');
-        $('#level_button_' + level).addClass('green-btn');
-
-        // We also have to add this level to the "Opening dates" section
-        $('#opening_date_level_' + level).removeClass('hidden');
-        $('#opening_date_level_' + level).find('input').val('');
-        $('#opening_date_level_' + level).find('input').prop({type:"text"});
-        $("#select-"+level).removeClass("hidden");
-        if ($("#disabled").hasClass('flex') && $("#disabled").val() == level) {
-          $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
-          $("#level-"+level).show({
-            start: function() {
-              $(this).addClass('flex');
-              $(this).removeClass('hidden');
-            }
-          });
-        }
+    if ($('#enable_level_' + level).is(':checked')) {
+      $('#opening_date_level_' + level).prop('disabled', false)
+                                      .attr('type', 'text')
+                                      .attr("placeholder", ClientMessages.directly_available)
+                                      .removeClass('bg-green-300')
+                                      .addClass('bg-gray-200')
     } else {
-        $('.adventure_level_' + level).each(function () {
-            $(this).prop("checked", false);
-            $(this).addClass('hidden');
-        });
-        $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('gray-btn');
-        // if this level was shown, hide it
-        if($("#level-"+level).hasClass('flex')) {
-          $("div.adventures-tab").removeClass('flex').addClass('hidden').removeAttr('style');
-          $("#disabled").removeClass('hidden').addClass('flex').removeAttr('style').val(level);
-        }
-        $("#select-"+level).addClass("hidden");
-        // We also have to remove this level from the "Opening dates" section
-        $('#opening_date_level_' + level).addClass('hidden');
+      $('#opening_date_level_' + level).prop('disabled', true)
+                                       .attr('type', 'text')
+                                       .attr("placeholder", ClientMessages.disabled)
+                                       .val('');
     }
+
+    if ($('#level-' + level).is(':visible')) {
+      setLevelStateIndicator(level);
+    }
+}
+
+export function setDateLevelInputColor(level: string) {
+  var date_string : string = $('#opening_date_level_' + level).val() as string;
+  var input_date = new Date(date_string);
+  var today_date = new Date();
+  if (input_date > today_date) {
+    $('#opening_date_level_' + level).removeClass('bg-gray-200')
+                                     .addClass('bg-green-300')
+
+  } else {
+    $('#opening_date_level_' + level).removeClass('bg-green-300')
+                                     .addClass('bg-gray-200')
+  }
+
+  if ($('#level-' +  level).is(':visible')) {
+    setLevelStateIndicator(level);
+  }
 }
 
 export function add_account_placeholder() {
@@ -642,52 +585,6 @@ function generateRandomString(length: number) {
     return text;
 }
 
-// Got from https://code-boxx.com/drag-drop-sortable-list-javascript/
-export function drag_list (target: any) {
-  let items = target.getElementsByTagName("div")
-  let current : any = null;
-  for (let i of items) {
-
-    i.ondragstart = () => {
-      current = i;
-      for (let it of items) {
-        if (it != current) { it.classList.add("drop-adventures-hint"); }
-      }
-    };
-
-    i.ondragenter = () => {
-      if (i != current) { i.classList.add("drop-adventures-active"); }
-    };
-
-    i.ondragleave = () => {
-      i.classList.remove("drop-adventures-active");
-    };
-
-    i.ondragend = () => { for (let it of items) {
-        it.classList.remove("drop-adventures-hint");
-        it.classList.remove("drop-adventures-active");
-    }};
-
-    i.ondragover = (evt: any) => { evt.preventDefault(); };
-
-    i.ondrop = (evt: any) => {
-      evt.preventDefault();
-      if (i != current) {
-        let currentpos = 0, droppedpos = 0;
-        for (let it=0; it<items.length; it++) {
-          if (current == items[it]) { currentpos = it; }
-          if (i == items[it]) { droppedpos = it; }
-        }
-        if (currentpos < droppedpos) {
-          i.parentNode.insertBefore(current, i.nextSibling);
-        } else {
-          i.parentNode.insertBefore(current, i);
-        }
-      }
-    };
-  }
-}
-
 export interface InitializeTeacherPageOptions {
   readonly page: 'for-teachers';
 
@@ -711,32 +608,32 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   }
 }
 
-/**
- * These will be copied into global variables, because that's how this file works...
- */
+function setLevelStateIndicator(level: string) {
+  $('[id^=state-]').addClass('hidden');
+
+  if ($('#opening_date_level_' + level).is(':disabled')) {
+    $('#state-disabled').removeClass('hidden');
+  } else if($('#opening_date_level_' + level).val() === ''){
+    $('#state-accessible').removeClass('hidden');
+  } else {
+    var date_string : string = $('#opening_date_level_' + level).val() as string;
+    var input_date = new Date(date_string);
+    var today_date = new Date();
+    if (input_date > today_date) {
+      $('#opening_date').text(date_string);
+      $('#state-future').removeClass('hidden');
+    } else {
+      $('#state-accessible').removeClass('hidden');
+    }
+  }
+}
+
 export interface InitializeCustomizeClassPageOptions {
   readonly page: 'customize-class';
-  readonly available_adventures_level_translation: string;
-  readonly teacher_adventures: TeacherAdventure[];
-  readonly available_adventures: Record<string, AvailableAdventure[]>;
-  readonly adventures_default_order: Record<string, string[]>;
-  readonly adventure_names: Record<string, string>;
   readonly class_id: string;
 }
 
-let available_adventures_level_translation: string;
-let teacher_adventures: TeacherAdventure[];
-let available_adventures: Record<string, AvailableAdventure[]>;
-let adventures_default_order: Record<string, string[]>;
-let adventure_names: Record<string, string>;
-
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
-  available_adventures_level_translation = options.available_adventures_level_translation;
-  teacher_adventures = options.teacher_adventures;
-  available_adventures = options.available_adventures;
-  adventures_default_order = options.adventures_default_order;
-  adventure_names = options.adventure_names;
-
   $(document).ready(function(){
       // Use this to make sure that we return a prompt when a user leaves the page without saving
       $( "input" ).on('change', function() {
@@ -758,75 +655,15 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         }
       });
 
-      drag_list(document.getElementById("sortadventures"));
+      $('[id^=opening_date_level_]').each(function() {
+        setDateLevelInputColor($(this).attr('level')!);
+      })
 
       $('#levels-dropdown').on('change', function(){
           var level = $(this).val() as string;
-          $("div.adventures-tab").addClass('hidden').removeClass('flex').removeAttr('style');
-          if ($("#disabled").hasClass('flex')) {
-            $("#disabled").removeClass('flex').addClass('hidden').removeAttr('style');
-          }
-          $("#level-"+level).show({
-              start: function() {
-                  $(this).addClass('flex');
-                  $(this).removeClass('hidden');
-              }
-          });
-
-          addAllAvailableAdventures(level);
-
-          drag_list(document.getElementById("level-"+level));
+          setLevelStateIndicator(level);
       });
-
-      $('#sortadventures').on('click', 'span', (function(event){
-        event.preventDefault();
-        const adventure = $(this).parent().attr('adventure') as string;
-        const level = $(this).parent().attr('level') as string;
-        const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
-        if (!available_adventures[level]) {
-          throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
-        }
-        available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
-        $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
-        $(this).parent().remove();
-        markUnsavedChanges();
-      }));
-
-      $('#available').on('change', function(){
-          const values = ($(this).val() as string).split('-');
-          const adventure = values[0];
-          const level = values[1]
-          const from_teacher = values[2] === "true";
-          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there
-          const adventure_div =
-          `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"></span>
-                  ${adventure_names[adventure]}
-          </div>`;
-          $('#level-'+level).append(adventure_div);
-          const index = available_adventures[level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
-          available_adventures![level].splice(index, 1);
-          $('#remove-'+adventure).remove();
-          drag_list(document.getElementById("level-"+level));
-          markUnsavedChanges();
-      });
-
-      addAllAvailableAdventures($('#levels-dropdown').val() as string);
   });
-
-  /**
-   * Put all available adventures into the dropdown
-   *
-   * They get removed from this list later on in some way that I don't quite get.
-   */
-  function addAllAvailableAdventures(level: string) {
-    $('#available').empty();
-    $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-    const adventures = available_adventures[level];
-    for(let i = 0; i < adventures.length; i++) {
-      $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-    }
-  }
 }
 
 /**

@@ -32,7 +32,7 @@
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
-                turn-pre-into-ace show-copy-button p-4"
+                turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
@@ -43,7 +43,6 @@
                   {% if adventure.example_code %}
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                          <h2>{{_('example_code_header')}}</h2>
                           {{ adventure.example_code|commonmark }}
                       </div>
                   {% endif %}
@@ -58,7 +57,6 @@
                   {% if story.example_code %}
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                          <h2>{{_('example_code_header')}}</h2>
                           {{ story.example_code|commonmark }}
                       </div>
                   {% endif %}

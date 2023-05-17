@@ -13,3 +13,12 @@ in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_acce
 text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE
+
+
+// FUNCTIONS ======================================== =============================
+define: _DEFINE function_name (_SPACE _USING arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+call: _CALL function_name (_SPACE _WITH arguments)?
+
+?arguments: argument (_COMMA argument)* -> arguments
+?argument: expression | atom | list_access
+// ================================================================================
