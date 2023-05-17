@@ -126,10 +126,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in class_info.students %}
+                            {% for s in student_names %}
                             <tr>
-                                <td class="px-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s.username}}" class="text-black hover:text-white" id="show-student">{{s.username}}</a></td>
-                                <td></td>
+                                <td class="px-2"><a href="/live_stats/class/{{class_info.id}}/student?student={{s}}" class="text-black hover:text-white" id="show-student">{{s}}</p></a></td>
+                                <td><button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-purple-700"></button>
+                                </td>
                             </tr>
                             {% endfor %}
 

@@ -156,6 +156,7 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        student_names = []
         students = sorted(class_.get("students", []))
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
@@ -170,11 +171,14 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+            student_names.append(student_username)
+
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
+            student_names=student_names,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -203,6 +207,7 @@ class LiveStatisticsModule(WebsiteModule):
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
         # Get data for all students
+        student_names = []
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -216,6 +221,7 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+            student_names.append(student_username)
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -223,7 +229,6 @@ class LiveStatisticsModule(WebsiteModule):
         finished_quizzes = any("finished" in x for x in quiz_scores)
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
-
         # Load in all program data for that specific student
         student_programs = []
         for item in programs:
@@ -258,6 +263,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
+            student_names = student_names,
             student_programs=student_programs,
             adventure_names=adventure_names,
             data=data,
@@ -283,7 +289,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve username of student in question via args
         selected_student = request.args.get("student", default=None, type=str)
-
+        student_names = []
         for student_username in class_.get("students", []):
             programs = self.db.programs_for_user(student_username)
             quiz_scores = self.db.get_quiz_stats([student_username])
@@ -297,7 +303,7 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
-
+            student_names.append(student_username)
         return render_template(
             "class-live-popup.html",
             class_info={"id": class_id, "students": students,
@@ -305,6 +311,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
+            student_names= student_names,
             current_page='my-profile'
         )
 
