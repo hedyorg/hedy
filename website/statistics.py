@@ -170,11 +170,15 @@ class LiveStatisticsModule(WebsiteModule):
                     "highest_level": highest_quiz,
                 }
             )
+
+        self.misconception_detection(class_id, user)
+
         return render_template(
             "class-live-stats.html",
             class_info={"id": class_id, "students": students, "common_errors": common_errors},
             dashboard_options={"show_c1": show_c1, "show_c2": show_c2, "show_c3": show_c3, "collapse": collapse},
             dashboard_options_args=dashboard_options_args,
+
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -323,6 +327,104 @@ class LiveStatisticsModule(WebsiteModule):
                 break
 
         return {}, 200
+
+    def retrieve_data(self, class_id, user):
+        supported_langs = ['en']
+
+        # Todo: only get programs that were ran today
+
+        data = {}
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = sorted(class_.get("students", []))
+        for student_username in students:
+            programs = self.db.programs_for_user(student_username)
+            for item in programs:
+                if item['lang'] in supported_langs:
+
+                    if item['session'] not in data.keys():
+                        data[item['session']] = []
+
+                    error_class = _get_error_info(item['code'], item['level'], item['lang'])
+
+                    data[item['session']].append({
+                        'username': student_username,
+                        'error': _translate_error(error_class, item['lang']) if error_class else None,
+                        'lang': item['lang'],
+                        "level": item["level"],
+                        'adventure_name': item['adventure_name'],
+                        "code": item["code"]
+                    })
+        return data
+
+    def misconception_detection(self, class_id, user):
+        # Group the error messages by session and count their occurrences
+        data = self.retrieve_data(class_id, user)  # retrieves relevant data from db
+
+        # Define the groups of misconceptions
+        misconception_groups = {
+            'Not a current level command': ['level'],
+            'Incorrect use of command': ['cannot'],
+            'Incorrect use of variable': ['variable'],
+            'Unwanted spaces': ['Spaces', 'confuse', 'computers'],
+            'Forgot commandos': ['forgot'],
+            'Empty program': ['empty program'],
+            'Typed something that is not allowed': ['entered', 'allowed'],
+            'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
+        }
+
+        misconception_counts = {}
+
+        for session, programs in data.items():
+            last_error = None  # Todo: augment database to include error history
+            count = 0
+
+            # Iterate over each error and its corresponding username in the current session group
+            for run in programs:
+                error = run['error']
+                username = run['username']
+
+                for misconception, keywords in misconception_groups.items():
+                    if error and any(keyword in error.lower() for keyword in keywords):
+                        # Check if the current error is different from the last error;
+                        # errors that fall in same misconception group are considered same errors
+                        if error != last_error:
+                            last_error = error
+                            count = 0
+                        count += 1
+                        if count >= 1:
+                            # Check if the current misconception is not in the misconception_counts dictionary
+                            if misconception not in misconception_counts:
+                                misconception_counts[misconception] = {}
+
+                            # Check if the current error is not in the misconception_counts
+                            # dictionary for the current misconception
+                            if error not in misconception_counts[misconception]:
+                                misconception_counts[misconception][error] = {'count': 0, 'users': []}
+                            misconception_counts[misconception][error]['count'] += 1
+                            misconception_counts[misconception][error]['users'].append(username)
+                        break
+                else:
+                    last_error = None
+                    count = 0
+
+        # Print the top 4 misconceptions with the highest count of continuous errors
+        # and their associated errors and usernames
+        for misconception, errors in sorted(misconception_counts.items(),
+                                            key=lambda x: sum(x[1][error]['count'] for error in x[1]), reverse=True)[
+                :4]:
+            print('Misconception "{}"'.format(misconception))
+            # write to radboard_error_data.json
+            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['count'], reverse=True)[:1]
+            for error, info in sorted_errors:
+                print('- "{}"'.format(error))
+                users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
+                sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)[:1]
+                for user, count in sorted_users:
+                    print('  - User "{}" made this error'.format(user))
+        self.__error_db_load()
 
 
 def add(username, action):
