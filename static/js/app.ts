@@ -14,12 +14,14 @@ import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stop
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
+import { LocalSaveWarning } from './local-save-warning';
 
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
 let last_code: string;
@@ -169,6 +171,9 @@ export interface InitializeCodePageOptions {
  */
 export function initializeCodePage(options: InitializeCodePageOptions) {
   theUserIsLoggedIn = !!options.current_user_name;
+  if (theUserIsLoggedIn) {
+    theLocalSaveWarning.setLoggedIn();
+  }
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
@@ -211,6 +216,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     reconfigurePageBasedOnTab();
     checkNow();
+    theLocalSaveWarning.switchTab();
   });
 
   initializeSpeech();
@@ -260,6 +266,9 @@ function initializeMainEditor($editor: JQuery) {
   theGlobalEditor = editor;
   theGlobalEditor.setShowPrintMargin(false);
   theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
+  theGlobalEditor.addEventListener('change', () => {
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
+  });
   error.setEditor(editor);
   markers = new Markers(theGlobalEditor);
 
@@ -492,6 +501,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     return;
   }
 
+  theLocalSaveWarning.clickRun();
+
   // Make sure to stop previous PyGame event listeners
   if (typeof Sk.unbindPygameListeners === 'function') {
     Sk.unbindPygameListeners();
@@ -501,7 +512,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFiles').hide();
+  $('#saveFilesContainer').hide();
   clearOutput();
 
   try {
@@ -1014,7 +1025,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
 
     if (hasTurtle) {
-      $('#saveFiles').show();
+      $('#saveFilesContainer').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
