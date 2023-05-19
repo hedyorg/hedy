@@ -251,6 +251,10 @@ class HedyTester(unittest.TestCase):
             # all ok? -> save hash!
             self.snippet_hashes.add(self.create_hash(self.all_language_texts, code, level))
 
+    def source_map_tester(self, code, expected_source_map: dict):
+        result = hedy.transpile(code, self.level, 'en')
+        self.assertDictEqual(result.source_map, expected_source_map)
+
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
