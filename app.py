@@ -402,7 +402,7 @@ def add_hx_detection():
     hx_request = bool(request.headers.get('Hx-Request'))
     return {
         "hx_request": hx_request,
-        "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
+        "hx_layout": 'htmx-layout-yes.html' if hx_request else 'htmx-layout-no.html',
     }
 
 
