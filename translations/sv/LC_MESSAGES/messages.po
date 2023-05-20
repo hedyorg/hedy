@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-05-15 11:37-0400\n"
-"PO-Revision-Date: 2023-05-18 10:47+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-05-21 03:27+0000\n"
+"Last-Translator: Robert Storlind <robert.storlind@gmail.com>\n"
 "Language-Team: none\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -19,203 +19,170 @@ msgstr ""
 "X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.11.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
 msgstr ""
-"You tried to use the variable {name} on line {access_line_number}, but you "
-"set it on line {definition_line_number}. Set a variable before using it."
+"Du försökte använda variabeln {name} på rad {access_line_number}, men du "
+"tilldelar den på rad {definition_line_number}. Tilldela variabeln ett värde "
+"innan du använder den."
 
-#, fuzzy
 msgid "Cyclic Var Definition"
 msgstr ""
-"The name {variable} needs to be set before you can use it on the right-hand "
-"side of the is command."
+"Namnet {variabel} måste tilldelas ett värde innan du kan använda det på "
+"höger sida av {is}-kommandot."
 
-#, fuzzy
 msgid "Has Blanks"
 msgstr ""
-"Your code is incomplete. It contains blanks that you have to replace with "
-"code."
+"Din kod är ofullständig. Den innehåller tomrum som du måste ersätta med kod."
 
-#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
-"text behind {incomplete_command}."
+"Hoppsan! Du glömde lite kod! På rad {line_number} måste du ange text efter "
+"{incomplete_command}."
 
-#, fuzzy
 msgid "Incomplete Repeat"
 msgstr ""
-"It looks like you forgot to use {command} with the repeat command you used "
-"on line {line_number}."
+"Du verkar ha glömt att använda ett kommando med {repeat}-kommandot som du "
+"använde på rad {line_number}."
 
-#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} is not a Hedy level {level} command. Did you mean "
+"{invalid_command} är inte ett Hedy-kommando på nivå {level}. Menade du "
 "{guessed_command}?"
 
-#, fuzzy
 msgid "Invalid Argument"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument}. Try changing "
-"{invalid_argument} to {allowed_types}."
+"Du kan inte använda kommandot {command} med {invalid_argument}. Försök att "
+"ändra {invalid_argument} till {allowed_types}."
 
-#, fuzzy
 msgid "Invalid Argument Type"
 msgstr ""
-"You cannot use {command} with {invalid_argument} because it is "
-"{invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+"Du kan inte använda {command} med {invalid_argument} eftersom det är "
+"{invalid_type}. Försök ändra {invalid_argument} till {allowed_types}."
 
-#, fuzzy
 msgid "Invalid At Command"
 msgstr ""
-"The {at} command may not be used from level 16 onward. You can use square "
-"brackets to use an element from a list, for example `friends[i]`, "
-"`lucky_numbers[{random}]`."
+"Kommandot {at} får inte användas från och med nivå 16. Du kan använda "
+"hakparenteser för att använda ett element från en lista, till exempel "
+"`friends[i]`, `lucky_numbers[{random}]`."
 
-#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! You started a line with a space on line {line_number}. Spaces confuse "
-"computers, can you remove it?"
+"Hoppsan! Du började en rad med ett mellanslag på rad {line_number}. "
+"Mellanslag förvirrar datorer; kan du ta bort det?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
 msgstr ""
-"You cannot use {invalid_argument} and {invalid_argument_2} with {command} "
-"because one is {invalid_type} and the other is {invalid_type_2}. Try "
-"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to "
-"{invalid_type}."
+"Du kan inte använda {invalid_argument} och {invalid_argument_2} med {command}"
+" eftersom det ena är {invalid_type} och det andra är {invalid_type_2}. "
+"Försök att ändra {invalid_argument} till {invalid_type_2} eller "
+"{invalid_argument_2} till {invalid_type}."
 
-#, fuzzy
 msgid "Locked Language Feature"
 msgstr ""
-"You are using {concept}! That is awesome, but {concept} is not unlocked yet! "
-"It will be unlocked in a later level."
+"Du använder {concept}! Det är jättebra men {concept} är inte upplåst än! Den "
+"kommer att låsas upp på en senare nivå."
 
-#, fuzzy
 msgid "Lonely Echo"
 msgstr ""
-"You used an echo before an ask, or an echo without an ask. First ask for "
-"input, then echo."
+"Du använde `{echo}` före `{ask}`, eller `{echo}` utan något `{ask}`. Skriv "
+"`{ask}` före `{echo}`."
 
-#, fuzzy
 msgid "Lonely Text"
 msgstr ""
-"It looks like you forgot to use a command with the text you put in line "
-"{line_number}"
+"Du verkar ha glömt att använda ett kommando ihop med texten du använde på "
+"rad {line_number}"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr "Du verkar ha glömt att använda ett kommando på rad {line_number}."
 
-#, fuzzy
 msgid "Missing Inner Command"
 msgstr ""
-"It looks like you forgot to use a command with the {command} statement you "
-"used on line {line_number}."
+"Du verkar ha glömt ett kommando ihop med {command} som du använde på rad "
+"{line_number}."
 
-#, fuzzy
 msgid "No Indentation"
 msgstr ""
-"You used too few spaces in line {line_number}. You used {leading_spaces} "
-"spaces, which is not enough. Start every new block with {indent_size} spaces "
-"more than the line before."
+"Du har använt för få mellanslag på rad {line_number}. Du använde "
+"{leading_spaces} mellanslag och det är för få. Börja varje nytt block med "
+"{indent_size} mellanslag mer än raden innan."
 
-#, fuzzy
 msgid "Parse"
 msgstr ""
-"The code you entered is not valid Hedy code. There is a mistake on line "
-"{location[0]}, at position {location[1]}. You typed {character_found}, but "
-"that is not allowed."
+"Koden du matat in är inte giltig Hedy-kod. Det finns ett fel på rad "
+"{location[0]} och kolumn {location[1]}. Du skrev {character_found}, men det "
+"är inte tillåtet."
 
-#, fuzzy
 msgid "Pressit Missing Else"
 msgstr ""
-"You forgot to add what happens when you press a different key, add an {else} "
-"to your code"
+"Du glömde att lägga till vad som händer när du trycker på en annan tangent; "
+"lägg till ett {else} i din kod"
 
-#, fuzzy
 msgid "Too Big"
 msgstr ""
-"Wow! Your program has an impressive {lines_of_code} lines of code! But we "
-"can only process {max_lines} lines in this level. Make your program smaller "
-"and try again."
+"Wow! Ditt program har {linjer_av_kod} rader kod vilket är imponerande! Men "
+"vi kan bara hantera {max_lines} kodrader på den här nivån. Korta av ditt "
+"program och försök igen."
 
-#, fuzzy
 msgid "Unexpected Indentation"
 msgstr ""
-"You used too many spaces in line {line_number}. You used {leading_spaces} "
-"spaces, which is too much. Start every new block with {indent_size} spaces "
-"more than the line before."
+"Du använde för många mellanslag på rad {line_number}. Du använde "
+"{leading_spaces} mellanslag, vilket är för mycket. Börja varje nytt block "
+"med {indent_size} mellanslag mer än raden före."
 
-#, fuzzy
 msgid "Unquoted Assignment"
 msgstr ""
-"From this level, you need to place texts to the right of the `is` between "
-"quotes. You forgot that for the text {text}."
+"Från den här nivån behöver du skriva texter till höger om {is} inom "
+"citattecken. Du glömde det för texten {text}."
 
-#, fuzzy
 msgid "Unquoted Equality Check"
 msgstr ""
-"If you want to check if a variable is equal to multiple words, the words "
-"should be surrounded by quotation marks!"
+"Om du vill kontrollera om en variabel är lika med flera ord, ska orden omges "
+"av citattecken!"
 
-#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Be careful. If you ask or print something, the text should start and finish "
-"with a quotation mark. You forgot one somewhere."
+"Var försiktig. Om du `{ask}` eller `{print}` något ska texten börja och "
+"sluta med ett citattecken. Du glömde det för texten {unquotedtext}."
 
-#, fuzzy
 msgid "Unsupported Float"
 msgstr ""
-"Non-integer numbers are not supported yet but they will be in a few levels. "
-"For now change {value} to an integer."
+"Icke-heltal stöds inte än, men kommer att finnas några nivåer högre upp. "
+"Ändra {value} till ett heltal för tillfället."
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain {invalid_value}."
+msgstr "Textvärden kan inte innehålla {invalid_value}."
 
-#, fuzzy
 msgid "Var Undefined"
 msgstr ""
-"You tried to use the variable {name}, but you didn't set it. It is also "
-"possible that you were trying to use the word {name} but forgot quotation "
-"marks."
+"Du försökte använda variabeln {name}, men du har inte tilldelat den något "
+"värde. Det är också möjligt att du försökte använda ordet {name} men glömde "
+"citattecken."
 
-#, fuzzy
 msgid "Wrong Level"
 msgstr ""
-"That was correct Hedy code, but not at the right level. You wrote "
-"{offending_keyword} for level {working_level}. Tip: {tip}"
+"Det var rätt Hedy-kod, men inte på rätt nivå. Du skrev {offending_keyword} "
+"på nivå {working_level}. Tips: {Tip}"
 
-#, fuzzy
 msgid "account_overview"
-msgstr "Account overview"
+msgstr "Kontoöversikt"
 
-#, fuzzy
 msgid "accounts_created"
-msgstr "Accounts where successfully created."
+msgstr "Kontona skapades."
 
-#, fuzzy
 msgid "accounts_intro"
 msgstr ""
-"On this page you can create accounts for multiple students at once. These "
-"are automatically added to the current class, so make sure the class shown "
-"above is the right one! Every username needs to be unique in the entire Hedy "
-"system. You can use 'Postfix classname' to add your class name to all "
-"accounts. If you manually enter passwords, these need to be <b>at least</b> "
-"6 characters."
+"På den här sidan kan du skapa konton för flera elever samtidigt. Deläggs "
+"automatiskt till i den aktuella klassen, så se till att klassen som visas "
+"ovan är rätt klass! Varje användarnamn måste vara unikt i hela Hedy-"
+"systemet. Du kan använda \"Postfix classname\" för att lägga till ditt "
+"klassnamn till alla konton. Om du anger lösenord manuellt måste de ha "
+"<b>minst</b> sex tecken."
 
-#, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "Du har fått en belöning!"
 
-#, fuzzy
 msgid "achievements"
-msgstr "achievements"
+msgstr "belöningar"
 
 #, fuzzy
 msgid "achievements_check_icon_alt"
@@ -225,32 +192,26 @@ msgstr "Achievement check icon"
 msgid "achievements_logo_alt"
 msgstr "Achievement logo"
 
-#, fuzzy
 msgid "add_students"
-msgstr "Add students"
+msgstr "Lägg till elever"
 
-#, fuzzy
 msgid "add_students_options"
-msgstr "Add students options"
+msgstr "Alternativ för att lägga till elever"
 
-#, fuzzy
 msgid "admin"
-msgstr "Admin"
+msgstr "Administration"
 
 msgid "advance_button"
 msgstr "Gå till nivå {level}"
 
-#, fuzzy
 msgid "adventure"
-msgstr "Adventure"
+msgstr "Äventyr"
 
-#, fuzzy
 msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
+msgstr "Du har redan ett äventyr med det här namnet."
 
-#, fuzzy
 msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
+msgstr "Du har inte angett ett äventyrsnamn!"
 
 #, fuzzy
 msgid "adventure_exp_1"
@@ -301,9 +262,8 @@ msgstr "The adventure has been updated!"
 msgid "adventures"
 msgstr "Adventures"
 
-#, fuzzy
 msgid "adventures_restored"
-msgstr "The default adventures have been restored!"
+msgstr "Standardäventyren har återställts."
 
 #, fuzzy
 msgid "ago"
@@ -898,7 +858,7 @@ msgid "hedy_tutorial_logo_alt"
 msgstr "Hedy tutorial icon"
 
 msgid "hello_logo"
-msgstr "Hej!"
+msgstr "hej"
 
 #, fuzzy
 msgid "hello_world"
@@ -1061,9 +1021,8 @@ msgstr "Level is open to students"
 msgid "level_disabled"
 msgstr "Level disabled"
 
-#, fuzzy
 msgid "level_future"
-msgstr "This level will open automatically after the opening date"
+msgstr "Den här nivån öppnas automatiskt den "
 
 #, fuzzy
 msgid "level_invalid"
@@ -1154,30 +1113,41 @@ msgstr ""
 msgid "mail_reset_password_subject"
 msgstr "Your Hedy password has been reset"
 
-#, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
-"<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the "
-"world wide community of Hedy teachers!\n"
+"<strong>Välkommen!</strong>\n"
+"Grattis till ditt nya Hedy-lärarkonto. Välkommen till gemenskapen för Hedy-"
+"lärare jorden runt!\n"
 "\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your "
-"students can than join your classes and you can see their progress. Classes "
-"are made and managed though the for <a href=\"https://hedycode.com/for-"
-"teachers\">teachers page</a>.\n"
+"<strong>Vad lärarkonton kan göra</strong>\n"
+"Du har ett antal extra alternativ som är upplåsta nu.\n"
 "\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements! "
-"You can share those ideas with us on the <a href=\"https://github.com/"
-"Felienne/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
+"1. Extra förklaringar finns i <a href=\"https://hedy.org/for-teachers/"
+"manual\">lärarhandboken</a>.\n"
+"2. Med ditt lärarkonto kan du skapa klasser. Dina elever kan sedan gå med i "
+"dina klasser och du kan se deras framsteg. Klasserna skapas och hanteras på "
+"<a href=\"https://hedycode.com/for-teachers\">lärarsidan</a>.\n"
+"3. Du kan anpassa dina klasser helt och hållet; till exempel kan du öppna "
+"och stänga nivåer, aktivera eller stänga av äventyr och skriva dina egna "
+"äventyr!\n"
 "\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a href=\"https://github.com/"
-"Felienne/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href="
-"\"mailto: hello@hedy.org\">send us an email</a>.\n"
+"<strong>Gå med i vår online-gemenskap!</strong>\n"
+"Alla Hedy-lärare, programmerare och andra fans är välkomna att gå med i vår "
+"<a href=\"https://discord.gg/8yY7dEme9r\">Discord-server</a>. Detta är den "
+"perfekta platsen för att prata om Hedy: vi har kanaler där du kan visa dina "
+"häftiga projekt och lektioner, kanaler för att rapportera fel och kanaler "
+"för att chatta med andra lärare och med Hedy-teamet.\n"
 "\n"
-"Keep programming!"
+"<strong>Hur du ber om hjälp </strong>\n"
+"Om något är oklart kan du fråga på Discord eller <a href=\"mailto: hello@hedy"
+".org\">skicka ett mejl till oss</a>.\n"
+"\n"
+"<strong>Hur man rapporterar buggar</strong>\n"
+"I Discord har vi en kanal för att rapportera fel och den heter #bugs. Det är "
+"den perfekta platsen för att rapportera problem du stöter på. Om du vet hur "
+"man använder GitHub kan du skapa en <a href=\"https://github.com/Felienne/"
+"hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\""
+">issue</a> där.\n"
 
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
