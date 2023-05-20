@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <!-- Card 1 Progress indicator collapsed version -->
+    <!-- Card 1 Class Overview -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
         <!-- Hide / Show -->
@@ -44,7 +44,6 @@
                         👇 Show
                     </a>
                 {% endif %}
-
             {% endif %}
         </div>
 
@@ -65,7 +64,8 @@
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
                 <div class="text-sm font-medium text-center text-blue-600 border-b-2 border-gray-200">
                     <ul class="flex flex-wrap -mb-px list-none">
-                    {% for level, adventure_list in adventures.items() %}{% if level|int == selected_level %}
+                    {% for level, adventure_list in adventures.items() %}
+                    {% if level|int == selected_level %}
                         {% for adventure in adventure_list %}
                             {% set in_progress = adventure["in_progress"]|length %}
                             {% set adventure_name = adventure["name"] %}
@@ -74,15 +74,17 @@
                                 <p>{{ adventure_name }}</p>
                                 {% if in_progress != 0 %}
                                 <div class="flex flex-col px-1">
-                                    <button class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick='hedyApp.toggle_show_students_class_overview( "{{ adventure_name }}" )'>{{ in_progress }}</button>
-                                    <div id="adventure_panel_{{adventure_name }}" class="hidden text-gray-800 text-xs">
+                                    <button class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick='hedyApp.toggle_show_students_class_overview( "level{{ selected_level }}_{{ adventure_name }}" )'>{{ in_progress }}</button>
+                                    <div id="adventure_panel_level{{ selected_level }}_{{ adventure_name }}" class="hidden text-gray-800 text-xs">
                                         <ul class="list-none">{% for student in adventure["in_progress"] %}<li>{{ student }}</li>{% endfor %}</ul>
                                     </div>
                                 </div>
                                 {% endif %}
                             </div>
-                        </li>                        
+                        </li>
                         {% endfor %}
+                    {% endif %}
+                    {% endfor %}
                         <li class="mr-1">
                             <div class="flex p-4 text-green-700 border-b-4 border-green-600">
                                 <p>Quiz</p>
@@ -90,16 +92,16 @@
                                 {% set finished = class_overview.quiz_info[selected_level]["students_finished"]|length %}
                                 {% if in_progress != 0 %}
                                 <div class="flex flex-col px-1">
-                                    <button class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_progress_{{ selected_level }}')">{{ in_progress }}</button>
-                                    <div id="adventure_panel_quiz_progress_{{ selected_level }}" class="hidden text-gray-800 text-xs">
+                                    <button class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_progress_level{{ selected_level }}')">{{ in_progress }}</button>
+                                    <div id="adventure_panel_quiz_progress_level{{ selected_level }}" class="hidden text-gray-800 text-xs">
                                         <ul class="list-none">{% for student in class_overview.quiz_info[selected_level]["students_in_progress"] %}<li>{{ student }}</li>{% endfor %}</ul>
                                     </div>
                                 </div>
                                 {% endif %}
                                 {% if finished != 0 %}
                                 <div class="flex flex-col px-1">
-                                    <button class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_finished_{{ selected_level }}')">{{ finished }}</button>
-                                    <div id="adventure_panel_quiz_finished_{{ selected_level }}" class="hidden text-gray-800 text-xs">
+                                    <button class="ml-1 bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_finished_level{{ selected_level }}')">{{ finished }}</button>
+                                    <div id="adventure_panel_quiz_finished_level{{ selected_level }}" class="hidden text-gray-800 text-xs">
                                         <ul class="list-none">{% for student in class_overview.quiz_info[selected_level]["students_finished"] %}<li>{{ student }}</li>{% endfor %}</ul>
                                     </div>
                                 </div>
@@ -108,7 +110,7 @@
                         </li>
                     </ul>
                 </div>
-                {%endfor%}
+                {% endfor %}
             </div>
             <!-- Legend -->
             <div class="mt-5 flex">

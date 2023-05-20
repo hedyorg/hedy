@@ -187,12 +187,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
-            data = []
+            _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    data.append({student: last_adventure[0]})
-            last_adventures.append(data)
+                    _data.append({_student: last_adventure[0]})
+            last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
@@ -261,7 +261,6 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        print("render_student_details1")
         # Get data for all students
         student_names = []
         for student_username in sorted(class_.get("students", [])):
@@ -278,8 +277,6 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
             student_names.append(student_username)
-
-        print("render_student_details2")
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -331,7 +328,7 @@ class LiveStatisticsModule(WebsiteModule):
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    _data.append({student: last_adventure[0]})
+                    _data.append({_student: last_adventure[0]})
             last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
@@ -425,12 +422,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
-            data = []
+            _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    data.append({student: last_adventure[0]})
-            last_adventures.append(data)
+                    _data.append({_student: last_adventure[0]})
+            last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
