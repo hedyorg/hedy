@@ -513,6 +513,57 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
   });
 }
 
+export function InitLineChart(data: any[], labels: any[]){
+  const ctx = document.getElementById("runsOverTime") as HTMLCanvasElement;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.map(String),
+      datasets: [{
+        data: data,
+        fill: false,
+        pointBackgroundColor: function(context) {
+                    var index = context.dataIndex;
+                    var value = context.dataset.data[index];
+                    if (value === 0) {
+                    return 'red'
+                    }
+                    else if (value === 1){
+                      return 'green'
+                    }
+                    return 'blue'
+                },
+        // backgroundColor: 'rgba(0, 0, 255, 1)',
+        borderColor: 'rgba(0, 0, 255, 0.6)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+            y: {
+              ticks: {
+                callback: function(index) {
+                  // Hide every 2nd tick label
+                  if (index === 0) {
+                    return 'Fail'
+                  }
+                  else if (index === 1){
+                    return 'Success'
+                  }
+                  return ''
+                },
+              }
+            },
+        },
+      plugins: {
+        legend: {
+            display: false
+        }
+      }
+    }
+  });
+}
+
 export function enable_level_class_overview(level: string) {
   if ($('#level_button_' + level).hasClass('gray-btn')) {
       $('#level_button_' + level).removeClass('gray-btn');
@@ -546,26 +597,31 @@ export function select_levels_class_overview(class_id: string) {
   });
 }
 
-export function toggle_show_students_class_overview(adventure: string) {
-  if ($('#adventure_panel_' + adventure).hasClass('hidden')) {
-    $('#adventure_panel_' + adventure).removeClass('hidden');
-    $('#adventure_panel_' + adventure).addClass('block');
-  } else {
-    $('#adventure_panel_' + adventure).removeClass('block');
-    $('#adventure_panel_' + adventure).addClass('hidden');
-  }
+export function getRunsOverTime(data: any[], labels: any[]) {
+  const chart = Chart.getChart("runsOverTime")!;
+  chart.data.labels = labels.map(String);
+
+  var datasets = [{
+    data: data,
+    fill: false,
+    pointBackgroundColor: function(context:any) {
+                var index = context.dataIndex;
+                var value = context.dataset.data[index];
+                if (value === 0) {
+                return 'red'
+                }
+                else if (value === 1){
+                  return 'green'
+                }
+                return 'blue'
+            },
+    // backgroundColor: 'rgba(0, 0, 255, 1)',
+    borderColor: 'rgba(0, 0, 255, 0.6)',
+    borderWidth: 1
+  }]
+
+  chart.data.datasets = datasets;
+  chart.update();
 }
 
-export function getRunsOverTime(data: any[]) {
-  data = [[0, 1], [1, 0]]
-
-  initChart('runsOverTime', 'line', 'Runs Over Time',
-      'Runs', null, false, false)
-
-  const ch = Chart.getChart('runsOverTime')!;
-  ch.data.datasets = [{
-    label: 'runs',
-    data: data
-  }];
-  ch.update();
-}
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
