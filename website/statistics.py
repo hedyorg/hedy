@@ -190,7 +190,7 @@ class LiveStatisticsModule(WebsiteModule):
             for student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
+                    data.append({student: last_adventure[0]})
             last_adventures.append(data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
@@ -320,7 +320,7 @@ class LiveStatisticsModule(WebsiteModule):
             for student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
+                    data.append({student: last_adventure[0]})
             last_adventures.append(data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
@@ -413,7 +413,7 @@ class LiveStatisticsModule(WebsiteModule):
             for student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
+                    data.append({student: last_adventure[0]})
             last_adventures.append(data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
@@ -748,7 +748,11 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
         for adventure in list(adventure_list):
             adventure_key = adventure['name']
 
-            number_in_progress = last_adventures[int(level) - 1].count(adventure_key)
+            students_in_progress = []
+            for d in last_adventures[int(level) - 1]:
+                (student, last_adventure), = d.items()
+                if last_adventure == adventure_key:
+                    students_in_progress.append(student)
 
             if adventure['from_teacher']:
                 adventure_name = teacher_adventures_formatted[adventure_key]
@@ -756,7 +760,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                     {
                         "id": adventure_key,
                         "name":  adventure_name,
-                        "in_progress": number_in_progress
+                        "in_progress": students_in_progress
                     }
                 )
 
@@ -766,7 +770,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                     {
                         "id": adventure_key,
                         "name":  adventure_name,
-                        "in_progress": number_in_progress
+                        "in_progress": students_in_progress
                     }
                 )
 
