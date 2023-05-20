@@ -15,14 +15,15 @@ def scan_pofiles(root):
         for file in files:
             if file.endswith('.po'):
                 fullpath = path.join(dir, file)
-                ret |= scan_file(fullpath)
+                ret |= scan_file_for_duplicates(fullpath)
+                ret |= scan_file_for_header(fullpath)
     return ret
 
 
 PAT = re.compile('^(?:#~ )?msgid "(.*)"')
 
 
-def scan_file(filename):
+def scan_file_for_duplicates(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         lines = f.read().splitlines()
 
@@ -48,13 +49,29 @@ def scan_file(filename):
             print(f'    {nr + 2}: {lines[nr + 1]}')
             print('')
 
+    print('Something went wrong with the gettext translation file, some entries were duplicated.')
+    print('See above for the list. Please make sure every msgid occurs only once,')
+    print('not commented out, with the right translation.')
+
+    return True
+
+
+def scan_file_for_header(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        contents = f.read()
+
+    if 'Project-Id-Version:' not in contents:
+        return False
+    print('-' * 70)
+    print(filename)
+    print('-' * 70)
+
+    print('Found "Project-Id-Version:" in the file. Be sure to run the pybabel commands with \'--omit-header\'!')
+
     return True
 
 
 if __name__ == '__main__':
     fail = scan_pofiles(path.join(path.dirname(__file__), '..', '..', 'translations'))
     if fail:
-        print('Something went wrong with the gettext translation files, some entries were duplicated.')
-        print('See above for the list. Please make sure every msgid occurs only once,')
-        print('not commented out, with the right translation.')
         sys.exit(1)
