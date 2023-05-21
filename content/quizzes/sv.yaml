@@ -1,7 +1,7 @@
 levels:
     1:
         1:
-            question_text: Vad kallas det här programmeringsspråket?
+            question_text: Vad heter det här programmeringsspråket?
             mp_choice_options:
             -   option: Hedy
                 feedback: Bra jobbat!
@@ -1884,7 +1884,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
+            code: "meny = 'kakor', 'ost', 'vindruvor'\n{print} 'Det är min födelsedag! Jag har tagit med lite snacks!'\ndiet = {ask} 'Har du några dietrestriktioner?'\n{if} diet = 'glutenfri'\n    {remove} 'cookies' {from} meny\n{if} diet = 'vegan'\n    {remove} 'ost' {from} menyn\n{print} 'Det här tog jag med till dig:'\n{for} mellanmål {in} meny\n    {print} mellanmål"
             mp_choice_options:
             -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
                 feedback: Terrific!
@@ -1901,20 +1901,20 @@ levels:
             question_text: Which code was used to create this output?
             code: '3.5'
             mp_choice_options:
-            -   option: "```\nprint '7 / 2'\n```"
+            -   option: "```\n{print} '7 / 2'\n```"
                 feedback: No
-            -   option: "```\nprint 7 / 2\n```"
+            -   option: "```\n{print} 7 / 2\n```"
                 feedback: That is right!
-            -   option: "```\nprint 7 : 2\n```"
+            -   option: "```\n{print} 7 : 2\n```"
                 feedback: No
-            -   option: "```\nprint 7 * 2\n```"
+            -   option: "```\n{print} 7 * 2\n```"
                 feedback: No
             correct_answer: B
             hint: 7 devided by 2 is 3.5
             question_score: '10'
         9:
             question_text: Which code should be filled in in line 1 at the ???
-            code: "???\nprint 'You won ' prices at random '!'"
+            code: "???\n{print} 'Du vann ' pris {at} {random} '!'"
             mp_choice_options:
             -   option: "```\nprices = 'one' 'million' 'dollars', 'nothing'\n```"
                 feedback: You won nothing
@@ -1929,53 +1929,53 @@ levels:
             question_score: '10'
         10:
             question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    for i in range 0 to 1\n        print 'if youre happy and you know it'\n        print action\n    print 'if youre happy and you know it and you really want to show it'\n    print 'if youre happy and you know it'\n    print action"
+            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    {for} i {in} range 0 {to} 1\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action"
             mp_choice_options:
-            -   option: for i in range 1 to 3
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
                 feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
+            -   option: "```\n{for} action {in} actions\n```"
                 feedback: You are amazing!
-            -   option: repeat 3 times
+            -   option: "```\n{repeat} 3 {times}\n```"
                 feedback: This is a hard one! All the actions on the list must be in the song.
             -   feedback: This is a hard one! All the actions on the list must be in the song.
-                option: print actions at random
+                option: "```\n{print} actions {at} {random}\n```"
             correct_answer: B
             hint: This is a hard one! All the actions on the list must be in the song.
             question_score: '10'
     13:
         1:
             question_text: Which code should be filled in at the ??? ?
-            code: "name = ask 'What is your name?'\nsong = ask 'Whould you like to hear a song?'\nbirthday = ask 'Is today your birthday?'\n???\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday. dear ' name\n  print 'Happy Birthday to you!'"
+            code: "namn = {ask} 'Vad heter du?'\nlåt = {ask} 'Vill du höra en låt?'\nfödelsedag = {ask} 'Fyller du år idag?'\n???\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday dear ' namn\n    {print} 'Happy Birthday to you!'"
             mp_choice_options:
-            -   option: "```\nif birthday and song = 'yes'\n```"
+            -   option: "```\n{if} födelsedag {and} låt = 'ja'\n```"
                 feedback: Almost there
-            -   option: "```\nif birthday = 'yes' and name = 'Hedy'\n```"
+            -   option: "```\n{if} födelsedag = 'ja' {and} namn = 'Hedy'\n```"
                 feedback: Hedy only sings for you if you like to hear a song
-            -   option: "```\nif song = 'yes' and birthday = 'yes'\n```"
+            -   option: "```\n{if} låt = 'ja' {and} födelsedag = 'ja'\n```"
                 feedback: Super!
-            -   option: "```\nif song = 'yes' or birthday = 'yes'\n```"
+            -   option: "```\n{if} låt = 'ja' {or} födelsedag = 'ja'\n```"
                 feedback: Hedy only sings if both answers are yes
             hint: Hedy sings if you want to hear a song and it's you birthday
             question_score: '10'
             correct_answer: C
         2:
             question_text: Which command is missing in the code at the place of the ??? ?
-            code: "menu = 'cheese', 'sausage rolls', 'cookies'\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'vegan' ??? diet = 'halal'\n    remove 'sausage rolls' from menu"
+            code: "meny = 'ost', 'korvrullar', 'kakor'\ndiet = {ask} 'Har du några dietrestriktioner?'\n{if} diet = 'vegan' ??? diet = 'halal'\n    {remove} 'korvrullar' {from} meny"
             mp_choice_options:
-            -   option: and
+            -   option: '`{and}`'
                 feedback: You don't have to be vegan and muslim
-            -   option: or
+            -   option: '`{or}`'
                 feedback: Great thinking!
-            -   option: ' + '
+            -   option: ' `+` '
                 feedback: No
-            -   option: print
+            -   option: '`{print}`'
                 feedback: No
             correct_answer: B
             hint: Neither vegans nor muslims can eat sausage rolls.
             question_score: '10'
         3:
             question_text: Which output is given to a member without a discount code?
-            code: "member = ask 'Do you have a membership card?'\ndiscount = ask 'Do you have a discount code?'\nif member = 'yes' or discount = 'yes'\n    print 'You get a free apple pie!'\nelse\n    print 'That will be 5 dollars please'"
+            code: "medlem = {ask} 'Har du medlemskort?'\nrabatt = {ask} 'Har du en rabattkod?'\n{if} medlem = 'ja' {or} rabatt = 'ja'\n    {print} 'Du får en gratis äppelpaj!'\n{else}\n    {print} 'Det blir 5 dollar, tack'"
             mp_choice_options:
             -   option: You get a free pie!
                 feedback: Great job!
@@ -1986,26 +1986,26 @@ levels:
             -   option: There is no way of knowing
                 feedback: There is! Read the question carefully
             correct_answer: A
-            hint: Mind the command 'or' in line 3
+            hint: Tänk på `{or}`-kommandot på rad 3
             question_score: '10'
         4:
             question_text: Which line of code should follow this line in rock-paper-scissors game?
-            code: if computer_choice is 'rock' and your_choice is 'paper'
+            code: "{if} datorns_val {is} 'sten' {and} ditt_val {is} 'påse'"
             mp_choice_options:
-            -   option: print 'you win'
+            -   option: "```\n{print} 'du vann'\n```"
                 feedback: You win!
-            -   option: print 'you lose'
+            -   option: "```\n{print} 'du förlorade'\n```"
                 feedback: You lose!
-            -   option: print 'tie'
+            -   option: "```\n{print} 'oavgjort'\n```"
                 feedback: It's only a tie if both choices are the same
-            -   option: print 'try again'
+            -   option: "```\n{print} 'försök igen'\n```"
                 feedback: Try again!
             hint: Paper beats rock
             question_score: '10'
             correct_answer: A
         5:
             question_text: Which statement is true about this code?
-            code: "if name = 'Cinderella' and shoe_size = '38'\n    print 'You are my one true love!'"
+            code: "{if} name = 'Askungen' {and} skostorlek = '38'\n    {print} 'Du är min enda sanna kärlek!'"
             mp_choice_options:
             -   option: Every person with shoe size 38 is this prince's one true love
                 feedback: The prince is a little more picky than that!
@@ -2020,7 +2020,7 @@ levels:
             question_score: '10'
         6:
             question_text: Which statement about this code is true?
-            code: "print 'Let me guess which family member you are!'\nglasses = ask 'Do you wear glasses?'\nfemale = ask 'Are you female?'\nif glasses = 'yes' and female = 'yes'\n    print 'You must be Sophie!'\nif glasses = 'no' and female = 'yes'\n   print 'You must be Marleen!'\nif glasses = 'yes' and female = 'no'\n    print 'You must be Wouter!'\nif glasses = 'no' and female = 'no'\n    print 'You must be Michael!'"
+            code: "{print} 'Låt mig gissa vilken familjemedlem du är!'\nglasögon = {ask} 'Har du glasögon?'\ntjej = {ask} 'Är du tjej?'\n{if} glasögon = 'ja' {and} tjej = 'ja'\n    {print} 'Du måste vara Sophie!'\n{if} glasögon = 'nej' {and} tjej = 'ja'\n   {print} 'Du måste vara Marleen!'\n{if} glasögon = 'ja' {and} tjej = 'nej'\n    {print} 'Du måste vara Wouter!'\n{if} glasögon = 'nej' {and} tjej = 'nej'\n    {print} 'Du måste vara Michael!'"
             mp_choice_options:
             -   option: Michael is a boy with glasses
                 feedback: Try again
@@ -2035,7 +2035,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which statement is false?
-            code: "print 'Thank you for helping me take care of my pets'\nprint 'Here is a program to help feed them'\nanimal is ask 'What kind of animal are they?'\ncolor is ask 'What colour are they?'\nif animal is 'cat' and color = 'grey'\n    print 'That is Abby. She eats 3 scoops of cat nibbles'\nif animal is 'cat' and color = 'orange'\n    print 'That is Milo. He eats 4 scoops of cat nibbles'\nif animal is 'bird' or color is 'black'\n    print 'I fed them this moring! They do not need more food today'\nif animal is 'hamster' and color is 'brown'\n    print 'You can feed them a piece of carrot'"
+            code: "{print} 'Tack för att du hjälper mig att ta hand om mina husdjur'\n{print} 'Här är ett program som hjälper till med matningen'\ndjur = {ask} 'Vad är det för djur?'\nfärg = {ask} 'Vilken färg har det?'\n{if} djur = 'katt' {and} färg = 'grå'\n    {print} 'Det är Abby. Hon äter 3 skopor kattsnacks'\n{if} djur = 'katt' {and} färg = 'orange'\n    {print} 'Det är Milo. Han äter 4 skopor kattsnacks'\n{if} djur = 'fågel' {or} färg = 'svart'\n    {print} 'Jag matade dem i morse! De behöver inte mer mat idag'\n{if} djur = 'hamster' {and} färg = 'brun'\n    {print} 'Du kan ge dem en bit morot'"
             mp_choice_options:
             -   option: The grey cat is called Abby
                 feedback: This is true!
@@ -2050,7 +2050,7 @@ levels:
             question_score: '10'
         8:
             question_text: What output do you get if you order popcorn but no drink?
-            code: "print 'Welcome to the movie theater'\npopcorn = ask 'Would you like some popcorn?'\ndrink = ask 'Would you like a drink?'\nif popcorn = 'yes' and drink = 'yes'\n    print 'That will be 8 dollars please'\nif popcorn = 'no' and drink = 'yes'\n   print 'That will be 3 dollars please'\nif popcorn = 'yes' and drink = 'no'\n    print 'That will be 5 dollars please'\nif popcorn = 'no' and drink = 'no'\n    print 'Ok'\nprint 'Enjoy the movie'"
+            code: "{print} 'Välkommen till bion'\npopcorn = {ask} 'Vill du ha popcorn?'\ndricka = {ask} 'Vill du ha något att dricka?'\n{if} popcorn = 'ja' {and} dricka = 'ja'\n    {print} 'Det blir 8 dollar, tack'\n{if} popcorn = 'nej' {and} dricka = 'ja'\n   {print} 'Det blir 3 dollar, tack'\n{if} popcorn = 'ja' {and} dricka = 'nej'\n    {print} 'Det blir 5 dollar, tack'\n{if} popcorn = 'nej' {and} dricka = 'nej'\n    {print} 'Ok'\n{print} 'Njut av filmen'"
             mp_choice_options:
             -   option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
                 feedback: You have paid too much!
@@ -2065,7 +2065,7 @@ levels:
             question_score: '10'
         9:
             question_text: What is wrong with this code?
-            code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
+            code: "1  choklad = {ask} 'Vill du ha chokladsås på din glass?'\n2      strössel = {ask} 'Vill du ha strössel på din glass?'\n3  {if} choklad {and} strössel = 'ja'\n4      {print} 'Glass med chokladsås och strössel på väg!'\n5  {if} choklad = 'ja' {and} strössel = 'nej'\n6      {print} 'Glass med chokladsås på väg!'\n7  {if} choklad = 'nej' {and} strössel = 'ja'\n8      {print} 'Glass med strössel på väg'\n9  {if} choklad = 'nej' {and} strössel = 'nej'\n10      {print} 'Bara vanlig glass på väg!'"
             mp_choice_options:
             -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Correct!
@@ -2080,15 +2080,15 @@ levels:
             question_score: '10'
         10:
             question_text: Which command needs to be in line 8 at the place of the ??? ?
-            code: "print 'Welcome to the product finder of this supermarkt'\nitem is ask 'What product are you looking for?'\nbakery = 'bread', 'buns', 'muffins'\ndrinks = 'soda', 'water', 'lemonade'\nsnacks = 'chips', 'nuts', 'dips'\nfrozen = 'fries', 'icecream', 'pizza'\nfruit = 'bananas', 'apples', 'oranges'\nif item in snacks ??? item in drinks\n    print 'This item is in aile 3'\nif item in bakery or item in bakery\n    print 'This item in in the back of the store'\nif item in fruit\n    print 'The fruit is sold near the register'"
+            code: "{print} 'Välkommen till varusökningen för den här mataffären'\nprodukt = {ask} 'Vilken produkt letar du efter?'\nbageri = 'bröd', 'bullar', 'muffins'\ndrycker = 'läsk', 'vatten', 'lemonad'\nsnacks = 'chips', 'nötter', 'dips'\nfryst = 'fries', 'glass', 'pizza'\nfrukt = 'bananer', 'äpplen', 'apelsiner'\n{if} produkt {in} snacks ??? produkt {in} drycker\n    {print} 'De varorna är i gång 3'\n{if} produkt {in} bageri {or} produkt {in} bageri\n    {print} 'De varorna är längst in i butiken'\n{if} produkt {in} frukt\n    {print} 'Frukten säljs nära kassorna'"
             mp_choice_options:
-            -   option: and
+            -   option: '`{and}`'
                 feedback: There are no items that are both the list of snacks and the list of drinks
-            -   option: or
+            -   option: '`{or}`'
                 feedback: Great job!
-            -   option: in
+            -   option: '`{in}`'
                 feedback: No
-            -   option: if
+            -   option: '`{if}`'
                 feedback: No
             hint: The item is either in the list of snacks, or in the list of drinks
             question_score: '10'
