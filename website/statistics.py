@@ -187,12 +187,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
-            data = []
+            _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
-            last_adventures.append(data)
+                    _data.append({_student: last_adventure[0]})
+            last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
@@ -216,8 +216,11 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options={
                 "show_c1": show_c1,
@@ -228,7 +231,6 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             student_names=student_names,  # just the names of student and no auxiliary information
             adventures=adventures,
-            quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
@@ -259,7 +261,6 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        print("render_student_details1")
         # Get data for all students
         student_names = []
         for student_username in sorted(class_.get("students", [])):
@@ -276,8 +277,6 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
             student_names.append(student_username)
-
-        print("render_student_details2")
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -329,7 +328,7 @@ class LiveStatisticsModule(WebsiteModule):
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    _data.append(last_adventure[0])
+                    _data.append({_student: last_adventure[0]})
             last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
@@ -360,15 +359,17 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
             student_names=student_names,
             student_programs=student_programs,
             adventures=adventures,
-            quiz_info=quiz_info,
             adventure_names=adventure_names,
             data=graph_data,
             labels=graph_labels,
@@ -421,12 +422,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         for level in range(1, HEDY_MAX_LEVEL+1):
-            data = []
+            _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
                 if last_adventure:
-                    data.append(last_adventure[0])
-            last_adventures.append(data)
+                    _data.append({_student: last_adventure[0]})
+            last_adventures.append(_data)
 
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
@@ -450,8 +451,11 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors,
-                "class_overview": class_overview
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": class_overview["selected_levels"],
+                "quiz_info": quiz_info
             },
             dashboard_options={
                 "show_c1": show_c1,
@@ -762,7 +766,11 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
         for adventure in list(adventure_list):
             adventure_key = adventure['name']
 
-            number_in_progress = last_adventures[int(level) - 1].count(adventure_key)
+            students_in_progress = []
+            for d in last_adventures[int(level) - 1]:
+                (student, last_adventure), = d.items()
+                if last_adventure == adventure_key:
+                    students_in_progress.append(student)
 
             if adventure['from_teacher']:
                 adventure_name = teacher_adventures_formatted[adventure_key]
@@ -770,7 +778,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                     {
                         "id": adventure_key,
                         "name":  adventure_name,
-                        "in_progress": number_in_progress
+                        "in_progress": students_in_progress
                     }
                 )
 
@@ -780,7 +788,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                     {
                         "id": adventure_key,
                         "name":  adventure_name,
-                        "in_progress": number_in_progress
+                        "in_progress": students_in_progress
                     }
                 )
 

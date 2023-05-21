@@ -597,6 +597,16 @@ export function select_levels_class_overview(class_id: string) {
   });
 }
 
+export function toggle_show_students_class_overview(adventure: string) {
+  if ($('#adventure_panel_' + adventure).hasClass('hidden')) {
+    $('#adventure_panel_' + adventure).removeClass('hidden');
+    $('#adventure_panel_' + adventure).addClass('block');
+  } else {
+    $('#adventure_panel_' + adventure).removeClass('block');
+    $('#adventure_panel_' + adventure).addClass('hidden');
+  }
+}
+
 export function getRunsOverTime(data: any[], labels: any[]) {
   const chart = Chart.getChart("runsOverTime")!;
   chart.data.labels = labels.map(String);
