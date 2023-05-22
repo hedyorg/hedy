@@ -3,7 +3,7 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
-from hypothesis import given, settings, reproduce_failure
+from hypothesis import given, settings
 import hypothesis.strategies
 
 
