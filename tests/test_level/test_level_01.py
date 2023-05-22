@@ -3,7 +3,7 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
-from hypothesis import given, settings
+from hypothesis import given, settings, reproduce_failure
 import hypothesis.strategies
 
 
@@ -705,6 +705,7 @@ class TestsHypothesisLevel1(HedyTester):
 
     @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
     @settings(deadline=None, max_examples=100)
+    @reproduce_failure('6.75.3', b'AXicY2CAAUZiMSPDtT8MAAXVAd8=')
     # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
     def test_template_combination(self, code_tuples, d):
         excluded_chars = ["_", "#", '\n', '\r']
