@@ -196,9 +196,9 @@ When adding new Babel translations the implementation is a bit more complex, but
     * Notice that the `{{ }}` characters are Jinja2 template placeholders for variables
     * When on the back-end we do this like this: `gettext('test')`
 2. Next we run the following command to let Babel search for keys, it is important to locations and sort the output to minimize merge conflicts:
-    * `pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output`
+    * `pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output --omit-header`
 3. We now have to add the found keys to all translation files, with the following command:
-    * `pybabel update -i messages.pot -d translations -N  --no-wrap`
+    * `pybabel update -i messages.pot -d translations -N  --no-wrap --omit-header`
 4. All keys will be automatically stored in the /translations folder
 5. Search for the .po files for the languages you know and find the empty `msgstr` for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
