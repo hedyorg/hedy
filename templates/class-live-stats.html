@@ -230,7 +230,7 @@
                             {% for error_entry in class_info.common_errors.errors %}
                                 {% if error_entry.active == 1 %}
                                     <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
-                                      <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?"~ dashboard_options_args}}'>
+                                      <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                         <h3 class="cursor-pointer hover:text-white">
                                           {{error_entry.header}}
                                         </h3>

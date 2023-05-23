@@ -394,6 +394,12 @@ class LiveStatisticsModule(WebsiteModule):
         common_errors = self.ERRORS.get({"class_id": class_id})
         class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
+        # get id of the common error to know which data to display from database
+        error_id = request.args.get("error-id", default="", type=str)
+        selected_item = None
+        if error_id:
+            selected_item = common_errors['errors'][int(error_id)]
+
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
@@ -470,6 +476,7 @@ class LiveStatisticsModule(WebsiteModule):
             quiz_info=quiz_info,
             student_names=student_names,
             max_level=HEDY_MAX_LEVEL,
+            selected_item=selected_item,
             current_page='my-profile'
         )
 
@@ -538,7 +545,7 @@ class LiveStatisticsModule(WebsiteModule):
         misconception_counts = {}
 
         for session, programs in data.items():
-            last_error = None  # Todo: augment database to include error history
+            last_error = None  # Todo: augment database to include type of error history
             count = 0
 
             # Iterate over each error and its corresponding username in the current session group
@@ -576,7 +583,7 @@ class LiveStatisticsModule(WebsiteModule):
                                             key=lambda x: sum(x[1][error]['count'] for error in x[1]), reverse=True)[
                 :4]:
             print('Misconception "{}"'.format(misconception))
-            # write to radboard_error_data.json
+            # Todo: write to radboard_error_data.json
             sorted_errors = sorted(errors.items(), key=lambda x: x[1]['count'], reverse=True)[:1]
             for error, info in sorted_errors:
                 print('- "{}"'.format(error))
