@@ -132,6 +132,17 @@ class LiveStatisticsModule(WebsiteModule):
         super().__init__("live-stats", __name__)
         self.db = db
         self.__error_db_load()
+        # Define the groups of misconceptions
+        self.misconception_groups = {
+            'Not a current level command': ['level'],
+            'Incorrect use of command': ['cannot'],
+            'Incorrect use of variable': ['variable'],
+            'Unwanted spaces': ['Spaces', 'confuse', 'computers'],
+            'Forgot commandos': ['forgot'],
+            'Empty program': ['empty program'],
+            'Typed something that is not allowed': ['entered', 'allowed'],
+            'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
+        }
 
     def __error_db_load(self):
         """Loads the error data from the json file. Function mainly exists in order to
@@ -151,6 +162,9 @@ class LiveStatisticsModule(WebsiteModule):
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
         class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
+
+        # identifies common errors in the class
+        self.misconception_detection(class_id, user, common_errors)
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -210,8 +224,6 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
         quiz_info = _get_quiz_info(quiz_stats)
-
-        self.misconception_detection(class_id, user)
 
         return render_template(
             "class-live-stats.html",
@@ -526,21 +538,15 @@ class LiveStatisticsModule(WebsiteModule):
                     })
         return data
 
-    def misconception_detection(self, class_id, user):
+    def misconception_detection(self, class_id, user, common_errors):
+        """
+        Detects misconceptions of students in the class based on errors they are making.
+        """
         # Group the error messages by session and count their occurrences
         data = self.retrieve_data(class_id, user)  # retrieves relevant data from db
 
-        # Define the groups of misconceptions
-        misconception_groups = {
-            'Not a current level command': ['level'],
-            'Incorrect use of command': ['cannot'],
-            'Incorrect use of variable': ['variable'],
-            'Unwanted spaces': ['Spaces', 'confuse', 'computers'],
-            'Forgot commandos': ['forgot'],
-            'Empty program': ['empty program'],
-            'Typed something that is not allowed': ['entered', 'allowed'],
-            'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
-        }
+        # common_error_ids = [x['id'] for x in common_errors['errors']]
+        # new_id = max(common_error_ids) + 1 if common_error_ids else 0
 
         misconception_counts = {}
 
@@ -553,7 +559,7 @@ class LiveStatisticsModule(WebsiteModule):
                 error = run['error']
                 username = run['username']
 
-                for misconception, keywords in misconception_groups.items():
+                for misconception, keywords in self.misconception_groups.items():
                     if error and any(keyword in error.lower() for keyword in keywords):
                         # Check if the current error is different from the last error;
                         # errors that fall in same misconception group are considered same errors
