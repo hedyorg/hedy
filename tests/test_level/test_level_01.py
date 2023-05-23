@@ -647,6 +647,33 @@ class TestsLevel1(HedyTester):
             max_level=17,
         )
 
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print Hallo welkom bij Hedy!
+        forward 50
+        ask Wat is je lievelingskleur
+        echo je lievelingskleur is""")
+
+        expected_code = HedyTester.dedent(f"""\
+        print('Hallo welkom bij Hedy!')
+        {HedyTester.indent(
+            HedyTester.forward_transpiled(50, self.level),
+            8, True)
+        }
+        answer = input('Wat is je lievelingskleur')
+        print('je lievelingskleur is '+answer)""")
+
+        expected_source_map = {
+            "1/0-1/28": "1/0-1/31",
+            "1/0-4/97": "1/0-10/491",
+            "2/29-2/39": "2/32-8/408",
+            "3/40-3/69": "9/409-9/452",
+            "4/70-4/96": "10/453-10/491"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
 # hypothesis initialization starts here
 
 
