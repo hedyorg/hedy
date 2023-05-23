@@ -155,6 +155,8 @@
                         {% endif %}
                     </div>
 
+                    <p>{{ class_info.students }}</p>
+
                     <table class="table-auto w-full border-separate space-y-6 rounded-lg">
                         <thead class="bg-gray-200">
                             <tr>
@@ -167,16 +169,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in student_names %}
+                            {% for s in class_info.students %}
                             <tr>
                                 <td class="px-2">
                                     {% if dashboard_options.student %}
                                         <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                            {{s.username}}
                                         </a>
                                     {% else %}
                                         <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                            {{s.username}}
                                         </a>
                                     {% endif %}
                                 </td>
@@ -187,7 +189,7 @@
                                             {% for adventure in adventure_list %}
                                                 {# Bubble per adventure #}
                                                 <div class="tooltip">
-                                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-400">
+                                                    <button type="button" class="h-6 w-6 rounded-full bg-gray-500 hover:bg-blue-100">
                                                     </button>
                                                     <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
                                                 </div>
