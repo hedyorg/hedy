@@ -176,7 +176,6 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
         students = self.__all_students(class_)
 
         # Data for student overview card
@@ -459,7 +458,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
     def select_levels(self, user, class_id):
-        """"
+        """
         Stores the selected levels in the class overview in the database.
         """
         body = request.json

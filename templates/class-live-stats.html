@@ -155,8 +155,6 @@
                         {% endif %}
                     </div>
 
-                    <p>{{ class_info.students }}</p>
-
                     <table class="table-auto w-full border-separate space-y-6 rounded-lg">
                         <thead class="bg-gray-200">
                             <tr>
@@ -173,11 +171,11 @@
                             <tr>
                                 <td class="px-2">
                                     {% if dashboard_options.student %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s)}}" class="text-black hover:text-white" id="show-student">
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
                                             {{s.username}}
                                         </a>
                                     {% else %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s)}}" class="text-black hover:text-white" id="show-student">
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
                                             {{s.username}}
                                         </a>
                                     {% endif %}
