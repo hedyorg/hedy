@@ -186,11 +186,19 @@
                                         <td>
                                             {% for adventure in adventure_list %}
                                                 {# Bubble per adventure #}
-                                                <div class="tooltip">
-                                                    <button type="button" class="h-6 w-6 rounded-full bg-gray-500 hover:bg-blue-100">
-                                                    </button>
-                                                    <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
-                                                </div>
+                                                {% if adventure_names.get(s.current_adventure.adventure_name) == adventure.name %}
+                                                    <div class="tooltip">
+                                                        <button type="button" class="h-6 w-6 border-2 border-blue-800 rounded-full bg-gray-500 hover:bg-blue-100">
+                                                        </button>
+                                                        <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="tooltip">
+                                                        <button type="button" class="h-6 w-6 rounded-full bg-gray-500 hover:bg-blue-100">
+                                                        </button>
+                                                        <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
+                                                    </div>
+                                                {% endif %}
                                             {% endfor %}
                                                 <div class="tooltip">
                                                     <button type="button" class="h-6 w-6 rounded-full bg-green-600 hover:bg-green-400">

@@ -155,6 +155,7 @@ class LiveStatisticsModule(WebsiteModule):
                     "username": student_username,
                     "programs": len(programs),
                     "highest_level": highest_quiz,
+                    "current_adventure": programs[0] if programs else "-"
                 }
             )
         return students
