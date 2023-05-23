@@ -1,49 +1,54 @@
 {% extends "class-live-stats.html" %}
 
-{% block additional_scripts %}
-    <script>
-            window.onload=hedyApp.getRunsOverTime({{ data }});
-    </script>
-{% endblock %}
-
 {% block student_space %}
 
   <div class="justify-center pt-10 min-h-full">
       <h2 class="text-center">Student Details</h2>
       <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
-        <a class="no-underline float-right p-2" href="/live_stats/class/{{class_info.id}}?{{dashboard_options_args}}">❌</a>
+        <a class="no-underline float-right p-2"
+           href="/live_stats/class/{{class_info.id}}?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}">
+            ❌
+        </a>
         <!-- Title columns -->
         <div class="m-auto ml-14 flex pt-4 pl-4">
-            <table class="text-left table-auto">
-                <thead>
-                    <tr>
-                        <th class="w-64 text-blue-600">{{_('name')}}</th>
-                        <th class="w-64 text-blue-600">{{_('level')}}</th>
-                        <th class="w-64 text-blue-600">{{_('adventure')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{student.username}}</td>
-                        {% if student_programs %}
-                        <td>{{_('level')}} {{ student_programs[0].level }}</td>
-                        <td>{{adventure_names.get(student_programs[0].adventure_name)}}</td>
-                        {% else %}
-                        <td>{{_('empty')}}</td>
-                        <td>{{_('empty')}}</td>
-                        {% endif %}
-                    </tr>
-                </tbody>
-            </table>
+            <div class="flex flex-row">
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('name')}}</p>
+                  {{student.username}}
+              </div>
+            {% if student_programs %}
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
+                  {{ student_programs[0].level }}
+              </div>
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
+                    {% if adventure_names.get(student_programs[0].adventure_name) %}
+                        {{adventure_names.get(student_programs[0].adventure_name)}}
+                    {% else %}
+                        {{student_programs[0].name}}
+                    {% endif %}
+              </div>
+            {% else %}
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
+                </div>
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
+                </div>
+            {% endif %}
+            </div>
         </div>
 
         <!-- Content -->
         <div class="grid grid-cols-3 p-5">
             <!-- Graph with fails and successful runs over time -->
-            <div class="w-full text-center" id="runs-over-time">
-                <h5 class="font-normal pb-1">Runs over time</h5>
-                <canvas id="runsOverTime" width="200" height="200"></canvas>
+            <div class="w-full text-center p-2">
+                <h5 class="font-normal ltr:mr-2 rtl:ml-2">Runs over time</h5>
+                <canvas id="runsOverTime" width="120" height="40"></canvas>
             </div>
+
+
 
             <!-- Last ran code -->
             <div class="w-full text-center turn-pre-into-ace mb-4">
@@ -61,7 +66,7 @@
                 <div class="flex justify-center">
                 {% if student_programs and student_programs[0].error_message %}
                     <div id="errorbox-info"
-                      class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
+                      class="flex-0 z-20 m-2 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
                       <div class="flex">
                         <div class="py-1">
                           <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -78,8 +83,19 @@
                 {% endif %}
                 </div>
             </div>
+            <a class="text-black font-light no-underline float-right" href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args}}">Refresh ⭯</a>
         </div>
       </div>
   </div>
 
+{% endblock %}
+
+{% block additional_scripts %}
+    <script>
+            hedyApp.InitLineChart({{ data }}, {{ labels }});
+            // interval to refresh data
+            hedyApp.sleep(60000).then(() => {
+                window.location.reload();
+            });
+    </script>
 {% endblock %}
