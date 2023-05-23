@@ -143,6 +143,8 @@ class LiveStatisticsModule(WebsiteModule):
             'Typed something that is not allowed': ['entered', 'allowed'],
             'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
         }
+        self.MAX_CONTINUOUS_ERRORS = 1
+        self.MAX_COMMON_ERRORS = 10
 
     def __error_db_load(self):
         """Loads the error data from the json file. Function mainly exists in order to
@@ -545,8 +547,12 @@ class LiveStatisticsModule(WebsiteModule):
         # Group the error messages by session and count their occurrences
         data = self.retrieve_data(class_id, user)  # retrieves relevant data from db
 
-        # common_error_ids = [x['id'] for x in common_errors['errors']]
-        # new_id = max(common_error_ids) + 1 if common_error_ids else 0
+        headers = [x['header'] for x in common_errors['errors']]
+        common_error_ids = [int(x['id']) for x in common_errors['errors']]
+        new_id = max(common_error_ids) + 1 if common_error_ids else 0
+
+        # retrieve proper format from db and store in table for further modification
+        new_common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
 
         misconception_counts = {}
 
@@ -567,7 +573,7 @@ class LiveStatisticsModule(WebsiteModule):
                             last_error = error
                             count = 0
                         count += 1
-                        if count >= 1:
+                        if count >= self.MAX_CONTINUOUS_ERRORS:
                             # Check if the current misconception is not in the misconception_counts dictionary
                             if misconception not in misconception_counts:
                                 misconception_counts[misconception] = {}
@@ -588,15 +594,39 @@ class LiveStatisticsModule(WebsiteModule):
         for misconception, errors in sorted(misconception_counts.items(),
                                             key=lambda x: sum(x[1][error]['count'] for error in x[1]), reverse=True)[
                 :4]:
-            print('Misconception "{}"'.format(misconception))
-            # Todo: write to radboard_error_data.json
+            print(f'Misconception "{misconception}"')
             sorted_errors = sorted(errors.items(), key=lambda x: x[1]['count'], reverse=True)[:1]
             for error, info in sorted_errors:
-                print('- "{}"'.format(error))
                 users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
                 sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)[:1]
-                for user, count in sorted_users:
-                    print('  - User "{}" made this error'.format(user))
+                users_only = [user for user, _ in sorted_users]
+                print(users_only)
+
+                if misconception in headers:
+                    idx = headers.index(misconception)
+                    hits = 0
+                    for user in users_only:
+                        if user in common_errors['errors'][idx]['students']:
+                            hits += 1
+                    if hits == len(users_only):
+                        # no update needed as entry already exists
+                        continue    # skip to next error
+                    elif hits > 0:
+                        # update existing entry, existing student was found but another one has to be added
+                        new_common_errors['errors'][idx]['students'] = users_only
+                        continue
+
+                # make new entry
+                new_common_errors['errors'].append({
+                    'id': new_id,
+                    'error': error,
+                    'header': misconception,
+                    'active': 1,
+                    "students": users_only,
+                })
+                new_id += 1
+                # Todo: write to radboard_error_data.json
+            self.ERRORS.update({"class_id": class_id}, new_common_errors)
         self.__error_db_load()
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
