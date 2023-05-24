@@ -540,6 +540,14 @@ class LiveStatisticsModule(WebsiteModule):
                     })
         return data
 
+    def misconception_hit(self, error):
+        for misconception, keywords in self.misconception_groups.items():
+            # Check if the current error is different from the last error;
+            # errors that fall in same misconception group are considered same errors
+            if error and any(keyword in error.lower() for keyword in keywords):
+                return misconception
+        return None
+
     def misconception_detection(self, class_id, user, common_errors):
         """
         Detects misconceptions of students in the class based on errors they are making.
@@ -556,38 +564,50 @@ class LiveStatisticsModule(WebsiteModule):
 
         misconception_counts = {}
 
-        for session, programs in data.items():
-            last_error = None  # Todo: augment database to include type of error history
-            count = 0
+        print("Data")
+        print(data)
 
-            # Iterate over each error and its corresponding username in the current session group
-            for run in programs:
-                error = run['error']
-                username = run['username']
+        # only take most recent session
+        recent_session = list(data.keys())[0]
+        programs = data[recent_session]
 
-                for misconception, keywords in self.misconception_groups.items():
-                    if error and any(keyword in error.lower() for keyword in keywords):
-                        # Check if the current error is different from the last error;
-                        # errors that fall in same misconception group are considered same errors
-                        if error != last_error:
-                            last_error = error
-                            count = 0
-                        count += 1
-                        if count >= self.MAX_CONTINUOUS_ERRORS:
-                            # Check if the current misconception is not in the misconception_counts dictionary
-                            if misconception not in misconception_counts:
-                                misconception_counts[misconception] = {}
+        last_error = None  # Todo: augment database to include type of error history
+        last_user = None
 
-                            # Check if the current error is not in the misconception_counts
-                            # dictionary for the current misconception
-                            if error not in misconception_counts[misconception]:
-                                misconception_counts[misconception][error] = {'count': 0, 'users': []}
-                            misconception_counts[misconception][error]['count'] += 1
-                            misconception_counts[misconception][error]['users'].append(username)
-                        break
-                else:
+        count = 0
+
+        # Iterate over each error and its corresponding username in the current session group
+        for run in programs:
+            error = run['error']
+            username = run['username']
+
+            print("Errors per user", error, username)
+            misconception = self.misconception_hit(error)
+            if misconception:
+
+                if username != last_user:
+                    last_user = username
                     last_error = None
+
+                if error != last_error:
+                    last_error = error
                     count = 0
+                count += 1
+                if count >= self.MAX_CONTINUOUS_ERRORS:
+                    # Check if the current misconception is not in the misconception_counts dictionary
+                    if misconception not in misconception_counts:
+                        misconception_counts[misconception] = {}
+
+                    # Check if the current error is not in the misconception_counts
+                    # dictionary for the current misconception
+                    if error not in misconception_counts[misconception]:
+                        misconception_counts[misconception][error] = {'count': 0, 'users': []}
+                    misconception_counts[misconception][error]['count'] += 1
+                    misconception_counts[misconception][error]['users'].append(username)
+                break
+            else:
+                last_error = None
+                count = 0
 
         # Print the top 4 misconceptions with the highest count of continuous errors
         # and their associated errors and usernames
@@ -600,7 +620,13 @@ class LiveStatisticsModule(WebsiteModule):
                 users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
                 sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)[:1]
                 users_only = [user for user, _ in sorted_users]
+
+                for user, count in sorted_users:
+                    print('- User "{}" made this error'.format(user))
+
+                print("All users")
                 print(users_only)
+                print(sorted_users)
 
                 if misconception in headers:
                     idx = headers.index(misconception)
