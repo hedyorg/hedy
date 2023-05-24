@@ -250,6 +250,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -459,6 +460,7 @@ class LiveStatisticsModule(WebsiteModule):
             adventures=adventures,
             quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             selected_item=selected_item,
             current_page='my-profile'
         )
