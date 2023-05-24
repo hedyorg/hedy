@@ -626,7 +626,7 @@ class LiveStatisticsModule(WebsiteModule):
                 })
                 new_id += 1
                 # Todo: write to radboard_error_data.json
-            self.ERRORS.update({"class_id": class_id}, new_common_errors)
+            # self.ERRORS.update({"class_id": class_id}, new_common_errors)
         self.__error_db_load()
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
