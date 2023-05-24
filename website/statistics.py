@@ -155,7 +155,8 @@ class LiveStatisticsModule(WebsiteModule):
                     "username": student_username,
                     "programs": len(programs),
                     "highest_level": highest_quiz,
-                    "current_adventure": programs[0] if programs else "-"
+                    "current_adventure": programs[0] if programs else "-",
+                    "current_level": programs[0]['level'] if programs else '0'
                 }
             )
         return students
@@ -234,6 +235,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -437,6 +439,7 @@ class LiveStatisticsModule(WebsiteModule):
             adventures=adventures,
             quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             current_page='my-profile'
         )
 
