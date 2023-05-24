@@ -235,7 +235,6 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
-            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             current_page="my-profile",
             page_title=gettext("title_class live_statistics")
         )
@@ -295,8 +294,6 @@ class LiveStatisticsModule(WebsiteModule):
                  'error_header': 'Oops'  # TODO: get proper header message that gets translated, e.g. Transpile_error
                  }
             )
-
-        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
 
         # get data for graph from db, db conveniently stores amount of errors for student
         graph_data = self.db.get_program_stats([selected_student['username']], None, None)
@@ -358,7 +355,6 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventures=adventures,
-            adventure_names=adventure_names,
             data=graph_data,
             labels=graph_labels,
             max_level=HEDY_MAX_LEVEL,
@@ -439,7 +435,6 @@ class LiveStatisticsModule(WebsiteModule):
             adventures=adventures,
             quiz_info=quiz_info,
             max_level=HEDY_MAX_LEVEL,
-            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             current_page='my-profile'
         )
 

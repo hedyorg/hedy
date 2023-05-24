@@ -186,7 +186,7 @@
                                         <td>
                                             {% for adventure in adventure_list %}
                                                 {# Bubble per adventure #}
-                                                {% if adventure_names.get(s.current_adventure.adventure_name) == adventure.name and s.current_level|int == level|int %}
+                                                {% if s.current_adventure.adventure_name == adventure.id and s.current_level|int == level|int %}
                                                     <div class="tooltip">
                                                         <button type="button" class="h-6 w-6 border-2 border-blue-800 rounded-full bg-gray-500 hover:bg-blue-100">
                                                         </button>
