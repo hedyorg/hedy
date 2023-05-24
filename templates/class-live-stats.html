@@ -19,6 +19,17 @@
         Refresh ⭯
     </a>
 
+    <!-- Levels selector -->
+    <div class="flex justify-center mb-10">
+        <div>
+            {% for i in range(1, max_level + 1) %}
+                <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
+            {% endfor %}
+        </div>
+        <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
+    </div>
+
+
     <!-- Card 1 Class Overview -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
@@ -51,18 +62,9 @@
             {% endif %}
         </div>
 
-        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 pt-2 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
-                <!-- Levels selector -->
-                <div class="flex justify-center">
-                    <div>
-                        {% for i in range(1, max_level + 1) %}
-                            <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
-                        {% endfor %}
-                    </div>
-                    <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
-                </div>
                 <!-- Adventures per level -->
                 {% for selected_level in class_overview.selected_levels %}
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
@@ -160,13 +162,13 @@
                     </div>
 
                     <table class="table-auto w-full border-separate space-y-6 rounded-lg">
-                        <thead class="bg-gray-200">
+                        <thead class="">
                             <tr>
                                 <th class="px-4 py-2 text-left w-0">{{_('name')}}</th>
                                 <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
 {#                                <th class="p-2">{{_('Adventure Progress')}}</th>#}
                                 {% for selected_level in class_overview.selected_levels %}
-                                    <th class="p-2 w-fit">Lv{{selected_level}}</th>
+                                    <th class="p-2 w-fit">Level {{selected_level}}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
@@ -190,29 +192,23 @@
                                         <td>
                                             {% for adventure in adventure_list %}
                                                 {# Bubble per adventure #}
-                                                {% if adventure_names.get(s.current_adventure.adventure_name) == adventure.name and s.current_level|int == level|int %}
+                                                {% if s.current_adventure.adventure_name == adventure.id and s.current_level|int == level|int %}
                                                     <div class="tooltip">
-                                                        <button type="button" class="h-6 w-6 border-2 border-blue-800 rounded-full bg-gray-500 hover:bg-blue-100">
-                                                        </button>
+                                                        <button type="button" class="h-6 w-6 border-2 border-blue-800 rounded-full bg-gray-500"></button>
                                                         <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
                                                     </div>
                                                 {% else %}
                                                     <div class="tooltip">
-                                                        <button type="button" class="h-6 w-6 rounded-full bg-gray-500 hover:bg-blue-100">
+                                                        <button type="button" class="h-6 w-6 rounded-full bg-gray-500">
                                                         </button>
                                                         <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
                                                     </div>
                                                 {% endif %}
                                             {% endfor %}
-                                                <div class="tooltip">
-                                                    <button type="button" class="h-6 w-6 rounded-full bg-green-600 hover:bg-green-400">
-                                                    </button>
-                                                    <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(200%);">Quiz</span>
-                                                </div>
-        {#                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-400">#}
-        {#                                    </button>#}
-        {#                                    <button type="button" class="h-6 w-6 rounded-full bg-gray-600 hover:bg-blue-100">#}
-        {#                                    </button>#}
+                                            <div class="tooltip">
+                                                <button type="button" class="h-6 w-6 rounded-full bg-green-600 hover:bg-green-400"></button>
+                                                <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(200%);">Quiz</span>
+                                            </div>
                                         </td>
                                         {% endif %}
                                     {% endfor %}

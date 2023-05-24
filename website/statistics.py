@@ -312,8 +312,6 @@ class LiveStatisticsModule(WebsiteModule):
                  }
             )
 
-        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
-
         # get data for graph from db, db conveniently stores amount of errors for student
         graph_data = self.db.get_program_stats([selected_student['username']], None, None)
         graph_data, graph_labels = _collect_graph_data(graph_data, window_size=10)
@@ -374,7 +372,6 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventures=adventures,
-            adventure_names=adventure_names,
             data=graph_data,
             labels=graph_labels,
             max_level=HEDY_MAX_LEVEL,
