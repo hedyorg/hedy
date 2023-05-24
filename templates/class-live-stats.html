@@ -159,32 +159,64 @@
                         {% endif %}
                     </div>
 
-                    <table class="table-auto w-full border-separate space-y-6 border border-black rounded-lg">
+                    <table class="table-auto w-full border-separate space-y-6 rounded-lg">
                         <thead class="bg-gray-200">
                             <tr>
-                                <th class="px-4 py-2 text-left">{{_('name')}}</th>
+                                <th class="px-4 py-2 text-left w-0">{{_('name')}}</th>
                                 <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
-                                <th class="p-2">{{_('Adventure Progress')}}</th>
+{#                                <th class="p-2">{{_('Adventure Progress')}}</th>#}
+                                {% for selected_level in class_overview.selected_levels %}
+                                    <th class="p-2 w-fit">Lv{{selected_level}}</th>
+                                {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in student_names %}
+                            {% for s in class_info.students %}
                             <tr>
                                 <td class="px-2">
                                     {% if dashboard_options.student %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
+                                            {{s.username}}
                                         </a>
                                     {% else %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s.username)}}" class="text-black hover:text-white" id="show-student">
+                                            {{s.username}}
                                         </a>
                                     {% endif %}
                                 </td>
-                                <td>
-                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-purple-700">
-                                    </button>
-                                </td>
+                                {% for selected_level in class_overview.selected_levels %}
+                                    {% for level, adventure_list in adventures.items() %}
+                                        {% if level|int == selected_level %}
+                                        <td>
+                                            {% for adventure in adventure_list %}
+                                                {# Bubble per adventure #}
+                                                {% if adventure_names.get(s.current_adventure.adventure_name) == adventure.name %}
+                                                    <div class="tooltip">
+                                                        <button type="button" class="h-6 w-6 border-2 border-blue-800 rounded-full bg-gray-500 hover:bg-blue-100">
+                                                        </button>
+                                                        <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="tooltip">
+                                                        <button type="button" class="h-6 w-6 rounded-full bg-gray-500 hover:bg-blue-100">
+                                                        </button>
+                                                        <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(50%);">{{ adventure.name }}</span>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                                <div class="tooltip">
+                                                    <button type="button" class="h-6 w-6 rounded-full bg-green-600 hover:bg-green-400">
+                                                    </button>
+                                                    <span class="tooltiptext border border-black shadow-lg delay-300 absolute text-ts text-center flex justify-center" style="color:black; transform:translateX(200%);">Quiz</span>
+                                                </div>
+        {#                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-400">#}
+        {#                                    </button>#}
+        {#                                    <button type="button" class="h-6 w-6 rounded-full bg-gray-600 hover:bg-blue-100">#}
+        {#                                    </button>#}
+                                        </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -154,6 +154,25 @@ class LiveStatisticsModule(WebsiteModule):
         self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
         self.CLASS_OVERVIEW = dynamo.Table(self.common_error_db, "class_overview", "class_id")
 
+    def __all_students(self, class_):
+        """Returns a list of all students in a class along with some info."""
+        students = []
+        for student_username in class_.get("students", []):
+            programs = self.db.programs_for_user(student_username)
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students.append(
+                {
+                    "username": student_username,
+                    "programs": len(programs),
+                    "highest_level": highest_quiz,
+                    "current_adventure": programs[0] if programs else "-"
+                }
+            )
+        return students
+
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
@@ -174,23 +193,7 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        student_names = []
-        students = sorted(class_.get("students", []))
-        for student_username in class_.get("students", []):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-            student_names.append(student_username)
+        students = self.__all_students(class_)
 
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -245,7 +248,6 @@ class LiveStatisticsModule(WebsiteModule):
                 "student": student
             },
             dashboard_options_args=dashboard_options_args,
-            student_names=student_names,  # just the names of student and no auxiliary information
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
@@ -277,22 +279,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        # Get data for all students
-        student_names = []
-        for student_username in sorted(class_.get("students", [])):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-            student_names.append(student_username)
+        students = self.__all_students(class_)
 
         # Get data for selected student
         programs = self.db.programs_for_user(student)
@@ -383,7 +370,6 @@ class LiveStatisticsModule(WebsiteModule):
             },
             dashboard_options_args=dashboard_options_args,
             student=selected_student,
-            student_names=student_names,
             student_programs=student_programs,
             adventures=adventures,
             adventure_names=adventure_names,
@@ -415,23 +401,7 @@ class LiveStatisticsModule(WebsiteModule):
             selected_item = common_errors['errors'][int(error_id)]
 
         class_ = self.db.get_class(class_id)
-        students = sorted(class_.get("students", []))
-
-        student_names = []
-        for student_username in sorted(class_.get("students", [])):
-            programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-            student_names.append(student_username)
+        students = self.__all_students(class_)
 
         # Data for student overview card
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -488,7 +458,6 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             quiz_info=quiz_info,
-            student_names=student_names,
             max_level=HEDY_MAX_LEVEL,
             selected_item=selected_item,
             current_page='my-profile'
@@ -633,7 +602,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
     def select_levels(self, user, class_id):
-        """"
+        """
         Stores the selected levels in the class overview in the database.
         """
         body = request.json
