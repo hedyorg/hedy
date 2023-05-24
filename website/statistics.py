@@ -552,7 +552,8 @@ class LiveStatisticsModule(WebsiteModule):
         new_id = max(common_error_ids) + 1 if common_error_ids else 0
 
         # retrieve proper format from db and store in table for further modification
-        new_common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        # new_common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id")
+        # .get({"class_id": class_id})
 
         misconception_counts = {}
 
@@ -613,17 +614,17 @@ class LiveStatisticsModule(WebsiteModule):
                         continue    # skip to next error
                     elif hits > 0:
                         # update existing entry, existing student was found but another one has to be added
-                        new_common_errors['errors'][idx]['students'] = users_only
+                        # new_common_errors['errors'][idx]['students'] = users_only
                         continue
 
                 # make new entry
-                new_common_errors['errors'].append({
-                    'id': new_id,
-                    'error': error,
-                    'header': misconception,
-                    'active': 1,
-                    "students": users_only,
-                })
+                # new_common_errors['errors'].append({
+                #     'id': new_id,
+                #     'error': error,
+                #     'header': misconception,
+                #     'active': 1,
+                #     "students": users_only,
+                # })
                 new_id += 1
                 # Todo: write to radboard_error_data.json
             # self.ERRORS.update({"class_id": class_id}, new_common_errors)
