@@ -376,6 +376,7 @@ class LiveStatisticsModule(WebsiteModule):
             labels=graph_labels,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile',
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             page_title=gettext("title_class live_statistics")
         )
 
