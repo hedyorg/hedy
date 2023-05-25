@@ -143,7 +143,7 @@ class LiveStatisticsModule(WebsiteModule):
             'Typed something that is not allowed': ['entered', 'allowed'],
             'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
         }
-        self.MAX_CONTINUOUS_ERRORS = 0  # update according with database functionality
+        self.MAX_CONTINUOUS_ERRORS = 1  # update according with database functionality
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
@@ -606,12 +606,12 @@ class LiveStatisticsModule(WebsiteModule):
                     if username == last_user and error == last_error:
                         count += 1
                     elif username == last_user and error != last_error:
-                        count = 0
+                        count = 1
                         last_error = error
                     elif username != last_user:
                         last_user = username
                         last_error = error
-                        count = 0
+                        count = 1
 
                     if count >= self.MAX_CONTINUOUS_ERRORS:
                         # Check if the current misconception is not in the misconception_counts dictionary
@@ -624,7 +624,6 @@ class LiveStatisticsModule(WebsiteModule):
                             misconception_counts[misconception][error] = {'freq': 0, 'users': []}
                         misconception_counts[misconception][error]['freq'] += 1
                         misconception_counts[misconception][error]['users'].append(username)
-                    break
                 else:
                     last_error = None
                     last_user = username
@@ -633,43 +632,45 @@ class LiveStatisticsModule(WebsiteModule):
         # Print the top 4 misconceptions with the highest count of continuous errors
         # and their associated errors and usernames
         print("Misconception Counts")
-        print(misconception_counts)
+        print(misconception_counts, "\n")
+
         for misconception, errors in sorted(misconception_counts.items(),
                                             key=lambda x: sum(x[1][error]['freq'] for error in x[1]),
                                             reverse=True)[:self.MAX_FEED_SIZE]:
 
-            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['freq'], reverse=True)[:1]
+            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['freq'], reverse=True)
+            all_users = []
+
             for error, info in sorted_errors:
                 users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
-                sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)[:1]
+                sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)
                 users_only = [user for user, _ in sorted_users]
+                all_users += users_only
 
-                # checks to avoid duplicates
-                if misconception in headers:
-                    idx = headers.index(misconception)
-                    hits = 0
-                    for user in users_only:
-                        if user in common_errors['errors'][idx]['students']:
-                            hits += 1
-                    if hits == len(users_only):
-                        # no update needed as entry already exists
-                        continue    # skip to next error
-                    elif hits > 0:
-                        # update existing entry, existing student was found but another one has to be added
-                        new_common_errors['errors'][idx]['students'] = users_only
-                else:
-                    # make new entry
-                    new_id = self.new_id_calc(common_errors, class_id)
-                    new_common_errors['errors'].append({
-                        'id': new_id,
-                        'error': error,
-                        'header': misconception,
-                        'active': 1,
-                        "students": users_only,
-                    })
+            # checks to avoid duplicates
+            if misconception in headers:
+                idx = headers.index(misconception)
+                hits = 0
+                for user in all_users:
+                    if user in common_errors['errors'][idx]['students']:
+                        hits += 1
+                if hits == len(all_users):
+                    # no update needed as entry already exists
+                    continue    # skip to next misconception
+                elif hits > 0:
+                    # update existing entry, existing student(s) was found but new ones have to be added
+                    new_common_errors['errors'][idx]['students'] = all_users
+            else:
+                # make new entry
+                new_id = self.new_id_calc(common_errors, class_id)
+                new_common_errors['errors'].append({
+                    'id': new_id,
+                    'header': misconception,
+                    'active': 1,
+                    "students": users_only,
+                })
             # update db
             self.ERRORS.update({"class_id": class_id}, new_common_errors)
-
         self.__error_db_load()
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
