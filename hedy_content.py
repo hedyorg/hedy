@@ -120,6 +120,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     6: [
         'default',
+        'maths',
         'songs',
         'dice',
         'dishes',

@@ -138,7 +138,7 @@ adventures:
                         {print} 'Hooray!'
                     {else}
                         {print} 'Maybe you should practice some more in the previous level'
-                start_code: ""
+                start_code: "{print} Lets go to the next tab!"
             10:
                 story_text: |
                     You're doing great! In the previous levels we still faced a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
@@ -284,7 +284,8 @@ adventures:
                     ```
                     _ Hello!
                     ```
-                start_code: ""
+                start_code: |
+                    {print} Welcome to Hedy!
             17:
                 start_code: |-
                     {for} i {in} {range} 1 {to} 10:
@@ -358,7 +359,10 @@ adventures:
                     _ How are you doing?
                     _
                     ```
-                start_code: ""
+                start_code: |
+                    {print} Hello!
+                    {ask} What is your name?
+                    {echo} hello
             2:
                 story_text: |
                     ## The ask command
@@ -386,7 +390,11 @@ adventures:
                     favorite_animals is ask What is your favorite animal?
                     print I like favorite_animals
                     ```
-                start_code: ""
+                start_code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
     is_command:
         name: "is"
         description: "introducing is command"
@@ -413,7 +421,10 @@ adventures:
                     favorite_animals is _
                     {print} I like favorite_animals
                     ```
-                start_code: "name is Hedy"
+                start_code: |-
+                    name {is} Hedy
+                    age {is} 15
+                    {print} name is age years old
             14:
                 start_code: |-
                     age = {ask} 'How old are you?'
@@ -543,7 +554,13 @@ adventures:
                     _
                     {print} You get a flavors {at} {random} milkshake
                     ```
-                start_code: ""
+                start_code: |-
+                    animals {is} dog, cat, kangaroo
+                    like {is} {ask} What is your favorite animal?
+                    {add} like {to_list} animals
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
     sleep_command:
         name: "sleep"
         description: "introducing sleep command"
@@ -559,7 +576,10 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-                start_code: ""
+                start_code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
     if_command:
         name: "if else"
         description: "Introducing the if command"
@@ -593,15 +613,16 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
-                start_code: ""
+                start_code: |-
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
+                    {else} {print} 'boo!'
             8:
                 start_code: |
-                    ```
                     name {is} {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
-                    ```
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
@@ -634,7 +655,6 @@ adventures:
                     {if} favorite_color {in} pretty_colors {print} 'pretty!'
                     {else} {print} 'meh'
                     ```
-
                 story_text_2: |
                     ### Exercise
                     Finish the example code by filling in the blanks with commands that you've learned.
@@ -646,7 +666,11 @@ adventures:
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
-                start_code: ""
+                start_code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
     quotation_marks:
         name: "'quotation marks'"
         description: "Introduction quotation marks"
@@ -676,7 +700,10 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-                start_code: ""
+                start_code: |-
+                    {print} 'You need to use quotation marks from now on!'
+                    answer {is} {ask} 'What do we need to use from now on?'
+                    {print} 'We need to use ' answer
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -711,7 +738,10 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                start_code: ""
+                start_code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name = 'Hedy the Robot'
+                        {print} 'Hi there!'
     repeat_command:
         name: "Repeat"
         description: "repeat command"
@@ -796,7 +826,10 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
-                start_code: ""
+                start_code: |-
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
             8:
                 story_text: |
                     ### In the block or not?
@@ -814,7 +847,11 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-                start_code: ""
+                start_code: |-
+                    {repeat} 3 {times}
+                        {print} This line will be repeated...
+                        {print} This one too...
+                    {print} but this one wont!
     for_command:
         name: "for"
         description: "for command"
@@ -957,7 +994,16 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
                     ```
-                start_code: ""
+                start_code: |-
+                    prices = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_price = prices[{random}]
+                    {print} 'You win ' your_price
+                    {if} your_price == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_price == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
+                    {else}:
+                        {print} 'Better luck next time..'
 
     story:
         name: "Story"
