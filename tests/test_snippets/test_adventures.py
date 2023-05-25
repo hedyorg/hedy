@@ -13,7 +13,7 @@ from website.yaml_file import YamlFile
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-filtered_language = 'en'
+filtered_language = None
 level = None
 
 
