@@ -6,45 +6,35 @@ adventures:
         levels:
             1:
                 story_text: "På Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden selv med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
-                example_code: "```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
                 story_text_2: "Du kan også spørre etter inndata med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
-                story_text_3: "La oss begynne! Er du ikke sikker på hva du vil lage? I de andre fanene finner du ideer til programmer å bygge.\n"
                 example_code_2: "```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
                 start_code: '{print} hallo verden!'
             2:
                 story_text: "På nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
                 example_code: "```\nnavn {is} Hedy\nalder {is} 15\n{print} navn is alder år gammel\n```\n"
                 story_text_2: "`{print}` fungerer fortsatt som før, men `{ask}` kommandoen har endret seg. Fra nå må du bruke en variabel når du bruker `{ask}` kommandoen. Det ser slik ut:\n"
-                example_code_2: "```\nsvar {is} {ask} Hva heter du?\n{print} Hallo svar\n```\n"
                 story_text_3: "Enda en ny kommando på dette nivået er `{sleep}`. Denne kommandoen setter programmet ditt på pause i et sekund. Hvis du skriver et tall bak {sleep} kommandoen, vil programmet settes på pause i så mange sekunder.\n"
-                example_code_3: "```\n{print} Min favorittfarge er...\n{sleep} 2\n{print} grønn!\n```\n"
                 start_code: '{print} hallo verden!'
             3:
                 story_text: "På nivå 3 kan du lage lister. Du kan la datamaskinen velge noe tilfeldig fra listen, du gjør det med `{at} {random}`.\n"
-                example_code: "\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
                 story_text_2: Du kan også legge til ting i listen med `{add}` og fjerne ting fra listen med `{remove}`.
-                example_code_2: "\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
                 start_code: '{print} hallo verden!'
             4:
                 start_code: "{print} 'Hallo verden'"
                 story_text: "På nivå 4 har `{ask}` og`{print}` blitt endret.\n\nDu må fra nå av legge tekst du vil skrive ut mellom fnutter.\n\nDette er nyttig, fordi nå kan du skrive ut alle ordene du vil. Også de ordene du har brukt til å lagre noe med `{is}`.\n\nDe fleste programmeringsspråk bruker også fnutter når de skriver ut ting, så vi går altså enda et steg nærmere ekte programmering!\n"
                 example_code: "```\n{print} 'Du må bruke fnutter fra nå av!'\nsvar {is} {ask} 'Hva må vi bruke fra nå av?'\n{print} 'Vi må bruke' svar\n```\n"
-                story_text_2: "Eventyrene blir mer og mer vanskelig nå i de rosa fanene.\nSå det er lurest å starte til venstre med Fortellingen, og jobbe seg mot høyre. På denne måten får du mer og mer utfordring for hvert eventyr.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
                 story_text: "På nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
                 example_code: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'wow!' {else} {print} 'fysj!'\n```\n"
-                story_text_3: "Hvis vi skal sjekke om noe er i en liste så kan vi nå bruke `{in}` kommandoen.\nDenne koden skriver ut 'Vakkert!' hvis du velger grønn eller gul, og 'meh' hvis du skriver noe annet.\n"
                 example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
                 example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
 
             6:
                 start_code: "{print} '5 ganger 5 er ' 5 * 5"
                 story_text: "På dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt anederledes, fordi det ikke er et gangesymbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 ganger 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
                 example_code: "```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 ganger 5 er ' 5 * 5\n```\n"
-                story_text_2: "Vi skal også gjøre en liten endring i hvordan vi lagrer et ord i en variabel! Du kan nå bruke `=` istedenfor `{is}` når du lagrer en tekst eller et tall i en variabel, slik:\n"
                 example_code_2: "```\nnavn = Hedy\nsvar = 4 + 20\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy er morro!'"
@@ -65,18 +55,13 @@ adventures:
             11:
                 start_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
                 story_text: "`{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.\nPrøv det ut og se hva som skjer! Husk å ha innrykk på linjen etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)\n"
-                example_code: "```\n{for} teller {in} {range} 1 {to} 5\n    {print} teller\n```\n"
             12:
                 start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
                 story_text: "**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
                 example_code: "```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All tekst må være inni fnutter**\nFra dette nivået må du nå ha fnutter rundt tekst som du lagrer ved hjelp av `=`:\n"
                 example_code_2: "```\nnavn = 'Roboten Hedy'\n{print} 'Hallo ' navn\n```\n"
-                story_text_3: "**All tekst i lister krever nå fnutter også**\nTekst i lister er også tekst, de må også ha fnutter rundt seg. Med dette mener vi at hver element i listen krever fnutter.\nDette lar deg lagre to ord som et element i listen, for eksempel 'Iron Man'.\n"
                 example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All tekst etter `{if}` sammenligninger krever også fnutter nå**\n"
                 example_code_4: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn= 'Roboten Hedy'\n    {print} 'Hei hei!'\n```\n"
-                story_text_5: "**Tall trenger ikke fnutter**\nNår du lagrer tall med `=` trenger du ikke å bruke fnutter:\n"
                 example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
             13:
                 start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
@@ -86,9 +71,7 @@ adventures:
                 start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
                 story_text: "Vi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `hvis`, for eksempel slik:\n"
                 example_code: "```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'Du er eldre enn meg!'\n```\n"
-                story_text_2: "Fra dette nivået, hvis du vil sjekke om to ting er like, kan du nå bruke to er-lik tegn. Dette er måten å sjekke om ting er lik i de fleste programmeringsspråk:\n"
                 example_code_2: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn == 'Hedy'\n    {print} 'Du er kul!'\n```\n"
-                story_text_3: "Du kan også sjekke om ting *ikke* er lik noe annet ved å bruke `!=`, for eksempel slik:\n"
                 example_code_3: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn != 'Hedy'\n    {print} 'Du er ikke Hedy!'\n```\n"
             15:
                 start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
@@ -101,15 +84,11 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
                 story_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
                 story_text: "Vi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
                 example_code: "```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
     story:
         name: Fortelling
         levels:
@@ -120,7 +99,7 @@ adventures:
             4:
                 start_code: "{print} 'Fortellingen din vil bli skrevet her!'"
                 story_text: "Du kan ha lagt merke til at det fremdeles er et problem med forrige nivå. Prøvde du å skrive ut en settning som inneholdt ordet navn?\nDu kan fikse det på dette nivået. Du må bruke hermetegn rundt alt som du vil skrive ut.\n"
-                example_code: "```\nnavn {is} Ola\n{print} 'Navnet på hovedpersonen er' navn\n{print} navn 'skal nå gå en tur i skogen'\n{print} navn 'er litt redd'\ndyrene {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'Han hører lyden av en' dyrene {at} {random}\n{print} navn 'er redd for at det spøker i skogen'\n```\n"
+                example_code: "```\nnavn {is} Ola\n{print} 'Navnet på hovedpersonen er' navn\n{print} navn 'skal nå gå en tur i skogen'\n{print} navn 'er litt redd'\ndyrene {is} 🦔, 🐿, 🦉, 🦇\n{print} 'Han hører lyden av en' dyrene {at} {random}\n{print} navn 'er redd for at det spøker i skogen'\n```\n"
             1:
                 story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
                 example_code: "\n```\n{ask} Hovedpersonen i fortellingen er\n{print} Hovedpersonen skal nå på tur i skogen\n{echo} Han er litt redd,\n{print} Han hører skumle lyder overalt\n{print} Han er redd dette er en forhekset skog\n```\n"
@@ -145,7 +124,7 @@ adventures:
                 start_code: '# skriv koden din her'
             8:
                 story_text: "På dette nivået kan du bruke flere linjer i din {if} kommando. På denne måten kan du oppgradere din lykkelige eller triste slutt!\n"
-                example_code: "```\n{print} 'Å NEI! T-rexen haler innpå!'\nslutt = {ask} 'Vil du ha en lykkelig eller en trist slutt?'\n{if} slutt {is} lykkelig\n    {print} 'Akkurat i tide hopper Rolf tilbake i tidsmaskinen!'\n    {print} 'Mikal skriver inn koden og...'\n    {print} '\U0001F4A5PANG!\U0001F4A5'\n    {print} 'De er tilbake i garasjen sin'\n{else}\n    {print} 'Mikal roper KOM IGJEN ROLF! LØP RASKERE!'\n    {print} 'Men Rolf løper for sakte...'\n    {print} 'T-rexen haler innpå og spiser ham i ett stort jafs!\U0001F996'\n```\n"
+                example_code: "```\n{print} 'Å NEI! T-rexen haler innpå!'\nslutt = {ask} 'Vil du ha en lykkelig eller en trist slutt?'\n{if} slutt {is} lykkelig\n    {print} 'Akkurat i tide hopper Rolf tilbake i tidsmaskinen!'\n    {print} 'Mikal skriver inn koden og...'\n    {print} '💥PANG!💥'\n    {print} 'De er tilbake i garasjen sin'\n{else}\n    {print} 'Mikal roper KOM IGJEN ROLF! LØP RASKERE!'\n    {print} 'Men Rolf løper for sakte...'\n    {print} 'T-rexen haler innpå og spiser ham i ett stort jafs!🦖'\n```\n"
                 start_code: '# skriv koden din her'
             7:
                 story_text: "I en fortelling sier noen ord flere ganger. For eksempel når noen roper etter hjelp eller synger en sang.\nDu kan putte inn slike repetisjoner i historien din på dette nivået med `{repeat}`.\n"
@@ -153,9 +132,9 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Hjelp!'"
             3:
                 story_text: "På nivå 3 kan du gjøre historien din enda mer gøy. Du kan bruke tilfeldighet for å velge et hvilket som helst monster, dyr eller hindring slik:\n"
-                example_code: "```\ndyrene {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Han hører nå lyden av en dyrene {at} {random}\n```\n"
+                example_code: "```\ndyrene {is} 🦔, 🐿, 🦉, 🦇\n{print} Han hører nå lyden av en dyrene {at} {random}\n```\n"
                 story_text_2: "Kommandoen `{add}` kan også være nyttig i historien din.\n"
-                example_code_2: "```\n{print} Han hører en lyd\ndyrene {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\ndyret {is} {ask} Hva tror du det er?\n{add} dyret {to_list} dyrene\n{print} det var en dyrene {at} {random}\n```\n"
+                example_code_2: "```\n{print} Han hører en lyd\ndyrene {is} 🐿, 🦔, 🦇, 🦉\ndyret {is} {ask} Hva tror du det er?\n{add} dyret {to_list} dyrene\n{print} det var en dyrene {at} {random}\n```\n"
                 story_text_3: "Dette er et eksempel på `{remove}` kommandoen i historien din\n"
                 example_code_3: "```\n{print} Ryggsekken hans ble alt for tung.\n{print} Inni den var en vannflaske, en lommelykt og en murstein.\nryggsek {is} vannflaske, lommelykt, murstein\ndump {is} {ask} Hvilken ting skal han legge igjen?\n{remove} dump {from} ryggsekk\n```\n"
                 start_code: '{print} Fortellingen din'
@@ -254,7 +233,6 @@ adventures:
                 story_text: "På dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
                 example_code: "```\nvalg {is} _\n{print} Jeg velger valg\n```\n"
                 start_code: '# skriv koden din her'
-                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             15:
                 story_text: "Spill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
                 example_code: "```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = valgene {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
@@ -291,7 +269,6 @@ adventures:
                 example_code_2: "```\ntabellene = 4, 5, 6, 8\ntallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabell = tabellene {at} {random}\ntall = tallene {at} {random}\nriktig_svar = tabell * tall\nditt_svar = {ask} 'hvor mye er ' tabell ' ganget med ' tall '?'\n{if} ditt_svar {is} riktig_svar {print} 'riktig'\n{else} {print} 'feil! det var ' riktig_svar\n```\n"
                 start_code: "{print} 'Velkommen til denne kalkulatoren!'"
                 story_text_3: "You can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             15:
                 story_text: "Du kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.\nDette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.\n"
                 example_code: "```\npoengsum = 0\n{for} i {in} {range} 0 {to} 9\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    ditt_svar = 0\n    {while} ditt_svar != riktig_svar\n        {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        ditt_svar = {ask} 'Skriv inn ditt svar:'\n        {print} 'Ditt svar er ' ditt_svar\n    {print} 'Godt jobbet!'\n{print} 'Du vant!'\n```\n"
@@ -320,7 +297,7 @@ adventures:
                 start_code: '# skriv koden din her'
             1:
                 story_text: " På nivå 1 kan du lage din egne virtuelle restaurant og ta imot dine gjesters bestillinger.\n"
-                example_code: "  ```\n {print} Velkommen til Hedys restaurant \U0001F35F\n {ask} Hva har du lyst å bestille?\n {echo} Så du vil bestille\n {print} Takk for din bestilling!\n {print} Den er på vei!\n ```\n"
+                example_code: "  ```\n {print} Velkommen til Hedys restaurant 🍟\n {ask} Hva har du lyst å bestille?\n {echo} Så du vil bestille\n {print} Takk for din bestilling!\n {print} Den er på vei!\n ```\n"
                 story_text_2: "Kan du tenke deg flere linjer du kan legge til restaurantens kode? For eksempe, kan du spørre gjestene hva de har lyst å drikke, fortelle de prisen eller å ønske de et godt måltid?\n"
                 start_code: '# skriv koden din her'
             12:
@@ -349,13 +326,11 @@ adventures:
             6:
                 story_text: "På dette nivået kan du bruke matte til å regne ut totalprisen på kundens bestilling. Dette vil gjøre den virtuelle restauranten mer realistisk.\n"
                 example_code: "Enkel\nDu kan lage koden for en enkel restaurant slik:\n```\n{print} 'Velkommen til Hedys restaurant'\n{print} 'Her er vår meny:'\n{print} 'Våre hovedretter er pizza, lasagne og spaghetti'\nhovedrett = {ask} 'Hvilken hovedrett vil du ha?'\npris = 0\n{if} hovedrett {is} pizza pris = 100\n{if} hovedrett {is} lasagne pris = 120\n{if} hovedrett {is} spaghetti pris = 80\n{print} 'Du har bestilt ' hovedrett\n{print} 'Det blir ' pris ' kroner, takk'\n{print} 'Takk, vel bekomme!'\n```\n"
-                story_text_2: "Men du kan også legge til mange flere ting i din virtuelle restaurant, for eksempel flere retter.\n\nDu kan legge til mange flere ting til din virtuelle restaurant. For eksempel kan du...\n- spørre hvor mange som kommer og gange prisen med antallet?\n- legge til flere retter?\n- gi gjestene rabatter dersom de oppgir en hemmeling rabattkode?\n- legge til en barnemeny?\n- tenk på andre ting du kan legge til?\n"
                 example_code_2: "Forseggjort\nI dette eksempelet er det tre retter, noe som krever mer kode og mer regning når man beregner prisen.\n```\n{print} 'Velkommen til Hedys restaurant'\n{print} 'Her er vår meny:'\n{print} 'Forrettene våre er salat, suppe og fiskepinner'\n{print} 'Til hovedrett har vi pizza, lasagne og spaghetti'\n{print} 'På dessertmenyen finner vi brownie, iskrem og milkshake'\nforrett = {ask} 'Hvilken forrett vil du ha?'\nhovedrett = {ask} 'Hvilken hovedrett ønsker du?'\ndessert = {ask} 'Hva har du lyst på til dessert?'\npris = 0\n{if} forrett {is} suppe pris = pris + 60 {else} pris = pris + 70\n{if} hovedrett {is} pizza pris = pris + 100\n{if} hovedrett {is} lasagne pris = pris + 120\n{if} hovedrett {is} spaghetti pris = pris + 80\n{if} dessert {is} brownie pris = pris + 70\n{if} dessert {is} iskrem pris = pris + 50\n{if} dessert {is} milkshake pris = pris + 40\n{print} 'Du har bestilt ' forrett ' , ' hovedrett ' og ' dessert\n{print} 'Det blir ' pris ' kroner, takk'\n{print} 'Takk, vel bekomme!'\n```\n"
                 start_code: '# skriv koden din her'
             5:
                 story_text: "På dette nivået lar `{if}`-kommandoen deg å spørre kunder spørsmål og gi forskjellige ting til svar.\nI eksempelet under kan du se at du kan spørre kunden om de har lyst å høre om dagens rett og Hedy kan svare deretter.\n"
                 example_code: "```\n{print} 'Velkommen til Hedys restaurant!'\nvil_høre {is} {ask} 'Vil du høre om dagens rett?'\n{if} vil_høre {is} ja {print} 'Dagens rett er kylling piri piri med ris.' {else} {print} 'Ikke noe problem.'\nmatønske {is} {ask} 'Hva har du lyst å spise?'\n{print} 'en ' matønske ' er på vei!'\ndrikke {is} {ask} 'Hva har du lyst å drikke til?'\n{if} drikke {is} cola {print} 'Beklager, vi er tom for cola!' {else} {print} 'Godt valg!'\nannet {is} {ask} 'Vil du ha noe annet?'\n{print} 'La meg lese opp bestillingen...'\n{print} 'En ' matønske\n{if} drikke {is} cola {print} 'og...' {else} {print} 'En ' drikke\n{if} annet {is} nei {print} 'Det var det!' {else} {print} 'En ' annet\n{print} 'Takk for bestillingen og vel bekomme!'\n```\n"
-                story_text_2: "Kan du komme på flere spørsmål du kan spørre kundene når de bestiller, og finne svar du kan gi til de ved hjelp av `{if}`-kommandoen?\n"
                 start_code: '# skriv koden din her'
             4:
                 story_text: "På dette nivået må du bruke fnutter når du bruker `{print}`-kommandoen.\nKan du gjøre sånn at koden fra forrige nivå også fungerer ved å legge til fnutter?\n\nVær forsiktig! I forrige nivå var fnutter lov i tekst, men på dette nivået vil det forvirre Hedy om du har fnutter i teksten din.\nSå istedenfor å skrive `{print} I dag serverer vi pizza`, må du nå skrive `{print} 'I dag serverer vi pizza'`\n"
@@ -367,7 +342,6 @@ adventures:
                 story_text_2: "Har dine gjester noen allergier eller noen retter de ikke liker? Da kan du bruke `{remove}`-kommandoen til å fjerne ting fra menyen.\n"
                 example_code_2: "```\n{print} Mysteriemilkshake\nsmaker {is} jordbær, sjokolader, vanilje\nallergier {is} {ask} Er du allergisk til en av smakene?\n{remove} allergier {from} smaker\n{print} Du vil få en flavors {at} {random} milkshake\n```\n"
                 start_code: '# skriv koden din her'
-                story_text_3: "**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: "Med `{while}` kan du sørge for at kundene dine kan fortsette å bestille til de er ferdig.\n"
@@ -383,10 +357,8 @@ adventures:
     fortune:
         levels:
             10:
-                story_text_2: We can also make a Harry Potter themed fortune teller.
                 story_text: "In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.\n"
                 example_code: "```\nhouses = mansion, apartment, shack, house\nloves = nobody, a royal, their neighbour, their true love\npets = dog, cat, elephant\nnames = Jenna, Ryan, Jim\n{for} name {in} names\n    {print} name ' lives in a ' houses {at} {random}\n    {print} name ' will marry ' loves {at} {random}\n    {print} name ' will get a ' pets {at} {random} ' as their pet.'\n    {sleep}\n```\n"
-                example_code_2: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name in names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
                 start_code: '# skriv koden din her'
             1:
                 story_text: "Have you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?\nThen you probably know that they can't really predict your future, but it's still fun to play!\n\nIn the upcoming levels you can learn how to create your own fortune telling machine!\nIn level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.\nLike this:\n"
@@ -404,7 +376,6 @@ adventures:
             7:
                 story_text: "In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.\n"
                 example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'You can {ask} 3 questions!'\n{repeat} 3 {times} question = {ask} 'What do you want to know?'\nanswer = yes, no, maybe\n{repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}\n```\n"
-                story_text_2: "### Exercise\nAs you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.\nEvery time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.\nThis means you can't print all the questions this way.\n\nBy using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.\nThis does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.\nCan you do it?\n\nIn the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.\n"
                 start_code: '# skriv koden din her'
             6:
                 story_text: "In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.\nFor example you could calculate how rich you'll get or how many kids you will have when you grow up.\n"
@@ -412,10 +383,8 @@ adventures:
                 start_code: '# skriv koden din her'
             5:
                 story_text: "In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
-                example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
-                story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
+                example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'\n```\n"
                 example_code_2: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n"
-                story_text_3: "### Exercises\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
                 start_code: '# skriv koden din her'
             4:
                 story_text: "This level has no new functions, but allows you to practice with using the quotation marks.\nYou can remake your level 3 code, and make sure to add the quotation marks in the right places!\n\nMind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.\nThe quotation marks in level 3 make this possible!\n\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to Im or Whats.\n"
@@ -446,7 +415,7 @@ adventures:
                 start_code: '{print} Hvordan kom jeg meg her?'
             2:
                 story_text: "In this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
-                example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code: "```\nmonster_1 {is} 👻\nmonster_2 {is} 🤡\nmonster_3 {is} 👶\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
                 start_code: monster1 {is} _
                 story_text_2: "### Exercise\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
@@ -468,11 +437,8 @@ adventures:
                 start_code: '# skriv koden din her'
             3:
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                story_text_2: "### Exercise\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# skriv koden din her'
-                story_text_3: "Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: Spøkelseshus
         description: flykt fra det forheksede huset
         default_save_name: Spøkelseshus
@@ -505,18 +471,17 @@ adventures:
                 example_code: "```\n{print} Jeg er papegøyen Hedy\nnavn {is} {ask} hva er ditt navn?\n{print} navn\n{sleep}\n{print} skrik!\n{sleep}\n{print} navn\n```\n"
                 start_code: '{print} Jeg er papegøyen Hedy!'
                 story_text_2: "### Exercise\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "Lær papegøyen din et nytt ord med `{add}`.\n"
-                example_code: "```\nordene {is} skrik, Hedy\n{print} Lær din papegøye!\nnytt_ord {is} {ask} Hvilket nytt ord vil du lære den?\n{add} nytt_ord {to_list} ordene\n{print} \U0001F9D2 Si nytt_ord , Hedy!\n{print} \U0001F99C ordene {at} {random}\n```\n"
+                example_code: "```\nordene {is} skrik, Hedy\n{print} Lær din papegøye!\nnytt_ord {is} {ask} Hvilket nytt ord vil du lære den?\n{add} nytt_ord {to_list} ordene\n{print} 🧒 Si nytt_ord , Hedy!\n{print} 🦜 ordene {at} {random}\n```\n"
                 start_code: '# skriv koden din her'
             5:
                 story_text: "Belønn papegøyen din om det sier det riktige ordet!\n"
-                example_code: "```\nordene {is} skrik, Hedy\n{print} 'Tren papegøyen din!'\nnytt_ord {is} {ask} 'Hvilket nytt ord vil du lære den?'\n{add} nytt_ord {to_list} ordene\nuttalt_ord {is} ordene {at} {random}\n{print} '\U0001F9D2 Si ' nytt_ord ', Hedy!'\n{print} '\U0001F99C ' uttalt_ord\n{if} uttalt_ord {is} nytt_ord {print} '\U0001F9D2 Godt jobbet, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Nei, Hedy! Si ' nytt_ord\n```\n"
+                example_code: "```\nordene {is} skrik, Hedy\n{print} 'Tren papegøyen din!'\nnytt_ord {is} {ask} 'Hvilket nytt ord vil du lære den?'\n{add} nytt_ord {to_list} ordene\nuttalt_ord {is} ordene {at} {random}\n{print} '🧒 Si ' nytt_ord ', Hedy!'\n{print} '🦜 ' uttalt_ord\n{if} uttalt_ord {is} nytt_ord {print} '🧒 Godt jobbet, Hedy! 🍪'\n{else} {print} '🧒 Nei, Hedy! Si ' nytt_ord\n```\n"
                 start_code: '# skriv koden din her'
             4:
                 story_text: "In this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
                 start_code: '# Write your code here'
     songs:
         name: Syng en sang!
@@ -646,7 +611,7 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
             5:
                 story_text: "Make your own program to practice your vocabulary in a new language.\n"
-                example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
+                example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '🐱'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '🐸'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
                 start_code: '# skriv koden din her'
     secret:
         name: SuperSpion
@@ -712,7 +677,7 @@ adventures:
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
                 story_text_2: "You can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
                 story_text: "In this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
-                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus 😭'\n```\n"
             9:
                 story_text: "Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.\n\n### Exercise\nFinish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.\n**(extra)** Clear the screen after each letter, and show the user how many points they have scored.\n"
                 example_code: "```\npoints = 0\nletters = a, b, c, d, e\n{repeat} 10 {times}\n    letter = _ _ _\n    {print} 'Press the letter ' letter\n    {if} letter {is} {pressed}\n    _\n    _\n    _\n```\n"

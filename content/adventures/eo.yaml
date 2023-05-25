@@ -16,7 +16,7 @@ adventures:
             8:
                 start_code: '# via kodo ĉi tie'
                 story_text: "En ĉi tiu nivelo, vi povas uzi plurajn liniojn en viaj `{if}`-komandoj; tiel, vi povas plibonigi vian ĝojan aŭ malĝojan finon!\n"
-                example_code: "```\n{print} 'HO NE! La tiranosaŭro alproksimiĝas!'\nfino = {ask} 'Ĉu vi volas ĝojan aŭ malĝojan finon?'\n{if} fino {is} ĝoja\n    {print} 'Ĝustatempe Rikardo resaltas en la tempomaŝinon!'\n    {print} 'Miĥaelo tajpas la kodon kaj…'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'Ili estas reen en sia garaĝo'\n{else}\n    {print} 'Miĥaelo krias: «VENU RIKARDO! KURU PLI RAPIDE!»'\n    {print} 'Sed Rikardo estas tro malrapida…'\n    {print} 'La tiranosaŭro proksimiĝas kaj manĝas lin per unu mordego!\U0001F996'\n```\n"
+                example_code: "```\n{print} 'HO NE! La tiranosaŭro alproksimiĝas!'\nfino = {ask} 'Ĉu vi volas ĝojan aŭ malĝojan finon?'\n{if} fino {is} ĝoja\n    {print} 'Ĝustatempe Rikardo resaltas en la tempomaŝinon!'\n    {print} 'Miĥaelo tajpas la kodon kaj…'\n    {print} '💥ZAP!💥'\n    {print} 'Ili estas reen en sia garaĝo'\n{else}\n    {print} 'Miĥaelo krias: «VENU RIKARDO! KURU PLI RAPIDE!»'\n    {print} 'Sed Rikardo estas tro malrapida…'\n    {print} 'La tiranosaŭro proksimiĝas kaj manĝas lin per unu mordego!🦖'\n```\n"
             9:
                 start_code: '# via kodo ĉi tie'
                 story_text: "En ĉi tiu nivelo vi povas uzi nestadon por meti {if}, {repeat} aŭ {for} komandojn en aliajn {if}, {repeat} aŭ {for}. Ĉi tio donas al vi multajn eblojn kaj vere helpas vin fari vian rakonton interaga.\n"
@@ -36,15 +36,15 @@ adventures:
                 story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             3:
                 story_text: "En Nivelo 3, oni povas igi sian rakonton pli amuza. Oni povas uzi hazardecon por iu ajn monstro, besto aŭ alia obstaklo, jene:\n"
-                example_code: "```\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Li nun aŭdas la sonon de bestoj {at} {random}\n```\n"
+                example_code: "```\nbestoj {is} 🦔, 🐿, 🦉, 🦇\n{print} Li nun aŭdas la sonon de bestoj {at} {random}\n```\n"
                 story_text_2: "La komando `{add}` ankaŭ povas esti utila en via rakonto.\n"
-                example_code_2: "```\n{print} Li aŭdas sonon\nbestoj {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nbesto {is} {ask} Kio estas ĝi laŭ via opinio?\n{add} besto {to_list} bestoj\n{print} ĝi estis bestoj {at} {random}\n```\n"
+                example_code_2: "```\n{print} Li aŭdas sonon\nbestoj {is} 🐿, 🦔, 🦇, 🦉\nbesto {is} {ask} Kio estas ĝi laŭ via opinio?\n{add} besto {to_list} bestoj\n{print} ĝi estis bestoj {at} {random}\n```\n"
                 story_text_3: "Jen ekzemplo de la komando `{remove}` en via rakonto\n"
                 example_code_3: "```\n{print} Lia tornistro fariĝis tro peza.\n{print} Ene estis botelo da akvo, lanterno kaj briko.\nsako {is} akvo, lanterno, briko\nforĵetoto {is} {ask} Kiun li forĵetu?\n{remove} forĵetoto {from} sako\n```\n"
                 start_code: '{print} Via rakonto'
             4:
                 story_text: "Vi eble rimarkis, ke ankoraŭ ekzistas problemo en la antaŭaj niveloj. Ĉu vi provis presi frazon, kiu enhavis la vorton nomon?\nVi povas solvi tion en ĉi tiu nivelo. Vi devas uzi citilojn por ĉio, kion vi presigos.\n"
-                example_code: "```\nnomo {is} Hanso\n{print} 'La nomo de la ĉefrolulo estas' nomo\n{print} nomo 'nun promenas en la arbaro'\n{print} nomo 'estas iom timigita'\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'Li aŭdas la sonon de' bestoj {at} {random}\n{print} nomo 'timas, ke ĉi tiu arbaro estas hantita'\n```\n"
+                example_code: "```\nnomo {is} Hanso\n{print} 'La nomo de la ĉefrolulo estas' nomo\n{print} nomo 'nun promenas en la arbaro'\n{print} nomo 'estas iom timigita'\nbestoj {is} 🦔, 🐿, 🦉, 🦇\n{print} 'Li aŭdas la sonon de' bestoj {at} {random}\n{print} nomo 'timas, ke ĉi tiu arbaro estas hantita'\n```\n"
                 start_code: "{print} 'Via rakonto ĉi tie!'"
             5:
                 story_text: "En ĉi tiu nivelo vi povas programi malsamajn finaĵojn, kiuj faros vian rakonton eĉ pli amuza.\n\nPensu pri du finaĵoj por via rakonto, ekzemple:\n\n- La princino promenas tra la arbaro\n- Ŝi renkontas monstron\n\n- Feliĉa fino: Ŝi prenas sian glavon kaj la monstro rapide forkuras\n- Malbona Fino: La monstro manĝas la princinon\n\nVi ankaŭ povas certigi, ke nomo povas esti enigita denove. Tio funkcias same kiel en la antaŭaj niveloj. Vi povas kombini tion per `{if}`, kaj tiam vi jam faris tutan programon!\n"
@@ -204,7 +204,6 @@ adventures:
                 story_text: "En ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
                 example_code: "```\nelekto {is} _\n{print} Mi elektas elekto\n```\n"
                 start_code: '# via kodo ĉi tie'
-                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             3:
                 story_text: "\nEn ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.\nVi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.\nEkzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.\n"
                 example_code: "```\nelektoj {is} roko, papero, tondilo\n{print} elektoj {at} {random}\n```\n"
@@ -248,7 +247,6 @@ adventures:
                 example_code_2: "```\ntabeloj = 4, 5, 6, 8\nnombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabelo = tabeloj {at} {random}\nnombro = nombroj {at} {random}\nĝusta_respondo = tabelo * nombro\nrespondo = {ask} 'Kiom estas ' tabelo ' multiplikite per ' nombro '?'\n{if} respondo {is} ĝusta_respondo {print} 'Bone!'\n{else} {print} 'Malĝuste! La ĝusta respondo estas ' ĝusta_respondo\n```\n"
                 start_code: "{print} 'Bonvenon al kalkulilo!'"
                 story_text_3: "You can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             9:
                 story_text: "En antaŭaj niveloj, vi lernis kiel verki kalkulilon. En ĉi tiu nivelo, vi povas apliki tiun kodon por verki matematikan ludeton jene…\n"
                 example_code: "```\npoentaro = 0\n{repeat} 10 {times}\n    nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombro1 = nombroj {at} {random}\n    nombro2 = nombroj {at} {random}\n    ĝusta_respondo = nombro1 * nombro2\n    {print} 'Kiom estas ' nombro1 ' multiplikite per ' nombro2 '?'\n    respondo = {ask} 'Tajpu vian respondon ĉi tie…'\n    {print} 'Jen via respondo:' respondo\n    {if} respondo {is} ĝusta_respondo\n        poentaro = poentaro + 1\n{print} 'Bonege! Jen via poentaro: ' poentaro '/10!'\n```\n"
@@ -282,7 +280,7 @@ adventures:
         levels:
             1:
                 story_text: " En Nivelo 1, vi povas krei vian propran virtualan restoracion kaj preni la mendojn de viaj gastoj.\n"
-                example_code: "```\n{print} Bonvenon al Restoracio Hedy \U0001F35F\n{ask} Kion vi volas mendi?\n{echo} Do vi volas mendi\n{print} Dankon pro via mendo!\n{print} Ĝi estas kuirata!\n```\n"
+                example_code: "```\n{print} Bonvenon al Restoracio Hedy 🍟\n{ask} Kion vi volas mendi?\n{echo} Do vi volas mendi\n{print} Dankon pro via mendo!\n{print} Ĝi estas kuirata!\n```\n"
                 story_text_2: "### Exercise\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
                 start_code: '# via kodo ĉi tie'
             2:
@@ -296,7 +294,6 @@ adventures:
                 story_text_2: "Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_2: "```\n{print} Mistera laktotrinkaĵo\ningrediencoj {is} frago, ĉokolado, vanilo\nalergio {is} {ask} Ĉu vi estas alergia al iu ingredienco?\n{remove} alergio {from} ingrediencoj\n{print} Vi ricevas laktotrinkaĵon kun ingrediencoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
-                story_text_3: "**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: "En ĉi tiu nivelo, oni devas uzi citilojn kiam oni uzas la komandon `{print}`.\nĈu vi povas igi vian kodon de la antaŭaj niveloj funkcii ankaŭ en ĉi tiu nivelo aldonante la citilojn?\n\nAtentu! En la antaŭaj niveloj apostrofoj estis permesitaj en la teksto, sed en ĉi tiu nivelo Hedy konfuzos ilin por citiloj kaj la kodo ne funkcios!\nDo anstataŭ tajpi `{print} Today we're serving pizza` , oni tajpu `{print} 'Today we are serving pizza'`\n"
@@ -305,12 +302,10 @@ adventures:
             5:
                 story_text: "In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.\nIn the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.\n"
                 example_code: "```\n{print} 'Bonvenon al Restoracio Hedy!'\nspecial {is} {ask} 'Would you like to hear our specials today?'\n{if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'\nmanĝaĵo {is} {ask} 'What would you like to eat?'\n{print} 'Unu ' manĝaĵo ', coming right up!'\ntrinkaĵo {is} {ask} 'What would you like to drink with that?'\n{if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'\nanything {is} {ask} 'Would you like anything {else}?'\n{print} 'Mi ripetos vian mendon…'\n{print} 'Unu ' manĝaĵo\n{if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo\n{if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything\n{print} 'Dankon pro via mendo. Ĝuu vian manĝon!'\n```\n"
-                story_text_2: "### Exercise\nCan you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?\n"
                 start_code: '# via kodo ĉi tie'
             6:
                 story_text: "In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.\n"
                 example_code: "\nVi povas verki simplan kodon por restoracio, jene:\n```\n{print} 'Bonvenon al restoracio Hedy'\n{print} 'Jen nia menuo:'\n{print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'\nĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'\nprezo = 0\n{if} ĉefplado {is} pico prezo = 10\n{if} ĉefplado {is} lasanjoj prezo = 12\n{if} ĉefplado {is} spagetoj prezo = 8\n{print} 'Vi mendis ' ĉefplado 'n'\n{print} 'La prezo estas ' prezo ' spesmiloj'\n{print} 'Dankon, ĝuu vian manĝon!'\n```\n"
-                story_text_2: "But you can also add many more things to your virtual restaurant, for example more courses.\n\n### Exercise\nYou can add many more things to your virtual restaurant. For example, can you...\n- {ask} how many people are coming and multiply the price by that amount?\n- add another course?\n- give people a discount when they enter a (secret) couponcode?\n- add a children's menu?\n- think of other fun things to add?\n"
                 example_code_2: "\nEn ĉi tiu ekzemplo estas tri pladoj, kiuj postulas pli da kodo kaj pli da sumado por kalkuli la prezon.\n```\n{print} 'Bonvenon al Restoracio Hedy'\n{print} 'Jen nia menuo:'\n{print} 'Jen niaj entreoj: salato, supo aŭ krudaĵo'\n{print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'\n{print} 'Jen niaj desertoj: kuko, glaciaĵo aŭ laktofrago'\nentreo = {ask} 'Kiun entreon vi deziras?'\nĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'\ndeserto = {ask} 'Kiun deserton vi deziras?'\nprezo = 0\n{if} entreo {is} supo prezo = prezo + 6 {else} prezo = prezo + 7\n{if} ĉefplado {is} pico prezo = prezo + 10\n{if} ĉefplado {is} lasanjoj prezo = prezo + 12\n{if} ĉefplado {is} spagetoj prezo = prezo + 8\n{if} deserto {is} kuko prezo = prezo + 7\n{if} deserto {is} glaciaĵo prezo = prezo + 5\n{if} deserto {is} laktofrago prezo = prezo + 4\n{print} 'Vi mendis ' starter 'n , ' ĉefplado 'n kaj ' deserto 'n'\n{print} 'La totalo estas ' prezo ' spesmiloj'\n{print} 'Dankon, ĝuu vian manĝon!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             7:
@@ -353,15 +348,13 @@ adventures:
             2:
                 start_code: monstro1 {is} _
                 story_text: "En ĉi tiu hantata domo, vi povas montri viajn monstrojn per vinjetosignoj. Kompreneble vi ankaŭ povas uzi vortojn.\n"
-                example_code: "```\nmonstro_1 {is} \U0001F47B\nmonstro_2 {is} \U0001F921\nmonstro_3 {is} \U0001F476\n{print} Vi eniras la hantatan domon.\n{print} Subite vi vidas monstro_1\n{print} Vi kuras en la alian ĉambron, sed monstro_2 atendas vin tie!\n{print} Ho ne! Rapidu al la kuirejo.\n{print} Sed dum vi eniras monstro_3 atakas vin!\n```\n"
+                example_code: "```\nmonstro_1 {is} 👻\nmonstro_2 {is} 🤡\nmonstro_3 {is} 👶\n{print} Vi eniras la hantatan domon.\n{print} Subite vi vidas monstro_1\n{print} Vi kuras en la alian ĉambron, sed monstro_2 atendas vin tie!\n{print} Ho ne! Rapidu al la kuirejo.\n{print} Sed dum vi eniras monstro_3 atakas vin!\n```\n"
                 story_text_2: "### Exercise\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 start_code: '# via kodo ĉi tie'
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                story_text_2: "Ĉi tiu rakonto estas sufiĉe simpla; eble vi povas iom timigi ĝin aldonante pli ekscitan rakonton.\nAnkaŭ vi havas tre limigitajn rezultojn nun, ekzistas nur 3 ebloj de kio estas malantaŭ la pordoj. Eble vi povas pensi pri pli da monstroj por aldoni al la listo!\n\nFinfine, ni ŝatus defii vin ŝanĝi ĉi tiun ludon en ludspektaklon (kiel tiuj en televido) kie vi elektas pordon aŭ valizon kaj ĝi enhavas grandan prezon!\nĈu vi povas fari ĝin?\n"
                 story_text_3: "Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
                 example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 start_code: '# via kodo ĉi tie'
@@ -399,7 +392,7 @@ adventures:
         levels:
             5:
                 story_text: "Faru vian propran programon por ekzerci vian vortprovizon en nova lingvo.\n"
-                example_code: "```\n{print} 'Lernu la francan!'\nkato {is} {ask} '\U0001F431'\n{if} kato {is} chat {print} 'Bonege!'\n{else} {print} 'Ne, kato estas chat'\nrano {is} {ask} '\U0001F438'\n{if} rano {is} grenouille {print} 'Bonege!'\n{else} {print} 'Ne, rano estas grenouille'\n```\n"
+                example_code: "```\n{print} 'Lernu la francan!'\nkato {is} {ask} '🐱'\n{if} kato {is} chat {print} 'Bonege!'\n{else} {print} 'Ne, kato estas chat'\nrano {is} {ask} '🐸'\n{if} rano {is} grenouille {print} 'Bonege!'\n{else} {print} 'Ne, rano estas grenouille'\n```\n"
                 start_code: '# via kodo ĉi tie'
             16:
                 story_text: "Faru vian propran programon por ekzerci vian vortprovizon en nova lingvo.\n"
@@ -436,45 +429,35 @@ adventures:
         levels:
             1:
                 story_text: "En Nivelo 1 vi povas uzi la komandojn `{print}`, `{ask}` kaj `{echo}`.\nTajpu vian kodon en la programan kampon. Aŭ premu la verdan butonon en la ekzempla kodbloko, kaj la kodo tajpiĝos por vi!\nProvu mem la kodon per la verda butono «Ruli kodon» sub la programa kampo.\n\nVi povas presi tekston al la ekrano per la komando `{print}`.\n"
-                example_code: "```\n{print} Saluton!\n{print} Bonvenon al Hedy!\n```\n"
                 story_text_2: "Vi ankaŭ povas peti enigon per `{ask}` kaj ripeti ĝin per la komando `{echo}`.\n"
-                story_text_3: "Ni komencu! Ĉu vi ne povas decidi kion krei? En la sekvaj langetoj, vi trovos ideojn pri kreindaj programoj.\n"
                 example_code_2: "```\n{ask} Kio estas via nomo?\n{echo} saluton\n```\n"
                 start_code: '{print} saluton mondo!'
             2:
                 story_text: "En Nivelo 2, ni lernas du novajn komandojn: `{is}` kaj `{sleep}`.\nVi povas nomi vorton per `{is}`. Tia nomo nomiĝas variablo. En ĉi tiu ekzemplo, ni faris variablon nomitan `nomo` kaj variablon nomitan `aĝo`. Vi povas uzi la vorton `nomo` ie ajn en via kodo, kaj ĝi estos anstataŭigita per Hedy, jene:\n\nTiel vi ne plu bezonas la komandon `{echo}`!\n"
                 example_code: "```\nnomo {is} Hedy\naĝo {is} 15\n{print} nomo estas aĝo jarojn aĝa\n```\n"
                 story_text_2: "`{print}` ankoraŭ funkcias same, sed la komando `{ask}` ŝanĝiĝis. Vi devas uzi variablon ankaŭ en la komando `{ask}`. Ĝi aspektas jene:\n"
-                example_code_2: "```\nrespondo {is} {ask} Kio estas via nomo?\n{print} Saluton respondo\n```\n"
                 story_text_3: "Alia nova komando en ĉi tiu nivelo estas `{sleep}`, kiu paŭzigas vian programon dum sekundo. Se vi tajpas nombron antaŭ la komando {sleep}, la programo paŭzas dum tiom da sekundoj.\n"
-                example_code_3: "```\n{print} Mia plej ŝatata koloro estas...\n{sleep} 2\n{print} verda!\n```\n"
                 start_code: '{print} saluton mondo!'
             3:
                 story_text: "En Nivelo 3, oni povas fari liston. Oni povas lasi la komputilon elekti hazardaĵon el la listo. Oni faras tion per `{at} {random}`.\n"
-                example_code: "```\nbestoj {is} hundo, kato, kanguruo\n{print} bestoj {at} {random}\n```\n"
                 story_text_2: Oni ankaŭ povas aldoni erojn al la listo per `{add}` kaj forigi erojn per `{remove}`.
-                example_code_2: "```\nbestoj {is} hundo, kato, kanguruo\n{add} pingveno {to_list} bestoj\n{remove} kato {from} bestoj\n{print} bestoj {at} {random}\n```\n"
                 start_code: '{print} saluton mondo!'
             4:
                 start_code: "{print} 'Saluton, mondo'"
                 story_text: "En Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
                 example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
-                story_text_2: "La aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
                 story_text: "En Nivelo 5 estas io nova, la `{if}`! Per la `{if}`, oni povas elekti inter du malsamaj opcioj.\nLa jena kodo presos «bone», se vi tajpos «Hedy» kiel nomon, kaj «ba!», se vi tajpos ion alian.\n`{ask}` kaj `{print}` daŭre funkcias kiel en Nivelo 4.\n"
                 example_code: "```\nnomo {is} {ask} 'kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone' {else} {print} 'ba!'\n```\n"
-                story_text_3: "Kiam oni volas kontroli, ĉu io estas en listo, oni nun povas uzi la komandon `{in}`.\nLa jena kodo presas «bela!», se oni elektas «verda» aŭ «flava», kaj «ba!» alie.\n"
                 example_code_3: "```\nbelaj_koloroj {is} verda, flava\nŝatata_koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} ŝatata_koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
-                story_text_2: "Kelkfoje kodo kun `{if}` estas tro longa por unu linio.<br>Oni ankaŭ povas dividi la kodon inter du linioj, komencante la duan linion ĉe la `{else}` jene:\n"
                 example_code_2: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone'\n{else} {print} 'ba!'\n```\n"
 
             6:
                 start_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
                 story_text: " En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.\n\n La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.\n\n La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!\n Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.\n"
                 example_code: "```\n{print} '5 plus 5 estas ' 5 + 5\n{print} '5 minus 5 estas ' 5 - 5\n{print} '5 multiplikite per 5 estas ' 5 * 5\n```\n"
-                story_text_2: "Ni ankaŭ faras ŝanĝon pri konservado de vorto en variablo! Oni nun povas uzi `=` anstataŭ `{is}` por konservi nomon aŭ nombron en variablo, jene:\n"
                 example_code_2: "```\nnomo = Hedy\nrespondo = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy estas amuza!'"
@@ -495,18 +478,13 @@ adventures:
             11:
                 start_code: "{for} nombro {in} {range} 1 {to} 5\n    {print} nombro"
                 story_text: "`{print}` funkcias same, sed ni ebligis novan formon de `{for}`. Oni nun povas uzi `{for} numero {in} {range} 1 {to} 5` kaj uzi `numero` en via programo.\nProvu ĝin por vidi kio okazos! Ne forgesu deŝovon post la deklaroj `{for}` kaj `{if}`. (Tio signifas komenci linion per kvar spacoj.)"
-                example_code: "```\n{for} nombro {in} {range} 1 {to} 5\n    {print} nombro\n```\n"
             12:
                 start_code: "{print} 'Decimalaj nombroj nun postulas punkton (ne komon)'\n{print} 2.5 + 2.5"
                 story_text: "**Decimalaj frakcioj**\nĜis nun, Hedy ne permesis decimalajn frakciojn kiel «1.5», sed nun ĝi ja permesas tiujn. Notu, ke komputiloj uzas la punkton `.` (ne la komon `,`) por decimalaj frakcioj."
                 example_code: "```\n{print} 'Du kaj duono plus du kaj duono estas…'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**Ĉiu teksto devas esti inter citiloj**\nPor ĉi tiu nivelo, oni ankaŭ devas uzi citilojn por konservi tekston per `=`:\n"
                 example_code_2: "```\nnomo = 'Hedy la Roboto'\n{print} 'Saluton ' nomo\n```\n"
-                story_text_3: "**Ĉiuj eroj en listoj ankaŭ bezonas citilojn**\nListoj estas tekstoj; tial, ankaŭ ili bezonas citilojn. Atentu, ke ĉiu unuopa ero en listo havas citilojn.\nTio ebligas al vi konservi du vortojn kiel 1 eron en la listo, ekzemple «Fera Viro».\n"
                 example_code_3: "```\nsuperherooj = 'Araneviro', 'Vespertviro', 'Fera Viro'\n{print} superherooj {at} {random}\n```\n"
-                story_text_4: "**Ĉiu teksto post `{if}`-komparoj ankaŭ bezonas citilojn**\n"
                 example_code_4: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo = 'Hedy la Roboto'\n    {print} 'Saluton!'\n```\n"
-                story_text_5: "**Nombroj ne bezonas citilojn**\nPor nombroj, vi ne uzas citilojn en la `=`:\n"
                 example_code_5: "```\npoentaro = 25\n{print} 'Via poentaro estas ' poentaro\n```\n"
             13:
                 start_code: "nomo = {ask} 'Kio estas via nomo?'\naĝo = {ask} 'Kio estas via aĝo?'\n{if} nomo {is} 'Hedy' {and} aĝo {is} 2\n    {print} 'Vi estas la vera Hedy!'"
@@ -516,9 +494,7 @@ adventures:
                 start_code: "aĝo = {ask} 'Kia estas via aĝo?'\n{if} aĝo < 13\n    {print} 'Vi estas malpli aĝa ol mi!'\n{else}\n    {print} 'Vi estas pli aĝa ol mi!'"
                 story_text: "Ni lernos pli da novaj sintaksaĵoj. Vi eble jam konas ilin pro matematiko: la `<` kaj `>`.\nLa `<` kontrolas, ĉu la unua nombro estas pli malgranda ol la dua: ekzemple `aĝo < 12` kontrolas, ĉu `aĝo` estas pli malgranda ol `12`.\nSe vi volas kontroli, ĉu la unua nombro estas pli malgranda aŭ egala al la dua, vi povas uzi `<=`: ekzemple, `aĝo <= 11`.\nLa `>` kontrolas, ĉu la unua nombro estas pli granda ol la dua: ekzemple, `poentaro > 10` kontrolas, ĉu `poentaro` estas pli granda ol `10`.\nSe oni volas kontroli, ĉu la unua nombro estas pli granda aŭ egala al la dua, oni povas uzi `>=`: ekzemple, `poentaro >= 11`.\nOni uzas tiujn komparojn en `{if}` jene:\n"
                 example_code: "```\naĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo > 12\n    {print} 'Vi estas pli aĝa ol mi!'\n```\n"
-                story_text_2: "Ekde ĉi tiu nivelo, se oni volas precize kompari, oni povas uzi du egalsignojn, simile al multaj programlingvoj:\n"
                 example_code_2: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo == 'Hedy'\n    {print} 'Bonege!'\n```\n"
-                story_text_3: "Oni ankaŭ povas kontroli, ĉu io *ne* egalas ion alian, uzante `!=` jene:\n"
                 example_code_3: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo != 'Hedy'\n    {print} 'vi ne estas Hedy'\n```\n"
             15:
                 start_code: "respondo = 0\n{while} respondo != 25\n    respondo = {ask} 'Kio estas 5 multiplikite per 5?'\n{print} 'Jen ĝusta respondo'"
@@ -531,15 +507,11 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Jen mi venas!'"
                 story_text: "Nun ni iom ŝanĝos la regulojn pri la deŝovo. Ĉiufoje kiam oni bezonas deŝovon, oni uzu dupunkton `:` ĉe la fino de la linio antaŭ la deŝovo.\n\nEn ĉi tiu nivelo, oni povas ankaŭ uzi novan komandon: `{elif}`. `{elif}` estas mallongigo de `{else} {if}`, kaj oni bezonas ĝin kiam oni volas havi 3 (aŭ pli da) opciojn.\nJen:"
-                example_code: "```\nprezoj = ['1 million dollars', 'an apple pie', 'nothing']\nvia_prezo = prezoj[{random}]\n{print} 'You win ' via_prezo\n{if} via_prezo == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} via_prezo == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
                 story_text: "Ni alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun."
-                example_code: "```\n{print}('Saluton!')\n{for} i {in} {range}(1, 10):\n    {print}('Jen linio n-ro ', i)\n```\n"
                 story_text_2: Se oni volas presi pli ol unu eron, oni devas apartigi ilin per komoj.
-                example_code_2: "```\ntemperaturo = 25\n{print}('Nun estas ', temperature, ' gradoj ekstere')\n```\n"
                 story_text_3: "La fina ŝanĝo, kiun ni devos fari por havi Python-kodon, estas ŝanĝi `{ask}` al `{input}`."
-                example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
     parrot:
         name: Papago
         description: Kreu vian propran Interretan dorlotpapagon, kiu kopios vin!
@@ -556,19 +528,18 @@ adventures:
                 example_code: "```\n{print} Mi estas Hedy la papago\nnomo {is} {ask} kio estas via nomo?\n{print} nomo\n{sleep}\n{print} grak\n{sleep}\n{print} nomo\n```\n"
                 start_code: '{print} Mi estas Hedy la papago!'
                 story_text_2: "### Exercise\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "Instruu al via papago novan vorton per `{add}`.\n"
-                example_code: "```\nvortoj {is} grak, Hedy\n{print} Trejnu vian papagon!\nnova_vorto {is} {ask} Kiun vorton instrui?\n{add} nova_vorto {to_list} vortoj\n{print} \U0001F9D2 Diru nova_vorto , Hedy!\n{print} \U0001F99C vortoj {at} {random}\n```\n"
+                example_code: "```\nvortoj {is} grak, Hedy\n{print} Trejnu vian papagon!\nnova_vorto {is} {ask} Kiun vorton instrui?\n{add} nova_vorto {to_list} vortoj\n{print} 🧒 Diru nova_vorto , Hedy!\n{print} 🦜 vortoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
             5:
                 story_text: "Rekompencu vian papagon, se ĝi diras la ĝustan vorton!\n"
-                example_code: "```\nvortoj {is} grak, Hedy\n{print} 'Trejnu vian papagon!'\nnova_vorto {is} {ask} 'Kiun vorton instrui?'\n{add} nova_vorto {to_list} vortoj\ndirita_vorto {is} vortoj {at} {random}\n{print} '\U0001F9D2 Diru «' nova_vorto '», Hedy!'\n{print} '\U0001F99C ' dirita_vorto\n{if} dirita_vorto {is} nova_vorto {print} '\U0001F9D2 Bonege, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Ne, Hedy! Diru «' nova_vorto '»'\n```\n"
+                example_code: "```\nvortoj {is} grak, Hedy\n{print} 'Trejnu vian papagon!'\nnova_vorto {is} {ask} 'Kiun vorton instrui?'\n{add} nova_vorto {to_list} vortoj\ndirita_vorto {is} vortoj {at} {random}\n{print} '🧒 Diru «' nova_vorto '», Hedy!'\n{print} '🦜 ' dirita_vorto\n{if} dirita_vorto {is} nova_vorto {print} '🧒 Bonege, Hedy! 🍪'\n{else} {print} '🧒 Ne, Hedy! Diru «' nova_vorto '»'\n```\n"
                 start_code: '# via kodo ĉi tie'
             4:
                 start_code: '# Write your code here'
                 story_text: "In this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
     dice:
         name: Ĵetkuboj
         description: Fari viajn proprajn ĵetkubojn
@@ -625,10 +596,8 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             5:
                 story_text: "In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
-                example_code: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'Mi povas aŭguri, ĉu vi gajnos la loterion morgaŭ!'\nhomo {is} {ask} 'Kiu vi estas?'\n{if} homo {is} Hedy {print} 'Vi certe gajnos!\U0001F929' {else} {print} 'Misfortune, aliulo gajnos!\U0001F62D'\n```\n"
-                story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
+                example_code: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'Mi povas aŭguri, ĉu vi gajnos la loterion morgaŭ!'\nhomo {is} {ask} 'Kiu vi estas?'\n{if} homo {is} Hedy {print} 'Vi certe gajnos!🤩' {else} {print} 'Misfortune, aliulo gajnos!😭'\n```\n"
                 example_code_2: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Kiu vi estas?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n"
-                story_text_3: "### Exercises\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
                 start_code: '# via kodo ĉi tie'
             6:
                 story_text: "In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.\nFor example you could calculate how rich you'll get or how many kids you will have when you grow up.\n"
@@ -637,7 +606,6 @@ adventures:
             7:
                 story_text: "En ĉi tiu nivelo, oni povas uzi la komandon `{repeat}` por igi vian komputilon aŭguri plurfoje.\n"
                 example_code: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'Vi povas demandi tri fojojn!'\n{repeat} 3 {times} demando = {ask} 'Kion vi volas ekscii?'\nrespondo = jes, ne, eble\n{repeat} 3 {times} {print} 'Laŭ mia kristala globo… ' respondo {at} {random}\n```\n"
-                story_text_2: "Kiel vi povas vidi, la demandoj ne estas presitaj en ĉi tiu ekzemplo. Tio estas ĉar la variablo `demando` estis ŝanĝita 3 fojojn.\nĈiufoje kiam la ludanto plenigas la novan respondon, Hedy anstataŭigas la antaŭan, do la unua respondo kiun la ludanto donis estas forgesita.\nĈi tio signifas, ke vi ne povas presi ĉiujn demandojn tiamaniere.\n\nUzante 3 malsamajn variablojn anstataŭ 1 (ekzemple `demando_1` , `demando_2` kaj `demando_3`), vi povus solvi la problemon kaj presi la demandojn.\nĈi tio ja signifas, ke vi povas uzi nur `{repeat}` por la respondoj, kaj vi devos demandi kaj presi ĉiujn demandojn aparte.\nĈu vi povas fari ĝin?\n\nEn la venontaj niveloj la aranĝo de {repeat} komando ŝanĝiĝos, kio ebligas al vi ripeti plurajn liniojn samtempe.\n"
                 start_code: '# via kodo ĉi tie'
             8:
                 story_text: "In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.\nNow that problem is solved, because of the new way of using the repeat command.\nIn the next example you can have your fortune teller {ask} 3 questions and also print them!\n"
@@ -646,7 +614,6 @@ adventures:
             10:
                 story_text: "En ĉi tiu nivelo, vi lernos kiel programi la ludon MASH (domego, apartamento, barako, domo). En ĉi tiu ludo vi povas aŭguri por ĉiuj ludantoj samtempe, kiel aspektos iliaj estontecoj.\n"
                 example_code: "```\ndomoj = domego, apartamento, barako, domo\namoj = neniu, reĝo, najbaro, vera amanto\ndorlotbestoj = hundo, kato, elefanto\nnomoj = Johanino, Rikardo, Jakobo\n{for} nomo {in} nomoj\n    {print} nomo ' loĝos en ' domoj {at} {random}\n    {print} nomo ' edz(in)iĝos kun ' amoj {at} {random}\n    {print} nomo ' ricevos ' dorlotbestoj {at} {random} 'n kiel sian dorlotbeston.'\n    {sleep}\n```\n"
-                story_text_2: Oni ankaŭ povas verki aŭguriston kun etoso de Harry Potter.
                 example_code_2: "```\ndomoj = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nstudfakoj = pocioj, defendo kontraŭ la mallumaj artoj, ĉarmoj, aliformiĝo\ntimoj = Voldemort, araneoj, malsukcesante vian OWL-teston\nnomoj = Harry, Ron, Hermione\n{for} nomo en nomoj\n    {print} nomo ' estas metita en ' domojn {at} {random}\n    {print} nomo ' estas bonega ĉe ' studfakoj {at} {random}\n    {print} nomo 'la plej granda timo estas ' timoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
             12:
@@ -780,7 +747,7 @@ adventures:
         levels:
             5:
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus 😭'\n```\n"
                 story_text: "In this level there is another new keyword: `{pressed}`!\nWith `{pressed}` you can use keys on your keyboard to control what lines are used.\n\n### Exercise\nLook at the example and add one more line of code that reacts to a key press.\n"
                 start_code: '# place your code here'
                 story_text_2: "You can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"

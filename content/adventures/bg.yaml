@@ -20,9 +20,7 @@ adventures:
                     Добре. Имаш ли вече идея какво да програмираш? Ако още не, то в табовете отгоре ще откриеш някои готови идеи.
 
                 start_code: "print Ето те и теб, очаквах те!"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
@@ -33,12 +31,7 @@ adventures:
                 start_code: "print здравей свят!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "**Внимание!** Запитването с командата `ask` се променя в това ниво, така че отговорът се записва в име, например."
-                example_code_2: |-
-                    ```
-                    отговорът is ask Как се казваш?
-                    ```
                 story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
             3:
                 story_text: |
                     Във второ ниво ще можеш да съставиш списък с думи и програмата сама ще може да изпечата произволна дума от твоя списък.
@@ -47,13 +40,7 @@ adventures:
                     Всички програмни кодове от ниво 3 са изписани в лявата колона със сините бутони, а с табовете горе се задействат новите задачи.
                     Хайде, успех!
                 start_code: "print здравей свят!"
-                example_code: |-
-                    ```
-                    животни is куче, котка, кенгуру
-                    print животни at random
-                    ```
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: "print 'Ура! Вече си в трето ниво!'"
                 story_text: |
@@ -69,7 +56,6 @@ adventures:
                     Командите от примерите в лявата колона ще ти помагат. Табовете по-горе съдържат нови задания, които се усложняват в посока все по-надясно.
                     Затова ги ползвай един по един, отляво надясно.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "The adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
             5:
                 start_code: |-
@@ -91,9 +77,7 @@ adventures:
                     име is ask 'Как се казва този език за програмиране?'
                     if име is Хеди print 'позна' else print 'не позна'
                     ```
-                story_text_3: "When we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: |-
                     ```
                     име is ask 'Как се казва този език за програмиране?'
@@ -116,7 +100,6 @@ adventures:
                     print '5 минус 5 е равно на ' 5 - 5
                     print '5 пъти по 5 е равно на ' 5 * 5
                     ```
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
             7:
                 start_code: "repeat 3 times print 'Да пишеш код на Хеди е забавно!'"
@@ -143,7 +126,6 @@ adventures:
             11:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
                 story_text: '`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)'
-                example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
                     {print} 'decimal numbers now need to use a dot'
@@ -156,34 +138,22 @@ adventures:
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
                     ```
-                story_text_2: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
                 example_code_2: |
                     ```
                     name = 'Hedy the Robot'
                     {print} 'Hello ' name
                     ```
-                story_text_3: |
-                    **All items in lists need quotation marks too**
-                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
                 example_code_3: |
                     ```
                     superheroes = 'Spiderman', 'Batman', 'Iron Man'
                     {print} superheroes {at} {random}
                     ```
-                story_text_4: |
-                    **All text after `{if}` comparisons need quotation marks too**
                 example_code_4: |
                     ```
                     name = {ask} 'What is your name?'
                     {if} name = 'Hedy the Robot'
                         {print} 'Hi there!'
                     ```
-                story_text_5: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
                 example_code_5: |
                     ```
                     score = 25
@@ -225,16 +195,12 @@ adventures:
                     {if} age > 12
                         {print} 'You are older than I am!'
                     ```
-                story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
                 example_code_2: |
                     ```
                     name = {ask} 'What is your name?'
                     {if} name == 'Hedy'
                         {print} 'You are cool!'
                     ```
-                story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
                 example_code_3: |
                     ```
                     name = {ask} 'What is your name?'
@@ -253,7 +219,7 @@ adventures:
 
                     In the example code, we continue until a correct answer has been given.
                     If the correct answer is never given, the loop never ends!
-                example_code: |4
+                example_code: |2
 
                     ```
                     answer = 0
@@ -268,7 +234,7 @@ adventures:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
-                example_code: |4
+                example_code: |2
 
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
@@ -287,19 +253,6 @@ adventures:
 
                     In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
-                example_code: |4
-
-                    ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-                    ```
             18:
                 start_code: |-
                     naam = 'Hedy'
@@ -307,30 +260,11 @@ adventures:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
-                example_code: |4
-
-                    ```
-                    {print}('my name is Hedy!')
-                    ```
-
                 story_text_2: |-
                     If you want to print more than one item, you need to separate them by commas.
 
-                example_code_2: |
-                    ```
-                    temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
-                    ```
-
                 story_text_3: |-
                     The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
-
-                example_code_3: |
-                    ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
-                    ```
 
     story:
         name: "История"
@@ -366,7 +300,7 @@ adventures:
 
                     За тази цел ти ще напишеш малко повече код. Ха!
 
-                example_code: |4
+                example_code: |2
 
                     ```
                     name is ask Как се нарича главаната героиня?
@@ -391,7 +325,7 @@ adventures:
 
                 start_code: "repeat 5 times print 'Помо-о-о-щ!'"
             5:
-                story_text: |
+                story_text: |2
 
                     В четвърто ниво ще направиш историята си дори по-цветиста и забавна!
                     Тук ще прибавиш различни възможни завършеци, за да има изненадващ край.
@@ -438,7 +372,7 @@ adventures:
                     ```
                 start_code: "print 'Твоята история ще се появи тук!'"
             3:
-                story_text: |4
+                story_text: |2
 
                     Към историята, която пишеш можеш да добавиш нещо произволно и неочаквано, примерно чудовище, животно или някаква пречка.
 
@@ -455,7 +389,7 @@ adventures:
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
-                example_code_3: |4
+                example_code_3: |2
 
 
                     ```
@@ -484,7 +418,7 @@ adventures:
                 story_text: "In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 start_code: '# place your code here'
             8:
-                example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
+                example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '💥ZAP!💥'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!🦖'\n```\n"
                 story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
                 start_code: '# place your code here'
             15:
@@ -510,7 +444,7 @@ adventures:
                 story_text: |
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -536,7 +470,7 @@ adventures:
                     Baby Shark
 
                     You can make this song much shorter with a `{repeat}`! Can you finish the code?
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -549,7 +483,7 @@ adventures:
             8:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -625,7 +559,7 @@ adventures:
             12:
                 story_text: |
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -712,7 +646,7 @@ adventures:
                     Ползвай 90 градуса, за да завиеш 1/4 (една четвърт). Едно пълно завъртане е равно на 360 градуса.
                     Представи си как би могла да "нарисуваш" фигура от свързани линии с програмиране? Може би триъгълник? Кръг?
 
-                example_code: |4
+                example_code: |2
 
                     ```
                     print "Рисуване на фигура"
@@ -805,14 +739,14 @@ adventures:
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             3:
-                story_text: |4
+                story_text: |2
 
 
                     Докато рисуваш костенурката можеш да добавиш и командата `random`. С нея костенурката ще поеме в произволна посока всеки път.
                     Ползвай `at random` в комбинация с променлива с повече стойности, не само една.
                     Ползвай примера отдолу и увеличи листа с още стойности, освен 10, 50, 90, 150, 250.
 
-                example_code: |4
+                example_code: |2
 
                     ```
                     ъгли is 10, 50, 90, 150, 250
@@ -874,7 +808,7 @@ adventures:
                 story_text_2: "If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             5:
-                story_text: |
+                story_text: |2
 
                     С командата `if` ще създадем възможност за повече избор в програмата ни.
                     Можеш да програмираш реакция на системата по определен избор.
@@ -892,7 +826,7 @@ adventures:
 
                 start_code: "print 'Кой мие чиниите?'"
             4:
-                story_text: |
+                story_text: |2
 
                     Сега ползвай кавички, за да подобриш графика на миячите на чинии.
                     Този път в кода има пропуски, отбелязани с черта за подчертаване '_'.
@@ -938,11 +872,10 @@ adventures:
                 story_text: "Create your own online pet parrot that will copy you!\n"
                 example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
                 start_code: '{print} Im Hedy the parrot!'
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
                 story_text_2: "### Exercise\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
             5:
                 story_text: "Reward your parrot {if} it says the correct word!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '🧒 Say ' new_word ', Hedy!'\n{print} '🦜 ' said_word\n{if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'\n{else} {print} '🧒 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
             1:
                 story_text: "Create your own online pet parrot that will copy you!\n"
@@ -951,13 +884,13 @@ adventures:
                 story_text_2: "### Exercise\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             3:
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} 🧒 Say new_word , Hedy!\n{print} 🦜 words {at} {random}\n```\n"
                 story_text: "Teach your parrot a new word with `{add}`.\n"
                 start_code: '# place your code here'
             4:
                 start_code: '# Write your code here'
                 story_text: "In this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
         name: Parrot
         description: Create your own online pet parrot that will copy you!
         default_save_name: Parrot
@@ -1021,7 +954,6 @@ adventures:
                 story_text: "In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
                 example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
                 start_code: '# place your code here'
-                story_text_2: "### Exercise\nCopy the example code to your input screen by clicking the yellow button.\nFinish the code by filling in the right commands on the blanks.\n"
             13:
                 story_text: "With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
                 example_code: "```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
@@ -1064,7 +996,6 @@ adventures:
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
                 example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
                 story_text_3: "You can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             10:
                 story_text: "This calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
                 example_code: "```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
@@ -1089,7 +1020,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -1153,7 +1084,6 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: "# place your code here"
-                story_text_3: "**Extra** Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
             4:
                 story_text: |
@@ -1196,9 +1126,6 @@ adventures:
                     {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
                     {print} 'Thank you for your order and enjoy your meal!'
                     ```
-                story_text_2: |
-                    Can you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?
-
                 start_code: "# place your code here"
             6:
                 story_text: |
@@ -1220,15 +1147,6 @@ adventures:
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
-                story_text_2: |
-                    But you can also add many more things to your virtual restaurant, for example more courses.
-
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - {ask} how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
                 example_code_2: |
                     (Elaborate)
                     In this example there are three courses, which requires more code and more additions in calculating the price.
@@ -1288,7 +1206,7 @@ adventures:
                     In this level you can use nesting to make your restaurant more realistic and more fun!
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1316,7 +1234,7 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1325,7 +1243,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |4
+                story_text_2: |2
 
 
                     Of course, you could also order for multiple people!
@@ -1342,7 +1260,7 @@ adventures:
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1364,7 +1282,7 @@ adventures:
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1387,7 +1305,7 @@ adventures:
                     In this level we can use the new commands to upgrade our restaurant.
                     We use `{and}` to see {if} two things are both the case.
 
-                example_code: |4
+                example_code: |2
 
                     ```
                     price = 10
@@ -1403,7 +1321,7 @@ adventures:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1441,7 +1359,6 @@ adventures:
             10:
                 story_text: "In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.\n"
                 example_code: "```\nhouses = mansion, apartment, shack, house\nloves = nobody, a royal, their neighbour, their true love\npets = dog, cat, elephant\nnames = Jenna, Ryan, Jim\n{for} name {in} names\n    {print} name ' lives in a ' houses {at} {random}\n    {print} name ' will marry ' loves {at} {random}\n    {print} name ' will get a ' pets {at} {random} ' as their pet.'\n    {sleep}\n```\n"
-                story_text_2: We can also make a Harry Potter themed fortune teller.
                 example_code_2: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name in names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
                 start_code: '# place your code here'
             8:
@@ -1452,14 +1369,11 @@ adventures:
                 example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'You can {ask} 3 questions!'\n{repeat} 3 {times} question = {ask} 'What do you want to know?'\nanswer = yes, no, maybe\n{repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}\n```\n\n### Exercise\nAs you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.\nEvery time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.\nThis means you can't print all the questions this way.\n\nBy using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.\nThis does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.\nCan you do it?\n\nIn the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.\n"
                 story_text: "In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.\n"
                 start_code: '# place your code here'
-                story_text_2: "### Exercise\nAs you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.\nEvery time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.\nThis means you can't print all the questions this way.\n\nBy using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.\nThis does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.\nCan you do it?\n\nIn the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.\n"
             5:
                 story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
-                example_code_2: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n\n### Exercises\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
                 story_text: "In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
-                example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
+                example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'\n```\n"
                 start_code: '# place your code here'
-                story_text_3: "### Exercises\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
             3:
                 example_code: "In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.\n```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n\n### Exercises\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
                 story_text: "In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.\nIn this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:\n"
@@ -1476,7 +1390,7 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |4
+                example_code: |2
 
 
 
@@ -1500,7 +1414,7 @@ adventures:
             2:
                 story_text: |
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-                example_code: |4
+                example_code: |2
 
                     ```
                     monster_1 {is} 👻
@@ -1520,16 +1434,8 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                story_text_2: |
-                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
-                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
-
-                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it?
                 start_code: "# place your code here"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
                 story_text_3: "Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: |
                     In this level you learn how to use quotation marks in your games.
@@ -1552,7 +1458,7 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1575,7 +1481,7 @@ adventures:
 
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1602,7 +1508,7 @@ adventures:
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1630,7 +1536,7 @@ adventures:
             14:
                 story_text: |
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1661,7 +1567,7 @@ adventures:
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
-                example_code: |4
+                example_code: |2
 
 
                     ```
@@ -1721,7 +1627,7 @@ adventures:
             5:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
-                example_code: |4
+                example_code: |2
 
                     ```
                     {print} 'Learn French!'
@@ -1737,7 +1643,7 @@ adventures:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
 
-                example_code: |4
+                example_code: |2
 
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -1816,7 +1722,7 @@ adventures:
                 story_text_2: "You can also link turtle commands to keys.\n\n### Exercise\nCopy the lines a few times so you can create a larger drawing.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
                 start_code: '# place your code here'
-                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus \U0001F62D'\n```\n"
+                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus 😭'\n```\n"
             7:
                 example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
                 start_code: '# place your code here'
