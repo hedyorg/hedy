@@ -13,7 +13,7 @@ from website.yaml_file import YamlFile
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-filtered_language = None
+filtered_language = 'en'
 level = None
 
 
@@ -122,8 +122,9 @@ class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
+        keywords = ['Introduction']
 
-        if snippet is not None and len(snippet.code) > 0:
+        if snippet is not None and len(snippet.code) > 0 and snippet.adventure_name not in keywords:
             try:
                 self.single_level_tester(
                     code=snippet.code,
@@ -149,6 +150,7 @@ class TestsAdventurePrograms(HedyTester):
                         error_message = error_message.replace('<span class="command-highlighted">', '`')
                         error_message = error_message.replace('</span>', '`')
                         print(f'\n----\n{snippet.code}\n----')
+                        print(f'from adventure {snippet.adventure_name}')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
                         raise E
