@@ -121,7 +121,7 @@ adventures:
                 story_text: "På nivå 2 kan du göra din berättelse roligare. Huvudpersonens namn kan nu stå var som helst i meningen.\n\nMen du får programmera lite extra för det. Du måste nu namnge din huvudperson först.\n\nDu kan sedan sätta det namnet var som helst i meningen.\n"
                 example_code: "```\nnamn {is} {ask} Vad heter huvudkaraktären?\n{print} namn ska nu gå en promenad i skogen\n{print} namn är lite rädd\n{print} Plötsligt hör han ett galet ljud...\n{sleep}\n{print} namn är rädd att detta är en hemsökt skog\n```"
                 start_code: '{print} Din berättelse'
-                story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
+                story_text_2: "### Övning\nDags att lägga till variabler till din egen berättelse som du skapade på föregående nivå.\nGå till \"Mina program\", leta efter ditt nivå 1-berättelseäventyr och kopiera koden. Klistra in koden på din inmatningsskärm på den här nivån.\n\nDen här koden fungerar inte på den här nivån eftersom du inte har använt variabler än.\nÄndra `{ask}`-kommandona och `{echo}`-kommandona i din kod till rätt form som du har lärt dig på den här nivån.\n\n**Extra** Lägg till ett sovkommando till din kod för att bygga upp spänningen i din berättelse.\n"
             3:
                 story_text: "I nivå 3 kan du göra din berättelse lite roligare. Du kan använda slumpen för monster, djur, eller annat hinder, så här:\n"
                 example_code: "```\ndjur {is} 🦔, 🐿, 🦉, 🦇\n{print} Han hör nu ljudet av en djur {at} {random}\n```\n"
@@ -133,14 +133,14 @@ adventures:
             5:
                 start_code: "{print} 'Här börjar din berättelse!'"
                 story_text: "På den här nivån kan du programmera olika slut, vilket gör din berättelse ännu roligare.\nI exempelkoden kan du se hur du skapar två olika slut.\n\n### Övning 1\nSkriv en ny berättelse på minst sex kodrader om ett ämne som du själv väljer.\nIngen inspiration? Välj ett av dessa ämnen: en superhjälte, en tråkig skoldag, strandad på en öde ö.\n\nGe nu spelaren möjlighet att välja ett lyckligt eller dåligt slut, precis som i exempelkoden.\nProgrammera båda sluten.\n\n### Övning 2\nKopiera den berättelse som du har skapat i ditt eget berättelseäventyr i de tidigare nivåerna.\nHitta ett sätt att lägga till minst två kommandon `{if}` och `{else}` i din berättelse.\nDetta kan vara med ett lyckligt eller dåligt slut, men du kan också försöka hitta andra sätt att få med kommandona.\n"
-                example_code: "```\nnamn {is} {ask} 'Vem går genom skogen?'\n{print} namn 'går igenom skogen'\n{print} namn 'stöter på ett monster'\nslutet {is} {ask} 'Vill du ha ett bra eller ett dåligt slut?'\n{if} slutet {is} bra {print} namn 'tar upp sitt svärd och monstret springer bort'\n{else} {print} 'Monstret åt upp' namn\n```\n"
+                example_code: "```\nnamn {is} {ask} 'Vem går genom skogen?'\n{print} namn ' går genom skogen'\n{print} namn ' stöter på ett monster'\nslutet {is} {ask} 'Vill du ha ett lyckligt eller olyckligt slut?'\n{if} slutet {is} lyckligt {print} namn ' tar sitt svärd och monstret springer bort'\n{else} {print} 'Monstret äter upp ' namn\n```\n"
             7:
                 example_code: "```\n{print} 'Prinsen fortsatte ropa på hjälp'\n{repeat} 5 {times} {print} 'Hjälp!'\n{print} 'Varför hjälper ingen mig?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Hjälp!'"
                 story_text: "I en berättelse säger någon samma ord flera gånger. Till exempel när någon ropar på hjälp eller sjunger en sång.\nDu kan lägga in sådana upprepningar i din berättelse, på den här nivån med `{repeat}`.\n\n### Övning\nLägg till upprepningar i din egen berättelse. Gå tillbaka till dina sparade program, välj ditt berättelseprogram från nivå 6 och\nhitta en rad som innehåller `{print}` och upprepa den!\n"
             9:
                 story_text: "På den här nivån kan du använda kommandona `{if}` och `{repeat}` inuti andra `{if}`- och `{repeat}`-kommandon.\nDetta ger dig många möjligheter och hjälper dig verkligen att göra din berättelse interaktiv.\n\n### Övning 1\nGör klart koden så att `{if}` fungerar korrekt.\n\n### Övning 2\nLägg till en `{if}` och `{else}` för den del av berättelsen där Robin också åker hem.\n\n### Övning 3\nGå tillbaka till din berättelse på nivå 8 och använd minst två `{if}` inom ett annat `{if}`.\n"
-                example_code: "```\n{print} 'Robyn promenerar ned för kvarteret'\nplats = {ask} 'Går Robyn till en affär eller går hon hem?'\n{if} plats {is} affär\n    {print} 'Hon går in i affären'\n    {print} 'Robyn ser en intressant bok'\n    bok = {ask} 'Köper Robyn boken?'\n    {if} bok {is} ja\n        {print} 'Robyn köper boken och går sedan hem'\n    {else}\n        {print} 'Robyn lämnar affären och går hem'\n{else}\n    {print} 'Robyn går hem'\n```\n"
+                example_code: "```\n{print} 'Robyn promenerar i stan'\nplats = {ask} 'Går Robyn till en affär eller går hon hem?'\n{if} plats {is} affär\n    {print} 'Hon går in i affären'\n    {print} 'Robyn ser en bok som ser spännande ut'\n    bok = {ask} 'Köper Robyn boken?'\n    {if} bok {is} ja\n        {print} 'Robyn köper boken och går hem'\n    {else}\n        {print} 'Robyn lämnar affären och går hem'\n{else}\n    {print} 'Robyn går hem'\n```\n"
                 start_code: '# placera din kod här'
             13:
                 start_code: '# placera din kod här'
@@ -163,30 +163,30 @@ adventures:
                 example_code: "```\nnamn = 'Drottningen av England'\n{print} namn ' åt en tårtbit, när plötsligt...'\n```\n"
                 start_code: '# placera din kod här'
             15:
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
                 story_text: "Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
-                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
+                example_code: "```\nnycklar = 'förlorade'\n{print} 'Du står i din trädgård och du har tappat dina nycklar.'\n{print} 'Var vill du leta efter dem?'\n{print} 'Du kan välja: träd, rabatt, sten, postlåda'\n{while} nycklar == 'förlorade'\n    plats = {ask} 'Var vill du titta?'\n    {if} plats == 'rabatt'\n        {print} 'Här är de!'\n        nycklar = 'hittade'\n    {else}\n        {print} 'Nej, de är inte här: ' plats\n{print} 'Nu kan du gå in i huset!'\n```\n"
             18:
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# placera din kod här'
                 story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
-                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
-                example_code: "```\n{print}('Welcome to this story!')\n```\n"
-                example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
+                story_text_2: "### Övning 2\nVi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.\nLägg sedan till en andra `{ask}` och använd den variabeln också.\nTips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!\n"
+                example_code: "```\n{print}('Välkommen till den här berättelsen!')\n```\n"
+                example_code_2: "```\nnamn = {input}(\"Vad heter du?\")\n{print}('Välkommen till den här berättelsen!')\n```\n"
         name: Berättelse
         description: Berättelse
         default_save_name: Berättelse
     parrot:
         levels:
             2:
-                start_code: '{print} Im Hedy the parrot!'
+                start_code: '{print} Jag är papegojan Hedy!'
                 story_text: "Skapa din egen papegoja som härmar dig!\n"
                 example_code: "```\n{print} Jag heter papegojan Hedy\nnamn {is} {ask} vad heter du?\n{print} namn\n{sleep}\n{print} krax\n{sleep}\n{print} namn\n```\n"
                 story_text_2: "### Exercise\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
+                example_code_2: "```\n{print} Jag är papegojan Hedy\nnamn {is} {ask} vad heter du?\n{print} namn\n{sleep}\n{print} namn\nefternamn {is} {ask} vad heter du i efternamn?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "Lär din papegoja ett nytt ord med `{add}`.\n### Övning\nHur kan du få din papegoja att säga flera ord?\n"
-                start_code: '# place your code here'
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} 🧒 Say new_word , Hedy!\n{print} 🦜 words {at} {random}\n```\n"
+                start_code: '# placera din kod här'
+                example_code: "```\nord {is} skri, Hedy\n{print} Träna din papegoja!\nnytt_ord {is} {ask} Vilket ord vill du lära den?\n{add} new_word {to_list} ord\n{print} 🧒 Säg nytt_ord, Hedy!\n{print} 🦜 ord {at} {random}\n```\n"
             1:
                 example_code: "```\n{print} Jag heter papegojan Hedy\n{ask} vad heter du?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Jag är papegojan Hedy
@@ -204,30 +204,30 @@ adventures:
             5:
                 story_text: "Belöna din papegoja om den säger rätt ord!\n\n### Övning\nAvsluta koden genom att fylla i de fyra saknade kommandona.\n"
                 example_code: "```\nord {is} skri, Hedy\n{print} 'Träna din papegoja!'\nnytt_ord {is} {ask} 'Vilket ord vill du lära den?'\n{add} nytt_ord {to_list} ord\nsagt_ord {is} ord {at} {random}\n{print} '🧒 Säg ' nytt_ord', Hedy!'\n{print} '🦜' sagt_ord\n_ sagt_ord {is} nytt_ord _ '🧒 Bra jobbat, Hedy! 🍪'\n_ _ '🧒 Nej, Hedy! Säg ' nytt_ord\n```\n"
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
             4:
-                start_code: '# Write your code here'
+                start_code: '# Skriv din kod här'
                 story_text: "På den här nivån måste vi använda citattecken i kommandona `{ask}` och `{print}`.\n### Övning\nKomplettera koden genom att fylla i citattecken på de tomma platserna.\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
+                example_code: "```\nord {is} skri, Hedy\n{print} _ Träna din papegoja! _\nnytt_ord {is} {ask} _ Vilket ord vill du lära den? _\n{add} nytt_ord {to_list} ord\n{print} _ 🧒 Säg _nytt_ord _, hedy!_\n{print} _ 🦜 _ ord {at} {random}\n```\n"
         name: Papegoja
         description: Skapa din egen papegoja som härmar dig!
         default_save_name: Papegoja
     songs:
         levels:
             11:
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
                 example_code: "```\n_ monkeys _ _ 5 _ 1\n    {print} monkeys ' little monkeys jumping on the bed'\n    _\n```\n"
                 story_text: "På den här nivån kan du använda `{for}` med `{range}` för att göra sånger där du räknar, till exempel fem små apor.\n\n### Övning 1\nFyll i luckorna och få koden att fungera! Om du inte kommer ihåg sångtexten kan du slå upp den själv.\n\n### Övning 2\nSångens sista rad skiljer sig från de andra. Skriv ut den raden inuti `{for}` och använd en `{if}` för att få den att fungera korrekt.\n"
             12:
                 story_text: "I den här sången kan vi göra det ännu enklare att programmera 'if you're happy and you know it, clap your hands'. Eftersom vi kan placera alla handlingar i en variabel, kolla in det:\n\n### Övning\nKan du lägga till rätt antal indrag (mellanslag) på varje rad för att få låten att spelas korrekt?\nTips: Alla rader behöver inte vara indragna.\n"
                 example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action\n```\n"
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
             16:
                 story_text: "In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
                 example_code: "```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
             6:
-                start_code: "{print} 'Baby shark'"
+                start_code: "{print} 'Vi sjunger!'"
                 story_text: "Sånger innehåller ofta många upprepningar. Ibland bygger upprepningarna också på räkning.\nTill exempel i den välkända sången 'Bottles of beer'. Du kan programmera den låten med lite matematik.\n\nTips: Använd funktionen för högläsning för att låta Hedy sjunga sången för dig!\n\n### Övning\nDu kan nu upprepa raderna 2 till 7 hur många gånger som helst genom att kopiera raderna.\n"
                 example_code: "```\nvers = 99\n{print} vers ' ölflaskor på väggen'\n{print} vers ' ölflaskor'\n{print} 'Ta en ner, skicka runt den'\nvers = vers - 1\n{print} vers ' ölflaskor på väggen'\n{sleep}\n```\n"
                 story_text_2: "This children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
@@ -239,24 +239,24 @@ adventures:
             8:
                 story_text: "I en tidigare nivå har du programmerat låten 'Bottles of beer'. Men utan kommandot `{repeat}` var du tvungen att kopiera verserna många gånger.\nI den här nivån kan du upprepa sången 99 gånger, bara genom att lägga till en endarad!\n\n### Övning\nLägg till rätt kommando på de tomma platserna och indentera koden på rätt sätt.\n"
                 example_code: "```\nverse = 99\n_ 99 {times}\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
             10:
                 story_text: "Med `{for}` kan du skriva ut hela sången om baby shark (inklusive alla andra hajar i familjen) på bara 6 rader!\n\n### Övning 1\nKan du göra baby shark-koden ännu kortare genom att använda kommandot `{for}`? Gör klart exempelkoden.\n"
                 example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n  {print} _\n```\n"
-                start_code: '# place your code here'
-                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
-                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
+                start_code: '# placera din kod här'
+                example_code_2: "```\napor = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Övning 2\nSkriv ut låten Fem små apor hoppade på sängen. Slå upp texten om du inte kommer ihåg.\n\n**(extra)** Skriv ut låten Old MacDonald had a farm och se till att alla djur gör ett annat ljud med hjälp av en `{if}`.\n"
             18:
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# placera din kod här'
                 story_text: "In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
                 example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        name: Sing a song!
-        description: Print a song
-        default_save_name: Song
+        name: Sjung en sång!
+        description: Skriv ut en sång
+        default_save_name: Sång
     turtle:
-        name: Turtle
-        description: Make your own drawing
-        default_save_name: Turtle
+        name: Sköldpadda
+        description: Gör din egen ritning
+        default_save_name: Sköldpadda
         levels:
             1:
                 story_text: "Du kan också rita med Hedy. Genom att kombinera svängar och linjer kan du göra en fyrkant eller trappa!\n\nMed `{forward}` ritar du en linje framåt. Talet efter avgör hur långt sköldpaddan kommer att gå. `{turn} {right}` vrider ett kvarts varv medurs, `{turn} {left}` vrider moturs.\n\nOm du vill gå bakåt använder du kommandot `{forward}` men med ett negativt tal. Till exempel `{forward} -100`\n\n### Övning\nDet här är början på en liten trappa. Kan du göra så den får fem steg?\n"
@@ -265,35 +265,35 @@ adventures:
             8:
                 start_code: angles = {ask} 'How many angles should I draw?'
                 story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\nVi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n\n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
-                example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
+                example_code: "```\nvinkel = 90\n{repeat} 4 {times}\n    {turn} vinkel\n    {forward} 50\n```\n"
                 story_text_2: "**(extra)** Vi kan nu förbättra programmet för att rita olika figurer. Gör klart koden och du kan rita vilken polygon som helst!\n"
                 example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
             2:
                 story_text: "In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.\n"
-                example_code: "```\nanswer {is} {ask} How many steps should the turtle make?\n{forward} answer\n```\n"
+                example_code: "```\nsvar {is} {ask} Hur många steg ska sköldpaddan ta?\n{forward} svar\n```\n"
                 story_text_2: "På nivå 1 kunde sköldpaddan dessutom bara svänga till vänster eller höger. Det är lite tråkigt!\nPå nivå 2 kan den peka med näsan åt alla håll.\n\nAnvänd 90 för att vrida en kvarts varv. Vi kallar detta för grader. Ett helt varv är 360 grader.\n\n### Övning\nKan du göra en figur med den här koden? Kanske en triangel eller en cirkel?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25"
+                example_code_2: "```\n{print} Rita figurer\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} Sköldpaddslopp!\nvinkel {is} 90\n{turn} vinkel\n{forward} 25"
             3:
-                example_code: "```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
+                example_code: "```\nvinklar {is} 10, 50, 90, 150, 250\n{turn} vinklar {at} {random}\n{forward} 25\n```\n"
                 story_text: "På den här nivån kan du använda `{at} {random}` med sköldpaddan. Ett slumpmässigt val gör att sköldpaddan går en annan väg varje gång.\nAnvänd `{at} {random}` för att välja ett värde från en lista.\n### Övning\nKan du kopiera och klistra in rad 2 och 3 för att skapa en längre slumpmässig väg?\n"
-                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
+                start_code: "vinklar {is} 10, 50, 90, 150, 250\n{turn} vinklar {at} {random}\n{forward} 25"
             4:
                 story_text: "In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25"
+                example_code: "```\n{print} _ Rita figurer _\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} 'Rita figurer'\nvinkel {is} 90\n{turn} vinkel\n{forward} 25"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             5:
-                example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                example_code: "```\n{print} 'Rita figurer'\nfigur {is} {ask} 'Vill du ha en kvadrat eller en triangel?'\n{if} figur {is} triangel vinkel {is} 120\n{else} vinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} 'Rita figurer'\nfigur {is} {ask} 'Vill du ha en kvadrat eller triangel?'\n{if} figur {is} triangel vinkel {is} 120 {else} vinkel {is} 90\n{turn} vinkel\n{forward} 25"
                 story_text: "In level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
-                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
+                story_text_2: "### Övning\nFyll i rätt tal i den här koden för att få det att fungera.\nNär du har gjort det kan du försöka lägga till alternativet baklänges.\n\n**Extra** Istället för att använda 'vänster' och 'höger', gör om programmet med nord, ost, syd och väst.\nPå så sätt kan du lägga till ännu fler vägbeskrivningar som nordost och sydväst etc.\n"
                 example_code_2: "```\nriktning {is} {ask} \"Vill du gå åt vänster, höger eller rakt fram?\n{if} riktning {is} vänster {turn} _\n{if} riktning {is} höger {turn} _\n{forward} 100\n```\n"
             6:
                 story_text: "In this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'"
+                example_code: "```\nvinklar = {ask} 'Hur många vinklar vill du ha?'\nvinkel = 360 / vinklar\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n```\n"
+                start_code: "{print} 'Rita figurer'"
             9:
 
                 start_code: '# place your code here'
@@ -706,12 +706,12 @@ adventures:
     years:
         levels:
             11:
-                start_code: '# place your code here'
+                start_code: '# placera din kod här'
                 story_text: "På den här nivån kan du använda kommandot `{for}` number `{in}` `{range}` för att räkna ner till det nya året.\n\n### Övning\nFyll i luckorna och få koden att fungera!\n"
                 example_code: "```\n{for} tal {in} {range} _ {to} _\n    {print} tal\n{print} 'Gott nytt år!'\n```\n"
-        name: New Year's
-        description: Countdown to the new year!
-        default_save_name: New Year's Countdown
+        name: Nyårsdagen
+        description: Nedräkning till det nya året!
+        default_save_name: Nedräkning till nyår
     pressit:
         levels:
             5:
