@@ -180,6 +180,138 @@ sections:
     -   title: "Video"
         text: |
             This <a href="https://www.youtube.com/watch?v=c4MntPPgl1Y" target="_blank">video</a> shows you even more features of Hedy, like the cheatsheets and the keyboard switcher.
+-   title: "Answers of the exercises"
+    key: "answers"
+    intro: |
+        In each adventure you students are asked to do an exercise. Examples of correct answers can be found in this section.
+    levels:
+    -   level: '1'
+        sections:
+        -   title: "Parrot"
+            example:
+                error_text: "Copy the example code to your input screen by clicking on the yellow button. Make the parrot ask a different question. Fill in the blanks in the example! Extra You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code."
+                error_code: |
+                    print Im Hedy the parrot
+                    ask _
+                    echo
+                    echo
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    print Im Lorre the Parrot
+                    ask What class are you in?
+                    echo
+                    echo
+                    ask Do you like programming?
+                    echo
+                    echo
+        - title: "Rock, paper, scissors"
+          example:
+              error_text: "Instead of using words, you could also use emojis: ✊✋✌ Can you create a code using emojis?"
+              error_code: |
+                  print what do you choose?
+                  ask choose from _
+                  echo so your choice was:
+              solution_text: "Students often know how to type emojis on their devices. On computers you can usually do a right mouse click and select Emojis. On tablets and smartphones you can usually choose between a keyboard with letters, numbers or emojis. "
+              solution_code: |
+                  print what do you choose?
+                  ask choose from ✊🫲✌️
+                  echo so your choice was:
+        - title: "Haunted house"
+          example:
+              error_text: "Copy the example code to your input screen by clicking the yellow button. Now finish the story by adding at least 5 lines of code. Remember to start each line of codes with a print command"
+              error_code: |
+                  print How did I get here?
+                  print I remember my friend telling me to go into the old mansion...
+                  print and suddenly everything went black.
+                  print But how did I end up on the floor...?
+                  print My head hurts like Ive been hit by a baseball bat!
+                  print What's that sound?
+                  print Oh no! I feel like Im not alone in this house!
+                  print I need to get out of here!
+                  print There are 3 doors in front of me..
+                  ask Which door should i pick?
+                  echo I choose door
+                  print ...?
+              solution_text: "The only requirement was to add five lines of code. The students can choose any lines and commands they like."
+              solution_code: |
+                  # Own answer
+        - title: "Story"
+          example:
+              error_text: "Now create your own story of at least 6 lines of code. This story cannot be the same as the example code. Use at least one ask and one echo command. You can make it about any topic you like. If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo."
+              error_code: |
+                  ask The main character of this story is
+                  print The main character is now going to walk in the forest
+                  echo He's a bit scared,
+                  print He hears crazy noises everywhere
+                  print He's afraid this is a haunted forest
+              solution_text: "The student has to think of their own story. It is important that the student doesn't copy our example this time. but tries themself. The code has to be at least 6 lines long and must contain an ask and an echo command."
+              solution_code: |
+                  # own answer
+        - title: "Turtle"
+          example:
+              error_text: "This is the start of a little staircase. Can you make it have 3 steps?"
+              error_code: |
+                  forward 50
+                  turn right
+                  forward 50
+                  turn left
+                  forward 50
+              solution_text: "The student has to copy the last 3 lines of code (line 2 - 4) and paste it 2 more times. They can also type it, but copy and paste is easier. "
+              solution_code: |
+                  forward 50
+                  turn right
+                  forward 50
+                  turn left
+                  forward 50
+                  turn right
+                  forward 50
+                  turn left
+                  forward 50
+                  turn right
+                  forward 50
+        - title: "Restaurant"
+          example:
+              error_text: "Copy the example code into your input screen by clicking the yellow button. Firstly, fill in the correct command on the blanks to make to code work properly. Then add at least 4 more lines of code to the restaurant program. Ask the costumer what they would like to drink and ask if they want to pay with cash or card. Lastly, think of a nice way to say goodbye to your costumer."
+              error_code: |
+                  print Welcome to Hedy's restaurant 🍟
+                  _ What would you like to order?
+                  echo So you would like to order
+                  print Thank you for your order!
+                  print It's on its way!
+              solution_text: "This is an example of a correct answer"
+              solution_code: |
+                  print Welcome to Hedy's restaurant 🍟
+                  ask What would you like to order?
+                  echo So you would like to order
+                  ask What would you like to drink
+                  echo you would like to drink
+                  print Thank you for your order!
+                  print It's on its way!
+                  ask Would you like to pay with cash or card?
+                  echo This is how you would like to pay:
+                  print Thank you! Bye Bye!
+        - title: "Fortune Teller"
+          example:
+              error_text: "Copy the example code into your inputscreen and fill in the blanks to make the code work. Extra Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself."
+              error_code: |
+                  _ Hello, I'm Hedy the fortune teller!
+                  _ Who are you?
+                  _ Let me take a look in my crystal ball
+                  _ I see... I see...
+                  _ Your name is
+              solution_text: "This is an example of a correct answer:"
+              solution_code: |
+                  print Hello, I'm Hedy the fortune teller!
+                  ask Who are you?
+                  print Let me take a look in my crystal ball
+                  print I see... I see...
+                  echo Your name is
+                  ask How old are you?
+                  print I see... I see...
+                  echo You are
+                  ask What is your favorite sportsteam?
+                  print I see... I see...
+                  echo You like
 -   title: "Common mistakes"
     key: "common_mistakes"
     intro: |
