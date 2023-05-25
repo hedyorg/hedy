@@ -143,8 +143,9 @@ class LiveStatisticsModule(WebsiteModule):
             'Typed something that is not allowed': ['entered', 'allowed'],
             'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
         }
-        self.MAX_CONTINUOUS_ERRORS = 1
+        self.MAX_CONTINUOUS_ERRORS = 0  # update according with database functionality
         self.MAX_COMMON_ERRORS = 10
+        self.MAX_FEED_SIZE = 4
 
     def __error_db_load(self):
         """Loads the error data from the json file. Function mainly exists in order to
@@ -512,7 +513,6 @@ class LiveStatisticsModule(WebsiteModule):
 
     def retrieve_data(self, class_id, user):
         supported_langs = ['en']
-        # Todo: only get programs that were ran today
 
         data = {}
         class_ = self.db.get_class(class_id)
@@ -548,6 +548,30 @@ class LiveStatisticsModule(WebsiteModule):
                 return misconception
         return None
 
+    def new_id_calc(self, common_errors, class_id):
+        common_error_ids = [int(x['id']) for x in common_errors['errors']]
+        new_id = max(common_error_ids) + 1 if common_error_ids else 0
+
+        # reached max common errors
+        if new_id > 0 and new_id % self.MAX_COMMON_ERRORS == 0:
+            # find all disables entries
+            disables = [x['id'] for x in common_errors['errors'] if x['active'] == 0]
+            if disables:
+                # assign oldest not used id to new error
+                new_id = disables[0]
+            else:
+                # forcefully overwrite oldest error despite not being resolved and set oldest half of the db to
+                # inactive to free up space
+                # Todo: could use a better way to handle this
+                new_id = 0
+                common_errors_update = dynamo.Table(self.common_error_db, "common_errors", "class_id").get(
+                    {"class_id": class_id})
+                for i in range(self.MAX_COMMON_ERRORS // 2):
+                    common_errors_update['errors'][i]['active'] = 0
+                self.ERRORS.update({"class_id": class_id}, common_errors_update)
+
+        return new_id
+
     def misconception_detection(self, class_id, user, common_errors):
         """
         Detects misconceptions of students in the class based on errors they are making.
@@ -556,24 +580,18 @@ class LiveStatisticsModule(WebsiteModule):
         data = self.retrieve_data(class_id, user)  # retrieves relevant data from db
 
         headers = [x['header'] for x in common_errors['errors']]
-        common_error_ids = [int(x['id']) for x in common_errors['errors']]
-        new_id = max(common_error_ids) + 1 if common_error_ids else 0
 
         # retrieve proper format from db and store in table for further modification
         new_common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
 
         misconception_counts = {}
 
-        print("Data")
-        print(data)
-
         # only take most recent session
         recent_session = list(data.keys())[0]
-        programs = data[recent_session]
+        programs = data[recent_session]  # all recent programs of all users in session
 
         last_error = None  # Todo: augment database to include type of error history
         last_user = None
-
         count = 0
 
         # Iterate over each error and its corresponding username in the current session group
@@ -581,53 +599,52 @@ class LiveStatisticsModule(WebsiteModule):
             error = run['error']
             username = run['username']
 
-            print("Errors per user", error, username)
-            misconception = self.misconception_hit(error)
-            if misconception:
+            if error:
+                misconception = self.misconception_hit(error)
+                if misconception:
 
-                if username != last_user:
-                    last_user = username
+                    if username == last_user and error == last_error:
+                        count += 1
+                    elif username == last_user and error != last_error:
+                        count = 0
+                        last_error = error
+                    elif username != last_user:
+                        last_user = username
+                        last_error = error
+                        count = 0
+
+                    if count >= self.MAX_CONTINUOUS_ERRORS:
+                        # Check if the current misconception is not in the misconception_counts dictionary
+                        if misconception not in misconception_counts:
+                            misconception_counts[misconception] = {}
+
+                        # Check if the current error is not in the misconception_counts
+                        # dictionary for the current misconception
+                        if error not in misconception_counts[misconception]:
+                            misconception_counts[misconception][error] = {'freq': 0, 'users': []}
+                        misconception_counts[misconception][error]['freq'] += 1
+                        misconception_counts[misconception][error]['users'].append(username)
+                    break
+                else:
                     last_error = None
-
-                if error != last_error:
-                    last_error = error
+                    last_user = username
                     count = 0
-                count += 1
-                if count >= self.MAX_CONTINUOUS_ERRORS:
-                    # Check if the current misconception is not in the misconception_counts dictionary
-                    if misconception not in misconception_counts:
-                        misconception_counts[misconception] = {}
-
-                    # Check if the current error is not in the misconception_counts
-                    # dictionary for the current misconception
-                    if error not in misconception_counts[misconception]:
-                        misconception_counts[misconception][error] = {'count': 0, 'users': []}
-                    misconception_counts[misconception][error]['count'] += 1
-                    misconception_counts[misconception][error]['users'].append(username)
-                break
-            else:
-                last_error = None
-                count = 0
 
         # Print the top 4 misconceptions with the highest count of continuous errors
         # and their associated errors and usernames
+        print("Misconception Counts")
+        print(misconception_counts)
         for misconception, errors in sorted(misconception_counts.items(),
-                                            key=lambda x: sum(x[1][error]['count'] for error in x[1]), reverse=True)[
-                :4]:
-            print(f'Misconception "{misconception}"')
-            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['count'], reverse=True)[:1]
+                                            key=lambda x: sum(x[1][error]['freq'] for error in x[1]),
+                                            reverse=True)[:self.MAX_FEED_SIZE]:
+
+            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['freq'], reverse=True)[:1]
             for error, info in sorted_errors:
                 users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
                 sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)[:1]
                 users_only = [user for user, _ in sorted_users]
 
-                for user, count in sorted_users:
-                    print('- User "{}" made this error'.format(user))
-
-                print("All users")
-                print(users_only)
-                print(sorted_users)
-
+                # checks to avoid duplicates
                 if misconception in headers:
                     idx = headers.index(misconception)
                     hits = 0
@@ -640,19 +657,19 @@ class LiveStatisticsModule(WebsiteModule):
                     elif hits > 0:
                         # update existing entry, existing student was found but another one has to be added
                         new_common_errors['errors'][idx]['students'] = users_only
-                        continue
-
-                # make new entry
-                new_common_errors['errors'].append({
-                    'id': new_id,
-                    'error': error,
-                    'header': misconception,
-                    'active': 1,
-                    "students": users_only,
-                })
-                new_id += 1
-                # Todo: write to radboard_error_data.json
+                else:
+                    # make new entry
+                    new_id = self.new_id_calc(common_errors, class_id)
+                    new_common_errors['errors'].append({
+                        'id': new_id,
+                        'error': error,
+                        'header': misconception,
+                        'active': 1,
+                        "students": users_only,
+                    })
+            # update db
             self.ERRORS.update({"class_id": class_id}, new_common_errors)
+
         self.__error_db_load()
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
