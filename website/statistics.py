@@ -111,7 +111,7 @@ class StatisticsModule(WebsiteModule):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
         students, class_, teacher_adventures, class_adventures_formatted, ticked_adventures = self.get_grid_info(
-            user, class_id)
+            user, class_id, 1)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, '1')
 
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -134,7 +134,7 @@ class StatisticsModule(WebsiteModule):
     def change_dropdown_level(self, user, class_id):
         level = request.args.get('level')
         students, class_, teacher_adventures, class_adventures_formatted, ticked_adventures = self.get_grid_info(
-            user, class_id)
+            user, class_id, level)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
 
         return jinja_partials.render_partial("customize-grid/grid-levels.html",
@@ -156,12 +156,12 @@ class StatisticsModule(WebsiteModule):
         student_index = request.args.get('student_index', type=int)
         adventure_index = request.args.get('adventure_index', type=int)
         students, class_, teacher_adventures, class_adventures_formatted, ticked_adventures = self.get_grid_info(
-            user, class_id)
+            user, class_id, level)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
 
         for program in ticked_adventures[students[student_index]]:
-            if level and class_adventures_formatted[level][adventure_index] in program:
-                program_id = program[0]
+            if level == program['level'] and class_adventures_formatted[level][adventure_index] == program['name']:
+                program_id = program['id']
         fetched_program = self.db.program_by_id(program_id)
 
         updates = {
@@ -172,7 +172,7 @@ class StatisticsModule(WebsiteModule):
             "ticked": True if 'ticked' not in fetched_program or not fetched_program['ticked'] else False
         }
         self.db.update_program(program_id, updates)
-        _, _, _, _, ticked_adventures = self.get_grid_info(user, class_id)
+        _, _, _, _, ticked_adventures = self.get_grid_info(user, class_id, level)
         matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
 
         return jinja_partials.render_partial("customize-grid/grid-levels.html",
@@ -195,12 +195,13 @@ class StatisticsModule(WebsiteModule):
             student_list = ticked_adventures.get(student)
             if student_list and rendered_adventures:
                 for program in student_list:
-                    if program[1] == level:
-                        index = rendered_adventures.index(program[2])
-                        if program[3]:
-                            clone[index] = 1
-                        else:
-                            clone[index] = 0
+                    if program['level'] == level:
+                        index = rendered_adventures.index(program['name'])
+                        if index != -1:
+                            if program['ticked']:
+                                clone[index] = 1
+                            else:
+                                clone[index] = 0
             grid_values.append(clone)
         return grid_values
 
@@ -224,7 +225,7 @@ class StatisticsModule(WebsiteModule):
         }
         return jsonify(response)
 
-    def get_grid_info(self, user, class_id):
+    def get_grid_info(self, user, class_id, level):
         class_ = self.db.get_class(class_id)
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
@@ -252,10 +253,10 @@ class StatisticsModule(WebsiteModule):
                     new_list.append(el['name'])
             class_adventures_formatted[adventure[0]] = class_adventures_formatted.get(adventure[0], []) + new_list
 
-        for level in class_adventures_formatted.items():
+        for sub_level in class_adventures_formatted.items():
             index = 0
-            for adventure_per_level in level[1]:
-                class_adventures_formatted[level[0]][index] = adventure_names[adventure_per_level]
+            for adventure_per_level in sub_level[1]:
+                class_adventures_formatted[sub_level[0]][index] = adventure_names[adventure_per_level]
                 index += 1
 
         teacher_adventures_formatted = []
@@ -264,17 +265,21 @@ class StatisticsModule(WebsiteModule):
 
         ticked_adventures = {}
         for student in students:
-            programs = self.db.programs_for_user(student)
+            programs = self.db.last_level_programs_for_user(student, level)
             if programs:
                 ticked_adventures[student] = []
-                for program in programs.records:
-                    if 'ticked' in program:
-                        program_data = [program['id'], str(program['level']),
-                                        adventure_names[program['adventure_name']], program['ticked']]
-                    else:
-                        program_data = [program['id'], str(program['level']),
-                                        adventure_names[program['adventure_name']], None]
-                    ticked_adventures[student].append(program_data)
+                current_program = {}
+                for key, program in programs.items():
+                    name = adventure_names[program['adventure_name']]
+                    customized_level = class_adventures_formatted.get(str(program['level']))
+                    if name in customized_level:
+                        if 'ticked' in program:
+                            current_program = dict(id=program['id'], level=str(program['level']),
+                                                   name=name, ticked=program['ticked'])
+                        else:
+                            current_program = dict(id=program['id'], level=str(program['level']),
+                                                   name=name, ticked=None)
+                        ticked_adventures[student].append(current_program)
 
         return students, class_, teacher_adventures_formatted, class_adventures_formatted, ticked_adventures
 

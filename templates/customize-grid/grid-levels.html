@@ -1,29 +1,29 @@
 <div id="level">
-    <table id="grid-table">
-      <thead>
+  <table id="grid-table">
+    <thead>
+      <tr>
+        <th>Students</th>
+        {% for adventure in class_adventures[level] %}                   
+          <th>{{ adventure }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in matrix_values %}
         <tr>
-          <th>Students</th>
-          {% for adventure in class_adventures[level] %}                   
-            <th>{{ adventure }}</th>
+          {% set student_index = loop.index0 %}
+          <th>{{ class_info['students'][student_index] }}</th>
+          {% for checkbox in row %}
+            {% if checkbox == 0 %}
+              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
+            {% elif checkbox == 1 %}  
+              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" checked="true" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
+            {% else %}
+              <th><input type="checkbox" class="disabledCheckBox" name="myCheckbox" disabled="disabled"></th>
+            {% endif %}  
           {% endfor %}
         </tr>
-      </thead>
-      <tbody>
-        {% for row in matrix_values %}
-          <tr>
-            {% set student_index = loop.index0 %}
-            <th>{{ class_info['students'][student_index] }}</th>
-            {% for checkbox in row %}
-              {% if checkbox == 0 %}
-                <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
-              {% elif checkbox == 1 %}  
-                <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" checked="true" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
-              {% else %}
-                <th><input type="checkbox" class="disabledCheckBox" name="myCheckbox" disabled="disabled"></th>
-              {% endif %}  
-            {% endfor %}
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
