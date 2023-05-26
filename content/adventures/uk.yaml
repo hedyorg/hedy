@@ -5,7 +5,6 @@ adventures:
             1:
                 start_code: '{print} привіт світе!'
                 story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\" під полем програмування.\n\nВивести текст на екран можна за допомогою команди `{print}`.     \n"
-                example_code_2: "```\n{ask} Як вас звати??\n{echo} Привіт.\n```\n"
             2:
                 story_text: "На 2-му рівні ми вивчимо дві нові команди: `{is}` та `{sleep}`.\nВи можете назвати слово за допомогою `{is}`. Це називається змінною. У цьому прикладі ми створили змінну з назвою name і змінну з назвою age. Ви можете використовувати слово name в будь-якому місці вашого коду, і воно буде замінено на Хеді, ось так:\n\nТаким чином, вам більше не потрібна команда `{echo}`\n"
                 example_code: "```\nname {is} Хеді\nage {is} 15\n{print} name is age years old\n```\n"
@@ -31,7 +30,6 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Десяткові числа**\nДо цього часу Hedy не дозволяла використовувати десяткові числа, такі як 1,5, але тепер ми це дозволяємо. Зауважте, що комп'ютери використовують символ `.` для десяткових чисел."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
                 example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
@@ -66,14 +64,12 @@ adventures:
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
                 story_text: "Ми з вами будемо вивчати нові елементи. Можливо, ви вже знаєте їх з математики - це `<` та `>`.\nСимвол `<` перевіряє, чи перше число менше за друге, наприклад, вік `<` 12 перевіряє, чи вік менше за 12.\nЯкщо потрібно перевірити, чи перше число менше або дорівнює другому, можна використовувати `<=`, наприклад, вік `<=` 11.\nСимвол `>` перевіряє, чи є перше число більшим за друге, наприклад, `>` 10 перевіряє, чи є число більшим за 10.\nЯкщо потрібно перевірити, чи перше число більше або дорівнює другому, можна використати `>=`, наприклад, пункти `>=` 11.\nВи використовуєте ці порівняння в `{if}`, ось так:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Зараз ми трішки змінимо відступи. Кожного разу коли нам потрібен відступ, ми також повинні поставити `:` на лінії перед відступом.\n\nНа цьому рівні ти також отримаєш нову команду `{elif}`. Команда `{elif}` – це сполучення команд `{else}` і `{if}`, яка пригодиться тобі якщо в тебе буде три (або більше!) опцій.\nВипробуй її!"
             18:
                 start_code: "імʼя = 'Хейді'\n{print}('Мене звати ', імʼя)"
                 story_text: "Ми отримали справжній код Python! Це означає, що відтепер нам потрібно використовувати дужки з `{print}` і `{range}`.\nЦе також означає, що ви можете використовувати код Hedy з цього рівня в будь-якому середовищі Python, якщо ви використовуєте англійські команди. Якщо ви цього ще не зробили, ви можете зробити це за допомогою перемикача в меню команд."
-                story_text_3: "Останньою зміною, яку нам потрібно зробити, щоб отримати код на Python, є зміна `{ask}` на `{input}`."
         name: Вступ
         description: Пояснення рівнів
     story:
@@ -506,7 +502,6 @@ adventures:
             3:
                 start_code: '# place your code here'
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"

@@ -293,15 +293,11 @@ adventures:
                 start_code: "emri {is} {ask} 'si e ke emrin?'\n{if} emri {is} Hedy {print} 'mirë!' {else} {print} 'meh'"
                 story_text: "Në nivel 5 kemi diçka të re, `{if}` komanda! Me `{if}` komandën ju mund të zgjidhni një nga dy opsione .\nKy kodi printon Hedy si emër, dhe boo! nëse shkruani diçka tjetër.\n`{ask}` dhe `{print}` komandat punojnë si në nivelin 4.\n"
                 example_code: "```\nemri {is} {ask} 'si e keni emrin?'\n{if} emri {is} Hedy {print} 'mirë' {else} {print} 'boo!'\n```\n"
-                example_code_2: "```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy {print} 'bukur'\n{else} {print} 'boo!'\n```\n"
-
             18:
                 start_code: "emri = 'Hedy'\n{print}('Emri im është ', emri)"
                 story_text: "Ne mbërritëm në kodin e vërtetë të gjuhës Python! Kjo do të thotë se duhet të përdorim kllapa në komandën {print} dhe {range} prej tani."
-                story_text_3: "Ndryshimi i fundit që duhet të bëjmë për të kaluar në Python duhet që komandën `{ask}` ta zëvendësojmë me komandën `{input}`."
             1:
                 story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\nShkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën e programimit.\n\nMund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
-                example_code_2: "```\n{ask} Si e keni emrin?\n{echo} përshëndetje\n```\n"
                 start_code: '{print} përshëndetje botë!'
             2:
                 story_text: "Në level 2 do të mësojmë komandat: `{is}` dhe `{sleep}`.\nMund që një fjale ti jepni një emër me komandën `{is}`. Kjo quhet një variabël. Në këtë shembull ne e krijuam një variabël 'emri' edhe një tjetër 'mosha'. Mund ta përdorni fjalën 'emri' kudo në kod dhe do të zëvendësohet me Hedy, si kështu:\n\nNë këtë mënyrë nuk të keni nevojë për komandën `{echo}`!\n"
@@ -342,7 +338,6 @@ adventures:
                 start_code: "{print} 'numrat decimal duhet të kenë pika'\n{print} 2.5 + 2.5"
                 story_text: "**Numrat decimal**\nDeri tani, Hedy nuk lejoji numrat decimal si 1.5, por tani ne e lejojmë këtë. Mbani mend se kompjuterët e përdorin `.` për numra decimal."
                 example_code: "```\n{print} 'Dy e gjysmë plus dy e gjysme është...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperhero = 'Spiderman', 'Batman', 'Njeriu i hekurt'\n{print} superhero {at} {random}\n```\n"
                 example_code_5: "```\nrezultati= 25\n{print} 'Ju keni ' rezultati\n```\n"
             13:
                 start_code: "emri = {ask} 'Si e ke emrin?'\nmosha = {ask} 'Sa vjeçar jeni?'\n{if} emri {is} 'Hedy' {and} mosha {is} 2\n    {print} 'Ju jeni Hedy i vërtetë!'"
@@ -352,7 +347,6 @@ adventures:
                 start_code: "mosha= {ask} 'Sa vjeçar jeni?'\n{if} mosha< 13\n    {print} 'Ju jeni më të ri se unë!'\n{else}\n    {print} 'Ju jeni më të vjetër se unë!'"
                 story_text: "Ne do të mësojmë më shumë gjëra. Ju veçse mund ti dini nga matematika, `<` edhe `>`.\n`<` kontrollon nëse numri i parë është më i vogël se i dyti, për shembull mosha `<` 12 kontrollon nëse mosha është më e vogël se 12.\nNëse doni të kontrolloni nëse numri i parë është më i madh ose barazi me numrin e dytë, ju mund të përdorni `<=`, për shembull mosha `<=` 11.\n`>` kontrollon nëse numri i parë është më i madh se i dyti, për shembull pikët `>` 10 kontrollon nëse pikët janë më shumë se 10.\nNëse doni të kontrolloni nëse numri i parë është më i madh apo barazi me numrin e dytë, ju mund të përdorni `>=`, për shembull pikët`>=` 11.\nJu mund ti përdorni këto krahasime në komandën `{if}`, si kështu:\n"
                 example_code: "```\nmosha= {ask} 'Sa vjeçar jeni?'\n{if} mosha > 12\n    {print} 'Ju jeni më të vjetër se unë!'\n```\n"
-                example_code_3: "```\nemri= {ask} 'Si e keni emrin?'\n{if} emri != 'Hedy'\n    {print} 'Ju nuk jeni Hedy'\n```\n"
             15:
                 start_code: "rezultati = 0\n{while} rezultati != 25\n    rezultati = {ask} 'Sa bëjnë 5 herë 5?'\n{print} 'Është dhënë përgjigje e saktë'"
                 story_text: "Ne do të mësojmë një tjetër kusht me përsëritje, `{while}` komanda! Ne e përsëritim bllokun e kodit derisa deklarata është e vërtetë.\nKështu që mos harroni ta ndërroni vlerën në kushtin e dhënë.\n\nNë shembullin e dhënë, ne vazhdojmë derisa të jepet një përgjigje e saktë.\nNëse nuk jepet përgjigje e saktë, atëherë përsëritja nuk mbaron!"

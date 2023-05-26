@@ -7,7 +7,6 @@ adventures:
             1:
                 story_text: "##Karibu  Hedy! \nKwa hiki kiwango cha kwanza, unaweza kutumia amri `{print}`, `{ask}` na `{echo}`. \nBonyeza kitufe(button) chenye rangi ya kijani kibichi ili kuanza! Jaribu kutekeleza msimbo(mpango) kwa kutumia kitufe chenye rangi ya kijani 'Run the code' kilicho upande wa kushoto.\n\nUnaweza kupiga chapa maneno iliyatokelezee kwenye kiwambo kwa kutumia amri ya `{print}`.     \n"
                 start_code: "{print}  salamudunia!"
-                story_text_3: "Tuanze! Hujui kitu gani cha kutengeneza? Katika kipande kifuatacho utakuta mawazo kwa ajili ya kutengeneza programu.\n"
             2:
                 story_text: "`ask` na `print` mabadiliko katika kiwango cha 3. Hizi mabadiliko, kinamaanisha neno `echo` haitakiwi tena kuchapisha maneno."
                 start_code: "print salamu dunia!"
@@ -33,8 +32,6 @@ adventures:
                 start_code: "lugha is ask 'Lugha ya taifi ni kipi?'\nif lugha is Kiswahili print 'umepatia!' else print 'umekosea'"
                 story_text: "`ask` na `print` zitabaki kama tulivio zitumia kiwango cha tatu. Kiwango cha nne tutasoma jinsi ya kitumia neno `if`."
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-
             6:
                 start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
                 story_text: "Matumizi ya `ask`, `print` na `if` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
@@ -73,7 +70,6 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n For numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
             13:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
                 story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
@@ -82,7 +78,6 @@ adventures:
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n\nFrom this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n\nYou can also compare if something is *not* equal to something else using `!=` like this:\n```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
@@ -115,9 +110,6 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-
-                story_text_3: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
     language:
         levels:
@@ -173,12 +165,12 @@ adventures:
 
                 example_code_2: |2
 
-                        {print} He hears a sound
-                        animals {is} 🐿, 🦔, 🦇, 🦉
-                        animal {is} {ask} What do you think it is?
-                        {add} animal {to_list} animals
-                        {print} it was a animals {at} {random}
-                        ```
+                          {print} He hears a sound
+                          animals {is} 🐿, 🦔, 🦇, 🦉
+                          animal {is} {ask} What do you think it is?
+                          {add} animal {to_list} animals
+                          {print} it was a animals {at} {random}
+                          ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
                 example_code_3: |
@@ -597,7 +589,6 @@ adventures:
             3:
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
                 start_code: '# place your code here'
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         default_save_name: Haunted House
     piggybank:

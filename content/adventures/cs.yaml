@@ -12,7 +12,6 @@ adventures:
 
                     Můžeš vypsat text na obrazovku užitím příkazu `{print}`.     
                 start_code: '{print} Ahoj světe!'
-                story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
             2:
                 story_text: |-
                     Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `is`.
@@ -58,8 +57,6 @@ adventures:
 
                     `{ask}` a `{print}` stále fungují stejně jako v úrovni 4.
                 example_code: "```\njméno {is} {ask} 'jak se jmenuješ?'\n{if} jméno {is} Hedy {print} 'Pěkně!' {else} {print} 'Fůj!'\n```\n"
-                example_code_2: "```\njméno {is} {ask} 'Jaké je tvé jméno?'\n{if} jméno {is} Hedy {print} 'pěkné'\n{else} {print} 'já mám hezčí!'\n```\n"
-
             6:
                 start_code: print '5 krát 5 je ' 5 * 5
                 story_text: |-
@@ -153,7 +150,6 @@ adventures:
                 story_text: |-
                     Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperhrdinové = 'Spiderman', 'Batman', 'Iron Man'\n{print} superhrdinové {at} {random}\n```\n"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
 
             13:
@@ -258,7 +254,6 @@ adventures:
                     `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
                     `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: |-
                     odpoved = 0
@@ -286,9 +281,6 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-
-                story_text_3: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
     story:
         name: Příběh
@@ -777,7 +769,6 @@ adventures:
             3:
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
                 start_code: '# place your code here'
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             1:
                 story_text: "In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but {if} not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.\n"

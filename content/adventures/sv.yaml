@@ -20,8 +20,6 @@ adventures:
                 start_code: "namn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "På nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
                 example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt' {else} {print} 'buu!'\n```\n"
-                example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
-
             6:
                 story_text: "På den här nivån får du lära dig något nytt: du kan nu också räkna.\n\nAddition är enkelt; du skriver det som i matte: `5 + 5` till exempel. Subtraktion fungerar också bra, det är `5 - 5`.\n\nMultiplikation är lite annorlunda, eftersom det inte finns något gångertecken på ditt tangentbord. Leta på, det bara finns inte!\nDet är därför vi multiplicerar med asterisken till höger om Ä: `5 * 5`. Läs det som \"5 gånger 5\", det är en bra minnesregel.\n"
                 start_code: "{print} '5 gånger 5 är ' 5 * 5"
@@ -49,7 +47,6 @@ adventures:
                 start_code: "{print} 'decimaltal behöver nu en punkt som decimaltecken'\n{print} 2.5 + 2.5"
                 story_text: "**Decimaltal**\nHittils har Hedy inte tillåtit decimaltal som 1,5, men nu tillåter vi det. Tänk på att datorer använder `.` (en punkt) för decimaltal istället för kommatecken."
                 example_code: "```\n{print} 'Två och en halv plus två och en halv är ...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_4: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn = 'Roboten Hedy'\n    {print} 'Hejsan!'\n```\n"
                 story_text_3: "**Alla saker i listor behöver också citattecken**\nListor är texter, så de behöver också citattecken. Tänk på att varje enskild sak i listan har sina egna citattecken.\nDet låter dig spara två ord som 1 sak i listan, till exempel \"En robot\".\n"
             13:
                 story_text: "Nu ska vi lära oss `{and}` och `{or}`! Om du vill testa två påståenden behöver du inte använda två `{if}` utan kan använda `{and}` och `{or}`.\n\nOm du använder `{and}` måste båda påståendena, till vänster och höger om `{and}`, vara sanna. Vi kan också använda `{or}`. Då behöver bara ett av påståendena vara korrekt."
@@ -73,7 +70,6 @@ adventures:
             18:
                 start_code: "namn = 'Hedy'\n{print}('Mitt namn är ', namn)"
                 story_text: "Vi har kommit fram till riktig Python-kod! Det betyder att vi måste använda parenteser med `{print}` och `{range}` från och med nu.\nDet betyder också att du kan använda Hedy-kod från den här nivån i vilken Python-miljö som helst så länge du använder de engelska kommandona. Om du inte har gjort det hittills så kan du ställa om i kommandomenyn för att göra det."
-                story_text_3: "Den sista ändringen vi behöver göra för att få Python-kod är att byta ut `{ask}` mot `{input}`."
         name: Introduktion
         description: Nivåbeskrivning
         default_save_name: introduktion

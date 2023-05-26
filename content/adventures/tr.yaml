@@ -57,13 +57,6 @@ adventures:
                     name {is} {ask} 'what is your name?'
                     {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
                     ```
-                example_code_2: |
-                    ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
-                    ```
-
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
@@ -156,11 +149,6 @@ adventures:
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
                     ```
-                example_code_3: |
-                    ```
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    {print} superheroes {at} {random}
-                    ```
                 example_code_5: |
                     ```
                     score = 25
@@ -200,12 +188,6 @@ adventures:
                     age = {ask} 'How old are you?'
                     {if} age > 12
                         {print} 'You are older than I am!'
-                    ```
-                example_code_3: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
                     ```
             15:
                 start_code: |-
@@ -257,9 +239,6 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-
-                story_text_3: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
     story:
         name: "Story"
@@ -1059,7 +1038,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                        Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1134,9 +1113,9 @@ adventures:
             3:
                 story_text: |2
 
-                      In this level we can enter lists and choose things from them.
-                      You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                      For example, you can let the computer pick from rock, paper and scissors.
+                        In this level we can enter lists and choose things from them.
+                        You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                        For example, you can let the computer pick from rock, paper and scissors.
 
                 example_code: |
                     ```

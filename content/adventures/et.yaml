@@ -5,7 +5,6 @@ adventures:
             1:
                 start_code: '{print} tere maailm!'
                 story_text: "Esimesel tasemel saad kasutada käske `{print}`, `{ask}` ja `{echo}`.\nKirjuta oma kood programmeerimisväljale või vajuta rohelist nuppu näidiskoodi väljal ja kood kirjutatakse sinu eest!\nKäivita kood kasutades rohelist 'Käivita kood' nuppu programmeerimisvälja all.\n\n`{print}` käsk kuvab teksti ekraanile.\n"
-                example_code_2: "```\n{ask} Mis su nimi on?\n{echo} tere\n```\n"
             2:
                 story_text: "Teisel tasemel õpime kahte uut käsku: `{is}` ja `{sleep}`.\n`{is}` käsuga saad sa mingile sõnale nime anda. Seda nime nimetatakse muutujaks. Siin näites me tegime muutuja nimega nimi ja muutuja nimega vanus. Igal pool kus sa nüüd oma koodis sõna nimi kasutad, asendatakse see Hedy'ga. Niimoodi:\n\nNüüd sul ei lähe enam vaja `{echo}` käsku!\n"
                 example_code: "```\nnimi {is} Hedy\nvanus {is} 15\n{print} nimi on vanus aastat vana\n```\n"
@@ -22,8 +21,6 @@ adventures:
                 start_code: "nimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe!' {else} {print} 'mhh'"
                 story_text: "5. tasemel leiame midagi uut: `{if}`! `{if}` abil saad valida kahe vóimaluse vahel.\nSee kood prindib kena, kui sisestad nimeks Hedy ja boo! kui sisestad midagi muud.\n`{ask}` ja `{print}` töötavad ikka samamoodi nagu 4. tasemel.\n"
                 example_code: "```\nnimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe' {else} {print} 'buu!'\n```\n"
-                example_code_2: "```\nnimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe'\n{else} {print} 'buu!'\n```\n"
-
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
@@ -33,13 +30,11 @@ adventures:
                 story_text: "`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
             14:
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: "Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
@@ -64,7 +59,6 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
             16:
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
                 start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"

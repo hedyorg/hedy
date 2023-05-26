@@ -7,7 +7,6 @@ adventures:
             1:
                 start_code: '{print} witaj świecie!'
                 story_text: "Na Poziomie 1 nauczysz się używać komend `{print}`, `{ask}` i `{echo}`.\nWpisz swój kod w polu programowania. Lub naciśnij zielony przycisk w przykładowym bloku kodu, a kod zostanie wpisany za Ciebie!\nWypróbuj kod samodzielnie za pomocą zielonego przycisku „Uruchom kod” pod polem programowania.\n\nMożesz wypisać tekst na ekran przy użyciu komendy `{print}`.     \n"
-                example_code_2: "```\n{ask} Jak masz na imię?\n{echo} Hej\n```\n"
             2:
                 story_text: "W poziomie 2 nauczymy się 2 nowych komend: `{is}` oraz `{sleep}`.\nMożesz nazwać słowo za pomocą `{is}`. Takie słowo nazywamy zmienną. W tym przykładzie stworzyliśmy zmienną nazwaną imię oraz zmienną nazwaną wiek. Możesz użyć słowa imię w dowolnym miejscu w swoim kodzie i zostanie ono zamienione przez Hedy w taki sposób:\n\nDzięki temu nie potrzebujesz już więcej komendy `{echo}`!\n"
                 example_code: "```\nimię {is} Hedy\nwiek {is} 15\n{print} imię ma wiek lat\n```\n"
@@ -24,7 +23,6 @@ adventures:
                 start_code: "imię {is} {ask} 'Jak masz na imię?'\n{if} imię {is} Hedy {print} 'super!' {else} {print} 'eh'"
                 story_text: "W poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.\nTen kod wyświetla „to miło”, jeśli wprowadzisz imię Hedy, w przeciwnym wypadku wyświetli „bu!”.\n`{ask}` i `{print}` działają w dalszym ciągu tak jak w poziomie 4.\n"
                 example_code: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło' {else} {print} 'bu!'\n```\n"
-                example_code_2: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło'\n{else} {print} 'bu!'\n```\n"
             6:
                 start_code: "{print} '5 razy 5 to' 5 * 5"
                 story_text: " W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.\n \n Dodawanie jest proste, możesz je zapisać tak jak w matematyce: na przykład `5 + 5`. Odejmowanie też jest proste, to po prostu `5 - 5`.\n \n Mnożenie jest trochę inne, ponieważ nie ma znaku mnożenia na twojej klawiaturze. Poszukaj, naprawdę go nie ma!\n Z tego powodu mnożymy za pomocą gwiazdki nad 8: `5 * 5`. Czytaj to jako „5 razy 5”, tak lepiej zapamiętasz.\n"
@@ -52,7 +50,6 @@ adventures:
                 start_code: "{print} 'Teraz zapisując ułamki dziesiętne musisz wykorzystać kropkę do oddzielenia części ułamkowej od części całkowitych'\n{print} 2.5 + 2.5"
                 story_text: "**Ułamki dziesiętne**\nDo tej pory Hedy nie pozwalał na zapisywanie ułamków dziesiętnych np. 1.5, ale od tej pory możesz już wykorzystać ułamki dziesiętne w swoich kodach. Pamiętaj że w komputerze wykorzystujemy  `.` do oddzielenia części ułamkowej od całkowitej."
                 example_code: "```\n{print} 'Dwa i pół plus dwa i pół to...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperbohaterowie = 'Spiderman', 'Batman', 'Iron Man'\n{print} superbohaterowie {at} {random}\n```\n"
                 example_code_5: "```\npunkty = 25\n{print} 'Zdobyłeś ' punkty\n```\n"
             13:
                 start_code: "imię = {ask} 'Jak masz na imię?'\nwiek = {ask} 'Ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    {print} 'Naprawdę jesteś Hedy!'"
@@ -62,7 +59,6 @@ adventures:
                 start_code: "wiek = {ask} 'Ile masz lat?'\n{if} wiek < 13\n    {print} 'Jesteś młodszy niż ja!'\n{else}\n    {print} 'Jesteś starszy niż ja!'"
                 story_text: "W tej lekcji nauczymy się zastosowania nowych operatorów logicznych, które możesz pamiętać z lekcji matematyki: operatory `<` i `>`.\nOperator `<` sprawdza czy pierwsza liczba jest mniejsza od drugiej liczby, na przykład wiek `<` 12 sprawdza czy wiek jest mniejszy niż 12.\nJeżeli chcesz sprawdzić czy pierwsza liczba jest mniejsza lub równa drugiej liczbie możesz użyć operator `<=`, na przykład wiek `<=` 11, który sprawdza czy wiek jest mniejszy lub równy 11.\nOperator `>` sprawdza czy pierwsza liczba jest większa od drugiej liczby, na przykład punkty `>` 10 sprawdza czy punkty są większe od 10.\nJeżeli chcesz sprawdzić, czy pierwsza liczba jest większa lub równa drugiej liczbie możesz użyć `>=`, na przykład punkty `>=` 11, który sprawdza czy punkty są większe lub równe 11.\nMożesz użyć tych operatorów logicznych w `{if}`, na przykład:\n"
                 example_code: "```\nwiek = {ask} 'Ile masz lat?'\n{if} wiek > 12\n    {print} 'Masz więcej lat niż ja!'\n```\n"
-                example_code_3: "```\nimię = {ask} 'Jak masz na imię?'\n{if} imię != 'Hedy'\n    {print} 'Nie jesteś Hedy'\n```\n"
             15:
                 start_code: "odpowiedź = 0\n{while} odpowiedź != 25\n    odpowiedź = {ask} 'Ile jest 5 razy 5?'\n{print} 'Dobra odpowiedź'"
                 story_text: "Tym razem nauczymy się nowego typu pętli - pętla `{while}`! Ta pętla będzie działać tak długo, jak warunek w pętli jest prawdziwy, \nwięc nie zapomnij zmienić wartości warunku w pętli.\n\nPętla kodzie przykładowym będzie działać aż poprawna odpowiedź zostanie podana.\nPętla nigdy się nie skończy, gdy poprawna odpowiedź nie zostanie podana!"
@@ -81,9 +77,6 @@ adventures:
                 story_text: |-
                     Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że od teraz musimy używać nawiasów z `{print}` i `{range}`.
                     Oznacza to również, że jeśli używasz angielskich wersji poleceń możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona. Jeśli jeszcze tego nie zrobiłeś, możesz przełączyć język w menu poleceń, aby to zrobić.
-
-                story_text_3: |-
-                    Ostatnią zmianą jaką musisz zrobić w kodzie, żeby otrzymać poprawny kod Python jest zmiana `{ask}` na `{input}`.
 
     songs:
         name: Zaśpiewaj piosenkę!

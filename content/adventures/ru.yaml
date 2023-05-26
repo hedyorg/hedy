@@ -12,10 +12,8 @@ adventures:
                 start_code: "{print} 'В десятичных числах теперь нужно использовать точку'\n{print} 2.5 + 2.5"
                 story_text: "**Десятичные числа**\nДо сих пор Hedy не позволял использовать десятичные числа, такие как 1,5, но теперь мы это делаем. Обратите внимание, что компьютеры используют `.` для десятичных чисел."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nсупергерои = 'Человек-паук', 'Бэтмен', 'Железный человек'\n{print} superheroes {at} {random}\n```\n"
             1:
                 story_text: "На Уровне 1 вы можете использовать команды `{print}`, `{ask}` и `{echo}`.\nВведите свой код в поле программирования. Или нажмите зеленую кнопку в блоке примера кода, и код будет набран за вас!\nПопробуйте выполнить код самостоятельно с помощью зеленой кнопки \"Выполнить код\" под полем программирования.\n\nВы можете распечатать текст на экране с помощью команды `{print}`.     \n"
-                example_code_2: "```\n{ask} Как тебя зовут?\n{echo} привет\n```\n"
                 start_code: '{print} привет мир!'
             2:
                 story_text: "In level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
@@ -36,14 +34,10 @@ adventures:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
-                story_text_3: |-
-                    Последнее изменение, которое нам нужно сделать для получения кода Python, - это замена `{ask}` на `{input}`.
-
             5:
                 start_code: "имя {is} {ask} 'как тебя зовут?'\n{if} имя {is} Хеди {print} 'круто!' {else} {print} 'meh'"
                 story_text: "На 5 уровне есть что-то новенькое, `{if}`! С помощью `{if}` ты можешь выбирать между двумя разными опциями.\nЭтот код выводит \"nice\" если ты введешь \"Hedy\" в качестве имени, а если ты введешь что-либо другое, выведется \"boo!\"\n`{ask}` и `{print}` работают также, как они работали на 4 уровне.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                example_code_2: "```\nимя {is} {ask} 'как тебя зовут?'\n{if} имя {is} Хеди {print} 'мило'\n{else} {print} 'boo!'\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: "Уровень 7 добавляет команду `{repeat}`. `{repeat}` можно использовать для многократного выполнения одной строки кода.\n"
@@ -71,7 +65,6 @@ adventures:
                 start_code: "возраст = {ask} 'Сколько тебе лет?'\n{if} возраст < 13\n    {print} 'Ты младше меня!'\n{else}\n    {print} 'Ты старше меня!'"
                 story_text: "Сейчас мы познакомимся с новыми предметами. Возможно, вы уже знаете их из математики: `<` и `>`.\nС помощью `<` проверяется, меньше ли первое число второго, например, возраст `<` 12 проверяется, меньше ли возраст 12.\nЕсли вы хотите проверить, меньше или равно ли первое число второму, вы можете использовать `<=`, например, возраст `<=` 11.\n `>` проверяет, больше ли первое число второго, например points `>` 10 проверяет, больше ли points 10.\nЕсли вы хотите проверить, больше или равно ли первое число второму, вы можете использовать `>=`, например points `>=` 11.\nЭти сравнения используются в `{if}`, например, так:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'Вы не Хеди'\n```\n"
             15:
                 start_code: "ответ = 0\n{while} ответ != 25\n    ответ = {ask} 'Сколько будет 5 раз по 5?'\n{print} 'Был дан правильный ответ'"
                 story_text: "Мы изучим новый цикл - цикл `{while}`! Мы продолжаем цикл до тех пор, пока утверждение истинно.\nПоэтому не забывайте менять значение в цикле.\n\nВ коде примера мы продолжаем цикл до тех пор, пока не будет получен правильный ответ.\nЕсли правильный ответ так и не будет получен, цикл не завершится!"

@@ -6,7 +6,6 @@ adventures:
         levels:
             1:
                 story_text: "På Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden selv med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
-                example_code_2: "```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
                 start_code: '{print} hallo verden!'
             2:
                 story_text: "På nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
@@ -24,8 +23,6 @@ adventures:
                 start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
                 story_text: "På nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
                 example_code: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'wow!' {else} {print} 'fysj!'\n```\n"
-                example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-
             6:
                 start_code: "{print} '5 ganger 5 er ' 5 * 5"
                 story_text: "På dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt anederledes, fordi det ikke er et gangesymbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 ganger 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
@@ -53,7 +50,6 @@ adventures:
                 start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
                 story_text: "**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
                 example_code: "```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
                 example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
             13:
                 start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
@@ -63,7 +59,6 @@ adventures:
                 start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
                 story_text: "Vi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `hvis`, for eksempel slik:\n"
                 example_code: "```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'Du er eldre enn meg!'\n```\n"
-                example_code_3: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn != 'Hedy'\n    {print} 'Du er ikke Hedy!'\n```\n"
             15:
                 start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
                 story_text: "Vi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
@@ -78,7 +73,6 @@ adventures:
             18:
                 start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
                 story_text: "Vi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
     story:
         name: Fortelling
         levels:

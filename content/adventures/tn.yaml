@@ -3,7 +3,6 @@ adventures:
         name: Tshimololo
         levels:
             1:
-                example_code_2: "```\n{ask} Leina la gago ke mang?\n{echo} Dumela\n```\n"
                 start_code: '{print} dumela lefatshe!'
                 story_text: "Mo legatong la ntha o ka dirisa mafoko a `{print}`, `{ask}` le `{echo}`.\nKwala  code ya gago mo tsejwaneng ya  programming. Kana tobetsa fa botaleng mo sekaing sa karolo ya code, ka jalo code ya gago etlaabo e kwalega ka boyone!\nLekeletsa code kabowena kago tobetsa botala, fa go kwadilweng 'Run code' kotlase ga tsebe ya   programming.\n\nO ka gatisa mokwalo mo sekerineng o dirisa  molao wa  `{print}`.\n"
             2:
@@ -27,7 +26,6 @@ adventures:
                 example_code: "```\ndingwaga = {ask} 'o dingwaga tse kae?'\n{if} dingwaga > 12\n    {print} 'o motona mogo nna!'\n```\n"
                 start_code: "dingwaga = {ask} 'O na le dingwaga tse kahe?'\n{if} dingwaga < 13\n    {print} 'o monnye mo go nna!'\n{else}\n    {print} 'o motona mo go nna!'"
                 story_text: "Re tile go ithuta dikarolo tse dingwe tse disha. O ka nna wa tswa o di itse mo tswa mo dipalong, mo `<` le `>`.\nFa `<` e supa fa nomoro ele nnye mogo ya bobedi, sekai sa dingwaga `<` 12 e supa fa dingwaga dile dinnye mogo 12.\nFa o batla go cheka gore nomoro ya ntlha e nnye kana e lekana leya bobedi o ka dirisa `<=`, fsekai sa dingwaga `<=` 11.\nFa `>` e supa gore nomoro ya ntlha e tona mogo ya bobedi, sekai se supa dipoints `>` 10 o supa fa dipointe dile ditona mogo 10.\nFa o batla go cheka gore nomoro ya ntlha e tona kana e lekana le ya bobedi onka dirisa`>=`, sekai dipointe `>=` 11.\nOka dirisa tekatekanyo mo go `{if}`, jaana:\n"
-                example_code_3: "```\nleina = {ask} 'leina la gago ke mang?'\n{if} leina != 'Hedy'\n    {print} 'gase wena Hedy'\n```\n"
             3:
                 story_text: "Mo legatong la boraro okadira lenaneo. O ka dira gore computara e kgethe sengwe random mo lenaneong. O dira jalo ka `{at} {random}`.\n"
                 start_code: '{print} dumela lefatshe!'
@@ -53,9 +51,7 @@ adventures:
             12:
                 start_code: "{print} 'decimal numbers jaanong di thoka go dirisa dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nGo tsena fa, Hedy ene esa letlelele decimal numbers jaaka 1.5, jaanong re letlelela se. Gakologelwa gore dibala makgolo di dirisa `.` mo decimal numbers."
-                example_code_5: "```\nMatshwao = 25\n{print} 'o tshwere ' matshwao\n```\n"
                 example_code: "```\n{print} 'Bobedi le sephato oketsa o oketsa ka bobedi le sephato ke...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
             13:
                 start_code: "leina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'o dingwaga tse kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy wa nnete!'"
                 story_text: "Mo legatong le, retile go ithuta `{and}` le `{or}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
@@ -71,7 +67,6 @@ adventures:
             18:
                 start_code: "leina = 'Hedy'\n{print}('leina lame ke ', leina)"
                 story_text: "Regorogile mo Python code ya nnete! Se seraya gore retshwanelwa ke go dirira matshwao a parentheses jaaka {print} le {range} gotswa fa go ya pele."
-                story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'o ipaakantse kana nnyaa, ke atla!'"
                 story_text: "jaanong reya go fetola indentation gole gonnye. Nako tsotlhe fa re tlhoka indentation, re tlhoka `:` mo lineng pele ga indentation.\n\nMo legatong le, o ka diria command e ntsha: `{elif}`. `{elif}` e khutshwafaditswe goraya {else} {if} gape oa e tlhoka fa o batla go dira dile tharo (kana go feta!) tse o ka thophang mogo tsone.\nlekeletsa!"

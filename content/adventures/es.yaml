@@ -12,7 +12,6 @@ adventures:
 
                     Puedes mostrar texto por pantalla usando el comando `{print}`.     
                 start_code: "{print} hola mundo!"
-                story_text_3: "¡Empezemos! ¿No sabes que crear? En las siguientes pestañas encontrarás ideas sobre programas que puedes construir.\n"
             2:
                 story_text: |
                     En el nivel 2 aprendemos dos nuevos comandos: `{is}` and `{sleep}`.
@@ -110,7 +109,6 @@ adventures:
                 start_code: "{print} 'los números decimales ahora necesitan usar un punto'\n{print} 2.5 + 2.5"
                 story_text: "**Números decimales**\nHasta ahora, Hedy no permitía números decimales como 1.5, pero a partir de ahora sí lo permitiremos. Fíjate que los ordenadores utilizan el punto `.` para los decimales, no la coma."
                 example_code: "```\n{print} 'Dos y medio más dos y medio es...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_4: "**Todo los textos después de las instrucciones `{if}` también necesitan comillas**.\n"
             13:
                 start_code: "nombre = {ask} '¿Cuál es tu nombre?'\nedad = {ask} '¿Cuántos años tienes?'\n{if} nombre {is} 'Hedy' {and} edad {is} 2\n    {print} '¡Eres la verdadera Hedy!'"
                 story_text: "¡Ahora vamos a aprender sobre `{and}` y `{or}`! Si quieres comprobar dos condiciones, no necesitas utilizar dos`{if}` si no que puedes utilizar `{and}` y `{or}`. \n\nSi utilizas `{and}`, ambas condiciones, a derecha e izquierda del `{and}`, deberán ser ciertas. También puedes utilizar `{or}`, en cuyo caso solo una debe ser cierta."
@@ -119,7 +117,6 @@ adventures:
                 start_code: "age = {ask} '¿Qué edad tienes?'\n{if} age < 13\n    {print} '¡Eres más joven que yo!'\n{else}\n    {print} '¡Eres mayor que yo!'"
                 story_text: "¡Vamos a aprender más! Puede que ya los conozcas de matemáticas, el `<` y `>`.\nEl `<`comprueba si el primer número es mas pequeño que el segundo, por ejemplo edad `<` 12 comprueba si edad es menor que 12.\nSi quieres comprobar si el primer número es menor o igual al segundo, puedes utilizar `<=`, por ejemplo, edad `<=` 11.\nEl `>` comprueba si el primer número es mayor que el segundo, por ejemplo puntos `>`10 comprueba si puntos es mayor que 10.\nSi quieres comprobar si el primer número es mayor o igual al segundo, puedes utilizar `>=`, por ejemplo, puntos `>=` 11.\nPuedes utilizar estos símbolos en un `{if}`. Ejemplo:\n"
                 example_code: "```\nage = {ask} '¿Qué edad tienes?'\n{if} age > 12\n    {print} '¡Eres más viejo que yo!'\n```\n"
-                example_code_3: "```\nnombre = {ask} '¿Cuál es tu nombre?'\n{if} nombre != 'Hedy'\n    {print} 'No te llamas Hedy'\n```\n"
             15:
                 start_code: "respuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} 'Cuanto es 5 por 5?'\n{print} 'Tenemos la respuesta correcta'"
                 story_text: "Vamos a aprender una nueva forma de bucles, ¡el bucle `{while}`! Este bucle se repetirá hasta que la condición sea cierta.\nAsí que no te olvides de cambiar el valor en el bucle.\n\nEn el código de ejemplo, este continuará hasta que se le dé una respuesta correcta.\nSi no se le da nunca la respuesta correcta, ¡el bucle nunca acaba!"
@@ -134,7 +131,6 @@ adventures:
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
                 story_text: "¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con `{print}` y `{range}` de ahora en adelante.\nTambién significa que puedes usar código Hedy de este nivel en cualquier ambiente Python siempre y cuando utilizes los comandos en Inglés. Si no lo has hecho hasta ahora, puedes cambiar el interruptor en el menú de comandos para hacerlo."
-                example_code: "```\n{print}('¡Hola!')\n{for} i {in} {range}(1, 10):\n    {print}('Esta es la línea ', i)\n```\n"
     story:
         name: "Una historia"
         description: "Una historia"
@@ -838,9 +834,9 @@ adventures:
             3:
                 story_text: |2
 
-                        En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
-                        Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
-                        De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
+                          En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
+                          Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
+                          De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
                 example_code: |
                     ```
                     opciones {is} piedra, papel, tijera
@@ -1170,7 +1166,6 @@ adventures:
             3:
                 story_text: "En los niveles anteriores hiciste la introducción al juego de la casa embrujada, pero como te habrás dado cuenta, la historia siempre termina en un final tenebroso.\nEn este nivel puedes hacer que tu historia sea más interactiva cambiando el resultado del juego; ¡algunas veces te comerán, otras veces escaparás!\n¡Deja que Hedy decida aleatoriamente!\n"
                 start_code: '# pon tu código aquí'
-                example_code_2: "```\n_ Escapa de la casa embrujada!\n_ Hay tres puertas en frente tuyo...\n_ _ _Que puerta vas a elegir?\n_ Elegiste la puerta... desición \nmonstruos _ un zombie, un vampiro, NADA QUE ESCAPARÁS\n_Ya ves...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
         name: La Casa Embrujada
         description: Escapa de la casa embrujada

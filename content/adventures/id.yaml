@@ -12,7 +12,6 @@ adventures:
 
                     Anda dapat print text di tampilan dengan menggunakan perintah `{print}` .     
                 start_code: '{print} hallo dunia!'
-                story_text_3: "Mari kita mulai! Tidak tahu apa yang harus dibuat? Di tab berikutnya anda akan menemukan ide untuk membuat program.\n"
             2:
                 story_text: |
                     Pada level 2 kita akan belajar perintah baru yaitu: `{is}` dan `{sleep}`.
@@ -167,7 +166,6 @@ adventures:
                     **Angka Desimal**
                     Sejauh ini, Hedy tidak diperbolehkan untuk menggunakan angka desimal seperti 1.5, tapi sekarang kita diperbolehkan untuk itu. Catatan untuk itu gunakan `.` untuk angka desimal itu
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
             13:
                 start_code: |-
                     name = ask 'what is your name?'
@@ -185,7 +183,6 @@ adventures:
                         print 'Kamu lebih tua daripada aku!'
                 story_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: |-
                     jawaban = 0
@@ -212,9 +209,6 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-
-                story_text_3: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
     story:
         name: Cerita
@@ -851,11 +845,11 @@ adventures:
             3:
                 story_text: |2-
 
-                      Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
+                        Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
 
-                      Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
+                        Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
 
-                      Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
+                        Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
 
                 example_code: |
                     ```
@@ -1440,7 +1434,6 @@ adventures:
                     Biarkan Hedy menentukannya secara acak!
 
                 start_code: print Kenapa aku ada disini?
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             14:
                 story_text: "In this level you can use the `<` and `>` symbol to introduce lives to your game.\n"

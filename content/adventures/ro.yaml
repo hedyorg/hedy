@@ -422,16 +422,13 @@ adventures:
             18:
                 start_code: "nume = 'Hedy'\n{print}('Numele meu este ', nume)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with 1`{print}` and 2`{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
-                story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
             1:
                 story_text: "În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.\nIntrodu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!\nÎncearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.\n\nPoți afișa text pe ecran folosind comanda `{print}`.     \n"
-                example_code_2: "```\n{ask} Cum te numești?\n{echo} Salut\n```\n"
                 start_code: '{print} salutări!'
             5:
                 start_code: "nume {is} {ask} 'Cum te numești?'\n{if} nume {is} Hedy {print} 'super!' {else} {print} 'moa'"
                 story_text: "La nivelul 5 există ceva nou, `{if}`! Cu `{if}` puteți alege între două opțiuni diferite.\nAcest program afișează frumos dacă introduci Hedy ca nume și bau! dacă introduci altceva.\n`{ask}` și `{print}` încă funcționează ca la nivelul 4.\n"
                 example_code: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos' {else} {print} 'bau!'\n```\n"
-                example_code_2: "```\nnume {is} {ask} 'cum te numești?'\n{if} nume {is} Hedy {print} 'frumos'\n{else} {print} 'bau!'\n```\n"
             6:
                 start_code: "{print} '5 ori 5 face ' 5 * 5"
                 story_text: "In acest nivel inveți ceva nou: poți face calcule aritmetice.\n\nSimbolul adună este ușor, poți scrie ca și la matematică: `5 + 5` de exemplu. Semnul minus este ușor, `5 - 5`.\n\nSimbolul pentru inmulțire este altfel pentru că nu există pe tastatură. Uită-te, chiar nu există!\nDe aceea inmulțim folosind simbolul asterisc deasupra lui 8: 3`5 * 5`. Citește-l ca și \"5 ori 5\", asta te ajută să îți amintești.\n"
@@ -456,7 +453,6 @@ adventures:
                 start_code: "{print} 'numerele zecimale au acum nevoie de un punct'\n{print} 2.5 + 2.5"
                 story_text: "**Numere zecimale**\nPână acum, Hedy nu permitea numere zecimale precum 1.5, dar acum permite asta. Rețineți că folosim `.` pentru numere zecimale, nu virgulă."
                 example_code: "```\n{print} 'Doi și jumătate plus doi și jumătate face...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\neroi_fantastici = 'Omul păianjen', 'Batman', 'Omul de fier'\n{print} eroi_fantastici {at} {random}\n```\n"
                 example_code_5: "```\nscorul = 25\n{print} 'Rezultatul ' scorul\n```\n"
 
             13:
@@ -467,7 +463,6 @@ adventures:
                 start_code: "vârsta = {ask} 'Ce vârsta ai?'\n{if} vârsta < 13\n    {print} 'Ești mai tânăr(ă) decât mine!'\n{else}\n    {print} 'Ești mai in vârstă decât mine!'"
                 story_text: "Vom invăța comenzi noi. Probabil le stii deja de la matematică: simbolurile:  `<` și  `>`.\nSimbolul `<` verifică dacă primul număr este mai mic decât cel de-al doilea număr, de exemplu pentru vârsta `<` 12 verifică dacă vârsta este mai mică decât 12.\nDacă vrei să verifici dacă primul număr este mai mic sau egal cu cel de-al doilea număr, poți folosi simbolul `<=`, de exemplu vârsta `<=` 11.\nSimbolul `>` verifică dacă primul număr este mai mare decât cel de-al doilea număr, de exemplu  `>` 10 verifică dacă if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nvârsta = {ask} 'Ce vârstă ai?'\n{if} vârsta > 12\n    {print} 'Ești mai în vârstă decât mine!'\n```\n"
-                example_code_3: "```\nnume = {ask} 'Cum te numești?'\n{if} nume != 'Hedy'\n    {print} 'Nu ești Hedy'\n```\n"
             15:
                 start_code: "răspuns = 0\n{while} răspuns != 25\n    răspuns = {ask} 'Cât face  5 ori 5?'\n{print} 'Am dat un răspuns corect'"
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"

@@ -13,10 +13,8 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
             1:
                 story_text: "在關卡 1 中，您可以使用命令 `{print}`、`{ask}` 和 `{echo}`。\n在編程字段中輸入您的代碼。 或者按下示例代碼塊中的綠色按鈕，代碼將輸入！\n使用編程字段下方的綠色“運行代碼”按鈕自行嘗試代碼。\n\n您可以使用 `{print}` 命令將文本打印到屏幕上。     \n"
-                example_code_2: "```\n{ask} 你叫什麽名字?\n{echo} 你好\n```\n"
                 start_code: '{print} 你好，世界！'
             2:
                 story_text: "在級別 2 中，我們學習了兩個新命令：`{is}` 和 `{sleep}`。\n你可以用 `{is}`來命名一個詞。 這稱為變量。 在這個例子中，我們創建了一個名為 name 的變量和一個名為 age 的變量。 您可以在代碼中的任何地方使用單詞名稱，它將被 Hedy 替換，如下所示：\n\n這樣你就不再需要 `{echo}` 命令了！\n"
@@ -31,8 +29,6 @@ adventures:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: "Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
@@ -60,7 +56,6 @@ adventures:
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
@@ -75,7 +70,6 @@ adventures:
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
         description: 關卡解釋
         default_save_name: 介紹
     story:

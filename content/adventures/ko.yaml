@@ -34,21 +34,17 @@ adventures:
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
             2:
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
                 story_text: "레벨 2에서는 두 개의 새로운 명령어 : `{is}` 그리고 `{sleep}` 를 배울거에요.\n단어는 `{is}` 명령어를 통해 새로운 이름으로 바꿀 수 있습니다. 프로그래밍에서 변수라고 부르는 것이죠. 이번 예시에서 'name'과 'age'라고 불리는 두 개의 변수를 만들었습니다. 오른쪽 예시처럼 변수 'name'은 어디에서나 'Hedy'를 대체할 수 있게 되었습니다.\n\n이제부터 `{echo}` 를 무조건 사용할 필요는 없다는 뜻이죠!\n"
                 start_code: '{print} hello world!'
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
             1:
                 story_text: "레벨 1에서는 `{print}`, `{ask}` 그리고 `{echo}` 와 같은 명령어를 사용할 수 있습니다.\n당신의 코드를 하단 프로그래밍 영역에 작성해주세요. 혹은 우측의 화살표 버튼을 눌러 당신을 위해 준비한 코드를 생성할 수도 있습니다!\n작성한 코드는 하단의 '코드 실행' 버튼을 누르면 실행할 수 있습니다.\n\n문장을 나타내기 위해 `{print}` 를 사용할 수 있습니다.     \n"
-                example_code_2: "```\n{ask} 당신의 이름은?\n{echo} 반가워요 \n```\n"
                 start_code: '{print} hello world!'
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: " In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
@@ -76,7 +72,6 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
             13:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
@@ -96,7 +91,6 @@ adventures:
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                story_text_3: "The final change we will need to make to get Python code is changing `{ask}` into `{input}`."
         name: 소개
         description: 레벨 설명
         default_save_name: 소개
@@ -495,7 +489,6 @@ adventures:
             3:
                 start_code: '# place your code here'
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 start_code: '# place your code here'

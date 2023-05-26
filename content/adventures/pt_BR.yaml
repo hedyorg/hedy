@@ -12,7 +12,6 @@ adventures:
 
                     Você pode imprimir texto na tela usando o comando `{print}`.     
                 start_code: "{print} olá mundo!"
-                story_text_3: "Vamos começar! Não sabe o que criar? Nas próximas abas, você encontrará ideias de programas para construir.\n"
             2:
                 story_text: |
                     No nível 2 aprendemos dois novos comandos: `{is}` e `{sleep}`.
@@ -50,7 +49,6 @@ adventures:
                     nome {is} {ask} 'qual o seu nome?'
                     {if} nome {is} Hedy {print} 'legal' {else} {print} 'não tão legal'
                     ```
-                example_code_2: "```\nnome {is} {ask} 'qual o seu nome?'\n{if} nome {is} Hedy {print} 'legal'\n{else} {print} 'não tão legal!'\n```\n"
             6:
                 start_code: "{print} '5 vezes 5 é ' 5 * 5"
                 story_text: |
@@ -138,7 +136,6 @@ adventures:
                     **Números decimais**
                     Até agora, a Hedy não permitia números decimais como 1,5, mas agora permitimos isso. Observe que os computadores usam o `.` para números decimais.
                 example_code: "```\n{print} 'Dois e meio mais dois e meio é...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_3: "```\nsuper_heróis = 'Homem-Aranha', 'Batman', 'Homem de Ferro'\n{print} super_heróis {at} {random}\n```\n"
             13:
                 start_code: |-
                     nome = {ask} 'qual o seu nome?'
@@ -156,7 +153,6 @@ adventures:
                         {print} 'Você é mais velho(a) do que eu!'
                 story_text: "Vamos aprender mais novos itens. Você já deve conhecê-los da matemática, os `<` e `>`.\nO `<` verifica se o primeiro número é menor que o segundo, por exemplo idade `<` 12 verifica se idade é menor que 12.\nSe você quiser verificar se o primeiro número é menor ou igual ao segundo, você pode usar `<=`, por exemplo idade `<=` 11.\nO `>` verifica se o primeiro número é maior que o segundo, por exemplo pontos `>` 10 verifica se pontos é maior que 10.\nSe você quiser verificar se o primeiro número é maior ou igual ao segundo, você pode usar `>=`, por exemplo pontos `>=` 11.\nVocê usa essas comparações em um `{if}`, assim:\n"
                 example_code: "```\nidade = {ask} 'Quantos anos você tem?'\n{if} idade > 12\n    {print} 'Você é mais velho(a) do que eu!'\n```\n"
-                example_code_3: "```\nnome = {ask} 'Qual o seu nome?'\n{if} nome != 'Hedy'\n    {print} 'Você não é a Hedy'\n```\n"
             15:
                 start_code: |-
                     resultado = 0
@@ -188,9 +184,6 @@ adventures:
                     {print}('Meu nome é ', nome)
                 story_text: |-
                     Chegamos ao código Python real! Isso significa que precisamos usar parênteses com {print} e {range} de agora em diante.
-
-                story_text_3: |-
-                    A mudança final que precisaremos fazer para obter o código Python é mudar `{ask}` para `{input}`.
 
     story:
         levels:
@@ -675,7 +668,6 @@ adventures:
             3:
                 story_text: "In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
                 start_code: '# coloque o seu código aqui'
-                example_code_2: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: "In this level you learn how to use quotation marks in your games.\nCan you make your Haunted House level 4 proof?\n"
