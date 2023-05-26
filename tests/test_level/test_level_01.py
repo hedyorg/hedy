@@ -3,6 +3,9 @@ import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
+from hypothesis import given, settings
+import hypothesis.strategies
+
 
 class TestsLevel1(HedyTester):
     level = 1
@@ -12,6 +15,7 @@ class TestsLevel1(HedyTester):
      * combined tests
      * markup tests
      * negative tests
+     * hypothesis tests
 
     Naming conventions are like this:
      * single keyword positive tests are just keyword or keyword_special_case
@@ -642,3 +646,84 @@ class TestsLevel1(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['invalid_command'] == 'aks',
             max_level=17,
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print Hallo welkom bij Hedy!
+        forward 50
+        ask Wat is je lievelingskleur
+        echo je lievelingskleur is""")
+
+        expected_code = HedyTester.dedent(f"""\
+        print('Hallo welkom bij Hedy!')
+        {HedyTester.indent(
+            HedyTester.forward_transpiled(50, self.level),
+            8, True)
+        }
+        answer = input('Wat is je lievelingskleur')
+        print('je lievelingskleur is '+answer)""")
+
+        expected_source_map = {
+            "1/0-1/28": "1/0-1/31",
+            "1/0-4/97": "1/0-10/491",
+            "2/29-2/39": "2/32-8/408",
+            "3/40-3/69": "9/409-9/452",
+            "4/70-4/96": "10/453-10/491"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+# hypothesis initialization starts here
+
+
+# numbers define an order since some commands must be in a certain place (f.e. here: ask must go before echo)
+templates = [
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("turn left", -1),  # arguments for turn and forward could also be randomly sampled
+    ("turn right", -1),
+    ("forward 200", -1),
+    ("forward -200", -1),
+    ("ask <P>", 1),
+    ("echo <P>", 2),
+    ("ask <P>", 3),
+    ("echo <P>", 4)
+]
+
+
+def valid_permutation(lines):
+    orders = [order for _, order in lines]
+    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
+    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    return all(list)
+
+
+class TestsHypothesisLevel1(HedyTester):
+    level = 1
+
+    @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
+    @settings(deadline=None, max_examples=100)
+    # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
+    def test_template_combination(self, code_tuples, d):
+        excluded_chars = ["_", "#", '\n', '\r']
+        random_print_argument = hypothesis.strategies.text(
+            alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+            min_size=1,
+            max_size=10)
+
+        if valid_permutation(code_tuples):
+            lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
+            code = '\n'.join(lines)
+
+            self.single_level_tester(
+                code=code,
+                translate=False
+            )
+
+            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
+                                 Command.print, Command.print, Command.print, Command.turn, Command.turn]
+
+            all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
+            self.assertEqual(expected_commands, all_commands)

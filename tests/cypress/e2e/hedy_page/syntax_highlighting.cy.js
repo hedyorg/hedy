@@ -1,9 +1,9 @@
 import { loginForUser } from "../tools/login/login";
-import { goToHedyPage } from "../tools/navigation/nav";
+import { goToHedyPage, goToAdventurePage } from "../tools/navigation/nav";
 
-describe('The Hedy level 1 page', () => {
+describe('The Hedy level 1 print adventure page', () => {
   beforeEach(() => {
-    goToHedyPage();
+    goToAdventurePage();
   });
 
   it('has the word print highlighted in examples', () => {

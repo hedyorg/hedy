@@ -20,6 +20,7 @@ import program_repair
 
 # Some useful constants
 from hedy_content import KEYWORDS
+from hedy_sourcemap import SourceMap, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
@@ -30,6 +31,9 @@ local_keywords_enabled = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
+
+# define source-map
+source_map = SourceMap()
 
 # builtins taken from 3.11.0 docs: https://docs.python.org/3/library/functions.html
 PYTHON_BUILTIN_FUNCTIONS = [
@@ -145,7 +149,7 @@ reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 indent_keywords = {}
 for lang, keywords in KEYWORDS.items():
     indent_keywords[lang] = []
-    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else']:
+    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else', 'define', 'def']:
         indent_keywords[lang].append(keyword)  # always also check for En
         indent_keywords[lang].append(keywords.get(keyword))
 
@@ -251,14 +255,14 @@ commands_per_level = {
     8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -552,6 +556,23 @@ class LookupEntryCollector(visitors.Visitor):
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
+
+    def define(self, tree):
+        # add function name to lookup
+        self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
+
+        # add arguments to lookup
+        if tree.children[1].data == 'arguments':
+            for x in (c for c in tree.children[1].children if isinstance(c, Tree)):
+                self.add_to_lookup(x.children[0], tree.children[1], tree.meta.line)
+
+    def call(self, tree):
+        function_name = tree.children[0].children[0]
+        args_str = ""
+        if len(tree.children) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
+                                 for x in tree.children[1].children)
+        self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
     def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
         entry = LookupEntry(name, tree, linenumber, skip_hashing)
@@ -1288,7 +1309,13 @@ class ConvertToPython(Transformer):
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
 
-        return escape_var(variable_name) in all_names_before_access_line
+        is_function = False
+        if isinstance(variable_name, str):
+            pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
+            match = re.match(pattern, variable_name)
+            is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+
+        return escape_var(variable_name) in all_names_before_access_line or is_function
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -1394,6 +1421,7 @@ class ConvertToPython(Transformer):
 
 @v_args(meta=True)
 @hedy_transpiler(level=1)
+@source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
     def __init__(self, lookup, numerals_language):
@@ -1538,6 +1566,7 @@ class ConvertToPython_1(ConvertToPython):
 
 @v_args(meta=True)
 @hedy_transpiler(level=2)
+@source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
     def error_ask_dep_2(self, meta, args):
@@ -1650,6 +1679,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
 @v_args(meta=True)
 @hedy_transpiler(level=3)
+@source_map_transformer(source_map)
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -1695,6 +1725,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
 @v_args(meta=True)
 @hedy_transpiler(level=4)
+@source_map_transformer(source_map)
 class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
@@ -1752,6 +1783,7 @@ except NameError:
 
 @v_args(meta=True)
 @hedy_transpiler(level=5)
+@source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
@@ -1842,6 +1874,7 @@ else:
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
+@source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
     def print_ask_args(self, meta, args):
@@ -1950,6 +1983,7 @@ def sleep_after(commands, indent=True):
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
+@source_map_transformer(source_map)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
         var_name = self.get_fresh_var('__i__')
@@ -1965,6 +1999,7 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @v_args(meta=True)
 @hedy_transpiler(level=9)
+@source_map_transformer(source_map)
 class ConvertToPython_8_9(ConvertToPython_7):
 
     def command(self, meta, args):
@@ -2059,6 +2094,7 @@ if event.unicode == '{args[0]}':
 
 @v_args(meta=True)
 @hedy_transpiler(level=10)
+@source_map_transformer(source_map)
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2072,7 +2108,17 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
 @v_args(meta=True)
 @hedy_transpiler(level=11)
+@source_map_transformer(source_map)
 class ConvertToPython_11(ConvertToPython_10):
+    def define(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        body = "\n".join(all_lines)
+        return "def " + args[0] + "():\n" + body
+
+    def call(self, meta, args):
+        return f"""{args[0]}()"""
+
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
@@ -2088,7 +2134,26 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 
 @v_args(meta=True)
 @hedy_transpiler(level=12)
+@source_map_transformer(source_map)
 class ConvertToPython_12(ConvertToPython_11):
+    def define(self, meta, args):
+        function_name = args[0]
+        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(
+            args[1], Tree) and args[1].data == "arguments" else ""
+
+        lines = []
+        for line in args[1 if args_str == "" else 2:]:
+            lines.append(line)
+        body = "\n".join(ConvertToPython.indent(x) for x in lines)
+
+        return f"def {function_name}({args_str}):\n{body}"
+
+    def call(self, meta, args):
+        args_str = ""
+        if len(args) > 1:
+            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+        return f"{args[0]}({args_str})"
+
     def number(self, meta, args):
         # try all ints? return ints
         try:
@@ -2216,6 +2281,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
+@source_map_transformer(source_map)
 class ConvertToPython_13(ConvertToPython_12):
     def and_condition(self, meta, args):
         return ' and '.join(args)
@@ -2226,7 +2292,13 @@ class ConvertToPython_13(ConvertToPython_12):
 
 @v_args(meta=True)
 @hedy_transpiler(level=14)
+@source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
+    def returns(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        exception = self.make_catch_exception(args)
+        return exception + f"return f'''{argument_string}'''"
+
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])
@@ -2260,6 +2332,7 @@ class ConvertToPython_14(ConvertToPython_13):
 
 @v_args(meta=True)
 @hedy_transpiler(level=15)
+@source_map_transformer(source_map)
 class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2295,6 +2368,7 @@ if event.unicode == '{args[0]}':
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
+@source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -2321,6 +2395,7 @@ class ConvertToPython_16(ConvertToPython_15):
 
 @v_args(meta=True)
 @hedy_transpiler(level=17)
+@source_map_transformer(source_map)
 class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2354,6 +2429,7 @@ if event.key == {button_name}:
 
 @v_args(meta=True)
 @hedy_transpiler(level=18)
+@source_map_transformer(source_map)
 class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
         return self.ask(meta, args)
@@ -2557,7 +2633,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
 
 
 def transpile(input_string, level, lang="en"):
@@ -2764,6 +2840,14 @@ def preprocess_ifs(code, lang='en'):
         else:
             return command in line
 
+    def contains_two(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                if line.count(' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    return True
+            return False
+
     def contains_any_of(commands, line):
         # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -2788,13 +2872,14 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                contains_any_of(commands, line) and not contains_any_of(excluded_commands, line)
-            ):  # and this should also (TODO) check for a second `is` cause that too is problematic.
+                (contains_any_of(commands, line) or contains_two('is', line))
+                and not contains_any_of(excluded_commands, line)
+            ):
                 # a second command, but also no else in this line -> check next line!
 
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
-                line = line + " else _ is x"
+                line = line + " else x__x__x__x is 5"
 
         processed_code.append(line)
     processed_code.append(lines[-1])  # always add the last line (if it has if and no else that is no problem)
@@ -2820,7 +2905,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
@@ -2830,8 +2915,8 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
-    if level >= 5 and level <= 8:
+    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
@@ -2996,6 +3081,9 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
+    source_map.clear()
+    source_map.set_hedy_input(input_string)
+
     # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
 
@@ -3027,7 +3115,8 @@ def transpile_inner(input_string, level, lang="en"):
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
 
-        return ParseResult(python, has_turtle, has_pygame)
+        source_map.set_python_output(python)
+        return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.
