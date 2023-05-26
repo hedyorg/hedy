@@ -121,7 +121,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     11: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color", "define", "call"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
@@ -132,7 +132,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     12: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color", "define", "call", "with", "using"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color", "define", "call", "with", "using", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
@@ -143,7 +143,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     13: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "repeat", "color", "define", "call", "with", "using"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "repeat", "color", "define", "call", "with", "using", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],

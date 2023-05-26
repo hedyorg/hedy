@@ -2184,3 +2184,16 @@ class TestsLevel12(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NestedFunctionException,
+            max_level=16,
+        )

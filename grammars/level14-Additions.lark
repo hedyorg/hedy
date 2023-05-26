@@ -11,13 +11,3 @@ bigger_equal: comparison_arg  _LARGER_EQUALS  comparison_arg
 not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
 
 ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER
-
-// FUNCTIONS ======================================== =============================
-command:+= return
-?return: _RETURN (_print_argument)? -> returns
-?simple_expression:+= call
-?turtle_color:+= call
-
-add: _ADD_LIST (call | some_spaces) _TO_LIST var_access
-remove: _REMOVE (call | some_spaces) _FROM var_access
-// ================================================================================
