@@ -2,20 +2,19 @@ levels:
     1:
         1:
             story: |
-                You're a customer at bakery Hedy.
-                You want into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Next, your order is being prepared.
-            code: |
+                Tu entres dans la boulangerie Hedy, et le boulanger t'accueille.
+                Il te demande le type de tarte que tu souhaites commandes.
+                Ensuite ta commande est préparée.
+            code: |-
                 {print} Bienvenue à la boulangerie Hedy !
                 {ask} Quel type de tarte souhaites-tu commander ?
-                {echo} So you want
+                {echo} Alors tu veux
                 {print} Ta commande est en train d'être préparée !
         2:
             story: |
                 You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
-            code: |
-                {print} This is DJ Hedy
+            code: |-
+                {print} C'est DJ Hedy
                 {ask} On fait la fête ?
                 {ask} Quelle chanson veux-tu écouter ?
                 {echo} Super choix ! J'adore
@@ -24,10 +23,10 @@ levels:
             story: |
                 Tes amis et toi allez regarder un film sur Netflix.
                 Affiche le titre du film que vous allez regarder et souhaite un bon visionnage !
-            code: |
-                {print} It is time for an evening of Netflix
-                film {is} Sonic the Hedgehog 2
-                {print} We're going to film
+            code: |-
+                {print} C'est l'heure d'une soirée ciné !
+                le film {is} Sonic le hérisson 2
+                {print} Allons regarder le film
                 {print} Bon visionnage !
         2:
             story: |
