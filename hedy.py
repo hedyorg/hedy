@@ -220,7 +220,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.for_loop: ['in', 'range', 'to'],
                          Command.define: ['define'],
                          Command.call: ['call'],
-                         Command.returns: ['return'],}
+                         Command.returns: ['return'], }
 
 
 class HedyType:
@@ -2160,7 +2160,7 @@ class ConvertToPython_12(ConvertToPython_11):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
         return exception + f"return f'''{argument_string}'''"
-    
+
     def number(self, meta, args):
         # try all ints? return ints
         try:

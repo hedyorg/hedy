@@ -11,7 +11,6 @@ class HighlighterTestFunctions(HighlightTester):
         ("level15"),
         ("level16"),
     ])
-    
     def test_functions_1(self, level):
         self.assert_highlighted_chr_multi_line(
             "define function_1 with par1, par2",
