@@ -28,7 +28,6 @@ import hedy
 import hedy_content
 import hedy_translation
 import hedyweb
-import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
