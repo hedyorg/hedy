@@ -177,7 +177,7 @@ adventures:
 
                     In the example code, we continue until a correct answer has been given.
                     If the correct answer is never given, the loop never ends!
-                example_code: |2
+                example_code: |
 
                         ```
                         answer = 0
@@ -192,7 +192,7 @@ adventures:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
-                example_code: |2
+                example_code: |
 
                         ```
                         friends = ['Ahmed', 'Ben', 'Cayden']
@@ -252,7 +252,7 @@ adventures:
 
                     За тази цел ти ще напишеш малко повече код. Ха!
 
-                example_code: |2
+                example_code: |
 
                         ```
                         name is ask Как се нарича главаната героиня?
@@ -277,8 +277,7 @@ adventures:
 
                 start_code: "repeat 5 times print 'Помо-о-о-щ!'"
             5:
-                story_text: |2
-
+                story_text: |
                         В четвърто ниво ще направиш историята си дори по-цветиста и забавна!
                         Тук ще прибавиш различни възможни завършеци, за да има изненадващ край.
 
@@ -293,7 +292,6 @@ adventures:
                         Сега ще ползваме променливата "име" по-гъвкаво, също както в трето ниво.
                         Виж как ползваме командите `if` (ако) и `else` (тогава), за да програмираме избирането
                         на един от двата края на историята.
-
                 example_code: |
                     ```
                     име is ask 'Как се казва принцесата, която се разхожда в гората?'
@@ -324,7 +322,7 @@ adventures:
                     ```
                 start_code: "print 'Твоята история ще се появи тук!'"
             3:
-                story_text: |2
+                story_text: |
 
                         Към историята, която пишеш можеш да добавиш нещо произволно и неочаквано, примерно чудовище, животно или някаква пречка.
 
@@ -341,7 +339,7 @@ adventures:
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
-                example_code_3: |2
+                example_code_3: |
 
 
                         ```
@@ -396,7 +394,7 @@ adventures:
                 story_text: |
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -422,7 +420,7 @@ adventures:
                     Baby Shark
 
                     You can make this song much shorter with a `{repeat}`! Can you finish the code?
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -435,7 +433,7 @@ adventures:
             8:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -511,7 +509,7 @@ adventures:
             12:
                 story_text: |
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -598,7 +596,7 @@ adventures:
                     Ползвай 90 градуса, за да завиеш 1/4 (една четвърт). Едно пълно завъртане е равно на 360 градуса.
                     Представи си как би могла да "нарисуваш" фигура от свързани линии с програмиране? Може би триъгълник? Кръг?
 
-                example_code: |2
+                example_code: |
 
                         ```
                         print "Рисуване на фигура"
@@ -691,14 +689,14 @@ adventures:
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             3:
-                story_text: |2
+                story_text: |
 
 
                         Докато рисуваш костенурката можеш да добавиш и командата `random`. С нея костенурката ще поеме в произволна посока всеки път.
                         Ползвай `at random` в комбинация с променлива с повече стойности, не само една.
                         Ползвай примера отдолу и увеличи листа с още стойности, освен 10, 50, 90, 150, 250.
 
-                example_code: |2
+                example_code: |
 
                         ```
                         ъгли is 10, 50, 90, 150, 250
@@ -760,8 +758,7 @@ adventures:
                 story_text_2: "If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             5:
-                story_text: |2
-
+                story_text: |
                         С командата `if` ще създадем възможност за повече избор в програмата ни.
                         Можеш да програмираш реакция на системата по определен избор.
 
@@ -778,7 +775,7 @@ adventures:
 
                 start_code: "print 'Кой мие чиниите?'"
             4:
-                story_text: |2
+                story_text: |
 
                         Сега ползвай кавички, за да подобриш графика на миячите на чинии.
                         Този път в кода има пропуски, отбелязани с черта за подчертаване '_'.
@@ -1133,7 +1130,7 @@ adventures:
                     In this level you can use nesting to make your restaurant more realistic and more fun!
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1161,7 +1158,7 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1170,7 +1167,7 @@ adventures:
                             food = {ask} 'What would you like to eat as your ' course '?'
                             {print} food ' will be your ' course
                         ```
-                story_text_2: |2
+                story_text_2: |
 
 
                         Of course, you could also order for multiple people!
@@ -1187,7 +1184,7 @@ adventures:
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1209,7 +1206,7 @@ adventures:
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1232,7 +1229,7 @@ adventures:
                     In this level we can use the new commands to upgrade our restaurant.
                     We use `{and}` to see {if} two things are both the case.
 
-                example_code: |2
+                example_code: |
 
                         ```
                         price = 10
@@ -1248,7 +1245,7 @@ adventures:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1315,7 +1312,7 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |2
+                example_code: |
 
 
 
@@ -1339,7 +1336,7 @@ adventures:
             2:
                 story_text: |
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-                example_code: |2
+                example_code: |
 
                         ```
                         monster_1 {is} 👻
@@ -1383,7 +1380,7 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1406,7 +1403,7 @@ adventures:
 
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1433,7 +1430,7 @@ adventures:
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1461,7 +1458,7 @@ adventures:
             14:
                 story_text: |
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1492,7 +1489,7 @@ adventures:
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
-                example_code: |2
+                example_code: |
 
 
                         ```
@@ -1552,7 +1549,7 @@ adventures:
             5:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
-                example_code: |2
+                example_code: |
 
                         ```
                         {print} 'Learn French!'
@@ -1568,7 +1565,7 @@ adventures:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
 
-                example_code: |2
+                example_code: |
 
                         ```
                         french_words = ['bonjour', 'ordinateur', 'pomme de terre']
