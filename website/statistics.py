@@ -151,55 +151,29 @@ class StatisticsModule(WebsiteModule):
             print(f'Student: {student_username}')
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-            quiz_scores = self.db.get_quiz_stats([student_username])
+            quizzes = self.db.get_quiz_stats([student_username])
 
-            # check the programs that the student has run each level
+            # find quiz and programs statistics for each student on each level
             programs_ran_per_level = []
             quizzes_ran_per_level = []
             average_quizzes_ran_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                programs_ran_per_level.append([])
-                quizzes_ran_per_level.append([])
+                find_programs_per_level(programs_ran_per_level, programs, level)
+                calc_num_programs_per_level(programs_ran_per_level, level)
 
-                # append the programs obtained on each level
-                for program in programs:
-                    if program['level'] == level:
-                        programs_ran_per_level[level - 1].append(program['name'])
-
-                # append the scores obtained on each level
-                for quiz_score in quiz_scores:
-                    if quiz_score['level'] == level:
-                        quizzes_ran_per_level[level - 1].append(quiz_score["scores"][0])
-
-                # average the quiz scores on each level
-                if not quizzes_ran_per_level[level - 1]:
-                    average_quizzes_ran_per_level.append(0)
-                else:
-                    if len(quizzes_ran_per_level[level - 1]) == 1:
-                        average_quizzes_ran_per_level.append(quizzes_ran_per_level[level - 1][0])
-                    if len(quizzes_ran_per_level[level - 1]) > 1:
-                        average_quiz_score_per_level = 0
-                        for index in range(1, len(quizzes_ran_per_level[level - 1]) + 1):
-                            quiz_scores_per_level = quizzes_ran_per_level[level - 1][index - 1]
-                            average_quiz_score_per_level += quiz_scores_per_level
-
-                        average_quiz_score_per_level /= (len(quizzes_ran_per_level[level - 1]))
-                        average_quizzes_ran_per_level.append(int(average_quiz_score_per_level))
-
-            # count the number of programs that the student has run each level
-            for i in range(len(programs_ran_per_level)):
-                programs_ran_per_level[i] = len(programs_ran_per_level[i])
+                find_quizzes_per_level(quizzes_ran_per_level, quizzes, level)
+                calc_avg_quizzes_per_level(average_quizzes_ran_per_level, quizzes_ran_per_level, level)
 
             average_quiz_scores = "-"
             success_rate_overall = "-"
-            if len(quiz_scores) != 0:
+            if len(quizzes) != 0:
                 num_finished_quizzes = 0
                 total_quiz_score = 0
                 success_rate_overall = 0
-                for index in range(1, len(quiz_scores) + 1):
-                    score_level = quiz_scores[index - 1].get("scores")[0]
-                    finished_quiz = quiz_scores[index - 1]['finished']
-                    started_quiz = quiz_scores[index - 1]['started']
+                for index in range(1, len(quizzes) + 1):
+                    score_level = quizzes[index - 1].get("scores")[0]
+                    finished_quiz = quizzes[index - 1]['finished']
+                    started_quiz = quizzes[index - 1]['started']
 
                     num_finished_quizzes += finished_quiz
                     total_quiz_score += score_level
@@ -210,17 +184,17 @@ class StatisticsModule(WebsiteModule):
                 success_rate_overall /= num_finished_quizzes
                 success_rate_overall = round(success_rate_overall, ndigits=0)
 
-            finished_quizzes = any("finished" in x for x in quiz_scores)
+            finished_quizzes = any("finished" in x for x in quizzes)
             highest_level_quiz = max([x.get("level")
-                                      for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            highest_level_quiz_score = ([x.get("scores") for x in quiz_scores if x.get(
+                                      for x in quizzes if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = ([x.get("scores") for x in quizzes if x.get(
                 "level") == highest_level_quiz]) if finished_quizzes else "-"
             success_rate_highest_level = '-'
             if finished_quizzes:
                 highest_level_started = ([x.get("started")
-                                          for x in quiz_scores if x.get("level") == highest_level_quiz])
+                                          for x in quizzes if x.get("level") == highest_level_quiz])
                 highest_level_finished = ([x.get("finished")
-                                           for x in quiz_scores if x.get("level") == highest_level_quiz])
+                                           for x in quizzes if x.get("level") == highest_level_quiz])
                 success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
                 success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
 
@@ -569,3 +543,42 @@ def get_general_class_stats(students):
         "week": {"runs": weekly_successes + weekly_errors, "fails": weekly_errors},
         "total": {"runs": successes + errors, "fails": errors},
     }
+
+
+# append the programs obtained on each level
+def find_programs_per_level(programs_per_level, programs, level):
+    programs_per_level.append([])
+    for program in programs:
+        if program['level'] == level:
+            programs_per_level[level - 1].append(program['name'])
+
+
+# append the quizzes obtained on each level
+def find_quizzes_per_level(quizzes_per_level, quizzes, level):
+    quizzes_per_level.append([])
+    for quiz_score in quizzes:
+        if quiz_score['level'] == level:
+            quizzes_per_level[level - 1].append(quiz_score["scores"][0])
+
+
+def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level, level):
+    if not quizzes_ran_per_level[level - 1]:
+        avg_quizzes_ran_per_level.append(0)
+    else:
+        quizzes_per_level = quizzes_ran_per_level[level - 1]
+        if len(quizzes_ran_per_level[level - 1]) == 1:
+            avg_quizzes_ran_per_level.append(quizzes_per_level[0])
+        if len(quizzes_ran_per_level[level - 1]) > 1:
+            average_quiz_score_per_level = 0
+            for index in range(1, len(quizzes_per_level) + 1):
+                average_quiz_score_per_level += quizzes_per_level[index - 1]
+
+            average_quiz_score_per_level /= (len(quizzes_ran_per_level[level - 1]))
+            avg_quizzes_ran_per_level.append(int(average_quiz_score_per_level))
+
+    return avg_quizzes_ran_per_level
+
+
+# count the number of programs that the student has run each level
+def calc_num_programs_per_level(programs_ran_per_level, level):
+    programs_ran_per_level[level - 1] = len(programs_ran_per_level[level - 1])
