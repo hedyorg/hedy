@@ -10,15 +10,20 @@
         </button>
     </div>
 
+    <div class="flex pt-2">
+        <button class="green-btn ml-auto"
+                onclick="hedyApp.loadQuizChart({{ class_info.levels }}, {{ class_info.students }})">
+            Load data
+        </button>
+    </div>
+
     <div class="shadow-md stats mt-4 p-2">
         <div id="wrapper-static-student-tile" class="flex flex-wrap justify-center">
             {% for student in class_info.students %}
-                <div id="static-student-tile" class="group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
+                <div id="static-student-tile-{{student.username}}" class="group student-tile shadow cursor-pointer inline-block border px-6 py-2 m-4 rounded-lg
                 transition-all duration-500 ease-in-out hover:bg-green-400 hover:text-white"
-                     onclick="hedyApp.loadQuizChart({{ class_info.levels }}, {{ student.average_quizzes_ran_per_level }})
-                             hedyApp.studentTileChartClicked(event, {{ student|tojson }},{{ class_info.levels }}, {{ student.programs_ran_per_level }} )">
+                     onclick="hedyApp.studentTileChartClicked(event, {{ student|tojson }},{{ class_info.levels }}, {{ student.programs_ran_per_level }} )">
                     <p id="static-student-name" class="select-none font-bold text-lg">{{ student.username }}</p>
-                    <canvas width="400" height="300" id="student-quiz-chart"></canvas>
                 </div>
             {% endfor %}
         </div>

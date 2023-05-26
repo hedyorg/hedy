@@ -1,7 +1,6 @@
 import {Chart} from "chart.js";
 
 let studentTileChart: Chart<"bar", number[], string>;
-let studentTileQuizChart: Chart<"line", number[], string>;
 
 function createNewQuizChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"line", number[], string> {
     return new Chart(ctx, {
@@ -122,15 +121,19 @@ export function studentTileChartClicked(event: any, student: any, levels: string
     }
 }
 
-export function loadQuizChart(levels: string[], studentQuizProgression: number[]) {
-    const ctx = document.getElementById('student-quiz-chart') as HTMLCanvasElement;
+export function loadQuizChart(levels: string[], students: any) {
+    for (let i = 0; i < students.length; i ++) {
+        let student = students[i];
+        let avg_quizzes_per_level = student['average_quizzes_ran_per_level']
+        let elementString = "static-student-tile-" + student['username']
 
-    console.log(studentQuizProgression)
+        const div = document.getElementById(elementString) as HTMLDivElement;
+        let canvas = document.createElement('canvas');
+        canvas.width  = 350;
+        canvas.height = 250;
+        canvas.id = "canvas-" + student['username'];
+        div.appendChild(canvas)
 
-    // Ensure that the studentTileChart (chart bar) is reset each time a different student tile is clicked
-    if (studentTileQuizChart != null) {
-        studentTileQuizChart.destroy();
+        createNewQuizChart(canvas, levels, avg_quizzes_per_level);
     }
-
-    studentTileQuizChart = createNewQuizChart(ctx, levels, studentQuizProgression);
 }
