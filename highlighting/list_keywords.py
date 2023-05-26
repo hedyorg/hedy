@@ -132,7 +132,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     12: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
@@ -143,7 +143,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     13: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
@@ -154,7 +154,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     14: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "else", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "else", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+", "<", ">", "!"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": [],
@@ -165,7 +165,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     15: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+", "<", ">", "!"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
@@ -176,7 +176,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     16: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "else", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "else", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+", "<", ">", "!", "\\[", "\\]"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": [],
@@ -187,7 +187,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     17: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "else", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "using", "return"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "not_in", "if", "else", "for", "range", "to", "and", "or", "while", "repeat", "color", "define", "call", "with", "return"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+", "<", ">", "!", "\\[", "\\]", ":"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": ["elif"],
