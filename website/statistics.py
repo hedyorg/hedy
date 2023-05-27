@@ -131,7 +131,6 @@ class LiveStatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("live-stats", __name__)
         self.db = db
-        self.__error_db_load()
         # Define the groups of misconceptions
         self.misconception_groups = {
             'Not a current level command': ['level'],
@@ -147,18 +146,19 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
-    def __error_db_load(self):
-        """Loads the error data from the json file. Function mainly exists in order to
-        quickly call it again whenever the database needs to be read again for updating purposes.
-        """
-        self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
-        self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
-
     def __selected_levels(self, class_id):
         class_overview = self.db.get_class_customizations(class_id)['dashboard_customization']
         if 'selected_levels' in class_overview.keys():
             return class_overview['selected_levels']
         return [1]
+
+    def __common_errors(self, class_id):
+        class_customization = self.db.get_class_customizations(class_id)
+        if 'dashboard_customization' in class_customization.keys() \
+                and 'common_errors' in class_customization['dashboard_customization'].keys():
+            return class_customization['dashboard_customization']['common_errors']
+        else:
+            return []
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
@@ -168,8 +168,10 @@ class LiveStatisticsModule(WebsiteModule):
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.ERRORS.get({"class_id": class_id})
+        common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
+
+        print("Common errors: ", common_errors)
 
         # identifies common errors in the class
         self.misconception_detection(class_id, user, common_errors)
@@ -208,7 +210,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL+1):
+        for level in range(1, HEDY_MAX_LEVEL + 1):
             _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
@@ -273,7 +275,7 @@ class LiveStatisticsModule(WebsiteModule):
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.ERRORS.get({"class_id": class_id})
+        common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
 
         self.misconception_detection(class_id, user, common_errors)
@@ -347,7 +349,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL+1):
+        for level in range(1, HEDY_MAX_LEVEL + 1):
             _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
@@ -408,12 +410,11 @@ class LiveStatisticsModule(WebsiteModule):
         """
         Handles the rendering of the common error items in the common errors detection list.
         """
-
         show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.ERRORS.get({"class_id": class_id})
+        common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
         self.misconception_detection(class_id, user, common_errors)
 
@@ -421,7 +422,7 @@ class LiveStatisticsModule(WebsiteModule):
         error_id = request.args.get("error-id", default="", type=str)
         selected_item = None
         if error_id:
-            selected_item = common_errors['errors'][int(error_id)]
+            selected_item = common_errors[int(error_id)]
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -452,7 +453,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL+1):
+        for level in range(1, HEDY_MAX_LEVEL + 1):
             _data = []
             for _student in class_.get("students", []):
                 last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
@@ -509,17 +510,37 @@ class LiveStatisticsModule(WebsiteModule):
         """
         Removes the common error item by setting the active flag to 0.
         """
-        common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
-        for i in range(len(common_errors['errors'])):
-            if common_errors['errors'][i]['id'] == error_id and common_errors['errors'][i]['active'] == 1:
-                common_errors['errors'][i]['active'] = 0
-                self.ERRORS.update({"class_id": class_id}, common_errors)
-                self.__error_db_load()
+        class_customization = self.db.get_class_customizations(class_id)
+
+        common_errors = []
+        if 'dashboard_customization' in class_customization.keys() and \
+                'common_errors' in class_customization['dashboard_customization'].keys():
+            common_errors = class_customization['dashboard_customization']['common_errors']
+
+        for i in range(len(common_errors)):
+            if common_errors[i]['id'] == int(error_id) and common_errors[i]['active'] == 1:
+                common_errors[i]['active'] = 0
+                selected_levels = []
+                if 'dashboard_customization' in class_customization.keys() and \
+                        'selected_levels' in class_customization['dashboard_customization'].keys():
+                    selected_levels = class_customization['dashboard_customization']['selected_levels']
+
+                class_customization['dashboard_customization'] = {
+                    'selected_levels': selected_levels,
+                    'common_errors': common_errors
+                }
+                self.db.update_class_customizations(class_customization)
                 break
 
         return {}, 200
 
     def retrieve_data(self, class_id, user):
+        """
+        Retrieves data from the db for use in misconception analysis.
+        :param class_id: class id
+        :param user: user
+        :return: data, data_error_history
+        """
         supported_langs = ['en']
 
         data, data_error_history = {}, {}
@@ -559,6 +580,7 @@ class LiveStatisticsModule(WebsiteModule):
         return data, data_error_history
 
     def misconception_hit(self, error):
+        # Currently not in use
         for misconception, keywords in self.misconception_groups.items():
             # Check if the current error is different from the last error;
             # errors that fall in same misconception group are considered same errors
@@ -567,7 +589,13 @@ class LiveStatisticsModule(WebsiteModule):
         return None
 
     def new_id_calc(self, common_errors, class_id):
-        common_error_ids = [int(x['id']) for x in common_errors['errors']]
+        """
+        Calculates the new id for a new common error entry.
+        :param common_errors: common errors from db
+        :param class_id: class id
+        :return: new id
+        """
+        common_error_ids = [int(x['id']) for x in common_errors]
         new_id = max(common_error_ids) + 1 if common_error_ids else 0
 
         # reached max common errors
@@ -597,10 +625,15 @@ class LiveStatisticsModule(WebsiteModule):
         # Group the error messages by session and count their occurrences
         data, data_error_history = self.retrieve_data(class_id, user)  # retrieves relevant data from db
 
-        headers = [x['header'] for x in common_errors['errors']]
+        # get current class customization
+        class_customization = self.db.get_class_customizations(class_id)
 
-        # retrieve proper format from db and store in table for further modification
-        new_common_errors = dynamo.Table(self.common_error_db, "common_errors", "class_id").get({"class_id": class_id})
+        headers = [x['header'] for x in common_errors]
+
+        existing_common_errors = []
+        if 'dashboard_customization' in class_customization.keys() and \
+                'common_errors' in class_customization['dashboard_customization'].keys():
+            existing_common_errors = class_customization['dashboard_customization']['common_errors']
 
         misconception_counts = {}
 
@@ -651,8 +684,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Print the top 4 misconceptions with the highest count of continuous errors
         # and their associated errors and usernames
-        print("Misconception Counts")
-        print(misconception_counts, "\n")
 
         for misconception, errors in sorted(misconception_counts.items(),
                                             key=lambda x: sum(x[1][error]['freq'] for error in x[1]),
@@ -672,26 +703,34 @@ class LiveStatisticsModule(WebsiteModule):
                 idx = headers.index(misconception)
                 hits = 0
                 for user in all_users:
-                    if user in common_errors['errors'][idx]['students']:
+                    if user in common_errors[idx]['students']:
                         hits += 1
                 if hits == len(all_users):
                     # no update needed as entry already exists
-                    continue    # skip to next misconception
+                    continue  # skip to next misconception
                 elif hits > 0:
                     # update existing entry, existing student(s) was found but new ones have to be added
-                    new_common_errors['errors'][idx]['students'] = all_users
+                    existing_common_errors[idx]['students'] = all_users
             else:
                 # make new entry
                 new_id = self.new_id_calc(common_errors, class_id)
-                new_common_errors['errors'].append({
+                existing_common_errors.append({
                     'id': new_id,
                     'header': misconception,
                     'active': 1,
-                    "students": users_only,
+                    "students": users_only
                 })
-            # update db
-            self.ERRORS.update({"class_id": class_id}, new_common_errors)
-        self.__error_db_load()
+
+            selected_levels = []
+            if 'dashboard_customization' in class_customization.keys() and \
+                    'selected_levels' in class_customization['dashboard_customization'].keys():
+                selected_levels = class_customization['dashboard_customization']['selected_levels']
+
+            class_customization['dashboard_customization'] = {
+                'selected_levels': selected_levels,
+                'common_errors': existing_common_errors
+            }
+            self.db.update_class_customizations(class_customization)
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
@@ -702,13 +741,19 @@ class LiveStatisticsModule(WebsiteModule):
         body = request.json
         levels = [int(i) for i in body["levels"]]
 
-        existing_class_customization = self.db.get_class_customizations(class_id)
-        existing_class_customization['dashboard_customization'] = {
-            'selected_levels': levels
+        class_customization = self.db.get_class_customizations(class_id)
+
+        common_errors = []
+        if 'dashboard_customization' in class_customization.keys() and \
+                'common_errors' in class_customization['dashboard_customization'].keys():
+            common_errors = class_customization['dashboard_customization']['common_errors']
+
+        class_customization['dashboard_customization'] = {
+            'selected_levels': levels,
+            "common_errors": common_errors
         }
 
-        self.db.update_class_customizations(existing_class_customization)
-        self.__error_db_load()
+        self.db.update_class_customizations(class_customization)
 
         return {}, 200
 
@@ -985,7 +1030,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                 adventures_for_level.append(
                     {
                         "id": adventure_key,
-                        "name":  adventure_name,
+                        "name": adventure_name,
                         "in_progress": students_in_progress
                     }
                 )
@@ -995,7 +1040,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                 adventures_for_level.append(
                     {
                         "id": adventure_key,
-                        "name":  adventure_name,
+                        "name": adventure_name,
                         "in_progress": students_in_progress
                     }
                 )
@@ -1013,7 +1058,7 @@ def _get_quiz_info(quiz_stats):
     { level: { students_in_progress, students_finished } }
     """
     quiz_info = {}
-    for level in range(1, HEDY_MAX_LEVEL+1):
+    for level in range(1, HEDY_MAX_LEVEL + 1):
         students_in_progress, students_finished = [], []
         for stats in quiz_stats:
             if level in stats.get("in_progress"):
@@ -1098,7 +1143,7 @@ def _collect_graph_data(data, window_size=5):
     for week in data:
         if 'chart_history' in week.keys():
             graph_data += week['chart_history']
-            labels += list(range(c+1, c + 1 + len(week['chart_history'])))
+            labels += list(range(c + 1, c + 1 + len(week['chart_history'])))
             c += len(week['chart_history'])
 
     slice = window_size if len(graph_data) > window_size else 0
