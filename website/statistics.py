@@ -153,7 +153,12 @@ class LiveStatisticsModule(WebsiteModule):
         """
         self.common_error_db = dynamo.MemoryStorage("radboard_error_data.json")
         self.ERRORS = dynamo.Table(self.common_error_db, "common_errors", "class_id")
-        self.CLASS_OVERVIEW = dynamo.Table(self.common_error_db, "class_overview", "class_id")
+
+    def __selected_levels(self, class_id):
+        class_overview = self.db.get_class_customizations(class_id)['dashboard_customization']
+        if 'selected_levels' in class_overview.keys():
+            return class_overview['selected_levels']
+        return [1]
 
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
@@ -164,7 +169,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
-        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
+        selected_levels = self.__selected_levels(class_id)
 
         # identifies common errors in the class
         self.misconception_detection(class_id, user, common_errors)
@@ -236,7 +241,7 @@ class LiveStatisticsModule(WebsiteModule):
                 "common_errors": common_errors
             },
             class_overview={
-                "selected_levels": class_overview["selected_levels"],
+                "selected_levels": selected_levels,
                 "quiz_info": quiz_info
             },
             dashboard_options={
@@ -269,7 +274,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
-        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
+        selected_levels = self.__selected_levels(class_id)
 
         self.misconception_detection(class_id, user, common_errors)
 
@@ -381,7 +386,7 @@ class LiveStatisticsModule(WebsiteModule):
                 "common_errors": common_errors
             },
             class_overview={
-                "selected_levels": class_overview["selected_levels"],
+                "selected_levels": selected_levels,
                 "quiz_info": quiz_info
             },
             dashboard_options_args=dashboard_options_args,
@@ -409,7 +414,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
-        class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
+        selected_levels = self.__selected_levels(class_id)
         self.misconception_detection(class_id, user, common_errors)
 
         # get id of the common error to know which data to display from database
@@ -480,7 +485,7 @@ class LiveStatisticsModule(WebsiteModule):
                 "common_errors": common_errors
             },
             class_overview={
-                "selected_levels": class_overview["selected_levels"],
+                "selected_levels": selected_levels,
                 "quiz_info": quiz_info
             },
             dashboard_options={
@@ -697,13 +702,7 @@ class LiveStatisticsModule(WebsiteModule):
         body = request.json
         levels = [int(i) for i in body["levels"]]
 
-        class_overview = dynamo.Table(self.common_error_db, "class_overview", "class_id").get({"class_id": class_id})
-        class_overview['selected_levels'] = levels
-
-        self.CLASS_OVERVIEW.update({"class_id": class_id}, class_overview)
-
         existing_class_customization = self.db.get_class_customizations(class_id)
-        # if 'dashboard_customization' not in existing_class_customization.keys():
         existing_class_customization['dashboard_customization'] = {
             'selected_levels': levels
         }
