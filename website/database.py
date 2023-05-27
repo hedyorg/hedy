@@ -129,6 +129,7 @@ QUIZ_STATS = dynamo.Table(
 # Program stats also includes a boolean array indicating the order of successful and non-successful runs.
 # In order to not flood the database, this history array can maximally have 100 entries.
 MAX_CHART_HISTORY_SIZE = 100
+MAX_ERROR_HISTORY_SIZE = 100
 
 
 class Database:
@@ -783,17 +784,24 @@ class Database:
         p_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
 
         chart_history = []
+        error_history = []
         if p_stats.records and 'chart_history' in p_stats.records[0].keys():
             chart_history = p_stats.records[0]['chart_history']
-        slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
+        chart_slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
+
+        if p_stats.records and 'error_history' in p_stats.records[0].keys():
+            error_history = p_stats.records[0]['error_history']
+        error_slice = MAX_ERROR_HISTORY_SIZE if len(error_history) > MAX_ERROR_HISTORY_SIZE else 0
 
         if exception:
             add_attributes[exception] = dynamo.DynamoIncrement()
             new_chart_history = chart_history + [0]
+            error_history += [exception]
         else:
             add_attributes["successful_runs"] = dynamo.DynamoIncrement()
             new_chart_history = chart_history + [1]
-        add_attributes["chart_history"] = new_chart_history[-slice:]
+        add_attributes["chart_history"] = new_chart_history[-chart_slice:]
+        add_attributes["error_history"] = error_history[-error_slice:]
 
         return PROGRAM_STATS.update(key, add_attributes)
 
