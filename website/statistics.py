@@ -271,6 +271,8 @@ class LiveStatisticsModule(WebsiteModule):
         common_errors = self.ERRORS.get({"class_id": class_id})
         class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
 
+        self.misconception_detection(class_id, user, common_errors)
+
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
 
@@ -408,6 +410,7 @@ class LiveStatisticsModule(WebsiteModule):
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.ERRORS.get({"class_id": class_id})
         class_overview = self.CLASS_OVERVIEW.get({"class_id": class_id})
+        self.misconception_detection(class_id, user, common_errors)
 
         # get id of the common error to know which data to display from database
         error_id = request.args.get("error-id", default="", type=str)
