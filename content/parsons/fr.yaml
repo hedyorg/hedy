@@ -12,7 +12,7 @@ levels:
                 {print} Ta commande est en train d'être préparée !
         2:
             story: |
-                You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
+                Tu es auprès du DJ pour lui demanded une chanson. Crée un programme qui demande si tu es prêt à faire la fête, et puis demande quelle chanson tu veux écouter.
             code: |-
                 {print} C'est DJ Hedy
                 {ask} On fait la fête ?
@@ -30,11 +30,11 @@ levels:
                 {print} Bon visionnage !
         2:
             story: |
-                This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code: |
-                {print} Welcome to our toystore
-                jouet {is} {ask} Qu aimerais tu acheter ?
-                {print} The toy is added to your shopping cart.
+                Ceci est la boutique en ligne d'un magasin de jouets. Crée un programme où les clients peuvent ajouter un jouet dans leur panier.
+            code: |-
+                {print} Bienvenue dans notre magasin de jouets
+                jouet {is} {ask} Qu'aimerais tu acheter ?
+                {print} Le jouet est ajouté dans notre panier.
                 {print} Merci d'avoir fait tes achats chez nous !
     3:
         1:
@@ -44,20 +44,20 @@ levels:
                 Dans quelle maison iras-tu ?
                 Es-tu plutôt Gryffondor, Poufsouffle, Serdaigle, ou Serpentard ?
                 Laisse le programme faire une petite pause avant de dévoiler ta maison.
-            code: |
+            code: |-
                 {print} Une nouvelle année commence à Poudlard !
-                {print} The sorting hat is ready to sort you into a Hogwarts house.
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                {print} Le Choipeaux magique va décider de la maison qui t'accueillera.
+                maison {is} Gryffondor, Poufsouffle, Serdaigle, ou Serpentard
                 {sleep} 2
-                {print} And it is houses {at} {random}
+                {print} Et c'est la maison {at} {random}
         2:
             story: |
                 Écris un programme qui te choisit un plat au hasard. Crée une liste d'aliments et une liste de garnitures et laisse le programme décider pour toi !
-            code: |
-                nourriture {is} pizza, icecream, salad, sandwich
-                garnitures {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
-                sleep 2
+            code: |-
+                nourriture {is} pizza, glace, salade, sandwich
+                garnitures {is} chocolat, fromage, thon, vermicelles
+                {print} Ton repas du jour au hasard est...
+                {sleep} 2
                 {print} nourriture {at} {random} avec garnitures {at} {random}
     4:
         1:
@@ -65,9 +65,9 @@ levels:
                 Tu es le plus jeune entraineur Pokémon de Pallet Town !
                 Fais un programme qui sélectionne ton premier Pokémon.
                 Laisse attendre le programme une minute avant de révéler ton premier Pokémon.
-            code: |
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+            code: |-
+                pokemons {is} Pikachu, Salamèche, Bulbizarre, Carapuce
+                {print} 'Ça va être ton premier pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
