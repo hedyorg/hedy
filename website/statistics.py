@@ -147,9 +147,11 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_FEED_SIZE = 4
 
     def __selected_levels(self, class_id):
-        class_overview = self.db.get_class_customizations(class_id)['dashboard_customization']
-        if 'selected_levels' in class_overview.keys():
-            return class_overview['selected_levels']
+        class_customization = self.db.get_class_customizations(class_id)
+        if 'dashboard_customization' in class_customization.keys():
+            class_overview = class_customization['dashboard_customization']
+            if 'selected_levels' in class_overview.keys():
+                return class_overview['selected_levels']
         return [1]
 
     def __common_errors(self, class_id):
