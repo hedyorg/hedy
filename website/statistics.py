@@ -603,7 +603,7 @@ class LiveStatisticsModule(WebsiteModule):
         # recent_session = list(data.keys())[0]
         # programs = data[recent_session]  # all recent programs of all users in session
 
-        last_error = None  # Todo: augment database to include type of error history
+        last_error = None
         last_user = None
         count = 0
 
