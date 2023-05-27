@@ -1,90 +1,7 @@
-import {Chart} from "chart.js";
+import {Chart, ChartTypeRegistry} from "chart.js";
 
 let studentTileChart: Chart<"bar", number[], string>;
-
-function createNewQuizChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgression: number[]): Chart<"line", number[], string> {
-    return new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: studentLevels,
-            datasets: [{
-                label: 'Average quiz per level (%)',
-                data: studentProgression,
-                borderWidth: 1,
-                borderColor: '#36A2EB',
-                backgroundColor: '#9BD0F5',
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Average Quiz',
-                    font: {
-                        size: 24,
-                    }
-                },
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: "Levels",
-                        font: {
-                            size: 15
-                        }
-                    },
-                }
-            }
-        }
-    });
-}
-
-function createNewProgressionChart(ctx: HTMLCanvasElement, studentLevels: string[], studentProgramProgression: number[]): Chart<"bar", number[], string> {
-    return new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: studentLevels,
-            datasets: [{
-                label: 'Program progression per level (%)',
-                data: studentProgramProgression,
-                borderWidth: 1,
-                borderColor: '#36A2EB',
-                backgroundColor: '#9BD0F5',
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Level Progression',
-                    font: {
-                        size: 24,
-                    }
-                },
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 10,
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: "Levels",
-                        font: {
-                            size: 15
-                        }
-                    },
-                }
-            }
-        }
-    });
-}
+let dataLoaded = false
 
 function expandStudentTileChart(student: any, levels: string[], programs: number[]){
     let bigTile = document.getElementById('expanded-student-tile')!;
@@ -96,7 +13,11 @@ function expandStudentTileChart(student: any, levels: string[], programs: number
         studentTileChart.destroy();
     }
 
-    studentTileChart = createNewProgressionChart(ctx, levels, programs);
+    let chartMax: number = 15
+    let chartType: keyof ChartTypeRegistry = "bar";
+    let chartLabel = 'Program progression per level (%)';
+    let chartTitle: string = 'Level Progression';
+    studentTileChart = createNewChart(ctx, levels, programs, chartMax, chartLabel, chartTitle, chartType);
 
     studentName.textContent = student.username;
     bigTile.classList.remove('hidden');
@@ -122,18 +43,67 @@ export function studentTileChartClicked(event: any, student: any, levels: string
 }
 
 export function loadQuizChart(levels: string[], students: any) {
-    for (let i = 0; i < students.length; i ++) {
-        let student = students[i];
-        let avg_quizzes_per_level = student['average_quizzes_ran_per_level']
-        let elementString = "static-student-tile-" + student['username']
+    if (!dataLoaded) {
+        for (let i = 0; i < students.length; i++) {
+            let student = students[i];
+            let avg_quizzes_per_level = student['average_quizzes_ran_per_level'];
+            let elementString = "static-student-tile-" + student['username'];
 
-        const div = document.getElementById(elementString) as HTMLDivElement;
-        let canvas = document.createElement('canvas');
-        canvas.width  = 350;
-        canvas.height = 250;
-        canvas.id = "canvas-" + student['username'];
-        div.appendChild(canvas)
+            const div = document.getElementById(elementString) as HTMLDivElement;
+            let canvas = document.createElement('canvas');
+            canvas.width = 350;
+            canvas.height = 250;
+            canvas.id = "canvas-" + student['username'];
+            div.appendChild(canvas);
 
-        createNewQuizChart(canvas, levels, avg_quizzes_per_level);
+            let chartMax: number = 100;
+            let chartType: keyof ChartTypeRegistry = "line";
+            let chartLabel = 'Average quiz per level (%)';
+            let chartTitle: string = 'Average Quiz';
+            createNewChart(canvas, levels, avg_quizzes_per_level, chartMax, chartLabel, chartTitle, chartType);
+        }
+        dataLoaded = true;
     }
+}
+
+function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], data: number[],  max: number, chartLabel: string, chartTitle: string, chartType: any): Chart<"bar", number[], string> {
+    return new Chart(ctx, {
+        type: chartType,
+        data: {
+            labels: studentLevels,
+            datasets: [{
+                label: chartLabel,
+                data: data,
+                borderWidth: 1,
+                borderColor: '#36A2EB',
+                backgroundColor: '#9BD0F5',
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: chartTitle,
+                    font: {
+                        size: 24,
+                    }
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: max,
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Levels",
+                        font: {
+                            size: 15
+                        }
+                    },
+                }
+            }
+        }
+    });
 }
