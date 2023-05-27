@@ -158,7 +158,7 @@ adventures:
                 example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
-                story_text: "Ahora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de `{else}` `{if}` y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
+                story_text: "Ahora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de `{else}` `{if}` y la necesitas cuando quieres hacer 3 (o más) opciones.\n¡Pruébalas!\n"
                 example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
@@ -767,27 +767,27 @@ adventures:
                 story_text: |
                     ¡En este nivel hay otra nueva palabra clave: `{pressed}`!
                     Con `{pressed}` puedes usar las teclas de tu teclado para controlar qué líneas se usarán.
-                    
+
                     ### Desafío
                     Mira el ejemplo y agrega una línea más de código que reaccione al presionar una tecla.
 
                 example_code: |
-                     ```
-                     {print} '¿Quieres un final bueno (g) o malo (b)?'
-                     {if} g {is} {pressed} {print} 'Vivieron felices para siempre ❤'
-                     {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
-                     ```
+                    ```
+                    {print} '¿Quieres un final bueno (g) o malo (b)?'
+                    {if} g {is} {pressed} {print} 'Vivieron felices para siempre ❤'
+                    {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
+                    ```
                 story_text_2: |
-                     También puedes enlazar los comandos de la tortuga a teclas del teclado.
+                    También puedes enlazar los comandos de la tortuga a teclas del teclado.
 
-                     ### Desafío
-                     Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
+                    ### Desafío
+                    Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
 
                 example_code_2: |
-                     ```
-                     {if} y {is} {pressed} {forward} 15
-                     {else} {turn} 90
-                     ```
+                    ```
+                    {if} y {is} {pressed} {forward} 15
+                    {else} {turn} 90
+                    ```
                 start_code: "# pon tu código aquí"
             7:
                 story_text: |
@@ -805,7 +805,7 @@ adventures:
             9:
                 story_text: |
                     Ahora que sabes como combinar sentencias, puedes crear una herramienta de escritura a ciegas con `{pressed}`
-                    
+
                     ### Ejercicio                    
                     Termina el código. Cada vez una letra aleatoria va a ser escogida, la cual debes presionar. Obtienes un punto cuando presionas la tecla correcta, y una deducción de dos puntos cuando presionas una tecla equivocada.
                     **(extra)** Limpia la pantalla luego de cada letra, y muestra al usuario cuántos puntos han obtenido.
@@ -869,7 +869,7 @@ adventures:
                     ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:
-                story_text: |
+                story_text: |2
 
                     En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
                     Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
@@ -984,7 +984,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                     En nivel 1 puedes hacer tu propio restaurante virtual y tomar los pedidos de tus invitados.
+                    En nivel 1 puedes hacer tu propio restaurante virtual y tomar los pedidos de tus invitados.
                 example_code: |
                     ```
                     {print} Bienvenido al restaurante Hedy's

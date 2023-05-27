@@ -252,7 +252,7 @@ adventures:
                 start_code: "{print} 你的故事"
             13:
                 story_text: "通过使用`{and}`和`{or}`命令，你可以把故事写得更短。比如这个龙的故事。\n\n### 练习 \n你能像这样制作你自己的迷你冒险游戏吗？\n"
-                example_code: "```\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n路 = {ask} '她应该选择哪条路呢？'\n武器 = {ask} '她画的是什么武器？'\n{for} i {in} {range} 0 {to} 2\n{if} 路 {is} '左' {and} 武器 {is} '剑'\n    _\n```\n"
+                example_code: "```\n{print} “我们的英雄正在穿过森林”\n{print} “路径分两路”\npath= {ask} “她应该选择哪条路径？”\n武器={ask} “她画的是什么武器？”\n{if} 路径 {is} “左” {and} 武器 {is} “剑”\n    _\n```\n"
                 start_code: '# 在这里写你的代码'
             1:
                 story_text: "在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
@@ -427,7 +427,7 @@ adventures:
             9:
                 start_code: '# 把你的代码放在这里'
                 story_text: "现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
-                example_code: "```\n积分们 = 1\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\n积分们 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
 
             5:
                 start_code: '# 在此处键入代码'
