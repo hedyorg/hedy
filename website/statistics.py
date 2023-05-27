@@ -143,7 +143,7 @@ class LiveStatisticsModule(WebsiteModule):
             'Typed something that is not allowed': ['entered', 'allowed'],
             'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
         }
-        self.MAX_CONTINUOUS_ERRORS = 1  # update according with database functionality
+        self.MAX_CONTINUOUS_ERRORS = 3
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
@@ -517,7 +517,7 @@ class LiveStatisticsModule(WebsiteModule):
     def retrieve_data(self, class_id, user):
         supported_langs = ['en']
 
-        data = {}
+        data, data_error_history = {}, {}
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -525,6 +525,16 @@ class LiveStatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
         for student_username in students:
             programs = self.db.programs_for_user(student_username)
+
+            program_stats = self.db.get_program_stats([student_username], None, None)
+            if program_stats:
+                # if there are multiple weeks, only get the most recent week's data
+                program_stats = program_stats[-1]
+
+                if "error_history" in program_stats.keys():
+                    # only get the most recent week's data
+                    data_error_history[student_username] = program_stats['error_history']
+
             for item in programs:
                 if item['lang'] in supported_langs:
 
@@ -541,7 +551,7 @@ class LiveStatisticsModule(WebsiteModule):
                         'adventure_name': item['adventure_name'],
                         "code": item["code"]
                     })
-        return data
+        return data, data_error_history
 
     def misconception_hit(self, error):
         for misconception, keywords in self.misconception_groups.items():
@@ -580,7 +590,7 @@ class LiveStatisticsModule(WebsiteModule):
         Detects misconceptions of students in the class based on errors they are making.
         """
         # Group the error messages by session and count their occurrences
-        data = self.retrieve_data(class_id, user)  # retrieves relevant data from db
+        data, data_error_history = self.retrieve_data(class_id, user)  # retrieves relevant data from db
 
         headers = [x['header'] for x in common_errors['errors']]
 
@@ -590,20 +600,22 @@ class LiveStatisticsModule(WebsiteModule):
         misconception_counts = {}
 
         # only take most recent session
-        recent_session = list(data.keys())[0]
-        programs = data[recent_session]  # all recent programs of all users in session
+        # recent_session = list(data.keys())[0]
+        # programs = data[recent_session]  # all recent programs of all users in session
 
         last_error = None  # Todo: augment database to include type of error history
         last_user = None
         count = 0
 
         # Iterate over each error and its corresponding username in the current session group
-        for run in programs:
-            error = run['error']
-            username = run['username']
+        for username, error_history in data_error_history.items():
 
-            if error:
-                misconception = self.misconception_hit(error)
+            for error in error_history:
+                # error_class = hedy_exceptions.HEDY_EXCEPTIONS[error_class_str]()
+                # error = _translate_error(error_class, 'en') if error_class else None
+
+                # misconception = self.misconception_hit(error)
+                misconception = error
                 if misconception:
 
                     if username == last_user and error == last_error:
