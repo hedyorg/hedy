@@ -691,7 +691,7 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
     def select_levels(self, user, class_id):
-        """"
+        """
         Stores the selected levels in the class overview in the database.
         """
         body = request.json
@@ -701,6 +701,14 @@ class LiveStatisticsModule(WebsiteModule):
         class_overview['selected_levels'] = levels
 
         self.CLASS_OVERVIEW.update({"class_id": class_id}, class_overview)
+
+        existing_class_customization = self.db.get_class_customizations(class_id)
+        # if 'dashboard_customization' not in existing_class_customization.keys():
+        existing_class_customization['dashboard_customization'] = {
+            'selected_levels': levels
+        }
+
+        self.db.update_class_customizations(existing_class_customization)
         self.__error_db_load()
 
         return {}, 200
