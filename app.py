@@ -511,7 +511,6 @@ def parse():
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
-                response['FixedCode'] = ex.fixed_code
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
@@ -521,14 +520,24 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
-            response['source_map'] = transpile_result.source_map
+            source_map_result = transpile_result.source_map.get_result()
+
+            for i, mapping in source_map_result.items():
+                if mapping['error'] is not None:
+                    source_map_result[i]['error'] = translate_error(
+                        source_map_result[i]['error'].error_code,
+                        source_map_result[i]['error'].arguments,
+                        keyword_lang
+                    )
+
+            response['source_map'] = source_map_result
 
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
-        except Exception:
+        except Exception as e:
             pass
 
         try:
