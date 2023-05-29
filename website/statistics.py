@@ -132,16 +132,6 @@ class LiveStatisticsModule(WebsiteModule):
         super().__init__("live-stats", __name__)
         self.db = db
         # Define the groups of misconceptions
-        self.misconception_groups = {
-            'Not a current level command': ['level'],
-            'Incorrect use of command': ['cannot'],
-            'Incorrect use of variable': ['variable'],
-            'Unwanted spaces': ['Spaces', 'confuse', 'computers'],
-            'Forgot commandos': ['forgot'],
-            'Empty program': ['empty program'],
-            'Typed something that is not allowed': ['entered', 'allowed'],
-            'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
-        }
         self.MAX_CONTINUOUS_ERRORS = 3
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
@@ -172,8 +162,6 @@ class LiveStatisticsModule(WebsiteModule):
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
-
-        print("Common errors: ", common_errors)
 
         # identifies common errors in the class
         self.misconception_detection(class_id, user, common_errors)
@@ -581,15 +569,6 @@ class LiveStatisticsModule(WebsiteModule):
                     })
         return data, data_error_history
 
-    def misconception_hit(self, error):
-        # Currently not in use
-        for misconception, keywords in self.misconception_groups.items():
-            # Check if the current error is different from the last error;
-            # errors that fall in same misconception group are considered same errors
-            if error and any(keyword in error.lower() for keyword in keywords):
-                return misconception
-        return None
-
     def new_id_calc(self, common_errors, class_id):
         """
         Calculates the new id for a new common error entry.
@@ -683,9 +662,6 @@ class LiveStatisticsModule(WebsiteModule):
                     last_error = None
                     last_user = username
                     count = 0
-
-        # Print the top 4 misconceptions with the highest count of continuous errors
-        # and their associated errors and usernames
 
         for misconception, errors in sorted(misconception_counts.items(),
                                             key=lambda x: sum(x[1][error]['freq'] for error in x[1]),
