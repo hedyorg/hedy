@@ -1,6 +1,8 @@
 import re
 from os import path
 
+from lark import Tree, ParseError
+
 
 class SourceRange:
     """
@@ -31,9 +33,10 @@ class SourceCode:
     a source_range (SourceRange) and the code (str)
     """
 
-    def __init__(self, source_range: SourceRange, code: str):
+    def __init__(self, source_range: SourceRange, code: str, error: Exception = None):
         self.source_range = source_range
         self.code = code
+        self.error = error
 
     def __hash__(self):
         return hash((
@@ -54,7 +57,10 @@ class SourceCode:
         return not (self == other)
 
     def __str__(self):
-        return f'{self.source_range} --- {self.code}'
+        if self.error is None:
+            return f'{self.source_range} --- {self.code}'
+        else:
+            return f'{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]'
 
     def __repr__(self):
         return self.__str__()
@@ -73,6 +79,8 @@ class SourceMap:
     """
 
     map = dict()
+    level = 0
+    language = 'en'
     hedy_code = ''
     python_code = ''
 
@@ -89,6 +97,13 @@ class SourceMap:
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
         self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
 
+    def set_level(self, level):
+        self.level = level
+        self.get_grammar_rules(level)
+
+    def set_language(self, language):
+        self.language = language
+
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
 
@@ -97,6 +112,9 @@ class SourceMap:
         python_code_mapped = list()
 
         for hedy_source_code, python_source_code in self.map.items():
+            if hedy_source_code.error is not None or python_source_code.code == '':
+                continue
+
             start_index = python_code.find(python_source_code.code)
             start_line = python_code[0:start_index].count('\n') + 1
             code_char_length = len(python_source_code.code)
@@ -116,20 +134,49 @@ class SourceMap:
 
             python_code_mapped.append(python_source_code.code)
 
+    def get_grammar_rules(self, level):
+        script_dir = path.abspath(path.dirname(__file__))
+
+        with open(path.join(script_dir, "grammars-Total", f'level{level}.en-Total.lark'), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+
+        self.grammar_rules = re.findall(r"(\w+):", grammar_text)
+        self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
+
     def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
         self.map[hedy_code] = python_code
 
     def clear(self):
         self.map.clear()
+        self.level = 0
+        self.language = 'en'
         self.hedy_code = ''
         self.python_code = ''
 
-    def get_response_object(self):
+    def get_result(self):
         response_map = dict()
+        index = 0
 
         for hedy_source_code, python_source_code in self.map.items():
-            response_map[str(hedy_source_code.source_range)] = str(python_source_code.source_range)
+            response_map[index] = {
+                'hedy_range': {
+                    'from_line': hedy_source_code.source_range.from_line,
+                    'from_character': hedy_source_code.source_range.from_character,
+                    'to_line': hedy_source_code.source_range.to_line,
+                    'to_character': hedy_source_code.source_range.to_character,
+                },
+                'python_range': {
+                    'from_line': python_source_code.source_range.from_line,
+                    'from_character': python_source_code.source_range.from_character,
+                    'to_line': python_source_code.source_range.to_line,
+                    'to_character': python_source_code.source_range.to_character,
+                },
+                'error': hedy_source_code.error,
+            }
 
+            index += 1
+
+        response_map.popitem()  # remove mapping for program rule
         return response_map
 
     def print_source_map(self, d, indent=0):
@@ -157,14 +204,28 @@ def source_map_rule(source_map: SourceMap):
     def decorator(function):
         def wrapper(*args, **kwargs):
             meta = args[1]
-            generated_python = function(*args, **kwargs)
 
             hedy_code_input = source_map.hedy_code[meta.start_pos:meta.end_pos]
             hedy_code_input = hedy_code_input.replace('#ENDBLOCK', '')  # ENDBLOCK is not part of the Hedy code, remove
 
+            try:
+                generated_python = function(*args, **kwargs)
+
+                if isinstance(generated_python, Tree):
+                    raise ParseError()  # code could not be parsed, raise ParseError
+
+                error = None
+            except Exception as e:
+                generated_python = 'pass'
+                error = e
+
             hedy_code = SourceCode(
-                SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
-                hedy_code_input
+                SourceRange(
+                    meta.container_line, meta.container_column,
+                    meta.container_end_line, meta.container_end_column
+                ),
+                hedy_code_input,
+                error=error
             )
 
             python_code = SourceCode(
