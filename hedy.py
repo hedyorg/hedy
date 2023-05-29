@@ -25,6 +25,7 @@ from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
+HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -2622,8 +2623,6 @@ PARSER_CACHE = {}
 
 def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
-
-    Uses caching if Hedy is NOT running in development mode.
     """
     key = str(level) + "." + lang + '.' + str(keep_all_tokens)
     existing = PARSER_CACHE.get(key)
@@ -2638,8 +2637,37 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
 
 
+def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
+    def skipping_faulty(meta, args): return 'pass'
+
+    defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
+    defined_errors_backup = dict()
+
+    for error in defined_errors:
+        defined_errors_backup[error] = getattr(IsValid, error)
+        setattr(IsValid, error, skipping_faulty)
+
+    transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+
+    for error in defined_errors:
+        setattr(IsValid, error,  defined_errors_backup[error])
+
+    for hedy_source_code, python_source_code in source_map.map.copy().items():
+        if hedy_source_code.error is not None or python_source_code.code == 'pass':
+            try:
+                transpile_inner(hedy_source_code.code, source_map.level, source_map.language)
+            except Exception as e:
+                hedy_source_code.error = e
+
+    return transpile_result
+
+
 def transpile(input_string, level, lang="en"):
-    transpile_result = transpile_inner(input_string, level, lang)
+    if level <= HEDY_MAX_LEVEL_SKIPPING_FAULTY:
+        transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+    else:
+        transpile_result = transpile_inner(input_string, level, lang)
+
     return transpile_result
 
 
@@ -3073,7 +3101,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en"):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False):
     check_program_size_is_valid(input_string)
 
     level = int(level)
@@ -3083,8 +3111,11 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    source_map.clear()
-    source_map.set_hedy_input(input_string)
+    if populate_source_map:
+        source_map.clear()
+        source_map.set_level(level)
+        source_map.set_language(lang)
+        source_map.set_hedy_input(input_string)
 
     # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
@@ -3102,11 +3133,11 @@ def transpile_inner(input_string, level, lang="en"):
         # FH, may 2022. for now, we just out arabic numerals when the language is ar
         # this can be changed into a profile setting or could be detected
         # in usage of programs
-
         if lang == "ar":
             numerals_language = "Arabic"
         else:
             numerals_language = "Latin"
+
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
@@ -3117,15 +3148,18 @@ def transpile_inner(input_string, level, lang="en"):
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
 
-        source_map.set_python_output(python)
-        return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
+        if populate_source_map:
+            source_map.set_python_output(python)
+
+        return ParseResult(python, source_map, has_turtle, has_pygame)
     except VisitError as E:
-        # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
-        # HedyException to show the intended error message.
-        if isinstance(E.orig_exc, exceptions.HedyException):
-            raise E.orig_exc
-        else:
-            raise E
+        if isinstance(E, VisitError):
+            # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
+            # HedyException to show the intended error message.
+            if isinstance(E.orig_exc, exceptions.HedyException):
+                raise E.orig_exc
+            else:
+                raise E
 
 
 def execute(input_string, level):
