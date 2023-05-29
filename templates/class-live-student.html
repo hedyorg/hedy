@@ -90,12 +90,4 @@
 
 {% endblock %}
 
-{% block additional_scripts %}
-    <script>
-            hedyApp.InitLineChart({{ data }}, {{ labels }});
-            // interval to refresh data
-            hedyApp.sleep(60000).then(() => {
-                window.location.reload();
-            });
-    </script>
-{% endblock %}
+
