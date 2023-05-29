@@ -355,6 +355,7 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventures=adventures,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             data=graph_data,
             labels=graph_labels,
             max_level=HEDY_MAX_LEVEL,
