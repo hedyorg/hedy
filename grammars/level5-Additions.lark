@@ -3,7 +3,7 @@ _empty_program: (_EOL | _SPACE)*
 _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs -= error_invalid > assign
+command:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs > assign | error_invalid
 _if_less_command: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
