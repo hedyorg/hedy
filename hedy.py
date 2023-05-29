@@ -22,6 +22,7 @@ import yaml
 
 # Some useful constants
 from hedy_content import KEYWORDS
+from hedy_sourcemap import SourceMap, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
@@ -32,6 +33,9 @@ local_keywords_enabled = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
+
+# define source-map
+source_map = SourceMap()
 
 # builtins taken from 3.11.0 docs: https://docs.python.org/3/library/functions.html
 PYTHON_BUILTIN_FUNCTIONS = [
@@ -1419,6 +1423,7 @@ class ConvertToPython(Transformer):
 
 @v_args(meta=True)
 @hedy_transpiler(level=1)
+@source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
     def __init__(self, lookup, numerals_language):
@@ -1563,6 +1568,7 @@ class ConvertToPython_1(ConvertToPython):
 
 @v_args(meta=True)
 @hedy_transpiler(level=2)
+@source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
     def error_ask_dep_2(self, meta, args):
@@ -1675,6 +1681,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
 @v_args(meta=True)
 @hedy_transpiler(level=3)
+@source_map_transformer(source_map)
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -1720,6 +1727,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
 @v_args(meta=True)
 @hedy_transpiler(level=4)
+@source_map_transformer(source_map)
 class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
@@ -1777,6 +1785,7 @@ except NameError:
 
 @v_args(meta=True)
 @hedy_transpiler(level=5)
+@source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
@@ -1867,6 +1876,7 @@ else:
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
+@source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
     def print_ask_args(self, meta, args):
@@ -1975,6 +1985,7 @@ def sleep_after(commands, indent=True):
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
+@source_map_transformer(source_map)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
         var_name = self.get_fresh_var('__i__')
@@ -1990,6 +2001,7 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @v_args(meta=True)
 @hedy_transpiler(level=9)
+@source_map_transformer(source_map)
 class ConvertToPython_8_9(ConvertToPython_7):
 
     def command(self, meta, args):
@@ -2084,6 +2096,7 @@ if event.unicode == '{args[0]}':
 
 @v_args(meta=True)
 @hedy_transpiler(level=10)
+@source_map_transformer(source_map)
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2097,6 +2110,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
 @v_args(meta=True)
 @hedy_transpiler(level=11)
+@source_map_transformer(source_map)
 class ConvertToPython_11(ConvertToPython_10):
     def define(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2122,6 +2136,7 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 
 @v_args(meta=True)
 @hedy_transpiler(level=12)
+@source_map_transformer(source_map)
 class ConvertToPython_12(ConvertToPython_11):
     def define(self, meta, args):
         function_name = args[0]
@@ -2268,6 +2283,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
+@source_map_transformer(source_map)
 class ConvertToPython_13(ConvertToPython_12):
     def and_condition(self, meta, args):
         return ' and '.join(args)
@@ -2278,6 +2294,7 @@ class ConvertToPython_13(ConvertToPython_12):
 
 @v_args(meta=True)
 @hedy_transpiler(level=14)
+@source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
@@ -2317,6 +2334,7 @@ class ConvertToPython_14(ConvertToPython_13):
 
 @v_args(meta=True)
 @hedy_transpiler(level=15)
+@source_map_transformer(source_map)
 class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2352,6 +2370,7 @@ if event.unicode == '{args[0]}':
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
+@source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -2378,6 +2397,7 @@ class ConvertToPython_16(ConvertToPython_15):
 
 @v_args(meta=True)
 @hedy_transpiler(level=17)
+@source_map_transformer(source_map)
 class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2411,6 +2431,7 @@ if event.key == {button_name}:
 
 @v_args(meta=True)
 @hedy_transpiler(level=18)
+@source_map_transformer(source_map)
 class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
         return self.ask(meta, args)
@@ -2614,7 +2635,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
 
 
 def transpile(input_string, level, lang="en"):
@@ -3062,6 +3083,9 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
+    source_map.clear()
+    source_map.set_hedy_input(input_string)
+
     # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
 
@@ -3093,7 +3117,8 @@ def transpile_inner(input_string, level, lang="en"):
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
 
-        return ParseResult(python, has_turtle, has_pygame)
+        source_map.set_python_output(python)
+        return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.

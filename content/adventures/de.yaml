@@ -189,8 +189,8 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Bereit oder nicht, ich komme!'
-                story_text: |-
-                    Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
+                story_text: |
+                    Jetzt werden wir die Einrückung ein wenig ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
                     In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für `{else}` `{if}` und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
                     Probier es mal aus!
@@ -929,8 +929,8 @@ adventures:
                     ```
                     tage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
                     namen = Mama, Papa, Emma, Sophie
-                    for tag in tage
-                        {print} namen {at} {random} ' ist am ' tag ' mit dem Abwasch dran.'
+                    {for} tag {in} tage
+                        {print} namen {at} {random} ' ist mit dem Abwasch dran am ' tag
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
@@ -1150,32 +1150,32 @@ adventures:
     pressit:
         name: Tastengedrücke
         description: Versuche eine Taste an einen Befehl zu binden!
-        default_save_name: Drückes
+        default_save_name: Gedrückt
         levels:
             5:
                 start_code: '# platziere deinen Code hier'
-                story_text: "In diezer Level wurde dir das neue Schlüsselwort `{pressed}` mitgeteilt! Mit `{pressed}`\nkannst du deinen Code interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\n### Übung\nSehen Sie sich das Beispiel an und fügen Sie eine weitere Zeile hinzu, die auf Tasten reagiert."
+                story_text: "In diesem Level gibt es ein neues Schlüsselwort: `{pressed}`!\nMit `{pressed}` kannst du mit den Tasten auf deiner Tastatur steuern, welche Zeilen verwendet werden.\n\n### Übung\nSchau dir das Beispiel an und füge eine weitere Zeile hinzu, die auf Tasten reagiert.\n"
                 example_code_2: "```\n{if} x {is} {pressed} {forward} 50\n{else} {turn} 90\n```\n"
                 example_code: |
                     ```
-                    {print} 'Willst du ein gutes (g) oder ein schlechtes (a) Ende?'
+                    {print} 'Möchtest du ein gutes (g) oder ein böses (b) Ende?'
                     {if} g {is} {pressed} {print} 'Sie lebten glücklich bis ans Ende ihrer Tage ❤'
-                    {else} print 'Der Prinz wurde von einem Nilpferd gefressen 😭'
+                    {else} {print} 'Der Prinz wurde von einem Nilpferd gefressen 😭'
                     ```
                 story_text_2: |
                     Sie können jeden Code mit einem Schlüssel verknüpfen, einschließlich der Zeichenschildkröte.
-                    
+
                     ### Übung
                     Kopieren Sie die Codezeilen, damit Sie eine größere Zeichnung erstellen können.
 
             7:
                 example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
                 start_code: '# Platziere deinen Code hier'
-                story_text: "Nun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
+                story_text: "Nun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken!\nDu kannst dazu nutzen, die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Code, den du in Level 5 gesehen hast, prüft die Taste nur einmal. Kopiere den Beispielcode und füge ein `{repeat}` hinzu, so dass du die Tasten mehrmals drücken kannst. Benutze diesen Code, um etwas Schönes zu zeichnen.\n"
             9:
                 start_code: '# platziere deinen Code hier'
-                story_text: "Nun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
-                example_code: "```\nPunkte = 1\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
+                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
+                example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
 
     rock:
         name: "Schere, Stein, Papier"
@@ -1275,7 +1275,7 @@ adventures:
 
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
-                story_text: |
+                story_text: |2
 
                     In this level we can enter lists and choose things from them.
                     You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
@@ -1649,7 +1649,7 @@ adventures:
                 story_text: |
                     In diesem Level kannst du Mathe verwenden um den Gesamtpreis einer Bestellung auszurechnen. Da macht dein virtuelles Restaurant realistischer.
 
-                example_code: |4
+                example_code: |2
 
                     Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
                     ```
@@ -1676,7 +1676,7 @@ adventures:
                     - ein Kindermenü hinzufügen?
                     - dir noch weitere Ideen ausdenken?
 
-                example_code_2: |4
+                example_code_2: |2
 
                     In diesem Beispiel gibt es ein Drei-Gänge-Menü, was mehr Code erfordert sowie ein paar Zusätze in der Preisberechnung.
                     ```
@@ -2013,7 +2013,7 @@ adventures:
                     Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sonder nur `{echo}`.
                     In diesem Level kannst du Variablen und den `{at} {random}` Befehl benutzen, um Hedy wirklich eine Antwort für dich auswählen zu lassen. Schau dir zum Beispiel diesen Code an:
 
-                example_code: |4
+                example_code: |2
 
                     In diesem Beispiel kann die Spielerin Hedy eine Ja-Nein-Frage {ask} und Hedy wird eine zufällige Antwort für dich aussuchen.
                     ```
@@ -2372,7 +2372,7 @@ adventures:
                 example_code: "```\nzeichen = 'x'\noffene_stellen = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus'\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1\n            stelle_1 = zeichen\n        {if} wahl == 2\n            stelle_2 = zeichen\n        {if} wahl == 3\n            stelle_3 = zeichen\n        {if} wahl == 4\n            stelle_4 = zeichen\n        {if} wahl == 5\n            stelle_5 = zeichen\n        {if} wahl == 6\n            stelle_6 = zeichen\n        {if} wahl == 7\n            stelle_7 = zeichen\n        {if} wahl == 8\n            stelle_8 = zeichen\n        {if} wahl == 9\n            stelle_9 = zeichen\n    {else}\n        {print} 'Die Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    gewinner = {ask} 'Hast du gewonnen?'\n    {if} gewinner == 'ja'\n        {print} 'Gut gemacht, Spieler ' zeichen '!'\n        spiel = 'aus'\n    {else}\n        {if} zeichen == 'x'\n            zeichen = 'o'\n        {else}\n            zeichen = 'x'\n```\n"
             17:
                 start_code: '# gib deinen Code hier ein'
-                story_text: "In den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird.\nDas bedeutet, dass die `{while}`-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
+                story_text: "In den vorigen Leveln hatte das Tic-Tac-Toe-Spiel ein nerviges Verhalten. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht.\nDies hat das Spiel spielbar gemacht, aber auch recht langsam. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe).\nDu kannst diese in den Zeilen 46 bis 69 finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable spiel auf 'aus' gesetzt wird.\nDas bedeutet, dass die `{while}`-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
                 example_code: "```\nzeichen = 'x'\noffene_stellen = [1, 2, 3, 4, 5, 6, 7, 8, 9]\nspiel = 'an'\nstelle_1 = '.'\nstelle_2 = '.'\nstelle_3 = '.'\nstelle_4 = '.'\nstelle_5 = '.'\nstelle_6 = '.'\nstelle_7 = '.'\nstelle_8 = '.'\nstelle_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} stelle_1 stelle_2 stelle_3\n{print} stelle_4 stelle_5 stelle_6\n{print} stelle_7 stelle_8 stelle_9\n{print} ' '\n{while} spiel != 'aus':\n    wahl = {ask} 'Spieler ' zeichen ', welche Stelle?'\n    {if} wahl {in} offene_stellen:\n        {remove} wahl {from} offene_stellen\n        {if} wahl == 1:\n            stelle_1 = zeichen\n        {if} wahl == 2:\n            stelle_2 = zeichen\n        {if} wahl == 3:\n            stelle_3 = zeichen\n        {if} wahl == 4:\n            stelle_4 = zeichen\n        {if} wahl == 5:\n            stelle_5 = zeichen\n        {if} wahl == 6:\n            stelle_6 = zeichen\n        {if} wahl == 7:\n            stelle_7 = zeichen\n        {if} wahl == 8:\n            stelle_8 = zeichen\n        {if} wahl == 9:\n            stelle_9 = zeichen\n    {else}:\n        {print} 'Diese Stelle ist bereits belegt'\n    {print} stelle_1 stelle_2 stelle_3\n    {print} stelle_4 stelle_5 stelle_6\n    {print} stelle_7 stelle_8 stelle_9\n    {print} ' '\n    {if} stelle_1 == stelle_2 {and} stelle_2 == stelle_3 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_4 == stelle_5 {and} stelle_5 == stelle_6 {and} stelle_4 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_7 == stelle_8 {and} stelle_8 == stelle_9 {and} stelle_7 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_4 {and} stelle_4 == stelle_7 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_2 == stelle_5 {and} stelle_5 == stelle_8 {and} stelle_2 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_6 {and} stelle_6 == stelle_9 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_1 == stelle_5 {and} stelle_5 == stelle_9 {and} stelle_1 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {elif} stelle_3 == stelle_5 {and} stelle_5 == stelle_7 {and} stelle_3 != '.':\n        {print} 'Spieler ' zeichen ' gewinnt!'\n        spiel = 'aus'\n    {else}:\n        {if} zeichen == 'x':\n            zeichen = 'o'\n        {else}:\n            zeichen = 'x'\n```\n"
     blackjack:
         name: Blackjack
