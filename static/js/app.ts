@@ -268,6 +268,7 @@ function initializeMainEditor($editor: JQuery) {
   theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
   theGlobalEditor.addEventListener('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
+    markers.clearIncorrectLines();
   });
   error.setEditor(editor);
   markers = new Markers(theGlobalEditor);
@@ -842,12 +843,43 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
-  // Currently, we don't do anything with the sourcemap
-  if (sourceMap){}
+  if (sourceMap){
+    let Range = ace.require("ace/range").Range
+
+    // We loop through the mappings and underline a mapping if it contains an error
+    for (const index in sourceMap) {
+      const map = sourceMap[index];
+      const range = new Range(
+        map.hedy_range.from_line-1, map.hedy_range.from_character-1,
+        map.hedy_range.to_line-1, map.hedy_range.to_character-1
+      )
+
+      if (map.error != null){
+        markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+      }
+    }
+
+    // We show the error message on click
+    theGlobalEditor.on("click", function(e) {
+      let position = e.getDocumentPosition()
+      position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+
+      let element = document.elementFromPoint(position.pageX, position.pageY)
+      if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+        let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+        let mapError = sourceMap[mapIndex];
+
+        $('#okbox').hide ();
+        $('#warningbox').hide();
+        clearErrors(theGlobalEditor);
+        error.show(ClientMessages['Transpile_error'], mapError.error);
+      }
+    })
+  }
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = outputDiv.find('#variable_button');
