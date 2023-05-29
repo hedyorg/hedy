@@ -256,7 +256,7 @@ class HedyTester(unittest.TestCase):
 
     def source_map_tester(self, code, expected_source_map: dict):
         result = hedy.transpile(code, self.level, 'en')
-        self.assertDictEqual(result.source_map, expected_source_map)
+        self.assertDictEqual(result.source_map.map, expected_source_map)
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
