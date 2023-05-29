@@ -106,7 +106,6 @@ adventures:
                     **Dezimalzahlen**
                     Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1,5 verwenden, aber jetzt geht das. Denke jedoch daran, dass Hedy (wie viele andere Programmiersprachen auch) anstatt des Kommas einen Punkt (`.`) verwendet.
                 example_code: "```\n{print} 'Zweieinhalb plus zweieinhalb macht...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_5: "```\nPunkte = 25\n{print} 'Du hast ' score\n```\n"
             13:
                 start_code: |-
                     name = {ask} 'Wie heißt du?'
@@ -1210,9 +1209,9 @@ adventures:
             3:
                 story_text: |
 
-                          In this level we can enter lists and choose things from them.
-                          You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                          For example, you can let the computer pick from rock, paper and scissors.
+                            In this level we can enter lists and choose things from them.
+                            You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                            For example, you can let the computer pick from rock, paper and scissors.
 
                 example_code: |
                     ```
@@ -1582,20 +1581,20 @@ adventures:
 
                 example_code: |
 
-                          Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
-                          ```
-                          {print} 'Willkommen im Restaurant Chez Hedy'
-                          {print} 'Hier ist unsere Karte:'
-                          {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
-                          haupt = {ask} 'Welches Hauptgericht möchten Sie?'
-                          preis = 0
-                          {if} haupt {is} Pizza preis = 10
-                          {if} haupt {is} Lasagne preis = 12
-                          {if} haupt {is} Spaghetti preis = 8
-                          {print} 'Sie bestellten ' haupt
-                          {print} 'Das kostet ' preis ' Euro, bitte'
-                          {print} 'Danke, genießen Sie Ihre Mahlzeit!'
-                          ```
+                            Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
+                            ```
+                            {print} 'Willkommen im Restaurant Chez Hedy'
+                            {print} 'Hier ist unsere Karte:'
+                            {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
+                            haupt = {ask} 'Welches Hauptgericht möchten Sie?'
+                            preis = 0
+                            {if} haupt {is} Pizza preis = 10
+                            {if} haupt {is} Lasagne preis = 12
+                            {if} haupt {is} Spaghetti preis = 8
+                            {print} 'Sie bestellten ' haupt
+                            {print} 'Das kostet ' preis ' Euro, bitte'
+                            {print} 'Danke, genießen Sie Ihre Mahlzeit!'
+                            ```
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
@@ -1876,16 +1875,16 @@ adventures:
 
                 example_code: |
 
-                          In diesem Beispiel kann die Spielerin Hedy eine Ja-Nein-Frage {ask} und Hedy wird eine zufällige Antwort für dich aussuchen.
-                          ```
-                          {print} Ich bin Hedy, die Wahrsagerin!
-                          Frage {is} {ask} Was würdest du gerne wissen?
-                          {print} Das würdest du gerne wissen: Frage
-                          Antworten {is} ja, nein, vielleicht
-                          {print} Meine Kristallkugel sagt...
-                          {sleep} 2
-                          {print} Antworten {at} {random}
-                          ```
+                            In diesem Beispiel kann die Spielerin Hedy eine Ja-Nein-Frage {ask} und Hedy wird eine zufällige Antwort für dich aussuchen.
+                            ```
+                            {print} Ich bin Hedy, die Wahrsagerin!
+                            Frage {is} {ask} Was würdest du gerne wissen?
+                            {print} Das würdest du gerne wissen: Frage
+                            Antworten {is} ja, nein, vielleicht
+                            {print} Meine Kristallkugel sagt...
+                            {sleep} 2
+                            {print} Antworten {at} {random}
+                            ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "### Übung\nBis hierhin konnte Hedy nur mit ja, nein oder vielleicht antworten. Kannst du Hedy mit zusätzlichen Antwortmöglichkeiten ausstatten, wie zum Beispiel 'auf jeden Fall' oder 'frag nochmal'?\n"
     haunted:
