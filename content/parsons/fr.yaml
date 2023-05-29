@@ -26,8 +26,8 @@ levels:
                 Affiche le titre du film que vous allez regarder et souhaite un bon visionnage !
             code: |-
                 {print} C'est l'heure d'une soirée ciné !
-                le film {is} Sonic le hérisson 2
-                {print} Allons regarder le film
+                le_film {is} Sonic le hérisson 2
+                {print} Allons regarder le_film
                 {print} Bon visionnage !
         2:
             story: |
@@ -48,16 +48,16 @@ levels:
             code: |-
                 {print} Une nouvelle année commence à Poudlard !
                 {print} Le Choipeaux magique va décider de la maison qui t'accueillera.
-                maison {is} Gryffondor, Poufsouffle, Serdaigle, ou Serpentard
+                la_maison {is} Gryffondor, Poufsouffle, Serdaigle, ou Serpentard
                 {sleep} 2
-                {print} Et c'est la maison {at} {random}
+                {print} Et c'est la_maison {at} {random}
         2:
             story: |
                 Écris un programme qui te choisit un plat au hasard. Crée une liste d'aliments et une liste de garnitures et laisse le programme décider pour toi !
             code: |-
                 nourriture {is} pizza, glace, salade, sandwich
                 garnitures {is} chocolat, fromage, thon, vermicelles
-                {print} Ton repas du jour au hasard est...
+                {print} Ton repas du jour hasard est...
                 {sleep} 2
                 {print} nourriture {at} {random} avec garnitures {at} {random}
     4:
@@ -76,7 +76,7 @@ levels:
                 Create a lottery that lets you choose an extra price that you might win.
             code: |-
                 lots {is} voiture, hamster, 1 million d'euros
-                lot {is} {ask} 'Qu'est-ce que tu veux gagner ?'
+                lot {is} {ask} "Qu'est-ce que tu veux gagner ?"
                 {add} lot {to_list} lots
                 {print} 'Tu as gagné un.e ' lots {at} {random}
     5:
@@ -88,7 +88,7 @@ levels:
                 films_préférés {is} Batman, Spiderman, Les Avengers, Jurassic Park
                 film {is} {ask} 'Quel est ton film préféré?'
                 {if} film {in} films_préférés {print} 'Tu as de bon goûts!'
-                {else} {print} 'Quel dommage que ton film préféré ne soit pas dans la liste, nous allons l'ajouter tout de suite!'
+                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, nous allons l'ajouter tout de suite!"
                 {add} film {to_list} films_préférés
         2:
             story: |
@@ -115,7 +115,7 @@ levels:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code: |-
-                {print} 'C'est ton anniversaire!'
+                {print} "C'est ton anniversaire!"
                 gens = {ask} 'À combien de personnes veux-tu donner une part de gâteau?'
                 nombre_de_gâteaux {is} gens/8
                 {print} 'Tu dois acheter ' nombre_de_gâteaux ' gâteaux'
@@ -127,7 +127,7 @@ levels:
                 First print the two players who play the first match, then print against which player the winner will play.
             code: |-
                 joueurs = Liam, Noah, Sophie
-                joueur1 = players {at} {random}
+                joueur1 = joueurs {at} {random}
                 {remove} joueur1 {from} joueurs
                 joueur2 = joueurs {at} {random}
                 {print} joueur1 ' joue en premier contre ' joueur2
@@ -137,10 +137,10 @@ levels:
             story: |
                 Create the song 'The wheels on the bus go round and round'
             code: |-
-                {print} 'Les roues de l'autobus '
+                {print} "Les roues de l'autobus "
                 {repeat} 3 {times} {print} 'tournent et tournent, '
-                {print} 'Les roues de l'autobus tournent et tournent '
-                {print} 'Dans toute la ville'
+                {print} "Les roues de l'autobus tournent et tournent "
+                {print} "Dans toute la ville"
     8:
         1:
             story: |
@@ -150,16 +150,16 @@ levels:
                 équipes = rouge, jaune, bleu
                 {print} 'Rouge, Jaune ou Bleu ?'
                 {repeat} 5 {times}
-                {print} 'Tu es sélectionné dans l'équipe... '
-                {print} équipes {at} {random}
-                sleep 2
+                    {print} "Tu es sélectionné dans l'équipe... "
+                    {print} équipes {at} {random}
+                    sleep 2
         2:
             story: |
                 Affiche le compte à rebours d'une partie de cache-cache.
             code: |-
                 compteur = 11
                 {repeat} 10 {times}
-                compteur = compteur - 1
-                {print} compteur
-                {sleep} 1
-                {print} 'Prêt ou pas, j'arrive!!'
+                    compteur = compteur - 1
+                    {print} compteur
+                    {sleep} 1
+                    {print} "Prêt ou pas, j'arrive!!"
