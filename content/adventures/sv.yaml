@@ -69,7 +69,7 @@ adventures:
             18:
                 start_code: "{print} ('Bra jobbat!!!')"
                 story_text: "Grattis! Du har nått den sista nivån i Hedy! Koden du skrivit här kan kopieras till riktiga Python-miljöer som replit eller PyCharm och du kan fortsätta lära dig där!\nNotera att Python bara kan läsa engelska kommandon, så om du har använt andra språk måste du byta till engelska nu.\n"
-        name: Introduktion
+        name: Introduction
         description: Nivåbeskrivning
         default_save_name: introduktion
     story:
@@ -121,7 +121,7 @@ adventures:
                 example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n{print} 'Vad ser du?'\n```\n"
                 start_code: '# placera din kod här'
             12:
-                story_text: "På den här nivån behövs citattecken för att spara flera ord i en variabel.\n\n### Övning\n\nHitta en berättelse från en tidigare nivå, vilken nivå som helst är okej. Lägg till citattecken på rätt ställen."
+                story_text: "På den här nivån behövs citattecken för att_spara flera ord i en variabel.\n\n### Övning\n\nHitta en berättelse från en tidigare nivå, vilken nivå som helst är okej. Lägg till citattecken på rätt ställen."
                 example_code: "```\nnamn = 'Drottningen av England'\n{print} namn ' åt en tårtbit, när plötsligt...'\n```\n"
                 start_code: '# placera din kod här'
             15:
@@ -273,7 +273,7 @@ adventures:
                 story_text: "På den här nivån kan du göra ett schema för hela veckan på ett enkelt sätt!\n\n### Övning\nLägg till en andra syssla, t.ex. dammsugning eller städning, och se till att den också är uppdelad för hela veckan.\n<br> **Extrauppgift** Programmet är inte rättvist – du kan ha otur och behöva diska hela veckan. Hur skulle du kunna göra programmet mer rättvist?\n"
             3:
                 story_text: "Är ni alltid oense hemma om vem som ska diska eller göra vid kattlådan idag?\nDå kan du låta datorn välja mycket rättvist. Det kan du programmera på den här nivån!\n"
-                example_code: "```\npersoner {is} mamma, pappa, Emma, Sophie\n{print} pesoner {at} {random} får diska\n```\n"
+                example_code: "```\npersoner {is} mamma, pappa, Emma, Sophie\n{print} personer {at} {random} får diska\n```\n"
                 story_text_2: "### Övning\nGör en egen version av programmet för diskmaskinen. Gör först en lista över dina familjemedlemmar.\nTänk sedan ut en uppgift som måste göras och låt datorn bestämma vem som ska göra uppgiften med kommandot `{at} {random}`.\n\n**Extra** Känner du inte för att diska själv? Hacka programmet genom att ta bort ditt namn från listan med kommandot `{remove}` `{from}`.\n"
                 start_code: '{print} Vem diskar?'
             6:
@@ -423,7 +423,7 @@ adventures:
                 example_code: "```\n_ Lägg till citattecken i den här koden _\n{print} Välkommen till Restaurang Chez Hedy!\n{print} Idag serverar vi pizza eller lasagne.\nmat {is} {ask} Vad vill du äta?\n{print} Bra val! Det är min älsklingsrätt!\ntopping {is} {ask} Vill du ha kött eller grönsaker till det?\n{print} mat med topping är på väg!\ndryck {is} {ask} Vad vill du dricka till?\n{print} Tack för din beställning.\n{print} Din mat och dryck kommer strax!\n```\n"
             5:
                 story_text: "### Övning\nExempelkoden visar hur du kan programmera att du har slut på ett menyalternativ i din restaurang.\nKopiera din egen restaurangkod från de tidigare nivåerna. Skapa ett problem i din restaurang och koda det, som i exempelkoden.\nDu kan till exempel också få slut på ett menyalternativ, eller så tar du inte kreditkort eller så är glassmaskinen trasig.\n\n**Extrauppgift** Har du programmerat problemet och lämpliga svar? Försök sedan att lägga till fler `{if}`- och `{else}`-kommandon i din kod.\nFörsök att lägga till en `{if}` efter varje `{ask}`-kommando i din kod för att göra den så interaktiv som möjligt!\n"
-                example_code: "```\ndrycker_i_lager {is} vatten, läsk, cola, apelsinjuice\ndryck {is} {ask} 'Vad vill du dricka?'\n{if} dryck {in} drycker_i_lager {print} 'En' drink 'på väg!'\n{else} {print} 'Tyvärr, vi har inte det'\n```\n"
+                example_code: "```\ndrycker_i_lager {is} vatten, läsk, cola, apelsinjuice\ndryck {is} {ask} 'Vad vill du dricka?'\n{if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'\n{else} {print} 'Tyvärr, vi har inte det'\n```\n"
                 start_code: '# skriv din kod här'
             9:
                 start_code: '# skriv din kod här'
@@ -509,7 +509,7 @@ adventures:
                 start_code: '# skriv din kod här'
             6:
                 story_text: "På den här nivån kan du använda matematik i dina förutsägelser som spåkvinna. Detta gör att du kan hitta på (fåniga) formler för att beräkna framtiden.\nDu kan till exempel beräkna hur rik du kommer att bli eller hur många barn du kommer att få när du blir vuxen.\n\n\n\n### Övning\nKan du hitta på en egen (fånig) spåmaskin?\n"
-                example_code: "```\n{print} 'Jag är spådamen Hedy!'\n{print} 'Jag kan förutsäga hur många barn du kommer att få när du blir stor!\"\nålder = {ask} 'Hur gammal är du?'\nsyskon = {ask} 'Hur många syskon har du?'\nlängd = {ask} 'Hur lång är du i centimeter?'\nbarn = längd / ålder\nbarn = barn - syskon\n{print} 'Du kommer att få …'\n{sleep}\n{print} barn ' barn!'\n```\n"
+                example_code: "```\n{print} 'Jag är spådamen Hedy!'\n{print} 'Jag kan förutsäga hur många barn du kommer att få när du blir stor!'\nålder = {ask} 'Hur gammal är du?'\nsyskon = {ask} 'Hur många syskon har du?'\nlängd = {ask} 'Hur lång är du i centimeter?'\nbarn = längd / ålder\nbarn = barn - syskon\n{print} 'Du kommer att få …'\n{sleep}\n{print} barn ' barn!'\n```\n"
                 start_code: '# skriv din kod här'
             7:
                 story_text: "### Övning\nAvsluta det här programmet som talar om för dig om din crush älskar dig tillbaka eller inte.\n"
@@ -581,7 +581,7 @@ adventures:
                 start_code: '# skriv din kod här'
             14:
                 story_text: "På den här nivån kan du låta Hedy berätta för dig om du har sparat tillräckligt med pengar!\n"
-                example_code: "```\npengar = {ask} 'Hur mycket pengar har du sparat?'\nönskan = {ask} 'Hur mycket pengar behöver du?'\nveckopeng = {ask} 'Hur mycket fickpengar får du varje vecka?'\natt spara = önskan - pengar\nveckor = att_spara / veckopeng\n{if} önskan > pengar\n    {print} 'Du måste spara lite mer!'\n    {print} 'Du behöver ' veckor ' veckor till.'\n{else}\n    {print} 'Bra! Du har tillräckligt'\n    {print} 'Nu handlar vi!'\n```\n"
+                example_code: "```\npengar = {ask} 'Hur mycket pengar har du sparat?'\nönskan = {ask} 'Hur mycket pengar behöver du?'\nveckopeng = {ask} 'Hur mycket fickpengar får du varje vecka?'\natt_spara = önskan - pengar\nveckor = att_spara / veckopeng\n{if} önskan > pengar\n    {print} 'Du måste spara lite mer!'\n    {print} 'Du behöver ' veckor ' veckor till.'\n{else}\n    {print} 'Bra! Du har tillräckligt'\n    {print} 'Nu handlar vi!'\n```\n"
                 start_code: '# skriv din kod här'
     language:
         levels:
@@ -646,7 +646,7 @@ adventures:
         levels:
             14:
                 story_text: "In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!\nYou can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!\n"
-                example_code: "```\n{print} 'Gör ditt eget quiz'\npoäng_a = 0\npoäng_b = 0\n{print} 'Fråga'\n{print} 'Svarsalternativ A'\n{print} 'Svarsalternativ B'\nsvar = {ask} 'Vilket svar?'\n{if} svar == 'A'\n    poäng_a = poäng_a + 1\n{if} svar == 'B'\n    poäng_b = poäng_b + 1\n{print} 'Slut på quizet!'\n{print} 'Vi kollar resultatet!'\n{if} points_a > points_b\n    {print} 'Du tillhör A-klubben'\n{if} points_b > points_a\n    {print} 'Du tillhör B-klubben'\n```\n"
+                example_code: "```\n{print} 'Gör ditt eget quiz'\npoäng_a = 0\npoäng_b = 0\n{print} 'Fråga'\n{print} 'Svarsalternativ A'\n{print} 'Svarsalternativ B'\nsvar = {ask} 'Vilket svar?'\n{if} svar == 'A'\n    poäng_a = poäng_a + 1\n{if} svar == 'B'\n    poäng_b = poäng_b + 1\n{print} 'Slut på quizet!'\n{print} 'Vi kollar resultatet!'\n{if} poäng_a > poäng_b\n    {print} 'Du tillhör A-klubben'\n{if} poäng_b > poäng_a\n    {print} 'Du tillhör B-klubben'\n```\n"
                 start_code: '# skriv din kod här'
     years:
         levels:
@@ -753,7 +753,7 @@ adventures:
             4:
                 story_text: "## 'citattecken'\nPå nivå 4 har `{ask}` och `{print}` ändrats.\nDu måste sätta text som du vill skriva ut mellan citattecken.\nDetta är användbart, för nu kan du skriva ut alla ord du vill ha. Även orden du använde för att lagra något med `{is}`.\nDe flesta programspråk använder också citattecken vid utskrift, så vi kommer också ett steg närmare riktig programmering!\n"
                 story_text_2: "##  Sammandragningar i engelsk text\nObs! Tänk på att nu när vi använder citattecken kommer Hedy att bli förvirrad när du använder apostrof för sammandragningar som I'm eller What's.\nSe till att ta bort dessa apostrofer och ändra stavningen till Im eller Whats om du skriver på engelska.\nKolla in exempelkoden för att se fel sätt att använda apostrof.\n"
-                example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad behöver vi använda från och med nu?'\n{print} Vi måste använda ' svar\n```\n"
+                example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad behöver vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
                 example_code_2: "```\n_ Detta är fel sätt att använda apostrof t.ex. i engelsk text_\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
                 start_code: "{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad behöver vi använda från och med nu?'\n{print} 'Vi måste använda ' svar"
         name: "'citattecken'"
@@ -846,9 +846,9 @@ adventures:
                 story_text: "Vi kommer att lära oss fler nya saker. Du kanske redan känner till dem från matematiken, `<` och `>`.\n `<` kollar om det första talet är mindre än det andra, t.ex. ålder `<` 12 kontrollerar om ålder är mindre än 12.\nOm du vill kolla om det första talet är mindre eller lika med det andra kan du använda `<=`, t.ex. ålder `<=` 11.\n `>` kollar om det första talet är större än det andra, t.ex. poäng `>` 10 kollar om poäng är större än 10.\nOm du vill kolla om det första talet är större eller lika med det andra kan du använda `>=`, t.ex. poäng `>=` 11.\nDu använder dessa jämförelser i en `{if}`, så här:\n"
                 example_code: "```\nålder = {ask} 'Hur gammal är du?'\n{if} ålder > 12\n    {print} 'Du är äldre än jag!'\n```\n"
                 story_text_2: "Från och med den här nivån kan du använda två likhetstecken om du vill jämföra exakt. Detta är vad de flesta programspråk gör:\n"
-                example_code_2: "```\nname = {ask} 'Vad heter du?'\n{if} namn == 'Hedy'\n    {print} 'Du är cool!'\n```\n"
+                example_code_2: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn == 'Hedy'\n    {print} 'Du är cool!'\n```\n"
                 story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:\n"
-                example_code_3: "```\nname = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
+                example_code_3: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
     add_remove_command:
         name: lägg till och ta bort
         description: introduktion till lägg till och ta bort
@@ -909,7 +909,7 @@ adventures:
         default_save_name: och eller
         levels:
             13:
-                start_code: "name = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'"
+                start_code: "namn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'"
                 story_text: "Vi ska nu lära oss `{and}` och `{or}`! Om du vill kontrollera två påståenden behöver du inte använda två `{if}` utan kan använda `{and}` och `{or}`.\n\nOm du använder `{and}` måste båda påståendena, vänster och höger om `{and}` vara sanna. Vi kan också använda `{or}`. Då behöver bara ett påstående vara korrekt."
                 example_code: "```\nnamn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'\n```\n"
     elif_command:
@@ -929,3 +929,4 @@ adventures:
             2:
                 story_text: "Nu när du har lärt dig använda kommandot `{ask} kan du göra din sten, sax, påse-kod interaktiv också!\n\n### Övning\nGör sten, sax, påse-koden interaktiv genom att lägga till kommandot `{ask}` och en fråga.\n"
                 example_code: "```\nval är _\n{print} Jag väljer val\n```\n"
+                start_code: ""
