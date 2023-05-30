@@ -7,18 +7,21 @@
             hx-target="#adventure-dragger" 
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
-                {% for adventure in customizations['sorted_adventures'][level|string] %}
-                    {% if adventure.name in adventure_names %}
-                        <div class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure['name'] }}">
-                            <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
-                                  hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure['name'] }}&level={{ level }}" 
-                                  hx-target="#adventure-dragger"
-                                  hx-indicator="#indicator"></span>
-                                {{ adventure_names[adventure['name']] }}
-                            {# Hidden input so we can send the adventures names in the request to the server #}
-                            <input type="hidden" value="{{ adventure['name'] }}" name="adventure">
-                        </div>
-                    {% endif %}
+                {% for adventure in adventures[level|int] %}
+                    <div class="tab {% if adventure.is_teacher_adventure %}
+                                        teacher_tab
+                                    {% elif adventure.is_command_adventure %}
+                                        command_tab
+                                    {% endif %} 
+                                    z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
+                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
+                            hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
+                            hx-target="#adventure-dragger"
+                            hx-indicator="#indicator"></span>
+                            {{ adventure.long_name }}
+                        {# Hidden input so we can send the adventures names in the request to the server #}
+                        <input type="hidden" value="{{ adventure.short_name }}" name="adventure">
+                    </div>                    
                 {% endfor %}
         </div>
     </div>
@@ -30,12 +33,12 @@
             hx-indicator="#indicator">
         <option value="none" selected disabled>{{_('adventures')}}</option>
         {% for adventure in available_adventures[level|int] %}
-            <option value="{{ adventure['name'] }}"> 
-                {{ adventure_names[adventure['name']] }} 
+            <option value="{{ adventure.short_name }}"> 
+                {{ adventure.long_name }} 
             </option>
         {% endfor %}
     </select> 
     <button title="{{_('reset_adventures')}}" class="yellow-btn text-white mr-4 ml-6 place-self-center" hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}" hx-target="#modal-target">
         {{_('reset_button')}}
     </button>
-</div>
+</div> 
