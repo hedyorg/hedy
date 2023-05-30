@@ -2641,16 +2641,19 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     def skipping_faulty(meta, args): return 'pass'
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
-    defined_errors_backup = dict()
+    defined_errors_original = dict()
 
+    # override IsValid methods to always be valid & store original
     for error in defined_errors:
-        defined_errors_backup[error] = getattr(IsValid, error)
+        defined_errors_original[error] = getattr(IsValid, error)
         setattr(IsValid, error, skipping_faulty)
 
-    transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
-
-    for error in defined_errors:
-        setattr(IsValid, error,  defined_errors_backup[error])
+    try:
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    finally:
+        # make sure to always revert IsValid methods to original
+        for error in defined_errors:
+            setattr(IsValid, error,  defined_errors_original[error])
 
     for hedy_source_code, python_source_code in source_map.map.copy().items():
         if hedy_source_code.error is not None or python_source_code.code == 'pass':
