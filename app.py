@@ -32,7 +32,7 @@ import utils
 from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
-from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
+from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES,ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
 from logging_config import LOGGING_CONFIG
@@ -140,6 +140,7 @@ def load_adventures_for_level(level):
                 example_code=adventure['levels'][level].get('example_code', ""),
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
+                is_command_adventure= short_name in KEYWORDS_ADVENTURES,
                 save_name=f'{default_save_name} {level}',
                 start_code=adventure['levels'][level].get('start_code', ""))
 
