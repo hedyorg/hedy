@@ -15,6 +15,16 @@
         </div>
     </div>
 
+    <!-- Levels selector -->
+    <div class="flex justify-center mb-10">
+        <div>
+            {% for i in range(1, max_level + 1) %}
+                <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
+            {% endfor %}
+        </div>
+        <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
+    </div>
+
     <a class="text-black font-light no-underline float-right" href="#" onclick="window.location.reload()">
         Refresh ⭯
     </a>
@@ -51,18 +61,9 @@
             {% endif %}
         </div>
 
-        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 shadow-lg" id="card1_class_overview">
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 pt-2 shadow-lg" id="card1_class_overview">
             {% if dashboard_options.show_c1 %}
             <div class="w-full">
-                <!-- Levels selector -->
-                <div class="flex justify-center">
-                    <div>
-                        {% for i in range(1, max_level + 1) %}
-                            <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" onclick="hedyApp.enable_level_class_overview('{{ i }}');" value="{{ i }}">{{ i }}</button>
-                        {% endfor %}
-                    </div>
-                    <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
-                </div>
                 <!-- Adventures per level -->
                 {% for selected_level in class_overview.selected_levels %}
                 <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
@@ -144,7 +145,7 @@
                   Student List
                 </h2>
                 {% if dashboard_options.show_c2 %}
-                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card2_list">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card2_list">
                     <div class="float-right relative m-2">
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
@@ -158,37 +159,67 @@
                         </a>
                         {% endif %}
                     </div>
-
-                    <table class="table-auto w-full border-separate space-y-6 border border-black rounded-lg">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="px-4 py-2 text-left">{{_('name')}}</th>
-                                <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
-                                <th class="p-2">{{_('Adventure Progress')}}</th>
+                    <div class="p-2 mt-10 w-full">
+                    <table class="border-spacing-2 border border-slate-400 rounded-lg w-full">
+                        <thead>
+                            <tr class="border-b p-2">
+                                <th class="px-2 sticky left-0 bg-blue-200 z-10 text-gray-900 font-bold">{{_('name')}}</th>
+                                {% for selected_level in class_overview.selected_levels %}
+                                    <th class="border-l px-2 text-gray-900 font-bold">{{_('level')}} {{selected_level}}</th>
+                                {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in student_names %}
+                            {% for student in class_info.students %}
                             <tr>
-                                <td class="px-2">
+                                <td class="p-2 text-center sticky left-0 bg-blue-200 z-10">
                                     {% if dashboard_options.student %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student.username)}}" class="text-gray-800 hover:text-white" id="show-student">
+                                            {{student.username}}
                                         </a>
                                     {% else %}
-                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~s)}}" class="text-black hover:text-white" id="show-student">
-                                            {{s}}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student.username)}}" class="text-gray-800 hover:text-white" id="show-student">
+                                            {{student.username}}
                                         </a>
                                     {% endif %}
                                 </td>
-                                <td>
-                                    <button type="button" class="h-6 w-6 rounded-full bg-blue-600 hover:bg-purple-700">
-                                    </button>
+                                {% for selected_level in class_overview.selected_levels %}
+                                {% for level, adventure_list in adventures.items() %}
+                                {% if level|int == selected_level %}
+                                <td class="px-4 border-l text-center">
+                                    <div class="flex justify-between">
+                                        {% if attempted_adventures[selected_level] %}{% set attempted_adventures_student = attempted_adventures[selected_level][student.username] %}{% endif %}
+                                        {% for adventure in adventure_list %}
+                                        <div class="group flex relative">
+                                            {% if student.current_adventure.adventure_name == adventure.id and student.current_level|int == level|int %}
+                                                <button type="button" class="h-6 w-6 m-1 border-4 border-blue-500 rounded-full bg-gray-400 hover:bg-gray-300 hover:border-blue-300"></button>
+                                            {% elif adventure.id in attempted_adventures_student %}
+                                                <button type="button" class="h-6 w-6 m-1 rounded-full bg-blue-500 hover:bg-blue-300"></button>
+                                            {% else %}
+                                                <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
+                                            {% endif %}
+                                            <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">{{ adventure.name }}</span>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="group flex relative">
+                                            {% if student.username in class_overview.quiz_info[selected_level]['students_finished'] %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full bg-green-600 hover:bg-green-400"></button>
+                                            {% elif student.username in class_overview.quiz_info[selected_level]['students_in_progress'] %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full border-4 border-green-600 bg-gray-400 hover:bg-gray-300 hover:border-green-400"></button>
+                                            {% else %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
+                                            {% endif %}
+                                        <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">Quiz</span>
+                                        </div>
+                                    </div>
                                 </td>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
                             </tr>
                             {% endfor %}
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
                 {% else %}
                 <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
@@ -227,7 +258,7 @@ The system is not foolproof! It is possible that students make errors that are n
                         </div>
                 </div>
                 {% if dashboard_options.show_c3 %}
-                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-64 overflow-auto" id="card3_misconceptions">
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card3_misconceptions">
                     <div class="float-right relative m-2">
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
