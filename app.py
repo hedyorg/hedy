@@ -700,7 +700,7 @@ def transpile_add_stats(code, level, lang_):
         return result
     except Exception as ex:
         class_name = get_class_name(ex)
-        error_msg, _ = hedy_error_to_response(ex)
+        error_msg = hedy_error_to_response(ex)['Error']
         statistics.add(username, lambda id_: DATABASE.add_program_stats(
             id_, level, number_of_lines, class_name, error_msg))
         raise
