@@ -312,18 +312,18 @@ sections:
                     Lägg till ett understreck.
                 solution_code: |
                     vald_dörr är fråga vilken dörr väljer du?
-        -   title: "Students might use two different names for the same variable"
+        -   title: "Eleverna kan råka använda två olika namn för samma variabel"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    I det här exemplet har eleven använt 'häst' och 'namn' för samma variabler.
                 error_code: |
-                    horse is ask What is your horse called?
-                    print Your horse is called name
+                    häst är fråga vad heter din häst?
+                    print Din häst heter namn
                 solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    Kolla alltid om variabeln genomgående har samma namn. Små skillnader kan vara svåra att upptäcka (till exempel pluralformer) men de kommer att påverka vad koden gör.
                 solution_code: |
-                    name is ask What is your horse called?
-                    print Your horse is called name
+                    namn är fråga Vad heter din häst?
+                    print Din häst heter namn
     -   level: '3'
         sections:
         -   title: "Students try to print whole lists"
@@ -345,155 +345,155 @@ sections:
         -   title: "Students use the name of a variable or list as regular text"
             example:
                 error_text: |
-                    This problem probably occured in level 2 as well. Now it can happen with lists too.
+                    Det här problemet hände förmodligen redan nivå 2. Nu kan det hända med listor också.
                 error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                    namn {är} Hedy
+                    {print} Hej mitt namn är namn
 
-                    or
+                    eller
 
-                    animal is rhino, bee, swan
-                    print The best animal is... animal at random
+                    djur {är} noshörning, bi, svan
+                    {print} Mitt bästa djur är … djur {at} {random}
                 solution_text: |
-                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
+                    Använd inte namnen på variabler eller listor i vanlig text för att skriva ut. På nivå 4 löses detta problem med citattecken.
                 solution_code: |
-                    name is Hedy
-                    print Hi I'm name
+                    namn {är} Hedy
+                    {print} Mitt namn är namn
 
-                    or
+                    eller
 
-                    animals is rhino, bee, swan
-                    print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+                    djur {är} noshörning, bi, svan
+                    {print} Mitt bästa djur är … djur {at} {random}
+        -   title: "Elever glömmer `{at}` i `{at}` `{random}`"
             example:
                 error_text: |
-                    Like in the example
+                    Som i exemplet
                 error_code: |
-                    birds is sparrow, seagull, robin
-                    print birds random
+                    fåglar är sparv, mås, rödhake
+                    skriv fåglar slump
                 solution_text: |
-                    This problem is solved by adding the word at.
+                    Lös problemet genom att lägga till ordet på.
                 solution_code: |
-                    birds is sparrow, seagull, robin
-                    print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+                    fåglar {är} sparv, mås, rödhake
+                    {print} fåglar {at} {random}
+        -   title: "Eleverna glömmer använda kommandot `{print}` när de också använder kommandot `{at}` `{random}`"
             example:
                 error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
+                    Eller så sätter de ibland `{at}` `{random}` i början av raden.
                 error_code: |
-                    fruit is apple, cherry, banana
-                    fruit at random
+                    frukt {is} äpple, körsbär, banan
+                    frukt {at} {random}
                 solution_text: |
-                    Emphasize to your students that you always need a print to print text.
+                    Betona för dina elever att du alltid behöver ett skriv-kommando för att skriva ut text.
                 solution_code: |
-                    fruit is apple, cherry, banana
-                    print fruit at random
-        -   title: "Students forget to use commas in their lists"
+                    frukt {is} äpple, körsbär, banan
+                    {print} frukt {at} {random}
+        -   title: "Eleverna glömmer att använda kommatecken i listor"
             example:
                 error_text: |
-                    In a list items are seperated with a comma.
+                    I en lista ska elementen skiljas åt med kommatecken.
                 error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
+                    pizzor {is} funghi tonno quattro stagioni
+                    {print} pizzor {at} {random}
                 solution_text: |
-                    After each item on your list, there should be a comma
+                    Efter varje element i listan ska det vara ett kommatecken
                 solution_code: |
-                    pizzas is funghi, tonno, quattro stagioni
-                    print pizzas at random
-        -   title: "Students try to use at random without a list"
+                    pizzor är funghi, tonno, quattro stagioni
+                    skriv pizzor på slump
+        -   title: "Eleverna försöker använda `{at}` `{random}` utan en lista"
             example:
                 error_text: |
-                    For example
+                    Till exempel
                 error_code: |
-                    clubs is Manchester United
-                    print clubs at random
+                    klubbar {is} Manchester United
+                    {print} klubbar {at} {random}
                 solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
+                    Hedy kan inte skriva ut något slumpmässigt, eftersom det inte finns någon lista att välja ur.
                 solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
-        -   title: "Students try to use add/remove without a list "
+                    klubbar {is} Manchester United, Bayern München, FC Barcelona
+                    {print} klubbar {at} {random}
+        -   title: "Eleverna försöker använda lägg till/ta bort utan någon lista "
             example:
                 error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                    I exemplet nedan är 'namn' inte en lista, utan en variabel. Du kan inte lägga till något till den.
                 error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    namn {is} Jake
+                    ditt_namn {is} {ask} Vem är du?
+                    {add} ditt_namn {to} namn
+                    {print} namn {at} {random}
                 solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                    Det måste först finnas en lista, så du måste lägga till ett andra namn för att förvandla namn till en lista, till exempel Amy. Om du inte vill ha Amy på din lista, kan du använda kommandot ta bort.
                 solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
-        -   title: "Students forget to use to/from in add/remove"
+                    namn {is} Jake, Amy
+                    ditt_namn {is} {ask} Vem är du?
+                    {add} ditt_namn {to} namn
+                    {print} namn {at} {random}
+        -   title: "Elever glömmer att använda till/bort i lägg till/ta bort"
             example:
                 error_text: |
-                    Without to/from the add/remove command won't work.
+                    Utan till/bort kommer kommandona lägg till/ta bort inte att fungera.
                 error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
+                    äventyr {is} berättelse, papegoja, tärningar
+                    val {is} Vilket äventyr gillar du bäst?
+                    {add} val
+                    {remove} tärningar
+                    {print} Jag älskar äventyr {at} {random}
                 solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
+                    Hedy måste veta vilken lista objektet ska läggas till i/tas bort från.
                 solution_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice to adventures
-                    remove dice from adventures
-                    print I love adventures at random
+                    äventyr är berättelse, papegoja, tärningar
+                    val är Vilket äventyr gillar du bäst?
+                    lägg till val till äventyr
+                    ta bort tärningar från äventyr
+                    print Jag älskar äventyr på slump
     -   level: '4'
         sections:
-        -   title: "Students forget to use quotation marks on both sides of the text"
+        -   title: "Eleverna glömmer att det behövs citattecken på båda sidor om texten"
             example:
                 error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
+                    På den här nivån behöver skriv och fråga ett par citattecken. Ett före och ett efter texten.
                 error_code: |
-                    print Hello
-                    mood is ask 'How are you?
+                    skriv Hej
+                    humör är fråga 'Hur är det?
                 solution_text: |
-                    Add the correct quotation marks.
+                    Lägg till rätt citattecken.
                 solution_code: |
-                    print 'Hello'
-                    mood is ask 'How are you?'
-        -   title: "Students use the wrong quotation marks"
+                    skriv 'Hej'
+                    humör är fråga 'Hur är det?'
+        -   title: "Eleverna använder fel citattecken"
             example:
                 error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                    Det är viktigt att börja lektionen med att kolla om eleverna vet hur man skriver ett citattecken på rätt sätt. Annars kanske de använder "dubbla citattecken" eller den sneda apostrofen `.
                 error_code: |
-                    print `Welcome to the restaurant`
-                    food is ask "What would you like to order?"
+                    skriv `Välkommen till restaurangen`
+                    mat är fråga "Vad vill du beställa?"
                 solution_text: |
-                    These are the correct quotation marks:
+                    Detta är rätt citattecken:
                 solution_code: |
-                    print 'Welcome to the restaurant'
-                    food is ask 'What would you like to order?'
-        -   title: "Students use an apostrophe in their text"
+                    skriv 'Välkommen till restaurangen'
+                    mat är fråga 'Vad vill du beställa?'
+        -   title: "Eleverna använder en apostrof i sin text"
             example:
                 error_text: |
-                    From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
+                    Från den här nivån är apostrofer inte tillåtna. De används ofta på engelska när du skriver sammandragningar som you’re, don’t eller what’s.
                 error_code: |
-                    print 'You're not allowed to type this'
+                    skriv 'Skriv inte rock'n roll'
                 solution_text: |
-                    You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
+                    Du kan välja att använda fel grammatik och bara utelämna apostrof. Eller så kan du använda ` som apostrof.
                 solution_code: |
-                    print 'Youre allowed to type this'
-                    print 'And you`re able to do this'
+                    skriv 'Du kan skriva rock-n-roll'
+                    skriv 'Och du kan skriva rock`n roll'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: "Eleverna glömmer att använda `{print}` i ett `{if}`-kommando"
             example:
                 error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
+                    När eleverna har använt `{if}` eller `{else}` glömmer de att ha ett andra kommando som `{print}` eller `{ ask}`.
                 error_code: |
-                    if name is Hedy 'Great!'
-                    else 'Hedy is better!'
+                    om namn är Hedy 'Bra!'
+                    annars 'Hedy är bättre!'
                 solution_text: |
-                    Add the print command to fix it.
+                    Lägg till kommandot skriv för att fixa det.
                 solution_code: |
                     if name is Hedy print 'Great!'
                     else print 'Hedy is better!'
