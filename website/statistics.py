@@ -520,7 +520,7 @@ class LiveStatisticsModule(WebsiteModule):
         for i in range(len(common_errors)):
             if common_errors[i]['id'] == int(error_id) and common_errors[i]['active'] == 1:
                 common_errors[i]['active'] = 0
-                selected_levels = []
+                selected_levels = [1]
                 if 'dashboard_customization' in class_customization.keys() and \
                         'selected_levels' in class_customization['dashboard_customization'].keys():
                     selected_levels = class_customization['dashboard_customization']['selected_levels']
