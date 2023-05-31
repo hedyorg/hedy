@@ -164,7 +164,6 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
-
         show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
@@ -197,7 +196,6 @@ class LiveStatisticsModule(WebsiteModule):
                 if last_adventure:
                     _data.append({_student: last_adventure[0]})
             last_adventures.append(_data)
-
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         quiz_stats = []
@@ -214,6 +212,16 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
         quiz_info = _get_quiz_info(quiz_stats)
+
+        attempted_adventures = {}
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            programs_for_student = {}
+            for _student in class_.get("students", []):
+                adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
+                if adventures_for_student != []:
+                    programs_for_student[_student] = adventures_for_student
+            if programs_for_student != []:
+                attempted_adventures[level] = programs_for_student
 
         return render_template(
             "class-live-stats.html",
@@ -232,6 +240,7 @@ class LiveStatisticsModule(WebsiteModule):
                 "show_c3": show_c3,
                 "student": student
             },
+            attempted_adventures=attempted_adventures,
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
@@ -316,7 +325,6 @@ class LiveStatisticsModule(WebsiteModule):
                 if last_adventure:
                     _data.append({_student: last_adventure[0]})
             last_adventures.append(_data)
-
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         quiz_stats = []
@@ -333,6 +341,16 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
         quiz_info = _get_quiz_info(quiz_stats)
+
+        attempted_adventures = {}
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            programs_for_student = {}
+            for _student in class_.get("students", []):
+                adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
+                if adventures_for_student != []:
+                    programs_for_student[_student] = adventures_for_student
+            if programs_for_student != []:
+                attempted_adventures[level] = programs_for_student
 
         return render_template(
             "class-live-student.html",
@@ -355,6 +373,7 @@ class LiveStatisticsModule(WebsiteModule):
             student=selected_student,
             student_programs=student_programs,
             adventures=adventures,
+            attempted_adventures=attempted_adventures,
             adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
             data=graph_data,
             labels=graph_labels,
@@ -397,7 +416,6 @@ class LiveStatisticsModule(WebsiteModule):
                 if last_adventure:
                     _data.append({_student: last_adventure[0]})
             last_adventures.append(_data)
-
         adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
 
         quiz_stats = []
@@ -414,6 +432,16 @@ class LiveStatisticsModule(WebsiteModule):
                 }
             )
         quiz_info = _get_quiz_info(quiz_stats)
+
+        attempted_adventures = {}
+        for level in range(1, HEDY_MAX_LEVEL+1):
+            programs_for_student = {}
+            for _student in class_.get("students", []):
+                adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
+                if adventures_for_student != []:
+                    programs_for_student[_student] = adventures_for_student
+            if programs_for_student != []:
+                attempted_adventures[level] = programs_for_student
 
         return render_template(
             "class-live-popup.html",
@@ -434,7 +462,7 @@ class LiveStatisticsModule(WebsiteModule):
             },
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
-            quiz_info=quiz_info,
+            attempted_adventures=attempted_adventures,
             max_level=HEDY_MAX_LEVEL,
             current_page='my-profile'
         )
