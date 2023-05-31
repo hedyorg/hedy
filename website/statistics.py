@@ -190,10 +190,13 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_id)
+        # in case of a
         selected_levels = self.__selected_levels(class_id)
 
         # identifies common errors in the class
         self.misconception_detection(class_id, user, common_errors)
+        # in case of a db update in the meantime, reload common errors
+        common_errors = self.__common_errors(class_id)
 
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -291,6 +294,8 @@ class LiveStatisticsModule(WebsiteModule):
         selected_levels = self.__selected_levels(class_id)
 
         self.misconception_detection(class_id, user, common_errors)
+        # in case of a db update in the meantime, reload common errors
+        common_errors = self.__common_errors(class_id)
 
         class_ = self.db.get_class(class_id)
         students = sorted(class_.get("students", []))
@@ -421,6 +426,8 @@ class LiveStatisticsModule(WebsiteModule):
         common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
         self.misconception_detection(class_id, user, common_errors)
+        # in case of a db update in the meantime, reload common errors
+        common_errors = self.__common_errors(class_id)
 
         # get id of the common error to know which data to display from database
         error_id = request.args.get("error-id", default="", type=str)
