@@ -623,7 +623,6 @@ class LiveStatisticsModule(WebsiteModule):
 
             for error in error_history:
                 misconception = self.misconception_hit(error)
-                # misconception = error
                 if misconception:
 
                     if username == last_user and error == last_error:
@@ -688,7 +687,7 @@ class LiveStatisticsModule(WebsiteModule):
                     "students": users_only
                 })
 
-            selected_levels = []
+            selected_levels = [1]
             if 'dashboard_customization' in class_customization.keys() and \
                     'selected_levels' in class_customization['dashboard_customization'].keys():
                 selected_levels = class_customization['dashboard_customization']['selected_levels']

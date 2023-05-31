@@ -23,7 +23,15 @@
               <ul class="p-4">
                 {% for student in selected_item.students %}
                     <li>
-                        {{ student }}
+                        {% if dashboard_options.student %}
+                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student)}}" class="text-gray-800 hover:text-white">
+                                {{student}}
+                            </a>
+                        {% else %}
+                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student)}}" class="text-gray-800 hover:text-white">
+                                {{student}}
+                            </a>
+                        {% endif %}
                     </li>
                 {% endfor %}
               </ul>

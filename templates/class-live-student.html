@@ -90,4 +90,8 @@
 
 {% endblock %}
 
-
+{% block additional_scripts %}
+    <script>
+            hedyApp.InitLineChart({{ data }}, {{ labels }});
+    </script>
+{% endblock %}
