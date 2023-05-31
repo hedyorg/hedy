@@ -128,8 +128,8 @@ QUIZ_STATS = dynamo.Table(
 
 # Program stats also includes a boolean array indicating the order of successful and non-successful runs.
 # In order to not flood the database, this history array can maximally have 100 entries.
-MAX_CHART_HISTORY_SIZE = 100
-MAX_ERROR_HISTORY_SIZE = 100
+MAX_CHART_HISTORY_SIZE = 50
+MAX_ERROR_HISTORY_SIZE = 50
 
 
 class Database:
