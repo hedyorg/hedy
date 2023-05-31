@@ -2677,8 +2677,14 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
 def transpile(input_string, level, lang="en"):
     source_map.clear()
-    source_map.set_skip_faulty(True)
-    transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+    
+    if level <= HEDY_MAX_LEVEL_SKIPPING_FAULTY:
+        source_map.set_skip_faulty(True)
+        transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+    else:
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+
     return transpile_result
 
 
