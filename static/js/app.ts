@@ -21,6 +21,7 @@ const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+export let theGlobalSourcemap;
 const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
@@ -352,6 +353,23 @@ function initializeMainEditor($editor: JQuery) {
     level: theLevel,
     language: theLanguage,
   });
+
+  // We show the error message when clicking on the skipped code
+  theGlobalEditor.on("click", function(e) {
+    let position = e.getDocumentPosition()
+    position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+
+    let element = document.elementFromPoint(position.pageX, position.pageY)
+    if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+      let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+      let mapError = theGlobalSourcemap[mapIndex];
+
+      $('#okbox').hide ();
+      $('#warningbox').hide();
+      $('#errorbox').hide();
+      error.show(ClientMessages['Transpile_error'], mapError.error);
+    }
+  })
 
   return editor;
 }
@@ -848,6 +866,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   let outputDiv = $('#output');
 
   if (sourceMap){
+    theGlobalSourcemap = sourceMap;
     let Range = ace.require("ace/range").Range
 
     // We loop through the mappings and underline a mapping if it contains an error
@@ -862,23 +881,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
       }
     }
-
-    // We show the error message on click
-    theGlobalEditor.on("click", function(e) {
-      let position = e.getDocumentPosition()
-      position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
-
-      let element = document.elementFromPoint(position.pageX, position.pageY)
-      if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-        let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-        let mapError = sourceMap[mapIndex];
-
-        $('#okbox').hide ();
-        $('#warningbox').hide();
-        clearErrors(theGlobalEditor);
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
-    })
   }
 
   //Saving the variable button because sk will overwrite the output div
