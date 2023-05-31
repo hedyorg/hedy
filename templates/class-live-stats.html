@@ -155,14 +155,13 @@
                         </a>
                         {% endif %}
                     </div>
-
                     <div class="p-2 mt-10 w-full">
                     <table class="border-spacing-2 border border-slate-400 rounded-lg w-full">
                         <thead>
                             <tr class="border-b p-2">
-                                <th class="px-2 sticky left-0 bg-blue-200 z-10">{{_('name')}}</th>
+                                <th class="px-2 sticky left-0 bg-blue-200 z-10 text-gray-900 font-bold">{{_('name')}}</th>
                                 {% for selected_level in class_overview.selected_levels %}
-                                    <th class="border-l px-2">Level {{selected_level}}</th>
+                                    <th class="border-l px-2 text-gray-900 font-bold">{{_('level')}} {{selected_level}}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
