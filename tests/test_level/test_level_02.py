@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel2(HedyTester):
@@ -367,14 +368,22 @@ class TestsLevel2(HedyTester):
 
     def test_access_before_assign_not_allowed(self):
         code = textwrap.dedent("""\
-            print the name program
-            name is Hedy""")
+        print the name program
+        name is Hedy""")
+
+        expected = textwrap.dedent("""\
+        pass
+        name = 'Hedy'""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssign)
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.AccessBeforeAssign,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=3,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_turn_with_string_var_gives_type_error(self):
@@ -408,11 +417,17 @@ class TestsLevel2(HedyTester):
     # issue #792
     def test_turn_right_number_gives_type_error(self):
         code = "turn right 90"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidArgumentException),
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidArgumentException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
-            max_level=11,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5,
         )
 
     # color tests
@@ -545,11 +560,18 @@ class TestsLevel2(HedyTester):
 
     def test_assign_with_space_gives_invalid(self):
         code = " naam is Hedy"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidSpaceException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=7)
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_assign(self):
         code = "naam is Felienne"
@@ -729,20 +751,36 @@ class TestsLevel2(HedyTester):
         ask what is jouw lievelingskleur?
         echo Jouw lievelingskleur is dus...""")
 
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 34), hedy.exceptions.WrongLevelException),
+            SkippedMapping(SourceRange(2, 1, 2, 36), hedy.exceptions.WrongLevelException),
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.WrongLevelException,
-            extra_check_function=lambda c: c.exception.error_code == 'Wrong Level',
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            extra_check_function=lambda c: c.error_code == 'Wrong Level',
             max_level=3
         )
 
     def test_ask_without_var_gives_error(self):
         code = "ask is de papier goed?"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.WrongLevelException),
+        ]
+
         self.multi_level_tester(
             code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=3,
-            exception=hedy.exceptions.WrongLevelException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
         )
 
     def test_ask_without_argument_gives_error(self):

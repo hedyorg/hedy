@@ -1,6 +1,8 @@
 import hedy
 import textwrap
-from tests.Tester import HedyTester
+
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 from parameterized import parameterized
 
 
@@ -166,7 +168,20 @@ class TestsLevel5(HedyTester):
         naam is James
         if naam is James Bond print 'shaken'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=11)
+        expected = textwrap.dedent("""\
+        naam = 'James'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 37), hedy.exceptions.UnquotedEqualityCheck),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
         code = textwrap.dedent("""\
@@ -174,14 +189,41 @@ class TestsLevel5(HedyTester):
         if naam is James Bond print 'shaken' 
         print naam""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
+        expected = textwrap.dedent("""\
+        naam = 'James'
+        pass
+        print(f'{naam}')""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheck),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
         if naam is James Bond naam is 'Pietjansma'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UnquotedEqualityCheck, max_level=7)
+        expected = textwrap.dedent("""\
+        naam = 'James'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 43), hedy.exceptions.UnquotedEqualityCheck),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space(self, q):
@@ -809,18 +851,34 @@ class TestsLevel5(HedyTester):
         name is Hedy
          if name is 3 print 'leuk' else print 'stom'""")
 
+        expected = textwrap.dedent("""\
+        name = 'Hedy'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 45), hedy.exceptions.InvalidSpaceException),
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=7)
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5)
 
     def test_pront_should_suggest_print(self):
         code = "pront 'Hedy is leuk!'"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.InvalidCommandException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidCommandException,
-            extra_check_function=lambda c: str(c.exception.arguments['guessed_command']) == 'print'
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            extra_check_function=lambda c: str(c.arguments['guessed_command']) == 'print',
+            max_level=5
         )
 
     def test_print_no_quotes(self):
@@ -829,20 +887,34 @@ class TestsLevel5(HedyTester):
         print 'Ik kan voorspellen wie morgen de loterij wint!'
         naam is ask 'Wie ben jij?'""")
 
+        expected = textwrap.dedent("""\
+        pass
+        print(f'Ik kan voorspellen wie morgen de loterij wint!')
+        naam = input(f'Wie ben jij?')""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 37), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     def test_print_quote_gives_exception(self):
         code = textwrap.dedent("""\
         print 'what's your name?'""")
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 27), hedy.exceptions.UnquotedTextException),
+        ]
 
         self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     def test_ask_with_quote(self):
@@ -860,10 +932,22 @@ class TestsLevel5(HedyTester):
     def test_if_equality_print_backtick_text_gives_error(self):
         code = "if 1 is 1 print `yay!` else print `nay`"
 
+        expected = textwrap.dedent("""\
+        if '1' == '1':
+          pass
+        else:
+          pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 11, 1, 23), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(1, 29, 1, 40), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.multi_level_tester(
-            max_level=6,
+            max_level=5,
             code=code,
-            exception=hedy.exceptions.UnquotedTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     def test_if_fix_nl(self):
@@ -1283,20 +1367,34 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed print 'hi!'""")
 
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 28), hedy.exceptions.MissingElseForPressitException),
+        ]
+
         self.multi_level_tester(
-            max_level=7,
+            max_level=5,
             code=code,
-            exception=hedy.exceptions.MissingElseForPressitException,
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     def test_if_pressed_missing_else_gives_error_with_new_line(self):
         code = textwrap.dedent("""\
         if x is pressed print 'hi!'\n\n""")
 
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 28), hedy.exceptions.MissingElseForPressitException),
+        ]
+
         self.multi_level_tester(
-            max_level=7,
+            max_level=5,
             code=code,
-            exception=hedy.exceptions.MissingElseForPressitException,
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     #
@@ -1376,11 +1474,11 @@ class TestsLevel5(HedyTester):
             # End of PyGame Event Handler""")
 
         expected_source_map = {
-            "1/0-1/49": "1/0-1/51",
-            "1/0-3/160": "1/0-17/467",
-            "2/66-2/105": "12/301-12/342",
-            "2/50-3/159": "2/52-17/467",
-            "3/111-3/159": "15/371-15/421"
+            '1/1-1/50': '1/1-1/52',
+            '2/17-2/56': '12/7-12/48',
+            '3/6-3/54': '15/7-15/57',
+            '2/1-3/54': '2/1-17/34',
+            '1/1-3/55': '1/1-17/34'
         }
 
         self.single_level_tester(code, expected=expected_code)
