@@ -21,7 +21,7 @@ const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
-export let theGlobalSourcemap;
+export let theGlobalSourcemap: { [x: string]: any; };
 const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
