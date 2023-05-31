@@ -2638,22 +2638,32 @@ ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'ha
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
-    def skipping_faulty(meta, args): return 'pass'
+    def skipping_faulty(meta, args): return [True]
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
     defined_errors_original = dict()
 
-    # override IsValid methods to always be valid & store original
-    for error in defined_errors:
-        defined_errors_original[error] = getattr(IsValid, error)
-        setattr(IsValid, error, skipping_faulty)
+    def set_error_to_allowed():
+        # override IsValid methods to always be valid & store original
+        for error in defined_errors:
+            defined_errors_original[error] = getattr(IsValid, error)
+            setattr(IsValid, error, skipping_faulty)
+
+    def set_errors_to_original():
+        # revert IsValid methods to original
+        for error in defined_errors:
+            setattr(IsValid, error, defined_errors_original[error])
 
     try:
+        set_error_to_allowed()
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    except Exception as e:
+        # transpile original
+        set_errors_to_original()
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
     finally:
         # make sure to always revert IsValid methods to original
-        for error in defined_errors:
-            setattr(IsValid, error,  defined_errors_original[error])
+        set_errors_to_original()
 
     for hedy_source_code, python_source_code in source_map.map.copy().items():
         if hedy_source_code.error is not None or python_source_code.code == 'pass':
@@ -2669,9 +2679,11 @@ def transpile(input_string, level, lang="en"):
     source_map.clear()
 
     if level <= HEDY_MAX_LEVEL_SKIPPING_FAULTY:
+        source_map.set_skip_faulty(True)
         transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
     else:
-        transpile_result = transpile_inner(input_string, level, lang)
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
 
     return transpile_result
 

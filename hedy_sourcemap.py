@@ -24,6 +24,15 @@ class SourceRange:
     def __repr__(self):
         return self.__str__()
 
+    def __eq__(self, other):
+        return (
+            self.from_line, self.from_character,
+            self.to_line, self.to_character
+        ) == (
+            other.from_line, other.from_character,
+            other.to_line, other.to_character
+        )
+
 
 class SourceCode:
     """
@@ -80,6 +89,7 @@ class SourceMap:
 
     map = dict()
     level = 0
+    skip_faulty = False
     language = 'en'
     hedy_code = ''
     python_code = ''
@@ -104,6 +114,10 @@ class SourceMap:
     def set_language(self, language):
         self.language = language
 
+    def set_skip_faulty(self, skip_faulty):
+        # if the mapping encounters an error and skip_faulty is True we will 'skip' the exception
+        self.skip_faulty = skip_faulty
+
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
 
@@ -111,25 +125,31 @@ class SourceMap:
         self.python_code = python_code
         python_code_mapped = list()
 
+        def line_col(context, idx):
+            return context.count('\n', 0, idx) + 1, idx - context.rfind('\n', 0, idx)
+
         for hedy_source_code, python_source_code in self.map.items():
             if hedy_source_code.error is not None or python_source_code.code == '':
                 continue
 
             start_index = python_code.find(python_source_code.code)
-            start_line = python_code[0:start_index].count('\n') + 1
             code_char_length = len(python_source_code.code)
 
             for i in range(python_code_mapped.count(python_source_code.code)):
                 start_index = python_code.find(python_source_code.code, start_index+code_char_length)
                 start_index = max(0, start_index)  # not found (-1) means that start_index = 0
-                start_line = python_code[0:start_index].count('\n') + 1
 
             end_index = start_index + code_char_length
             code_line_length = python_code[start_index:end_index].count('\n')
-            end_line = start_line + code_line_length
+
+            start_line, start_column = line_col(python_code, start_index)
+            end_line, end_column = line_col(python_code, end_index)
 
             python_source_code.source_range = SourceRange(
-                start_line, start_index, end_line, end_index
+                start_line,
+                start_column,
+                end_line,
+                end_column
             )
 
             python_code_mapped.append(python_source_code.code)
@@ -176,8 +196,20 @@ class SourceMap:
 
             index += 1
 
-        response_map.popitem()  # remove mapping for program rule
         return response_map
+
+    def get_compressed_mapping(self):
+        response_map = dict()
+
+        for hedy_source_code, python_source_code in self.map.items():
+            response_map[str(hedy_source_code.source_range)] = str(python_source_code.source_range)
+
+        return response_map
+
+    def get_error_from_hedy_source_range(self, hedy_range: SourceRange) -> Exception:
+        for hedy_source_code, python_source_code in self.map.items():
+            if hedy_source_code.source_range == hedy_range:
+                return hedy_source_code.error
 
     def print_source_map(self, d, indent=0):
         for key, value in d.items():
@@ -210,14 +242,21 @@ def source_map_rule(source_map: SourceMap):
 
             try:
                 generated_python = function(*args, **kwargs)
+                is_tree = (
+                    isinstance(generated_python, Tree) or
+                    bool(re.match(r".*Tree\(.*Token\(.*\).*\).*", generated_python))
+                )
 
-                if isinstance(generated_python, Tree):
-                    raise ParseError()  # code could not be parsed, raise ParseError
+                if is_tree:
+                    raise ParseError()  # code could not be parsed to string, raise ParseError
 
                 error = None
             except Exception as e:
-                generated_python = 'pass'
-                error = e
+                if source_map.skip_faulty:
+                    generated_python = 'pass'
+                    error = e
+                else:
+                    raise e
 
             hedy_code = SourceCode(
                 SourceRange(
