@@ -537,7 +537,7 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
-        except Exception as e:
+        except Exception:
             pass
 
         try:

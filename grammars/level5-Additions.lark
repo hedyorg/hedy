@@ -7,7 +7,7 @@ command:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifels
 _if_less_command: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
-error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
+error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)? _EOL
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _IS var _AT (INT | random)

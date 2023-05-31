@@ -140,8 +140,6 @@ class SourceMap:
                 start_index = max(0, start_index)  # not found (-1) means that start_index = 0
 
             end_index = start_index + code_char_length
-            code_line_length = python_code[start_index:end_index].count('\n')
-
             start_line, start_column = line_col(python_code, start_index)
             end_line, end_column = line_col(python_code, end_index)
 
@@ -156,8 +154,9 @@ class SourceMap:
 
     def get_grammar_rules(self, level):
         script_dir = path.abspath(path.dirname(__file__))
+        file_path = path.join(script_dir, "grammars-Total", f'level{level}.en-Total.lark')
 
-        with open(path.join(script_dir, "grammars-Total", f'level{level}.en-Total.lark'), "r", encoding="utf-8") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             grammar_text = file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
