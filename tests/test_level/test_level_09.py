@@ -280,3 +280,30 @@ class TestsLevel9(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        repeat 3 times
+            food = ask 'What do you want?'
+            if food is pizza
+                print 'nice!'
+            else
+                print 'pizza is better'""")
+
+        expected_source_map = {
+            "1/0-6/160": "1/0-7/214",
+            "1/0-6/161": "1/0-7/214",
+            "2/19-2/23": "2/28-2/32",
+            "2/19-2/49": "2/28-2/62",
+            "3/57-3/70": "3/68-3/137",
+            "3/54-4/101": "7/-1-7/90",
+            "3/54-6/151": "7/-1-7/124",
+            "4/79-4/92": "4/143-4/158",
+            "4/101-6/151": "7/-1-7/33",
+            "6/119-6/142": "6/171-6/196"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )

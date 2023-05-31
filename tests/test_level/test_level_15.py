@@ -250,3 +250,39 @@ class TestsLevel15(HedyTester):
             max_level=16,
             expected=expected,
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        answer = 0
+        while answer != 25
+            answer = ask 'What is 5 times 5?'
+        print 'A correct answer has been given'""")
+
+        excepted_code = textwrap.dedent("""\
+        answer = 0
+        while convert_numerals('Latin', answer)!=convert_numerals('Latin', 25):
+          answer = input(f'''What is 5 times 5?''')
+          try:
+            answer = int(answer)
+          except ValueError:
+            try:
+              answer = float(answer)
+            except ValueError:
+              pass
+          time.sleep(0.1)
+        print(f'''A correct answer has been given''')""")
+
+        expected_source_map = {
+            "1/0-1/6": "1/0-1/6",
+            "1/0-1/10": "1/0-1/10",
+            "1/0-4/117": "1/0-12/315",
+            "2/17-2/23": "2/43-2/49",
+            "2/17-2/29": "2/17-2/81",
+            "2/11-3/76": "2/11-11/269",
+            "3/34-3/40": "3/85-3/91",
+            "3/34-3/67": "12/-1-12/151",
+            "4/77-4/116": "12/270-12/315"
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
