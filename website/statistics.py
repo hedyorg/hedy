@@ -190,7 +190,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_id)
-        # in case of a
         selected_levels = self.__selected_levels(class_id)
 
         # identifies common errors in the class
