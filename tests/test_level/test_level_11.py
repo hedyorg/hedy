@@ -389,3 +389,16 @@ class TestsLevel11(HedyTester):
             expected=expected,
             output=output,
         )
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NestedFunctionException,
+            max_level=16,
+        )
