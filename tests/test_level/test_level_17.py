@@ -544,3 +544,28 @@ class TestsLevel17(HedyTester):
         call simple_function""")
 
         self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        for i in range 1 to 10:
+            print i
+        print 'Ready or not, here I come!'""")
+
+        excepted_code = textwrap.dedent("""\
+        step = 1 if 1 < 10 else -1
+        for i in range(1, 10 + step, step):
+          print(f'''{i}''')
+          time.sleep(0.1)
+        print(f'''Ready or not, here I come!''')""")
+
+        expected_source_map = {
+            "1/4-1/5": "1/9-1/10",
+            "1/0-2/44": "1/0-4/100",
+            "1/0-3/80": "1/0-5/141",
+            "2/34-2/35": "2/31-2/32",
+            "2/28-2/35": "3/65-3/82",
+            "3/45-3/79": "5/101-5/141"
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
