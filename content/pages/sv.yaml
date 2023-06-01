@@ -326,23 +326,23 @@ sections:
                     print Din häst heter namn
     -   level: '3'
         sections:
-        -   title: "Students try to print whole lists"
+        -   title: "Eleverna försöker skriva ut hela listor"
             example:
                 error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
+                    En hel lista kan inte skrivas ut. Du kan bara skriva ut ett element i taget från listan med {at} {random}.
                 error_code: |
-                    groceries is apples, milk, chocolate
-                    print groceries
+                    matvaror är äpplen, mjölk, choklad
+                    skriv matvaror
                 solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
+                    För att skriva ut en lista med alla matvaror behöver du bara sätta dem efter ett `{print}`-kommando. Annars kan du använda listan för att skriva ut ett element med `{at}` `{random}`.
                 solution_code: |
-                    print apples, milk, chocolate
+                    {print} äpplen, mjölk, choklad
 
-                    or
+                    eller
 
-                    groceries is apples, milk, chocolate
-                    print groceries at random
-        -   title: "Students use the name of a variable or list as regular text"
+                    matvaror {är} äpplen, mjölk, choklad
+                    {print} matvaror {at} {random}
+        -   title: "Eleverna använder namnet på en variabel eller lista som vanlig text"
             example:
                 error_text: |
                     Det här problemet hände förmodligen redan nivå 2. Nu kan det hända med listor också.
@@ -495,99 +495,99 @@ sections:
                 solution_text: |
                     Lägg till kommandot skriv för att fixa det.
                 solution_code: |
-                    if name is Hedy print 'Great!'
-                    else print 'Hedy is better!'
-        -   title: "Students might use two different names for the same variable"
+                    om namn är Hedy skriv 'Bra!'
+                    annars skriv 'Hedy är bättre!'
+        -   title: "Elever råkar använda två olika namn för samma variabel"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    I det här exemplet har eleven använt 'häst' och 'namn' för samma variabler.
                 error_code: |
-                    horse is ask 'What is your horse called?'
-                    if name is Bonfire print 'cool'
-                    else print 'less cool!'
+                    häst är fråga 'Vad heter din häst?'
+                    om namn är Bonfire skriv 'coolt'
+                    annars skriv 'mindre coolt!'
                 solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    Kolla alltid om variabeln har samma namn genomgående. Små skillnader kan vara svåra att upptäcka (till exempel pluralformer) men de kommer att ändra kodens innebörd.
                 solution_code: |
-                    horse is ask 'What is your horse called'
-                    if horse is Bonfire print 'cool!'
-                    else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides"
+                    häst är fråga 'Vad heter din häst?'
+                    om häst är Bonfire skriv 'coolt!'
+                    annars skriv 'mindre coolt!'
+        -   title: "Eleverna glömmer fortfarande citattecken före och efter text"
             example:
                 error_text: |
-                    Codes using the `if` commando can get very long and students tend to forget to use quotes.
+                    Kod som använder kommandot `om` kan bli väldigt lång och eleverna tenderar att glömma att använda citattecken.
                 error_code: |
-                    if name is Hedy print fun
-                    else print 'meh!
+                    om namn är Hedy skriv 'kul'
+                    annars skriv 'meh!
                 solution_text: |
-                    Always use 2 quotes in a print command.
+                    Använd alltid två citattecken i kommandot skriv.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!'
-        -   title: "Students use quotes around variable names"
+                    om namn är Hedy skriv 'kul'
+                    annars skriv 'meh!'
+        -   title: "Eleverna använder citattecken runt variabelnamn"
             example:
                 error_text: |
-                    In this level there are no quotes around variable names.
+                    På den här nivån är det inga citattecken kring variabelnamn.
                 error_code: |
-                    if 'name' is 'Hedy' print 'fun'
-                    else print 'meh!'
+                    om 'namn' är 'Hedy' skriv 'kul'
+                    annars skriv 'meh!'
                 solution_text: |
-                    Remove the quotes to get the code to work.
+                    Ta bort citattecknen för att få koden att fungera.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!
-        -   title: "Students use long variable names containing two words"
+                    om namn är Hedy skriv 'kul'
+                    annars skriv 'meh!'
+        -   title: "Studenter använder långa variabelnamn med två ord"
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    En variabel ska heta ett ord. Du kan använda ett understreck för att koppla ihop två ord. Det räknas som ett ord.
                 error_code: |
-                    chosen door is ask 'Which door do you pick?'
+                    vald dörr är fråga 'Vilken dörr väljer du?'
                 solution_text: |
-                    Add an underscore.
+                    Lägg till ett understreck.
                 solution_code: |
-                    chosen_door is ask 'which door do you pick?'
-        -   title: "Students want multiple answers to be correct"
+                    vald_dörr är fråga 'vilken dörr väljer du?'
+        -   title: "Eleverna vill att flera svar ska vara rätt"
             example:
                 error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                    Till exempel vill den här eleven att Hedy ska säga att alla hens vänner är roliga och att de andra klasskamrater inte är det.
                 error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
+                    om namn är Jesse, David, Souf skriv 'Du är rolig' annars skriv 'Du är inte rolig'
                 solution_text: |
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Du kan använda kommandot `i` för att lösa det. Det förklaras på en högre nivå, men det fungerar redan på nivå 5.
+                    En annan lösning är att använda flera om-kommandon och inget annars-kommando. Nackdelen är att det inte kommer att säga till de andra klasskamraterna att de inte är roliga.
                 solution_code: |
-                    friends is Jesse, David, Souf
-                    name is ask 'Who are you?'
-                    if name in friends print 'You are funny'
-                    else print 'You are not funny'
+                    vänner är Jesse, David, Souf
+                    namn är fråga 'Vem är du?'
+                    om namn i vänner skriv 'Du är rolig'
+                    annars skriv 'Du är inte rolig'
 
-                    or
+                    eller
 
-                    name is ask 'Who are you?'
-                    if naam is Jesse print 'You are funny'
-                    if naam is David print 'You are funny'
-                    if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+                    namn är fråga 'Vem är du?'
+                    om namn är Jesse skriv 'Du är rolig'
+                    om namn är David skriv 'Du är rolig'
+                    om namn är Souf skriv 'Du är rolig'
+        -   title: "Eleverna gör variabelnamnet till samma som värdet i `{if}`-satsen"
             example:
                 error_text: |
-                    In the example below the password is 'password'. This will result in it always being correct.
+                    I exemplet nedan är lösenordet 'lösenord'. Detta kommer att resultera i att det alltid är korrekt.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password print 'Access granted'
-                    else print 'Acces denied!'
+                    lösenord är fråga 'Vad är lösenordet?'
+                    om lösenord är lösenord skriv 'Åtkomst beviljad'
+                    annars skriv 'Ingen åtkomst'
                 solution_text: |
-                    Pick a different name for your variable.
+                    Välj ett annat variabelnamn.
                 solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                    hemligt_lösenord {is} {ask} 'Vad är lösenordet'
+                    {if} hemligt_lösenord {is} lösenord {print} 'Åtkomst beviljad!'
+                    {else} {print} 'Ingen åtkomst'
     -   level: '6'
         sections:
-        -   title: "Students struggle with quotation marks"
+        -   title: "Eleverna kämpar med citattecken"
             example:
                 error_text: |
-                    Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
+                    Vissa elever kämpar med att lägga till citattecken eller inte. Om du lägger till citattecken blir utskriften bokstavligen '5+5'.
                 error_code: |
-                    print '5 + 5'
+                    skriv '5 + 5'
                 solution_text: |
                     In this code the output screen will print '10'.
                 solution_code: |
