@@ -785,21 +785,21 @@ class Database:
 
         chart_history = []
         error_history = []
-        if program_stats.records and 'chart_history' in program_stats.records[0].keys():
-            chart_history = program_stats.records[0]['chart_history']
+        if program_stats.records:
+            chart_history = program_stats.records[0].get('chart_history', [])
         chart_slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
 
-        if program_stats.records and 'error_history' in program_stats.records[0].keys():
-            error_history = program_stats.records[0]['error_history']
+        if program_stats.records:
+            error_history = program_stats.records[0].get('error_history', [])
         error_slice = MAX_ERROR_HISTORY_SIZE if len(error_history) > MAX_ERROR_HISTORY_SIZE else 0
 
         if exception:
             add_attributes[exception] = dynamo.DynamoIncrement()
-            new_chart_history = chart_history + [0]
+            new_chart_history = list(chart_history) + [0]
             error_history += [error_message]
         else:
             add_attributes["successful_runs"] = dynamo.DynamoIncrement()
-            new_chart_history = chart_history + [1]
+            new_chart_history = list(chart_history) + [1]
         add_attributes["chart_history"] = new_chart_history[-chart_slice:]
         add_attributes["error_history"] = error_history[-error_slice:]
 

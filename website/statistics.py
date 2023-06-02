@@ -148,19 +148,15 @@ class LiveStatisticsModule(WebsiteModule):
 
     def __selected_levels(self, class_id):
         class_customization = self.db.get_class_customizations(class_id)
-        if 'dashboard_customization' in class_customization.keys():
-            class_overview = class_customization['dashboard_customization']
-            if 'selected_levels' in class_overview.keys():
-                return class_overview['selected_levels']
+        class_overview = class_customization.get('dashboard_customization')
+        if class_overview:
+            return class_overview.get('selected_levels', [1])
         return [1]
 
     def __common_errors(self, class_id):
         class_customization = self.db.get_class_customizations(class_id)
-        if 'dashboard_customization' in class_customization.keys() \
-                and 'common_errors' in class_customization['dashboard_customization'].keys():
-            return class_customization['dashboard_customization']['common_errors']
-        else:
-            return []
+        dashboard_customization = class_customization.get('dashboard_customization', {})
+        return dashboard_customization.get('common_errors', [])
 
     def __all_students(self, class_):
         """Returns a list of all students in a class along with some info."""
@@ -513,19 +509,13 @@ class LiveStatisticsModule(WebsiteModule):
         Removes the common error item by setting the active flag to 0.
         """
         class_customization = self.db.get_class_customizations(class_id)
-
-        common_errors = []
-        if 'dashboard_customization' in class_customization.keys() and \
-                'common_errors' in class_customization['dashboard_customization'].keys():
-            common_errors = class_customization['dashboard_customization']['common_errors']
+        dashboard_customization = class_customization.get('dashboard_customization', {})
+        common_errors = dashboard_customization.get('common_errors', [])
 
         for i in range(len(common_errors)):
             if common_errors[i]['id'] == int(error_id) and common_errors[i]['active'] == 1:
                 common_errors[i]['active'] = 0
-                selected_levels = [1]
-                if 'dashboard_customization' in class_customization.keys() and \
-                        'selected_levels' in class_customization['dashboard_customization'].keys():
-                    selected_levels = class_customization['dashboard_customization']['selected_levels']
+                selected_levels = dashboard_customization.get('selected_levels', [1])
 
                 class_customization['dashboard_customization'] = {
                     'selected_levels': selected_levels,
@@ -610,14 +600,10 @@ class LiveStatisticsModule(WebsiteModule):
 
         # get current class customization
         class_customization = self.db.get_class_customizations(class_id)
+        dashboard_customization = class_customization.get('dashboard_customization', {})
 
         headers = [x['header'] for x in common_errors]
-
-        existing_common_errors = []
-        if 'dashboard_customization' in class_customization.keys() and \
-                'common_errors' in class_customization['dashboard_customization'].keys():
-            existing_common_errors = class_customization['dashboard_customization']['common_errors']
-
+        existing_common_errors = dashboard_customization.get('common_errors', [])
         misconception_counts = {}
 
         last_error = None
@@ -693,10 +679,7 @@ class LiveStatisticsModule(WebsiteModule):
                     "students": users_only
                 })
 
-            selected_levels = [1]
-            if 'dashboard_customization' in class_customization.keys() and \
-                    'selected_levels' in class_customization['dashboard_customization'].keys():
-                selected_levels = class_customization['dashboard_customization']['selected_levels']
+            selected_levels = dashboard_customization.get('selected_levels', [1])
 
             class_customization['dashboard_customization'] = {
                 'selected_levels': selected_levels,
@@ -714,11 +697,8 @@ class LiveStatisticsModule(WebsiteModule):
         levels = [int(i) for i in body["levels"]]
 
         class_customization = self.db.get_class_customizations(class_id)
-
-        common_errors = []
-        if 'dashboard_customization' in class_customization.keys() and \
-                'common_errors' in class_customization['dashboard_customization'].keys():
-            common_errors = class_customization['dashboard_customization']['common_errors']
+        dashboard_customization = class_customization.get('dashboard_customization', {})
+        common_errors = dashboard_customization.get('common_errors', [])
 
         class_customization['dashboard_customization'] = {
             'selected_levels': levels,
