@@ -25,6 +25,10 @@
         <button class="blue-btn p-1 ml-4 h-8 text-sm" id="level_button_{{ i }}" onclick="hedyApp.select_levels_class_overview('{{class_info.id}}')">Select levels</button>
     </div>
 
+    <a class="text-black font-light no-underline float-right" href="#" onclick="window.location.reload(true)">
+        Refresh 🔄
+    </a>
+
     <!-- Card 1 Class Overview -->
     <div class="justify-center">
         <h2 class="text-center">Class Overview</h2>
@@ -270,13 +274,13 @@ The system is not foolproof! It is possible that students make errors that are n
                     </div>
                     <div class="w-full text-left p-6 mt-5">
                         <ul class="max-w-md space-y-3 list-none list-inside">
-                            {% for error_entry in class_info.common_errors.errors %}
+                            {% for error_entry in class_info.common_errors %}
                                 {% if error_entry.active == 1 %}
-                                    <li class="relative w-full border-solid border-0 border-blue-600 rounded p-2 shadow bg-blue-100" id="{{ ident }}">
+                                    <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
                                         <div class="flex justify-between items-center">
-                                            <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?"~ dashboard_options_args}}'>
+                                            <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                                 <h3 class="cursor-pointer ml-2 hover:text-white">
-                                                {{error_entry.header}}
+                                                {{error_entry.header}} ({{error_entry.students|length}})
                                                 </h3>
                                             </a>
                                             <button class="btn-shape tiny-btn pb-0 p-1 border-0 text-black hover:text-white self-end" id="resolve-student" 
@@ -286,7 +290,6 @@ The system is not foolproof! It is possible that students make errors that are n
                                             <!-- <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{error_entry.id}}", {{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a> -->
                                         </div>
                                     </li>
-
                                 {% endif %}
                             {% endfor %}
                         </ul>

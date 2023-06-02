@@ -1,3 +1,6 @@
+import inspect
+
+
 class HedyException(Exception):
     def __init__(self, error_code, **arguments):
         """Create a new HedyException.
@@ -279,3 +282,6 @@ class MissingElseForPressitException(HedyException):
                          command=command,
                          level=level,
                          line_number=line_number)
+
+
+HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}
