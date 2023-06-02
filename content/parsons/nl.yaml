@@ -122,9 +122,9 @@ levels:
             code: |
                 spelers = Freek, Bart, Emma
                 speler1 = spelers {at} {random}
+                {remove} speler1 {from} spelers
                 speler2 = spelers {at} {random}
                 {print} speler1 ' speelt eerst tegen ' speler2
-                {remove} speler1 {from} spelers
                 {remove} speler2 {from} spelers
                 {print} 'De winnaar speelt tegen ' spelers {at} {random}
         2:

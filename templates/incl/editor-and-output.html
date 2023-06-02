@@ -1,12 +1,17 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
+    {% if raw %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-0 mb-0">
+    {% else %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
+    {% endif %}
+
     <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
      <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
          <span>→</span>
      </div>
     </div>
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
+    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="min-height: 22rem;" {% endif %}>
         <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
@@ -49,7 +54,7 @@
         <!-- The actual editor -->
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          class="w-full flex-1 text-lg rounded">{{initial_adventure.start_code}}</div>
+          class="w-full flex-1 text-lg rounded {% if raw %} max-h-56 {% endif %}">{{initial_adventure.start_code}}</div>
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
             {% for i in range(1, 11) %}
                 <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
@@ -109,7 +114,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex flex-col order-3 relative" id="code_output" style="height: 22rem;">
+    <div class="w-full flex flex-col order-3 relative" id="code_output">
         <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
             <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
                 🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -122,14 +127,15 @@
             </div>
         </div>
       <!-- tabindex=0 makes the div focusable -->
-      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
-      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto {% if raw %} max-h-56 {% endif %}" style="min-height: 3rem;"></div>
+      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"  {% if raw %} raw="yes" {% endif%}></div>
       <div id="inline-modal" class="flex-0">
         <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">Header</p>
           </div>
+          <!--Body-->
           <!--Body-->
           <form>
             <div class="my-2 flex">
@@ -150,13 +156,16 @@
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
     <div class="order-2 md:order-4" id="code_related_buttons">
+      <div id="not-logged-in-warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+        {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
+      </div>
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
-        <div id="saveFilesContainer">
-          <button id="saveFiles" class="green-btn hidden" onclick="hedyApp.saveMachineFiles();">💾</button>
+        <div id="saveFilesContainer" class="hidden">
+          <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>

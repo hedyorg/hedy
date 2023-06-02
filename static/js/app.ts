@@ -14,12 +14,14 @@ import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stop
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
+import { LocalSaveWarning } from './local-save-warning';
 
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
 let last_code: string;
@@ -169,6 +171,9 @@ export interface InitializeCodePageOptions {
  */
 export function initializeCodePage(options: InitializeCodePageOptions) {
   theUserIsLoggedIn = !!options.current_user_name;
+  if (theUserIsLoggedIn) {
+    theLocalSaveWarning.setLoggedIn();
+  }
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
@@ -202,7 +207,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     // Load initial code from local storage, if available
     const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
       adventure.start_code = programFromLs.code;
       adventure.save_name = programFromLs.saveName;
       adventure.save_info = 'local-storage';
@@ -210,6 +216,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     reconfigurePageBasedOnTab();
     checkNow();
+    theLocalSaveWarning.switchTab();
   });
 
   initializeSpeech();
@@ -259,6 +266,9 @@ function initializeMainEditor($editor: JQuery) {
   theGlobalEditor = editor;
   theGlobalEditor.setShowPrintMargin(false);
   theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
+  theGlobalEditor.addEventListener('change', () => {
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
+  });
   error.setEditor(editor);
   markers = new Markers(theGlobalEditor);
 
@@ -491,6 +501,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     return;
   }
 
+  theLocalSaveWarning.clickRun();
+
   // Make sure to stop previous PyGame event listeners
   if (typeof Sk.unbindPygameListeners === 'function') {
     Sk.unbindPygameListeners();
@@ -500,7 +512,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFiles').hide();
+  $('#saveFilesContainer').hide();
   clearOutput();
 
   try {
@@ -571,7 +583,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
           error.show(ClientMessages['Execute_error'], err.message);
@@ -830,9 +842,12 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
+
+  // Currently, we don't do anything with the sourcemap
+  if (sourceMap){}
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = outputDiv.find('#variable_button');
@@ -856,7 +871,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -1009,7 +1028,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
 
     if (hasTurtle) {
-      $('#saveFiles').show();
+      $('#saveFilesContainer').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -2013,6 +2032,7 @@ async function saveIfNecessary() {
 
   const code = theGlobalEditor.getValue();
   const saveName = saveNameFromInput();
+
 
   if (theUserIsLoggedIn) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;

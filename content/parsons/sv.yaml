@@ -22,9 +22,9 @@ levels:
                 {print} Din slumpade måltid för dagen är...
                 {sleep} 2
                 {print} mat {at} {random} med tillbehör {at} {random}
-            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
+            story: "Gör ett program som väljer en slumpmässig måltid åt dig. Gör en lista med mat och en lista med tillbehör och låt programmet bestämma vad du ska äta!\n"
         1:
-            story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
+            story: "Det nya skolåret på Hogwarts har börjat! \nDet är sorteringshattens uppgift att sortera in dig i ett av husen.\nVilket hus kommer du att sorteras in i?\nÄr du en Gryffindor, Hufflepuf, Ravenclaw eller Slytherin.\nLåt programmet vänta en kort stund innan det avslöjar ditt hus.\n"
             code: |-
                 {print} Det nya skolåret på Hogwarts börjar!
                 {print} Sorteringshatten är redo att sortera in dig i ett elevhem.
@@ -33,14 +33,14 @@ levels:
                 {print} Och det blir {at} {random}
     4:
         1:
-            story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
+            story: "Du är den nyaste Pokémon-tränaren från Pallet Town!\nGör ett program som väljer din första Pokémon.\nLåt programmet vänta en minut innan det avslöjar din första Pokémon.\n"
             code: |-
                 pokemon {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'Det här blir din första Pokémon!'
                 {sleep}
                 {print} pokemon {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.\n
+            story: "Skapa ett lotteri där du kan välja ett pris som du kan vinna.\n"
             code: |-
                 priser {is} bil, hamster, 1 miljon kronor
                 pris {is} {ask} 'Vad vill du vinna?'
@@ -53,7 +53,7 @@ levels:
                 svar {is} {ask} '88 - 16 = ?'
                 {if} svar {is} 72 {print} 'Rätt!'
                 {else} {print} 'Fel! Svaret var 72'
-            story: Create a maths game.\n
+            story: "Gör ett mattespel.\n"
         1:
             code: |-
                 favoritfilmer {is} Batman, Spiderman, The Avengers, Jurassic Park
@@ -61,10 +61,10 @@ levels:
                 {if} film {in} favoritfilmer {print} 'Du har bra smak'
                 {else} {print} 'Synd att din favoritfilm inte finns i listan. Vi lägger till den direkt!'
                 {add} film {to_list} favoritfilmer
-            story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
+            story: "Gör ett program som kollar om din favoritfilm redan är med i datorns lista.\nOm så är fallet, skriv att du har god smak, annars lägg till filmen till i listan.\n"
     6:
         1:
-            story: Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n
+            story: "Gör ett program som räknar ut hur gammal du är i hund- och kattår.\nFråga först efter användarens ålder och börja beräkna.\nBeräkna först hundår och sedan kattår.\nVisa användaren de olika åldrarna.\n"
             code: |-
                 ålder = {ask} 'Hur gammal är du?'
                 hundålder = ålder * 7
@@ -72,7 +72,7 @@ levels:
                 {print} 'I hundår är du ' hundålder ' år gammal.'
                 {print} 'I kattår är du ' kattålder ' år gammal.'
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
+            story: "Gör ett program som hjälper dig beräkna hur många tårtor du ska köpa till ditt födelsedagskalas.\n"
             code: |-
                 {print} 'Det är din födelsedag!'
                 personer = {ask} 'Hur många personer vill du ge en tårtbit?'
@@ -80,17 +80,17 @@ levels:
                 {print} 'Då behöver du köpa' tårtmängd ' tårtor'
     7:
         1:
-            story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
+            story: "I en schackturnering är det tre spelare kvar.\nGör ett program som bestämmer vilka två spelare som ska möta varann först.\nSkriv först ut vilka två spelare som möts i den första matchen, skriv sedan ut vilken spelare vinnaren kommer att möta.\n"
             code: |-
                 spelare = Liam, Noah, Sophie
                 spelare1 = spelare {at} {random}
+                {remove} spelare1 {from} spelare
                 spelare2 = spelare {at} {random}
                 {print} spelare1 ' spelar först mot ' spelare2
-                {remove} spelare1 {from} spelare
                 {remove} spelare2 {from} spelare
                 {print} 'Vinnaren spelar mot ' spelare {at} {random}
         2:
-            story: Create the song 'The wheels on the bus go round and round'\n
+            story: "Skapa låten \"Hjulen på bussen går runt runt runt\"\n"
             code: |-
                 {print} 'hjulen på bussen snurrar'
                 {repeat} 3 {times} {print} 'runt, runt, runt'
@@ -105,7 +105,7 @@ levels:
                 {print} Vi ska se film
                 {print} Ha det så roligt!
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
+            story: "Detta är webbshoppen för en leksaksbutik. Gör ett program där kunder kan lägga till en vara i sin kundvagn.\n"
             code: |-
                 {print} Välkommen till vår leksaksaffär
                 leksak {is} {ask} Vad vill du köpa?
@@ -113,7 +113,7 @@ levels:
                 {print} Tack för att du handlar hos oss!
     8:
         1:
-            story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n
+            story: "Du och fyra andra vänner spelar Pokémon Go! Gör ett program som bestämmer vilket lag var och en av er ska spela i.\nAntingen rött, gult eller blått! Gör en liten paus efter att du har meddelat ett lag.\n"
             code: |-
                 lag = röd, gul, blå
                 {print} 'Röd, Gul eller Blå?'
@@ -122,7 +122,7 @@ levels:
                     {print} lag {at} {random}
                     sleep 2
         2:
-            story: Print the countdown for a  game of hide and seek.\n
+            story: "Skriv ut nedräkningen för att leka kurragömma.\n"
             code: |-
                 räknare = 11
                 {repeat} 10 {times}

@@ -198,7 +198,7 @@ When adding new Babel translations the implementation is a bit more complex, but
 2. Next we run the following command to let Babel search for keys, it is important to locations and sort the output to minimize merge conflicts:
     * `pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output`
 3. We now have to add the found keys to all translation files, with the following command:
-    * `pybabel update -i messages.pot -d translations -N  --no-wrap`
+    * `pybabel update -i messages.pot -d translations -N`
 4. All keys will be automatically stored in the /translations folder
 5. Search for the .po files for the languages you know and find the empty `msgstr` for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
@@ -326,14 +326,6 @@ If you want to try Admin features locally (for example, marking accounts as teac
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
-## What happens when I make a PR?
-
-When you create a pull request, someone will take a look and see whether all is in order. It really helps if you let us know how to test the PR (this is also documented in the PR template) and if you yourself make sure all is in order by running the tests locally.
-
-If the PR is approved, it will be merged with a [mergify script](https://github.com/hedyorg/hedy/blob/main/.mergify.yml). Please don't do anything (esp. don't enable auto merge), all will be handled automatically. Mergify will also tell you that when the PR is approved.
-
-When your PR is accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
-We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy. You can use [the version log](https://hedy.org/version) to see which version of Hedy lives on the website.
 
 Accessing logs
 -----------------------

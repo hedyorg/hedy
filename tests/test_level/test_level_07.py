@@ -419,7 +419,7 @@ class TestsLevel7(HedyTester):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
-            _ = 'x'
+            x__x__x__x = '5'
           time.sleep(0.1)
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
@@ -437,5 +437,28 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            output=output,
-            translate=False)
+            output=output)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'The prince kept calling for help'
+        repeat 5 times print 'Help!'
+        print 'Why is nobody helping me?'""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'The prince kept calling for help')
+        for __i__ in range(int('5')):
+          print(f'Help!')
+          time.sleep(0.1)
+        print(f'Why is nobody helping me?')""")
+
+        expected_source_map = {
+            "1/0-1/40": "1/0-1/42",
+            "1/0-3/104": "1/0-5/144",
+            "2/56-2/69": "3/75-3/90",
+            "2/41-2/69": "2/43-4/108",
+            "3/70-3/103": "5/109-5/144"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
