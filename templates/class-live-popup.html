@@ -16,10 +16,25 @@
         {% endif %}
 
           <div class="pt-10 px-2 pb-2">
-              <h2>❗ Error</h2>
+              <h2>❗ {{ selected_item.header }}</h2>
               <p>
-                  Jantje has a problem at Lv. 1 ...
+                  Flagged Student(s):
               </p>
+              <ul class="p-4">
+                {% for student in selected_item.students %}
+                    <li>
+                        {% if dashboard_options.student %}
+                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student)}}" class="text-gray-800 hover:text-white">
+                                {{student}}
+                            </a>
+                        {% else %}
+                            <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student)}}" class="text-gray-800 hover:text-white">
+                                {{student}}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+              </ul>
           </div>
         </p>
       </div>
