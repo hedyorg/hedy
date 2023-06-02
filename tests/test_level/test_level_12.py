@@ -2102,3 +2102,85 @@ class TestsLevel12(HedyTester):
             output=output,
             max_level=16
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        price = 0.0
+        food = ask 'What would you like to order?'
+        drink = ask 'What would you like to drink?'
+        if food is 'hamburger'
+            price = price + 6.50
+        if food is 'pizza'
+            price = price + 5.75
+        if drink is 'water'
+            price = price + 1.20
+        if drink is 'soda'
+            price = price + 2.35
+        print 'That will be ' price ' dollar, please'""")
+
+        expected_code = textwrap.dedent("""\
+        price = 0.0
+        food = input(f'''What would you like to order?''')
+        try:
+          food = int(food)
+        except ValueError:
+          try:
+            food = float(food)
+          except ValueError:
+            pass
+        drink = input(f'''What would you like to drink?''')
+        try:
+          drink = int(drink)
+        except ValueError:
+          try:
+            drink = float(drink)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'hamburger'):
+          price = price + 6.5
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'pizza'):
+          price = price + 5.75
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'water'):
+          price = price + 1.2
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'soda'):
+          price = price + 2.35
+        print(f'''That will be {price} dollar, please''')""")
+
+        expected_source_map = {
+            "1/0-1/5": "1/0-1/5",
+            "1/0-1/11": "1/0-1/11",
+            "1/0-12/362": "1/0-26/765",
+            "2/12-2/16": "2/12-2/16",
+            "2/12-2/54": "2/12-9/165",
+            "3/55-3/60": "10/166-10/171",
+            "3/55-3/98": "10/166-17/324",
+            "4/102-4/106": "4/70-4/74",
+            "4/102-4/121": "18/328-18/401",
+            "4/99-5/155": "18/325-19/424",
+            "5/126-5/131": "19/405-19/410",
+            "5/134-5/139": "19/413-19/418",
+            "5/126-5/146": "19/405-19/424",
+            "6/159-6/163": "4/81-4/85",
+            "6/159-6/174": "20/428-20/497",
+            "6/156-7/208": "20/425-21/521",
+            "7/179-7/184": "21/501-21/506",
+            "7/187-7/192": "21/509-21/514",
+            "7/179-7/199": "21/501-21/521",
+            "8/212-8/217": "10/207-10/212",
+            "8/212-8/228": "22/525-22/595",
+            "8/209-9/262": "22/522-23/618",
+            "9/233-9/238": "23/599-23/604",
+            "9/241-9/246": "23/607-23/612",
+            "9/233-9/253": "23/599-23/618",
+            "10/266-10/271": "12/225-12/230",
+            "10/266-10/281": "24/622-24/691",
+            "10/263-11/315": "24/619-25/715",
+            "11/286-11/291": "25/695-25/700",
+            "11/294-11/299": "25/703-25/708",
+            "11/286-11/306": "25/695-25/715",
+            "12/338-12/343": "26/740-26/745",
+            "12/316-12/361": "26/716-26/765"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

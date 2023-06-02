@@ -22,17 +22,18 @@ class TestsLevel5(HedyTester):
     #
     # if tests
     #
-    def test_if_equality_linebreak_print(self):
+    @parameterized.expand(HedyTester.commands_level_4)
+    def test_if_equality_linebreak_print(self, hedy, python):
         # line breaks after if-condition are allowed
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(f"""\
         naam is Hedy
         if naam is Hedy
-        print 'leuk'""")
+        {hedy}""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         naam = 'Hedy'
         if naam == 'Hedy':
-          print(f'leuk')""")
+          {python}""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1348,3 +1349,39 @@ class TestsLevel5(HedyTester):
             # End of PyGame Event Handler""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'Do you want a good (g) or bad (b) ending?'
+        if g is pressed print 'They lived happily ever after ❤'
+        else print 'The prince was eaten by a hippopotamus 😭'""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'Do you want a good (g) or bad (b) ending?')
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'g':
+              print(f'They lived happily ever after ❤')
+              break
+            else:
+              print(f'The prince was eaten by a hippopotamus 😭')
+              break
+            # End of PyGame Event Handler""")
+
+        expected_source_map = {
+            "1/0-1/49": "1/0-1/51",
+            "1/0-3/160": "1/0-17/467",
+            "2/66-2/105": "12/301-12/342",
+            "2/50-3/159": "2/52-17/467",
+            "3/111-3/159": "15/371-15/421"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

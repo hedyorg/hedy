@@ -1,52 +1,46 @@
 1:
--   name: "print"
-    explanation: "Принтирай дума с командата `print`."
-    demo_code: "print Привет, добре дошли при Хеди!"
--   name: "ask"
-    explanation: "Задай въпрос с `ask`, примерно любим цвят."
-    demo_code: "ask Кой е любимият ти цвят?"
--   name: "echo"
-    explanation: "Повтори това, което си написал(а) с `echo`."
+-   name: "{print}"
+    explanation: "Принтирай дума с командата `{print}`."
+    demo_code: "{print} Привет, добре дошли при Хеди!"
+-   name: "{ask}"
+    explanation: "Задай въпрос с `{ask}`."
+    demo_code: "{ask} Кой е любимият ти цвят?"
+-   name: "{echo}"
+    explanation: "Повтори това, което си написал(а) с `{echo}`."
     demo_code: |-
-        ask Кой е любимият ти цвят?
-        echo значи любимият ти цвят e ...
--   name: "forward"
-    explanation: "Нарисувай линия с `forward`."
-    demo_code: "forward 100"
--   name: "turn"
-    explanation: "Обърни нарисуваната костенурка с `turn`"
+        {ask} Кой е любимият ти цвят?
+        {echo} значи любимият ти цвят е
+-   name: "{print} емотикони"
+    explanation: "Отпечатване на емотикон с `{print}`."
+    demo_code: "{print} 🙋 🌍 ❗"
+-   name: "{forward}"
+    explanation: "Начертайте линия с `{forward}`."
     demo_code: |-
-        forward 50
-        turn right
-        forward 25
-        turn left
-        forward 50
-        turn right
-        forward 25
-        turn left
-        forward 50
+        {forward} 100
 -   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    explanation: Завъртете рисуващата костенурка с `{turn}`.
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
--   name: "is"
-    explanation: "С командата `is` можеш да запишеш име в програмата. Избери си едно име, може и твоето."
+-   name: "{is}"
+    explanation: "С командата `{is}` можеш да запишеш име в програмата. Избери си едно име, може и твоето."
     demo_code: |-
-        име is Галя
-        print Аз се казвам име.
--   name: "ask"
-    explanation: "Запитай с командата `ask`. Важно е да запомниш, че трябва да назовеш отговора си с командата `is`."
+        име {is} Галя
+        {print} добре дошъл име.
+-   name: "{ask}"
+    explanation: "Запитай с командата `{ask}`. Важно е да запомниш, че трябва да назовеш отговора си с командата `{is}`."
     demo_code: |-
-        цвят is ask Кой е любимият ти цвят?
-        print Твоят любим е цвят.
--   name: "is - turtle"
-    explanation: "Назови число, използвайки командата `is`."
+        цвят {is} {ask} Кой е любимият ти цвят?
+        {print} цвят е твоят любим.
+-   name: "{sleep}"
+    explanation: "`{sleep}` приспива Хеди за (няколко) секунда (и)."
     demo_code: |-
-        hoek is 90
-        turn hoek
-        forward 100
+        {print} Нека помисля за секунда...
+        {sleep}
+        {print} Хммм.. Имам нужда от още 3 секунди...
+        {sleep} 3
+        {print} Еврика! Открих го!
 -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    name: is - turtle
+    name: '{is} с костенурка'
     demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
 -   name: "избери_произволно"
@@ -97,8 +91,8 @@
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     explanation: Check elements with `{in}`
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Проверете дали даден клавиш на клавиатурата е `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} \"Ти натисна A!\" {else} {print} \"Ти натисна друг клавиш!\""
 6:
 -   name: "print"
     explanation: "Принтирай точно думите в кавички"
@@ -108,7 +102,7 @@
     demo_code: |-
         решение = ask 'Колко прави 10 + 10?'
         if решение is 20 print 'Да!' else print 'Невярно'
--   name: "`ask` and `if` turtle"
+-   name: "`{ask}` и `{if}` с костенурка"
     explanation: "Запитай въвеждане на брой ъгли"
     demo_code: |-
         ъгли = ask 'Колко ъгли?'
@@ -154,8 +148,8 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Проверете дали даден клавиш на клавиатурата е `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} \"Ти натисна A!\"\n{else}\n    {print} \"Ти натисна друг клавиш!\""
 9:
 -   name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
@@ -202,26 +196,26 @@
 12:
 -   name: "float directly"
     explanation: "Decimal numbers"
-    demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+    demo_code: |-
+        {print} 'Смятай!'
+        {print} 'Две и половина плюс две и половина е...'
         {print} 2.5 + 2.5
 -   name: "assign text"
     explanation: "Text with quotation marks after ="
-    demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
+    demo_code: |-
+        име = "Роботът Хеди"
+        {print} "Здравей, " име
+-   name: "кавички след `{if}` сравнение"
     explanation: "Text with quotation marks after {if}"
-    demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
+    demo_code: |-
+        име = {ask} 'Кой си ти?'
+        {if} име = 'Хеди'
+            {print} 'Здравейте!'
 -   name: "quotes in list"
     explanation: "A list with quotation marks"
-    demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+    demo_code: |-
+        супергерои = 'Железният човек', 'Батман', 'Супермен'
+        {print} супергерои {at} {random}
 13:
 -   name: "{and}"
     explanation: "Two parts both need to be correct"
