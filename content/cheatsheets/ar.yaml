@@ -31,7 +31,7 @@
     demo_code: |-
         اللون {is} {ask} ما لونك المفضل؟
         {print} اللون هو المفضل لديك!
--   explanation: نستطيع أن نعلق تنفيذ هيدي (نجعلها تنتظر) عدد معين من الثواني.
+-   explanation: '`{sleep}` نستطيع أن نعلق تنفيذ هيدي (نجعلها تنتظر) عدد معين من الثواني.'
     demo_code: |-
         {print} دعني أفكر للحظة...
         {sleep}
@@ -39,7 +39,7 @@
         {sleep} ٣
         {print} لقد وجدتها الآن!
     name: '{sleep}'
--   name: هو - الرسام
+-   name: '{is} مع السلحفاة'
     explanation: نعطي اسماً لأي رقم من خلال الأمر `هو` أو `هي`. بامكانك اختيار الاسم بنفسك.
     demo_code: "الزاوية هي ٩٠\n{turn} الزاوية\n{forward} ١٠٠"
 3:
@@ -94,8 +94,8 @@
         لوني_المفضل {is} {ask} "ما لونك المفضل؟"
         {if} لوني_المفضل {in} الالوان_الجميلة {print} "هذا رائع!" {else} {print} "يا خسارة!"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: تحقق مما إذا كان مفتاح معين على لوحة المفاتيح هو `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} \"لقد ضغطت على A!\" {else} {print} \"لقد ضغطت على مفتاح آخر!\""
 6:
 -   name: "{print}"
     explanation: "نطبع على الشاشة النص ما بين علامات الاقتباس حرفياً"
@@ -105,7 +105,7 @@
     demo_code: |-
         الجواب = {ask} "ما حاصل ١٠ زائد ١٠؟"
         {if} الجواب {is} ٢٠ {print} "نعم صحيح!" {else} {print} "للأسف! اجابة خاطئة.."
--   name: "`{ask}` و `{if}` مع الرسام"
+-   name: "`{ask}` و `{if}` مع السلحفاة"
     explanation: "{ask} المستخدم عن عدد الزوايا التي يريد أن يستعمل للدوران"
     demo_code: |-
         عدد_الزوايا = {ask} "كم عدد الزوايا؟"
@@ -150,8 +150,8 @@
             {turn} ٩٠
             {forward} ٥٠
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: تحقق مما إذا كان مفتاح معين على لوحة المفاتيح هو `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'لقد ضغطت على A!'\n{else}\n    {print} 'لقد ضغطت على مفتاح آخر!'"
 9:
 -   name: "`{if}` مع أكثر من سطر برمجي"
     explanation: "نجيب على سؤال ما باستخدام الأمر {ask} و نفحص بعدها ما اذا كانت الاجابة صحيحة. يمكننا الان طباعة اكثر من سطر على الشاشة."
@@ -198,26 +198,26 @@
 12:
 -   name: "الأرقام العشرية"
     explanation: "الأرقام العشرية"
-    demo_code: |
+    demo_code: |-
         {print} "احسب بسرعة!"
         {print} "اثنان ونصف زائد اثنان ونصف يساوي ..."
-        {print} ٢.٥ + ٢.٥
+        {print} 2.5 + 2.5
 -   name: "تخزين النصوص"
     explanation: "النص بين علامات الاقتباس بعد ="
-    demo_code: |
-        الاسم = "الآلية هيدي"
-        {print} "مرحباً " الاسم
--   name: "علامات الاقتباس بعد الفحص عند استخدام {if}"
+    demo_code: |-
+        name = "الآلية هيدي"
+        {print} "مرحباً " name
+-   name: "علامات اقتباس بعد مقارنة `{if}`"
     explanation: "النص داخل علامات الاقتباس بعد {if}"
-    demo_code: |
-        اسمك = {ask} "من أنت؟"
-        {if} اسمك = "هيدي"
+    demo_code: |-
+        name = {ask} "من أنت؟"
+        {if} name = "هيدي"
             {print} "مرحباً بك!"
 -   name: "نصوص مع علامات الاقتباس داخل قائمة"
     explanation: "قائمة تحتوي على نصوص مع علامات الاقتباس"
-    demo_code: |
-        الابطال_الخارقون = "سبايدرمان"، "باتمان"، "الرجل الحديدي"
-        {print} الابطال_الخارقون {at} {random}
+    demo_code: |-
+        superheros = "سبايدرمان"، "باتمان"، "الرجل الحديدي"
+        {print} superheros {at} {random}
 13:
 -   name: "{and}"
     explanation: "يجب أن يكون كلا الفحصين صحيحين"

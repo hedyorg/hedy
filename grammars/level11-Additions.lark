@@ -1,11 +1,13 @@
-command:+= for_loop | call | define
+command:+= for_loop | call | error_nested_define
 
 //new : for loop
 for_loop: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK
 
 // FUNCTIONS ======================================== =============================
 // check line 1: command:+= call | define
+_non_empty_program: _EOL* (define | command | error_invalid) _SPACE* (_EOL+ (define | command) _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 define: _DEFINE function_name _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 call: _CALL function_name
 function_name: NAME -> text
+error_nested_define: define
 // ================================================================================
