@@ -276,10 +276,11 @@ The system is not foolproof! It is possible that students make errors that are n
                         <ul class="max-w-md space-y-1 list-none list-inside">
                             {% for error_entry in class_info.common_errors %}
                                 {% if error_entry.active == 1 %}
+                               
                                     <li class="relative w-full border-solid border-2 border-black rounded p-2" id="{{ ident }}">
                                       <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                         <h3 class="cursor-pointer hover:text-white">
-                                          {{error_entry.header}}
+                                          {{error_entry.header}} ({{error_entry.students|length}})
                                         </h3>
                                       </a>
                                       <a href="#" class="absolute text-black right-5 top-0 no-underline hover:text-white" id="resolve-student" onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{error_entry.id}}", {{('resolve_student_prompt')|default(None)|tojson}})'>✔️ Resolve</a>
