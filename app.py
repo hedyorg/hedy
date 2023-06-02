@@ -15,8 +15,9 @@ from logging.config import dictConfig as logConfig
 from os import path
 
 import static_babel_content
-from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   redirect, request, send_file, url_for,
+from markupsafe import Markup
+from flask import (Flask, Response, abort, after_this_request, g,
+                   redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -31,7 +32,7 @@ import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
-from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
+from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
@@ -63,6 +64,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
+app.json = JinjaCompatibleJsonProvider(app)
 babel = Babel(app)
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)

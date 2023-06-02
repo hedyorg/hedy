@@ -284,4 +284,9 @@ class MissingElseForPressitException(HedyException):
                          line_number=line_number)
 
 
+class NestedFunctionException(HedyException):
+    def __init__(self):
+        super().__init__('Nested Function')
+
+
 HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}
