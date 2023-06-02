@@ -781,16 +781,16 @@ class Database:
     def add_program_stats(self, id, level, number_of_lines, exception, error_message=None):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
-        p_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
+        program_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
 
         chart_history = []
         error_history = []
-        if p_stats.records and 'chart_history' in p_stats.records[0].keys():
-            chart_history = p_stats.records[0]['chart_history']
+        if program_stats.records and 'chart_history' in program_stats.records[0].keys():
+            chart_history = program_stats.records[0]['chart_history']
         chart_slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
 
-        if p_stats.records and 'error_history' in p_stats.records[0].keys():
-            error_history = p_stats.records[0]['error_history']
+        if program_stats.records and 'error_history' in program_stats.records[0].keys():
+            error_history = program_stats.records[0]['error_history']
         error_slice = MAX_ERROR_HISTORY_SIZE if len(error_history) > MAX_ERROR_HISTORY_SIZE else 0
 
         if exception:
