@@ -14,7 +14,6 @@ from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
-from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -574,11 +573,19 @@ class LiveStatisticsModule(WebsiteModule):
                 # inactive to free up space
                 # Todo: could use a better way to handle this
                 new_id = 0
-                common_errors_update = dynamo.Table(self.common_error_db, "common_errors", "class_id").get(
-                    {"class_id": class_id})
+
+                class_customization = self.db.get_class_customizations(class_id)
+                dashboard_customization = class_customization.get('dashboard_customization', {})
+
+                common_errors = dashboard_customization.get('common_errors', [])
                 for i in range(self.MAX_COMMON_ERRORS // 2):
-                    common_errors_update['errors'][i]['active'] = 0
-                self.ERRORS.update({"class_id": class_id}, common_errors_update)
+                    common_errors[i]['active'] = 0
+
+                class_customization['dashboard_customization'] = {
+                    'selected_levels': dashboard_customization.get('selected_levels', [1]),
+                    'common_errors': common_errors
+                }
+                self.db.update_class_customizations(class_customization)
 
         return new_id
 
