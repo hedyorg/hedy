@@ -4,7 +4,7 @@
 
 <div>
     <!--  Back to class button  -->
-    <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
+    <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
       {{_('back_to_class')}}
     </button>
 
@@ -14,6 +14,10 @@
             <h1>RADboard</h1>
         </div>
     </div>
+
+    <button class="blue-btn float-right" id="questionnaire" onclick=" window.open('https://hedy-nml.socsci.ru.nl/','_blank')">
+      Questionnaire
+    </button>
 
     <!-- Levels selector -->
     <div class="flex justify-center mb-10">
