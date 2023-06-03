@@ -78,7 +78,8 @@ class StatisticsModule(WebsiteModule):
             quizzes_runs_per_level = []
             avg_quizzes_runs_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level)
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
+                                            error_runs_per_level, programs, level)
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
@@ -154,7 +155,8 @@ class StatisticsModule(WebsiteModule):
             quizzes_runs_per_level = []
             avg_quizzes_runs_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level)
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
+                                            error_runs_per_level, programs, level)
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
