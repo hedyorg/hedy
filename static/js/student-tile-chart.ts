@@ -1,9 +1,9 @@
-import {Chart, ChartTypeRegistry} from "chart.js";
+import {Chart, ChartType} from "chart.js";
 
-let studentTileChart: Chart<"bar", number[], string>;
+let studentTileChart: Chart<ChartType, number[][], string>;
 let dataLoaded = false
 
-function expandStudentTileChart(student: any, levels: string[], programs: number[]){
+function expandStudentTileChart(student: any, levels: string[], successRuns: number[], errorRuns: number[]){
     let bigTile = document.getElementById('expanded-student-tile')!;
     let studentName = document.getElementById('student-name')!;
     const ctx = document.getElementById('student-progression-chart') as HTMLCanvasElement;
@@ -13,11 +13,20 @@ function expandStudentTileChart(student: any, levels: string[], programs: number
         studentTileChart.destroy();
     }
 
-    let chartMax: number = 15
-    let chartType: keyof ChartTypeRegistry = "bar";
-    let chartLabel = 'Program progression per level (%)';
-    let chartTitle: string = 'Level Progression';
-    studentTileChart = createNewChart(ctx, levels, programs, chartMax, chartLabel, chartTitle, chartType);
+    const chartMax: number = 15
+    const chartTitle: string = 'Level Progression';
+    const chartFailColor = "#fd7f6f";
+    const chartSuccessColor = "#b2e061";
+    const chartSuccessLabel = "Successful runs";
+    const chartFailLabel = "Failed runs";
+
+    const data = [successRuns, errorRuns]
+    const chartColors = [chartSuccessColor, chartFailColor]
+    const chartLabels = [chartSuccessLabel, chartFailLabel]
+
+    const datasets = initChart(levels, data, chartLabels, chartColors)
+
+    studentTileChart = createNewChart(ctx, datasets, chartMax, chartTitle, "bar");
 
     studentName.textContent = student.username;
     bigTile.classList.remove('hidden');
@@ -27,7 +36,7 @@ function hideStudentTileChart() {
     $('#expanded-student-tile').addClass('hidden');
 }
 
-export function studentTileChartClicked(event: any, student: any, levels: string[], programs: number[]): void {
+export function studentTileChartClicked(event: any, student: any, levels: string[], success_runs: number[], error_runs: number[]): void {
     const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
 
     // Remove 'selected' attribute from all student tiles
@@ -38,7 +47,7 @@ export function studentTileChartClicked(event: any, student: any, levels: string
         hideStudentTileChart();
     } else {
         $(event.target).closest('.student-tile').addClass('selected');
-        expandStudentTileChart(student, levels, programs);
+        expandStudentTileChart(student, levels, success_runs, error_runs);
     }
 }
 
@@ -46,7 +55,7 @@ export function loadQuizChart(levels: string[], students: any) {
     if (!dataLoaded) {
         for (let i = 0; i < students.length; i++) {
             let student = students[i];
-            let avg_quizzes_per_level = student['average_quizzes_ran_per_level'];
+            let avg_quizzes_per_level = student['avg_quizzes_runs_per_level'];
             let elementString = "static-student-tile-" + student['username'];
 
             const div = document.getElementById(elementString) as HTMLDivElement;
@@ -57,28 +66,31 @@ export function loadQuizChart(levels: string[], students: any) {
             div.appendChild(canvas);
 
             let chartMax: number = 100;
-            let chartType: keyof ChartTypeRegistry = "line";
             let chartLabel = 'Average quiz per level (%)';
             let chartTitle: string = 'Average Quiz';
-            createNewChart(canvas, levels, avg_quizzes_per_level, chartMax, chartLabel, chartTitle, chartType);
+
+            const data = {
+              labels: levels,
+              datasets: [
+                {
+                  label: chartLabel,
+                  data: avg_quizzes_per_level,
+                    borderColor: '#36A2EB',
+                    backgroundColor: '#9BD0F5',
+                },
+              ]
+            };
+
+            createNewChart(canvas, data, chartMax, chartTitle, "line");
         }
         dataLoaded = true;
     }
 }
 
-function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], data: number[],  max: number, chartLabel: string, chartTitle: string, chartType: any): Chart<"bar", number[], string> {
+function createNewChart(ctx: HTMLCanvasElement, data: any, max: number, chartTitle: string, chartType: any): Chart<ChartType, number[][], string> {
     return new Chart(ctx, {
         type: chartType,
-        data: {
-            labels: studentLevels,
-            datasets: [{
-                label: chartLabel,
-                data: data,
-                borderWidth: 1,
-                borderColor: '#36A2EB',
-                backgroundColor: '#9BD0F5',
-            }]
-        },
+        data: data,
         options: {
             plugins: {
                 title: {
@@ -93,6 +105,7 @@ function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], data: n
                 y: {
                     beginAtZero: true,
                     max: max,
+                    stacked: true,
                 },
                 x: {
                     title: {
@@ -102,8 +115,27 @@ function createNewChart(ctx: HTMLCanvasElement, studentLevels: string[], data: n
                             size: 15
                         }
                     },
+                    stacked: true,
                 }
             }
         }
     });
+}
+
+function initChart(levels: string[], data: any, chartLabels: any, chartColor: any) {
+    return {
+      labels: levels,
+      datasets: [
+        {
+          label: chartLabels[0],
+          data: data[0],
+            backgroundColor: chartColor[0],
+        },
+        {
+          label: chartLabels[1],
+          data: data[1],
+            backgroundColor: chartColor[1],
+        },
+      ]
+    };
 }

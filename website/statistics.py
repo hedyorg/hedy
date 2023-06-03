@@ -72,23 +72,26 @@ class StatisticsModule(WebsiteModule):
             quizzes = self.db.get_quiz_stats([student_username])
 
             # find quiz and programs statistics for each student on each level
-            programs_ran_per_level = []
-            quizzes_ran_per_level = []
-            average_quizzes_ran_per_level = []
+            program_runs_per_level = []
+            success_runs_per_level = []
+            error_runs_per_level = []
+            quizzes_runs_per_level = []
+            avg_quizzes_runs_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                find_programs_per_level(programs_ran_per_level, programs, level)
-                calc_num_programs_per_level(programs_ran_per_level, level)
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level)
+                calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
-                find_quizzes_per_level(quizzes_ran_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(average_quizzes_ran_per_level, quizzes_ran_per_level, level)
+                find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
+                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            average_quizzes = calc_average_quizzes(average_quizzes_ran_per_level)
+            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
 
             finished_quizzes = any("finished" in x for x in quizzes)
-            highest_level_quiz = max([x.get("level")for x in quizzes if x.get("finished")]) if finished_quizzes else "-"
-            highest_level_quiz_score = ([x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
-
+            highest_level_quiz = max(
+                [x.get("level") for x in quizzes if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = (
+                [x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
             success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
 
             students.append(
@@ -96,10 +99,10 @@ class StatisticsModule(WebsiteModule):
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
-                    "programs_ran_per_level": programs_ran_per_level,
+                    "program_runs_per_level": program_runs_per_level,
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
-                    "average_quizzes_ran_per_level": average_quizzes_ran_per_level,
+                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
                     "average_quiz": average_quizzes,
                     "highest_level_quiz": highest_level_quiz,
                     "highest_level_quiz_score": highest_level_quiz_score,
@@ -144,23 +147,26 @@ class StatisticsModule(WebsiteModule):
             quizzes = self.db.get_quiz_stats([student_username])
 
             # find quiz and programs statistics for each student on each level
-            programs_ran_per_level = []
-            quizzes_ran_per_level = []
-            average_quizzes_ran_per_level = []
+            program_runs_per_level = []
+            success_runs_per_level = []
+            error_runs_per_level = []
+            quizzes_runs_per_level = []
+            avg_quizzes_runs_per_level = []
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                find_programs_per_level(programs_ran_per_level, programs, level)
-                calc_num_programs_per_level(programs_ran_per_level, level)
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level)
+                calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
-                find_quizzes_per_level(quizzes_ran_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(average_quizzes_ran_per_level, quizzes_ran_per_level, level)
+                find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
+                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            average_quizzes = calc_average_quizzes(average_quizzes_ran_per_level)
+            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
 
             finished_quizzes = any("finished" in x for x in quizzes)
-            highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")]) if finished_quizzes else "-"
-            highest_level_quiz_score = ([x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
-
+            highest_level_quiz = max(
+                [x.get("level") for x in quizzes if x.get("finished")]) if finished_quizzes else "-"
+            highest_level_quiz_score = (
+                [x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]) if finished_quizzes else "-"
             success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
 
             students.append(
@@ -168,10 +174,11 @@ class StatisticsModule(WebsiteModule):
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
-                    "programs_ran_per_level": programs_ran_per_level,
+                    "success_runs_per_level": success_runs_per_level,
+                    "error_runs_per_level": error_runs_per_level,
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
-                    "average_quizzes_ran_per_level": average_quizzes_ran_per_level,
+                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
                     "average_quiz": average_quizzes,
                     "highest_level_quiz": highest_level_quiz,
                     "highest_level_quiz_score": highest_level_quiz_score,
@@ -179,10 +186,6 @@ class StatisticsModule(WebsiteModule):
             )
 
         students = sorted(students, key=lambda d: d.get("username", 0))
-
-        for student in students:
-            print(student.get('username'))
-            print(student.get('average_quizzes_ran_per_level'))
 
         return render_template(
             "class-stats-v2.html",
@@ -511,11 +514,16 @@ def get_general_class_stats(students):
 
 
 # append the programs obtained on each level
-def find_programs_per_level(programs_per_level, programs, level):
-    programs_per_level.append([])
+def find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level):
+    program_runs_per_level.append([])
+    success_runs_per_level.append([]), error_runs_per_level.append([])
     for program in programs:
         if program['level'] == level:
-            programs_per_level[level - 1].append(program['name'])
+            program_runs_per_level[level - 1].append([program['name'], str(program.get("error"))])
+            if str(program.get("error")) == "True":
+                success_runs_per_level[level - 1].append(program['name'])
+            elif str(program.get("error")) == "False":
+                error_runs_per_level[level - 1].append(program['name'])
 
 
 # append the quizzes obtained on each level
@@ -545,8 +553,22 @@ def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level,
 
 
 # count the number of programs that the student has run each level
-def calc_num_programs_per_level(programs_ran_per_level, level):
-    programs_ran_per_level[level - 1] = len(programs_ran_per_level[level - 1])
+def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, error_runs_per_level, level):
+    if len(programs_ran_per_level[level - 1]) != 0:
+        successful_runs = 0
+        unsuccessful_runs = 0
+        for program in programs_ran_per_level[level - 1]:
+            if str(program[1]) == "True":
+                unsuccessful_runs += 1
+            else:
+                successful_runs += 1
+        success_runs_per_level[level - 1] = successful_runs
+        error_runs_per_level[level - 1] = unsuccessful_runs
+    else:
+        success_runs_per_level[level - 1] = 0
+        error_runs_per_level[level - 1] = 0
+
+    return success_runs_per_level, error_runs_per_level
 
 
 def find_success_rate_overall(quizzes):
@@ -569,8 +591,8 @@ def find_success_rate_overall(quizzes):
 def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
     success_rate_highest_level = '-'
     if finished_quizzes:
-        highest_level_started = ([x.get("started")for x in quizzes if x.get("level") == highest_level_quiz])
-        highest_level_finished = ([x.get("finished")for x in quizzes if x.get("level") == highest_level_quiz])
+        highest_level_started = ([x.get("started") for x in quizzes if x.get("level") == highest_level_quiz])
+        highest_level_finished = ([x.get("finished") for x in quizzes if x.get("level") == highest_level_quiz])
         success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
         success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
     return success_rate_highest_level
