@@ -536,6 +536,15 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function:
+            define nested_function:
+                print 1
+        call simple_function""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)
+
     def test_source_map(self):
         code = textwrap.dedent("""\
         for i in range 1 to 10:
