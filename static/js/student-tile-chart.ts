@@ -15,18 +15,16 @@ function expandStudentTileChart(student: any, levels: string[], successRuns: num
 
     const chartMax: number = 15
     const chartTitle: string = 'Level Progression';
-    const chartFailColor = "#fd7f6f";
-    const chartSuccessColor = "#b2e061";
-    const chartSuccessLabel = "Successful runs";
-    const chartFailLabel = "Failed runs";
+    const chartFailColor: string = "#fd7f6f";
+    const chartSuccessColor: string = "#b2e061";
+    const chartSuccessLabel: string = "Successful runs";
+    const chartFailLabel: string = "Failed runs";
 
     const data = [successRuns, errorRuns]
     const chartColors = [chartSuccessColor, chartFailColor]
     const chartLabels = [chartSuccessLabel, chartFailLabel]
-
-    const datasets = initChart(levels, data, chartLabels, chartColors)
-
-    studentTileChart = createNewChart(ctx, datasets, chartMax, chartTitle, "bar");
+    const chartData = initChartData(data, chartColors, chartLabels, levels)
+    studentTileChart = createNewChart(ctx, chartData, chartMax, chartTitle, "bar");
 
     studentName.textContent = student.username;
     bigTile.classList.remove('hidden');
@@ -55,7 +53,7 @@ export function loadQuizChart(levels: string[], students: any) {
     if (!dataLoaded) {
         for (let i = 0; i < students.length; i++) {
             let student = students[i];
-            let avg_quizzes_per_level = student['avg_quizzes_runs_per_level'];
+            let avg_quizzes_runs_per_level = student['avg_quizzes_runs_per_level'];
             let elementString = "static-student-tile-" + student['username'];
 
             const div = document.getElementById(elementString) as HTMLDivElement;
@@ -65,25 +63,35 @@ export function loadQuizChart(levels: string[], students: any) {
             canvas.id = "canvas-" + student['username'];
             div.appendChild(canvas);
 
-            let chartMax: number = 100;
-            let chartLabel = 'Average quiz per level (%)';
-            let chartTitle: string = 'Average Quiz';
+            const chartMax: number = 100;
+            const chartLabel: string = 'Average quiz per level (%)';
+            const chartTitle: string = 'Average Quiz';
+            const chartColor: string = '#9BD0F5';
 
-            const data = {
-              labels: levels,
-              datasets: [
-                {
-                  label: chartLabel,
-                  data: avg_quizzes_per_level,
-                    borderColor: '#36A2EB',
-                    backgroundColor: '#9BD0F5',
-                },
-              ]
-            };
-
-            createNewChart(canvas, data, chartMax, chartTitle, "line");
+            const data = [avg_quizzes_runs_per_level]
+            const chartColors = [chartColor]
+            const chartLabels = [chartLabel]
+            const chartData = initChartData(data, chartColors, chartLabels, levels)
+            createNewChart(canvas, chartData, chartMax, chartTitle, "line");
         }
         dataLoaded = true;
+    }
+}
+
+function initChartData(data: any[], chartColor: string[], chartLabel: string[], levels: any) {
+    let datasets: {label: string, data: any, backgroundColor: any}[] = [];
+
+    for (let i  = 0; i < data.length; i++) {
+        datasets.push({
+            backgroundColor: chartColor[i],
+            data: data[i],
+            label: chartLabel[i]
+        })
+    }
+
+    return {
+        labels: levels,
+        datasets: datasets
     }
 }
 
@@ -120,22 +128,4 @@ function createNewChart(ctx: HTMLCanvasElement, data: any, max: number, chartTit
             }
         }
     });
-}
-
-function initChart(levels: string[], data: any, chartLabels: any, chartColor: any) {
-    return {
-      labels: levels,
-      datasets: [
-        {
-          label: chartLabels[0],
-          data: data[0],
-            backgroundColor: chartColor[0],
-        },
-        {
-          label: chartLabels[1],
-          data: data[1],
-            backgroundColor: chartColor[1],
-        },
-      ]
-    };
 }
