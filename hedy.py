@@ -3020,7 +3020,6 @@ def is_program_valid(program_root, input_string, level, lang):
                 command='ifpressed_else', level=level, line_number=invalid_info.line)
         elif invalid_info.error_type == 'nested function':
             raise exceptions.NestedFunctionException()
-
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
