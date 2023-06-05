@@ -8,12 +8,7 @@
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
                 {% for adventure in adventures[level|int] %}
-                    <div class="tab {% if adventure.is_teacher_adventure %}
-                                        teacher_tab
-                                    {% elif adventure.is_command_adventure %}
-                                        command_tab
-                                    {% endif %} 
-                                    z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
+                    <div class="tab {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
                         <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
                             hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
                             hx-target="#adventure-dragger"
