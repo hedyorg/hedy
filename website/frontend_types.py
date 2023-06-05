@@ -102,4 +102,5 @@ class Adventure:
             save_name=row['name'],
             start_code='',  # Teacher adventures don't seem to have this
             text=row['content'],
-            is_teacher_adventure=True)
+            is_teacher_adventure=True,
+            is_command_adventure=False)
