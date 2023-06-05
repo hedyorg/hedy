@@ -45,7 +45,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
 from website.auth import (current_user, is_admin, is_teacher,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
-from website.types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)

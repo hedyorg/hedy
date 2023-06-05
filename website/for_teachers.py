@@ -12,7 +12,7 @@ import hedy_content
 import hedyweb
 import utils
 from safe_format import safe_format
-from website.types import SortedAdventure
+from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
 from website.auth import (
     current_user,
