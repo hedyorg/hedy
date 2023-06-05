@@ -589,148 +589,148 @@ sections:
                 error_code: |
                     skriv '5 + 5'
                 solution_text: |
-                    In this code the output screen will print '10'.
+                    I den här koden kommer utdataskärmen att skriva ut '10'.
                 solution_code: |
-                    print 5 + 5
-        -   title: "Students struggle with the concept of doing maths with a variable"
+                    skriv 5 + 5
+        -   title: "Eleverna kämpar med begreppet att göra uträkningar med en variabel"
             example:
                 error_text: |
-                    Some students will find it hard to do maths with variables. Try to show them very simple examples, like:
+                    Vissa elever kommer att tycka att det är svårt att göra uträkningar med variabler. Försök att visa dem mycket enkla exempel, t.ex:
                 error_code: |
-                    age = ask 'How old are you?'
-                    print 'Next year you will be ' age + 1
+                    ålder = fråga 'Hur gammal är du?'
+                    skriv 'Nästa år fyller du ' ålder + 1
                 solution_text: |
-                    Or take it a step further like this.
+                    Eller ta det ett steg längre och gör så här.
                 solution_code: |
-                    price = 0
-                    print 'Welcome to our burger restaurant'
-                    burger = ask 'Would you like a burger?'
-                    if burger = yes price = price + 10
-                    drink = ask 'Would you like a drink?'
-                    if drink = yes price = price + 4
-                    print 'That will be ' price ' euros please'
+                    pris = 0
+                    skriv 'Välkommen till vår hamburgerrestaurang'
+                    hamburgare = fråga 'Vill du ha en hamburgare?'
+                    om hamburgare = ja pris = pris + 10
+                    dryck = fråga 'Vill du ha något att dricka?'
+                    om dryck = ja pris = pris + 4
+                    skriv 'Det blir ' pris ' euro tack'
     -   level: '7'
         sections:
-        -   title: "Students forget one of the word of the repeat command, or they forget the print command"
+        -   title: "Eleverna glömmer något av orden i repetera-kommandot, eller så glömmer de skriv-kommandot"
             example:
                 error_text: |
-                    Make sure that the students know to use both the full repeat command and the print command.
+                    Se till att eleverna vet att de ska använda både det fullständiga repetera-kommandot och utskriftskommandot.
                 error_code: |
-                    repeat 3 times 'For he`s a jolly good fellow'
-                    repeat 3 print 'Which nobody can deny!'
+                    upprepa 3 gånger 'For he`s a jolly good fellow'
+                    upprepa 3 skriv 'Which nobody can deny!'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    repeat 3 times print 'For he`s a jolly good fellow'
-                    repeat 3 times print 'Which nobody can deny!'
-        -   title: "Students try to repeat multiple lines"
+                    upprepa 3 gånger skriv 'For he`s a jolly good fellow'
+                    upprepa 3 gånger skriv 'Which nobody can deny!'
+        -   title: "Eleverna försöker upprepa flera rader"
             example:
                 error_text: |
-                    In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
+                    På den här nivån kan du bara upprepa en kodrad åt gången. I den här koden ville eleven skriva ut tre olika drycker, men det fungerar inte. Den kommer att ställa frågan tre gånger och bara skriva ut det sista svaret.
                 error_code: |
-                    repeat 3 times drink = ask 'What would you like to drink?'
-                    print drink
+                    upprepa 3 gånger dryck = fråga 'Vad skulle du vilja dricka?'
+                    skriv dryck
                 solution_text: |
-                    You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                    Du bör gå till nästa nivå för att kunna upprepa flera rader. Så på den här nivån måste du skriva ut allt separat.
                 solution_code: |
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-        -   title: "Students make programs that take too long to run"
+                    dryck = fråga 'Vad skulle du vilja dricka?'
+                    skriv dryck
+                    dryck = fråga 'Vad skulle du vilja dricka?'
+                    skriv dryck
+                    dryck = fråga 'Vad skulle du vilja dricka?'
+                    skriv dryck
+        -   title: "Eleverna skriver program som tar för lång tid att köra"
             example:
                 error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                    På den här nivån är det väldigt lätt att göra långa kod. Eleverna får inte göra program som tar för lång tid att ladda (för att spara våra servrar).
                 error_code: |
-                    repeat 100 times print 'How many times can I repeat this?'
+                    upprepa 100 gånger skriv 'Hur många gånger kan jag upprepa detta?'
                 solution_text: |
-                    Make sure the codes aren't too long
+                    Se till att koden inte är för lång
                 solution_code: |
-                    repeat 20 times print 'This is enough'
+                    upprepa 20 gånger skriv 'Detta räcker'
     -   level: '8'
         sections:
-        -   title: "Students use the indentation wrong"
+        -   title: "Eleverna gör fel indrag"
             example:
                 error_text: |
-                    Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
+                    Indrag är ett nytt begrepp på den här nivån, som är svårt att använda för vissa elever. Se till att de tränar på enkel kod innan du gör ett helt program med det.
                 error_code: |
-                    repeat 3 times
-                    print 'hello'
+                    upprepa 3 gånger
+                    skriv 'hej'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    repeat 3 times
-                        print 'hello'
-        -   title: "Students only repeat 1 line when they wanted to repeat multiple lines"
+                    upprepa 3 gånger
+                        skriv 'hej'
+        -   title: "Elever upprepar bara en rad när de ville upprepa flera rader"
             example:
                 error_text: |
-                    For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
+                    I koden nedan ville studenten t.ex. ta emot tre personers dryckesbeställningar. Men istället frågade programmet tre gånger och men skrev bara ut en beställning.
                 error_code: |
-                    repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                    print drink
+                    upprepa 3 gånger
+                        dryck = fråga 'Vad skulle du vilja dricka?'
+                    skriv dryck
                 solution_text: |
-                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
-                    Showing your students these differences can help them understand why we need indentation to make our programs work.
+                    I rätt kod börjar även den tredje raden med indrag. På så vis tillhör den raden upprepningsblocket och kommer att upprepas 3 gånger.
+                    Att visa dina elever dessa skillnader kan hjälpa dem att förstå varför vi behöver indrag för att få våra program att fungera.
                 solution_code: |
-                    repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                        print drink
-        -   title: "Students want to nest if statements, or put if statements inside a loop"
+                    upprepa 3 gånger
+                        dryck = fråga 'Vad skulle du vilja dricka?'
+                        skriv dryck
+        -   title: "Elever vill nästa `{if}`-satser eller ha `{if}`-satser i en loop"
             example:
                 error_text: |
-                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
-                    In the next level this is allowed.
+                    På den här nivån får eleverna ännu inte ha `{if}`-satser inuti andra `{if}`-satser eller inuti upprepade loopar.
+                    På nästa nivå är detta tillåtet.
                 error_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
-                        repeat 3 times
-                            print 'Hip Hip Hooray!'
+                    födelsedag = fråga 'Är det din födelsedag?'
+                    om födelsedag = ja
+                        upprepa 3 gånger
+                            skriv 'Hipp Hipp Hurra!'
                 solution_text: |
-                    This is the correct code for this level:
+                    Det här är rätt kod på den här nivån:
                 solution_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-        -   title: "Students make programs that take too long to run"
+                    födelsedag = fråga 'Är det din födelsedag?'
+                    om födelsedag = ja
+                        skriv 'Hipp Hipp Hurra!'
+                        skriv 'Hipp Hipp Hurra!'
+                        skriv 'Hipp Hipp Hurra!'
+        -   title: "Eleverna skriver program som tar för lång tid att köra"
             example:
                 error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                    På den här nivån är det väldigt lätt att skriva mycket kod. Eleverna får inte göra program som tar för lång tid att ladda (för att spara våra servrar).
                 error_code: |
-                    repeat 100 times
-                        print 'How many times can I repeat this?'
+                    upprepa 100 gånger
+                        skriv 'Hur många gånger kan jag upprepa detta?'
                 solution_text: |
-                    Make sure the codes aren't too long
+                    Se till att koden inte är för lång
                 solution_code: |
-                    repeat 20 times
-                        print 'This is enough'
-        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+                    upprepa 20 gånger
+                        skriv 'Detta räcker'
+        -   title: "Elever använder kommandot `{if}` för att kolla om variabelvärdet är lika med variabelnamnet"
             example:
                 error_text: |
-                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
-                    In line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.
-                    So with this code the answer will always be 'You can come in' no matter what the player fills in.
+                    Vi har sett det här misstaget hos några av våra elever. De skapar ett lösenord för sin dator, men de skapar lösenordet 'lösenord'.
+                    På rad 2 uppmanas datorn att kolla om det variabeln lösenord är lika med variabeln lösenord, alltså sig själv. Det innebär att svaret alltid är ja.
+                    Så med den här koden kommer svaret alltid att vara 'Du kan komma in' oavsett vad spelaren fyller i.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password
-                        print 'You can come in'
-                    else
-                        print 'You are not allowed'
+                    lösenord är fråga 'Vad är lösenordet?'
+                    om lösenord är lösenord
+                        print 'Du kan komma in'
+                    annars
+                        print 'Du får inte komma in'
                 solution_text: |
-                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
+                    Du kan åtgärda det här misstaget genom att lägga till citattecken. Då vet datorn att det andra lösenordet i '{if} lösenord {is} 'lösenord' är en sträng (alltså normal text) och inte variabelnamnet.
                 solution_code: |
-                    password is ask 'What is the password?'
-                    if password is 'password'
-                        print 'You can come in'
-                    else
-                        print 'You are not allowed'
+                    lösenord är fråga 'Vad är lösenordet?'
+                    om lösenord är 'lösenord'
+                        print 'Du kan komma in'
+                    annars
+                        print 'Du får inte komma in'
     -   level: '9'
         sections:
-        -   title: "Students make mistakes with indentation"
+        -   title: "Elever gör fel på indrag"
             example:
                 error_text: |
                     The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
