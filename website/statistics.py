@@ -552,8 +552,6 @@ class LiveStatisticsModule(WebsiteModule):
         """
         data_error_history = {}
         class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         students = sorted(class_.get("students", []))
         for student_username in students:
@@ -562,10 +560,7 @@ class LiveStatisticsModule(WebsiteModule):
             if program_stats:
                 # if there are multiple weeks, only get the most recent week's data
                 program_stats = program_stats[-1]
-
-                if "error_history" in program_stats.keys():
-                    # only get the most recent week's data
-                    data_error_history[student_username] = program_stats['error_history']
+                data_error_history[student_username] = program_stats.get('error_history', [])
 
         return data_error_history
 
