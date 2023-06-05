@@ -468,10 +468,22 @@ class ForTeachersModule(WebsiteModule):
 
         customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
             user, session['class_id'])
-        sorted_adventures = {}
+
+        db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+
         for lvl, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False}
-                                           for adventure in default_adventures]
+            for adventure in default_adventures:
+                db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
+                sorted_adventure = SortedAdventure(short_name=adventure,
+                                                   long_name=adventure_names[adventure],
+                                                   is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
+                                                   is_teacher_adventure=False)
+                adventures[lvl].append(sorted_adventure)
+
+        for adventure in teacher_adventures:
+            available_adventures[int(adventure['level'])].append(
+                {"name": adventure['id'], "from_teacher": True})
 
         customizations = {
             "id": class_id,
@@ -479,14 +491,11 @@ class ForTeachersModule(WebsiteModule):
             "opening_dates": {},
             "other_settings": [],
             "level_thresholds": {},
-            "sorted_adventures": sorted_adventures
+            "sorted_adventures": db_adventures
         }
 
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
-        for adventure in teacher_adventures:
-            available_adventures[int(adventure['level'])].append(
-                {"name": adventure['id'], "from_teacher": True})
 
         return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
