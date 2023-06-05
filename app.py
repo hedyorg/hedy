@@ -1176,6 +1176,7 @@ def index(level, program_id):
                 start_code=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
+                is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
             ))
 
     adventures_map = {a.short_name: a for a in adventures}
