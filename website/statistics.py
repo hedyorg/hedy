@@ -154,6 +154,24 @@ class LiveStatisticsModule(WebsiteModule):
 
     def __common_errors(self, class_id):
         class_customization = self.db.get_class_customizations(class_id)
+        # if the class customization button has not been pressed yet
+        # class_customization will be None
+        # if that is the case, we create a default class customization
+        if not class_customization:
+            sorted_adventures = {}
+            for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+                sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+            customizations = {
+                "id": class_id,
+                "levels": [i for i in range(1, HEDY_MAX_LEVEL + 1)],
+                "opening_dates": {},
+                "other_settings": [],
+                "level_thresholds": {},
+                "sorted_adventures": sorted_adventures
+            }
+            self.db.update_class_customizations(customizations)
+            class_customization = self.db.get_class_customizations(class_id)
+
         dashboard_customization = class_customization.get('dashboard_customization', {})
         return dashboard_customization.get('common_errors', [])
 
