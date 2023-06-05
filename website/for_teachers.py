@@ -194,7 +194,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        customizations, adventures, adventure_names, available_adventures, min_level = self.get_class_info(user, class_id)
+        customizations, adventures, adventure_names, available_adventures, min_level = self.get_class_info(
+            user, class_id)
 
         return render_template(
             "customize-class.html",
@@ -224,7 +225,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         level = request.args.get('level')
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
 
         return render_partial('customize-class/hx-sortable-adventures.html',
                               level=level,
@@ -246,14 +248,15 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         adventure_id = request.form.get('adventure_id')
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
         customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
-        sorted_adventure = SortedAdventure(short_name=adventure_id, 
-                                           long_name=adventure_names[adventure_id], 
-                                           is_teacher_adventure=is_teacher_adventure, 
+        sorted_adventure = SortedAdventure(short_name=adventure_id,
+                                           long_name=adventure_names[adventure_id],
+                                           is_teacher_adventure=is_teacher_adventure,
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
         adventures[int(level)].append(sorted_adventure)
@@ -283,11 +286,12 @@ class ForTeachersModule(WebsiteModule):
         level = request.args.get('level')
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])        
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
         customizations['sorted_adventures'][level].remove({'name': adventure_id, 'from_teacher': is_teacher_adventure})
-        sorted_adventure = SortedAdventure(short_name=adventure_id, 
-                                           long_name=adventure_names[adventure_id], 
-                                           is_teacher_adventure=is_teacher_adventure, 
+        sorted_adventure = SortedAdventure(short_name=adventure_id,
+                                           long_name=adventure_names[adventure_id],
+                                           is_teacher_adventure=is_teacher_adventure,
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
         adventures[int(level)].remove(sorted_adventure)
         self.db.update_class_customizations(customizations)
@@ -312,7 +316,8 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
         level = request.args.get('level')
         adventures_from_request = request.form.getlist('adventure')
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
@@ -321,12 +326,12 @@ class ForTeachersModule(WebsiteModule):
         for adventure in adventures_from_request:
             is_teacher_adventure = self.is_adventure_from_teacher(adventure, teacher_adventures)
             customizations['sorted_adventures'][level].append({'name': adventure, 'from_teacher': is_teacher_adventure})
-            sorted_adventure = SortedAdventure(short_name=adventure, 
-                                               long_name=adventure_names[adventure], 
-                                               is_teacher_adventure=is_teacher_adventure, 
+            sorted_adventure = SortedAdventure(short_name=adventure,
+                                               long_name=adventure_names[adventure],
+                                               is_teacher_adventure=is_teacher_adventure,
                                                is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES)
             adventures[int(level)].append(sorted_adventure)
-        
+
         self.db.update_class_customizations(customizations)
 
         return render_partial('customize-class/hx-sortable-adventures.html',
@@ -350,7 +355,7 @@ class ForTeachersModule(WebsiteModule):
 
         # Initialize the data structures that will hold the adventures for each level
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
-        
+
         min_level = 1
         adventure_names = {}
         for adv_key, adv_dic in default_adventures.items():
@@ -364,7 +369,7 @@ class ForTeachersModule(WebsiteModule):
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
                 # remove from customizations adventures that we have removed
-                self.purge_customizations(customizations['sorted_adventures'], default_adventures)            
+                self.purge_customizations(customizations['sorted_adventures'], default_adventures)
             # it uses the old way so convert it to the new one
             elif 'adventures' in customizations:
                 customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
@@ -379,7 +384,8 @@ class ForTeachersModule(WebsiteModule):
             # This makes further updating with HTMX easier
             adventures_to_db = {}
             for level, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-                adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False} for adventure in default_adventures]
+                adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
+                                                for adventure in default_adventures]
 
             customizations = {
                 "id": class_id,
@@ -387,20 +393,21 @@ class ForTeachersModule(WebsiteModule):
                 "opening_dates": {},
                 "other_settings": [],
                 "level_thresholds": {},
-                "sorted_adventures": adventures
+                "sorted_adventures": adventures_to_db
             }
-            self.db.update_class_customizations(customizations)        
+            self.db.update_class_customizations(customizations)
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
                 sorted_adventure = SortedAdventure(short_name=adventure['name'],
                                                    long_name=adventure_names[adventure['name']],
-                                                   is_command_adventure=adventure['name'] in hedy_content.KEYWORDS_ADVENTURES,
+                                                   is_command_adventure=adventure['name']
+                                                   in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=adventure['from_teacher'])
                 adventures[int(level)].append(sorted_adventure)
-        
+
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
-        
+
         return customizations, adventures, adventure_names, available_adventures, min_level
 
     # This function is used to remove from the customizations default adventures that we have removed
@@ -418,25 +425,25 @@ class ForTeachersModule(WebsiteModule):
 
         for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for short_name in level_default_adventures:
-                adventure = SortedAdventure(short_name=short_name, 
-                                            long_name=adventure_names[short_name], 
-                                            is_teacher_adventure=False, 
+                adventure = SortedAdventure(short_name=short_name,
+                                            long_name=adventure_names[short_name],
+                                            is_teacher_adventure=False,
                                             is_command_adventure=short_name in hedy_content.KEYWORDS_ADVENTURES)
-                default_adventures[level].add(adventure) 
-        
+                default_adventures[level].add(adventure)
+
         for teacher_adventure in teacher_adventures_db:
             adventure = SortedAdventure(short_name=teacher_adventure['id'],
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
                                         is_command_adventure=False)
             teacher_adventures[int(teacher_adventure['level'])].add(adventure)
-        
-        for level in range(1, hedy.HEDY_MAX_LEVEL +1):
+
+        for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
             adventures_set = set(adventures[level])
             available_teacher_adventures = teacher_adventures[level].difference(adventures_set)
             available_default_adventures = default_adventures[level].difference(adventures_set)
             available_adventures[level] = list(available_teacher_adventures.union(available_default_adventures))
-            available_adventures[level].sort(key= lambda item: item.long_name.upper())
+            available_adventures[level].sort(key=lambda item: item.long_name.upper())
 
         return available_adventures
 
@@ -459,10 +466,12 @@ class ForTeachersModule(WebsiteModule):
         if not Class or Class["teacher"] != user["username"]:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
         sorted_adventures = {}
-        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+        for lvl, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False}
+                                           for adventure in default_adventures]
 
         customizations = {
             "id": class_id,
@@ -498,21 +507,22 @@ class ForTeachersModule(WebsiteModule):
         if not Class or Class["teacher"] != user["username"]:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
+            user, session['class_id'])
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
 
         db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         for lvl, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for adventure in default_adventures:
-                db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})                
-                sorted_adventure = SortedAdventure(short_name=adventure, 
-                                                  long_name=adventure_names[adventure], 
-                                                  is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES, 
-                                                  is_teacher_adventure=False)
-                adventures[lvl].append(sorted_adventure)                                                              
-        
-        customizations['sorted_adventures'] = db_adventures        
+                db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
+                sorted_adventure = SortedAdventure(short_name=adventure,
+                                                   long_name=adventure_names[adventure],
+                                                   is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
+                                                   is_teacher_adventure=False)
+                adventures[lvl].append(sorted_adventure)
+
+        customizations['sorted_adventures'] = db_adventures
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
         self.db.update_class_customizations(customizations)
 
