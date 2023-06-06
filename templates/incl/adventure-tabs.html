@@ -14,7 +14,13 @@
         <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
         <div class="flex flex-row w-min" id="adventures-buttons">
             {% for adventure in adventures %}
-                {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab' if adventure.is_teacher_adventure else '') }}
+                {% if adventure.is_teacher_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab') }}
+                {% elif adventure.is_command_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab') }}
+                {% else %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '') }}                    
+                {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
