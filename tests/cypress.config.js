@@ -22,6 +22,7 @@ module.exports = defineConfig({
     recover_page: '/recover',
     hedy_page: '/hedy',
     hedy_level2_page: '/hedy/2',
+    adventure_page: '/hedy/1#print_command',
     admin_page: '/admin',
     admin_users_page: '/admin/users',
     teachers_page: '/for-teachers',
