@@ -733,268 +733,268 @@ sections:
         -   title: "Elever gör fel på indrag"
             example:
                 error_text: |
-                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                    Det svåraste med den här nivån är att ha rätt indrag. Elever älskar att kapsla `{if}`-satser, ibland även inuti andra kapslade `{if}`-satser. Att hålla reda på indragen kan bli ganska svårt.
                 error_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                            if book is yes
-                    print 'Robin buys the book and goes home'
-                    else
-                        print 'Robin leaves the shop and goes home'
-                    else
-                        print 'Robin goes home'
+                    skriv 'Robin går på stan'
+                    plats = fråga 'Går Robin in i en butik eller går hon hem?'
+                    om plats är butik
+                        skriv 'Hon går in i butiken.'
+                        skriv 'Robin ser en intressant bok'
+                        bok = fråga 'Köper Robin boken?'
+                            om bok är ja
+                    skriv 'Robin köper boken och går hem'
+                    annars
+                        skriv 'Robin lämnar butiken och går hem'
+                    annars
+                        skriv 'Robin går hem'
                 solution_text: |
-                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
+                    Detta är rätt kod. Försök att hålla reda på alla olika konstruktioner när du sätter `{if}`-satser inuti andra `{if}`-satser.
                 solution_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                        if book is yes
-                            print 'Robin buys the book and goes home'
-                        else
-                            print 'Robin leaves the shop and goes home'
-                    else
-                        print 'Robin goes home'
+                    skriv 'Robin går på stan'
+                    plats = fråga 'Går Robin in i en butik eller går hon hem?'
+                    om plats är butik
+                        skriv 'Hon går in i butiken.'
+                        skriv 'Robin ser en intressant bok'
+                        bok = fråga 'Köper Robin boken?'
+                        om bok är ja
+                            skriv 'Robin köper boken och går hem'
+                        annars
+                            skriv 'Robin lämnar butiken och går hem'
+                    annars
+                        skriv 'Robin går hem'
 
     -   level: '10'
         sections:
-        -   title: "Students so not use the for command correctly"
+        -   title: "Eleverna använder inte för-kommandot rätt"
             example:
                 error_text: |
-                    We often see that students try to print the list (in the example animals) instead of the items of the list.
+                    Vi ser ofta att elever försöker skriva ut listan (i exemplet djur) istället för elementen i listan.
                 error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animals
+                    djur är hund, katt, marulk
+                    för djuret i djur
+                      skriv 'Jag älskar ' djur
                 solution_text: |
-                    The word animals in the last line should be changed into animal.
+                    Ordet djur i den sista raden bör ändras till djuret.
                 solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
-        -   title: "Students forget the indentation"
+                    djur är hund, katt, marulk
+                    för djuret i djur
+                      skriv 'Jag älskar ' djuret
+        -   title: "Eleverna glömmer indragningen"
             example:
                 error_text: |
-                    Students tend to forget to use indentation after a for command.
+                    Elever har en tendens att glömma att använda indrag efter ett för-kommando.
                 error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                    print 'I love ' animals
+                    djur är hund, katt, marulk
+                    för djuret i djur
+                    skriv 'Jag älskar ' djuret
                 solution_text: |
-                    You should use indentation after a for command.
+                    Du behöver använda indrag efter kommandot för.
                 solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    djur är hund, katt, marulk
+                    för djuret i djur
+                      skriv 'Jag älskar ' djuret
     -   level: '11'
         sections:
-        -   title: "Students forget to use indentation"
+        -   title: "Eleverna glömmer att använda indrag"
             example:
                 error_text: |
-                    Make sure that the students use indentation.
+                    Se till att eleverna använder indrag.
                 error_code: |
-                    for i in range 1 to 5
-                    print i
+                    för j i intervallet 1 till 5
+                    skriv j
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    for i in range 1 to 5
-                        print i
-        -   title: "Students don't understand the i"
+                    för j i intervallet 1 till 5
+                        skriv j
+        -   title: "Eleverna förstår inte j:ets betydelse"
             example:
                 error_text: |
-                    Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
-                    For example, this code:
+                    Vissa elever förstår inte att j är en variabel. Vi har valt j (eller i) eftersom det används i Python-programmering, men du kan lika gärna använda ett annat variabelnamn.
+                    Till exempel den här koden:
                 error_code: |
-                    for i in range 1 to 5
-                    print i
+                    för j i intervallet 1 till 5
+                    skriv j
                 solution_text: |
-                    Could just as well be replaced with this code. It works the same.
+                    Kan lika gärna ersättas med denna kod. Den fungerar på samma sätt.
                 solution_code: |
-                    for banana in range 1 to 5
-                        print banana
+                    för banan i intervallet 1 till 5
+                        skriv banan
     -   level: '12'
         sections:
-        -   title: "Students forget quotation marks"
+        -   title: "Eleverna glömmer citattecken"
             example:
                 error_text: |
-                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
+                    Eleverna behöver fler citattecken nu än på de tidigare nivåerna. I det här exemplet glömdes citattecken i listan och i kommandot `{if}`.
                 error_code: |
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes at random
-                    if superhero = Batman
-                        print 'IM BATMAN!'
+                    superhjältar = Spiderman, Batman, Iron Man
+                    superhjälte = superhjältar {at} {random}
+                    {if} superhjälte = Batman
+                        {print} 'JAG ÄR BATMAN!'
 
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes at random
-                    if superhero is 'Batman'
-                        print 'IM BATMAN!'
-        -   title: "Students use quotation marks on numbers they want to use for calculations"
+                    superhjältar = 'Spiderman', 'Batman', 'Iron Man'
+                    superhjälte = superhjältar {at} {random}
+                    {if} superhjälte {is} 'Batman'
+                        {print} 'JAG ÄR BATMAN!'
+        -   title: "Eleverna använder citattecken runt tal som de vill använda för beräkningar"
             example:
                 error_text: |
-                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
-                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
+                    Du kan använda citattecken runt tal, men bara om du vill att datorn ska se dem som text. Det betyder att du inte kan göra beräkningar med talet.
+                    I exemplet nedan kan du inte göra uträkningar med talet 25, eftersom det står inom citattecken.
                 error_code: |
-                    score = '25'
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
+                    poäng = '25'
+                    svar är fråga 'Vill du ha en poäng?'
+                    om svar är 'ja'
+                        poäng = poäng + 1
+                        skriva poäng
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    score = 25
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
-        -   title: "Students use commas instead of periods in decimal numbers"
+                    poäng = 25
+                    svar är fråga 'Vill du ha en poäng?'
+                    om svar är 'ja'
+                        poäng = poäng + 1
+                        skriv poäng
+        -   title: "Eleverna använder kommatecken istället för punkt i decimaltal"
             example:
                 error_text: |
-                    Decimal numbers can be used from this level on, but you can't use commas.
+                    Decimaltal kan användas från och med den här nivån, men du kan inte använda decimalkomma.
                 error_code: |
-                    print 2,5 + 2,5
+                    skriv 2,5 + 2,5
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    print 2.5 + 2.5
+                    skriv 2.5 + 2.5
     -   level: '13'
         sections:
-        -   title: "Students confuse `and` with `or`"
+        -   title: "Elever förväxlar `och` med `eller`"
             example:
                 error_text: |
-                    Both commands might appear similar, but their functions are very different.
+                    De båda kommandona kan verka snarlika, men de fungerar helt olika.
                 error_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' or time is 'yes'
-                        print 'Lets play!'
+                    spel är fråga 'Vill du spela ett spel?'
+                    tid är fråga 'Har du tid att spela?'
+                    om spel är 'ja' eller tid är 'ja'
+                        skriv 'Nu spelar vi!'
                 solution_text: |
-                    In this case, the person should answer yes on both questions, so you should use `and`.
+                    I det här fallet behöver personen svara ja på båda frågorna, så du ska använda `och`.
                 solution_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' and time is 'yes'
-                        print 'Lets play!'
+                    spel är fråga 'Vill du spela ett spel?'
+                    tid är fråga 'Har du tid att spela?'
+                    om spel är 'ja' och tid är 'ja'
+                        skriv 'Nu spelar vi!'
     -   level: '14'
         sections:
-        -   title: "Students confuse the < and > signs"
+        -   title: "Eleverna blandar ihop symbolerna < och >"
             example:
                 error_text: |
-                    Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                    Ofta är eleverna redan bekanta med de symbolerna från matten. Men om dina elever inte känner till tecknen än kan de få problem med det.
                 error_code: |
-                    age = ask 'How old are you?'
-                    if age < 12
-                        print 'You are older than I am!'
+                    ålder = fråga 'Hur gammal är du?'
+                    om ålder < 12
+                        skriv 'Du är äldre än jag!'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    age = ask 'How old are you?'
-                    if age > 12
-                        print 'You are older than I am!'
-        -   title: "Students use the wrong signs for `!=` `<=` and `>=`"
+                    ålder = fråga 'Hur gammal är du?'
+                    om ålder > 12
+                        skriv 'Du är äldre än jag!'
+        -   title: "Eleverna använder fel symboler för `!=`, `<=` och `>=`"
             example:
                 error_text: |
-                    These signs are probably new for most students. Make sure to explain these signs to your students.
+                    De här symbolerna är förmodligen nya för de flesta eleverna. Se till att förklara dem för dina elever.
                 error_code: |
-                    name = ask 'What is your name?'
-                    if name =< 'Hedy'
-                        print 'You are not Hedy'
+                    namn = fråga 'Vad heter du?'
+                    om namn =< 'Hedy'
+                        skriv 'Du är inte Hedy'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    name = ask 'What is your name?'
-                    if name != 'Hedy'
-                        print 'You are not Hedy'
-        -   title: "Students forget to use the == sign"
+                    namn = fråga 'Vad heter du?'
+                    om namn != 'Hedy'
+                        skriv 'Du är inte Hedy'
+        -   title: "Eleverna glömmer att använda symbolen =="
             example:
                 error_text: |
-                    In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                    På den här nivån får eleverna fortfarande använda = eller är. Men på högre nivåer, eller i Python, kan de få problem. Därför är det bäst att träna dem i att använda symbolen ==.
                 error_code: |
-                    name = ask 'What is your name?'
-                    if name = 'Hedy'
-                        print 'You are cool!'
+                    namn = fråga 'Vad heter du?'
+                    om namn = 'Hedy'
+                        skriv 'Du är cool!'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    name = ask 'What is your name?'
-                    if name == 'Hedy'
-                        print 'You are cool!'
+                    namn = fråga 'Vad heter du?'
+                    om namn == 'Hedy'
+                        skriv 'Du är cool!'
     -   level: '15'
         sections:
-        -   title: "Students forget indentation in the while loop"
+        -   title: "Eleverna glömmer indrag i while-loopen"
             example:
                 error_text: |
-                    Indentation is often hard for students.
+                    Indrag är ofta svårt för eleverna.
                 error_code: |
-                    answer = 0
-                    while answer != 25
-                    answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    svar = 0
+                    medan svar != 25
+                    svar = fråga 'Vad är 5 gånger 5?'
+                    print 'Rätt svar har getts'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    svar = 0
+                    medan svar != 25
+                        svar = fråga 'Vad är 5 gånger 5?'
+                    print 'Rätt svar har getts'
     -   level: '16'
         sections:
-        -   title: "Students forget the brackets"
+        -   title: "Eleverna glömmer klamrar"
             example:
                 error_text: |
-                    From this level on lists should be in brackets.
+                    Från och med den här nivån ska listor anges inom klammer.
                 error_code: |
-                    icecream = 'starwberry', 'chocolate'
-                    print 'I love ' icecream[random] ' icecream'
+                    glass = 'jordgubbs', 'choklad'
+                    skriv 'Jag älskar ' glass[slump] 'glass'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students use the wrong brackets"
+                    glass = ['jordgubbs', 'choklad']
+                    skriv 'Jag älskar ' glass[slump] 'glass'
+        -   title: "Eleverna använder fel sorts klammer"
             example:
                 error_text: |
-                    From this level on lists should be in brackets.
+                    Från och med den här nivån ska listor ha hakparenteser (klammer).
                 error_code: |
-                    icecream = ('starwberry', 'chocolate'}
-                    print 'I love ' icecream[random] ' icecream'
+                    glass = ('jordgubbs', 'choklad'}
+                    skriv 'Jag älskar ' glass[slump] 'glass'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                    glass = ['jordgubbs', 'choklad']
+                    skriv 'Jag älskar ' glass[slump] 'glass'
+        -   title: "Eleverna glömmer citattecknen när de fokuserar på parenteserna"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
+                    glass = [jordgubbs, choklad]
+                    skriv 'Jag älskar ' glass[slump] 'glass'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students still use the old at random command"
+                    glass = ['jordgubbs', 'choklad']
+                    skriv 'Jag älskar ' glass[slump] 'glass'
+        -   title: "Eleverna använder fortfarande det gamla kommandot på slump"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream at random ' icecream'
+                    glass = [jordgubbs, choklad]
+                    skriv 'Jag älskar ' glass på slump 'glass'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
