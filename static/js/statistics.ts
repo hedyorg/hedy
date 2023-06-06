@@ -598,12 +598,13 @@ export function select_levels_class_overview(class_id: string) {
 }
 
 export function toggle_show_students_class_overview(adventure: string) {
-  if ($('#adventure_panel_' + adventure).hasClass('hidden')) {
-    $('#adventure_panel_' + adventure).removeClass('hidden');
-    $('#adventure_panel_' + adventure).addClass('block');
+  var adventure_panel = "div[id='adventure_panel_" + adventure + "']";
+  if ($(adventure_panel).hasClass('hidden')) {
+    $(adventure_panel).removeClass('hidden');
+    $(adventure_panel).addClass('block');
   } else {
-    $('#adventure_panel_' + adventure).removeClass('block');
-    $('#adventure_panel_' + adventure).addClass('hidden');
+    $(adventure_panel).removeClass('block');
+    $(adventure_panel).addClass('hidden');
   }
 }
 
