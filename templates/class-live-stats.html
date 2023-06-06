@@ -60,24 +60,24 @@
                 {% if dashboard_options.student %}
                     <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
-                        ☝️ {{_('_Hide')}}
+                        <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_Hide')}}
                     </a>
                 {% else %}
                     <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
-                        ☝️ {{_('_Hide')}}
+                        <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_Hide')}}
                     </a>
                 {% endif %}
             {% else %}
                 {% if dashboard_options.student %}
                     <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                     </a>
                 {% else %}
                     <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                     </a>
                 {% endif %}
             {% endif %}
@@ -189,12 +189,12 @@
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                            href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
-                            ☝️ Hide
+                            <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_Hide')}}
                         </a>
                         {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
-                            ☝️ Hide
+                            <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_Hide')}}
                         </a>
                         {% endif %}
                     </div>
@@ -266,12 +266,12 @@
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                         href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                         </a>
                         {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                         </a>
                         {% endif %}
                     </div>
@@ -302,12 +302,12 @@
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                            href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
-                            ☝️ {{_('_Hide')}}
+                            <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_Hide')}}
                         </a>
                         {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
                            href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
-                            ☝️ {{_('_Hide')}}
+                            <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_Hide')}}
                         </a>
                         {% endif %}
                     </div>
@@ -339,12 +339,12 @@
                         {% if dashboard_options.student %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                         </a>
                         {% else %}
                         <a class="no-underline text-black rounded hover:bg-blue-600"
                         href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
-                        👇 {{_('_Show')}}
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_Show')}}
                         </a>
                         {% endif %}
                     </div>
