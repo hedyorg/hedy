@@ -334,3 +334,12 @@ class TestsLevel18(HedyTester):
             # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        def simple_function():
+            def nested_function():
+                print(1)
+        simple_function()""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)

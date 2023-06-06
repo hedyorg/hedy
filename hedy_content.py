@@ -25,33 +25,30 @@ CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'kmr': 'ku_TR', 'tn': 'en', 'tl
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)', 'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
-ADVENTURE_NAMES = [
-    'default',
-    'parrot',
-    'years',
-    'fortune',
-    'haunted',
-    'restaurant',
-    'story',
-    'songs',
-    'turtle',
-    'dishes',
-    'dice',
-    'rock',
-    'calculator',
-    'piggybank',
-    'quizmaster',
-    'language',
-    'secret',
-    'tic',
-    'blackjack',
-    'next',
-    'end'
-]
+KEYWORDS_ADVENTURES = set([
+    'print_command',
+    'ask_command',
+    'is_command',
+    'sleep_command',
+    'random_command',
+    'add_remove_command',
+    'quotation_marks',
+    'if_command',
+    'in_command',
+    'maths',
+    'repeat_command',
+    'repeat_command_2',
+    'for_command',
+    'and_or_command',
+    'while_command',
+    'elif_command'
+])
 
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [
         'default',
+        'print_command',
+        'ask_command',
         'parrot',
         'rock',
         'haunted',
@@ -62,27 +59,34 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     2: [
         'default',
+        'is_command',
         'rock',
+        'ask_command',
+        'rock_2',
+        'haunted',
+        'sleep_command',
         'parrot',
         'story',
-        'haunted',
         'restaurant',
         'turtle'
     ],
     3: [
         'default',
-        'dishes',
-        'rock',
+        'random_command',
         'dice',
+        'rock',
         'fortune',
-        'turtle',
-        'story',
+        'restaurant',
+        'add_remove_command',
         'parrot',
+        'dishes',
+        'story',
         'haunted',
-        'restaurant'
+        'turtle'
     ],
     4: [
         'default',
+        'quotation_marks',
         'rock',
         'dice',
         'dishes',
@@ -95,20 +99,23 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     5: [
         'default',
+        'if_command',
         'language',
         'dice',
         'dishes',
         'story',
         'rock',
-        'pressit',
         'parrot',
-        'turtle',
         'haunted',
+        'in_command',
         'restaurant',
-        'fortune'
+        'fortune',
+        'pressit',
+        'turtle'
     ],
     6: [
         'default',
+        'maths',
         'songs',
         'dice',
         'dishes',
@@ -119,46 +126,55 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     7: [
         'default',
+        'repeat_command',
         'story',
         'songs',
         'dishes',
-        'pressit',
         'dice',
+        'repeat_command_2',
         'fortune',
-        'restaurant'
+        'restaurant',
+        'pressit'
     ],
     8: [
         'default',
-        'story',
+        'repeat_command',
         'fortune',
+        'repeat_command_2',
         'songs',
+        'if_command',
+        'story',
         'haunted',
         'restaurant',
         'turtle'
     ],
     9: [
         'default',
+        'repeat_command',
         'rock',
         'story',
-        'pressit',
         'calculator',
         'restaurant',
         'haunted',
+        'pressit',
         'turtle'
     ],
     10: [
         'default',
+        'for_command',
         'dishes',
-        'fortune',
-        'rock',
         'dice',
+        'fortune',
+        'harry_potter',
         'songs',
         'story',
+        'rock',
         'calculator',
         'restaurant',
     ],
     11: [
         'default',
+        'for_command',
         'years',
         'calculator',
         'songs',
@@ -167,6 +183,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     12: [
         'default',
+        'maths',
+        'quotation_marks',
         'story',
         'fortune',
         'songs',
@@ -177,6 +195,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     13: [
         'default',
+        'and_or_command',
         'secret',
         'story',
         'rock',
@@ -186,6 +205,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     14: [
         'default',
+        'is_command',
         'haunted',
         'calculator',
         'piggybank',
@@ -194,6 +214,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     15: [
         'default',
+        'while_command',
         'restaurant',
         'story',
         'dice',
@@ -203,17 +224,21 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     16: [
         'default',
+        'random_command',
         'haunted',
         'songs',
         'language'
     ],
     17: [
         'default',
+        'print_command',
+        'elif_command',
         'tic',
         'blackjack'
     ],
     18: [
         'default',
+        'print_command',
         'story',
         'songs'
     ]

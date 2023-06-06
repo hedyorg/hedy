@@ -1216,6 +1216,10 @@ class IsValid(Filter):
         error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_nested_define(self, meta, args):
+        error = InvalidInfo('nested function', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     # other rules are inherited from Filter
 
 
@@ -3018,6 +3022,8 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'ifpressed missing else':
             raise exceptions.MissingElseForPressitException(
                 command='ifpressed_else', level=level, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'nested function':
+            raise exceptions.NestedFunctionException()
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
