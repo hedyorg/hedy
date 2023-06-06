@@ -783,6 +783,8 @@ class Database:
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
         program_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
 
+        # chart history and error history are used for visual elements on the live dashboard, see statistics.py
+        # for how they are read from the database
         chart_history = []
         error_history = []
         if program_stats.records:
