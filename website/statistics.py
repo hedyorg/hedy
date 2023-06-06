@@ -195,6 +195,33 @@ class LiveStatisticsModule(WebsiteModule):
             )
         return students
 
+    def __get_adventures_for_overview(self, user, class_id):
+        class_ = self.db.get_class(class_id)
+        # Data for student overview card
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        customizations = self.db.get_class_customizations(class_id)
+
+        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
+        last_adventures = []
+        found_students = []
+        # loop in reverse to ignore early levels
+        for level in reversed(range(1, HEDY_MAX_LEVEL + 1)):
+            _data = []
+            for _student in class_.get("students", []):
+                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
+                if last_adventure and _student not in found_students:
+                    _data.append({_student: last_adventure[0]})
+                    found_students.append(_student)
+            last_adventures.append(_data)
+        # reverse back to normal level order
+        last_adventures.reverse()
+
+        return _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
@@ -218,24 +245,7 @@ class LiveStatisticsModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = self.__all_students(class_)
 
-        # Data for student overview card
-        if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
-        else:
-            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        customizations = self.db.get_class_customizations(class_id)
-
-        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
-        last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL + 1):
-            _data = []
-            for _student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
-                if last_adventure:
-                    _data.append({_student: last_adventure[0]})
-            last_adventures.append(_data)
-        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = self.__get_adventures_for_overview(user, class_id)
 
         quiz_stats = []
         for student_username in class_.get("students", []):
@@ -351,24 +361,7 @@ class LiveStatisticsModule(WebsiteModule):
         graph_data = self.db.get_program_stats([selected_student['username']], None, None)
         graph_data, graph_labels = _collect_graph_data(graph_data, window_size=10)
 
-        # Data for student overview card
-        if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
-        else:
-            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        customizations = self.db.get_class_customizations(class_id)
-
-        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
-        last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL + 1):
-            _data = []
-            for _student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
-                if last_adventure:
-                    _data.append({_student: last_adventure[0]})
-            last_adventures.append(_data)
-        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = self.__get_adventures_for_overview(user, class_id)
 
         quiz_stats = []
         for student_username in class_.get("students", []):
@@ -450,24 +443,7 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         students = self.__all_students(class_)
 
-        # Data for student overview card
-        if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
-        else:
-            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        customizations = self.db.get_class_customizations(class_id)
-
-        # Array where (index-1) is the level, and the values are lists of the current adventures of the students
-        last_adventures = []
-        for level in range(1, HEDY_MAX_LEVEL + 1):
-            _data = []
-            for _student in class_.get("students", []):
-                last_adventure = list(self.db.last_level_programs_for_user(_student, level).keys())
-                if last_adventure:
-                    _data.append({_student: last_adventure[0]})
-            last_adventures.append(_data)
-        adventures = _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures)
+        adventures = self.__get_adventures_for_overview(user, class_id)
 
         quiz_stats = []
         for student_username in class_.get("students", []):
