@@ -37,11 +37,8 @@ class ABProxying:
             url = self.target_host + request.full_path
             logging.debug("Proxying %s %s %s to %s", request.method, request.url, dict(session), url)
 
-            request_headers = {}
-            for header in request.headers:
-                if header[0].lower() in ["host"]:
-                    continue
-                request_headers[header[0]] = header[1]
+            request_headers = {header[0]: header[1] for header in request.headers if header[0].lower() != "host"}
+
             # In case the session_id is not yet set in the cookie, pass it in a special header
             request_headers["X-session_id"] = session["session_id"]
 
