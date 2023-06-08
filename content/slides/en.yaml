@@ -59,7 +59,7 @@ levels:
                We need three text codes to create interactive stories.
 
         2:
-          header: "Hedy level 1: {print}"
+          header: "{print}"
           text: |
               The first code that you can use in level 1 is `{print}`.
 
@@ -67,48 +67,60 @@ levels:
           editor: |
             <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
         3:
-            header: "Hedy level 1: {ask}"
+          header: "The {print} command"
+          text: |
+            You can change the text after the print command to whatever you want.
+
+            Or you could print multiple lines by adding another line of code that also starts with `{print}`.
+          editor: |
+            <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+        4:
+            header: "{ask} "
             text: |
               The second code that you can use in level 1 is `{ask}`.
 
               `{ask}` is used to ask a question that can be answered.
             editor: |
-              <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
-        4:
-            header: "Hedy level 1: {echo}"
+              <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+        5:
+            header: "{echo}"
             text: |
-              The final text code that you can use in level 1 is `{echo}`.
+              As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
+
+              The answer, however doesn't show in the output screen.
+
+              If you do want the answer to show, you can use the final command of this level: `{echo}`.
 
               `{echo}` is used to repeat the answer of an `{ask}`.
             editor: |
               <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
-        5:
+        6:
             header: "Programming!"
             text: |
               With `{print}`, `{ask}` and `{echo}` you can already create a little story.
               This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
-        6:
+        7:
             header: "Programming!"
             text: |
               Adventures are shown in tabs.
             editor: |
               <iframe class="fragment" src="/hedy/1"></iframe>
-        7:
+        8:
             header: "Programming!"
             text: |
               The yellow arrow buttons can be used to copy examples.
               <iframe class="fragment" src="/hedy/1"></iframe>
-        8:
+        9:
             header: "Drawing with the turtle"
             text: |
                Now that we have seen at text codes, we will now look at drawing codes next.
-        9:
+        10:
             header: "Drawing with the turtle: {forward}"
             text: |
                `{forward}` is used to move the turtle forward.
             editor: |
                <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
-        10:
+        11:
             header: "Drawing with the turtle: {turn}"
             text: |
                `{turn}` is used to make the turtle turn left or right.
@@ -137,7 +149,7 @@ levels:
 
             The answer to the question is stored in the variable.
 
-            This way we don't need the `{echo}` command.
+            This way we don't need the `{echo}`  command.
           editor: |
             <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
         4:
@@ -160,6 +172,10 @@ levels:
             If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
           editor: |
             <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+        7:
+          header: "Let the programming fun begin!"
+          text: |
+            Enjoy the adeventures in level 3!
     3:
         1:
           header: "Welcome to level 3"
@@ -180,7 +196,7 @@ levels:
             The computer will randomly pick one item of the list.
             Every time you run this code the output will differ.
           editor: |
-            <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
         4:
           header: "At random in a sentence"
           text: |
@@ -191,22 +207,22 @@ levels:
           header: "Add to"
           text: |
             You can add items to a list with the `{add}` `{to}` command.
-          editor: |
-            <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        6:
-          header: "Add to"
-          text: |
-            You can also use the `{add}` `{to}` command in combination with the `{ask}` command.
+
+            You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
             This way you can let the player decide what to add to the list.
           editor: |
             <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        7:
+        6:
           header: "Remove from"
           text: |
             The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
             This command removes an item from a list.
           editor: |
             <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+        9:
+          header: "Let's get to work!"
+          text: |
+            Enjoy the adeventures in level 3!
     4:
         1:
           header: "Welcome to level 4"
@@ -251,15 +267,20 @@ levels:
             When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
             The rest of the sentence however, does need quotation marks. That looks like this:
           editor: |
-            <iframe class="fragment" src="/adventure/dishes/1/raw"></iframe>
+            <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         8:
           header: "Quotation marks and contractions"
           text: |
             Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
-          editor: |
-            <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
 
+          editor: |
+            <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+        9:
+          header: "Ready, Set, Go!"
+          text: |
+            Enjoy the adeventures in level 4!
     5:
         1:
           header: "Welcome to level 5"
@@ -284,7 +305,7 @@ levels:
           text: |
             When using an `{if}` command, you can also add an `{else}` command.
             If the answer is Hedy, the computer will print 'nice'.
-            But if the answer is something else the computer will print 'not as nice'
+            But if the answer is something else the computer will print 'boo'
           editor: |
             <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         5:
@@ -301,12 +322,18 @@ levels:
             If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
 
             With `{in}` you can let the computer check if an item is in a list, for example:
+
+            Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
           editor: |
             <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
 
 
 
 
+        7:
+          header: "Let's go!"
+          text: |
+            Enjoy the adeventures in level 5!
     6:
       1:
         header: "Welcome to level 6"
@@ -354,7 +381,12 @@ levels:
         text: |
           You can use calculations with numbers, but you can also use variables to do calculations, like this:
         editor: |
-          <iframe class="fragment" src="/adventure/song/6/raw"></iframe>
+          <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+      9:
+        header: "Let's get to work!"
+        text: |
+          Enjoy the adeventures in level 6!
+
     7:
       1:
         header: "Welcome to level 7"
@@ -365,14 +397,16 @@ levels:
         text: |
           If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
           If you want to repeat the line more times, simply change the number.
+
+          For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
         editor: |
-          <iframe class="fragment" src="/adventure/repeat/7/raw"></iframe>
+          <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
       3:
         header: "Don't forget the print command"
         text: |
           When using the repeat command, do not forget the `{print}` command.
         editor: |
-          <iframe class="fragment" src="/adventure/repeat_command/7/raw"></iframe>
+          <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
       4:
         header: "Repeat an ask command"
         text: |
@@ -385,6 +419,10 @@ levels:
 
 
 
+      5:
+        header: "Ready Set Go!"
+        text: |
+          Enjoy the adeventures in level 7!
     8:
       1:
         header: "Welcome to level 8"
@@ -397,7 +435,7 @@ levels:
 
           You could only repeat one line of code.
         editor: |
-          <iframe class="fragment" src="/adventure/repeat_command/7/raw"></iframe>
+          <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
       3:
         header: "if commands now"
         text: |
@@ -420,7 +458,7 @@ levels:
           The same goes for the `{if}` and `{else}` commands.
           These were the commands before:
         editor: |
-          <iframe class="fragment" src="/adventure/if_command/7/raw"></iframe>
+          <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
       6:
         header: "if and else now"
         text: |
@@ -441,13 +479,17 @@ levels:
           For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
 
 
+      9:
+        header: "Let's check out the adventures!"
+        text: |
+          Enjoy the adeventures in level 8!
     9:
       1:
         header: "Welcome to level 9"
         text: |
           In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
 
-          You can even put a `{repeat}`command within another `{repeat}`  command.
+          You can even put a `{repeat}` command within another `{repeat}`  command.
       2:
         header: "Multiple lines after `{repeat}`"
         text: |
@@ -459,7 +501,7 @@ levels:
         text: |
           Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
         editor: |
-          <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+          <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
       4:
         header: "Multipe lines after `{if}`"
         text: |
@@ -469,7 +511,7 @@ levels:
       5:
         header: "Indentation matters"
         text: |
-          Indentation is still very important and can make a big difference in the code.
+          Again, indentation is still very important and can make a big difference in the code.
         editor: |
           <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
       6:
@@ -487,6 +529,10 @@ levels:
           <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
 
 
+      8:
+        header: "Let's go!"
+        text: |
+          Enjoy the adeventures in level 9!
     10:
       1:
         header: "Welcome to level 10"
@@ -495,7 +541,7 @@ levels:
       2:
         header: "The for command"
         text: |
-          With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with spaces.
+          With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
         editor: |
           <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
       3:
@@ -503,7 +549,11 @@ levels:
         text: |
           Here you see another example of the `{for}` command:
         editor: |
-          <iframe class="fragment" src="/adventure/default/10/raw"></iframe>
+          <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+      4:
+        header: "Time to program!"
+        text: |
+          Enjoy the adeventures in level 10!
     11:
       1:
         header: "Welcome to level 11"
@@ -526,7 +576,11 @@ levels:
           That looks like this:
         editor: |
           <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
-      13:
+      4:
+        header: "Let's start programming!"
+        text: |
+          Enjoy the adeventures in level 11!
+    13:
         1:
           header: "Welcome to level 13"
           text: |
@@ -541,10 +595,16 @@ levels:
         3:
           header: "The or command"
           text: |
-            The `{or}` works in the same way as the `{and} command, but only 1 of the two statements has to be true.
-            For example:
+            The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
+
+            Let's see what happens when you change the `{and}` for `{if}`.
           editor: |
             <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
 
 
 
+
+        4:
+          header: "Let's go!"
+          text: |
+            Enjoy the adeventures in level 13!
