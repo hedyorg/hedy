@@ -116,6 +116,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     6: [
         'default',
         'maths',
+        'is_command',
         'songs',
         'dice',
         'dishes',
@@ -151,6 +152,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     9: [
         'default',
         'repeat_command',
+        'if_command',
         'rock',
         'story',
         'calculator',
