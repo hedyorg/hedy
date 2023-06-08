@@ -996,102 +996,102 @@ sections:
                 solution_text: |
                     Detta är rätt kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                    glass = ['jordgubbs', 'choklad']
+                    skriv 'Jag älskar ' glass[slump] 'glass'
+        -   title: "Eleverna glömmer citattecken medan när fokuserar på parenteserna"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
+                    glass = [jordgubbs, choklad]
+                    skriv 'Jag älskar ' glass[slump] 'glass'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
+                    glass = ['jordgubbs', 'choklad']
+                    skriv 'Jag älskar ' glass[slump] 'glass'
     -   level: '17'
         sections:
-        -   title: "Students use elif like else, so without a condition"
+        -   title: "Eleverna använder `{elif}` som `{else}`, alltså utan ett villkor"
             example:
                 error_text: |
-                    The elif command needs a condition behind it. It cannot be used like else, without a condition.
+                    Kommandot `{elif}` behöver ett villkor efter. Det kan inte användas som `{else}`, alltså utan ett villkor.
                 error_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif:
-                        print 'I like green'
+                    färg = fråga 'Vilken är din favoritfärg?'
+                    {if} färg == 'grön':
+                        {print} 'grönt är trevligt'
+                    {elif}:
+                        {print} 'Jag gillar grönt'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif color == yellow:
-                        print 'yellow is alright'
-                    else:
-                        print 'I like green'
-        -   title: "Students forget the colon"
+                    färg = {ask} 'Vilken är din favoritfärg?'
+                    {if} färg == 'grön':
+                        {print} 'grönt är trevligt'
+                    {elif} färg == gul:
+                        {print} 'gult är okej'
+                    {annars}:
+                        {print} 'Jag gillar grönt'
+        -   title: "Eleverna glömmer kolonet"
             example:
                 error_text: |
-                    After each command that requires indentation, a colon should be used.
+                    Efter ett kommando som behöver indrag ska det vara ett kolon.
                 error_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great'
-                        print 'Me too!'
-                    elif answer is 'bad'
-                        print 'Let me cheer you up!'
-                    else
-                        print 'Im great!'
+                    svar = fråga 'Hur mår du?'
+                    {if} svar {is} 'bra'
+                        {print} 'Jag också!'
+                    {elif} svar {är} 'dåligt'
+                        {print} 'Jag kan pigga upp dig!'
+                    {annars}
+                        {print} 'Jag är jättebra!'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great':
-                        print 'Me too!'
-                    elif answer is 'bad':
-                        print 'Let me cheer you up!'
-                    else:
-                        print 'Im great!'
+                    svar = fråga 'Hur mår du?'
+                    om svar är 'bra':
+                        skriv 'Jag också!'
+                    annars om svar är 'dåligt':
+                        skriv 'Jag kan muntra upp dig!'
+                    annars:
+                        skriv 'Jag är jättebra!'
     -   level: '18'
         sections:
-        -   title: "Students forget to use the brackets"
+        -   title: "Eleverna glömmer hakparenteser"
             example:
                 error_text: |
-                    Students will forget to put brackets around their text.
+                    Eleverna glömmer att ha parenteser runt text.
                 error_code: |
-                    print 'my name is Hedy!'
+                    skriv 'jag heter Hedy!'
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    print('my name is Hedy!')
-        -   title: "Students will still use the ask command"
+                    skriv('jag heter Hedy!')
+        -   title: "Eleverna fortsätter använda fråga-kommandot"
             example:
                 error_text: |
-                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                    Ask-kommandot har använts från nivå 1. Så det kan vara svårt för eleverna att byta till kommandot inmatning istället för kommandot fråga.
                 error_code: |
-                    print('My name is Hedy!')
-                    name = ask('What is your name?')
-                    print('So your name is ', name)
+                    skriv('Jag heter Hedy!')
+                    namn = fråga('Vad heter du?')
+                    skriv('Så du heter ', namn)
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    print('My name is Hedy!')
-                    name = input('What is your name?')
-                    print('So your name is ', name)
-        -   title: "Students might use the brackets as quotation marks"
+                    skriv('Jag heter Hedy!')
+                    namn = inmatning('Vad heter du?')
+                    skriv('Så du heter ', namn)
+        -   title: "Eleverna råkar använda parenteser som citattecken"
             example:
                 error_text: |
-                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                    De har lärt sig att ha variablerna utanför citattecknen, så de kanske gör samma sak med parenteserna, vilket inte är rätt sätt att använda dem.
                 error_code: |
-                    temperature = 25
-                    print('It is ') temperature ('degrees outside')
+                    temperatur = 25
+                    skriv('Det är ') temperatur (' grader ute')
                 solution_text: |
-                    This is the correct code:
+                    Detta är rätt kod:
                 solution_code: |
-                    temperature = 25
-                    print('It is ', temperature, 'degrees outside')
+                    temperatur = 25
+                    skriv('Det är' , temperatur, ' grader ute')
 learn-more-sections:
 -   text: "Vi vill gärna höra från dig! Det bästa sättet att komma i kontakt med oss är att gå med i vår Discord-server <a href=\"https://discord.gg/8yY7dEme9r\" target=\"_blank\"></a> .\n\nDu kan också [skicka ett mejl till oss] (mailto:hello@hedy.org \"Om Hedy\").\n"
     title: Gå med i Hedy-gemenskapen
@@ -1114,7 +1114,7 @@ start-sections:
         3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience
 -   title: "Multi-lingual programming"
     text: |
-        While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a a new translation.
+        Nästan alla textbaserade programspråk har nyckelord på engelska, som `for` eller `repeat`, men Hedy kan användas på alla språk! Vi stöder för närvarande 39 olika språk, inklusive spanska, arabiska, förenklad kinesiska och hindi. Om ditt språk inte finns, kan du alltid starta en ny översättning.
 -   title: "Step by step learning"
     text: |
         Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven way to learn!
@@ -1134,18 +1134,18 @@ start-sections:
 -   title: "Do I need to install anything?"
     text: |-
         No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
--   title: "Do I need programming experience to teach with Hedy?"
+-   title: "Behöver jag programmeringserfarenhet för att undervisa med Hedy?"
     text: |-
-        No, that is not needed. All concepts are explained in the slides and in the interface for learners.
-        If you create a free teacher's account, you also get access to the teacher's manual with information on how to teach
-        and frequently made mistakes.
+        Nej, det behövs inte. Alla begrepp förklaras i bilderna och i gränssnittet för elever.
+        Om du skapar ett kostnadsfritt lärarkonto får du även tillgång till lärarhandledningen med information om hur du undervisar
+        och vanliga misstag.
 
 join-sections:
--   text: "# There are three ways in which you can support Hedy!\n"
-    title: Supporting Hedy
--   title: Improving the language
+-   text: "# Det finns tre sätt att stödja Hedy!\n"
+    title: Att stödja Hedy
+-   title: Förbättra språket
     text: "Hedys stegvisa och flerspråkiga karaktär skapar många intressanta tekniska utmaningar.\nDu hittar dessa frågor på <a href=\"https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage\" target=\"_blank\">Github</a>.\n"
--   title: Translating Hedy
+-   title: Översätta Hedy
     text: "Är du ingen programmerare? Inga problem! Ett annat sätt att stödja Hedy är att <a href=\"https://github.com/hedyorg/hedy/blob/main/TRANSLATING.md\" target=\"_blank\">översätta nyckelord, felmeddelanden, äventyr och annat innehåll</a>.\nDetta är den nuvarande statusen; hjälp oss att göra klart ett språk eller lägga till ett nytt!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Help teachers get started
+-   title: Hjälpa lärare att komma igång
     text: "Hedy är utformat för att hjälpa lärare att ge programmeringslektioner i klassrummet. Vi har särskilda lärarfunktioner som möjligheten att skapa en klass, anpassa den och följa dina elever.\nOm du gillar Hedy kan du nå ut till skolor som du känner för att hjälpa lärare att komma igång! Vi kan hjälpa dig att hitta skolor eller lärare via <a href=\"https://discord.gg/8yY7dEme9r\" target=\"_blank\">Discord</a>.\n"
