@@ -3005,7 +3005,11 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy is leuk!'
                     ```
-                start_code: "{print} 'fijne verjaardag voor jou'\n{print} 'fijne verjaardag voor jou'\n{print} 'fijne verjaardag lieve Hedy'\n{print} fijne verjaardag voor jou!'\n"
+                start_code: |
+                    {print} 'Fijne verjaardag voor jou'
+                    {print} 'Fijne verjaardag voor jou'
+                    {print} 'Fijne verjaardag lieve Hedy'
+                    {print} 'Fijne verjaardag voor jou!'
             8:
                 start_code: |-
                     {repeat} 5 {times}
@@ -3047,7 +3051,10 @@ adventures:
                 story_text_2: "Met `{repeat}` kun je ook variabelen gebruiken om in te stellen hoe vaak iets herhaald moet worden. In het voorbeeld zie je dat we eerst vragen hoe oud iemand is met de variabele leeftijd.\nDaarna, in regel 3, wordt 'Hieperdepiep Hoera!' net zo vaak herhaald als diegene oud is geworden. Zo hebben we dus de variabele leeftijd gebruikt samen met het `{repeat}` commando.\n"
                 example_code: "```\n{repeat} 2 {times} antwoord = {ask} 'Wist je al dat je een vraag ook kunt herhalen?'\n{if} antwoord {is} ja {repeat} 2 {times} {print} 'Daar was jij al achter!'\n{else} {repeat} 3 {times} {print} 'Je hebt weer iets nieuws geleerd!'\n```\n"
                 example_code_2: "```\n{print} 'Yes! Je bent jarig!'\nleeftijd = {ask} 'Hoe oud ben je geworden?'\n{repeat} leeftijd {times} {print} 'Hieperdepiep Hoera!'\n```\n"
-                start_code: "```\n{repeat} 2 {times} antwoord = {ask} 'Wist je al dat je een vraag ook kunt herhalen?'\n{if} antwoord {is} ja {repeat} 2 {times} {print} 'Daar was jij al achter!'\n{else} {repeat} 3 {times} {print} 'Je hebt weer iets nieuws geleerd!'\n```\n"
+                start_code: |
+                    {repeat} 2 {times} antwoord = {ask} 'Wist je al dat je een vraag ook kunt herhalen?'
+                    {if} antwoord {is} ja {repeat} 2 {times} {print} 'Daar was jij al achter!'
+                    {else} {repeat} 3 {times} {print} 'Je hebt weer iets nieuws geleerd!'
             8:
                 story_text: "### In het blok of niet?\nIn dit level moet je goed nadenken over welke regels code in het blok moeten staan en welke niet.\nBijvoorbeeld: Als je Hedy het liedje *de mosselman* wil laten zingen. Je wil dan dat het zinnetje 'de mosselman' wordt herhaald.\nDat betekent dat de laatste regel niet moet worden herhaald en dus ook niet in het blok mag staan.\nHet liedje klopt niet als je de laatste regel ook laat inspringen.\n\n### Opdracht\nElke regel code start met een streepje. Verwijder het streepje en laat de regels waar nodig inspringen om het liedje af te maken.\n"
                 example_code: "```\n_ {print} 'Zeg ken jij de mosselman?'\n_ {repeat} 2 {times}\n_ {print} 'de mosselman'\n_ {print} 'Zeg ken jij de mosselman? Hij woont in Scheveningen'\n```\n"
@@ -3084,11 +3091,9 @@ adventures:
                     {print} a + b
                     ```
                 start_code: |
-                    ```
                     a = 'Hallo '
                     b = 'wereld!'
                     {print} a + b
-                    ```
         name: Rekenen
         description: Introducing maths
         default_save_name: maths
@@ -3101,7 +3106,7 @@ adventures:
                     Je kunt in dit level een nieuw commando gebruiken: `{ elif }`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
                     Kijk maar!
                 example_code: "```\nprijzen = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prijzen[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk de volgende keer..'\n```\n"
-                start_code: "```\nprijzen = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prijzen[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk de volgende keer..'\n```\n"
+                start_code: "prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prijzen[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk de volgende keer..'\n"
         default_save_name: elif
     rock_2:
         name: Steen, papier, schaar 2
@@ -3217,7 +3222,7 @@ adventures:
                 example_code_2: "```\ndieren {is} hond, kat, kangoeroe\nniet_leuk {is} {ask} Welk dier vind jij niet leuk?\n{remove} niet_leuk {from} dieren\n{print} Ik kies dieren {at} {random}\n```\n"
                 story_text_3: "### Opdracht\nProbeer de nieuwe codes uit. Voeg de smaak die de speler graag wil toe aan het lijstje en haal de smaken waar diegene allergisch voor is van het lijstje af.\n"
                 example_code_3: "```\n{print} Verrassingsmilkshake\nsmaken {is} aardbei, chocolade, vanille\nhoop {is} {ask} Welke smaak hoop je dat het wordt?\n_\nallergie {is} {ask} Voor welke smaak ben je allergsich?\n_\n{print} Je krijgt een {at} {random} milkshake\n```\n"
-                start_code: "```\ndieren {is} hond, kat, kangoeroe\nleuk {is} {ask} Welk dier vind jij leuk?\n{add} leuk {to_list} dieren\nniet_leuk {is} {ask} Welk dier vind jij niet leuk?\n{remove} niet_leuk {from} dieren\n{print} Ik kies dieren {at} {random}\n```\n"
+                start_code: "dieren {is} hond, kat, kangoeroe\nleuk {is} {ask} Welk dier vind jij leuk?\n{add} leuk {to_list} dieren\nniet_leuk {is} {ask} Welk dier vind jij niet leuk?\n{remove} niet_leuk {from} dieren\n{print} Ik kies dieren {at} {random}\n"
     sleep_command:
         name: slaap
         description: introducing sleep command
@@ -3233,11 +3238,9 @@ adventures:
                     {print} groen!
                     ```
                 start_code: |
-                    ```
                     {print} Mijn favoriete kleur is...
                     {sleep} 2
                     {print} groen!
-                    ```
     if_command:
         name: als anders
         description: Introducing the if command
