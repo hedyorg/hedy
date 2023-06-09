@@ -1,7 +1,7 @@
 import uuid
 from typing import Optional
 
-from flask import g, request
+from flask import g, request, jsonify
 from flask_babel import gettext
 
 import hedy
@@ -12,8 +12,7 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
-from .flask_helpers import proper_jsonify as jsonify
-from .types import SaveInfo, Program
+from .frontend_types import SaveInfo, Program
 from . import querylog
 
 

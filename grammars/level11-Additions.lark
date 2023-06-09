@@ -1,11 +1,4 @@
-command:+= for_loop | call | define
+command:+= for_loop 
 
 //new : for loop
 for_loop: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK
-
-// FUNCTIONS ======================================== =============================
-// check line 1: command:+= call | define
-define: _DEFINE function_name _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-call: _CALL function_name
-function_name: NAME -> text
-// ================================================================================

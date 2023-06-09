@@ -198,6 +198,9 @@ class Command:
     not_equal = '!='
     pressed = 'pressed'
     clear = 'clear'
+    define = 'define'
+    call = 'call'
+    returns = 'return'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -214,7 +217,10 @@ translatable_commands = {Command.print: ['print'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
-                         Command.for_loop: ['in', 'range', 'to']}
+                         Command.for_loop: ['in', 'range', 'to'],
+                         Command.define: ['define'],
+                         Command.call: ['call'],
+                         Command.returns: ['return'], }
 
 
 class HedyType:
@@ -257,7 +263,7 @@ commands_per_level = {
     8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
     10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
     12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
     13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
     14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
@@ -1216,6 +1222,9 @@ class IsValid(Filter):
         error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_nested_define(self, meta, args):
+        error = InvalidInfo('nested function', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     # other rules are inherited from Filter
 
 
@@ -2112,15 +2121,6 @@ class ConvertToPython_10(ConvertToPython_8_9):
 @hedy_transpiler(level=11)
 @source_map_transformer(source_map)
 class ConvertToPython_11(ConvertToPython_10):
-    def define(self, meta, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        body = "\n".join(all_lines)
-        return "def " + args[0] + "():\n" + body
-
-    def call(self, meta, args):
-        return f"""{args[0]}()"""
-
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
@@ -2155,6 +2155,11 @@ class ConvertToPython_12(ConvertToPython_11):
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
         return f"{args[0]}({args_str})"
+
+    def returns(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        exception = self.make_catch_exception(args)
+        return exception + f"return f'''{argument_string}'''"
 
     def number(self, meta, args):
         # try all ints? return ints
@@ -2296,11 +2301,6 @@ class ConvertToPython_13(ConvertToPython_12):
 @hedy_transpiler(level=14)
 @source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
-    def returns(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
-        exception = self.make_catch_exception(args)
-        return exception + f"return f'''{argument_string}'''"
-
     def process_comparison(self, meta, args, operator):
 
         arg0 = self.process_variable_for_comparisons(args[0])
@@ -3018,6 +3018,8 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'ifpressed missing else':
             raise exceptions.MissingElseForPressitException(
                 command='ifpressed_else', level=level, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'nested function':
+            raise exceptions.NestedFunctionException()
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
