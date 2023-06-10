@@ -5,7 +5,6 @@ module.exports = defineConfig({
   watchForFileChanges: false,
   video: false,
   redirectionLimit: 100,
-  defaultCommandTimeout: 10000,
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
