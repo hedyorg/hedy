@@ -2704,12 +2704,20 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
         # make sure to always revert IsValid methods to original
         set_errors_to_original()
 
+    # If transpiled successfully while allowing errors, transpile mapped code again to get original error
+    # If none is found, raise error so that original error will be returned
+    at_least_one_error_found = False
+
     for hedy_source_code, python_source_code in source_map.map.copy().items():
         if hedy_source_code.error is not None or python_source_code.code == 'pass':
             try:
                 transpile_inner(hedy_source_code.code, source_map.level, source_map.language)
             except Exception as e:
+                at_least_one_error_found = True
                 hedy_source_code.error = e
+
+    if not at_least_one_error_found:
+        raise Exception('Could not find original error for skipped code')
 
     return transpile_result
 
