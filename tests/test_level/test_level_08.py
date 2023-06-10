@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel8(HedyTester):
@@ -31,12 +32,21 @@ class TestsLevel8(HedyTester):
         antwoord is 25
         if antwoord is 100 print 'goed zo' else print 'neenee'""")
 
+        expected = textwrap.dedent("""\
+        antwoord = '25'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 55), hedy.exceptions.WrongLevelException),
+        ]
+
         # one line if's are no longer allowed
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.WrongLevelException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            max_level=17)
+            max_level=11,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_if_no_indentation(self):
         code = textwrap.dedent("""\
@@ -980,7 +990,18 @@ class TestsLevel8(HedyTester):
         if x is pressed 
           print 'missing else!'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.MissingElseForPressitException, max_level=14)
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 2, 34), hedy.exceptions.MissingElseForPressitException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=14
+        )
 
     def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
         code = textwrap.dedent("""\

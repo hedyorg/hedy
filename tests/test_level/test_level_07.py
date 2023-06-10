@@ -3,7 +3,8 @@ import textwrap
 from parameterized import parameterized
 
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel7(HedyTester):
@@ -100,19 +101,54 @@ class TestsLevel7(HedyTester):
         x is 3
         repeat 3 times x""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.IncompleteRepeatException)
+        expected = textwrap.dedent("""\
+        x = '3'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
         repeat 3 times 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LonelyTextException)
+        expected = textwrap.dedent("""\
+        for __i__ in range(int('3')):
+          pass
+          time.sleep(0.1)""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 16, 1, 19), hedy.exceptions.LonelyTextException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
         repeat 3 print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.IncompleteRepeatException)
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_ask(self):
         code = textwrap.dedent("""\

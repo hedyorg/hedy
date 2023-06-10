@@ -25,7 +25,7 @@ class TestsLevel5(HedyTester):
     # if tests
     #
     @parameterized.expand(HedyTester.commands_level_4)
-    def test_if_equality_linebreak_print(self, hedy, python):
+    def test_if_equality_linebreak_print(self,  hedy, python):
         # line breaks after if-condition are allowed
         code = textwrap.dedent(f"""\
         naam is Hedy
@@ -839,11 +839,21 @@ class TestsLevel5(HedyTester):
         if option is Scissors
             print 'Its a tie!'""")
 
+        expected = textwrap.dedent("""\
+        option = input(f'Rock Paper or Scissors?')
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 22), hedy.exceptions.ParseException),
+            SkippedMapping(SourceRange(3, 1, 3, 23), hedy.exceptions.InvalidSpaceException),
+        ]
+
         self.multi_level_tester(
-            max_level=7,
             code=code,
-            exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 3 and c.exception.error_location[1] == 1
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=7
         )
 
     def test_line_with_if_with_space_gives_invalid(self):

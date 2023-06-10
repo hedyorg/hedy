@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel16(HedyTester):
@@ -623,9 +624,28 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(['sleep', 'number is', 'print', 'forward', 'turn'])
+    @parameterized.expand(['number is', 'print', 'forward', 'turn'])
     def test_at_random_express(self, command):
         code = textwrap.dedent(f"""\
             numbers is [1, 2, 3]
             {command} numbers at random""")
         self.single_level_tester(code=code, exception=hedy.exceptions.InvalidAtCommandException)
+
+    def test_at_random_express_sleep(self):
+        code = textwrap.dedent(f"""\
+            numbers is [1, 2, 3]
+            sleep numbers at random""")
+
+        expected = textwrap.dedent(f"""\
+        numbers = [1, 2, 3]
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 24), hedy.exceptions.InvalidAtCommandException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
