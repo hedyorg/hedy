@@ -5,6 +5,7 @@ module.exports = defineConfig({
   watchForFileChanges: false,
   video: false,
   redirectionLimit: 100,
+  defaultCommandTimeout: 10000,
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
@@ -22,6 +23,7 @@ module.exports = defineConfig({
     recover_page: '/recover',
     hedy_page: '/hedy',
     hedy_level2_page: '/hedy/2',
+    hedy_level5_page: '/hedy/5',
     adventure_page: '/hedy/1#print_command',
     admin_page: '/admin',
     admin_users_page: '/admin/users',
