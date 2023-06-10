@@ -13,7 +13,7 @@ _if_less_command_skipping_enabled: print | ask | turtle | assign_button | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
 error_invalid_skipping_disabled.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
-error_invalid_skipping_enabled.-100: textwithoutspaces text?
+error_invalid_skipping_enabled.-100: textwithoutspaces _SPACE* text?
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _IS var _AT (INT | random)
