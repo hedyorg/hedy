@@ -2731,7 +2731,7 @@ def transpile(input_string, level, lang="en"):
                 transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
             else:
                 raise original_error
-        except Exception as skipping_error:
+        except Exception:
             raise original_error
 
     return transpile_result
