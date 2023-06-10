@@ -2713,8 +2713,10 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
             try:
                 transpile_inner(hedy_source_code.code, source_map.level, source_map.language)
             except Exception as e:
-                at_least_one_error_found = True
                 hedy_source_code.error = e
+
+            if hedy_source_code.error is not None:
+                at_least_one_error_found = True
 
     if not at_least_one_error_found:
         raise Exception('Could not find original error for skipped code')
@@ -2728,8 +2730,11 @@ def transpile(input_string, level, lang="en"):
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
     except Exception as original_error:
         try:
-            source_map.set_skip_faulty(True)
-            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            if not isinstance(original_error, source_map.exceptions_not_to_skip):
+                source_map.set_skip_faulty(True)
+                transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            else:
+                raise original_error
         except Exception as skipping_error:
             raise original_error
 

@@ -1,6 +1,6 @@
 import re
+import exceptions
 from os import path
-
 from lark import Tree, ParseError
 
 
@@ -89,7 +89,12 @@ class SourceMap:
 
     map = dict()
     level = 0
+
     skip_faulty = False
+    exceptions_not_to_skip = (
+        exceptions.UnsupportedStringValue,
+    )
+
     language = 'en'
     hedy_code = ''
     python_code = ''
