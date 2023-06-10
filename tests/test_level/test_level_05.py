@@ -180,7 +180,7 @@ class TestsLevel5(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
-            max_level=5
+            max_level=7
         )
 
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
@@ -202,7 +202,7 @@ class TestsLevel5(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
-            max_level=5
+            max_level=7
         )
 
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
@@ -222,7 +222,7 @@ class TestsLevel5(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
-            max_level=5
+            max_level=7
         )
 
     @parameterized.expand(HedyTester.quotes)
@@ -873,7 +873,7 @@ class TestsLevel5(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
-            max_level=5)
+            max_level=7)
 
     def test_pront_should_suggest_print(self):
         code = "pront 'Hedy is leuk!'"
@@ -888,7 +888,6 @@ class TestsLevel5(HedyTester):
             expected=expected,
             skipped_mappings=skipped_mappings,
             extra_check_function=lambda c: str(c.arguments['guessed_command']) == 'print',
-            max_level=5
         )
 
     def test_print_no_quotes(self):
@@ -1384,7 +1383,7 @@ class TestsLevel5(HedyTester):
         ]
 
         self.multi_level_tester(
-            max_level=5,
+            max_level=7,
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings
@@ -1401,7 +1400,7 @@ class TestsLevel5(HedyTester):
         ]
 
         self.multi_level_tester(
-            max_level=5,
+            max_level=7,
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings
