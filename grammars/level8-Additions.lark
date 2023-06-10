@@ -1,4 +1,5 @@
-command:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse
+command_skipping_disabled:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse
+command_skipping_enabled:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | error_repeat_no_command | ifelse > error_invalid
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 

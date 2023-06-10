@@ -14,6 +14,9 @@ text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्
 text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE
 
+// From level 12 when skipping enabled, we disallow using all keywords (if, else) as text in the current language, This is necessary to be able to skip faulty code
+textwithspaces_skipping_enabled: /(?:[^#\n،,，、 ]| (?!SKIPPING_TEXT_WITH_SPACES_NON_ALLOWED_WORDS))+/ -> text
+textwithoutspaces_skipping_enabled: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIPPING_TEXT_WITHOUT_SPACES_NON_ALLOWED_WORDS)+/ -> text
 
 // FUNCTIONS ======================================== =============================
 define: _DEFINE function_name (_SPACE _USING arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

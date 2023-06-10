@@ -2459,6 +2459,21 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
 
+    if not source_map.skip_faulty:
+        # remove all faulty code skipping enabled rules
+        grammar_text_1 = re.sub(r".*_skipping_enabled.+", "\n", grammar_text_1)
+        grammar_text_2 = re.sub(r".*_skipping_enabled.+", "\n", grammar_text_2)
+        # set all faulty code skipping disabled rules as default
+        grammar_text_1 = re.sub(r"_skipping_disabled", "", grammar_text_1)
+        grammar_text_2 = re.sub(r"_skipping_disabled", "", grammar_text_2)
+    else:
+        # remove all faulty code skipping disabled rules
+        grammar_text_1 = re.sub(r".*_skipping_disabled.+", "\n", grammar_text_1)
+        grammar_text_2 = re.sub(r".*_skipping_disabled.+", "\n", grammar_text_2)
+        # set all faulty code skipping enabled rules as default
+        grammar_text_1 = re.sub(r"_skipping_enabled", "", grammar_text_1)
+        grammar_text_2 = re.sub(r"_skipping_enabled", "", grammar_text_2)
+
     merged_grammar = []
 
     rules_grammar_1 = grammar_text_1.split('\n')
@@ -2568,10 +2583,34 @@ def create_grammar(level, lang="en"):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i, i)
 
+    if source_map.skip_faulty:
+        non_allowed_words = re.findall(r'".*?"', keywords)
+        non_allowed_words = list(set(non_allowed_words))
+
+        non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
+        non_allowed_words_with_space = '|'.join(non_allowed_words)
+        result = result.replace('SKIPPING_TEXT_WITH_SPACES_NON_ALLOWED_WORDS', non_allowed_words_with_space)
+
+        letters_done = []
+        string_words = ''
+
+        for word in non_allowed_words:
+            # go through all words and add them in groups by their first letter
+            first_letter = word[0]
+            if first_letter not in letters_done:
+                string_words += f'|{first_letter}(?!{word[1:]})'
+                letters_done.append(first_letter)
+            else:
+                string_words = string_words.replace(f'|{word[0]}(?!', f'|{word[0]}(?!{word[1:]}|')
+
+        string_words = string_words.replace('|)', ')')  # remove empty regex expressions
+        string_words = string_words[1:]  # remove first |
+
+        result = result.replace('SKIPPING_TEXT_WITHOUT_SPACES_NON_ALLOWED_WORDS', string_words)
+
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
     save_total_grammar_file(level, result, lang)
-
     return result
 
 
@@ -2628,7 +2667,7 @@ PARSER_CACHE = {}
 def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens)
+    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
@@ -2661,10 +2700,6 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     try:
         set_error_to_allowed()
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
-    except Exception:
-        # transpile original
-        set_errors_to_original()
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
     finally:
         # make sure to always revert IsValid methods to original
         set_errors_to_original()
@@ -2680,14 +2715,15 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
 
 def transpile(input_string, level, lang="en"):
-    source_map.clear()
-
-    if level <= HEDY_MAX_LEVEL_SKIPPING_FAULTY:
-        source_map.set_skip_faulty(True)
-        transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
-    else:
+    try:
         source_map.set_skip_faulty(False)
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    except Exception as original_error:
+        try:
+            source_map.set_skip_faulty(True)
+            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+        except Exception as skipping_error:
+            raise original_error
 
     return transpile_result
 

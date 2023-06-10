@@ -1,4 +1,5 @@
-command:+= for_list
+command_skipping_disabled:+= for_list
+command_skipping_enabled:+= for_list > error_invalid
 
 // new : for list
 for_list: _FOR var _IN var_access _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

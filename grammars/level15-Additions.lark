@@ -1,4 +1,5 @@
-command:+= while_loop | ifpressed-= error_ifpressed_missing_else > ifelse | ifs
+command_skipping_disabled:+= while_loop | ifpressed-= error_ifpressed_missing_else > ifelse | ifs
+command_skipping_enabled:+= while_loop | ifpressed-= error_ifpressed_missing_else > ifelse | ifs > error_invalid
 
 // new : while loop
 while_loop: _WHILE (_conditions) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

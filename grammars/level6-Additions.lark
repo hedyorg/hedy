@@ -2,8 +2,11 @@ _print_argument: (_SPACE | quoted_text | list_access | expression | print_expres
 ?print_expression: var_access_print | error_unsupported_number | INT
 
 // redefining it entirely since it has many order-depending rules
-command: clear | print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs | ask | error_ask_no_quotes| assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
-_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | error_ask_no_quotes | assign_button | assign | assign_list
+command_skipping_disabled: clear | print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs | ask | error_ask_no_quotes| assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
+command_skipping_enabled: clear | print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs | ask | error_ask_no_quotes| assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line | error_invalid
+
+_if_less_command_skipping_disabled: print | turtle | add | remove | sleep | error_print_no_quotes | ask | error_ask_no_quotes | assign_button | assign | assign_list
+_if_less_command_skipping_enabled: print | turtle | add | remove | sleep | error_print_no_quotes | ask | error_ask_no_quotes | assign_button | assign | assign_list | error_invalid
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?

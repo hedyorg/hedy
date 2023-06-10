@@ -13,7 +13,9 @@ not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
 ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER
 
 // FUNCTIONS ======================================== =============================
-command:+= return
+command_skipping_disabled:+= return
+command_skipping_enabled:+= return > error_invalid
+
 ?return: _RETURN (_print_argument)? -> returns
 ?simple_expression:+= call
 ?turtle_color:+= call

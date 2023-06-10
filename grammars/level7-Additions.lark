@@ -1,5 +1,8 @@
-command:+= repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times -= error_print_no_quotes
-_if_less_command:+= repeat -= error_print_no_quotes
+command_skipping_disabled:+= repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times -= error_print_no_quotes
+command_skipping_enabled:+= repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times -= error_print_no_quotes > error_invalid
+
+_if_less_command_skipping_disabled:+= repeat -= error_print_no_quotes
+_if_less_command_skipping_enabled:+= repeat -= error_print_no_quotes > error_invalid
 
 // new commands
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE command

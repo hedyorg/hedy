@@ -1,13 +1,19 @@
 program: _empty_program | _non_empty_program
 _empty_program: (_EOL | _SPACE)*
-_non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+
+_non_empty_program_skipping_disabled: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+_non_empty_program_skipping_enabled: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs -= error_invalid > assign
-_if_less_command: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
+command_skipping_disabled:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs -= error_invalid > assign
+command_skipping_enabled:+= assign_button | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs > assign | error_invalid
+
+_if_less_command_skipping_disabled: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
+_if_less_command_skipping_enabled: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign | error_invalid
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
-error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
+error_invalid_skipping_disabled.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
+error_invalid_skipping_enabled.-100: textwithoutspaces text?
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _IS var _AT (INT | random)
