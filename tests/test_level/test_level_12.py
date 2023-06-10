@@ -2037,14 +2037,14 @@ class TestsLevel12(HedyTester):
 
     def test_simple_function(self):
         code = textwrap.dedent("""\
-        define simple_function_1 using parameter
+        define simple_function_1 with parameter
             print "simple_function_1 - 1"
             m = "simple_function_1 - 2"
             print m
-        define simple_function_2 using param
+        define simple_function_2 with param
             print "simple_function_2 - 1"
             print param
-        define simple_function_3 using param_a, param_b, param_c
+        define simple_function_3 with param_a, param_b, param_c
             if param_a = "A"
                 print "simple_function_3 - 1"
                 print param_b
@@ -2184,3 +2184,16 @@ class TestsLevel12(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NestedFunctionException,
+            max_level=16,
+        )

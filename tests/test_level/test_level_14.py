@@ -422,9 +422,9 @@ class TestsLevel14(HedyTester):
         define test_function_1
             int = 1
             return "Test function " int
-        define test_function_2 using int
+        define test_function_2 with int
             return "Test function " int
-        define test_function_3 using input
+        define test_function_3 with input
             if input != 5
                 print "NE5"
             if input < 5

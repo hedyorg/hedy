@@ -19,9 +19,24 @@ textwithspaces_skipping_enabled: /(?:[^#\n،,，、 ]| (?!SKIPPING_TEXT_WITH_SPA
 textwithoutspaces_skipping_enabled: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIPPING_TEXT_WITHOUT_SPACES_NON_ALLOWED_WORDS)+/ -> text
 
 // FUNCTIONS ======================================== =============================
-define: _DEFINE function_name (_SPACE _USING arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+command:+= call | error_nested_define | return
+_non_empty_program: _EOL* (define | command | error_invalid) _SPACE* (_EOL+ (define | command) _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+
+error_nested_define: define
+define: _DEFINE function_name (_SPACE _WITH arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 call: _CALL function_name (_SPACE _WITH arguments)?
+
+
 
 ?arguments: argument (_COMMA argument)* -> arguments
 ?argument: expression | atom | list_access
+
+function_name: NAME -> text
+
+?return: _RETURN (_print_argument)? -> returns
+?simple_expression:+= call
+?turtle_color:+= call
+
+add: _ADD_LIST (call | some_spaces) _TO_LIST var_access
+remove: _REMOVE (call | some_spaces) _FROM var_access
 // ================================================================================

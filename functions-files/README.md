@@ -16,12 +16,12 @@ for i in range 1 to 3
 ## LEVEL 12
 Functions with arguments
 ```
-define fruit using a, b, c, d
+define fruit with a, b, c, d
     print "fruit " c
     call fruit_2 with a, d
     print "fruit " b
 
-define fruit_2 using x, y
+define fruit_2 with x, y
     print "fruit2: " y " " x
     
 f = 'C'
@@ -32,7 +32,7 @@ call fruit with 5 + 4.4, "A", f, g
 ## LEVEL 14
 Functions with arguments and return
 ```
-define squares using a
+define squares with a
     return a * a
 
 
