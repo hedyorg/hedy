@@ -757,384 +757,384 @@ levels:
             -   option: Hedy väljer ett slumpmässigt monster varje gång.
                 feedback: Toppen!
             -   option: vampyr
-                feedback: Not always...
-            -   option: werewolf
-                feedback: Not always...
-            -   option: giant spider
-                feedback: Not always...
+                feedback: Inte alltid …
+            -   option: varulv
+                feedback: Inte alltid …
+            -   option: jättespindel
+                feedback: Inte alltid …
             correct_answer: A
-            hint: Mind the last 3 words... monsters `{at} {random}`...
+            hint: Tänk på de tre sista orden … monster `{at} {random}`…
             question_score: '10'
     6:
         4:
             mp_choice_options:
             -   option: '30'
-                feedback: Mind, Hedy also prints 'Your lucky number is...'
+                feedback: Tänk på att Hedy också skriver 'Ditt lyckotal är …'
             -   option: '10'
-                feedback: Please try again.
-            -   option: Your lucky number is... 30
-                feedback: That's right!
-            -   option: Your lucky number is... 10
-                feedback: Her lucky number is name times age...
+                feedback: Försök igen.
+            -   option: Ditt lyckotal är … 30
+                feedback: Det stämmer!
+            -   option: Ditt lyckotal är … 10
+                feedback: Hennes lyckotal är namn gånger ålder …
             correct_answer: C
-            question_text: Kim is 10 years old. What will Hedy print for her?
-            code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
-            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+            question_text: Kim är 10 år gammal. Vad kommer Hedy att skriva ut för henne?
+            code: "name = {ask} 'Hur många bokstäver har ditt namn?'\nålder = {ask} 'Hur gammal är du?'\nlyckotal = namn*ålder\n{print} 'Ditt lyckonummer är …' lyckotal"
+            hint: 'Kim har 3 bokstäver, hon är 10 år gammal så: bokstäver gånger ålder = 3*10 = 30.'
             question_score: '10'
         5:
             mp_choice_options:
-            -   option: 5 dollars
-                feedback: Unfortunately, it's not that cheap.
-            -   option: 10 dollars
-                feedback: No, it's 10 dollars each.
-            -   option: 15 dollars
-                feedback: The * means multiplication.
-            -   option: 50 dollars
-                feedback: Great!
-            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
-            code: "{print} 'Welcome to Hedys!'\npeople = {ask} 'How many people are eating with us tonight?'\nprice = people * 10\n{print} 'That will be ' price 'dollar please'"
+            -   option: 5 dollar
+                feedback: Tyvärr är det inte så billigt.
+            -   option: 10 dollar
+                feedback: Nej, det är 10 dollar per person.
+            -   option: 15 dollar
+                feedback: '* betyder multiplikation.'
+            -   option: 50 dollar
+                feedback: Bra!
+            question_text: Om 5 personer äter på denna restaurang, hur mycket måste de betala sammanlagt?
+            code: "{print} 'Välkommen till Hedys!'\npersoner = {ask} 'Hur många äter hos oss ikväll?'\npris = personer * 10\n{print} 'Det blir' pris 'dollar, tack'"
             correct_answer: D
             hint: '`price` `is` `people` `times` 10'
             question_score: '10'
         7:
-            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = price + 15\n{if} food {is} fries price = price + 6\ndrinks is {ask} 'What would you like to drink?'\n{if} drinks {is} coke price = price + 3\n{if} drinks {is} water price = price + 1\n{print} price ' dollars please'"
+            code: "{print} 'Välkommen till Hedys lunchrestaurang'\nmat = {ask} 'Vad önskas att äta?'\npris = 0\n{if} mat {is} hamburgare pris = pris + 15\n{if} mat {is} fries pris = pris + 6\ndricka är {ask} 'Vad skulle du vilja dricka?'\n{if} dricka {is} cola pris = pris + 3\n{if} dricka {is} vatten pris = pris + 1\n{print} pris ' dollar, tack'"
             mp_choice_options:
-            -   option: It could have been `price = 3` just as well.
-                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
-            -   option: Because Hedy doesn't understand `price = 3`.
-                feedback: Hedy would understand, but it wouldn't be right.
-            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
-                feedback: That's right!
-            -   option: Because the price is 0 dollars to begin with.
-                feedback: That's true, but not the reason
-            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            -   option: Det kunde lika gärna ha varit `pris = 3`.
+                feedback: Nej, det stämmer inte. Hedy måste lägga till 3 dollar till slutsumman.
+            -   option: Eftersom Hedy inte förstår `pris = 3`.
+                feedback: Hedy skulle förstå, men det skulle inte bli rätt.
+            -   option: Eftersom Hedy annars skulle glömma bort den tidigare beställningen. Priset skulle bli 3 dollar totalt.
+                feedback: Det stämmer!
+            -   option: Eftersom priset är 0 dollar till att börja med.
+                feedback: Det är sant, men det är inte anledningen
+            question_text: Varför står det på rad 7 'pris är pris + 3' i stället för 'pris är 3'?
             correct_answer: C
-            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            hint: Priset ska inte vara 3, utan 3 dollar mer än det redan var
             question_score: '10'
         10:
             mp_choice_options:
             -   option: Du kan bara fylla i ordet "är" på `_`
-                feedback: You are allowed to use the `=` sign as well
-            -   feedback: Amazing!
+                feedback: Du får också använda tecknet `=`
+            -   feedback: Fantastiskt!
                 option: Du kan fylla i antingen ordet "är" eller tecknet `=` i fältet `_`
             -   option: Du måste skriva =är= i `_`
-                feedback: No, one `=` sign is enough
-            -   option: You can only use the `=` sign when working with numbers, not with words.
-                feedback: You can also use `=` with words.
+                feedback: Nej, ett `=`-tecken räcker
+            -   option: Du kan bara använda `=`-tecknet när du arbetar med siffror, inte med ord.
+                feedback: Du kan också använda `=` med ord.
             correct_answer: B
-            hint: '`{is}` and `=` are both allowed'
+            hint: '`{is}` och `=` är båda tillåtna'
             question_score: '10'
-            question_text: Which statement is true?
-            code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
+            question_text: Vilket påstående stämmer?
+            code: "namn _ Hedy\n{print} namn 'går genom skogen'"
         2:
             mp_choice_options:
             -   option: '`-`'
-                feedback: That's not it
-            -   feedback: That's not it
+                feedback: Det är fel
+            -   feedback: Det är fel
                 option: plus
             -   option: '`*`'
-                feedback: That's not it
+                feedback: Det är fel
             -   option: '`+`'
-                feedback: Korrekt!
+                feedback: Rätt!
             correct_answer: D
-            hint: It's the plus sign.
-            question_text: What do you use when you want to add two numbers?
+            hint: Det är plustecknet.
+            question_text: Vad använder du när du vill addera två tal?
             question_score: '10'
         1:
-            question_text: What's Hedy's output when you run this code?
+            question_text: Vad skriver Hedy ut när du kör den här koden?
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Korrekt!
+                feedback: Rätt!
             -   option: '12'
-                feedback: No, the plus sign is used in addition
+                feedback: Nej, plustecknet används för addition
             -   option: 2*10
-                feedback: No, Hedy will calculate the answer
+                feedback: Nej, Hedy kommer att beräkna svaret
             -   option: '210'
-                feedback: Mind it's a calculation.
+                feedback: Tänk på att det är en uträkning.
             correct_answer: A
-            hint: The `*` is used as a multiplication sign
+            hint: '`*` används som gångertecken'
             question_score: '10'
         3:
-            question_text: What's Hedy's output when you run this code?
+            question_text: Vad skriver Hedy ut när du kör den här koden?
             code: "{print} '3*10'"
             mp_choice_options:
             -   option: '30'
-                feedback: This would be the right answer if there were no quotation marks.
+                feedback: Detta skulle vara rätt svar om det inte fanns några citattecken.
             -   option: '13'
-                feedback: Try again..
+                feedback: Försök igen …
             -   option: 3*10
-                feedback: Correct! There are quotation marks, so Hedy will print it literally.
-            -   option: Nothing, Hedy will give an error message.
-                feedback: No, Hedy will print it literally.
+                feedback: Rätt! Det finns citattecken, så Hedy kommer att skriva ut det bokstavligen.
+            -   option: Inget, Hedy kommer att ge ett felmeddelande.
+                feedback: Nej, Hedy kommer att skriva ut det bokstavligen.
             correct_answer: C
-            hint: Mind the quotation marks!!
+            hint: Tänk på citattecknen!!
             question_score: '10'
         6:
-            question_text: How much does a hamburger cost is this virtual restaurant?
-            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = 15\n{if} food {is} fries price = 6"
+            question_text: Vad kostar en hamburgare i den här virtuella restaurangen?
+            code: "{print} 'Välkommen till Hedys lunchrestaurang'\nmat = {ask} 'Vad önskas att äta?'\npris = 0\n{if} mat {is} hamburgare pris = 15\n{if} mat {is} fries pris = 6"
             mp_choice_options:
-            -   option: 15 dollars
-                feedback: Super!
-            -   option: 6 dollars
-                feedback: The fries are 6 dollars
-            -   option: 0 dollars
-                feedback: The hamburger isn't free!
-            -   option: 21 dollars
-                feedback: That's the price for a hamburger and fries!
+            -   option: 15 dollar
+                feedback: Superbra!
+            -   option: 6 dollar
+                feedback: Fries kostar 6 dollar
+            -   option: 0 dollar
+                feedback: Hamburgaren är inte gratis!
+            -   option: 21 dollar
+                feedback: Det är priset för en hamburgare och fries!
             correct_answer: A
-            hint: Mind the fourth line.
+            hint: Tänk på den fjärde raden.
             question_score: '10'
         8:
-            question_text: Why is this code incorrect?
-            code: "correct answer = 3*12\nanswer = {ask} 'What is 3 times 12?'\n{if} answer {is} correct answer {print} 'Good job!'\n{else} {print} 'No... It was ' correct answer"
+            question_text: Varför är den här koden fel?
+            code: "rätt svar = 3*12\nsvar = {ask} 'Vad är 3 gånger 12?'\n{if} svar {is} rätt svar {print} 'Bra jobbat!'\n{else} {print} 'Nej … Det var' rätt svar"
             mp_choice_options:
-            -   option: There shouldn't be quotation marks in line 2
-                feedback: No, there should be!
-            -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Korrekt!
-            -   option: The `{if}` and `{else}` commands should be in the same line.
-                feedback: No, that's not true.
-            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
-                feedback: Variable names can be similar, but they can't be 2 words...
+            -   option: Det ska inte vara några citattecken på rad 2
+                feedback: Nej, det borde det vara!
+            -   option: Variabeln heter rätt svar, men ett variabelnamn får bara vara ett ord. Så det borde vara rätt_svar
+                feedback: Rätt!
+            -   option: Kommandona `{if}` och `{else}` ska stå på samma rad.
+                feedback: Nej, det stämmer inte.
+            -   option: Variabeln på rad 2 kan inte heta svar, eftersom den är för lik variabeln rätt svar.
+                feedback: Variabelnamn kan likna varann men kan inte bestå av två ord …
             correct_answer: B
-            hint: Inspect what the variables are called.
+            hint: Kontrollera variabelnamnen.
             question_score: '10'
         9:
-            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
-            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            question_text: Tänk dig att du älskar fotboll 10 av 10, har ätit 2 bananer och har tvättat händerna 3 gånger idag. Hur smart tror den fåniga spådamen att du är?
+            code: "{print} 'Jag är Hedy, den fåniga spådamen'\n{print} 'Jag kommer att förutsäga hur smart du är!'\nfotboll = {ask} 'På en skala från 0 till 10, hur mycket älskar du fotboll?'\nbananer = {ask} 'Hur många bananer har du ätit den här veckan?'\nhygien = {ask} 'Hur många gånger har du tvättat händerna idag?'\nresultat = bananer + hygien\nresultat = resultat * fotboll\n{print} 'Du är ' resultat 'procent smart.'"
             mp_choice_options:
             -   option: 10%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
             -   option: 32%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
             -   option: 50%
-                feedback: Super! You are 100 percent smart!
+                feedback: Super! Du är 100 procent smart!
             -   option: 100%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
             correct_answer: C
-            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            hint: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
             question_score: '10'
     7:
         1:
-            question_text: How many lines can you repeat at once with the repeat command at this level?
+            question_text: Hur många rader kan du upprepa samtidigt med repetera-kommandot på den här nivån?
             mp_choice_options:
             -   option: '0'
-                feedback: No you can repeat a line.
+                feedback: Nej, du kan upprepa en rad.
             -   option: '1'
-                feedback: Correct, one line at a time
-            -   option: '2'
-                feedback: In this level only one line at a time
-            -   option: infinite
-                feedback: In this level you can only repeat one line at a time
+                feedback: Korrekt, en rad i taget
+            -   option: '3'
+                feedback: På den här nivån bara en rad i taget
+            -   option: oändligt
+                feedback: På den här nivån kan du bara upprepa en rad i taget
             correct_answer: B
-            hint: You can only repeat 1 line at a time
+            hint: Du kan bara upprepa en rad åt gången
             question_score: '10'
         2:
-            question_text: Which code is right?
+            question_text: Vilken kod är rätt?
             mp_choice_options:
-            -   option: "```\n{print} 100 {times} 'hello'\n```\n"
-                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
-            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```\n"
-                feedback: "{repeat} 100 {times} {print} 'hello'"
-            -   option: "```\n{repeat} 'hello' 100 {times}\n```\n"
-                feedback: "{repeat} 100 {times} {print} 'hello'"
-            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```\n"
-                feedback: That's right!
+            -   option: "```\n{print} 100 {times} 'hej'\n```\n"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hej'"
+            -   option: "```\n{print} {repeat} 100 {times} 'hej'\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hej'"
+            -   option: "```\n{repeat} 'hej' 100 {times}\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hej'"
+            -   option: "```\n{repeat} 100 {times} {print} 'hej'\n```\n"
+                feedback: Det är rätt!
             correct_answer: D
-            hint: First the repeat command, then the `{print}` command
+            hint: Först kommandot upprepa, sedan kommandot `{print}`
             question_score: '10'
         3:
-            question_text: Is this code right or wrong?
+            question_text: Är den här koden rätt eller fel?
             mp_choice_options:
-            -   option: Right
-                feedback: No, a word is missing
-            -   option: Wrong, the word `{repeat}` is missing
-                feedback: The word `{repeat}` is there, another word is missing
-            -   feedback: The word `{times}` is there, another word is missing.
-                option: Wrong, the word `{times}` is missing
-            -   option: Wrong, the word `{print}` is missing
-                feedback: Korrekt
+            -   option: Rätt
+                feedback: Nej, ett ord fattas
+            -   option: Fel; ordet `{repeat}` saknas
+                feedback: Ordet `{repeat}` finns med, ett annat ord saknas
+            -   feedback: Ordet `{times}` är med; ett annat ord saknas.
+                option: Fel, ordet `{times}` saknas
+            -   option: Fel; ordet `{print}` saknas
+                feedback: Rätt
             correct_answer: D
-            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            hint: "Det ska vara: `{repeat}` 100 `{times}` `{print}` 'Hej'"
             question_score: '10'
-            code: "{repeat} 100 {times} 'Hello!'"
+            code: "{repeat} 100 {times} 'Hej!'"
         4:
-            question_text: Which word is wrong in the code?
+            question_text: Vilket ord är fel i koden?
             code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
             mp_choice_options:
             -   option: "```\nI'm\n```\n"
-                feedback: That's right!
+                feedback: Det stämmer!
             -   option: "`{print}`\n"
-                feedback: '`{print}` is spelled correctly'
+                feedback: '`{print}` är rättstavat'
             -   option: "`{repeat}`\n"
-                feedback: '`{repeat}` is spelled correctly'
+                feedback: '`{repeat}` är rättstavat'
             -   option: "`{times}`\n"
-                feedback: '`{times}` is spelled correctly'
+                feedback: '`{times}` är rättstavat'
             correct_answer: A
-            hint: I'm is wrong, you can't use apostrophes
+            hint: Jag har fel; du kan inte använda apostrofer
             question_score: '10'
         5:
             correct_answer: A
-            hint: The code is correct!
+            hint: Koden är rätt!
             question_score: '10'
-            question_text: Is this code right or wrong?
-            code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
+            question_text: Är den här koden rätt eller fel?
+            code: "{repeat} 100 {times} {print} 'Hedy är fantastiskt!'"
             mp_choice_options:
-            -   option: Korrekt
-                feedback: That's right!
-            -   option: Wrong
-                feedback: That's not it
+            -   option: Rätt
+                feedback: Det stämmer!
+            -   option: Fel
+                feedback: Det är fel
         6:
-            question_text: What will be the output from this code?
-            code: "{print} 'The wheels on the bus go'\n{repeat} 3 {times} {print} ' round and round'"
+            question_text: Vad skriver den här koden ut?
+            code: "{print} 'Hjulen på bussen rullar'\n{repeat} 3 {times} {print} 'runt runt runt'"
             mp_choice_options:
-            -   feedback: Only the second line is repeated 3 times
-                option: "the wheels on the bus go\nround and round"
-            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
-                feedback: Only the second line is repeated 3 times
-            -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
-                feedback: Only the second line is repeated 3 times
-            -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
-                feedback: All though the town! Perfect!
+            -   feedback: Bara den andra raden upprepas tre gånger
+                option: "hjulen på bussen rullar\nrunt runt runt"
+            -   option: "hjulen på bussen rullar\nhjulen på bussen rullar\nhjulen på bussen rullar\nrunt runt runt"
+                feedback: Bara den andra raden upprepas tre gånger
+            -   option: "hjulen på bussen rullar\nrunt runt runt\nhjulen på bussen rullar\nrunt runt runt\nhjulen på bussen rullar\nrunt runt runt"
+                feedback: Bara den andra raden upprepas tre gånger
+            -   option: "hjulen på bussen rullar\nrunt runt runt\nrunt runt runt\nrunt runt runt"
+                feedback: Genom hela staden! Perfekt!
             correct_answer: D
-            hint: Only 'round and round' is repeated 3 times.
+            hint: Bara 'runt och runt' upprepas tre gånger.
             question_score: '10'
         8:
             mp_choice_options:
             -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
-                feedback: Awesome, you can't use the `{repeat}` command here.
-            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\"\n"
-                feedback: Where did you leave 'Do do do do'?
-            -   feedback: This is not the correct order..
+                feedback: Perfekt; du kan inte använda kommandot `{repeat}` här.
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n"
+                feedback: Vart tog 'Do do do do' vägen?
+            -   feedback: Detta är inte rätt ordning …
                 option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
-            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\"\n```\n"
-                feedback: This is not the correct order..
-            hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: Detta är inte rätt ordning …
+            hint: '`{repeat}` kan bara användas om du vill köra samma rad flera gånger.'
             correct_answer: A
             question_score: '10'
-            question_text: What Hedy code belongs to this output?
+            question_text: Vilken Hedy-kod ger den här utskriften?
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
         9:
-            question_text: What Hedy code belongs to this output?
+            question_text: Vilken Hedy-kod ger den här utskriften?
             code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
             mp_choice_options:
-            -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
-                feedback: Your repeated line is incorrect.
-            -   feedback: The `{print}` command is missing on line 3.
-                option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```\n"
-            -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
-                feedback: You're missing the quotation marks
-            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help !'\n{print} 'Please help me !'\n```\n"
-                feedback: Perfect
+            -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming!'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
+                feedback: Din upprepade rad är felaktig.
+            -   feedback: Kommandot `{print}` saknas på rad 3.
+                option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming!'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```\n"
+            -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming!\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
+                feedback: Det saknas citattecken
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming!'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'\n```\n"
+                feedback: Perfekt
             question_score: '10'
-            hint: "'Help!' is repeated 3 times."
+            hint: "'Help!' upprepas 3 gånger."
             correct_answer: D
         10:
             mp_choice_options:
             -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
-                feedback: Almost! the first line needs an extra word
-            -   feedback: Great!
+                feedback: Närapå! Den första raden behöver ett extra ord
+            -   feedback: Bra!
                 option: "```\n{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             -   option: "```\n{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n```\n"
-                feedback: This is not in the right order.
+                feedback: Detta är inte i rätt ordning.
             -   option: "```\n{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'\n```\n"
-                feedback: This is not in the right order.
-            hint: Mind the order of the sentences.
+                feedback: Detta är inte i rätt ordning.
+            hint: Tänk på ordningen på meningarna.
             question_score: '10'
-            question_text: What Hedy code belongs to this output?
+            question_text: Vilken Hedy-kod ger den här utskriften?
             code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
             correct_answer: B
         7:
-            question_text: What will be the output from this code?
+            question_text: Vad kommer den här koden att skriva ut?
             code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
             mp_choice_options:
             -   option: "We will We will\nROCK YOU!"
-                feedback: "'We will' won't appear twice in the same line"
+                feedback: "'We will' visas inte två gånger på samma rad"
             -   option: "We will\nWe will\nROCK YOU!"
-                feedback: Great!
+                feedback: Bra!
             -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
-                feedback: ROCK YOU! won't be repeated
+                feedback: ROCK YOU! kommer inte att upprepas
             -   option: "We will\nROCK YOU!"
-                feedback: Mind the repeat command
+                feedback: Tänk på kommandot upprepa
             correct_answer: B
-            hint: Mind the `{repeat}` command.
+            hint: Tänk på kommandot `{repeat}`.
             question_score: '10'
     8:
         1:
-            question_text: Which output will be produced by this code?
-            code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
+            question_text: Vad skriver den här koden ut?
+            code: "{repeat} 2 {times}\n    {print} 'Hej'\n    {print} 'Jag heter Hedy!'"
             mp_choice_options:
-            -   option: "Hello\nIm Hedy!\n"
-                feedback: Everything is printed twice.
-            -   option: "Hello\nHello\nIm Hedy\n"
-                feedback: The second line is repeated twice as well.
-            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!\n"
-                feedback: Super!
-            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!\"\n"
-                feedback: Everything is printed twice
+            -   option: "Hej\nJag heter Hedy!\n"
+                feedback: Allt skrivs ut två gånger.
+            -   option: "Hej\nHej\nJag heter Hedy\n"
+                feedback: Den andra raden upprepas två gånger också.
+            -   option: "Hej\nJag heter Hedy!\nHej\nJag heter Hedy!\n"
+                feedback: Superbra!
+            -   option: "Hej\nHej\nJag heter Hedy!\nJag heter Hedy!\n"
+                feedback: Allt skrivs ut två gånger
             correct_answer: C
-            hint: Both lines are repeated twice.
+            hint: Båda raderna upprepas två gånger.
             question_score: '10'
         2:
-            code: "{repeat} 5 {times}\n{print} 'Hedy is cool!'"
+            code: "{repeat} 5 {times}\n{print} 'Hedy är cool!'"
             mp_choice_options:
-            -   option: This should be only one line, not 2.
-                feedback: No it should be 2 lines.
+            -   option: Detta ska bara vara en rad, inte två.
+                feedback: Nej, det ska vara två rader.
             -   option: Det här `{print}` -kommandot ska bort.
-                feedback: No, you need it.
-            -   option: There is a spelling mistake in the `{repeat}` command.
-                feedback: Nee, repeat is de goede spelling
-            -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Korrekt!
-            question_text: What is wrong with this code?
+                feedback: Nej, det behövs.
+            -   option: Det är ett stavfel i kommandot `{repeat}`.
+                feedback: Nej, upprepa är rätt stavning
+            -   option: Den andra raden ska börja med fyra mellanslag som indrag.
+                feedback: Rätt!
+            question_text: Vad är fel med den här koden?
             correct_answer: D
-            hint: Something is missing in the second line?
+            hint: Saknas det något på andra raden?
             question_score: '10'
         3:
             mp_choice_options:
             -   option: "Baby shark tututudutudu\nBaby shark\n"
-                feedback: Mind the `{repeat}` command!
+                feedback: Tänk på kommandot `{repeat}`!
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
-                feedback: The last line has no indentation, so it's not repeated.
+                feedback: Den sista raden har ingen indragning, så den upprepas inte.
             -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
-                feedback: Right!
+                feedback: Just det!
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
-                feedback: What is being repeated and what isn't.
+                feedback: Vad som upprepas och vad som inte upprepas.
             correct_answer: C
-            question_text: What output will be produced when you run this program?
+            question_text: Vad skrivs ut när du kör det här programmet?
             code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
-            hint: What is being repeated and what is not?.
+            hint: Vad är det som upprepas och vad är det som inte upprepas?
             question_score: '10'
         4:
             mp_choice_options:
-            -   option: "The children went:\nYay!\nWere going on holiday!\n"
-                feedback: Mind the `{repeat}` command !
-            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!\n"
-                feedback: Korrekt!
-            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!\n"
-                feedback: This order is incorrect.
-            -   feedback: The last line is repeated too.
-                option: "The children went:\nYay!\nYay!\nWere going on holiday!\n"
+            -   option: "Barnen sa:\nYay!\nVi ska åka på semester!\n"
+                feedback: Tänk på kommandot `{repeat}`!
+            -   option: "Barnen sa:\nYay!\nVi ska åka på semester!\nYay!\nVi ska åka på semester!\n"
+                feedback: Rätt!
+            -   option: "Barnen sa:\nYay!\nYay!\nVi ska åka på semester!\nVi ska åka på semester!\n"
+                feedback: Den här ordningen är fel.
+            -   feedback: Sista raden upprepas också.
+                option: "Barnen sa:\nYay!\nYay!\nVi ska åka på semester!\n"
             correct_answer: B
-            hint: The block under the `{repeat}` command is repeated twice.
+            hint: Blocket under kommandot `{repeat}` upprepas två gånger.
             question_score: '10'
-            question_text: Which output is correct?
-            code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Were going on holiday!'"
+            question_text: Vilken utskrift är korrekt?
+            code: "{print} 'Barnen sa:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Vi ska åka på semester!'"
         5:
-            question_text: What is wrong with this code?
-            code: "end = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy {print} 'They lived happily ever after'\n{else} {print} 'The world exploded. The end.'"
+            question_text: Vad är fel med den här koden?
+            code: "slut = {ask} 'Vill du ha ett lyckligt eller sorgligt slut?'\n{if} slut {is} lyckligt {print} 'De levde lyckliga i alla sina dagar'\n{else} {print} 'Världen exploderade. Slut.'"
             mp_choice_options:
-            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
-            -   option: '`{else}` is not a command!'
-                feedback: It is!
-            -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: That's not true
-            -   option: '`{ask}` is no longer a command'
-                feedback: That's not true
+            -   option: '`{print}`-kommandona på de två sista raderna ska börja på nya rader med fyra mellanslag.'
+                feedback: Det stämmer!
+            -   option: '`{else}` är inte ett kommando!'
+                feedback: Det är det!
+            -   option: Rader som börjar med `{if}` ska ha fyra mellanslag i början
+                feedback: Det stämmer inte
+            -   option: '`{ask}` är inte längre ett kommando'
+                feedback: Det stämmer inte
             correct_answer: A
-            hint: Something is wrong with indentation
+            hint: Något är fel med indragningen
             question_score: '10'
         6:
             question_text: "What will be the output of this code when we enter pancakes?"
@@ -1170,218 +1170,218 @@ levels:
             hint: "The first sentence and question will not be repeated"
             question_score: '10'
         7:
-            question_text: What is wrong with this code?
-            code: "eten = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            question_text: Vad är fel med den här koden?
+            code: "mat = {ask} 'Vad vill du äta?'\n{if} mat {is} fries\nsås = {ask} 'Vilken sås vill du ha?'\n    {print} 'En fries med ' sås\n{if} mat {is} pizza\n    topping = {ask} 'Vilken topping vill du ha?'\n    {print} 'En pizza med ' topping\n{print} 'Tack för din beställning\""
             mp_choice_options:
-            -   option: Nothing this code is correct!
+            -   option: Ingenting; koden är rätt!
                 feedback: Något är fel!
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+            -   option: Det är inte tillåtet att ha ett `{if}` -kommando efter ett `{ask}` -kommando.
                 feedback: Det är du!
-            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the first `{if}` command.
-                feedback: That's right.
+            -   option: Du behöver inte använda indrag två gånger, bara i det första `{if}`-kommandot.
+                feedback: Du måste alltid ha indrag.
+            -   option: Indraget är fel i det första `{if}`-kommandot.
+                feedback: Det stämmer.
             correct_answer: D
-            hint: Take a careful look at the indentation.
+            hint: Titta noga på indragningen.
             question_score: '10'
         10:
             correct_answer: D
-            hint: Only one line starts with 4 spaces, but which one...?
+            hint: Bara en rad börjar med fyra mellanslag, men vilken …?
             question_score: '10'
-            question_text: Which statement is true?
+            question_text: Vilket påstående stämmer?
             code: "1 nivå = {ask} 'Vilken nivå är du på?'\n2 {if} nivå {is} 8\n3 {print} 'Bra jobbat!'"
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 3 should start with 4 spaces
-                feedback: You are correct!
+            -   option: Alla rader ska börja med fyra mellanslag
+                feedback: Det stämmer inte
+            -   option: Rad 2 och 3 ska börja med fyra mellanslag
+                feedback: Det stämmer inte
+            -   option: Rad 2 ska börja med fyra mellanslag
+                feedback: Det stämmer inte
+            -   option: Rad 3 ska börja med fyra mellanslag
+                feedback: Du har rätt!
         8:
             mp_choice_options:
             -   option: "```\n{if} svar {is} 32\n   {print} 'Du har ...'\n      {sleep}\n          {print} 'rätt!'\n      {else}\n          {print} 'Du har fel!'\n```\n"
-                feedback: You are wrong!
+                feedback: Du har fel!
             -   option: "```\n{if} svar {is} 32\n{print} 'Du har ...'\n{sleep}\n{print} 'Rätt!'\n{else}\n{print} 'Du har fel!'\n```\n"
-                feedback: You are wrong!
+                feedback: Du har fel!
             -   option: "```\n{if} svar {is} 32\n    {print} 'Du har ...'\n    {sleep}\n    {print} 'rätt!'\n{else}\n    {print} 'Du har fel!'\n```\n"
-                feedback: You are... right!
+                feedback: Du har … rätt!
             -   option: "```\n{if} svar {is} 32\n    {print} 'Du har ...'\n    {sleep}\n{print} 'rätt!'\n{else}\n    {print} 'Du har fel!'\n```\n"
-                feedback: You are wrong!
-            question_text: In which of the codes is the indentation done right?
+                feedback: Du har fel!
+            question_text: Vilken kod har rätt indragning?
             correct_answer: C
-            hint: What should happen if the person is right? And what else?
+            hint: Vad ska hända om personen har rätt? Och vad mer?
             question_score: '10'
         9:
-            question_text: What line(s) in this code should start with 4 spaces?
+            question_text: Vilken rad i denna kod ska börja med fyra mellanslag?
             code: "1 musik = {ask} 'Vilken är din favoritmusikgenre?'\n2 {if} musik {is} rock\n3 {print} ' 🤘'\n4 {else}\n5 {print} ' 👎'"
             mp_choice_options:
-            -   feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
-                option: Line 2 and 4
-            -   option: Only line 3
-                feedback: Not only 3...
-            -   option: Line 3, 4 and 5
-                feedback: Line 4 shouldn't
-            -   option: Line 3 and 5
-                feedback: Great job!
+            -   feedback: Raderna efter kommandona `{if}` och `{else}` ska börja med 4 mellanslag
+                option: Rad 2 och 4
+            -   option: Bara rad 3
+                feedback: Inte bara 3 …
+            -   option: Rad 3, 4 och 5
+                feedback: Inte rad 4
+            -   option: Rad 3 och 5
+                feedback: Bra jobbat!
             correct_answer: D
-            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            hint: Raderna efter ett `{if}`- eller `{else}`-kommando ska börja med fyra mellanslag.
             question_score: '10'
     9:
         1:
-            question_text: What is wrong with this code?
-            code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            question_text: Vad är fel med den här koden?
+            code: "{repeat} 3 {times}\n   mat = {ask} 'Vad skulle du vilja äta?'\n   {if} mat {is} fries\n       sås = {ask} 'Vilken sås vill du ha?'\n       {print} 'En fries med ' sås\n   {if} mat {is} pizza\n       topping = {ask} 'Vilken topping vill du ha?'\n       {print} 'En pizza med ' topping\n{print} \"Tack för din beställning\""
             mp_choice_options:
-            -   option: Nothing this code is correct!
+            -   option: Ingenting; koden är rätt!
                 feedback: Det stämmer!
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+            -   option: Det är inte tillåtet att ha ett `{if}`-kommando efter ett `{ask}`-kommando.
                 feedback: Det är du!
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: Du behöver inte använda indrag två gånger.
+                feedback: Du måste alltid ha indrag.
+            -   option: Indraget är fel i det sista `{if}`-kommandot.
+                feedback: Det är inte indragningen.
+            hint: Alla indragningar är rätt.
             question_score: '10'
             correct_answer: A
         2:
-            question_text: What will be printed after entering the correct password?
+            question_text: Vad skrivs ut när du matar in rätt lösenord?
             mp_choice_options:
             -   option: "```\nBra jobbat!\nBra jobbat!\n```"
-                feedback: That's not it!
+                feedback: Det är fel!
             -   option: "```\nDatorn kommer att explodera om 5.... 4... 3... 2... 1...\n```"
-                feedback: That's not it!
+                feedback: Det är fel!
             -   option: "```\nBra jobbat!\nBra jobbat!\nDu kan använda datorn!\n```"
-                feedback: That's not it!
+                feedback: Det är fel!
             -   option: "```\nBra jobbat!\nDu kan använda datorn!\nBra jobbat!\nDu kan använda datorn!\n```"
-                feedback: Korrekt!
+                feedback: Rätt!
             correct_answer: D
-            hint: Everything under the `{repeat}` command is repeated twice.
+            hint: Allt under kommandot `{repeat}` upprepas två gånger.
             question_score: '10'
-            code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
+            code: "lösenord = {ask} 'Vad är lösenordet?'\nrätt_lösenord = Hedy\n{if} lösenord {is} rätt_lösenord\n    {repeat} 2 {times}\n        {print} 'Bra jobbat!'\n        {print} 'Du kan använda datorn!'\n{else}\n    {print} 'Datorn kommer att explodera om 5 … 4 … 3 … 2 … 1 …'"
         3:
-            question_text: Which case should you choose to win a million dollars?
+            question_text: Vilken låda ska du välja för att vinna en miljon dollar?
             mp_choice_options:
-            -   option: case 1, sell
-                feedback: You don't win a million!
-            -   option: case 1, open
-                feedback: You don't win a million
-            -   option: case 2, sell
-                feedback: You don't win a million
-            -   option: case 2, open
-                feedback: Great job! You win!
+            -   option: låda 1, sälj
+                feedback: Du vinner inte en miljon!
+            -   option: låda 1, öppna
+                feedback: Du vinner inte en miljon
+            -   option: låda 2, sälj
+                feedback: Du vinner inte en miljon
+            -   option: låda 2, öppna
+                feedback: Bra jobbat! Du vinner!
             correct_answer: D
-            hint: Follow the right path
+            hint: Följ rätt väg
             question_score: '10'
-            code: "{print} 'Choose the right case and win!'\ncase = {ask} 'Which case will you pick? 1 or 2?'\n{if} case {is} 1\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell your case for 10 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win an apple pie'\n{if} case {is} 2\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell the case for 500 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win a million dollars!'"
+            code: "{print} 'Välj rätt låda och vinn!'\nlåda = {ask} 'Vilken låda väljer du? 1 eller 2?'\n{if} låda {is} 1\n     åtgärd = {ask} 'Öppna den eller sälj den?'\n         {if} åtgärd {is} sälj\n             {print} 'Du säljer din låda för 10 dollar'\n         {if} åtgärd {is} öppna\n             {print} 'Du öppnar lådan och vinner en äppelpaj'\n{if} låda {is} 2\n     åtgärd = {ask} 'Öppna den eller sälj den?'\n         {if} åtgärd {is} sälj\n             {print} 'Du säljer lådan för 500 dollar'\n         {if} åtgärd {is} öppna\n             {print} 'Du öppnar lådan och vinner en miljon dollar!'"
         4:
-            question_text: Which statement is true?
-            code: "name = {ask} 'What is your name?'\nsize = {ask} 'What is your shoe size?'\n{if} size {is} 38\n    {if} name {is} Cinderella\n        {print} 'I was looking for you!'\n    {else}\n        {print} 'You are not the one!'\n{else}\n    {print} 'Ill keep looking'"
+            question_text: Vilket påstående stämmer?
+            code: "name = {ask} 'Vad heter du?'\nstorlek = {ask} 'Vad är din skostorlek?'\n{if} storlek {is} 38\n    {if} namn {is} Askungen\n        {print} '❤️❤️❤️'\n    {else}\n        {print} 'Du är inte den rätta!'\n{else}\n    {print} 'Jag fortsätter att leta'"
             mp_choice_options:
-            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
-                feedback: No, she gets 'You are not the one!'
-            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
-                feedback: No, she gets 'Ill keep looking'
-            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
-            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
-                feedback: No she gets 'Ill keep looking'
+            -   option: Törnrosa med skostorlek 38 får svaret 'Jag fortsätter att leta'
+                feedback: Nej, hon får höra 'Du är inte den rätta!'
+            -   option: "Askungen med skostorlek 40 får utskriften '❤️❤️❤️'"
+                feedback: Nej, hon får 'Jag fortsätter att leta'
+            -   option: Törnrosa med skostorlek 40 får svaret 'Jag fortsätter att leta'
+                feedback: Det stämmer!
+            -   option: Askungen med skostorlek 38 får svaret 'Jag fortsätter att leta'
+                feedback: Nej, hon får '❤️❤️❤️'
             correct_answer: C
-            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            hint: Oavsett vad du heter, om du har skostorlek 40 kommer du att få meddelandet 'Jag fortsätter att leta'.
             question_score: '10'
         5:
-            question_text: Which code produced this output?
-            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            question_text: Vilken kod gav det här resultatet?
+            output: "Glass är bäst!\nGlass är bäst!\nGlass är bäst!"
             mp_choice_options:
-            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
-                feedback: Don't forget the indentation after `{repeat}` commands.
-            -   feedback: Use indentation after an `{if}` command
-                option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
-            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+            -   option: "```\ndessert = {ask} 'Vilken är din favorittyp av efterrätt?'\n{if} dessert {is} glass\n    {repeat} 3 {times}\n    {print} 'Glass är bäst!'\n```\n"
+                feedback: Glöm inte indragningen efter `{repeat}`-kommandon.
+            -   feedback: Använd indrag efter ett `{if}`-kommando
+                option: "```\ndessert = {ask} 'Vilken är din favorittyp av efterrätt?'\n{if} dessert {is} glass\n{repeat} 3 {times}\n    {print} 'Glass är bäst!'\n```\n"
+            -   option: "```\ndessert = {ask} 'Vilken är din favorittyp av efterrätt?'\n{if} dessert {is} glass\n    {repeat} 3 {times}\n        {print} 'Glass är bäst!'\n```\n"
                 feedback: Perfect
-            -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
-                feedback: There are 2 `{repeat}` commands in this code.
+            -   option: "```\n{repeat} 3 {times}\n    dessert = {ask} 'Vilken är din favorittyp av efterrätt?'\n    {if} dessert {is} glass\n        {repeat} 3 {times}\n        {print} 'Glass är bäst!'\n```\n"
+                feedback: Det finns två `{repeat}`-kommandon i den här koden.
             correct_answer: C
-            hint: Watch the indentation
+            hint: Titta på indraget
             question_score: '10'
         10:
             mp_choice_options:
-            -   feedback: Only line 2 and 3 start with spaces
-                option: All lines should start with 4 spaces
-            -   feedback: Line 3 should start with 8
-                option: Line 2 and 3 should start with 4 spaces
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
+            -   feedback: Bara rad 2 och 3 börjar med mellanslag
+                option: Alla rader ska börja med fyra mellanslag
+            -   feedback: Rad 3 ska börja med åtta
+                option: Rad 2 och 3 ska börja med fyra mellanslag
+            -   option: Rad 2 och 3 ska börja med åtta mellanslag
+                feedback: Rad 2 ska börja med fyra
+            -   option: rad 2 ska börja med fyra mellanslag och rad 3 med åtta
+                feedback: Du har rätt!
             correct_answer: D
-            hint: The first line doens't start with any spaces
+            hint: Den första raden börjar inte med några mellanslag
             question_score: '10'
-            question_text: Which statement is true?
-            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Great job!"
+            question_text: Vilket påstående stämmer?
+            code: "1 {repeat} 2 {times}\n2 {if} nivå {is} 9\n3 {print} Bra jobbat!"
         6:
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: Glöm inte de andra
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: Glöm inte `{else}`!
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: Fortsätt så!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+                feedback: Inte med skriv
+            question_text: Efter vilket/vilka kommandon ska du använda indrag (börja nästa rad med 4 mellanslag)?
             correct_answer: C
-            hint: Indentation happens on the line below some commands
+            hint: Indrag sker på raden under vissa kommandon
             question_score: '10'
         7:
             question_text: "Du får 5 dollar i rabatt om du beställer en mediumpizza med cola.<br>Men koden har ett fel! Hur kan man felsöka den?"
-            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
+            code: "{if} mat {is} pizza\n{if} storlek {is} medium\n{if} dricka {is} cola\npris = pris - 5"
             mp_choice_options:
-            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
-                feedback: Amazing!
+            -   option: "```\n{if} mat {is} pizza\n    {if} storlek {is} medium\n        {if} dricka {is} cola\n            pris = pris - 5\n```\n"
+                feedback: Fantastiskt!
             -   feedback: Den andra `{if}`-satsen saknar kod!
-                option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
-            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
+                option: "```\n{if} mat {is} pizza\n    {if} storlek {is} medium\n{if} dricka {is} cola\n    pris = pris - 5\n```\n"
+            -   option: "```\n{if} mat {is} pizza\n{if} storlek {is} medium\n{if} dricka {is} cola\n        pris = pris - 5\n```\n"
                 feedback: Två `{if}` på rad är aldrig rätt.
-            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
+            -   option: "```\n{if} mat {is} pizza\n    {if} storlek {is} medium\n        {if} dricka {is} cola\n        pris = pris - 5\n```\n"
                 feedback: Nästan rätt, men titta på den sista raden.
             correct_answer: A
-            hint: After each `{if}` command, the line below should indent
+            hint: Efter varje `{if}`-kommando ska raden nedanför dras in
             question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: Vad är det för fel på den här koden?
             code: "ålder = {ask} 'Grattis på födelsedagen! Hur gammal är du?'\nsång = {ask} 'Vill du att vi ska sjunga?'\n{if} sång {is} ja\n    {repeat} ålder {times}\n        {print} 'Hipp hipp hurra'"
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
+            -   option: Du kan inte ställa två frågor i rad
+                feedback: Jo, det kan du.
+            -   option: Variabeln 'ålder' används senare som 'år'
+                feedback: Det var skarpsynt! Bra jobbat!
+            -   option: Du får inte börja med 8 mellanslag, som på rad 4 och 5
+                feedback: Du måste faktiskt börja på det sättet.
+            -   option: Koden måste alltid börja med ett `{print}`-kommando på första raden
+                feedback: Det stämmer inte.
             correct_answer: B
-            hint: The indentation is done right this time
+            hint: Indragningen är rätt den här gången
             question_score: '10'
         9:
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_text: Hur många `{if}`-kommandon kan man ha inuti ett annat `{if}`-kommando?
             mp_choice_options:
-            -   feedback: You are allowed to
-                option: None, that is not allowed
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   feedback: Du får
+                option: Inga – det är inte tillåtet
+            -   option: Bara en
+                feedback: Du kan använda mer om du vill
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
+                feedback: Du kan använda fler om du vill
+            -   option: Oändligt, så länge du fortsätter att använda indrag på rätt sätt
+                feedback: Det är sant
             correct_answer: D
-            hint: You can put an `{if}` command inside an `{if}` command.
+            hint: Du kan ha ett `{if}`-kommando inuti ett `{if}`-kommando.
             question_score: '10'
     11:
         1:
             question_text: "What word should be at the place of the question mark?"
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
@@ -1538,11 +1538,11 @@ levels:
         7:
             question_text: "What should be on the place of the question mark?"
             code: |-
-                {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
-                _?_
-                    food is {ask} 'What would you like to order?'
-                    {print} food
+                {print} 'Välkommen till Hedys restaurang'
+                personer = {ask} 'Hur många kommer att äta här ikväll?'
+                _
+                    mat = {ask} 'Vad skulle du vilja beställa?'
+                    {print} mat
             mp_choice_options:
             -   option: |
                     ```
@@ -1587,23 +1587,23 @@ levels:
         9:
             question_text: "How many times does Hedy chant Hip Hip Hooray?"
             code: |-
-                age = {ask} 'How old are you?'
-                {for} i {in} {range} 1 {to} age
-                    {print} 'Hip Hip Hoorray!'
+                ålder = {ask} 'Hur gammal är du?'
+                {for} i {in} {range} 1 {to} ålder
+                    {print} 'Hipp Hipp Hurra!'
             mp_choice_options:
-            -   option: "1 time"
-                feedback: "Try again"
-            -   option: "2 times"
-                feedback: "Try again"
-            -   option: "Never"
-                feedback: "Try again"
-            -   option: "That depends on how old you are"
-                feedback: "That's right!"
+            -   option: "En gång"
+                feedback: "Försök igen"
+            -   option: "Två gånger"
+                feedback: "Försök igen"
+            -   option: "Aldrig"
+                feedback: "Försök igen"
+            -   option: "Det beror på hur gammal du är"
+                feedback: "Det stämmer!"
             correct_answer: "D"
-            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` ålder"
             question_score: '10'
         10:
-            question_text: "Which code belongs to this output?"
+            question_text: "Vilken Hedy-kod ger den här utskriften?"
             output: |-
                 Baby shark tututudutudu
                 Baby shark tututudutudu
@@ -1616,89 +1616,89 @@ levels:
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "Mind the indention"
+                feedback: "Tänk på indragningen"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "That's right!"
+                feedback: "Det stämmer!"
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 är fyra gånger."
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 är fyra gånger."
             correct_answer: "B"
-            hint: "Mind the indention"
+            hint: "Tänk på indragningen"
             question_score: '10'
     10:
         1:
             mp_choice_options:
-            -   option: "```\n{for} each compliment\n```\n"
-                feedback: That's not it
-            -   option: "```\n{for} compliment {in} compliments\n```\n"
-                feedback: You deserve all those compliments!
-            -   option: "```\n{if} compliment {in} compliments\n```\n"
-                feedback: That's not it
-            -   option: "```\n{for} compliments {in} compliment\n```\n"
-                feedback: Almost there!
+            -   option: "```\n{for} varje komplimang\n```\n"
+                feedback: Det är fel
+            -   option: "```\n{for} komplimang {in} komplimanger\n```\n"
+                feedback: Du förtjänar alla dessa komplimanger!
+            -   option: "```\n{if} komplimang {in} komplimanger\n```\n"
+                feedback: Det är fel
+            -   option: "```\n{for} komplimanger {in} komplimang\n```\n"
+                feedback: Nästan framme!
             question_text: Vad måste vi fylla i på `_` om vi vill skriva ut varje komplimang?
-            code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
+            code: "komplimanger = perfekt, bra jobbat, fantastiskt\n_\n    {print} komplimang"
             question_score: '10'
             correct_answer: B
-            hint: '`{for}` each compliment in the lists of compliments...'
+            hint: '`{for}` varje komplimang i listan av komplimanger …'
         4:
-            code: "groceries = apples, bread, milk\n{for} item {in} groceries\n    {print} 'We need ' groceries"
+            code: "matvaror = äpplen, bröd, mjölk\n{for} mat {in} matvaror\n    {print} 'Vi behöver ' matvaror"
             mp_choice_options:
-            -   option: Line 2 needs to start with 4 spaces as indentation
-                feedback: No it doesn't. Only line 3 needs indentation, which it has.
-            -   option: Line 3 does not need to start with 4 spaces as indentation
-                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
-            -   option: Line 3 should say item instead of groceries
-                feedback: Good job!
-            -   option: Line 2 should say groceries instead of item
-                feedback: No it does not.
-            question_text: What's wrong with this code?
+            -   option: Rad 2 ska börja med fyra mellanslag som indrag
+                feedback: Nej, det behöver den inte. Bara rad 3 behöver indrag, vilket den har.
+            -   option: Rad 3 behöver inte börja med fyra mellanslag som indrag
+                feedback: Rad 2 är ett `{for}`-kommando, så rad 3 måste börja med ett indrag.
+            -   option: På rad 3 ska det stå mat istället för matvaror
+                feedback: Bra jobbat!
+            -   option: På rad 2 ska det stå matvaror istället för mat
+                feedback: Nej, det ska det inte.
+            question_text: Vad är det för fel på den här koden?
             correct_answer: C
-            hint: Line 2 says `{for}` each item in the list of groceries
+            hint: Rad 2 säger `{for}` varje mat i listan över matvaror
             question_score: '10'
         6:
             mp_choice_options:
-            -   option: Kelly chooses rock
-                feedback: Meredith wants to play too!
-            -   feedback: So close! But Kelly is first in the list, so she goes first
-                option: "Meredith chooses scissors\nKelly chooses rock"
-            -   option: Meredith chooses paper
-                feedback: Kelly wants to play too!
-            -   option: "Kelly chooses paper\nMeredith chooses scissors"
-                feedback: Amazing!
+            -   option: Kelly väljer sten
+                feedback: Meredith vill också spela!
+            -   feedback: Så nära! Men Kelly är först i listan, så hon är först ut
+                option: "Meredith väljer sax\nKelly väljer sten"
+            -   option: Meredith väljer påse
+                feedback: Kelly vill också spela!
+            -   option: "Kelly väljer påse\nMeredith väljer sax"
+                feedback: Fantastiskt!
             correct_answer: D
-            hint: Each player will pick an option. The player that's first on the list will go first.
+            hint: Varje spelare väljer ett alternativ. Den spelare som är först i listan börjar.
             question_score: '10'
-            question_text: Which of the answers below is a possible outcome when you run the code?
-            code: "choices = rock, paper, scissors\nplayers = Kelly, Meredith\n{for} player {in} players\n    {print} player ' chooses ' choices {at} {random}"
+            question_text: Vilket av svaren nedan är möjligt när du kör koden?
+            code: "val = sten, sax, påse\nspelarna = Kelly, Meredith\n{for} spelare {in} spelarna\n    {print} spelare ' väljer ' val {at} {random}"
         7:
             mp_choice_options:
-            -   option: "```\n{for} name {in} names\n```\n"
-                feedback: You are on fire!
-            -   option: "```\n{for} names {in} name\n```\n"
-                feedback: No it should be for each name in the list nameS, so the other way around
+            -   option: "```\n{for} namn {in} namnen\n```\n"
+                feedback: Du äger!
+            -   option: "```\n{for} namnen {in} namn\n```\n"
+                feedback: Nej, det ska vara för varje namn i listan namnen, så tvärtom
             -   option: "```\n{for} food {in} food\n```\n"
                 feedback: Each name should be told what they will have for dinner.
             -   option: "```\n{for} name {in} food\n```\n"
                 feedback: Each name should be told what they will have for dinner.
-            question_text: What line should be on the _?_ in this code that decides what these people will have for dinner?
-            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_?_\n    {print} name ' has to eat ' food {at} {random} ' for dinner'"
+            question_text: Vilken rad skall finnas på _ i den här koden som bestämmer vad personerna skall äta till middag?
+            code: "namnen = Ron, Leslie, April, Andy\nmat = pasta, pommes, sallad\n_\n    {print} namn ' måste äta ' mat {at} {random} ' till middag'"
             correct_answer: A
             hint: Each name should be told what they will have for dinner.
             question_score: '10'
@@ -1733,49 +1733,49 @@ levels:
             hint: Try to imagine the output of this code.
             question_score: '10'
         2:
-            question_text: Which output is correct?
-            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            question_text: Vilken utskrift är korrekt?
+            code: "maträtter = pizza, pasta, pannkakor\n{for} mat {in} maträtter\n    {print} 'Jag älskar ' mat"
             mp_choice_options:
-            -   option: I love pizza
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pasta
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pancakes
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: "I love pizza\nI love pasta\nI love pancakes"
-                feedback: Great!
+            -   option: Jag älskar pizza
+                feedback: Rad 2 säger `{for}` varje mat i listan med maträtter. Så varje maträtt skrivs ut.
+            -   option: Jag älskar pasta
+                feedback: Rad 2 säger `{for}` varje mat i listan över maträtter. Så varje maträtt skrivs ut.
+            -   option: Jag älskar pannkakor
+                feedback: Rad 2 säger `{for}` varje mat i listan över maträtter. Så varje maträtt skrivs ut.
+            -   option: "Jag älskar pizza\nJag älskar pasta\nJag älskar pannkakor"
+                feedback: Bra!
             correct_answer: D
             question_score: '10'
-            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+            hint: Rad 2 säger för varje mat i listan över maträtter. Så varje maträtt skrivs ut.
         3:
-            question_text: Which output is correct?
-            code: "animals = dogs, cats, hamsters, chickens\n{for} animal {in} animals\n    {print} animal ' are lovely pets'"
+            question_text: Vilken utskrift är korrekt?
+            code: "djuren = hundar, katter, hamstrar, höns\n{for} djur {in} djuren\n    {print} djur ' är underbara husdjur'"
             mp_choice_options:
-            -   option: dogs are lovely pets
-                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-            -   option: dogs, cats, hamsters, chickens are lovely pets
-                feedback: Each animal gets their own line in the output.
-            -   option: "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
-                feedback: Great!
-            -   feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-                option: You don't know yet. Because it chooses one of the animals {at} {random}.
+            -   option: hundar är underbara husdjur
+                feedback: Rad 2 säger {for} varje djur i listan över djuren. Så varje djur {print}s ut.
+            -   option: hundar, katter, hamstrar, höns är underbara husdjur
+                feedback: Varje djur får sin egen rad i utskriften.
+            -   option: "hundar är underbara husdjur\nkatter är underbara husdjur\nhamstrar är underbara husdjur\nkycklingar är underbara husdjur"
+                feedback: Jättebra!
+            -   feedback: Rad 2 säger {for} varje djur i listan över djuren. Så varje djur {print}s ut.
+                option: Du vet inte än, eftersom den väljer ett av djuren {at} {random}.
             correct_answer: C
-            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            hint: Rad 2 säger {for} varje djur i listan över djuren. Så varje djur skrivs ut
             question_score: '10'
         5:
-            question_text: What word should be on the _?_ with these digital dice?
-            code: "{print} 'Welcome to the digital dice!'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' _?_ {at} {random}"
+            question_text: Vilket ord ska stå på _ med dessa digitala tärningar?
+            code: "{print} 'Välkommen till de digitala tärningarna!'\nspelarna = Ann, John, Jesse\nval = 1, 2, 3, 4, 5, 6\n{for} spelare {in} spelarna\n    {print} spelare ' kastar ' _ {at} {random}"
             mp_choice_options:
-            -   option: players
-                feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
-            -   option: choices
-                feedback: That's right!
-            -   option: choice
-                feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
-            -   option: dice
-                feedback: Look at the names of the variables.
+            -   option: spelarna
+                feedback: Det skulle bli 'Ann kastar Jesse', istället för 'Ann kastar 6'.
+            -   option: val
+                feedback: Det stämmer!
+            -   option: val
+                feedback: Du är väldigt nära. Men du behöver låta Hedy välja från listan som heter 'val', inte 'valen' …
+            -   option: tärning
+                feedback: Titta på variablernas namn.
             correct_answer: B
-            hint: Hedy needs to pick a number `{at} {random}`
+            hint: Hedy behöver välja ett tal `{at} {random}`
             question_score: '10'
         9:
             question_text: Vad är det första Hedy kommer att fråga dig när du kör programmet?
