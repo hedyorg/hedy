@@ -137,9 +137,7 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        levels = []
-        for i in range(1, hedy.HEDY_MAX_LEVEL + 1):
-            levels.append(i)
+        levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
 
         students = []
         for student_username in class_.get("students", []):
