@@ -23,4 +23,3 @@ export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
 export * from  './student-tile';
-export * from  './student-tile-chart';
