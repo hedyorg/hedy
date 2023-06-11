@@ -83,7 +83,7 @@ class StatisticsModule(WebsiteModule):
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
-                # calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
             average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
