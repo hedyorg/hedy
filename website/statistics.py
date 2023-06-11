@@ -594,7 +594,6 @@ def find_success_rate_overall(quizzes):
     :param quizzes: A list of dictionaries representing quiz data.
     :return: The overall success rate for the quizzes as a float, or "-" if there are no quizzes.
     """
-    success_rate_overall = "-"
     if len(quizzes) == 0:
         return "-"
     else:
