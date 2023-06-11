@@ -143,7 +143,6 @@ class StatisticsModule(WebsiteModule):
 
         students = []
         for student_username in class_.get("students", []):
-            print(f'Student: {student_username}')
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
             quizzes = self.db.get_quiz_stats([student_username])
@@ -518,6 +517,15 @@ def get_general_class_stats(students):
 
 # append the programs obtained on each level
 def find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level):
+    """
+    Finds program runs per level and appends them to lists.
+
+    :param program_runs_per_level: list of lists containing program run information per level
+    :param success_runs_per_level: list of successful program runs per level
+    :param error_runs_per_level: list of unsuccessful program runs per level
+    :param programs: list of dictionaries containing program information
+    :param level: current level
+    """
     program_runs_per_level.append([])
     success_runs_per_level.append([])
     error_runs_per_level.append([])
@@ -530,35 +538,54 @@ def find_program_runs_per_level(program_runs_per_level, success_runs_per_level, 
                 error_runs_per_level[level - 1].append(program['name'])
 
 
-# append the quizzes obtained on each level
 def find_quizzes_per_level(quizzes_per_level, quizzes, level):
+    """
+    Finds the quizzes per level and appends them to a list.
+
+    :param quizzes_per_level: list of lists containing the number of quizzes per level
+    :param quizzes: list of dictionaries containing quiz information
+    :param level: current level
+    :return: updated list of quizzes per level
+    """
     quizzes_per_level.append([])
-    for quiz_score in quizzes:
-        if quiz_score['level'] == level:
+    for quiz_scores in quizzes:
+        if quiz_scores['level'] == level:
             # if a quiz level is repeated in a different week, you need to handle it differently.
-            if len(quiz_score["scores"]) == 1:
-                quizzes_per_level[level - 1].append(quiz_score["scores"][0])
+            if len(quiz_scores["scores"]) == 1:
+                quizzes_per_level[level - 1].append(quiz_scores["scores"][0])
             else:
-                weekly_quiz_scores = quiz_score["scores"]
-                quizzes_per_level[level - 1] = weekly_quiz_scores
+                quizzes_per_level[level - 1] = quiz_scores["scores"]
 
 
 def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level, level):
+    """
+    Calculates the average number of quizzes ran per level and appends it to a list.
+
+    :param avg_quizzes_ran_per_level: list of average quizzes ran per level
+    :param quizzes_ran_per_level: list of lists containing the number of quizzes ran per level
+    :param level: current level
+    :return: updated list of average quizzes ran per level
+    """
     if not quizzes_ran_per_level[level - 1]:
         avg_quizzes_ran_per_level.append(0)
     else:
         quizzes_per_level = quizzes_ran_per_level[level - 1]
-        if len(quizzes_ran_per_level[level - 1]) == 1:
-            avg_quizzes_ran_per_level.append(quizzes_per_level[0])
-        if len(quizzes_ran_per_level[level - 1]) > 1:
-            avg_quiz = sum(quizzes_per_level) / len(quizzes_per_level)
-            avg_quizzes_ran_per_level.append(int(avg_quiz))
+        avg_quiz = sum(quizzes_per_level) / len(quizzes_per_level)
+        avg_quizzes_ran_per_level.append(int(avg_quiz))
 
     return avg_quizzes_ran_per_level
 
 
-# count the number of programs that the student has run each level
 def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, error_runs_per_level, level):
+    """
+    Calculates the number of successful and unsuccessful program runs per level.
+
+    :param programs_ran_per_level: list of lists containing program run information per level
+    :param success_runs_per_level: list of successful program runs per level
+    :param error_runs_per_level: list of unsuccessful program runs per level
+    :param level: current level
+    :return: updated lists of successful and unsuccessful program runs per level
+    """
     if len(programs_ran_per_level[level - 1]) != 0:
         successful_runs = 0
         unsuccessful_runs = 0
