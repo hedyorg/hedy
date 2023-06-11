@@ -623,10 +623,10 @@ def calc_average_quizzes(average_quizzes_ran_per_level):
     average_quizzes = "-"
     num_quizzes = 0
     total_quiz_scores = 0
-    for i in range(1, len(average_quizzes_ran_per_level) + 1):
-        if average_quizzes_ran_per_level[i - 1] != 0:
+    for i in range(len(average_quizzes_ran_per_level)):
+        if average_quizzes_ran_per_level[i] != 0:
             num_quizzes += 1
-            total_quiz_scores += average_quizzes_ran_per_level[i - 1]
+            total_quiz_scores += average_quizzes_ran_per_level[i]
     if num_quizzes != 0:
         average_quizzes = total_quiz_scores / num_quizzes
     return average_quizzes
