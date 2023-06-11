@@ -143,7 +143,6 @@ class StatisticsModule(WebsiteModule):
 
         students = []
         for student_username in class_.get("students", []):
-            print(f'Student: {student_username}')
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
             quizzes = self.db.get_quiz_stats([student_username])
