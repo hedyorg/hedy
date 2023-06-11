@@ -7,17 +7,17 @@
     {% include "quiz/incl-question-progress.html" %}
     <div>
         <div class="my-10 text-3xl font-bold text-blue-900 text-center">
-            {{ question.text }}
+            {{ question.text|commonmark }}
         </div>
         {% if question.code %}
-        <div class="turn-pre-into-ace w-3/4 max-w-3xl mx-auto my-4 ace-container">
+        <div class="turn-pre-into-ace w-2/3 max-w-3xl mx-auto my-4 ace-container">
             <pre class="quiz-question" level="{{ level }}">{{ question.code }}</pre>
         </div>
         {% endif %}
 
         {% if question.output %}
-        <div class="w-3/4 mx-auto my-4 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto">
-            {{ question.output }}
+        <div class="w-2/3 mx-auto my-4 rounded p-2 px-3 bg-gray-900 color-white text-lg overflow-auto">
+            <pre>{{ question.output }}</pre>
         </div>
         {% endif %}
 
