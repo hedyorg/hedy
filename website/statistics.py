@@ -85,7 +85,10 @@ class StatisticsModule(WebsiteModule):
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
                 calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
+            # average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
+            non_zero_grades = [grade for grade in avg_quizzes_runs_per_level if grade != 0]
+            average_quizzes = sum(non_zero_grades) / len(non_zero_grades)
+
             success_rate_overall = find_success_rate_overall(quizzes)
 
             finished_quizzes = any("finished" in x for x in quizzes)
