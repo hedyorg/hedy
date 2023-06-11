@@ -374,7 +374,7 @@ adventures:
                 example_code: "```\nalternativ = 'sten', 'sax', 'påse'\nditt val = {ask} 'Vad väljer du?'\ndatorval = alternativ {at} {random}\n{print} 'Du väljer' ditt_val\n{print} 'Datorn väljer ' datorval\n{if} datorval {is} ditt_val\n    {print} 'Oavgjort'\n{if} datorval {is} 'sten' {and} ditt_val {is} 'påse'\n    {print} 'Du vann!'\n{if} datorval {is} 'sten' {and} ditt_val {is} 'sax'\n    {print} 'Datorn vann!'\n_\n```\n"
                 start_code: '# skriv din kod här'
         name: Sten, sax, påse
-        default_save_name: Sten_2
+        default_save_name: Sten
     calculator:
         name: Kalkylator
         description: Gör en kalkylator
@@ -929,4 +929,4 @@ adventures:
             2:
                 story_text: "Nu när du har lärt dig använda kommandot `{ask} kan du göra din sten, sax, påse-kod interaktiv också!\n\n### Övning\nGör sten, sax, påse-koden interaktiv genom att lägga till kommandot `{ask}` och en fråga.\n"
                 example_code: "```\nval är _\n{print} Jag väljer val\n```\n"
-                start_code: "# skriv din kod här"
+                start_code: ""

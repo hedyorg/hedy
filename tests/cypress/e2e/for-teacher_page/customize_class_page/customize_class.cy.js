@@ -72,7 +72,7 @@ describe('customize class page', () => {
 
     it('the quiz score holds the value typed to it', () => {
       // testing quiz score feature
-      cy.getBySel('quiz_input').clear().type("50").should("have.value", "50");
+      cy.getBySel('quiz_input').type("50").should("have.value", "50");
     });
 
 

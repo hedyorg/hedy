@@ -12,7 +12,7 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
-from .frontend_types import SaveInfo, Program
+from .types import SaveInfo, Program
 from . import querylog
 
 

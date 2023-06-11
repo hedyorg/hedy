@@ -274,24 +274,41 @@ function initializeMainEditor($editor: JQuery) {
 
   window.Range = ace.require('ace/range').Range // get reference to ace/range
 
-  if (dir === "rtl") {
-      editor.setOptions({ rtl: true });
-  }
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const loadedProgram = $editor.data('loaded-program');
 
-  // If prompt is shown and user enters text in the editor, hide the prompt.
-  editor.on('change', function () {
-    if (askPromptOpen) {
-      stopit();
-      editor.focus(); // Make sure the editor has focus, so we can continue typing
+    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+    const programFromStorage = storage.getItem(currentTabLsKey());
+    if (loadedProgram !== 'True' && programFromStorage) {
+      editor.setValue(programFromStorage?.trim(), MOVE_CURSOR_TO_END);
     }
-    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-    askPromptOpen = false;
-    $ ('#runit').css('background-color', '');
 
-    clearErrors(editor);
-    //removing the debugging state when loading in the editor
-    stopDebug();
-  });
+    // When the user exits the editor, save what we have.
+    editor.on('blur', function(_e: Event) {
+      storage.setItem(currentTabLsKey(), editor.getValue());
+    });
+
+    if (dir === "rtl") {
+        editor.setOptions({ rtl: true });
+    }
+
+    // If prompt is shown and user enters text in the editor, hide the prompt.
+    editor.on('change', function () {
+      if (askPromptOpen) {
+        stopit();
+        editor.focus(); // Make sure the editor has focus, so we can continue typing
+      }
+      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+      askPromptOpen = false;
+      $ ('#runit').css('background-color', '');
+
+      clearErrors(editor);
+      //removing the debugging state when loading in the editor
+      stopDebug();
+    });
+  }
 
   // *** KEYBOARD SHORTCUTS ***
 
@@ -1515,6 +1532,29 @@ function initializeModalEditor($editor: JQuery) {
   error.setEditor(editor);
 
   window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+      let tempIndex = 0;
+      let resultString = "";
+
+      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))){
+        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
+        let tempString = ""
+        for (let i = 0; i < resultString.length + 1; i++) {
+          setTimeout(function() {
+            editor.setValue(tempString,tempIndex);
+            tempString += resultString[tempIndex];
+            tempIndex++;
+          }, 150 * i);
+        }
+      }
+      else{
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
+        editor.setValue(resultString);
+      }
+  }
 
   // *** KEYBOARD SHORTCUTS ***
 

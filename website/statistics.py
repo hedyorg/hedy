@@ -83,7 +83,7 @@ class StatisticsModule(WebsiteModule):
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+                # calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
             average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
@@ -143,6 +143,7 @@ class StatisticsModule(WebsiteModule):
 
         students = []
         for student_username in class_.get("students", []):
+            print(f'Student: {student_username}')
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
             quizzes = self.db.get_quiz_stats([student_username])
@@ -159,9 +160,9 @@ class StatisticsModule(WebsiteModule):
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+                # calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
+            print(quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
 
             finished_quizzes = any("finished" in x for x in quizzes)
@@ -182,7 +183,6 @@ class StatisticsModule(WebsiteModule):
                     "success_rate_highest_level": success_rate_highest_level,
                     "success_rate_overall": success_rate_overall,
                     "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
-                    "average_quiz": average_quizzes,
                     "highest_level_quiz": highest_level_quiz,
                     "highest_level_quiz_score": highest_level_quiz_score,
                 }
@@ -535,7 +535,14 @@ def find_quizzes_per_level(quizzes_per_level, quizzes, level):
     quizzes_per_level.append([])
     for quiz_score in quizzes:
         if quiz_score['level'] == level:
-            quizzes_per_level[level - 1].append(quiz_score["scores"][0])
+            # if a quiz is repeated in different weeks need to handle it differently.
+            if len(quiz_score) == 1:
+                print(quiz_score[0])
+                quizzes_per_level[level - 1].append(quiz_score[0])
+            else:
+                weekly_quiz_scores = quiz_score["scores"]
+                quizzes_per_level[level - 1].append(weekly_quiz_scores)
+            print(quizzes_per_level[level - 1])
 
 
 def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level, level):
@@ -546,7 +553,8 @@ def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level,
         if len(quizzes_ran_per_level[level - 1]) == 1:
             avg_quizzes_ran_per_level.append(quizzes_per_level[0])
         if len(quizzes_ran_per_level[level - 1]) > 1:
-            avg_quizzes_ran_per_level.append(sum(quizzes_per_level)/len(quizzes_per_level))
+            avg_quiz = sum(quizzes_per_level) / len(quizzes_per_level)
+            avg_quizzes_ran_per_level.append(int(avg_quiz))
 
     return avg_quizzes_ran_per_level
 

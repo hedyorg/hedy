@@ -8,9 +8,6 @@ export interface Adventure {
   /** The type of adventure */
   is_teacher_adventure: boolean;
 
-  /** Is this an adventure about a keyword? */
-  is_command_adventure: boolean;
-
   /** Markdown for the introductory paragraph */
   text?: string;
 

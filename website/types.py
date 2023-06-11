@@ -85,7 +85,6 @@ class Adventure:
     save_name: str
     start_code: str
     is_teacher_adventure: bool
-    is_command_adventure: bool
     image: Optional[str] = None
     example_code: Optional[str] = None
     extra_stories: Optional[List[ExtraStory]] = field(default_factory=list)
@@ -102,5 +101,4 @@ class Adventure:
             save_name=row['name'],
             start_code='',  # Teacher adventures don't seem to have this
             text=row['content'],
-            is_teacher_adventure=True,
-            is_command_adventure=False)
+            is_teacher_adventure=True)

@@ -171,14 +171,14 @@ adventures:
 
                     In the example code, we continue until a correct answer has been given.
                     If the correct answer is never given, the loop never ends!
-                example_code: |2
+                example_code: |
 
-                    ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                    ```
+                          ```
+                          answer = 0
+                          {while} answer != 25
+                              answer = {ask} 'What is 5 times 5?'
+                          {print} 'A correct answer has been given'
+                          ```
             16:
                 start_code: |-
                     fruit = ['apple', 'banana', 'cherry']
@@ -186,15 +186,15 @@ adventures:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
-                example_code: |2
+                example_code: |
 
-                    ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
-                    ```
+                          ```
+                          friends = ['Ahmed', 'Ben', 'Cayden']
+                          lucky_numbers = [15, 18, 6]
+                          {for} i {in} {range} 1 {to} 3
+                              {print} 'the lucky number of ' friends[i]
+                              {print} 'is ' lucky_numbers[i]
+                          ```
             17:
                 start_code: |-
                     {for} i {in} {range} 1 {to} 10:
@@ -246,15 +246,15 @@ adventures:
 
                     За тази цел ти ще напишеш малко повече код. Ха!
 
-                example_code: |2
+                example_code: |
 
-                    ```
-                    name is ask Как се нарича главаната героиня?
-                    print name сега навлиза в гората.
-                    print Тя е малко разтревожена.
-                    print Наоколо се долавят странни шумове и звуци.
-                    print name се опасява че гората може би е омагьосана.
-                    ```
+                          ```
+                          name is ask Как се нарича главаната героиня?
+                          print name сега навлиза в гората.
+                          print Тя е малко разтревожена.
+                          print Наоколо се долавят странни шумове и звуци.
+                          print name се опасява че гората може би е омагьосана.
+                          ```
                 start_code: "print Твоята история"
                 story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             7:
@@ -271,22 +271,22 @@ adventures:
 
                 start_code: "repeat 5 times print 'Помо-о-о-щ!'"
             5:
-                story_text: |2
+                story_text: |
 
-                    В четвърто ниво ще направиш историята си дори по-цветиста и забавна!
-                    Тук ще прибавиш различни възможни завършеци, за да има изненадващ край.
+                          В четвърто ниво ще направиш историята си дори по-цветиста и забавна!
+                          Тук ще прибавиш различни възможни завършеци, за да има изненадващ край.
 
-                    Представи си, че историята започва така:
+                          Представи си, че историята започва така:
 
-                    1. Принцесата се разхожда в гората.
-                    2. Внезапно насреща й изскача свирепо чудовище.
+                          1. Принцесата се разхожда в гората.
+                          2. Внезапно насреща й изскача свирепо чудовище.
 
-                    3. **щастлив край**: Тя изважда острата си сабя и чудовището се оттегля от пътя й.
-                    3. **тъжен край**: Чудовището отваря голямата си паст и поглъща принцесата цяла.
+                          3. **щастлив край**: Тя изважда острата си сабя и чудовището се оттегля от пътя й.
+                          3. **тъжен край**: Чудовището отваря голямата си паст и поглъща принцесата цяла.
 
-                    Сега ще ползваме променливата "име" по-гъвкаво, също както в трето ниво.
-                    Виж как ползваме командите `if` (ако) и `else` (тогава), за да програмираме избирането
-                    на един от двата края на историята.
+                          Сега ще ползваме променливата "име" по-гъвкаво, също както в трето ниво.
+                          Виж как ползваме командите `if` (ако) и `else` (тогава), за да програмираме избирането
+                          на един от двата края на историята.
 
                 example_code: |
                     ```
@@ -318,9 +318,9 @@ adventures:
                     ```
                 start_code: "print 'Твоята история ще се появи тук!'"
             3:
-                story_text: |2
+                story_text: |
 
-                    Към историята, която пишеш можеш да добавиш нещо произволно и неочаквано, примерно чудовище, животно или някаква пречка.
+                          Към историята, която пишеш можеш да добавиш нещо произволно и неочаквано, примерно чудовище, животно или някаква пречка.
 
                 start_code: "print Твоята история"
                 story_text_2: |
@@ -335,16 +335,16 @@ adventures:
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
-                example_code_3: |2
+                example_code_3: |
 
 
-                    ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
-                    ```
+                          ```
+                          {print} His backpack got way too heavy.
+                          {print} Inside were a bottle of water, a flashlight and a brick.
+                          bag {is} water, flashlight, brick
+                          dump {is} {ask} Which item should he dump?
+                          {remove} dump {from} bag
+                          ```
                 example_code: |-
                     Ето как изглежда:
                     ```
@@ -390,19 +390,19 @@ adventures:
                 story_text: |
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    verse = 99
-                    {print} verse ' bottles of beer on the wall'
-                    {print} verse ' bottles of beer'
-                    {print} 'Take one down, pass it around'
-                    verse = verse - 1
-                    {print} verse ' bottles of beer on the wall'
-                    ```
+                          ```
+                          verse = 99
+                          {print} verse ' bottles of beer on the wall'
+                          {print} verse ' bottles of beer'
+                          {print} 'Take one down, pass it around'
+                          verse = verse - 1
+                          {print} verse ' bottles of beer on the wall'
+                          ```
 
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+                          You can now repeat lines 2 to 9 as many times as you want by copying the lines.
                 start_code: "{print} 'Baby shark'"
                 story_text_2: "This children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
                 example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
@@ -416,31 +416,31 @@ adventures:
                     Baby Shark
 
                     You can make this song much shorter with a `{repeat}`! Can you finish the code?
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
-                    ```
+                          ```
+                          {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                          {print} 'Baby Shark'
+                          ```
 
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
+                          After Baby Shark you can of course also program other songs. There are many songs with repetition.
                 start_code: "{print} 'Baby Shark'"
             8:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    verse = 99
-                    {repeat} 99 {times}
-                        {print} verse ' bottles of beer on the wall'
-                        {print} verse ' bottles of beer'
-                        {print} 'Take one down, pass it around'
-                        verse = verse - 1
-                        {print} verse ' bottles of beer on the wall'
-                    ```
+                          ```
+                          verse = 99
+                          {repeat} 99 {times}
+                              {print} verse ' bottles of beer on the wall'
+                              {print} verse ' bottles of beer'
+                              {print} 'Take one down, pass it around'
+                              verse = verse - 1
+                              {print} verse ' bottles of beer on the wall'
+                          ```
                 start_code: "# place your code here"
             10:
                 story_text: |
@@ -505,19 +505,19 @@ adventures:
             12:
                 story_text: |
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it and you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
-                    ```
+                          ```
+                          actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                          {for} action {in} actions
+                              {for} i {in} {range} 1 {to} 2
+                                  {print} 'if youre happy and you know it'
+                                  {print} action
+                              {print} 'if youre happy and you know it and you really want to show it'
+                              {print} 'if youre happy and you know it'
+                              {print} action
+                          ```
                 start_code: "# place your code here"
             16:
                 story_text: |
@@ -592,16 +592,16 @@ adventures:
                     Ползвай 90 градуса, за да завиеш 1/4 (една четвърт). Едно пълно завъртане е равно на 360 градуса.
                     Представи си как би могла да "нарисуваш" фигура от свързани линии с програмиране? Може би триъгълник? Кръг?
 
-                example_code: |2
+                example_code: |
 
-                    ```
-                    print "Рисуване на фигура"
-                    angle is 90
-                    turn angle
-                    forward 50
-                    turn angle
-                    forward 50
-                    ```
+                          ```
+                          print "Рисуване на фигура"
+                          angle is 90
+                          turn angle
+                          forward 50
+                          turn angle
+                          forward 50
+                          ```
 
                 start_code: |
                     print Състезание с костенурки!
@@ -685,20 +685,20 @@ adventures:
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             3:
-                story_text: |2
+                story_text: |
 
 
-                    Докато рисуваш костенурката можеш да добавиш и командата `random`. С нея костенурката ще поеме в произволна посока всеки път.
-                    Ползвай `at random` в комбинация с променлива с повече стойности, не само една.
-                    Ползвай примера отдолу и увеличи листа с още стойности, освен 10, 50, 90, 150, 250.
+                          Докато рисуваш костенурката можеш да добавиш и командата `random`. С нея костенурката ще поеме в произволна посока всеки път.
+                          Ползвай `at random` в комбинация с променлива с повече стойности, не само една.
+                          Ползвай примера отдолу и увеличи листа с още стойности, освен 10, 50, 90, 150, 250.
 
-                example_code: |2
+                example_code: |
 
-                    ```
-                    ъгли is 10, 50, 90, 150, 250
-                    turn ъгли at random
-                    forward 25
-                    ```
+                          ```
+                          ъгли is 10, 50, 90, 150, 250
+                          turn ъгли at random
+                          forward 25
+                          ```
 
                 start_code: |
                     print Състезание с костенурки!
@@ -754,13 +754,13 @@ adventures:
                 story_text_2: "If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             5:
-                story_text: |2
+                story_text: |
 
-                    С командата `if` ще създадем възможност за повече избор в програмата ни.
-                    Можеш да програмираш реакция на системата по определен избор.
+                          С командата `if` ще създадем възможност за повече избор в програмата ни.
+                          Можеш да програмираш реакция на системата по определен избор.
 
-                    Можеш ли да довършиш примерния код по-долу с думите 'Какъв лош късмет..' когато ти си наред да миеш?
-                    И не забравяй да ползваш кавички около текста!
+                          Можеш ли да довършиш примерния код по-долу с думите 'Какъв лош късмет..' когато ти си наред да миеш?
+                          И не забравяй да ползваш кавички около текста!
 
                 example_code: |
                     ```
@@ -772,14 +772,14 @@ adventures:
 
                 start_code: "print 'Кой мие чиниите?'"
             4:
-                story_text: |2
+                story_text: |
 
-                    Сега ползвай кавички, за да подобриш графика на миячите на чинии.
-                    Този път в кода има пропуски, отбелязани с черта за подчертаване '_'.
+                          Сега ползвай кавички, за да подобриш графика на миячите на чинии.
+                          Този път в кода има пропуски, отбелязани с черта за подчертаване '_'.
 
-                    Можеш ли да замениш 'празните места' с подходящ код - дума или символ?
+                          Можеш ли да замениш 'празните места' с подходящ код - дума или символ?
 
-                    Съвет: не забравяй да ползваш кавички около текста!
+                          Съвет: не забравяй да ползваш кавички около текста!
 
                 example_code: |
                     ```
@@ -1127,47 +1127,47 @@ adventures:
                     In this level you can use nesting to make your restaurant more realistic and more fun!
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
-                            {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
-                    ```
+                          ```
+                          {print} 'Welcome to Hedys restaurant!'
+                          people = {ask} 'How many people will be joining us today?'
+                          {print} 'Great!'
+                          price = 0
+                          {repeat} people {times}
+                              food = {ask} 'What would you like to order?'
+                              {print} food
+                              {if} food {is} fries
+                                  price = price + 3
+                                  sauce = {ask} 'What kind of sauce would you like with your fries?'
+                                  {if} sauce {is} no
+                                      {print} 'no sauce'
+                                  {else}
+                                      price = price + 1
+                                      {print} 'with ' sauce
+                              {if} food {is} pizza
+                                  price = price + 4
+                          {print} 'That will be ' price ' dollar'
+                          {print} 'Enjoy your meal!'
+                          ```
                 start_code: "# place your code here"
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
-                    ```
-                story_text_2: |2
+                          ```
+                          courses = appetizer, main course, dessert
+                          {for} course {in} courses
+                              food = {ask} 'What would you like to eat as your ' course '?'
+                              {print} food ' will be your ' course
+                          ```
+                story_text_2: |
 
 
-                    Of course, you could also order for multiple people!
+                          Of course, you could also order for multiple people!
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -1181,79 +1181,79 @@ adventures:
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Welcome to Restaurant Hedy!'
-                    people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 {to} people
-                        {print} 'Order number ' i
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce = {ask} 'What kind of sauce would you like with that?'
-                            {print} sauce
-                        drinks = {ask} 'What would you like to drink?'
-                        {print} drinks
-                    price = 4 * people
-                    {print} 'That will be ' price ' dollars, please!'
-                    ```
+                          ```
+                          {print} 'Welcome to Restaurant Hedy!'
+                          people = {ask} 'For how many people would you like to order?'
+                          {for} i {in} {range} 1 {to} people
+                              {print} 'Order number ' i
+                              food = {ask} 'What would you like to eat?'
+                              {print} food
+                              {if} food {is} fries
+                                  sauce = {ask} 'What kind of sauce would you like with that?'
+                                  {print} sauce
+                              drinks = {ask} 'What would you like to drink?'
+                              {print} drinks
+                          price = 4 * people
+                          {print} 'That will be ' price ' dollars, please!'
+                          ```
                 start_code: "# place your code here"
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
-                    ```
+                          ```
+                          price = 0
+                          food = {ask} 'What would you like to order?'
+                          drink = {ask} 'What would you like to drink?'
+                          {if} food {is} 'hamburger'
+                              price = price + 6.50
+                          {if} food {is} 'pizza'
+                              price = price + 5.75
+                          {if} drink {is} 'water'
+                              price = price + 1.20
+                          {if} drink {is} 'soda'
+                              price = price + 2.35
+                          {print} 'That will be ' price ' dollar, please'
+                          ```
                 start_code: "# place your code here"
             13:
                 story_text: |
                     In this level we can use the new commands to upgrade our restaurant.
                     We use `{and}` to see {if} two things are both the case.
 
-                example_code: |2
+                example_code: |
 
-                    ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
-                    ```
+                          ```
+                          price = 10
+                          food = {ask} 'What would you like to eat?'
+                          drinks = {ask} 'What would you like to drink?'
+                          {if} food {is} 'sandwich' {and} drinks {is} 'juice'
+                              {print} 'Thats our discount menu'
+                              price = price - 3
+                          {print} 'That will be ' price ' dollars'
+                          ```
                 start_code: "# place your code here"
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Welcome at McHedy'
-                    more = 'yes'
-                    {while} more == 'yes'
-                        order = {ask} 'What would you like to order?'
-                        {print} order
-                        more = {ask} 'Would you like to order anything {else}?'
-                    {print} 'Thank you!'
-                    ```
+                          ```
+                          {print} 'Welcome at McHedy'
+                          more = 'yes'
+                          {while} more == 'yes'
+                              order = {ask} 'What would you like to order?'
+                              {print} order
+                              more = {ask} 'Would you like to order anything {else}?'
+                          {print} 'Thank you!'
+                          ```
                 start_code: "# place your code here"
     fortune:
         name: Fortune teller
@@ -1309,42 +1309,42 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |2
+                example_code: |
 
 
 
-                    ```
-                    {print} How did I get here?
-                    {print} I remember my friend telling me to go into the old mansion...
-                    {print} and suddenly everything went black.
-                    {print} But how did I end up on the floor...?
-                    {print} My head hurts like Ive been hit by a baseball bat!
-                    {print} What's that sound?
-                    {print} Oh no! I feel like Im not alone in this house!
-                    {print} I need to get out of here!
-                    {print} There are 3 doors in front of me..
-                    {ask} Which door should i pick?
-                    {echo} I choose door
-                    {print} ...?
-                    ```
+                          ```
+                          {print} How did I get here?
+                          {print} I remember my friend telling me to go into the old mansion...
+                          {print} and suddenly everything went black.
+                          {print} But how did I end up on the floor...?
+                          {print} My head hurts like Ive been hit by a baseball bat!
+                          {print} What's that sound?
+                          {print} Oh no! I feel like Im not alone in this house!
+                          {print} I need to get out of here!
+                          {print} There are 3 doors in front of me..
+                          {ask} Which door should i pick?
+                          {echo} I choose door
+                          {print} ...?
+                          ```
                 story_text_2: |
                     Can you finish the scary story? Or make up your own haunted house story?
                 start_code: "{print} How did I get here?"
             2:
                 story_text: |
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-                example_code: |2
+                example_code: |
 
-                    ```
-                    monster_1 {is} 👻
-                    monster_2 {is} 🤡
-                    monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
-                    ```
+                          ```
+                          monster_1 {is} 👻
+                          monster_2 {is} 🤡
+                          monster_3 {is} 👶
+                          {print} You enter the haunted house.
+                          {print} Suddenly you see a monster_1
+                          {print} You run into the other room, but a monster_2 is waiting there for you!
+                          {print} Oh no! Quickly get to the kitchen.
+                          {print} But as you enter monster_3 attacks you!
+                          ```
                 start_code: "monster1 {is} _"
                 story_text_2: "### Exercise\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
@@ -1377,21 +1377,21 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
-                    {sleep}
-                    correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
-                    ```
+                          ```
+                          {print} 'Escape from the haunted house!'
+                          {print} 'There are 3 doors in front of you...'
+                          doors {is} 1, 2, 3
+                          monsters {is} werewolf, mummy, vampire, zombie
+                          chosen_door {is} {ask} 'Which door do you choose?'
+                          {print} 'You chose door...' chosen_door
+                          {sleep}
+                          correct_door {is} doors {at} {random}
+                          {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                          {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                          ```
 
                 start_code: "# place your code here"
             9:
@@ -1400,121 +1400,121 @@ adventures:
 
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
-                    ```
+                          ```
+                          {print} 'Escape from the Haunted House!'
+                          player = alive
+                          doors = 1, 2, 3
+                          monsters = zombie, vampire, giant spider
+                          {repeat} 3 {times}
+                              {if} player {is} alive
+                                  correct_door {is} doors {at} {random}
+                                  {print} 'There are 3 doors in front of you...'
+                                  chosen_door = {ask} 'Which door do you choose?'
+                                  {if} chosen_door {is} correct_door
+                                      {print} 'No monsters here!'
+                                  {else}
+                                      {print} 'You are eaten by a ' monsters {at} {random}
+                                      player = dead
+                              {else}
+                                  {print} 'GAME OVER'
+                          {if} player {is} alive
+                              {print} 'Great! You survived!'
+                          ```
                 start_code: "{print} 'Escape from the haunted house!'"
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
-                    ```
+                          ```
+                          {print} 'Escape from the Haunted House!'
+                          player {is} alive
+                          doors = 1, 2, 3
+                          monsters = zombie, vampire, giant spider
+                          {for} i {in} {range} 1 {to} 3
+                              {if} player {is} alive
+                                  correct_door = doors {at} {random}
+                                  {print} 'Room ' i
+                                  {print} 'There are 3 doors in front of you...'
+                                  chosendoor = {ask} 'Which door do you choose?'
+                                  {if} chosendoor {is} correct_door
+                                      {print} 'No monsters here!'
+                                  {else}
+                                      {print} 'You are eaten by a ' monsters {at} {random}
+                                      player = dead
+                              {else}
+                                  {print} 'GAME OVER'
+                          {if} player {is} alive
+                              {print} 'Great! You survived!'
+                          ```
                 start_code: "{print} 'Escape from the haunted house!'"
             14:
                 story_text: |
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    {print} 'Escape from the haunted house'
-                    lives = 3
-                    doors = 1, 2, 3
-                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
-                            good_door = doors {at} {random}
-                            monster = monsters {at} {random}
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} good_door == chosen_door
-                                {print} 'You have chosen the correct door'
-                            {else}
-                                {print} 'You see...' monster
-                                {if} monster == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Its asleep'
-                                {else}
-                                    {print} 'You lose one life'
-                                    lives = lives -1
-                        {else}
-                            {print} 'GAME OVER'
-                    ```
+                          ```
+                          {print} 'Escape from the haunted house'
+                          lives = 3
+                          doors = 1, 2, 3
+                          monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                          {for} i {in} {range} 1 {to} 10
+                              {if} lives > 0
+                                  good_door = doors {at} {random}
+                                  monster = monsters {at} {random}
+                                  chosen_door = {ask} 'Which door do you choose?'
+                                  {if} good_door == chosen_door
+                                      {print} 'You have chosen the correct door'
+                                  {else}
+                                      {print} 'You see...' monster
+                                      {if} monster == 'a sleeping 3 headed dog'
+                                          {print} 'Pffieuw.... Its asleep'
+                                      {else}
+                                          {print} 'You lose one life'
+                                          lives = lives -1
+                              {else}
+                                  {print} 'GAME OVER'
+                          ```
                 start_code: "# place your code here"
             16:
                 story_text: |
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
-                example_code: |2
+                example_code: |
 
 
-                    ```
-                    numbers = [1, 2, 3]
-                    i = numbers[{random}]
-                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
-                    monsters = ['zombie', 'witch', 'vampire']
-                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
-                    weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mansion'
-                    {print} 'Something is not right here'
-                    {print} 'You hear ' hint[i]
-                    {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
-                    your_weapon = {ask} 'What do you bring with you?'
-                    {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' monsters[i]
-                    needed_weapon = weapons[i]
-                    {if} your_weapon == needed_weapon
-                        {print} 'You use your ' your_weapon
-                        {print} good_fate[i]
-                        {print} 'YOU WIN!'
-                    {else}
-                        {print} 'You have chosen the wrong weapon...'
-                        {print} bad_fate[i]
-                        {print} 'GAME OVER'
-                    ```
+                          ```
+                          numbers = [1, 2, 3]
+                          i = numbers[{random}]
+                          hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                          monsters = ['zombie', 'witch', 'vampire']
+                          bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                          good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                          weapons = ['ham', 'lighter', 'garlic']
+                          {print} 'You are standing in front of an old mansion'
+                          {print} 'Something is not right here'
+                          {print} 'You hear ' hint[i]
+                          {print} 'You are going to explore it'
+                          {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                          your_weapon = {ask} 'What do you bring with you?'
+                          {print} 'With your ' your_weapon ' you enter the living room'
+                          {print} 'There you find a ' monsters[i]
+                          needed_weapon = weapons[i]
+                          {if} your_weapon == needed_weapon
+                              {print} 'You use your ' your_weapon
+                              {print} good_fate[i]
+                              {print} 'YOU WIN!'
+                          {else}
+                              {print} 'You have chosen the wrong weapon...'
+                              {print} bad_fate[i]
+                              {print} 'GAME OVER'
+                          ```
                 start_code: "# place your code here"
     piggybank:
         default_save_name: Piggy Bank
@@ -1546,38 +1546,38 @@ adventures:
             5:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
-                example_code: |2
+                example_code: |
 
-                    ```
-                    {print} 'Learn French!'
-                    cat {is} {ask} '🐱'
-                    {if} cat {is} chat {print} 'Terrific!'
-                    {else} {print} 'No, cat is chat'
-                    frog {is} {ask} '🐸'
-                    {if} frog {is} grenouille {print} 'Super!'
-                    {else} {print} 'No, frog is grenouille'
-                    ```
+                          ```
+                          {print} 'Learn French!'
+                          cat {is} {ask} '🐱'
+                          {if} cat {is} chat {print} 'Terrific!'
+                          {else} {print} 'No, cat is chat'
+                          frog {is} {ask} '🐸'
+                          {if} frog {is} grenouille {print} 'Super!'
+                          {else} {print} 'No, frog is grenouille'
+                          ```
                 start_code: "# place your code here"
             16:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
 
-                example_code: |2
+                example_code: |
 
-                    ```
-                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
-                    translation = ['hello', 'computer', 'potato']
-                    score = 0
-                    {for} i {in} {range} 1 {to} 3
-                        answer = {ask} 'What does ' french_words[i] ' mean?'
-                        correct = translation[i]
-                        {if} answer == correct
-                            {print} 'Correct!'
-                            score = score + 1
-                        {else}
-                            {print} 'Wrong, ' french_words[i] ' means ' translation[i]
-                    {print} 'You gave ' score ' correct answers.'
-                    ```
+                          ```
+                          french_words = ['bonjour', 'ordinateur', 'pomme de terre']
+                          translation = ['hello', 'computer', 'potato']
+                          score = 0
+                          {for} i {in} {range} 1 {to} 3
+                              answer = {ask} 'What does ' french_words[i] ' mean?'
+                              correct = translation[i]
+                              {if} answer == correct
+                                  {print} 'Correct!'
+                                  score = score + 1
+                              {else}
+                                  {print} 'Wrong, ' french_words[i] ' means ' translation[i]
+                          {print} 'You gave ' score ' correct answers.'
+                          ```
                 start_code: "# place your code here"
     secret:
         name: SuperSpy
@@ -1750,7 +1750,7 @@ adventures:
             2:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
-                start_code: "# place your code here"
+                start_code: ""
     harry_potter:
         description: Harry Potter adventures
         default_save_name: Harry Potter

@@ -12,7 +12,6 @@ TOKEN_CODE = {
     "constant.character": 'S',
     "event": 'E',
     "invalid": 'I',
-    "support.function": 'F'
 }
 
 # for the caractere SPACE, all this highlights are equals
@@ -55,8 +54,6 @@ ABBREVIATION = {
     "inv": "I",
     "pink": "I",
     "I": "I",
-
-    "support.function": 'F',
 }
 
 

@@ -26,8 +26,8 @@ levels:
                 feedback: Wrong, look carefully!
             correct_answer: A
             hint: Line 1 doesn't seem right
-            question_text: Vad är fel med den här koden?
-            code: "Hej jag heter Hedy!\n{ask} Vad heter du?\n{echo} Hej …"
+            question_text: What is wrong with this code?
+            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
             question_score: '10'
         7:
             code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
@@ -65,28 +65,28 @@ levels:
             -   option: "`{print}`\n"
                 feedback: Korrekt!
             -   option: "`hello`\n"
-                feedback: Hej är inte ett kommando.
+                feedback: Hello isn't a command.
             -   option: "`{ask}`\n"
-                feedback: Med `{ask}` kan du ställa en fråga.
+                feedback: With `{ask}`, you can ask a question.
             correct_answer: B
-            hint: _ Hej världen!
+            hint: _?_ Hello world!
             question_text: Vad behöver fyllas i för att visa texten Hej!?
             question_score: '10'
             code: |
-                _ Hej!
+                ___ Hej!
         3:
-            question_text: Hur frågar man vad någons favoritfärg är?
+            question_text: How do you ask what someone's favorite color is?
             mp_choice_options:
-            -   option: "```\n{print} Vilken är din favoritfärg?\n```\n"
-                feedback: "`{print}` skriver ut text men ställer inga frågor."
-            -   option: "```\n{ask} {print} Vilken är din favoritfärg?\n```\n"
-                feedback: Du behöver bara ett kommando, inte två.
-            -   option: "```\n{ask} Vilken är din favoritfärg?\n```\n"
-                feedback: Jättebra!
-            -   option: "```\n{echo} Vilken är din favoritfärg?\n```\n"
-                feedback: '`{echo}` upprepar ditt svar tillbaka till dig.'
+            -   option: "```\n{print} What is your favorite color?\n```\n"
+                feedback: "`{print}` prints text, but it doesn't ask questions."
+            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
+                feedback: You only need one command, not two.
+            -   option: "```\n{ask} What is your favorite color?\n```\n"
+                feedback: Great!
+            -   option: "```\n{echo} What is your favorite color?\n```\n"
+                feedback: '`{echo}` repeats your answer back to you.'
             correct_answer: C
-            hint: Du kan fråga något med kommandot `{ask}`
+            hint: You can ask something with the `{ask}` command
             question_score: '10'
         5:
             question_text: Which command is missing in line 2?

@@ -90,14 +90,14 @@ class TestsLevel13(HedyTester):
 
     def test_simple_function(self):
         code = textwrap.dedent("""\
-        define simple_function_1 with parameter
+        define simple_function_1 using parameter
             print "simple_function_1 - 1"
             m = "simple_function_1 - 2"
             print m
-        define simple_function_2 with param
+        define simple_function_2 using param
             print "simple_function_2 - 1"
             print param
-        define simple_function_3 with param_a, param_b, param_c
+        define simple_function_3 using param_a, param_b, param_c
             if param_a = "A" or param_a = "B"
                 print "simple_function_3 - 1"
                 print param_b
