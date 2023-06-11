@@ -519,7 +519,8 @@ def get_general_class_stats(students):
 # append the programs obtained on each level
 def find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level):
     program_runs_per_level.append([])
-    success_runs_per_level.append([]), error_runs_per_level.append([])
+    success_runs_per_level.append([])
+    error_runs_per_level.append([])
     for program in programs:
         if program['level'] == level:
             program_runs_per_level[level - 1].append([program['name'], str(program.get("error"))])
@@ -545,12 +546,7 @@ def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level,
         if len(quizzes_ran_per_level[level - 1]) == 1:
             avg_quizzes_ran_per_level.append(quizzes_per_level[0])
         if len(quizzes_ran_per_level[level - 1]) > 1:
-            average_quiz_score_per_level = 0
-            for index in range(1, len(quizzes_per_level) + 1):
-                average_quiz_score_per_level += quizzes_per_level[index - 1]
-
-            average_quiz_score_per_level /= (len(quizzes_ran_per_level[level - 1]))
-            avg_quizzes_ran_per_level.append(int(average_quiz_score_per_level))
+            avg_quizzes_ran_per_level.append(sum(quizzes_per_level)/len(quizzes_per_level))
 
     return avg_quizzes_ran_per_level
 
