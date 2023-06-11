@@ -162,18 +162,6 @@ class StatisticsModule(WebsiteModule):
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
                 calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            success_rate_overall = find_success_rate_overall(quizzes)
-
-            finished_quizzes = any("finished" in x for x in quizzes)
-            if finished_quizzes:
-                highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")])
-                highest_level_quiz_score = [x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]
-            else:
-                highest_level_quiz = "-"
-                highest_level_quiz_score = "-"
-
-            success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
-
             students.append(
                 {
                     "username": student_username,
@@ -181,11 +169,7 @@ class StatisticsModule(WebsiteModule):
                     "programs": len(programs),
                     "success_runs_per_level": success_runs_per_level,
                     "error_runs_per_level": error_runs_per_level,
-                    "success_rate_highest_level": success_rate_highest_level,
-                    "success_rate_overall": success_rate_overall,
                     "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
-                    "highest_level_quiz": highest_level_quiz,
-                    "highest_level_quiz_score": highest_level_quiz_score,
                 }
             )
 
