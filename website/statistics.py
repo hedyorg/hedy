@@ -572,16 +572,14 @@ def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, 
     :param level: current level
     :return: updated lists of successful and unsuccessful program runs per level
     """
-    if len(programs_ran_per_level[level - 1]) != 0:
-        successful_runs = 0
-        unsuccessful_runs = 0
-        for program in programs_ran_per_level[level - 1]:
-            if str(program[1]) == "True":
-                unsuccessful_runs += 1
-            else:
-                successful_runs += 1
+    programs_for_level = programs_ran_per_level[level - 1]
+    if len(programs_for_level) != 0:
+        # There are 3 possible states: None, True, False
+        successful_runs = sum(1 for program in programs_for_level if str(program[1]) != "True")
+        unsuccessful_runs = sum(1 for program in programs_for_level if str(program[1]) == "True")
         success_runs_per_level[level - 1] = successful_runs
         error_runs_per_level[level - 1] = unsuccessful_runs
+
     else:
         success_runs_per_level[level - 1] = 0
         error_runs_per_level[level - 1] = 0
@@ -613,13 +611,12 @@ def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
     :param quizzes: A list of dictionaries representing quiz data.
     :return: The success rate for the highest level quiz as a float, or "-" if no quizzes have been finished.
     """
-    success_rate_highest_level = '-'
-    if finished_quizzes:
-        highest_level_started = ([x.get("started") for x in quizzes if x.get("level") == highest_level_quiz])
-        highest_level_finished = ([x.get("finished") for x in quizzes if x.get("level") == highest_level_quiz])
-        success_rate_highest_level = (highest_level_finished[0] / highest_level_started[0] * 100)
-        success_rate_highest_level = round(success_rate_highest_level, ndigits=0)
-    return success_rate_highest_level
+    if not finished_quizzes:
+        return '-'
+    else:
+        highest_level_quiz_data = next(quiz for quiz in quizzes if quiz.get("level") == highest_level_quiz)
+        success_rate_highest_level = highest_level_quiz_data['finished'] / highest_level_quiz_data['started'] * 100
+        return round(success_rate_highest_level, ndigits=0)
 
 
 def calc_average_quizzes(average_quizzes_ran_per_level):
