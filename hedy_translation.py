@@ -185,9 +185,6 @@ class Translator(Visitor):
     def call(self, tree):
         self.add_rule("_CALL", "call", tree)
 
-    def using(self, tree):
-        self.add_rule("_USING", "using", tree)
-
     def withs(self, tree):
         self.add_rule("_WITH", "with", tree)
 
