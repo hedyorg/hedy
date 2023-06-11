@@ -590,20 +590,18 @@ def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, 
 
 
 def find_success_rate_overall(quizzes):
+    """
+    Calculates the overall success rate for a list of quizzes.
+
+    :param quizzes: A list of dictionaries representing quiz data.
+    :return: The overall success rate for the quizzes as a float, or "-" if there are no quizzes.
+    """
     success_rate_overall = "-"
-    if len(quizzes) != 0:
-        num_finished_quizzes = 0
-        success_rate_overall = 0
-        for index in range(1, len(quizzes) + 1):
-            finished_quiz = quizzes[index - 1]['finished']
-            started_quiz = quizzes[index - 1]['started']
-
-            num_finished_quizzes += finished_quiz
-            success_rate_overall += finished_quiz / started_quiz * 100
-
-        success_rate_overall /= num_finished_quizzes
-        success_rate_overall = round(success_rate_overall, ndigits=0)
-    return success_rate_overall
+    if len(quizzes) == 0:
+        return "-"
+    else:
+        success_rates = [quiz['finished'] / quiz['started'] for quiz in quizzes]
+        return round(sum(success_rates) / len(success_rates) * 100, ndigits=0)
 
 
 def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
