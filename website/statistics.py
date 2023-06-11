@@ -85,10 +85,7 @@ class StatisticsModule(WebsiteModule):
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
                 calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
 
-            # average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
-            non_zero_grades = [grade for grade in avg_quizzes_runs_per_level if grade != 0]
-            average_quizzes = sum(non_zero_grades) / len(non_zero_grades)
-
+            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
             success_rate_overall = find_success_rate_overall(quizzes)
 
             finished_quizzes = any("finished" in x for x in quizzes)
@@ -610,6 +607,14 @@ def find_success_rate_overall(quizzes):
 
 
 def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
+    """
+    Calculates the success rate for the highest level quiz.
+
+    :param finished_quizzes: A boolean indicating whether any quizzes have been finished.
+    :param highest_level_quiz: An integer representing the highest level quiz.
+    :param quizzes: A list of dictionaries representing quiz data.
+    :return: The success rate for the highest level quiz as a float, or "-" if no quizzes have been finished.
+    """
     success_rate_highest_level = '-'
     if finished_quizzes:
         highest_level_started = ([x.get("started") for x in quizzes if x.get("level") == highest_level_quiz])
@@ -620,13 +625,14 @@ def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
 
 
 def calc_average_quizzes(average_quizzes_ran_per_level):
-    average_quizzes = "-"
-    num_quizzes = 0
-    total_quiz_scores = 0
-    for i in range(len(average_quizzes_ran_per_level)):
-        if average_quizzes_ran_per_level[i] != 0:
-            num_quizzes += 1
-            total_quiz_scores += average_quizzes_ran_per_level[i]
-    if num_quizzes != 0:
-        average_quizzes = total_quiz_scores / num_quizzes
-    return average_quizzes
+    """
+    Calculates the average of non-zero values in a list of integers.
+
+    :param average_quizzes_ran_per_level: A list of integers representing quiz scores.
+    :return: The average of non-zero values in the input list as a float, or "-" if there are no non-zero values.
+    """
+    non_zero_grades = [grade for grade in average_quizzes_ran_per_level if grade != 0]
+    if len(non_zero_grades) == 0:
+        return "-"
+    else:
+        return sum(non_zero_grades) / len(non_zero_grades)
