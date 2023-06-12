@@ -35,6 +35,7 @@ class Snippet:
 
 class SkippedMapping:
     """ Class used to test if a certain source mapping contains an exception type """
+
     def __init__(self, source_range: SourceRange, exception_type: type(Exception)):
         self.source_range = source_range
         self.exception_type = exception_type
