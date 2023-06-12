@@ -254,24 +254,31 @@ def source_map_rule(source_map: SourceMap):
 
             hedy_code_input = source_map.hedy_code[meta.start_pos:meta.end_pos]
             hedy_code_input = hedy_code_input.replace('#ENDBLOCK', '')  # ENDBLOCK is not part of the Hedy code, remove
+            error = None
 
-            try:
+            if not source_map.skip_faulty:
                 generated_python = function(*args, **kwargs)
-                is_tree = (
-                    isinstance(generated_python, Tree) or
-                    bool(re.match(r".*Tree\(.*Token\(.*\).*\).*", generated_python))
-                )
+            else:
+                try:
+                    generated_python = function(*args, **kwargs)
 
-                if is_tree:
-                    raise ParseError()  # code could not be parsed to string, raise ParseError
+                    # When parsing with skip_faulty enabled it could happen that because sanitization is not done
+                    # a tree is returned instead of a string containing valid Python code by a transformer method.
+                    # If this happens we have to raise an exception, we cannot map a Lark tree
 
-                error = None
-            except Exception as e:
-                if source_map.skip_faulty:
+                    if (
+                        # if a Lark tree is returned
+                        isinstance(generated_python, Tree) or
+                        # if a Lark tree is returned as a string, we check with regex
+                        bool(re.match(r".*Tree\(.*Token\(.*\).*\).*", generated_python))
+                    ):
+                        raise Exception('Can not map a Lark tree, only strings')
+
+                except Exception as e:
+                    # If an exception is found, we set the Python code to pass (null operator)
+                    # we also map the error
                     generated_python = 'pass'
                     error = e
-                else:
-                    raise e
 
             hedy_code = SourceCode(
                 SourceRange(
