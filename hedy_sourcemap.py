@@ -9,28 +9,39 @@ class SourceRange:
     A class used to represent source code ranges
 
     The source code range is made out of:
-    from_line (int), from_character (int), to_line (int), to_character (int)
+    from_line (int), from_column (int), to_line (int), to_column (int)
+
+    An example:
+    print Hello!
+    ask What is your name?
+
+    For the above snippet we could have the following mappings:
+    print Hello! - from_line (1), from_column (1), to_line (1), to_column (13)
+    ask What is your name? - from_line (2), from_column (1), to_line (2), to_column (23)
+    Hello! - from_line (1), from_column (7), to_line (1), to_column (13)
+
+    Tip: You can use a more advanced text editor like Notepad++ to get these values for a certain cursor position
     """
 
-    def __init__(self, from_line, from_character, to_line, to_character):
+    def __init__(self, from_line, from_column, to_line, to_column):
         self.from_line = from_line
-        self.from_character = from_character
+        self.from_column = from_column
         self.to_line = to_line
-        self.to_character = to_character
+        self.to_column = to_column
 
     def __str__(self):
-        return f'{self.from_line}/{self.from_character}-{self.to_line}/{self.to_character}'
+        return f'{self.from_line}/{self.from_column}-{self.to_line}/{self.to_column}'
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
         return (
-            self.from_line, self.from_character,
-            self.to_line, self.to_character
+            self.from_line, self.from_column,
+            self.to_line, self.to_column
         ) == (
-            other.from_line, other.from_character,
-            other.to_line, other.to_character
+            other.from_line, other.from_column,
+            other.to_line, other.to_column
         )
 
 
@@ -49,17 +60,17 @@ class SourceCode:
 
     def __hash__(self):
         return hash((
-            self.source_range.from_line, self.source_range.from_character,
-            self.source_range.to_line, self.source_range.to_character
+            self.source_range.from_line, self.source_range.from_column,
+            self.source_range.to_line, self.source_range.to_column
         ))
 
     def __eq__(self, other):
         return (
-            self.source_range.from_line, self.source_range.from_character,
-            self.source_range.to_line, self.source_range.to_character
+            self.source_range.from_line, self.source_range.from_column,
+            self.source_range.to_line, self.source_range.to_column
         ) == (
-            other.source_range.from_line, other.source_range.from_character,
-            other.source_range.to_line, other.source_range.to_character
+            other.source_range.from_line, other.source_range.from_column,
+            other.source_range.to_line, other.source_range.to_column
         )
 
     def __ne__(self, other):
@@ -185,15 +196,15 @@ class SourceMap:
             response_map[index] = {
                 'hedy_range': {
                     'from_line': hedy_source_code.source_range.from_line,
-                    'from_character': hedy_source_code.source_range.from_character,
+                    'from_column': hedy_source_code.source_range.from_column,
                     'to_line': hedy_source_code.source_range.to_line,
-                    'to_character': hedy_source_code.source_range.to_character,
+                    'to_column': hedy_source_code.source_range.to_column,
                 },
                 'python_range': {
                     'from_line': python_source_code.source_range.from_line,
-                    'from_character': python_source_code.source_range.from_character,
+                    'from_column': python_source_code.source_range.from_column,
                     'to_line': python_source_code.source_range.to_line,
-                    'to_character': python_source_code.source_range.to_character,
+                    'to_column': python_source_code.source_range.to_column,
                 },
                 'error': hedy_source_code.error,
             }

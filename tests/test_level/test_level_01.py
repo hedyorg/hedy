@@ -484,6 +484,10 @@ class TestsLevel1(HedyTester):
         code = "turn koekoek"
         expected = "pass"
 
+        # We test the skipping of faulty code by checking if a certain range contains an error after executing
+        # The source range consists of from_line, from_column, to_line, to_column
+        # we can add multiple tests to the skipped_mappings list to test multiple error mappings
+
         skipped_mappings = [
             SkippedMapping(SourceRange(1, 1, 1, 13), hedy.exceptions.InvalidArgumentException)
         ]

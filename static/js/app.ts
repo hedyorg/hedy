@@ -856,8 +856,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     for (const index in sourceMap) {
       const map = sourceMap[index];
       const range = new Range(
-        map.hedy_range.from_line-1, map.hedy_range.from_character-1,
-        map.hedy_range.to_line-1, map.hedy_range.to_character-1
+        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+        map.hedy_range.to_line-1, map.hedy_range.to_column-1
       )
 
       if (map.error != null){
