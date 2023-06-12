@@ -9,9 +9,10 @@ from tests.Tester import HedyTester
 class TestsLevel18(HedyTester):
     level = 18
 
-    def test_print_brackets(self):
-        code = textwrap.dedent("""\
-      print('Hallo!')""")
+    @parameterized.expand([['(', ')'], ['（', '）']])
+    def test_print_brackets(self, bracket_open, bracket_close):
+        code = textwrap.dedent(f"""\
+      print{bracket_open}'Hallo!'{bracket_close}""")
 
         expected = textwrap.dedent("""\
       print(f'''Hallo!''')""")
@@ -69,10 +70,11 @@ class TestsLevel18(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    def test_if_with_equals_sign(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand([':', '：'])
+    def test_if_with_dequals_sign_colon(self, colon):
+        code = textwrap.dedent(f"""\
       naam is 'Hedy'
-      if naam == Hedy:
+      if naam == Hedy{colon}
           print('koekoek')""")
 
         expected = textwrap.dedent("""\
@@ -317,6 +319,7 @@ class TestsLevel18(HedyTester):
         expected = HedyTester.dedent(f"""\
         x = 'PRINT'
         create_button(x)
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -327,33 +330,16 @@ class TestsLevel18(HedyTester):
           if event.type == pygame.USEREVENT:
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
-              break""")
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_if_button_is_pressed_print_in_repeat(self):
-        code = textwrap.dedent("""\
-        x = 'but' 
-        x is button
-        repeat 3 times
-            if but is pressed:
-                print('wow')""")
-
-        expected = HedyTester.dedent(f"""\
-        x = 'but'
-        create_button(x)
-        for i in range(int('3')):
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
               break
-            if event.type == pygame.USEREVENT:
-              if event.key == 'but':
-                print(f'''wow''')
-                break
-          time.sleep(0.1)""")
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        def simple_function():
+            def nested_function():
+                print(1)
+        simple_function()""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)

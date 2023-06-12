@@ -70,12 +70,12 @@
 -   name: "ask"
     explanation: "Kérdezz valamit az `ask`utasítással."
     demo_code: |-
-        szin is ask Mi a kedvenc színed?
+        szin is ask 'Mi a kedvenc színed?'
         print szin ' a kedvenced!'
 -   name: "if"
     explanation: "Válassz az `if` utasítással"
     demo_code: |-
-        szin is ask Mi a kedvenc színed?
+        szin is ask 'Mi a kedvenc színed?'
         if szin is zöld print 'szép!' else print 'csúnya'
 -   name: if utasítás a teknőssel
     explanation: Válassz az `if` utasítással
@@ -86,7 +86,7 @@
     explanation: Check elements with `{in}`
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Ellenőrizze hogy a `{pressed}` kulcs a billentyűzeten van-e.
     demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "print"

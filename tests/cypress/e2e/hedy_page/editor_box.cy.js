@@ -1,20 +1,22 @@
-import {goToHedyPage} from "../tools/navigation/nav";
+const YAML = require('js-yaml')
 
 describe('Is able to type in the editor box', () => {
-    it('Passes', () => {
-      goToHedyPage();
+  const LANGUAGES_TO_TEST = ['ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'en','el', 'eo', 'es', 'et', 'fa', 'fi', 'fr', 'fy', 'he', 'hi', 'hu', 'id', 'it', 'ja', 'kmr', 'ko', 'nb_NO', 'nl', 'pa_PK', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru', 'sq', 'sr', 'sv', 'sw', 'te', 'th']
 
-      cy.get('#editor > .ace_scroller > .ace_content').type('\nask What is your name\necho hello');
-      cy.get('#editor > .ace_scroller > .ace_content .ace_line').each((element, index) => {
-        if(index == 0) {
-          cy.get(element).should('have.text', 'print hello world!');
-        }
-        if(index == 1) {
-          cy.get(element).should('have.text', 'ask What is your name');
-        }
-        if(index == 2) {
-          cy.get(element).should('have.text', 'echo hello');
-        }
-      })
-    })
-})
+  // Do something for every language
+  for (const language of LANGUAGES_TO_TEST) {
+
+    it(`Language ${language} should run`, () => {
+      cy.visit(`${Cypress.env('hedy_page')}?language=${language}`);
+
+      // click on textaread to get focus
+      cy.get('#editor > .ace_scroller > .ace_content').click();
+      // empty textarea
+      cy.focused().clear()
+      cy.get('#editor').type('print Hello world');
+      cy.get('#editor > .ace_scroller > .ace_content').should('contain.text', 'print Hello world');
+      cy.get('#runit').click();
+      cy.get('#output').should('contain.text', 'Hello world');
+    });
+  }
+});

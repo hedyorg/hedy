@@ -80,14 +80,20 @@ class TestsLevel7(HedyTester):
         n is 'test'
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_list_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 1, 2, 3
         repeat n times print 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.single_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
@@ -211,9 +217,10 @@ class TestsLevel7(HedyTester):
             expected=expected)
 
     def test_if_pressed_repeat(self):
-        code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
+        code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 
         expected = HedyTester.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -226,8 +233,232 @@ class TestsLevel7(HedyTester):
               for __i__ in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
-              break""")
+              break
+            else:
+              print(f'iets anders')
+              break
+            # End of PyGame Event Handler""")
 
         self.single_level_tester(
             code=code,
             expected=expected)
+
+    def test_if_pressed_multiple(self):
+        code = textwrap.dedent("""\
+            if x is pressed print 'doe het 1 keer!' else print 'iets anders'
+            if y is pressed print 'doe het 1 keer!' else print 'iets anders'
+            if z is pressed print 'doe het 1 keer!' else print 'iets anders'""")
+
+        expected = HedyTester.dedent("""\
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'x':
+              print(f'doe het 1 keer!')
+              break
+            else:
+              print(f'iets anders')
+              break
+            # End of PyGame Event Handler
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'y':
+              print(f'doe het 1 keer!')
+              break
+            else:
+              print(f'iets anders')
+              break
+            # End of PyGame Event Handler
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'z':
+              print(f'doe het 1 keer!')
+              break
+            else:
+              print(f'iets anders')
+              break
+            # End of PyGame Event Handler""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False)
+
+    def test_repeat_if_pressed_multiple(self):
+        code = textwrap.dedent("""\
+            repeat 3 times if x is pressed forward 15 else forward -15
+            repeat 3 times if y is pressed forward 15 else forward -15
+            repeat 3 times if z is pressed forward 15 else forward -15""")
+
+        expected = HedyTester.dedent("""\
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'x':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'y':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'z':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False)
+
+    def test_repeat_if_multiple(self):
+        code = textwrap.dedent("""\
+            aan is ja
+            repeat 3 times if aan is ja print 'Hedy is leuk!'
+            repeat 3 times if aan is ja print 'Hedy is leuk!'""")
+
+        expected = HedyTester.dedent("""\
+        aan = 'ja'
+        for __i__ in range(int('3')):
+          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
+            print(f'Hedy is leuk!')
+          else:
+            x__x__x__x = '5'
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
+            print(f'Hedy is leuk!')
+          time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!
+        Hedy is leuk!""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'The prince kept calling for help'
+        repeat 5 times print 'Help!'
+        print 'Why is nobody helping me?'""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'The prince kept calling for help')
+        for __i__ in range(int('5')):
+          print(f'Help!')
+          time.sleep(0.1)
+        print(f'Why is nobody helping me?')""")
+
+        expected_source_map = {
+            "1/0-1/40": "1/0-1/42",
+            "1/0-3/104": "1/0-5/144",
+            "2/56-2/69": "3/75-3/90",
+            "2/41-2/69": "2/43-4/108",
+            "3/70-3/103": "5/109-5/144"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

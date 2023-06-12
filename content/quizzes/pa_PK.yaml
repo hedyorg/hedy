@@ -31,14 +31,28 @@ levels:
             hint: '`{ask}` allows you to ask a question'
             question_score: '10'
         10:
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
-            -   option: Yes!
-                feedback: Great! Let's go to the next level!
-            -   feedback: What a shame... You can practice some more in level 1!
-                option: No
-            correct_answer: A
-            question_text: Are you ready for level 2?
-            hint: Let's go!
+            -   option: |
+                    Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                    Yes!
+                    Yes!
+                feedback: "Great job!"
+            -   option: |
+                    Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                    Are you ready to go to level 2?
+                    Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
+            hint: "Let's go!"
             question_score: '10'
         1:
             question_text: What's this programming language called?
@@ -68,7 +82,8 @@ levels:
             correct_answer: B
             hint: _?_ Hello world!
             question_score: '10'
-            code: "```\n___ Hello!\n```\n"
+            code: |
+                ___ Hello!
         3:
             question_text: How do you ask what someone's favorite color is?
             mp_choice_options:
@@ -757,13 +772,13 @@ levels:
         2:
             question_text: What do you use when you want to add two numbers?
             mp_choice_options:
-            -   option: '-'
+            -   option: '`-`'
                 feedback: That's not it
             -   option: plus
                 feedback: That's not it
-            -   option: '*'
+            -   option: '`*`'
                 feedback: That's not it
-            -   option: +
+            -   option: '`+`'
                 feedback: Correct!
             correct_answer: D
             hint: It's the plus sign.
@@ -1110,19 +1125,37 @@ levels:
             hint: Something is wrong with indentation
             question_score: '10'
         6:
-            question_text: Which code was used to create this output?
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            question_text: "What will be the output of this code when we enter pancakes?"
+            code: |-
+                {print} 'Welcome to restaurant Hedy'
+                {repeat} 2 {times}
+                    food {is} {ask} 'What do you want to eat?'
+                    {print} food
             mp_choice_options:
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\nfood = {ask} 'What would you like to eat?'\n{print} food\n```\n"
-                feedback: You need to take 2 orders.
-            -   option: "```\n{repeat} 2 {times}\n    {print} 'Welcome to restaurant Hedy'\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
-                feedback: The welcome line would be printed twice in this code too
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n{print} food\n```\n"
-                feedback: Now only the last order is printed.
-            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
-                feedback: Awesome!
-            hint: Pay attention to what sould be repeated and what should only be printed once.
-            correct_answer: D
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Pancakes
+                feedback: "There is no repetition in this answer."
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "This answer also repeats the welcome message"
+            -   option: |
+                    Welcome to restaurant Hedy
+                    What do you want to eat?
+                    What do you want to eat?
+                    Pancakes
+                    Pancakes
+                feedback: "Almost! But look at the question, it is not repeated."
+            -   option: |
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "Well done!"
+            correct_answer: "D"
+            hint: "The first sentence and question will not be repeated"
             question_score: '10'
         7:
             question_text: What is wrong with this code?
@@ -1773,13 +1806,13 @@ levels:
             question_text: What is wrong with this code?
             code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
             correct_answer: A
             hint: There is a mistake in line 3
@@ -2053,4 +2086,154 @@ levels:
                 feedback: "`{range}` 0 `{to}` 3 is 4 times."
             correct_answer: "B"
             hint: "Mind the indention"
+            question_score: '10'
+    14:
+        1:
+            mp_choice_options:
+            -   option: '`=>`'
+                feedback: This is not a symbol.
+            -   option: '`==`'
+                feedback: We are not comparing anything, just asking.
+            -   option: '`!=`'
+                feedback: We are not comparing anything, just asking
+            -   option: '`=`'
+                feedback: Right!
+            question_text: Which symbol should be used on the blank?
+            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'\n"
+            correct_answer: D
+            hint: We are not comparing anything, we are just asking a name.
+            question_score: '10'
+        3:
+            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'\n"
+            mp_choice_options:
+            -   option: '`>` and `<`'
+                feedback: That's not it
+            -   option: '`=` and `>=`'
+                feedback: That's not it
+            -   option: '`<` and `>=`'
+                feedback: You are right
+            -   option: ' `+` and `==`'
+            feedback: That's not it
+            correct_answer: C
+            hint: There are 130 people allowed in the club
+            question_score: '10'
+            question_text: Which symbols should be filled in on the two blanks?
+        4:
+            question_text: What's wrong with this code?
+            mp_choice_options:
+            -   feedback: No that's not it
+                option: In line 1 == should be used instead of =
+            -   option: Line 2 misses quotation marks
+                feedback: You are correct
+            -   option: In line 4 = should have been used instead of ==
+                feedback: No that's not it
+            -   option: In line 4 <= should have been used instead of >=
+            code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
+            feedback: No that's not it
+            correct_answer: B
+            hint: The symbols are right
+            question_score: '10'
+        6:
+            question_score: '10'
+            question_text: How many times do you have to say you are annoyed before this annoying game stops?
+            code: "lives = 2\n{repeat} 10 times\n    {if} lives != 0\n        answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1\n"
+            mp_choice_options:
+            -   option: 10 times
+                feedback: It stops after 2 times
+            -   feedback: It stops after 2 times
+                option: 0 times
+            -   option: 1 time
+                feedback: It stops after 2 times
+            -   option: 2 times
+                feedback: That is correct
+            correct_answer: D
+            hint: "!= means 'is not'"
+        7:
+            question_text: What should be filled in on the three blanks?
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'\n"
+            mp_choice_options:
+            -   option: "`'Lower'` and `'Higher'` and `'You win!'`"
+                feedback: That's not quite right.
+            -   option: "`'Higher'` and `'Lower'` and `'You win!'`"
+                feedback: You win!
+            -   option: "`'You win!'` and `'Lower!'` and `'Higher'`"
+                feedback: That's not quite right.
+            -   option: "`'Lower!'` and `'You win!'` and `'Higher!'`"
+                feedback: That's not quite right.
+            correct_answer: B
+            hint: The last one should say you win.
+            question_score: '10'
+        9:
+            mp_choice_options:
+            -   feedback: No
+                option: 1 or more
+            -   option: 2 or more
+                feedback: No
+            -   option: 8 or more
+                feedback: Almost
+            -   option: 9 or more
+                feedback: Great!
+            question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
+            code: "chocolate = {ask} 'How many pieces of chocolate have you eaten?'\n  {if} chocolate <= 2\n      {print} 'That is a healthy amount'\n  {if} chocolate > 2 and chocolate =< 8\n      {print} 'That is a bit much'\n  {if} chocolate > 8\n      {print} 'You will get a stomach ache!'\n"
+            correct_answer: D
+            hint: '> 8 means more than 8'
+            question_score: '10'
+        2:
+            question_text: Which of these codes has used the correct = or == symbol?
+            mp_choice_options:
+            -   option: '{if} name = Hedy'
+                feedback: No
+            -   option: '{if} age = 24'
+                feedback: No
+            -   option: answer = {ask} 'What is your answer'
+                feedback: Yes!
+            -   option: answer == {ask} 'How are you doing?'
+                feedback: No
+            correct_answer: C
+            hint: When you are comparing two answers you should use ==
+            question_score: '10'
+        5:
+            question_text: 'Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? '
+            code: "age = {ask} 'How old are you?'\nticket = {ask} 'Do you have a ticket?'\n{if} age _ and ticket == 'yes'\n    {print} 'You can enter the movie theater.'\n{else}\n    {print} 'You are not allowed to come in!'\n"
+            mp_choice_options:
+            -   option: '`> 12`'
+                feedback: 12 year olds are allowed too
+            -   option: '`>= 12`'
+                feedback: Great!
+            -   option: '`< 12`'
+                feedback: These kids are too young!
+            -   option: '`<= 12`'
+                feedback: These kids are too young
+            correct_answer: B
+            hint: '> means greater than'
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: You must be taller than 120 cm to go on the roller coaster
+                feedback: True!
+            -   option: You must be taller than 119 cm to go on the roller coaster
+                feedback: If you are 120 cm you won't get in
+            -   option: You must be shorter than 120 cm to go on the roller coaster
+                feedback: '> means greater than'
+            -   option: There are no length restrictions to go on the roller coaster
+            question_text: Which statement is true about this roller coaster?
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            feedback: There are.
+            correct_answer: A
+            hint: '> means greater than'
+            question_score: '10'
+        10:
+            question_text: What should be filled in in the blanks?
+            code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _\n"
+            mp_choice_options:
+            -   option: "'player 1 wins'"
+                feedback: Look at who has the highest score!
+            -   option: "'player 2 wins'"
+                feedback: Yes!
+            -   option: "'player 2 loses'"
+                feedback: Look at who has the highest score!
+            -   option: "'It is a tie'"
+            feedback: No it's not, one player has a higher score
+            correct_answer: B
+            hint: You win the game by having the most points
             question_score: '10'

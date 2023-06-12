@@ -1,0 +1,65 @@
+<div id="share-modal" data-modal="true" class="hidden fixed w-screen h-screen z-40 inset-0">
+  <div class="absolute bg-black w-full h-full opacity-75" onclick="hedyApp.closeContainingModal(this)"></div>
+  <div class="absolute flex justify-center w-full h-full">
+    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
+      <h2>{{_('share_your_program')}}</h2>
+
+      {% if username %}
+
+      <div class="grid grid-flow-row-dense gap-1 gap-x-4 w-full my-8">
+        {# Private #}
+        <div class="text-2xl col-start-1 row-span-2 ltr:text-right rtl:text-left text-bottom">
+          <input type="radio" id="share-private" name="public" value="0">
+        </div>
+        <div class="text-2xl col-start-2">
+          <label for="share-private">{{_('private')}}</label>
+        </div>
+        <div class="col-start-2">
+          {{_('only_you_can_see')}}
+        </div>
+
+        <div class="col-span-2 h-4"></div>
+
+        {# Private #}
+        <div class="text-2xl col-start-1 row-span-2 ltr:text-right rtl:text-left text-bottom">
+          <input type="radio" id="share-public" name="public" value="1">
+        </div>
+        <div class="text-2xl col-start-2">
+          <label for="share-public">{{_('public')}}</label>
+        </div>
+        <div class="col-start-2">
+          {{_('people_with_a_link')}}
+        </div>
+
+        <div class="col-start-1"></div>
+        <div class="col-start-2" data-view="if-public">
+          <div class="my-4">
+            {{_('share_by_giving_link')}}
+          </div>
+
+          {% include 'incl/copy-url-bar.html' %}
+        </div>
+
+      </div>
+
+      {% else %} {# logged in? #}
+
+      <div class="mt-8">
+        <p>{{_('logged_in_to_share')}}</p>
+        <p><a href="/login">{{_('login')}}</a></p>
+      </div>
+
+      {% endif %}
+
+      <div class="flex justify-end">
+        <button class="blue-btn" onclick="hedyApp.closeContainingModal(this)">{{_('close')}}</button>
+      </div>
+
+      <div class="absolute right-0 top-0 m-8">
+        <a href="#" title="Close popup" onclick="hedyApp.closeContainingModal(this); return false;">
+          <span class="text-3xl text-gray-400 fa-solid fa-xmark"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

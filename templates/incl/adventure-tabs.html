@@ -1,0 +1,86 @@
+      {# TABS #}
+      <div id="adventures">
+        {% macro adventure_tab(tabname, title, selected, id, tab_class) %}
+            <div
+                class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
+                id="{{ id }}"
+                tabindex="0"
+                data-tab="{{ tabname }}"
+                >
+                {{title}}
+            </div>
+        {% endmacro %}
+
+        <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
+        <div class="flex flex-row w-min" id="adventures-buttons">
+            {% for adventure in adventures %}
+                {% if adventure.is_teacher_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab') }}
+                {% elif adventure.is_command_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab') }}
+                {% else %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '') }}                    
+                {% endif %}
+            {% endfor %}
+            <!-- Add the tab for the parsons problem (if it exists) -->
+            {% if parsons %}
+                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab') }}
+            {% endif %}
+            <!-- Add the tab for the quiz -->
+            {% if quiz %}
+                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab') }}
+            {% endif %}
+        </div>
+      </div>
+      {# PANES #}
+      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-8 shadow-md">
+        {% for adventure in adventures %}
+            <div
+                data-tabtarget="{{adventure.short_name}}" class="
+                {% if adventure.short_name != initial_tab %}hidden{% endif %}
+                turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
+                >
+              <div class="lg:flex lg:flex-row">
+                  <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
+                    <div class="max-w-prose">
+                      {{ adventure.text|commonmark }}
+                    </div>
+                  </div>
+                  {% if adventure.example_code %}
+                      <div class="border"></div>
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                          {{ adventure.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+              </div>
+            {% for story in adventure.extra_stories %}
+                <div class="lg:flex lg:flex-row border-t-2">
+                    <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
+                        <div class="max-w-prose">
+                            {{ story.text|commonmark }}
+                        </div>
+                  </div>
+                  {% if story.example_code %}
+                      <div class="border"></div>
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                          {{ story.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        {% if parsons %}
+            <div data-tabtarget="parsons" class="hidden turn-pre-into-ace p-4">
+                <div>
+                    {% include 'incl/parsons.html' %}
+                </div>
+            </div>
+        {% endif %}
+        {% if quiz %}
+            <div data-tabtarget="quiz" class="hidden">
+                {% include 'quiz/incl-begin.html' %}
+            </div>
+        {% endif %}
+      </div>
+    </div>

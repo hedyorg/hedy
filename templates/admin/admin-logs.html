@@ -1,6 +1,7 @@
+{% set initialize_logs = True %}
 {% extends "auth.html" %}
 
-{% from "stats-shared.html" import insert_log_search %}
+{% from "macros/stats-shared.html" import insert_log_search %}
 
 {% block regular_content %}
 <div class="flex flex-row items-center justify-between border-b">
@@ -13,11 +14,4 @@
   {{ insert_log_search() }}
 
 </div>
-
-<script>
-  $(function() {
-    hedyApp.logs.initialize();
-  });
-</script>
-
 {% endblock %}

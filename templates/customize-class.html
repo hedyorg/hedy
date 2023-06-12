@@ -1,76 +1,47 @@
 {% extends "auth.html" %}
-
 {% block regular_content %}
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
-    <div>
-        {{ _('customize_class_exp_1')|commonmark }}
-        <div class="border border-gray-400 w-full lg:w-3/4 rounded-lg px-2 py-1 my-2">
-            <ol class="list-inside">
-                <li>{{_('customize_class_step_1')}}</li>
-                <li>{{_('customize_class_step_2')}}</li>
-                <li>{{_('customize_class_step_3')}}</li>
-                <li>{{_('customize_class_step_4')}}</li>
-                <li>{{_('customize_class_step_5')}}</li>
-                <li>{{_('customize_class_step_6')}}</li>
-                <li>{{_('customize_class_step_7')}}</li>
-                <li>{{_('customize_class_step_8')}}</li>
-            </ol>
-        </div>
-        {{ _('customize_class_exp_2')|commonmark }}
-    </div>
-    <div class="flex flex-row border border-gray-400 rounded-lg">
-        <h3 class="px-4 w-3/12">{{_('select_levels')}}</h3>
-        <div class="py-2 px-4 w-9/12 overflow-x-scroll">
-            {% for i in range(1, max_level + 1) %}
-                <button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.enable_level('{{ i }}');" value="{{ i }}">{{ i }}</button>
-            {% endfor %}
-        </div>
-    </div>
     <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
         <h3 class="px-4">{{_('select_adventures')}}</h3>
-        <div class="flex flex-row w-full mb-4">
-            <div class="flex flex-row justify-center items-center mr-2 w-1/12 ml-4">
-                <select class="flex flex-row py-2 px-1 mt-2 h-10 justify-center items-center text-center w-full" name="levels" id="adventures">
-                    <option value="none" selected disabled hidden> {{_('select_a_level')}} </option>
+        <div class="flex flex-row">
+            <div id="state-accessible" class="leading-6 ml-4 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_accessible')}}</span>
+            </div>
+            <div id="state-disabled" class="leading-6 ml-4 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_disabled')}}</span>
+            </div>
+            <div id="state-future" class="leading-6 ml-4 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_future')}}</span>
+                <span id="opening_date"></span>
+            </div>
+            <div id="indicator" class="htmx-indicator custom-indicator ml-4">{{_('updating_indicator')}} <i class="fa fa-spinner fa-spin"></i> </div>
+        </div>
+        <div class="flex flex-row w-full mb-4 overflow-x-auto">
+            <div class="items-center justify-center mr-2 w-1/12 ml-4 min-w-[100px]">
+                <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" id="levels-dropdown"
+                        data-cy="adventures"
+                        hx-get="/for-teachers/get-customization-level"
+                        hx-target="#adventure-dragger"
+                        hx-trigger="input"
+                        hx-indicator="#indicator">
                     {% for i in range(1, max_level + 1) %}
-                        <option id="select-{{i}}" {% if customizations and i not in customizations['levels'] %}class="hidden"{% endif %}value="{{ i }}">{{ _('level_title') }} {{ i }}</option>
+                    <option id="select-{{i}}" value="{{ i }}" {% if i == min_level %} selected {% endif %}>
+                        {{ _('level_title') }} {{ i }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
-            <div id="sortadventures" class="flex flex-row w-9/12">
-                {% if customizations and customizations['sorted_adventures'] %}
-                    {% for level, adventures in customizations['sorted_adventures'].items() %}
-                        <div id="level-{{ level }}" class="adventures-tab">
-                            {% for adventure in adventures %}
-                               {% if adventure.name in adventure_names %}
-                                    {# Note: this code is copy/pasted in teachers.ts. If you change it here, also change it there #}
-                                    <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level="{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
-                                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                                        {{ adventure_names[adventure['name']] }}
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    {% for level, adventures in adventures_default_order.items() %}
-                        <div id="level-{{ level }}" class="adventures-tab">
-                            {% for adventure in adventures %}
-                            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure }}" level = "{{ level }}" from-teacher = "false">
-                                <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                                {{ adventure_names[adventure] }}
-                            </div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="flex flex-row justify-center items-center ml-2 w-2/12 mr-4">
-                <select class="flex flex-row py-2 px-1 w-full mt-2 h-10 justify-center items-center text-center" name="levels" id="available">
-                    <option value="none" selected>{{_('available_adventures_level')}} -</option>
-                </select>
-            </div>
+            {{ render_partial('customize-class/hx-sortable-adventures.html',
+                               customizations=customizations,
+                               adventures=adventures,
+                               max_level=max_level,
+                               adventure_names=adventure_names,
+                               adventures_default_order=adventures_default_order,
+                               class_id=class_id,
+                               level=min_level,
+                               available_adventures=available_adventures)
+            }}
         </div>
     </div>
 
@@ -83,22 +54,38 @@
                         <tr>
                             <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
                             <th class="w-full">{{_('opening_date')}}</th>
+                            <th class="w-auto">{{_('disable')}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in range(1, max_level + 1) %}
-                            <tr class="{% if customizations and i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
-                                <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
-                                <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
-                                    <input level="{{ i }}"
-                                       {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
-                                        type="date" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"
-                                       {% else %}
-                                        type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
-                                       {% endif %}
-                                       class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
-                                </td>
-                            </tr>
+                        <tr class="opening_date_container">
+                            <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
+                            <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
+                                <input level="{{ i }}" id="opening_date_level_{{ i }}"
+                                    data-cy="opening_date_level_{{ i }}" {% if customizations %} {% if i in
+                                    customizations['levels'] %} {% if i|string in customizations['opening_dates'] %}
+                                    type="date" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})"
+                                    value="{{ customizations['opening_dates'][i|string] }}"
+                                    placeholder="{{_('directly_available')}}" {% else %} type="text"
+                                    onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})"
+                                    placeholder="{{_('directly_available')}}" {% endif %} {% else %} type="text"
+                                    onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})" placeholder="Disabled"
+                                    disabled {% endif %} {% else %} type="text" onfocus="(this.type='date')"
+                                    placeholder="{{_('directly_available')}}" onchange="hedyApp.setDateLevelInputColor({{i}})" {% endif %}
+                                    class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-0 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                            </td>
+                            <td class="border-r border-t border-gray-400">
+                                <label class="switch">
+                                    <input type="checkbox" id="enable_level_{{ i }}"
+                                        onchange="hedyApp.enable_level({{i}})" {% if (customizations and i in
+                                        customizations['levels']) or not customizations %} checked {% endif %}
+                                        level="{{ i }}"
+                                        data-cy="enable_level_{{ i }}">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -119,7 +106,11 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
                                 <td class="border-t border-gray-400 px-4 pt-2">
-                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" id="quiz" {% if "quiz" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
+                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2"
+                                        data-cy="quiz_input" id="quiz" {% if "quiz" in
+                                        customizations['level_thresholds']
+                                        %}value="{{ customizations['level_thresholds']['quiz'] }}" {% endif %} min="1"
+                                        max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
                                 </td>
                             </tr>
                         </tbody>
@@ -140,37 +131,46 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {%
+                                        if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('all_class_highscores')}}</td>
+                                <td class="text-left border-t border-r border-gray-400">{{_('all_class_highscores')}}
+                                </td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="all_highscores" type="checkbox" {% if "all_highscores" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="all_highscores" type="checkbox" {%
+                                        if "all_highscores" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('hide_cheatsheet')}}</td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {%
+                                        if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                             <tr>
-                                 <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}</td>
-                                 <td class="border-t border-gray-400">
-                                     <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {% if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif %}>
-                                 </td>
-                             </tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}
+                                </td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {%
+                                        if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif
+                                        %}>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('hide_quiz')}}</td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="hide_quiz" type="checkbox" {% if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="hide_quiz" type="checkbox" {%
+                                        if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('hide_parsons')}}</td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="hide_parsons" type="checkbox" {% if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="hide_parsons" type="checkbox" {%
+                                        if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                         </tbody>
@@ -178,45 +178,24 @@
                 </div>
             </div>
             {% if not (is_admin and class_info.teacher != username) %}
-                <div class="flex flex-col gap-2 mt-4">
-                    <div class="flex flex-row ml-auto gap-2">
-                        {# TODO JP: make a button that resets the adventures to the default in Hedy content #}
-                        <!-- <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button> -->
-                        <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
-                    </div>
-                    <div class="flex flex-row ml-auto gap-2">
-                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
-                        {{_('remove_customization')}}</button>
-                        <button class="green-btn" onclick="validate_changes()">{{_('back_to_class')}}</button>
-                    </div>
+            <div class="flex flex-col gap-2 mt-4">
+                <div class="flex flex-row ml-auto gap-2">
+                    <button data-cy="save_customizations" class="blue-btn"
+                            onclick="hedyApp.save_customizations('{{class_info.id}}')">
+                                {{_('save')}}
+                    </button>
                 </div>
+                <div class="flex flex-row ml-auto gap-2">
+                    <button class="red-btn {% if not customizations %}hidden{% endif %}"
+                        id="remove_customizations_button" data-cy="remove_customizations_button"
+                        onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
+                            {{_('remove_customization')}}
+                    </button>
+                    <button id='back_to_class' class="green-btn" data-cy="back_to_class">{{_('back_to_class')}}</button>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
 </div>
-<script>
-// If we return something a pop-up will be given: "are you sure you want to leave?"
-// Best we can do as the beforeunload doesn't allow the call of functions or other methods
-$(window).bind('beforeunload', () => {
-    if (window.State.unsaved_changes) {
-        return " ";
-    };
-});
-function validate_changes() {
-    if(window.State.unsaved_changes) {
-        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
-            window.location = "/for-teachers/class/{{class_info.id}}";
-        });
-    } else {
-        window.location = "/for-teachers/class/{{class_info.id}}";
-    }
-}
-window.addEventListener("DOMContentLoaded", () => {
-    hedyApp.initializeCustomizeClassPage({{_('available_adventures_level')|tojson}});
-    window.State.teacher_adventures = {{ teacher_adventures|tojson }};
-    window.State.adventures_default_order = {{ adventures_default_order|tojson }};
-    window.State.adventure_names = {{ adventure_names|tojson }};
-    window.State.available_adventures = {{ available_adventures|tojson }};
-});
-</script>
 {% endblock %}

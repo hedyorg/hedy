@@ -13,7 +13,7 @@ levels:
                 {print} It is time for an evening of Netflix'
                 film {is} Sonic the Hedgehog 2
                 {print} We're going to film
-                {print} Have lot of fun!'
+                {print} Have fun!'
     7:
         2:
             code: |
@@ -26,20 +26,20 @@ levels:
             code: |
                 players = Liam, Noah, Sophie
                 player1 = players {at} {random}
+                {remove} player1 {from} players
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
                 {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
     1:
         1:
-            story: You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n
-            code: |
-                {print} Welcome to bakery Hedy!'
-                {ask} What type of pie do you want to order?'
-                {echo} So you want'
-                {print} Your order is being prepared!'
+            story: "آپ بیکری Hedy کے گاہک ہیں۔\nآپ بیکری میں چلے جاتے ہیں اور بیکر نے آپ کا استقبال کیا۔\nاس نے پوچھا کہ آپ کس قسم کی پائی آرڈر کرنا چاہتے ہیں۔\nاگلا، آپ کا آرڈر تیار کیا جا رہا ہے۔\n"
+            code: |-
+                {print} بیکری Hedy میں خوش آمدید!
+                {ask} آپ کس قسم کی پائی آرڈر کرنا چاہتے ہیں؟
+                {echo} تو آپ چاہتے ہیں۔
+                {print} آپ کا آرڈر تیار کیا جا رہا ہے!
         2:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
             code: |

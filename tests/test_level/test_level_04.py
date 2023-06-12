@@ -34,6 +34,33 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_french_quoted_text(self):
+        code = "print «bonjour tous le monde!»"
+        expected = "print(f'bonjour tous le monde!')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_chinese_quoted_text(self):
+        code = "print “逃离鬼屋！”"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_chinese_double_quoted_text(self):
+        code = "print ‘逃离鬼屋！’"
+        expected = "print(f'逃离鬼屋！')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
     def test_print_double_quoted_text(self):
         code = 'print "hallo wereld!"'
         expected = "print(f'hallo wereld!')"
@@ -181,6 +208,17 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
+    def test_assign_catalan_var_name(self):
+        code = textwrap.dedent("""\
+            pel·lícula is Sonic the Hedgehog 2
+            print 'Veurem una ' pel·lícula""")
+
+        expected = textwrap.dedent("""\
+            pel·lícula = 'Sonic the Hedgehog 2'
+            print(f'Veurem una {pel·lícula}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_place_holder_no_space(self):
         # same as print for level 4
         code = "print _Escape from the haunted house!_"
@@ -188,6 +226,7 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
 
@@ -395,6 +434,25 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_print_list_access_index_var(self):
+        code = textwrap.dedent("""\
+        index is 1
+        dieren is Hond, Kat, Kangoeroe
+        print dieren at index""")
+
+        expected = HedyTester.dedent("index = '1'\ndieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[int(index)-1]'),
+                                     "print(f'{dieren[int(index)-1]}')")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
         colors is orange, blue, green
@@ -402,7 +460,7 @@ class TestsLevel4(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {colors[1-1]}')""")
+        favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -638,5 +696,38 @@ class TestsLevel4(HedyTester):
 
     def test_clear(self):
         code = "clear"
-        expected = "extensions.clear()"
+        expected = textwrap.dedent("""\
+        extensions.clear()
+        try:
+            # If turtle is being used, reset canvas
+            t.hideturtle()
+            turtle.resetscreen()
+            t.left(90)
+            t.showturtle()
+        except NameError:
+            pass""")
+
         self.multi_level_tester(code=code, expected=expected)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'You need to use quotation marks from now on!'
+        answer is ask 'What do we need to use from now on?'
+        print 'We need to use ' answer""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'You need to use quotation marks from now on!')
+        answer = input(f'What do we need to use from now on?')
+        print(f'We need to use {answer}')""")
+
+        expected_source_map = {
+            "1/0-1/52": "1/0-1/54",
+            "1/0-3/136": "1/0-3/143",
+            "2/53-2/59": "2/55-2/61",
+            "2/53-2/104": "2/55-2/109",
+            "3/129-3/135": "3/134-3/140",
+            "3/105-3/135": "3/110-3/143"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

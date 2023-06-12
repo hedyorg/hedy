@@ -553,7 +553,7 @@ class TestAuth(AuthHelper):
                     'token': self.user['verify_token']}),
             expect_http_code=302,
             return_headers=True)
-        self.assertEqual(headers['location'], HOST + 'landing-page')
+        self.assertEqual(headers['location'], '/landing-page')
 
         # WHEN attepting to verify the user again (the operation should be idempotent)
         # THEN (again) receive a redirect from the server taking us to `/landing-page`
@@ -565,7 +565,7 @@ class TestAuth(AuthHelper):
                     'token': self.user['verify_token']}),
             expect_http_code=302,
             return_headers=True)
-        self.assertEqual(headers['location'], HOST + 'landing-page')
+        self.assertEqual(headers['location'], '/landing-page')
 
         # WHEN retrieving profile to see that the user is no longer marked with
         # `verification_pending`
@@ -1036,10 +1036,12 @@ class TestProgram(AuthHelper):
         # THEN verify that the program we just saved is in the list
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
+
+        keys_to_ignore = set(["achievements", "message", "share_message", "save_info"])
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements" and key != "message" and key != "share_message":
-                self.assertEqual(program[key], saved_program[key])
+            if key not in keys_to_ignore:
+                self.assertEqual(program.get(key, None), saved_program.get(key, None), f'Difference on key {key}')
 
     def test_invalid_make_program_public(self):
         # GIVEN a logged in user
@@ -1410,7 +1412,7 @@ class TestCustomizeClasses(AuthHelper):
         # AND retrieve the class_id from the first class of your classes
         self.post_data('class', {'name': 'class1'})
         class_id = self.get_data('classes')[0].get('id')
-
+        self.get_data('for-teachers/customize-class/' + class_id)
         # WHEN attempting to create an invalid customization
         invalid_bodies = [
             '',
@@ -1418,9 +1420,9 @@ class TestCustomizeClasses(AuthHelper):
             {},
             {'levels': 1},
             {'levels': [1, 2, 3]},
-            {'levels': [1, 2, 3], 'sorted_adventures': []},
-            {'levels': [1, 2, 3], 'sorted_adventures': {}},
-            {'levels': [1, 2, 3], 'sorted_adventures': {}, 'opening_dates': {}},
+            {'levels': [1, 2, 3], 'other_settings': {}},
+            {'levels': [1, 2, 3], 'opening_dates': []},
+            {'opening_dates': {}},
         ]
 
         for invalid_body in invalid_bodies:
@@ -1445,18 +1447,16 @@ class TestCustomizeClasses(AuthHelper):
         # AND retrieve the class_id from the first class of your classes
         self.post_data('class', {'name': 'class1'})
         class_id = self.get_data('classes')[0].get('id')
-
+        self.get_data('for-teachers/customize-class/' + class_id)
         valid_bodies = [
             {
                 'levels': [],
-                'sorted_adventures': {},
                 'opening_dates': {},
                 'other_settings': [],
                 'level_thresholds': {}
             },
             {
                 'levels': ['1'],
-                'sorted_adventures': {'1': [{'name': 'story', 'from_teacher': False}]},
                 'opening_dates': {'1': '2022-03-16'},
                 'other_settings': [],
                 'level_thresholds': {}
@@ -1464,51 +1464,12 @@ class TestCustomizeClasses(AuthHelper):
             {
                 'levels': ['1', '2', '3'],
                 'opening_dates': {'1': '', '2': '', '3': ''},
-                'sorted_adventures': {
-                    '1': [],
-                    '2': [],
-                    '3': [],
-                    '4': [],
-                    '5': [],
-                    '6': []
-                },
                 'other_settings': [],
                 'level_thresholds': {}
             },
             {
                 'levels': ['1', '2', '3'],
                 'opening_dates': {'1': '', '2': '', '3': ''},
-                'sorted_adventures': {
-                    "1": [
-                        {"name": "next", "from_teacher": False},
-                        {"name": "default", "from_teacher": False},
-                        {"name": "story", "from_teacher": False},
-                        {"name": "restaurant", "from_teacher": False},
-                        {"name": "fortune", "from_teacher": False},
-                        {"name": "haunted", "from_teacher": False}
-                    ],
-                    "2": [
-                        {"name": "turtle", "from_teacher": False},
-                        {"name": "default", "from_teacher": False},
-                        {"name": "rock", "from_teacher": False},
-                        {"name": "parrot", "from_teacher": False},
-                        {"name": "story", "from_teacher": False},
-                        {"name": "haunted", "from_teacher": False},
-                        {"name": "restaurant", "from_teacher": False}
-                    ],
-                    "3": [
-                        {"name": "default", "from_teacher": False},
-                        {"name": "rock", "from_teacher": False},
-                        {"name": "dice", "from_teacher": False},
-                        {"name": "dishes", "from_teacher": False},
-                        {"name": "fortune", "from_teacher": False},
-                        {"name": "turtle", "from_teacher": False},
-                        {"name": "story", "from_teacher": False},
-                        {"name": "parrot", "from_teacher": False},
-                        {"name": "haunted", "from_teacher": False},
-                        {"name": "restaurant", "from_teacher": False},
-                        {"name": "next", "from_teacher": False}]
-                },
                 'teacher_adventures': [],
                 'other_settings': ['developers_mode', 'hide_cheatsheet'],
                 'level_thresholds': {}
@@ -1536,17 +1497,10 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating class customizations
         # THEN receive an OK response code with the server
-        body = {
-            'levels': [],
-            'sorted_adventures': {},
-            'opening_dates': {},
-            'other_settings': [],
-            'level_thresholds': {}}
-        self.post_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
-
+        self.get_data('for-teachers/customize-class/' + class_id, expect_http_code=200)
         # WHEN deleting class customizations
         # THEN receive an OK response code with the server
-        self.delete_data('for-teachers/customize-class/' + class_id, expect_http_code=200)
+        self.post_data('for-teachers/restore-customizations?level=1', {}, expect_http_code=200)
 
 
 class TestCustomAdventures(AuthHelper):
@@ -1806,3 +1760,7 @@ def tearDownModule():
     for username in USERS.copy():
         auth_helper.given_specific_user_is_logged_in(username)
         auth_helper.destroy_current_user()
+
+
+def remove_keys(dct, *keys):
+    return {k: v for k, v in dct.items() if k not in keys}

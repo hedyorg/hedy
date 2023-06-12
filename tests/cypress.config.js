@@ -4,10 +4,16 @@ module.exports = defineConfig({
   projectId: 'a1fbb9',
   watchForFileChanges: false,
   video: false,
+  redirectionLimit: 100,
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('@cypress/code-coverage/task')(on, config)
+      // include any other plugin code...
+
+      // It's IMPORTANT to return the config object
+      // with any changed environment variables
+      return config
     },
   },
   env: {
@@ -16,6 +22,7 @@ module.exports = defineConfig({
     recover_page: '/recover',
     hedy_page: '/hedy',
     hedy_level2_page: '/hedy/2',
+    adventure_page: '/hedy/1#print_command',
     admin_page: '/admin',
     admin_users_page: '/admin/users',
     teachers_page: '/for-teachers',

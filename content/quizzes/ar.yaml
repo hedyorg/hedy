@@ -40,7 +40,8 @@ levels:
             correct_answer: "B"
             hint: "_؟_ مرحبًا يا عالم!"
             question_score: '10'
-            code: "```\n___ Hello!\n```\n"
+            code: |
+                ___ Hello!
         3:
             question_text: "كيف تسأل شخص ما هو لونه المفضل؟"
             mp_choice_options:
@@ -185,14 +186,28 @@ levels:
             hint: "`{ask}` يمكنك من طرح سؤال"
             question_score: '10'
         10:
-            question_text: "هل أنت مستعد للمستوى الثاني؟"
+            question_text: "Which output will be in your outputscreen after you've run this code?"
+            code: |
+                {ask} Are you ready to go to level 2?
+                {echo}
+                {echo}
             mp_choice_options:
-            -   option: "أجل!"
-                feedback: "رائع! هيا بنا لإستكشاف المستوى التالي!"
-            -   option: "لا"
-                feedback: "يمكنك ممارسة المزيد في المستوى الأول!"
-            correct_answer: "A"
-            hint: "هيا بنا!"
+            -   option: |
+                    Are you ready to go to level 2?
+                feedback: "There are two echo commands"
+            -   option: |
+                    Yes!
+                    Yes!
+                feedback: "Great job!"
+            -   option: |
+                    Yes!
+                feedback: "There are two echo commands"
+            -   option: |
+                    Are you ready to go to level 2?
+                    Yes!
+                feedback: "There are two echo commands"
+            correct_answer: "B"
+            hint: "Let's go!"
             question_score: '10'
     2:
         1:
@@ -644,222 +659,222 @@ levels:
             question_score: '10'
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "اختر الجملة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "يجب استخدام علامات الاقتباس مع الأمر `{ask}` والأمر `{print}`"
+                feedback: "إجابة صحيحة."
+            -   option: "الأمر `{print}` هو الأمر الوحيد الذي يجب استخدام علامات الاقتباس معه"
+                feedback: "الأمر `{ask}` أيضًا يحتاج علامات اقتباس!"
+            -   option: "`{at} {random}` لا تعمل في المستوى الرابع"
+                feedback: "`{at} {random}` ما زالت تعمل!"
+            -   option: "يجب استخدام علامات الاقتباس مع `{at} {random}`"
+                feedback: "لا, ولكن هناك أمران يجب استخدام علامات الاقتباس معهما."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
-            question_score: '10'
+            hint: "في المستوى الرابع تحتاج لعلامات الاقتباس عند استخدام أمران من الأوامر."
+            question_score: '١٠'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "ما الكود الذي يستخدم علامات الاقتباس الصحيحة؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} `hello`
+                    {print} `مرحبًا`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "هذه ليست علامات الاقتباس الصحيحة."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'مرحبًا'
                     ```
-                feedback: "Correct"
+                feedback: "إجابة صحيحة"
             -   option: |
                     ```
-                    {print} hello
+                    {print} مرحبًا
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "لا يحتوي هذا الكود على علامات الاقتباس!"
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,مرحبًا,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "هذه فاصلة, أنت تريد علامات الاقتباس"
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
-            question_score: '10'
+            hint: "اختر علامات الاقتباس الصحيحة."
+            question_score: '١٠'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "في أي كود تم استخدام علامات الاقتباس بالشكل الصحيح؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} Hi Im Hedy
+                    {print} مرحبًا أنا هيدي
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "لا أرى علامات اقتباس هنا!"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy
+                    {print} 'مرحبًا انا هيدي
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "لا أرى إلا علامة اقتباس واحدة!"
             -   option: |
                     ```
-                    '{print} Hi Im Hedy'
+                    '{print} مرحبًا أنا هيدي'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "علامة الاقتباس الأولى يجب أن تاتي بعد الأمر {print}"
             -   option: |
                     ```
-                    {print} 'Hi Im Hedy'
+                    {print} 'مرحبًا انا هيدي'
                     ```
-                feedback: "Perfect!"
+                feedback: "رائع!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
-            question_score: '10'
+            hint: "يجب أن تكون علامات الاقتباس محيطة بالكلام الذي تريد طباعته (قبله وبعده)"
+            question_score: '١٠'
         4:
-            question_text: "Which statement is true?"
+            question_text: "اختر العبارة الصحيحة مما يلي:"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
-                feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
-            -   option: "You can choose yourself whether to use quotation marks or not."
-                feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "يجب وضع علامات الاقتباس حول الأمر `{print}` هكذا `'{print}'`."
+                feedback: "علامات الاقتباس لا توضع حول الأمر نفسه."
+            -   option: "يجب وضع علامات الاقتباس حول الكلام الذي تريد طباعته."
+                feedback: "ممتاز!"
+            -   option: "الأمر `{ask}` لا يحتاج إلى علامات الاقتباس"
+                feedback: "كلا الأمرين `{print}` و `{ask}` يحتاج إلى علامات الاقتباس"
+            -   option: "لك حرية الاختيار ان تستخدم علامات الاقتباس أم لا."
+                feedback: "للأسف, هيدي قوانينها صارمة بشأن علامات الاقتباس."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
-            question_score: '10'
+            hint: "ابتداءً من المستوى الرابع عليك استخدام علامات الاقتباس."
+            question_score: '١٠'
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "ما الذي يجب تغييره في الكود كي تعمل للعبة بالشكل الصحيح؟"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                الخيارات {is} حجر, ورقة, مقص
+                {print} 'الخيارات {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
-                    '{print} options {at} {random}'
+                    '{print} الخيارات {at} {random}'
                     ```
-                feedback: "Never put the quotation mark in front of the {print} command."
+                feedback: "احذر ان تضع علامات الاقتباس قبل الأمر {print}."
             -   option: |
                     ```
-                    {print} 'options' {at} {random}
+                    {print} 'الخيارات' {at} {random}
                     ```
-                feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
+                feedback: "الخيارات هي متغير. أنت لا تريد طباعة جملة \"الخيارات{at}{random}\" حرفياً."
             -   option: |
                     ```
-                    {print} options {at} {random}
+                    {print} الخيارات {at} {random}
                     ```
-                feedback: "That's right"
-            -   option: "Nothing, the game already works!"
-                feedback: "Look carefully. There is an error."
+                feedback: "إجابة صحيحة, أحسنت!"
+            -   option: "لا شيء, اللعبة تعمل بالشكل الصحيح!"
+                feedback: "انظر جيدًا. هناك خطأ في الكود."
             correct_answer: "C"
             hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
-            question_score: '10'
+            question_score: '١٠'
         6:
             question_text: "What would be a good next line in this code?"
             code: |-
-                prices {is} 1 dollar, 100 dollars, 1 million dollars
+                الجوائز {is} ١ دولار, ١٠٠ دولارات, مليون دولار
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'You win...' prices {at} {random}
+                    {print} 'لقد ربحت ...' الجوائز {at} {random}
                     ```
-                feedback: "Great! You get it!"
+                feedback: "أحسنت! إجابة صحيحة!"
             -   option: |
                     ```
-                    {print} You win... 'prices {at} {random}'
+                    {print} لقد ربحت... 'الجوائز {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}'"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"الجوائز{at}{random}\""
             -   option: |
                     ```
-                    {print} You win... prices {at} {random}
+                    {print} لقد ربحت... الجوائز {at} {random}
                     ```
-                feedback: "You need some quotation marks!"
+                feedback: "تحتاج إلى علامات الاقتباس!"
             -   option: |
                     ```
-                    {print} 'You win... prices {at} {random}'
+                    {print} 'لقد ربحت... الجوائز {at} {random}'
                     ```
-                feedback: "Hedy will literally print 'prices {at} {random}''"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"الجوائز {at}{random}\""
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
-            question_score: '10'
+            hint: "فكّر جيدًا قبل الإجابة, فرّق بين المتغير الذي لا ينبغي وضعه داخل علامات اقتباس والكلمات العادية التي يجب وضعها داخل علامات اقتباس عند الطباعة"
+            question_score: '١٠'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                السؤال {is} {ask} ماذا تريد أن تعرف؟
+                الإجابات {is} نعم, لا, ربما
+                {print} الإجابات {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "Correct!"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "A variable doesn't need quotes"
-            -   option: "Quotation marks are missing in line 3"
-                feedback: "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
-            -   option: "Nothing, this code is good as is!"
-                feedback: "Look carefully. You missed a mistake!"
+            -   option: "علامات الاقتباس مفقودة في السطر الأول"
+                feedback: "صحيح!"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني"
+                feedback: "المتغير لا يحتاج إلى علامات الاقتباس"
+            -   option: "علامات الاقتباس مفقودة في السطر الثالث"
+                feedback: "أنت لا تريد هيدي أن تطبع عبارة\"الإجابات بشكل عشوائي\" لذلك لا حاجة لعلامات الاقتباس هنا!"
+            -   option: "لا شيء, الكود يبدو جيدًا كما هو!"
+                feedback: "انظر جيدًا, هناك خطأ في الكود!"
             correct_answer: "A"
-            hint: "Check each line on whether they'd need quotation marks or not."
-            question_score: '10'
+            hint: "تفقد كل سط إن كان بحاجة علامات الاقتباس أم لا."
+            question_score: '١٠'
         8:
-            question_text: "What would be a good next line for this code?"
+            question_text: "ما هو السطر المناسب ليكمل الكود التالي؟"
             code: |-
-                {print} 'Welcome at the money show!'
-                {print} 'In front of you are 3 doors'
-                door {is} {ask} 'Which door do you choose?'
+                {print} 'أهلًا بك في عرض الأموال'
+                {print} 'امامك ثلاثة أبواب'
+                الباب {is} {ask} 'أي باب ستختار؟'
             mp_choice_options:
             -   option: |
                     ```
-                    {print} So you pick door door
+                    {print} إذًا, لقد اخترت الباب الباب
                     ```
-                feedback: "We need quotation marks"
+                feedback: "ينقصنا علامات الاقتباس"
             -   option: |
                     ```
-                    {print} 'So you pick ' door door
+                    {print} 'إذًا لقد اخترت ' الباب الباب
                     ```
-                feedback: "If the player chooses door 3, Hedy will say 'So you pick 3 3"
+                feedback: "إذا اختار اللاعب الباب 3, هيدي ستطبع \"إذًا لقد اخترت\" 3 3"
             -   option: |
                     ```
-                    {print} 'So you pick door ' door
+                    {print} 'إذًا لقد اخترت الباب ' الباب
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {print} 'So you pick door door'
+                    {print} 'إذًا لقد اخترت الباب الباب'
                     ```
-                feedback: "Hedy will literally print 'So you pick door door"
+                feedback: "هيدي ستطبع حرفيًا عبارة \"لقد اخترت الباب الباب\""
             correct_answer: "C"
-            hint: "The second word door should be replaced with the number, the first should still be the word door..."
-            question_score: '10'
+            hint: "المتغير \"الباب\" يجب أن تطبع قيمته كرقم..."
+            question_score: '١٠'
         9:
-            question_text: "What will never appear in your output screen?"
+            question_text: "ما الخيار الذي لن يظهر على الشاشة أبدًا؟"
             code: |-
-                clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' is going the win the champions league'
+                النوادي_الرياضية {is} ريال مدريد, بايرين ميونيخ, مانشستر يونايتيد, اجاكس
+                {print} النوادي_الرياضية {at} {random} ' سيفوز في دوري أبطال أوروبا'
             mp_choice_options:
-            -   option: "Ajax is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Real Madrid is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "Bayer Munchen is going to win the champions league"
-                feedback: "Hedy could `{print}` that"
-            -   option: "FC Barcelona is going to win the champions league"
-                feedback: "That's right. It's not in the list"
+            -   option: "اجاكس سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "ريال مدريد سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "بايرين ميونيخ سيفوز في دوري أبطال أوروبا"
+                feedback: "من الممكن أن تطبع هيدي ذلك الخيار"
+            -   option: "نادي برشلونة سيفوز في دوري أبطال أوروبا"
+                feedback: "إجابة صحيحة, نادي برشلونة ليس من ضمن القائمة"
             correct_answer: "D"
-            hint: "What are Hedy's options to randomly pick from?"
-            question_score: '10'
+            hint: "ما هي الخيارات التي ستختار منها هيدي عشوائيًا؟"
+            question_score: '١٠'
         10:
-            question_text: "Which statement is true?"
+            question_text: "اختر الإجابة الصحيحة مما يلي:"
             code: |-
-                people {is} mom, dad, Emma, Sophie
-                {print} The dishes are done by...
-                {print} people {at} {random}
+                الأشخاص {is} الأم, الأب, إيمان, صوفي
+                {print} غسل الأطباق سيكون على...
+                {print} الأشخاص {at} {random}
             mp_choice_options:
-            -   option: "Quotation marks are missing in line 1"
-                feedback: "A list doesn't need quotation marks"
-            -   option: "Quotation marks are missing in line 2"
-                feedback: "Correct"
-            -   option: "Quotation marks are missing in both line 2 and 3"
-                feedback: "Line 3 doesn't need quotation marks because it's not printed literally"
-            -   option: "Nothing, this code has no mistakes"
-                feedback: "You missed one!"
+            -   option: "علامات الاقتباس مفقودة في السطر الأول"
+                feedback: "القائمة لا تحتاج إلى علامات الاقتباس"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني"
+                feedback: "صحيح"
+            -   option: "علامات الاقتباس مفقودة في السطر الثاني والثالث"
+                feedback: "لا نحتاج إلى علامات الاقتباس عند طباعة المتغيرات"
+            -   option: "لا شيء, الكود لا يحتوي على أخطاء"
+                feedback: "ركّز جيّدًا ستجد خطأ!"
             correct_answer: "B"
-            hint: "One line needs quotation marks, because you want it to be printed literally."
-            question_score: '10'
+            hint: "أحد السطور يحتاج إلى علامات اقتباس, لأننا نريد طباعته حرفيًا."
+            question_score: '١٠'
     5:
         1:
             question_text: "What is true?"
@@ -1101,13 +1116,13 @@ levels:
         2:
             question_text: "Which sign do you use for an addition?"
             mp_choice_options:
-            -   option: "-"
+            -   option: "`-`"
                 feedback: "That's not it"
             -   option: "plus"
                 feedback: "That's not it"
-            -   option: "*"
+            -   option: "`*`"
                 feedback: "That's not it"
-            -   option: "+"
+            -   option: "`+`"
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "It's the plus sign."
@@ -1613,43 +1628,38 @@ levels:
             hint: "Something is wrong with indentation"
             question_score: '10'
         6:
-            question_text: "Which code was used to create this output?"
+            question_text: "What will be the output of this code when we enter pancakes?"
+            code: |-
+                {print} 'Welcome to restaurant Hedy'
+                {repeat} 2 {times}
+                    food {is} {ask} 'What do you want to eat?'
+                    {print} food
             mp_choice_options:
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
-                    {print} food
-                    ```
-                feedback: "You need to take 2 orders."
+                    Welcome to restaurant Hedy
+                    Pancakes
+                feedback: "There is no repetition in this answer."
             -   option: |
-                    ```
-                    {repeat} 2 {times}
-                        {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
-                        {print} food
-                    ```
-                feedback: "The welcome line would be printed twice in this code too"
+                    Welcome to restaurant Hedy
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "This answer also repeats the welcome message"
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                    {print} food
-                    ```
-                feedback: "Now only the last order is printed."
+                    Welcome to restaurant Hedy
+                    What do you want to eat?
+                    What do you want to eat?
+                    Pancakes
+                    Pancakes
+                feedback: "Almost! But look at the question, it is not repeated."
             -   option: |
-                    ```
-                    {print} 'Welcome to restaurant Hedy'
-                    {repeat} 2 {times}
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                    ```
-                feedback: "Awesome!"
+                    Welcome to restaurant Hedy
+                    Pancakes
+                    Pancakes
+                feedback: "Well done!"
             correct_answer: "D"
-            hint: "Pay attention to what sould be repeated and what should only be printed once."
+            hint: "The first sentence and question will not be repeated"
             question_score: '10'
-            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "What is wrong with this code?"
             code: |-
@@ -2806,14 +2816,164 @@ levels:
             question_text: What is wrong with this code?
             code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
             mp_choice_options:
-            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: Correct!
-            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
                 feedback: This is not what I ordered!
-            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
                 feedback: This is not what I ordered!
             correct_answer: A
             hint: There is a mistake in line 3
+            question_score: '10'
+    14:
+        3:
+            correct_answer: C
+            mp_choice_options:
+            -   option: '`>` and `<`'
+                feedback: That's not it
+            -   option: '`=` and `>=`'
+                feedback: That's not it
+            -   option: '`<` and `>=`'
+                feedback: You are right
+            -   option: ' `+` and `==`'
+            feedback: That's not it
+            hint: There are 130 people allowed in the club
+            question_score: '10'
+            question_text: Which symbols should be filled in on the two blanks?
+            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'\n"
+        4:
+            mp_choice_options:
+            -   option: In line 1 == should be used instead of =
+                feedback: No that's not it
+            -   option: Line 2 misses quotation marks
+                feedback: You are correct
+            -   feedback: No that's not it
+                option: In line 4 = should have been used instead of ==
+            -   option: In line 4 <= should have been used instead of >=
+            question_text: What's wrong with this code?
+            code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
+            hint: The symbols are right
+            feedback: No that's not it
+            correct_answer: B
+            question_score: '10'
+        5:
+            mp_choice_options:
+            -   option: '`> 12`'
+                feedback: 12 year olds are allowed too
+            -   option: '`>= 12`'
+                feedback: Great!
+            -   option: '`< 12`'
+                feedback: These kids are too young!
+            -   option: '`<= 12`'
+                feedback: These kids are too young
+            question_text: 'Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? '
+            code: "age = {ask} 'How old are you?'\nticket = {ask} 'Do you have a ticket?'\n{if} age _ and ticket == 'yes'\n    {print} 'You can enter the movie theater.'\n{else}\n    {print} 'You are not allowed to come in!'\n"
+            correct_answer: B
+            hint: '> means greater than'
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   option: 10 times
+                feedback: It stops after 2 times
+            -   option: 0 times
+                feedback: It stops after 2 times
+            -   option: 1 time
+                feedback: It stops after 2 times
+            -   option: 2 times
+                feedback: That is correct
+            question_text: How many times do you have to say you are annoyed before this annoying game stops?
+            code: "lives = 2\n{repeat} 10 times\n    {if} lives != 0\n        answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1\n"
+            correct_answer: D
+            hint: "!= means 'is not'"
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: "`'Lower'` and `'Higher'` and `'You win!'`"
+                feedback: That's not quite right.
+            -   option: "`'Higher'` and `'Lower'` and `'You win!'`"
+                feedback: You win!
+            -   option: "`'You win!'` and `'Lower!'` and `'Higher'`"
+                feedback: That's not quite right.
+            -   option: "`'Lower!'` and `'You win!'` and `'Higher!'`"
+                feedback: That's not quite right.
+            question_text: What should be filled in on the three blanks?
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'\n"
+            correct_answer: B
+            hint: The last one should say you win.
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   feedback: True!
+                option: You must be taller than 120 cm to go on the roller coaster
+            -   option: You must be taller than 119 cm to go on the roller coaster
+                feedback: If you are 120 cm you won't get in
+            -   option: You must be shorter than 120 cm to go on the roller coaster
+                feedback: '> means greater than'
+            -   option: There are no length restrictions to go on the roller coaster
+            question_text: Which statement is true about this roller coaster?
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            feedback: There are.
+            correct_answer: A
+            hint: '> means greater than'
+            question_score: '10'
+        9:
+            mp_choice_options:
+            -   option: 1 or more
+                feedback: No
+            -   feedback: No
+                option: 2 or more
+            -   option: 8 or more
+                feedback: Almost
+            -   option: 9 or more
+                feedback: Great!
+            question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
+            code: "chocolate = {ask} 'How many pieces of chocolate have you eaten?'\n  {if} chocolate <= 2\n      {print} 'That is a healthy amount'\n  {if} chocolate > 2 and chocolate =< 8\n      {print} 'That is a bit much'\n  {if} chocolate > 8\n      {print} 'You will get a stomach ache!'\n"
+            correct_answer: D
+            hint: '> 8 means more than 8'
+            question_score: '10'
+        1:
+            question_text: Which symbol should be used on the blank?
+            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'\n"
+            mp_choice_options:
+            -   option: '`=>`'
+                feedback: This is not a symbol.
+            -   option: '`==`'
+                feedback: We are not comparing anything, just asking.
+            -   option: '`!=`'
+                feedback: We are not comparing anything, just asking
+            -   option: '`=`'
+                feedback: Right!
+            correct_answer: D
+            hint: We are not comparing anything, we are just asking a name.
+            question_score: '10'
+        2:
+            question_text: Which of these codes has used the correct = or == symbol?
+            mp_choice_options:
+            -   option: '{if} name = Hedy'
+                feedback: No
+            -   option: '{if} age = 24'
+                feedback: No
+            -   option: answer = {ask} 'What is your answer'
+                feedback: Yes!
+            -   option: answer == {ask} 'How are you doing?'
+                feedback: No
+            correct_answer: C
+            hint: When you are comparing two answers you should use ==
+            question_score: '10'
+        10:
+            question_text: What should be filled in in the blanks?
+            code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _\n"
+            mp_choice_options:
+            -   option: "'player 1 wins'"
+                feedback: Look at who has the highest score!
+            -   option: "'player 2 wins'"
+                feedback: Yes!
+            -   option: "'player 2 loses'"
+                feedback: Look at who has the highest score!
+            -   option: "'It is a tie'"
+            feedback: No it's not, one player has a higher score
+            correct_answer: B
+            hint: You win the game by having the most points
             question_score: '10'

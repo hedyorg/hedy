@@ -2,13 +2,13 @@ _print_argument: (_SPACE | quoted_text | list_access | expression | print_expres
 ?print_expression: var_access_print | error_unsupported_number | INT
 
 // redefining it entirely since it has many order-depending rules
-command: clear | print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | ifpressed | ifelse | ifs | ask | assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
-_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | assign_button | assign | assign_list
+command: clear | print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | error_ifpressed_missing_else | ifelse | ifs | ask | error_ask_no_quotes| assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
+_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | error_ask_no_quotes | assign_button | assign | assign_list
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
 
-equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (textwithoutspaces | quoted_text | INT)
+equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
 
 condition:+= equality_check -= equality_check
 
@@ -19,11 +19,13 @@ assign: var (_IS | _EQUALS) (list_access | expression | textwithoutspaces | text
 
 sleep: _SLEEP (INT | list_access | var_access | expression)?
 
-turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces | expression))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces))? -> color
+turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces | expression))? -> turn | _COLOR (turtle_color)? -> color
 
 ?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _PLUS atom -> addition | expression _MINUS atom -> subtraction
 ?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _PLUS atom -> addition | atom _MINUS atom -> subtraction
 
 ?atom: INT | _MINUS INT |var_access | error_unsupported_number | textwithoutspaces
 
-error_unsupported_number: /([-+]?(\d+[\.،,，]\d+))/ -> error_unsupported_number
+error_unsupported_number: /([-+]?(\d+[\.،,、，]\d+))/ -> error_unsupported_number
+
+?turtle_color: black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces

@@ -1,0 +1,20 @@
+{##
+ # HTMX base layout for normal page load
+ #
+ # This layout is a frame for a page that is intended to be loaded
+ # via HTMX, but currently is being loaded regularly (for debugging
+ # purposes).
+ #
+ # The page contains minimal elements, but will include scripts
+ # and styling.
+ #
+ # Use like this (remove tilde): {~% extends hx_layout %~}
+ #}
+{% extends "layout.html" %}
+{% block full_width_content %}
+
+<div id="auth_main_container" class="common-page-container" hx-target="this">
+{% block regular_content %}{% endblock %}
+</div>
+
+{% endblock %}

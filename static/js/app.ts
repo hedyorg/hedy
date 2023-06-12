@@ -1,44 +1,49 @@
-// It's important that this file gets loaded first
-import './syntaxModesRules';
-
-import { modal, error, success } from './modal';
+import { initializeSyntaxHighlighter } from './syntaxModesRules';
+import { ClientMessages } from './client-messages';
+import { modal, error, success, tryCatchPopup } from './modal';
 import { Markers } from './markers';
+import JSZip from "jszip";
+import { Tabs } from './tabs';
+import { MessageKey } from './message-translations';
+import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
+import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
+import { startIntroTutorial } from './tutorials/tutorial';
+import { loadParsonsExercise } from './parsons';
+import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
+import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
+import { localDelete, localLoad, localSave } from './local';
+import { initializeLoginLinks } from './auth';
+import { postJson } from './comm';
+import { LocalSaveWarning } from './local-save-warning';
+
+// const MOVE_CURSOR_TO_BEGIN = -1;
+const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
 let last_code: string;
 
-const turtle_prefix =
-`# coding=utf8
-import random, time, turtle
-t = turtle.Turtle()
-t.shape("turtle")
-t.hideturtle()
-t.penup()
-t.left(90)
-t.pendown()
-t.speed(3)
-t.showturtle()
-`;
+/**
+ * Used to record and undo pygame-related settings
+ */
+let pygameRunning = false;
 
-const pygame_prefix =
-`# coding=utf8
-import pygame
-import buttons
-pygame.init()
-canvas = pygame.display.set_mode((711,300))
-canvas.fill(pygame.Color(247, 250, 252, 255))
-pygame_end = False
+/**
+ * Represents whether there's an open 'ask' prompt
+ */
+let askPromptOpen = false;
 
-button_list = []
-def create_button(name):
-  if name not in button_list:
-    button_list.append(name)
-    buttons.add(name)
-
-`;
+// Many bits of code all over this file need this information globally.
+// Not great but it'll do for now until we refactor this file some more.
+let theAdventures: Record<string, Adventure> = {};
+let theLevel: number = 0;
+let theLanguage: string = '';
+let theKeywordLanguage: string = 'en';
+let currentTab: string;
+let theUserIsLoggedIn: boolean;
 
 const pygame_suffix =
 `# coding=utf8
@@ -46,285 +51,367 @@ pygame_end = True
 pygame.quit()
 `;
 
-const normal_prefix =
-`# coding=utf8
-import random, time, extensions
-global int_saver
-global convert_numerals # needed for recursion to work
-int_saver = int
-def int(s):
-  if isinstance(s, str):
-    numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
-    latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
-    return int_saver(latin_numerals)
-  return(int_saver(s))
+const slides_template = `
+<!DOCTYPE html>
+<html class="sl-root decks export offline loaded">
 
-def convert_numerals(alphabet, number):
-  numerals_dict_return = {
-    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
-    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
-    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
-    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
-    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
-    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
-    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
-    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
-    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
-    'Telugu':['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
-    'Burmese':['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
-    'Tibetan':['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
-    'Mongolian':['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
-    'Khmer':['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
-    'Thai':['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
-    'Lao':['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
-    'Javanese':['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
-    'Arabic':['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
-    'Persian':['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
-    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Slides Level - 1</title>
+	<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+</head>
 
-  number = str(number)
-  T = str
+<body class="reveal-viewport theme-font-montserrat theme-color-white-blue">
+	<div class="reveal">
+		<div class="slides">
+			{replace}
+		</div>
+	</div>
 
-  sign = ''
-  if number[0] == '-':
-    sign = '-'
-    number = number[1:]
+	<!-- Initialize the presentation -->
+	<script>
+		Reveal.initialize({
+			width: 960,
+			height: 700,
+			margin: 0.05,
 
-  if number.replace('.', '', 1).isnumeric():
-    numerals_list = numerals_dict_return[alphabet]
-    if '.' in number:
-      tokens = number.split('.')
-      all_numerals_converted = [numerals_list[int(digit)] for digit in tokens[0]]
-      all_numerals_converted.append('.')
-      all_numerals_converted.extend(numerals_list[int(digit)] for digit in tokens[1])
-      if alphabet == 'Latin':
-        T = float
-    else:
-      all_numerals_converted = [numerals_list[int(digit)] for digit in number]
-      if alphabet == 'Latin':
-        T = int
-    number = ''.join(all_numerals_converted)
-  return T(f'{sign}{number}')
+
+			hash: true,
+			controls: true,
+			progress: true,
+			mouseWheel: false,
+			showNotes: false,
+			slideNumber: false,
+			fragmentInURL: true,
+
+			autoSlide: 0,
+			autoSlideStoppable: true,
+
+			autoAnimateMatcher: SL.deck.AutoAnimate.matcher,
+
+			center: false,
+			shuffle: false,
+			loop: false,
+			rtl: false,
+			navigationMode: "default",
+
+			transition: "slide",
+			backgroundTransition: "slide",
+
+			highlight: {
+				escapeHTML: false
+			},
+
+			plugins: [RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight]
+		});
+	</script>
+</body>
+</html>
 `;
 
-// Close the dropdown menu if the user clicks outside of it
-$(document).on("click", function(event){
-    if(!$(event.target).closest(".dropdown").length){
-        $(".dropdown-menu").slideUp("medium");
-        $(".cheatsheet-menu").slideUp("medium");
-    }
-});
+export interface InitializeAppOptions {
+  readonly level: number;
+  readonly keywordLanguage: string;
+}
 
-const onElementBecomesVisible = (() => {
-  const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
+/**
+ * Initialize "global" parts of the main app
+ */
+export function initializeApp(options: InitializeAppOptions) {
+  theLevel = options.level;
+  theKeywordLanguage = options.keywordLanguage;
+  initializeSyntaxHighlighter({
+    keywordLanguage: options.keywordLanguage,
+  });
+  initializeHighlightedCodeBlocks(document.body);
+  initializeCopyToClipboard();
 
-  function isInView(elem: HTMLElement) {
-    var docViewTop = $(window).scrollTop()!;
-    var docViewBottom = docViewTop + $(window).height()!;
-    var elemTop = $(elem).offset()!.top;
-    return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
-  }
-
-  $(window).on('scroll', () => {
-    for (let i = 0; i < SCROLL_HANDLERS.length; ) {
-      const [element, handler] = SCROLL_HANDLERS[i];
-      if (isInView(element)) {
-        handler();
-        SCROLL_HANDLERS.splice(i, 1);
-      } else {
-        i += 1;
+  // Close the dropdown menu if the user clicks outside of it
+  $(document).on("click", function(event){
+      if(!$(event.target).closest(".dropdown").length){
+          $(".dropdown-menu").slideUp("medium");
+          $(".cheatsheet-menu").slideUp("medium");
       }
-    }
   });
 
-  return function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
-    if (isInView(element)) {
-      handler();
-    } else {
-      SCROLL_HANDLERS.push([element, handler]);
-    }
-  }
-})();
+  $("#search_language").on('keyup', function() {
+      let search_query = ($("#search_language").val() as string).toLowerCase();
+      $(".language").each(function(){
+          if ($(this).html().toLowerCase().includes(search_query)) {
+              $(this).show();
+          } else {
+              $(this).hide();
+          }
+      });
+  });
 
-(function() {
-  // A bunch of code expects a global "State" object. Set it here if not
-  // set yet.
-  if (!window.State) {
-    window.State = {};
+  // All input elements with data-autosubmit="true" automatically submit their enclosing form
+  $('*[data-autosubmit="true"]').on('change', (ev) => {
+    $(ev.target).closest('form').trigger('submit');
+  });
+
+  initializeLoginLinks();
+}
+
+export interface InitializeCodePageOptions {
+  readonly page: 'code';
+  readonly level: number;
+  readonly lang: string;
+  readonly adventures: Adventure[];
+  readonly start_tutorial?: boolean;
+  readonly initial_tab: string;
+  readonly current_user_name?: string;
+}
+
+/**
+ * Initialize the actual code page
+ */
+export function initializeCodePage(options: InitializeCodePageOptions) {
+  theUserIsLoggedIn = !!options.current_user_name;
+  if (theUserIsLoggedIn) {
+    theLocalSaveWarning.setLoggedIn();
   }
 
-  // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("body").attr("dir");
+  theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
+
+  // theLevel will already have been set during initializeApp
+  if (theLevel != options.level) {
+    throw new Error(`initializeApp set level to ${JSON.stringify(theLevel)} but initializeCodePage sets it to ${JSON.stringify(options.level)}`);
+  }
+  theLanguage = options.lang;
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
-  // Any code blocks we find inside 'turn-pre-into-ace' get turned into
-  // read-only editors (for syntax highlighting)
-  for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview)
-      .addClass('text-lg rounded overflow-x-hidden')
-      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-      .attr('lang', <string>window.State.keyword_language);
+  const anchor = window.location.hash.substring(1);
 
-    // Only turn into an editor if the editor scrolls into view
-    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-    onElementBecomesVisible(preview, () => {
-      const exampleEditor = turnIntoAceEditor(preview, true);
+  const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
 
-      // Fits to content size
-      exampleEditor.setOptions({ maxLines: Infinity });
-      if ($(preview).hasClass('common-mistakes')) {
-        exampleEditor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true,
-          minLines: 5,
-        });
-      } else if ($(preview).hasClass('cheatsheet')) {
-        exampleEditor.setOptions({ minLines: 1 });
-      } else if ($(preview).hasClass('parsons')) {
-        exampleEditor.setOptions({
-          minLines: 1,
-          showGutter: false,
-          showPrintMargin: false,
-          highlightActiveLine: false
-        });
-      } else {
-        exampleEditor.setOptions({ minLines: 2 });
-      }
+  const tabs = new Tabs({
+    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+    // We click on `level` to load a program associated with level, if any.
+    initialTab: validAnchor ?? options.initial_tab,
+  });
 
-      if (dir === "rtl") {
-          exampleEditor.setOptions({ rtl: true });
-      }
-      // Strip trailing newline, it renders better
-      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-      if (! $(preview).hasClass('no-copy-button')) {
-        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-        let symbol = "⇥";
-        if (dir === "rtl") {
-          symbol = "⇤";
-        }
-        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-          stopit();
-          clearOutput();
-        });
-      }
-      if($(preview).attr('level')){
-        let level = String($(preview).attr('level'));
-        exampleEditor.session.setMode(getHighlighter(level));
-      }
-    });
-  }
+  tabs.on('beforeSwitch', () => {
+    // If there are unsaved changes, we warn the user before changing tabs.
+    saveIfNecessary();
+  });
 
-  /**
-   * Initialize the main editor and attach all the required event handlers
-   */
-  function initializeMainEditor($editor: JQuery) {
-    if (!$editor.length) return;
+  tabs.on('afterSwitch', (ev) => {
+    currentTab = ev.newTab;
+    const adventure = theAdventures[currentTab];
 
-    // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
-    theGlobalEditor = editor;
-    theGlobalEditor.setShowPrintMargin(false);
-    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
-    error.setEditor(editor);
-    markers = new Markers(theGlobalEditor);
-
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // Load existing code from session, if it exists
-    const storage = window.sessionStorage;
-    if (storage) {
-      const levelKey = $editor.data('lskey');
-      const loadedProgram = $editor.data('loaded-program');
-
-      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-      const programFromStorage = storage.getItem(levelKey);
-      if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue(programFromStorage, 1);
-      }
-
-      // When the user exits the editor, save what we have.
-      editor.on('blur', function(_e: Event) {
-        storage.setItem(levelKey, editor.getValue());
-      });
-
-      if (dir === "rtl") {
-         editor.setOptions({ rtl: true });
-      }
-
-      // If prompt is shown and user enters text in the editor, hide the prompt.
-      editor.on('change', function () {
-        if (window.State.disable_run) {
-          stopit();
-          editor.focus(); // Make sure the editor has focus, so we can continue typing
-        }
-        if ($('#ask-modal').is (':visible')) $('#inline-modal').hide();
-        window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-        window.State.unsaved_changes = true;
-
-        clearErrors(editor);
-        //removing the debugging state when loading in the editor
-        stopDebug();
-      });
+    // Load initial code from local storage, if available
+    const programFromLs = localLoad(currentTabLsKey());
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
+      adventure.start_code = programFromLs.code;
+      adventure.save_name = programFromLs.saveName;
+      adventure.save_info = 'local-storage';
     }
 
-    // *** PROMPT TO SAVE CHANGES ***
+    reconfigurePageBasedOnTab();
+    checkNow();
+    theLocalSaveWarning.switchTab();
+  });
 
-    window.onbeforeunload = () => {
-      // The browser doesn't show this message, rather it shows a default message.
-      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return ErrorMessages['Unsaved_Changes'];
-      } else {
-        return undefined;
-      }
-    };
+  initializeSpeech();
 
-    // *** KEYBOARD SHORTCUTS ***
-
-    let altPressed: boolean | undefined;
-
-    // alt is 18, enter is 13
-    window.addEventListener ('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!window.State.level || !window.State.lang) {
-          throw new Error('Oh no');
-        }
-        runit (window.State.level, window.State.lang, "", function () {
-          $ ('#output').focus ();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-        editor.focus ();
-        editor.navigateFileEnd ();
-      }
-    });
-    window.addEventListener ('keyup', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-    return editor;
+  if (options.start_tutorial) {
+    startIntroTutorial();
   }
 
-})();
+  // Share/hand in modals
+  $('#share_program_button').on('click', () => $('#share-modal').show());
+  $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
+  initializeShareProgramButtons();
+  initializeHandInButton();
 
-export function getHighlighter(level: string) {
-  return `ace/mode/level` + level;
+  // Save if user navigates away
+  window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
+
+  // Save if program name is changed
+  $('#program_name').on('blur', () => saveIfNecessary());
+}
+
+export interface InitializeViewProgramPageOptions {
+  readonly page: 'view-program';
+  readonly level: number;
+  readonly lang: string;
+}
+
+export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
+  theLevel = options.level;
+  theLanguage = options.lang;
+
+  // We need to enable the main editor for the program page as well
+  initializeMainEditor($('#editor'));
+}
+
+/**
+ * Initialize the main editor and attach all the required event handlers
+ */
+function initializeMainEditor($editor: JQuery) {
+  if (!$editor.length) return;
+
+  // Set const value to determine the current page direction -> useful for ace editor settings
+  const dir = $("body").attr("dir");
+
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
+  theGlobalEditor = editor;
+  theGlobalEditor.setShowPrintMargin(false);
+  theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
+  theGlobalEditor.addEventListener('change', () => {
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
+  });
+  error.setEditor(editor);
+  markers = new Markers(theGlobalEditor);
+
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+  if (dir === "rtl") {
+      editor.setOptions({ rtl: true });
+  }
+
+  // If prompt is shown and user enters text in the editor, hide the prompt.
+  editor.on('change', function () {
+    if (askPromptOpen) {
+      stopit();
+      editor.focus(); // Make sure the editor has focus, so we can continue typing
+    }
+    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+    askPromptOpen = false;
+    $ ('#runit').css('background-color', '');
+
+    clearErrors(editor);
+    //removing the debugging state when loading in the editor
+    stopDebug();
+  });
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed: boolean | undefined;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      if (!theLevel || !theLanguage) {
+        throw new Error('Oh no');
+      }
+      runit (theLevel, theLanguage, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    triggerAutomaticSave();
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+
+  // *** Debugger ***
+  initializeDebugger({
+    editor: theGlobalEditor,
+    markers,
+    level: theLevel,
+    language: theLanguage,
+  });
+
+  return editor;
+}
+
+export function initializeHighlightedCodeBlocks(where: Element) {
+  const dir = $("body").attr("dir");
+
+  // Any code blocks we find inside 'turn-pre-into-ace' get turned into
+  // read-only editors (for syntax highlighting)
+  for (const container of $(where).find('.turn-pre-into-ace').get()) {
+    for (const preview of $(container).find('pre').get()) {
+      $(preview)
+        .addClass('text-lg rounded overflow-x-hidden')
+        // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+        .attr('lang', theKeywordLanguage);
+
+      // Only turn into an editor if the editor scrolls into view
+      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+      onElementBecomesVisible(preview, () => {
+        const exampleEditor = turnIntoAceEditor(preview, true);
+
+        // Fits to content size
+        exampleEditor.setOptions({ maxLines: Infinity });
+        if ($(preview).hasClass('common-mistakes')) {
+          exampleEditor.setOptions({
+            showGutter: true,
+            showPrintMargin: true,
+            highlightActiveLine: true,
+            minLines: 5,
+          });
+        } else if ($(preview).hasClass('cheatsheet')) {
+          exampleEditor.setOptions({ minLines: 1 });
+        } else if ($(preview).hasClass('parsons')) {
+          exampleEditor.setOptions({
+            minLines: 1,
+            showGutter: false,
+            showPrintMargin: false,
+            highlightActiveLine: false
+          });
+        } else {
+          exampleEditor.setOptions({ minLines: 2 });
+        }
+
+        if (dir === "rtl") {
+            exampleEditor.setOptions({ rtl: true });
+        }
+
+        // Strip trailing newline, it renders better
+        exampleEditor.setValue(exampleEditor.getValue().trimRight(), -1);
+        // And add an overlay button to the editor if requested via a show-copy-button class, either
+        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          let symbol = "⇥";
+          if (dir === "rtl") {
+            symbol = "⇤";
+          }
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+            if (!theGlobalEditor?.getReadOnly()) {
+              theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
+            }
+            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+            stopit();
+            clearOutput();
+          });
+        }
+
+        const levelStr = $(preview).attr('level');
+        if (levelStr) {
+          exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+        }
+      });
+    }
+  }
+}
+
+export function getHighlighter(level: number) {
+  return `ace/mode/level${level}`;
 }
 
 function clearErrors(editor: AceAjax.Editor) {
@@ -335,12 +422,12 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  if (window.State.pygame_running) {
+  if (pygameRunning) {
       // when running pygame, raise the pygame quit event
       Sk.insertPyGameEvent("quit");
       Sk.unbindPygameListeners();
 
-      window.State.pygame_running = false;
+      pygameRunning = false;
       document.onkeydown = null;
       $('#pygame-modal').hide();
       $('#stopit').hide();
@@ -362,7 +449,7 @@ export function stopit() {
       }
   }
 
-  window.State.disable_run = false;
+  askPromptOpen = false;
 }
 
 function clearOutput() {
@@ -384,13 +471,20 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
-  if (window.State.disable_run) {
+export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+  // Copy 'currentTab' into a variable, so that our event handlers don't mess up
+  // if the user changes tabs while we're waiting for a response
+  const adventureName = currentTab;
+
+  if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
-      return modal.alert(disabled_prompt, 3000, true);
-    } return;
+      return modal.notifyError(disabled_prompt);
+    }
+    return;
   }
+
+  theLocalSaveWarning.clickRun();
 
   // Make sure to stop previous PyGame event listeners
   if (typeof Sk.unbindPygameListeners === 'function') {
@@ -401,15 +495,13 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFiles').hide();
+  $('#saveFilesContainer').hide();
   clearOutput();
 
   try {
-    level = level.toString();
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
-      window.State.unsaved_changes = false; // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -435,30 +527,36 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     removeBulb();
     console.log('Original program:\n', code);
 
-    $.ajax({
-      type: 'POST',
-      url: '/parse',
-      data: JSON.stringify({
-        level: level,
+    const adventure = theAdventures[adventureName];
+
+    try {
+      cancelPendingAutomaticSave();
+      const response = await postJsonWithAchievements('/parse', {
+        level: `${level}`,
         code: code,
         lang: lang,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: window.State.adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response: any) {
+        adventure_name: adventureName,
+
+        // Save under an existing id if this field is set
+        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+        save_name: saveNameFromInput(),
+      });
+
       console.log('Response', response);
+
       if (response.Warning && $('#editor').is(":visible")) {
         //storeFixedCode(response, level);
-        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
+        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
       }
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
+      showAchievements(response.achievements, false, "");
+      if (adventure && response.save_info) {
+        adventure.save_info = response.save_info;
+        adventure.start_code = code;
       }
       if (response.Error) {
-        error.show(ErrorMessages['Transpile_error'], response.Error);
+        error.show(ClientMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
@@ -468,88 +566,56 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
-          error.show(ErrorMessages['Execute_error'], err.message);
+          error.show(ClientMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
       });
-    }).fail(function(xhr) {
-      console.error(xhr);
-       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      if (xhr.readyState < 4) {
-        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
+    } catch (e: any) {
+      console.error(e);
+      if (e.internetError) {
+        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
       } else {
-        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
+        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
       }
-    });
-
+    }
   } catch (e: any) {
-    modal.alert(e.responseText, 3000, true);
+    modal.notifyError(e.responseText);
   }
 }
 
-export function saveMachineFiles() {
-  $.ajax({
-    type: 'POST',
-    url: '/generate_machine_files',
-    data: JSON.stringify({
-      level: window.State.level,
-      code: get_active_and_trimmed_code(),
-      lang: window.State.lang,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-    }).done(function(response: any) {
-      if (response.filename) {
-        // Download the file
-        window.location.replace('/download_machine_files/' + response.filename);
-      }
+export async function saveMachineFiles() {
+  const response = await postJsonWithAchievements('/generate_machine_files', {
+    level: theLevel,
+    code: get_active_and_trimmed_code(),
+    lang: theLanguage,
   });
+
+  if (response.filename) {
+    // Download the file
+    window.location.replace('/download_machine_files/' + response.filename);
+  }
 }
-
-// function storeFixedCode(response: any, level: string) {
-//   if (response.FixedCode) {
-//     sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-//     showBulb(level);
-//   }
-// }
-
-// function showBulb(level: string){
-//   const parsedlevel = parseInt(level)
-//   if(parsedlevel <= 2){
-//     const repair_button = $('#repair_button');
-//     repair_button.show();
-//     repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
-//   }
-//}
-
 
 // We've observed that this code may gets invoked 100s of times in quick succession. Don't
 // ever push the same achievement more than once per page load to avoid this.
 const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
 
-export function pushAchievement(achievement: string) {
+export async function pushAchievement(achievement: string) {
   if (ACHIEVEMENTS_PUSHED[achievement]) {
-      console.error('Achievement already pushed, this may be a programming issue: ', achievement);
+      console.warn('Achievement already pushed, this may be a programming issue: ', achievement);
       return;
   }
   ACHIEVEMENTS_PUSHED[achievement] = true;
 
-  $.ajax({
-    type: 'POST',
-    url: '/achievements/push-achievement',
-    data: JSON.stringify({
-      achievement: achievement
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-    }).done(function(response: any) {
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
-      }
-  });
+  try {
+    const response = await postJson('/achievements/push-achievement', { achievement });
+    showAchievements(response.achievements, false, "");
+  } catch {
+    // This might fail commonly with a 403 (not logged in). Ignore any errors anyway.
+  }
 }
 
 export function closeAchievement() {
@@ -570,8 +636,15 @@ export function closeAchievement() {
   $('#achievement_pop-up').removeAttr('redirect');
 }
 
-export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
-  fnAsync(achievements, 0);
+export async function showAchievements(achievements: Achievement[] | undefined, reload: boolean, redirect: string) {
+  if (!achievements || achievements.length === 0) {
+    return;
+  }
+
+  for (const achievement of achievements) {
+    await showAchievement(achievement);
+  }
+
   if (reload) {
     $('#achievement_pop-up').attr('reload', 'true');
     setTimeout(function(){
@@ -590,14 +663,7 @@ export function showAchievements(achievements: any[], reload: boolean, redirect:
   }
 }
 
-async function fnAsync(achievements: any[], index: number) {
-  await showAchievement(achievements[index]);
-  if (index < achievements.length - 1) {
-    await fnAsync(achievements, index + 1)
-  }
-}
-
-function showAchievement(achievement: any[]){
+function showAchievement(achievement: Achievement) {
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
@@ -623,205 +689,29 @@ function removeBulb(){
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  var editor = ace.edit("editor");
+  if (theGlobalEditor?.getReadOnly()) {
+    return;
+  }
 
-  var MOVE_CURSOR_TO_END = 1;
-  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  theGlobalEditor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
       update_view("main_editor_keyword_selector", "en");
   }
-  window.State.unsaved_changes = false;
-}
-
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
-  window.State.unsaved_changes = false;
-  var adventure_name = window.State.adventure_name;
-  // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
-  if (Array.isArray(level)) {
-     adventure_name = level [1];
-     level = level [0];
-  }
-
-  $.ajax({
-    type: 'POST',
-    url: '/programs',
-    data: JSON.stringify({
-      level: level,
-      lang:  lang,
-      name:  name,
-      code:  code,
-      shared: shared,
-      force_save: force_save,
-      adventure_name: adventure_name
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    // If the program contains an error -> verify that the user really wants to save it and POST again
-    // If we already answered this question with yes the "force_save" is true, so we skip this part
-    if (response.parse_error && !force_save) {
-      modal.confirm(response.message, function() {
-        return storeProgram(level, lang, name, code, shared, true, cb);
-      });
-      return;
-    }
-    // The auth functions use this callback function.
-    if (cb) return response.Error ? cb (response) : cb (null, response);
-    if (shared) {
-      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
-      modal.copy_alert (response.message, 5000);
-    } else {
-      modal.alert(response.message, 3000, false);
-    }
-    if (response.achievements) {
-      showAchievements(response.achievements, false, "");
-    }
-    // If we succeed, we need to update the default program name & program for the currently selected tab.
-    // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
-    // The name of the program might have been changed by the server, so we use the name stated by the server.
-    $ ('#program_name').val (response.name);
-    window.State.adventures?.map (function (adventure) {
-      if (adventure.short_name === (adventure_name || 'level')) {
-        adventure.loaded_program = {name: response.name, code: code};
-      }
-    });
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
-    if (err.status === 403) {
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
-       localStorage.setItem ('hedy-save-redirect', 'hedy');
-       window.location.pathname = '/login';
-    }
-  });
-}
-
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
-  try {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/duplicate-check',
-      data: JSON.stringify({
-        name:  name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response['duplicate']) {
-        modal.confirm (response.message, function () {
-          storeProgram(level, lang, name, code, shared, false, cb);
-          pushAchievement("double_check");
-        });
-      } else {
-         storeProgram(level, lang, name, code, shared, false, cb);
-      }
-    }).fail(function(err) {
-      if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (err.responseText, function () {
-           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
-             level = [level, window.State.adventure_name];
-           }
-           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
-           window.location.pathname = '/login';
-         });
-      }
-    });
-  } catch (e: any) {
-    console.error(e);
-    modal.alert(e.message, 3000, true);
-  }
-}
-
-/**
- * The 'saveit' function, as an async function
- */
-export function saveitP(level: number | [number, string], lang: string, name: string, code: string, shared: boolean) {
-  return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, shared,(err, response) => {
-      if (err) {
-        ko(err);
-      } else {
-        ok(response);
-      }
-    });
-  });
 }
 
 export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
-function change_shared (shared: boolean, index: number) {
-  // Index is a front-end unique given to each program container and children
-  // This value enables us to remove, hide or show specific element without connecting to the server (again)
-  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
-  if (index == -1) {
-    return;
-  }
-  if (shared) {
-    $('#non_public_button_container_' + index).hide();
-    $('#public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).show();
-  } else {
-    $('#modal-copy-button').hide();
-    $('#public_button_container_' + index).hide();
-    $('#non_public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).hide();
-
-    // In the theoretical situation that a user unshares their favourite program -> Change UI
-    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
-    $('#favourite_program_container_' + index).addClass('text-white');
-  }
-}
-
-export function share_program(id: string, index: number, Public: boolean) {
-  $.ajax({
-      type: 'POST',
-      url: '/programs/share',
-      data: JSON.stringify({
-        id: id,
-        public: Public
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, false, "");
-      }
-      modal.alert (response.message, 3000, false);
-      if (Public) {
-        change_shared(true, index);
-      } else {
-        change_shared(false, index);
-      }
-    }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
-    });
-}
-
-export function delete_program(id: string, index: number, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/delete',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, true, "");
-      } else {
-          $('#program_' + index).remove();
-      }
-      modal.alert(response.message, 3000, false);
-    }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
-    });
+export async function delete_program(id: string, index: number, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/delete', { id });
+    showAchievements(response.achievement, true, "");
+    $('#program_' + index).remove();
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -833,22 +723,12 @@ function set_favourite(index: number) {
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
 
-export function set_favourite_program(id: string, index: number, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/set_favourite',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      set_favourite(index)
-      modal.alert (response.message, 3000, false);
-    }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
-    });
+export async function set_favourite_program(id: string, index: number, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
+    set_favourite(index)
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -863,69 +743,36 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  $.ajax({
-    type: 'POST',
-    url: '/programs/submit',
-    data: JSON.stringify({
-      id: id
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    if (response.achievements) {
-      showAchievements(response.achievements, false, "");
-    }
+  tryCatchPopup(async () => {
+    await postJsonWithAchievements('/programs/submit', { id });
     change_to_submitted(index);
-  }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
   });
 }
 
-export function set_explore_favourite(id: string, favourite: number) {
+export async function set_explore_favourite(id: string, favourite: number) {
   let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
   if (favourite) {
     prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
   }
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/set_hedy_choice',
-      data: JSON.stringify({
-        id: id,
-        favourite: favourite
-    }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-        modal.alert(response.message, 3000, false);
-        if (favourite == 1) {
-          $('#' + id).removeClass('text-white');
-          $('#' + id).addClass('text-yellow-500');
-        } else {
-          $('#' + id).removeClass('text-yellow-500');
-          $('#' + id).addClass('text-white');
-        }
-    }).fail(function(err) {
-        return modal.alert(err.responseText, 3000, true);
+  await modal.confirmP(prompt);
+
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/set_hedy_choice', {
+      id: id,
+      favourite: favourite
     });
+
+    modal.notifySuccess(response.message);
+    $('#' + id).toggleClass('text-white', favourite !== 1);
+    $('#' + id).toggleClass('text-yellow-500', favourite === 1);
   });
 }
 
 export function report_program(prompt: string, id: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'POST',
-      url: '/programs/report',
-      data: JSON.stringify({
-        id: id,
-    }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-        modal.alert(response.message, 3000, false);
-    }).fail(function(err) {
-        return modal.alert(err.responseText, 3000, true);
-    });
+  tryCatchPopup(async () => {
+    await modal.confirmP(prompt);
+    const response = await postJsonWithAchievements('/programs/report', { id });
+    modal.notifySuccess(response.message);
   });
 }
 
@@ -951,49 +798,39 @@ export function copy_to_clipboard (string: string, prompt: string) {
 
   // Hide all modals to make sure the copy clipboard modal is hidden as well -> show alert() with feedback
   modal.hide();
-  modal.alert(prompt, 3000, false);
+  modal.notifySuccess(prompt, 3000);
 }
 
 /**
  * Do a POST with the error to the server so we can log it
  */
-function reportClientError(level: string, code: string, client_error: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/report_error',
-    data: JSON.stringify({
-      level: level,
-      code: code,
-      page: window.location.href,
-      client_error: client_error,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
+function reportClientError(level: number, code: string, client_error: string) {
+  postJsonWithAchievements('/report_error', {
+    level: `${level}`,
+    code: code,
+    page: window.location.href,
+    client_error: client_error,
   });
 }
 
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
-
-  $.ajax({
-    type: 'POST',
-    url: '/client_exception',
-    data: JSON.stringify({
-      message: message,
-      source: source,
-      line_number: line_number,
-      column_number: column_number,
-      error: error,
-      url: window.location.href,
-      user_agent: navigator.userAgent,
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
+  postJsonWithAchievements('/client_exception', {
+    message: message,
+    source: source,
+    line_number: line_number,
+    column_number: column_number,
+    error: error,
+    url: window.location.href,
+    user_agent: navigator.userAgent,
   });
 }
 
-export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
+
+  // Currently, we don't do anything with the sourcemap
+  if (sourceMap){}
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = outputDiv.find('#variable_button');
@@ -1017,7 +854,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -1088,17 +929,28 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+    let pygameModal = $('#pygame-modal');
 
     const codeContainsInputFunctionBeforePygame = new RegExp(
       "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
     ).test(code);
 
-    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
-      $('#pygame-modal').show();
+    if (!codeContainsInputFunctionBeforePygame) {
+      pygameModal.show();
+    }
+
+    if (hasTurtle) {
+      pygameModal.addClass('absolute');
+      pygameModal.addClass('bottom-0');
+      pygameModal.addClass('w-full');
+    } else {
+      pygameModal.removeClass('absolute');
+      pygameModal.removeClass('bottom-0');
+      pygameModal.removeClass('w-full');
     }
 
     document.onkeydown = animateKeys;
-    window.State.pygame_running = true;
+    pygameRunning = true;
   }
 
   code = code_prefix + code;
@@ -1117,7 +969,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       $('#runit').show();
       if (Sk.execLimit != 1) {
         pushAchievement("hedy_hacking");
-        return ErrorMessages ['Program_too_long'];
+        return ClientMessages ['Program_too_long'];
       } else {
         return null;
       }
@@ -1126,7 +978,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      const level = Number(window.State.level) || 0;
+      const level = theLevel;
       if (hasTurtle || hasPygame) {
         // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
         return (6000000);
@@ -1159,14 +1011,14 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
 
     if (hasTurtle) {
-      $('#saveFiles').show();
+      $('#saveFilesContainer').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
     if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       if(!debug){
         pushAchievement("error_or_empty");
-        error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
       }
       return;
     }
@@ -1201,7 +1053,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
-    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+    scrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1246,14 +1098,14 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
 
-    if (window.State.pygame_running) {
+    if (pygameRunning) {
       Sk.unbindPygameListeners();
       document.onkeydown = null;
       $('#pygame-modal').hide();
     }
 
     return new Promise(function(ok) {
-      window.State.disable_run = true;
+      askPromptOpen = true;
 
       const input = $('#ask-modal input[type="text"]');
       $('#ask-modal .caption').text(prompt);
@@ -1265,7 +1117,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
         input.focus();
       }, 0);
       $('#ask-modal form').one('submit', function(event) {
-        window.State.disable_run = false;
+        askPromptOpen = false;
         event.preventDefault();
         $('#ask-modal').hide();
 
@@ -1273,7 +1125,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           $('#turtlecanvas').show();
         }
 
-        if (window.State.pygame_running) {
+        if (pygameRunning) {
           Sk.bindPygameListeners();
           document.onkeydown = animateKeys;
 
@@ -1298,6 +1150,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           return false;
         });
         $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
       });
     } else {
       return new Promise(function (ok) {
@@ -1357,7 +1212,13 @@ function initCanvas4PyGame() {
       let div2 = document.createElement("div");
       $(div2).addClass("modal-dialog modal-lg");
       $(div2).css("display", "inline-block");
-      $(div2).width(self.width + 42);
+
+      // I'm not sure what the code below was supposed to do,
+      // but it was referring to 'self.width' which does not
+      // exist, and the result would be 'undefined + 42 == NaN'.
+      //
+      // (as any to make TypeScript allow the nonsensical addition)
+      $(div2).width(undefined as any + 42);
       $(div2).attr("role", "document");
       div1.appendChild(div2);
 
@@ -1409,9 +1270,14 @@ function speak(text: string) {
   pushAchievement("make_some_noise");
 }
 
-(() => {
-  if (!window.speechSynthesis) { return; /* No point in even trying */ }
-  if (!window.State.lang) { return; /* Not on a code page */ }
+function initializeSpeech() {
+  // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
+  // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
+  // successfully.
+  const isBeingTested = !!(window as any).Cypress;
+
+  if (!window.speechSynthesis && !isBeingTested) { return; /* No point in even trying */ }
+  if (!theLanguage) { return; /* Not on a code page */ }
 
   /**
    * Show the "speak" checkbox if we find that we have speech support for the
@@ -1426,9 +1292,9 @@ function speak(text: string) {
   const timer = setInterval(function() {
     attempts += 1;
 
-    const voices = findVoices(window.State.lang ?? '');
+    const voices = findVoices(theLanguage);
 
-    if (voices.length > 0) {
+    if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
         $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
@@ -1453,13 +1319,6 @@ function speak(text: string) {
     if (!window.speechSynthesis) { return []; }
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
-})();
-
-export function prompt_unsaved(cb: () => void) {
-  // This variable avoids showing the generic native `onbeforeunload` prompt
-  window.State.no_unload_prompt = true;
-  if (! window.State.unsaved_changes) return cb ();
-  modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
 }
 
 export function load_quiz(level: string) {
@@ -1478,125 +1337,19 @@ export function showVariableView() {
   }
 }
 
-//Feature flag for variable and values view
-var variable_view = false;
-
-if(window.State.level != null){
-  let level = Number(window.State.level);
-  variable_view = level >= 2;
-  hide_if_no_variables();
-}
-
-function hide_if_no_variables(){
-  if($('#variables #variable-list li').length == 0){
-    $('#variable_button').hide();
-  }
-  else{
-    $('#variable_button').show();
-  }
-}
-
-//Hides the HTML DIV for variables if feature flag is false
-if (!variable_view) {
-  $('#variables').hide();
-  $('#variable_button').hide();
-}
-
-//Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
-var step_debugger = false;
-if(window.State.level != null){
-  let level = Number(window.State.level);
-  step_debugger = level <= 7;
-}
-
-//Hides the debug button if feature flag is false
-if (!step_debugger) {
-  $('#debug_button').hide();
-}
-
-export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
-  }
-}
-
-export function load_variables(variables: any) {
-  if (variable_view === true) {
-    variables = clean_variables(variables);
-    const variableList = $('#variable-list');
-    variableList.empty();
-    for (const i in variables) {
-      // Only append if the variable contains any data (and is not undefined)
-      if (variables[i][1]) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
-      }
-    }
-    hide_if_no_variables();
-  }
-}
-
-// Color-coding string, numbers, booleans and lists
-// This will be cool to use in the future!
-// Just change the colors to use it
-function special_style_for_variable(variable: Variable) {
-  let result = '';
-  let parsedVariable = parseInt(variable.v as string);
-  if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
-   }
-   if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
-   }
-   if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
-   }
-   if (variable.tp$name == 'list'){
-    result =  "#ffffff";
-   }
-   return result;
-}
-
-//hiding certain variables from the list unwanted for users
-function clean_variables(variables: Record<string, Variable>) {
-  const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let name = unfixReserved(variable);
-      let newTuple = [name, variables[variable].v, extraStyle];
-      new_variables.push(newTuple);
-    }
-  }
-  return new_variables;
-}
-
-function unfixReserved(name: string) {
-  return name.replace(/_\$rw\$$/, "");
-}
-
-function store_parsons_attempt(order: Array<string>, correct: boolean) {
-  $.ajax({
-    type: 'POST',
-    url: '/store_parsons_order',
-    data: JSON.stringify({
-      level: window.State.level,
+async function store_parsons_attempt(order: Array<string>, correct: boolean) {
+  try {
+    await postJsonWithAchievements('/store_parsons_order', {
+      level: theLevel,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function() {
-    // Let's do nothing: saving is not a user relevant action -> no feedback required
-    }).fail(function(xhr) {
-      console.error(xhr);
     });
+  } catch (e) {
+    // Let's do nothing: saving is not a user relevant action -> no feedback required
+    console.error(e);
+  };
 }
-
 
 // Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
@@ -1646,24 +1399,7 @@ export function get_active_and_trimmed_code() {
     console.error(e);
   }
 
-  // ignore the lines with a breakpoint in it.
-  const breakpoints = getBreakpoints(editor);
-  let code = theGlobalEditor.getValue();
-  const storage = window.localStorage;
-  const debugLines = storage.getItem('debugLine');
-
-  if (code) {
-    let lines = code.split('\n');
-    if(debugLines != null){
-      lines = lines.slice(0, parseInt(debugLines) + 1);
-    }
-    for (let i = 0; i < lines.length; i++) {
-      if (breakpoints[i] == BP_DISABLED_LINE) {
-        lines[i] = '';
-      }
-    }
-    code = lines.join('\n');
-  }
+  const code = returnLinesWithoutBreakpoints(theGlobalEditor);
 
   return code;
 }
@@ -1681,7 +1417,7 @@ export function confetti_cannon(){
     let customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
 
     if(customLevels.includes(currentAdventure!)){
-      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure ?? '' as any);
 
       jsConfetti.addConfetti({
         emojis: currentAdventureConfetti,
@@ -1700,17 +1436,19 @@ export function confetti_cannon(){
   }
 }
 
-function getConfettiForAdventure(adventure: string){
-  let emoji = Array.from(ErrorMessages[adventure])
-  if (emoji != null){
-    return emoji;
+function getConfettiForAdventure(adventure: MessageKey){
+  if (ClientMessages[adventure]) {
+    return Array.from(ClientMessages[adventure]).filter(x => x !== ',' && x !== ' ');
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
-export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+/**
+ * Scroll the output to bottom immediately
+ */
+function scrollOutputToBottom() {
+  const outputDiv = $('#output');
+  outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
 }
 
 export function modalStepOne(level: number){
@@ -1721,14 +1459,14 @@ export function modalStepOne(level: number){
 
 function showSuccesMessage(){
   removeBulb();
-  var allsuccessmessages = ErrorMessages['Transpile_success'];
+  var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
   success.show(allsuccessmessages[randomnum]);
 }
 
 function createModal(level:number ){
-  let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
-  let title = ErrorMessages['Program_repair'];
+  let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
 
@@ -1739,6 +1477,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
   const editor = ace.edit(element);
   editor.setTheme("ace/theme/monokai");
   if (isReadOnly) {
+    editor.setValue(editor.getValue().trimRight(), -1);
     // Remove the cursor
     editor.renderer.$cursorLayer.element.style.display = "none";
     editor.setOptions({
@@ -1747,6 +1486,9 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
       showPrintMargin: false,
       highlightActiveLine: false
     });
+    // A bit of margin looks better
+    editor.renderer.setScrollMargin(3, 3, 10, 20)
+
     // When it is the main editor -> we want to show line numbers!
     if (isMainEditor) {
       editor.setOptions({
@@ -1755,16 +1497,11 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isM
     }
   }
 
-  // a variable which turns on(1) highlighter or turns it off(0)
-  var highlighter = 1;
-
-  if (highlighter == 1) {
-    // Everything turns into 'ace/mode/levelX', except what's in
-    // this table. Yes the numbers are strings. That's just JavaScript for you.
-    if (window.State.level) {
-      const mode = getHighlighter(window.State.level);
-      editor.session.setMode(mode);
-    }
+  // Everything turns into 'ace/mode/levelX', except what's in
+  // this table. Yes the numbers are strings. That's just JavaScript for you.
+  if (theLevel) {
+    const mode = getHighlighter(theLevel);
+    editor.session.setMode(mode);
   }
 
   return editor;
@@ -1776,43 +1513,8 @@ function initializeModalEditor($editor: JQuery) {
   let editor = turnIntoAceEditor($editor.get(0)!, true);
   theModalEditor = editor;
   error.setEditor(editor);
-  //small timeout to make sure the call with fixed code is complete.
-  setTimeout(function(){}, 2000);
 
   window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  // Load existing code from session, if it exists
-  const storage = window.sessionStorage;
-  if (storage) {
-    const levelKey = $editor.data('lskey');
-      let tempIndex = 0;
-      let resultString = "";
-
-      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-        let tempString = ""
-        for (let i = 0; i < resultString.length + 1; i++) {
-          setTimeout(function() {
-            editor.setValue(tempString,tempIndex);
-            tempString += resultString[tempIndex];
-            tempIndex++;
-          }, 150 * i);
-        }
-      }
-      else{
-        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
-        editor.setValue(resultString);
-      }
-  }
-
-  window.onbeforeunload = () => {
-    // The browser doesn't show this message, rather it shows a default message.
-    if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-      return ErrorMessages['Unsaved_Changes'];
-    } else {
-      return undefined;
-    }
-  };
 
   // *** KEYBOARD SHORTCUTS ***
 
@@ -1826,10 +1528,7 @@ function initializeModalEditor($editor: JQuery) {
       return;
     }
     if (keyCode === 13 && altPressed) {
-      if (!window.State.level || !window.State.lang) {
-        throw new Error('Oh no');
-      }
-      runit (window.State.level, window.State.lang, "", function () {
+      runit (theLevel, theLanguage, "", function () {
         $ ('#output').focus ();
       });
     }
@@ -1891,52 +1590,48 @@ export function toggle_blur_code() {
   }
 }
 
-export function change_language(lang: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/change_language',
-    data: JSON.stringify({
-      lang: lang
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response: any) {
-      if (response.succes){
-        // Check if keyword_language is set to change it to English
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get('keyword_language') !== null) {
-          urlParams.set('keyword_language', 'en');
-          window.location.search = urlParams.toString();
-        } else {
-          location.reload();
-        }
+export async function change_language(lang: string) {
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/change_language', { lang });
+    if (response.succes) {
+      // Check if keyword_language is set to change it to English
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      if (urlParams.get('keyword_language') !== null) {
+        urlParams.set('keyword_language', 'en');
+        window.location.search = urlParams.toString();
+      } else {
+        location.reload();
       }
-    }).fail(function(xhr) {
-      console.error(xhr);
-    });
+    }
+  });
+}
+
+/**
+ * Post JSON, return the result on success, throw an exception on failure
+ *
+ * Automatically handles any achievements the server might send our way.
+ */
+async function postJsonWithAchievements(url: string, data: any): Promise<any> {
+  const response = await postJson(url, data);
+  showAchievements(response.achievement, true, "");
+  return response;
 }
 
 export function change_keyword_language(start_lang: string, new_lang: string) {
-  $.ajax({
-    type: 'POST',
-    url: '/translate_keywords',
-    data: JSON.stringify({
+  tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/translate_keywords', {
       code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
-      level: window.State.level
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function (response: any) {
+      level: theLevel,
+    });
+
     if (response.success) {
-      ace.edit('editor').setValue(response.code);
+      ace.edit('editor').setValue(response.code, MOVE_CURSOR_TO_END);
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
-  }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
   });
 }
 
@@ -1954,17 +1649,6 @@ export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
   $('#image').val(image);
-}
-
-export function filter_user_programs(username: string, own_request?: boolean) {
-  const level = $('#user_program_page_level').val();
-  const adventure = $('#user_program_page_adventure').val();
-  const filter = $('input[name="submitted"]:checked').val();
-  if (own_request) {
-    window.open('?level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
-  } else {
-    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
-  }
 }
 
 export function filter_admin() {
@@ -1996,205 +1680,6 @@ export function filter_admin() {
 
   const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
   window.open('?' + queryString, '_self');
-}
-
-/**
- * Add types for the gutter event
- */
-interface GutterMouseDownEvent {
-  readonly domEvent: MouseEvent;
-  readonly clientX: number;
-  readonly clientY: number;
-  readonly editor: AceAjax.Editor;
-
-  getDocumentPosition(): AceAjax.Position;
-  stop(): void;
-}
-
-/**
- * The '@types/ace' package has the type of breakpoints incorrect
- *
- * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
- * but can be something you pick yourself.
- */
-function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
-  return editor.session.getBreakpoints() as unknown as Breakpoints;
-}
-
-type Breakpoints = Record<number, string>;
-
-/**
- * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
- */
-const BP_DISABLED_LINE = 'ace_breakpoint';
-
-function get_shift_key(event: Event | undefined) {
-  // @ts-ignore
-  if (event.shiftKey) {
-    return true;
-  } return false;
-}
-
-if ($("#editor").length) {
-  var editor: AceAjax.Editor = ace.edit("editor");
-  editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
-    const target = e.domEvent.target as HTMLElement;
-
-    // Not actually the gutter
-    if (target.className.indexOf("ace_gutter-cell") == -1)
-      return;
-
-    if (e.clientX > 25 + target.getBoundingClientRect().left)
-      return;
-
-    const breakpoints = getBreakpoints(e.editor);
-
-    let row = e.getDocumentPosition().row;
-    if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
-      // If the shift key is pressed mark all rows between the current one and the first one above that is a debug line
-      if (get_shift_key(event)) {
-        let highest_key = row;
-        for (const key in breakpoints) {
-          const number_key = parseInt(key);
-          if (number_key < row) {
-            highest_key = number_key;
-          }
-        }
-        for (let i = highest_key; i <= row; i++) {
-          e.editor.session.setBreakpoint(i, BP_DISABLED_LINE);
-        }
-      } else {
-        e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
-      }
-    } else {
-      e.editor.session.clearBreakpoint(row);
-    }
-    e.stop();
-  });
-
-  editor.session.on('changeBreakpoint', () => updateBreakpointVisuals(editor));
-}
-
-/**
- * Render markers for all lines that have breakpoints
- *
- * (Breakpoints mean "disabled lines" in Hedy).
- */
-function updateBreakpointVisuals(editor: AceAjax.Editor) {
-  const breakpoints = getBreakpoints(editor);
-
-  const disabledLines = Object.entries(breakpoints)
-    .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-    .map(([line, _]) => line)
-    .map(x => parseInt(x, 10));
-
-  markers.strikethroughLines(disabledLines);
-}
-
-function debugRun() {
-  let language = window.State.lang ?? window.State.keyword_language;
-  if (window.State.level != null && language != null) {
-    runit(window.State.level, language, "", function () {
-      $('#output').focus();
-    });
-  }
-}
-
-export function startDebug() {
-  if (step_debugger === true) {
-    var debugButton = $("#debug_button");
-    debugButton.hide();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
-
-    runButtonContainer.hide();
-    continueButton.show();
-    stopButton.show();
-    resetButton.show();
-
-    incrementDebugLine();
-  }
-}
-
-export function resetDebug() {
-  if (step_debugger === true) {
-    var storage = window.localStorage;
-    var continueButton = $("#debug_continue");
-    continueButton.show();
-
-    storage.setItem("debugLine", "0");
-    clearDebugVariables();
-    markCurrentDebuggerLine();
-    debugRun();
-  }
-}
-
-export function stopDebug() {
-  if (step_debugger === true) {
-    var debugButton = $("#debug_button");
-    debugButton.show();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
-
-    runButtonContainer.show();
-    continueButton.hide();
-    stopButton.hide();
-    resetButton.hide();
-
-    var storage = window.localStorage;
-    storage.removeItem("debugLine");
-
-    clearDebugVariables();
-    markCurrentDebuggerLine();
-  }
-}
-
-function clearDebugVariables() {
-  var storage = window.localStorage;
-  var keysToRemove = {...localStorage};
-
-  for (var key in keysToRemove) {
-    if (key.includes("prompt-")) {
-      storage.removeItem(key);
-    }
-  }
-}
-
-export function incrementDebugLine() {
-  var storage = window.localStorage;
-  var debugLine = storage.getItem("debugLine");
-
-  const nextDebugLine = debugLine == null
-    ? 0
-    : parseInt(debugLine, 10) + 1;
-
-  storage.setItem("debugLine", nextDebugLine.toString());
-  markCurrentDebuggerLine();
-
-  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
-  if (nextDebugLine < lengthOfEntireEditor) {
-    debugRun();
-  } else {
-    stopDebug();
-  }
-}
-
-function markCurrentDebuggerLine() {
-  if (!step_debugger) { return; }
-
-  const storage = window.localStorage;
-  var debugLine = storage?.getItem("debugLine");
-
-  if (debugLine != null) {
-    var debugLineNumber = parseInt(debugLine, 10);
-    markers.setDebuggerCurrentLine(debugLineNumber);
-  } else {
-    markers.setDebuggerCurrentLine(undefined);
-  }
 }
 
 export function hide_editor() {
@@ -2232,3 +1717,308 @@ const clearTimeouts = () => {
   timers.forEach(clearTimeout);
   timers = [];
 };
+
+export function downloadSlides(level: number) {
+  var iframe : any = document.getElementById(`level-${level}-slides`)!;
+  iframe.setAttribute('src',`/slides/${level}`);
+  $(`#level-${level}-slides`).on('load', function (){
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var slides = innerDoc.getElementsByTagName('section');
+    var slidesHTML = ''
+    for (let i = 0; i < slides.length; i++) {
+      var innerIframe = slides[i].getElementsByTagName('iframe');
+      for (let j = 0; j < innerIframe.length; j++) {
+        var a = document.createElement('a');
+        a.href = 'https://www.hedy.org' + innerIframe[j].getAttribute('src');
+        a.appendChild(document.createTextNode(a.href));
+        slides[i].appendChild(a);
+        slides[i].removeChild(innerIframe[j]);
+      }
+      slidesHTML += '\n'+ slides[i].outerHTML;
+    }
+
+    var template = slides_template.replace('{replace}', slidesHTML);
+    var zip = JSZip();
+    zip.file('index.html', template);
+    zip.folder("lib");
+    zip.folder(`hedy-level-${level}`);
+    zip.generateAsync({type: 'blob'})
+       .then(function(content: any) {
+          download(content, `hedy-level-${level}.zip`, "zip");
+       });
+  })
+}
+
+function download(data: any, filename: any, type: any) {
+  var file = new Blob([data], {type: type});
+  var a = document.createElement("a"),
+  url = URL.createObjectURL(file);
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 0);
+}
+
+/**
+ * Hide all things that may have been dynamically shown when switching tabs
+ *
+ * Reset the state of the editor.
+ */
+function resetWindow() {
+  $('#warningbox').hide ();
+  $('#errorbox').hide ();
+  $('#okbox').hide ();
+  $('#repair_button').hide();
+  const output = $('#output');
+  const variable_button = $(output).find('#variable_button');
+  const variables = $(output).find('#variables');
+  output.empty();
+  $('#turtlecanvas').empty();
+  output.append(variable_button);
+  output.append(variables);
+  theGlobalEditor?.clearSelection();
+  theGlobalEditor?.session.clearBreakpoints();
+}
+
+/**
+ * Update page element visibilities/states based on the state of the current tab
+ */
+function updatePageElements() {
+  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
+
+  // .toggle(bool) sets visibility based on the boolean
+
+  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
+  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
+  $('#developers_toggle_container').toggle(isCodeTab);
+  $('#level-header input').toggle(isCodeTab);
+  $('#parsons_code_container').toggle(currentTab === 'parsons');
+  $('#editor-area').toggle(isCodeTab || currentTab === 'parsons');
+  $('#editor').toggle(isCodeTab);
+  $('#debug_container').toggle(isCodeTab);
+  $('#program_name_container').toggle(isCodeTab);
+  theGlobalEditor.setReadOnly(false);
+
+  const adventure = theAdventures[currentTab];
+  if (adventure) {
+    const saveInfo: ServerSaveInfo = isServerSaveInfo(adventure.save_info)
+      ? adventure.save_info
+      : { id : '*dummy*' };
+
+    // SHARING SETTINGS
+    // Star on "share" button is filled if program is already public, outlined otherwise
+    const isPublic = !!saveInfo.public;
+    $('#share_program_button')
+      .toggleClass('active-bluebar-btn', isPublic);
+    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
+
+    // Show <...data-view="if-public-url"> only if we have a public url
+    $('[data-view="if-public"]').toggle(isPublic);
+    $('[data-view="if-public-url"]').toggle(!!saveInfo.public_url);
+    $('input[data-view="public-url"]').val(saveInfo.public_url ?? '');
+
+    // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
+    const isSubmitted = !!saveInfo.submitted;
+    $('#hand_in_button')
+      .toggleClass('active-bluebar-btn', isSubmitted);
+
+    // Show <...data-view="if-submitted"> only if we have a public url
+    $('[data-view="if-submitted"]').toggle(isSubmitted);
+    $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+
+    theGlobalEditor.setReadOnly(isSubmitted);
+  }
+}
+
+/**
+ * After switching tabs, show/hide elements
+ */
+function reconfigurePageBasedOnTab() {
+  resetWindow();
+
+  updatePageElements();
+
+  if (currentTab === 'parsons') {
+    loadParsonsExercise(theLevel, 1);
+    return;
+  }
+
+  const adventure = theAdventures[currentTab];
+  if (adventure) {
+    $ ('#program_name').val(adventure.save_name);
+    theGlobalEditor?.setValue(adventure.start_code, MOVE_CURSOR_TO_END);
+  }
+}
+
+/**
+ * Find the containing modal for the event target, and close it
+ *
+ * The modal will be the containing HTML element that has data-modal="true".
+ *
+ * Intended to be used from HTML: click="hedyApp.closeContainingModal(this)"
+ */
+export function closeContainingModal(target: HTMLElement) {
+  $(target).closest('[data-modal="true"]').hide();
+}
+
+function initializeShareProgramButtons() {
+  $('input[type="radio"][name="public"]').on('change', (ev) => {
+    if ((ev.target as HTMLInputElement).checked) {
+      const isPublic = $(ev.target).val() === '1' ? true : false;
+
+      // Async-safe copy of current tab
+      const adventure = theAdventures[currentTab];
+
+      tryCatchPopup(async () => {
+        await saveIfNecessary();
+
+        const saveInfo = isServerSaveInfo(adventure?.save_info) ? adventure?.save_info : undefined;
+        if (!saveInfo) {
+          throw new Error('This program does not have an id');
+        }
+
+        const response = await postJsonWithAchievements('/programs/share', {
+          id: saveInfo.id,
+          public: isPublic,
+        });
+
+        modal.notifySuccess(response.message);
+        if (response.save_info) {
+          adventure.save_info = response.save_info;
+        }
+        updatePageElements();
+      });
+    }
+  })
+}
+
+function initializeHandInButton() {
+  $('#do_hand_in_button').on('click', () => {
+      // Async-safe copy of current tab
+      const adventure = theAdventures[currentTab];
+
+      tryCatchPopup(async () => {
+        await saveIfNecessary();
+
+        const saveInfo = isServerSaveInfo(adventure?.save_info) ? adventure.save_info : undefined;
+        if (!saveInfo) {
+          throw new Error('This program does not have an id');
+        }
+        const response = await postJsonWithAchievements('/programs/submit', {
+          id: saveInfo.id,
+        });
+
+        modal.notifySuccess(response.message);
+        if (response.save_info) {
+          adventure.save_info = response.save_info;
+        }
+        updatePageElements();
+      });
+  });
+}
+
+/**
+ * Initialize copy to clipboard buttons.
+ *
+ * For all elements with data-action="copy-to-clipboard", find the containing
+ * data-copy="container" items and an <input> in there, and copy it to the clipboard.
+ */
+function initializeCopyToClipboard() {
+  $('[data-action="copy-to-clipboard"]').on('click', (ev) => {
+    const text = $(ev.target).closest('[data-copy="container"]').find('input').val();
+    if (typeof text === 'string') {
+      copy_to_clipboard(text, ClientMessages.copy_link_to_share);
+    }
+  });
+}
+
+function saveNameFromInput(): string {
+  return $('#program_name').val() as string;
+}
+
+function programNeedsSaving(adventureName: string) {
+  const adventure = theAdventures[adventureName];
+  if (!adventure) {
+    return false;
+  }
+
+  // We need to save if the content changed, OR if we have the opportunity to
+  // save a program that was loaded from local storage to the server.
+  // (Submitted programs are never saved again).
+  const programChanged = theGlobalEditor.getValue() !== adventure.start_code;
+  const nameChanged = $('#program_name').val() !== adventure.save_name;
+  const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
+  const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
+
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
+}
+
+/**
+ * (Re)set a timer to trigger a save in N second
+ */
+let saveTimer: number | undefined;
+function triggerAutomaticSave() {
+  const saveSeconds = 20;
+  cancelPendingAutomaticSave();
+  saveTimer = window.setTimeout(() => saveIfNecessary(), saveSeconds * 1000);
+}
+
+function cancelPendingAutomaticSave() {
+  if (saveTimer) {
+    window.clearTimeout(saveTimer);
+  }
+}
+
+async function saveIfNecessary() {
+  // Async-safe copy of current tab
+  const adventureName = currentTab;
+  const adventure = theAdventures[adventureName];
+  if (!programNeedsSaving(adventureName) || !adventure) {
+    return;
+  }
+
+  console.info('Saving program automatically...');
+
+  const code = theGlobalEditor.getValue();
+  const saveName = saveNameFromInput();
+
+
+  if (theUserIsLoggedIn) {
+    const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
+    const response = await postJsonWithAchievements('/programs', {
+      level: theLevel,
+      lang:  theLanguage,
+      name:  saveName,
+      code:  code,
+      adventure_name: adventureName,
+      program_id: saveInfo?.id,
+      // We pass 'public' in here to save the backend a lookup
+      share: saveInfo?.public,
+    });
+
+    // Record that we saved successfully
+    adventure.start_code = code;
+    if (response.save_info) {
+      adventure.save_info = response.save_info;
+    }
+    localDelete(currentTabLsKey());
+  } else {
+    localSave(currentTabLsKey(), { saveName, code });
+    adventure.start_code = code;
+  }
+}
+
+function currentTabLsKey() {
+  return `save-${currentTab}-${theLevel}`;
+}

@@ -146,9 +146,27 @@ class TestsLevel15(HedyTester):
             exception=exceptions.NoIndentationException
         )
 
-    #
-    # pressed with while loop tests
-    #
+    def test_if_pressed_without_else_works(self):
+        code = textwrap.dedent("""\
+        if p is pressed
+            print 'press'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'p':
+              print(f'''press''')
+              break
+            # End of PyGame Event Handler""")
+
+        self.multi_level_tester(code, expected=expected, max_level=16)
 
     def test_if_pressed_works_in_while_loop(self):
         code = textwrap.dedent("""\
@@ -161,8 +179,54 @@ class TestsLevel15(HedyTester):
       print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-      stop = 0
-      while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+        stop = 0
+        while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'p':
+                print(f'''press''')
+                break
+              # End of PyGame Event Handler
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 's':
+                stop = 1
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        print(f'''Uit de loop!''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+        )
+
+    def test_if_pressed_multiple_lines_body(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'x'
+            print 'lalalalala'
+        else
+            print 'not x'
+            print 'lalalalala'""")
+
+        expected = textwrap.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -171,18 +235,54 @@ class TestsLevel15(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN:
-            if event.unicode == 'p':
-              print(f'''press''')
+            if event.unicode == 'x':
+              print(f'''x''')
+              print(f'''lalalalala''')
               break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 's':
-              stop = 1
-              break
-        time.sleep(0.1)
-      print(f'''Uit de loop!''')""")
+            # End of PyGame Event Handler    
+            else:
+              print(f'''not x''')
+              print(f'''lalalalala''')
+              break""")
 
         self.multi_level_tester(
             code=code,
             max_level=16,
             expected=expected,
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        answer = 0
+        while answer != 25
+            answer = ask 'What is 5 times 5?'
+        print 'A correct answer has been given'""")
+
+        excepted_code = textwrap.dedent("""\
+        answer = 0
+        while convert_numerals('Latin', answer)!=convert_numerals('Latin', 25):
+          answer = input(f'''What is 5 times 5?''')
+          try:
+            answer = int(answer)
+          except ValueError:
+            try:
+              answer = float(answer)
+            except ValueError:
+              pass
+          time.sleep(0.1)
+        print(f'''A correct answer has been given''')""")
+
+        expected_source_map = {
+            "1/0-1/6": "1/0-1/6",
+            "1/0-1/10": "1/0-1/10",
+            "1/0-4/117": "1/0-12/315",
+            "2/17-2/23": "2/43-2/49",
+            "2/17-2/29": "2/17-2/81",
+            "2/11-3/76": "2/11-11/269",
+            "3/34-3/40": "3/85-3/91",
+            "3/34-3/67": "12/-1-12/151",
+            "4/77-4/116": "12/270-12/315"
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

@@ -33,7 +33,7 @@
                             <pre class="inline-block w-64">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                <pre level="1" class="no-copy-button">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
+                                <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
                             </div>
                         </div>
                         {{_('adventure_exp_3')}}
@@ -46,21 +46,6 @@
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                     </div>
-                    {% if class_data %}
-                        <!-- <div class="flex flex-col items-center">
-                            <h3 class="text-center">{{_('directly_add_adventure_to_classes')}}</h3>
-                            <div class="border-gray-500 border px-4 py-2 rounded-lg">
-                                <div class="flex flex-col items-center gap-2">
-                                    {% for class in class_data %}
-                                        <div class="flex w-full flex-row items-center gap-4 justify-between">
-                                            <label>{{ class.name }}</label>
-                                            <input class="customize_adventure_class_checkbox" type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div> -->
-                    {% endif %}
                 </div>
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
@@ -74,20 +59,4 @@
         <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
-{% endblock %}
-<!-- Todo TB: At one point we should clean this up instead of copying all scripts each time -->
-{% block scripts %}
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
-  <script>
-    window.State = {};
-    window.State.lang = "{{ g.lang }}";
-    window.State.keyword_language = "{{ g.keyword_lang }}";
-  </script>
-  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}

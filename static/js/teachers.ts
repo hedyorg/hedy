@@ -1,21 +1,17 @@
 import { modal } from './modal';
-import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
+import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
+import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
+import { ClientMessages } from './client-messages';
 import { parse as parse_csv } from 'papaparse';
 import DOMPurify from 'dompurify'
+import { startTeacherTutorial } from './tutorials/tutorial';
 
 interface Account {
   username: string,
   password: string
 }
 const EMPTY_ACCOUNT = {username:'', password: ''};
-
-(function() {
-    // Use this to make sure that we return a prompt when a user leaves the page without saving
-    $( "input" ).change(function() {
-        window.State.unsaved_changes = true;
-    });
-    reset_create_accounts_form();
-})();
+declare const htmx: typeof import('./htmx');
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -34,7 +30,7 @@ export function create_class(class_name_prompt: string) {
         window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -56,7 +52,7 @@ export function rename_class(id: string, class_name_prompt: string) {
             location.reload();
           }
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -79,7 +75,7 @@ export function duplicate_class(id: string, prompt: string) {
             location.reload();
           }
     }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+      return modal.notifyError(err.responseText);
     });
   });
 }
@@ -98,7 +94,7 @@ export function delete_class(id: string, prompt: string) {
         location.reload();
       }
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -126,7 +122,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ErrorMessages['Connection_error'], 3000, true);
+          modal.notifyError(ClientMessages['Connection_error']);
       }
     });
 }
@@ -145,7 +141,7 @@ export function invite_student(class_id: string, prompt: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          modal.alert(err.responseText, 3000, true);
+          modal.notifyError(err.responseText);
       });
     });
 }
@@ -164,7 +160,7 @@ export function remove_student_invite(username: string, class_id: string, prompt
       }).done(function () {
           location.reload();
       }).fail(function (err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
       });
   });
 }
@@ -183,7 +179,7 @@ export function remove_student(class_id: string, student_id: string, prompt: str
           location.reload();
       }
     }).fail(function(err) {
-        modal.alert(err.responseText, 3000, true);
+        modal.notifyError(err.responseText);
     });
   });
 }
@@ -201,7 +197,7 @@ export function create_adventure(prompt: string) {
         }).done(function(response) {
           window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
         }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          return modal.notifyError(err.responseText);
         });
     });
 }
@@ -213,12 +209,6 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
-   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
-   // The values in this case are the class id's for which we need to update the class customizations
-   let classes = new Array();
-   $(".customize_adventure_class_checkbox:checked").each(function () {
-     classes.push($(this).val());
-   });
 
     $.ajax({
       type: 'POST',
@@ -228,15 +218,14 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      modal.alert (response.success, 3000, false);
+      modal.notifySuccess(response.success);
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -251,8 +240,11 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 }
 
 function show_preview(content: string) {
-    const name = <string>$('#custom_adventure_name').val();
-    const level = <string>$('#custom_adventure_level').val();
+    const name = $('#custom_adventure_name').val();
+    if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
+    const level = $('#custom_adventure_level').val();
+    if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); }
+
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
     container.css('white-space', 'pre-wrap');
@@ -267,7 +259,7 @@ function show_preview(content: string) {
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
         exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-        const mode = getHighlighter(level);
+        const mode = getHighlighter(parseInt(level, 10));
         exampleEditor.session.setMode(mode);
     }
 }
@@ -286,7 +278,7 @@ export function preview_adventure() {
     }).done(function (response) {
         show_preview(response.code);
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
@@ -300,7 +292,7 @@ export function delete_adventure(adventure_id: string, prompt: string) {
         }).done(function () {
             window.location.href = '/for-teachers';
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -318,9 +310,9 @@ export function change_password_student(username: string, enter_password: string
               contentType: 'application/json',
               dataType: 'json'
             }).done(function (response) {
-              modal.alert(response.success, 3000, false);
+              modal.notifySuccess(response.success);
             }).fail(function (err) {
-              modal.alert(err.responseText, 3000, true);
+              modal.notifyError(err.responseText);
             });
         });
     });
@@ -350,9 +342,9 @@ export function show_doc_section(section_key: string) {
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
     let levels: (string | undefined)[] = [];
-    $('.level-select-button').each(function() {
-        if ($(this).hasClass("green-btn")) {
-            levels.push(<string>$(this).val());
+    $('[id^=enable_level_]').each(function() {
+        if ($(this).is(":checked")) {
+            levels.push(<string>$(this).attr('level'));
         }
     });
     let other_settings: string[] = [];
@@ -367,28 +359,11 @@ export function save_customizations(class_id: string) {
             level_thresholds[$(this).attr('id') as string] = $(this).val() as string;
         }
     });
-
     let opening_dates: Record<string, string> = {};
-    $('.opening_date_container').each(function() {
-        if ($(this).is(":visible")) {
-            $(this).find(':input').each(function () {
-                opening_dates[$(this).attr('level') as string] = $(this).val() as string;
-            });
-        }
+    $('[id^=opening_date_level_]').each(function() {
+      opening_dates[$(this).attr('level') as string] = $(this).val() as string;
     });
-    let sorted_adventures : Record<string, Record<string, string|boolean>[]> = {};
-    $('#sortadventures').children().each(function() {
-        const id = $(this).attr('id')!;
-        const level = id.split('-')[1]!;
-        sorted_adventures[level] = [];
-        $('#'+id).children().each(function() {
-            const level : string = $(this).attr('level')!;
-            const adventure = $(this).attr('adventure')!;
-            const from_teacher = $(this).attr('from-teacher') === "true";
-            sorted_adventures[level].push({"name": adventure,"from_teacher": from_teacher});
-        });
-    });
-
+    // Not sending the adventures because the adventures are automatically saved in the database
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
@@ -396,8 +371,7 @@ export function save_customizations(class_id: string) {
           levels: levels,
           opening_dates: opening_dates,
           other_settings: other_settings,
-          level_thresholds: level_thresholds,
-          sorted_adventures: sorted_adventures
+          level_thresholds: level_thresholds
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -405,127 +379,65 @@ export function save_customizations(class_id: string) {
       if (response.achievement) {
           showAchievements(response.achievement, false, "");
       }
-      modal.alert(response.success, 3000, false);
-      window.State.unsaved_changes = false;
+      modal.notifySuccess(response.success);
+      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+      modal.notifyError(err.responseText);
     });
 }
 
-export function remove_customizations(class_id: string, prompt: string) {
+export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-class/' + class_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function (response) {
-            $('#remove_customizations_button').addClass('hidden');
-            $('.adventure_level_input').show();
-            $('.adventure_level_input').prop('checked', true);
-            $('.teacher_adventures_checkbox').prop('checked', false);
-            $('.other_settings_checkbox').prop('checked', false);
-            $('.level-select-button').removeClass('blue-btn');
-            $('.level-select-button').addClass('green-btn');
-            $('.opening_date_container').removeClass('hidden');
+      // We need to know the current level that is selected by the user
+      // so we can know which level to draw in the template  
+      let active_level_id : string = $('[id^=level-]')[0].id;
+      let active_level = active_level_id.split('-')[1]
+      htmx.ajax(
+        'POST',
+        `/for-teachers/restore-customizations?level=${active_level}`,
+        '#adventure-dragger'
+      ).then(() => {
+        // Restore all the options other than the adventures.
+        // The adventures will be restored to the default using an HTMX call to the server
+        $('.other_settings_checkbox').prop('checked', false);
+        // Remove the value from all input fields -> reset to text to show placeholder
+        $('.opening_date_input').prop("type", "text")
+                                .blur()
+                                .val('')
+                                .prop('disabled', false)                                
+                                .attr('placeholder', ClientMessages.directly_available)
+                                .each(function() {         
+                                      if($(this).hasClass('bg-green-300')) {
+                                        $(this).removeClass('bg-green-300')
+                                              .addClass('bg-gray-200')
+                                      }
+                                });
 
-            // Remove the value from all input fields -> reset to text to show placeholder
-            $('.opening_date_input').prop("type", "text");
-            $('.opening_date_input').blur();
-            $('.opening_date_input').val('');
-            $('#sortadventures').children().each(
-              function() {
-                $(this).empty();
-                const level = $(this).attr('id')!.split('-')[1];
-                for (let i = 0; i < window.State.adventures_default_order![level].length; i++) {
-                  // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
-                  const div =
-                  `
-                  <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${window.State.adventures_default_order![level][i]}" level="${level}" from-teacher="false">
-                    <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                    ${window.State.adventure_names![window.State.adventures_default_order![level][i]]}
-                  </div>
-                  `
-                  $(this).append(div);
-                }
-                drag_list(document.getElementById("level-"+level));
-            });
-            for (let i = 1; i <= 18; i++) {
-              window.State.available_adventures![i] = [];
-            }
-            for (let i = 0; i < window.State.teacher_adventures!.length; i++) {
-              window.State.available_adventures![window.State.teacher_adventures![i]['level']].push({'name': window.State.teacher_adventures![i]['id'], 'from_teacher': true});
-            }
-            modal.alert(response.success, 3000, false);
-        }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
-        });
-    });
-}
-
-export function select_all_levels_adventure(adventure_name: string) {
-    window.State.unsaved_changes = true;
-    let first_input = true;
-    let checked = true;
-    $('.adventure_level_input').each(function() {
-        const name = <string>$(this).attr('adventure');
-        if (name == adventure_name && $(this).is(":visible")) {
-            if (first_input) {
-                checked = $(this).prop("checked");
-                first_input = false;
-            }
-            $(this).prop("checked", !checked);
-        }
+        $('[id^=enable_level_]').prop('checked', true);                
+        setLevelStateIndicator(active_level);
+        modal.notifySuccess(ClientMessages.customization_deleted);          
+      })
     });
 }
 
 export function enable_level(level: string) {
-    window.State.unsaved_changes = true;
-    // It is not selected yet -> select all and change color
-    if ($('#level_button_' + level).hasClass('blue-btn')) {
-        $('.adventure_level_' + level).each(function(){
-            $(this).removeClass('hidden');
-            if ($(this).is(':enabled')) {
-                $(this).prop("checked", true);
-            }
-        });
-        $('#level_button_' + level).removeClass('blue-btn');
-        $('#level_button_' + level).addClass('green-btn');
-
-        // We also have to add this level to the "Opening dates" section
-        $('#opening_date_level_' + level).removeClass('hidden');
-        $('#opening_date_level_' + level).find('input').val('');
-        $('#opening_date_level_' + level).find('input').prop({type:"text"});
-        $("#select-"+level).removeClass("hidden");
-        let shown : boolean = false;
-        $("div.adventures-tab").each(function() {
-          if($(this).attr('style') === "display: flex;") {
-            shown = true;
-          }
-        });
-        // if no level is shown, it means current level was the one selected
-        if (!shown) {
-          $("#level-"+level).show({
-            start: function() {
-                $(this).css('display', 'flex');
-            }
-        });
-        }
+    markUnsavedChanges();
+    if ($('#enable_level_' + level).is(':checked')) {
+      $('#opening_date_level_' + level).prop('disabled', false)
+                                      .attr('type', 'text')
+                                      .attr("placeholder", ClientMessages.directly_available)
+                                      .removeClass('bg-green-300')
+                                      .addClass('bg-gray-200')
     } else {
-        $('.adventure_level_' + level).each(function () {
-            $(this).prop("checked", false);
-            $(this).addClass('hidden');
-        });
-        $('#level_button_' + level).removeClass('green-btn');
-        $('#level_button_' + level).addClass('blue-btn');
-        // if this level was shown, hide it
-        if($("#level-"+level).attr('style') === "display: flex;") {
-          $("div.adventures-tab").hide();
-        }
-        $("#select-"+level).addClass("hidden");
-        // We also have to remove this level from the "Opening dates" section
-        $('#opening_date_level_' + level).addClass('hidden');
+      $('#opening_date_level_' + level).prop('disabled', true)
+                                       .attr('type', 'text')
+                                       .attr("placeholder", ClientMessages.disabled)
+                                       .val('');
+    }
+
+    if ($('#level-' + level).is(':visible')) {
+      setLevelStateIndicator(level);
     }
 }
 
@@ -542,6 +454,23 @@ export function add_account_placeholder(accounts: Array<Account> | void) {
   });
   if ($('#passwords_toggle').is(":checked")) {
     generate_passwords()
+  }
+}
+export function setDateLevelInputColor(level: string) {
+  var date_string : string = $('#opening_date_level_' + level).val() as string;
+  var input_date = new Date(date_string);
+  var today_date = new Date();  
+  if (input_date > today_date) {
+    $('#opening_date_level_' + level).removeClass('bg-gray-200')
+                                     .addClass('bg-green-300')
+
+  } else {
+    $('#opening_date_level_' + level).removeClass('bg-green-300')
+                                     .addClass('bg-gray-200')
+  }
+
+  if ($('#level-' +  level).is(':visible')) {
+    setLevelStateIndicator(level);
   }
 }
 
@@ -659,7 +588,7 @@ export function create_accounts(prompt: string) {
             dataType: 'json'
         }).done(function (response) {
             if (response.error) {
-                modal.alert(response.error, 3000, true);
+                modal.notifyError(response.error);
                 $('#account_rows_container').find(':input').each(function () {
                     if ($(this).val() == response.value) {
                         $(this).addClass('border-2 border-red-500');
@@ -667,7 +596,7 @@ export function create_accounts(prompt: string) {
                 });
                 return;
             } else {
-                modal.alert(response.success, 3000, false);
+                modal.notifySuccess(response.success);
                 if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
                     download_login_credentials(accounts);
                 }
@@ -676,7 +605,7 @@ export function create_accounts(prompt: string) {
                 });
             }
         }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
+            modal.notifyError(err.responseText);
         });
     });
 }
@@ -708,7 +637,7 @@ export function copy_join_link(link: string, success: string) {
     sampleTextarea.select();
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
-    modal.alert(success, 3000, false);
+    modal.notifySuccess(success);
 }
 
 // https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
@@ -721,104 +650,103 @@ function generateRandomString(length: number) {
     return text;
 }
 
-// Got from https://code-boxx.com/drag-drop-sortable-list-javascript/
-export function drag_list (target: any) {
-  let items = target.getElementsByTagName("div")
-  let current : any = null;
-  for (let i of items) {
+export interface InitializeTeacherPageOptions {
+  readonly page: 'for-teachers';
 
-    i.ondragstart = () => {
-      current = i;
-      for (let it of items) {
-        if (it != current) { it.classList.add("drop-adventures-hint"); }
-      }
-    };
+  /**
+   * Whether to show the dialog box on page load
+   */
+  readonly welcome_teacher?: boolean;
 
-    i.ondragenter = () => {
-      if (i != current) { i.classList.add("drop-adventures-active"); }
-    };
+  /**
+   * Whether to show the tutorial on page load
+   */
+  readonly tutorial?: boolean;
+}
 
-    i.ondragleave = () => {
-      i.classList.remove("drop-adventures-active");
-    };
-
-    i.ondragend = () => { for (let it of items) {
-        it.classList.remove("drop-adventures-hint");
-        it.classList.remove("drop-adventures-active");
-    }};
-
-    i.ondragover = (evt: any) => { evt.preventDefault(); };
-
-    i.ondrop = (evt: any) => {
-      evt.preventDefault();
-      if (i != current) {
-        let currentpos = 0, droppedpos = 0;
-        for (let it=0; it<items.length; it++) {
-          if (current == items[it]) { currentpos = it; }
-          if (i == items[it]) { droppedpos = it; }
-        }
-        if (currentpos < droppedpos) {
-          i.parentNode.insertBefore(current, i.nextSibling);
-        } else {
-          i.parentNode.insertBefore(current, i);
-        }
-      }
-    };
+export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
+  if (options.welcome_teacher) {
+    modal.notifySuccess(ClientMessages.teacher_welcome, 30_000);
+  }
+  if (options.tutorial) {
+    startTeacherTutorial();
   }
 }
 
-export function initializeCustomizeClassPage(available_adventures_level_translation: string) {
+function setLevelStateIndicator(level: string) {
+  $('[id^=state-]').addClass('hidden');
 
+  if ($('#opening_date_level_' + level).is(':disabled')) {
+    $('#state-disabled').removeClass('hidden');
+  } else if($('#opening_date_level_' + level).val() === ''){
+    $('#state-accessible').removeClass('hidden');
+  } else {
+    var date_string : string = $('#opening_date_level_' + level).val() as string;
+    var input_date = new Date(date_string);
+    var today_date = new Date();
+    if (input_date > today_date) {
+      $('#opening_date').text(date_string);
+      $('#state-future').removeClass('hidden');
+    } else {
+      $('#state-accessible').removeClass('hidden');
+    }
+  }
+}
+
+export interface InitializeCustomizeClassPageOptions {
+  readonly page: 'customize-class';
+  readonly class_id: string;
+}
+
+export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
-      $('#adventures').on('change', function(){
+      // Use this to make sure that we return a prompt when a user leaves the page without saving
+      $( "input" ).on('change', function() {
+        markUnsavedChanges();
+      });
+
+      $('#back_to_class').on('click', () => {
+        function backToClass() {
+            window.location.href = `/for-teachers/class/${options.class_id}`;
+        }
+
+        if (hasUnsavedChanges()) {
+            modal.confirm(ClientMessages.unsaved_class_changes, () => {
+                clearUnsavedChanges();
+                backToClass();
+            });
+        } else {
+            backToClass();
+        }
+      });
+
+      $('[id^=opening_date_level_]').each(function() {
+        setDateLevelInputColor($(this).attr('level')!);
+      })
+
+      $('#levels-dropdown').on('change', function(){
           var level = $(this).val() as string;
-          $("div.adventures-tab").hide();
-          $("#level-"+level).show({
-              start: function() {
-                  $(this).css('display', 'flex');
-              }
-          });
-          $('#available').empty();
-          $('#available').append(`<option value="none" selected>${available_adventures_level_translation} ${level}</option>`);
-          const adventures = window.State.available_adventures![level];
-          for(let i = 0; i < adventures.length; i++) {
-            $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${window.State.adventure_names![adventures[i]['name']]}</option>`);
-          }
-          drag_list(document.getElementById("level-"+level));
+          setLevelStateIndicator(level);
       });
   });
+}
 
-  $('#sortadventures').on('click', 'span', (function(event){
-      event.preventDefault();
-      const adventure = $(this).parent().attr('adventure') as string;
-      const level = $(this).parent().attr('level') as string;
-      const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
-      if (!window.State.available_adventures![level]) {
-        throw new Error(`No available adventures for level ${JSON.stringify(level)}`);
-      }
-      window.State.available_adventures![level].push({"name": adventure, "from_teacher": from_teacher});
-      $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${window.State.adventure_names![adventure]}</option>`);
-      $(this).parent().remove();
-      window.State.unsaved_changes = true;
-  }));
-  $(document).ready(function(){
-      $('#available').on('change', function(){
-          const values = ($(this).val() as string).split('-');
-          const adventure = values[0];
-          const level = values[1]
-          const from_teacher = values[2] === "true";
-          // Note: this code is copy/pasted elsewhere in this file and also in customize-class.html. If you change it here, also change it there #}
-          const adventure_div =
-          `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-              <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                  ${window.State.adventure_names![adventure]}
-          </div>`;
-          $('#level-'+level).append(adventure_div);
-          const index = window.State.available_adventures![level].findIndex(a => a.name === adventure && a.from_teacher === from_teacher);
-          window.State.available_adventures![level].splice(index, 1);
-          $('#remove-'+adventure).remove();
-          drag_list(document.getElementById("level-"+level));
-          window.State.unsaved_changes = true;
-      });
+/**
+ * These will be copied into global variables, because that's how this file works...
+ */
+export interface InitializeClassOverviewPageOptions {
+  readonly page: 'class-overview';
+}
+
+export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
+  $('.attribute').change(function() {
+    const attribute = $(this).attr('id');
+    if(!(this as HTMLInputElement).checked) {
+        $('#' + attribute + '_header').hide();
+        $('.' + attribute + '_cell').hide();
+    } else {
+        $('#' + attribute + '_header').show();
+        $('.' + attribute + '_cell').show();
+    }
   });
 }

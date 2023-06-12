@@ -237,6 +237,7 @@ class TestsLevel14(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=16,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -250,6 +251,7 @@ class TestsLevel14(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=15,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -397,6 +399,7 @@ class TestsLevel14(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=15,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=exceptions.InvalidTypeCombinationException
         )
 
@@ -413,3 +416,135 @@ class TestsLevel14(HedyTester):
             max_level=15,
             exception=exceptions.NoIndentationException
         )
+
+    def test_simple_function(self):
+        code = textwrap.dedent("""\
+        define test_function_1
+            int = 1
+            return "Test function " int
+        define test_function_2 with int
+            return "Test function " int
+        define test_function_3 with input
+            if input != 5
+                print "NE5"
+            if input < 5
+                print "LT5"
+            if input <= 5
+                print "LTE5"
+            if input > 5
+                print "GT5"
+            if input >= 5
+                print "GTE5"
+            if input = 5
+                print "E5"
+        print call test_function_1
+        print call test_function_2 with 2
+        m = 3
+        print call test_function_2 with m
+        print call test_function_2 with 4.0
+        print call test_function_2 with "5"
+        print call test_function_2 with 4 * 1.5
+        print ""
+        call test_function_3 with 4
+        print ""
+        call test_function_3 with 5
+        print ""
+        call test_function_3 with 6""")
+
+        expected = textwrap.dedent("""\
+        def test_function_1():
+          _int = 1
+          return f'''Test function {_int}'''
+        def test_function_2(_int):
+          return f'''Test function {_int}'''
+        def test_function_3(_input):
+          if convert_numerals('Latin', _input)!=convert_numerals('Latin', 5):
+            print(f'''NE5''')
+          if convert_numerals('Latin', _input)<convert_numerals('Latin', 5):
+            print(f'''LT5''')
+          if convert_numerals('Latin', _input)<=convert_numerals('Latin', 5):
+            print(f'''LTE5''')
+          if convert_numerals('Latin', _input)>convert_numerals('Latin', 5):
+            print(f'''GT5''')
+          if convert_numerals('Latin', _input)>=convert_numerals('Latin', 5):
+            print(f'''GTE5''')
+          if convert_numerals('Latin', _input) == convert_numerals('Latin', '5'):
+            print(f'''E5''')
+        print(f'''{test_function_1()}''')
+        print(f'''{test_function_2(2)}''')
+        m = 3
+        print(f'''{test_function_2(m)}''')
+        print(f'''{test_function_2(4.0)}''')
+        print(f'''{test_function_2('5')}''')
+        print(f'''{test_function_2(4 * 1.5)}''')
+        print(f'''''')
+        test_function_3(4)
+        print(f'''''')
+        test_function_3(5)
+        print(f'''''')
+        test_function_3(6)""")
+
+        output = textwrap.dedent("""\
+        Test function 1
+        Test function 2
+        Test function 3
+        Test function 4.0
+        Test function 5
+        Test function 6.0
+
+        NE5
+        LT5
+        LTE5
+
+        LTE5
+        GTE5
+        E5
+
+        NE5
+        GT5
+        GTE5""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            max_level=16
+        )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        age = ask 'How old are you?'
+        if age < 13
+            print 'You are younger than me!'
+        else
+            print 'You are older than me!'""")
+
+        excepted_code = textwrap.dedent("""\
+        age = input(f'''How old are you?''')
+        try:
+          age = int(age)
+        except ValueError:
+          try:
+            age = float(age)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', age)<convert_numerals('Latin', 13):
+          print(f'''You are younger than me!''')
+        else:
+          print(f'''You are older than me!''')""")
+
+        expected_source_map = {
+            "1/0-1/3": "1/0-1/3",
+            "1/0-1/28": "1/0-8/135",
+            "1/0-5/136": "1/0-12/286",
+            "2/32-2/35": "3/44-3/47",
+            "2/32-2/40": "9/139-9/199",
+            "2/29-3/86": "9/136-10/241",
+            "2/29-5/135": "9/136-12/286",
+            "3/45-3/77": "10/203-10/241",
+            "3/86-5/135": "10/241-12/286",
+            "5/96-5/126": "12/250-12/286"
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

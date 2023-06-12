@@ -19,6 +19,11 @@ END_WORD = '(?!' + CHARACTER + ')'
 DIGIT = '[__DIGIT__]'
 
 TRANSLATE_WORDS = [
+    "define",
+    "call",
+    "with",
+    "def",
+    "return",
     "print",
     "ask",
     "echo",

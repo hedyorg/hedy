@@ -75,10 +75,10 @@ levels:
             story: |
                 Create a lottery that lets you choose an extra price that you might win.
             code: |-
-                Preise {is} Auto, Hamster, 1 Million Euro
-                Preis {is} {ask} 'Was möchtest du gewinnen?'
-                {add} Preis {to_list} Preise
-                {print} 'Du gewinnst ' Preise {at} {random}
+                preise {is} Auto, Hamster, 1 Million Euro
+                preis {is} {ask} 'Was möchtest du gewinnen?'
+                {add} preis {to_list} preise
+                {print} 'Du gewinnst ' preise {at} {random}
     5:
         1:
             story: |
@@ -128,9 +128,9 @@ levels:
             code: |-
                 Spieler = Liam, Noah, Sophie
                 Spieler1 = Spieler {at} {random}
+                {remove} Spieler1 {from} Spieler
                 Spieler2 = Spieler {at} {random}
                 {print} Spieler1 ' spielt zuerst gegen ' Spieler2
-                {remove} Spieler1 {from} Spieler
                 {remove} Spieler2 {from} Spieler
                 {print} 'Der Gewinner spielt gegen ' Spieler {at} {random}
         2:

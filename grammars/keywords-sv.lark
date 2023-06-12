@@ -1,3 +1,8 @@
+_DEFINE: ("definiera" | "define") _SPACE?
+_CALL: ("anropa" | "call") _SPACE?
+_WITH: ("med" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("returnera" | "return") _SPACE?
 _PRINT: ("skriv" | "print") _SPACE?
 _ASK: ("fråga" | "ask") _SPACE?
 _ECHO: ("eko" | "echo") _SPACE?
@@ -32,15 +37,15 @@ _AND: _SPACE ("och" | "and") _SPACE
 _REPEAT: ("upprepa" | "repeat") _SPACE
 _TIMES: _SPACE ("gånger" | "times")
 _FOR: ("för" | "for") _SPACE
-_RANGE: ("spann" | "range") _SPACE?
+_RANGE: ("intervall" | "range") _SPACE?
 _TO: _SPACE ("till" | "to") _SPACE
 _STEP: "steg" | "step"
 _ELIF: _SPACE? ("annarsom" | "elif") _SPACE
 _INPUT: ("inmatning" | "input")
 _OR: _SPACE ("eller" | "or") _SPACE
-_WHILE: ("medans" | "while") _SPACE
+_WHILE: ("medan" | "while") _SPACE
 _LENGTH: "längd" | "length"
 _COLOR : ("färg" | "color") _SPACE?
 _PRESSED: ("nedtryckt" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
-clear: ("clear" | "clear") _SPACE?
+_BUTTON: ("knapp" | "button") _SPACE?
+clear: ("rensa" | "clear") _SPACE?

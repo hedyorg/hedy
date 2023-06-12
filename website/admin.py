@@ -3,7 +3,7 @@ from flask_babel import gettext
 
 import hedyweb
 import utils
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website import statistics
 from website.auth import (
     create_verify_link,
@@ -122,6 +122,7 @@ class AdminModule(WebsiteModule):
             keyword_language_filter=keyword_language,
             next_page_token=users.next_page_token,
             current_page="admin",
+            javascript_page_options=dict(page='admin-users'),
         )
 
     @route("/classes", methods=["GET"])
@@ -130,7 +131,9 @@ class AdminModule(WebsiteModule):
         classes = [
             {
                 "name": Class.get("name"),
+                # replace email by username for easier communication
                 "teacher": Class.get("teacher"),
+                "email": self.db.user_by_username(Class.get("teacher")).get("email"),
                 "created": utils.localized_date_format(Class.get("date")),
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
@@ -139,9 +142,14 @@ class AdminModule(WebsiteModule):
             for Class in self.db.all_classes()
         ]
 
+        active_classes = [x for x in classes if x.get("stats").get("week").get("runs") > 0]
+
         classes = sorted(classes, key=lambda d: d.get("stats").get("week").get("runs"), reverse=True)
 
-        return render_template("admin/admin-classes.html", classes=classes, page_title=gettext("title_admin"))
+        return render_template("admin/admin-classes.html",
+                               active_classes=active_classes,
+                               classes=classes,
+                               page_title=gettext("title_admin"))
 
     @route("/adventures", methods=["GET"])
     @requires_admin
@@ -169,7 +177,12 @@ class AdminModule(WebsiteModule):
     @route("/stats", methods=["GET"])
     @requires_admin
     def get_admin_stats_page(self, user):
-        return render_template("admin/admin-stats.html", page_title=gettext("title_admin"), current_page="admin")
+        return render_template("admin/admin-stats.html",
+                               page_title=gettext("title_admin"),
+                               current_page="admin",
+                               javascript_page_options=dict(
+                                   page='admin-stats',
+                               ))
 
     @route("/logs", methods=["GET"])
     @requires_admin
@@ -313,10 +326,11 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
 
     db.update_user(user["username"], {"is_teacher": is_teacher_value, "teacher_request": None})
 
-    if user_becomes_teacher and not utils.is_testing_request(request):
+    # Some (student users) may not have emails, and this code would explode otherwise
+    if user_becomes_teacher and not utils.is_testing_request(request) and user.get('email'):
         try:
             send_localized_email_template(
                 locale=user["language"], template="welcome_teacher", email=user["email"], username=user["username"]
             )
-        except BaseException:
+        except Exception:
             print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")

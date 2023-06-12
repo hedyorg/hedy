@@ -73,7 +73,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
     try:
         processed_input = hedy.process_input_string(
-            input_string_, level, from_lang, escape_backslashes=False
+            input_string_, level, from_lang, escape_backslashes=False, preprocess_ifs_enabled=False
         )
 
         parser = hedy.get_parser(level, from_lang, True)
@@ -175,6 +175,21 @@ class Translator(Visitor):
     def __init__(self, input_string):
         self.input_string = input_string
         self.rules = []
+
+    def define(self, tree):
+        self.add_rule("_DEFINE", "define", tree)
+
+    def defs(self, tree):
+        self.add_rule("_DEF", "def", tree)
+
+    def call(self, tree):
+        self.add_rule("_CALL", "call", tree)
+
+    def withs(self, tree):
+        self.add_rule("_WITH", "with", tree)
+
+    def returns(self, tree):
+        self.add_rule("_RETURN", "return", tree)
 
     def print(self, tree):
         self.add_rule("_PRINT", "print", tree)

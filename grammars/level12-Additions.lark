@@ -1,15 +1,39 @@
 //assigning a string now must be done with quotes
-assign: var (_IS| _EQUALS) (list_access | atom | expression)
+assign: (list_access | var) (_IS| _EQUALS) (list_access | atom | expression)
 assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
 ?atom: NUMBER | _MINUS NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 ?print_expression: var_access_print | error_unsupported_number | NUMBER
 
-equality_check: (var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (var_access | text_in_quotes | NUMBER)
+equality_check: (list_access | var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (list_access | var_access | text_in_quotes | NUMBER)
 
-in_list_check: (var_access | text_in_quotes | NUMBER) _IN var_access
+in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
 text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE
+
+
+// FUNCTIONS ======================================== =============================
+command:+= call | error_nested_define | return
+_non_empty_program: _EOL* (define | command | error_invalid) _SPACE* (_EOL+ (define | command) _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+
+error_nested_define: define
+define: _DEFINE function_name (_SPACE _WITH arguments)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+call: _CALL function_name (_SPACE _WITH arguments)?
+
+
+
+?arguments: argument (_COMMA argument)* -> arguments
+?argument: expression | atom | list_access
+
+function_name: NAME -> text
+
+?return: _RETURN (_print_argument)? -> returns
+?simple_expression:+= call
+?turtle_color:+= call
+
+add: _ADD_LIST (call | some_spaces) _TO_LIST var_access
+remove: _REMOVE (call | some_spaces) _FROM var_access
+// ================================================================================

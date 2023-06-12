@@ -25,8 +25,8 @@ levels:
                 Ty i Twoi znajomi macie zamiar pooglądać Netflix'a.
                 Pokaż, który film chcesz obejrzeć i życz widzom dobrej zabawy!
             code: |-
-                {print} Czas na popołudniowego Netfilx'a
-                film {is} Sonic 2 - Szybki jak błyskawica
+                {print} Czas na popołudniowego Netfilx’a
+                film {is} Sonic 2. Szybki jak błyskawica
                 {print} Idziemy oglądać film
                 {print} Dobrej zabawy!
         2:
@@ -128,9 +128,9 @@ levels:
             code: |-
                 gracze = Władek, Tadek, Zofia
                 gracz1 = gracze {at} {random}
+                {remove} gracz1 {from} gracze
                 gracz2 = gracze {at} {random}
                 {print} gracz1 ' rozpoczyna grę z ' gracz2
-                {remove} gracz1 {from} gracze
                 {remove} gracz2 {from} gracze
                 {print} 'Zwycięzca gra przeciwko ' gracze {at} {random}
         2:

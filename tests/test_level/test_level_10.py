@@ -53,6 +53,7 @@ class TestsLevel10(HedyTester):
         self.multi_level_tester(
             max_level=16,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
 
@@ -103,6 +104,7 @@ class TestsLevel10(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             max_level=16,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
@@ -115,6 +117,7 @@ class TestsLevel10(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=16,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
@@ -126,10 +129,13 @@ class TestsLevel10(HedyTester):
         lijstje is kip, haan, kuiken
         if x is pressed
             for dier in lijstje
-                print 'dier'""")
+                print dier
+        else
+            print 'onbekend dier'""")
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -140,8 +146,12 @@ class TestsLevel10(HedyTester):
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               for dier in lijstje:
-                print(f'dier')
+                print(f'{dier}')
                 time.sleep(0.1)
+              break
+            # End of PyGame Event Handler    
+            else:
+              print(f'onbekend dier')
               break""")
 
         self.multi_level_tester(

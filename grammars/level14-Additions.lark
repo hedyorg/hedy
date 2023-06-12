@@ -10,4 +10,4 @@ smaller_equal: comparison_arg  _SMALLER_EQUALS  comparison_arg
 bigger_equal: comparison_arg  _LARGER_EQUALS  comparison_arg
 not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
 
-?comparison_arg: var_access | text_in_quotes | NUMBER
+?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER

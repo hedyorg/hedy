@@ -1,0 +1,329 @@
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    {% if raw %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-0 mb-0">
+    {% else %}
+        <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
+    {% endif %}
+
+    <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
+     <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
+         <span>→</span>
+     </div>
+    </div>
+    <!-- Row 1: editor, output pane -->
+    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="min-height: 22rem;" {% endif %}>
+        <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
+         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
+             <span>←</span>
+         </div>
+        </div>
+      <!-- language selector overlay -->
+      {% if is_admin and other_keyword_language() %}
+          <div id="main_editor_keyword_selector">
+              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
+                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
+                      {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
+                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                      </ul>
+                  </div>
+              </div>
+              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden" lang="{{ other_keyword_language().lang }}">
+                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
+                      {{ other_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
+                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        {% endif %}
+        <!--The div below is used to send translation of search to Ace through the frontend-->
+        <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
+      <div class="w-full flex-1 flex flex-col">
+        <!-- Status warning -->
+        <div data-view="if-submitted"
+          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+          {{_('submitted_header')}}
+        </div>
+
+        <!-- The actual editor -->
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
+          {% if editor_readonly %}data-readonly="true"{% endif %}
+          class="w-full flex-1 text-lg rounded {% if raw %} max-h-56 {% endif %}">{{initial_adventure.start_code}}</div>
+        <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
+            {% for i in range(1, 11) %}
+                <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
+                    <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                    <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm"></pre>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- errorbox -->
+        <div id="errorbox"
+          class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+          style="display: none;">
+          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm">An error occurred.</p>
+            </div>
+          </div>
+        </div>
+        <!-- warningbox -->
+        <div id="warningbox"
+          class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm">An error occurred.</p>
+            </div>
+          </div>
+        </div>
+        <!-- okbox -->
+        <div id="okbox"
+          class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <div class="flex">
+            <div class="flex w-full justify-between items-center">
+              <p class="caption font-bold">Success</p>
+              <button id="confetti-button" onclick="hedyApp.confetti_cannon()">🎉</button>
+              <!-- <p class="details text-sm">Something went according to plan.</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex flex-col order-3 relative" id="code_output">
+        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
+            <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
+                🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path>
+                    </svg>
+            </button>
+            <div class="absolute hidden inline-block flex ltr:right-0 rtl:left-0 z-10 text-white bg-blue-600 rounded-lg ltr:mr-1 rtl:ml-1 mt-2" id="variables">
+                <div id="variables_header" class="text-center text-lg font-bold px-4">{{_('variables')}}</div>
+                <ul id="variable-list" class="px-4 whitespace-nowrap list-none mt-0" style="margin-left: 0px;"></ul> <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
+            </div>
+        </div>
+      <!-- tabindex=0 makes the div focusable -->
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto {% if raw %} max-h-56 {% endif %}" style="min-height: 3rem;"></div>
+      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"  {% if raw %} raw="yes" {% endif%}></div>
+      <div id="inline-modal" class="flex-0">
+        <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">Header</p>
+          </div>
+          <!--Body-->
+          <!--Body-->
+          <form>
+            <div class="my-2 flex">
+              <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
+              <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+            </div>
+          </form>
+        </div>
+        <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
+          </div>
+        </div>
+      </div>
+      <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+      </div>
+    </div>
+    <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
+    <div class="order-2 md:order-4" id="code_related_buttons">
+      <div id="not-logged-in-warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+        {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
+      </div>
+      <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
+        <div id="runButtonContainer">
+          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
+          <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+        </div>
+        <div id="saveFilesContainer" class="hidden">
+          <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
+        </div>
+        <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
+          <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
+          <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
+          <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
+            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()"><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+        </div>
+        <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
+        {% if show_edit_button %}
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
+        {% else %}
+            <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
+        {% endif %}
+        {% if editor_readonly and is_admin %}
+                <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
+        {% endif %}
+      </div>
+      {% if not raw %}
+      <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
+          <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
+          <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+            <option value="">🤫</option>
+          </select>
+      </div>
+      {% endif %}
+    </div>
+    <div class="order-5">
+      {% if not specific_adventure %}
+          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+            {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
+              <a class="green-btn" id="prev_level_button" href="{{ hedy_link(prev_level, 1) }}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
+            {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}
+                  <div class="relative">
+
+                    <button class="green-btn" disabled>{{_('regress_button')|replace("{level}", prev_level)}}</button>
+
+                    <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top'>
+                      <span class='tooltiptext text-xs font-semibold rounded shadow-lg p-1 bg-gray-100 -mt-8'> {{_('disabled_button_locked')}} </span>
+                      </span>
+                    </div>
+                  </div>
+            {% endif %}
+            {% if next_level and (not customizations or next_level in customizations['available_levels']) %}
+                <a class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" href="{{ hedy_link(next_level, 1) }}">{{_('advance_button')|replace("{level}", next_level)}}</a>
+            {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
+                <div class="relative">
+                    <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    <div class="absolute w-80 z-10 opacity-0 hover:opacity-100 duration-300 top-0 ltr:right-0 rtl:left-0">
+                      <div class="text-red-500 text-center font-bold bg-gray-100 px-2 py-1 rounded-lg border-4 border-yellow-600 text-sm">
+                          {{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}}
+                       </div>
+                    </div>
+                </div>
+            {% endif %}
+          </div>
+      {% else %}
+           {% if not raw %}
+                  <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+                    {% if prev_level %}
+                      <a class="green-btn" href="/adventure/{{ adventures[0].short_name}}/{{prev_level}}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
+                    {% endif %}
+                    {% if next_level %}
+                    <a class="green-btn ltr:ml-1 rtl:mr-1" href="/adventure/{{ adventures[0].short_name}}/{{next_level}}">{{_('advance_button')|replace("{level}", next_level)}}</a>
+                    {% endif %}
+                  </div>
+            {% endif %}
+      {% endif %}
+    </div>
+  </div>
+<!-- developer mode toggle -->
+{% if not raw %}
+<div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
+  <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+    <div class="relative">
+      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode(false)" class="sr-only" />
+      <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
+      <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle" style="top: -5px;"></div>
+    </div>
+    <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
+  </label>
+</div>
+{% endif %}
+<script>
+// FIXME: Stop using inline JavaScript
+document.addEventListener('DOMContentLoaded', (event) => {
+     function handleDragStart(e){
+         this.style.opacity = 0.4;
+         this.style.background = "#272822";
+
+         dragSrcEl = this;
+
+         $('.parsons_goal_line_container').removeClass('border-green-500 border-red-500');
+         $('.parsons_goal_line_container').addClass('border-black');
+
+         e.dataTransfer.effectAllowed = 'move';
+         e.dataTransfer.setData('code', this.getAttribute('code'));
+         e.dataTransfer.setData('text/plain', this.getAttribute('index'));
+     }
+
+     function handleDragEnd(e) {
+         this.style.opacity = '1';
+         this.style.background = "";
+
+         start_items.forEach(function (item) {
+             item.classList.remove('over');
+         });
+         goal_items.forEach(function (item) {
+             item.classList.remove('over');
+         });
+     }
+
+     function handleDragOver(e) {
+         e.preventDefault();
+     }
+
+     function handleDrop(e) {
+         e.preventDefault();
+         e.stopPropagation(); // stops the browser from redirecting.
+
+         if (dragSrcEl !== this) {
+             // Now it gets complex: also update both ace editors
+             let start_ace = ace.edit(dragSrcEl.parentNode.childNodes[3].getAttribute('id'));
+             let goal_ace = ace.edit(this.parentNode.childNodes[3].getAttribute('id'));
+
+             start_ace.session.setValue(this.getAttribute('code').replace(/\n+$/, ''), -1);
+             goal_ace.session.setValue(e.dataTransfer.getData('code').replace(/\n+$/, ''), -1);
+
+             dragSrcEl.setAttribute('index', this.getAttribute('index'));
+             dragSrcEl.setAttribute('code', this.getAttribute('code'));
+
+             this.setAttribute('index', e.dataTransfer.getData('text/plain'));
+             this.setAttribute('code', e.dataTransfer.getData('code'));
+         }
+         return false;
+     }
+
+     let start_items = document.querySelectorAll('.start-parsons-box');
+     start_items.forEach(function (item) {
+         item.addEventListener('dragstart', handleDragStart);
+         item.addEventListener('dragover', handleDragOver);
+         item.addEventListener('dragend', handleDragEnd);
+         item.addEventListener('drop', handleDrop);
+     });
+     let goal_items = document.querySelectorAll('.compiler-parsons-box');
+     goal_items.forEach(function (item) {
+         item.addEventListener('dragstart', handleDragStart);
+         item.addEventListener('dragover', handleDragOver);
+         item.addEventListener('dragend', handleDragEnd);
+         item.addEventListener('drop', handleDrop);
+     });
+ });
+</script>
+<!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
+{% if enforce_developers_mode %}
+<script>
+// FIXME: Stop using inline JavaScript
+$(document).ready(function () {
+    hedyApp.toggle_developers_mode(true);
+});
+</script>
+{% endif %}

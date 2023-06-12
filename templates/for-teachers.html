@@ -27,16 +27,16 @@
             <tbody>
               {% for class in teacher_classes %}
                 <tr>
-                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class">{{class.name|e}}</a></td>
+                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
                   <td class="text-center p-2">{{class.students|length}}</td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|tojson}})')><span class="fas fa-copy"></span></a></td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|tojson}})'>🗑️</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|default(None)|tojson}})')><span class="fas fa-copy"></span></a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
         {% endif %}
-      <button class="green-btn mt-4" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|tojson}})'>{{_('create_class')}}</button>
+      <button class="green-btn mt-4" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'>{{_('create_class')}}</button>
     </div>
     <div id="teacher_adventures" class="flex flex-col items-center gap-2 pb-4 border-b">
         <h2>{{_('my_adventures')}}</h2>
@@ -47,7 +47,7 @@
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
-                  <th class="p-2">{{_('view')}}</th>
+                  <th class="p-2">{{_('preview')}}</th>
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
@@ -58,26 +58,34 @@
                   <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
                   <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">👁</a></td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|tojson}})'>🗑️</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
         {% endif %}
-        <button class="green-btn mt-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('adventure_prompt')|tojson}})'>{{_('create_adventure')}}</button>
+        <button class="green-btn mt-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('adventure_prompt')|default(None)|tojson}})'>{{_('create_adventure')}}</button>
     </div>
-</div>
-
-<script>
-{% if welcome_teacher %}
-  window.onload = function() {
-    hedyApp.modal.alert('{{_('teacher_welcome')}}');
-  };
-{% endif %}
-{% if tutorial %}
-    $(document).ready(function() {
-        hedyApp.startTeacherTutorial();
-    });
-{% endif %}
-</script>
+    <div id="slides" class="flex flex-col items-center gap-2 pb-4 border-b">
+    <h2>Slides</h2>
+    <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
+      <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2 text-center">{{_('level')}}</th>
+            <th class="p-2">{{_('download')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for level in slides %}
+            <tr>
+              <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/slides/{{level}}" target="_blank">{{level}}</a></td>
+              <td class="text-center p-2">
+                <iframe class="hidden" id="level-{{level}}-slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
+                <button class="green-btn mt-4 fa fa-arrow-down" id="download-slides-{{level}}" onclick="hedyApp.downloadSlides({{level}})"></button>
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
 {% endblock %}

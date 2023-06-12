@@ -11,7 +11,6 @@ describe('Is able to use "Go back to level x" button', () => {
       goToHedyLevel2Page();
       cy.get('#editor').type('hello');
       cy.get('#prev_level_button').click();
-      cy.get('#modal-yes-button').click();
       cy.url().should('include', Cypress.env('hedy_page'));
     })
   })

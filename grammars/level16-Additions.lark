@@ -1,9 +1,18 @@
 // adds list access with numbers and brackets
-command:+= change_list_item
 // TODO for tomorrow: this stills needs tests in level 16 for > and !=
+command:+= change_list_item
+
 ?comparison_arg: var_access | text_in_quotes | NUMBER | list_access
 
 ?atom: NUMBER | _MINUS NUMBER | var_access | list_access | text_in_quotes
 list_access: var_access _LEFT_SQUARE_BRACKET (INT | random | var_access) _RIGHT_SQUARE_BRACKET
 change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | textwithoutspaces)
 assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | INT) (_COMMA (quoted_text | INT))*)? _RIGHT_SQUARE_BRACKET
+
+error_list_access_at: var_access _AT (INT | random)
+
+_print_argument: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
+assign: var (_IS| _EQUALS) (list_access | error_list_access_at | atom | expression)
+error_print_no_quotes: _PRINT (textwithoutspaces | list_access | error_list_access_at | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
+sleep: _SLEEP (INT | list_access | error_list_access_at | var_access | expression)?
+turtle: _FORWARD ((NUMBER | list_access | error_list_access_at | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | error_list_access_at | textwithoutspaces | expression))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | error_list_access_at | textwithoutspaces))? -> color

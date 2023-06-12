@@ -40,7 +40,7 @@ levels:
                 {print} It is time for an evening of Netflix'
                 film {is} Sonic the Hedgehog 2'
                 {print} We're going to film
-                {print} Have lot of fun!'
+                {print} Have fun!'
         2:
             story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
             code: |
@@ -118,9 +118,9 @@ levels:
             code: |
                 players = Liam, Noah, Sophie
                 player1 = players {at} {random}
+                {remove} player1 {from} players
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
                 {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
         2:

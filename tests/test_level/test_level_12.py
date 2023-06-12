@@ -104,6 +104,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=15,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -138,8 +139,8 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         numbers = [5, 4, 3]""",
-                                     HedyTester.list_access_transpiled('numbers[1-1]'),
-                                     "print(f'''{numbers[1-1]}''')")
+                                     HedyTester.list_access_transpiled('numbers[int(1)-1]'),
+                                     "print(f'''{numbers[int(1)-1]}''')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == '5')
 
@@ -153,6 +154,33 @@ class TestsLevel12(HedyTester):
     def test_print_single_quoted_text(self):
         code = "print 'hallo wereld!'"
         expected = "print(f'''hallo wereld!''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected)
+
+    def test_print_chinese_quoted_text(self):
+        code = "print “逃离鬼屋！”"
+        expected = "print(f'''逃离鬼屋！''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected)
+
+    def test_print_french_quoted_text(self):
+        code = "print «bonjour tous le monde!»"
+        expected = "print(f'''bonjour tous le monde!''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected)
+
+    def test_print_chinese_double_quoted_text(self):
+        code = "print ‘逃离鬼屋！’"
+        expected = "print(f'''逃离鬼屋！''')"
 
         self.multi_level_tester(
             code=code,
@@ -318,6 +346,44 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
+    def test_assign_to_list_access(self):
+        code = textwrap.dedent("""\
+            field = '.', '.', '.', '.', '.', '.'
+            field at 1 = 'x'
+            print field at 1""")
+
+        expected = textwrap.dedent("""\
+            field = ['.', '.', '.', '.', '.', '.']
+            field[int(1)-1] = 'x'
+            try:
+              field[int(1)-1]
+            except IndexError:
+              raise Exception('catch_index_exception')
+            print(f'''{field[int(1)-1]}''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
+    def test_if_and_list_access(self):
+        code = textwrap.dedent("""\
+        player = 'x'
+        choice = 1
+        field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+        if field at choice = '.'
+            field at choice = player
+        else
+            print 'illegal move!'""")
+
+        expected = textwrap.dedent("""\
+        player = 'x'
+        choice = 1
+        field = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+        if convert_numerals('Latin', field[int(choice)-1]) == convert_numerals('Latin', '.'):
+          field[int(choice)-1] = player
+        else:
+          print(f'''illegal move!''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
     def test_print_calc(self):
         code = textwrap.dedent("""\
             var is 5
@@ -353,6 +419,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException,
         )
 
@@ -431,6 +498,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException,
         )
 
@@ -542,7 +610,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[1-1]}''')
+        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -613,6 +681,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -676,7 +745,7 @@ class TestsLevel12(HedyTester):
             favorite is ask 'Is your fav number ' numbers at 2""")
         expected = HedyTester.dedent(
             "numbers = [1, 2, 3]",
-            HedyTester.input_transpiled('favorite', 'Is your fav number {numbers[2-1]}'))
+            HedyTester.input_transpiled('favorite', 'Is your fav number {numbers[int(2)-1]}'))
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -718,7 +787,10 @@ class TestsLevel12(HedyTester):
             n is "test"
             sleep n""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.multi_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_sleep_with_list_access(self):
         code = textwrap.dedent("""\
@@ -728,12 +800,12 @@ class TestsLevel12(HedyTester):
         n = [1, 2, 3]
         try:
           try:
-            n[1-1]
+            n[int(1)-1]
           except IndexError:
             raise Exception('catch_index_exception')
-          time.sleep(int(n[1-1]))
+          time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[1-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -760,7 +832,11 @@ class TestsLevel12(HedyTester):
             n is 1, 2, 3
             sleep n""")
 
-        self.multi_level_tester(max_level=15, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_sleep_with_input_variable(self):
         code = textwrap.dedent("""\
@@ -794,7 +870,10 @@ class TestsLevel12(HedyTester):
             n is 1.5
             sleep n""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+        self.multi_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
     # assign tests
@@ -866,7 +945,20 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
-            exception=hedy.exceptions.UnquotedAssignTextException
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
+        )
+
+    def test_assign_string_without_quotes_line_2(self):
+        code = textwrap.dedent("""\
+        print 'lalala'
+        name is Harry""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     @parameterized.expand(HedyTester.quotes)
@@ -951,6 +1043,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -963,6 +1056,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -975,6 +1069,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -987,6 +1082,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=15,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -1151,10 +1247,11 @@ class TestsLevel12(HedyTester):
         n is 1, 2
         if m is n
             print 'success!'""")
-
+        # FH, Mar 2023 why should this fail?
         self.multi_level_tester(
             max_level=13,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     @parameterized.expand(HedyTester.quotes)
@@ -1166,6 +1263,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=16,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -1177,6 +1275,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=13,
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
@@ -1189,7 +1288,8 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             max_level=16,
             code=code,
-            exception=hedy.exceptions.InvalidTypeCombinationException
+            exception=hedy.exceptions.InvalidTypeCombinationException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3
         )
 
     #
@@ -1725,6 +1825,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidTypeCombinationException)
 
     def test_concat_quoted_string_and_int_gives_type_error(self):
@@ -1732,6 +1833,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidTypeCombinationException)
 
     @parameterized.expand(['-', '*', '/'])
@@ -1741,6 +1843,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     @parameterized.expand(['-', '*', '/'])
@@ -1750,6 +1853,7 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     # def test_access_variable_before_definition(self):
@@ -1809,10 +1913,13 @@ class TestsLevel12(HedyTester):
         lijstje is 'kip', 'haan', 'kuiken'
         if x is pressed
             for dier in lijstje
-                print 'dier'""")
+                print 'dier'
+        else
+            print 'onbekend dier'""")
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -1825,249 +1932,16 @@ class TestsLevel12(HedyTester):
               for dier in lijstje:
                 print(f'''dier''')
                 time.sleep(0.1)
+              break
+            # End of PyGame Event Handler    
+            else:
+              print(f'''onbekend dier''')
               break""")
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             max_level=15)
-
-    #
-    # if pressed else tests
-    #
-
-    def test_if_pressed_repeat(self):
-        code = textwrap.dedent("""\
-        if x is pressed 
-            repeat 5 times 
-                print 'doe het 5 keer!'""")
-
-        expected = HedyTester.dedent("""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for i in range(int('5')):
-                print(f'''doe het 5 keer!''')
-                time.sleep(0.1)
-              break""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    def test_if_pressed_x_else(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            print 'x is pressed!'
-        else
-            print 'x is not pressed!'""")
-
-        expected = HedyTester.dedent("""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              print(f'''x is pressed!''')
-              break    
-            else:
-              print(f'''x is not pressed!''')
-              break\n""") + "    "
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    def test_if_pressed_x_print(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            print 'it is a letter key'""")
-        expected = HedyTester.dedent("""\
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'x':
-                print(f'''it is a letter key''')
-                break""")
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    def test_double_if_pressed(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            print 'first key'
-        if y is pressed
-            print 'second key'""")
-
-        expected = HedyTester.dedent("""\
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'x':
-                print(f'''first key''')
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'y':
-                print(f'''second key''')
-                break""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    def test_if_pressed_is_number_key_print(self):
-        code = textwrap.dedent("""\
-        if 1 is pressed
-            print 'it is a number key'""")
-
-        expected = HedyTester.dedent("""\
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == '1':
-                print(f'''it is a number key''')
-                break""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    #
-    # if pressed turtle tests
-    #
-
-    def test_if_pressed_repeat_multiple_x_turtle_move(self):
-        code = textwrap.dedent("""\
-        repeat 10 times
-            if w is pressed
-                forward 25
-            if a is pressed
-                turn -90
-            if d is pressed
-                turn 90
-            if s is pressed
-                turn 180""")
-
-        expected = HedyTester.dedent(f"""\
-        for i in range(int('10')):
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'w':
-                {HedyTester.indent(
-                  HedyTester.forward_transpiled(25.0, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'a':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(-90.0, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'd':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(90.0, self.level),
-                  16, True)
-                }
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 's':
-                {HedyTester.indent(
-                  HedyTester.turn_transpiled(180.0, self.level),
-                  16, True)
-                }
-                break
-          time.sleep(0.1)""")
-
-        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=16)
-
-    def test_if_pressed_with_turtlecolor(self):
-        code = textwrap.dedent("""\
-        if x is pressed 
-            color red""")
-
-        expected = HedyTester.dedent(f"""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              {HedyTester.indent(
-                HedyTester.turtle_color_command_transpiled('red'), 
-                14, True)
-              }
-              break""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=16
-        )
-
-    def test_if_pressed_else_with_turtle(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            forward 25
-        else
-            turn 90""")
-
-        expected = HedyTester.dedent(f"""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              {HedyTester.indent(
-                HedyTester.forward_transpiled(25.0, self.level),
-                14, True)
-              }
-              break    
-            else:
-              {HedyTester.indent(
-                HedyTester.turn_transpiled(90.0, self.level), 
-                14, True)
-              }
-              break\n""") + "    "
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=16
-        )
 
     #
     # button tests
@@ -2088,11 +1962,14 @@ class TestsLevel12(HedyTester):
         x = 'PRINT'
         x is button
         if PRINT is pressed 
-            print 'The button got pressed!'""")
+            print 'The button got pressed!'
+        else
+            print 'Other button is pressed!'""")
 
         expected = HedyTester.dedent(f"""\
         x = 'PRINT'
         create_button(x)
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -2103,32 +1980,10 @@ class TestsLevel12(HedyTester):
           if event.type == pygame.USEREVENT:
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
-              break""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    def test_if_button_is_pressed_make_button(self):
-        code = textwrap.dedent("""\
-        x = 'PRESS'
-        x is button
-        if PRESS is pressed
-            y = 'BUT'
-            y is button""")
-
-        expected = HedyTester.dedent(f"""\
-        x = 'PRESS'
-        create_button(x)
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRESS':
-              y = 'BUT'
-              create_button(y)
+              break
+            # End of PyGame Event Handler    
+            else:
+              print(f'''Other button is pressed!''')
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
@@ -2152,12 +2007,15 @@ class TestsLevel12(HedyTester):
         x is button
         repeat 3 times
             if but is pressed
-                print 'wow'""")
+                print 'wow'
+            else
+                print 'nah'""")
 
         expected = HedyTester.dedent(f"""\
         x = 'but'
         create_button(x)
         for i in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -2169,6 +2027,173 @@ class TestsLevel12(HedyTester):
               if event.key == 'but':
                 print(f'''wow''')
                 break
+              # End of PyGame Event Handler    
+              else:
+                print(f'''nah''')
+                break
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_simple_function(self):
+        code = textwrap.dedent("""\
+        define simple_function_1 with parameter
+            print "simple_function_1 - 1"
+            m = "simple_function_1 - 2"
+            print m
+        define simple_function_2 with param
+            print "simple_function_2 - 1"
+            print param
+        define simple_function_3 with param_a, param_b, param_c
+            if param_a = "A"
+                print "simple_function_3 - 1"
+                print param_b
+            else
+                print "simple_function_3 - 2"
+                if param_a = "B"
+                    print "simple_function_3 - 2A"
+                    print param_b
+                else
+                    print "simple_function_3 - 2B"
+                    print param_c
+        a = "test1"
+        call simple_function_3 with "A", a, 1.0
+        call simple_function_3 with "B", a, 1.0
+        call simple_function_3 with "C", a, 1.0""")
+
+        expected = textwrap.dedent("""\
+        def simple_function_1(parameter):
+          print(f'''simple_function_1 - 1''')
+          m = 'simple_function_1 - 2'
+          print(f'''{m}''')
+        def simple_function_2(param):
+          print(f'''simple_function_2 - 1''')
+          print(f'''{param}''')
+        def simple_function_3(param_a, param_b, param_c):
+          if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'A'):
+            print(f'''simple_function_3 - 1''')
+            print(f'''{param_b}''')
+          else:
+            print(f'''simple_function_3 - 2''')
+            if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'B'):
+              print(f'''simple_function_3 - 2A''')
+              print(f'''{param_b}''')
+            else:
+              print(f'''simple_function_3 - 2B''')
+              print(f'''{param_c}''')
+        a = 'test1'
+        simple_function_3('A', a, 1.0)
+        simple_function_3('B', a, 1.0)
+        simple_function_3('C', a, 1.0)""")
+
+        output = textwrap.dedent("""\
+        simple_function_3 - 1
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2A
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2B
+        1.0""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            max_level=16
+        )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        price = 0.0
+        food = ask 'What would you like to order?'
+        drink = ask 'What would you like to drink?'
+        if food is 'hamburger'
+            price = price + 6.50
+        if food is 'pizza'
+            price = price + 5.75
+        if drink is 'water'
+            price = price + 1.20
+        if drink is 'soda'
+            price = price + 2.35
+        print 'That will be ' price ' dollar, please'""")
+
+        expected_code = textwrap.dedent("""\
+        price = 0.0
+        food = input(f'''What would you like to order?''')
+        try:
+          food = int(food)
+        except ValueError:
+          try:
+            food = float(food)
+          except ValueError:
+            pass
+        drink = input(f'''What would you like to drink?''')
+        try:
+          drink = int(drink)
+        except ValueError:
+          try:
+            drink = float(drink)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'hamburger'):
+          price = price + 6.5
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'pizza'):
+          price = price + 5.75
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'water'):
+          price = price + 1.2
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'soda'):
+          price = price + 2.35
+        print(f'''That will be {price} dollar, please''')""")
+
+        expected_source_map = {
+            "1/0-1/5": "1/0-1/5",
+            "1/0-1/11": "1/0-1/11",
+            "1/0-12/362": "1/0-26/765",
+            "2/12-2/16": "2/12-2/16",
+            "2/12-2/54": "2/12-9/165",
+            "3/55-3/60": "10/166-10/171",
+            "3/55-3/98": "10/166-17/324",
+            "4/102-4/106": "4/70-4/74",
+            "4/102-4/121": "18/328-18/401",
+            "4/99-5/155": "18/325-19/424",
+            "5/126-5/131": "19/405-19/410",
+            "5/134-5/139": "19/413-19/418",
+            "5/126-5/146": "19/405-19/424",
+            "6/159-6/163": "4/81-4/85",
+            "6/159-6/174": "20/428-20/497",
+            "6/156-7/208": "20/425-21/521",
+            "7/179-7/184": "21/501-21/506",
+            "7/187-7/192": "21/509-21/514",
+            "7/179-7/199": "21/501-21/521",
+            "8/212-8/217": "10/207-10/212",
+            "8/212-8/228": "22/525-22/595",
+            "8/209-9/262": "22/522-23/618",
+            "9/233-9/238": "23/599-23/604",
+            "9/241-9/246": "23/607-23/612",
+            "9/233-9/253": "23/599-23/618",
+            "10/266-10/271": "12/225-12/230",
+            "10/266-10/281": "24/622-24/691",
+            "10/263-11/315": "24/619-25/715",
+            "11/286-11/291": "25/695-25/700",
+            "11/294-11/299": "25/703-25/708",
+            "11/286-11/306": "25/695-25/715",
+            "12/338-12/343": "26/740-26/745",
+            "12/316-12/361": "26/716-26/765"
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NestedFunctionException,
+            max_level=16,
+        )

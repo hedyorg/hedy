@@ -17,17 +17,18 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
 
-./generate-grammars-and-js
-
 # Do a minimizing build of Tailwind. Generates the tailwind css, and strip
 # all CSS classes that aren't used in our application (determined by searching
 # for CSS classes in the HTML templates and JavaScript files).
 
 echo '-----> Doing a Tailwind build'
-tailwind/generate-css
+tailwind/generate-prod-css
 
 echo '-----> Compiling Babel translations'
 (cd ../.. && pybabel compile -f -d translations)
 
 echo '-----> Generating static Babel content'
 ./generate-static-babel-content
+
+# Must be last, depends on .po -> .mo file compilation
+./generate-grammars-and-js

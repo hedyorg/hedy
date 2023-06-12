@@ -6,7 +6,7 @@ from flask import g, jsonify, request
 from flask_babel import gettext
 
 import utils
-from flask_helpers import render_template
+from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
@@ -48,6 +48,7 @@ class StatisticsModule(WebsiteModule):
             class_info={"id": class_id, "students": students},
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='class-stats'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])

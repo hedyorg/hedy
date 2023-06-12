@@ -219,9 +219,12 @@ class TestsLevel9(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed
             repeat 5 times
-                print 'doe het 5 keer!'""")
+                print 'doe het 5 keer!'
+        else
+            print '1 keertje'""")
 
         expected = HedyTester.dedent("""\
+        pygame_end = False
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()
@@ -234,71 +237,13 @@ class TestsLevel9(HedyTester):
               for i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
+              break
+            # End of PyGame Event Handler    
+            else:
+              print(f'1 keertje')
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
-
-    def test_if_pressed_repeat_turtle_moves_multiple_keys(self):
-        code = textwrap.dedent("""\
-        repeat 10 times
-            if w is pressed
-                forward 25
-            if a is pressed
-                turn -90
-            if d is pressed
-                turn 90
-            if s is pressed
-                turn 180""")
-
-        expected = HedyTester.dedent("""\
-        for i in range(int('10')):
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'w':
-                __trtl = 25
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'a':
-                __trtl = -90
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'd':
-                __trtl = 90
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 's':
-                __trtl = 180
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
-                t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                break
-          time.sleep(0.1)""")
-
-        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
 
     #
     # button tests
@@ -309,11 +254,14 @@ class TestsLevel9(HedyTester):
         button1 is button
         repeat 3 times
           if button1 is pressed
-            print 'wow'""")
+            print 'wow'
+          else
+            print 'nah'""")
 
         expected = HedyTester.dedent(f"""\
         create_button('button1')
         for i in range(int('3')):
+          pygame_end = False
           while not pygame_end:
             pygame.display.update()
             event = pygame.event.wait()
@@ -325,6 +273,37 @@ class TestsLevel9(HedyTester):
               if event.key == 'button1':
                 print(f'wow')
                 break
+              # End of PyGame Event Handler    
+              else:
+                print(f'nah')
+                break
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        repeat 3 times
+            food = ask 'What do you want?'
+            if food is pizza
+                print 'nice!'
+            else
+                print 'pizza is better'""")
+
+        expected_source_map = {
+            "1/0-6/160": "1/0-7/214",
+            "1/0-6/161": "1/0-7/214",
+            "2/19-2/23": "2/28-2/32",
+            "2/19-2/49": "2/28-2/62",
+            "3/57-3/70": "3/68-3/137",
+            "3/54-4/101": "7/-1-7/90",
+            "3/54-6/151": "7/-1-7/124",
+            "4/79-4/92": "4/143-4/158",
+            "4/101-6/151": "7/-1-7/33",
+            "6/119-6/142": "6/171-6/196"
+        }
+
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )
