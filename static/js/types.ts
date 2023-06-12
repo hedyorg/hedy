@@ -91,3 +91,8 @@ export interface Program {
  * Array of [title, text, statistics].
  */
 export type Achievement = [string, string, string];
+
+export interface Account {
+  username: string,
+  password: string
+}

@@ -5,11 +5,8 @@ import { ClientMessages } from './client-messages';
 import { parse as parse_csv } from 'papaparse';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
+import { Account } from './types';
 
-interface Account {
-  username: string,
-  password: string
-}
 const EMPTY_ACCOUNT = {username:'', password: ''};
 declare const htmx: typeof import('./htmx');
 
