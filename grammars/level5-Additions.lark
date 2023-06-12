@@ -12,6 +12,8 @@ _if_less_command_skipping_disabled: print | ask | turtle | assign_button | assig
 _if_less_command_skipping_enabled: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign | error_invalid
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
+// We give the error_invalid rule below a priority of -100,
+// just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid_skipping_disabled.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 error_invalid_skipping_enabled.-100: textwithoutspaces _SPACE* text?
 

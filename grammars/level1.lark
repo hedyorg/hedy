@@ -32,9 +32,12 @@ ask: _ASK (text)?
 echo: _ECHO (text)?
 turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | text))? -> color
 error_invalid_space: _SPACE any
-error_invalid.-100: textwithoutspaces text?
-empty_line: _SPACE
 
+// We give the error_invalid rule below a priority of -100,
+// just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
+error_invalid.-100: textwithoutspaces text?
+
+empty_line: _SPACE
 any: /.+/ -> text
 
 COMMENT: _HASH /([^\n]*)/
