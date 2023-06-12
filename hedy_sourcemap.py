@@ -1,7 +1,7 @@
 import re
 import exceptions
 from os import path
-from lark import Tree, ParseError
+from lark import Tree
 
 
 class SourceRange:
