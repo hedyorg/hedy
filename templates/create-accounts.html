@@ -32,15 +32,14 @@
                     <span class="w-40"></span> <!-- Use this empty span to make sure the headers align with the fields -->
                 </div>
                 <div class="flex flex-col" id="account_rows_container">
-                    <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                     {% for i in range(5) %}
-                    <div class="flex flex-row w-full gap-2 items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
-                        <input id="username" autocomplete="off" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                        <input id="password" autocomplete="off" name="password" {% if i != 0 %}required{% endif %} minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                        <input id="classes" name="class" value="{{current_class.name}}" disabled type="hidden">
-                        <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                    </div>
-                {% endfor %}
+                        <div class="flex flex-row w-full gap-2 items-center mb-4 account_row">
+                            <input id="username" autocomplete="off" name="username" required type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                            <input id="password" autocomplete="off" name="password" required minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                            <input id="classes" name="class" value="{{current_class.name}}" disabled class="hidden">
+                            <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                        </div>
+                    {% endfor %}
                 </div>
                 <div class="flex flex-row items-center gap-4">
                     <div class="flex flex-row items-center gap-4 border rounded-lg border-gray-500 py-2 px-8 mx-auto">
