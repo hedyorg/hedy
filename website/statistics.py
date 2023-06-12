@@ -5,6 +5,7 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+import hedy
 import utils
 from website.flask_helpers import render_template
 from website import querylog
@@ -49,6 +50,141 @@ class StatisticsModule(WebsiteModule):
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
             javascript_page_options=dict(page='class-stats'),
+        )
+
+    # [work in progress] method for implementing the version 1 of class stats page
+    # Method for retrieving student information for a specific class
+    @route("/stats/class/<class_id>-v1", methods=["GET"])
+    @requires_login
+    def render_class_stats_v1(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = []
+        for student_username in class_.get("students", []):
+            student = self.db.user_by_username(student_username)
+            programs = self.db.programs_for_user(student_username)
+            quizzes = self.db.get_quiz_stats([student_username])
+
+            # find quiz and programs statistics for each student on each level
+            program_runs_per_level = []
+            success_runs_per_level = []
+            error_runs_per_level = []
+            quizzes_runs_per_level = []
+            avg_quizzes_runs_per_level = []
+            for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
+                                            error_runs_per_level, programs, level)
+                calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
+
+                find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
+                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+
+            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
+            success_rate_overall = find_success_rate_overall(quizzes)
+
+            finished_quizzes = any("finished" in x for x in quizzes)
+            if finished_quizzes:
+                highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")])
+                highest_level_quiz_score = [x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]
+            else:
+                highest_level_quiz = "-"
+                highest_level_quiz_score = "-"
+
+            success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
+
+            students.append(
+                {
+                    "username": student_username,
+                    "last_login": student["last_login"],
+                    "programs": len(programs),
+                    "program_runs_per_level": program_runs_per_level,
+                    "success_rate_highest_level": success_rate_highest_level,
+                    "success_rate_overall": success_rate_overall,
+                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
+                    "average_quiz": average_quizzes,
+                    "highest_level_quiz": highest_level_quiz,
+                    "highest_level_quiz_score": highest_level_quiz_score,
+                }
+            )
+
+        students = sorted(students, key=lambda d: d.get("username", 0))
+
+        return render_template(
+            "class-stats-v1.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "name": class_["name"],
+            },
+            current_page="my-profile",
+            page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='class-stats-v1'),
+        )
+
+    # [work in progress] method for implementing the version 2 of class stats page
+    # Method for retrieving student information for a specific class
+    @route("/stats/class/<class_id>-v2", methods=["GET"])
+    @requires_login
+    def render_class_stats_v2(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
+
+        students = []
+        for student_username in class_.get("students", []):
+            student = self.db.user_by_username(student_username)
+            programs = self.db.programs_for_user(student_username)
+            quizzes = self.db.get_quiz_stats([student_username])
+
+            # find quiz and programs statistics for each student on each level
+            program_runs_per_level = []
+            success_runs_per_level = []
+            error_runs_per_level = []
+            quizzes_runs_per_level = []
+            avg_quizzes_runs_per_level = []
+
+            for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
+                find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
+                                            error_runs_per_level, programs, level)
+                calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
+
+                find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
+                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+
+            students.append(
+                {
+                    "username": student_username,
+                    "last_login": student["last_login"],
+                    "programs": len(programs),
+                    "success_runs_per_level": success_runs_per_level,
+                    "error_runs_per_level": error_runs_per_level,
+                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
+                }
+            )
+
+        students = sorted(students, key=lambda d: d.get("username", 0))
+
+        return render_template(
+            "class-stats-v2.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "name": class_["name"],
+                "levels": levels,
+            },
+            current_page="my-profile",
+            page_title=gettext("title_class statistics"),
+            javascript_page_options=dict(page='class-stats-v2'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
@@ -362,3 +498,133 @@ def get_general_class_stats(students):
         "week": {"runs": weekly_successes + weekly_errors, "fails": weekly_errors},
         "total": {"runs": successes + errors, "fails": errors},
     }
+
+
+def find_program_runs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, programs, level):
+    """
+    Finds program runs per level and appends them to lists.
+
+    :param program_runs_per_level: list of lists containing program run information per level
+    :param success_runs_per_level: list of successful program runs per level
+    :param error_runs_per_level: list of unsuccessful program runs per level
+    :param programs: list of dictionaries containing program information
+    :param level: current level
+    """
+    program_runs_per_level.append([])
+    success_runs_per_level.append([])
+    error_runs_per_level.append([])
+    for program in programs:
+        if program['level'] == level:
+            program_runs_per_level[level - 1].append([program['name'], str(program.get("error"))])
+            if str(program.get("error")) == "True":
+                success_runs_per_level[level - 1].append(program['name'])
+            elif str(program.get("error")) == "False":
+                error_runs_per_level[level - 1].append(program['name'])
+
+
+def find_quizzes_per_level(quizzes_per_level, quizzes, level):
+    """
+    Finds the quizzes per level and appends them to a list.
+
+    :param quizzes_per_level: list of lists containing the number of quizzes per level
+    :param quizzes: list of dictionaries containing quiz information
+    :param level: current level
+    :return: updated list of quizzes per level
+    """
+    quizzes_per_level.append([])
+    for quiz_scores in quizzes:
+        if quiz_scores['level'] == level:
+            # if a quiz level is repeated in a different week, you need to handle it differently.
+            if len(quiz_scores["scores"]) == 1:
+                quizzes_per_level[level - 1].append(quiz_scores["scores"][0])
+            else:
+                quizzes_per_level[level - 1] = quiz_scores["scores"]
+
+
+def calc_avg_quizzes_per_level(avg_quizzes_ran_per_level, quizzes_ran_per_level, level):
+    """
+    Calculates the average number of quizzes ran per level and appends it to a list.
+
+    :param avg_quizzes_ran_per_level: list of average quizzes ran per level
+    :param quizzes_ran_per_level: list of lists containing the number of quizzes ran per level
+    :param level: current level
+    :return: updated list of average quizzes ran per level
+    """
+    if not quizzes_ran_per_level[level - 1]:
+        avg_quizzes_ran_per_level.append(0)
+    else:
+        quizzes_per_level = quizzes_ran_per_level[level - 1]
+        avg_quiz = sum(quizzes_per_level) / len(quizzes_per_level)
+        avg_quizzes_ran_per_level.append(int(avg_quiz))
+
+    return avg_quizzes_ran_per_level
+
+
+def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, error_runs_per_level, level):
+    """
+    Calculates the number of successful and unsuccessful program runs per level.
+
+    :param programs_ran_per_level: list of lists containing program run information per level
+    :param success_runs_per_level: list of successful program runs per level
+    :param error_runs_per_level: list of unsuccessful program runs per level
+    :param level: current level
+    :return: updated lists of successful and unsuccessful program runs per level
+    """
+    programs_for_level = programs_ran_per_level[level - 1]
+    if len(programs_for_level) != 0:
+        # There are 3 possible states: None, True, False
+        successful_runs = sum(1 for program in programs_for_level if str(program[1]) != "True")
+        unsuccessful_runs = sum(1 for program in programs_for_level if str(program[1]) == "True")
+        success_runs_per_level[level - 1] = successful_runs
+        error_runs_per_level[level - 1] = unsuccessful_runs
+
+    else:
+        success_runs_per_level[level - 1] = 0
+        error_runs_per_level[level - 1] = 0
+
+    return success_runs_per_level, error_runs_per_level
+
+
+def find_success_rate_overall(quizzes):
+    """
+    Calculates the overall success rate for a list of quizzes.
+
+    :param quizzes: A list of dictionaries representing quiz data.
+    :return: The overall success rate for the quizzes as a float, or "-" if there are no quizzes.
+    """
+    if len(quizzes) == 0:
+        return "-"
+    else:
+        success_rates = [quiz['finished'] / quiz['started'] for quiz in quizzes]
+        return round(sum(success_rates) / len(success_rates) * 100, ndigits=0)
+
+
+def calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes):
+    """
+    Calculates the success rate for the highest level quiz.
+
+    :param finished_quizzes: A boolean indicating whether any quizzes have been finished.
+    :param highest_level_quiz: An integer representing the highest level quiz.
+    :param quizzes: A list of dictionaries representing quiz data.
+    :return: The success rate for the highest level quiz as a float, or "-" if no quizzes have been finished.
+    """
+    if not finished_quizzes:
+        return '-'
+    else:
+        highest_level_quiz_data = next(quiz for quiz in quizzes if quiz.get("level") == highest_level_quiz)
+        success_rate_highest_level = highest_level_quiz_data['finished'] / highest_level_quiz_data['started'] * 100
+        return round(success_rate_highest_level, ndigits=0)
+
+
+def calc_average_quizzes(average_quizzes_ran_per_level):
+    """
+    Calculates the average of non-zero values in a list of integers.
+
+    :param average_quizzes_ran_per_level: A list of integers representing quiz scores.
+    :return: The average of non-zero values in the input list as a float, or "-" if there are no non-zero values.
+    """
+    non_zero_grades = [grade for grade in average_quizzes_ran_per_level if grade != 0]
+    if len(non_zero_grades) == 0:
+        return "-"
+    else:
+        return sum(non_zero_grades) / len(non_zero_grades)
