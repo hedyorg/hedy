@@ -550,10 +550,11 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     try {
       cancelPendingAutomaticSave();
-      const response = await postJsonWithAchievements('/parse', {
+      let data = {
         level: `${level}`,
         code: code,
         lang: lang,
+        skip_faulty: false,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: adventureName,
@@ -561,14 +562,19 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         // Save under an existing id if this field is set
         program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
         save_name: saveNameFromInput(),
-      });
+      };
 
+      let response = await postJsonWithAchievements('/parse', data);
       console.log('Response', response);
 
-      if (response.Warning && $('#editor').is(":visible")) {
-        //storeFixedCode(response, level);
-        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+      if (response.ErrorsFoundWarning) {
+        data.skip_faulty = true;
+        error.showWarningSpinner();
+        error.showWarning(ClientMessages['Execute_error'], response.ErrorsFoundWarning);
+        response = await postJsonWithAchievements('/parse', data);
+        error.hide(true);
       }
+
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
         adventure.save_info = response.save_info;

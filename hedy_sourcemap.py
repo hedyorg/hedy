@@ -102,6 +102,8 @@ class SourceMap:
     level = 0
 
     skip_faulty = False
+    exception_found_during_parsing = None
+
     exceptions_not_to_skip = (
         exceptions.UnsupportedStringValue,
     )

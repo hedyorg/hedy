@@ -474,6 +474,8 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'skip_faulty' not in body:
+        return "body.skip_faulty must be a boolean", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
@@ -483,6 +485,7 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
+    skip_faulty = bool(body['skip_faulty'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -503,10 +506,13 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, skip_faulty)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
+            except hedy.exceptions.ErrorFoundWarningException as ex:
+                translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
+                response['ErrorsFoundWarning'] = translated_error
             except hedy.exceptions.WarningException as ex:
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
@@ -702,11 +708,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, skip_faulty):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, skip_faulty)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
