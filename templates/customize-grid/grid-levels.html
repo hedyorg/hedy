@@ -12,12 +12,30 @@
       {% for row in matrix_values %}
         <tr>
           {% set student_index = loop.index0 %}
-          <th>{{ class_info['students'][student_index] }}</th>
+          {% set student = class_info['students'][student_index] %}
+          <th>{{ student }}</th>
           {% for checkbox in row %}
+            {% set adventure_index = loop.index0 %}
+            {% set adventure_id = adventure_names[class_adventures[level][adventure_index]] %}
+            {% set student_adventure_id = student ~ '-' ~ adventure_id ~ '-' ~ level %}
             {% if checkbox == 0 %}
-              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
+              <th class="table-header">
+                <div>
+                  <input type="checkbox" name="myCheckbox" class="checkbox-wrapper" value="checked" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}" hx-target="#level" hx-trigger="change">
+                </div>
+                <div class="button-wrapper">
+                  <a class="no-underline cursor-pointer" href='/hedy/{{student_adventures[student_adventure_id]}}/view'>👁</a>
+                </div>
+              </th>
             {% elif checkbox == 1 %}  
-              <th><input type="checkbox" class="myCheckbox" name="myCheckbox" value="checked" checked="true" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ loop.index0 }}" hx-target="#level" hx-trigger="change"></th>
+              <th class="table-header">
+                <div>
+                  <input type="checkbox" name="myCheckbox" class="checkbox-wrapper" value="checked" checked="true" hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}" hx-target="#level" hx-trigger="change">
+                </div>
+                <div class="button-wrapper">
+                  <a class="no-underline cursor-pointer" href='/hedy/{{student_adventures[student_adventure_id]}}/view'>👁</a>
+                </div>
+              </th>
             {% else %}
               <th><input type="checkbox" class="disabledCheckBox" name="myCheckbox" disabled="disabled"></th>
             {% endif %}  

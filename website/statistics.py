@@ -110,9 +110,12 @@ class StatisticsModule(WebsiteModule):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
-        students, class_, class_adventures_formatted, ticked_adventures, _ = self.get_grid_info(
-            user, class_id, 1)
+        students, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(
+                user, class_id, 1)
+
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, '1')
+        adventure_names = {value: key for key, value in adventure_names.items()}
 
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -125,6 +128,8 @@ class StatisticsModule(WebsiteModule):
             class_adventures=class_adventures_formatted,
             ticked_adventures=ticked_adventures,
             matrix_values=matrix_values,
+            adventure_names=adventure_names,
+            student_adventures=student_adventures,
             page_title=gettext("title_class grid_overview"),
         )
 
@@ -132,9 +137,11 @@ class StatisticsModule(WebsiteModule):
     @requires_login
     def change_dropdown_level(self, user, class_id):
         level = request.args.get('level')
-        students, class_, class_adventures_formatted, ticked_adventures, _ = self.get_grid_info(
-            user, class_id, level)
+        students, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(
+                user, class_id, 1)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
+        adventure_names = {value: key for key, value in adventure_names.items()}
 
         return jinja_partials.render_partial("customize-grid/grid-levels.html",
                                              level=level,
@@ -144,6 +151,8 @@ class StatisticsModule(WebsiteModule):
                                              class_adventures=class_adventures_formatted,
                                              ticked_adventures=ticked_adventures,
                                              matrix_values=matrix_values,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
                                              page_title=gettext("title_class grid_overview"),
                                              )
 
@@ -153,7 +162,7 @@ class StatisticsModule(WebsiteModule):
         level = request.args.get('level')
         student_index = request.args.get('student_index', type=int)
         adventure_index = request.args.get('adventure_index', type=int)
-        students, class_, class_adventures_formatted, ticked_adventures, adventure_names = self.get_grid_info(
+        students, class_, class_adventures_formatted, ticked_adventures, adventure_names, _ = self.get_grid_info(
             user, class_id, level)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
 
@@ -162,7 +171,7 @@ class StatisticsModule(WebsiteModule):
         student_adventure_id = f"{students[student_index]}-{adventure_names[current_adventure_name]}-{level}"
 
         self.db.update_student_adventure(student_adventure_id, matrix_values[student_index][adventure_index])
-        _, _, _, ticked_adventures, _ = self.get_grid_info(user, class_id, level)
+        _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
         matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
 
         return jinja_partials.render_partial("customize-grid/grid-levels.html",
@@ -172,6 +181,8 @@ class StatisticsModule(WebsiteModule):
                                              max_level=hedy.HEDY_MAX_LEVEL,
                                              class_adventures=class_adventures_formatted,
                                              ticked_adventures=ticked_adventures,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
                                              matrix_values=matrix_values,
                                              page_title=gettext("title_class grid_overview"),
                                              )
@@ -239,6 +250,7 @@ class StatisticsModule(WebsiteModule):
             class_adventures_formatted[key] = adventure_list
 
         ticked_adventures = {}
+        student_adventures = {}
         for student in students:
             programs = self.db.last_level_programs_for_user(student, level)
             if programs:
@@ -253,14 +265,15 @@ class StatisticsModule(WebsiteModule):
                         if not current_adventure:
                             # store the adventure in case it's not in the table
                             current_adventure = self.db.store_student_adventure(
-                                dict(id=f"{student_adventure_id}", ticked=False))
+                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
 
                         current_program = dict(id=program['id'], level=str(program['level']),
                                                name=name, ticked=current_adventure['ticked'])
 
+                        student_adventures[student_adventure_id] = program['id']
                         ticked_adventures[student].append(current_program)
 
-        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names
+        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
 
 
 def add(username, action):
