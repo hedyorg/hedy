@@ -510,9 +510,6 @@ def parse():
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
-            except hedy.exceptions.ErrorFoundWarningException as ex:
-                translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
-                response['ErrorsFoundWarning'] = translated_error
             except hedy.exceptions.WarningException as ex:
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):

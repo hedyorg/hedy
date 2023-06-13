@@ -567,10 +567,10 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       let response = await postJsonWithAchievements('/parse', data);
       console.log('Response', response);
 
-      if (response.ErrorsFoundWarning) {
+      if (!data.skip_faulty && response.Error) {
         data.skip_faulty = true;
         error.showWarningSpinner();
-        error.showWarning(ClientMessages['Execute_error'], response.ErrorsFoundWarning);
+        error.showWarning(ClientMessages['Execute_error'], "MISTAKE");
         response = await postJsonWithAchievements('/parse', data);
         error.hide(true);
       }

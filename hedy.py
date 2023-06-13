@@ -2727,7 +2727,7 @@ def transpile(input_string, level, lang="en", skip_faulty=False):
     The first time the client will try to execute the code without skipping faulty code
     If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
 
-    The second time, after ErrorFoundWarningException is received by the client, the client will re-POST the code
+    The second time, after an Error is received by the client, the client will re-POST the code
     with skipping faulty enabled, after that we either return the partially correct code or raise the original error
     """
 
@@ -2736,14 +2736,14 @@ def transpile(input_string, level, lang="en", skip_faulty=False):
             source_map.set_skip_faulty(False)
             transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
         except Exception as original_error:
-            if not isinstance(original_error, source_map.exceptions_not_to_skip):
-                source_map.exception_found_during_parsing = original_error  # store original exception
-                raise exceptions.ErrorFoundWarningException()
-            else:
-                raise original_error
+            source_map.exception_found_during_parsing = original_error  # store original exception
+            raise original_error
     else:
         original_error = source_map.exception_found_during_parsing
         source_map.clear()
+
+        if isinstance(original_error, source_map.exceptions_not_to_skip):
+            raise original_error
 
         try:
             source_map.set_skip_faulty(True)

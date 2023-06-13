@@ -225,7 +225,7 @@ class HedyTester(unittest.TestCase):
         if not self.snippet_already_tested_with_current_hedy_version(code, level):
 
             if skipped_mappings is not None:
-                result = hedy.transpile(code, level, lang)
+                result = hedy.transpile(code, level, lang, skip_faulty=True)
                 for skipped in skipped_mappings:
                     result_error = result.source_map.get_error_from_hedy_source_range(skipped.source_range)
                     self.assertEqual(expected, result.code)
