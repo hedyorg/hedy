@@ -570,7 +570,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       if (!data.skip_faulty && response.Error) {
         data.skip_faulty = true;
         error.showWarningSpinner();
-        error.showWarning(ClientMessages['Execute_error'], "MISTAKE");
+        error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
         response = await postJsonWithAchievements('/parse', data);
         error.hide(true);
       }
