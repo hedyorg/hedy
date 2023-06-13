@@ -291,5 +291,6 @@ class ErrorFoundWarningException(HedyException):
     We use this exception to return to the client that an error is found,
     after this the client should re-POST the code again but with skipping faulty enabled
     """
+
     def __init__(self):
         super().__init__('Errors Found within the Hedy code')
