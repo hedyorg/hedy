@@ -540,7 +540,8 @@ export function process_accounts_csv(f: HTMLInputElement, prompt: string, invali
     complete: results => {
       const headers = results.meta.fields;
       if (results.errors.length || headers?.length !== 2 || headers[0] !== 'username' || headers[1] !== 'password') {
-        // TODO : display error
+        //TODO: Replace with a Client Message after #4338 is merged
+        modal.notifyError("There was an error reading the file, please check it before uploading it again.", 30_000);
         return;
       }
       modal.confirm(

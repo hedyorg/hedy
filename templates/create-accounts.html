@@ -11,77 +11,72 @@
     </div>
     <div>
         <form onsubmit="hedyApp.create_accounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
-        <div class="border rounded-lg px-4 py-2">
-            <div id="upload-accounts-csv-div" class="flex flex-col items-center px-6 py-12 border-2 border-dashed border-gray-400 rounded-md upload_accounts_csv_ui_element hidden"
-                ondragenter="console.log('Entered');event.preventDefault();" 
-                ondragleave="console.log('Exited');event.preventDefault();" 
-                ondragover="console.log('Over');event.preventDefault();" 
-                ondrop="hedyApp.handle_drop_accounts_csv(event);event.preventDefault();" 
-            >
-                <h2 class="my-0 py-0">{{_('drag_and_drop_file_for_upload')|commonmark }}</h2>
-                <div class="text-xl text-blue-600 mb-2">{{_('or')|commonmark }}</div>
-                <label class="bg-white px-4 h-9 inline-flex items-center rounded border border-gray-300 shadow-md text-md text-gray-700"> <!--focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500-->
-                    {{_('select_file')|commonmark }}
-                    <input type="file" class="hidden" id="accounts_csv_file_input" onchange="hedyApp.process_accounts_csv(this, '{{_('upload_accounts_csv_prompt')}}', '{{_('upload_accounts_csv_invalid_file')}}')" accept=".csv" >
-                </label>
-            </div>
-            <div id="create-accounts-form-div" class="create_accounts_form_ui_element">
-                <div class="flex flex-row w-full gap-4 mb-2 items-center">
-                    <h2 class="w-full text-center my-0 py-0">{{_('username')}}</h2>
-                    <h2 class="w-full text-center my-0 py-0">{{_('password')}}</h2>
-                    <span class="w-40"></span> <!-- Use this empty span to make sure the headers align with the fields -->
+            <div class="border rounded-lg px-4 py-2">
+                <div id="upload-accounts-csv-div" class="flex flex-col items-center px-6 py-12 border-2 border-dashed border-gray-400 rounded-md upload_accounts_csv_ui_element hidden"
+                    ondragenter="console.log('Entered');event.preventDefault();" 
+                    ondragleave="console.log('Exited');event.preventDefault();" 
+                    ondragover="console.log('Over');event.preventDefault();" 
+                    ondrop="hedyApp.handle_drop_accounts_csv(event);event.preventDefault();" 
+                >
+                    <h2 class="my-0 py-0">{{_('drag_and_drop_file_for_upload')|commonmark }}</h2>
+                    <div class="text-xl text-blue-600 mb-2">{{_('or')|commonmark }}</div>
+                    <label class="bg-white px-4 h-9 inline-flex items-center rounded border border-gray-300 shadow-md text-md text-gray-700"> <!--focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500-->
+                        {{_('select_file')|commonmark }}
+                        <input type="file" class="hidden" id="accounts_csv_file_input" onchange="hedyApp.process_accounts_csv(this, '{{_('upload_accounts_csv_prompt')}}', '{{_('upload_accounts_csv_invalid_file')}}')" accept=".csv" >
+                    </label>
                 </div>
-                <div class="flex flex-col" id="account_rows_container">
-                    {% for i in range(5) %}
-                        <div class="flex flex-row w-full gap-2 items-center mb-4 account_row">
-                            <input id="username" autocomplete="off" name="username" required type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                            <input id="password" autocomplete="off" name="password" required minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                            <input id="classes" name="class" value="{{current_class.name}}" disabled class="hidden">
-                            <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="flex flex-row items-center gap-4">
-                    <div class="flex flex-row items-center gap-4 border rounded-lg border-gray-500 py-2 px-8 mx-auto">
-                        <div class="italic text-xl text-blue-600">{{_('download_login_credentials')}}</div>
-                        <div>
-                            <div class="flex flex-row items-center gap-4">
-                                <input type="radio" id="download_credentials_yes" name="download_credentials_checkbox" value="yes" checked>
-                                <label for="yes">{{_('yes')}}</label>
-                            </div>
-                            <div class="flex flex-row items-center gap-4">
-                                <input type="radio" id="download_credentials_no" name="download_credentials_checkbox" value="no">
-                                <label for="no">{{_('no')}}</label>
+                <div id="create-accounts-form-div" class="create_accounts_form_ui_element">
+                    <div class="flex flex-row w-full gap-4 mb-2 items-center">
+                        <h2 class="w-full text-center my-0 py-0">{{_('username')}}</h2>
+                        <h2 class="w-full text-center my-0 py-0">{{_('password')}}</h2>
+                        <span class="w-40"></span> <!-- Use this empty span to make sure the headers align with the fields -->
+                    </div>
+                    <div class="flex flex-col" id="account_rows_container">
+                        {% for i in range(5) %}
+                            {{ user_account() }}
+                        {% endfor %}
+                    </div>
+                    <div class="flex flex-row items-center gap-4">
+                        <div class="flex flex-row items-center gap-4 border rounded-lg border-gray-500 py-2 px-8 mx-auto">
+                            <div class="italic text-xl text-blue-600">{{_('download_login_credentials')}}</div>
+                            <div>
+                                <div class="flex flex-row items-center gap-4">
+                                    <input type="radio" id="download_credentials_yes" name="download_credentials_checkbox" value="yes" checked>
+                                    <label for="yes">{{_('yes')}}</label>
+                                </div>
+                                <div class="flex flex-row items-center gap-4">
+                                    <input type="radio" id="download_credentials_no" name="download_credentials_checkbox" value="no">
+                                    <label for="no">{{_('no')}}</label>
+                                </div>
                             </div>
                         </div>
+                        <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" id="add_multiple_rows" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
                     </div>
-                    <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" id="add_multiple_rows" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-row mt-4">
-            <div class="flex flex-row gap-2">
-                <button class="green-btn" id="back_to_class_button" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
-                <button class="yellow-btn text-white create_accounts_form_ui_element" id="upload_csv_button" onclick="hedyApp.display_upload_accounts_csv_ui_elements(true);event.preventDefault();">{{_('upload_csv')}}</button>
-                <button class="red-btn upload_accounts_csv_ui_element hidden" id="cancel_upload_csv_button" onclick="hedyApp.display_upload_accounts_csv_ui_elements(false);event.preventDefault();">{{_('cancel')}}</button>
-            </div>
-            <div class="ltr:ml-auto flex flex-row items-center gap-2 create_accounts_form_ui_element">
-                <div class="mx-auto border-gray-400 border-2 rounded-full py-2 px-4">
-                  <label for="passwords_toggle" class="flex flex-row items-center justify-center cursor-pointer">
-                    <div class="relative">
-                      <input id="passwords_toggle" type="checkbox" onclick="hedyApp.generate_passwords()" class="sr-only" />
-                      <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
-                      <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle"></div>
-                    </div>
-                    <div class="ltr:ml-3 rtl:mr-3">{{_('generate_passwords')}}</div>
-                  </label>
+            <div class="flex flex-row mt-4">
+                <div class="flex flex-row gap-2">
+                    <button class="green-btn" id="back_to_class_button" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
+                    <button class="yellow-btn text-white create_accounts_form_ui_element" id="upload_csv_button" onclick="hedyApp.display_upload_accounts_csv_ui_elements(true);event.preventDefault();">{{_('upload_csv')}}</button>
+                    <button class="red-btn upload_accounts_csv_ui_element hidden" id="cancel_upload_csv_button" onclick="hedyApp.display_upload_accounts_csv_ui_elements(false);event.preventDefault();">{{_('cancel')}}</button>
                 </div>
-                <button class="yellow-btn text-white" onclick="hedyApp.append_classname('{{current_class.name}}');event.preventDefault();">{{_('postfix_classname')}}</button>
-                <button type="reset" id="reset_button" class="red-btn" onclick="hedyApp.reset_create_accounts_form();">
-                    {{_('reset_view')}}</button>
-                <button type="submit" id="create_accounts_button" class="blue-btn px-4">{{_('create_accounts')}}</button>
+                <div class="ltr:ml-auto flex flex-row items-center gap-2 create_accounts_form_ui_element">
+                    <div class="mx-auto border-gray-400 border-2 rounded-full py-2 px-4">
+                    <label for="passwords_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+                        <div class="relative">
+                        <input id="passwords_toggle" type="checkbox" onclick="hedyApp.generate_passwords()" class="sr-only" />
+                        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
+                        <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle"></div>
+                        </div>
+                        <div class="ltr:ml-3 rtl:mr-3">{{_('generate_passwords')}}</div>
+                    </label>
+                    </div>
+                    <button class="yellow-btn text-white" onclick="hedyApp.append_classname('{{current_class.name}}');event.preventDefault();">{{_('postfix_classname')}}</button>
+                    <button type="reset" id="reset_button" class="red-btn" onclick="hedyApp.reset_create_accounts_form();">
+                        {{_('reset_view')}}</button>
+                    <button type="submit" id="create_accounts_button" class="blue-btn px-4">{{_('create_accounts')}}</button>
+                </div>
             </div>
-        </div>
        </form>
 
 
@@ -89,11 +84,15 @@
 </div>
 
 <template id="account_row_unique">
+    {{ user_account() }}
+</template>
+{% endblock %}
+
+{% macro user_account() %}
     <div class="flex flex-row w-full gap-2 items-center mb-4 account_row">
         <input id="username" autocomplete="off" name="username" required type=text placeholder="{{_('username')}}" class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
         <input id="password" autocomplete="off" name="password" required minlength="6" type=text placeholder="{{_('password')}}" class="passwords_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
         <input id="classes" name="class" value="{{current_class.name}}" disabled class="hidden">
         <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
     </div>
-</template>
-{% endblock %}
+{% endmacro %}
