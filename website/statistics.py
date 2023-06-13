@@ -113,7 +113,6 @@ class StatisticsModule(WebsiteModule):
         students, class_, class_adventures_formatted, ticked_adventures, \
             adventure_names, student_adventures = self.get_grid_info(
                 user, class_id, 1)
-
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, '1')
         adventure_names = {value: key for key, value in adventure_names.items()}
 
@@ -139,7 +138,7 @@ class StatisticsModule(WebsiteModule):
         level = request.args.get('level')
         students, class_, class_adventures_formatted, ticked_adventures, \
             adventure_names, student_adventures = self.get_grid_info(
-                user, class_id, 1)
+                user, class_id, level)
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
