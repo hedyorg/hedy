@@ -228,7 +228,7 @@ class ForTeachersModule(WebsiteModule):
         customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
             user, session['class_id'])
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
@@ -263,7 +263,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
@@ -297,7 +297,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
@@ -334,7 +334,7 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_class_customizations(customizations)
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
@@ -497,7 +497,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
@@ -535,7 +535,7 @@ class ForTeachersModule(WebsiteModule):
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
         self.db.update_class_customizations(customizations)
 
-        return render_partial('customize-class/hx-sortable-adventures.html',
+        return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
                               customizations=customizations,
                               adventures=adventures,
