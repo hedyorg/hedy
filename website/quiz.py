@@ -57,7 +57,7 @@ class QuizModule(WebsiteModule):
         """
         progress, question = self.current_progress_and_question()
 
-        return render_template('quiz/hx-question.html',
+        return render_template('quiz/partial-question.html',
                                level=progress.level,
                                question_count=self.question_count(progress.level),
                                correct_answers_so_far=progress.correct_answers_so_far,
@@ -133,7 +133,7 @@ class QuizModule(WebsiteModule):
 
         next_question = progress.question + 1 if progress.question + 1 <= question_count else None
 
-        return render_template('quiz/hx-review-question.html',
+        return render_template('quiz/partial-review-question.html',
                                progress=progress,
                                question=question,
                                question_count=question_count,
@@ -183,7 +183,7 @@ class QuizModule(WebsiteModule):
                 get_certificate = None
                 retake_quiz_level = progress.level
 
-        return render_template('quiz/hx-review-quiz.html',
+        return render_template('quiz/partial-review-quiz.html',
                                next_level=next_level,
                                progress=progress,
                                retake_quiz_level=retake_quiz_level,
