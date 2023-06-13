@@ -284,4 +284,3 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
-
