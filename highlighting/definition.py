@@ -21,7 +21,6 @@ DIGIT = '[__DIGIT__]'
 TRANSLATE_WORDS = [
     "define",
     "call",
-    "using",
     "with",
     "def",
     "return",
