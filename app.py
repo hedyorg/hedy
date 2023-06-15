@@ -15,8 +15,9 @@ from logging.config import dictConfig as logConfig
 from os import path
 
 import static_babel_content
-from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   redirect, request, send_file, url_for,
+from markupsafe import Markup
+from flask import (Flask, Response, abort, after_this_request, g,
+                   redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -31,8 +32,8 @@ import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
-from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
-from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
+from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
+from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES)
 
 from logging_config import LOGGING_CONFIG
@@ -44,7 +45,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
 from website.auth import (current_user, is_admin, is_teacher,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
-from website.types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -63,6 +64,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
+app.json = JinjaCompatibleJsonProvider(app)
 babel = Babel(app)
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
@@ -140,6 +142,7 @@ def load_adventures_for_level(level):
                 example_code=adventure['levels'][level].get('example_code', ""),
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
+                is_command_adventure=short_name in KEYWORDS_ADVENTURES,
                 save_name=f'{default_save_name} {level}',
                 start_code=adventure['levels'][level].get('start_code', ""))
 
@@ -402,7 +405,7 @@ def add_hx_detection():
     hx_request = bool(request.headers.get('Hx-Request'))
     return {
         "hx_request": hx_request,
-        "hx_layout": 'hx-layout-yes.html' if hx_request else 'hx-layout-no.html',
+        "hx_layout": 'htmx-layout-yes.html' if hx_request else 'htmx-layout-no.html',
     }
 
 
@@ -1173,6 +1176,7 @@ def index(level, program_id):
                 start_code=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
+                is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
             ))
 
     adventures_map = {a.short_name: a for a in adventures}
