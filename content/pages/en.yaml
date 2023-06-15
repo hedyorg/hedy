@@ -312,6 +312,291 @@ sections:
                   ask What is your favorite sportsteam?
                   print I see... I see...
                   echo You like
+    -   level: '2'
+        sections:
+        -   title: "Is"
+            example:
+                error_text: "Time to make your own variables! In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we have used the variable in a print command. Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the is command. Then use it with a print command, just like we did."
+                error_code: |
+                    favorite_animals is _
+                    {print} I like favorite_animals
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                        favorite_animals {is} cows
+                        {print} I like favorite_animals
+                        favorite_drink {is} lemonade
+                        {print} I like to drink favorite_drink
+                        favorite_book {is} Harry Potter
+                        {print} I like to read favorite_book
+        -   title: "Rock paper Scissors"
+            example:
+                error_text: "Finish the code by filling in the **variable** on the blanks. This game is not very interactive, but no worries! In the next tab you'll learn how to use variables with the `{ask}` command to make your game interactive!"
+                error_code: |
+                    choice is rock
+                    {print} I choose _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    choice is rock
+                    {print} I choose choice
+        -   title: "ask"
+            example:
+                error_text: |
+                    In the previous tab you have practised with setting variables with the `{is}` command.
+                    You have created at least 3 variables and used them with a print command.
+                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
+
+                    Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
+                error_code: |
+                    favorite_animals {is} cows
+                    {print} I like favorite_animals
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    favorite_animals {is} What is your favorite animal?
+                    {print} I like favorite_animals
+                    favorite_drink {is} {ask} What is your favorite drink?
+                    {print} I like to drink favorite_drink
+                    favorite_book {is} {ask} What is your favorite book?
+                    {print} I like to read favorite_book
+        -   title: "Rock Paper Scissors 2"
+            example:
+                error_text: "Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code."
+                error_code: |
+                    choice is _
+                    {print} I choose choice
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    choice {is} {ask} Rock, paper or scissors?
+                    {print} I choose choice
+        -   title: "Haunted House"
+            example:
+                error_text: "In the example above the monsters are predetermined. So each time you run your code, the output is the same. Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?"
+                error_code: |
+                    monster_1 {is} _
+                    monster_2 {is} _
+                    monster_3 {is} _
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    monster_1 {is} {ask} What kind of monster is a little scary to you?
+                    monster_2 {is} {ask} What other monster are you afraid of?
+                    monster_3 {is} {ask} What is the scariest monster you could think of?
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+        -   title: "Sleep"
+            example:
+                error_text: "Practise this new command by making a code of your own in which you use the {sleep} command at least 3 times. With each {sleep} command the pausing time should differ."
+                error_code: |
+                    {print} My favotite color is...
+                    {sleep} 2
+                    {print} green!
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    {print} And the winner is...
+                    {sleep} 2
+                    {print} Maria!
+                    {print} She won a...
+                    {sleep} 1
+                    {print} brand new ferrari!
+                    {print} and that not all!
+                    {print} She also wins...
+                    {sleep} 5
+                    {print} a trip to France!
+        -   title: "Parrot"
+            example:
+                error_text: |
+                    Firstly, finish line 2 with an `{is}` and an `{ask}` command.
+                    Then fill in a `{sleep}` command on line 4 and 6 to let the parrot stay quiet for a little bit.
+
+                    **Extra** Can you make the parrot ask for more then only your name by adding more lines of code?
+                error_code: |
+                    {print} Im Hedy the parrot
+                    name _ _ what is your name?
+                    {print} name
+                    _
+                    {print} squawk
+                    _
+                    {print} name
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    {print} Im Hedy the parrot
+                    name {is} {ask} what is your name?
+                    {print} name
+                    {sleep} 2
+                    {print} squawk
+                    {sleep} 2
+                    {print} name
+                solution_text_2: "This is an example of an answer to the extra assignment"
+                solution_code_2: |
+                    {print} Im Hedy the parrot
+                    name {is} {ask} what is your name?
+                    {print} name
+                    {sleep} 2
+                    {print} squawk
+                    {sleep} 2
+                    {print} name
+                    age {is} {ask} How old are you?
+                    {print} age
+                    {sleep} 2
+                    {print} squawk
+                    {sleep} 2
+                    {print} age
+        -   title: "Story"
+            example:
+                error_text: |
+                    Now it's time to add variables to your own story that you've made in the previous level.
+                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+
+                    This code won't work in this level, because you have not used variables yet.
+                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+
+                    **Extra** Add a sleep command to your code to build up tension in your story.
+                error_code: |
+                    Own answer
+                solution_text: "The students made their own story code, so they have their own answers. Check if they removed all {echo} commands"
+                solution_code: |
+                    Own answer
+        -   title: "Restaurant"
+            example:
+                error_text: |
+                    Copy your own restaurant code from to previous level to the input screen below.
+                    Fix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.
+
+                    Now that your code is working again, it's time to add something more.
+                    Look at the last line of the example code: `{print} food with topping is on its way!`
+                    In this single line 2 variables have been used to create a summary of the order.
+                    Now add your own summary of the food and drinks ordered by the customer.
+
+                    **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
+
+                error_code: |
+                    Own answer
+                solution_text: "The students made their own restaurant code, so they have their own answers. Check if they removed all {echo} commands "
+                solution_code: |
+                    Own answer
+        -   title: "turtle"
+            example:
+                error_text: "This is a circle (technically a decagon, but a real circle would make a really long code in this level)"
+                error_code: |
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                    forward 30
+                    turn 36
+                solution_text: "This is a triangle"
+                solution_code: |
+                    turn 90
+                    forward 160
+                    turn 225
+                    forward 120
+                    turn 270
+                    forward 120
+    -   level: '3'
+        sections:
+        -   title: "Random"
+            example:
+                error_text: "Try out the at random command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price! Can you do it? We have already put the first lines into the example code."
+                error_code: |
+                    print The big gameshow!
+                    print There are 3 suitcases in front of you...
+                    chosen is ask Which suitcase do you choose?
+                    prices is _
+                    _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    print The big gameshow!
+                    print There are 3 suitcases in front of you...
+                    chosen is ask Which suitcase do you choose?
+                    prices is a taco, a pen, a million dollar
+                    print You win... prices at random
+        -   title: "Dice"
+            example:
+                error_text: "The dice in the example above are dice for a specific game. Can you make normal dice? Or other special dice from a different game?"
+                error_code: |
+                    choices is _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    choices is 1, 2, 3, 4, 5, 6
+                    print You throw... choices at random
+        -   title: "Rock, paper, scissors"
+            example:
+                error_text: "Finish the code by using the at random command."
+                error_code: |
+                    choices is rock, paper, scissors
+                    print choices _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    choices is rock, paper, scissors
+                    print choices at random
+        -   title: "Rock, paper, Scissors extra"
+            example:
+                error_text: "Make a two player game. Firstly ask the two players to fill in their names. Then let the computer randomly pick their choices."
+                error_code: |
+                    choices is rock, paper, scissors
+                    player_1 is ask Name of player 1:
+                    _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    choices is rock, paper, scissors
+                    player_1 is ask Name of player 1:
+                    player_2 is ask Name of player 2:
+                    print player_1 chooses choices at random
+                    print player_2 chooses choices at random
+        -   title: "Fortune Teller"
+            example:
+                error_text: "Opdracht"
+                error_code: |
+                    opdracht
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    oplossing
+        -   title: "avontuur"
+            example:
+                error_text: "Opdracht"
+                error_code: |
+                    opdracht
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    oplossing
+        -   title: "avontuur"
+            example:
+                error_text: "Opdracht"
+                error_code: |
+                    opdracht
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    oplossing
+        -   title: "avontuur"
+            example:
+                error_text: "Opdracht"
+                error_code: |
+                    opdracht
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    oplossing
 -   title: "Common mistakes"
     key: "common_mistakes"
     intro: |
