@@ -119,6 +119,11 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
+        max_width = max(len(str(element)) for row in matrix_values for element in row)
+
+        for row in matrix_values:
+            print(" ".join(str(element).ljust(max_width) for element in row))
+
         return render_template(
             "class-grid.html",
             class_info={"id": class_id, "students": students, "name": class_["name"]},
@@ -188,18 +193,15 @@ class StatisticsModule(WebsiteModule):
 
     def get_matrix_values(self, students, class_adventures_formatted, ticked_adventures, level):
         rendered_adventures = class_adventures_formatted.get(level)
-        grid_values = []
-        for student in students:
-            clone = [None for _ in range(len(class_adventures_formatted[level]))]
-            student_list = ticked_adventures.get(student)
+        matrix = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
+        for student_index in range(len(students)):
+            student_list = ticked_adventures.get(students[student_index])
             if student_list and rendered_adventures:
                 for program in student_list:
                     if program['level'] == level:
                         index = rendered_adventures.index(program['name'])
-                        if index != -1:
-                            clone[index] = 1 if program['ticked'] else 0
-            grid_values.append(clone)
-        return grid_values
+                        matrix[student_index][index] = 1 if program['ticked'] else 0
+        return matrix
 
     @route("/program-stats", methods=["GET"])
     @requires_admin

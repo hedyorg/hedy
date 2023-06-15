@@ -276,10 +276,10 @@ class Database:
         # Swap the ticked value when a request is sent
         return STUDENT_ADVENTURES.update({"id": id}, {"ticked": not ticked})
 
-    def store_student_adventure(self, adventure):
+    def store_student_adventure(self, student_adventure):
         # Store the adventure data in this table in case it doesn't match the programs table.
-        STUDENT_ADVENTURES.create(adventure)
-        return adventure
+        STUDENT_ADVENTURES.create(student_adventure)
+        return student_adventure
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
