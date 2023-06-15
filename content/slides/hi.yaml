@@ -49,9 +49,11 @@ levels:
         5:
             header: Programming!
             text: "with `{print}`, `{ask}` and `{echo}` you can already create a little story.\nThis is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         7:
             header: Programming!
             text: "The yellow arrow buttons can be used to copy examples.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
+            editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
             header: Drawing with the turtle
             text: "Now that we have seen at text codes, we will now look at drawing codes next.\n"
@@ -62,3 +64,365 @@ levels:
             header: 'Drawing with the turtle: {turn}'
             text: "`{turn}` is used to make the turtle turn left or right.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
+        11:
+            header: 'Drawing with the turtle: {turn}'
+            text: "`{turn}` is used to make the turtle turn left or right.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
+    5:
+        1:
+            header: Welcome to level 5
+            text: "In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.\n"
+        6:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/in_command/5/raw\"></iframe>\n"
+            header: Another new command
+            text: "If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.\n\nWith `{in}` you can let the computer check if an item is in a list, for example:\n\nPlease note that Hedy is case sensitive. This means that if you answer \"Green\" instead of \"green\", Hedy will print \"meh\".\n"
+        7:
+            header: Let's go!
+            text: "Enjoy the adventures in level 5!\n"
+        2:
+            header: if
+            text: "The `{if}` command allows you to choose between two options.\nIn this example the computer will print 'nice' if the given answer is Hedy.\nIf the answer is not Hedy, the computer will do nothing.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+        3:
+            header: Don't forget to print
+            text: "When using the `{if}` command, don't forget to use the `{print}` command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+        4:
+            header: else
+            text: "When using an `{if}` command, you can also add an `{else}` command.\nIf the answer is Hedy, the computer will print 'nice'.\nBut if the answer is something else the computer will print 'boo'\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+        5:
+            header: Long lines
+            text: "You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.\n\nYou can choose to seperate commands and put them on 2 lines, like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+    6:
+        1:
+            text: "In this level we are adding maths to our codes.\n"
+            header: Welcome to level 6
+        2:
+            header: Addition
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+            text: "If you want to calculate an addition, simply use the plus sign.\n"
+        7:
+            header: The = symbol
+            text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/6/raw\"></iframe>\n"
+        4:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+            header: Multiplication
+            text: "If you want to do multiplications, you can use the asterisk.\n"
+        3:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+            header: Subtraction
+            text: "If you want to subtract, you can use the minus sign.\n"
+        5:
+            header: Division
+            text: "You can use the slash for division.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+        6:
+            header: Summary
+            text: "In summary, you can use +, -, * and / to do maths.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+        8:
+            header: Calculations with variables
+            text: "You can use calculations with numbers, but you can also use variables to do calculations, like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/6/raw\"></iframe>\n"
+        9:
+            header: Let's get to work!
+            text: "Enjoy the adventures in level 6!\n"
+    9:
+        3:
+            header: Indentation matters!
+            text: "Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
+        5:
+            header: Indentation matters
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
+            text: "Again, indentation is still very important and can make a big difference in the code.\n"
+        6:
+            header: An `{if}` inside a `{repeat}`
+            text: "Now that you can use multiple lines of code after these command, you can also put them within each other.\nCheck it out:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
+        4:
+            header: Multipe lines after `{if}`
+            text: "You can also use multiple lines after `{if}`\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
+        7:
+            header: Mind the indentation
+            text: "Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
+        2:
+            text: "You are allowed to use multiple lines after `{repeat}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
+            header: Multiple lines after `{repeat}`
+        1:
+            text: "In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.\n\nYou can even put a `{repeat}` command within another `{repeat}`  command.\n"
+            header: Welcome to level 9
+        8:
+            header: Let's go!
+            text: "Enjoy the adventures in level 9!\n"
+    10:
+        4:
+            text: "Enjoy the adventures in level 10!\n"
+            header: Time to program!
+        1:
+            header: Welcome to level 10
+            text: "In this level you will learn a new command: `{for}`.\n"
+        2:
+            header: The for command
+            text: "With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/10/raw\"></iframe>\n"
+        3:
+            header: The for command
+            text: "Here you see another example of the `{for}` command:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/dishes/10/raw\"></iframe>\n"
+    4:
+        1:
+            header: Welcome to level 4
+            text: "In this level you will learn how to use quotation marks.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
+        2:
+            header: Problem
+            text: "In the previous levels, you might have come across this problem:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/default/4/raw\"></iframe>\n"
+        3:
+            header: Fixing it with quotation marks
+            text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code.\n"
+        4:
+            header: Quotation marks with print
+            text: "Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
+        5:
+            header: Quotation marks with ask
+            text: "This also goes for the `{ask}` command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
+        6:
+            header: Quotation marks and variables
+            text: "You do not want variable names to be printed on the screen.\nThis is why variables should be left out of the quotation marks, like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
+        7:
+            header: Quotation marks and variables
+            text: "When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.\nThe rest of the sentence however, does need quotation marks. That looks like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
+        8:
+            header: Quotation marks and contractions
+            text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens....\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
+        9:
+            header: Ready, Set, Go!
+            text: "Enjoy the adventures in level 4!\n"
+    3:
+        9:
+            text: "Enjoy the adventures in level 3!\n"
+            header: Let's get to work!
+        2:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
+            header: Making a list
+            text: "You make a list with `{is}`.\n\nSeperate the items on your list with a comma.\n"
+        3:
+            header: At random
+            text: "You can use the list with the `{at}` `{random}` command.\nThe computer will randomly pick one item of the list.\nEvery time you run this code the output will differ.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/dice/3/raw\"></iframe>\n"
+        1:
+            header: Welcome to level 3
+            text: "In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.\n"
+        4:
+            header: At random in a sentence
+            text: "You can use the `{at}` `{random}` command in a sentence as well.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
+        5:
+            header: Add to
+            text: "You can add items to a list with the `{add}` `{to}` command.\n\nYou can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.\nThis way you can let the player decide what to add to the list.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
+        6:
+            header: Remove from
+            text: "The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.\nThis command removes an item from a list.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
+    8:
+        2:
+            text: "In the previous levels, the `{repeat}` command looked like this:\n\nYou could only repeat one line of code.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
+            header: '{repeat} commands before'
+        3:
+            header: '{repeat} commands now'
+            text: "In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.\nYou do this by using indentation.\n\nUse 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/8/raw\"></iframe>\n"
+        1:
+            header: Welcome to level 8
+            text: "In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.\n"
+        4:
+            header: '{repeat} commands now'
+            text: "If you want to, you can continue after the `{repeat}` command without indentation.\nThe lines that do not start with indentation will not be repeated.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
+        5:
+            header: if and else before
+            text: "The same goes for the `{if}` and `{else}` commands.\nThese were the commands before:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+        8:
+            text: "You might have thought of trying to put an if command inside a repeat command, or inside another if command.\nFor now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.\n"
+            header: if statements inside if statements
+        6:
+            header: if and else now
+            text: "These are the `{if}` and `{else}` commands now.\nEach line after the `{if}` and `{else}` commands start with indentation.\n"
+            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+        7:
+            header: stopping the indentation
+            text: "Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/8/raw\"></iframe>\n"
+        9:
+            header: Let's check out the adventures!
+            text: "Enjoy the adventures in level 8!\n"
+    7:
+        1:
+            header: Welcome to level 7
+            text: "In this level you will learn how to repeat a line of code as many times a you'd like.\n"
+        2:
+            header: repeat 3 times
+            text: "If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.\nIf you want to repeat the line more times, simply change the number.\n\nFor example: If you are programming a story where your character shouts for help for 5 times, it could look like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
+        5:
+            text: "Enjoy the adventures in level 7!\n"
+            header: Ready Set Go!
+        3:
+            header: Don't forget the print command
+            text: "When using the repeat command, do not forget the `{print}` command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print/7/raw\"></iframe>\n"
+        4:
+            header: Repeat an ask command
+            text: "You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/7/raw\"></iframe>\n"
+    14:
+        2:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/14/raw\"></iframe>\n"
+            header: Symbols
+            text: "These are the new symbols you can use:\n\n  The >  means bigger than...\n\n  The >= means bigger than or the same as...\n\n  The <  means smaller than...\n\n  The <= means smaller than or the same as...\n\nYou can use them like this:\n"
+        3:
+            header: Symbols
+            text: "You can also use:\n\n== is the same as.\n\n!= is not\n\n== is used in `{if}` statements.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/default/14/raw\"></iframe>\n"
+        4:
+            header: Let's get to work!
+            text: "Enjoy the adventures in level 14!\n"
+        1:
+            header: Welcome to level 14
+            text: "In this level you'll learn some new symbols that can help you improve your programs, like >.\n"
+    15:
+        1:
+            header: Welcome to level 15
+            text: "In this level you will learn about the `{while}` loop.\n"
+        2:
+            header: '{while}'
+            text: "We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/while_command/15/raw\"></iframe>\n"
+        3:
+            header: Let's try it out!
+            text: "Enjoy the adventures in level 15!\n"
+    18:
+        3:
+            header: The very last adventures!
+            text: "Enjoy the very last adventures in level 18!\n"
+        1:
+            header: Welcome to level 18
+            text: "Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.\n"
+        2:
+            header: The Python way
+            text: "We arrived at real Python code! That means we need to use parentheses with print and range from now on.\n\nAlso, if you want to print more than one item, you need to separate them by commas.\n\nThe final change we will need to make to get Python code is changing ask into input.\n\nClick on the 'print' tab for all the examples.\n"
+            editor: "<iframe class=\"fragment\" src=\"/hedy/18\"></iframe>\n"
+    12:
+        3:
+            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/12/raw\"></iframe>\n"
+            header: Decimal numbers
+            text: "From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!\n\nNumbers do not quotation marks.\n"
+        1:
+            header: Welcome to level 12
+            text: "From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.\n"
+        2:
+            header: Quotation marks
+            text: "This level makes some changes to the usage of quotation marks.\nFrom now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/12/raw\"></iframe>\n"
+        4:
+            header: Ready to try it out?
+            text: "Enjoy the adventures in level 12!\n"
+    11:
+        1:
+            header: Welcome to level 11
+            text: "In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.\n\nThis way we don't need the `{repeat}` command anymore.\n"
+        2:
+            header: The for command
+            text: "This is what the new for command looks like:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/11/raw\"></iframe>\n"
+        3:
+            header: the variable i
+            text: "In the previous slide the variable was named 'counter', because it was counting down.\nYou can of course use any name for the variable you want.\nThe standard name  for variables in this situation that is used in programming languages like Python is 'i'.\nThat looks like this:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/11/raw\"></iframe>\n"
+        4:
+            header: Let's start programming!
+            text: "Enjoy the adventures in level 11!\n"
+    2:
+        1:
+            header: Welcome to level 2
+            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store informatie.\n\nFor example: a name, age or favorite sports team.\n"
+        2:
+            header: Variables
+            text: "To make or 'set' a variable we use the `{is}` command\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
+        3:
+            header: Interactive
+            text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}`  command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
+        4:
+            header: Multiple variables
+            text: "Now that we use variables, we can use multiple variables instead of just one `{echo}`command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
+        5:
+            header: Sleep
+            text: "You can also use the `{sleep}` command to pause the code for a while.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
+        6:
+            header: Sleep 5
+            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
+        7:
+            header: Let the programming fun begin!
+            text: "Enjoy the adventures in level 3!\n"
+    13:
+        1:
+            header: Welcome to level 13
+            text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.\n"
+        2:
+            header: The and command
+            text: "The `{and}` command is always used in a combination with the {if} command.\nThis way you can check if 2 statements are true. For example:\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
+        3:
+            header: The or command
+            text: "The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.\n\nLet's see what happens when you change the `{and}` for `{or}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
+        4:
+            header: Let's go!
+            text: "Enjoy the adventures in level 13!\n"
+    16:
+        1:
+            header: Welcome to level 16
+            text: "In this level you will learn about the [square brackets] and how to use them.\n"
+        2:
+            header: Square brackets
+            text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/16/raw\"></iframe>\n"
+        3:
+            header: Let's try it out!
+            text: "Enjoy the adventures in level 16!\n"
+    17:
+        1:
+            header: Welcome to level 17
+            text: "in this level you will learn how to use a colon and you will learn the elif command.\n"
+        2:
+            header: Colon
+            text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/17/raw\"></iframe>\n"
+        3:
+            header: Elif
+            text: "In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/elif_command/17/raw\"></iframe>\n"
+        4:
+            header: Let's try it out!
+            text: "Enjoy the adventures in level 17!\n"
