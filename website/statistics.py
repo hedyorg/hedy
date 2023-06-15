@@ -119,11 +119,6 @@ class StatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        max_width = max(len(str(element)) for row in matrix_values for element in row)
-
-        for row in matrix_values:
-            print(" ".join(str(element).ljust(max_width) for element in row))
-
         return render_template(
             "class-grid.html",
             class_info={"id": class_id, "students": students, "name": class_["name"]},
