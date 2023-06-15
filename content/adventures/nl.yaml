@@ -2839,13 +2839,6 @@ adventures:
                         {print} '5 keer 5 is ' 5 * 5
                         {print} '5 gedeeld door 5 is ' 5 / 5
                         ```
-                story_text_2: |
-                        Vanaf dit level mag je ook opslaan met een `=` in plaats van met het woord `{is}`. Bij woorden en bij sommen. Dus zo:
-                example_code_2: |
-                        ```
-                        naam = Hedy
-                        antwoord = 5 + 12
-                        ```
             12:
                 story_text: |-
                     **Rekenen met woorden**
@@ -2894,6 +2887,17 @@ adventures:
                 story_text_2: "### Opdracht\nTijd om je eigen variabelen te maken!\nIn het voorbeeld hebben we de variabele 'lievelingsdier' gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.\nMaak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.\n"
                 example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van favorite_animals\n```\n"
                 start_code: "naam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud."
+            6:
+                story_text: |
+                    We kunnen vanaf dit level ook waardes op een andere manier opslaan in een variabele, namelijk met `=` in plaats van `{is}`. Je gebruikt = om een woord of een getal in een variabele op te slaan, zoals het voorbeeld hier:
+                example_code: |
+                    ```
+                    naam = Hedy
+                    antwoord = 20 + 4
+                    ```
+                start_code: |
+                    naam = Hedy
+                    antwoord = 20 + 4
             14:
                 start_code: |-
                     leeftijd = {ask} 'Hoe oud ben jij?'
@@ -3041,6 +3045,8 @@ adventures:
                 start_code: "naam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n"
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
+            9:
+                
     in_command:
         name: in
         description: Introducing the in command
