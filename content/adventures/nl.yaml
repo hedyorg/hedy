@@ -3046,7 +3046,30 @@ adventures:
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
             9:
-                
+                start_code: |
+                    doorgaan = {ask} 'Wil je doorgaan?'
+                    {if} doorgaan {is} ja
+                        zeker = {ask} 'Weet je het zeker?'
+                        {if} zeker {is} ja
+                            {print} 'We gaan door'
+                        {else}
+                            {print} 'Je weet het niet zeker'
+                    {else}
+                        {print} 'Je wil niet doorgaan'
+                example_code: |
+                    ```
+                    doorgaan = {ask} 'Wil je doorgaan?'
+                    {if} doorgaan {is} ja
+                        zeker = {ask} 'Weet je het zeker?'
+                        {if} zeker {is} ja
+                            {print} 'We gaan door'
+                        {else}
+                            {print} 'Je weet het niet zeker'
+                    {else}
+                        {print} 'Je wil niet doorgaan'
+                    ```
+                story_text: |
+                    In dit level kun je een {if} commando in een ander {if} commando stoppen. 
     in_command:
         name: in
         description: Introducing the in command
