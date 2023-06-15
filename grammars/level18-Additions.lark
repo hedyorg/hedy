@@ -1,7 +1,6 @@
 // adds round brackets in print() and range(), and changes ask to input
 
-command_skipping_disabled:+= input | input_empty_brackets | print_empty_brackets -= ask > assign | call
-command_skipping_enabled:+= input | input_empty_brackets | print_empty_brackets -= ask > assign | call | error_invalid
+command:+= input | input_empty_brackets | print_empty_brackets -= ask > assign | call
 
 print: _PRINT (_LEFT_BRACKET (quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))* _RIGHT_BRACKET)?
 print_empty_brackets: _PRINT _LEFT_BRACKET _RIGHT_BRACKET

@@ -1,5 +1,4 @@
-command_skipping_disabled:+= for_loop
-command_skipping_enabled:+= for_loop > error_invalid
+command:+= for_loop
 
 //new : for loop
 for_loop: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK

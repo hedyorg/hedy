@@ -2454,22 +2454,6 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
-
-    if not source_map.skip_faulty:
-        # remove all faulty code skipping enabled rules
-        grammar_text_1 = re.sub(r".*_skipping_enabled.+", "\n", grammar_text_1)
-        grammar_text_2 = re.sub(r".*_skipping_enabled.+", "\n", grammar_text_2)
-        # set all faulty code skipping disabled rules as default
-        grammar_text_1 = re.sub(r"_skipping_disabled", "", grammar_text_1)
-        grammar_text_2 = re.sub(r"_skipping_disabled", "", grammar_text_2)
-    else:
-        # remove all faulty code skipping disabled rules
-        grammar_text_1 = re.sub(r".*_skipping_disabled.+", "\n", grammar_text_1)
-        grammar_text_2 = re.sub(r".*_skipping_disabled.+", "\n", grammar_text_2)
-        # set all faulty code skipping enabled rules as default
-        grammar_text_1 = re.sub(r"_skipping_enabled", "", grammar_text_1)
-        grammar_text_2 = re.sub(r"_skipping_enabled", "", grammar_text_2)
-
     merged_grammar = []
 
     rules_grammar_1 = grammar_text_1.split('\n')
@@ -2579,30 +2563,83 @@ def create_grammar(level, lang="en"):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i, i)
 
+    # Change the grammar if skipping faulty is enabled
     if source_map.skip_faulty:
-        non_allowed_words = re.findall(r'".*?"', keywords)
-        non_allowed_words = list(set(non_allowed_words))
+        # Make sure to change the meaning of error_invalid
+        # this way more text will be 'catched'
+        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
+        if len(error_invalid_rules) > 0:
+            error_invalid_rule = error_invalid_rules[0]
+            error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
+            result = result.replace(error_invalid_rule, error_invalid_rule_changed)
 
-        non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
-        non_allowed_words_with_space = '|'.join(non_allowed_words)
-        result = result.replace('SKIPPING_TEXT_WITH_SPACES_NON_ALLOWED_WORDS', non_allowed_words_with_space)
+        # from level 12:
+        # Make sure that all keywords in the language are added to the rules:
+        # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
+        if level > 12:
+            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', result, re.MULTILINE)
+            if len(textwithspaces_rules) > 0:
+                textwithspaces_rule = textwithspaces_rules[0]
+                textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
+                result = result.replace(textwithspaces_rule, textwithspaces_rule_changed)
 
-        letters_done = []
-        string_words = ''
+            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', result, re.MULTILINE)
+            if len(textwithoutspaces_rules) > 0:
+                textwithoutspaces_rule = textwithoutspaces_rules[0]
+                textwithoutspaces_rule_changed = (
+                    r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
+                )
+                result = result.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
 
-        for word in non_allowed_words:
-            # go through all words and add them in groups by their first letter
-            first_letter = word[0]
-            if first_letter not in letters_done:
-                string_words += f'|{first_letter}(?!{word[1:]})'
-                letters_done.append(first_letter)
-            else:
-                string_words = string_words.replace(f'|{word[0]}(?!', f'|{word[0]}(?!{word[1:]}|')
+            non_allowed_words = re.findall(r'".*?"', keywords)
+            non_allowed_words = list(set(non_allowed_words))
 
-        string_words = string_words.replace('|)', ')')  # remove empty regex expressions
-        string_words = string_words[1:]  # remove first |
+            non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
+            non_allowed_words_with_space = '|'.join(non_allowed_words)
+            result = result.replace('SKIP1', non_allowed_words_with_space)
 
-        result = result.replace('SKIPPING_TEXT_WITHOUT_SPACES_NON_ALLOWED_WORDS', string_words)
+            letters_done = []
+            string_words = ''
+
+            for word in non_allowed_words:
+                # go through all words and add them in groups by their first letter
+                first_letter = word[0]
+                if first_letter not in letters_done:
+                    string_words += f'|{first_letter}(?!{word[1:]})'
+                    letters_done.append(first_letter)
+                else:
+                    string_words = string_words.replace(f'|{word[0]}(?!', f'|{word[0]}(?!{word[1:]}|')
+
+            string_words = string_words.replace('|)', ')')  # remove empty regex expressions
+            string_words = string_words[1:]  # remove first |
+
+            result = result.replace('SKIP2', string_words)
+
+        # Make sure that the error_invalid is added to the command rule
+        # to function as a 'bucket' for faulty text
+        command_rules = re.findall(r'^command:.*?\n', result, re.MULTILINE)
+        if len(command_rules) > 0:
+            command_rule = command_rules[0]
+            command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
+            result = result.replace(command_rule, command_rule_with_error_invalid)
+
+        # Make sure that the error_invalid is added to the if_less_command rule
+        # to function as a 'bucket' for faulty if body commands
+        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', result, re.MULTILINE)
+        if len(if_less_command_rules) > 0:
+            if_less_command_rule = if_less_command_rules[0]
+            if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
+            result = result.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
+
+        # Make sure that the _non_empty_program rule does not contain error_invalid rules
+        # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
+        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', result, re.MULTILINE)
+        if len(non_empty_program_rules) > 0:
+            non_empty_program_rule = non_empty_program_rules[0]
+            non_empty_program_rule_changed = (
+                '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
+            )
+            result = result.replace(non_empty_program_rule, non_empty_program_rule_changed)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
