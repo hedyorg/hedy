@@ -567,36 +567,164 @@ sections:
                     print player_2 chooses choices at random
         -   title: "Fortune Teller"
             example:
-                error_text: "Opdracht"
+                error_text: "Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'."
                 error_code: |
-                    opdracht
+                    print I’m Hedy the fortune teller!
+                    question is ask What do you want to know?
+                    print This is what you want to know: question
+                    answers is yes, no, maybe
+                    print My crystal ball says...
+                    sleep 2
+                    print answers at random
                 solution_text: "This is an example of a correct answer"
                 solution_code: |
-                    oplossing
-        -   title: "avontuur"
+                    print I’m Hedy the fortune teller!
+                    question is ask What do you want to know?
+                    print This is what you want to know: question
+                    answers is yes, no, maybe, definitely, i dont know, try again
+                    print My crystal ball says...
+                    sleep 2
+                    print answers at random
+        -   title: "restaurant"
             example:
-                error_text: "Opdracht"
+                error_text: "Now make your own version of the random restaurant. Make a list of starts, mains, desserts, drinks and prices yourself. Then use print and at random commands to tell the costumer what will be on their menu tonight."
                 error_code: |
-                    opdracht
+                    print Welcome to your own random restaurant!
+                    starters is _
+                    mains is _
+                    desserts is _
+                    drinks is _
+                    prices is _
+                    _
                 solution_text: "This is an example of a correct answer"
                 solution_code: |
-                    oplossing
-        -   title: "avontuur"
+                    print Welcome to your own random restaurant!
+                    starters is soup, salad, nothing
+                    mains is brussels sprouts, fried spider legs, pizza
+                    desserts is chocolate cake, french cheese board, panna cotta
+                    drinks is cola, water, beer
+                    prices is 50 sents, 50 euros, 500 euros
+                    print you will have starters at random
+                    print followed by mains at random
+                    print lastly you will get desserts at random
+                    print you will drink drinks at random
+                    print that will be prices at random please!
+        -   title: "Add and remove"
             example:
-                error_text: "Opdracht"
+                error_text: "Try out the new commands in this virtual restaurant. Add the flavor the player is hoping for to the list and remove the flavors they are allergic to."
                 error_code: |
-                    opdracht
+                    print Mystery milkshake
+                    flavors is strawberry, chocolate, vanilla
+                    hope is ask What flavor are you hoping for?
+                    _
+                    allergies is ask Are you allergic to any flavors?
+                    _
+                    print You get a flavors at random milkshake
                 solution_text: "This is an example of a correct answer"
                 solution_code: |
-                    oplossing
-        -   title: "avontuur"
+                    print Mystery milkshake
+                    flavors is strawberry, chocolate, vanilla
+                    hope is ask What flavor are you hoping for?
+                    add hope to flavors
+                    allergies is ask Are you allergic to any flavors?
+                    remove allergies from flavors
+                    print You get a flavors at random milkshake
+        -   title: "Parrot"
             example:
-                error_text: "Opdracht"
+                error_text: "Can you add the add to command to get the code to work?"
                 error_code: |
-                    opdracht
+                    words is squawk, Hedy
+                    print Train your parrot!
+                    new_word is ask Which word do you want to teach them?
+                    _ new_word _ words
+                    print 🧒 Say new_word, Hedy!
+                    print 🦜 words at random
                 solution_text: "This is an example of a correct answer"
                 solution_code: |
-                    oplossing
+                    words is squawk, Hedy
+                    print Train your parrot!
+                    new_word is ask Which word do you want to teach them?
+                    add new_word to words
+                    print 🧒 Say new_word, Hedy!
+                    print 🦜 words at random
+        -   title: "dishes"
+            example:
+                error_text: "Make your own version of the dishwasher program. Firstly make a list of your family members. Then think of a task that needs to be done, and let the computer decide who has to do the task with the at random command."
+                error_code: |
+                    people is mom, dad, Emma, Sophie
+                    print people at random has to do the dishes
+                solution_text: "Own answer"
+                solution_code: |
+                    Own answer
+        -   title: "Dishes extra"
+            example:
+                error_text: "Extra Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the remove from command"
+                error_code: |
+                    people is mom, dad, Emma, Sophie
+                    print people at random has to do the dishes
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    people is mom, dad, Emma, Sophie
+                    name is ask what is your name?
+                    remove name from people
+                    print people at random has to do the dishes
+        -   title: "story"
+            example:
+                error_text: "Copy your story from the previous levels into this level. In this level you've learned 3 new commands at random , add to and remove from. Add new lines of code to your story, so that all of the new commands are featured at least once in your story."
+                error_code: |
+                    print His backpack got way too heavy.
+                    print Inside were a bottle of water, a flashlight and a brick.
+                    bag is water, flashlight, brick
+                    dump is ask Which item should he dump?
+                    remove dump from bag
+                solution_text: "Own answer"
+                solution_code: |
+                    Own answer
+        -   title: "Haunted House"
+            example:
+                error_text: "Copy the example codes and fill in the blanks to make it work!"
+                error_code: |
+                    _ Escape from the haunted house!
+                    _ There are 3 doors in front of you...
+                    _ _ _ Which door do you choose?
+                    _ You picked door ... choice
+                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    _ You see...
+                    sleep
+                    _ _ _ _
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    print Escape from the haunted house!
+                    print There are 3 doors in front of you...
+                    choice is ask Which door do you choose?
+                    print You picked door ... choice
+                    monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    print You see...
+                    sleep
+                    monsters at random
+        -   title: "Haunted House Extra"
+            example:
+                error_text: "Extra This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story. Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!"
+                error_code: |
+                    print Escape from the haunted house!
+                    print There are 3 doors in front of you...
+                    choice is ask Which door do you choose?
+                    print You picked door ... choice
+                    monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    print You see...
+                    sleep
+                    monsters at random
+                solution_text: "This is an example of a correct answer"
+                solution_code: |
+                    print Once upon a time
+                    print (the student can make up a whole story here)
+                    print There are 3 doors in front of you...
+                    choice is ask Which door do you choose?
+                    print You picked door ... choice
+                    monsters is a zombie, a vampire, a mummy, a giant spider, NOTHING YOUVE ESCAPED
+                    print You see...
+                    sleep
+                    monsters at random
 -   title: "Common mistakes"
     key: "common_mistakes"
     intro: |
