@@ -40,7 +40,9 @@ adventures:
                         Ga maar snel naar het volgende avontuur!
                     start_code: "{print} hello world!"
             4:
-                    start_code: "{print} 'Hello world'"
+                    start_code: |
+                        naam {is} Sophie
+                        {print} Mijn naam is naam
                     story_text: |
                         In de vorige levels heb je geoefend met variabelen, maar misschien ben je dit probleem tegengekomen.
                         Als je deze code wil programmeren:
@@ -205,7 +207,12 @@ adventures:
                         {else}
                             {print} 'Hoera! Je haalt het vak!'
                         ```
-                    start_code: "{print} 'Lets go to the next tab'"
+                    start_code: |
+                        antwoord = {ask} 'Wil je nog meer leren?'
+                        {if} antwoord == 'ja'
+                        {print} 'Ga naar het volgende avontuur!'
+                        {if} antwoord != 'ja'
+                        {print} 'Wat jammer!'
             15:
                     story_text: |
                         In het spelletje hiernaast kan de speler erg lang blijven spelen...
@@ -1130,10 +1137,14 @@ adventures:
                     ```
                     dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
                     namen = mama, papa, Emma, Sophie
-                    for dag in dagen
+                    {for} dag {in} dagen
                         {print} 'Op ' dag ' doet ' namen {at} {random} ' de afwas.'
                     ```
-                start_code: "# Schrijf jouw code hier"
+                start_code: |
+                    dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
+                    namen = mama, papa, Emma, Sophie
+                    {for} dag {in} dagen
+                       {print} 'Op ' dag ' doet ' namen {at} {random} ' de afwas.'
     dice:
         name: "Dobbelsteen"
         description: "Maak je eigen dobbelsteen"
@@ -1499,10 +1510,10 @@ adventures:
                     Nu je kunt rekenen, kun je ook een programma maken om sommetjes te oefenen. Je kunt de sommen zelf verzinnen, bijv zo:
                 example_code: |
                     ```
-                    goedeantwoord = 11 * 27
+                    goede_antwoord = 11 * 27
                     antwoord = {ask} 'Hoeveel is 11 keer 27?'
-                    {if} antwoord {is} goedeantwoord {print} 'goedzo'
-                    {else} {print} 'Foutje! Het was ' goedeantwoord
+                    {if} antwoord {is} goede_antwoord {print} 'goedzo'
+                    {else} {print} 'Foutje! Het was ' goede_antwoord
                     ```
                 story_text_2: |
                     ### Opdracht
@@ -1519,7 +1530,11 @@ adventures:
                     Je kunt ook de computer zelf willekeurige sommen laten maken met {random}.
 
                     Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
-                start_code: "{print} 'Welkom bij jouw rekenmachine'"
+                start_code: |
+                    goede_antwoord = 11 * 27
+                    antwoord = {ask} 'Hoeveel is 11 keer 27?'
+                    {if} antwoord {is} goede_antwoord {print} 'goedzo'
+                    {else} {print} 'Foutje! Het was ' goede_antwoord
             9:
                 story_text: |
                     In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
@@ -1579,7 +1594,10 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * nummer
                     ```
-                start_code: "# Jouw code komt hier"
+                start_code: |
+                    nummer = 10
+                    {for} i {in} {range} 1 to 10
+                       {print} i * nummer
             12:
                 story_text: |
                     In dit level kun je ook met kommagetallen werken met de rekenmachine.
@@ -2712,9 +2730,9 @@ adventures:
 
                     De meeste programmeertalen gebruiken ook aanhalingstekens bij het printen, dus we komen zo al een stapje dichterbij echt programmeren!
                 story_text_2: "## Hoge komma's\nLet op! Omdat we nu aanhalingstekens gebruiken, raakt Hedy in de war als je een hoge komma wil gebruiken in woorden zoals: Auto's.\n Zorg dus dat je de hoge komma's weghaalt en de spelling dus aanpast naar: Autos.\nIn het voorbeeldje hieronder zie je wat er gebeurt als je de hoge komma's wel gewoon blijft gebruiken.\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
+                example_code: "```{print} 'Vanaf nu gebruik je aanhalingstekens!'\nantwoord {is} {ask} 'Wat gebruiken we vanaf nu?'\n{print} 'We gebruiken ' antwoord ' vanaf nu'```"
                 example_code_2: "```\n_ Let op dit voorbeeld laat zien hoe het NIET moet_\n{print} 'Daar rijden twee oma's in hun auto's '\n{print} 'Zouden zij liever 's middags of 's avonds rijden?'\n```\n"
-                start_code: "{print} 'Vanaf nu gebruik je aanhalingstekens!'\nantwoord {is} {ask} 'Wat gebruiken we vanaf nu?'\n{print} 'We gebruiken ' antwoord"
+                start_code: "{print} 'Vanaf nu gebruik je aanhalingstekens!'\nantwoord {is} {ask} 'Wat gebruiken we vanaf nu?'\n{print} 'We gebruiken ' antwoord ' vanaf nu'"
         name: "'Aanhalingstekens'"
         default_save_name: quotation_marks
     repeat_command:
@@ -2805,7 +2823,11 @@ adventures:
     maths:
         levels:
             6:
-                start_code: "{print} '5 keer 5 is ' 5 * 5"
+                start_code: |
+                    {print} '5 plus 5 is ' 5 + 5
+                    {print} '5 min 5 is ' 5 - 5
+                    {print} '5 keer 5 is ' 5 * 5
+                    {print} '5 gedeeld door 5 is ' 5 / 5
                 story_text: |
                         In level 6 is er iets nieuws: je kunt nu ook rekenen. De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
                         De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
@@ -2815,6 +2837,7 @@ adventures:
                         {print} '5 plus 5 is ' 5 + 5
                         {print} '5 min 5 is ' 5 - 5
                         {print} '5 keer 5 is ' 5 * 5
+                        {print} '5 gedeeld door 5 is ' 5 / 5
                         ```
                 story_text_2: |
                         Vanaf dit level mag je ook opslaan met een `=` in plaats van met het woord `{is}`. Bij woorden en bij sommen. Dus zo:
@@ -2938,8 +2961,11 @@ adventures:
                 example_code_3: "```\n{print} Win een prijs!\n{print} Voor je staan 3 koffers...\ngekozen {is} {ask} Welke koffer kies je?\nprijzen {is} _\n_\n```\n"
             16:
                 start_code: |-
-                    fruit = ['appel', 'banaan', 'kers']
-                    {print} fruit
+                    vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    geluksgetallen = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} 'het geluksgetal van ' vrienden[i]
+                        {print} 'is ' geluksgetallen[i]
                 story_text: |-
                     We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Python code.
                     In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
