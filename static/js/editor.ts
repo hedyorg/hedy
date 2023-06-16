@@ -61,4 +61,19 @@ export interface HedyEditor {
      * Clears the errors and annotations in the editor
      */
     clearErrors: () => void;
+
+    /**     
+     * Moves to the cursor to the end of the current file
+     */
+    moveCursorToEndOfFile: () => void;
+
+    /**
+     * Clears the selected text
+     */
+    clearSelection: () => void;
+
+    /**
+    * Removes all breakpoints on the rows.
+    **/
+    clearBreakpoints(): void;
 }
