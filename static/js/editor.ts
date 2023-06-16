@@ -17,19 +17,48 @@ export interface HedyEditor {
     /**
      * Ininitialize an editor that appears in a modal
      * @param $editor reference to the div that contains this editor
-     * @returns 
      */   
     initializeModalEditor: ($editor: JQuery)=> HedyEditor;
 
     /**
      * Set the highlither rules for a particular level
-     * @param level 
-     * @returns 
+     * @param level      
      */
     setHighliterForLevel: (level: string) => void;
     
     /**
-     * Returns the string of the current program in the editor
+     * @returns the string of the current program in the editor
      */
-    getContent: () => string
+    getValue: () => string;
+
+    /**     
+     * @returns if the editor is set to read-only mode
+     */
+    getReadOnly: () => boolean;
+    
+    /**
+     * Sets the editor contents.
+     * @param content the content that wants to be set in the editor
+     */
+    setValue: (content: string) => void;
+
+    /**
+     * Trim trailing whitespaces
+     */
+    trimTrailingSpace: (editor: HedyEditor) => void
+
+    /**
+     * Resizes the editor after changing its size programatically
+     */
+    resize: () => void;
+
+    /**
+     * Focuses the text area for the current editor
+     */
+    focus: () => void;
+
+    /**
+     * Clears the errors and annotations in the editor
+     */
+    clearErrors: () => void;
 }
