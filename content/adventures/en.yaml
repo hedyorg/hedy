@@ -541,7 +541,7 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    Try out the new commands in this virtual restaurant. Add the flavor the player is hoping for to the list and remove the flavors they are allergic to.
                 example_code_3: |
                     ```
                     {print} Mystery milkshake
@@ -566,8 +566,10 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## The sleep command
                     Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+
+                    ### Exercise
+                    Practise this new command by making a code of your own in which you use the {sleep} command at least 3 times. With each {sleep} command the pausing time should differ.
                 example_code: |
                     ```
                     {print} My favorite colour is...
@@ -1874,7 +1876,7 @@ adventures:
                     people {is} mom, dad, Emma, Sophie
                     dishwasher {is} people {at} {random}
                     _ dishwasher {is} Sophie {print} _ too bad I have to do the dishes _
-                    _ {print} 'luckily no dishes because' _ 'is already washing up'
+                    _ {print} 'luckily no dishes because ' _ ' is already washing up'
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             6:
@@ -1907,7 +1909,6 @@ adventures:
                     dishwasher = people {at} {random}
                     {print} 'Tuesday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             7:
@@ -1984,7 +1985,7 @@ adventures:
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
                     throw {is} choices {at} {random}
-                    {print} 'you have thrown' choices
+                    {print} 'you have thrown ' throw
                     _ throw {is} earthworm {print} 'You can stop throwing.'
                     _ {print} 'You have to throw it again!'
                     ```
@@ -2002,9 +2003,9 @@ adventures:
                     choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
                     throw = choices {at} {random}
-                    {print} 'you threw' throw
+                    {print} 'you threw ' throw
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
-                    {print} 'those are' points ' point'
+                    {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
 
@@ -2824,7 +2825,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Copy the example code into your inputscreen and fill in the blanks to make the code work.
+                    Copy the example code into your input screen and fill in the blanks to make the code work.
                     **Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.
                 start_code: "# place your code here"
             3:
