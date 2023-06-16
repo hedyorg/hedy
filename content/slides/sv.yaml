@@ -29,8 +29,8 @@ levels:
             text: "Utmatningen kan också vara en teckning.\n<iframe class=\"embedded-hedy\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     1:
         5:
-            header: Programmering!
-            text: "Redan med `{print}`, `{ask}` och `{echo}` kan du skapa en liten berättelse.\nDet här är ett bra tillfälle att testa äventyren Papegoja, Berättelse och Sten, sax, påse.\n"
+            header: '{echo}'
+            text: "Du såg i förra exemplet att om du använder kommandot `{ask}` kan du ställa en fråga.\n\nMen svaret visas inte i på utdataskärmen.\n\nOm du vill att svaret ska visas kan du använda det sista kommandot på den här nivån: `{echo}`.\n\n`{echo}` används för att upprepa svaret på en `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         1:
             header: Välkommen till nivå 1!
@@ -44,19 +44,19 @@ levels:
             text: "Den andra koden man kan använda i nivå 1 är `{ask}`.\n\n`{ask}` används för att fråga en fråga som kan besvaras.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
         4:
-            header: 'Hedy nivå 1: {echo}'
+            header: '{ask} '
             text: "Den sista textkoden som du kan använda på nivå 1 är `{echo}`.\n\n`{echo}`upprepar svaret på en `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
         6:
             header: Programmering!
-            text: "Äventyr visas i flikar.\n"
+            text: "Med `{print}`, `{ask}` och `{echo}` kan du redan skapa en liten berättelse.\nDet här är ett bra tillfälle att prova äventyren Papegoja, Berättelse och Sten, sax, påse.\n"
         7:
             header: Programmering!
-            text: "De gula pilknapparna används för att kopiera exempel.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
+            text: "Äventyren visas i flikar.\n"
             editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
-            header: Rita med sköldpaddan
-            text: "Nu när vi har kollat på textkoder ska vi se på koder för att rita.\n"
+            header: Programmering!
+            text: "De gula pilknapparna används för att kopiera exempel.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         9:
             header: 'Rita med sköldpaddan: {forward}'
             text: "`{forward}` flyttar sköldpaddan framåt.\n"
@@ -65,8 +65,8 @@ levels:
             text: "'{turn}' används för att få sköldpaddan att svänga vänster eller höger.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: "`{turn}` is used to make the turtle turn left or right.\n"
+            header: 'Rita med sköldpaddan: {turn}'
+            text: "'{turn}' används för att få sköldpaddan att svänga vänster eller höger.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     5:
         5:
@@ -185,42 +185,42 @@ levels:
             text: "Enjoy the adventures in level 8!\n"
     3:
         9:
-            header: Let's get to work!
-            text: "Enjoy the adventures in level 3!\n"
+            header: Nu sätter vi igång!
+            text: "Ha det kul med äventyren på nivå 3!\n"
         4:
             editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
-            header: At random in a sentence
-            text: "You can use the `{at}` `{random}` command in a sentence as well.\n"
+            header: Slumpmässigt i en mening
+            text: "Du kan använda kommandot `{at} {random}` i en mening också.\n"
         5:
             header: Add to
-            text: "You can add items to a list with the `{add}` `{to}` command.\n\nYou can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.\nThis way you can let the player decide what to add to the list.\n"
+            text: "Du kan lägga till element i en lista med kommandot `{add}` `{to}`.\n\nDu kan välja vad som ska läggas till i listan eller så kan du använda kommandot `{add}` `{to}` i kombination med kommandot `{ask}`.\nPå så sätt kan du låta spelaren bestämma vad som ska läggas till i listan.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         1:
-            header: Welcome to level 3
-            text: "In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.\n"
+            header: Välkommen till nivå 3
+            text: "På den här nivån får du lära dig att göra en lista, lägga till och ta bort element från din lista och välja ett slumpmässigt element från listan.\n"
         2:
-            header: Making a list
-            text: "You make a list with `{is}`.\n\nSeperate the items on your list with a comma.\n"
+            header: Göra en lista
+            text: "Du gör en lista med kommandot `{is}`.\n\nSkriv kommatecken mellan elementen i listan.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
         3:
-            header: At random
-            text: "You can use the list with the `{at}` `{random}` command.\nThe computer will randomly pick one item of the list.\nEvery time you run this code the output will differ.\n"
+            header: Slumpmässigt
+            text: "Du kan använda listan med kommandot `{at}` `{random}`.\nDatorn kommer slumpmässigt att välja ett element från listan.\nVarje gång du kör denna kod kommer utskriften att skilja sig åt.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/dice/3/raw\"></iframe>\n"
         6:
-            header: Remove from
-            text: "The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.\nThis command removes an item from a list.\n"
+            header: Ta bort från
+            text: "Motsatsen till kommandot `{add}` `{to}` är kommandot `{remove}` `{from}`.\nDetta kommando tar bort ett element från en lista.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
     4:
         1:
-            header: Welcome to level 4
-            text: "In this level you will learn how to use quotation marks.\n"
+            header: Välkommen till nivå 4
+            text: "På den här nivån får du lära dig använda citattecken.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         2:
             header: Problem
-            text: "In the previous levels, you might have come across this problem:\n"
+            text: "På de tidigare nivåerna kan du ha stött på det här problemet:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/default/4/raw\"></iframe>\n"
         3:
-            header: Fixing it with quotation marks
+            header: Fixa det med citattecken
             text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code.\n"
         4:
             header: Quotation marks with print
@@ -308,31 +308,31 @@ levels:
             text: "Enjoy the adventures in level 13!\n"
     2:
         3:
-            header: Interactive
-            text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}`  command.\n"
+            header: Interaktiv
+            text: "Vi kan också sätta en variabel genom att ställa frågor.\n\nSvaret på frågan lagras i variabeln.\n\nPå så sätt behöver vi inte kommandot `{echo}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         1:
-            header: Welcome to level 2
-            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store informatie.\n\nFor example: a name, age or favorite sports team.\n"
+            header: Välkommen till nivå 2
+            text: "På den här nivån får du lära dig att använda variabler.\n\nEn variabel är ett ord som kan användas för att spara information.\n\nTill exempel: ett namn, en ålder eller ett favoritlag.\n"
         2:
             header: Variables
-            text: "To make or 'set' a variable we use the `{is}` command\n"
+            text: "För att skapa eller sätta en variabels värde använder vi kommandot `{is}`\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
         4:
             header: Multiple variables
-            text: "Now that we use variables, we can use multiple variables instead of just one `{echo}`command.\n"
+            text: "Nu när vi använder variabler kan vi använda flera variabler istället för bara ett `{echo}`-kommando.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         5:
-            header: Sleep
-            text: "You can also use the `{sleep}` command to pause the code for a while.\n"
+            header: Sov
+            text: "Du kan också använda kommandot `{sleep}` för att pausa koden ett tag.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         6:
-            header: Sleep 5
-            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command.\n"
+            header: Sov 5
+            text: "Du kan lägga till ett tal efter kommandot `{sleep}` om du vill att pausen ska vara längre.\n\nOm du vill kan du även använda en variabel istället för ett tal för att bestämma längden på sov-kommandot.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         7:
-            header: Let the programming fun begin!
-            text: "Enjoy the adventures in level 3!\n"
+            header: Låt den roliga programmeringen börja!
+            text: "Ha det kul med äventyren på nivå 3!\n"
     10:
         1:
             header: Welcome to level 10
