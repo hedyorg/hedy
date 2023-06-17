@@ -242,7 +242,8 @@ class StatisticsModule(WebsiteModule):
         for key, value in class_adventures.items():
             adventure_list = []
             for adventure in value:
-                adventure_list.append(adventure_names[adventure['name']])
+                if not adventure['name'] == 'next':
+                    adventure_list.append(adventure_names[adventure['name']])
             class_adventures_formatted[key] = adventure_list
 
         ticked_adventures = {}
