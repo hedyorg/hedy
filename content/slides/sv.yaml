@@ -23,7 +23,7 @@ levels:
             text: "Vi startar koden med Kör kod-knappen under koden.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         8:
             header: Programmering i Hedy
-            text: "Utmatning visas på vänster sida.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            text: "Utmatning visas till höger.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         9:
             header: Programmering i Hedy
             text: "Utmatningen kan också vara en teckning.\n<iframe class=\"embedded-hedy\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
@@ -36,17 +36,17 @@ levels:
             header: Välkommen till nivå 1!
             text: "Vi börjar nivå 1 med att göra historier i Hedy!\n\nVi behöver tre textkoder för att skapa interaktiva berättelser.\n"
         2:
-            header: 'Hedy nivå 1: {print}'
+            header: '{print}'
             text: "Den första koden man kan använda i nivå 1 är `{print}`.\n\n`{print}` används för att visa text på skärmen.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         3:
-            header: 'Hedy nivå 1: {ask}'
-            text: "Den andra koden man kan använda i nivå 1 är `{ask}`.\n\n`{ask}` används för att fråga en fråga som kan besvaras.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
+            header: 'Kommandot {print}'
+            text: "Du kan ändra texten efter skriv-kommandot till vad du vill.\n\nEller så kan du skriva ut flera rader genom att lägga till en ny kodrad som också börjar med `{print}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         4:
             header: '{ask} '
-            text: "Den sista textkoden som du kan använda på nivå 1 är `{echo}`.\n\n`{echo}`upprepar svaret på en `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
+            text: "Det andra kommandot som du kan använda på nivå 1 är `{ask}`.\n\n`{ask}` används för att ställa en fråga som kan besvaras.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
         6:
             header: Programmering!
             text: "Med `{print}`, `{ask}` och `{echo}` kan du redan skapa en liten berättelse.\nDet här är ett bra tillfälle att prova äventyren Papegoja, Berättelse och Sten, sax, påse.\n"
@@ -58,131 +58,131 @@ levels:
             header: Programmering!
             text: "De gula pilknapparna används för att kopiera exempel.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         9:
+            header: 'Rita med sköldpaddan'
+            text: "Nu när vi har sett textkod kommer vi att titta på ritkod.\n"
+        10:
             header: 'Rita med sköldpaddan: {forward}'
             text: "`{forward}` flyttar sköldpaddan framåt.\n"
-        10:
-            header: 'Rita med sköldpaddan: {turn}'
-            text: "'{turn}' används för att få sköldpaddan att svänga vänster eller höger.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
         11:
             header: 'Rita med sköldpaddan: {turn}'
-            text: "'{turn}' används för att få sköldpaddan att svänga vänster eller höger.\n"
+            text: "`{turn}` används för att få sköldpaddan att svänga vänster eller höger.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     5:
         5:
-            header: Long lines
+            header: Långa rader
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-            text: "You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.\n\nYou can choose to seperate commands and put them on 2 lines, like this:\n"
+            text: "Du kanske har märkt att dina rader kan bli väldigt långa när du har både ett `{if}`- och ett `{else}`-kommando.\n\nDu kan välja att dela upp kommandona på två rader, så här:\n"
         6:
-            header: Another new command
-            text: "If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.\n\nWith `{in}` you can let the computer check if an item is in a list, for example:\n\nPlease note that Hedy is case sensitive. This means that if you answer \"Green\" instead of \"green\", Hedy will print \"meh\".\n"
+            header: Ett till nytt kommando
+            text: "Om du har övat med kommandona `{if}` och `{else}` kan du också prova kommandot `{in}`.\n\nMed `{in}` kan du låta datorn kolla om ett element finns i en lista, t.ex:\n\nTänk på att Hedy är skiljer på stora och små bokstäver. Det betyder om du svarar \"Grönt\" istället för \"grönt\", kommer Hedy att skriva \"meh\".\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/in_command/5/raw\"></iframe>\n"
         7:
-            text: "Enjoy the adventures in level 5!\n"
-            header: Let's go!
+            text: "Ha det kul med äventyren på nivå 5!\n"
+            header: Nu kör vi!
         3:
-            text: "When using the `{if}` command, don't forget to use the `{print}` command.\n"
+            text: "Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-            header: Don't forget to print
+            header: Glöm inte att skriva ut
         4:
-            header: else
-            text: "When using an `{if}` command, you can also add an `{else}` command.\nIf the answer is Hedy, the computer will print 'nice'.\nBut if the answer is something else the computer will print 'boo'\n"
+            header: annars
+            text: "När du använder ett `{if}`-kommando kan du också lägga till ett `{else}`-kommando.\nOm svaret är Hedy kommer datorn att skriva 'nice'.\nMen om svaret är något annat kommer datorn att skriva 'boo'.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
         1:
-            header: Welcome to level 5
-            text: "In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.\n"
+            header: Välkommen till nivå 5
+            text: "På den här nivån får du lära dig att använda tre nya kommandon: `{if}`, `{else}` och `{in}`.\n"
         2:
-            header: if
-            text: "The `{if}` command allows you to choose between two options.\nIn this example the computer will print 'nice' if the given answer is Hedy.\nIf the answer is not Hedy, the computer will do nothing.\n"
+            header: om
+            text: "Med kommandot `{if}` kan du välja mellan två alternativ.\nI exemplet kommer datorn att skriva 'nice' om det givna svaret är Hedy.\nOm svaret inte är Hedy kommer datorn inte att göra någonting.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
     6:
         6:
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
-            header: Summary
-            text: "In summary, you can use +, -, * and / to do maths.\n"
+            header: Sammanfattning
+            text: "Sammanfattningsvis kan du använda +, –, * och / för att räkna.\n"
         7:
-            header: The = symbol
-            text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.\n"
+            header: Symbolen =
+            text: "Från och med nu kan du också använda likhetstecken (=) istället för `{is}`-kommandot.\nDetta gäller både tal och ord, och det gäller även efter kommandona `{if}` eller `{else}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/6/raw\"></iframe>\n"
         8:
-            header: Calculations with variables
-            text: "You can use calculations with numbers, but you can also use variables to do calculations, like this:\n"
+            header: Beräkningar med variabler
+            text: "Du kan göra beräkningar med tal, men du kan också använda variabler för att göra beräkningar, t.ex. så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/6/raw\"></iframe>\n"
         9:
-            header: Let's get to work!
-            text: "Enjoy the adventures in level 6!\n"
+            header: Nu sätter vi igång!
+            text: "Ha det kul med äventyren på nivå 6!\n"
         1:
-            header: Welcome to level 6
-            text: "In this level we are adding maths to our codes.\n"
+            header: Välkommen till nivå 6
+            text: "På den här nivån lägger vi till matematik till vår kod.\n"
         2:
             header: Addition
-            text: "If you want to calculate an addition, simply use the plus sign.\n"
+            text: "Om du vill addera så använder du helt enkelt plustecknet.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
         3:
-            header: Subtraction
-            text: "If you want to subtract, you can use the minus sign.\n"
+            header: Subtraktion
+            text: "För att subtrahera använder du minustecknet.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
         4:
-            header: Multiplication
-            text: "If you want to do multiplications, you can use the asterisk.\n"
+            header: Multiplikation
+            text: "Om du vill multiplicera kan du använda asterisk.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
         5:
             header: Division
-            text: "You can use the slash for division.\n"
+            text: "Du kan använda snedstreck för division.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
     7:
         1:
-            text: "In this level you will learn how to repeat a line of code as many times a you'd like.\n"
-            header: Welcome to level 7
+            text: "På den här nivån får du lära dig att upprepa en kodrad hur många gånger som helst.\n"
+            header: Välkommen till nivå 7
         2:
-            header: repeat 3 times
-            text: "If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.\nIf you want to repeat the line more times, simply change the number.\n\nFor example: If you are programming a story where your character shouts for help for 5 times, it could look like this:\n"
+            header: upprepa 3 gånger
+            text: "Om du vill upprepa en kodrad kan du använda koden `{repeat}` 3 `{times}`.\nOm du vill upprepa raden fler gånger ändrar du bara talet.\n\nTill exempel: Om du programmerar en berättelse där din karaktär ropar på hjälp fem gånger, kan det se ut så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
         5:
-            text: "Enjoy the adventures in level 7!\n"
-            header: Ready Set Go!
+            text: "Ha det kul med äventyren på nivå 7!\n"
+            header: Klara, färdiga, gå!
         3:
-            header: Don't forget the print command
-            text: "When using the repeat command, do not forget the `{print}` command.\n"
+            header: Glöm inte kommandot skriv
+            text: "Glöm inte kommandot `{print}` när du använder kommandot upprepa.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/print/7/raw\"></iframe>\n"
         4:
-            header: Repeat an ask command
-            text: "You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.\n"
+            header: Upprepa ett fråga-kommando
+            text: "Du kan också upprepa ett `{ask}`-, `{if}`- eller `{else}`-kommando flera gånger.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/7/raw\"></iframe>\n"
     8:
         1:
-            header: Welcome to level 8
-            text: "In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.\n"
+            header: Välkommen till nivå 8
+            text: "På den här nivån lär du dig att använda indrag för att få kommandona `{repeat}`, `{if}` och `{else}` att fungera för flera rader kod.\n"
         2:
-            header: '{repeat} commands before'
-            text: "In the previous levels, the `{repeat}` command looked like this:\n\nYou could only repeat one line of code.\n"
+            header: '{repeat}-kommandon förut'
+            text: "På de tidigare nivåerna såg kommandot `{repeat}` ut så här:\n\nDu kunde bara upprepa en kodrad.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
         3:
-            header: '{repeat} commands now'
-            text: "In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.\nYou do this by using indentation.\n\nUse 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:\n"
+            header: '{repeat}-kommandon nu'
+            text: "På den här nivån kan du upprepa flera rader kod. För att göra det måste du berätta för datorn vilka rader som hör ihop och ska upprepas.\nDet gör du genom att använda indrag.\n\nAnvänd fyra blanksteg (eller en tabb) i början av varje rad som du vill upprepa, så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/8/raw\"></iframe>\n"
         4:
-            header: '{repeat} commands now'
-            text: "If you want to, you can continue after the `{repeat}` command without indentation.\nThe lines that do not start with indentation will not be repeated.\n"
+            header: '{repeat}-kommandon nu'
+            text: "Om du vill kan du fortsätta efter kommandot `{repeat}` utan indrag.\nRader utan indrag kommer inte att upprepas.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
         5:
-            header: if and else before
-            text: "The same goes for the `{if}` and `{else}` commands.\nThese were the commands before:\n"
+            header: om och annars förut
+            text: "Detsamma gäller för kommandona `{if}` och `{else}`.\nDessa kommandon användes tidigare:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
         6:
-            header: if and else now
-            text: "These are the `{if}` and `{else}` commands now.\nEach line after the `{if}` and `{else}` commands start with indentation.\n"
+            header: om och annars nu
+            text: "Så här är kommandona`{if}` och `{else}` nu.\nVarje rad efter kommandona `{if}` och `{else}` börjar med indrag.\n"
             editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
         7:
-            header: stopping the indentation
-            text: "Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.\n"
+            header: stoppa indraget
+            text: "Precis som med kommandot `{repeat}` kan du sluta använda indrag och raderna kommer alltid att visas, altså inte bara om påståendet är sant.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/8/raw\"></iframe>\n"
         8:
-            header: if statements inside if statements
-            text: "You might have thought of trying to put an if command inside a repeat command, or inside another if command.\nFor now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.\n"
+            header: if-satser inuti if-satser
+            text: "Du kanske har funderat på att ha ett if-kommando inuti ett repeat-kommando, eller inuti ett annat if-kommando.\nFör närvarande är detta inte möjligt. På de högre nivåerna kommer det att bli tillåtet, men nu ska vi fokusera på att öva kommandona `{if}` `{else}` och `{repeat}` med korrekt indrag först.\n"
         9:
-            header: Let's check out the adventures!
-            text: "Enjoy the adventures in level 8!\n"
+            header: Vi kollar in äventyren!
+            text: "Ha det kul med äventyren på nivå 8!\n"
     3:
         9:
             header: Nu sätter vi igång!
@@ -192,7 +192,7 @@ levels:
             header: Slumpmässigt i en mening
             text: "Du kan använda kommandot `{at} {random}` i en mening också.\n"
         5:
-            header: Add to
+            header: Lägg till i
             text: "Du kan lägga till element i en lista med kommandot `{add}` `{to}`.\n\nDu kan välja vad som ska läggas till i listan eller så kan du använda kommandot `{add}` `{to}` i kombination med kommandot `{ask}`.\nPå så sätt kan du låta spelaren bestämma vad som ska läggas till i listan.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         1:
@@ -221,91 +221,91 @@ levels:
             editor: "<iframe class=\"fragment\" src=\"/adventure/default/4/raw\"></iframe>\n"
         3:
             header: Fixa det med citattecken
-            text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code.\n"
+            text: "På den här nivån kommer vi att lösa detta problem genom att använda citattecken.\n\nDetta gör också att vår kod mer liknar 'riktig' Python-kod.\n"
         4:
-            header: Quotation marks with print
-            text: "Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.\n"
+            header: Citattecken med skriv
+            text: "När du använder kommandot `{print}` måste du sätta texten som du vill ska visas på skärmen inom citattecken.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         5:
-            header: Quotation marks with ask
-            text: "This also goes for the `{ask}` command.\n"
+            header: Citattecken med fråga
+            text: "Detta gäller också för kommandot `{fråga}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         6:
-            header: Quotation marks and variables
-            text: "You do not want variable names to be printed on the screen.\nThis is why variables should be left out of the quotation marks, like this:\n"
+            header: Citattecken och variabler
+            text: "Du vill inte att variabelnamn ska skrivas ut på skärmen.\nDet är därför variabler ska lämnas utanför citattecknen, så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         7:
-            header: Quotation marks and variables
-            text: "When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.\nThe rest of the sentence however, does need quotation marks. That looks like this:\n"
+            header: Citattecken och variabler
+            text: "När variabelnamn används inuti mening måste variablerna stå utanför citattecknen.\nResten av meningen behöver citattecken. Det ser ut så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         8:
-            header: Quotation marks and contractions
-            text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens....\n"
+            header: Citattecken och sammandragningar
+            text: "Var försiktig! Nu när du använder citattecken kan du inte använda apostrofer i sammandragningar.\n\nFörsök att skriva ut en sammandragning som engelska \"you're\" eller \"I'm\" på skärmen nedan och se vad som händer …\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
         9:
-            header: Ready, Set, Go!
-            text: "Enjoy the adventures in level 4!\n"
+            header: Klara, färdiga, gå!
+            text: "Ha det kul med äventyren på nivå 4!\n"
     9:
         4:
-            header: Multipe lines after `{if}`
-            text: "You can also use multiple lines after `{if}`\n"
+            header: Flera rader efter `{if}`
+            text: "Du kan också ha flera rader efter `{if}`\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
         5:
-            header: Indentation matters
-            text: "Again, indentation is still very important and can make a big difference in the code.\n"
+            header: Indrag är viktigt
+            text: "Indrag är fortfarande mycket viktigt och kan göra stor skillnad i koden.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
         7:
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
-            header: Mind the indentation
-            text: "Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.\n"
+            header: Tänk på indraget
+            text: "Tänk på att den fjärde och sjätte raden i koden börjar med åtta mellanslag.\n"
         8:
-            header: Let's go!
-            text: "Enjoy the adventures in level 9!\n"
+            header: Nu kör vi!
+            text: "Ha det kul med äventyren på nivå 9!\n"
         1:
-            header: Welcome to level 9
-            text: "In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.\n\nYou can even put a `{repeat}` command within another `{repeat}`  command.\n"
+            header: Välkommen till nivå 9
+            text: "På den här nivån kan du använda flera rader kod efter ett `{if}`- eller `{repeat}`-kommando.\n\nDu kan till och med ha ett `{repeat}`-kommando inuti ett annat `{repeat}`-kommando.\n"
         2:
-            header: Multiple lines after `{repeat}`
-            text: "You are allowed to use multiple lines after `{repeat}`.\n"
+            header: Flera rader efter `{repeat}`
+            text: "Du får ha flera rader efter `{repeat}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
         3:
-            header: Indentation matters!
-            text: "Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.\n"
+            header: Indrag är viktigt!
+            text: "Indrag är mycket viktigt för att tala om för datorn vilka rader som ska upprepas och vilka rader som bara ska köras en gång.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
         6:
-            header: An `{if}` inside a `{repeat}`
-            text: "Now that you can use multiple lines of code after these command, you can also put them within each other.\nCheck it out:\n"
+            header: Ett `{if}` inuti en `{repeat}`
+            text: "Nu när du kan ha flera kodrader efter dessa kommandon kan du också placera dem inuti varann.\nKolla in det här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
     12:
         2:
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/12/raw\"></iframe>\n"
-            header: Quotation marks
-            text: "This level makes some changes to the usage of quotation marks.\nFrom now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.\n"
+            header: Citattecken
+            text: "Den här nivån ändrar lite hur citattecken används.\nFrån och med nu måste ** alla texter ** vara inom citattecken. Detta gäller också värden för variabler, element i listor och text efter {if}-kommandon.\n"
         3:
-            header: Decimal numbers
-            text: "From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!\n\nNumbers do not quotation marks.\n"
+            header: Decimaltal
+            text: "Från och med denna nivå får du också använda decimaltal. Det kan göra program som din restaurang ännu bättre!\n\nSiffror har inte citattecken.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/maths/12/raw\"></iframe>\n"
         4:
-            header: Ready to try it out?
-            text: "Enjoy the adventures in level 12!\n"
+            header: Är du redo att prova?
+            text: "Ha det kul med äventyren på nivå 12!\n"
         1:
-            header: Welcome to level 12
-            text: "From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.\n"
+            header: Välkommen till nivå 12
+            text: "Från och med denna nivå får du använda decimaltal och det har gjorts vissa ändringar av citattecknen.\n"
     13:
         1:
-            header: Welcome to level 13
-            text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.\n"
+            header: Välkommen till nivå 13
+            text: "Nu ska vi lära oss `{and}` och `{or}`! Om du vill kolla två påståenden behöver du inte använda två 'om' utan kan använda 'och' och 'eller'.\n"
         2:
-            header: The and command
-            text: "The `{and}` command is always used in a combination with the {if} command.\nThis way you can check if 2 statements are true. For example:\n"
+            header: Kommandot och
+            text: "Kommandot `{och}` används alltid ihop med kommandot {if}.\nPå så sätt kan du kontrollera om två påståenden är sanna. Till exempel:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
         3:
-            header: The or command
-            text: "The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.\n\nLet's see what happens when you change the `{and}` for `{or}`.\n"
+            header: Kommandot 'eller'
+            text: "Kommandot `{or}` fungerar på samma sätt som kommandot `{and}`, men bara ett av de två påståendena måste vara sant.\n\nLåt oss se vad som händer när du byter `{and}` mot `{or}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
         4:
-            header: Let's go!
-            text: "Enjoy the adventures in level 13!\n"
+            header: Nu kör vi!
+            text: "Ha det kul med äventyren på nivå 13!\n"
     2:
         3:
             header: Interaktiv
@@ -315,11 +315,11 @@ levels:
             header: Välkommen till nivå 2
             text: "På den här nivån får du lära dig att använda variabler.\n\nEn variabel är ett ord som kan användas för att spara information.\n\nTill exempel: ett namn, en ålder eller ett favoritlag.\n"
         2:
-            header: Variables
+            header: Variabler
             text: "För att skapa eller sätta en variabels värde använder vi kommandot `{is}`\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
         4:
-            header: Multiple variables
+            header: Flera variabler
             text: "Nu när vi använder variabler kan vi använda flera variabler istället för bara ett `{echo}`-kommando.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         5:
@@ -335,94 +335,94 @@ levels:
             text: "Ha det kul med äventyren på nivå 3!\n"
     10:
         1:
-            header: Welcome to level 10
-            text: "In this level you will learn a new command: `{for}`.\n"
+            header: Välkommen till nivå 10
+            text: "På den här nivån kommer du att lära dig ett nytt kommando: `{for}`.\n"
         2:
-            header: The for command
-            text: "With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).\n"
+            header: Kommandot 'för'
+            text: "Med 'för' kan du skapa en lista och använda alla element i listan. `{for}` skapar ett block, som 'upprepa' och 'om', så alla rader i blocket ska börja med indrag (fyra mellanslag).\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/10/raw\"></iframe>\n"
         3:
-            header: The for command
-            text: "Here you see another example of the `{for}` command:\n"
+            header: Kommandot 'för'
+            text: "Här ser du ett annat exempel på kommandot `{for}`:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/dishes/10/raw\"></iframe>\n"
         4:
-            header: Time to program!
-            text: "Enjoy the adventures in level 10!\n"
+            header: Dags att programmera!
+            text: "Ha det kul med äventyren på nivå 10!\n"
     14:
         1:
-            text: "In this level you'll learn some new symbols that can help you improve your programs, like >.\n"
-            header: Welcome to level 14
+            text: "På den här nivån får du lära dig några nya symboler som kan hjälpa dig att förbättra dina program, t.ex. '>'.\n"
+            header: Välkommen till nivå 14
         2:
-            header: Symbols
-            text: "These are the new symbols you can use:\n\n  The >  means bigger than...\n\n  The >= means bigger than or the same as...\n\n  The <  means smaller than...\n\n  The <= means smaller than or the same as...\n\nYou can use them like this:\n"
+            header: Symboler
+            text: "Detta är de nya symbolerna som du kan använda:\n\n  > betyder större än …\n\n  >= betyder större än eller lika med …\n\n  < betyder mindre än …\n\n  <= betyder mindre än eller lika med …\n\nDu kan använda dem så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/14/raw\"></iframe>\n"
         3:
-            header: Symbols
-            text: "You can also use:\n\n== is the same as.\n\n!= is not\n\n== is used in `{if}` statements.\n"
+            header: Symboler
+            text: "Du kan också använda:\n\n== är lika med.\n\n!= är inte lika med\n\n== används i `{if}`-satser.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/default/14/raw\"></iframe>\n"
         4:
-            header: Let's get to work!
-            text: "Enjoy the adventures in level 14!\n"
+            header: Nu sätter vi igång!
+            text: "Ha det kul med äventyren på nivå 14!\n"
     15:
         1:
-            header: Welcome to level 15
-            text: "In this level you will learn about the `{while}` loop.\n"
+            header: Välkommen till nivå 15
+            text: "På den här nivån lär du dig om `{while}`-loopen.\n"
         2:
             header: '{while}'
-            text: "We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!\n"
+            text: "Vi ska lära oss en ny loop, medan-loopen! Loopen fortsätter så länge som påståendet är sant. Så glöm inte att ändra värdet inuti slingan.\n\nI exempelkoden fortsätter vi tills ett korrekt svar har getts. Om det rätta svaret aldrig ges kommer loopen aldrig att avslutas!\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/while_command/15/raw\"></iframe>\n"
         3:
-            header: Let's try it out!
-            text: "Enjoy the adventures in level 15!\n"
+            header: Vi testar det!
+            text: "Ha det kul med äventyren på nivå 15!\n"
     11:
         1:
-            header: Welcome to level 11
-            text: "In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.\n\nThis way we don't need the `{repeat}` command anymore.\n"
+            header: Välkommen till nivå 11
+            text: "På den här nivån lägger vi till en ny variant av kommandot `{for}`. På tidigare nivåer använde vi för med en lista, men vi kan också använda för med tal.\n\nPå så sätt behöver vi inte kommandot `{repeat}` längre.\n"
         2:
-            header: The for command
-            text: "This is what the new for command looks like:\n"
+            header: Kommandot 'för'
+            text: "Så här ser det nya för-kommandot ut:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/11/raw\"></iframe>\n"
         3:
-            header: the variable i
-            text: "In the previous slide the variable was named 'counter', because it was counting down.\nYou can of course use any name for the variable you want.\nThe standard name  for variables in this situation that is used in programming languages like Python is 'i'.\nThat looks like this:\n"
+            header: variabeln i
+            text: "I föregående bild fick variabeln namnet 'räknare', eftersom den räknade nedåt.\nDu kan naturligtvis använda vilket namn du vill för variabeln.\nStandardnamnet för variabler i den här situationen som används i programspråk som Python är 'i'.\nDet ser ut så här:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/11/raw\"></iframe>\n"
         4:
-            header: Let's start programming!
-            text: "Enjoy the adventures in level 11!\n"
+            header: Låt oss börja programmera!
+            text: "Ha det kul med äventyren på nivå 11!\n"
     16:
         1:
-            header: Welcome to level 16
-            text: "In this level you will learn about the [square brackets] and how to use them.\n"
+            header: Välkommen till nivå 16
+            text: "På den här nivån får du lära dig mer om [hakparenteser] och hur du använder dem.\n"
         2:
-            header: Square brackets
-            text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.\n"
+            header: Hakparenteser
+            text: "Vi kommer att göra listor på Python-vis, med hakparenteser runt listorna! Vi behåller också citattecknen runt varje element, som vi har lärt oss i tidigare nivåer. Vi använder hakparenteser för att peka ut en plats i en lista. Kommandot 'på slump' kan inte användas längre.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/16/raw\"></iframe>\n"
         3:
-            header: Let's try it out!
-            text: "Enjoy the adventures in level 16!\n"
+            header: Vi testar det!
+            text: "Ha det kul med äventyren på nivå 16!\n"
     17:
         1:
-            header: Welcome to level 17
-            text: "in this level you will learn how to use a colon and you will learn the elif command.\n"
+            header: Välkommen till nivå 17
+            text: "På den här nivån får du lära dig hur man använder kolon och kommandot 'annars om'.\n"
         2:
-            header: Colon
-            text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.\n"
+            header: Kolon
+            text: "Nu ska vi ändra indraget lite grann. Varje gång vi behöver en indragning behöver vi kolon (:) på raden före indragningen.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/17/raw\"></iframe>\n"
         3:
-            header: Elif
-            text: "In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!\n"
+            header: Annarsom
+            text: "På den här nivån kan du också använda ett nytt kommando: annarsom. annarsom är en sammandragning av 'annars om' och du behöver det när du vill skapa tre (eller fler!) alternativ. Kolla in det här!\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/elif_command/17/raw\"></iframe>\n"
         4:
-            header: Let's try it out!
-            text: "Enjoy the adventures in level 17!\n"
+            header: Vi testar det!
+            text: "Ha det kul med äventyren på nivå 17!\n"
     18:
         1:
-            header: Welcome to level 18
-            text: "Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.\n"
+            header: Välkommen till nivå 18
+            text: "Grattis! Du har nått den sista nivån i Hedy! Koden som du har skapat här kan kopieras till riktiga Python-miljöer som repl.it eller PyCharm och du kan fortsätta att lära dig där! Tänk på att Python bara kan läsa engelska kommandon, så om du har använt andra språk måste du byta till engelska nu.\n"
         2:
-            header: The Python way
-            text: "We arrived at real Python code! That means we need to use parentheses with print and range from now on.\n\nAlso, if you want to print more than one item, you need to separate them by commas.\n\nThe final change we will need to make to get Python code is changing ask into input.\n\nClick on the 'print' tab for all the examples.\n"
+            header: Python-sättet
+            text: "Vi har kommit till riktig Python-kod! Det betyder att vi måste använda parenteser med print och range från och med nu.\n\nOm du vill skriva ut mer än ett element måste du också skilja dem med kommatecken.\n\nDen sista ändringen vi behöver göra för att få Python-kod är att ändra ask till input.\n\nKlicka på fliken 'print' för alla exempel.\n"
             editor: "<iframe class=\"fragment\" src=\"/hedy/18\"></iframe>\n"
         3:
-            header: The very last adventures!
-            text: "Enjoy the very last adventures in level 18!\n"
+            header: De allra sista äventyren!
+            text: "Njut av de allra sista äventyren på nivå 18!\n"
