@@ -31,6 +31,7 @@ p2 = [(s.name, s) for s in public_snippets if not s.error]
 
 passed_snippets = []
 
+
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
@@ -51,9 +52,8 @@ class TestsPublicPrograms(HedyTester):
                 # except Exception as e:
                 #     pass
 
-
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
-                 pass
+                pass
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
             except exceptions.HedyException as E:

@@ -82,7 +82,6 @@ class TestsLevel7(HedyTester):
                                 exception=hedy.exceptions.MissingInnerCommandException,
                                 max_level=8)
 
-
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
@@ -100,6 +99,7 @@ class TestsLevel7(HedyTester):
             max_level=17,
             exception=hedy.exceptions.UnquotedTextException
         )
+
     def test_repeat_with_string_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 'test'
