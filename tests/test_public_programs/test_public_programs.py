@@ -6,7 +6,7 @@ from app import translate_error, app
 from flask_babel import force_locale
 import exceptions
 
-most_recent_file_name = 'tests/test_public_programs/filtered-programs-2022-12-01.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-06-19.json'
 public_snippets = []
 
 # this file tests all public programs in the database
