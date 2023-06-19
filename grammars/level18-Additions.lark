@@ -2,8 +2,6 @@
 
 command:+= input | input_empty_brackets | print_empty_brackets -= ask | error_print_no_quotes > assign | call
 
-Public programs still need testing!!
-
 print: _PRINT (_LEFT_BRACKET (quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))* _RIGHT_BRACKET)?
 print_empty_brackets: _PRINT _LEFT_BRACKET _RIGHT_BRACKET
 input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)

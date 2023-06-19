@@ -75,6 +75,14 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
+    def test_missing_body(self):
+        code = "repeat 5 times"
+
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.MissingInnerCommandException,
+                                max_level=8)
+
+
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
