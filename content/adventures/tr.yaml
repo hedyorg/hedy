@@ -5,20 +5,21 @@ adventures:
         default_save_name: "Giriş"
         levels:
             1:
-                story_text: "Seviye 1'de `{print}`, `{ask}` ve `{echo}` komutlarını kullanabilirsiniz.\n\nKodunuzu programlama alanına yazın. Veya örnek kod bloğundaki yeşil butona basın, ve kod sizin için yazılsın!\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsiniz.\n\n`{print}` komutuyla ekrana yazı yazdırabilirsiniz.     \n"
+                story_text: "Hedy'e hoş geldin! Seviye 1'e, bir hikaye yazdırarak başlayabilirsin.\n\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsin.\n\nHazır mısın? O zaman ilk komutunu öğrenmek için bir sonraki sekmeye geç!\n"
                 start_code: '{print} merhaba dünya!'
             2:
                 story_text: |
-                    In level 2 we learn two new commands: `{is}` and `{sleep}`.
-                    You can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
-
-                    This way you no longer need the `{echo}` command!
+                    Tebrikler! Seviye 2'ye ulaştın. Umarız şu ana kadar harika kodlar yazmışsındır!
+                    İlk seviyede, `{echo}` komutunun bir seferde sadece bir bit kaydettiğini fark etmiş olabilirsin.
+                    Örneğin, restoran macerasında müşterinin ne yemek istediğini veya ne içmek istediğini “echo” edebilirsiniz, ama ikisini bir cümlede “echo” edemezsiniz.
 
                 example_code: |
                     ```
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+                    {print} Hedy's'e hoş geldiniz
+                    {ask} Ne yemek istersiniz?
+                    {echo} İstiyorsunuz
+                    {ask} ne içmek istersiniz?
+                    {echo} İstiyorsunuz
                     ```
                 story_text_2: |
                     `{print}` hâlâ aynı çalışıyor, ama  `{ask}` komutu değişti.  `{ask}` komutunda da bir değişken kullanman gerekiyor. Bu da şu şekilde görünüyor:
@@ -40,9 +41,8 @@ adventures:
                     Çoğu programlama dili de yazdırırken tırnak işaretleri kullanır, bu nedenle gerçek programlamaya bir adım daha yaklaşıyoruz!
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    Adım {is} Sophie
+                    {print} Benim adım adım
                     ```
             5:
                 start_code: |-
@@ -1031,9 +1031,9 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |2
+                example_code_2: |
 
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1106,11 +1106,11 @@ adventures:
                     ```
                 start_code: "# place your code here"
             3:
-                story_text: |2
+                story_text: |
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                          In this level we can enter lists and choose things from them.
+                          You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                          For example, you can let the computer pick from rock, paper and scissors.
 
                 example_code: |
                     ```
