@@ -63,7 +63,7 @@
 -   name: '{if} med sköldpadda'
     explanation: Gör ett val med `{if}`.
     demo_code: "svar {is} {ask} 'Hur långt ska jag gå?'\n{if} svar {is} långt {forward} 100 {else} {forward} 5"
--   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   demo_code: "snygga_färger {is} grönt, gult\nfärg {is} {ask} 'Vad {is} din favoritfärg?'\n{if} färg {in} snygga_färger {print} 'snyggt!' {else} {print} 'meh'"
     name: '{in}'
     explanation: Kolla element med `{in}`.
 -   name: '{pressed}'
@@ -71,60 +71,60 @@
     demo_code: "{if} a {is} {pressed} {print} 'Du tryckte på A!' {else} {print} 'Du tryckte på en annan tangent!'"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
+    explanation: Skriv ut exakt med citattecken.
+    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
+-   demo_code: "svar = {ask} 'Vad är 10 plus 10?'\n{if} svar {is} 20 {print} 'Ja!' {else} {print} 'Hoppsan'"
     name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
+    explanation: Be om en uträkning och kolla om den stämmer.
 -   name: '`{ask}` och `{if}` med sköldpadda'
-    explanation: Ask the user how many angles they want.
-    demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
+    explanation: Fråga användaren hur många vinklar den vill ha.
+    demo_code: "vinklar = {ask} 'Hur många vinklar?'\nvinkel = 360 / vinklar\n{forward} 50"
 9:
--   explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
-    name: '{if} with multiple lines'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+-   explanation: Fråga efter svaret på en addition med `{ask}` och se om det är korrekt. Nu skriver vi ut två rader.
+    demo_code: "svar = {ask} 'Vad är 10 plus 10?'\n{if} svar {is} 20\n    {print} 'Bra jobbat!!'\n    {print} 'Svaret är faktiskt ' svar\n{else}\n    {print} 'Fel'\n    {print} 'Svaret är 20'"
+    name: '{if} med flera rader'
+-   name: '{repeat} med sköldpadda'
+    explanation: Upprepa flera rader.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 12:
--   name: float directly
-    explanation: Decimal numbers.
+-   name: flyt direkt
+    explanation: Decimaltal.
     demo_code: "{print} 'Räkna på!'\n{print} 'Två och en halv plus två och en halv är...'\n{print} 2.5 + 2.5"
--   name: assign text
-    explanation: Text with quotation marks after `=`
+-   name: tilldela text
+    explanation: Text med citattecken efter `=`
     demo_code: "namn = 'Roboten Hedy'\n{print} 'Hej ' namn"
 -   name: citattecken efter `{if}`-jämförelse
-    explanation: Text with quotation marks after `{if}`.
+    explanation: Text med citattecken efter `{if}`.
     demo_code: "namn = {ask} 'Vem är du?'\n{if} namn = 'Hedy'\n    {print} 'Hallå där!'"
--   name: quotes in list
-    explanation: A list with quotation marks.
+-   name: citattecken i lista
+    explanation: En lista med citattecken.
     demo_code: "superhjältar = 'Iron Man', 'Batman', 'Stålmannen'\n{print} superhjältar {at} {random}"
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
+    explanation: Två delar som båda måste vara rätt.
+    demo_code: "svar1 = {ask} 'Vad är 3+2?'\nsvar2 = {ask} 'Vad är 2+2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Båda svaren är rätt!'\n{else}\n    {print} 'Minst ett svar är fel!'"
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\n{else}\n    {print} 'Both answers are wrong!'"
+    explanation: Minst ett av de två delarna måste vara rätt. Om båda är rätt går det också bra.
+    demo_code: "svar1 = {ask} 'Vad är 3+2?'\nsvar2 = {ask} 'Vad är 2+2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Minst ett svar är rätt!'\n{else}\n    {print} 'Båda svaren är fel!'"
 14:
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That is correct!'"
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+-   name: Mindre än
+    explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
+    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder < 13\n    {print} 'Du är yngre än jag!'"
+-   name: Större än
+    explanation: Vi använder `>` för att kolla om det första talet är större än det andra talet.
+    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder > 13\n    {print} 'Du är äldre än jag!'"
+-   name: Lika med
+    explanation: Vi använder `==` för att kolla om två saker är lika.
+    demo_code: "svar = {ask} 'Vad är 5 * 5?'\n{if} svar == 25\n    {print} 'Det stämmer!'"
+-   name: Olika
+    explanation: Vi använder `!=` för att kolla om två saker är olika.
+    demo_code: "svar = {ask} 'Vad är 5 * 5?'\n{if} svar != 25\n    {print} 'Det stämmer inte!'"
+-   name: Mindre än eller lika med
+    explanation: Vi använder `<=` för att kolla om det första talet är mindre än eller lika med det andra talet.
+    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder <= 12\n    {print} 'Du är yngre än jag!'"
+-   name: Större än eller lika med
+    explanation: Vi använder `>=` för att kolla om det första talet är större än eller lika med det andra talet.
+    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder >= 14\n    {print} 'Du är äldre än jag!'"
 15:
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal.
@@ -167,41 +167,41 @@
     demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Skriv ut exakt med citattecken.
+    demo_code: "{print} 'Hej och välkommen till Hedy.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Fråga något med `{ask}`.
+    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{print} färg ' är din favorit!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+    explanation: Välj ett alternativ `{if}`.
+    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{if} färg {is} grönt {print} 'fint!' {else} {print} 'meh'"
+-   name: '{repeat} med sköldpadda'
+    explanation: Upprepa en kodrad med `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: Skriv ut något. Kom ihåg att använda citattecken för att skriva ut exakt.
+    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: Fråga efter svaret på en addition och kontrollera om det är korrekt. Vi kan nu skriva ut två rader.
+    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!\"\n    {print} 'Svaret var faktiskt ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
+-   name: '{repeat} med sköldpadda'
+    explanation: Upprepa flera rader.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
     explanation: Kontrollera om en viss tangent är `{pressed}`.
     demo_code: "{if} a {is} {pressed}\n    {print} 'Du tryckte på A!'\n{else}\n    {print} 'Du tryckte på en annan tangent'"
 10:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: '{for} with a list'
-    explanation: Print all things in a list.
-    demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    explanation: Skriv ut något. Kom ihåg att använda citattecken för exakt utskrift.
+    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
+-   name: '{for} med en lista'
+    explanation: Skriv ut alla saker i en lista.
+    demo_code: "alla_djur {is} hund, katt, marulk\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
 11:
--   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
-    demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+-   name: '{for}-loop'
+    explanation: Vi kan använda `{for}` med ett `{range}`.
+    demo_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    explanation: Fråga efter svaret på en addition och kolla om det är korrekt. Vi kan nu skriva ut två rader.
+    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!'\n    {print} 'Ja, svaret var ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
