@@ -50,25 +50,8 @@
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
-            <button id="dropdownDefaultButton" data-dropdown-toggle="stats_page_dropdown" type="button" class="green-btn inline-flex items-center" onclick="$('#stats_page_dropdown').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');">
-                New Stats Pages
-                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </button>
+            <button class="green-btn" id="statistics_button_draft" onclick="window.location.href = '/stats/class/{{class_info.id}}-draft'">{{_('New Class Statistics (Draft)')}}</button>
             <button class="green-btn" id="logs_button" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
-        </div>
-        <div class="flex justify-center">
-            <div id="stats_page_dropdown" class="hidden">
-                <ul class="list-none text-sm mt-3 text-gray-700" aria-labelledby="dropdownDefaultButton">
-                  <li class="inline">
-                    <button class="green-btn" id="stats_button_v1" onclick="window.location.href = '/stats/class/{{class_info.id}}-v1'">{{_('Stats page 1')}}</button>
-                  </li>
-                  <li class="inline mt-2">
-                    <button class="green-btn" id="stats_button_v2" onclick="window.location.href = '/stats/class/{{class_info.id}}-v2'">{{_('Stats page 2')}}</button>
-                  </li>
-                </ul>
-            </div>
         </div>
         <div class="flex ltr:ml-auto rtl:mr-auto">
             <button class="blue-btn" id="go_back_to_teacher_page_button" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>

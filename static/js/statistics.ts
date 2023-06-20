@@ -494,43 +494,6 @@ function updateChart(elementId: string, datasets: any[] ) {
   ch.update();
 }
 
-function expandStudentTile(student: any) {
-    const average_quiz = student.average_quiz;
-    const success_rate_highest_level = student.success_rate_highest_level;
-    const success_rate_overall = student.success_rate_overall;
-    const highest_level_quiz = student.highest_level_quiz;
-    const highest_level_quiz_score = student.highest_level_quiz_score;
-
-    let bigTile = document.getElementById('expanded-student-tile')!;
-    bigTile.innerHTML =
-        '<p class="font-bold text-lg">' + student.username + '</p>' +
-        '<p>Success overall:  ' + success_rate_overall + '</p>' +
-        '<p>Highest level: ' + highest_level_quiz + '</p>' +
-        '<p>Quiz avg: ' + average_quiz + '</p></br>' +
-        '<p>Success rate highest level' + '(' + highest_level_quiz + '): ' + success_rate_highest_level + '</p>' +
-        '<p>Quiz score highest level' + '(' + highest_level_quiz + '): ' + highest_level_quiz_score + '</p>';
-    bigTile.classList.remove('hidden');
-}
-
-function hideStudentTile() {
-    $('#expanded-student-tile').addClass('hidden');
-}
-
-export function studentTileClicked(event: any, student: any): void {
-    const currentlySelected = $(event.target).closest('.student-tile').hasClass('selected');
-
-    // Remove 'selected' attribute from all student tiles
-    $('.student-tile').removeClass('selected');
-
-    // Select the currently clicked tile, or unselect if it was already selected
-    if (currentlySelected) {
-        hideStudentTile();
-    } else {
-        $(event.target).closest('.student-tile').addClass('selected');
-        expandStudentTile(student);
-    }
-}
-
 function expandStudentTileChart(student: any, levels: string[], successRuns: number[], errorRuns: number[]){
     let bigTile = document.getElementById('expanded-student-tile')!;
     let studentName = document.getElementById('student-name')!;
@@ -581,20 +544,15 @@ export function loadQuizChart(levels: string[], students: any) {
     if (!dataLoaded) {
         for (let i = 0; i < students.length; i++) {
             let student = students[i];
-            let avg_quizzes_runs_per_level = student['avg_quizzes_runs_per_level'];
-            let elementString = "static-student-tile-" + student['username'];
-
-            const div = document.getElementById(elementString) as HTMLDivElement;
-            let canvas = document.createElement('canvas');
-            canvas.width = 350;
-            canvas.height = 250;
-            canvas.id = "canvas-" + student['username'];
-            div.appendChild(canvas);
+            let elementString = "canvas-" + student['username'];
+            let canvas = document.getElementById(elementString) as HTMLCanvasElement;
 
             const chartMax: number = 100;
             const chartLabel: string = 'Average quiz per level (%)';
             const chartTitle: string = 'Average Quiz';
             const chartColor: string = '#9BD0F5';
+
+            let avg_quizzes_runs_per_level = student['average_quizzes_runs_per_level'];
 
             const data = [avg_quizzes_runs_per_level]
             const chartColors = [chartColor]
@@ -603,6 +561,15 @@ export function loadQuizChart(levels: string[], students: any) {
             createNewChart(canvas, chartData, chartMax, chartTitle, "line");
         }
         dataLoaded = true;
+    }
+}
+
+export function toggleStudentQuizTile(username: any) {
+    const studentTile = document.getElementById(`static-student-tile-${username}`);
+    if (studentTile!.style.display === 'none') {
+        studentTile!.style.display = 'block';
+    } else {
+        studentTile!.style.display = 'none';
     }
 }
 

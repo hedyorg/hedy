@@ -52,85 +52,11 @@ class StatisticsModule(WebsiteModule):
             javascript_page_options=dict(page='class-stats'),
         )
 
-    # [work in progress] method for implementing the version 1 of class stats page
-    # Method for retrieving student information for a specific class
-    @route("/stats/class/<class_id>-v1", methods=["GET"])
-    @requires_login
-    def render_class_stats_v1(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        students = []
-        for student_username in class_.get("students", []):
-            student = self.db.user_by_username(student_username)
-            programs = self.db.programs_for_user(student_username)
-            quizzes = self.db.get_quiz_stats([student_username])
-
-            # find quiz and programs statistics for each student on each level
-            program_runs_per_level = []
-            success_runs_per_level = []
-            error_runs_per_level = []
-            quizzes_runs_per_level = []
-            avg_quizzes_runs_per_level = []
-            for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
-                find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
-                                            error_runs_per_level, programs, level)
-                calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
-
-                find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
-
-            average_quizzes = calc_average_quizzes(avg_quizzes_runs_per_level)
-            success_rate_overall = find_success_rate_overall(quizzes)
-
-            finished_quizzes = any("finished" in x for x in quizzes)
-            if finished_quizzes:
-                highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")])
-                highest_level_quiz_score = [x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz]
-            else:
-                highest_level_quiz = "-"
-                highest_level_quiz_score = "-"
-
-            success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
-
-            students.append(
-                {
-                    "username": student_username,
-                    "last_login": student["last_login"],
-                    "programs": len(programs),
-                    "program_runs_per_level": program_runs_per_level,
-                    "success_rate_highest_level": success_rate_highest_level,
-                    "success_rate_overall": success_rate_overall,
-                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
-                    "average_quiz": average_quizzes,
-                    "highest_level_quiz": highest_level_quiz,
-                    "highest_level_quiz_score": highest_level_quiz_score,
-                }
-            )
-
-        students = sorted(students, key=lambda d: d.get("username", 0))
-
-        return render_template(
-            "class-stats-v1.html",
-            class_info={
-                "id": class_id,
-                "students": students,
-                "name": class_["name"],
-            },
-            current_page="my-profile",
-            page_title=gettext("title_class statistics"),
-            javascript_page_options=dict(page='class-stats-v1'),
-        )
-
     # [work in progress] method for implementing the version 2 of class stats page
     # Method for retrieving student information for a specific class
-    @route("/stats/class/<class_id>-v2", methods=["GET"])
+    @route("/stats/class/<class_id>-draft", methods=["GET"])
     @requires_login
-    def render_class_stats_v2(self, user, class_id):
+    def render_class_stats_draft(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -151,7 +77,7 @@ class StatisticsModule(WebsiteModule):
             success_runs_per_level = []
             error_runs_per_level = []
             quizzes_runs_per_level = []
-            avg_quizzes_runs_per_level = []
+            average_quizzes_runs_per_level = []
 
             for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
                 find_program_runs_per_level(program_runs_per_level, success_runs_per_level,
@@ -159,7 +85,14 @@ class StatisticsModule(WebsiteModule):
                 calc_num_programs_per_level(program_runs_per_level, success_runs_per_level, error_runs_per_level, level)
 
                 find_quizzes_per_level(quizzes_runs_per_level, quizzes, level)
-                calc_avg_quizzes_per_level(avg_quizzes_runs_per_level, quizzes_runs_per_level, level)
+                calc_avg_quizzes_per_level(average_quizzes_runs_per_level, quizzes_runs_per_level, level)
+
+            average_quizzes = calc_average_quizzes(average_quizzes_runs_per_level)
+            success_rate_overall = find_success_rate_overall(quizzes)
+
+            finished_quizzes = any("finished" in x for x in quizzes)
+            highest_level_quiz, highest_level_quiz_score = find_highest_level_quiz_data(finished_quizzes, quizzes)
+            success_rate_highest_level = calc_highest_success_rate(finished_quizzes, highest_level_quiz, quizzes)
 
             students.append(
                 {
@@ -168,14 +101,19 @@ class StatisticsModule(WebsiteModule):
                     "programs": len(programs),
                     "success_runs_per_level": success_runs_per_level,
                     "error_runs_per_level": error_runs_per_level,
-                    "avg_quizzes_runs_per_level": avg_quizzes_runs_per_level,
+                    "average_quizzes_runs_per_level": average_quizzes_runs_per_level,
+                    "average_quizzes": average_quizzes,
+                    "highest_level_quiz": highest_level_quiz,
+                    "highest_level_quiz_score": highest_level_quiz_score,
+                    "success_rate_highest_level": success_rate_highest_level,
+                    "success_rate_overall": success_rate_overall,
                 }
             )
 
         students = sorted(students, key=lambda d: d.get("username", 0))
 
         return render_template(
-            "class-stats-v2.html",
+            "class-stats-draft.html",
             class_info={
                 "id": class_id,
                 "students": students,
@@ -184,7 +122,7 @@ class StatisticsModule(WebsiteModule):
             },
             current_page="my-profile",
             page_title=gettext("title_class statistics"),
-            javascript_page_options=dict(page='class-stats-v2'),
+            javascript_page_options=dict(page='class-stats-draft'),
         )
 
     @route("/logs/class/<class_id>", methods=["GET"])
@@ -583,6 +521,20 @@ def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, 
         error_runs_per_level[level - 1] = 0
 
     return success_runs_per_level, error_runs_per_level
+
+
+def find_highest_level_quiz_data(finished_quizzes, quizzes):
+    if finished_quizzes:
+        highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")])
+        highest_level_quiz_score = max([x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz])
+        if len(highest_level_quiz_score) > 1:
+            highest_level_quiz_score = max(highest_level_quiz_score)
+        else:
+            highest_level_quiz_score = highest_level_quiz_score[0]
+    else:
+        highest_level_quiz = "-"
+        highest_level_quiz_score = "-"
+    return highest_level_quiz, highest_level_quiz_score
 
 
 def find_success_rate_overall(quizzes):
