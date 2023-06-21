@@ -27,13 +27,14 @@ for p in public_programs:
                 )
     public_snippets.append(s)
 
-p2 = [(s.name, s) for s in public_snippets if not s.error]
+p2 = [(s.name, s) for s in public_snippets]
 
 
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
-        if snippet is not None and len(snippet.code) > 0:
+        # test correct programs
+        if snippet is not None and len(snippet.code) > 0 and len(snippet.code) <100 and not snippet.error:
             try:
                 self.single_level_tester(
                     code=snippet.code,
@@ -62,3 +63,13 @@ class TestsPublicPrograms(HedyTester):
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
                         raise E
+
+        # test if we are not validating previously incorrect programs
+        if snippet is not None and len(snippet.code) > 0 and snippet.error:
+                self.single_level_tester(
+                    code=snippet.code,
+                    level=int(snippet.level),
+                    lang=snippet.language,
+                    translate=False,
+                    exception=exceptions.HedyException
+                )
