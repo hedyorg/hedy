@@ -144,7 +144,7 @@ class AdminModule(WebsiteModule):
         ]
 
         active_classes = [x for x in classes if x["weekly_runs"] > 0]
-        classes = sorted(classes, key=lambda d: d["weekly_runs"], reverse=True)
+        #classes = sorted(classes, key=lambda d: d["weekly_runs"], reverse=True)
 
         return render_template("admin/admin-classes.html",
                                active_classes=active_classes,
