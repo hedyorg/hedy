@@ -138,13 +138,12 @@ class AdminModule(WebsiteModule):
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
                 "id": Class.get("id"),
-                "weekly_runs": statistics.get_general_class_stats(Class.get("students", []))["week"]["runs"]
             }
             for Class in self.db.all_classes()
         ]
 
-        active_classes = [x for x in classes if x["weekly_runs"] > 0]
-        classes = sorted(classes, key=lambda d: d["weekly_runs"], reverse=True)
+        active_classes = [x for x in classes if x["stats"]["week"]["runs"] > 0]
+        classes = sorted(classes, key=lambda d: d["stats"]["week"]["runs"], reverse=True)
 
         return render_template("admin/admin-classes.html",
                                active_classes=active_classes,
