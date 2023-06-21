@@ -267,7 +267,7 @@ class LiveStatisticsModule(WebsiteModule):
             programs_for_student = {}
             for _student in class_.get("students", []):
                 adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
-                if adventures_for_student != []:
+                if adventures_for_student:
                     programs_for_student[_student] = adventures_for_student
             if programs_for_student != []:
                 attempted_adventures[level] = programs_for_student
@@ -925,9 +925,7 @@ def _calc_error_rate(fail, success):
 
 
 def _determine_bool(bool_str):
-    if bool_str == "True":
-        return True
-    return False
+return bool_str == "True":
 
 
 def _check_dashboard_display_args():
