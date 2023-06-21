@@ -45,12 +45,12 @@ levels:
                 Which house will you be sorted into?
                 Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
                 Let the program wait a short period before revealing your house.
-            code: |
-                {print} The new school year at Hogwarts is starting!
-                {print} The sorting hat is ready to sort you into a Hogwarts house.
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+            code: |-
+                {print} Новый учебный год в Хогвартсе начинается!
+                {print} Распределяющая шляпа готова распределить вас по домам Хогвартса.
+                дома {is} Гриффиндор, Хаффлпаф, Рейвенкло, Слизерин.
                 {sleep} 2
-                {print} And it is houses {at} {random}
+                {print} И это дома {at} {random}
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
@@ -84,12 +84,12 @@ levels:
             story: |
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
-            code: |
+            code: |-
                 favorite_movies {is} Бэтмен, Человек-паук, Мстители, Парк Юрского периода
-                movie {is} {ask} 'What is your favourite movie?'
-                {if} фильм {in} favorite_movies {print} 'У вас отличный вкус!'
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} фильм {to_list} favorite_movies
+                movie {is} {ask} 'Какой твой любимый фильм?'
+                {if} movie {in} favorite_movies {print} 'У вас отличный вкус!'
+                {else} {print} 'Очень жаль, вашего любимого фильма нет в списке, мы обязательно его добавим!'
+                {add} movie {to_list} favorite_movies
         2:
             story: |
                 Create a maths game.
@@ -105,12 +105,12 @@ levels:
                 First ask the age of the user and start calculating.
                 First calculate the dogyears then the catyears.
                 Show the user the different ages.
-            code: |
-                age = {ask} 'How old are you?'
+            code: |-
+                age = {ask} 'Сколько тебе лет?'
                 dog_age = age * 7
                 cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+                {print} 'В собачьих годах тебе' dog_age ' лет.'
+                {print} 'В кошачьих годах тебе ' cat_age ' лет.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
