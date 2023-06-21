@@ -127,44 +127,44 @@
     demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder >= 14\n    {print} 'Du är äldre än jag!'"
 15:
 -   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal.
-    demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
--   demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
-    name: Smaller {while}
-    explanation: We can also use the `{while}` loop with `<` and `>`.
+    explanation: Vi kan använda `{while}` med skilt från.
+    demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Vad är 5 gånger 5?'\n{print} 'Rätt svar har getts'"
+-   demo_code: "antal = 1\n{while} antal < 3\n    {print} 'Vi gör det här ' 3 - antal ' gånger till'\n    antal = antal + 1\n{print} 'Nu är det klart'"
+    name: Mindre än {while}
+    explanation: Vi kan också använda `{while}` med `<` och `>`.
 16:
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+-   name: hakparenteser
+    explanation: Listor med hakparenteser.
+    demo_code: "frukt = ['äpple', 'banan', 'körsbär']\n{print} frukt"
+-   name: Hämta ett element från en lista
+    explanation: För att hämta ett element från en lista använder vi [tal] så frukt[1] betyder att hämta den första frukten från listan!
+    demo_code: "frukt = ['banan', 'äpple', 'körsbär']\nförsta_frukten = frukt[1]\n{print} första_frukten"
+-   name: Hämta ett slumpmässigt element från en lista
+    explanation: För att få ett slumpmässigt element från en lista använder vi [slump] så frukt[slump] betyder att hämta en slumpmässig frukt från listan!
     demo_code: "frukt = ['banan', 'äpple', 'körsbär']\nslumpad_frukt = frukt[{random}]\n{print} slumpad_frukt"
 17:
 -   name: '{elif}'
-    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a är 1'\n{elif} a == 2:\n    {print} 'a är 2'\n{else}:\n    {print} 'a är inte 1 eller 2'"
     explanation: '`{elif}`'
 -   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+    explanation: När vi använder `{for}` måste vi ha ett `:` efter `{for}`-satsen!
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Redo eller inte, här kommer jag!'"
 -   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
+    explanation: Vi behöver göra samma sak med alla våra `{if}`-satser.
+    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{if} färg == 'grönt':\n    {print} 'Din favoritfärg är grönt'\n{else}:\n    {print} 'Din favoritfärg är inte grönt'"
 18:
 -   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: "{print}('hi!')"
+    explanation: Efter `{print}` behöver du ha parenteser.
+    demo_code: "{print}('hej!')"
 -   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+    explanation: Efter `{range}` behöver du ha parenteser.
+    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hej, gånger ', i)"
+-   name: '{print} med var'
+    explanation: Med `{print}` behöver du använda parenteser och kommatecken om du skriver ut fler saker.
+    demo_code: "namn = 'Hedy'\n{print}('Jag heter ', namn)"
+-   name: fråga något med {input}
+    explanation: Använd `{input}` istället för `{ask}` för att fråga något.
+    demo_code: "namn = {input}('Vad heter du?')\n{print}('Så du heter ', name)"
 7:
 -   name: '{print}'
     explanation: Skriv ut exakt med citattecken.
