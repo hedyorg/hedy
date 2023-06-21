@@ -34,7 +34,7 @@ class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
         # test correct programs
-        if snippet is not None and len(snippet.code) > 0 and len(snippet.code) <100 and not snippet.error:
+        if snippet is not None and len(snippet.code) > 0 and len(snippet.code) < 100 and not snippet.error:
             try:
                 self.single_level_tester(
                     code=snippet.code,
@@ -66,10 +66,10 @@ class TestsPublicPrograms(HedyTester):
 
         # test if we are not validating previously incorrect programs
         if snippet is not None and len(snippet.code) > 0 and snippet.error:
-                self.single_level_tester(
-                    code=snippet.code,
-                    level=int(snippet.level),
-                    lang=snippet.language,
-                    translate=False,
-                    exception=exceptions.HedyException
-                )
+            self.single_level_tester(
+                code=snippet.code,
+                level=int(snippet.level),
+                lang=snippet.language,
+                translate=False,
+                exception=exceptions.HedyException
+            )
