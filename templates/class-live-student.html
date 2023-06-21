@@ -3,7 +3,7 @@
 {% block student_space %}
 
   <div class="justify-center pt-10 min-h-full">
-      <h2 class="text-center">{{_('Student_Details')}}</h2>
+      <h2 class="text-center">{{_('student_details')}}</h2>
       <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
         <a class="no-underline float-right p-2"
            href="/live_stats/class/{{class_info.id}}?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}">
@@ -44,7 +44,7 @@
         <div class="grid grid-cols-3 p-5">
             <!-- Graph with fails and successful runs over time -->
             <div class="w-full text-center p-2">
-                <h5 class="font-normal ltr:mr-2 rtl:ml-2">{{_('Runs_over_time')}}</h5>
+                <h5 class="font-normal ltr:mr-2 rtl:ml-2">{{_('runs_over_time')}}</h5>
                 <canvas id="runsOverTime" width="120" height="40"></canvas>
             </div>
 
@@ -52,7 +52,7 @@
 
             <!-- Last ran code -->
             <div class="w-full text-center turn-pre-into-ace mb-4">
-                <h5 class="font-normal pb-1">{{_('Last_program')}}</h5>
+                <h5 class="font-normal pb-1">{{_('last_program')}}</h5>
                 {% if student_programs %}
                     <pre level="{{ student_programs[0].level }}">{{ student_programs[0].code }}</pre>
                 {% else %}
@@ -62,7 +62,7 @@
 
             <!-- Last error message  -->
             <div class="w-full text-center" id="last-error">
-                <h5 class="font-normal pb-1">{{_('Last_error')}}</h5>
+                <h5 class="font-normal pb-1">{{_('last_error')}}</h5>
                 <div class="flex justify-center">
                 {% if student_programs and student_programs[0].error_message %}
                     <div id="errorbox-info"
