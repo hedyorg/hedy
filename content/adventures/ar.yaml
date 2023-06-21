@@ -156,9 +156,9 @@ adventures:
             11:
                 story_text: |-
 
-                          `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
+                    `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
 
-                          فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)
+                    فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)
                 start_code: |
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
@@ -858,7 +858,7 @@ adventures:
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
         description: Introduction print command
-        default_save_name: print_command
+        default_save_name: print
     ask_command:
         levels:
             2:
@@ -980,7 +980,7 @@ adventures:
             2:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
-                start_code: ""
+                start_code: "# place your code here"
         name: Rock, paper, scissors 2
         description: Part 2 of rock, paper, scissors
     harry_potter:

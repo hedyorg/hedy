@@ -32,8 +32,9 @@
                     {% endfor %}
                 </select>
             </div>
-            {{ render_partial('customize-class/hx-sortable-adventures.html',
+            {{ render_partial('customize-class/partial-sortable-adventures.html',
                                customizations=customizations,
+                               adventures=adventures,
                                max_level=max_level,
                                adventure_names=adventure_names,
                                adventures_default_order=adventures_default_order,

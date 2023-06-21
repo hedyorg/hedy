@@ -604,20 +604,20 @@ adventures:
 
                 example_code: |
 
-                        你可以写一段简单的餐厅代码，像这样：
-                        ```
-                        {print} '欢迎来到海蒂餐厅'
-                        {print} '这是我们的菜单：'
-                        {print} '我们的主菜有披萨、千层面、意面'
-                        主菜 = {ask} '您想要哪道主菜？'
-                        价格 = 0
-                        {if} 主菜 {is} 披萨 价格 = 10
-                        {if} 主菜 {is} 千层面 价格 = 12
-                        {if} 主菜 {is} 意面 价格 = 8
-                        {print} '您点了' 主菜
-                        {print} '请付' 价格 '元'
-                        {print} '谢谢，祝您用餐愉快！'
-                        ```
+                    你可以写一段简单的餐厅代码，像这样：
+                    ```
+                    {print} '欢迎来到海蒂餐厅'
+                    {print} '这是我们的菜单：'
+                    {print} '我们的主菜有披萨、千层面、意面'
+                    主菜 = {ask} '您想要哪道主菜？'
+                    价格 = 0
+                    {if} 主菜 {is} 披萨 价格 = 10
+                    {if} 主菜 {is} 千层面 价格 = 12
+                    {if} 主菜 {is} 意面 价格 = 8
+                    {print} '您点了' 主菜
+                    {print} '请付' 价格 '元'
+                    {print} '谢谢，祝您用餐愉快！'
+                    ```
                 start_code: "# 在这里写你的代码"
             7:
                 story_text: |
@@ -823,16 +823,16 @@ adventures:
                     在这一级，你可以用变量和`{at} {random}`命令来真正让海蒂为你选择一个答案。比如看看这段代码：
                 example_code: |
 
-                        在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
-                        ```
-                        {print} 我是海蒂半仙！
-                        问题 {is} {ask} 你想算什么？
-                        {print} 你想算：问题
-                        回答 {is} 是, 否, 有可能
-                        {print} 让我算一卦……
-                        {sleep} 2
-                        {print} 回答 {at} {random}
-                        ```
+                    在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
+                    ```
+                    {print} 我是海蒂半仙！
+                    问题 {is} {ask} 你想算什么？
+                    {print} 你想算：问题
+                    回答 {is} 是, 否, 有可能
+                    {print} 让我算一卦……
+                    {sleep} 2
+                    {print} 回答 {at} {random}
+                    ```
                 story_text_2: |
                     ### 练习
                     现在海蒂只能回答是、否和有可能。你能否给海蒂更多回答选项，比如“肯定”或者“换个问题”。
@@ -1406,7 +1406,7 @@ adventures:
             2:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
-                start_code: ""
+                start_code: "# place your code here"
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures
@@ -1419,7 +1419,7 @@ adventures:
     print_command:
         name: print
         description: Introduction print command
-        default_save_name: print_command
+        default_save_name: print
         levels:
             1:
                 story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"

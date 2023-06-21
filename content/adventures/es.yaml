@@ -834,9 +834,9 @@ adventures:
             3:
                 story_text: |
 
-                          En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
-                          Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
-                          De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
+                    En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
+                    Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
+                    De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
                 example_code: |
                     ```
                     opciones {is} piedra, papel, tijera
@@ -1352,7 +1352,7 @@ adventures:
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         name: print
         description: Introduction print command
-        default_save_name: print_command
+        default_save_name: print
     is_command:
         name: is
         description: introducing is command
@@ -1478,7 +1478,7 @@ adventures:
             2:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
-                start_code: ""
+                start_code: "# place your code here"
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures
