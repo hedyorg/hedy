@@ -21,7 +21,7 @@ const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
-const theLocalSaveWarning = new LocalSaveWarning();
+export const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
 let last_code: string;
@@ -184,6 +184,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   theLanguage = options.lang;
 
   // *** EDITOR SETUP ***
+  
   initializeMainEditor($('#editor'));
 
   const anchor = window.location.hash.substring(1);
