@@ -925,9 +925,7 @@ def _calc_error_rate(fail, success):
 
 
 def _determine_bool(bool_str):
-    if bool_str == "True":
-        return True
-    return False
+return bool_str == "True":
 
 
 def _check_dashboard_display_args():
