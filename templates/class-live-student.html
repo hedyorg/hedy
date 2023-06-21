@@ -56,7 +56,7 @@
                 {% if student_programs %}
                     <pre level="{{ student_programs[0].level }}">{{ student_programs[0].code }}</pre>
                 {% else %}
-                    <p>No program run yet</p>
+                    <p>{{_('no_programs')}}</p>
                 {% endif %}
             </div>
 
