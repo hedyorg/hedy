@@ -10,6 +10,7 @@ import sys
 import traceback
 import textwrap
 import zipfile
+import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
@@ -28,7 +29,6 @@ import hedy
 import hedy_content
 import hedy_translation
 import hedyweb
-import jinja_partials
 import utils
 from safe_format import safe_format
 from config import config
@@ -66,6 +66,7 @@ app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
 babel = Babel(app)
+
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
