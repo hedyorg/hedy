@@ -26,7 +26,7 @@ adventures:
                 example_code: "```\nmatpris {is} 0\ndrickapris {is} 0\ntotalpris {is} 0\n{print} 'Välkommen till McHedy'\nbeställning {is} {ask} 'Vad önskas att äta?'\n{if} beställning {is} hamburgare matpris {is} 5\n{if} beställning {is} pommes frites matpris {is} 2\ndricka {is} {ask} 'Vad vill du dricka?'\n{if} dricka {is} vatten drickapris {is} 0\nelse drickapris {is} 3\ntotalpris {is} food_price + drink_price\n{print} 'Det blir ' totalpris ' dollar, tack'\n```\n"
             7:
                 start_code: "{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n"
-                story_text: "Bra jobbat! Du har nått nästa nivå, vilket betyder att du har tränat på `{if}` och `{else}`. Du har säkert märkt att din kod blir längre och längre.\nTill exempel om du vill programmera 'Grattis på födelsedagen'.\n\nDet är mycket kod för i huvudsak samma ord om och om igen. I nästa flik lär du dig tack och lov en lösning med kommandot `{repeat}`, som låter dig upprepa en kodrad flera gånger.\n"
+                story_text: "Bra jobbat! Du har nått nästa nivå, vilket betyder att du har tränat på `{if}` och `{else}`. Du har säkert märkt att din kod blir längre och längre.\nTill exempel om du vill programmera 'Happy Birthday'.\n\nDet är mycket kod för i huvudsak samma ord om och om igen. I nästa flik lär du dig tack och lov en lösning med kommandot `{repeat}`, som låter dig upprepa en kodrad flera gånger.\n"
                 example_code: "```\n{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n```\n"
             8:
                 start_code: "{print} 'Vi forsätter till nästa flik!'"
@@ -486,9 +486,9 @@ adventures:
     fortune:
         levels:
             1:
-                story_text: "Har du någonsin varit på marknad och fått din framtid förutspådd av en spåkvinna? Eller har du någonsin spelat med en magisk åttaboll?\nDå vet du säkert att de inte riktigt kan förutse din framtid, men det är ändå kul att spela!\n\nPå de kommande nivåerna kan du lära dig hur du skapar din egen spåmaskin!\nPå nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spåkvinna och låta henne `{echo}` spelarnas svar.\nSå här:\n"
-                example_code: "```\n_ Hej, jag är spåkvinnan Hedy!\n_ Vem är du?\n_ Låt mig ta en titt i min kristallkula.\n_ Jag ser ... Jag ser ...\n_ Ditt namn är\n```\n"
-                story_text_2: "### Övning\nKopiera exempelkoden till din inmatningsskärm och fyll i de tomma rutorna så att koden fungerar.\n**Extra** Ändra koden och låt spåkvinnan inte bara förutsäga ditt namn utan även din ålder, ditt favoritsportlag eller något annat om dig själv.\n"
+                story_text: "Har du någonsin varit på marknad och fått din framtid förutspådd av en spådam? Eller har du någonsin spelat med en magisk åttaboll?\nDå vet du säkert att de inte riktigt kan förutse din framtid, men det är ändå kul att spela!\n\nPå de kommande nivåerna kan du lära dig hur du skapar din egen spåmaskin!\nPå nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spådam och låta henne `{echo}` spelarnas svar.\nSå här:\n"
+                example_code: "```\n_ Hej, jag är spådamen Hedy!\n_ Vem är du?\n_ Låt mig ta en titt i min kristallkula.\n_ Jag ser ... Jag ser ...\n_ Ditt namn är\n```\n"
+                story_text_2: "### Övning\nKopiera exempelkoden till din inmatningsskärm och fyll i de tomma rutorna så att koden fungerar.\n**Extra** Ändra koden och låt spådamen inte bara förutsäga ditt namn utan även din ålder, ditt favoritsportlag eller något annat om dig själv.\n"
                 start_code: '# skriv din kod här'
             3:
                 story_text: "På de tidigare nivåerna har du skapat din första spåmaskin, men Hedy kunde inte förutsäga någonting, bara `{echo}`.\nPå den här nivån kan du använda en variabel och kommandot `{at} {random}` för att verkligen låta Hedy välja ett svar åt dig. Titta till exempel på den här koden:\n"
@@ -498,7 +498,7 @@ adventures:
             4:
                 start_code: '# skriv din kod här'
                 story_text: "Den här nivån har inga nya funktioner, men ger dig chansen att öva på att använda citattecken.\nDu kan göra om din kod från nivå 3 och se till att lägga till citattecken på rätt ställen!\n\nTänk på att vi på nivå 3 inte kunde använda ordet 'fråga' både som namn på variabeln och som ett normalt ord som kan skrivas ut.\nCitattecken på nivå 4 gör detta möjligt!\n\n### Övning\nVi har tagit bort alla citattecken från den här exempelkoden – kan du lägga till dem på alla ställen där det behövs?\n\n### Övning 2\nGå tillbaka till den föregående nivån och kopiera din spådomskod. Få koden att fungera på den här nivån genom att lägga till citattecken på rätt ställen.\n"
-                example_code: "```\n_ Lägg till citattecken i denna kod _\n{print} Jag är spåkvinnan Hedy!\nfråga {is} {ask} Vad vill du veta?\n{print} Detta är din fråga: fråga\nsvar {is} ja, nej, kanske\n{print} Min kristallkula säger ...\n{sleep} 2\n{print} svar {at} {random}\n```\n"
+                example_code: "```\n_ Lägg till citattecken i denna kod _\n{print} Jag är spådamen Hedy!\nfråga {is} {ask} Vad vill du veta?\n{print} Detta är din fråga: fråga\nsvar {is} ja, nej, kanske\n{print} Min kristallkula säger ...\n{sleep} 2\n{print} svar {at} {random}\n```\n"
             10:
                 story_text: "På den här nivån lär du dig att programmera spelet MASH (M=herrgård, A=lägenhet, S=stuga, H=hus). I det här spelet kan du förutsäga för alla spelare samtidigt hur deras framtid kommer att se ut.\n\n### Övning\nFyll i tomrummen genom att använda de nya kommandon du lärt dig på den här nivån.\n"
                 example_code: "```\nbostäder = en herrgård, en lägenhet, ett skjul, ett hus\nkärlekar = ingen, en kunglighet, sin granne, sin sanna kärlek\nhusdjur = hund, katt, elefant\nnamn = Jenna, Ryan, Jim\n_\n    {print} namn ' bor i ' bostäder {at} {random}\n    {print} namn ' kommer att gifta sig med ' älskar {at} {random}\n    {print} namn ' kommer att få en ' husdjur {at} {random} ' som husdjur.\n   {sleep}\n```\n"
@@ -516,7 +516,7 @@ adventures:
                 example_code: "```\n{print} 'Jag har en blomma med magiska kronblad'\n{print} 'Om du plockar kronbladen kommer blomman att berätta för dig om din crush älskar dig tillbaka'\nantal = {ask} 'Hur många kronblad vill du välja?'\nalternativ = de älskar dig, de älskar dig inte\n_ _ _ _ alternativ {at} {random}\n```\n"
                 start_code: '# skriv din kod här'
             8:
-                example_code: "```\n{print} 'Jag är spåkvinnan Hedy!'\n{print} 'Du kan ställa tre frågor till mig.'\nsvar = ja, nej, kanske\n_ _ _\n   fråga = {ask} 'Vad vill du veta?'\n   {print} fråga\n   {sleep}\n   {print} 'Min kristallkula säger ...' svar {at} {random}\n```\n"
+                example_code: "```\n{print} 'Jag är spådamen Hedy!'\n{print} 'Du kan ställa tre frågor till mig.'\nsvar = ja, nej, kanske\n_ _ _\n   fråga = {ask} 'Vad vill du veta?'\n   {print} fråga\n   {sleep}\n   {print} 'Min kristallkula säger ...' svar {at} {random}\n```\n"
                 start_code: '# skriv din kod här'
                 story_text: "I nästa exempel kan du låta din spådam ställa flera frågor och även skriva ut dem!\n\n### Övning\nKan du fylla i rätt kommando på de tomma platserna?\n"
             12:
@@ -751,7 +751,7 @@ adventures:
                 example_code_4: "```\npoäng = 25\n{print} 'Du har ' poäng ' poäng'\n```\n"
                 start_code: "namn = {ask} 'Vad heter du?'\n{if} namn = 'Roboten Hedy'\n    {print} 'Hej på dig!'"
             4:
-                story_text: "## 'citattecken'\nPå nivå 4 har `{ask}` och `{print}` ändrats.\nDu måste sätta text som du vill skriva ut mellan citattecken.\nDetta är användbart, för nu kan du skriva ut alla ord du vill ha. Även orden du använde för att lagra något med `{is}`.\nDe flesta programspråk använder också citattecken vid utskrift, så vi kommer också ett steg närmare riktig programmering!\n"
+                story_text: "## 'Citattecken'\nPå nivå 4 har `{ask}` och `{print}` ändrats.\nDu måste sätta texten du vill skriva ut mellan citattecken.\nDetta är bra, för nu kan du skriva ut alla ord du vill ha. Även orden du använde för att spara något med `{is}`.\nDe flesta programspråk använder citattecken vid utskrift, så vi kommer också ett steg närmare riktig programmering!\n"
                 story_text_2: "##  Sammandragningar i engelsk text\nObs! Tänk på att nu när vi använder citattecken kommer Hedy att bli förvirrad när du använder apostrof för sammandragningar som I'm eller What's.\nSe till att ta bort dessa apostrofer och ändra stavningen till Im eller Whats om du skriver på engelska.\nKolla in exempelkoden för att se fel sätt att använda apostrof.\n"
                 example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad behöver vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
                 example_code_2: "```\n_ Detta är fel sätt att använda apostrof t.ex. i engelsk text_\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
@@ -869,7 +869,7 @@ adventures:
         levels:
             5:
                 story_text: "## Listor\nNär vi vill kontrollera om något finns i en lista kan vi nu använda kommandot `{in}`.\nDen här koden skriver ut snyggt! om du väljer grönt eller gult, annars meh.\n"
-                example_code: "```\nsnygga_färger {is} grön, gul\nfavoritfärg {is} {ask} 'Vilken är din favoritfärg?'\n{if} favoritfärg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
+                example_code: "```\nsnygga_färger {is} grönt, gult\nfavoritfärg {is} {ask} 'Vilken är din favoritfärg?'\n{if} favoritfärg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "### Övning\nGör klar exempelkoden genom att fylla i luckorna med kommandon som du har lärt dig.\nNär du är klar med koden, försök att lägga till egen kod och använd en fråga som du själv har kommit på.\n"
                 example_code_2: "```\ndjur är hund, ko, får\nsvaret är fråga 'Vilket är ditt favoritdjur?'\n_ svar _ djur _ 'Mitt också!'\n_ _ 'Mina favoritdjur är hundar, kor och får'\n```\n"
                 start_code: "snygga_färger {is} grön, gul\nfavoritfärg {is} {ask} 'Vilken är din favoritfärg?'\n{if} favoritfärg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'"
