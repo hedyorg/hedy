@@ -141,12 +141,12 @@ levels:
                 {echo}
             mp_choice_options:
             -   option: |
-                    Are you ready to go to level 2?
-                feedback: "There are two echo commands"
+                    Är du redo att gå vidare till nivå 2?
+                feedback: "Det finns två kommandon för eko"
             -   option: |
-                    Yes!
-                    Yes!
-                feedback: "Great job!"
+                    Ja!
+                    Ja!
+                feedback: "Bra jobbat!"
             -   option: |
                     Yes!
                 feedback: "There are two echo commands"
@@ -347,7 +347,7 @@ levels:
                 feedback: Nej, det lägger till din favoritbok i listan
             question_score: '10'
             question_text: Vad gör kommandot `{add}`?
-            code: "books {is} Harry Potter, The Hobbit, Green Eggs and Ham\nyour_book {is} {ask} What is your favorite book?\n{add} your_book {to} books\n{print} books {at} {random}"
+            code: "böcker {is} Harry Potter, Hobbiten, Gröna ägg och skinka\ndin_bok {is} {ask} Vad är din favoritbok?\n{add} din_bok {to} böcker\n{print} böcker {at} {random}"
             correct_answer: C
             hint: Kommandot `{add}` lägger till en bok, men vilken?
         8:
@@ -700,7 +700,7 @@ levels:
             -   option: "`{sleep}`\n"
                 feedback: "Det är inte rätt!"
             -   option: "`{else}`\n"
-                feedback: "Correct!"
+                feedback: "Det är rätt!"
             correct_answer: "D"
             hint: "Vilket hör ihop med kommandot `{if}`?"
             question_score: '10'
@@ -1137,7 +1137,7 @@ levels:
             hint: Något är fel med indragningen
             question_score: '10'
         6:
-            question_text: "What will be the output of this code when we enter pancakes?"
+            question_text: "Vad blir utskriften från koden när vi matar in pannkakor?"
             code: |-
                 {print} 'Welcome to restaurant Hedy'
                 {repeat} 2 {times}
@@ -1145,29 +1145,29 @@ levels:
                     {print} food
             mp_choice_options:
             -   option: |
-                    Welcome to restaurant Hedy
-                    Pancakes
-                feedback: "There is no repetition in this answer."
+                    Välkommen till restaurang Hedy
+                    Pannkakor
+                feedback: "Det finns ingen upprepning i detta svar."
             -   option: |
-                    Welcome to restaurant Hedy
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: "This answer also repeats the welcome message"
+                    Välkommen till restaurang Hedy
+                    Välkommen till restaurang Hedy
+                    Pannkakor
+                    Pannkakor
+                feedback: "Svaret upprepar också välkomstmeddelandet"
             -   option: |
-                    Welcome to restaurant Hedy
-                    What do you want to eat?
-                    What do you want to eat?
-                    Pancakes
-                    Pancakes
-                feedback: "Almost! But look at the question, it is not repeated."
+                    Välkommen till restaurang Hedy
+                    Vad vill du äta?
+                    Vad vill du äta?
+                    Pannkakor
+                    Pannkakor
+                feedback: "Nära! Men titta på frågan – den upprepas inte."
             -   option: |
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: "Well done!"
+                    Välkommen till restaurang Hedy
+                    Pannkakor
+                    Pannkakor
+                feedback: "Bra jobbat!"
             correct_answer: "D"
-            hint: "The first sentence and question will not be repeated"
+            hint: "Den första meningen och frågan kommer inte att upprepas"
             question_score: '10'
         7:
             question_text: Vad är fel med den här koden?
@@ -1379,38 +1379,38 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "What word should be at the place of the question mark?"
+            question_text: "Vilket ord ska stå i stället för frågetecknet?"
             code: |-
                 {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
                     ```
-                    counter
+                    räknare
                     ```
                 feedback: "No"
             -   option: |
                     `{range}`
-                feedback: "Correct"
+                feedback: "Rätt"
             -   option: |
                     `{if}`
-                feedback: "No"
+                feedback: "Nej"
             -   option: |
                     `{for}`
-                feedback: "No"
+                feedback: "Nej"
             correct_answer: "B"
-            hint: "What did you learn in this level?"
+            hint: "Vad lärde du dig på den här nivån?"
             question_score: '10'
         2:
-            question_text: "What will be the output from this code?"
+            question_text: "Vad blir utskriften från denna kod?"
             code: |-
                 {for} i {in} {range} 1 {to} 3
                     {print} i
             mp_choice_options:
             -   option: "1\n2\n3"
-                feedback: "Correct!"
+                feedback: "Rätt!"
             -   option: "1 2 3"
-                feedback: "That's not it"
+                feedback: "Det är fel"
             -   option: "1, 2, 3"
                 feedback: "That's not it"
             -   option: "123"
@@ -2067,13 +2067,13 @@ levels:
             question_text: Vad är fel med den här koden?
             code: "1  choklad = {ask} 'Vill du ha chokladsås på din glass?'\n2      strössel = {ask} 'Vill du ha strössel på din glass?'\n3  {if} choklad {and} strössel = 'ja'\n4      {print} 'Glass med chokladsås och strössel på väg!'\n5  {if} choklad = 'ja' {and} strössel = 'nej'\n6      {print} 'Glass med chokladsås på väg!'\n7  {if} choklad = 'nej' {and} strössel = 'ja'\n8      {print} 'Glass med strössel på väg'\n9  {if} choklad = 'nej' {and} strössel = 'nej'\n10      {print} 'Bara vanlig glass på väg!'"
             mp_choice_options:
-            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
+            -   option: "Rad 3 ska vara\n```\n{if} choklad = 'ja' {and} strössel = 'ja'\n```\n"
                 feedback: Rätt!
-            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
+            -   option: "Rad 3 ska vara\n```\n{if} choklad = 'nej' {and} strössel = 'nej'\n```\n"
                 feedback: Detta är inte vad jag beställde!
-            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
+            -   option: "Rad 5 ska vara\n```\n{if} choklad = 'ja' {and} strössel = 'ja'\n```\n"
                 feedback: Det här är inte vad jag beställde!
-            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
+            -   option: "Rad 7 ska vara\n```\n{if} choklad = 'ja' {and} strössel = 'nej'\n```\n"
                 feedback: Det här är inte vad jag beställde!
             hint: Det finns ett misstag på rad 3
             correct_answer: A
