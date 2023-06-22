@@ -86,17 +86,17 @@ levels:
             text: |
                 Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
                 Dit is een goed moment om de Papegaai, Verhaal en Steen, Schaar, Papier avonturen te proberen.
+            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         6:
             header: "Programmeren maar!"
             text: |
                 Advonturen staan in de tabbladen.
-            editor: |
-                <iframe class="fragment" src="/hedy/1"></iframe>
         7:
             header: "Programmeren maar!"
             text: |
                 Je kan de gele knopjes gebruiken om voorbeeldcodes te kopiëren.
                 <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
             header: "Tekenen met de schildpad"
             text: |
@@ -105,11 +105,627 @@ levels:
             header: "Tekenen met de schildpad: {forward}"
             text: |
                 Met `{forward}` kun je de schildpad vooruit laten bewegen.
-            editor: |
-                <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
         10:
             header: "Tekenen met de schildpad: {turn}"
             text: |
                 Met `{turn}` draait de schildpad links (`{turn} {left}`) of rechts (`{turn} {right}`).
             editor: |
                 <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+
+        11:
+            header: 'Drawing with the turtle: {turn}'
+            text: "`{turn}` is used to make the turtle turn left or right.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
+    2:
+        1:
+            header: "Welkom bij level 2"
+            text: |
+                In dit level leer je variabelen te gebruiken.
+
+                Een variabele is een woord waarin je informatie kunt opslaan.
+
+                Bijvoorbeeld: jouw naam, leeftijd of favoriete sportteam.
+        2:
+            header: "Variabelen"
+            text: |
+                Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando.
+            editor: |
+                <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+        3:
+            header: "Interactief"
+            text: |
+                We kunnen ook een variabele instellen door vragen te stellen.
+
+                Het antwoord op de vraag wordt dan opgeslagen in de variabele.
+
+                Zo hebben we het `{echo}`  commando niet meer nodig.
+            editor: |
+                <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+        4:
+            header: "Meerdere variabelen"
+            text: |
+                Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in tegenstelling tot maar één `{echo}`commando.
+            editor: |
+                <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+        5:
+            header: "{Sleep}"
+            text: |
+                Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
+            editor: |
+                <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+        6:
+            header: "{Sleep} 5"
+            text: |
+                Je kunt een getal achter het `{sleep}` commando typen als je een langere stilte wilt.
+
+                Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauseren.
+            editor: |
+                <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+        7:
+            header: "Veel programmeerplezier!"
+            text: |
+                Veel plezier met de avonturen in level 3!
+    3:
+        1:
+            header: "Welkom bij level 3"
+            text: |
+                In dit level leer je een lijstje te maken, items aan het lijstje toe te voegen of verwijderen en een willekeurig item uit het lijstje kiezen.
+        2:
+            header: "Een lijst maken"
+            text: |
+                Je maakt een lijst met `{is}`.
+
+                Scheid de items op de lijst met een komma.
+            editor: |
+                <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+        3:
+            header: "{At} {random}"
+            text: |
+                Je kunt na het maken van een lijstje het `{at}` `{random}` commando gebruiken.
+                De computer kiest dan een willekeurig item van het lijstje.
+                Je krijgt bij deze code dus elke keer dat je het uitvoert een verschillende uitvoer.
+            editor: |
+                <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+        4:
+            header: "{at} {random} in een zin"
+            text: |
+                Je kunt `{at}` `{random}` ook midden in een zin gebruiken.
+            editor: |
+                <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+        5:
+            header: "{Add} {to}"
+            text: |
+                Je kunt items aan een lijst toevoegen met het `{add}` `{to}` commando.
+
+                Je kunt  zelf kiezen wat je aan de lijst toevoegt, of je kunt de speler laten kiezen.
+                Dat doe je door `{add}` `{to}` te gebruiken in combinatie met een `{ask}` commando.
+            editor: |
+                <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+        6:
+            header: "{remove} {from}"
+            text: |
+                Het tegenovergestelde van `{add}` `{to}` is  `{remove}` `{from}`.
+                Met dit commando haal je dus juist items van het lijstje af.
+            editor: |
+                <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+        9:
+            header: "Aan de slag!"
+            text: |
+                Veel plezier met de avonturen in level 3!
+    4:
+        1:
+            header: "Welkom bij level 4"
+            text: |
+                In dit level leer je aanhalingstekens te gebruiken.
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+        2:
+            header: "Probleem"
+            text: |
+                In de vorige levels heb je dit probleem misschien gezien:
+            editor: |
+                <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+        3:
+            header: "Aanhalingstekens zijn de oplossing"
+            text: |
+                In dit level leer je het probleem op te lossen met aanhalingstekens.
+
+                Dit zorgt er ook voor dat je code meer begint te lijken op 'echte' Python code.
+        4:
+            header: "Aanhalingstekens en {print}"
+            text: |
+                Elke keer als je het `{print}` commando gebruikt, moet je de tekst die je letterlijk op het uitvoerscherm wil zien tussen aanhalingstekens zetten.
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+        5:
+            header: "Aanhalingstekens en {ask}"
+            text: |
+                Dit geldt ook voor `{ask}` .
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+        6:
+            header: "Aanhalingstekens en variabelen"
+            text: |
+                De naam van je variabele wil je niet letterlijk in het uitvoerscherm zien verschijnen.
+                Daarom moeten variabelenamen buiten de aanhalingstekens gehouden worden! Kijk maar:
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+        7:
+            header: "Aanhalingstekens en variabelen"
+            text: |
+                Als een variabele midden in een zin staat, moet de variabele nog steeds buiten de aanhalingstekens gezet worden.
+                De rest van de zin moet daarentegen wel binnen aanhalingstekens. Dat ziet er dan zo uit:
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+        8:
+            header: "Aanhalingstekens en hoge komma's"
+            text: |
+                Let op! Nu we aanhalingstekens gebruiken, kun je geen hoge komma's gebruiken voor andere doeleinden.
+
+                Een hoge komma voor een meervoudsvorm, zoals auto's, of een hoge komma voor 's middags, maken Hedy in de war.
+                Kijk maar eens wat er gebeurt als je deze woorden probeert te typen...
+
+            editor: |
+                <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+        9:
+            header: "Klaar voor de start? Af!"
+            text: |
+                Veel plezier met de avonturen in level 4!
+    5:
+        1:
+            header: "Welkom bij level 5"
+            text: |
+                In dit level leer je 3 nieuwe commando's:  `{if}`, `{else}` en `{in}`.
+        2:
+            header: "{if}"
+            text: |
+                Door {if} kun je kiezen uit twee opties.
+                In dit voorbeeld wordt er bijvoorbeeld 'nice' geprint als de speler 'Hedy' antwoordt.
+                Antwoordt de speler iets anders, dan doet de computer niets.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+        3:
+            header: "Vergeet het print commando niet"
+            text: |
+                Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+        4:
+            header: "{else}"
+            text: |
+                Als je een {if} gebruikt, kun je ook een {else} toevoegen.
+                Als het antwoord op de vraag 'Hedy' is, zegt de computer 'leuk'.
+                Is het antwoord iets anders, dan print de computer 'minder leuk'.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+        5:
+            header: "Lange regels"
+            text: |
+                Door {if} en {else} te gebruiken in één regel, kunnen je regels erg lang worden.
+
+                Daarom mag je de commando's ook op twee losse regels gerbuiken.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+        6:
+            header: 'Nog iets nieuws!'
+            text: |
+                Als je hebt geoefend met  `{if}` en `{else}`, kun je aan de slag met het`{in}` commando.
+
+                Met `{in}`  kun je de computer laten checken of iets in jouw lijstje staat. Kijk maar naar het voorbeeld:
+
+                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt inplaats van "groen", dan zegt Hedy "meh".
+            editor: |
+                <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+
+
+
+
+        7:
+            header: "Werken maar!"
+            text: |
+                Veel plezier met de avonturen in level 5!
+    6:
+        1:
+            header: "Welkom bij level 6"
+            text: |
+                In dit level kunnen we gaan rekenen in onze codes.
+        2:
+            header: "Optellen"
+            text: |
+                Wil je optellen, dan gebruik je het plusteken.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+        3:
+            header: "Aftrekken"
+            text: |
+                Wil je twee getallen van elkaar aftrekken, gebruik dan het minteken.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+        4:
+            header: "Vermenigvuldigen"
+            text: |
+                Wil je vermenigvuldigen, gebruik dan het sterretje.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+        5:
+            header: "Delen"
+            text: |
+                Voor delen gebruik je de slash.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+        6:
+            header: "Samenvatting"
+            text: |
+                Je kan deze tekens dus gebuiken om mee te rekenen: +, -, * en /.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+        7:
+            header: "Het = symbool"
+            text: |
+                Vanaf nu kun je het = symbool gebruiken in plaats van het`{is}` commando.
+                Dit geldt voor getallen en woorden, en het geldt ook na  `{if}` of `{else}` commando's.
+            editor: |
+                <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+        8:
+            header: "Rekenen met variabelen"
+            text: |
+                Je kunt rekenen met getallen, maar je kunt ook variabelen gebruiken in je berekeningen. Kijk maar:
+            editor: |
+                <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+        9:
+            header: "Aan de slag!"
+            text: |
+                Veel plezier met de avonturen in level 6!
+    7:
+        1:
+            header: "Welkom bij level 7"
+            text: |
+                In dit level leer je hoe je een regel code zo vaak als je wil kunt herhalen.
+        2:
+            header: "{repeat} 3 {times}"
+            text: |
+                Wil je een regel code herhalen, gebruik dan deze code `{repeat}` 3 `{times}`.
+
+                Wil je de regel vaker herhalen dan 3 keer, verander dan simpleweg het getal.
+
+                Bijvoorbeeld: Wil je in je spannende verhaal een personage 5x om hulp laten schreeuwen. Doe dat dan zo:
+            editor: |
+                <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+        3:
+            header: "Vergeet print niet!"
+            text: |
+                Als je {repeat} gebruikt, vergeet dan {print} niet!
+            editor: |
+                <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+        4:
+            header: "{repeat} met {ask}"
+            text: |
+                Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+
+
+
+
+
+
+        5:
+            header: "Klaar voor de start? Af!"
+            text: |
+                Veel plezier met de avonturen in level 7!
+    8:
+        1:
+            header: "Welkom bij level 8"
+            text: |
+                In dit level leer je inspringen bij  `{repeat}`, `{if}` en `{else}`, om de commando's te gebruiken over meerdere regels code.
+        2:
+            header: "{repeat} hiervoor"
+            text: |
+                Voor dit level zag `{repeat}` er zo uit:
+                Je kon het maar gebruiken over 1 regel.
+            editor: |
+                <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+        3:
+            header: "{repeat} nu"
+            text: |
+                In dit level kun je meerdere regels code herhalen. Om dit te doen moet je de computer duidelijk maken welke regels bij elkaar horen en dus herhaald moeten worden.
+                Dit doe je door in te springen.
+
+                Inspringen doe je met 4 spaties (of een tab) aan het begin van elke regel die herhaald moet worden. Zoals in het voorbeeld:
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+        4:
+            header: "{repeat} nu"
+            text: |
+                Als je wil kun je onder het blok van regels die herhaald gaan worden gewoon weer verder typen zonder in te springen.
+                De regels die niet inspringen worden dan niet herhaald.
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+        5:
+            header: "{if} en {else} hiervoor"
+            text: |
+                Hetzelfde geldt voor `{if}` en `{else}`.
+                Hiervoor gebruikte je deze commando's zo:
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+        6:
+            header: "{if} en {else} nu"
+            text: |
+                Bij {if} en {else} spring je nu ook in.
+            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+        7:
+            header: "Stoppen met inspringen"
+            text: |
+                Net als bij {repeat}, kun je stoppen met inspringen. Hierdoor worden de regels altijd getoond en niet alleen als de stelling waar is.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+        8:
+            header: "{if}jes in {if}jes"
+            text: |
+                Misschien heb je al bedacht om te proberen om een {if} in een {repeat} te stoppen, of andersom.
+                Voor nu kan dit nog niet. In hoger levels mag dit wel, maar we willen je eerst even goed laten oefenen met het inspringen bij deze commando's.
+        9:
+            header: "Op naar de avonturen!"
+            text: |
+                Veel plezier met de avonturen in level 8!
+    9:
+        1:
+            header: "Welkom bij level 9"
+            text: |
+                In dit level leer je meerdere regels code te gebruiken na een `{if}` of na een `{repeat}` commando.
+
+                Je mag zelfs een `{repeat}` commando in een ander `{repeat}`  commando zetten.
+        2:
+            header: "Meerdere regels na `{repeat}`"
+            text: |
+                Je mag meerdere regels gebruiken na `{repeat}`.
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+        3:
+            header: "Inspringen is belangrijk!"
+            text: |
+                Inspringen is erg belanrgijk om de computer te vertellen welke regels herhaald moeten worden en welke niet.
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+        4:
+            header: "Meerdere regels na `{if}`"
+            text: |
+                Je mag ook meerdere regels gebruiken na een `{if}`.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+        5:
+            header: "Inspringen is belangrijk"
+            text: |
+                Ook hier is inspringen superbelangrijk! Het kan een groot verschil maken in je code.
+            editor: |
+                <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+        6:
+            header: "Een `{if}` in een `{repeat}`"
+            text: |
+                Nu je meerdere regels kunt gebruiken na deze commando's, kun je ze ook in elkaar zetten.
+                Bekijk dit voorbeeld maar eens:
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+        7:
+            header: "Let op het inspringen"
+            text: |
+                Zie je hoe de 4e en 6e regel van deze code beginnen met 8 spaties?
+            editor: |
+                <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+
+
+        8:
+            header: "Let's go!"
+            text: |
+                Veel plezier met de avonturen in level 9!
+    10:
+        1:
+            header: "Welkom bij level 10"
+            text: |
+                In dit level leer je het nieuwe comamndo: `{for}`.
+        2:
+            header: "{for}"
+            text: |
+                Met {for} kun je een lijst maken en alle items op die lijst gebruiken. `{for}` creëert net als {repeat} en {if} een blok waarbij je 4 spaties moet inspringen.
+            editor: |
+                <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
+        3:
+            header: "{for}"
+            text: |
+                Hier zie je een ander voorbeeld van `{for}`:
+            editor: |
+                <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+        4:
+            header: "Programmeertijd!"
+            text: |
+                Veel plezier met de avonturen in level 10!
+    11:
+        1:
+            header: "Welkom bij level 11"
+            text: |
+                In dit level leer je een nieuwe vorm van `{for}`. In de eerdere levels gebruikte je `{for}` voor een lijstje, maar we kunnen het ook gebruiken met getallen.
+                Hierdoor hebben we het `{repeat}` commando niet meer nodig.
+        2:
+            header: "{for}"
+            text: |
+                Zo ziet de nieuwe vorm van `{for}` eruit:
+            editor: |
+                <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
+        3:
+            header: "De variabele i"
+            text: |
+                In de vorige slide heette de variabele 'teller', omdat hij aan het aftellen was.
+                Je kunt een variabele natuurlijk alle namen geven die je wil.
+                In Python is de standaard naam die in deze situatie voor variabelen gebruikt wordt 'i'.
+            editor: |
+                <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
+        4:
+            header: "Lekker programmeren!"
+            text: |
+                Veel plezier met de avonturen in level 11!
+    12:
+        1:
+            header: "Welkom bij level 12"
+            text: |
+                Vanaf dit level kun je decimale getallen gebruiken en er is een aantal aanpassingen gedaan bij de aanhalingstekens.
+        2:
+            header: "Aanhalingstekens"
+            text: |
+                In dit level is er iets aangepast aan de aanhalingstekens.
+                Vanaf nu moet **alle tekst** in aanhalingstekens. Dus ook de waarden die je aan variabelen geeft, items op lijsten en tekst na {if} commando's.
+            editor: |
+                <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
+        3:
+            header: "Decimale getallen"
+            text: |
+                Vanaf nu kun je decimale getallen gebruiken. Dit kan bijvoorbeeld leuk zijn in jouw restaurantprogramma!
+
+                Getallen hoeven geen aanhalingstekens.
+            editor: |
+                <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
+        4:
+            header: "Klaar om het te gaan proberen?"
+            text: |
+                Veel plezier met de avonturen in level 12!
+    13:
+        1:
+            header: "Welkom bij level 13"
+            text: |
+                We gaan dit level `{and}` en `{or}` leren! Als je 2 stellingen wil checken, komen deze commando's goed van pas.
+        2:
+            header: "{and}"
+            text: |
+                {and} gebruik je altijd in combinatie met een {if}.
+                Met dit commando kun je checken of 2 stellingen allebei waar zijn. Bijvoorbeeld:
+            editor: |
+                <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+        3:
+            header: "{or}"
+            text: |
+                {or} werkt op dezelfde manier als `{and}`, maar dan hoeft maar één van de twee stellingen waar te zijn.
+
+                Laten we kijken wat er gebeurt als je de `{and}` in het voorbeeld verandert naar `{or}`.
+            editor: |
+                <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+
+
+
+
+        4:
+            header: "Let's go!"
+            text: |
+                Veel plezier met de avonturen in level 13!
+
+    14:
+        1:
+            header: "Welkom bij level 14"
+            text: |
+                In dit level leer je een aantal nieuwe symbolen die je programma's kunnen verbeteren, zoals >.
+        2:
+            header: "Symbolen"
+            text: |
+                Deze nieuwe symbolen kun je gebruiken:
+
+                  De >  betekent groter dan...
+
+                  De >= betekent groter dan of gelijk aan...
+
+                  De <  betekent kleiner dan...
+
+                  De <= betekent kleiner dan of gelijk aan...
+
+                Hier zie je een voorbeeld van hoe je deze symbolen kunt gebruiken.
+
+            editor: |
+                <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+        3:
+            header: "Symbolen"
+            text: |
+                Je kunt ook deze twee symbolen gebruiken:
+
+                  == is hetzelfde als.
+
+                  != is niet
+
+                  == gebruik je bij een `{if}`. Kijk maar:
+            editor: |
+                <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+        4:
+            header: "Aan de slag!"
+            text: |
+                Veel plezier met de avonturen in level 14!
+    15:
+        1:
+            header: "Welkom bij level 15"
+            text: |
+                In dit level leer je over de  `{while}` lus.
+        2:
+            header: "{while}"
+            text: |
+                Nu gaan we een nieuwe lus leren: De {zolang} lus! We gaan door zo lang het statement dat we hebben waar is. Vergeet dus niet in de loop de waarde te veranderen.
+
+                Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de lus nooit!
+            editor: "<iframe class=\"fragment\" src=\"/adventure/while_command/15/raw\"></iframe>\n"
+        3:
+            header: "Let's try it out!"
+            text: |
+                Veel plezier met de avonturen in level 15!
+    16:
+        1:
+            header: "Welkom bij level 16"
+            text: |
+                In dit level leer je over de [vierkante haken] en hoe je ze moet gebruiken.
+        2:
+            header: "Vierkante haken"
+            text: |
+                We gaan lijstjes maken op de Pyhton manier, met vierkante haken om de lijst! We zetten nog steeds aanhalingsteken om elk item, zoals je eerste hebt geleerd. We gebruiken vierkante haken om de plek in de lijst aan te geven. Het {at} {random} ziet er nu ook anders uit.
+            editor: |
+                <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+        3:
+            header: "Proberen maar!"
+            text: |
+                Veel plezier met de avonturen in level 16!
+    17:
+        1:
+            header: "Welkom bij level 17"
+            text: |
+                In dit level leer je hoe je een dubbele punt gebruikt en leer je het {elif} commando.
+        2:
+            header: "Dubbele punt"
+            text: |
+                Het inspringen verandert weer een klein beetje. Elke keer als er ingesprongen moet worden, hebben we ook een dubbele punt nodig in de zin daarvoor.
+            editor: |
+                <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+        3:
+            header: "{elif}"
+            text: |
+                In dit level kun je ook een nieuw commando gebruiken: {elif}. {elif} is een samenvoeging van {else} en {if}. Je kunt het gebruiken om een 3e optie te creëren (of zelfs meer!). Kijk maar!
+            editor: |
+                <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+        4:
+            header: "Aan het werk!"
+            text: |
+                Veel plezier met de avonturen in level 17!
+    18:
+        1:
+            header: "Welkom bij level 18"
+            text: |
+                Welkom in het laatste level van Hedy! We zijn aangekomen bij echte Python code! Dit betekent ook dat je de Hedy code uit de level in iedere Python omgeving kunt gebruiken als je Engelse commando's gebruikt. Deed je dat tot nu toe nog niet, zet dan de knop om in het commando's menu.
+        2:
+            header: "De Python manier"
+            text: |
+                We zijn aangekomen bij echte Python code! Dat betekent dat we vanaf nu haakjes moeten zetten om {print} en {range}.
+
+                Daarnaast moeten we komma's gaan gebruiken als we meer dan 1 item willen printen.
+
+                Tot slot moeten we het commando {ask} veranderen in {input}.
+
+                Klik op het tabje '{print}' voor alle voorbeelden.
+
+            editor: |
+                <iframe class="fragment" src="/hedy/18"></iframe>
+        3:
+            header: "De laatste avonturen!"
+            text: |
+                Veel plezier bij de laatse avonturen in level 18!
+
