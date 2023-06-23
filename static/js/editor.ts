@@ -1,3 +1,6 @@
+export type Breakpoints = Record<number, string>;
+
+
 export interface HedyEditorCreator {
   // TODO: Not sure yet if it should return a HedyEditor or change local variable names
   /**
@@ -23,6 +26,10 @@ export interface HedyEditorCreator {
 
 export interface HedyEditor {
   /**
+ * Represents whether there's an open 'ask' prompt
+ */
+  askPromptOpen: boolean;
+  /**
    * Set the highlither rules for a particular level
    * @param level      
    */
@@ -47,7 +54,7 @@ export interface HedyEditor {
   /**
    * Trim trailing whitespaces
    */
-  trimTrailingSpace: (editor: HedyEditor) => void
+  trimTrailingSpace: () => void
 
   /**
    * Resizes the editor after changing its size programatically
@@ -77,6 +84,23 @@ export interface HedyEditor {
   /**
   * Removes all breakpoints on the rows.
   **/
-  clearBreakpoints(): void;
+  clearBreakpoints: ()  => void;
 
+  /**
+   * Sets the main editor and also its options
+   */
+  configureMainEditor(): void;
+
+  /**
+   * Returns the breakpoints as a map-to-css-class
+   */
+  getBreakpoints: () => Breakpoints;
+
+  /**
+   * Sets the mode of the editor to read-only or editable depending
+   * on the paramater
+   * @param isReadMode whether the editor will be set to read only mode or not
+   */
+  setMode: (isReadMode: boolean) => void;
+  
 }
