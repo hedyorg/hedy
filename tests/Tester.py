@@ -223,7 +223,6 @@ class HedyTester(unittest.TestCase):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
         if not self.snippet_already_tested_with_current_hedy_version(code, level):
-
             if skipped_mappings is not None:
                 result = hedy.transpile(code, level, lang, skip_faulty=True)
                 for skipped in skipped_mappings:
