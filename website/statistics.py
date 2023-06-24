@@ -524,6 +524,15 @@ def calc_num_programs_per_level(programs_ran_per_level, success_runs_per_level, 
 
 
 def find_highest_level_quiz_data(finished_quizzes, quizzes):
+    """
+    Finds the highest level quiz data from a list of quizzes.
+
+    :param finished_quizzes: A boolean indicating whether there are any finished quizzes.
+    :param quizzes: A list of dictionaries representing quiz data. Each dictionary should have 'level' and 'scores'
+                    keys, representing the level of the quiz and the corresponding scores, respectively.
+    :return: A tuple containing the highest level quiz and its corresponding score. If there are no finished quizzes,
+             the function returns ("-", "-").
+    """
     if finished_quizzes:
         highest_level_quiz = max([x.get("level") for x in quizzes if x.get("finished")])
         highest_level_quiz_score = max([x.get("scores") for x in quizzes if x.get("level") == highest_level_quiz])
