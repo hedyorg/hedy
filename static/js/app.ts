@@ -10,13 +10,13 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
+import { load_variables, returnLinesWithoutBreakpoints } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor } from './editor';
-import { HedyAceEditor, HedyAceEditorCreator } from './ace-editor';
+import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -188,14 +188,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theGlobalEditor = editorCreator.initializeMainEditor($editor);
   }
   
-  // // *** Debugger *** //
-  //TODO: FIX THIS
-  // initializeDebugger({
-  //   editor: theGlobalEditor,
-  //   level: theLevel,
-  //   language: theLanguage,
-  // });
-  
   const anchor = window.location.hash.substring(1);
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
@@ -277,36 +269,10 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
-        const exampleEditor = turnIntoAceEditor(preview, true);
-
-        // Fits to content size
-        exampleEditor.setOptions({ maxLines: Infinity });
-        if ($(preview).hasClass('common-mistakes')) {
-          exampleEditor.setOptions({
-            showGutter: true,
-            showPrintMargin: true,
-            highlightActiveLine: true,
-            minLines: 5,
-          });
-        } else if ($(preview).hasClass('cheatsheet')) {
-          exampleEditor.setOptions({ minLines: 1 });
-        } else if ($(preview).hasClass('parsons')) {
-          exampleEditor.setOptions({
-            minLines: 1,
-            showGutter: false,
-            showPrintMargin: false,
-            highlightActiveLine: false
-          });
-        } else {
-          exampleEditor.setOptions({ minLines: 2 });
-        }
-
-        if (dir === "rtl") {
-            exampleEditor.setOptions({ rtl: true });
-        }
-
+        // Create this example editor
+        const exampleEditor = editorCreator.initializeExampleEditor(preview)
         // Strip trailing newline, it renders better
-        exampleEditor.setValue(exampleEditor.getValue().trimRight(), -1);
+        exampleEditor.setValue(exampleEditor.getValue().trimRight());
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
@@ -327,7 +293,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
 
         const levelStr = $(preview).attr('level');
         if (levelStr) {
-          exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+          exampleEditor.setHighliterForLevel(parseInt(levelStr, 10));
         }
       });
     }
@@ -1382,43 +1348,6 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-/**
- * Turn an HTML element into an Ace editor
- */
-export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): AceAjax.Editor {
-  const editor = ace.edit(element);
-  editor.setTheme("ace/theme/monokai");
-  if (isReadOnly) {
-    editor.setValue(editor.getValue().trimRight(), -1);
-    // Remove the cursor
-    editor.renderer.$cursorLayer.element.style.display = "none";
-    editor.setOptions({
-      readOnly: true,
-      showGutter: false,
-      showPrintMargin: false,
-      highlightActiveLine: false
-    });
-    // A bit of margin looks better
-    editor.renderer.setScrollMargin(3, 3, 10, 20)
-
-    // When it is the main editor -> we want to show line numbers!
-    if (isMainEditor) {
-      editor.setOptions({
-        showGutter: true
-      });
-    }
-  }
-
-  // Everything turns into 'ace/mode/levelX', except what's in
-  // this table. Yes the numbers are strings. That's just JavaScript for you.
-  if (theLevel) {
-    const mode = getHighlighter(theLevel);
-    editor.session.setMode(mode);
-  }
-
-  return editor;
-}
-
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
@@ -1672,7 +1601,7 @@ function updatePageElements() {
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
-  theGlobalEditor.setMode(false);
+  theGlobalEditor.setEditorMode(false);
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
@@ -1701,7 +1630,7 @@ function updatePageElements() {
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
-    theGlobalEditor.setMode(isSubmitted);
+    theGlobalEditor.setEditorMode(isSubmitted);
   }
 }
 

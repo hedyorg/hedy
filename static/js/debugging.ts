@@ -1,4 +1,3 @@
-import { HedyAceEditor } from "./ace-editor";
 import { runit } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import { Markers } from "./markers";
@@ -335,4 +334,14 @@ export function returnLinesWithoutBreakpoints(editor: HedyEditor) {
   }
 
   return code;
+}
+
+/**
+ * The '@types/ace' package has the type of breakpoints incorrect
+ *
+ * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
+ * but can be something you pick yourself.
+ */
+function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
+  return editor.session.getBreakpoints() as unknown as Breakpoints;
 }

@@ -83,14 +83,12 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
         });
       }
     }
-
-    // Everything turns into 'ace/mode/levelX', except what's in
-    // this table. Yes the numbers are strings. That's just JavaScript for you.
+    
+    hedyEditor.editor = editor;    
+    // Everything turns into 'ace/mode/levelX', except what's in    
     if (theLevel) {
-      const mode = getHighlighter(theLevel);
-      editor.session.setMode(mode);
+      hedyEditor.setHighliterForLevel(theLevel)
     }
-    hedyEditor.editor = editor;
     return hedyEditor;
   }
 
@@ -134,23 +132,59 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
   });
     return editor;
   }
+
+  initializeExampleEditor(preview: HTMLElement): HedyEditor {
+    const dir = $("body").attr("dir");
+    const exampleEditor = this.turnIntoEditor(preview, true);
+    // Fits to content size
+    exampleEditor.setOptions({ maxLines: Infinity });
+    if ($(preview).hasClass('common-mistakes')) {
+      exampleEditor.setOptions({
+        showGutter: true,
+        showPrintMargin: true,
+        highlightActiveLine: true,
+        minLines: 5,
+      });
+    } else if ($(preview).hasClass('cheatsheet')) {
+      exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
+    } else {
+      exampleEditor.setOptions({ minLines: 2 });
+    }
+
+    if (dir === "rtl") {
+        exampleEditor.setOptions({ rtl: true });
+    }
+    return exampleEditor;
+  }
 }
 
 export class HedyAceEditor implements HedyEditor {
   private _editor?: AceAjax.Editor;
-  markers?: Markers
+  private _markers?: Markers
   askPromptOpen: boolean = false;
 
   /**
  * Set the highlither rules for a particular level
  * @param level      
  */
-  setHighliterForLevel(level: string): void { }
+  setHighliterForLevel(level: number): void { 
+    const mode = this.getHighlighter(level);
+    this._editor?.session.setMode(mode);
+  }
 
   /**
    * @returns the string of the current program in the editor
    */
-  getValue(): string { return "" }
+  getValue(): string { 
+    return this._editor!.getValue();
+  }
 
   /**     
    * @returns if the editor is set to read-only mode
@@ -183,12 +217,16 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * Resizes the editor after changing its size programatically
    */
-  resize(): void { }
+  resize(): void {
+    this._editor?.resize()
+  }
 
   /**
    * Focuses the text area for the current editor
    */
-  focus(): void { }
+  focus(): void { 
+    this._editor?.focus();
+  }
 
   /**
    * Clears the errors and annotations in the editor
@@ -250,7 +288,16 @@ export class HedyAceEditor implements HedyEditor {
       stopDebug();
     });
 
-    this.markers = new Markers(this._editor!)
+    this._markers = new Markers(this._editor!);
+
+          // *** Debugger *** //
+      // TODO: FIX THIS
+      initializeDebugger({
+        editor: this._editor!,
+        markers: this.markers,
+        level: theLevel,
+        language: theLanguage,
+      });
   }
 
   set editor(editor: AceAjax.Editor) {
@@ -267,8 +314,24 @@ export class HedyAceEditor implements HedyEditor {
     return this._editor?.session.getBreakpoints() as unknown as Breakpoints;
   }
 
-  setMode(isReadMode: boolean): void {
+  setEditorMode(isReadMode: boolean): void {
     this._editor?.setReadOnly(isReadMode);
+  }
+
+  getHighlighter(level: number): string {
+    return `ace/mode/level${level}`;
+  }
+
+  setOptions(options: object) {
+    this._editor?.setOptions(options);
+  }
+
+  get editor(): AceAjax.Editor {
+    return this._editor!;
+  }
+
+  get markers(): Markers {
+    return this._markers!;
   }
 }
 

@@ -33,7 +33,7 @@ export interface HedyEditor {
    * Set the highlither rules for a particular level
    * @param level      
    */
-  setHighliterForLevel: (level: string) => void;
+  setHighliterForLevel: (level: number) => void;
 
   /**
    * @returns the string of the current program in the editor
@@ -101,6 +101,6 @@ export interface HedyEditor {
    * on the paramater
    * @param isReadMode whether the editor will be set to read only mode or not
    */
-  setMode: (isReadMode: boolean) => void;
+  setEditorMode: (isReadMode: boolean) => void;
   
 }
