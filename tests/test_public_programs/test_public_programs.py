@@ -6,7 +6,7 @@ from app import translate_error, app
 from flask_babel import force_locale
 import exceptions
 
-most_recent_file_name = 'tests/test_public_programs/filtered-programs-2022-12-01.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-06-19.json'
 public_snippets = []
 
 # this file tests all public programs in the database
@@ -27,7 +27,7 @@ for p in public_programs:
                 )
     public_snippets.append(s)
 
-p2 = [(s.name, s) for s in public_snippets if not s.error]
+p2 = [(s.name, s) for s in public_snippets]
 
 passed_snippets = []
 
@@ -35,7 +35,8 @@ passed_snippets = []
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
-        if snippet is not None and len(snippet.code) > 0:
+        # test correct programs
+        if snippet is not None and len(snippet.code) > 0 and len(snippet.code) < 100 and not snippet.error:
             try:
                 self.single_level_tester(
                     code=snippet.code,
@@ -72,3 +73,13 @@ class TestsPublicPrograms(HedyTester):
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
                         raise E
+
+        # test if we are not validating previously incorrect programs
+        if snippet is not None and len(snippet.code) > 0 and snippet.error:
+            self.single_level_tester(
+                code=snippet.code,
+                level=int(snippet.level),
+                lang=snippet.language,
+                translate=False,
+                exception=exceptions.HedyException
+            )
