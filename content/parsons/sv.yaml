@@ -27,10 +27,10 @@ levels:
             story: "Det nya skolåret på Hogwarts har börjat! \nDet är sorteringshattens uppgift att sortera in dig i ett av husen.\nVilket hus kommer du att sorteras in i?\nÄr du en Gryffindor, Hufflepuf, Ravenclaw eller Slytherin.\nLåt programmet vänta en kort stund innan det avslöjar ditt hus.\n"
             code: |-
                 {print} Det nya skolåret på Hogwarts börjar!
-                {print} Sorteringshatten är redo att sortera in dig i ett elevhem.
-                blir {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
+                {print} Sorteringshatten är redo att sortera.
+                elevhem {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
                 {sleep} 2
-                {print} Och det blir {at} {random}
+                {print} Och det blir elevhem {at} {random}
     4:
         1:
             story: "Du är den nyaste Pokémon-tränaren från Pallet Town!\nGör ett program som väljer din första Pokémon.\nLåt programmet vänta en minut innan det avslöjar din första Pokémon.\n"
@@ -42,7 +42,7 @@ levels:
         2:
             story: "Skapa ett lotteri där du kan välja ett pris som du kan vinna.\n"
             code: |-
-                priser {is} bil, hamster, 1 miljon kronor
+                priser {is} bil, hamster, miljon kronor
                 pris {is} {ask} 'Vad vill du vinna?'
                 {add} pris {to_list} priser
                 {print} 'Du vann en ' priser {at} {random}
