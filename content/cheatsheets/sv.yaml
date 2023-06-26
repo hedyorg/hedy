@@ -164,7 +164,7 @@
     demo_code: "namn = 'Hedy'\n{print}('Jag heter ', namn)"
 -   name: fråga något med {input}
     explanation: Använd `{input}` istället för `{ask}` för att fråga något.
-    demo_code: "namn = {input}('Vad heter du?')\n{print}('Så du heter ', name)"
+    demo_code: "namn = {input}('Vad heter du?')\n{print}('Så du heter ', namn)"
 7:
 -   name: '{print}'
     explanation: Skriv ut exakt med citattecken.
@@ -184,7 +184,7 @@
     demo_code: "{print} '5 gånger 5 är ' 5 * 5"
 -   name: '{ask}'
     explanation: Fråga efter svaret på en addition och kontrollera om det är korrekt. Vi kan nu skriva ut två rader.
-    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!\"\n    {print} 'Svaret var faktiskt ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
+    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!\'\n    {print} 'Svaret var faktiskt ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
 -   name: '{repeat} med sköldpadda'
     explanation: Upprepa flera rader.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
