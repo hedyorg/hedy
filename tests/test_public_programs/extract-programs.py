@@ -4,7 +4,7 @@ import json
 # The log file itself is not in the repo since it also contains dates & usernames
 # Felienne will periodically update the filtered file for testing purposes
 
-date = '2022-12-01'
+date = '2023-06-19'
 
 with open(f'public-programs-{date}.json', 'r') as public_programs:
     text = public_programs.read()

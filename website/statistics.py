@@ -7,9 +7,10 @@ from flask_babel import gettext
 
 import exceptions as hedy_exceptions
 from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
-import hedy_content
-
 import utils
+import hedy_content
+import hedy
+import jinja_partials
 from website.flask_helpers import render_template
 from website import querylog
 from website.auth import is_admin, is_teacher, requires_admin, requires_login
@@ -105,6 +106,100 @@ class StatisticsModule(WebsiteModule):
         }
         return jsonify(response)
 
+    @route("/grid_overview/class/<class_id>", methods=["GET"])
+    @requires_login
+    def render_class_grid_overview(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        students, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(
+                user, class_id, 1)
+        matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, '1')
+        adventure_names = {value: key for key, value in adventure_names.items()}
+
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        return render_template(
+            "class-grid.html",
+            class_info={"id": class_id, "students": students, "name": class_["name"]},
+            current_page="grid_overview",
+            max_level=hedy.HEDY_MAX_LEVEL,
+            class_adventures=class_adventures_formatted,
+            ticked_adventures=ticked_adventures,
+            matrix_values=matrix_values,
+            adventure_names=adventure_names,
+            student_adventures=student_adventures,
+            page_title=gettext("title_class grid_overview"),
+        )
+
+    @route("/grid_overview/class/<class_id>/level", methods=["GET"])
+    @requires_login
+    def change_dropdown_level(self, user, class_id):
+        level = request.args.get('level')
+        students, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(
+                user, class_id, level)
+        matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
+        adventure_names = {value: key for key, value in adventure_names.items()}
+
+        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             current_page="grid_overview",
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             ticked_adventures=ticked_adventures,
+                                             matrix_values=matrix_values,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             page_title=gettext("title_class grid_overview"),
+                                             )
+
+    @route("/grid_overview/class/<class_id>/level", methods=["POST"])
+    @requires_login
+    def change_checkbox(self, user, class_id):
+        level = request.args.get('level')
+        student_index = request.args.get('student_index', type=int)
+        adventure_index = request.args.get('adventure_index', type=int)
+        students, class_, class_adventures_formatted, ticked_adventures, adventure_names, _ = self.get_grid_info(
+            user, class_id, level)
+        matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
+
+        adventure_names = {value: key for key, value in adventure_names.items()}
+        current_adventure_name = class_adventures_formatted[level][adventure_index]
+        student_adventure_id = f"{students[student_index]}-{adventure_names[current_adventure_name]}-{level}"
+
+        self.db.update_student_adventure(student_adventure_id, matrix_values[student_index][adventure_index])
+        _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
+        matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
+
+        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             current_page="grid_overview",
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             ticked_adventures=ticked_adventures,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             matrix_values=matrix_values,
+                                             page_title=gettext("title_class grid_overview"),
+                                             )
+
+    def get_matrix_values(self, students, class_adventures_formatted, ticked_adventures, level):
+        rendered_adventures = class_adventures_formatted.get(level)
+        matrix = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
+        for student_index in range(len(students)):
+            student_list = ticked_adventures.get(students[student_index])
+            if student_list and rendered_adventures:
+                for program in student_list:
+                    if program['level'] == level:
+                        index = rendered_adventures.index(program['name'])
+                        matrix[student_index][index] = 1 if program['ticked'] else 0
+        return matrix
+
     @route("/program-stats", methods=["GET"])
     @requires_admin
     def get_program_stats(self, user):
@@ -124,6 +219,60 @@ class StatisticsModule(WebsiteModule):
             "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
         }
         return jsonify(response)
+
+    def get_grid_info(self, user, class_id, level):
+        class_ = self.db.get_class(class_id)
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        class_info = self.db.get_class_customizations(class_id)
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                if not adventure['name'] == 'next':
+                    adventure_list.append(adventure_names[adventure['name']])
+            class_adventures_formatted[key] = adventure_list
+
+        ticked_adventures = {}
+        student_adventures = {}
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            if programs:
+                ticked_adventures[student] = []
+                current_program = {}
+                for _, program in programs.items():
+                    name = adventure_names[program['adventure_name']]
+                    customized_level = class_adventures_formatted.get(str(program['level']))
+                    if name in customized_level:
+                        student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                        if not current_adventure:
+                            # store the adventure in case it's not in the table
+                            current_adventure = self.db.store_student_adventure(
+                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+
+                        current_program = dict(id=program['id'], level=str(program['level']),
+                                               name=name, ticked=current_adventure['ticked'])
+
+                        student_adventures[student_adventure_id] = program['id']
+                        ticked_adventures[student].append(current_program)
+
+        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
 
 
 class LiveStatisticsModule(WebsiteModule):

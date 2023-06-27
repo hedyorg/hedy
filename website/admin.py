@@ -138,7 +138,7 @@ class AdminModule(WebsiteModule):
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
                 "id": Class.get("id"),
-                "weekly_runs": Class.get("stats").get("week").get("runs") if "stats" in Class else 0
+                "weekly_runs": statistics.get_general_class_stats(Class.get("students", []))["week"]["runs"]
             }
             for Class in self.db.all_classes()
         ]
