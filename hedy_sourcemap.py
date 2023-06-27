@@ -1,5 +1,7 @@
 import re
+import exceptions
 from os import path
+from lark import Tree
 
 
 class SourceRange:
@@ -7,20 +9,40 @@ class SourceRange:
     A class used to represent source code ranges
 
     The source code range is made out of:
-    from_line (int), from_character (int), to_line (int), to_character (int)
+    from_line (int), from_column (int), to_line (int), to_column (int)
+
+    An example:
+    print Hello!
+    ask What is your name?
+
+    For the above snippet we could have the following mappings:
+    print Hello! - from_line (1), from_column (1), to_line (1), to_column (13)
+    ask What is your name? - from_line (2), from_column (1), to_line (2), to_column (23)
+    Hello! - from_line (1), from_column (7), to_line (1), to_column (13)
+
+    Tip: You can use a more advanced text editor like Notepad++ to get these values for a certain cursor position
     """
 
-    def __init__(self, from_line, from_character, to_line, to_character):
+    def __init__(self, from_line, from_column, to_line, to_column):
         self.from_line = from_line
-        self.from_character = from_character
+        self.from_column = from_column
         self.to_line = to_line
-        self.to_character = to_character
+        self.to_column = to_column
 
     def __str__(self):
-        return f'{self.from_line}/{self.from_character}-{self.to_line}/{self.to_character}'
+        return f'{self.from_line}/{self.from_column}-{self.to_line}/{self.to_column}'
 
     def __repr__(self):
         return self.__str__()
+
+    def __eq__(self, other):
+        return (
+            self.from_line, self.from_column,
+            self.to_line, self.to_column
+        ) == (
+            other.from_line, other.from_column,
+            other.to_line, other.to_column
+        )
 
 
 class SourceCode:
@@ -31,30 +53,34 @@ class SourceCode:
     a source_range (SourceRange) and the code (str)
     """
 
-    def __init__(self, source_range: SourceRange, code: str):
+    def __init__(self, source_range: SourceRange, code: str, error: Exception = None):
         self.source_range = source_range
         self.code = code
+        self.error = error
 
     def __hash__(self):
         return hash((
-            self.source_range.from_line, self.source_range.from_character,
-            self.source_range.to_line, self.source_range.to_character
+            self.source_range.from_line, self.source_range.from_column,
+            self.source_range.to_line, self.source_range.to_column
         ))
 
     def __eq__(self, other):
         return (
-            self.source_range.from_line, self.source_range.from_character,
-            self.source_range.to_line, self.source_range.to_character
+            self.source_range.from_line, self.source_range.from_column,
+            self.source_range.to_line, self.source_range.to_column
         ) == (
-            other.source_range.from_line, other.source_range.from_character,
-            other.source_range.to_line, other.source_range.to_character
+            other.source_range.from_line, other.source_range.from_column,
+            other.source_range.to_line, other.source_range.to_column
         )
 
     def __ne__(self, other):
         return not (self == other)
 
     def __str__(self):
-        return f'{self.source_range} --- {self.code}'
+        if self.error is None:
+            return f'{self.source_range} --- {self.code}'
+        else:
+            return f'{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]'
 
     def __repr__(self):
         return self.__str__()
@@ -73,6 +99,16 @@ class SourceMap:
     """
 
     map = dict()
+    level = 0
+
+    skip_faulty = False
+    exception_found_during_parsing = None
+
+    exceptions_not_to_skip = (
+        exceptions.UnsupportedStringValue,
+    )
+
+    language = 'en'
     hedy_code = ''
     python_code = ''
 
@@ -89,6 +125,17 @@ class SourceMap:
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
         self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
 
+    def set_level(self, level):
+        self.level = level
+        self.get_grammar_rules(level)
+
+    def set_language(self, language):
+        self.language = language
+
+    def set_skip_faulty(self, skip_faulty):
+        # if the mapping encounters an error and skip_faulty is True we will 'skip' the exception
+        self.skip_faulty = skip_faulty
+
     def set_hedy_input(self, hedy_code):
         self.hedy_code = hedy_code
 
@@ -96,41 +143,90 @@ class SourceMap:
         self.python_code = python_code
         python_code_mapped = list()
 
+        def line_col(context, idx):
+            return context.count('\n', 0, idx) + 1, idx - context.rfind('\n', 0, idx)
+
         for hedy_source_code, python_source_code in self.map.items():
+            if hedy_source_code.error is not None or python_source_code.code == '':
+                continue
+
             start_index = python_code.find(python_source_code.code)
-            start_line = python_code[0:start_index].count('\n') + 1
             code_char_length = len(python_source_code.code)
 
             for i in range(python_code_mapped.count(python_source_code.code)):
                 start_index = python_code.find(python_source_code.code, start_index+code_char_length)
                 start_index = max(0, start_index)  # not found (-1) means that start_index = 0
-                start_line = python_code[0:start_index].count('\n') + 1
 
             end_index = start_index + code_char_length
-            code_line_length = python_code[start_index:end_index].count('\n')
-            end_line = start_line + code_line_length
+            start_line, start_column = line_col(python_code, start_index)
+            end_line, end_column = line_col(python_code, end_index)
 
             python_source_code.source_range = SourceRange(
-                start_line, start_index, end_line, end_index
+                start_line,
+                start_column,
+                end_line,
+                end_column
             )
 
             python_code_mapped.append(python_source_code.code)
+
+    def get_grammar_rules(self, level):
+        script_dir = path.abspath(path.dirname(__file__))
+        file_path = path.join(script_dir, "grammars-Total", f'level{level}.en-Total.lark')
+
+        with open(file_path, "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+
+        self.grammar_rules = re.findall(r"(\w+):", grammar_text)
+        self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
 
     def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
         self.map[hedy_code] = python_code
 
     def clear(self):
         self.map.clear()
+        self.level = 0
+        self.language = 'en'
         self.hedy_code = ''
         self.python_code = ''
 
-    def get_response_object(self):
+    def get_result(self):
+        response_map = dict()
+        index = 0
+
+        for hedy_source_code, python_source_code in self.map.items():
+            response_map[index] = {
+                'hedy_range': {
+                    'from_line': hedy_source_code.source_range.from_line,
+                    'from_column': hedy_source_code.source_range.from_column,
+                    'to_line': hedy_source_code.source_range.to_line,
+                    'to_column': hedy_source_code.source_range.to_column,
+                },
+                'python_range': {
+                    'from_line': python_source_code.source_range.from_line,
+                    'from_column': python_source_code.source_range.from_column,
+                    'to_line': python_source_code.source_range.to_line,
+                    'to_column': python_source_code.source_range.to_column,
+                },
+                'error': hedy_source_code.error,
+            }
+
+            index += 1
+
+        return response_map
+
+    def get_compressed_mapping(self):
         response_map = dict()
 
         for hedy_source_code, python_source_code in self.map.items():
             response_map[str(hedy_source_code.source_range)] = str(python_source_code.source_range)
 
         return response_map
+
+    def get_error_from_hedy_source_range(self, hedy_range: SourceRange) -> Exception:
+        for hedy_source_code, python_source_code in self.map.items():
+            if hedy_source_code.source_range == hedy_range:
+                return hedy_source_code.error
 
     def print_source_map(self, d, indent=0):
         for key, value in d.items():
@@ -157,14 +253,42 @@ def source_map_rule(source_map: SourceMap):
     def decorator(function):
         def wrapper(*args, **kwargs):
             meta = args[1]
-            generated_python = function(*args, **kwargs)
 
             hedy_code_input = source_map.hedy_code[meta.start_pos:meta.end_pos]
             hedy_code_input = hedy_code_input.replace('#ENDBLOCK', '')  # ENDBLOCK is not part of the Hedy code, remove
+            error = None
+
+            if not source_map.skip_faulty:
+                generated_python = function(*args, **kwargs)
+            else:
+                try:
+                    generated_python = function(*args, **kwargs)
+
+                    # When parsing with skip_faulty enabled it could happen that because sanitization is not done
+                    # a tree is returned instead of a string containing valid Python code by a transformer method.
+                    # If this happens we have to raise an exception, we cannot map a Lark tree
+
+                    if (
+                        # if a Lark tree is returned
+                        isinstance(generated_python, Tree) or
+                        # if a Lark tree is returned as a string, we check with regex
+                        bool(re.match(r".*Tree\(.*Token\(.*\).*\).*", generated_python))
+                    ):
+                        raise Exception('Can not map a Lark tree, only strings')
+
+                except Exception as e:
+                    # If an exception is found, we set the Python code to pass (null operator)
+                    # we also map the error
+                    generated_python = 'pass'
+                    error = e
 
             hedy_code = SourceCode(
-                SourceRange(meta.container_line, meta.start_pos, meta.container_end_line, meta.end_pos),
-                hedy_code_input
+                SourceRange(
+                    meta.container_line, meta.container_column,
+                    meta.container_end_line, meta.container_end_column
+                ),
+                hedy_code_input,
+                error=error
             )
 
             python_code = SourceCode(

@@ -76,6 +76,9 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
             input_string_, level, from_lang, escape_backslashes=False, preprocess_ifs_enabled=False
         )
 
+        hedy.source_map.clear()
+        hedy.source_map.set_skip_faulty(False)
+
         parser = hedy.get_parser(level, from_lang, True)
         keyword_dict_from = keywords_to_dict(from_lang)
         keyword_dict_to = keywords_to_dict(to_lang)

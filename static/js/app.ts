@@ -21,6 +21,7 @@ const MOVE_CURSOR_TO_END = 1;
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+export let theGlobalSourcemap: { [x: string]: any; };
 const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
 
@@ -268,6 +269,7 @@ function initializeMainEditor($editor: JQuery) {
   theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
   theGlobalEditor.addEventListener('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
+    markers.clearIncorrectLines();
   });
   error.setEditor(editor);
   markers = new Markers(theGlobalEditor);
@@ -334,6 +336,23 @@ function initializeMainEditor($editor: JQuery) {
     level: theLevel,
     language: theLanguage,
   });
+
+  // We show the error message when clicking on the skipped code
+  theGlobalEditor.on("click", function(e) {
+    let position = e.getDocumentPosition()
+    position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+
+    let element = document.elementFromPoint(position.pageX, position.pageY)
+    if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+      let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+      let mapError = theGlobalSourcemap[mapIndex];
+
+      $('#okbox').hide ();
+      $('#warningbox').hide();
+      $('#errorbox').hide();
+      error.show(ClientMessages['Transpile_error'], mapError.error);
+    }
+  })
 
   return editor;
 }
@@ -531,10 +550,11 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     try {
       cancelPendingAutomaticSave();
-      const response = await postJsonWithAchievements('/parse', {
+      let data = {
         level: `${level}`,
         code: code,
         lang: lang,
+        skip_faulty: false,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: adventureName,
@@ -542,14 +562,19 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         // Save under an existing id if this field is set
         program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
         save_name: saveNameFromInput(),
-      });
+      };
 
+      let response = await postJsonWithAchievements('/parse', data);
       console.log('Response', response);
 
-      if (response.Warning && $('#editor').is(":visible")) {
-        //storeFixedCode(response, level);
-        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+      if (!data.skip_faulty && response.Error) {
+        data.skip_faulty = true;
+        error.showWarningSpinner();
+        error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        response = await postJsonWithAchievements('/parse', data);
+        error.hide(true);
       }
+
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
         adventure.save_info = response.save_info;
@@ -825,12 +850,27 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
-  // Currently, we don't do anything with the sourcemap
-  if (sourceMap){}
+  if (sourceMap){
+    theGlobalSourcemap = sourceMap;
+    let Range = ace.require("ace/range").Range
+
+    // We loop through the mappings and underline a mapping if it contains an error
+    for (const index in sourceMap) {
+      const map = sourceMap[index];
+      const range = new Range(
+        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+        map.hedy_range.to_line-1, map.hedy_range.to_column-1
+      )
+
+      if (map.error != null){
+        markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+      }
+    }
+  }
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = outputDiv.find('#variable_button');

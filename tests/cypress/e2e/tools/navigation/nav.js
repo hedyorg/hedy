@@ -63,6 +63,11 @@ export function goToHedyLevel2Page()
     return goToPage(Cypress.env('hedy_level2_page'));
 }
 
+export function goToHedyLevel5Page()
+{
+    return goToPage(Cypress.env('hedy_level5_page'));
+}
+
 export function goToAdminUsersPage()
 {
     loginForAdmin();
