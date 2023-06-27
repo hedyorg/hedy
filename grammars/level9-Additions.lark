@@ -1,2 +1,3 @@
-// no additions to the grammar because we now allow nested blocks
-// which is done in the transpiler
+// only remove repeat error commands
+
+command:+= repeat-=repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times
