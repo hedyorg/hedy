@@ -13,6 +13,7 @@ from tqdm import tqdm
 
 DDB_DESERIALIZER = TypeDeserializer()
 
+
 def main():
 
     defs = TableDefinitions()
@@ -46,7 +47,6 @@ def main():
     if 'command' not in args or args.command == 'insert':
         inserter = TableInserter('db.sqlite3', 'download')
         inserter.insert_all(defs)
-
 
 
 class TableInserter:
@@ -97,7 +97,6 @@ class TableInserter:
             cursor.executemany(
                 onetomanytable.insert_statement,
                 table.extract_table_values(table_data['rows']))
-
 
         self.db.commit()
 
@@ -199,9 +198,12 @@ class SqlType:
         self.is_map = type == '+MAP'
 
     def unify(self, rhs):
-        if self.type == rhs.type: return self
-        if self.type == 'NULL': return rhs
-        if rhs.type == 'NULL': return self
+        if self.type == rhs.type:
+            return self
+        if self.type == 'NULL':
+            return rhs
+        if rhs.type == 'NULL':
+            return self
 
         types = [self.type, rhs.type]
         types.sort()
@@ -246,7 +248,7 @@ class TableDownload:
         with tqdm(total=description['Table']['ItemCount']) as progressbar:
             for page in self.ddb.get_paginator('scan').paginate(TableName=table_name):
                 for row in page['Items']:
-                    rows.append({ key: DDB_DESERIALIZER.deserialize(value) for key, value in row.items()})
+                    rows.append({key: DDB_DESERIALIZER.deserialize(value) for key, value in row.items()})
                     progressbar.update(1)
 
         with open(path.join(self.directory, f'{table_name}.json'), 'w', encoding='utf-8') as f:
@@ -255,6 +257,7 @@ class TableDownload:
 
 class DDBTypesEncoder(json.JSONEncoder):
     """Encode some types to JSON that can occur in DynamoDB that are not natively serializable to JSON."""
+
     def default(self, o):
         if isinstance(o, decimal.Decimal):
             if int(o) == o:
