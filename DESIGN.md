@@ -17,6 +17,14 @@ Transpiling
 
 Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
+### Skipping Faulty Code
+When the AST is scanned for invalid rules and actually contains an error, an exception is thrown. 
+We catch the exception and transpile the code again but this time we allow 'invalid' code that we are going to skip.
+If this also fails, we raise the original exception, if it succeeds, 
+the error(s) will be caught by the source-mapper and therefore be mapped. 
+We go through all the errors and transpile again without allowing 'invalid' code, we ultimately get the original exception per mapping.
+This we return to the user along-side the partially functional code.
+
 
 Design Goals
 ------------

@@ -475,6 +475,8 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'skip_faulty' not in body:
+        return "body.skip_faulty must be a boolean", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
@@ -484,6 +486,7 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
+    skip_faulty = bool(body['skip_faulty'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -504,7 +507,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, skip_faulty)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -515,7 +518,6 @@ def parse():
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
-                response['FixedCode'] = ex.fixed_code
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
@@ -525,7 +527,17 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
-            response['source_map'] = transpile_result.source_map
+            source_map_result = transpile_result.source_map.get_result()
+
+            for i, mapping in source_map_result.items():
+                if mapping['error'] is not None:
+                    source_map_result[i]['error'] = translate_error(
+                        source_map_result[i]['error'].error_code,
+                        source_map_result[i]['error'].arguments,
+                        keyword_lang
+                    )
+
+            response['source_map'] = source_map_result
 
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
@@ -694,11 +706,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, skip_faulty):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, skip_faulty)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
