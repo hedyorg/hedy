@@ -13,254 +13,254 @@ adventures:
                     Klaar om te leren programmeren? Ga dan snel naar het eerste avontuur in het volgende tabje!
                 start_code: "{print} hallo wereld!"
             2:
-                    story_text: |
-                        Gefeliciteerd! Je bent door naar level 2. Hopelijk heb je al wat coole codes gemaakt!
-                        In het eerste level heb je misschien gemerkt dat het  `{echo}` commando maar voor één antwoord tegelijk gebruikt kan worden.
-                        Bijvoorbeeld in het restaurantavontuur kun je echoën wat de klanten willen eten, of wat ze willen drinken, maar niet allebei in één zin.
-                    example_code: |
-                        ```
-                        {print} Welcome bij restaurant Hedy
-                        {ask} Wat wil je eten?
-                        {echo} Dus jij wilt graag
-                        {ask} Wat wil je drinken?
-                        {echo} Dus jij wilt graag
-                        ```
-                    story_text_2: |
-                        Als de speler een hamburger en een cola bestelt, kun je niet aan het einde één zin maken waarin de bestelling herhaald wordt. Het zou moeten in twee aparte regels.
-                        Daarnaast plaatst het `{echo}` commando het antwoord altijd aan het einde van de zin. Dus je kunt bijvoorbeeld niet zeggen "Je hamburger komt er aan!".
+                story_text: |
+                    Gefeliciteerd! Je bent door naar level 2. Hopelijk heb je al wat coole codes gemaakt!
+                    In het eerste level heb je misschien gemerkt dat het  `{echo}` commando maar voor één antwoord tegelijk gebruikt kan worden.
+                    Bijvoorbeeld in het restaurantavontuur kun je echoën wat de klanten willen eten, of wat ze willen drinken, maar niet allebei in één zin.
+                example_code: |
+                    ```
+                    {print} Welcome bij restaurant Hedy
+                    {ask} Wat wil je eten?
+                    {echo} Dus jij wilt graag
+                    {ask} Wat wil je drinken?
+                    {echo} Dus jij wilt graag
+                    ```
+                story_text_2: |
+                    Als de speler een hamburger en een cola bestelt, kun je niet aan het einde één zin maken waarin de bestelling herhaald wordt. Het zou moeten in twee aparte regels.
+                    Daarnaast plaatst het `{echo}` commando het antwoord altijd aan het einde van de zin. Dus je kunt bijvoorbeeld niet zeggen "Je hamburger komt er aan!".
 
-                        Dat verandert gelukkig in dit level. In level 2 leer je werken met variabelen. Hiermee kun je meerdere stukjes informatie opslaan èn kun je het overal in de zin plaatsen waar je wil.
-                        Op naar het volgende avontuur!
-                    start_code: "{print} hello world!"
+                    Dat verandert gelukkig in dit level. In level 2 leer je werken met variabelen. Hiermee kun je meerdere stukjes informatie opslaan èn kun je het overal in de zin plaatsen waar je wil.
+                    Op naar het volgende avontuur!
+                start_code: "{print} hello world!"
             3:
-                    story_text: |
-                        In het vorige level heb je geleerd wat een variabele is en hoe je avonturen wat interactiever kunt maken.
-                        Maar... Dat is niet het enige wat je kunt doen met variabelen! Je kunt met variabelen ook lijstjes maken.
-                        En je kunt Hedy een willekeurig item van het lijstje laten kiezen, waardoor je echte spelletjes kunt programmeren!
-                        Ga maar snel naar het volgende avontuur!
-                    start_code: "{print} hello world!"
+                story_text: |
+                    In het vorige level heb je geleerd wat een variabele is en hoe je avonturen wat interactiever kunt maken.
+                    Maar... Dat is niet het enige wat je kunt doen met variabelen! Je kunt met variabelen ook lijstjes maken.
+                    En je kunt Hedy een willekeurig item van het lijstje laten kiezen, waardoor je echte spelletjes kunt programmeren!
+                    Ga maar snel naar het volgende avontuur!
+                start_code: "{print} hello world!"
             4:
-                    start_code: |
-                        naam {is} Sophie
-                        {print} Mijn naam is naam
-                    story_text: |
-                        In de vorige levels heb je geoefend met variabelen, maar misschien ben je dit probleem tegengekomen.
-                        Als je deze code wil programmeren:
+                start_code: |
+                    naam {is} Sophie
+                    {print} Mijn naam is naam
+                story_text: |
+                    In de vorige levels heb je geoefend met variabelen, maar misschien ben je dit probleem tegengekomen.
+                    Als je deze code wil programmeren:
 
-                        Je wilde natuurlijk printen:
-                        `Mijn naam is Sophie`
+                    Je wilde natuurlijk printen:
+                    `Mijn naam is Sophie`
 
-                        maar Hedy print:
-                        `Mijn Sophie is Sophie`.
+                    maar Hedy print:
+                    `Mijn Sophie is Sophie`.
 
-                        In dit level leer je dit probleem aan te pakken door middel van aanhalingstekens.
+                    In dit level leer je dit probleem aan te pakken door middel van aanhalingstekens.
 
-                    example_code: |
-                        ```
-                        naam {is} Sophie
-                        {print} Mijn naam is naam
-                        ```
+                example_code: |
+                    ```
+                    naam {is} Sophie
+                    {print} Mijn naam is naam
+                    ```
             5:
-                    story_text: |
-                        In de voorgaande levels heb je geleerd om met `{at} {random}`  te werken. Hierdoor kun je spelletjes maken waarbij er steeds een andere uitkomst is.
-                        Maar echt interactief is het niet... De speler heeft namelijk geen invloed op wat er gebeurt in het spel.
+                story_text: |
+                    In de voorgaande levels heb je geleerd om met `{at} {random}`  te werken. Hierdoor kun je spelletjes maken waarbij er steeds een andere uitkomst is.
+                    Maar echt interactief is het niet... De speler heeft namelijk geen invloed op wat er gebeurt in het spel.
 
-                        In dit level leer je het `{if}` commando, waarmee je verschillende reacties kunt programmeren. Zo leer je bijvoorbeeld een wachtwoord instellen.
-                        Ga maar snel naar het nieuwe avontuur!
-                    example_code: |
-                        ```
-                        wachtwoord {is} {ask} 'Wat is het juiste wachtwoord?'
-                        ```
-                    start_code: |-
-                        naam {is} {ask} 'Hoe heet jij?'
-                        {if} naam {is} Hedy {print} 'cool!' {else} {print} 'meh'
+                    In dit level leer je het `{if}` commando, waarmee je verschillende reacties kunt programmeren. Zo leer je bijvoorbeeld een wachtwoord instellen.
+                    Ga maar snel naar het nieuwe avontuur!
+                example_code: |
+                    ```
+                    wachtwoord {is} {ask} 'Wat is het juiste wachtwoord?'
+                    ```
+                start_code: |-
+                    naam {is} {ask} 'Hoe heet jij?'
+                    {if} naam {is} Hedy {print} 'cool!' {else} {print} 'meh'
             6:
-                    story_text: |
-                        In het vorige level heb je geoefend met `{ask}` en `{if}`. Zo heb je in het restaurant bijvoorbeeld aan je klanten gevraagd wat ze wilden eten.
-                        Wat je echter nog niet kunt doen, is de prijs berekenen voor je klanten.
+                story_text: |
+                    In het vorige level heb je geoefend met `{ask}` en `{if}`. Zo heb je in het restaurant bijvoorbeeld aan je klanten gevraagd wat ze wilden eten.
+                    Wat je echter nog niet kunt doen, is de prijs berekenen voor je klanten.
 
-                        In dit level kun je optellen, aftrekken, vermenigvuldigen en delen in jouw programma's. Hierdoor kun je een bonnetje maken voor je restaurantgasten, of een geheime kortingscode bedenken voor je vrienden en familie.
-                        Je leert dit level ook een rekenspelletje maken, waarmee je broertje of zusje de tafelsommen kan oefenen.
-                        Neem maar eens een kijkje!
-                    example_code: |
-                        ```
-                        eten_prijs {is} 0
-                        drinken_prijs {is} 0
-                        totaal_prijs {is} 0
-                        {print} 'Welkom bij McHedy'
-                        bestelling {is} {ask} 'Wat wil je eten?'
-                        {if} bestelling {is} hamburger eten_prijs {is} 5
-                        {if} bestelling {is} friet eten_prijs {is} 2
-                        drinken {is} {ask} 'Wat wilt u daarbij drinken?'
-                        {if} drinken {is} water drinken_prijs {is} 0
-                        else drinken_prijs {is} 3
-                        totaal_price {is} eten_prijs + drinken_prijs
-                        {print} 'Dat wordt dan ' totaal_prijs ' euro, alstublieft'
-                        ```
-                    start_code: "# place your code here"
+                    In dit level kun je optellen, aftrekken, vermenigvuldigen en delen in jouw programma's. Hierdoor kun je een bonnetje maken voor je restaurantgasten, of een geheime kortingscode bedenken voor je vrienden en familie.
+                    Je leert dit level ook een rekenspelletje maken, waarmee je broertje of zusje de tafelsommen kan oefenen.
+                    Neem maar eens een kijkje!
+                example_code: |
+                    ```
+                    eten_prijs {is} 0
+                    drinken_prijs {is} 0
+                    totaal_prijs {is} 0
+                    {print} 'Welkom bij McHedy'
+                    bestelling {is} {ask} 'Wat wil je eten?'
+                    {if} bestelling {is} hamburger eten_prijs {is} 5
+                    {if} bestelling {is} friet eten_prijs {is} 2
+                    drinken {is} {ask} 'Wat wilt u daarbij drinken?'
+                    {if} drinken {is} water drinken_prijs {is} 0
+                    else drinken_prijs {is} 3
+                    totaal_price {is} eten_prijs + drinken_prijs
+                    {print} 'Dat wordt dan ' totaal_prijs ' euro, alstublieft'
+                    ```
+                start_code: "# place your code here"
             7:
-                    story_text: |
-                        Goed gedaan! Je bent bij het volgende level, wat betekent dat je goed geoefend hebt met `{if}` en `{else}`. Waarschijnlijk heb je al gemerkt dat je codes steeds langer worden.
-                        Hier zie je de code van het verjaardagsliedje 'Happy Birthday'.
-                        Dat is een hoop code voor steeds hetzelfde zinnetje.... Gelukkig leer je in het volgende avontuur een oplossing!
-                    example_code: |
-                        ```
-                        {print} 'happy birthday to you'
-                        {print} 'happy birthday to you'
-                        {print} 'happy birthday dear Hedy'
-                        {print} 'happy birthday to you'
-                        ```
-                    start_code: |
-                        {print} 'happy birthday to you'
-                        {print} 'happy birthday to you'
-                        {print} 'happy birthday dear Hedy'
-                        {print} 'happy birthday to you'
+                story_text: |
+                    Goed gedaan! Je bent bij het volgende level, wat betekent dat je goed geoefend hebt met `{if}` en `{else}`. Waarschijnlijk heb je al gemerkt dat je codes steeds langer worden.
+                    Hier zie je de code van het verjaardagsliedje 'Happy Birthday'.
+                    Dat is een hoop code voor steeds hetzelfde zinnetje.... Gelukkig leer je in het volgende avontuur een oplossing!
+                example_code: |
+                    ```
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+                    ```
+                start_code: |
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
             8:
-                    story_text: |
-                        Je hebt nu één regel code leren herhalen. Dat is handig, maar niet altijd genoeg. Soms wil je een groepje van meerdere codes een paar keer herhalen.
-                        In dit level leer je hoe je dat doet!
-                    example_code: |
-                        ```
-                        {repeat} 5 {times} {print} 'In het volgende avontuur leer je meerdere regels herhalen!'
-                        ```
-                    start_code: "{print} 'Lets go to the next tab!'"
+                story_text: |
+                    Je hebt nu één regel code leren herhalen. Dat is handig, maar niet altijd genoeg. Soms wil je een groepje van meerdere codes een paar keer herhalen.
+                    In dit level leer je hoe je dat doet!
+                example_code: |
+                    ```
+                    {repeat} 5 {times} {print} 'In het volgende avontuur leer je meerdere regels herhalen!'
+                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             9:
-                    story_text: |
-                        Fantastisch! Je bent alweer bij een nieuw level! In de vorige levels leerde je meerdere regels code in een blokje zetten met een {if} of {repeat} commando. Maar je kon ze nog niet allebei tegelijk gebruiken...
-                        Goed nieuws! In dit level mag je een {if} in een {if} of in een {repeat} zetten. Kijk maar!
-                    example_code: |
-                        ```
-                        antwoord = {ask} 'Ben je klaar om iets nieuws te leren?'
-                        {if} antwoord {is} ja
-                            {print} 'Super! Je kunt leren hoe je een herhaalcommando in een alscommando kunt zetten'
-                            {print} 'Joepie!'
-                            {print} 'Joepie!'
-                            {print} 'Joepie!'
-                        {else}
-                            {print} 'Nee? Oefen dan nog even door in het vorige level'
-                    start_code: "{print} Lets go to the next tab!"
+                story_text: |
+                    Fantastisch! Je bent alweer bij een nieuw level! In de vorige levels leerde je meerdere regels code in een blokje zetten met een {if} of {repeat} commando. Maar je kon ze nog niet allebei tegelijk gebruiken...
+                    Goed nieuws! In dit level mag je een {if} in een {if} of in een {repeat} zetten. Kijk maar!
+                example_code: |
+                    ```
+                    antwoord = {ask} 'Ben je klaar om iets nieuws te leren?'
+                    {if} antwoord {is} ja
+                        {print} 'Super! Je kunt leren hoe je een herhaalcommando in een alscommando kunt zetten'
+                        {print} 'Joepie!'
+                        {print} 'Joepie!'
+                        {print} 'Joepie!'
+                    {else}
+                        {print} 'Nee? Oefen dan nog even door in het vorige level'
+                start_code: "{print} Lets go to the next tab!"
             10:
-                    story_text: |
-                        Wat ben jij goed bezig! In het vorige level ben je misschien tegen een klein probleempje aangelopen. Je hebt geleerd hoe je regels kunt herhalen, maar wat als je ze elke keer net ietsje ander wil.
-                        Bijvoorbeeld in het Engelse liedje 'if you're happy and you know it'. Dat zou er dan ongeveer zo uitzien:
+                story_text: |
+                    Wat ben jij goed bezig! In het vorige level ben je misschien tegen een klein probleempje aangelopen. Je hebt geleerd hoe je regels kunt herhalen, maar wat als je ze elke keer net ietsje ander wil.
+                    Bijvoorbeeld in het Engelse liedje 'if you're happy and you know it'. Dat zou er dan ongeveer zo uitzien:
 
-                        Als je in het volgende couplet niet 'clap your hands' maar 'stomp your feet' wil gebruiken, dan moet je de code volledig aanpassen.
-                        Superonhandig! In dit level leer je het `{for}` commando, dat dat probleem voor je oplost!
-                        Ga maar snel door!
-                    example_code: |
-                        ```
-                        {repeat} 2 {times}
-                            {print} 'if youre happy and you know it clap your hands'
-                        {print} 'if youre happy and you know it and you really want to show it'
+                    Als je in het volgende couplet niet 'clap your hands' maar 'stomp your feet' wil gebruiken, dan moet je de code volledig aanpassen.
+                    Superonhandig! In dit level leer je het `{for}` commando, dat dat probleem voor je oplost!
+                    Ga maar snel door!
+                example_code: |
+                    ```
+                    {repeat} 2 {times}
                         {print} 'if youre happy and you know it clap your hands'
-                        ```
-                    start_code: "{print} 'Lets go to the next tab!'"
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
+                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             11:
-                    story_text: |
-                        Je bent al ver gekomen! Goedzo! In de hogere levels gaat de Hedy programmeertaal steeds meer op Python lijken.
-                        In Python bestaat het `{repeat}` commando niet, maar er is wel een commando dat werkt zoals {repeat}. Ben je benieuwd hoe je`{repeat}` zegt in Pythontaal? Ga dan naar het volgende avontuur!
-                    start_code: "{print} 'Lets go to the next tab!'"
+                story_text: |
+                    Je bent al ver gekomen! Goedzo! In de hogere levels gaat de Hedy programmeertaal steeds meer op Python lijken.
+                    In Python bestaat het `{repeat}` commando niet, maar er is wel een commando dat werkt zoals {repeat}. Ben je benieuwd hoe je`{repeat}` zegt in Pythontaal? Ga dan naar het volgende avontuur!
+                start_code: "{print} 'Lets go to the next tab!'"
             12:
-                    story_text: |
-                        Misschien heb je in een van je programma's al eens geprobeerd om kommagetallen te gebruiken, bijvoorbeeld bij je restaurant. Als je dat gedaan hebt, dan ben je er achtergekomen dat Hedy die kommagetallen steeds afrondde.
-                        Vanaf nu mag je ook kommagetallen gebruiken! Wil je weten hoe? Kijk dan in het volgende avontuur!
-                    example_code: |
-                        ```
-                        burger = 5
-                        drinken = 2
-                        totaal = burger + drinken
-                        print 'Dat kost ' totaal ' euro alstublieft'
-                        ```
-                    start_code: "{print} 'Lets go to the next tab!'"
+                story_text: |
+                    Misschien heb je in een van je programma's al eens geprobeerd om kommagetallen te gebruiken, bijvoorbeeld bij je restaurant. Als je dat gedaan hebt, dan ben je er achtergekomen dat Hedy die kommagetallen steeds afrondde.
+                    Vanaf nu mag je ook kommagetallen gebruiken! Wil je weten hoe? Kijk dan in het volgende avontuur!
+                example_code: |
+                    ```
+                    burger = 5
+                    drinken = 2
+                    totaal = burger + drinken
+                    print 'Dat kost ' totaal ' euro alstublieft'
+                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             13:
-                    story_text: |
-                        In vorige levels heb je geleerd hoe je twee `{if}`commando's in elkaar kan stoppen. Dit werk prima, maar het kan wel resulteren in lange onhandige codes zoals deze:
-                        In dit systeem moet je zowel de goede gebruikersnaam als het goede wachtwoord opgeven.
-                        In dit level leer je het `{and}` commando, waarmee je codes zoals deze een stuk korter en makkelijker kunt maken!
-                        Kijk maar!
-                    example_code: |
-                        ```
-                        gebruikersnaam = {ask} 'Wat is je gebruikersnaam?'
-                        wachtwoord = {ask} 'Wat is je wachtwoord?'
-                        {if} gebruikersnaam {is} 'Hedy'
-                            {if} wachtwoord {is} 'geheim'
-                                {print} 'Welkom Hedy!'
-                            {else}
-                                {print} 'Toegang geweigerd!'
+                story_text: |
+                    In vorige levels heb je geleerd hoe je twee `{if}`commando's in elkaar kan stoppen. Dit werk prima, maar het kan wel resulteren in lange onhandige codes zoals deze:
+                    In dit systeem moet je zowel de goede gebruikersnaam als het goede wachtwoord opgeven.
+                    In dit level leer je het `{and}` commando, waarmee je codes zoals deze een stuk korter en makkelijker kunt maken!
+                    Kijk maar!
+                example_code: |
+                    ```
+                    gebruikersnaam = {ask} 'Wat is je gebruikersnaam?'
+                    wachtwoord = {ask} 'Wat is je wachtwoord?'
+                    {if} gebruikersnaam {is} 'Hedy'
+                        {if} wachtwoord {is} 'geheim'
+                            {print} 'Welkom Hedy!'
                         {else}
                             {print} 'Toegang geweigerd!'
-                        ```
-                    start_code: "{print} 'Lets go to the next level!'"
+                    {else}
+                        {print} 'Toegang geweigerd!'
+                    ```
+                start_code: "{print} 'Lets go to the next level!'"
             14:
-                    story_text: |
-                        Met het programma hiernaast kun je berekenen of je je schoolvak wel of niet hebt gehaald (dus, of je een 6 of hoger hebt gehaald).
-                        Je kunt zien dat deze code extreem onhandig is, door de veel te lange regel 5.
-                        Alle cijfers van 1 tot 5 moesten apart worden ingevoerd. Gelukkig leer je in het volgende avontuur hoe je dit kunt oplossen!
-                    example_code: |
-                        ```
-                        eerste_cijfer = {ask} 'Wat heb je gehaald op je eerste toets?'
-                        tweede_cijfer = {ask} 'Wat heb je gehaald op je tweede toets?'
-                        samen = eerste_cijfer + tweede_cijfer
-                        gemiddelde_cijfer = samen / 2
-                        {if} gemiddelde_cijfer = 1 {or} gemiddelde_cijfer = 2 {or} gemiddelde_cijfer = 3 {or} gemiddelde_cijfer = 4 {or} gemiddelde_cijfer = 5
-                            {print} 'Oh oh! Je gaat dit vak niet halen...'
-                        {else}
-                            {print} 'Hoera! Je haalt het vak!'
-                        ```
-                    start_code: |
-                        antwoord = {ask} 'Wil je nog meer leren?'
-                        {if} antwoord == 'ja'
-                        {print} 'Ga naar het volgende avontuur!'
-                        {if} antwoord != 'ja'
-                        {print} 'Wat jammer!'
+                story_text: |
+                    Met het programma hiernaast kun je berekenen of je je schoolvak wel of niet hebt gehaald (dus, of je een 6 of hoger hebt gehaald).
+                    Je kunt zien dat deze code extreem onhandig is, door de veel te lange regel 5.
+                    Alle cijfers van 1 tot 5 moesten apart worden ingevoerd. Gelukkig leer je in het volgende avontuur hoe je dit kunt oplossen!
+                example_code: |
+                    ```
+                    eerste_cijfer = {ask} 'Wat heb je gehaald op je eerste toets?'
+                    tweede_cijfer = {ask} 'Wat heb je gehaald op je tweede toets?'
+                    samen = eerste_cijfer + tweede_cijfer
+                    gemiddelde_cijfer = samen / 2
+                    {if} gemiddelde_cijfer = 1 {or} gemiddelde_cijfer = 2 {or} gemiddelde_cijfer = 3 {or} gemiddelde_cijfer = 4 {or} gemiddelde_cijfer = 5
+                        {print} 'Oh oh! Je gaat dit vak niet halen...'
+                    {else}
+                        {print} 'Hoera! Je haalt het vak!'
+                    ```
+                start_code: |
+                    antwoord = {ask} 'Wil je nog meer leren?'
+                    {if} antwoord == 'ja'
+                    {print} 'Ga naar het volgende avontuur!'
+                    {if} antwoord != 'ja'
+                    {print} 'Wat jammer!'
             15:
-                    story_text: |
-                        In het spelletje hiernaast kan de speler erg lang blijven spelen...
-                        Maar de code is onhandig en veel te lang. Daarbij kan de speler geen 101 potjes spelen als hij/zij dat zou willen!
-                        Kun je dan nooit oneindig spelen?
-                        In dit level leer je een code waarmee dat wel kan! En nog een stuk gemakkelijker ook!
-                    example_code: |
-                        ```
-                        spel {is} 'aan'
-                        {for} i {in} {range} 1 {to} 100
-                            {if} spel {is} 'aan'
-                                antwoord = {ask} 'Wil je doorspelen?'
-                                {if} antwoord {is} 'nee'
-                                    spel {is} 'over'
-                                {if} antwoord {is} 'ja'
-                                    {print} 'Ok dan ga ik door'
-                        ```
-                    start_code: "{print} 'Lets go to the next level!'"
+                story_text: |
+                    In het spelletje hiernaast kan de speler erg lang blijven spelen...
+                    Maar de code is onhandig en veel te lang. Daarbij kan de speler geen 101 potjes spelen als hij/zij dat zou willen!
+                    Kun je dan nooit oneindig spelen?
+                    In dit level leer je een code waarmee dat wel kan! En nog een stuk gemakkelijker ook!
+                example_code: |
+                    ```
+                    spel {is} 'aan'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} spel {is} 'aan'
+                            antwoord = {ask} 'Wil je doorspelen?'
+                            {if} antwoord {is} 'nee'
+                                spel {is} 'over'
+                            {if} antwoord {is} 'ja'
+                                {print} 'Ok dan ga ik door'
+                    ```
+                start_code: "{print} 'Lets go to the next level!'"
             16:
-                    story_text: |
-                        In dit level komen we weer een stukje dichter bij Pythoncode. Je gaat leren hoe je twee lijstjes met elkaar kunt matchen.
-                        Zo kun je bijvoorbeeld een lijstje met dieren matchen aan het bijpassende geluid.
-                        Want als je dat tot nu toe probeerde, kom je uit op de codes hieronder. En die slaan duideijk nergens op!
-                    example_code: |
-                        ```
-                        dieren = 'kip', 'paard', 'koe'
-                        geluiden = 'tok', 'pfffff', 'boe'
-                        {for} dier {in} dieren
-                            {print} 'een ' dier ' zegt ' geluiden {at} {random}
-                        ```
-                        Dit kun je ook proberen, maar....
-                        ```
-                        dieren = 'kip', 'paard', 'koe'
-                        sounds = 'tok', 'pffffff', 'boe'
-                        {for} dier {in} dieren
-                            {for} geluid {in} geluiden
-                                {print} 'Een ' dier ' zegt ' geluid
-                        ```
-                    start_code: "{print} 'Lets go to the next tab!'"
+                story_text: |
+                    In dit level komen we weer een stukje dichter bij Pythoncode. Je gaat leren hoe je twee lijstjes met elkaar kunt matchen.
+                    Zo kun je bijvoorbeeld een lijstje met dieren matchen aan het bijpassende geluid.
+                    Want als je dat tot nu toe probeerde, kom je uit op de codes hieronder. En die slaan duideijk nergens op!
+                example_code: |
+                    ```
+                    dieren = 'kip', 'paard', 'koe'
+                    geluiden = 'tok', 'pfffff', 'boe'
+                    {for} dier {in} dieren
+                        {print} 'een ' dier ' zegt ' geluiden {at} {random}
+                    ```
+                    Dit kun je ook proberen, maar....
+                    ```
+                    dieren = 'kip', 'paard', 'koe'
+                    sounds = 'tok', 'pffffff', 'boe'
+                    {for} dier {in} dieren
+                        {for} geluid {in} geluiden
+                            {print} 'Een ' dier ' zegt ' geluid
+                    ```
+                start_code: "{print} 'Lets go to the next tab!'"
             17:
-                    story_text: |
-                        Je bent bijna aan het einde van Hedy, goed bezig! In dit level leer je `{print}` op de Pythonmanier!
-                    start_code: "{print} 'Lets go to the next level!'"
+                story_text: |
+                    Je bent bijna aan het einde van Hedy, goed bezig! In dit level leer je `{print}` op de Pythonmanier!
+                start_code: "{print} 'Lets go to the next level!'"
             18:
-                    story_text: |
-                        Hoera! Je hebt het einde van van Hedy bereikt! De codes die je hier in het laaste level maakt kun je kopiëren naar andere Python omgevingen, zoals replit or PyCharm. Daar kun je verder Python leren!
-                        Let wel op! Python kan alleen Engelse commando's lezen. Dus heb je de commando's geprogrammeerd in een andere taal, zet ze dan nu om naar het Engels.
-                    start_code: "{print} ('Great job!!!')"
+                story_text: |
+                    Hoera! Je hebt het einde van van Hedy bereikt! De codes die je hier in het laaste level maakt kun je kopiëren naar andere Python omgevingen, zoals replit or PyCharm. Daar kun je verder Python leren!
+                    Let wel op! Python kan alleen Engelse commando's lezen. Dus heb je de commando's geprogrammeerd in een andere taal, zet ze dan nu om naar het Engels.
+                start_code: "{print} ('Great job!!!')"
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
@@ -483,13 +483,13 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
-                story_text: |2-
+                story_text: |-
 
-                    Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
+                        Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
 
-                    ### Opdracht
-                    Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
-                    Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
+                        ### Opdracht
+                        Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
+                        Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
@@ -1355,11 +1355,11 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             3:
-                story_text: |2
+                story_text: |
 
-                    In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen.
-                    Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
-                    Zo kun je de computer laten kiezen uit steen, papier en schaar.
+                        In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen.
+                        Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
+                        Zo kun je de computer laten kiezen uit steen, papier en schaar.
                 example_code: |
                     ```
                     keuzes {is} steen, papier, schaar
@@ -1619,15 +1619,15 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             13:
-                story_text: |2
+                story_text: |
 
-                    ### Opdracht 1
-                    Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
+                        ### Opdracht 1
+                        Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
-                    ### Opdracht 2 (extra)
-                    Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
-                    Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
-                    Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
+                        ### Opdracht 2 (extra)
+                        Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
+                        Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
+                        Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
 
                 example_code: |
                     ```
@@ -1708,18 +1708,18 @@ adventures:
                     In het vorige level heb je een begin gemaakt aan de waarzegger, maar echt voorspellingen waren er nog niet.
                     In dit level kun je een variabele gebruiken en het `{at} {random}` commando om Hedy antwoorden te laten kiezen op je vraag.
                     Kijk maar naar dit voorbeeld:
-                example_code: |2
+                example_code: |
 
-                    In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
-                    ```
-                    {print} Hoi Ik ben Hedy de Waarzegger
-                    vraag {is} {ask} Wat wil je weten?
-                    {print} vraag
-                    antwoorden {is} ja, nee, misschien
-                    {print} Mijn glazen bol zegt...
-                    {sleep} 2
-                    {print} antwoorden {at} {random}
-                    ```
+                        In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
+                        ```
+                        {print} Hoi Ik ben Hedy de Waarzegger
+                        vraag {is} {ask} Wat wil je weten?
+                        {print} vraag
+                        antwoorden {is} ja, nee, misschien
+                        {print} Mijn glazen bol zegt...
+                        {sleep} 2
+                        {print} antwoorden {at} {random}
+                        ```
                 story_text_2: |
                     ### Opdracht
                     Er zijn nu maar 3 antwoordopties waar Hedy uit kan kiezen, kun jij er meer toevoegen? Bijvoorbeeld: zeker weten, geen idee of probeer het nog eens!
@@ -1971,23 +1971,23 @@ adventures:
             6:
                 story_text: |
                     In dit level kun je in je restaurant prijzen toevoegen en berekenen!
-                example_code: |2
+                example_code: |
 
-                    Je kunt een simpel restaurant maken:
-                      ```
-                      {print} 'Welkom bij McHedy'
-                      {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                      {print} 'U krijgt frietjes en drinken bij uw bestelling. '
-                      eten = {ask} 'Wat wilt u bestellen?'
-                      prijs = 0
-                      {if} eten {is} hamburger prijs = 8
-                      {if} eten {is} kroket prijs = 6
-                      {if} eten {is} kaassoufle prijs = 5
-                      {print} 'U heeft een ' eten ' besteld'
-                      {print} 'Dat is dan ' prijs ' euro, alstublieft!'
-                      {print} 'Bedankt en eet smakelijk!'
-                      ```
-                      In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
+                        Je kunt een simpel restaurant maken:
+                          ```
+                          {print} 'Welkom bij McHedy'
+                          {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
+                          {print} 'U krijgt frietjes en drinken bij uw bestelling. '
+                          eten = {ask} 'Wat wilt u bestellen?'
+                          prijs = 0
+                          {if} eten {is} hamburger prijs = 8
+                          {if} eten {is} kroket prijs = 6
+                          {if} eten {is} kaassoufle prijs = 5
+                          {print} 'U heeft een ' eten ' besteld'
+                          {print} 'Dat is dan ' prijs ' euro, alstublieft!'
+                          {print} 'Bedankt en eet smakelijk!'
+                          ```
+                          In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
                 start_code: "{print} 'Welkom'"
             7:
                 story_text: |
@@ -2829,16 +2829,18 @@ adventures:
                     {print} '5 keer 5 is ' 5 * 5
                     {print} '5 gedeeld door 5 is ' 5 / 5
                 story_text: |
-                        In level 6 is er iets nieuws: je kunt nu ook rekenen. De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
-                        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-                        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je dat het makkelijkst.
+                    In level 6 is er iets nieuws: je kunt nu ook rekenen. De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
+                    De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+                    Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je dat het makkelijkst.
                 example_code: |
-                        ```
-                        {print} '5 plus 5 is ' 5 + 5
-                        {print} '5 min 5 is ' 5 - 5
-                        {print} '5 keer 5 is ' 5 * 5
-                        {print} '5 gedeeld door 5 is ' 5 / 5
-                        ```
+                    ```
+                    {print} '5 plus 5 is ' 5 + 5
+                    {print} '5 min 5 is ' 5 - 5
+                    {print} '5 keer 5 is ' 5 * 5
+                    {print} '5 gedeeld door 5 is ' 5 / 5
+                    ```
+                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             12:
                 story_text: |-
                     **Rekenen met woorden**
@@ -2875,7 +2877,7 @@ adventures:
             2:
                 story_text: "Nu je `{ask} hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!\n\n### Opdracht\nMaak de steen, papier, schaarcode interactief door met `{ask}` commando.\n"
                 example_code: "```\nckeuze is _\n{print} Ik kies keuze\n```\n"
-                start_code: ""
+                start_code: "# place your code here"
     is_command:
         name: is
         description: introducing is command
@@ -2887,17 +2889,6 @@ adventures:
                 story_text_2: "### Opdracht\nTijd om je eigen variabelen te maken!\nIn het voorbeeld hebben we de variabele 'lievelingsdier' gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.\nMaak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.\n"
                 example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van favorite_animals\n```\n"
                 start_code: "naam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud."
-            6:
-                story_text: |
-                    We kunnen vanaf dit level ook waardes op een andere manier opslaan in een variabele, namelijk met `=` in plaats van `{is}`. Je gebruikt = om een woord of een getal in een variabele op te slaan, zoals het voorbeeld hier:
-                example_code: |
-                    ```
-                    naam = Hedy
-                    antwoord = 20 + 4
-                    ```
-                start_code: |
-                    naam = Hedy
-                    antwoord = 20 + 4
             14:
                 start_code: |-
                     leeftijd = {ask} 'Hoe oud ben jij?'
@@ -3045,31 +3036,6 @@ adventures:
                 start_code: "naam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n"
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
-            9:
-                start_code: |
-                    doorgaan = {ask} 'Wil je doorgaan?'
-                    {if} doorgaan {is} ja
-                        zeker = {ask} 'Weet je het zeker?'
-                        {if} zeker {is} ja
-                            {print} 'We gaan door'
-                        {else}
-                            {print} 'Je weet het niet zeker'
-                    {else}
-                        {print} 'Je wil niet doorgaan'
-                example_code: |
-                    ```
-                    doorgaan = {ask} 'Wil je doorgaan?'
-                    {if} doorgaan {is} ja
-                        zeker = {ask} 'Weet je het zeker?'
-                        {if} zeker {is} ja
-                            {print} 'We gaan door'
-                        {else}
-                            {print} 'Je weet het niet zeker'
-                    {else}
-                        {print} 'Je wil niet doorgaan'
-                    ```
-                story_text: |
-                    In dit level kun je een {if} commando in een ander {if} commando stoppen. 
     in_command:
         name: in
         description: Introducing the in command
