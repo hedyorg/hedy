@@ -75,6 +75,31 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
+    def test_missing_body(self):
+        code = "repeat 5 times"
+
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.MissingInnerCommandException,
+                                max_level=8)
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_print_without_opening_quote_gives_error(self, q):
+        code = f"print hedy 123{q}"
+        self.multi_level_tester(
+            code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_print_without_closing_quote_gives_error(self, q):
+        code = f"print {q}hedy 123"
+        self.multi_level_tester(
+            code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
     def test_repeat_with_string_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 'test'
