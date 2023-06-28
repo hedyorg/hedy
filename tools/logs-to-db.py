@@ -68,7 +68,7 @@ for filename in files:
 
             try:
                 cursor.execute(f'insert into Logs values({value_string})', keys)
-            except UnicodeEncodeError as E:
+            except UnicodeEncodeError:
                 print(f'{json_dict["session"]} data not inserted!!')
 
 
