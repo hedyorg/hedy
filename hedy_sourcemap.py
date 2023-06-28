@@ -111,23 +111,13 @@ class SourceMap:
     language = 'en'
     hedy_code = ''
     python_code = ''
+    grammar_rules = []
 
     def __init__(self):
-        script_dir = path.abspath(path.dirname(__file__))
-
-        with open(path.join(script_dir, "grammars", "level1.lark"), "r", encoding="utf-8") as file:
-            grammar_text = file.read()
-
-        for i in range(2, 19):
-            with open(path.join(script_dir, "grammars", f'level{i}-Additions.lark'), "r", encoding="utf-8") as file:
-                grammar_text += '\n' + file.read()
-
-        self.grammar_rules = re.findall(r"(\w+):", grammar_text)
-        self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
+        self.get_grammar_rules()
 
     def set_level(self, level):
         self.level = level
-        self.get_grammar_rules(level)
 
     def set_language(self, language):
         self.language = language
@@ -170,15 +160,19 @@ class SourceMap:
 
             python_code_mapped.append(python_source_code.code)
 
-    def get_grammar_rules(self, level):
+    def get_grammar_rules(self):
         script_dir = path.abspath(path.dirname(__file__))
-        file_path = path.join(script_dir, "grammars-Total", f'level{level}.en-Total.lark')
 
-        with open(file_path, "r", encoding="utf-8") as file:
+        with open(path.join(script_dir, "grammars", "level1.lark"), "r", encoding="utf-8") as file:
             grammar_text = file.read()
+
+        for i in range(2, 19):
+            with open(path.join(script_dir, "grammars", f'level{i}-Additions.lark'), "r", encoding="utf-8") as file:
+                grammar_text += '\n' + file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
         self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
+        self.grammar_rules = list(set(self.grammar_rules))  # remove duplicates
 
     def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
         self.map[hedy_code] = python_code
