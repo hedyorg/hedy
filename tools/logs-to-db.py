@@ -28,14 +28,14 @@ defaults = {'lang': 'en', 'server_error': None, 'exception': None,
 
 
 def add_defaults(x):
-    l = []
+    keys = []
     for c in columns:
         try:
-            l.append(json_dict[c])
-        except:  # no value? grap the default for this column
-            l.append(defaults[c])
+            keys.append(json_dict[c])
+        except KeyError:  # no value? grap the default for this column
+            keys.append(defaults[c])
 
-    return l
+    return keys
 
 
 directory = 'aws-logs'
@@ -64,12 +64,11 @@ for filename in files:
             except json.decoder.JSONDecodeError:
                 pass  # skip for now!
 
-            y = add_defaults(json_dict)
+            keys = tuple(add_defaults(json_dict))
 
-            keys = tuple(y)
             try:
                 cursor.execute(f'insert into Logs values({value_string})', keys)
-            except:
+            except UnicodeEncodeError as E:
                 print(f'{json_dict["session"]} data not inserted!!')
 
 
