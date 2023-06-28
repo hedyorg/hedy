@@ -51,8 +51,6 @@ def main():
 
 class TableInserter:
     def __init__(self, dbfile, jsondirectory):
-        if path.exists(dbfile):
-            os.unlink(dbfile)
         self.db = sqlite3.connect(dbfile)
         self.jsondirectory = jsondirectory
 
@@ -67,16 +65,17 @@ class TableInserter:
         if not table_data['rows']:
             return
 
-        sql_table_name = slugify(table_name)
+        table_data['rows'] = restore_types(table_data['rows'])
+
         columns = determine_columns(table_data['rows'])
 
-        scalar_columns = [col for col in columns if not col.is_collection]
-        keycolumns = [find_col(scalar_columns, k) for k in table_data['keys']]
+        scalar_columns = [col for col in columns if not col.type.is_collection]
+        keycolumns = [find_col(scalar_columns, k) for k in table_data['key']]
 
-        table = SqlTableDef(table_name, columns, keycolumns)
+        table = SqlTableDef(table_name, scalar_columns, keycolumns)
 
-        print(table.create_statement)
         cursor = self.db.cursor()
+        cursor.execute(table.drop_statement)
         cursor.execute(table.create_statement)
 
         cursor.executemany(
@@ -84,20 +83,31 @@ class TableInserter:
             table.extract_table_values(table_data['rows']))
 
         # Lists
-        for listcol in [col for col in columns if col.is_list]:
-            typ = SqlType.most_generic(value for row in table_data['rows'] for value in row[name])
+        for listcol in (col for col in columns if col.type.is_list or col.type.is_set):
+            typ = SqlType.most_generic(value for row in table_data['rows'] for value in row.get(listcol.original_name, []))
             onetomanycol = SqlColumn(listcol.original_name, typ)
-            cols = table.key_columns + [onetomanycol]
+
             onetomanytable = SqlTableDef(
                 f'{table.table_name}_{onetomanycol.name}',
-                cols,
-                cols)
+                table.key_columns + [onetomanycol],
+                table.key_columns + [onetomanycol] if listcol.type.is_set else [])
             print(onetomanytable.table_name)
+            cursor.execute(onetomanytable.drop_statement)
             cursor.execute(onetomanytable.create_statement)
-            cursor.executemany(
-                onetomanytable.insert_statement,
-                table.extract_table_values(table_data['rows']))
 
+            one_to_many_data = []
+            for row in table_data['rows']:
+                for listvalue in row.get(listcol.original_name, []):
+                    one_to_many_data.append(tuple(
+                        [row.get(key_col.original_name) for key_col in table.key_columns]
+                        +
+                        [listvalue]))
+
+            cursor.executemany(onetomanytable.insert_statement, one_to_many_data)
+
+        # Maps (not implemented yet)
+        for mapcol in (col for col in columns if col.type.is_map):
+            print(f'Dropping column: {table.original_name}.{mapcol.original_name}')
 
         self.db.commit()
 
@@ -115,7 +125,7 @@ class SqlColumn:
         self.name = slugify(name)
         self.type = type
 
-        self.sql_def = f'"{self.name}" {self.type}'
+        self.sql_def = f'"{self.name}" {self.type.sql_def}'
 
     def widen_type(self, type: 'SqlType'):
         self.type = self.type.unify(type)
@@ -129,9 +139,18 @@ class SqlTableDef:
         self.key_columns = key_columns
 
     @property
+    def drop_statement(self):
+        return f'DROP TABLE IF EXISTS "{self.table_name}";'
+
+    @property
     def create_statement(self):
-        coldefs = [col.sql_def for col in self.columns]
-        return f'CREATE TABLE "{self.table_name}"({", ".join(coldefs)}, PRIMARY KEY({", ".join(c.name for c in self.key_columns)}));'
+        table_def = ', '.join(
+            [col.sql_def for col in self.columns]
+            +
+            (['PRIMARY KEY(' + ', '.join(c.name for c in self.key_columns) + ')'] if self.key_columns else [])
+        )
+
+        return f'CREATE TABLE "{self.table_name}"({table_def});'
 
     @property
     def insert_statement(self):
@@ -149,11 +168,12 @@ def determine_columns(rows):
     columns = {}
     for row in rows:
         for key, value in row.items():
-            if key in columns:
-                columns[key] = columns[key].widen_type(SqlType.of(value))
+            existing_col = columns.get(key)
+            if existing_col:
+                existing_col.widen_type(SqlType.of(value))
             else:
                 columns[key] = SqlColumn(key, SqlType.of(value))
-    return list(columns.items())
+    return list(columns.values())
 
 
 def make_col_def(name, typ):
@@ -173,6 +193,8 @@ class SqlType:
             return SqlType('INTEGER')
         if isinstance(value, float):
             return SqlType('REAL')
+        if isinstance(value, set):
+            return SqlType('+SET')
         if isinstance(value, list):
             return SqlType('+LIST')
         if isinstance(value, dict):
@@ -195,8 +217,10 @@ class SqlType:
     def __init__(self, type):
         self.type = type
         self.is_collection = type.startswith('+')
+        self.is_set = type == '+SET'
         self.is_list = type == '+LIST'
         self.is_map = type == '+MAP'
+        self.sql_def = type
 
     def unify(self, rhs):
         if self.type == rhs.type: return self
@@ -261,8 +285,17 @@ class DDBTypesEncoder(json.JSONEncoder):
                 return int(o)
             return float(o)
         if isinstance(o, set):
-            return list(o)
+            return { '@type': 'set', 'set': list(o) }
         return super(DDBTypesEncoder, self).default(o)
+
+
+def restore_types(rows):
+    """Decode all values that were encoded using DDBTypesEncoder."""
+    def decode(o):
+        if isinstance(o, dict) and o.get('@type') == 'set':
+            return set(o['set'])
+        return o
+    return [{key: decode(value) for key, value in row.items()} for row in rows]
 
 
 if __name__ == '__main__':
