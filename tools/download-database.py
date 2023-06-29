@@ -84,7 +84,8 @@ class TableInserter:
 
         # Lists
         for listcol in (col for col in columns if col.type.is_list or col.type.is_set):
-            typ = SqlType.most_generic(value for row in table_data['rows'] for value in row.get(listcol.original_name, []))
+            typ = SqlType.most_generic(value for row in table_data['rows']
+                                       for value in row.get(listcol.original_name, []))
             onetomanycol = SqlColumn(listcol.original_name, typ)
 
             onetomanytable = SqlTableDef(
@@ -289,7 +290,7 @@ class DDBTypesEncoder(json.JSONEncoder):
                 return int(o)
             return float(o)
         if isinstance(o, set):
-            return { '@type': 'set', 'set': list(o) }
+            return {'@type': 'set', 'set': list(o)}
         return super(DDBTypesEncoder, self).default(o)
 
 
