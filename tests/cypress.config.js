@@ -22,6 +22,7 @@ module.exports = defineConfig({
     recover_page: '/recover',
     hedy_page: '/hedy',
     hedy_level2_page: '/hedy/2',
+    hedy_level5_page: '/hedy/5',
     adventure_page: '/hedy/1#print_command',
     admin_page: '/admin',
     admin_users_page: '/admin/users',
@@ -30,6 +31,7 @@ module.exports = defineConfig({
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
     logs_page: '/logs/class/', // You should concatenate this with the class id e.g. /logs/class/<class id>
+    grid_overview_page: '/grid_overview/class', 
     register_student_page: '/signup?teacher=false',
     register_teacher_page: '/signup?teacher=true',
     profile_page: '/my-profile',
