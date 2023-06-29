@@ -2678,7 +2678,7 @@ adventures:
                 story_text_2: "### Opdracht\nJe hebt in het vorige avontuur al geleerd hoe je variabelen kunt instellen met het`{is}` commando.\nDaar heb je minstens 3 variabelen gemaakt en ze gebruikt met een print commando.\nNu gaan we de variabelen intercatief maken in plaats van ze in te stellen met het `{is}` commando. \n\nKopieer je code van het vorige avontuur en maak de variabelen interactief door `{ask}` commando's te gebruiken.\n"
                 example_code_2: "```\nlievelingsdier {is} {ask} Wat is je lievelingsdier?\n{print} Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} {ask} Hoe heet je?\n{print} Hoi naam\nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar oud."
-        name: "vraag"
+        name: "{ask}"
         description: Introduction ask command
         default_save_name: ask_command
     quotation_marks:
@@ -2799,11 +2799,11 @@ adventures:
                         {print} 'INDRINGER!'
                         {print} 'Je kunt deze computer niet gebruiken!'
                     ```
-        name: Repeat
+        name: "{repeat}"
         description: repeat command
         default_save_name: repeat_command
     repeat_command_2:
-        name: Herhaal 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
         levels:
@@ -2859,7 +2859,7 @@ adventures:
         description: Introducing maths
         default_save_name: maths
     elif_command:
-        name: Elif
+        name: "{elif}"
         description: elif
         levels:
             17:
@@ -2879,7 +2879,7 @@ adventures:
                 example_code: "```\nckeuze is _\n{print} Ik kies keuze\n```\n"
                 start_code: "# place your code here"
     is_command:
-        name: is
+        name: "{is}"
         description: introducing is command
         default_save_name: is_command
         levels:
@@ -2926,7 +2926,7 @@ adventures:
                         {print} 'Jij bent Hedy niet'
                     ```
     random_command:
-        name: willekeurig
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:
@@ -2975,7 +2975,7 @@ adventures:
                        {print} 'is ' geluksgetallen[i]
                     ```
     add_remove_command:
-        name: voeg toe en verwijder uit
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:
@@ -2988,7 +2988,7 @@ adventures:
                 example_code_3: "```\n{print} Verrassingsmilkshake\nsmaken {is} aardbei, chocolade, vanille\nhoop {is} {ask} Welke smaak hoop je dat het wordt?\n_\nallergie {is} {ask} Voor welke smaak ben je allergsich?\n_\n{print} Je krijgt een {at} {random} milkshake\n```\n"
                 start_code: "dieren {is} hond, kat, kangoeroe\nleuk {is} {ask} Welk dier vind jij leuk?\n{add} leuk {to_list} dieren\nniet_leuk {is} {ask} Welk dier vind jij niet leuk?\n{remove} niet_leuk {from} dieren\n{print} Ik kies dieren {at} {random}\n"
     sleep_command:
-        name: slaap
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -3006,7 +3006,7 @@ adventures:
                     {sleep} 2
                     {print} groen!
     if_command:
-        name: als anders
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:
@@ -3037,7 +3037,7 @@ adventures:
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
     in_command:
-        name: in
+        name: "{in}"
         description: Introducing the in command
         default_save_name: in_command
         levels:
@@ -3061,7 +3061,7 @@ adventures:
                     {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
                     {else} {print} 'mwah'
     for_command:
-        name: voor
+        name: "{for}"
         description: for command
         default_save_name: for
         levels:
@@ -3097,7 +3097,7 @@ adventures:
                     {print} 'Wie niet weg is, is gezien'
                     ```
     and_or_command:
-        name: en of
+        name: "{and} & {or}"
         description: introducing and or
         default_save_name: and or
         levels:
@@ -3117,7 +3117,7 @@ adventures:
                         {print} 'Jij bent de echte Hedy!'
                     ```
     while_command:
-        name: zolang
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:
