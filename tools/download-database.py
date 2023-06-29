@@ -16,6 +16,8 @@ DDB_DESERIALIZER = TypeDeserializer()
 
 def main():
 
+    REGION = 'eu-west-1'
+
     defs = TableDefinitions()
     defs.add('hedy-beta-achievements')
     defs.add('hedy-beta-adventures')
@@ -41,7 +43,7 @@ def main():
 
     args = parser.parse_args()
     if 'command' not in args or args.command == 'download':
-        ddb = boto3.client('dynamodb')
+        ddb = boto3.client('dynamodb', region_name=REGION)
         dl = TableDownload(ddb, 'download')
         dl.download_all(defs)
     if 'command' not in args or args.command == 'insert':
