@@ -92,6 +92,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'clear_command',
         'story',
         'haunted',
         'fortune',

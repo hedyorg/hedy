@@ -3135,6 +3135,39 @@ adventures:
                     Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
                     Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
                 example_code: "```\nantwoord = 0\n{while} antwoord != 25\n    antwoord = {ask} 'What is 5 times 5?'\n{print} 'Je hebt een correct antwoord gegeven'\n```\n"
+    clear_command:
+        name: "{clear}"
+        description: clear command
+        default_save_name: clear_command
+        levels:
+            4:
+                start_code: |
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                story_text: |
+                    Tijd voor nog een nieuw commando! Met de code `{clear}` wis je alle tekst van je scherm. Zo kun je voorkomen dat je uitvoerscherm te vol raakt.
+                    Let op! Gebruik bij het `{clear}` commando ook altijd een `{sleep}` anders wist Hedy je scherm zo vlug dat je de tekst niet eens gezien hebt!
+                example_code: |
+                    ```
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                    ```
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures
