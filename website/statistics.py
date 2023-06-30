@@ -374,27 +374,55 @@ class LiveStatisticsModule(WebsiteModule):
     @route("/live_stats/class/<class_id>", methods=["GET"])
     @requires_login
     def render_live_stats(self, user, class_id):
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
-
-        # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.__common_errors(class_id)
-        selected_levels = self.__selected_levels(class_id)
-
-        # identifies common errors in the class
-        self.misconception_detection(class_id, user, common_errors)
-        # in case of a db update in the meantime, reload common errors
-        common_errors = self.__common_errors(class_id)
-
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        students = self.__all_students(class_)
 
-        adventures = self.__get_adventures_for_overview(user, class_id)
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+
+        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
+            adventures = self.get_class_live_stats(user, class_)
+
+        return render_template(
+            "class-live-stats.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": selected_levels,
+                "quiz_info": quiz_info
+            },
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2,
+                "show_c3": show_c3,
+                "student": student
+            },
+            attempted_adventures=attempted_adventures,
+            dashboard_options_args=dashboard_options_args,
+            adventures=adventures,
+            max_level=HEDY_MAX_LEVEL,
+            current_page="my-profile",
+            page_title=gettext("title_class live_statistics")
+        )
+
+    def get_class_live_stats(self, user, class_):
+        # Retrieve common errors and selected levels in class overview from the database for class
+        common_errors = self.__common_errors(class_['id'])
+        selected_levels = self.__selected_levels(class_['id'])
+
+        # identifies common errors in the class
+        self.misconception_detection(class_['id'], user, common_errors)
+        # in case of a db update in the meantime, reload common errors
+        common_errors = self.__common_errors(class_['id'])
+        students = self.__all_students(class_)
+        adventures = self.__get_adventures_for_overview(user, class_['id'])
 
         quiz_stats = []
         for student_username in class_.get("students", []):
@@ -421,8 +449,43 @@ class LiveStatisticsModule(WebsiteModule):
             if programs_for_student != []:
                 attempted_adventures[level] = programs_for_student
 
-        return render_template(
-            "class-live-stats.html",
+        return students, common_errors, selected_levels, quiz_info, attempted_adventures, adventures
+
+    @route("/live_stats/class/<class_id>/select_level", methods=["GET"])
+    @requires_login
+    def choose_level(self, user, class_id):
+        """
+        Adds or remove the current level from the UI
+        """
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        selected_levels = self.__selected_levels(class_id)
+        chosen_level = request.args.get("level")
+
+        if int(chosen_level) in selected_levels:
+            selected_levels.remove(int(chosen_level))
+        else:
+            selected_levels.append(int(chosen_level))
+
+        customization = self.db.get_class_customizations(class_id)
+        dashboard_customization = customization.get('dashboard_customization', {})
+        dashboard_customization['selected_levels'] = selected_levels
+        customization['dashboard_customization'] = dashboard_customization
+        self.db.update_class_customizations(customization)
+
+        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
+            adventures = self.get_class_live_stats(user, class_)
+
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+
+        return jinja_partials.render_partial(
+            "partial-class-live-stats.html",
             class_info={
                 "id": class_id,
                 "students": students,

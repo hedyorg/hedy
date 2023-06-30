@@ -1,0 +1,353 @@
+<div id="main_content">
+    <!--  Back to class button  -->
+    <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
+      {{_('back_to_class')}}
+    </button>
+
+    <!-- Title  -->
+    <div class="flex flex-col gap-4">
+        <div class="flex font-bold font-slab text-sky-600 text-2xl">
+            <h1>{{_('live_dashboard')}}</h1>
+        </div>
+    </div>
+
+    <div class="flex justify-center p-4">
+        <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top -ml-32'>
+                <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg p-1 w-72' style="color:black; background:lightsteelblue;">
+                    Real-time Analytics Dashboard (RADboard) is a dashboard for teachers to monitor the progress of students during class.
+                        RADboard is currently in alpha so it is possible that you encounter some bugs.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Levels selector -->
+    <div class="flex justify-center mb-10">
+        <div>
+            {% for i in range(1, max_level + 1) %}
+                <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" 
+                        id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" 
+                        hx-get="/live_stats/class/{{ class_info.id }}/select_level?level={{ i }}"                        
+                        value="{{ i }}"
+                        hx-target="#main_content"
+                        hx-swap="outerHTML">
+                            {{ i }}
+                </button>
+            {% endfor %}
+        </div>        
+    </div>
+
+    <a class="text-blue-800 font-light float-right mr-4 font-slab hover:text-blue-400" href="#" onclick="window.location.reload(true)">
+        Refresh 🔄
+    </a>
+
+    <!-- Card 1 Class Overview -->
+    <div class="justify-center">
+        <h2 class="text-center">{{_('class_overview')}}</h2>
+        <!-- Hide / Show -->
+        <div class="float-right relative m-2">
+            {% if dashboard_options.show_c1 %}
+                {% if dashboard_options.student %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                       href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                        <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_hide')}}
+                    </a>
+                {% else %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                       href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=True', 'show_c1=False') }}">
+                        <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_hide')}}
+                    </a>
+                {% endif %}
+            {% else %}
+                {% if dashboard_options.student %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                       href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                    </a>
+                {% else %}
+                    <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                       href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c1=False', 'show_c1=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="w-full max-w-8xl rounded-lg bg-blue-200 p-6 pt-2 shadow-lg font-slab" id="card1_class_overview">
+            {% if dashboard_options.show_c1 %}
+            <div class="w-full">
+                <!-- Adventures per level -->
+                {% for selected_level in class_overview.selected_levels %}
+                <p class="text-blue-600 font-bold mr-2 ml-4 mt-8">{{_('level')}} {{ selected_level }}</p>
+                <div class="font-medium text-center text-blue-600 border-b-2 border-gray-200">
+                    <ul class="flex flex-wrap -mb-px list-none">
+                    {% for level, adventure_list in adventures.items() %}
+                    {% if level|int == selected_level %}
+                        {% for adventure in adventure_list %}
+                            {% set in_progress = adventure["in_progress"]|length %}
+                            {% set adventure_name = adventure["name"] %}
+                        <li class="mr-1">
+                            <div class="flex p-4 text-gray-700">
+                                <p>{{ adventure_name }}</p>
+                                {% if in_progress != 0 %}
+                                <div class="flex flex-col px-1">
+                                    <button class="ml-2 bg-blue-100 text-blue-800 hover:bg-blue-400 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick='hedyApp.toggle_show_students_class_overview( "level{{ selected_level }}_{{ adventure_name }}" )'>{{ in_progress }}</button>
+                                    <div id="adventure_panel_level{{ selected_level }}_{{ adventure_name }}" class="hidden text-gray-800 text-xs">
+                                        <ul class="list-none">{% for student in adventure["in_progress"] %}<li>{{ student }}</li>{% endfor %}</ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                        <li class="mr-1">
+                            <div class="flex p-4 text-green-700 border-b-4 border-green-600">
+                                <p>Quiz</p>
+                                {% set in_progress = class_overview.quiz_info[selected_level]["students_in_progress"]|length %}
+                                {% set finished = class_overview.quiz_info[selected_level]["students_finished"]|length %}
+                                {% if in_progress != 0 %}
+                                <div class="flex flex-col px-1">
+                                    <button class="ml-1 bg-blue-100 text-blue-800 hover:bg-green-300 text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_progress_level{{ selected_level }}')">{{ in_progress }}</button>
+                                    <div id="adventure_panel_quiz_progress_level{{ selected_level }}" class="hidden text-gray-800 text-xs">
+                                        <ul class="list-none">{% for student in class_overview.quiz_info[selected_level]["students_in_progress"] %}<li>{{ student }}</li>{% endfor %}</ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if finished != 0 %}
+                                <div class="flex flex-col px-1">
+                                    <button class="ml-1 bg-green-600 text-white hover:bg-green-300 border-green-600 text-xs font-medium px-2.5 py-0.5 rounded-full accordion accordion-tab" onclick="hedyApp.toggle_show_students_class_overview('quiz_finished_level{{ selected_level }}')">{{ finished }}</button>
+                                    <div id="adventure_panel_quiz_finished_level{{ selected_level }}" class="hidden text-gray-800 text-xs">
+                                        <ul class="list-none">{% for student in class_overview.quiz_info[selected_level]["students_finished"] %}<li>{{ student }}</li>{% endfor %}</ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Legend -->
+            <div class="mt-5 flex">
+                <div class="flex m-1">
+                    <div><span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
+                    <p class="text-sm font-semibold text-gray-700 mt-1">In progress</p>
+                </div>
+                <div class="flex m-1 ml-3">
+                    <div><span class="bg-green-600 text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">Nr.</span></div>
+                    <p class="text-sm font-semibold text-green-800 mt-1">Quiz finished</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Space for Student Details card, otherwise empty -->
+    {% block student_space %}
+    {% endblock %}
+
+
+    <div class="justify-center w-full max-w-8xl">
+        <div class="flex gap-4 my-8" id="columns_grid">
+            <!-- Card 2 Student List    -->
+            <div id="col1" class="basis-2/3 w-1/3">
+                <div class="flex justify-center text-blue-500 space-x-3">
+                    <h2 class="text-center">
+                      {{_('student_list')}}
+                    </h2>
+                        <div class ="relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                            </svg>
+                            <div class='text-left tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-left items-top -mr-6 mt-0.5'>
+                                <span class='tooltiptext text-xs font-medium flex justify-left absolute rounded shadow-lg p-1 w-max' style="color:black">
+                                    <ul style="list-style: none;">
+                                        <li><button type="button" class="h-6 w-6 m-1 border-4 border-blue-500 rounded-full bg-gray-400"></button> - Current Adventure</li>
+                                        <li><button type="button" class="h-6 w-6 m-1 rounded-full bg-green-600"></button> - Finished Quiz</li>
+                                        <li><button type="button" class="h-6 w-6 m-1 rounded-full bg-blue-500"></button> - Attempted</li>
+                                        <li><button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500"></button> - Not Attempted</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                </div>
+                {% if dashboard_options.show_c2 %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card2_list">
+                    <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
+                            <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_hide')}}
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                           href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=True', 'show_c2=False') }}">
+                            <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_hide')}}
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="p-2 mt-10 w-full">
+                    <table class="border-spacing-2 rounded-lg w-full font-slab">
+                        <thead>
+                            <tr class="border-b p-2">
+                                <th class="px-2 sticky left-0 bg-blue-200 z-10 text-gray-900 font-bold">{{_('name')}}</th>
+                                {% for selected_level in class_overview.selected_levels %}
+                                    <th class="border-l px-2 text-gray-900 font-bold">{{_('level')}} {{selected_level}}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in class_info.students %}
+                            <tr>
+                                <td class="p-2 text-center sticky left-0 bg-blue-200 z-10">
+                                    {% if dashboard_options.student %}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student.username)}}" class="text-gray-700 hover:text-white" id="show-student">
+                                            {{student.username}}
+                                        </a>
+                                    {% else %}
+                                        <a href="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student.username)}}" class="text-gray-700 hover:text-white" id="show-student">
+                                            {{student.username}}
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                {% for selected_level in class_overview.selected_levels %}
+                                {% for level, adventure_list in adventures.items() %}
+                                {% if level|int == selected_level %}
+                                <td class="px-4 border-l text-center">
+                                    <div class="flex justify-between">
+                                        {% if attempted_adventures[selected_level] %}{% set attempted_adventures_student = attempted_adventures[selected_level][student.username] %}{% endif %}
+                                        {% for adventure in adventure_list %}
+                                        <div class="group flex relative">
+                                            {% if student.current_adventure.adventure_name == adventure.id and student.current_level|int == level|int %}
+                                                <button type="button" class="h-6 w-6 m-1 border-4 border-blue-500 rounded-full bg-gray-400 hover:bg-gray-300 hover:border-blue-300"></button>
+                                            {% elif adventure.id in attempted_adventures_student %}
+                                                <button type="button" class="h-6 w-6 m-1 rounded-full bg-blue-500 hover:bg-blue-300"></button>
+                                            {% else %}
+                                                <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
+                                            {% endif %}
+                                            <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">{{ adventure.name }}</span>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="group flex relative">
+                                            {% if student.username in class_overview.quiz_info[selected_level]['students_finished'] %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full bg-green-600 hover:bg-green-400"></button>
+                                            {% elif student.username in class_overview.quiz_info[selected_level]['students_in_progress'] %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full border-4 border-green-600 bg-gray-400 hover:bg-gray-300 hover:border-green-400"></button>
+                                            {% else %}
+                                            <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
+                                            {% endif %}
+                                        <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">Quiz</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table></div>
+                </div>
+                {% else %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card2_list_hidden">
+                    <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c2=False', 'show_c2=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Card 3 Common Errors -->
+            <div id="col2" class="basis-1/3">
+                <div class="flex justify-center text-blue-500 space-x-3">
+                    <h2>
+                        {{_('common_errors')}}
+                    </h2>
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                        </svg>
+                        <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top -ml-32 mt-0.5'>
+                            <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg p-1 w-72' style="color:black"> The common errors are gathered by an AI system. It detects and clusters code submissions that fail to run.
+                                    The system is not foolproof! It is possible that students make errors that are not detected.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% if dashboard_options.show_c3 %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card3_misconceptions">
+                    <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                           href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
+                            <i class="fa-solid fa-chevron-up w-4"></i>️️ {{_('_hide')}}
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600 font-slab"
+                           href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=True', 'show_c3=False') }}">
+                            <i class="fa-solid fa-chevron-up w-4"></i>️ {{_('_hide')}}
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="w-full text-left p-6 mt-5">
+                        <ul class="max-w-md space-y-3 list-none list-inside">
+                            {% for error_entry in class_info.common_errors %}
+                                {% if error_entry.active == 1 %}
+                                    <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
+                                        <div class="flex justify-between items-center">
+                                            <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
+                                                <h3 class="cursor-pointer ml-2 hover:text-white">
+                                                {{error_entry.header}} ({{error_entry.students|length}})
+                                                </h3>
+                                            </a>
+                                            <button class="btn-shape tiny-btn pb-0 p-1 border-0 text-black hover:text-white self-end" id="resolve-student" 
+                                                onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{ error_entry.id }}", {{('resolve_student_prompt')|default(None)|tojson}})'>
+                                                ✔️ Resolve
+                                            </button>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                  </div>
+                </div>
+                {% else %}
+                <div class="rounded-lg bg-blue-200 shadow-lg p-0 overflow-auto" id="card3_misconceptions_hidden">
+                    <div class="float-right relative m-2">
+                        {% if dashboard_options.student %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}/student?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                        </a>
+                        {% else %}
+                        <a class="no-underline text-black rounded hover:bg-blue-600"
+                        href="/live_stats/class/{{class_info.id}}?{{ dashboard_options_args | replace('show_c3=False', 'show_c3=True') }}">
+                        <i class="fa-solid fa-chevron-down w-4"></i>️ {{_('_show')}}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% block popup_content %}
+    {% endblock %}
+</div>
