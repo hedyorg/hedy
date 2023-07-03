@@ -772,7 +772,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "customization_deleted": "Personalisatie succesvol verwijderd.",
     "dice": "🎲",
     "directly_available": "Gelijk open",
-    "disabled": "Disabled",
+    "disabled": "Gedeactiveerd",
     "fortune": "🔮, ✨",
     "haunted": "🦇, 👻, 🎃",
     "level_title": "Level",
