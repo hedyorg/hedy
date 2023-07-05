@@ -509,9 +509,93 @@ class LiveStatisticsModule(WebsiteModule):
             page_title=gettext("title_class live_statistics")
         )
 
+    @route("/live_stats/class/<class_id>/refresh", methods=["GET"])
+    @requires_login
+    def refresh_live_stats(self, user, class_id):
+        """
+        Partialy refresh the live statistics page, be it hiding and showing the differents parts of the page
+        or refreshing the entirety of it
+        """
+
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
+        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+
+        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
+            adventures = self.get_class_live_stats(user, class_)
+
+        # Give the template more data in case there's a student selected
+        if student:
+            class_students = class_.get("students", [])
+            if student not in class_students:
+                return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+
+            student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
+
+            return jinja_partials.render_partial(
+                "partial-class-live-stats.html",
+                dashboard_options={
+                    "show_c1": show_c1,
+                    "show_c2": show_c2,
+                    "show_c3": show_c3,
+                    "student": student
+                },
+                class_info={
+                    "id": class_id,
+                    "students": students,
+                    "common_errors": common_errors
+                },
+                class_overview={
+                    "selected_levels": selected_levels,
+                    "quiz_info": quiz_info
+                },
+                attempted_adventures=attempted_adventures,
+                dashboard_options_args=dashboard_options_args,
+                adventures=adventures,
+                max_level=HEDY_MAX_LEVEL,
+                adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
+                student=selected_student,
+                student_programs=student_programs,
+                data=graph_data,
+                labels=graph_labels,
+                current_page='my-profile',
+                page_title=gettext("title_class live_statistics")
+            )
+        else:
+            return jinja_partials.render_partial(
+                "partial-class-live-stats.html",
+                class_info={
+                    "id": class_id,
+                    "students": students,
+                    "common_errors": common_errors
+                },
+                class_overview={
+                    "selected_levels": selected_levels,
+                    "quiz_info": quiz_info
+                },
+                dashboard_options={
+                    "show_c1": show_c1,
+                    "show_c2": show_c2,
+                    "show_c3": show_c3,
+                    "student": student
+                },
+                attempted_adventures=attempted_adventures,
+                dashboard_options_args=dashboard_options_args,
+                adventures=adventures,
+                max_level=HEDY_MAX_LEVEL,
+                current_page="my-profile",
+                page_title=gettext("title_class live_statistics")
+            )
+
     @route("/live_stats/class/<class_id>/student", methods=["GET"])
     @requires_login
-    def render_student_details(self, user, class_id):
+    def render_student_details____(self, user, class_id):
         """
         Shows information about an individual student when they
         are selected in the student list.
@@ -520,32 +604,63 @@ class LiveStatisticsModule(WebsiteModule):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
         show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
         dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
 
-        # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.__common_errors(class_id)
-        selected_levels = self.__selected_levels(class_id)
-
-        self.misconception_detection(class_id, user, common_errors)
-        # in case of a db update in the meantime, reload common errors
-        common_errors = self.__common_errors(class_id)
-
-        class_ = self.db.get_class(class_id)
-        students = sorted(class_.get("students", []))
-
-        # retrieve username of student in question via args
+        students = class_.get("students", [])
         if student not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-        students = self.__all_students(class_)
+        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
+            adventures = self.get_class_live_stats(user, class_)
 
+        student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
+
+        return jinja_partials.render_partial(
+            "partial-class-live-stats.html",
+            dashboard_options={
+                "show_c1": show_c1,
+                "show_c2": show_c2,
+                "show_c3": show_c3,
+                "student": student
+            },
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors
+            },
+            class_overview={
+                "selected_levels": selected_levels,
+                "quiz_info": quiz_info
+            },
+            attempted_adventures=attempted_adventures,
+            dashboard_options_args=dashboard_options_args,
+            adventures=adventures,
+            max_level=HEDY_MAX_LEVEL,
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
+            student=selected_student,
+            student_programs=student_programs,
+            data=graph_data,
+            labels=graph_labels,
+            current_page='my-profile',
+            page_title=gettext("title_class live_statistics")
+        )
+
+    def get_student_data(self, student, class_):
+        """
+        Returns the data for a specific student
+        """
         # Get data for selected student
         programs = self.db.programs_for_user(student)
         quiz_scores = self.db.get_quiz_stats([student])
         finished_quizzes = any("finished" in x for x in quiz_scores)
         highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
         selected_student = {"username": student, "programs": len(programs), "highest_level": highest_quiz}
+
         # Load in all program data for that specific student
         student_programs = []
         for item in programs:
@@ -573,23 +688,6 @@ class LiveStatisticsModule(WebsiteModule):
         graph_data = self.db.get_program_stats([selected_student['username']], None, None)
         graph_data, graph_labels = _collect_graph_data(graph_data, window_size=10)
 
-        adventures = self.__get_adventures_for_overview(user, class_id)
-
-        quiz_stats = []
-        for student_username in class_.get("students", []):
-            quiz_stats_student = self.db.get_quiz_stats([student_username])
-            quiz_in_progress = [x.get("level") for x in quiz_stats_student
-                                if x.get("started") and not x.get("finished")]
-            quiz_finished = [x.get("level") for x in quiz_stats_student if x.get("finished")]
-            quiz_stats.append(
-                {
-                    "student": student_username,
-                    "in_progress": quiz_in_progress,
-                    "finished": quiz_finished
-                }
-            )
-        quiz_info = _get_quiz_info(quiz_stats)
-
         attempted_adventures = {}
         for level in range(1, HEDY_MAX_LEVEL+1):
             programs_for_student = {}
@@ -600,35 +698,7 @@ class LiveStatisticsModule(WebsiteModule):
             if programs_for_student != []:
                 attempted_adventures[level] = programs_for_student
 
-        return render_template(
-            "class-live-student.html",
-            dashboard_options={
-                "show_c1": show_c1,
-                "show_c2": show_c2,
-                "show_c3": show_c3,
-                "student": student
-            },
-            class_info={
-                "id": class_id,
-                "students": students,
-                "common_errors": common_errors
-            },
-            class_overview={
-                "selected_levels": selected_levels,
-                "quiz_info": quiz_info
-            },
-            dashboard_options_args=dashboard_options_args,
-            student=selected_student,
-            student_programs=student_programs,
-            adventures=adventures,
-            attempted_adventures=attempted_adventures,
-            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
-            data=graph_data,
-            labels=graph_labels,
-            max_level=HEDY_MAX_LEVEL,
-            current_page='my-profile',
-            page_title=gettext("title_class live_statistics")
-        )
+        return student_programs, graph_data, graph_labels, selected_student
 
     @route("/live_stats/class/<class_id>/pop_up", methods=["GET"])
     @requires_login

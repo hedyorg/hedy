@@ -1,14 +1,13 @@
-{% extends "class-live-stats.html" %}
-
 {% block student_space %}
 
   <div class="justify-center pt-10 min-h-full">
       <h2 class="text-center">{{_('student_details')}}</h2>
       <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
-        <a class="no-underline float-right p-2"
-           href="/live_stats/class/{{class_info.id}}?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}">
-            ❌
-        </a>
+        <a class="red-btn float-right cursor-pointer text-sm pt-0.5 pb-0 px-2 mr-2 mt-2"
+          hx-get="/live_stats/class/{{class_info.id}}/refresh?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}"
+          hx-target="#main_content">
+          <i class="fa fa-times" aria-hidden="true"></i>
+       </a>
         <!-- Title columns -->
         <div class="m-auto ml-14 flex pt-4 pl-4">
             <div class="flex flex-row">
@@ -83,7 +82,6 @@
                 {% endif %}
                 </div>
             </div>
-            <a class="text-black font-light no-underline float-right" href="#" onclick="window.location.reload(true)">Refresh 🔄</a>
         </div>
       </div>
   </div>
