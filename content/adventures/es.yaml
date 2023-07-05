@@ -833,10 +833,10 @@ adventures:
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:
                 story_text: |
+                    ¡Puedes usar el comando `{at} {random}` para dejar que el ordenador elija piedra, papel o tijeras!
 
-                    En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
-                    Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
-                    De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
+                    ### Ejercicio
+                    Completa el código usando el comando `{at} {random}`.
                 example_code: |
                     ```
                     opciones {is} piedra, papel, tijera
@@ -963,7 +963,7 @@ adventures:
 
                 start_code: "# pon tu código aquí"
                 example_code: "```\n{print} ¡Bienvenido al restaurante Hedy's!\n{print} Hoy estamos sirviendo pizza o lasaña.\ncomida {is} {ask} ¿Qué te gustaría comer?\n{print} ¡Muy buena elección! ¡La comida es mi favorita!\ncobertura {is} {ask} ¿Te gustaría carne o verduras en eso?\n{print} ¡La comida con cobertura está en camino!\n```\n"
-                story_text_2: "¿Puedes hacer este código más elaborado? Por ejemplo, agregando bebidas a la orden, o...?\n"
+                story_text_2: "### Ejercicio\nCopia tu propio código del restaurante del nivel anterior a la pantalla de entrada de abajo.\nCorrige el código reemplazando los comandos `{ask}` y  `{echo}` y usando variables, como las que has aprendido en este nivel.\n\nAhora que tu código funciona otra vez, es hora de añadir más cosas.\nObserva la última línea de código del ejemplo: ¡Marchando la comida `{print}` con cobertura!\nEn esta línea se han usado 2 variables para crear un resumen de tu pedido.\nAhora añade tu propio resumen de la comida y las bebidas pedidas por el cliente.\n\n**Extra** Ahora que has aprendido a usar variables, puedes usar tantas variables como quieras en una línea de código. ¿Puedes añadir más variables a tu código, como comer aquí o para llevar, efectivo o tarjeta, con o sin pajita etc.?\n"
             11:
                 story_text: |
                     Podemos usar `{for} i {in} {range} 1 {to} 5` para imprimir (`{print}`) los pedidos de varios clientes de manera ordenada.
