@@ -1,7 +1,8 @@
 import textwrap
 
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel3(HedyTester):
@@ -624,11 +625,19 @@ class TestsLevel3(HedyTester):
         print colors at random
         colors is green, red, blue""")
 
-        self.multi_level_tester(
+        expected = textwrap.dedent("""\
+        print(f'pass')
+        colors = ['green', 'red', 'blue']""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssign),
+            SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
+        ]
+
+        self.single_level_tester(
             code=code,
-            max_level=11,
-            exception=hedy.exceptions.AccessBeforeAssign,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
+            expected=expected,
+            skipped_mappings=skipped_mappings,
         )
 
     def test_add_ask_to_list(self):

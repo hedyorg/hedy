@@ -226,9 +226,22 @@ export const error = {
     editor = e;
   },
 
-  hide() {
-    $('#errorbox').hide();
-    $('#warningbox').hide();
+  hide(fade: boolean = false) {
+    // Remove the fading immediately
+    $("#errorbox").stop().fadeOut();
+    $("#warningbox").stop().fadeOut();
+    $("#warningbox_spinner").stop().fadeOut();
+
+    if (!fade) {
+      $('#errorbox').hide();
+      $('#warningbox').hide();
+      $('#warningbox_spinner').hide();
+    } else {
+      $('#errorbox').fadeOut(2500);
+      $('#warningbox').fadeOut(2500);
+      $('#warningbox_spinner').fadeOut(2500);
+    }
+
     editor?.resize();
   },
 
@@ -237,6 +250,16 @@ export const error = {
     $('#warningbox .details').text(message);
     $('#warningbox').show();
     editor?.resize();
+  },
+
+  showWarningSpinner(){
+    $('#warningbox_icon').hide();
+    $('#warningbox_spinner').show();
+  },
+
+  hideWarningSpinner(){
+    $('#warningbox_icon').show();
+    $('#warningbox_spinner').hide();
   },
 
   show(caption: string, message: string) {

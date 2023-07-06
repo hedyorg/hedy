@@ -1005,6 +1005,40 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
 
+    clear_command:
+        name: "{clear}"
+        description: clear command
+        default_save_name: clear_command
+        levels:
+            4:
+                start_code: |
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'SURPRISE!'
+                story_text: |
+                    Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
+                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                example_code: |
+                    ```
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'SURPRISE!'
+                    ```
+
     story:
         name: "Story"
         description: "Story"
@@ -1101,7 +1135,8 @@ adventures:
                     You can solve that in this level. You must use quotation marks for everything that you are going to print.
 
                     ### Exercise
-                    Copy the example code and make it work by adding quotation marks on the lines.
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
 
                     ### Exercise 2
                     Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
@@ -1110,6 +1145,8 @@ adventures:
                     ```
                     name {is} {ask} _ What is your name? _
                     {print}  _ The main character is called _ name
+                    _
+                    _
                     {print} name  _ is now going to walk in the woods _
                     {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -2566,9 +2603,10 @@ adventures:
 
                     ### Exercise
                     Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
                     ### Exercise 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots.
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _

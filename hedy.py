@@ -25,6 +25,7 @@ from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
 HEDY_MAX_LEVEL = 18
+HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -2453,7 +2454,6 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
-
     merged_grammar = []
 
     rules_grammar_1 = grammar_text_1.split('\n')
@@ -2563,10 +2563,87 @@ def create_grammar(level, lang="en"):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i, i)
 
+    # Change the grammar if skipping faulty is enabled
+    if source_map.skip_faulty:
+        # Make sure to change the meaning of error_invalid
+        # this way more text will be 'catched'
+        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
+        if len(error_invalid_rules) > 0:
+            error_invalid_rule = error_invalid_rules[0]
+            error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
+            result = result.replace(error_invalid_rule, error_invalid_rule_changed)
+
+        # from level 12:
+        # Make sure that all keywords in the language are added to the rules:
+        # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
+        if level > 12:
+            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', result, re.MULTILINE)
+            if len(textwithspaces_rules) > 0:
+                textwithspaces_rule = textwithspaces_rules[0]
+                textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
+                result = result.replace(textwithspaces_rule, textwithspaces_rule_changed)
+
+            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', result, re.MULTILINE)
+            if len(textwithoutspaces_rules) > 0:
+                textwithoutspaces_rule = textwithoutspaces_rules[0]
+                textwithoutspaces_rule_changed = (
+                    r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
+                )
+                result = result.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
+
+            non_allowed_words = re.findall(r'".*?"', keywords)
+            non_allowed_words = list(set(non_allowed_words))
+
+            non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
+            non_allowed_words_with_space = '|'.join(non_allowed_words)
+            result = result.replace('SKIP1', non_allowed_words_with_space)
+
+            letters_done = []
+            string_words = ''
+
+            for word in non_allowed_words:
+                # go through all words and add them in groups by their first letter
+                first_letter = word[0]
+                if first_letter not in letters_done:
+                    string_words += f'|{first_letter}(?!{word[1:]})'
+                    letters_done.append(first_letter)
+                else:
+                    string_words = string_words.replace(f'|{word[0]}(?!', f'|{word[0]}(?!{word[1:]}|')
+
+            string_words = string_words.replace('|)', ')')  # remove empty regex expressions
+            string_words = string_words[1:]  # remove first |
+
+            result = result.replace('SKIP2', string_words)
+
+        # Make sure that the error_invalid is added to the command rule
+        # to function as a 'bucket' for faulty text
+        command_rules = re.findall(r'^command:.*?\n', result, re.MULTILINE)
+        if len(command_rules) > 0:
+            command_rule = command_rules[0]
+            command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
+            result = result.replace(command_rule, command_rule_with_error_invalid)
+
+        # Make sure that the error_invalid is added to the if_less_command rule
+        # to function as a 'bucket' for faulty if body commands
+        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', result, re.MULTILINE)
+        if len(if_less_command_rules) > 0:
+            if_less_command_rule = if_less_command_rules[0]
+            if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
+            result = result.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
+
+        # Make sure that the _non_empty_program rule does not contain error_invalid rules
+        # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
+        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', result, re.MULTILINE)
+        if len(non_empty_program_rules) > 0:
+            non_empty_program_rule = non_empty_program_rules[0]
+            non_empty_program_rule_changed = (
+                '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
+            )
+            result = result.replace(non_empty_program_rule, non_empty_program_rule_changed)
+
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
     save_total_grammar_file(level, result, lang)
-
     return result
 
 
@@ -2622,10 +2699,8 @@ PARSER_CACHE = {}
 
 def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
-
-    Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens)
+    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
@@ -2638,8 +2713,81 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
 
 
-def transpile(input_string, level, lang="en"):
-    transpile_result = transpile_inner(input_string, level, lang)
+def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
+    def skipping_faulty(meta, args): return [True]
+
+    defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
+    defined_errors_original = dict()
+
+    def set_error_to_allowed():
+        # override IsValid methods to always be valid & store original
+        for error in defined_errors:
+            defined_errors_original[error] = getattr(IsValid, error)
+            setattr(IsValid, error, skipping_faulty)
+
+    def set_errors_to_original():
+        # revert IsValid methods to original
+        for error in defined_errors:
+            setattr(IsValid, error, defined_errors_original[error])
+
+    try:
+        set_error_to_allowed()
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    finally:
+        # make sure to always revert IsValid methods to original
+        set_errors_to_original()
+
+    # If transpiled successfully while allowing errors, transpile mapped code again to get original error
+    # If none is found, raise error so that original error will be returned
+    at_least_one_error_found = False
+
+    for hedy_source_code, python_source_code in source_map.map.copy().items():
+        if hedy_source_code.error is not None or python_source_code.code == 'pass':
+            try:
+                transpile_inner(hedy_source_code.code, source_map.level, source_map.language)
+            except Exception as e:
+                hedy_source_code.error = e
+
+            if hedy_source_code.error is not None:
+                at_least_one_error_found = True
+
+    if not at_least_one_error_found:
+        raise Exception('Could not find original error for skipped code')
+
+    return transpile_result
+
+
+def transpile(input_string, level, lang="en", skip_faulty=False):
+    """
+    Function that transpiles the Hedy code to Python
+
+    The first time the client will try to execute the code without skipping faulty code
+    If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
+
+    The second time, after an Error is received by the client, the client will re-POST the code
+    with skipping faulty enabled, after that we either return the partially correct code or raise the original error
+    """
+
+    if not skip_faulty:
+        try:
+            source_map.set_skip_faulty(False)
+            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+        except Exception as original_error:
+            source_map.exception_found_during_parsing = original_error  # store original exception
+            raise original_error
+    else:
+        original_error = source_map.exception_found_during_parsing
+        source_map.clear()
+
+        if isinstance(original_error, source_map.exceptions_not_to_skip):
+            raise original_error
+
+        try:
+            source_map.set_skip_faulty(True)
+            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+        except Exception:
+            raise original_error  # we could not skip faulty code, raise original exception
+
     return transpile_result
 
 
@@ -3075,7 +3223,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en"):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False):
     check_program_size_is_valid(input_string)
 
     level = int(level)
@@ -3085,8 +3233,11 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    source_map.clear()
-    source_map.set_hedy_input(input_string)
+    if populate_source_map:
+        source_map.clear()
+        source_map.set_level(level)
+        source_map.set_language(lang)
+        source_map.set_hedy_input(input_string)
 
     # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
@@ -3104,11 +3255,11 @@ def transpile_inner(input_string, level, lang="en"):
         # FH, may 2022. for now, we just out arabic numerals when the language is ar
         # this can be changed into a profile setting or could be detected
         # in usage of programs
-
         if lang == "ar":
             numerals_language = "Arabic"
         else:
             numerals_language = "Latin"
+
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
@@ -3119,15 +3270,18 @@ def transpile_inner(input_string, level, lang="en"):
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
 
-        source_map.set_python_output(python)
-        return ParseResult(python, source_map.get_response_object(), has_turtle, has_pygame)
+        if populate_source_map:
+            source_map.set_python_output(python)
+
+        return ParseResult(python, source_map, has_turtle, has_pygame)
     except VisitError as E:
-        # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
-        # HedyException to show the intended error message.
-        if isinstance(E.orig_exc, exceptions.HedyException):
-            raise E.orig_exc
-        else:
-            raise E
+        if isinstance(E, VisitError):
+            # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
+            # HedyException to show the intended error message.
+            if isinstance(E.orig_exc, exceptions.HedyException):
+                raise E.orig_exc
+            else:
+                raise E
 
 
 def execute(input_string, level):

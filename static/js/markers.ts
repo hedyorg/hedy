@@ -58,6 +58,22 @@ export class Markers {
   }
 
   /**
+   * Remove all incorrect lines markers
+   */
+  public clearIncorrectLines() {
+    const markers = this.editor.session.getMarkers(true);
+
+    if (markers) {
+      for (const index in markers) {
+        let marker = markers[index];
+        if (marker.clazz.includes('ace_incorrect_hedy_code')){
+          this.removeMarker(Number(index));
+        }
+      }
+    }
+  }
+
+  /**
    * Set the current line in the debugger
    */
   public setDebuggerCurrentLine(line: number | undefined) {
@@ -104,7 +120,7 @@ export class Markers {
   /**
    * Add a marker and remember the class
    */
-  private addMarker(range: AceAjax.Range, klass: string, scope: 'text' | 'line' | 'fullLine', inFront = false) {
+  public addMarker(range: AceAjax.Range, klass: string, scope: 'text' | 'line' | 'fullLine', inFront = false) {
     const id = this.editor.session.addMarker(range, klass, scope, inFront);
     this.markerClasses.set(id, klass);
     return id;
