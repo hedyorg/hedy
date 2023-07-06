@@ -358,6 +358,7 @@ adventures:
 
                     ### Opdracht
                     Kopieer de voorbeeldcode en maak hem kloppend door aanhalingstekens in te vullen op de lijntjes.
+                    Op de lijntjes van regel 3 en 4 moeten geen aanhalingstekens komen, maar een `{slaap}` en een `{clear}` commando. Lukt het jou om het programma te laten werken?
 
                     ### Opdracht 2
                     Ga terug naar het vorige level en kopieer je eigen verhaalcode. Maak de code nu kloppend voor dit level door er aanhalingstekens aan toe te voegen op de goede plekken.
@@ -366,6 +367,8 @@ adventures:
                     ```
                     naam {is} {ask} _Hoe heet de hoofdpersoon_
                     {print} _De hoofdpersoon heet _ naam
+                    _
+                    _
                     {print} naam _ gaat nu in het bos lopen_
                     {print} naam _ is wel een beetje bang_
                     dieren {is} 🦔, 🦉, 🐿, 🦇
@@ -1937,10 +1940,11 @@ adventures:
             4:
                 story_text: |
                     ### Opdracht
-                    Kun jij de voorbeeldcode aan de praat krijgen?
+                    Kun jij de voorbeeldcode aan de praat krijgen door aanhalingstekens toe te voegen?
+                    Voeg daarna `{clear}` commando's toe om steeds maar 1 regel tekst in je uitvoerscherm te hebben.
 
                     ### Opdracht 2
-                    Kopieer je eigen restaurantcode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
+                    Kopieer je eigen restaurantcode van het vorige level en voeg aanhalingstekens en {clear} commando's toe om de code ook in dit level te laten werken.
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
                     ```
@@ -3135,6 +3139,39 @@ adventures:
                     Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
                     Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
                 example_code: "```\nantwoord = 0\n{while} antwoord != 25\n    antwoord = {ask} 'What is 5 times 5?'\n{print} 'Je hebt een correct antwoord gegeven'\n```\n"
+    clear_command:
+        name: "{clear}"
+        description: clear command
+        default_save_name: clear_command
+        levels:
+            4:
+                start_code: |
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                story_text: |
+                    Tijd voor nog een nieuw commando! Met de code `{clear}` wis je alle tekst van je scherm. Zo kun je voorkomen dat je uitvoerscherm te vol raakt.
+                    Let op! Gebruik bij het `{clear}` commando ook altijd een `{sleep}` anders wist Hedy je scherm zo vlug dat je de tekst niet eens gezien hebt!
+                example_code: |
+                    ```
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                    ```
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures
