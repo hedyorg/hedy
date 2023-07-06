@@ -2,6 +2,8 @@
  * The modal we pop up to have children confirm things
  */
 
+import { HedyEditor } from "./editor";
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -186,13 +188,13 @@ class Modal {
   }
 }
 
-let editor: AceAjax.Editor | undefined;
+let editor: HedyEditor | undefined;
 
 /**
  * The error that appears underneath the code editor
  */
 export const success = {
-  setEditor(e: AceAjax.Editor) {
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
@@ -219,7 +221,8 @@ export const success = {
 }
 
 export const error = {
-  setEditor(e: AceAjax.Editor) {
+  //TODO: change this to the new interface of HedyEditor
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
