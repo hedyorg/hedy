@@ -41,7 +41,8 @@ KEYWORDS_ADVENTURES = set([
     'for_command',
     'and_or_command',
     'while_command',
-    'elif_command'
+    'elif_command',
+    'clear_command'
 ])
 
 ADVENTURE_ORDER_PER_LEVEL = {
@@ -92,6 +93,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'clear_command',
         'story',
         'haunted',
         'fortune',
