@@ -2,6 +2,8 @@
  * The modal we pop up to have children confirm things
  */
 
+import { HedyEditor } from "./editor";
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -186,13 +188,13 @@ class Modal {
   }
 }
 
-let editor: AceAjax.Editor | undefined;
+let editor: HedyEditor | undefined;
 
 /**
  * The error that appears underneath the code editor
  */
 export const success = {
-  setEditor(e: AceAjax.Editor) {
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
@@ -219,13 +221,27 @@ export const success = {
 }
 
 export const error = {
-  setEditor(e: AceAjax.Editor) {
+  //TODO: change this to the new interface of HedyEditor
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
-  hide() {
-    $('#errorbox').hide();
-    $('#warningbox').hide();
+  hide(fade: boolean = false) {
+    // Remove the fading immediately
+    $("#errorbox").stop().fadeOut();
+    $("#warningbox").stop().fadeOut();
+    $("#warningbox_spinner").stop().fadeOut();
+
+    if (!fade) {
+      $('#errorbox').hide();
+      $('#warningbox').hide();
+      $('#warningbox_spinner').hide();
+    } else {
+      $('#errorbox').fadeOut(2500);
+      $('#warningbox').fadeOut(2500);
+      $('#warningbox_spinner').fadeOut(2500);
+    }
+
     editor?.resize();
   },
 
@@ -234,6 +250,16 @@ export const error = {
     $('#warningbox .details').text(message);
     $('#warningbox').show();
     editor?.resize();
+  },
+
+  showWarningSpinner(){
+    $('#warningbox_icon').hide();
+    $('#warningbox_spinner').show();
+  },
+
+  hideWarningSpinner(){
+    $('#warningbox_icon').show();
+    $('#warningbox_spinner').hide();
   },
 
   show(caption: string, message: string) {

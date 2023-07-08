@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel4(HedyTester):
@@ -101,11 +102,18 @@ class TestsLevel4(HedyTester):
 
     def test_print_with_space_gives_invalid(self):
         code = " print 'Hallo welkom bij Hedy!'"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 32), hedy.exceptions.InvalidSpaceException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=7)
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_print_no_space(self):
         code = "print'hallo wereld!'"
@@ -175,12 +183,17 @@ class TestsLevel4(HedyTester):
         # then we can immediately raise the no quoted exception
 
         code = "print hedy 123"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.UnquotedTextException),
+        ]
 
         self.multi_level_tester(
             code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=5,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_print_without_quotes_gives_error_from_transpiler(self):
@@ -201,11 +214,17 @@ class TestsLevel4(HedyTester):
     def test_ask_without_quotes_gives_error_from_grammar(self):
         # same as print for level 4
         code = "pietje is ask hedy 123"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+        ]
 
         self.multi_level_tester(
             code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=4,
-            exception=hedy.exceptions.UnquotedTextException
         )
 
     def test_assign_catalan_var_name(self):
@@ -236,7 +255,7 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            max_level=5,
             exception=hedy.exceptions.UnquotedTextException,
         )
 
@@ -260,19 +279,33 @@ class TestsLevel4(HedyTester):
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.multi_level_tester(
             code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
         code = f"print {q}hedy 123"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.multi_level_tester(
             code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     def test_print_single_quoted_text_var(self):
@@ -372,7 +405,17 @@ class TestsLevel4(HedyTester):
 
     def test_ask_without_quotes_gives_error(self):
         code = "kleur is ask Hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.HedyException)
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 22), hedy.exceptions.UnquotedTextException),
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_ask_text_without_quotes_gives_error(self):
         code = "var is ask hallo wereld"
@@ -386,12 +429,32 @@ class TestsLevel4(HedyTester):
     @parameterized.expand(HedyTester.quotes)
     def test_ask_without_opening_quote_gives_error(self, q):
         code = f"kleur is ask Hedy 123{q}"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_without_closing_quote_gives_error(self, q):
         code = f"kleur is ask {q}Hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_ask_with_comma(self):
         code = textwrap.dedent("""\
@@ -675,8 +738,18 @@ class TestsLevel4(HedyTester):
 
     def test_quoted_text_gives_error(self):
         code = 'competitie die gaan we winnen'
+        expected = "pass"
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.MissingCommandException)
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 31), hedy.exceptions.MissingCommandException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_repair_incorrect_print_argument(self):
         code = "print ,'Hello'"
@@ -689,9 +762,17 @@ class TestsLevel4(HedyTester):
 
     def test_lonely_text(self):
         code = "'Hello'"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 8), hedy.exceptions.LonelyTextException),
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.LonelyTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     def test_clear(self):
@@ -721,12 +802,12 @@ class TestsLevel4(HedyTester):
         print(f'We need to use {answer}')""")
 
         expected_source_map = {
-            "1/0-1/52": "1/0-1/54",
-            "1/0-3/136": "1/0-3/143",
-            "2/53-2/59": "2/55-2/61",
-            "2/53-2/104": "2/55-2/109",
-            "3/129-3/135": "3/134-3/140",
-            "3/105-3/135": "3/110-3/143"
+            '1/1-1/53': '1/1-1/55',
+            '2/1-2/7': '2/1-2/7',
+            '2/1-2/52': '2/1-2/55',
+            '3/25-3/31': '3/25-3/31',
+            '3/1-3/31': '3/1-3/34',
+            '1/1-3/32': '1/1-3/34'
         }
 
         self.single_level_tester(code, expected=expected_code)

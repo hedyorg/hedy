@@ -29,6 +29,8 @@ for p in public_programs:
 
 p2 = [(s.name, s) for s in public_snippets]
 
+passed_snippets = []
+
 
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
@@ -42,6 +44,14 @@ class TestsPublicPrograms(HedyTester):
                     lang=snippet.language,
                     translate=False
                 )
+
+                # useful code if you want to test what erroneous snippets are now passing
+                # passed_snippets.append(str(snippet.level) + '\n' + snippet.code + '\n--------\n')
+                # try:
+                #     with open('output.txt', 'w') as f:
+                #         f.writelines(passed_snippets)
+                # except Exception as e:
+                #     pass
 
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
                 pass

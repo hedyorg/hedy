@@ -14,7 +14,6 @@ text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्
 text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE
 
-
 // FUNCTIONS ======================================== =============================
 command:+= call | error_nested_define | return
 _non_empty_program: _EOL* (define | command | error_invalid) _SPACE* (_EOL+ (define | command) _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
