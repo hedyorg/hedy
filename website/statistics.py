@@ -381,8 +381,8 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
 
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
@@ -399,9 +399,6 @@ class LiveStatisticsModule(WebsiteModule):
                 "quiz_info": quiz_info
             },
             dashboard_options={
-                "show_c1": show_c1,
-                "show_c2": show_c2,
-                "show_c3": show_c3,
                 "student": student
             },
             attempted_adventures=attempted_adventures,
@@ -481,8 +478,8 @@ class LiveStatisticsModule(WebsiteModule):
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
 
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
 
         return jinja_partials.render_partial(
             "partial-class-live-stats.html",
@@ -496,9 +493,6 @@ class LiveStatisticsModule(WebsiteModule):
                 "quiz_info": quiz_info
             },
             dashboard_options={
-                "show_c1": show_c1,
-                "show_c2": show_c2,
-                "show_c3": show_c3,
                 "student": student
             },
             attempted_adventures=attempted_adventures,
@@ -524,8 +518,8 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
 
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
@@ -541,9 +535,6 @@ class LiveStatisticsModule(WebsiteModule):
             return jinja_partials.render_partial(
                 "partial-class-live-stats.html",
                 dashboard_options={
-                    "show_c1": show_c1,
-                    "show_c2": show_c2,
-                    "show_c3": show_c3,
                     "student": student
                 },
                 class_info={
@@ -580,9 +571,6 @@ class LiveStatisticsModule(WebsiteModule):
                     "quiz_info": quiz_info
                 },
                 dashboard_options={
-                    "show_c1": show_c1,
-                    "show_c2": show_c2,
-                    "show_c3": show_c3,
                     "student": student
                 },
                 attempted_adventures=attempted_adventures,
@@ -608,8 +596,8 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
 
         students = class_.get("students", [])
         if student not in students:
@@ -623,9 +611,6 @@ class LiveStatisticsModule(WebsiteModule):
         return jinja_partials.render_partial(
             "partial-class-live-stats.html",
             dashboard_options={
-                "show_c1": show_c1,
-                "show_c2": show_c2,
-                "show_c3": show_c3,
                 "student": student
             },
             class_info={
@@ -706,8 +691,8 @@ class LiveStatisticsModule(WebsiteModule):
         """
         Handles the rendering of the common error items in the common errors detection list.
         """
-        show_c1, show_c2, show_c3, student = _check_dashboard_display_args()
-        dashboard_options_args = _build_url_args(show_c1=show_c1, show_c2=show_c2, show_c3=show_c3, student=student)
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
 
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_id)
@@ -764,9 +749,6 @@ class LiveStatisticsModule(WebsiteModule):
                 "quiz_info": quiz_info
             },
             dashboard_options={
-                "show_c1": show_c1,
-                "show_c2": show_c2,
-                "show_c3": show_c3,
                 "student": student
             },
             dashboard_options_args=dashboard_options_args,
@@ -1210,23 +1192,15 @@ def _determine_bool(bool_str):
     return bool_str == "True"
 
 
-def _check_dashboard_display_args():
+def _check_student_arg():
     """
     Checks the arguments of the request and returns the values. Mainly exists to avoid code duplication.
     """
-    show_c1 = request.args.get("show_c1", default="True", type=str)
-    show_c1 = _determine_bool(show_c1)
-
-    show_c2 = request.args.get("show_c2", default="True", type=str)
-    show_c2 = _determine_bool(show_c2)
-
-    show_c3 = request.args.get("show_c3", default="True", type=str)
-    show_c3 = _determine_bool(show_c3)
 
     student = request.args.get("student", default=None, type=str)
     student = None if student == "None" else student
 
-    return show_c1, show_c2, show_c3, student
+    return student
 
 
 def _get_available_adventures(adventures, teacher_adventures, customizations, last_adventures):
