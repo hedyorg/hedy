@@ -399,6 +399,8 @@ class ForTeachersModule(WebsiteModule):
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
+                if adventure['name'] not in adventure_names:
+                    adventure_names[adventure['name']] = adventure['long_name']
                 sorted_adventure = SortedAdventure(short_name=adventure['name'],
                                                    long_name=adventure_names[adventure['name']],
                                                    is_command_adventure=adventure['name']
