@@ -828,8 +828,9 @@ adventures:
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             4:
                 story_text: |
-                    En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si ({if}) quieres imprimir texto, debes usar comillas.
-                    ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
+                    En este nivel podemos programar el juego de piedra, papel, tijera. Pero si quieres añadir texto, aquí también tienes que usar comillas.
+                    ### Ejercicio
+                    Copia el código del nivel anterior y haz que funcione usando comillas después de cada comando `{print}` o `{ask}`.
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:
                 story_text: |
@@ -913,7 +914,7 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} '¡Bienvenide a tu propia calculadora!'"
-                story_text_3: "También puedes hacer que la computadora haga sumas aleatorias por su propia cuenta.\nAsí es como puedes escoger un número de tablas para practicar, y de ahí puedes tener siempre una suma diferente:\n"
+                story_text_3: "\n**Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\nAsí es como eliges un número de tablas para practicar, y desde ahí siempre consigues una suma diferente:\n"
             14:
                 story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
                 example_code: "```\n{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        intento = {ask} '¿Que número piensas que es?'\n        {if} intento > número\n            {print} '¡Muy alto!'\n        {if} intento < número\n            {print} '!Muy bajo!'\n        {if} intento == número\n            {print} '¡Ganaste!'\n            juego = 'terminó'\n```\n"
@@ -927,11 +928,11 @@ adventures:
                 example_code: "```\nnúmeros = 1, 2, 3\n{for} número1 {in} números\n    {for} número2 {in} números\n        respuesta = {ask} '¿Cuánto es ' número2 ' por ' número1 '?'\n        correcta = número1 * número2\n        {if} respuesta {is} correcta\n            {print} 'Muy bien!'\n        {else}\n            {print} 'Estás equivocade. La respuesta correcta es ' correcta\n```\n"
                 start_code: '# pon tu código aquí'
             15:
-                story_text: "Puedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste en el nivel anterior.\nEsto asegura que el jugador no pueda continuar a la siguiente pregunta {if} (si) se responde incorrectamente.\n"
+                story_text: "Puedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste a hacer en el nivel anterior.\nEsto asegura que el jugador no pueda continuar a la siguiente pregunta si se responde incorrectamente.\n"
                 example_code: "```\npuntaje = 0\n{for} i {in} {range} 0 {to} 9\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    correcta = número1 * número2\n    respuesta = 0\n    {while} respuesta != correcta\n        {print} '¿Cuánto es ' número1 ' por ' número2 '?'\n        respuesta = {ask} 'Escribe tu respuesta:'\n        {print} 'Tu respuesta es ' respuesta\n    {print} '¡Buen trabajo!'\n{print} '¡Ganaste!'\n```\n"
                 start_code: '# pon tu código aquí'
             11:
-                example_code: "```\nnumero = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * numero\n```\n"
+                example_code: "```\nnumber = 10\n{for} i {in} {range} 1 a 10\n    {print} i * number\n```\n"
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el codigo de ejemplo para que\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# pon tu codigo aquí'
             13:
