@@ -960,7 +960,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                            Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                              Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1481,7 +1481,7 @@ adventures:
                     ```
                 story_text_2: |2
 
-                            Of course, you could also order for multiple people!
+                              Of course, you could also order for multiple people!
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -2550,30 +2550,30 @@ adventures:
                 example_code_2: "```\nanimaux_favoris is _\n{print} J'aime les animaux_favoris\n```\n"
                 start_code: "nom {is} Hedy\nâge {is} 15\n{print} nom a âge ans"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
-                story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                start_code: "âge = {ask} \"Quel âge as-tu ?\"\n{if} âge < 13\n    {print} \"Tu es plus jeune que moi !\"\n{else}\n    {print} \"Tu es plus âgé que moi !\""
+                story_text: "Nous allons apprendre d'autres nouveaux éléments. Tu les connais peut-être déjà par les mathématiques, le `<` et `>`.\nLe `<` vérifie si le premier nombre est plus petit que le second, par exemple, `âge < 12` vérifie si âge est plus petit que 12.\nSi tu veux vérifier si le premier nombre est plus petit ou égale au second, tu peux utiliser `<=`. Par exemple `âge <= 11`.\nLe `>` vérifie si le premier nombre est plus grand que le second, par exemple, `âge > 10` vérifie si âge est plus grand que 10.\nSi tu veux vérifier si le premier nombre est plus grand ou égale au second, tu peux utiliser `>=`. Par exemple `âge >= 11`.\nCes comparaisons s'utilisent avec `{if}`, comme ceci :\n"
+                example_code: "```\nâge = {ask} \"Quel âge as-tu ?\"\n{if} âge > 12\n     {print} \"Tu es plus agé que moi !\"\n```\n"
+                story_text_2: "A parti de ce niveau et pour les suivants, si tu veux comparer l'égalité, tu dois utiliser deux fois le signe égale. C'est ainsi que font la plupart des langages de programmation.\n"
+                example_code_2: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom == \"Hedy\"\n    {print} \"Tu es cool !\"\n```\n"
+                story_text_3: "Tu peux aussi comparer si une chose n'est *pas* égale à une autre chose en utilisant `!=` comme ceci :\n"
+                example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom != \"Hedy\"\n    {print} \"Tu n'es pas Hedy\"\n```\n"
     random_command:
-        name: random
-        description: introducing at random command
+        name: hasard
+        description: introduction de la commande `{at} {random}`
         default_save_name: random_command
         levels:
             3:
-                story_text: "## At random\nIn this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.\n"
-                example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
-                story_text_2: "You can use the `{at} {random}` command in a sentence as well.\n"
-                example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
-                start_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n"
-                story_text_3: "### Exercice\nTry out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it? We have already put the first lines into the example code.\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\nchosen {is} {ask} Which suitcase do you choose?\nprices {is} _\n_\n```\n"
+                story_text: "## Au hasard\nÀ ce niveau, tu peux créer une liste avec la commande `{is}`. Tu peux laisser l'ordinateur choisir un élément au hasard dans cette liste. Tu fais ça avec `{at} {random}`\n"
+                example_code: "```\nanimaux {is} chien, chat, kangourou\n{print} animaux {at} {random}\n```\n"
+                story_text_2: "Tu peux aussi utiliser la commande `{at} {random}` dans une phrase.\n"
+                example_code_2: "```\nnouriture {is} part de tarte, part de pizza, salade, crêpe\n{print} Je vais prendre une nouriture {at} {random} pour le déjeuner.\n```\n"
+                start_code: "animaux {is} chien, chat, kangourou\n{print} animaux {at} {random}\n"
+                story_text_3: "### Exercice\nEssaie la commande `{at} {random}` en faisant ton propre jeu concours (comme à la télé) où tu choisis une porte ou une valise qui peut contenir le gros lot !\nSauras-tu le faire ? Nous avons déjà écrit les premières lignes dans le code d'exemple.\n"
+                example_code_3: "```\n{print} Le grand jeu concours !\n{print} Voyez ces 3 valises devant vous…\nchoix {is} {ask} Quelle valise choisissez-vous ?\nles_prix {is} _\n_\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit[random]"
-                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "fruit = [\"pomme\", \"banane\", \"cerise\"]\n{print} fruit[random]"
+                story_text: "Nous allons créer des listes comme en Python, avec des crochets autour des listes ! Nous gardons aussi les guillemets autour de chaque élément comme nous l'avons appris au niveau précédent.\nNous utilisons les crochets pour désigner une position dans une liste. La commande `{at} {random}` ne peut plus être utilisée."
+                example_code: "```\namis = [\"Ahmed\", \"Ben\", \"Cayden\"]\nnuméros_porte_bonheur = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} \"Le numéro porte-bonheur de \" amis[i]\n    {print} \"est \" numéros_porte_bonheur[i]\n```\n"
     if_command:
         levels:
             5:
@@ -2673,8 +2673,8 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
     add_remove_command:
-        name: add and remove
-        description: introducing add to and remove from
+        name: ajoute et supprime
+        description: Introduction de ajoute et supprime de
         default_save_name: add_remove_command
         levels:
             3:
