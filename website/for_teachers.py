@@ -399,11 +399,12 @@ class ForTeachersModule(WebsiteModule):
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
-                sorted_adventure = SortedAdventure(short_name=adventure['name'],
-                                                   long_name=adventure_names[adventure['name']],
-                                                   is_command_adventure=adventure['name']
-                                                   in hedy_content.KEYWORDS_ADVENTURES,
-                                                   is_teacher_adventure=adventure['from_teacher'])
+                if adventure['name'] in adventure_names:
+                    sorted_adventure = SortedAdventure(short_name=adventure['name'],
+                                                       long_name=adventure_names[adventure['name']],
+                                                       is_command_adventure=adventure['name']
+                                                       in hedy_content.KEYWORDS_ADVENTURES,
+                                                       is_teacher_adventure=adventure['from_teacher'])
                 adventures[int(level)].append(sorted_adventure)
 
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)

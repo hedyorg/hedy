@@ -244,7 +244,8 @@ class StatisticsModule(WebsiteModule):
         for key, value in class_adventures.items():
             adventure_list = []
             for adventure in value:
-                if not adventure['name'] == 'next':
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
                     adventure_list.append(adventure_names[adventure['name']])
             class_adventures_formatted[key] = adventure_list
 
@@ -256,7 +257,7 @@ class StatisticsModule(WebsiteModule):
                 ticked_adventures[student] = []
                 current_program = {}
                 for _, program in programs.items():
-                    name = adventure_names[program['adventure_name']]
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
                     if name in customized_level:
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
