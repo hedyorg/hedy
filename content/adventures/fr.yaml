@@ -960,7 +960,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                              Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1481,7 +1481,7 @@ adventures:
                     ```
                 story_text_2: |2
 
-                              Of course, you could also order for multiple people!
+                                Of course, you could also order for multiple people!
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -2577,19 +2577,19 @@ adventures:
     if_command:
         levels:
             5:
-                story_text_3: "### Exercice\nTry to create your own code with `{if}` and `{else}`. You can use the example code if you want.\n"
-                example_code_3: "```\nanswer {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Great job!'\n_ _ 'No 2 + 2 = 4'\n```\n"
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                story_text_3: "### Exercice\nEssaye de créer ton propre code avec `{if}`et `{else}`. Tu peux utiliser l'exemple de code si tu veux.\n"
+                example_code_3: "```\nréponse {is} {ask} \"2 + 2 = ?\"\n_ _ _ 4 _ \"Bon travail !\"\n_ _ \"Non 2 + 2 = 4\"\n```\n"
+                start_code: "nom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy {print} \"bien\"\n{else} {print} \"bouu !\""
+                story_text: "## Si… sinon…\nAu niveau 5 il y a quelque chose de nouveau, le `{if}` ! Avec le `{if}` tu peux choisir entre deux options différentes.\nCe code écrit « bien » si tu réponds « Hedy » comme nom, et « bouuu ! » si tu réponds quelque chose d'autre.\n`{ask}` et `{print}` continuent de fonctionner de la même manière qu'au niveau 4.\n"
+                example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy {print} \"bien\" {else} {print} \"bouu !\"\n```\n"
+                story_text_2: "Parfois, le code avec un `{if}`devient vraiment long et ne tient plus très bien sur la ligne.\nTu peux diviser le code sur deux lignes en commençant la seconde ligne avec le `{else}` comme ceci :\n"
+                example_code_2: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy {print} \"bien\"\n{else} {print} \"bouuu !\"\n```\n"
             8:
-                start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
-                example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
-                story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercice\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
-        name: if else
-        description: Introducing the if command
+                start_code: "nom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n"
+                example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n```\n"
+                story_text: "## Si… Sinon…\nTu as appris à répéter un bloc de ligne de code après une commande `{repeat}`.\nMaintenant, tu peux aussi utiliser l'indentation pour faire un bloc après une commande `{if}` ou `{else}`.\nRegarde l'exemple de code.\n\n### Exercice\nAjoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.\n"
+        name: si sinon
+        description: Introduction de la commande `{if}`
         default_save_name: if_command
     in_command:
         name: in
@@ -2678,22 +2678,22 @@ adventures:
         default_save_name: add_remove_command
         levels:
             3:
-                story_text: "## Add to\nYou can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_2: "## Remove from\nIf you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.\n"
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_3: "### Exercice\nTry out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.\n"
-                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
-                start_code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
+                story_text: "## Ajouter à une liste\nTu peux ajouter des éléments à une liste avec la commande `{add} {to}`. Pour ajouter un élément à une liste, tu peux simplement écrire : `{add} pingouin {to} animaux`ou tu peux utiliser la commande `{ask}` comme dans le code d'exemple.\n"
+                example_code: "```\nanimaux {is} chien, chat, kangourou\nfavori {is} {ask} Quel est ton animal favori ?\n{add} favori {to_list} animaux\n{print} Je choisis animaux {at} {random}\n```\n"
+                story_text_2: "## Supprimer d'une liste\nSi tu peux ajouter des éléments à une liste, tu peux aussi en retirer bien sûr. Cela se fait avec la commande `{remove} {from}`\n"
+                example_code_2: "```\nanimaux {is} chien, chat, kangourou\nmal_aimé {is} {ask} Quel animal n'aimes-tu pas ?\n{remove} mal_aimé {from} animaux\n{print} Je choisis animaux {at} {random}\n```\n"
+                story_text_3: "### Exercice\nEssaye les nouvelles commandes dans ce restaurant virtuel. Ajoute les parfums que les joueurs désirent à la liste et supprime les parfums auxquels ils sont allergiques.\n"
+                example_code_3: "```\n{print} Le milkshake mystérieux\nparfums {is} fraise, chololat, vanille\ndésire {is} {ask} Quelle parfum désires-tu ?\n_\nallergie {is} {ask} Est-tu allergique à un parfum ?\n_\n{print} Voici un milkshake parfums {at} {random}\n```\n"
+                start_code: "animaux {is} chien, chat, kangourou\nfavori {is} {ask} Quel est ton animal favori ?\n{add} favori {to_list} animaux\nmal_aimé {is} {ask} Quel animal n'aimes-tu pas ?\n{remove} mal_aimé {from} animaux\n{print} Je choisis animaux {at} {random}"
     sleep_command:
-        name: sleep
-        description: introducing sleep command
+        name: dors
+        description: Introduction à la commande pour endormir
         default_save_name: sleep_command
         levels:
             2:
-                story_text: "## The sleep command\nAnother new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-                start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
+                story_text: "Une autre nouvelle commande de ce niveau est `{sleep}`. Elle endort le programme pendant une seconde. Si tu écris un nombre après la commande `{sleep}`, le programme s'endort durant le nombre de secondes correspondantes.\n\n### Exercice\nEntraine-toi avec cette nouvelle commande en écrivant ton propre code dans lequel tu utiliseras la commande `{sleep}` au moins 3 fois. Pour chaque commande `{sleep}`, utilise un temps de sommeil différent.\n"
+                example_code: "```\n{print} Ma couleur favorite est…\n{sleep} 2\n{print} vert !\n```\n"
+                start_code: "{print} Ma couleur favorite est…\n{sleep} 2\n{print} vert !"
     quotation_marks:
         name: "'quotation marks'"
         description: Introduction quotation marks
