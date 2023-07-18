@@ -739,7 +739,7 @@ class LiveStatisticsModule(WebsiteModule):
                 attempted_adventures[level] = programs_for_student
 
         return render_template(
-            "class-live-popup.html",
+            "htmx-class-live-popup.html",
             class_info={
                 "id": class_id,
                 "students": students,

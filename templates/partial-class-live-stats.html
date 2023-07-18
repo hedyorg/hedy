@@ -197,7 +197,7 @@
                                                 {% else %}
                                                     <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
                                                 {% endif %}
-                                                <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">{{ adventure.name }}</span>
+                                                <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto z-50">{{ adventure.name }}</span>
                                             </div>
                                             {% endfor %}
                                             <div class="group flex relative">
@@ -208,7 +208,7 @@
                                                 {% else %}
                                                 <button type="button" class="h-6 w-6 m-1 rounded-full bg-gray-500 hover:bg-gray-400"></button>
                                                 {% endif %}
-                                            <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto">Quiz</span>
+                                            <span class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 -translate-y-8 opacity-0 m-4 mx-auto z-50">Quiz</span>
                                             </div>
                                         </div>
                                     </td>
@@ -249,13 +249,13 @@
                             <i id="common_errors_icon" class="fa-solid fa-chevron-up w-4"></i>
                         </a> 
                     </div>
-                    <div class="w-full text-left p-6 mt-5" id="common_errors_list">
+                    <div class="w-full text-left p-6 mt-10" id="common_errors_list">
                         <ul class="max-w-md space-y-3 list-none list-inside">
                             {% for error_entry in class_info.common_errors %}
                                 {% if error_entry.active == 1 %}
                                     <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
                                         <div class="flex justify-between items-center">
-                                            <a class="no-underline"  href='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
+                                            <a class="no-underline" hx-target="#modal-target" hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                                 <h3 class="cursor-pointer ml-2 hover:text-white">
                                                 {{error_entry.header}} ({{error_entry.students|length}})
                                                 </h3>
