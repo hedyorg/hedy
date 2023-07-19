@@ -362,110 +362,110 @@ sections:
                 solution_code: |
                     fruit {is} pomme, cerise, banane
                     {print} fruit {at} {random}
-        -   title: "Students forget to use commas in their lists"
+        -   title: "Les élèves oublient d'utiliser des virgules dans leurs listes"
             example:
                 error_text: |
-                    In a list items are seperated with a comma.
+                    Dans une liste, les éléments sont séparés par une virgule.
                 error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
+                    pizzas {is} champignons thon quatre saisons
+                    {print} pizzas {at} {random}
                 solution_text: |
-                    After each item on your list, there should be a comma
+                    Chaque élément de votre liste doit être suivi d'une virgule
                 solution_code: |
-                    pizzas is funghi, tonno, quattro stagioni
-                    print pizzas at random
-        -   title: "Les élèves essaient d'utiliser at random sans une liste"
+                    pizzas {is} champignons, thon, quatre saisons
+                    {print} pizzas {at} {random}
+        -   title: "Les élèves essaient d'utiliser `{at}` `{random}` sans une liste"
             example:
                 error_text: |
-                    For example
+                    Par exemple
                 error_code: |
-                    clubs is Manchester United
-                    print clubs at random
+                    clubs {is} Machester United
+                    {print} clubs {at} {random}
                 solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
+                    Hedy ne peut pas afficher quelque chose au hasard, parce qu'il n'y a pas de liste à partir de laquelle choisir.
                 solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
-        -   title: "Students try to use add/remove without a list "
+                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
+                    {print} clubs {at} {random}
+        -   title: "Les élèves essaient d'utiliser les fonctions ajouter/supprimer sans liste "
             example:
                 error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                    Dans l'exemple ci-dessous, "noms" n'est pas une liste, mais une variable. Vous ne pouvez rien y ajouter.
                 error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    noms {is} Jake
+                    ton_nom {is} {ask} Qui es-tu ?
+                    {add} ton_nom {to} noms
+                    {print} noms {at} {random}
                 solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                    Il faut d'abord qu'il y ait une liste, donc vous devez ajouter un deuxième nom pour transformer les noms en liste, par exemple Amy. Si vous ne voulez pas d'Amy dans votre liste, vous pouvez utiliser remove pour la supprimer ensuite.
                 solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
-        -   title: "Les élèves oublient d'utiliser to/from dans add/remove"
+                    noms {is} Jake, Amy
+                    ton_nom {is} {ask} Qui es-tu ?
+                    {add} ton_nom {to} noms
+                    {print} noms {at} {random}
+        -   title: "Les élèves oublient d'utiliser à/de dans ajoute/supprime"
             example:
                 error_text: |
-                    Without to/from the add/remove command won't work.
+                    Sans à/de, la commande ajoute/supprime ne marchera pas..
                 error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
+                    aventures {is} histoire, perroquet, dé
+                    choix {is} Quelle aventure tu préfères?
+                    {add} choix
+                    {remove} dé
+                    {print} J'aime aventures {at} {random}
                 solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
+                    Hedy doit savoir à quelle liste l'élément doit être ajouté/supprimé.
                 solution_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice to adventures
-                    remove dice from adventures
-                    print I love adventures at random
+                    aventures est histoire, perroquet, dé
+                    choix est Quelle aventure préférez-vous ?
+                    ajoute choix à aventures
+                    supprime dé de aventures
+                    affiche J'aime aventures au hasard
     -   level: '4'
         sections:
-        -   title: "Students forget to use quotation marks on both sides of the text"
+        -   title: "Les élèves oublient d'utiliser les guillemets des deux côtés du texte"
             example:
                 error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
+                    Dans ce niveau, il affiche et demande ont besoin de guillemets. Un avant le texte et un après.
                 error_code: |
-                    print Hello
-                    mood is ask 'How are you?
+                    affiche Hello
+                    humeur demande 'Comment vas-tu ?
                 solution_text: |
-                    Add the correct quotation marks.
+                    Ajoute correctement les guillemets.
                 solution_code: |
-                    print 'Hello'
-                    mood is ask 'How are you?'
-        -   title: "Students use the wrong quotation marks"
+                    affiche 'Hello'
+                    humeur est demande 'Comment vas-tu?'
+        -   title: "Les élèves utilisent les mauvais guillemets"
             example:
                 error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. ELse they might use the "double quotes" or the `skewed one`.
+                    Il est important de commencer votre cours en vérifiant si les étudiants savent comment taper un guillemet correctement. Sinon, ils pourraient utiliser les "doubles guillemets" ou les guillemets inversés ` .
                 error_code: |
-                    print `Welcome to the restaurant`
-                    food is ask "What would you like to order?"
+                    print `Bienvenue au restaurant`
+                    nourriture is demande "Que voulez-vous commander?"
                 solution_text: |
-                    These are the correct quotation marks:
+                    Ce sont les guillemets corrects :
                 solution_code: |
-                    print 'Welcome to the restaurant'
-                    food is ask 'What would you like to order?'
-        -   title: "Students use an apostrophe in their text"
+                    affiche 'Bienvenue au restaurant'
+                    nourriture est demande 'Que voulez-vous commander ?'
+        -   title: "Les élèves utilisent une apostrophe dans leur texte"
             example:
                 error_text: |
-                    From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
+                    A partir de ce niveau, les apostrophes ne sont plus autorisées. Elles sont souvent utilisées en français pour signifier l'élision de voyelles comme dans l'entrée, par exemple.
                 error_code: |
-                    print 'You're not allowed to type this'
+                    affiche 'Vous n'êtes pas autorisé à entrer ceci'
                 solution_text: |
-                    You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
+                    Vous pouvez choisir d'utiliser la mauvaise grammaire et d'omettre l'apostrophe. Vous pouvez aussi utiliser le ` comme apostrophe.
                 solution_code: |
-                    print 'Youre allowed to type this'
-                    print 'And you`re able to do this'
+                    print 'T'es autorisé à entrer ceci'
+                    print 'Et t`es capable de faire ceci'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: "Les élèves oublient d'utiliser `{print}` dans une commande `{if}`"
             example:
                 error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
+                    Après avoir utilisé `{if}`ou `{else}`, les élèves oublient d'utiliser une deuxième commande comme `{print}` ou `{ask}`.
                 error_code: |
-                    if name is Hedy 'Great!'
-                    else 'Hedy is better!'
+                    si nom est Hedy 'Super!'
+                    sinon 'Hedy est mieux!'
                 solution_text: |
                     Add the print command to fix it.
                 solution_code: |
