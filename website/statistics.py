@@ -414,7 +414,9 @@ class LiveStatisticsModule(WebsiteModule):
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_['id'])
         selected_levels = self.__selected_levels(class_['id'])
-
+        if selected_levels:
+            selected_levels = [int(level) for level in selected_levels]
+            selected_levels.sort()
         # identifies common errors in the class
         self.misconception_detection(class_['id'], user, common_errors)
         # in case of a db update in the meantime, reload common errors
