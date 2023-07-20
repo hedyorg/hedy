@@ -21,14 +21,14 @@
                               <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student)}}" 
                                  hx-target="#main_content"
                                  _="on click trigger closeModal"
-                                 class="text-gray-800 hover:text-white cursor-pointer">
+                                 class="text-gray-800 no-underline hover:underline underline-offset-2 cursor-pointer">
                                   {{student}}
                               </a>
                           {% else %}
                               <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student)}}" 
                                  hx-target="#main_content"
                                  _="on click trigger closeModal"
-                                 class="text-gray-800 hover:text-white cursor-pointer">
+                                 class="text-gray-800 no-underline hover:underline underline-offset-2 cursor-pointer">
                                   {{student}}
                               </a>
                           {% endif %}
