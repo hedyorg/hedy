@@ -926,7 +926,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                  Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1364,20 +1364,20 @@ adventures:
 
                 example_code: |2
 
-                    Vous pouvez créer un code de restaurant simple, comme celui-ci :
-                    ```
-                    {print} 'Bienvenue au restaurant Chez Hedy'
-                    {print} 'Voici notre menu:'
-                    {print} 'Nos plats principaux sont: pizza, lasagnes ou spaghettis'
-                    plat_principal = {ask} 'Quel plat principal souhaitez-vous?'
-                    prix = 0
-                    {if} plat_principal {est} pizza prix = 10
-                    {if} plat_principal {est} lasagne prix = 12
-                    {if} plat_principal {est} spaghetti prix = 8
-                    {print} 'Vous avez commandé ' plat_principal
-                    {print} 'Ce sera ' prix ' dollars, s'il vous plaît'
-                    {print} 'Merci, bon appétit !'
-                    ```
+                      Vous pouvez créer un code de restaurant simple, comme celui-ci :
+                      ```
+                      {print} 'Bienvenue au restaurant Chez Hedy'
+                      {print} 'Voici notre menu:'
+                      {print} 'Nos plats principaux sont: pizza, lasagnes ou spaghettis'
+                      plat_principal = {ask} 'Quel plat principal souhaitez-vous?'
+                      prix = 0
+                      {if} plat_principal {est} pizza prix = 10
+                      {if} plat_principal {est} lasagne prix = 12
+                      {if} plat_principal {est} spaghetti prix = 8
+                      {print} 'Vous avez commandé ' plat_principal
+                      {print} 'Ce sera ' prix ' dollars, s'il vous plaît'
+                      {print} 'Merci, bon appétit !'
+                      ```
                 start_code: "# place your code here"
             7:
                 story_text: |
@@ -2555,16 +2555,16 @@ adventures:
         description: Introduction de la commande `{if}`
         default_save_name: if_command
     in_command:
-        name: in
-        description: Introducing the in command
+        name: dans
+        description: Introduction de la commande `{in}`
         default_save_name: in_command
         levels:
             5:
-                story_text: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code: "```\npretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "### Exercice\nFinish the example code by filling in the blanks with commands that you've learned.\nWhen you've finished the code, try to create a code of your own and use a question that you've thought of yourself.\n"
-                example_code_2: "```\nanimals is dog, cow, sheep\nanswer is ask 'What is your favorite animal?'\n_ answer _ animals _ 'Mine too!'\n_ _ 'My favorite animals are dogs, cows and sheep'\n```\n"
-                start_code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
+                story_text: "## Listes\nQuand nous voulons vérifier si quelque chose est dans une liste, nous pouvons maintenant utiliser la commande `{in}`.\nCe code écrit « joli ! » si tu choisis vert ou jaune, et « bof » sinon.\n"
+                example_code: "```\njolies_couleurs {is} vert, jaune\ncouleur_favori {is} {ask} \"Quelle est ta couleur préférée ?\"\n{if} couleur_favori {in} jolies_couleurs {print} \"jolie !\"\n{else} {print} \"bof\"\n```\n"
+                story_text_2: "### Exercice\nTermine l'exemple de code en remplissant les blancs avec les commandes que tu as apprises.\nQuand tu auras fini, essaye de créer ton propre code et utilise une question que tu auras trouvée toi-même.\n"
+                example_code_2: "```\nanimaux {is} chien, vache, mouton\nréponse {is} {ask} \"Quel est ton animal préféré ?\"\n_ réponse _ animaux _ \"c'est aussi le mien !\"\n_ _ \"mes animaux préférés sont le chien, la vache et le mouton\"\n```\n"
+                start_code: "jolies_couleurs {is} vert, jaune\ncouleur_favori {is} {ask} \"Quelle est ta couleur préférée ?\"\n{if} couleur_favori {in} jolies_couleurs {print} \"jolie !\"\n{else} {print} \"bof\""
     repeat_command_2:
         levels:
             8:
@@ -2658,43 +2658,43 @@ adventures:
                 example_code: "```\n{print} Ma couleur favorite est…\n{sleep} 2\n{print} vert !\n```\n"
                 start_code: "{print} Ma couleur favorite est…\n{sleep} 2\n{print} vert !"
     quotation_marks:
-        name: "'quotation marks'"
-        description: Introduction quotation marks
+        name: "\"Les guillemets\""
+        description: Introduction des guillemets
         default_save_name: quotation_marks
         levels:
             4:
-                story_text: "## 'Guillemets'\nAu niveau 4 `{ask}` et `{print}` ont changé.\nTu dois mettre le texte que tu veux afficher entre des guillemets.\nC'est utile, parce-que tu peux maintenant afficher tous les mots que tu veux. Même les mots que tu as utilisé pour mémoriser des choses avec `{is}`.\nLa plupart des langages de programmation utilisent aussi des guillemets pour afficher, donc on s'approche un peu plus de la vraie programmation !\n"
-                story_text_2: "## Apostrophes\nImportant ! Garde à l'esprit que maintenant que nous utilisons des guillemets, Hedy va être perdue quand tu utilises l'apostrophe pour des mots comme aujourd'hui ou s'il vous plait.\nAstuce : Tu peux utiliser différentes formes de guillemets pour entourer ton texte. Nous te recommandons d'utiliser \"les guillemets doubles\" qui fonctionnent bien dans la plupart de situations.\nL'exemple montre la mauvaise façon d'utiliser les apostrophes.\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
-                start_code: "{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer"
+                story_text: "## \"Les guillemets\"\nAu niveau 4 `{ask}` et `{print}` ont changé.\nTu dois mettre le texte que tu veux afficher entre des guillemets.\nC'est utile, parce que tu peux maintenant afficher tous les mots que tu veux. Même les mots que tu as utilisés pour mémoriser des choses avec `{is}`.\nLa plupart des langages de programmation utilisent aussi des guillemets pour afficher, donc on s'approche un peu plus de la vraie programmation !\n"
+                story_text_2: "## Apostrophes\nImportant ! Hedy accepte que tu utilises les guillemets ou les apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop de problème, mais en français, cela pose un problème avec, par exemple, « aujourd'hui » ou « s'il vous plait »\nAstuce : Nous te recommandons d'utiliser les guillemets qui fonctionnent bien dans la plupart de situations.\nL'exemple montre la mauvaise façon d'utiliser les apostrophes.\n"
+                example_code: "```\n{print} \"Tu as besoins d'utiliser les guillemets à partir de maintenant !\"\nréponse {is} {ask} \"Qu'avons nous besoins d'utiliser à partir de maintenant ?\"\n{print} \"Nous avons besoins d'utiliser \" réponse\n```\n"
+                example_code_2: "```\n_ Voici comment ça ne marche pas avec les apostrophes_\n{print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'\n{print} 'qu'y a-t-il de plus amusant que ça ?'\n```\n"
+                start_code: "{print}\"Tu as besoins d'utiliser les guillemets à partir de maintenant !\"\nréponse {is} {ask} \"Qu'avons-nous besoins d'utiliser à partir de maintenant ?\"\n{print} \"Nous avons besoins d'utiliser \" réponse"
             12:
-                story_text: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_2: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_2: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_3: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_4: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                start_code: "name = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'"
+                story_text: "**Tous les textes doivent être entre guillemets**\nÀ partir de ce niveau, tu devras utiliser les guillemets quand tu enregistres un texte avec `=` :\n"
+                example_code: "```\nnom = \"Hedy le robot\"\n{print} \"Bonjour \" nom\n```\n"
+                story_text_2: "**Tous les éléments des listes ont aussi besoins des guillemets**\nLes listes, c'est du texte ! Donc, elles ont aussi besoins des guillemets. Attention que chaque élément de la liste à besoins de ses guillemets individuellement.\nCela te permet d'avoir un élément de deux mots dans une liste. Par exemple \"Iron Man\".\n"
+                example_code_2: "```\nsuperhéros = \"Spiderman\", \"Batman\", \"Iron Man\"\n{print} superhéros {at} {random}\n```\n"
+                story_text_3: "**Tout texte dans la comparaison d'un `{if}` a besoins de guillemets**\n"
+                example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom = \"Hedy le robot\"\n    {print} \"Salut !\"\n```\n"
+                story_text_4: "**Les nombres n'ont pas besoins de guillemets**\nPour les nombres, tu ne dois pas utiliser les guillemets avec `=` :\n"
+                example_code_4: "```\nscore = 25\n{print} \"Tu as \" score\n```\n"
+                start_code: "nom = {ask} \"Quel est ton nom ?\"\n{if} nom = 'Hedy le robot'\n    {print} \"Salut !\""
     repeat_command:
-        name: Repeat
-        description: repeat command
+        name: Répète
+        description: la commande répète
         default_save_name: repeat_command
         levels:
             7:
-                story_text: "## Repeat! Repeat! Repeat!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:\n\n### Exercice\nPlay around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
-                start_code: "{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n"
+                story_text: "## Répète ! Répète ! Répète !\nLe niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour executer une ligne de code plusieurs fois. Comme ceci :\n\n### Exercice\nJoue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?\n"
+                example_code: "```\n{repeat} 3 {times} {print} \"Hedy est marrant !\"\n```\n"
+                start_code: "{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire, Hedy\"\n{print} \"Joyeux anniversaire\"\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
-                story_text: "### Repeat commands and indentation\nIn this level you can repeat multiple lines of code with only 1 repeat command.\nYou do this by making a block of lines that you want to repeat.\nThe lines in this block will need **indentation** .\nThat means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.\n"
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+                start_code: "{repeat} 5 {times}\n    {print} \"Bonjour tout le monde\"\n    {print} \"Ceci sera écrit 5 fois\""
+                story_text: "### La commande `{repeat}` et l'indentation\nÀ ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.\nTu le fais en faisant un bloc avec les lignes que tu veux répéter.\nLes lignes de ce bloc vont avoir besoins d'une **indentation**.\nCela veut dire mettre quatre espaces au début de chaque ligne. Tu devras indenter même si tu veux créer un bloc d'une seule ligne.\n"
+                example_code: "```\n{repeat} 5 {times}\n    {print} \"Salut tout le monde\"\n    {print}\"Tout ceci sera répété 5 fois\"\n```\n"
             9:
                 story_text: "In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
-                start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
+                start_code: "{repeat} 3 {times}\n    nourriture = {ask} \"Que veux-tu ?\"\n    {if} nourriture {is} pizza\n        {print} \"parfait !\"\n    {else}\n        {print} \"pizza c'est meilleur\""
     and_or_command:
         name: and or
         description: introducing and or
