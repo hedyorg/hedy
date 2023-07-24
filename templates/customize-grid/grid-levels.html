@@ -1,34 +1,45 @@
-<div id="level">
-  <table id="grid-table">
+<div class="border border-gray-400 py-2 px-4 rounded-lg" id="level">
+  <table class="table-auto text-center w-full" id="grid-table">
     <thead>
       <tr>
-        <th>Students</th>
+        <th class="border-r border-b border-gray-400 p-2" >Students</th>
         {% for adventure in class_adventures[level] %}                   
-          <th>{{ adventure }}</th>
+          <th class="border-b border-gray-400 {%if not loop.last %}border-r{% endif %}">{{ adventure }}</th>
         {% endfor %}
       </tr>
     </thead>
     <tbody>
-      {% for row in matrix_values %}
+      {% for row in matrix_values %} 
         <tr>
           {% set student_index = loop.index0 %}
+          {% set is_last_student = loop.last %}
           {% set student = class_info['students'][student_index] %}
-          <th>{{ student }}</th>
+          <td class="border-gray-400 p-1 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
           {% for checkbox in row %}
             {% set adventure_index = loop.index0 %}
             {% set adventure_id = adventure_names[class_adventures[level][adventure_index]] %}
             {% set student_adventure_id = student ~ '-' ~ adventure_id ~ '-' ~ level %}
             {% if checkbox is not none %}
-              <th class="table-header">
-                <div>
-                  <input type="checkbox" name="gridCheckBox" class="checkbox-wrapper" {% if checkbox == 1%}checked{% endif %} hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}" hx-target="#level" hx-trigger="change">
+              <td class="p-2 border-gray-400 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
+                <div class="relative">
+                  <input type="checkbox" 
+                         name="gridCheckBox" 
+                         class="student_adventure_checkbox align-middle text-green-700 text-center text-sm cursor-pointer {% if checkbox == 1%}fa-solid fa-check{% endif %}" 
+                         {% if checkbox == 1%}checked{% endif %} 
+                         hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}" 
+                         hx-target="#level" 
+                         hx-swap="outerHTML" 
+                         hx-trigger="change">           
+                         <a class="no-underline cursor-pointer absolute right-0 text-gray-800 hover:bg-gray-400/50 hover:rounded-full px-2 mx-0" href='/hedy/{{student_adventures[student_adventure_id]}}/view'><i class="fa-regular fa-eye"></i></a>
                 </div>
-                <div class="button-wrapper">
-                  <a class="no-underline cursor-pointer" href='/hedy/{{student_adventures[student_adventure_id]}}/view'>👁</a>
-                </div>
-              </th>
+              </td>
             {% else %}
-              <th><input type="checkbox" class="disabledCheckBox" name="gridCheckBox" disabled="true"></th>
+              <td class="border-gray-400 p-2 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
+                <input type="checkbox" 
+                       class="student_adventure_checkbox align-middle fa-solid fa-xmark text-center text-sm text-orange-600" 
+                       name="gridCheckBox" 
+                       disabled="true">
+              </td>
             {% endif %}  
           {% endfor %}
         </tr>
