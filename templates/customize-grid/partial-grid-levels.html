@@ -4,7 +4,7 @@
       <tr>
         <th class="border-r border-b border-gray-400 p-2" >Students</th>
         {% for adventure in class_adventures[level] %}                   
-          <th class="border-b border-gray-400 {%if not loop.last %}border-r{% endif %}">{{ adventure }}</th>
+          <th class="border-b border-gray-400 p-2 {%if not loop.last %}border-r{% endif %}">{{ adventure }}</th>
         {% endfor %}
       </tr>
     </thead>
@@ -14,7 +14,7 @@
           {% set student_index = loop.index0 %}
           {% set is_last_student = loop.last %}
           {% set student = class_info['students'][student_index] %}
-          <td class="border-gray-400 p-1 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
+          <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
           {% for checkbox in row %}
             {% set adventure_index = loop.index0 %}
             {% set adventure_id = adventure_names[class_adventures[level][adventure_index]] %}

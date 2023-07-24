@@ -142,7 +142,7 @@ class StatisticsModule(WebsiteModule):
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
@@ -173,7 +173,7 @@ class StatisticsModule(WebsiteModule):
         _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
         matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
