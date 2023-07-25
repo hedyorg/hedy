@@ -96,20 +96,7 @@
                 </div>
             </div>
         {% endif %}
-        {% if programs %}
-            {% for program in programs %}
-                {% if program.id != favourite_program.id %}
-                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-                        <div class="flex items-center justify-center mt-2 mb-2">
-                            <p>{{ program.name }}</p>
-                        </div>
-                        <div class="relative px-4 mb-4">
-                            <pre level="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+            {% include 'incl/public-programs.html' %}
         </div>
     {% else %}
         <div class="ml-4">{{ user_info.username }} {{_('no_shared_programs')}}</div>
