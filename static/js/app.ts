@@ -1844,3 +1844,40 @@ async function saveIfNecessary() {
 function currentTabLsKey() {
   return `save-${currentTab}-${theLevel}`;
 }
+
+export async function share_program(id: string, index: number, Public: boolean, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/share', { id, public: Public });
+    showAchievements(response.achievement, true, "");
+    if (Public) {
+      change_shared(true, index);
+    } else {
+      change_shared(false, index);
+    }
+    modal.notifySuccess(response.message);
+  });
+}
+
+function change_shared (shared: boolean, index: number) {
+  // Index is a front-end unique given to each program container and children
+  // This value enables us to remove, hide or show specific element without connecting to the server (again)
+  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
+  if (index == -1) {
+    return;
+  }
+  if (shared) {
+    $('#non_public_button_container_' + index).hide();
+    $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
+  } else {
+    $('#modal-copy-button').hide();
+    $('#public_button_container_' + index).hide();
+    $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
+  }
+}
