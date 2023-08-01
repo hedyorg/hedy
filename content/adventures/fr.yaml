@@ -447,8 +447,8 @@ adventures:
                 example_code: |
                     ```
                     mots {is} cri, Hedy
-                    {print} 'Entraîne ton perroquet !
-                    nouveau_mot {is} {demande} 'Quel mot veux-tu lui apprendre ?'
+                    {print} 'Entraîne ton perroquet !'
+                    nouveau_mot {is} {ask} 'Quel mot veux-tu lui apprendre ?'
                     {add} nouveau_mot {to_list} mots
                     mot_dit {is} mots {at} {random}
                     {print} '🧒 Dis ' nouveau_mot ', Hedy !'
@@ -924,9 +924,8 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |2
-
-                                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                example_code_2: |
+                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1362,8 +1361,7 @@ adventures:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |2
-
+                example_code: |
                       Vous pouvez créer un code de restaurant simple, comme celui-ci :
                       ```
                       {print} 'Bienvenue au restaurant Chez Hedy'
@@ -1371,11 +1369,11 @@ adventures:
                       {print} 'Nos plats principaux sont: pizza, lasagnes ou spaghettis'
                       plat_principal = {ask} 'Quel plat principal souhaitez-vous?'
                       prix = 0
-                      {if} plat_principal {est} pizza prix = 10
-                      {if} plat_principal {est} lasagne prix = 12
-                      {if} plat_principal {est} spaghetti prix = 8
+                      {if} plat_principal {is} pizza prix = 10
+                      {if} plat_principal {is} lasagne prix = 12
+                      {if} plat_principal {is} spaghetti prix = 8
                       {print} 'Vous avez commandé ' plat_principal
-                      {print} 'Ce sera ' prix ' dollars, s'il vous plaît'
+                      {print} "Ce sera " prix " dollars, s'il vous plaît"
                       {print} 'Merci, bon appétit !'
                       ```
                 start_code: "# place your code here"
@@ -1416,11 +1414,11 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Bienvenue au restaurant chez Hedy!'
-                    nombre_personnes = {ask} 'Combien de personnes se joindront à nous aujourd'hui?'
+                    nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui?"
                     {print} 'Génial!'
                     prix = 0
                     {repeat} nombre_personnes {times}
-                    nourriture = {ask} 'Que voulez-vous commander ?'
+                        nourriture = {ask} 'Que voulez-vous commander ?'
                         {print} nourriture
                         {if} nourriture {is} frites
                             prix = prix + 3
@@ -1468,7 +1466,7 @@ adventures:
                     ```
                     {print} 'Bienvenue au restaurant Hedy!'
                     nombre_personnes = {ask} 'Pour combien de personnes souhaitez-vous commander?'
-                    {print} 'Vous voulez donc commander pour ' nombre_personnes ' personnes'.
+                    {print} 'Vous voulez donc commander pour ' nombre_personnes ' personnes.'
                     {print} "Allons-y !"
                     ```
                 start_code: "# place your code here"
@@ -2471,7 +2469,7 @@ adventures:
                 example_code_2: "```\n_ Salut !\n```\n"
                 start_code: "{print} Bienvenue chez Hedy !\n"
             18:
-                example_code: "```\n{print}('Salut !')\n{for} i {in} {range}(1, 10) :\n    {print}('Ceci est la ligne ', i)\n```\n"
+                example_code: "```\n{print}('Salut !')\n{for} i {in} {range}(1, 10):\n    {print}('Ceci est la ligne ', i)\n```\n"
                 story_text_2: Si tu veux afficher plus d'un élément, tu dois les séparer par une virgule.
                 example_code_2: "```\ntemperature = 25\n{print}(\"Il fait \", temperature, \" degrés dehors\")\n```\n"
                 story_text_3: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
@@ -2479,9 +2477,9 @@ adventures:
                 start_code: "nom = \"Hedy\"\n{print}(\"mon nom est \", nom)"
                 story_text: "Nous sommes arrivés à du code Python réel ! Cela signifie qu'à partir de maintenant, nous devons utiliser les parenthèses avec `{print}` et `{range}`\nCela signifie aussi que tu peux utiliser le code Hedy de ce niveau dans n'importe quel environnement Python du moment que tu utilises les commandes en anglais. Si tu ne l'as pas encore fait, tu peux basculer en anglais dans le menu des commandes."
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10 :\n    {print} i\n{print} \"Caché ou pas, j'arrive !\""
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\""
                 story_text: "Maintenant, nous allons un petit peu changer l'indentation. Chaque fois que nous avons une nouvelle indentation, nous devons ajouter `:` au début de la ligne précédente.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10 :\n    {print} i\n{print} \"Caché ou pas, j'arrive !\"\n```\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\"\n```\n"
     ask_command:
         name: demande
         description: Introduction à la commande `{ask}`

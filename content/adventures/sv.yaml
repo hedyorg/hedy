@@ -933,7 +933,7 @@ adventures:
     clear_command:
         levels:
             4:
-                example_code: "```\nskriv '3'\nsov\nsudda\nskriv '2'\nsov\nsudda\nskriv '1'\nsov\nsudda\nskriv 'SURPRISE!'\n```\n"
+                example_code: "```\n{print} '3'\nsov\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SURPRISE!'\n```\n"
                 start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SURPRISE!'\n"
                 story_text: "Dags för ett nytt kommando! Med `{clear}` kan du sudda all text från utdataskärmen. På så sätt kan du hindra att skärmen blir för full med text.\nSe upp! Om du använder ett `{clear}`-kommando, så kom ihåg att använda ett `{sleep}` ovanför det. Annars kommer Hedy att sudda skärmen utan att ge dig tid att läsa!\n"
         name: '{clear}'
