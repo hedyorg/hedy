@@ -28,7 +28,11 @@ describe('Is able to share and unshare programs', () => {
         cy.get('#modal_alert_text').should('be.visible');
         cy.get('#non_public_button_container_1').should('not.be.visible');
         cy.get('#public_button_container_1').should('be.visible');
-
+        
+        // Wait until the achievement is gone
+        cy.get('#achievement_pop-up', {timeout: 8_000}).should('not.be.visible');
+        
+        // Make the program private again
         cy.getBySel('unshare_program_1').click();
         cy.get('#modal-confirm').should('be.visible');
         cy.getBySel('modal_yes_button').click();
