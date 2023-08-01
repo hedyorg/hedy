@@ -10,21 +10,20 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
+import { load_variables, returnLinesWithoutBreakpoints } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
+import { HedyEditor } from './editor';
+import { HedyAceEditorCreator } from './ace-editor';
 
-// const MOVE_CURSOR_TO_BEGIN = -1;
-const MOVE_CURSOR_TO_END = 1;
-
-export let theGlobalEditor: AceAjax.Editor;
-export let theModalEditor: AceAjax.Editor;
+export let theGlobalEditor: HedyEditor;
+export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
-const theLocalSaveWarning = new LocalSaveWarning();
+export const theLocalSaveWarning = new LocalSaveWarning();
 let markers: Markers;
-
+const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -40,8 +39,8 @@ let askPromptOpen = false;
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
 let theAdventures: Record<string, Adventure> = {};
-let theLevel: number = 0;
-let theLanguage: string = '';
+export let theLevel: number = 0;
+export let theLanguage: string = '';
 let theKeywordLanguage: string = 'en';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
@@ -184,9 +183,12 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   }
   theLanguage = options.lang;
 
-  // *** EDITOR SETUP ***
-  initializeMainEditor($('#editor'));
-
+  // *** EDITOR SETUP ***  
+  const $editor = $('#editor');
+  if ($editor.length) {
+    theGlobalEditor = editorCreator.initializeMainEditor($editor);
+  }
+  
   const anchor = window.location.hash.substring(1);
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
@@ -250,111 +252,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theLanguage = options.lang;
 
   // We need to enable the main editor for the program page as well
-  initializeMainEditor($('#editor'));
-}
-
-/**
- * Initialize the main editor and attach all the required event handlers
- */
-function initializeMainEditor($editor: JQuery) {
-  if (!$editor.length) return;
-
-  // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("body").attr("dir");
-
-  // We expose the editor globally so it's available to other functions for resizing
-  var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
-  theGlobalEditor = editor;
-  theGlobalEditor.setShowPrintMargin(false);
-  theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
-  theGlobalEditor.addEventListener('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.getValue().split('\n').length);
-    markers.clearIncorrectLines();
-  });
-  error.setEditor(editor);
-  markers = new Markers(theGlobalEditor);
-
-  window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  if (dir === "rtl") {
-      editor.setOptions({ rtl: true });
-  }
-
-  // If prompt is shown and user enters text in the editor, hide the prompt.
-  editor.on('change', function () {
-    if (askPromptOpen) {
-      stopit();
-      editor.focus(); // Make sure the editor has focus, so we can continue typing
-    }
-    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-    askPromptOpen = false;
-    $ ('#runit').css('background-color', '');
-
-    clearErrors(editor);
-    //removing the debugging state when loading in the editor
-    stopDebug();
-  });
-
-  // *** KEYBOARD SHORTCUTS ***
-
-  let altPressed: boolean | undefined;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = true;
-      return;
-    }
-    if (keyCode === 13 && altPressed) {
-      if (!theLevel || !theLanguage) {
-        throw new Error('Oh no');
-      }
-      runit (theLevel, theLanguage, "", function () {
-        $ ('#output').focus ();
-      });
-    }
-    // We don't use jquery because it doesn't return true for this equality check.
-    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus ();
-      editor.navigateFileEnd ();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    triggerAutomaticSave();
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = false;
-      return;
-    }
-  });
-
-  // *** Debugger ***
-  initializeDebugger({
-    editor: theGlobalEditor,
-    markers,
-    level: theLevel,
-    language: theLanguage,
-  });
-
-  // We show the error message when clicking on the skipped code
-  theGlobalEditor.on("click", function(e) {
-    let position = e.getDocumentPosition()
-    position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
-
-    let element = document.elementFromPoint(position.pageX, position.pageY)
-    if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-      let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-      let mapError = theGlobalSourcemap[mapIndex];
-
-      $('#okbox').hide ();
-      $('#warningbox').hide();
-      $('#errorbox').hide();
-      error.show(ClientMessages['Transpile_error'], mapError.error);
-    }
-  })
-
-  return editor;
+  theGlobalEditor = editorCreator.initializeMainEditor($('#editor'));
 }
 
 export function initializeHighlightedCodeBlocks(where: Element) {
@@ -372,36 +270,10 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
-        const exampleEditor = turnIntoAceEditor(preview, true);
-
-        // Fits to content size
-        exampleEditor.setOptions({ maxLines: Infinity });
-        if ($(preview).hasClass('common-mistakes')) {
-          exampleEditor.setOptions({
-            showGutter: true,
-            showPrintMargin: true,
-            highlightActiveLine: true,
-            minLines: 5,
-          });
-        } else if ($(preview).hasClass('cheatsheet')) {
-          exampleEditor.setOptions({ minLines: 1 });
-        } else if ($(preview).hasClass('parsons')) {
-          exampleEditor.setOptions({
-            minLines: 1,
-            showGutter: false,
-            showPrintMargin: false,
-            highlightActiveLine: false
-          });
-        } else {
-          exampleEditor.setOptions({ minLines: 2 });
-        }
-
-        if (dir === "rtl") {
-            exampleEditor.setOptions({ rtl: true });
-        }
-
+        // Create this example editor
+        const exampleEditor = editorCreator.initializeExampleEditor(preview)
         // Strip trailing newline, it renders better
-        exampleEditor.setValue(exampleEditor.getValue().trimRight(), -1);
+        exampleEditor.setValue(exampleEditor.getValue().trimRight());
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
@@ -411,8 +283,8 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             symbol = "⇤";
           }
           $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-            if (!theGlobalEditor?.getReadOnly()) {
-              theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
+            if (!theGlobalEditor?.isReadOnly()) {
+              theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
             }
             update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
             stopit();
@@ -422,7 +294,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
 
         const levelStr = $(preview).attr('level');
         if (levelStr) {
-          exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+          exampleEditor.setHighliterForLevel(parseInt(levelStr, 10));
         }
       });
     }
@@ -431,13 +303,6 @@ export function initializeHighlightedCodeBlocks(where: Element) {
 
 export function getHighlighter(level: number) {
   return `ace/mode/level${level}`;
-}
-
-function clearErrors(editor: AceAjax.Editor) {
-  // Not sure if we use annotations everywhere, but this was
-  // here already.
-  editor.session.clearAnnotations();
-  markers.clearErrors();
 }
 
 export function stopit() {
@@ -524,7 +389,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
-        clearErrors(editor);
+        editor.clearErrors();
         stopit();
         return;
       } else {
@@ -536,13 +401,13 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     } else {
       code = get_active_and_trimmed_code();
       if (code.length == 0) {
-        clearErrors(editor);
+        editor.clearErrors()
         stopit();
         return;
       }
     }
 
-    clearErrors(editor);
+    editor.clearErrors()
     removeBulb();
     console.log('Original program:\n', code);
 
@@ -714,11 +579,11 @@ function removeBulb(){
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (theGlobalEditor?.getReadOnly()) {
+  if (theGlobalEditor?.isReadOnly()) {
     return;
   }
 
-  theGlobalEditor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  theGlobalEditor.setValue(exampleCode + '\n');
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -1430,15 +1295,8 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-
-  try {
-    // This module may or may not exist, so let's be extra careful here.
-    const whitespace = ace.require("ace/ext/whitespace");
-    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
-  } catch (e) {
-    console.error(e);
-  }
-
+  
+  theGlobalEditor.trimTrailingSpace();
   const code = returnLinesWithoutBreakpoints(theGlobalEditor);
 
   return code;
@@ -1493,8 +1351,10 @@ function scrollOutputToBottom() {
 
 export function modalStepOne(level: number){
   createModal(level);
-  let modal_editor = $('#modal-editor');
-  initializeModalEditor(modal_editor);
+  let $modalEditor = $('#modal-editor');
+  if ($modalEditor.length) {
+    theModalEditor = editorCreator.initializeModalEditor($modalEditor)
+  }
 }
 
 function showSuccesMessage(){
@@ -1508,84 +1368,6 @@ function createModal(level:number ){
   let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
-}
-
-/**
- * Turn an HTML element into an Ace editor
- */
-export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): AceAjax.Editor {
-  const editor = ace.edit(element);
-  editor.setTheme("ace/theme/monokai");
-  if (isReadOnly) {
-    editor.setValue(editor.getValue().trimRight(), -1);
-    // Remove the cursor
-    editor.renderer.$cursorLayer.element.style.display = "none";
-    editor.setOptions({
-      readOnly: true,
-      showGutter: false,
-      showPrintMargin: false,
-      highlightActiveLine: false
-    });
-    // A bit of margin looks better
-    editor.renderer.setScrollMargin(3, 3, 10, 20)
-
-    // When it is the main editor -> we want to show line numbers!
-    if (isMainEditor) {
-      editor.setOptions({
-        showGutter: true
-      });
-    }
-  }
-
-  // Everything turns into 'ace/mode/levelX', except what's in
-  // this table. Yes the numbers are strings. That's just JavaScript for you.
-  if (theLevel) {
-    const mode = getHighlighter(theLevel);
-    editor.session.setMode(mode);
-  }
-
-  return editor;
-}
-
-function initializeModalEditor($editor: JQuery) {
-  if (!$editor.length) return;
-  // We expose the editor globally so it's available to other functions for resizing
-  let editor = turnIntoAceEditor($editor.get(0)!, true);
-  theModalEditor = editor;
-  error.setEditor(editor);
-
-  window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  // *** KEYBOARD SHORTCUTS ***
-
-  let altPressed: boolean | undefined;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = true;
-      return;
-    }
-    if (keyCode === 13 && altPressed) {
-      runit (theLevel, theLanguage, "", function () {
-        $ ('#output').focus ();
-      });
-    }
-    // We don't use jquery because it doesn't return true for this equality check.
-    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus ();
-      editor.navigateFileEnd ();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = false;
-      return;
-    }
-  });
-  return editor;
 }
 
 export function toggle_developers_mode(enforced: boolean) {
@@ -1661,14 +1443,14 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
 export function change_keyword_language(start_lang: string, new_lang: string) {
   tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/translate_keywords', {
-      code: ace.edit('editor').getValue(),
+      code: theGlobalEditor,
       start_lang: start_lang,
       goal_lang: new_lang,
       level: theLevel,
     });
 
     if (response.success) {
-      ace.edit('editor').setValue(response.code, MOVE_CURSOR_TO_END);
+      theGlobalEditor.setValue(response.code);
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
@@ -1821,7 +1603,7 @@ function resetWindow() {
   output.append(variable_button);
   output.append(variables);
   theGlobalEditor?.clearSelection();
-  theGlobalEditor?.session.clearBreakpoints();
+  theGlobalEditor?.clearBreakpoints();
 }
 
 /**
@@ -1841,7 +1623,7 @@ function updatePageElements() {
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
-  theGlobalEditor.setReadOnly(false);
+  theGlobalEditor.setEditorMode(false);
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
@@ -1870,7 +1652,7 @@ function updatePageElements() {
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
-    theGlobalEditor.setReadOnly(isSubmitted);
+    theGlobalEditor.setEditorMode(isSubmitted);
   }
 }
 
@@ -1890,7 +1672,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor?.setValue(adventure.start_code, MOVE_CURSOR_TO_END);
+    theGlobalEditor?.setValue(adventure.start_code);
   }
 }
 
@@ -2008,7 +1790,7 @@ function programNeedsSaving(adventureName: string) {
  * (Re)set a timer to trigger a save in N second
  */
 let saveTimer: number | undefined;
-function triggerAutomaticSave() {
+export function triggerAutomaticSave() {
   const saveSeconds = 20;
   cancelPendingAutomaticSave();
   saveTimer = window.setTimeout(() => saveIfNecessary(), saveSeconds * 1000);
