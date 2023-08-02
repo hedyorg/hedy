@@ -602,7 +602,7 @@ adventures:
                 story_text: |
                     在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
 
-                example_code: |
+                example_code: |2
 
                     你可以写一段简单的餐厅代码，像这样：
                     ```
@@ -821,7 +821,7 @@ adventures:
                 story_text: |
                     在上一级，你创造了你的第一台算命机器，但海蒂不会算任何东西，只会“{echo}”。
                     在这一级，你可以用变量和`{at} {random}`命令来真正让海蒂为你选择一个答案。比如看看这段代码：
-                example_code: |
+                example_code: |2
 
                     在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
                     ```
@@ -1599,3 +1599,12 @@ adventures:
                 story_text: "In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.\nCheck it out!\n"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
                 start_code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+    clear_command:
+        name: '{clear}'
+        description: clear command
+        default_save_name: clear_command
+        levels:
+            4:
+                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
+                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
+                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
