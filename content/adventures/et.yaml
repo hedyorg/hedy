@@ -665,7 +665,7 @@ adventures:
         default_save_name: Pressed
         name: Key presses
     print_command:
-        name: print
+        name: "{print}"
         description: Introduction print command
         default_save_name: print
         levels:
@@ -788,7 +788,7 @@ adventures:
     and_or_command:
         description: introducing and or
         default_save_name: and or
-        name: and or
+        name: "{and} & {or}"
         levels:
             13:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
@@ -901,7 +901,7 @@ adventures:
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:

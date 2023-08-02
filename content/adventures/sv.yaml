@@ -790,7 +790,7 @@ adventures:
                 story_text: "**Decimaltal**\nHittills har Hedy inte tillåtit decimaltal som 1.5, men nu tillåter vi det. Tänk på att datorer använder `.` för decimaltal."
                 example_code: "```\n{print} 'Två och en halv plus två och en halv är …'\n{print} 2.5 + 2.5\n```\n"
     while_command:
-        name: så länge
+        name: "{while}"
         description: så länge
         default_save_name: kommandot_så_länge
         levels:
@@ -808,7 +808,7 @@ adventures:
                 example_code: "```\nhus = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nämnen = drycker, försvar mot svartkonst, förtrollningar, förvandling\nrädslor = Voldemort, spindlar, att misslyckas med sitt OWL-test\nnamn = Harry, Ron, Hermione\n_\n_ {print} namn ' är placerad i ' hus {at} {random}\n_ {print} namn ' är bra på ' ämnen {at} {random}\n_ {print} namn 's största rädsla är ' rädslor {at} {random}\n```\n"
                 start_code: '# skriv din kod här'
     print_command:
-        name: skriv
+        name: "{print}"
         description: Introduktion till kommandot print
         default_save_name: skriv
         levels:
@@ -904,7 +904,7 @@ adventures:
                 story_text: "På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.\nDet gör vi genom att lägga till ett variabelnamn, följt av `{in}` `{range}`. Vi skriver sedan talet vi vill börja på, `{to}` och talet vi vill sluta på.\n\nProva exemplet för att se vad som händer! På den här nivån måste alltid använda indrag på raderna under `{for}`-satserna."
                 example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
     and_or_command:
-        name: och eller
+        name: "{and} & {or}"
         description: introduktion och eller
         default_save_name: och eller
         levels:

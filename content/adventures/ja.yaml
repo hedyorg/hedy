@@ -684,7 +684,7 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-        name: print
+        name: "{print}"
         description: Introduction print command
         default_save_name: print
     is_command:
@@ -883,7 +883,7 @@ adventures:
                 story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
     and_or_command:
-        name: and or
+        name: "{and} & {or}"
         description: introducing and or
         default_save_name: and or
         levels:
@@ -892,7 +892,7 @@ adventures:
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:

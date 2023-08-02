@@ -958,7 +958,7 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-        name: print
+        name: "{print}"
         description: Introduction print command
         default_save_name: print
     ask_command:
@@ -1166,7 +1166,7 @@ adventures:
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
                 start_code: '# place your code here'
     and_or_command:
-        name: and or
+        name: "{and} & {or}"
         description: introducing and or
         levels:
             13:
@@ -1175,7 +1175,7 @@ adventures:
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
         default_save_name: and or
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:
