@@ -1459,7 +1459,7 @@ adventures:
                 story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     if_command:
-        name: if else
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:
@@ -1549,7 +1549,7 @@ adventures:
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
                 start_code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:

@@ -1690,7 +1690,7 @@ adventures:
         description: introducing at random command
         default_save_name: random_command
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -1713,7 +1713,7 @@ adventures:
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         default_save_name: if_command
-        name: if else
+        name: "{if} & {else}"
         description: Introducing the if command
     quotation_marks:
         levels:

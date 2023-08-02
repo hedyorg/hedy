@@ -776,7 +776,7 @@ adventures:
                 story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -785,7 +785,7 @@ adventures:
                 example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
     if_command:
-        name: if else
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:

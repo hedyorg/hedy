@@ -792,7 +792,7 @@ adventures:
                 example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -801,7 +801,7 @@ adventures:
                 example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
     if_command:
-        name: if else
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:

@@ -718,11 +718,11 @@ adventures:
                 start_code: "{print} Min favoritfärg är …\n{sleep} 2\n{print} grön!"
                 story_text: "Ett annat nytt kommando på denna nivå är `{sleep}`, som pausar ditt program i en sekund. Om du skriver ett tal efter kommandot {sleep}, pausas programmet i det antalet sekunder.\n\n### Övning\nÖva på det nya kommandot genom att göra egen kod där du använder kommandot {sleep} minst 3 gånger. För varje {sleep}-kommando ska paustiden variera.\n"
                 example_code: "```\n{print} Min favoritfärg är …\n{sleep} 2\n{print} grön!\n```\n"
-        name: sov
+        name: "{sleep}"
         description: introduktion till kommandot sov
         default_save_name: kommandot_sov
     if_command:
-        name: om annars
+        name: "{if} & {else}"
         description: Introduktion till kommandot if
         default_save_name: kommandot_if
         levels:

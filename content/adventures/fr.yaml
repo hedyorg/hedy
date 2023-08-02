@@ -2549,7 +2549,7 @@ adventures:
                 start_code: "nom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n"
                 example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n```\n"
                 story_text: "## Si… Sinon…\nTu as appris à répéter un bloc de ligne de code après une commande `{repeat}`.\nMaintenant, tu peux aussi utiliser l'indentation pour faire un bloc après une commande `{if}` ou `{else}`.\nRegarde l'exemple de code.\n\n### Exercice\nAjoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.\n"
-        name: si sinon
+        name: "{if} & {else}"
         description: Introduction de la commande `{if}`
         default_save_name: if_command
     in_command:
@@ -2647,7 +2647,7 @@ adventures:
                 example_code_3: "```\n{print} Le milkshake mystérieux\nparfums {is} fraise, chololat, vanille\ndésire {is} {ask} Quelle parfum désires-tu ?\n_\nallergie {is} {ask} Est-tu allergique à un parfum ?\n_\n{print} Voici un milkshake parfums {at} {random}\n```\n"
                 start_code: "animaux {is} chien, chat, kangourou\nfavori {is} {ask} Quel est ton animal préféré ?\n{add} favori {to_list} animaux\nmal_aimé {is} {ask} Quel animal n'aimes-tu pas ?\n{remove} mal_aimé {from} animaux\n{print} Je choisis animaux {at} {random}"
     sleep_command:
-        name: dors
+        name: "{sleep}"
         description: Introduction à la commande pour endormir
         default_save_name: sleep_command
         levels:
