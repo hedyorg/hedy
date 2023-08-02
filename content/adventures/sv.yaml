@@ -863,7 +863,7 @@ adventures:
                 example_code_3: "```\n{print} Hemlig milkshake\nsmaker {is} jordgubb, choklad, vanilj\nhoppas {is} {ask} Vilken smak hoppas du på?\n_\nallergier {is} {ask} Är du allergisk mot några smaker?\n_\n{print} Du får en milkshake med smaker {at} {random}\n```\n"
                 start_code: "djur {is} hund, katt, känguru\ngillar {is} {ask} Vilket är ditt favoritdjur?\n{add} gillar {to_list} djur\nogillar {is} {ask} Vilket djur gillar du inte?\n{remove} ogillar {from} djur\n{print} Jag väljer djur {at} {random}"
     in_command:
-        name: i
+        name: "{in}"
         description: Introduktion till kommandot i
         default_save_name: kommandot_i
         levels:
@@ -891,7 +891,7 @@ adventures:
                 story_text: "På den här nivån kan du inte bara använda flera rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet ser du ett `{if}`-kommando inuti ett `{repeat}`-kommando. Det är också tillåtet tvärtom, och en `{if}` är också tillåten i en `{if}` och en `{repeat}` i en `{repeat}`.\nTesta det!\n"
                 example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'najs!'\n    {else}\n        {print} 'pizza är bättre'\n```\n"
     for_command:
-        name: för
+        name: "{for}"
         description: kommandot för
         default_save_name: för
         levels:

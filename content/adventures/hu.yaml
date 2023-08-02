@@ -1769,7 +1769,7 @@ adventures:
         description: repeat command 2
         default_save_name: repeat_command_2
     for_command:
-        name: for
+        name: "{for}"
         description: for command
         default_save_name: for
         levels:
@@ -1882,7 +1882,7 @@ adventures:
                 example_code_2: "```\nanimals is dog, cow, sheep\nanswer is ask 'What is your favorite animal?'\n_ answer _ animals _ 'Mine too!'\n_ _ 'My favorite animals are dogs, cows and sheep'\n```\n"
                 start_code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
                 story_text_2: "### Exercise\nFinish the example code by filling in the blanks with commands that you've learned.\nWhen you've finished the code, try to create a code of your own and use a question that you've thought of yourself.\n"
-        name: in
+        name: "{in}"
         description: Introducing the in command
         default_save_name: in_command
     while_command:
