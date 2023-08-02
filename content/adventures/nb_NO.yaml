@@ -814,7 +814,7 @@ adventures:
                 example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 start_code: "name = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'"
     repeat_command:
-        name: Repeat
+        name: "{repeat}"
         description: repeat command
         default_save_name: repeat_command
         levels:
@@ -831,7 +831,7 @@ adventures:
                 story_text: "### Repeat commands and indentation\nIn this level you can repeat multiple lines of code with only 1 repeat command.\nYou do this by making a block of lines that you want to repeat.\nThe lines in this block will need **indentation** .\nThat means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
     repeat_command_2:
-        name: Repeat 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
         levels:

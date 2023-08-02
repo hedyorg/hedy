@@ -1088,7 +1088,7 @@ adventures:
                 example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 start_code: "name = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'"
     repeat_command:
-        name: Repeat
+        name: "{repeat}"
         levels:
             8:
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
@@ -1105,7 +1105,7 @@ adventures:
         description: repeat command
         default_save_name: repeat_command
     repeat_command_2:
-        name: Repeat 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
         levels:
