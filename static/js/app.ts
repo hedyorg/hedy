@@ -1,7 +1,6 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
-import { Markers } from './markers';
 import JSZip from "jszip";
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
@@ -22,7 +21,6 @@ export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
-let markers: Markers;
 const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
@@ -450,7 +448,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
-          markers.highlightAceError(response.Location[0], response.Location[1]);
+          theGlobalEditor.markers.highlightAceError(response.Location[0], response.Location[1]);
         }
         $('#stopit').hide();
         $('#runit').show();
@@ -732,7 +730,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       )
 
       if (map.error != null){
-        markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+        theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
       }
     }
   }
