@@ -726,7 +726,7 @@ adventures:
         name: "{is}"
         description: introducing is command
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         levels:
             3:
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
@@ -813,7 +813,7 @@ adventures:
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
                 start_code: '# place your code here'
     random_command:
-        name: random
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:

@@ -1346,7 +1346,7 @@ adventures:
                 story_text: "在此级别中，您可以使用 `{for}` 数字 `{in}` `{range}` 命令倒计时到新年。\n\n### 练习\n填空并使代码正常工作！\n"
                 example_code: "```\n{for} 数字{in} {range} _{to} _\n    {print} 数字\n{print} '新年快乐！'\n```\n"
     random_command:
-        name: random
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:
@@ -1478,7 +1478,7 @@ adventures:
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:

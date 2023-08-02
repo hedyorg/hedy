@@ -1000,7 +1000,7 @@ adventures:
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     random_command:
-        name: random
+        name: "{random}"
         levels:
             3:
                 start_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n"
@@ -1017,7 +1017,7 @@ adventures:
         description: introducing at random command
         default_save_name: random_command
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:

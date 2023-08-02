@@ -2519,7 +2519,7 @@ adventures:
                 story_text_3: "Tu peux aussi comparer si une chose n'est *pas* égale à une autre chose en utilisant `!=` comme ceci :\n"
                 example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom != \"Hedy\"\n    {print} \"Tu n'es pas Hedy\"\n```\n"
     random_command:
-        name: hasard
+        name: "{random}"
         description: introduction de la commande `{at} {random}`
         default_save_name: random_command
         levels:
@@ -2634,7 +2634,7 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
     add_remove_command:
-        name: ajoute et supprime
+        name: "{add} {to} & {remove} {from}"
         description: Introduction de ajoute et supprime de
         default_save_name: add_remove_command
         levels:

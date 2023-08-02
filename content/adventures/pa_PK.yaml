@@ -703,7 +703,7 @@ adventures:
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     random_command:
-        name: random
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:
@@ -789,7 +789,7 @@ adventures:
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:

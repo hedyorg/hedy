@@ -1626,7 +1626,7 @@ adventures:
         name: "{ask}"
         description: Introduction ask command
     random_command:
-        name: random
+        name: "{random}"
         default_save_name: random_command
         levels:
             3:
@@ -1653,7 +1653,7 @@ adventures:
                 story_text_3: "### Exercise\nTry out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
         default_save_name: add_remove_command
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
     sleep_command:
         name: sleep

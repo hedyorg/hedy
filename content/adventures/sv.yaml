@@ -709,7 +709,7 @@ adventures:
                 start_code: "djur {is} hund, katt, känguru\n{print} djur {at} {random}\n"
                 story_text_3: "### Övning\nProva kommandot `{at} {random}` genom att göra din egen spelshow (som de på tv) där du väljer en dörr eller resväska och den innehåller ett stort pris!\nKan du göra det? Vi har redan lagt in de första raderna i exempelkoden.\n"
                 example_code_3: "```\n{print} Den stora spelshowen!\n{print} Det står tre resväskor framför dig …\nvalt {is} {ask} Vilken resväska väljer du?\npriser {is} _\n_\n```\n"
-        name: slump
+        name: "random"
         description: introduktion av kommandot random
         default_save_name: kommandot_random
     sleep_command:
@@ -850,7 +850,7 @@ adventures:
                 story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:\n"
                 example_code_3: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
     add_remove_command:
-        name: lägg till och ta bort
+        name: "{add} {to} & {remove} {from}"
         description: introduktion till lägg till och ta bort
         default_save_name: kommandot_lägg_till_ta_bort
         levels:

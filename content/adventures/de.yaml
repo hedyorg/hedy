@@ -2440,7 +2440,7 @@ adventures:
                 start_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n"
                 story_text_3: "### Exercise\nTry out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it? We have already put the first lines into the example code.\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\nchosen {is} {ask} Which suitcase do you choose?\nprices {is} _\n_\n```\n"
-        name: random
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
     sleep_command:
@@ -2507,7 +2507,7 @@ adventures:
                 example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:
