@@ -99,7 +99,7 @@ def collect_snippets(path, filtered_language=None):
 
     return Hedy_snippets
 
-# filtered_language = 'sv'
+# filtered_language = 'fr'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 
@@ -122,7 +122,7 @@ class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
-        keywords = ['Introduction', 'Introductie', 'Başlangıç']
+        keywords = ['Introduction', 'Introductie', 'Başlangıç', 'Introducción']
 
         if snippet is not None and len(snippet.code) > 0 and snippet.adventure_name not in keywords:
             try:
