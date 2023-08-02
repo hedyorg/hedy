@@ -1,3 +1,5 @@
+import { Markers } from "./markers";
+
 export type Breakpoints = Record<number, string>;
 
 
@@ -103,4 +105,5 @@ export interface HedyEditor {
    */
   setEditorMode: (isReadMode: boolean) => void;
   
+  markers: Markers;
 }
