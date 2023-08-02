@@ -913,7 +913,7 @@ adventures:
                 story_text: "Vi ska nu lära oss `{and}` och `{or}`! Om du vill kontrollera två påståenden behöver du inte använda två `{if}` utan kan använda `{and}` och `{or}`.\n\nOm du använder `{and}` måste båda påståendena, vänster och höger om `{and}` vara sanna. Vi kan också använda `{or}`. Då behöver bara ett påstående vara korrekt."
                 example_code: "```\nnamn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'\n```\n"
     elif_command:
-        name: annarsom
+        name: "{elif}"
         description: annarsom
         default_save_name: annarsom
         levels:
