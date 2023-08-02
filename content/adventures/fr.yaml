@@ -2458,7 +2458,7 @@ adventures:
         name: Key presses
         description: Try linking a keyboard key to a command!
     print_command:
-        name: affiche
+        name: "{print}"
         description: Introduction à la commande `{print}`
         default_save_name: affiche
         levels:
@@ -2481,7 +2481,7 @@ adventures:
                 story_text: "Maintenant, nous allons un petit peu changer l'indentation. Chaque fois que nous avons une nouvelle indentation, nous devons ajouter `:` au début de la ligne précédente.\n"
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\"\n```\n"
     ask_command:
-        name: demande
+        name: "{ask}"
         description: Introduction à la commande `{ask}`
         levels:
             2:
@@ -2500,7 +2500,7 @@ adventures:
                 start_code: "{print} Salut !\n{ask} Quel est ton nom ?\n{echo} salut\n"
         default_save_name: command_demande
     is_command:
-        name: est
+        name: "{is}"
         description: La commande {is}
         default_save_name: command_est
         levels:
@@ -2519,7 +2519,7 @@ adventures:
                 story_text_3: "Tu peux aussi comparer si une chose n'est *pas* égale à une autre chose en utilisant `!=` comme ceci :\n"
                 example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom != \"Hedy\"\n    {print} \"Tu n'es pas Hedy\"\n```\n"
     random_command:
-        name: hasard
+        name: "{random}"
         description: introduction de la commande `{at} {random}`
         default_save_name: random_command
         levels:
@@ -2549,11 +2549,11 @@ adventures:
                 start_code: "nom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n"
                 example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n```\n"
                 story_text: "## Si… Sinon…\nTu as appris à répéter un bloc de ligne de code après une commande `{repeat}`.\nMaintenant, tu peux aussi utiliser l'indentation pour faire un bloc après une commande `{if}` ou `{else}`.\nRegarde l'exemple de code.\n\n### Exercice\nAjoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.\n"
-        name: si sinon
+        name: "{if} & {else}"
         description: Introduction de la commande `{if}`
         default_save_name: if_command
     in_command:
-        name: dans
+        name: "{in}"
         description: Introduction de la commande `{in}`
         default_save_name: in_command
         levels:
@@ -2575,11 +2575,11 @@ adventures:
                 story_text: "## Repeat with other commands and with variables\nYou have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?\nIn this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.\n"
                 example_code_2: "```\n{print} 'Yay! It is your birthday!'\nage = {ask} 'How old are you now?'\n{repeat} age {times} {print} 'Hip Hip Hurray!'\n```\n"
                 start_code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
-        name: Repeat 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
     for_command:
-        name: for
+        name: "{for}"
         description: for command
         default_save_name: for
         levels:
@@ -2608,7 +2608,7 @@ adventures:
         default_save_name: maths
     elif_command:
         default_save_name: elif
-        name: elif
+        name: "{elif}"
         description: elif
         levels:
             17:
@@ -2634,7 +2634,7 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
     add_remove_command:
-        name: ajoute et supprime
+        name: "{add} {to} & {remove} {from}"
         description: Introduction de ajoute et supprime de
         default_save_name: add_remove_command
         levels:
@@ -2647,7 +2647,7 @@ adventures:
                 example_code_3: "```\n{print} Le milkshake mystérieux\nparfums {is} fraise, chololat, vanille\ndésire {is} {ask} Quelle parfum désires-tu ?\n_\nallergie {is} {ask} Est-tu allergique à un parfum ?\n_\n{print} Voici un milkshake parfums {at} {random}\n```\n"
                 start_code: "animaux {is} chien, chat, kangourou\nfavori {is} {ask} Quel est ton animal préféré ?\n{add} favori {to_list} animaux\nmal_aimé {is} {ask} Quel animal n'aimes-tu pas ?\n{remove} mal_aimé {from} animaux\n{print} Je choisis animaux {at} {random}"
     sleep_command:
-        name: dors
+        name: "{sleep}"
         description: Introduction à la commande pour endormir
         default_save_name: sleep_command
         levels:
@@ -2677,7 +2677,7 @@ adventures:
                 example_code_4: "```\nscore = 25\n{print} \"Tu as \" score\n```\n"
                 start_code: "nom = {ask} \"Quel est ton nom ?\"\n{if} nom = 'Hedy le robot'\n    {print} \"Salut !\""
     repeat_command:
-        name: Répète
+        name: "{repeat}"
         description: la commande répète
         default_save_name: repeat_command
         levels:
@@ -2694,7 +2694,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
                 start_code: "{repeat} 3 {times}\n    nourriture = {ask} \"Que veux-tu ?\"\n    {if} nourriture {is} pizza\n        {print} \"parfait !\"\n    {else}\n        {print} \"pizza c'est meilleur\""
     and_or_command:
-        name: and or
+        name: "{and} & {or}"
         description: introducing and or
         default_save_name: and or
         levels:
@@ -2703,7 +2703,7 @@ adventures:
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:

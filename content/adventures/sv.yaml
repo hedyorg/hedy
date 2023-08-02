@@ -677,7 +677,7 @@ adventures:
         default_save_name: Tryckt
         name: Knapptryckningar
     ask_command:
-        name: fråga
+        name: "{ask}"
         levels:
             1:
                 example_code_2: "```\n{print} Hej!\n{ask} Vad heter du?\n{echo} hej\n```\n"
@@ -709,7 +709,7 @@ adventures:
                 start_code: "djur {is} hund, katt, känguru\n{print} djur {at} {random}\n"
                 story_text_3: "### Övning\nProva kommandot `{at} {random}` genom att göra din egen spelshow (som de på tv) där du väljer en dörr eller resväska och den innehåller ett stort pris!\nKan du göra det? Vi har redan lagt in de första raderna i exempelkoden.\n"
                 example_code_3: "```\n{print} Den stora spelshowen!\n{print} Det står tre resväskor framför dig …\nvalt {is} {ask} Vilken resväska väljer du?\npriser {is} _\n_\n```\n"
-        name: slump
+        name: "random"
         description: introduktion av kommandot random
         default_save_name: kommandot_random
     sleep_command:
@@ -718,11 +718,11 @@ adventures:
                 start_code: "{print} Min favoritfärg är …\n{sleep} 2\n{print} grön!"
                 story_text: "Ett annat nytt kommando på denna nivå är `{sleep}`, som pausar ditt program i en sekund. Om du skriver ett tal efter kommandot {sleep}, pausas programmet i det antalet sekunder.\n\n### Övning\nÖva på det nya kommandot genom att göra egen kod där du använder kommandot {sleep} minst 3 gånger. För varje {sleep}-kommando ska paustiden variera.\n"
                 example_code: "```\n{print} Min favoritfärg är …\n{sleep} 2\n{print} grön!\n```\n"
-        name: sov
+        name: "{sleep}"
         description: introduktion till kommandot sov
         default_save_name: kommandot_sov
     if_command:
-        name: om annars
+        name: "{if} & {else}"
         description: Introduktion till kommandot if
         default_save_name: kommandot_if
         levels:
@@ -760,7 +760,7 @@ adventures:
         description: Introduktion till citattecken
         default_save_name: citattecken
     repeat_command_2:
-        name: Upprepa 2
+        name: "{repeat} 2"
         description: kommandot upprepa 2
         default_save_name: kommandot_upprepa_2
         levels:
@@ -790,7 +790,7 @@ adventures:
                 story_text: "**Decimaltal**\nHittills har Hedy inte tillåtit decimaltal som 1.5, men nu tillåter vi det. Tänk på att datorer använder `.` för decimaltal."
                 example_code: "```\n{print} 'Två och en halv plus två och en halv är …'\n{print} 2.5 + 2.5\n```\n"
     while_command:
-        name: så länge
+        name: "{while}"
         description: så länge
         default_save_name: kommandot_så_länge
         levels:
@@ -808,7 +808,7 @@ adventures:
                 example_code: "```\nhus = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nämnen = drycker, försvar mot svartkonst, förtrollningar, förvandling\nrädslor = Voldemort, spindlar, att misslyckas med sitt OWL-test\nnamn = Harry, Ron, Hermione\n_\n_ {print} namn ' är placerad i ' hus {at} {random}\n_ {print} namn ' är bra på ' ämnen {at} {random}\n_ {print} namn 's största rädsla är ' rädslor {at} {random}\n```\n"
                 start_code: '# skriv din kod här'
     print_command:
-        name: skriv
+        name: "{print}"
         description: Introduktion till kommandot print
         default_save_name: skriv
         levels:
@@ -831,7 +831,7 @@ adventures:
                 story_text_3: Den sista ändringen vi behöver göra för att få Python-kod är att ändra `{ask}` till `{input}`.
                 example_code_3: "```\n{print}('Jag heter Hedy!')\nnamn = {input}('Vad heter du?')\n{print}('Du heter alltså ', namn)\n```\n"
     is_command:
-        name: är
+        name: "{is}"
         description: introduktion till kommandot är
         default_save_name: kommandot_är
         levels:
@@ -850,7 +850,7 @@ adventures:
                 story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:\n"
                 example_code_3: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
     add_remove_command:
-        name: lägg till och ta bort
+        name: "{add} {to} & {remove} {from}"
         description: introduktion till lägg till och ta bort
         default_save_name: kommandot_lägg_till_ta_bort
         levels:
@@ -863,7 +863,7 @@ adventures:
                 example_code_3: "```\n{print} Hemlig milkshake\nsmaker {is} jordgubb, choklad, vanilj\nhoppas {is} {ask} Vilken smak hoppas du på?\n_\nallergier {is} {ask} Är du allergisk mot några smaker?\n_\n{print} Du får en milkshake med smaker {at} {random}\n```\n"
                 start_code: "djur {is} hund, katt, känguru\ngillar {is} {ask} Vilket är ditt favoritdjur?\n{add} gillar {to_list} djur\nogillar {is} {ask} Vilket djur gillar du inte?\n{remove} ogillar {from} djur\n{print} Jag väljer djur {at} {random}"
     in_command:
-        name: i
+        name: "{in}"
         description: Introduktion till kommandot i
         default_save_name: kommandot_i
         levels:
@@ -891,7 +891,7 @@ adventures:
                 story_text: "På den här nivån kan du inte bara använda flera rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet ser du ett `{if}`-kommando inuti ett `{repeat}`-kommando. Det är också tillåtet tvärtom, och en `{if}` är också tillåten i en `{if}` och en `{repeat}` i en `{repeat}`.\nTesta det!\n"
                 example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'najs!'\n    {else}\n        {print} 'pizza är bättre'\n```\n"
     for_command:
-        name: för
+        name: "{for}"
         description: kommandot för
         default_save_name: för
         levels:
@@ -904,7 +904,7 @@ adventures:
                 story_text: "På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.\nDet gör vi genom att lägga till ett variabelnamn, följt av `{in}` `{range}`. Vi skriver sedan talet vi vill börja på, `{to}` och talet vi vill sluta på.\n\nProva exemplet för att se vad som händer! På den här nivån måste alltid använda indrag på raderna under `{for}`-satserna."
                 example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
     and_or_command:
-        name: och eller
+        name: "{and} & {or}"
         description: introduktion och eller
         default_save_name: och eller
         levels:
@@ -913,7 +913,7 @@ adventures:
                 story_text: "Vi ska nu lära oss `{and}` och `{or}`! Om du vill kontrollera två påståenden behöver du inte använda två `{if}` utan kan använda `{and}` och `{or}`.\n\nOm du använder `{and}` måste båda påståendena, vänster och höger om `{and}` vara sanna. Vi kan också använda `{or}`. Då behöver bara ett påstående vara korrekt."
                 example_code: "```\nnamn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'\n```\n"
     elif_command:
-        name: annarsom
+        name: "{elif}"
         description: annarsom
         default_save_name: annarsom
         levels:

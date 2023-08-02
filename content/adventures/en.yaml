@@ -260,7 +260,7 @@ adventures:
                 start_code: "{print} ('Great job!!!')"
 
     print_command:
-        name: "print"
+        name: "{print}"
         description: "Introduction print command"
         default_save_name: print
         levels:
@@ -328,7 +328,7 @@ adventures:
                     {print}('So your name is ', name)
                     ```
     ask_command:
-        name: "ask"
+        name: "{ask}"
         description: "Introduction ask command"
         default_save_name: "ask_command"
         levels:
@@ -396,7 +396,7 @@ adventures:
                     age {is} {ask} How old are you?
                     {print} name is age years old.
     is_command:
-        name: "is"
+        name: "{is}"
         description: "introducing is command"
         default_save_name: "is_command"
         levels:
@@ -462,7 +462,7 @@ adventures:
                         {print} 'You are not Hedy'
                     ```
     random_command:
-        name: "random"
+        name: "{random}"
         description: "introducing at random command"
         default_save_name: "random_command"
         levels:
@@ -514,7 +514,7 @@ adventures:
                         {print} 'is ' lucky_numbers[i]
                     ```
     add_remove_command:
-        name: "add and remove"
+        name: "{add} {to} & {remove} {from}"
         description: "introducing add to and remove from"
         default_save_name: "add_remove_command"
         levels:
@@ -560,7 +560,7 @@ adventures:
                     {remove} dislike {from} animals
                     {print} I choose animals {at} {random}
     sleep_command:
-        name: "sleep"
+        name: "{sleep}"
         description: "introducing sleep command"
         default_save_name: "sleep_command"
         levels:
@@ -581,7 +581,7 @@ adventures:
                     {sleep} 2
                     {print} green!
     if_command:
-        name: "if else"
+        name: "{if} & {else}"
         description: "Introducing the if command"
         default_save_name: "if_command"
         levels:
@@ -639,7 +639,7 @@ adventures:
                     ### Exercise
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
     in_command:
-        name: "in"
+        name: "{in}"
         description: "Introducing the in command"
         default_save_name: "in_command"
         levels:
@@ -743,7 +743,7 @@ adventures:
                     {if} name = 'Hedy the Robot'
                         {print} 'Hi there!'
     repeat_command:
-        name: "Repeat"
+        name: "{repeat}"
         description: "repeat command"
         default_save_name: "repeat_command"
         levels:
@@ -802,7 +802,7 @@ adventures:
                             {print} 'pizza is better'
                     ```
     repeat_command_2:
-        name: "Repeat 2"
+        name: "{repeat} 2"
         description: "repeat command 2"
         default_save_name: "repeat_command_2"
         levels:
@@ -853,7 +853,7 @@ adventures:
                         {print} 'This one too...'
                     {print} 'but this one will not!'
     for_command:
-        name: "for"
+        name: "{for}"
         description: "for command"
         default_save_name: "for"
         levels:
@@ -927,7 +927,7 @@ adventures:
                     {print} 2.5 + 2.5
                     ```
     and_or_command:
-        name: "and or"
+        name: "{and} & {or}"
         description: "introducing and or"
         default_save_name: "and or"
         levels:
@@ -950,7 +950,7 @@ adventures:
                     ```
 
     while_command:
-        name: "while"
+        name: "{while}"
         description: "while"
         default_save_name: "while_command"
         levels:
@@ -974,7 +974,7 @@ adventures:
                     {print} 'A correct answer has been given'
                     ```
     elif_command:
-        name: "elif"
+        name: "{elif}"
         description: "elif"
         default_save_name: "elif"
         levels:
