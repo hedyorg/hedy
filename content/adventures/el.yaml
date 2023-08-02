@@ -290,7 +290,7 @@ adventures:
                 start_code: "print Η ιστορία σου"
                 story_text_2: "### Exercise\nNow it's time to add variables to your own story that you've made in the previous level.\nGo to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.\n\nThis code won't work in this level, because you have not used variables yet.\nChange the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.\n\n**Extra** Add a sleep command to your code to build up tension in your story.\n"
             7:
-                story_text: |
+                story_text: |2
 
                     Σε μια ιστορία, κάποιος μπορεί να αναφέρει διάφορες λέξεις πολλές φορές. Για παράδειγμα, όταν κάποιος φωνάζει βοήθεια ή τραγουδά ένα τραγούδι. 
                     Μπορείς να βάλεις μια τέτοια επανάληψη στην ιστορία σου στο επίπεδο 5 με την `repeat`.
@@ -327,7 +327,7 @@ adventures:
                     ```
                 start_code: "print 'Εδώ θα βρίσκεται σύντομα η ιστορία σου!'"
             4:
-                story_text: |
+                story_text: |2
 
                     Θα παρατήρησες πως υπάρχει ακόμα ένα σφάλμα στο επίπεδο 2.
 
@@ -349,7 +349,7 @@ adventures:
                     ```
                 start_code: "print 'Η ιστορία σου θα εμφανιστεί εδώ!'"
             3:
-                story_text: |
+                story_text: |2
 
                     Μπορείς επίσης να προσθέσεις κάτι τυχαίο στην ιστορία σου. Οποιοδήποτε τέρας, ζώο ή άλλο εμπόδιο.
 
@@ -729,7 +729,7 @@ adventures:
 
                 start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!'"
             3:
-                story_text: |
+                story_text: |2
 
                     Στο επίπεδο 2 μπορούμε να εισάγουμε λίστες και να επιλέξουμε πράγματα από αυτές. 
 
@@ -860,7 +860,7 @@ adventures:
 
 
                 start_code: "# place your code here"
-                example_code: |-
+                example_code: |2-
 
                     ```
                     print Καλωσήλθατε στο εστιατόριο της Hedy!
@@ -1653,3 +1653,12 @@ adventures:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
                 start_code: "# place your code here"
+    clear_command:
+        name: '{clear}'
+        levels:
+            4:
+                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
+                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
+                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
+        description: clear command
+        default_save_name: clear_command
