@@ -3,6 +3,17 @@ import { loginForUser } from "../tools/login/login";
 describe('Is able to share and unshare programs', () => {
     beforeEach(() => {
         loginForUser();
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get("body").then($body => {
+            if ($body.find("[data-cy='delete_non_submitted_program_1']").length > 0) {               
+                cy.getBySel('delete_non_submitted_program_1').then(($btn) => {
+                    if ($btn.is(':visible')) {
+                        $btn.click();
+                        cy.getBySel('modal_yes_button').click();
+                    }
+                });
+            }
+        });
         cy.visit(`${Cypress.env('hedy_page')}#default`);
         // Execute program to save it 
         cy.get('#editor > .ace_scroller > .ace_content').click();
