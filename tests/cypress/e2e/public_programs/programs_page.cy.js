@@ -4,6 +4,7 @@ describe('Is able to share and unshare programs', () => {
     beforeEach(() => {
         loginForUser();
         cy.visit(`${Cypress.env('programs_page')}`);
+        // Delete the program in case it's already there
         cy.get("body").then($body => {
             if ($body.find("[data-cy='delete_non_submitted_program_1']").length > 0) {               
                 cy.getBySel('delete_non_submitted_program_1').then(($btn) => {
