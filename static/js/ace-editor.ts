@@ -267,6 +267,7 @@ export class HedyAceEditor implements HedyEditor {
     this._editor?.renderer.setScrollMargin(0, 0, 0, 20)
     this._editor?.addEventListener('change', () => {
       theLocalSaveWarning.setProgramLength(this._editor!.getValue().split('\n').length);
+      this._markers?.clearIncorrectLines();
     });
     // Set const value to determine the current page direction -> useful for ace editor settings
     const dir = $("body").attr("dir");

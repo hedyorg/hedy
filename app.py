@@ -1676,7 +1676,7 @@ def explore():
         'explore.html',
         programs=programs,
         favourite_programs=favourite_programs,
-        filtered_level=str(level),
+        filtered_level=str(level) if level else None,
         achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,

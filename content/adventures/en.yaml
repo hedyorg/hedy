@@ -260,7 +260,7 @@ adventures:
                 start_code: "{print} ('Great job!!!')"
 
     print_command:
-        name: "print"
+        name: "{print}"
         description: "Introduction print command"
         default_save_name: print
         levels:
@@ -328,7 +328,7 @@ adventures:
                     {print}('So your name is ', name)
                     ```
     ask_command:
-        name: "ask"
+        name: "{ask}"
         description: "Introduction ask command"
         default_save_name: "ask_command"
         levels:
@@ -396,7 +396,7 @@ adventures:
                     age {is} {ask} How old are you?
                     {print} name is age years old.
     is_command:
-        name: "is"
+        name: "{is}"
         description: "introducing is command"
         default_save_name: "is_command"
         levels:
@@ -462,7 +462,7 @@ adventures:
                         {print} 'You are not Hedy'
                     ```
     random_command:
-        name: "random"
+        name: "{random}"
         description: "introducing at random command"
         default_save_name: "random_command"
         levels:
@@ -514,7 +514,7 @@ adventures:
                         {print} 'is ' lucky_numbers[i]
                     ```
     add_remove_command:
-        name: "add and remove"
+        name: "{add} {to} & {remove} {from}"
         description: "introducing add to and remove from"
         default_save_name: "add_remove_command"
         levels:
@@ -560,7 +560,7 @@ adventures:
                     {remove} dislike {from} animals
                     {print} I choose animals {at} {random}
     sleep_command:
-        name: "sleep"
+        name: "{sleep}"
         description: "introducing sleep command"
         default_save_name: "sleep_command"
         levels:
@@ -581,7 +581,7 @@ adventures:
                     {sleep} 2
                     {print} green!
     if_command:
-        name: "if else"
+        name: "{if} & {else}"
         description: "Introducing the if command"
         default_save_name: "if_command"
         levels:
@@ -639,7 +639,7 @@ adventures:
                     ### Exercise
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
     in_command:
-        name: "in"
+        name: "{in}"
         description: "Introducing the in command"
         default_save_name: "in_command"
         levels:
@@ -743,7 +743,7 @@ adventures:
                     {if} name = 'Hedy the Robot'
                         {print} 'Hi there!'
     repeat_command:
-        name: "Repeat"
+        name: "{repeat}"
         description: "repeat command"
         default_save_name: "repeat_command"
         levels:
@@ -802,7 +802,7 @@ adventures:
                             {print} 'pizza is better'
                     ```
     repeat_command_2:
-        name: "Repeat 2"
+        name: "{repeat} 2"
         description: "repeat command 2"
         default_save_name: "repeat_command_2"
         levels:
@@ -853,7 +853,7 @@ adventures:
                         {print} 'This one too...'
                     {print} 'but this one will not!'
     for_command:
-        name: "for"
+        name: "{for}"
         description: "for command"
         default_save_name: "for"
         levels:
@@ -927,7 +927,7 @@ adventures:
                     {print} 2.5 + 2.5
                     ```
     and_or_command:
-        name: "and or"
+        name: "{and} & {or}"
         description: "introducing and or"
         default_save_name: "and or"
         levels:
@@ -950,7 +950,7 @@ adventures:
                     ```
 
     while_command:
-        name: "while"
+        name: "{while}"
         description: "while"
         default_save_name: "while_command"
         levels:
@@ -974,7 +974,7 @@ adventures:
                     {print} 'A correct answer has been given'
                     ```
     elif_command:
-        name: "elif"
+        name: "{elif}"
         description: "elif"
         default_save_name: "elif"
         levels:
@@ -1012,16 +1012,16 @@ adventures:
         levels:
             4:
                 start_code: |
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'SURPRISE!'
                 story_text: |
                     Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
                     Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
@@ -2044,9 +2044,9 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are ' points ' points'
                     ```
-                example_code_2: |
+                example_code_2: |2
 
-                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2371,11 +2371,11 @@ adventures:
                     {if} answer {is} _ {print} 'good job!'
                     {else} {print} 'Wrong! It was ' _
                     ```
-                story_text_3: |
+                story_text_3: |2
 
-                      **Extra** You can also let the computer do random sums on its own using random.
+                    **Extra** You can also let the computer do random sums on its own using random.
 
-                      This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: "{print} 'Welcome to this calculator!'"
             9:
                 story_text: |
@@ -2458,15 +2458,15 @@ adventures:
                     ```
                 start_code: "# place your code here"
             13:
-                story_text: |
+                story_text: |2
 
-                      ### Exercise 1
-                      Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    ### Exercise 1
+                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                      ### Exercise 2 Extra
-                      Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                      Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                      Empty the programming field and create your own solution.
+                    ### Exercise 2 Extra
+                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                    Empty the programming field and create your own solution.
 
                 example_code: |
                     ```
@@ -2651,21 +2651,20 @@ adventures:
                     - add a children's menu?
                     - think of other fun things to add?
                 example_code: |
-
-                      You can make a simple restaurant code, like this:
-                      ```
-                      {print} 'Welcome to Restaurant Chez Hedy'
-                      {print} 'Here is our menu:'
-                      {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                      main = {ask} 'Which main course would you like?'
-                      price = 0
-                      {if} main {is} pizza price = 10
-                      {if} main {is} lasagne price = 12
-                      {if} main {is} spaghetti price = 8
-                      {print} 'You have ordered ' main
-                      {print} 'That will be ' price ' dollars, please'
-                      {print} 'Thank you, enjoy your meal!'
-                      ```
+                    You can make a simple restaurant code, like this:
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    price = 0
+                    {if} main {is} pizza price = 10
+                    {if} main {is} lasagne price = 12
+                    {if} main {is} spaghetti price = 8
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
+                    ```
                 start_code: "# place your code here"
             7:
                 story_text: |
