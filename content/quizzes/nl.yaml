@@ -2962,13 +2962,25 @@ levels:
         2:
             question_text: "Welke van deze codes gebruikt = of == correct?"
             mp_choice_options:
-            -   option: "{if} naam = Hedy"
+            -   option: | 
+                  ```
+                  {if} naam = Hedy
+                  ```
                 feedback: "No"
-            -   option: "{if} leeftijd = 24"
+            -   option: |
+                  ```
+                  {if} leeftijd = 24
+                  ```
                 feedback: "No"
-            -   option: "antwoord = {ask} 'Wat is je antwoord?'"
+            -   option: |
+                  ```
+                  antwoord = {ask} 'Wat is je antwoord?'
+                  ```
                 feedback: "Yes!"
-            -   option: "antwoord == {ask} 'Hoe gaat het?'"
+            -   option: |
+                  ```
+                  antwoord == {ask} 'Hoe gaat het?'
+                  ```
                 feedback: "No"
             correct_answer: "C"
             hint: "Je gebruikt == bij het vergelijken van twee antwoorden"
@@ -3026,13 +3038,25 @@ levels:
               {else}
                   {print} 'Je mag de zaal niet in!'
             mp_choice_options:
-            -   option: "`> 12`"
+            -   option: |
+                  ```
+                  > 12
+                  ```
                 feedback: "12 jarigen mogen ook naar binnen"
-            -   option: "`>= 12`"
+            -   option: |
+                  ```
+                  >= 12
+                  ```
                 feedback: "Fantastisch!"
-            -   option: "`< 12`"
+            -   option: |
+                  ```
+                  < 12
+                  ```
                 feedback: "Deze kinderen zijn te jong!"
-            -   option: "`<= 12`"
+            -   option: |
+                  ```
+                  <= 12
+                  ```
                 feedback: "Deze kinderen zijn te jong"
             correct_answer: "B"
             hint: "> betekent groter dan"
@@ -3076,13 +3100,13 @@ levels:
                           {print} _
                           spel = 'over'
             mp_choice_options:
-            -   option: "`'Lager'` and `'Hoger'` and `'Je wint!'`"
+            -   option: "'Lager' en 'Hoger' en 'Je wint!'"
                 feedback: "Bijna."
-            -   option: "`'Hoger'` and `'Lager'` and `'Je wint!'`"
+            -   option: "'Hoger' en 'Lager' en 'Je wint!'"
                 feedback: "Je wint!"
-            -   option: "`'Je wint'` and `'Lager!'` and `'Hoger'`"
+            -   option: "'Je wint' en 'Lager!' en 'Hoger'"
                 feedback: "De volgorde klopt niet."
-            -   option: "`'Lager!'` and `'Je wint!'` and `'Hoger!'`"
+            -   option: "'Lager!' en 'Je wint!' en 'Hoger!'"
                 feedback: "Die volgorde klopt niet"
             correct_answer: "B"
             hint: "Bij de laatste optie win je het spel."
