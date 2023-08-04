@@ -3301,14 +3301,15 @@ levels:
             question_score: "10"
     15:
         1:
-            question_text: "Which symbol should be used on the blank? Tip: the programm lets you keep guessing until you get it right."
+            question_text: "Which symbol should be used on the blank? 
+            Tip: You must keep guessing until you get it right."
             code: |
               answer = 0
               while answer _ 'Amsterdam'
                   answer = ask 'What is the capital city of the Netherlands?'
               print 'You have given the correct answer'
             mp_choice_options:
-            -   option: "`=>`"
+            -   option: "`=!`"
                 feedback: "That is not right."
             -   option: "`==`"
                 feedback: "You don't have to keep guessing if you've given the right answer."
@@ -3322,13 +3323,25 @@ levels:
         2:
             question_text: "Which of these codes has used the correct symbol(s)?"
             mp_choice_options:
-            -   option: "{while} name = Hedy"
+            -   option: |
+                  ```
+                  {while} name = Hedy
+                  ```
                 feedback: "No"
-            -   option: "{while} age = 24"
+            -   option: |
+                  ```
+                  {while} age = 24
+                  ```
                 feedback: "No"
-            -   option: "{while} time > 0'"
+            -   option: |
+                  ```
+                  {while} time > 0
+                  ```
                 feedback: "Yes!"
-            -   option: "{while} answer == yes'"
+            -   option: |
+                  ```
+                  {while} answer == yes'
+                  ```
                 feedback: "A quotation mark is missing"
             correct_answer: "C"
             hint: "When you are comparing two answers you should use =="
@@ -3339,13 +3352,13 @@ levels:
               _ age >= 18
                 print 'you are not allowed in this bar'
             mp_choice_options:
-            -   option: "{if}"
+            -   option: "`{in}`"
                 feedback: "That's not it"
-            -   option: "{while}"
+            -   option: "`{while}`"
                 feedback: "You are right"
-            -   option: "{for}"
+            -   option: "`{for}`"
                 feedback: "That's not it"
-            -   option: "{range}"
+            -   option: "`{range}`"
             feedback: "That's not it"
             correct_answer: "B"
             hint: "You are not allowed in the bar as long as you are 17 or younger"
