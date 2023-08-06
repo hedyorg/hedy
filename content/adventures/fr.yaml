@@ -144,23 +144,23 @@ adventures:
     story:
         name: "Histoire"
         description: "Histoire"
-        default_save_name: "Histoire"
+        default_save_name: "Story"
         levels:
             1:
                 story_text: |
-                    In level 1 you can make a story with a different main character that you enter yourself.
+                    Au niveau 1 tu peux faire une histoire avec un personnage principal dont tu auras choisi le nom toi-même.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
+                    Après la première ligne, commence avec `{print}` si la phrase a besoin d'être affichée.
+                    Où utilise `{echo}` si tu veux que le nom de ton personnage principal soit à la fin de la phrase.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {ask} Le nom du personnage principal de cette histoire est
+                    {print} Le personnage principal est en train de marcher dans la forêt
+                    {echo} Il est un peu effrayé,
+                    {print} Il entend de drôle de bruit tout autour
+                    {print} Il craint que cette forêt soit hantée
                     ```
                 start_code: "{print} Ton histoire commence ici"
                 story_text_2: "### Défi\nCréez maintenant votre propre histoire à l'aide d'au moins 6 lignes de code.\nCette histoire doit être différente de celle proposée dans le code de l'exemple.\nUtilisez au moins une commande `{ask}` et une commande `{echo}`.\nVous pouvez choisir n'importe quel sujet.\nSi vous n'avez pas d'idée, vous pouvez parler de l'un des sujets suivants : un film, un match ou une journée au zoo.\n"
@@ -1324,15 +1324,15 @@ adventures:
                 example_code: |
                     ```
                     _ Ajoute les guillemets à ce code _
-                    {print} Bienvenue au Restaurant Chez Hedy!
+                    {print} Bienvenue au Restaurant Chez Hedy !
                     {print} Aujourd'hui nous servons pizza ou lasagne.
-                    plat {is} {ask} Que voudrais-tu manger ?
-                    {print} Très bon choix !   plat  est ce que je préfère !
-                    accompagnement {is} {ask} Voudrais-tu de la viande ou des légumes en garniture ?
-                    {print} plat  avec  accompagnement  . C'est parti !
-                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
+                    plat {is} {ask} Que voudrais-tu manger ?
+                    {print} Très bon choix !  plat  est ce que je préfère !
+                    accompagnement {is} {ask} Voudrais-tu de la viande ou des légumes en garniture ?
+                    {print} plat  avec  accompagnement  . C'est parti !
+                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
                     {print} Merci pour ta commande.
-                    {print} Tes  plat  et  boisson  vont être servis!
+                    {print} Tes  plat  et  boisson  vont être servis !
                     ```
                 start_code: "# inscris ton code ici"
             5:
@@ -1362,20 +1362,20 @@ adventures:
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
                 example_code: |
-                      Vous pouvez créer un code de restaurant simple, comme celui-ci :
-                      ```
-                      {print} 'Bienvenue au restaurant Chez Hedy'
-                      {print} 'Voici notre menu:'
-                      {print} 'Nos plats principaux sont: pizza, lasagnes ou spaghettis'
-                      plat_principal = {ask} 'Quel plat principal souhaitez-vous?'
-                      prix = 0
-                      {if} plat_principal {is} pizza prix = 10
-                      {if} plat_principal {is} lasagne prix = 12
-                      {if} plat_principal {is} spaghetti prix = 8
-                      {print} 'Vous avez commandé ' plat_principal
-                      {print} "Ce sera " prix " dollars, s'il vous plaît"
-                      {print} 'Merci, bon appétit !'
-                      ```
+                    Vous pouvez créer un code de restaurant simple, comme celui-ci :
+                    ```
+                    {print} "Bienvenue au restaurant Chez Hedy"
+                    {print} "Voici notre menu :"
+                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghettis"
+                    plat_principal = {ask} "Quel plat principal souhaitez-vous ?"
+                    prix = 0
+                    {if} plat_principal {is} pizza prix = 10
+                    {if} plat_principal {is} lasagnes prix = 12
+                    {if} plat_principal {is} spaghettis prix = 8
+                    {print} "Vous avez commandé " plat_principal
+                    {print} "Ce sera " prix " euros, s'il vous plaît"
+                    {print} "Merci, bon appétit !"
+                    ```
                 start_code: "# place your code here"
             7:
                 story_text: |
@@ -1413,25 +1413,25 @@ adventures:
                     Check out the example, and try this at your own virtual restaurant!
                 example_code: |
                     ```
-                    {print} 'Bienvenue au restaurant chez Hedy!'
-                    nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui?"
-                    {print} 'Génial!'
+                    {print} "Bienvenue au restaurant chez Hedy !"
+                    nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui ?"
+                    {print} "Génial !"
                     prix = 0
                     {repeat} nombre_personnes {times}
-                        nourriture = {ask} 'Que voulez-vous commander ?'
+                        nourriture = {ask} "Que voulez-vous commander ?"
                         {print} nourriture
                         {if} nourriture {is} frites
                             prix = prix + 3
-                            sauce = {ask} 'Quelle sauce voulez-vous avec vos frites?' 
+                            sauce = {ask} "Quelle sauce voulez-vous avec vos frites ?"
                             {if} sauce {is} aucune
-                                {print} 'pas de sauce'
+                                {print} "pas de sauce"
                             {else}
                                 prix = prix + 1
-                                {print} 'avec ' sauce
+                                {print} "avec " sauce
                         {if} nourriture {is} pizza
                             prix = prix + 4
-                    {print} 'Cela fera ' prix ' dollars'
-                    {print} 'Bon appétit !'
+                    {print} "Cela fera " prix " euros"
+                    {print} "Bon appétit !"
                     ```
                 start_code: "# place your code here"
             10:
@@ -2566,45 +2566,45 @@ adventures:
     repeat_command_2:
         levels:
             8:
-                story_text: "### In the block or not?\nIn this level you have to think carefully which lines of code should be in the block and which shouldn't.\nFor example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.\nThis means the last line shouldn't start with indentation as it doesn't belong to the block.\nIf you do start the last line with indentation the song will turn out wrong.\n\n## Exercice\nEach line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.\n"
-                example_code: "```\n_ {print} 'Do you know the muffin man?'\n_ {repeat} 2 {times}\n_ {print} 'The muffin man'\n_ {print} 'Do you know the muffin man, who lives on Drury Lane?'\n```\n"
-                start_code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
+                story_text: "### C'est dans le bloc ou pas ?\nÀ ce niveau, tu dois faire attention à quelles lignes de code doivent être dans le bloc et lesquelles ne doivent pas y être.\nPar exemple : si tu veux chanter la chanson *Vive le vent*. Tu veux que seule la ligne avec \"Vive le vent\" soit répétée deux fois.\nCela veut dire que les lignes suivantes ne devrait pas démarrer avec une indentation car elles n'appartiennent pas au bloc.\nSi tu démarres les autres lignes avec une indentation, la chanson ne sera plus correcte.\n\n## Exercice\nChaque ligne de l'exemple de code démarre avec un espace blanc. Retire le blanc et essaye de trouver quelle ligne a besoin d'une indentation et quelle ligne n'en a pas besoin pour faire la chanson de vive le vent.\n"
+                example_code: "```\n_ {repeat} 2 {times}\n_ {print} \"Vive le vent\"\n_ {print} \"Vive le vent d'hiver\"\n_ {print} \"Qui s'en va sifflant, soufflant\"\n_ {print} \"Dans les grands sapins verts, oh !\"\n```\n"
+                start_code: "{repeat} 3 {times}\n    {print} \"Cette ligne sera répétée…\"\n    {print} \"Cette ligne aussi…\"\n{print} \"mais celle-ci ne le sera pas !\""
             7:
-                story_text_2: "Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.\nThen, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.\n"
-                example_code: "```\n{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'\n```\n"
-                story_text: "## Repeat with other commands and with variables\nYou have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?\nIn this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.\n"
-                example_code_2: "```\n{print} 'Yay! It is your birthday!'\nage = {ask} 'How old are you now?'\n{repeat} age {times} {print} 'Hip Hip Hurray!'\n```\n"
-                start_code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
+                story_text_2: "Une autre chose intéressante que tu peux faire avec la commande `{repeat}`, c'est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple de code, tu peux voir que nous demandons en premier quel âge a la personne.\nEnsuite, en ligne 3, le message est répété `âge` fois. Donc nous avons utilisé la variable `âge` avec la commande `{repeat}`.\n"
+                example_code: "```\n{repeat} 2 {times} réponse = {ask} \"Savais-tu que tu pouvais poser une question plusieurs fois ?\"\n{if} réponse {is} oui {repeat} 2 {times} {print} \"Tu le savais déjà !\"\n{else} {repeat} 3 {times} {print} \"Tu as appris quelque chose de nouveau !\"\n```\n"
+                story_text: "## Répète avec d'autres commandes et avec des variables\nTu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`, mais savais-tu que tu pouvais aussi utiliser d'autres commandes avec `{repeat}` ?\nDans cet exemple de code, tu peux voir que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.\n"
+                example_code_2: "```\n{print} \"Youpi ! C'est ton anniversaire\"\nâge = {ask} \"Quel âge as-tu ?\"\n{repeat} âge {times} {print} \"Hip Hip Hip Hourra !\"\n```\n"
+                start_code: "{repeat} 2 {times} réponse = {ask} \"Savais-tu que tu pouvais poser une question plusieurs fois ?\"\n{if} réponse {is} oui {repeat} 2 {times} {print} \"Tu le savais déjà !\"\n{else} {repeat} 3 {times} {print} \"Tu as appris quelque chose de nouveau !\""
         name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
     for_command:
         name: "{for}"
-        description: for command
-        default_save_name: for
+        description: La commande {for}
+        default_save_name: pour
         levels:
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
-                story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
+                start_code: "animaux {is} chiens, chats, méduses\n{for} animal {in} animaux\n    {print} \"J'aime les \" animal"
+                example_code: "```\nanimaux {is} chiens, chats, méduses\n{for} animal {in} animaux\n    {print} \"J'aime les \" animal\n```\n"
+                story_text: "## Pour\nÀ ce niveau nous apprenons une nouvelle commande appelée `{for}`. Avec `{for}` tu peux répéter quelque chose pour tous les éléments d'une liste\n`{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces devant toutes les lignes du bloc."
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: "{for} compteur {in} {range} 1 {to} 5\n    {print} compteur"
+                story_text: "À ce niveau, nous ajoutons une nouvelle forme pour le `{for}`. Aux niveaux précédents, nous avons utilisé `{for}`avec une liste, mais nous pouvons aussi utiliser `{for}` avec des nombres.\nNous le faisons en ajoutant un nom de variable, suivi par `{in}``{range}`. Nous écrivons ensuite le nombre de départ, puis `{to}`, et enfin le nombre d'arrivé.\n\nEssaye l'exemple pour voir ce qui se passe ! À ce niveau aussi, tu devras utilise les indentations pour les lignes en dessous de l'instruction `{for}`."
+                example_code: "```\n{for} compteur {in} {range} 1 {to} 5\n    {print} compteur\n```\n"
     maths:
         name: maths
         levels:
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
-                story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "{print} \"5 fois 5 est \" 5 * 5"
+                story_text: "## 1 + 1\nDans ce niveau tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.\n\nL'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.\n\nLa multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !\nVoilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.\n"
+                example_code: "```\n{print} \"5 plus 5 fait \" 5 + 5\n{print} \"5 moins 5 fait \" 5 - 5\n{print} \"5 fois 5 fait \" 5 * 5\n```\n"
+                story_text_2: "Nous faisons aussi un changement pour enregistrer un mot dans une variable ! Tu peux maintenant utiliser `=` à la place de `{is}` quand tu enregistres un nom ou un nombre dans une variable, comme ceci :\n"
+                example_code_2: "```\nnom = Hedy\nréponse = 20 + 4\n```\n"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-                story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-        description: Introducing maths
+                start_code: "{print} \"Les nombres décimaux ont maintenant besoin d'utiliser un point\"\n{print} 2.5 + 2.5"
+                story_text: "**Nombres décimaux**\nJusqu'à présent, Hedy ne te permettait pas d'utiliser les nombres décimaux comme 1.5, mais maintenant nous les autorisons. Attention, les langages de programmation utilisent le point pour les nombres décimaux et non la virgule."
+                example_code: "```\n{print} \"Deux et demi plus deux et demi fait…\"\n{print} 2.5 + 2.5\n```\n"
+        description: Introduction des maths
         default_save_name: maths
     elif_command:
         default_save_name: elif
@@ -2690,33 +2690,33 @@ adventures:
                 story_text: "### La commande `{repeat}` et l'indentation\nÀ ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.\nTu le fais en faisant un bloc avec les lignes que tu veux répéter.\nLes lignes de ce bloc vont avoir besoins d'une **indentation**.\nCela veut dire mettre quatre espaces au début de chaque ligne. Tu devras indenter même si tu veux créer un bloc d'une seule ligne.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} \"Salut tout le monde\"\n    {print}\"Tout ceci sera répété 5 fois\"\n```\n"
             9:
-                story_text: "In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
+                story_text: "Dans ce niveau, tu peux non seulement utiliser plusieurs lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !\nDans l'exemple, tu vois une commande `{if}` dans une commande `{repeat}`. Ça marche aussi à l'inverse, et un `{if}` peut aussi se trouver dans un autre `{if}` et un `{repeat}` dans un autre `{repeat}`.\nEssaye !\n"
+                example_code: "```\n{repeat} 3 {times}\n    nourriture = {ask} \"Que veux-tu ?\"\n    {if} nourriture {is} pizza\n        {print} \"bien !\"\n    {else}\n        {print} \"la pizza c'est meilleur\"\n```\n"
                 start_code: "{repeat} 3 {times}\n    nourriture = {ask} \"Que veux-tu ?\"\n    {if} nourriture {is} pizza\n        {print} \"parfait !\"\n    {else}\n        {print} \"pizza c'est meilleur\""
     and_or_command:
         name: "{and} & {or}"
-        description: introducing and or
-        default_save_name: and or
+        description: Introduction de {and} et {or}
+        default_save_name: et ou
         levels:
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-                story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                start_code: "nom = {ask} \"quel est ton nom ?\"\nâge = {ask} \"quel est ton âge ?\"\n{if} nom {is} \"Hedy\" {and} âge {is} 2\n    {print} \"Tu es le vrai Hedy !\""
+                story_text: "Nous allons maintenant apprendre `{and}' et `{or}` ! Si tu veux vérifier deux éléments, tu n'es plus obligé d'utiliser deux `{if}` mais tu peux utiliser `{and}` et `{or}`\n\nSi tu utilises `{and}`, les deux éléments, à gauche et à droite du `{and}` doivent être vrai. Nous pouvons aussi utiliser `{or}`. Dans ce cas, seulement un des éléments doit être correct."
+                example_code: "```\nnom = {ask} \"Quel est ton nom ?\"\nâge = {ask} \"Quel est ton âge ?\"\n{if} nom {is} 'Hedy' {and} âge {is} 2\n    {print} \"Tu es le vrais Hedy !\"\n```\n"
     while_command:
         name: "{while}"
-        description: while
+        description: tant que
         default_save_name: while_command
         levels:
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                start_code: "réponse = 0\n{while} réponse != 25\n    réponse = {ask} \"Combien font 5 fois 5 ?\"\n{print} \"Une réponse correcte a été donnée\""
+                story_text: "Nous allons apprendre une nouvelle boucle, la boucle `{while}` ! La boucle continue tant que la condition est vraie.\nAlors n'oublie pas de changer la valeur dans la boucle.\n\nDans l'exemple de code, on continue jusqu'à obtenir une réponse correcte.\nSi la réponse correcte n'est jamais donnée, la boucle ne se termine pas !"
+                example_code: "```\nréponse = 0\n{while} réponse != 25\n    réponse = {ask} \"Combien font 5 fois 5 ?\"\n{print} \"Une réponse correcte a été donnée\"\n```\n"
     clear_command:
         name: '{clear}'
-        description: clear command
+        description: La commande {clear}
         default_save_name: clear_command
         levels:
             4:
-                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
-                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
-                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
+                start_code: "{print} \"3\"\n{sleep}\n{clear}\n{print} \"2\"\n{sleep}\n{clear}\n{print} \"1\"\n{sleep}\n{clear}\n{print} \"SURPRISE !\"\n"
+                story_text: "C'est le moment d'apprendre une nouvelle commande ! Avec `{clear}`tu peux effacer tout le texte de l'écran d'affichage. De cette manière, tu peux éviter que ton écran ne soit trop rempli de texte.\nAttention ! Quand tu utilises une commande `{clear}`, rappelle-toi d'utiliser un `{sleep}` juste avant. Sinon Hedy effacera ton écran sans te laisser le temps de le lire !\n"
+                example_code: "```\n{print} \"3\"\n{sleep}\n{clear}\n{print} \"2\"\n{sleep}\n{clear}\n{print} \"1\"\n{sleep}\n{clear}\n{print} \"SURPRISE !\"\n```\n"
