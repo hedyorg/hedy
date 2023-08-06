@@ -2492,15 +2492,15 @@ adventures:
         description: Introduction à la commande `{ask}`
         levels:
             2:
-                story_text_2: "### Exercice\nDans l'onglet précédent tu t'es entraîné à attribuer des valeurs aux variables via la commande `{is}`.\nTu as créé au moins 3 variables et les a utilisées avec la commande `{print}`.\nMaintenant, au lieu de simplement attribuer une valeur fixe aux variables, nous voulons les rendre interactives, comme dans l'exemple.\n\nCopie le code de l'onglet précédent et rend les variables interactives en utilisant la commande `{ask}`.\n"
+                story_text_2: "### Exercice\nDans l'onglet précédent tu t'es entraîné à attribuer des valeurs aux variables avec la commande `{is}`.\nTu as créé au moins 3 variables et les a utilisées avec la commande `{print}`.\nMaintenant, au lieu de simplement attribuer une valeur fixe aux variables, nous voulons les rendre interactives, comme dans l'exemple.\n\nCopie le code de l'onglet précédent et rend les variables interactives en utilisant la commande `{ask}`.\n"
                 example_code_2: "```\nanimal_favori {is} {ask} Quel est ton animal favori ?\n{print} J'aime les animal_favori\n```\n"
                 story_text: "## La commande `{ask}`\nMaintenant que l'on peut utiliser les **variables** dans nos codes, la commande `{echo}` n'est plus utile.\nOn peut utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes\nRegarde ça :\n\nComme ça notre code devient interactif !\n"
                 example_code: "```\nnom {is} {ask} Quel est ton nom ?\n{print} Bonjour nom\nâge {is} {ask} Quel âge as-tu ?\n{print} nom a âge ans.\n```\n"
                 start_code: "nom {is} {ask} Quel est ton nom ?\n{print} Bonjour nom\nage {is} {ask} Quel âge as-tu ?\n{print} nom a âge ans."
             1:
-                story_text: "## La commande `{ask}`\nMaintenant que tu sais utiliser la commande `{print}`, tu es prêt pour apprendre la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fait un essai :\n"
+                story_text: "## La commande `{ask}`\nMaintenant que tu sais utiliser la commande `{print}`, tu es prêt pour apprendre la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fais un essai :\n"
                 example_code: "```\n{print} Salut !\n{ask} quel est ton nom ?\n```\n"
-                story_text_2: "## La commande `{echo}`\nSi tu veux que l'ordinateur te redise ta réponse, tu peux utiliser la commande `{echo}`. Attention, car la réponse est ajoutée à la fin de la phrase, soit, dans cet exemple, après salut.\n"
+                story_text_2: "## La commande `{echo}`\nSi tu veux que l'ordinateur te répète ta réponse, tu peux utiliser la commande `{echo}`. Attention, car la réponse est ajoutée à la fin de la phrase, soit, dans cet exemple, après salut.\n"
                 story_text_3: "### Exercice\nEssayer les commandes `{ask}` et `{echo}`. Tout d'abord, complète les blancs pour faire fonctionner ce programme.\nEnsuite pose 2 autres questions avec la commande `{ask}`, après chaque `{ask}` utilise `{echo}` pour afficher la réponse à l'écran.\n"
                 example_code_2: "```\n{print} Salut !\n{ask} Quel est ton nom ?\n{echo} Salut\n```\n"
                 example_code_3: "```\n_ Comment vas-tu ?\n_\n```\n"
@@ -2508,13 +2508,13 @@ adventures:
         default_save_name: command_demande
     is_command:
         name: "{is}"
-        description: La commande {is}
+        description: Introduction à la commande {is}
         default_save_name: command_est
         levels:
             2:
                 story_text: "## Les variables\nTu peux donner une valeur à un mot avec `{is}`. C'est ce que l'on appelle une **variable**. Dans cet exemple, nous avons défini une variable qui s'appelle « nom » et une variable qui s'appelle « age ». Tu peux utiliser le mot « nom » n'importe où dans ton code et il sera remplacé par sa valeur, comme ceci :\n"
                 example_code: "```\nnom {is} Hedy\nâge {is} 15\n{print} nom a âge ans\n```\n"
-                story_text_2: "### Exercice\nIl est temps de faire tes propres variables !\nDans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.\nPour commencer, termine notre exemple en remplissant l'espace blanc avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire dans l'exemple.\n"
+                story_text_2: "### Exercice\nIl est temps de faire tes propres variables !\nDans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.\nPour commencer, termine notre exemple en remplissant l'espace blanc avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.\n"
                 example_code_2: "```\nanimaux_favoris is _\n{print} J'aime les animaux_favoris\n```\n"
                 start_code: "nom {is} Hedy\nâge {is} 15\n{print} nom a âge ans"
             14:
@@ -2527,7 +2527,7 @@ adventures:
                 example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom != \"Hedy\"\n    {print} \"Tu n'es pas Hedy\"\n```\n"
     random_command:
         name: "{random}"
-        description: introduction de la commande `{at} {random}`
+        description: Introduction à la commande `{at} {random}`
         default_save_name: random_command
         levels:
             3:
@@ -2557,11 +2557,11 @@ adventures:
                 example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n```\n"
                 story_text: "## Si… Sinon…\nTu as appris à répéter un bloc de ligne de code après une commande `{repeat}`.\nMaintenant, tu peux aussi utiliser l'indentation pour faire un bloc après une commande `{if}` ou `{else}`.\nRegarde l'exemple de code.\n\n### Exercice\nAjoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.\n"
         name: "{if} & {else}"
-        description: Introduction de la commande `{if}`
+        description: Introduction à la commande `{if}`
         default_save_name: if_command
     in_command:
         name: "{in}"
-        description: Introduction de la commande `{in}`
+        description: Introduction à la commande `{in}`
         default_save_name: in_command
         levels:
             5:
@@ -2689,12 +2689,12 @@ adventures:
         default_save_name: repeat_command
         levels:
             7:
-                story_text: "## Répète ! Répète ! Répète !\nLe niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour executer une ligne de code plusieurs fois. Comme ceci :\n\n### Exercice\nJoue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?\n"
+                story_text: "## Répète ! Répète ! Répète !\nLe niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :\n\n### Exercice\nJoue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?\n"
                 example_code: "```\n{repeat} 3 {times} {print} \"Hedy est marrant !\"\n```\n"
                 start_code: "{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire, Hedy\"\n{print} \"Joyeux anniversaire\"\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} \"Bonjour tout le monde\"\n    {print} \"Ceci sera écrit 5 fois\""
-                story_text: "### La commande `{repeat}` et l'indentation\nÀ ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.\nTu le fais en faisant un bloc avec les lignes que tu veux répéter.\nLes lignes de ce bloc vont avoir besoins d'une **indentation**.\nCela veut dire mettre quatre espaces au début de chaque ligne. Tu devras indenter même si tu veux créer un bloc d'une seule ligne.\n"
+                story_text: "### La commande `{repeat}` et l'indentation\nDans ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.\nTu le fais en faisant un bloc avec les lignes que tu veux répéter.\nLes lignes de ce bloc vont avoir besoin d'une **indentation**.\nCela veut dire mettre quatre espaces au début de chaque ligne. Tu devras indenter même si tu veux créer un bloc d'une seule ligne.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} \"Salut tout le monde\"\n    {print}\"Tout ceci sera répété 5 fois\"\n```\n"
             9:
                 story_text: "Dans ce niveau, tu peux non seulement utiliser plusieurs lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !\nDans l'exemple, tu vois une commande `{if}` dans une commande `{repeat}`. Ça marche aussi à l'inverse, et un `{if}` peut aussi se trouver dans un autre `{if}` et un `{repeat}` dans un autre `{repeat}`.\nEssaye !\n"
