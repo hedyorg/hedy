@@ -35,11 +35,11 @@ adventures:
 
                     Bien sûr, tu voulais afficher
 
-                    `Mon nom est Sophie`
+                    "Mon nom est Sophie"
 
                     mais Hedy affiche
 
-                    `Mon Sophie est Sophie`.
+                    "Mon Sophie est Sophie".
 
                     Dans ce niveau, ce problème est résolu à l'aide des guillemets.
                 example_code: "```\nnom {is} Sophie\n{print} Mon nom est nom\n```\n"
@@ -158,49 +158,47 @@ adventures:
                     ```
                     {ask} Le nom du personnage principal de cette histoire est
                     {print} Le personnage principal est en train de marcher dans la forêt
-                    {echo} Il est un peu effrayé,
-                    {print} Il entend de drôle de bruit tout autour
+                    {echo} Il a un peu peur,
+                    {print} Il entend de drôles de bruits tout autour
                     {print} Il craint que cette forêt soit hantée
                     ```
                 start_code: "{print} Ton histoire commence ici"
-                story_text_2: "### Défi\nCréez maintenant votre propre histoire à l'aide d'au moins 6 lignes de code.\nCette histoire doit être différente de celle proposée dans le code de l'exemple.\nUtilisez au moins une commande `{ask}` et une commande `{echo}`.\nVous pouvez choisir n'importe quel sujet.\nSi vous n'avez pas d'idée, vous pouvez parler de l'un des sujets suivants : un film, un match ou une journée au zoo.\n"
+                story_text_2: "### Défi\nCrée maintenant ta propre histoire à l'aide d'au moins 6 lignes de code.\nCette histoire doit être différente de celle proposée dans le code d'exemple.\nUtilise au moins une commande `{ask}` et une commande `{echo}`.\nTu peux choisir n'importe quel sujet.\nSi tu n'as pas d'idée, tu peux parler de l'un des sujets suivants : un film, un match ou une journée au zoo.\n"
             2:
                 story_text: |
-                    Dans le niveau 2 tu peux créer une histoire plus drôle. Le nom de ton personnage principal peut être dans n'importe quel endroit de la phrase
+                    Dans le niveau 2 tu peux créer une histoire plus drôle. Le nom de ton personnage principal peut être à n'importe quel endroit de la phrase
 
-                    Tu devras programmer un petit peu plus pour ça. Tu dois d'abord donner un nom à ton personnage principal.
+                    Tu vas devoir programmer un petit supplément pour ça. Maintenant, tu dois commencer par donner un nom à ton personnage principal.
 
-                    Tu peux ensuite mettre ce nom n'importe où dans la phrase.
-
-                    Peux-tu créer une histoire en utilisant une variable toi-même ? Tu peux ajouter plusieurs variables ?
+                    Tu peux ensuite mettre ce nom n'importe où dans une phrase.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    nom {is} {ask} Quel est le nom du personnage principal ?
+                    {print} nom va courir dans les bois
+                    {print} nom a un peu peur
+                    {print} Soudain, il entend un bruit étrange…
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} nom craint que cette forêt soit hantée
                     ```
                 start_code: "{print} Ton histoire"
-                story_text_2: "### Défi\nIl est maintenant temps d'ajouter des variables à votre propre histoire créée au niveau précédent.\nAllez dans 'Mes programmes', cherchez votre histoire créée au niveau 1 et copiez le code. Collez le code dans l'écran de saisie de ce niveau.\n\nÉtant donné qu'aucune variable n'est utilisée, ce code ne fonctionne pas à ce niveau.\nEn utilisant la forme adéquate apprise dans ce niveau, modifiez les commandes `{ask}` et `{echo}` de votre code.\n\n**Défi supplémentaire** Pour corser votre histoire, ajoutez une commande `{sleep}`.\n"
+                story_text_2: "### Défi\nIl est maintenant temps d'ajouter des variables à l'histoire que tu as créée au niveau précédent.\nVa dans 'Mes programmes', recherche ton histoire créée au niveau 1 et copie le code. Colle le code dans l'écran de saisie de ce niveau.\n\nCe code ne fonctionne pas à ce niveau parce que tu n'as pas encore utilisé de variables.\nEn utilisant la forme adéquate apprise dans ce niveau, modifiez les commandes `{ask}` et `{echo}` de ton code.\n\n**Défi supplémentaire** Pour ajouter du suspens à ton histoire, ajoute une commande `{sleep}`.\n"
             3:
                 story_text: |
-                    Dans le niveau 3, vous pouvez rendre votre histoire plus amusante. Vous pouvez utiliser un côté plus aléatoire pour les monstres, les animaux ou les obstacles.  Pour ce faire :
+                    Dans le niveau 3, tu peux rendre ton histoire plus amusante. Tu peux tirer au hasard un monstre, un animal ou un autre obstacle, comme ceci :
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    animaux {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Maintenant il entend le cri d'un animaux {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story.
+                    La commande `{add}` peut aussi être pratique pour ton histoire.
                 example_code_2: |
                     ```
                     {print} Il entend un bruit
-                    animal {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} C'est quoi à ton avis ?
-                    {add} animal {to_list} d'animaux
-                    {print} C'était un {at} {random}
+                    animaux {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} C'est quoi à ton avis ?
+                    {add} animal {to_list} animaux
+                    {print} C'était un animaux {at} {random}
                     ```
                 story_text_3: |
                     Ceci est un exemple de la commande `{remove}` dans ton histoire.
@@ -211,95 +209,104 @@ adventures:
                     Ajoute de nouvelles lignes de code à ton histoire de manière à ce que ces nouvelles commandes apparaissent au moins une fois.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} Son sac à dos est beaucoup trop lourd.
+                    {print} Il y a dedans une bouteille d'eau, une lampe torche et une brique.
+                    sac {is} eau, torche, brique
+                    jeté {is} {ask} Quel objet devrions-nous jeter ?
+                    {remove} jeté {from} sac
                     ```
-                start_code: "{print} Votre histoire"
+                start_code: "{print} Ton histoire"
             4:
                 story_text: |
                     Tu as sans doute remarqué que le problème des niveaux précédents persiste. As-tu essayé d'afficher une phrase contenant le mot « nom » ? Par exemple : `{print}` mon nom est nom.
-                    Tu peux résoudre ce problème dans ce niveau en mettant entre guillemets tout ce qui va être affiché.
+                    Tu peux résoudre ce problème dans ce niveau. Tu dois mettre entre guillemets tout ce que tu veux écrire.
 
                     ### Défi
-                    Copie le code d’exemple et ajoute des guillemets aux lignes pour le faire fonctionner.
+                    Copie le code d’exemple et ajoute des guillemets à la place des espaces blancs aux lignes 1 et 2 pour le faire fonctionner.
+                    Les espaces blancs en ligne 3 et 4 ne devraient pas être remplacés par des guillemets, mais une commande `{sleep}`et une commande `{clear}`. Peux-tu faire marcher ça ?
 
                     ### Défi 2
                     Rends-toi au niveau précédent et copie le code de ton histoire. Dans ce niveau, ton code fonctionnera en ajoutant des guillemets aux bons endroits.
-                    Astuce : les variables de ta propre histoire ne doivent pas être entre guillemets, comme le montre la deuxième ligne dans le code d'exemple. Dans cette ligne, le nom de la variable n'est pas entre guillemets.
+                    Astuce : les variables de ta propre histoire ne doivent pas être entre guillemets, comme le montre la seconde ligne dans le code d'exemple. Dans cette ligne, le nom de la variable n'est pas entre guillemets.
                 example_code: |
                     ```
-                    nom {is} {ask} _ Comment t'appelles-tu ? _
+                    nom {is} {ask} _ Comment t'appelles-tu ? _
                     {print}  _ Le personnage principal s'appelle _ nom
                     _
                     _
                     {print} nom  _ va se promener dans les bois _
                     {print} nom _ a un peu peur _
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Il entend le bruit d'un animal _ animaux {at} {random}
-                    {print} nom _ craint que la forêt ne soit hantée_
+                    {print} _ Il entend le bruit d'un _ animaux {at} {random}
+                    {print} nom _ craint que la forêt ne soit hantée _
                     ```
-                start_code: "{print} 'Votre histoire sera imprimée ici'"
+                start_code: "{print} \"ton histoire sera écrite ici !\""
             5:
                 story_text: |
-                    Dans ce niveau, différentes fins peuvent être programmées afin de rendre votre histoire encore plus amusante.
-                    Ce code d'exemple vous présente comment réaliser deux fins différentes.
+                    Dans ce niveau, différentes fins peuvent être programmées afin de rendre ton histoire encore plus amusante.
+                    Le code d'exemple te montre comment réaliser deux fins différentes.
 
                     ### Défi 1
-                    Ecrivez une nouvelle histoire courte du sujet de votre choix.
-                    En panne d'inspiration ? Choisissez l'un des sujets suivants : un super-héros, une journée d'école ennuyeuse, une île déserte.
+                    Écrie une nouvelle histoire courte du sujet de ton choix.
+                    En panne d'inspiration ? Choisie l'un des sujets suivants : un super-héros, une journée d'école ennuyeuse, une île déserte.
 
-                    Maintenant, donnez la possibilité au joueur de choisir une fin heureuse ou non, comme indiqué dans le code d'exemple.
-                    Programmez les deux fins.
+                    Maintenant, donne la possibilité au joueur de choisir une fin heureuse ou non, comme indiqué dans le code d'exemple.
+                    Programme les deux fins.
 
                     ### Défi 2
-                    Copiez l'histoire créée aux niveaux précédents.
-                    Trouvez le moyen d'ajouter au moins deux commandes`{if}` et `{else}` à votre histoire.
-                    La fin peut être heureuse ou non. Vous pouvez également trouver d'autres moyens d'inclure ces commandes.
+                    Copie l'histoire créée aux niveaux précédents.
+                    Trouve le moyen d'ajouter au moins deux commandes `{if}` et `{else}` à ton histoire.
+                    La fin peut être heureuse ou non. Tu peux également trouver d'autres moyens d'inclure ces commandes.
                 example_code: |
                     ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name 'walks through the forest'
-                    {print} name 'encounter a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats' name
+                    nom {is} {ask} "Qui se promène en forêt ?"
+                    {print} nom " se promène en forêt"
+                    {print} nom " rencontre un monstre"
+                    fin {is} {ask} "Voudrais-tu une fin triste ou heureuse ?"
+                    {if} fin {is} heureuse {print} nom " sort son épée et le monstre s'enfuie rapidement"
+                    {else} {print} "Le monstre mange " nom
                     ```
-                start_code: "{print} 'Here your story will start!'"
+                start_code: "{print} \"C'est ici que commence ton histoire !\""
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    Dans une histoire, on se répète parfois. Par exemple, quand une personne appelle à l'aide ou chante une chanson.
+                    À ce niveau, tu peux écrire ces répétitions dans ton histoire, avec `{repeat}`.
+
+                    ### Exercice
+                    Ajoute une répétition à ta propre histoire. Recherche dans tes programmes sauvegardés, choisi l'histoire que tu as programmé au niveau 6, trouve une ligne contenant `{print}` et répète là !
 
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} "Le prince appelait à l'aide sans arrêt"
+                    {repeat} 5 {times} {print} "au secours !"
+                    {print} "Pourquoi personne ne vient m'aider ?"
                     ```
 
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    À ce niveau tu peux utiliser plusieurs lignes dans une commande `{if}`, ainsi tu peux améliorer ta fin heureuse ou triste !
+
+                    ### Exercice 1
+                    L'exemple de code montre deux fins différentes, une ou les personnages sautent dans une machine à voyager dans le temps et une où ce n'est pas le cas.
+                    Complète les espaces blancs avec, au moins, une phrase pour chaque fin.
+                    **Pour aller plus loin**, continue l'histoire. Que se passe-t-il dans l'histoire ? Tu peux aussi ajouter un second `{ask}` avec des options différentes.
+
+                    ### Exercice 2
+                    Recherche dans tes programmes sauvegardés et choisi une histoire du niveau 5. Maintenant écrit une fin triste et heureuse d'au moins trois lignes de long pour chacune !
 
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} "Oh non ! Le T-rex se rapproche !
+                    fin = {ask} "Voulez-vous une fin triste ou heureuse ?"
+                    {if} fin {is} "heureuse"
+                        {print} "Juste à temps, Richard retourne d'un saut dans la machine à voyager dans le temps !"
+                        {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} "Oh non ! Richard est trop lent…"
+                        {print} _
                     ```
-                start_code: "# place your code here"
+                start_code: "# met ton code ici"
             9:
                 story_text: |
                     In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
