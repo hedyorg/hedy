@@ -41,32 +41,32 @@ levels:
             editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         4:
             header: '{ask} '
-            text: "Le dernier code que tu peux utiliser au niveau 1 est `{echo}`.\n\n`{echo}` répète la réponse d'un `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
+            text: "Le deuxième code que tu peux utiliser au niveau 1 est `{ask}`.\n\n`{ask}` est utilisé pour poser une question à laquelle on peut répondre.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
         5:
-            header: Programmons !
-            text: "Avec `{print}`, `{ask}` et `{echo}` tu peux déjà écrire une petite histoire.\nC'est le bon moment pour essayer les aventures Perroquet, Histoire et Pierre, feuille, ciseaux.\n"
+            header: '{echo}'
+            text: "Comme tu as pu le voir dans l'exemple précédent, si tu utilises la commande `{ask}`, tu peux poser une question.\n\nCependant, la réponse n'apparaît pas dans l'écran de sortie.\n\nSi tu veux que la réponse s'affiche, tu peux utiliser la commande finale de ce niveau: `{echo}`.\n\n`{echo}` est utilisée pour répéter la réponse d'un `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         6:
             header: Programmons !
-            text: "Les aventures sont sous la forme d'onglets.\n"
+            text: "Avec `{print}`, `{ask}` et `{echo}` tu peux déjà créer une petite histoire.\nIl est temps d'essayer l'histoire du Perroquet et les aventures \"Pierre, Feuille, Ciseaux\".\n"
         7:
             header: Programmons !
-            text: "Les boutons de flèche jaune permettent de copier les exemples.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
+            text: "Les aventures sont affichées dans des onglets.\n"
             editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
-            header: Dessinons avec la tortue
-            text: "Après avoir vu les codes textuels, voyons les codes de dessin.\n"
+            header: Programmons!
+            text: "Les boutons en forme de flèches jaunes peuvent être utilisés pour copier des exemples.\n<iframe class=\"fragment\" src=\"/hedy/1\">\n"
         9:
-            header: 'Dessinons avec la tortue : {forward}'
-            text: "`{forward}` fait avancer la tortue.\n"
+            header: 'Dessinons avec la tortue'
+            text: "Maintenant que nous avons vu les codes textuels, nous allons désormais nous attarder sur les codes en forme de dessins.\n"
         10:
-            header: 'Dessinons avec la tortue : {turn}'
-            text: "`{turn}` est utilisé pour faire tourner la tortue à gauche ou a droite.\n"
+            header: 'Dessinons avec la tortue : {forward}'
+            text: "`{forward}` est utilisé pour faire avancer la tortue.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: "`{turn}` is used to make the turtle turn left or right.\n"
+            header: 'Dessinons avec la tortue: {turn}'
+            text: "`{turn}` est utilisée pour faire tourner la tortue vers la gauche ou la droite.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     9:
         1:
@@ -101,31 +101,31 @@ levels:
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
     2:
         2:
-            text: "To make or 'set' a variable we use the `{is}` command\n"
+            text: "Pour créer ou 'définir' une variable nous utilisons la commande `{is}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
             header: Variables
         3:
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
-            header: Interactive
-            text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}`  command.\n"
+            header: Interactif
+            text: "Nous pouvons aussi définir une variable en posant des questions.\n\nLa réponse à la question posée est alors stockée dans la variable..\n\nDe cette façon nous n'avons pas besoin de la commande `{echo}`  .\n"
         1:
-            header: Welcome to level 2
-            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store informatie.\n\nFor example: a name, age or favorite sports team.\n"
+            header: Bienvenue au niveau 2
+            text: "Dans ce niveau tu vas apprendre à utiliser les variables.\n\nUne variable est un mot qui peut être utilisé pour conserver des informations.\n\nPar exemple: un nom, un âge ou ton équipe sportive favorite.\n"
         4:
-            header: Multiple variables
-            text: "Now that we use variables, we can use multiple variables instead of just one `{echo}`command.\n"
+            header: Variables multiples
+            text: "Maintenant que nous utilisons les variables, nous pouvons utiliser des variables multiples au lieu d'une seule commande `{echo}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         5:
             header: Sleep
-            text: "You can also use the `{sleep}` command to pause the code for a while.\n"
+            text: "Tu peux aussi utiliser la commande `{sleep}` pour mettre le code en pause pendant un moment.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         6:
             header: Sleep 5
-            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command.\n"
+            text: "Tu peux ajouter un nombre après la commande `{sleep}` si tu veux que la pause soit plus longue.\n\nSi tu le veux, tu peux même utiliser une variable au lieu d'un nombre pour contrôler la durée de la commande sleep.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         7:
-            header: Let the programming fun begin!
-            text: "Enjoy the adventures in level 3!\n"
+            header: Que le plaisir de programmer commence!
+            text: "Profite des aventures du niveau 3!\n"
     4:
         2:
             header: Problem
