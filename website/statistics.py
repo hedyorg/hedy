@@ -449,12 +449,8 @@ class LiveStatisticsModule(WebsiteModule):
             selected_levels = [int(level) for level in selected_levels]
             selected_levels.sort()
         # identifies common errors in the class
-        b = self.common_exception_detection(class_['id'], user, common_errors)
+        self.common_exception_detection(class_['id'], user, common_errors)
 
-        print('*'*100)
-        print('b')
-        print(b)
-        print('*'*100)
         # in case of a db update in the meantime, reload common errors
         common_errors = self.__common_errors(class_['id'])
         students = self.__all_students(class_)
@@ -927,8 +923,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         # Iterate over each error and its corresponding username in the current session group
         for username, exception_count in exceptions_per_user.items():
-            print(f'username {username}')
-            print(f'exception {exception_count}')
             for exception_name, count in exception_count.items():
                 exception_type = self.exception_types[exception_name]
 
@@ -986,7 +980,6 @@ class LiveStatisticsModule(WebsiteModule):
                 'common_errors': existing_common_errors
             }
             self.db.update_class_customizations(class_customization)
-        return existing_common_errors
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
