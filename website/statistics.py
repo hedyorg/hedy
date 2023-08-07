@@ -280,47 +280,53 @@ class LiveStatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("live-stats", __name__)
         self.db = db
-        # Define the groups of misconceptions
-        self.misconception_groups = {
-            'Not a current level command': ['level'],
-            'Incorrect use of command': ['cannot'],
-            'Incorrect use of variable': ['variable'],
-            'Unwanted spaces': ['Spaces', 'confuse', 'computers'],
-            'Forgot commandos': ['forgot'],
-            'Empty program': ['empty program'],
-            'Typed something that is not allowed': ['entered', 'allowed'],
-            'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
-        }
+        """
+        Every exception must be listed here, and assigned a type. Currently we have the following
+        types of Exceptions:
+        * Programs too large: when the programs surpass our limit
+        * Use of blanks in programs: when the kids uses blanks in the programs (_)
+        * Use of nested functions: nested functions are not allowed in Hedy
+        * Incorrect use of types: this encompass errors that involve using the wrong type for a
+          built-in function or a matemathical operation
+        * Invalid command: We list here parse exception when the command used is wrong and we dont know it
+        * Incomplete command: when the command have several parts, and the user forgot one.
+        * Command not correct anymore: When a command changes sintax or is removed
+        * Command not available yet: for commands that will be available in the following levels, but not yet
+        * Incorect use of variable: When a variable is used before being assigned or is undefined.
+        * Incorrect Indentation: the user put a space where it didnt belong or the indentation doesnt match
+        * Echo and ask mismatch: when an echo is used without an ask
+        * Incorrect handling of quotes: any scenario where text is not handled correctly
+        """
         self.exception_types = {
-            'InputTooBigException': 'Programs too large',
-            'CodePlaceholdersPresentException': 'Use of blanks in programs',
-            'NestedFunctionException': 'Use of nested functions',
-            'InvalidTypeCombinationException': 'Incorrect use of types',
-            'InvalidArgumentTypeException': 'Incorrect use of types',
-            'InvalidArgumentException': 'Incorrect use of types',
-            'InvalidCommandException': 'Invalid command',
-            'MissingCommandException': 'Invalid command',
-            'IncompleteCommandException': 'Incomplete Command',
-            'MissingElseForPressitException': 'Incomplete Command',
-            'MissingInnerCommandException': 'Incomplete Command',
-            'IncompleteRepeatException': 'Incomplete Command',
-            'WrongLevelException': 'Command not correct anymore',
-            'InvalidAtCommandException': 'Command not correct anymore',
-            'LockedLanguageFeatureException': 'Command not available yet',
-            'UnsupportedFloatException': 'Command not available yet',
-            'AccessBeforeAssignException': 'Incorrect use of variable',
-            'UndefinedVarException': 'Incorrect use of variable',
-            'CyclicVariableDefinitionException': 'Incorrect use of variable',
-            'IndentationException': 'Incorrect Indentation',
-            'InvalidSpaceException': 'Incorrect Indentation',
-            'NoIndentationException': 'Incorrect Indentation',
-            'LonelyEchoException': 'Echo and ask mismatch',
-            'UnsupportedStringValue': 'Incorrect handling of quotes',
-            'UnquotedAssignTextException': 'Incorrect handling of quotes',
-            'UnquotedEqualityCheckException': 'Incorrect handling of quotes',
-            'LonelyTextException': 'Incorrect handling of quotes',
-            'UnquotedTextException': 'Incorrect handling of quotes',
-            'ParseException': 'Couldnt parse the program'
+            'InputTooBigException': 'program_too_large_exception',
+            'CodePlaceholdersPresentException': 'use_of_blanks_exception',
+            'NestedFunctionException': 'use_of_nested_functions_exception',
+            'InvalidTypeCombinationException': 'incorrect_use_of_types_exception',
+            'InvalidArgumentTypeException': 'incorrect_use_of_types_exception',
+            'InvalidArgumentException': 'incorrect_use_of_types_exception',
+            'InvalidCommandException': 'invalid_command_exception',
+            'MissingCommandException': 'invalid_command_exception',
+            'IncompleteCommandException': 'incomplete_command_exception',
+            'MissingElseForPressitException': 'incomplete_command_exception',
+            'MissingInnerCommandException': 'incomplete_command_exception',
+            'IncompleteRepeatException': 'incomplete_command_exception',
+            'WrongLevelException': 'command_unavailable_exception',
+            'InvalidAtCommandException': 'command_unavailable_exception',
+            'LockedLanguageFeatureException': 'command_not_available_yet_exception',
+            'UnsupportedFloatException': 'command_not_available_yet_exception',
+            'AccessBeforeAssignException': 'incorrect_use_of_variable_exception',
+            'UndefinedVarException': 'incorrect_use_of_variable_exception',
+            'CyclicVariableDefinitionException': 'incorrect_use_of_variable_exception',
+            'IndentationException': 'indentation_exception',
+            'InvalidSpaceException': 'indentation_exception',
+            'NoIndentationException': 'indentation_exception',
+            'LonelyEchoException': 'echo_and_ask_mismatch_exception',
+            'UnsupportedStringValue': 'incorrect_handling_of_quotes_exception',
+            'UnquotedAssignTextException': 'incorrect_handling_of_quotes_exception',
+            'UnquotedEqualityCheckException': 'incorrect_handling_of_quotes_exception',
+            'LonelyTextException': 'incorrect_handling_of_quotes_exception',
+            'UnquotedTextException': 'incorrect_handling_of_quotes_exception',
+            'ParseException': 'cant_parse_exception'
         }
         self.MAX_CONTINUOUS_ERRORS = 3
         self.MAX_COMMON_ERRORS = 10
