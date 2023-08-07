@@ -75,14 +75,14 @@ class ParseException(HedyException):
         self.fixed_code = fixed_code
 
 
-class UnquotedEqualityCheck(HedyException):
+class UnquotedEqualityCheckException(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
                          line_number=line_number)
         self.location = [line_number]
 
 
-class AccessBeforeAssign(HedyException):
+class AccessBeforeAssignException(HedyException):
     def __init__(self, name, access_line_number, definition_line_number):
         super().__init__('Access Before Assign',
                          name=name,

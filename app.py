@@ -520,7 +520,7 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
-            except hedy.exceptions.UnquotedEqualityCheck as ex:
+            except hedy.exceptions.UnquotedEqualityCheckException as ex:
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
