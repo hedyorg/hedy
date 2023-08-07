@@ -291,6 +291,37 @@ class LiveStatisticsModule(WebsiteModule):
             'Typed something that is not allowed': ['entered', 'allowed'],
             'Echo and ask mismatch': ['echo before an ask', 'echo without an ask'],
         }
+        self.exception_types = {
+            'InputTooBigException': 'Programs too large',
+            'CodePlaceholdersPresentException': 'Use of blanks in programs',
+            'NestedFunctionException': 'Use of nested functions',
+            'InvalidTypeCombinationException': 'Incorrect use of types',
+            'InvalidArgumentTypeException': 'Incorrect use of types',
+            'InvalidArgumentException': 'Incorrect use of types',
+            'InvalidCommandException': 'Invalid command',
+            'MissingCommandException': 'Invalid command',
+            'IncompleteCommandException': 'Incomplete Command',
+            'MissingElseForPressitException': 'Incomplete Command',
+            'MissingInnerCommandException': 'Incomplete Command',
+            'IncompleteRepeatException': 'Incomplete Command',
+            'WrongLevelException': 'Command not correct anymore',
+            'InvalidAtCommandException': 'Command not correct anymore',
+            'LockedLanguageFeatureException': 'Command not available yet',
+            'UnsupportedFloatException': 'Command not available yet',
+            'AccessBeforeAssignException': 'Incorrect use of variable',
+            'UndefinedVarException': 'Incorrect use of variable',
+            'CyclicVariableDefinitionException': 'Incorrect use of variable',
+            'IndentationException': 'Incorrect Indentation',
+            'InvalidSpaceException': 'Incorrect Indentation',
+            'NoIndentationException': 'Incorrect Indentation',
+            'LonelyEchoException': 'Echo and ask mismatch',
+            'UnsupportedStringValue': 'Incorrect handling of quotes',
+            'UnquotedAssignTextException': 'Incorrect handling of quotes',
+            'UnquotedEqualityCheckException': 'Incorrect handling of quotes',
+            'LonelyTextException': 'Incorrect handling of quotes',
+            'UnquotedTextException': 'Incorrect handling of quotes',
+            'ParseException': 'Couldnt parse the program'
+        }
         self.MAX_CONTINUOUS_ERRORS = 3
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
@@ -418,7 +449,12 @@ class LiveStatisticsModule(WebsiteModule):
             selected_levels = [int(level) for level in selected_levels]
             selected_levels.sort()
         # identifies common errors in the class
-        self.misconception_detection(class_['id'], user, common_errors)
+        b = self.common_exception_detection(class_['id'], user, common_errors)
+
+        print('*'*100)
+        print('b')
+        print(b)
+        print('*'*100)
         # in case of a db update in the meantime, reload common errors
         common_errors = self.__common_errors(class_['id'])
         students = self.__all_students(class_)
@@ -700,7 +736,7 @@ class LiveStatisticsModule(WebsiteModule):
         # Retrieve common errors and selected levels in class overview from the database for class
         common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
-        self.misconception_detection(class_id, user, common_errors)
+        self.common_exception_detection(class_id, user, common_errors)
         # in case of a db update in the meantime, reload common errors
         common_errors = self.__common_errors(class_id)
 
@@ -795,7 +831,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
         data_error_history = {}
         class_ = self.db.get_class(class_id)
-
+        exceptions_per_user = {}
         students = sorted(class_.get("students", []))
         for student_username in students:
 
@@ -804,8 +840,29 @@ class LiveStatisticsModule(WebsiteModule):
                 # if there are multiple weeks, only get the most recent week's data
                 program_stats = program_stats[-1]
                 data_error_history[student_username] = program_stats.get('error_history', [])
+                exceptions = {k: v for k, v in program_stats.items() if k.lower().endswith("exception")}
+                exceptions_per_user[student_username] = exceptions
 
-        return data_error_history
+        return data_error_history, exceptions_per_user
+
+    def retrieve_exceptions_per_student(self, class_id):
+        """
+        Retrieves exceptions per student in the class
+        :param class_id: class id
+        :return: exceptions_per_user
+        """
+        class_ = self.db.get_class(class_id)
+        exceptions_per_user = {}
+        students = sorted(class_.get("students", []))
+        for student_username in students:
+            program_stats = self.db.get_program_stats([student_username], None, None)
+            if program_stats:
+                # if there are multiple weeks, only get the most recent week's data
+                program_stats = program_stats[-1]
+                exceptions = {k: v for k, v in program_stats.items() if k.lower().endswith("exception")}
+                exceptions_per_user[student_username] = exceptions
+
+        return exceptions_per_user
 
     def new_id_calc(self, common_errors, class_id):
         """
@@ -854,74 +911,54 @@ class LiveStatisticsModule(WebsiteModule):
                 return misconception
         return None
 
-    def misconception_detection(self, class_id, user, common_errors):
+    def common_exception_detection(self, class_id, user, common_errors):
         """
         Detects misconceptions of students in the class based on errors they are making.
         """
         # Group the error messages by session and count their occurrences
-        data_error_history = self.retrieve_data(class_id, user)  # retrieves relevant data from db
-
+        exceptions_per_user = self.retrieve_exceptions_per_student(class_id)  # retrieves relevant data from db
         # get current class customization
         class_customization = self.db.get_class_customizations(class_id)
         dashboard_customization = class_customization.get('dashboard_customization', {})
 
-        headers = [x['header'] for x in common_errors]
+        labels = [x['label'] for x in common_errors]
         existing_common_errors = dashboard_customization.get('common_errors', [])
-        misconception_counts = {}
-
-        last_error = None
-        last_user = None
-        count = 0
+        exception_type_counts = {}
 
         # Iterate over each error and its corresponding username in the current session group
-        for username, error_history in data_error_history.items():
+        for username, exception_count in exceptions_per_user.items():
+            print(f'username {username}')
+            print(f'exception {exception_count}')
+            for exception_name, count in exception_count.items():
+                exception_type = self.exception_types[exception_name]
 
-            for error in error_history:
-                misconception = self.misconception_hit(error)
-                if misconception:
+                if count >= self.MAX_CONTINUOUS_ERRORS:
+                    # Check if the current exception type is in the dictionary
+                    if exception_name not in exception_type_counts:
+                        exception_type_counts[exception_type] = {}
+                    # Check if the current exception is not in the exception_type_counts
+                    # dictionary for the current exception_type
+                    if exception_name not in exception_type_counts[exception_type]:
+                        exception_type_counts[exception_type][exception_name] = {'freq': 0, 'users': []}
+                    exception_type_counts[exception_type][exception_name]['freq'] += 1
+                    exception_type_counts[exception_type][exception_name]['users'].append(username)
 
-                    if username == last_user and error == last_error:
-                        count += 1
-                    elif username == last_user and error != last_error:
-                        count = 1
-                        last_error = error
-                    elif username != last_user:
-                        last_user = username
-                        last_error = error
-                        count = 1
-
-                    if count >= self.MAX_CONTINUOUS_ERRORS:
-                        # Check if the current misconception is not in the misconception_counts dictionary
-                        if misconception not in misconception_counts:
-                            misconception_counts[misconception] = {}
-
-                        # Check if the current error is not in the misconception_counts
-                        # dictionary for the current misconception
-                        if error not in misconception_counts[misconception]:
-                            misconception_counts[misconception][error] = {'freq': 0, 'users': []}
-                        misconception_counts[misconception][error]['freq'] += 1
-                        misconception_counts[misconception][error]['users'].append(username)
-                else:
-                    last_error = None
-                    last_user = username
-                    count = 0
-
-        for misconception, errors in sorted(misconception_counts.items(),
-                                            key=lambda x: sum(x[1][error]['freq'] for error in x[1]),
-                                            reverse=True)[:self.MAX_FEED_SIZE]:
-
-            sorted_errors = sorted(errors.items(), key=lambda x: x[1]['freq'], reverse=True)
+        for exception_type, exception_name in sorted(exception_type_counts.items(),
+                                                     key=lambda x: sum(x[1][exception_name]['freq']
+                                                                       for exception_name in x[1]),
+                                                     reverse=True)[:self.MAX_FEED_SIZE]:
+            sorted_exceptions = sorted(exception_name.items(), key=lambda x: x[1]['freq'], reverse=True)
             all_users = []
 
-            for error, info in sorted_errors:
+            for _, info in sorted_exceptions:
                 users_counts = [(user, info['users'].count(user)) for user in set(info['users'])]
                 sorted_users = sorted(users_counts, key=lambda x: x[1], reverse=True)
                 users_only = [user for user, _ in sorted_users]
                 all_users += users_only
 
             # checks to avoid duplicates
-            if misconception in headers:
-                idx = headers.index(misconception)
+            if exception_type in labels:
+                idx = labels.index(exception_type)
                 hits = 0
                 for user in all_users:
                     if user in common_errors[idx]['students']:
@@ -937,7 +974,7 @@ class LiveStatisticsModule(WebsiteModule):
                 new_id = self.new_id_calc(common_errors, class_id)
                 existing_common_errors.append({
                     'id': new_id,
-                    'header': misconception,
+                    'label': exception_type,
                     'active': 1,
                     "students": users_only
                 })
@@ -949,6 +986,7 @@ class LiveStatisticsModule(WebsiteModule):
                 'common_errors': existing_common_errors
             }
             self.db.update_class_customizations(class_customization)
+        return existing_common_errors
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
