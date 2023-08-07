@@ -411,9 +411,9 @@ class ForTeachersModule(WebsiteModule):
 
         return customizations, adventures, adventure_names, available_adventures, min_level
 
-
     # This function is used to remove from the customizations default adventures that we have removed
     # Otherwise they might cause an error when the students try to access a level
+
     def purge_customizations(self, sorted_adventures, adventures):
         for _, adventure_list in sorted_adventures.items():
             for adventure in list(adventure_list):
