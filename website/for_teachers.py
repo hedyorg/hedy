@@ -558,7 +558,7 @@ class ForTeachersModule(WebsiteModule):
         htmx_endpoint = f'/for-teachers/restore-adventures/level/{level}'
         htmx_target = "#adventure-dragger"
         htmx_indicator = "#indicator"
-        return render_partial('modal/hx-modal-confirm.html',
+        return render_partial('modal/htmx-modal-confirm.html',
                               modal_text=modal_text,
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,
