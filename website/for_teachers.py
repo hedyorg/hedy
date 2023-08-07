@@ -194,8 +194,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        customizations, adventures, adventure_names, available_adventures, min_level = self.get_class_info(
-            user, class_id)
+        customizations, adventures, adventure_names, available_adventures, min_level = \
+            self.get_class_info(user, class_id)
 
         return render_template(
             "customize-class.html",
@@ -360,7 +360,8 @@ class ForTeachersModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in default_adventures.items():
             for name, _ in adv_dic.items():
-                adventure_names[adv_key] = name
+                localized_name = safe_format(name, **hedy_content.KEYWORDS.get(g.keyword_lang))
+                adventure_names[adv_key] = localized_name
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
