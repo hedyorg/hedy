@@ -235,8 +235,8 @@ class StatisticsModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
-                localized_name = safe_format(name, **hedy_content.KEYWORDS.get(g.keyword_lang))
-                adventure_names[adv_key] = localized_name
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']

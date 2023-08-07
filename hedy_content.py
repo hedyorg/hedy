@@ -325,6 +325,8 @@ def deep_translate_keywords(yaml, keyword_language):
         return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
     return yaml
 
+def get_localized_name(name, keyword_lang):
+    return safe_format(name, **KEYWORDS.get(keyword_lang))
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
 # each language file is there

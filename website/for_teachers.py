@@ -360,8 +360,7 @@ class ForTeachersModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in default_adventures.items():
             for name, _ in adv_dic.items():
-                localized_name = safe_format(name, **hedy_content.KEYWORDS.get(g.keyword_lang))
-                adventure_names[adv_key] = localized_name
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
@@ -411,6 +410,7 @@ class ForTeachersModule(WebsiteModule):
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
         return customizations, adventures, adventure_names, available_adventures, min_level
+
 
     # This function is used to remove from the customizations default adventures that we have removed
     # Otherwise they might cause an error when the students try to access a level
