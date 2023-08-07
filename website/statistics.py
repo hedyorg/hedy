@@ -5,6 +5,8 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
+from safe_format import safe_format
+
 import utils
 import hedy_content
 import hedy
@@ -233,7 +235,8 @@ class StatisticsModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
-                adventure_names[adv_key] = name
+                localized_name = safe_format(name, **hedy_content.KEYWORDS.get(g.keyword_lang))
+                adventure_names[adv_key] = localized_name
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
