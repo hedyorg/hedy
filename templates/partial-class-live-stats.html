@@ -257,7 +257,7 @@
                                         <div class="flex justify-between items-center">
                                             <a class="no-underline" hx-target="#modal-target" hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                                 <h3 class="cursor-pointer ml-2 hover:underline underline-offset-2">
-                                                {{error_entry.label}} ({{error_entry.students|length}})
+                                                {{_(error_entry.label)}} ({{error_entry.students|length}})
                                                 </h3>
                                             </a>
                                             <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve-student" 
