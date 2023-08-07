@@ -2,8 +2,8 @@
 {% block regular_content %}
 <div class="flex flex-col gap-2">
   <h2>{{_('grid_overview')}}: {{class_info.name}}</h2>
-  <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
-    <select class="py-2 px-1 mt-2 h-10 text-center w-full" 
+  <div class="flex flex-row items-center justify-center mr-2 lg:w-1/12 md:w-3/12 sm:w-5/12 ml-4">
+    <select class="py-2 px-1 mt-2 h-10 text-center w-full " 
             name="level" 
             id="menu" 
             hx-get="/grid_overview/class/{{ class_info.id }}/level" 
