@@ -5,8 +5,6 @@ from enum import Enum
 from flask import g, jsonify, request
 from flask_babel import gettext
 
-from safe_format import safe_format
-
 import utils
 import hedy_content
 import hedy
