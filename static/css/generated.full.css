@@ -722,11 +722,18 @@ strong {
   border-color: white transparent transparent transparent;
 }
 
-.green-btn:hover:enabled {
+.green-btn:hover:enabled, a.green-btn:hover {
   --tw-border-opacity: 1;
   border-color: rgb(72 187 120 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(104 211 145 / var(--tw-bg-opacity));
+}
+
+.green-btn:hover:enabled:active, a.green-btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(47 133 90 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(47 133 90 / var(--tw-bg-opacity));
 }
 
 .red-btn {
@@ -758,6 +765,13 @@ strong {
   background-color: rgb(252 129 129 / var(--tw-bg-opacity));
 }
 
+.red-btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(197 48 48 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(197 48 48 / var(--tw-bg-opacity));
+}
+
 .yellow-btn {
   font-weight: 400;
   line-height: 1.5rem;
@@ -787,6 +801,13 @@ strong {
   background-color: rgb(246 224 94 / var(--tw-bg-opacity));
 }
 
+.yellow-btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(183 121 31 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(183 121 31 / var(--tw-bg-opacity));
+}
+
 .pink-btn {
   font-weight: 400;
   line-height: 1.5rem;
@@ -814,6 +835,13 @@ strong {
   border-color: rgb(246 135 179 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(251 182 206 / var(--tw-bg-opacity));
+}
+
+.pink-btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(237 100 166 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(184 50 128 / var(--tw-bg-opacity));
 }
 
 .blue-btn {
@@ -865,6 +893,13 @@ strong {
   border-color: rgb(66 153 225 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(99 179 237 / var(--tw-bg-opacity));
+}
+
+.blue-btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(43 108 176 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(43 108 176 / var(--tw-bg-opacity));
 }
 
 /* Styles only for use in MarkDown blocks */
@@ -30806,6 +30841,13 @@ code {
   border-color: rgb(66 153 225 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(99 179 237 / var(--tw-bg-opacity));
+}
+
+.btn:hover:active {
+  --tw-border-opacity: 1;
+  border-color: rgb(43 108 176 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(43 108 176 / var(--tw-bg-opacity));
 }
 
 .menubar-item {
