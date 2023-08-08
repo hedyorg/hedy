@@ -162,8 +162,10 @@ strong {
 }
 
 
-.green-btn:hover:enabled {
+.green-btn:hover:enabled, 
+a.green-btn:hover {
   @apply bg-green-400 border-green-500;
+  @apply active:bg-green-700 active:border-green-700;
 }
 
 .red-btn {
@@ -173,6 +175,7 @@ strong {
 
 .red-btn:hover {
   @apply bg-red-400 border-red-500;
+  @apply active:bg-red-700 active:border-red-700;
 }
 
 .yellow-btn {
@@ -182,6 +185,7 @@ strong {
 
 .yellow-btn:hover {
   @apply bg-yellow-400 border-yellow-500;
+  @apply active:bg-yellow-700 active:border-yellow-700;
 }
 
 .pink-btn {
@@ -191,6 +195,7 @@ strong {
 
 .pink-btn:hover {
   @apply bg-pink-300 border-pink-400;
+  @apply active:bg-pink-700 active:border-pink-500;
 }
 
 .blue-btn {
@@ -205,6 +210,7 @@ strong {
 
 .blue-btn:hover {
   @apply bg-blue-400 border-blue-500;
+  @apply active:bg-blue-700 active:border-blue-700;
 }
 
 /* Styles only for use in MarkDown blocks */
@@ -294,6 +300,7 @@ code {
 
 .btn:hover {
   @apply bg-blue-400 border-blue-500;
+  @apply active:bg-blue-700 active:border-blue-700
 }
 
 .menubar-item {
@@ -816,4 +823,16 @@ div[class^="ace_incorrect_hedy_code"] {
    position: absolute;
    cursor: pointer !important;
    pointer-events: auto;
+}
+
+.student_adventure_checkbox[disabled] {
+  @apply relative bg-gray-200 rounded border-gray-500 !important
+}
+
+.student_adventure_checkbox {
+  @apply relative bg-white rounded border-gray-500 !important
+}
+
+.student_adventure_checkbox:checked {
+  @apply relative bg-green-300 rounded border-gray-500  !important
 }

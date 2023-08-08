@@ -142,7 +142,7 @@ class StatisticsModule(WebsiteModule):
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
@@ -173,7 +173,7 @@ class StatisticsModule(WebsiteModule):
         _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
         matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
@@ -233,7 +233,7 @@ class StatisticsModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
-                adventure_names[adv_key] = name
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
@@ -242,7 +242,8 @@ class StatisticsModule(WebsiteModule):
         for key, value in class_adventures.items():
             adventure_list = []
             for adventure in value:
-                if not adventure['name'] == 'next':
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
                     adventure_list.append(adventure_names[adventure['name']])
             class_adventures_formatted[key] = adventure_list
 
@@ -254,7 +255,7 @@ class StatisticsModule(WebsiteModule):
                 ticked_adventures[student] = []
                 current_program = {}
                 for _, program in programs.items():
-                    name = adventure_names[program['adventure_name']]
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
                     if name in customized_level:
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"

@@ -1,4 +1,5 @@
 import { runit } from "./app";
+import { HedyEditor, Breakpoints } from "./editor";
 import { Markers } from "./markers";
 
 let theMarkers: Markers;
@@ -97,18 +98,6 @@ function unfixReserved(name: string) {
   return name.replace(/_\$rw\$$/, "");
 }
 
-
-/**
- * The '@types/ace' package has the type of breakpoints incorrect
- *
- * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
- * but can be something you pick yourself.
- */
-function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
-  return editor.session.getBreakpoints() as unknown as Breakpoints;
-}
-
-type Breakpoints = Record<number, string>;
 
 /**
  * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
@@ -323,11 +312,11 @@ function markCurrentDebuggerLine() {
   }
 }
 
-export function returnLinesWithoutBreakpoints(editor: AceAjax.Editor) {
+export function returnLinesWithoutBreakpoints(editor: HedyEditor) {
 
   // ignore the lines with a breakpoint in it.
   let code = editor.getValue();
-  const breakpoints = getBreakpoints(editor);
+  const breakpoints = editor.getBreakpoints();
   const storage = window.localStorage;
   const debugLines = storage.getItem('debugLine');
 
@@ -345,4 +334,14 @@ export function returnLinesWithoutBreakpoints(editor: AceAjax.Editor) {
   }
 
   return code;
+}
+
+/**
+ * The '@types/ace' package has the type of breakpoints incorrect
+ *
+ * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
+ * but can be something you pick yourself.
+ */
+function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
+  return editor.session.getBreakpoints() as unknown as Breakpoints;
 }
