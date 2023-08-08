@@ -1339,7 +1339,7 @@ levels:
             hint: Something is wrong with indentation
         9:
             question_text: What line(s) in this code should start with 4 spaces?
-            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
             mp_choice_options:
             -   option: Line 2 and 4
                 feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
@@ -2029,7 +2029,6 @@ levels:
             code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'\n"
             hint: The last one should say you win.
         8:
-            feedback: There are.
             question_text: Which statement is true about this roller coaster?
             code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             mp_choice_options:
@@ -2069,7 +2068,6 @@ levels:
             -   option: "'player 2 loses'"
                 feedback: Look at who has the highest score!
             -   option: "'It is a tie'"
-            feedback: No it's not, one player has a higher score
             correct_answer: B
             hint: You win the game by having the most points
             question_score: '10'
@@ -2097,7 +2095,6 @@ levels:
             -   feedback: No that's not it
                 option: In line 4 = should have been used instead of ==
             -   option: In line 4 <= should have been used instead of >=
-            feedback: No that's not it
             correct_answer: B
             hint: The symbols are right
             question_score: '10'

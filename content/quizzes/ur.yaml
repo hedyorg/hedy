@@ -1120,7 +1120,7 @@ levels:
             -   option: Line 3 and 5
                 feedback: Great job!
             question_text: What line(s) in this code should start with 4 spaces?
-            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music is rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music is rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
             correct_answer: D
             hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
             question_score: '10'
@@ -2129,7 +2129,6 @@ levels:
             -   option: In line 4 = should have been used instead of ==
                 feedback: No that's not it
             -   option: In line 4 <= should have been used instead of >=
-            feedback: No that's not it
             correct_answer: B
             hint: The symbols are right
         6:
@@ -2163,7 +2162,6 @@ levels:
             hint: The last one should say you win.
             question_score: '10'
         8:
-            feedback: There are.
             question_text: Which statement is true about this roller coaster?
             code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             mp_choice_options:
@@ -2188,7 +2186,6 @@ levels:
             -   option: "'player 2 loses'"
                 feedback: Look at who has the highest score!
             -   option: "'It is a tie'"
-            feedback: No it's not, one player has a higher score
             correct_answer: B
             hint: You win the game by having the most points
             question_score: '10'

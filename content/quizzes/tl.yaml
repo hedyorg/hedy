@@ -1063,7 +1063,7 @@ levels:
             question_score: '10'
             correct_answer: D
             question_text: What line(s) in this code should start with 4 spaces?
-            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
         10:
             question_text: Which statement is true?
             code: "1 level = {ask} 'What level are you on?'\n2 {if} level {is} 8\n3 {print} 'Great job!'"
@@ -1992,7 +1992,6 @@ levels:
             -   option: In line 4 = should have been used instead of ==
                 feedback: No that's not it
             -   option: In line 4 <= should have been used instead of >=
-            feedback: No that's not it
             question_text: What's wrong with this code?
             code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
             correct_answer: B
@@ -2026,7 +2025,6 @@ levels:
             -   option: "'It is a tie'"
             question_text: What should be filled in in the blanks?
             code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _\n"
-            feedback: No it's not, one player has a higher score
             correct_answer: B
         1:
             question_text: Which symbol should be used on the blank?
@@ -2099,7 +2097,6 @@ levels:
             -   option: You must be shorter than 120 cm to go on the roller coaster
                 feedback: '> means greater than'
             -   option: There are no length restrictions to go on the roller coaster
-            feedback: There are.
             correct_answer: A
             hint: '> means greater than'
             question_score: '10'

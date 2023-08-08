@@ -2149,7 +2149,6 @@ levels:
             -   option: På rad 4 ska <= användas istället för >=
             question_text: Vad är fel med den här koden?
             code: "pris = 10\npengar = {ask} Hur mycket pengar har du?\nköp = {ask} 'Vill du köpa den här nallebjörnen?'\n{if} pengar >= pris och köp == 'ja'\n    {print} 'Du kan köpa björnen!'\n{else}\n    {print} 'Du kan inte köpa den här björnen!'\n"
-            feedback: Nej, det stämmer inte
             correct_answer: B
             hint: Symbolerna är rätt
             question_score: '10'
@@ -2195,7 +2194,6 @@ levels:
                 feedback: '> betyder större än'
             -   option: Det finns inga längdbegränsningar för att åka berg- och dalbana
             code: "längd = {ask} 'Fyll i din längd i cm, tack'\n{if} längd > 120\n    {print} 'Tyvärr, du kan inte åka på den här berg-och-dalbanan.'\n{else}\n    {print} 'Ha en fin åktur'\n"
-            feedback: Det finns det.
             correct_answer: A
             hint: '> betyder större än'
         10:
@@ -2210,7 +2208,6 @@ levels:
             -   option: "'spelare 2 förlorar'"
                 feedback: Kolla vem som har högst poäng!
             -   option: "'Det är oavgjort'"
-            feedback: Nej det är det inte, en spelare har högre poäng
             hint: Du vinner spelet genom att ha flest poäng
             question_score: '10'
         5:
