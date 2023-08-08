@@ -3388,26 +3388,27 @@ levels:
             hint: "There is something wrong in line 5"
             question_score: "10"
         5:
-            question_text: "Which two lines of code should be switched to make this program work correctly?"
+            question_text: "What should be placed on the blank to make this program work correctly?"
             code: |
-              while hair == 'wet'
-                hairblower = 'on'
-                print 'Your hair is still wet'
-              else
-                hairblower = 'off'
-                print 'your hair is dry now'
-                clear
+              wetness = 10
+              while wetness != 0
+                  print 'Your hair is still wet, hair dryer on!'
+                  sleep 1
+                  clear
+                  wetness _
+              
+              print 'All dry!'
             mp_choice_options:
-            -   option: "line 2 and 3"
+            -   option: "= wetness"
                 feedback: "That will not change anything"
-            -   option: "line 5 and 6"
-                feedback: "That will not change anything"
-            -   option: "line 6 and 7"
+            -   option: "= wetness = 1"
+                feedback: "You can't have two times = in one line"
+            -   option: "= wetness - 1"
                 feedback: "You are correct!"
-            -   option: "No lines should be switched"
-                feedback: "you should switch"
+            -   option: "= wetness + 1"
+                feedback: "The program should count down"
             correct_answer: "C"
-            hint: "The clear command now clears the 'your hair is dry now' line before you could read it."
+            hint: "wetness should get less each time"
             question_score: "10"
         6:
             question_text: "what is wrong with this code?"
@@ -3430,49 +3431,48 @@ levels:
             hint: "Look closely at the indentation"
             question_score: "10"
         7:
-            question_text: "How could this code be made shorter with the while loop? You should remove line 5 and..."
+            question_text: "How should this program be changed to that it works?"
             code: |
               {print} 'Guess which number'
               numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
               number = numbers {at} {random}
               game = 'on'
-              {for} i {in} {range} 1 {to} 10
-                  {if} game == 'on'
-                      guess = {ask} 'Which number do you think it is?'
-                      {if} guess < number
-                          {print} _
-                      {if} guess > number
-                          {print} _
-                      {if} guess == number
-                          {print} _
-                          game = 'over'
+              {if} game == 'on'
+                  guess = {ask} 'Which number do you think it is?'
+                  {if} guess < number
+                      {print} _
+                  {if} guess > number
+                      {print} _
+                  {if} guess == number
+                      {print} _
+                      game = 'over'
             mp_choice_options:
-            -   option: "... change the first if into a while"
+            -   option: "... change the first {if} into a {while}"
                 feedback: "Perfect!"
-            -   option: "... change the second if into a while"
+            -   option: "... change the second {if} into a {while}"
                 feedback: "That's not quite right."
-            -   option: "... change the third if into a while"
+            -   option: "... change the third {if} into a {while}"
                 feedback: "That's not quite right."
-            -   option: "... change the fourth if into a while"
+            -   option: "... change the fourth {if} into a {while}"
                 feedback: "That's not quite right."
             correct_answer: "A"
             hint: "The last one should say you win."
             question_score: "10"
         8:
-            question_text: "Which statement is true about this automated lights in the toilet?"
+            question_text: "Which statement is true about this automated toilet system?"
             code: |
               while toilet == 'occupied'
                   lights = 'on'
-                  airfreshener_sprays = 'yes'
+                  air_freshener_sprays = 'yes'
                   sleep 60
               else
                   lights = 'off'
             mp_choice_options:
-            -   option: "The lights and airfreshener will turn off after 1 minute"
+            -   option: "The lights and air freshener will turn off after 1 minute"
                 feedback: "False!"
-            -   option: "The aifreshener sprays once every minute and the lights stay on the whole time while you are on the toilet"
+            -   option: "The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet"
                 feedback: "Great job"
-            -   option: "The airfreshener sprays once you leave the toilet."
+            -   option: "The air freshener sprays once you leave the toilet."
                 feedback: "It only sprays when you're in there."
             -   option: "The lights will always stay on."
                 feedback: "That wouldn't be right."
@@ -3480,7 +3480,7 @@ levels:
             hint: "The block after the while command keeps happening while the toilet is occupied."
             question_score: "10"
         9:
-            question_text: "What will the dietapp say if you have eaten 1600 calories today?"
+            question_text: "What will the diet app say if you have eaten 1600 calories today?"
             code: |
               chocolate = {ask} 'How many calories have you eaten today?'
                 {while} calories <= 1000
@@ -3504,15 +3504,15 @@ levels:
         10:
             question_text: "What should be filled in in the blanks? Tip: the player with the most points is in the lead."
             code: |
-                name_player_1 = {ask} Name player 1:
-                name_player_2 = {ask} Name player 2:
+                name_player_1 = {ask} 'Name player 1:'
+                name_player_2 = {ask} 'Name player 2:'
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: "'name_player_1'"
+            -   option: "name_player_1"
                 feedback: "You are right!"
             -   option: "name_player_2"
-                feedback: "No he's losing!"
+                feedback: "No they are losing!"
             -   option: "points_player_1"
                 feedback: "You should fill in a name, not a number"
             -   option: "points_player_2"
