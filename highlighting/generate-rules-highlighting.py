@@ -75,14 +75,14 @@ def validate_ruleset(levels):
                 r = re.compile(rule['regex'])
 
                 if r.groups == 0:
-                    if type(rule["token"]) != str:
+                    if not isinstance(rule["token"], str):
                         raise ValueError(
                             f"In {level['name']}, state \'{state}\': if regex has no groups, token must be a string."
                             f"In this rule.\n{rule}")
                         errors += 1
 
                 else:
-                    if type(rule["token"]) != list:
+                    if not isinstance(rule["token"], list):
                         raise ValueError(
                             f"In {level['name']}, state \'{state}\': if regex has groups, token must be a list."
                             f"In this rule.\n{rule}")

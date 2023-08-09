@@ -488,7 +488,7 @@ class ExtractAST(Transformer):
     def list_access(self, meta, args):
         # FH, may 2022 I don't fully understand why we remove INT here and just plemp
         # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
-        if type(args[1]) == Tree:
+        if isinstance(args[1], Tree):
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
             elif args[1].data == "var_access":
@@ -983,7 +983,7 @@ class UsesTurtle(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
-            return any(type(c) == bool and c is True for c in children)
+            return any(isinstance(c, bool) and c is True for c in children)
 
     # returns true if Forward or Turn are in the tree, false otherwise
     def forward(self, args):
@@ -1027,7 +1027,7 @@ while not pygame_end:
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
         else:
-            return any(type(c) == bool and c is True for c in children)
+            return any(isinstance(c, bool) and c is True for c in children)
 
     def ifpressed(self, args):
         return True
@@ -1595,7 +1595,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.pencolor('black')"
         arg = args[0]
-        if type(arg) != str:
+        if not isinstance(arg, str):
             arg = arg.data
 
         arg = self.process_variable_for_fstring(arg)
