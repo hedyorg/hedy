@@ -1,9 +1,8 @@
-import { theLocalSaveWarning, theLevel, runit, stopit, theLanguage, triggerAutomaticSave, theGlobalSourcemap} from "./app";
+import { theLocalSaveWarning, theLevel, runit, stopit, theLanguage, triggerAutomaticSave} from "./app";
 import { HedyEditorCreator, HedyEditor, Breakpoints } from "./editor";
 import { error } from "./modal";
 import { initializeDebugger, stopDebug } from "./debugging";
 import { Markers } from "./markers";
-import { ClientMessages } from "./client-messages";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 export class HedyAceEditorCreator implements HedyEditorCreator {
@@ -267,7 +266,6 @@ export class HedyAceEditor implements HedyEditor {
     this._editor?.renderer.setScrollMargin(0, 0, 0, 20)
     this._editor?.addEventListener('change', () => {
       theLocalSaveWarning.setProgramLength(this._editor!.getValue().split('\n').length);
-      this._markers?.clearIncorrectLines();
     });
     // Set const value to determine the current page direction -> useful for ace editor settings
     const dir = $("body").attr("dir");
@@ -288,23 +286,23 @@ export class HedyAceEditor implements HedyEditor {
       //removing the debugging state when loading in the editor
       stopDebug();
     });
-
+      // Removed until we can fix the skip lines feature
       // We show the error message when clicking on the skipped code
-    this._editor?.on("click", function(e) {
-      let position = e.getDocumentPosition()
-      position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+    // this._editor?.on("click", function(e) {
+    //   let position = e.getDocumentPosition()
+    //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
 
-      let element = document.elementFromPoint(position.pageX, position.pageY)
-      if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-        let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-        let mapError = theGlobalSourcemap[mapIndex];
+    //   let element = document.elementFromPoint(position.pageX, position.pageY)
+    //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+    //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+    //     let mapError = theGlobalSourcemap[mapIndex];
 
-        $('#okbox').hide ();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
-    })
+    //     $('#okbox').hide ();
+    //     $('#warningbox').hide();
+    //     $('#errorbox').hide();
+    //     error.show(ClientMessages['Transpile_error'], mapError.error);
+    //   }
+    // })
 
     this._markers = new Markers(this._editor!);
 
