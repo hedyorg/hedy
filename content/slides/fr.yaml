@@ -2,7 +2,7 @@ levels:
     0:
         8:
             header: Programmer en Hedy
-            text: "Les sorties apparaissent sur le côté gauche.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            text: "Les sorties apparaissent sur le côté droit.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         1:
             header: Bienvenue sur Hedy !
             text: "Hedy est un langage de programmation.\n"
@@ -32,15 +32,15 @@ levels:
             header: Bienvenue au niveau 1 !
             text: "Commençons le niveau 1 en créant des histoires en Hedy !\n\nNous avons besoin de trois codes textuels pour créer des histoires interactives.\n"
         2:
-            header: 'Hedy niveau 1 : {print}'
+            header: '{print}'
             text: "Le premier code que tu peux utiliser au niveau 1 est `{print}`.\n\n`{print}` permet d'afficher du texte à l'écran.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         3:
-            header: 'Hedy niveau 1 : {ask}'
-            text: "Le second code que tu peux utiliser dans le niveau 1 est `{ask}`.\n\n`{ask}` crée une question qui peut être répondue.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
+            header: 'La commande {print}'
+            text: "Tu peux changer le texte après la commande affiche par ce que tu veux.\n\nTu peux également imprimer plusieurs lignes en ajoutant une autre ligne de code qui commence également par `{print}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         4:
-            header: 'Hedy niveau 1 : {echo}'
+            header: '{ask} '
             text: "Le dernier code que tu peux utiliser au niveau 1 est `{echo}`.\n\n`{echo}` répète la réponse d'un `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
         5:
@@ -159,6 +159,10 @@ levels:
             text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens....\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
         9:
+            header: Ready, Set, Go!
+            text: "Enjoy the adventures in level 4!\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/clear_command/4/raw\"></iframe>\n"
+        10:
             header: Ready, Set, Go!
             text: "Enjoy the adventures in level 4!\n"
     6:

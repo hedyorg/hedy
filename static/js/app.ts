@@ -1,7 +1,6 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
-import { Markers } from './markers';
 import JSZip from "jszip";
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
@@ -22,7 +21,6 @@ export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
-let markers: Markers;
 const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
@@ -450,7 +448,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
-          markers.highlightAceError(response.Location[0], response.Location[1]);
+          theGlobalEditor.markers.highlightAceError(response.Location[0], response.Location[1]);
         }
         $('#stopit').hide();
         $('#runit').show();
@@ -732,7 +730,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       )
 
       if (map.error != null){
-        markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+        theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
       }
     }
   }
@@ -1843,4 +1841,41 @@ async function saveIfNecessary() {
 
 function currentTabLsKey() {
   return `save-${currentTab}-${theLevel}`;
+}
+
+export async function share_program(id: string, index: number, Public: boolean, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/share', { id, public: Public });
+    showAchievements(response.achievement, true, "");
+    if (Public) {
+      change_shared(true, index);
+    } else {
+      change_shared(false, index);
+    }
+    modal.notifySuccess(response.message);
+  });
+}
+
+function change_shared (shared: boolean, index: number) {
+  // Index is a front-end unique given to each program container and children
+  // This value enables us to remove, hide or show specific element without connecting to the server (again)
+  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
+  if (index == -1) {
+    return;
+  }
+  if (shared) {
+    $('#non_public_button_container_' + index).hide();
+    $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
+  } else {
+    $('#modal-copy-button').hide();
+    $('#public_button_container_' + index).hide();
+    $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
+  }
 }
