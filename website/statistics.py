@@ -824,29 +824,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         return {}, 200
 
-    def retrieve_data(self, class_id, user):
-        """
-        Retrieves data from the db for use in misconception analysis.
-        :param class_id: class id
-        :param user: user
-        :return: data, data_error_history
-        """
-        data_error_history = {}
-        class_ = self.db.get_class(class_id)
-        exceptions_per_user = {}
-        students = sorted(class_.get("students", []))
-        for student_username in students:
-
-            program_stats = self.db.get_program_stats([student_username], None, None)
-            if program_stats:
-                # if there are multiple weeks, only get the most recent week's data
-                program_stats = program_stats[-1]
-                data_error_history[student_username] = program_stats.get('error_history', [])
-                exceptions = {k: v for k, v in program_stats.items() if k.lower().endswith("exception")}
-                exceptions_per_user[student_username] = exceptions
-
-        return data_error_history, exceptions_per_user
-
     def retrieve_exceptions_per_student(self, class_id):
         """
         Retrieves exceptions per student in the class
@@ -903,15 +880,6 @@ class LiveStatisticsModule(WebsiteModule):
                 self.db.update_class_customizations(class_customization)
 
         return new_id
-
-    def misconception_hit(self, error):
-        # Currently not in use
-        for misconception, keywords in self.misconception_groups.items():
-            # Check if the current error is different from the last error;
-            # errors that fall in same misconception group are considered same errors
-            if error and any(keyword in error.lower() for keyword in keywords):
-                return misconception
-        return None
 
     def common_exception_detection(self, class_id, user, common_errors):
         """
@@ -1226,10 +1194,6 @@ def _calc_error_rate(fail, success):
     failed = fail or 0
     successful = success or 0
     return (failed * 100) / max(1, failed + successful)
-
-
-def _determine_bool(bool_str):
-    return bool_str == "True"
 
 
 def _check_student_arg():
