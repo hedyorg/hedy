@@ -219,12 +219,14 @@ class HedyTester(unittest.TestCase):
             output=None,
             expected_commands=None,
             lang='en',
-            translate=True):
+            translate=True,
+            skip_faulty=True,
+    ):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
         if not self.snippet_already_tested_with_current_hedy_version(code, level):
             if skipped_mappings is not None:
-                result = hedy.transpile(code, level, lang, skip_faulty=True)
+                result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                 for skipped in skipped_mappings:
                     result_error = result.source_map.get_error_from_hedy_source_range(skipped.source_range)
                     self.assertEqual(expected, result.code)
@@ -234,11 +236,11 @@ class HedyTester(unittest.TestCase):
             else:
                 if exception is not None:
                     with self.assertRaises(exception) as context:
-                        result = hedy.transpile(code, level, lang)
+                        result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
