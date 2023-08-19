@@ -2757,36 +2757,32 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=False):
+def transpile(input_string, level, lang="en", skip_faulty=True):
     """
     Function that transpiles the Hedy code to Python
 
-    The first time the client will try to execute the code without skipping faulty code
-    If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
+    The first time we try to transpile the code without skipping faulty code
+    If an exception is caught (the Hedy code contains faults) an exception is raised
 
-    The second time, after an Error is received by the client, the client will re-POST the code
-    with skipping faulty enabled, after that we either return the partially correct code or raise the original error
+    The second time, after the non-skipping approach raised an exception,
+    we try transpile the code with skipping faulty code, if skip_faulty is True.
+    After that either the partial program is returned or the original error
     """
 
-    if not skip_faulty:
-        try:
-            source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
-        except Exception as original_error:
-            source_map.exception_found_during_parsing = original_error  # store original exception
+    try:
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    except Exception as original_error:
+        if skip_faulty:
+            if isinstance(original_error, source_map.exceptions_not_to_skip):
+                raise original_error
+            try:
+                source_map.set_skip_faulty(True)
+                transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            except Exception:
+                raise original_error  # we could not skip faulty code, raise original exception
+        else:
             raise original_error
-    else:
-        original_error = source_map.exception_found_during_parsing
-        source_map.clear()
-
-        if isinstance(original_error, source_map.exceptions_not_to_skip):
-            raise original_error
-
-        try:
-            source_map.set_skip_faulty(True)
-            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
-        except Exception:
-            raise original_error  # we could not skip faulty code, raise original exception
 
     return transpile_result
 
