@@ -417,7 +417,6 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         level: `${level}`,
         code: code,
         lang: lang,
-        skip_faulty: false,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: adventureName,
@@ -427,16 +426,15 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         save_name: saveNameFromInput(),
       };
 
-      let response = await postJsonWithAchievements('/parse', data);
-      console.log('Response', response);
-
-      if (!data.skip_faulty && response.Error) {
-        data.skip_faulty = true;
+      let errorsFoundTimeout = setTimeout(function () {
         error.showWarningSpinner();
         error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-        response = await postJsonWithAchievements('/parse', data);
-        error.hide(true);
-      }
+      }, 500)
+
+      let response = await postJsonWithAchievements('/parse', data);
+      clearTimeout(errorsFoundTimeout);
+      console.log('Response', response);
+      error.hide(true);
 
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
