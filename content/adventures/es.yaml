@@ -670,7 +670,7 @@ adventures:
                     ```
 
                 start_code: "{print} '¿Qué salió esta vez?'"
-                example_code_2: "\n  ¿Pudiste calcular la puntuación para 8 dados? Eso necesitó que copiaras y pegaras mucho, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
+                example_code_2: "\n    ¿Pudiste calcular la puntuación para 8 dados? Eso necesitó que copiaras y pegaras mucho, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
             5:
                 story_text: |
                     Vamos a añadir los comandos `{if}` y `{else}` a nuestros dados!
@@ -922,7 +922,7 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} '¡Bienvenide a tu propia calculadora!'"
-                story_text_3: "\n  **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\n  Así es como eliges un número de tablas para practicar, y desde ahí siempre consigues una suma diferente:\n"
+                story_text_3: "\n    **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\n    Así es como eliges un número de tablas para practicar, y desde ahí siempre consigues una suma diferente:\n"
             14:
                 story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
                 example_code: "```\n{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        intento = {ask} '¿Que número piensas que es?'\n        {if} intento > número\n            {print} '¡Muy alto!'\n        {if} intento < número\n            {print} '!Muy bajo!'\n        {if} intento == número\n            {print} '¡Ganaste!'\n            juego = 'terminó'\n```\n"
@@ -944,7 +944,7 @@ adventures:
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el codigo de ejemplo para que\n\n### Exercise 2\nGo back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.\n"
                 start_code: '# pon tu codigo aquí'
             13:
-                story_text: "\n  ### Ejercicio 1\n  Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.\n\n  ### Ejercicio 2 Extra\n  A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.\n  Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.\n  Vacía el campo de programación y crea tu propia solución.\n"
+                story_text: "\n    ### Ejercicio 1\n    Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.\n\n    ### Ejercicio 2 Extra\n    A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.\n    Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.\n    Vacía el campo de programación y crea tu propia solución.\n"
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu codigo aqui'
     restaurant:
@@ -1541,7 +1541,7 @@ adventures:
                 story_text: "## El comando ask\nAhora que podemos usar **variables** en nuestros códigos, ya no necesitamos el comando `{echo}`.\nPodemos usar variables para almacenar las respuestas a nuestras pregunta y de esta manera podemos usar la respuesta a varias preguntas en nuestros códigos.\nCompruébalo:\n\n¡De esta manera tu código se convierte interactivo!\n"
                 example_code: "```\nnombre {is} {ask} ¿Cómo te llamas?\n{print} Hola nombre\nedad {is} {ask} ¿Cúantos años tienes?\n{print} nombre tiene edad años.\n```\n"
                 story_text_2: "### Ejercicio\nEn la pestaña anterior has practicado estableciendo variables con el comando `{is}`.\nHas creado al menos 3 variables y las has usado con el comando print.\nAhora, en vez de establecer las variables queremos que hagas las variables interactivas, como hicimos en nuestro ejemplo.\n\nCopia tu código de la pestaña anterior y haz las variables interactivas usando el comando `{ask}`.\n"
-                example_code_2: "```\nanimales_favoritos es preguntar ¿Cúal es tu animal favorito?\nimprimir Me gusta animales_favoritos\n```\n"
+                example_code_2: "```\nanimales_favoritos {is} {ask} ¿Cuál es tu animal favorito?\n{print} Me gusta animales_favoritos\n```\n"
                 start_code: "nombre {is} {ask} ¿Cómo te llamas?\n{print} Hola nombre\nedad {is} {ask} ¿Cúantos años tienes?\n{print} nombre tiene edad años."
     random_command:
         name: "{random}"
@@ -1627,5 +1627,5 @@ adventures:
             4:
                 start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} '¡SORPRESA!'\n"
                 story_text: "¡Hora para un nuevo comando! Con `{clear}` puedes limpiar todo el texto de la pantalla de salida. De esta manera puedes evitar que tu pantalla se llene de texto.\n¡Atención! Si usas un comando `{clear}`, recuerda usar un `{sleep}` encima de él. En caso contrario, ¡Hedy limpiará tu pantalla sin darte tiempo a leer lo que pone!\n"
-                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint '¡SORPRESA!'\n```\n"
+                example_code: "```\n{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} '¡SORPRESA!'\n```\n"
         name: '{clear}'
