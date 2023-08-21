@@ -577,24 +577,24 @@ levels:
         9:
             question_text: "¿Qué le pasa a este código?"
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                colores {is} azul, morado, verde
+                color_elegido {is} {ask} ¿Qué color de pelo no te gustaría tener?
+                {remove} color_elegido {from} colores
+                {print} Me teñiría el pelo de color {at} {random}
             mp_choice_options:
-            -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
-                feedback: "Maybe you want blue hair though!"
-            -   option: "Line 3 should have an `{add}` command instead of a `{remove}` command"
-                feedback: "You want to remove the chosen color so `{remove}` is right."
-            -   option: "In line 4 the variable should be called colors instead of color"
-                feedback: "Great job!"
-            -   option: "Nothing, this is a correct code!"
-                feedback: "Find the mistake!"
+            -   option: "La línea 3 debería decir: `{remove}` azul `{from}` colores"
+                feedback: "¡Tal vez quieras el pelo azul!"
+            -   option: "La línea 3 debe tener un comando `{add}` en vez de un comando `{remove}`"
+                feedback: "Quieres eliminar el color elegido así que `{remove}` es correcto."
+            -   option: "En la línea 4 la variable se debería llamar colores en vez de color"
+                feedback: "¡Gran trabajo!"
+            -   option: "Nada, ¡el código es correcto!"
+                feedback: "¡Encuentra el fallo!"
             correct_answer: "C"
-            hint: "Look at line 3"
+            hint: "Mira la línea 3"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "¿Qué debería ser en el _?"
             code: |-
                 walkers {is} dad, mom, Sam, Petra
                 walked_yesterday {is} {ask} Who walked the dogs yesterday?
@@ -604,104 +604,104 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} walked_yesterday {from} walkers
+                    {remove} caminado_ayer {from} senderistas
                     ```
-                feedback: "Super!"
+                feedback: "¡Super!"
             -   option: |
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} caminado ayer {to} senderistas
                     ```
                 feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
             -   option: |
                     ```
-                    {remove} walkers {from} yesterday
+                    {remove} senderistas {from} ayer
                     ```
-                feedback: "yesterday is not a variable"
+                feedback: "ayer no es una variable"
             -   option: |
                     ```
-                    {add} walked_yesterday {to} walkers
+                    {add} caminado_ayer {to} senderistas
                     ```
-                feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+                feedback: "Esto aumenta la probabilidad de que la persona que andó ayer tenga que hacerlo otra vez. Eso es malo."
             correct_answer: "A"
-            hint: "The person who walked the dog yesterday should be removed from the list."
+            hint: "Se debería borrar de la lista a la persona que paseó al perro ayer."
             question_score: '10'
 
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "¿Cuál de estos códigos es correcto?"
             mp_choice_options:
-            -   option: "`{print}` and `{ask}` now need quotation marks"
-                feedback: "That's right"
-            -   option: "Only `{print}` needs quotation marks"
-                feedback: "`{ask}` needs quotation marks too!"
-            -   option: "`{at} {random}` doesn't work anymore in level 4"
-                feedback: "`{at} {random}` still works"
-            -   option: "`{at} {random}` now needs quotation marks"
-                feedback: "No, but 2 other commands do."
+            -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!'\n```\n"
+                feedback: "Eso es cierto"
+            -   option: "```\n{print} ¡Tengo muchas ganas de hacer este cuestionario!\n```\n"
+                feedback: "¡`{ask}` también necesita comillas!"
+            -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!'\n```\n"
+                feedback: "`{at} {random}` todavía funciona"
+            -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!\n```\n"
+                feedback: "No, pero otros 2 comandos sí."
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
+            hint: "En el nivel 4 necesitas comillas para 2 comandos."
             question_score: '10'
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "¿Qué código utiliza las comillas adecuadas?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} `hello`
                     ```
-                feedback: "This quotation mark is skewed, you need a straight one."
+                feedback: "Esta comilla está torcida, necesitas una recta."
             -   option: |
                     ```
-                    {print} 'hello'
+                    {print} 'hola'
                     ```
-                feedback: "Correct"
+                feedback: "Correcto"
             -   option: |
                     ```
-                    {print} hello
+                    {print} hola
                     ```
-                feedback: "There are no quotation marks here!."
+                feedback: "¡Aquí no hay comillas!."
             -   option: |
                     ```
-                    {print} ,hello,
+                    {print} ,hola,
                     ```
-                feedback: "This is a comma, you need quotation marks."
+                feedback: "Esto es una coma, necesitas comillas."
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
+            hint: "Elige las comillas correctas."
             question_score: '10'
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "¿Dónde se utilizan correctamente las comillas?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: "Add quotation marks please!"
+                feedback: "¡Añade comillas, por favor!"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: "Both before and after the words you want to print should be a quotation mark."
+                feedback: "Debe haber una comilla tanto antes como después de las palabras que quieras imprimir."
             -   option: |
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: "The first quotation mark should be behind the word {print}"
+                feedback: "La primera comilla estar detrás de la palabra {print}"
             -   option: |
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: "Perfect!"
+                feedback: "¡Perfecto!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation mark."
+            hint: "Debe haber una comilla tanto antes como después de las palabras que quieras imprimir."
             question_score: '10'
         4:
-            question_text: "Which statement is true?"
+            question_text: "¿Qué sentencia es verdadera?"
             mp_choice_options:
-            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
-                feedback: "The quotation marks shouldn't be around the command itself."
-            -   option: "You need quotation marks around the words you want to print."
-                feedback: "Super!"
-            -   option: "You do not need quotation marks when using the `{ask}` command"
-                feedback: "Both `{print}` and `{ask}` require quotation marks"
+            -   option: "Necesitas comillas alrededor de la palabra `{print}`, tal que así: `'{print}'`."
+                feedback: "Las comillas no deben ir alrededor del propio comando."
+            -   option: "Necesitas comillas alrededor de las palabras que quieras imprimir."
+                feedback: "¡Super!"
+            -   option: "No necesitas comillas cuando uses el comando `{ask}`"
+                feedback: "Tanto `{print}` como `{ask}` necesitan comillas"
             -   option: "You can choose yourself whether to use quotation marks or not."
                 feedback: "Unfortunately, Hedy is stricter than that."
             correct_answer: "B"
