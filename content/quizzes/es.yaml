@@ -420,7 +420,7 @@ levels:
                 feedback: "`{print}` se usa para imprimir texto"
             -   option: |
                     `{ask}`
-                feedback: "`{ask}` is used to ask a question"
+                feedback: "`{ask}` se usa para hacer una pregunta"
             -   option: |
                     `{is}`
                 feedback: "`{is}` se usa para hacer una lista"
@@ -521,61 +521,61 @@ levels:
         6:
             question_text: "¿Qué falla en este código?"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                pregunta {is} {ask} ¿Qué quieres saber?
+                respuestas sí, no, quizás
+                {print} respuestas {at} {random}
             mp_choice_options:
-            -   option: "Line 2 needs to say question instead of answers"
-                feedback: "No that's not right"
-            -   option: "Line 2 needs the `{is}` command"
-                feedback: "Correct"
-            -   option: "Line 3 needs to say answer instead of answers"
-                feedback: "No the variable's called answers"
-            -   option: "Nothing! This code is great!"
-                feedback: "Actually, line 2 has a mistake."
+            -   option: "La línea 2 tiene que decir pregunta en vez de respuestas"
+                feedback: "No, eso no es correcto"
+            -   option: "La línea 2 necesita el comando `{is}`"
+                feedback: "Correcto"
+            -   option: "La línea 3 tiene que decir respuesta en vez de respuestas"
+                feedback: "No, la variable se llama respuestas"
+            -   option: "¡Nada! ¡Este código está genial!"
+                feedback: "En realidad, la línea 2 tiene un fallo."
             correct_answer: "B"
-            hint: "There is something wrong with line 2."
+            hint: "Hay algo mal en la línea 2."
             question_score: '10'
         7:
-            question_text: "What does the `{add}` command do?"
+            question_text: "¿Qué hace el comando `{add}`?"
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: "The `{add}` command removes a random book from the list"
-                feedback: "The remove command removes, the add command adds"
-            -   option: "The `{add}` command adds a random book to a list"
-                feedback: "It doesn't. It adds your answer to the list!"
-            -   option: "The `{add}` command adds your favorite book to the list"
-                feedback: "Correct!"
-            -   option: "The `{add}` command prints your favorite book."
-                feedback: "No, it adds your favorite book to the list"
+            -   option: "El comando `{add}` elimina un libro al azar de la lista"
+                feedback: "El comando eliminar elimina, el comando añadir añade"
+            -   option: "El comando `{add}` añade un libro al azar a una lista"
+                feedback: "No es así. ¡Añade tu respuesta a la lista!"
+            -   option: "El comando `{add}` añade tu libro favorito a la lista"
+                feedback: "¡Correcto!"
+            -   option: "El comando `{add}` imprime tu libro favorito."
+                feedback: "No, añade tu libro favorito a la lista"
             correct_answer: "C"
-            hint: "The `{add}` command adds a book, but which one?"
+            hint: "El comando `{add}` añade un libro, ¿pero cuál?"
             question_score: '10'
         8:
-            question_text: "What is the output of this code?"
+            question_text: "¿Cuál es el resultado de este código?"
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                patatas_fritas {is} sal marina, pimentón, crema agria
+                {remove} sal marina {from} patatas_fritas
+                {remove} pimentón {from} patatas_fritas
+                {print} patatas_fritas {at} {random}
             mp_choice_options:
-            -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
-                feedback: "Take a look at the `{remove}` commands"
+            -   option: "No se puede decir, porque Hedy `{print}` uno de los 3 sabores `{at} {random}`"
+                feedback: "Echa un vistazo a los comandos `{remove}`"
             -   option: "sea salt"
-                feedback: "sea salt is removed from the list"
-            -   option: "paprika"
-                feedback: "Paprika is removed from the list"
-            -   option: "sour cream"
-                feedback: "That's right!"
+                feedback: "la sal marina se ha eliminado de la lista"
+            -   option: "pimentón"
+                feedback: "Pimentón se ha eliminado de la lista"
+            -   option: "crema agria"
+                feedback: "¡Cierto!"
             correct_answer: "D"
-            hint: "There are 3 flavors, bit 2 are removed. Which one remains?"
+            hint: "Hay 3 sabores, pero 2 se han eliminado. ¿Cuál queda?"
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "¿Qué le pasa a este código?"
             code: |-
                 colors {is} blue, purple, green
                 chosen_color {is} {ask} Which haircolor wouldn't your like to have?
