@@ -255,9 +255,10 @@ class StatisticsModule(WebsiteModule):
                 ticked_adventures[student] = []
                 current_program = {}
                 for _, program in programs.items():
-                    print('*'*100)
-                    print(f'program {program} for student {student}')
-                    print('*'*100)
+                    # Old programs sometimes don't have adventures associated to them
+                    # So skip them
+                    if 'adventure_name' not in program:
+                        continue
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
                     if name in customized_level:
