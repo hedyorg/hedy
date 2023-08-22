@@ -4,7 +4,6 @@ from enum import Enum
 
 from flask import g, jsonify, request
 from flask_babel import gettext
-
 import utils
 import hedy_content
 import hedy
@@ -227,9 +226,21 @@ class StatisticsModule(WebsiteModule):
 
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
         class_info = self.db.get_class_customizations(class_id)
-        if not class_info:
-            class_info = self._create_customizations(class_id)
+        if class_info and 'adventures' in class_info:
+            # it uses the old way so convert it to the new one
+            class_info['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+            for adventure, levels in class_info['adventures'].items():
+                for level in levels:
+                    class_info['sorted_adventures'][str(level)].append(
+                        {"name": adventure, "from_teacher": False})
+
+            self.db.update_class_customizations(class_info)
+        else:
+            # Create a new default customizations object in case it doesn't have one
+            class_info = self._create_customizations(self, class_id)
+
         class_adventures = class_info.get('sorted_adventures')
 
         adventure_names = {}
