@@ -430,13 +430,18 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       let response = await postJsonWithAchievements('/parse', data);
       console.log('Response', response);
 
-      if (!data.skip_faulty && response.Error) {
-        data.skip_faulty = true;
-        error.showWarningSpinner();
-        error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-        response = await postJsonWithAchievements('/parse', data);
-        error.hide(true);
+      if (response.Warning && $('#editor').is(":visible")) {
+        //storeFixedCode(response, level);
+        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
       }
+
+      // if (!data.skip_faulty && response.Error) {
+      //   data.skip_faulty = true;
+      //   error.showWarningSpinner();
+      //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+      //   response = await postJsonWithAchievements('/parse', data);
+      //   error.hide(true);
+      // }
 
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
@@ -718,21 +723,21 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   let outputDiv = $('#output');
 
   if (sourceMap){
-    theGlobalSourcemap = sourceMap;
-    let Range = ace.require("ace/range").Range
+    // theGlobalSourcemap = sourceMap;
+    // let Range = ace.require("ace/range").Range
 
-    // We loop through the mappings and underline a mapping if it contains an error
-    for (const index in sourceMap) {
-      const map = sourceMap[index];
-      const range = new Range(
-        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-        map.hedy_range.to_line-1, map.hedy_range.to_column-1
-      )
+    // // We loop through the mappings and underline a mapping if it contains an error
+    // for (const index in sourceMap) {
+    //   const map = sourceMap[index];
+    //   const range = new Range(
+    //     map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+    //     map.hedy_range.to_line-1, map.hedy_range.to_column-1
+    //   )
 
-      if (map.error != null){
-        theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
-      }
-    }
+    //   if (map.error != null){
+    //     theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+    //   }
+    // }
   }
 
   //Saving the variable button because sk will overwrite the output div
