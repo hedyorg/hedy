@@ -176,7 +176,9 @@ class HedyTester(unittest.TestCase):
             expected_commands=None,
             lang='en',
             translate=True,
-            output=None):
+            output=None,
+            skip_faulty=True
+    ):
         # used to test the same code snippet over multiple levels
         # Use exception to check for an exception
 
@@ -205,7 +207,8 @@ class HedyTester(unittest.TestCase):
                 expected_commands=expected_commands,
                 lang=lang,
                 translate=translate,
-                output=output)
+                output=output,
+                skip_faulty=skip_faulty)
             print(f'Passed for level {level}')
 
     def single_level_tester(
