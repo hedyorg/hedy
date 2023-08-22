@@ -228,6 +228,8 @@ class StatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         class_info = self.db.get_class_customizations(class_id)
+        if not class_info:
+            class_info = self._create_customizations(class_id)
         class_adventures = class_info.get('sorted_adventures')
 
         adventure_names = {}
@@ -276,6 +278,21 @@ class StatisticsModule(WebsiteModule):
                         ticked_adventures[student].append(current_program)
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+
+    def _create_customizations(self, class_id):
+        sorted_adventures = {}
+        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+        customizations = {
+            "id": class_id,
+            "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+            "opening_dates": {},
+            "other_settings": [],
+            "level_thresholds": {},
+            "sorted_adventures": sorted_adventures
+        }
+        self.db.update_class_customizations(customizations)
+        return customizations
 
 
 def add(username, action):
