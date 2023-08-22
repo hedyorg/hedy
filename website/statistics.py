@@ -239,7 +239,7 @@ class StatisticsModule(WebsiteModule):
             self.db.update_class_customizations(class_info)
         else:
             # Create a new default customizations object in case it doesn't have one
-            class_info = self._create_customizations(self, class_id)
+            class_info = self._create_customizations(class_id)
 
         class_adventures = class_info.get('sorted_adventures')
 
