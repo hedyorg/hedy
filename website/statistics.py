@@ -4,11 +4,10 @@ from enum import Enum
 
 from flask import g, jsonify, request
 from flask_babel import gettext
-
-import exceptions as hedy_exceptions
-from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import utils
 import hedy_content
+import exceptions as hedy_exceptions
+from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy
 import jinja_partials
 from website.flask_helpers import render_template
@@ -229,7 +228,21 @@ class StatisticsModule(WebsiteModule):
 
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
         class_info = self.db.get_class_customizations(class_id)
+        if class_info and 'adventures' in class_info:
+            # it uses the old way so convert it to the new one
+            class_info['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+            for adventure, levels in class_info['adventures'].items():
+                for level in levels:
+                    class_info['sorted_adventures'][str(level)].append(
+                        {"name": adventure, "from_teacher": False})
+
+            self.db.update_class_customizations(class_info)
+        else:
+            # Create a new default customizations object in case it doesn't have one
+            class_info = self._create_customizations(class_id)
+
         class_adventures = class_info.get('sorted_adventures')
 
         adventure_names = {}
@@ -278,6 +291,21 @@ class StatisticsModule(WebsiteModule):
                         ticked_adventures[student].append(current_program)
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+
+    def _create_customizations(self, class_id):
+        sorted_adventures = {}
+        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+        customizations = {
+            "id": class_id,
+            "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+            "opening_dates": {},
+            "other_settings": [],
+            "level_thresholds": {},
+            "sorted_adventures": sorted_adventures
+        }
+        self.db.update_class_customizations(customizations)
+        return customizations
 
 
 class LiveStatisticsModule(WebsiteModule):
