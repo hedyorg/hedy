@@ -74,7 +74,7 @@ ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
 PARSONS = dynamo.Table(storage, "parsons", "id")
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id")
-
+CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
 # list of users.
@@ -284,6 +284,19 @@ class Database:
         # Store the adventure data in this table in case it doesn't match the programs table.
         STUDENT_ADVENTURES.create(student_adventure)
         return student_adventure
+
+    def get_class_errors(self, class_id):
+        # Fetch a student adventure with id formatted as studentID-adventureName-level
+        return CLASS_ERRORS.get({"id": class_id})
+
+    def update_class_errors(self, class_errors):
+        # Swap the ticked value when a request is sent
+        return CLASS_ERRORS.put(class_errors)
+
+    def store_class_errors(self, class_errors):
+        # create a new class errors object
+        CLASS_ERRORS.create(class_errors)
+        return class_errors
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""

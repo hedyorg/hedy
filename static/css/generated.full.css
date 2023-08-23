@@ -7099,10 +7099,6 @@ code {
   width: 75%;
 }
 
-.w-1\/12 {
-  width: 8.333333%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -7130,6 +7126,10 @@ code {
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-1\/12 {
+  width: 8.333333%;
 }
 
 .w-auto {
@@ -24611,6 +24611,11 @@ code {
   color: rgb(113 128 150 / var(--tw-text-opacity));
 }
 
+.text-orange-600 {
+  --tw-text-opacity: 1;
+  color: rgb(221 107 32 / var(--tw-text-opacity));
+}
+
 .text-yellow-900 {
   --tw-text-opacity: 1;
   color: rgb(116 66 16 / var(--tw-text-opacity));
@@ -24717,11 +24722,6 @@ code {
 .text-orange-500 {
   --tw-text-opacity: 1;
   color: rgb(237 137 54 / var(--tw-text-opacity));
-}
-
-.text-orange-600 {
-  --tw-text-opacity: 1;
-  color: rgb(221 107 32 / var(--tw-text-opacity));
 }
 
 .text-orange-700 {
@@ -31742,6 +31742,37 @@ div[class^="ace_incorrect_hedy_code"] {
   pointer-events: auto;
 }
 
+.student_adventure_checkbox[disabled] {
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(237 242 247 / var(--tw-bg-opacity)) !important;
+}
+
+.student_adventure_checkbox {
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+
+.student_adventure_checkbox:checked {
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(154 230 180 / var(--tw-bg-opacity)) !important;
+}
+
+.hover\:rounded-full:hover {
+  border-radius: 9999px;
+}
+
 .hover\:border-blue-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(144 205 244 / var(--tw-border-opacity));
@@ -31799,6 +31830,10 @@ div[class^="ace_incorrect_hedy_code"] {
 .hover\:bg-gray-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 224 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-400\/50:hover {
+  background-color: rgb(203 213 224 / 0.5);
 }
 
 .hover\:text-white:hover {
@@ -32079,6 +32114,10 @@ div[class^="ace_incorrect_hedy_code"] {
   .sm\:inline {
     display: inline;
   }
+
+  .sm\:w-5\/12 {
+    width: 41.666667%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -32105,6 +32144,10 @@ div[class^="ace_incorrect_hedy_code"] {
 
   .md\:h-64 {
     height: 16rem;
+  }
+
+  .md\:w-3\/12 {
+    width: 25%;
   }
 
   .md\:w-2\/5 {
@@ -32184,6 +32227,10 @@ div[class^="ace_incorrect_hedy_code"] {
 
   .lg\:h-10 {
     height: 2.5rem;
+  }
+
+  .lg\:w-1\/12 {
+    width: 8.333333%;
   }
 
   .lg\:w-1\/2 {

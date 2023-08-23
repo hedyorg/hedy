@@ -229,20 +229,7 @@ class StatisticsModule(WebsiteModule):
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
 
-        class_info = self.db.get_class_customizations(class_id)
-        if class_info and 'adventures' in class_info:
-            # it uses the old way so convert it to the new one
-            class_info['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-            for adventure, levels in class_info['adventures'].items():
-                for level in levels:
-                    class_info['sorted_adventures'][str(level)].append(
-                        {"name": adventure, "from_teacher": False})
-
-            self.db.update_class_customizations(class_info)
-        else:
-            # Create a new default customizations object in case it doesn't have one
-            class_info = self._create_customizations(class_id)
-
+        class_info = get_customizations(self.db, class_id)
         class_adventures = class_info.get('sorted_adventures')
 
         adventure_names = {}
@@ -291,21 +278,6 @@ class StatisticsModule(WebsiteModule):
                         ticked_adventures[student].append(current_program)
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
-
-    def _create_customizations(self, class_id):
-        sorted_adventures = {}
-        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
-        customizations = {
-            "id": class_id,
-            "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
-            "opening_dates": {},
-            "other_settings": [],
-            "level_thresholds": {},
-            "sorted_adventures": sorted_adventures
-        }
-        self.db.update_class_customizations(customizations)
-        return customizations
 
 
 class LiveStatisticsModule(WebsiteModule):
@@ -365,34 +337,17 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_FEED_SIZE = 4
 
     def __selected_levels(self, class_id):
-        class_customization = self.db.get_class_customizations(class_id)
+        class_customization = get_customizations(self.db, class_id)
         class_overview = class_customization.get('dashboard_customization')
         if class_overview:
             return class_overview.get('selected_levels', [1])
         return [1]
 
     def __common_errors(self, class_id):
-        class_customization = self.db.get_class_customizations(class_id)
-        # if the class customization button has not been pressed yet
-        # class_customization will be None
-        # if that is the case, we create a default class customization
-        if not class_customization:
-            sorted_adventures = {}
-            for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-                sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
-            customizations = {
-                "id": class_id,
-                "levels": [i for i in range(1, HEDY_MAX_LEVEL + 1)],
-                "opening_dates": {},
-                "other_settings": [],
-                "level_thresholds": {},
-                "sorted_adventures": sorted_adventures
-            }
-            self.db.update_class_customizations(customizations)
-            class_customization = self.db.get_class_customizations(class_id)
-
-        dashboard_customization = class_customization.get('dashboard_customization', {})
-        return dashboard_customization.get('common_errors', [])
+        common_errors = self.db.get_class_errors(class_id)
+        if not common_errors:
+            return self.db.store_class_errors(dict(id=class_id, errors=[]))
+        return common_errors
 
     def __all_students(self, class_):
         """Returns a list of all students in a class along with some info."""
@@ -422,8 +377,7 @@ class LiveStatisticsModule(WebsiteModule):
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        customizations = self.db.get_class_customizations(class_id)
-
+        customizations = get_customizations(self.db, class_id)
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
         found_students = []
@@ -462,7 +416,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors
+                "common_errors": common_errors['errors']
             },
             class_overview={
                 "selected_levels": selected_levels,
@@ -481,16 +435,14 @@ class LiveStatisticsModule(WebsiteModule):
 
     def get_class_live_stats(self, user, class_):
         # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.__common_errors(class_['id'])
         selected_levels = self.__selected_levels(class_['id'])
         if selected_levels:
             selected_levels = [int(level) for level in selected_levels]
             selected_levels.sort()
-        # identifies common errors in the class
-        self.common_exception_detection(class_['id'], user, common_errors)
 
-        # in case of a db update in the meantime, reload common errors
-        common_errors = self.__common_errors(class_['id'])
+        # identifies common errors in the class
+        common_errors = self.common_exception_detection(class_['id'], user)
+
         students = self.__all_students(class_)
         adventures = self.__get_adventures_for_overview(user, class_['id'])
 
@@ -542,7 +494,7 @@ class LiveStatisticsModule(WebsiteModule):
         else:
             selected_levels.append(int(chosen_level))
 
-        customization = self.db.get_class_customizations(class_id)
+        customization = get_customizations(self.db, class_id)
         dashboard_customization = customization.get('dashboard_customization', {})
         dashboard_customization['selected_levels'] = selected_levels
         customization['dashboard_customization'] = dashboard_customization
@@ -559,7 +511,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors
+                "common_errors": common_errors['errors']
             },
             class_overview={
                 "selected_levels": selected_levels,
@@ -613,7 +565,7 @@ class LiveStatisticsModule(WebsiteModule):
                 class_info={
                     "id": class_id,
                     "students": students,
-                    "common_errors": common_errors
+                    "common_errors": common_errors['errors']
                 },
                 class_overview={
                     "selected_levels": selected_levels,
@@ -637,7 +589,7 @@ class LiveStatisticsModule(WebsiteModule):
                 class_info={
                     "id": class_id,
                     "students": students,
-                    "common_errors": common_errors
+                    "common_errors": common_errors['errors']
                 },
                 class_overview={
                     "selected_levels": selected_levels,
@@ -689,7 +641,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors
+                "common_errors": common_errors['errors']
             },
             class_overview={
                 "selected_levels": selected_levels,
@@ -767,18 +719,14 @@ class LiveStatisticsModule(WebsiteModule):
         student = _check_student_arg()
         dashboard_options_args = _build_url_args(student=student)
 
-        # Retrieve common errors and selected levels in class overview from the database for class
-        common_errors = self.__common_errors(class_id)
         selected_levels = self.__selected_levels(class_id)
-        self.common_exception_detection(class_id, user, common_errors)
-        # in case of a db update in the meantime, reload common errors
-        common_errors = self.__common_errors(class_id)
+        common_errors = self.common_exception_detection(class_id, user)
 
         # get id of the common error to know which data to display from database
         error_id = request.args.get("error-id", default="", type=str)
         selected_item = None
         if error_id:
-            selected_item = common_errors[int(error_id)]
+            selected_item = common_errors['errors'][int(error_id)]
 
         class_ = self.db.get_class(class_id)
         students = self.__all_students(class_)
@@ -815,7 +763,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_info={
                 "id": class_id,
                 "students": students,
-                "common_errors": common_errors
+                "common_errors": common_errors['errors']
             },
             class_overview={
                 "selected_levels": selected_levels,
@@ -838,20 +786,11 @@ class LiveStatisticsModule(WebsiteModule):
         """
         Removes the common error item by setting the active flag to 0.
         """
-        class_customization = self.db.get_class_customizations(class_id)
-        dashboard_customization = class_customization.get('dashboard_customization', {})
-        common_errors = dashboard_customization.get('common_errors', [])
-
-        for i in range(len(common_errors)):
-            if common_errors[i]['id'] == int(error_id) and common_errors[i]['active'] == 1:
-                common_errors[i]['active'] = 0
-                selected_levels = dashboard_customization.get('selected_levels', [1])
-
-                class_customization['dashboard_customization'] = {
-                    'selected_levels': selected_levels,
-                    'common_errors': common_errors
-                }
-                self.db.update_class_customizations(class_customization)
+        common_errors = self.__common_errors(class_id)
+        for i in range(len(common_errors['errors'])):
+            if common_errors['errors'][i]['id'] == int(error_id) and common_errors['errors'][i]['active'] == 1:
+                common_errors['errors'][i]['active'] = 0
+                self.db.update_class_errors(common_errors)
                 break
 
         return {}, 200
@@ -882,7 +821,7 @@ class LiveStatisticsModule(WebsiteModule):
         :param class_id: class id
         :return: new id
         """
-        common_error_ids = [int(x['id']) for x in common_errors]
+        common_error_ids = [int(x['id']) for x in common_errors['errors']]
         new_id = max(common_error_ids) + 1 if common_error_ids else 0
 
         # reached max common errors
@@ -898,33 +837,20 @@ class LiveStatisticsModule(WebsiteModule):
                 # Todo: could use a better way to handle this
                 new_id = 0
 
-                class_customization = self.db.get_class_customizations(class_id)
-                dashboard_customization = class_customization.get('dashboard_customization', {})
-
-                common_errors = dashboard_customization.get('common_errors', [])
                 for i in range(self.MAX_COMMON_ERRORS // 2):
-                    common_errors[i]['active'] = 0
-
-                class_customization['dashboard_customization'] = {
-                    'selected_levels': dashboard_customization.get('selected_levels', [1]),
-                    'common_errors': common_errors
-                }
-                self.db.update_class_customizations(class_customization)
+                    common_errors['errors'][i]['active'] = 0
+                self.db.update_class_errors(common_errors)
 
         return new_id
 
-    def common_exception_detection(self, class_id, user, common_errors):
+    def common_exception_detection(self, class_id, user):
         """
         Detects misconceptions of students in the class based on errors they are making.
         """
+        common_errors = self.__common_errors(class_id)
         # Group the error messages by session and count their occurrences
         exceptions_per_user = self.retrieve_exceptions_per_student(class_id)  # retrieves relevant data from db
-        # get current class customization
-        class_customization = self.db.get_class_customizations(class_id)
-        dashboard_customization = class_customization.get('dashboard_customization', {})
-
-        labels = [x['label'] for x in common_errors]
-        existing_common_errors = dashboard_customization.get('common_errors', [])
+        labels = [x['label'] for x in common_errors['errors']]
         exception_type_counts = {}
 
         # Iterate over each error and its corresponding username in the current session group
@@ -961,31 +887,25 @@ class LiveStatisticsModule(WebsiteModule):
                 idx = labels.index(exception_type)
                 hits = 0
                 for user in all_users:
-                    if user in common_errors[idx]['students']:
+                    if user in common_errors['errors'][idx]['students']:
                         hits += 1
                 if hits == len(all_users):
                     # no update needed as entry already exists
                     continue  # skip to next misconception
                 elif hits > 0:
                     # update existing entry, existing student(s) was found but new ones have to be added
-                    existing_common_errors[idx]['students'] = all_users
+                    common_errors['errors'][idx]['students'] = all_users
             else:
                 # make new entry
                 new_id = self.new_id_calc(common_errors, class_id)
-                existing_common_errors.append({
+                common_errors['errors'].append({
                     'id': new_id,
                     'label': exception_type,
                     'active': 1,
                     "students": users_only
                 })
 
-            selected_levels = dashboard_customization.get('selected_levels', [1])
-
-            class_customization['dashboard_customization'] = {
-                'selected_levels': selected_levels,
-                'common_errors': existing_common_errors
-            }
-            self.db.update_class_customizations(class_customization)
+        return self.db.update_class_errors(common_errors)
 
     @route("/live_stats/class/<class_id>", methods=["POST"])
     @requires_login
@@ -996,13 +916,9 @@ class LiveStatisticsModule(WebsiteModule):
         body = request.json
         levels = [int(i) for i in body["levels"]]
 
-        class_customization = self.db.get_class_customizations(class_id)
-        dashboard_customization = class_customization.get('dashboard_customization', {})
-        common_errors = dashboard_customization.get('common_errors', [])
-
+        class_customization = get_customizations(self.db, class_id)
         class_customization['dashboard_customization'] = {
             'selected_levels': levels,
-            "common_errors": common_errors
         }
 
         self.db.update_class_customizations(class_customization)
@@ -1247,14 +1163,20 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
 
     { level: [ { id, name, in_progress } ] }
     """
-    teacher_adventures_formatted = {}
+    adventure_names = {}
+    for adv_key, adv_dic in adventures.items():
+        for name, _ in adv_dic.items():
+            adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
     for adventure in teacher_adventures:
-        teacher_adventures_formatted[adventure['id']] = adventure["name"]
+        adventure_names[adventure['id']] = adventure['name']
 
     selected_adventures = {}
     for level, adventure_list in customizations['sorted_adventures'].items():
         adventures_for_level = []
         for adventure in list(adventure_list):
+            if adventure['name'] == 'next':
+                continue
             adventure_key = adventure['name']
 
             students_in_progress = []
@@ -1263,25 +1185,14 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
                 if last_adventure == adventure_key:
                     students_in_progress.append(student)
 
-            if adventure['from_teacher']:
-                adventure_name = teacher_adventures_formatted[adventure_key]
-                adventures_for_level.append(
-                    {
-                        "id": adventure_key,
-                        "name": adventure_name,
-                        "in_progress": students_in_progress
-                    }
-                )
-
-            if not adventure['from_teacher'] and adventure_key in adventures:
-                adventure_name = list(adventures[adventure_key].keys())[0]
-                adventures_for_level.append(
-                    {
-                        "id": adventure_key,
-                        "name": adventure_name,
-                        "in_progress": students_in_progress
-                    }
-                )
+            adventure_name = adventure_names[adventure_key]
+            adventures_for_level.append(
+                {
+                    "id": adventure_key,
+                    "name": adventure_name,
+                    "in_progress": students_in_progress
+                }
+            )
 
         selected_adventures[level] = adventures_for_level
 
@@ -1411,3 +1322,59 @@ def get_general_class_stats(students):
         "week": {"runs": weekly_successes + weekly_errors, "fails": weekly_errors},
         "total": {"runs": successes + errors, "fails": errors},
     }
+
+
+def get_customizations(db, class_id):
+    """
+    Retrieves the customizations for a specific class from the database.
+
+    Args:
+        db (Database): The database object used to retrieve the customizations.
+        class_id (string): The ID of the class for which to retrieve the customizations.
+
+    Returns:
+        customizations (dict): A dictionary containing the customizations for the class.
+    """
+    customizations = db.get_class_customizations(class_id)
+    if customizations and 'adventures' in customizations:
+        # it uses the old way so convert it to the new one
+        customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        for adventure, levels in customizations['adventures'].items():
+            for level in levels:
+                customizations['sorted_adventures'][str(level)].append(
+                    {"name": adventure, "from_teacher": False})
+
+        db.update_class_customizations(customizations)
+    elif not customizations:
+        # Create a new default customizations object in case it doesn't have one
+        customizations = _create_customizations(db, class_id)
+    return customizations
+
+
+def _create_customizations(db, class_id):
+    """
+    Create customizations for a given class.
+
+    Args:
+        db (Database): The database object.
+        class_id (int): The ID of the class.
+
+    Returns:
+        customizations (dict): The customizations for the class.
+    """
+    sorted_adventures = {}
+    for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    customizations = {
+        "id": class_id,
+        "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+        "opening_dates": {},
+        "other_settings": [],
+        "level_thresholds": {},
+        "sorted_adventures": sorted_adventures,
+        "dashboard_customization": {
+            "selected_levels": [1]
+        },
+    }
+    db.update_class_customizations(customizations)
+    return customizations
