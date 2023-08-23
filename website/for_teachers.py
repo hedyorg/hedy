@@ -609,13 +609,18 @@ class ForTeachersModule(WebsiteModule):
             level_thresholds[name] = value
 
         customizations = self.db.get_class_customizations(class_id)
+        dashboard = customizations.get('dashboard_customization', {})
+        levels = dashboard.get('selected_levels', [1])
         customizations = {
             "id": class_id,
             "levels": levels,
             "opening_dates": opening_dates,
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
-            "sorted_adventures": customizations["sorted_adventures"]
+            "sorted_adventures": customizations["sorted_adventures"],
+            'dashboard_customization': {
+                'selected_levels': levels
+            }
         }
 
         self.db.update_class_customizations(customizations)
