@@ -3284,40 +3284,40 @@ levels:
                 feedback: Fout!
             -   option: De luchtverfrisser sprayt een keer per minuut en de lichten blijven aan zolang je op de wc zit.
                 feedback: Geweldig!
-            -   option: The air freshener sprays once you leave the toilet.
-                feedback: It only sprays when you're in there.
-            -   option: The lights will always stay on.
-                feedback: That wouldn't be right.
-            hint: The block after the while command keeps happening while the toilet is occupied.
+            -   option: De luchtverfrisser sprayt als je het toilet verlaat.
+                feedback: Hij sprayt alleen als hij bezet is.
+            -   option: Het licht blijft altijd aan.
+                feedback: Dat klopt niet.
+            hint: Het blok na het {while} commando blijft gebeuren zolang het toilet bezet is.
             question_score: '10'
             correct_answer: B
         9:
-            question_text: What will the diet app say if you have eaten 1600 calories today?
-            code: "chocolate = {ask} 'How many calories have you eaten today?'\n  {while} calories <= 1000\n      {print} 'You could eat some more'\n  {while} calories > 1000 and calories =< 2000\n      {print} 'That is alright'\n  {while} calories > 2000\n      {print} 'You have had enough for today'\n"
+            question_text: Wat zegt de dieetapp als je 1600 caloriëen hebt gegeten die dag?
+            code: "calorie = {ask} 'Hoeveel calorieën heb je vandaag gegeten?'\n  {while} calorie <= 1000\n      {print} 'Je kunt nog wat eten'\n  {while} calorie > 1000 and calorie =< 2000\n      {print} 'Prima'\n  {while} calorie > 2000\n      {print} 'Je hebt genoeg gehad'\n"
             mp_choice_options:
-            -   option: Nothing. 1600 is not programmed into the app.
-                feedback: No
-            -   option: you could eat some more
-                feedback: No
-            -   option: That is alright
-                feedback: Yes!
-            -   feedback: No
-                option: You have eaten enough for today
+            -   option: Niets. 1600 calorieën is niet geprogrammeerd
+                feedback: Nee
+            -   option: Je kunt nog wat eten
+                feedback: Nee
+            -   option: Prima
+                feedback: Ja!
+            -   feedback: Nee
+                option: Je hebt genoeg gehad
             correct_answer: C
-            hint: 1600 is between 1000 and 2000
+            hint: 1600 ligt tussen 1000 en 2000
             question_score: '10'
         10:
-            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
-            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'\n"
+            question_text: 'Wat moet worden ingevuld op het streepje?  Tip: de speler met de meeste punten staat voor.'
+            code: "naam_speler_1 = {ask} 'Naam speler 1:'\nnaam_speler_2 = {ask} 'Naam speler 2:'\n{while} punten_speler_1 > punten_speler_2\n    {print} _ ' staat voor!'\n"
             mp_choice_options:
-            -   option: name_player_1
-                feedback: You are right!
+            -   option: naam_speler_1
+                feedback: Fantastisch!
             -   option: name_player_2
-                feedback: No they are losing!
-            -   option: points_player_1
-                feedback: You should fill in a name, not a number
-            -   option: points_player_2
-                feedback: You should fill in a name, not a number
+                feedback: Nee die verliest!
+            -   option: punten_speler_1
+                feedback: Het moet een naam zijn, geen getal
+            -   option: punten_speler_2
+                feedback: Het moet een naam zijn, geen getal
             correct_answer: A
-            hint: You win the game by having the most points. Your name should appear on the screen
+            hint: Je wint het spel als je de meeste punten hebt. Je naam komt dan in beeld.
             question_score: '10'

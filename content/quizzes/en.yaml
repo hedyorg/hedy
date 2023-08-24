@@ -3482,7 +3482,7 @@ levels:
         9:
             question_text: "What will the diet app say if you have eaten 1600 calories today?"
             code: |
-              chocolate = {ask} 'How many calories have you eaten today?'
+              calories = {ask} 'How many calories have you eaten today?'
                 {while} calories <= 1000
                     {print} 'You could eat some more'
                 {while} calories > 1000 and calories =< 2000
