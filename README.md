@@ -12,7 +12,7 @@ The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 [](https://img.shields.io/github/issues/hedyorg/hedy)
 ![](https://img.shields.io/github/last-commit/hedyorg/hedy)
 [](https://github.com/hedyorg/hedy/stargazers)
-[](https://img.shields.io/github/contributors/hedyorg/hedy/)
+![](https://img.shields.io/github/contributors/hedyorg/hedy/)
 
 ![Repo Beats statistics](https://repobeats.axiom.co/api/embed/a3206e7c42293ee71446a7081b9c98636953501c.svg "Repobeats analytics image")
 
