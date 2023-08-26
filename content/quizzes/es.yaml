@@ -1492,30 +1492,30 @@ levels:
             question_text: "Which output will be produced by this code?"
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} 'Hola'
+                    {print} '¡Soy Hedy!'
             mp_choice_options:
-            -   option: "Hello\nIm Hedy!"
-                feedback: "Everything is printed twice."
-            -   option: "Hello\nHello\nIm Hedy"
-                feedback: "The second line is repeated twice as well."
-            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!"
+            -   option: "Hola\n¡Soy Hedy!\n"
+                feedback: "Todo se imprime dos veces."
+            -   option: "Hola\nHola\nSoy Hedy\n"
+                feedback: "La segunda línea también se repite dos veces."
+            -   option: "Hola\n¡Soy Hedy!\nHola\n¡Soy Hedy!\n"
                 feedback: "¡Super!"
-            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!"
-                feedback: "Everything is printed twice"
+            -   option: "Hola\nHola\n¡Soy Hedy!\n¡Soy Hedy!\n"
+                feedback: "Todo se imprime dos veces"
             correct_answer: "C"
-            hint: "Both lines are repeated twice."
+            hint: "Ambas líneas se repiten dos veces."
             question_score: '10'
         2:
             question_text: "¿Qué le pasa a este código?"
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} '¡Hedy mola!'
             mp_choice_options:
-            -   option: "This should be only one line, not 2."
+            -   option: "Esto debería ser una línea, no 2."
                 feedback: "No it should be 2 lines."
-            -   option: "This `{print}` command has to go"
-                feedback: "No, you need it."
+            -   option: "Este comando `{print}` se tiene que eliminar."
+                feedback: "No, lo necesitas."
             -   option: "There is a spelling mistake in the `{repeat}` command."
                 feedback: "Nee, repeat is de goede spelling"
             -   option: "The second line need to start with 4 spaces as indentation."
