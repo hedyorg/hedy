@@ -1542,7 +1542,7 @@ levels:
             hint: "What is being repeated and what is not?."
             question_score: '10'
         4:
-            question_text: "Which output is correct?"
+            question_text: "¿Qué resultado es correcto?"
             code: |-
                 {print} 'The children went:'
                 {repeat} 2 {times}
@@ -2213,7 +2213,7 @@ levels:
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "Mind the indention"
+                feedback: "Cuidado con la sangría"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 3
@@ -2227,16 +2227,16 @@ levels:
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 son 4 veces."
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+                feedback: "`{range}` 0 `{to}` 3 son 4 veces."
             correct_answer: "B"
-            hint: "Mind the indention"
+            hint: "Cuidado con la sangría"
             question_score: '10'
     10:
         1:
@@ -2248,69 +2248,69 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {for} each compliment
+                    {for} cada cumplido
                     ```
                 feedback: "No es eso"
             -   option: |
                     ```
-                    {for} compliment {in} compliments
+                    {for} cumplido {in} cumplidos
                     ```
-                feedback: "You deserve all those compliments!"
+                feedback: "¡Te mereces todos esos cumplidos!"
             -   option: |
                     ```
-                    {if} compliment {in} compliments
+                    {if} cumplido {in} cumplidos
                     ```
                 feedback: "No es eso"
             -   option: |
                     ```
-                    {for} compliments {in} compliment
+                    {for} cumplidos {in} cumplido
                     ```
                 feedback: "¡Ya casi está!"
             correct_answer: "B"
-            hint: "`{for}` each compliment in the lists of compliments..."
+            hint: "`{for}` cada cumplido en la lista de cumplidos..."
             question_score: '10'
         2:
-            question_text: "Which output is correct?"
+            question_text: "¿Qué resultado es correcto?"
             code: |-
                 meals = pizza, pasta, pancakes
                 {for} meal {in} meals
                     {print} 'I love ' meal
             mp_choice_options:
-            -   option: "I love pizza"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
-            -   option: "I love pasta"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
-            -   option: "I love pancakes"
-                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
+            -   option: "Me encanta la pizza"
+                feedback: "La línea 2 dice `{for}` cada comida en la lista de comidas. Así que se imprime cada comida."
+            -   option: "Me encanta la pasta"
+                feedback: "La línea 2 dice `{for}` cada comida en la lista de comidas. Así que se imprime cada comida."
+            -   option: "Me encanta las tortitas"
+                feedback: "La línea 2 dice `{for}` cada comida en la lista de comidas. Así que se imprime cada comida."
             -   option: |-
-                    I love pizza
-                    I love pasta
-                    I love pancakes
+                    Me encanta la pizza
+                    Me encanta la pasta
+                    Me encanta las tortitas
                 feedback: "Great!"
             correct_answer: "D"
-            hint: "Line 2 says for each meal in the list of meals. So each meal is printed."
+            hint: "La línea 2 dice cada comida en la lista de comidas. Así que se imprime cada comida."
             question_score: '10'
         3:
-            question_text: "Which output is correct?"
+            question_text: "¿Qué resultado es correcto?"
             code: |-
                 animals = dogs, cats, hamsters, chickens
                 {for} animal {in} animals
                     {print} animal ' are lovely pets'
             mp_choice_options:
-            -   option: "dogs are lovely pets"
-                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
-            -   option: "dogs, cats, hamsters, chickens are lovely pets"
-                feedback: "Each animal gets their own line in the output."
+            -   option: "los perros son mascotas adorables"
+                feedback: "La línea 2 dice {for} cada animal en la lista de animales. Así que se {print} cada animal."
+            -   option: "perros, gatos, hámsteres, gallinas son mascotas adorables"
+                feedback: "Cada animal tiene su propia línea en la salida."
             -   option: |-
-                    dogs are lovely pets
-                    cats are lovely pets
-                    hamsters are lovely pets
-                    chickens are lovely pets
+                    los perros son mascotas adorables
+                    los gatos son mascotas adorables
+                    los hámsteres son mascotas adorables
+                    las gallinas son mascotas adorables
                 feedback: "Great!"
-            -   option: "You don't know yet. Because it chooses one of the animals {at} {random}."
-                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
+            -   option: "Todavía no lo sabes. Porque elige uno de los animales {at} {random}."
+                feedback: "La línea 2 dice {for} cada animal en la lista de animales. Así que se {print} cada animal."
             correct_answer: "C"
-            hint: "Line 2 says {for} each animal in the list of animals. So each animal is printed"
+            hint: "La línea 2 dice {for} cada animal en la lista de animales. Así que se imprime cada animal"
             question_score: '10'
         4:
             question_text: "¿Qué le pasa a este código?"
@@ -2319,19 +2319,19 @@ levels:
                 {for} item {in} groceries
                     {print} 'We need ' groceries
             mp_choice_options:
-            -   option: "Line 2 needs to start with 4 spaces as indentation"
-                feedback: "No it doesn't. Only line 3 needs indentation, which it has."
-            -   option: "Line 3 does not need to start with 4 spaces as indentation"
-                feedback: "Line 2 is a `{for}`command so line 3 does need to start with an indent."
-            -   option: "Line 3 should say item instead of groceries"
-                feedback: "Good job!"
-            -   option: "Line 2 should say groceries instead of item"
-                feedback: "No it does not."
+            -   option: "La línea 2 tiene que empezar con 4 espacios como sangría"
+                feedback: "No. Sólo la línea 3 necesita sangría, la cual tiene."
+            -   option: "La línea 3 no tiene que empezar con 4 espacios como sangría"
+                feedback: "La línea 2 es un comando `{for}` así que la línea 3 no tiene que empezar con sangría."
+            -   option: "La línea 3 debería decir artículo en vez de comestibles"
+                feedback: "¡Buen trabajo!"
+            -   option: "La línea 2 debería decir comestibles en vez de artículo"
+                feedback: "No, no es así."
             correct_answer: "C"
-            hint: "Line 2 says `{for}` each item in the list of groceries"
+            hint: "La línea 2 dice `{for}` cada artículo en la lista de la compra"
             question_score: '10'
         5:
-            question_text: "What word should be on the _?_ with these digital dice?"
+            question_text: "¿Qué palabra debería ir en el _ con estos dados digitales?"
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
@@ -2339,19 +2339,19 @@ levels:
                 {for} player {in} players
                     {print} player ' throws ' _?_ {at} {random}
             mp_choice_options:
-            -   option: "players"
-                feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
-            -   option: "choices"
+            -   option: "jugadores"
+                feedback: "Diría 'Ann lanza a Jesse', en vez de 'Ann lanza un 6'."
+            -   option: "opciones"
                 feedback: "¡Eso es!"
-            -   option: "choice"
-                feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
-            -   option: "dice"
-                feedback: "Look at the names of the variables."
+            -   option: "opcion"
+                feedback: "Estás muy cerca. Pero necesitas que Hedy elija de la lista llamada 'opciones' no 'opcion'..."
+            -   option: "dados"
+                feedback: "Mira los nombres de las variables."
             correct_answer: "B"
-            hint: "Hedy needs to pick a number `{at} {random}`"
+            hint: "Hedy tiene que elegir un número `{at} {random}`"
             question_score: '10'
         6:
-            question_text: "Which of the answers below is a possible outcome when you run the code?"
+            question_text: "¿Cuál de las respuestas de abajo es un posible resultado cuando ejecutes el código?"
             code: |-
                 choices = rock, paper, scissors
                 players = Kelly, Meredith
@@ -2359,24 +2359,24 @@ levels:
                     {print} player ' chooses ' choices {at} {random}
             mp_choice_options:
             -   option: |-
-                    Kelly chooses rock
-                feedback: "Meredith wants to play too!"
+                    Kelly elige piedra
+                feedback: "¡Meredith también quiere jugar!"
             -   option: |-
-                    Meredith chooses scissors
-                    Kelly chooses rock
-                feedback: "So close! But Kelly is first in the list, so she goes first"
+                    Meredith elige tijeras
+                    Kelly elige piedra
+                feedback: "¡Muy cerca! Pero Kelly es la primera en la lista, así que ella elige primero"
             -   option: |-
-                    Meredith chooses paper
-                feedback: "Kelly wants to play too!"
+                    Meredith elige papel
+                feedback: "¡Kelly también quiere jugar!"
             -   option: |-
-                    Kelly chooses paper
-                    Meredith chooses scissors
+                    Kelly elige papel
+                    Meredith elige tijeras
                 feedback: "¡Increíble!"
             correct_answer: "D"
-            hint: "Each player will pick an option. The player that's first on the list will go first."
+            hint: "Cada jugador elegirá una opción. El jugador que esté primero en la lista escogerá primero."
             question_score: '10'
         7:
-            question_text: "What line should be on the _?_ in this code that decides what these people will have for dinner?"
+            question_text: "¿Qué línea debería ir en el _ en este código que decide lo que cenarán estas personas?"
             code: |-
                 names = Ron, Leslie, April, Andy
                 food = pasta, fries, salad
@@ -2387,27 +2387,27 @@ levels:
                     ```
                     {for} name {in} names
                     ```
-                feedback: "You are on fire!"
+                feedback: "¡Estás en racha!"
             -   option: |
                     ```
                     {for} names {in} name
                     ```
-                feedback: "No it should be for each name in the list nameS, so the other way around"
+                feedback: "No, debería ser para cada nombre en la lista de nombres, así que al revés"
             -   option: |
                     ```
                     {for} food {in} food
                     ```
-                feedback: "Each name should be told what they will have for dinner."
+                feedback: "Hay que decir a cada uno lo que va a cenar."
             -   option: |
                     ```
                     {for} name {in} food
                     ```
-                feedback: "Each name should be told what they will have for dinner."
+                feedback: "Hay que decir a cada uno lo que va a cenar."
             correct_answer: "A"
-            hint: "Each name should be told what they will have for dinner."
+            hint: "Hay que decir a cada uno lo que va a cenar."
             question_score: '10'
         8:
-            question_text: "What should be on the _?_ in this code that decides which color shirt you get?"
+            question_text: "¿Qué debería ir en el _ en este código que decide qué color de camiseta recibes?"
             code: |-
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple
@@ -2423,22 +2423,22 @@ levels:
                     ```
                     name 'gets a ' colors {at} {random} ' shirt'
                     ```
-                feedback: "Great job! This was a hard one!"
+                feedback: "¡Gran trabajo! Este era difícil!"
             -   option: |
                     ```
                     names 'gets a ' color {at} {random} ' shirt'
                     ```
-                feedback: "You want each name printed. So the first word should not be names but..."
+                feedback: "Quieres que se imprima cada nombre. Así que la primera palabra no debería ser nombres pero..."
             -   option: |
                     ```
-                    'people gets a colors shirt'
+                    gente ' recibe una camiseta de colores'
                     ```
-                feedback: "There is no variable named people.."
+                feedback: "No hay una variable llamada gente.."
             correct_answer: "B"
-            hint: "Mind the quotation marks and the names of the variables"
+            hint: "Cuidado con las comillas y los nombres de las variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
+            question_text: "¿Cuál será la primera pregunta que Hedy te preguntará cuando ejecutes el programa?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
@@ -2447,84 +2447,84 @@ levels:
                         food = {ask} name ', what would you like to eat as your ' course '?'
                         {print} name ' orders ' food ' as their ' course
             mp_choice_options:
-            -   option: "Timon, what would you like to eat as your appetizer?"
-                feedback: "Perfect!"
-            -   option: "Onno, what would you like to eat as your appetizer?"
-                feedback: "Timon is first on the list!"
-            -   option: "Timon, what would you like to eat as your dessert?"
-                feedback: "Appetizers are first in the list"
-            -   option: "You don't know that. Hedy will choose `{at} {random}`."
-                feedback: "There is no `{at} {random}` in this code..."
+            -   option: "Timón, ¿qué te gustaría comer como aperitivo?"
+                feedback: "¡Perfecto!"
+            -   option: "Onno, qué te gustaría comer de aperitivo?"
+                feedback: "¡Timón es el primero en la lista!"
+            -   option: "Timón, qué te gustaría comer de postre?"
+                feedback: "Aperitivos son los primeros en la lista"
+            -   option: "No sabes eso. Hedy elegirá `{at} {random}`."
+                feedback: "No hay `{at} {random}` en este código..."
             correct_answer: "A"
-            hint: "The first options from both lists are chosen."
+            hint: "Se eligen las primeras opciones de ambas listas."
             question_score: '10'
         10:
-            question_text: "What is true about this code?"
+            question_text: "¿Qué hay de cierto en este código?"
             code: |-
                 prices = 1 million dollars, car, sandwich
                 names = Bob, Patrick, Sandy, Larry
                 {for} price {in} prices
                     {print} 'The ' price 'is won by ' names {at} {random}
             mp_choice_options:
-            -   option: "Everybody will always win a price."
-                feedback: "That is not true, you could end up without a price."
-            -   option: "All the prices always go to one single person."
-                feedback: "That is not true. All the prices are given away, but to random people"
-            -   option: "Larry will never win a price"
-                feedback: "That is not true. Larry has the same odds as the others"
-            -   option: "Someone might win with two prices"
-                feedback: "You get it!"
+            -   option: "Todo el mundo siempre ganará un premio."
+                feedback: "Eso no es cierto, puede que acabes sin llevarte un premio."
+            -   option: "Todos los premios siempre van a la misma persona."
+                feedback: "Eso no es cierto. Todos los premios se reparten, pero a gente al azar"
+            -   option: "Larry nunca ganará con un premio"
+                feedback: "Eso no es cierto. Larry tiene las mismas probabilidades que los otros"
+            -   option: "Alguno podría ganar con dos premios"
+                feedback: "¡Lo conseguiste!"
             correct_answer: "D"
-            hint: "Try to imagine the output of this code."
+            hint: "Intenta imaginar el resultado de este código."
             question_score: '10'
     12:
         1:
             mp_choice_options:
-            -   feedback: Don't forget the first line of code!
+            -   feedback: ¡No olvides la primera línea de código!
                 option: "5\n"
             -   option: "3.5 + 1.5\n"
-                feedback: This is not the one!
+                feedback: ¡Este no es el uno!
             -   option: "thee and a half plus one and a half is...\nfive\n"
-                feedback: Take a close look at the second line...
+                feedback: Fíjate bien en la segunda línea...
             -   option: "three and a half plus one and a half is...\n5\n"
                 feedback: ¡Gran trabajo!
-            question_text: Which output is correct?
+            question_text: ¿Qué resultado es correcto?
             code: "print 'three and a half plus one and a half is...'\nprint 3.5 + 1.5"
             correct_answer: D
-            hint: Both lines are printed!
+            hint: ¡Se imprimen ambas líneas!
             question_score: '10'
         2:
             question_score: '10'
-            question_text: Which of these codes is correct?
+            question_text: ¿Cuál de estos códigos es correcto?
             mp_choice_options:
             -   option: "```\nflavors is vanilla, strawberry, chocolate\nprint 'I would like a ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
+                feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             -   option: "```\n'flavors = vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
+                feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```"
-                feedback: Alright!
+                feedback: ¡Muy bien!
             -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\nprint 'I would like a ' flavors at random ' cake.'\n```\n"
-                feedback: All the different values of flavors should be in quotation marks.
+                feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             correct_answer: C
-            hint: The second line is the same in each code, pay attention to the first line
+            hint: La segunda línea es la misma en cada código, presta atención a la primera línea
         3:
             question_score: '10'
             question_text: ¿Qué le pasa a este código?
             code: "favorite_animal = ask 'What is your favorite animal?'\nprint 'I like ' favoriteanimal ' too!'"
             mp_choice_options:
-            -   option: "The name of the variable is different in line 1 than in line 2.\n"
+            -   option: "El nombre de la variable es diferente en la línea 1 que en la línea 2.\n"
                 feedback: ¡Correcto!
-            -   option: "The quotation marks aren't used correctly in line 2\n"
-                feedback: That's not true
-            -   option: "You can't use the = sign when using an ask command\n"
-                feedback: That's not true
-            -   option: "Nothing is wrong.\n"
-                feedback: That's not true
+            -   option: "No se han utilizado correctamente las comillas en la línea 2\n"
+                feedback: Eso no es cierto
+            -   option: "No puedes usar el signo = al usar un comando {ask}\n"
+                feedback: Eso no es cierto
+            -   option: "No ocurre nada.\n"
+                feedback: Eso no es cierto
             correct_answer: A
-            hint: The quotation marks are used correctly
+            hint: Las comillas se han utilizado correctamente
         5:
             correct_answer: B
-            question_text: What output does Agent007 get when they put in the correct password?
+            question_text: ¿Qué resultado tendrá el Agente007 cuando pongan la contraseña correcta?
             code: "name is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the train station '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b"
             mp_choice_options:
             -   option: Ve a la estación de trenes hoy a las 10.00
@@ -2583,17 +2583,17 @@ levels:
             correct_answer: B
             hint: 7 dividido por 2 es 3.5
         4:
-            question_text: In which lines are quotation marks needed to get the code to work?
+            question_text: ¿En qué líneas se necesitan comillas para conseguir que el código funcione?
             code: "print Welcome to the online shoe shop\ncategory = ask What kind of shoes are you looking for?\nif category = high heels\n  print High heels are 50% off now!"
             mp_choice_options:
-            -   option: "Line 1 and 2\n"
+            -   option: "Líneas 1 y 2\n"
                 feedback: No
-            -   option: "Line 1, 2 and 3\n"
+            -   option: "Líneas 1, 2 y 3\n"
                 feedback: No
-            -   option: "Line 1, 2 and 4\n"
+            -   option: "Líneas 1, 2 y 4\n"
                 feedback: No
-            -   option: "All of the lines\n"
-                feedback: Perfect!
+            -   option: "Todas las líneas\n"
+                feedback: ¡Perfecto!
             correct_answer: D
             hint: ¿La línea 3 también necesita comillas?
             question_score: '10'
@@ -2631,7 +2631,7 @@ levels:
         4:
             question_score: '10'
             question_text: ¿Qué línea de código debe seguir a esta línea en el juego de piedra-papel-tijeras?
-            code: if computer_choice is 'rock' and your_choice is 'paper'
+            code: "{if} ordenador_opcion {is} 'piedra' {and} tu_opcion {is} 'papel'"
             mp_choice_options:
             -   option: "```\n{print} 'ganas'\n```"
                 feedback: ¡Ganas!
@@ -2916,15 +2916,15 @@ levels:
         8:
             mp_choice_options:
             -   option: Debes ser más alto de 120 cm para montar en la montaña rusa
-                feedback: ¡Verdadero!
+                feedback: '> significa mayor que'
             -   feedback: Si mides 120 cm no subirás
                 option: Debes ser más alto de 119 cm para montar en la montaña rusa
-            -   option: Debes ser más bajo que 120 cm para montar en la montaña rusa
-                feedback: '> significa mayor que'
+            -   option: Debes medir 120 cm o menos para montar en la montaña rusa
+                feedback: '¡Cierto!'
             -   option: No hay restricciones de altura para montar en una montaña rusa
                 feedback: There are.
-            correct_answer: A
-            hint: '> significa mayor que'
+            correct_answer: C
+            hint: 'Céntrate en qué valores de longitud están permitidos'
             question_score: '10'
             question_text: ¿Qué sentencia es verdadera sobre esta montaña rusa?
             code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
