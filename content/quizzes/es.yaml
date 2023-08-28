@@ -1914,10 +1914,10 @@ levels:
                     ```
                 feedback: "Try again"
             correct_answer: "A"
-            hint: "After each `{if}` command, the line below should indent"
+            hint: "Tras cada comando `{if}`, la línea de debajo debe tener sangría"
             question_score: '10'
         8:
-            question_text: "What is wrong is this code?"
+            question_text: "¿Qué falla en este código?"
             code: |-
                 age = {ask} 'Happy Birthday! How old are you?'
                 singing = {ask} 'Would you like us to sing?'
@@ -1925,28 +1925,28 @@ levels:
                         {repeat} years {times}
                         {print} 'Hip Hip Hooray'
             mp_choice_options:
-            -   option: "You can't put two questions in a row"
-                feedback: "Yes you can."
+            -   option: "No puedes poner dos preguntas seguidas"
+                feedback: "Sí puedes."
             -   option: "The variable called 'age' is later on used as 'years'"
-                feedback: "Keen eye! Good job!"
+                feedback: "¡Buen ojo! ¡Buen trabajo!"
             -   option: "You're not allowed to start with 8 spaces, like line 4 and 5 do"
-                feedback: "You actually must start like that."
+                feedback: "De hecho debes empezar así."
             -   option: "A code must always start with a `{print}` command in the first line"
-                feedback: "That's not true."
+                feedback: "Eso no es cierto."
             correct_answer: "B"
-            hint: "The indentation is done right this time"
+            hint: "Esta vez la sangría está bien hecha"
             question_score: '10'
         9:
-            question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
+            question_text: "¿Cuántos comandos `{if}` se pueden poner dentro de otro comando `{if}`?"
             mp_choice_options:
-            -   option: "None, that is not allowed"
-                feedback: "You are allowed to"
-            -   option: "Only 1"
-                feedback: "You could use more if you like"
+            -   option: "Ninguno, no está permitido"
+                feedback: "Tienes permiso"
+            -   option: "Sólo 1"
+                feedback: "Puedes usar más si quieres"
             -   option: "3"
-                feedback: "You could use more if you like"
+                feedback: "Puedes usar más si quieres"
             -   option: "Infinite, as long as you keep using indentation correctly"
-                feedback: "That is true"
+                feedback: "Eso es cierto"
             correct_answer: "D"
             hint: "You can put an `{if}` command inside an `{if}` command."
             question_score: '10'
@@ -1957,22 +1957,22 @@ levels:
                 2 {if} nivel {is} 9
                 3 {print} ¡Gran trabajo!
             mp_choice_options:
-            -   option: "All lines should start with 4 spaces"
-                feedback: "Only line 2 and 3 start with spaces"
-            -   option: "Line 2 and 3 should start with 4 spaces"
-                feedback: "Line 3 should start with 8"
-            -   option: "Line 2 and 3 should start with 8 spaces"
-                feedback: "Line 2 should start with 4"
-            -   option: "line 2 should atart with 4 spaces and line 3 with 8"
-                feedback: "You are correct!"
+            -   option: "Todas las líneas deberían empezar con 4 espacios"
+                feedback: "Sólo las líneas 2 y 3 deberían empezar con espacios"
+            -   option: "Las líneas 2 y 3 deberían empezar con 4 espacios"
+                feedback: "La línea 3 debería empezar con 8"
+            -   option: "Las líneas 2 y 3 deberían empezar con 8 espacios"
+                feedback: "La línea 2 debería empezar con 4"
+            -   option: "la línea 2 debería empezar con 4 espacios y la línea 3 con 8"
+                feedback: "¡Tienes razón!"
             correct_answer: "D"
-            hint: "The first line doens't start with any spaces"
+            hint: "La primera línea no empieza con ningún espacio"
             question_score: '10'
     11:
         1:
             question_text: "What word should be at the place of the question mark?"
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |
@@ -1981,19 +1981,13 @@ levels:
                     ```
                 feedback: "No"
             -   option: |
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: "Correct"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "No"
             -   option: |
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: "No"
             correct_answer: "B"
             hint: "What did you learn in this level?"
@@ -2016,7 +2010,7 @@ levels:
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
         3:
-            question_text: "Which code was used to get this output?"
+            question_text: "¿Qué código se usó para conseguir este resultado?"
             output: |-
                 1
                 2
@@ -2116,24 +2110,24 @@ levels:
             hint: "There is something wrong with the indention"
             question_score: '10'
         6:
-            question_text: "How many times does the word Hello appear on your screen when you run the code?"
+            question_text: "¿Cuántas veces aparece la palabra Hola en tu pantalla cuando ejecutes el código?"
             code: |-
                 {for} i {in} {range} 0 {to} 2
                     {print} 'Hello'
             mp_choice_options:
-            -   option: "1 time"
+            -   option: "1 vez"
                 feedback: "No"
-            -   option: "2 times"
+            -   option: "2 veces"
                 feedback: "No"
-            -   option: "3 times"
+            -   option: "3 veces"
                 feedback: "¡Eso es!"
-            -   option: "Never"
+            -   option: "Nunca"
                 feedback: "No"
             correct_answer: "C"
-            hint: "0 also counts. So 0,1,2 that's 3 times."
+            hint: "0 también cuenta. Así que 0,1,2 son 3 veces."
             question_score: '10'
         7:
-            question_text: "What should be on the place of the question mark?"
+            question_text: "¿Qué debería ir en lugar del interrogante?"
             code: |-
                 {print} 'Welcome to Hedys diner'
                 people is {ask} 'How many people will be eating here tonight?'
@@ -2145,12 +2139,12 @@ levels:
                     ```
                     {for} i {in} {range} 0 {to} 3
                     ```
-                feedback: "There's not always 3 people"
+                feedback: "No siempre hay 3 personas"
             -   option: |
                     ```
-                    {for} i {in} {range} 1 {to} guests
+                    {for} i {in} {range} 1 {to} invitados
                     ```
-                feedback: "The variable is not named guests"
+                feedback: "La variable no se llama invitados"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} people
@@ -2160,29 +2154,29 @@ levels:
                     ```
                     {for} i {in} {range} 0 {to} people
                     ```
-                feedback: "That's one order too many!"
+                feedback: "¡Es un pedido de más!"
             correct_answer: "C"
-            hint: "Use the variable 'people'"
+            hint: "Usa la variable 'gente'"
             question_score: '10'
         8:
-            question_text: "What will be the output from this code?"
+            question_text: "¿Cuál será el resultado de este código?"
             code: |-
                 {for} i {in} {range} 23 {to} 25
                     {print} 'hi'
             mp_choice_options:
             -   option: "23\n24\n25"
-                feedback: "The numbers don't appear. It doesn't say `{print}` i."
+                feedback: "El número no aparece. No dice `{print}` i."
             -   option: "23 hi 24 hi 25 hi"
-                feedback: "The numbers don't appear. It doesn't say `{print}` i"
+                feedback: "El número no aparece. No dice `{print}` i"
             -   option: "hi\nhi\nhi"
                 feedback: "Correcto"
-            -   option: "The word 'hi' will appear 25 times in a row."
-                feedback: "No it will only appear 3 times."
+            -   option: "La palabra 'hola' aparecerá 25 veces seguidas."
+                feedback: "No, sólo aparecerá 3 veces."
             correct_answer: "C"
-            hint: "It doesn't say `{print}` i"
+            hint: "No dice `{print}` i"
             question_score: '10'
         9:
-            question_text: "How many times does Hedy chant Hip Hip Hooray?"
+            question_text: "¿Cuántas veces Hedy canta Hip Hip Hurra?"
             code: |-
                 age = {ask} 'How old are you?'
                 {for} i {in} {range} 1 {to} age
@@ -2194,13 +2188,13 @@ levels:
                 feedback: "Inténtalo de nuevo"
             -   option: "Nunca"
                 feedback: "Inténtalo de nuevo"
-            -   option: "That depends on how old you are"
+            -   option: "Que depende de cuantos años tienes"
                 feedback: "¡Eso es!"
             correct_answer: "D"
-            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` edad"
             question_score: '10'
         10:
-            question_text: "Which code belongs to this output?"
+            question_text: "¿Qué código pertenece a este resultado?"
             output: |-
                 Baby shark tututudutudu
                 Baby shark tututudutudu
