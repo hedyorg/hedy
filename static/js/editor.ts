@@ -10,20 +10,20 @@ export interface HedyEditorCreator {
    * event handlers
    * @param $editor reference to the div that contains the main editor
    */
-  initializeMainEditor: ($editor: JQuery) => HedyEditor | undefined;
+  initializeMainEditor($editor: JQuery): HedyEditor | undefined;
   /**
    * 
    * @param element the element that will contain this editor
    * @param isReadOnly to decide weather to remove the cursor
    * @param isMainEditor should we show the line numbers
    */
-  turnIntoEditor: (element: HTMLElement, isReadOnly: boolean, isMainEditor: boolean) => HedyEditor;
+  turnIntoEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor: boolean): HedyEditor;
 
   /**
    * Ininitialize an editor that appears in a modal
    * @param $editor reference to the div that contains this editor
    */
-  initializeModalEditor: ($editor: JQuery) => HedyEditor;
+  initializeModalEditor($editor: JQuery): HedyEditor;
 }
 
 export interface HedyEditor {
@@ -35,58 +35,58 @@ export interface HedyEditor {
    * Set the highlither rules for a particular level
    * @param level      
    */
-  setHighliterForLevel: (level: number) => void;
+  setHighliterForLevel(level: number): void;
 
   /**
    * @returns the string of the current program in the editor
    */
-  getValue: () => string;
+  getValue(): string;
 
   /**     
    * @returns if the editor is set to read-only mode
    */
-  isReadOnly: () => boolean;
+  isReadOnly(): boolean;
 
   /**
    * Sets the editor contents.
    * @param content the content that wants to be set in the editor
    */
-  setValue: (content: string) => void;
+  setValue(content: string): void;
 
   /**
    * Trim trailing whitespaces
    */
-  trimTrailingSpace: () => void
+  trimTrailingSpace(): void
 
   /**
    * Resizes the editor after changing its size programatically
    */
-  resize: () => void;
+  resize(): void;
 
   /**
    * Focuses the text area for the current editor
    */
-  focus: () => void;
+  focus(): void;
 
   /**
    * Clears the errors and annotations in the editor
    */
-  clearErrors: () => void;
+  clearErrors(): void;
 
   /**     
    * Moves to the cursor to the end of the current file
    */
-  moveCursorToEndOfFile: () => void;
+  moveCursorToEndOfFile(): void;
 
   /**
    * Clears the selected text
    */
-  clearSelection: () => void;
+  clearSelection(): void;
 
   /**
   * Removes all breakpoints on the rows.
   **/
-  clearBreakpoints: ()  => void;
+  clearBreakpoints(): void;
 
   /**
    * Sets the main editor and also its options
@@ -96,14 +96,14 @@ export interface HedyEditor {
   /**
    * Returns the breakpoints as a map-to-css-class
    */
-  getBreakpoints: () => Breakpoints;
+  getBreakpoints(): Breakpoints;
 
   /**
    * Sets the mode of the editor to read-only or editable depending
    * on the paramater
    * @param isReadMode whether the editor will be set to read only mode or not
    */
-  setEditorMode: (isReadMode: boolean) => void;
+  setEditorMode(isReadMode: boolean): void;
   
   markers: Markers;
 }
