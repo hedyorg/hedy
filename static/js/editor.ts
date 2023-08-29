@@ -32,26 +32,19 @@ export interface HedyEditor {
  */
   askPromptOpen: boolean;
   /**
+   * The contents of the editor
+   */
+  contents: string;
+  /**
    * Set the highlither rules for a particular level
    * @param level      
    */
   setHighliterForLevel(level: number): void;
 
-  /**
-   * @returns the string of the current program in the editor
-   */
-  getValue(): string;
-
   /**     
    * @returns if the editor is set to read-only mode
    */
   isReadOnly(): boolean;
-
-  /**
-   * Sets the editor contents.
-   * @param content the content that wants to be set in the editor
-   */
-  setValue(content: string): void;
 
   /**
    * Trim trailing whitespaces

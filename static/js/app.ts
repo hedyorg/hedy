@@ -271,7 +271,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         // Create this example editor
         const exampleEditor = editorCreator.initializeExampleEditor(preview)
         // Strip trailing newline, it renders better
-        exampleEditor.setValue(exampleEditor.getValue().trimRight());
+        exampleEditor.contents = exampleEditor.contents.trimRight();      
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
@@ -282,7 +282,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
           }
           $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
             if (!theGlobalEditor?.isReadOnly()) {
-              theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+              theGlobalEditor.contents = exampleEditor.contents + '\n';
             }
             update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
             stopit();
@@ -586,7 +586,7 @@ export function tryPaletteCode(exampleCode: string) {
     return;
   }
 
-  theGlobalEditor.setValue(exampleCode + '\n');
+  theGlobalEditor.contents = exampleCode + '\n';
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -1453,7 +1453,7 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
     });
 
     if (response.success) {
-      theGlobalEditor.setValue(response.code);
+      theGlobalEditor.contents = response.code;
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
@@ -1675,7 +1675,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor?.setValue(adventure.start_code);
+    theGlobalEditor.contents = adventure.start_code;    
   }
 }
 
@@ -1774,7 +1774,7 @@ function programNeedsSaving(adventureName: string) {
   // We need to save if the content changed, OR if we have the opportunity to
   // save a program that was loaded from local storage to the server.
   // (Submitted programs are never saved again).
-  const programChanged = theGlobalEditor.getValue() !== adventure.start_code;
+  const programChanged = theGlobalEditor.contents !== adventure.start_code;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
@@ -1784,7 +1784,7 @@ function programNeedsSaving(adventureName: string) {
   // "Run" button will always save regardless of size.
   const wasSavedBefore = adventure.save_info !== undefined;
   const suspiciouslySmallFraction = 0.5;
-  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.getValue().length < adventure.start_code.length * suspiciouslySmallFraction;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.start_code.length * suspiciouslySmallFraction;
 
   return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
@@ -1815,7 +1815,7 @@ async function saveIfNecessary() {
 
   console.info('Saving program automatically...');
 
-  const code = theGlobalEditor.getValue();
+  const code = theGlobalEditor.contents;
   const saveName = saveNameFromInput();
 
 

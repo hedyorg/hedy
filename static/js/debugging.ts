@@ -315,7 +315,7 @@ function markCurrentDebuggerLine() {
 export function returnLinesWithoutBreakpoints(editor: HedyEditor) {
 
   // ignore the lines with a breakpoint in it.
-  let code = editor.getValue();
+  let code = editor.contents;
   const breakpoints = editor.getBreakpoints();
   const storage = window.localStorage;
   const debugLines = storage.getItem('debugLine');

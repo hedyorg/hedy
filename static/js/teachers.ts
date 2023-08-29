@@ -255,7 +255,7 @@ function show_preview(content: string) {
         const exampleEditor = editorCreator.turnIntoEditor(preview, true)
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
-        exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''));
+        exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
         exampleEditor.setHighliterForLevel(parseInt(level, 10));                
     }
 }

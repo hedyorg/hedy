@@ -181,8 +181,16 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * @returns the string of the current program in the editor
    */
-  getValue(): string { 
+  public get contents(): string { 
     return this._editor!.getValue();
+  }
+
+  /**
+   * Sets the editor contents.
+   * @param content the content that wants to be set in the editor
+   */
+  public set contents(content: string) {
+    this._editor?.setValue(content, MOVE_CURSOR_TO_END);
   }
 
   /**     
@@ -192,13 +200,6 @@ export class HedyAceEditor implements HedyEditor {
     return this._editor!.getReadOnly();
   }
 
-  /**
-   * Sets the editor contents.
-   * @param content the content that wants to be set in the editor
-   */
-  setValue(content: string): void {
-    this._editor?.setValue(content, MOVE_CURSOR_TO_END);
-  }
 
   /**
    * Trim trailing whitespaces
