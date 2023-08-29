@@ -168,6 +168,7 @@ export class HedyAceEditor implements HedyEditor {
   private _editor?: AceAjax.Editor;
   private _markers?: Markers
   askPromptOpen: boolean = false;
+  isReadOnly: boolean = false;
 
   /**
  * Set the highlither rules for a particular level
@@ -196,10 +197,17 @@ export class HedyAceEditor implements HedyEditor {
   /**     
    * @returns if the editor is set to read-only mode
    */
-  isReadOnly(): boolean {
-    return this._editor!.getReadOnly();
+  public get getIsReadOnly(): boolean {
+    return this.isReadOnly;
   }
-
+  
+  /**
+   * Sets the read mode of the editor
+   */
+  public set setIsreadOnly(isReadMode: boolean) {
+    this._editor?.setReadOnly(isReadMode);
+    this.isReadOnly = isReadMode;
+  }
 
   /**
    * Trim trailing whitespaces
@@ -329,10 +337,6 @@ export class HedyAceEditor implements HedyEditor {
  */
   getBreakpoints(): Breakpoints {
     return this._editor?.session.getBreakpoints() as unknown as Breakpoints;
-  }
-
-  setEditorMode(isReadMode: boolean): void {
-    this._editor?.setReadOnly(isReadMode);
   }
 
   getHighlighter(level: number): string {

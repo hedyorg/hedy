@@ -36,15 +36,14 @@ export interface HedyEditor {
    */
   contents: string;
   /**
+   * if the editor is set to read-only mode
+   */
+  isReadOnly: boolean;
+  /**
    * Set the highlither rules for a particular level
-   * @param level      
+   * @param level
    */
   setHighliterForLevel(level: number): void;
-
-  /**     
-   * @returns if the editor is set to read-only mode
-   */
-  isReadOnly(): boolean;
 
   /**
    * Trim trailing whitespaces
@@ -90,13 +89,6 @@ export interface HedyEditor {
    * Returns the breakpoints as a map-to-css-class
    */
   getBreakpoints(): Breakpoints;
-
-  /**
-   * Sets the mode of the editor to read-only or editable depending
-   * on the paramater
-   * @param isReadMode whether the editor will be set to read only mode or not
-   */
-  setEditorMode(isReadMode: boolean): void;
   
   markers: Markers;
 }

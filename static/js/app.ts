@@ -281,7 +281,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             symbol = "⇤";
           }
           $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-            if (!theGlobalEditor?.isReadOnly()) {
+            if (!theGlobalEditor?.isReadOnly) {
               theGlobalEditor.contents = exampleEditor.contents + '\n';
             }
             update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
@@ -582,7 +582,7 @@ function removeBulb(){
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (theGlobalEditor?.isReadOnly()) {
+  if (theGlobalEditor?.isReadOnly) {
     return;
   }
 
@@ -1626,7 +1626,7 @@ function updatePageElements() {
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
-  theGlobalEditor.setEditorMode(false);
+  theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
@@ -1655,7 +1655,7 @@ function updatePageElements() {
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
-    theGlobalEditor.setEditorMode(isSubmitted);
+    theGlobalEditor.isReadOnly = isSubmitted;
   }
 }
 
