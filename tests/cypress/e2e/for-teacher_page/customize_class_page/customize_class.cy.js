@@ -10,8 +10,10 @@ describe('customize class page', () => {
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
+      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
       cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
+      cy.wait('@restoreCustomizations');
     });
 
     it('checks the option checkboxes', () => {
