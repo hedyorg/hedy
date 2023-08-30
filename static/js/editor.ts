@@ -46,11 +46,6 @@ export interface HedyEditor {
   setHighliterForLevel(level: number): void;
 
   /**
-   * Trim trailing whitespaces
-   */
-  trimTrailingSpace(): void
-
-  /**
    * Resizes the editor after changing its size programatically
    */
   resize(): void;

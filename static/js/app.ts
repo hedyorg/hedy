@@ -1298,11 +1298,7 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-  
-  theGlobalEditor.trimTrailingSpace();
-  const code = returnLinesWithoutBreakpoints(theGlobalEditor);
-
-  return code;
+  return returnLinesWithoutBreakpoints(theGlobalEditor);
 }
 
 export function confetti_cannon(){
