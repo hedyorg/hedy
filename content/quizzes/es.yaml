@@ -1015,12 +1015,12 @@ levels:
         9:
             question_text: "¿Qué puerta debes elegir para escapar?"
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} '¡Escapa de la casa encantada!'
+                {print} 'Hay 3 puertas delante de ti'
+                puerta {is} {ask} '¿Qué puerta eliges?'
+                monstruos {is} vampiro, hombre lobo, araña gigante
+                {if} puerta {is} 2 {print} '¡Sí, puedes escapar!'
+                {else} {print} 'Eres devorado por un... ' monstruos {at} {random}
             mp_choice_options:
             -   option: "1"
                 feedback: "¡Mala elección! Se te han comido"
@@ -1036,12 +1036,12 @@ levels:
         10:
             question_text: "¿Qué monstruo se encuentra detrás de la puerta 1?"
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} '¡Escapa de la casa encantada!'
+                {print} 'Hay 3 puertas delante de ti'
+                puerta {is} {ask} '¿Qué puerta eliges?'
+                monstruos {is} vampiro, hombre lobo, araña gigante
+                {if} puerta {is} 2 {print} '¡Sí, puedes escapar!'
+                {else} {print} 'Eres devorado por un... ' monstruos {at} {random}
             mp_choice_options:
             -   option: "Hedy elige un monstruo aleatorio cada vez."
                 feedback: "¡Increible!"
@@ -1121,8 +1121,8 @@ levels:
         5:
             question_text: "Si 5 personas comen en este restaurante, ¿cuánto tienen que pagar en total?"
             code: |-
-                {print} '¡Bienvenido a Hedys!'
-                gente = {ask} '¿Cuánta gente van a cenar con nosotros esta noche?'
+                {print} '¡Bienvenidos a Hedys!'
+                gente = {ask} '¿Cuántas personas van a comer con nosotros esta noche?'
                 precio = gente * 10
                 {print} 'Serán ' precio 'dólares por favor'
             mp_choice_options:
@@ -1160,15 +1160,15 @@ levels:
         7:
             question_text: "¿Por qué la línea 7 dice 'precio es precio + 3' en vez de 'precio es 3'?"
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
-                price = 0
-                {if} food {is} hamburger price = price + 15
-                {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
-                {if} drinks {is} coke price = price + 3
-                {if} drinks {is} water price = price + 1
-                {print} price ' dollars please'
+                {print} 'Bienvenido a la cena de Hedys'
+                comida = {ask} '¿Qué le gustaría comer?'
+                precio = 0
+                {if} comida {is} hamburguesa precio = precio + 15
+                {if} comida {is} patatas fritas precio = precio + 6
+                bebidas es {ask} '¿Qué le gustaría beber?'
+                {if} bebidas {is} refresco precio = precio + 3
+                {if} bebidas {is} agua precio = precio + 1
+                {print} precio ' dólares por favor'
             mp_choice_options:
             -   option: "También podría haber sido `price = 3`."
                 feedback: "No, eso no es cierto. Hedy tiene que añadir 3 dólates al total."
@@ -1203,14 +1203,14 @@ levels:
         9:
             question_text: "Imagina que te gusta el fútbol un 10, te has comido 2 plátanos y te has lavado las manos 3 veces hoy. ¿Cómo de listo se cree que eres el necio adivino?"
             code: |-
-                {print} 'Im Hedy the silly fortune teller'
-                {print} 'I will predict how smart you are!'
-                football = {ask} 'On a scale of 0 to 10 how much do you love football?'
-                bananas = {ask} 'How many bananas have you eaten this week?'
-                hygiene = {ask} 'How many times did you wash your hands today??'
-                result = bananas + hygiene
-                result = result * football
-                {print} 'You are ' result 'percent smart.'
+                {print} 'Soy Hedy el adivino de tontos'
+                {print} '¡Voy a predecir cómo eres de inteligente!'
+                fútbol = {ask} 'En una escala de 0 a 10, ¿cuánto amas el fútbol?'
+                plátanos = {ask} '¿Cuántos plátanos te has comido esta semana?'
+                higiene = {ask} '¿Cuántas veces te has lavado las manos hoy??'
+                resultado = plátanos + higiene
+                resultado = resultado * fútbol
+                {print} 'Eres ' resultado ' por ciento inteligente.'
             mp_choice_options:
             -   option: "10%"
                 feedback: "(2 plátanos + 3 higiene) * 10 fútbol = 5*10 =?"
@@ -1640,41 +1640,41 @@ levels:
             -   option: |
                     ```
                     {if} respuesta {is} 32
-                       {print} 'Tienes...'
+                       {print} 'Estas...'
                           {sleep}
-                              {print} '¡razón!'
+                              {print} '¡en lo cierto!'
                           {else}
-                              {print} '¡Te equivocas!'
+                              {print} '¡Estás equivocado!'
                     ```
                 feedback: "¡Te equivocas!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} respuesta {is} 32
+                    {print} 'Estas...'
+                    {sleep}
+                    {print} '¡en lo cierto!'
                     {else}
-                    {print} You are wrong!
+                    {print} '¡Estás equivocado!'
                     ```
                 feedback: "¡Te equivocas!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} respuesta {is} 32
+                        {print} 'Estas...'
+                        {sleep}
+                        {print} '¡en lo cierto!'
                     {else}
-                        {print} You are wrong!
+                        {print} '¡Estás equivocado!'
                     ```
                 feedback: "¡Tienes... razón!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} respuesta {is} 32
+                        {print} 'Estas...'
+                        {sleep}
+                    {print} '¡en lo cierto!'
                     {else}
-                        {print} You are wrong!
+                        {print} '¡Estás equivocado!'
                     ```
                 feedback: "¡Te equivocas!"
             correct_answer: "C"
@@ -1683,14 +1683,14 @@ levels:
         9:
             question_text: "¿Qué línea(s) en este código deberían empezar con 4 espacios?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                1 música = {ask} '¿Cuál es tu género musical favorito?'
+                2 {if} música {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
             mp_choice_options:
             -   option: "Líneas 2 y 4"
-                feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
+                feedback: "Las líneas tras el comando `{if}` y `{else}` debería empezar con 4 espacios"
             -   option: "Sólo la línea 3"
                 feedback: "No sólo 3..."
             -   option: "Líneas 3, 4 y 5"
@@ -1703,14 +1703,14 @@ levels:
         10:
             question_text: "¿Qué afirmación es cierta?"
             code: |-
-                1 level = {ask} 'What level are you on?"
-                2 {if} level {is} 8
-                3 {print} Great job!
+                1 nivel = {ask} '¿En qué nivel estás?'
+                2 {if} nivel {is} 8
+                3 {print} '¡Gran trabajo!'
             mp_choice_options:
             -   option: "Todas las líneas deben empezar con 4 espacios"
                 feedback: "Eso no es cierto"
             -   option: "Las líneas 2 y 3 deberían empezar con 4 espacios"
-                feedback: "That's not true"
+                feedback: "Eso no es cierto"
             -   option: "La línea 2 debería empezar con 4 espacios"
                 feedback: "Eso no es cierto"
             -   option: "La línea 3 debería empezar con 4 espacios"
@@ -1723,14 +1723,14 @@ levels:
             question_text: "¿Qué le pasa a este código?"
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                   comida = {ask} '¿Qué te gustaría comer?'
+                   {if} comida {is} patatas fritas
+                       salsa = {ask} '¿Qué salsa quieres?'
+                       {print} 'Unas patatas fritas con ' salsa
+                   {if} comida {is} pizza
+                       ingrediente = {ask} '¿Qué ingrediente le gustaría?'
+                       {print} 'Una pizza con ' ingrediente
+                {print} 'Gracias por su pedido'
             mp_choice_options:
             -   option: "¡Nada, este código es correcto!"
                 feedback: "¡Eso es!"
@@ -1746,14 +1746,14 @@ levels:
         2:
             question_text: "¿Qué se imprimirá tras introducir la contraseña correcta?"
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                contraseña = {ask} '¿Cuál es la contraseña?'
+                contraseña_correcta = Hedy
+                {if} contraseña {is} contraseña_correcta
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} ''Buen trabajo!'
+                        {print} '¡Puedes usar el ordenador!'
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} 'El ordenador explotará en 5... 4... 3... 2... 1...'
             mp_choice_options:
             -   option: "Good job!\nGood job!"
                 feedback: "¡No es eso!"
@@ -1769,20 +1769,20 @@ levels:
         3:
             question_text: "¿Qué caso deberías elegir para ganar un millón de dólares?"
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} '¡Elige la caja correcta y gana!'
+                caja = {ask} '¿Qué caja elegirás? 1 o 2?'
+                {if} caja {is} 1
+                     acción = {ask} '¿La abres o la vendes?'
+                         {if} acción {is} vender
+                             {print} 'Vendes tu caja por 10 dólares'
+                         {if} acción {is} abrir
+                             {print} 'Abres la caja y ganas una tarta de manzana'
+                {if} caja {is} 2
+                     acción = {ask} '¿La abres o la vendes?'
+                         {if} acción {is} vender
+                             {print} 'Vendes la caja por 500 dólares'
+                         {if} acción {is} abrir
+                             {print} '¡Abres la caja y ganas un millón de dólares!'
             mp_choice_options:
             -   option: "caso 1, vende"
                 feedback: "¡No ganas un millón!"
@@ -1798,15 +1798,15 @@ levels:
         4:
             question_text: "¿Qué afirmación es cierta?"
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                nombre = {ask} '¿Cómo te llamas?'
+                talla = {ask} '¿Cuál es tu número de calzado??'
+                {if} talla {is} 38
+                    {if} nombre {is} Cenicienta
+                        {print} '❤️❤️❤️'
                     {else}
-                        {print} 'You are not the one!'
+                        {print} '¡Tu no eres!'
                 {else}
-                    {print} 'Ill keep looking'
+                    {print} 'Seguiré buscando'
             mp_choice_options:
             -   option: "La Bella Durmiente con una talla 38 de calzado recibe el mensaje 'seguiré mirando'"
                 feedback: "No, ella recibe '¡Tú no eres!'"
@@ -1824,48 +1824,48 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    postre = {ask} '¿Cuál es tu postre favorito?'
+                    {if} postre {is} helado
                         {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} '¡El helado es el mejor!'
                     ```
-                feedback: "Don't forget the indentation after `{repeat}` commands."
+                feedback: "No te olvides la sangría tras los comandos `{repeat}`."
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    postre = {ask} '¿Cuál es tu postre favorito?'
+                    {if} postre {is} helado
                     {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} '¡El helado es el mejor!'
                     ```
                 feedback: "Usa sangría tras un comando `{if}`"
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    postre = {ask} '¿Cuál es tu postre favorito?'
+                    {if} postre {is} helado
                         {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} '¡El helado es el mejor!'
                     ```
                 feedback: "Perfecto"
             -   option: |
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        postre = {ask} '¿Cuál es tu postre favorito?'
+                        {if} postre {is} helado
                             {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} '¡El helado es el mejor!'
                     ```
                 feedback: "Hay 2 comandos `{repeat}` en este código."
             correct_answer: "C"
             hint: "Revisa la sangría"
             question_score: '10'
-            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            output: "¡El helado es el mejor!\n¡El helado es el mejor!\n¡El helado es el mejor!"
         6:
             question_text: "¿Tras qué comando(s) se debería usar sangría (Que empiece la siguiente línea con 4 espacios)?"
             mp_choice_options:
             -   option: "`{if}`"
                 feedback: "No te olvides de los otros"
             -   option: "`{if}` `{repeat}`"
-                feedback: "Don't forget `{else}`!"
+                feedback: "¡No olvides `{else}`!"
             -   option: "`{if}` `{else}` `{repeat}`"
                 feedback: "¡Sigue así!"
             -   option: "`{if}` `{else}` `{repeat}` `{print}`"
@@ -1876,41 +1876,41 @@ levels:
         7:
             question_text: "Conseguirás un descuento de 5 dólares si pides una pizza mediana y un refresco.<br>¡Pero el código tiene un fallo! ¿Cómo depurarlo?"
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if} comida {is} pizza
+                {if} tamaño {is} mediana
+                {if} bebida {is} refresco
+                precio = precio - 5
             mp_choice_options:
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                                price = price - 2
+                    {if} comida {is} pizza
+                        {if} tamaño {is} mediana
+                            {if} bebida {is} refresco
+                                precio = precio - 5
                     ```
                 feedback: "¡Increíble!"
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                    {if} drink {is} coke
-                        price = price - 2
+                    {if} comida {is} pizza
+                        {if} tamaño {is} mediana
+                    {if} bebida {is} refresco
+                        precio = precio - 5
                     ```
                 feedback: "¡Falta código en el segundo `{if}`!"
             -   option: |
                     ```
-                    {if} food {is} pizza
-                    {if} size {is} medium
-                    {if} drink {is} coke
-                            price = price - 2
+                    {if} comida {is} pizza
+                    {if} tamaño {is} mediana
+                    {if} bebida {is} refresco
+                            precio = precio - 5
                     ```
-                feedback: "Try again"
+                feedback: "Dos `{if}`s consecutivos nunca es correcto."
             -   option: |
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                            price = price - 2
+                    {if} comida {is} pizza
+                        {if} tamaño {is} mediana
+                            {if} bebida {is} refresco
+                            precio = precio - 5
                     ```
                 feedback: "Try again"
             correct_answer: "A"
@@ -1919,11 +1919,11 @@ levels:
         8:
             question_text: "¿Qué falla en este código?"
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                edad = {ask} '¡Feliz cumpleaños! ¿Qué edad tienes?'
+                cantar = {ask} '¿Quieres que cantemos?'
+                {if} cantar {is} sí
+                    {repeat} años {times}
+                        {print} 'Hip Hip Hurra'
             mp_choice_options:
             -   option: "No puedes poner dos preguntas seguidas"
                 feedback: "Sí puedes."
@@ -2129,11 +2129,11 @@ levels:
         7:
             question_text: "¿Qué debería ir en lugar del interrogante?"
             code: |-
-                {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
-                _?_
-                    food is {ask} 'What would you like to order?'
-                    {print} food
+                {print} 'Bienvenido a la cena de Hedys'
+                gente = {ask} '¿Cuántas personas comerán aquí esta noche?'
+                _
+                    comida = {ask} '¿Qué te gustaría pedir?'
+                    {print} comida
             mp_choice_options:
             -   option: |
                     ```
@@ -2178,9 +2178,9 @@ levels:
         9:
             question_text: "¿Cuántas veces Hedy canta Hip Hip Hurra?"
             code: |-
-                age = {ask} 'How old are you?'
-                {for} i {in} {range} 1 {to} age
-                    {print} 'Hip Hip Hoorray!'
+                edad = {ask} '¿Qué edad tienes?'
+                {for} i {in} {range} 1 {to} edad
+                    {print} '¡Hip Hip Hurra!'
             mp_choice_options:
             -   option: "1 vez"
                 feedback: "Inténtalo de nuevo"
