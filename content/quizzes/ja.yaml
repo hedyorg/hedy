@@ -2150,19 +2150,19 @@ levels:
             correct_answer: D
         8:
             mp_choice_options:
-            -   feedback: True!
-                option: You must be taller than 120 cm to go on the roller coaster
-            -   feedback: If you are 120 cm you won't get in
-                option: You must be taller than 119 cm to go on the roller coaster
-            -   option: You must be shorter than 120 cm to go on the roller coaster
-                feedback: '> means greater than'
-            -   option: There are no length restrictions to go on the roller coaster
-                feedback: There are.
+            -   option: "You must be taller than 120 cm to go on the roller coaster"
+                feedback: "> means greater than"
+            -   option: "You must be taller than 119 cm to go on the roller coaster"
+                feedback: "If you are 120 cm you won't get in"
+            -   option: "You must be shorter or equal to 120 cm to go on the roller coaster"
+                feedback: "True!"
+            -   option: "There are no length restrictions to go on the roller coaster"
+                feedback: "There are."
+            correct_answer: "C"
+            hint: "Focus on which length values are allowed"
+            question_score: "10"
             question_text: Which statement is true about this roller coaster?
             code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
-            correct_answer: A
-            hint: '> means greater than'
-            question_score: '10'
         9:
             mp_choice_options:
             -   option: 1 or more

@@ -2187,17 +2187,17 @@ levels:
             question_score: '10'
             question_text: Vilket påstående stämmer om den här berg- och dalbanan?
             mp_choice_options:
-            -   feedback: Det är sant!
+            -   feedback: ""
                 option: Du måste vara längre än 120 cm för att åka berg- och dalbanan
             -   option: Du måste vara längre än 119 cm för att åka berg- och dalbanan
                 feedback: Är du 120 cm kommer du inte in
             -   option: Du måste vara längre än 120 cm för att åka berg- och dalbanan
-                feedback: '> betyder större än'
+                feedback: Det är sant!
             -   option: Det finns inga längdbegränsningar för att åka berg- och dalbana
                 feedback: There are.
             code: "längd = {ask} 'Fyll i din längd i cm, tack'\n{if} längd > 120\n    {print} 'Tyvärr, du kan inte åka på den här berg-och-dalbanan.'\n{else}\n    {print} 'Ha en fin åktur'\n"
-            correct_answer: A
-            hint: '> betyder större än'
+            correct_answer: C
+            hint: ''
         10:
             correct_answer: B
             question_text: Vad ska det stå i de tomma rutorna?
