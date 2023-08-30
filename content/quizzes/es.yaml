@@ -934,11 +934,11 @@ levels:
         6:
             question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación en la última línea?"
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print} '¡Soy Hedy, el advino de fútbol!'
+                {print} '¡Voy a predecir en que posición acabará tu equipo!'
+                equipo es {ask} '¿Cuál es tu equipo favorito?'
+                {if} equipo {is} ajax {print} '¡Ajax va a ganar por supuesto!'
+                _ {print} 'Lo siento, tu equipo va a quedar último...'
             mp_choice_options:
             -   option: |
                     ```
@@ -966,10 +966,10 @@ levels:
         7:
             question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación?"
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} '¡Puedo predecir si serás millonario o no!'
+                nombre {is} {ask} '¿Cómo te llamas?'
+                {if} nombre {is} Hedy {print} '¡Vas a ser millonario!'
+                {else} _ 'Por desgracia... No hay mucho dinero para ti.'
             mp_choice_options:
             -   option: |
                     `{if}`
@@ -989,9 +989,9 @@ levels:
         8:
             question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación?"
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                animal {is} {ask} '¿Cuál es tu animal favorito?'
+                {if} _ {is} pingüino {print} '¡También es mi animal favorito!'
+                {else} {print} '¡Mola! Me gustan los pingüinos.'
             mp_choice_options:
             -   option: |
                     ```
@@ -1121,10 +1121,10 @@ levels:
         5:
             question_text: "Si 5 personas comen en este restaurante, ¿cuánto tienen que pagar en total?"
             code: |-
-                {print} 'Welcome to Hedys!'
-                people = {ask} 'How many people are eating with us tonight?'
-                price = people * 10
-                {print} 'That will be ' price 'dollar please'
+                {print} '¡Bienvenido a Hedys!'
+                gente = {ask} '¿Cuánta gente van a cenar con nosotros esta noche?'
+                precio = gente * 10
+                {print} 'Serán ' precio 'dólares por favor'
             mp_choice_options:
             -   option: "5 dólares"
                 feedback: "Por desgracia, no es tan barato."
@@ -1140,11 +1140,11 @@ levels:
         6:
             question_text: "¿Cuánto cuesta una hamburguesa en este restaurante virtual?"
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
-                price = 0
-                {if} food {is} hamburger price = 15
-                {if} food {is} fries price = 6
+                {print} 'Bienvenido a la cena de Hedys'
+                comida = {ask} '¿Qué le gustaría comer?'
+                precio = 0
+                {if} comida {is} hamburguesa precio = 15
+                {if} comida {is} patatas fritas precio = 6
             mp_choice_options:
             -   option: "15 dólares"
                 feedback: "¡Super!"
@@ -1184,10 +1184,10 @@ levels:
         8:
             question_text: "¿Por qué este código es incorrecto?"
             code: |-
-                correct answer = 3*12
-                answer = {ask} 'What is 3 times 12?'
-                {if} answer {is} correct answer {print} 'Good job!'
-                {else} {print} 'No... It was ' correct answer
+                respuesta correcta = 3*12
+                respuesta = {ask} '¿Cuánto es 3 veces 12?'
+                {if} respuesta {is} respuesta correcta {print} '¡Buen trabajo!'
+                {else} {print} 'No... Fue ' respuesta correcta
             mp_choice_options:
             -   option: "No debería haber comillas en la línea 2"
                 feedback: "¡No, debería haber!"
@@ -1367,37 +1367,37 @@ levels:
             question_score: '10'
         8:
             question_text: "¿Qué código de Hedy corresponde a esta salida?"
-            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            code: "Ahí viene el Sol\nDo do do do\nAhí viene el Sol\nY digo\nTodo está bien"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'Here comes the sun'
+                    {print} 'Ahí viene el Sol'
                     {print} 'Do do do do'
-                    {print} 'Here comes the sun'
-                    {print} 'And I say'
-                    {print} 'Its alright'
+                    {print} 'Ahí viene el Sol'
+                    {print} 'Y digo'
+                    {print} 'Todo está bien'
                     ```
                 feedback: "Increíble, no puedes usar aquí el comando `{repeat}`."
             -   option: |
                     ```
-                    {repeat} 2 {times} {print} 'Here comes the sun'
-                    {print} 'And I say'
-                    {print} 'Its alright'"
+                    {repeat} 2 {times} {print} 'Ahí viene el Sol'
+                    {print} 'Y digo'
+                    {print} 'Todo está bien'
                 feedback: "¿Dónde dejaste 'Do do do do'?"
             -   option: |
                     ```
-                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {repeat} 2 {times} {print} 'Ahí viene el Sol'
                     {print} 'Do do do do'
-                    {print} 'And I say'
-                    {print} 'Its alright'
+                    {print} 'Y digo'
+                    {print} 'Todo está bien'
                     ```
                 feedback: "Este no es el orden correcto.."
             -   option: |
                     ```
-                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {repeat} 2 {times} {print} 'Ahí viene el Sol'
                     {repeat} 2 {times} {print} 'Do do'
-                    {print} 'And I say'
-                    {print} 'Its alright'"
+                    {print} 'Y digo'
+                    {print} 'Todo está bien'
                     ```
                 feedback: "Este no es el orden correcto.."
             hint: "`{repeat}` sólo se puede usar si quieres ejecutar la misma línea varias veces seguidas."
@@ -1406,43 +1406,43 @@ levels:
         9:
             question_text: "¿Qué código de Hedy pertenece a este resultado?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Batman estaba volando por Gotham.
+                Cuando de repente oyó a alguien gritar...
+                ¡Ayuda!
+                ¡Ayuda!
+                ¡Ayuda!
+                ¡Por favor ayúdadme!
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} 'Batman estaba volando por Gotham. '
+                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {print} '¡Ayuda!'
+                    {repeat} 3 {times} {print} '¡Por favor ayúdadme!'
                     ```
                 feedback: "Tu línea repetida es incorrecta."
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman estaba volando por Gotham.'
+                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {repeat} 3 {times} '¡Ayuda!'
+                    {print} '¡Por favor ayúdadme!'
                     ```
                 feedback: "Falta el comando `{print}` en la línea 3."
             -   option: |
                     ```
-                    {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {print} Batman estaba volando por Gotham.
+                    {print} ¡Cuando de repente oyó a alguien gritar!
+                    {repeat} 3 {times} {print} ¡Ayuda!
+                    {print} ¡Por favor ayúdadme!
                     ```
                 feedback: "Te faltan las comillas"
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman estaba volando por Gotham.'
+                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {repeat} 3 {times} {print} '¡Ayuda!'
+                    {print} '¡Por favor ayúdadme!'
                     ```
                 feedback: "Perfecto"
             question_score: '10'
@@ -1451,37 +1451,37 @@ levels:
         10:
             question_text: "¿Qué código de Hedy corresponde a este resultado?"
             code: |-
-                if youre happy and you know it clap your hands
-                if youre happy and you know it clap your hands
-                if youre happy and you know it and you really want to show it
-                if youre happy and you know it clap your hands
+                si estás feliz y lo sabes aplaude
+                si estás feliz y lo sabes aplaude
+                si estás feliz y lo sabes y realmente quieres mostrarlo
+                si estás feliz y lo sabes aplaude
             mp_choice_options:
             -   option: |
                     ```
-                    {repeat} 2 {times} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
-                    {print} 'if youre happy and you know it clap your hands'
+                    {repeat} 2 {times} 'si estás feliz y lo sabes aplaude'
+                    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'
+                    {print} 'si estás feliz y lo sabes aplaude'
                     ```
                 feedback: "¡Casi! la primera línea necesita una palabra extra"
             -   option: |
                     ```
-                    {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
-                    {print} 'if youre happy and you know it clap your hands'
+                    {repeat} 2 {times} {print} 'si estás feliz y lo sabes aplaude'
+                    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'
+                    {print} 'si estás feliz y lo sabes aplaude'
                     ```
                 feedback: "Great!"
             -   option: |
                     ```
-                    {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
+                    {repeat} 3 {times} {print} 'si estás feliz y lo sabes aplaude'
+                    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'
                     ```
                 feedback: "Esto no está en el orden correcto."
             -   option: |
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'si estás feliz y lo sabes'
+                    {repeat} 2 veces 'aplaude'
+                    {print} 'y realmente quieres mostrarlo'
+                    {print} 'aplaude'
                     ```
                 feedback: "Esto no está en el orden correcto."
             correct_answer: "B"
@@ -1544,10 +1544,10 @@ levels:
         4:
             question_text: "¿Qué resultado es correcto?"
             code: |-
-                {print} 'The children went:'
+                {print} 'Los niños se fueron:'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} '¡Yay!'
+                    {print} '¡Estamos de vacaciones!'
             mp_choice_options:
             -   option: "The children went:\nYay!\nWere going on holiday!"
                 feedback: "¡Cuidado con el comando `{repeat}`!"
@@ -1563,9 +1563,9 @@ levels:
         5:
             question_text: "¿Qué le pasa a este código?"
             code: |-
-                end = {ask} 'Do you want a happy or a sad ending?'
-                {if} end {is} happy {print} 'They lived happily ever after'
-                {else} {print} 'The world exploded. The end.'
+                final = {ask} '¿Quieres un final feliz o final triste?'
+                {if} final {is} feliz {print} 'Vivieron felices para siempre'
+                {else} {print} 'El mundo explotó. Fin.'
             mp_choice_options:
             -   option: "Los comandos `{print}` en las últimas dos líneas deberían comenzar en líneas nuevas con 4 espacios."
                 feedback: "¡Eso es!"
@@ -1614,14 +1614,14 @@ levels:
         7:
             question_text: "¿Qué le pasa a este código?"
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                comida = {ask} '¿Qué te gustaría comer?'
+                {if} comida {is} patatas fritas
+                salsa = {ask} '¿Qué salsa quieres?'
+                    {print} 'Unas patatas fritas con ' salsa
+                {if} comida {is} pizza
+                    ingrediente = {ask} '¿Qué ingrediente le gustaría?'
+                    {print} 'Una pizza con ' ingrediente
+                {print} 'Gracias por su pedido'
             mp_choice_options:
             -   option: "¡Nada de este código es correcto!"
                 feedback: "¡Algo falla!"
@@ -1639,12 +1639,12 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} respuesta {is} 32
+                       {print} 'Tienes...'
+                          {sleep}
+                              {print} '¡razón!'
                           {else}
-                              {print} You are wrong!
+                              {print} '¡Te equivocas!'
                     ```
                 feedback: "¡Te equivocas!"
             -   option: |
