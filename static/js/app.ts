@@ -292,7 +292,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
 
         const levelStr = $(preview).attr('level');
         if (levelStr) {
-          exampleEditor.setHighliterForLevel(parseInt(levelStr, 10));
+          exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
         }
       });
     }
