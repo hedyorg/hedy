@@ -2236,9 +2236,9 @@ levels:
         1:
             question_text: "¿Qué tenemos que rellenar en el `_` si queremos imprimir cada cumplido?"
             code: |-
-                compliments = perfect, great job, amazing
-                _?_
-                    {print} compliment
+                cumplidos = perfecto, gran trabajo, increíble
+                _
+                    {print} cumplido
             mp_choice_options:
             -   option: |
                     ```
@@ -2266,9 +2266,9 @@ levels:
         2:
             question_text: "¿Qué resultado es correcto?"
             code: |-
-                meals = pizza, pasta, pancakes
-                {for} meal {in} meals
-                    {print} 'I love ' meal
+                comidas = pizza, pasta, tortitas
+                {for} comida {in} comidas
+                    {print} 'Me encanta ' comida
             mp_choice_options:
             -   option: "Me encanta la pizza"
                 feedback: "La línea 2 dice `{for}` cada comida en la lista de comidas. Así que se imprime cada comida."
@@ -2287,9 +2287,9 @@ levels:
         3:
             question_text: "¿Qué resultado es correcto?"
             code: |-
-                animals = dogs, cats, hamsters, chickens
-                {for} animal {in} animals
-                    {print} animal ' are lovely pets'
+                animales = perros, gatos, hámsteres, gallinas
+                {for} animal {in} animales
+                    {print} animal ' son mascotas adorables'
             mp_choice_options:
             -   option: "los perros son mascotas adorables"
                 feedback: "La línea 2 dice {for} cada animal en la lista de animales. Así que se {print} cada animal."
@@ -2309,9 +2309,9 @@ levels:
         4:
             question_text: "¿Qué le pasa a este código?"
             code: |-
-                groceries = apples, bread, milk
-                {for} item {in} groceries
-                    {print} 'We need ' groceries
+                alimentos = manzanas, pan, leche
+                {for} objeto {in} alimentos
+                    {print} 'Necesitamos ' alimentos
             mp_choice_options:
             -   option: "La línea 2 tiene que empezar con 4 espacios como sangría"
                 feedback: "No. Sólo la línea 3 necesita sangría, la cual tiene."
@@ -2347,10 +2347,10 @@ levels:
         6:
             question_text: "¿Cuál de las respuestas de abajo es un posible resultado cuando ejecutes el código?"
             code: |-
-                choices = rock, paper, scissors
-                players = Kelly, Meredith
-                {for} player {in} players
-                    {print} player ' chooses ' choices {at} {random}
+                opciones = piedra, papel, tijeras
+                jugadores = Kelly, Meredith
+                {for} jugador {in} jugadores
+                    {print} jugador ' elige ' opciones {at} {random}
             mp_choice_options:
             -   option: |-
                     Kelly elige piedra
@@ -2403,10 +2403,10 @@ levels:
         8:
             question_text: "¿Qué debería ir en el _ en este código que decide qué color de camiseta recibes?"
             code: |-
-                names = Donna, Tommy, Ben
-                colors = blue, red, purple
-                {for} name {in} names
-                    {print} _?_
+                nombres = Donna, Tommy, Ben
+                colores = azul, rojo, morado
+                {for} nombre {in} nombres
+                    {print} _
             mp_choice_options:
             -   option: |
                     ```
@@ -2504,7 +2504,7 @@ levels:
         3:
             question_score: '10'
             question_text: ¿Qué le pasa a este código?
-            code: "favorite_animal = ask 'What is your favorite animal?'\nprint 'I like ' favoriteanimal ' too!'"
+            code: "animal_favorito = {ask} '¿Cuál es tu animal favorito?'\n{print} 'Me gustan ' animalfavorito ' también!'"
             mp_choice_options:
             -   option: "El nombre de la variable es diferente en la línea 1 que en la línea 2.\n"
                 feedback: ¡Correcto!
@@ -2551,13 +2551,13 @@ levels:
             question_text: ¿Qué resultado obtiene un vegano?
             code: "menu = 'cookies', 'cheese', 'grapes'\nprint \"It's my birthday! I`ve brought some snacks!\"\ndiet = ask 'Do you have any dietary restrictions?'\nif diet = 'gluten free'\n    remove 'cookies' from menu\nif diet = 'vegan'\n    remove 'cheese' from menu\nprint 'For you I have brought: '\nfor snack in menu\n    print snack"
             mp_choice_options:
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
+            -   option: "¡Es mi cumpleaños! ¡He traído algunos aperitivos!\nPara ti he traído:\ngalletas\nuvas"
                 feedback: ¡Magnífico!
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes"
+            -   option: "¡Es mi cumpleaños! ¡He traído algunos aperitivos!\nPara ti he traído:\nuvas"
                 feedback: Hay más opciones que una
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncheese\ngrapes"
+            -   option: "¡Es mi cumpleaños! ¡He traído algunos aperitivos!\nPara ti he traído:\nqueso\nuvas"
                 feedback: Una persona vegana no puede comer queso
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes\ncookies"
+            -   option: "¡Es mi cumpleaños! ¡He traído algunos aperitivos!\nPara ti he traído:\nuvas\ngalletas"
                 feedback: Ya casi está, pero mira el orden de los aperitivos de la lista
             correct_answer: A
             hint: ¿Qué elemento se elimina de la lista cuando respondes 'vegano'?
@@ -2608,7 +2608,7 @@ levels:
             question_score: '10'
         10:
             question_text: ¿Qué línea de código debe rellenarse en ??? para completar la canción ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    for i in range 0 to 1\n        print 'if youre happy and you know it'\n        print action\n    print 'if youre happy and you know it and you really want to show it'\n    print 'if youre happy and you know it'\n    print action"
+            code: "acciones = 'aplaude', 'pisa fuerte', 'grita ¡Hurra!'\n???\n    {for} i {in} rango 0 {to} 1\n        {print} 'si estás feliz y lo sabes'\n        {print} accion\n    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'\n    {print} 'si estás feliz y lo sabes'\n    {print} accion"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
                 feedback: ¡Esta es difícil! En la canción deben aparecer todas las acciones de la lista.
@@ -2714,7 +2714,7 @@ levels:
             question_score: '10'
         1:
             question_text: ¿Qué código debe rellenarse en ??? ?
-            code: "name = ask 'What is your name?'\nsong = ask 'Whould you like to hear a song?'\nbirthday = ask 'Is today your birthday?'\n???\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday to you!'\n  print 'Happy Birthday. dear ' name\n  print 'Happy Birthday to you!'"
+            code: "nombre = {ask} '¿Cómo te llamas?'\ncanción = {ask} '¿Quieres escuchar una canción?'\ncumpleaños = {ask} '¿Hoy es tu cumpleaños?'\n???\n    {print} '¡Cumpleaños Feliz para ti!'\n    {print} '¡Cumpleaños Feliz para ti!'\n    {print} 'Cumpleaños Feliz querido ' nombre\n    {print} '¡Cumpleaños Feliz para ti!'"
             mp_choice_options:
             -   option: "```\n{if} cumpleaños {and} canción = 'sí'\n```"
                 feedback: Ya casi está
@@ -2804,7 +2804,7 @@ levels:
             question_score: '10'
         4:
             correct_answer: B
-            code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
+            code: "precio = 10\ndinero = {ask} ¿Cuánto dinero tienes?\ncomprar = {ask} '¿Quieres comprar este osito de peluche?'\n{if} dinero >= precio y comprar == 'sí'\n    {print} '¡Puedes comprar el oso!'\n{else}\n    {print} '¡No puedes comprar el oso!'\n"
             mp_choice_options:
             -   option: En la línea 1 se debería haber usado == en vez de =
                 feedback: No, no es eso
@@ -2829,7 +2829,7 @@ levels:
                 feedback: Se para tras 2 veces
             -   option: 2 veces
                 feedback: Eso es correcto
-            code: "lives = 2\n{repeat} 10 times\n    {if} lives != 0\n        answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1\n"
+            code: "vidas = 2\n{repeat} 10 veces\n    {if} vidas != 0\n        respuesta = {ask} '¿Ya estás enfadado?'\n    {if} respuesta == 'sí'\n        vidas = vidas - 1\n"
             correct_answer: D
             hint: "!= significa 'no es'"
         9:
@@ -2842,7 +2842,7 @@ levels:
                 option: 8 o más
             -   feedback: ¡Genial!
                 option: 9 o más
-            code: "chocolate = {ask} 'How many pieces of chocolate have you eaten?'\n  {if} chocolate <= 2\n      {print} 'That is a healthy amount'\n  {if} chocolate > 2 and chocolate =< 8\n      {print} 'That is a bit much'\n  {if} chocolate > 8\n      {print} 'You will get a stomach ache!'\n"
+            code: "chocolate = {ask} '¿Cuántos trozos de chocolate te has comido?'\n  {if} chocolate <= 2\n      {print} 'Eso es una cantidad sana'\n  {if} chocolate > 2 y chocolate =< 8\n      {print} 'Eso es demasiado'\n  {if} chocolate > 8\n      {print} '¡Te va a doler el estómago!'\n"
             question_text: ¿Cuántas porciones de chocolate harán que te duela el estómago de acuerdo a este fitbit?
             question_score: '10'
             correct_answer: D
@@ -2864,7 +2864,7 @@ levels:
             hint: Ganas el juego por tener más puntos
         3:
             question_text: ¿Qué símbolo debe rellenarse en los dos espacios en blanco?
-            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'\n"
+            code: "invitados = {ask} '¿Cuánta gente hay en la fiesta?'\n{if} invitados _ 130\n    {print} '¡Puedes entrar!'\n{if} invitados _ 130\n    {print} 'Lo siento, la sala está llena. '\n    {print} 'Tienes que esperar a que alguien salga'\n"
             mp_choice_options:
             -   option: '`>` y `<`'
                 feedback: No es eso
@@ -2879,7 +2879,7 @@ levels:
             question_score: '10'
         5:
             question_text: '¿Qué símbolo debe rellenarse en los espacios en blanco si la película es apta para niños a partir de 12 años? '
-            code: "age = {ask} 'How old are you?'\nticket = {ask} 'Do you have a ticket?'\n{if} age _ and ticket == 'yes'\n    {print} 'You can enter the movie theater.'\n{else}\n    {print} 'You are not allowed to come in!'\n"
+            code: "edad = {ask} '¿Cuántos años tienes?'\nentrada = {ask} '¿Tienes una entrada?'\n{if} edad _ y entrada == 'sí'\n    {print} 'Puedes entrar al cine.'\n{else}\n    {print} '¡No puedes entrar!'\n"
             mp_choice_options:
             -   option: '`> 12`'
                 feedback: También se admite a los de 12 años
@@ -2894,7 +2894,7 @@ levels:
             question_score: '10'
         7:
             question_text: ¿Qué debe rellenarse en los tres espacios en blanco?
-            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'\n"
+            code: "{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        respuesta = {ask} '¿Qué número crees que es?'\n        {if} respuesta < número\n            {print} _\n        {if} respuesta > número\n            {print} _\n        {if} respuesta == número\n            {print} _\n            juego = 'acabado'\n"
             mp_choice_options:
             -   option: "`'Baja'` and `'Sube'` and `'¡Ganaste!'`"
                 feedback: Eso no es del todo correcto.
@@ -2916,12 +2916,12 @@ levels:
             -   option: Debes medir 120 cm o menos para montar en la montaña rusa
                 feedback: '¡Cierto!'
             -   option: No hay restricciones de altura para montar en una montaña rusa
-                feedback: There are.
+                feedback: Ahí está.
             correct_answer: C
             hint: 'Céntrate en qué valores de longitud están permitidos'
             question_score: '10'
             question_text: ¿Qué sentencia es verdadera sobre esta montaña rusa?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            code: "altura = {ask} 'Por favor indica tu altura en centímetros'\n{if} altura > 120\n    {print} 'Lo siento, no puedes montar en la montaña rusa.'\n{else}\n    {print} 'Disfruta del viaje'\n"
     15:
         1:
             question_text: '¿Qué símbolo debería usarse en el espacio en blanco? Consejo: Debes seguir adivinando hasta que lo consigas.'
