@@ -43,7 +43,7 @@ export interface HedyEditor {
    * Set the highlither rules for a particular level
    * @param level
    */
-  setHighliterForLevel(level: number): void;
+  setHighlighterForLevel(level: number): void;
 
   /**
    * Resizes the editor after changing its size programatically

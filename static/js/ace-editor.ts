@@ -86,7 +86,7 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
     hedyEditor.editor = editor;    
     // Everything turns into 'ace/mode/levelX', except what's in    
     if (theLevel) {
-      hedyEditor.setHighliterForLevel(theLevel)
+      hedyEditor.setHighlighterForLevel(theLevel)
     }
     return hedyEditor;
   }
@@ -174,7 +174,7 @@ export class HedyAceEditor implements HedyEditor {
  * Set the highlither rules for a particular level
  * @param level      
  */
-  setHighliterForLevel(level: number): void { 
+  setHighlighterForLevel(level: number): void { 
     const mode = this.getHighlighter(level);
     this._editor?.session.setMode(mode);
   }

@@ -256,7 +256,7 @@ function show_preview(content: string) {
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
         exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
-        exampleEditor.setHighliterForLevel(parseInt(level, 10));                
+        exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
     }
 }
 
