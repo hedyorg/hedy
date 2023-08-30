@@ -59,9 +59,9 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    * @param isMainEditor should we show the line numbers
    */
   turnIntoEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): HedyAceEditor {
-    let hedyEditor: HedyAceEditor = new HedyAceEditor();
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
+    let hedyEditor: HedyAceEditor = new HedyAceEditor(editor, isReadOnly);
     if (isReadOnly) {
       editor.setValue(editor.getValue().trimRight(), -1);
       // Remove the cursor
@@ -165,18 +165,24 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
 }
 
 export class HedyAceEditor implements HedyEditor {
-  private _editor?: AceAjax.Editor;
+  private _editor: AceAjax.Editor;
   private _markers?: Markers
-  askPromptOpen: boolean = false;
-  isReadOnly: boolean = false;
+  askPromptOpen: boolean;
+  isReadOnly: boolean;
 
+  constructor(editor: AceAjax.Editor, isReadOnly: boolean) {
+    this._editor = editor;
+    this.isReadOnly = isReadOnly;
+    this.askPromptOpen = false;
+  }
+  
   /**
- * Set the highlither rules for a particular level
- * @param level      
- */
+  * Set the highlither rules for a particular level
+  * @param level      
+  */
   setHighlighterForLevel(level: number): void { 
     const mode = this.getHighlighter(level);
-    this._editor?.session.setMode(mode);
+    this._editor.session.setMode(mode);
   }
 
   /**
@@ -187,11 +193,11 @@ export class HedyAceEditor implements HedyEditor {
     try {
       // This module may or may not exist, so let's be extra careful here.
       const whitespace = ace.require("ace/ext/whitespace");
-      whitespace.trimTrailingSpace(this._editor!.session, true);
+      whitespace.trimTrailingSpace(this._editor.session, true);
     } catch (e) {
       console.error(e);
     }
-    return this._editor!.getValue();
+    return this._editor.getValue();
   }
 
   /**
@@ -199,7 +205,7 @@ export class HedyAceEditor implements HedyEditor {
    * @param content the content that wants to be set in the editor
    */
   public set contents(content: string) {
-    this._editor?.setValue(content, MOVE_CURSOR_TO_END);
+    this._editor.setValue(content, MOVE_CURSOR_TO_END);
   }
 
   /**     
@@ -213,7 +219,7 @@ export class HedyAceEditor implements HedyEditor {
    * Sets the read mode of the editor
    */
   public set setIsreadOnly(isReadMode: boolean) {
-    this._editor?.setReadOnly(isReadMode);
+    this._editor.setReadOnly(isReadMode);
     this.isReadOnly = isReadMode;
   }
 
@@ -221,14 +227,14 @@ export class HedyAceEditor implements HedyEditor {
    * Resizes the editor after changing its size programatically
    */
   resize(): void {
-    this._editor?.resize()
+    this._editor.resize()
   }
 
   /**
    * Focuses the text area for the current editor
    */
   focus(): void { 
-    this._editor?.focus();
+    this._editor.focus();
   }
 
   /**
@@ -237,7 +243,7 @@ export class HedyAceEditor implements HedyEditor {
   clearErrors(): void {
     // Not sure if we use annotations everywhere, but this was
     // here already.
-    this._editor?.session.clearAnnotations();
+    this._editor.session.clearAnnotations();
     this.markers?.clearErrors();
   }
 
@@ -245,43 +251,43 @@ export class HedyAceEditor implements HedyEditor {
    * Moves to the cursor to the end of the current file
    */
   moveCursorToEndOfFile(): void { 
-    this._editor?.navigateFileEnd();
+    this._editor.navigateFileEnd();
   }
 
   /**
    * Clears the selected text
    */
   clearSelection(): void {
-    this._editor?.clearSelection();
+    this._editor.clearSelection();
   }
 
   /**
   * Removes all breakpoints on the rows.
   **/
   clearBreakpoints(): void { 
-    this._editor?.session.clearBreakpoints();
+    this._editor.session.clearBreakpoints();
   }
 
   /**
    * If this editor is used as a main editor, we set the options here
    */
   configureMainEditor(): void {
-    this._editor?.setShowPrintMargin(false);
-    this._editor?.renderer.setScrollMargin(0, 0, 0, 20)
-    this._editor?.addEventListener('change', () => {
-      theLocalSaveWarning.setProgramLength(this._editor!.getValue().split('\n').length);
+    this._editor.setShowPrintMargin(false);
+    this._editor.renderer.setScrollMargin(0, 0, 0, 20)
+    this._editor.addEventListener('change', () => {
+      theLocalSaveWarning.setProgramLength(this._editor.getValue().split('\n').length);
     });
     // Set const value to determine the current page direction -> useful for ace editor settings
     const dir = $("body").attr("dir");
     if (dir === "rtl") {
-      this._editor?.setOptions({ rtl: true });
+      this._editor.setOptions({ rtl: true });
     }
 
     // If prompt is shown and user enters text in the editor, hide the prompt.
-    this._editor?.on('change', () => {
+    this._editor.on('change', () => {
       if (this.askPromptOpen) {
         stopit();
-        this._editor?.focus(); // Make sure the editor has focus, so we can continue typing
+        this._editor.focus(); // Make sure the editor has focus, so we can continue typing
       }
       if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
       this.askPromptOpen = false;
@@ -292,7 +298,7 @@ export class HedyAceEditor implements HedyEditor {
     });
       // Removed until we can fix the skip lines feature
       // We show the error message when clicking on the skipped code
-    // this._editor?.on("click", function(e) {
+    // this._editor.on("click", function(e) {
     //   let position = e.getDocumentPosition()
     //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
 
@@ -308,12 +314,12 @@ export class HedyAceEditor implements HedyEditor {
     //   }
     // })
 
-    this._markers = new Markers(this._editor!);
+    this._markers = new Markers(this._editor);
 
           // *** Debugger *** //
       // TODO: FIX THIS
       initializeDebugger({
-        editor: this._editor!,
+        editor: this._editor,
         markers: this.markers,
         level: theLevel,
         language: theLanguage,
@@ -331,7 +337,7 @@ export class HedyAceEditor implements HedyEditor {
  * but can be something you pick yourself.
  */
   getBreakpoints(): Breakpoints {
-    return this._editor?.session.getBreakpoints() as unknown as Breakpoints;
+    return this._editor.session.getBreakpoints() as unknown as Breakpoints;
   }
 
   getHighlighter(level: number): string {
@@ -339,11 +345,11 @@ export class HedyAceEditor implements HedyEditor {
   }
 
   setOptions(options: object) {
-    this._editor?.setOptions(options);
+    this._editor.setOptions(options);
   }
 
   get editor(): AceAjax.Editor {
-    return this._editor!;
+    return this._editor;
   }
 
   get markers(): Markers {
