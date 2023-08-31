@@ -2149,7 +2149,7 @@ levels:
             code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
         8:
             question_text: Which statement is true about this roller coaster?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             mp_choice_options:
             -   option: You must be taller than 120 cm to go on the roller coaster
                 feedback: True!
