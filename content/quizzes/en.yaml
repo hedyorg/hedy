@@ -3243,7 +3243,7 @@ levels:
             question_text: "Which statement is true about this roller coaster?"
             code: |
               length = {ask} 'Please fill in your length in cm'
-              {if} length > 120
+              {if} length < 120
                   {print} 'Sorry, you cannot go on this roller coaster.'
               {else}
                   {print} 'Enjoy the ride'
