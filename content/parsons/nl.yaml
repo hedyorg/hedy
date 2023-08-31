@@ -173,3 +173,113 @@ levels:
                   {print} teller
                   {sleep} 1
                 {print} 'Wie niet weg is, is gezien! Ik kom!'
+    9:
+        1:
+            story: |
+                Dit spelletje geeft je 3 verschillende rekensommen. Kun jij het spelletje aan de praat krijgen?
+            code: |
+                nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                {repeat} 3 {times}
+                    nummer = nummers {at} {random}
+                    correct_antwoord = 5 * nummer
+                    antwoord = {ask} 'Wat is 5 keer' nummer '?'
+                    {if} antwoord = correct_antwoord
+                        {print} 'Super!'
+                    {else}
+                        {print} 'Nee! Het antwoord is ' correct_antwoord
+        2:
+            story: |
+                Deze code vraagt aan klanten in een restaurant of ze een toetje willen bestellen. Als ze dat willen wordt er gevraagd welk toetje. Willen ze tiramisu, dan wordt er gezegd dat dat helaas op is.
+                Kun jij de volgorde van de regels bepalen?
+            code: |
+                bestelling = {ask} 'Wilt u een toetje?'
+                {if} bestelling = ja
+                    toetje = {ask} 'Wat voor toetje wilt u?'
+                    {if} toetje = tiramisu
+                        {print} 'Sorry, we hebben helaas geen tiramisu meer.'
+                    {else}
+                        {print} 'Een ' toetje ', komt eraan!'
+                {else}
+                    {print} 'Geen toetje? Geen probleem!'
+    10:
+        1:
+            story: |
+                Help deze familie een schema te maken voor wie wanneer wat moet koken. Zorg met de {remove} commando's dat er nooit twee dagen hetzelfde wordt gegeten en dat iedereen maar één keer hoeft te koken.
+                **Let op!** De volgorde van de variabelen is eerst dagen, daarna mensen en als laatste diner_opties. Deze volgorde geldt ook bij de {remove} commando's.
+            code: |
+                dagen = maandag, dinsdag, woensdag, donderdag, vrijdag
+                mensen = mama, papa, Martin, Abby, Jesse
+                diner_opties = pizza, tacos, pannenkoeken, een salade, lasagne
+                {for} dag {in} dagen
+                    gekozen_persoon = people {at} {random}
+                    gekozen_diner = diner_opties {at} {random}
+                    {print} 'Op ' dag ' kookt ' gekozen_persoon ' ' gekozen_diner
+                    {remove} gekozen_persoon {from} mensen
+                    {remove} gekozen_diner {from} diner_opties
+        2:
+            story: |
+                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
+                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+            code: |
+                mensen = Betty, Amanda, Marc
+                haarstijl = een kaal hoofd, een hanekam, een paardenstaart, stekeltjes
+                {for} mesn {in} mensen
+                    {print} mens ' krijgt nu ' haarstijl {at} {random}
+                    tevreden = {ask} mens ', ben je blij met deze keuze?'
+                    {if} tevreden {is} ja
+                        {print} 'Fantastisch'
+                    {else}
+                        {print} 'We proberen het opniew... ' mens ' krijgt ' haarstijl {at} {random}
+    11:
+        1:
+            story: |
+                Maak een aftelklok voor oudjaarsavond! Het programma moet de getallen van 10 tot 1 één seconde tonen en je dan een gelukkig nieuwjaar wensen!
+            code: |
+                {for} getal {in} {range} 10 {to} 1
+                    {print} getal
+                    {sleep}
+                    {clear}
+                {print} 'Gelukkig nieuwjaar!'
+        2:
+            story: |
+                Maak een programma dat ons de uitslag van de wetenschapswedstrijd kan vertellen. Definieer eerst de variabele deelnemers en daarna de variabele plek.
+                **Tip** Regel 5 is het {sleep} commando en je eindigt met een felicitatie naar de deelnemers.
+            code: |
+                {print} 'En dan nu.. de resultaten van de wetenschapswedstrijd'
+                deelnemers = Vivienne, Paul, Trixy, Bianca, Katya
+                plek = 5
+                {for} deelnemer {in} deelnemers
+                    {sleep} 2
+                    {print} 'Op plek ' plek ' is geëindigd... ' deelnemer
+                    plek = plek - 1
+                {print} 'Gefeliciteerd!'
+    12:
+        1:
+            story: |
+                Zing het lied 'De dronken zeeman'. Dit is de songtekst:
+
+                Wat zullen we doen met de dronken zeeman?
+                Wat zullen we doen met de dronken zeeman?
+                Wat zullen we doen met de dronken zeeman?
+                's Morgens in de vroegte
+
+                Hela hup, daar gaat ie
+                Hela hup, daar gaat ie
+                Hela hup, daar gaat ie
+                's Morgens in de vroegte
+
+            code: |
+                coupletten = 'Wat zullen we doen met de dronken zeeman', 'Hela hup, daar gaat ie'
+                {for} couplet {in} coupletten
+                    {for} teller {in} {range} 1 {to} 3
+                        {print} couplet
+                    {print} 's Morgens in de vroegte'
+        2:
+            story: |
+                Speel een potje Twister! Stel de variabele mensen eerst in, daarna ledematen en tot slot kleuren.
+            code: |
+                mensen = 'Jess', 'Nick', 'Winston'
+                ledematen = 'linkerhand', 'linkervoet', 'rechterhand', 'rechtervoet'
+                kleuren = 'rood', 'blauw', 'groen', 'geel'
+                {for} mens {in} mensen
+                    {print} mens ', zet je ' ledematen {at} {random} ' op ' kleuren {at} {random}
