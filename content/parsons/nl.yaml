@@ -2,9 +2,12 @@ levels:
     1:
         1:
             story: |
+                In de sleeppuzzels zijn de regels code al voor je geschreven. Je hoeft ze alleen nog maar in de juiste volgorde te plaatsen! Sleep de regels code in je invoerscherm en voer de code uit. Kun jij het programma aan de praat krijgen?
+
+
                 Je bent een klant bij bakkerij Hedy. 
                 Je loopt de bakkerij binnen en wordt verwelkomd door de bakker.
-                Hij vraagt wat voor taart je wil bestellen.
+                Hij vraagt wat voor taart je wil bestellen en herhaalt het antwoord.
                 Daarna wordt je bestelling klaargezet.
             code: |
                 {print} Welkom bij bakkerij Hedy!
@@ -17,7 +20,7 @@ levels:
                 {print} Hier is DJ Hedy
                 {ask} Klaar voor een feestje?
                 {ask} Welke liedje wil je horen?
-                {echo} Prima keuze! I houd van
+                {echo} Prima keuze! I houd van het lied
     2:
         1:
             story: |
@@ -33,7 +36,7 @@ levels:
             code: |-
                 {print} Welkom in onze speelgoedwinkel
                 speelgoed {is} {ask} Wat wilt u kopen?
-                {print} Het speelgoed is toegevoegd aan uw winkelwagen.
+                {print} speelgoed is toegevoegd aan uw winkelwagen.
                 {print} Bedankt voor het winkelen bij ons!
     3:
         1:
@@ -42,13 +45,13 @@ levels:
                 Het is de taak van de sorteerhoed om jou in te delen in een van de afdelingen. 
                 Bij welke afdeling zou jij willen?
                 Ben jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. 
-                Laat het programma even wachten voordat het onthult bij welke afdeling jij mag.
+                Voordat de sorteerhoed zijn keuze bekend maakt, kun je aangeven bij welk huis je niet terecht wil komen.
             code: |-
-                {print} Het nieuwe schooljaar op Zweinstein gaat van start!
                 {print} De sorteerhoed is er klaar voor om jou in te delen op Zweinstein.
-                afdeling {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
-                {sleep} 2
-                {print} Het wordt afdeling {at} {random}
+                afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
+                liever_niet {is} {ask} Bij welke afdeling zou je liever niet willen?
+                {remove} liever_niet {from} afdelingen
+                {print} Niet bij liever_niet he? Dan wordt het maar... afdelingen {at} {random}
         2:
             story: "Maak een programma dat een willekeurige maaltijd voor je kiest. Maak een lijst met eten en een lijst met toppings en laat het programma beslissen wat je krijgt!\n"
             code: |-
@@ -57,6 +60,19 @@ levels:
                 {print} Je willekeurige maaltijd voor vandaag is...
                 {sleep} 2
                 {print} eten {at} {random} met topping {at} {random}
+        3:
+            story: |
+                In een schaaktoernooi zijn nog drie spelers over.
+                Maak een programma dat beslist welke twee spelers als eerst tegen elkaar mogen schaken.
+                Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
+            code: |
+                spelers = Freek, Bart, Emma
+                speler1 = spelers {at} {random}
+                {remove} speler1 {from} spelers
+                speler2 = spelers {at} {random}
+                {print} speler1 ' speelt eerst tegen ' speler2
+                {remove} speler2 {from} spelers
+                {print} 'De winnaar speelt tegen ' spelers {at} {random}
     4:
         1:
             story: |
@@ -69,36 +85,39 @@ levels:
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: |
+                Maak een loterij waarbij je zelf een prijs mag bedenken.
+                Begin met het lijstje prijzen op regel 1.
             code: |
-                prices {is} car, hamster, million euros
-                price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+                prijzen {is} auto, hamster, miljoen euro
+                prijs {is} {ask} 'Wat zou je willen winnen?'
+                {add} prijs {to_list} prijzen
+                {print} 'Je wint een ' prijzen {at} {random}
     5:
         1:
             story: |
                 Maak een programma dat kijkt of jouw lievelingsfilm al in het lijstje van de computer staat opgeslagen.
                 Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst.
             code: |
-                favoriete_film {is} Batman, Spiderman, The Avengers, Jurassic Park
+                favoriete_films {is} Batman, Spiderman, The Avengers, Jurassic Park
                 film {is} {ask} 'Wat is jouw lievelingsfilm?'
-                {if} film {in} favoriete_film {print} 'Jij hebt een goede smaak!'
+                {if} film {in} favoriete_films {print} 'Jij hebt een goede smaak!'
                 {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
-                {add} film {to_list} favoriete_film
+                {add} film {to_list} favoriete_films
         2:
-            story: Create a maths game.
+            story: |
+                Maak dit rekenspelletje.
             code: |
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} print 'Wrong! The answer was 72'
+                {print} 'Los deze som op'
+                antwoord {is} {ask} '88 - 16 = ?'
+                {if} antwoord {is} 72 {print} 'Correct!'
+                {else} {print} 'Fout! Het was 72'
     6:
         1:
             story: |
                 Maak een programma dat voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.
                 Vraag eerst de leeftijd van de gebruiker en rekenen maar. 
-                Bereken eerst de hondenjaren en dan de kattenjaren.
+                **Bereken eerst de hondenjaren en dan de kattenjaren.**
                 Laat de gebruiker de nieuwe leeftijden zien!
             code: |
                 leeftijd = {ask} 'Hoe oud ben je?'
@@ -107,33 +126,31 @@ levels:
                 {print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
                 {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
+            story: |
+                Maak een programma dat je helpt berekenen hoeveel taarten je moet kopen voor iemands verjaardag.
             code: |
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount is people/8
+                cakes_amount = people/8
                 {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
             story: |
-                In een schaaktoernooi zijn nog drie spelers over. 
-                Maak een programma dat beslist welke twee spelers als eerst tegen elkaar mogen schaken.
-                Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
+                Maak het baby shark liedje compleet. Eerst komt baby, dan mama tot slot papa haai.
             code: |
-                spelers = Freek, Bart, Emma
-                speler1 = spelers {at} {random}
-                {remove} speler1 {from} spelers
-                speler2 = spelers {at} {random}
-                {print} speler1 ' speelt eerst tegen ' speler2
-                {remove} speler2 {from} spelers
-                {print} 'De winnaar speelt tegen ' spelers {at} {random}
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
         2:
-            story: Create the song 'The wheels on the bus go round and round'
+            story: Maak het liedje 'de wielen van de bus'
             code: |
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'De wielen van de bus gaan'
+                {repeat} 3 {times} {print} 'rond en rond'
+                {print} 'De wielen van de bus gaan rond en rond'
+                {print} 'als de bus gaat rijden'
     8:
         1:
             story: |
@@ -148,11 +165,11 @@ levels:
                     {sleep} 2
         2:
             story: |
-                Print the countdown for a  game of hide and seek.
+                Laat de computer aftellen voor een potje verstoppertje
             code: |
-                counter = 11
+                teller = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
+                  teller = teller - 1
+                  {print} teller
                   {sleep} 1
-                {print} 'Ready or not here I come!'
+                {print} 'Wie niet weg is, is gezien! Ik kom!'
