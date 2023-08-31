@@ -18,7 +18,7 @@ adventures:
                     Quizás te has dado cuenta en el primer nivel que el comando `{echo}` sólo puede guardar un bit de información cada vez.
                     Por ejemplo en la aventura del restaurante, puedes imprimir lo que el cliente quiere comer, o que quiere de beber, pero no ambas en una misma frase.
                 start_code: "{print} hola mundo!"
-                example_code: "```\n{print} Bienvenido a Hedy's\n{ask} ¿Qué le gustaría comer?\n{echo} Así que quiere\n{ask} ¿qué le gustaría beber?\n{echo} Así que quiere\n```\n"
+                example_code: "**¡Cuidado! ¡Este código no funciona!**\nEn Hedy los camndos a veces cambiarán. `echo` por ejemplo sólo funciona en el nivel 1. En este nivel aprenderás una forma mejor para devolver las respuestas.\n```\n{print} Bienvenido a Hedy's\n{ask} ¿Qué le gustaría comer?\n{echo} Así que quiere\n{ask} ¿qué le gustaría beber?\n{echo} Así que quiere\n```\n"
                 story_text_2: "Si el jugador escribe una hamburguesa y un refresco, no puedes decir \"así que quieres una hamburguesa y un refresco\", pero tendrás que hacerlo en dos líneas separadas.\nTambién, el comando `{echo}` sólo imprime la palabra al final de la frase. Así que no puedes decir \"¡tu hamburguesa viene enseguida!\".\n\nEsos cambios en el nivel 2. En el nivel 2 aprenderás a trabajar con variables, que te permiten guardar varias partes de información e imprimirlas donde quieras.\n¡Así que vayamos a la siguiente pestaña!\n"
             3:
                 story_text: |
@@ -946,13 +946,13 @@ adventures:
             13:
                 story_text: |2
 
-                    ### Ejercicio 1
-                    Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.
+                      ### Ejercicio 1
+                      Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.
 
-                    ### Ejercicio 2 Extra
-                    A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.
-                    Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.
-                    Vacía el campo de programación y crea tu propia solución.
+                      ### Ejercicio 2 Extra
+                      A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.
+                      Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.
+                      Vacía el campo de programación y crea tu propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu codigo aqui'
     restaurant:
