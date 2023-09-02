@@ -9,7 +9,7 @@ The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 What's next?
 ------------
 
-If you want to see what the core team will work on next, you can follow [our Project](https://github.com/Felienne/hedy/projects/5), the [Discussions](https://github.com/Felienne/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
+If you want to see what the core team will work on next, you can follow [our Project](https://github.com/hedyorg/hedy/projects/5), the [Discussions](https://github.com/hedyorg/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
 
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ----------------------------------------------
@@ -26,12 +26,12 @@ I have an idea for what you should build or improve!
 
 Great! We have multiple ways of monitoring ideas.
 
-If it is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
+If it is a small fix, it is best to [make an issue](https://github.com/hedyorg/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
 
 * Error messages that need to be improved
 * Crashes or bugs
 
-If it is a new idea, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas). Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
+If it is a new idea, [start a discussion](https://github.com/hedyorg/hedy/discussions/categories/ideas). Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
 
 * New keywords
 * New meanings for existing keywords
@@ -44,4 +44,4 @@ Want to help improve Hedy?
 
 We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-You can follow the [Discussions](https://github.com/Felienne/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
+You can follow the [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)

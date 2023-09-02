@@ -23,7 +23,7 @@ Tip, if you use the word `fixes` before the issue number in this description, th
 
 **How to test**
 
-* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example_
+* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/hedyorg/hedy/pull/880#issue-1016304308 for an example_
 * If this is a language change: _add a few tests showing the difference_
 
 **Checklist**
