@@ -28,7 +28,7 @@ def collect_snippets(path, filtered_language=None):
 
             for name, adventure in yaml['adventures'].items():
                 # the default tab sometimes contains broken code to make a point to learners about changing syntax.
-                if not not name == 'default':
+                if not name == 'default':
                     for level_number in adventure['levels']:
                         if level_number > hedy.HEDY_MAX_LEVEL:
                             print('content above max level!')
