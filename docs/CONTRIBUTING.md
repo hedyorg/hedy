@@ -243,7 +243,7 @@ As this project is growing and multiple people are working on it, we want to mov
 (.env) $ pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
+After this, every modification you commit will be linted by flake8 and autoformatted by black according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 `git commit -m "your message" --no-verify`
