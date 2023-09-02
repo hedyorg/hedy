@@ -122,7 +122,7 @@ class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
-        keywords = ['Introduction', 'Introductie', 'Başlangıç', 'Introducción']
+        keywords = ['Introduction', 'Introductie', 'Başlangıç', 'Introducción', 'Introdução', 'Pierwsze kroki']
 
         if snippet is not None and len(snippet.code) > 0 and snippet.adventure_name not in keywords:
             try:
