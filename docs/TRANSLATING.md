@@ -59,3 +59,7 @@ One important thing to notice is the **grayed pieces of text**. This is computer
 
 If you run into any problems, let us know, so we can address them here for future translators. You can reach us at [hello@hedy.org](mailto:hello@hedy.org), or you can join our [Discord #translators channel](https://discord.gg/N7XXDtcNRY)
 
+
+## Weblate development tips
+
+For advanced weblate development instructions, see [WEBLATE.md](WEBLATE.md).
