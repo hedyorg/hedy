@@ -489,7 +489,8 @@ class TestsLevel4(HedyTester):
             "print(f'{dieren[int(index)-1]}')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Hond"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Hond"
 
         self.multi_level_tester(
             max_level=11,

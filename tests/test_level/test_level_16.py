@@ -24,7 +24,8 @@ class TestsLevel16(HedyTester):
             "print(f'''{dieren[int(1)-1]}''')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Hond"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Hond"
 
         self.multi_level_tester(
             code=code,
@@ -43,7 +44,8 @@ class TestsLevel16(HedyTester):
         code = "friends = ['Ashli']"
         expected = "friends = ['Ashli']"
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Ashli"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Ashli"
 
         self.multi_level_tester(
             code=code,
@@ -68,7 +70,8 @@ class TestsLevel16(HedyTester):
             "print(f'''{friends[int(1)-1]}''')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Ashli"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Ashli"
 
         self.multi_level_tester(
             code=code,
@@ -90,7 +93,8 @@ class TestsLevel16(HedyTester):
             "print(f'''{dieren[int(1)-1]}''')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Hond"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Hond"
 
         self.multi_level_tester(
             code=code,
@@ -115,7 +119,9 @@ class TestsLevel16(HedyTester):
         )
 
         szamok1 = ["1", "2", "3", "4", "5"]
-        check_in_list = lambda x: HedyTester.run_code(x) in szamok1
+
+        def check_in_list(x):
+            return HedyTester.run_code(x) in szamok1
 
         self.multi_level_tester(
             code=code,

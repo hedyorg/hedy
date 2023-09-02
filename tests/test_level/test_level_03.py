@@ -53,7 +53,8 @@ class TestsLevel3(HedyTester):
         )
 
         # check if result is in the expected list
-        check_in_list = lambda x: HedyTester.run_code(x) in ["Hond", "Kat", "Kangoeroe"]
+        def check_in_list(x):
+            return HedyTester.run_code(x) in ["Hond", "Kat", "Kangoeroe"]
 
         self.multi_level_tester(
             max_level=11,
@@ -105,7 +106,8 @@ class TestsLevel3(HedyTester):
             "print(f'{dieren[int(1)-1]}')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "Hond"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "Hond"
 
         self.multi_level_tester(
             max_level=11,
@@ -128,11 +130,12 @@ class TestsLevel3(HedyTester):
         )
 
         # check if result is in the expected list
-        check_in_list = lambda x: HedyTester.run_code(x) in [
-            "chien",
-            "chat",
-            "kangourou",
-        ]
+        def check_in_list(x):
+            return HedyTester.run_code(x) in [
+                "chien",
+                "chat",
+                "kangourou",
+            ]
 
         self.multi_level_tester(
             max_level=11,

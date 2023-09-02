@@ -149,7 +149,8 @@ class TestsLevel12(HedyTester):
             "print(f'''{numbers[int(1)-1]}''')",
         )
 
-        check_in_list = lambda x: HedyTester.run_code(x) == "5"
+        def check_in_list(x):
+            return HedyTester.run_code(x) == "5"
 
         self.multi_level_tester(
             max_level=15,
@@ -2066,7 +2067,8 @@ class TestsLevel12(HedyTester):
         print(f'''dat is dan: {getal1 + getal2 + getal3}''')"""
         )
 
-        check_output = lambda x: HedyTester.run_code(x) == "dat is dan: 567"
+        def check_output(x):
+            return HedyTester.run_code(x) == "dat is dan: 567"
 
         self.multi_level_tester(
             code=code,
