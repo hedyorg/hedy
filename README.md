@@ -14,7 +14,7 @@ If you want to see what the core team will work on next, you can follow [our Pro
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ----------------------------------------------
 
-A simple way to help out Hedy is to [help us translate Hedy](TRANSLATING.md) using Weblate! You do not need programming experience or knowledge to translate Hedy. Below the current status, help us complete a language, or add a new one.
+A simple way to help out Hedy is to [help us translate Hedy](docs/TRANSLATING.md) using Weblate! You do not need programming experience or knowledge to translate Hedy. Below the current status, help us complete a language, or add a new one.
 
 <a href="https://hosted.weblate.org/engage/hedy/">
 <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" />
@@ -42,6 +42,6 @@ Please note that we want to be a friendly and welcoming open source project. If 
 Want to help improve Hedy?
 --------------------------
 
-We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](CONTRIBUTING.md).
+We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-You can follow the [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
+You can follow the [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md)
