@@ -15,7 +15,8 @@ def exception_language_input():
 def custom_name_func(testcase_func, _, param):
     (ex, lang) = param.args
     return parameterized.to_safe_name(
-        f"{testcase_func.__name__}_{ex.__class__.__name__}_to_{lang}_lang")
+        f"{testcase_func.__name__}_{ex.__class__.__name__}_to_{lang}_lang"
+    )
 
 
 def create_exceptions():
@@ -25,13 +26,15 @@ def create_exceptions():
 
 def create_exception(ex_class):
     ex_args = [
-        f'{n}-value' for n in ex_class.__init__.__code__.co_varnames if n not in ['self', 'arguments']]
+        f"{n}-value"
+        for n in ex_class.__init__.__code__.co_varnames
+        if n not in ["self", "arguments"]
+    ]
     return ex_class(*ex_args)
 
 
 class TestsTranslationError(HedyTester):
-
     @parameterized.expand(exception_language_input(), name_func=custom_name_func)
     def test_translate_hedy_exception(self, exception, language):
-        with app.test_request_context(headers={'Accept-Language': language}):
+        with app.test_request_context(headers={"Accept-Language": language}):
             translate_error(exception.error_code, exception.arguments, language)

@@ -35,7 +35,13 @@ class ABProxying:
         # /session_test is meant to return the session from the test environment, for testing purposes.
         elif re.match(".*/session_test", request.url) or redirect_ab(request):
             url = self.target_host + request.full_path
-            logging.debug("Proxying %s %s %s to %s", request.method, request.url, dict(session), url)
+            logging.debug(
+                "Proxying %s %s %s to %s",
+                request.method,
+                request.url,
+                dict(session),
+                url,
+            )
 
             request_headers = {}
             for header in request.headers:
@@ -45,20 +51,29 @@ class ABProxying:
             # In case the session_id is not yet set in the cookie, pass it in a special header
             request_headers["X-session_id"] = session["session_id"]
 
-            r = getattr(requests, request.method.lower())(url, headers=request_headers, data=request.data)
+            r = getattr(requests, request.method.lower())(
+                url, headers=request_headers, data=request.data
+            )
 
             response = make_response(r.content)
             for header in r.headers:
                 # With great help from
                 # https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
-                if header.lower() in ["content-encoding", "content-length", "transfer-encoding", "connection"]:
+                if header.lower() in [
+                    "content-encoding",
+                    "content-length",
+                    "transfer-encoding",
+                    "connection",
+                ]:
                     continue
                 # Setting the session cookie returned by the test environment into the response
                 # won't work because it will be overwritten by Flask,
                 # so we need to read the cookie into the session so that then
                 # the session cookie can be updated by Flask
                 if header.lower() == "set-cookie":
-                    proxied_session = extract_session_from_cookie(r.headers[header], self.secret_key)
+                    proxied_session = extract_session_from_cookie(
+                        r.headers[header], self.secret_key
+                    )
                     for key in proxied_session:
                         session[key] = proxied_session[key]
                     continue
@@ -101,7 +116,8 @@ def extract_session_from_cookie(cookie_header, secret_key):
         salt=cookie_interface.salt,
         serializer=cookie_interface.serializer,
         signer_kwargs=dict(
-            key_derivation=cookie_interface.key_derivation, digest_method=cookie_interface.digest_method
+            key_derivation=cookie_interface.key_derivation,
+            digest_method=cookie_interface.digest_method,
         ),
     )
 

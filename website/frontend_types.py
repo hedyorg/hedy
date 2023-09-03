@@ -48,13 +48,14 @@ class Program:
     def from_database_row(r):
         """Convert a database row into a typed Program object."""
         return Program(
-            name=r.get('name', ''),
-            code=r.get('code', ''),
-            date=r.get('date', 0),
-            adventure_name=r.get('adventure_name', 'default'),
-            id=r.get('id', ''),
-            public=r.get('public'),
-            submitted=r.get('submitted'))
+            name=r.get("name", ""),
+            code=r.get("code", ""),
+            date=r.get("date", 0),
+            adventure_name=r.get("adventure_name", "default"),
+            id=r.get("id", ""),
+            public=r.get("public"),
+            submitted=r.get("submitted"),
+        )
 
 
 @dataclass
@@ -73,7 +74,9 @@ class SaveInfo:
             id=program.id,
             public=program.public,
             submitted=program.submitted,
-            public_url=f'{utils.base_url()}/hedy/{program.id}/view' if program.public or program.submitted else None,
+            public_url=f"{utils.base_url()}/hedy/{program.id}/view"
+            if program.public or program.submitted
+            else None,
         )
 
 
@@ -97,10 +100,11 @@ class Adventure:
     @staticmethod
     def from_teacher_adventure_database_row(row):
         return Adventure(
-            short_name=row['id'],
-            name=row['name'],
-            save_name=row['name'],
-            start_code='',  # Teacher adventures don't seem to have this
-            text=row['content'],
+            short_name=row["id"],
+            name=row["name"],
+            save_name=row["name"],
+            start_code="",  # Teacher adventures don't seem to have this
+            text=row["content"],
             is_teacher_adventure=True,
-            is_command_adventure=False)
+            is_command_adventure=False,
+        )

@@ -13,46 +13,66 @@ class TestsTranslationLevel18(HedyTester):
     level = 18
 
     def test_input(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         leeftijd is input('Hoe oud ben jij?')
-        print(leeftijd)""")
+        print(leeftijd)"""
+        )
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = textwrap.dedent("""\
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level
+        )
+        expected = textwrap.dedent(
+            """\
         leeftijd is invoer('Hoe oud ben jij?')
-        print(leeftijd)""")
+        print(leeftijd)"""
+        )
 
         self.assertEqual(expected, result)
 
     def test_range_with_brackets(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         for i in range(0, 10):
-            print('hallo!')""")
+            print('hallo!')"""
+        )
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = textwrap.dedent("""\
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level
+        )
+        expected = textwrap.dedent(
+            """\
         voor i in bereik(0, 10):
-            print('hallo!')""")
+            print('hallo!')"""
+        )
 
         self.assertEqual(expected, result)
 
     def test_input_empty_brackets(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         nombre es entrada()
-        imprimir(nombre)""")
+        imprimir(nombre)"""
+        )
 
-        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
+        result = hedy_translation.translate_keywords(
+            code, from_lang="es", to_lang="en", level=self.level
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         nombre is input()
-        print(nombre)""")
+        print(nombre)"""
+        )
 
         self.assertEqual(expected, result)
 
     def test_print_empty_brackets(self):
         code = textwrap.dedent("imprimir()")
 
-        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
+        result = hedy_translation.translate_keywords(
+            code, from_lang="es", to_lang="en", level=self.level
+        )
 
         expected = textwrap.dedent("print()")
 

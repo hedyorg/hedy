@@ -38,7 +38,9 @@ class LogQueue:
         self.transmitter = None
         self.do_print = do_print
         self.mutex = threading.Lock()
-        self.thread = threading.Thread(target=self._write_thread, name=f"{name}Writer", daemon=True)
+        self.thread = threading.Thread(
+            target=self._write_thread, name=f"{name}Writer", daemon=True
+        )
         self.thread.start()
 
     def add(self, data):
@@ -136,7 +138,9 @@ class LogQueue:
             return self.transmitter(timestamp, records)
         else:
             count = len(records)
-            logger.warning(f"No querylog transmitter configured, {count} records dropped")
+            logger.warning(
+                f"No querylog transmitter configured, {count} records dropped"
+            )
 
     def _write_thread(self):
         """Background thread which will wake up every batch_window_s seconds

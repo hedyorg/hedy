@@ -30,18 +30,17 @@ class SourceRange:
         self.to_column = to_column
 
     def __str__(self):
-        return f'{self.from_line}/{self.from_column}-{self.to_line}/{self.to_column}'
+        return f"{self.from_line}/{self.from_column}-{self.to_line}/{self.to_column}"
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
-        return (
-            self.from_line, self.from_column,
-            self.to_line, self.to_column
-        ) == (
-            other.from_line, other.from_column,
-            other.to_line, other.to_column
+        return (self.from_line, self.from_column, self.to_line, self.to_column) == (
+            other.from_line,
+            other.from_column,
+            other.to_line,
+            other.to_column,
         )
 
 
@@ -59,18 +58,26 @@ class SourceCode:
         self.error = error
 
     def __hash__(self):
-        return hash((
-            self.source_range.from_line, self.source_range.from_column,
-            self.source_range.to_line, self.source_range.to_column
-        ))
+        return hash(
+            (
+                self.source_range.from_line,
+                self.source_range.from_column,
+                self.source_range.to_line,
+                self.source_range.to_column,
+            )
+        )
 
     def __eq__(self, other):
         return (
-            self.source_range.from_line, self.source_range.from_column,
-            self.source_range.to_line, self.source_range.to_column
+            self.source_range.from_line,
+            self.source_range.from_column,
+            self.source_range.to_line,
+            self.source_range.to_column,
         ) == (
-            other.source_range.from_line, other.source_range.from_column,
-            other.source_range.to_line, other.source_range.to_column
+            other.source_range.from_line,
+            other.source_range.from_column,
+            other.source_range.to_line,
+            other.source_range.to_column,
         )
 
     def __ne__(self, other):
@@ -78,9 +85,9 @@ class SourceCode:
 
     def __str__(self):
         if self.error is None:
-            return f'{self.source_range} --- {self.code}'
+            return f"{self.source_range} --- {self.code}"
         else:
-            return f'{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]'
+            return f"{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]"
 
     def __repr__(self):
         return self.__str__()
@@ -104,13 +111,11 @@ class SourceMap:
     skip_faulty = False
     exception_found_during_parsing = None
 
-    exceptions_not_to_skip = (
-        exceptions.UnsupportedStringValue,
-    )
+    exceptions_not_to_skip = (exceptions.UnsupportedStringValue,)
 
-    language = 'en'
-    hedy_code = ''
-    python_code = ''
+    language = "en"
+    hedy_code = ""
+    python_code = ""
     grammar_rules = []
 
     def __init__(self):
@@ -134,28 +139,29 @@ class SourceMap:
         python_code_mapped = list()
 
         def line_col(context, idx):
-            return context.count('\n', 0, idx) + 1, idx - context.rfind('\n', 0, idx)
+            return context.count("\n", 0, idx) + 1, idx - context.rfind("\n", 0, idx)
 
         for hedy_source_code, python_source_code in self.map.items():
-            if hedy_source_code.error is not None or python_source_code.code == '':
+            if hedy_source_code.error is not None or python_source_code.code == "":
                 continue
 
             start_index = python_code.find(python_source_code.code)
             code_char_length = len(python_source_code.code)
 
             for i in range(python_code_mapped.count(python_source_code.code)):
-                start_index = python_code.find(python_source_code.code, start_index+code_char_length)
-                start_index = max(0, start_index)  # not found (-1) means that start_index = 0
+                start_index = python_code.find(
+                    python_source_code.code, start_index + code_char_length
+                )
+                start_index = max(
+                    0, start_index
+                )  # not found (-1) means that start_index = 0
 
             end_index = start_index + code_char_length
             start_line, start_column = line_col(python_code, start_index)
             end_line, end_column = line_col(python_code, end_index)
 
             python_source_code.source_range = SourceRange(
-                start_line,
-                start_column,
-                end_line,
-                end_column
+                start_line, start_column, end_line, end_column
             )
 
             python_code_mapped.append(python_source_code.code)
@@ -163,15 +169,23 @@ class SourceMap:
     def get_grammar_rules(self):
         script_dir = path.abspath(path.dirname(__file__))
 
-        with open(path.join(script_dir, "grammars", "level1.lark"), "r", encoding="utf-8") as file:
+        with open(
+            path.join(script_dir, "grammars", "level1.lark"), "r", encoding="utf-8"
+        ) as file:
             grammar_text = file.read()
 
         for i in range(2, 19):
-            with open(path.join(script_dir, "grammars", f'level{i}-Additions.lark'), "r", encoding="utf-8") as file:
-                grammar_text += '\n' + file.read()
+            with open(
+                path.join(script_dir, "grammars", f"level{i}-Additions.lark"),
+                "r",
+                encoding="utf-8",
+            ) as file:
+                grammar_text += "\n" + file.read()
 
         self.grammar_rules = re.findall(r"(\w+):", grammar_text)
-        self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
+        self.grammar_rules = [
+            rule for rule in self.grammar_rules if "text" not in rule
+        ]  # exclude text from mapping
         self.grammar_rules = list(set(self.grammar_rules))  # remove duplicates
 
     def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
@@ -180,9 +194,9 @@ class SourceMap:
     def clear(self):
         self.map.clear()
         self.level = 0
-        self.language = 'en'
-        self.hedy_code = ''
-        self.python_code = ''
+        self.language = "en"
+        self.hedy_code = ""
+        self.python_code = ""
 
     def get_result(self):
         response_map = dict()
@@ -190,19 +204,19 @@ class SourceMap:
 
         for hedy_source_code, python_source_code in self.map.items():
             response_map[index] = {
-                'hedy_range': {
-                    'from_line': hedy_source_code.source_range.from_line,
-                    'from_column': hedy_source_code.source_range.from_column,
-                    'to_line': hedy_source_code.source_range.to_line,
-                    'to_column': hedy_source_code.source_range.to_column,
+                "hedy_range": {
+                    "from_line": hedy_source_code.source_range.from_line,
+                    "from_column": hedy_source_code.source_range.from_column,
+                    "to_line": hedy_source_code.source_range.to_line,
+                    "to_column": hedy_source_code.source_range.to_column,
                 },
-                'python_range': {
-                    'from_line': python_source_code.source_range.from_line,
-                    'from_column': python_source_code.source_range.from_column,
-                    'to_line': python_source_code.source_range.to_line,
-                    'to_column': python_source_code.source_range.to_column,
+                "python_range": {
+                    "from_line": python_source_code.source_range.from_line,
+                    "from_column": python_source_code.source_range.from_column,
+                    "to_line": python_source_code.source_range.to_line,
+                    "to_column": python_source_code.source_range.to_column,
                 },
-                'error': hedy_source_code.error,
+                "error": hedy_source_code.error,
             }
 
             index += 1
@@ -213,7 +227,9 @@ class SourceMap:
         response_map = dict()
 
         for hedy_source_code, python_source_code in self.map.items():
-            response_map[str(hedy_source_code.source_range)] = str(python_source_code.source_range)
+            response_map[str(hedy_source_code.source_range)] = str(
+                python_source_code.source_range
+            )
 
         return response_map
 
@@ -224,15 +240,15 @@ class SourceMap:
 
     def print_source_map(self, d, indent=0):
         for key, value in d.items():
-            print('\t' * indent + str(key) + ':')
+            print("\t" * indent + str(key) + ":")
             if isinstance(value, dict):
                 self.print_source_map(value, indent + 1)
             else:
                 code_lines = str(value).splitlines()
-                code_lines = ['\t' * (indent + 1) + str(x) for x in code_lines]
+                code_lines = ["\t" * (indent + 1) + str(x) for x in code_lines]
                 code = "\n".join(code_lines)
                 print(code)
-            print('')
+            print("")
 
     def __str__(self):
         self.print_source_map(self.map)
@@ -240,16 +256,18 @@ class SourceMap:
 
 
 def source_map_rule(source_map: SourceMap):
-    """ A decorator function that should decorator the transformer method (grammar rule)
-        the decorator adds the hedy code & python code to the map when the transformer method (grammar rule) is used
+    """A decorator function that should decorator the transformer method (grammar rule)
+    the decorator adds the hedy code & python code to the map when the transformer method (grammar rule) is used
     """
 
     def decorator(function):
         def wrapper(*args, **kwargs):
             meta = args[1]
 
-            hedy_code_input = source_map.hedy_code[meta.start_pos:meta.end_pos]
-            hedy_code_input = hedy_code_input.replace('#ENDBLOCK', '')  # ENDBLOCK is not part of the Hedy code, remove
+            hedy_code_input = source_map.hedy_code[meta.start_pos : meta.end_pos]
+            hedy_code_input = hedy_code_input.replace(
+                "#ENDBLOCK", ""
+            )  # ENDBLOCK is not part of the Hedy code, remove
             error = None
 
             if not source_map.skip_faulty:
@@ -264,31 +282,34 @@ def source_map_rule(source_map: SourceMap):
 
                     if (
                         # if a Lark tree is returned
-                        isinstance(generated_python, Tree) or
+                        isinstance(generated_python, Tree)
+                        or
                         # if a Lark tree is returned as a string, we check with regex
                         bool(re.match(r".*Tree\(.*Token\(.*\).*\).*", generated_python))
                     ):
-                        raise Exception('Can not map a Lark tree, only strings')
+                        raise Exception("Can not map a Lark tree, only strings")
 
                 except Exception as e:
                     # If an exception is found, we set the Python code to pass (null operator)
                     # we also map the error
-                    generated_python = 'pass'
+                    generated_python = "pass"
                     error = e
 
             hedy_code = SourceCode(
                 SourceRange(
-                    meta.container_line, meta.container_column,
-                    meta.container_end_line, meta.container_end_column
+                    meta.container_line,
+                    meta.container_column,
+                    meta.container_end_line,
+                    meta.container_end_column,
                 ),
                 hedy_code_input,
-                error=error
+                error=error,
             )
 
             python_code = SourceCode(
                 # We don't know now, set_python_output will set the ranges later
                 SourceRange(None, None, None, None),
-                generated_python
+                generated_python,
             )
 
             source_map.add_source(hedy_code, python_code)
@@ -300,11 +321,11 @@ def source_map_rule(source_map: SourceMap):
 
 
 def source_map_transformer(source_map: SourceMap):
-    """ A decorator function that should decorate a transformer class
+    """A decorator function that should decorate a transformer class
 
-        This is used for convenience, instead of adding source_map_rule to all methods,
-        source_map_transformer needs only to be added to the transformer class.
-        This decorator add source_map_rule to all appropriate methods.
+    This is used for convenience, instead of adding source_map_rule to all methods,
+    source_map_transformer needs only to be added to the transformer class.
+    This decorator add source_map_rule to all appropriate methods.
     """
 
     def decorate(cls):

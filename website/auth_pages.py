@@ -57,7 +57,10 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body["username"])
 
         if not user or not check_password(body["password"], user["password"]):
-            return gettext("invalid_username_password") + " " + gettext("no_account"), 403
+            return (
+                gettext("invalid_username_password") + " " + gettext("no_account"),
+                403,
+            )
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -65,7 +68,13 @@ class AuthModule(WebsiteModule):
             new_hash = password_hash(body["password"], make_salt())
 
         cookie = make_salt()
-        self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
+        self.db.store_token(
+            {
+                "id": cookie,
+                "username": user["username"],
+                "ttl": times() + SESSION_LENGTH,
+            }
+        )
         if new_hash:
             self.db.record_login(user["username"], new_hash)
         else:
@@ -121,13 +130,21 @@ class AuthModule(WebsiteModule):
             return validation, 400
 
         # Validate fields only relevant when creating a single user account
-        if not isinstance(body.get("password_repeat"), str) or body["password"] != body["password_repeat"]:
+        if (
+            not isinstance(body.get("password_repeat"), str)
+            or body["password"] != body["password_repeat"]
+        ):
             return gettext("repeat_match_password"), 400
-        if not isinstance(body.get("language"), str) or body.get("language") not in ALL_LANGUAGES.keys():
+        if (
+            not isinstance(body.get("language"), str)
+            or body.get("language") not in ALL_LANGUAGES.keys()
+        ):
             return gettext("language_invalid"), 400
         if not isinstance(body.get("agree_terms"), str) or not body.get("agree_terms"):
             return gettext("agree_invalid"), 400
-        if not isinstance(body.get("keyword_language"), str) or body.get("keyword_language") not in [
+        if not isinstance(body.get("keyword_language"), str) or body.get(
+            "keyword_language"
+        ) not in [
             "en",
             body.get("language"),
         ]:
@@ -140,10 +157,18 @@ class AuthModule(WebsiteModule):
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
-            if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
+            if (
+                not isinstance(body.get("birth_year"), int)
+                or body["birth_year"] <= 1900
+                or body["birth_year"] > year
+            ):
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
-            if body["gender"] != "m" and body["gender"] != "f" and body["gender"] != "o":
+            if (
+                body["gender"] != "m"
+                and body["gender"] != "f"
+                and body["gender"] != "o"
+            ):
                 return gettext("gender_invalid"), 400
         if "country" in body:
             if not body["country"] in COUNTRIES:
@@ -154,8 +179,13 @@ class AuthModule(WebsiteModule):
             if not isinstance(body["heard_about"], list):
                 return gettext("heard_about_invalid"), 400
             for option in body["heard_about"]:
-                if option not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website",
-                                  "other_source"]:
+                if option not in [
+                    "from_another_teacher",
+                    "social_media",
+                    "from_video",
+                    "from_magazine_website",
+                    "other_source",
+                ]:
                     return gettext("heard_about_invalid"), 400
         if "prog_experience" in body and body["prog_experience"] not in ["yes", "no"]:
             return gettext("experience_invalid"), 400
@@ -191,7 +221,13 @@ class AuthModule(WebsiteModule):
 
         # We automatically login the user
         cookie = make_salt()
-        self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
+        self.db.store_token(
+            {
+                "id": cookie,
+                "username": user["username"],
+                "ttl": times() + SESSION_LENGTH,
+            }
+        )
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -208,7 +244,7 @@ class AuthModule(WebsiteModule):
         remember_current_user(user)
         return resp
 
-    @ route("/verify", methods=["GET"])
+    @route("/verify", methods=["GET"])
     def verify_email(self):
         username = request.args.get("username", None)
         token = request.args.get("token", None)
@@ -235,35 +271,41 @@ class AuthModule(WebsiteModule):
 
         # We automatically login the user
         cookie = make_salt()
-        self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
+        self.db.store_token(
+            {
+                "id": cookie,
+                "username": user["username"],
+                "ttl": times() + SESSION_LENGTH,
+            }
+        )
         remember_current_user(user)
 
         return redirect("/landing-page")
 
-    @ route("/logout", methods=["POST"])
+    @route("/logout", methods=["POST"])
     def logout(self):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         return "", 200
 
-    @ route("/destroy", methods=["POST"])
-    @ requires_login
+    @route("/destroy", methods=["POST"])
+    @requires_login
     def destroy(self, user):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
         return "", 200
 
-    @ route("/destroy_public", methods=["POST"])
-    @ requires_login
+    @route("/destroy_public", methods=["POST"])
+    @requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
         return "", 200
 
-    @ route("/change_student_password", methods=["POST"])
-    @ requires_login
+    @route("/change_student_password", methods=["POST"])
+    @requires_login
     def change_student_password(self, user):
         body = request.json
         if not isinstance(body, dict):
@@ -286,14 +328,16 @@ class AuthModule(WebsiteModule):
 
         return {"success": gettext("password_change_success")}, 200
 
-    @ route("/change_password", methods=["POST"])
-    @ requires_login
+    @route("/change_password", methods=["POST"])
+    @requires_login
     def change_password(self, user):
         body = request.json
 
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
-        if not isinstance(body.get("old_password"), str) or not isinstance(body.get("new-password"), str):
+        if not isinstance(body.get("old_password"), str) or not isinstance(
+            body.get("new-password"), str
+        ):
             return gettext("password_invalid"), 400
         if not isinstance(body.get("password_repeat"), str):
             return gettext("repeat_match_password"), 400
@@ -314,13 +358,17 @@ class AuthModule(WebsiteModule):
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
             try:
-                send_email_template(template="change_password", email=user["email"], username=user["username"])
+                send_email_template(
+                    template="change_password",
+                    email=user["email"],
+                    username=user["username"],
+                )
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
         return jsonify({"message": gettext("password_updated")}), 200
 
-    @ route("/recover", methods=["POST"])
+    @route("/recover", methods=["POST"])
     def recover(self):
         body = request.json
         # Validations
@@ -348,7 +396,9 @@ class AuthModule(WebsiteModule):
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
         # Todo TB -> Don't we want to use a hashed token here as well?
-        self.db.store_token({"id": token, "username": user["username"], "ttl": times() + RESET_LENGTH})
+        self.db.store_token(
+            {"id": token, "username": user["username"], "ttl": times() + RESET_LENGTH}
+        )
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -366,7 +416,7 @@ class AuthModule(WebsiteModule):
 
             return jsonify({"message": gettext("sent_password_recovery")}), 200
 
-    @ route("/reset", methods=["POST"])
+    @route("/reset", methods=["POST"])
     def reset(self):
         body = request.json
         # Validations
@@ -380,11 +430,18 @@ class AuthModule(WebsiteModule):
             return gettext("password_invalid"), 400
         if len(body["password"]) < 6:
             return gettext("password_six"), 400
-        if not isinstance(body.get("password_repeat"), str) or body["password"] != body["password_repeat"]:
+        if (
+            not isinstance(body.get("password_repeat"), str)
+            or body["password"] != body["password_repeat"]
+        ):
             return gettext("repeat_match_password"), 400
 
         token = self.db.get_token(body["token"])
-        if not token or body["token"] != token.get("id") or body["username"] != token.get("username"):
+        if (
+            not token
+            or body["token"] != token.get("id")
+            or body["username"] != token.get("username")
+        ):
             return gettext("token_invalid"), 403
 
         hashed = password_hash(body["password"], make_salt())
@@ -403,7 +460,9 @@ class AuthModule(WebsiteModule):
 
         if not is_testing_request(request):
             try:
-                send_email_template(template="reset_password", email=email, username=user["username"])
+                send_email_template(
+                    template="reset_password", email=email, username=user["username"]
+                )
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
@@ -422,7 +481,9 @@ class AuthModule(WebsiteModule):
         return jsonify({"message": gettext("teacher_account_success")}), 200
 
     def store_new_account(self, account, email):
-        username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])
+        username, hashed, hashed_token = prepare_user_db(
+            account["username"], account["password"]
+        )
         user = {
             "username": username,
             "password": hashed,
@@ -436,8 +497,15 @@ class AuthModule(WebsiteModule):
             "last_login": timems(),
         }
 
-        for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",
-                      "experience_languages"]:
+        for field in [
+            "country",
+            "birth_year",
+            "gender",
+            "language",
+            "heard_about",
+            "prog_experience",
+            "experience_languages",
+        ]:
             if field in account:
                 if field == "heard_about" and len(account[field]) == 0:
                     continue
@@ -460,6 +528,8 @@ class AuthModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return user, make_response({gettext("mail_error_change_processed")}, 400)
+                return user, make_response(
+                    {gettext("mail_error_change_processed")}, 400
+                )
             resp = make_response({})
         return user, resp

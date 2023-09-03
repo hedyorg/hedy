@@ -68,8 +68,11 @@ class YamlFile:
         because it creates a mess of files.
         """
         self.filename = filename
-        self.pickle_filename = path.join(tempfile.gettempdir(), 'hedy_pickles',
-                                         f"{pathname_slug(self.filename)}.pickle")
+        self.pickle_filename = path.join(
+            tempfile.gettempdir(),
+            "hedy_pickles",
+            f"{pathname_slug(self.filename)}.pickle",
+        )
 
     def exists(self):
         return os.path.exists(self.filename)
@@ -92,7 +95,7 @@ class YamlFile:
         """
         # Obtain or create a per-request cache dictionary (if we have a request), or an unattached
         # cache object that will disappear after this function returns if we don't have a request.
-        yaml_cache = g.setdefault('yaml_cache', {}) if has_request_context() else {}
+        yaml_cache = g.setdefault("yaml_cache", {}) if has_request_context() else {}
         cached = yaml_cache.get(self.filename)
         if cached is not None:
             return cached
@@ -100,7 +103,9 @@ class YamlFile:
         data = self.load()
 
         if not isinstance(data, dict):
-            raise RuntimeError(f"Contents of {self.filename} needs to be a dict, got: {data}")
+            raise RuntimeError(
+                f"Contents of {self.filename} needs to be a dict, got: {data}"
+            )
 
         yaml_cache[self.filename] = data
         return data
@@ -126,16 +131,16 @@ class YamlFile:
             with atomic_write_file(self.pickle_filename) as f:
                 pickle.dump(data, f)
         except IOError as e:
-            logger.warn('Error writing pickled YAML: %s', e)
+            logger.warn("Error writing pickled YAML: %s", e)
 
         return data
 
-    @querylog.timed_as('load_yaml_pickled')
+    @querylog.timed_as("load_yaml_pickled")
     def load_pickle(self):
         with open(self.pickle_filename, "rb") as f:
             return pickle.load(f)
 
-    @querylog.timed_as('load_yaml_uncached')
+    @querylog.timed_as("load_yaml_uncached")
     def load_uncached(self):
         """Load the source YAML file."""
         try:
@@ -186,7 +191,7 @@ def pathname_slug(x):
     that the full path may be too long to use as a file name, and that
     it needs to remain unique.
     """
-    x = re.sub(r'[^a-zA-Z0-9_-]', '', x)
+    x = re.sub(r"[^a-zA-Z0-9_-]", "", x)
     return x[-20:] + md5digest(x)
 
 

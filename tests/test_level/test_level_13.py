@@ -1,4 +1,3 @@
-
 import textwrap
 
 from tests.Tester import HedyTester
@@ -8,12 +7,15 @@ class TestsLevel13(HedyTester):
     level = 13
 
     def test_and(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       naam is ask 'hoe heet jij?'
       leeftijd is ask 'hoe oud ben jij?'
       if naam is 'Felienne' and leeftijd is 37
-          print 'hallo jij!'""")
-        expected = textwrap.dedent("""\
+          print 'hallo jij!'"""
+        )
+        expected = textwrap.dedent(
+            """\
       naam = input(f'''hoe heet jij?''')
       try:
         naam = int(naam)
@@ -31,22 +33,22 @@ class TestsLevel13(HedyTester):
         except ValueError:
           pass
       if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Felienne') and convert_numerals('Latin', leeftijd) == convert_numerals('Latin', '37'):
-        print(f'''hallo jij!''')""")
-
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            expected=expected
+        print(f'''hallo jij!''')"""
         )
 
+        self.multi_level_tester(max_level=16, code=code, expected=expected)
+
     def test_equals(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
     name = ask 'what is your name?'
     age = ask 'what is your age?'
     if name is 'Hedy' and age is 2
-        print 'You are the real Hedy!'""")
+        print 'You are the real Hedy!'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       name = input(f'''what is your name?''')
       try:
         name = int(name)
@@ -64,32 +66,38 @@ class TestsLevel13(HedyTester):
         except ValueError:
           pass
       if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy') and convert_numerals('Latin', age) == convert_numerals('Latin', '2'):
-        print(f'''You are the real Hedy!''')""")
+        print(f'''You are the real Hedy!''')"""
+        )
 
         self.multi_level_tester(
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['ask', 'ask', 'if', 'and', 'print']
+            expected_commands=["ask", "ask", "if", "and", "print"],
         )
 
     def test_or(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       if 5 is 5 or 4 is 4
-          print 'hallo'""")
-        expected = textwrap.dedent("""\
+          print 'hallo'"""
+        )
+        expected = textwrap.dedent(
+            """\
       if convert_numerals('Latin', '5') == convert_numerals('Latin', '5') or convert_numerals('Latin', '4') == convert_numerals('Latin', '4'):
-        print(f'''hallo''')""")
+        print(f'''hallo''')"""
+        )
 
         self.multi_level_tester(
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['if', 'or', 'print']
+            expected_commands=["if", "or", "print"],
         )
 
     def test_simple_function(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         define simple_function_1 with parameter
             print "simple_function_1 - 1"
             m = "simple_function_1 - 2"
@@ -113,9 +121,11 @@ class TestsLevel13(HedyTester):
         call simple_function_3 with "A", a, 1.0
         call simple_function_3 with "B", a, 1.0
         call simple_function_3 with "C", a, 1.0
-        call simple_function_3 with "C", 3 + 3, 1.0""")
+        call simple_function_3 with "C", 3 + 3, 1.0"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         def simple_function_1(parameter):
           print(f'''simple_function_1 - 1''')
           m = 'simple_function_1 - 2'
@@ -139,9 +149,11 @@ class TestsLevel13(HedyTester):
         simple_function_3('A', a, 1.0)
         simple_function_3('B', a, 1.0)
         simple_function_3('C', a, 1.0)
-        simple_function_3('C', 3 + 3, 1.0)""")
+        simple_function_3('C', 3 + 3, 1.0)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         simple_function_3 - 1
         test1
         simple_function_3 - 1
@@ -151,11 +163,9 @@ class TestsLevel13(HedyTester):
         1.0
         simple_function_3 - 2
         simple_function_3 - 2B
-        1.0""")
+        1.0"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            output=output,
-            max_level=16
+            code=code, expected=expected, output=output, max_level=16
         )

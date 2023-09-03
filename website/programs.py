@@ -7,7 +7,14 @@ from flask_babel import gettext
 import hedy
 import utils
 from config import config
-from website.auth import current_user, email_base_url, is_admin, requires_admin, requires_login, send_email
+from website.auth import (
+    current_user,
+    email_base_url,
+    is_admin,
+    requires_admin,
+    requires_login,
+    send_email,
+)
 
 from .achievements import Achievements
 from .database import Database
@@ -30,15 +37,17 @@ class ProgramsLogic:
         self.db = db
         self.achievements = achievements
 
-    def store_user_program(self,
-                           user,
-                           level: int,
-                           name: str,
-                           code: str,
-                           error: bool,
-                           program_id: Optional[str] = None,
-                           adventure_name: Optional[str] = None,
-                           set_public: Optional[bool] = None):
+    def store_user_program(
+        self,
+        user,
+        level: int,
+        name: str,
+        code: str,
+        error: bool,
+        program_id: Optional[str] = None,
+        adventure_name: Optional[str] = None,
+        set_public: Optional[bool] = None,
+    ):
         """Store a user program (either new or overwrite an existing one).
 
         Returns the program record.
@@ -59,19 +68,19 @@ class ProgramsLogic:
         }
 
         if set_public is not None:
-            updates['public'] = 1 if set_public else 0
+            updates["public"] = 1 if set_public else 0
 
         if program_id:
             # FIXME: This should turn into a conditional update
             current_prog = self.db.program_by_id(program_id)
             if not current_prog:
-                raise RuntimeError(f'No program with id: {program_id}')
-            if current_prog['username'] != updates['username']:
-                raise NotYourProgramError('Cannot overwrite other user\'s program')
+                raise RuntimeError(f"No program with id: {program_id}")
+            if current_prog["username"] != updates["username"]:
+                raise NotYourProgramError("Cannot overwrite other user's program")
 
             program = self.db.update_program(program_id, updates)
         else:
-            updates['id'] = uuid.uuid4().hex
+            updates["id"] = uuid.uuid4().hex
             program = self.db.store_program(updates)
             self.db.increase_user_program_count(user["username"])
 
@@ -79,8 +88,12 @@ class ProgramsLogic:
         self.achievements.increase_count("saved")
         self.achievements.verify_save_achievements(user["username"], adventure_name)
 
-        querylog.log_value(program_id=program['id'],
-                           adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
+        querylog.log_value(
+            program_id=program["id"],
+            adventure_name=adventure_name,
+            error=error,
+            code_lines=len(code.split("\n")),
+        )
 
         return program
 
@@ -109,7 +122,9 @@ class ProgramsModule(WebsiteModule):
 
         result = self.db.program_by_id(body["id"])
 
-        if not result or (result["username"] != user["username"] and not is_admin(user)):
+        if not result or (
+            result["username"] != user["username"] and not is_admin(user)
+        ):
             return "", 404
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
@@ -123,7 +138,9 @@ class ProgramsModule(WebsiteModule):
         ):
             self.db.set_favourite_program(user["username"], None)
 
-        achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
+        achievement = self.achievements.add_single_achievement(
+            user["username"], "do_you_have_copy"
+        )
         resp = {"message": gettext("delete_success")}
         if achievement:
             resp["achievement"] = achievement
@@ -143,7 +160,9 @@ class ProgramsModule(WebsiteModule):
         programs = self.db.programs_for_user(current_user()["username"])
         for program in programs:
             if program["name"] == body["name"]:
-                return jsonify({"duplicate": True, "message": gettext("overwrite_warning")})
+                return jsonify(
+                    {"duplicate": True, "message": gettext("overwrite_warning")}
+                )
         return jsonify({"duplicate": False})
 
     @route("/", methods=["POST"])
@@ -158,16 +177,16 @@ class ProgramsModule(WebsiteModule):
             return "name must be a string", 400
         if not isinstance(body.get("level"), int):
             return "level must be an integer", 400
-        if 'program_id' in body and not isinstance(body.get("program_id"), str):
+        if "program_id" in body and not isinstance(body.get("program_id"), str):
             return "program_id must be a string", 400
-        if 'shared' in body and not isinstance(body.get("shared"), bool):
+        if "shared" in body and not isinstance(body.get("shared"), bool):
             return "shared must be a boolean", 400
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
                 return "if present, adventure_name must be a string", 400
 
         error = None
-        program_id = body.get('program_id')
+        program_id = body.get("program_id")
 
         # We don't NEED to pass this in, but it saves the database a lookup if we do.
         program_public = body.get("shared")
@@ -183,26 +202,31 @@ class ProgramsModule(WebsiteModule):
             except BaseException:
                 error = True
                 if not body.get("force_save", True):
-                    return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+                    return jsonify(
+                        {"parse_error": True, "message": gettext("save_parse_warning")}
+                    )
 
         program = self.logic.store_user_program(
             program_id=program_id,
-            level=body['level'],
-            code=body['code'],
-            name=body['name'],
+            level=body["level"],
+            code=body["code"],
+            name=body["name"],
             user=user,
             error=error,
             set_public=program_public,
-            adventure_name=body.get('adventure_name'))
+            adventure_name=body.get("adventure_name"),
+        )
 
-        return jsonify({
-            "message": gettext("save_success_detail"),
-            "share_message": gettext("copy_clipboard"),
-            "name": program["name"],
-            "id": program['id'],
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-            "achievements": self.achievements.get_earned_achievements(),
-        })
+        return jsonify(
+            {
+                "message": gettext("save_success_detail"),
+                "share_message": gettext("copy_clipboard"),
+                "name": program["name"],
+                "id": program["id"],
+                "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+                "achievements": self.achievements.get_earned_achievements(),
+            }
+        )
 
     @route("/share", methods=["POST"])
     @requires_login
@@ -229,7 +253,9 @@ class ProgramsModule(WebsiteModule):
             self.db.set_favourite_program(user["username"], None)
 
         program = self.db.set_program_public_by_id(body["id"], bool(body["public"]))
-        achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
+        achievement = self.achievements.add_single_achievement(
+            user["username"], "sharing_is_caring"
+        )
 
         resp = {
             "id": body["id"],
@@ -307,8 +333,18 @@ class ProgramsModule(WebsiteModule):
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return jsonify({"message": 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({"message": 'Program successfully removed as a "Hedy choice" program.'}), 200
+            return (
+                jsonify(
+                    {"message": 'Program successfully set as a "Hedy choice" program.'}
+                ),
+                200,
+            )
+        return (
+            jsonify(
+                {"message": 'Program successfully removed as a "Hedy choice" program.'}
+            ),
+            200,
+        )
 
     @route("/report", methods=["POST"])
     @requires_login

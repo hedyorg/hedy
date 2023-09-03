@@ -9,7 +9,7 @@ from tests.Tester import HedyTester, SkippedMapping
 
 class TestsLevel7(HedyTester):
     level = 7
-    '''
+    """
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
@@ -20,7 +20,7 @@ class TestsLevel7(HedyTester):
      * single keyword positive tests are just keyword or keyword_special_case
      * multi keyword positive tests are keyword1_keywords_2
      * negative tests should be situation_gives_exception
-    '''
+    """
 
     #
     # repeat tests
@@ -30,108 +30,133 @@ class TestsLevel7(HedyTester):
 
         expected = HedyTester.dedent(
             "for __i__ in range(int('3')):",
-            (HedyTester.forward_transpiled(100, self.level), '  '))
+            (HedyTester.forward_transpiled(100, self.level), "  "),
+        )
 
-        self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
+        self.single_level_tester(
+            code=code, expected=expected, extra_check_function=self.is_turtle()
+        )
 
     def test_repeat_print(self):
         code = "repeat 5 times print 'me wants a cookie!'"
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         for __i__ in range(int('5')):
           print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
-        me wants a cookie!""")
+        me wants a cookie!"""
+        )
 
         self.single_level_tester(code=code, expected=expected, output=output)
 
     def test_repeat_print_variable(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         n is 5
-        repeat n times print 'me wants a cookie!'""")
+        repeat n times print 'me wants a cookie!'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         n = '5'
         for __i__ in range(int(n)):
           print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
-        me wants a cookie!""")
+        me wants a cookie!"""
+        )
 
         self.single_level_tester(code=code, expected=expected, output=output)
 
     def test_repeat_print_undefined_variable_gives_error(self):
         code = "repeat n times print 'me wants a cookie!'"
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+        self.single_level_tester(
+            code=code, exception=hedy.exceptions.UndefinedVarException
+        )
 
     def test_missing_body(self):
         code = "repeat 5 times"
 
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.MissingInnerCommandException,
-                                max_level=8)
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+            max_level=8,
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code, max_level=17, exception=hedy.exceptions.UnquotedTextException
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
         code = f"print {q}hedy 123"
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code, max_level=17, exception=hedy.exceptions.UnquotedTextException
         )
 
     def test_repeat_with_string_variable_gives_type_error(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         n is 'test'
-        repeat n times print 'n'""")
+        repeat n times print 'n'"""
+        )
 
         self.single_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
 
     def test_repeat_with_list_variable_gives_type_error(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         n is 1, 2, 3
-        repeat n times print 'n'""")
+        repeat n times print 'n'"""
+        )
 
         self.single_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
 
     def test_repeat_with_missing_print_gives_error(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         x is 3
-        repeat 3 times x""")
+        repeat 3 times x"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         x = '3'
-        pass""")
+        pass"""
+        )
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(
+                SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException
+            ),
         ]
 
         self.single_level_tester(
@@ -141,16 +166,22 @@ class TestsLevel7(HedyTester):
         )
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
-        code = textwrap.dedent("""\
-        repeat 3 times 'n'""")
+        code = textwrap.dedent(
+            """\
+        repeat 3 times 'n'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         for __i__ in range(int('3')):
           pass
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 16, 1, 19), hedy.exceptions.LonelyTextException),
+            SkippedMapping(
+                SourceRange(1, 16, 1, 19), hedy.exceptions.LonelyTextException
+            ),
         ]
 
         self.single_level_tester(
@@ -160,13 +191,17 @@ class TestsLevel7(HedyTester):
         )
 
     def test_repeat_with_missing_times_gives_error(self):
-        code = textwrap.dedent("""\
-        repeat 3 print 'n'""")
+        code = textwrap.dedent(
+            """\
+        repeat 3 print 'n'"""
+        )
 
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException
+            ),
         ]
 
         self.single_level_tester(
@@ -176,47 +211,82 @@ class TestsLevel7(HedyTester):
         )
 
     def test_repeat_ask(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         n is ask 'How many times?'
-        repeat n times print 'n'""")
+        repeat n times print 'n'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         n = input(f'How many times?')
         for __i__ in range(int(n)):
           print(f'n')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
-                           '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+    @parameterized.expand(
+        [
+            "5",
+            "𑁫",
+            "५",
+            "૫",
+            "੫",
+            "৫",
+            "೫",
+            "୫",
+            "൫",
+            "௫",
+            "౫",
+            "၅",
+            "༥",
+            "᠕",
+            "៥",
+            "๕",
+            "໕",
+            "꧕",
+            "٥",
+            "۵",
+        ]
+    )
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
-        expected = textwrap.dedent(f"""\
+        expected = textwrap.dedent(
+            f"""\
         for __i__ in range(int('{int(number)}')):
           print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
-        me wants a cookie!""")
+        me wants a cookie!"""
+        )
 
         self.single_level_tester(code=code, expected=expected, output=output)
 
     def test_repeat_over_9_times(self):
-        code = textwrap.dedent("""\
-        repeat 10 times print 'me wants a cookie!'""")
+        code = textwrap.dedent(
+            """\
+        repeat 10 times print 'me wants a cookie!'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         for __i__ in range(int('10')):
           print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
@@ -226,61 +296,73 @@ class TestsLevel7(HedyTester):
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
-        me wants a cookie!""")
+        me wants a cookie!"""
+        )
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['repeat', 'print'],
-            output=output)
+            expected_commands=["repeat", "print"],
+            output=output,
+        )
 
     def test_repeat_with_variable_name_collision(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         i is hallo!
         repeat 5 times print 'me wants a cookie!'
-        print i""")
+        print i"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         i = 'hallo!'
         for __i__ in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)
-        print(f'{i}')""")
+        print(f'{i}')"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
         me wants a cookie!
-        hallo!""")
+        hallo!"""
+        )
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['is', 'repeat', 'print', 'print'],
-            output=output)
+            expected_commands=["is", "repeat", "print", "print"],
+            output=output,
+        )
 
     def test_repeat_if(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is Hedy
-        if naam is Hedy repeat 3 times print 'Hallo Hedy!'""")
+        if naam is Hedy repeat 3 times print 'Hallo Hedy!'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         naam = 'Hedy'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           for __i__ in range(int('3')):
             print(f'Hallo Hedy!')
-            time.sleep(0.1)""")
+            time.sleep(0.1)"""
+        )
 
-        self.single_level_tester(
-            code=code,
-            expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_pressed_repeat(self):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(
+            """\
         pygame_end = False
         while not pygame_end:
           pygame.display.update()
@@ -298,19 +380,21 @@ class TestsLevel7(HedyTester):
             else:
               print(f'iets anders')
               break
-            # End of PyGame Event Handler""")
+            # End of PyGame Event Handler"""
+        )
 
-        self.single_level_tester(
-            code=code,
-            expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_pressed_multiple(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             if x is pressed print 'doe het 1 keer!' else print 'iets anders'
             if y is pressed print 'doe het 1 keer!' else print 'iets anders'
-            if z is pressed print 'doe het 1 keer!' else print 'iets anders'""")
+            if z is pressed print 'doe het 1 keer!' else print 'iets anders'"""
+        )
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(
+            """\
         pygame_end = False
         while not pygame_end:
           pygame.display.update()
@@ -358,20 +442,21 @@ class TestsLevel7(HedyTester):
             else:
               print(f'iets anders')
               break
-            # End of PyGame Event Handler""")
+            # End of PyGame Event Handler"""
+        )
 
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            translate=False)
+        self.single_level_tester(code=code, expected=expected, translate=False)
 
     def test_repeat_if_pressed_multiple(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             repeat 3 times if x is pressed forward 15 else forward -15
             repeat 3 times if y is pressed forward 15 else forward -15
-            repeat 3 times if z is pressed forward 15 else forward -15""")
+            repeat 3 times if z is pressed forward 15 else forward -15"""
+        )
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(
+            """\
         for __i__ in range(int('3')):
           pygame_end = False
           while not pygame_end:
@@ -461,20 +546,21 @@ class TestsLevel7(HedyTester):
                 time.sleep(0.1)
                 break
               # End of PyGame Event Handler
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            translate=False)
+        self.single_level_tester(code=code, expected=expected, translate=False)
 
     def test_repeat_if_multiple(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             aan is ja
             repeat 3 times if aan is ja print 'Hedy is leuk!'
-            repeat 3 times if aan is ja print 'Hedy is leuk!'""")
+            repeat 3 times if aan is ja print 'Hedy is leuk!'"""
+        )
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(
+            """\
         aan = 'ja'
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
@@ -485,40 +571,44 @@ class TestsLevel7(HedyTester):
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         Hedy is leuk!
         Hedy is leuk!
         Hedy is leuk!
         Hedy is leuk!
         Hedy is leuk!
-        Hedy is leuk!""")
+        Hedy is leuk!"""
+        )
 
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            output=output)
+        self.single_level_tester(code=code, expected=expected, output=output)
 
     def test_source_map(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         print 'The prince kept calling for help'
         repeat 5 times print 'Help!'
-        print 'Why is nobody helping me?'""")
+        print 'Why is nobody helping me?'"""
+        )
 
-        expected_code = textwrap.dedent("""\
+        expected_code = textwrap.dedent(
+            """\
         print(f'The prince kept calling for help')
         for __i__ in range(int('5')):
           print(f'Help!')
           time.sleep(0.1)
-        print(f'Why is nobody helping me?')""")
+        print(f'Why is nobody helping me?')"""
+        )
 
         expected_source_map = {
-            '1/1-1/41': '1/1-1/43',
-            '2/16-2/29': '3/3-3/18',
-            '2/1-2/29': '2/1-4/18',
-            '3/1-3/34': '5/1-5/36',
-            '1/1-3/35': '1/1-5/36'
+            "1/1-1/41": "1/1-1/43",
+            "2/16-2/29": "3/3-3/18",
+            "2/1-2/29": "2/1-4/18",
+            "3/1-3/34": "5/1-5/36",
+            "1/1-3/35": "1/1-5/36",
         }
 
         self.single_level_tester(code, expected=expected_code)

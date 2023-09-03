@@ -7,12 +7,13 @@ import unicodedata
 def slugify(s):
     if s is None:
         return None
-    return re.sub('[^a-zA-Z0-9]', '-', strip_accents(s)).lower()
+    return re.sub("[^a-zA-Z0-9]", "-", strip_accents(s)).lower()
 
 
 def strip_accents(s):
-    return ''.join(c for c in unicodedata.normalize('NFD', s)
-                   if unicodedata.category(c) != 'Mn')
+    return "".join(
+        c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"
+    )
 
 
 class DocCollection:
@@ -31,7 +32,7 @@ class DocCollection:
         return v
 
     def load_dir(self, rootdir):
-        files = glob.glob(f'{rootdir}/**/*.md', recursive=True)
+        files = glob.glob(f"{rootdir}/**/*.md", recursive=True)
         for file in sorted(files):
             doc = MarkdownDoc.from_file(file)
 
@@ -61,9 +62,9 @@ class DocCollection:
 class MarkdownDoc:
     @staticmethod
     def from_file(filename):
-        with open(filename, 'r', encoding='utf-8') as f:
+        with open(filename, "r", encoding="utf-8") as f:
             contents = f.read()
-        parts = re.split('^---+$', contents, maxsplit=1, flags=re.M)
+        parts = re.split("^---+$", contents, maxsplit=1, flags=re.M)
         if len(parts) == 1:
             return MarkdownDoc({}, parts[0])
         return MarkdownDoc(yaml.safe_load(parts[0]), parts[1])

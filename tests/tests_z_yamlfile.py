@@ -16,7 +16,7 @@ class TestYamlFile(unittest.TestCase):
 
         # Pick a file with unicode in it so we're sure it gets handled properly
         root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-        yaml_file = os.path.normpath(root_dir + '/content/adventures/hu.yaml')
+        yaml_file = os.path.normpath(root_dir + "/content/adventures/hu.yaml")
         file = YamlFile(yaml_file)
 
         # Remove pickled version of this file if it exists, it may
@@ -39,5 +39,6 @@ class TestYamlFile(unittest.TestCase):
 
         self.assertEqual(original_data, cached_data)
         print(
-            f'YAML loading takes {original_seconds / n} seconds, unpickling takes {cached_seconds / n}'
-            f'({original_seconds / cached_seconds:.1f}x faster)')
+            f"YAML loading takes {original_seconds / n} seconds, unpickling takes {cached_seconds / n}"
+            f"({original_seconds / cached_seconds:.1f}x faster)"
+        )

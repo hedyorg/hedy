@@ -20,19 +20,19 @@ import commonmark
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 
-IS_WINDOWS = os.name == 'nt'
+IS_WINDOWS = os.name == "nt"
 
 # Define code that will be used if some turtle command is present
-with open('prefixes/turtle.py', encoding='utf-8') as f:
+with open("prefixes/turtle.py", encoding="utf-8") as f:
     TURTLE_PREFIX_CODE = f.read()
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open('prefixes/normal.py', encoding='utf-8') as f:
+with open("prefixes/normal.py", encoding="utf-8") as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open('prefixes/pygame.py', encoding='utf-8') as f:
+with open("prefixes/pygame.py", encoding="utf-8") as f:
     PYGAME_PREFIX_CODE = f.read()
 
 
@@ -47,15 +47,17 @@ class Timer:
 
     def __exit__(self, type, value, tb):
         delta = time.time() - self.start
-        print(f'{self.name}: {delta}s')
+        print(f"{self.name}: {delta}s")
 
 
 def timer(fn):
     """Decoractor for fn."""
+
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
         with Timer(fn.__name__):
             return fn(*args, **kwargs)
+
     return wrapper
 
 
@@ -97,7 +99,7 @@ def set_debug_mode(debug_mode):
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
-        with open(filename, 'r', encoding='utf-8') as f:
+        with open(filename, "r", encoding="utf-8") as f:
             return yaml.round_trip_load(f, preserve_quotes=True)
     except IOError:
         return {}
@@ -114,10 +116,10 @@ def slash_join(*args):
         if not arg:
             continue
 
-        if ret and not ret[-1].endswith('/'):
-            ret.append('/')
-        ret.append(arg.lstrip('/') if ret else arg)
-    return ''.join(ret)
+        if ret and not ret[-1].endswith("/"):
+            ret.append("/")
+        ret.append(arg.lstrip("/") if ret else arg)
+    return "".join(ret)
 
 
 def is_testing_request(request):
@@ -128,22 +130,24 @@ def is_testing_request(request):
 
     Test requests are only allowed on non-Heroku instances.
     """
-    return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
+    return not is_heroku() and bool(
+        "X-Testing" in request.headers and request.headers["X-Testing"]
+    )
 
 
 def extract_bcrypt_rounds(hash):
-    return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
+    return int(re.match(r"\$2b\$\d+", hash)[0].replace("$2b$", ""))
 
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
     dt = datetime.datetime.utcfromtimestamp(timestamp)
-    return dt.isoformat() + 'Z'
+    return dt.isoformat() + "Z"
 
 
 def is_production():
     """Whether we are serving production traffic."""
-    return os.getenv('IS_PRODUCTION', '') != ''
+    return os.getenv("IS_PRODUCTION", "") != ""
 
 
 def is_heroku():
@@ -161,27 +165,29 @@ def is_heroku():
       to optimize for developer productivity.
 
     """
-    return os.getenv('DYNO', '') != ''
+    return os.getenv("DYNO", "") != ""
 
 
 def version():
     # """Get the version from the Heroku environment variables."""
     if not is_heroku():
-        return 'DEV'
+        return "DEV"
 
-    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    vrz = os.getenv("HEROKU_RELEASE_CREATED_AT")
     the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
 
-    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%Y %b %d') + f'({commit})'
+    commit = os.getenv("HEROKU_SLUG_COMMIT", "????")[0:6]
+    return the_date.strftime("%Y %b %d") + f"({commit})"
 
 
 def valid_email(s):
-    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    return bool(
+        re.match(r"^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$", s)
+    )
 
 
 @contextlib.contextmanager
-def atomic_write_file(filename, mode='wb'):
+def atomic_write_file(filename, mode="wb"):
     """Write to a filename atomically.
 
     First write to a unique tempfile, then rename the tempfile into
@@ -192,7 +198,7 @@ def atomic_write_file(filename, mode='wb'):
             f.write('hello')
     """
 
-    tmp_file = f'{filename}.{os.getpid()}'
+    tmp_file = f"{filename}.{os.getpid()}"
     with open(tmp_file, mode) as f:
         yield f
 
@@ -222,9 +228,13 @@ def timestamp_to_date(timestamp, short_format=False):
 
 def delta_timestamp(date, short_format=False):
     if short_format:
-        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)))
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(
+            int(str(date))
+        )
     else:
-        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(
+            int(str(date)[:-3])
+        )
     return format_timedelta(delta)
 
 
@@ -238,7 +248,11 @@ def localized_date_format(date, short_format=False):
         timestamp = datetime.datetime.fromtimestamp(int(str(date)))
     else:
         timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
-    return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
+    return (
+        format_date(timestamp, format="medium")
+        + " "
+        + format_datetime(timestamp, "H:mm")
+    )
 
 
 def datetotimeordate(date):
@@ -250,11 +264,9 @@ def datetotimeordate(date):
 
 
 def random_id_generator(
-        size=6,
-        chars=string.ascii_uppercase +
-        string.ascii_lowercase +
-        string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+    size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits
+):
+    return "".join(random.choice(chars) for _ in range(size))
 
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
@@ -263,54 +275,81 @@ def random_id_generator(
 
 def markdown_to_html_tags(markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
-    soup = BeautifulSoup(_html, 'html.parser')
+    soup = BeautifulSoup(_html, "html.parser")
     return soup.find_all()
 
 
-def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
+def error_page(
+    error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None
+):
     if error not in [403, 404, 500]:
         error = 404
-    default = gettext('default_404')
+    default = gettext("default_404")
     if error == 403:
-        default = gettext('default_403')
+        default = gettext("default_403")
     elif error == 500:
-        default = gettext('default_500')
+        default = gettext("default_500")
 
-    hx_request = bool(request.headers.get('Hx-Request'))
+    hx_request = bool(request.headers.get("Hx-Request"))
     if hx_request:
         # For HTMX-request, just return the error as plain text body
-        return make_response(f'{default} {exception}', error)
+        return make_response(f"{default} {exception}", error)
 
-    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+    if (
+        request.accept_mimetypes.accept_json
+        and not request.accept_mimetypes.accept_html
+    ):
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error,
-                        "error": default,
-                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
+        return (
+            jsonify(
+                {
+                    "code": error,
+                    "error": default,
+                    "exception": traceback.format_exception(
+                        type(exception), exception, exception.__traceback__
+                    )
+                    if exception
+                    else None,
+                }
+            ),
+            error,
+        )
 
-    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or ui_message or '', default=default), error
+    return (
+        render_template(
+            "error-page.html",
+            menu=menu,
+            error=error,
+            iframe=iframe,
+            page_error=page_error or ui_message or "",
+            default=default,
+        ),
+        error,
+    )
 
 
 def session_id():
     """Returns or sets the current session ID."""
-    if 'session_id' not in session:
-        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
-            session['session_id'] = request.headers['X-session_id']
+    if "session_id" not in session:
+        if os.getenv("IS_TEST_ENV") and "X-session_id" in request.headers:
+            session["session_id"] = request.headers["X-session_id"]
         else:
-            session['session_id'] = uuid.uuid4().hex
-    return session['session_id']
+            session["session_id"] = uuid.uuid4().hex
+    return session["session_id"]
 
 
 # https://github.com/python-babel/babel/issues/454
 def customize_babel_locale(custom_locales: dict):
     from babel.core import get_global
-    db = get_global('likely_subtags')
+
+    db = get_global("likely_subtags")
     for custom_name in custom_locales:
         db[custom_name] = custom_name
     import babel.localedata
 
     o_exists, o_load = babel.localedata.exists, babel.localedata.load
     if o_exists.__module__ != __name__:
+
         def exists(name):
             name = custom_locales.get(name, name)
             return o_exists(name)
@@ -324,8 +363,9 @@ def customize_babel_locale(custom_locales: dict):
 
 
 def strip_accents(s):
-    return ''.join(c for c in unicodedata.normalize('NFD', s)
-                   if unicodedata.category(c) != 'Mn')
+    return "".join(
+        c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"
+    )
 
 
 def base_url():
@@ -333,8 +373,8 @@ def base_url():
 
     Returns either from configuration or otherwise from Flask.
     """
-    url = os.getenv('BASE_URL')
+    url = os.getenv("BASE_URL")
     if not url:
         url = request.host_url
 
-    return url if not url.endswith('/') else url[:-1]
+    return url if not url.endswith("/") else url[:-1]

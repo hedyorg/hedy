@@ -1,22 +1,22 @@
 # This file defines the special regexes
 
 # list of symbols recognized as characters (with non-Latin characters)
-CHARACTER = '[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·]'
+CHARACTER = "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·]"
 
 # definition of word
-WORD = '(' + CHARACTER + "+)"
+WORD = "(" + CHARACTER + "+)"
 # space
 SPACE = "( +)"
 
 # beginning and end of one line, including space
-START_LINE = '(^ *)'
-END_LINE = '( *$)'
+START_LINE = "(^ *)"
+END_LINE = "( *$)"
 
 # beginning and end of words
-START_WORD = '(^| )'
-END_WORD = '(?!' + CHARACTER + ')'
+START_WORD = "(^| )"
+END_WORD = "(?!" + CHARACTER + ")"
 
-DIGIT = '[__DIGIT__]'
+DIGIT = "[__DIGIT__]"
 
 TRANSLATE_WORDS = [
     "define",
@@ -68,7 +68,7 @@ TRANSLATE_WORDS = [
     "length",
     "comma",
     "pressed",
-    "clear"
+    "clear",
 ]
 
 
@@ -76,10 +76,10 @@ TOKEN_CONSTANT = "text"
 
 
 def get_translated_keyword(word, withoutGroup=False):
-    """ Function that allows to add double underscores around the keywords to be translated.
-            The "__" are added before and after only if the keyword belongs to the list.
+    """Function that allows to add double underscores around the keywords to be translated.
+    The "__" are added before and after only if the keyword belongs to the list.
 
-            - withoutGroup : bool, Add parentheses for make a group or not
+    - withoutGroup : bool, Add parentheses for make a group or not
     """
     if withoutGroup:
         if word in TRANSLATE_WORDS:

@@ -36,7 +36,10 @@ class ProfileModule(WebsiteModule):
         body = request.json
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
-        if not isinstance(body.get("language"), str) or body.get("language") not in ALL_LANGUAGES.keys():
+        if (
+            not isinstance(body.get("language"), str)
+            or body.get("language") not in ALL_LANGUAGES.keys()
+        ):
             return gettext("language_invalid"), 400
         if (
             not isinstance(body.get("keyword_language"), str)
@@ -58,7 +61,11 @@ class ProfileModule(WebsiteModule):
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
-            if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
+            if (
+                not isinstance(body.get("birth_year"), int)
+                or body["birth_year"] <= 1900
+                or body["birth_year"] > year
+            ):
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] not in ["m", "f", "o"]:
@@ -77,7 +84,10 @@ class ProfileModule(WebsiteModule):
                     return gettext("exists_email"), 403
                 token = make_salt()
                 hashed_token = password_hash(token, make_salt())
-                self.db.update_user(user["username"], {"email": email, "verification_pending": hashed_token})
+                self.db.update_user(
+                    user["username"],
+                    {"email": email, "verification_pending": hashed_token},
+                )
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
                 if is_testing_request(request):
                     resp = {"username": user["username"], "token": hashed_token}
@@ -93,13 +103,17 @@ class ProfileModule(WebsiteModule):
                         # Todo TB: Now we only log to the back-end, would be nice to also return the user some info
                         # We have two options: return an error at this point (don't process changes)
                         # Add a notification to the response, still process the changes
-                        print(f"Profile changes processed for {user['username']}, mail sending invalid")
+                        print(
+                            f"Profile changes processed for {user['username']}, mail sending invalid"
+                        )
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
                     # We hash the email with md5 to avoid emails with unescaped characters triggering errors
                     request_path = (
-                        MAILCHIMP_API_URL + "/members/" + hashlib.md5(old_user_email.encode("utf-8")).hexdigest()
+                        MAILCHIMP_API_URL
+                        + "/members/"
+                        + hashlib.md5(old_user_email.encode("utf-8")).hexdigest()
                     )
                     r = requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
                     # If user is subscribed, we remove the old email from the list and add the new one
@@ -111,7 +125,13 @@ class ProfileModule(WebsiteModule):
         username = user["username"]
 
         updates = {}
-        for field in ["country", "birth_year", "gender", "language", "keyword_language"]:
+        for field in [
+            "country",
+            "birth_year",
+            "gender",
+            "language",
+            "keyword_language",
+        ]:
             if field in body:
                 updates[field] = body[field]
             else:
@@ -130,7 +150,10 @@ class ProfileModule(WebsiteModule):
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp["reload"] = False
-        if session["lang"] != body["language"] or session["keyword_lang"] != body["keyword_language"]:
+        if (
+            session["lang"] != body["language"]
+            or session["keyword_lang"] != body["keyword_language"]
+        ):
             resp["message"] = gettext("profile_updated_reload")
             resp["reload"] = True
         else:
@@ -145,8 +168,19 @@ class ProfileModule(WebsiteModule):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
 
-        output = {"username": user["username"], "email": user["email"], "language": user.get("language", "en")}
-        for field in ["birth_year", "country", "gender", "prog_experience", "experience_languages", "third_party"]:
+        output = {
+            "username": user["username"],
+            "email": user["email"],
+            "language": user.get("language", "en"),
+        }
+        for field in [
+            "birth_year",
+            "country",
+            "gender",
+            "prog_experience",
+            "experience_languages",
+            "third_party",
+        ]:
             if field in user:
                 output[field] = user[field]
         if "verification_pending" in user:

@@ -22,7 +22,9 @@ class LogRecord:
         self.attributes = kwargs
         self.running_timers = set([])
         loadavg = os.getloadavg()[0] if not IS_WINDOWS else None
-        self.set(start_time=dtfmt(self.start_time), pid=os.getpid(), loadavg=loadavg, fault=0)
+        self.set(
+            start_time=dtfmt(self.start_time), pid=os.getpid(), loadavg=loadavg, fault=0
+        )
 
         dyno = os.getenv("DYNO")
         if dyno:

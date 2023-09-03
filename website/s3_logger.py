@@ -13,8 +13,7 @@ class NullLogger:
 
 
 class S3ParseLogger:
-    """A logger that logs to S3.
-    """
+    """A logger that logs to S3."""
 
     @staticmethod
     def from_env_vars():

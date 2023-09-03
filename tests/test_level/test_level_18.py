@@ -9,50 +9,58 @@ from tests.Tester import HedyTester
 class TestsLevel18(HedyTester):
     level = 18
 
-    @parameterized.expand([['(', ')'], ['（', '）']])
+    @parameterized.expand([["(", ")"], ["（", "）"]])
     def test_print_brackets(self, bracket_open, bracket_close):
-        code = textwrap.dedent(f"""\
-      print{bracket_open}'Hallo!'{bracket_close}""")
+        code = textwrap.dedent(
+            f"""\
+      print{bracket_open}'Hallo!'{bracket_close}"""
+        )
 
-        expected = textwrap.dedent("""\
-      print(f'''Hallo!''')""")
+        expected = textwrap.dedent(
+            """\
+      print(f'''Hallo!''')"""
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
-            expected_commands=['print']
+            expected_commands=["print"],
         )
 
     def test_print_var_brackets(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is 'Hedy'
-        print('ik heet', naam)""")
+        print('ik heet', naam)"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         naam = 'Hedy'
-        print(f'''ik heet{naam}''')""")
+        print(f'''ik heet{naam}''')"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle()
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
         )
 
     def test_print_comma(self):
         code = "print('ik heet ,')"
         expected = "print(f'''ik heet ,''')"
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle())
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
+        )
 
-    @parameterized.expand(['=', 'is'])
+    @parameterized.expand(["=", "is"])
     def test_input(self, assigment):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         leeftijd {assigment} input('Hoe oud ben jij?')
-        print(leeftijd)""")
-        expected = textwrap.dedent("""\
+        print(leeftijd)"""
+        )
+        expected = textwrap.dedent(
+            """\
         leeftijd = input(f'''Hoe oud ben jij?''')
         try:
           leeftijd = int(leeftijd)
@@ -61,26 +69,31 @@ class TestsLevel18(HedyTester):
             leeftijd = float(leeftijd)
           except ValueError:
             pass
-        print(f'''{leeftijd}''')""")
+        print(f'''{leeftijd}''')"""
+        )
 
         self.multi_level_tester(
             max_level=20,
             code=code,
             expected=expected,
-            extra_check_function=self.is_not_turtle()
+            extra_check_function=self.is_not_turtle(),
         )
 
-    @parameterized.expand([':', '：'])
+    @parameterized.expand([":", "："])
     def test_if_with_dequals_sign_colon(self, colon):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
       naam is 'Hedy'
       if naam == Hedy{colon}
-          print('koekoek')""")
+          print('koekoek')"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       naam = 'Hedy'
       if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-        print(f'''koekoek''')""")
+        print(f'''koekoek''')"""
+        )
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -124,16 +137,19 @@ class TestsLevel18(HedyTester):
     #     )
 
     def test_if_else(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       antwoord is input('Hoeveel is 10 plus 10?')
       if antwoord is 20:
           print('Goedzo!')
           print('Het antwoord was inderdaad', antwoord)
       else:
           print('Foutje')
-          print('Het antwoord moest zijn', antwoord)""")
+          print('Het antwoord moest zijn', antwoord)"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       antwoord = input(f'''Hoeveel is 10 plus 10?''')
       try:
         antwoord = int(antwoord)
@@ -147,78 +163,89 @@ class TestsLevel18(HedyTester):
         print(f'''Het antwoord was inderdaad{antwoord}''')
       else:
         print(f'''Foutje''')
-        print(f'''Het antwoord moest zijn{antwoord}''')""")
+        print(f'''Het antwoord moest zijn{antwoord}''')"""
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
-            extra_check_function=self.is_not_turtle()
+            expected_commands=["input", "if", "print", "print", "print", "print"],
+            extra_check_function=self.is_not_turtle(),
         )
 
     def test_for_loop(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       a is 2
       b is 3
       for a in range(2, 4):
           a is a + 2
-          b is b + 2""")
-        expected = textwrap.dedent("""\
+          b is b + 2"""
+        )
+        expected = textwrap.dedent(
+            """\
       a = 2
       b = 3
       step = 1 if 2 < 4 else -1
       for a in range(2, 4 + step, step):
         a = a + 2
         b = b + 2
-        time.sleep(0.1)""")
+        time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle()
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
         )
 
     def test_for_nesting(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       for i in range(1, 3):
           for j in range(1, 4):
-              print('rondje: ', i, ' tel: ', j)""")
-        expected = textwrap.dedent("""\
+              print('rondje: ', i, ' tel: ', j)"""
+        )
+        expected = textwrap.dedent(
+            """\
       step = 1 if 1 < 3 else -1
       for i in range(1, 3 + step, step):
         step = 1 if 1 < 4 else -1
         for j in range(1, 4 + step, step):
           print(f'''rondje: {i} tel: {j}''')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle()
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
         )
 
     def test_for_loop_arabic(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       for دورة in range(١, ٥):
-          print(دورة)""")
+          print(دورة)"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       step = 1 if 1 < 5 else -1
       for دورة in range(1, 5 + step, step):
         print(f'''{دورة}''')
-        time.sleep(0.1)""")
+        time.sleep(0.1)"""
+        )
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['for', 'print'])
+            code=code, expected=expected, expected_commands=["for", "print"]
+        )
 
     def test_input_with_list(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
       color is ['green', 'blue']
-      choice is input('Is your favorite color one of: ', color)""")
+      choice is input('Is your favorite color one of: ', color)"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       color = ['green', 'blue']
       choice = input(f'''Is your favorite color one of: {color}''')
       try:
@@ -227,17 +254,17 @@ class TestsLevel18(HedyTester):
         try:
           choice = float(choice)
         except ValueError:
-          pass""")
+          pass"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle()
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
         )
 
     def test_input_without_text_inside(self):
         code = "x = input()"
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
       x = input(f'''''')
       try:
         x = int(x)
@@ -245,40 +272,41 @@ class TestsLevel18(HedyTester):
         try:
           x = float(x)
         except ValueError:
-          pass""")
+          pass"""
+        )
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle()
+            code=code, expected=expected, extra_check_function=self.is_not_turtle()
         )
 
     def test_print_without_text_inside(self):
         self.multi_level_tester(
             code="print()",
             expected="print(f'''''')",
-            extra_check_function=self.is_not_turtle()
+            extra_check_function=self.is_not_turtle(),
         )
 
     # negative tests
 
     def test_while_undefined_var(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         while antwoord != 25:
-            print('hoera')""")
+            print('hoera')"""
+        )
 
         self.single_level_tester(
-            code=code,
-            exception=hedy.exceptions.UndefinedVarException
+            code=code, exception=hedy.exceptions.UndefinedVarException
         )
 
     def test_var_undefined_error_message(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is 'Hedy'
-        print('ik heet ', name)""")
+        print('ik heet ', name)"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.UndefinedVarException
+            code=code, exception=hedy.exceptions.UndefinedVarException
         )
 
         # deze extra check functie kan nu niet mee omdat die altijd op result werkt
@@ -287,8 +315,7 @@ class TestsLevel18(HedyTester):
 
     def test_input_without_argument(self):
         self.multi_level_tester(
-            code="name is input",
-            exception=hedy.exceptions.IncompleteCommandException
+            code="name is input", exception=hedy.exceptions.IncompleteCommandException
         )
 
     #
@@ -297,26 +324,25 @@ class TestsLevel18(HedyTester):
     def test_print_comment(self):
         code = "print('Hallo welkom bij Hedy!') # This is a comment"
         expected = "print(f'''Hallo welkom bij Hedy!''')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            output=output
-        )
+        self.multi_level_tester(code=code, expected=expected, output=output)
 
     #
     # button tests
     #
 
     def test_if_button_is_pressed_print(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         x = 'PRINT'
         x is button
         if PRINT is pressed:
-            print('The button got pressed!')""")
+            print('The button got pressed!')"""
+        )
 
-        expected = HedyTester.dedent(f"""\
+        expected = HedyTester.dedent(
+            f"""\
         x = 'PRINT'
         create_button(x)
         pygame_end = False
@@ -331,15 +357,20 @@ class TestsLevel18(HedyTester):
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
               break
-            # End of PyGame Event Handler""")
+            # End of PyGame Event Handler"""
+        )
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_nested_functions(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         def simple_function():
             def nested_function():
                 print(1)
-        simple_function()""")
+        simple_function()"""
+        )
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)
+        self.single_level_tester(
+            code=code, exception=hedy.exceptions.NestedFunctionException
+        )

@@ -16,7 +16,9 @@ class TestsTranslationLevel12(HedyTester):
     def test_decimal_english_dutch(self):
         code = "print 2.5 + 2.5"
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level
+        )
         expected = "print 2.5 + 2.5"
 
         self.assertEqual(expected, result)
@@ -24,21 +26,29 @@ class TestsTranslationLevel12(HedyTester):
     def test_text_in_quotes_english_dutch(self):
         code = "naam = 'hedy'"
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level
+        )
         expected = "naam = 'hedy'"
 
         self.assertEqual(expected, result)
 
     def test_text_in_quotes_ifs_english_dutch(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam = 'hedy'
         if naam is 'hedy'
-            print 'hallo ' naam""")
+            print 'hallo ' naam"""
+        )
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = textwrap.dedent("""\
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level
+        )
+        expected = textwrap.dedent(
+            """\
         naam = 'hedy'
         als naam is 'hedy'
-            print 'hallo ' naam""")
+            print 'hallo ' naam"""
+        )
 
         self.assertEqual(expected, result)

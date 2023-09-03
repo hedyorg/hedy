@@ -43,7 +43,9 @@ class Cdn:
             # emails and content we forgot to replace or are unable to replace (like in Markdowns).
             self.static_prefix = "/static-" + commit
             app.add_url_rule(
-                self.static_prefix + "/<path:filename>", endpoint="cdn_static", view_func=self._send_static_file
+                self.static_prefix + "/<path:filename>",
+                endpoint="cdn_static",
+                view_func=self._send_static_file,
             )
 
         app.add_template_global(self.static, name="static")

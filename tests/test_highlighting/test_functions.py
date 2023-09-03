@@ -4,13 +4,15 @@ from tests.Highlighter import HighlightTester
 
 
 class HighlighterTestFunctions(HighlightTester):
-    @parameterized.expand([
-        ("level12"),
-        ("level13"),
-        ("level14"),
-        ("level15"),
-        ("level16"),
-    ])
+    @parameterized.expand(
+        [
+            ("level12"),
+            ("level13"),
+            ("level14"),
+            ("level15"),
+            ("level16"),
+        ]
+    )
     def test_functions_1(self, level):
         self.assert_highlighted_chr_multi_line(
             "define function_1 with par1, par2",
@@ -19,7 +21,9 @@ class HighlighterTestFunctions(HighlightTester):
             "    KKKKKK TTTT",
             "call function_1 with 7, 'm'",
             "FFFF TTTTTTTTTT KKKK NK SSS",
-            level=level, lang="en")
+            level=level,
+            lang="en",
+        )
 
     def test_functions_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -29,7 +33,9 @@ class HighlighterTestFunctions(HighlightTester):
             "    KKKKKK TTTT",
             "call function_1 with 7, 'm'",
             "FFFF TTTTTTTTTT KKKK NK SSS",
-            level='level17', lang="en")
+            level="level17",
+            lang="en",
+        )
 
     def test_functions_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -39,4 +45,6 @@ class HighlighterTestFunctions(HighlightTester):
             "    KKKKKKTTTTK",
             "function_1(7, 'df')",
             "TTTTTTTTTTKNK SSSSK",
-            level='level18', lang="en")
+            level="level18",
+            lang="en",
+        )

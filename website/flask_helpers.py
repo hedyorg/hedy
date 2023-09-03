@@ -42,7 +42,9 @@ class EnhancedJSONEncoder(json.JSONEncoder):
 
 def strip_nones(x):
     if isinstance(x, dict):
-        return {k: v for k, v in x.items() if v is not None and not isinstance(v, Undefined)}
+        return {
+            k: v for k, v in x.items() if v is not None and not isinstance(v, Undefined)
+        }
     return x
 
 

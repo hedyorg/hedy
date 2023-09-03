@@ -9,7 +9,7 @@ def safe_format(s: str, /, **kwargs):
 class SafeFormatter(Formatter):
     def get_value(self, field_name, args, kwargs):
         if field_name not in kwargs:
-            return '{' + field_name + '}'
+            return "{" + field_name + "}"
         return super().get_value(field_name, args, kwargs)
 
 

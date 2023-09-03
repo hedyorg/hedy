@@ -39,7 +39,9 @@ def all_keywords_to_dict():
         commands = keywords_to_dict_single_choice(lang)
         keyword_dict[lang] = commands
 
-    all_translations = {k: [v.get(k, k) for v in keyword_dict.values()] for k in keyword_dict["en"]}
+    all_translations = {
+        k: [v.get(k, k) for v in keyword_dict.values()] for k in keyword_dict["en"]
+    }
     return all_translations
 
 
@@ -73,7 +75,11 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
     try:
         processed_input = hedy.process_input_string(
-            input_string_, level, from_lang, escape_backslashes=False, preprocess_ifs_enabled=False
+            input_string_,
+            level,
+            from_lang,
+            escape_backslashes=False,
+            preprocess_ifs_enabled=False,
         )
 
         hedy.source_map.clear()
@@ -87,7 +93,9 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
         translator = Translator(processed_input)
         translator.visit(program_root)
-        ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
+        ordered_rules = reversed(
+            sorted(translator.rules, key=operator.attrgetter("line", "start"))
+        )
 
         # FH Feb 2022 TODO trees containing invalid nodes are happily translated,
         # should be stopped here!
@@ -113,7 +121,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
 def replace_line(lines, index, line):
     before = "\n".join(lines[0:index])
-    after = "\n".join(lines[index + 1:])
+    after = "\n".join(lines[index + 1 :])
     if len(before) > 0:
         before = before + "\n"
     if len(after) > 0:
@@ -123,8 +131,8 @@ def replace_line(lines, index, line):
 
 def replace_token_in_line(line, rule, original, target):
     """Replaces a token in a line from the user input with its translated equivalent"""
-    before = "" if rule.start == 0 else line[0: rule.start]
-    after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
+    before = "" if rule.start == 0 else line[0 : rule.start]
+    after = "" if rule.end == len(line) - 1 else line[rule.end + 1 :]
     # Note that we need to replace the target value in the original value because some
     # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
     # (latin_comma | arabic_comma) _SPACES*
@@ -148,10 +156,18 @@ def find_command_keywords(
     }
 
 
-def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, end_column):
+def find_keyword_in_rules(
+    rules, keyword, start_line, end_line, start_column, end_column
+):
     for rule in rules:
-        if rule.keyword == keyword and rule.line == start_line and rule.start >= start_column:
-            if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
+        if (
+            rule.keyword == keyword
+            and rule.line == start_line
+            and rule.start >= start_column
+        ):
+            if rule.line < end_line or (
+                rule.line == end_line and rule.end <= end_column
+            ):
                 return rule.value
     return None
 
@@ -218,19 +234,25 @@ class Translator(Visitor):
 
     def left(self, tree):
         token = tree.children[0]
-        rule = Rule("left", token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule(
+            "left", token.line, token.column - 1, token.end_column - 2, token.value
+        )
         self.rules.append(rule)
 
     def right(self, tree):
         token = tree.children[0]
-        rule = Rule("right", token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule(
+            "right", token.line, token.column - 1, token.end_column - 2, token.value
+        )
         self.rules.append(rule)
 
     def assign_list(self, tree):
         self.add_rule("_IS", "is", tree)
         commas = self.get_keyword_tokens("_COMMA", tree)
         for comma in commas:
-            rule = Rule("comma", comma.line, comma.column - 1, comma.end_column - 2, comma.value)
+            rule = Rule(
+                "comma", comma.line, comma.column - 1, comma.end_column - 2, comma.value
+            )
             self.rules.append(rule)
 
     def assign(self, tree):
@@ -249,7 +271,9 @@ class Translator(Visitor):
 
     def random(self, tree):
         token = tree.children[0]
-        rule = Rule("random", token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule(
+            "random", token.line, token.column - 1, token.end_column - 2, token.value
+        )
         self.rules.append(rule)
 
     def ifs(self, tree):
@@ -324,7 +348,11 @@ class Translator(Visitor):
         token = self.get_keyword_token(token_name, tree)
         if token:
             rule = Rule(
-                token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
+                token_keyword,
+                token.line,
+                token.column - 1,
+                token.end_column - 2,
+                token.value,
             )
             self.rules.append(rule)
 

@@ -25,7 +25,9 @@ class AwsAthenaClient:
             database = config["athena"]["database"]
             s3_output = config["athena"]["s3_output"]
             return AwsAthenaClient(db, database, s3_output)
-        logger.warning("Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
+        logger.warning(
+            "Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)"
+        )
         return None
 
     def __init__(self, client, database, s3_output):
@@ -33,7 +35,11 @@ class AwsAthenaClient:
         self.database = database
         self.s3_output = s3_output
 
-    @retry(stop_max_attempt_number=5, wait_exponential_multiplier=1000, wait_exponential_max=10 * 1000)
+    @retry(
+        stop_max_attempt_number=5,
+        wait_exponential_multiplier=1000,
+        wait_exponential_max=10 * 1000,
+    )
     def poll_query_status(self, query_execution_id):
         result = self.client.get_query_execution(QueryExecutionId=query_execution_id)
         state = result["QueryExecution"]["Status"]["State"]
@@ -69,11 +75,15 @@ class LogFetcher:
         query_exec_id = self.client.start_query(query)
         query_status = self.client.poll_query_status(query_exec_id)
 
-        return QueryResult(query_exec_id, query_status["QueryExecution"]["Status"]["State"])
+        return QueryResult(
+            query_exec_id, query_status["QueryExecution"]["Status"]["State"]
+        )
 
     def get_query_results(self, query_execution_id, next_token=None):
         max_results = config["athena"]["max_results"]
-        data = self.client.get_query_results(query_execution_id, next_token, max_results)
+        data = self.client.get_query_results(
+            query_execution_id, next_token, max_results
+        )
         return self._result_to_response(data, next_token is None), data.get("NextToken")
 
     def _build_query(self, filters):
@@ -111,7 +121,10 @@ class LogFetcher:
         return (
             {}
             if len(row) != len(headers)
-            else {headers[i]: self._format_if_date(headers[i], row[i]) for i in range(0, len(headers))}
+            else {
+                headers[i]: self._format_if_date(headers[i], row[i])
+                for i in range(0, len(headers))
+            }
         )
 
     def _format_if_date(self, header, value):

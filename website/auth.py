@@ -48,8 +48,16 @@ if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
 
 def mailchimp_subscribe_user(email, country):
     # Request is always for teachers as only they can subscribe to newsletters
-    request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
-    r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+    request_body = {
+        "email_address": email,
+        "status": "subscribed",
+        "tags": [country, "teacher"],
+    }
+    r = requests.post(
+        MAILCHIMP_API_URL + "/members",
+        headers=MAILCHIMP_API_HEADERS,
+        data=json.dumps(request_body),
+    )
 
     subscription_error = None
     if r.status_code != 200 and r.status_code != 400:
@@ -63,7 +71,13 @@ def mailchimp_subscribe_user(email, country):
             config["email"]["sender"],
             "ERROR - Subscription to Hedy newsletter on signup",
             email,
-            "<p>" + email + "</p><pre>Status:" + str(r.status_code) + "    Body:" + r.text + "</pre>",
+            "<p>"
+            + email
+            + "</p><pre>Status:"
+            + str(r.status_code)
+            + "    Body:"
+            + r.text
+            + "</pre>",
         )
 
 
@@ -104,7 +118,9 @@ def remember_current_user(db_user):
 
 
 def pick(d, *requested_keys):
-    return {key: force_json_serializable_type(d.get(key, None)) for key in requested_keys}
+    return {
+        key: force_json_serializable_type(d.get(key, None)) for key in requested_keys
+    }
 
 
 def force_json_serializable_type(x):
@@ -214,7 +230,7 @@ def requires_login_redirect(f):
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in():
-            return redirect('/')
+            return redirect("/")
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
@@ -293,7 +309,9 @@ def validate_signup_data(account):
         return gettext("username_special")
     if len(account.get("username").strip()) < 3:
         return gettext("username_three")
-    if not isinstance(account.get("email"), str) or not utils.valid_email(account.get("email")):
+    if not isinstance(account.get("email"), str) or not utils.valid_email(
+        account.get("email")
+    ):
         return gettext("email_invalid")
     if not isinstance(account.get("password"), str):
         return gettext("password_invalid")
@@ -387,7 +405,9 @@ def send_email_template(template, email, link=None, username=None):
     body_html = body_html.format(content=body)
     body_plain = body
     if link:
-        body_plain = safe_format(body_plain, link=gettext("copy_mail_link") + " " + link)
+        body_plain = safe_format(
+            body_plain, link=gettext("copy_mail_link") + " " + link
+        )
         body_html = safe_format(body_html, link='<a href="' + link + '">{link}</a>')
         body_html = safe_format(body_html, link=gettext("link"))
 
@@ -406,7 +426,9 @@ def send_localized_email_template(locale, template, email, link=None, username=N
 
 
 def store_new_student_account(db, account, teacher_username):
-    username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])
+    username, hashed, hashed_token = prepare_user_db(
+        account["username"], account["password"]
+    )
     user = {
         "username": username,
         "password": hashed,
@@ -433,7 +455,9 @@ def prepare_user_db(username, password):
 
 def create_verify_link(username, token):
     email = email_base_url() + "/auth/verify?username="
-    email += urllib.parse.quote_plus(username) + "&token=" + urllib.parse.quote_plus(token)
+    email += (
+        urllib.parse.quote_plus(username) + "&token=" + urllib.parse.quote_plus(token)
+    )
     return email
 
 
@@ -455,5 +479,7 @@ def email_base_url():
 
 def create_recover_link(username, token):
     email = email_base_url() + "/reset?username="
-    email += urllib.parse.quote_plus(username) + "&token=" + urllib.parse.quote_plus(token)
+    email += (
+        urllib.parse.quote_plus(username) + "&token=" + urllib.parse.quote_plus(token)
+    )
     return email

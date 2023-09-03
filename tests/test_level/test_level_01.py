@@ -10,7 +10,7 @@ import hypothesis.strategies
 
 class TestsLevel1(HedyTester):
     level = 1
-    '''
+    """
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
@@ -22,7 +22,7 @@ class TestsLevel1(HedyTester):
      * single keyword positive tests are just keyword or keyword_special_case
      * multi keyword positive tests are keyword1_keywords_2
      * negative tests should be situation_gives_exception
-    '''
+    """
 
     #
     # print tests
@@ -30,28 +30,28 @@ class TestsLevel1(HedyTester):
     def test_print(self):
         code = "print Hallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
         expected_commands = [Command.print]
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
-            expected_commands=expected_commands
+            expected_commands=expected_commands,
         )
         self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
         expected_commands = [Command.print]
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
-            expected_commands=expected_commands
+            expected_commands=expected_commands,
         )
         self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
@@ -60,30 +60,43 @@ class TestsLevel1(HedyTester):
         expected = "print('hallo')\n\nprint('hallo')"
         expected_commands = [Command.print, Command.print]
 
-        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+        self.single_level_tester(
+            code=code, expected=expected, expected_commands=expected_commands
+        )
 
     def test_print_comma(self):
         code = "print one, two, three"
         expected = "print('one, two, three')"
         expected_commands = [Command.print]
 
-        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+        self.single_level_tester(
+            code=code, expected=expected, expected_commands=expected_commands
+        )
 
     def test_print_multiple_lines(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         print Hallo welkom bij Hedy
-        print Mooi hoor""")
+        print Mooi hoor"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         print('Hallo welkom bij Hedy')
-        print('Mooi hoor')""")
+        print('Mooi hoor')"""
+        )
 
-        output = textwrap.dedent("""\
+        output = textwrap.dedent(
+            """\
         Hallo welkom bij Hedy
-        Mooi hoor""")
+        Mooi hoor"""
+        )
 
         self.single_level_tester(code=code, expected=expected, output=output)
-        self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
+        self.assertEqual(
+            ["Hallo welkom bij Hedy", "Mooi hoor"],
+            hedy.all_print_arguments(code, self.level),
+        )
 
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView!'"
@@ -141,28 +154,29 @@ class TestsLevel1(HedyTester):
     def test_print_nl(self):
         code = "print Hallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
 
-        self.single_level_tester(code=code, expected=expected, output=output, lang='nl')
+        self.single_level_tester(code=code, expected=expected, output=output, lang="nl")
 
     def test_print_ar(self):
         code = "قول أهلا ومرحبا بكم في هيدي!"
         expected = "print('أهلا ومرحبا بكم في هيدي!')"
-        output = 'أهلا ومرحبا بكم في هيدي!'
+        output = "أهلا ومرحبا بكم في هيدي!"
 
-        self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
+        self.single_level_tester(code=code, expected=expected, output=output, lang="ar")
 
     def test_print_ar_tatweel_all_places(self):
         code = "ـــقــولـ أ"
         expected = "print('أ')"
-        output = 'أ'
+        output = "أ"
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
             translate=False,  # translation will remove the tatweels, we will deal with that later
-            lang='ar')
+            lang="ar",
+        )
 
     def test_ask_ar_tatweel_all_places(self):
         code = "اســأل أ"
@@ -172,7 +186,8 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             translate=False,  # translation will remove the tatweels, we will deal with that later
-            lang='ar')
+            lang="ar",
+        )
 
     # def test_print_ar_tatweel_itself(self):
     # FH, May 2022, sadly beginning a string with tatweel does not work
@@ -192,45 +207,48 @@ class TestsLevel1(HedyTester):
     def test_print_ar_tatweel_printing(self):
         code = "قول لــــ"
         expected = "print('لــــ')"
-        output = 'لــــ'
+        output = "لــــ"
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
             translate=False,  # translation will remove the tatweels, we will deal with that later
-            lang='ar')
+            lang="ar",
+        )
 
     def test_print_ar_tatweel_begin(self):
         code = "ـــقول أ"
         expected = "print('أ')"
-        output = 'أ'
+        output = "أ"
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
             translate=False,  # translation will remove the tatweels, we will deal with that later
-            lang='ar')
+            lang="ar",
+        )
 
     def test_print_ar_tatweel_multiple_end(self):
         code = "ـــقــوـلــــ أ"
         expected = "print('أ')"
-        output = 'أ'
+        output = "أ"
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
             translate=False,  # translation will remove the tatweels, we will deal with that later
-            lang='ar')
+            lang="ar",
+        )
 
     def test_print_ar_2(self):
         code = "قول مرحبا أيها العالم!"
         expected = "print('مرحبا أيها العالم!')"
-        output = 'مرحبا أيها العالم!'
+        output = "مرحبا أيها العالم!"
 
-        self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
+        self.single_level_tester(code=code, expected=expected, output=output, lang="ar")
 
     #
     # ask tests
@@ -275,7 +293,7 @@ class TestsLevel1(HedyTester):
         code = "vraag Heb je er zin in?"
         expected = "answer = input('Heb je er zin in?')"
 
-        self.single_level_tester(code=code, expected=expected, lang='nl')
+        self.single_level_tester(code=code, expected=expected, lang="nl")
 
     def test_ask_en_code_transpiled_in_nl(self):
         code = "ask Heb je er zin in?"
@@ -284,29 +302,33 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            lang='nl',
-            translate=False  # we are trying a Dutch keyword in en, can't be translated
+            lang="nl",
+            translate=False,  # we are trying a Dutch keyword in en, can't be translated
         )
 
     def test_mixes_languages_nl_en(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         vraag Heb je er zin in?
         echo
         ask are you sure?
-        print mooizo!""")
+        print mooizo!"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         answer = input('Heb je er zin in?')
         print(answer)
         answer = input('are you sure?')
-        print('mooizo!')""")
+        print('mooizo!')"""
+        )
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['ask', 'echo', 'ask', 'print'],
-            lang='nl',
-            translate=False  # mixed codes will not translate back to their original form, sadly
+            expected_commands=["ask", "echo", "ask", "print"],
+            lang="nl",
+            translate=False,  # mixed codes will not translate back to their original form, sadly
         )
 
     #
@@ -319,13 +341,17 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_echo_with_quotes(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         ask waar?
-        echo oma's aan de""")
+        echo oma's aan de"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         answer = input('waar?')
-        print('oma\\'s aan de '+answer)""")
+        print('oma\\'s aan de '+answer)"""
+        )
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -340,7 +366,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=11
+            max_level=11,
         )
 
     def test_forward_arabic_numeral(self):
@@ -351,7 +377,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=11
+            max_level=11,
         )
 
     def test_forward_hindi_numeral(self):
@@ -362,20 +388,22 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=11
+            max_level=11,
         )
 
     def test_forward_without_argument(self):
-        code = 'forward'
-        expected = textwrap.dedent("""\
+        code = "forward"
+        expected = textwrap.dedent(
+            """\
         t.forward(50)
-        time.sleep(0.1)""")
+        time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=11
+            max_level=11,
         )
 
     def test_forward_with_text_gives_type_error(self):
@@ -384,23 +412,25 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 1,
         )
 
     def test_multiple_forward_without_arguments(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         forward
-        forward""")
-        expected = textwrap.dedent("""\
+        forward"""
+        )
+        expected = textwrap.dedent(
+            """\
         t.forward(50)
         time.sleep(0.1)
         t.forward(50)
-        time.sleep(0.1)""")
+        time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
+            code=code, expected=expected, extra_check_function=self.is_turtle()
         )
 
     #
@@ -413,28 +443,35 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=10)
+            max_level=10,
+        )
 
     def test_one_color_red(self):
         code = "color red"
         expected = "t.pencolor('red')"
 
-        self.single_level_tester(code=code, expected=expected,
-                                 extra_check_function=self.is_turtle())
+        self.single_level_tester(
+            code=code, expected=expected, extra_check_function=self.is_turtle()
+        )
 
     def test_one_color_purple(self):
         code = "color purple"
         expected = "t.pencolor('purple')"
 
-        self.single_level_tester(code=code, expected=expected,
-                                 extra_check_function=self.is_turtle())
+        self.single_level_tester(
+            code=code, expected=expected, extra_check_function=self.is_turtle()
+        )
 
     def test_one_color_purple_nl(self):
         code = "kleur paars"
         expected = "t.pencolor('purple')"
 
-        self.single_level_tester(code=code, expected=expected,
-                                 extra_check_function=self.is_turtle(), lang='nl')
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang="nl",
+        )
 
     #
     # turn tests
@@ -444,9 +481,7 @@ class TestsLevel1(HedyTester):
         expected = "t.right(90)"
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
+            code=code, expected=expected, extra_check_function=self.is_turtle()
         )
 
     def test_turn_right(self):
@@ -454,9 +489,7 @@ class TestsLevel1(HedyTester):
         expected = "t.right(90)"
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
+            code=code, expected=expected, extra_check_function=self.is_turtle()
         )
 
     def test_turn_left(self):
@@ -464,9 +497,7 @@ class TestsLevel1(HedyTester):
         expected = "t.left(90)"
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
+            code=code, expected=expected, extra_check_function=self.is_turtle()
         )
 
     def test_turn_left_nl(self):
@@ -477,7 +508,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            lang='nl'
+            lang="nl",
         )
 
     def test_turn_with_text_gives_error(self):
@@ -489,13 +520,13 @@ class TestsLevel1(HedyTester):
         # we can add multiple tests to the skipped_mappings list to test multiple error mappings
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 13), hedy.exceptions.InvalidArgumentException)
+            SkippedMapping(
+                SourceRange(1, 1, 1, 13), hedy.exceptions.InvalidArgumentException
+            )
         ]
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
+            code=code, expected=expected, skipped_mappings=skipped_mappings
         )
 
     #
@@ -510,53 +541,63 @@ class TestsLevel1(HedyTester):
     def test_print_comment(self):
         code = "print Hallo welkom bij Hedy! # This is a print"
         expected = "print('Hallo welkom bij Hedy! ')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
-            expected_commands=[Command.print]
+            expected_commands=[Command.print],
         )
 
-        self.assertEqual(['Hallo welkom bij Hedy! '], hedy.all_print_arguments(code, self.level))
+        self.assertEqual(
+            ["Hallo welkom bij Hedy! "], hedy.all_print_arguments(code, self.level)
+        )
 
     #
     # combined commands tests
     #
     def test_print_ask_echo(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         print Hallo
         ask Wat is je lievelingskleur
-        echo je lievelingskleur is""")
+        echo je lievelingskleur is"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         print('Hallo')
         answer = input('Wat is je lievelingskleur')
-        print('je lievelingskleur is '+answer)""")
+        print('je lievelingskleur is '+answer)"""
+        )
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=[Command.print, Command.ask, Command.echo])
+            expected_commands=[Command.print, Command.ask, Command.echo],
+        )
 
     def test_forward_turn_combined(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             forward 50
             turn
-            forward 100""")
+            forward 100"""
+        )
 
         expected = HedyTester.dedent(
             HedyTester.forward_transpiled(50, self.level),
-            't.right(90)',
-            HedyTester.forward_transpiled(100, self.level))
+            "t.right(90)",
+            HedyTester.forward_transpiled(100, self.level),
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
             expected_commands=[Command.forward, Command.turn, Command.forward],
-            max_level=11
+            max_level=11,
         )
 
     #
@@ -565,16 +606,20 @@ class TestsLevel1(HedyTester):
     def test_lines_may_end_in_spaces(self):
         code = "print Hallo welkom bij Hedy! "
         expected = "print('Hallo welkom bij Hedy! ')"
-        output = 'Hallo welkom bij Hedy!'
+        output = "Hallo welkom bij Hedy!"
 
-        self.single_level_tester(code=code, expected=expected, output=output, translate=False)
+        self.single_level_tester(
+            code=code, expected=expected, output=output, translate=False
+        )
 
     def test_comments_may_be_empty(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             #
             # This is a comment
             #
-            print Привіт, Хейді!""")
+            print Привіт, Хейді!"""
+        )
         expected = "print('Привіт, Хейді!')"
         output = "Привіт, Хейді!"
 
@@ -588,56 +633,58 @@ class TestsLevel1(HedyTester):
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException)
+            SkippedMapping(
+                SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException
+            )
         ]
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=1)
+            code=code, expected=expected, skipped_mappings=skipped_mappings, max_level=1
+        )
 
     def test_ask_with_space_gives_invalid(self):
         code = " ask Hallo welkom bij Hedy?"
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 28), hedy.exceptions.InvalidSpaceException)
+            SkippedMapping(
+                SourceRange(1, 1, 1, 28), hedy.exceptions.InvalidSpaceException
+            )
         ]
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=1)
+            code=code, expected=expected, skipped_mappings=skipped_mappings, max_level=1
+        )
 
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
         expected = "pass\npass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException
+            ),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException
+            ),
         ]
 
         self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=3)
+            code=code, expected=expected, skipped_mappings=skipped_mappings, max_level=3
+        )
 
     def test_word_plus_period_gives_invalid(self):
         code = "word."
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException
+            ),
         ]
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
+            code=code, expected=expected, skipped_mappings=skipped_mappings
         )
 
     def test_non_keyword_gives_invalid(self):
@@ -645,13 +692,13 @@ class TestsLevel1(HedyTester):
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException
+            ),
         ]
 
         self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
+            code=code, expected=expected, skipped_mappings=skipped_mappings
         )
 
     def test_lonely_echo_gives_LonelyEcho(self):
@@ -659,43 +706,51 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
     def test_echo_before_ask_gives_lonely_echo(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         echo what can't we do?
-        ask time travel """)
+        ask time travel """
+        )
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
     def test_pint_after_empty_line_gives_error_line_3(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         print hallo
 
-        prnt hallo""")
+        prnt hallo"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         print('hallo')
-        pass""")
+        pass"""
+        )
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(3, 1, 3, 11), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(
+                SourceRange(3, 1, 3, 11), hedy.exceptions.InvalidCommandException
+            ),
         ]
 
         self.single_level_tester(
-            code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
+            code, expected=expected, skipped_mappings=skipped_mappings
         )
 
     def test_print_without_argument_gives_incomplete(self):
         self.multi_level_tester(
             code="print",
             exception=hedy.exceptions.IncompleteCommandException,
-            extra_check_function=lambda c: c.exception.arguments['incomplete_command'] == 'print'
+            extra_check_function=lambda c: c.exception.arguments["incomplete_command"]
+            == "print",
         )
 
     def test_print_without_argument_gives_incomplete_2(self):
         self.multi_level_tester(
             code="print lalalala\nprint",
             exception=hedy.exceptions.IncompleteCommandException,
-            extra_check_function=lambda c: c.exception.arguments['incomplete_command'] == 'print',
+            extra_check_function=lambda c: c.exception.arguments["incomplete_command"]
+            == "print",
             max_level=17,
         )
 
@@ -704,43 +759,50 @@ class TestsLevel1(HedyTester):
         expected = "pass"
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 18), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(
+                SourceRange(1, 1, 1, 18), hedy.exceptions.InvalidCommandException
+            ),
         ]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
-            extra_check_function=lambda c: c.arguments['invalid_command'] == 'aks',
+            extra_check_function=lambda c: c.arguments["invalid_command"] == "aks",
             max_level=5,
         )
 
     def test_source_map(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         print Hallo welkom bij Hedy!
         forward 50
         ask Wat is je lievelingskleur
-        echo je lievelingskleur is""")
+        echo je lievelingskleur is"""
+        )
 
-        expected_code = HedyTester.dedent(f"""\
+        expected_code = HedyTester.dedent(
+            f"""\
         print('Hallo welkom bij Hedy!')
         {HedyTester.indent(
             HedyTester.forward_transpiled(50, self.level),
             8, True)
         }
         answer = input('Wat is je lievelingskleur')
-        print('je lievelingskleur is '+answer)""")
+        print('je lievelingskleur is '+answer)"""
+        )
 
         expected_source_map = {
-            '1/1-1/29': '1/1-1/32',
-            '2/1-2/11': '2/1-8/16',
-            '3/1-3/30': '9/1-9/44',
-            '4/1-4/27': '10/1-10/39',
-            '1/1-4/28': '1/1-10/39'
+            "1/1-1/29": "1/1-1/32",
+            "2/1-2/11": "2/1-8/16",
+            "3/1-3/30": "9/1-9/44",
+            "4/1-4/27": "10/1-10/39",
+            "1/1-4/28": "1/1-10/39",
         }
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
 
 # hypothesis initialization starts here
 
@@ -757,41 +819,61 @@ templates = [
     ("ask <P>", 1),
     ("echo <P>", 2),
     ("ask <P>", 3),
-    ("echo <P>", 4)
+    ("echo <P>", 4),
 ]
 
 
 def valid_permutation(lines):
     orders = [order for _, order in lines]
     significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
-    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    list = [
+        significant_orders[i] <= significant_orders[i + 1]
+        for i in range(len(significant_orders) - 1)
+    ]
     return all(list)
 
 
 class TestsHypothesisLevel1(HedyTester):
     level = 1
 
-    @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
+    @given(
+        code_tuples=hypothesis.strategies.permutations(templates),
+        d=hypothesis.strategies.data(),
+    )
     @settings(deadline=None, max_examples=100)
     # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
     def test_template_combination(self, code_tuples, d):
-        excluded_chars = ["_", "#", '\n', '\r']
+        excluded_chars = ["_", "#", "\n", "\r"]
         random_print_argument = hypothesis.strategies.text(
-            alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+            alphabet=hypothesis.strategies.characters(
+                blacklist_characters=excluded_chars
+            ),
             min_size=1,
-            max_size=10)
+            max_size=10,
+        )
 
         if valid_permutation(code_tuples):
-            lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
-            code = '\n'.join(lines)
+            lines = [
+                line.replace("<P>", d.draw(random_print_argument))
+                for line, _ in code_tuples
+            ]
+            code = "\n".join(lines)
 
-            self.single_level_tester(
-                code=code,
-                translate=False
-            )
+            self.single_level_tester(code=code, translate=False)
 
-            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
-                                 Command.print, Command.print, Command.print, Command.turn, Command.turn]
+            expected_commands = [
+                Command.ask,
+                Command.ask,
+                Command.echo,
+                Command.echo,
+                Command.forward,
+                Command.forward,
+                Command.print,
+                Command.print,
+                Command.print,
+                Command.turn,
+                Command.turn,
+            ]
 
-            all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
+            all_commands = sorted(hedy.all_commands(code, self.level, "en"))
             self.assertEqual(expected_commands, all_commands)

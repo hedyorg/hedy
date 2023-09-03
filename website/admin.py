@@ -32,7 +32,9 @@ class AdminModule(WebsiteModule):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext("unauthorized"))
-        return render_template("admin/admin.html", page_title=gettext("title_admin"), current_page="admin")
+        return render_template(
+            "admin/admin.html", page_title=gettext("title_admin"), current_page="admin"
+        )
 
     @route("/users", methods=["GET"])
     @requires_admin
@@ -83,7 +85,11 @@ class AdminModule(WebsiteModule):
             data["teacher_request"] = True if data["teacher_request"] else None
             data["third_party"] = True if data["third_party"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
-            data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
+            data["last_login"] = (
+                utils.timestamp_to_date(data["last_login"])
+                if data.get("last_login")
+                else None
+            )
             if category == "language":
                 if language != data["language"]:
                     continue
@@ -94,19 +100,30 @@ class AdminModule(WebsiteModule):
                 if substring and substring not in data.get("username"):
                     continue
             if category == "email":
-                if not data.get("email") or (substring and substring not in data.get("email")):
+                if not data.get("email") or (
+                    substring and substring not in data.get("email")
+                ):
                     continue
             if category == "created":
-                if start_date and utils.string_date_to_date(start_date) > data["created"]:
+                if (
+                    start_date
+                    and utils.string_date_to_date(start_date) > data["created"]
+                ):
                     continue
                 if end_date and utils.string_date_to_date(end_date) < data["created"]:
                     continue
             if category == "last_login":
                 if not data.get("last_login"):
                     continue
-                if start_date and utils.string_date_to_date(start_date) > data["last_login"]:
+                if (
+                    start_date
+                    and utils.string_date_to_date(start_date) > data["last_login"]
+                ):
                     continue
-                if end_date and utils.string_date_to_date(end_date) < data["last_login"]:
+                if (
+                    end_date
+                    and utils.string_date_to_date(end_date) < data["last_login"]
+                ):
                     continue
             userdata.append(data)
 
@@ -122,7 +139,7 @@ class AdminModule(WebsiteModule):
             keyword_language_filter=keyword_language,
             next_page_token=users.next_page_token,
             current_page="admin",
-            javascript_page_options=dict(page='admin-users'),
+            javascript_page_options=dict(page="admin-users"),
         )
 
     @route("/classes", methods=["GET"])
@@ -138,7 +155,9 @@ class AdminModule(WebsiteModule):
                 "students": len(Class.get("students")) if "students" in Class else 0,
                 "stats": statistics.get_general_class_stats(Class.get("students", [])),
                 "id": Class.get("id"),
-                "weekly_runs": statistics.get_general_class_stats(Class.get("students", []))["week"]["runs"]
+                "weekly_runs": statistics.get_general_class_stats(
+                    Class.get("students", [])
+                )["week"]["runs"],
             }
             for Class in self.db.all_classes()
         ]
@@ -146,15 +165,19 @@ class AdminModule(WebsiteModule):
         active_classes = [x for x in classes if x["weekly_runs"] > 0]
         # classes = sorted(classes, key=lambda d: d["weekly_runs"], reverse=True)
 
-        return render_template("admin/admin-classes.html",
-                               active_classes=active_classes,
-                               classes=classes,
-                               page_title=gettext("title_admin"))
+        return render_template(
+            "admin/admin-classes.html",
+            active_classes=active_classes,
+            classes=classes,
+            page_title=gettext("title_admin"),
+        )
 
     @route("/adventures", methods=["GET"])
     @requires_admin
     def get_admin_adventures_page(self, user):
-        all_adventures = sorted(self.db.all_adventures(), key=lambda d: d.get("date", 0), reverse=True)
+        all_adventures = sorted(
+            self.db.all_adventures(), key=lambda d: d.get("date", 0), reverse=True
+        )
         adventures = [
             {
                 "id": adventure.get("id"),
@@ -177,27 +200,37 @@ class AdminModule(WebsiteModule):
     @route("/stats", methods=["GET"])
     @requires_admin
     def get_admin_stats_page(self, user):
-        return render_template("admin/admin-stats.html",
-                               page_title=gettext("title_admin"),
-                               current_page="admin",
-                               javascript_page_options=dict(
-                                   page='admin-stats',
-                               ))
+        return render_template(
+            "admin/admin-stats.html",
+            page_title=gettext("title_admin"),
+            current_page="admin",
+            javascript_page_options=dict(
+                page="admin-stats",
+            ),
+        )
 
     @route("/logs", methods=["GET"])
     @requires_admin
     def get_admin_logs_page(self, user):
-        return render_template("admin/admin-logs.html", page_title=gettext("title_admin"), current_page="admin")
+        return render_template(
+            "admin/admin-logs.html",
+            page_title=gettext("title_admin"),
+            current_page="admin",
+        )
 
     @route("/achievements", methods=["GET"])
     @requires_admin
     def get_admin_achievements_page(self, user):
         stats = {}
-        achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
+        achievements = (
+            hedyweb.AchievementTranslations().get_translations("en").get("achievements")
+        )
         for achievement in achievements.keys():
             stats[achievement] = {}
             stats[achievement]["name"] = achievements.get(achievement).get("title")
-            stats[achievement]["description"] = achievements.get(achievement).get("text")
+            stats[achievement]["description"] = achievements.get(achievement).get(
+                "text"
+            )
             stats[achievement]["count"] = 0
 
         user_achievements = self.db.get_all_achievements()
@@ -251,7 +284,9 @@ class AdminModule(WebsiteModule):
             return gettext("ajax_error"), 400
         if not isinstance(body.get("username"), str):
             return gettext("username_invalid"), 400
-        if not isinstance(body.get("email"), str) or not utils.valid_email(body["email"]):
+        if not isinstance(body.get("email"), str) or not utils.valid_email(
+            body["email"]
+        ):
             return gettext("email_invalid"), 400
 
         user = self.db.user_by_username(body["username"].strip().lower())
@@ -264,7 +299,10 @@ class AdminModule(WebsiteModule):
 
         # We assume that this email is not in use by any other users.
         # In other words, we trust the admin to enter a valid, not yet used email address.
-        self.db.update_user(user["username"], {"email": body["email"], "verification_pending": hashed_token})
+        self.db.update_user(
+            user["username"],
+            {"email": body["email"], "verification_pending": hashed_token},
+        )
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
@@ -324,13 +362,24 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    db.update_user(user["username"], {"is_teacher": is_teacher_value, "teacher_request": None})
+    db.update_user(
+        user["username"], {"is_teacher": is_teacher_value, "teacher_request": None}
+    )
 
     # Some (student users) may not have emails, and this code would explode otherwise
-    if user_becomes_teacher and not utils.is_testing_request(request) and user.get('email'):
+    if (
+        user_becomes_teacher
+        and not utils.is_testing_request(request)
+        and user.get("email")
+    ):
         try:
             send_localized_email_template(
-                locale=user["language"], template="welcome_teacher", email=user["email"], username=user["username"]
+                locale=user["language"],
+                template="welcome_teacher",
+                email=user["email"],
+                username=user["username"],
             )
         except Exception:
-            print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
+            print(
+                f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed"
+            )

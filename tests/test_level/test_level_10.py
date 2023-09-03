@@ -6,7 +6,7 @@ from tests.Tester import HedyTester
 
 class TestsLevel10(HedyTester):
     level = 10
-    '''
+    """
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
@@ -17,123 +17,146 @@ class TestsLevel10(HedyTester):
      * single keyword positive tests are just keyword or keyword_special_case
      * multi keyword positive tests are keyword1_keywords_2
      * negative tests should be situation_gives_exception
-    '''
+    """
 
     #
     # for list command
     #
     def test_for_list(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         dieren is hond, kat, papegaai
         for dier in dieren
-            print dier""")
+            print dier"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         dieren = ['hond', 'kat', 'papegaai']
         for dier in dieren:
           print(f'{dier}')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['is', 'for', 'print'],
-            max_level=11
+            expected_commands=["is", "for", "print"],
+            max_level=11,
         )
 
     def test_blanks(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         players = Ann, John, Jesse
         choices = 1, 2, 3, 4, 5, 6
         _
             print player ' throws ' choices at random
             sleep
-        """)
+        """
+        )
 
         self.multi_level_tester(
             max_level=16,
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.CodePlaceholdersPresentException
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 3,
+            exception=hedy.exceptions.CodePlaceholdersPresentException,
         )
 
     def test_for_list_hindi(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         क is hond, kat, papegaai
         for काउंटर in क
-            print काउंटर""")
+            print काउंटर"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         क = ['hond', 'kat', 'papegaai']
         for काउंटर in क:
           print(f'{काउंटर}')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['is', 'for', 'print'],
-            max_level=11
+            expected_commands=["is", "for", "print"],
+            max_level=11,
         )
 
     def test_for_list_multiline_body(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         familie is baby, mommy, daddy, grandpa, grandma
         for shark in familie
             print shark ' shark tudutudutudu'
             print shark ' shark tudutudutudu'
             print shark ' shark tudutudutudu'
-            print shark ' shark'""")
+            print shark ' shark'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
         for shark in familie:
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark')
-          time.sleep(0.1)""")
+          time.sleep(0.1)"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_for_list_with_string_gives_type_error(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         dieren is 'text'
         for dier in dieren
-            print dier""")
+            print dier"""
+        )
 
         self.multi_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 2,
             max_level=16,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
 
     def test_for_list_with_int_gives_type_error(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         dieren is 5
         for dier in dieren
-            print dier""")
+            print dier"""
+        )
 
         self.multi_level_tester(
             code=code,
             max_level=16,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
 
     #
     # if pressed tests
     #
 
     def test_if_pressed_with_list_and_for(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         lijstje is kip, haan, kuiken
         if x is pressed
             for dier in lijstje
                 print dier
         else
-            print 'onbekend dier'""")
+            print 'onbekend dier'"""
+        )
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(
+            """\
         lijstje = ['kip', 'haan', 'kuiken']
         pygame_end = False
         while not pygame_end:
@@ -152,9 +175,7 @@ class TestsLevel10(HedyTester):
             # End of PyGame Event Handler    
             else:
               print(f'onbekend dier')
-              break""")
+              break"""
+        )
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)

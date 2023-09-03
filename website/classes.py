@@ -6,7 +6,13 @@ from flask_babel import gettext
 import utils
 from config import config
 from website.flask_helpers import render_template
-from website.auth import current_user, is_teacher, requires_login, requires_teacher, refresh_current_user_from_db
+from website.auth import (
+    current_user,
+    is_teacher,
+    requires_login,
+    requires_teacher,
+    refresh_current_user_from_db,
+)
 
 from .achievements import Achievements
 from .database import Database
@@ -52,7 +58,9 @@ class ClassModule(WebsiteModule):
         }
 
         self.db.store_class(Class)
-        achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
+        achievement = self.achievements.add_single_achievement(
+            user["username"], "ready_set_education"
+        )
         if achievement:
             return {"id": Class["id"], "achievement": achievement}, 200
         return {"id": Class["id"]}, 200
@@ -77,10 +85,15 @@ class ClassModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(user["username"], True)
         for Class in Classes:
             if Class["name"] == body["name"]:
-                return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
+                return (
+                    "duplicate",
+                    200,
+                )  # Todo TB: Will have to look into this, but not sure why we return a 200?
 
         self.db.update_class(class_id, body["name"])
-        achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
+        achievement = self.achievements.add_single_achievement(
+            user["username"], "on_second_thoughts"
+        )
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
@@ -93,7 +106,9 @@ class ClassModule(WebsiteModule):
             return gettext("no_such_class"), 404
 
         self.db.delete_class(Class)
-        achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
+        achievement = self.achievements.add_single_achievement(
+            user["username"], "end_of_semester"
+        )
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
@@ -142,7 +157,9 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = 0
 
-        achievement = self.achievements.add_single_achievement(current_user()["username"], "epic_education")
+        achievement = self.achievements.add_single_achievement(
+            current_user()["username"], "epic_education"
+        )
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
@@ -151,14 +168,18 @@ class ClassModule(WebsiteModule):
     @requires_login
     def leave_class(self, user, class_id, student_id):
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and student_id != user["username"]):
+        if not Class or (
+            Class["teacher"] != user["username"] and student_id != user["username"]
+        ):
             return gettext("ajax_error"), 400
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
         achievement = None
         if Class["teacher"] == user["username"]:
-            achievement = self.achievements.add_single_achievement(user["username"], "detention")
+            achievement = self.achievements.add_single_achievement(
+                user["username"], "detention"
+            )
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
@@ -223,7 +244,9 @@ class MiscClassPages(WebsiteModule):
             customizations["id"] = class_id
             self.db.update_class_customizations(customizations)
 
-        achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
+        achievement = self.achievements.add_single_achievement(
+            current_user()["username"], "one_for_money"
+        )
         if achievement:
             return {"achievement": achievement}, 200
 
@@ -283,9 +306,13 @@ class MiscClassPages(WebsiteModule):
 
         # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
         if not is_teacher(user) and username != user.get("username"):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(
+                error=403, ui_message=gettext("retrieve_class_error")
+            )
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and username != user.get("username")):
+        if not Class or (
+            Class["teacher"] != user["username"] and username != user.get("username")
+        ):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         self.db.remove_class_invite(username)
@@ -297,5 +324,8 @@ class MiscClassPages(WebsiteModule):
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
         return redirect(
-            request.url.replace("/hedy/l/" + link_id, "/class/" + Class["id"] + "/prejoin/" + link_id), code=302
+            request.url.replace(
+                "/hedy/l/" + link_id, "/class/" + Class["id"] + "/prejoin/" + link_id
+            ),
+            code=302,
         )

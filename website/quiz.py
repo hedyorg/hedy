@@ -16,7 +16,7 @@ from .database import Database
 from .website_module import WebsiteModule, route
 
 MAX_ATTEMPTS = 2
-NO_SUCH_QUESTION = 'No such question'
+NO_SUCH_QUESTION = "No such question"
 
 
 class QuizLogic:
@@ -27,12 +27,16 @@ class QuizLogic:
 
     def quiz_threshold_for_user(self):
         """Return the minimum quiz percentage the given user has to achieve to pass the quiz."""
-        customizations = self.db.get_student_class_customizations(current_user()['username'])
-        return customizations.get('level_thresholds', {}).get('quiz', 0)
+        customizations = self.db.get_student_class_customizations(
+            current_user()["username"]
+        )
+        return customizations.get("level_thresholds", {}).get("quiz", 0)
 
 
 class QuizModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements, quizzes: Dict[str, Quizzes]):
+    def __init__(
+        self, db: Database, achievements: Achievements, quizzes: Dict[str, Quizzes]
+    ):
         super().__init__("quiz", __name__, url_prefix="/quiz")
         self.logic = QuizLogic(db)
         self.db = db
@@ -46,8 +50,10 @@ class QuizModule(WebsiteModule):
         Initialize a new attempt, then redirect to the form that presents question 1.
         """
         self.initialize_attempt(level)
-        statistics.add(current_user()["username"], lambda id_: self.db.add_quiz_started(id_, level))
-        return redirect(url_for('.current_question'))
+        statistics.add(
+            current_user()["username"], lambda id_: self.db.add_quiz_started(id_, level)
+        )
+        return redirect(url_for(".current_question"))
 
     @route("/current_question", methods=["GET"])
     def current_question(self):
@@ -57,13 +63,15 @@ class QuizModule(WebsiteModule):
         """
         progress, question = self.current_progress_and_question()
 
-        return render_template('quiz/partial-question.html',
-                               level=progress.level,
-                               question_count=self.question_count(progress.level),
-                               correct_answers_so_far=progress.correct_answers_so_far,
-                               incorrect_answers_so_far=progress.incorrect_answers_so_far,
-                               progress=progress,
-                               question=question)
+        return render_template(
+            "quiz/partial-question.html",
+            level=progress.level,
+            question_count=self.question_count(progress.level),
+            correct_answers_so_far=progress.correct_answers_so_far,
+            incorrect_answers_so_far=progress.incorrect_answers_so_far,
+            progress=progress,
+            question=question,
+        )
 
     @route("/preview-question/<int:level>/<int:question>", methods=["GET"])
     def preview_question(self, level, question):
@@ -86,12 +94,12 @@ class QuizModule(WebsiteModule):
         progress, question = self.current_progress_and_question()
         question_count = self.question_count(progress.level)
 
-        answer = int(request.form.get('answer', '0'))
+        answer = int(request.form.get("answer", "0"))
         if not answer:
-            return 'No answer given or not an int', 400
+            return "No answer given or not an int", 400
 
         if progress.question_attempt >= MAX_ATTEMPTS:
-            return redirect(url_for('.review_question'))
+            return redirect(url_for(".review_question"))
 
         is_correct = question.correct_answer == answer
 
@@ -119,7 +127,9 @@ class QuizModule(WebsiteModule):
             self.on_quiz_finished(progress)
 
         self.save_progress(progress)
-        return redirect(url_for('.review_question' if question_finished else '.current_question'))
+        return redirect(
+            url_for(".review_question" if question_finished else ".current_question")
+        )
 
     @route("/review_question", methods=["GET"])
     def review_question(self):
@@ -129,20 +139,28 @@ class QuizModule(WebsiteModule):
         is_correct = progress.last_wrong_answer is None
         question_count = self.question_count(progress.level)
         correct_answer = question.get_choice(question.correct_answer)
-        incorrect_answer = question.get_choice(progress.last_wrong_answer) if progress.last_wrong_answer else None
+        incorrect_answer = (
+            question.get_choice(progress.last_wrong_answer)
+            if progress.last_wrong_answer
+            else None
+        )
 
-        next_question = progress.question + 1 if progress.question + 1 <= question_count else None
+        next_question = (
+            progress.question + 1 if progress.question + 1 <= question_count else None
+        )
 
-        return render_template('quiz/partial-review-question.html',
-                               progress=progress,
-                               question=question,
-                               question_count=question_count,
-                               correct_answers_so_far=progress.correct_answers_so_far,
-                               incorrect_answers_so_far=progress.incorrect_answers_so_far,
-                               correct_answer=correct_answer,
-                               incorrect_answer=incorrect_answer,
-                               next_question=next_question,
-                               is_correct=is_correct)
+        return render_template(
+            "quiz/partial-review-question.html",
+            progress=progress,
+            question=question,
+            question_count=question_count,
+            correct_answers_so_far=progress.correct_answers_so_far,
+            incorrect_answers_so_far=progress.incorrect_answers_so_far,
+            correct_answer=correct_answer,
+            incorrect_answer=incorrect_answer,
+            next_question=next_question,
+            is_correct=is_correct,
+        )
 
     @route("/next_question", methods=["POST"])
     def next_question(self):
@@ -153,29 +171,31 @@ class QuizModule(WebsiteModule):
         self.save_progress(progress)
 
         if progress.question <= self.question_count(progress.level):
-            return redirect(url_for('.current_question'))
+            return redirect(url_for(".current_question"))
         else:
-            return redirect(url_for('.review_quiz'))
+            return redirect(url_for(".review_quiz"))
 
     @route("/review_quiz", methods=["GET"])
     def review_quiz(self):
         """Review the results of the quiz."""
         progress = self.current_progress()
         if not progress:
-            return redirect(url_for('.begin', level=1))
+            return redirect(url_for(".begin", level=1))
         questions = self.get_all_questions(progress.level)
         total_achievable = sum(q.score for q in questions)
 
         score_percent = round(progress.total_score / total_achievable * 100)
 
         # Certificates are only for logged-in users
-        get_certificate = current_user()['username'] and progress.level == HEDY_MAX_LEVEL
+        get_certificate = (
+            current_user()["username"] and progress.level == HEDY_MAX_LEVEL
+        )
         next_level = progress.level + 1 if progress.level < HEDY_MAX_LEVEL else None
         retake_quiz_level = None
 
         # If you are in a class and the teacher has set quiz completion requirements, we check
         # them here and hide the "next level" button if you haven't met them.
-        if current_user()['username']:
+        if current_user()["username"]:
             threshold = self.logic.quiz_threshold_for_user()
             if score_percent < threshold:
                 # No next level for you
@@ -183,12 +203,14 @@ class QuizModule(WebsiteModule):
                 get_certificate = None
                 retake_quiz_level = progress.level
 
-        return render_template('quiz/partial-review-quiz.html',
-                               next_level=next_level,
-                               progress=progress,
-                               retake_quiz_level=retake_quiz_level,
-                               get_certificate=get_certificate,
-                               score_percent=score_percent)
+        return render_template(
+            "quiz/partial-review-quiz.html",
+            next_level=next_level,
+            progress=progress,
+            retake_quiz_level=retake_quiz_level,
+            get_certificate=get_certificate,
+            score_percent=score_percent,
+        )
 
     def on_quiz_finished(self, progress):
         """Called when the student has answered the last question in the quiz.
@@ -204,44 +226,67 @@ class QuizModule(WebsiteModule):
         achievement = None
         username = current_user()["username"]
         if username:
-            statistics.add(username, lambda id_: self.db.add_quiz_finished(id_, progress.level, progress.total_score))
+            statistics.add(
+                username,
+                lambda id_: self.db.add_quiz_finished(
+                    id_, progress.level, progress.total_score
+                ),
+            )
             # FIXME: I'm pretty sure the types of this code don't work out in case there is more
             # than once achievement at a time, but I don't quite understand well enough how it's
             # supposed to work to fix it.
-            achievement = self.achievements.add_single_achievement(username, "next_question")
+            achievement = self.achievements.add_single_achievement(
+                username, "next_question"
+            )
             if progress.total_score == total_achievable:
                 if achievement:
-                    achievement.append(self.achievements.add_single_achievement(username, "quiz_master")[0])
+                    achievement.append(
+                        self.achievements.add_single_achievement(
+                            username, "quiz_master"
+                        )[0]
+                    )
                 else:
-                    achievement = self.achievements.add_single_achievement(username, "quiz_master")
+                    achievement = self.achievements.add_single_achievement(
+                        username, "quiz_master"
+                    )
             if progress.level == HEDY_MAX_LEVEL:
                 if achievement:
-                    achievement.append(self.achievements.add_single_achievement(username, "hedy_certificate")[0])
+                    achievement.append(
+                        self.achievements.add_single_achievement(
+                            username, "hedy_certificate"
+                        )[0]
+                    )
                 else:
-                    achievement = self.achievements.add_single_achievement(username, "hedy_certificate")
+                    achievement = self.achievements.add_single_achievement(
+                        username, "hedy_certificate"
+                    )
 
         # Add any achievements we accumulated to the session. They will be sent to the
         # client at the next possible opportunity.
         if achievement:
-            session['pending_achievements'] = session.get('pending_achievements', []) + achievement
+            session["pending_achievements"] = (
+                session.get("pending_achievements", []) + achievement
+            )
 
     def initialize_attempt(self, level):
         """Record that we're starting a new attempt."""
-        return self.save_progress(QuizProgress(
-            attempt_id=uuid.uuid4().hex,
-            level=level,
-            question=1,
-            question_attempt=0,
-            total_score=0,
-        ))
+        return self.save_progress(
+            QuizProgress(
+                attempt_id=uuid.uuid4().hex,
+                level=level,
+                question=1,
+                question_attempt=0,
+                total_score=0,
+            )
+        )
 
     def save_progress(self, progress):
-        session['quiz_progress'] = asdict(progress)
+        session["quiz_progress"] = asdict(progress)
         return progress
 
     def current_progress(self):
         """Return the current QuizProgress object."""
-        p = session.get('quiz_progress')
+        p = session.get("quiz_progress")
         try:
             return QuizProgress(**p) if p else None
         except Exception:
@@ -257,24 +302,27 @@ class QuizModule(WebsiteModule):
 
     def get_all_questions(self, level):
         """Return all questions for the given level."""
-        qs = self.my_quiz().get_quiz_data_for_level(level, request.args.get('keyword_lang_override', g.keyword_lang))
+        qs = self.my_quiz().get_quiz_data_for_level(
+            level, request.args.get("keyword_lang_override", g.keyword_lang)
+        )
         return [Question.from_yaml(int(n), q) for n, q in qs.items()]
 
-    def get_question(self, level, question: int) -> 'Question':
+    def get_question(self, level, question: int) -> "Question":
         """Return the indicated question. The question will be returned as ViewModelQuestion object.
 
         The current session's keyword language is used, and an override is possible if
         requested.
         """
         q = self.my_quiz().get_quiz_data_for_level_question(
-            level, question, request.args.get('keyword_lang_override', g.keyword_lang))
+            level, question, request.args.get("keyword_lang_override", g.keyword_lang)
+        )
         return Question.from_yaml(question, q) if q else None
 
     def current_progress_and_question(self):
         """Return the current progress and question objects."""
         progress = self.current_progress()
         if not progress:
-            raise RequestRedirect(url_for('.begin', level=1))
+            raise RequestRedirect(url_for(".begin", level=1))
 
         question = self.get_question(progress.level, progress.question)
         if not question:
@@ -297,6 +345,7 @@ class Question:
 
     A question as it is seen by the templates (not necessarily as it is stored on disk).
     """
+
     number: int
     text: str
     choices: List[Choice]
@@ -315,22 +364,29 @@ class Question:
         """Build a ViewModelQuestion from what's written in the YAML."""
         return Question(
             number=nr,
-            text=data.get('question_text', ''),
-            code=data.get('code'),
-            choices=[Choice(number=i + 1, text=opt.get('option', ''), feedback=opt.get('feedback', ''))
-                     for i, opt in enumerate(data.get('mp_choice_options', []))],
+            text=data.get("question_text", ""),
+            code=data.get("code"),
+            choices=[
+                Choice(
+                    number=i + 1,
+                    text=opt.get("option", ""),
+                    feedback=opt.get("feedback", ""),
+                )
+                for i, opt in enumerate(data.get("mp_choice_options", []))
+            ],
             # Correct_answer is 'A', 'B', 'C' in the file, but needs to be 1, 2, 3 because that's
             # what the data has.
-            correct_answer=number_from_letter(data.get('correct_answer', 'A')),
-            hint=data.get('hint', ''),
-            score=int(data.get('question_score', 10)),
-            output=data.get('output'),
+            correct_answer=number_from_letter(data.get("correct_answer", "A")),
+            hint=data.get("hint", ""),
+            score=int(data.get("question_score", 10)),
+            output=data.get("output"),
         )
 
 
 @dataclass
 class QuizProgress:
     """Progress through the quiz."""
+
     level: int
     question: int
     attempt_id: str  # Identifier of the entire quiz
@@ -375,14 +431,18 @@ class QuizProgress:
 
     @property
     def incorrect_answers_so_far(self):
-        return set(i + 1 for i in range(self.question) if i + 1 not in self.correctly_answered_questions_numbers)
+        return set(
+            i + 1
+            for i in range(self.question)
+            if i + 1 not in self.correctly_answered_questions_numbers
+        )
 
 
 def number_from_letter(letter):
     """Turn A, B, C into 1, 2, 3."""
-    return ord(letter.upper()) - ord('A') + 1
+    return ord(letter.upper()) - ord("A") + 1
 
 
 def letter_from_number(num):
     """Turn 1, 2, 3 into A, B, C."""
-    return chr(ord('A') + num - 1)
+    return chr(ord("A") + num - 1)

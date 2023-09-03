@@ -5,18 +5,18 @@ import unittest
 
 # Transcription of the used tokens into a symbol (a letter) in order to apply a coloring
 TOKEN_CODE = {
-    "text": 'T',  # normal
-    "keyword": 'K',
-    "comment": 'C',
-    "variable": 'N',
-    "constant.character": 'S',
-    "event": 'E',
-    "invalid": 'I',
-    "support.function": 'F'
+    "text": "T",  # normal
+    "keyword": "K",
+    "comment": "C",
+    "variable": "N",
+    "constant.character": "S",
+    "event": "E",
+    "invalid": "I",
+    "support.function": "F",
 }
 
 # for the caractere SPACE, all this highlights are equals
-SAME_COLOR_FOR_SPACE = ['T', 'K', 'C', 'N', 'S', 'E']
+SAME_COLOR_FOR_SPACE = ["T", "K", "C", "N", "S", "E"]
 
 ABBREVIATION = {
     "text": "T",
@@ -24,53 +24,46 @@ ABBREVIATION = {
     "txt": "T",
     "white": "T",
     "T": "T",
-
     "keyword": "K",
     "kw": "K",
     "red": "K",
     "K": "K",
-
     "comment": "C",
     "cmt": "C",
     "grey": "C",
     "C": "C",
-
     "variable": "N",
     "number": "N",
     "green": "N",
     "N": "N",
-
     "constant.character": "S",
     "string": "S",
     "str": "S",
     "blue": "S",
     "S": "S",
-
     "event": "E",
     "pressed": "E",
     "orange": "E",
     "E": "E",
-
     "invalid": "I",
     "inv": "I",
     "pink": "I",
     "I": "I",
-
-    "support.function": 'F',
+    "support.function": "F",
 }
 
 
 class HighlightTester(unittest.TestCase):
-
     def assert_highlighted_chr(
-            self,
-            code,
-            expected,
-            level,
-            lang="en",
-            start_token="start",
-            last_state="start",
-            intermediate_tests=True):
+        self,
+        code,
+        expected,
+        level,
+        lang="en",
+        start_token="start",
+        last_state="start",
+        intermediate_tests=True,
+    ):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -90,13 +83,14 @@ class HighlightTester(unittest.TestCase):
             self.checkInter(code, expected, state_machine, start_token)
 
     def assert_highlighted_chr_multi_line(
-            self,
-            *args,
-            level,
-            lang="en",
-            start_token="start",
-            last_state="start",
-            intermediate_tests=True):
+        self,
+        *args,
+        level,
+        lang="en",
+        start_token="start",
+        last_state="start",
+        intermediate_tests=True,
+    ):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -115,29 +109,26 @@ class HighlightTester(unittest.TestCase):
         """
         if len(args) % 2 != 0:
             raise RuntimeError(
-                f'Pass an even number of strings to assert_highlighted_chr_multi_line\
-                  (alternatingly code and highlighting). Got: {args}')
+                f"Pass an even number of strings to assert_highlighted_chr_multi_line\
+                  (alternatingly code and highlighting). Got: {args}"
+            )
 
-        code = '\n'.join(line for i, line in enumerate(args) if i % 2 == 0)
-        expected = '\n'.join(line for i, line in enumerate(args) if i % 2 != 0)
+        code = "\n".join(line for i, line in enumerate(args) if i % 2 == 0)
+        expected = "\n".join(line for i, line in enumerate(args) if i % 2 != 0)
 
         self.assert_highlighted_chr(
-            code,
-            expected,
-            level,
-            lang,
-            start_token,
-            last_state,
-            intermediate_tests)
+            code, expected, level, lang, start_token, last_state, intermediate_tests
+        )
 
     def assert_highlighted(
-            self,
-            code_coloration,
-            level,
-            lang="en",
-            start_token="start",
-            last_state="start",
-            intermediate_tests=True):
+        self,
+        code_coloration,
+        level,
+        lang="en",
+        start_token="start",
+        last_state="start",
+        intermediate_tests=True,
+    ):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -152,22 +143,18 @@ class HighlightTester(unittest.TestCase):
         """
         code, expected = self.convert(code_coloration)
         self.assert_highlighted_chr(
-            code,
-            expected,
-            level,
-            lang,
-            start_token,
-            last_state,
-            intermediate_tests)
+            code, expected, level, lang, start_token, last_state, intermediate_tests
+        )
 
     def assert_highlighted_multi_line(
-            self,
-            *args,
-            level,
-            lang="en",
-            start_token="start",
-            last_state="start",
-            intermediate_tests=True):
+        self,
+        *args,
+        level,
+        lang="en",
+        start_token="start",
+        last_state="start",
+        intermediate_tests=True,
+    ):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -183,13 +170,8 @@ class HighlightTester(unittest.TestCase):
         code_coloration = "\n".join(args)
         code, expected = self.convert(code_coloration)
         self.assert_highlighted_chr(
-            code,
-            expected,
-            level,
-            lang,
-            start_token,
-            last_state,
-            intermediate_tests)
+            code, expected, level, lang, start_token, last_state, intermediate_tests
+        )
 
     def checkInter(self, code, expected, state_machine, start_token="start"):
         """Check the highlighting on the intermediate states
@@ -210,7 +192,9 @@ class HighlightTester(unittest.TestCase):
         for n in range(len(listCode)):
             self.check(listCode[n], listExpected[n], state_machine, start_token, None)
 
-    def check(self, code, expected, state_machine, start_token="start", last_state='start'):
+    def check(
+        self, code, expected, state_machine, start_token="start", last_state="start"
+    ):
         """Apply state_machine on code and check if the result is valid
 
         Arguments :
@@ -267,20 +251,20 @@ class HighlightTester(unittest.TestCase):
         Returns a state machine.
         """
         root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-        trad_file = os.path.normpath(root_dir + '/highlighting/highlighting-trad.json')
+        trad_file = os.path.normpath(root_dir + "/highlighting/highlighting-trad.json")
 
         # get traduction
-        with open(trad_file, 'r', encoding='utf-8') as file_regex_trad:
+        with open(trad_file, "r", encoding="utf-8") as file_regex_trad:
             data_regex_trad = json.load(file_regex_trad)
 
         if lang not in data_regex_trad.keys():
-            lang = 'en'
+            lang = "en"
 
         regex_trad = data_regex_trad[lang]
 
         # get state_machine
-        sm_file = os.path.normpath(root_dir + '/highlighting/highlighting.json')
-        with open(sm_file, 'r', encoding='utf-8') as file_regex:
+        sm_file = os.path.normpath(root_dir + "/highlighting/highlighting.json")
+        with open(sm_file, "r", encoding="utf-8") as file_regex:
             data_regex = json.load(file_regex)
 
         # apply translation of keywords
@@ -288,14 +272,18 @@ class HighlightTester(unittest.TestCase):
             for state in lvl_rules["rules"]:
                 for rule in lvl_rules["rules"][state]:
                     for key in regex_trad:
-                        rule['regex'] = rule['regex'].replace("__" + key + "__", regex_trad[key])
+                        rule["regex"] = rule["regex"].replace(
+                            "__" + key + "__", regex_trad[key]
+                        )
 
         # get state_machine for the level
-        state_machine = [item for item in data_regex if item['name'] == level]
+        state_machine = [item for item in data_regex if item["name"] == level]
         if len(state_machine) != 1:
-            raise RuntimeError(f'Expected exactly 1 rule with {level}, got {len(state_machine)}')
+            raise RuntimeError(
+                f"Expected exactly 1 rule with {level}, got {len(state_machine)}"
+            )
         else:
-            state_machine = state_machine[0]['rules']
+            state_machine = state_machine[0]["rules"]
         return state_machine
 
     def convert(self, code_coloration):
@@ -331,7 +319,6 @@ class HighlightTester(unittest.TestCase):
                 state = KEYWORD
 
             else:  # not a special symbol
-
                 if state == CODE:
                     tmp_code.append(ch)
                 elif state == KEYWORD:
@@ -353,7 +340,7 @@ def genInterTest(code, expected):
     to check that the highlighting when
     typing the code will be consistent."""
     C, E = [], []
-    codes = [k.split(' ') for k in code.split("\n")]
+    codes = [k.split(" ") for k in code.split("\n")]
 
     currentCode = []
 
@@ -366,7 +353,7 @@ def genInterTest(code, expected):
             # add
             current = "\n".join([" ".join(k) for k in currentCode + [currentLine]])
             C.append(current)
-            E.append(expected[:len(current)])
+            E.append(expected[: len(current)])
 
         currentCode.append(currentLine)
 
@@ -374,7 +361,6 @@ def genInterTest(code, expected):
 
 
 class SimulatorAce:
-
     # constructor of SimulatorAce with check on state_machine
     def __init__(self, state_machine):
         self.state_machine = state_machine
@@ -403,28 +389,30 @@ class SimulatorAce:
         """
         for state in self.state_machine:
             for rule in self.state_machine[state]:
-
                 if "token" not in rule:
                     raise ValueError("We need a token in all rules !")
 
-                rule["regex_compile"] = re.compile(rule['regex'], re.MULTILINE)
+                rule["regex_compile"] = re.compile(rule["regex"], re.MULTILINE)
                 rule["nb_groups"] = rule["regex_compile"].groups
 
                 if rule["nb_groups"] == 0:
                     if not isinstance(rule["token"], str):
                         raise ValueError(
-                            f"if regex has no groups, token must be a string. In this rule : {rule}!")
+                            f"if regex has no groups, token must be a string. In this rule : {rule}!"
+                        )
 
                 else:
                     if not isinstance(rule["token"], list):
                         raise ValueError(
-                            f"if regex has groups, token must be a list. In this rule : {rule}!")
+                            f"if regex has groups, token must be a list. In this rule : {rule}!"
+                        )
 
                     else:
                         if rule["nb_groups"] != len(rule["token"]):
                             raise ValueError(
                                 f"The number of groups in the regex is different from the number of tokens.\
-                                  In this rule : {rule}!")
+                                  In this rule : {rule}!"
+                            )
 
     def highlight(self, code, start_token="start"):
         """Simulates the application of syntax highlighting state_machine on a code.
@@ -465,11 +453,15 @@ class SimulatorAce:
 
         default_token = "text"
 
-        find_transition, next_transition = self.find_match(code, current_position, current_state)
+        find_transition, next_transition = self.find_match(
+            code, current_position, current_state
+        )
         while find_transition:
-
             # get match
-            current_rule, current_match = next_transition["rule"], next_transition["match"]
+            current_rule, current_match = (
+                next_transition["rule"],
+                next_transition["match"],
+            )
 
             # we color the characters since the last match with the default coloring
             for c in range(current_position, current_match.start()):
@@ -483,7 +475,7 @@ class SimulatorAce:
 
             # if rule has only one groups
             if current_rule["nb_groups"] == 0:
-                tok = current_rule['token']
+                tok = current_rule["token"]
                 length = current_match.end() - current_match.start()
                 output.append(TOKEN_CODE[tok] * length)
 
@@ -491,21 +483,22 @@ class SimulatorAce:
             else:
                 pos = current_match.start()
                 for i, submatch in enumerate(current_match.groups()):
-                    tok = current_rule['token'][i % len(current_rule['token'])]
+                    tok = current_rule["token"][i % len(current_rule["token"])]
                     output.append(TOKEN_CODE[tok] * len(submatch))
                     pos += len(submatch)
 
             # get nexts values
             current_position = current_match.end()
 
-            if 'next' in current_rule:
-                current_state = current_rule['next']
+            if "next" in current_rule:
+                current_state = current_rule["next"]
 
             if current_position == len(code):
                 find_transition = False
             else:
                 find_transition, next_transition = self.find_match(
-                    code, current_position, current_state)
+                    code, current_position, current_state
+                )
 
         # we color the last characters since the last match with the default coloring
         for c in range(current_position, len(code)):
@@ -514,7 +507,7 @@ class SimulatorAce:
         return "".join(output), current_state
 
     def find_match(self, code, current_position, current_state):
-        """ Find the next matching rule in the given code.
+        """Find the next matching rule in the given code.
 
         If there are multiple rules that match the code in the given state,
         returns the one that matches earliest in the source string.
@@ -535,7 +528,6 @@ class SimulatorAce:
 
         next_pos = len(code) + 1
         for rule in self.state_machine[current_state]:
-
             regex_compile = rule["regex_compile"]
             match = regex_compile.search(code, current_position)
 

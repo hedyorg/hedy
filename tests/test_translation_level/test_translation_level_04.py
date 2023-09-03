@@ -88,16 +88,19 @@ class TestsTranslationLevel4(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([('en', 'ask'), ('es', 'preguntar'), ('es', 'ask')])
+    @parameterized.expand([("en", "ask"), ("es", "preguntar"), ("es", "ask")])
     def test_ask_type_error_translates_command(self, lang, ask):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
             colors is orange, blue, green
-            favorite is {ask} 'Is your fav color' colors""")
+            favorite is {ask} 'Is your fav color' colors"""
+        )
 
         self.multi_level_tester(
             lang=lang,
             code=code,
             max_level=11,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2 and self.exception_command(ask)
+            extra_check_function=lambda c: c.exception.arguments["line_number"] == 2
+            and self.exception_command(ask),
         )

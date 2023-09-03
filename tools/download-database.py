@@ -15,39 +15,38 @@ DDB_DESERIALIZER = TypeDeserializer()
 
 
 def main():
-
-    REGION = 'eu-west-1'
+    REGION = "eu-west-1"
 
     defs = TableDefinitions()
-    defs.add('hedy-beta-achievements')
-    defs.add('hedy-beta-adventures')
-    defs.add('hedy-beta-classes')
-    defs.add('hedy-beta-class_customizations')
-    defs.add('hedy-beta-class_invitations')
-    defs.add('hedy-beta-parsons')
-    defs.add('hedy-beta-program-stats')
-    defs.add('hedy-beta-programs')
-    defs.add('hedy-beta-public_profiles')
-    defs.add('hedy-beta-quiz-stats')
-    defs.add('hedy-beta-quizAnswers')
-    defs.add('hedy-beta-tokens')
-    defs.add('hedy-beta-users')
+    defs.add("hedy-beta-achievements")
+    defs.add("hedy-beta-adventures")
+    defs.add("hedy-beta-classes")
+    defs.add("hedy-beta-class_customizations")
+    defs.add("hedy-beta-class_invitations")
+    defs.add("hedy-beta-parsons")
+    defs.add("hedy-beta-program-stats")
+    defs.add("hedy-beta-programs")
+    defs.add("hedy-beta-public_profiles")
+    defs.add("hedy-beta-quiz-stats")
+    defs.add("hedy-beta-quizAnswers")
+    defs.add("hedy-beta-tokens")
+    defs.add("hedy-beta-users")
 
-    parser = argparse.ArgumentParser(description='Download DDB into SQLite')
+    parser = argparse.ArgumentParser(description="Download DDB into SQLite")
     subparsers = parser.add_subparsers()
-    cmd_download = subparsers.add_parser('download')
-    cmd_download.set_defaults(command='download')
+    cmd_download = subparsers.add_parser("download")
+    cmd_download.set_defaults(command="download")
 
-    cmd_insert = subparsers.add_parser('insert')
-    cmd_insert.set_defaults(command='insert')
+    cmd_insert = subparsers.add_parser("insert")
+    cmd_insert.set_defaults(command="insert")
 
     args = parser.parse_args()
-    if 'command' not in args or args.command == 'download':
-        ddb = boto3.client('dynamodb', region_name=REGION)
-        dl = TableDownload(ddb, 'download')
+    if "command" not in args or args.command == "download":
+        ddb = boto3.client("dynamodb", region_name=REGION)
+        dl = TableDownload(ddb, "download")
         dl.download_all(defs)
-    if 'command' not in args or args.command == 'insert':
-        inserter = TableInserter('db.sqlite3', 'download')
+    if "command" not in args or args.command == "insert":
+        inserter = TableInserter("db.sqlite3", "download")
         inserter.insert_all(defs)
 
 
@@ -56,23 +55,25 @@ class TableInserter:
         self.db = sqlite3.connect(dbfile)
         self.jsondirectory = jsondirectory
 
-    def insert_all(self, defs: 'TableDefinitions'):
+    def insert_all(self, defs: "TableDefinitions"):
         for table_name in defs.table_names:
             self.insert_table(table_name)
 
     def insert_table(self, table_name):
         print(table_name)
-        with open(path.join(self.jsondirectory, f'{table_name}.json'), 'r', encoding='utf-8') as f:
+        with open(
+            path.join(self.jsondirectory, f"{table_name}.json"), "r", encoding="utf-8"
+        ) as f:
             table_data = json.load(f)
-        if not table_data['rows']:
+        if not table_data["rows"]:
             return
 
-        table_data['rows'] = restore_types(table_data['rows'])
+        table_data["rows"] = restore_types(table_data["rows"])
 
-        columns = determine_columns(table_data['rows'])
+        columns = determine_columns(table_data["rows"])
 
         scalar_columns = [col for col in columns if not col.type.is_collection]
-        keycolumns = [find_col(scalar_columns, k) for k in table_data['key']]
+        keycolumns = [find_col(scalar_columns, k) for k in table_data["key"]]
 
         table = SqlTableDef(table_name, scalar_columns, keycolumns)
 
@@ -81,36 +82,45 @@ class TableInserter:
         cursor.execute(table.create_statement)
 
         cursor.executemany(
-            table.insert_statement,
-            table.extract_table_values(table_data['rows']))
+            table.insert_statement, table.extract_table_values(table_data["rows"])
+        )
 
         # Lists
         for listcol in (col for col in columns if col.type.is_list or col.type.is_set):
-            typ = SqlType.most_generic(value for row in table_data['rows']
-                                       for value in row.get(listcol.original_name, []))
+            typ = SqlType.most_generic(
+                value
+                for row in table_data["rows"]
+                for value in row.get(listcol.original_name, [])
+            )
             onetomanycol = SqlColumn(listcol.original_name, typ)
 
             onetomanytable = SqlTableDef(
-                f'{table.table_name}_{onetomanycol.name}',
+                f"{table.table_name}_{onetomanycol.name}",
                 table.key_columns + [onetomanycol],
-                table.key_columns + [onetomanycol] if listcol.type.is_set else [])
+                table.key_columns + [onetomanycol] if listcol.type.is_set else [],
+            )
             print(onetomanytable.table_name)
             cursor.execute(onetomanytable.drop_statement)
             cursor.execute(onetomanytable.create_statement)
 
             one_to_many_data = []
-            for row in table_data['rows']:
+            for row in table_data["rows"]:
                 for listvalue in row.get(listcol.original_name, []):
-                    one_to_many_data.append(tuple(
-                        [row.get(key_col.original_name) for key_col in table.key_columns]
-                        +
-                        [listvalue]))
+                    one_to_many_data.append(
+                        tuple(
+                            [
+                                row.get(key_col.original_name)
+                                for key_col in table.key_columns
+                            ]
+                            + [listvalue]
+                        )
+                    )
 
             cursor.executemany(onetomanytable.insert_statement, one_to_many_data)
 
         # Maps (not implemented yet)
         for mapcol in (col for col in columns if col.type.is_map):
-            print(f'Dropping column: {table.original_name}.{mapcol.original_name}')
+            print(f"Dropping column: {table.original_name}.{mapcol.original_name}")
 
         self.db.commit()
 
@@ -118,19 +128,19 @@ class TableInserter:
 def find_col(cols, name):
     cs = [col for col in cols if col.original_name == name]
     if not cs:
-        raise RuntimeError(f'Could not find col {name}')
+        raise RuntimeError(f"Could not find col {name}")
     return cs[0]
 
 
 class SqlColumn:
-    def __init__(self, name, type: 'SqlType'):
+    def __init__(self, name, type: "SqlType"):
         self.original_name = name
         self.name = slugify(name)
         self.type = type
 
         self.sql_def = f'"{self.name}" {self.type.sql_def}'
 
-    def widen_type(self, type: 'SqlType'):
+    def widen_type(self, type: "SqlType"):
         self.type = self.type.unify(type)
 
 
@@ -147,21 +157,27 @@ class SqlTableDef:
 
     @property
     def create_statement(self):
-        table_def = ', '.join(
+        table_def = ", ".join(
             [col.sql_def for col in self.columns]
-            +
-            (['PRIMARY KEY(' + ', '.join(c.name for c in self.key_columns) + ')'] if self.key_columns else [])
+            + (
+                ["PRIMARY KEY(" + ", ".join(c.name for c in self.key_columns) + ")"]
+                if self.key_columns
+                else []
+            )
         )
 
         return f'CREATE TABLE "{self.table_name}"({table_def});'
 
     @property
     def insert_statement(self):
-        qmarks = ['?'] * len(self.columns)
+        qmarks = ["?"] * len(self.columns)
         return f'INSERT INTO "{self.table_name}" VALUES({", ".join(qmarks)});'
 
     def extract_values(self, row):
-        return tuple(row[c.original_name] if c.original_name in row else None for c in self.columns)
+        return tuple(
+            row[c.original_name] if c.original_name in row else None
+            for c in self.columns
+        )
 
     def extract_table_values(self, table):
         return [self.extract_values(row) for row in table]
@@ -184,31 +200,31 @@ def make_col_def(name, typ):
 
 
 def slugify(x):
-    return re.sub('[^a-zA-Z0-9]', '_', x)
+    return re.sub("[^a-zA-Z0-9]", "_", x)
 
 
 class SqlType:
     @staticmethod
     def of(value):
         if isinstance(value, str):
-            return SqlType('TEXT')
+            return SqlType("TEXT")
         if isinstance(value, int):
-            return SqlType('INTEGER')
+            return SqlType("INTEGER")
         if isinstance(value, float):
-            return SqlType('REAL')
+            return SqlType("REAL")
         if isinstance(value, set):
-            return SqlType('+SET')
+            return SqlType("+SET")
         if isinstance(value, list):
-            return SqlType('+LIST')
+            return SqlType("+LIST")
         if isinstance(value, dict):
-            return SqlType('+MAP')
+            return SqlType("+MAP")
         if value is None:
-            return SqlType('NULL')
-        raise RuntimeError(f'Do not know type of value {value}')
+            return SqlType("NULL")
+        raise RuntimeError(f"Do not know type of value {value}")
 
     @staticmethod
     def null():
-        return SqlType('NULL')
+        return SqlType("NULL")
 
     @staticmethod
     def most_generic(xs):
@@ -219,28 +235,28 @@ class SqlType:
 
     def __init__(self, type):
         self.type = type
-        self.is_collection = type.startswith('+')
-        self.is_set = type == '+SET'
-        self.is_list = type == '+LIST'
-        self.is_map = type == '+MAP'
+        self.is_collection = type.startswith("+")
+        self.is_set = type == "+SET"
+        self.is_list = type == "+LIST"
+        self.is_map = type == "+MAP"
         self.sql_def = type
 
     def unify(self, rhs):
         if self.type == rhs.type:
             return self
-        if self.type == 'NULL':
+        if self.type == "NULL":
             return rhs
-        if rhs.type == 'NULL':
+        if rhs.type == "NULL":
             return self
 
         types = [self.type, rhs.type]
         types.sort()
 
-        if types == ['INTEGER', 'REAL']:
-            return SqlType('REAL')
-        if types == ['INTEGER', 'TEXT'] or types == ['REAL', 'TEXT']:
-            return SqlType('TEXT')
-        raise RuntimeError(f'Cannot unify types {self.type} and {rhs.type}')
+        if types == ["INTEGER", "REAL"]:
+            return SqlType("REAL")
+        if types == ["INTEGER", "TEXT"] or types == ["REAL", "TEXT"]:
+            return SqlType("TEXT")
+        raise RuntimeError(f"Cannot unify types {self.type} and {rhs.type}")
 
 
 class TableDefinitions:
@@ -265,21 +281,39 @@ class TableDownload:
         print(table_name)
         description = self.ddb.describe_table(TableName=table_name)
 
-        partition_key = [k['AttributeName'] for k in description['Table']['KeySchema'] if k['KeyType'] == 'HASH']
-        sort_key = [k['AttributeName'] for k in description['Table']['KeySchema'] if k['KeyType'] == 'RANGE']
+        partition_key = [
+            k["AttributeName"]
+            for k in description["Table"]["KeySchema"]
+            if k["KeyType"] == "HASH"
+        ]
+        sort_key = [
+            k["AttributeName"]
+            for k in description["Table"]["KeySchema"]
+            if k["KeyType"] == "RANGE"
+        ]
 
         key = [partition_key[0]] + ([sort_key[0]] if sort_key else [])
 
-        columns = {a['AttributeName']: a['AttributeType'] for a in description['Table']['AttributeDefinitions']}
+        columns = {
+            a["AttributeName"]: a["AttributeType"]
+            for a in description["Table"]["AttributeDefinitions"]
+        }
 
         rows = []
-        with tqdm(total=description['Table']['ItemCount']) as progressbar:
-            for page in self.ddb.get_paginator('scan').paginate(TableName=table_name):
-                for row in page['Items']:
-                    rows.append({key: DDB_DESERIALIZER.deserialize(value) for key, value in row.items()})
+        with tqdm(total=description["Table"]["ItemCount"]) as progressbar:
+            for page in self.ddb.get_paginator("scan").paginate(TableName=table_name):
+                for row in page["Items"]:
+                    rows.append(
+                        {
+                            key: DDB_DESERIALIZER.deserialize(value)
+                            for key, value in row.items()
+                        }
+                    )
                     progressbar.update(1)
 
-        with open(path.join(self.directory, f'{table_name}.json'), 'w', encoding='utf-8') as f:
+        with open(
+            path.join(self.directory, f"{table_name}.json"), "w", encoding="utf-8"
+        ) as f:
             json.dump(dict(key=key, rows=rows, columns=columns), f, cls=DDBTypesEncoder)
 
 
@@ -292,18 +326,20 @@ class DDBTypesEncoder(json.JSONEncoder):
                 return int(o)
             return float(o)
         if isinstance(o, set):
-            return {'@type': 'set', 'set': list(o)}
+            return {"@type": "set", "set": list(o)}
         return super(DDBTypesEncoder, self).default(o)
 
 
 def restore_types(rows):
     """Decode all values that were encoded using DDBTypesEncoder."""
+
     def decode(o):
-        if isinstance(o, dict) and o.get('@type') == 'set':
-            return set(o['set'])
+        if isinstance(o, dict) and o.get("@type") == "set":
+            return set(o["set"])
         return o
+
     return [{key: decode(value) for key, value in row.items()} for row in rows]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
