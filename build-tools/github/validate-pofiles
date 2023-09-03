@@ -13,7 +13,7 @@ def scan_pofiles(root):
     ret = False
     for dir, _, files in os.walk(root):
         for file in files:
-            if file.endswith('.po'):
+            if file.endswith(".po"):
                 fullpath = path.join(dir, file)
                 ret |= scan_file(fullpath)
     return ret
@@ -23,7 +23,7 @@ PAT = re.compile('^(?:#~ )?msgid "(.*)"')
 
 
 def scan_file(filename):
-    with open(filename, 'r', encoding='utf-8') as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.read().splitlines()
 
     indexes = collections.defaultdict(list)
@@ -36,25 +36,27 @@ def scan_file(filename):
     if len(morethanonce) == 0:
         return False
 
-    print('-' * 70)
+    print("-" * 70)
     print(filename)
-    print('-' * 70)
+    print("-" * 70)
 
     for word, linenrs in morethanonce:
         print(f"The translation of '{word}' occurs {len(linenrs)} times:")
-        print('')
+        print("")
         for nr in linenrs:
-            print(f'    {nr + 1}: {lines[nr]}')
-            print(f'    {nr + 2}: {lines[nr + 1]}')
-            print('')
+            print(f"    {nr + 1}: {lines[nr]}")
+            print(f"    {nr + 2}: {lines[nr + 1]}")
+            print("")
 
     return True
 
 
-if __name__ == '__main__':
-    fail = scan_pofiles(path.join(path.dirname(__file__), '..', '..', 'translations'))
+if __name__ == "__main__":
+    fail = scan_pofiles(path.join(path.dirname(__file__), "..", "..", "translations"))
     if fail:
-        print('Something went wrong with the gettext translation files, some entries were duplicated.')
-        print('See above for the list. Please make sure every msgid occurs only once,')
-        print('not commented out, with the right translation.')
+        print(
+            "Something went wrong with the gettext translation files, some entries were duplicated."
+        )
+        print("See above for the list. Please make sure every msgid occurs only once,")
+        print("not commented out, with the right translation.")
         sys.exit(1)

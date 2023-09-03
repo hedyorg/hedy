@@ -9,7 +9,7 @@ def insert(input_string, line, column, new_string):
 def delete(input_string, line, column, length):
     """ "delete length chars starting at (line, column)"""
     rows = input_string.splitlines()
-    rows[line] = rows[line][:column] + rows[line][column + length :]
+    rows[line] = rows[line][:column] + rows[line][column + length:]
 
     return "\n".join(rows)
 

@@ -2819,7 +2819,7 @@ class ConvertToPython_12(ConvertToPython_11):
         )
 
         lines = []
-        for line in args[1 if args_str == "" else 2 :]:
+        for line in args[1 if args_str == "" else 2:]:
             lines.append(line)
         body = "\n".join(ConvertToPython.indent(x) for x in lines)
 
@@ -3780,13 +3780,13 @@ def preprocess_ifs(code, lang="en"):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 #  starts with the keyword and next character is a space
-                if line[0 : len(c)] == c and (
+                if line[0: len(c)] == c and (
                     len(c) == len(line) or line[len(c)] == " "
                 ):
                     return True
             return False
         else:
-            return line[0 : len(command)] == command
+            return line[0: len(command)] == command
 
     def starts_with_after_repeat(command, line):
         elements_in_line = line.split()
@@ -3805,13 +3805,13 @@ def preprocess_ifs(code, lang="en"):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 #  starts with the keyword and next character is a space
-                if line[0 : len(c)] == c and (
+                if line[0: len(c)] == c and (
                     len(c) == len(line) or line[len(c)] == " "
                 ):
                     return True
             return False
         else:
-            return line[0 : len(command)] == command
+            return line[0: len(command)] == command
 
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:

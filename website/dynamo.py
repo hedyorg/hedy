@@ -910,7 +910,7 @@ class MemoryStorage(TableStorage):
         start_index = 0
         if pagination_token:
             start_index = pagination_token["offset"]
-            items = items[pagination_token["offset"] :]
+            items = items[pagination_token["offset"]:]
 
         next_page_token = None
         if limit and limit < len(items):
