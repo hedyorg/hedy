@@ -18,10 +18,10 @@ Transpiling
 Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
 ### Skipping Faulty Code
-When the AST is scanned for invalid rules and actually contains an error, an exception is thrown. 
+When the AST is scanned for invalid rules and actually contains an error, an exception is thrown.
 We catch the exception and transpile the code again but this time we allow 'invalid' code that we are going to skip.
-If this also fails, we raise the original exception, if it succeeds, 
-the error(s) will be caught by the source-mapper and therefore be mapped. 
+If this also fails, we raise the original exception, if it succeeds,
+the error(s) will be caught by the source-mapper and therefore be mapped.
 We go through all the errors and transpile again without allowing 'invalid' code, we ultimately get the original exception per mapping.
 This we return to the user along-side the partially functional code.
 
@@ -112,16 +112,16 @@ from expressions, e.g. the literal 'text' vs a variable called 'text'. Because o
 only variable definitions, but also all expressions that need to be escaped, e.g. variable access such as `animals[0]`.
 
 The lookup table is created and enriched in two separate steps. The first traversal of the abstract syntax tree puts in
-the lookup table the entries required by the transpiler along with a reference to the sub-tree needed to infer their 
+the lookup table the entries required by the transpiler along with a reference to the sub-tree needed to infer their
 type. For example, the line `a is 1` will add the following entry `{name: 'a', tree: {data='integer', children:['1']}}`
-The second traversal of the abstract syntax tree is performed to infer the types of expressions, store the inferred 
-types of variables in the lookup table, and perform type validation. If during the second step the type system 
+The second traversal of the abstract syntax tree is performed to infer the types of expressions, store the inferred
+types of variables in the lookup table, and perform type validation. If during the second step the type system
 encounters a variable with type that has not been inferred yet, it will use the tree stored in the lookup entry to infer
-its type. Note that there are valid scenarios in which the lookup entries will be accessed before their type is inferred. 
+its type. Note that there are valid scenarios in which the lookup entries will be accessed before their type is inferred.
 This is the case with for loops:
 
     for i in 1 to 10
         print i
 
 In the above case, `print i` is visited before the definition of i in the for loop. To mitigate the issue, the lookup
-entry tree is used to infer the type of `i`. There is a guard against cyclic definitions, e.g. `b is b + 1`. 
+entry tree is used to infer the type of `i`. There is a guard against cyclic definitions, e.g. `b is b + 1`.
