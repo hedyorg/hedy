@@ -30,10 +30,6 @@ export interface HedyEditorCreator {
 
 export interface HedyEditor {
   /**
- * Represents whether there's an open 'ask' prompt
- */
-  askPromptOpen: boolean;
-  /**
    * The contents of the editor
    */
   contents: string;
@@ -76,11 +72,6 @@ export interface HedyEditor {
   * Removes all breakpoints on the rows.
   **/
   clearBreakpoints(): void;
-
-  /**
-   * Sets the main editor and also its options
-   */
-  configureMainEditor(): void;
 
   /**
    * Returns the breakpoints as a map-to-css-class
