@@ -264,7 +264,7 @@ def source_map_rule(source_map: SourceMap):
         def wrapper(*args, **kwargs):
             meta = args[1]
 
-            hedy_code_input = source_map.hedy_code[meta.start_pos: meta.end_pos]
+            hedy_code_input = source_map.hedy_code[meta.start_pos : meta.end_pos]
             hedy_code_input = hedy_code_input.replace(
                 "#ENDBLOCK", ""
             )  # ENDBLOCK is not part of the Hedy code, remove

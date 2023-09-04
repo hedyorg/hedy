@@ -2179,7 +2179,7 @@ def slugify(s):
 @app.template_filter()
 def chunk(x, size):
     """Chunk a list into groups of size at most 'size'."""
-    return (x[pos: pos + size] for pos in range(0, len(x), size))
+    return (x[pos : pos + size] for pos in range(0, len(x), size))
 
 
 @app.template_global()

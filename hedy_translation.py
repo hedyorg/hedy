@@ -121,7 +121,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
 def replace_line(lines, index, line):
     before = "\n".join(lines[0:index])
-    after = "\n".join(lines[index + 1:])
+    after = "\n".join(lines[index + 1 :])
     if len(before) > 0:
         before = before + "\n"
     if len(after) > 0:
@@ -131,8 +131,8 @@ def replace_line(lines, index, line):
 
 def replace_token_in_line(line, rule, original, target):
     """Replaces a token in a line from the user input with its translated equivalent"""
-    before = "" if rule.start == 0 else line[0: rule.start]
-    after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
+    before = "" if rule.start == 0 else line[0 : rule.start]
+    after = "" if rule.end == len(line) - 1 else line[rule.end + 1 :]
     # Note that we need to replace the target value in the original value because some
     # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
     # (latin_comma | arabic_comma) _SPACES*
