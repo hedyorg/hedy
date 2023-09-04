@@ -243,12 +243,12 @@ As this project is growing and multiple people are working on it, we want to mov
 (.env) $ pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 and autoformatted by black according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=120 [your-file]`.
+After this, every modification you commit will be linted by flake8 and autoformatted by black according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use black to solve some formatting issues automatically. If you want to do this, install black using `pip install black` and run `black [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 `git commit -m "your message" --no-verify`
 
-When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it!
+When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. When seeing any kind of improvement, please keep the Boy Scout Rule in mind: always leave the code better than you found it!
 
 ## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
