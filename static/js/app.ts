@@ -14,7 +14,7 @@ import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
-import { HedyEditor } from './editor';
+import { HedyEditor, EditorType } from './editor';
 import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalEditor: HedyEditor;
@@ -184,7 +184,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   // *** EDITOR SETUP ***  
   const $editor = $('#editor');
   if ($editor.length) {
-    theGlobalEditor = editorCreator.initializeMainEditor($editor);
+    theGlobalEditor = editorCreator.initializeWritableEditor($editor, EditorType.MAIN);
   }
   
   const anchor = window.location.hash.substring(1);
@@ -250,7 +250,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theLanguage = options.lang;
 
   // We need to enable the main editor for the program page as well
-  theGlobalEditor = editorCreator.initializeMainEditor($('#editor'));
+  theGlobalEditor = editorCreator.initializeWritableEditor($('#editor'), EditorType.MAIN);
 }
 
 export function initializeHighlightedCodeBlocks(where: Element) {
@@ -269,7 +269,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
         // Create this example editor
-        const exampleEditor = editorCreator.initializeExampleEditor(preview)
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview);
         // Strip trailing newline, it renders better
         exampleEditor.contents = exampleEditor.contents.trimRight();      
         // And add an overlay button to the editor if requested via a show-copy-button class, either
@@ -1352,7 +1352,7 @@ export function modalStepOne(level: number){
   createModal(level);
   let $modalEditor = $('#modal-editor');
   if ($modalEditor.length) {
-    theModalEditor = editorCreator.initializeModalEditor($modalEditor)
+    theModalEditor = editorCreator.initializeWritableEditor($modalEditor, EditorType.MODAL);
   }
 }
 

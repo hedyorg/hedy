@@ -1,29 +1,31 @@
 import { Markers } from "./markers";
 
 export type Breakpoints = Record<number, string>;
+export enum EditorType {
+  MAIN,
+  MODAL,
+  COMMON_MISTAKES,
+  CHEATSHEET,
+  PARSONS,
+  EXAMPLE
+}
 
-
-export interface HedyEditorCreator {
-  // TODO: Not sure yet if it should return a HedyEditor or change local variable names
+export interface HedyEditorCreator {  
   /**
    * This function should initialize the editor and set up all the required
    * event handlers
-   * @param $editor reference to the div that contains the main editor
+   * @param {JQuery} $editor reference to the div that contains the main editor
+   * @param {EditorType} editorType the type of the editor
    */
-  initializeMainEditor($editor: JQuery): HedyEditor | undefined;
+  initializeWritableEditor($editor: JQuery, editorType: EditorType): HedyEditor;
+  
   /**
-   * 
-   * @param element the element that will contain this editor
-   * @param isReadOnly to decide weather to remove the cursor
-   * @param isMainEditor should we show the line numbers
+   * Initializes a read only editor
+   *
+   * @param {HTMLElement} preview - The element to preview the editor.
+   * @return {HedyEditor} The initialized Hedy editor instance.
    */
-  turnIntoEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor: boolean): HedyEditor;
-
-  /**
-   * Ininitialize an editor that appears in a modal
-   * @param $editor reference to the div that contains this editor
-   */
-  initializeModalEditor($editor: JQuery): HedyEditor;
+  initializeReadOnlyEditor(preview: HTMLElement): HedyEditor;
 }
 
 export interface HedyEditor {

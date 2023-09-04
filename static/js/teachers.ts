@@ -252,9 +252,7 @@ function show_preview(content: string) {
     modal.preview(container, name);
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
-        const exampleEditor = editorCreator.turnIntoEditor(preview, true)
-        exampleEditor.setOptions({ maxLines: Infinity });
-        exampleEditor.setOptions({ minLines: 2 });
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview);
         exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
         exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
     }
