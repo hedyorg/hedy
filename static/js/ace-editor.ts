@@ -272,21 +272,21 @@ export class HedyAceEditor implements HedyEditor {
     });
       // Removed until we can fix the skip lines feature
       // We show the error message when clicking on the skipped code
-    // this._editor.on("click", function(e) {
-    //   let position = e.getDocumentPosition()
-    //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+      // this._editor.on("click", function(e) {
+      //   let position = e.getDocumentPosition()
+      //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
 
-    //   let element = document.elementFromPoint(position.pageX, position.pageY)
-    //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-    //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-    //     let mapError = theGlobalSourcemap[mapIndex];
+      //   let element = document.elementFromPoint(position.pageX, position.pageY)
+      //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+      //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+      //     let mapError = theGlobalSourcemap[mapIndex];
 
-    //     $('#okbox').hide ();
-    //     $('#warningbox').hide();
-    //     $('#errorbox').hide();
-    //     error.show(ClientMessages['Transpile_error'], mapError.error);
-    //   }
-    // })
+      //     $('#okbox').hide ();
+      //     $('#warningbox').hide();
+      //     $('#errorbox').hide();
+      //     error.show(ClientMessages['Transpile_error'], mapError.error);
+      //   }
+      // })
 
     this._markers = new Markers(this._editor);
 
