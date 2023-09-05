@@ -417,6 +417,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         level: `${level}`,
         code: code,
         lang: lang,
+        skip_faulty: false,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: adventureName,
