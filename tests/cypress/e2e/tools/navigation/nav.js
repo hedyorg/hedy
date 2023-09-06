@@ -105,4 +105,9 @@ export function goToEditAdventure()
       .click();
 }
 
+export function goToExploreProgramsPage()
+{
+   return goToPage(Cypress.env('explore_programs_page'));
+}
+
 export default {goToPage}
