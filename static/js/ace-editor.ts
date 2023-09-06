@@ -1,8 +1,8 @@
-import { theLocalSaveWarning, theLevel, runit, stopit, theLanguage, triggerAutomaticSave} from "./app";
-import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType } from "./editor";
-import { error } from "./modal";
-import { initializeDebugger, stopDebug } from "./debugging";
+import {  theLevel, theLanguage} from "./app";
+import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } from "./editor";
+import { initializeDebugger } from "./debugging";
 import { Markers } from "./markers";
+import { EventEmitter } from "./event-emitter";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 export class HedyAceEditorCreator implements HedyEditorCreator {
@@ -10,46 +10,12 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    * This function should initialize the editor and set up all the required
    * event handlers
    * @param $editor reference to the div that contains the main editor
+   * @param editorType the type of the editor
+   * @param dir the direction of the text
+   * @return {HedyEditor} The initialized Hedy editor instance
    */
-  initializeWritableEditor($editor: JQuery, editorType: EditorType): HedyAceEditor {
-    const dir = $("body").attr("dir");
+  initializeWritableEditor($editor: JQuery, editorType: EditorType, dir: string = "ltr"): HedyAceEditor {
     let editor: HedyAceEditor = new HedyAceEditor($editor.get(0)!, $editor.data('readonly'), editorType, dir);
-    error.setEditor(editor);
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // *** KEYBOARD SHORTCUTS ***
-    let altPressed: boolean | undefined;
-    // alt is 18, enter is 13
-    window.addEventListener('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!theLevel || !theLanguage) {
-          throw new Error('Oh no');
-        }
-        runit(theLevel, theLanguage, "", function () {
-          $('#output').focus();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById('output')) {
-        editor.focus();
-        editor.moveCursorToEndOfFile();
-      }
-    });
-
-    window.addEventListener('keyup', function (ev) {
-      triggerAutomaticSave();
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-
     return editor;
   }
   /**
@@ -58,8 +24,7 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    * @param {HTMLElement} preview - The element to preview the editor.
    * @return {HedyEditor} The initialized Hedy editor instance.
    */
-  initializeReadOnlyEditor(preview: HTMLElement): HedyEditor {
-    const dir = $("body").attr("dir");
+  initializeReadOnlyEditor(preview: HTMLElement, dir: string = "ltr"): HedyEditor {
     let editorType: EditorType;
   
     if ($(preview).hasClass('common-mistakes')) {
@@ -79,8 +44,8 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
 export class HedyAceEditor implements HedyEditor {
   private _editor: AceAjax.Editor;
   private _markers?: Markers
-  askPromptOpen: boolean;
   isReadOnly: boolean;
+  private editorEvent = new EventEmitter<EditorEvent>({change: true});
   
   /**
    * 
@@ -89,10 +54,9 @@ export class HedyAceEditor implements HedyEditor {
    * @param {EditorType} editorType the type of the editor, could be a main editor, a parsons editor, etc.
    * @param {string} dir the direction of the text
    */
-  constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir = "ltr") {
+  constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
     this._editor = ace.edit(element);
     this.isReadOnly = isReadOnly;
-    this.askPromptOpen = false;
     this._editor.setTheme("ace/theme/monokai");
       
     if (isReadOnly) {
@@ -253,51 +217,15 @@ export class HedyAceEditor implements HedyEditor {
    * If this editor is used as a main editor, we set the options here
    */
   configureMainEditor(): void {
-    this._editor.addEventListener('change', () => {
-      theLocalSaveWarning.setProgramLength(this._editor.getValue().split('\n').length);
-    });
-
-    // If prompt is shown and user enters text in the editor, hide the prompt.
-    this._editor.on('change', () => {
-      if (this.askPromptOpen) {
-        stopit();
-        this._editor.focus(); // Make sure the editor has focus, so we can continue typing
-      }
-      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-      this.askPromptOpen = false;
-      $('#runit').css('background-color', '');
-      this.clearErrors();
-      //removing the debugging state when loading in the editor
-      stopDebug();
-    });
-      // Removed until we can fix the skip lines feature
-      // We show the error message when clicking on the skipped code
-      // this._editor.on("click", function(e) {
-      //   let position = e.getDocumentPosition()
-      //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
-
-      //   let element = document.elementFromPoint(position.pageX, position.pageY)
-      //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-      //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-      //     let mapError = theGlobalSourcemap[mapIndex];
-
-      //     $('#okbox').hide ();
-      //     $('#warningbox').hide();
-      //     $('#errorbox').hide();
-      //     error.show(ClientMessages['Transpile_error'], mapError.error);
-      //   }
-      // })
-
     this._markers = new Markers(this._editor);
-
-          // *** Debugger *** //
-      // TODO: FIX THIS
-      initializeDebugger({
-        editor: this._editor,
-        markers: this.markers,
-        level: theLevel,
-        language: theLanguage,
-      });
+    // *** Debugger *** //
+    // TODO: FIX THIS
+    initializeDebugger({
+      editor: this._editor,
+      markers: this.markers,
+      level: theLevel,
+      language: theLanguage,
+    });
   }
 
   /**
@@ -314,12 +242,13 @@ export class HedyAceEditor implements HedyEditor {
     return `ace/mode/level${level}`;
   }
 
-  get editor(): AceAjax.Editor {
-    return this._editor;
-  }
-
   get markers(): Markers {
     return this._markers!;
   }
-}
 
+  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
+    const ret = this.editorEvent.on(key, handler);    
+    this._editor.addEventListener(key, handler);
+    return ret;
+  }
+}

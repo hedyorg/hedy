@@ -16,6 +16,7 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { HedyAceEditorCreator } from './ace-editor';
+import { stopDebug } from "./debugging";
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -184,7 +185,11 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   // *** EDITOR SETUP ***  
   const $editor = $('#editor');
   if ($editor.length) {
-    theGlobalEditor = editorCreator.initializeWritableEditor($editor, EditorType.MAIN);
+    const dir = $("body").attr("dir");
+    theGlobalEditor = editorCreator.initializeWritableEditor($editor, EditorType.MAIN, dir);
+    attachMainEditorEvents();
+    error.setEditor(theGlobalEditor);
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
   }
   
   const anchor = window.location.hash.substring(1);
@@ -239,6 +244,79 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#program_name').on('blur', () => saveIfNecessary());
 }
 
+function attachMainEditorEvents() {
+
+  theGlobalEditor.on('change', () => {
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
+    // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
+  });  
+  
+  // If prompt is shown and user enters text in the editor, hide the prompt.
+  theGlobalEditor.on('change', function() {
+    if (askPromptOpen) {
+      stopit();
+      theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
+    }
+    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+    askPromptOpen = false;
+    $('#runit').css('background-color', '');
+    theGlobalEditor.clearErrors();
+    //removing the debugging state when loading in the editor
+    stopDebug();
+  });
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed: boolean | undefined;
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      if (!theLevel || !theLanguage) {
+        throw new Error('Oh no');
+      }
+      runit (theLevel, theLanguage, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      theGlobalEditor.focus();
+      theGlobalEditor.moveCursorToEndOfFile();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    triggerAutomaticSave();
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+
+  // Removed until we can fix the skip lines feature
+  // We show the error message when clicking on the skipped code
+  // this._editor.on("click", function(e) {
+  //   let position = e.getDocumentPosition()
+  //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+
+  //   let element = document.elementFromPoint(position.pageX, position.pageY)
+  //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
+  //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
+  //     let mapError = theGlobalSourcemap[mapIndex];
+
+  //     $('#okbox').hide ();
+  //     $('#warningbox').hide();
+  //     $('#errorbox').hide();
+  //     error.show(ClientMessages['Transpile_error'], mapError.error);
+  //   }
+  // });
+}
+
 export interface InitializeViewProgramPageOptions {
   readonly page: 'view-program';
   readonly level: number;
@@ -250,7 +328,11 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theLanguage = options.lang;
 
   // We need to enable the main editor for the program page as well
-  theGlobalEditor = editorCreator.initializeWritableEditor($('#editor'), EditorType.MAIN);
+  const dir = $("body").attr("dir");
+  theGlobalEditor = editorCreator.initializeWritableEditor($('#editor'), EditorType.MAIN, dir);
+  attachMainEditorEvents();
+  error.setEditor(theGlobalEditor);
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
 }
 
 export function initializeHighlightedCodeBlocks(where: Element) {
@@ -269,7 +351,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
         // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview);
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
         exampleEditor.contents = exampleEditor.contents.trimRight();      
         // And add an overlay button to the editor if requested via a show-copy-button class, either
@@ -1352,7 +1434,8 @@ export function modalStepOne(level: number){
   createModal(level);
   let $modalEditor = $('#modal-editor');
   if ($modalEditor.length) {
-    theModalEditor = editorCreator.initializeWritableEditor($modalEditor, EditorType.MODAL);
+    const dir = $("body").attr("dir");
+    theModalEditor = editorCreator.initializeWritableEditor($modalEditor, EditorType.MODAL, dir);
   }
 }
 

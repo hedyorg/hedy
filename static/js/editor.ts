@@ -10,6 +10,10 @@ export enum EditorType {
   EXAMPLE
 }
 
+export interface EditorEvent {
+  readonly change: string;
+}
+
 export interface HedyEditorCreator {  
   /**
    * This function should initialize the editor and set up all the required
@@ -17,7 +21,7 @@ export interface HedyEditorCreator {
    * @param {JQuery} $editor reference to the div that contains the main editor
    * @param {EditorType} editorType the type of the editor
    */
-  initializeWritableEditor($editor: JQuery, editorType: EditorType): HedyEditor;
+  initializeWritableEditor($editor: JQuery, editorType: EditorType, dir?: string): HedyEditor;
   
   /**
    * Initializes a read only editor
@@ -25,7 +29,7 @@ export interface HedyEditorCreator {
    * @param {HTMLElement} preview - The element to preview the editor.
    * @return {HedyEditor} The initialized Hedy editor instance.
    */
-  initializeReadOnlyEditor(preview: HTMLElement): HedyEditor;
+  initializeReadOnlyEditor(preview: HTMLElement, dir?: string): HedyEditor;
 }
 
 export interface HedyEditor {
@@ -77,6 +81,8 @@ export interface HedyEditor {
    * Returns the breakpoints as a map-to-css-class
    */
   getBreakpoints(): Breakpoints;
+  // TODO: improve this type definition
+  on(key: any, handler: any): void;
   
   markers: Markers;
 }
