@@ -39,7 +39,7 @@
             <h2 class="text-center z-10 font-bold pb-0 mb-0 text-3xl">{{_('hedy_choice_title')}}</h2>
             <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="explore_favourite_programs">
                 {% for program in favourite_programs %}
-                    {{ public_programs.program_box(program, true) }}
+                    {{ public_programs.program_box(program, true, is_admin) }}
                 {% endfor %}
             </div>
         </div>
@@ -50,7 +50,7 @@
                     {{_('no_programs')}}
                 {% else %}
                     {% for program in programs %}
-                        {{ public_programs.program_box(program, false) }}
+                        {{ public_programs.program_box(program, false, is_admin) }}
                     {% endfor %}
                 {% endif %}
             </div>
