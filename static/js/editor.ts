@@ -1,5 +1,5 @@
 import { Markers } from "./markers";
-
+import { EventEmitter } from "./event-emitter";
 export type Breakpoints = Record<number, string>;
 export enum EditorType {
   MAIN,
@@ -9,6 +9,9 @@ export enum EditorType {
   PARSONS,
   EXAMPLE
 }
+
+type EditorEventEmitter = EventEmitter<EditorEvent>;
+type OnEditorEventParameters = Parameters<EditorEventEmitter['on']>;
 
 export interface EditorEvent {
   readonly change: string;
@@ -82,7 +85,7 @@ export interface HedyEditor {
    */
   getBreakpoints(): Breakpoints;
   // TODO: improve this type definition
-  on(key: any, handler: any): void;
+  on(key: OnEditorEventParameters[0], handler: OnEditorEventParameters[1]): void;
   
   markers: Markers;
 }
