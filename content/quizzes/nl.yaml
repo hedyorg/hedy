@@ -3115,7 +3115,7 @@ levels:
             question_text: "Wat klopt over deze achtbaan?"
             code: |
                 lengte = {ask} 'Vul je lengte in in cm'
-                {if} lengte > 120
+                {if} lengte < 120
                     {print} 'Sorry, je mag niet in deze achtbaan.'
                 {else}
                     {print} 'Geniet van je ritje!'
