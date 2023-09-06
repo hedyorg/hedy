@@ -84,7 +84,11 @@ export interface HedyEditor {
    * Returns the breakpoints as a map-to-css-class
    */
   getBreakpoints(): Breakpoints;
-  // TODO: improve this type definition
+  /**
+   * An event handler for the HedyEditor 
+   * @param key the event
+   * @param handler  the event handler function
+   */
   on(key: OnEditorEventParameters[0], handler: OnEditorEventParameters[1]): void;
   
   markers: Markers;
