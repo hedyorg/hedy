@@ -43,8 +43,7 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
   
 export class HedyAceEditor implements HedyEditor {
   private _editor: AceAjax.Editor;
-  private _markers?: Markers
-  isReadOnly: boolean;
+  private _markers?: Markers;
   private editorEvent = new EventEmitter<EditorEvent>({change: true});
   
   /**
@@ -58,7 +57,7 @@ export class HedyAceEditor implements HedyEditor {
     this._editor = ace.edit(element);
     this.isReadOnly = isReadOnly;
     this._editor.setTheme("ace/theme/monokai");
-      
+
     if (isReadOnly) {
       this._editor.setValue(this._editor.getValue().trimRight(), -1);
       // Remove the cursor
@@ -151,18 +150,17 @@ export class HedyAceEditor implements HedyEditor {
   /**     
    * @returns if the editor is set to read-only mode
    */
-  public get getIsReadOnly(): boolean {
-    return this.isReadOnly;
+  public get isReadOnly(): boolean {
+    return this._editor.getReadOnly();
   }
   
   /**
    * Sets the read mode of the editor
    */
-  public set setIsreadOnly(isReadMode: boolean) {
-    this._editor.setReadOnly(isReadMode);
-    this.isReadOnly = isReadMode;
+  public set isReadOnly(isReadMode: boolean) {
+   this._editor.setReadOnly(isReadMode);
   }
-
+  
   /**
    * Resizes the editor after changing its size programatically
    */
