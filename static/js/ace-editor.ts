@@ -67,41 +67,36 @@ export class HedyAceEditor implements HedyEditor {
       // @ts-ignore
       this._editor.renderer.$cursorLayer.element.style.display = "none";
       this._editor.setOptions({
-        readOnly: true,
+        // only show gutter when its the main editor
+        readOnly: editorType === EditorType.MAIN,
         showGutter: false,
         showPrintMargin: false,
         highlightActiveLine: false
       });
       // A bit of margin looks better
       this._editor.renderer.setScrollMargin(3, 3, 10, 20)
-
-      // When it is the main editor -> we want to show line numbers!
-      if (editorType === EditorType.MAIN) {
+      
+      // It's an example editor
+      // Fits to content size
+      this._editor.setOptions({ maxLines: Infinity });     
+      if(editorType === EditorType.CHEATSHEET) {
+        this._editor.setOptions({ minLines: 1 });
+      } else if(editorType === EditorType.COMMON_MISTAKES) {
         this._editor.setOptions({
-          showGutter: true
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true,
+          minLines: 5,
         });
-      } else { // It's an example editor
-         // Fits to content size
-        this._editor.setOptions({ maxLines: Infinity });     
-        if(editorType === EditorType.CHEATSHEET) {
-          this._editor.setOptions({ minLines: 1 });
-        } else if(editorType === EditorType.COMMON_MISTAKES) {
-          this._editor.setOptions({
-            showGutter: true,
-            showPrintMargin: true,
-            highlightActiveLine: true,
-            minLines: 5,
-          });
-        } else if(editorType === EditorType.PARSONS) {
-          this._editor.setOptions({
-            minLines: 1,
-            showGutter: false,
-            showPrintMargin: false,
-            highlightActiveLine: false
-          });
-        } else if(editorType === EditorType.EXAMPLE) {
-          this._editor.setOptions({ minLines: 2 });
-        }
+      } else if(editorType === EditorType.PARSONS) {
+        this._editor.setOptions({
+          minLines: 1,
+          showGutter: false,
+          showPrintMargin: false,
+          highlightActiveLine: false
+        });
+      } else if(editorType === EditorType.EXAMPLE) {
+        this._editor.setOptions({ minLines: 2 });
       }
     } else {
       if (editorType === EditorType.MAIN) {
