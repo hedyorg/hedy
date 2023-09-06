@@ -24,7 +24,7 @@ export interface HedyEditorCreator {
    * @param {JQuery} $editor reference to the div that contains the main editor
    * @param {EditorType} editorType the type of the editor
    */
-  initializeWritableEditor($editor: JQuery, editorType: EditorType, dir?: string): HedyEditor;
+  initializeEditorWithGutter($editor: JQuery, editorType: EditorType, dir?: string): HedyEditor;
   
   /**
    * Initializes a read only editor

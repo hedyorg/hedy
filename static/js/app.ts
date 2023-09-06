@@ -186,7 +186,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   const $editor = $('#editor');
   if ($editor.length) {
     const dir = $("body").attr("dir");
-    theGlobalEditor = editorCreator.initializeWritableEditor($editor, EditorType.MAIN, dir);
+    theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     window.Range = ace.require('ace/range').Range // get reference to ace/range
@@ -329,7 +329,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
   // We need to enable the main editor for the program page as well
   const dir = $("body").attr("dir");
-  theGlobalEditor = editorCreator.initializeWritableEditor($('#editor'), EditorType.MAIN, dir);
+  theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
   attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
   window.Range = ace.require('ace/range').Range // get reference to ace/range
@@ -1435,7 +1435,7 @@ export function modalStepOne(level: number){
   let $modalEditor = $('#modal-editor');
   if ($modalEditor.length) {
     const dir = $("body").attr("dir");
-    theModalEditor = editorCreator.initializeWritableEditor($modalEditor, EditorType.MODAL, dir);
+    theModalEditor = editorCreator.initializeEditorWithGutter($modalEditor, EditorType.MODAL, dir);
   }
 }
 

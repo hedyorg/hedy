@@ -14,7 +14,7 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    * @param dir the direction of the text
    * @return {HedyEditor} The initialized Hedy editor instance
    */
-  initializeWritableEditor($editor: JQuery, editorType: EditorType, dir: string = "ltr"): HedyAceEditor {
+  initializeEditorWithGutter($editor: JQuery, editorType: EditorType, dir: string = "ltr"): HedyAceEditor {
     let editor: HedyAceEditor = new HedyAceEditor($editor.get(0)!, $editor.data('readonly'), editorType, dir);
     return editor;
   }
