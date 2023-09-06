@@ -187,7 +187,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $("body").attr("dir");
     theGlobalEditor = editorCreator.initializeWritableEditor($editor, EditorType.MAIN, dir);
-    attachMainEditorEvents();
+    attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     window.Range = ace.require('ace/range').Range // get reference to ace/range
   }
@@ -244,15 +244,15 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#program_name').on('blur', () => saveIfNecessary());
 }
 
-function attachMainEditorEvents() {
+function attachMainEditorEvents(editor: HedyEditor) {
 
-  theGlobalEditor.on('change', () => {
+  editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
     // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
   });  
   
   // If prompt is shown and user enters text in the editor, hide the prompt.
-  theGlobalEditor.on('change', function() {
+  editor.on('change', function() {
     if (askPromptOpen) {
       stopit();
       theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
@@ -330,7 +330,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $("body").attr("dir");
   theGlobalEditor = editorCreator.initializeWritableEditor($('#editor'), EditorType.MAIN, dir);
-  attachMainEditorEvents();
+  attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
   window.Range = ace.require('ace/range').Range // get reference to ace/range
 }
