@@ -4,9 +4,9 @@
 <div class="px-8 py-12">
     {% if achievement %}
     <script>
-    $(function() {
-        hedyApp.showAchievements({{ achievement|safe }}, false, "");
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            hedyApp.showAchievements({{ achievement|safe }}, false, "");
+        });
     </script>
     {% endif %}
     <!-- <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2> -->
