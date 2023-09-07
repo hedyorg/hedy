@@ -1,8 +1,18 @@
 levels:
     1:
         1:
-            story: "You're a customer at bakery Hedy.\nYou walk into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
-            code: "{print} Welcome to bakery Hedy!\n{ask} What type of pie do you want to order?\n{echo} So you want\n{print} Your order is being prepared!"
+          story: |
+                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
+                You're a customer at bakery Hedy.
+                You walk into the bakery and are welcomed by the baker.
+                He asks what type of pie you want to order.
+                Then he repeats your answer back to you.
+                Lastly, your order is being prepared.
+          code: |-
+                {print} Welcome to bakery Hedy!
+                {ask} What type of pie do you want to order?
+                {echo} So you want
+                {print} Your order is being prepared!
         2:
             story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
             code: "{print} This is DJ Hedy\n{ask} Are you ready to party?\n{ask} What song would you like to hear?\n{echo} Great choice! I love"
