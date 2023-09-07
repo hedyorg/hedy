@@ -17,11 +17,11 @@ levels:
     3:
         1:
             code: |
-                {print} The new school year at Hogwarts is starting!
                 {print} The sorting hat is ready to sort you into a Hogwarts house.
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} And it is houses {at} {random}
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
         2:
             story: "Viết chương trình chọn một món ăn ngẫu nhiên. Tạo một danh sách đồ ăn và lớp phủ (topping) và để chương trình quyết định bạn sẽ ăn gì!\n"

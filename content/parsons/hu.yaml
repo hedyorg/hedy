@@ -43,15 +43,14 @@ levels:
             story: |
                 The new school year at Hogwarts is starting! 
                 It is the job of the sorting hat to sort you into one of the houses.
-                Which house will you be sorted into?
-                Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
-                Let the program wait a short period before revealing your house.
+                Which house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.
+                Before the sorting hat reveals your house, you can tell it to not pick one of the houses.
             code: |
-                {print} The new school year at Hogwarts is starting!
                 {print} The sorting hat is ready to sort you into a Hogwarts house.
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} And it is houses {at} {random}
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
