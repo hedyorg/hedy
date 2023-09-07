@@ -55,4 +55,4 @@ Want to help improve Hedy?
 
 We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-You can follow the [our Project Board](https://github.com/orgs/hedyorg/projects/1/views/5) to see what we are currently working on, and [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md).
+You can follow the [Project Board](https://github.com/orgs/hedyorg/projects/1/views/5) to see what we are currently working on, and [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md).
