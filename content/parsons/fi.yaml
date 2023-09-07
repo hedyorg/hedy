@@ -27,8 +27,17 @@ levels:
 \n{print} Thank you for shopping with us!\n"
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
-            code: "{print} The new school year at Hogwarts is starting!\n{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} And it is houses {at} {random}\n"
+            story: |
+                    The new school year at Hogwarts is starting!
+                    It is the job of the sorting hat to sort you into one of the houses.
+                    Which house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.
+                    Before the sorting hat reveals your house, you can tell it to not pick one of the houses.
+            code: |-
+              {print} The sorting hat is ready to sort you into a Hogwarts house.
+              houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+              dislike {is} {ask} Are there any houses you do not want to be part of?
+              {remove} dislike {from} houses
+              {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
             code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}\n"
