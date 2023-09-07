@@ -20,7 +20,7 @@ The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 What's next?
 ------------
 
-If you want to see what the core team will work on next, you can follow [our Project](https://github.com/hedyorg/hedy/projects/5), the [Discussions](https://github.com/hedyorg/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
+If you want to see what the core team will work on next, you can follow [our Project Board](https://github.com/orgs/hedyorg/projects/1/views/5), the [Discussions](https://github.com/hedyorg/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
 
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ----------------------------------------------
@@ -55,4 +55,4 @@ Want to help improve Hedy?
 
 We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-You can follow the [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md)
+You can follow the [our Project Board](https://github.com/orgs/hedyorg/projects/1/views/5) to see what we are currently working on, and [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md).
