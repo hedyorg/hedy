@@ -55,15 +55,15 @@ levels:
                 {print} 'the wheels on the bus go'
             story: "Create the song 'The wheels on the bus go round and round'\\n\n"
         1:
+            story: |
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
             code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                {remove} player1 {from} players
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
-            story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
     8:
         2:
             code: |

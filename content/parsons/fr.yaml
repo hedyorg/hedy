@@ -122,17 +122,14 @@ levels:
     7:
         1:
             story: |
-                In a chess tournament there are three players left.
-                Create a program that decides which two players first play against each other.
-                First print the two players who play the first match, then print against which player the winner will play.
-            code: |-
-                joueurs = Liam, Noah, Sophie
-                joueur1 = joueurs {at} {random}
-                {remove} joueur1 {from} joueurs
-                joueur2 = joueurs {at} {random}
-                {print} joueur1 ' joue en premier contre ' joueur2
-                {remove} joueur2 {from} joueurs
-                {print} 'Le gagnant joue contre ' joueurs {at} {random}
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            code: |
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'

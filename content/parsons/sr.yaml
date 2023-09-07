@@ -63,8 +63,15 @@ levels:
             code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
     7:
         1:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players = Liam, Noah, Sophie\nplayer1 = players {at} {random}\n{remove} player1 {from} players\nplayer2 = players {at} {random}\n{print} player1 ' first plays against ' player2\n{remove} player2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: |
+              Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            code: |
+              {repeat} 3 {times} {print} 'Baby shark tututututudu'
+              {print} 'Baby shark'
+              {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+              {print} 'Mommy shark'
+              {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+              {print} 'Daddy shark
         2:
             story: "Create the song 'The wheels on the bus go round and round'\n"
             code: "{print} 'the wheels on the bus go'\n{repeat} 3 {times} {print} 'round and round'\n{print} 'the wheels of the bus go round and round'\n{print} 'all through the town '"
