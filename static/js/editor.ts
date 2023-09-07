@@ -90,6 +90,6 @@ export interface HedyEditor {
    * @param handler  the event handler function
    */
   on(key: OnEditorEventParameters[0], handler: OnEditorEventParameters[1]): void;
-  
-  markers: Markers;
+  // Very sneaky need to change this
+  markers: Markers | undefined;
 }
