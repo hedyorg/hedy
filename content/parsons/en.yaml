@@ -68,10 +68,10 @@ levels:
                 Create a program that decides which two players have to play against each other first.
                 Start by printing the two players who play the first match, then print against which player the winner will play.
             code: |-
-                players = Liam, Noah, Sophie
-                player_1 = players {at} {random}
+                players {is} Liam, Noah, Sophie
+                player_1 {is} players {at} {random}
                 {remove} player_1 {from} players
-                player_2 = players {at} {random}
+                player_2 {is} players {at} {random}
                 {print} player_1 ' first plays against ' player_2
                 {remove} player_2 {from} players
                 {print} 'The winner plays against ' players {at} {random}

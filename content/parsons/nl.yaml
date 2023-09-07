@@ -66,12 +66,12 @@ levels:
                 Maak een programma dat beslist welke twee spelers als eerst tegen elkaar mogen schaken.
                 Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
             code: |
-                spelers = Freek, Bart, Emma
-                speler1 = spelers {at} {random}
-                {remove} speler1 {from} spelers
-                speler2 = spelers {at} {random}
-                {print} speler1 ' speelt eerst tegen ' speler2
-                {remove} speler2 {from} spelers
+                spelers {is} Freek, Bart, Emma
+                speler_1 {is} spelers {at} {random}
+                {remove} speler_1 {from} spelers
+                speler2 {is} spelers {at} {random}
+                {print} speler_1 ' speelt eerst tegen ' speler_2
+                {remove} speler_2 {from} spelers
                 {print} 'De winnaar speelt tegen ' spelers {at} {random}
     4:
         1:
@@ -211,7 +211,7 @@ levels:
                 mensen = mama, papa, Martin, Abby, Jesse
                 diner_opties = pizza, tacos, pannenkoeken, een salade, lasagne
                 {for} dag {in} dagen
-                    gekozen_persoon = people {at} {random}
+                    gekozen_persoon = mensen {at} {random}
                     gekozen_diner = diner_opties {at} {random}
                     {print} 'Op ' dag ' kookt ' gekozen_persoon ' ' gekozen_diner
                     {remove} gekozen_persoon {from} mensen
@@ -223,7 +223,7 @@ levels:
             code: |
                 mensen = Betty, Amanda, Marc
                 haarstijl = een kaal hoofd, een hanekam, een paardenstaart, stekeltjes
-                {for} mesn {in} mensen
+                {for} mens {in} mensen
                     {print} mens ' krijgt nu ' haarstijl {at} {random}
                     tevreden = {ask} mens ', ben je blij met deze keuze?'
                     {if} tevreden {is} ja
@@ -269,7 +269,7 @@ levels:
                 's Morgens in de vroegte
 
             code: |
-                coupletten = 'Wat zullen we doen met de dronken zeeman', 'Hela hup, daar gaat ie'
+                coupletten = 'Wat zullen we doen met de dronken zeeman', 'Hela hup daar gaat ie'
                 {for} couplet {in} coupletten
                     {for} teller {in} {range} 1 {to} 3
                         {print} couplet
