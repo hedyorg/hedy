@@ -127,15 +127,7 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * @returns the string of the current program in the editor
    */
-  public get contents(): string { 
-    // Always trim trailing whitespaces before returning the contents
-    try {
-      // This module may or may not exist, so let's be extra careful here.
-      const whitespace = ace.require("ace/ext/whitespace");
-      whitespace.trimTrailingSpace(this._editor.session, true);
-    } catch (e) {
-      console.error(e);
-    }
+  public get contents(): string {
     return this._editor.getValue();
   }
 
@@ -237,6 +229,19 @@ export class HedyAceEditor implements HedyEditor {
 
   get markers(): Markers {
     return this._markers!;
+  }
+
+  /**
+  * Trim trailing whitespaces
+  */
+  trimTrailingSpace(): void {
+    try {
+      // This module may or may not exist, so let's be extra careful here.
+      const whitespace = ace.require("ace/ext/whitespace");
+      whitespace.trimTrailingSpace(this._editor!.session, true);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
