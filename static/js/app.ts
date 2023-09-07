@@ -15,14 +15,15 @@ import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
-import { HedyAceEditorCreator } from './ace-editor';
+// import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
-const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
+const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
 let last_code: string;
 
 /**
@@ -532,7 +533,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
-          theGlobalEditor.markers.highlightAceError(response.Location[0], response.Location[1]);
+          theGlobalEditor.markers?.highlightAceError(response.Location[0], response.Location[1]);
         }
         $('#stopit').hide();
         $('#runit').show();
