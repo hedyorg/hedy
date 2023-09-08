@@ -29,11 +29,6 @@ let last_code: string;
  */
 let pygameRunning = false;
 
-/**
- * Represents whether there's an open 'ask' prompt
- */
-let askPromptOpen = false;
-
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
 let theAdventures: Record<string, Adventure> = {};
@@ -331,7 +326,7 @@ export function stopit() {
       }
   }
 
-  askPromptOpen = false;
+  theGlobalEditor.askPromptOpen = false;
 }
 
 function clearOutput() {
@@ -358,7 +353,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
 
-  if (askPromptOpen) {
+  if (theGlobalEditor.askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
       return modal.notifyError(disabled_prompt);
@@ -1013,7 +1008,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     }
 
     return new Promise(function(ok) {
-      askPromptOpen = true;
+      theGlobalEditor.askPromptOpen = true;
 
       const input = $('#ask-modal input[type="text"]');
       $('#ask-modal .caption').text(prompt);
@@ -1025,7 +1020,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         input.focus();
       }, 0);
       $('#ask-modal form').one('submit', function(event) {
-        askPromptOpen = false;
+        theGlobalEditor.askPromptOpen = false;
         event.preventDefault();
         $('#ask-modal').hide();
 
