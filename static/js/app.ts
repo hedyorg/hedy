@@ -16,7 +16,7 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor } from './editor';
 import { HedyAceEditorCreator } from './ace-editor';
-
+export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
@@ -346,6 +346,131 @@ function clearOutput() {
   const buttonsDiv = $('#dynamic-buttons');
   buttonsDiv.empty();
   buttonsDiv.hide();
+}
+export async function debugit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+// Copy 'currentTab' into a variable, so that our event handlers don't mess up
+  // if the user changes tabs while we're waiting for a response
+  const adventureName = currentTab;
+
+  if (theGlobalEditor.askPromptOpen) {
+    // If there is no message -> don't show a prompt
+    if (disabled_prompt) {
+      return modal.notifyError(disabled_prompt);
+    }
+    return;
+  }
+
+  theLocalSaveWarning.clickRun();
+
+  // Make sure to stop previous PyGame event listeners
+  if (typeof Sk.unbindPygameListeners === 'function') {
+    Sk.unbindPygameListeners();
+  }
+
+  // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
+  Sk.execLimit = 1;
+  $('#runit').hide();
+  $('#stopit').show();
+  $('#saveFilesContainer').hide();
+  clearOutput();
+
+  try {
+    var editor = theGlobalEditor;
+    var code = "";
+    if ($('#parsons_container').is(":visible")) {
+      code = get_parsons_code();
+      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
+      if (!code) {
+        editor.clearErrors();
+        stopit();
+        return;
+      } else {
+        // Add the onclick on the button -> only show if there is another exercise to load (set with an onclick)
+        if ($('#next_parson_button').attr('onclick')) {
+          $('#next_parson_button').show();
+        }
+      }
+    } else {
+      code = get_active_and_trimmed_code();
+      if (code.length == 0) {
+        editor.clearErrors()
+        stopit();
+        return;
+      }
+    }
+
+    editor.clearErrors()
+    removeBulb();
+    console.log('Original program:\n', code);
+
+    const adventure = theAdventures[adventureName];
+
+    try {
+      cancelPendingAutomaticSave();
+      let data = {
+        level: `${level}`,
+        code: code,
+        lang: lang,
+        skip_faulty: false,
+        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
+        read_aloud : !!$('#speak_dropdown').val(),
+        adventure_name: adventureName,
+
+        // Save under an existing id if this field is set
+        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+        save_name: saveNameFromInput(),
+      };
+
+      let response = await postJsonWithAchievements('/parse', data);
+      console.log('Response', response);
+
+      if (response.Warning && $('#editor').is(":visible")) {
+        //storeFixedCode(response, level);
+        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+      }
+
+      // if (!data.skip_faulty && response.Error) {
+      //   data.skip_faulty = true;
+      //   error.showWarningSpinner();
+      //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+      //   response = await postJsonWithAchievements('/parse', data);
+      //   error.hide(true);
+      // }
+
+      showAchievements(response.achievements, false, "");
+      if (adventure && response.save_info) {
+        adventure.save_info = response.save_info;
+        adventure.start_code = code;
+      }
+      if (response.Error) {
+        error.show(ClientMessages['Transpile_error'], response.Error);
+        if (response.Location && response.Location[0] != "?") {
+          //storeFixedCode(response, level);
+          // Location can be either [row, col] or just [row].
+          theGlobalEditor.markers.highlightAceError(response.Location[0], response.Location[1]);
+        }
+        $('#stopit').hide();
+        $('#runit').show();
+        return;
+      }
+      debugPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err: any) {
+        // The err is null if we don't understand it -> don't show anything
+        if (err != null) {
+          error.show(ClientMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
+      });
+    } catch (e: any) {
+      console.error(e);
+      if (e.internetError) {
+        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
+      } else {
+        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+      }
+    }
+  } catch (e: any) {
+    modal.notifyError(e.responseText);
+  }
 }
 
 export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
@@ -711,6 +836,370 @@ window.onerror = function reportClientException(message, source, line_number, co
     url: window.location.href,
     user_agent: navigator.userAgent,
   });
+}
+
+export function debugPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+  
+  
+  theGlobalDebugger = new Sk.Debugger('<stdin>', outf);
+  
+  
+  // If we are in the Parsons problem -> use a different output
+  let outputDiv = $('#output');
+
+  if (sourceMap){
+    // theGlobalSourcemap = sourceMap;
+    // let Range = ace.require("ace/range").Range
+
+    // // We loop through the mappings and underline a mapping if it contains an error
+    // for (const index in sourceMap) {
+    //   const map = sourceMap[index];
+    //   const range = new Range(
+    //     map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+    //     map.hedy_range.to_line-1, map.hedy_range.to_column-1
+    //   )
+
+    //   if (map.error != null){
+    //     theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+    //   }
+    // }
+  }
+
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = outputDiv.find('#variable_button');
+  const variables = outputDiv.find('#variables');
+  outputDiv.empty();
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
+
+  const storage = window.localStorage;
+  let skulptExternalLibraries:{[index: string]:any} = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
+  };
+  let debug = storage.getItem("debugLine");
+
+  Sk.pre = "output";
+  const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
+  turtleConfig.target = 'turtlecanvas';
+  // If the adventures are not shown  -> increase height of turtleConfig
+  if ($('#adventures-tab').is(":hidden")) {
+      turtleConfig.height = 600;
+      turtleConfig.worldHeight = 600;
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
+      turtleConfig.height = 300;
+      turtleConfig.worldHeight = 300;
+  }
+  // Always set the width to output panel width -> match the UI
+  turtleConfig.width = outputDiv.width();
+  turtleConfig.worldWidth = outputDiv.width();
+
+  let code_prefix = normal_prefix;
+
+  if (!hasTurtle && !hasPygame) {
+    // There might still be a visible turtle panel. If the new program does not use the Turtle,
+    // remove it (by clearing the '#turtlecanvas' div)
+    $('#turtlecanvas').empty();
+  }
+
+  if (hasTurtle) {
+    code_prefix += turtle_prefix;
+    $('#turtlecanvas').show();
+  }
+
+  if (hasPygame){
+    skulptExternalLibraries = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
+      './pygame.js': {
+        path: "/vendor/pygame_4_skulpt/init.js",
+      },
+      './display.js': {
+        path: "/vendor/pygame_4_skulpt/display.js",
+      },
+      './draw.js': {
+        path: "/vendor/pygame_4_skulpt/draw.js",
+      },
+      './event.js': {
+        path: "/vendor/pygame_4_skulpt/event.js",
+      },
+      './font.js': {
+        path: "/vendor/pygame_4_skulpt/font.js",
+      },
+      './image.js': {
+        path: "/vendor/pygame_4_skulpt/image.js",
+      },
+      './key.js': {
+        path: "/vendor/pygame_4_skulpt/key.js",
+      },
+      './mouse.js': {
+        path: "/vendor/pygame_4_skulpt/mouse.js",
+      },
+      './transform.js': {
+        path: "/vendor/pygame_4_skulpt/transform.js",
+      },
+      './locals.js': {
+        path: "/vendor/pygame_4_skulpt/locals.js",
+      },
+      './time.js': {
+        path: "/vendor/pygame_4_skulpt/time.js",
+      },
+      './version.js': {
+        path: "/vendor/pygame_4_skulpt/version.js",
+      },
+      './buttons.js': {
+          path: "/js/buttons.js",
+      },
+    };
+
+    code_prefix += pygame_prefix;
+
+    initSkulpt4Pygame();
+    initCanvas4PyGame();
+    let pygameModal = $('#pygame-modal');
+
+    const codeContainsInputFunctionBeforePygame = new RegExp(
+      "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
+    ).test(code);
+
+    if (!codeContainsInputFunctionBeforePygame) {
+      pygameModal.show();
+    }
+
+    if (hasTurtle) {
+      pygameModal.addClass('absolute');
+      pygameModal.addClass('bottom-0');
+      pygameModal.addClass('w-full');
+    } else {
+      pygameModal.removeClass('absolute');
+      pygameModal.removeClass('bottom-0');
+      pygameModal.removeClass('w-full');
+    }
+
+    document.onkeydown = animateKeys;
+    pygameRunning = true;
+  }
+
+  code = code_prefix + code;
+  if (hasPygame) code += pygame_suffix;
+
+  Sk.configure({
+    output: outf,
+    read: builtinRead,
+    inputfun: inputFromInlineModal,
+    inputfunTakesPrompt: true,
+    setTimeout: timeout,
+    __future__: Sk.python3,
+    debuggin: true,
+    breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),
+    timeoutMsg: function () {
+      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      $('#stopit').hide();
+      $('#runit').show();
+      if (Sk.execLimit != 1) {
+        pushAchievement("hedy_hacking");
+        return ClientMessages ['Program_too_long'];
+      } else {
+        return null;
+      }
+    },
+    // We want to make the timeout function a bit more sophisticated that simply setting a value
+    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+    // So: a very large limit in these levels, keep the limit on other onces.
+    execLimit: (function () {
+      const level = theLevel;
+      if (hasTurtle || hasPygame) {
+        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+        return (6000000);
+      }
+      if (level < 7) {
+        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
+        return (3000000);
+      }
+      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+      return ((hasSleep) ? 20000 : 5000);
+    }) ()
+  });
+  
+  return theGlobalDebugger.asyncToPromise(function(){
+    return Sk.importMainWithBody("<stdin>", true, code, true);
+  }, {'*': theGlobalDebugger.suspension_handler.bind(this)}, theGlobalDebugger).then(
+    theGlobalDebugger.success.bind(theGlobalDebugger)
+  ).catch(theGlobalDebugger.error.bind(theGlobalDebugger));
+
+    return Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody("<stdin>", true, code, true), {
+        "*": theGlobalDebugger.suspension_handler.bind(this)
+      }
+    ).then(function(_mod) {
+      console.log('Program executed');
+      const pythonVariables = Sk.globals;
+      load_variables(pythonVariables);
+      $('#stopit').hide();
+      $('#runit').show();
+
+      if (hasPygame) {
+        document.onkeydown = null;
+        $('#pygame-modal').hide();
+      }
+
+      if (hasTurtle) {
+        $('#saveFilesContainer').show();
+      }
+
+      // Check if the program was correct but the output window is empty: Return a warning
+      if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+        if(!debug){
+          pushAchievement("error_or_empty");
+          error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+        }
+        return;
+      }
+      if (!hasWarnings && code !== last_code && !debug) {
+          showSuccesMessage();
+          last_code = code;
+      }
+      if (cb) cb ();
+    }).catch(function(err) {
+
+
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);
+    });
+
+  /**
+   * Get the error messages from a Skulpt error
+   *
+   * They look like this:
+   *
+   * {"args":{"v":[{"v":"name 'name' is not defined"}]},"traceback":[{"lineno":3,"colno":0,"filename":"<stdin>.py"}]}
+   *
+   * Don't know why, so let's be defensive about it.
+   */
+  function errorMessageFromSkulptError(err: any) {
+    const message = err.args && err.args.v && err.args.v[0] && err.args.v[0].v;
+    return message;
+  }
+
+  function addToOutput(text: string, color: string) {
+    $('<span>').text(text).css({ color }).appendTo(outputDiv);
+    scrollOutputToBottom();
+  }
+
+  // output functions are configurable.  This one just appends some text
+  // to a pre element.
+  function outf(text: string) {
+    addToOutput(text, 'white');
+    speak(text)
+  }
+
+  function builtinRead(x: string) {
+    if (x in skulptExternalLibraries) {
+      const tmpPath = skulptExternalLibraries[x]["path"];
+      if (x === "./pygame.js") {
+        return Sk.misceval.promiseToSuspension(
+          fetch(tmpPath)
+              .then(r => r.text()))
+
+      } else {
+        let request = new XMLHttpRequest();
+        request.open("GET", tmpPath, false);
+        request.send();
+
+        if (request.status !== 200) {
+          return void 0
+        }
+
+        return request.responseText
+      }
+    }
+
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+        throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+  }
+
+  // This method draws the prompt for asking for user input.
+  function inputFromInlineModal(prompt: string) {
+    // We give the user time to give input.
+    var storage = window.localStorage;
+    var debug = storage.getItem("debugLine")
+    if (storage.getItem("prompt-" + prompt) == null) {
+    Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+    $('#turtlecanvas').hide();
+
+    if (pygameRunning) {
+      Sk.unbindPygameListeners();
+      document.onkeydown = null;
+      $('#pygame-modal').hide();
+    }
+
+    return new Promise(function(ok) {
+      theGlobalEditor.askPromptOpen = true;
+
+      const input = $('#ask-modal input[type="text"]');
+      $('#ask-modal .caption').text(prompt);
+      input.val('');
+      input.attr('placeholder', prompt);
+      speak(prompt)
+
+      setTimeout(function() {
+        input.focus();
+      }, 0);
+      $('#ask-modal form').one('submit', function(event) {
+        theGlobalEditor.askPromptOpen = false;
+        event.preventDefault();
+        $('#ask-modal').hide();
+
+        if (hasTurtle) {
+          $('#turtlecanvas').show();
+        }
+
+        if (pygameRunning) {
+          Sk.bindPygameListeners();
+          document.onkeydown = animateKeys;
+
+          if (!hasTurtle) {
+            $('#pygame-modal').show();
+          }
+        }
+
+        // We reset the timer to the present moment.
+        Sk.execStart = new Date ();
+        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+        // replying to a query.
+        setTimeout (function () {
+           ok(input.val());
+           if (debug != null) {
+              storage.setItem("prompt-" + prompt, input.val()!.toString());
+           }
+           $ ('#output').focus ();
+        }, 0);
+
+          return false;
+        });
+        $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
+      });
+    } else {
+      return new Promise(function (ok) {
+        ok(storage.getItem("prompt-" + prompt));
+      });
+    }
+  }
+
 }
 
 export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
