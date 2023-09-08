@@ -5,7 +5,7 @@ adventures:
             4:
                 start_code: "{print} 'Silav dinya'"
                 story_text: "In level 4 `{ask}` and `{print}` have changed.\nYou must put text that you want to print between quotation marks.\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'Pêwîste ku hûn ji nuha û pê ve nîşanan bikar bînin!'\nbersiv {is} {ask} 'Ji niha û pê ve divê em çi bikar bînin?'\n{print} Divê em navê Sophie bikar bînin\n{print} Navê min navê min\n"
+                example_code: "```\n{print} 'Pêwîste ku hûn ji nuha û pê ve nîşanan bikar bînin!'\nbersiv {is} {ask} 'Ji niha û pê ve divê em çi bikar bînin?'\n{print} 'Divê em navê Sophie bikar bînin'\n{print} 'Navê min navê min'\n"
             5:
                 start_code: "nav {is} {ask} 'navê te çi ye?'\n{if} nav {is} Hedy {print} 'xweş!' {else} {print} 'meh'"
                 story_text: "In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
@@ -31,7 +31,7 @@ adventures:
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy xweş e!'\n"
                 story_text: "Asta 7 fermana `{repeat}` zêde dike. `{repeat}` dikare ji bo pêkanîna yekê were bikar anîn\n"
-                example_code: "{repeat} 3 {times} {print} 'Hedy kêfxweş e!print}  'rojbûna te pîroz be'\n{repeat} 3 {times} {print} 'Hedy kêfxweş e!print!'\n```\n"
+                example_code: "{repeat} 3 {times} {print} 'Hedy kêfxweş e! {print}  'rojbûna te pîroz be'\n{repeat} 3 {times} {print} 'Hedy kêfxweş e!print!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
                 story_text: "`{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!\nYou can now group several lines together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"

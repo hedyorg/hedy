@@ -2921,7 +2921,7 @@ levels:
             hint: 'Céntrate en qué valores de longitud están permitidos'
             question_score: '10'
             question_text: ¿Qué sentencia es verdadera sobre esta montaña rusa?
-            code: "altura = {ask} 'Por favor indica tu altura en centímetros'\n{if} altura > 120\n    {print} 'Lo siento, no puedes montar en la montaña rusa.'\n{else}\n    {print} 'Disfruta del viaje'\n"
+            code: "altura = {ask} 'Por favor indica tu altura en centímetros'\n{if} altura < 120\n    {print} 'Lo siento, no puedes montar en la montaña rusa.'\n{else}\n    {print} 'Disfruta del viaje'\n"
     15:
         1:
             question_text: '¿Qué símbolo debería usarse en el espacio en blanco? Consejo: Debes seguir adivinando hasta que lo consigas.'
