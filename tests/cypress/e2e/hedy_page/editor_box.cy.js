@@ -61,4 +61,26 @@ describe('Test editor box functionality', () => {
     cy.get('#output').should('contain.text', 'Hello world');
     cy.get('#ask-modal').should('be.visible');
   });
+
+  it ('When making an error the error modal should be shown', () => {
+    cy.get('#editor').type('echo');
+    cy.get('#editor > .ace_scroller > .ace_content').should('contain.text', 'echo');
+    cy.get('#runit').click();
+
+    cy.get('#errorbox').should('be.visible');
+    // The error should be about the lonely echo
+    cy.getBySel('error_details').should('contain.text', 'echo');
+  });
+
+  it ('When making an error the keywords must be highligted', () => {
+    cy.get('#editor').type('prin Hello world');
+    cy.get('#editor > .ace_scroller > .ace_content').should('contain.text', 'prin Hello world');
+    cy.get('#runit').click();
+
+    cy.get('#errorbox').should('be.visible');
+    // The error should be about the lonely echo
+    cy.getBySel('error_details').should('contain.text', 'prin');
+    cy.get('[data-cy="error_details"] span').should('have.class', 'command-highlighted');
+
+  });
 });
