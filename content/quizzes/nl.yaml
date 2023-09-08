@@ -3173,151 +3173,151 @@ levels:
             question_score: "10"
     15:
         1:
-            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
-            code: "answer = 0\nwhile answer _ 'Amsterdam'\n    answer = ask 'What is the capital city of the Netherlands?'\nprint 'You have given the correct answer'\n"
+            question_text: 'Welk symbool moet worden gebruikt op het streepje? Tip: Je moet blijven raden tot het antwoord goed is.'
+            code: "antwoord = 0\n{while} antwoord _ 'Amsterdam'\n    antwoord = {ask} 'Wat is de hoofdstad van Nederland?'\nprint 'Je hebt het juiste antwoord gegeven'\n"
             mp_choice_options:
             -   option: '`=!`'
-                feedback: That is not right.
+                feedback: Dat klopt niet.
             -   option: '`==`'
-                feedback: You don't have to keep guessing if you've given the right answer.
+                feedback: Je hoeft niet te blijven raden als je het goede antwoord hebt gegeven
             -   option: '`!=`'
                 feedback: Correct
             -   option: '`=`'
-                feedback: That's not it
+                feedback: Dat klopt niet
             correct_answer: C
-            hint: Keep guessing until you say Amsterdam
+            hint: Blijf raden tot de speler Amsterdam zegt.
             question_score: '10'
         2:
-            question_text: Which of these codes has used the correct symbol(s)?
+            question_text: Welk van deze codes gebruikt het juiste symbool/symbolen?
             mp_choice_options:
-            -   option: "```\n{while} name = Hedy\n```\n"
-                feedback: No
-            -   option: "```\n{while} age = 24\n```\n"
-                feedback: No
-            -   option: "```\n{while} time > 0\n```\n"
-                feedback: Yes!
-            -   option: "```\n{while} answer == yes'\n```\n"
-                feedback: A quotation mark is missing
+            -   option: "```\n{while} naam = Hedy\n```\n"
+                feedback: Nee
+            -   option: "```\n{while} leeftijd = 24\n```\n"
+                feedback: Nee
+            -   option: "```\n{while} tijd > 0\n```\n"
+                feedback: Ja!
+            -   option: "```\n{while} antwoord == ja'\n```\n"
+                feedback: Hier mist een aanhalingsteken
             correct_answer: C
-            hint: When you are comparing two answers you should use ==
+            hint: Je gebruikt == wanneer je twee dingen vergelijkt
             question_score: '10'
         3:
-            question_text: Which command should be filled in on the two blanks?
-            code: "_ age >= 18\n  print 'you are not allowed in this bar'\n"
+            question_text: Welk commando moet op het streepje?
+            code: "_ leeftijd >= 18\n  print 'Jij mag deze bar niet in'\n"
             mp_choice_options:
             -   option: '`{in}`'
-                feedback: That's not it
+                feedback: Dat is hem niet.
             -   option: '`{while}`'
-                feedback: You are right
+                feedback: Goed gedaan!
             -   option: '`{for}`'
-                feedback: That's not it
+                feedback: Dat is hem niet.
             -   option: '`{range}`'
-            feedback: That's not it
+                feedback: Dat is hem niet.
             correct_answer: B
-            hint: You are not allowed in the bar as long as you are 17 or younger
+            hint: Je mag de bar niet in als je 17 of jonger bent.
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
-            code: "options = 1, 2, 3, 4, 5, 6\nprint 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\nwhile thrown == 6\n    thrown = options at random\n    print 'You threw ' thrown\n    tries = tries + 1\nprint 'Yes! You have thrown 6 in ' tries ' tries.'\n"
+            question_text: Wat is er mis met deze code?
+            code: "opties = 1, 2, 3, 4, 5, 6\nprint 'Gooi zo snel mogelijk 6!'\ngegooid = 0\npogingen = 0\n{while} gegooid == 6\n    gegooid = opties {at} {random}\n    print 'Je gooide ' gegooid\n    pogingen = pogingen + 1\nprint 'Hoera! Je gooide 6 in ' pogingen ' pogingen.'\n"
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: That's not right
-            -   option: In line 5 if should have been used instead of while
-                feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
-                feedback: You are correct
+            -   option: In regel 1 moet == worden gebruikt in plaats van =
+                feedback: Dat klopt niet
+            -   option: Regel 2 mist aanhalingstekens
+                feedback: Dat klopt niet
+            -   option: In regels 5 moet {if} gebruikt worden in plaats van {while}
+                feedback: Dat klopt niet
+            -   option: In regel 5 moet != gebruikt worden in plaats van ==
+                feedback: Dat is juist!
             correct_answer: D
-            hint: There is something wrong in line 5
+            hint: Er is iets mis in regel 5
             question_score: '10'
         5:
-            question_text: What should be placed on the blank to make this program work correctly?
-            code: "wetness = 10\nwhile wetness != 0\n    print 'Your hair is still wet, hair dryer on!'\n    sleep 1\n    clear\n    wetness _\n\nprint 'All dry!'\n"
+            question_text: Wat moet er op het streepje komen om dit programma goed te laten werken?
+            code: "vochtgehalte = 10\n{while} vochtgehalte != 0\n    print 'Je haar is nog nat, zet de föhn aan!'\n    {sleep} 1\n    {clear}\n    vochtgehalte _\n\nprint 'Helemaal droog!'\n"
             mp_choice_options:
-            -   option: = wetness
-                feedback: That will not change anything
-            -   option: = wetness = 1
-                feedback: You can't have two times = in one line
-            -   option: = wetness - 1
-                feedback: You are correct!
-            -   option: = wetness + 1
-                feedback: The program should count down
+            -   option: = vochtgehalte
+                feedback: Dit verandert niets
+            -   option: = vochtgehalte = 1
+                feedback: Dat klopt niet
+            -   option: = vochtgehalte - 1
+                feedback: Super!
+            -   option: = vochtgehalte + 1
+                feedback: Het programma moet aftellen
             correct_answer: C
             question_score: '10'
-            hint: wetness should get less each time
+            hint: Het haar moet steeds minder vochtig zijn.
         6:
-            question_text: what is wrong with this code?
-            code: "lives = 100\n    {while} lives != 0\n    answer = {ask} 'Are you annoyed yet?'\n{if} answer == 'yes'\n    lives = lives - 1\n"
+            question_text: Wat is er mis met deze code?
+            code: "levens = 100\n    {while} levens != 0\n    antwoord = {ask} 'Ben je al boos?'\n{if} antwoord == 'ja'\n    levens = levens - 1\n"
             mp_choice_options:
-            -   option: while should be if
-                feedback: No that is not right
-            -   option: if should be while
-                feedback: No that is not right
-            -   option: Line 3 should start with more indentation
-                feedback: No that's not right
-            -   option: Line 2 should start with less indentation
+            -   option: "{while} moet {if} zijn."
+                feedback: Nee dat klopt niet
+            -   option: "{if} moet {while} zijn."
+                feedback: Nee dat klopt niet
+            -   option: Bij regel 3 moet meer worden ingesprongen
+                feedback: Nee dat klopt niet
+            -   option: Bij regel 2 moet minder worden ingesprongen
                 feedback: That is correct
             correct_answer: D
-            hint: Look closely at the indentation
+            hint: Er wordt verkeerd ingesprongen
             question_score: '10'
         7:
-            question_text: How should this program be changed to that it works?
-            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'\n"
+            question_text: Wat moet er in deze code veranderen?
+            code: "{print} 'Raad mijn getal'\nnumemrs = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnummer = nummers {at} {random}\ngame = 'aan'\n{if} game == 'aan'\n    gok = {ask} 'Welk getal denk jij dat het is?'\n    {if} gok < nummer\n        {print} _\n    {if} gok > nummer\n        {print} _\n    {if} gok == nummer\n        {print} _\n        spel = 'over'\n"
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
+            -   option: 'De eerste {if} moet een {while} worden'
                 feedback: Perfect!
-            -   option: '... change the second {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the third {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the fourth {if} into a {while}'
-                feedback: That's not quite right.
+            -   option: 'De tweede {if} moet een {while} worden'
+                feedback: Helaas.
+            -   option: 'De derde {if} moet een {while} worden'
+                feedback: Helaas.
+            -   option: 'De vierde {if} moet een {while} worden'
+                feedback: Helaas.
             correct_answer: A
-            hint: The last one should say you win.
+            hint: De laatste moet een {if} blijven.
             question_score: '10'
         8:
-            question_text: Which statement is true about this automated toilet system?
-            code: "while toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    sleep 60\nelse\n    lights = 'off'\n"
+            question_text: Wat is waar over dit automatische toilet systeem?
+            code: "{while} toilet == 'bezet'\n    licht = 'aan'\n    lucgtverfrisser_sprayt = 'ja'\n    {sleep} 60\nelse\n    licht = 'uit'\n"
             mp_choice_options:
-            -   option: The lights and air freshener will turn off after 1 minute
-                feedback: False!
-            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
-                feedback: Great job
-            -   option: The air freshener sprays once you leave the toilet.
-                feedback: It only sprays when you're in there.
-            -   option: The lights will always stay on.
-                feedback: That wouldn't be right.
-            hint: The block after the while command keeps happening while the toilet is occupied.
+            -   option: De lichten en luchtverfrisser gaan uit na 1 minuut
+                feedback: Fout!
+            -   option: De luchtverfrisser sprayt een keer per minuut en de lichten blijven aan zolang je op de wc zit.
+                feedback: Geweldig!
+            -   option: De luchtverfrisser sprayt als je het toilet verlaat.
+                feedback: Hij sprayt alleen als hij bezet is.
+            -   option: Het licht blijft altijd aan.
+                feedback: Dat klopt niet.
+            hint: Het blok na het {while} commando blijft gebeuren zolang het toilet bezet is.
             question_score: '10'
             correct_answer: B
         9:
-            question_text: What will the diet app say if you have eaten 1600 calories today?
-            code: "chocolate = {ask} 'How many calories have you eaten today?'\n  {while} calories <= 1000\n      {print} 'You could eat some more'\n  {while} calories > 1000 and calories =< 2000\n      {print} 'That is alright'\n  {while} calories > 2000\n      {print} 'You have had enough for today'\n"
+            question_text: Wat zegt de dieetapp als je 1600 caloriëen hebt gegeten die dag?
+            code: "calorie = {ask} 'Hoeveel calorieën heb je vandaag gegeten?'\n  {while} calorie <= 1000\n      {print} 'Je kunt nog wat eten'\n  {while} calorie > 1000 and calorie =< 2000\n      {print} 'Prima'\n  {while} calorie > 2000\n      {print} 'Je hebt genoeg gehad'\n"
             mp_choice_options:
-            -   option: Nothing. 1600 is not programmed into the app.
-                feedback: No
-            -   option: you could eat some more
-                feedback: No
-            -   option: That is alright
-                feedback: Yes!
-            -   feedback: No
-                option: You have eaten enough for today
+            -   option: Niets. 1600 calorieën is niet geprogrammeerd
+                feedback: Nee
+            -   option: Je kunt nog wat eten
+                feedback: Nee
+            -   option: Prima
+                feedback: Ja!
+            -   feedback: Nee
+                option: Je hebt genoeg gehad
             correct_answer: C
-            hint: 1600 is between 1000 and 2000
+            hint: 1600 ligt tussen 1000 en 2000
             question_score: '10'
         10:
-            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
-            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'\n"
+            question_text: 'Wat moet worden ingevuld op het streepje?  Tip: de speler met de meeste punten staat voor.'
+            code: "naam_speler_1 = {ask} 'Naam speler 1:'\nnaam_speler_2 = {ask} 'Naam speler 2:'\n{while} punten_speler_1 > punten_speler_2\n    {print} _ ' staat voor!'\n"
             mp_choice_options:
-            -   option: name_player_1
-                feedback: You are right!
+            -   option: naam_speler_1
+                feedback: Fantastisch!
             -   option: name_player_2
-                feedback: No they are losing!
-            -   option: points_player_1
-                feedback: You should fill in a name, not a number
-            -   option: points_player_2
-                feedback: You should fill in a name, not a number
+                feedback: Nee die verliest!
+            -   option: punten_speler_1
+                feedback: Het moet een naam zijn, geen getal
+            -   option: punten_speler_2
+                feedback: Het moet een naam zijn, geen getal
             correct_answer: A
-            hint: You win the game by having the most points. Your name should appear on the screen
+            hint: Je wint het spel als je de meeste punten hebt. Je naam komt dan in beeld.
             question_score: '10'
