@@ -2910,15 +2910,15 @@ levels:
         8:
             mp_choice_options:
             -   option: Debes ser más alto de 120 cm para montar en la montaña rusa
-                feedback: '> significa mayor que'
+                feedback: '¡Es verdad!'
             -   feedback: Si mides 120 cm no subirás
                 option: Debes ser más alto de 119 cm para montar en la montaña rusa
-            -   option: Debes medir 120 cm o menos para montar en la montaña rusa
-                feedback: '¡Cierto!'
+            -   option: Para subir a la montaña rusa hay que medir menos de 120 cm
+                feedback: '> significa mayor que'
             -   option: No hay restricciones de altura para montar en una montaña rusa
                 feedback: Ahí está.
-            correct_answer: C
-            hint: 'Céntrate en qué valores de longitud están permitidos'
+            correct_answer: A
+            hint: '> significa mayor que'
             question_score: '10'
             question_text: ¿Qué sentencia es verdadera sobre esta montaña rusa?
             code: "altura = {ask} 'Por favor indica tu altura en centímetros'\n{if} altura < 120\n    {print} 'Lo siento, no puedes montar en la montaña rusa.'\n{else}\n    {print} 'Disfruta del viaje'\n"
@@ -2963,7 +2963,7 @@ levels:
             -   feedback: No es eso
                 option: '`{for}`'
             -   option: '`{range}`'
-                feedback: That's not it
+                feedback: Eso no es todo
             question_score: '10'
             correct_answer: B
             hint: No puedes entrar al bar si tienes 17 años o menos
@@ -2998,7 +2998,7 @@ levels:
             hint: la humedad debería ser menor cada vez
             question_score: '10'
         6:
-            question_text: ¿qué le pasa a este código?
+            question_text: ¿Qué le pasa a este código?
             code: "vidas = 100\n    {while} vidas != 0\n    respuesta = {ask} '¿Ya estás enfadado?'\n{if} respuesta == 'sí'\n    vidas = vidas - 1\n"
             mp_choice_options:
             -   option: while debe ser if
@@ -3043,7 +3043,7 @@ levels:
             hint: El bloque después del comando while sigue ocurriendo mientras el baño está ocupado.
             question_score: '10'
         9:
-            code: "chocolate = {ask} '¿Cuántas calorías has comido hoy?'\n  {while} calorias <= 1000\n      {print} 'Puedes comer más'\n  {while} calorias > 1000 and calorias =< 2000\n      {print} 'Está bien'\n  {while} calorias > 2000\n      {print} 'Ya has comido suficiente hoy'\n"
+            code: "calorías = {ask} '¿Cuántas calorías has comido hoy?'\n  {while} calorías <= 1000\n      {print} 'Puedes comer más'\n  {while} calorías > 1000 and calorias =< 2000\n      {print} 'Está bien'\n  {while} calorías > 2000\n      {print} 'Ya has comido suficiente hoy'\n"
             mp_choice_options:
             -   option: Nada. 1600 no está programado en la aplicación.
                 feedback: No
