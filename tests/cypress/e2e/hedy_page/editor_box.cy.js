@@ -28,7 +28,7 @@ describe('Test editor box functionality', () => {
     cy.get('#editor > .ace_scroller > .ace_content').click();
     // We wait until the editor is focused
     // TODO: replace this wait. The editor takes a while to be focused
-    cy.wait(1000);
+    cy.wait(2500);
     cy.focused().clear();
   });
   
