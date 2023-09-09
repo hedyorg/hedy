@@ -197,11 +197,13 @@ Sk.Debugger.prototype.set_suspension = function(suspension) {
 
     suspension = parent;
     
-    this.print_suspension_info(suspension);
+    // this.print_suspension_info(suspension);
 };
 
 Sk.Debugger.prototype.add_breakpoint = function(filename, lineno, colno, temporary) {
+    console.log(filename, lineno, colno, temporary)
     var key = this.generate_breakpoint_key(filename, lineno, colno);
+    console.log(key)
     this.dbg_breakpoints[key] = new Sk.Breakpoint(filename, lineno, colno);
     if (temporary) {
         this.tmp_breakpoints[key] = true;
@@ -243,8 +245,7 @@ Sk.Debugger.prototype.success = function(r) {
             // Current suspension needs to be popped of the stack
             this.pop_suspension_stack();
             
-            if (this.suspension_stack.length === 0) {
-                this.print("Program execution complete");
+            if (this.suspension_stack.length === 0) {                
                 return;
             }
             
@@ -255,17 +256,16 @@ Sk.Debugger.prototype.success = function(r) {
                 return r;
             };
             this.resume();
-        } else {
-            this.print("Program execution complete");
         }
     }
 };
 
 Sk.Debugger.prototype.error = function(e) {
     this.print("Traceback (most recent call last):");
+    console.log(e)
     for (var idx = 0; idx < e.traceback.length; ++idx) {
-        this.print("  File \"" + e.traceback[idx].filename + "\", line " + e.traceback[idx].lineno + ", in <module>");
-        var code = this.get_source_line(e.traceback[idx].lineno - 1);
+        this.print("  File \"" + e.traceback[idx].$filename + "\", line " + e.traceback[idx].$lineno + ", in <module>");
+        var code = this.get_source_line(e.traceback[idx].$lineno - 1);
         code = code.trim();
         code = "    " + code;
         this.print(code);

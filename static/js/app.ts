@@ -455,6 +455,7 @@ export async function debugit(level: number, lang: string, disabled_prompt: stri
       }
       debugPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err: any) {
         // The err is null if we don't understand it -> don't show anything
+        console.log(err)
         if (err != null) {
           error.show(ClientMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
@@ -838,12 +839,17 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
+export function debugStepForward() {
+  theGlobalDebugger.enable_step_mode();
+  theGlobalDebugger.resume.call(theGlobalDebugger);
+}
+
 export function debugPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   
   
   theGlobalDebugger = new Sk.Debugger('<stdin>', outf);
-  
-  
+
+  $('#debug_continue').show();
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
@@ -985,7 +991,7 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
-
+  let originalProgramLength = code.split('\n').length;
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
@@ -996,7 +1002,7 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
     inputfunTakesPrompt: true,
     setTimeout: timeout,
     __future__: Sk.python3,
-    debuggin: true,
+    debugging: true,
     breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),
     timeoutMsg: function () {
       // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
@@ -1026,7 +1032,9 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
       return ((hasSleep) ? 20000 : 5000);
     }) ()
   });
-  
+  let userProgramBeginning = code.split('\n').length - originalProgramLength + 1;
+  console.log(`userProgramBeginning ${userProgramBeginning}`);
+  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
   return theGlobalDebugger.asyncToPromise(function(){
     return Sk.importMainWithBody("<stdin>", true, code, true);
   }, {'*': theGlobalDebugger.suspension_handler.bind(this)}, theGlobalDebugger).then(

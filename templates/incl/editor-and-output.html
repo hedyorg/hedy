@@ -178,7 +178,7 @@
           <button id="debug_button" class="green-btn" onclick='hedyApp.debugit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()"><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.debugStepForward()"><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}
