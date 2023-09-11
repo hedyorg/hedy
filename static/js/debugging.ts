@@ -126,7 +126,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
   if (options.level > 0) {
     let level = options.level;
-    step_debugger = level <= 7;
+    step_debugger = level <= 700;
   }
 
   //Hides the debug button if feature flag is false
