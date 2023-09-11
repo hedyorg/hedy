@@ -25,7 +25,7 @@ For these types of issues it is fine to ping us on GitHub before starting the wo
 
 **Discussions**
 
-The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into an issue, like big new features or overhauls of the language or architecture.
+The [Discussion board](https://github.com/hedyorg/hedy/discussions) has ideas that are not yet detailed enough to be put into an issue, like big new features or overhauls of the language or architecture.
 If you are interested in working on topics related to an open discussion, please join a meeting to discuss the plans in detail.
 
 Contributing to Hedy

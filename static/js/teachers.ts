@@ -1,12 +1,14 @@
 import { modal } from './modal';
-import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
+import { showAchievements } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
+import { HedyAceEditorCreator } from './ace-editor';
 
 declare const htmx: typeof import('./htmx');
+const editorCreator = new HedyAceEditorCreator();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -250,12 +252,11 @@ function show_preview(content: string) {
     modal.preview(container, name);
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
-        const exampleEditor = turnIntoAceEditor(preview, true)
+        const exampleEditor = editorCreator.turnIntoEditor(preview, true)
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
-        exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-        const mode = getHighlighter(parseInt(level, 10));
-        exampleEditor.session.setMode(mode);
+        exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''));
+        exampleEditor.setHighliterForLevel(parseInt(level, 10));                
     }
 }
 

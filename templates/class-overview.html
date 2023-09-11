@@ -4,9 +4,9 @@
 <div>
     {% if achievement %}
     <script>
-    $(function() {
-        hedyApp.showAchievements({{ achievement|safe }}, false, "");
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            hedyApp.showAchievements({{ achievement|safe }}, false, "");
+        });
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">

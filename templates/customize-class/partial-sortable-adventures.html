@@ -33,7 +33,7 @@
             </option>
         {% endfor %}
     </select> 
-    <button title="{{_('reset_adventures')}}" class="yellow-btn text-white mr-4 ml-6 place-self-center" hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}" hx-target="#modal-target">
+    <button data-cy="reset_adventures" title="{{_('reset_adventures')}}" class="yellow-btn text-white mr-4 ml-6 place-self-center" hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}" hx-target="#modal-target">
         {{_('reset_button')}}
     </button>
 </div> 

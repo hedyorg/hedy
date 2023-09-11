@@ -28,7 +28,7 @@ Now push newbranchname and Weblate is happy again again, because it will see tha
 
 **Accept but do not click merge!**
 
-If all is in order (all tests pass), you can accept the PR. But! Do not merge it with the button since Webalte PRs require a merge commit instead of a squash merge. Mergify will do this automatically. 
+If all is in order (all tests pass), you can accept the PR. But! Do not merge it with the button since Webalte PRs require a merge commit instead of a squash merge. Mergify will do this automatically.
 
 # Fixing Weblate Merge snippet errors
 
@@ -45,7 +45,7 @@ Sometimes Weblate gets angry because we accidentally repeat a certain key. Since
 For the po files:
 `for x in */LC_MESSAGES/messages.po;do echo $x ; sort $x | uniq -c | grep "2 msgid"; done`
 
-For `messages.pot`:  
+For `messages.pot`:
 `sort messages.pot | uniq -c | grep "2 msgid"`
 
 # New strings versus fuzzy strings

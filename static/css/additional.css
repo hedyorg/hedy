@@ -10,6 +10,14 @@
   white-space: pre-wrap;
 }
 
+.code-teacher {
+  background-color: #dddddd;
+  color: #000000;
+  padding: 0.25rem;
+  font-family: monospace;
+  border-radius: 0.25rem;
+}}
+
 .command-highlighted {
   background-color: #272822;
   color: #ff6188;
@@ -137,54 +145,43 @@ body[dir='rtl'] #editor .ace_gutter-layer > * {
     z-index: 20
 }
 
-#grid-table td,
+/* #grid-table td,
 #grid-table th {
   width: 100px;
-}
+} */
 
 /* Set the height of each row */
-#grid-table tr {
+/* #grid-table tr {
   height: 50px;
-}
+} */
 
 /* Remove any default padding and margin from the table */
-#grid-table,
+/* #grid-table,
 #grid-table td,
 #grid-table th {
   padding: 0;
   margin: 0;
   border-collapse: collapse;
-}
+} */
 
 /* Add some padding and a border to the table cells */
-#grid-table td,
+/* #grid-table td,
 #grid-table th {
   padding: 8px;
   border: 1px solid #ddd;
-}
+} */
 
 /* Add some background color to the header row */
-#grid-table {
+/* #grid-table {
   width: 100%;
-}
+} */
 
-.disabledCheckBox {
-  position: relative;
-}
-
-.disabledCheckBox::before {
-  content: '✕';
+.student_adventure_checkbox::before  {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: red;
   text-align: center;
-}
-.table-header {
-  position: relative;
-  text-align: center;
-  padding: 10px;
 }
 
 .checkbox-wrapper {
