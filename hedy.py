@@ -1985,12 +1985,13 @@ class ConvertToPython_6(ConvertToPython_5):
 
 
 def sleep_after(commands, indent=True):
-    lines = commands.split()
-    if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
-        return commands
+    # lines = commands.split()
+    # if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
+    #     return commands
 
-    sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
-    return commands + "\n" + sleep_command
+    # sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
+    # return commands + "\n" + sleep_command
+    return commands
 
 
 @v_args(meta=True)
