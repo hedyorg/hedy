@@ -218,7 +218,7 @@ sections:
         -   title: Los estudiantes olvidan utilizar to/from con add/remove
             example:
                 error_text: "Sin a/de el comando añadir/borrar no funcionará.\n"
-                error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
+                error_code: "aventuras {is} historia, loro, dados\nopción {is} ¿Qué aventura te gusta más?\n{add} opción\n{remove} dados\n{print} Me encanta aventuras {at} {random}\n"
                 solution_text: "Hedy tiene que saber a qué lista debe añadirse/eliminarse el objeto.\n"
                 solution_code: "aventuras es historia, loro, dado\nopción es ¿Qué aventura te gusta más?\nañadir opción a aventuras\nborrar dado de aventuras\nimprimir Me encanta aventuras en aleatorio\n"
     -   sections:
@@ -252,30 +252,30 @@ sections:
         -   title: Los alumnos podrían utilizar dos nombres distintos para la misma variable
             example:
                 error_text: "En este ejemplo el alumno ha utilizado 'caballo' y 'nombre' para las mismas variables.\n"
-                error_code: "horse is ask 'What is your horse called?'\nif name is Bonfire print 'cool'\nelse print 'less cool!'\n"
-                solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
-                solution_code: "horse is ask 'What is your horse called'\nif horse is Bonfire print 'cool!'\nelse print 'less cool!'\n"
+                error_code: "caballo es preguntar '¿Cómo se llama tu caballo?'\nsi nombre es Hoguera imprimir 'mola'\nsi no imprimir '¡no mola tanto!'\n"
+                solution_text: "Comprueba si la variable tiene el mismo nombre en todo el código. Las pequeñas diferencias pueden ser difíciles de encontrar (por ejemplo en los plurales) pero pueden interferir con el código.\n"
+                solution_code: "caballo es preguntar 'Cómo se llama tu caballo'\nsi caballo es Hoguera imprimir '¡mola!'\nsi no imprimir '¡no mola tanto!'\n"
         -   title: Los estudiantes aún olvidan las comillas en ambos lados
             example:
                 error_text: "If commandos can get very long and students tend to forget to use quotes.\n"
-                error_code: "if name is Hedy print fun\nelse print 'meh!\n"
-                solution_text: "Always use 2 quotes in a print command.\n"
-                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!'\n"
+                error_code: "si nombre es Hedy imprimir divertido\nsi no imprimir '¡meh!\n"
+                solution_text: "Usa siempre dos comillas en un comando imprimir.\n"
+                solution_code: "si nombre es Hedy imprimir 'divertido'\nsi no imprimir '¡meh!'\n"
         -   example:
-                error_code: "if 'name' is 'Hedy' print 'fun'\nelse print 'meh!'\n"
-                solution_text: "Remove the quotes to get the code to work.\n"
-                error_text: "In this level there are no quotes around variable names.\n"
-                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!\n"
+                error_code: "si 'nombre' es 'Hedy' imprimir 'divertido'\nsi no imprimir '¡meh!'\n"
+                solution_text: "Borra las comillas para hacer que el código funcione.\n"
+                error_text: "En este nivel no hay comillas alrededor de los nombres de variables.\n"
+                solution_code: "si nombre es Hedy imprimir 'divertido'\nsi no imprimir '¡meh!\n"
             title: Los estudiantes usan comillas alredeor de los nombres de las variables
         -   title: Los estudiantes usan nombres largos para las variables que contienen dos palabras
             example:
-                error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
-                error_code: "chosen door is ask 'Which door do you pick?'\n"
-                solution_text: "Add an underscore.\n"
-                solution_code: "chosen_door is ask 'which door do you pick?'\n"
-        -   title: Students want multiple answers to be correct
+                error_text: "Una variable debería llamarse con una palabra. Puedes usar un guion bajo para conectar dos palabras. Eso cuenta como una.\n"
+                error_code: "puerta elegida es preguntar '¿Qué puerta eliges?'\n"
+                solution_text: "Añade un guion bajo.\n"
+                solution_code: "puerta_elegida es preguntar '¿qué puerta eliges?'\n"
+        -   title: Los alumnos quieren varias respuestas correctas
             example:
-                error_text: "For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.\n"
+                error_text: "Por ejemplo este alumno Hedy le dice a todos sus amigos que son divertidos, pero a otros compañeros les diría que no lo son.\n"
                 error_code: "if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'\n"
                 solution_text: "You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.\nAnother solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.\n"
                 solution_code: "friends is Jesse, David, Souf\nname is ask 'Who are you?'\nif name in friends print 'You are funny'\nelse print 'You are not funny'\n\nor\n\nname is ask 'Who are you?'\nif naam is Jesse print 'You are funny'\nif naam is David print 'You are funny'\nif naam is Souf print 'You are funny'\n"
