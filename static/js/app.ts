@@ -18,12 +18,14 @@ import { HedyEditor, EditorType } from './editor';
 // import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
 const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
+const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -349,7 +351,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
         // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
         exampleEditor.contents = exampleEditor.contents.trimRight();      
         // And add an overlay button to the editor if requested via a show-copy-button class, either
