@@ -852,7 +852,7 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
   $('#debug_continue').show();
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
-
+  console.log(hasSleep)
   if (sourceMap){
     // theGlobalSourcemap = sourceMap;
     // let Range = ace.require("ace/range").Range
@@ -1000,44 +1000,22 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
-    setTimeout: timeout,
     __future__: Sk.python3,
     debugging: true,
     breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),
-    timeoutMsg: function () {
-      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
-      $('#stopit').hide();
-      $('#runit').show();
-      if (Sk.execLimit != 1) {
-        pushAchievement("hedy_hacking");
-        return ClientMessages ['Program_too_long'];
-      } else {
-        return null;
-      }
-    },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
     // So: a very large limit in these levels, keep the limit on other onces.
-    execLimit: (function () {
-      const level = theLevel;
-      if (hasTurtle || hasPygame) {
-        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
-        return (6000000);
-      }
-      if (level < 7) {
-        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
-        return (3000000);
-      }
-      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-      return ((hasSleep) ? 20000 : 5000);
-    }) ()
+    execLimit: null
   });
   let userProgramBeginning = code.split('\n').length - originalProgramLength + 1;
   console.log(`userProgramBeginning ${userProgramBeginning}`);
-  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
+  // theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
+  console.log(code);
+  theGlobalDebugger.set_code(code.split('\n'));
   return theGlobalDebugger.asyncToPromise(function(){
     return Sk.importMainWithBody("<stdin>", true, code, true);
-  }, {'*': theGlobalDebugger.suspension_handler.bind(this)}, theGlobalDebugger).then(
+  }, {'*': (r: any) => {console.log('webo pelao y duro'); console.log(r); }}, theGlobalDebugger).then(
     theGlobalDebugger.success.bind(theGlobalDebugger)
   ).catch(theGlobalDebugger.error.bind(theGlobalDebugger));
 
