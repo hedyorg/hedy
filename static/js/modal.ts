@@ -269,6 +269,7 @@ export const error = {
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').html(message);
+    console.log('Height of errorbox:' + $('#errorbox').height());
     $('#errorbox').show();
     editor?.resize();
   }

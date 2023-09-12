@@ -17,7 +17,7 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 // import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
-import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from './cm-editor';
 import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalEditor: HedyEditor;
@@ -1468,10 +1468,18 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
     theGlobalEditor.resize();
+    if (theGlobalEditor instanceof HedyCodeMirrorEditor) {
+      console.log('Were here')
+      theGlobalEditor.switchProgrammersMode(true);
+    }
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+    if (theGlobalEditor instanceof HedyCodeMirrorEditor) {
+      console.log('Were here')
+      theGlobalEditor.switchProgrammersMode(false);
+    }
   }
 }
 

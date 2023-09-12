@@ -2,7 +2,7 @@ import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator } from "./editor
 import { Markers } from "./markers";
 import { basicSetup } from 'codemirror';
 import { EditorView } from '@codemirror/view'
-import { EditorState } from '@codemirror/state'
+import { Compartment, EditorState } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
@@ -43,21 +43,48 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
 
 export class HedyCodeMirrorEditor implements HedyEditor {
     markers: Markers | undefined;
+    private view: EditorView;
+    private readMode = new Compartment; // Configuration for the editor read mode
+    private theme = new Compartment;
+    private themeStyles: Record<string, any>;
+    
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
         console.log(element, isReadOnly, editorType, dir);
+        
+        this.themeStyles = {
+            "&": {
+                height: "352px", 
+                background: '#272822', 
+                fontSize: '15.2px', 
+                color: 'white',
+                borderRadius: '4px'
+            },
+            
+            ".cm-scroller": {
+                overflow: "auto"
+            },
+
+            ".cm-gutters": {
+                borderRadius: '4px'
+            },
+        }
+        
+        const mainEditorStyling = EditorView.theme(this.themeStyles);
+        
         const state = EditorState.create({
             doc: '',
             extensions: [
                 basicSetup,
-                oneDark
+                oneDark,
+                this.theme.of(mainEditorStyling),
+                this.readMode.of(EditorState.readOnly.of(isReadOnly)),
             ]
         });
-        const view = new EditorView({
+        this.view = new EditorView({
             parent: element,
             state: state
         });
 
-        console.log(view);
     }
 
     /**
@@ -103,7 +130,17 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * Resizes the editor after changing its size programatically
      */
     resize(): void {
-        // pass
+        // TODO: this is still not working
+        const editorHeight = $('#editor').height()!;
+        const alertBoxHeight = $('#errorbox').height()!;
+        const height = editorHeight - alertBoxHeight;
+        console.log(`Editor original height ${editorHeight}`);
+        console.log(`Editor internal height ${this.view.dom.clientHeight}`);        
+        console.log('Editor resulting height' + height);
+        this.themeStyles['&'].height = `${height}px`;
+               this.view.dispatch({
+                effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
+        });       
     }
 
     /**
@@ -167,4 +204,20 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         console.log(key, handler)
     }
 
+    public trimTrailingSpace() {
+        // pass
+    }
+
+    public switchProgrammersMode(isProgrammersMode: boolean) {                
+        if (isProgrammersMode) {
+            // Switch to programmers mode            
+            this.themeStyles['&'].height = "576px";
+        } else {
+            // Switch back to normal mode            
+            this.themeStyles['&'].height = "352px";
+        }    
+        this.view.dispatch({
+            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
+        });
+    }
 }
