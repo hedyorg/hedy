@@ -48,11 +48,11 @@ If it is a new idea, [start a discussion](https://github.com/hedyorg/hedy/discus
 * New meanings for existing keywords
 * Experimental improvements to the parser/transpiler
 
-Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, get in touch with us our show of your Hedy related creations.
+Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guideline, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki) 
+Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, get in touch with us our show of your Hedy related creations.
 
 Want to help improve Hedy?
 --------------------------
 
-We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](docs/CONTRIBUTING.md).
-
-You can follow the [Project Board](https://github.com/orgs/hedyorg/projects/1/views/5) to see what we are currently working on, and [Discussions](https://github.com/hedyorg/hedy/discussions) to stay up to date on things we are considering. Full documentation including our design and design principles can be found [DESIGN.md](docs/DESIGN.md).
+We would love to have a few more programmers join the Hedy team as regular contributors! 
+If you are interested, please consult [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
