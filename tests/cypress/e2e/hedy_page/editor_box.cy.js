@@ -21,7 +21,7 @@ describe('Is able to type in the editor box', () => {
   }
 });
 
-/* TODO: We need to fix this tests so they don't fail every time we execute them on GitHub actions
+/* TODO: We need to fix these tests so they don't fail every time we execute them on GitHub actions
 
 describe('Test editor box functionality', () => {
   beforeEach(() => {
