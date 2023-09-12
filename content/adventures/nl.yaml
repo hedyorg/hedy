@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     Welkom bij Hedy! In Level 1 ga je je eerste codes leren maken.
 
-                    Als je een code het getypt in het invoerscherm kun je op de knop 'Voer de code uit' klikken. Je programma wordt dan uitgevoerd in het uitvoerscherm.
+                    Als je een code hebt getypt in het invoerscherm kun je op de knop 'Voer de code uit' klikken. Je programma wordt dan uitgevoerd in het uitvoerscherm.
 
                     Klaar om te leren programmeren? Ga dan snel naar het eerste avontuur in het volgende tabje!
                 start_code: "{print} hallo wereld!"
@@ -18,6 +18,8 @@ adventures:
                     In het eerste level heb je misschien gemerkt dat het  `{echo}` commando maar voor één antwoord tegelijk gebruikt kan worden.
                     Bijvoorbeeld in het restaurantavontuur kun je echoën wat de klanten willen eten, of wat ze willen drinken, maar niet allebei in één zin.
                 example_code: |
+                    **Let op! Deze code werkt niet!**
+                    In Hedy veranderen commando's wel eens. Zo werkt `echo` alleen in level 1. In dit level leer je een betere manier om antwoord te echoën!
                     ```
                     {print} Welcome bij restaurant Hedy
                     {ask} Wat wil je eten?
@@ -358,6 +360,7 @@ adventures:
 
                     ### Opdracht
                     Kopieer de voorbeeldcode en maak hem kloppend door aanhalingstekens in te vullen op de lijntjes.
+                    Op de lijntjes van regel 3 en 4 moeten geen aanhalingstekens komen, maar een `{slaap}` en een `{clear}` commando. Lukt het jou om het programma te laten werken?
 
                     ### Opdracht 2
                     Ga terug naar het vorige level en kopieer je eigen verhaalcode. Maak de code nu kloppend voor dit level door er aanhalingstekens aan toe te voegen op de goede plekken.
@@ -366,6 +369,8 @@ adventures:
                     ```
                     naam {is} {ask} _Hoe heet de hoofdpersoon_
                     {print} _De hoofdpersoon heet _ naam
+                    _
+                    _
                     {print} naam _ gaat nu in het bos lopen_
                     {print} naam _ is wel een beetje bang_
                     dieren {is} 🦔, 🦉, 🐿, 🦇
@@ -1892,7 +1897,7 @@ adventures:
                     {print} Vandaag serveren we pizza of lasagne.
                     eten {is} {ask} Wat wilt u eten?
                     {print} Heerlijk! eten is ook mijn favoriet!
-                    topping {is} {ask} Wilt u eten met groente of vlees?
+                    topping {is} {ask} Met groente of vlees?
                     {print} eten met topping komt eraan!
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1937,10 +1942,11 @@ adventures:
             4:
                 story_text: |
                     ### Opdracht
-                    Kun jij de voorbeeldcode aan de praat krijgen?
+                    Kun jij de voorbeeldcode aan de praat krijgen door aanhalingstekens toe te voegen?
+                    Voeg daarna `{clear}` commando's toe om steeds maar 1 regel tekst in je uitvoerscherm te hebben.
 
                     ### Opdracht 2
-                    Kopieer je eigen restaurantcode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
+                    Kopieer je eigen restaurantcode van het vorige level en voeg aanhalingstekens en {clear} commando's toe om de code ook in dit level te laten werken.
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
                     ```
@@ -2210,7 +2216,7 @@ adventures:
                     {print} Je stapt het oude verlaten spookhuis binnen
                     {print} Meteen hoor je het geluid van een monster1
                     {print} Dus snel ren je naar de volgende kamer.
-                    {print} Maar daar wordt je opgewacht door een monster2
+                    {print} Maar daar word je opgewacht door een monster2
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
@@ -2227,7 +2233,7 @@ adventures:
                     {print} Je stapt het oude verlaten spookhuis binnen
                     {print} Meteen hoor je het geluid van een monster1
                     {print} Dus snel ren je naar de volgende kamer.
-                    {print} Maar daar wordt je opgewacht door een monster2
+                    {print} Maar daar word je opgewacht door een monster2
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
@@ -2235,7 +2241,7 @@ adventures:
             3:
                 story_text: |
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
-                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms wordt je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
+                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms word je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
                     Hedy kiest willekeurig of je overleeft of niet...
                 start_code: "{print} Ontsnap uit het spookhuis!"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
@@ -2640,7 +2646,7 @@ adventures:
                     ```
                 start_code: "# Jouw code komt hier"
     print_command:
-        name: print
+        name: "{print}"
         description: Introductie print commando
         default_save_name: print
         levels:
@@ -2678,8 +2684,8 @@ adventures:
                 story_text_2: "### Opdracht\nJe hebt in het vorige avontuur al geleerd hoe je variabelen kunt instellen met het`{is}` commando.\nDaar heb je minstens 3 variabelen gemaakt en ze gebruikt met een print commando.\nNu gaan we de variabelen interactief maken in plaats van ze in te stellen, zoals we deden in ons voorbeeld. \n\nKopieer je code van het vorige avontuur en maak de variabelen interactief door `{ask}` commando's te gebruiken.\n"
                 example_code_2: "```\nlievelingsdier is ask Wat is je lievelingsdier?\nprint Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} {ask} Hoe heet je?\n{print} Hoi naam\nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar oud."
-        name: "vraag"
-        description: Introductie vraag commando
+        name: "{ask}"
+        description: Introduction ask command
         default_save_name: vraag_commando
     quotation_marks:
         description: Introduction quotation marks
@@ -2799,11 +2805,11 @@ adventures:
                         {print} 'INDRINGER!'
                         {print} 'Je kunt deze computer niet gebruiken!'
                     ```
-        name: Repeat
+        name: "{repeat}"
         description: repeat command
         default_save_name: repeat_command
     repeat_command_2:
-        name: Herhaal 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
         levels:
@@ -2859,7 +2865,7 @@ adventures:
         description: Introducing maths
         default_save_name: maths
     elif_command:
-        name: Elif
+        name: "{elif}"
         description: elif
         levels:
             17:
@@ -2876,18 +2882,18 @@ adventures:
         levels:
             2:
                 story_text: "Nu je `{ask} hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!\n\n### Opdracht\nMaak de steen, papier, schaarcode interactief door met `{ask}` commando.\n"
-                example_code: "```\nckeuze is _\n{print} Ik kies keuze\n```\n"
+                example_code: "```\nkeuze is _\n{print} Ik kies keuze\n```\n"
                 start_code: "# place your code here"
     is_command:
-        name: is
-        description: introductie is commando
-        default_save_name: is_commando
+        name: "{is}"
+        description: introducing is command
+        default_save_name: is_command
         levels:
             2:
-                story_text: "## Variabelen\nJe kunt een waarde in een woord opslaan met het commando `{is}`. Dit noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele overal in de zin plaatsen waar je wil en Hedy verplaatst de variabele dan met de waarde. Kijk maar:\n"
+                story_text: "## Variabelen\nJe kunt een waarde in een woord opslaan met het commando `{is}`. Dit noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele overal in de zin plaatsen waar je wil en Hedy vervangt de variabele dan voor de waarde. Kijk maar:\n"
                 example_code: "```\nnaam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud\n```\n"
                 story_text_2: "### Opdracht\nTijd om je eigen variabelen te maken!\nIn het voorbeeld hebben we de variabele 'lievelingsdier' gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.\nMaak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.\n"
-                example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van favorite_animals\n```\n"
+                example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud."
             14:
                 start_code: |-
@@ -2926,7 +2932,7 @@ adventures:
                         {print} 'Jij bent Hedy niet'
                     ```
     random_command:
-        name: willekeurig
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:
@@ -2940,16 +2946,12 @@ adventures:
                     dieren {is} hond, kat, kangoeroe
                     {print} dieren {at} {random}
                     ```
-
-                story_text_2: |-
-                    Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`. Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
-
+                story_text_2: |
+                    Je kunt {at} {random} ook in een zin gebruiken.
                 example_code_2: |
                     ```
-                    taarten {is} aardbei, chocolade
-                    {add} appel {to_list} taarten
-                    {remove} chocolade {from} taarten
-                    {print} taarten {at} {random}
+                    eten {is} broodje, pizza, salade, burrito
+                    {print} Ik ga een eten {at} {random} lunchen.
                     ```
                 start_code: "dieren {is} hond, kat, kangoeroe\n{print} dieren {at} {random}\n"
                 story_text_3: "### Opdracht\nProbeer het `{at} {random}` commando uit door je eigen gameshow te maken (zoals Miljoenenjacht op tv). De kandidaat kiest een koffer of een deur waarachter een grote prijs verstopt kan zitten!\nLukt het jou om zo'n programma te maken? De eerste regels zijn alvast te vinden in het voorbeeld\n"
@@ -2975,7 +2977,7 @@ adventures:
                        {print} 'is ' geluksgetallen[i]
                     ```
     add_remove_command:
-        name: voeg toe en verwijder uit
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:
@@ -2988,7 +2990,7 @@ adventures:
                 example_code_3: "```\n{print} Verrassingsmilkshake\nsmaken {is} aardbei, chocolade, vanille\nhoop {is} {ask} Welke smaak hoop je dat het wordt?\n_\nallergie {is} {ask} Voor welke smaak ben je allergsich?\n_\n{print} Je krijgt een {at} {random} milkshake\n```\n"
                 start_code: "dieren {is} hond, kat, kangoeroe\nleuk {is} {ask} Welk dier vind jij leuk?\n{add} leuk {to_list} dieren\nniet_leuk {is} {ask} Welk dier vind jij niet leuk?\n{remove} niet_leuk {from} dieren\n{print} Ik kies dieren {at} {random}\n"
     sleep_command:
-        name: slaap
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -3006,7 +3008,7 @@ adventures:
                     {sleep} 2
                     {print} groen!
     if_command:
-        name: als anders
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:
@@ -3037,7 +3039,7 @@ adventures:
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
     in_command:
-        name: in
+        name: "{in}"
         description: Introducing the in command
         default_save_name: in_command
         levels:
@@ -3061,7 +3063,7 @@ adventures:
                     {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
                     {else} {print} 'mwah'
     for_command:
-        name: voor
+        name: "{for}"
         description: for command
         default_save_name: for
         levels:
@@ -3097,7 +3099,7 @@ adventures:
                     {print} 'Wie niet weg is, is gezien'
                     ```
     and_or_command:
-        name: en of
+        name: "{and} & {or}"
         description: introducing and or
         default_save_name: and or
         levels:
@@ -3117,7 +3119,7 @@ adventures:
                         {print} 'Jij bent de echte Hedy!'
                     ```
     while_command:
-        name: zolang
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:
@@ -3135,6 +3137,39 @@ adventures:
                     Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
                     Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
                 example_code: "```\nantwoord = 0\n{while} antwoord != 25\n    antwoord = {ask} 'What is 5 times 5?'\n{print} 'Je hebt een correct antwoord gegeven'\n```\n"
+    clear_command:
+        name: "{clear}"
+        description: clear command
+        default_save_name: clear_command
+        levels:
+            4:
+                start_code: |
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                story_text: |
+                    Tijd voor nog een nieuw commando! Met de code `{clear}` wis je alle tekst van je scherm. Zo kun je voorkomen dat je uitvoerscherm te vol raakt.
+                    Let op! Gebruik bij het `{clear}` commando ook altijd een `{sleep}` anders wist Hedy je scherm zo vlug dat je de tekst niet eens gezien hebt!
+                example_code: |
+                    ```
+                    print '3'
+                    sleep
+                    clear
+                    print '2'
+                    sleep
+                    clear
+                    print '1'
+                    sleep
+                    clear
+                    print 'VERRASSING!'
+                    ```
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures

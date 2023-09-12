@@ -67,7 +67,7 @@
         <div id="errorbox"
           class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
           style="display: none;">
-          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
+          <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -77,7 +77,7 @@
             </div>
             <div>
               <p class="caption font-bold">Oops</p>
-              <p class="details text-sm">An error occurred.</p>
+              <p class="details text-sm" data-cy="error_details">An error occurred.</p>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
         <div id="warningbox"
           class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
-          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
+          <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
           <div class="flex">
             <div class="py-1">
                 <div id="warningbox_spinner" style="display: none">

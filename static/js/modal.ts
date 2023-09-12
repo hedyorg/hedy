@@ -2,6 +2,8 @@
  * The modal we pop up to have children confirm things
  */
 
+import { HedyEditor } from "./editor";
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -186,13 +188,13 @@ class Modal {
   }
 }
 
-let editor: AceAjax.Editor | undefined;
+let editor: HedyEditor | undefined;
 
 /**
  * The error that appears underneath the code editor
  */
 export const success = {
-  setEditor(e: AceAjax.Editor) {
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
@@ -219,29 +221,34 @@ export const success = {
 }
 
 export const error = {
-  setEditor(e: AceAjax.Editor) {
+  //TODO: change this to the new interface of HedyEditor
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
-  hide(fade: boolean = false) {
-    // Remove the fading immediately
-    $("#errorbox").stop().fadeOut();
-    $("#warningbox").stop().fadeOut();
-    $("#warningbox_spinner").stop().fadeOut();
+  // hide(fade: boolean = false) {
+  //   // Remove the fading immediately
+  //   $("#errorbox").stop().fadeOut();
+  //   $("#warningbox").stop().fadeOut();
+  //   $("#warningbox_spinner").stop().fadeOut();
 
-    if (!fade) {
-      $('#errorbox').hide();
-      $('#warningbox').hide();
-      $('#warningbox_spinner').hide();
-    } else {
-      $('#errorbox').fadeOut(2500);
-      $('#warningbox').fadeOut(2500);
-      $('#warningbox_spinner').fadeOut(2500);
-    }
+  //   if (!fade) {
+  //     $('#errorbox').hide();
+  //     $('#warningbox').hide();
+  //     $('#warningbox_spinner').hide();
+  //   } else {
+  //     $('#errorbox').fadeOut(2500);
+  //     $('#warningbox').fadeOut(2500);
+  //     $('#warningbox_spinner').fadeOut(2500);
+  //   }
 
+  //   editor?.resize();
+  // },
+  hide() {
+    $('#errorbox').hide();
+    $('#warningbox').hide();
     editor?.resize();
   },
-
   showWarning(caption: string, message: string) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
@@ -249,15 +256,15 @@ export const error = {
     editor?.resize();
   },
 
-  showWarningSpinner(){
-    $('#warningbox_icon').hide();
-    $('#warningbox_spinner').show();
-  },
+  // showWarningSpinner(){
+  //   $('#warningbox_icon').hide();
+  //   $('#warningbox_spinner').show();
+  // },
 
-  hideWarningSpinner(){
-    $('#warningbox_icon').show();
-    $('#warningbox_spinner').hide();
-  },
+  // hideWarningSpinner(){
+  //   $('#warningbox_icon').show();
+  //   $('#warningbox_spinner').hide();
+  // },
 
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);

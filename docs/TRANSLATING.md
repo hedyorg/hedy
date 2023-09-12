@@ -18,19 +18,19 @@ Click on Hedy to start with this project.
 
 Now you'll see the different component within Hedy you can work on:
 
-![](image/TRANSLATING/1652368824875.png)
+![](1652368824875.png)
 
 On this page you see the progress of every component, calculated over all languages. At the time of this screenshot level-defaults was translated for 61% over 19 languages.
 
 Click on "Languages" in the menu on top to get to this screen:
 
-![](image/TRANSLATING/1652368938016.png)
+![](1652368938016.png)
 
 Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is not reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
 
 Now click on Dutch to reach the following screen:
 
-![](image/TRANSLATING/1652369040371.png)
+![](1652369040371.png)
 
 The components are shown again, but now with progress shown calculated for only Dutch. If you actually want to translate files for us, you have to register with Weblate.
 
@@ -38,7 +38,7 @@ Now, lets start looking at texts to translate.
 
 Click on Adventures to reach this screen:
 
-![](image/TRANSLATING/1652369170523.png)
+![](1652369170523.png)
 
 Now you see an overview of this component. Little too much information maybe. Don't worry, just start with "Strings marked for edit". These are strings that have the English text in place of the translation or have been translated, but the source has changed. All texts start with the English source text, this way every text that has not been translated yet, is at least visible in English on the website.
 
@@ -47,11 +47,11 @@ At the right, you can choose between Translate or Zen.
 
 If you choose for Translate for the Failing checks: Placeholders, you might see something like this:
 
-![](image/TRANSLATING/1652370304289.png)
+![](1652370304289.png)
 
 Again, maybe a little too much information, but a lot is very helpful. Browse a little through this info. There is info about texts in the vicinity, or suggestions of computer translations. If you think this is too much info for now, you can choose for the Zen option which looks like this:
 
-![](image/TRANSLATING/1652370483598.png)
+![](1652370483598.png)
 
 You see more strings on the same page for faster translation, but less helpful info per translation.
 
@@ -59,3 +59,7 @@ One important thing to notice is the **grayed pieces of text**. This is computer
 
 If you run into any problems, let us know, so we can address them here for future translators. You can reach us at [hello@hedy.org](mailto:hello@hedy.org), or you can join our [Discord #translators channel](https://discord.gg/N7XXDtcNRY)
 
+
+## Weblate development tips
+
+For advanced weblate development instructions, see [WEBLATE.md](WEBLATE.md).

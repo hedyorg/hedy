@@ -23,42 +23,42 @@ levels:
             text: "Słowa kodowe będą wyświetlane na różowo.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         8:
             header: Programowanie w Hedy
-            text: "Dane wyjściowe są wyświetlane po lewej stronie.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            text: "Dane wyjściowe są wyświetlane po prawej stronie.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         9:
             header: Programowanie w Hedy
             text: "Dane wyjściowe mogą być również rysunkiem.\n<iframe class=\"embedded-hedy\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     1:
         2:
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/1/raw\"></iframe>\n"
-            header: 'Hedy poziom 1: {print}'
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
+            header: '{print}'
             text: "Pierwszym kodem, którego możesz użyć na poziomie 1 jest `{print}`.\n\n`{print}` służy do wyświetlania tekstu na ekranie.\n"
         3:
-            header: 'Hedy poziom 1: {ask}'
-            text: "Drugim kodem, którego możesz użyć w poziomie 1 jest `{ask}`.\n\n`{ask}` służy do zadawania pytań, na które można odpowiedzieć.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
+            header: 'Komenda {print}'
+            text: "Możesz zmienić tekst po poleceniu wydruku, aby wypisać dowolny tekst.\n\nEwentualnie, możesz wypisać kilka linijek tekstu przez dodanie kolejnej linii kodu również zaczynającej się komendą `{print}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         4:
-            text: "Ostatnim kodem tekstowym, którego możesz użyć w poziomie 1 jest `{echo}`.\n\n`{echo}` służy do powtórzenia odpowiedzi z `{ask}`.\n"
-            header: 'Hedy poziom 1: {echo}'
-            editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
+            text: "Drugim kodem tekstowym, którego możesz użyć w poziomie 1 jest `{ask}`.\n\n`{ask}` służy do zadania pytania, na które użytkownik może odpowiedzieć.\n"
+            header: '{ask} '
+            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
         6:
             header: Programowanie!
-            text: "Przygody są wyświetlane w zakładkach.\n"
+            text: "Korzystając z komend `{print}`, `{ask}` i `{echo}` możecie już stworzyć małą opowieść.\nTo dobry moment na spróbowanie swoich sił z przygodami takimi, jak Papuga, Opowieść i Kamień, Papier, Nożyce.\n"
         1:
             header: Witamy na poziomie 1!
             text: "Poziom 1 rozpoczniemy od tworzenia historii w Hedy!\n\nDo stworzenia interaktywnych historii potrzebujemy trzech kodów tekstowych.\n"
         5:
-            header: Programowanie!
-            text: "za pomocą `{print}`, `{ask}` i `{echo}` można już stworzyć małą historię.\nTo dobry moment na wypróbowanie przygód Papugi i Papier, Kamień, Nożyce.\n"
+            header: '{echo}'
+            text: "Jak mogliście zobaczyć w poprzednim przykładzie. Jeśli użyjecie komendy `{ask}`, możecie zadać pytanie.\n\nOdpowiedź jednak nie wyświetla się na ekranie.\n\nJeśli chcecie, aby odpowiedź się wyświetliła, możecie użyć ostaniej komendy tego poziomu: `{echo}`.\n\n`{echo}` używa się, aby powtórzyć odpowiedź do pytania zadanego komendą `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         7:
             header: Programowanie!
-            text: "Za pomocą żółtych przycisków ze strzałkami można kopiować przykłady.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
+            text: "Przygody są dostępne w zakładkach.\n"
             editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
-            header: Rysowanie z żółwiem
-            text: "Po zapoznaniu się z kodami tekstowymi, przyjrzymy się teraz kodom rysunkowym.\n"
+            header: Programowanie!
+            text: "Użyj zółtych strzałek, aby skopiować przykłady.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         9:
-            header: 'Rysowanie z żółwiem: {forward}'
+            header: 'Rysowanie z żółwiem'
             text: "`{forward}` służy do przesuwania żółwia do przodu.\n"
         10:
             header: 'Rysowanie z żółwiem: {turn}'
@@ -155,6 +155,10 @@ levels:
             text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens....\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
         9:
+            header: Ready, Set, Go!
+            text: "Enjoy the adventures in level 4!\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/clear_command/4/raw\"></iframe>\n"
+        10:
             header: Ready, Set, Go!
             text: "Enjoy the adventures in level 4!\n"
     6:

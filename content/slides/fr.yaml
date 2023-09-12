@@ -2,7 +2,7 @@ levels:
     0:
         8:
             header: Programmer en Hedy
-            text: "Les sorties apparaissent sur le côté gauche.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            text: "Les sorties apparaissent sur le côté droit.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         1:
             header: Bienvenue sur Hedy !
             text: "Hedy est un langage de programmation.\n"
@@ -32,41 +32,41 @@ levels:
             header: Bienvenue au niveau 1 !
             text: "Commençons le niveau 1 en créant des histoires en Hedy !\n\nNous avons besoin de trois codes textuels pour créer des histoires interactives.\n"
         2:
-            header: 'Hedy niveau 1 : {print}'
+            header: '{print}'
             text: "Le premier code que tu peux utiliser au niveau 1 est `{print}`.\n\n`{print}` permet d'afficher du texte à l'écran.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/1/raw\"></iframe>\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         3:
-            header: 'Hedy niveau 1 : {ask}'
-            text: "Le second code que tu peux utiliser dans le niveau 1 est `{ask}`.\n\n`{ask}` crée une question qui peut être répondue.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
+            header: 'La commande {print}'
+            text: "Tu peux changer le texte après la commande affiche par ce que tu veux.\n\nTu peux également imprimer plusieurs lignes en ajoutant une autre ligne de code qui commence également par `{print}`.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         4:
-            header: 'Hedy niveau 1 : {echo}'
-            text: "Le dernier code que tu peux utiliser au niveau 1 est `{echo}`.\n\n`{echo}` répète la réponse d'un `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/parrot/1/raw\"></iframe>\n"
+            header: '{ask} '
+            text: "Le deuxième code que tu peux utiliser au niveau 1 est `{ask}`.\n\n`{ask}` est utilisé pour poser une question à laquelle on peut répondre.\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
         5:
-            header: Programmons !
-            text: "Avec `{print}`, `{ask}` et `{echo}` tu peux déjà écrire une petite histoire.\nC'est le bon moment pour essayer les aventures Perroquet, Histoire et Pierre, feuille, ciseaux.\n"
+            header: '{echo}'
+            text: "Comme tu as pu le voir dans l'exemple précédent, si tu utilises la commande `{ask}`, tu peux poser une question.\n\nCependant, la réponse n'apparaît pas dans l'écran de sortie.\n\nSi tu veux que la réponse s'affiche, tu peux utiliser la commande finale de ce niveau: `{echo}`.\n\n`{echo}` est utilisée pour répéter la réponse d'un `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         6:
             header: Programmons !
-            text: "Les aventures sont sous la forme d'onglets.\n"
+            text: "Avec `{print}`, `{ask}` et `{echo}` tu peux déjà créer une petite histoire.\nIl est temps d'essayer l'histoire du Perroquet et les aventures \"Pierre, Feuille, Ciseaux\".\n"
         7:
             header: Programmons !
-            text: "Les boutons de flèche jaune permettent de copier les exemples.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
+            text: "Les aventures sont affichées dans des onglets.\n"
             editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         8:
-            header: Dessinons avec la tortue
-            text: "Après avoir vu les codes textuels, voyons les codes de dessin.\n"
+            header: Programmons!
+            text: "Les boutons en forme de flèches jaunes peuvent être utilisés pour copier des exemples.\n<iframe class=\"fragment\" src=\"/hedy/1\">\n"
         9:
-            header: 'Dessinons avec la tortue : {forward}'
-            text: "`{forward}` fait avancer la tortue.\n"
+            header: 'Dessinons avec la tortue'
+            text: "Maintenant que nous avons vu les codes textuels, nous allons désormais nous attarder sur les codes en forme de dessins.\n"
         10:
-            header: 'Dessinons avec la tortue : {turn}'
-            text: "`{turn}` est utilisé pour faire tourner la tortue à gauche ou a droite.\n"
+            header: 'Dessinons avec la tortue : {forward}'
+            text: "`{forward}` est utilisé pour faire avancer la tortue.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: "`{turn}` is used to make the turtle turn left or right.\n"
+            header: 'Dessinons avec la tortue: {turn}'
+            text: "`{turn}` est utilisée pour faire tourner la tortue vers la gauche ou la droite.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     9:
         1:
@@ -101,64 +101,68 @@ levels:
             editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
     2:
         2:
-            text: "To make or 'set' a variable we use the `{is}` command\n"
+            text: "Pour créer ou 'définir' une variable nous utilisons la commande `{is}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
             header: Variables
         3:
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
-            header: Interactive
-            text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}`  command.\n"
+            header: Interactif
+            text: "Nous pouvons aussi définir une variable en posant des questions.\n\nLa réponse à la question posée est alors stockée dans la variable..\n\nDe cette façon nous n'avons pas besoin de la commande `{echo}`  .\n"
         1:
-            header: Welcome to level 2
-            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store informatie.\n\nFor example: a name, age or favorite sports team.\n"
+            header: Bienvenue au niveau 2
+            text: "Dans ce niveau tu vas apprendre à utiliser les variables.\n\nUne variable est un mot qui peut être utilisé pour conserver des informations.\n\nPar exemple: un nom, un âge ou ton équipe sportive favorite.\n"
         4:
-            header: Multiple variables
-            text: "Now that we use variables, we can use multiple variables instead of just one `{echo}`command.\n"
+            header: Variables multiples
+            text: "Maintenant que nous utilisons les variables, nous pouvons utiliser des variables multiples au lieu d'une seule commande `{echo}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         5:
             header: Sleep
-            text: "You can also use the `{sleep}` command to pause the code for a while.\n"
+            text: "Tu peux aussi utiliser la commande `{sleep}` pour mettre le code en pause pendant un moment.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         6:
             header: Sleep 5
-            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command.\n"
+            text: "Tu peux ajouter un nombre après la commande `{sleep}` si tu veux que la pause soit plus longue.\n\nSi tu le veux, tu peux même utiliser une variable au lieu d'un nombre pour contrôler la durée de la commande sleep.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
         7:
-            header: Let the programming fun begin!
-            text: "Enjoy the adventures in level 3!\n"
+            header: Que le plaisir de programmer commence!
+            text: "Profite des aventures du niveau 3!\n"
     4:
         2:
-            header: Problem
-            text: "In the previous levels, you might have come across this problem:\n"
+            header: Problème
+            text: "Dans les niveaux précédents, tu as peut-être été confronté à ce problème:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/default/4/raw\"></iframe>\n"
         3:
-            header: Fixing it with quotation marks
-            text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code.\n"
+            header: Résolvons-le avec les guillemets
+            text: "Dans ce niveau, nous résoudrons ce problème en utilisant des guillemets.\n\nNotre code ressemblera aussi davantage à un \"vrai\" code Python.\n"
         5:
-            text: "This also goes for the `{ask}` command.\n"
+            text: "C'est aussi valable pour la commande `{ask}`.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-            header: Quotation marks with ask
+            header: Guillemets avec ask
         1:
-            header: Welcome to level 4
-            text: "In this level you will learn how to use quotation marks.\n"
+            header: Bienvenue au niveau 4
+            text: "Dans ce niveau, tu apprendras à te servir des guillemets.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         4:
-            header: Quotation marks with print
-            text: "Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.\n"
+            header: Guillemets avec print
+            text: "A chaque fois que tu utilises la commande`{print}`, il faut que tu mettes le texte que tu veux voir apparaître à l'écran entre guillemets.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         6:
-            header: Quotation marks and variables
-            text: "You do not want variable names to be printed on the screen.\nThis is why variables should be left out of the quotation marks, like this:\n"
+            header: Guillemets et variables
+            text: "Tu ne veux pas que le nom des variables soit affiché à l'écran.\nC'est pourquoi les variables doivent être laissées en dehors des guillemets, comme ça:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         7:
-            header: Quotation marks and variables
-            text: "When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.\nThe rest of the sentence however, does need quotation marks. That looks like this:\n"
+            header: Guillemets et variables
+            text: "Quand les noms des variables sont utilisés au milieu d'une phrase, tu dois laisser les variables en dehors des guillemets.\nNéanmoins, le reste de la phrase a besoin de guillemets. Cela ressemble à ça:\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
         8:
             header: Quotation marks and contractions
             text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens....\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
         9:
+            header: Ready, Set, Go!
+            text: "Enjoy the adventures in level 4!\n"
+            editor: "<iframe class=\"fragment\" src=\"/adventure/clear_command/4/raw\"></iframe>\n"
+        10:
             header: Ready, Set, Go!
             text: "Enjoy the adventures in level 4!\n"
     6:
@@ -292,31 +296,31 @@ levels:
             text: "Enjoy the adventures in level 15!\n"
     3:
         1:
-            header: Welcome to level 3
-            text: "In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.\n"
+            header: Bienvenue au niveau 3
+            text: "Dans ce niveau tu apprendras à faire une liste, à ajouter et retirer des éléments de tes listes et à choisir un élément au hasard parmi une liste.\n"
         2:
-            header: Making a list
-            text: "You make a list with `{is}`.\n\nSeperate the items on your list with a comma.\n"
+            header: Créons une liste
+            text: "Tu crées une liste avec `{is}`\nSépare les éléments de ta liste avec une virgule.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
         3:
-            header: At random
-            text: "You can use the list with the `{at}` `{random}` command.\nThe computer will randomly pick one item of the list.\nEvery time you run this code the output will differ.\n"
+            header: Au hasard
+            text: "Tu peux utiliser la liste avec la commande `{at}` `{random}`.\nL'ordinateur tirera au hasard un élément de la liste.\nA chaque fois que tu exécuteras le code, le tirage changera.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/dice/3/raw\"></iframe>\n"
         4:
-            header: At random in a sentence
-            text: "You can use the `{at}` `{random}` command in a sentence as well.\n"
+            header: Au hasard dans une phrase
+            text: "Tu peux également utiliser la commande `{at}` `{random}` dans une phrase.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
         5:
-            header: Add to
-            text: "You can add items to a list with the `{add}` `{to}` command.\n\nYou can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.\nThis way you can let the player decide what to add to the list.\n"
+            header: Ajouter à
+            text: "Tu peux ajouter des éléments à une liste avec la commande `{add}` `{to}`.\n\nTu peux choisir ce qu'il faut ajouter à la liste ou tu peux combiner la commande `{add}` `{to}` avec la commande `{ask}` .\nDe cette façon, tu peux laisser le joueur décider de ce qu'il faut ajouter à la liste.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         6:
-            header: Remove from
-            text: "The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.\nThis command removes an item from a list.\n"
+            header: Retirer de
+            text: "Le contraire de la commande `{add}` `{to}` est la commande  `{remove}` `{from}`.\nCette commande retire un élément d'une liste.\n"
             editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         9:
-            header: Let's get to work!
-            text: "Enjoy the adventures in level 3!\n"
+            header: Il est temps de passer à l'action!
+            text: "Profite des aventures du niveau 3!\n"
     11:
         1:
             header: Welcome to level 11

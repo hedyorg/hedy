@@ -4,7 +4,6 @@ from enum import Enum
 
 from flask import g, jsonify, request
 from flask_babel import gettext
-
 import utils
 import hedy_content
 import hedy
@@ -142,7 +141,7 @@ class StatisticsModule(WebsiteModule):
         matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
@@ -173,7 +172,7 @@ class StatisticsModule(WebsiteModule):
         _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
         matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
 
-        return jinja_partials.render_partial("customize-grid/grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              current_page="grid_overview",
@@ -227,13 +226,27 @@ class StatisticsModule(WebsiteModule):
 
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
         class_info = self.db.get_class_customizations(class_id)
+        if class_info and 'adventures' in class_info:
+            # it uses the old way so convert it to the new one
+            class_info['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+            for adventure, levels in class_info['adventures'].items():
+                for level in levels:
+                    class_info['sorted_adventures'][str(level)].append(
+                        {"name": adventure, "from_teacher": False})
+
+            self.db.update_class_customizations(class_info)
+        else:
+            # Create a new default customizations object in case it doesn't have one
+            class_info = self._create_customizations(class_id)
+
         class_adventures = class_info.get('sorted_adventures')
 
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
-                adventure_names[adv_key] = name
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
@@ -242,7 +255,8 @@ class StatisticsModule(WebsiteModule):
         for key, value in class_adventures.items():
             adventure_list = []
             for adventure in value:
-                if not adventure['name'] == 'next':
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
                     adventure_list.append(adventure_names[adventure['name']])
             class_adventures_formatted[key] = adventure_list
 
@@ -254,7 +268,11 @@ class StatisticsModule(WebsiteModule):
                 ticked_adventures[student] = []
                 current_program = {}
                 for _, program in programs.items():
-                    name = adventure_names[program['adventure_name']]
+                    # Old programs sometimes don't have adventures associated to them
+                    # So skip them
+                    if 'adventure_name' not in program:
+                        continue
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
                     if name in customized_level:
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
@@ -271,6 +289,21 @@ class StatisticsModule(WebsiteModule):
                         ticked_adventures[student].append(current_program)
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+
+    def _create_customizations(self, class_id):
+        sorted_adventures = {}
+        for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+        customizations = {
+            "id": class_id,
+            "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+            "opening_dates": {},
+            "other_settings": [],
+            "level_thresholds": {},
+            "sorted_adventures": sorted_adventures
+        }
+        self.db.update_class_customizations(customizations)
+        return customizations
 
 
 def add(username, action):

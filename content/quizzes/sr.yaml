@@ -1939,7 +1939,7 @@ levels:
             question_score: '10'
         9:
             question_text: What line(s) in this code should start with 4 spaces?
-            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
             mp_choice_options:
             -   option: Line 2 and 4
                 feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
@@ -2037,9 +2037,9 @@ levels:
             -   option: You must be shorter than 120 cm to go on the roller coaster
                 feedback: '> means greater than'
             -   option: There are no length restrictions to go on the roller coaster
+                feedback: There are.
             question_text: Which statement is true about this roller coaster?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
-            feedback: There are.
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             correct_answer: A
             hint: '> means greater than'
             question_score: '10'
@@ -2070,7 +2070,7 @@ levels:
             -   option: "'player 2 loses'"
                 feedback: Look at who has the highest score!
             -   option: "'It is a tie'"
-            feedback: No it's not, one player has a higher score
+                feedback: No it's not, one player has a higher score
             hint: You win the game by having the most points
             question_score: '10'
         2:
@@ -2098,7 +2098,7 @@ levels:
             -   option: In line 4 = should have been used instead of ==
                 feedback: No that's not it
             -   option: In line 4 <= should have been used instead of >=
-            feedback: No that's not it
+                feedback: No that's not it
             correct_answer: B
             hint: The symbols are right
             question_score: '10'
@@ -2116,4 +2116,154 @@ levels:
                 feedback: That's not quite right.
             correct_answer: B
             hint: The last one should say you win.
+            question_score: '10'
+    15:
+        1:
+            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
+            code: "answer = 0\nwhile answer _ 'Amsterdam'\n    answer = ask 'What is the capital city of the Netherlands?'\nprint 'You have given the correct answer'\n"
+            mp_choice_options:
+            -   option: '`=!`'
+                feedback: That is not right.
+            -   option: '`==`'
+                feedback: You don't have to keep guessing if you've given the right answer.
+            -   option: '`!=`'
+                feedback: Correct
+            -   option: '`=`'
+                feedback: That's not it
+            correct_answer: C
+            hint: Keep guessing until you say Amsterdam
+            question_score: '10'
+        2:
+            question_text: Which of these codes has used the correct symbol(s)?
+            mp_choice_options:
+            -   option: "```\n{while} name = Hedy\n```\n"
+                feedback: No
+            -   option: "```\n{while} age = 24\n```\n"
+                feedback: No
+            -   option: "```\n{while} time > 0\n```\n"
+                feedback: Yes!
+            -   option: "```\n{while} answer == yes'\n```\n"
+                feedback: A quotation mark is missing
+            correct_answer: C
+            hint: When you are comparing two answers you should use ==
+            question_score: '10'
+        3:
+            question_text: Which command should be filled in on the two blanks?
+            code: "_ age >= 18\n  print 'you are not allowed in this bar'\n"
+            mp_choice_options:
+            -   option: '`{in}`'
+                feedback: That's not it
+            -   option: '`{while}`'
+                feedback: You are right
+            -   option: '`{for}`'
+                feedback: That's not it
+            -   option: '`{range}`'
+            feedback: That's not it
+            correct_answer: B
+            hint: You are not allowed in the bar as long as you are 17 or younger
+            question_score: '10'
+        4:
+            question_text: What's wrong with this code?
+            mp_choice_options:
+            -   option: In line 1 == should be used instead of =
+                feedback: No that's not it
+            -   option: Line 2 misses quotation marks
+                feedback: That's not right
+            -   option: In line 5 if should have been used instead of while
+                feedback: That's not it
+            -   option: In line 5 != should have been used instead of ==
+                feedback: You are correct
+            code: "options = 1, 2, 3, 4, 5, 6\nprint 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\nwhile thrown == 6\n    thrown = options at random\n    print 'You threw ' thrown\n    tries = tries + 1\nprint 'Yes! You have thrown 6 in ' tries ' tries.'\n"
+            correct_answer: D
+            hint: There is something wrong in line 5
+            question_score: '10'
+        5:
+            question_text: What should be placed on the blank to make this program work correctly?
+            code: "wetness = 10\nwhile wetness != 0\n    print 'Your hair is still wet, hair dryer on!'\n    sleep 1\n    clear\n    wetness _\n\nprint 'All dry!'\n"
+            mp_choice_options:
+            -   option: = wetness
+                feedback: That will not change anything
+            -   option: = wetness = 1
+                feedback: You can't have two times = in one line
+            -   option: = wetness - 1
+                feedback: You are correct!
+            -   option: = wetness + 1
+                feedback: The program should count down
+            correct_answer: C
+            question_score: '10'
+            hint: wetness should get less each time
+        6:
+            question_text: what is wrong with this code?
+            code: "lives = 100\n    {while} lives != 0\n    answer = {ask} 'Are you annoyed yet?'\n{if} answer == 'yes'\n    lives = lives - 1\n"
+            mp_choice_options:
+            -   option: while should be if
+                feedback: No that is not right
+            -   option: if should be while
+                feedback: No that is not right
+            -   option: Line 3 should start with more indentation
+                feedback: No that's not right
+            -   option: Line 2 should start with less indentation
+                feedback: That is correct
+            correct_answer: D
+            hint: Look closely at the indentation
+            question_score: '10'
+        7:
+            question_text: How should this program be changed to that it works?
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'\n"
+            mp_choice_options:
+            -   option: '... change the first {if} into a {while}'
+                feedback: Perfect!
+            -   option: '... change the second {if} into a {while}'
+                feedback: That's not quite right.
+            -   option: '... change the third {if} into a {while}'
+                feedback: That's not quite right.
+            -   option: '... change the fourth {if} into a {while}'
+                feedback: That's not quite right.
+            correct_answer: A
+            hint: The last one should say you win.
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   feedback: False!
+                option: The lights and air freshener will turn off after 1 minute
+            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
+                feedback: Great job
+            -   option: The air freshener sprays once you leave the toilet.
+                feedback: It only sprays when you're in there.
+            -   option: The lights will always stay on.
+                feedback: That wouldn't be right.
+            question_text: Which statement is true about this automated toilet system?
+            code: "while toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    sleep 60\nelse\n    lights = 'off'\n"
+            hint: The block after the while command keeps happening while the toilet is occupied.
+            question_score: '10'
+            correct_answer: B
+        9:
+            mp_choice_options:
+            -   option: Nothing. 1600 is not programmed into the app.
+                feedback: No
+            -   option: you could eat some more
+                feedback: No
+            -   option: That is alright
+                feedback: Yes!
+            -   option: You have eaten enough for today
+                feedback: No
+            question_text: What will the diet app say if you have eaten 1600 calories today?
+            code: "chocolate = {ask} 'How many calories have you eaten today?'\n  {while} calories <= 1000\n      {print} 'You could eat some more'\n  {while} calories > 1000 and calories =< 2000\n      {print} 'That is alright'\n  {while} calories > 2000\n      {print} 'You have had enough for today'\n"
+            correct_answer: C
+            hint: 1600 is between 1000 and 2000
+            question_score: '10'
+        10:
+            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
+            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'\n"
+            mp_choice_options:
+            -   option: name_player_1
+                feedback: You are right!
+            -   option: name_player_2
+                feedback: No they are losing!
+            -   option: points_player_1
+                feedback: You should fill in a name, not a number
+            -   option: points_player_2
+                feedback: You should fill in a name, not a number
+            correct_answer: A
+            hint: You win the game by having the most points. Your name should appear on the screen
             question_score: '10'
