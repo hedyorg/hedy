@@ -52,8 +52,9 @@ export interface HedyEditor {
 
   /**
    * Resizes the editor after changing its size programatically
+   * @param newHeight the new height of the editor, if supplied
    */
-  resize(): void;
+  resize(newHeight?: number): void;
 
   /**
    * Focuses the text area for the current editor
