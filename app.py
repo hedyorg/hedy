@@ -65,6 +65,11 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
 jinja_partials.register_extensions(app)
@@ -2244,6 +2249,9 @@ if __name__ == '__main__':
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
