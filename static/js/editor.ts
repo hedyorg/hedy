@@ -91,6 +91,11 @@ export interface HedyEditor {
    * @param handler  the event handler function
    */
   on(key: OnEditorEventParameters[0], handler: OnEditorEventParameters[1]): void;
+  /**
+   * Trim trailing whitespaces
+   */
+  trimTrailingSpace: () => void;
+
   // Very sneaky need to change this
   markers: Markers | undefined;
 }
