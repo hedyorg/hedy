@@ -1,3 +1,11 @@
+import inspect
+"""
+    Any exception added in this file must be also added to error-messages.txt
+    So we can translate the error message. The exception must also be assigned
+    an Exception Type in the exception_types dictionary in statistics.py
+"""
+
+
 class HedyException(Exception):
     def __init__(self, error_code, **arguments):
         """Create a new HedyException.
@@ -72,14 +80,14 @@ class ParseException(HedyException):
         self.fixed_code = fixed_code
 
 
-class UnquotedEqualityCheck(HedyException):
+class UnquotedEqualityCheckException(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
                          line_number=line_number)
         self.location = [line_number]
 
 
-class AccessBeforeAssign(HedyException):
+class AccessBeforeAssignException(HedyException):
     def __init__(self, name, access_line_number, definition_line_number):
         super().__init__('Access Before Assign',
                          name=name,
@@ -284,3 +292,6 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
+
+
+HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}
