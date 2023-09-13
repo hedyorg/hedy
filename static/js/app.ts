@@ -1015,7 +1015,7 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
   theGlobalDebugger.set_code(code.split('\n'));
   return theGlobalDebugger.asyncToPromise(function(){
     return Sk.importMainWithBody("<stdin>", true, code, true);
-  }, {'*': (r: any) => {console.log('webo pelao y duro'); console.log(r); }}, theGlobalDebugger).then(
+  }, {'*': (r: any) => {console.log('Test'); console.log(r); }}, theGlobalDebugger).then(
     theGlobalDebugger.success.bind(theGlobalDebugger)
   ).catch(theGlobalDebugger.error.bind(theGlobalDebugger));
 
