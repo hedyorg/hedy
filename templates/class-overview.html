@@ -49,8 +49,6 @@
                 <button class="green-btn" id="add-student" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
-            <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
-            <button class="green-btn" id="logs_button" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
             <button class="green-btn" id="grid_overview_button" onclick="window.location.href = '/grid_overview/class/{{class_info.id}}'">{{_('grid_overview')}}</button>
         </div>
         <div class="flex ltr:ml-auto rtl:mr-auto">
