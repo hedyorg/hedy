@@ -162,15 +162,17 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     moveCursorToEndOfFile(): void {
         const endPos = this.view.state.doc.length;
         this.view.dispatch(
-            this.view.state.update({ selection: {anchor: endPos, head: endPos}})
+            this.view.state.update({ selection: { anchor: endPos }})
         );
     }
 
     /**
-     * Clears the selected text
+     * Clears the selected text leaving the anchor in its current position
      */
-    clearSelection(): void {
-        // pass
+    clearSelection(): void {        
+        const currentSelection = this.view.state.selection;
+        const currentAnchor = currentSelection.ranges[0].anchor;
+        this.view.dispatch(this.view.state.update({ selection: {anchor: currentAnchor}}));
     }
 
     /**
