@@ -5,6 +5,7 @@ import { EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
+import { deleteTrailingWhitespace } from '@codemirror/commands'
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
      * This function should initialize the editor and set up all the required
@@ -206,7 +207,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     }
 
     public trimTrailingSpace() {
-        // pass
+        deleteTrailingWhitespace(this.view);
     }
 
     public on(key: Parameters<typeof this.editorEvent.on>[0], handler: any) {
