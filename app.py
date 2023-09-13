@@ -65,6 +65,11 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
 jinja_partials.register_extensions(app)
@@ -356,6 +361,7 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
+    querylog.log_value(lang=session['lang'])
 
     if 'keyword_lang' not in session:
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
@@ -1663,12 +1669,12 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(
+    programs = normalize_public_programs(DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
         adventure_filter=adventure))
-    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
+    favourite_programs = normalize_public_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
@@ -1686,8 +1692,8 @@ def explore():
         current_page='explore')
 
 
-def normalize_explore_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore page.
+def normalize_public_programs(programs):
+    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
 
     Does the following thing:
 
@@ -2114,23 +2120,28 @@ def public_user_page(username):
     if not user:
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
+    page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username)
+        user_programs = DATABASE.public_programs_for_user(username,
+                                                          limit=10,
+                                                          pagination_token=page)
+        next_page_token = user_programs.next_page_token
+        user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
             favourite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
-        if len(user_programs) >= 5:
-            user_programs = user_programs[:5]
 
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
+        print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
-
+        next_page_url = url_for('public_user_page', username=username, **dict(request.args,
+                                page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2140,7 +2151,8 @@ def public_user_page(username):
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
-            certificate_message=certificate_message)
+            certificate_message=certificate_message,
+            next_page_url=next_page_url)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
@@ -2238,6 +2250,9 @@ if __name__ == '__main__':
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.

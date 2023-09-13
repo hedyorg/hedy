@@ -222,10 +222,20 @@ class Database:
 
         return dynamo.ResultPage(ret, programs.next_page_token)
 
-    def public_programs_for_user(self, username):
+    def public_programs_for_user(self, username, limit=None, pagination_token=None):
         # Only return programs that are public but not submitted
-        programs = PROGRAMS.get_many({"username": username}, reverse=True)
-        return [p for p in programs if p.get("public") == 1 and not p.get("submitted", False)]
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+                                          reverse=True, limit=limit, pagination_token=pagination_token)
+        ret = []
+        for program in programs:
+            if program.get("public") != 1 or program.get("submitted", False):
+                continue
+            ret.append(program)
+
+            if limit is not None and len(ret) >= limit:
+                break
+
+        return dynamo.ResultPage(ret, programs.next_page_token)
 
     def program_by_id(self, id):
         """Get program by ID.

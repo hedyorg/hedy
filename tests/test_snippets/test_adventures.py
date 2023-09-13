@@ -27,8 +27,8 @@ def collect_snippets(path, filtered_language=None):
             yaml = YamlFile.for_file(f)
 
             for name, adventure in yaml['adventures'].items():
-                # code in next sometimes uses examples from higher levels so is potentially wrong
-                if not name == 'next':
+                # the default tab sometimes contains broken code to make a point to learners about changing syntax.
+                if not name == 'default':
                     for level_number in adventure['levels']:
                         if level_number > hedy.HEDY_MAX_LEVEL:
                             print('content above max level!')
@@ -122,9 +122,7 @@ class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
-        keywords = ['Introduction', 'Introductie', 'Başlangıç', 'Introducción']
-
-        if snippet is not None and len(snippet.code) > 0 and snippet.adventure_name not in keywords:
+        if snippet is not None and len(snippet.code) > 0:
             try:
                 self.single_level_tester(
                     code=snippet.code,

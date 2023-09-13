@@ -378,7 +378,7 @@ class ForTeachersModule(WebsiteModule):
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": adventure, "from_teacher": False})
             self.db.update_class_customizations(customizations)
-            min_level = min(customizations['levels'])
+            min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
         else:
             # Since it doesn't have customizations loaded, we create a default customization object.
             # This makes further updating with HTMX easier

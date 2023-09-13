@@ -2944,9 +2944,9 @@ levels:
         1:
             question_text: "Welk symbool moet op het lijntje komen te staan?"
             code: |
-              naam _ {ask} 'Wie ben jij?'
-              {if} naam == 'Hedy'
-                  {print}  'Ik ook!'
+                naam _ {ask} 'Wie ben jij?'
+                {if} naam == 'Hedy'
+                    {print}  'Ik ook!'
             mp_choice_options:
             -   option: "`=>`"
                 feedback: "Dit symbool bestaat niet."
@@ -2962,25 +2962,25 @@ levels:
         2:
             question_text: "Welke van deze codes gebruikt = of == correct?"
             mp_choice_options:
-            -   option: | 
-                  ```
-                  {if} naam = Hedy
-                  ```
+            -   option: |
+                    ```
+                    {if} naam = Hedy
+                    ```
                 feedback: "No"
             -   option: |
-                  ```
-                  {if} leeftijd = 24
-                  ```
+                    ```
+                    {if} leeftijd = 24
+                    ```
                 feedback: "No"
             -   option: |
-                  ```
-                  antwoord = {ask} 'Wat is je antwoord?'
-                  ```
+                    ```
+                    antwoord = {ask} 'Wat is je antwoord?'
+                    ```
                 feedback: "Yes!"
             -   option: |
-                  ```
-                  antwoord == {ask} 'Hoe gaat het?'
-                  ```
+                    ```
+                    antwoord == {ask} 'Hoe gaat het?'
+                    ```
                 feedback: "No"
             correct_answer: "C"
             hint: "Je gebruikt == bij het vergelijken van twee antwoorden"
@@ -3009,13 +3009,13 @@ levels:
         4:
             question_text: "Wat is er mis met deze code?"
             code: |
-              prijs = 10
-              geld = {ask} Hoeveel geld heb je?
-              kopen = {ask} 'Wil je deze teddybeer kopen?'
-              {if} money >= prijs {and} kopen == 'yes'
-                  {print} 'Je kunt de beer kopen!'
-              {else}
-                  {print} 'Je kunt de beer helaas niet kopen!'
+                prijs = 10
+                geld = {ask} Hoeveel geld heb je?
+                kopen = {ask} 'Wil je deze teddybeer kopen?'
+                {if} money >= prijs {and} kopen == 'yes'
+                    {print} 'Je kunt de beer kopen!'
+                {else}
+                    {print} 'Je kunt de beer helaas niet kopen!'
             mp_choice_options:
             -   option: "In regel moet == worden gebruikt in plaats van =."
                 feedback: "Dat klopt niet"
@@ -3031,32 +3031,32 @@ levels:
         5:
             question_text: "Welk symbool moet op de lijntjes ingevuld worden als de film geschikt is voor kinderen van 12 jaar en ouder? "
             code: |
-              leeftijd = {ask} 'Hoe oud ben je?'
-              ticket = {ask} 'Heb je een kaartje?'
-              {if} leeftijd _ and ticket == 'ja'
-                  {print} 'Je mag de zaal in.'
-              {else}
-                  {print} 'Je mag de zaal niet in!'
+                leeftijd = {ask} 'Hoe oud ben je?'
+                ticket = {ask} 'Heb je een kaartje?'
+                {if} leeftijd _ and ticket == 'ja'
+                    {print} 'Je mag de zaal in.'
+                {else}
+                    {print} 'Je mag de zaal niet in!'
             mp_choice_options:
             -   option: |
-                  ```
-                  > 12
-                  ```
+                    ```
+                    > 12
+                    ```
                 feedback: "12 jarigen mogen ook naar binnen"
             -   option: |
-                  ```
-                  >= 12
-                  ```
+                    ```
+                    >= 12
+                    ```
                 feedback: "Fantastisch!"
             -   option: |
-                  ```
-                  < 12
-                  ```
+                    ```
+                    < 12
+                    ```
                 feedback: "Deze kinderen zijn te jong!"
             -   option: |
-                  ```
-                  <= 12
-                  ```
+                    ```
+                    <= 12
+                    ```
                 feedback: "Deze kinderen zijn te jong"
             correct_answer: "B"
             hint: "> betekent groter dan"
@@ -3064,12 +3064,12 @@ levels:
         6:
             question_text: "Hoe vaak moet je aangeven dat je je ergert voordat dit irritante spel stopt?"
             code: |
-              levens = 2
-              {repeat} 10 {times}
-                  {if} levens != 0
-                      antwoord = {ask} 'Erger je je al?'
-                  {if} antwoord == 'ja'
-                      levens = levens - 1
+                levens = 2
+                {repeat} 10 {times}
+                    {if} levens != 0
+                        antwoord = {ask} 'Erger je je al?'
+                    {if} antwoord == 'ja'
+                        levens = levens - 1
             mp_choice_options:
             -   option: "10 keer"
                 feedback: "Het stopt na 2x"
@@ -3085,20 +3085,20 @@ levels:
         7:
             question_text: "Wat moet worden ingevuld op de 3 lijntjes?"
             code: |
-              {print} 'Raad het getal'
-              getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-              getal = getallen {at} {random}
-              spel = 'aan'
-              {for} i {in} {range} 1 {to} 10
-                  {if} spel == 'aan'
-                      gok = {ask} 'Welk getal denk je?'
-                      {if} gok < getal
-                          {print} _
-                      {if} gok > getal
-                          {print} _
-                      {if} gok == getal
-                          {print} _
-                          spel = 'over'
+                {print} 'Raad het getal'
+                getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                getal = getallen {at} {random}
+                spel = 'aan'
+                {for} i {in} {range} 1 {to} 10
+                    {if} spel == 'aan'
+                        gok = {ask} 'Welk getal denk je?'
+                        {if} gok < getal
+                            {print} _
+                        {if} gok > getal
+                            {print} _
+                        {if} gok == getal
+                            {print} _
+                            spel = 'over'
             mp_choice_options:
             -   option: "'Lager' en 'Hoger' en 'Je wint!'"
                 feedback: "Bijna."
@@ -3114,11 +3114,11 @@ levels:
         8:
             question_text: "Wat klopt over deze achtbaan?"
             code: |
-              lengte = {ask} 'Vul je lengte in in cm'
-              {if} lengte > 120
-                  {print} 'Sorry, je mag niet in deze achtbaan.'
-              {else}
-                  {print} 'Geniet van je ritje!'
+                lengte = {ask} 'Vul je lengte in in cm'
+                {if} lengte < 120
+                    {print} 'Sorry, je mag niet in deze achtbaan.'
+                {else}
+                    {print} 'Geniet van je ritje!'
             mp_choice_options:
             -   option: "Je moet langer zijn dan 120 cm om in de achtbaan te mogen"
                 feedback: "Juist!"
@@ -3134,13 +3134,13 @@ levels:
         9:
             question_text: "Na hoeveel chocolaatjes krijg je buikpijn volgens deze fitbit?"
             code: |
-              chocolaatjes = {ask} 'Hoeveel chocolaatjes heb je al gegeten?'
-                {if} chocolaatjes <= 2
-                    {print} 'Dat is nog gezond'
-                {if} chocolaatjes > 2 and chocolaatjes =< 8
-                    {print} 'Dat is best veel'
-                {if} chocolaatjes > 8
-                    {print} 'Daar krijg je buikpijn van!'
+                chocolaatjes = {ask} 'Hoeveel chocolaatjes heb je al gegeten?'
+                  {if} chocolaatjes <= 2
+                      {print} 'Dat is nog gezond'
+                  {if} chocolaatjes > 2 and chocolaatjes =< 8
+                      {print} 'Dat is best veel'
+                  {if} chocolaatjes > 8
+                      {print} 'Daar krijg je buikpijn van!'
             mp_choice_options:
             -   option: "1 of meer"
                 feedback: "Nee"
@@ -3171,3 +3171,153 @@ levels:
             correct_answer: "B"
             hint: "Je wint het spel als je de meeste punten hebt"
             question_score: "10"
+    15:
+        1:
+            question_text: 'Welk symbool moet worden gebruikt op het streepje? Tip: Je moet blijven raden tot het antwoord goed is.'
+            code: "antwoord = 0\n{while} antwoord _ 'Amsterdam'\n    antwoord = {ask} 'Wat is de hoofdstad van Nederland?'\nprint 'Je hebt het juiste antwoord gegeven'\n"
+            mp_choice_options:
+            -   option: '`=!`'
+                feedback: Dat klopt niet.
+            -   option: '`==`'
+                feedback: Je hoeft niet te blijven raden als je het goede antwoord hebt gegeven
+            -   option: '`!=`'
+                feedback: Correct
+            -   option: '`=`'
+                feedback: Dat klopt niet
+            correct_answer: C
+            hint: Blijf raden tot de speler Amsterdam zegt.
+            question_score: '10'
+        2:
+            question_text: Welk van deze codes gebruikt het juiste symbool/symbolen?
+            mp_choice_options:
+            -   option: "```\n{while} naam = Hedy\n```\n"
+                feedback: Nee
+            -   option: "```\n{while} leeftijd = 24\n```\n"
+                feedback: Nee
+            -   option: "```\n{while} tijd > 0\n```\n"
+                feedback: Ja!
+            -   option: "```\n{while} antwoord == ja'\n```\n"
+                feedback: Hier mist een aanhalingsteken
+            correct_answer: C
+            hint: Je gebruikt == wanneer je twee dingen vergelijkt
+            question_score: '10'
+        3:
+            question_text: Welk commando moet op het streepje?
+            code: "_ leeftijd >= 18\n  print 'Jij mag deze bar niet in'\n"
+            mp_choice_options:
+            -   option: '`{in}`'
+                feedback: Dat is hem niet.
+            -   option: '`{while}`'
+                feedback: Goed gedaan!
+            -   option: '`{for}`'
+                feedback: Dat is hem niet.
+            -   option: '`{range}`'
+                feedback: Dat is hem niet.
+            correct_answer: B
+            hint: Je mag de bar niet in als je 17 of jonger bent.
+            question_score: '10'
+        4:
+            question_text: Wat is er mis met deze code?
+            code: "opties = 1, 2, 3, 4, 5, 6\nprint 'Gooi zo snel mogelijk 6!'\ngegooid = 0\npogingen = 0\n{while} gegooid == 6\n    gegooid = opties {at} {random}\n    print 'Je gooide ' gegooid\n    pogingen = pogingen + 1\nprint 'Hoera! Je gooide 6 in ' pogingen ' pogingen.'\n"
+            mp_choice_options:
+            -   option: In regel 1 moet == worden gebruikt in plaats van =
+                feedback: Dat klopt niet
+            -   option: Regel 2 mist aanhalingstekens
+                feedback: Dat klopt niet
+            -   option: In regels 5 moet {if} gebruikt worden in plaats van {while}
+                feedback: Dat klopt niet
+            -   option: In regel 5 moet != gebruikt worden in plaats van ==
+                feedback: Dat is juist!
+            correct_answer: D
+            hint: Er is iets mis in regel 5
+            question_score: '10'
+        5:
+            question_text: Wat moet er op het streepje komen om dit programma goed te laten werken?
+            code: "vochtgehalte = 10\n{while} vochtgehalte != 0\n    print 'Je haar is nog nat, zet de föhn aan!'\n    {sleep} 1\n    {clear}\n    vochtgehalte _\n\nprint 'Helemaal droog!'\n"
+            mp_choice_options:
+            -   option: = vochtgehalte
+                feedback: Dit verandert niets
+            -   option: = vochtgehalte = 1
+                feedback: Dat klopt niet
+            -   option: = vochtgehalte - 1
+                feedback: Super!
+            -   option: = vochtgehalte + 1
+                feedback: Het programma moet aftellen
+            correct_answer: C
+            question_score: '10'
+            hint: Het haar moet steeds minder vochtig zijn.
+        6:
+            question_text: Wat is er mis met deze code?
+            code: "levens = 100\n    {while} levens != 0\n    antwoord = {ask} 'Ben je al boos?'\n{if} antwoord == 'ja'\n    levens = levens - 1\n"
+            mp_choice_options:
+            -   option: "{while} moet {if} zijn."
+                feedback: Nee dat klopt niet
+            -   option: "{if} moet {while} zijn."
+                feedback: Nee dat klopt niet
+            -   option: Bij regel 3 moet meer worden ingesprongen
+                feedback: Nee dat klopt niet
+            -   option: Bij regel 2 moet minder worden ingesprongen
+                feedback: That is correct
+            correct_answer: D
+            hint: Er wordt verkeerd ingesprongen
+            question_score: '10'
+        7:
+            question_text: Wat moet er in deze code veranderen?
+            code: "{print} 'Raad mijn getal'\nnumemrs = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnummer = nummers {at} {random}\ngame = 'aan'\n{if} game == 'aan'\n    gok = {ask} 'Welk getal denk jij dat het is?'\n    {if} gok < nummer\n        {print} _\n    {if} gok > nummer\n        {print} _\n    {if} gok == nummer\n        {print} _\n        spel = 'over'\n"
+            mp_choice_options:
+            -   option: 'De eerste {if} moet een {while} worden'
+                feedback: Perfect!
+            -   option: 'De tweede {if} moet een {while} worden'
+                feedback: Helaas.
+            -   option: 'De derde {if} moet een {while} worden'
+                feedback: Helaas.
+            -   option: 'De vierde {if} moet een {while} worden'
+                feedback: Helaas.
+            correct_answer: A
+            hint: De laatste moet een {if} blijven.
+            question_score: '10'
+        8:
+            question_text: Wat is waar over dit automatische toilet systeem?
+            code: "{while} toilet == 'bezet'\n    licht = 'aan'\n    lucgtverfrisser_sprayt = 'ja'\n    {sleep} 60\nelse\n    licht = 'uit'\n"
+            mp_choice_options:
+            -   option: De lichten en luchtverfrisser gaan uit na 1 minuut
+                feedback: Fout!
+            -   option: De luchtverfrisser sprayt een keer per minuut en de lichten blijven aan zolang je op de wc zit.
+                feedback: Geweldig!
+            -   option: De luchtverfrisser sprayt als je het toilet verlaat.
+                feedback: Hij sprayt alleen als hij bezet is.
+            -   option: Het licht blijft altijd aan.
+                feedback: Dat klopt niet.
+            hint: Het blok na het {while} commando blijft gebeuren zolang het toilet bezet is.
+            question_score: '10'
+            correct_answer: B
+        9:
+            question_text: Wat zegt de dieetapp als je 1600 caloriëen hebt gegeten die dag?
+            code: "calorie = {ask} 'Hoeveel calorieën heb je vandaag gegeten?'\n  {while} calorie <= 1000\n      {print} 'Je kunt nog wat eten'\n  {while} calorie > 1000 and calorie =< 2000\n      {print} 'Prima'\n  {while} calorie > 2000\n      {print} 'Je hebt genoeg gehad'\n"
+            mp_choice_options:
+            -   option: Niets. 1600 calorieën is niet geprogrammeerd
+                feedback: Nee
+            -   option: Je kunt nog wat eten
+                feedback: Nee
+            -   option: Prima
+                feedback: Ja!
+            -   feedback: Nee
+                option: Je hebt genoeg gehad
+            correct_answer: C
+            hint: 1600 ligt tussen 1000 en 2000
+            question_score: '10'
+        10:
+            question_text: 'Wat moet worden ingevuld op het streepje?  Tip: de speler met de meeste punten staat voor.'
+            code: "naam_speler_1 = {ask} 'Naam speler 1:'\nnaam_speler_2 = {ask} 'Naam speler 2:'\n{while} punten_speler_1 > punten_speler_2\n    {print} _ ' staat voor!'\n"
+            mp_choice_options:
+            -   option: naam_speler_1
+                feedback: Fantastisch!
+            -   option: name_player_2
+                feedback: Nee die verliest!
+            -   option: punten_speler_1
+                feedback: Het moet een naam zijn, geen getal
+            -   option: punten_speler_2
+                feedback: Het moet een naam zijn, geen getal
+            correct_answer: A
+            hint: Je wint het spel als je de meeste punten hebt. Je naam komt dan in beeld.
+            question_score: '10'
