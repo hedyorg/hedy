@@ -130,19 +130,23 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * Resizes the editor after changing its size programatically
      */
     resize(newHeight?: number): void {
+        if (newHeight === undefined) {
+            console.log('Error! When resizing a CodeMirror instance, you need to provide the new height');
+            return;
+        }
         // Change the size of the container element of the editor
         // Via reconfiguring the editors theme
         this.themeStyles['&'].height = `${newHeight}px`;
                this.view.dispatch({
                 effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
-        });       
+        });
     }
 
     /**
      * Focuses the text area for the current editor
      */
     focus(): void {
-        // pass
+        this.view.focus();
     }
 
     /**
@@ -156,7 +160,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * Moves to the cursor to the end of the current file
      */
     moveCursorToEndOfFile(): void {
-        // pass
+        const endPos = this.view.state.doc.length;
+        this.view.dispatch(
+            this.view.state.update({ selection: {anchor: endPos, head: endPos}})
+        );
     }
 
     /**
