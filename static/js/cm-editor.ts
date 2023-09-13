@@ -1,10 +1,10 @@
-import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator } from "./editor";
+import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator, EditorEvent } from "./editor";
 import { Markers } from "./markers";
 import { basicSetup } from 'codemirror';
-import { EditorView } from '@codemirror/view'
-import { Compartment, EditorState } from '@codemirror/state'
+import { EditorView, ViewUpdate } from '@codemirror/view'
+import { EditorState, Compartment, StateEffect } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
-
+import { EventEmitter } from "./event-emitter";
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
      * This function should initialize the editor and set up all the required
@@ -47,19 +47,20 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private readMode = new Compartment; // Configuration for the editor read mode
     private theme = new Compartment;
     private themeStyles: Record<string, any>;
-    
+    private editorEvent = new EventEmitter<EditorEvent>({change: true});
+
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
-        console.log(element, isReadOnly, editorType, dir);
-        
+        console.log(editorType, dir);
+
         this.themeStyles = {
             "&": {
-                height: "352px", 
-                background: '#272822', 
-                fontSize: '15.2px', 
+                height: "352px",
+                background: '#272822',
+                fontSize: '15.2px',
                 color: 'white',
                 borderRadius: '4px'
             },
-            
+
             ".cm-scroller": {
                 overflow: "auto"
             },
@@ -68,9 +69,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 borderRadius: '4px'
             },
         }
-        
+
         const mainEditorStyling = EditorView.theme(this.themeStyles);
-        
+
         const state = EditorState.create({
             doc: '',
             extensions: [
@@ -137,8 +138,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // Change the size of the container element of the editor
         // Via reconfiguring the editors theme
         this.themeStyles['&'].height = `${newHeight}px`;
-               this.view.dispatch({
-                effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
+        this.view.dispatch({
+            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
         });
     }
 
@@ -162,17 +163,17 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     moveCursorToEndOfFile(): void {
         const endPos = this.view.state.doc.length;
         this.view.dispatch(
-            this.view.state.update({ selection: { anchor: endPos }})
+            this.view.state.update({ selection: { anchor: endPos } })
         );
     }
 
     /**
      * Clears the selected text leaving the anchor in its current position
      */
-    clearSelection(): void {        
+    clearSelection(): void {
         const currentSelection = this.view.state.selection;
         const currentAnchor = currentSelection.ranges[0].anchor;
-        this.view.dispatch(this.view.state.update({ selection: {anchor: currentAnchor}}));
+        this.view.dispatch(this.view.state.update({ selection: { anchor: currentAnchor } }));
     }
 
     /**
@@ -203,25 +204,23 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         return `${level}`;
     }
 
-
-    public on(key: any, handler: any) {
-        console.log(key, handler)
-    }
-
     public trimTrailingSpace() {
         // pass
     }
 
-    public switchProgrammersMode(isProgrammersMode: boolean) {
-        if (isProgrammersMode) {
-            // Switch to programmers mode
-            this.themeStyles['&'].height = "576px";
-        } else {
-            // Switch back to normal mode
-            this.themeStyles['&'].height = "352px";
-        }    
-        this.view.dispatch({
-            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
-        });
+    public on(key: Parameters<typeof this.editorEvent.on>[0], handler: any) {
+        // This type of handler works for when the view is updated
+        // If in the future we need to add another type of handler to the editor
+        // that hooks to the DOM, We can use the domEventHandlers configuration for that
+        if (key === 'change') {
+            const transaction = this.view.state.update({
+                effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
+                    if (v.docChanged) {
+                        handler();
+                    }
+                }))
+            })
+            this.view.dispatch(transaction);
+        }
     }
 }

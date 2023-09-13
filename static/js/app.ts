@@ -253,6 +253,8 @@ function attachMainEditorEvents(editor: HedyEditor) {
   
   // If prompt is shown and user enters text in the editor, hide the prompt.
   editor.on('change', function() {
+    // TODO: When the user clicks back in the editor when an ask is open
+    // it then loses focus the moment the user starts editing again
     if (askPromptOpen) {
       stopit();
       theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
