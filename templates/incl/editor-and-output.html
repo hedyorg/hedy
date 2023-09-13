@@ -52,7 +52,7 @@
         </div>
 
         <!-- The actual editor -->
-        <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
           class="w-full flex-1 text-lg rounded {% if raw %} max-h-56 {% endif %}"></div>
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
