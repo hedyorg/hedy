@@ -1,0 +1,19 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{# This template holds the outer parts of the page, while the partial is the one we will be rendering trtough HTMX calls #}
+{{
+        render_partial('partial-class-live-stats.html',
+            class_info=class_info,
+            class_overview=class_overview,
+            dashboard_options=dashboard_options,
+            attempted_adventures=attempted_adventures,
+            dashboard_options_args=dashboard_options_args,
+            adventures=adventures,
+            max_level=max_level,
+            current_page=current_page,
+            page_title=page_title
+        )
+}}
+
+{% endblock %}

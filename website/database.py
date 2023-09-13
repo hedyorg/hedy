@@ -74,7 +74,7 @@ ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
 PARSONS = dynamo.Table(storage, "parsons", "id")
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id")
-
+CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
 # list of users.
@@ -125,6 +125,10 @@ PROGRAM_STATS = dynamo.Table(
 QUIZ_STATS = dynamo.Table(
     storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
+
+# Program stats also includes a boolean array indicating the order of successful and non-successful runs.
+# In order to not flood the database, this history array can maximally have 100 entries.
+MAX_CHART_HISTORY_SIZE = 50
 
 
 class Database:
@@ -290,6 +294,19 @@ class Database:
         # Store the adventure data in this table in case it doesn't match the programs table.
         STUDENT_ADVENTURES.create(student_adventure)
         return student_adventure
+
+    def get_class_errors(self, class_id):
+        # Fetch a student adventure with id formatted as studentID-adventureName-level
+        return CLASS_ERRORS.get({"id": class_id})
+
+    def update_class_errors(self, class_errors):
+        # Swap the ticked value when a request is sent
+        return CLASS_ERRORS.put(class_errors)
+
+    def store_class_errors(self, class_errors):
+        # create a new class errors object
+        CLASS_ERRORS.create(class_errors)
+        return class_errors
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
@@ -796,14 +813,25 @@ class Database:
         data = [QUIZ_STATS.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
-    def add_program_stats(self, id, level, number_of_lines, exception):
+    def add_program_stats(self, id, level, number_of_lines, exception, error_message=None):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
-
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
+        program_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
+
+        # chart history and error history are used for visual elements on the live dashboard, see statistics.py
+        # for how they are read from the database
+        chart_history = []
+        if program_stats.records:
+            chart_history = program_stats.records[0].get('chart_history', [])
+        chart_slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
+
         if exception:
             add_attributes[exception] = dynamo.DynamoIncrement()
+            new_chart_history = list(chart_history) + [0]
         else:
             add_attributes["successful_runs"] = dynamo.DynamoIncrement()
+            new_chart_history = list(chart_history) + [1]
+        add_attributes["chart_history"] = new_chart_history[-chart_slice:]
 
         return PROGRAM_STATS.update(key, add_attributes)
 
