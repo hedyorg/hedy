@@ -1,3 +1,0 @@
-Helping build Hedy
-------------
-
