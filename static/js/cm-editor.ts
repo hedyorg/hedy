@@ -100,7 +100,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     * @returns the string of the current program in the editor
     */
     public get contents(): string {
-        return '';
+        return this.view.state.doc.toString();
     }
 
     /**
@@ -108,23 +108,24 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * @param content the content that wants to be set in the editor
      */
     public set contents(content: string) {
-        // pass
-        console.log(content);
+        let transaction = this.view.state.update({ changes: { from: 0, to: this.view.state.doc.length, insert: content } });
+        this.view.dispatch(transaction);
     }
 
     /**     
      * @returns if the editor is set to read-only mode
      */
     public get isReadOnly(): boolean {
-        return false;
+        return this.view.state.readOnly;
     }
 
     /**
      * Sets the read mode of the editor
      */
     public set isReadOnly(isReadMode: boolean) {
-        // pass
-        console.log(isReadMode)
+        this.view.dispatch({
+            effects: this.readMode.reconfigure(EditorState.readOnly.of(isReadMode))
+        });
     }
 
     /**
