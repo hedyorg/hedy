@@ -6,24 +6,26 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No Nível 1 você pode usar os comandos `{print}`, `{ask}` e `{echo}`.
-                    Digite seu código no campo de programação. Ou pressione o botão verde no bloco de código de exemplo, e o código será digitado para você!
-                    Experimente o código você mesmo com o botão verde 'Executar código' abaixo do campo de programação.
+                    Bem-vindo(a) a Hedy! No Nível 1 você pode começar escrevendo uma história.
 
-                    Você pode imprimir texto na tela usando o comando `{print}`.     
+                    Experimente o código você mesmo com o botão 'Executar código' verde debaixo do campo de programação.
+
+                    Preparado? Então vá para a próxima aba para aprender o seu primeiro comando!
                 start_code: "{print} olá mundo!"
             2:
                 story_text: |
-                    No nível 2 aprendemos dois novos comandos: `{is}` e `{sleep}`.
-                    Você pode nomear uma palavra com `{is}`. Isso é chamado de variável. Neste exemplo, criamos uma variável chamada nome e uma variável chamada idade. Você pode usar a palavra nome em qualquer lugar do seu código e ela será substituída pela Hedy, assim:
-
-                    Desta forma você não precisa mais do comando `{echo}`!
+                    Parabéns! Você chegou ao nível 2.Você provavelmente já fez alguns códigos incríveis!
+                    No primeiro nível você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
+                    Por exemplo, na aventura no restaurante, você podia ecoar o que o cliente queria comer, ou o que ele queria beber, mas não os dois em uma mesma frase.
                 start_code: "{print} olá mundo!"
-                example_code: "```\nnome {is} Hedy\nidade {is} 15\n{print} nome tem idade anos\n```\n"
-                story_text_2: "`{print}` ainda funciona da mesma forma, mas o comando `{ask}` mudou. Você precisa usar uma variável no comando `{ask}` também. Se parece com isso:\n"
+                example_code: "```\n{print} Bem vindo ao Hedy's\n{ask} O que gostaria de comer?\n{echo} Então você quer\n{ask} O que gostaria de beber?\n{echo} Então você quer\n```\n"
+                story_text_2: "Se o jogador digitar um hambúrguer e um refrigerante, você não pode dizer \"então você quer um hambúrguer e um refrigerante\", mas sim tem que fazer duas linhas separadas.\nAlém disso, o comando `{echo}` somente ecoa a palavra no final da frase. Então você não pode dizer \"o seu hambúrguer vai estar pronto daqui a pouco!\".\n\nIsso muda no nível 2. No nível 2 você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.\nEntão vamos para a próxima aba!\n"
             3:
                 story_text: |
-                    No nível 3 você pode fazer uma lista. Você pode deixar o computador escolher algo aleatório da lista. Você faz isso com `{at} {random}`.
+                    No último nível você aprendeu o que é uma variável e como usá-las para fazer sua aventura mais interativa.
+                    Mas... isso não é a única coisa que você pode fazer com variáveis! Você também pode usar variáveis para fazer listas.
+                    E você pode até deixar a Hedy escolher uma palavra aleatória da lista, o que lhe permite criar jogos de verdade!
+                    Dê uma olhada na próxima aba!
                 start_code: "{print} olá mundo!"
             4:
                 start_code: "{print} 'Olá mundo'"
@@ -828,7 +830,7 @@ adventures:
         name: Key presses
         description: Try linking a keyboard key to a command!
     repeat_command_2:
-        name: Repeat 2
+        name: "{repeat} 2"
         description: repeat command 2
         default_save_name: repeat_command_2
         levels:
@@ -861,7 +863,7 @@ adventures:
         description: Harry Potter adventures
         default_save_name: Harry Potter
     print_command:
-        name: print
+        name: "{print}"
         description: Introduction print command
         default_save_name: print
         levels:
@@ -884,7 +886,7 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
     ask_command:
-        name: ask
+        name: "{ask}"
         description: Introduction ask command
         default_save_name: ask_command
         levels:
@@ -903,7 +905,7 @@ adventures:
                 example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
     is_command:
-        name: is
+        name: "{is}"
         description: introducing is command
         default_save_name: is_command
         levels:
@@ -922,7 +924,7 @@ adventures:
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     random_command:
-        name: random
+        name: "{random}"
         description: introducing at random command
         default_save_name: random_command
         levels:
@@ -939,7 +941,7 @@ adventures:
                 story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     add_remove_command:
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
         default_save_name: add_remove_command
         levels:
@@ -952,7 +954,7 @@ adventures:
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
                 start_code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -961,7 +963,7 @@ adventures:
                 example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
     if_command:
-        name: if else
+        name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
         levels:
@@ -978,7 +980,7 @@ adventures:
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
     in_command:
-        name: in
+        name: "{in}"
         description: Introducing the in command
         default_save_name: in_command
         levels:
@@ -1010,7 +1012,7 @@ adventures:
                 example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 start_code: "name = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'"
     repeat_command:
-        name: Repeat
+        name: "{repeat}"
         description: repeat command
         default_save_name: repeat_command
         levels:
@@ -1027,7 +1029,7 @@ adventures:
                 story_text: "In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
     for_command:
-        name: for
+        name: "{for}"
         description: for command
         default_save_name: for
         levels:
@@ -1055,7 +1057,7 @@ adventures:
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
     and_or_command:
-        name: and or
+        name: "{and} & {or}"
         description: introducing and or
         default_save_name: and or
         levels:
@@ -1064,7 +1066,7 @@ adventures:
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:
@@ -1073,7 +1075,7 @@ adventures:
                 story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
                 example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
     elif_command:
-        name: elif
+        name: "{elif}"
         description: elif
         default_save_name: elif
         levels:
@@ -1081,3 +1083,12 @@ adventures:
                 story_text: "In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.\nCheck it out!\n"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
                 start_code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+    clear_command:
+        name: '{clear}'
+        levels:
+            4:
+                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
+                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
+                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
+        description: clear command
+        default_save_name: clear_command

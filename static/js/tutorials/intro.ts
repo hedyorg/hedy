@@ -8,7 +8,7 @@ export function startIntro() {
   current_step = 1;
   $('#adventures').hide();
   $('#variables_container').hide();
-  theGlobalEditor?.setValue("");
+  theGlobalEditor.contents = "";
 
   tutorialPopup("intro", current_step);
 }
@@ -70,7 +70,7 @@ function codeEditorStep() {
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
-  theGlobalEditor?.setValue("print ___");
+  theGlobalEditor.contents = "print ___";  
   tutorialPopup("intro", current_step);
 }
 
@@ -103,9 +103,9 @@ function tryRunButtonStep() {
       url: '/get_tutorial_step/intro/code_snippet/',
       dataType: 'json'
     }).done(function(response: any) {
-       theGlobalEditor?.setValue(response.code);
+       theGlobalEditor.contents = response.code;
     }).fail(function() {
-       theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
+       theGlobalEditor.contents = "print Hello world!\nprint I'm learning Hedy with the tutorial!";
     });
 
   relocatePopup(50, 70);

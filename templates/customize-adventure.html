@@ -24,13 +24,13 @@
                     <div class="border border-black rounded-lg p-4 text-sm">
                         {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
-                            <pre class="inline-block w-64">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
+                            <pre class="code-teacher">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <code class="text-base">{{parse_keyword('print')}}</code>
                         </div>
                         {{_('adventure_exp_2')}}
                         <div class="flex flex-row items-center">
-                            <pre class="inline-block w-64">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
+                            <pre class="code-teacher">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
                                 <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>

@@ -41,7 +41,8 @@ KEYWORDS_ADVENTURES = set([
     'for_command',
     'and_or_command',
     'while_command',
-    'elif_command'
+    'elif_command',
+    'clear_command'
 ])
 
 ADVENTURE_ORDER_PER_LEVEL = {
@@ -92,6 +93,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'clear_command',
         'story',
         'haunted',
         'fortune',
@@ -323,6 +325,9 @@ def deep_translate_keywords(yaml, keyword_language):
         return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
     return yaml
 
+
+def get_localized_name(name, keyword_lang):
+    return safe_format(name, **KEYWORDS.get(keyword_lang))
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
 # each language file is there

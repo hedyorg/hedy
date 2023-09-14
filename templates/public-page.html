@@ -1,5 +1,5 @@
 {% extends "auth.html" %}
-
+{% import "macros/public-programs.html" as public_programs %}
 {% block regular_content %}
     <div id="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
         <div class="h-full flex items-center justify-center">
@@ -83,33 +83,35 @@
         </div>
         {% endif %}
     </div>
-    <h2 class="ml-4">{{_('program_header')}}</h2>
+    <h2 class="ml-4 text-3xl">{{_('programs')}}</h2>
     {% if favourite_program or programs %}
         <div class="flex flex-wrap w-full turn-pre-into-ace">
         {% if favourite_program %}
-             <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
-                 <div class="text-white text-gray-700 text-2xl flex items-center justify-center mt-2 mb-2">
-                    <p>{{ favourite_program.name }}</p>
+            <div class="border rounded-lg border-yellow-500 mb-4 py-2 w-full">
+                <h3 class="text-center z-10 font-bold pb-0 mb-0 text-2xl">{{_('favorite_program')}}</h3>
+                <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="user_favourite_program">
+                    {{ public_programs.program_box(favourite_program, true) }}                    
                 </div>
-                <div class="relative px-4 mb-4">
-                    <pre class="max-h-full" level="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
-                </div>
-            </div>
+            </div>            
         {% endif %}
-        {% if programs %}
-            {% for program in programs %}
-                {% if program.id != favourite_program.id %}
-                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-                        <div class="flex items-center justify-center mt-2 mb-2">
-                            <p>{{ program.name }}</p>
-                        </div>
-                        <div class="relative px-4 mb-4">
-                            <pre level="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
-                        </div>
+            <div class="flex flex-col w-full">
+                <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="public_page_programs">
+                    {% if programs|length == 0 %}
+                        {{_('no_programs')}}
+                    {% else %}
+                        {% for program in programs %}
+                            {{ public_programs.program_box(program, false) }}                            
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if next_page_url %}
+                    <div class="flex w-1/3 mx-16 mt-4 align-self-right">
+                            <div>
+                                <a href="{{next_page_url}}" class="green-btn">{{_('next_page')}}</a>
+                            </div>
                     </div>
                 {% endif %}
-            {% endfor %}
-        {% endif %}
+            </div>
         </div>
     {% else %}
         <div class="ml-4">{{ user_info.username }} {{_('no_shared_programs')}}</div>

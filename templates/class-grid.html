@@ -2,8 +2,14 @@
 {% block regular_content %}
 <div class="flex flex-col gap-2">
   <h2>{{_('grid_overview')}}: {{class_info.name}}</h2>
-  <div class="flex flex-row items-center justify-center mr-2 w-1/12 ml-4">
-    <select class="py-2 px-1 mt-2 h-10 text-center w-full" name="level" id="menu" hx-get="/grid_overview/class/{{ class_info.id }}/level" hx-target="#level" hx-trigger="change">
+  <div class="flex flex-row items-center justify-center mr-2 lg:w-1/12 md:w-3/12 sm:w-5/12 ml-4">
+    <select class="py-2 px-1 mt-2 h-10 text-center w-full " 
+            name="level" 
+            id="menu" 
+            hx-get="/grid_overview/class/{{ class_info.id }}/level" 
+            hx-target="#level" 
+            hx-trigger="change"
+            hx-swap="outerHTML">
         {% for i in range(1, max_level + 1) %}
             <option id="select-{{i}}" value="{{ i }}">
                 {{ _('level_title') }} {{ i }}
@@ -11,7 +17,7 @@
         {% endfor %}
     </select>
   </div>
-  {{ render_partial('customize-grid/grid-levels.html',
+  {{ render_partial('customize-grid/partial-grid-levels.html',
                     class_info=class_info,
                     max_level=max_level, 
                     adventure_names=adventure_names, 

@@ -844,7 +844,7 @@ adventures:
 
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             3:
-                story_text: |-
+                story_text: |2-
 
                     Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
 
@@ -1606,7 +1606,7 @@ adventures:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
-        name: print
+        name: "{print}"
     ask_command:
         default_save_name: ask_command
         levels:
@@ -1624,10 +1624,10 @@ adventures:
                 example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
                 story_text: "## The ask command\nNow that we can use **variables** in our codes, we no longer need the `{echo}` command.\nWe can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.\nCheck it out:\n\nThis way your code is becoming interactive!\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
-        name: ask
+        name: "{ask}"
         description: Introduction ask command
     random_command:
-        name: random
+        name: "{random}"
         default_save_name: random_command
         levels:
             3:
@@ -1654,10 +1654,10 @@ adventures:
                 story_text_3: "### Exercise\nTry out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.\n"
                 example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
         default_save_name: add_remove_command
-        name: add and remove
+        name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
     sleep_command:
-        name: sleep
+        name: "{sleep}"
         description: introducing sleep command
         default_save_name: sleep_command
         levels:
@@ -1666,7 +1666,7 @@ adventures:
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
                 story_text: "## The sleep command\nAnother new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
     if_command:
-        name: if else
+        name: "{if} & {else}"
         default_save_name: if_command
         levels:
             5:
@@ -1717,11 +1717,11 @@ adventures:
                 story_text: "In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
-        name: Repeat
+        name: "{repeat}"
         description: repeat command
         default_save_name: repeat_command
     repeat_command_2:
-        name: Repeat 2
+        name: "{repeat} 2"
         levels:
             7:
                 story_text_2: "Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.\nThen, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.\n"
@@ -1736,7 +1736,7 @@ adventures:
         default_save_name: repeat_command_2
         description: repeat command 2
     for_command:
-        name: for
+        name: "{for}"
         description: for command
         levels:
             10:
@@ -1755,10 +1755,10 @@ adventures:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
-        name: and or
+        name: "{and} & {or}"
         description: introducing and or
     while_command:
-        name: while
+        name: "{while}"
         description: while
         default_save_name: while_command
         levels:
@@ -1791,11 +1791,11 @@ adventures:
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-        name: is
+        name: "{is}"
         description: introducing is command
         default_save_name: is_command
     in_command:
-        name: in
+        name: "{in}"
         description: Introducing the in command
         default_save_name: in_command
         levels:
@@ -1821,7 +1821,7 @@ adventures:
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
     elif_command:
-        name: elif
+        name: "{elif}"
         description: elif
         default_save_name: elif
         levels:
@@ -1838,3 +1838,12 @@ adventures:
                 story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
                 start_code: "# place your code here"
+    clear_command:
+        name: '{clear}'
+        description: clear command
+        levels:
+            4:
+                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
+                example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
+                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
+        default_save_name: clear_command
