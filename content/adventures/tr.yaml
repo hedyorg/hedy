@@ -14,90 +14,111 @@ adventures:
                     Örneğin restoran macerasında, müşterinin ne yemek istediğini veya ne içmek istediğini yankılayabilirsiniz, ancak her ikisi tek bir cümlede olmaz.
 
                 example_code: |
+                    **Uyarı! Bu kod çalışmaz!**
+                    Hedy'de komutlar arada değişecektir. Örneğin `yankıla` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
                     ```
-                    {print} Hedy's'e hoş geldiniz
+                    {print} Hedy's 'e Hoş Geldiniz
                     {ask} Ne yemek istersiniz?
-                    {echo} İstiyorsunuz
-                    {ask} ne içmek istersiniz?
-                    {echo} İstiyorsunuz
+                    {echo} Demek isteğiniz
+                    {ask} Ne içmek istersiniz?
+                    {echo} Demek isteğiniz
                     ```
                 story_text_2: |
-                    Oyuncu bir hamburger ve kola yazarsa, "yani hamburger ve kola istersiniz" diyemezsiniz, ancak iki ayrı satır yapmanız gerekir.
-                    Ayrıca, '{echo}' komutu yalnızca cümlenin sonundaki sözcüğü yankılandırır. Yani "hamburgeriniz hemen geliyor!" diyemezsiniz.
+                    Oyuncu hamburger ve kola yazarsa, "yani hamburger ve kola istiyorsunuz" diyemezsiniz, ancak iki ayrı satır oluşturmanız gerekir.
+                    Ayrıca, `{echo}` komutu sadece cümlenin sonundaki kelimeyi yankılar. Yani "hamburgeriniz hemen geliyor!" diyemezsiniz.
 
-                    Bu seviye 2'de değişir. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz herhangi bir yere yazdırmanıza izin veren değişkenlerle çalışmayı öğreneceksiniz.
-                    Öyleyse bir sonraki sekmeye geçelim!
+                    Seviye 2'de bu durum değişiyor. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz yere yazdırmanıza olanak tanıyan değişkenlerle çalışmayı öğreneceksiniz.
+                    O halde hadi bir sonraki sekmeye geçelim!
                 start_code: "{print} Merhaba Dünya!"
             3:
                 story_text: |
-                    In level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.
+                    Bir önceki seviyede değişkenin ne olduğunu ve maceralarınızı daha etkileşimli hale getirmek için nasıl kullanabileceğinizi öğrendiniz.
+                    Ancak... değişkenlerle yapabileceğiniz tek şey bu değil! Değişkenleri liste yapmak için de kullanabilirsiniz.
+                    Ve hatta Hedy'nin bir listeden rastgele bir kelime seçmesini sağlayabilirsiniz, bu da gerçek oyunlar yapmanıza olanak tanır!
+                    Bir sonraki sekmeye hızlıca göz atın!
 
-                start_code: "{print} Merhaba dünya!"
+                start_code: "{print} Merhaba Dünya!"
             4:
-                start_code: "{print} 'Merhaba dünya'"
+                start_code: "{print} 'Merhaba Dünya'"
                 story_text: |
-                    4.seviyede,  `{ask}` ve`{print}` konutları değiştirildi. 
+                    Önceki seviyelerde değişkenlerle pratik yaptınız, ancak bu problemle karşılaşmış olabilirsiniz.
+                    Bunun gibi bir kodu çalıştırmayı denemiş olabilirsiniz:
 
-                    Yazdırmak istediğiniz metni tırnak işaretleri arasına almalısınız.
+                    Aslında şunu yazdırmak istedin
 
-                    Bu kullanışlıdır, çünkü artık istediğiniz tüm kelimeleri yazdırabilirsiniz. Ayrıca bir şeyi depolamak için `{is}` kullanabilirsiniz.
+                    `My name is Sophie`
 
-                    Çoğu programlama dili de yazdırırken tırnak işaretleri kullanır, bu nedenle gerçek programlamaya bir adım daha yaklaşıyoruz!
+                    ama Hedy bunu yazdı
+
+                    `My Sophie is Sophie`.
+
+                    Bu seviyede tırnak işaretleri kullanılarak bu sorun giderilir.
                 example_code: |
                     ```
-                    Adım {is} Sophie
-                    {print} Benim adım adım
+                    isim {is} Sophie
+                    {print} Benim adım isim
                     ```
             5:
                 start_code: |-
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
+                    isim {is} {ask} 'Senin adın ne?'
+                    {if} isim {is} Hedy {print} 'havalıymış!' {else} {print} 'eh işte'
                 story_text: |
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
+                    Önceki seviyelerde, kodu her çalıştırdığınızda oyunlarınızı farklı kılan `{at} {random}` kullanmayı zaten öğrenmiştiniz.
+                    Ancak bu gerçekten etkileşimli değil, oyuncunun oyunda neler olacağı üzerinde herhangi bir etkisi yok.
+
+                    Bu seviyede, programınızda farklı yanıtlar vermenizi sağlayan `{if}` komutunu öğreneceksiniz. Bu şekilde örneğin bilgisayarınız için gizli bir şifre programlayabilirsiniz.
+                    Yeni komut için bir sonraki sekmeye geçelim!
                 example_code: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    şifre {is} {ask} 'Doğru şifre nedir?'
                     ```
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: "# kodunuzu buraya yazın"
                 story_text: |
-                    In this level you learn something new: you can now also calculate.
+                    Önceki seviyede `{ask}` ve `{if}` ile pratik yaptınız. Örneğin artık konuklara ne yemek istediklerini sorabilirsiniz.
+                    Ancak henüz yapamadığınız şey, herkesin akşam yemeğinin fiyatını hesaplamak.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    Bir sonraki seviye, programlarınızda toplama, çıkarma ve çarpma işlemlerini kullanmanızı sağlayacak. Bu şekilde restoranınızdaki fiyatları hesaplayabilir, ama aynı zamanda arkadaşlarınıza ve ailenize indirim yapmak için gizli bir kod ekleyebilirsiniz.
+                    Bir sonraki seviyedeki bir başka seçenek de küçük kardeşinizin çarpma işlemlerinde pratik yapması için kendi matematik oyununuzu programlamaktır.
+                    Gidip kendiniz görün!
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    yemek_ücreti {is} 0
+                    içecek_ücreti {is} 0
+                    toplam_ücret {is} 0
+                    {print} 'McHedy'e Hoş Geldiniz'
+                    sipariş {is} {ask} 'Ne yemek istersiniz?'
+                    {if} sipariş {is} hamburger yemek_ücreti {is} 5
+                    {if} sipariş {is} kızartma yemek_ücreti {is} 2
+                    içecek {is} {ask} 'Ne içmek istersiniz?'
+                    {if} içecek {is} su içecek_ücreti {is} 0
+                    değilse içecek_ücreti {is} 3
+                    toplam_ücret {is} yemek_ücreti + içecek_ücreti
+                    {print} 'Toplamda 'toplam_ücret ' lira ödeyin, lütfen'
                     ```
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
+                start_code: "{print} 'mutlu yıllar sana'\n{print} 'mutlu yıllar sana'\n{print} 'mutlu yıllar sevgili Hedy'\n{print} 'mutlu yıllar sana'\n"
                 story_text: |
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
+                    Harika bir iş çıkardınız! Bir sonraki seviyeye ulaştınız, bu da `{if}` ve `{else}` ile pratik yaptığınız anlamına geliyor. Muhtemelen kodlarınızın gittikçe uzadığını fark etmişsinizdir.
+                    Örneğin 'Doğum Günün Kutlu Olsun' şarkısını programlamak isterseniz.
+
+                    Bu, çoğunlukla aynı kelimeleri tekrar ve tekrar yazmak için çok fazla kod demek. Neyse ki bir sonraki sekmede `{repeat}` komutu ile bir kod satırını birden çok kez tekrarlamanıza olanak tanıyan bir çözüm öğreneceksiniz.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'Mutlu yıllar sevgili Hedy'
+                    {print} 'mutlu yıllar sana'
                     ```
             8:
                 start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello folks'
-                        {print} 'This will be printed 5 times'
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
                 story_text: |
-                    `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
-                    You can now execute groups of code together, but you will have to *indent* the code.
-                    That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
+                    Artık tek bir kod satırını nasıl tekrarlayacağınızı öğrendiniz. Bu kullanışlı olabilir, ancak her zaman yeterli değildir. Bazen aynı anda birden fazla satırı tekrarlamak istersiniz.
+                    Bu seviye, birkaç kod satırını gruplandırmanıza ve bu küçük satır grubunu bir kerede tekrarlamanıza yardım edecek!
                 example_code: |
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This is all repeated 5 times'
+                    {repeat} 5 {times} {print} 'Bir sonraki sekmede birden fazla kod satırını aynı anda tekrarlayabilirsiniz!'
                     ```
             9:
                 start_code: |-
@@ -108,9 +129,8 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Harika bir iş! Yeni bir seviyeye daha ulaştınız! Bir önceki seviyede {if} veya {repeat} komutunda birden fazla kod satırı kullanmayı öğrendiniz. Ancak henüz ikisini birleştiremiyorsunuz...
+                    İyi haberim var! Bu seviyede, bir {if} içine {if} veya bir {repeat} komutu koymanıza izin verilecektir.
                 example_code: |
                     ```
                     {repeat} 3 {times}
@@ -1037,7 +1057,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                              Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
