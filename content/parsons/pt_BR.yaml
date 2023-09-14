@@ -48,16 +48,16 @@ levels:
             code: |-
                 {print} O novo ano escolar de Hogwarts está começando!
                 {print} O chapeu seletor está pronto para escolher uma casa para você.
-                As casas são {is} Grifinória, Lufa-Lufa, Corvinal, Sonserina
+                casas {is} Grifinória, Lufa-Lufa, Corvinal, Sonserina
                 {sleep} 2
-                {print} E a casa é {at} {random}
+                {print} E a casas {at} {random}
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
                 comida {is} pizza, sorvete, salada, sanduiche
                 cobertura {is} chocolate, queijo, atum, granulado
-                {print} Sua comida aleatória de hoje é...
+                {print} Sua aleatória de hoje é...
                 {sleep} 2
                 {print} comida {at} {random} com cobertura {at} {random}
     4:
@@ -109,8 +109,8 @@ levels:
                 idade = {ask} 'Qual sua idade?'
                 idade_cachorro = idade * 7
                 idade_gato = idade * 5
-                {print} 'Em anos de cachorro você tem ' dog_age ' anos.'
-                {print} 'Em anos de gato você tem ' cat_age ' anos.'
+                {print} 'Em anos de cachorro você tem ' idade_cachorro ' anos.'
+                {print} 'Em anos de gato você tem ' idade_gato ' anos.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
