@@ -15,9 +15,9 @@
                         <span style="color: #ff6188;">{{_('print_logo')}}</span>
                         <span class="text-white">{{_('hello_logo')}}</span>
                     </div>
-                    <img class="absolute drop-shadow-lg" src="images/hero-graphic/hero-graphic-empty.png" style="max-width: 600px; bottom: -170px;">
+                    <img class="absolute drop-shadow-lg" src="{{static('/images/hero-graphic/hero-graphic-empty.png')}}" style="max-width: 600px; bottom: -170px;">
                 {% else %}
-                   <img class="absolute drop-shadow-lg" src="images/hero-graphic/hero-graphic-{{ g.lang }}.png" style="max-width: 600px; bottom: -170px;">
+                   <img class="absolute drop-shadow-lg" src="{{static('/images/hero-graphic/hero-graphic-' + g.lang + '.png')}}" style="max-width: 600px; bottom: -170px;">
                 {% endif %}
 
             </div>
