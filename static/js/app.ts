@@ -840,7 +840,97 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 export function debugStepForward() {
-  theGlobalDebugger.enable_step_mode();
+  let outputDiv = $('#output');
+  function addToOutput(text: string, color: string) {
+    $('<span>').text(text).css({ color }).appendTo(outputDiv);
+    scrollOutputToBottom();
+  }
+
+  // output functions are configurable.  This one just appends some text
+  // to a pre element.
+  function outf(text: string) {
+    addToOutput(text, 'white');
+    speak(text)
+  }
+
+  function builtinRead(x: string) {    
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+        throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+  }
+  function inputFromInlineModal(prompt: string) {
+    // We give the user time to give input.
+    var storage = window.localStorage;
+    var debug = storage.getItem("debugLine")
+    if (storage.getItem("prompt-" + prompt) == null) {
+    Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+    $('#turtlecanvas').hide();
+
+    if (pygameRunning) {
+      Sk.unbindPygameListeners();
+      document.onkeydown = null;
+      $('#pygame-modal').hide();
+    }
+
+    return new Promise(function(ok) {
+      theGlobalEditor.askPromptOpen = true;
+
+      const input = $('#ask-modal input[type="text"]');
+      $('#ask-modal .caption').text(prompt);
+      input.val('');
+      input.attr('placeholder', prompt);
+      speak(prompt)
+
+      setTimeout(function() {
+        input.focus();
+      }, 0);
+      $('#ask-modal form').one('submit', function(event) {
+        theGlobalEditor.askPromptOpen = false;
+        event.preventDefault();
+        $('#ask-modal').hide();
+
+
+
+        // We reset the timer to the present moment.
+        Sk.execStart = new Date ();
+        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+        // replying to a query.
+        setTimeout (function () {
+           ok(input.val());
+           if (debug != null) {
+              storage.setItem("prompt-" + prompt, input.val()!.toString());
+           }
+           $ ('#output').focus ();
+        }, 0);
+
+          return false;
+        });
+        $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
+      });
+    } else {
+      return new Promise(function (ok) {
+        ok(storage.getItem("prompt-" + prompt));
+      });
+    }
+  }
+  Sk.configure({
+    output: outf,
+    read: builtinRead,
+    inputfun: inputFromInlineModal,
+    inputfunTakesPrompt: true,
+    __future__: Sk.python3,
+    debugging: true,
+    breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),
+    // We want to make the timeout function a bit more sophisticated that simply setting a value
+    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+    // So: a very large limit in these levels, keep the limit on other onces.
+    execLimit: null
+  });
+  theGlobalDebugger.disable_step_mode();
   theGlobalDebugger.resume.call(theGlobalDebugger);
 }
 
@@ -1009,8 +1099,10 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
     execLimit: null
   });
   let userProgramBeginning = code.split('\n').length - originalProgramLength + 1;
-  console.log(`userProgramBeginning ${userProgramBeginning}`);
-  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
+  console.log(`userProgramBeginning ${userProgramBeginning}`);  
+  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning + 2, '0', false)
+  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning + 3, '0', false)
+  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning + 5, '0', false)
   console.log(code);
   theGlobalDebugger.set_code(code.split('\n'));
   return theGlobalDebugger.asyncToPromise(function(){
