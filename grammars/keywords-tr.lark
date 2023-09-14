@@ -1,11 +1,11 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
-_DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_DEFINE: ("tanımla" | "define") _SPACE?
+_CALL: ("çağır" | "call") _SPACE?
+_WITH: ("ile" | "with") _SPACE?
+_DEF: ("tanı" | "def") _SPACE?
+_RETURN: ("geridön" | "return") _SPACE?
 _PRINT: ("yazdır" | "print") _SPACE?
 _ASK: ("sor" | "ask") _SPACE?
-_ECHO: ("eko" | "echo") _SPACE?
+_ECHO: ("yankıla" | "echo") _SPACE?
 _FORWARD: ("ileri" | "forward") _SPACE?
 _TURN: ("döndür" | "turn") _SPACE?
 left: ("sol" | "left") _SPACE?
@@ -22,30 +22,30 @@ red: ("kırmızı" | "red") _SPACE?
 white: ("beyaz" | "white") _SPACE?
 yellow: ("sarı" | "yellow") _SPACE?
 _IS: _SPACE ("eşit" | "is") _SPACE
-_SLEEP: ("bekle" | "sleep") _SPACE?
+_SLEEP: ("uyu" | "sleep") _SPACE?
 _ADD_LIST: ("ekle" | "add") _SPACE
-_TO_LIST: _SPACE ("to" | "to") _SPACE
+_TO_LIST: _SPACE ("şuraya" | "to") _SPACE
 _REMOVE: ("sil" | "remove") _SPACE
 _FROM: _SPACE ("şuradan" | "from") _SPACE
 _AT: _SPACE ("şurada" | "at") _SPACE
 random: ("rastgele" | "random") _SPACE?
 _IN: _SPACE ("içinde" | "in") _SPACE
-_NOT_IN: _SPACE ("değil" | "not in") _SPACE
+_NOT_IN: _SPACE ("içinde değil" | "not in") _SPACE
 _IF: ("eğer" | "if") _SPACE
-_ELSE: "başka" | "else"
+_ELSE: "değilse" | "else"
 _AND: _SPACE ("ve" | "and") _SPACE
-_REPEAT: ("tekrar" | "repeat") _SPACE
+_REPEAT: ("tekrarla" | "repeat") _SPACE
 _TIMES: _SPACE ("kere" | "times")
-_FOR: ("şunun için" | "for") _SPACE
-_RANGE: ("dizi" | "range") _SPACE?
+_FOR: ("için" | "for") _SPACE
+_RANGE: ("aralık" | "range") _SPACE?
 _TO: _SPACE ("şuraya" | "to") _SPACE
 _STEP: "adım" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_ELIF: _SPACE? ("değilseeğer" | "elif") _SPACE
 _INPUT: ("girdi" | "input")
 _OR: _SPACE ("veya" | "or") _SPACE
 _WHILE: ("iken" | "while") _SPACE
 _LENGTH: "uzunluk" | "length"
 _COLOR : ("renk" | "color") _SPACE?
 _PRESSED: ("basılı" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
-clear: ("temiz" | "clear") _SPACE?
+_BUTTON: ("düğme" | "button") _SPACE?
+clear: ("temizle" | "clear") _SPACE?
