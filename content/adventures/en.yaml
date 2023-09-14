@@ -194,7 +194,7 @@ adventures:
                     {else}
                         {print} 'Access denied!'
                     ```
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             14:
                 story_text: |
                     With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
@@ -234,7 +234,7 @@ adventures:
                             {if} answer {is} 'yes'
                                 {print} 'Ok we will continue'
                     ```
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             16:
                 story_text: |
                     In this level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
@@ -259,7 +259,7 @@ adventures:
             17:
                 story_text: |
                     You have almost reached the last level of Hedy, well done! In this level you will learn a real Python way to use `{print}`.
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             18:
                 story_text: |
                     Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
@@ -918,8 +918,9 @@ adventures:
                     ```
             11:
                 start_code: |-
-                    {for} counter {in} {range} 1 {to} 5
+                    {for} counter {in} {range} 1 {to} 10
                         {print} counter
+                    {print} 'Ready or not. Here I come!'
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
                     We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
@@ -927,8 +928,9 @@ adventures:
                     Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
                 example_code: |
                     ```
-                    {for} counter {in} {range} 1 {to} 5
+                    {for} counter {in} {range} 1 {to} 10
                         {print} counter
+                    {print} 'Ready or not. Here I come!'
                     ```
     maths:
         name: "maths"
@@ -1046,6 +1048,7 @@ adventures:
                         {print} 'Lovely, an apple pie!'
                     {else}:
                         {print} 'Better luck next time..'
+
 
     story:
         name: "Story"
@@ -3022,7 +3025,7 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                start_code: ""
+                start_code: """# place your code here"
             12:
                 story_text: |-
                     From level 12 on, you will also have to use quotation marks in lists, before and after each item.
