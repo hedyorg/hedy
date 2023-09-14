@@ -61,7 +61,7 @@
 4:
 -   name: "{print}"
     explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
-    demo_code: "{print} 'Merhaba, Hedy'ye hoş geldiniz.'"
+    demo_code: "{print} "Merhaba, Hedy'ye hoş geldiniz.""
 -   name: "{is}"
     explanation: "Bir metne bir isim verin ve `{print}` ile tırnak işaretleri olmadan yazdırın."
     demo_code: |-
@@ -75,7 +75,7 @@
 5:
 -   name: "{print}"
     explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
-    demo_code: "{print} 'Merhaba, Hedy'ye hoş geldiniz.'"
+    demo_code: "{print} "Merhaba, Hedy'ye hoş geldiniz.""
 -   name: "{ask}"
     explanation: "`{ask}` ile bir şeyler sorun."
     demo_code: |-
@@ -118,7 +118,7 @@
 7:
 -   name: "{print}"
     explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
-    demo_code: "{print} 'Merhaba, Hedy'ye hoş geldiniz.'"
+    demo_code: "{print} "Merhaba, Hedy'ye hoş geldiniz.""
 -   name: "{ask}"
     explanation: "`{ask}` ile bir şeyler sorun."
     demo_code: |-
@@ -195,7 +195,7 @@
         cevap = {ask} '5 artı 5 kaç eder?'
         {if} cevap {is} 10
             {print} 'Aferin sana!'
-            {print} 'Gerçekten de cevap ' answer
+            {print} 'Gerçekten de cevap ' cevap
         {else}
             {print} 'Oops!'
             {print} 'Cevap 10 olacaktı'
