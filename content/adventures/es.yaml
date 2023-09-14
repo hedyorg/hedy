@@ -944,15 +944,14 @@ adventures:
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el código de ejemplo para que\n\n### Ejercicio 2\nVuelve al código de multiplicación del nivel 10, y modifícalo para que use un `{for}` y `{range}`.\n"
                 start_code: '# pon tu código aquí'
             13:
-                story_text: |2
-
-                        ### Ejercicio 1
-                        Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.
-
-                        ### Ejercicio 2 Extra
-                        A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.
-                        Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.
-                        Vacía el campo de programación y crea tu propia solución.
+                story_text: |
+                    ### Ejercicio 1
+                    Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.
+    
+                    ### Ejercicio 2 Extra
+                    A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.
+                    Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.
+                    Vacía el campo de programación y crea tu propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu código aquí'
     restaurant:
