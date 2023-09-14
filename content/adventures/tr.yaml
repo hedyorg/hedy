@@ -122,71 +122,77 @@ adventures:
                     ```
             9:
                 start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                    {print} Bir sonraki sekmeye geçelim!
                 story_text: |
                     Harika bir iş! Yeni bir seviyeye daha ulaştınız! Bir önceki seviyede {if} veya {repeat} komutunda birden fazla kod satırı kullanmayı öğrendiniz. Ancak henüz ikisini birleştiremiyorsunuz...
                     İyi haberim var! Bu seviyede, bir {if} içine {if} veya bir {repeat} komutu koymanıza izin verilecektir.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    cevap = {ask} 'Yeni bir şeyler öğrenmeye hazır mısınız?'
+                    {if} cevap {is} evet
+                        {print} 'Harika! eğer komutunda tekrarla komutunu kullanmayı öğrenebilirsiniz!'
+                        {print} 'Yaşasın!'
+                        {print} 'Yaşasın!'
+                        {print} 'Yaşasın!'
+                    {else}
+                        {print} 'Belki de bir önceki seviyede biraz daha pratik yapmalısınız'
             10:
                 start_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-                story_text: |-
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Harika gidiyorsunuz! Önceki seviyelerde hep küçük bir sorunla karşılaştık. Satırları tekrarlamayı öğrendiniz, ama ya satırı biraz değiştirmek isterseniz?
+                    Örneğin 'eğer mutluysan ve bunu biliyorsan.' şarkısını söylemek istiyorsunuz. Şöyle görünecektir:
+
+                    Eğer bir sonraki mısranın 'ayaklarını yere vur', ve bir sonrakinin, ve bir sonrakinin de aynı olmasını istiyorsanız, kodu tamamen değiştirmeniz gerekir.
+                    Bu seviyede, bir eylem listesi oluşturmanıza ve kodu her seferinde başka bir eylemle tekrarlamanıza olanak tanıyan `{for}` komutunu öğreneceksiniz!
+                    Lütfen bir göz atın!
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    {repeat} 2 {times}
+                        {print} 'Mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ellerinizi çırpın'
                     ```
             11:
                 start_code: |-
-                    {for} counter {in} {range} 1 {to} 5
-                        {print} counter
-                story_text: |-
-                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
-                    Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Seviye 10'a ulaştınız, harika gidiyorsunuz! Daha yüksek seviyelerde, Hedy size Python programlama dilini öğretmeye daha fazla odaklanıyor.
+                    Python'da `{repeat}` komutu yoktur, ancak {repeat} gibi çalışan bir komut vardır. Python dilinde `{repeat}` komutunun nasıl söylendiğini merak ediyor musunuz? Öğrenmek için hemen devam edin!
             12:
                 start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
-                story_text: |-
-                    **Decimal numbers**
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Belki restoran maceranızda ondalık sayıları kullanmayı denemişsinizdir. Eğer denediyseniz, muhtemelen Hedy'nin bunları henüz anlamadığını ve her zaman yuvarladığını fark etmişsinizdir.
+                    Bu seviyeden itibaren ondalık sayıları kullanabilirsiniz.
                 example_code: |
                     ```
-                    {print} 'Two and a half plus two and a half is...'
-                    {print} 2.5 + 2.5
+                    burger = 5
+                    içecek = 2
+                    toplam = burger + içecek
+                    print 'Bir hamburger ve içecek sipariş ettiniz'
+                    print 'Toplam ' toplam ' lira ödeyin lütfen'
                     ```
             13:
                 start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
-                story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                story_text: |
+                    Önceki seviyelerde iki `{if}` komutunu birbirinin içine nasıl yerleştireceğinizi öğrendiniz. Bu sorunsuz çalışır, ancak size bunun gibi çok uzun ve kullanışsız kodlar verir:
+
+                    Bu sistemde hem doğru kullanıcı adını hem de doğru şifreyi vermeniz gerekmektedir.
+                    Bu seviyede, bu kodu çok daha kısa ve anlaşılır hale getirecek `{and}` komutunu öğreneceksiniz!
+                    Şuna bir bakın!
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    kullanıcı = {ask} 'Kullanıcı adınız nedir?'
+                    şifre = {ask} 'Şifreniz nedir?'
+                    {if} kullanıcı {is} 'Hedy'
+                        {if} şifre {is} 'gizli'
+                            {print} 'Hoş geldin Hedy!'
+                        {else}
+                            {print} 'Erişim reddedildi'
+                    {else}
+                        {print} 'Erişim reddedildi!'
                     ```
             14:
                 start_code: |-
@@ -196,17 +202,19 @@ adventures:
                     {else}
                         {print} 'You are older than me!'
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.
-                    The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
-                    You use these comparisons in an `{if}`, like this:
+                    Aşağıdaki program ile okulda bir dersi geçip geçmediğinizi hesaplayabilirsiniz (yani, altı yada daha yüksek bir not).
+                    Bu kodun, 5. satırdaki çok uzun kod nedeniyle son derece verimsiz olduğunu görebilirsiniz.
+                    1'den 5'e kadar tüm farklı notların ayrı ayrı programlanması gerekiyordu. Şanslısınız ki, bu seviyede bu son derece uzun kod olmadan bunu nasıl yapacağınızı öğreneceksiniz!
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    birinci_not = {ask} 'İlk sınavınızda kaç puan aldınız?'
+                    ikinci_not = {ask} 'İkinci sınavınızda kaç puan aldınız?'
+                    toplam = birinci_not + ikinci_not
+                    ortalama_not = toplam / 2
+                    {if} ortalama_not = 1 {or} ortalama_not = 2 {or} ortalama_not = 3 {or} ortalama_not = 4 {or} ortalama_not = 5
+                        {print} 'Olamaz! Bu dersi geçemediniz.'
+                    {else}
+                        {print} 'Harika! Bu dersi geçtiniz!'
                     ```
             15:
                 start_code: |-
@@ -1057,7 +1065,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                  Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
