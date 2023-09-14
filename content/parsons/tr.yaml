@@ -68,7 +68,7 @@ levels:
                 İlk pokemonunuzu göstermeden önce programın bir dakika beklemesine izin verin.
             code: |-
                 pokemonlar {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'Bu senin ilk Pokémon'un olacak!'
+                {print} "Bu senin ilk Pokémon'un olacak!"
                 {sleep}
                 {print} pokemonlar {at} {random}
         2:
@@ -132,7 +132,7 @@ levels:
                 oyuncu2 = oyuncular {at} {random}
                 {print} 'ilk olarak ' oyuncu1 ' ve ' oyuncu2 ' oynayacak'
                 {remove} oyuncu2 {from} oyuncular
-                {print} 'Kazanan ile ' players {at} {random} ' oynayacak'
+                {print} 'Kazanan ile ' oyuncular {at} {random} ' oynayacak'
         2:
             story: |
                 'The wheels on the bus go round and round' şarkısını oluşturun (Otobüsün tekerleri dönüyor çocuk şarkısı, biz daha Türkçesini bulana kadar bunun şarkı sözlerini arayın, şarkının kendisini anlamanız gerekmez)
