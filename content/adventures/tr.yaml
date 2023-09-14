@@ -1063,7 +1063,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                        Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2623,21 +2623,21 @@ adventures:
                 start_code: '# place your code here'
     print_command:
         name: "{print}"
-        description: Introduction print command
-        default_save_name: print
+        description: yazdır komutuna giriş
+        default_save_name: yazdır
         levels:
             1:
-                story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"
-                story_text_2: "### Exercise\nIn Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.\nIn this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.\n\nFill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.\nHave fun!\n"
-                example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
-                example_code_2: "```\n_ Hello!\n```\n"
-                start_code: "{print} Welcome to Hedy!\n"
+                story_text: "## yazdır komutu\n`{print}` komutunu kullanarak ekrana metin yazdırabilirsiniz.\n"
+                story_text_2: "### Alıştırma\nHedy'de, her macerada alıştırmalar bulacaksınız. Bir alıştırma, yeni komutları ve kavramları uygulamanıza ve örnek kodlara kendi yorumunuzu katmanıza olanak tanır.\nBu alıştırmada pembe bir boşluk göreceksiniz. Kodun çalıştırılabilmesi için boş alanın yerine bir şey yazıp doldurmanız gerekiyor.\n\nBoş alana `{print}` komutunu girin ve ardından beş tane daha kod satırı ekleyin. Her satır bir `{print}` komutu ile başlamalıdır.\nİyi eğlenceler!\n"
+                example_code: "```\n{print} Merhaba, programcı!\n{print} Hedy'ye hoş geldin!\n```\n"
+                example_code_2: "```\n_ Merhaba!\n```\n"
+                start_code: "{print} Hedy'ye hoş geldin!\n"
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'"
+                story_text: "Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'\n```\n"
             18:
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
+                start_code: "isim = 'Hedy'\n{print}('Benim adım ', isim)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
