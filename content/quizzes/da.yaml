@@ -2041,7 +2041,7 @@ levels:
             correct_answer: A
             hint: '> means greater than'
             question_text: Which statement is true about this roller coaster?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             question_score: '10'
         9:
             question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
@@ -2158,7 +2158,7 @@ levels:
             -   option: '`{for}`'
                 feedback: That's not it
             -   option: '`{range}`'
-            feedback: That's not it
+                feedback: That's not it
             hint: You are not allowed in the bar as long as you are 17 or younger
             question_score: '10'
             question_text: Which command should be filled in on the two blanks?

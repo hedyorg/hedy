@@ -2934,7 +2934,7 @@ levels:
             hint: '> means greater than'
         8:
             question_text: Which statement is true about this roller coaster?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length > 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
             mp_choice_options:
             -   option: You must be taller than 120 cm to go on the roller coaster
                 feedback: True!
@@ -3018,10 +3018,10 @@ levels:
             -   option: '`{for}`'
                 feedback: That's not it
             -   option: '`{range}`'
+                feedback: That's not it
             correct_answer: B
             hint: You are not allowed in the bar as long as you are 17 or younger
             question_score: '10'
-            feedback: That's not it
         4:
             question_text: What's wrong with this code?
             code: "options = 1, 2, 3, 4, 5, 6\nprint 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\nwhile thrown == 6\n    thrown = options at random\n    print 'You threw ' thrown\n    tries = tries + 1\nprint 'Yes! You have thrown 6 in ' tries ' tries.'\n"

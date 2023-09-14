@@ -6,6 +6,7 @@ from werkzeug.routing import RequestRedirect
 from flask import abort, g, render_template, request, session, redirect, url_for
 
 import utils
+from . import querylog
 from hedy import HEDY_MAX_LEVEL
 from hedy_content import Quizzes
 from website import statistics
@@ -83,6 +84,7 @@ class QuizModule(WebsiteModule):
     @route("/submit_answer", methods=["POST"])
     def submit_answer(self):
         """Hit when an answer is submitted."""
+        self.log_form()
         progress, question = self.current_progress_and_question()
         question_count = self.question_count(progress.level)
 
@@ -201,27 +203,18 @@ class QuizModule(WebsiteModule):
         questions = self.get_all_questions(progress.level)
         total_achievable = sum(q.score for q in questions)
 
-        achievement = None
+        achievement = []
         username = current_user()["username"]
         if username:
             statistics.add(username, lambda id_: self.db.add_quiz_finished(id_, progress.level, progress.total_score))
-            # FIXME: I'm pretty sure the types of this code don't work out in case there is more
-            # than once achievement at a time, but I don't quite understand well enough how it's
-            # supposed to work to fix it.
-            achievement = self.achievements.add_single_achievement(username, "next_question")
+            achievement.extend(self.achievements.add_single_achievement(username, "next_question") or [])
             if progress.total_score == total_achievable:
-                if achievement:
-                    achievement.append(self.achievements.add_single_achievement(username, "quiz_master")[0])
-                else:
-                    achievement = self.achievements.add_single_achievement(username, "quiz_master")
+                achievement.extend(self.achievements.add_single_achievement(username, "quiz_master") or [])
             if progress.level == HEDY_MAX_LEVEL:
-                if achievement:
-                    achievement.append(self.achievements.add_single_achievement(username, "hedy_certificate")[0])
-                else:
-                    achievement = self.achievements.add_single_achievement(username, "hedy_certificate")
+                achievement.extend(self.achievements.add_single_achievement(username, "hedy_certificate") or [])
 
         # Add any achievements we accumulated to the session. They will be sent to the
-        # client at the next possible opportunity.
+        # client at the next possible opportunity. `add_single_achievement` may have
         if achievement:
             session['pending_achievements'] = session.get('pending_achievements', []) + achievement
 
@@ -243,10 +236,26 @@ class QuizModule(WebsiteModule):
         """Return the current QuizProgress object."""
         p = session.get('quiz_progress')
         try:
-            return QuizProgress(**p) if p else None
+            ret = QuizProgress(**p) if p else None
+            if ret:
+                self.log_progress(ret)
+            return ret
         except Exception:
             # Deserializing failed for some reason
             return None
+
+    def log_progress(self, progress: 'QuizProgress'):
+        """Log the current progress to the current query logger."""
+        querylog.log_value(
+            level=progress.level,
+            question=progress.question,
+            attempt_id=progress.attempt_id,
+            question_attempt=progress.question_attempt,
+            last_wrong_answer=progress.last_wrong_answer)
+
+    def log_form(self):
+        """Log the sent form contents to the query logger. Prefix all fields with 'form_'."""
+        querylog.log_value(**{f'form_{name}': value for name, value in request.form.items()})
 
     def my_quiz(self):
         """Return the quiz for the current language."""

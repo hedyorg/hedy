@@ -39,6 +39,11 @@ export interface InitializeOptions {
 
   readonly logs?: boolean;
 
+  /**
+   * The URL root where static content is hosted
+   */
+  readonly staticRoot?: string;
+
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
@@ -63,6 +68,7 @@ export function initialize(options: InitializeOptions) {
   initializeApp({
     level: options.level,
     keywordLanguage: options.keyword_language,
+    staticRoot: options.staticRoot,
   });
   initializeFormSubmits();
   initializeTutorial();
