@@ -22,7 +22,7 @@ export function callNextStepLevel1() {
   current_step += 1;
 
   if (current_step == 2) {
-    theGlobalEditor?.setValue("print Hello world!");
+    theGlobalEditor.contents = "print Hello world!";
     relocatePopup(50, 70);
     tutorialPopup("1", 2);
 

@@ -41,5 +41,6 @@ module.exports = defineConfig({
     admin_achievements_page: '/admin/achievements',
     admin_classes_page: '/admin/classes',
     programs_page: '/programs',
+    explore_programs_page: '/explore',
   }
 });
