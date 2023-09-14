@@ -1,0 +1,95 @@
+{% block student_space %}
+
+  <div class="justify-center pt-10 min-h-full">
+      <h2 class="text-center">{{_('student_details')}}</h2>
+      <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
+        <a class="red-btn float-right cursor-pointer text-sm pt-0.5 pb-0 px-2 mr-2 mt-2"
+          hx-get="/live_stats/class/{{class_info.id}}/refresh?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}"
+          hx-target="#main_content">
+          <i class="fa fa-times" aria-hidden="true"></i>
+       </a>
+        <!-- Title columns -->
+        <div class="m-auto ml-14 flex pt-4 pl-4">
+            <div class="flex flex-row">
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('name')}}</p>
+                  {{student.username}}
+              </div>
+            {% if student_programs %}
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
+                  {{ student_programs[0].level }}
+              </div>
+              <div class="flex flex-row p-2">
+                  <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
+                    {% if adventure_names.get(student_programs[0].adventure_name) %}
+                        {{adventure_names.get(student_programs[0].adventure_name)}}
+                    {% else %}
+                        {{student_programs[0].name}}
+                    {% endif %}
+              </div>
+            {% else %}
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('level')}}</p>
+                </div>
+                <div class="flex flex-row p-2">
+                    <p class="text-blue-600 font-bold ltr:mr-2 rtl:ml-2">{{_('adventure')}}</p>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="grid grid-cols-3 p-5">
+            <!-- Graph with fails and successful runs over time -->
+            <div class="w-full text-center p-2">
+                <h5 class="font-normal ltr:mr-2 rtl:ml-2">{{_('runs_over_time')}}</h5>
+                <canvas id="runsOverTime" width="120" height="40"></canvas>
+            </div>
+
+
+
+            <!-- Last ran code -->
+            <div class="w-full text-center turn-pre-into-ace mb-4">
+                <h5 class="font-normal pb-1">{{_('last_program')}}</h5>
+                {% if student_programs %}
+                    <pre level="{{ student_programs[0].level }}">{{ student_programs[0].code }}</pre>
+                {% else %}
+                    <p>{{_('no_programs')}}</p>
+                {% endif %}
+            </div>
+
+            <!-- Last error message  -->
+            <div class="w-full text-center ml-2" id="last-error">
+                <h5 class="font-normal pb-1">{{_('last_error')}}</h5>
+                <div class="flex justify-center">
+                {% if student_programs and student_programs[0].error_message %}
+                    <div id="errorbox-info"
+                      class="flex-0 z-20 m-2 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
+                      <div class="flex">
+                        <div class="py-1">
+                          <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path
+                              d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p class="caption font-bold">{{ student_programs[0].error_header }}</p>
+                          <p class="details text-sm">{{ student_programs[0].error_message }}</p>
+                        </div>
+                      </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+
+{% endblock %}
+
+{% block additional_scripts %}
+    <script>
+            hedyApp.InitLineChart({{ data }}, {{ labels }});
+    </script>
+{% endblock %}
