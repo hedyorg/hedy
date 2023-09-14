@@ -169,7 +169,6 @@ Sk.Debugger.prototype.set_condition = function(filename, lineno, colno, lhs, con
 };
 
 Sk.Debugger.prototype.print_suspension_info = function(suspension) {
-    console.log(suspension)
     var filename = suspension.$filename;
     var lineno = suspension.$lineno;
     var colno = suspension.$colno;
@@ -180,10 +179,8 @@ Sk.Debugger.prototype.print_suspension_info = function(suspension) {
 };
 
 Sk.Debugger.prototype.set_suspension = function(suspension) {
-    console.log('Set suspension')
     var parent = null;
     if (!suspension.hasOwnProperty("filename") && suspension.child instanceof Sk.misceval.Suspension) {
-        console.log('Estamos en 186 primer if de set suspensios')
         suspension = suspension.child;
     }
         
@@ -204,26 +201,83 @@ Sk.Debugger.prototype.set_suspension = function(suspension) {
     suspension = parent;
     
     this.print_suspension_info(suspension);
-    console.log('209')
 };
 
 Sk.Debugger.prototype.add_breakpoint = function(filename, lineno, colno, temporary) {
-    console.log(filename, lineno, colno, temporary)
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    console.log(key)
+    var key = this.generate_breakpoint_key(filename, lineno, colno);    
     this.dbg_breakpoints[key] = new Sk.Breakpoint(filename, lineno, colno);
     if (temporary) {
         this.tmp_breakpoints[key] = true;
     }
 };
 // aplicar tecnica de MiscEval en Skilpt aqui
-Sk.Debugger.prototype.suspension_handler = function(susp) {
-    console.log('221 Suspension handler')
+Sk.Debugger.prototype.suspension_handler = function(susp) {    
+    console.log('In suspension handler')
     return new Promise(function(resolve, reject) {
-        console.log('223 Suspension handler')
-        console.log(susp)
-        
         try {
+            (function handleResponse(r) {
+                try {
+                    // jsh*nt insists these be defined outside the loop
+                    console.log('Inside handle response')   
+                    console.log(r)
+                    var resume = function () {
+                        try {
+                            console.log('226')
+                            resolve(r.resume());
+                        } catch (e) {
+                            reject(e);
+                        }
+                    };
+                    var resumeWithData = function resolved(x) {
+                        console.log('233')                        
+                        try {
+                            r.data["result"] = x;
+                            resume();
+                        } catch (e) {
+                            reject(e);
+                        }
+                    };
+                    var resumeWithError = function rejected(e) {
+                        console.log('243')                        
+                        try {
+                            r.data["error"] = e;
+                            resume();
+                        } catch (ex) {
+                            reject(ex);
+                        }
+                    };
+                    while (r instanceof Sk.misceval.Suspension) {
+                        if (r.data["type"] == "Sk.promise") {
+                            console.log('252')                            
+                            r.data["promise"].then(resumeWithData, resumeWithError);
+                            return;
+                        } else if (r.data["type"] == "Sk.yield") {
+                            // Assumes all yields are optional, as Sk.setTimeout might
+                            // not be able to yield.
+                            //Sk.setTimeout(resume, 0);
+                            Sk.global["setImmediate"](resume);
+                            return;
+                        } else if (r.data["type"] == "Sk.delay") {
+                            //Sk.setTimeout(resume, 1);
+                            Sk.global["setImmediate"](resume);
+                            return;
+                        } else if (r.optional) {
+                            // Unhandled optional suspensions just get
+                            // resumed immediately, and we go around the loop again.
+                            console.log('268')
+                            return;
+                        } else {
+                            // Unhandled, non-optional suspension.
+                            throw new Sk.builtin.SuspensionError("Unhandled non-optional suspension of type '" + r.data["type"] + "'");
+                        }
+                    }
+                    
+                    resolve(r);
+                } catch (e) {
+                    reject(e);
+                }
+            })(susp);
+            // console.log('Just before resolve 281')
             resolve(susp.resume());
         } catch(e) {
             reject(e);
@@ -233,12 +287,14 @@ Sk.Debugger.prototype.suspension_handler = function(susp) {
 
 Sk.Debugger.prototype.resume = function() {
     // Reset the suspension stack to the topmost
+    console.log('In resume')
     this.current_suspension = this.suspension_stack.length - 1;
     if (this.suspension_stack.length === 0) {
         this.print("No running program");
     } else {
-        console.log(this.get_active_suspension())
         var promise = this.suspension_handler(this.get_active_suspension());      
+        console.log('Promise from resume')
+        console.log(promise)
         promise.then(this.success.bind(this), this.error.bind(this));
     }
 };
@@ -258,29 +314,15 @@ Sk.Debugger.prototype.pop_suspension_stack = function() {
  * @returns 
  */
 Sk.Debugger.prototype.success = function(r) {
-    console.log(r)
+    console.log('Success!')
     if (r instanceof Sk.misceval.Suspension) {        
-        if (r.data['type'] == 'Sk.promise') {            
-            console.log('Were in a promise')
-            var resumeWithData = function resolved(x) {
-                try {
-                    console.log(r)
-                    r.data["result"] = x;
-                    var promise = this.suspension_handler(r);      
-                    promise.then(this.success.bind(this), this.error.bind(this));
-                } catch (e) {
-                    this.error(e);
-                }
-            };
-            r.data['promise'].then(resumeWithData, this.error.bind(this));
-            return;
-        } else {
-            this.set_suspension(r);
+        if (r.data['type'] === 'Sk.promise') { 
+            var promise = this.suspension_handler(r);
+            promise.then(this.success.bind(this), this.error.bind(this));
         }
+        this.set_suspension(r);
     } else {
-        if (this.suspension_stack.length > 0) {
-            console.log('In else')        
-            
+        if (this.suspension_stack.length > 0) {            
             // Current suspension needs to be popped of the stack
             this.pop_suspension_stack();
             

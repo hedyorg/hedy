@@ -1010,7 +1010,7 @@ export function debugPythonProgram(this: any, code: string, sourceMap: any, hasT
   });
   let userProgramBeginning = code.split('\n').length - originalProgramLength + 1;
   console.log(`userProgramBeginning ${userProgramBeginning}`);
-  // theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
+  theGlobalDebugger.add_breakpoint('<stdin>.py', userProgramBeginning, '0', false)
   console.log(code);
   theGlobalDebugger.set_code(code.split('\n'));
   return theGlobalDebugger.asyncToPromise(function(){
