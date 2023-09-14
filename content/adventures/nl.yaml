@@ -127,7 +127,7 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} 'In het volgende avontuur leer je meerdere regels herhalen!'
                     ```
-                start_code: "{print} 'Lets go to the next tab!'"
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             9:
                 story_text: |
                     Fantastisch! Je bent alweer bij een nieuw level! In de vorige levels leerde je meerdere regels code in een blokje zetten met een {if} of {repeat} commando. Maar je kon ze nog niet allebei tegelijk gebruiken...
@@ -142,7 +142,7 @@ adventures:
                         {print} 'Joepie!'
                     {else}
                         {print} 'Nee? Oefen dan nog even door in het vorige level'
-                start_code: "{print} Lets go to the next tab!"
+                start_code: "{print} Op naar het volgende avontuur!"
             10:
                 story_text: |
                     Wat ben jij goed bezig! In het vorige level ben je misschien tegen een klein probleempje aangelopen. Je hebt geleerd hoe je regels kunt herhalen, maar wat als je ze elke keer net ietsje ander wil.
@@ -158,12 +158,12 @@ adventures:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                start_code: "{print} 'Lets go to the next tab!'"
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             11:
                 story_text: |
                     Je bent al ver gekomen! Goedzo! In de hogere levels gaat de Hedy programmeertaal steeds meer op Python lijken.
                     In Python bestaat het `{repeat}` commando niet, maar er is wel een commando dat werkt zoals {repeat}. Ben je benieuwd hoe je`{repeat}` zegt in Pythontaal? Ga dan naar het volgende avontuur!
-                start_code: "{print} 'Lets go to the next tab!'"
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             12:
                 story_text: |
                     Misschien heb je in een van je programma's al eens geprobeerd om kommagetallen te gebruiken, bijvoorbeeld bij je restaurant. Als je dat gedaan hebt, dan ben je er achtergekomen dat Hedy die kommagetallen steeds afrondde.
@@ -176,7 +176,7 @@ adventures:
                     print 'Je hebt een burger en drinken besteld'
                     print 'Dat kost ' totaal ' euro alstublieft'
                     ```
-                start_code: "{print} 'Lets go to the next tab!'"
+                start_code: "{print} 'op naar het volgende avontuur!'"
             13:
                 story_text: |
                     In vorige levels heb je geleerd hoe je twee `{if}`commando's in elkaar kan stoppen. Dit werk prima, maar het kan wel resulteren in lange onhandige codes zoals deze:
@@ -232,7 +232,7 @@ adventures:
                             {if} antwoord {is} 'ja'
                                 {print} 'Ok dan ga ik door'
                     ```
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             16:
                 story_text: |
                     In dit level komen we weer een stukje dichter bij Pythoncode. Je gaat leren hoe je twee lijstjes met elkaar kunt matchen.
@@ -253,7 +253,7 @@ adventures:
                         {for} geluid {in} geluiden
                             {print} 'Een ' dier ' zegt ' geluid
                     ```
-                start_code: "{print} 'Lets go to the next tab!'"
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             17:
                 story_text: |
                     Nu maken we nog een kleine verandering bij het inspringen. Elke keer als we moeten inspringen, gebruiken we een `:` bij de regel erboven.
@@ -265,7 +265,7 @@ adventures:
                 story_text: |
                     Hoera! Je hebt het einde van Hedy bereikt! De codes die je hier in het laaste level maakt kun je kopiëren naar andere Python omgevingen, zoals replit or PyCharm. Daar kun je verder Python leren!
                     Let wel op! Python kan alleen Engelse commando's lezen. Dus heb je de commando's geprogrammeerd in een andere taal, zet ze dan nu om naar het Engels.
-                start_code: "{print} ('Great job!!!')"
+                start_code: "{print} ('Geweldig gedaan!!!')"
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
@@ -593,7 +593,11 @@ adventures:
                     {echo}
                     {echo}
                     ```
-                start_code: "{print} Ik ben Hedy de papegaai!"
+                start_code: |
+                    {print} Ik ben papegaai Hedy
+                    {ask} Wie ben jij?
+                    {echo}
+                    {echo}
             2:
                 story_text: |
                     Maak je eigen online papegaai die je napraat!
@@ -874,7 +878,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: "{forward} 50\n{turn} {right}"
+                start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
                     In dit level kun je variabelen gebruiken om de turtle interactief te maken. Je kunt bijvoorbeeld aan de speler vragen hoeveel stapjes de turtle moet nemen.
@@ -893,7 +897,11 @@ adventures:
                     {turn} hoek
                     {forward} 25
                 story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de turtle naar elke richting laten wijzen. \n\nGebruik 90 graden om een kwartslag te draaien. Een heel rondje draaien is 360 graden. \nKun jij een figuurtje tekenen met deze code? Misschien een driehoek of een cirkel?\n"
-                example_code_2: "```\n{print} Figuren tekenen\nhoek {is} 90\n{turn} hoek\n{forward} 25\n{turn} hoek\n{forward} 25\n```\n"
+                example_code_2: |-
+                    {print} Schildpaddenrace!
+                    hoek {is} 90
+                    {turn} hoek
+                    {forward} 25
             3:
                 story_text: |
                     Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
@@ -908,9 +916,8 @@ adventures:
                     {forward} 25
                     ```
                 start_code: |-
-                    {print} Schildpaddenrace!
-                    hoek {is} 90
-                    {turn} hoek
+                    hoeken {is} 10, 50, 90, 150, 250
+                    {turn} hoeken {at} {random}
                     {forward} 25
             4:
                 story_text: |
@@ -959,7 +966,8 @@ adventures:
                     ```
                 start_code: |-
                     {print} 'Figuren tekenen'
-                    hoek {is} 90
+                    figuur {is} {ask} 'Wil je een vierkant of een driehoek?'
+                    {if} figuur {is} driehoek hoek {is} 120 {else} hoek {is} 90
                     {turn} hoek
                     {forward} 25
                 example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
@@ -1171,7 +1179,9 @@ adventures:
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
                     {print} Jij gooit _ {at} {random}
                     ```
-                start_code: "{print} Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: |
+                    keuzes {is} 1, 2, 3, 4, 5, regenworm
+                    {print} Jij gooide _ {at} {random} !
                 example_code_2: |
                     ```
                     keuze {is} _
@@ -1540,10 +1550,10 @@ adventures:
 
                     Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
                 start_code: |
-                    goede_antwoord = 11 * 27
-                    antwoord = {ask} 'Hoeveel is 11 keer 27?'
-                    {if} antwoord {is} goede_antwoord {print} 'goedzo'
-                    {else} {print} 'Foutje! Het was ' goede_antwoord
+                    getal_1 = {ask} 'Het eerste getal is:'
+                    getal_2 = {ask} 'Het tweede getal is:'
+                    correct_antwoord = getal_1 * getal_2
+                    {print} getal_1 ' keer ' getal_2 ' is ' correct_antwoord
             9:
                 story_text: |
                     In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
@@ -2199,7 +2209,6 @@ adventures:
                     {print} _
                     ```
                 start_code: "{print} Hoe ben ik hier terechtgekomen?"
-
                 story_text_2: |
                     ### Opdracht
                     Kopieer de voorbeeldcode naar jouw invoerscherm door op de gele knop te klikken.
@@ -2844,17 +2853,17 @@ adventures:
                 story_text_2: "We gaan het opslaan van een variabele veranderen! Vanaf nu mag je `=` gebruiken in plaats van `{is}` om een woord of een getal in een variabele op te slaan, dat ziet er zo uit:\n"
                 example_code_2: "```\nnaam = Hedy\nantwoord = 20 + 4\n```\n"
             12:
+                start_code: |-
+                    {print} 'kommagetallen gebruiken een punt'
+                    {print} 2.5 + 2.5
                 story_text: |-
                     **Kommagetallen**
-                    Tot nu toe mocht je in Hedy geen kommagetallen gebruiken zoals 1.5, maar vanaf nu mag dat wel! Let op dat je een punt moet gebruiken in plaats van een komma. Kijk maar:
+                    Tot nu toe mocht je bij Hedy geen kommagetallen gebruiken zoals 1.5, maar vanaf nu mag dat wel. Let op! Gebruik een punt en geen komma.
                 example_code: |
                     ```
                     {print} 'Anderhalf plus anderhalf is...'
                     {print} 1.5 + 1.5
                     ```
-                start_code: |
-                    {print} 'Kommagetallen gebruiken een punt'
-                    {print} 2.5 + 2.5
                 story_text_2: |-
                     **Rekenen met woorden**
                     In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
@@ -2898,6 +2907,16 @@ adventures:
                 story_text_2: "### Opdracht\nTijd om je eigen variabelen te maken!\nIn het voorbeeld hebben we de variabele 'lievelingsdier' gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.\nMaak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.\n"
                 example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud."
+            6:
+                story_text: |
+                    We veranderen ook hoe je een woord opslaat in een variabele! Je mag hierbij vanaf nu een `=` in plaats van een `{is}` gebruiken. Kijk maar:                example_code: |
+                    ```
+                    naam = Hedy
+                    antwoord = 20 + 4
+                    ```
+                start_code: |
+                    naam = Hedy
+                    antwoord = 20 + 4
             14:
                 start_code: |-
                     leeftijd = {ask} 'Hoe oud ben jij?'
@@ -3021,7 +3040,8 @@ adventures:
             5:
                 start_code: |-
                     naam {is} {ask} 'hoe heet jij?'
-                    {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
+                    {if} naam {is} Hedy {print} 'leuk'
+                    {else} {print} 'minder leuk!'
                 story_text: |
                     In dit level is er iets nieuws, de `{if}`! Met de `{if}` kun je een keuze maken tussen twee verschillende opties.
                     Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
@@ -3044,6 +3064,29 @@ adventures:
                 start_code: "naam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n"
                 example_code: "```\nnaam {is} {ask} 'Hoe heet je?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n    {print} 'Jij mag computeren!'\n```\n"
                 story_text: "Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.\nJe kunt nu ook inspringen na het {if} of {else} commando om zo'n blok te vormen.\nKijk maar naar het voorbeeld.\n\n### Opdracht\nVoeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.\n"
+            9:
+                start_code: |
+                    doorgaan = {ask} 'Wil je doorgaan?'
+                    {if} doorgaan = ja
+                        zeker = {ask} 'Weet je het zeker?'
+                        {if} zeker = ja
+                            {print} 'We gaan door'
+                        {else}
+                            {print} 'Je bent niet zeker'
+                    {else}
+                        {print} 'Je wil niet doorgaan'
+                example_code: |
+                    doorgaan = {ask} 'Wil je doorgaan?'
+                    {if} doorgaan = ja
+                        zeker = {ask} 'Weet je het zeker?'
+                        {if} zeker = ja
+                            {print} 'We gaan door'
+                        {else}
+                            {print} 'Je bent niet zeker'
+                    {else}
+                        {print} 'Je wil niet doorgaan'
+                story_text: |
+                    In dit level kun je een {if} commando in een ander {if} commando stoppen.
     in_command:
         name: "{in}"
         description: Introducing the in command
