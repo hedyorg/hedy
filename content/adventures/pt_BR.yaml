@@ -348,7 +348,7 @@ adventures:
             1:
                 story_text: "Você também pode usar Hedy para desenhar. Ao combinar giros e linhas, você pode fazer um quadrado ou uma escada!\n\nUsando `{forward}` você desenha uma linha para frente. O número depois dele determina o quão longe a tartaruga vai andar. `{turn} {right}` gira um quarto de volta no sentido horário, `{turn} {left}` gira no sentido anti-horário.\nSe você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`\n\nEste é o início de uma pequena escada. Você pode fazê-la ter 5 passos?\n"
                 start_code: "{forward} 50\n{turn} {left}"
-                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
             2:
                 story_text: "Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.\n"
                 example_code: "```\nresposta {is} {ask} Quantos passos a tartaruga deve dar?\n{forward} resposta\n```\n"

@@ -147,7 +147,14 @@ adventures:
                 story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             1:
                 story_text: "Du ha også bruke Hedy til å tegne. Ved å kombinere svinger og linjer så kan du lage firkanter eller trapper!\n\nVed å bruke `{forward}` kan du tegne en linje fremover. Talle bak kommandoen bestemmer hvor langt skilpadden vil gå. `{turn} {right}` snur skilpadden en kvart runde med klokken, `{turn} {left}` snur skilpadden mot klokken.\n\nDette er starten på en liten trapp. Kan du få den til å ha 5 trinn?\n"
-                example_code: "```\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                example_code: |
+                    ```
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    ```
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: "På nivå 1 kunne skilpadden kun snu seg til høyre eller venstre. Det er litt kjedelig!\nPå nivå 2 kan den peke nesen i alle retninger.\n\nBruk 90 til å snu en kvart omdreining. Vi kalle dette grader. En full rotasjon er 360 grader.\nKan du lage en liten figur med denne koden? Kanskje et triangel eller en sirkel?\n"
