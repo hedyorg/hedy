@@ -196,11 +196,7 @@ adventures:
                     ```
             14:
                 start_code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                    {print} 'Hadi bir sonraki sekmeye geçelim'
                 story_text: |
                     Aşağıdaki program ile okulda bir dersi geçip geçmediğinizi hesaplayabilirsiniz (yani, altı yada daha yüksek bir not).
                     Bu kodun, 5. satırdaki çok uzun kod nedeniyle son derece verimsiz olduğunu görebilirsiniz.
@@ -222,12 +218,11 @@ adventures:
                     {while} answer != 25
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
-                story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
-
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
+                story_text: |
+                    Aşağıdaki bu oyunda, oyuncunun istediği kadar oynayabilmesini sağlamak için bir kod yapılmıştır...
+                    Ancak kod etkisiz ve çok uzun. Ayrıca, oyuncu 100 yerine 101 oyun oynamak isterse ne olacak?
+                    Sonsuza kadar da oynayamaz mısın?
+                    Bu seviyede tüm bunları çok daha kolay hale getiren bir komut öğreneceksiniz!
                 example_code: |
                     ```
                     answer = 0
@@ -1065,7 +1060,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                  Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
