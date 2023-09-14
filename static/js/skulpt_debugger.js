@@ -2,13 +2,7 @@
  * Debugger support for skulpt module
  */
 
-var Sk = Sk || {}; //jshint ignore:line
-
-// function hasOwnProperty(obj, prop) {
-//     var proto = obj.constructor.prototype;
-//     return (prop in obj) &&
-//         (!(prop in proto) || proto[prop] !== obj[prop]);
-// }
+var Sk = Sk || {};
 
 Sk.Breakpoint = function(filename, lineno, colno) {
     this.filename = filename;
@@ -18,379 +12,331 @@ Sk.Breakpoint = function(filename, lineno, colno) {
     this.ignore_count = 0;
 };
 
-Sk.Debugger = function(filename, output_callback, editor_ref) {
-    this.dbg_breakpoints = {};
-    this.tmp_breakpoints = {};
-    this.suspension_stack = [];
-    this.current_suspension = -1;
-    this.eval_callback = null;
-    this.suspension = null;
-    this.output_callback = output_callback;
-    this.step_mode = false;
-    this.filename = filename;
-    this.editor_ref = editor_ref;
-    this.code = "";
-};
-
-Sk.Debugger.prototype.set_code = function(code) {
-    this.code = code;
-}
-
-Sk.Debugger.prototype.print = function(txt) {
-    console.log(txt);
-};
-
-Sk.Debugger.prototype.get_source_line = function(lineno) {
-    if (this.code.length > 0) {
-        return this.code[lineno];
+Sk.Debugger = class {
+    constructor(filename, output_callback, editor_ref) {
+        this.dbg_breakpoints = {};
+        this.tmp_breakpoints = {};
+        this.suspension_stack = [];
+        this.current_suspension = -1;
+        this.eval_callback = null;
+        this.suspension = null;
+        this.output_callback = output_callback;
+        this.step_mode = false;
+        this.filename = filename;
+        this.editor_ref = editor_ref;
+        this.code = "";
     }
-    
-    return "";
-};
-
-Sk.Debugger.prototype.move_up_the_stack = function() {
-    this.current_suspension = Math.min(this.current_suspension + 1, this.suspension_stack.length - 1);
-};
-
-Sk.Debugger.prototype.move_down_the_stack = function() {
-    this.current_suspension = Math.max(this.current_suspension - 1, 0);
-};
-
-Sk.Debugger.prototype.enable_step_mode = function() {
-    this.step_mode = true;
-};
-
-Sk.Debugger.prototype.disable_step_mode = function() {
-    this.step_mode = false;
-};
-
-Sk.Debugger.prototype.get_suspension_stack = function() {
-    return this.suspension_stack;
-};
-
-Sk.Debugger.prototype.get_active_suspension = function() {
-    if (this.suspension_stack.length === 0) {
-        return null;
+    set_code(code) {
+        this.code = code;
     }
-
-    return this.suspension_stack[this.current_suspension];
-};
-
-Sk.Debugger.prototype.generate_breakpoint_key = function(filename, lineno, colno) {
-    var key = filename + "-" + lineno;
-    return key;
-};
-
-Sk.Debugger.prototype.check_breakpoints = function(filename, lineno, colno, globals, locals) {
-    // If Step mode is enabled then ignore breakpoints since we will just break
-    // at every line.
-    if (this.step_mode === true) {
-        return true;
+    print(txt) {
+        console.log(txt);
     }
-    
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    if (this.dbg_breakpoints.hasOwnProperty(key) &&
-        this.dbg_breakpoints[key].enabled === true) {
-        var bp = null;
-        if (this.tmp_breakpoints.hasOwnProperty(key)) {
+    get_source_line(lineno) {
+        if (this.code.length > 0) {
+            return this.code[lineno];
+        }
+
+        return "";
+    }
+    move_up_the_stack() {
+        this.current_suspension = Math.min(this.current_suspension + 1, this.suspension_stack.length - 1);
+    }
+    move_down_the_stack() {
+        this.current_suspension = Math.max(this.current_suspension - 1, 0);
+    }
+    enable_step_mode() {
+        this.step_mode = true;
+    }
+    disable_step_mode() {
+        this.step_mode = false;
+    }
+    get_suspension_stack() {
+        return this.suspension_stack;
+    }
+    get_active_suspension() {
+        if (this.suspension_stack.length === 0) {
+            return null;
+        }
+
+        return this.suspension_stack[this.current_suspension];
+    }
+    generate_breakpoint_key(filename, lineno, colno) {
+        var key = filename + "-" + lineno;
+        return key;
+    }
+    check_breakpoints(filename, lineno, colno, globals, locals) {
+        // If Step mode is enabled then ignore breakpoints since we will just break
+        // at every line.
+        if (this.step_mode === true) {
+            return true;
+        }
+
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+        if (this.dbg_breakpoints.hasOwnProperty(key) &&
+            this.dbg_breakpoints[key].enabled === true) {
+            var bp = null;
+            if (this.tmp_breakpoints.hasOwnProperty(key)) {
+                delete this.dbg_breakpoints[key];
+                delete this.tmp_breakpoints[key];
+                return true;
+            }
+
+            this.dbg_breakpoints[key].ignore_count -= 1;
+            this.dbg_breakpoints[key].ignore_count = Math.max(0, this.dbg_breakpoints[key].ignore_count);
+
+            bp = this.dbg_breakpoints[key];
+            if (bp.ignore_count === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+    get_breakpoints_list() {
+        return this.dbg_breakpoints;
+    }
+    disable_breakpoint(filename, lineno, colno) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+
+        if (this.dbg_breakpoints.hasOwnProperty(key)) {
+            this.dbg_breakpoints[key].enabled = false;
+        }
+    }
+    enable_breakpoint(filename, lineno, colno) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+
+        if (this.dbg_breakpoints.hasOwnProperty(key)) {
+            this.dbg_breakpoints[key].enabled = true;
+        }
+    }
+    clear_breakpoint(filename, lineno, colno) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+        if (this.dbg_breakpoints.hasOwnProperty(key)) {
             delete this.dbg_breakpoints[key];
-            delete this.tmp_breakpoints[key];
-            return true;
-        }
-        
-        this.dbg_breakpoints[key].ignore_count -= 1;
-        this.dbg_breakpoints[key].ignore_count = Math.max(0, this.dbg_breakpoints[key].ignore_count);
-        
-        bp = this.dbg_breakpoints[key];
-        if (bp.ignore_count === 0) {
-            return true;
+            return null;
         } else {
-            return false;
+            return "Invalid breakpoint specified: " + filename + " line: " + lineno;
         }
     }
-    return false;
-};
-
-Sk.Debugger.prototype.get_breakpoints_list = function() {
-    return this.dbg_breakpoints;
-};
-
-Sk.Debugger.prototype.disable_breakpoint = function(filename, lineno, colno) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    
-    if (this.dbg_breakpoints.hasOwnProperty(key)) {
-        this.dbg_breakpoints[key].enabled = false;
+    clear_all_breakpoints() {
+        this.dbg_breakpoints = {};
+        this.tmp_breakpoints = {};
     }
-};
-
-Sk.Debugger.prototype.enable_breakpoint = function(filename, lineno, colno) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    
-    if (this.dbg_breakpoints.hasOwnProperty(key)) {
-        this.dbg_breakpoints[key].enabled = true;
+    set_ignore_count(filename, lineno, colno, count) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+        if (this.dbg_breakpoints.hasOwnProperty(key)) {
+            var bp = this.dbg_breakpoints[key];
+            bp.ignore_count = count;
+        }
     }
-};
+    set_condition(filename, lineno, colno, lhs, cond, rhs) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+        var bp;
+        if (this.dbg_breakpoints.hasOwnProperty(key)) {
+            // Set a new condition
+            bp = this.dbg_breakpoints[key];
+        } else {
+            bp = new Sk.Breakpoint(filename, lineno, colno);
+        }
 
-Sk.Debugger.prototype.clear_breakpoint = function(filename, lineno, colno) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    if (this.dbg_breakpoints.hasOwnProperty(key)) {
-        delete this.dbg_breakpoints[key];
-        return null;
-    } else {
-        return "Invalid breakpoint specified: " + filename + " line: " + lineno;
+        bp.condition = new Sk.Condition(lhs, cond, rhs);
+        this.dbg_breakpoints[key] = bp;
     }
-};
-
-Sk.Debugger.prototype.clear_all_breakpoints = function() {
-    this.dbg_breakpoints = {};
-    this.tmp_breakpoints = {};
-};
-
-Sk.Debugger.prototype.set_ignore_count = function(filename, lineno, colno, count) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    if (this.dbg_breakpoints.hasOwnProperty(key)) {
-        var bp = this.dbg_breakpoints[key];
-        bp.ignore_count = count;
+    print_suspension_info(suspension) {
+        var filename = suspension.$filename;
+        var lineno = suspension.$lineno;
+        var colno = suspension.$colno;
+        this.print("Hit Breakpoint at <" + filename + "> at line: " + lineno + " column: " + colno + "\n");
+        this.print("----------------------------------------------------------------------------------\n");
+        this.print(" ==> " + this.get_source_line(lineno - 1) + "\n");
+        this.print("----------------------------------------------------------------------------------\n");
     }
-};
+    set_suspension(suspension) {
+        var parent = null;
+        if (!suspension.hasOwnProperty("filename") && suspension.child instanceof Sk.misceval.Suspension) {
+            suspension = suspension.child;
+        }
 
-Sk.Debugger.prototype.set_condition = function(filename, lineno, colno, lhs, cond, rhs) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);
-    var bp;
-    if (this.dbg_breakpoints.hasOwnProperty(key)) {
-        // Set a new condition
-        bp = this.dbg_breakpoints[key];
-    } else {
-        bp = new Sk.Breakpoint(filename, lineno, colno);
+        // Pop the last suspension of the stack if there is more than 0
+        if (this.suspension_stack.length > 0) {
+            this.suspension_stack.pop();
+            this.current_suspension -= 1;
+        }
+
+        // Unroll the stack to get each suspension.
+        while (suspension instanceof Sk.misceval.Suspension) {
+            parent = suspension;
+            this.suspension_stack.push(parent);
+            this.current_suspension += 1;
+            suspension = suspension.child;
+        }
+
+        suspension = parent;
+
+        this.print_suspension_info(suspension);
     }
-    
-    bp.condition = new Sk.Condition(lhs, cond, rhs);
-    this.dbg_breakpoints[key] = bp;
-};
-
-Sk.Debugger.prototype.print_suspension_info = function(suspension) {
-    var filename = suspension.$filename;
-    var lineno = suspension.$lineno;
-    var colno = suspension.$colno;
-    this.print("Hit Breakpoint at <" + filename + "> at line: " + lineno + " column: " + colno + "\n");
-    this.print("----------------------------------------------------------------------------------\n");
-    this.print(" ==> " + this.get_source_line(lineno - 1) + "\n");
-    this.print("----------------------------------------------------------------------------------\n");
-};
-
-Sk.Debugger.prototype.set_suspension = function(suspension) {
-    var parent = null;
-    if (!suspension.hasOwnProperty("filename") && suspension.child instanceof Sk.misceval.Suspension) {
-        suspension = suspension.child;
+    add_breakpoint(filename, lineno, colno, temporary) {
+        var key = this.generate_breakpoint_key(filename, lineno, colno);
+        this.dbg_breakpoints[key] = new Sk.Breakpoint(filename, lineno, colno);
+        if (temporary) {
+            this.tmp_breakpoints[key] = true;
+        }
     }
-        
-    // Pop the last suspension of the stack if there is more than 0
-    if (this.suspension_stack.length > 0) {     
+    // aplicar tecnica de MiscEval en Skilpt aqui
+    suspension_handler(susp) {
+        return new Promise(function (resolve, reject) {
+            try {
+                (function handleResponse(r) {
+                    try {
+                        // jsh*nt insists these be defined outside the loop
+                        var resume = function () {
+                            try {
+                                resolve(r.resume());
+                            } catch (e) {
+                                reject(e);
+                            }
+                        };
+                        var resumeWithData = function resolved(x) {
+                            try {
+                                r.data["result"] = x;
+                                resume();
+                            } catch (e) {
+                                reject(e);
+                            }
+                        };
+                        var resumeWithError = function rejected(e) {;
+                            try {
+                                r.data["error"] = e;
+                                resume();
+                            } catch (ex) {
+                                reject(ex);
+                            }
+                        };
+                        while (r instanceof Sk.misceval.Suspension) {
+                            if (r.data["type"] == "Sk.promise") {
+                                r.data["promise"].then(resumeWithData, resumeWithError);
+                                return;
+                            } else if (r.data["type"] == "Sk.yield") {
+                                // Assumes all yields are optional, as Sk.setTimeout might
+                                // not be able to yield.
+                                //Sk.setTimeout(resume, 0);
+                                Sk.global["setImmediate"](resume);
+                                return;
+                            } else if (r.data["type"] == "Sk.delay") {
+                                //Sk.setTimeout(resume, 1);
+                                Sk.global["setImmediate"](resume);
+                                return;
+                            } else if (r.optional) {
+                                // Unhandled optional suspensions just get
+                                // resumed immediately, and we go around the loop again.
+                                return;
+                            } else {
+                                // Unhandled, non-optional suspension.
+                                throw new Sk.builtin.SuspensionError("Unhandled non-optional suspension of type '" + r.data["type"] + "'");
+                            }
+                        }
+
+                        resolve(r);
+                    } catch (e) {
+                        reject(e);
+                    }
+                })(susp);
+                resolve(susp.resume());
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+    resume() {
+        // Reset the suspension stack to the topmost
+        this.current_suspension = this.suspension_stack.length - 1;
+        if (this.suspension_stack.length === 0) {
+            this.print("No running program");
+        } else {
+            var promise = this.suspension_handler(this.get_active_suspension());
+            promise.then(this.success.bind(this), this.error.bind(this));
+        }
+    }
+    pop_suspension_stack() {
         this.suspension_stack.pop();
         this.current_suspension -= 1;
     }
-    
-    // Unroll the stack to get each suspension.
-    while (suspension instanceof Sk.misceval.Suspension) {
-        parent = suspension;
-        this.suspension_stack.push(parent);
-        this.current_suspension += 1;
-        suspension = suspension.child;
-    }
-
-    suspension = parent;
-    
-    this.print_suspension_info(suspension);
-};
-
-Sk.Debugger.prototype.add_breakpoint = function(filename, lineno, colno, temporary) {
-    var key = this.generate_breakpoint_key(filename, lineno, colno);    
-    this.dbg_breakpoints[key] = new Sk.Breakpoint(filename, lineno, colno);
-    if (temporary) {
-        this.tmp_breakpoints[key] = true;
-    }
-};
-// aplicar tecnica de MiscEval en Skilpt aqui
-Sk.Debugger.prototype.suspension_handler = function(susp) {    
-    console.log('In suspension handler')
-    return new Promise(function(resolve, reject) {
-        try {
-            (function handleResponse(r) {
-                try {
-                    // jsh*nt insists these be defined outside the loop
-                    console.log('Inside handle response')   
-                    console.log(r)
-                    var resume = function () {
-                        try {
-                            console.log('226')
-                            resolve(r.resume());
-                        } catch (e) {
-                            reject(e);
-                        }
-                    };
-                    var resumeWithData = function resolved(x) {
-                        console.log('233')                        
-                        try {
-                            r.data["result"] = x;
-                            resume();
-                        } catch (e) {
-                            reject(e);
-                        }
-                    };
-                    var resumeWithError = function rejected(e) {
-                        console.log('243')                        
-                        try {
-                            r.data["error"] = e;
-                            resume();
-                        } catch (ex) {
-                            reject(ex);
-                        }
-                    };
-                    while (r instanceof Sk.misceval.Suspension) {
-                        if (r.data["type"] == "Sk.promise") {
-                            console.log('252')                            
-                            r.data["promise"].then(resumeWithData, resumeWithError);
-                            return;
-                        } else if (r.data["type"] == "Sk.yield") {
-                            // Assumes all yields are optional, as Sk.setTimeout might
-                            // not be able to yield.
-                            //Sk.setTimeout(resume, 0);
-                            Sk.global["setImmediate"](resume);
-                            return;
-                        } else if (r.data["type"] == "Sk.delay") {
-                            //Sk.setTimeout(resume, 1);
-                            Sk.global["setImmediate"](resume);
-                            return;
-                        } else if (r.optional) {
-                            // Unhandled optional suspensions just get
-                            // resumed immediately, and we go around the loop again.
-                            console.log('268')
-                            return;
-                        } else {
-                            // Unhandled, non-optional suspension.
-                            throw new Sk.builtin.SuspensionError("Unhandled non-optional suspension of type '" + r.data["type"] + "'");
-                        }
-                    }
-                    
-                    resolve(r);
-                } catch (e) {
-                    reject(e);
-                }
-            })(susp);
-            // console.log('Just before resolve 281')
-            resolve(susp.resume());
-        } catch(e) {
-            reject(e);
-        }
-    });
-};
-
-Sk.Debugger.prototype.resume = function() {
-    // Reset the suspension stack to the topmost
-    console.log('In resume')
-    this.current_suspension = this.suspension_stack.length - 1;
-    if (this.suspension_stack.length === 0) {
-        this.print("No running program");
-    } else {
-        var promise = this.suspension_handler(this.get_active_suspension());      
-        console.log('Promise from resume')
-        console.log(promise)
-        promise.then(this.success.bind(this), this.error.bind(this));
-    }
-};
-
-Sk.Debugger.prototype.pop_suspension_stack = function() {
-    this.suspension_stack.pop();
-    this.current_suspension -= 1;
-};
-/**
- * Necesito saber como hacer que luego de setearle el valor a la suspension que viene de la promesa
- * se ejecute la siguiente suspension
- * tal como pasa en misceval asyncToPromise en Skulpt. Me tengo que vasar en eso
- * para solcionar este problema
- * Otra cosa que me gustaría saber como funciona es como se ejecuta la siguiente suspension y como espera
- * el programa por ella tan solo llaamando a this.set_suspension()
- * @param {*} r 
- * @returns 
- */
-Sk.Debugger.prototype.success = function(r) {
-    console.log('Success!')
-    if (r instanceof Sk.misceval.Suspension) {        
-        if (r.data['type'] === 'Sk.promise') { 
-            var promise = this.suspension_handler(r);
-            promise.then(this.success.bind(this), this.error.bind(this));
-        }
-        this.set_suspension(r);
-    } else {
-        if (this.suspension_stack.length > 0) {            
-            // Current suspension needs to be popped of the stack
-            this.pop_suspension_stack();
-            
-            if (this.suspension_stack.length === 0) {                
-                return;
+    /**
+     * Necesito saber como hacer que luego de setearle el valor a la suspension que viene de la promesa
+     * se ejecute la siguiente suspension
+     * tal como pasa en misceval asyncToPromise en Skulpt. Me tengo que vasar en eso
+     * para solcionar este problema
+     * Otra cosa que me gustaría saber como funciona es como se ejecuta la siguiente suspension y como espera
+     * el programa por ella tan solo llaamando a this.set_suspension()
+     * @param {*} r
+     * @returns
+     */
+    success(r) {
+        if (r instanceof Sk.misceval.Suspension) {
+            if (r.data['type'] === 'Sk.promise') {
+                var promise = this.suspension_handler(r);
+                promise.then(this.success.bind(this), this.error.bind(this));
             }
-            
-            var parent_suspension = this.get_active_suspension();
-            // The child has completed the execution. So override the child's resume
-            // so we can continue the execution.
-            parent_suspension.child.resume = function() {
-                return r;
-            };
-            this.resume();
-        }
-    }
-};
+            this.set_suspension(r);
+        } else {
+            if (this.suspension_stack.length > 0) {
+                // Current suspension needs to be popped of the stack
+                this.pop_suspension_stack();
 
-Sk.Debugger.prototype.error = function(e) {
-    this.print("Traceback (most recent call last):");
-    console.log(e)
-    for (var idx = 0; idx < e.traceback.length; ++idx) {
-        this.print("  File \"" + e.traceback[idx].$filename + "\", line " + e.traceback[idx].$lineno + ", in <module>");
-    }
-    
-    var err_ty = e.constructor.tp$name;
-    for (idx = 0; idx < e.args.v.length; ++idx) {
-        this.print(err_ty + ": " + e.args.v[idx].v);
-    }
-};
-
-Sk.Debugger.prototype.asyncToPromise = function(suspendablefn, suspHandlers, debugger_obj) {
-    return new Promise(function(resolve, reject) {
-        try {
-            var r = suspendablefn();
-            console.log('Estamos en 290')
-            console.log(r);
-            console.log(suspendablefn);
-            (function handleResponse (r) {
-                try {
-                    while (r instanceof Sk.misceval.Suspension) {
-                        console.log('Estamos en 301')
-                        console.log(r);
-                        debugger_obj.set_suspension(r);
-                        console.log('Estamos en 304')
-                        return;
-                    }
-                    console.log(resolve);
-                    resolve(r);
-                } catch(e) {
-                    reject(e);
+                if (this.suspension_stack.length === 0) {
+                    return;
                 }
-            })(r);
-            console.log('here? 313')
-        } catch (e) {
-            console.log('316')
-            console.log(e)
-            reject(e);
-        }
-    });
-};
 
-Sk.Debugger.prototype.execute = function(suspendablefn, suspHandlers) {
-    var r = suspendablefn();
-    
-    if (r instanceof Sk.misceval.Suspension) {
-        this.suspensions.concat(r);
-        this.eval_callback(r);
+                var parent_suspension = this.get_active_suspension();
+                // The child has completed the execution. So override the child's resume
+                // so we can continue the execution.
+                parent_suspension.child.resume = function () {
+                    return r;
+                };
+                this.resume();
+            }
+        }
+    }
+    error(e) {
+        this.print("Traceback (most recent call last):");
+        for (var idx = 0; idx < e.traceback.length; ++idx) {
+            this.print("  File \"" + e.traceback[idx].$filename + "\", line " + e.traceback[idx].$lineno + ", in <module>");
+        }
+
+        var err_ty = e.constructor.tp$name;
+        for (idx = 0; idx < e.args.v.length; ++idx) {
+            this.print(err_ty + ": " + e.args.v[idx].v);
+        }
+    }
+    asyncToPromise(suspendablefn, suspHandlers, debugger_obj) {
+        return new Promise(function (resolve, reject) {
+            try {
+                var r = suspendablefn();
+                (function handleResponse(r) {
+                    try {
+                        while (r instanceof Sk.misceval.Suspension) {
+                            debugger_obj.set_suspension(r);
+                            return;
+                        }
+                        resolve(r);
+                    } catch (e) {
+                        reject(e);
+                    }
+                })(r);
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+    execute(suspendablefn, suspHandlers) {
+        var r = suspendablefn();
+
+        if (r instanceof Sk.misceval.Suspension) {
+            this.suspensions.concat(r);
+            this.eval_callback(r);
+        }
     }
 };
 
