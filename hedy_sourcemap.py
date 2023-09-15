@@ -53,10 +53,11 @@ class SourceCode:
     a source_range (SourceRange) and the code (str)
     """
 
-    def __init__(self, source_range: SourceRange, code: str, error: Exception = None):
+    def __init__(self, source_range: SourceRange, code: str, error: Exception = None, command_name: str = None):
         self.source_range = source_range
         self.code = code
         self.error = error
+        self.command_name = command_name
 
     def __hash__(self):
         return hash((
@@ -78,7 +79,7 @@ class SourceCode:
 
     def __str__(self):
         if self.error is None:
-            return f'{self.source_range} --- {self.code}'
+            return f'{self.source_range} --- {self.code} --- {self.command_name}'
         else:
             return f'{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]'
 
@@ -203,10 +204,10 @@ class SourceMap:
                     'to_column': python_source_code.source_range.to_column,
                 },
                 'error': hedy_source_code.error,
+                'command': hedy_source_code.command_name
             }
 
             index += 1
-
         return response_map
 
     def get_compressed_mapping(self):
@@ -282,7 +283,8 @@ def source_map_rule(source_map: SourceMap):
                     meta.container_end_line, meta.container_end_column
                 ),
                 hedy_code_input,
-                error=error
+                error=error,
+                command_name=function.__name__
             )
 
             python_code = SourceCode(
