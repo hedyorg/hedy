@@ -34,11 +34,11 @@ levels:
             question_text: 어떤 진술이 사실입니까?
             code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
             mp_choice_options:
-            -   option: You can only fill in the word is on the `_?_`
-                feedback: 오류:509
-            -   option: You can fill in either the word is or the `=` sign on the `_?_`
+            -   option: '`_`에 있는 단어만 입력할 수 있습니다'
+                feedback: '`=` 표시도 사용할 수 있습니다'
+            -   option: '`_`에 단어를 입력하거나 `=` 기호를 입력할 수 있습니다'
                 feedback: 최고야!
-            -   option: You have to fill in =is= on the `_?_`
+            -   option: '`_`에 = is =를 입력해야 합니다'
                 feedback: No, one `=` sign is enough
             -   option: You can only use the `=` sign when working with numbers, not with words.
                 feedback: '`=`를 단어와 함께 사용할 수도 있습니다.'
@@ -200,11 +200,11 @@ levels:
             -   option: "```\nI'm\n```\n"
                 feedback: 그렇구나!
             -   option: "`{print}`\n"
-                feedback: '{print}의 철자가 정확합니다'
+                feedback: '`{print}`의 철자가 정확합니다'
             -   option: "`{repeat}`\n"
                 feedback: '`{repeat}`의 철자가 정확합니다'
             -   option: "`{times}`\n"
-                feedback: '{times}의 철자가 정확합니다'
+                feedback: '`{times}`의 철자가 정확합니다'
             correct_answer: A
             hint: I'm is wrong, you can't use apostrophes
             question_score: '10'
@@ -271,7 +271,7 @@ levels:
             -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
                 feedback: 반복되는 대사가 올바르지 않습니다.
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```\n"
-                feedback: 3행에 '{print}' 명령이 없습니다.
+                feedback: 3행에 `{print}` 명령이 없습니다.
             -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
                 feedback: 따옴표를 놓쳤군요
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help !'\n{print} 'Please help me !'\n```\n"
@@ -330,7 +330,7 @@ levels:
             code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
             mp_choice_options:
             -   option: "Baby shark tututudutudu\nBaby shark\n"
-                feedback: '{repeat} 명령을 조심하세요!'
+                feedback: '`{repeat}` 명령을 조심하세요!'
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: The last line has no indentation, so it's not repeated.
             -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
@@ -345,7 +345,7 @@ levels:
             code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Were going on holiday!'"
             mp_choice_options:
             -   option: "The children went:\nYay!\nWere going on holiday!\n"
-                feedback: '{repeat} 명령을 조심하세요!'
+                feedback: '`{repeat}` 명령을 조심하세요!'
             -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!\n"
                 feedback: 정답!
             -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!\n"
@@ -437,7 +437,7 @@ levels:
             code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
             mp_choice_options:
             -   option: Line 2 and 4
-                feedback: "{if} 및 '{else}' 명령 뒤의 행은 4개의 공백으로 시작해야 합니다"
+                feedback: "`{if}` 및 `{else}` 명령 뒤의 행은 4개의 공백으로 시작해야 합니다"
             -   option: Only line 3
                 feedback: 3명 뿐만 아니라...
             -   option: Line 3, 4 and 5
@@ -528,13 +528,13 @@ levels:
             output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             mp_choice_options:
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
-                feedback: '{repeat} 명령 뒤에 들여쓰기를 잊지 마십시오.'
+                feedback: '`{repeat}` 명령 뒤에 들여쓰기를 잊지 마십시오.'
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
-                feedback: '{if} 명령 뒤에 들여쓰기 사용'
+                feedback: '`{if}`명령 뒤에 들여쓰기 사용'
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: 완벽하네요
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
-                feedback: 이 코드에는 2개의 '{repeat}' 명령이 있습니다.
+                feedback: 이 코드에는 2개의 `{repeat}`명령이 있습니다.
             correct_answer: C
             hint: Watch the indentation
             question_score: '10'
@@ -544,7 +544,7 @@ levels:
             -   option: '`{if}`'
                 feedback: 다른 사람들을 잊지 마세요
             -   option: '`{if}` `{repeat}`'
-                feedback: '{else}을(를) 잊지 마세요!'
+                feedback: '`{else}`을(를) 잊지 마세요!'
             -   option: '`{if}` `{else}` `{repeat}`'
                 feedback: 힘내세요!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
@@ -583,7 +583,7 @@ levels:
             question_score: '10'
             correct_answer: B
         9:
-            question_text: 다른 '{if}' 명령어 안에 넣을 수 있는 '{if}' 명령어는 몇 개인가?
+            question_text: 다른 '`{if}` 명령어 안에 넣을 수 있는 `{if}` 명령어는 몇 개인가?
             mp_choice_options:
             -   option: None, that is not allowed
                 feedback: 할 수 있다
@@ -808,9 +808,9 @@ levels:
                     {print} 'hi'
             mp_choice_options:
             -   option: "23\n24\n25"
-                feedback: "숫자가 나타나지도 않고 '{print}' i라고 쓰여 있지도 않아요."
+                feedback: "숫자가 나타나지도 않고 `{print}`i라고 쓰여 있지도 않아요."
             -   option: "23 hi 24 hi 25 hi"
-                feedback: "숫자가 표시되지 않습니다. {print} i라고 표시되지 않습니다"
+                feedback: "숫자가 표시되지 않습니다. `{print}` i라고 표시되지 않습니다"
             -   option: "hi\nhi\nhi"
                 feedback: "맞아요"
             -   option: "The word 'hi' will appear 25 times in a row."
@@ -864,20 +864,20 @@ levels:
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: "{range}'' 0 ''{to}'' 3은 4배이다."
+                feedback: "`{range}` 0 `{to}` 3은 4배이다."
             -   option: |
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: "{range}'' 0 ''{to}'' 3은 4배이다."
+                feedback: "`{range}` 0 `{to}` 3은 4배이다."
             correct_answer: "B"
             hint: "Mind the indention"
             question_score: '10'
     10:
         1:
-            question_text: 각각의 칭찬을 인쇄하려면 '_?_'에 무엇을 기입해야 할까요?
+            question_text: 각각의 칭찬을 인쇄하려면 `_`에 무엇을 기입해야 할까요?
             code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
             mp_choice_options:
             -   option: "```\n{for} each compliment\n```\n"
@@ -896,11 +896,11 @@ levels:
             code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
             mp_choice_options:
             -   option: I love pizza
-                feedback: 2행은 식사 목록에 매 끼니마다 {for}라고 표시되어 있어 매 끼니마다 인쇄됩니다.
+                feedback: 2행은 식사 목록에 매 끼니마다 `{for}`라고 표시되어 있어 매 끼니마다 인쇄됩니다.
             -   option: I love pasta
-                feedback: 2행은 식사 목록에 매 끼니마다 {for}라고 표시되어 있어 매 끼니마다 인쇄됩니다.
+                feedback: 2행은 식사 목록에 매 끼니마다 `{for}`라고 표시되어 있어 매 끼니마다 인쇄됩니다.
             -   option: I love pancakes
-                feedback: 2행은 식사 목록에 매 끼니마다 {for}라고 표시되어 있어 매 끼니마다 인쇄됩니다.
+                feedback: 2행은 식사 목록에 매 끼니마다 `{for}`라고 표시되어 있어 매 끼니마다 인쇄됩니다.
             -   option: "I love pizza\nI love pasta\nI love pancakes"
                 feedback: 좋았어!
             correct_answer: D
@@ -928,7 +928,7 @@ levels:
             -   option: Line 2 needs to start with 4 spaces as indentation
                 feedback: No it doesn't. Only line 3 needs indentation, which it has.
             -   option: Line 3 does not need to start with 4 spaces as indentation
-                feedback: 2행은 '{for}' 명령이므로 3행은 들여쓰기로 시작해야 합니다.
+                feedback: 2행은 `{for}` 명령이므로 3행은 들여쓰기로 시작해야 합니다.
             -   option: Line 3 should say item instead of groceries
                 feedback: 수고했어!
             -   option: Line 2 should say groceries instead of item
@@ -1007,7 +1007,7 @@ levels:
             -   option: Timon, what would you like to eat as your dessert?
                 feedback: 애피타이저가 제일 먼저다
             -   option: You don't know that. Hedy will choose `{at} {random}`.
-                feedback: 이 코드에 '{at} {random}'이(가) 없습니다...
+                feedback: 이 코드에 `{at} {random}`이(가) 없습니다...
             correct_answer: A
             hint: The first options from both lists are chosen.
             question_score: '10'
@@ -1966,7 +1966,7 @@ levels:
                 option: '`{and}`'
             -   option: '`{or}`'
                 feedback: 좋은 생각이다!
-            -   option: ' + '
+            -   option: ' `+` '
                 feedback: 아니오
             -   option: '`{print}`'
                 feedback: 아니오
