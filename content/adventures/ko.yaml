@@ -104,15 +104,15 @@ adventures:
                 story_text: "{while} 루프를 사용하면 이야기가 더 재미있을 수 있습니다. 예를 들어 {while} game {is} on을 사용하면 게임이 끝날 때까지 게임을 할 수 있습니다. 또는 {while} sword {is} lost를 사용하면 플레이어가 무언가를 찾을 때까지 게임을 계속할 수 없습니다.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
             1:
-                story_text: "레벨 1단계에서 입력한 다른 주요 특성을 가진 이야기를 만들 수 있습니다.첫 번째 라인에서는 {k}을(를) 사용하고 있는지 물어봅니다.그 첫 번째 선을 인쇄해야 할 경우 { 지문}을(를)으로 시작합니다.문장의 마지막 캐릭터가 끝날 때 {ko}을(를) 사용합니다.\n"
+                story_text: "레벨 1단계에서 입력한 다른 주요 특성을 가진 이야기를 만들 수 있습니다.첫 번째 라인에서는 {ask}을(를) 사용하고 있는지 물어봅니다.그 첫 번째 선을 인쇄해야 할 경우 { 지문}을(를)으로 시작합니다.문장의 마지막 캐릭터가 끝날 때 {echo}을(를) 사용합니다.\n"
                 example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story starts here'
-                story_text_2: "### 이제 운동은 적어도 6선 코드 중 적어도 6선의 이야기를 만듭니다.이 이야기는 예를 들면, 예를 들어 볼 수 없습니다.최소 {k}의 명령어를 사용하여 {ko}을(를) 사용합니다.당신이 좋아하는 주제들을 만들 수 있습니다.주제를 생각할 수 없다면, 우리 선택 중 하나는 동물원에서 운동이나 하루에 스포츠 시합을 사용합니다.\n"
+                story_text_2: "### 이제 운동은 적어도 6선 코드 중 적어도 6선의 이야기를 만듭니다.이 이야기는 예를 들면, 예를 들어 볼 수 없습니다.최소 {print}의 명령어를 사용하여 {echo}을(를) 사용합니다.당신이 좋아하는 주제들을 만들 수 있습니다.주제를 생각할 수 없다면, 우리 선택 중 하나는 동물원에서 운동이나 하루에 스포츠 시합을 사용합니다.\n"
             2:
                 story_text: "레벨 2에서 더 재미있게 만들 수 있습니다.주인공의 이름은 이제 문장에서 어디에 있을 수 있습니다.당신은 그것에 대해 조금 추가해야 합니다.이제 메인 문자를 먼저 지정해야 합니다.그 다음 문장에서 그 이름을 넣을 수 있습니다.\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
                 start_code: '{print} Your story'
-                story_text_2: "### 현재 레벨에서 만들어진 자신만의 이야기를 추가할 수 있습니다.'내 프로그램'에 가서 코드를 복사하고 코드를 복사하십시오.이 수준에서 코드를 붙여넣습니다.이 코드는 아직 사용되지 않았기 때문에 이 코드를 사용할 수 없습니다.이 수준에서 {k} 명령과 {ko}의 명령과(를) 명령으로 변경합니다.***** 확장 명령을 추가하려면 {Num} 명령을 추가합니다.\n"
+                story_text_2: "### 현재 레벨에서 만들어진 자신만의 이야기를 추가할 수 있습니다.'내 프로그램'에 가서 코드를 복사하고 코드를 복사하십시오.이 수준에서 코드를 붙여넣습니다.이 코드는 아직 사용되지 않았기 때문에 이 코드를 사용할 수 없습니다.이 수준에서 {print} 명령과 {echo}의 명령과(를) 명령으로 변경합니다.***** 확장 명령을 추가하려면 {Num} 명령을 추가합니다.\n"
             3:
                 story_text: "레벨 3단계에서 더 재미있게 만들 수 있습니다.괴물, 동물 또는 다른 장애에 대한 랜덤성을 사용할 수 있습니다.\n"
                 example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} He now hears the sound of an animals {at} {random}\n```\n"
