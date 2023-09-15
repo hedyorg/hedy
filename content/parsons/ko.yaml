@@ -6,9 +6,9 @@ levels:
                 {ask} Are you ready to party?
                 {ask} What song would you like to hear?
                 {echo} Great choice! I love
-            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
+            story: "지금 DJ 부스에서 노래를 요청하고 있습니다. 파티를 할 준비가 되었는지 묻고 어떤 노래를 듣고 싶은지 묻는 프로그램을 만드세요.\n"
         1:
-            story: "You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
+            story: "당신은 베이커리 헤디의 손님이군요.\n당신은 빵집 안으로 들어가서 제빵사의 환영을 받는다.\n그는 당신이 어떤 종류의 파이를 주문하고 싶은지 물어봅니다.\n다음은 주문 준비 중입니다.\n"
             code: |-
                 {print} Welcome to bakery Hedy!
                 {ask} What type of pie do you want to order?
@@ -23,26 +23,26 @@ levels:
                     {print} counter
                     {sleep} 1
                 {print} 'Ready or not here I come!'
-            story: "Print the countdown for a game of hide and seek.\n"
+            story: "숨바꼭질 게임의 카운트다운을 인쇄하세요.\n"
         1:
-            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team.\n"
+            story: "여러분과 다른 네 명의 친구들이 포켓몬 고를 하고 있습니다! 여러분 각자가 어느 팀에서 경기할지를 결정하는 프로그램을 만드세요.\n빨간색, 노란색, 파란색 중 하나! 팀 발표 후 잠시 쉬세요.\n"
             code: |-
                 teams = red, yellow, blue
-                {print} 'Red, Yellow of Blue?'
+                {print} 'Red, Yellow or Blue?'
                 {repeat} 5 {times}
                     {print} 'You are selected in team... '
                     {print} teams {at} {random}
                     sleep 2
     2:
         1:
-            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
+            story: "너와 너의 친구들은 넷플릭스를 볼거야.\n어떤 영화를 보는지 보여주시고 시청자분들께 재미가 가득하시길 바랍니다!\n"
             code: |-
                 {print} It is time for an evening of Netflix'
                 film {is} Sonic the Hedgehog 2
                 {print} We're going to film
                 {print} Have fun!
         2:
-            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
+            story: "이것은 장난감 가게의 웹샵입니다. 고객들이 장바구니에 물건을 추가할 수 있는 프로그램을 만드세요.\n"
             code: |-
                 {print} Welcome to our toystore
                 toy {is} {ask} What would you like to buy?
@@ -50,7 +50,7 @@ levels:
                 {print} Thank you for shopping with us!
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
+            story: "호그와트의 새 학년이 시작됩니다! \n당신을 집들 중 한 곳으로 분류하는 것은 모자를 분류하는 일이다.\n어느 집으로 분류되실 건가요?\n당신은 그리핀도르, 허플푸프, 레이븐클로, 슬리데린 중 누구입니까.\n집을 공개하기 전에 프로그램을 잠시 기다리게 하세요.\n"
             code: |-
                 {print} The new school year at Hogwarts is starting!'
                 {print} The sorting hat is ready to sort you into a Hogwarts house.'
@@ -58,7 +58,7 @@ levels:
                 {sleep} 2
                 {print} And it is houses {at} {random}
         2:
-            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
+            story: "여러분을 위해 임의의 식사를 선택하는 프로그램을 만드세요. 음식 목록과 토핑 목록을 만들고 그 프로그램이 여러분이 무엇을 먹을지 결정하게 하세요!\n"
             code: |-
                 food {is} pizza, icecream, salad, sandwich
                 toppings {is} chocolate, cheese, tuna, sprinkles
@@ -67,38 +67,38 @@ levels:
                 {print} food {at} {random} with toppings {at} {random}
     4:
         1:
-            story: "You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n"
+            story: "당신은 팔레트 타운에서 온 최신 포켓몬 트레이너입니다!\n첫 번째 포켓몬을 선택할 수 있는 프로그램을 만드세요.\n첫 번째 포켓몬을 공개하기 전에 프로그램을 잠시 기다리게 하세요.\n"
             code: |-
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                포켓몬 {is} 피카츄, 샤만데르, 불바사우르, 꼬부기
                 {print} 'This is going to be your first pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: "Create a lottery that lets you choose an extra price that you might win.\n"
+            story: "당첨 가능한 추가 가격을 선택할 수 있는 복권을 만드세요.\n"
             code: |-
-                prices {is} car, hamster, 1 million euros
-                price {is} {ask} 'What would you like to win?'
+                가격 {is} 자동차, 햄스터, 100만 유로
+                가격 {is} {ask} '무엇을 이기고 싶습니까?'
                 {add} price {to_list} prices
                 {print} 'You won a ' prices {at} {random}
     5:
         1:
-            story: "Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n"
+            story: "좋아하는 영화가 이미 컴퓨터 목록에 있는지 확인하는 프로그램을 만드십시오.\n그렇다면 취향이 좋다고 인쇄하고, 그렇지 않으면 영화를 목록에 추가합니다.\n"
             code: |-
-                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
-                movie {is} {ask} 'What is your favourite movie?'
+                favorite_movies {is} 배트맨, 스파이더맨, 어벤져스, 쥬라기 공원
+                영화 {is}{ask} '가장 좋아하는 영화는 무엇입니까?'
                 {if} movie {in} favorite_movies {print} 'You have great taste!'
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
                 {add} movie {to_list} favorite_movies
         2:
-            story: "Create a maths game.\n"
+            story: "수학 게임을 만드세요.\n"
             code: |-
                 {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
+                답은 {is} {ask} '88 - 16 = ?'
                 {if} answer {is} 72 {print} 'Correct!'
                 {else} {print} 'Wrong! The answer was 72'
     6:
         1:
-            story: "Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n"
+            story: "개와 고양이의 나이를 계산하는 프로그램을 만드세요.\n먼저 사용자의 나이를 묻고 계산을 시작합니다.\n먼저 개의 해를 계산하고 고양이의 해를 계산한다.\n사용자에게 다양한 연령을 보여줍니다.\n"
             code: |-
                 age = {ask} 'How old are you?'
                 dog_age = age * 7
@@ -106,7 +106,7 @@ levels:
                 {print} 'In dogyears you are ' dog_age ' years old.'
                 {print} 'In catyears you are ' cat_age ' years old.'
         2:
-            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\n"
+            story: "생일 파티를 위해 몇 개의 케이크를 사야 하는지 계산할 수 있도록 도와주는 프로그램을 만드세요.\n"
             code: |-
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
@@ -114,7 +114,7 @@ levels:
                 {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n"
+            story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n어떤 두 플레이어가 먼저 서로 대결할지 결정하는 프로그램을 만듭니다.\n먼저 첫 번째 경기를 치른 두 명의 플레이어를 인쇄한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
             code: |-
                 players = Liam, Noah, Sophie
                 player1 = players {at} {random}
@@ -124,7 +124,7 @@ levels:
                 {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
         2:
-            story: "Create the song 'The wheels on the bus go round and round'\n"
+            story: "'버스 바퀴는 돌고 돈다'라는 노래를 만들어 보세요\n"
             code: |-
                 {print} 'the wheels on the bus go'
                 {repeat} 3 {times} {print} 'round and round'
