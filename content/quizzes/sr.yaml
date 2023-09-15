@@ -856,7 +856,7 @@ levels:
             -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 5\n```\n"
                 feedback: Two consecutive {if}s is never correct.
             -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 5\n```\n"
-                feedback: Bijna goed maar kijk eens naar die laatste regel.
+                feedback: Almost right! Take another look at the last line.
             correct_answer: A
             hint: After each `{if}` command, the line below should indent
             question_score: '10'
@@ -2158,7 +2158,7 @@ levels:
             -   option: '`{for}`'
                 feedback: That's not it
             -   option: '`{range}`'
-            feedback: That's not it
+                feedback: That's not it
             correct_answer: B
             hint: You are not allowed in the bar as long as you are 17 or younger
             question_score: '10'

@@ -1,22 +1,41 @@
 levels:
     1:
         1:
-            story: "You're a customer at bakery Hedy.\nYou walk into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
-            code: "{print} Welcome to bakery Hedy!\n{ask} What type of pie do you want to order?\n{echo} So you want\n{print} Your order is being prepared!"
+          story: |
+                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
+                You're a customer at bakery Hedy.
+                You walk into the bakery and are welcomed by the baker.
+                He asks what type of pie you want to order.
+                Then he repeats your answer back to you.
+                Lastly, your order is being prepared.
+          code: |-
+                {print} Welcome to bakery Hedy!
+                {ask} What type of pie do you want to order?
+                {echo} So you want
+                {print} Your order is being prepared!
         2:
             story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
-            code: "{print} This is DJ Hedy\n{ask} Are you ready to party?\n{ask} What song would you like to hear?\n{echo} Great choice! I love"
+            code: "{print} This is DJ Hedy\n{ask} Are you ready to party?\n{ask} What song would you like to hear?\n{echo} Great choice! I love the song"
     2:
         1:
             story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
             code: "{print} It is time for an evening of Netflix\nfilm {is} Sonic the Hedgehog 2\n{print} We're going to watch film\n{print} Have fun!"
         2:
             story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
-            code: "{print} Welcome to our toystore\ntoy {is} {ask} What would you like to buy?\n{print} The toy is added to your shopping cart.\n{print} Thank you for shopping with us!"
+            code: "{print} Welcome to our toystore\ntoy {is} {ask} What would you like to buy?\n{print} toy is added to your shopping cart.\n{print} Thank you for shopping with us!"
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
-            code: "{print} The new school year at Hogwarts is starting!\n{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} And it is houses {at} {random}"
+            story: |
+                    The new school year at Hogwarts is starting!
+                    It is the job of the sorting hat to sort you into one of the houses.
+                    Which house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.
+                    Before the sorting hat reveals your house, you can tell it to not pick one of the houses.
+            code: |-
+                {print} The sorting hat is ready to sort you into a Hogwarts house.
+                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
             code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
@@ -40,14 +59,21 @@ levels:
             code: "age = {ask} 'How old are you?'\ndog_age = age * 7\ncat_age = age * 5\n{print} 'In dog years you are ' dog_age ' years old.'\n{print} 'In cat years you are ' cat_age ' years old.'"
         2:
             story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\n"
-            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount {is} people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
     7:
         1:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players = Liam, Noah, Sophie\nplayer1 = players {at} {random}\n{remove} player1 {from} players\nplayer2 = players {at} {random}\n{print} player1 ' first plays against ' player2\n{remove} player2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: |
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            code: |
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
         2:
             story: "Create the song 'The wheels on the bus go round and round'\n"
-            code: "{print} 'the wheels on the bus go'\n{repeat} 3 {times} {print} 'round and round'\n{print} 'the wheels of the bus go round and round'\n{print} 'all through the town '"
+            code: "{print} 'the wheels on the bus go'\n{repeat} 3 {times} {print} 'round and round'\n{print} 'the wheels of the bus go round and round'\n{print} 'all through the town'"
     8:
         1:
             story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team.\n"

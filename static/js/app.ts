@@ -42,6 +42,7 @@ let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
 let theKeywordLanguage: string = 'en';
+let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
 
@@ -115,6 +116,10 @@ const slides_template = `
 export interface InitializeAppOptions {
   readonly level: number;
   readonly keywordLanguage: string;
+  /**
+   * The URL root where static content is hosted
+   */
+  readonly staticRoot?: string;
 }
 
 /**
@@ -123,6 +128,7 @@ export interface InitializeAppOptions {
 export function initializeApp(options: InitializeAppOptions) {
   theLevel = options.level;
   theKeywordLanguage = options.keywordLanguage;
+  theStaticRoot = options.staticRoot ?? '';
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
@@ -183,7 +189,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   }
   theLanguage = options.lang;
 
-  // *** EDITOR SETUP ***  
+  // *** EDITOR SETUP ***
   const $editor = $('#editor');
   if ($editor.length) {
     const dir = $("body").attr("dir");
@@ -191,7 +197,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
   }
-  
+
   const anchor = window.location.hash.substring(1);
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
@@ -249,8 +255,8 @@ function attachMainEditorEvents(editor: HedyEditor) {
   editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
     // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
-  });  
-  
+  });
+
   // If prompt is shown and user enters text in the editor, hide the prompt.
   editor.on('change', function() {
     // TODO: When the user clicks back in the editor when an ask is open
@@ -354,7 +360,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         // Create this example editor
         const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
-        exampleEditor.contents = exampleEditor.contents.trimRight();      
+        exampleEditor.contents = exampleEditor.contents.trimRight();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
@@ -833,7 +839,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   const storage = window.localStorage;
   let skulptExternalLibraries:{[index: string]:any} = {
       './extensions.js': {
-        path: "/vendor/skulpt-stdlib-extensions.js",
+        path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
   };
   let debug = storage.getItem("debugLine");
@@ -873,46 +879,46 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   if (hasPygame){
     skulptExternalLibraries = {
       './extensions.js': {
-        path: "/vendor/skulpt-stdlib-extensions.js",
+        path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
       './pygame.js': {
-        path: "/vendor/pygame_4_skulpt/init.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/init.js",
       },
       './display.js': {
-        path: "/vendor/pygame_4_skulpt/display.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/display.js",
       },
       './draw.js': {
-        path: "/vendor/pygame_4_skulpt/draw.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/draw.js",
       },
       './event.js': {
-        path: "/vendor/pygame_4_skulpt/event.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/event.js",
       },
       './font.js': {
-        path: "/vendor/pygame_4_skulpt/font.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/font.js",
       },
       './image.js': {
-        path: "/vendor/pygame_4_skulpt/image.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/image.js",
       },
       './key.js': {
-        path: "/vendor/pygame_4_skulpt/key.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/key.js",
       },
       './mouse.js': {
-        path: "/vendor/pygame_4_skulpt/mouse.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/mouse.js",
       },
       './transform.js': {
-        path: "/vendor/pygame_4_skulpt/transform.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/transform.js",
       },
       './locals.js': {
-        path: "/vendor/pygame_4_skulpt/locals.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/locals.js",
       },
       './time.js': {
-        path: "/vendor/pygame_4_skulpt/time.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/time.js",
       },
       './version.js': {
-        path: "/vendor/pygame_4_skulpt/version.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/version.js",
       },
       './buttons.js': {
-          path: "/js/buttons.js",
+          path: theStaticRoot + "/js/buttons.js",
       },
     };
 
@@ -1757,7 +1763,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor.contents = adventure.start_code;    
+    theGlobalEditor.contents = adventure.start_code;
   }
 }
 
