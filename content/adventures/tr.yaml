@@ -1052,7 +1052,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                            Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                              Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2649,65 +2649,65 @@ adventures:
             2:
                 story_text: "## sor komutu\nArtık kodlarımızda **değişkenleri** kullanabildiğimize göre, `{echo}` komutuna artık ihtiyacımız yok.\nSorularımızın cevaplarını saklamak için değişkenler kullanabiliriz ve bu şekilde kodlarımızda birden fazla sorunun cevabını kullanabiliriz.\nŞuna bir bakın:\n\nBu şekilde kodunuz etkileşimli hale geliyor!\n"
                 example_code: "```\nisim {is} {ask} Senin adın ne?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} isim age yaşındadır.\n```\n"
-                story_text_2: "### Exercise\nIn the previous tab you have practised with setting variables with the `{is}` command.\nYou have created at least 3 variables and used them with a print command.\nNow, instead of setting the variables we want you to make the variables interactive, like we did in our example.\n\nCopy your code from the previous tab and make the variables interactive by using `{ask}` commands.\n"
-                example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
-                start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
+                story_text_2: "### Alıştırma\nÖnceki sekmede `{is}` komutu ile değişkenleri ayarlama alıştırması yaptınız.\nEn az 3 değişken oluşturdunuz ve bunları bir yazdır komutu ile kullandınız.\nŞimdi, değişkenleri ayarlamak yerine, örneğimizde yaptığımız gibi değişkenleri etkileşimli hale getirmenizi istiyoruz.\n\nKodunuzu önceki sekmeden kopyalayın ve `{ask}` komutlarını kullanarak değişkenleri etkileşimli hale getirin.\n"
+                example_code_2: "```\nfavori_hayvan {is} {ask} En sevdiğin hayvan hangisi?\n{print} En sevdiğim hayvan favori_hayvan\n```\n"
+                start_code: "isim {is} {ask} Senin adın ne?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} name age yaşındadır."
     is_command:
         name: "{is}"
-        description: introducing is command
+        description: eşit komutuna giriş
         default_save_name: is_command
         levels:
             2:
-                story_text: "## Variables\nYou can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "### Exercise\nTime to make your own variables!\nIn the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.\nFirstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.\n"
-                example_code_2: "```\nfavorite_animals is _\n{print} I like favorite_animals\n```\n"
-                start_code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
+                story_text: "## Değişkenler\nBir kelimeyi `{is}` ile isimlendirebilirsiniz. Buna bir **değişken** denir. Bu örnekte isim adında bir değişken ile yaş adında bir değişken oluşturduk. Kodunuzun herhangi bir yerinde isim kelimesini kullanabilirsiniz ve Hedy bu kelimeyi değiştirilecektir, bunun gibi:\n"
+                example_code: "```\nisim {is} Hedy\nyaş {is} 15\n{print} isim age yaşındadır\n```\n"
+                story_text_2: "### Alıştırma\nKendi değişkenlerinizi oluşturma zamanı!\nÖrnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir yazdır komutunda kullandık.\nÖncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni {is} komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi {print} komutu ile kullanın.\n"
+                example_code_2: "```\nfavori_hayvan eşit _\n{print} En sevdiğim havyan favori_hayvan\n```\n"
+                start_code: "isim {is} Hedy\nyaş {is} 15\n{print} name age yaşındadır"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
-                story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                start_code: "yaş = {ask} 'Kaç yaşındasın?'\n{if} yaş < 13\n    {print} 'Sen benden daha gençsin!'\n{else}\n    {print} 'Sen benden daha yaşlısın!'"
+                story_text: "Daha fazla yeni öğe öğrenmeye devam ediyoruz. Bunları matematikten zaten biliyor olabilirsiniz, `<` ve `>`.\n`<`, ilk sayının ikinciden küçük olup olmadığını kontrol eder, örneğin yaş `<` 12, yaşın 12'den küçük olup olmadığını kontrol eder.\nİlk sayının ikinciden küçük veya ona eşit olup olmadığını kontrol etmek istiyorsanız, `<=` kullanabilirsiniz, örneğin yaş `<=` 11.\n`>`, İlk sayının ikinciden büyük olup olmadığını kontrol eder, örneğin puan `>` 10, puan'ın 10'dan büyük olup olmadığını kontrol eder.\nİlk sayının ikinciden büyük veya ona eşit olup olmadığını kontrol etmek istiyorsanız, `>=` kullanabilirsiniz, örneğin puan `>=` 11.\nBu karşılaştırmaları aşağıdaki gibi bir `{if}` içinde kullanırsınız:\n"
+                example_code: "```\nyaş = {ask} 'Kaç yaşındasın?'\n{if} yaş > 12\n    {print} 'Sen benden daha yaşlısın!'\n```\n"
+                story_text_2: "Bu seviyeden itibaren, tam değer karşılaştırması istiyorsanız, iki eşit işareti kullanabilirsiniz. Çoğu programlama dili bunu yapar:\n"
+                example_code_2: "```\nisim = {ask} 'Senin adın ne?'\n{if} isim == 'Hedy'\n    {print} 'Çok havalısın!'\n```\n"
+                story_text_3: "Bir şeyin başka bir şeye eşit *olmadığını* `!=` kullanarak karşılaştırabilirsiniz:\n"
+                example_code_3: "```\nisim = {ask} 'Senin adın ne?'\n{if} isim != 'Hedy'\n    {print} 'Sen Hedy değilsin.'\n```\n"
     random_command:
         name: "{random}"
-        description: introducing at random command
+        description: şurada rastgele komutuna giriş
         default_save_name: random_command
         levels:
             3:
-                story_text: "## At random\nIn this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.\n"
-                example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
-                story_text_2: "You can use the `{at} {random}` command in a sentence as well.\n"
-                example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
-                start_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n"
-                story_text_3: "### Exercise\nTry out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it? We have already put the first lines into the example code.\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\nchosen {is} {ask} Which suitcase do you choose?\nprices {is} _\n_\n```\n"
+                story_text: "## şurada rastgele\nBu seviyede `{is}` komutunu kullanarak bir liste oluşturabileceksiniz. Bilgisayarın bu listeden rastgele bir öğe seçmesine izin verebilirsiniz. Bunu `{at} {random}` ile yaparsınız.\n"
+                example_code: "```\nhayvanlar {is} köpekler, kediler, kangurular\n{print} hayvanlar {at} {random}\n```\n"
+                story_text_2: "`{at} {random}` komutunu cümle içinde de kullanabilirsiniz.\n"
+                example_code_2: "```\nyemek {is} sandviç, bir dilim pizza, salata, dürüm\n{print} Öğle yemeğinde bir yemek {at} {random} yiyeceğim.\n```\n"
+                start_code: "hayvanlar {is} köpek, kedi, kanguru\n{print} hayvanlar {at} {random}\n"
+                story_text_3: "### Alıştırma\nBir kapı veya bir bavul seçtiğiniz ve içinde büyük bir ödül bulunan kendi oyun programınızı (televizyondakiler gibi) yapmak için `{at} {random}` komutunu deneyin!\nBunu yapabilir misiniz? İlk satırları sizin için örnek koda zaten koyduk.\n"
+                example_code_3: "```\n{print} Büyük oyun gösterisi!\n{print} Önünüzde 3 bavul var...\nseçim {is} {ask} Hangi bavulu seçiyorsunuz?\nödüller {is} _\n_\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit[random]"
-                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "meyve = ['elma', 'muz', 'kiraz']\n{print} meyve[rastgele]"
+                story_text: "Şimdi Python yöntemiyle listeler yapacağız, bu listelerin etrafında köşeli parantezler olacak! Ayrıca önceki seviyelerde öğrendiğimiz gibi her öğenin etrafında tırnak işaretlerini koyuyoruz.\nKöşeli parantezleri listedeki bir yeri belirtmek için kullanırız. {at} {random} komutu bu bölümde artık kullanılamaz."
+                example_code: "```\narkadaşlar = ['Ahmet', 'Betül', 'Ceyda']\nşanslı_sayılar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] ' için şanslı sayı'\n    {print} lucky_numbers[i] ' sayısıdır' \n```\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
-        description: introducing add to and remove from
+        description: ekle şuraya ve çıkar şuradan komutlarına giriş
         default_save_name: add_remove_command
         levels:
             3:
-                story_text: "## Add to\nYou can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_2: "## Remove from\nIf you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.\n"
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_3: "### Exercise\nTry out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.\n"
-                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
-                start_code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
+                story_text: "## ekle şuraya\nListeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.\n"
+                example_code: "```\nhayvanlar {is} köpek, kedi, kanguru\nsevilen {is} {ask} En sevdiğin hayvan hangisi?\n{add} sevilen {to_list} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}\n```\n"
+                story_text_2: "## kaldır şuradan\nBir listeye öğe ekleyebiliyorsanız, elbette bunları listeden çıkarabilirsiniz de. Bu işlem `{remove} {from}` komutu ile yapılır.\n"
+                example_code_2: "```\nhayvanlar {is} köpek, kedi, kanguru\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}\n```\n"
+                story_text_3: "### Alıştırma\nBu yeni komutları sanal restoranımızda deneyin. Oyuncunun istediği lezzeti listeye ekleyin ve alerjisi olduğu lezzetleri listeden çıkarın.\n"
+                example_code_3: "```\n{print} Gizemli milkshake\nçeşitler {is} çilek, çikolata, vanilya\nbeklenti {is} {ask} Nasıl bir lezzet bekliyorsunuz?\n_\nalerjiler {is} {ask} Herhangi bir çeşide alerjiniz var mı?\n_\n{print} Size çeşitler {at} {random} milkshake hazırladık\n```\n"
+                start_code: "hayvanlar {is} köpek, kedi, kanguru\nsevilen {is} {ask} En sevdiğin hayvan hangisi?\n{add} sevilen {to_list} hayvanlar\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print} Benim seçtiğim bir hayvanlar {at} {random}"
     sleep_command:
         name: "{sleep}"
-        description: introducing sleep command
+        description: uyku komutuna giriş
         default_save_name: sleep_command
         levels:
             2:
-                story_text: "## The sleep command\nAnother new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+                story_text: "Bu seviyede kullanabileceğiniz bir diğer yeni komut, programınızı bir saniyeliğine duraklatan `{sleep}` komutudur. Eğer {sleep} komutunun arkasına bir sayı yazarsanız, program o kadar saniye duraklar.\n\n### Alıştırma\nBu yeni komutu, {sleep} komutunu en az 3 kez kullandığınız kendi kodunuzu oluşturarak uygulayın. Her {sleep} komutunda duraklama süresi farklı olsun.\n"
                 example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
     if_command:
