@@ -1,207 +1,207 @@
 15:
 -   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal.
+    explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.
     demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
--   explanation: We can also use the `{while}` loop with `<` and `>`.
+-   explanation: 또한 `<`와 `>`와 함께 `{while}` 루프를 사용할 수 있다.
     demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
     name: Smaller {while}
 16:
 -   name: square brackets
     demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-    explanation: Lists with square brackets.
+    explanation: 대괄호가 있는 목록입니다.
 -   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
+    explanation: 목록에서 항목을 가져오려면 [숫자]를 사용하므로 fruit[1]은 목록에서 첫 번째 과일을 가져오라는 의미입니다!
     demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
+    explanation: 우리가 사용하는 과일[무작위] 목록에서 임의의 품목을 얻으려면 과일[무작위] 목록에서 임의의 과일을 얻으라는 뜻이다!
+    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[{random}]\n{print} random_fruit"
 17:
 -   demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
     name: '{elif}'
     explanation: '`{elif}`'
 -   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+    explanation: '`{for}`를 사용할 때는 `{for}` 문 뒤에 `:`를 넣어야 한다!'
     demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
 -   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
+    explanation: 우리는 우리의 모든 `{if}` 진술에 대해 똑같이 할 필요가 있다.
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
 18:
 -   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
+    explanation: '`{print}` 뒤에는 괄호를 사용해야 합니다.'
     demo_code: "{print}('hi!')"
 -   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
+    explanation: '`{range}` 뒤에는 괄호를 사용해야 합니다.'
     demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
 -   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
+    explanation: '`{print}`에서는 항목을 더 인쇄할 경우 괄호와 쉼표를 사용해야 합니다.'
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
 -   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
+    explanation: 질문할 때는 `{ask}` 대신 `{input}`을 사용한다.
     demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: 따옴표를 사용하여 정확하게 인쇄합니다.
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
+    explanation: 계산을 요청하고 정확한지 확인한다.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
--   name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
+-   name: '`{ask}` and `{if}` with turtle'
+    explanation: 사용자에게 원하는 각도를 물어봅니다.
     demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 12:
 -   name: float directly
-    explanation: Decimal numbers.
+    explanation: 십진 숫자.
     demo_code: "{print} '계산하세요!'\n{print} '2.5 더하기 2.5는...'\n{print} 2.5 + 2.5"
 -   name: assign text
-    explanation: Text with quotation marks after `=`
+    explanation: '`=` 뒤에 따옴표가 있는 텍스트'
     demo_code: "name = '로봇 헤디'\n{print} '안녕' name"
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after `{if}`.
+-   name: quotes after `{if}` comparison
+    explanation: '`{if}` 뒤에 따옴표가 있는 텍스트.'
     demo_code: "name = {ask} '누구세요?'\n{if} name = '헤디'\n    {print} '안녕하세요!'"
 -   name: quotes in list
-    explanation: A list with quotation marks.
+    explanation: 따옴표가 있는 목록입니다.
     demo_code: "superheroes = '아이언맨', '배트맨', '슈퍼맨'\n{print} superheroes {at} {random}"
 14:
 -   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
+    explanation: 우리는 `<`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작은지 확인합니다.
     demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
 -   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
+    explanation: 첫 번째 숫자가 두 번째 숫자보다 큰지 확인할 때는 `>`를 사용합니다.
     demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
 -   name: Equal
-    explanation: We use the `==` to check if two things are the same.
+    explanation: 우리는 `==`를 사용하여 두 가지가 같은지 확인합니다.
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That is correct!'"
 -   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
+    explanation: 우리는 `!=`를 사용하여 두 가지가 같지 않은지 확인합니다.
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
 -   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+    explanation: 우리는 `<=`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작거나 같은지 확인합니다.
     demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
 -   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    explanation: 첫 번째 숫자가 두 번째 숫자보다 크거나 같은지 확인하기 위해 `>=`를 사용합니다.
     demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
+    explanation: '`{print}`로 인쇄합니다.'
     demo_code: '{print} Hello welcome to Hedy!'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: '`{ask}`로 물어본다.'
     demo_code: '{ask} What is your favorite color?'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
+    explanation: '`{echo}`를 사용하여 무엇인가를 반복한다.'
     demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
 -   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+    explanation: '`{print}`로 이모지를 인쇄합니다.'
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     demo_code: '{forward} 100'
-    explanation: Draw a line with `{forward}`.
+    explanation: '`{forward}`로 선을 그립니다.'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: 그림 거북이를 `{turn}`으로 돌려주세요.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: '`{is}`를 사용하여 프로그램에서 사용할 단어의 이름을 지정합니다. 직접 이름을 선택할 수 있습니다.'
     demo_code: "name {is} Hedy\n{print} welcome name"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: '`{ask}`로 물어 보세요. 조심하세요! 답에 `{is}`로 이름을 붙여야 합니다.'
     demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
 -   name: '{sleep}'
-    explanation: '`{sleep}`는 Hedy가 (몇) 초 동안 일시 중지하도록 합니다.'
+    explanation: '`{sleep}`은 헤디를 잠시 쉬게 해준다.'
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    explanation: '`{is}`를 사용하여 숫자에 이름을 붙여라. 직접 이름을 선택할 수 있다.'
     demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
 -   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
+    explanation: '`{at}`와 `{random}`을 가진 그룹에서 임의의 단어를 선택한다.'
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
-    explanation: 목록에 항목을 추가합니다.
+    explanation: '`{add}` 항목 `{to_list}` 목록입니다.'
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
-    explanation: Remove an item from a list.
+    explanation: '항목 `{remove}` 목록 `{from}`.'
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: 따옴표를 사용하여 정확하게 인쇄합니다.
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
+    explanation: 일부 텍스트와 따옴표 없이 `{print}`에 이름을 붙여라.
     demo_code: "name {is} Hedy\n{print} 'my name is ' name"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: '`{ask}`로 물어본다.'
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: 따옴표를 사용하여 정확하게 인쇄합니다.
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: '`{ask}`로 물어본다.'
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: '`{if}`로 선택하세요.'
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
+    explanation: '`{if}`로 선택하세요.'
     demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: '`{in}`로 요소를 점검한다.'
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{pressed}'
-    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인합니다.
+    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인한다.
     demo_code: "{if} a {is} {pressed} {print} '당신은 A를 눌렀습니다!' {else} {print} '다른 키를 눌렀습니다!'"
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: 따옴표를 사용하여 정확하게 인쇄합니다.
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: '`{ask}`로 물어본다.'
     demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: '`{if}`로 선택하세요.'
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+    explanation: 코드 행을 `{repeat}`로 반복합니다.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
+    explanation: 무언가를 인쇄하라. 문자 그대로 인쇄할 때 따옴표를 사용하는 것을 기억하라.
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 인쇄할 수 있습니다.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 -   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: 여러 줄을 반복합니다.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인합니다.
+    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인한다.
     demo_code: "{if} a {is} {pressed}\n    {print} 'A 키를 눌렀습니다!'\n{else}\n    {print} '다른 키를 눌렀습니다!'"
 9:
 -   name: '{if} with multiple lines'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+    explanation: 질문의 총합을 `{ask}`로 맞춘 다음 그것이 맞는지 확인한다. 이제 우리는 두 줄을 출력한다.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
 -   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: 여러 줄을 반복합니다.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
+    explanation: 무언가를 인쇄하라. 문자 그대로 인쇄할 때 따옴표를 사용하는 것을 기억하라.
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: '{for} with a list'
-    explanation: Print all things in a list.
+    explanation: 목록에 있는 모든 것을 인쇄합니다.
     demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
 11:
 -   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
+    explanation: '`{range}`와 함께 `{for}`를 사용할 수 있습니다.'
     demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 인쇄할 수 있습니다.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct.
+    explanation: 두 부분 모두 정확해야 합니다.
     demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+    explanation: 두 부분 중 적어도 1개는 맞아야 한다. 둘 다 맞다면 역시 괜찮다.
     demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\n{else}\n    {print} 'Both answers are wrong!'"
