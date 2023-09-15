@@ -115,18 +115,18 @@ levels:
     7:
         1:
             story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n어떤 두 플레이어가 먼저 서로 대결할지 결정하는 프로그램을 만듭니다.\n먼저 첫 번째 경기를 치른 두 명의 플레이어를 인쇄한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
-            code: |-
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                {remove} player1 {from} players
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            code: |
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
         2:
             story: "'버스 바퀴는 돌고 돈다'라는 노래를 만들어 보세요\n"
             code: |-
                 {print} 'the wheels on the bus go'
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'all through the town'

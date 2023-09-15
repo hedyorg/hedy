@@ -42,15 +42,14 @@ levels:
             story: |
                 The new school year at Hogwarts is starting! 
                 It is the job of the sorting hat to sort you into one of the houses.
-                Which house will you be sorted into?
-                Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
-                Let the program wait a short period before revealing your house.
+                Which house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.
+                Before the sorting hat reveals your house, you can tell it to not pick one of the houses.
             code: |
-                {print} The new school year at Hogwarts is starting!
                 {print} The sorting hat is ready to sort you into a Hogwarts house.
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} And it is houses {at} {random}
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
@@ -122,17 +121,14 @@ levels:
     7:
         1:
             story: |
-                In a chess tournament there are three players left.
-                Create a program that decides which two players first play against each other.
-                First print the two players who play the first match, then print against which player the winner will play.
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
             code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                {remove} player1 {from} players
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'
@@ -140,7 +136,7 @@ levels:
                 {print} 'the wheels on the bus go'
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'all through the town'
     8:
         1:
             story: |
