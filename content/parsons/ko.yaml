@@ -72,23 +72,23 @@ levels:
                 포켓몬 {is} 피카츄, 샤만데르, 불바사우르, 꼬부기
                 {print} 'This is going to be your first pokémon!'
                 {sleep}
-                {print} pokemons {at} {random}
+                {print} 포켓몬 {at} {random}
         2:
             story: "당첨 가능한 추가 가격을 선택할 수 있는 복권을 만드세요.\n"
             code: |-
                 가격 {is} 자동차, 햄스터, 100만 유로
-                가격 {is} {ask} '무엇을 이기고 싶습니까?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+                extra {is} {ask} '무엇을 이기고 싶습니까?'
+                {add} extra {to_list} 가격
+                {print} 'You won a ' 가격 {at} {random}
     5:
         1:
             story: "좋아하는 영화가 이미 컴퓨터 목록에 있는지 확인하는 프로그램을 만드십시오.\n그렇다면 취향이 좋다고 인쇄하고, 그렇지 않으면 영화를 목록에 추가합니다.\n"
             code: |-
                 favorite_movies {is} 배트맨, 스파이더맨, 어벤져스, 쥬라기 공원
-                영화 {is}{ask} '가장 좋아하는 영화는 무엇입니까?'
-                {if} movie {in} favorite_movies {print} 'You have great taste!'
+                영화 {is} {ask} '가장 좋아하는 영화는 무엇입니까?'
+                {if} 영화 {in} favorite_movies {print} 'You have great taste!'
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favorite_movies
+                {add} 영화 {to_list} favorite_movies
         2:
             story: "수학 게임을 만드세요.\n"
             code: |-
