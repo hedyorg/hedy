@@ -14,7 +14,7 @@
     demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
 -   name: Get a random item from a list
     explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
+    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[{random}]\n{print} random_fruit"
 17:
 -   demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
     name: '{elif}'
@@ -45,7 +45,7 @@
 -   name: '{ask}'
     explanation: Ask for a calculation and check whether it is correct.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
--   name: '{ask} and {if} with turtle'
+-   name: '`{ask}` and `{if}` with turtle'
     explanation: Ask the user how many angles they want.
     demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 12:
@@ -55,7 +55,7 @@
 -   name: assign text
     explanation: Text with quotation marks after `=`
     demo_code: "name = '로봇 헤디'\n{print} '안녕' name"
--   name: quotes after {if} comparison
+-   name: quotes after `{if}` comparison
     explanation: Text with quotation marks after `{if}`.
     demo_code: "name = {ask} '누구세요?'\n{if} name = '헤디'\n    {print} '안녕하세요!'"
 -   name: quotes in list
@@ -117,10 +117,10 @@
     explanation: Choose a random word from a group with `{at}` and `{random}`.
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
-    explanation: 목록에 항목을 추가합니다.
+    explanation: '`{to_list}`목록에 `{add}` 항목을 추가합니다.'
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
-    explanation: Remove an item from a list.
+    explanation: '`{remove}` an item `{from}` a list.'
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
 -   name: '{print}'
