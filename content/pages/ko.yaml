@@ -199,68 +199,68 @@ sections:
         -   title: "학생들이 명령어를 입력하는 것을 잊는다"
             example:
                 error_text: |
-                    For example they type a sentence without using print.
+                    예를 들어 print 명령어를 사용하지 않고 문장을 타이핑한다.
                 error_code: |
                     Hedy can't print this
                 solution_text: |
-                    Teach your students to always start a line of code with a command.
+                    학생들에게 항상 명령어로 코드 줄을 시작하도록 가르칩니다.
                 solution_code: |
                     print Hedy can print this!
         -   title: "학생들은 명령을 입력할 때 대문자를 사용한다"
             example:
                 error_text: |
-                    Commands won't work if they are in capitals.
+                    명령어가 대문자일 경우 작동하지 않습니다.
                 error_code: |
                     Ask Why does my code fail?
                     Print Because I'm using capitals.
                 solution_text: |
-                    Remove the capitals.
+                    대문자를 제거한다.
                 solution_code: |
                     ask Why does my code work now?
                     print Because I removed the capitals!
         -   title: "학생들은 요청 없이 에코를 사용한다"
             example:
                 error_text: |
-                    Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
+                    echo는 질문 명령 후에 대답을 반복하도록 되어 있다. 질문이 없으면 echo는 아무것도 할 수 없다.
                 error_code: |
                     echo Your name is
                 solution_text: |
-                    Add an ask command to make it work.
+                    ask 명령어를 추가하여 작동시킵니다.
                 solution_code: |
                     ask What's your name?
                     echo Your name is
         -   title: "학생들은 그들의 에코 단어(변수)가 문장의 중간에 있기를 원한다"
             example:
                 error_text: |
-                    And they are right! That's why they will learn to use proper variables in the next level.
+                    그리고 그들이 옳아요! 그래서 그들은 다음 단계에서 적절한 변수를 사용하는 법을 배우게 될 것입니다.
                 error_code: |
                     ask Which programming language is the most fun?
                     echo is the best!
                 solution_text: |
-                    In level 1 we have to keep it at this:
+                    레벨 1에서는 이 상태를 유지해야 합니다:
                 solution_code: |
                     ask Which programming language is the most fun?
                     echo The best is...
         -   title: "거북이: 학생들은 거북이를 화면에서 걷게 했습니다"
             example:
                 error_text: |
-                    Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.
+                    종종 학생들은 거북이를 사용할 때 큰 숫자를 시도하는 것을 좋아하는데, 이것은 화살이 화면을 벗어나 걷게 만든다.
                 error_code: |
                     forward 300
                     turn 90
                 solution_text: |
-                    In the example, students tend to think that the turn command doesn't work. Even though it does work, you can't see it happening off screen. Use smaller numbers to prevent this from happening.
+                    예를 들어, 학생들은 방향 지시가 작동하지 않는다고 생각하는 경향이 있습니다. 작동하더라도 화면 밖에서는 그런 현상을 볼 수 없습니다. 이런 현상이 발생하지 않도록 작은 숫자를 사용하세요.
                 solution_code: |
                     forward 100
                     turn 90
-        -   title: "Turtle: Students use the command backward, but that doesn't exist"
+        -   title: "거북이: 학생들은 명령어를 거꾸로 사용하지만, 그것은 존재하지 않습니다"
             example:
                 error_text: |
-                    Backward is not a command.
+                    뒤로 가기는 정확한 명령어가 아닙니다.
                 error_code: |
                     backward 100
                 solution_text: |
-                    To make the turtle go backwards, you use the forward command and a negative number. For example:
+                    거북이를 뒤로 가게 하려면 forward 명령어와 음수를 사용합니다. 예를 들어:
                 solution_code: |
                     forward -100
     -   level: '2'
@@ -268,66 +268,66 @@ sections:
         -   title: "학생들은 그들의 명령에 오타를 낸다"
             example:
                 error_text: |
-                    Hedy can't recognize a command with a typo.
+                    헤디는 오타가 있는 명령을 인식하지 못한다.
                 error_code: |
                     prinnt Don't make typos!
                 solution_text: |
-                    Teach your students to read the error messages. This way they can find out themselves what went wrong.
+                    학생들에게 오류 메시지를 읽는 법을 가르치세요. 이 방법으로 학생들은 무엇이 잘못되었는지 스스로 알아낼 수 있습니다.
                 solution_code: |
                     print Don't make typos!
         -   title: "학생들은 ask 명령이 바뀌었다는 것을 잊어버립니다"
             example:
                 error_text: |
-                    In this level students learn about variables. The ask command requires a variable as well, but students forget this.
+                    이 수준에서 학생들은 변수에 대해 배운다. ask 명령어도 변수가 필요하지만 학생들은 이것을 잊어버린다.
                 error_code: |
                     ask what would you like to eat?
                 solution_text: |
-                    In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
+                    이 수준에서는 헤디에게 답을 저장할 위치를 알려주어야 나중에 사용할 수 있다. 이를 변수라고 한다.
                 solution_code: |
                     order is ask What would you like to eat?
         -   title: "학생들은 echo 명령을 사용하려고 한다 "
             example:
                 error_text: |
-                    For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
+                    일부 학생들에게는 에코 명령이 더 이상 작동하지 않는다는 것을 알게 되면 좌절할 수 있습니다. 그렇기 때문에 변수를 사용하는 것의 장점을 설명하는 것이 매우 중요합니다. 예를 들어, 코드에 여러 개의 변수를 사용할 수 있고, 문장에서 원하는 곳에 변수를 넣을 수 있습니다!
                 error_code: |
                     answer is ask Why doesn't echo work anymore?!
                     echo
                 solution_text: |
-                    Use a varible instead.
+                    대신 변수를 사용하세요.
                 solution_code: |
                     answer is ask Why doens't echo work anymore?!
                     print answer
         -   title: "학생들은 가변적인 이름을 사용하거나 일반적인 단어로 사용한다"
             example:
                 error_text: |
-                    In the example below the word 'name' is used as a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.
+                    아래 예제에서는 'name'이라는 단어가 변수로 사용되지만 정규 텍스트로도 사용된다. 이 코드의 출력은 'Hi my Hedy is Hedy'가 될 것이다.
                 error_code: |
                     name is Hedy
                     print Hi my name is name
                 solution_text: |
-                    So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.
+                    그러니까 본문에서 사용하고 싶은 단어를 변수 이름으로 사용하지 마세요. 4단계에서는 따옴표로 풀립니다.
                 solution_code: |
                     name is Hedy
                     print Hi I'm name
         -   title: "학생들은 두 단어를 포함하는 긴 변수 이름을 사용한다."
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    변수 이름은 하나의 단어로 지어져야 한다. 두 단어를 연결하기 위해 언더스코어( _ )을 사용할 수 있다. 그것은 하나로 계산된다.
                 error_code: |
-                    chosen door is ask Which door do you pick?
+                    선택한 문은 어떤 문을 선택하느냐는 질문이다?
                 solution_text: |
-                    Add an underscore.
+                    언더스코어( _ )를 사용합니다.
                 solution_code: |
                     chosen_door is ask which door do you pick?
         -   title: "학생들은 같은 변수에 대해 두 개의 다른 이름을 사용할 수 있습니다"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    이 예제에서 학생은 동일한 변수에 대해 '말'과 '이름'을 사용했습니다.
                 error_code: |
                     horse is ask What is your horse called?
                     print Your horse is called name
                 solution_text: |
-                    Always check whether the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    코드 전체에 걸쳐 변수의 이름이 같은지 항상 확인해야 한다. 약간의 차이는 발견하기 어려울 수 있지만(예: 복수) 코드를 방해한다.
                 solution_code: |
                     name is ask What is your horse called?
                     print Your horse is called name
@@ -336,12 +336,12 @@ sections:
         -   title: "학생들은 전체 목록을 인쇄하려고 한다"
             example:
                 error_text: |
-                    A list can't be printed. You can only print one item from the list with {at} {random}.
+                    목록을 인쇄할 수 없습니다. {at} {random}(으)로 목록에서 항목 하나만 인쇄할 수 있습니다.
                 error_code: |
                     groceries is apples, milk, chocolate
                     print groceries
                 solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a `{print}` command. Else you can use the list to print one item with `{at}` `{random}`.
+                    모든 식료품 목록을 인쇄하려면 {print} 명령 뒤에 입력하기만 하면 됩니다. 그렇지 않으면 목록을 사용하여 {at} {random}이(가) 포함된 하나의 품목을 인쇄할 수 있습니다.
                 solution_code: |
                     {print} apples, milk, chocolate
 
@@ -352,7 +352,7 @@ sections:
         -   title: "학생들은 변수 또는 목록의 이름을 일반 텍스트로 사용합니다"
             example:
                 error_text: |
-                    This problem probably occured in level 2 as well. Now it can happen with lists too.
+                    이 문제는 레벨 2에서도 발생했을 것이다. 이제 목록에서도 발생할 수 있다.
                 error_code: |
                     name {is} Hedy
                     {print} Hi my name is name
@@ -362,7 +362,7 @@ sections:
                     animal {is} rhino, bee, swan
                     {print} The best animal is... animal {at} {random}
                 solution_text: |
-                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solved with quotation marks.
+                    print할 때 일반 텍스트의 변수 이름이나 목록을 사용하지 마십시오. 레벨 4에서는 따옴표로 이 문제를 해결합니다.
                 solution_code: |
                     name {is} Hedy
                     {print} Hi I'm name
