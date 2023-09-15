@@ -621,7 +621,7 @@ adventures:
             6:
                 story_text: "여러분은 이 과정에서 지렁이를 다시 죽게 만들 수도 있지만, 이제 얼마나 많은 점들이 굴러갔는지도 계산할 수 있습니다. 여러분은 지렁이가 지렁이의 점을 5개나 세는다는 것을 알 것입니다. 이제 굴린 후에 여러분은 몇 점을 던졌는지 즉시 계산할 수 있습니다. 이것은 주사위 하나에 대한 점들을 계산하기 위한 코드입니다. ### 연습 8개의 주사위에 대한 총 점수를 얻을 수 있도록 코드를 만들 수 있나요? 그러기 위해서는 코드의 몇 줄을 자르고 붙여 넣어야 합니다.\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
-                example_code_2: "\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                example_code_2: "\n    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: "이 레벨에서는 주사위를 다시 만들 수도 있습니다. {repeat} 코드를 사용하면 손쉽게 주사위 한 손을 통째로 굴릴 수 있습니다. ### 연습 샘플 코드를 완성해 보십시오! **Extra** 주사위와 {repeat}을(를) 사용하는 프로그램이 포함된 게임을 생각해 보십시오.\n"
