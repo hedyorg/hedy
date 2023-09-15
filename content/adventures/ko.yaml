@@ -30,62 +30,62 @@ adventures:
                 story_text: "이전 수준에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.\n다음과 같은 코드를 실행하려고 했을 수도 있습니다:\n\n물론 print하고 싶었겠지\n\n`제 이름은 소피입니다`\n\n하지만 Hedy는 지문을 찍는다\n\n`나의 소피는 소피다.`\n\n이 수준에서는 따옴표를 사용하여 이 문제를 해결합니다.\n"
                 example_code: "```\nname {is} Sophie\n{print} My name is name\n```\n"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+                start_code: "{print} 'Lets go to the next tab'"
                 story_text: "아래의 프로그램으로 여러분은 학교에서 한 과목(즉, 6등급 또는 그 이상의 등급)을 통과했는지 계산할 수 있다. 여러분은 이 코드가 5번 줄에 있는 매우 긴 코드 때문에 극도로 비효율적이라는 것을 알 수 있다. 1등급부터 5등급까지 모든 다른 등급들은 따로 프로그램 되어 있어야 했다. 운이 좋군요, 이 수준에서 여러분은 이 극도로 긴 코드 없이 이것을 하는 방법을 배울 수 있을 것입니다!\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded = first_grade + second_grade\nmean_grade = added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             2:
                 story_text: "축하해요! 레벨 2에 올랐네요. 이미 멋진 코드를 만들었기를 바랍니다!\n첫 번째 레벨에서는 '{echo}' 명령을 사용하면 한 번에 정보를 한 비트만 저장할 수 있다는 것을 알 수 있습니다.\n예를 들어 레스토랑 어드벤처에서는 고객이 먹고 싶은 것, 또는 마시고 싶은 것을 한 문장으로 반향할 수 있지만 둘 다는 아니다.\n"
                 start_code: '{print} hello world!'
                 example_code: "**Warning! This code does not work!**\nIn Hedy commands will change sometimes. `echo` for example only works in level 1. In this level you'll learn a better way to echo answers back.\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want\n{ask} what would you like to drink?\n{echo} So you want\n```\n"
                 story_text_2: "플레이어가 햄버거와 콜라를 입력하면 \"그래서 햄버거와 콜라를 원한다\"고 말할 수는 없지만, 두 줄을 따로 만들어야 한다.\n또한, {echo} 명령어는 문장의 마지막에 단어만 울려 퍼지기 때문에 \"너의 햄버거가 바로 올라온다!\"라고 말할 수는 없다.\n\n이는 레벨 2에서 변화한다. 레벨 2에서는 여러 개의 정보를 저장하고 원하는 장소에 인쇄할 수 있는 변수 작업을 배울 수 있다.\n그럼 다음 탭으로 가보도록 하겠습니다!\n"
             1:
-                story_text: "레벨 1에서는 `{print}`, `{ask}` 그리고 `{echo}` 와 같은 명령어를 사용할 수 있습니다.\n당신의 코드를 하단 프로그래밍 영역에 작성해주세요. 혹은 우측의 화살표 버튼을 눌러 당신을 위해 준비한 코드를 생성할 수도 있습니다!\n작성한 코드는 하단의 '코드 실행' 버튼을 누르면 실행할 수 있습니다.\n\n문장을 나타내기 위해 `{print}` 를 사용할 수 있습니다.\n"
+                story_text: "Hedy에 오신 것을 환영합니다! 레벨 1에서는 이야기를 인쇄하는 것으로 시작할 수 있습니다.\n\n프로그래밍 필드 아래에 있는 녹색 'Run code' 버튼으로 직접 코드를 사용해 보십시오.\n\n준비되셨나요? 그럼 다음 탭으로 가셔서 첫 번째 명령어를 배우세요!\n"
                 start_code: '{print} hello world!'
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "이전 수준에서는 코드를 실행할 때마다 게임이 달라지는 {at} {random}을 사용하는 법을 이미 배웠습니다. 하지만 이것은 실제로 상호작용적이지는 않고 플레이어는 게임에서 일어나는 일에 아무런 영향을 미치지 않습니다. 이 수준에서 여러분은 프로그램에서 다른 반응을 줄 수 있는 {if} 명령어를 배울 것입니다. 예를 들어, 컴퓨터의 비밀 암호를 프로그래밍할 수 있는 방법입니다. 이제 새로운 명령어에 대한 다음 탭으로 가봅시다!\n"
                 example_code: "```\npassword {is} {ask} 'What is the correct password?'\n```\n"
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: "# 코드를 여기에 입력합니다"
                 story_text: "이전 단계에서는 '{ask}'와 '{if}'로 연습한 적이 있다. 예를 들어, 손님들에게 무엇을 먹고 싶은지 물어볼 수 있다. 하지만 아직은 할 수 없는 것은 모든 사람들의 저녁 식사 가격을 계산하는 것이다. 다음 단계에서는 프로그램에서 덧셈, 뺄셈, 곱셈을 사용하는 것이 가능하다. 이렇게 하면 식당의 가격을 계산할 수 있지만, 친구나 가족에게 할인을 주기 위해 비밀 코드를 추가할 수도 있다. 다음 단계에서는 남동생이나 여동생이 곱셈을 연습할 수 있도록 자신만의 수학 게임을 프로그래밍하는 것이다. 직접 가서 보세요!\n"
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
+                example_code: "```\nfood_price {is} 0\ndrink_price {is} 0\ntotal_price {is} 0\n{print} 'Welcome to McHedy'\norder {is} {ask} 'What would you like to eat?'\n{if} order {is} hamburger food_price {is} 5\n{if} order {is} fries food_price {is} 2\ndrink {is} {ask} 'What would you like to drink?'\n{if} drink {is} water drink_price {is} 0\nelse drink_price {is} 3\ntotal_price {is} food_price + drink_price\n{print} 'That will be ' total_price ' dollars, please'\n```\n"
             7:
                 start_code: "{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n"
                 story_text: "잘했어요! 다음 단계에 도달했으니 {if}과 {else}로 연습한 셈이죠. 코드가 점점 더 길어지고 있음을 알아차렸을 거예요. 예를 들어, 생일 축하 프로그램을 만들고 싶다면 같은 단어를 몇 번이고 반복하는 코드가 많습니다. 다행히도 다음 탭에서 코드 한 줄을 여러 번 반복할 수 있는 {repeat} 명령어를 사용한 해결책을 배울 수 있을 거예요.\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+                example_code: "```\n{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n```\n"
             9:
-                story_text: "수고했어요! 또 새로운 단계에 도달했네요!\n"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
+                story_text: "잘했어요! 다른 새 레벨에 도달했어요! 이전 레벨에서는 {if} 또는 {repeat} 명령어에서 여러 줄의 코드를 사용하는 법을 배웠지만 아직 둘을 결합할 수는 없어요...\n좋은 소식입니다! 이 레벨에서는 {if} 명령 또는 {repeat} 명령에 {if}을(를) 넣을 수 있습니다.\n"
+                example_code: "```\nanswer = {ask} 'Are you ready to learn something new?'\n{if} answer {is} yes\n    {print} 'Great! You can learn to use the repeat commando in the if command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Maybe you should practice some more in the previous level'\n"
                 start_code: "{print} Lets go to the next tab!"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
+                start_code: "{print} 'Lets go to the next tab!'"
                 story_text: "이제 여러분은 한 줄의 코드를 반복하는 방법에 대해 배웠습니다. 이것은 유용하지만, 항상 충분하지는 않습니다. 때때로 여러분은 여러 줄의 코드를 한 번에 반복하고 싶어합니다. 이 레벨을 사용하면 두 줄의 코드를 그룹화하여 그 작은 줄의 그룹을 한 번에 반복할 수 있습니다!\n"
                 example_code: "```\n{repeat} 5 {times} {print} 'In the next tab you can repeat multiple lines of code at once!'\n```\n"
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+                start_code: "{print} 'Lets go to the next tab!'"
                 story_text: "잘하고 있어요! 이전 단계에서 우리는 여전히 작은 문제에 직면했어요. 대사를 반복하는 법을 배웠지만, 대사를 약간 바꾸고 싶다면 어떻게 하죠. 예를 들어, 만약 여러분이 행복하고 그것을 안다면'이라는 노래를 부르고 싶다면요. 다음 소절과 다음 소절, 그리고 다음 소절까지 원한다면, 여러분은 코드를 완전히 바꿔야 할 것입니다. 이 레벨에서 여러분은 동작 목록을 만들고 매번 다른 동작으로 코드를 반복할 수 있는 '{for}' 명령어를 배울 것입니다. 한번 보세요!\n"
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                example_code: "```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+                start_code: "{print} 'Lets go to the next tab!'"
                 story_text: "레벨 10에 도달하셨네요, 잘 하고 계십니다! 상위 레벨에서는 헤디가 점점 더 파이썬 프로그래밍 언어를 가르치는데 집중하고 있습니다. 파이썬에는 {repeat} 명령어가 없지만 {repeat}과 같은 동작을 하는 명령어가 있습니다. 파이썬 언어로 {repeat}을(를) 어떻게 말해야 하는지 궁금하신가요? 얼른 찾아보세요!\n"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+                start_code: "{print} 'Lets go to the next tab!'"
                 story_text: "아마 당신은 레스토랑 모험에서 십진법 숫자들을 사용해 보았을 것이다. 만약 사용했다면, 당신은 헤디가 숫자들을 아직 이해하지 못했고 항상 반올림했다는 것을 알아차렸을 것이다. 이 단계부터 당신은 십진법 숫자들을 사용할 수 있다.\n"
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                example_code: "```\nburger = 5\ndrink = 2\ntotal = burger + drink\nprint 'You have ordered a burger and a drink'\nprint 'That costs ' total ' dollars please'\n```\n"
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+                start_code: "{print} 'Lets go to the next level!'"
                 story_text: "이전 수준에서 여러분은 두 개의 {if} 명령어를 서로 안에 넣는 방법을 배웠습니다. 이것은 잘 작동하지만, 이것과 같이 매우 길고 다루기 어려운 코드를 제공합니다. 이 시스템에서 여러분은 올바른 사용자 이름과 올바른 비밀번호를 모두 가르쳐야 합니다. 이 수준에서 여러분은 이 코드를 훨씬 더 짧고 이해하기 쉽게 만드는 {and} 명령어를 배울 것입니다. 이것을 확인하세요!\n"
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                example_code: "```\nusername = {ask} 'What is your username?'\npassword = {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+                start_code: "{print} 'Lets go to the next level!'"
                 story_text: "아래의 이 게임에서는 플레이어가 원하는 만큼 게임을 할 수 있도록 보장하는 코드가 만들어졌다... 하지만 코드는 효과가 없고 너무 길다. 또한 플레이어가 100 게임 대신 101 게임을 하고 싶다면 어떻게 할 것인가? 무한대로 게임을 할 수는 없다? 이 레벨에서 당신은 이 모든 것을 훨씬 쉽게 만드는 명령어를 배울 것이다!\n"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                example_code: "```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
             16:
                 start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
                 story_text: "이 수준에서 우리는 실제 파이썬 코드를 향해 조금 더 성장할 것이다. 당신은 또한 두 목록을 어떻게 함께 맞추는지 배울 것이다. 이 방법으로 당신은 올바른 소리에 맞는 동물을 맞추는 코드를 프로그래밍할 수 있다. 왜냐하면 아래의 두 코드는... 명백하게 넌센스이다!\n"
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                start_code: "{print} 'Lets go to the next level!'"
                 story_text: "헤디의 마지막 레벨에 거의 다 도달했습니다. 잘했어요! 이 레벨에서는 {print}을(를) 사용하는 실제 파이썬 방법을 배울 수 있습니다.\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
@@ -703,7 +703,7 @@ adventures:
         name: "{ask}"
         levels:
             1:
-                story_text_3: "### 연습문제 {ask}와 {echo} 명령어를 사용해 보세요. 먼저 빈칸을 채워야 이 프로그램이 작동합니다. 그런 다음 {ask} 명령어를 사용하여 답을 화면에 출력한 후, {ask} 명령어를 사용하여 2개의 질문을 더 합니다.\n"
+                story_text_3: "### 연습문제\n`{ask}` 명령어와 `{echo}` 명령어를 사용해 보세요. 먼저 빈칸을 채워야 이 프로그램이 작동합니다.\n그런 다음 `{ask}` 명령을 사용하여 2개의 질문을 더 하고, 각 {ask}가 {echo}를 사용하여 답을 화면에 출력합니다.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
                 start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
@@ -714,7 +714,7 @@ adventures:
                 story_text: "## ask 명령어 이제 **variable**를 코드에 사용할 수 있게 되었으므로 더 이상 {echo} 명령어가 필요 없다. 우리는 변수를 사용하여 질문에 대한 답을 저장할 수 있고, 이 방법으로 우리는 코드에 여러 질문의 답을 사용할 수 있다. 이것을 확인해보라: 이것이 당신의 코드가 상호작용하는 방법이다!\n"
                 example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
                 story_text_2: "### 연습 이전 탭에서 당신은 '{is}' 명령어로 변수를 설정하는 연습을 했다. 당신은 적어도 3개의 변수를 만들어서 인쇄 명령어로 사용했다. 이제 우리는 예제에서 했던 것처럼 변수를 설정하는 대신 변수를 상호작용적으로 만들기를 원한다. 이전 탭에서 코드를 복사하고 '{ask}' 명령어를 사용하여 변수를 상호작용적으로 만든다.\n"
-                example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
+                example_code_2: "```\nfavorite_animals {is} {ask} What is your favorite animal?\n{print} I like favorite_animals\n```\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         description: Introduction ask command
         default_save_name: ask_command
@@ -784,7 +784,7 @@ adventures:
             5:
                 story_text: "## 만약... 그렇지 않다면... 레벨 5에는 새로운 {if}! {if} 라는 두 가지 다른 옵션 중에서 하나를 선택할 수 있다. 이름으로 헤디를 입력하면 이 코드가 잘 인쇄되고, 다른 것을 입력하면 boo! 된다. {ask} 와 {print} 는 레벨 4 에서와 마찬가지로 여전히 작동한다.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_2: "{if}인 코드가 정말 길어져서 행에 잘 맞지 않을 때도 있다. <br> 코드를 두 줄에 걸쳐 나눌 수도 있는데, 두 번째 줄은 다음과 같이 'else'에서 시작한다:\n"
+                story_text_2: "`{if}`인 코드가 정말 길어져서 행에 잘 맞지 않을 때도 있다. <br> 코드를 두 줄에 걸쳐 나눌 수도 있는데, 두 번째 줄은 다음과 같이 `{else}`에서 시작한다:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 story_text_3: "### 연습 '{if}'와 '{else}'로 자신만의 코드를 만들어 보자. 원한다면 예제 코드를 사용할 수 있다.\n"
                 example_code_3: "```\nanswer {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Great job!'\n_ _ 'No 2 + 2 = 4'\n```\n"
