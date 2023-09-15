@@ -2,10 +2,13 @@ levels:
     1:
         1:
             story: |
-                Eres cliente de la panadería Hedy.
+                Los puzzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
+
+                Eres un cliente de la panadería Hedy.
                 Entras en la panadería y te recibe el panadero.
                 Te pregunta qué tipo de tarta quieres pedir.
-                A continuación, se prepara tu pedido.
+                Luego te repite la respuesta.
+                Por último, se prepara tu pedido.
             code: |-
                 {print} ¡Bienvenido a la panedería Hedy!
                 {ask} ¿Qué tipo de pastel quieres pedir?
@@ -18,7 +21,7 @@ levels:
                 {print} Esta es la DJ Hedy
                 {ask} ¿Estás listo para la fiesta?
                 {ask} ¿Qué canción te gustaría escuchar?
-                {echo} ¡Excelente elección! Me encanta
+                {echo} ¡Excelente elección! Me encanta la canción
     2:
         1:
             story: |
@@ -40,17 +43,16 @@ levels:
     3:
         1:
             story: |
-                ¡El nuevo año escolar en Hogwarts está empezando!
-                Es el trabajo del Sombrero Seleccionador asignarte a alguna de las casas.
-                ¿En cuál casa te gustaría ser seleccionado?
-                ¿Eres de Gryffindor, Hufflepuf, Ravenclaw o Slytherin?
-                Deja que el programa espere por un momento antes de revelar tu casa.
+                ¡Comienza el nuevo curso escolar en Hogwarts! 
+                El sombrero seleccionador es el encargado de clasificarte en una de las casas.
+                ¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?
+                Antes de que el sombrero clasificador revele tu casa, puedes decirle que no elija una de las casas.
             code: |-
-                {print} ¡El nuevo año escolar en Hogwarts está empezando!
-                {print} El Sombrero Seleccionador está listo para asignarte a una casa de Hogwarts.
+                {print} El sombrero seleccionador está listo para clasificarte en una casa de Hogwarts.
                 casas {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} Y es casas {at} {random}
+                aversión {is} {ask} ¿Hay alguna casa de la que no quieras formar parte?
+                {remove} no {from} las casas
+                {print} No te disgusta, ¿eh? Mejor que sean... casas {at} {random}
         2:
             story: |
                 Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de toppings y deja que el programa decida que vas a comer!
@@ -61,8 +63,8 @@ levels:
                 {sleep} 2
                 {print} comida {at} {random} con toppings {at} {random}
         3:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: "En un torneo de ajedrez quedan tres jugadores.\nCrea un programa que decida qué dos jugadores tienen que jugar primero entre sí.\nEmpieza imprimiendo los dos jugadores que juegan la primera partida, luego imprime contra qué jugador jugará el ganador.\n"
+            code: "jugadores {is} Liam, Noah, Sophie\njugador_1 {is} jugadores {at} {random}\n{remove} jugador_1 {from} jugadores\njugador_2 {is} jugadores {at} {random}\n{print} jugador_1 ' primero juega contra ' jugador_2\n{remove} jugador_2 {from} jugadores\n{print} 'El ganador juega contra ' jugadores {at} {random}"
     4:
         1:
             story: |
@@ -119,23 +121,20 @@ levels:
                 Crea un programa que te ayude a calcular cuantas tortas deberías comprar para tu fiesta de cumpleaños.
             code: |-
                 {print} '¡Es tu cumpleaños!'
-                gente = {ask} '¿A cuántas personas te gustaría darle un pedazo de torta?'
-                cantidad_tortas {is} gente/8
-                {print} 'Vas a necesitar comprar ' cantidad_tortas ' tortas'
+                people = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
+                cakes_amount = personas/8
+                {print} 'Tendrás que comprar ' cakes_amount ' pasteles'
     7:
         1:
             story: |
-                En un campeonato de ajedrez hay tres jugadores restantes.
-                Crea un programa que decida dos jugadores se enfrentan primero.
-                Primero imprime los dos jugadores que jugarán el primer partido, y luego imprime contra qué jugador jugará el ganador.
-            code: |-
-                jugadores = Liam, Noah, Sophie
-                jugador1 = jugadores {at} {random}
-                {remove} jugador1 {from} jugadores
-                jugador2 = jugadores {at} {random}
-                {print} jugador1 ' se enfrentará primero a ' jugador2
-                {remove} jugador2 {from} jugadores
-                {print} 'El ganador se enfrentará a ' jugadores {at} {random}
+                Completa la canción del bebé tiburón. Primero viene el bebé tiburón, luego mamá y por último papá tiburón.
+            code: |
+                {repeat} 3 {times} {print} 'Tiburón bebe tututututudu'
+                {print} 'Tiburón bebé "
+                {repeat} 3 {times} {print} 'Mamá Tiburón tututututudu'
+                {print} 'Mama Tiburón'
+                {repeat} 3 {times} {print} 'Papá Tiburón tututututudu'
+                {print} 'Tiburón Papá'
         2:
             story: |
                 Crea la canción 'Las ruedas del autobús girando van, girando van'
@@ -143,7 +142,7 @@ levels:
                 {print} 'Las ruedas del autobús'
                 {repeat} 3 {times} {print} 'girando van, girando van'
                 {print} 'las ruedas del autobús girando van, girando van'
-                {print} 'por toda la ciudad '
+                {print} 'por toda la ciudad'
     8:
         1:
             story: |
@@ -178,7 +177,7 @@ levels:
             story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?\n"
             code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
         1:
-            story: "This game will give you three maths assignments. Each time the question is different. Can you figure out the order?\n"
+            story: "Este juego te dará tres tareas de matemáticas. Cada vez la pregunta es diferente. ¿Puedes averiguar el orden?\n"
             code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
     12:
         1:
