@@ -290,7 +290,7 @@ sections:
                 error_text: |
                     일부 학생들에게는 에코 명령이 더 이상 작동하지 않는다는 것을 알게 되면 좌절할 수 있습니다. 그렇기 때문에 변수를 사용하는 것의 장점을 설명하는 것이 매우 중요합니다. 예를 들어, 코드에 여러 개의 변수를 사용할 수 있고, 문장에서 원하는 곳에 변수를 넣을 수 있습니다!
                 error_code: |
-                    answer is ask Why doesn't echo work anymore?!
+                    답은 왜 echo가 더 이상 작동하지 않는지 묻는 것이다.
                     echo
                 solution_text: |
                     대신 변수를 사용하세요.
@@ -374,62 +374,62 @@ sections:
         -   title: "학생들은 {at} {random}에서 {at}을 잊어버린다"
             example:
                 error_text: |
-                    Like in the example
+                    예를 들면..
                 error_code: |
                     birds is sparrow, seagull, robin
                     print birds random
                 solution_text: |
-                    This problem is solved by adding the word at.
+                    이 문제는 단어를 추가하면 해결된다.
                 solution_code: |
                     birds {is} sparrow, seagull, robin
                     {print} birds {at} {random}
         -   title: "학생들은 `{at}` `{random}` 명령을 사용할 때 `{print}` 명령을 사용하는 것을 잊어버린다"
             example:
                 error_text: |
-                    Or they will sometimes put `{at}` `{random}` at the beginning of the line.
+                    줄의 맨 앞에 `{at}` '{random}'을 붙이기도 한다.
                 error_code: |
                     fruit {is} apple, cherry, banana
                     fruit {at} {random}
                 solution_text: |
-                    Emphasize to your students that you always need a print to print text.
+                    텍스트를 print하려면 항상 print가 필요하다는 것을 학생들에게 강조합니다.
                 solution_code: |
                     fruit {is} apple, cherry, banana
                     {print} fruit {at} {random}
         -   title: "학생들은 그들의 목록에 쉼표를 사용하는 것을 잊는다"
             example:
                 error_text: |
-                    In a list items are seperated with a comma.
+                    목록에서 항목은 쉼표(,)로 구분됩니다.
                 error_code: |
                     pizzas {is} funghi tonno quattro stagioni
                     {print} pizzas {at} {random}
                 solution_text: |
-                    After each item on your list, there should be a comma
+                    목록의 각 항목 뒤에 쉼표(,)가 있어야 합니다
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
         -   title: "학생들은 리스트 없이 `{at}` `{random}`를 사용하려고 한다"
             example:
                 error_text: |
-                    For example
+                    예를 들면..
                 error_code: |
                     clubs {is} Manchester United
                     {print} clubs {at} {random}
                 solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
+                    헤디는 아무 것도 임의로 인쇄할 수 없는데, 그 이유는 선택할 수 있는 목록이 없기 때문이다.
                 solution_code: |
                     clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
                     {print} clubs {at} {random}
         -   title: "학생들은 목록 없이 추가/제거를 사용하려고 합니다 "
             example:
                 error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                    아래 예제의 'names'는 목록이 아니라 변수입니다. 여기에 어떤 것도 추가할 수 없습니다.
                 error_code: |
                     names {is} Jake
                     your_name {is} {ask} Who are you?
                     {add} your_name {to} names
                     {print} names {at} {random}
                 solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                    먼저 목록이 있어야 하기 때문에 에이미처럼 이름을 목록으로 바꾸기 위해 두 번째 이름을 추가해야 합니다. 에이미를 목록에 넣지 않으려면 그 다음에 제거를 사용하여 제거할 수 있습니다.
                 solution_code: |
                     names {is} Jake, Amy
                     your_name {is} {ask} Who are you?
@@ -438,7 +438,7 @@ sections:
         -   title: "학생들이 추가/제거할 때 사용하는 것을 잊어버림"
             example:
                 error_text: |
-                    Without to/from the add/remove command won't work.
+                    to/from add/remove 명령이 없으면 작동하지 않습니다.
                 error_code: |
                     adventures {is} story, parrot, dice
                     choice {is} Which adventure do you like best?
@@ -446,7 +446,7 @@ sections:
                     {remove} dice
                     {print} I love adventures {at} {random}
                 solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
+                    헤디는 어떤 목록에 항목을 add/remove해야 하는지 알아야 한다.
                 solution_code: |
                     adventures is story, parrot, dice
                     choice is Which adventure do you like best?
@@ -458,12 +458,12 @@ sections:
         -   title: "학생들은 본문 양쪽에 따옴표를 사용하는 것을 잊는다"
             example:
                 error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
+                    이 레벨에서는 따옴표(')가 필요하다. 본문 앞에 하나, 뒤에 하나.
                 error_code: |
                     print Hello
                     mood is ask 'How are you?
                 solution_text: |
-                    Add the correct quotation marks.
+                    올바른 따옴표(')를 추가한다.
                 solution_code: |
                     print 'Hello'
                     mood is ask 'How are you?'
@@ -1042,7 +1042,7 @@ sections:
         -   title: "학생들은 대장을 잊어버린다"
             example:
                 error_text: |
-                    After each command that requires indentation, a colon should be used.
+                    들여쓰기가 필요한 각 명령 뒤에는 콜론(:)을 사용해야 합니다.
                 error_code: |
                     answer = ask 'How are you doing?'
                     {if} answer {is} 'great'
@@ -1076,7 +1076,7 @@ sections:
         -   title: "학생들은 여전히 ask 명령을 사용합니다"
             example:
                 error_text: |
-                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                    ask 명령어는 레벨 1 부터 사용되어왔기 때문에 학생들이 ask 대신 입력으로 전환하기가 어려울 수 있습니다.
                 error_code: |
                     print('My name is Hedy!')
                     name = ask('What is your name?')
@@ -1090,7 +1090,7 @@ sections:
         -   title: "학생들은 괄호를 따옴표로 사용할 수 있다"
             example:
                 error_text: |
-                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                    그들은 변수를 따옴표 밖에 두는 법을 배웠기 때문에 괄호 안에서도 같은 일을 할 수 있다. 이것은 그 변수들을 사용하는 올바른 방법이 아니다.
                 error_code: |
                     temperature = 25
                     print('It is ') temperature ('degrees outside')
