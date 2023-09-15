@@ -599,15 +599,15 @@ adventures:
                     Eksik olan 4 komutu doldurarak kodu tamamlayın.
                 example_code: |
                     ```
-                    words {is} squawk, Hedy
-                    {print} 'Train your parrot!'
-                    new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to_list} words
-                    said_word {is} words {at} {random}
-                    {print} '🧒 Say ' new_word ', Hedy!'
-                    {print} '🦜 ' said_word
-                    {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
-                    {else} {print} '🧒 No, Hedy! Say ' new_word
+                    kelimeler {is} gaak, Hedy
+                    {print} 'Papağanınızı eğitin!'
+                    yeni_kelime {is} {ask} 'Ona hangi kelimeyi öğretmek istiyorsunuz?'
+                    {add} yeni_kelime {to_list} kelimeler
+                    dediği_kelime {is} kelimeler {at} {random}
+                    {print} '🧒 Hadi ' new_word ' de, Hedy!'
+                    {print} '🦜 ' dediği_kelime
+                    _ dediği_kelime {is} yeni_kelime _ '🧒 Aferin, Hedy! 🍪'
+                    _ _ '🧒 Hayır, Hedy! ' yeni_kelime ' de!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             4:
@@ -615,49 +615,58 @@ adventures:
                 story_text: "Bu seviyede `{ask}` ve `{print}` komutları ile tırnak işaretlerini kullanmamız gerekiyor.\n### Alıştırma\nBoşluklardaki tırnak işaretlerini doldurarak kodu tamamlayın.\n"
                 example_code: "```\nkelimeler {is} gaak, Hedy\n{print} _ Papağanınızı eğitin! _\nyeni_kelime {is} {ask} _ Ona hangi kelimeyi öğretmek istiyorsunuz? _\n{add} yeni_kelime {to_list} kelimeler\n{print} _ 🧒 Hadi _ new_word _ de, Hedy!_\n{print} _ 🦜 _ kelimeler {at} {random}\n```\n"
     songs:
-        name: "Sing a song!"
-        description: "Print a song"
-        default_save_name: "Song"
+        name: "Bir şarkı söyle!"
+        description: "Şarkı yazdır"
+        default_save_name: "Şarkı"
         levels:
             6:
                 story_text: |
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+                    Şarkılar genellikle çok sayıda tekrarlama içerir. Bazen bu tekrarlar saymaya da dayanır.
+                    Örneğin, meşhur 'Bira şişeleri' şarkısı gibi. Bu şarkıyı biraz matematikle programlayabilirsiniz.
+
+                    İpucu: Hedy'nin şarkıyı size söylemesini sağlamak için sesli okuma işlevini kullanın!
+
+                    ### Alıştırma
+                    Şimdi 2'den 7'ye kadar olan satırları kopyalayarak istediğiniz kadar tekrarlayabilirsiniz.
                 example_code: |
                     ```
-                    verse = 99
-                    {print} verse ' bottles of beer on the wall'
-                    {print} verse ' bottles of beer'
-                    {print} 'Take one down, pass it around'
-                    verse = verse - 1
-                    {print} verse ' bottles of beer on the wall'
+                    mısra = 99
+                    {print} mısra ' şişe duvarda dizili'
+                    {print} mısra ' bira şişesi'
+                    {print} 'Bir tane indirip, kenara koyun'
+                    mısra = mısra - 1
+                    {print} mısra ' şişe duvarda dizili'
+                    {sleep}
                     ```
-
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
-                start_code: "{print} 'Baby shark'"
-                story_text_2: "This children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                start_code: "{print} 'Şarkı söyleyelim!'"
+                story_text_2: "Bu çocuk şarkısı 5 küçük maymundan 1 maymuna doğru geri sayar.\nEğer 2 - 7. satırları kopyalar ve kodun altına yapıştırırsanız, tüm şarkıyı söyleyebilirsiniz!\n"
+                example_code_2: "```\nsayı = 6\nsayı = sayı - 1\n{print} sayı ' küçük maymun yatağın üzerinde zıplıyor'\n{print} 'Biri düştü ve kafasını çarptı.'\n{print} 'Annem doktoru aradı ve doktor dedi ki'\n{print} 'ARTIK YATAKTA ZIPLAYAN MAYMUN OLMASIN!'\n{sleep}\n```\n"
             7:
                 story_text: |
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    Şarkılar genellikle çok fazla tekrarlama içerir. Örneğin. Bebek Köpekbalığı! Eğer söylerseniz, aynı şeyi söylemeye devam edersiniz:
 
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
+                    Bebek Köpekbalığı tututudutudu <br>
+                    Bebek Köpekbalığı tututudutudu <br>
+                    Bebek Köpekbalığı tututudutudu <br>
+                    Bebek Köpekbalığı
 
-                    You can make this song much shorter with a `{repeat}`! Can you finish the code?
+                    ### Alıştırma
+                    Bebek Köpekbalığı şarkısını bir `{repeat}` ile yazdırabilir misiniz? Boşlukları değiştirerek kodu tamamlayın?
+                    **Ekleme** Bebek Köpekbalığı'ndan sonra elbette başka şarkılar da programlayabilirsiniz. Tekrarı olan birçok şarkı var!
+                    Aklınıza bir şarkı daha geliyorsa yazdırabilir misiniz?
                 example_code: |
                     ```
-                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
+                    {repeat} _ _ {print} 'Bebek Köpekbalığı tututudutudu'
+                    {print} 'Bebek Köpekbalığı'
                     ```
-
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
-                start_code: "{print} 'Baby Shark'"
+                start_code: "{print} 'Bebek Köpekbalığı'"
             8:
                 story_text: |
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    Önceki bir seviyede, 'Bira şişeleri' şarkısını programladınız. Ancak `{repeat}` komutu olmadan, dizeleri birçok kez kopyalamak zorunda kaldınız.
+                    Bu seviyede, sadece basit bir satır ekleyerek şarkıyı 99 kez tekrarlayabilirsiniz!
+
+                    ### Alıştırma
+                    Boşluklara doğru komutu ekleyin ve kodu doğru şekilde girintileyin.
                 example_code: |
                     ```
                     verse = 99
@@ -1092,7 +1101,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                                        Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
