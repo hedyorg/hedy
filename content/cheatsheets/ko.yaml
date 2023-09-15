@@ -54,10 +54,10 @@
     demo_code: "{print} '계산하세요!'\n{print} '2.5 더하기 2.5는...'\n{print} 2.5 + 2.5"
 -   name: assign text
     explanation: '`=` 뒤에 따옴표가 있는 텍스트'
-    demo_code: "name = '로봇 헤디'\n{print} '안녕' name"
+    demo_code: "name = '로봇 Hedy'\n{print} '안녕' name"
 -   name: quotes after `{if}` comparison
     explanation: '`{if}` 뒤에 따옴표가 있는 텍스트.'
-    demo_code: "name = {ask} '누구세요?'\n{if} name = '헤디'\n    {print} '안녕하세요!'"
+    demo_code: "name = {ask} '누구세요?'\n{if} name = 'Hedy'\n    {print} '안녕하세요!'"
 -   name: quotes in list
     explanation: 따옴표가 있는 목록입니다.
     demo_code: "superheroes = '아이언맨', '배트맨', '슈퍼맨'\n{print} superheroes {at} {random}"
@@ -107,7 +107,7 @@
     explanation: '`{ask}`로 물어 보세요. 조심하세요! 답에 `{is}`로 이름을 붙여야 합니다.'
     demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
 -   name: '{sleep}'
-    explanation: '`{sleep}`은 헤디를 잠시 쉬게 해준다.'
+    explanation: '`{sleep}`은 Hedy를 잠시 쉬게 해준다.'
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   name: '{is} with turtle'
     explanation: '`{is}`를 사용하여 숫자에 이름을 붙여라. 직접 이름을 선택할 수 있다.'
