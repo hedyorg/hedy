@@ -41,13 +41,13 @@ levels:
             -   option: You have to fill in =is= on the `_?_`
                 feedback: No, one `=` sign is enough
             -   option: You can only use the `=` sign when working with numbers, not with words.
-                feedback: 오류:509
+                feedback: '`=`를 단어와 함께 사용할 수도 있습니다.'
             correct_answer: B
             hint: '`{is}` and `=` are both allowed'
             question_score: '10'
         4:
             correct_answer: C
-            question_text: 킴은 10살입니다. 헤디는 그녀를 위해 무엇을 인쇄할까요?
+            question_text: Kim은 10살입니다. Hedy는 그녀를 위해 무엇을 인쇄할까요?
             code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
             mp_choice_options:
             -   option: '30'
@@ -61,7 +61,7 @@ levels:
             hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
             question_score: '10'
         1:
-            question_text: 이 코드를 실행하면 헤디의 출력은 얼마죠?
+            question_text: 이 코드를 실행하면 Hedy는 무엇을 출력 하나요?
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
@@ -79,18 +79,18 @@ levels:
             question_text: 두 개의 숫자를 더하고 싶을 때 당신은 무엇을 사용하나요?
             mp_choice_options:
             -   option: '`-`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: plus
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`*`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`+`'
                 feedback: 정답!
             correct_answer: D
             hint: It's the plus sign.
             question_score: '10'
         3:
-            question_text: 이 코드를 실행하면 헤디의 출력은 얼마죠?
+            question_text: 이 코드를 실행하면 Hedy는 무엇을 출력 하나요?
             code: "{print} '3*10'"
             mp_choice_options:
             -   option: '30'
@@ -154,7 +154,7 @@ levels:
             question_text: 이 레벨에서 repeat 명령으로 한 번에 몇 줄을 반복할 수 있습니까?
             mp_choice_options:
             -   option: '0'
-                feedback: '"아니요'
+                feedback: '아니요 한 줄만 반복해도 돼요.'
             -   option: '1'
                 feedback: Correct, one line at a time
             -   option: '2'
@@ -189,7 +189,7 @@ levels:
             -   option: Wrong, the word `{times}` is missing
                 feedback: The word `{times}` is there, another word is missing.
             -   option: Wrong, the word `{print}` is missing
-                feedback: 맞아요.
+                feedback: 맞아요
             correct_answer: D
             hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
             question_score: '10'
@@ -199,11 +199,11 @@ levels:
             mp_choice_options:
             -   option: "```\nI'm\n```\n"
                 feedback: 그렇구나!
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{print}`\n"
                 feedback: '{print}의 철자가 정확합니다'
-            -   option: "```\n{repeat}\n```\n"
+            -   option: "`{repeat}`\n"
                 feedback: '`{repeat}`의 철자가 정확합니다'
-            -   option: "```\n{times}\n```\n"
+            -   option: "`{times}`\n"
                 feedback: '{times}의 철자가 정확합니다'
             correct_answer: A
             hint: I'm is wrong, you can't use apostrophes
@@ -215,7 +215,7 @@ levels:
             -   option: Correct
                 feedback: 그렇구나!
             -   option: Wrong
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             correct_answer: A
             hint: The code is correct!
             question_score: '10'
@@ -250,7 +250,7 @@ levels:
             hint: Mind the `{repeat}` command.
             question_score: '10'
         8:
-            question_text: 헤디 코드가 이 출력물에 속하나요?
+            question_text: Hedy 코드가 이 출력물에 속하나요?
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
@@ -265,7 +265,7 @@ levels:
             correct_answer: A
             question_score: '10'
         9:
-            question_text: 헤디 코드가 이 출력물에 속하나요?
+            question_text: Hedy 코드가 이 출력물에 속하나요?
             code: "배트맨은 고담을 비행하고 있었다.\n갑자기 누군가가 비명을 지르는 걸 들었을 때...\n도와주세요!\n도와주세요!\n도와주세요!\n제발 저좀 도와주세요!"
             mp_choice_options:
             -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
@@ -275,12 +275,12 @@ levels:
             -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
                 feedback: 따옴표를 놓쳤군요
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help !'\n{print} 'Please help me !'\n```\n"
-                feedback: 완벽하네요.
+                feedback: 완벽하네요
             question_score: '10'
             hint: "'Help!' is repeated 3 times."
             correct_answer: D
         10:
-            question_text: 헤디 코드가 이 출력물에 속하나요?
+            question_text: 어떤 코드가 이 출력물에 속하나요?
             code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
             mp_choice_options:
             -   feedback: 거의! 첫번째 줄은 추가 단어가 필요해
@@ -316,7 +316,7 @@ levels:
             mp_choice_options:
             -   option: This should be only one line, not 2.
                 feedback: 아니요. 2줄이어야 돼요.
-            -   option: This `{print}` command has to go
+            -   option: 이 `{print}` 명령은 제거해야 합니다.
                 feedback: No, you need it.
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
@@ -364,9 +364,9 @@ levels:
             -   option: '`{else}` is not a command!'
                 feedback: 네!
             -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: '`{ask}` is no longer a command'
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             correct_answer: A
             hint: Something is wrong with indentation
             question_score: '10'
@@ -452,11 +452,11 @@ levels:
             code: "1 level = {ask} 'What level are you on?'\n2 {if} level {is} 8\n3 {print} 'Great job!'"
             mp_choice_options:
             -   option: All lines should start with 4 spaces
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: Line 2 and 3 should start with 4 spaces
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: Line 2 should start with 4 spaces
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: Line 3 should start with 4 spaces
                 feedback: 당신 말이 맞아요!
             correct_answer: D
@@ -484,7 +484,7 @@ levels:
             mp_choice_options:
             -   option: "```\nGood job!\nGood job!\n```"
                 feedback: 그게 아니야!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
+            -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
                 feedback: 그게 아니야!
             -   option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
                 feedback: 그게 아니야!
@@ -532,7 +532,7 @@ levels:
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
                 feedback: '{if} 명령 뒤에 들여쓰기 사용'
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
-                feedback: 완벽하네요.
+                feedback: 완벽하네요
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: 이 코드에는 2개의 '{repeat}' 명령이 있습니다.
             correct_answer: C
@@ -572,7 +572,7 @@ levels:
             code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n{if} singing {is} yes\n    {repeat} years {times}\n        {print} 'Hip Hip Hooray'"
             mp_choice_options:
             -   option: You can't put two questions in a row
-                feedback: '"네'
+                feedback: '네 당신은 할 수 있어요.'
             -   option: The variable called 'age' is later on used as 'years'
                 feedback: 예리한 눈! 잘했어!
             -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
@@ -591,7 +591,7 @@ levels:
                 feedback: 원하신다면 더 쓰셔도 됩니다
             -   option: 'should'
                 feedback: 원하신다면 더 쓰셔도 됩니다
-            -   feedback: 그것은 사실이에요.
+            -   feedback: 그것은 사실이에요
                 option: Infinite, as long as you keep using indentation correctly
             correct_answer: D
             hint: You can put an `{if}` command inside an `{if}` command.
@@ -624,19 +624,13 @@ levels:
                     ```
                 feedback: "아니오"
             -   option: |
-                    ```
-                    {range}
-                    ```
-                feedback: "맞아요."
+                    `{range}`
+                feedback: "맞아요"
             -   option: |
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: "아니오"
             -   option: |
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: "아니오"
             correct_answer: "B"
             hint: "What did you learn in this level?"
@@ -650,11 +644,11 @@ levels:
             -   option: "1\n2\n3"
                 feedback: "정답!"
             -   option: "1 2 3"
-                feedback: "그게 아니야."
+                feedback: "그게 아니야"
             -   option: "1, 2, 3"
-                feedback: "그게 아니야."
+                feedback: "그게 아니야"
             -   option: "123"
-                feedback: "그게 아니야."
+                feedback: "그게 아니야"
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
@@ -674,7 +668,7 @@ levels:
                         {print} i
                     {print} 'Once I caught a fish alive!'
                     ```
-                feedback: "완벽하네요."
+                feedback: "완벽하네요"
             -   option: |
                     ```
                     {for} i {in} {range} 1 {to} 5
@@ -719,13 +713,13 @@ levels:
                     {for} i {in} {range} 0 {to} 10
                         {print} i
                     ```
-                feedback: "이제 헤디는 10에서 0이 아닌 0에서 10까지의 숫자를 인쇄한다."
+                feedback: "이제 Hedy는 10에서 0이 아닌 0에서 10까지의 숫자를 인쇄한다."
             -   option: |
                     ```
                     {for} i {in} {range} 0 to 10
                         {print} - i
                     ```
-                feedback: "헤디는 이런 경우에 음수를 찍어낼 겁니다."
+                feedback: "Hedy는 이런 경우에 음수를 찍어낼 겁니다."
             -   option: |
                     ```
                     {for} i {in} {range} 10 to 0
@@ -748,7 +742,7 @@ levels:
                 {print} i
             mp_choice_options:
             -   option: "The i in the last line need quotation marks"
-                feedback: "\"아뇨"
+                feedback: "아니오 그렇지 않아요."
             -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
                 feedback: "1부터 5까지 사용할 수 있어요!"
             -   option: "Line 1 needs to start with an indention."
@@ -818,7 +812,7 @@ levels:
             -   option: "23 hi 24 hi 25 hi"
                 feedback: "숫자가 표시되지 않습니다. {print} i라고 표시되지 않습니다"
             -   option: "hi\nhi\nhi"
-                feedback: "맞아요."
+                feedback: "맞아요"
             -   option: "The word 'hi' will appear 25 times in a row."
                 feedback: "아니요. 3번만 나옵니다."
             correct_answer: "C"
@@ -887,11 +881,11 @@ levels:
             code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
             mp_choice_options:
             -   option: "```\n{for} each compliment\n```\n"
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: "```\n{for} compliment {in} compliments\n```\n"
                 feedback: 당신은 그 많은 칭찬을 받을 자격이 있어요!
             -   option: "```\n{if} compliment {in} compliments\n```\n"
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: "```\n{for} compliments {in} compliment\n```\n"
                 feedback: 거의 다 왔어요!
             correct_answer: B
@@ -938,7 +932,7 @@ levels:
             -   option: Line 3 should say item instead of groceries
                 feedback: 수고했어!
             -   option: Line 2 should say groceries instead of item
-                feedback: '"아니'
+                feedback: '아니오 그렇지 않아요.'
             hint: Line 2 says `{for}` each item in the list of groceries
             question_score: '10'
             correct_answer: C
@@ -951,7 +945,7 @@ levels:
             -   option: choices
                 feedback: 그렇구나!
             -   option: choice
-                feedback: 당신은 정말 가깝군요 하지만 헤디는 '선택'이 아니라 '선택'이라는 리스트에서 골라야 해요...
+                feedback: 정말 아깝네요. 하지만 Hedy는 'choices'이 아니라 'choice'이라는 목록에서 골라야 해요...
             -   option: dice
                 feedback: 변수 이름을 보세요.
             correct_answer: B
@@ -1003,7 +997,7 @@ levels:
             hint: Mind the quotation marks and the names of the variables
             question_score: '10'
         9:
-            question_text: 프로그램을 실행할 때 헤디가 당신에게 {물어보겠다}고 한 첫 번째 질문은 무엇인가요?
+            question_text: 프로그램을 실행할 때 Hedy가 당신에게 물어보겠다고 한 첫 번째 질문은 무엇인가요?
             code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course"
             mp_choice_options:
             -   option: Timon, what would you like to eat as your appetizer?
@@ -1045,19 +1039,19 @@ levels:
             -   option: Heidi
                 feedback: 이거 말고!
             correct_answer: A
-            hint: 헤디 라마르의 이름을 따서 지었어요.
+            hint: Hedy Lamarr의 이름을 따서 지었어요.
             question_score: '10'
         2:
             question_text: 텍스트를 나타나게 하는 명령어는 무엇입니까?
             mp_choice_options:
-            -   option: "```\n{echo}\n```\n"
+            -   option: "`{echo}`\n"
                 feedback: '`{echo}`는 주어진 답을 반복한다.'
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{print}`\n"
                 feedback: 정답!
-            -   option: "```\nhello\n```\n"
+            -   option: "`hello`\n"
                 feedback: 안녕은 명령이 아니야.
-            -   option: "```\n{ask}\n```\n"
-                feedback: "'{ask}'를 사용하면, 질문을 할 수 있습니다."
+            -   option: "`{ask}`\n"
+                feedback: "`{ask}`를 사용하면, 질문을 할 수 있습니다."
             correct_answer: B
             hint: _?_ Hello world!
             question_score: '10'
@@ -1084,7 +1078,7 @@ levels:
             -   option: '`{print}` in line 1 is missing.'
                 feedback: 정답!
             -   option: Im in line 1 is spelled wrong.
-                feedback: 나는 일부러 철자가 틀렸다. 헤디는 아직 아포스트로피를 이해하지 못한다.
+                feedback: 명령어의 철자가 정확합니다.
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: Nothing! This is a perfect code!
@@ -1096,13 +1090,13 @@ levels:
             question_text: 2행에 어떤 명령이 누락되었습니까?
             code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
             mp_choice_options:
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{print}`\n"
                 feedback: No, you would like the answer to be repeated back to you.
-            -   option: "```\nHedy\n```\n"
-                feedback: 헤디는 지휘관이 아니야.
-            -   option: "```\n{ask}\n```\n"
-                feedback: '{ask}를 사용하면 질문을 할 수 있습니다.'
-            -   option: "```\n{echo}\n```\n"
+            -   option: "`Hedy`\n"
+                feedback: Hedy는 명령어가 아니야.
+            -   option: "`{ask}`\n"
+                feedback: '`{ask}`를 사용하면 질문을 할 수 있습니다.'
+            -   option: "`{echo}`\n"
                 feedback: 그래요!
             correct_answer: D
             hint: You want to see the answer at the end of line 2...
@@ -1112,7 +1106,7 @@ levels:
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
-                feedback: '1행의 ''{print}''가 맞습니다.'
+                feedback: '1행의 `{print}`가 맞습니다.'
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
                 feedback: 잘됐네요! 신경 썼네요!
             -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
@@ -1138,12 +1132,12 @@ levels:
             hint: Check the code line by line
             question_score: '10'
         8:
-            question_text: '{echo} 명령어는 어떻게 사용하나요?'
+            question_text: '`{echo}` 명령어는 어떻게 사용하나요?'
             mp_choice_options:
             -   option: You can use it to `{ask}` a question.
-                feedback: 그것이 바로 '{ask}'의 목적입니다!
-            -   option: 다음과 같은 방법으로 사용할 수 있습니다`{print}`
-                feedback: 그게 바로 '{print}'의 목적입니다!
+                feedback: 그것이 바로 `{ask}`의 목적입니다!
+            -   option: 다음과 같은 방법으로 사용할 수 있습니다`{print}`.
+                feedback: 그게 바로 `{print}`의 목적입니다!
             -   option: You can use it to repeat an answer.
                 feedback: 수고했어!
             -   option: You can use it to make text disappear.
@@ -1199,7 +1193,7 @@ levels:
             -   option: "```\n{sleep} 3\n```\n"
                 feedback: 가장 좋아하는 맛을 알고 싶겠지!
             -   option: "```\n{print} strawberries\n```\n"
-                feedback: 줄 가운데에 '{print}' 명령을 원하지 않으십니다...
+                feedback: 줄 가운데에 `{print}`명령을 원하지 않으십니다...
             -   option: "```\nstrawberries, chocolate, vanilla\n```\n"
                 feedback: 이런 식으로 목록을 만드는 거야 지금은 그걸 원하지 않을 거야.
             -   option: "```\n{ask} What flavor icecream do you like?\n```\n"
@@ -1265,7 +1259,7 @@ levels:
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
         5:
-            question_text: '{sleep} 명령을 사용하면 어떻게 됩니까?'
+            question_text: '`{sleep}` 명령을 사용하면 어떻게 됩니까?'
             mp_choice_options:
             -   option: It slows down your computer
                 feedback: 천만다행으로 그렇지 않다!
@@ -1282,13 +1276,13 @@ levels:
             question_text: 뭐가 있어야 할까요?
             code: "{print} And the award for best programming language goes to...\n_?_\n{print} Hedy!"
             mp_choice_options:
-            -   option: "```\n{sleep}\n```\n"
+            -   option: "`{sleep}`\n"
                 feedback: 완벽해!
-            -   option: "```\n{echo}\n```\n"
+            -   option: "`{echo}`\n"
                 feedback: 여기서 다시 반복할 것은 없다
-            -   option: "```\n{print}\n```\n"
-                feedback: '{print}에 대한 텍스트가 없습니다'
-            -   option: "```\n{ask}\n```\n"
+            -   option: "`{print}`\n"
+                feedback: '`{print}`에 대한 텍스트가 없습니다'
+            -   option: "`{ask}`\n"
                 feedback: 의심할 여지가 없다
             correct_answer: A
             hint: Pause for dramatic effect...
@@ -1298,7 +1292,7 @@ levels:
             code: "{print} I will explode in 3 seconds!\n_?_\n{print} BOOM!"
             mp_choice_options:
             -   option: "```\n{print} 3\n```\n"
-                feedback: '{print}할 필요가 없습니다'
+                feedback: '`{print}`할 필요가 없습니다'
             -   option: "```\n{sleep} 3\n```\n"
                 feedback: 완벽해!
             -   option: "```\n{sleep}\n```\n"
@@ -1319,7 +1313,7 @@ levels:
             -   option: "```\nage {is} {ask} How old are you?\n```\n"
                 feedback: 알겠어요!
             -   option: "```\nage {is} How old are you?\n```\n"
-                feedback: '{ask} 명령은 어디에 있습니까?'
+                feedback: '`{ask}` 명령은 어디에 있습니까?'
             correct_answer: C
             hint: The variable name should come first
             question_score: '10'
@@ -1334,7 +1328,7 @@ levels:
             -   option: 'Line 2 should say: `{print}` I love animals'
                 feedback: 가변적인 이름은 동물이다
             -   option: 'Line 2 should say: `{sleep}` I love animals'
-                feedback: 절전 모드가 '{print}' 텍스트에 사용되지 않습니다
+                feedback: 절전 모드가 `{print}`텍스트에 사용되지 않습니다
             correct_answer: B
             hint: You want to `{print}` 'I love dogs'
             question_score: '10'
@@ -1346,7 +1340,7 @@ levels:
             -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
                 feedback: 파란 머리를 하고 싶으실 수도 있어요!
             -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
-                feedback: '{remove}이(가) 옳도록 선택한 색을 제거하려고 합니다.'
+                feedback: '`{remove}`이(가) 옳도록 선택한 색을 제거하려고 합니다.'
             -   option: In line 4 the variable should be called colors instead of color
                 feedback: 정말 잘했어!
             -   option: Nothing, this is a correct code!
@@ -1370,15 +1364,15 @@ levels:
             hint: The person who walked the dog yesterday should be removed from the list.
             question_score: '10'
         1:
-            question_text: 헤디가 임의로 무언가를 고르도록 하기 위해 어떤 명령을 쓰나요?
+            question_text: Hedy가 독단적으로 선택하도록 하기 위해 당신은 어떤 명령어를 쓰나요?
             mp_choice_options:
-            -   option: "```\n{print}\n```\n"
-                feedback: '{print}는 텍스트를 인쇄하는 데 사용됩니다'
-            -   option: "```\n{ask}\n```\n"
-                feedback: '{ask}는 질문을 할 때 사용된다'
-            -   option: "```\n{is}\n```\n"
-                feedback: '{is}는 목록을 만드는 데 사용된다'
-            -   option: "```\n{at} {random}\n```\n"
+            -   option: "`{print}`\n"
+                feedback: '`{print}`는 텍스트를 인쇄하는 데 사용됩니다'
+            -   option: "`{ask}`\n"
+                feedback: '`{ask}`는 질문을 할 때 사용된다'
+            -   option: "`{is}`\n"
+                feedback: '`{is}`는 목록을 만드는 데 사용된다'
+            -   option: "`{at}` `{random}`\n"
                 feedback: 정답!
             correct_answer: D
             hint: Arbitrarily means without a plan or randomly.
@@ -1435,7 +1429,7 @@ levels:
             -   option: Line 1 needs to say `{print}` instead of `{ask}`
                 feedback: No, that's not wrong.
             -   option: Line 2 needs to say `{ask}` instead of `{print}`
-                feedback: '"아니'
+                feedback: '아니야 그건 틀리지 않아.'
             -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
                 feedback: No, that's not wrong.
             -   option: Nothing, this code is perfect
@@ -1450,7 +1444,7 @@ levels:
             -   option: Line 2 needs to say question instead of answers
                 feedback: No that's not right
             -   option: Line 2 needs the `{is}` command
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: Line 3 needs to say answer instead of answers
                 feedback: '"아니요'
             -   option: Nothing! This code is great!
@@ -1459,7 +1453,7 @@ levels:
             hint: There is something wrong with line 2.
             question_score: '10'
         7:
-            question_text: '{add} 명령어의 기능은 무엇입니까?'
+            question_text: '`{add}` 명령어의 기능은 무엇입니까?'
             code: "books {is} Harry Potter, The Hobbit, Green Eggs and Ham\nyour_book {is} {ask} What is your favorite book?\n{add} your_book {to} books\n{print} books {at} {random}"
             mp_choice_options:
             -   option: The `{add}` command removes a random book from the list
@@ -1478,7 +1472,7 @@ levels:
             code: "crisps {is} sea salt, paprika, sour cream\n{remove} sea salt {from} crisps\n{remove} paprika {from} crisps\n{print} crisps {at} {random}"
             mp_choice_options:
             -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: '{remove} 명령을 살펴봅니다'
+                feedback: '`{remove}` 명령을 살펴봅니다'
             -   option: sea salt
                 feedback: 천일염은 목록에서 제외된다
             -   option: paprika
@@ -1497,7 +1491,7 @@ levels:
             -   option: Quotation marks are missing in line 1
                 feedback: 목록에는 따옴표가 필요 없습니다
             -   option: Quotation marks are missing in line 2
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: Quotation marks are missing in both line 2 and 3
                 feedback: 3호선은 글자 그대로 인쇄되어 있지 않기 때문에 따옴표가 필요 없습니다
             -   option: Nothing, this code has no mistakes
@@ -1514,9 +1508,9 @@ levels:
                     ```
 
                     '
-                feedback: 맞아요.
-            -   option: "Only `{print}` needs quotation marks\n"
-                feedback: '{ask}에도 따옴표가 필요합니다!'
+                feedback: 맞아요
+            -   option: "```\n{print} Im very excited to take this quiz!\n```\n"
+                feedback: '`{ask}`에도 따옴표가 필요합니다!'
             -   option: "```\n{print} 'I'm very excited to take this quiz!'\n```\n"
                 feedback: '`{at} {random}`이(가) 여전히 작동합니다'
             -   option: '```
@@ -1536,7 +1530,7 @@ levels:
             -   option: "```\n{print} `hello`\n```\n"
                 feedback: This quotation mark is skewed, you need a straight one.
             -   option: "```\n{print} 'hello'\n```\n"
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: "```\n{print} hello\n```\n"
                 feedback: 따옴표가 없습니다!
             -   option: "```\n{print} ,hello,\n```\n"
@@ -1552,7 +1546,7 @@ levels:
             -   option: "```\n{print} 'Hi Im Hedy\n```\n"
                 feedback: 인쇄하고 싶은 단어의 앞뒤는 모두 따옴표로 표시해야 합니다.
             -   option: "```\n'{print} Hi Im Hedy'\n```\n"
-                feedback: 첫 번째 따옴표는 {print} 단어 뒤에 있어야 합니다
+                feedback: 첫 번째 따옴표는 `{print}`단어 뒤에 있어야 합니다
             -   option: "```\n{print} 'Hi Im Hedy'\n```\n"
                 feedback: 완벽해!
             correct_answer: D
@@ -1566,7 +1560,7 @@ levels:
             -   option: You need quotation marks around the words you want to print.
                 feedback: 굉장하네요!
             -   option: You do not need quotation marks when using the `{ask}` command
-                feedback: "{print}와 '{ask}' 모두 따옴표가 필요합니다"
+                feedback: "`{print}`와`{ask}` 모두 따옴표가 필요합니다"
             -   option: You can choose yourself whether to use quotation marks or not.
                 feedback: Unfortunately, Hedy is stricter than that.
             correct_answer: B
@@ -1577,11 +1571,11 @@ levels:
             code: "options {is} rock, paper, scissors\n{print} 'options {at} {random}'"
             mp_choice_options:
             -   option: "```\n'{print} options {at} {random}'\n```\n"
-                feedback: '{print} 명령 앞에 따옴표를 붙이지 마십시오.'
+                feedback: '`{print}`명령 앞에 따옴표를 붙이지 마십시오.'
             -   option: "```\n{print} 'options' {at} {random}\n```\n"
                 feedback: options가 변수입니다. 'options {at} {random}'을(를) 인쇄하고 싶지는 않습니다.
             -   option: "```\n{print} options {at} {random}\n```\n"
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: Nothing, the game already works!
                 feedback: 잘 보세요. 오류가 있네요.
             correct_answer: C
@@ -1598,7 +1592,7 @@ levels:
             -   option: "```\n{print} You win... prices {at} {random}\n```\n"
                 feedback: 따옴표가 필요해요!
             -   option: "```\n{print} 'You win... prices {at} {random}'\n```\n"
-                feedback: 헤디는 말 그대로 '가격 {at} {random}'을 인쇄할 것이다
+                feedback: Hedy는 말 그대로 '가격 {at} {random}'을 인쇄할 것이다
             correct_answer: A
             hint: '신중하게 생각하라. 변수가 무엇이고 따옴표 밖에 있어야 하는가? 그리고 그 안에 들어가야 하는 정상적인 단어는 무엇인가?'
             question_score: '10'
@@ -1628,7 +1622,7 @@ levels:
             -   option: "```\n{print} 'So you pick door ' door\n```\n"
                 feedback: 굉장하네요!
             -   option: "```\n{print} 'So you pick door door'\n```\n"
-                feedback: 헤디는 말 그대로 '문을 선택하라'고 인쇄할 것이다
+                feedback: Hedy는 말 그대로 '문을 선택하라'고 인쇄할 것이다
             correct_answer: C
             hint: The second word door should be replaced with the number, the first should still be the word door...
             question_score: '10'
@@ -1652,7 +1646,7 @@ levels:
             question_text: "무엇이 진실일까?"
             mp_choice_options:
             -   option: "In level 5 `{print}` works differently than in level 4\n"
-                feedback: "{print}는 여전히 동일합니다"
+                feedback: "`{print}`는 여전히 동일합니다."
             -   option: "`{if}`\n"
                 feedback: "위 줄에서 `{if}`명령을 사용합니다."
             -   option: "`{sleep}`\n"
@@ -1660,7 +1654,7 @@ levels:
             -   option: "`{else}`\n"
                 feedback: "정답!"
             correct_answer: "D"
-            hint: "'{if}' 명령어와 함께 사용되는 것은 무엇입니까?"
+            hint: "`{if}` 명령어와 함께 사용되는 것은 무엇입니까?"
             question_score: '10'
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
@@ -1694,7 +1688,7 @@ levels:
             hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
             question_score: '10'
         4:
-            question_text: 비밀번호를 잘못 입력하면 헤디는 무엇을 출력하나요?
+            question_text: 당신이 비밀번호를 잘못 입력하면 Hedy는 무엇을 출력하나요?
             code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
             -   option: Correct
@@ -1709,7 +1703,7 @@ levels:
             hint: Your computer will sound the alarm for intruders!
             question_score: '10'
         5:
-            question_text: 비밀이라고 입력하면 왜 헤디는 'ALARM! INTRUDER'라고 말하는 걸까요?
+            question_text: "'비밀'이라고 입력하면 왜 Hedy는 'ALARM! INTRUDER'라고 말하는 걸까요?"
             code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
             -   option: Because it needs to be in capitals, so SECRET
@@ -1728,7 +1722,7 @@ levels:
             code: "{print} 'Im Hedy the football fortune teller!'\n{print} 'I will predict what place your team will end up!'\nclub is {ask} 'Which club is your favorite?'\n{if} club {is} ajax {print} 'Ajax is going to win of course!'\n_?_ {print} 'Sorry, your club is gonna be in last place...'"
             mp_choice_options:
             -   option: "```\n{if}\n```\n"
-                feedback: '{if}이(가) 이미 위의 행에 있습니다'
+                feedback: '`{if}`이(가) 이미 위의 행에 있습니다'
             -   option: "```\n{at} {random}\n```\n"
                 feedback: No, you need `{else}`.
             -   option: "```\n{else}\n```\n"
@@ -1742,13 +1736,13 @@ levels:
             question_text: 물음표 대신에 어떤 단어가 있어야 할까요?
             code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _?_ 'Unfortunately... No big money for you.'"
             mp_choice_options:
-            -   option: "```\n{if}\n```\n"
-                feedback: '{if}는 위 행에 있다.'
-            -   option: "```\n{at} {random}\n```\n"
+            -   option: "`{if}`\n"
+                feedback: '`{if}`는 위 행에 있다.'
+            -   option: "`{at}` `{random}`\n"
                 feedback: No, you don't need `{at} {random}`.
-            -   option: "```\n{else}\n```\n"
-                feedback: '{else} 명령이 이미 있습니다'
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{else}`\n"
+                feedback: '`{else}` 명령이 이미 있습니다'
+            -   option: "`{print}`\n"
                 feedback: 아주 좋아요!
             correct_answer: D
             hint: After `{else}` a `{print}` command follows
@@ -1761,9 +1755,9 @@ levels:
                 feedback: 그건 가변적인 이름이 아니야.
             -   option: "```\nanimal\n```\n"
                 feedback: 정말 잘했어!
-            -   option: "```\n{if}\n```\n"
-                feedback: '{if}이(가) 이미 있습니다'
-            -   option: "```\n{print}\n```\n"
+            -   option: "`{if}`\n"
+                feedback: '`{if}`이(가) 이미 있습니다'
+            -   option: "`{print}`\n"
                 feedback: No, that's not it.
             correct_answer: B
             hint: What the variable name?
@@ -1835,11 +1829,11 @@ levels:
             -   option: "The name of the variable is different in line 1 than in line 2.\n"
                 feedback: 정답!
             -   option: "The quotation marks aren't used correctly in line 2\n"
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: "You can't use the = sign when using an {ask} command\n"
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             -   option: "Nothing is wrong.\n"
-                feedback: 그렇지 않아요.
+                feedback: 그렇지 않아요
             correct_answer: A
             hint: The quotation marks are used correctly
             question_score: '10'
@@ -1956,11 +1950,11 @@ levels:
             -   option: "```\n{if} birthday {and} song = 'yes'\n```"
                 feedback: 거의 다 왔다
             -   option: "```\n{if} birthday = 'yes' {and} name = 'Hedy'\n```"
-                feedback: 헤디는 당신이 노래를 듣고 싶을때만 당신을 위해 노래한다
+                feedback: Hedy는 당신이 노래를 듣고 싶을때만 당신을 위해 노래한다
             -   option: "```\n{if} song = 'yes' {and} birthday = 'yes'\n```"
                 feedback: 굉장하네요!
             -   option: "```\n{if} song = 'yes' {or} birthday = 'yes'\n```"
-                feedback: 헤디는 두 대답이 모두 '예'일 경우에만 노래를 부른다
+                feedback: Hedy는 두 대답이 모두 '예'일 경우에만 노래를 부른다
             correct_answer: C
             hint: Hedy sings if you want to hear a song and it's you birthday
             question_score: '10'
@@ -2046,11 +2040,11 @@ levels:
             -   option: The grey cat is called Abby
                 feedback: 진짜다!
             -   option: Milo the orange cat eats 4 scoops of cat nibbles
-                feedback: 이것은 사실입니다.
+                feedback: 이것은 true입니다
             -   option: The black hamster needs to be fed a piece of carrot
                 feedback: 정말 잘했어!
             -   option: The yellow bird was fed this morning
-                feedback: 이것은 사실입니다.
+                feedback: 이것은 true입니다
             correct_answer: C
             hint: Read the last 4 lines carefully
             question_score: '10'
@@ -2101,18 +2095,18 @@ levels:
             question_score: '10'
     14:
         3:
-            feedback: 그게 아니야.
+            feedback: 그게 아니야
             correct_answer: C
             question_score: '10'
             question_text: 빈칸 두 개에 어떤 기호를 써야 할까요?
             code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'\n"
             mp_choice_options:
             -   option: '`>` and `<`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`=` and `>=`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`<` and `>=`'
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: ' `+` and `==`'
             hint: There are 130 people allowed in the club
         4:
@@ -2168,7 +2162,7 @@ levels:
             -   option: 2 or more
                 feedback: 아니오
             -   option: 8 or more
-                feedback: 거의.
+                feedback: 거의
             -   option: 9 or more
                 feedback: 좋았어!
             question_text: 이 핏비트에 따라 몇 조각의 초콜릿이 복통을 일으킬까요?
@@ -2245,7 +2239,7 @@ levels:
             -   option: 1 time
                 feedback: 2번이면 멈춰요
             -   option: 2 times
-                feedback: 그것이 맞아요.
+                feedback: 그것이 맞아요
             question_score: '10'
             correct_answer: D
             hint: "!= means 'is not'"
@@ -2257,9 +2251,9 @@ levels:
             -   option: '`==`'
                 feedback: 정답을 맞혔는지 계속 추측할 필요는 없다.
             -   option: '`!=`'
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: '`=`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             question_text: '빈 칸에 어떤 기호를 써야 할까요? 팁: 정답을 맞힐 때까지 계속 추측해야 합니다.'
             code: "answer = 0\nwhile answer _ 'Amsterdam'\n    answer = ask 'What is the capital city of the Netherlands?'\nprint 'You have given the correct answer'\n"
             correct_answer: C
@@ -2284,13 +2278,13 @@ levels:
             code: "_ age >= 18\n  print 'you are not allowed in this bar'\n"
             mp_choice_options:
             -   option: '`{in}`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`{while}`'
-                feedback: 맞아요.
+                feedback: 맞아요
             -   option: '`{for}`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: '`{range}`'
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             correct_answer: B
             hint: You are not allowed in the bar as long as you are 17 or younger
             question_score: '10'
@@ -2303,7 +2297,7 @@ levels:
             -   option: Line 2 misses quotation marks
                 feedback: 그렇지 않다
             -   option: In line 5 if should have been used instead of while
-                feedback: 그게 아니야.
+                feedback: 그게 아니야
             -   option: In line 5 != should have been used instead of ==
                 feedback: 당신 말이 맞아요
             correct_answer: D
@@ -2335,7 +2329,7 @@ levels:
             -   option: Line 3 should start with more indentation
                 feedback: '"아니'
             -   option: Line 2 should start with less indentation
-                feedback: 그것이 맞아요.
+                feedback: 그것이 맞아요
             correct_answer: D
             hint: Look closely at the indentation
             question_score: '10'
