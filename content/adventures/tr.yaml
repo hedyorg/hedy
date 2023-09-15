@@ -1052,7 +1052,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                                Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                                  Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2766,13 +2766,13 @@ adventures:
         levels:
             7:
                 story_text: "## tekrarla ile diğer komutlar ve değişkenler\n`{print}` komutu ile birlikte `{repeat}` komutunu yeterince uyguladınız, ancak `{repeat}` ile başka komutlar da kullanabileceğinizi biliyor muydunuz?\nBu örnek kodda `{repeat}` komutunun bir `{ask}`, `{if}` veya `{else}` komutuyla da kullanılabileceğini görebilirsiniz.\n"
-                story_text_2: "Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.\nThen, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.\n"
-                example_code: "```\n{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'\n```\n"
-                example_code_2: "```\n{print} 'Yay! It is your birthday!'\nage = {ask} 'How old are you now?'\n{repeat} age {times} {print} 'Hip Hip Hurray!'\n```\n"
-                start_code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
+                story_text_2: "`{repeat}` komutuyla yapabileceğiniz bir başka ilginç şey de, bir şeyin kaç kez tekrarlanacağını ayarlamak için, değişkenler kullanmaktır. Örnek kodda ilk olarak kişiye kaç yaşında olduğunu sorduğumuzu görebilirsiniz.\nArdından, 3. satırda, bu soru 'yaş' kez tekrarlanır. Yani `{repeat}` komutu ile 'yaş' değişkenini kullandık.\n"
+                example_code: "```\n{repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'\n{if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz!'\n{else} {repeat} 3 {times} {print} 'Yeni bir şey daha öğrendiniz!'\n```\n"
+                example_code_2: "```\n{print} 'Yaşasın! Bugün senin doğum günün!'\nyaş = {ask} 'Şimdi kaç yaşındasın?'\n{repeat} yaş {times} {print} 'Hey Çok Yaşa!'\n```\n"
+                start_code: "{repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'\n{if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz'\n{else} {repeat} 3 {times} {print} 'Artık yeni bir şey öğrendiniz!'"
             8:
-                story_text: "### In the block or not?\nIn this level you have to think carefully which lines of code should be in the block and which shouldn't.\nFor example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.\nThis means the last line shouldn't start with indentation as it doesn't belong to the block.\nIf you do start the last line with indentation the song will turn out wrong.\n\n## Exercise\nEach line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.\n"
-                example_code: "```\n_ {print} 'Do you know the muffin man?'\n_ {repeat} 2 {times}\n_ {print} 'The muffin man'\n_ {print} 'Do you know the muffin man, who lives on Drury Lane?'\n```\n"
+                story_text: "### blok mu değil mi?\nBu seviyede, hangi kod satırlarının blokta yer alması ve hangilerinin yer almaması gerektiğini dikkatlice düşünmeniz gerekir.\nÖrneğin: Eğer *çörek adam* şarkısını söylemek isterseniz, sadece 'çörek adam' satırının iki kez tekrarlanmasını istersiniz.\nBu, son satırın bloğa ait olmadığı için girintiyle başlamaması gerektiği anlamına gelir.\nSon satıra girinti ile başlarsanız şarkı yanlış olur.\n\n## Alıştırma\nÖrnek koddaki her satır bir boşlukla başlar. Boşlukları kaldırın ve çörek adam şarkısını yapmak için hangi satırın girintiye ihtiyacı olduğunu ve hangisinin olmadığını bulmaya çalışın.\n"
+                example_code: "```\n_ {print} 'Kim tanır çörek adamı?'\n_ {repeat} 2 {times}\n_ {print} 'çörek adamı'\n_ {print} 'kim tanır çörek adamı, nerede yaşıyor?'\n```\n"
                 start_code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
     for_command:
         name: "{for}"
