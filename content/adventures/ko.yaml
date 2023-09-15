@@ -96,7 +96,7 @@ adventures:
     story:
         levels:
             9:
-                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### 연습문제 1\nFinish the code so the `{if}` works correctly.\n\n### 연습문제 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### 연습문제 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
+                story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할 수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n### 연습문제 1\n코드를 완료하여 '{if}'가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 이야기의 부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한 두 개의 `{if}`을 사용합니다.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
                 start_code: '# place your code here'
             15:
@@ -118,7 +118,7 @@ adventures:
                 example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} He now hears the sound of an animals {at} {random}\n```\n"
                 story_text_2: "`{add}`라는 명령어는 당신의 이야기에도 도움이 될 것이다.\n"
                 example_code_2: "```\n{print} He hears a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n\n### 연습문제\nCopy your story from the previous levels into this level.\nIn this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.\nAdd new lines of code to your story, so that all of the new commands are featured at least once in your story.\n"
+                story_text_3: "This is an example of the `{remove}` command in your story\n\n### 연습문제\n이전 레벨에서 이 레벨로 스토리를 복사합니다.\n이 레벨에서는 `{at} {random}`, `{add} {to}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.\n스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
                 start_code: '{print} Your story'
             4:
@@ -126,33 +126,33 @@ adventures:
                 example_code: "```\nname {is} {ask} _ What is your name? _\n{print}  _ The main character is called _ name\n_\n_\n{print} name  _ is now going to walk in the woods _\n{print} name _ is a bit scared _\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} _ He hears the sound of a _ animals {at} {random}\n{print} name _ is afraid this is a haunted forest _\n```\n"
                 start_code: "{print} 'Your story will be printed here!'"
             5:
-                story_text: "In this level you can program different endings, which will make your story even more fun.\nIn the example code you can see how to make 2 different endings.\n\n### 연습문제 1\nWrite a new short story of at least 6 lines of code about a topic of your choosing.\nNo inspiration? Choose one of these topics: a superhero, a boring school day, stranded on a desert island.\n\nNow give the player a change to choose a happy or a bad end, just like in the example code.\nProgram both the endings.\n\n### 연습문제 2\nCopy the story you've created in your own story adventure in the previous levels.\nFind a way to add at least 2 `{if}` and `{else}` commands to your story.\nThis can be with a happy or bad ending, but you can also try to find other ways to incoporate the commands.\n"
+                story_text: "이 레벨에서 다른 엔딩을 프로그래밍할 수 있으므로 스토리가 더욱 재미있을 것입니다.\n예제 코드에서 두 가지 다른 엔딩을 만드는 방법을 볼 수 있습니다.\n\n### 연습문제 1\n당신이 선택한 주제에 대해 최소 6줄의 코드로 된 새로운 단편 소설을 쓰시오.\n영감이 없다고요? 다음 주제들 중 하나를 고르세요: 슈퍼히어로, 지루한 학교생활, 무인도에 발이 묶인 것들.\n\n이제 예제 코드와 같이 플레이어에게 해피엔드 또는 배드엔드를 선택할 수 있는 변화를 줍니다.\n양쪽 끝을 모두 프로그래밍합니다.\n\n### 연습문제 2\n자신의 스토리 모험에서 만든 스토리를 이전 레벨에 복사합니다.\n이야기에 최소한 두 개의 `{if}` 명령과 `{else}` 명령을 추가하는 방법을 찾으십시오.\n이것은 행복한 결말일 수도 있고 나쁜 결말일 수도 있지만 명령어를 통합하는 다른 방법을 찾을 수도 있습니다.\n"
                 start_code: "{print} 'Here your story will start!'"
                 example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
             7:
-                story_text: "In a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n\n### 연습문제\nAdd repetition to your own story. Go back to your saved programs, choose your story program from level 6 and\nfind a line containing `{print}` and repeat it!\n"
+                story_text: "이야기에서, 어떤 사람은 여러 번 말을 합니다. 예를 들어, 누군가가 도움을 요청하거나 노래를 부를 때 말입니다.\n이런 반복을 이야기에 넣을 수 있습니다. `{repeat}`과(와) 같은 수준이다.\n\n### 연습문제\n자신의 이야기에 반복을 더하세요. 저장된 프로그램으로 돌아가서 6단계에서 자신의 이야기 프로그램을 선택하고\n`{print}`가 포함된 행을 찾아서 반복합니다!\n"
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
-                story_text: "In this level you can use multiple lines in your `{if}` commands, this way you can upgrade your happy or sad ending!\n\n### 연습문제 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks with at least one sentence per ending.\n**Extra** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n\n### 연습문제 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad ending of at least three lines long each!\n"
+                story_text: "이 레벨에서는 `{if}` 명령에 여러 줄을 사용할 수 있으며, 이렇게 하면 해피엔딩이나 새드엔딩을 업그레이드할 수 있습니다!\n\n### ### 연습문제 1\n예제 코드는 두 개의 다른 엔딩을 보여주는데, 하나는 캐릭터가 타임머신에 뛰어드는 것이고, 다른 하나는 그렇지 않은 것이다.\n빈칸을 한 문장씩 이상 완성하세요.\n**Extra** 이야기를 길게 만들어 보세요. 이야기에서 무슨 일이 일어날까요? 다른 옵션이 있는 두 번째 `{ask}`를 추가할 수도 있습니다.\n\n### ### 연습문제 2\n저장된 프로그램으로 돌아가서 5단계에서 스토리 프로그램을 선택하세요. 이제 각각 최소 세 줄의 좋은 결말과 나쁜 결말을 쓰세요!\n"
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} _\n{else}\n    {print} 'Oh no! Richard is too slow...'\n    {print} _\n```\n"
                 start_code: '# place your code here'
             10:
-                story_text: "In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.\n\n### Exercise\n\nLook at <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> if you do not know it, and make sure it is printed as in the book.\n"
+                story_text: "이 수준에서 이야기에서 {for} 명령을 사용할 수 있다. 이렇게 하면 어린이 책 '갈색 곰, 갈색곰, 무엇이 보이니'를 쉽게 프로그래밍할 수 있다.\n\n### 연습 문제\n\n<a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\">스토리</a> 를 보고, 책에서처럼 인쇄되어 있는지 확인한다.\n"
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
                 start_code: '# place your code here'
             12:
-                story_text: "In this level quotation marks will be needed to save multiple words in a variable.\n\n### 연습문제\n\nFind a story from a previous level, any level is ok. Now make sure quotation marks are added in the right places."
+                story_text: "이 수준에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.\n\n### ### 연습문제\n\n이전 수준의 이야기를 찾으세요. 어느 수준이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요."
                 example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
                 start_code: '# place your code here'
             13:
-                story_text: "By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.\n\n### 연습문제 1\nLook at the example code and finish it. Then add at least 2 more `{if}` codes with `{and}` or `{or}`.\n\n### 연습문제 2\nFind a story from a previous level, and add one `{and}` or `{or}`.\n"
+                story_text: "`{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.\n\n### 연습문제 1\n예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.\n\n### 연습문제 2\n이전 수준의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.\n"
                 example_code: "```\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\npath = {ask} 'Which path should she choose?'\nweapon = {ask} 'What weapon does she draw?'\n{if} path {is} 'left' {and} weapon {is} 'sword'\n    _\n```\n"
                 start_code: '# place your code here'
             18:
                 start_code: '# Schrijf jouw code hier'
-                story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### 연습문제 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
-                story_text_2: "### 연습문제 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                story_text: "다른 이야기를 인쇄할 건데 이제는 `{print}`가 붙은 괄호를 써야 해요.\n\n### ### 연습문제 1\n최소 5문장 이상의 이야기를 만들어 보세요. 아직 '이름'을 사용하지 않아도 됩니다.\n"
+                story_text_2: "### 연습문제 2\n우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.\n그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.\n팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!\n"
                 example_code: "```\n{print}('Welcome to this story!')\n```\n"
                 example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
         name: Story
@@ -581,23 +581,23 @@ adventures:
                     {echo}
 
                     '
-                story_text_2: "### 연습문제\nCopy the example code to your input screen by clicking on the yellow button.\nMake the parrot ask a different question. Fill in the blanks in the example!\n**Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.\n"
+                story_text_2: "### 연습문제\n노란색 버튼을 클릭하여 예제 코드를 입력 화면에 복사합니다.\n앵무새가 다른 질문을 하도록 하세요. 예제에서 빈칸을 채우세요!\n**추가** 앵무새가 여러 질문을 하도록 할 수도 있습니다. 자신의 코드 아래에 몇 줄의 코드를 더 입력하세요.\n"
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "In the previous level you've made a parrot that will repeat after you. In this level we'll make the parrot interactive using a variable and `{ask}` command.\nWe will also make the parrot more life-like by adding `{sleep}` commands after something is said.\n"
                 example_code: "```\n{print} Im Hedy the parrot\nname _ _ what is your name?\n{print} name\n_\n{print} squawk\n_\n{print} name\n```\n"
                 start_code: '{print} Im Hedy the parrot!'
-                story_text_2: "### 연습문제\nFirstly, finish line 2 with an `{is}` and an `{ask}` command.\nThen fill in a `{sleep}` command on line 4 and 6 to let the parrot stay quiet for a little bit.\n\n**Extra** Can you make the parrot ask for more then only your name by adding more lines of code?\n"
+                story_text_2: "### 연습문제\n먼저 `{is}`와 `{ask}` 명령으로 2번 행을 마칩니다.\n그런 다음 4번과 6번 줄에서 `{sleep}` 명령을 입력하면 앵무새가 잠시 동안 조용히 있을 수 있습니다.\n\n**Extra** 코드 줄을 더 추가해서 앵무새가 이름만 요구하게 만들 수 있나요?\n"
             3:
-                story_text: "Teach your parrot a new word with `{add}`.\n### 연습문제\nCan you add the `{add} {to}` command to get the code to work?\n"
+                story_text: "앵무새에게 `{add}`로 새로운 단어를 가르쳐라.\n### 연습문제\n코드를 작동시키기 위해 `{add} {to}` 명령을 추가할 수 있습니까?\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n_ new_word _ words\n{print} 🧒 Say new_word, Hedy!\n{print} 🦜 words {at} {random}\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "Reward your parrot if it says the correct word!\n\n### 연습문제\nFinish the code by filling in the 4 missing commands.\n"
+                story_text: "앵무새가 정확한 단어를 말하면 보상을 해주세요!\n\n### 연습문제\n누락된 명령어 4개를 입력하여 코드를 마무리합니다.\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '🧒 Say ' new_word ', Hedy!'\n{print} '🦜 ' said_word\n_ said_word {is} new_word _ '🧒 Great job, Hedy! 🍪'\n_ _ '🧒 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
             4:
-                story_text: "In this level we have to use quotation marks with the commands `{ask}` and `{print}`.\n### 연습문제\nComplete the code by filling in quotation marks on the blanks.\n"
+                story_text: "이 레벨에서 우리는 `{ask}`와 `{print}` 명령어가 있는 따옴표를 사용해야 한다.\n### 연습문제\n빈칸에 따옴표를 기입하여 코드를 완성한다.\n"
                 start_code: '# Write your code here'
                 example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
     dice:
@@ -654,7 +654,7 @@ adventures:
         description: Countdown to the new year!
         levels:
             11:
-                story_text: "In this level you can use the `{for}` number `{in}` `{range}` command to countdown to the New Year.\n\n### 연습문제\nFill in the blanks and make the code work!\n"
+                story_text: "이 레벨에서는 `{for}` number `{in}``{range}` 명령을 사용하여 새해를 카운트다운할 수 있습니다.\n\n### 연습문제\n빈칸을 채우고 코드를 작동시켜라!\n"
                 example_code: "```\n{for} number {in} {range} _ {to} _\n    {print} number\n{print} 'Happy New Year!'\n```\n"
                 start_code: '# place your code here'
     pressit:
@@ -819,7 +819,7 @@ adventures:
                 story_text_4: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
             4:
                 story_text: "## 'Quotation marks'\n레벨 4의 `{ask}`와 `{print}`가 변경되었습니다.\n따옴표 사이에 인쇄할 텍스트를 넣어야 합니다.\n이제 원하는 단어를 모두 인쇄할 수 있기 때문에 유용합니다. 또한 `{is}`과(와) 함께 저장할 때 사용한 단어도 있습니다.\n대부분의 프로그래밍 언어도 인쇄할 때 따옴표를 사용하기 때문에 실제 프로그래밍에 한 걸음 더 다가가고 있습니다!\n"
-                story_text_2: "## Contractions\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to I am or What is.\nCheck out the example code to see the wrong way of using apostrophes.\n"
+                story_text_2: "## Contractions\n중요해요! 이제 따옴표를 사용하게 되었으니, 헤디는 아포스트로피를 I'm이나 What's처럼 수축할 때 혼동할 거예요.\n아포스트로피를 제거하고 철자를 I 또는 What is로 변경해야 합니다.\n아포스트로피를 사용하는 잘못된 방법을 알아보려면 예제 코드를 확인하십시오.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
                 start_code: "{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer"
@@ -832,7 +832,7 @@ adventures:
         levels:
             10:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
-                story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
+                story_text: "## For\n이 레벨에서 우리는 `{for}`라는 새로운 코드를 배운다. `{for}`를 사용하면 목록을 만들고 모든 요소를 사용할 수 있다.\n`{for}`는 `{repeat}`와 `{if}`와 같은 블록을 생성하므로 블록의 모든 행은 4개의 공백으로 시작해야 한다."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
             11:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
@@ -889,12 +889,12 @@ adventures:
         default_save_name: repeat_command
         levels:
             7:
-                story_text: "## Repeat! Repeat! Repeat!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:\n\n### 연습문제\nPlay around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?\n"
+                story_text: "## Repeat! Repeat! Repeat!\n레벨 7은 `{repeat}` 명령어를 추가한다.`{repeat}`는 한 줄의 코드를 여러 번 실행하는 데 사용될 수 있다. 다음과 같다:\n\n### ### 연습문제\n반복 명령으로 장난을 치세요. 생일 축하 노래를 지금 4줄이 아닌 3줄의 코드로 만들 수 있나요?\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
                 start_code: "{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
-                story_text: "### Repeat commands and indentation\nIn this level you can repeat multiple lines of code with only 1 repeat command.\nYou do this by making a block of lines that you want to repeat.\nThe lines in this block will need **indentation** .\nThat means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.\n"
+                story_text: "### Repeat commands and indentation\n이 레벨에서는 1회 반복 명령만으로 여러 줄의 코드를 반복할 수 있습니다.\n이것은 반복하고 싶은 선들의 블록을 만들어서 하는 것이다.\n이 블록의 줄에는 **indentation**가 필요합니다.\n그것은 각 줄의 시작에 4칸을 넣는 것을 의미한다. 한 줄로 된 블록을 만들고 싶을 때도 들여쓰기를 해야 한다.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
@@ -906,13 +906,13 @@ adventures:
         default_save_name: repeat_command_2
         levels:
             7:
-                story_text: "## Repeat with other commands and with variables\nYou have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?\nIn this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.\n"
+                story_text: "## Repeat with other commands and with variables\n지금은 `{print}` 명령어와 함께 `{repeat}` 명령어를 연습했는데, `{repeat}`으로 다른 명령어도 사용할 수 있다는 사실을 알고 있었나요?\n이 예제 코드에서 '{repeat}'는 `{ask}`, `{if}` 또는 `{else}` 명령어로도 사용할 수 있음을 알 수 있습니다.\n"
                 story_text_2: "Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.\nThen, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.\n"
                 example_code: "```\n{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'\n```\n"
                 example_code_2: "```\n{print} 'Yay! It is your birthday!'\nage = {ask} 'How old are you now?'\n{repeat} age {times} {print} 'Hip Hip Hurray!'\n```\n"
                 start_code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
             8:
-                story_text: "### In the block or not?\nIn this level you have to think carefully which lines of code should be in the block and which shouldn't.\nFor example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.\nThis means the last line shouldn't start with indentation as it doesn't belong to the block.\nIf you do start the last line with indentation the song will turn out wrong.\n\n## Exercise\nEach line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.\n"
+                story_text: "### In the block or not?\n이 레벨에서 당신은 어떤 코드 라인이 블록에 있어야 하고 어떤 코드 라인이 있어서는 안 되는지 신중하게 생각해야 한다.\n예를 들어, 만약 당신이 *the muffin man*이라는 노래를 부르고 싶다면. 당신은 'the muffin man'이라는 대사를 두 번만 반복하기를 원한다.\n이것은 마지막 줄이 블록에 속하지 않으므로 들여쓰기로 시작해서는 안 된다는 것을 의미합니다.\n마지막 줄을 들여쓰기로 시작하면 곡이 틀릴 것이다.\n\n## 연습운동\n예제 코드의 각 줄은 빈칸으로 시작한다. 빈칸을 제거하고 어떤 줄은 들여쓰기가 필요하고 어떤 줄은 머핀 맨 노래가 되지 않는지 알아낸다.\n"
                 example_code: "```\n_ {print} 'Do you know the muffin man?'\n_ {repeat} 2 {times}\n_ {print} 'The muffin man'\n_ {print} 'Do you know the muffin man, who lives on Drury Lane?'\n```\n"
                 start_code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
     maths:
@@ -922,7 +922,7 @@ adventures:
         levels:
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
-                story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
+                story_text: "## 1 + 1\n이 수준에서 새로운 것을 배울 수 있습니다. 이제 계산도 할 수 있습니다.\n\n좋은 점은 쉽다. 예를 들어 수학으로 `5 + 5`처럼 쓴다. 마이너스도 `5 - 5`로 잘 맞는다.\n\n여러분의 키보드에 기호가 없기 때문에 시대는 조금 다릅니다. 그냥 검색해보세요, 정말로 없습니다!\n그래서 우리는 위의 별표 8에 `5 * 5`를 곱한다. 이를 가장 잘 기억할 수 있도록 도와주는 5 곱하기 5로 읽어보라.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
