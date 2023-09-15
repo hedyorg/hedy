@@ -1052,7 +1052,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2793,18 +2793,18 @@ adventures:
         default_save_name: while_command
         levels:
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                start_code: "cevap = 0\n{while} cevap != 25\n    cevap = {ask} '5 kere 5 kaç eder?'\n{print} 'Doğru cevap verilmiştir'"
+                story_text: "Yeni bir döngü çeşidi öğreneceğiz, `{while}` döngüsü! Deyim doğru olduğu sürece döngüye devam ediyoruz.\nBu yüzden döngü içinde değeri değiştirmeyi unutmayın.\n\nÖrnek kodda, doğru bir cevap verilene kadar devam ediyoruz.\nDoğru cevap hiç verilmezse, döngü asla sona ermez!"
+                example_code: "```\ncevap = 0\n{while} cevap != 25\n    cevap = {ask} '5 kere 5 kaç eder?'\n{print} 'Doğru cevap verilmiştir'\n```\n"
     elif_command:
         name: "{elif}"
-        description: elif
-        default_save_name: elif
+        description: değileğer
+        default_save_name: değileğer
         levels:
             17:
-                story_text: "In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.\nCheck it out!\n"
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-                start_code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+                story_text: "Bu seviyede yeni bir komutu daha kullanabilirsiniz: `{elif}`. `{elif}`, `{else}` `{if}` komutunun kısaltmasıdır ve 3 (veya daha fazla!) seçenek yapmak istediğinizde buna ihtiyaç duyarsınız.\nŞuna bir bakın!\n"
+                example_code: "```\nödüller = ['1 milyon lira', 'bir elmalı turta', 'hiçbir şey']\nsenin_ödülün = ödüller[{random}]\n{print} 'Kazandığın ödül ' senin_ödülün\n{if} senin_ödülün == '1 milyon lira' :\n    {print} 'Evet! Sen artık zenginsin!'\n{elif} senin_ödülün == 'bir elmalı turta' :\n    {print} 'Çok güzel, bir elmalı turta!'\n{else}:\n    {print} 'Bir dahaki sefere iyi şanslar...'\n```\n"
+                start_code: "ödüller = ['1 milyon lira', 'bir elmalı turta', 'hiçbir şey']\nsenin_ödülün = ödüller[{random}]\n{print} 'Kazandığın ödül ' senin_ödülün\n{if} senin_ödülün == '1 milyon lira' :\n    {print} 'Evet! Sen artık zenginsin!'\n{elif} senin_ödülün == 'bir elmalı turta' :\n    {print} 'Çok güzel, bir elmalı turta!'\n{else}:\n    {print} 'Bir dahaki sefere iyi şanslar...'"
     rock_2:
         name: Rock, paper, scissors 2
         description: Part 2 of rock, paper, scissors
@@ -2816,10 +2816,10 @@ adventures:
                 start_code: "# place your code here"
     clear_command:
         name: '{clear}'
-        description: clear command
+        description: temizle komutu
         default_save_name: clear_command
         levels:
             4:
-                start_code: "print '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n"
-                story_text: "Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.\nBeware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!\n"
+                start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SÜRPRİZ!'\n"
+                story_text: "Yeni bir komut zamanı! `{clear}` ile çıktı ekranınızdaki tüm metni temizleyebilirsiniz. Bu şekilde ekranınızın çok fazla metinle dolmasını önleyebilirsiniz.\nDikkat! Eğer bir `{clear}` komutu kullanıyorsanız, bunun yanında bir `{sleep}` kullanmayı unutmayın. Aksi takdirde Hedy size okumaya zaman bırakmadan ekranınızı temizleyecektir!\n"
                 example_code: "```\nprint '3'\nsleep\nclear\nprint '2'\nsleep\nclear\nprint '1'\nsleep\nclear\nprint 'SURPRISE!'\n```\n"
