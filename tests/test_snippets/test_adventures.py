@@ -122,7 +122,6 @@ class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
-
         if snippet is not None and len(snippet.code) > 0:
             try:
                 self.single_level_tester(

@@ -17,11 +17,11 @@ levels:
     3:
         1:
             code: |
-                {print} The new school year at Hogwarts is starting!
                 {print} The sorting hat is ready to sort you into a Hogwarts house.
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} And it is houses {at} {random}
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
         2:
             story: "Viết chương trình chọn một món ăn ngẫu nhiên. Tạo một danh sách đồ ăn và lớp phủ (topping) và để chương trình quyết định bạn sẽ ăn gì!\n"
@@ -51,19 +51,19 @@ levels:
             code: |
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'all through the town'
                 {print} 'the wheels on the bus go'
             story: "Create the song 'The wheels on the bus go round and round'\\n\n"
         1:
+            story: |
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
             code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                {remove} player1 {from} players
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
-            story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
     8:
         2:
             code: |
@@ -128,5 +128,5 @@ levels:
             code: |
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount {is} people/8
+                cakes_amount = people/8
                 {print} 'You will have to buy ' cakes_amount ' cakes'

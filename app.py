@@ -65,6 +65,11 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
 jinja_partials.register_extensions(app)
@@ -356,6 +361,7 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
+    querylog.log_value(lang=session['lang'])
 
     if 'keyword_lang' not in session:
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
@@ -517,7 +523,7 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
-            except hedy.exceptions.UnquotedEqualityCheck as ex:
+            except hedy.exceptions.UnquotedEqualityCheckException as ex:
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
@@ -2207,6 +2213,7 @@ app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
+app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 
 
 # *** START SERVER ***
@@ -2233,6 +2240,9 @@ if __name__ == '__main__':
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.

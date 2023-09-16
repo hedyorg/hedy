@@ -1,243 +1,269 @@
 adventures:
     default:
-        name: "Başlangıç"
-        description: "Bölüm açıklaması"
-        default_save_name: "Giriş"
+        name: "Giriş"
+        description: "Seviye açıklaması"
+        default_save_name: "giriş"
         levels:
             1:
-                story_text: "Hedy'e hoş geldin! Seviye 1'e, bir hikaye yazdırarak başlayabilirsin.\n\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsin.\n\nHazır mısın? O zaman ilk komutunu öğrenmek için bir sonraki sekmeye geç!\n"
-                start_code: '{print} merhaba dünya!'
+                story_text: "Hedy'ye hoş geldiniz! Seviye 1'de, bir hikaye yazdırarak başlayabilirsiniz.\n\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.\n\nHazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!\n"
+                start_code: '{print} Merhaba Dünya!'
             2:
                 story_text: |
-                    Tebrikler! Seviye 2'ye ulaştın. Umarız şu ana kadar harika kodlar yazmışsındır!
-                    İlk seviyede, `{echo}` komutunun bir seferde sadece bir bit kaydettiğini fark etmiş olabilirsin.
-                    Örneğin, restoran macerasında müşterinin ne yemek istediğini veya ne içmek istediğini “echo” edebilirsiniz, ama ikisini bir cümlede “echo” edemezsiniz.
+                    Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
+                    İlk seviyede `{echo}` komutunun bir seferde sadece bir bilgi kaydedebildiğini fark etmiş olabilirsiniz.
+                    Örneğin restoran macerasında, müşterinin ne yemek istediğini veya ne içmek istediğini yankılayabilirsiniz, ancak her ikisi tek bir cümlede olmaz.
 
                 example_code: |
+                    **Uyarı! Bu kod çalışmaz!**
+                    Hedy'de komutlar arada değişecektir. Örneğin `yankıla` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
                     ```
-                    {print} Hedy's'e hoş geldiniz
+                    {print} Hedy's 'e Hoş Geldiniz
                     {ask} Ne yemek istersiniz?
-                    {echo} İstiyorsunuz
-                    {ask} ne içmek istersiniz?
-                    {echo} İstiyorsunuz
+                    {echo} Demek isteğiniz
+                    {ask} Ne içmek istersiniz?
+                    {echo} Demek isteğiniz
                     ```
                 story_text_2: |
-                    Oyuncu bir hamburger ve kola yazarsa, "yani hamburger ve kola istersiniz" diyemezsiniz, ancak iki ayrı satır yapmanız gerekir.
-                    Ayrıca, '{echo}' komutu yalnızca cümlenin sonundaki sözcüğü yankılandırır. Yani "hamburgeriniz hemen geliyor!" diyemezsiniz.
+                    Oyuncu hamburger ve kola yazarsa, "yani hamburger ve kola istiyorsunuz" diyemezsiniz, ancak iki ayrı satır oluşturmanız gerekir.
+                    Ayrıca, `{echo}` komutu sadece cümlenin sonundaki kelimeyi yankılar. Yani "hamburgeriniz hemen geliyor!" diyemezsiniz.
 
-                    Bu seviye 2'de değişir. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz herhangi bir yere yazdırmanıza izin veren değişkenlerle çalışmayı öğreneceksiniz.
-                    Öyleyse bir sonraki sekmeye geçelim!
+                    Seviye 2'de bu durum değişiyor. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz yere yazdırmanıza olanak tanıyan değişkenlerle çalışmayı öğreneceksiniz.
+                    O halde hadi bir sonraki sekmeye geçelim!
                 start_code: "{print} Merhaba Dünya!"
             3:
                 story_text: |
-                    In level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.
+                    Bir önceki seviyede değişkenin ne olduğunu ve maceralarınızı daha etkileşimli hale getirmek için nasıl kullanabileceğinizi öğrendiniz.
+                    Ancak... değişkenlerle yapabileceğiniz tek şey bu değil! Değişkenleri liste yapmak için de kullanabilirsiniz.
+                    Ve hatta Hedy'nin bir listeden rastgele bir kelime seçmesini sağlayabilirsiniz, bu da gerçek oyunlar yapmanıza olanak tanır!
+                    Bir sonraki sekmeye hızlıca göz atın!
 
-                start_code: "{print} Merhaba dünya!"
+                start_code: "{print} Merhaba Dünya!"
             4:
-                start_code: "{print} 'Merhaba dünya'"
+                start_code: "{print} 'Merhaba Dünya'"
                 story_text: |
-                    4.seviyede,  `{ask}` ve`{print}` konutları değiştirildi. 
+                    Önceki seviyelerde değişkenlerle pratik yaptınız, ancak bu problemle karşılaşmış olabilirsiniz.
+                    Bunun gibi bir kodu çalıştırmayı denemiş olabilirsiniz:
 
-                    Yazdırmak istediğiniz metni tırnak işaretleri arasına almalısınız.
+                    Aslında şunu yazdırmak istedin
 
-                    Bu kullanışlıdır, çünkü artık istediğiniz tüm kelimeleri yazdırabilirsiniz. Ayrıca bir şeyi depolamak için `{is}` kullanabilirsiniz.
+                    `My name is Sophie`
 
-                    Çoğu programlama dili de yazdırırken tırnak işaretleri kullanır, bu nedenle gerçek programlamaya bir adım daha yaklaşıyoruz!
+                    ama Hedy bunu yazdı
+
+                    `My Sophie is Sophie`.
+
+                    Bu seviyede tırnak işaretleri kullanılarak bu sorun giderilir.
                 example_code: |
                     ```
-                    Adım {is} Sophie
-                    {print} Benim adım adım
+                    isim {is} Sophie
+                    {print} Benim adım isim
                     ```
             5:
                 start_code: |-
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
+                    isim {is} {ask} 'Senin adın ne?'
+                    {if} isim {is} Hedy {print} 'havalıymış!' {else} {print} 'eh işte'
                 story_text: |
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
+                    Önceki seviyelerde, kodu her çalıştırdığınızda oyunlarınızı farklı kılan `{at} {random}` kullanmayı zaten öğrenmiştiniz.
+                    Ancak bu gerçekten etkileşimli değil, oyuncunun oyunda neler olacağı üzerinde herhangi bir etkisi yok.
+
+                    Bu seviyede, programınızda farklı yanıtlar vermenizi sağlayan `{if}` komutunu öğreneceksiniz. Bu şekilde örneğin bilgisayarınız için gizli bir şifre programlayabilirsiniz.
+                    Yeni komut için bir sonraki sekmeye geçelim!
                 example_code: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    şifre {is} {ask} 'Doğru şifre nedir?'
                     ```
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: "# kodunuzu buraya yazın"
                 story_text: |
-                    In this level you learn something new: you can now also calculate.
+                    Önceki seviyede `{ask}` ve `{if}` ile pratik yaptınız. Örneğin artık konuklara ne yemek istediklerini sorabilirsiniz.
+                    Ancak henüz yapamadığınız şey, herkesin akşam yemeğinin fiyatını hesaplamak.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    Bir sonraki seviye, programlarınızda toplama, çıkarma ve çarpma işlemlerini kullanmanızı sağlayacak. Bu şekilde restoranınızdaki fiyatları hesaplayabilir, ama aynı zamanda arkadaşlarınıza ve ailenize indirim yapmak için gizli bir kod ekleyebilirsiniz.
+                    Bir sonraki seviyedeki bir başka seçenek de küçük kardeşinizin çarpma işlemlerinde pratik yapması için kendi matematik oyununuzu programlamaktır.
+                    Gidip kendiniz görün!
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    yemek_ücreti {is} 0
+                    içecek_ücreti {is} 0
+                    toplam_ücret {is} 0
+                    {print} 'McHedy'e Hoş Geldiniz'
+                    sipariş {is} {ask} 'Ne yemek istersiniz?'
+                    {if} sipariş {is} hamburger yemek_ücreti {is} 5
+                    {if} sipariş {is} kızartma yemek_ücreti {is} 2
+                    içecek {is} {ask} 'Ne içmek istersiniz?'
+                    {if} içecek {is} su içecek_ücreti {is} 0
+                    değilse içecek_ücreti {is} 3
+                    toplam_ücret {is} yemek_ücreti + içecek_ücreti
+                    {print} 'Toplamda 'toplam_ücret ' lira ödeyin, lütfen'
                     ```
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
+                start_code: "{print} 'mutlu yıllar sana'\n{print} 'mutlu yıllar sana'\n{print} 'mutlu yıllar sevgili Hedy'\n{print} 'mutlu yıllar sana'\n"
                 story_text: |
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
+                    Harika bir iş çıkardınız! Bir sonraki seviyeye ulaştınız, bu da `{if}` ve `{else}` ile pratik yaptığınız anlamına geliyor. Muhtemelen kodlarınızın gittikçe uzadığını fark etmişsinizdir.
+                    Örneğin 'Doğum Günün Kutlu Olsun' şarkısını programlamak isterseniz.
+
+                    Bu, çoğunlukla aynı kelimeleri tekrar ve tekrar yazmak için çok fazla kod demek. Neyse ki bir sonraki sekmede `{repeat}` komutu ile bir kod satırını birden çok kez tekrarlamanıza olanak tanıyan bir çözüm öğreneceksiniz.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'Mutlu yıllar sevgili Hedy'
+                    {print} 'mutlu yıllar sana'
                     ```
             8:
                 start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello folks'
-                        {print} 'This will be printed 5 times'
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
                 story_text: |
-                    `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
-                    You can now execute groups of code together, but you will have to *indent* the code.
-                    That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
+                    Artık tek bir kod satırını nasıl tekrarlayacağınızı öğrendiniz. Bu kullanışlı olabilir, ancak her zaman yeterli değildir. Bazen aynı anda birden fazla satırı tekrarlamak istersiniz.
+                    Bu seviye, birkaç kod satırını gruplandırmanıza ve bu küçük satır grubunu bir kerede tekrarlamanıza yardım edecek!
                 example_code: |
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This is all repeated 5 times'
+                    {repeat} 5 {times} {print} 'Bir sonraki sekmede birden fazla kod satırını aynı anda tekrarlayabilirsiniz!'
                     ```
             9:
                 start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                    {print} Bir sonraki sekmeye geçelim!
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Harika bir iş! Yeni bir seviyeye daha ulaştınız! Bir önceki seviyede {if} veya {repeat} komutunda birden fazla kod satırı kullanmayı öğrendiniz. Ancak henüz ikisini birleştiremiyorsunuz...
+                    İyi haberim var! Bu seviyede, bir {if} içine {if} veya bir {repeat} komutu koymanıza izin verilecektir.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    cevap = {ask} 'Yeni bir şeyler öğrenmeye hazır mısınız?'
+                    {if} cevap {is} evet
+                        {print} 'Harika! eğer komutunda tekrarla komutunu kullanmayı öğrenebilirsiniz!'
+                        {print} 'Yaşasın!'
+                        {print} 'Yaşasın!'
+                        {print} 'Yaşasın!'
+                    {else}
+                        {print} 'Belki de bir önceki seviyede biraz daha pratik yapmalısınız'
             10:
                 start_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-                story_text: |-
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Harika gidiyorsunuz! Önceki seviyelerde hep küçük bir sorunla karşılaştık. Satırları tekrarlamayı öğrendiniz, ama ya satırı biraz değiştirmek isterseniz?
+                    Örneğin 'eğer mutluysan ve bunu biliyorsan.' şarkısını söylemek istiyorsunuz. Şöyle görünecektir:
+
+                    Eğer bir sonraki mısranın 'ayaklarını yere vur', ve bir sonrakinin, ve bir sonrakinin de aynı olmasını istiyorsanız, kodu tamamen değiştirmeniz gerekir.
+                    Bu seviyede, bir eylem listesi oluşturmanıza ve kodu her seferinde başka bir eylemle tekrarlamanıza olanak tanıyan `{for}` komutunu öğreneceksiniz!
+                    Lütfen bir göz atın!
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    {repeat} 2 {times}
+                        {print} 'Mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ellerinizi çırpın'
                     ```
             11:
                 start_code: |-
-                    {for} counter {in} {range} 1 {to} 5
-                        {print} counter
-                story_text: |-
-                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
-                    Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Seviye 10'a ulaştınız, harika gidiyorsunuz! Daha yüksek seviyelerde, Hedy size Python programlama dilini öğretmeye daha fazla odaklanıyor.
+                    Python'da `{repeat}` komutu yoktur, ancak {repeat} gibi çalışan bir komut vardır. Python dilinde `{repeat}` komutunun nasıl söylendiğini merak ediyor musunuz? Öğrenmek için hemen devam edin!
             12:
                 start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
-                story_text: |-
-                    **Decimal numbers**
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Belki restoran maceranızda ondalık sayıları kullanmayı denemişsinizdir. Eğer denediyseniz, muhtemelen Hedy'nin bunları henüz anlamadığını ve her zaman yuvarladığını fark etmişsinizdir.
+                    Bu seviyeden itibaren ondalık sayıları kullanabilirsiniz.
                 example_code: |
                     ```
-                    {print} 'Two and a half plus two and a half is...'
-                    {print} 2.5 + 2.5
+                    burger = 5
+                    içecek = 2
+                    toplam = burger + içecek
+                    print 'Bir hamburger ve içecek sipariş ettiniz'
+                    print 'Toplam ' toplam ' lira ödeyin lütfen'
                     ```
             13:
                 start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
-                story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                story_text: |
+                    Önceki seviyelerde iki `{if}` komutunu birbirinin içine nasıl yerleştireceğinizi öğrendiniz. Bu sorunsuz çalışır, ancak size bunun gibi çok uzun ve kullanışsız kodlar verir:
+
+                    Bu sistemde hem doğru kullanıcı adını hem de doğru şifreyi vermeniz gerekmektedir.
+                    Bu seviyede, bu kodu çok daha kısa ve anlaşılır hale getirecek `{and}` komutunu öğreneceksiniz!
+                    Şuna bir bakın!
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    kullanıcı = {ask} 'Kullanıcı adınız nedir?'
+                    şifre = {ask} 'Şifreniz nedir?'
+                    {if} kullanıcı {is} 'Hedy'
+                        {if} şifre {is} 'gizli'
+                            {print} 'Hoş geldin Hedy!'
+                        {else}
+                            {print} 'Erişim reddedildi'
+                    {else}
+                        {print} 'Erişim reddedildi!'
                     ```
             14:
                 start_code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                    {print} 'Hadi bir sonraki sekmeye geçelim'
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.
-                    The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
-                    You use these comparisons in an `{if}`, like this:
+                    Aşağıdaki program ile okulda bir dersi geçip geçmediğinizi hesaplayabilirsiniz (yani, altı yada daha yüksek bir not).
+                    Bu kodun, 5. satırdaki çok uzun kod nedeniyle son derece verimsiz olduğunu görebilirsiniz.
+                    1'den 5'e kadar tüm farklı notların ayrı ayrı programlanması gerekiyordu. Şanslısınız ki, bu seviyede bu son derece uzun kod olmadan bunu nasıl yapacağınızı öğreneceksiniz!
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    birinci_not = {ask} 'İlk sınavınızda kaç puan aldınız?'
+                    ikinci_not = {ask} 'İkinci sınavınızda kaç puan aldınız?'
+                    toplam = birinci_not + ikinci_not
+                    ortalama_not = toplam / 2
+                    {if} ortalama_not = 1 {or} ortalama_not = 2 {or} ortalama_not = 3 {or} ortalama_not = 4 {or} ortalama_not = 5
+                        {print} 'Olamaz! Bu dersi geçemediniz.'
+                    {else}
+                        {print} 'Harika! Bu dersi geçtiniz!'
                     ```
             15:
                 start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
-
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
+                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                story_text: |
+                    Aşağıdaki bu oyunda, oyuncunun istediği kadar oynayabilmesini sağlamak için bir kod yapılmıştır...
+                    Ancak kod etkisiz ve çok uzun. Ayrıca, oyuncu 100 yerine 101 oyun oynamak isterse ne olacak?
+                    Sonsuza kadar da oynayamaz mısın?
+                    Bu seviyede tüm bunları çok daha kolay hale getiren bir komut öğreneceksiniz!
                 example_code: |
                     ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    oyun {is} 'devam'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} oyun {is} 'devam'
+                            cevap = {ask} 'Devam etmek istiyor musun?'
+                            {if} cevap {is} 'hayır'
+                                oyun {is} 'bitti'
+                            {if} cevap {is} 'evet'
+                                {print} 'Tamamdır, devam ediyoruz.'
                     ```
             16:
                 start_code: |-
-                    fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit
-                story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    You can use the square brackets as well to point out a place in the lists.
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
+                story_text: |
+                    Bu seviyede gerçek Python koduna doğru biraz daha yakınlaşacağız. Ayrıca iki listeyi nasıl eşleştireceğinizi de öğreneceksiniz.
+                    Bu şekilde, doğru hayvanın doğru sesle eşleştirildiği bir kod programlayabilirsiniz.
+                    Çünkü aşağıdaki iki kod... açıkça saçmalıyorlar!
                 example_code: |
                     ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                    hayvanlar = 'tavuk', 'köpek', 'inek'
+                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    {for} hayvan {in} hayvanlar
+                        {print} 'Bir ' hayvan ' ses çıkarıyor ' sesler {at} {random}
+                    ```
+                    You could also try to make it work this way, but....
+                    ```
+                    hayvanlar = 'tavuk', 'köpek', 'inek'
+                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    {for} hayvan {in} hayvanlar
+                        {for} ses {in} sesler
+                            {print} 'Bir ' hayvan ' ses çıkarıyor ' ses
                     ```
             17:
                 start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
-                story_text: |-
-                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
-
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
-                    Check it out!
+                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                story_text: |
+                    Hedy'nin son seviyesine neredeyse ulaşmak üzeresiniz, aferin! Bu seviyede `{print}` kullanmanın gerçek bir Python yolunu öğreneceksiniz.
             18:
                 start_code: |-
-                    naam = 'Hedy'
-                    {print}('My name is ', naam)
-                story_text: |-
-                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+                    {print} ('Harika iş çıkardınız!!!')
+                story_text: |
+                    Tebrikler! Hedy'nin son seviyesine ulaştınız! Burada oluşturduğunuz kodu replit veya PyCharm gibi gerçek Python ortamlarına kopyalayabilir ve orada öğrenmeye devam edebilirsiniz!
+                    Ancak Python'un yalnızca İngilizce komutları okuyabildiğini unutmayın. Şimdiye kadar gördüğünüz komutları İngilizce olanları ile değiştirmeniz gerekecek. Komutları yazarken cümledeki yerlerinin biraz Tarzan'ca olduğunu farketmişsinizdir. Bunun sebebi, komut kelimelerinin aynı oldukları yerlere İngilizcelerini yazınca, kodunuzun gerçek bir Python programına dönüşebilmesiydi (tabi biraz da Türkçemizin bazı harflerini değiştirmek gerekecek ama bu pek bir sorun değil).
 
     story:
         name: "Story"
@@ -721,19 +747,8 @@ adventures:
         default_save_name: "Turtle"
         levels:
             1:
-                story_text: |
-                    You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!
-
-                    Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
-
-                    This is the start of a little staircase. Can you make it have 5 steps?
-                example_code: |
-                    ```
-                    {turn} {right}
-                    {forward} 50
-                    {turn} {left}
-                    {forward} 50
-                    ```
+                story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### Exercise\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
@@ -1037,7 +1052,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2597,21 +2612,21 @@ adventures:
                 start_code: '# place your code here'
     print_command:
         name: "{print}"
-        description: Introduction print command
-        default_save_name: print
+        description: yazdır komutuna giriş
+        default_save_name: yazdır
         levels:
             1:
-                story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"
-                story_text_2: "### Exercise\nIn Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.\nIn this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.\n\nFill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.\nHave fun!\n"
-                example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
-                example_code_2: "```\n_ Hello!\n```\n"
-                start_code: "{print} Welcome to Hedy!\n"
+                story_text: "## yazdır komutu\n`{print}` komutunu kullanarak ekrana metin yazdırabilirsiniz.\n"
+                story_text_2: "### Alıştırma\nHedy'de, her macerada alıştırmalar bulacaksınız. Bir alıştırma, yeni komutları ve kavramları uygulamanıza ve örnek kodlara kendi yorumunuzu katmanıza olanak tanır.\nBu alıştırmada pembe bir boşluk göreceksiniz. Kodun çalıştırılabilmesi için boş alanın yerine bir şey yazıp doldurmanız gerekiyor.\n\nBoş alana `{print}` komutunu girin ve ardından beş tane daha kod satırı ekleyin. Her satır bir `{print}` komutu ile başlamalıdır.\nİyi eğlenceler!\n"
+                example_code: "```\n{print} Merhaba, programcı!\n{print} Hedy'ye hoş geldin!\n```\n"
+                example_code_2: "```\n_ Merhaba!\n```\n"
+                start_code: "{print} Hedy'ye hoş geldin!\n"
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'"
+                story_text: "Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'\n```\n"
             18:
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
+                start_code: "isim = 'Hedy'\n{print}('Benim adım ', isim)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.

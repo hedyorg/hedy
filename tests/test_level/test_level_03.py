@@ -630,7 +630,7 @@ class TestsLevel3(HedyTester):
         colors = ['green', 'red', 'blue']""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssign),
+            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
             SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
         ]
 

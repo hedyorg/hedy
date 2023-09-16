@@ -1316,7 +1316,7 @@ class ConvertToPython(Transformer):
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
             definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
-            raise hedy.exceptions.AccessBeforeAssign(
+            raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
@@ -3080,7 +3080,7 @@ def parse_input(input_string, level, lang):
     except lark.UnexpectedEOF:
         lines = input_string.split('\n')
         last_line = len(lines)
-        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
+        raise exceptions.UnquotedEqualityCheckException(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -3136,7 +3136,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'invalid condition':
-            raise exceptions.UnquotedEqualityCheck(line_number=line)
+            raise exceptions.UnquotedEqualityCheckException(line_number=line)
         elif invalid_info.error_type == 'invalid repeat':
             raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
         elif invalid_info.error_type == 'repeat missing print':

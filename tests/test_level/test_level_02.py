@@ -376,7 +376,7 @@ class TestsLevel2(HedyTester):
         name = 'Hedy'""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssign)
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException)
         ]
 
         self.multi_level_tester(

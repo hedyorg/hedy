@@ -87,7 +87,10 @@ class Achievements:
             session["submitted_programs"] += 1
 
     def add_single_achievement(self, username, achievement):
-        """Record an achievement for this user, return the list of achievements earned so far."""
+        """Record an achievement for this user.
+
+        Returns all new achievements recorded in this way, or the special value 'None' in case
+        the operation could not be performed."""
         self.initialize_user_data_if_necessary()
         if achievement not in session["achieved"] and achievement in self.translations.get_translations(
             session["lang"]
