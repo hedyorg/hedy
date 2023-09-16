@@ -11,7 +11,6 @@ import warnings
 import hedy
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
 from collections import namedtuple
 import re
 import regex
