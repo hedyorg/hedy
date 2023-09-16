@@ -1098,7 +1098,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                          Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -2031,90 +2031,91 @@ adventures:
                 start_code: "# kodunuzu buraya yazın"
             9:
                 story_text: |
-                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+                    Bu seviyede, perili evi daha da etkileşimli hale getirmenize olanak tanıyan iç içe geçirme özelliğini kullanabilirsiniz!
 
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                    ### Alıştırma
+                    Şu anda bu oyunu kazanmak çok zor, kazanmayı daha kolay hale getirebilir misiniz?
+                    Kodunuzu bir doğru kapı ve iki yanlış kapı yerine sadece bir yanlış kapı ve iki doğru kapı olacak şekilde değiştirebilir misiniz?
+                    İpucu: Bu, doğru_kapı değişkenini yanlış_kapı olarak değiştirmek ve `{if}` ve `{else}` kodlarını değiştirmek anlamına gelir.
+                    Ve tabii ki hikayeyi değiştirebilir ve kendinize ait hale getirebilirsiniz. Canavarları değiştirin ya da hediye aldığınız mutlu bir oyun gösterisine çevirin!
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
+                    {print} 'Perili Evden Kaçış!'
+                    oyuncu = canlı
+                    kapılar = 1, 2, 3
+                    canavarlar = zombi, vampir, dev örümcek
                     {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
+                        {if} oyuncu {is} canlı
+                            doğru_kapı {is} kapılar {at} {random}
+                            {print} 'Önünüzde 3 kapı var...'
+                            seçilen_kapı = {ask} 'Hangi kapıyı seçiyorsunuz?'
+                            {if} seçilen_kapı {is} doğru_kapı
+                                {print} 'Burada hiç canavar yok!'
                             {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
+                                {print} 'Bir ' monsters {at} {random} ' sizi yakaladı ve yedi'
+                                oyuncu = ölü
                         {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                            {print} 'OYUN BİTTİ'
+                    {if} oyuncu {is} canlı
+                        {print} 'Harika! Hayatta kaldınız!'
                     ```
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} 'Perili evden kaçış!'"
             11:
                 story_text: |
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    Bu seviyede, `{for}` komutunu değiştirdik, böylece oyuncuya nerede olduklarını söyleyebiliyoruz.
+
+                    ### Alıştırma 1
+                    Oyuncunun hangi odada olduğunu bilmesi için programı tamamlayın.
+
+                    ### Alıştırma 2
+                    Bu adımları takip ederek programı bir maceraya dönüştürün:
+
+                    1. Seçeneklerin bir listesini yapın (savaş ya da kaç gibi)
+                    2. Oyuncunun `{ask}` ile bir seçenek seçebildiğinden emin olun
+                    3. Cevap doğru mu? O zaman bir sonraki canavara geçebilirler. Yanlış bir cevap mı verdiler? Oyuncuya bir `{print}` ile bildirin.
+
+                    **Ekleme** Şu anda, yanlış bir seçim yaparsanız, yine de bir canavar gösteriliyor! Bunu nasıl değiştirebilirsiniz?
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                    {print} 'Perili Evden Kaçış!'
+                    canavarlar = zombi, vampir, dev örümcek
+                    _
+                        {print} 'Oda ' i
+                        canavar = canavarlar {at} {random}
                     ```
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} 'Perili evden kaçış!'"
             14:
                 story_text: |
-                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Bu seviyede, `<` ve `>` sembollerini kullanarak oyununuza canlar ekleyebilirsiniz.
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house'
-                    lives = 3
-                    doors = 1, 2, 3
-                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    {print} 'Perili evden kaçış'
+                    canlar = 3
+                    kapılar = 1, 2, 3
+                    canavarlar = 'kötü cadı', 'zombi', 'uyuyan üç başlı bir köpek'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
-                            good_door = doors {at} {random}
-                            monster = monsters {at} {random}
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} good_door == chosen_door
-                                {print} 'You have chosen the correct door'
+                        {if} canlar > 0
+                            iyi_kapı = kapılar {at} {random}
+                            canavar = canavarlar {at} {random}
+                            seçilen_kapı = {ask} 'Hangi kapıyı seçiyorsunuz?'
+                            {if} iyi_kapı == seçilen_kapı
+                                {print} 'Doğru kapıyı seçtiniz'
                             {else}
-                                {print} 'You see...' monster
-                                {if} monster == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Its asleep'
+                                {print} 'Karşınıza bir...' canavar ' çıktı'
+                                {if} canavar == 'uyuyan üç başlı bir köpek'
+                                    {print} 'Pffieuw.... Neyseki uyuyor'
                                 {else}
-                                    {print} 'You lose one life'
-                                    lives = lives -1
+                                    {print} 'Bir can kaybettiniz'
+                                    canlar = canlar -1
                         {else}
-                            {print} 'GAME OVER'
+                            {print} 'OYUN BİTTİ'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             16:
                 story_text: |
-                    This haunted house game uses the connection between the lists you can use in this level.
-                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    Bu perili ev oyunu, bu seviyede kullanabileceğiniz listeler ile arasında bir bağlantı kullanır.
+                    Örneğin: zombiye ait tüm özellikler tüm listelerde ilk sırada, cadı ikinci sırada ve vampir üçüncü sırada yer alır.
+                    Kodu kontrol edin!
                 example_code: |
                     ```
                     numbers = [1, 2, 3]
