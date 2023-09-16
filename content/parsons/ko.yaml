@@ -2,18 +2,18 @@ levels:
     1:
         2:
             code: |-
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love the song
+                {print} 디제이 Hedy입니다
+                {ask} 파티할 준비 되셨나요?
+                {ask} 어떤 노래를 듣고 싶으십니까?
+                {echo} 잘 선택했어요! 노래 너무 좋아요
             story: "지금 DJ 부스에서 노래를 요청하고 있습니다. 파티를 할 준비가 되었는지 묻고 어떤 노래를 듣고 싶은지 묻는 프로그램을 만드세요.\n"
         1:
-            story: "퍼즐은 코드의 줄들이 이미 당신을 위해 쓰여져 있는 연습문제이다. 당신은 줄들을 정확한 순서대로 놓기만 하면 된다. 코드의 줄들을 입력화면으로 끌어다 놓고 코드를 실행시킨다. 당신은 프로그램을 작동시킬 수 있는가?\n\n당신은 베이커리 헤디의 손님이군요.\n당신은 빵집 안으로 들어가서 제빵사의 환영을 받는다.\n그는 당신이 어떤 종류의 파이를 주문하고 싶은지 물어봅니다.\n그러고 나서 그는 당신에게 대답을 반복한다.\n마지막으로 당신의 주문은 준비 중입니다.\n"
+            story: "퍼즐은 코드의 줄들이 이미 당신을 위해 쓰여져 있는 연습문제이다. 당신은 줄들을 정확한 순서대로 놓기만 하면 된다. 코드의 줄들을 입력화면으로 끌어다 놓고 코드를 실행시킨다. 당신은 프로그램을 작동시킬 수 있는가?\n\n당신은 베이커리 Hedy의 손님이군요.\n당신은 빵집 안으로 들어가서 제빵사의 환영을 받는다.\n그는 당신이 어떤 종류의 파이를 주문하고 싶은지 물어봅니다.\n그러고 나서 그는 당신에게 대답을 반복한다.\n마지막으로 당신의 주문은 준비 중입니다.\n"
             code: |-
-                {print} Welcome to bakery Hedy!
-                {ask} What type of pie do you want to order?
-                {echo} So you want
-                {print} Your order is being prepared!
+                {print} 베이커리 Hedy에 오신 것을 환영합니다!
+                {ask} 어떤 종류의 파이를 주문하시겠습니까?
+                {echo} 그래서 당신이 원하는거군요
+                {print} 주문이 준비 중입니다!
     8:
         2:
             code: |-
@@ -37,17 +37,17 @@ levels:
         1:
             story: "너와 너의 친구들은 넷플릭스를 볼거야.\n어떤 영화를 보는지 보여주시고 시청자분들께 재미가 가득하시길 바랍니다!\n"
             code: |-
-                {print} It is time for an evening of Netflix'
-                film {is} Sonic the Hedgehog 2
-                {print} We're going to film
-                {print} Have fun!
+                {print} 넷플릭스의 저녁 시간입니다
+                영화 {is} 소닉 더 헤지호그 2
+                {print} 촬영을 진행합니다
+                {print} 즐거운 시간 보내세요!
         2:
             story: "이것은 장난감 가게의 웹샵입니다. 고객들이 장바구니에 물건을 추가할 수 있는 프로그램을 만드세요.\n"
             code: |-
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} toy is added to your shopping cart.
-                {print} Thank you for shopping with us!
+                {print} 장난감 가게에 오신 것을 환영합니다
+                장난감 {is} {ask} 무엇을 사고 싶으십니까?
+                {print}개의 장난감이 장바구니에 추가됩니다.
+                {print} 저희와 함께 쇼핑해 주셔서 감사합니다!
     3:
         1:
             story: "호그와트의 새 학년이 시작됩니다! \n당신을 집들 중 한 곳으로 분류하는 것은 모자를 분류하는 일이다.\n당신은 어느 집으로 분류될 것인가? 당신은 그리핀도르, 허플푸프, 레이븐클로, 슬리데린 중 어느 집으로 분류될 것인가.\n분류 모자가 집을 드러내기 전에 집 중 하나를 선택하지 말라고 말하면 됩니다.\n"
@@ -60,11 +60,11 @@ levels:
         2:
             story: "여러분을 위해 임의의 식사를 선택하는 프로그램을 만드세요. 음식 목록과 토핑 목록을 만들고 그 프로그램이 여러분이 무엇을 먹을지 결정하게 하세요!\n"
             code: |-
-                food {is} pizza, icecream, salad, sandwich
-                toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
+                음식 {is} 피자, 아이스크림, 샐러드, 샌드위치
+                토핑 {is} 초콜릿, 치즈, 참치, 스프링클
+                {print} 오늘 당신의 복불복 식사는...
                 {sleep} 2
-                {print} food {at} {random} with toppings {at} {random}
+                {print} 음식 {at}{random} (토핑 {at} {random} 포함)
         3:
             story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n두 선수가 먼저 맞붙어야 할 상대를 결정하는 프로그램을 만드세요.\n첫 번째 경기를 치른 두 명의 플레이어를 인쇄하는 것으로 시작한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
             code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
