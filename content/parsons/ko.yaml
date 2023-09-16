@@ -5,10 +5,10 @@ levels:
                 {print} This is DJ Hedy
                 {ask} Are you ready to party?
                 {ask} What song would you like to hear?
-                {echo} Great choice! I love
+                {echo} Great choice! I love the song
             story: "지금 DJ 부스에서 노래를 요청하고 있습니다. 파티를 할 준비가 되었는지 묻고 어떤 노래를 듣고 싶은지 묻는 프로그램을 만드세요.\n"
         1:
-            story: "당신은 베이커리 헤디의 손님이군요.\n당신은 빵집 안으로 들어가서 제빵사의 환영을 받는다.\n그는 당신이 어떤 종류의 파이를 주문하고 싶은지 물어봅니다.\n다음은 주문 준비 중입니다.\n"
+            story: "퍼즐은 코드의 줄들이 이미 당신을 위해 쓰여져 있는 연습문제이다. 당신은 줄들을 정확한 순서대로 놓기만 하면 된다. 코드의 줄들을 입력화면으로 끌어다 놓고 코드를 실행시킨다. 당신은 프로그램을 작동시킬 수 있는가?\n\n당신은 베이커리 헤디의 손님이군요.\n당신은 빵집 안으로 들어가서 제빵사의 환영을 받는다.\n그는 당신이 어떤 종류의 파이를 주문하고 싶은지 물어봅니다.\n그러고 나서 그는 당신에게 대답을 반복한다.\n마지막으로 당신의 주문은 준비 중입니다.\n"
             code: |-
                 {print} Welcome to bakery Hedy!
                 {ask} What type of pie do you want to order?
@@ -46,17 +46,17 @@ levels:
             code: |-
                 {print} Welcome to our toystore
                 toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.
+                {print} toy is added to your shopping cart.
                 {print} Thank you for shopping with us!
     3:
         1:
-            story: "호그와트의 새 학년이 시작됩니다! \n당신을 집들 중 한 곳으로 분류하는 것은 모자를 분류하는 일이다.\n어느 집으로 분류되실 건가요?\n당신은 그리핀도르, 허플푸프, 레이븐클로, 슬리데린 중 누구입니까.\n집을 공개하기 전에 프로그램을 잠시 기다리게 하세요.\n"
+            story: "호그와트의 새 학년이 시작됩니다! \n당신을 집들 중 한 곳으로 분류하는 것은 모자를 분류하는 일이다.\n당신은 어느 집으로 분류될 것인가? 당신은 그리핀도르, 허플푸프, 레이븐클로, 슬리데린 중 어느 집으로 분류될 것인가.\n분류 모자가 집을 드러내기 전에 집 중 하나를 선택하지 말라고 말하면 됩니다.\n"
             code: |-
-                {print} The new school year at Hogwarts is starting!'
-                {print} The sorting hat is ready to sort you into a Hogwarts house.'
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} And it is houses {at} {random}
+                {print} 정렬 모자가 당신을 호그와트의 집으로 분류할 준비가 되었습니다.
+                집 {is} 그리핀도르, 허플푸프, 레이븐클로, 슬리데린
+                이가 {is} {ask} 싫어하는 집이 있습니까?
+                {remove} 이가 {from} 집
+                {print} 싫지 않아? 차라리... 집 {at} {random} 이가 좋아
         2:
             story: "여러분을 위해 임의의 식사를 선택하는 프로그램을 만드세요. 음식 목록과 토핑 목록을 만들고 그 프로그램이 여러분이 무엇을 먹을지 결정하게 하세요!\n"
             code: |-
@@ -65,6 +65,9 @@ levels:
                 {print} Your random meal for today is...
                 {sleep} 2
                 {print} food {at} {random} with toppings {at} {random}
+        3:
+            story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n두 선수가 먼저 맞붙어야 할 상대를 결정하는 프로그램을 만드세요.\n첫 번째 경기를 치른 두 명의 플레이어를 인쇄하는 것으로 시작한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
     4:
         1:
             story: "당신은 팔레트 타운에서 온 최신 포켓몬 트레이너입니다!\n첫 번째 포켓몬을 선택할 수 있는 프로그램을 만드세요.\n첫 번째 포켓몬을 공개하기 전에 프로그램을 잠시 기다리게 하세요.\n"
@@ -110,11 +113,11 @@ levels:
             code: |-
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount {is} people/8
+                cakes_amount = people/8
                 {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
-            story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n어떤 두 플레이어가 먼저 서로 대결할지 결정하는 프로그램을 만듭니다.\n먼저 첫 번째 경기를 치른 두 명의 플레이어를 인쇄한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
+            story: "아기 상어 노래를 완성하세요. 먼저 아기 상어, 그 다음에 엄마, 그리고 마지막으로 아빠 상어.\n"
             code: |
                 {repeat} 3 {times} {print} 'Baby shark tututututudu'
                 {print} 'Baby shark'
@@ -129,3 +132,31 @@ levels:
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
                 {print} 'all through the town'
+    10:
+        2:
+            story: "이 변신 로봇이 여러분의 새로운 머리 모양을 결정해 줄 것입니다. 만약 여러분이 첫 번째 선택에 동의하지 않는다면, 다시 시도해 볼 수 있습니다.\n**Mind** 변수 사람은 첫 번째 줄에 정의하고, 두 번째 줄에 변수 머리 스타일을 정의합니다.\n"
+            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
+        1:
+            story: "누가 요리를 하고 있고 이번 주에 그들이 무엇을 만들어야 하는지에 대한 일정표를 만들어서 이 가족을 도와주세요. 제거 명령은 아무도 두 번 요리할 필요가 없도록 해주고 그들은 매일 다른 저녁식사를 하도록 해줍니다.\n**Mind!** 변수 순서는 첫째 날, 그 다음에 사람, 그리고 마지막에 dinner_options이어야 합니다. 이 순서는 remove 명령이 있는 줄에도 적용됩니다.\n"
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
+    9:
+        2:
+            story: "이 코드는 식당에 있는 고객들에게 디저트를 주문할 것인지를 물어봅니다. 만약 주문한다면, 어떤 디저트를 주문할 것인지를 물어봅니다. 만약 그들이 티라미수를 주문하면, 그들은 티라미수가 매진되었다는 말을 듣습니다.\n코드를 작동시킬 수 있나요?\n"
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
+        1:
+            story: "이 게임은 당신에게 세가지 수학과제를 줄 것이다. 매번 문제가 다르다. 당신은 순서를 알아낼 수 있습니까?\n"
+            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
+    12:
+        1:
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
+            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+        2:
+            story: "우리와 함께 트위스터 게임을 해보세요! 먼저 가변적인 사람들을 정의하고, 팔다리, 그리고 색을 정의하세요.\n"
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+    11:
+        1:
+            story: "새해 전날을 위한 카운트 다운 시계를 만드세요! 이 프로그램은 10부터 1까지의 숫자를 잠깐 동안 보여주고 나서 여러분에게 새해 복 많이 받으세요.\n"
+            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+        2:
+            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"
