@@ -1,7 +1,7 @@
 import functools
 import operator
 import itertools
-from datetime import date
+from datetime import date, timedelta
 
 from utils import timems, times
 
@@ -413,12 +413,13 @@ class Database:
             filters['adventure_name'] = adventure_filter
         filters['public'] = 1
 
+        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
         id_batch_size = 200
         fetch_batch_size = 50
 
         found_programs = []
         pagination_token = None
-        while len(found_programs) < limit:
+        while len(found_programs) < limit and not timeout.is_cancelled():
             page = PROGRAMS.get_many({ 'public': 1 }, reverse=True, limit=id_batch_size, pagination_token=pagination_token)
             ids = [{ 'id': r['id'] } for r in page]
 
