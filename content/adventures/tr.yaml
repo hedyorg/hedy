@@ -476,7 +476,7 @@ adventures:
                     {print} 'brown bear'
                     {print} 'brown bear'
                     {print} 'What do you see?'
-                    {for} havyan {in} hayvanlar
+                    {for} hayvan {in} hayvanlar
                         {print} 'I see a ' hayvan ' looking at me'
                         {print} hayvan
                         {print} hayvan
@@ -740,7 +740,7 @@ adventures:
                         hayvan = hayvanlar[i]
                         ses = sesler[i]
                         {print} 'Ali Babanın bir çiftliği var'
-                        {print} 'çiftliğinde ' animal ' var'
+                        {print} 'çiftliğinde ' hayvan ' var'
                         {print} ses ses ' diye bağırır'
                         {print} 'çiftliğinde Ali Babanın'
                     ```
@@ -1031,7 +1031,7 @@ adventures:
                     günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar
                     isimler = anne, baba, Ali, Ayşe
                     {for} gün {in} günler
-                        {print} isimler {at} {random} ' bulaşıkları ' day ' günü yıkayacak'
+                        {print} isimler {at} {random} ' bulaşıkları ' günler {at} {random} ' günü yıkayacak'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     dice:
@@ -2640,9 +2640,9 @@ adventures:
         default_save_name: ve veya
         levels:
             13:
-                start_code: "isim = {ask} 'Adınız nedir?'\nyaş = {ask} 'Yaşınız kaç?'\n{if} isim {is} 'Hedy' {and} yaş {is} 2\n    {print} 'Sen gerçek Hedy'sin!'"
+                start_code: "isim = {ask} 'Adınız nedir?'\nyaş = {ask} 'Yaşınız kaç?'\n{if} isim {is} 'Hedy' {and} yaş {is} 2\n    {print} \"Sen gerçek Hedy'sin!\""
                 story_text: "Şimdi `{and}` ve `{or}`'yı öğreneceğiz! İki ifadeyi birden kontrol etmek istiyorsanız, iki tane `{if}` kullanmak zorunda değilsiniz, bunun yerine `{and}` ve `{or}` kullanabilirsiniz.\n\nEğer `{and}` kullanırsanız, `{and}` nin sağındaki ve solundaki her iki ifadenin de doğru olması gerekir. Ayrıca `{or}` da kullanabiliriz. O zaman sadece bir ifadenin doğru olması gerekir."
-                example_code: "```\nisim = {ask} 'adınız nedir?'\nyaş = {ask} 'yaşınız kaç?'\n{if} isim {is} 'Hedy' {and} yaş {is} 2\n    {print} 'Sen gerçek Hedy'sin!'\n```\n"
+                example_code: "```\nisim = {ask} 'adınız nedir?'\nyaş = {ask} 'yaşınız kaç?'\n{if} isim {is} 'Hedy' {and} yaş {is} 2\n    {print} \"Sen gerçek Hedy'sin!\"\n```\n"
     harry_potter:
         name: Harry Potter
         description: Harry Potter adventures
@@ -2729,7 +2729,7 @@ adventures:
             16:
                 start_code: "meyve = ['elma', 'muz', 'kiraz']\n{print} meyve[rastgele]"
                 story_text: "Şimdi Python yöntemiyle listeler yapacağız, bu listelerin etrafında köşeli parantezler olacak! Ayrıca önceki seviyelerde öğrendiğimiz gibi her öğenin etrafında tırnak işaretlerini koyuyoruz.\nKöşeli parantezleri listedeki bir yeri belirtmek için kullanırız. {at} {random} komutu bu bölümde artık kullanılamaz."
-                example_code: "```\narkadaşlar = ['Ahmet', 'Betül', 'Ceyda']\nşanslı_sayılar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] ' için şanslı sayı'\n    {print} lucky_numbers[i] ' sayısıdır' \n```\n"
+                example_code: "```\narkadaşlar = ['Ahmet', 'Betül', 'Ceyda']\nşanslı_sayılar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} arkadaşlar[i] ' için şanslı sayı'\n    {print} şanslı_sayılar[i] ' sayısıdır' \n```\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: ekle şuraya ve çıkar şuradan komutlarına giriş

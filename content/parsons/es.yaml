@@ -51,7 +51,7 @@ levels:
                 {print} El sombrero seleccionador está listo para clasificarte en una casa de Hogwarts.
                 casas {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
                 aversión {is} {ask} ¿Hay alguna casa de la que no quieras formar parte?
-                {remove} no {from} las casas
+                {remove} aversión {from} casas
                 {print} No te disgusta, ¿eh? Mejor que sean... casas {at} {random}
         2:
             story: |
@@ -121,7 +121,7 @@ levels:
                 Crea un programa que te ayude a calcular cuantas tortas deberías comprar para tu fiesta de cumpleaños.
             code: |-
                 {print} '¡Es tu cumpleaños!'
-                people = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
+                personas = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
                 cakes_amount = personas/8
                 {print} 'Tendrás que comprar ' cakes_amount ' pasteles'
     7:
@@ -130,7 +130,7 @@ levels:
                 Completa la canción del bebé tiburón. Primero viene el bebé tiburón, luego mamá y por último papá tiburón.
             code: |
                 {repeat} 3 {times} {print} 'Tiburón bebe tututututudu'
-                {print} 'Tiburón bebé "
+                {print} 'Tiburón bebé' 
                 {repeat} 3 {times} {print} 'Mamá Tiburón tututututudu'
                 {print} 'Mama Tiburón'
                 {repeat} 3 {times} {print} 'Papá Tiburón tututututudu'
