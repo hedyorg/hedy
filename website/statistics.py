@@ -36,38 +36,6 @@ class StatisticsModule(WebsiteModule):
         super().__init__("stats", __name__)
         self.db = db
 
-    @route("/class-stats/<class_id>", methods=["GET"])
-    @requires_login
-    def get_class_stats(self, user, class_id):
-        start_date = request.args.get("start", default=None, type=str)
-        end_date = request.args.get("end", default=None, type=str)
-
-        cls = self.db.get_class(class_id)
-        students = cls.get("students", [])
-        if not cls or not students or (cls["teacher"] != user["username"] and not is_admin(user)):
-            return "No such class or class empty", 403
-
-        program_data = self.db.get_program_stats(students, start_date, end_date)
-        quiz_data = self.db.get_quiz_stats(students, start_date, end_date)
-        data = program_data + quiz_data
-
-        per_level_data = _aggregate_for_keys(data, [level_key])
-        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
-        per_level_per_student = _aggregate_for_keys(data, [username_key, level_key])
-        per_week_per_student = _aggregate_for_keys(data, [username_key, week_key])
-
-        response = {
-            "class": {
-                "per_level": _to_response_per_level(per_level_data),
-                "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
-            },
-            "students": {
-                "per_level": _to_response(per_level_per_student, "level", lambda e: e["id"], _to_response_level_name),
-                "per_week": _to_response(per_week_per_student, "week", lambda e: e["id"]),
-            },
-        }
-        return jsonify(response)
-
     @route("/grid_overview/class/<class_id>", methods=["GET"])
     @requires_login
     def render_class_grid_overview(self, user, class_id):
