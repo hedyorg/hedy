@@ -1098,7 +1098,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                        Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                          Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1627,359 +1627,405 @@ adventures:
                     **Extra** Müşteriler içecek mi istiyor? Onları da sorun! <br>
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
-                            {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
+                    {print} 'Restaurant Chez Hedy'ye hoş geldiniz!'
+                    kişiler = {ask} 'Bugün bize kaç kişi katılacak?'
+                    {print} 'Harika!'
+                    fiyat = 0
+                    {repeat} kişiler {times}
+                    _ yemek = {ask} 'Ne sipariş etmek istersiniz?'
+                    _ {print} yemek
+                    _ {if} yemek {is} kızartma
+                    _ fiyat = fiyat + 3
+                    _ sos = {ask} 'Patates kızartmanızın yanında ne tür bir sos istersiniz?'
+                    _ {if} sos {is} 'hayır'
+                    _ {print} 'sos olmayacak'
+                    _ {else}
+                    _ fiyat = fiyat + 1
+                    _ {print} sos ' sosu olacak '
+                    _ {if} yemek {is} pizza
+                    _ fiyat = fiyat + 4
+                    {print} 'Toplam ücret ' price ' lira'
+                    {print} 'Afiyet olsun!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             10:
                 story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    Bu seviyede, farklı çeşitler için nasıl kolayca sipariş vereceğinizi öğreneceksiniz.
+
+                    ### Alıştırma 1
+                    Kodu boşluklara bir `{ask}` koyarak tamamlayın, böylece müşteriye her yemek için ne yemek istediği sorulur.
                 example_code: |
                     ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                    çeşitler = meze, ana yemek, tatlı
+                    {for} çeşit {in} çeşitler
+                        {print} 'Siparişiniz için ' course ' ne olacak?'
+                        _ 
+                        _
                     ```
                 story_text_2: |
-                    Of course, you could also order for multiple people!
+                    ### Alıştırma
+                    Tabii ki, birden fazla kişi için de sipariş verebilirsiniz!
+                    Kodun düzgün çalışması için her satırdan önce doğru miktarda girinti ekleyebilir misiniz?
+                    İpucu: Bazı satırlarda hiç girintiye gerek yoktur.
                 example_code_2: |
                     ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
+                    _ çeşitler = meze, ana yemek, tatlı
+                    _ isimler = Ali, Ayşe
+                    _ {for} isim {in} isimler
+                    _ {for} çeşit {in} çeşitler
+                    _ yemek = {ask} isim ', yemekte ' course ' olarak ne yemek istersin?'
+                    _ {print} isim ' yemekte ' çeşit ' olarak ' yemek ' sipariş ediyor'
                     ```
-                start_code: "courses = appetizer, main course, dessert"
+                start_code: "çeşitler = meze, ana yemek, tatlı"
             11:
                 story_text: |
-                    We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
+                    Birden fazla müşteriden gelen siparişleri düzenli bir şekilde yazdırmak için `{for}` ile `{range}` kullanabiliriz.
+
+                    ### Alıştırma
+                    Restoran kodunu tamamlayın, böylece birden fazla kişinin siparişini alabilirsiniz. Her seferinde sipariş numarasını yazdırın: 'Sipariş 1', 'Sipariş 2', gibi.
+                    Bunu nasıl yapacağınızdan emin değil misiniz? Seviye 8 kodunuza bir göz atın.
+
+                    **Ekleme** 9. seviyede, restoran fiyatlarını da kullanmıştınız. Bunu da buraya ekleyebilirsiniz!
                 example_code: |
                     ```
-                    {print} 'Welcome to Restaurant Hedy!'
-                    people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 {to} people
-                        {print} 'Order number ' i
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce = {ask} 'What kind of sauce would you like with that?'
-                            {print} sauce
-                        drinks = {ask} 'What would you like to drink?'
-                        {print} drinks
-                    price = 4 * people
-                    {print} 'That will be ' price ' dollars, please!'
+                    {print} 'Restaurant Hedy'ye hoş geldiniz!'
+                    kişiler = {ask} 'Kaç kişi için sipariş vermek istersiniz?'
+                    {print} 'Demek ' kişiler ' kişi için sipariş vermek istiyorsunuz'
+                    {print} "Tamam, başlayalım!"
                     ```
                 start_code: "# kodunuzu buraya yazın"
             12:
                 story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                    Bu seviyeden itibaren menünüzü daha gerçekçi hale getirmek için ondalık sayıları kullanabilirsiniz.
+
+                    ### Alıştırma
+                    Arkadaşlarınıza ve ailenize %15 indirim sağlayacak bir kod düşünebiliyor musunuz?
+                example_code: "```\nfiyat = 0.0\nyemek = {ask} 'Ne sipariş etmek istersiniz?'\niçecek = {ask} 'Ne içmek istersiniz?'\n{if} yemek {is} 'hamburger'\n    fiyat = fiyat + 6.50\n{if} yemek {is} 'pizza'\n    fiyat = fiyat + 5.75\n{if} içecek {is} 'su'\n    fiyat = fiyat + 1.20\n{if} içecek {is} 'soda'\n    fiyat = fiyat + 2.35\n{print} 'Toplam ' fiyat ' lira, lütfen'\n```\n"
                 start_code: "# kodunuzu buraya yazın"
             13:
                 story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    Bu seviyede kodunuzu daha da genişletmek için yeni komutlar öğreneceksiniz.
+
+                    ### Alıştırma 1
+                    Programdaki mantıklı olan yerlere bir `{and}` ve bir `{or}` yerleştirin.
+
+                    ### Alıştırma 2
+                    Restoranınızı en az bir tane daha `{and}` ve bir tane `{or}` ile genişletin.
+                    Örneğin, yalnızca pizza için geçerli olan özel bir indirim kuponu oluşturun veya müşterinize patates kızartması ve krep ile birlikte ücretsiz bir içecek verin.
+                    Ya da tabii ki tamamen farklı bir şey de olabilir!
 
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
+                        {print} 'Bu bizim indirim menümüz'
+                        fiyat = fiyat - 3
+                    {if} içecekler {is} 'su' _ içecekler {is} 'meyve suyu'
+                        {print} 'Bu sağlıklı bir seçim'
+                    {print} 'Toplam ' lira ' lira ediyor'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             15:
                 story_text: |
-                    With the `{while}` you can make sure your costumers can keep adding orders until they are done.
+                    `{while}` ile müşterilerinizin istekleri bitene kadar sipariş eklemeye devam edebilmelerini sağlayabilirsiniz.
 
                 example_code: |
                     ```
-                    {print} 'Welcome at McHedy'
-                    more = 'yes'
-                    {while} more == 'yes'
-                        order = {ask} 'What would you like to order?'
-                        {print} order
-                        more = {ask} 'Would you like to order anything {else}?'
-                    {print} 'Thank you!'
+                    {print} 'McHedy'ye Hoş Geldiniz'
+                    dahafazla = 'evet'
+                    {while} dahafazla == 'evet'
+                        sipariş = {ask} 'Ne sipariş etmek istersiniz?'
+                        {print} sipariş
+                        dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
+                    {print} 'Teşekkür ederiz!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     fortune:
-        name: "Fortune teller"
-        description: "Let Hedy predict the future"
-        default_save_name: "Fortune Teller"
+        name: "Falcı"
+        description: "Hedy'nin geleceği tahmin etmesini sağlayın"
+        default_save_name: "Falcı"
         levels:
             1:
                 story_text: |
-                    Have you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?
-                    Then you probably know that they can't really predict your future, but it's still fun to play!
+                    Hiç bir karnavala gittiniz ve bir falcı tarafından geleceğinizin tahmin edildiğini gördünüz mü? Ya da hiç sihirli sekiz topla oynadınız mı? Ya da bunları bir filmde gördünüz mü?
+                    O zaman muhtemelen geleceğinizi gerçekten tahmin edemeyeceklerini biliyorsunuzdur, ama yine de oynamak eğlenceli!
 
-                    In the upcoming levels you can learn how to create your own fortune telling machine!
-                    In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.
-                    Like this:
+                    İlerleyen seviyelerde kendi fal makinenizi nasıl yaratacağınızı öğrenebilirsiniz!
+                    1. seviyede, Hedy'nin kendini falcı olarak tanıtmasını ve oyuncuların cevaplarını `{echo}` ile yankılamasını sağlayarak kolay bir başlangıç yapabilirsiniz.
+                    Bunun gibi:
                 example_code: |
                     ```
-                    {print} Hello, I'm Hedy the fortune teller!
-                    {ask} Who are you?
-                    {print} Let me take a look in my crystal ball
-                    {print} I see... I see...
-                    {echo} Your name is
+                    _ Merhaba, ben falcı Hedy!
+                    _ Peki sen kimsin?
+                    _ Kristal küreme bir göz atayım
+                    _ Görüyorum... Görüyorum...
+                    _ Senin adın
                     ```
                 story_text_2: |
-                    Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
-                    Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
-                    Take a look in level 2 to improve your fortune teller.
+                    ### Alıştırma
+                    Örnek kodu girdi ekranınıza kopyalayın ve kodun çalışması için boşlukları doldurun.
+                    **Ekleme** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
                 start_code: "# kodunuzu buraya yazın"
             3:
                 story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
+                    Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi, sadece `{echo}` kullandı.
+                    Bu seviyede, Hedy'nin sizin için bir cevap seçmesini gerçekten sağlamak için bir değişken ve `{at} {random}` komutunu kullanabilirsiniz. Örneğin bu koda göz atın:
                 example_code: |
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
-                    {print} I’m Hedy the fortune teller!
-                    question {is} {ask} What do you want to know?
-                    {print} This is what you want to know: question
-                    answers {is} yes, no, maybe
-                    {print} My crystal ball says...
+                    {print} Ben falcı Hedy'im!
+                    soru {is} {ask} Ne bilmek istiyorsun?
+                    {print} Demek bilmek istediğin şey: soru
+                    cevaplar {is} evet, hayır, belki
+                    {print} Kristal kürem diyor ki...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} cevaplar {at} {random}
                     ```
                 story_text_2: |
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
+                    ### Alıştırma
+                    Şimdilik, Hedy sadece evet, hayır veya belki cevaplarını verebiliyor. Hedy'ye 'kesinlikle' veya 'tekrar sor' gibi daha fazla cevap seçeneği verebilir misiniz?
                 start_code: "# kodunuzu buraya yazın"
             4:
                 story_text: |
-                    This level has no new functions, but allows you to practice with using the quotation marks.
-                    You can remake your level 3 code, and make sure to add the quotation marks in the right places!
+                    Bu seviyede yeni bir işlev yok, ancak tırnak işaretlerini kullanarak pratik yapmanızı sağlar.
+                    Seviye 3 kodunuzu yeniden oluşturabilir ve tırnak işaretlerini doğru yerlere eklediğinizden emin olabilirsiniz!
 
-                    Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
-                    The quotation marks in level 3 make this possible!
+                    Seviye 3'te 'soru' kelimesini hem değişken adı hem de yazdırılabilecek normal bir kelime olarak kullanamadığımızı unutmayın.
+                    Seviye 4'teki tırnak işaretleri bunu mümkün kılmaktadır!
 
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
+                    ### Alıştırma
+                    Bu örnek koddan tüm tırnak işaretlerini kaldırdık, bunları doğru yerlere ekleyebilir misiniz?
+
+                    ### Alıştırma 2
+                    Önceki seviyeye geri dönün ve falcı kodunuzu kopyalayın. Doğru noktalara tırnak işaretleri ekleyerek kodun bu seviyede çalışmasını sağlayın.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    question {is} {ask} 'What do you want to know?'
-                    {print} 'This is your question: ' question
-                    answers {is} yes, no, maybe
-                    {print} 'My crystal ball says...'
+                    _ Bu koda tırnak işaretlerini ekleyin _
+                    {print} Ben falcı Hedy!
+                    soru {is} {ask} Ne bilmek istiyorsun?
+                    {print} Sorduğun soru: soru
+                    cevaplar {is} evet, hayır, belki
+                    {print} Kristal kürem diyor ki...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} cevaplar {at} {random}
                     ```
                 start_code: "# kodunuzu buraya yazın"
             5:
                 story_text: |
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
+                    ### Alıştırma
+                    Örnek kodda, olasılıkları kendi lehinize çevirmenizi sağlayan bir falcı programının nasıl yapıldığını göreceksiniz. Bu hile programı size her zaman piyangoyu kazanacağınızı söyler, ancak arkadaşlarınız asla kazanamaz.
+
+                    Bunu kendi programınızı yapmak için kullanın, yaratıcı olun! Örneğin şunu tahmin eden bir kod oluşturabilirsiniz:
+                    * tuttuğunuz spor takımı tüm rakiplerini yenecek!
+                    * film gecesi için en sevdiğiniz film seçilecek!
+                    * en sevdiğiniz gösteriye bilet kazanın!
+                    * Pamuk Prenses'in sihirli aynası gibi, hepsinin içinde en güzeli sensin.
+                    Bırakın işi hayal gücünüz yapsın!
+
+                    Programınız en az 10 satır koddan oluşmalı ve en az bir `{if}` ve `{else}` komutuna sahip olmalıdır.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    arkadaşlar {is} Leyla, Orhan, Nergis
+                    {print} 'Yarın piyangoyu kazanıp kazanmayacağınızı tahmin edebilirim!'
+                    kişi {is} {ask} 'Sen kimsin?'
+                    iyi_cevap {is} Yaşasın! Sen kazandın!, Kesinlikle sen kazanacaksın!, Bir kazananımız var!
+                    kötü_cevap {is} Kötü şans! Tekrar dene!, Başka biri kazanacak, Sen kaybedeceksin!
+                    {if} kişi {in} arkadaşlar {print} iyi_cevap {at} {random}
+                    {else} {print} kötü_cevap {at} {random}
                     ```
                 start_code: "# kodunuzu buraya yazın"
             6:
                 story_text: |
-                    In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
-                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
+                    Bu seviyede artık bir falcı olarak tahminlerinizde matematiği kullanabilirsiniz. Bu, geleceği hesaplamak için (aptalca) formüller oluşturmanıza olanak tanır.
+                    Örneğin, ne kadar zengin olacağınızı veya büyüdüğünüzde kaç çocuğunuz olacağını hesaplayabilirsiniz.
+
+
+
+                    ### Alıştırma
+                    Kendinize ait (aptalca) bir fal makinenizi hayal edebiliyor musunuz?
 
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'I can predict how many kids youll get when you grow up!'
-                    age = {ask} 'How old are you?'
-                    siblings = {ask} 'How many siblings do you have?'
-                    length = {ask} 'How tall are you in centimetres?'
-                    kids = length / age
-                    kids = kids - siblings
-                    {print} 'You will get ...'
+                    {print} 'Ben falcı Hedy'im!'
+                    {print} 'Büyüdüğünde kaç çocuğun olacağını tahmin edebiliyorum!'
+                    yaş = {ask} 'Kaç yaşındasın?'
+                    kardeşler = {ask} 'Kaç kardeşin var?'
+                    boy = {ask} 'Santimetre cinsinden boyun kaç?'
+                    çocuklar = boy / yaş
+                    çocuklar = çocuklar - kardeşler
+                    {print} 'Büyüdüğünde...'
                     {sleep}
-                    {print} kids ' kids!'
-                    ```
-
-                    If the previous example wasn't silly enough for you, take a look at this one!
-
-                    ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
+                    {print} çocuklar ' çocuğun olacak!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Alıştırma
+                    Aşık olduğunuz kişinin sizi sevip sevmediğini söyleyen bu programı bitirin.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} 'Sihirli yaprakları olan bir çiçeğim var'
+                    {print} 'Eğer taç yapraklarını koparırsanız, çiçek size aşkınızın sizi sevip sevmediğini söyleyecektir.'
+                    miktar = {ask} 'Kaç tane taç yaprağı koparmak istiyorsun?'
+                    seçenekler = seni seviyor, seni sevmiyor
+                    _ _ _ _ seçenekler {at} {random}
                     ```
                 start_code: "# kodunuzu buraya yazın"
             8:
                 story_text: |
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    Bir sonraki örnekte, falcınızın birden fazla soru sormasını ve bunları yazdırmasını sağlayabilirsiniz!
+
+                    ### Alıştırma
+                    Boşlukları doğru komutla doldurabilir misiniz?
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can {ask} me 3 questions.'
-                    answers = yes, no, maybe
-                    {repeat} 3 {times}
-                       question = {ask} 'What do you want to know?'
-                       {print} question
+                    {print} 'Ben falcı Hedy'im!'
+                    {print} 'Bana 3 soru sorabilirsin.'
+                    cevaplar = evet, hayır, belki
+                    _ _ _
+                       soru = {ask} 'Ne bilmek istiyorsun?'
+                       {print} soru
                        {sleep}
-                       {print} 'My crystal ball says...' answers {at} {random}
+                       {print} 'Kristal kürem diyor ki... ' cevaplar {at} {random}
                     ```
                 start_code: "# kodunuzu buraya yazın"
             10:
                 story_text: |
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    Bu seviyede MASH (konak, apartman, kulübe, ev) oyununu nasıl programlayacağınızı öğreneceksiniz. Bu oyunda tüm oyuncular için aynı anda geleceklerinin neye benzeyeceğini tahmin edebilirsiniz.
+
+                    ### Alıştırma
+                    Bu seviyede öğrendiğiniz yeni komutu kullanarak boşlukları doldurun.
                 example_code: |
                     ```
-                    houses = mansion, apartment, shack, house
-                    loves = nobody, a royal, their neighbour, their true love
-                    pets = dog, cat, elephant
-                    names = Jenna, Ryan, Jim
-                    {for} name {in} names
-                        {print} name ' lives in a ' houses {at} {random}
-                        {print} name ' will marry ' loves {at} {random}
-                        {print} name ' will get a ' pets {at} {random} ' as their pet.'
+                    evler = konak, apartman, baraka, ev
+                    aşklar = hiç kimse, bir soylu, bir komşu, gerçek aşkı
+                    hayvanlar = köpek, kedi, fil
+                    isimler = Bulut, Sema, Deniz
+                    _
+                        {print} isim ' şu evde yaşayacak: ' houses {at} {random}
+                        {print} isim ' şununla evlenecek: ' loves {at} {random}
+                        {print} isim ' evcil hayvan olarak ' pets {at} {random} ' besleyecek.'
                         {sleep}
                     ```
                 start_code: "# place your code here"
             12:
-                story_text: |
-                    In this level you can make your fortunes multiple words. Like in this example below:
+                story_text: |-
+                    12. seviyeden itibaren artık, listelerde her öğeden önce ve sonra tırnak işareti kullanmanız gerekecektir.
+
+                    ### Alıştırma
+                    Listeye iki tane tahmin ekleyin
                 example_code: |
                     ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
-                    {print} 'I see... I see...'
+                    fallar = 'muz kabuğuna basıp kayacaksın', _
+                    {print} 'Geleceğin için kristal küreme bir göz atacağım.'
+                    {print} 'Görüyorum... Görüyorum...'
                     {sleep}
-                    {print} fortunes {at} {random}
+                    {print} fallar {at} {random}
                     ```
                 start_code: "# kodunuzu buraya yazın"
     haunted:
-        name: "Haunted House"
-        description: "Escape from the haunted house"
-        default_save_name: "Haunted House"
+        name: "Perili Ev"
+        description: "Perili evden kaçış"
+        default_save_name: "Perili Ev"
         levels:
             1:
                 story_text: |
-                    In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
-                    If you pick the right door you'll survive, but {if} not a terrible monster might...
+                    Bu macerada, doğru kapıyı seçerek perili bir evden kaçmanız gereken bir oyun yapmak için çalışıyorsunuz.
+                    Eğer doğru kapıyı seçerseniz hayatta kalırsınız, ama seçmezseniz korkunç bir canavar sizi...
 
-                    In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
+                    1. seviyede, perili ev oyunumuza korkutucu bir hikaye uydurarak başlıyoruz ve oyuncuya perili evde hangi canavarı göreceklerini soruyoruz.
                 example_code: |
                     ```
-                    {print} How did I get here?
-                    {print} I remember my friend telling me to go into the old mansion...
-                    {print} and suddenly everything went black.
-                    {print} But how did I end up on the floor...?
-                    {print} My head hurts like Ive been hit by a baseball bat!
-                    {print} What's that sound?
-                    {print} Oh no! I feel like Im not alone in this house!
-                    {print} I need to get out of here!
-                    {print} There are 3 doors in front of me..
-                    {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} Buraya nasıl geldim?
+                    {print} Arkadaşımın bana eski malikaneye gitmemi söylediğini hatırlıyorum...
+                    {print} sonra her şey aniden karardı.
+                    {print} Ama nasıl oldu da kendimi yerde buldum?
+                    {print} Başım beyzbol sopasıyla vurulmuş gibi ağrıyor!
+                    {print} Bu ses de ne?
+                    {print} Oh hayır! Bu evde yalnız değilmişim gibi hissediyorum!
+                    {print} Buradan çıkmam lazım!
+                    {print} Önümde 3 kapı var...
+                    {ask} Hangi kapıyı seçmeliyim?
+                    {echo} Seçtiğim kapı
                     {print} ...?
                     ```
                 story_text_2: |
-                    Can you finish the scary story? Or make up your own haunted house story?
-                start_code: "{print} How did I get here?"
+                    ### Alıştırma
+                    Sarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.
+                    Şimdi en az 5 satır kod ekleyerek hikayeyi bitirin.
+                    Her kod satırına `{print}` komutuyla başlamayı unutmayın.
+                start_code: "{print} Buraya nasıl geldim?"
             2:
                 story_text: |
-                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
+                    Bu perili evde canavarlarınızı emojilerle seçebilirsiniz. Tabii ki yine kelimeleri de kullanabilirsiniz.
                 example_code: |
                     ```
-                    monster_1 {is} 👻
-                    monster_2 {is} 🤡
-                    monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    canavar_1 {is} 👻
+                    canavar_2 {is} 🤡
+                    canavar_3 {is} 👶
+                    {print} Perili eve giriyorsunuz.
+                    {print} Aniden bir canavar_1 görüyorsunuz
+                    {print} Diğer odaya koşuyorsunuz...
+                    {print} Ama canavar_2 sizi orada bekliyor!
+                    {print} Olamaz! Çabuk mutfağa gidin.
+                    {print} Ama siz içeri girerken canavar_3 size saldırıyor!
                     ```
-                start_code: "monster1 {is} _"
-                story_text_2: "### Exercise\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
-                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                start_code: "canavar_1 {is} _"
+                story_text_2: "### Alıştırma\nYukarıdaki örnekte canavarlar önceden belirlenmiştir. Yani kodunuzu her çalıştırdığınızda çıktı aynı olacaktır.\nPerili evi etkileşimli hale getirmek ve oyuncuların karşılaştıkları canavarları seçmelerini sağlamak için `{ask}` komutları ekleyebilir misiniz?\n"
+                example_code_2: "```\ncanavar_1 {is} _\ncanavar_2 {is} _\ncanavar_3 {is} _\n{print} Perili eve giriyorsunuz.\n{print} Aniden bir canavar_1 görüyorsunuz\n{print} Diğer odaya koşuyorsunuz...\n{print} Ama canavar_2 sizi orada bekliyor!\n{print} Olamaz! Çabuk mutfağa gidin.\n{print} Ama siz içeri girerken canavar_3 size saldırıyor!\n```\n"
             3:
                 story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    Önceki seviyelerde, perili ev oyununuza bir giriş yaptınız, ancak fark etmiş olabileceğiniz gibi hikaye her zaman korkunç bir sona sahip oluyordu.
+                    Bu seviyede oyunun sonucunu değiştirerek hikayenizi daha etkileşimli hale getirebilirsiniz; bazen yenileceksiniz, bazen kaçmayı başaracaksınız!
+                    Bırakın Hedy rastgele karar versin!
+
+                    ### Exercise
+                    Örnek kodları kopyalayın ve çalışmasını sağlamak için boşlukları doldurun!
+
+                    **Ekleme** Bu hikaye oldukça basit, belki daha heyecanlı bir hikaye ekleyerek biraz canlandırabilirsiniz.
+                    Ayrıca şu anda çok sınırlı sonuçlarınız var, kapıların arkasında ne olduğuna dair sadece 3 seçenek var. Belki listeye eklemek için daha fazla canavar düşünebilirsiniz!
                 start_code: "# kodunuzu buraya yazın"
-                example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
+                example_code: "```\n_ Perili evden kaçış!\n_ Önünüzde 3 kapı var...\n_ _ _ Hangi kapıyı seçiyorsunuz?\n_ Seçtiğiniz kapı ... choice\ncanavarlar _ bir zombi, bir vampir, KAÇAMAYACAĞINIZ BİR ŞEY\n_ Karşınıza çıkan...\n{sleep}\n_ _ _ _\n```\n"
             4:
                 story_text: |
-                    In this level you learn how to use quotation marks in your games.
-                    Can you make your Haunted House level 4 proof?
+                    Bu seviyede oyunlarınızda tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
+
+                    ### Alıştırma
+                    Perili Evinizi 4. seviyeye dayanıklı yapabilir misiniz?
+
+                    ### Alıştırma 2
+                    Önceki seviyeye geri dönün ve perili ev kodunuzu kopyalayın. Doğru noktalara tırnak işaretleri ekleyerek kodun bu seviyede çalışmasını sağlayın.
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
+                    _ Bu koda tırnak işaretleri ekleyin _
+                    {print} Perili evden kaçış!
+                    {print} Önünüzde 3 kapı var...
+                    seçim {is} {ask} Hangi kapıyı seçiyorsunuz?
+                    {print} Seçtiğiniz kapı ... choice
+                    canavarlar {is} bir zombi, bir vampir, KAÇAMAYACAĞINIZ BİR ŞEY
+                    {print} Karşınıza çıkan...
                     {sleep}
-                    {print} monsters {at} {random}
+                    {print} canavarlar {at} {random}
                      ```
 
                 start_code: "# kodunuzu buraya yazın"
             5:
                 story_text: |
-                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
-                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In this level you can only win the game by picking the same door Hedy picked randomly.
+                    Bu seviyeye kadar perili ev oyunu her zaman oyuncudan bir kapı seçmesini istedi, ancak fark etmiş olabileceğiniz gibi, gerçekten doğru cevap vermek zorunda değillerdi.
+                    Oyuncu tamamen rastgele bir cevap girerse, oyun yine de çalışır ve hatta oyuncu kazanabilirdi (bir kapı seçmemesine rağmen).
+                    Bu seviyede oyunu sadece Hedy'nin rastgele seçtiği kapıyı seçerek kazanabilirsiniz.
+
+                    ### Alıştırma
+                    Kodu tamamlamak için eksik 4 kelimeyi bulabilir misiniz?
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
+                    {print} 'Perili evden kaçış!'
+                    {print} 'Önünüzde 3 kapı var...'
+                    kapılar {is} 1, 2, 3
+                    canavarlar {is} kurt adam, mumya, vampir, zombi
+                    seçilen_kapı {is} {ask} 'Hangi kapıyı seçiyorsunuz?'
+                    {print} 'Seçtiğini kapı...' seçilen_kapı
                     {sleep}
-                    correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    doğru_kapı {is} kapılar {at} {random}
+                    _ _ _ _ {print} 'Harika! Kaçmayı başardınız!'
+                    {else} {print} 'Olamaz! Bir ' monsters {at} {random} ' sizi yedi!'
                     ```
 
                 start_code: "# kodunuzu buraya yazın"
@@ -2694,12 +2740,12 @@ adventures:
                 example_code: "```\nisim = {ask} 'adınız nedir?'\nyaş = {ask} 'yaşınız kaç?'\n{if} isim {is} 'Hedy' {and} yaş {is} 2\n    {print} \"Sen gerçek Hedy'sin!\"\n```\n"
     harry_potter:
         name: Harry Potter
-        description: Harry Potter adventures
+        description: Harry Potter maceraları
         default_save_name: Harry Potter
         levels:
             10:
-                story_text: "### Exercise\nWe can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.\n**Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.\n"
-                example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
+                story_text: "### Alıştırma\nHarry Potter temalı bir falcı da yapabiliriz. Boşlukları 9 satır yazdıracak şekilde doldurun.\n**Ekleme** Falcının temasını en sevdiğiniz kitap, film veya televizyon programı gibi başka bir şeye dönüştürün.\n"
+                example_code: "```\nevler = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nkonular = iksirler, karanlık sanatlara karşı savunma, tılsımlar, başkalaşım\nkorkular = Voldemort, örümcekler, OWL sınavında başarısız olmak\nisimler = Harry, Ron, Hermione\n_\n_ {print} isim ' şu okula gidiyor: ' evler {at} {random}\n_ {print} isim ' şu konuda çok iyi: ' konular {at} {random}\n_ {print} isim ' en çok şundan korkuyor: ' korkular {at} {random}\n```\n"
                 start_code: '# kodunuzu buraya yazın'
     print_command:
         name: "{print}"
