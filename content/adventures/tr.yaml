@@ -1098,7 +1098,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                              Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -2118,30 +2118,30 @@ adventures:
                     Kodu kontrol edin!
                 example_code: |
                     ```
-                    numbers = [1, 2, 3]
-                    i = numbers[{random}]
-                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
-                    monsters = ['zombie', 'witch', 'vampire']
-                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
-                    weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mansion'
-                    {print} 'Something is not right here'
-                    {print} 'You hear ' hint[i]
-                    {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
-                    your_weapon = {ask} 'What do you bring with you?'
-                    {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' monsters[i]
-                    needed_weapon = weapons[i]
-                    {if} your_weapon == needed_weapon
-                        {print} 'You use your ' your_weapon
-                        {print} good_fate[i]
-                        {print} 'YOU WIN!'
+                    sayılar = [1, 2, 3]
+                    i = sayılar[{random}]
+                    ipucu = ['hırlama', 'gıdaklayan bir kahkaha', 'çırpınan yarasa kanatları']
+                    canavarlar = ['zombi', 'cadı', 'vampir']
+                    kötü_son = ['Beynini yediler', 'Sonsuza kadar lanetlendin', 'Isırıldın']
+                    iyi_son = ["Bir et parçası fırlatırsın. Zombinin dikkati dağılır ve onu yemeye başlar', 'Perdeleri ateşe verirsin. Cadı yangın korkusuyla kaçar', 'Vampir sarımsaktan nefret eder ve kaçar']
+                    silahlar = ['et', 'çakmak', 'sarımsak']
+                    {print} 'Eski bir konağın önünde duruyorsunuz.'
+                    {print} 'Burada doğru olmayan bir şeyler var.'
+                    {print} 'Bir ' ipucu[i] ' sesi duyuyorsunuz... '
+                    {print} 'Onu aramaya gidiyorsunuz'
+                    {print} 'Mutfağa giriyorsunuz ve bir çakmak, çiğ bir et ve sarımsak görüyorsunuz.'
+                    senin_silahın = {ask} 'Yanına hangisini alıyorsun? (çakmak, et, sarımsak)'
+                    {print} 'Elinde ' your_weapon ' ile oturma odasına giriyorsun'
+                    {print} 'Orada karşına bir ' monsters[i] ' çıkıyor'
+                    gereken_silah = silahlar[i]
+                    {if} senin_silahın == gereken_silah
+                        {print} 'Elindeki ' senin_silahın ' ile saldırıyorsun'
+                        {print} iyi_son[i]
+                        {print} 'SEN KAZANDIN!'
                     {else}
-                        {print} 'You have chosen the wrong weapon...'
-                        {print} bad_fate[i]
-                        {print} 'GAME OVER'
+                        {print} 'Yanlış silahı seçmişsin....'
+                        {print} kötü_son[i]
+                        {print} 'OYUN BİTTİ'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     piggybank:
