@@ -419,15 +419,16 @@ class Database:
         found_programs = []
         pagination_token = None
         while len(found_programs) < limit:
-            page = PROGRAMS.get_many({ 'public': 1 }, reverse=True, limit=id_batch_size, pagination_token=pagination_token)
-            ids = [{ 'id': r['id'] } for r in page]
+            page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=id_batch_size,
+                                     pagination_token=pagination_token)
+            ids = [{'id': r['id']} for r in page]
 
             # Do this in smaller chunks so we can avoid batch getting records we might
             # not need anymore
             for id_page in batched(ids, fetch_batch_size):
                 programs = PROGRAMS.batch_get(id_page)
                 found_programs.extend([p for p in programs
-                            if all(filters[k] == p.get(k) for k in filters.keys())])
+                                       if all(filters[k] == p.get(k) for k in filters.keys())])
                 if len(found_programs) >= limit:
                     break
 
@@ -821,6 +822,7 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
+
 
 def batched(iterable, n):
     "Batch data into tuples of length n. The last batch may be shorter."
