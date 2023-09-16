@@ -252,7 +252,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
+    theGlobalEditor.markers.clearIncorrectLines();
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -302,23 +302,18 @@ function attachMainEditorEvents(editor: HedyEditor) {
     }
   });
 
-  // Removed until we can fix the skip lines feature
   // We show the error message when clicking on the skipped code
-  // this._editor.on("click", function(e) {
-  //   let position = e.getDocumentPosition()
-  //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+  $(document).on("click", '[class*=ace_incorrect_hedy_code]', function(e) {
+    let mapIndex = e.target.className;
+    mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+    mapIndex = mapIndex.replace('ace_start ace_br15', '');
+    let mapError = theGlobalSourcemap[Number(mapIndex)];
 
-  //   let element = document.elementFromPoint(position.pageX, position.pageY)
-  //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-  //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-  //     let mapError = theGlobalSourcemap[mapIndex];
-
-  //     $('#okbox').hide ();
-  //     $('#warningbox').hide();
-  //     $('#errorbox').hide();
-  //     error.show(ClientMessages['Transpile_error'], mapError.error);
-  //   }
-  // });
+    $('#okbox').hide ();
+    $('#warningbox').hide();
+    $('#errorbox').hide();
+    error.show(ClientMessages['Transpile_error'], mapError.error);
+  });
 }
 
 export interface InitializeViewProgramPageOptions {

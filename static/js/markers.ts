@@ -60,18 +60,18 @@ export class Markers {
   /**
    * Remove all incorrect lines markers
    */
-  // public clearIncorrectLines() {
-  //   const markers = this.editor.session.getMarkers(true);
+  public clearIncorrectLines() {
+    const markers = this.editor.session.getMarkers(true);
 
-  //   if (markers) {
-  //     for (const index in markers) {
-  //       let marker = markers[index];
-  //       if (marker.clazz.includes('ace_incorrect_hedy_code')){
-  //         this.removeMarker(Number(index));
-  //       }
-  //     }
-  //   }
-  // }
+    if (markers) {
+      for (const index in markers) {
+        let marker = markers[index];
+        if (marker.clazz.includes('ace_incorrect_hedy_code')){
+          this.removeMarker(Number(index));
+        }
+      }
+    }
+  }
 
   /**
    * Set the current line in the debugger
