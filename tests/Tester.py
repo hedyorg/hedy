@@ -79,6 +79,8 @@ class HedyTester(unittest.TestCase):
         cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
         cls.snippet_hashes_original_len = len(cls.snippet_hashes)
 
+        os.environ["ENABLE_SKIP_FAULTY"] = 'True'  # Always test with skipping faulty enabled
+
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

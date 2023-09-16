@@ -5,7 +5,7 @@ from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, getenv
 
 import warnings
 import hedy
@@ -2773,7 +2773,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
         source_map.set_skip_faulty(False)
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
     except Exception as original_error:
-        if skip_faulty:
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
                 raise original_error
             try:
