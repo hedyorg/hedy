@@ -200,7 +200,7 @@ class Database:
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, limit=limit, pagination_token=pagination_token)
+                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
         for program in programs:
             if level and program.get('level') != int(level):
                 continue
@@ -223,7 +223,7 @@ class Database:
     def public_programs_for_user(self, username, limit=None, pagination_token=None):
         # Only return programs that are public but not submitted
         programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, limit=limit, pagination_token=pagination_token)
+                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
         ret = []
         for program in programs:
             if program.get("public") != 1 or program.get("submitted", False):
