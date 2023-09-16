@@ -1,10 +1,12 @@
 import functools
 import operator
-from datetime import date, timedelta
+import itertools
+from datetime import date
 
 from utils import timems, times
 
 from . import dynamo
+from . import querylog
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
@@ -395,58 +397,53 @@ class Database:
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
+    @querylog.timed_as("get_public_programs")
     def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
         """Return the most recent N public programs, optionally filtered by attributes.
 
-        Walk down three key-only indexes at the same time until we have accumulated enough programs.
+        The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
+        the filters.
         """
-        filters = []
+        filters = {}
         if level_filter:
-            filters.append(PROGRAMS.get_all({'level': int(level_filter)}, reverse=True))
+            filters['level'] = int(level_filter)
         if language_filter:
-            filters.append(PROGRAMS.get_all({'lang': language_filter}, reverse=True))
+            filters['lang'] = language_filter
         if adventure_filter:
-            filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
+            filters['adventure_name'] = adventure_filter
+        filters['public'] = 1
 
-        programs = dynamo.GetManyIterator(PROGRAMS, {'public': 1}, reverse=True)
-
-        # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
-        # the programs match the filter. This works because they all have a 'matching' date field
-        # we can use to sync up the streams.
-        #
-        # Use a cancellation token to timeout if this takes too long. For example, if there are 0
-        # programs to find this might take a long while to iterate through everything before it
-        # concludes we didn't want any of it.
-        #
-        # Intersecting the filters beforehand and then fetching whatever matches
-        # is more efficient if we are likely to match very little.
-        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
+        id_batch_size = 200
+        fetch_batch_size = 50
 
         found_programs = []
-        for program in programs:
-            if len(found_programs) >= limit or timeout.is_cancelled():
+        pagination_token = None
+        while len(found_programs) < limit:
+            page = PROGRAMS.get_many({ 'public': 1 }, reverse=True, limit=id_batch_size, pagination_token=pagination_token)
+            ids = [{ 'id': r['id'] } for r in page]
+
+            # Do this in smaller chunks so we can avoid batch getting records we might
+            # not need anymore
+            for id_page in batched(ids, fetch_batch_size):
+                programs = PROGRAMS.batch_get(id_page)
+                found_programs.extend([p for p in programs
+                            if all(filters[k] == p.get(k) for k in filters.keys())])
+                if len(found_programs) >= limit:
+                    break
+
+            pagination_token = page.next_page_token
+            if pagination_token is None:
                 break
 
-            # Advance every filter to match the date that the current program has
-            # FIXME: This is not guaranteed to catch 2 programs that have the same
-            # timestamp, but for the purposes of showing a sampling of public programs
-            # I don't really care.
-            for flt in filters:
-                while flt and flt.current['date'] > program['date']:
-                    flt.advance()
-
-            # Include the current program in the result set if it is now the front item in each filter.
-            if all((flt and flt.current['id'] == program['id']) for flt in filters):
-                found_programs.append(program)
-
+        del found_programs[limit:]  # Cap off in case we found too much
         return found_programs
 
     def add_public_profile_information(self, programs):
-        """Add the information to a list of programs on whether the author has a public profile or not.
+        """For each program in a list, note whether the author has a public profile or not.
 
         For each program, add 'public_user': True or 'public_user': None.
 
-        Modifies the list in-place.
+        Modifies the records in the list in-place.
         """
         queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs}
         profiles = PUBLIC_PROFILES.batch_get(queries)
@@ -824,3 +821,12 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
+
+def batched(iterable, n):
+    "Batch data into tuples of length n. The last batch may be shorter."
+    # batched('ABCDEFG', 3) --> ABC DEF G
+    if n < 1:
+        raise ValueError('n must be at least one')
+    it = iter(iterable)
+    while batch := tuple(itertools.islice(it, n)):
+        yield batch

@@ -359,13 +359,13 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'))), expected)
 
         # Query paginated, using the Python iterator protocol
-        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), limit=3)), expected)
+        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3)), expected)
 
         # Reuse the client-side pager every time, using the Python iterator protocol
         ret = []
         token = None
         while True:
-            many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+            many = dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3, pagination_token=token)
             ret.append(next(iter(many)))
             token = many.next_page_token
             if not token:
@@ -374,7 +374,7 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
 
         # Also test using the eof/current/advance protocol
         ret = []
-        many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+        many = dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3, pagination_token=token)
         while many:
             ret.append(many.current)
             many.advance()

@@ -258,15 +258,15 @@ class Table:
             )
         else:
             assert False
-        querylog.log_counter("db_get_many_items", len(items))
+        querylog.log_counter(f"db_get_many_items:{self.table_name}", len(items))
         return ResultPage(items, encode_page_token(next_page_token))
 
-    def get_all(self, key, reverse=False):
+    def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
 
         Iterating over all elements can take a long time, make sure you have a timeout in the loop
         somewhere!"""
-        return GetManyIterator(self, key, reverse=reverse)
+        return GetManyIterator(self, key, reverse=reverse, batch_size=batch_size)
 
     @querylog.timed_as("db_create")
     def create(self, data):
@@ -1024,7 +1024,7 @@ class ExponentialBackoff:
 
     @querylog.timed_as('db:sleep')
     def sleep(self):
-        time.sleep(random.randint(0, self.time))
+        time.sleep(random.random() * self.time)
         self.time *= 2
 
     def sleep_when(self, condition):
@@ -1147,17 +1147,17 @@ class GetManyIterator(QueryIterator):
     Wrapper around query_many that automatically paginates.
     """
 
-    def __init__(self, table, key, reverse=False, limit=None, pagination_token=None):
+    def __init__(self, table, key, reverse=False, batch_size=None, pagination_token=None):
         self.table = table
         self.key = key
         self.reverse = reverse
-        self.limit = limit
+        self.batch_size = batch_size
         super().__init__(pagination_token)
 
     def _do_fetch(self):
         return self.table.get_many(self.key,
                                    reverse=self.reverse,
-                                   limit=self.limit,
+                                   limit=self.batch_size,
                                    pagination_token=self.pagination_token)
 
 
