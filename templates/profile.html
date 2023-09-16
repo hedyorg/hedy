@@ -30,9 +30,6 @@
        <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
             <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
-            <div class="flex flex-row my-2 justify-center items-center">
-                <button class="green-btn {% if not public_settings %}hidden{% endif %}" onclick="window.open('/user/{{ username}}')" id="public_profile_redirect">{{_('visit_own_public_profile')}}</button>
-            </div>
              <form id="public_profile" class="flex flex-col gap-4">
                  <div class="flex flex-col">
                      <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('profile_picture')}}</h3>

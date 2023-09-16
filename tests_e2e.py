@@ -374,9 +374,9 @@ class TestPages(AuthHelper):
 
             for page in pages:
                 if page == "/hedy":
+                    self.get_data(page)  # this loads level 1
                     for i in range(2, HEDY_MAX_LEVEL + 1):
                         self.get_data(page + "/" + str(i))
-                self.get_data(page)
 
 
 class TestSessionVariables(AuthHelper):
