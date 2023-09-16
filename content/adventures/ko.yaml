@@ -2,7 +2,7 @@ adventures:
     tic:
         levels:
             17:
-                story_text: "이전 단계에서 틱택토 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 수준에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\n헤디가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
+                story_text: "이전 단계에서 틱택토 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 수준에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\nHedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             13:
@@ -24,7 +24,7 @@ adventures:
         levels:
             3:
                 start_code: '{print} hello world!'
-                story_text: "이전 수준에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.\n하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.\n그리고 당신은 헤디가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!\n다음 탭을 잠깐 보세요!\n"
+                story_text: "이전 수준에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.\n하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.\n그리고 당신은 Hedy가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!\n다음 탭을 잠깐 보세요!\n"
             4:
                 start_code: "{print} 'Hello world'"
                 story_text: "이전 수준에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.\n다음과 같은 코드를 실행하려고 했을 수도 있습니다:\n\n물론 인쇄하고 싶었겠지\n\n`My name is Sophie`\n\nbut Hedy prints\n\n`My Sophie is Sophie`.\n\n이 수준에서는 따옴표를 사용하여 이 문제를 해결합니다.\n"
@@ -67,7 +67,7 @@ adventures:
                 example_code: "```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             11:
                 start_code: "{print} 'Lets go to the next tab!'"
-                story_text: "당신은 레벨 10에 도달했고, 잘하고 있어요! 상위 레벨에서는 헤디가 점점 더 당신에게 파이썬 프로그래밍 언어를 가르치는데 집중하고 있습니다.\n파이썬에는 `{repeat}` 명령어가 없지만 {repeat}처럼 작동하는 명령어가 있습니다. 파이썬 언어로 `{repeat}`을(를) 어떻게 말해야 하는지 궁금한가요? 빨리 찾아보세요!\n"
+                story_text: "당신은 레벨 10에 도달했고, 잘하고 있어요! 상위 레벨에서는 Hedy가 점점 더 당신에게 파이썬 프로그래밍 언어를 가르치는데 집중하고 있습니다.\n파이썬에는 `{repeat}` 명령어가 없지만 {repeat}처럼 작동하는 명령어가 있습니다. 파이썬 언어로 `{repeat}`을(를) 어떻게 말해야 하는지 궁금한가요? 빨리 찾아보세요!\n"
             12:
                 start_code: "{print} 'Lets go to the next tab!'"
                 story_text: "아마 독자 분은 레스토랑 모험에서 십진법 숫자들을 사용해 보셨을 겁니다. 만약 사용했다면, 독자 분은 Hedy가 십진법 숫자들을 아직 이해하지 못하고 항상 반올림했다는 것을 알아차렸을 거예요.\n이 레벨부터는 십진수를 사용할 수 있습니다.\n"
@@ -89,7 +89,7 @@ adventures:
                 story_text: "Hedy의 마지막 레벨에 거의 다 도달했습니다. 잘했어요! 이 레벨에서는 `{print}`을(를) 사용하는 실제 파이썬 방법을 배울 수 있습니다.\n"
             18:
                 start_code: "{print} ('Great job!!!')"
-                story_text: "축하합니다! 헤디의 마지막 레벨에 도달했습니다! 여기서 만든 코드를 레플릿이나 파이참과 같은 실제 파이썬 환경에 복사할 수 있고, 거기서 계속 배울 수 있습니다!\n참고로 파이썬은 영어 명령어만 읽을 수 있기 때문에 다른 언어를 사용해 왔다면 지금은 영어로 전환해야 한다.\n"
+                story_text: "축하합니다! Hedy의 마지막 레벨에 도달했습니다! 여기서 만든 코드를 레플릿이나 파이참과 같은 실제 파이썬 환경에 복사할 수 있고, 거기서 계속 배울 수 있습니다!\n참고로 파이썬은 영어 명령어만 읽을 수 있기 때문에 다른 언어를 사용해 왔다면 지금은 영어로 전환해야 한다.\n"
         name: 소개
         description: 레벨 설명
         default_save_name: 인트로
@@ -439,7 +439,7 @@ adventures:
         levels:
             1:
                 start_code: '# 코드를 여기에 입력하세요'
-                story_text: "당신은 카니발에 가보고 점쟁이에게 당신의 미래를 점쳐본적이 있는가? 아니면 마법의 8구를 가지고 놀아본적이 있는가?\n그러면 여러분은 아마 그들이 여러분의 미래를 정말로 예측하지 못한다는 것을 알 거예요, 하지만 노는 것은 여전히 재미있어요!\n\n다음 단계에서 여러분은 여러분만의 점치는 기계를 만드는 방법을 배울 수 있습니다!\n레벨 1에서는 헤디가 자신을 점쟁이라고 소개하고 선수들의 대답을 `{echo}`하게 하면 쉽게 시작할 수 있다.\n이런 식으로:\n"
+                story_text: "당신은 카니발에 가보고 점쟁이에게 당신의 미래를 점쳐본적이 있는가? 아니면 마법의 8구를 가지고 놀아본적이 있는가?\n그러면 여러분은 아마 그들이 여러분의 미래를 정말로 예측하지 못한다는 것을 알 거예요, 하지만 노는 것은 여전히 재미있어요!\n\n다음 단계에서 여러분은 여러분만의 점치는 기계를 만드는 방법을 배울 수 있습니다!\n레벨 1에서는 Hedy가 자신을 점쟁이라고 소개하고 선수들의 대답을 `{echo}`하게 하면 쉽게 시작할 수 있다.\n이런 식으로:\n"
                 example_code: "```\n_ Hello, I'm Hedy the fortune teller!\n_ Who are you?\n_ Let me take a look in my crystal ball\n_ I see... I see...\n_ Your name is\n```\n"
                 story_text_2: "### 연습문제\nCopy the example code into your input screen and fill in the blanks to make the code work.\n**Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.\n"
             3:
@@ -527,7 +527,7 @@ adventures:
                 story_text: "In this adventure you learn how to make a digital piggy bank.\n\n### 연습문제\nFinish the code to calculate how much money you have and how long you need to save up to buy what you want!\n**Extra** Maybe you have already saved some money? Deduct that from the amount you will have to save up.\n"
                 example_code: "```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n```\n"
             14:
-                story_text: "이 정도면 헤디에게 돈을 충분히 모았는지 말해줄 수 있을 거야!\n"
+                story_text: "이 정도면Hedy에게 돈을 충분히 모았는지 말해줄 수 있을 거야!\n"
                 example_code: "```\nmoney = {ask} 'How much money have you saved?'\nwish = {ask} 'How much money do you need?'\nallowance = {ask} 'How much pocket money do you get each week?'\nto_save = wish - money\nweeks = to_save / allowance\n{if} wish > money\n    {print} 'You need to save up some more!'\n    {print} 'Youll need ' weeks ' more weeks.'\n{else}\n    {print} 'Great! You have enough'\n    {print} 'Lets go shopping!'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
         name: Piggy Bank
@@ -693,7 +693,7 @@ adventures:
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
-                story_text: "진짜 파이썬 코드에 도착했어! 이제부터는 `{print}`와 `{range}`가 있는 괄호를 써야 한다는 얘기다.\n영어 명령어만 사용하면 파이썬 환경에서 이 레벨의 헤디 코드를 사용할 수 있다는 의미도 있다. 지금까지 사용하지 않았다면 명령어 메뉴의 토글을 전환하여 사용할 수 있다."
+                story_text: "진짜 파이썬 코드에 도착했어! 이제부터는 `{print}`와 `{range}`가 있는 괄호를 써야 한다는 얘기다.\n영어 명령어만 사용하면 파이썬 환경에서 이 레벨의 Hedy 코드를 사용할 수 있다는 의미도 있다. 지금까지 사용하지 않았다면 명령어 메뉴의 토글을 전환하여 사용할 수 있다."
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: 두 개 이상의 항목을 인쇄하려면 쉼표로 구분해야 합니다.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
@@ -782,7 +782,7 @@ adventures:
         default_save_name: if_command
         levels:
             5:
-                story_text: "## If... else....\n레벨 5에는 새로운 것인 {if}가 있다! `{if}`을(를) 사용하면 두 개의 다른 옵션 중에서 선택할 수 있다.\n이 코드는 이름으로 헤디를 입력하면 인쇄가 잘 되고, 다른 이름으로 입력하면 야유.\n`{ask}`와 `{print}`는 여전히 레벨 4와 같이 작동한다.\n"
+                story_text: "## If... else....\n레벨 5에는 새로운 것인 {if}가 있다! `{if}`을(를) 사용하면 두 개의 다른 옵션 중에서 선택할 수 있다.\n이 코드는 이름으로 Hedy를 입력하면 인쇄가 잘 되고, 다른 이름으로 입력하면 야유.\n`{ask}`와 `{print}`는 여전히 레벨 4와 같이 작동한다.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_2: "`{if}`인 코드가 정말 길어져서 행에 잘 맞지 않을 때도 있다. <br> 코드를 두 줄에 걸쳐 나눌 수도 있는데, 두 번째 줄은 다음과 같이 `{else}`에서 시작한다:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
@@ -819,7 +819,7 @@ adventures:
                 story_text_4: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
             4:
                 story_text: "## 'Quotation marks'\n레벨 4의 `{ask}`와 `{print}`가 변경되었습니다.\n따옴표 사이에 인쇄할 텍스트를 넣어야 합니다.\n이제 원하는 단어를 모두 인쇄할 수 있기 때문에 유용합니다. 또한 `{is}`과(와) 함께 저장할 때 사용한 단어도 있습니다.\n대부분의 프로그래밍 언어도 인쇄할 때 따옴표를 사용하기 때문에 실제 프로그래밍에 한 걸음 더 다가가고 있습니다!\n"
-                story_text_2: "## Contractions\n중요해요! 이제 따옴표를 사용하게 되었으니, 헤디는 아포스트로피를 I'm이나 What's처럼 수축할 때 혼동할 거예요.\n아포스트로피를 제거하고 철자를 I 또는 What is로 변경해야 합니다.\n아포스트로피를 사용하는 잘못된 방법을 알아보려면 예제 코드를 확인하십시오.\n"
+                story_text_2: "## Contractions\n중요해요! 이제 따옴표를 사용하게 되었으니, Hedy는 따옴표'를 I'm이나 What's처럼 수축할 때 혼동할 거예요.\n아포스트로피를 제거하고 철자를 I 또는 What is로 변경해야 합니다.\n아포스트로피를 사용하는 잘못된 방법을 알아보려면 예제 코드를 확인하십시오.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 example_code_2: "```\n_ This is the wrong way of using apostrophes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
                 start_code: "{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer"
