@@ -2694,20 +2694,11 @@ def get_keywords_for_language(language):
     return keywords
 
 
-PARSER_CACHE = {}
-
-
 def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
-    existing = PARSER_CACHE.get(key)
-    if existing and not utils.is_debug_mode():
-        return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
-    PARSER_CACHE[key] = ret
-    return ret
+    return Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
