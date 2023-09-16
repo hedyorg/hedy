@@ -322,15 +322,15 @@ sections:
         -   title: "학생들은 같은 변수에 대해 두 개의 다른 이름을 사용할 수 있습니다"
             example:
                 error_text: |
-                    이 예제에서 학생은 동일한 변수에 대해 'horse'와 'name'을 사용했습니다.
+                    이 예제에서 학생은 동일한 변수에 대해 '강아지'와 '이름'을 사용했습니다.
                 error_code: |
-                    horse is ask What is your horse called?
-                    print Your horse is called name
+                    강아지 is ask 너의 강아지는 뭐라고 부르니?
+                    print 너의 강아지 이름
                 solution_text: |
                     코드 변수의 이름이 같은지 항상 확인해야 한다. 약간의 차이는 발견하기 어려울 수 있지만(예: 복수) 코드를 방해한다.
                 solution_code: |
-                    name is ask What is your horse called?
-                    print Your horse is called name
+                    이름 is ask 너의 강아지는 뭐라고 부르니?
+                    print 너의 강아지 이름
     -   level: '3'
         sections:
         -   title: "학생들은 전체 목록을 print하려고 한다"
@@ -349,20 +349,20 @@ sections:
 
                     식료품점 {is} 사과, 우유, 초콜렛
                     {print} 식료품점 {at} {random}
-        -   title: "학생들은 변수 또는 목록의 이름을 일반 텍스트로 사용합니다"
+        -   title: "학생들은 변수 또는 목록의 이름을 일반 단어로 사용합니다"
             example:
                 error_text: |
-                    이 문제는 레벨 2에서도 발생했을 것이다. 이제 목록에서도 발생할 수 있다.
+                    이 문제는 레벨 2에서도 발생했을 것입니다. 이제 목록에서도 발생할 수 있어요.
                 error_code: |
                     이름 {is} Hedy
-                    {print} 나의 이름은 name 이다
+                    {print} 나의 이름 은 이름 이다
 
                     또는
 
                     동물 {is} 코뿔소, 꿀벌, 백조
-                    {print} The best 동물 is... 동물 {at} {random}
+                    {print} 최고의 동물은... 동물 {at} {random}
                 solution_text: |
-                    print할 때 일반 텍스트의 변수 이름이나 목록을 사용하지 마십시오. 레벨 4에서는 따옴표'로 이 문제를 해결합니다.
+                    print할 때 일반 단어의 변수 이름이나 목록을 사용하지 마십시오. 레벨 4에서는 따옴표'로 이 문제를 해결합니다.
                 solution_code: |
                     이름 {is} Hedy
                     {print} 안녕 나는 이름 이야
@@ -371,22 +371,22 @@ sections:
 
                     동물들 {is} 코뿔소, 꿀벌, 백조
                     {print} 최고의 동물은... 동물들 {at} {random}
-        -   title: "학생들은 {at} {random}에서 {at}을 잊어버린다"
+        -   title: "학생들은 `{at}` `{random}`에서 `{at}`을 잊어버린다"
             example:
                 error_text: |
-                    예를 들면..
+                    예를 들면
                 error_code: |
                     새들 is 참새, 갈매기, 벌새
-                    print 새들 랜덤
+                    print 새들 random
                 solution_text: |
-                    이 문제는 단어를 추가하면 해결된다.
+                    이 문제는 단어를 추가하면 해결됩니다.
                 solution_code: |
                     새들 {is} 참새, 갈매기, 벌새
                     {print} 새들 {at} {random}
         -   title: "학생들은 `{at}` `{random}` 명령어를 사용할 때는 `{print}` 명령어를 사용하는 것을 잊어버린다"
             example:
                 error_text: |
-                    줄의 맨 앞에 `{at}` '{random}'을 붙이기도 한다.
+                    맨 앞줄에 `{at}` '{random}'을 붙이기도 합니다.
                 error_code: |
                     과일 {is} 사과, 체리, 바나나
                     과일 {at} {random}
