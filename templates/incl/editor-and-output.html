@@ -184,7 +184,7 @@
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
         {% else %}
-            <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
+            <img src="{{static('/images/Hedylightbulb_1.svg')}}" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
         {% endif %}
         {% if editor_readonly and is_admin %}
                 <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
