@@ -669,407 +669,400 @@ adventures:
                     Boşluklara doğru komutu ekleyin ve kodu doğru şekilde girintileyin.
                 example_code: |
                     ```
-                    verse = 99
-                    {repeat} 99 {times}
-                        {print} verse ' bottles of beer on the wall'
-                        {print} verse ' bottles of beer'
-                        {print} 'Take one down, pass it around'
-                        verse = verse - 1
-                        {print} verse ' bottles of beer on the wall'
+                    mısra = 99
+                    _ 99 {times}
+                    {print} mısra ' bira şişesi duvarda dizili'
+                    {print} mısra ' bira şişesi'
+                    {print} 'Bir tane indirin, kenara koyun.'
+                    mısra = mısra - 1
+                    {print} mısra ' bira şişesi duvarda dizili'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             10:
                 story_text: |
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    `{for}` ile tüm yavru köpekbalığı şarkısını (ailedeki diğer tüm köpekbalıkları da dahil olmak üzere) sadece 6 satırda yazdırabilirsiniz!
+
+                    ### Alıştırma 1
+                    Bir `{for}` komutu kullanarak yavru köpekbalığı kodunu daha da kısaltabilir misiniz? Örnek kodu tamamlayın.
                 example_code: |
                     ```
-                    monkeys = 5, 4, 3, 2
-                    {for} monkey {in} monkeys
-                        {print} monkey ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    ```
-
-                    ```
-                    sharks = baby, mommy, daddy, grandma, grandpa
-                    {for} shark {in} sharks
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark
-                    ```
-                    ```
-                    animals = pig, dog, cow
-                    {for} animal {in} animals
-                        {if} animal {is} pig
-                            sound = oink
-                        {if} animal {is} dog
-                            sound = woof
-                        {if} animal {is} cow
-                            sound = moo
-                        {print} 'Old McDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                    aile = bebek, anne, baba, büyükanne, büyükbaba
+                    _ _ _ _ 
+                      {print} _
                     ```
                 start_code: "# kodunuzu buraya yazın"
-                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
-                story_text_2: "### Exercise 2\nPrint the song Five little moneys jumping on the bed. Look up the text if you don't remember.\n\n**(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.\n"
+                example_code_2: "```\nmaymunlar = 5, 4, 3, 2, 1\n```\n"
+                story_text_2: "### Alıştırma 2\nBeş küçük maymun yatakta zıplıyor şarkısını yazdırın. Eğer hatırlamıyorsanız metne bakın.\n\n**Ekleme** Ali babanın bir çiftliği var şarkısını yazdırın ve `{if}` kullanarak tüm hayvanların farklı bir ses çıkardığından emin olun.\n"
             11:
                 story_text: |
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
+                    Bu seviyede `{for}` ile `{range}` kullanarak, 5 küçük maymun gibi, saymayı kullanan şarkılar yapabilirsiniz.
+
+                    ### Alıştırma 1
+                    Boşlukları doldurun ve kodu çalışır hale getirin! Şarkı metnini hatırlamıyorsanız, kendiniz arayın.
+
+                    ### Alıştırma 2
+                    Şarkının son satırı diğerlerinden farklıdır. Bu satırı `{for}` içine yazdırın ve doğru çalışması için bir `{if}` kullanın.
                 example_code: |
                     ```
-                    {for} i {in} {range} 5 {to} 1
-                        {print} i ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {if} i {is} 1
-                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
-                        {else}
-                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    _ maymunlar _ _ 5 _ 1
+                        {print} maymunlar ' küçük maymun yatağın üzerinde zıplıyor'
+                        _
                     ```
                 start_code: "# kodunuzu buraya yazın"
             12:
                 story_text: |
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                    Bu şarkıda 'eğer mutluysan ve bunu biliyorsan, ellerini çırp' cümlesini programlamayı daha da kolaylaştırabiliriz. Çünkü tüm eylemleri bir değişkene koyabiliriz, bir göz atın:
+
+                    ### Alıştırma
+                    Şarkının doğru çalınması için her satıra doğru miktarda girinti ekleyebilir misiniz?
+                    İpucu: Tüm satırların girintiye ihtiyacı yoktur
                 example_code: |
                     ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it and you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
+                    _ eylemler = 'ellerini çırp', 'ayaklarını yere vur', 'Yaşasın diye bağırın!'
+                    _ {for} eylem {in} eylemler
+                    _ {for} i {in} {range} 1 {to} 2
+                    _ {print} 'eğer mutluysan ve bunu biliyorsan'
+                    _ {print} eylem
+                    _ {print} 'eğer mutluysan ve bunu biliyorsan ve gerçekten göstermek istiyorsan'
+                    _ {print} 'eğer mutluysan ve bunu biliyorsan'
+                    _ {print} eylem
                     ```
                 start_code: "# kodunuzu buraya yazın"
             16:
                 story_text: |
-                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
-                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+                    Bu seviyede Ali Babanın çiftliği gibi bir şarkıyı daha da hızlı bir şekilde programlayabilirsiniz. Sadece listede aynı yere koyarak doğru hayvanı doğru sese bağlayabilirsiniz.
+                    Sarhoş Denizci de bu seviyede hızlı bir şekilde yapılır. Tüm şarkı için sadece 8 satıra ihtiyacınız var, bir göz atın!
                 example_code: |
                     ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
+                    hayvanlar = ['eşek', 'köpek', 'inek']
+                    sesler = ['ai', 'hav', 'möö']
                     {for} i {in} {range} 1 {to} 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        {print} 'Old McDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                        hayvan = hayvanlar[i]
+                        ses = sesler[i]
+                        {print} 'Ali Babanın bir çiftliği var'
+                        {print} 'çiftliğinde ' animal ' var'
+                        {print} ses ses ' diye bağırır'
+                        {print} 'çiftliğinde Ali Babanın'
                     ```
 
                     ```
-                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
-                    {for} line {in} lines
+                    satırlar = ['sarhoş bir denizciye ne yapmalı', 'paslı usturayla karnını traş etmeli', 'ayılana kadar uzun kayığa koymalı']
+                    {for} satır {in} satırlar
                         {for} i {in} {range} 1 {to} 3
-                            {print} line
-                        {print} 'early in the morning'
+                            {print} satır
+                        {print} 'sabah erkenden'
                         {for} i {in} {range} 1 {to} 3
-                            {print} 'way hay and up she rises'
-                        {print} 'early in the morning'
+                            {print} 'hey heyy ve işte doğuyor'
+                        {print} 'sabah erkenden'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             18:
-                story_text: "In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.\n\n### Exercise 1\nThe Drunken sailor song is given as sample code, but not yet working.\nCan you make sure everything works again? To help you, we've put _ in the places of _some_ errors.\n\n### Exercise 2\nNow also look up your Old MacDonald song from level 16, and correct it.\n"
-                example_code: "```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ line _\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "Seviye 16'da listeleri kullanarak şarkılar yaptık. Ancak bu programlar bu seviyede artık düzgün çalışmazlar. Seviye 17'deki iki nokta üst üste ve seviye 18'deki parantezlerin hala eklenmesi gerekiyor.\n\n### Alıştırma 1\nSarhoş denizci şarkısı örnek kod olarak verilmiştir, ancak henüz çalışmamaktadır.\nHer şeyin tekrar çalıştığından emin olabilir misiniz? Size yardımcı olmak için _bazı_ hataların yerlerine _ koyduk.\n\n### Alıştırma 2\nŞimdi de 16. seviyedeki Ali Baba şarkınıza bakın ve düzeltin.\n"
+                example_code: "```\nsatırlar = ['sarhoş bir denizciye ne yapmalı', 'paslı usturayla karnını traş etmeli', 'ayılana kadar uzun kayığa koymalı']\n{for} satır {in} satırlaar _\n    {for} i {in} {range} 1 {to} 3 _\n        {print} _ satır _\n    {print} 'sabah erkenden'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'hey heyy ve işte doğuyor'\n    {print} 'sabah erkenden'\n```\n"
                 start_code: '# kodunuzu buraya yazın'
     turtle:
-        name: "Turtle"
-        description: "Make your own drawing"
-        default_save_name: "Turtle"
+        name: "Kaplumbağa"
+        description: "Kendi çiziminizi yapın"
+        default_save_name: "Kaplumbağa"
         levels:
             1:
-                story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### Exercise\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "Hedy'yi çizim yapmak için de kullanabilirsiniz. Dönüşleri ve çizgileri birleştirerek bir kare veya merdiven yapabilirsiniz!\n\n`{forward}` kullanarak ileriye doğru bir çizgi çizersiniz. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` saat yönünde çeyrek tur döner, `{turn} {left}` saat yönünün tersine döner.\n\nGeriye doğru gitmek istiyorsanız, `{forward}` komutunu eksili bir sayı ile kullanırsınız. Yani örneğin `{forward} -100`\n\n### Alıştırma\nBu küçük bir merdivenin başlangıcı. Bunu beş basamaklı yapabilir misin?\n"
                 example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
-                    In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
+                    Bu seviyede, kaplumbağayı etkileşimli hale getirmek için değişkenler kullanabilirsiniz. Örneğin oyuncuya kaplumbağanın kaç adım atması gerektiğini sorabilirsiniz.
                 example_code: |
                     ```
-                    answer {is} {ask} How many steps should the turtle make?
-                    {forward} answer
+                    cevap {is} {ask} Kaplumbağa kaç adım atsın?
+                    {forward} cevap
                     ```
                 story_text_2: |
-                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
-                    In level 2 he can point his nose in all directions.
+                    Ayrıca, 1. seviyede kaplumbağa sadece sola veya sağa dönebiliyordu. Bu biraz sıkıcı!
+                    2. seviyede burnunu her yöne çevirebilir.
 
-                    Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
-                    Can you make a figure with this code? Maybe a triangle or a circle?
+                    Bir çeyrek tur döndürmek için 90 kullanın. Buna derece diyoruz. Tam dönüş 360 derecedir.
+
+                    ### Alıştırma
+                    Bu kodla bir şekil oluşturabilir misiniz? Belki bir üçgen ya da daire?
                 example_code_2: |
                     ```
-                    {print} Drawing figures
-                    angle {is} 90
-                    {turn} angle
+                    {print} Şekiller çizdirmek
+                    açı {is} 90
+                    {turn} açı
                     {forward} 25
-                    {turn} angle
+                    {turn} açı
                     {forward} 25
                     ```
                 start_code: |-
-                    {print} Turtle race!
-                    hoek {is} 90
-                    {turn} hoek
+                    {print} Kaplumbağa yarışı!
+                    açı {is} 90
+                    {turn} açı
                     {forward} 25
             3:
                 story_text: |
-                    In this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
-                    Use `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.
+                    Bu seviyede, çizim kaplumbağamız ile `{at} {random}` kullanabilirsiniz. Rastgele bir seçim, kaplumbağanın her seferinde farklı bir yolda yürümesini sağlar.
+                    Listeden bir değer seçmek için `{at} {random}` kullanın.
+                    ### Alıştırma
+                    Daha uzun rastgele bir yol oluşturmak için 2. ve 3. satırları kopyalayıp yapıştırabilir misiniz?
                 example_code: |
                     ```
-                    angles {is} 10, 50, 90, 150, 250
-                    {turn} angles {at} {random}
+                    açılar {is} 10, 50, 90, 150, 250
+                    {turn} açılar {at} {random}
                     {forward} 25
                     ```
                 start_code: |-
-                    angles {is} 10, 50, 90, 150, 250
-                    {turn} angles {at} {random}
+                    açılar {is} 10, 50, 90, 150, 250
+                    {turn} açılar {at} {random}
                     {forward} 25
             4:
                 story_text: |
-                    In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!
+                    4. seviyede, `{print}` ve `{ask}` ile tırnak işareti kullanmanız gerekecek. Ayrıca çizim yaparken de!
                 example_code: |
                     ```
-                    {print} 'Drawing figures'
-                    angle {is} 90
-                    {turn} angle
+                    {print} _ Çizim yapılıyor _
+                    açı {is} 90
+                    {turn} açı
                     {forward} 25
-                    {turn} angle
+                    {turn} açı
                     {forward} 25
                     ```
                 start_code: |-
-                    {print} 'Drawing figures'
-                    angle {is} 90
-                    {turn} angle
+                    {print} 'Çizim yapılıyor'
+                    açı {is} 90
+                    {turn} açı
                     {forward} 25
 
-                story_text_2: "You can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "Ayrıca `{color}` komutu ile çizgilerin rengini de değiştirebilirsiniz. Örneğe göz atın.\nAyrıca bunun yanında çizim alanımız beyaz olduğundan `{color} {white}` komutunu kullanarak 'görünmez' çizgiler çizebilirsiniz. Çizime başlamadan önce kaplumbağayı ekranda herhangi bir yere taşımak için bu beyaz çizgileri kullanabilirsiniz.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
-                    In level 5 you can make a choice with `{if}`. For example between different types of figures.
+                    5. seviyede, `{if}` ile bir seçim yapabilirsiniz. Örneğin farklı şekil türleri arasında.
                 example_code: |
                     ```
-                    {print} 'Drawing Figures'
-                    figure {is} {ask} 'Do you want a square or a triangle?'
-                    {if} figure {is} triangle angle {is} 120
-                    {else} angle {is} 90
-                    {turn} angle
+                    {print} 'Çizim yapılıyor'
+                    şekil {is} {ask} 'Kare mi yoksa üçgen mi istiyorsunuz?'
+                    {if} şekil {is} üçgen açı {is} 120
+                    {else} açı {is} 90
+                    {turn} açı
                     {forward} 25
-                    {turn} angle
+                    {turn} açı
                     {forward} 25
-                    {turn} angle
+                    {turn} açı
                     {forward} 25
-                    {turn} angle
+                    {turn} açı
                     {forward} 25
                     ```
                 start_code: |-
-                    {print} 'Drawing Figures'
-                    figure {is} {ask} 'Do you want a square or a triangle?'
-                    {if} figure {is} triangle angle {is} 120 {else} angle {is} 90
-                    {turn} angle
+                    {print} 'Çizim yapılıyor'
+                    şekil {is} {ask} 'Kare mi yoksa üçgen mi istiyorsunuz?'
+                    {if} şekil {is} üçgen açı {is} 120 {else} açı {is} 90
+                    {turn} açı
                     {forward} 25
-                story_text_2: "### Exercise\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
-                example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\nif direction is left turn _\nif direction is right turn _\nforward 100\n```\n"
+                story_text_2: "### Alıştırma\nBu kodun çalışmasını sağlamak için kodun içine doğru sayıları doldurun.\nBunu yaptıktan sonra, geriye doğru seçeneğini eklemeyi deneyebilirsiniz.\n\n**Ekleme** 'Sol' ve 'sağ' kullanmak yerine, programı Kuzey, Doğu, Güney ve Batı ile yeniden oluşturun.\nBu şekilde Kuzeydoğu ve Güneybatı gibi daha fazla yön ekleyebilirsiniz.\n"
+                example_code_2: "```\nyön {is} {ask} 'Sola mı, sağa mı, yoksa düz mü gitmek istiyorsunuz?'\n{if} yön {is} sol {turn} _\n{if} yön {is} sağ {turn} _\n{forward} 100\n```\n"
             6:
                 story_text: |
-                    In this level you can use calculations to draw different figures.
-                    You may have learned in school that turning a full circle is 360 degrees. If not, now you know!
-                    That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
-                    Now that we can do math with Hedy, we can draw all the figures we want!
+                    Bu seviyede, farklı şekiller çizmek için hesaplamaları kullanabilirsiniz.
+                    Okulda tam bir daire çizmenin 360 derece olduğunu öğrenmiş olabilirsiniz. Eğer öğrenmediyseniz, artık biliyorsunuz!
+                    Bu yüzden bir kare için 90 derece kullanırsınız. 360'ın 4'e bölümü 90'dır.
+                    Artık Hedy ile matematik yapabildiğimize göre, istediğimiz tüm şekilleri çizebiliriz!
 
                 example_code: |
                     ```
-                    angles = {ask} 'How many angles do you want?'
-                    angle = 360 / angles
+                    açılar = {ask} 'Kaç tane açı istiyorsun?'
+                    açı = 360 / açılar
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     {forward} 50
-                    {turn} angle
+                    {turn} açı
                     ```
                 start_code: |-
-                    {print} 'Drawing figures'
+                    {print} 'Şekiller çizmek'
             8:
                 story_text: |
-                    Now that we can repeat several lines, we can make figures more easily.
-                    We only have to set the angle once and then use that variable in the `{repeat}`.
+                    Artık birkaç satırı tekrarlayabildiğimize göre, şekilleri daha kolay oluşturabiliriz.
+                    Açıyı yalnızca bir kez ayarlamamız ve ardından bu değişkeni `{repeat}` içinde kullanmamız gerekir.
+
+                    ### Alıştırma 1
+                    Örnek kod bir kare oluşturur. Kodu, üçgen veya altıgen gibi başka bir şekil oluşturacak şekilde değiştirin.
+                    Bu, iki kod satırında değişiklik yapılmasını gerektirir.
+                    İpucu: Bir dairenin tamamı 360 derecedir.
+
+                    ### Alıştırma 2
+                    Şimdi en az iki çokgenden oluşan bir çizim oluşturun.
 
                 example_code: |
                     ```
-                    angle = 90
-                    {repeat} 10 {times}
-                        {turn} angle
+                    açı = 90
+                    {repeat} 4 {times}
+                        {turn} açı
                         {forward} 50
                     ```
                 story_text_2: |
-                    Also, we can now improve the program that draws different figures.
-                    Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
+                    **Ekleme** Artık farklı şekiller çizen programımızı geliştirebiliriz. Kodu tamamlayınca istediğiniz herhangi bir çokgeni çizebilirsiniz!
 
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    şekil = {ask} 'Kaç tane açı çizmeliyim?'
+                    açı = 360 / şekil
+                    {repeat} şekil {times}
                         {turn} _
                         {forward} _
                     ```
                 start_code: |-
-                    angles = {ask} 'How many angles should I draw?'
+                    şekil = {ask} 'Kaç tane açı çizmeliyim?'
             9:
-                story_text: "Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                story_text: "Artık bir `{repeat}` içinde bir `{repeat}` kullanabildiğimize göre, daha karmaşık şekiller oluşturabiliriz.\n\n### Alıştırma 1\nBu kod üç tane siyah üçgen oluşturur, bunu beş pembe kareye dönüştürün.\n\n **Ekleme** En az iki farklı şekil türünden oluşan kendi seçtiğiniz bir şekil oluşturun.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
 
                 start_code: '# kodunuzu buraya yazın'
     dishes:
-        name: "Dishes?"
-        description: "Use the computer to see who does the dishes (Start at level 2)"
-        default_save_name: "Dishes"
+        name: "Bulaşıklar mı?"
+        description: "Bulaşıkları kimin yıkayacağını seçmek için bilgisayarı kullanın"
+        default_save_name: "Bulaşıklar"
         levels:
             3:
                 story_text: |
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
-                    Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                    Bugün bulaşıkları kimin yıkayacağı ya da kedinin kum kabını kimin değiştireceği konusunda evde hep anlaşmazlığa mı düşüyorsunuz?
+                    O zaman bilgisayarın çok adil bir şekilde seçim yapmasına izin verebilirsiniz. Bunu bu seviyede programlayabilirsiniz!
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
+                    kişiler {is} anne, baba, Ali, Ayşe
+                    {print} kişiler {at} {random} bulaşığı yıkayacak
                     ```
                 story_text_2: |
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
-                start_code: "{print} Who does the dishes?"
+                    ### Alıştırma
+                    Bulaşık makinesi programının kendi çeşidinizi yapın. Öncelikle aile üyelerinizin bir listesini yapın.
+                    Ardından yapılması gereken bir görev düşünün ve bilgisayarın `{at} {random}` komutuyla görevi kimin yapması gerektiğine karar vermesini sağlayın.
+
+                    **Ekleme** Bulaşıkları kendiniz yıkamak istemiyor musunuz? Adınızı `{remove}` `{from}` komutuyla listeden kaldırarak programda hile yapın.
+                start_code: "{print} Bulaşıkları kim yıkıyor?"
             4:
                 story_text: |
-                    With quotation marks you can make your dishwashing planning more beautiful.
-                    This time the sample code is not quite complete.
+                    Tırnak işaretleri ile bulaşık yıkama programınızı daha da iyi hale getirebilirsiniz.
 
-                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
-
-                    Tip: Don't forget the quotation marks!
+                    ### Alıştırma
+                    Öncelikle, bu örnek programı çalıştırmak için boşluklara doğru sembolleri veya komutları doldurun.
+                    Anladınız mı? Harika! Şimdi, önceki seviyeden kendi kodunuzu kopyalayın ve doğru noktalara tırnak işaretleri ekleyerek bu seviyede çalışmasını sağlayın.
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ the dishes are done by _
+                    kişiler {is} anne, baba, Ali, Ayşe
+                    {print} _ bulaşıkları yıkayacak olan _
                     {sleep}
-                    {print} people {at} _
+                    {print} kişiler {at} _
                     ```
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Bulaşıkları kim yıkıyor?'"
             5:
                 story_text: |
-                    With the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
-
-                    Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
-                    Don't forget the quotes!
+                    `{if}` ile artık programda seçim yaparak daha fazla eğlenebilirsiniz. Programınızın bilgisayarın yaptığı seçime yanıt vermesini sağlayabilirsiniz.
+                    ### Alıştırma
+                    Kodu, sıra size geldiğinde "çok kötü", aksi halde "evet!" yazdıracak şekilde tamamlayabilir misiniz?
+                    Tırnakları unutmayın!
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    dishwasher {is} people {at} {random}
-                    {if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'
+                    kişiler {is} anne, baba, Ali, Ayşe
+                    bulaşıkçı {is} kişiler {at} {random}
+                    _ bulaşıkçı {is} Ayşe {print} _ Bulaşıkları yıkamak zorunda olmam çok kötü. _
+                    _ {print} 'Neyse ki bulaşık yok çünkü ' _ ' zaten yıkıyor'
                     ```
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Bulaşıkları kim yıkıyor?'"
             6:
                 story_text: |
-                    How often is everyone going to do the dishes? Is that fair? You can count it in this level.
+                    Herkes bulaşıkları ne sıklıkla yıkayacak? Bu adil mi? Bunu bu seviyede sayabilirsiniz.
                 example_code: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is' dishwasher
-                    {if} dishwasher {is} Emma emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week' emma_washes 'times'
+                    kişiler = anne, baba, Ali, Ayşe
+                    ali_yıkadı = 0
+                    bulaşıkçı = kişiler {at} {random}
+                    {print} 'Bulaşıkçımız bugün ' bulaşıkçı
+                    {if} bulaşıkçı {is} Ali ali_yıkadı = ali_yıkadı + 1
+                    {print} 'Ali bu hafta bulaşıkları ' ali_yıkadı ' kere yıkadı'
                     ```
 
-                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
-                    Do you make the code for the whole week?
+                    Şimdi 3'ten 5'e kadar olan satırları birkaç kez (örneğin tüm hafta için 7 kez) kopyalayarak tekrar tüm hafta için hesaplama yapabilirsiniz.
+                    Bütün hafta için kod yazabilir misiniz?
                 story_text_2: |
-                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
-                    To create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+                    Eğer çok şanssızsanız, bir önceki program sizi tüm hafta boyunca bulaşıkları yıkamanız için seçebilir! Bu hiç adil değil!
+                    Daha adil bir sistem oluşturmak için `{remove}` komutunu kullanarak seçilen kişiyi listeden çıkarabilirsiniz. Bu şekilde, herkes sırasını alana kadar bulaşıkları tekrar yıkamak zorunda kalmazsınız.
 
-                    Monday and tuesday are ready for you! Can you add the rest of the week?
-                    And... can you come up with a solution for when your list is empty?
+                    Pazartesi ve salı günleri sizin için hazır! Haftanın geri kalanını da ekleyebilir misiniz?
+                    Ve... listenizin boşaldığı durum için bir çözüm bulabilir misiniz?
                 example_code_2: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Monday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
-                    {print} 'Tuesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
+                    kişiler = anne, baba, Ali, Ayşe
+                    bulaşıkçı = kişiler {at} {random}
+                    {print} 'Pazartesi günü bulaşıkçımız: ' bulaşıkçı
+                    {remove} bulaşıkçı {from} kişiler
+                    bulaşıkçı = kişiler {at} {random}
+                    {print} 'Salı günü bulaşıkçımız: ' bulaşıkçı
+                    {remove} bulaşıkçı {from} kişiler
                     ```
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Bulaşıkları kim yıkıyor?'"
             7:
                 story_text: |
-                    With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    `{repeat}` ile kod parçalarını tekrarlayabilirsiniz. Bunu, birden fazla gün boyunca bulaşıkları kimin yıkayacağını hesaplamak için kullanabilirsiniz!
+                    ### Alıştırma
+                    Bütün bir hafta boyunca bulaşıkları kimin yıkaması gerektiğine karar vermek için `{repeat}` komutunu kullanın. Her boşluğun bir komut veya sayı ile doldurulması gerekiyor!
+                    **Ekleme** Evdeki diğer görevleri düşünebiliyor musunuz? Kodu üç ev işine karar verecek şekilde uyarlayın. Hangi görevlerle ilgili olduğunu yazdırmayı unutmayın!
                 example_code: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    {repeat} _ _ {print} 'the dishwasher is' _
+                    kişiler = anne, baba, Ali, Ayşe
+                    {repeat} _ _ {print} 'Bugün bulaşıkçımız ' _ _ _
                     ```
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Bulaşıkları kim yıkıyor?'"
             10:
                 story_text: |
-                    In this level you could make an even better dish washing shedule.
+                    Bu seviyede, kolay bir şekilde tüm hafta için bir program yapabilirsiniz!
+
+                    ### Alıştırma
+                    Süpürmek veya ortalığı toplamak gibi ikinci bir angarya iş ekleyin ve bunun da tüm haftaya bölündüğünden emin olun.
+                    <br> **Ekleme** Program adil değil, şanssız olabilir ve tüm hafta boyunca temizlikçi olabilirsiniz. Programı nasıl daha adil hale getirebilirsiniz?
                 example_code: |
                     ```
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    {for} day {in} days
-                        {print} names {at} {random} ' does the dishes on ' day
+                    günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar
+                    isimler = anne, baba, Ali, Ayşe
+                    {for} gün {in} günler
+                        {print} isimler {at} {random} ' bulaşıkları ' day ' günü yıkayacak'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     dice:
-        name: "Dice"
-        description: "Make your own dice"
-        default_save_name: "Dice"
+        name: "Zar"
+        description: "Kendi zarınızı yapın"
+        default_save_name: "Zar"
         levels:
             3:
                 story_text: |
-                    In this level we can choose from a list. With that we can let the computer choose one side of the die.
-                    Take a look at the games you have in your closet at home.
-                    Are there games with a (special) die? You can also copy it with this code.
-                    For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
+                    Bu seviyede bir listeden seçim yapabiliriz. Bununla bilgisayarın zarın bir tarafını seçmesini sağlayabiliriz.
+                    Evinizde dolabınızda bulunan oyunlara bir göz atın.
+                    (Özel) bir zarı olan oyunlar var mı? Onları da bu kodla da kopyalayabilirsiniz.
+                    Örneğin, üzerinde 1'den 5'e kadar sayılar ve bir solucan bulunan Solucan oyunu zarı.
 
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+                    ![üzerinde 1'den 5'e kadar sayılar ve solucan olan bir solucan zarı](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    seçimler {is} 1, 2, 3, 4, 5, solucan
+                    {print} Attığın zar _ {at} {random}
                     ```
-                start_code: "{print} What will the die indicate this time?"
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "### Exercise\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                start_code: "{print} Bu sefer zar kaçı gösterecek?"
+                example_code_2: "```\nseçimler {is} _\n```\n"
+                story_text_2: "### Alıştırma\nYukarıdaki örnekteki zarlar belirli bir oyun için zarlardır. Normal bir zar yapabilir misiniz?\nYa da farklı bir oyundaki diğer özel zarları?\n"
             4:
                 story_text: |
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
-                start_code: "{print} 'What will the die indicate this time?'"
+                    Bu seviyede, ayrıca zar da oluşturabilirsiniz. Ancak bu sefer örnek bir kod olmadan kendiniz deneyebilirsiniz!
+
+                    ### Alıştırma
+                    Bu seviyede kendi zarınızı yapın.
+                    İpucu: Nasıl zar atılacağı hakkında hiçbir fikriniz yoksa. Bir önceki seviyedeki zarlarınıza bir göz atın, ancak tırnak işareti eklemeyi unutmayın.
+                start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             5:
                 story_text: |
                     You can also make a die again in this level using the `{if}`.
@@ -1101,7 +1094,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                                                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                                                            Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
