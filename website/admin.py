@@ -174,21 +174,6 @@ class AdminModule(WebsiteModule):
             current_page="admin",
         )
 
-    @route("/stats", methods=["GET"])
-    @requires_admin
-    def get_admin_stats_page(self, user):
-        return render_template("admin/admin-stats.html",
-                               page_title=gettext("title_admin"),
-                               current_page="admin",
-                               javascript_page_options=dict(
-                                   page='admin-stats',
-                               ))
-
-    @route("/logs", methods=["GET"])
-    @requires_admin
-    def get_admin_logs_page(self, user):
-        return render_template("admin/admin-logs.html", page_title=gettext("title_admin"), current_page="admin")
-
     @route("/achievements", methods=["GET"])
     @requires_admin
     def get_admin_achievements_page(self, user):
