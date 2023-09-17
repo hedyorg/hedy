@@ -1672,7 +1672,7 @@ def explore():
     favourite_programs = DATABASE.get_hedy_choices()
 
     # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(programs.records + favourite_programs.records)
+    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
