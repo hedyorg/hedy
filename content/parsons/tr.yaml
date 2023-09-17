@@ -35,18 +35,17 @@ levels:
         2:
             story: |
                 This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code: |
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} toy is added to your shopping cart.
-                {print} Thank you for shopping with us!
+            code: |-
+                {print} Oyuncak mağazamıza hoş geldiniz
+                oyuncak {is} {ask} Ne satın almak istersiniz?
+                {print} oyuncak alışveriş sepetinize eklendi.
+                {print} Bizimle alışveriş yaptığınız için teşekkür ederiz!
     3:
         1:
             story: |
                 Hogwarts'ta yeni okul yılı başlıyor!
                 Sıralama şapkasının görevi sizi evlerden birine yerleştirmektir.
-                Hangi eve yerleştirileceksiniz?
-                Gryffindor, Hufflepuf, Ravenclaw veya Slytherin misiniz?
+                Hangi eve yerleştirileceksiniz? Gryffindor, Hufflepuf, Ravenclaw veya Slytherin misiniz?
                 Sıralama şapkası evinizi açıklamadan önce, ona evlerden birini seçmemesini söyleyebilirsiniz.
             code: |-
                 {print} Sıralama şapkası sizi bir Hogwarts evine yerleştirmeye hazır.
@@ -186,7 +185,7 @@ levels:
             story: "\"Sarhoş denizciyi ne yapalım?\" şarkısını söyleyin. Bilmiyorsanız diye söylüyorum, şarkı şöyle başlıyordu (İngilizce olmasına aldırmayın, tekrar eden satırlara bakın):\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
         2:
             story: "Bizimle bir Twister oyunu oynayın! Önce kişiler, sonra uzuvlar, sonra da renkler değişkenlerini tanımlayın.\n"
-            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+            code: "kişiler = 'Jess', 'Nick', 'Winston'\nuzuvlar = 'sol el', 'sol ayak', 'sağ el', 'sağ ayak'\nrenkler = 'kırmızı', 'mavi', 'yeşil', 'sarı'\n{for} kişi {in} kişiler\n    {print} kişi ' için, ' uzuvlar {at} {random} renkler {at} {random} ' renkli daireye'\n"
     11:
         1:
             story: "Yılbaşı gecesi için bir geri sayım saati oluşturun! Program 10'dan 1'e kadar olan sayıları bir saniyeliğine göstermeli ve ardından size mutlu bir yeni yıl dilemelidir.\n"
