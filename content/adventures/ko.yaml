@@ -23,10 +23,10 @@ adventures:
     default:
         levels:
             3:
-                start_code: '{print} hello world!'
+                start_code: '{print} 안녕하세요!'
                 story_text: "이전 수준에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.\n하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.\n그리고 당신은 Hedy가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!\n다음 탭을 잠깐 보세요!\n"
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: "{print} 안녕하세요!"
                 story_text: "이전 수준에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.\n다음과 같은 코드를 실행하려고 했을 수도 있습니다:\n\n물론 인쇄하고 싶었겠지\n\n`My name is Sophie`\n\nbut Hedy prints\n\n`My Sophie is Sophie`.\n\n이 수준에서는 따옴표를 사용하여 이 문제를 해결합니다.\n"
                 example_code: "```\nname {is} Sophie\n{print} My name is name\n```\n"
             14:
@@ -35,12 +35,12 @@ adventures:
                 example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded = first_grade + second_grade\nmean_grade = added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             2:
                 story_text: "축하해요! 레벨 2에 올랐네요. 이미 멋진 코드를 만들었기를 바랍니다!\n첫 번째 레벨에서는 `{echo}` 명령을 사용하면 한 번에 정보를 한 비트만 저장할 수 있다는 것을 알 수 있습니다.\n예를 들어 레스토랑 어드벤처에서는 고객이 먹고 싶은 것, 또는 마시고 싶은 것을 한 문장으로 반향할 수 있지만 둘 다는 아니다.\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} 안녕하세요!'
                 example_code: "**Warning! This code does not work!**\nIn Hedy commands will change sometimes. `echo` for example only works in level 1. In this level you'll learn a better way to echo answers back.\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want\n{ask} what would you like to drink?\n{echo} So you want\n```\n"
                 story_text_2: "플레이어가 햄버거와 콜라를 입력하면 \"그래서 햄버거와 콜라를 원한다\"고 말할 수는 없지만, 두 줄을 따로 만들어야 한다.\n또한, `{echo}` 명령어는 문장의 마지막에 단어만 울려 퍼지기 때문에 \"너의 햄버거가 바로 올라온다!\"라고 말할 수는 없다.\n\n이는 레벨 2에서 변화한다. 레벨 2에서는 여러 개의 정보를 저장하고 원하는 장소에 인쇄할 수 있는 변수 작업을 배울 수 있다.\n그럼 다음 탭으로 가보도록 하겠습니다!\n"
             1:
                 story_text: "Hedy에 오신 것을 환영합니다! 레벨 1에서는 이야기를 인쇄하는 것으로 시작할 수 있습니다.\n\n프로그래밍 필드 아래에 있는 녹색 'Run code' 버튼으로 직접 코드를 사용해 보십시오.\n\n준비되셨나요? 그럼 다음 탭으로 가셔서 첫 번째 명령어를 배우세요!\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} 안녕 세상아!'
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "이전 레벨에서는 코드를 실행할 때마다 게임이 달라지는 `{at} {random}`을 사용하는 법을 이미 배웠습니다.\n하지만 그것은 실제로 상호작용적이지 않으며, 플레이어는 게임에서 일어나는 일에 아무런 영향을 미치지 않는다.\n\n이 레벨에서는 프로그램에서 다른 응답을 할 수 있는 `{if}` 명령어를 배울 것이다. 예를 들어, 컴퓨터의 비밀 암호를 프로그래밍할 수 있는 방법이다.\n그럼 새로운 명령어를 보려면 다음 탭으로 이동해 보겠습니다!\n"
