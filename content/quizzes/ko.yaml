@@ -1058,33 +1058,33 @@ levels:
             code: |
                 ___ 안녕하세요!
         3:
-            question_text: 어떤 사람이 가장 좋아하는 색이 무엇인지 어떻게 물어요?
+            question_text: 어떤 사람이 좋아하는 색이 무엇인지 어떻게 물어요?
             mp_choice_options:
-            -   option: "```\n{print} 무슨 색깔을 가장 좋아하세요?\n```\n"
-                feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} 무슨 색깔을 가장 좋아하세요?\n```\n"
+            -   option: "```\n{print} 무슨 색깔을 좋아하세요?\n```\n"
+                feedback: "`{print}` 텍스트는 출력 하지만 질문이 없습니다."
+            -   option: "```\n{ask} {print} 무슨 색깔을 좋아하세요?\n```\n"
                 feedback: 명령어는 1개만 입력하셔야 합니다, 2개는 사용할수 없어요.
-            -   option: "```\n{ask} 무슨 색깔을 가장 좋아하세요?\n```\n"
+            -   option: "```\n{ask} 무슨 색깔을 좋아하세요?\n```\n"
                 feedback: 좋았어!
-            -   option: "```\n{echo} 무슨 색깔을 가장 좋아하세요?\n```\n"
+            -   option: "```\n{echo} 무슨 색깔을 좋아하세요?\n```\n"
                 feedback: '`{echo}` 당신의 답변 뒤에 반복 됩니다.'
             correct_answer: C
-            hint: You can ask something with the `{ask}` command
+            hint: '`{ask}` 명령을 사용하여 질문할 수 있습니다'
             question_score: '10'
         4:
             question_text: 이 코드에 무슨 문제가 있나요?
-            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            code: "안녕 나는 Hedy야!\n{ask} 너는 누구니?\n{echo} 안녕..."
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
+            -   option: '`{print}` 가 1번 라인에서 누락되었습니다.'
                 feedback: 맞아요!
-            -   option: Im in line 1 is spelled wrong.
+            -   option: 1번 라인에 있는 단어는 철자가 틀렸어요.
                 feedback: 명령어의 철자가 정확합니다.
             -   option: "`{echo}` 는 명령어가 아닙니다."
                 feedback: "`{echo}` 는 명령어이지만, 여기에는 다른 문제가 있습니다."
-            -   option: Nothing! This is a perfect code!
+            -   option: 문제 없어요! 이 코드는 완벽해요!
                 feedback: 틀렸어요, 주의해서 보세요!
             correct_answer: A
-            hint: Line 1 doesn't seem right
+            hint: 1번 라인이 무언가 이상한 것 같아요
             question_score: '10'
         5:
             question_text: 2행에 어떤 명령이 누락되었습니까?
