@@ -140,10 +140,10 @@ levels:
             story: |
                 'The wheels on the bus go round and round' şarkısını oluşturun (Otobüsün tekerleri dönüyor çocuk şarkısı, biz daha Türkçesini bulana kadar bunun şarkı sözlerini arayın, şarkının kendisini anlamanız gerekmez)
             code: |-
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'Otobüsün tekerleri'
+                {repeat} 3 {times} {print} 'dönüp duruyor'
+                {print} 'otobüsün tekerleri dönüp duruyor'
+                {print} 'şehre varana kadar'
     8:
         1:
             story: |
@@ -176,21 +176,21 @@ levels:
     9:
         2:
             story: "Bu kod, bir restorandaki müşterilere tatlı sipariş etmek isteyip istemediklerini sorar. Eğer isterlerse, onlara ne tür bir tatlı istediklerini sorar. Eğer tiramisu sipariş ederlerse, tiramisunun tükendiği söylenir.\nKodu çalışmasını sağlayabilir misin?\n"
-            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
+            code: "sipariş = {ask} 'Tatlı sipariş etmek ister misiniz??'\n{if} sipariş = evet\n    tatlı = {ask} 'Ne tür bir tatlı istersiniz??'\n    {if} tatlı = tiramisu\n        {print} 'Üzgünüm, tiramisumuz kalmadı.'\n    {else}\n        {print} 'Bir ' tatlı ' hemen geliyor!'\n{else}\n    {print} 'Tatlı istemiyorsunuz. Sorun değil!'\n"
         1:
             story: "Bu oyun size üç matematik ödevi verecektir. Her seferinde soru fark olacak. Sıralamayı çözebilir misiniz?\n"
-            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
+            code: "sayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    sayı = sayılar {at} {random}\n    doğru_cevap = 5 * sayı\n    cevap = {ask} '5 kere ' sayı ' kaç eder?'\n    {if} cevap = doğru_cevap\n        {print} 'Aferin!'\n    {else}\n        {print} 'Hayır! doğru cevap ' doğru_cevap\n"
     12:
         1:
-            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
-            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+            code: "mısralar = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} mısra {in} mısralar\n    {for} count {in} {range} 1 {to} 3\n        {print} mısra\n    {print} 'Early in the morning'\n"
+            story: "\"Sarhoş denizciyi ne yapalım?\" şarkısını söyleyin. Bilmiyorsanız diye söylüyorum, şarkı şöyle başlıyordu (İngilizce olmasına aldırmayın, tekrar eden satırlara bakın):\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
         2:
-            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
+            story: "Bizimle bir Twister oyunu oynayın! Önce kişiler, sonra uzuvlar, sonra da renkler değişkenlerini tanımlayın.\n"
             code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
     11:
         1:
             story: "Yılbaşı gecesi için bir geri sayım saati oluşturun! Program 10'dan 1'e kadar olan sayıları bir saniyeliğine göstermeli ve ardından size mutlu bir yeni yıl dilemelidir.\n"
             code: "{for} sayı {in} {range} 10 {to} 1\n    {print} sayı\n    {sleep}\n    {clear}\n{print} 'Yeni yılınız kutlu olsun!'\n"
         2:
-            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
-            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"
+            story: "Bilim fuarının nihai sonuçlarını bize bildiren bir program oluşturun. İlk olarak yarışmacılar değişkenini, ardından yer değişkenini tanımlayın.\n**İpucu** Satır 5 uyku komutu olmalı ve tebrikler diyerek bitirmelisiniz.\n"
+            code: "{print} 'Ve şimdi sırada bilim fuarının sonuçlarını açıklayacağız'\nyarışmacılar = Vivienne, Paul, Trixy, Bianca, Katya\nsıralama = 5\n{for} yarışmacı {in} yarışmacılar\n    {sleep} 2\n    {print} 'Sırası ' sıralama ' olan... ' yarışmacı\n    sıralama = sıralama - 1\n{print} 'Tebrikler!'\n"
