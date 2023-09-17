@@ -158,7 +158,7 @@ levels:
             -   option: '1'
                 feedback: Correct, one line at a time
             -   option: '2'
-                feedback: 이 수준에서는 한 번에 한 줄만 사용할 수 있습니다
+                feedback: 이 레벨에서는 한 번에 한 줄만 사용할 수 있습니다
             -   option: infinite
                 feedback: 이 레벨에서는 한 번에 한 줄만 반복할 수 있습니다
             correct_answer: B
@@ -574,7 +574,7 @@ levels:
             -   option: You can't put two questions in a row
                 feedback: '네 당신은 할 수 있어요.'
             -   option: The variable called 'age' is later on used as 'years'
-                feedback: 예리한 눈! 잘했어!
+                feedback: 잘 보셨네요! 잘했어요!
             -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
                 feedback: 사실 그렇게 시작해야 해요.
             -   option: A code must always start with a `{print}` command in the first line
@@ -1053,21 +1053,21 @@ levels:
             -   option: "`{ask}`\n"
                 feedback: "`{ask}`를 사용하면, 질문을 할 수 있습니다."
             correct_answer: B
-            hint: _?_ Hello world!
+            hint: _?_ 안녕하세요!
             question_score: '10'
             code: |
-                ___ Hello!
+                ___ 안녕하세요!
         3:
             question_text: 어떤 사람이 가장 좋아하는 색이 무엇인지 어떻게 물어요?
             mp_choice_options:
-            -   option: "```\n{print} What is your favorite color?\n```\n"
+            -   option: "```\n{print} 무슨 색깔을 가장 좋아하세요?\n```\n"
                 feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
-                feedback: You only need one command, not two.
-            -   option: "```\n{ask} What is your favorite color?\n```\n"
+            -   option: "```\n{ask} {print} 무슨 색깔을 가장 좋아하세요?\n```\n"
+                feedback: 명령어는 1개만 입력하셔야 합니다, 2개는 사용할수 없어요.
+            -   option: "```\n{ask} 무슨 색깔을 가장 좋아하세요?\n```\n"
                 feedback: 좋았어!
-            -   option: "```\n{echo} What is your favorite color?\n```\n"
-                feedback: '`{echo}` 당신의 답변 뒤에 반복됩니다.'
+            -   option: "```\n{echo} 무슨 색깔을 가장 좋아하세요?\n```\n"
+                feedback: '`{echo}` 당신의 답변 뒤에 반복 됩니다.'
             correct_answer: C
             hint: You can ask something with the `{ask}` command
             question_score: '10'
@@ -1079,10 +1079,10 @@ levels:
                 feedback: 맞아요!
             -   option: Im in line 1 is spelled wrong.
                 feedback: 명령어의 철자가 정확합니다.
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: "`{echo}` 는 명령어가 아닙니다."
+                feedback: "`{echo}` 는 명령어이지만, 여기에는 다른 문제가 있습니다."
             -   option: Nothing! This is a perfect code!
-                feedback: Wrong, look carefully!
+                feedback: 틀렸어요, 주의해서 보세요!
             correct_answer: A
             hint: Line 1 doesn't seem right
             question_score: '10'
@@ -1106,7 +1106,7 @@ levels:
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
-                feedback: '1행의 `{print}`가 맞습니다.'
+                feedback: '1줄의 `{print}`는 정상적입니다.'
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
                 feedback: 잘했어요! 집중하셨네요!
             -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
@@ -1123,7 +1123,7 @@ levels:
             -   option: In line 1 `{print}` needs to be replaced with `{ask}`
                 feedback: 뭔가 잘못된 게 확실해요?
             -   option: In line 1 `{print}` needs to be replaced with `{echo}`
-                feedback: 뭔가 잘못 된 게 확실해요?
+                feedback: 뭔가 잘못된 게 확실해요?
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: 뭔가 잘못된 게 확실해요?
             -   option: Nothing! This is a perfect code!
@@ -1171,16 +1171,16 @@ levels:
                     Are you ready to go to level 2?
                 feedback: "두 개의 에코 명령이 있습니다"
             -   option: |
-                    Yes!
-                    Yes!
+                    네!
+                    네!
                 feedback: "정말 잘했어!"
             -   option: |
-                    Yes!
-                feedback: "두 개의 에코 명령이 있습니다"
+                    네!
+                feedback: "두 개의 echo 명령어가 있습니다"
             -   option: |
                     Are you ready to go to level 2?
                     Yes!
-                feedback: "두 개의 에코 명령이 있습니다"
+                feedback: "두 개의 echo 명령어가 있습니다"
             correct_answer: "B"
             hint: "Let's go!"
             question_score: '10'
@@ -1210,7 +1210,7 @@ levels:
             -   option: '`{print}`명령을 사용하면 텍스트를 표시할 수 있습니다'
                 feedback: 좋아요.
             -   option: '{sleep}명령을 사용하면 화면에서 텍스트를 제거할 수 있습니다.'
-                feedback: '`{sleep}`은 그렇게 작동하지 않습니다.'
+                feedback: '`{sleep}` 사용법이 잘못 되었습니다.'
             correct_answer: C
             hint: '`{print}`는 여전히 레벨 1과 동일한 방식으로 작동합니다'
             question_score: '10'
@@ -1393,7 +1393,7 @@ levels:
             hint: There's something wrong in line 1
             question_score: '10'
         3:
-            question_text: 이 코드 2번 줄에 뭐가 문제야?
+            question_text: 이 코드 2번 줄에 뭐가 문제일까요?
             code: "options {is} rock, paper, scissors\n{print} rock, paper, scissors {at} {random}"
             mp_choice_options:
             -   option: "```\n{at} {random} {print} options\n```\n"
@@ -1472,7 +1472,7 @@ levels:
             code: "crisps {is} sea salt, paprika, sour cream\n{remove} sea salt {from} crisps\n{remove} paprika {from} crisps\n{print} crisps {at} {random}"
             mp_choice_options:
             -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: '`{remove}` 명령을 살펴봅니다'
+                feedback: '`{remove}` 명령어를 살펴봅니다'
             -   option: sea salt
                 feedback: 천일염은 목록에서 제외된다
             -   option: paprika
@@ -1485,7 +1485,7 @@ levels:
     4:
         10:
             correct_answer: B
-            question_text: 어떤 진술이 사실입니까?
+            question_text: 어떤 문장이 맞나요?
             code: "people {is} mom, dad, Emma, Sophie\n{print} The dishes are done by...\n{print} people {at} {random}"
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
@@ -1616,7 +1616,7 @@ levels:
             code: "{print} 'Welcome at the money show!'\n{print} 'In front of you are 3 doors'\ndoor {is} {ask} 'Which door do you choose?'"
             mp_choice_options:
             -   option: "```\n{print} So you pick door door\n```\n"
-                feedback: 우리는 따옴표가 필요하다
+                feedback: 우리는 따옴표가 필요해요
             -   option: "```\n{print} 'So you pick ' door door\n```\n"
                 feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
             -   option: "```\n{print} 'So you pick door ' door\n```\n"
@@ -1643,9 +1643,9 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "무엇이 진실일까?"
+            question_text: "공백은 어떤 명령어로 채워야 할까요?"
             mp_choice_options:
-            -   option: "In level 5 `{print}` works differently than in level 4\n"
+            -   option: "`{print}`\n"
                 feedback: "`{print}`는 여전히 동일합니다."
             -   option: "`{if}`\n"
                 feedback: "위 줄에서 `{if}`명령을 사용합니다."
@@ -1680,7 +1680,7 @@ levels:
                 feedback: 올바른 암호를 입력하면 print됩니다
             -   option: SECRET
                 feedback: 맞아요!'
-            -   option: isn't
+            -   option: password
                 feedback: password는 암호가 아닙니다...
             -   option: ALARM INTRUDER
                 feedback: 비밀번호를 잘못 입력하면 출력됩니다!
@@ -1737,7 +1737,7 @@ levels:
             code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _?_ 'Unfortunately... No big money for you.'"
             mp_choice_options:
             -   option: "`{if}`\n"
-                feedback: '`{if}`는 위 행에 있다.'
+                feedback: '`{if}`는 위쪽 라인에 있다.'
             -   option: "`{at}` `{random}`\n"
                 feedback: No, you don't need `{at} {random}`.
             -   option: "`{else}`\n"
@@ -1769,7 +1769,7 @@ levels:
             -   option: '1'
                 feedback: 나쁜 선택! 잡아먹히는 거야
             -   option: 'should'
-                feedback: 슈퍼! 탈출했어!
+                feedback: 좋았어! 탈출했어!
             -   option: '3'
                 feedback: 나쁜 선택이야! 잡아먹히는 거야.
             -   option: It's a trap, you will always be eaten!
