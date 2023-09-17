@@ -155,9 +155,9 @@ adventures:
                 story_text_2: "### 연습문제 2\n우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.\n그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.\n팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!\n"
                 example_code: "```\n{print}('Welcome to this story!')\n```\n"
                 example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: 스토리
+        description: 스토리
+        default_save_name: 스토리
     songs:
         levels:
             6:
@@ -390,7 +390,7 @@ adventures:
                 story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### 연습문제\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: "```\n{print} 'Welcome to Restaurant Chez Hedy!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\nprice = 0\n{repeat} people {times}\n_ food = {ask} 'What would you like to order?'\n_ {print} food\n_ {if} food {is} fries\n_ price = price + 3\n_ sauce = {ask} 'What kind of sauce would you like with your fries?'\n_ {if} sauce {is} no\n_ {print} 'no sauce'\n_ {else}\n_ price = price + 1\n_ {print} 'with ' sauce\n_ {if} food {is} pizza\n_ price = price + 4\n{print} 'That will be ' price ' dollar'\n{print} 'Enjoy your meal!'\n```\n"
             1:
-                story_text: "레벨 1에서는 가상 레스토랑을 직접 만들어 손님들의 주문을 받아볼 수 있다.\n"
+                story_text: "레벨 1에서는 가상의 식당을 직접 만들어 손님들의 주문을 받아볼 수 있다.\n"
                 example_code: "```\n{print} Welcome to Hedy's restaurant 🍟\n_ What would you like to order?\n{echo} So you would like to order\n{print} Thank you for your order!\n{print} It's on its way!\n```\n"
                 story_text_2: "### 연습문제\nCopy the example code into your input screen by clicking the yellow button.\nFirstly, fill in the correct command on the blanks to make to code work properly.\nThen add at least 4 more lines of code to the restaurant program.\nAsk the costumer what they would like to drink and ask if they want to pay with cash or card.\nLastly, think of a nice way to say goodbye to your costumer.\n"
                 start_code: '# 코드를 여기에 입력하세요'
@@ -430,16 +430,16 @@ adventures:
                 story_text: "`{while}`를 사용하면 고객이 주문이 완료될 때까지 주문을 계속 추가할 수 있습니다.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything else?'\n{print} 'Thank you!'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
-        name: Restaurant
+        name: 식당
         description: Create your own virtual restaurant
-        default_save_name: Restaurant
+        default_save_name: 식당
     fortune:
-        name: Fortune teller
+        name: 예언가
         description: Let Hedy predict the future
         levels:
             1:
                 start_code: '# 코드를 여기에 입력하세요'
-                story_text: "당신은 카니발에 가보고 점쟁이에게 당신의 미래를 점쳐본적이 있는가? 아니면 마법의 8구를 가지고 놀아본적이 있는가?\n그러면 여러분은 아마 그들이 여러분의 미래를 정말로 예측하지 못한다는 것을 알 거예요, 하지만 노는 것은 여전히 재미있어요!\n\n다음 단계에서 여러분은 여러분만의 점치는 기계를 만드는 방법을 배울 수 있습니다!\n레벨 1에서는 Hedy가 자신을 점쟁이라고 소개하고 선수들의 대답을 `{echo}`하게 하면 쉽게 시작할 수 있다.\n이런 식으로:\n"
+                story_text: "당신은 카니발에 가보고 예언가에게 당신의 미래를 점쳐본적이 있는가? 아니면 마법의 8구를 가지고 놀아본적이 있는가?\n그러면 여러분은 아마 그들이 여러분의 미래를 정말로 예측하지 못한다는 것을 알 거예요, 하지만 노는 것은 여전히 재미있어요!\n\n다음 단계에서 여러분은 여러분만의 점치는 기계를 만드는 방법을 배울 수 있습니다!\n레벨 1에서는 Hedy가 자신을 점쟁이라고 소개하고 선수들의 대답을 `{echo}`하게 하면 쉽게 시작할 수 있다.\n이런 식으로:\n"
                 example_code: "```\n_ Hello, I'm Hedy the fortune teller!\n_ Who are you?\n_ Let me take a look in my crystal ball\n_ I see... I see...\n_ Your name is\n```\n"
                 story_text_2: "### 연습문제\nCopy the example code into your input screen and fill in the blanks to make the code work.\n**Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.\n"
             3:
@@ -475,7 +475,7 @@ adventures:
                 story_text: "From level 12 on, you will also have to use quotation marks in lists, before and after each item.\n\n### 연습문제\nAdd two predictions to the list"
                 example_code: "```\nfortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'\n{print} 'I will take a look in my crystall ball for your future.'\n{print} 'I see... I see...'\n{sleep}\n{print} fortunes {at} {random}\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
-        default_save_name: Fortune Teller
+        default_save_name: 예언가
     haunted:
         levels:
             1:
@@ -484,7 +484,7 @@ adventures:
                 story_text_2: "### 연습문제\nCopy the example code to your input screen by clicking the yellow button.\nNow finish the story by adding at least 5 lines of code.\nRemember to start each line of codes with a `{print}` command.\n"
                 start_code: '{print} How did I get here?'
             2:
-                story_text: "이 귀신이 나오는 집에서는 이모지로 몬스터를 고를 수 있습니다. 물론 단어도 사용할 수 있습니다.\n"
+                story_text: "이 유령이 나오는 집에서는 이모지로 몬스터를 고를 수 있습니다. 물론 단어도 사용할 수 있습니다.\n"
                 example_code: "```\nmonster_1 {is} 👻\nmonster_2 {is} 🤡\nmonster_3 {is} 👶\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room...\n{print} But a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
                 start_code: monster1 {is} _
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room...\n{print} But a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
@@ -517,9 +517,9 @@ adventures:
                 story_text: "This haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
                 example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[{random}]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mansion'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
-        name: Haunted House
+        name: 유령의 집
         description: Escape from the haunted house
-        default_save_name: Haunted House
+        default_save_name: 유령의 집
     piggybank:
         levels:
             12:
@@ -565,9 +565,9 @@ adventures:
         name: Blackjack
         description: Try to get as close to 21 as you can
     parrot:
-        name: Parrot
+        name: 앵무새
         description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        default_save_name: 앵무새
         levels:
             1:
                 story_text: "당신을 따라 할 당신만의 온라인 애완 앵무새를 만들어 보세요!\n"
@@ -707,9 +707,9 @@ adventures:
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
                 start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
-                story_text: "## The ask command\n이제 `{print}` 명령어를 사용할 수 있게 되었으므로 다음 명령어인 `{ask}`를 배울 준비가 되었다. `{ask}` 명령어를 사용하면 질문을 할 수 있다. 다음을 확인해 보자:\n"
+                story_text: "## ask 명령어\n이제 `{print}` 명령어를 사용할 수 있게 되었으므로 다음 명령어인 `{ask}`를 배울 준비가 되었다. `{ask}` 명령어를 사용하면 질문을 할 수 있다. 다음을 확인해 보자:\n"
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## The echo command\n컴퓨터가 다시 대답을 반복하게 하려면 `{echo}` 명령을 사용하면 된다. 대답은 문장의 마지막에 메아리치므로 hello 뒤에 이 예를 들어 설명해야 한다.\n"
+                story_text_2: "## echo 명령어\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
             2:
                 story_text: "## The ask command\n이제 코드에서 **variable**를 사용할 수 있게 되었으므로 `{echo}` 명령어가 더 이상 필요하지 않습니다.\n우리는 질문에 대한 답을 저장하기 위해 변수를 사용할 수 있고, 이 방법으로 우리는 코드에 있는 여러 질문에 대한 답을 사용할 수 있다.\n확인해보세요:\n\n이런 식으로 코드가 상호작용하고 있어요!\n"
                 example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
