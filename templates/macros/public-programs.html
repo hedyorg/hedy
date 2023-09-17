@@ -1,5 +1,5 @@
-{% macro program_box(program, is_favorite) %}
-    <div class="explore-program-box overflow-hidden">
+{% macro program_box(program, is_favorite, is_admin) %}
+    <div class="explore-program-box overflow-hidden" data-cy="{{ program.id }}">
         <div class="flex flex-col h-full">
                 <div class="explore-program-box-title
                            {% if is_favorite %} bg-yellow-500

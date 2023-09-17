@@ -1997,7 +1997,7 @@ levels:
                             {if} drink {is} coke
                             price = price - 5
                     ```
-                feedback: "Bijna goed maar kijk eens naar die laatste regel."
+                feedback: "Almost right. Take another look at the last line"
             correct_answer: "A"
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
@@ -3249,15 +3249,15 @@ levels:
                   {print} 'Enjoy the ride'
             mp_choice_options:
             -   option: "You must be taller than 120 cm to go on the roller coaster"
-                feedback: "> means greater than"
+                feedback: "True!"
             -   option: "You must be taller than 119 cm to go on the roller coaster"
                 feedback: "If you are 120 cm you won't get in"
-            -   option: "You must be shorter or equal to 120 cm to go on the roller coaster"
-                feedback: "True!"
+            -   option: "You must be shorter than 120 cm to go on the roller coaster"
+                feedback: "> means greater than"
             -   option: "There are no length restrictions to go on the roller coaster"
                 feedback: "There are."
-            correct_answer: "C"
-            hint: "Focus on which length values are allowed"
+            correct_answer: "A"
+            hint: "> means greater than"
             question_score: "10"
         9:
             question_text: "How many pieces of chocolate will give you a stomach ache according to this fitbit?"

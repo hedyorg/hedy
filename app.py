@@ -42,7 +42,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
-from website.auth import (current_user, is_admin, is_teacher,
+from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
@@ -65,6 +65,11 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
 jinja_partials.register_extensions(app)
@@ -387,7 +392,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
+            'is_teacher': is_teacher(user), 'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
     return data
 
 
@@ -522,7 +527,7 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
-            except hedy.exceptions.UnquotedEqualityCheck as ex:
+            except hedy.exceptions.UnquotedEqualityCheckException as ex:
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
@@ -2222,6 +2227,7 @@ app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
+app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 
 
 # *** START SERVER ***
@@ -2243,25 +2249,71 @@ def try_parse_int(x):
         return None
 
 
+def analyze_memory_snapshot(start_snapshot, end_snapshot):
+    filters = [
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+        tracemalloc.Filter(False, "<unknown>"),
+    ]
+    start_snapshot = start_snapshot.filter_traces(filters)
+    end_snapshot = end_snapshot.filter_traces(filters)
+    top_stats = end_snapshot.compare_to(start_snapshot, 'traceback')
+
+    limit = 10
+
+    print("Top %s leaking locations" % limit)
+    for index, stat in enumerate(top_stats[:limit], 1):
+        print("#%s: %.1f KiB (count=%d)" % (index, stat.size / 1024, stat.count))
+        for line in stat.traceback.format():
+            print(' ', line)
+        print('')
+
+    other = top_stats[limit:]
+    if other:
+        size = sum(stat.size for stat in other)
+        print("%s other: %.1f KiB" % (len(other), size / 1024))
+    total = sum(stat.size for stat in top_stats)
+    print("Total allocated size: %.1f KiB" % (total / 1024))
+
+
+def split_at(n, xs):
+    """Split a collection at an index."""
+    return xs[:n], xs[n:]
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
 
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
     is_in_debugger = sys.gettrace() is not None
 
+    # Set PYTHONTRACEMALLOC=10 to debug memory usage
+    profile_memory = os.getenv('PYTHONTRACEMALLOC')
+    start_snapshot = None
+    if profile_memory:
+        import tracemalloc
+        tracemalloc.start()
+        start_snapshot = tracemalloc.take_snapshot()
+
     on_server_start()
     logger.debug('app starting in debug mode')
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger,
+    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
 
-
-def split_at(n, xs):
-    """Split a collection at an index."""
-    return xs[:n], xs[n:]
+    # If we hit Ctrl-C, we end up here
+    if profile_memory:
+        print('⏳ Taking memory snapshot. This may take a moment.')
+        import gc
+        gc.collect()
+        end_snapshot = tracemalloc.take_snapshot()
+        analyze_memory_snapshot(start_snapshot, end_snapshot)

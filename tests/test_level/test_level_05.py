@@ -173,7 +173,7 @@ class TestsLevel5(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 37), hedy.exceptions.UnquotedEqualityCheck),
+            SkippedMapping(SourceRange(2, 1, 2, 37), hedy.exceptions.UnquotedEqualityCheckException),
         ]
 
         self.multi_level_tester(
@@ -195,7 +195,7 @@ class TestsLevel5(HedyTester):
         print(f'{naam}')""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheck),
+            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheckException),
         ]
 
         self.multi_level_tester(
@@ -215,7 +215,7 @@ class TestsLevel5(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 43), hedy.exceptions.UnquotedEqualityCheck),
+            SkippedMapping(SourceRange(2, 1, 2, 43), hedy.exceptions.UnquotedEqualityCheckException),
         ]
 
         self.multi_level_tester(

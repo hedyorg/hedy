@@ -234,6 +234,8 @@ class Table:
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
 
+        print('get_many', key, reverse, limit, pagination_token)
+
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
             items, next_page_token = self.storage.query(
