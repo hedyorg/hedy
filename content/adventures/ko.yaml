@@ -2,7 +2,7 @@ adventures:
     tic:
         levels:
             17:
-                story_text: "이전 단계에서 틱택토 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 수준에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\nHedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
+                story_text: "이전 단계에서 틱택토 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 레벨에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\nHedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             13:
@@ -14,7 +14,7 @@ adventures:
                 story_text: "In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Tic Tac Toe game, like this:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
             15:
-                story_text: "이 수준에서 {while} 루프로 틱택토 게임을 향상시킬 수 있다. 이 루프로 `{if} game != 'over'`와 `{for} i {in} {range} 1 {to} 9`를 하나의 간단한 행으로 결합할 수 있다.\n확인해보세요:\n"
+                story_text: "이 레벨에서 {while} 루프로 틱택토 게임을 향상시킬 수 있다. 이 루프로 `{if} game != 'over'`와 `{for} i {in} {range} 1 {to} 9`를 하나의 간단한 행으로 결합할 수 있다.\n확인해보세요:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
         name: Tic Tac Toe
@@ -24,10 +24,10 @@ adventures:
         levels:
             3:
                 start_code: '{print} 안녕하세요!'
-                story_text: "이전 수준에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.\n하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.\n그리고 당신은 Hedy가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!\n다음 탭을 잠깐 보세요!\n"
+                story_text: "이전 레벨에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.\n하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.\n그리고 당신은 Hedy가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!\n다음 탭을 잠깐 보세요!\n"
             4:
-                start_code: "{print} 안녕하세요!"
-                story_text: "이전 수준에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.\n다음과 같은 코드를 실행하려고 했을 수도 있습니다:\n\n물론 인쇄하고 싶었겠지\n\n`My name is Sophie`\n\nbut Hedy prints\n\n`My Sophie is Sophie`.\n\n이 수준에서는 따옴표를 사용하여 이 문제를 해결합니다.\n"
+                start_code: "{print} '안녕하세요'"
+                story_text: "이전 레벨에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.\n다음과 같은 코드를 실행하려고 했을 수도 있습니다:\n\n물론 출력 하고 싶었겠지\n\n`My name is Sophie`\n\nbut Hedy prints\n\n`My Sophie is Sophie`.\n\n이 레벨에서는 따옴표를 사용하여 이 문제를 해결합니다.\n"
                 example_code: "```\nname {is} Sophie\n{print} My name is name\n```\n"
             14:
                 start_code: "{print} 'Lets go to the next tab'"
@@ -40,14 +40,14 @@ adventures:
                 story_text_2: "플레이어가 햄버거와 콜라를 입력하면 \"그래서 햄버거와 콜라를 원한다\"고 말할 수는 없지만, 두 줄을 따로 만들어야 한다.\n또한, `{echo}` 명령어는 문장의 마지막에 단어만 울려 퍼지기 때문에 \"너의 햄버거가 바로 올라온다!\"라고 말할 수는 없다.\n\n이는 레벨 2에서 변화한다. 레벨 2에서는 여러 개의 정보를 저장하고 원하는 장소에 인쇄할 수 있는 변수 작업을 배울 수 있다.\n그럼 다음 탭으로 가보도록 하겠습니다!\n"
             1:
                 story_text: "Hedy에 오신 것을 환영합니다! 레벨 1에서는 이야기를 인쇄하는 것으로 시작할 수 있습니다.\n\n프로그래밍 필드 아래에 있는 녹색 'Run code' 버튼으로 직접 코드를 사용해 보십시오.\n\n준비되셨나요? 그럼 다음 탭으로 가셔서 첫 번째 명령어를 배우세요!\n"
-                start_code: '{print} 안녕 세상아!'
+                start_code: '{print} 안녕하세요!'
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "이전 레벨에서는 코드를 실행할 때마다 게임이 달라지는 `{at} {random}`을 사용하는 법을 이미 배웠습니다.\n하지만 그것은 실제로 상호작용적이지 않으며, 플레이어는 게임에서 일어나는 일에 아무런 영향을 미치지 않는다.\n\n이 레벨에서는 프로그램에서 다른 응답을 할 수 있는 `{if}` 명령어를 배울 것이다. 예를 들어, 컴퓨터의 비밀 암호를 프로그래밍할 수 있는 방법이다.\n그럼 새로운 명령어를 보려면 다음 탭으로 이동해 보겠습니다!\n"
                 example_code: "```\npassword {is} {ask} 'What is the correct password?'\n```\n"
             6:
                 start_code: "# 코드를 여기에 입력합니다"
-                story_text: "이전 단계에서는 `{ask}`와 `{if}`을 연습했습니다. 예를 들어 손님들에게 무엇을 먹고 싶은지 물어볼 수 있습니다.\n하지만 아직 할 수 없는 것은 모든 사람들의 저녁 식사 가격을 계산하는 것이다.\n\n다음 단계는 프로그램에서 덧셈, 뺄셈, 곱셈을 사용하는 것을 가능하게 한다. 이런 식으로 당신은 당신의 식당의 가격을 계산할 수 있지만, 친구들과 가족들에게 할인을 주기 위해 비밀번호를 추가할 수도 있다.\n다음 단계의 또 다른 옵션은 당신의 남동생이나 여동생이 그들의 곱셈을 연습할 수 있도록 당신 자신의 수학 게임을 프로그래밍하는 것이다.\n직접 가보세요!\n"
+                story_text: "이전 단계에서는 `{ask}`와 `{if}`을 연습했습니다. 예를 들어 손님들에게 무엇을 먹고 싶은지 물어볼 수 있습니다.\n하지만 아직 할 수 없는 것은 모든 사람들의 저녁 식사 가격을 계산하는 것이다.\n\n다음 단계는 프로그램에서 덧셈, 뺄셈, 곱셈을 사용하는 것을 가능하게 한다. 이런 식으로 당신은 당신의 식당의 가격을 계산할 수 있지만, 친구들과 가족들에게 할인을 주기 위해 비밀 암호를 추가할 수도 있다.\n다음 단계의 또 다른 옵션은 당신의 남동생이나 여동생이 그들의 곱셈을 연습할 수 있도록 당신 자신의 수학 게임을 프로그래밍하는 것이다.\n직접 가보세요!\n"
                 example_code: "```\nfood_price {is} 0\ndrink_price {is} 0\ntotal_price {is} 0\n{print} 'Welcome to McHedy'\norder {is} {ask} 'What would you like to eat?'\n{if} order {is} hamburger food_price {is} 5\n{if} order {is} fries food_price {is} 2\ndrink {is} {ask} 'What would you like to drink?'\n{if} drink {is} water drink_price {is} 0\nelse drink_price {is} 3\ntotal_price {is} food_price + drink_price\n{print} 'That will be ' total_price ' dollars, please'\n```\n"
             7:
                 start_code: "{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n"
@@ -63,7 +63,7 @@ adventures:
                 example_code: "```\n{repeat} 5 {times} {print} 'In the next tab you can repeat multiple lines of code at once!'\n```\n"
             10:
                 start_code: "{print} 'Lets go to the next tab!'"
-                story_text: "잘하고 있어요! 이전 수준에서 우리는 여전히 작은 문제에 직면했어요. 당신은 선을 반복하는 법을 배웠지만, 선을 살짝 바꾸고 싶다면 어떻게 해야 하죠.\n예를 들어, 만약 여러분이 '행복하고 알고 있다면'이라는 노래를 부르고 싶다면, 다음과 같습니다:\n\n다음 절 '발을 구르다', 다음 절 '발을 구르다', 다음 절 '발을 구르다'도 원한다면 코드를 완전히 바꿔야 할 것이다.\n이 레벨에서는 동작 목록을 만들고 매번 다른 동작으로 코드를 반복할 수 있는 `{for}` 명령어를 배울 것입니다!\n한번 봐주세요!\n"
+                story_text: "잘하고 있어요! 이전 레벨에서 우리는 여전히 작은 문제에 직면했어요. 당신은 선을 반복하는 법을 배웠지만, 선을 살짝 바꾸고 싶다면 어떻게 해야 하죠.\n예를 들어, 만약 여러분이 '행복하고 알고 있다면'이라는 노래를 부르고 싶다면, 다음과 같습니다:\n\n다음 절 '발을 구르다', 다음 절 '발을 구르다', 다음 절 '발을 구르다'도 원한다면 코드를 완전히 바꿔야 할 것이다.\n이 레벨에서는 동작 목록을 만들고 매번 다른 동작으로 코드를 반복할 수 있는 `{for}` 명령어를 배울 것입니다!\n한번 봐주세요!\n"
                 example_code: "```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             11:
                 start_code: "{print} 'Lets go to the next tab!'"
@@ -74,7 +74,7 @@ adventures:
                 example_code: "```\nburger = 5\ndrink = 2\ntotal = burger + drink\nprint 'You have ordered a burger and a drink'\nprint 'That costs ' total ' dollars please'\n```\n"
             13:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "이전 수준에서 여러분은 두 `{if}` 명령어를 서로 안에 넣는 방법을 배웠습니다. 이것은 잘 작동하지만, 이것과 같이 매우 길고 다루기 힘든 코드를 제공합니다:\n\n이 시스템에서는 올바른 사용자 이름과 올바른 암호를 모두 제공해야 합니다.\n이 수준에서 당신은 이 코드를 훨씬 더 짧고 이해하기 쉽게 만드는 `{and}`명령어를 배울 것이다!\n한번 봐봐!\n"
+                story_text: "이전 레벨에서 여러분은 두 `{if}` 명령어를 서로 안에 넣는 방법을 배웠습니다. 이것은 잘 작동하지만, 이것과 같이 매우 길고 다루기 힘든 코드를 제공합니다:\n\n이 시스템에서는 올바른 사용자 이름과 올바른 비밀 암호를 모두 제공해야 합니다.\n이 레벨에서 당신은 이 코드를 훨씬 더 짧고 이해하기 쉽게 만드는 `{and}`명령어를 배울 것이다!\n한번 봐봐!\n"
                 example_code: "```\nusername = {ask} 'What is your username?'\npassword = {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
             15:
                 start_code: "{print} 'Lets go to the next level!'"
@@ -88,7 +88,7 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "Hedy의 마지막 레벨에 거의 다 도달했습니다. 잘했어요! 이 레벨에서는 `{print}`을(를) 사용하는 실제 파이썬 방법을 배울 수 있습니다.\n"
             18:
-                start_code: "{print} ('Great job!!!')"
+                start_code: "{print} ('잘했어!!!')"
                 story_text: "축하합니다! Hedy의 마지막 레벨에 도달했습니다! 여기서 만든 코드를 레플릿이나 파이참과 같은 실제 파이썬 환경에 복사할 수 있고, 거기서 계속 배울 수 있습니다!\n참고로 파이썬은 영어 명령어만 읽을 수 있기 때문에 다른 언어를 사용해 왔다면 지금은 영어로 전환해야 한다.\n"
         name: 소개
         description: 레벨 설명
@@ -120,11 +120,11 @@ adventures:
                 example_code_2: "```\n{print} He hears a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n\n### 연습문제\n이전 레벨에서 이 레벨로 스토리를 복사합니다.\n이 레벨에서는 `{at} {random}`, `{add} {to}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.\n스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
+                start_code: '{print} 너의 스토리'
             4:
                 story_text: "이전 수준에서 여전히 문제가 있다는 것을 알아차렸을 수도 있다. 당신은 단어 이름을 포함하는 문장을 인쇄하려고 노력하였는가? 즉, `{print}` 내 이름은 name이다.\n이 수준에서 해결할 수 있습니다. 인쇄할 모든 내용에 따옴표를 사용해야 합니다.\n\n### 연습문제1\n예제 코드를 복사한 후 1행과 2행의 빈칸에 따옴표를 붙여서 마무리한다.\n3번과 4번의 빈칸은 따옴표가 아니라 `{sleep}`과 `{clear}`명령어로 대체해야 하는데, 할 수 있을까요?\n\n### 연습문제2\n이전 레벨로 돌아가서 스토리 코드를 복사하세요. 올바른 자리에 따옴표를 추가하여 코드가 이 레벨에서 작동하도록 하세요.\n주의: 당신 자신의 이야기에 나오는 변수들은 따옴표 밖에 있어야 한다. 예제 코드의 두 번째 줄처럼. 그 줄에서 변수 이름은 따옴표 밖에 놓여 있다.\n"
                 example_code: "```\nname {is} {ask} _ What is your name? _\n{print}  _ The main character is called _ name\n_\n_\n{print} name  _ is now going to walk in the woods _\n{print} name _ is a bit scared _\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} _ He hears the sound of a _ animals {at} {random}\n{print} name _ is afraid this is a haunted forest _\n```\n"
-                start_code: "{print} 'Your story will be printed here!'"
+                start_code: "{print} '너의 이야기는 여기에 출력될거야'"
             5:
                 story_text: "이 레벨에서 다른 엔딩을 프로그래밍할 수 있으므로 스토리가 더욱 재미있을 것입니다.\n예제 코드에서 두 가지 다른 엔딩을 만드는 방법을 볼 수 있습니다.\n\n### 연습문제 1\n당신이 선택한 주제에 대해 최소 6줄의 코드로 된 새로운 단편 소설을 쓰시오.\n영감이 없다고요? 다음 주제들 중 하나를 고르세요: 슈퍼히어로, 지루한 학교생활, 무인도에 발이 묶인 것들.\n\n이제 예제 코드와 같이 플레이어에게 해피엔드 또는 배드엔드를 선택할 수 있는 변화를 줍니다.\n양쪽 끝을 모두 프로그래밍합니다.\n\n### 연습문제 2\n자신의 스토리 모험에서 만든 스토리를 이전 레벨에 복사합니다.\n이야기에 최소한 두 개의 `{if}` 명령과 `{else}` 명령을 추가하는 방법을 찾으십시오.\n이것은 행복한 결말일 수도 있고 나쁜 결말일 수도 있지만 명령어를 통합하는 다른 방법을 찾을 수도 있습니다.\n"
                 start_code: "{print} 'Here your story will start!'"
@@ -142,15 +142,15 @@ adventures:
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             12:
-                story_text: "이 수준에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.\n\n### ### 연습문제\n\n이전 수준의 이야기를 찾으세요. 어느 수준이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요."
+                story_text: "이 레벨에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.\n\n### ### 연습문제\n\n이전 레벨의 이야기를 찾으세요. 어느 레벨이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요."
                 example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             13:
-                story_text: "`{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.\n\n### 연습문제 1\n예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.\n\n### 연습문제 2\n이전 수준의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.\n"
+                story_text: "`{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.\n\n### 연습문제 1\n예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.\n\n### 연습문제 2\n이전 레벨의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.\n"
                 example_code: "```\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\npath = {ask} 'Which path should she choose?'\nweapon = {ask} 'What weapon does she draw?'\n{if} path {is} 'left' {and} weapon {is} 'sword'\n    _\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             18:
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# 코드를 여기에 입력하세요'
                 story_text: "다른 이야기를 인쇄할 건데 이제는 `{print}`가 붙은 괄호를 써야 해요.\n\n### ### 연습문제 1\n최소 5문장 이상의 이야기를 만들어 보세요. 아직 '이름'을 사용하지 않아도 됩니다.\n"
                 story_text_2: "### 연습문제 2\n우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.\n그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.\n팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!\n"
                 example_code: "```\n{print}('Welcome to this story!')\n```\n"
@@ -212,7 +212,7 @@ adventures:
                 example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
-                story_text: "이 수준에서 변수를 사용하여 거북이가 상호작용하도록 만들 수 있다. 예를 들어 플레이어에게 거북이가 몇 걸음을 걸어야 하는지 물어볼 수 있다.\n"
+                story_text: "이 레벨에서 변수를 사용하여 거북이가 상호작용하도록 만들 수 있다. 예를 들어 플레이어에게 거북이가 몇 걸음을 걸어야 하는지 물어볼 수 있다.\n"
                 example_code: "```\nanswer {is} {ask} How many steps should the turtle make?\n{forward} answer\n```\n"
                 story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\n\n### 연습문제\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
                 example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
@@ -404,7 +404,7 @@ adventures:
                 example_code: "You can make a simple restaurant code, like this:\n```\n{print} 'Welcome to Restaurant Chez Hedy'\n{print} 'Here is our menu:'\n{print} 'Our main courses are pizza, lasagne, or spaghetti'\nmain = {ask} 'Which main course would you like?'\nprice = 0\n{if} main {is} pizza price = 10\n{if} main {is} lasagne price = 12\n{if} main {is} spaghetti price = 8\n{print} 'You have ordered ' main\n{print} 'That will be ' price ' dollars, please'\n{print} 'Thank you, enjoy your meal!'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             8:
-                story_text: "이 수준에서 당신은 여러 줄의 코드를 반복함으로써 가상 레스토랑을 더 정교하게 만들 수 있다. 다음과 같이:\n"
+                story_text: "이 레벨에서 당신은 여러 줄의 코드를 반복함으로써 가상 식당을 더 정교하게 만들 수 있다. 다음과 같이:\n"
                 example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n"
                 story_text_2: "### 연습문제\nThis code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.\n**Extra** Add even more items, as many options as you like!\n"
                 start_code: '# 코드를 여기에 입력하세요'
@@ -566,7 +566,7 @@ adventures:
         description: Try to get as close to 21 as you can
     parrot:
         name: 앵무새
-        description: Create your own online pet parrot that will copy you!
+        description: 당신의 말을 따라할 당신만의 온라인 애완 앵무새를 만들어 보세요!
         default_save_name: 앵무새
         levels:
             1:
@@ -598,7 +598,7 @@ adventures:
                 start_code: '# 코드를 여기에 입력하세요'
             4:
                 story_text: "이 레벨에서 우리는 `{ask}`와 `{print}` 명령어가 있는 따옴표를 사용해야 한다.\n### 연습문제\n빈칸에 따옴표를 기입하여 코드를 완성한다.\n"
-                start_code: '# Write your code here'
+                start_code: '# 여기에 코드를 입력하세요'
                 example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ 🧒 Say _ new_word _, Hedy!_\n{print} _ 🦜 _ words {at} {random}\n```\n"
     dice:
         name: Dice
@@ -682,11 +682,11 @@ adventures:
         default_save_name: print
         levels:
             1:
-                story_text: "## The print command\n`{print}` 명령을 사용하여 화면에 텍스트를 인쇄할 수 있습니다.\n"
+                story_text: "## print 명령어\n`{print}` 명령을 사용하여 화면에 텍스트를 print할 수 있습니다.\n"
                 story_text_2: "### 연습문제\nHedy에서 당신은 모든 모험에서 연습문제를 발견할 수 있을 것이다. 연습문제는 당신이 새로운 명령과 개념을 연습할 수 있게 해주고, 예제 코드에 당신만의 반전을 줄 수 있게 해준다.\n이 연습에서 여러분은 분홍색 빈 칸을 보게 될 것이다. 코드를 실행하기 전에 빈 칸의 자리에 무언가를 채워야 한다.\n\n빈 칸에 `{print}` 명령어를 입력한 다음 코드 행을 다섯 개 더 추가합니다. 각 행은 `{print}`명령어로 시작해야 합니다.\n재미있게 보내!\n"
-                example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
-                example_code_2: "```\n_ Hello!\n```\n"
-                start_code: "{print} Welcome to Hedy!\n"
+                example_code: "```\n{print} 안녕, 프로그래머 여러분!\n{print} Hedy에 오신걸 환영해요!\n```\n"
+                example_code_2: "```\n_ 안녕하세요!\n```\n"
+                start_code: "{print} Hedy에 오신걸 환영해요!\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "이제 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다 우리는 들여쓰기 앞 줄에 `:`가 필요하다.\n"
@@ -695,7 +695,7 @@ adventures:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "진짜 파이썬 코드에 도착했어! 이제부터는 `{print}`와 `{range}`가 있는 괄호를 써야 한다는 얘기다.\n영어 명령어만 사용하면 파이썬 환경에서 이 레벨의 Hedy 코드를 사용할 수 있다는 의미도 있다. 지금까지 사용하지 않았다면 명령어 메뉴의 토글을 전환하여 사용할 수 있다."
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
-                story_text_2: 두 개 이상의 항목을 인쇄하려면 쉼표로 구분해야 합니다.
+                story_text_2: 두 개 이상의 항목을 인쇄하려면 쉼표,으로 구분해야 합니다.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
                 story_text_3: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
@@ -805,7 +805,7 @@ adventures:
         description: Introducing the in command
         default_save_name: in_command
     quotation_marks:
-        name: "'quotation marks'"
+        name: "'따옴표'"
         levels:
             12:
                 example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
@@ -827,7 +827,7 @@ adventures:
         default_save_name: quotation_marks
     for_command:
         name: "{for}"
-        description: for command
+        description: for 명령어
         default_save_name: for
         levels:
             10:
@@ -885,7 +885,7 @@ adventures:
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
     repeat_command:
         name: "{repeat}"
-        description: repeat command
+        description: repeat 명령어
         default_save_name: repeat_command
         levels:
             7:
@@ -902,7 +902,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
     repeat_command_2:
         name: "{repeat} 2"
-        description: repeat command 2
+        description: repeat 명령어 2
         default_save_name: repeat_command_2
         levels:
             7:
@@ -937,5 +937,5 @@ adventures:
                 start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SURPRISE!'\n"
                 story_text: "새로운 명령어가 필요합니다. `{clear}`을(를) 사용하면 출력된 화면의 모든 텍스트를 지울 수 있습니다. 이렇게 하면 화면에 텍스트가 너무 차는 것을 방지할 수 있습니다.\n조심하세요! 만약 `{clear}` 명령을 사용하고 있다면, 그 위에 `{sleep}`을 사용하는 것을 기억하세요. 그렇지 않으면 Hedy는 읽을 시간을 주지 않고 화면을 지울 것입니다!\n"
         name: '{clear}'
-        description: clear command
+        description: clear 명령어
         default_save_name: clear_command
