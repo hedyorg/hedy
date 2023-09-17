@@ -64,8 +64,8 @@ levels:
                 {sleep} 2
                 {print} yemek {at} {random} ve soslar {at} {random}
         3:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: "Bir satranç turnuvasında geriye üç oyuncu kalmıştır.\nHangi iki oyuncunun ilk önce birbirlerine karşı oynaması gerektiğine karar veren bir program oluşturun.\nİlk maçı oynayan iki oyuncuyu yazdırarak başlayın, ardından kazananın hangi oyuncuya karşı oynayacağını yazdırın.\n"
+            code: "oyuncular {is} Liam, Noah, Sophie\noyuncu_1 {is} oyuncular {at} {random}\n{remove} oyuncu_1 {from} oyuncular\noyuncu_2 {is} oyuncular {at} {random}\n{print} 'İlk karşılaşma ' oyuncu_1 ' ile ' oyuncu_2 ' arasında'\n{remove} oyuncu_2 {from} oyuncular\n{print} 'Kazanan ' oyuncular {at} {random} ' ile oynayacak'"
     4:
         1:
             story: |
@@ -128,17 +128,14 @@ levels:
     7:
         1:
             story: |
-                Bir satranç turnuvasında üç oyuncu kalmıştır.
-                İlk önce hangi iki oyuncunun birbirlerine karşı oynayacağına karar veren bir program oluşturun.
-                Önce ilk maçı oynayacak iki oyuncuyu yazdırın, ardından kazananın hangi oyuncuya karşı oynayacağını yazdırın.
-            code: |-
-                oyuncular = Liam, Noah, Sophie
-                oyuncu1 = oyuncular {at} {random}
-                {remove} oyuncu1 {from} oyuncular
-                oyuncu2 = oyuncular {at} {random}
-                {print} 'ilk olarak ' oyuncu1 ' ve ' oyuncu2 ' oynayacak'
-                {remove} oyuncu2 {from} oyuncular
-                {print} 'Kazanan ile ' oyuncular {at} {random} ' oynayacak'
+                Bebek köpekbalığı şarkısını tamamlayın. Önce bebek köpekbalığı, sonra anne ve son olarak baba köpekbalığı gelir.
+            code: |
+                {repeat} 3 {times} {print} 'Bebek köpekbalığı tututututudu'
+                {print} 'Bebek köpekbalığı'
+                {repeat} 3 {times} {print} 'Anne köpekbalığı tututututudu'
+                {print} 'Anne köpekbalığı'
+                {repeat} 3 {times} {print} 'Baba köpekbalığı tututututudu'
+                {print} 'Baba köpekbalığı'
         2:
             story: |
                 'The wheels on the bus go round and round' şarkısını oluşturun (Otobüsün tekerleri dönüyor çocuk şarkısı, biz daha Türkçesini bulana kadar bunun şarkı sözlerini arayın, şarkının kendisini anlamanız gerekmez)
