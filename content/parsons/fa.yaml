@@ -42,9 +42,8 @@ levels:
             story: |
                 The new school year at Hogwarts is starting! 
                 It is the job of the sorting hat to sort you into one of the houses.
-                Which house will you be sorted into?
-                Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
-                Let the program wait a short period before revealing your house.
+                Which house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.
+                Before the sorting hat reveals your house, you can tell it to not pick one of the houses.
             code: |
                 {print} سال تحصیلی جدید در هاگوارتز شروع می شود!
                 {print} The sorting hat is ready to sort you into a Hogwarts house.
@@ -60,6 +59,9 @@ levels:
                 {print} Your random meal for today is...
                 sleep 2
                 {print} food at random with toppings at random
+        3:
+            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play.\n"
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
     4:
         1:
             story: |
@@ -122,17 +124,14 @@ levels:
     7:
         1:
             story: |
-                In a chess tournament there are three players left.
-                Create a program that decides which two players first play against each other.
-                First print the two players who play the first match, then print against which player the winner will play.
+                Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
             code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                {remove} player1 {from} players
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                {repeat} 3 {times} {print} 'Baby shark tututututudu'
+                {print} 'Baby shark'
+                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
+                {print} 'Mommy shark'
+                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
+                {print} 'Daddy shark'
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'
@@ -140,7 +139,7 @@ levels:
                 {print} 'the wheels on the bus go'
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'all through the town'
     8:
         1:
             story: |
@@ -163,3 +162,31 @@ levels:
                   {print} counter
                   {sleep} 1
                 {print} 'Ready or not here I come!'
+    10:
+        2:
+            story: "This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.\n**Mind** The variable people is defined in the first line. The variable hairstyles in the second.\n"
+            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
+        1:
+            story: "Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.\n**Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.\n"
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
+    9:
+        2:
+            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?\n"
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
+        1:
+            story: "This game will give you three maths assignments. Each time the question is different. Can you figure out the order?\n"
+            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
+    12:
+        1:
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
+            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+        2:
+            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+    11:
+        1:
+            story: "Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.\n"
+            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+        2:
+            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"

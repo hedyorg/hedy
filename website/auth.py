@@ -174,7 +174,17 @@ def is_teacher(user):
     return bool(user.get("is_teacher", False))
 
 
+def has_public_profile(user):
+    if 'username' not in user or user.get('username') == '':
+        return False
+    username = user.get('username')
+    public_profile_settings = g.db.get_public_profile_settings(username)
+    has_public_profile = public_profile_settings is not None
+    return has_public_profile
+
 # Thanks to https://stackoverflow.com/a/34499643
+
+
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 

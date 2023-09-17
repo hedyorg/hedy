@@ -6,352 +6,352 @@
     explanation: '`{ask}` ile bir şey sor.'
     demo_code: '{ask} En sevdiğin renk nedir?'
 -   name: '{echo}'
-    explanation: "'{echo}' kullanarak bir şeyi tekrarlayın."
-    demo_code: "{ask} En sevdiğin renk nedir?\n{echo} en sevdiğin renk"
+    explanation: "`{echo}` kullanarak bir şeyi tekrar edin."
+    demo_code: "{ask} En sevdiğin renk nedir?\n{echo} demek en sevdiğin renk"
 -   name: '{print} emojiler'
-    explanation: '`{print}` ile bir emoji yazdır'
+    explanation: '`{print}` ile bir emoji yazdır.'
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: '`{forward}` ile bir çizgi çizin.'
+    explanation: '`{forward}`ile bir çizgi çizin.'
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    explanation: '`{turn}` ile çizim kaplumbağasını döndürün.'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
+    explanation: "`{is}` kullanarak, programda kullanılacak bir kelimeye bir isim verin. İsmi kendiniz seçebilirsiniz."
     demo_code: |-
-        name {is} Hedy
-        {print} welcome name
+        isim {is} Hedy
+        {print} merhaba isim
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
+    explanation: "`{ask}` ile bir şey sorun. Ama dikkat! Cevaba `{is}` ile bir isim vermeniz gerekir."
     demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
+        renk {is} {ask} En sevdiğin renk nedir?
+        {print} renk senin favorin!
 -   name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
+    explanation: "`{sleep}` ile Hedy'nin (birkaç) saniye duraklamasını sağlayın."
     demo_code: |-
-        {print} Let me think for one second...
+        {print} Bir saniye düşünmeme izin verin.
         {sleep}
-        {print} Hmm.. I need 3 more seconds...
+        {print} Hmm.. 3 saniyeye daha ihtiyacım var...
         {sleep} 3
-        {print} Eureka! Ive got it!
--   explanation: "Give a number a name using `{is}`. You can choose the name yourself."
+        {print} Evreka! Buldum!
+-   explanation: "Bir sayıya `{is}` kullanarak bir isim verin. İsmi kendiniz seçebilirsiniz."
     demo_code: |-
-        angle {is} 90
-        {turn} angle
+        açı {is} 90
+        {turn} açı
         {forward} 100
-    name: is - turtle
+    name: '{is} ile kablumbağa'
 3:
--   name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
+-   name: Rastgele seçin
+    explanation: '`{at}` ve `{random}` ile bir gruptan rastgele bir kelime seçin.'
     demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
+        hayvanlar {is} köpek, kedi, kanguru
+        {print} hayvanlar {at} {random}
 -   name: "{add}"
-    explanation: "add an item to a list"
+    explanation: "`{add}` bir öğe `{to_list}` bir liste."
     demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
+        hayvanlar {is} inek, kedi
+        {add} köpek {to_list} hayvanlar
 -   name: "{remove}"
-    explanation: "remove an item from a list"
+    explanation: "`{remove}` bir öğe `{from}` bir liste."
     demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+        hayvanlar {is} kedi, köpek, inek
+        {remove} köpek {from} hayvanlar
 4:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
+    demo_code: "{print} \"Merhaba, Hedy'ye hoş geldiniz.\""
 -   name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
+    explanation: "Bir metne bir isim verin ve `{print}` ile tırnak işaretleri olmadan yazdırın."
     demo_code: |-
-        name {is} Hedy
-        {print} 'my name is ' name
+        isim {is} Hedy
+        {print} 'benim adım ' isim
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "`{ask}` ile bir şeyler sorun."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        renk {is} {ask} 'En sevdiğin renk nedir?'
+        {print} renk ' senin favorin!'
 5:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
+    demo_code: "{print} \"Merhaba, Hedy'ye hoş geldiniz.\""
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "`{ask}` ile bir şeyler sorun."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' {is} your favorite!'
+        renk {is} {ask} 'En sevdiğin renk nedir?'
+        {print} renk ' senin favorin!'
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
+    explanation: "`{if}` ile seçin yapın."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
+        renk {is} {ask} 'En sevdiğin renk nedir?'
+        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
+-   name: "{if} ile kaplumbağa"
+    explanation: "`{if}` ile seçim yapın."
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        cevap {is} {ask} 'Ne kadar yürümeliyim?'
+        {if} cevap {is} uzak {forward} 100 {else} {forward} 5
 -   name: "{in}"
-    explanation: "Check elements with `{in}`"
+    explanation: "`{in}` ile öğeleri kontrol edin."
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{basılı}'
-    explanation: Klavyede belirli bir tuşun `{basılı}` olup olmadığını kontrol edin.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+        güzel_renkler {is} yeşil, sarı
+        renk {is} {ask} 'En sevdiğin renk nedir? ({is})'
+        {if} renk {in} güzel_renkler {print} 'Güzel!' {else} {print} 'eh işte'
+-   name: '{pressed}'
+    explanation: '`{pressed}` ile klavyede belirli bir tuşun basılı olup olmadığını kontrol edin.'
+    demo_code: "{if} a {is} {pressed} {print} 'A ya bastın!' {else} {print} 'Başka bir tuşa bastın!'"
 6:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
+    demo_code: "{print} '5 kere 5 eşittir ' 5 * 5"
 -   name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
+    explanation: "Bir hesaplama isteyin ve doğru olup olmadığını kontrol edin."
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
+        cevap = {ask} '10 artı 10 nedir?'
+        {if} cevap {is} 20 {print} 'Evet!' {else} {print} 'Oops'
+-   name: "`{ask}` ve `{if}` ile kaplumbağa"
+    explanation: "Kullanıcıya kaç tane açı istediğini sorun."
     demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
+        açılar = {ask} 'Kaç tane açı olacak?'
+        açı = 360 / açılar
         {forward} 50
 7:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Tırnak işaretlerini kullanarak tam olarak yazdırın."
+    demo_code: "{print} \"Merhaba, Hedy'ye hoş geldiniz.\""
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "`{ask}` ile bir şeyler sorun."
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        renk = {ask} 'En sevdiğin renk nedir?'
+        {print} renk ' senin favorin!'
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
+    explanation: "`{if}` ile bir seçim yapın."
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
+        renk = {ask} 'En sevdiğin renk nedir?'
+        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
+-   name: "{repeat} ile kaplumbağa"
+    explanation: "`{repeat}` ile bir kod satırını yineleyin."
     demo_code: |-
         {repeat} 3 {times} {forward} 10
 8:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "Bir şey yazdırın. Tam yazım için tırnak işareti kullanmayı unutmayın."
+    demo_code: "{print} '5 kere 5 eşittir ' 5 * 5"
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+    explanation: "Bir toplamanın cevabını isteyin ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
+        cevap = {ask} '5 artı 5 kaç eder?'
+        {if} cevap {is} 10
+            {print} 'Aferin sana!'
+            {print} 'Cevap gerçekten de ' cevap
+        {else}
             {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
+            {print} 'Cevap 10 olacaktı'
+-   name: "{repeat} ile kaplumbağa"
+    explanation: "Birden fazla satırı yineleyin."
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: '`{pressed}` ile klavyedeki belirli bir tuşun basılı olup olmadığını kontrol edin.'
+    demo_code: "{if} a {is} {pressed}\n    {print} 'A ya bastın!'\n{else}\n    {print} 'Başka bir tuşa bastın!'"
 9:
--   name: "`{if}` with multiple lines"
-    explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
+-   name: "{if} ile çoklu satırlar"
+    explanation: "`{ask}` ile bir toplama sorusunun cevabını alın ve doğru olup olmadığına bakın. Şimdi iki satır yazdırıyoruz."
     demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: "`{repeat}` and turtle"
-    explanation: "{repeat} multiple lines"
+        cevap = {ask} '10 artı 10 kaç eder?'
+        {if} cevap {is} 20
+            {print} 'Aferin!!'
+            {print} 'Cevap gerçekten de ' cevap
+        {else}
+            {print} 'Yanlış'
+            {print} 'Cevap 20 olacaktı'
+-   name: "{repeat} ile kaplumbağa"
+    explanation: "Birden fazla satırı tekrarlayın."
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: "{for} with a list"
-    explanation: "print all things in a list "
+    explanation: "Bir şey yazdırın. Tam yazdırma için tırnak işareti kullanmayı unutmayın."
+    demo_code: "{print} '5 kere 5 eder ' 5 * 5"
+-   name: "{for} ile bir liste"
+    explanation: "Bir listedeki her şeyi yazdırın."
     demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
+        hayvanlar {is} köpek, kedi, damlabalık
+        {for} hayvan {in} hayvanlar
+          {print} hayvan ' severim'
 11:
--   name: "{for} loop"
-    explanation: "We can use `{for}` with a {range}"
+-   name: "{for} döngüsü"
+    explanation: "`{for}` ile bir `{range}` 'ı birlikte kullanabiliriz."
     demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
+        {for} sayaç {in} {range} 1 {to} 5
+            {print} sayaç
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+    explanation: "Bir toplamın cevabını sorun ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
+        cevap = {ask} '5 artı 5 kaç eder?'
+        {if} cevap {is} 10
+            {print} 'Aferin sana!'
+            {print} 'Gerçekten de cevap ' cevap
+        {else}
             {print} 'Oops!'
-            {print} 'The answer is 10'
+            {print} 'Cevap 10 olacaktı'
 12:
--   name: "float directly"
-    explanation: "Decimal numbers"
-    demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+-   name: "doğrudan yüzmek"
+    explanation: "Ondalık sayılar."
+    demo_code: |-
+        {print} 'Hesaplayın!'
+        {print} 'İki buçuk artı iki buçuk...'
         {print} 2.5 + 2.5
--   name: "assign text"
-    explanation: "Text with quotation marks after ="
-    demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
-    explanation: "Text with quotation marks after {if}"
-    demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: "quotes in list"
-    explanation: "A list with quotation marks"
-    demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+-   name: "metin atayın"
+    explanation: "`=` den sonra tırnak işareti içinde olan metin"
+    demo_code: |-
+        isim = 'Robot Hedy'
+        {print} 'Merhaba ' isim
+-   name: "karşılaştırma için `{if}` 'den sonraki tırnaklar"
+    explanation: "`{if}` 'den sonraki tırnak içindeki metin."
+    demo_code: |-
+        isim = {ask} 'Kimsin sen?'
+        {if} isim = 'Hedy'
+            {print} 'Merhaba oradaki!'
+-   name: "listedeki tırnaklar"
+    explanation: "Tırnak işaretli bir liste."
+    demo_code: |-
+        süperkahramanlar = 'Iron Man', 'Batman', 'Superman'
+        {print} süperkahramanlar {at} {random}
 13:
 -   name: "{and}"
-    explanation: "Two parts both need to be correct"
+    explanation: "İki parçanın da doğru olması gerekir."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        else
-            {print} 'At least one answer is wrong!'
+        cevap1 = {ask} '3+2 kaç eder?'
+        cevap2 = {ask} '2+2 kaç eder?'
+        {if} cevap1 {is} 5 {and} cevap2 {is} 4
+            {print} 'Her iki cevap ta doğru!'
+        {else}
+            {print} 'En azından bir cevap yanlış!'
 -   name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
+    explanation: "İki parçadan en az birinin doğru olması gerekir. Her ikisi de doğruysa, bu da iyidir."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        else
-            {print} 'Both answers are wrong!'
+        cevap1 = {ask} '3+2 kaç eder?'
+        cevap2 = {ask} '2+2 kaç eder?'
+        {if} cevap1 {is} 5 {or} cevap2 {is} 4
+            {print} 'En azından bir cevap doğru!'
+        {else}
+            {print} 'Her iki cevap ta yanlış!'
 14:
--   name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
+-   name: "Daha küçük"
+    explanation: "İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
+        yaş = {ask} 'Kaç yaşındasın?'
+        {if} yaş < 13
+            {print} 'Sen benden daha gençsin!'
+-   name: "Daha büyük"
+    explanation: "İlk sayının ikinci sayıdan büyük olup olmadığını kontrol etmek için `>` kullanırız."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
+        yaş = {ask} 'Kaç yaşındasın?'
+        {if} yaş > 13
+            {print} 'Sen benden daha yaşlısın!'
+-   name: "Eşit"
+    explanation: "İki şeyin aynı olduklarını kontrol etmek için `==` kullanırız."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
+        cevap = {ask} '5 * 5 kaç eder?'
+        {if} cevap == 25
+            {print} 'Bu doğru!'
+-   name: "Eşit değil"
+    explanation: "İki şeyin aynı olmadıklarını kontrol etmek için `!=` kullanırız."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        cevap = {ask} '5 * 5 kaç eder?'
+        {if} cevap != 25
+            {print} 'Bu doğru değil!'
 
--   name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
+-   name: "Küçük veya eşit"
+    explanation: "İlk sayının ikinci sayıdan küçük veya ona eşit olduğunu kontrol etmek için `<=` kullanırız."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+        yaş = {ask} 'Kaç yaşındasın?'
+        {if} yaş <= 12
+            {print} 'Sen benden daha gençsin!'
 
--   name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
+-   name: "Büyük veya eşit"
+    explanation: "İlk sayının ikinci sayıdan büyük veya ona eşit olduğunu kontrol etmek için `>=` kullanırız."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        yaş = {ask} 'Kaç yaşındasın?'
+        {if} yaş >= 14
+            {print} 'Sen benden daha yaşlısın!'
 15:
 -   name: "{while}"
-    explanation: "We can use the `{while}` loop with not equal"
+    explanation: "Eşit değil ile `{while}` döngüsünü kullanabiliriz."
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: "Smaller {while}"
-    explanation: "We can also use the `{while}` loop with `<` and `>`. "
+        cevap = 0
+        {while} cevap != 25
+            cevap = {ask} '5 kere 5 kaç eder?'
+        {print} 'Doğru bir cevap verilmiştir'
+-   name: "Küçüktür ile {while}"
+    explanation: "Ayrıca `{while}` döngüsünü `<` ve `>` ile de kullanabiliriz."
     demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
+        sayaç = 1
+        {while} sayaç < 3
+            {print} 'Bunu ' 3 - sayaç ' kere daha yapıyoruz'
+            sayaç = sayaç + 1
+        {print} 'İşimizi bitirdik'
 16:
--   name: "square brackets"
-    explanation: "Lists with square brackets"
+-   name: "köşeli parantezler"
+    explanation: "Köşeli parantezler ile listeler."
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: "Get an item from a list"
-    explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
+        meyve = ['elma', 'muz', 'kiraz']
+        {print} meyve
+-   name: "Listeden bir öğe alma"
+    explanation: "Bir listeden bir öğe almak için [sayı] kullanırız, yani meyve[1] demek listeden ilk meyveyi al anlamına gelir!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: "Get a random item from a list"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
+        meyve = ['muz', 'elma', 'kiraz']
+        ilkmeyve = meyve[1]
+        {print} ilkmeyve
+-   name: "Listeden rastgele bir öğe alın"
+    explanation: "Bir listeden rastgele bir öğe almak için [rastgele] kullanırız, bu nedenle meyve[rastgele] listeden rastgele bir meyve al anlamına gelir!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit
+        meyve = ['muz', 'elma', 'kiraz']
+        rastgele_meyve = meyve[{random}]
+        {print} rastgele_meyve
 17:
 -   name: "{elif}"
-    explanation: "`{elif}`."
+    explanation: "`{elif}`"
     demo_code: |-
         a = 2
         {if} a == 1:
-            {print} 'a is 1'
+            {print} 'a 1 dir'
         {elif} a == 2:
-            {print} 'a is 2'
+            {print} 'a 2 dir'
         {else}:
-            {print} 'a is not 1 or 2'
+            {print} 'a 1 veya 2 değildir'
 -   name: "{print}"
-    explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
+    explanation: "Bir `{for}` kullandığımızda, `{for}` ifadesinin arkasına bir `:` koymamız gerekir!"
     demo_code: |-
         {for} i {in} {range} 1 {to} 12:
             {print} i
-        {print} 'Ready or not, here I come!'
+        {print} 'Hazır ya da değil, işte geliyorum!'
 -   name: "{if}"
-    explanation: "We need to do the same with all of our `{if}` statements"
+    explanation: "Aynı şeyi tüm `{if}` ifadelerimiz için de yapmamız gerekiyor."
     demo_code: |-
-        colour = {ask} 'What is your favorite color?'
-        {if} colour == 'green':
-            {print} 'Your favorite colour is green'
+        renk = {ask} 'En sevdiğin renk nedir?'
+        {if} renk == 'yeşil':
+            {print} 'En sevdiğin renk yeşil'
         {else}:
-            {print} 'Your favorite colour is not green'
+            {print} 'En sevdiğin renk yeşil değil'
 18:
 -   name: "{print}"
-    explanation: "With `{print}` you need to use parentheses"
+    explanation: "`{print}` ifadesinden sonra parantez kullanmanız gerekir."
     demo_code: |-
-        {print}('hi!')
--   name: "{print} with var"
-    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+        {print}('Merhaba!')
+-   name: "{range}"
+    explanation: "`{range}` tan sonra parantez kullanmanız gerekir."
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+        {for} i {in} {range} (1,10):
+            {print}('Merhaba, çarpı ', i)
+-   name: '{print} ile değişken'
+    demo_code: "isim = 'Hedy'\n{print}('Benim adım ', isim)"
+    explanation: '`{print}` ile daha fazla öğe yazdırıyorsanız, parantezler ve virgüller kullanmanız gerekir.'
+-   name: '{input} ile bir şey sorun'
+    explanation: Bir şey sormak için `{ask}` yerine `{input}` kullanın.
+    demo_code: "isim = {input}('Adın ne senin?')\n{print}('Demek senin adın ', isim)"

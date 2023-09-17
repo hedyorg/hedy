@@ -314,16 +314,21 @@ class Commands(StructuredDataFile):
 
 
 def deep_translate_keywords(yaml, keyword_language):
-    """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
-    if isinstance(yaml, str):
-        # this is used to localize adventures linked in slides (PR 3860)
-        yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
-        return safe_format(yaml, **KEYWORDS.get(keyword_language))
-    if isinstance(yaml, list):
-        return [deep_translate_keywords(e, keyword_language) for e in yaml]
-    if isinstance(yaml, dict):
-        return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
-    return yaml
+    try:
+        """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
+        if isinstance(yaml, str):
+            # this is used to localize adventures linked in slides (PR 3860)
+            yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
+            return safe_format(yaml, **KEYWORDS.get(keyword_language))
+        if isinstance(yaml, list):
+            return [deep_translate_keywords(e, keyword_language) for e in yaml]
+        if isinstance(yaml, dict):
+            return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
+        return yaml
+    except ValueError as E:
+        raise ValueError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
+    except TypeError as E:
+        raise TypeError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
 
 
 def get_localized_name(name, keyword_lang):
