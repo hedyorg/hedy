@@ -472,16 +472,9 @@ adventures:
 
                 example_code: |
                     ```
-                    hayvanlar = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
+                    hayvanlar = _ , _ , _ 
+                    {print} 'Brown bear, Brown bear'
                     {print} 'What do you see?'
-                    {for} hayvan {in} hayvanlar
-                        {print} 'I see a ' hayvan ' looking at me'
-                        {print} hayvan
-                        {print} hayvan
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             12:
@@ -559,7 +552,7 @@ adventures:
                     ```
                 start_code: "{print} Ben papağan Hedy.\n{ask} Adın ne senin?\n{echo}\n{echo}\n"
                 example_code_2: "```\n{print} Ben papağan Hedy.\n{ask} _\n{echo}\n{echo}\n"
-                story_text_2: "### Alıştırma\nSarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.\nPapağanın farklı bir soru sormasını sağlayın. Örnekteki boşlukları doldurun!\n**Ekleme** Papağanın birden fazla soru sormasına da izin verebilirsiniz. Kendi kodunuzun altına birkaç satır daha kod yazın.\n"
+                story_text_2: "### Alıştırma\nSarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.\nPapağanın farklı bir soru sormasını sağlayın. Örnekteki boşlukları doldurun!\n**Ekleme** Papağanın birden fazla soru sormasını da sağlayabilirsiniz. Kendi kodunuzun altına birkaç satır daha kod yazın.\n"
             2:
                 story_text: |
                     Bir önceki seviyede, sizden sonra tekrar eden bir papağan yapmıştınız. Bu seviyede papağanı bir değişken ve `{ask}` komutu kullanarak etkileşimli hale getireceğiz.
@@ -743,6 +736,11 @@ adventures:
                         {print} 'çiftliğinde ' hayvan ' var'
                         {print} ses ses ' diye bağırır'
                         {print} 'çiftliğinde Ali Babanın'
+                        {print} 
+                        {print} 
+                        {print} 
+                        {print} 
+                        {print} 
                     ```
 
                     ```
@@ -933,7 +931,7 @@ adventures:
             3:
                 story_text: |
                     Bugün bulaşıkları kimin yıkayacağı ya da kedinin kum kabını kimin değiştireceği konusunda evde hep anlaşmazlığa mı düşüyorsunuz?
-                    O zaman bilgisayarın çok adil bir şekilde seçim yapmasına izin verebilirsiniz. Bunu bu seviyede programlayabilirsiniz!
+                    O zaman bilgisayarın çok adil bir şekilde seçim yapmasını sağlayabilirsiniz. Bunu bu seviyede programlayabilirsiniz!
                 example_code: |
                     ```
                     kişiler {is} anne, baba, Ali, Ayşe
@@ -1031,7 +1029,7 @@ adventures:
                     günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar
                     isimler = anne, baba, Ali, Ayşe
                     {for} gün {in} günler
-                        {print} isimler {at} {random} ' bulaşıkları ' günler {at} {random} ' günü yıkayacak'
+                        {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     dice:
@@ -1098,7 +1096,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                              Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                                Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1202,7 +1200,7 @@ adventures:
 
                     ### Alıştırma
                     Boşlukları doldurarak kodu tamamlayın:
-                    * Bilgisayarın rastgele bir seçeneği seçmesine izin verin
+                    * Bilgisayarın rastgele bir seçeneği seçmesini sağlayın
                     * Oyuncuya ne seçmek istediğini sorun
                     * Satır 4 ve 5 için doğru değişkenleri yerlerine doldurun
                     * Hedy'nin beraberlik olup olmadığını kontrol edebilmesi için 6. satırı tamamlayın.
@@ -1213,7 +1211,7 @@ adventures:
                     seçim {is} _
                     {print} 'senin seçimin ' _
                     {print} 'bilgisayarın seçimi ' _
-                    {if} _ {is} _ {print} 'berabere!' {else} {print} 'berabere değil'
+                    {if} _ {is} _ {print} 'berabere kaldınız!' {else} {print} 'berabere değil'
                     ```
 
                     Beraberlik olup olmadığını görmek için boşluklara doğru kodu girin.
@@ -1382,7 +1380,7 @@ adventures:
 
                     ### Exercise 2
                     Yeni bir matematik alıştırma programı oluşturun, ama şimdi ondalık sayıları kullanın.
-                    Bir sayı listesi oluşturun, çarpma için iki tanesini seçin ve oyuncunun cevaplamasına izin verin.
+                    Bir sayı listesi oluşturun, çarpma için iki tanesini seçin ve oyuncunun cevaplamasını sağlayın.
                     Ve tabii ki cevabı doğrulamanız gerekiyor! **Ekleme** Can ekleyerek zorluğu artırın: Bir oyuncu yanlış cevap için bir can kaybetsin ve üç yanlış cevaptan sonra oyun sona ersin.
                 example_code: |
                     ```
@@ -1502,11 +1500,13 @@ adventures:
 
                 example_code_2: |
                     ```
-                    {print} Gizemli milkshake
-                    tatlar {is} çilekli, çikolatalı, vanilyalı
-                    alerjiler {is} {ask} Herhangi bir tat alerjiniz var mı?
-                    {remove} alerjiler {from} tatlar
-                    {print} Simdi bir tatlar {at} {random} milkshake geliyor
+                    {print} Kendi rastgele restoranınıza hoş geldiniz!
+                    mezeler {is} _
+                    yemekler {is} _
+                    tatlılar {is} _
+                    içecekler {is} _
+                    fiyatlar {is} _
+                    _
                     ```
                 start_code: "# kodunuzu buraya yazın"
             4:
@@ -1720,7 +1720,7 @@ adventures:
                         fiyat = fiyat - 3
                     {if} içecekler {is} 'su' _ içecekler {is} 'meyve suyu'
                         {print} 'Bu sağlıklı bir seçim'
-                    {print} 'Toplam ' lira ' lira ediyor'
+                    {print} 'Toplam ' fiyat' lira ediyor'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             15:
@@ -1756,7 +1756,7 @@ adventures:
                     _ Merhaba, ben falcı Hedy!
                     _ Peki sen kimsin?
                     _ Kristal küreme bir göz atayım
-                    _ Görüyorum... Görüyorum...
+                    _ Görüyorum... Evet görüyorum...
                     _ Senin adın
                     ```
                 story_text_2: |
@@ -2036,7 +2036,7 @@ adventures:
                     ### Alıştırma
                     Şu anda bu oyunu kazanmak çok zor, kazanmayı daha kolay hale getirebilir misiniz?
                     Kodunuzu bir doğru kapı ve iki yanlış kapı yerine sadece bir yanlış kapı ve iki doğru kapı olacak şekilde değiştirebilir misiniz?
-                    İpucu: Bu, doğru_kapı değişkenini yanlış_kapı olarak değiştirmek ve `{if}` ve `{else}` kodlarını değiştirmek anlamına gelir.
+                    İpucu: Bu, doğru_kapı değişkenini yanlış_kapı olarak değiştirmek ve sonra `{if}` ve `{else}` kodlarını değiştirmek anlamına gelir.
                     Ve tabii ki hikayeyi değiştirebilir ve kendinize ait hale getirebilirsiniz. Canavarları değiştirin ya da hediye aldığınız mutlu bir oyun gösterisine çevirin!
                 example_code: |
                     ```
@@ -2145,528 +2145,516 @@ adventures:
                     ```
                 start_code: "# kodunuzu buraya yazın"
     piggybank:
-        name: "Piggy Bank"
-        description: "Count your pocketmoney!"
-        default_save_name: "Piggy Bank"
+        name: "Kumbara"
+        description: "Cebindeki parayı say!"
+        default_save_name: "Kumbara"
         levels:
             12:
                 story_text: |
-                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
+                    Bu macerada, dijital bir kumbaranın nasıl yapılacağını öğreneceksiniz.
+
+                    ### Alıştırma
+                    Ne kadar paranız olduğunu ve istediğinizi satın almak için ne kadar süre biriktirmeniz gerektiğini hesaplamak için kodu tamamlayın!
+                    **Ekleme** Belki de zaten biraz para biriktirmişsinizdir? Bunu biriktirmeniz gereken miktardan düşebilirsiniz.
                 example_code: |
                     ```
-                    {print} 'The digital piggy bank'
-                    wish = {ask} 'What would you like to buy?'
-                    price = {ask} 'How much does that cost?'
-                    saved = {ask} 'How much money have you saved already?'
-                    allowance = {ask} 'How much pocket money do you get per week?'
-                    to_save = price - saved
-                    weeks = to_save / allowance
-                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    {print} 'Dijital kumbara'
+                    istek = {ask} 'Ne satın almak isterdiniz?'
+                    fiyat = {ask} 'Bu fiyatı ne kadar?'
+                    biriken = {ask} 'Şimdiye kadar ne kadar para biriktirdiniz?'
+                    haftalık = {ask} 'Haftada ne kadar cep harçlığı alıyorsunuz?'
+                    birikmesi_gereken = fiyat - biriken
+                    haftalar = birikmesi_gereken / haftalık
+                    {print} 'Yeni bir ' _ ' almak için ' _ ' hafta biriktirmek gerekiyor.'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             14:
                 story_text: |
-                    In this level you can let Hedy tell you {if} you have saved up enough money!
+                    Bu seviyede, Hedy'nin size yeterince para biriktirip biriktirmediğinizi söylemesini sağlayabilirsiniz!
                 example_code: |
                     ```
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-                    to_save = wish - money
-                    weeks = to_save / allowance
-                    {if} wish > money
-                        {print} 'You need to save up some more!'
-                        {print} 'Youll need ' weeks ' more weeks.'
+                    biriken = {ask} 'Ne kadar para biriktirdiniz?'
+                    istek = {ask} 'Ne kadar paraya ihtiyacınız var?'
+                    haftalık = {ask} 'Her hafta ne kadar cep harçlığı alıyorsunuz?'
+                    birikmesi_gereken = istek - biriken
+                    haftalat = birikmesi_gereken / hatfalık
+                    {if} istek > biriken
+                        {print} 'Biraz daha para biriktirmelisiniz!'
+                        {print} 'Size ' weeks ' hafta daha gerekiyor'
                     {else}
-                        {print} 'Great! You have enough'
-                        {print} 'Lets go shopping!'
+                        {print} 'Harika! Yeterince paranız var'
+                        {print} 'Hadi alışverişe gidelim!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     quizmaster:
-        name: "Quizmaster"
-        description: "Make your own quiz!"
-        default_save_name: "Quizmaster"
+        name: "Kısa sınav ustası"
+        description: "Kendi kısa sınavınızı yapın!"
+        default_save_name: "Kısa sınav ustası"
         levels:
             14:
                 story_text: |
-                    In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
-                    You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
+                    Bu macerada kendi kısa sınavınızı yapabilirsiniz! Boşlukları doldurun, daha fazla soru ekleyin ve kendi kısa sınavınızın tadını çıkarın!
+                    İstediğiniz herhangi bir şey hakkında bir kısa sınav yapabilirsiniz: hobiniz, en sevdiğiniz hayvan, en sevdiğiniz kitap veya herhangi bir şey!
                 example_code: |
                     ```
-                    {print} 'Make your own quiz'
-                    points_a = 0
-                    points_b = 0
-                    {print} 'Question'
-                    {print} 'Answer option A'
-                    {print} 'Answer option B'
-                    answer = {ask} 'Which answer?'
-                    {if} answer == 'A'
-                        points_a = points_a + 1
-                    {if} answer == 'B'
-                        points_b = points_b + 1
-                    {print} 'End of the quiz!'
-                    {print} 'Lets see the results!'
-                    {if} points_a > points_b
-                        {print} 'You belong to the A club'
-                    {if} points_b > points_a
-                        {print} 'You belong to the B club'
+                    {print} 'Kendi kısa sınavınızı yapın'
+                    puanlar_a = 0
+                    puanlar_b = 0
+                    {print} 'Soru'
+                    {print} 'Cevap seçeneği A'
+                    {print} 'Cevap seçeneği B'
+                    cevap = {ask} 'Cevap hangisi?'
+                    {if} cevap == 'A'
+                        puanlar_a = puanlar_a + 1
+                    {if} cevap == 'B'
+                        puanlar_b = puanlar_b + 1
+                    {print} 'Kısa sınav bitti!'
+                    {print} 'Sonuçları görelim!'
+                    {if} puanlar_a > puanlar_b
+                        {print} 'Sen A kulübüne aitsin.'
+                    {if} puanlar_b > puanlar_a
+                        {print} 'Sen B kulübüne aitsin.'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     language:
-        name: "Language"
-        description: "Practice words in a foreign language"
-        default_save_name: "Language"
+        name: "Dil"
+        description: "Yabancı dilde kelime pratiği yapın"
+        default_save_name: "Dil"
         levels:
             5:
                 story_text: |
-                    Make your own program to practice your vocabulary in a new language.
+                    Yeni bir dilde kelime bilginizi geliştirmek için kendi programınızı yapın.
+
+                    ### Alıştırma
+                    Oyuncunun öğrenmesi için en az 3 kelime daha ekleyerek kodu daha uzun hale getirin.
+                    **Ekleme** Elbette Fransızca'dan farklı bir dil kullanmayı seçebilirsiniz. Kodu öğrenmek istediğiniz herhangi bir dile değiştirebilirsiniz.
                 example_code: |
                     ```
-                    {print} 'Learn French!'
-                    cat {is} {ask} '🐱'
-                    {if} cat {is} chat {print} 'Terrific!'
-                    {else} {print} 'No, cat is chat'
-                    frog {is} {ask} '🐸'
-                    {if} frog {is} grenouille {print} 'Super!'
-                    {else} {print} 'No, frog is grenouille'
+                    {print} 'Fransızca öğrenin!'
+                    kedi {is} {ask} '🐱'
+                    {if} kedi {is} chat {print} 'Müthiş!'
+                    {else} {print} 'Hayır, kedinin karşılığı chat'
+                    kurbağa {is} {ask} '🐸'
+                    {if} kurbağa {is} grenouille {print} 'Süper!'
+                    {else} {print} 'Hayır, kurbağanın karşılığı grenouille'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             16:
                 story_text: |
-                    Make your own program to practice your vocabulary in a new language.
+                    Yeni bir dilde kelime bilginizi geliştirmek için kendi programınızı yapın.
 
                 example_code: |
                     ```
-                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
-                    translation = ['hello', 'computer', 'potato']
-                    score = 0
+                    fransızca_kelimeler = ['bonjour', 'ordinateur', 'pomme de terre']
+                    çevirisi = ['merhaba', 'bilgisayar', 'patates']
+                    puan = 0
                     {for} i {in} {range} 1 {to} 3
-                        answer = {ask} 'What does ' french_words[i] ' mean?'
-                        correct = translation[i]
-                        {if} answer == correct
-                            {print} 'Correct!'
-                            score = score + 1
+                        cevap = {ask} fransızca_kelimeler[i] ' kelimesinin anlamı nedir?'
+                        doğrusu = çevirisi[i]
+                        {if} cevap == doğrusu
+                            {print} 'Doğru bildin!'
+                            puan = puan + 1
                         {else}
-                            {print} 'Wrong, ' french_words[i] ' means ' translation[i]
-                    {print} 'You gave ' score ' correct answers.'
+                            {print} 'Yanlış, ' fransızca_kelimeler[i] ' kelimesi ' çevirisi[i] ' anlamına geliyor'
+                    {print} 'Toplam ' puan ' doğru cevap verdin.'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     secret:
-        name: "SuperSpy"
-        description: "Make your own spy code"
-        default_save_name: "SuperSpy"
+        name: "SüperCasus"
+        description: "Kendi casus kodunuzu oluşturun"
+        default_save_name: "SüperCasus"
         levels:
             12:
                 story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
+                    Bu macerada kendi süper casus kodunuzu oluşturabilirsiniz. Sadece doğru ajanın deşifre edebileceği bir mesaj kodlayın.
+                    Düşman kodu kırmaya çalışırsa, zamanlarını boşa harcayarak bazı yanlış bilgiler elde edeceklerdir.
+
+                    ### Alıştırma 1
+                    Süper casusunuz için kendi gizli kodunuzu oluşturun ve her iki parçayı da yalnızca gerçek casusa iade edin.
+
+                    ### Alıştırma 2
+                    Koda üçüncü bir bileşen ekleyin, bir giysi parçası veya bir nesne gibi.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    if name is 'Agent007'
-                        a is 'Go to the airport '
-                    else
-                        a is 'Go to the trainstation '
-                    password is ask 'What is the password?'
-                    if password is 'TOPSECRET'
-                        b is 'tomorrow at 02.00'
-                    else
-                        b is 'today at 10.00'
-                    print a + b
+                    isim {is} {ask} 'Senin adın ne?'
+                    eğer isim {is} '_'
+                        a {is} 'Havaalanına git '
+                    {else}
+                        a {is} 'Tren istasyonuna git '
+                    şifre {is} {ask} 'Şifre nedir?'
+                    {if} şifre {is} _
+                        b {is} 'yarın gece saat 02.00'de'
+                    {else}
+                        b {is} 'bugün sabah saat 10.00'da'
+                    {print} _ _ _
                     ```
                 start_code: "# kodunuzu buraya yazın"
             13:
                 story_text: |
-                    The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
+                    Süpercasus kodunu `{and}` ile basitleştirebiliriz, böylece bize sadece bir `{if}` gerekir.
+
+                    ### Alıştırma 1
+                    Boşluklara doğru komutu doldurarak kodu tamamlayın. İpucu: Süper casus gizli bilgileri almadan önce HER İKİ soruya da doğru cevap vermelidir!
+
+                    ### Alıştırma 2
+                    Düşmanın kafasını daha da karıştırmak istiyoruz! Sahte cevaplardan oluşan bir liste oluşturun ve yanlış cevap verildiğinde rastgele birini seçin.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    password is ask 'What is your password?'
-                    if name is 'Agent007' and password is 'TOPSECRET'
-                        print 'Go to the airport at 02.00'
-                    else
-                        print 'Go to the trainstation at 10.00'
+                    isim {is} {ask} 'Senin adın ne?'
+                    şifre {is} {ask} 'Şifre nedir?'
+                    {if} isim {is} 'Ajan007' _ şifre {is} 'ÇOKGİZLİ'
+                        {print} 'Gece 02.00'de havaalanına git.'
+                    {else}
+                        {print} 'Sabah 10.00'da tren istasyonuna git.'
                      ```
                 start_code: "# kodunuzu buraya yazın"
     blackjack:
-        name: "Blackjack"
-        description: "Try to get as close to 21 as you can"
-        default_save_name: "Blackjack"
+        name: "Yirmibir"
+        description: "21'e olabildiğince yaklaşmaya çalışın"
+        default_save_name: "Yirmibir"
         levels:
             17:
                 story_text: |
-                    Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
-                    The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
-                    If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
-                    But be careful not to get more than 21 points, because if you do, you lose!
-                    The player who gets closest to 21, without going over it, wins!
+                    Yirmibir, 21 puana mümkün olduğunca yaklaşmanız gereken basit bir kart oyunudur. İki kart alırsınız. Her kart kendi rakam değerindedir ve surat kartları (Vale, Kız ve Papaz) 10 puan değerindedir.
+                    As ya 1 ya da 11 puan değerindedir (seçebilirsiniz). Rakibiniz olan dağıtıcı da iki kart alır.
+                    İsterseniz başka bir kart daha alabilirsiniz ve onun puanı toplamınıza eklenir. Dağıtıcı da başka bir kart almayı seçebilir.
+                    Ancak 21 puandan fazla almamaya dikkat edin, çünkü alırsanız kaybedersiniz!
+                    21'i aşmadan 21'e en çok yaklaşan oyuncu kazanır!
 
-                    Have fun!
+                    İyi eğlenceler!
                 example_code: |
                     ```
-                    {print} 'BLACKJACK'
-                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
-                    points = 0
-                    dealer_points = 0
-                    card_1 = cards[{random}]
-                    card_2 = cards[{random}]
-                    card_3 = cards [{random}]
-                    dealer_card_1 = cards[{random}]
-                    dealer_card_2 = cards[{random}]
-                    dealer_card_3 = cards[{random}]
-                    # Points for card 1
-                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
-                        points = points + 10
-                    {elif} card_1 == 'Ace':
-                        points = points + 11
+                    {print} 'YİRMİBİR'
+                    kartlar = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Vale', 'Kız', 'Papaz', 'As']
+                    puanlar = 0
+                    dağıtıcı_puanları = 0
+                    kart_1 = kartlar[{random}]
+                    kart_2 = kartlar[{random}]
+                    kart_3 = kartlar[{random}]
+                    dağıtıcı_kartı_1 = kartlar[{random}]
+                    dağıtıcı_kartı_2 = kartlar[{random}]
+                    dağıtıcı_kartı_3 = kartlar[{random}]
+                    # Kart 1 için puanlar
+                    {if} kart_1 == 'Vale' {or} kart_1 == 'Kız' {or} kart_1 == 'Papaz':
+                        puanlar = puanlar + 10
+                    {elif} kart_1 == 'As':
+                        puanlar = puanlar + 11
                     {else}:
-                        points = points + card_1
-                    # Points for card 2
-                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
-                        points = points + 10
-                    {elif} card_2 == 'Ace':
-                        points = points + 11
+                        puanlar = puanlar + kart_1
+                    # Kart 2 için puanlar
+                    {if} kart_2 == 'Vale' {or} kart_2 == 'Kız' {or} kart_2 == 'Papaz':
+                        puanlar = puanlar + 10
+                    {elif} kart_2 == 'As':
+                        puanlar = puanlar + 11
                     {else}:
-                        points = points + card_2
-                    # Points for dealer card 1
-                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_1 == 'Ace':
-                        dealer_points = dealer_points + 11
+                        puanlar = puanlar + kart_2
+                    # Dağıtıcı kartı 1 için puanlar
+                    {if} dağıtıcı_kartı_1 == 'Vale' {or} dağıtıcı_kartı_1 == 'Kız' {or} dağıtıcı_kartı_1 == 'Papaz':
+                        dağıtıcı_puanları = dağıtıcı_puanları + 10
+                    {elif} dağıtıcı_kartı_1 == 'As':
+                        dağıtıcı_puanları = dağıtıcı_puanları + 11
                     {else}:
-                        dealer_points = dealer_points + dealer_card_1
-                    # Points for dealer card 2
-                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_2 == 'Ace':
-                        dealer_points = dealer_points + 11
+                        dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_1
+                    # Dağıtıcı kartı 2 için puanlar
+                    {if} dağıtıcı_kartı_2 == 'Vale' {or} dağıtıcı_kartı_2 == 'Kız' {or} dağıtıcı_kartı_2 == 'Papaz':
+                        dağıtıcı_puanları = dağıtıcı_puanları + 10
+                    {elif} dağıtıcı_kartı_2 == 'As':
+                        dağıtıcı_puanları = dağıtıcı_puanları + 11
                     {else}:
-                        dealer_points = dealer_points + dealer_card_2
-                    # Two Aces
-                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
-                        points = 12
-                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
-                        dealer_points = 12
-                    # Scoreboard
-                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
-                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
-                    # Extra card for the player
-                    hit = {ask} 'Do you want an extra card?'
-                    {if} hit == 'yes':
-                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
-                            points = points + 10
-                        {elif} card_3 == 'Ace':
-                            {if} points > 11:
-                                points = points + 11
+                        dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_2
+                    # İki As
+                    {if} kart_1 == 'As' {and} kart_2 == 'As':
+                        puanlar = 12
+                    {if} dağıtıcı_kartı_1 == 'As' {and} dağıtıcı_kartı_2 == 'As':
+                        dağıtıcı_puanları = 12
+                    # Sayı Tabelası
+                    {print} 'Elinizde bir ' kart_1 ' ve bir ' kart_2 ' var (' puanlar ' puan)'
+                    {print} 'Dağıtıcının elinde bir ' dağıtıcı_kartı_1 ' ve bir ' dağıtıcı_kartı_2 ' var (' dağıtıcı_puanları ' puan)'
+                    # Oyuncu için ek kart
+                    ekkart = {ask} 'Ek bir kart ister misin?'
+                    {if} ekkart == 'evet':
+                        {if} kart_3 == 'Vale' {or} kart_3 == 'Kız' {or} kart_3 == 'Papaz':
+                            puanlar = puanlar + 10
+                        {elif} kart_3 == 'As':
+                            {if} puanlar < 11:
+                                puanlar = puanlar + 11
                             {else}:
-                                points = points + 1
+                                puanlar = puanlar + 1
                         {else}:
-                            points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                            puanlar = puanlar + kart_3
+                        {print} 'Çektiğin ek kart bir ' kart_3 ' (' puanlar ' puan)'
                     {else}:
-                        print 'No extra cards'
-                    # Winner
-                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
-                        {print} 'You lose'
-                    {elif} dealer_points < 17:
-                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
-                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
-                            dealer_points = dealer_points + 10
-                        {elif} dealer_card_3 == 'Ace':
-                            {if} dealer_points < 11:
-                                dealer_points = dealer_points + 11
+                        {print} 'Ek kart yok'
+                    # Kazanan
+                    {if} puanlar > 21 {or} dağıtıcı_puanları > puanlar {or} dağıtıcı_puanları == 21:
+                        {print} 'Sen kaybettin'
+                    {elif} dağıtıcı_puanları < 17:
+                        {print} 'Dağıtıcı ek kart istiyor. Aldığı bir... ' dağıtıcı_kartı_3
+                        {if} dağıtıcı_kartı_3 == 'Vale' {or} dağıtıcı_kartı_3 == 'Kız' {or} dağıtıcı_kartı_3 == 'Papaz':
+                            dağıtıcı_puanları = dağıtıcı_puanları + 10
+                        {elif} dağıtıcı_kartı_3 == 'As':
+                            {if} dağıtıcı_puanları < 11:
+                                dağıtıcı_puanları = dağıtıcı_puanları + 11
                             {else}:
-                                dealer_points = dealer_points + 1
+                                dağıtıcı_puanları = dağıtıcı_puanları + 1
                         {else}:
-                            dealer_points = dealer_points + dealer_card_3
-                        {print} 'The dealer has ' dealer_points ' points now'
-                        {if} dealer_points < 21 {and} dealer_points > points:
-                            {print} 'You lose'
+                            dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_3
+                        {print} 'Dağıtıcının şimdi ' dağıtıcı_puanları ' puanı var'
+                        {if} dağıtıcı_puanları < 21 {and} dağıtıcı_puanları > puanlar:
+                            {print} 'Sen kaybettin'
                         {else}:
-                            {print} 'You win'
-                    {elif} points > dealer_points {and} points < 21:
-                        {print} 'You win!'
+                            {print} 'Sen kazandın'
+                    {elif} puanlar > dağıtıcı_puanları {and} puanlar < 21:
+                        {print} 'Sen kazandın!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
     tic:
         name: "Tic Tac Toe"
-        description: "Play a game of Tic Tac Toe!"
+        description: "Tic Tac Toe oyunu oynayın!"
         default_save_name: "Tic"
         levels:
             13:
                 story_text: |
-                    In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
-                    The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
+                    Bu macerada bir Tic Tac Toe oyunu programlayabilirsiniz. İki kişi ile oynayabilirsiniz. Sırayla, işaretinizi (x veya o) koymak istediğiniz yerin numarasını (1 - 9) seçersiniz.
+                    Arka arkaya 3 tane (yatay, dikey veya çapraz) koyan ilk oyuncu kazanır!
+
+                    ### Alıştırma 1
+                    Oyun çalışıyor, ancak bazı sorunları var. Örneğin, herhangi bir oyuncu herhangi bir alanı seçebilir, zaten alınmış bir alanı bile! Yerin alınıp alınmadığını `{if}` ile kontrol edin ve eğer öyleyse oyuncuyu uyarın.
+
+                    ### Alıştırma 2
+                    Oyun ayrıca kimin kazandığına karar vermiyor. Bunu, arka arkaya 3 noktanın aynı sembole sahip olup olmadığını kontrol ederek eklemeniz gerekir.
+
+                    ### Alıştırma 3 Ekleme
+                    Her zaman birlikte oynayabileceğiniz bir arkadaşınız olmayabilir. Bir bilgisayar rakibi oluşturabilir misin?
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
+                    oyuncu= 'x'
+                    oyun_alanı = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+
                     {for} i {in} {range} 1 {to} 9
-                        {if} game {is} 'on'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice {is} 1
-                                    spot_1 = sign
-                                {if} choice {is} 2
-                                    spot_2 = sign
-                                {if} choice {is} 3
-                                    spot_3 = sign
-                                {if} choice {is} 4
-                                    spot_4 = sign
-                                {if} choice {is} 5
-                                    spot_5 = sign
-                                {if} choice {is} 6
-                                    spot_6 = sign
-                                {if} choice {is} 7
-                                    spot_7 = sign
-                                {if} choice {is} 8
-                                    spot_8 = sign
-                                {if} choice {is} 9
-                                    spot_9 = sign
-                            {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
-                            {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner {is} 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
-                            {else}
-                                {if} sign {is} 'x'
-                                    sign = 'o'
-                                {else}
-                                    sign = 'x'
+                        seçim = {ask} 'Oyuncu ' player ' , hangi yeri seçiyorsun?'
+                        oyun_alanı {at} seçim = oyuncu
+                        {clear}
+                        yazdır oyun_alanı {at} 1 oyun_alanı {at} 2 oyun_alanı {at} 3
+                        yazdır oyun_alanı {at} 4 oyun_alanı {at} 5 oyun_alanı {at} 6
+                        yazdır oyun_alanı {at} 7 oyun_alanı {at} 8 oyun_alanı {at} 9
+                        {if} oyuncu = 'x'
+                            oyuncu = 'o'
+                        {else}
+                            oyuncu = 'x'
                     ```
                 start_code: "# Kodunuzu buraya yazın"
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
-                    You can use this knowledge in your new Tic Tac Toe game, like this:
+                    Önceki seviyelerde bir tic tac toe oyunu yaptınız. Şimdi de = işaretini, == işaretini ve != işaretini nasıl kullanacağınızı öğrendiniz.
+                    Bu bilgiyi yeni Tic Tac Toe oyununuzda şu şekilde kullanabilirsiniz:
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
+                    işaret = 'x'
+                    açık_yerler = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    oyun = 'devam'
+                    yer_1 = '.'
+                    yer_2 = '.'
+                    yer_3 = '.'
+                    yer_4 = '.'
+                    yer_5 = '.'
+                    yer_6 = '.'
+                    yer_7 = '.'
+                    yer_8 = '.'
+                    yer_9 = '.'
                     {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
+                    {print} yer_1 yer_2 yer_3
+                    {print} yer_4 yer_5 yer_6
+                    {print} yer_7 yer_8 yer_9
                     {print} ' '
                     {for} i {in} {range} 1 {to} 9
-                        {if} game != 'over'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice == 1
-                                    spot_1 = sign
-                                {if} choice == 2
-                                    spot_2 = sign
-                                {if} choice == 3
-                                    spot_3 = sign
-                                {if} choice == 4
-                                    spot_4 = sign
-                                {if} choice == 5
-                                    spot_5 = sign
-                                {if} choice == 6
-                                    spot_6 = sign
-                                {if} choice == 7
-                                    spot_7 = sign
-                                {if} choice == 8
-                                    spot_8 = sign
-                                {if} choice == 9
-                                    spot_9 = sign
+                        {if} oyun != 'bitti'
+                            seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
+                            {if} seçim {in} açık_yerler
+                                {remove} seçim {from} açık_yerler
+                                {if} seçim == 1
+                                    yer_1 = işaret
+                                {if} seçim == 2
+                                    yer_2 = işaret
+                                {if} seçim == 3
+                                    yer_3 = işaret
+                                {if} seçim == 4
+                                    yer_4 = işaret
+                                {if} seçim == 5
+                                    yer_5 = işaret
+                                {if} seçim == 6
+                                    yer_6 = işaret
+                                {if} seçim == 7
+                                    yer_7 = işaret
+                                {if} seçim == 8
+                                    yer_8 = işaret
+                                {if} seçim == 9
+                                    yer_9 = işaret
                             {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
+                                {print} 'Bu yer zaten doldu'
+                            {print} yer_1 yer_2 yer_3
+                            {print} yer_4 yer_5 yer_6
+                            {print} yer_7 yer_8 yer_9
                             {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner == 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
+                            kazanan = {ask} 'Kazandın mı?'
+                            {if} kazanan == 'yes'
+                                {print} 'Aferin, oyuncu ' işaret '!'
+                                oyun = 'bitti'
                             {else}
-                                {if} sign == 'x'
-                                    sign = 'o'
+                                {if} işaret == 'x'
+                                    işaret = 'o'
                                 {else}
-                                    sign = 'x'
+                                    işaret = 'x'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             15:
                 story_text: |
-                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
-                    Check it out:
+                    Bu seviyede, Tic Tac Toe oyununuzu {while} döngüsü ile geliştirebilirsiniz. Bu döngü ile `{if} oyun != 'bitti'` ve `{for} i {in} {range} 1 {to} 9` satırları basit tek bir satıra dönüştürülür.
+                    Şuna bir bak:
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
+                    işaret = 'x'
+                    açık_yerler = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    oyun = 'devam'
+                    yer_1 = '.'
+                    yer_2 = '.'
+                    yer_3 = '.'
+                    yer_4 = '.'
+                    yer_5 = '.'
+                    yer_6 = '.'
+                    yer_7 = '.'
+                    yer_8 = '.'
+                    yer_9 = '.'
                     {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
+                    {print} yer_1 yer_2 yer_3
+                    {print} yer_4 yer_5 yer_6
+                    {print} yer_7 yer_8 yer_9
                     {print} ' '
-                    {while} game != 'over'
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots
-                            {remove} choice {from} open_spots
-                            {if} choice == 1
-                                spot_1 = sign
-                            {if} choice == 2
-                                spot_2 = sign
-                            {if} choice == 3
-                                spot_3 = sign
-                            {if} choice == 4
-                                spot_4 = sign
-                            {if} choice == 5
-                                spot_5 = sign
-                            {if} choice == 6
-                                spot_6 = sign
-                            {if} choice == 7
-                                spot_7 = sign
-                            {if} choice == 8
-                                spot_8 = sign
-                            {if} choice == 9
-                                spot_9 = sign
+                    {while} oyun != 'bitti'
+                        seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
+                        {if} seçim {in} açık_yerler
+                            {remove} seçim {from} açık_yerler
+                            {if} seçim == 1
+                                yer_1 = işaret
+                            {if} seçim == 2
+                                yer_2 = işaret
+                            {if} seçim == 3
+                                yer_3 = işaret
+                            {if} seçim == 4
+                                yer_4 = işaret
+                            {if} seçim == 5
+                                yer_5 = işaret
+                            {if} seçim == 6
+                                yer_6 = işaret
+                            {if} seçim == 7
+                                yer_7 = işaret
+                            {if} seçim == 8
+                                yer_8 = işaret
+                            {if} seçim == 9
+                                yer_9 = işaret
                         {else}
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
+                            {print} 'Burası zaten dolu'
+                        {print} yer_1 yer_2 yer_3
+                        {print} yer_4 yer_5 yer_6
+                        {print} yer_7 yer_8 yer_9
                         {print} ' '
-                        winner = {ask} 'Did you win?'
-                        {if} winner == 'yes'
-                            {print} 'Good job, player ' sign '!'
-                            game = 'over'
+                        kazanan = {ask} 'Kazandın mı?'
+                        {if} kazanan == 'evet'
+                            {print} 'Aferin, oyuncu ' işaret '!'
+                            oyun = 'bitti'
                         {else}
-                            {if} sign == 'x'
-                                sign = 'o'
+                            {if} işaret == 'x'
+                                işaret = 'o'
                             {else}
-                                sign = 'x'
+                                işaret = 'x'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             17:
                 story_text: |
-                    In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
-                    This made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.
-                    To use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
+                    Önceki seviyelerde, tic tac toe oyununun can sıkıcı bir özelliği vardı. Her hamleden sonra, kazanıp kazanmadığınızı kendiniz doldurmanız gerekiyordu.
+                    Bu da oyunu oynanabilir ama aynı zamanda oldukça yavaş hale getiriyordu. Bu seviyede, bu sorunu çözebilecek `{elif}` komutunu öğrendik.
+                    Hedy'nin bir oyuncunun kazanıp kazanmadığını kontrol etmesini sağlamak için `{elif}` kullanmak eğlencelidir, ancak aynı zamanda oldukça fazla miktarda ek satır gerektirir.
 
-                    In the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).
-                    You can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.
-                    This means that the {while} loop will be stopped and the game ends.
+                    Örnek kodda kazanmak için gerekenleri eklediğimizi görüyorsunuz (yatay, dikey veya çapraz olarak arka arkaya 3 nokta).
+                    Bunları 46'dan 69'a kadar olan satırlarda bulabilirsiniz. Gereksinim her karşılandığında (yani bir oyuncu kazandığında) oyun değişkeninin 'bitti' olarak ayarlandığını görebilirsiniz.
+                    Bu, `{while}` döngüsünün durdurulacağı ve oyunun sona ereceği anlamına gelir.
 
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
+                    işaret = 'x'
+                    açık_yerler = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    oyun = 'devam'
+                    yer_1 = '.'
+                    yer_2 = '.'
+                    yer_3 = '.'
+                    yer_4 = '.'
+                    yer_5 = '.'
+                    yer_6 = '.'
+                    yer_7 = '.'
+                    yer_8 = '.'
+                    yer_9 = '.'
                     {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
+                    {print} yer_1 yer_2 yer_3
+                    {print} yer_4 yer_5 yer_6
+                    {print} yer_7 yer_8 yer_9
                     {print} ' '
-                    {while} game != 'over':
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots:
-                            {remove} choice {from} open_spots
-                            {if} choice == 1:
-                                spot_1 = sign
-                            {if} choice == 2:
-                                spot_2 = sign
-                            {if} choice == 3:
-                                spot_3 = sign
-                            {if} choice == 4:
-                                spot_4 = sign
-                            {if} choice == 5:
-                                spot_5 = sign
-                            {if} choice == 6:
-                                spot_6 = sign
-                            {if} choice == 7:
-                                spot_7 = sign
-                            {if} choice == 8:
-                                spot_8 = sign
-                            {if} choice == 9:
-                                spot_9 = sign
+                    {while} oyun != 'bitti':
+                        seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
+                        {if} seçim {in} açık_yerler:
+                            {remove} seçim {from} açık_yerler
+                            {if} seçim == 1:
+                                yer_1 = işaret
+                            {if} seçim == 2:
+                                yer_2 = işaret
+                            {if} seçim == 3:
+                                yer_3 = işaret
+                            {if} seçim == 4:
+                                yer_4 = işaret
+                            {if} seçim == 5:
+                                yer_5 = işaret
+                            {if} seçim == 6:
+                                yer_6 = işaret
+                            {if} seçim == 7:
+                                yer_7 = işaret
+                            {if} seçim == 8:
+                                yer_8 = işaret
+                            {if} seçim == 9:
+                                yer_9 = işaret
                         {else}:
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
+                            {print} 'Bu yer doldu'
+                        {print} yer_1 yer_2 yer_3
+                        {print} yer_4 yer_5 yer_6
+                        {print} yer_7 yer_8 yer_9
                         {print} ' '
-                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
+                        {if} yer_1 == yer_2 {and} yer_2 == yer_3 {and} yer_1 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_4 == yer_5 {and} yer_5 == yer_6 {and} yer_4 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_7 == yer_8 {and} yer_8 == yer_9 {and} yer_7 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_1 == yer_4 {and} yer_4 == yer_7 {and} yer_1 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_2 == yer_5 {and} yer_5 == yer_8 {and} yer_2 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_3 == yer_6 {and} yer_6 == yer_9 {and} yer_3 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_1 == yer_5 {and} yer_5 == yer_9 {and} yer_1 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
+                        {elif} yer_3 == yer_5 {and} yer_5 == yer_7 {and} yer_3 != '.':
+                            {print} 'Oyuncu ' işaret ' kazandı!'
+                            oyun = 'bitti'
                         {else}:
-                            {if} sign == 'x':
-                                sign = 'o'
+                            {if} işaret == 'x':
+                                işaret = 'o'
                             {else}:
-                                sign = 'x'
+                                işaret = 'x'
                     ```
 
                 start_code: "# kodunuzu buraya yazın"
@@ -2815,7 +2803,7 @@ adventures:
         default_save_name: random_command
         levels:
             3:
-                story_text: "## şurada rastgele\nBu seviyede `{is}` komutunu kullanarak bir liste oluşturabileceksiniz. Bilgisayarın bu listeden rastgele bir öğe seçmesine izin verebilirsiniz. Bunu `{at} {random}` ile yaparsınız.\n"
+                story_text: "## şurada rastgele\nBu seviyede `{is}` komutunu kullanarak bir liste oluşturabileceksiniz. Bilgisayarın bu listeden rastgele bir öğe seçmesini sağlayabilirsiniz. Bunu `{at} {random}` ile yaparsınız.\n"
                 example_code: "```\nhayvanlar {is} köpekler, kediler, kangurular\n{print} hayvanlar {at} {random}\n```\n"
                 story_text_2: "`{at} {random}` komutunu cümle içinde de kullanabilirsiniz.\n"
                 example_code_2: "```\nyemek {is} sandviç, bir dilim pizza, salata, dürüm\n{print} Öğle yemeğinde bir yemek {at} {random} yiyeceğim.\n```\n"
