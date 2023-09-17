@@ -1322,11 +1322,11 @@ levels:
             code: "dogs {is} animal\n{print} I love animal"
             mp_choice_options:
             -   option: 'Line 1 should say: dogs `{is}` animals'
-                feedback: 가변적인 이름은 동물이다
+                feedback: 변수명은 동물이다
             -   option: 'Line 1 should say: animal `{is}` dogs'
                 feedback: 좋았어!
             -   option: 'Line 2 should say: `{print}` I love animals'
-                feedback: 가변적인 이름은 동물이다
+                feedback: 변수명은 동물이다
             -   option: 'Line 2 should say: `{sleep}` I love animals'
                 feedback: 절전 모드가 `{print}`텍스트에 사용되지 않습니다
             correct_answer: B
@@ -1752,7 +1752,7 @@ levels:
             code: "animal {is} {ask} 'What is your favorite animal?'\n{if} _?_ {is} penguin {print} 'Thats my favorite animal too!'\n{else} {print} 'Cool! I like penguins.'"
             mp_choice_options:
             -   option: "```\nfavorite animal\n```\n"
-                feedback: 그건 가변적인 이름이 아니야.
+                feedback: 그건 변수명이 아니야.
             -   option: "```\nanimal\n```\n"
                 feedback: 정말 잘했어!
             -   option: "`{if}`\n"
@@ -2107,7 +2107,7 @@ levels:
                 feedback: 그게 아니야
             -   option: '`<` and `>=`'
                 feedback: 맞아요
-            -   option: ' `+` and `==`'
+            -   option: ' `+` 와 `==`'
             hint: There are 130 people allowed in the club
         4:
             mp_choice_options:
