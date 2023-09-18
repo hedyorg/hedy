@@ -25,6 +25,8 @@ Sk.Debugger = class {
         this.filename = filename;
         this.editor_ref = editor_ref;
         this.code = "";
+        this.resolveCallback = null;
+        this.rejectCallback = null;
     }
     set_code(code) {
         this.code = code;
@@ -174,6 +176,8 @@ Sk.Debugger = class {
         }
 
         suspension = parent;
+        console.log(this.current_suspension);
+        console.log(this.suspension_stack);
 
         this.print_suspension_info(suspension);
     }
@@ -253,34 +257,26 @@ Sk.Debugger = class {
         // Reset the suspension stack to the topmost
         this.current_suspension = this.suspension_stack.length - 1;
         if (this.suspension_stack.length === 0) {
-            this.print("No running program");
+            return Promise.resolve();
         } else {
-            var promise = this.suspension_handler(this.get_active_suspension());
-            promise.then(this.success.bind(this), this.error.bind(this));
+            var promise = this.suspension_handler(this.get_active_suspension());          
+            return promise
         }
     }
     pop_suspension_stack() {
         this.suspension_stack.pop();
         this.current_suspension -= 1;
     }
-    /**
-     * Necesito saber como hacer que luego de setearle el valor a la suspension que viene de la promesa
-     * se ejecute la siguiente suspension
-     * tal como pasa en misceval asyncToPromise en Skulpt. Me tengo que vasar en eso
-     * para solcionar este problema
-     * Otra cosa que me gustaría saber como funciona es como se ejecuta la siguiente suspension y como espera
-     * el programa por ella tan solo llaamando a this.set_suspension()
-     * @param {*} r
-     * @returns
-     */
+
     success(r) {
         if (r instanceof Sk.misceval.Suspension) {
+            console.log('We are in 274 success')
             if (r.data['type'] === 'Sk.promise') {
                 var promise = this.suspension_handler(r);
                 promise.then(this.success.bind(this), this.error.bind(this));
             }
             this.set_suspension(r);
-        } else {
+        } else {;
             if (this.suspension_stack.length > 0) {
                 // Current suspension needs to be popped of the stack
                 this.pop_suspension_stack();
@@ -313,6 +309,8 @@ Sk.Debugger = class {
     asyncToPromise(suspendablefn, suspHandlers, debugger_obj) {
         return new Promise(function (resolve, reject) {
             try {
+                debugger_obj.resolveCallback = resolve;                
+                debugger_obj.resolveCallback = reject;                
                 var r = suspendablefn();
                 (function handleResponse(r) {
                     try {
