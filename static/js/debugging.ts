@@ -209,7 +209,7 @@ function updateBreakpointVisuals(editor: AceAjax.Editor) {
 
 function debugRun() {
   if (theLevel && theLanguage) {
-    runit(theLevel, theLanguage, "", function () {
+    runit(theLevel, theLanguage, "", "run", function () {
       $('#output').focus();
     });
   }
