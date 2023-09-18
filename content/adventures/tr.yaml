@@ -736,11 +736,6 @@ adventures:
                         {print} 'çiftliğinde ' hayvan ' var'
                         {print} ses ses ' diye bağırır'
                         {print} 'çiftliğinde Ali Babanın'
-                        {print} 
-                        {print} 
-                        {print} 
-                        {print} 
-                        {print} 
                     ```
 
                     ```
@@ -1090,7 +1085,7 @@ adventures:
                     seçimler = 1, 2, 3, 4, 5, solucan
                     puan = 0
                     atılan = seçimler {at} {random}
-                    {print} 'Attığın zar ' throw
+                    {print} 'Attığın zar ' atılan
                     {if} atılan {is} solucan puan = puan + 5 {else} puan = puan + atılan
                     {print} 'toplam puan ' puan ' oldu'
                     ```
@@ -1221,7 +1216,7 @@ adventures:
                 story_text: |
                     Bu seviyede `{if}` komutlarını iç içe geçirerek tüm taş, kağıt, makas oyununu programlayabilirsiniz.
 
-                    ### Exercise
+                    ### Alıştırma
                     Kodu tamamlayabilir misiniz? Program her kombinasyon için kimin kazandığını söylemelidir.
 
                     **Ekleme** Birden fazla oyun mu oynamak istiyorsunuz? Birden fazla tur oynayabilmek için kodu genişletin. Kullanıcıya kaç tur oynamak istediğini sormak için bir `{ask}` bile kullanabilirsiniz.
@@ -1315,7 +1310,7 @@ adventures:
                     {print} sayı_1 ' kere ' sayı_2 ' eder ' doğru_cevap
                     ```
                 story_text_2: |
-                    ### Exercise
+                    ### Alıştırma
                     Yukarıdaki hesap makinesi, cevabı sizin için hesaplayacaktır, ancak bunun gibi bir programı kendi matematik becerilerinizi test etmek için de yapabilirsiniz:
                     Tamamlamak için boşlukları doldurun!
                 example_code_2: |
@@ -1344,7 +1339,7 @@ adventures:
                         sayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         sayı1 = sayılar {at} {random}
                         sayı2 = sayılar {at} {random}
-                        correct_answer = sayı1 * sayı2
+                        cevap_correct = sayı1 * sayı2
                         {print} 'Söyle bakalım ' sayı1 ' kere ' sayı2 ' kaç eder?'
                         cevap = {ask} 'Cevabını buraya yaz...'
                         {print} 'Cevabın ' cevap
@@ -1363,7 +1358,7 @@ adventures:
                     sayılar = 1, 2, 3
                     {for} sayı1 {in} sayılar
                         {for} sayı2 {in} sayılar
-                            cevap = {ask} 'Söyle bakalım, ' number2 ' kere ' number1 ' kaç eder?'
+                            cevap = {ask} 'Söyle bakalım, ' sayı2 ' kere ' sayı1 ' kaç eder?'
                             doğrucevap = sayı1 * sayı2
                             {if} cevap {is} doğrucevap
                                 {print} 'Aferin!'
@@ -1378,7 +1373,7 @@ adventures:
                     ### Alıştırma 1
                     Hesap makinesini tamamlamak için boşlukları doldurun. Ondalık sayılar için virgül değil nokta kullanmayı unutmayın.
 
-                    ### Exercise 2
+                    ### Alıştırma 2
                     Yeni bir matematik alıştırma programı oluşturun, ama şimdi ondalık sayıları kullanın.
                     Bir sayı listesi oluşturun, çarpma için iki tanesini seçin ve oyuncunun cevaplamasını sağlayın.
                     Ve tabii ki cevabı doğrulamanız gerekiyor! **Ekleme** Can ekleyerek zorluğu artırın: Bir oyuncu yanlış cevap için bir can kaybetsin ve üç yanlış cevaptan sonra oyun sona ersin.
@@ -1404,7 +1399,7 @@ adventures:
                             tahmin = {ask} 'Sence hangi sayıyı tuttum?'
                             {if} tahmin > sayı
                                 {print} 'Aşağı!'
-                            {if} tahmin < number
+                            {if} tahmin < sayı
                                 {print} 'Yukarı!'
                             {if} tahmin == sayı
                                 {print} 'Sen kazandın!'
@@ -1427,7 +1422,7 @@ adventures:
                         {while} cevap != doğrucevap
                             {print} 'Söyle hadi, ' sayı1 ' kere ' sayı2 ' kaç eder?'
                             cevap = {ask} 'Cevabın nedir?:'
-                            {print} 'Cevabın ' answer
+                            {print} 'Cevabın ' cevap
                         {print} 'Aferin, iyi işti!'
                     {print} 'Sen kazandın!'
                     ```
@@ -1567,7 +1562,7 @@ adventures:
                 example_code: |
                     Bunun gibi basit bir restoran kodu oluşturabilirsiniz:
                     ```
-                    {print} 'Restaurant Chez Hedy'ye Hoş Geldiniz'
+                    {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
                     {print} 'İşte menümüz:'
                     {print} 'Ana yemeklerimiz pizza, lazanya veya spagetti'
                     ana = {ask} 'Hangi ana yemeği istersiniz?'
@@ -1590,7 +1585,7 @@ adventures:
                     **Ekleme** Kodunuzu daha fazla soru ile genişletin, örneğin içecekler veya sos hakkında.
                 example_code: |
                     ```
-                    {print} 'Restaurant Chez Hedy'ye Hoş Geldiniz'
+                    {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
                     kişiler = {ask} 'Bugün bize kaç kişi katılıyor?'
                     ```
                 start_code: "# kodunuzu buraya yazın"
@@ -1599,7 +1594,7 @@ adventures:
                     Bu seviyede, birden fazla kod satırını tekrarlayarak sanal restoranınızı daha ayrıntılı hale getirebilirsiniz. Bunun gibi:
                 example_code: |
                     ```
-                    {print} 'Restaurant Chez Hedy'ye hoş geldiniz!'
+                    {print} "Restaurant Chez Hedy'ye hoş geldiniz!"
                     kişiler = {ask} 'Bugün bize kaç kişi katılacak?'
                     {print} 'Harika!'
                     {repeat} kişiler {times}
@@ -1627,7 +1622,7 @@ adventures:
                     **Extra** Müşteriler içecek mi istiyor? Onları da sorun! <br>
                 example_code: |
                     ```
-                    {print} 'Restaurant Chez Hedy'ye hoş geldiniz!'
+                    {print} "Restaurant Chez Hedy'ye hoş geldiniz!"
                     kişiler = {ask} 'Bugün bize kaç kişi katılacak?'
                     {print} 'Harika!'
                     fiyat = 0
@@ -1688,10 +1683,10 @@ adventures:
                     **Ekleme** 9. seviyede, restoran fiyatlarını da kullanmıştınız. Bunu da buraya ekleyebilirsiniz!
                 example_code: |
                     ```
-                    {print} 'Restaurant Hedy'ye hoş geldiniz!'
+                    {print} "Restaurant Hedy'ye hoş geldiniz!"
                     kişiler = {ask} 'Kaç kişi için sipariş vermek istersiniz?'
                     {print} 'Demek ' kişiler ' kişi için sipariş vermek istiyorsunuz'
-                    {print} "Tamam, başlayalım!"
+                    {print} 'Tamam, başlayalım!'
                     ```
                 start_code: "# kodunuzu buraya yazın"
             12:
@@ -1729,7 +1724,7 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} 'McHedy'ye Hoş Geldiniz'
+                    {print} "McHedy'ye Hoş Geldiniz"
                     dahafazla = 'evet'
                     {while} dahafazla == 'evet'
                         sipariş = {ask} 'Ne sipariş etmek istersiniz?'
@@ -1843,7 +1838,7 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} 'Ben falcı Hedy'im!'
+                    {print} "Ben falcı Hedy'im!"
                     {print} 'Büyüdüğünde kaç çocuğun olacağını tahmin edebiliyorum!'
                     yaş = {ask} 'Kaç yaşındasın?'
                     kardeşler = {ask} 'Kaç kardeşin var?'
@@ -1876,7 +1871,7 @@ adventures:
                     Boşlukları doğru komutla doldurabilir misiniz?
                 example_code: |
                     ```
-                    {print} 'Ben falcı Hedy'im!'
+                    {print} "Ben falcı Hedy'im!"
                     {print} 'Bana 3 soru sorabilirsin.'
                     cevaplar = evet, hayır, belki
                     _ _ _
@@ -1976,7 +1971,7 @@ adventures:
                     Bu seviyede oyunun sonucunu değiştirerek hikayenizi daha etkileşimli hale getirebilirsiniz; bazen yenileceksiniz, bazen kaçmayı başaracaksınız!
                     Bırakın Hedy rastgele karar versin!
 
-                    ### Exercise
+                    ### Alıştırma
                     Örnek kodları kopyalayın ve çalışmasını sağlamak için boşlukları doldurun!
 
                     **Ekleme** Bu hikaye oldukça basit, belki daha heyecanlı bir hikaye ekleyerek biraz canlandırabilirsiniz.
@@ -2025,7 +2020,7 @@ adventures:
                     {sleep}
                     doğru_kapı {is} kapılar {at} {random}
                     _ _ _ _ {print} 'Harika! Kaçmayı başardınız!'
-                    {else} {print} 'Olamaz! Bir ' monsters {at} {random} ' sizi yedi!'
+                    {else} {print} 'Olamaz! Bir ' canavarlar {at} {random} ' sizi yedi!'
                     ```
 
                 start_code: "# kodunuzu buraya yazın"
@@ -2052,7 +2047,7 @@ adventures:
                             {if} seçilen_kapı {is} doğru_kapı
                                 {print} 'Burada hiç canavar yok!'
                             {else}
-                                {print} 'Bir ' monsters {at} {random} ' sizi yakaladı ve yedi'
+                                {print} 'Bir ' canavarlar {at} {random} ' sizi yakaladı ve yedi'
                                 oyuncu = ölü
                         {else}
                             {print} 'OYUN BİTTİ'
@@ -2123,7 +2118,7 @@ adventures:
                     ipucu = ['hırlama', 'gıdaklayan bir kahkaha', 'çırpınan yarasa kanatları']
                     canavarlar = ['zombi', 'cadı', 'vampir']
                     kötü_son = ['Beynini yediler', 'Sonsuza kadar lanetlendin', 'Isırıldın']
-                    iyi_son = ["Bir et parçası fırlatırsın. Zombinin dikkati dağılır ve onu yemeye başlar', 'Perdeleri ateşe verirsin. Cadı yangın korkusuyla kaçar', 'Vampir sarımsaktan nefret eder ve kaçar']
+                    iyi_son = ['Bir et parçası fırlatırsın. Zombinin dikkati dağılır ve onu yemeye başlar', 'Perdeleri ateşe verirsin. Cadı yangın korkusuyla kaçar', 'Vampir sarımsaktan nefret eder ve kaçar']
                     silahlar = ['et', 'çakmak', 'sarımsak']
                     {print} 'Eski bir konağın önünde duruyorsunuz.'
                     {print} 'Burada doğru olmayan bir şeyler var.'
@@ -2131,8 +2126,8 @@ adventures:
                     {print} 'Onu aramaya gidiyorsunuz'
                     {print} 'Mutfağa giriyorsunuz ve bir çakmak, çiğ bir et ve sarımsak görüyorsunuz.'
                     senin_silahın = {ask} 'Yanına hangisini alıyorsun? (çakmak, et, sarımsak)'
-                    {print} 'Elinde ' your_weapon ' ile oturma odasına giriyorsun'
-                    {print} 'Orada karşına bir ' monsters[i] ' çıkıyor'
+                    {print} 'Elinde ' senin_silahın ' ile oturma odasına giriyorsun'
+                    {print} 'Orada karşına bir ' canavarlar[i] ' çıkıyor'
                     gereken_silah = silahlar[i]
                     {if} senin_silahın == gereken_silah
                         {print} 'Elindeki ' senin_silahın ' ile saldırıyorsun'
@@ -2177,10 +2172,10 @@ adventures:
                     istek = {ask} 'Ne kadar paraya ihtiyacınız var?'
                     haftalık = {ask} 'Her hafta ne kadar cep harçlığı alıyorsunuz?'
                     birikmesi_gereken = istek - biriken
-                    haftalat = birikmesi_gereken / hatfalık
+                    haftalat = birikmesi_gereken / haftalık
                     {if} istek > biriken
                         {print} 'Biraz daha para biriktirmelisiniz!'
-                        {print} 'Size ' weeks ' hafta daha gerekiyor'
+                        {print} 'Size ' haftalat ' hafta daha gerekiyor'
                     {else}
                         {print} 'Harika! Yeterince paranız var'
                         {print} 'Hadi alışverişe gidelim!'
@@ -2428,16 +2423,16 @@ adventures:
                     Her zaman birlikte oynayabileceğiniz bir arkadaşınız olmayabilir. Bir bilgisayar rakibi oluşturabilir misin?
                 example_code: |
                     ```
-                    oyuncu= 'x'
+                    oyuncu = 'x'
                     oyun_alanı = '.', '.', '.', '.', '.', '.', '.', '.', '.'
 
                     {for} i {in} {range} 1 {to} 9
-                        seçim = {ask} 'Oyuncu ' player ' , hangi yeri seçiyorsun?'
+                        seçim = {ask} 'Oyuncu ' oyuncu ' , hangi yeri seçiyorsun?'
                         oyun_alanı {at} seçim = oyuncu
                         {clear}
-                        yazdır oyun_alanı {at} 1 oyun_alanı {at} 2 oyun_alanı {at} 3
-                        yazdır oyun_alanı {at} 4 oyun_alanı {at} 5 oyun_alanı {at} 6
-                        yazdır oyun_alanı {at} 7 oyun_alanı {at} 8 oyun_alanı {at} 9
+                        {print} oyun_alanı {at} 1 oyun_alanı {at} 2 oyun_alanı {at} 3
+                        {print} oyun_alanı {at} 4 oyun_alanı {at} 5 oyun_alanı {at} 6
+                        {print} oyun_alanı {at} 7 oyun_alanı {at} 8 oyun_alanı {at} 9
                         {if} oyuncu = 'x'
                             oyuncu = 'o'
                         {else}

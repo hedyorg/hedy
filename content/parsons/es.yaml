@@ -178,7 +178,7 @@ levels:
             code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
         1:
             story: "Este juego te dará tres tareas de matemáticas. Cada vez la pregunta es diferente. ¿Puedes averiguar el orden?\n"
-            code: "números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    número = números {at} {random}\n    respuesta_correcta = 5 * número\n    respuesta = {ask} '¿Cuánto es 5 veces' número '?'\n    {if} respuesta = respuesta_correcta\n        {print} '¡Buen trabajo!\n    {else}\n        {print} '¡No! La respuesta correcta es ' correct_answer\n"
+            code: "números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    número = números {at} {random}\n    respuesta_correcta = 5 * número\n    respuesta = {ask} '¿Cuánto es 5 veces' número '?'\n    {if} respuesta = respuesta_correcta\n        {print} '¡Buen trabajo!'\n    {else}\n        {print} '¡No! La respuesta correcta es ' respuesta_correcta\n"
     12:
         1:
             code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"

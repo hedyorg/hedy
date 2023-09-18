@@ -44,7 +44,7 @@ levels:
         2:
             story: "이것은 장난감 가게의 웹샵입니다. 고객들이 장바구니에 물건을 추가할 수 있는 프로그램을 만드세요.\n"
             code: |-
-                {print} 장난감 가게에 오신 것을 환영합니다
+                {print} 장 난감 가게에 오신 것을 환영합니다
                 장난감 {is} {ask} 무엇을 사고 싶으십니까?
                 {print}개의 장난감이 장바구니에 추가됩니다.
                 {print} 저희와 함께 쇼핑해 주셔서 감사합니다!
@@ -64,7 +64,7 @@ levels:
                 토핑 {is} 초콜릿, 치즈, 참치, 스프링클
                 {print} 오늘 당신의 복불복 식사는...
                 {sleep} 2
-                {print} 음식 {at}{random} (토핑 {at} {random} 포함)
+                {print} 음식 {at} {random} (토핑 {at} {random} 포함)
         3:
             story: "체스 토너먼트에는 세 명의 선수가 남아 있다.\n두 선수가 먼저 맞붙어야 할 상대를 결정하는 프로그램을 만드세요.\n첫 번째 경기를 치른 두 명의 플레이어를 인쇄하는 것으로 시작한 다음 승자가 상대할 플레이어를 인쇄합니다.\n"
             code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
