@@ -29,18 +29,18 @@ adventures:
                 start_code: "{print} hola mundo!"
             4:
                 story_text: |
-                    En los niveles anteriores has estado practicando con variables, pero puede que te hayas encontrado con un problema.
-                    Quizás hayas intentado ejecutar un código como este:
+                    En los niveles anteriores has estado practicando con variables, pero puede que te hayas encontrado con este problema.
+                    Puede que hayas intentado ejecutar un código como éste:
 
-                    Por supuesto que querías mostrar
+                    Por supuesto que querías imprimir
 
-                    `Mi nombre es Sofía`
+                    `My Sophie is Sophie`
 
-                    pero Hedy mostró
+                    pero Hedy imprime
 
-                    `Mi Sofía es Sofía`.
+                    `My Sophie is Sophie`.
 
-                    En este nivel el problema se soluciona usando comillas.
+                    En este nivel este problema se soluciona utilizando comillas.
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\nnombre {is} Sofia\n{print} Mi nombre es nombre\n```\n"
             5:
@@ -942,14 +942,15 @@ adventures:
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el código de ejemplo para que\n\n### Ejercicio 2\nVuelve al código de multiplicación del nivel 10, y modifícalo para que use un `{for}` y `{range}`.\n"
                 start_code: '# pon tu código aquí'
             13:
-                story_text: |
+                story_text: |2
+
                     ### Ejercicio 1
-                    Hagamos el programa de practica un poco mas difícil. El jugador tiene que responder dos preguntas correctamente. Llena los espacios en blanco para completar el programa.
-    
+                    Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
+
                     ### Ejercicio 2 Extra
-                    A veces las calculadoras tienen múltiples respuestas correctas. Por ejemplo, 10 se puede dividir por 5 y 2. Entonces la pregunta '¿Qué numero divide el 10?' se puede responder con 2 y con 5.
-                    Pide un cálculo que tenga múltiples respuestas correctas, pídele al jugador que lo responda y determine si es correcto usando`{or}`.
-                    Vacía el campo de programación y crea tu propia solución.
+                    A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
+                    Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
+                    Vacíe el campo de programación y cree su propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu código aquí'
     restaurant:
@@ -1094,7 +1095,7 @@ adventures:
                     Así:
 
                 start_code: "# pon tu código aquí"
-                example_code: "```\n_ ¡Hola, soy Hedy la adivina!\n_ ¿Quién es usted?\n_ Déjame mirar en mi bola de cristal\n_ Veo... Veo...\n_ Tu nombre es\n```\n"
+                example_code: "```\n¡Hola, soy Hedy la adivina!\n¿Quién eres tú?\nDéjame echar un vistazo en mi bola de cristal.\nVeo... Veo...\nTu nombre es\n```\n"
                 story_text_2: "### Ejercicio\nCopia el código de ejemplo en tu pantalla de entrada y rellena los espacios en blanco para hacer que tu código funcione.\n**Extra** Cambia el código y deja que el adivino no sólo prediga tu nombre, sino también tu edad, tu equipo favorito de deporte o cualquier otra cosa sobre ti mismo.\n"
             3:
                 story_text: |
@@ -1105,7 +1106,7 @@ adventures:
                 story_text_2: "### Ejercicio\nAhora Hedy sólo puede responder si, no o quizás. ¿Puedes darle más opciones a Hedy, como 'sin duda' o 'pregunta de nuevo'.\n"
             12:
                 story_text: "Desde el nivel 12, tendrás que usar comillas en las listas, antes y después de cada elemento.\n\n### Ejercicio \nAñade dos predicciones a la lista"
-                example_code: "```\nfortuna = 'te resbalarás con una cáscara de plátano', _\n{print} 'Echaré un vistazo en mi bola de cristal para tu futuro'.\n{print} 'Veo... Veo...'\n{sleep}\n{print} 'Fortuna' {at} {random}\n```\n"
+                example_code: "```\nfortuna = 'te resbalarás en una cáscara de plátano', _\n{print} 'Echaré un vistazo a tu futuro en mi bola de cristal.'\n{print} 'Veo... Veo...\n{sleep}\n{print} tu fortuna {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
             10:
                 story_text: "En este nivel aprenderás a programar el juego MACC (mansión, apartamento, cabaña, casa). En este juego puedes predecir para todos los jugadores a la vez, cuál será su futuro.\n\n### Ejercicio\nLlena los huecos en blanco usando el nuevo comando que has aprendido en este nivel.\n"
@@ -1218,7 +1219,7 @@ adventures:
                 example_code: "```\n{print} '¡La hucha virtual!'\ndeseo = {ask} '¿Qué quieres comprar?'\nprecio = {ask} '¿Cuánto cuesta?'\nahorrado = {ask} '¿Cuánto dinero tienes ahorrado?'\npaga = {ask} '¿Cuánto dinero obtienes por semana?'\na_ahorrar = precio - ahorrado\nsemanas = a_ahorrar / paga\n{print} 'Podrás comprar un ' _ ' en ' _ ' semanas.'\n```\n"
                 start_code: '# pon tu código aquí'
             14:
-                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nprestación = {ask} '¿Cuánto dinero de bolsillo tienes cada semana?'\nahorro = deseo - dinero\nsemanas = ahorro/prestación\n{if} deseo > dinero\n    {print} '¡Tienes que ahorrar más!'\n    {print} 'Necesitarás ' semanas ' más semanas.'\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos a comprar!'\n```\n"
+                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} ¿Cuánto dinero necesitas?\npagar = {ask} ¿Cuánto dinero de bolsillo recibes cada semana?\nto_save = deseo - dinero\nsemanas = para_ahorrar / paga\n{if} deseo > dinero\n    {print} '¡Tienes que ahorrar un poco más!\n    {print} \"Necesitarás ' semanas ' más semanas\".\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos de compras!'\n```\n"
                 story_text: "¡En este nivel puedes hacer que Hedy te diga si has ahorrado suficiente dinero!\n"
                 start_code: '# pon tu código aquí'
         name: Cerdito hucha
@@ -1278,7 +1279,7 @@ adventures:
                 example_code: "```\nsímbolo = 'x'\ncasillas_disponibles = [1, 2, 3, 4, 5, 6, 7, 8, 9]\njuego = 'en marcha'\ncasilla_1 = '.'\ncasilla_2 = '.'\ncasilla_3 = '.'\ncasilla_4 = '.'\ncasilla_5 = '.'\ncasilla_6 = '.'\ncasilla_7 = '.'\ncasilla_8 = '.'\ncasilla_9 = '.'\n{print} '¡Tres en raya!'\n{print} casilla_1 casilla_2 casilla_3\n{print} casilla_4 casilla_5 casilla_6\n{print} casilla_7 casilla_8 casilla_9\n{print} ' '\n{while} juego != 'terminado':\n    elección = {ask} 'Jugador ' símbolo ', ¿qué casilla quieres tomar?'\n    {if} elección {in} casillas_disponibles:\n        {remove} elección {from} casillas_disponibles\n        {if} elección == 1:\n            casilla_1 = símbolo\n        {if} elección == 2:\n            casilla_2 = símbolo\n        {if} elección == 3:\n            casilla_3 = símbolo\n        {if} elección == 4:\n            casilla_4 = símbolo\n        {if} elección == 5:\n            casilla_5 = símbolo\n        {if} elección == 6:\n            casilla_6 = símbolo\n        {if} elección == 7:\n            casilla_7 = símbolo\n        {if} elección == 8:\n            casilla_8 = símbolo\n        {if} elección == 9:\n            casilla_9 = símbolo\n    {else}:\n        {print} 'Esa casilla ya está tomada'\n    {print} casilla_1 casilla_2 casilla_3\n    {print} casilla_4 casilla_5 casilla_6\n    {print} casilla_7 casilla_8 casilla_9\n    {print} ' '\n    {if} casilla_1 == casilla_2 {and} casilla_2 == casilla_3 {and} casilla_1 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_4 == casilla_5 {and} casilla_5 == casilla_6 {and} casilla_4 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_7 == casilla_8 {and} casilla_8 == casilla_9 {and} casilla_7 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_1 == casilla_4 {and} casilla_4 == casilla_7 {and} casilla_1 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_2 == casilla_5 {and} casilla_5 == casilla_8 {and} casilla_2 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_3 == casilla_6 {and} casilla_6 == casilla_9 {and} casilla_3 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_1 == casilla_5 {and} casilla_5 == casilla_9 {and} casilla_1 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {elif} casilla_3 == casilla_5 {and} casilla_5 == casilla_7 {and} casilla_3 != '.':\n        {print} '¡Jugador ' símbolo ' gana!'\n        juego = 'terminado'\n    {else}:\n        {if} símbolo == 'x':\n            símbolo = 'o'\n        {else}:\n            símbolo = 'x'\n```\n"
             13:
                 story_text: "En esta aventura podrás programar el juego Tres en Raya. Puedes jugar con dos personas. En turnos, eliges un número (1-9) del sitio donde quieres poner tu señal (x u o).\n¡El primer jugador que obtenga tres en línea (horizontal, vertical o en diagonal) gana!\n\n### Ejercicio 1\nEl juego funciona, pero tiene algunos errores. Por ejemplo, cualquier jugador puede elegir cualquier casilla, ¡incluso si ya estaba elegida! Usa un `{if}` allá donde la casilla esté tomada, y si lo está, avisa al jugador.\n\n### Ejercicio 2\nEl juego tampoco decide quién ha ganado. Tienes que añadir esto comprobando si las 3 casilla en fila tienen el mismo símbolo.\n\n### Ejercicio 3 Extra\nNo siempre tienes un amigo con el que jugar. ¿Puedes crear un rival informático?\n"
-                example_code: "```\njugador = 'x'\ncasilla = '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    opción = {ask} 'Jugador ' jugador ' ¿qué casillas eliges?'\n    casilla {at} opción = jugador\n    {clear}\n    print casilla {at} 1 casilla {at} 2 casilla {at} 3\n    print casilla {at} 4 casilla {at} 5 casilla {at} 6\n    print casilla {at} 7 casilla {at} 8 casilla {at} 9\n    {if} jugador = 'x'\n        jugador = 'o'\n    {else}\n        jugador = 'x'\n```\n"
+                example_code: "```\njugador = 'x'\ncampo = '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    elección = {ask} 'Jugador ' jugador ' ¿qué lugar eliges?'\n    campo {at} elección = jugador\n    {clear}\n    {print} campo {at} 1 campo {at} 2 campo {at} 3\n    {print} campo {at} 4 campo {at} 5 campo {at} 6\n    {print} campo {at} 7 campo {at} 8 campo {at} 9\n    {if} jugador = 'x'\n        player = 'o'\n    {else}\n        player = 'x'\n```\n"
                 start_code: '# pon tu código aquí'
     blackjack:
         name: Blackjack
