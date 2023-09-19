@@ -20,7 +20,7 @@ TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
 ])
 PROGRAMS = dynamo.Table(storage, "programs", "id", indexes=[
     dynamo.Index('username', sort_key='date', index_name='username-index'),
-    dynamo.Index('public', sort_key='date', index_name='public-index'),
+    dynamo.Index('public', sort_key='date'),
     dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
 
     # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
@@ -419,42 +419,32 @@ class Database:
         """Return the most recent N public programs, optionally filtered by attributes.
 
         The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
-        the filters.
+        the filters (on the server).
         """
-        filters = {}
+        filter = {}
         if level_filter:
-            filters['level'] = int(level_filter)
+            filter['level'] = int(level_filter)
         if language_filter:
-            filters['lang'] = language_filter
+            filter['lang'] = language_filter
         if adventure_filter:
-            filters['adventure_name'] = adventure_filter
-        filters['public'] = 1
+            filter['adventure_name'] = adventure_filter
 
         timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
         id_batch_size = 200
-        fetch_batch_size = 50
 
-        found_programs = []
+        found_program_ids = []
         pagination_token = None
-        while len(found_programs) < limit and not timeout.is_cancelled():
+        while len(found_program_ids) < limit and not timeout.is_cancelled():
             page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=id_batch_size,
-                                     pagination_token=pagination_token)
-            ids = [{'id': r['id']} for r in page]
-
-            # Do this in smaller chunks so we can avoid batch getting records we might
-            # not need anymore
-            for id_page in batched(ids, fetch_batch_size):
-                programs = PROGRAMS.batch_get(id_page)
-                found_programs.extend([p for p in programs
-                                       if all(filters[k] == p.get(k) for k in filters.keys())])
-                if len(found_programs) >= limit:
-                    break
-
+                                     pagination_token=pagination_token, filter=filter)
+            found_program_ids.extend([{'id': r['id']} for r in page])
             pagination_token = page.next_page_token
             if pagination_token is None:
                 break
+        del found_program_ids[limit:]  # Cap off in case we found too much
 
-        del found_programs[limit:]  # Cap off in case we found too much
+        # Now retrieve all programs we found with a batch-get
+        found_programs = PROGRAMS.batch_get(found_program_ids)
         return found_programs
 
     def add_public_profile_information(self, programs):

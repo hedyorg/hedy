@@ -192,6 +192,16 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             {'id': 'key', 'sort': 2, 'm': 'another'}
         ])
 
+    def test_query_with_filter(self):
+        self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+
+        ret = list(self.table.get_many({'id': 'key'}, filter={'m': 'another'}))
+
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 2, 'm': 'another'}
+        ])
+
     def test_between_query(self):
         self.table.create({'id': 'key', 'sort': 1, 'x': 'x'})
         self.table.create({'id': 'key', 'sort': 2, 'x': 'y'})
@@ -214,6 +224,18 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
 
         self.assertEqual(ret, [
             {'id': 'key', 'sort': 1, 'm': 'val'}
+        ])
+
+    def test_query_index_with_filter(self):
+        self.table.create({'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 'another', 'q': 'q'})
+
+        ret = list(self.table.get_many({'m': 'val'}, filter={'p': 'p'}))
+
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'},
+            {'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'},
         ])
 
     def test_query_index_with_partition_key(self):

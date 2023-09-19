@@ -33,11 +33,12 @@ class TableStorage(metaclass=ABCMeta):
 
     # The 'sort_key' argument for query and query_index is used to indicate that one of the keys is a sort_key
     # This is now needed because we can query by index sort key too. Still hacky hacky :).
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         ...
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False,
-                    limit=None, pagination_token=None, keys_only=None, table_key_names=None):
+                    limit=None, pagination_token=None, keys_only=None, table_key_names=None,
+                    filter=None):
         ...
 
     def put(self, table_name, key, data):
@@ -223,7 +224,7 @@ class Table:
             return [resp_dict.get(f'k{i}') for i in range(len(keys))]
 
     @querylog.timed_as("db_get_many")
-    def get_many(self, key, reverse=False, limit=None, pagination_token=None):
+    def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
@@ -231,10 +232,12 @@ class Table:
 
         `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
         records, whichever one is hit first.
+
+        After reading, the items can be filtered by passing conditions in 'filter'.
+        Filtering happens after reading, and saves bytes sent over the wire. It is still
+        important to pick a good key to read.
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
-
-        print('get_many', key, reverse, limit, pagination_token)
 
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
@@ -245,6 +248,7 @@ class Table:
                 reverse=reverse,
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token),
+                filter=filter
             )
         elif isinstance(lookup, IndexLookup):
             items, next_page_token = self.storage.query_index(
@@ -257,6 +261,7 @@ class Table:
                 pagination_token=decode_page_token(pagination_token),
                 keys_only=lookup.keys_only,
                 table_key_names=self.key_names,
+                filter=filter,
             )
         else:
             assert False
@@ -462,43 +467,65 @@ class AwsDynamoStorage(TableStorage):
 
         return ret
 
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         key_expression, attr_values, attr_names = self._prep_query_data(key, sort_key)
+
+        if filter:
+            filter_expression, filter_values, filter_names = self._prep_query_data(filter, is_key_expression=False)
+        else:
+            filter_expression, filter_values, filter_names = None, None, None
+
         result = self.db.query(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
+                # Key & Filter
                 KeyConditionExpression=key_expression,
-                ExpressionAttributeValues=attr_values,
+                FilterExpression=filter_expression,
+                ExpressionAttributeValues=merge_dicts(attr_values, filter_values),
+                ExpressionAttributeNames=merge_dicts(attr_names, filter_names),
+                # Paging
                 ScanIndexForward=not reverse,
-                ExpressionAttributeNames=attr_names,
                 Limit=limit,
                 ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None,
             )
         )
+
+        if result.get('Count') and result.get('ScannedCount') and filter:
+            querylog.log_counter('dropped_by_filter', int(result['ScannedCount']) - int(result['Count']))
 
         items = [self._decode(x) for x in result.get("Items", [])]
         next_page_token = self._decode(result.get("LastEvaluatedKey", None))
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None, filter=None):
         # keys_only is ignored here -- that's only necessary for the in-memory implementation.
         # In an actual DDB table, that's an attribute of the index itself
 
         key_expression, attr_values, attr_names = self._prep_query_data(keys, sort_key)
+        if filter:
+            filter_expression, filter_values, filter_names = self._prep_query_data(filter, is_key_expression=False)
+        else:
+            filter_expression, filter_values, filter_names = None, None, None
 
         result = self.db.query(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
                 IndexName=index_name,
+                # Key & Filter
                 KeyConditionExpression=key_expression,
-                ExpressionAttributeValues=attr_values,
+                FilterExpression=filter_expression,
+                ExpressionAttributeValues=merge_dicts(attr_values, filter_values),
+                ExpressionAttributeNames=merge_dicts(attr_names, filter_names),
+                # Paging
                 ScanIndexForward=not reverse,
-                ExpressionAttributeNames=attr_names,
                 Limit=limit,
                 ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None,
             )
         )
+
+        if result.get('Count') and result.get('ScannedCount') and filter:
+            querylog.log_counter('dropped_by_filter', int(result['ScannedCount']) - int(result['Count']))
 
         items = [self._decode(x) for x in result.get("Items", [])]
         next_page_token = (
@@ -506,9 +533,10 @@ class AwsDynamoStorage(TableStorage):
         )
         return items, next_page_token
 
-    def _prep_query_data(self, key, sort_key=None):
+    def _prep_query_data(self, key, sort_key=None, is_key_expression=True):
         eq_conditions, special_conditions = DynamoCondition.partition(key)
-        validate_only_sort_key(special_conditions, sort_key)
+        if is_key_expression:
+            validate_only_sort_key(special_conditions, sort_key)
 
         # We must escape field names with a '#' because Dynamo is unhappy
         # with fields called 'level' etc:
@@ -636,9 +664,14 @@ class MemoryStorage(TableStorage):
         return {k: self.get_item(table_name, key) for k, key in keys_map.items()}
 
     @lock.synchronized
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         eq_conditions, special_conditions = DynamoCondition.partition(key)
         validate_only_sort_key(special_conditions, sort_key)
+
+        if filter:
+            filter_eq_conditions, filter_special_conditions = DynamoCondition.partition(filter)
+        else:
+            filter_eq_conditions, filter_special_conditions = {}, {}
 
         records = self.tables.get(table_name, [])
         filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
@@ -677,17 +710,26 @@ class MemoryStorage(TableStorage):
             with_keys = with_keys[:limit]
             next_page_key = with_keys[-1][0]
 
-        return copy.copy([record for _, record in with_keys]), next_page_key
+        # Do a final filtering to mimic DynamoDB FilterExpression
+        return copy.copy([record
+                          for _, record in with_keys
+                          if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                          ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None, query_index=None, filter=None):
         # If keys_only, we project down to the index + table keys
         # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
         # so we need to drop some data so programmers don't accidentally rely on it.
 
         records, next_page_token = self.query(
-            table_name, keys, sort_key=sort_key, reverse=reverse, limit=limit, pagination_token=pagination_token
+            table_name, keys,
+            sort_key=sort_key,
+            reverse=reverse,
+            limit=limit,
+            pagination_token=pagination_token,
+            filter=filter,
         )
 
         if not keys_only:
@@ -1176,3 +1218,9 @@ class ScanIterator(QueryIterator):
 
     def _do_fetch(self):
         return self.table.scan(limit=self.limit, pagination_token=self.pagination_token)
+
+
+def merge_dicts(a, b):
+    if not a: return b
+    if not b: return a
+    return dict(**a, **b)
