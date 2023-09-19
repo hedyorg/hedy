@@ -208,7 +208,7 @@ adventures:
                 example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\n{if} direction {is} left {turn} _\n{if} direction {is} right {turn} _\n{forward} 100\n```\n"
                 story_text_2: "### 연습문제\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             1:
-                story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### 연습문제\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "여러분은 또한 Hedy를 그림을 그리기 위해 사용할 수 있습니다. 회전과 선을 결합함으로써, 여러분은 사각형이나 계단을 만들 수 있습니다!\n\n`{forward}`을 사용하면 앞으로 선을 그립니다. 뒤에 있는 숫자에 따라 거북이가 걸어갈 거리가 결정됩니다.`{turn} {right}`는 시계 방향으로 1/4회전, `{turn} {left}`는 시계 반대 방향으로 회전합니다.\n\n뒤로 가려면 `{forward}` 명령을 사용하지만 음수가 됩니다. 따라서 예를 들어 `{forward} -100`\n\n### ### 연습문제\n작은 시작 단계입니다. 계단을 5개로 만들 수 있나요?\n"
                 example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
@@ -283,7 +283,7 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
                 story_text: "In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.\n### 연습문제\nCopy your code from the previous level and make it work by using quotation marks after each `{print}` or `{ask}` command.\n"
             1:
-                story_text: "In level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
+                story_text: "1단계에서는 가위바위보 게임으로 시작할 수 있습니다.\n\n`{ask}`를 사용하면 선택을 할 수 있고, `{echo}`를 사용하면 선택을 반복할 수 있습니다.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\n"
                 start_code: '{print} Welcome to your own rock scissors paper!
 
@@ -479,7 +479,7 @@ adventures:
     haunted:
         levels:
             1:
-                story_text: "In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but if not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.\n"
+                story_text: "이 모험에서 여러분은 올바른 문을 선택하여 유령의 집에서 탈출해야 하는 게임을 만들기 위해 노력하고 있습니다.\n오른쪽 문을 선택하면 살아남겠지만, 끔찍한 괴물이 아니라면...\n\n레벨 1에서는 무서운 이야기를 지어내는 것으로 유령의 집 게임을 시작하고 플레이어에게 유령의 집에서 어떤 괴물을 보게 될지 물어봅니다.\n"
                 example_code: "```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n"
                 story_text_2: "### 연습문제\nCopy the example code to your input screen by clicking the yellow button.\nNow finish the story by adding at least 5 lines of code.\nRemember to start each line of codes with a `{print}` command.\n"
                 start_code: '{print} How did I get here?'
@@ -704,12 +704,12 @@ adventures:
         levels:
             1:
                 story_text_3: "### 연습문제\n`{ask}` 명령어와 `{echo}` 명령어를 사용해 보세요. 먼저 빈칸을 채워야 이 프로그램이 작동합니다.\n그런 다음 `{ask}` 명령을 사용하여 2개의 질문을 더 하고, 각 {ask}가 {echo}를 사용하여 답을 화면에 출력합니다.\n"
-                example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
-                example_code_3: "```\n_ How are you doing?\n_\n```\n"
-                start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
+                example_code_2: "```\n{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n{echo} 안녕하세요\n```\n"
+                example_code_3: "```\n_ 너는 요즘 어때?\n_\n```\n"
+                start_code: "{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n{echo} 안녕하세요\n"
                 story_text: "## ask 명령어\n이제 `{print}` 명령어를 사용할 수 있게 되었으므로 다음 명령어인 `{ask}`를 배울 준비가 되었다. `{ask}` 명령어를 사용하면 질문을 할 수 있다. 다음을 확인해 보자:\n"
-                example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## echo 명령어\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                example_code: "```\n{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n```\n"
+                story_text_2: "## echo 명령어\n컴퓨터가 나의 답변을 또 다시 출력하도록 하려면 `{echo}` 명령을 사용하면 됩니다. 대답은 문장 끝에 다시 나오니 이점을 명심해주시고 \"안녕하세요\" 예문을 참고해주세요.\n"
             2:
                 story_text: "## The ask command\n이제 코드에서 **variable**를 사용할 수 있게 되었으므로 `{echo}` 명령어가 더 이상 필요하지 않습니다.\n우리는 질문에 대한 답을 저장하기 위해 변수를 사용할 수 있고, 이 방법으로 우리는 코드에 있는 여러 질문에 대한 답을 사용할 수 있다.\n확인해보세요:\n\n이런 식으로 코드가 상호작용하고 있어요!\n"
                 example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
