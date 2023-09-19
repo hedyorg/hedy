@@ -2,7 +2,7 @@ levels:
     1:
         1:
             story: |
-                Los puzzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
+                Los puzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
 
                 Eres un cliente de la panadería Hedy.
                 Entras en la panadería y te recibe el panadero.
@@ -10,7 +10,7 @@ levels:
                 Luego te repite la respuesta.
                 Por último, se prepara tu pedido.
             code: |-
-                {print} ¡Bienvenido a la panedería Hedy!
+                {print} ¡Bienvenido a la panadería Hedy!
                 {ask} ¿Qué tipo de pastel quieres pedir?
                 {echo} Entonces quieres
                 {print} ¡Tu orden está siendo preparada!
@@ -26,10 +26,10 @@ levels:
         1:
             story: |
                 Tú y tus amigos van a ver Netflix.
-                ¡Muestra qué película van a ver y deseales a los espectadores que se diviertan mucho!
+                ¡Muestra qué película van a ver y deséales a los espectadores que se diviertan mucho!
             code: |-
                 {print} Es hora de una noche de Netflix
-                película {is} Sonic the Hedgehog 2
+                película {is} Sonic 2: La película
                 {print} Vamos a ver una película
                 {print} ¡Diviértete!
         2:
@@ -55,13 +55,13 @@ levels:
                 {print} No te disgusta, ¿eh? Mejor que sean... casas {at} {random}
         2:
             story: |
-                Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de toppings y deja que el programa decida que vas a comer!
+                Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de ingredientes y deja que el programa decida que vas a comer!
             code: |-
-                comida {is} pizza, helado, ensalada, sandwich
-                toppings {is} chocolate, queso, atún, chispas
+                comida {is} pizza, helado, ensalada, sándwich
+                ingredientes {is} chocolate, queso, atún, chispas
                 {print} Tu aleatoria para hoy es...
                 {sleep} 2
-                {print} comida {at} {random} con toppings {at} {random}
+                {print} comida {at} {random} con ingredientes {at} {random}
         3:
             story: "En un torneo de ajedrez quedan tres jugadores.\nCrea un programa que decida qué dos jugadores tienen que jugar primero entre sí.\nEmpieza imprimiendo los dos jugadores que juegan la primera partida, luego imprime contra qué jugador jugará el ganador.\n"
             code: "jugadores {is} Liam, Noah, Sophie\njugador_1 {is} jugadores {at} {random}\n{remove} jugador_1 {from} jugadores\njugador_2 {is} jugadores {at} {random}\n{print} jugador_1 ' primero juega contra ' jugador_2\n{remove} jugador_2 {from} jugadores\n{print} 'El ganador juega contra ' jugadores {at} {random}"
@@ -80,7 +80,7 @@ levels:
             story: |
                 Crea una lotería que te permita elegir un premio extra que puedas ganar.
             code: |-
-                premios {is} coche, hamster, 1 millón de euros
+                premios {is} coche, hámster, 1 millón de euros
                 premio {is} {ask} '¿Qué te gustaría ganar?'
                 {add} premio {to_list} premios
                 {print} 'Ganaste un ' premios {at} {random}
@@ -90,11 +90,11 @@ levels:
                 Haz un programa que compruebe si tu película favorita ya está en la lista de la computadora.
                 Si es así, imprime que tienes un gran gusto, sino, agrega la película a la lista.
             code: |-
-                peliculas_favoritas {is} Batman, Spiderman, Los Vengadores, Jurassic Park
-                pelicula {is} {ask} '¿Cuál es tu película favorita?'
-                {if} pelicula {in} peliculas_favoritas {print} '¡Tienes un gran gusto!'
+                películas_favoritas {is} Batman, Spiderman, Los Vengadores, Parque Jurásico
+                película {is} {ask} '¿Cuál es tu película favorita?'
+                {if} película {in} películas_favoritas {print} '¡Tienes un gran gusto!'
                 {else} {print} '¡Que lástima que tu película favorita no está en la lista, vamos a añadirla de una vez!'
-                {add} pelicula {to_list} peliculas_favoritas
+                {add} película {to_list} películas_favoritas
         2:
             story: |
                 Crea un juego de matemáticas.
@@ -122,8 +122,8 @@ levels:
             code: |-
                 {print} '¡Es tu cumpleaños!'
                 personas = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
-                cakes_amount = personas/8
-                {print} 'Tendrás que comprar ' cakes_amount ' pasteles'
+                cantidad_tartas = personas/8
+                {print} 'Tendrás que comprar ' cantidad_tartas ' pasteles'
     7:
         1:
             story: |
@@ -154,7 +154,7 @@ levels:
                 {repeat} 5 {times}
                   {print} 'Haz sido seleccionado en el equipo... '
                   {print} equipos {at} {random}
-                  sleep 2
+                  dormir 2
         2:
             story: |
                 Imprime la cuenta regresiva para un juego de escondidas.
