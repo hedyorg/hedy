@@ -1302,9 +1302,16 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, numerals_language="Latin"):
+    def __init__(self, lookup, numerals_language="Latin", is_debug=False):
         self.lookup = lookup
         self.numerals_language = numerals_language
+        self.is_debug = is_debug
+
+    def add_debug_breakpoint(self):
+        if self.is_debug:
+            return f" # __BREAKPOINT__"
+        else:
+            return ""
 
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
@@ -1435,9 +1442,10 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, numerals_language):
+    def __init__(self, lookup, numerals_language, is_debug):
         self.numerals_language = numerals_language
         self.lookup = lookup
+        self.is_debug = is_debug
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1640,7 +1648,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-        return exception + f"print(f'{argument_string}')"
+        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1770,7 +1778,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_catch_exception(args)
-        return exceptions + f"print(f'{argument_string}')"
+        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1796,8 +1804,8 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, numerals_language):
-        super().__init__(lookup, numerals_language)
+    def __init__(self, lookup, numerals_language, is_debug):
+        super().__init__(lookup, numerals_language, is_debug)
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -1983,7 +1991,9 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True):
+def sleep_after(commands, indent=True, is_debug=False):
+    if is_debug:
+        return commands
     lines = commands.split()
     if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
         return commands
@@ -2001,8 +2011,8 @@ class ConvertToPython_7(ConvertToPython_6):
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
-        command = sleep_after(command, False)
-        return f"""for {var_name} in range(int({str(times)})):
+        command = sleep_after(command, False, self.is_debug)
+        return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
 
@@ -3213,7 +3223,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=True):
     check_program_size_is_valid(input_string)
 
     level = int(level)
@@ -3252,7 +3262,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         uses_turtle = UsesTurtle()
         has_turtle = uses_turtle.transform(abstract_syntax_tree)
