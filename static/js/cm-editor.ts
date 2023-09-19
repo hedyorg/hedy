@@ -1,5 +1,4 @@
 import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator, EditorEvent } from "./editor";
-import { Markers } from "./markers";
 import { basicSetup } from 'codemirror';
 import { EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect } from '@codemirror/state'
@@ -43,12 +42,15 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
 }
 
 export class HedyCodeMirrorEditor implements HedyEditor {
-    markers: Markers | undefined;
     private view: EditorView;
     private readMode = new Compartment; // Configuration for the editor read mode
     private theme = new Compartment;
     private themeStyles: Record<string, any>;
-    private editorEvent = new EventEmitter<EditorEvent>({change: true});
+    private editorEvent = new EventEmitter<EditorEvent>({
+        change: true,
+        guttermousedown: true,
+        changeBreakpoint: true
+      });
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
         console.log(editorType, dir);
@@ -224,5 +226,43 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             })
             this.view.dispatch(transaction);
         }
+    }
+
+    /**
+     * Mark an error location in the editor
+     *
+     * The error occurs at the given row, and optionally has a column and
+     * and a length.
+     *
+     * If 'col' is not given, the entire line will be highlighted red. Otherwise
+     * the character at 'col' will be highlighted, optionally extending for
+     * 'length' characters.
+     *
+     * 'row' and 'col' are 1-based.
+     */
+    highlightError(row: number, col?: number) {
+        // pass
+        console.log(row, col);
+    }
+
+    /**
+     * Remove all incorrect lines markers
+     */
+    // clearIncorrectLines(): void => for Skip Faulty
+
+    /**
+     * Set the current line in the debugger
+     */
+    setDebuggerCurrentLine(line: number | undefined) {
+        // pass
+        console.log(line);
+    }
+
+    /**
+     * Mark the given set of lines as currently struck through
+     */
+    strikethroughLines(lines: number[]) {
+        // pass
+        console.log(lines);
     }
 }
