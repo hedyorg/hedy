@@ -1221,6 +1221,8 @@ class ScanIterator(QueryIterator):
 
 
 def merge_dicts(a, b):
-    if not a: return b
-    if not b: return a
+    if not a:
+        return b
+    if not b:
+        return a
     return dict(**a, **b)
