@@ -196,7 +196,7 @@ sections:
     levels:
     -   level: '1'
         sections:
-        -   title: "Öğrenciler komutları yazmayı unutuyor"
+        -   title: "Öğrenciler komutları yazmayı unutmuş olabilir"
             example:
                 error_text: |
                     Örneğin, yazdır kullanmadan bir cümle yazarlar.
@@ -206,7 +206,7 @@ sections:
                     Bu seviyede, öğrencilerinize bir kod satırına her zaman bir komutla başlamalarını öğretin.
                 solution_code: |
                     yazdır Hedy bunu yazdırabilir!
-        -   title: "Öğrenciler komutları yazarken büyük harf kullanıyorlar"
+        -   title: "Öğrenciler komutları yazarken büyük harf kullanmış olabilirler"
             example:
                 error_text: |
                     Komutlar büyük harflerle yazılırsa çalışamazlar.
@@ -218,7 +218,7 @@ sections:
                 solution_code: |
                     sor Kodum şimdi neden çalışıyor?
                     yazdır Çünkü büyük harfleri kaldırdım!
-        -   title: "Öğrenciler yakıla'yı sor olmadan kullanıyor"
+        -   title: "Öğrenciler yakıla'yı sor olmadan kullanmış olabilir"
             example:
                 error_text: |
                     Bu seviyede, yankıla komutu bir sor komutundan sonra alınan cevabı tekrarlamak için yapıldı. sor komutu olmadan yankıla hiçbir şey yapmaz.
@@ -241,10 +241,10 @@ sections:
                 solution_code: |
                     sor En eğlenceli programlama dili hangisidir?
                     yankıla En iyi olan dil...
-        -   title: "Kaplumbağa: Öğrenciler kaplumbağanın ekrandan çıkıp gitmesine izin verir"
+        -   title: "Kaplumbağa: Öğrenciler kaplumbağanın ekrandan çıkıp gitmesine sebep olmuştur"
             example:
                 error_text: |
-                    Genellikle öğrenciler kaplumbağayı kullanırken büyük sayıları denemeyi severler, ama bu okun ekrandan çıkmasına neden olur.
+                    Genellikle öğrenciler kaplumbağayı kullanırken büyük sayıları denemeyi severler, ama bu onun ekrandan çıkmasına neden olur.
                 error_code: |
                     ileri 300
                     döndür 90
@@ -253,336 +253,336 @@ sections:
                 solution_code: |
                     ileri 100
                     döndür 90
-        -   title: "Kaplumbağa: Öğrenciler geri_git komutunu kullanmayı deniyor, ancak böyle bir komut yok"
+        -   title: "Kaplumbağa: Öğrenciler geriye gibi bir komutu kullanmayı deniyor, ancak böyle bir komut yok"
             example:
                 error_text: |
-                    geri_git diye bir komutumuz yok.
+                    geriye diye bir komutumuz yok.
                 error_code: |
-                    geri_git 100
+                    geriye 100
                 solution_text: |
                     Kaplumbağanın geriye doğru gitmesini sağlamak için ileri komutu ile negatif bir sayı kullanırsınız. Örneğin:
                 solution_code: |
                     ileri -100
     -   level: '2'
         sections:
-        -   title: "Students make typos in their commands"
+        -   title: "Öğrenciler komutlarında yazım hataları yapmış olabilirler"
             example:
                 error_text: |
-                    Hedy can't recognize a command with a typo.
+                    Hedy yazım hatası olan bir komutu tanıyamaz.
                 error_code: |
-                    prinnt Don't make typos!
+                    yazzdır Yazım hatası yapma!
                 solution_text: |
-                    Teach your students to read the error messages. This way they can find out themselves what went wrong.
+                    Öğrencilerinize hata mesajlarını okumayı öğretin. Bu şekilde neyin yanlış gittiğini kendileri bulabilirler.
                 solution_code: |
-                    print Don't make typos!
-        -   title: "Students forget that the ask command has changed"
+                    yazdır Yazım hatası yapmayın!
+        -   title: "Öğrenciler sor komutunun artık değiştiğini unutmuş olabilir"
             example:
                 error_text: |
-                    In this level students learn about variables. The ask command requires a variable as well, but students forget this.
+                    Bu seviyede öğrenciler değişkenleri öğrenirler. sor komutu da bir değişken kullanmayı gerektirir, ancak öğrenciler bu değişikliği unutabilirler.
                 error_code: |
-                    ask what would you like to eat?
+                    sor Ne yemek istersiniz?
                 solution_text: |
-                    In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
+                    Bu seviyede Hedy'ye cevabınızı nereye kaydedeceğinizi söylemeniz gerekir, böylece onu daha sonra kullanılabilirsiniz. Buna değişken denir.
                 solution_code: |
-                    order is ask What would you like to eat?
-        -   title: "Students try to use the echo command "
+                    sipariş eşit sor Ne yemek istersiniz?
+        -   title: "Öğrenciler echo komutunu kullanmayı deniyor olabilirler "
             example:
                 error_text: |
-                    For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
+                    Bazı öğrenciler için yankıla komutunun artık çalışmadığını öğrenmek biraz sinir bozucu olabilir. Bu yüzden değişken kullanmanın avantajlarını açıklamak çok önemlidir. Örneğin, bir kodda birden fazla değişken kullanabilir ve bunları bir cümle içinde istediğiniz yere koyabilirsiniz!
                 error_code: |
                     cevap eşit sor yankıla neden artık çalışmıyor?!
                     yankıla
                 solution_text: |
-                    Use a varible instead.
+                    Bunun yerine bir değişken kullanın.
                 solution_code: |
-                    answer is ask Why doens't echo work anymore?!
-                    print answer
-        -   title: "Students use a variable name or as a normal word"
+                    cevap eşit sor yankı komutu neden artık çalışmıyor?!
+                    yazdır cevap
+        -   title: "Öğrenciler bir değişken adını normal bir kelime gibi olarak kullanmaya çalışır"
             example:
                 error_text: |
-                    In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.
+                    Aşağıdaki örnekte 'adım' kelimesi hem bir değişken hem de normal bir metin olarak kullanılmıştır. Bu kodun çıktısı 'Merhaba, benim Hedy, Hedy' olacaktır.
                 error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                    adım eşit Hedy
+                    yazdır Merhaba, benim adım, adım
                 solution_text: |
-                    So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.
+                    Bu nedenle, metin içinde kullanmak istediğiniz bir kelimeyi değişken adı olarak kullanmayın. Seviye 4'te bu sorun tırnak işaretleri kullanımı ile çözülecek.
                 solution_code: |
-                    name is Hedy
-                    print Hi I'm name
-        -   title: "Students use long variable names containing two words."
+                    isim eşit Hedy
+                    yazdır Merhaba, benim adım isim
+        -   title: "Öğrenciler iki kelime içeren uzun değişken isimleri kullanmayı deneyebilir."
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    Bir değişken tek bir kelime ile adlandırılmalıdır. İki kelime gerekiyorsa bunları bağlamak için alt çizgi kullanabilirsiniz. Bu şekilde yine bir kelime olarak sayılır.
                 error_code: |
-                    chosen door is ask Which door do you pick?
+                    seçili kapı eşit sor Hangi kapıyı seçiyorsun?
                 solution_text: |
-                    Add an underscore.
+                    Alt çizgi kullanın.
                 solution_code: |
-                    chosen_door is ask which door do you pick?
-        -   title: "Students might use two different names for the same variable"
+                    seçili_kapı eşit sor Hangi kapıyı seçiyorsun?
+        -   title: "Öğrenciler aynı değişken için iki farklı isim kullanmış olabilirler"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    Bu örnekte öğrenci aynı değişken için 'at' ve 'isim' kelimelerini kullanmıştır.
                 error_code: |
-                    horse is ask What is your horse called?
-                    print Your horse is called name
+                    at eşit sor Atının adı ne?
+                    yazdır Demek, atınızın adı isim
                 solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    Değişkenin kod boyunca aynı isme sahip olup olmadığını her zaman kontrol edin. Küçük farklılıkları fark etmek zor olabilir (örneğin çoğullar) ancak bunlar doğrudan koda etki edecektir.
                 solution_code: |
-                    name is ask What is your horse called?
-                    print Your horse is called name
+                    isim eşit sor Atının adı ne?
+                    yazdır Demek, atınızın adı isim
     -   level: '3'
         sections:
-        -   title: "Students try to print whole lists"
+        -   title: "Öğrenciler bir listenin tamamını yazdırmaya çalışıyor olabilir"
             example:
                 error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
+                    Bir listenin tamamı yazdırılamaz. (şimdilik) yalnızca listeden bir öğeyi şuradan rastgele kullanarak yazdırabilirsiniz.
                 error_code: |
-                    groceries is apples, milk, chocolate
-                    print groceries
+                    alışveriş eşit elma, süt, çikolata
+                    yazdır alışveriş
                 solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
+                    Tüm yiyeceklerin bir listesini yazdırmak için, bunları bir `{print}` komutundan sonra tek tek koymanız yeterlidir. Aksi takdirde, listeyi `{at}` `{random}` ile kullanıp tek bir öğeyi yazdırmak için kullanabilirsiniz.
                 solution_code: |
-                    print apples, milk, chocolate
+                    yazdır elma, süt, çikolata
 
-                    or
+                    ya da
 
-                    groceries is apples, milk, chocolate
-                    print groceries at random
-        -   title: "Students use the name of a variable or list as regular text"
+                    alışveriş eşit elma, süt, çikolata
+                    yazdır alışveriş şuradan rastgele
+        -   title: "Öğrenciler bir değişkenin veya listenin adını normal metin gibi kullanıyor olabilir"
             example:
                 error_text: |
-                    This problem probably occured in level 2 as well. Now it can happen with lists too.
+                    Bu sorun muhtemelen 2. seviyede de ortaya çıkmıştır. Şimdi listelerde de olabilir.
                 error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                    adım eşit Hedy
+                    yazdır Merhaba, benim adım adım
 
-                    or
+                    ya da
 
-                    animal is rhino, bee, swan
-                    print The best animal is... animal at random
+                    hayvan eşit gergedan, arı, kuğu
+                    yazdır En iyi hayvan ... hayvan şuradan rastgele
                 solution_text: |
-                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
+                    Yazdırmak için değişkenlerin veya listelerin adlarını normal metin içinde kullanmayın ya da onlara başka isimler verin. Seviye 4'te bu sorun tırnak işaretleri ile çözülecek.
                 solution_code: |
-                    name is Hedy
-                    print Hi I'm name
+                    isim {is} Hedy
+                    {print} Merhaba, benim adım isim
 
-                    or
+                    ya da
 
-                    animals is rhino, bee, swan
-                    print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+                    hayvanlar {is} gergedan, arı, kuğu
+                    {print} En iyi hayvan ... hayvanlar {at} {random}
+        -   title: "Öğrenciler `{at}` `{random}` içinde `{at}` kullanmayı unutmuş olabilirler"
             example:
                 error_text: |
-                    Like in the example
+                    Örnekte olduğu gibi
                 error_code: |
-                    birds is sparrow, seagull, robin
-                    print birds random
+                    kuşlar eşit serçe, martı, kızılgerdan
+                    yazdır kuşlar rastgele
                 solution_text: |
-                    This problem is solved by adding the word at.
+                    Bu sorun şuradan kelimesinin eklenmesiyle çözülür.
                 solution_code: |
-                    birds is sparrow, seagull, robin
-                    print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+                    kuşlar eşit serçe, martı, kızılgerdan
+                    yazdır kuşlar şuradan rastgele
+        -   title: "Öğrenciler `{at}` `{random}` komutunu kullanırken de `{print}` komutunu kullanmayı unutmuş olabilirler"
             example:
                 error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
+                    Ya da bazen satırın başına `{at}` `{random}` koyarlar.
                 error_code: |
-                    fruit is apple, cherry, banana
-                    fruit at random
+                    meyve eşit elma, kiraz, muz
+                    meyve şuradan rastgele
                 solution_text: |
-                    Emphasize to your students that you always need a print to print text.
+                    Öğrencilerinize bir metni yazdırmak için her zaman bir yazdır kullanmaları gerektiğini vurgulayın.
                 solution_code: |
-                    fruit is apple, cherry, banana
-                    print fruit at random
-        -   title: "Students forget to use commas in their lists"
+                    meyve {is} elma, kiraz, muz
+                    {print} meyve {at} {random}
+        -   title: "Öğrenciler listelerinde virgül kullanmayı unutmuş olabilirler"
             example:
                 error_text: |
-                    In a list items are seperated with a comma.
+                    Bir listede öğeler virgülle ayrılır.
                 error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
+                    pizzalar {is} mantar ton balığı dört mevsim
+                    {print} pizzalar {at} {random}
                 solution_text: |
-                    After each item on your list, there should be a comma
+                    Listenizdeki her maddeden sonra bir virgül olmalıdır
                 solution_code: |
-                    pizzas is funghi, tonno, quattro stagioni
-                    print pizzas at random
-        -   title: "Students try to use at random without a list"
+                    pizzalar eşit mantar, ton balığı, dört mevsim
+                    yazdır pizzalar şuradan rastgele
+        -   title: "Öğrenciler liste olmadan `{at}` `{random}` kullanmaya çalışıyor olabilirler"
             example:
                 error_text: |
-                    For example
+                    Örneğin
                 error_code: |
-                    clubs is Manchester United
-                    print clubs at random
+                    kulüpler {is} Manchester United
+                    {print} kulüpler {at} {random}
                 solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
+                    Hedy rastgele bir şey yazdıramaz, çünkü seçim yapabileceği bir liste yoktur.
                 solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
-        -   title: "Students try to use add/remove without a list "
+                    kulüpler {is} Manchester United, Bayern Munchen, FC Barcelona
+                    {print} kulüpler {at} {random}
+        -   title: "Öğrenciler liste olmadan ekle/kaldır yöntemini kullanmaya çalışıyor olabilirler "
             example:
                 error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                    Aşağıdaki örnekte 'isimler' bir liste değil, bir tekli değişkendir. İçine herhangi bir şey ekleyemezsiniz.
                 error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
+                    isimler {is} Jake
+                    senin_ismin {is} {ask} Kimsin sen?
+                    {add} senin_ismin {to} isimler
+                    {print} isimler {at} {random}
                 solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                    Öncelikle elinizde bir liste olması gerekir, bu nedenle isimleri bir listeye dönüştürmek için ikinci bir isim eklemeniz gerekir, örneğin Amy. Amy'yi listenizde istemiyorsanız, daha sonra kaldırmak için kaldır kullanabilirsiniz.
                 solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
-        -   title: "Students forget to use to/from in add/remove"
+                    isimler {is} Jake, Amy
+                    senin_ismin {is} {ask} Kimsin sen?
+                    {add} senin_ismin {to} isimler
+                    {print} isimler {at} {random}
+        -   title: "Öğrenciler ekle/kaldır işleminde şuraya/şuradan kullanmayı unuturlar"
             example:
                 error_text: |
-                    Without to/from the add/remove command won't work.
+                    şuraya/şuradan olmadan ekle/kaldır komutu çalışmayacaktır.
                 error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
+                    maceralar {is} hikaye, papağan, zar
+                    seçim {is} En çok hangi macerayı seviyorsunuz?
+                    {add} seçim
+                    {remove} zar
+                    {print} En çok sevdiğim maceralar {at} {random}
                 solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
+                    Hedy, öğenin hangi listeye ekleneceğini ve hangi listeden çıkarılacağını bilmelidir.
                 solution_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice to adventures
-                    remove dice from adventures
-                    print I love adventures at random
+                    maceralar eşit hikaye, papağan, zar
+                    seçim eşit En çok hangi macerayı seviyorsunuz?
+                    ekle seçim şuraya maceralar
+                    kaldır zar şuradan maceralar
+                    yazdır Benim sevdiğim adventures şurada rastgele
     -   level: '4'
         sections:
-        -   title: "Students forget to use quotation marks on both sides of the text"
+        -   title: "Öğrenciler metnin her iki tarafında da tırnak işareti kullanmayı unutmuş olabilirler"
             example:
                 error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
+                    Bu seviyede yazdırmak ve sormak için artık bir çift tırnak işareti kullanmak gerekiyor. Biri metinden önce ve diğeri sonra.
                 error_code: |
-                    print Hello
-                    mood is ask 'How are you?
+                    yazdır Merhaba
+                    ruh_hali eşit sor 'Nasılsın?
                 solution_text: |
-                    Add the correct quotation marks.
+                    Doğru tırnak işaretlerini ekleyin.
                 solution_code: |
-                    print 'Hello'
-                    mood is ask 'How are you?'
-        -   title: "Students use the wrong quotation marks"
+                    yazdır 'Hello'
+                    ruh_hali eşit sor 'Nasılsın?'
+        -   title: "Öğrenciler yanlış tırnak işaretini kullanıyor"
             example:
                 error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                    Dersinize öğrencilerin tırnak işaretini doğru yazmayı bilip bilmediklerini kontrol ederek başlamanız önemlidir. Aksi takdirde "çift tırnak" veya `ters tırnak` kullanabilirler.
                 error_code: |
-                    print `Welcome to the restaurant`
-                    food is ask "What would you like to order?"
+                    yazdır `Restorana hoş geldiniz`
+                    yemek eşit sor "Ne sipariş etmek istersiniz?"
                 solution_text: |
-                    These are the correct quotation marks:
+                    Doğrusu aşağıdaki gibi 'tek tırnak' işaretleridir:
                 solution_code: |
-                    print 'Welcome to the restaurant'
-                    food is ask 'What would you like to order?'
-        -   title: "Students use an apostrophe in their text"
+                    yazdır 'Restorana hoş geldiniz'
+                    yemek eşit sor 'Ne sipariş etmek istersiniz?'
+        -   title: "Öğrenciler metinlerinde kesme işareti kullanmış olabilirler"
             example:
                 error_text: |
-                    From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
+                    Bu seviyeden itibaren, kesme işaretlerine izin verilmez çünkü bunlarda tek tırnak işareti kullanırlar. İngilizce you're veya don't, Türkçe'de Ali'nin veya TC'de gibi ifadelerde kullanılırlar.
                 error_code: |
-                    print 'You're not allowed to type this'
+                    yazdır 'Hedy'de böyle yazmaya izniniz yok.'
                 solution_text: |
-                    You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
+                    Yanlış dilbilgisini kullanmayı seçebilir ve kesme işaretini atlayabilirsiniz. Ya da kesme işareti olarak ters tırnak ` kullanabilirsiniz.
                 solution_code: |
-                    print 'Youre allowed to type this'
-                    print 'And you`re able to do this'
+                    yazdır 'Hedy de böyle yazmana izin var.'
+                    yazdır 'Hedy`de böyle de yazabilirsin'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: "Öğrenciler bir `{if}` komutunda `{print}` kullanmayı unutmuş olabilirler"
             example:
                 error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
+                    Öğrenciler `{if}` veya `{else}` komutlarını kullandıktan sonra `{print}` veya `{ask}` gibi ikinci bir komut kullanmayı unutabilirler.
                 error_code: |
-                    if name is Hedy 'Great!'
-                    else 'Hedy is better!'
+                    eğer isim eşit Hedy 'Harika!'
+                    değilse 'Hedy daha iyi!'
                 solution_text: |
-                    Add the print command to fix it.
+                    Düzeltmek için yazdır komutunu ekleyin.
                 solution_code: |
-                    if name is Hedy print 'Great!'
-                    else print 'Hedy is better!'
-        -   title: "Students might use two different names for the same variable"
+                    eğer isim eşit Hedy yazdır 'Harika!'
+                    değilse yazdır 'Hedy daha iyi!'
+        -   title: "Öğrenciler aynı değişken için iki farklı isim kullanmış olabilir"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    Bu örnekte öğrenci aynı değişkenler için 'at' ve 'isim' kelimelerini kullanmıştır.
                 error_code: |
-                    horse is ask 'What is your horse called?'
-                    if name is Bonfire print 'cool'
-                    else print 'less cool!'
+                    at eşit sor 'Atının adı ne?'
+                    eğer isim eşit 'Şenlik Ateşi' yazdır 'havalı'
+                    değilse yazdır 'az havalı!'
                 solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    Değişkenin kod boyunca aynı ada sahip olup olmadığını her zaman kontrol edin. Küçük farklılıkları fark etmek zor olabilir (örneğin çoğullar) ancak bunlar kodu doğrudan etkileyecektir.
                 solution_code: |
-                    horse is ask 'What is your horse called'
-                    if horse is Bonfire print 'cool!'
-                    else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides"
+                    at eşit sor 'Atının adı ne?'
+                    eğer at eşit 'Şenlik Ateşi' yazdır 'havalı'
+                    değilse yazdır 'az havalı!
+        -   title: "Öğrenciler hala her iki taraftaki tırnakları unutuyor olabilir"
             example:
                 error_text: |
-                    Codes using the `if` commando can get very long and students tend to forget to use quotes.
+                    `eğer` komutunu kullanan kodlar çok uzun olabilir ve öğrenciler tırnak işaretlerini kullanmayı unutabilirler.
                 error_code: |
-                    if name is Hedy print fun
-                    else print 'meh!
+                    eğer isim eşit Hedy yazdır eğlenceli
+                    değilse yazdır 'eh işte!
                 solution_text: |
-                    Always use 2 quotes in a print command.
+                    yazdır komutunda her zaman 2 tırnak işareti kullanın.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!'
-        -   title: "Students use quotes around variable names"
+                    eğer isim eşit Hedy yazdır 'eğlenceli'
+                    değilse yazdır 'eh işte!'
+        -   title: "Öğrenciler değişken isimlerinin etrafında tırnak işareti kullanıyor olabilir"
             example:
                 error_text: |
-                    In this level there are no quotes around variable names.
+                    Bu seviyede değişken isimlerinin etrafında tırnak işareti yoktur.
                 error_code: |
-                    if 'name' is 'Hedy' print 'fun'
-                    else print 'meh!'
+                    eğer 'isim' eşit 'Hedy' yazdır 'eğlenceli'
+                    değilse yazdır 'eh işte!'
                 solution_text: |
-                    Remove the quotes to get the code to work.
+                    Kodun çalışması için tırnak işaretlerini kaldırın.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!
-        -   title: "Students use long variable names containing two words"
+                    eğer isim eşit Hedy yazdır 'eğlenceli'
+                    değilse yazdır 'eh işte!
+        -   title: "Öğrenciler iki sözcük içeren uzun değişken adları kullanmaya çalışabilirler"
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    Bir değişken tek bir kelime ile adlandırılmalıdır. İki kelimeyi bağlamak için aralarına alt çizgi koyabilirsiniz. Bu şekilde bir kelime olarak sayılır.
                 error_code: |
-                    chosen door is ask 'Which door do you pick?'
+                    seçilen kapı eşit sor 'Hangi kapıyı seçiyorsun?'
                 solution_text: |
-                    Add an underscore.
+                    Bir alt çizgi ekleyin.
                 solution_code: |
-                    chosen_door is ask 'which door do you pick?'
-        -   title: "Students want multiple answers to be correct"
+                    seçilen_kapı eşit sor 'Hangi kapıyı seçiyorsun?'
+        -   title: "Öğrenciler birden fazla cevabın doğru olmasını isteyebilir"
             example:
                 error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                    Örneğin bu Hedy isimli öğrenci tüm kendi arkadaşlarına komik olduklarını söylerken, diğer sınıf arkadaşlarına komik olmadıklarını söyleyecektir.
                 error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
+                    eğer isim Jesse, David, Souf yazdır 'Komiksin' değilse yazdır 'Komik değilsin'
                 solution_text: |
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Bunun için `içinde` komutunu kullanabilirsiniz. Bu daha ileriki bir seviyede açıklanmıştır, ancak 5. seviyede de çalışmaktadır.
+                    Başka bir çözüm de birden fazla eğer komutu kullanmak ve değilse komutunu kullanmamaktır. Ama bunun kötü yanı, diğer sınıf arkadaşlarına komik olmadıklarını söyleyemeyecek olmasıdır.
                 solution_code: |
-                    friends is Jesse, David, Souf
-                    name is ask 'Who are you?'
-                    if name in friends print 'You are funny'
-                    else print 'You are not funny'
+                    arkadaşlar eşit Jesse, David, Souf
+                    isim eşit sor 'Kimsin sen?'
+                    eğer isim içinde arkadaşlar yazdır 'Çok komiksin.'
+                    değilse yazdır 'Hiç komik değilsin.'
 
-                    or
+                    ya da
 
-                    name is ask 'Who are you?'
-                    if naam is Jesse print 'You are funny'
-                    if naam is David print 'You are funny'
-                    if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+                    isim eşit sor 'Kimsin sen?'
+                    eğer isim eşit Jesse yazdır 'Çok komiksin.'
+                    eğer isim eşit David yazdır 'Çok komiksin.'
+                    eğer isim eşit Souf yazdır 'Çok komiksin.'
+        -   title: "Öğrenciler değişken adını `{if}` ifadesindeki değerle aynı yapmış olabilirler"
             example:
                 error_text: |
-                    In the example below the password is 'password'. This will result in it always being correct.
+                    Aşağıdaki örnekte parola 'parola'dır. Bu, her zaman karşılaştırmanın doğru olmasıyla sonuçlanacaktır.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password print 'Access granted'
-                    else print 'Acces denied!'
+                    parola eşit sor 'Parola nedir?'
+                    eğer parola eşit parola yazdır 'Erişim izni verildi'
+                    değilse yazdır 'Erişim reddedildi!'
                 solution_text: |
-                    Pick a different name for your variable.
+                    Değişkeniniz için farklı bir ad seçin.
                 solution_code: |
                     secret_password is ask 'What is the password'
                     if secret_password is password print 'Access granted!'
