@@ -79,7 +79,7 @@ sections:
             Bu şekilde öğrencilerinize İngilizce anahtar kelimelerle kodlamayı öğretebilir, ancak kendi dillerinde programlamalarını da sağlayabilirsiniz. Örneğin, Türk öğrenciler 'ask' yerine 'sor' komutunu kullanabilirler.
 
             **Video**
-            Bu  <a href="https://www.youtube.com/watch?v=QrVZETj4oLM" target="_blank">video</a> tercih edilen bir dili nasıl ayarlayacağınızı ve anahtar kelimeleri de tercih ettiğiniz dile nasıl değiştireceğinizi gösterir.
+            Bu <a href="https://www.youtube.com/watch?v=QrVZETj4oLM" target="_blank">video</a> tercih edilen bir dili nasıl ayarlayacağınızı ve anahtar kelimeleri de tercih ettiğiniz dile nasıl değiştireceğinizi gösterir.
 
     -   title: "Programların kaydedilmesi"
         text: |
@@ -604,540 +604,557 @@ sections:
                 error_text: |
                     Bazı öğrenciler değişkenlerle matematik yapmakta zorlanacaktır. Onlara çok basit örnekler göstermeye çalışın:
                 error_code: |
-                    age = ask 'How old are you?'
-                    print 'Next year you will be ' age + 1
+                    yaş = sor 'Kaç yaşındasın?'
+                    yazdır 'Gelecek sene yaşın şu olacak: ' yaş + 1
                 solution_text: |
-                    Or take it a step further like this.
+                    Ya da şu şekilde bir adım daha ileri gidin.
                 solution_code: |
-                    price = 0
-                    print 'Welcome to our burger restaurant'
-                    burger = ask 'Would you like a burger?'
-                    if burger = yes price = price + 10
-                    drink = ask 'Would you like a drink?'
-                    if drink = yes price = price + 4
-                    print 'That will be ' price ' euros please'
+                    ücret = 0
+                    yazdır 'Burger restoranımıza hoş geldiniz'
+                    burger = sor 'Burger ister misin?'
+                    eğer burger = yes ücret = ücret + 10
+                    içecek = sor 'İçecek bir şey ister misin?'
+                    eğer içecek = evet ücret = ücret + 4
+                    yazdır 'Borcunuz ' ücret ' lira, lütfen'
     -   level: '7'
         sections:
-        -   title: "Students forget one of the word of the repeat command, or they forget the print command"
+        -   title: "Öğrenciler tekrarla komutunun bir kelimesini veya yazdır komutunu kullanmayı unutabilirler"
             example:
                 error_text: |
-                    Make sure that the students know to use both the full repeat command and the print command.
+                    Öğrencilerin hem tekrarla komutunun tamamını hem de yazdır komutunu kullanmayı bildiklerinden emin olun.
                 error_code: |
-                    repeat 3 times 'For he`s a jolly good fellow'
-                    repeat 3 print 'Which nobody can deny!'
+                    tekrarla 3 kere 'Çünkü o çok iyi bir adam'
+                    tekrarla 3 yazdır 'Bunu kimse inkar edemez!'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan bu kod:
                 solution_code: |
-                    repeat 3 times print 'For he`s a jolly good fellow'
-                    repeat 3 times print 'Which nobody can deny!'
-        -   title: "Students try to repeat multiple lines"
+                    tekrarla 3 kere yazdır 'Çünkü o çok iyi bir adam'
+                    tekrarla 3 kere yazdır 'Bunu kimse inkar edemez!'
+        -   title: "Öğrenciler birden fazla satırı tekrar etmeye çalışır"
             example:
                 error_text: |
-                    In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
+                    Bu seviyede henüz sadece bir kod satırını birden fazla kez tekrarlayabilirsiniz. Bu kodda öğrenci 3 farklı içecek yazdırmak istemiştir, ancak bu işe yaramayacaktır. Soruyu 3 kez soracak ama sadece son cevabı yazdıracaktır.
                 error_code: |
-                    repeat 3 times drink = ask 'What would you like to drink?'
-                    print drink
+                    tekrarla 3 kere içecek = sor 'Ne içmek istersiniz?'
+                    yazdır içecek
                 solution_text: |
-                    You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                    Birden fazla satırı tekrarlayabilmek için bir sonraki seviyeye geçmelisiniz. Yani bu seviyede için her şeyi ayrı yazdırmanız gerekecek.
                 solution_code: |
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-        -   title: "Students make programs that take too long to run"
+                    içecek = sor 'Ne içmek istersiniz?'
+                    yazdır içecek
+                    içecek = sor 'Ne içmek istersiniz?'
+                    yazdır içecek
+                    içecek = sor 'Ne içmek istersiniz?'
+                    yazdır içecek
+        -   title: "Öğrenciler çalışması çok uzun süren programlar yazabilirler"
             example:
                 error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                    Bu seviyede uzun kodlar yapmak çok kolaydır. Ancak öğrencilerin yüklenmesi çok uzun süren programlar yapmalarına izin verilmez (sunucularımızı korumak için).
                 error_code: |
-                    repeat 100 times print 'How many times can I repeat this?'
+                    tekrarla 100 kere yazdır 'Bunu kaç kez tekrarlayabilirim?'
                 solution_text: |
-                    Make sure the codes aren't too long
+                    Kodların çok uzun olmadığından emin olun
                 solution_code: |
-                    repeat 20 times print 'This is enough'
+                    tekrarla 20 kere yazdır 'Bu kadar yeterli olur'
     -   level: '8'
         sections:
-        -   title: "Students use the indentation wrong"
+        -   title: "Öğrenciler girintiyi yanlış kullanabilirler"
             example:
                 error_text: |
-                    Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
+                    Girintileme, bu seviyede gelen yeni bir kavramdır ve bazı öğrenciler için kullanımını anlamak zordur. Bununla bütün bir program yapmadan önce bazı basit kodları uyguladıklarından emin olun.
                 error_code: |
-                    repeat 3 times
-                    print 'hello'
+                    tekrarla 3 kere
+                    yazdır 'hello'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    repeat 3 times
-                        print 'hello'
-        -   title: "Students only repeat 1 line when they wanted to repeat multiple lines"
+                    tekrarla 3 kere
+                        yazdır 'Merhaba'
+        -   title: "Öğrenciler birden fazla satırı tekrar etmek istiyorlar ama sadece 1 satırı tekrar etmiş olabilirler"
             example:
                 error_text: |
-                    For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
+                    Örneğin, aşağıdaki kodda öğrenci 3 kişinin içecek siparişini almak istemiştir. Ancak bunun yerine program 3 kez soru sordu, ama yalnızca bir siparişi yazdı.
                 error_code: |
-                    repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                    print drink
+                    tekrarla 3 kere
+                        içecek = sor 'Ne içmek istersiniz?'
+                    yazdır içecek
                 solution_text: |
-                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
-                    Showing your students these differences can help them understand why we need indentation to make our programs work.
+                    Doğru kod için, üçüncü satır bir girinti ile başlar. Bu şekilde tekrarla bloğuna ait olur ve böylece 3 kez tekrarlanır.
+                    Öğrencilerinize bu farklılıkları göstermek, programlarımızın çalışması için neden girintiye ihtiyaç duyduğumuzu anlamalarına yardımcı olabilir.
                 solution_code: |
-                    repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                        print drink
-        -   title: "Students want to nest if statements, or put if statements inside a loop"
+                    tekrarla 3 kere
+                        içecek = sor 'Ne içmek istersiniz?'
+                        yazdır içecek
+        -   title: "Öğrenciler `{if}` deyimlerini iç içe yerleştirmek veya `{if}` deyimlerini bir döngünün içine koymak isteyebilirler"
             example:
                 error_text: |
-                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
-                    In the next level this is allowed.
+                    Bu seviyede henüz öğrencilerin `{if}` ifadelerini diğer `{if}` ifadelerinin içine veya tekrarla döngülerinin içine koymalarına henüz izin verilmemektedir.
+                    Bir sonraki seviyede buna izin verilecektir.
                 error_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
-                        repeat 3 times
-                            print 'Hip Hip Hooray!'
+                    doğum_günü = sor 'Bugün doğum günün mü?'
+                    eğer doğum_günü = evet
+                        tekrarla 3 kere
+                            yazdır 'Yaşasın!'
                 solution_text: |
-                    This is the correct code for this level:
+                    Bu seviye için doğru kod şudur:
                 solution_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-        -   title: "Students make programs that take too long to run"
+                    doğum_günü = sor 'Bugün doğum günün mü?'
+                    eğer doğum_günü = evet
+                        yazdır 'Yaşasın'
+                        yazdır 'Yaşasın'
+                        yazdır 'Yaşasın'
+        -   title: "Öğrenciler çalışması çok uzun süren programlar yaparlar"
             example:
                 error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                    Bu seviyede uzun kodlar yapmak çok kolaydır. Ancak öğrencilerin yüklenmesi çok uzun süren programlar yapmalarına izin verilmez (sunucularımızı korumak için).
                 error_code: |
-                    repeat 100 times
-                        print 'How many times can I repeat this?'
+                    tekrarla 100 kere
+                        yazdır 'Bunu kaç kez tekrarlayabilirim?'
                 solution_text: |
-                    Make sure the codes aren't too long
+                    Kodların çok uzun olmadığından emin olun
                 solution_code: |
-                    repeat 20 times
-                        print 'This is enough'
-        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+                    tekrarla 20 kere
+                        yazdır 'Bu kadarı yeterli olur'
+        -   title: "Öğrenciler, değişken değerinin değişken adıyla aynı olup olmadığını kontrol etmek için `{if}` komutunu kullanır"
             example:
                 error_text: |
-                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
-                    In line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.
-                    So with this code the answer will always be 'You can come in' no matter what the player fills in.
+                    Bu hatayı bazı öğrencilerimizde gördük. Bilgisayarları için bir şifre oluşturuyorlar, ancak şifreyi 'parola' yapıyorlar.
+                    2. satırda bilgisayardan değişken ismi olan parola'nın değişken değeri olan parola ile aynı olup olmadığını kontrol etmesi istenir. Bu da cevabın her zaman evet olduğu anlamına gelir.
+                    Yani bu kodla, oyuncu ne doldurursa doldursun cevap her zaman 'İçeri girebilirsiniz' olacaktır.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password
-                        print 'You can come in'
-                    else
-                        print 'You are not allowed'
+                    parola eşit sor 'Parola nedir?'
+                    eğer parola eşit parola
+                        yazdır 'İçeri gelebilirsin'
+                    değilse
+                        yazdır 'Giriş iznin yok'
                 solution_text: |
-                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
+                    Tırnak işareti ekleyerek bu hatayı düzeltebilirsiniz. Bu şekilde bilgisayar `{if} parola {is} 'parola'` içindeki ikinci parolanın değişken adı değil bir dize değeri (yani normal metin) olduğunu bilir.
                 solution_code: |
-                    password is ask 'What is the password?'
-                    if password is 'password'
-                        print 'You can come in'
-                    else
-                        print 'You are not allowed'
+                    parola eşit sor 'Parola ne?'
+                    eğer parola eşit 'parola'
+                        yazdır 'İçeri gelebilirsin'
+                    değilse
+                        yazdır 'Giriş iznin yok'
     -   level: '9'
         sections:
-        -   title: "Students make mistakes with indentation"
+        -   title: "Öğrenciler girintilemede hata yapıyor"
             example:
                 error_text: |
-                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                    Bu seviyenin en zor kısmı girintileri doğru yapmaktır. Öğrenciler `{if}` deyimlerini iç içe geçirmeye bayılırlar, hatta bazen iç içe geçmiş başka `{if}` deyimlerinin içinde bile. Bu durumda girintilemeyi takip etmek oldukça zor olabilir.
                 error_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                            if book is yes
-                    print 'Robin buys the book and goes home'
-                    else
-                        print 'Robin leaves the shop and goes home'
-                    else
-                        print 'Robin goes home'
+                    yazdır 'Robin şehir merkezinde yürüyor.'
+                    konum = sor 'Robin bir dükkana mı giriyor, yoksa eve mi gidiyor?'
+                    eğer konum eşit dükkan
+                        yazdır 'Dükkana giriyor.'
+                        yazdır 'Robin ilginç görünümlü bir kitap görür'
+                        kitap = sor 'Robin kitabı satın alıyor mu?'
+                            eğer kitap eşit evet
+                    yazdır 'Robin kitabı satın alır ve eve gider.'
+                    değilse
+                        yazdır 'Robin dükkandan çıkar ve eve gider.'
+                    değilse
+                        yazdır 'Robin eve gider'
                 solution_text: |
-                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
+                    Doğru olan kod budur. Diğer `{if}` deyimlerinin içine `{if}` deyimlerini koyarken tüm farklı yapıları takip etmeye çalışın.
                 solution_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                        if book is yes
-                            print 'Robin buys the book and goes home'
-                        else
-                            print 'Robin leaves the shop and goes home'
-                    else
-                        print 'Robin goes home'
+                    yazdır 'Robin şehir merkezinde yürüyor.'
+                    konum = sor 'Robin bir dükkana mı giriyor, yoksa eve mi gidiyor?'
+                    eğer konum eşit dükkan
+                        yazdır 'Dükkana giriyor.'
+                        yazdır 'Robin ilginç görünümlü bir kitap görür'
+                        kitap = sor 'Robin kitabı satın alıyor mu?'
+                        eğer kitap eşit evet
+                            yazdır 'Robin kitabı satın alır ve eve gider.'
+                        değilse
+                            yazdır 'Robin dükkandan çıkar ve eve gider.'
+                    değilse
+                        yazdır 'Robin eve gider'
 
     -   level: '10'
         sections:
-        -   title: "Students so not use the for command correctly"
+        -   title: "Öğrenciler için komutunu doğru kullanmıyor olabilirler"
             example:
                 error_text: |
-                    We often see that students try to print the list (in the example animals) instead of the items of the list.
+                    Öğrencilerin listedeki öğeler yerine listeyi (hayvanlar örneğinde olduğu gibi) yazdırmaya çalıştıklarını sık görüyoruz.
                 error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animals
+                    hayvanlar eşit köpek, kedi, balık
+                    için hayvan içinde hayvanlar
+                      yazdır 'Benim sevdiğim ' hayvanlar
                 solution_text: |
-                    The word animals in the last line should be changed into animal.
+                    Son satırdaki hayvanlar kelimesi hayvan olarak değiştirilmelidir.
                 solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
-        -   title: "Students forget the indentation"
+                    hayvanlar eşit köpek, kedi, balık
+                    için hayvan içinde hayvanlar
+                      yazdır 'Benim sevdiğim ' hayvan
+        -   title: "Öğrenciler girintiyi unutuyor olabilirler"
             example:
                 error_text: |
-                    Students tend to forget to use indentation after a for command.
+                    Öğrenciler için komutundan sonra girinti kullanmayı unutma eğilimindedir.
                 error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                    print 'I love ' animals
+                    hayvanlar eşit köpek, kedi, balık
+                    için hayvan içinde hayvanlar
+                    yazdır 'Benim sevdiğim ' hayvan
                 solution_text: |
-                    You should use indentation after a for command.
+                    Bir için komutundan sonra girinti kullanmalısınız.
                 solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    hayvanlar eşit köpek, kedi, balık
+                    için hayvan içinde hayvanlar
+                      yazdır 'Benim sevdiğim ' hayvan
     -   level: '11'
         sections:
-        -   title: "Students forget to use indentation"
+        -   title: "Öğrenciler girinti kullanmayı unutuyorlar"
             example:
                 error_text: |
-                    Make sure that the students use indentation.
+                    Öğrencilerin girinti kullandıklarından emin olun.
                 error_code: |
-                    for i in range 1 to 5
-                    print i
+                    için i içinde aralık 1 şuraya 5
+                    yazdır i
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    for i in range 1 to 5
-                        print i
-        -   title: "Students don't understand the i"
+                    için i içinde aralık 1 şuraya 5
+                        yazdır i
+        -   title: "Öğrenciler \"i\" nin ne olduğunu anlamamış olabilir"
             example:
                 error_text: |
-                    Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
-                    For example, this code:
+                    Bazı öğrenciler i'nin bir değişken olduğunu anlamıyor. Python programlamada sık kullanıldığı için "i" seçilmiştir, ancak farklı bir değişken adı da kullanabilirsiniz.
+                    Örneğin, bu kod:
                 error_code: |
-                    for i in range 1 to 5
-                    print i
+                    için i içinde aralık 1 şuraya 5
+                        yazdır i
                 solution_text: |
-                    Could just as well be replaced with this code. It works the same.
+                    Bu kod aşağıdaki ile de değiştirilebilir. Aynı şekilde çalışır.
                 solution_code: |
-                    for banana in range 1 to 5
-                        print banana
+                    için muzlu_süt içinde aralık 1 şuraya 5
+                        yazdır muzlu_süt
     -   level: '12'
         sections:
-        -   title: "Students forget quotation marks"
+        -   title: "Öğrenciler tırnak işaretlerini unutmuş olabilirler"
             example:
                 error_text: |
-                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
+                    Öğrenciler artık önceki seviyelere göre daha fazla tırnak işaretine ihtiyaç duymaktadır. Bu örnekte tırnak işaretleri listede ve `{if}` komutunda unutulmuştur.
                 error_code: |
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes at random
-                    if superhero = Batman
-                        print 'IM BATMAN!'
+                    süper_kahramanlar = Spiderman, Batman, Iron Man
+                    süper_kahraman = süper_kahramanlar {at} {random}
+                    {if} süper_kahraman = Batman
+                        {print} 'BEN... BATMAN!'
 
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes at random
-                    if superhero is 'Batman'
-                        print 'IM BATMAN!'
-        -   title: "Students use quotation marks on numbers they want to use for calculations"
+                    süper_kahramanlar = 'Spiderman', 'Batman', 'Iron Man'
+                    süper_kahraman = süper_kahramanlar {at} {random}
+                    {if} süper_kahraman = 'Batman'
+                        {print} 'BEN... BATMAN!'
+        -   title: "Öğrenciler hesaplamalarda kullanmak istedikleri sayılar için tırnak işareti kullanmış olabilirler"
             example:
                 error_text: |
-                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
-                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
+                    Sayılar üzerinde tırnak işareti kullanabilirsiniz, ancak yalnızca bilgisayarın bunları metin olarak düşünmesini istiyorsanız. Bunu yaparsanız, sayı ile hesaplama yapamayacağınız anlamına gelir.
+                    Aşağıdaki örnekte, 25 sayısı ile matematik yapamazsınız, çünkü tırnak işareti içindedir.
                 error_code: |
-                    score = '25'
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
+                    puan = '25'
+                    cevap eşit sor 'Bir puan mı istiyorsun?'
+                    eğer cevap eşit 'evet'
+                        puan = puan + 1
+                        yazdır puan
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    score = 25
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
-        -   title: "Students use commas instead of periods in decimal numbers"
+                    puan = 25
+                    cevap eşit sor 'Bir puan mı istiyorsun?'
+                    eğer cevap eşit 'evet'
+                        puan = puan + 1
+                        yazdır puan
+        -   title: "Öğrenciler ondalık sayılarda nokta yerine virgül kullanmış olabilir"
             example:
                 error_text: |
-                    Decimal numbers can be used from this level on, but you can't use commas.
+                    Bu seviyeden itibaren ondalık sayılar kullanılabilir, ancak bunlarda virgül kullanamazsınız. Ondalıkları ayırmak için nokta gerekiyor.
                 error_code: |
-                    print 2,5 + 2,5
+                    yazdır 2,5 + 2,5
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    print 2.5 + 2.5
+                    yazdır 2.5 + 2.5
     -   level: '13'
         sections:
-        -   title: "Students confuse `and` with `or`"
+        -   title: "Öğrenciler `ve` ile `veya`yı karıştırıyor"
             example:
                 error_text: |
-                    Both commands might appear similar, but their functions are very different.
+                    Her iki komut da benzer görünebilir, ancak işlevleri çok farklıdır.
                 error_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' or time is 'yes'
-                        print 'Lets play!'
+                    oyun eşit sor 'Oyun oynamak ister misin?'
+                    zaman eşit sor 'Oynayacak vaktin var mı?'
+                    eğer oyun eşit 'evet' veya zaman eşit 'evet'
+                        yazdır 'Hadi oynayalım!'
                 solution_text: |
-                    In this case, the person should answer yes on both questions, so you should use `and`.
+                    Bu durumda, aslında oyun oynayabilmesi için kişinin her iki soruya da evet yanıtı vermesi gerekir, bu nedenle `ve` kullanmalısınız.
                 solution_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' and time is 'yes'
-                        print 'Lets play!'
+                    oyun eşit sor 'Oyun oynamak ister misin?'
+                    zaman eşit sor 'Oynayacak vaktin var mı?'
+                    eğer oyun eşit 'evet' ve zaman eşit 'evet'
+                        yazdır 'Hadi oynayalım!
     -   level: '14'
         sections:
-        -   title: "Students confuse the < and > signs"
+        -   title: "Öğrenciler < ve > işaretlerini karıştırabilir"
             example:
                 error_text: |
-                    Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                    Öğrenciler genellikle bu işaretlere matematik dersinden aşinadır. Ancak öğrencileriniz bu işaretleri henüz bilmiyorsa, bununla ilgili bir zorluk yaşayabilirler. (Buna yardımcı olmak için "büyük" ve "küçük" kelimelerinin ilk harflerinin yazımından dik çizgiyi kaldırmayı gösterebilirsiniz: "b" için ">" ve "k" için "<").
                 error_code: |
-                    age = ask 'How old are you?'
-                    if age < 12
-                        print 'You are older than I am!'
+                    yaş = sor 'Kaç yaşındasın?'
+                    eğer yaş < 12
+                        yazdır 'Sen benden daha yaşlısın!'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    age = ask 'How old are you?'
-                    if age > 12
-                        print 'You are older than I am!'
-        -   title: "Students use the wrong signs for `!=` `<=` and `>=`"
+                    yaş = sor 'Kaç yaşındasın?'
+                    eğer yaş > 12
+                        yazdır 'Sen benden daha yaşlısın!'
+        -   title: "Öğrenciler `!=`, `<=` ve `>=` için yanlış işaretler kullanabilir"
             example:
                 error_text: |
-                    These signs are probably new for most students. Make sure to explain these signs to your students.
+                    Bu işaretler muhtemelen çoğu öğrenci için yenidir. Bu işaretleri öğrencilerinize açıkladığınızdan emin olun.
                 error_code: |
-                    name = ask 'What is your name?'
-                    if name =< 'Hedy'
-                        print 'You are not Hedy'
+                    isim = sor 'Adın ne?'
+                    eğer isim =< 'Hedy'
+                        yazdır 'Sen Hedy değilsin.'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    name = ask 'What is your name?'
-                    if name != 'Hedy'
-                        print 'You are not Hedy'
-        -   title: "Students forget to use the == sign"
+                    isim = sor 'Adın ne?'
+                    eğer isim != 'Hedy'
+                        yazdır 'Sen Hedy değilsin.'
+        -   title: "Öğrenciler == işaretini kullanmayı unutabilirler"
             example:
                 error_text: |
-                    In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                    Bu seviyede, öğrencilerin "=" veya "eşit" kullanmalarına hala izin verilmektedir. Ancak diğer seviyelerde veya python'da bunun için başları belaya girebilir. Bu yüzden onları bunu kullanmaları için eğitmek en iyisidir. "=" değer atamak için, "==" ise değer karşılaştırmak içindir.
                 error_code: |
-                    name = ask 'What is your name?'
-                    if name = 'Hedy'
-                        print 'You are cool!'
+                    isim = sor 'Adın ne?'
+                    eğer isim = 'Hedy'
+                        yazdır 'Çok havalısın!'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    name = ask 'What is your name?'
-                    if name == 'Hedy'
-                        print 'You are cool!'
+                    isim = sor 'Adın ne?'
+                    eğer isim == 'Hedy'
+                        yazdır 'Çok havalısın!'
     -   level: '15'
         sections:
-        -   title: "Students forget indentation in the while loop"
+        -   title: "Öğrenciler iken döngüsünde girintilemeyi unutabilir"
             example:
                 error_text: |
-                    Indentation is often hard for students.
+                    Girinti yapmak öğrenciler için genellikle zordur.
                 error_code: |
-                    answer = 0
-                    while answer != 25
-                    answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    cevap = 0
+                    iken cevap != 25
+                    cevap = sor '5 kere 5 kaç eder?'
+                    yazdır 'Doğru bir cevap verilmiştir'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    cevap = 0
+                    iken cevap != 25
+                        cevap = sor '5 kere 5 kaç eder?'
+                    yazdır 'Doğru bir cevap verilmiştir'
     -   level: '16'
         sections:
-        -   title: "Students forget the brackets"
+        -   title: "Öğrenciler parantezleri unutur"
             example:
                 error_text: |
-                    From this level on lists should be in brackets.
+                    Bu seviyeden itibaren listeler köşeli parantez içinde olmalıdır.
                 error_code: |
-                    icecream = 'starwberry', 'chocolate'
-                    print 'I love ' icecream[random] ' icecream'
+                    dondurma = 'çilek', 'çikolata'
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students use the wrong brackets"
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
+        -   title: "Öğrenciler yanlış parantezleri kullanır"
             example:
                 error_text: |
-                    From this level on lists should be in brackets.
+                    Bu seviyeden itibaren listeler köşeli parantez içinde olmalıdır.
                 error_code: |
-                    icecream = ('starwberry', 'chocolate'}
-                    print 'I love ' icecream[random] ' icecream'
+                    dondurma = ('çilek', 'çikolata'}
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
+        -   title: "Öğrenciler parantezlere odaklanırken tırnak işaretlerini unuturlar"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Öğrenciler bazen sözdiziminin yeni yönüne o kadar odaklanırlar ki tırnak işaretlerini unuturlar.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
+                    dondurma = [çilek, çikolata]
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students still use the old at random command"
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
+        -   title: "Öğrenciler hala eski rastgele komutunu kullanmaya çalışıyor"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Öğrenciler bazen yeni gelen değişiklikleri anlamamış olabilirler. Listeden bir öğe almak için artık "şuradan rastgele" komutu kullanılamaz.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream at random ' icecream'
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma şuradan rastgele ' tadında dondurma'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
+        -   title: "Öğrenciler parantezlere odaklanırken tırnak işaretlerini unuturlar"
             example:
                 error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                    Öğrenciler bazen sözdiziminin yeni yönüne o kadar odaklanırlar ki tırnak işaretlerini unuturlar.
                 error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
+                    dondurma = [çilek, çikolata]
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
+                    dondurma = ['çilek', 'çikolata']
+                    yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
     -   level: '17'
         sections:
-        -   title: "Students use elif like else, so without a condition"
+        -   title: "Öğrenciler `{elif}` ifadesini `{else}` gibi kullanmaya çalışabilirler; yanına bir koşul yazmadan"
             example:
                 error_text: |
-                    The elif command needs a condition behind it. It cannot be used like else, without a condition.
+                    `{elif}` komutunun arkasında bir koşul olması gerekir. Bir koşul olmadan `{else}` gibi kullanılamaz.
                 error_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif:
-                        print 'I like green'
+                    renk = sor 'En sevdiğin renk hangisi?'
+                    {if} renk == 'yeşil':
+                        {print} 'yeşil güzeldir'
+                    {elif}:
+                        {print} 'Ben yeşili seviyorum.'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif color == yellow:
-                        print 'yellow is alright'
-                    else:
-                        print 'I like green'
-        -   title: "Students forget the colon"
+                    renk = sor 'En sevdiğin renk hangisi?'
+                    {if} renk == 'yeşil':
+                        {print} 'yeşil güzeldir'
+                    {elif} renk == 'sarı':
+                        {print} 'sarı iyidir'
+                    {else}:
+                        {print} 'Ben yeşili seviyorum.'
+        -   title: "Öğrenciler iki nokta üst üste işaretini unutuyor"
             example:
                 error_text: |
-                    After each command that requires indentation, a colon should be used.
+                    Bu seviyeden itibaren, girinti gerektiren her komuttan sonra iki nokta üst üste kullanılmalıdır.
                 error_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great'
-                        print 'Me too!'
-                    elif answer is 'bad'
-                        print 'Let me cheer you up!'
-                    else
-                        print 'Im great!'
+                    cevap = sor 'Nasılsın?'
+                    {if} cevap {is} 'harika'
+                        {print} 'Ben de!'
+                    {elif} cevap {is} 'kötü'
+                        {print} 'Dur seni neşelendireyim'
+                    {else}
+                        {print} 'Harikayım!'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great':
-                        print 'Me too!'
-                    elif answer is 'bad':
-                        print 'Let me cheer you up!'
-                    else:
-                        print 'Im great!'
+                    cevap = sor 'Nasılsın?'
+                    {if} cevap {is} 'harika':
+                        {print} 'Ben de!'
+                    {elif} cevap {is} 'kötü':
+                        {print} 'Dur seni neşelendireyim'
+                    {else}:
+                        {print} 'Harikayım!'
     -   level: '18'
         sections:
-        -   title: "Students forget to use the brackets"
+        -   title: "Öğrenciler parantezleri kullanmayı unutuyorlar"
             example:
                 error_text: |
-                    Students will forget to put brackets around their text.
+                    Öğrenciler metinlerinin etrafına parantez koymayı unutabilirler. Bu seviyede bir çok komutta artık parantez kullanılmalıdır.
                 error_code: |
-                    print 'my name is Hedy!'
+                    yazdır 'Benim adım Hedy!'
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    print('my name is Hedy!')
-        -   title: "Students will still use the ask command"
+                    yazdır('Benim adım Hedy!')
+        -   title: "Öğrenciler yine de sor komutunu kullanmaya çalışıyorlar"
             example:
                 error_text: |
-                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                    sor komutu 1. seviyeden beri kullanılıyordu. Bu yüzden öğrenciler için sor yerine girdi komutuna geçmek zor olabilir.
                 error_code: |
-                    print('My name is Hedy!')
-                    name = ask('What is your name?')
-                    print('So your name is ', name)
+                    yazdır('Benim adım Hedy!')
+                    isim = sor('Adın ne?')
+                    yazdır('Demek senin adın ', isim)
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    print('My name is Hedy!')
-                    name = input('What is your name?')
-                    print('So your name is ', name)
-        -   title: "Students might use the brackets as quotation marks"
+                    yazdır('Benim adım Hedy!')
+                    isim = girdi('Adın ne?')
+                    yazdır('Demek senin adın ', isim)
+        -   title: "Öğrenciler parantezleri tırnak işareti gibi kullanmaya çalışıyor olabilir"
             example:
                 error_text: |
-                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                    Değişkenleri tırnak işaretlerinin dışında tutmayı öğrendikleri için aynı şeyi parantezler için de yapabilirler. Ama bu parantezleri kullanmanın doğru yolu değildir. Tek bir parantezin için değişkenleri ve metinleri virgülle ayırmak gerekiyor.
                 error_code: |
-                    temperature = 25
-                    print('It is ') temperature ('degrees outside')
+                    sıcaklık = 25
+                    yazdır('Şu anda have dışarıda ') sıcaklık (' derece')
                 solution_text: |
-                    This is the correct code:
+                    Doğru olan kod:
                 solution_code: |
-                    temperature = 25
-                    print('It is ', temperature, 'degrees outside')
+                    sıcaklık = 25
+                    yazdır('Şu anda hava dışarıda ', sıcaklık, ' derece')
 learn-more-sections:
--   title: "Do you like Hedy?"
+-   title: "Hedy Topluluğuna Katılın"
     text: |
-        We love to hear from you!
+        Sizden haber almak isteriz! Bizimle iletişime geçmenin en iyi yolu <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord sunucumuz</a> 'a katılmaktır.
 
-        [Click here to send us a message](mailto:hello@hedy.org "About Hedy")
--   title: "Found a bug?"
+        Ayrıca bize [e-posta gönderbilirsiniz](mailto:hello@hedy.org "About Hedy").
+-   title: "Derin bir dalış!"
     text: |
-        [Let us know on GitHub](https://github.com/hedyorg/hedy/issues/new/choose)
--   title: "Want to help?"
-    text: |
-        The easiest way is to help with [translating Hedy](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)
+        Hedy'nin felsefesi ve tasarımı hakkında daha fazla bilgi edinmek ister misiniz? Felienne'in 2022'de StrangeLoop Konferansında yaptığı bu konuşmaya göz atın:
 
-        Below the current status, help us complete a language, or add a new one.
-        <a href="https://hosted.weblate.org/engage/hedy/">
-        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" /></a>
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/fmF7HpU_-9k?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+-   title: "Haberlerde Hedy"
+    text: |
+        2020'nin başlarında yayınlandığımızdan bu yana bazı web siteleri ve gazeteler Hedy hakkında yazdı. Burada bir liste tutuyoruz:
+        * [Tech Optimism - A Solution to the IT Shortage (Almanca), Ağustos 2022](https://pom.show/2022/08/12/een-oplossing-voor-het-it-tekort/)
+        * [Codeweek Podcast, Temmuz 2022](https://codeweek.eu/podcast/26)
+        * [Heise.de (Almanca), Ocak 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
+        * [Strumenta, Kasım 2021](https://tomassetti.me/teaching-programming-with-hedy/)
+        * [Vives (Almanca), CodeWeek Special Ekim 2021](images/Vives-174-Codeweek.pdf)
+        * [CodeWeek.eu - Haunted House Challenge, Eylül 2021](https://codeweek.eu/2021/challenges/haunted-house)
+        * [Opensource.com, Nisan 2021](https://opensource.com/article/21/4/hedy-teach-code)
+        * [IO Magazine, Nisan 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
+        * [Ingeniería De Software (İspayolca), Şubat 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
+        * [Hello World Magazine, Şubat 2021](images/Hello_World_15_Hedy.pdf)
+        * [Discoro, Ocak 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
+        * [Felienne wins the Dutch award for ICT research for Hedy, Ocak 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
+        * [SlashDot, Ağustos 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
+        * [GenBeta (İspanyolca), Ağustos 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+        * [Developpez (Fransızca), Ağustos 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+        * [Vives (Almanca), Ekim 2020](images/artikel_vives.pdf) "Met Hedy stap voor stap leren programmeren"
+        * [Leiden University, Nisan 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
+        * [Mare (Almanca), Nisan 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
+        * [AG Connect (Almanca), Nisan 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
 join-sections:
--   text: "# There are three ways in which you can support Hedy!\n"
-    title: Supporting Hedy
--   title: Improving the language
-    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
--   title: Translating Hedy
-    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Help teachers get started
-    text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"
+-   text: "# Hedy'yi destekleyebileceğiniz üç yol var!\n"
+    title: Hedy'yi Desteklemek
+-   title: Dilin iyileştirilmesi/geliştirilmesi
+    text: "Hedy'nin kademeli ve çok dilli yapısı birçok ilginç teknik zorluk karşımıza çıkarıyor.\nBu problemleri <a href=\"https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage\" target=\"_blank\">Github</a> üzerinde bulabilirsiniz.\n"
+-   title: Hedy için çeviri yapılması
+    text: "Programcı değil misiniz? Sorun değil! Hedy'yi desteklemenin bir başka yolu da <a href=\"https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial\" target=\"_blank\">anahtar kelimeleri, hata mesajlarını, maceraları ve diğer içerikleri çevirmek</a>.\nMevcut durum bu, bir dili tamamlamamıza veya yeni bir dil eklememize yardımcı olun!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
+-   title: Öğretmenlerin başlamasına yardımcı olun
+    text: "Hedy, öğretmenlerin sınıfta programlama dersleri vermelerini desteklemek için tasarlanmıştır. Bir sınıf oluşturma, onu özelleştirme ve öğrencilerinizin neler yaptığını görme seçeneği gibi belirli öğretmen özelliklerine sahibiz.\nHedy'yi beğendiyseniz, öğretmenlerin başlamasına yardımcı olmak için tanıdığınız okullara ulaşabilirsiniz! <a href=\"https://discord.gg/8yY7dEme9r\" target=\"_blank\">Discord</a> aracılığı ile okul veya öğretmen bulmanıza yardımcı olabiliriz.\n"
 start-sections:
--   text: "Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to\nScratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.\n\nPython however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.\nHedy is the easy way to get started with textual programming languages! Hedy is free to use, open source, and unlike any other textual programming language in three ways.\n\n1. Hedy is multi-lingual, you can use Hedy in your own language\n2. Hedy is gradual, so you can learn one concept and its syntax a time\n3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience\n"
-    title: Textual programming made easy!
--   title: Multi-lingual programming
-    text: "While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a a new translation.\n"
--   text: "Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven way to learn!\n"
-    title: Step by step learning
--   title: Built for the classroom
-    text: "Hedy is suitable for kids aged 10 and up and designed for classroom use.\nTeachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.\n"
--   title: Programming in context
-    text: "Hedy shows programming in the broadest way possible, and can be used in variety of exciting ways. Hedy allows for the creation of digital and interactive stories, colorful drawings that can be shown on the screen but also drawn with a pen plotter or embroidered on a shirt, and can be used to create games or apps with buttons and keyboard actions.\n"
--   title: Is Hedy free?
-    text: "Yes! Hedy is 'Open source', which means that everyone can help us make Hedy better.\nYou can find our code on [GitHub](https://github.com/hedyorg/hedy).\nIf you like Hedy and want to contribute, we accept (and are very grateful for) [donations](https://github.com/sponsors/hedyorg)!\n"
--   title: Do I need to install anything?
-    text: No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
--   title: Do I need programming experience to teach with Hedy?
-    text: "No, that is not needed. All concepts are explained in the slides and in the interface for learners.\nIf you create a free teacher's account, you also get access to the teacher's manual with information on how to teach\nand frequently made mistakes."
+-   text: "Dünya çapında birçok okul ve öğretmen öğrencilerine programlamayı öğretmek istiyor. Başlangıçta bu genellikle Beebot robotundan Scratch Junior veya Scratch'e kadar değişen eğlenceli araçlarla yapılır.\nBu tür araçları kullandıktan sonra çocuklar genellikle Python gibi daha güçlü, metinsel programlama dillerine geçmek isterler.\n\nAncak Python zordur, çünkü yalnızca İngilizce olarak mevcuttur ve öğrencilerin karmaşık programlama kavramlarını ve sözdizimini bir kerede öğrenmelerini gerektirir.\nHedy, metinsel programlama dillerine başlamanın kolay yoludur! Hedy'nin kullanımı ücretsizdir, açık kaynak kodludur ve diğer metinsel programlama dillerinden üç yönden farklıdır.\n\n1. Hedy çok dillidir, Hedy'yi kendi dilinizde kullanabilirsiniz\n2. Hedy aşamalıdır, böylece bir seferde bir kavramı ve sözdizimini öğrenebilirsiniz\n3. Hedy sınıf için tasarlanmıştır ve öğretmenlerin öğrencilerinin deneyimlerini tamamen özelleştirmelerine olanak tanır\n"
+    title: Metinsel programlama kolaylaştı!
+-   title: Çok-dilli programlama
+    text: "Neredeyse tüm metinsel programlama dillerinde `for` veya `repeat` gibi İngilizce anahtar kelimeler bulunurken, Hedy her dilde kullanılabilir! Şu anda Türkçe, İspanyolca, Arapça, Basitleştirilmiş Çince ve Hintçe dahil olmak üzere 39 farklı dili destekliyoruz. Eğer diliniz mevcut değilse her zaman yeni bir çeviri başlatabilirsiniz.\n"
+-   text: "Bir programlama dilini öğrenmek çok zor olabilir, çünkü öğrenciler aynı anda hem kavramları (örneğin eğer/değilse -if/else- veya döngüler) hem de sözdizimini (tırnak işaretleri veya yuvarlak parantezler gibi) öğrenmek zorundadır. Hedy'de kavramlar, ilk başta çok az söz dizimi ile tanıtılır ve daha sonra yavaştan değiştirilerek geliştirilir. Öğrenmenin bilimsel olarak kanıtlanmış bir yolu!\n"
+    title: Adım adım öğrenme
+-   title: Sınıf için tasarlandı
+    text: "Hedy, 10 yaş ve üzeri çocuklar için uygundur ve sınıf kullanımı için tasarlanmıştır.\nÖğretmenler ücretsiz, yerleşik ders planlarımızı kullanabilir, ancak bunun yanında kendi derslerini de yazabilir ve bunları Hedy kullanıcı arayüzüne yükleyebilirler.\n"
+-   title: Bağlam içinde programlama
+    text: "Hedy, programlamayı mümkün olan en genel şekliyle gösterir ve çok çeşitli ve heyecan verici şekillerde kullanılabilir. Hedy, dijital ve etkileşimli hikayeler oluşturmak kadar, ekranda gösterilebilmelerinin yanı sıra bir kalem çiziciyle kağıda çizilebilen veya bir tişört üzerine baskı olarak işlenebilen renkli çizimler yapmak, veya düğmeler ve klavye eylemleriyle kullanılabilen oyunlar veya uygulamalar oluşturmak için de kullanılabilir.\n"
+-   title: Hedy ücretsiz mi?
+    text: "Evet! Hedy 'Açık kaynak kodludur', yani herkes Hedy'yi daha iyi hale getirmemize yardımcı olabilir.\nKodumuzu <a href=\"https://github.com/hedyorg/hedy\" target=\"_blank\">Github</a> üzerinde bulabilirsiniz.\nHedy'yi severseniz ve katkıda bulunmak isterseniz, <a href=\"https://github.com/sponsors/hedyorg\" target=\"_blank\">bağışlarınızı</a> kabul ediyoruz (ve çok minnettarız)!\n"
+-   title: Bir şey yükleyip kurmam gerekiyor mu?
+    text: Hayır. Hedy, bu sayfaya bakmak için kullandığınız program olan tarayıcıda çalışır. Muhtemelen Chrome veya Edge veya Firefox. Hedy telefon ve tabletlerde de çalışır.
+-   title: Hedy ile ders vermek için programlama deneyimine ihtiyacım var mı?
+    text: "Hayır, buna gerek yok. Tüm kavramlar slaytlarda ve öğrenciler için olan arayüzde açıklanmıştır.\nÜcretsiz bir öğretmen hesabı oluşturursanız, nasıl öğretileceği ve sık yapılan hatalar hakkında bilgi içeren öğretmen kılavuzuna da erişebilirsiniz.\n(Bu süreçte programlama temellerini siz de öğrenebilirsiniz)."
