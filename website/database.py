@@ -20,8 +20,9 @@ TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
 ])
 PROGRAMS = dynamo.Table(storage, "programs", "id", indexes=[
     dynamo.Index('username', sort_key='date', index_name='username-index'),
-    dynamo.Index('public', sort_key='date'),
     dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
+    # For the explore page, this index has 'level', 'lang' and 'adventure_name'
+    dynamo.Index('public', sort_key='date'),
 
     # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
     dynamo.Index('lang', sort_key='date', keys_only=True),
@@ -419,7 +420,8 @@ class Database:
         """Return the most recent N public programs, optionally filtered by attributes.
 
         The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
-        the filters (on the server).
+        the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
+        'level' columns.
         """
         filter = {}
         if level_filter:
