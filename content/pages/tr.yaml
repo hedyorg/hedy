@@ -584,25 +584,25 @@ sections:
                 solution_text: |
                     Değişkeniniz için farklı bir ad seçin.
                 solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                    gizli_parola eşit sor 'Parola nedir'
+                    eğer gizli_parola eşit parola yazdır 'Erişim izni verildi!'
+                    değilse yazdır 'Erişim reddedildi!'
     -   level: '6'
         sections:
-        -   title: "Students struggle with quotation marks"
+        -   title: "Öğrenciler tırnak işaretleriyle mücadele etmeye devam ediyor"
             example:
                 error_text: |
-                    Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
+                    Bazı öğrenciler tırnak işareti ekleyip eklememekte zorlanırlar. Tırnak işareti eklerseniz, çıktı ekranı tam anlamıyla '5+5' gösterecektir.
                 error_code: |
-                    print '5 + 5'
+                    yazdır '5 + 5'
                 solution_text: |
-                    In this code the output screen will print '10'.
+                    Bu kodda ise, çıktı ekranı '10' yazdıracaktır.
                 solution_code: |
-                    print 5 + 5
-        -   title: "Students struggle with the concept of doing maths with a variable"
+                    yazdır 5 + 5
+        -   title: "Öğrenciler bir değişkenle matematik yapma kavramını anlamakta zorlanıyor olabilir"
             example:
                 error_text: |
-                    Some students will find it hard to do maths with variables. Try to show them very simple examples, like:
+                    Bazı öğrenciler değişkenlerle matematik yapmakta zorlanacaktır. Onlara çok basit örnekler göstermeye çalışın:
                 error_code: |
                     age = ask 'How old are you?'
                     print 'Next year you will be ' age + 1
