@@ -1039,11 +1039,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       execLimit: null
     });
     
-    theGlobalDebugger.add_breakpoint('<stdin>.py', 1, '0', false)
-    theGlobalDebugger.add_breakpoint('<stdin>.py', 2, '0', false)
-    
+    let lines = code.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].includes("# __BREAKPOINT__")) {
+        // breakpoints are 1-indexed
+        theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
+      }
+    }    
     $('#debug_continue').show();
-    
+    theGlobalDebugger.set_code(code.split('\n'));
     return theGlobalDebugger.asyncToPromise(() => Sk.importMainWithBody("<stdin>", true, code, true), {}, theGlobalDebugger).then(
       theGlobalDebugger.success.bind(theGlobalDebugger)
     ).catch(function(err: any) {
@@ -1069,7 +1073,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
    
     theGlobalDebugger.disable_step_mode();
-    
     return theGlobalDebugger.resume().then(theGlobalDebugger.success.bind(theGlobalDebugger)).catch(function(err: any) {
       const errorMessage = errorMessageFromSkulptError(err) || null;
       if (!errorMessage) {
