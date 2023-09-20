@@ -1,4 +1,3 @@
-import { Markers } from "./markers";
 import { EventEmitter } from "./event-emitter";
 export type Breakpoints = Record<number, string>;
 export enum EditorType {
@@ -15,6 +14,8 @@ type OnEditorEventParameters = Parameters<EditorEventEmitter['on']>;
 
 export interface EditorEvent {
   readonly change: string;
+  readonly guttermousedown: string;
+  readonly changeBreakpoint: string
 }
 
 export interface HedyEditorCreator {  
@@ -85,17 +86,46 @@ export interface HedyEditor {
    * Returns the breakpoints as a map-to-css-class
    */
   getBreakpoints(): Breakpoints;
+
   /**
    * An event handler for the HedyEditor 
    * @param key the event
    * @param handler  the event handler function
    */
-  on(key: OnEditorEventParameters[0], handler: OnEditorEventParameters[1]): void;
+
+  on(key: OnEditorEventParameters[0], handler: any): void;
+
   /**
    * Trim trailing whitespaces
    */
   trimTrailingSpace: () => void;
 
-  // Very sneaky need to change this
-  markers: Markers | undefined;
+  /**
+   * Mark an error location in the editor
+   *
+   * The error occurs at the given row, and optionally has a column and
+   * and a length.
+   *
+   * If 'col' is not given, the entire line will be highlighted red. Otherwise
+   * the character at 'col' will be highlighted, optionally extending for
+   * 'length' characters.
+   *
+   * 'row' and 'col' are 1-based.
+   */
+  highlightError(row: number, col?: number): void;
+
+  /**
+   * Remove all incorrect lines markers
+   */
+  // clearIncorrectLines(): void => for Skip Faulty
+
+  /**
+   * Set the current line in the debugger
+   */
+  setDebuggerCurrentLine(line: number | undefined): void;
+
+  /**
+   * Mark the given set of lines as currently struck through
+   */
+  strikethroughLines(lines: number[]): void;
 }

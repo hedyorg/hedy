@@ -2,10 +2,13 @@ levels:
     1:
         1:
             story: |
+                Bulmacalar, kod satırlarının sizin için hazır yazılmış olduğu alıştırmalardır. Tek yapmanız gereken satırları doğru sırayla yerleştirmektir. Kod satırlarını girdi ekranına sürükleyin ve kodu çalıştırın. Programın çalışmasını sağlayabilir misiniz?
+
                 Hedy fırınında bir müşterisiniz.
                 Fırına giriyorsunuz ve fırıncı tarafından karşılanıyorsunuz.
                 Size ne tür bir turta sipariş etmek istediğinizi soruyor.
-                Ardından siparişiniz hazırlanıyor.
+                Sonra cevabınızı size tekrarlıyor.
+                Son olarak, siparişiniz hazırlanıyor.
             code: |-
                 {print} Hedy fırınına hoş geldiniz!
                 {ask} Ne tür bir turta sipariş etmek istersiniz?
@@ -18,7 +21,7 @@ levels:
                 {print} Ben DJ Hedy
                 {ask} Partiye hazır mısınız?
                 {ask} Hangi şarkıyı dinlemek istersiniz?
-                {echo} Harika bir seçim! Bayıldım
+                {echo} Harika bir seçim! Şarkıya bayıldım
     2:
         1:
             story: |
@@ -30,27 +33,26 @@ levels:
                 {print} şimdi film izleyeceğiz.
                 {print} İyi eğlenceler!
         2:
-          story: |
-            This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-          code: |
-            {print} Welcome to our toystore
-            toy {is} {ask} What would you like to buy?
-            {print} toy is added to your shopping cart.
-            {print} Thank you for shopping with us!
+            story: |
+                This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
+            code: |-
+                {print} Oyuncak mağazamıza hoş geldiniz
+                oyuncak {is} {ask} Ne satın almak istersiniz?
+                {print} oyuncak alışveriş sepetinize eklendi.
+                {print} Bizimle alışveriş yaptığınız için teşekkür ederiz!
     3:
         1:
             story: |
                 Hogwarts'ta yeni okul yılı başlıyor!
                 Sıralama şapkasının görevi sizi evlerden birine yerleştirmektir.
-                Hangi eve yerleştirileceksiniz?
-                Gryffindor, Hufflepuf, Ravenclaw veya Slytherin misiniz?
-                Evinizi açıklamadan önce programın kısa bir süre beklemesine izin verin.
+                Hangi eve yerleştirileceksiniz? Gryffindor, Hufflepuf, Ravenclaw veya Slytherin misiniz?
+                Sıralama şapkası evinizi açıklamadan önce, ona evlerden birini seçmemesini söyleyebilirsiniz.
             code: |-
-                {print} Hogwarts'ta yeni okul yılı başlıyor!
                 {print} Sıralama şapkası sizi bir Hogwarts evine yerleştirmeye hazır.
                 evler {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} Ve eviniz evler {at} {random}
+                sevilmeyen {is} {ask} Gitmek istemediğin bir ev var mı?
+                {remove} sevilmeyen {from} evler
+                {print} sevilmeyen olmasın demek! O halde senin evin... evler {at} {random}
         2:
             story: |
                 Sizin için rastgele bir yemek seçen bir program oluşturun. Bir yemek listesi ve bir sos listesi yapın ve bırakın ne yiyeceğinize program karar versin!
@@ -60,6 +62,9 @@ levels:
                 {print} Bugünkü rastgele yemeğiniz...
                 {sleep} 2
                 {print} yemek {at} {random} ve soslar {at} {random}
+        3:
+            story: "Bir satranç turnuvasında geriye üç oyuncu kalmıştır.\nHangi iki oyuncunun ilk önce birbirlerine karşı oynaması gerektiğine karar veren bir program oluşturun.\nİlk maçı oynayan iki oyuncuyu yazdırarak başlayın, ardından kazananın hangi oyuncuya karşı oynayacağını yazdırın.\n"
+            code: "oyuncular {is} Liam, Noah, Sophie\noyuncu_1 {is} oyuncular {at} {random}\n{remove} oyuncu_1 {from} oyuncular\noyuncu_2 {is} oyuncular {at} {random}\n{print} 'İlk karşılaşma ' oyuncu_1 ' ile ' oyuncu_2 ' arasında'\n{remove} oyuncu_2 {from} oyuncular\n{print} 'Kazanan ' oyuncular {at} {random} ' ile oynayacak'"
     4:
         1:
             story: |
@@ -117,30 +122,27 @@ levels:
             code: |-
                 {print} 'Bugün senin doğum günün!'
                 kişiler = {ask} 'Kaç kişiye birer dilim pasta vermek istersiniz?'
-                pasta_sayısı {is} kişiler/8
+                pasta_sayısı = kişiler/8
                 {print} pasta_sayısı ' tane pasta satın almanız gerekecek'
     7:
         1:
             story: |
-                Bir satranç turnuvasında üç oyuncu kalmıştır.
-                İlk önce hangi iki oyuncunun birbirlerine karşı oynayacağına karar veren bir program oluşturun.
-                Önce ilk maçı oynayacak iki oyuncuyu yazdırın, ardından kazananın hangi oyuncuya karşı oynayacağını yazdırın.
-            code: |-
-                oyuncular = Liam, Noah, Sophie
-                oyuncu1 = oyuncular {at} {random}
-                {remove} oyuncu1 {from} oyuncular
-                oyuncu2 = oyuncular {at} {random}
-                {print} 'ilk olarak ' oyuncu1 ' ve ' oyuncu2 ' oynayacak'
-                {remove} oyuncu2 {from} oyuncular
-                {print} 'Kazanan ile ' oyuncular {at} {random} ' oynayacak'
+                Bebek köpekbalığı şarkısını tamamlayın. Önce bebek köpekbalığı, sonra anne ve son olarak baba köpekbalığı gelir.
+            code: |
+                {repeat} 3 {times} {print} 'Bebek köpekbalığı tututututudu'
+                {print} 'Bebek köpekbalığı'
+                {repeat} 3 {times} {print} 'Anne köpekbalığı tututututudu'
+                {print} 'Anne köpekbalığı'
+                {repeat} 3 {times} {print} 'Baba köpekbalığı tututututudu'
+                {print} 'Baba köpekbalığı'
         2:
             story: |
                 'The wheels on the bus go round and round' şarkısını oluşturun (Otobüsün tekerleri dönüyor çocuk şarkısı, biz daha Türkçesini bulana kadar bunun şarkı sözlerini arayın, şarkının kendisini anlamanız gerekmez)
             code: |-
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'Otobüsün tekerleri'
+                {repeat} 3 {times} {print} 'dönüp duruyor'
+                {print} 'otobüsün tekerleri dönüp duruyor'
+                {print} 'şehre varana kadar'
     8:
         1:
             story: |
@@ -163,3 +165,31 @@ levels:
                     {print} sayaç
                     {sleep} 1
                 {print} 'Önüm, arkam, sağım, solum sobe! Saklanmayan ebe!'
+    10:
+        2:
+            story: "Bu makyaj robotu yeni saç stilinize sizin için karar verecek. İlk seçimle aynı fikirde olmazsanız, tekrar deneyebilirsiniz.\n**Dikkat edin** kişiler değişkeni ilk satırda tanımlanmıştır. İkinci satırda saçtarzları değişkeni.\n"
+            code: "kişiler = Betty, Amanda, Marc\nsaçtarzları = a bald head, a mohawk, a ponytail, spikes\n{for} kişi {in} kişiler\n    {print} kişi ' için saç tarzı ' saçtarzları {at} {random}\n    mutlu = {ask} kişi ', bu seçimden memnun musun?'\n    {if} mutlu {is} evet\n        {print} 'Harika'\n    {else}\n        {print} 'Tekrar deneyelim... Şimdi ' kişi ' için yeni saç tarzı ' saçtarzları {at} {random}\n"
+        1:
+            story: "Bu hafta kimin ne pişireceğine dair bir program oluşturarak bu aileye yardımcı olun. Kaldırma komutları kimsenin iki kez yemek yapmak zorunda kalmamasını ve her gün farklı bir akşam yemeği yemelerini sağlar.\n**Dikkat edin!** değişken sıralaması önce günler, sonra kişiler ve son olarak yemek_seçenekleri şeklinde olmalıdır. Bu, kaldır komutlarını içeren satırlar için de geçerlidir.\n"
+            code: "günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma\nkişiler = anne, baba, Ali, Beyza, Ceren\nyemek_seçenekleri = pizza, dürüm, kızartma, salata, makarna\n{for} gün {in} günler\n    seçilen_kişi = kişiler {at} {random}\n    seçilen_yemek = yemek_seçenekleri {at} {random}\n    {print} gün ' günü ' seçilen_kişi 'yemekte ' seçilen_yemek 'yapacak'\n    {remove} seçilen_kişi {from} kişiler\n    {remove} seçilen_yemek {from} yemek_seçenekleri\n"
+    9:
+        2:
+            story: "Bu kod, bir restorandaki müşterilere tatlı sipariş etmek isteyip istemediklerini sorar. Eğer isterlerse, onlara ne tür bir tatlı istediklerini sorar. Eğer tiramisu sipariş ederlerse, tiramisunun tükendiği söylenir.\nKodu çalışmasını sağlayabilir misin?\n"
+            code: "sipariş = {ask} 'Tatlı sipariş etmek ister misiniz??'\n{if} sipariş = evet\n    tatlı = {ask} 'Ne tür bir tatlı istersiniz??'\n    {if} tatlı = tiramisu\n        {print} 'Üzgünüm, tiramisumuz kalmadı.'\n    {else}\n        {print} 'Bir ' tatlı ' hemen geliyor!'\n{else}\n    {print} 'Tatlı istemiyorsunuz. Sorun değil!'\n"
+        1:
+            story: "Bu oyun size üç matematik ödevi verecektir. Her seferinde soru fark olacak. Sıralamayı çözebilir misiniz?\n"
+            code: "sayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    sayı = sayılar {at} {random}\n    doğru_cevap = 5 * sayı\n    cevap = {ask} '5 kere ' sayı ' kaç eder?'\n    {if} cevap = doğru_cevap\n        {print} 'Aferin!'\n    {else}\n        {print} 'Hayır! doğru cevap ' doğru_cevap\n"
+    12:
+        1:
+            code: "mısralar = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} mısra {in} mısralar\n    {for} count {in} {range} 1 {to} 3\n        {print} mısra\n    {print} 'Early in the morning'\n"
+            story: "\"Sarhoş denizciyi ne yapalım?\" şarkısını söyleyin. Bilmiyorsanız diye söylüyorum, şarkı şöyle başlıyordu (İngilizce olmasına aldırmayın, tekrar eden satırlara bakın):\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+        2:
+            story: "Bizimle bir Twister oyunu oynayın! Önce kişiler, sonra uzuvlar, sonra da renkler değişkenlerini tanımlayın.\n"
+            code: "kişiler = 'Jess', 'Nick', 'Winston'\nuzuvlar = 'sol el', 'sol ayak', 'sağ el', 'sağ ayak'\nrenkler = 'kırmızı', 'mavi', 'yeşil', 'sarı'\n{for} kişi {in} kişiler\n    {print} kişi ' için, ' uzuvlar {at} {random} renkler {at} {random} ' renkli daireye'\n"
+    11:
+        1:
+            story: "Yılbaşı gecesi için bir geri sayım saati oluşturun! Program 10'dan 1'e kadar olan sayıları bir saniyeliğine göstermeli ve ardından size mutlu bir yeni yıl dilemelidir.\n"
+            code: "{for} sayı {in} {range} 10 {to} 1\n    {print} sayı\n    {sleep}\n    {clear}\n{print} 'Yeni yılınız kutlu olsun!'\n"
+        2:
+            story: "Bilim fuarının nihai sonuçlarını bize bildiren bir program oluşturun. İlk olarak yarışmacılar değişkenini, ardından yer değişkenini tanımlayın.\n**İpucu** Satır 5 uyku komutu olmalı ve tebrikler diyerek bitirmelisiniz.\n"
+            code: "{print} 'Ve şimdi sırada bilim fuarının sonuçlarını açıklayacağız'\nyarışmacılar = Vivienne, Paul, Trixy, Bianca, Katya\nsıralama = 5\n{for} yarışmacı {in} yarışmacılar\n    {sleep} 2\n    {print} 'Sırası ' sıralama ' olan... ' yarışmacı\n    sıralama = sıralama - 1\n{print} 'Tebrikler!'\n"
