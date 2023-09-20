@@ -226,21 +226,10 @@ export const error = {
     editor = e;
   },
 
-  hide(fade: boolean = false) {
-    // Remove the fading immediately
-    $("#errorbox").stop().fadeOut();
-    $("#warningbox").stop().fadeOut();
-    $("#warningbox_spinner").stop().fadeOut();
-
-    if (!fade) {
-      $('#errorbox').hide();
-      $('#warningbox').hide();
-      $('#warningbox_spinner').hide();
-    } else {
-      $('#errorbox').fadeOut(2500);
-      $('#warningbox').fadeOut(2500);
-      $('#warningbox_spinner').fadeOut(2500);
-    }
+  hide() {
+    $('#errorbox').hide();
+    $('#warningbox').hide();
+    $('#warningbox_spinner').hide();
 
     editor?.resize();
   },

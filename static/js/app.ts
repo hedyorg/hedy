@@ -515,7 +515,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       let response = await postJsonWithAchievements('/parse', data);
       clearTimeout(errorsFoundTimeout);
       console.log('Response', response);
-      error.hide(true);
+      error.hide();
 
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
