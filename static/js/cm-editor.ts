@@ -1,10 +1,44 @@
 import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator, EditorEvent } from "./editor";
 import { basicSetup } from 'codemirror';
-import { EditorView, ViewUpdate } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect } from '@codemirror/state'
+import { Decoration, DecorationSet, EditorView, ViewUpdate } from '@codemirror/view'
+import { EditorState, Compartment, StateEffect, StateField } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
+
+
+const addErrorLine = StateEffect.define<{row: number, col?: number}>()
+  
+const errorLineField = StateField.define<DecorationSet>({
+    create() {
+      return Decoration.none
+    },
+    update(errors, tr) {
+      errors = errors.map(tr.changes)
+      for (let e of tr.effects) if (e.is(addErrorLine)) {
+        // Get line given the row number
+        const line = tr.state.doc.line(e.value.row);
+        errors = errors.update({
+          add: [errorHighlightMark.range(line.from, line.from)]
+        })
+      }
+      return errors
+    },
+    provide: f => EditorView.decorations.from(f)
+})
+  
+const errorHighlightMark = Decoration.line({class: "cm-error-line"})
+
+const errorHighlightTheme = EditorView.baseTheme({
+    ".cm-error-line": {
+        borderBottomWidth: "2px",
+        borderTopWidth: "2px",        
+        borderColor: "#F56565",
+        backgroundColor: "#4299E1",
+        opacity: 0.7
+    }
+})
+
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
      * This function should initialize the editor and set up all the required
@@ -82,6 +116,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 oneDark,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                errorLineField,
+                errorHighlightTheme
             ]
         });
         this.view = new EditorView({
@@ -241,8 +277,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * 'row' and 'col' are 1-based.
      */
     highlightError(row: number, col?: number) {
-        // pass
-        console.log(row, col);
+        let effects: StateEffect<{row: number, col?: number}>[] = [addErrorLine.of({row, col})]
+        this.view.dispatch({effects})
     }
 
     /**
