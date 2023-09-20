@@ -1308,6 +1308,9 @@ class ConvertToPython(Transformer):
         self.is_debug = is_debug
 
     def add_debug_breakpoint(self):
+        print('*'*100)
+        print(self.is_debug)
+        print('*'*100)
         if self.is_debug:
             return f" # __BREAKPOINT__"
         else:
@@ -1540,7 +1543,7 @@ class ConvertToPython_1(ConvertToPython):
               {variable} = {type}({variable})
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
-            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep:
             return sleep_after(transpiled, False)
         return transpiled
@@ -1600,7 +1603,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def color(self, meta, args):
         if len(args) == 0:
-            return "t.pencolor('black')"
+            return f"t.pencolor('black'){self.add_debug_breakpoint()}"
         arg = args[0]
         if not isinstance(arg, str):
             arg = arg.data
@@ -1611,7 +1614,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -1653,11 +1656,11 @@ class ConvertToPython_2(ConvertToPython_1):
     def ask(self, meta, args):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
+        return f'{var} = input(' + '+'.join(all_parameters) + ")" + self.add_debug_breakpoint()
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False)
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1672,15 +1675,15 @@ class ConvertToPython_2(ConvertToPython_1):
         value = args[1]
         if self.is_random(value) or self.is_list(value):
             exception = self.make_catch_exception([value])
-            return exception + parameter + " = " + value
+            return exception + parameter + " = " + value + self.add_debug_breakpoint()
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value
+                return parameter + " = " + value + self.add_debug_breakpoint()
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
         if not args:
@@ -2771,7 +2774,7 @@ def transpile(input_string, level, lang="en", skip_faulty=False):
     if not skip_faulty:
         try:
             source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=True)
         except Exception as original_error:
             source_map.exception_found_during_parsing = original_error  # store original exception
             raise original_error
