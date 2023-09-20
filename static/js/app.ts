@@ -257,7 +257,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    theGlobalEditor.markers.clearIncorrectLines();
+    theGlobalEditor.clearIncorrectLines();
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -832,7 +832,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       )
 
       if (map.error != null){
-        theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
+        theGlobalEditor.setIncorrectLine(range, Number(index));
       }
     }
   }

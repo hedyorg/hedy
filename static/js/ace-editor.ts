@@ -275,21 +275,29 @@ export class HedyAceEditor implements HedyEditor {
     );
   }
 
+
+  /**
+   * Set incorrect line marker => Part of skip line feature
+   */
+  public setIncorrectLine(range: AceAjax.Range, lineIndex: number){
+    this.addMarker(range, `ace_incorrect_hedy_code_${lineIndex}`, "text", true);
+  }
+
   /**
    * Remove all incorrect lines markers => Part of skip line feature
    */
-  // public clearIncorrectLines() {
-  //   const markers = this.editor.session.getMarkers(true);
+  public clearIncorrectLines() {
+    const markers = this._editor.session.getMarkers(true);
 
-  //   if (markers) {
-  //     for (const index in markers) {
-  //       let marker = markers[index];
-  //       if (marker.clazz.includes('ace_incorrect_hedy_code')){
-  //         this.removeMarker(Number(index));
-  //       }
-  //     }
-  //   }
-  // }
+    if (markers) {
+      for (const index in markers) {
+        let marker = markers[index];
+        if (marker.clazz.includes('ace_incorrect_hedy_code')){
+          this.removeMarker(Number(index));
+        }
+      }
+    }
+  }
 
   /**
    * Set the current line in the debugger
