@@ -302,17 +302,30 @@ function attachMainEditorEvents(editor: HedyEditor) {
     }
   });
 
-  // We show the error message when clicking on the skipped code
-  $(document).on("click", '[class*=ace_incorrect_hedy_code]', function(e) {
-    let mapIndex = e.target.className;
-    mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
-    mapIndex = mapIndex.replace('ace_start ace_br15', '');
-    let mapError = theGlobalSourcemap[Number(mapIndex)];
+  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
+  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
+    let className = e.target.className;
 
-    $('#okbox').hide ();
-    $('#warningbox').hide();
-    $('#errorbox').hide();
-    error.show(ClientMessages['Transpile_error'], mapError.error);
+    // Only do this if skipping faulty is used
+    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
+      if (className === 'ace_content') {
+        // Hide error, warning or okbox
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+      } else {
+        // Show error for this line
+        let mapIndex = className;
+        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+        mapIndex = mapIndex.replace('ace_start ace_br15', '');
+        let mapError = theGlobalSourcemap[Number(mapIndex)];
+
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+        error.show(ClientMessages['Transpile_error'], mapError.error);
+      }
+    }
   });
 }
 
