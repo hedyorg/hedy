@@ -354,7 +354,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "In this level you can use the quotation marks to save multiple words in a variable.\n"
-                example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
+                example_code: "```\nnama = 'Ratu Inggris'\n{cetak} nama ' sedang memakan sepotong kue, tiba-tiba...'\n```\n"
                 start_code: '# place your code here'
             8:
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '💥ZAP!💥'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!🦖'\n```\n"
@@ -844,13 +844,11 @@ adventures:
 
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             3:
-                story_text: |2-
+                story_text: |
+                    Kamu bisa menggunakan `{at} {random}` perintah untuk membiarkan komputer mengambil batu, kertas atau gunting!
 
-                    Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
-
-                    Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
-
-                    Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
+                    ### Latihan
+                    Selesaikan kode menggunakan `{at} {random}` perintah.
 
                 example_code: |
                     ```
