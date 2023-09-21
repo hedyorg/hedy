@@ -2746,7 +2746,7 @@ levels:
             code: |-
                 lid = {ask} 'Heb je een lidmaatschapskaart?'
                 korting = {ask} 'Heb je een kortingscode?'
-                {if} lid = 'ja' {or} discount = 'ja'
+                {if} lid = 'ja' {or} korting = 'ja'
                     {print} 'Je krijgt een gratis appeltaart!'
                 {else}
                     {print} 'Dat wordt dan 5 euro, alstublieft'
@@ -2781,7 +2781,7 @@ levels:
         5:
             question_text: "Welke stelling over deze code is waar?"
             code: |-
-                {if} naam = 'Assepoester' {and} schoenmaat = '38'
+                {if} naam = 'Assepoester' {and} schoenmaat = 38
                     {print} 'Jij bent de ware!'
             mp_choice_options:
             -   option: "Iedereen met schoenmaat 38 is de ware"
@@ -2828,7 +2828,7 @@ levels:
                 {print} 'Hier is een programma om ze te helpen voeren'
                 dier = {ask} 'Wat voor dier is het?'
                 kleur = {ask} 'Welke kleur heeft het?'
-                {if} dier = 'cat' {and} kleur = 'grijs'
+                {if} dier = 'kat' {and} kleur = 'grijs'
                     {print} 'Dit is Abby. Zij krijgt 3 scheppen kattenbrokjes'
                 {if} dier = 'kat' {and} kleur = 'oranje'
                     {print} 'Dat is Milo. Hij eet 4 scheppen kattenbrokjes'
