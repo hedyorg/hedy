@@ -1,27 +1,32 @@
 import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator, EditorEvent } from "./editor";
 import { basicSetup } from 'codemirror';
 import { Decoration, DecorationSet, EditorView, ViewUpdate } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, StateField } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, StateField, Prec } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
 
 
 const addErrorLine = StateEffect.define<{row: number, col?: number}>()
-  
+const removeErrorLines = StateEffect.define<void>()
+
 const errorLineField = StateField.define<DecorationSet>({
     create() {
       return Decoration.none
     },
     update(errors, tr) {
       errors = errors.map(tr.changes)
-      for (let e of tr.effects) if (e.is(addErrorLine)) {
-        // Get line given the row number
-        const line = tr.state.doc.line(e.value.row);
-        errors = errors.update({
-          add: [errorHighlightMark.range(line.from, line.from)]
-        })
-      }
+      for (let e of tr.effects) {
+        if (e.is(addErrorLine)) {
+            // Get line given the row number
+            const line = tr.state.doc.line(e.value.row);
+            errors = errors.update({
+                add: [errorHighlightMark.range(line.from, line.from)]
+            })
+        } else if (e.is(removeErrorLines)) {
+            return Decoration.none;
+        }
+      } 
       return errors
     },
     provide: f => EditorView.decorations.from(f)
@@ -29,14 +34,12 @@ const errorLineField = StateField.define<DecorationSet>({
   
 const errorHighlightMark = Decoration.line({class: "cm-error-line"})
 
-const errorHighlightTheme = EditorView.baseTheme({
+const errorHighlightTheme = EditorView.theme({
     ".cm-error-line": {
-        borderBottomWidth: "2px",
-        borderTopWidth: "2px",        
-        borderColor: "#F56565",
-        backgroundColor: "#4299E1",
-        opacity: 0.7
-    }
+        outline: "2px solid #F56565",
+        backgroundColor: "rgba(66, 153, 225, 0.7)",
+        color: "white"
+    },
 })
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
@@ -104,8 +107,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
             ".cm-gutters": {
                 borderRadius: '4px'
-            },
+            }
         }
+
+        const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
 
@@ -113,11 +118,12 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             doc: '',
             extensions: [
                 basicSetup,
+                EditorView.theme(cursorStyle),
                 oneDark,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
-                errorHighlightTheme
+                Prec.high(errorHighlightTheme)
             ]
         });
         this.view = new EditorView({
@@ -194,7 +200,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * Clears the errors and annotations in the editor
      */
     clearErrors(): void {
-        // pass
+        let effect: StateEffect<void> = removeErrorLines.of();
+        this.view.dispatch({effects: effect});
     }
 
     /**     
