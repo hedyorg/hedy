@@ -42,7 +42,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
-from website.auth import (current_user, is_admin, is_teacher,
+from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
@@ -65,6 +65,11 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
 jinja_partials.register_extensions(app)
@@ -356,6 +361,7 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
+    querylog.log_value(lang=session['lang'])
 
     if 'keyword_lang' not in session:
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
@@ -386,7 +392,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
+            'is_teacher': is_teacher(user), 'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
     return data
 
 
@@ -475,10 +481,11 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
-    if 'skip_faulty' not in body:
-        return "body.skip_faulty must be a boolean", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
+    # TODO: Once we figure out whats wrong with the skip faulty code, we need to reinstantiate this
+    # if 'skip_faulty' not in body:
+    #     return "body.skip_faulty must be a boolean", 400
 
     error_check = False
     if 'error_check' in body:
@@ -486,7 +493,7 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
-    skip_faulty = bool(body['skip_faulty'])
+    skip_faulty = False  # bool(body['skip_faulty'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -520,25 +527,25 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
-            except hedy.exceptions.UnquotedEqualityCheck as ex:
+            except hedy.exceptions.UnquotedEqualityCheckException as ex:
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
 
         try:
             response['Code'] = transpile_result.code
-            source_map_result = transpile_result.source_map.get_result()
+            # source_map_result = transpile_result.source_map.get_result()
 
-            for i, mapping in source_map_result.items():
-                if mapping['error'] is not None:
-                    source_map_result[i]['error'] = translate_error(
-                        source_map_result[i]['error'].error_code,
-                        source_map_result[i]['error'].arguments,
-                        keyword_lang
-                    )
+            # for i, mapping in source_map_result.items():
+            #     if mapping['error'] is not None:
+            #         source_map_result[i]['error'] = translate_error(
+            #             source_map_result[i]['error'].error_code,
+            #             source_map_result[i]['error'].arguments,
+            #             keyword_lang
+            #         )
 
-            response['source_map'] = source_map_result
-
+            # response['source_map'] = source_map_result
+            response['source_map'] = transpile_result.source_map.get_result()
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
@@ -1666,12 +1673,12 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(
+    programs = normalize_public_programs(DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
         adventure_filter=adventure))
-    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
+    favourite_programs = normalize_public_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
@@ -1689,8 +1696,8 @@ def explore():
         current_page='explore')
 
 
-def normalize_explore_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore page.
+def normalize_public_programs(programs):
+    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
 
     Does the following thing:
 
@@ -2117,23 +2124,28 @@ def public_user_page(username):
     if not user:
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
+    page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username)
+        user_programs = DATABASE.public_programs_for_user(username,
+                                                          limit=10,
+                                                          pagination_token=page)
+        next_page_token = user_programs.next_page_token
+        user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
             favourite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
-        if len(user_programs) >= 5:
-            user_programs = user_programs[:5]
 
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
+        print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
-
+        next_page_url = url_for('public_user_page', username=username, **dict(request.args,
+                                page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2143,7 +2155,8 @@ def public_user_page(username):
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
-            certificate_message=certificate_message)
+            certificate_message=certificate_message,
+            next_page_url=next_page_url)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
@@ -2214,6 +2227,7 @@ app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
+app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 
 
 # *** START SERVER ***
@@ -2235,20 +2249,66 @@ def try_parse_int(x):
         return None
 
 
+def analyze_memory_snapshot(start_snapshot, end_snapshot):
+    filters = [
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+        tracemalloc.Filter(False, "<unknown>"),
+    ]
+    start_snapshot = start_snapshot.filter_traces(filters)
+    end_snapshot = end_snapshot.filter_traces(filters)
+    top_stats = end_snapshot.compare_to(start_snapshot, 'traceback')
+
+    limit = 10
+
+    print("Top %s leaking locations" % limit)
+    for index, stat in enumerate(top_stats[:limit], 1):
+        print("#%s: %.1f KiB (count=%d)" % (index, stat.size / 1024, stat.count))
+        for line in stat.traceback.format():
+            print(' ', line)
+        print('')
+
+    other = top_stats[limit:]
+    if other:
+        size = sum(stat.size for stat in other)
+        print("%s other: %.1f KiB" % (len(other), size / 1024))
+    total = sum(stat.size for stat in top_stats)
+    print("Total allocated size: %.1f KiB" % (total / 1024))
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
 
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
     is_in_debugger = sys.gettrace() is not None
 
+    # Set PYTHONTRACEMALLOC=10 to debug memory usage
+    profile_memory = os.getenv('PYTHONTRACEMALLOC')
+    start_snapshot = None
+    if profile_memory:
+        import tracemalloc
+        tracemalloc.start()
+        start_snapshot = tracemalloc.take_snapshot()
+
     on_server_start()
     logger.debug('app starting in debug mode')
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger,
+    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
+
+    # If we hit Ctrl-C, we end up here
+    if profile_memory:
+        print('⏳ Taking memory snapshot. This may take a moment.')
+        import gc
+        gc.collect()
+        end_snapshot = tracemalloc.take_snapshot()
+        analyze_memory_snapshot(start_snapshot, end_snapshot)

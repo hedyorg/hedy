@@ -11,7 +11,6 @@ import warnings
 import hedy
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
 from collections import namedtuple
 import re
 import regex
@@ -488,7 +487,7 @@ class ExtractAST(Transformer):
     def list_access(self, meta, args):
         # FH, may 2022 I don't fully understand why we remove INT here and just plemp
         # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
-        if type(args[1]) == Tree:
+        if isinstance(args[1], Tree):
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
             elif args[1].data == "var_access":
@@ -983,7 +982,7 @@ class UsesTurtle(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
-            return any(type(c) == bool and c is True for c in children)
+            return any(isinstance(c, bool) and c is True for c in children)
 
     # returns true if Forward or Turn are in the tree, false otherwise
     def forward(self, args):
@@ -1027,7 +1026,7 @@ while not pygame_end:
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
         else:
-            return any(type(c) == bool and c is True for c in children)
+            return any(isinstance(c, bool) and c is True for c in children)
 
     def ifpressed(self, args):
         return True
@@ -1316,7 +1315,7 @@ class ConvertToPython(Transformer):
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
             definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
-            raise hedy.exceptions.AccessBeforeAssign(
+            raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
@@ -1595,7 +1594,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.pencolor('black')"
         arg = args[0]
-        if type(arg) != str:
+        if not isinstance(arg, str):
             arg = arg.data
 
         arg = self.process_variable_for_fstring(arg)
@@ -2694,20 +2693,11 @@ def get_keywords_for_language(language):
     return keywords
 
 
-PARSER_CACHE = {}
-
-
 def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
-    existing = PARSER_CACHE.get(key)
-    if existing and not utils.is_debug_mode():
-        return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
-    PARSER_CACHE[key] = ret
-    return ret
+    return Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
@@ -3084,7 +3074,7 @@ def parse_input(input_string, level, lang):
     except lark.UnexpectedEOF:
         lines = input_string.split('\n')
         last_line = len(lines)
-        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
+        raise exceptions.UnquotedEqualityCheckException(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -3140,7 +3130,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'invalid condition':
-            raise exceptions.UnquotedEqualityCheck(line_number=line)
+            raise exceptions.UnquotedEqualityCheckException(line_number=line)
         elif invalid_info.error_type == 'invalid repeat':
             raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
         elif invalid_info.error_type == 'repeat missing print':

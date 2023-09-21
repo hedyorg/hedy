@@ -18,6 +18,8 @@ adventures:
                     In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
                     For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `echo` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
                     {print} Welcome at Hedy's
                     {ask} What would you like to eat?
@@ -387,8 +389,8 @@ adventures:
                     Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
                 example_code_2: |
                     ```
-                    favorite_animals is ask What is your favorite animal?
-                    print I like favorite_animals
+                    favorite_animals {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animals
                     ```
                 start_code: |-
                     name {is} {ask} What is your name?
@@ -1027,16 +1029,16 @@ adventures:
                     Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'SURPRISE!'
                     ```
 
     story:
@@ -1664,11 +1666,11 @@ adventures:
 
                 example_code: |
                     ```
-                    {forward} 50
+                    {forward} 20
                     {turn} {right}
-                    {forward} 50
+                    {forward} 20
                     {turn} {left}
-                    {forward} 50
+                    {forward} 20
                     ```
                 start_code: "{forward} 50\n{turn} {left}"
             2:
@@ -2046,7 +2048,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2373,9 +2375,9 @@ adventures:
                     ```
                 story_text_3: |2
 
-                    **Extra** You can also let the computer do random sums on its own using random.
+                      **Extra** You can also let the computer do random sums on its own using random.
 
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
+                      This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: "{print} 'Welcome to this calculator!'"
             9:
                 story_text: |
@@ -2458,15 +2460,15 @@ adventures:
                     ```
                 start_code: "# place your code here"
             13:
-                story_text: |2
+                story_text: |
 
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                      ### Exercise 1
+                      Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 Extra
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                      ### Exercise 2 Extra
+                      Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                      Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                      Empty the programming field and create your own solution.
 
                 example_code: |
                     ```
@@ -3331,7 +3333,7 @@ adventures:
                     weeks = to_save / allowance
                     {if} wish > money
                         {print} 'You need to save up some more!'
-                        {print} 'Youll need ' weeks ' more weeks.'
+                        {print} "You'll need ' weeks ' more weeks."
                     {else}
                         {print} 'Great! You have enough'
                         {print} 'Lets go shopping!'
@@ -3587,9 +3589,9 @@ adventures:
                         choice = {ask} 'Player ' player ' what spot do you choose?'
                         field {at} choice = player
                         {clear}
-                        print field {at} 1 field {at} 2 field {at} 3
-                        print field {at} 4 field {at} 5 field {at} 6
-                        print field {at} 7 field {at} 8 field {at} 9
+                        {print} field {at} 1 field {at} 2 field {at} 3
+                        {print} field {at} 4 field {at} 5 field {at} 6
+                        {print} field {at} 7 field {at} 8 field {at} 9
                         {if} player = 'x'
                             player = 'o'
                         {else}

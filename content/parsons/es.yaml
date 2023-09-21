@@ -2,10 +2,13 @@ levels:
     1:
         1:
             story: |
-                Eres cliente de la panadería Hedy.
+                Los puzzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
+
+                Eres un cliente de la panadería Hedy.
                 Entras en la panadería y te recibe el panadero.
                 Te pregunta qué tipo de tarta quieres pedir.
-                A continuación, se prepara tu pedido.
+                Luego te repite la respuesta.
+                Por último, se prepara tu pedido.
             code: |-
                 {print} ¡Bienvenido a la panedería Hedy!
                 {ask} ¿Qué tipo de pastel quieres pedir?
@@ -18,7 +21,7 @@ levels:
                 {print} Esta es la DJ Hedy
                 {ask} ¿Estás listo para la fiesta?
                 {ask} ¿Qué canción te gustaría escuchar?
-                {echo} ¡Excelente elección! Me encanta
+                {echo} ¡Excelente elección! Me encanta la canción
     2:
         1:
             story: |
@@ -40,17 +43,16 @@ levels:
     3:
         1:
             story: |
-                ¡El nuevo año escolar en Hogwarts está empezando!
-                Es el trabajo del Sombrero Seleccionador asignarte a alguna de las casas.
-                ¿En cuál casa te gustaría ser seleccionado?
-                ¿Eres de Gryffindor, Hufflepuf, Ravenclaw o Slytherin?
-                Deja que el programa espere por un momento antes de revelar tu casa.
+                ¡Comienza el nuevo curso escolar en Hogwarts! 
+                El sombrero seleccionador es el encargado de clasificarte en una de las casas.
+                ¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?
+                Antes de que el sombrero clasificador revele tu casa, puedes decirle que no elija una de las casas.
             code: |-
-                {print} ¡El nuevo año escolar en Hogwarts está empezando!
-                {print} El Sombrero Seleccionador está listo para asignarte a una casa de Hogwarts.
+                {print} El sombrero seleccionador está listo para clasificarte en una casa de Hogwarts.
                 casas {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} Y es casas {at} {random}
+                aversión {is} {ask} ¿Hay alguna casa de la que no quieras formar parte?
+                {remove} aversión {from} casas
+                {print} No te disgusta, ¿eh? Mejor que sean... casas {at} {random}
         2:
             story: |
                 Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de toppings y deja que el programa decida que vas a comer!
@@ -60,6 +62,9 @@ levels:
                 {print} Tu aleatoria para hoy es...
                 {sleep} 2
                 {print} comida {at} {random} con toppings {at} {random}
+        3:
+            story: "En un torneo de ajedrez quedan tres jugadores.\nCrea un programa que decida qué dos jugadores tienen que jugar primero entre sí.\nEmpieza imprimiendo los dos jugadores que juegan la primera partida, luego imprime contra qué jugador jugará el ganador.\n"
+            code: "jugadores {is} Liam, Noah, Sophie\njugador_1 {is} jugadores {at} {random}\n{remove} jugador_1 {from} jugadores\njugador_2 {is} jugadores {at} {random}\n{print} jugador_1 ' primero juega contra ' jugador_2\n{remove} jugador_2 {from} jugadores\n{print} 'El ganador juega contra ' jugadores {at} {random}"
     4:
         1:
             story: |
@@ -116,23 +121,20 @@ levels:
                 Crea un programa que te ayude a calcular cuantas tortas deberías comprar para tu fiesta de cumpleaños.
             code: |-
                 {print} '¡Es tu cumpleaños!'
-                gente = {ask} '¿A cuántas personas te gustaría darle un pedazo de torta?'
-                cantidad_tortas {is} gente/8
-                {print} 'Vas a necesitar comprar ' cantidad_tortas ' tortas'
+                personas = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
+                cakes_amount = personas/8
+                {print} 'Tendrás que comprar ' cakes_amount ' pasteles'
     7:
         1:
             story: |
-                En un campeonato de ajedrez hay tres jugadores restantes.
-                Crea un programa que decida dos jugadores se enfrentan primero.
-                Primero imprime los dos jugadores que jugarán el primer partido, y luego imprime contra qué jugador jugará el ganador.
-            code: |-
-                jugadores = Liam, Noah, Sophie
-                jugador1 = jugadores {at} {random}
-                {remove} jugador1 {from} jugadores
-                jugador2 = jugadores {at} {random}
-                {print} jugador1 ' se enfrentará primero a ' jugador2
-                {remove} jugador2 {from} jugadores
-                {print} 'El ganador se enfrentará a ' jugadores {at} {random}
+                Completa la canción del bebé tiburón. Primero viene el bebé tiburón, luego mamá y por último papá tiburón.
+            code: |
+                {repeat} 3 {times} {print} 'Tiburón bebe tututututudu'
+                {print} 'Tiburón bebé' 
+                {repeat} 3 {times} {print} 'Mamá Tiburón tututututudu'
+                {print} 'Mama Tiburón'
+                {repeat} 3 {times} {print} 'Papá Tiburón tututututudu'
+                {print} 'Tiburón Papá'
         2:
             story: |
                 Crea la canción 'Las ruedas del autobús girando van, girando van'
@@ -140,7 +142,7 @@ levels:
                 {print} 'Las ruedas del autobús'
                 {repeat} 3 {times} {print} 'girando van, girando van'
                 {print} 'las ruedas del autobús girando van, girando van'
-                {print} 'por toda la ciudad '
+                {print} 'por toda la ciudad'
     8:
         1:
             story: |
@@ -163,3 +165,31 @@ levels:
                   {print} contador
                   {sleep} 1
                 {print} '¡Listo o no aquí voy!'
+    10:
+        2:
+            story: "This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.\n**Mind** The variable people is defined in the first line. The variable hairstyles in the second.\n"
+            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
+        1:
+            story: "Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.\n**Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.\n"
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
+    9:
+        2:
+            story: "Este código pregunta a los clientes de un restaurante si desean pedir postre. En caso afirmativo, les pregunta qué tipo de postre. Si piden tiramisú, se les dice que el tiramisú está agotado.\n¿Puedes hacer que el código funcione?\n"
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
+        1:
+            story: "Este juego te dará tres tareas de matemáticas. Cada vez la pregunta es diferente. ¿Puedes averiguar el orden?\n"
+            code: "números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    número = números {at} {random}\n    respuesta_correcta = 5 * número\n    respuesta = {ask} '¿Cuánto es 5 veces' número '?'\n    {if} respuesta = respuesta_correcta\n        {print} '¡Buen trabajo!'\n    {else}\n        {print} '¡No! La respuesta correcta es ' respuesta_correcta\n"
+    12:
+        1:
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
+            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+        2:
+            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+    11:
+        1:
+            story: "Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.\n"
+            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+        2:
+            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"

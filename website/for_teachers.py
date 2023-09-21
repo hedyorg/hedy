@@ -194,8 +194,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        customizations, adventures, adventure_names, available_adventures, min_level = self.get_class_info(
-            user, class_id)
+        customizations, adventures, adventure_names, available_adventures, min_level = \
+            self.get_class_info(user, class_id)
 
         return render_template(
             "customize-class.html",
@@ -360,7 +360,7 @@ class ForTeachersModule(WebsiteModule):
         adventure_names = {}
         for adv_key, adv_dic in default_adventures.items():
             for name, _ in adv_dic.items():
-                adventure_names[adv_key] = name
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
 
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
@@ -378,7 +378,7 @@ class ForTeachersModule(WebsiteModule):
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": adventure, "from_teacher": False})
             self.db.update_class_customizations(customizations)
-            min_level = min(customizations['levels'])
+            min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
         else:
             # Since it doesn't have customizations loaded, we create a default customization object.
             # This makes further updating with HTMX easier
@@ -413,6 +413,7 @@ class ForTeachersModule(WebsiteModule):
 
     # This function is used to remove from the customizations default adventures that we have removed
     # Otherwise they might cause an error when the students try to access a level
+
     def purge_customizations(self, sorted_adventures, adventures):
         for _, adventure_list in sorted_adventures.items():
             for adventure in list(adventure_list):
@@ -557,7 +558,7 @@ class ForTeachersModule(WebsiteModule):
         htmx_endpoint = f'/for-teachers/restore-adventures/level/{level}'
         htmx_target = "#adventure-dragger"
         htmx_indicator = "#indicator"
-        return render_partial('modal/hx-modal-confirm.html',
+        return render_partial('modal/htmx-modal-confirm.html',
                               modal_text=modal_text,
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,
@@ -608,13 +609,18 @@ class ForTeachersModule(WebsiteModule):
             level_thresholds[name] = value
 
         customizations = self.db.get_class_customizations(class_id)
+        dashboard = customizations.get('dashboard_customization', {})
+        levels = dashboard.get('selected_levels', [1])
         customizations = {
             "id": class_id,
             "levels": levels,
             "opening_dates": opening_dates,
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
-            "sorted_adventures": customizations["sorted_adventures"]
+            "sorted_adventures": customizations["sorted_adventures"],
+            'dashboard_customization': {
+                'selected_levels': levels
+            }
         }
 
         self.db.update_class_customizations(customizations)

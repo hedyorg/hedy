@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     Welkom bij Hedy! In Level 1 ga je je eerste codes leren maken.
 
-                    Als je een code het getypt in het invoerscherm kun je op de knop 'Voer de code uit' klikken. Je programma wordt dan uitgevoerd in het uitvoerscherm.
+                    Als je een code hebt getypt in het invoerscherm kun je op de knop 'Voer de code uit' klikken. Je programma wordt dan uitgevoerd in het uitvoerscherm.
 
                     Klaar om te leren programmeren? Ga dan snel naar het eerste avontuur in het volgende tabje!
                 start_code: "{print} hallo wereld!"
@@ -18,6 +18,8 @@ adventures:
                     In het eerste level heb je misschien gemerkt dat het  `{echo}` commando maar voor één antwoord tegelijk gebruikt kan worden.
                     Bijvoorbeeld in het restaurantavontuur kun je echoën wat de klanten willen eten, of wat ze willen drinken, maar niet allebei in één zin.
                 example_code: |
+                    **Let op! Deze code werkt niet!**
+                    In Hedy veranderen commando's wel eens. Zo werkt `echo` alleen in level 1. In dit level leer je een betere manier om antwoord te echoën!
                     ```
                     {print} Welcome bij restaurant Hedy
                     {ask} Wat wil je eten?
@@ -486,13 +488,13 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
-                story_text: |2-
+                story_text: |
 
-                    Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
+                      Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
 
-                    ### Opdracht
-                    Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
-                    Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
+                      ### Opdracht
+                      Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
+                      Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
@@ -863,10 +865,11 @@ adventures:
                     Wil je naar achteren? Gebruik dan het `{forward} ` commando met een negatief getal. Dus bijvoorbeeld `{forward} -100`.
                 example_code: |
                     ```
+                    {forward} 20
                     {turn} {right}
-                    {forward} 50
+                    {forward} 20
                     {turn} {left}
-                    {forward} 50
+                    {forward} 20
                     ```
                 start_code: "{forward} 50\n{turn} {right}"
             2:
@@ -1358,11 +1361,11 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             3:
-                story_text: |2
+                story_text: |
 
-                    In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen.
-                    Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
-                    Zo kun je de computer laten kiezen uit steen, papier en schaar.
+                      In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen.
+                      Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
+                      Zo kun je de computer laten kiezen uit steen, papier en schaar.
                 example_code: |
                     ```
                     keuzes {is} steen, papier, schaar
@@ -1622,15 +1625,15 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             13:
-                story_text: |2
+                story_text: |
 
-                    ### Opdracht 1
-                    Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
+                      ### Opdracht 1
+                      Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
-                    ### Opdracht 2 (extra)
-                    Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
-                    Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
-                    Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
+                      ### Opdracht 2 (extra)
+                      Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
+                      Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
+                      Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
 
                 example_code: |
                     ```
@@ -1711,18 +1714,18 @@ adventures:
                     In het vorige level heb je een begin gemaakt aan de waarzegger, maar echt voorspellingen waren er nog niet.
                     In dit level kun je een variabele gebruiken en het `{at} {random}` commando om Hedy antwoorden te laten kiezen op je vraag.
                     Kijk maar naar dit voorbeeld:
-                example_code: |2
+                example_code: |
 
-                    In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
-                    ```
-                    {print} Hoi Ik ben Hedy de Waarzegger
-                    vraag {is} {ask} Wat wil je weten?
-                    {print} vraag
-                    antwoorden {is} ja, nee, misschien
-                    {print} Mijn glazen bol zegt...
-                    {sleep} 2
-                    {print} antwoorden {at} {random}
-                    ```
+                      In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
+                      ```
+                      {print} Hoi Ik ben Hedy de Waarzegger
+                      vraag {is} {ask} Wat wil je weten?
+                      {print} vraag
+                      antwoorden {is} ja, nee, misschien
+                      {print} Mijn glazen bol zegt...
+                      {sleep} 2
+                      {print} antwoorden {at} {random}
+                      ```
                 story_text_2: |
                     ### Opdracht
                     Er zijn nu maar 3 antwoordopties waar Hedy uit kan kiezen, kun jij er meer toevoegen? Bijvoorbeeld: zeker weten, geen idee of probeer het nog eens!
@@ -1895,7 +1898,7 @@ adventures:
                     {print} Vandaag serveren we pizza of lasagne.
                     eten {is} {ask} Wat wilt u eten?
                     {print} Heerlijk! eten is ook mijn favoriet!
-                    topping {is} {ask} Wilt u eten met groente of vlees?
+                    topping {is} {ask} Met groente of vlees?
                     {print} eten met topping komt eraan!
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1975,23 +1978,23 @@ adventures:
             6:
                 story_text: |
                     In dit level kun je in je restaurant prijzen toevoegen en berekenen!
-                example_code: |2
+                example_code: |
 
-                    Je kunt een simpel restaurant maken:
-                      ```
-                      {print} 'Welkom bij McHedy'
-                      {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                      {print} 'U krijgt frietjes en drinken bij uw bestelling. '
-                      eten = {ask} 'Wat wilt u bestellen?'
-                      prijs = 0
-                      {if} eten {is} hamburger prijs = 8
-                      {if} eten {is} kroket prijs = 6
-                      {if} eten {is} kaassoufle prijs = 5
-                      {print} 'U heeft een ' eten ' besteld'
-                      {print} 'Dat is dan ' prijs ' euro, alstublieft!'
-                      {print} 'Bedankt en eet smakelijk!'
-                      ```
-                      In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
+                      Je kunt een simpel restaurant maken:
+                        ```
+                        {print} 'Welkom bij McHedy'
+                        {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
+                        {print} 'U krijgt frietjes en drinken bij uw bestelling. '
+                        eten = {ask} 'Wat wilt u bestellen?'
+                        prijs = 0
+                        {if} eten {is} hamburger prijs = 8
+                        {if} eten {is} kroket prijs = 6
+                        {if} eten {is} kaassoufle prijs = 5
+                        {print} 'U heeft een ' eten ' besteld'
+                        {print} 'Dat is dan ' prijs ' euro, alstublieft!'
+                        {print} 'Bedankt en eet smakelijk!'
+                        ```
+                        In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
                 start_code: "{print} 'Welkom'"
             7:
                 story_text: |
@@ -2214,7 +2217,7 @@ adventures:
                     {print} Je stapt het oude verlaten spookhuis binnen
                     {print} Meteen hoor je het geluid van een monster1
                     {print} Dus snel ren je naar de volgende kamer.
-                    {print} Maar daar wordt je opgewacht door een monster2
+                    {print} Maar daar word je opgewacht door een monster2
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
@@ -2231,7 +2234,7 @@ adventures:
                     {print} Je stapt het oude verlaten spookhuis binnen
                     {print} Meteen hoor je het geluid van een monster1
                     {print} Dus snel ren je naar de volgende kamer.
-                    {print} Maar daar wordt je opgewacht door een monster2
+                    {print} Maar daar word je opgewacht door een monster2
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
@@ -2239,7 +2242,7 @@ adventures:
             3:
                 story_text: |
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
-                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms wordt je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
+                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms word je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
                     Hedy kiest willekeurig of je overleeft of niet...
                 start_code: "{print} Ontsnap uit het spookhuis!"
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
@@ -2880,7 +2883,7 @@ adventures:
         levels:
             2:
                 story_text: "Nu je `{ask} hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!\n\n### Opdracht\nMaak de steen, papier, schaarcode interactief door met `{ask}` commando.\n"
-                example_code: "```\nckeuze is _\n{print} Ik kies keuze\n```\n"
+                example_code: "```\nkeuze is _\n{print} Ik kies keuze\n```\n"
                 start_code: "# place your code here"
     is_command:
         name: "{is}"
@@ -2888,10 +2891,10 @@ adventures:
         default_save_name: is_command
         levels:
             2:
-                story_text: "## Variabelen\nJe kunt een waarde in een woord opslaan met het commando `{is}`. Dit noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele overal in de zin plaatsen waar je wil en Hedy verplaatst de variabele dan met de waarde. Kijk maar:\n"
+                story_text: "## Variabelen\nJe kunt een waarde in een woord opslaan met het commando `{is}`. Dit noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele overal in de zin plaatsen waar je wil en Hedy vervangt de variabele dan voor de waarde. Kijk maar:\n"
                 example_code: "```\nnaam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud\n```\n"
                 story_text_2: "### Opdracht\nTijd om je eigen variabelen te maken!\nIn het voorbeeld hebben we de variabele 'lievelingsdier' gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.\nMaak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.\n"
-                example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van favorite_animals\n```\n"
+                example_code_2: "```\nlievelingsdier is _\n{print} Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} Hedy\nleeftijd {is} 15\n{print} naam is leeftijd jaar oud."
             14:
                 start_code: |-
@@ -2944,16 +2947,12 @@ adventures:
                     dieren {is} hond, kat, kangoeroe
                     {print} dieren {at} {random}
                     ```
-
-                story_text_2: |-
-                    Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`. Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
-
+                story_text_2: |
+                    Je kunt {at} {random} ook in een zin gebruiken.
                 example_code_2: |
                     ```
-                    taarten {is} aardbei, chocolade
-                    {add} appel {to_list} taarten
-                    {remove} chocolade {from} taarten
-                    {print} taarten {at} {random}
+                    eten {is} broodje, pizza, salade, burrito
+                    {print} Ik ga een eten {at} {random} lunchen.
                     ```
                 start_code: "dieren {is} hond, kat, kangoeroe\n{print} dieren {at} {random}\n"
                 story_text_3: "### Opdracht\nProbeer het `{at} {random}` commando uit door je eigen gameshow te maken (zoals Miljoenenjacht op tv). De kandidaat kiest een koffer of een deur waarachter een grote prijs verstopt kan zitten!\nLukt het jou om zo'n programma te maken? De eerste regels zijn alvast te vinden in het voorbeeld\n"

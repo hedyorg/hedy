@@ -203,14 +203,19 @@ a.green-btn:hover {
   @apply bg-blue-500 text-white border-blue-700;
 }
 
+.blue-btn:hover {
+  @apply bg-blue-400 border-blue-500;
+  @apply active:bg-blue-700 active:border-blue-700;
+}
+
 .gray-btn {
   @apply btn-shape;
   @apply bg-gray-500 text-white border-gray-700;
 }
 
-.blue-btn:hover {
-  @apply bg-blue-400 border-blue-500;
-  @apply active:bg-blue-700 active:border-blue-700;
+.gray-btn:hover {
+  @apply bg-gray-400 border-gray-500;
+  @apply active:bg-gray-700 active:border-gray-700;
 }
 
 /* Styles only for use in MarkDown blocks */
@@ -823,4 +828,16 @@ div[class^="ace_incorrect_hedy_code"] {
    position: absolute;
    cursor: pointer !important;
    pointer-events: auto;
+}
+
+.student_adventure_checkbox[disabled] {
+  @apply relative bg-gray-200 rounded border-gray-500 !important
+}
+
+.student_adventure_checkbox {
+  @apply relative bg-white rounded border-gray-500 !important
+}
+
+.student_adventure_checkbox:checked {
+  @apply relative bg-green-300 rounded border-gray-500  !important
 }

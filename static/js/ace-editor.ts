@@ -1,9 +1,6 @@
-import { theLocalSaveWarning, theLevel, runit, stopit, theLanguage, triggerAutomaticSave, theGlobalSourcemap} from "./app";
-import { HedyEditorCreator, HedyEditor, Breakpoints } from "./editor";
-import { error } from "./modal";
-import { initializeDebugger, stopDebug } from "./debugging";
-import { Markers } from "./markers";
-import { ClientMessages } from "./client-messages";
+import { theLevel } from "./app";
+import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } from "./editor";
+import { EventEmitter } from "./event-emitter";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 export class HedyAceEditorCreator implements HedyEditorCreator {
@@ -11,199 +8,219 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    * This function should initialize the editor and set up all the required
    * event handlers
    * @param $editor reference to the div that contains the main editor
+   * @param editorType the type of the editor
+   * @param dir the direction of the text
+   * @return {HedyEditor} The initialized Hedy editor instance
    */
-  initializeMainEditor($editor: JQuery): HedyAceEditor {
-    let editor: HedyAceEditor = this.turnIntoEditor($editor.get(0)!, $editor.data('readonly'), true);
-    editor.configureMainEditor();
-    error.setEditor(editor);
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // *** KEYBOARD SHORTCUTS ***
-    let altPressed: boolean | undefined;
-    // alt is 18, enter is 13
-    window.addEventListener('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!theLevel || !theLanguage) {
-          throw new Error('Oh no');
-        }
-        runit(theLevel, theLanguage, "", function () {
-          $('#output').focus();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById('output')) {
-        editor.focus();
-        editor.moveCursorToEndOfFile();
-      }
-    });
-
-    window.addEventListener('keyup', function (ev) {
-      triggerAutomaticSave();
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-
+  initializeEditorWithGutter($editor: JQuery, editorType: EditorType, dir: string = "ltr"): HedyAceEditor {
+    let editor: HedyAceEditor = new HedyAceEditor($editor.get(0)!, $editor.data('readonly'), editorType, dir);
     return editor;
   }
   /**
-   * 
-   * @param element the element that will contain this editor
-   * @param isReadOnly to decide weather to remove the cursor
-   * @param isMainEditor should we show the line numbers
+   * Initializes a read only editor
+   *
+   * @param {HTMLElement} preview - The element to preview the editor.
+   * @return {HedyEditor} The initialized Hedy editor instance.
    */
-  turnIntoEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): HedyAceEditor {
-    let hedyEditor: HedyAceEditor = new HedyAceEditor();
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
+  initializeReadOnlyEditor(preview: HTMLElement, dir: string = "ltr"): HedyEditor {
+    let editorType: EditorType;
+
+    if ($(preview).hasClass('common-mistakes')) {
+      editorType = EditorType.COMMON_MISTAKES;
+    } else if ($(preview).hasClass('cheatsheet')) {
+      editorType = EditorType.CHEATSHEET;
+    } else if ($(preview).hasClass('parsons')) {
+      editorType = EditorType.PARSONS;
+    } else {
+      editorType = EditorType.EXAMPLE;
+    }
+
+    return new HedyAceEditor(preview, true, editorType, dir);
+  }
+}
+
+export class HedyAceEditor implements HedyEditor {
+  private _editor: AceAjax.Editor;
+  private editorEvent = new EventEmitter<EditorEvent>({
+    change: true,
+    guttermousedown: true,
+    changeBreakpoint: true
+  });
+  private markerClasses = new Map<number, string>();
+  private currentLineMarker?: MarkerLocation;
+  // Map line numbers to markers
+  private strikeMarkers = new Map<number, number>();
+
+  /**
+   * 
+   * @param {HTMLElement} element the element that will contain this editor
+   * @param {boolean} isReadOnly to decide weather to remove the cursor
+   * @param {EditorType} editorType the type of the editor, could be a main editor, a parsons editor, etc.
+   * @param {string} dir the direction of the text
+   */
+  constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
+    this._editor = ace.edit(element);
+    this.isReadOnly = isReadOnly;
+    this._editor.setTheme("ace/theme/monokai");
+
     if (isReadOnly) {
-      editor.setValue(editor.getValue().trimRight(), -1);
+      this._editor.setValue(this._editor.getValue().trimRight(), -1);
       // Remove the cursor
-      editor.renderer.$cursorLayer.element.style.display = "none";
-      editor.setOptions({
-        readOnly: true,
+      // Telling TS to ignore this line, because $cursorLayer is not correctly include in ace types
+      // but it's there
+      // @ts-ignore
+      this._editor.renderer.$cursorLayer.element.style.display = "none";
+      this._editor.setOptions({
+        // only show gutter when its the main editor
+        readOnly: editorType === EditorType.MAIN,
         showGutter: false,
         showPrintMargin: false,
         highlightActiveLine: false
       });
       // A bit of margin looks better
-      editor.renderer.setScrollMargin(3, 3, 10, 20)
+      this._editor.renderer.setScrollMargin(3, 3, 10, 20)
 
-      // When it is the main editor -> we want to show line numbers!
-      if (isMainEditor) {
-        editor.setOptions({
-          showGutter: true
+      // It's an example editor
+      // Fits to content size
+      this._editor.setOptions({ maxLines: Infinity });
+      if (editorType === EditorType.CHEATSHEET) {
+        this._editor.setOptions({ minLines: 1 });
+      } else if (editorType === EditorType.COMMON_MISTAKES) {
+        this._editor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true,
+          minLines: 5,
         });
+      } else if (editorType === EditorType.PARSONS) {
+        this._editor.setOptions({
+          minLines: 1,
+          showGutter: false,
+          showPrintMargin: false,
+          highlightActiveLine: false
+        });
+      } else if (editorType === EditorType.EXAMPLE) {
+        this._editor.setOptions({ minLines: 2 });
+      }
+    } else {
+      if (editorType === EditorType.MAIN) {
+        this._editor.setShowPrintMargin(false);
+        this._editor.renderer.setScrollMargin(0, 0, 0, 20);
       }
     }
-    
-    hedyEditor.editor = editor;    
+
     // Everything turns into 'ace/mode/levelX', except what's in    
     if (theLevel) {
-      hedyEditor.setHighliterForLevel(theLevel)
-    }
-    return hedyEditor;
-  }
-
-  /**
-   * Ininitialize an editor that appears in a modal
-   * @param $editor reference to the div that contains this editor
-   */
-  initializeModalEditor($editor: JQuery): HedyEditor {
-    let editor = this.turnIntoEditor($editor.get(0)!, true);
-    error.setEditor(editor);
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  // *** KEYBOARD SHORTCUTS ***
-
-  let altPressed: boolean | undefined;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = true;
-      return;
-    }
-    if (keyCode === 13 && altPressed) {
-      runit (theLevel, theLanguage, "", function () {
-        $ ('#output').focus ();
-      });
-    }
-    // We don't use jquery because it doesn't return true for this equality check.
-    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus();
-      editor.moveCursorToEndOfFile();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = false;
-      return;
-    }
-  });
-    return editor;
-  }
-
-  initializeExampleEditor(preview: HTMLElement): HedyEditor {
-    const dir = $("body").attr("dir");
-    const exampleEditor = this.turnIntoEditor(preview, true);
-    // Fits to content size
-    exampleEditor.setOptions({ maxLines: Infinity });
-    if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({
-        showGutter: true,
-        showPrintMargin: true,
-        highlightActiveLine: true,
-        minLines: 5,
-      });
-    } else if ($(preview).hasClass('cheatsheet')) {
-      exampleEditor.setOptions({ minLines: 1 });
-    } else if ($(preview).hasClass('parsons')) {
-      exampleEditor.setOptions({
-        minLines: 1,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-    } else {
-      exampleEditor.setOptions({ minLines: 2 });
+      this.setHighlighterForLevel(theLevel)
     }
 
     if (dir === "rtl") {
-        exampleEditor.setOptions({ rtl: true });
+      this._editor.setOptions({ rtl: true });
     }
-    return exampleEditor;
   }
-}
-
-export class HedyAceEditor implements HedyEditor {
-  private _editor?: AceAjax.Editor;
-  private _markers?: Markers
-  askPromptOpen: boolean = false;
 
   /**
- * Set the highlither rules for a particular level
- * @param level      
- */
-  setHighliterForLevel(level: number): void { 
+  * Set the highlither rules for a particular level
+  * @param level      
+  */
+  setHighlighterForLevel(level: number): void {
     const mode = this.getHighlighter(level);
-    this._editor?.session.setMode(mode);
+    this._editor.session.setMode(mode);
   }
 
   /**
    * @returns the string of the current program in the editor
    */
-  getValue(): string { 
-    return this._editor!.getValue();
-  }
-
-  /**     
-   * @returns if the editor is set to read-only mode
-   */
-  isReadOnly(): boolean {
-    return this._editor!.getReadOnly();
+  public get contents(): string {
+    return this._editor.getValue();
   }
 
   /**
    * Sets the editor contents.
    * @param content the content that wants to be set in the editor
    */
-  setValue(content: string): void {
-    this._editor?.setValue(content, MOVE_CURSOR_TO_END);
+  public set contents(content: string) {
+    this._editor.setValue(content, MOVE_CURSOR_TO_END);
+  }
+
+  /**     
+   * @returns if the editor is set to read-only mode
+   */
+  public get isReadOnly(): boolean {
+    return this._editor.getReadOnly();
   }
 
   /**
-   * Trim trailing whitespaces
+   * Sets the read mode of the editor
    */
+  public set isReadOnly(isReadMode: boolean) {
+    this._editor.setReadOnly(isReadMode);
+  }
+
+  /**
+   * Resizes the editor after changing its size programatically
+   */
+  resize(): void {
+    this._editor.resize()
+  }
+
+  /**
+   * Focuses the text area for the current editor
+   */
+  focus(): void {
+    this._editor.focus();
+  }
+
+  /**
+   * Clears the errors and annotations in the editor
+   */
+  clearErrors(): void {
+    // Not sure if we use annotations everywhere, but this was
+    // here already.
+    this._editor.session.clearAnnotations();
+    for (const marker of this.findMarkers('editor-error')) {
+      this.removeMarker(marker);
+    }
+  }
+
+  /**     
+   * Moves to the cursor to the end of the current file
+   */
+  moveCursorToEndOfFile(): void {
+    this._editor.navigateFileEnd();
+  }
+
+  /**
+   * Clears the selected text
+   */
+  clearSelection(): void {
+    this._editor.clearSelection();
+  }
+
+  /**
+  * Removes all breakpoints on the rows.
+  **/
+  clearBreakpoints(): void {
+    this._editor.session.clearBreakpoints();
+  }
+
+  /**
+ * The '@types/ace' package has the type of breakpoints incorrect
+ *
+ * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
+ * but can be something you pick yourself.
+ */
+  getBreakpoints(): Breakpoints {
+    return this._editor.session.getBreakpoints() as unknown as Breakpoints;
+  }
+
+  getHighlighter(level: number): string {
+    return `ace/mode/level${level}`;
+  }
+
+  /**
+  * Trim trailing whitespaces
+  */
   trimTrailingSpace(): void {
     try {
       // This module may or may not exist, so let's be extra careful here.
@@ -214,142 +231,137 @@ export class HedyAceEditor implements HedyEditor {
     }
   }
 
-  /**
-   * Resizes the editor after changing its size programatically
-   */
-  resize(): void {
-    this._editor?.resize()
+  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
+    const ret = this.editorEvent.on(key, handler);
+    // This particular event needs to be attached to the session
+    if (key == 'changeBreakpoint'){
+      this._editor.session.on(key, handler);
+    } else {
+      this._editor.addEventListener(key, handler);
+    }
+    return ret;
   }
 
   /**
-   * Focuses the text area for the current editor
+   * Mark an error location in the ace editor
+   *
+   * The error occurs at the given row, and optionally has a column and
+   * and a length.
+   *
+   * If 'col' is not given, the entire line will be highlighted red. Otherwise
+   * the character at 'col' will be highlighted, optionally extending for
+   * 'length' characters.
+   *
+   * 'row' and 'col' are 1-based.
    */
-  focus(): void { 
-    this._editor?.focus();
+  public highlightError(row: number, col?: number) {
+    // Set a marker on the error spot, either a fullLine or a text
+    // class defines the related css class for styling; which is fixed in styles.css with Tailwind
+    if (col === undefined) {
+      // If the is no column, highlight the whole row
+      this.addMarker(
+        new ace.Range(row - 1, 1, row - 1, 2),
+        "editor-error", "fullLine"
+      );
+      return;
+    }
+    // If we get here we know there is a column -> dynamically get the length of the error string
+    // As we assume the error is supposed to target a specific word we get row[column, whitespace].
+    const length = this._editor.session.getLine(row - 1).slice(col - 1).split(/(\s+)/)[0].length;
+
+    // If there is a column, only highlight the relevant text
+    this.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
+      "editor-error", "text"
+    );
   }
 
   /**
-   * Clears the errors and annotations in the editor
+   * Remove all incorrect lines markers => Part of skip line feature
    */
-  clearErrors(): void {
-    // Not sure if we use annotations everywhere, but this was
-    // here already.
-    this._editor?.session.clearAnnotations();
-    this.markers?.clearErrors();
-  }
+  // public clearIncorrectLines() {
+  //   const markers = this.editor.session.getMarkers(true);
 
-  /**     
-   * Moves to the cursor to the end of the current file
-   */
-  moveCursorToEndOfFile(): void { 
-    this._editor?.navigateFileEnd();
-  }
-
-  /**
-   * Clears the selected text
-   */
-  clearSelection(): void {
-    this._editor?.clearSelection();
-  }
+  //   if (markers) {
+  //     for (const index in markers) {
+  //       let marker = markers[index];
+  //       if (marker.clazz.includes('ace_incorrect_hedy_code')){
+  //         this.removeMarker(Number(index));
+  //       }
+  //     }
+  //   }
+  // }
 
   /**
-  * Removes all breakpoints on the rows.
-  **/
-  clearBreakpoints(): void { 
-    this._editor?.session.clearBreakpoints();
-  }
-
-  /**
-   * If this editor is used as a main editor, we set the options here
+   * Set the current line in the debugger
    */
-  configureMainEditor(): void {
-    this._editor?.setShowPrintMargin(false);
-    this._editor?.renderer.setScrollMargin(0, 0, 0, 20)
-    this._editor?.addEventListener('change', () => {
-      theLocalSaveWarning.setProgramLength(this._editor!.getValue().split('\n').length);
-      this._markers?.clearIncorrectLines();
-    });
-    // Set const value to determine the current page direction -> useful for ace editor settings
-    const dir = $("body").attr("dir");
-    if (dir === "rtl") {
-      this._editor?.setOptions({ rtl: true });
+  public setDebuggerCurrentLine(line: number | undefined) {
+    if (this.currentLineMarker?.line === line) {
+      return;
     }
 
-    // If prompt is shown and user enters text in the editor, hide the prompt.
-    this._editor?.on('change', () => {
-      if (this.askPromptOpen) {
-        stopit();
-        this._editor?.focus(); // Make sure the editor has focus, so we can continue typing
-      }
-      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-      this.askPromptOpen = false;
-      $('#runit').css('background-color', '');
-      this.clearErrors();
-      //removing the debugging state when loading in the editor
-      stopDebug();
-    });
+    if (this.currentLineMarker) {
+      this.removeMarker(this.currentLineMarker.id);
+    }
 
-      // We show the error message when clicking on the skipped code
-    this._editor?.on("click", function(e) {
-      let position = e.getDocumentPosition()
-      position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+    if (line === undefined) {
+      this.currentLineMarker = undefined;
+      return;
+    }
 
-      let element = document.elementFromPoint(position.pageX, position.pageY)
-      if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-        let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-        let mapError = theGlobalSourcemap[mapIndex];
-
-        $('#okbox').hide ();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
-    })
-
-    this._markers = new Markers(this._editor!);
-
-          // *** Debugger *** //
-      // TODO: FIX THIS
-      initializeDebugger({
-        editor: this._editor!,
-        markers: this.markers,
-        level: theLevel,
-        language: theLanguage,
-      });
-  }
-
-  set editor(editor: AceAjax.Editor) {
-    this._editor = editor;
+    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    this.currentLineMarker = { line, id };
   }
 
   /**
- * The '@types/ace' package has the type of breakpoints incorrect
- *
- * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
- * but can be something you pick yourself.
- */
-  getBreakpoints(): Breakpoints {
-    return this._editor?.session.getBreakpoints() as unknown as Breakpoints;
+   * Mark the given set of lines as currently struck through
+   */
+  public strikethroughLines(lines: number[]) {
+    const struckLines = new Set(lines);
+
+    // First remove all markers that are no longer in the target set
+    const noLongerStruck = Array.from(this.strikeMarkers.entries())
+      .filter(([line, _]) => !struckLines.has(line))
+    for (const [line, id] of noLongerStruck) {
+      this.removeMarker(id);
+      this.strikeMarkers.delete(line);
+    }
+
+    // Then add markers for lines need to be struck
+    const newlyStruck = lines
+      .filter(line => !this.strikeMarkers.has(line));
+    for (const line of newlyStruck) {
+      const id = this.addMarker(new ace.Range(line, 0, line, 999), 'disabled-line', 'text', true);
+      this.strikeMarkers.set(line, id);
+    }
   }
 
-  setEditorMode(isReadMode: boolean): void {
-    this._editor?.setReadOnly(isReadMode);
+  /**
+   * Add a marker and remember the class
+   */
+  private addMarker(range: AceAjax.Range, klass: string, scope: 'text' | 'line' | 'fullLine', inFront = false) {
+    const id = this._editor.session.addMarker(range, klass, scope, inFront);
+    this.markerClasses.set(id, klass);
+    return id;
   }
 
-  getHighlighter(level: number): string {
-    return `ace/mode/level${level}`;
+  private removeMarker(id: number) {
+    this._editor.session.removeMarker(id);
+    this.markerClasses.delete(id);
   }
 
-  setOptions(options: object) {
-    this._editor?.setOptions(options);
+  private findMarkers(klass: string) {
+    return Array.from(this.markerClasses.entries())
+      .filter(([_, k]) => k === klass)
+      .map(([id, _]) => id);
   }
-
-  get editor(): AceAjax.Editor {
-    return this._editor!;
-  }
-
-  get markers(): Markers {
-    return this._markers!;
+  
+  public get session() {
+    return this._editor.session;
   }
 }
 
+
+interface MarkerLocation {
+  readonly line: number;
+  readonly id: number;
+}

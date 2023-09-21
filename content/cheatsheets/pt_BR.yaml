@@ -83,7 +83,7 @@
         {if} resposta {is} longe {forward} 100 {else} {forward} 5
 -   name: '{in}'
     explanation: Verifique elementos com `{in}`.
-    demo_code: "cores_bonitas {is} verde, amarelo\ncor {is} {ask} 'Qual é a sua cor favorita?'\n{if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'não gostei'"
+    demo_code: "cores_bonitas {is} verde, amarelo\ncor {is} {ask} 'Qual {is} a sua cor favorita?'\n{if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'não gostei'"
 -   name: '{pressed}'
     explanation: Verifique se uma determinada tecla no teclado está `{pressed}`.
     demo_code: "{if} a {is} {pressed} {print} 'Você apertou A!' {else} {print} 'Você apertou outra tecla!'"

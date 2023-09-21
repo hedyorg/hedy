@@ -10,8 +10,10 @@ describe('customize class page', () => {
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
+      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
       cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
+      cy.wait('@restoreCustomizations');
     });
 
     it('checks the option checkboxes', () => {
@@ -212,7 +214,22 @@ describe('customize class page', () => {
 
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
-    })
+    });
+
+    it('Clicking the Reset button displays a confirm dialog', () => {
+      /**
+       * At the beggining, the Parrot adventure should be in the level 1's adventures
+       */
+      selectLevel('1');
+      cy.get('#htmx-modal').should('not.exist');
+      cy.get(`*[data-cy="level-1"] div[data-cy='parrot'] *[data-cy="hide"]`).click();
+      cy.getBySel('parrot').should('not.exist');
+
+      cy.getBySel('reset_adventures').click();
+      cy.getBySel('confirm_modal').should('be.visible');
+      cy.getBySel('htmx_modal_yes_button').click();
+      cy.getBySel('parrot').should('be.visible');
+    });
 
     describe('an adventure that is hidden', () => {
       const hiddenAdventure = 'parrot';

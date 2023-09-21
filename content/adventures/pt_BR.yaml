@@ -6,24 +6,26 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No Nível 1 você pode usar os comandos `{print}`, `{ask}` e `{echo}`.
-                    Digite seu código no campo de programação. Ou pressione o botão verde no bloco de código de exemplo, e o código será digitado para você!
-                    Experimente o código você mesmo com o botão verde 'Executar código' abaixo do campo de programação.
+                    Bem-vindo(a) a Hedy! No Nível 1 você pode começar escrevendo uma história.
 
-                    Você pode imprimir texto na tela usando o comando `{print}`.     
+                    Experimente o código você mesmo com o botão 'Executar código' verde debaixo do campo de programação.
+
+                    Preparado? Então vá para a próxima aba para aprender o seu primeiro comando!
                 start_code: "{print} olá mundo!"
             2:
                 story_text: |
-                    No nível 2 aprendemos dois novos comandos: `{is}` e `{sleep}`.
-                    Você pode nomear uma palavra com `{is}`. Isso é chamado de variável. Neste exemplo, criamos uma variável chamada nome e uma variável chamada idade. Você pode usar a palavra nome em qualquer lugar do seu código e ela será substituída pela Hedy, assim:
-
-                    Desta forma você não precisa mais do comando `{echo}`!
+                    Parabéns! Você chegou ao nível 2.Você provavelmente já fez alguns códigos incríveis!
+                    No primeiro nível você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
+                    Por exemplo, na aventura no restaurante, você podia ecoar o que o cliente queria comer, ou o que ele queria beber, mas não os dois em uma mesma frase.
                 start_code: "{print} olá mundo!"
-                example_code: "```\nnome {is} Hedy\nidade {is} 15\n{print} nome tem idade anos\n```\n"
-                story_text_2: "`{print}` ainda funciona da mesma forma, mas o comando `{ask}` mudou. Você precisa usar uma variável no comando `{ask}` também. Se parece com isso:\n"
+                example_code: "```\n{print} Bem vindo ao Hedy's\n{ask} O que gostaria de comer?\n{echo} Então você quer\n{ask} O que gostaria de beber?\n{echo} Então você quer\n```\n"
+                story_text_2: "Se o jogador digitar um hambúrguer e um refrigerante, você não pode dizer \"então você quer um hambúrguer e um refrigerante\", mas sim tem que fazer duas linhas separadas.\nAlém disso, o comando `{echo}` somente ecoa a palavra no final da frase. Então você não pode dizer \"o seu hambúrguer vai estar pronto daqui a pouco!\".\n\nIsso muda no nível 2. No nível 2 você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.\nEntão vamos para a próxima aba!\n"
             3:
                 story_text: |
-                    No nível 3 você pode fazer uma lista. Você pode deixar o computador escolher algo aleatório da lista. Você faz isso com `{at} {random}`.
+                    No último nível você aprendeu o que é uma variável e como usá-las para fazer sua aventura mais interativa.
+                    Mas... isso não é a única coisa que você pode fazer com variáveis! Você também pode usar variáveis para fazer listas.
+                    E você pode até deixar a Hedy escolher uma palavra aleatória da lista, o que lhe permite criar jogos de verdade!
+                    Dê uma olhada na próxima aba!
                 start_code: "{print} olá mundo!"
             4:
                 start_code: "{print} 'Olá mundo'"
@@ -348,7 +350,7 @@ adventures:
             1:
                 story_text: "Você também pode usar Hedy para desenhar. Ao combinar giros e linhas, você pode fazer um quadrado ou uma escada!\n\nUsando `{forward}` você desenha uma linha para frente. O número depois dele determina o quão longe a tartaruga vai andar. `{turn} {right}` gira um quarto de volta no sentido horário, `{turn} {left}` gira no sentido anti-horário.\nSe você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`\n\nEste é o início de uma pequena escada. Você pode fazê-la ter 5 passos?\n"
                 start_code: "{forward} 50\n{turn} {left}"
-                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
             2:
                 story_text: "Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.\n"
                 example_code: "```\nresposta {is} {ask} Quantos passos a tartaruga deve dar?\n{forward} resposta\n```\n"
