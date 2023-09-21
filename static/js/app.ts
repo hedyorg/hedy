@@ -127,6 +127,8 @@ export function initializeApp(options: InitializeAppOptions) {
   theLevel = options.level;
   theKeywordLanguage = options.keywordLanguage;
   theStaticRoot = options.staticRoot ?? '';
+  // When we are in Alpha or in dev the static root already points to an internal directory
+  theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
