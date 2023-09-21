@@ -21,8 +21,6 @@ describe('Is able to type in the editor box', () => {
   }
 });
 
-/* TODO: We need to fix these tests so they don't fail every time we execute them on GitHub actions
-
 describe('Test editor box functionality', () => {
   beforeEach(() => {
     cy.visit(`${Cypress.env('hedy_page')}#default`);
@@ -35,6 +33,7 @@ describe('Test editor box functionality', () => {
   });
   
   it('Ask modal should hold input and the answer should be shown in output', () => {
+    waitForAceToLoad();
     cy.get('#editor').type('print Hello world\nask Hello!\necho');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!echo');
     cy.get('#runit').click();
@@ -46,6 +45,8 @@ describe('Test editor box functionality', () => {
   });
 
   it('Ask modal shpuld be shown even when editing the program after clicking run and not answering the modal', () => {
+    waitForAceToLoad();
+
     // First we write and run the program and leave the ask modal unanswered
     cy.get('#editor').type('print Hello world\nask Hello!');
     // the \n is not shown as a charecter when you get the text
@@ -70,6 +71,7 @@ describe('Test editor box functionality', () => {
   });
 
   it ('When making an error the error modal should be shown', () => {
+    waitForAceToLoad();
     cy.get('#editor').type('echo');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'echo');
     cy.get('#runit').click();
@@ -80,6 +82,8 @@ describe('Test editor box functionality', () => {
   });
 
   it ('When making an error the keywords must be highligted', () => {
+    waitForAceToLoad();
+
     cy.get('#editor').type('prin Hello world');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'prin Hello world');
     cy.get('#runit').click();
@@ -90,4 +94,14 @@ describe('Test editor box functionality', () => {
     cy.get('[data-cy="error_details"] span').should('have.class', 'command-highlighted');
 
   });
-});*/
+});
+
+/**
+ * Wait for the Ace editor to finish initializing all the HTML elements and attach the listeners
+ * 
+ * If we start typing in the editor immediately, it may happen before the editor has
+ * loaded. Waiting for HTML elements that are created as the editor loads will fix that.
+ */
+function waitForAceToLoad() {
+  cy.get('#editor > .ace_scroller > .ace_content').should('be.visible');
+}
