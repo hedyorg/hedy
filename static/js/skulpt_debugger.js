@@ -176,8 +176,6 @@ Sk.Debugger = class {
         }
 
         suspension = parent;
-        console.log(this.current_suspension);
-        console.log(this.suspension_stack);
 
         this.print_suspension_info(suspension);
     }
@@ -259,6 +257,7 @@ Sk.Debugger = class {
         if (this.suspension_stack.length === 0) {
             return Promise.resolve();
         } else {
+            console.log(promise)
             var promise = this.suspension_handler(this.get_active_suspension());          
             return promise
         }
@@ -312,12 +311,59 @@ Sk.Debugger = class {
                 debugger_obj.resolveCallback = resolve;                
                 debugger_obj.resolveCallback = reject;                
                 var r = suspendablefn();
+
                 (function handleResponse(r) {
                     try {
+                        // jsh*nt insists these be defined outside the loop
+                        var resume = function () {
+                            try {
+                                resolve(r.resume());
+                            } catch (e) {
+                                reject(e);
+                            }
+                        };
+                        var resumeWithData = function resolved(x) {
+                            try {
+                                r.data["result"] = x;
+                                resume();
+                            } catch (e) {
+                                reject(e);
+                            }
+                        };
+                        var resumeWithError = function rejected(e) {;
+                            try {
+                                r.data["error"] = e;
+                                resume();
+                            } catch (ex) {
+                                reject(ex);
+                            }
+                        };
+
                         while (r instanceof Sk.misceval.Suspension) {
-                            debugger_obj.set_suspension(r);
-                            return;
+                            if (r.data["type"] == "Sk.promise") {
+                                r.data["promise"].then(resumeWithData, resumeWithError);
+                                return;
+                            } else if (r.data["type"] == "Sk.yield") {
+                                // Assumes all yields are optional, as Sk.setTimeout might
+                                // not be able to yield.
+                                //Sk.setTimeout(resume, 0);
+                                Sk.global["setImmediate"](resume);
+                                return;
+                            } else if (r.data["type"] == "Sk.delay") {
+                                //Sk.setTimeout(resume, 1);
+                                Sk.global["setImmediate"](resume);
+                                return;
+                            } else if (r.optional) {
+                                // Unhandled optional suspensions just get
+                                // resumed immediately, and we go around the loop again.
+                                debugger_obj.set_suspension(r);
+                                return;
+                            } else {
+                                // Unhandled, non-optional suspension.
+                                throw new Sk.builtin.SuspensionError("Unhandled non-optional suspension of type '" + r.data["type"] + "'");
+                            }
                         }
+
                         resolve(r);
                     } catch (e) {
                         reject(e);
