@@ -1707,7 +1707,7 @@ class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
-        return f"{parameter} = [{', '.join(values)}]"
+        return f"{parameter} = [{', '.join(values)}]{self.add_debug_breakpoint()}"
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
@@ -1734,14 +1734,14 @@ class ConvertToPython_3(ConvertToPython_2):
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
-        return f"{list_var}.append({value})"
+        return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-          {list_var}.remove({value})
+          {list_var}.remove({value}){self.add_debug_breakpoint()}
         except:
           pass""")
 
@@ -1787,13 +1787,13 @@ class ConvertToPython_4(ConvertToPython_3):
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        return f"{var} = input(f'{argument_string}')"
+        return f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
 
-    def clear(self, meta, args):
-        return f"""extensions.clear()
+    def clear(self, meta, args):  # todo not sure about it being here
+        return f"""extensions.clear(){self.add_debug_breakpoint()}
 try:
     # If turtle is being used, reset canvas
     t.hideturtle()
@@ -1811,14 +1811,14 @@ class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language, is_debug):
         super().__init__(lookup, numerals_language, is_debug)
 
-    def ifs(self, meta, args):
-        return f"""if {args[0]}:
+    def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
     def ifelse(self, meta, args):
-        return f"""if {args[0]}:
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}
-else:
+else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
     def condition(self, meta, args):
@@ -1931,19 +1931,19 @@ class ConvertToPython_6(ConvertToPython_5):
         parameter = args[0]
         value = args[1]
         if type(value) is Tree:
-            return parameter + " = " + value.children[0]
+            return parameter + " = " + value.children[0] + self.add_debug_breakpoint()
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
                     exception = self.make_catch_exception([value])
-                    return exception + parameter + " = " + value
+                    return exception + parameter + " = " + value + self.add_debug_breakpoint()
                 else:
                     return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
@@ -1976,7 +1976,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -1986,7 +1986,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
