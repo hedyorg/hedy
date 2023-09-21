@@ -1041,6 +1041,152 @@ adventures:
                     {print} 'SURPRISE!'
                     ```
 
+    functions_2:
+        name: "functions 2"
+        description: functions 2
+        default_save_name: functions_2
+        levels:
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could use multiple arguments in one function?
+                    And did you know you could combine them with {ask} commands as well?
+
+                    Here is an example of using multiple arguments combined with {ask} commands.
+                example_code: |
+                    ```
+                    define welcome_message with title, last_name, country
+                        print 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        print 'We hope you have had a nice trip from ' country
+
+                    title = ask 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = ask 'What is you last name?'
+                    homecountry = ask 'What country do you come from?'
+
+                    call welcome_message with title, name, homecountry
+                    ```
+                start_code: |
+                    define welcome_message with title, last_name, country
+                        print 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        print 'We hope you have had a nice trip from ' country
+
+                    title = ask 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = ask 'What is you last name?'
+                    homecountry = ask 'What country do you come from?'
+
+                    call welcome_message with title, name, homecountry
+    functions:
+        name: functions
+        description: functions
+        default_save_name: functions
+        levels:
+            12:
+                story_text: |
+                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
+                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
+                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+
+                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+
+                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                example_code: |
+                    ```
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+
+                    {define} turn
+                        chosen_side = sides {at} {random}
+                        chosen_limb = limbs {at} {random}
+                        chosen_color = colors {at} {random}
+                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+
+                    {print} 'Lets play a game of Twister!'
+                    {for} i {in} {range} 1 to 5
+                        {call} turn
+                        {sleep} 2
+                    ```
+                start_code: |
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+
+                    {define} turn
+                        chosen_side = sides {at} {random}
+                        chosen_limb = limbs {at} {random}
+                        chosen_color = colors {at} {random}
+                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+
+                    {print} 'Lets play a game of Twister!'
+                    {for} i {in} {range} 1 to 5
+                        {call} turn
+                        {sleep} 2
+            13:
+                story_text: |
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
+
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
+                    To use `place` we have programmed the line `define song with place`.
+                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+
+                    ### Exercise
+                    The next verse of this song goes:
+
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
+
+                    Can you program this verse in the same way as the example?
+                example_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is over the ' place
+
+                    call song with 'ocean'
+                    call song with 'sea'
+                    call song with 'ocean'
+                    ```
+                start_code: |
+                    define song with place
+                        print 'My Bonnie is over the ' place
+
+                    call song with 'ocean'
+                    call song with 'sea'
+                    call song with 'ocean'
+            14:
+                story_text: |
+                    In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
+                    You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+
+                    For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+##                  Note to Felienne: Now i've used different words for the same amount (amount = old price, persentage = discount) because you could use different words. Is it better to use the same words?
+
+                example_code: |
+                    ```
+                    define calculate_new_price with amount, percentage
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        return amount - discount_amount
+
+                    old_price = ask 'How much is on the price tag?'
+                    discount = ask 'What percentage is the discount?'
+                    new_price = call calculate_new_price with old_price, discount
+                    print 'The new price is ' new_price ' dollar'
+                    ```
+                start_code: |
+                    define calculate_new_price with amount, percentage
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        return amount - discount_amount
+
+                    old_price = ask 'How much is on the price tag?'
+                    discount = ask 'What percentage is the discount?'
+
+                    new_price = call calculate_new_price with old_price, discount
+                    print 'The new price is ' new_price ' dollar'
+
     story:
         name: "Story"
         description: "Story"
