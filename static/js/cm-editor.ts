@@ -7,7 +7,8 @@ import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
 
 
-const addErrorLine = StateEffect.define<{row: number, col?: number}>()
+const addErrorLine = StateEffect.define<{row: number}>()
+const addErrorWord = StateEffect.define<{row: number, col: number}>();
 const removeErrorLines = StateEffect.define<void>()
 
 const errorLineField = StateField.define<DecorationSet>({
@@ -21,9 +22,22 @@ const errorLineField = StateField.define<DecorationSet>({
             // Get line given the row number
             const line = tr.state.doc.line(e.value.row);
             errors = errors.update({
-                add: [errorHighlightMark.range(line.from, line.from)]
+                add: [errorHighlightLine.range(line.from, line.from)]
             })
-        } else if (e.is(removeErrorLines)) {
+        } else if(e.is(addErrorWord)) {
+            const line = tr.state.doc.line(e.value.row);
+            const length = line.text.slice(e.value.col - 1).split(/(\s+)/)[0].length;
+            if (length > 0) {
+                errors = errors.update({
+                    add: [errorHighlightMark.range(line.from + e.value.col - 1, line.from + e.value.col - 1 + length)]
+                });
+            } else { // Might not be the best to highlight the whole line but rather just the previous word?                
+                errors = errors.update({
+                    add: [errorHighlightLine.range(line.from, line.from)]
+                })
+            }
+        }
+        else if (e.is(removeErrorLines)) {
             return Decoration.none;
         }
       } 
@@ -32,7 +46,9 @@ const errorLineField = StateField.define<DecorationSet>({
     provide: f => EditorView.decorations.from(f)
 })
   
-const errorHighlightMark = Decoration.line({class: "cm-error-line"})
+const errorHighlightLine = Decoration.line({class: "cm-error-line"})
+const errorHighlightMark = Decoration.mark({class: "cm-error-line"})
+
 
 const errorHighlightTheme = EditorView.theme({
     ".cm-error-line": {
@@ -284,7 +300,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * 'row' and 'col' are 1-based.
      */
     highlightError(row: number, col?: number) {
-        let effects: StateEffect<{row: number, col?: number}>[] = [addErrorLine.of({row, col})]
+        console.log(row, col);
+        let effect: StateEffect<{row: number, col?: number}>;
+        if (col === undefined) {
+            effect = addErrorLine.of({row});
+        } else {
+            effect = addErrorWord.of({row, col});
+        }        
+        let effects: StateEffect<{row: number, col?: number}>[] = [effect]
         this.view.dispatch({effects})
     }
 
