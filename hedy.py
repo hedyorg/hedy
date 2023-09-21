@@ -1473,18 +1473,18 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + "')"
+        return f"print('" + argument + "')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
-        return "answer = input('" + argument + "')"
+        return "answer = input('" + argument + "')" + self.add_debug_breakpoint()
 
     def echo(self, meta, args):
         if len(args) == 0:
-            return "print(answer)"  # no arguments, just print answer
+            return f"print(answer){self.add_debug_breakpoint()}"  # no arguments, just print answer
 
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + " '+answer)"
+        return "print('" + argument + " '+answer)" + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1494,16 +1494,16 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False)
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
         if len(args) == 0:
-            return "t.pencolor('black')"  # no arguments defaults to black ink
+            return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = args[0].data
         if arg in command_make_color:
-            return f"t.pencolor('{arg}')"
+            return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
@@ -1511,13 +1511,13 @@ class ConvertToPython_1(ConvertToPython):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
 
         arg = args[0].data
         if arg == 'left':
-            return "t.left(90)"
+            return f"t.left(90){self.add_debug_breakpoint()}"
         elif arg == 'right':
-            return "t.right(90)"
+            return f"t.right(90){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
@@ -1544,7 +1544,7 @@ class ConvertToPython_1(ConvertToPython):
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
-        if add_sleep:
+        if add_sleep and not self.is_debug:
             return sleep_after(transpiled, False)
         return transpiled
 
@@ -1554,7 +1554,7 @@ class ConvertToPython_1(ConvertToPython):
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
-            t.{command_text}({variable})""")
+            t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
         lists_names = []
@@ -1686,14 +1686,15 @@ class ConvertToPython_2(ConvertToPython_1):
                 return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
+
         if not args:
-            return "time.sleep(1)"
+            return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value}))
+                  time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
             return code
