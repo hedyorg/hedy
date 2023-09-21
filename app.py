@@ -1559,10 +1559,9 @@ def favicon():
 
 
 @app.route('/')
-@app.route('/start')
 @app.route('/index.html')
 def main_page():
-    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['home-sections']
 
     sections = sections[:]
 
@@ -1617,6 +1616,11 @@ def join():
     return render_template('join.html', page_title=gettext('title_learn-more'),
                            current_page='join', content=join_translations)
 
+@app.route('/start')
+def start():
+    start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
+    return render_template('start.html', page_title=gettext('title_learn-more'),
+                           current_page='start', content=start_translations)
 
 @app.route('/privacy')
 def privacy():
