@@ -1,9 +1,7 @@
 import { runit } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
-import { Markers } from "./markers";
 
-let theMarkers: Markers;
-let theGlobalEditor: AceAjax.Editor;
+let theGlobalEditor: HedyEditor;
 let theLevel: number;
 let theLanguage: string;
 
@@ -106,13 +104,11 @@ const BP_DISABLED_LINE = 'ace_breakpoint';
 
 export interface InitializeDebuggerOptions {
   readonly level: number;
-  readonly editor: AceAjax.Editor;
-  readonly markers: Markers;
+  readonly editor: HedyEditor;
   readonly language: string;
 }
 
 export function initializeDebugger(options: InitializeDebuggerOptions) {
-  theMarkers = options.markers;
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
@@ -143,9 +139,8 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   initializeBreakpoints(options.editor);
 }
 
-function initializeBreakpoints(editor: AceAjax.Editor) {
-
-  var editor: AceAjax.Editor = ace.edit("editor");
+function initializeBreakpoints(editor: HedyEditor) {
+  
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
     const target = e.domEvent.target as HTMLElement;
 
@@ -181,7 +176,21 @@ function initializeBreakpoints(editor: AceAjax.Editor) {
     e.stop();
   });
 
-  editor.session.on('changeBreakpoint', () => updateBreakpointVisuals(editor));
+  /**
+ * Render markers for all lines that have breakpoints
+ * 
+ * (Breakpoints mean "disabled lines" in Hedy).
+ * */
+  editor.on('changeBreakpoint', function() {
+    const breakpoints = theGlobalEditor.getBreakpoints();
+
+    const disabledLines = Object.entries(breakpoints)
+      .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
+      .map(([line, _]) => line)
+      .map(x => parseInt(x, 10));
+
+    theGlobalEditor.strikethroughLines(disabledLines);
+  });
 }
 
 function get_shift_key(event: Event | undefined) {
@@ -189,22 +198,6 @@ function get_shift_key(event: Event | undefined) {
   if (event.shiftKey) {
     return true;
   } return false;
-}
-
-/**
- * Render markers for all lines that have breakpoints
- *
- * (Breakpoints mean "disabled lines" in Hedy).
- */
-function updateBreakpointVisuals(editor: AceAjax.Editor) {
-  const breakpoints = getBreakpoints(editor);
-
-  const disabledLines = Object.entries(breakpoints)
-    .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-    .map(([line, _]) => line)
-    .map(x => parseInt(x, 10));
-
-  theMarkers.strikethroughLines(disabledLines);
 }
 
 function debugRun() {
@@ -290,7 +283,7 @@ export function incrementDebugLine() {
   storage.setItem("debugLine", nextDebugLine.toString());
   markCurrentDebuggerLine();
 
-  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
+  var lengthOfEntireEditor = theGlobalEditor.contents.split("\n").filter(e => e).length;
   if (nextDebugLine < lengthOfEntireEditor) {
     debugRun();
   } else {
@@ -306,9 +299,9 @@ function markCurrentDebuggerLine() {
 
   if (debugLine != null) {
     var debugLineNumber = parseInt(debugLine, 10);
-    theMarkers.setDebuggerCurrentLine(debugLineNumber);
+    theGlobalEditor.setDebuggerCurrentLine(debugLineNumber);
   } else {
-    theMarkers.setDebuggerCurrentLine(undefined);
+    theGlobalEditor.setDebuggerCurrentLine(undefined);
   }
 }
 
