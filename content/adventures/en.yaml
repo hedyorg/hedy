@@ -18,6 +18,8 @@ adventures:
                     In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
                     For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `echo` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
                     {print} Welcome at Hedy's
                     {ask} What would you like to eat?
@@ -1664,11 +1666,11 @@ adventures:
 
                 example_code: |
                     ```
-                    {forward} 50
+                    {forward} 20
                     {turn} {right}
-                    {forward} 50
+                    {forward} 20
                     {turn} {left}
-                    {forward} 50
+                    {forward} 20
                     ```
                 start_code: "{forward} 50\n{turn} {left}"
             2:
@@ -3331,7 +3333,7 @@ adventures:
                     weeks = to_save / allowance
                     {if} wish > money
                         {print} 'You need to save up some more!'
-                        {print} 'Youll need ' weeks ' more weeks.'
+                        {print} "You'll need ' weeks ' more weeks."
                     {else}
                         {print} 'Great! You have enough'
                         {print} 'Lets go shopping!'
@@ -3587,9 +3589,9 @@ adventures:
                         choice = {ask} 'Player ' player ' what spot do you choose?'
                         field {at} choice = player
                         {clear}
-                        print field {at} 1 field {at} 2 field {at} 3
-                        print field {at} 4 field {at} 5 field {at} 6
-                        print field {at} 7 field {at} 8 field {at} 9
+                        {print} field {at} 1 field {at} 2 field {at} 3
+                        {print} field {at} 4 field {at} 5 field {at} 6
+                        {print} field {at} 7 field {at} 8 field {at} 9
                         {if} player = 'x'
                             player = 'o'
                         {else}

@@ -19,19 +19,19 @@ _Changes in detail. For example: "**Adds** translations of levels 1 to 12 to Pol
 **Fixes _issue or discussion number_**
 
 Always link the number of the issue or of the discussion that your PR concerns.
-Tip, if you use the word `fixes` before the issue number in this description, the related issue will automatically close then the PR is merged! 
+Tip, if you use the word `fixes` before the issue number in this description, the related issue will automatically close then the PR is merged!
 
 **How to test**
 
-* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example_
+* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/hedyorg/hedy/pull/880#issue-1016304308 for an example_
 * If this is a language change: _add a few tests showing the difference_
 
 **Checklist**
-Done? Check if you have it all in place using this list:*
-  
+Done? Check if you have it all in place using this list: (mark with x if done)
+
 - [ ] Contains one of the PR categories in the name
 - [ ] Describes changes in the format above
-- [ ] Links to an existing issue or discussion 
+- [ ] Links to an existing issue or discussion
 - [ ] Has a "How to test" section
 
 If you're unsure about any of these, don't hesitate to ask. We're here to help!

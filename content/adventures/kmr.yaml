@@ -1,37 +1,37 @@
 adventures:
     default:
-        name: Introduction
+        name: Pêşkêş
         levels:
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: "{print} 'Silav dinya'"
                 story_text: "In level 4 `{ask}` and `{print}` have changed.\nYou must put text that you want to print between quotation marks.\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
+                example_code: "```\n{print} 'Pêwîste ku hûn ji nuha û pê ve nîşanan bikar bînin!'\nbersiv {is} {ask} 'Ji niha û pê ve divê em çi bikar bînin?'\n{print} 'Divê em navê Sophie bikar bînin'\n{print} 'Navê min navê min'\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
+                start_code: "nav {is} {ask} 'navê te çi ye?'\n{if} nav {is} Hedy {print} 'xweş!' {else} {print} 'meh'"
                 story_text: "In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                example_code: "```\nnav {is} {ask} 'Navê te çi ye?'\n{if} nav {is} Hedy {print} 'xweşik' {else} {print} 'boo!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
             1:
                 story_text: "Bi xêr hatî Hedy! Di Asta 1 de hûn dikarin fermanên `{print}`, `{ask}` û `{echo}` bikar bînin.\nKoda xwe di qada bernamekirinê de binivîsin. An jî bişkoka kesk a di bloka kodê ya nimûneyê de bikirtînin, û kod dê ji we re were nivîsandin! Bi çapkirina çîrokek dest pê bikin.\n\nBi bişkoja kesk 'Run code' di binê qada bernamekirinê de kodê biceribînin.\n\nHûn dikarin nivîsê li ser ekranê bi karanîna `{print}` çap bikin Amade ne? Ew cax biçin tabloya din da ku emrê xweya yekem fêr bibin .     !\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} silav dinya!'
             2:
                 story_text: "In level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: "{print} Hûn bi xêr hatin Hedy's\n{ask} Tu dixwazî çi bixwî?\n{echo} Ji ber vê yekê hûn dixwazin\n{ask} dixwazin çi vexwin?\n{echo} Ji ber vê yekê hûn dixwazin\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} silav dinya!'
             3:
                 story_text: "In level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} silav dinya!'
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: "{print} '5 caran 5 ' 5 * 5"
                 story_text: " In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
+                example_code: "```\n{print} '5 biserve 5  {is}  ' 5 + 5\n{print} '5 kêmkir 5  {is}  ' 5 - 5\n{print} '5 caran 5  {is}  ' 5 * 5\n```\n"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-                story_text: "Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+                start_code: "{repeat} 3 {times} {print} 'Hedy xweş e!'\n"
+                story_text: "Asta 7 fermana `{repeat}` zêde dike. `{repeat}` dikare ji bo pêkanîna yekê were bikar anîn\n"
+                example_code: "{repeat} 3 {times} {print} 'Hedy kêfxweş e! {print}  'rojbûna te pîroz be'\n{repeat} 3 {times} {print} 'Hedy kêfxweş e!print!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
                 story_text: "`{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!\nYou can now group several lines together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
@@ -222,7 +222,7 @@ adventures:
         levels:
             1:
                 story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### Exercise\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
-                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: "In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.\n"

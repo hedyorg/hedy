@@ -212,7 +212,7 @@ adventures:
         default_save_name: Turtle
         levels:
             1:
-                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
                 story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### Exercise\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
             2:
@@ -637,7 +637,7 @@ adventures:
     tic:
         levels:
             13:
-                example_code: "```\nplayer = 'x'\nfield = '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    choice = {ask} 'Player ' player ' what spot do you choose?'\n    field {at} choice = player\n    {clear}\n    print field {at} 1 field {at} 2 field {at} 3\n    print field {at} 4 field {at} 5 field {at} 6\n    print field {at} 7 field {at} 8 field {at} 9\n    {if} player = 'x'\n        player = 'o'\n    {else}\n        player = 'x'\n```\n"
+                example_code: "```\nplayer = 'x'\nfield = '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    choice = {ask} 'Player ' player ' what spot do you choose?'\n    field {at} choice = player\n    {clear}\n    {print} field {at} 1 field {at} 2 field {at} 3\n    {print} field {at} 4 field {at} 5 field {at} 6\n    {print} field {at} 7 field {at} 8 field {at} 9\n    {if} player = 'x'\n        player = 'o'\n    {else}\n        player = 'x'\n```\n"
                 story_text: "In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\n\n### Exercise 1\nThe game works, but it has some issues. For example, any player can pick any field, even one already taken! Use an `{if}` whether the spot is taken, and if so, warn the player.\n\n### Exercise 2\nThe game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol.\n\n### Exercise 3 (extra)\nYou don't always have a friend to play with. Can you create a computer opponent?\n"
                 start_code: '# Write your code here'
             14:
