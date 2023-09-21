@@ -97,7 +97,7 @@ adventures:
                     drinken {is} {ask} 'Wat wilt u daarbij drinken?'
                     {if} drinken {is} water drinken_prijs {is} 0
                     else drinken_prijs {is} 3
-                    totaal_price {is} eten_prijs + drinken_prijs
+                    totaal_prijs {is} eten_prijs + drinken_prijs
                     {print} 'Dat wordt dan ' totaal_prijs ' euro, alstublieft'
                     ```
                 start_code: "# place your code here"
