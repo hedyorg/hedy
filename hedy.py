@@ -1995,9 +1995,10 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True, is_debug=False):
+def sleep_after(commands, indent=True, is_debug=True):
     if is_debug:
         return commands
+
     lines = commands.split()
     if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
         return commands
@@ -2041,11 +2042,11 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return f"for {var_name} in range(int({times})):\n{body}"
+        return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "if " + args[0] + ":\n" + "\n".join(all_lines)
+        return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def ifpressed(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2128,7 +2129,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = sleep_after(body, True)
-        return f"for {times} in {args[1]}:\n{body}"
+        return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
 
 
 @v_args(meta=True)
@@ -2144,7 +2145,7 @@ class ConvertToPython_11(ConvertToPython_10):
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
-for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
+for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):{self.add_debug_breakpoint()}
 {body}"""
 
 
@@ -2216,12 +2217,12 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
-        return exception + f"print(f'''{argument_string}''')"
+        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        assign = f"{var} = input(f'''{argument_string}''')"
+        assign = f"{var} = input(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
         return textwrap.dedent(f"""\
         {assign}
@@ -2236,7 +2237,7 @@ class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = args[1:]
-        return parameter + " = [" + ", ".join(values) + "]"
+        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
 
     def assign(self, meta, args):
         right_hand_side = args[1]
@@ -2259,11 +2260,11 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if isinstance(right_hand_side, Tree):
             exception = self.make_catch_exception([right_hand_side.children[0]])
-            return exception + left_hand_side + " = " + right_hand_side.children[0]
+            return exception + left_hand_side + " = " + right_hand_side.children[0] + self.add_debug_breakpoint()
         else:
             # we no longer escape quotes here because they are now needed
             exception = self.make_catch_exception([right_hand_side])
-            return exception + left_hand_side + " = " + right_hand_side + ""
+            return exception + left_hand_side + " = " + right_hand_side + "" + self.add_debug_breakpoint()
 
     def var(self, meta, args):
         name = args[0]
@@ -2272,7 +2273,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -2282,7 +2283,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2356,7 +2357,7 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
         body = sleep_after(body)
         exceptions = self.make_catch_exception([args[0]])
-        return exceptions + "while " + args[0] + ":\n" + body
+        return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
@@ -2389,7 +2390,7 @@ class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = [a for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
+        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
 
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
@@ -2401,12 +2402,12 @@ class ConvertToPython_16(ConvertToPython_15):
         except IndexError:
           raise Exception('{exception_text}')
         """)
-        return exception + left_side + ' = ' + right_side
+        return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         exceptions = self.make_catch_exception([args[0]])
-        return exceptions + "if " + args[0] + ":\n" + "\n".join(all_lines)
+        return exceptions + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)
@@ -2416,7 +2417,7 @@ class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def ifpressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
