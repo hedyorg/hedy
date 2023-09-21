@@ -29,18 +29,18 @@ adventures:
                 start_code: "{print} hola mundo!"
             4:
                 story_text: |
-                    En los niveles anteriores has estado practicando con variables, pero puede que te hayas encontrado con este problema.
-                    Puede que hayas intentado ejecutar un código como éste:
+                    En los niveles anteriores has estado practicando con las variables, pero es posible que te hayas encontrado con este problema.
+                    Es posible que hayas intentado ejecutar un código como este:
 
                     Por supuesto que querías imprimir
 
-                    `My Sophie is Sophie`
+                    `My name is Sophie`
 
                     pero Hedy imprime
 
                     `My Sophie is Sophie`.
 
-                    En este nivel este problema se soluciona utilizando comillas.
+                    En este nivel, este problema se soluciona mediante el uso de comillas.
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\nnombre {is} Sofia\n{print} Mi nombre es nombre\n```\n"
             5:
@@ -944,13 +944,13 @@ adventures:
             13:
                 story_text: |2
 
-                    ### Ejercicio 1
-                    Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
+                      ### Ejercicio 1
+                      Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
 
-                    ### Ejercicio 2 Extra
-                    A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
-                    Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
-                    Vacíe el campo de programación y cree su propia solución.
+                      ### Ejercicio 2 Extra
+                      A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
+                      Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
+                      Vacíe el campo de programación y cree su propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu código aquí'
     restaurant:
@@ -1095,7 +1095,7 @@ adventures:
                     Así:
 
                 start_code: "# pon tu código aquí"
-                example_code: "```\n¡Hola, soy Hedy la adivina!\n¿Quién eres tú?\nDéjame echar un vistazo en mi bola de cristal.\nVeo... Veo...\nTu nombre es\n```\n"
+                example_code: "```\n_ ¡Hola, soy Hedy la adivina!\n_ ¿Quién eres?\n_ Déjame echar un vistazo a mi bola de cristal.\n_ Veo... Veo...\n_ Tu nombre es\n```\n"
                 story_text_2: "### Ejercicio\nCopia el código de ejemplo en tu pantalla de entrada y rellena los espacios en blanco para hacer que tu código funcione.\n**Extra** Cambia el código y deja que el adivino no sólo prediga tu nombre, sino también tu edad, tu equipo favorito de deporte o cualquier otra cosa sobre ti mismo.\n"
             3:
                 story_text: |
@@ -1111,7 +1111,7 @@ adventures:
             10:
                 story_text: "En este nivel aprenderás a programar el juego MACC (mansión, apartamento, cabaña, casa). En este juego puedes predecir para todos los jugadores a la vez, cuál será su futuro.\n\n### Ejercicio\nLlena los huecos en blanco usando el nuevo comando que has aprendido en este nivel.\n"
                 example_code: "```\ncasas = mansión, apartamento, cabaña, casa\nama = nadie, alguien de la realeza, su vecino, su verdadero amor\nmascotas = perro, gato, elefante\nnombres = Jenna, Ryan, Jim\n_\n    {print} nombre ' vive en una ' casas {at} {random}\n    {print} nombre ' se casará con ' ama {at} {random}\n    {print} nombre ' tendrá un ' mascotas {at} {random} ' como su mascota.'\n    {sleep}\n```\n"
-                start_code: '# pon tú código aquí'
+                start_code: 'Escribe tu código aquí #'
             6:
                 story_text: "En este nivel puedes usar matemáticas para en tus predicciones de adivino. Esto te permite crear fórmulas (bobas) para calcular el futuro.\nPor ejemplo, puedes calcular cuán rico vas a ser o cuantos niños vas a tener cuando crezcas.\n\n\n\n### Ejercicio\n¿Puedes pensar en tu (boba) máquina adivina?\n"
                 example_code: "```\n{print} '¡Soy Hedy el adivino!'\n{print} '¡Puedo predecir cuántos hijos tendrás cuando crezcas!'\nedad = {ask} '¿Cuántos años tienes?'\nhermanos = {ask} '¿Cuántos hermanos tienes?'\naltura = {ask} '¿Qué altura tienes en centímetros?'\nniños = altura / edad\nniños = niños - hermanos\n{print} 'Tendrás...'\n{sleep}\n{print} niños ' niños!'\n```\n"
