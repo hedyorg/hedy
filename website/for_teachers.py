@@ -369,7 +369,7 @@ class ForTeachersModule(WebsiteModule):
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
                 # remove from customizations adventures that we have removed
-                self.purge_customizations(customizations['sorted_adventures'], default_adventures)
+                self.purge_customizations(customizations['sorted_adventures'], default_adventures, teacher_adventures)
             # it uses the old way so convert it to the new one
             elif 'adventures' in customizations:
                 customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
@@ -411,13 +411,14 @@ class ForTeachersModule(WebsiteModule):
 
         return customizations, adventures, adventure_names, available_adventures, min_level
 
-    # This function is used to remove from the customizations default adventures that we have removed
-    # Otherwise they might cause an error when the students try to access a level
-
-    def purge_customizations(self, sorted_adventures, adventures):
+    # Remove adventures from customizations that aren't in use anymore
+    # They can be default and therefore we removed then, or from the teacher
+    # and tehrefore removed by the user
+    def purge_customizations(self, sorted_adventures, adventures, teacher_adventures):
+        teacher_adventures_set = {adventure['id'] for adventure in teacher_adventures}
         for _, adventure_list in sorted_adventures.items():
             for adventure in list(adventure_list):
-                if not adventure['from_teacher'] and adventure['name'] not in adventures:
+                if adventure['name'] not in adventures and adventure['name'] not in teacher_adventures_set:
                     adventure_list.remove(adventure)
 
     def get_unused_adventures(self, adventures, teacher_adventures_db, adventure_names):
