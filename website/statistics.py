@@ -1175,7 +1175,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
     for level, adventure_list in customizations['sorted_adventures'].items():
         adventures_for_level = []
         for adventure in list(adventure_list):
-            if adventure['name'] == 'next':
+            if adventure['name'] == 'next' or adventure['name'] not in adventure_names:
                 continue
             adventure_key = adventure['name']
 
