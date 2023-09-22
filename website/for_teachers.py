@@ -87,7 +87,10 @@ class ForTeachersModule(WebsiteModule):
         page_title = content.get('title', '')
         sections = {section['key']: section for section in content['sections']}
         section_titles = [(section['key'], section.get('title', '')) for section in content['sections']]
-        current_section = sections.get(section_key)
+        try:
+            current_section = sections[section_key]
+        except KeyError:
+            current_section = content['sections'][0]
 
         if not current_section:
             return utils.error_page(error=404, ui_message=gettext("page_not_found"))
