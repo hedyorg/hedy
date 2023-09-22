@@ -306,7 +306,15 @@ class LiveStatisticsModule(WebsiteModule):
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        # For authorization purposes only admins can do this lookup by the class teacher,
+        # more or less impersonating the teacher. We can consider doing the lookup by the
+        # teacher field in any case if we don't care about security in this private method.
+        if is_admin(user):
+            teacher_name = class_["teacher"]
+        else:
+            teacher_name = user["username"]
+        teacher_adventures = self.db.get_teacher_adventures(teacher_name)
         customizations = get_customizations(self.db, class_id)
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
