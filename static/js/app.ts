@@ -9,7 +9,7 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { load_variables, returnLinesWithoutBreakpoints } from './debugging';
+import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
@@ -127,6 +127,8 @@ export function initializeApp(options: InitializeAppOptions) {
   theLevel = options.level;
   theKeywordLanguage = options.keywordLanguage;
   theStaticRoot = options.staticRoot ?? '';
+  // When we are in Alpha or in dev the static root already points to an internal directory
+  theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
@@ -194,6 +196,11 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
+    initializeDebugger({
+      editor: theGlobalEditor,    
+      level: theLevel,
+      language: theLanguage,
+    });
   }
 
   const anchor = window.location.hash.substring(1);
@@ -336,6 +343,11 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
   attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
+  initializeDebugger({
+    editor: theGlobalEditor,    
+    level: theLevel,
+    language: theLanguage,
+  });
 }
 
 export function initializeHighlightedCodeBlocks(where: Element) {
@@ -538,7 +550,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
-          theGlobalEditor.markers.highlightAceError(response.Location[0], response.Location[1]);
+          theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
         }
         $('#stopit').hide();
         $('#runit').show();
