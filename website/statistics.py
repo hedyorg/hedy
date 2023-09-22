@@ -1,5 +1,4 @@
 from collections import namedtuple
-from datetime import date
 from enum import Enum
 
 from flask import g, jsonify, request
@@ -1229,30 +1228,6 @@ def _collect_graph_data(data, window_size=5):
     slice = window_size if len(graph_data) > window_size else 0
 
     return graph_data[-slice:], labels[-slice:]
-
-
-def get_general_class_stats(students):
-    # g.db instead of self.db since this function is not on a class
-    current_week = g.db.to_year_week(date.today())
-    data = g.db.get_program_stats(students, None, None)
-    successes = 0
-    errors = 0
-    weekly_successes = 0
-    weekly_errors = 0
-
-    for entry in data:
-        entry_successes = int(entry.get("successful_runs", 0))
-        entry_errors = sum([v for k, v in entry.items() if k.lower().endswith("exception")])
-        successes += entry_successes
-        errors += entry_errors
-        if entry.get("week") == current_week:
-            weekly_successes += entry_successes
-            weekly_errors += entry_errors
-
-    return {
-        "week": {"runs": weekly_successes + weekly_errors, "fails": weekly_errors},
-        "total": {"runs": successes + errors, "fails": errors},
-    }
 
 
 def get_customizations(db, class_id):

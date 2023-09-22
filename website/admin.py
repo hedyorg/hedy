@@ -4,7 +4,6 @@ from flask_babel import gettext
 import hedyweb
 import utils
 from website.flask_helpers import render_template
-from website import statistics
 from website.auth import (
     create_verify_link,
     current_user,
@@ -124,32 +123,6 @@ class AdminModule(WebsiteModule):
             current_page="admin",
             javascript_page_options=dict(page='admin-users'),
         )
-
-    @route("/classes", methods=["GET"])
-    @requires_admin
-    def get_admin_classes_page(self, user):
-        classes = [
-            {
-                "name": Class.get("name"),
-                # replace email by username for easier communication
-                "teacher": Class.get("teacher"),
-                "email": self.db.user_by_username(Class.get("teacher")).get("email"),
-                "created": utils.localized_date_format(Class.get("date")),
-                "students": len(Class.get("students")) if "students" in Class else 0,
-                "stats": statistics.get_general_class_stats(Class.get("students", [])),
-                "id": Class.get("id"),
-                "weekly_runs": statistics.get_general_class_stats(Class.get("students", []))["week"]["runs"]
-            }
-            for Class in self.db.all_classes()
-        ]
-
-        active_classes = [x for x in classes if x["weekly_runs"] > 0]
-        # classes = sorted(classes, key=lambda d: d["weekly_runs"], reverse=True)
-
-        return render_template("admin/admin-classes.html",
-                               active_classes=active_classes,
-                               classes=classes,
-                               page_title=gettext("title_admin"))
 
     @route("/adventures", methods=["GET"])
     @requires_admin
