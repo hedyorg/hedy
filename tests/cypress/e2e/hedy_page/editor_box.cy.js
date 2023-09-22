@@ -26,7 +26,7 @@ describe.only('Test editor box functionality', () => {
     cy.visit(`${Cypress.env('hedy_page')}#default`);
     cy.get('#editor > .ace_scroller > .ace_content').click();
     // empty textarea
-    cy.focused().clear()
+    cy.get('#editor').clear()
   });
   
   it('Ask modal should hold input and the answer should be shown in output', () => {
