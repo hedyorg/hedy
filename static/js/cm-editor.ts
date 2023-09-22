@@ -7,23 +7,26 @@ import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
 
 
-const addErrorLine = StateEffect.define<{row: number}>()
+const addErrorLine = StateEffect.define<{row: number}>();
 const addErrorWord = StateEffect.define<{row: number, col: number}>();
-const removeErrorMarkers = StateEffect.define<void>()
+const removeErrorMarkers = StateEffect.define<void>();
+
+const addDebugLine = StateEffect.define<{row: number}>();
+const removeDebugLine = StateEffect.define<void>();
 
 const errorLineField = StateField.define<DecorationSet>({
     create() {
-      return Decoration.none
+      return Decoration.none;
     },
     update(errors, tr) {
-      errors = errors.map(tr.changes)
+      errors = errors.map(tr.changes);
       for (let e of tr.effects) {
         if (e.is(addErrorLine)) {
             // Get line given the row number
             const line = tr.state.doc.line(e.value.row);
             errors = errors.update({
                 add: [errorHighlightLine.range(line.from, line.from)]
-            })
+            });
         } else if(e.is(addErrorWord)) {
             const line = tr.state.doc.line(e.value.row);
             const length = line.text.slice(e.value.col - 1).split(/(\s+)/)[0].length;
@@ -34,7 +37,7 @@ const errorLineField = StateField.define<DecorationSet>({
             } else { // If we can't find the word, highlight the whole line
                 errors = errors.update({
                     add: [errorHighlightLine.range(line.from, line.from)]
-                })
+                });
             }
         }
         else if (e.is(removeErrorMarkers)) {
@@ -42,22 +45,49 @@ const errorLineField = StateField.define<DecorationSet>({
             return Decoration.none;
         }
       } 
-      return errors
+      return errors;
+    },
+    provide: f => EditorView.decorations.from(f)
+});
+
+const debugLineField = StateField.define<DecorationSet>({
+    create() {
+      return Decoration.none;
+    },
+    update(errors, tr) {
+      errors = errors.map(tr.changes);
+      for (let e of tr.effects) {
+        if (e.is(addDebugLine)) {
+            // Get line given the row number
+            const line = tr.state.doc.line(e.value.row);
+            errors = errors.update({
+                add: [debugLine.range(line.from, line.from)]
+            });
+        } else if (e.is(removeDebugLine)) {
+            // Just return the empty decoration set to remove all of the errors
+            return Decoration.none;
+        }
+      } 
+      return errors;
     },
     provide: f => EditorView.decorations.from(f)
 })
   
-const errorHighlightLine = Decoration.line({class: "cm-error-editor"})
-const errorHighlightMark = Decoration.mark({class: "cm-error-editor"})
+const errorHighlightLine = Decoration.line({class: "cm-error-editor"});
+const errorHighlightMark = Decoration.mark({class: "cm-error-editor"});
 
+const debugLine = Decoration.line({class: "cm-debugger-current-line"});
 
-const errorHighlightTheme = EditorView.theme({
+const decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
         outline: "2px solid #F56565",
         backgroundColor: "rgba(66, 153, 225, 0.7)",
         color: "white"
     },
-})
+    ".cm-debugger-current-line": {
+        backgroundColor: "#2D6099"
+    },
+});
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -104,7 +134,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         change: true,
         guttermousedown: true,
         changeBreakpoint: true
-      });
+    });
+    private currentDebugLine?: number;
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
         console.log(editorType, dir);
@@ -140,7 +171,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
-                Prec.high(errorHighlightTheme)
+                debugLineField,
+                Prec.high(decorationsTheme)
             ]
         });
         this.view = new EditorView({
@@ -303,7 +335,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * 'row' and 'col' are 1-based.
      */
     highlightError(row: number, col?: number) {
-        console.log(row, col);
         let effect: StateEffect<{row: number, col?: number}>;
         if (col === undefined) {
             effect = addErrorLine.of({row});
@@ -321,9 +352,26 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     /**
      * Set the current line in the debugger
      */
-    setDebuggerCurrentLine(line: number | undefined) {
-        // pass
-        console.log(line);
+    setDebuggerCurrentLine(line: number | undefined) {        
+        line = line === undefined ? line : line + 1;
+
+        if (this.currentDebugLine === line) {
+            return;
+        }
+
+        if (this.currentDebugLine) {
+            this.view.dispatch({ effects: removeDebugLine.of() });
+        }
+
+        if (line === undefined) {
+            this.currentDebugLine = undefined;
+            return;
+        }
+
+        this.currentDebugLine = line;
+        let effect: StateEffect<{row: number}>;
+        effect = addDebugLine.of({row: line});
+        this.view.dispatch({effects: effect});
     }
 
     /**
