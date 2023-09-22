@@ -944,13 +944,13 @@ adventures:
             13:
                 story_text: |2
 
-                          ### Ejercicio 1
-                          Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
+                    ### Ejercicio 1
+                    Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
 
-                          ### Ejercicio 2 Extra
-                          A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
-                          Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
-                          Vacíe el campo de programación y cree su propia solución.
+                    ### Ejercicio 2 Extra
+                    A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
+                    Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
+                    Vacíe el campo de programación y cree su propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu código aquí'
     restaurant:
@@ -1219,7 +1219,7 @@ adventures:
                 example_code: "```\n{print} '¡La hucha virtual!'\ndeseo = {ask} '¿Qué quieres comprar?'\nprecio = {ask} '¿Cuánto cuesta?'\nahorrado = {ask} '¿Cuánto dinero tienes ahorrado?'\npaga = {ask} '¿Cuánto dinero obtienes por semana?'\na_ahorrar = precio - ahorrado\nsemanas = a_ahorrar / paga\n{print} 'Podrás comprar un ' _ ' en ' _ ' semanas.'\n```\n"
                 start_code: '# pon tu código aquí'
             14:
-                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\npagar = {ask} '¿Cuánto dinero de bolsillo recibes cada semana?'\nto_save = deseo - dinero\nsemanas = para_ahorrar / paga\n{if} deseo > dinero\n    {print} '¡Tienes que ahorrar un poco más!'\n    {print} 'Necesitarás ' semanas ' más semanas'.\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos de compras!'\n```\n"
+                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\npagar = {ask} '¿Cuánto dinero de bolsillo recibes cada semana?'\nto_save = deseo - dinero\nsemanas = para_ahorrar / paga\n{if} deseo > dinero\n    {print} '¡Tienes que ahorrar un poco más!'\n    {print} 'Necesitarás ' semanas ' más semanas.'\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos de compras!'\n```\n"
                 story_text: "¡En este nivel puedes hacer que Hedy te diga si has ahorrado suficiente dinero!\n"
                 start_code: '# pon tu código aquí'
         name: Cerdito hucha
