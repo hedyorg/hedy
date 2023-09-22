@@ -1595,10 +1595,13 @@ adventures:
                     Check out this example to find out how.
                 example_code: |
                     ```
-                    amis {is} Jonathan, Lucy, David
-                    {print} "Je peux prédire si tu va gagner à la lottery demain !"
-                    personne {is} {ask} "Qui est-tu ?"
-                    bonne_réponse {is} Hourra ! Tu as gagné ! tu va vraiment gagner ! Nous avon un gagnant !
+                    amis {is} Jonathan, Lucile, David
+                    {print} "Je peux prédire si tu vas gagner à la loterie demain !"
+                    personne {is} {ask} "Qui es-tu ?"
+                    bonnes_réponses {is} Hourra ! Tu as gagné !, Tu vas certainement gagner !, Nous avons un gagnant !
+                    mauvaises_réponses {is} Pas de chance ! Essaye encore !, C'est une autre personne qui gagnera, Tu as perdu !
+                    {if} personne {in} amis {print} bonnes_réponses {at} {random}
+                    {else} {print} mauvaises_réponses {at} {random}
                     ```
                 start_code: "# écrit ton code ici"
             6:
