@@ -1611,6 +1611,7 @@ def main_page():
 def subscribe():
     return render_template('subscribe.html', current_page='subscribe')
 
+
 @app.route('/learn-more')
 def learn_more():
     learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
