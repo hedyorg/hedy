@@ -11,11 +11,11 @@ yaml_writer = yaml.YAML(typ="rt")
 
 def main():
     any_failure = False
-    for reference_file in glob.glob('content/*/en.yaml'):
+    for reference_file in glob.glob('content/pages/en.yaml'):
         en = load_yaml(reference_file)
         structure_dir = path.basename(path.dirname(reference_file))
 
-        mismatches = {comparison_file: find_mismatched_arrays(en, load_yaml(comparison_file))
+        mismatches = {comparison_file: find_mismatched_arrays(en, load_yaml(comparison_file), structure_dir)
                       for comparison_file in glob.glob(f'content/{structure_dir}/*.yaml')
                       if comparison_file != reference_file}
         mismatches = {file: mis for file, mis in mismatches.items() if mis}
@@ -55,17 +55,25 @@ def main():
 Mismatch = collections.namedtuple('Mismatch', ('left', 'right'))
 
 
-def find_mismatched_arrays(reference, other):
+def find_mismatched_arrays(reference, other, dir_name):
     """Recurse through the given structure and find mismatched arrays.
 
     Disregard mismatched structure, if types aren't correct or not all
     object keys are present, we don't care about that (Weblate will fix it
     later, but Weblate can't fix array mismatches).
+
+    We also check some additional things, based on the structure we expect.
+    (See https://github.com/hedyorg/hedy/pull/4527 for motivation)
     """
     ret = {}
 
     def recurse(ref, oth, p):
         if isinstance(ref, dict) and isinstance(oth, dict):
+            if dir_name == 'pages' and len(p) == 2 and p[0] == '.sections':
+                if 'key' in ref and 'key' in oth:
+                    if ref['key'] == 'intro' and oth['key'] != ref['key']:
+                        raise Exception(f'{oth["key"]} should be the value {ref["key"]}')
+
             for key in set(ref.keys()) & set(oth.keys()):
                 recurse(ref[key], oth[key], p + [f'.{key}'])
             return
