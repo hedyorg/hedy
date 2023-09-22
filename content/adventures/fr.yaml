@@ -1596,10 +1596,10 @@ adventures:
                 example_code: |
                     ```
                     amis {is} Jonathan, Lucile, David
-                    {print} "Je peux prédire si tu vas gagner à la loterie demain !"
-                    personne {is} {ask} "Qui es-tu ?"
+                    {print} 'Je peux prédire si tu vas gagner à la loterie demain !'
+                    personne {is} {ask} 'Qui es-tu ?'
                     bonnes_réponses {is} Hourra ! Tu as gagné !, Tu vas certainement gagner !, Nous avons un gagnant !
-                    mauvaises_réponses {is} Pas de chance ! Essaye encore !, C'est une autre personne qui gagnera, Tu as perdu !
+                    mauvaises_réponses {is} Pas de chance ! Essaye encore !, C`est une autre personne qui gagnera, Tu as perdu !
                     {if} personne {in} amis {print} bonnes_réponses {at} {random}
                     {else} {print} mauvaises_réponses {at} {random}
                     ```
