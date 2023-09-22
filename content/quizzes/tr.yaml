@@ -305,111 +305,111 @@ levels:
             hint: "Dramatik bir etki için kısa bir süre duraklayın."
             question_score: '10'
         7:
-            question_text: "What command should be used on line 2?"
+            question_text: "Satır 2'de hangi komut kullanılmalıdır?"
             code: |-
-                {print} I will explode in 3 seconds!
-                _?_
+                {print} Üç saniye içinde patlayacağım!
+                _
                 {print} BOOM!
             mp_choice_options:
             -   option: |
                     ```
                     {print} 3
                     ```
-                feedback: "You don't need to `{print}`"
+                feedback: "`{print}` yapmanıza gerek yok"
             -   option: |
                     ```
                     {sleep} 3
                     ```
-                feedback: "Perfect!"
+                feedback: "Mükemmel!"
             -   option: |
                     ```
                     {sleep}
                     ```
-                feedback: "This way the bomb will explode in 1 second"
+                feedback: "Böyle olursa bomba 1 saniye içinde patlayacak"
             -   option: |
                     ```
                     {sleep} {sleep} {sleep}
                     ```
-                feedback: "Make it easier on yourself by using the number 3"
+                feedback: "Üç rakamını kullanarak işinizi kolaylaştırın"
             correct_answer: "B"
-            hint: "You want the computer to wait for 3 seconds"
+            hint: "Bilgisayarın 3 saniye beklemesini istiyorsunuz"
             question_score: '10'
         8:
-            question_text: "How would you correct the first line of code?"
+            question_text: "Bu kodun ilk satırındaki sorunu nasıl düzeltirsiniz?"
             code: |-
-                {ask} {is} How old are you?
-                {print} age
+                {ask} {is} Kaç yaşındasın sen?
+                {print} yaş
             mp_choice_options:
             -   option: |
                     ```
-                    age {ask} {is} How old are you?
+                    yaş {ask} {is} Kaç yaşındasın sen?
                     ```
-                feedback: "That is the wrong order"
+                feedback: "Bunun sıralaması yanlış"
             -   option: |
                     ```
-                    {ask} {is} age How old are you?
+                    {ask} {is} yaş Kaç yaşındasın sen?
                     ```
-                feedback: "That is the wrong order"
+                feedback: "Bunun sıralaması yanlış"
             -   option: |
                     ```
-                    age {is} {ask} How old are you?
+                    yaş {is} {ask} Kaç yaşındasın sen?
                     ```
-                feedback: "You get it!"
+                feedback: "Anladın sen onu!"
             -   option: |
                     ```
-                    age {is} How old are you?
+                    yaş {is} Kaç yaşındasın sen?
                     ```
-                feedback: "Where is the `{ask}` command?"
+                feedback: "`{ask}` komutu nerede?"
             correct_answer: "C"
-            hint: "The variable name should come first"
+            hint: "Değişken adı ilk önce gelmelidir"
             question_score: '10'
         9:
-            question_text: "What is going wrong in this code?"
+            question_text: "Bu kodda yanlış olan nedir?"
             code: |-
-                dogs {is} animal
-                {print} I love animal
+                köpekler {is} hayvan
+                {print} Benim sevdiğim hayvan
             mp_choice_options:
-            -   option: "Line 1 should say: dogs `{is}` animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 1 should say: animal `{is}` dogs"
-                feedback: "Great!"
-            -   option: "Line 2 should say: `{print}` I love animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 2 should say: `{sleep}` I love animals"
-                feedback: "Sleep is not used to `{print}` text"
+            -   option: "Satır 1 şöyle olmalıdır: köpekler `{is}` hayvanlar"
+                feedback: "Değişken adımız hayvan"
+            -   option: "Satır 1 şöyle olmalıdır: hayvan `{is}` köpekler"
+                feedback: "Harika!"
+            -   option: "Satır 2 şöyle olmalıdır: `{print}` Benim sevdiğim hayvanlar"
+                feedback: "Değişkenin adı hayvan"
+            -   option: "Satır 2 şöyle olmalıdır: `{sleep}` Benim sevdiğim hayvanlar"
+                feedback: "Uyku, bir metni `{print}` etmek için kullanılmaz"
             correct_answer: "B"
-            hint: "You want to `{print}` 'I love dogs'"
+            hint: "'Benim sevdiğim köpekler' ifadesini `{print}` etmek istiyorsunuz"
             question_score: '10'
         10:
-            question_text: "What command should be used on the line 1?"
+            question_text: "Satır 1'de boşlukta hangi komut kullanılmalıdır?"
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                aroma {is} _
+                {print} En sevdiğim dondurma...
                 {sleep}
-                {print} flavor
+                {print} aroma
             mp_choice_options:
             -   option: |
                     ```
                     {sleep} 3
                     ```
-                feedback: "You want to know the favorite flavor!"
+                feedback: "En sevdiğiniz aromayı bilmek istiyorsunuz!"
             -   option: |
                     ```
-                    {print} strawberries
+                    {print} çilekli
                     ```
-                feedback: "You do not want a `{print}` command at the middle of the line..."
+                feedback: "Satırın ortasında bir `{print}` komutu istemezsiniz..."
             -   option: |
                     ```
-                    strawberries, chocolate, vanilla
+                    çilekli, çikolatalı, vanilyalı
                     ```
-                feedback: "This way you are making a list. You don't want that now."
+                feedback: "Bu şekilde bir liste yapıyorsunuz. Bunu şimdilik istemezsin."
             -   option: |
                     ```
-                    {ask} What flavor icecream do you like?
+                    {ask} Hangi aromalı dondurmayı seversin?
                     ```
-                feedback: "That's right!"
+                feedback: "Bu doğru!"
             correct_answer: "D"
-            hint: "You want to `{ask}` a question"
+            hint: "`{ask}` kullanıp bir soru sormak istiyorsunuz"
             question_score: '10'
     3:
         1:
