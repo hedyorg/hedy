@@ -9,7 +9,7 @@ import { deleteTrailingWhitespace } from '@codemirror/commands'
 
 const addErrorLine = StateEffect.define<{row: number}>()
 const addErrorWord = StateEffect.define<{row: number, col: number}>();
-const removeErrorLines = StateEffect.define<void>()
+const removeErrorMarkers = StateEffect.define<void>()
 
 const errorLineField = StateField.define<DecorationSet>({
     create() {
@@ -31,13 +31,14 @@ const errorLineField = StateField.define<DecorationSet>({
                 errors = errors.update({
                     add: [errorHighlightMark.range(line.from + e.value.col - 1, line.from + e.value.col - 1 + length)]
                 });
-            } else { // Might not be the best to highlight the whole line but rather just the previous word?                
+            } else { // If we can't find the word, highlight the whole line
                 errors = errors.update({
                     add: [errorHighlightLine.range(line.from, line.from)]
                 })
             }
         }
-        else if (e.is(removeErrorLines)) {
+        else if (e.is(removeErrorMarkers)) {
+            // Just return the empty decoration set to remove all of the errors
             return Decoration.none;
         }
       } 
@@ -46,12 +47,12 @@ const errorLineField = StateField.define<DecorationSet>({
     provide: f => EditorView.decorations.from(f)
 })
   
-const errorHighlightLine = Decoration.line({class: "cm-error-line"})
-const errorHighlightMark = Decoration.mark({class: "cm-error-line"})
+const errorHighlightLine = Decoration.line({class: "cm-error-editor"})
+const errorHighlightMark = Decoration.mark({class: "cm-error-editor"})
 
 
 const errorHighlightTheme = EditorView.theme({
-    ".cm-error-line": {
+    ".cm-error-editor": {
         outline: "2px solid #F56565",
         backgroundColor: "rgba(66, 153, 225, 0.7)",
         color: "white"
@@ -216,7 +217,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * Clears the errors and annotations in the editor
      */
     clearErrors(): void {
-        let effect: StateEffect<void> = removeErrorLines.of();
+        let effect: StateEffect<void> = removeErrorMarkers.of();
         this.view.dispatch({effects: effect});
     }
 
@@ -295,7 +296,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      *
      * If 'col' is not given, the entire line will be highlighted red. Otherwise
      * the character at 'col' will be highlighted, optionally extending for
-     * 'length' characters.
+     * 'length' characters, unless the length of the string to highlight is 0.
+     * 
+     * If that's the case, highlight the whole line
      *
      * 'row' and 'col' are 1-based.
      */
@@ -306,9 +309,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             effect = addErrorLine.of({row});
         } else {
             effect = addErrorWord.of({row, col});
-        }        
-        let effects: StateEffect<{row: number, col?: number}>[] = [effect]
-        this.view.dispatch({effects})
+        }
+        this.view.dispatch({effects: effect})
     }
 
     /**
