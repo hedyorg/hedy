@@ -1521,21 +1521,21 @@ adventures:
                     ```
                 start_code: "# écrit ton code ici"
     fortune:
-        name: "Le devin"
+        name: "La voyante"
         description: "Demandons à Hedy de prédire le futur"
-        default_save_name: "Le devin"
+        default_save_name: "La voyante"
         levels:
             1:
                 story_text: |
-                    As-tu déjà été à un carnaval et u ton futur prédit par un devin ? Ou déjà joué avec une boule de cristal ?
-                    Alors tu sais probablement qu'ils ne peuvent pas réellement prédire ton futur, mais que c'est quand même amusant d'y jouer !
+                    As-tu déjà été à un carnaval et u ton futur prédit par une voyante ? Ou déjà joué avec une boule de cristal ?
+                    Alors tu sais probablement qu'elles ne peuvent pas réellement prédire ton futur, mais que c'est quand même amusant d'y jouer !
 
                     Avec les nivaux à venir tu pourras apprendre comment créer ta propre machine à prédire l'avenir.
-                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter lui-même comme un devin et le laisser `{echo}` les réponses des joueurs.
+                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter lui-même comme une voyante et la laisser `{echo}` les réponses des joueurs.
                     Comme ceci :
                 example_code: |
                     ```
-                    _ Bonjour, je suis Hedy le devin
+                    _ Bonjour, je suis Hedy la voyante
                     _ Qui es-tu ?
                     _ Laisse moi regarder dans ma boule de cristal
                     _ Je vois… je vois…
@@ -1544,7 +1544,7 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Copie l'exemple de code dans la zone de programmation et complète les espaces vides roses pour faire marcher le code.
-                    **En plus** Change le code pour que le devin, non seulement prédise ton nom, mais également ton âge, ton équipe de sport favori et quelque chose d'autre à ton sujet.
+                    **En plus** Change le code pour que la voyante, non seulement prédise ton nom, mais également ton âge, ton équipe de sport favori et quelque chose d'autre à ton sujet.
                 start_code: "# écrit ton code ici"
             3:
                 story_text: |
@@ -1552,13 +1552,13 @@ adventures:
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |
                     ```
-                    {print} I’m Hedy the fortune teller!
-                    question {is} {ask} What do you want to know?
-                    {print} This is what you want to know: question
-                    answers {is} yes, no, maybe
-                    {print} My crystal ball says...
+                    {print} Je suis Hedy la voyante
+                    question {is} {ask} Que veux-tu savoir ?
+                    {print} Voici ce que tu veux savoir : question
+                    réponses {is} oui, non, peut-être
+                    {print} Ma boule de cristal dit...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} réponses {at} {random}
                     ```
                 story_text_2: |
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
@@ -1566,13 +1566,13 @@ adventures:
             4:
                 story_text: |
                     Ce niveau n'ajoute pas de nouvelles fonctions, mais te permet de t'entrainer à utiliser les guillemets.
-                    Tu peux refaire ton code du niveau 3, et assure-toi d'ajouter les guillemets aux bons endroits !
+                    Tu peux refaire ton code du niveau 3, et assure-toi d'ajouter les guillemets aux bons endroits !
 
-                    Rappelles-toi qu'au niveau 3, on ne pouvait pas utiliser le mot 'question' en même temps en nom de variable et en mot normal à afficher.
-                    Les guillemets du niveau 4 le rendent possible !
+                    Rappelle-toi qu'au niveau 3, on ne pouvait pas utiliser le mot « question » à la fois en nom de variable et en mot normal à afficher.
+                    Les guillemets du niveau 4 rendent ça possible !
 
                     ### Exercice
-                    Nous avons retiré toutes les guillemets de cet exemple de code, peux-tu les ajouter à tous les bons endroits ?
+                    Nous avons retiré toutes les guillemets de cet exemple de code, peux-tu les ajouter à tous les bons endroits ?
 
                     ### Exercice 2
                     Retourne au niveau précédent et copie ton code de la voyante. Fais fonctionner le code dans ce niveau en ajoutant les guillemets aux bons endroits.
@@ -1595,10 +1595,10 @@ adventures:
                     Check out this example to find out how.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    amis {is} Jonathan, Lucy, David
+                    {print} "Je peux prédire si tu va gagner à la lottery demain !"
+                    personne {is} {ask} "Qui est-tu ?"
+                    bonne_réponse {is} Hourra ! Tu as gagné ! tu va vraiment gagner ! Nous avon un gagnant !
                     ```
                 start_code: "# écrit ton code ici"
             6:
