@@ -1,7 +1,5 @@
-import {  theLevel, theLanguage} from "./app";
+import { theLevel } from "./app";
 import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } from "./editor";
-import { initializeDebugger } from "./debugging";
-import { Markers } from "./markers";
 import { EventEmitter } from "./event-emitter";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
@@ -26,7 +24,7 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
    */
   initializeReadOnlyEditor(preview: HTMLElement, dir: string = "ltr"): HedyEditor {
     let editorType: EditorType;
-  
+
     if ($(preview).hasClass('common-mistakes')) {
       editorType = EditorType.COMMON_MISTAKES;
     } else if ($(preview).hasClass('cheatsheet')) {
@@ -40,12 +38,19 @@ export class HedyAceEditorCreator implements HedyEditorCreator {
     return new HedyAceEditor(preview, true, editorType, dir);
   }
 }
-  
+
 export class HedyAceEditor implements HedyEditor {
   private _editor: AceAjax.Editor;
-  private _markers?: Markers;
-  private editorEvent = new EventEmitter<EditorEvent>({change: true});
-  
+  private editorEvent = new EventEmitter<EditorEvent>({
+    change: true,
+    guttermousedown: true,
+    changeBreakpoint: true
+  });
+  private markerClasses = new Map<number, string>();
+  private currentLineMarker?: MarkerLocation;
+  // Map line numbers to markers
+  private strikeMarkers = new Map<number, number>();
+
   /**
    * 
    * @param {HTMLElement} element the element that will contain this editor
@@ -74,37 +79,36 @@ export class HedyAceEditor implements HedyEditor {
       });
       // A bit of margin looks better
       this._editor.renderer.setScrollMargin(3, 3, 10, 20)
-      
+
       // It's an example editor
       // Fits to content size
-      this._editor.setOptions({ maxLines: Infinity });     
-      if(editorType === EditorType.CHEATSHEET) {
+      this._editor.setOptions({ maxLines: Infinity });
+      if (editorType === EditorType.CHEATSHEET) {
         this._editor.setOptions({ minLines: 1 });
-      } else if(editorType === EditorType.COMMON_MISTAKES) {
+      } else if (editorType === EditorType.COMMON_MISTAKES) {
         this._editor.setOptions({
           showGutter: true,
           showPrintMargin: true,
           highlightActiveLine: true,
           minLines: 5,
         });
-      } else if(editorType === EditorType.PARSONS) {
+      } else if (editorType === EditorType.PARSONS) {
         this._editor.setOptions({
           minLines: 1,
           showGutter: false,
           showPrintMargin: false,
           highlightActiveLine: false
         });
-      } else if(editorType === EditorType.EXAMPLE) {
+      } else if (editorType === EditorType.EXAMPLE) {
         this._editor.setOptions({ minLines: 2 });
       }
     } else {
       if (editorType === EditorType.MAIN) {
         this._editor.setShowPrintMargin(false);
         this._editor.renderer.setScrollMargin(0, 0, 0, 20);
-        this.configureMainEditor();
       }
     }
-    
+
     // Everything turns into 'ace/mode/levelX', except what's in    
     if (theLevel) {
       this.setHighlighterForLevel(theLevel)
@@ -114,12 +118,12 @@ export class HedyAceEditor implements HedyEditor {
       this._editor.setOptions({ rtl: true });
     }
   }
-  
+
   /**
   * Set the highlither rules for a particular level
   * @param level      
   */
-  setHighlighterForLevel(level: number): void { 
+  setHighlighterForLevel(level: number): void {
     const mode = this.getHighlighter(level);
     this._editor.session.setMode(mode);
   }
@@ -145,14 +149,14 @@ export class HedyAceEditor implements HedyEditor {
   public get isReadOnly(): boolean {
     return this._editor.getReadOnly();
   }
-  
+
   /**
    * Sets the read mode of the editor
    */
   public set isReadOnly(isReadMode: boolean) {
-   this._editor.setReadOnly(isReadMode);
+    this._editor.setReadOnly(isReadMode);
   }
-  
+
   /**
    * Resizes the editor after changing its size programatically
    */
@@ -163,7 +167,7 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * Focuses the text area for the current editor
    */
-  focus(): void { 
+  focus(): void {
     this._editor.focus();
   }
 
@@ -174,13 +178,15 @@ export class HedyAceEditor implements HedyEditor {
     // Not sure if we use annotations everywhere, but this was
     // here already.
     this._editor.session.clearAnnotations();
-    this.markers?.clearErrors();
+    for (const marker of this.findMarkers('editor-error')) {
+      this.removeMarker(marker);
+    }
   }
 
   /**     
    * Moves to the cursor to the end of the current file
    */
-  moveCursorToEndOfFile(): void { 
+  moveCursorToEndOfFile(): void {
     this._editor.navigateFileEnd();
   }
 
@@ -194,23 +200,8 @@ export class HedyAceEditor implements HedyEditor {
   /**
   * Removes all breakpoints on the rows.
   **/
-  clearBreakpoints(): void { 
+  clearBreakpoints(): void {
     this._editor.session.clearBreakpoints();
-  }
-
-  /**
-   * If this editor is used as a main editor, we set the options here
-   */
-  configureMainEditor(): void {
-    this._markers = new Markers(this._editor);
-    // *** Debugger *** //
-    // TODO: FIX THIS
-    initializeDebugger({
-      editor: this._editor,
-      markers: this.markers,
-      level: theLevel,
-      language: theLanguage,
-    });
   }
 
   /**
@@ -227,10 +218,6 @@ export class HedyAceEditor implements HedyEditor {
     return `ace/mode/level${level}`;
   }
 
-  get markers(): Markers {
-    return this._markers!;
-  }
-
   /**
   * Trim trailing whitespaces
   */
@@ -245,8 +232,143 @@ export class HedyAceEditor implements HedyEditor {
   }
 
   public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
-    const ret = this.editorEvent.on(key, handler);    
-    this._editor.addEventListener(key, handler);
+    const ret = this.editorEvent.on(key, handler);
+    // This particular event needs to be attached to the session
+    if (key == 'changeBreakpoint'){
+      this._editor.session.on(key, handler);
+    } else {
+      this._editor.addEventListener(key, handler);
+    }
     return ret;
   }
+
+  /**
+   * Mark an error location in the ace editor
+   *
+   * The error occurs at the given row, and optionally has a column and
+   * and a length.
+   *
+   * If 'col' is not given, the entire line will be highlighted red. Otherwise
+   * the character at 'col' will be highlighted, optionally extending for
+   * 'length' characters.
+   *
+   * 'row' and 'col' are 1-based.
+   */
+  public highlightError(row: number, col?: number) {
+    // Set a marker on the error spot, either a fullLine or a text
+    // class defines the related css class for styling; which is fixed in styles.css with Tailwind
+    if (col === undefined) {
+      // If the is no column, highlight the whole row
+      this.addMarker(
+        new ace.Range(row - 1, 1, row - 1, 2),
+        "editor-error", "fullLine"
+      );
+      return;
+    }
+    // If we get here we know there is a column -> dynamically get the length of the error string
+    // As we assume the error is supposed to target a specific word we get row[column, whitespace].
+    const length = this._editor.session.getLine(row - 1).slice(col - 1).split(/(\s+)/)[0].length;
+    if (length > 0) {
+      // If there is a column, only highlight the relevant text
+      this.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
+        "editor-error", "text"
+      );
+    } else {
+      // If we can't find the word to highlight, highlight the whole line
+      this.addMarker(
+        new ace.Range(row - 1, 1, row - 1, 2),
+        "editor-error", "fullLine"
+      );
+    }
+  }
+
+  /**
+   * Remove all incorrect lines markers => Part of skip line feature
+   */
+  // public clearIncorrectLines() {
+  //   const markers = this.editor.session.getMarkers(true);
+
+  //   if (markers) {
+  //     for (const index in markers) {
+  //       let marker = markers[index];
+  //       if (marker.clazz.includes('ace_incorrect_hedy_code')){
+  //         this.removeMarker(Number(index));
+  //       }
+  //     }
+  //   }
+  // }
+
+  /**
+   * Set the current line in the debugger
+   */
+  public setDebuggerCurrentLine(line: number | undefined) {
+    if (this.currentLineMarker?.line === line) {
+      return;
+    }
+
+    if (this.currentLineMarker) {
+      this.removeMarker(this.currentLineMarker.id);
+    }
+
+    if (line === undefined) {
+      this.currentLineMarker = undefined;
+      return;
+    }
+
+    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    this.currentLineMarker = { line, id };
+  }
+
+  /**
+   * Mark the given set of lines as currently struck through
+   */
+  public strikethroughLines(lines: number[]) {
+    const struckLines = new Set(lines);
+
+    // First remove all markers that are no longer in the target set
+    const noLongerStruck = Array.from(this.strikeMarkers.entries())
+      .filter(([line, _]) => !struckLines.has(line))
+    for (const [line, id] of noLongerStruck) {
+      this.removeMarker(id);
+      this.strikeMarkers.delete(line);
+    }
+
+    // Then add markers for lines need to be struck
+    const newlyStruck = lines
+      .filter(line => !this.strikeMarkers.has(line));
+    for (const line of newlyStruck) {
+      const id = this.addMarker(new ace.Range(line, 0, line, 999), 'disabled-line', 'text', true);
+      this.strikeMarkers.set(line, id);
+    }
+  }
+
+  /**
+   * Add a marker and remember the class
+   */
+  private addMarker(range: AceAjax.Range, klass: string, scope: 'text' | 'line' | 'fullLine', inFront = false) {
+    const id = this._editor.session.addMarker(range, klass, scope, inFront);
+    this.markerClasses.set(id, klass);
+    return id;
+  }
+
+  private removeMarker(id: number) {
+    this._editor.session.removeMarker(id);
+    this.markerClasses.delete(id);
+  }
+
+  private findMarkers(klass: string) {
+    return Array.from(this.markerClasses.entries())
+      .filter(([_, k]) => k === klass)
+      .map(([id, _]) => id);
+  }
+  
+  public get session() {
+    return this._editor.session;
+  }
+}
+
+
+interface MarkerLocation {
+  readonly line: number;
+  readonly id: number;
 }
