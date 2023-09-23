@@ -20,7 +20,7 @@ adventures:
                     Par exemple, dans l'aventure du restaurant, tu peux re-dire ce que le client voulait manger ou ce qu'il voulait boire, mais pas les deux en une seule phrase.
                 start_code: "{print} bonjour le monde !"
                 story_text_2: "Si le joueur écrit un hamburger et un coca, il n'est pas possible de dire « donc tu voudrais un hamburger et un coca », pour le moment tu dois écrire deux lignes différentes.\nAussi, la commande `{echo}` ne sait re-dire le mot qu'à la fin de la phrase. Donc tu ne peux pas dire « ton hamburger est en route ! ».\n\nÀ partir du niveau 2, ça change. Au niveau 2, tu vas apprendre à travailler avec des variables, ce qui te permet de mémoriser plusieurs réponses et les afficher où tu veux.\nPour découvrir tout ça, allons à l'onglet suivant !\n"
-                example_code: "```\n{print} Bienvenue chez Hedy\n{ask} Que voudrais-tu manger ?\n{echo} Donc, tu voudrais\n{ask} Que voudrais-tu boire ?\n{echo} Donc, tu voudrais\n```\n"
+                example_code: "**Attention ! Ce code ne fonctionne pas !**\nDans Hedy, les commandes changeront parfois. `{echo}` par exemple, ne fonctionne qu'au niveau 1. À ce niveau tu apprendras une meilleure façon de répéter les réponses.\n```\n{print} Bienvenue chez Hedy\n{ask} Que voudrais-tu manger ?\n{echo} Donc, tu veux\n{ask} Que voudrais-tu boire ?\n{echo} Donc, tu veux\n```\n"
             3:
                 story_text: |
                     Dans le niveau précédent tu as appris ce qu'est une variable et comment tu peux l'utiliser pour rendre tes aventures plus interactives.
@@ -31,18 +31,18 @@ adventures:
             4:
                 start_code: "{print} \"Bonjour le monde\""
                 story_text: |
-                    Dans les niveaux précédents, tu t'es entrainé à utiliser les variables, mais tu as peut-être rencontré le problème suivant.
+                    Aux niveaux précédents, tu t'es entrainé à utiliser les variables, mais tu as peut-être rencontré le problème suivant.
                     Tu as peut-être essayé de lancer un code qui ressemble à ceci :
 
                     Bien sûr, tu voulais afficher
 
-                    "Mon nom est Sophie"
+                    `Mon nom est Sophie`
 
-                    mais Hedy affiche
+                    mais Hedy a affiché
 
-                    "Mon Sophie est Sophie".
+                    `Mon Sophie est Sophie`.
 
-                    Dans ce niveau, ce problème est résolu à l'aide des guillemets.
+                    À ce niveau, ce problème est résolu à l'aide des guillemets.
                 example_code: "```\nnom {is} Sophie\n{print} Mon nom est nom\n```\n"
             5:
                 start_code: |-
@@ -64,9 +64,9 @@ adventures:
                     Le niveau suivant rend possible l'addition, la soustraction et la multiplication dans tes programmes. Tu pourras calculer les prix dans ton restaurant mais aussi ajouter un code secret pour faire une réduction à tes amis et ta famille.
                     Une autre possibilité sera de programmer ton propre jeu de mathématiques, pour que ton petit frère ou ta petite sœur s'entraîne aux multiplications.
                     En selle !
-                example_code: "```\nprix_plat {is} 0\nprix_boisson {is} 0\nprix_total {is} 0\n{print} \"Bonjour chez McHedy\"\ncommande {is} {ask} \"Que désirez-vous manger ?\"\n{if} commande {is} hamburger prix_plat {is} 5\n{if} commande {is} frites prix_plat {is} 2\nboisson {is} {ask} \"Que désirez-vous boire ?\"\n{if} boisson {is} eau prix_boisson {is} 0\nelse prix_boisson {is} 3\nprix_total {is} prix_plat + prix_boisson\n{print} \"Ça fera \" prix_total \" euros, s'il vous plait\"\n```\n"
+                example_code: "```\nprix_plat {is} 0\nprix_boisson {is} 0\nprix_total {is} 0\n{print} \"Bienvenue chez McHedy\"\ncommande {is} {ask} \"Que désirez-vous manger ?\"\n{if} commande {is} hamburger prix_plat {is} 5\n{if} commande {is} frites prix_plat {is} 2\nboisson {is} {ask} \"Que désirez-vous boire ?\"\n{if} boisson {is} eau prix_boisson {is} 0\nelse prix_boisson {is} 3\nprix_total {is} prix_plat + prix_boisson\n{print} \"Ça fera \" prix_total \" euros, s'il vous plait\"\n```\n"
             7:
-                start_code: "{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire cher Hedy\"\n{print} \"Joyeux anniversaire\"\n"
+                start_code: "{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire\"\n{print} \"Joyeux anniversaire chère Hedy\"\n{print} \"Joyeux anniversaire\"\n"
                 story_text: |
                     Bon travail ! Vous avez atteint le niveau suivant, ce qui signifie que vous avez pratiqué avec `{if}` et `{else}`. Vous avez probablement remarqué que vos codes deviennent de plus en plus longs.
                     Par exemple, si vous voulez programmer 'Joyeux anniversaire'.
@@ -135,7 +135,7 @@ adventures:
             17:
                 start_code: |-
                     {print} "Allons au niveau suivant !"
-                story_text: "Tu as presque atteint le dernier niveau de Hedy, félicitations ! Dans ce niveau, tu apprendras une véritable façon d'utiliser `{print}` en Python.\n"
+                story_text: "Maintenant nous allons changer les indentations un petit peu. Chaque fois que nous aurons besoin d'une indentation, nous aurons besoin d'écrire `:` à la ligne précédant l'indentation.\n\nÀ ce niveau tu peux aussi utiliser une nouvelle commande : `{elif}`. `{elif}` est un raccourci pour `{else} {if}` et tu en as besoin quand tu veux faire 3 (ou plus !) options.\nVérifions ça !\n"
             18:
                 start_code: |-
                     {print} ("Félicitations !!!")
@@ -411,14 +411,14 @@ adventures:
                 example_code: |
                     ```
                     {print} Je suis Hedy le perroquet
-                    nom _ _ Quel est ton nom ? 
+                    nom _ _ Quel est ton nom ?
                     {print} nom
-                    {sleep}
+                    _
                     {print} craque
-                    {sleep}
+                    _
                     {print} nom
                     ```
-                start_code: "{print} Je suis Hedy le perroquet !"
+                start_code: "{print} Je suis Hedy le perroquet !"
                 story_text_2: "### Exercice\nPour commencer, termine la ligne 2 avec une commande `{is}` et une commande `{ask}`.\nEnsuite, écrit une commande `{sleep}` aux lignes 4 et 6 pour que le perroquet se calme un petit peu.\n\n**En plus** Peux-tu faire que le perroquet demande plus que ton nom, en ajoutant des lignes de code ?\n"
             3:
                 story_text: |
@@ -427,11 +427,11 @@ adventures:
                     Peux-tu ajouter la commande `{add} {to}` pour faire marcher le code ?
                 example_code: |
                     ```
-                    mots {is} craque, Hedy
-                    {print} Entraine ton perroquet !
-                    nouveau_mot {is} {ask} Quel mot veux-tu lui apprendre ?
+                    mots {is} coco, Hedy
+                    {print} Entraine ton perroquet !
+                    nouveau_mot {is} {ask} Quel mot veux-tu lui apprendre ?
                     _ nouveau_mot _ mots
-                    {print} 🧒 Dit nouveau_mot , Hedy !
+                    {print} 🧒 Dit nouveau_mot , Hedy !
                     {print} 🦜 mots {at} {random}
                     ```
                 start_code: "# écrit ton code ici"
@@ -440,20 +440,20 @@ adventures:
                     Récompense ton perroquet s'il dit le bon mots !
                 example_code: |
                     ```
-                    mots {is} cri, Hedy
-                    {print} 'Entraîne ton perroquet !'
-                    nouveau_mot {is} {ask} 'Quel mot veux-tu lui apprendre ?'
+                    mots {is} coco, Hedy
+                    {print} "Entraîne ton perroquet !"
+                    nouveau_mot {is} {ask} "Quel mot veux-tu lui apprendre ?"
                     {add} nouveau_mot {to_list} mots
                     mot_dit {is} mots {at} {random}
-                    {print} '🧒 Dis ' nouveau_mot ', Hedy !'
-                    {print} '🦜 ' mot_dit
-                    {if} mot_dit {is} nouveau_mot {print} '🧒 Bien joué, Hedy ! 🍪'
-                    {else} {print} '🧒 Non, Hedy ! Dis ' nouveau_mot
+                    {print} "🧒 Dis " nouveau_mot ", Hedy !"
+                    {print} "🦜 " mot_dit
+                    _ mot_dit {is} nouveau_mot _ "🧒 Bien joué, Hedy ! 🍪"
+                    _ _ "🧒 Non, Hedy ! Dis " nouveau_mot
                     ```
                 start_code: "# écrit ton code ici"
             4:
                 story_text: "Dans ce niveau nous devons utiliser les guillemets avec les commandes `{ask}` et `{print}`.\n### Exercice\nComplète le code en remplissant les blancs par des guillemets.\n"
-                example_code: "```\nmots {is} coco, Hedy\n{print} _ Entraîne ton perroquet ! _\nnouveau_mot {is} {ask} _ Quel mot souhaites-tu apprendre au perroquet ? _\n{add} nouveau_mot {to_list} mots\n{print} _ 🧒 Dis _ nouveau_mot _, Hedy!_\n{print} _ 🦜 _ mots {at} {random}\n```\n"
+                example_code: "```\nmots {is} coco, Hedy\n{print} _ Entraîne ton perroquet ! _\nnouveau_mot {is} {ask} _ Quel mot souhaites-tu apprendre au perroquet ? _\n{add} nouveau_mot {to_list} mots\n{print} _ 🧒 Dis _ nouveau_mot _, Hedy !_\n{print} _ 🦜 _ mots {at} {random}\n```\n"
                 start_code: '# Écrit ton code ici'
     songs:
         name: "Chante une chanson"
@@ -462,19 +462,24 @@ adventures:
         levels:
             6:
                 story_text: |
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+                    Les chansons contiennent beaucoup de répétitions. Parfois la répétition est basée sur un comptage.
+                    Par exemple, dans la fameuse chanson "Bouteilles vertes". Tu peux programmer cette chanson avec un petit peu de maths.
+
+                    Astuce : Utilise la fonction de lecture du texte pour que Hedy te chante la chanson !
+
+                    ### Exercice
+                    Tu peux maintenant répéter les lignes 2 à 7 autant de fois que tu le veux en copiant les lignes.
                 example_code: |
                     ```
                     verset = 99
-                    {print} verset " bouteilles de bierre sur le mur"
-                    {print} verset " bouteilles de bierre"
-                    {print} "Attrapes en une, fait la passer"
+                    {print} verset " bouteilles vertes posées sur le mur"
+                    {print} verset " bouteilles vertes"
+                    {print} "Et si une bouteille verte vient à tomber"
                     verset = verset - 1
-                    {print} verset " bouteilles de bierre sur le mur"
+                    {print} verset " bouteilles vertes posées sur le mur"
                     ```
                 start_code: "{print} 'Baby shark'"
-                story_text_2: "This children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                story_text_2: "Cette chanson enfantine décompte à partir de 5 petits singes jusqu'à 1 seul singe.\nSi tu copies les lignes de 2 à 7 en dessous du code, tu peux chanter toute la chanson !\n"
                 example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             7:
                 story_text: |
@@ -596,7 +601,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Tu peux aussi utiliser Hedy pour dessiner. En combinant tournant et lignes, tu peux dessiner un carré ou des escaliers !
+                    Tu peux aussi utiliser Hedy pour dessiner. En combinant tournants et lignes, tu peux dessiner un carré ou des escaliers !
 
                     En utilisant `{forward}` tu traces une ligne vers l'avant. Le nombre écrit après détermine la distance que va parcourir la tortue. `{turn} {right}` tourne d'un quart de tour dans le sens des aiguilles d'une montre, `{turn} {left}` tourne dans le sens inverse des aiguilles d'une montre.
 
@@ -1324,15 +1329,15 @@ adventures:
                 example_code: |
                     ```
                     _ Ajoute les guillemets à ce code _
-                    {print} Bienvenue au Restaurant Chez Hedy !
+                    {print} Bienvenue au Restaurant Chez Hedy !
                     {print} Aujourd'hui nous servons pizza ou lasagne.
-                    plat {is} {ask} Que voudrais-tu manger ?
-                    {print} Très bon choix !  plat  est ce que je préfère !
-                    accompagnement {is} {ask} Voudrais-tu de la viande ou des légumes en garniture ?
-                    {print} plat  avec  accompagnement  . C'est parti !
-                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
+                    plat {is} {ask} Que voudrais-tu manger ?
+                    {print} Très bon choix !  plat  est ce que je préfère !
+                    accompagnement {is} {ask} Voudrais-tu de la viande ou des légumes en garniture ?
+                    {print} plat  avec  accompagnement  . C'est parti !
+                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
                     {print} Merci pour ta commande.
-                    {print} Tes  plat  et  boisson  vont être servis !
+                    {print} Tes  plat  et  boisson  vont être servis !
                     ```
                 start_code: "# écrit ton code ici"
             5:
@@ -1362,19 +1367,19 @@ adventures:
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
                 example_code: |
-                    Vous pouvez créer un code de restaurant simple, comme celui-ci :
+                    Vous pouvez créer un code de restaurant simple, comme celui-ci :
                     ```
                     {print} "Bienvenue au restaurant Chez Hedy"
-                    {print} "Voici notre menu :"
-                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghettis"
-                    plat_principal = {ask} "Quel plat principal souhaitez-vous ?"
+                    {print} "Voici notre menu :"
+                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghettis"
+                    plat_principal = {ask} "Quel plat principal souhaitez-vous ?"
                     prix = 0
                     {if} plat_principal {is} pizza prix = 10
                     {if} plat_principal {is} lasagnes prix = 12
                     {if} plat_principal {is} spaghettis prix = 8
                     {print} "Vous avez commandé " plat_principal
                     {print} "Ce sera " prix " euros, s'il vous plaît"
-                    {print} "Merci, bon appétit !"
+                    {print} "Merci, bon appétit !"
                     ```
                 start_code: "# écrit ton code ici"
             7:
@@ -1383,10 +1388,8 @@ adventures:
                     You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
+                    {print} "Bienvenu au restaurant Chez Hedy"
+                    personnes = {ask} "Combien de personnes vont nous rejoindre aujourd'hui ?"
                     ```
                 start_code: "# écrit ton code ici"
             8:
@@ -1413,25 +1416,25 @@ adventures:
                     Check out the example, and try this at your own virtual restaurant!
                 example_code: |
                     ```
-                    {print} "Bienvenue au restaurant chez Hedy !"
-                    nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui ?"
-                    {print} "Génial !"
+                    {print} "Bienvenue au restaurant chez Hedy !"
+                    nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui ?"
+                    {print} "Génial !"
                     prix = 0
                     {repeat} nombre_personnes {times}
-                        nourriture = {ask} "Que voulez-vous commander ?"
-                        {print} nourriture
-                        {if} nourriture {is} frites
-                            prix = prix + 3
-                            sauce = {ask} "Quelle sauce voulez-vous avec vos frites ?"
-                            {if} sauce {is} aucune
-                                {print} "pas de sauce"
-                            {else}
-                                prix = prix + 1
-                                {print} "avec " sauce
-                        {if} nourriture {is} pizza
-                            prix = prix + 4
+                    _ nourriture = {ask} "Que voulez-vous commander ?"
+                    _ {print} nourriture
+                    _ {if} nourriture {is} frites
+                    _ prix = prix + 3
+                    _ sauce = {ask} "Quelle sauce voulez-vous avec vos frites ?"
+                    _ {if} sauce {is} aucune
+                    _ {print} "pas de sauce"
+                    _ {else}
+                    _ prix = prix + 1
+                    _ {print} "avec " sauce
+                    _{if} nourriture {is} pizza
+                    _ prix = prix + 4
                     {print} "Cela fera " prix " euros"
-                    {print} "Bon appétit !"
+                    {print} "Bon appétit !"
                     ```
                 start_code: "# écrit ton code ici"
             10:
@@ -1530,8 +1533,8 @@ adventures:
                     As-tu déjà été à un carnaval et u ton futur prédit par une voyante ? Ou déjà joué avec une boule de cristal ?
                     Alors tu sais probablement qu'elles ne peuvent pas réellement prédire ton futur, mais que c'est quand même amusant d'y jouer !
 
-                    Avec les nivaux à venir tu pourras apprendre comment créer ta propre machine à prédire l'avenir.
-                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter lui-même comme une voyante et la laisser `{echo}` les réponses des joueurs.
+                    Dans les nivaux à venir tu pourras apprendre comment créer ta propre machine à prédire l'avenir.
+                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter elle-même comme une voyante et la laisser `{echo}` les réponses des joueurs.
                     Comme ceci :
                 example_code: |
                     ```
@@ -2472,7 +2475,7 @@ adventures:
             1:
                 story_text: "## La commande d'affichage\nTu peux afficher du texte à l'écran en utilisant la commande `{print}`.\n"
                 example_code: "```\n{print} Salut à toi, programmeur/programmeuse !\n{print} Bienvenue chez Hedy !\n```\n"
-                story_text_2: "### Exercice\nAvec Hedy, tu as des exercices pour chaque aventure. Un exercice te permet de t'entrainer avec les nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.\nDans cet exercice, tu verras un espace vide rose. Tu dois écrire quelque chose à la place de cet espace vide pour que ton code fonctionne.\n\nComplète l'espace vide en écrivant la commande `{print}` et ajoute cinq autres lignes de code. Chaque ligne doit commencer par la commande `{print}`.\nAmuse-toi !\n"
+                story_text_2: "### Exercice\nDans Hedy tu as des exercices pour chaque aventure. Un exercice te permet de t'entrainer aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.\nDans cet exercice, tu verras un espace vide rose. Tu dois écrire quelque chose à la place de cet espace vide pour que ton code fonctionne.\n\nComplète l'espace vide en écrivant la commande `{print}` et ajoute cinq autres lignes de code. Chaque ligne doit commencer par la commande `{print}`.\nAmuse-toi !\n"
                 example_code_2: "```\n_ Salut !\n```\n"
                 start_code: "{print} Bienvenue chez Hedy !\n"
             18:
@@ -2480,7 +2483,7 @@ adventures:
                 story_text_2: Si tu veux afficher plus d'un élément, tu dois les séparer par une virgule.
                 example_code_2: "```\ntemperature = 25\n{print}(\"Il fait \", temperature, \" degrés dehors\")\n```\n"
                 story_text_3: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
-                example_code_3: "```\n{print}(\"Mon nom est hedy !\")\nnom = {input}(\"quel est ton nom ?\")\n{print}(\"Ainsi ton nom est \", nom)\n```\n"
+                example_code_3: "```\n{print}(\"Mon nom est hedy !\")\nnom = {input}(\"quel est ton nom ?\")\n{print}(\"Ainsi ton nom est \", nom)\n```\n"
                 start_code: "nom = \"Hedy\"\n{print}(\"mon nom est \", nom)"
                 story_text: "Nous sommes arrivés à du code Python réel ! Cela signifie qu'à partir de maintenant, nous devons utiliser les parenthèses avec `{print}` et `{range}`\nCela signifie aussi que tu peux utiliser le code Hedy de ce niveau dans n'importe quel environnement Python du moment que tu utilises les commandes en anglais. Si tu ne l'as pas encore fait, tu peux basculer en anglais dans le menu des commandes."
     ask_command:
@@ -2508,7 +2511,7 @@ adventures:
         default_save_name: command_est
         levels:
             2:
-                story_text: "## Les variables\nTu peux donner une valeur à un mot avec `{is}`. C'est ce que l'on appelle une **variable**. Dans cet exemple, nous avons défini une variable qui s'appelle « nom » et une variable qui s'appelle « age ». Tu peux utiliser le mot « nom » n'importe où dans ton code et il sera remplacé par sa valeur, comme ceci :\n"
+                story_text: "## Les variables\nTu peux donner une valeur à un mot avec `{is}`. C'est ce que l'on appelle une **variable**. Dans cet exemple, nous avons défini une variable qui s'appelle « nom » et une variable qui s'appelle « age ». Tu peux utiliser le mot « nom » n'importe où dans ton code et il sera remplacé par « Hedy », comme ceci :\n"
                 example_code: "```\nnom {is} Hedy\nâge {is} 15\n{print} nom a âge ans\n```\n"
                 story_text_2: "### Exercice\nIl est temps de faire tes propres variables !\nDans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.\nPour commencer, termine notre exemple en remplissant l'espace blanc avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.\n"
                 example_code_2: "```\nanimaux_favoris is _\n{print} J'aime les animaux_favoris\n```\n"
@@ -2706,9 +2709,9 @@ adventures:
         default_save_name: et ou
         levels:
             13:
-                start_code: "nom = {ask} \"quel est ton nom ?\"\nâge = {ask} \"quel est ton âge ?\"\n{if} nom {is} \"Hedy\" {and} âge {is} 2\n    {print} \"Tu es le vrai Hedy !\""
+                start_code: "nom = {ask} \"quel est ton nom ?\"\nâge = {ask} \"quel est ton âge ?\"\n{if} nom {is} \"Hedy\" {and} âge {is} 2\n    {print} \"Tu es la vraie Hedy !\""
                 story_text: "Nous allons maintenant apprendre `{and}' et `{or}` ! Si tu veux vérifier deux éléments, tu n'es plus obligé d'utiliser deux `{if}` mais tu peux utiliser `{and}` et `{or}`\n\nSi tu utilises `{and}`, les deux éléments, à gauche et à droite du `{and}` doivent être vrai. Nous pouvons aussi utiliser `{or}`. Dans ce cas, seulement un des éléments doit être correct."
-                example_code: "```\nnom = {ask} \"Quel est ton nom ?\"\nâge = {ask} \"Quel est ton âge ?\"\n{if} nom {is} 'Hedy' {and} âge {is} 2\n    {print} \"Tu es le vrais Hedy !\"\n```\n"
+                example_code: "```\nnom = {ask} \"Quel est ton nom ?\"\nâge = {ask} \"Quel est ton âge ?\"\n{if} nom {is} 'Hedy' {and} âge {is} 2\n    {print} \"Tu es la vraie Hedy !\"\n```\n"
     while_command:
         name: "{while}"
         description: tant que
