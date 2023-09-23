@@ -24,11 +24,12 @@ Sk.Debugger = class {
         this.step_mode = false;
         this.filename = filename;
         this.editor_ref = editor_ref;
-        this.code = "";
+        this.source_code_lines = [];
         this.program_data = null;
         this.resolveCallback = null;
         this.rejectCallback = null;
     }
+
     set_program_data(program_data) {
         this.program_data = program_data;
     }
@@ -38,33 +39,41 @@ Sk.Debugger = class {
     }
 
     set_code(code) {
-        this.code = code;
+        this.source_code_lines = code;
     }
+
     print(txt) {
         console.log(txt);
     }
+
     get_source_line(lineno) {
-        if (this.code.length > 0) {
-            return this.code[lineno];
+        if (this.source_code_lines.length > 0) {
+            return this.source_code_lines[lineno];
         }
 
         return "";
     }
+
     move_up_the_stack() {
         this.current_suspension = Math.min(this.current_suspension + 1, this.suspension_stack.length - 1);
     }
+
     move_down_the_stack() {
         this.current_suspension = Math.max(this.current_suspension - 1, 0);
     }
+
     enable_step_mode() {
         this.step_mode = true;
     }
+
     disable_step_mode() {
         this.step_mode = false;
     }
+
     get_suspension_stack() {
         return this.suspension_stack;
     }
+
     get_active_suspension() {
         if (this.suspension_stack.length === 0) {
             return null;
@@ -72,10 +81,12 @@ Sk.Debugger = class {
 
         return this.suspension_stack[this.current_suspension];
     }
+
     generate_breakpoint_key(filename, lineno, colno) {
         var key = filename + "-" + lineno;
         return key;
     }
+
     check_breakpoints(filename, lineno, colno, globals, locals) {
         // If Step mode is enabled then ignore breakpoints since we will just break
         // at every line.
@@ -109,6 +120,7 @@ Sk.Debugger = class {
     get_breakpoints_list() {
         return this.dbg_breakpoints;
     }
+
     disable_breakpoint(filename, lineno, colno) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
 
@@ -116,6 +128,7 @@ Sk.Debugger = class {
             this.dbg_breakpoints[key].enabled = false;
         }
     }
+
     enable_breakpoint(filename, lineno, colno) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
 
@@ -123,6 +136,7 @@ Sk.Debugger = class {
             this.dbg_breakpoints[key].enabled = true;
         }
     }
+
     clear_breakpoint(filename, lineno, colno) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
         if (this.dbg_breakpoints.hasOwnProperty(key)) {
@@ -132,10 +146,12 @@ Sk.Debugger = class {
             return "Invalid breakpoint specified: " + filename + " line: " + lineno;
         }
     }
+
     clear_all_breakpoints() {
         this.dbg_breakpoints = {};
         this.tmp_breakpoints = {};
     }
+
     set_ignore_count(filename, lineno, colno, count) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
         if (this.dbg_breakpoints.hasOwnProperty(key)) {
@@ -143,6 +159,7 @@ Sk.Debugger = class {
             bp.ignore_count = count;
         }
     }
+
     set_condition(filename, lineno, colno, lhs, cond, rhs) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
         var bp;
@@ -156,6 +173,7 @@ Sk.Debugger = class {
         bp.condition = new Sk.Condition(lhs, cond, rhs);
         this.dbg_breakpoints[key] = bp;
     }
+
     print_suspension_info(suspension) {
         var filename = suspension.$filename;
         var lineno = suspension.$lineno;
@@ -165,6 +183,7 @@ Sk.Debugger = class {
         this.print(" ==> " + this.get_source_line(lineno - 1) + "\n");
         this.print("----------------------------------------------------------------------------------\n");
     }
+
     set_suspension(suspension) {
         var parent = null;
         if (!suspension.hasOwnProperty("filename") && suspension.child instanceof Sk.misceval.Suspension) {
@@ -189,6 +208,7 @@ Sk.Debugger = class {
 
         this.print_suspension_info(suspension);
     }
+
     add_breakpoint(filename, lineno, colno, temporary) {
         var key = this.generate_breakpoint_key(filename, lineno, colno);
         this.dbg_breakpoints[key] = new Sk.Breakpoint(filename, lineno, colno);
@@ -262,6 +282,7 @@ Sk.Debugger = class {
             }
         });
     }
+
     resume() {
         // Reset the suspension stack to the topmost
         this.current_suspension = this.suspension_stack.length - 1;
@@ -304,6 +325,7 @@ Sk.Debugger = class {
             }
         }
     }
+
     error(e) {
         this.print("Traceback (most recent call last):");
         for (var idx = 0; idx < e.traceback.length; ++idx) {
@@ -315,6 +337,7 @@ Sk.Debugger = class {
             this.print(err_ty + ": " + e.args.v[idx].v);
         }
     }
+
     asyncToPromise(suspendablefn, suspHandlers, debugger_obj) {
         return new Promise(function (resolve, reject) {
             try {
