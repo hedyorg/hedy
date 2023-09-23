@@ -175,7 +175,7 @@ levels:
     9:
         2:
             story: "Este código pregunta a los clientes de un restaurante si desean pedir postre. En caso afirmativo, les pregunta qué tipo de postre. Si piden tiramisú, se les dice que el tiramisú está agotado.\n¿Puedes hacer que el código funcione?\n"
-            code: "pedir = {ask} '¿Desea pedir postre?'\n{if} pedido = sí\n    postre = {ask} ¿Qué tipo de postre desea?\n    {if} postre = tiramisú\n        {print} \"Lo sentimos, no tenemos tiramisú.\n    {else}\n        {print} '¡Un ' postre ' enseguida!'\n{else}\n    {print} 'No quieres postre. No hay problema.\n"
+            code: "pedir = {ask} '¿Desea pedir postre?'\n{if} pedido = sí\n    postre = {ask} ¿Qué tipo de postre desea?\n    {if} postre = tiramisú\n        {print} \"Lo sentimos, no tenemos tiramisú.\"\n    {else}\n        {print} '¡Un ' postre ' enseguida!'\n{else}\n    {print} 'No quieres postre. No hay problema.\n"
         1:
             story: "Este juego te dará tres tareas de matemáticas. Cada vez la pregunta es diferente. ¿Puedes averiguar el orden?\n"
             code: "números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    número = números {at} {random}\n    respuesta_correcta = 5 * número\n    respuesta = {ask} '¿Cuánto es 5 veces' número '?'\n    {if} respuesta = respuesta_correcta\n        {print} '¡Buen trabajo!'\n    {else}\n        {print} '¡No! La respuesta correcta es ' respuesta_correcta\n"
