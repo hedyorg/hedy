@@ -2483,10 +2483,6 @@ adventures:
                 example_code_3: "```\n{print}(\"Mon nom est hedy !\")\nnom = {input}(\"quel est ton nom ?\")\n{print}(\"Ainsi ton nom est \", nom)\n```\n"
                 start_code: "nom = \"Hedy\"\n{print}(\"mon nom est \", nom)"
                 story_text: "Nous sommes arrivés à du code Python réel ! Cela signifie qu'à partir de maintenant, nous devons utiliser les parenthèses avec `{print}` et `{range}`\nCela signifie aussi que tu peux utiliser le code Hedy de ce niveau dans n'importe quel environnement Python du moment que tu utilises les commandes en anglais. Si tu ne l'as pas encore fait, tu peux basculer en anglais dans le menu des commandes."
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\""
-                story_text: "Maintenant, nous allons un petit peu changer l'indentation. Chaque fois que nous avons une nouvelle indentation, nous devons ajouter `:` au début de la ligne précédente.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\"\n```\n"
     ask_command:
         name: "{ask}"
         description: Introduction à la commande '{ask}'
@@ -2598,6 +2594,10 @@ adventures:
                 start_code: "{for} compteur {in} {range} 1 {to} 5\n    {print} compteur"
                 story_text: "À ce niveau, nous ajoutons une nouvelle forme pour le `{for}`. Aux niveaux précédents, nous avons utilisé `{for}`avec une liste, mais nous pouvons aussi utiliser `{for}` avec des nombres.\nNous le faisons en ajoutant un nom de variable, suivi par `{in}``{range}`. Nous écrivons ensuite le nombre de départ, puis `{to}`, et enfin le nombre d'arrivé.\n\nEssaye l'exemple pour voir ce qui se passe ! À ce niveau aussi, tu devras utilise les indentations pour les lignes en dessous de l'instruction `{for}`."
                 example_code: "```\n{for} compteur {in} {range} 1 {to} 5\n    {print} compteur\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\""
+                story_text: "Maintenant, nous allons un petit peu changer l'indentation. Chaque fois que nous avons une nouvelle indentation, nous devons ajouter `:` au début de la ligne précédente.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\"\n```\n"
     maths:
         name: maths
         levels:

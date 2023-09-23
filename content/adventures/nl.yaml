@@ -256,8 +256,11 @@ adventures:
                 start_code: "{print} 'Lets go to the next tab!'"
             17:
                 story_text: |
-                    Je bent bijna aan het einde van Hedy, goed bezig! In dit level leer je `{print}` op de Pythonmanier!
-                start_code: "{print} 'Lets go to the next level!'"
+                    Nu maken we nog een kleine verandering bij het inspringen. Elke keer als we moeten inspringen, gebruiken we een `:` bij de regel erboven.
+
+                    In dit level leer je ook een nieuw commando `{ elif }`. `{elif}` is  een samentrekking van {else} en {if} voor als je 3 of meer opties wilt programmeren.
+                    Kijk maar in het volgende avontuur!
+                start_code: "{print} 'Op naar het volgende avontuur!'"
             18:
                 story_text: |
                     Hoera! Je hebt het einde van Hedy bereikt! De codes die je hier in het laaste level maakt kun je kopiëren naar andere Python omgevingen, zoals replit or PyCharm. Daar kun je verder Python leren!
@@ -2653,10 +2656,6 @@ adventures:
                 example_code: "```\n{print} Hey, programmeur!\n{print} Welkom bij Hedy!\n```\n"
                 example_code_2: "```\n_ Hallo!\n```\n"
                 start_code: "{print} Welkom bij Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Wie niet weg is, is gezien! Ik kom!'"
-                story_text: "Er komt nu een kleine verandering in het inspringen. Elke keer als er moet worden ingesprongen, moet je een `:` typen in de regel daarvoor.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Wie niet weg is, is gezien! Ik kom!'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('Mijn naam is ', naam)"
                 story_text: "We gaan nu echte Python code programmeren! Dat betekent dat we vanaf nu haakjes moeten gebruiken bij `{print}` en `{range}`.\n Het betekent ook dat je nu in andere Python omgevingen kunt gaan programmeren met Hedy code. Je moet hierbij dan wel de Engelse commando's gebruiken. Als je de Engelse commando's nog niet gebruikte, dan kun je nu de schakelaar omzetten in het commandomenu."
@@ -3098,6 +3097,10 @@ adventures:
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
                     ```
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Wie niet weg is, is gezien! Ik kom!'"
+                story_text: "Er komt nu een kleine verandering in het inspringen. Elke keer als er moet worden ingesprongen, moet je een `:` typen in de regel daarvoor.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Wie niet weg is, is gezien! Ik kom!'\n```\n"
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or
