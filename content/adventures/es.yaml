@@ -125,7 +125,7 @@ adventures:
                 example_code: "```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cacarear', 'relinchar', 'mugir'\n{for} animal {in} animales\n    {print} 'Un ' animal ' dice ' sonidos {at} {random}\n```\nTambién puedes intentar hacer que funcione de esta manera, pero....\n```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cacarear', 'relinchar', 'mugir'\n{for} animal {in} animales\n    {for} sonido {in} sonidos\n        {print} 'Un ' animal ' dice ' sonido\n```\n"
             17:
                 start_code: "{print} '¡Vayamos al siguiente nivel!'"
-                story_text: "Ya casi has alcanzado el último nivel de Hedy, ¡bien hecho! En este nivel aprenderás una forma real de Python de usar `{print}`.\n"
+                story_text: "Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.\n\nEn este nivel también se puede utilizar un nuevo comando: `{ elif }`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.\n¡Compruébalo!\n"
             18:
                 start_code: "{print} ('¡¡¡Gran trabajo!!!')"
                 story_text: "¡Enhorabuena! Has alcanzado el último nivel de Hedy! El código que has creado aquí se puede copiar a entornos reales de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí!\nSin embargo ten en cuenta que Python sólo puede leer comando en inglés, así que si has estado usando otros idiomas, ahora los tendrás que cambiar a inglés.\n"
@@ -668,7 +668,7 @@ adventures:
                     ```
 
                 start_code: "{print} '¿Qué salió esta vez?'"
-                example_code_2: "\n    ¿Pudiste calcular la puntuación para 8 dados? Eso necesitó que copiaras y pegaras mucho, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
+                example_code_2: "\n        ¿Conseguiste calcular la puntuación para 8 dados? Esto requería un montón de cortar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
             5:
                 story_text: |
                     Vamos a añadir los comandos `{if}` y `{else}` a nuestros dados!
@@ -920,7 +920,7 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} '¡Bienvenido a tu propia calculadora!'"
-                story_text_3: "\n    **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando aleatorio.\n\n    Así es como eliges un número de tablas para practicar, y desde ahí siempre consigues una suma diferente:\n"
+                story_text_3: "\n        **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\n        Así eliges un número de tablas para practicar, y de ahí siempre obtienes una suma diferente:\n"
             14:
                 story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
                 example_code: "```\n{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        intento = {ask} '¿Que número piensas que es?'\n        {if} intento > número\n            {print} '¡Muy alto!'\n        {if} intento < número\n            {print} '!Muy bajo!'\n        {if} intento == número\n            {print} '¡Ganaste!'\n            juego = 'terminó'\n```\n"
@@ -942,15 +942,15 @@ adventures:
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el código de ejemplo para que\n\n### Ejercicio 2\nVuelve al código de multiplicación del nivel 10, y modifícalo para que use un `{for}` y `{range}`.\n"
                 start_code: '# pon tu código aquí'
             13:
-                story_text: |
+                story_text: |2
 
-                      ### Ejercicio 1
-                      Hagamos la práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
+                        ### Ejercicio 1
+                        Hagamos el programa de práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
 
-                      ### Ejercicio 2 Extra
-                      A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
-                      Pida un cálculo que tenga múltiples respuestas correctas, pida al jugador que lo responda y determine si es correcto utilizando `{or}`.
-                      Vacíe el campo de programación y cree su propia solución.
+                        ### Ejercicio 2 Extra
+                        A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
+                        Pide un cálculo que tenga múltiples respuestas correctas, pide al jugador que te responda y determine si es correcto utilizando `{or}`.
+                        Vacía el campo de programación y crea tu propia solución.
                 example_code: "```\nrespuesta1 = {ask} 'Cuanto es 10 por 7?'\nrespuesta2 = {ask} 'Cuanto es 6 por 7?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 start_code: '# Escribe tu código aquí'
     restaurant:
@@ -1534,7 +1534,7 @@ adventures:
             1:
                 story_text: "## El comando preguntar\nAhora que puedes usar el comando `{print}`, estás preparado para usar el siguiente comando: `{ask}`. Con el comando `{ask}`, puedes hacer una pregunta. Compruébalo:\n"
                 example_code: "```\n{print} ¡Hola!\n{ask} ¿Cómo te llamas?\n```\n"
-                story_text_2: "## El comando eco\nSi quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Ten en cuenta que la respuesta es repetida al final de la frase, como este ejemplo después del hola.\n"
+                story_text_2: "## El comando echo\nSi quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Que la respuesta se hará eco de nuevo al final de la frase, así que en este ejemplo después de hola.\n"
                 story_text_3: "### Ejercicio\nPrueba los comandos `{ask}` y `{echo}`. Lo primero, rellena los huecos en blanco para hacer que el programa funcione.\nDespués, haz 2 preguntas más usando el comando `{ask}`, tras cada `{ask}` usa un `{echo}` para imprimir la respuesta en pantalla.\n"
                 example_code_2: "```\n{print} ¡Hola!\n{ask} ¿Cómo te llamas?\n{echo} hola\n```\n"
                 example_code_3: "```\n_ ¿Qué tal estás?\n_\n```\n"
