@@ -74,11 +74,6 @@ export function goToAdminUsersPage()
     cy.get('#users_button').click();
 }
 
-export function goToAdminStatsPage()
-{
-   return goToPage(Cypress.env('admin_stats_page'));
-}
-
 export function goToAdminAdventuresPage()
 {
    return goToPage(Cypress.env('admin_adventures_page'));

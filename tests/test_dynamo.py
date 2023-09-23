@@ -192,6 +192,16 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             {'id': 'key', 'sort': 2, 'm': 'another'}
         ])
 
+    def test_query_with_filter(self):
+        self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+
+        ret = list(self.table.get_many({'id': 'key'}, filter={'m': 'another'}))
+
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 2, 'm': 'another'}
+        ])
+
     def test_between_query(self):
         self.table.create({'id': 'key', 'sort': 1, 'x': 'x'})
         self.table.create({'id': 'key', 'sort': 2, 'x': 'y'})
@@ -214,6 +224,18 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
 
         self.assertEqual(ret, [
             {'id': 'key', 'sort': 1, 'm': 'val'}
+        ])
+
+    def test_query_index_with_filter(self):
+        self.table.create({'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 'another', 'q': 'q'})
+
+        ret = list(self.table.get_many({'m': 'val'}, filter={'p': 'p'}))
+
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'},
+            {'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'},
         ])
 
     def test_query_index_with_partition_key(self):
@@ -359,13 +381,13 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'))), expected)
 
         # Query paginated, using the Python iterator protocol
-        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), limit=3)), expected)
+        self.assertEqual(list(dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3)), expected)
 
         # Reuse the client-side pager every time, using the Python iterator protocol
         ret = []
         token = None
         while True:
-            many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+            many = dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3, pagination_token=token)
             ret.append(next(iter(many)))
             token = many.next_page_token
             if not token:
@@ -374,7 +396,7 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
 
         # Also test using the eof/current/advance protocol
         ret = []
-        many = dynamo.GetManyIterator(self.table, dict(id='key'), limit=3, pagination_token=token)
+        many = dynamo.GetManyIterator(self.table, dict(id='key'), batch_size=3, pagination_token=token)
         while many:
             ret.append(many.current)
             many.advance()
