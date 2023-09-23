@@ -1308,9 +1308,6 @@ class ConvertToPython(Transformer):
         self.is_debug = is_debug
 
     def add_debug_breakpoint(self):
-        print('*'*100)
-        print(self.is_debug)
-        print('*'*100)
         if self.is_debug:
             return f" # __BREAKPOINT__"
         else:
@@ -1494,7 +1491,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
@@ -1545,7 +1542,7 @@ class ConvertToPython_1(ConvertToPython):
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
-            return sleep_after(transpiled, False)
+            return sleep_after(transpiled, False, self.is_debug)
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text):
@@ -1660,7 +1657,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1986,7 +1983,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -1995,7 +1992,7 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True, is_debug=True):
+def sleep_after(commands, indent=True, is_debug=False):
     if is_debug:
         return commands
 
@@ -2040,7 +2037,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body)
+        body = sleep_after(body, indent=True, is_debug=self.is_debug)
 
         return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
@@ -2128,7 +2125,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
-        body = sleep_after(body, True)
+        body = sleep_after(body, True, self.is_debug)
         return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
 
 
@@ -2140,7 +2137,7 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
-        body = sleep_after(body)
+        body = sleep_after(body, True, self.is_debug)
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
@@ -2283,7 +2280,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2355,7 +2352,7 @@ class ConvertToPython_15(ConvertToPython_14):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body)
+        body = sleep_after(body, True, self.is_debug)
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
@@ -2762,7 +2759,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=False):
+def transpile(input_string, level, lang="en", skip_faulty=False, is_debug=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -2776,7 +2773,7 @@ def transpile(input_string, level, lang="en", skip_faulty=False):
     if not skip_faulty:
         try:
             source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=True)
+            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
         except Exception as original_error:
             source_map.exception_found_during_parsing = original_error  # store original exception
             raise original_error
@@ -3228,7 +3225,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=True):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
 
     level = int(level)

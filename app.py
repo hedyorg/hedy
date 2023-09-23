@@ -486,6 +486,8 @@ def parse():
     # TODO: Once we figure out whats wrong with the skip faulty code, we need to reinstantiate this
     # if 'skip_faulty' not in body:
     #     return "body.skip_faulty must be a boolean", 400
+    if 'is_debug' not in body:
+        return "body.is_debug must be a boolean", 400
 
     error_check = False
     if 'error_check' in body:
@@ -494,6 +496,7 @@ def parse():
     code = body['code']
     level = int(body['level'])
     skip_faulty = False  # bool(body['skip_faulty'])
+    is_debug = bool(body['is_debug'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -514,7 +517,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang, skip_faulty)
+                transpile_result = transpile_add_stats(code, level, lang, skip_faulty, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -713,11 +716,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_, skip_faulty):
+def transpile_add_stats(code, level, lang_, skip_faulty, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_, skip_faulty)
+        result = hedy.transpile(code, level, lang_, skip_faulty, is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result

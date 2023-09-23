@@ -511,70 +511,82 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
+    let program_data;
 
-    try {
-      cancelPendingAutomaticSave();
-      let data = {
-        level: `${level}`,
-        code: code,
-        lang: lang,
-        skip_faulty: false,
-        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: adventureName,
+    if (run_type === 'run' || run_type === 'debug') {
+      try {
+        cancelPendingAutomaticSave();
+        let data = {
+          level: `${level}`,
+          code: code,
+          lang: lang,
+          skip_faulty: false,
+          is_debug: run_type === 'debug',
+          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
+          read_aloud : !!$('#speak_dropdown').val(),
+          adventure_name: adventureName,
+  
+          // Save under an existing id if this field is set
+          program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+          save_name: saveNameFromInput(),
+        };
 
-        // Save under an existing id if this field is set
-        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
-        save_name: saveNameFromInput(),
-      };
-
-      let response = await postJsonWithAchievements('/parse', data);
-      console.log('Response', response);
-
-      if (response.Warning && $('#editor').is(":visible")) {
-        //storeFixedCode(response, level);
-        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
-      }
-
-      // if (!data.skip_faulty && response.Error) {
-      //   data.skip_faulty = true;
-      //   error.showWarningSpinner();
-      //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-      //   response = await postJsonWithAchievements('/parse', data);
-      //   error.hide(true);
-      // }
-
-      showAchievements(response.achievements, false, "");
-      if (adventure && response.save_info) {
-        adventure.save_info = response.save_info;
-        adventure.start_code = code;
-      }
-      if (response.Error) {
-        error.show(ClientMessages['Transpile_error'], response.Error);
-        if (response.Location && response.Location[0] != "?") {
+        let response = await postJsonWithAchievements('/parse', data);
+        
+        program_data = response;
+        console.log('Response', response);
+        
+        if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
-          // Location can be either [row, col] or just [row].
-          theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+          error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
         }
-        $('#stopit').hide();
-        $('#runit').show();
-        return;
-      }
-      runPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb, run_type).catch(function(err: any) {
-        // The err is null if we don't understand it -> don't show anything
-        if (err != null) {
-          error.show(ClientMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
+  
+        // if (!data.skip_faulty && response.Error) {
+        //   data.skip_faulty = true;
+        //   error.showWarningSpinner();
+        //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        //   response = await postJsonWithAchievements('/parse', data);
+        //   error.hide(true);
+        // }
+
+        showAchievements(response.achievements, false, "");
+        if (adventure && response.save_info) {
+          adventure.save_info = response.save_info;
+          adventure.start_code = code;
         }
-      });
-    } catch (e: any) {
-      console.error(e);
-      if (e.internetError) {
-        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
-      } else {
-        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+
+        if (response.Error) {
+          error.show(ClientMessages['Transpile_error'], response.Error);
+          if (response.Location && response.Location[0] != "?") {
+            //storeFixedCode(response, level);
+            // Location can be either [row, col] or just [row].
+            theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+          }
+          $('#stopit').hide();
+          $('#runit').show();
+          return;
+        }
+      } catch (e: any) {
+        console.error(e);
+        if (e.internetError) {
+          error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
+        } else {
+          error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+        }
       }
+    } else {
+      program_data = theGlobalDebugger.get_program_data();
     }
+    
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.Warning, cb, run_type).catch(function(err: any) {
+      // The err is null if we don't understand it -> don't show anything
+      if (err != null) {
+        error.show(ClientMessages['Execute_error'], err.message);
+        reportClientError(level, code, err.message);
+      }
+    });
+  
+  
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -1039,7 +1051,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
     
   } else if (run_type === "debug") {
-    theGlobalDebugger = new Sk.Debugger('<stdin>', outf);    
+    theGlobalDebugger = new Sk.Debugger('<stdin>', outf);
     Sk.configure({
       output: outf,
       read: builtinRead,
@@ -1053,13 +1065,21 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     
     let lines = code.split('\n');
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i].includes("# __BREAKPOINT__")) {
+      // lines with dummy variable name are not meant to be shown to the user, skip them.
+      if (lines[i].includes("# __BREAKPOINT__") && !lines[i].includes('x__x__x__x')) {
         // breakpoints are 1-indexed
         theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
       }
     }    
     $('#debug_continue').show();
     theGlobalDebugger.set_code(code.split('\n'));
+    theGlobalDebugger.set_program_data({
+      Code: code,
+      source_map: sourceMap,
+      has_turtle: hasTurtle,
+      has_pygame: hasPygame,
+      Warning: hasWarnings
+    });
     return theGlobalDebugger.asyncToPromise(() => Sk.importMainWithBody("<stdin>", true, code, true), {}, theGlobalDebugger).then(
       theGlobalDebugger.success.bind(theGlobalDebugger)
     ).catch(function(err: any) {
