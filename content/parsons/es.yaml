@@ -2,7 +2,7 @@ levels:
     1:
         1:
             story: |
-                Los puzzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
+                Los puzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
 
                 Eres un cliente de la panadería Hedy.
                 Entras en la panadería y te recibe el panadero.
@@ -10,7 +10,7 @@ levels:
                 Luego te repite la respuesta.
                 Por último, se prepara tu pedido.
             code: |-
-                {print} ¡Bienvenido a la panedería Hedy!
+                {print} ¡Bienvenido a la panadería Hedy!
                 {ask} ¿Qué tipo de pastel quieres pedir?
                 {echo} Entonces quieres
                 {print} ¡Tu orden está siendo preparada!
@@ -26,10 +26,10 @@ levels:
         1:
             story: |
                 Tú y tus amigos van a ver Netflix.
-                ¡Muestra qué película van a ver y deseales a los espectadores que se diviertan mucho!
+                ¡Muestra qué película van a ver y deséales a los espectadores que se diviertan mucho!
             code: |-
                 {print} Es hora de una noche de Netflix
-                película {is} Sonic the Hedgehog 2
+                película {is} Sonic 2: La película
                 {print} Vamos a ver una película
                 {print} ¡Diviértete!
         2:
@@ -55,13 +55,13 @@ levels:
                 {print} No te disgusta, ¿eh? Mejor que sean... casas {at} {random}
         2:
             story: |
-                Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de toppings y deja que el programa decida que vas a comer!
+                Crea un programa que escoja una comida aleatoria para ti. ¡Haz una lista de comidas y una lista de ingredientes y deja que el programa decida que vas a comer!
             code: |-
-                comida {is} pizza, helado, ensalada, sandwich
-                toppings {is} chocolate, queso, atún, chispas
+                comida {is} pizza, helado, ensalada, sándwich
+                ingredientes {is} chocolate, queso, atún, chispas
                 {print} Tu aleatoria para hoy es...
                 {sleep} 2
-                {print} comida {at} {random} con toppings {at} {random}
+                {print} comida {at} {random} con ingredientes {at} {random}
         3:
             story: "En un torneo de ajedrez quedan tres jugadores.\nCrea un programa que decida qué dos jugadores tienen que jugar primero entre sí.\nEmpieza imprimiendo los dos jugadores que juegan la primera partida, luego imprime contra qué jugador jugará el ganador.\n"
             code: "jugadores {is} Liam, Noah, Sophie\njugador_1 {is} jugadores {at} {random}\n{remove} jugador_1 {from} jugadores\njugador_2 {is} jugadores {at} {random}\n{print} jugador_1 ' primero juega contra ' jugador_2\n{remove} jugador_2 {from} jugadores\n{print} 'El ganador juega contra ' jugadores {at} {random}"
@@ -80,7 +80,7 @@ levels:
             story: |
                 Crea una lotería que te permita elegir un premio extra que puedas ganar.
             code: |-
-                premios {is} coche, hamster, 1 millón de euros
+                premios {is} coche, hámster, 1 millón de euros
                 premio {is} {ask} '¿Qué te gustaría ganar?'
                 {add} premio {to_list} premios
                 {print} 'Ganaste un ' premios {at} {random}
@@ -90,11 +90,11 @@ levels:
                 Haz un programa que compruebe si tu película favorita ya está en la lista de la computadora.
                 Si es así, imprime que tienes un gran gusto, sino, agrega la película a la lista.
             code: |-
-                peliculas_favoritas {is} Batman, Spiderman, Los Vengadores, Jurassic Park
-                pelicula {is} {ask} '¿Cuál es tu película favorita?'
-                {if} pelicula {in} peliculas_favoritas {print} '¡Tienes un gran gusto!'
+                películas_favoritas {is} Batman, Spiderman, Los Vengadores, Parque Jurásico
+                película {is} {ask} '¿Cuál es tu película favorita?'
+                {if} película {in} películas_favoritas {print} '¡Tienes un gran gusto!'
                 {else} {print} '¡Que lástima que tu película favorita no está en la lista, vamos a añadirla de una vez!'
-                {add} pelicula {to_list} peliculas_favoritas
+                {add} película {to_list} películas_favoritas
         2:
             story: |
                 Crea un juego de matemáticas.
@@ -122,8 +122,8 @@ levels:
             code: |-
                 {print} '¡Es tu cumpleaños!'
                 personas = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
-                cakes_amount = personas/8
-                {print} 'Tendrás que comprar ' cakes_amount ' pasteles'
+                cantidad_tartas = personas/8
+                {print} 'Tendrás que comprar ' cantidad_tartas ' pasteles'
     7:
         1:
             story: |
@@ -154,7 +154,7 @@ levels:
                 {repeat} 5 {times}
                   {print} 'Haz sido seleccionado en el equipo... '
                   {print} equipos {at} {random}
-                  sleep 2
+                  dormir 2
         2:
             story: |
                 Imprime la cuenta regresiva para un juego de escondidas.
@@ -167,29 +167,29 @@ levels:
                 {print} '¡Listo o no aquí voy!'
     10:
         2:
-            story: "This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.\n**Mind** The variable people is defined in the first line. The variable hairstyles in the second.\n"
-            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
+            story: "Este robot maquillador decidirá tu nuevo corte de pelo para ti.. Si no te gusta la primera opción, puedes probar de nuevo.\n**Recuerda** La variable gente está definida en la primera línea. La variable peinados en la segunda.\n"
+            code: "gente = Betty, Amanda, Marc\npeinados = una calva, una cresta, una coleta, pinchos\n{for} persona {in} gente\n    {print} persona ' se peinará ' peinados {at} {random}\n    contento = {ask} persona ', ¿estás contento con tu elección?'\n    {if} contento {is} sí\n        {print} 'Genial'\n    {else}\n        {print} 'Probemos de nuevo... Entonces 'persona ' se peinará ' peinados {at} {random}\n"
         1:
-            story: "Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.\n**Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.\n"
-            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
+            story: "Ayuda a esta familia creando un cronograma de quién cocinará y qué deberían preparar esta semana. Los comandos borrar garantizan que nadie tenga que cocinar dos veces y que tengan una cena diferente todos los días.\n**¡Cuidado!** el orden de las variables debe ser primero días, luego personas y, por último, opciones_cena. Esto también se aplica a las líneas con los comandos borrar.\n"
+            code: "días = Lunes, Martes, Miércoles, Jueves, Viernes\ngente = mamá, papá, Martin, Abby, Jesse\nopciones_cena = pizza, tacos, tortitas, una ensalada, lasaña\n{for} día {in} días\n    persona_elegida = gente {at} {random}\n    cena_elegida = opciones_cena {at} {random}\n    {print} 'En ' día ' ' persona_elegida ' va a preparar ' cena_elegida\n    {remove} persona_elegida {from} gente\n    {remove} cena_elegida {from} opciones_cena\n"
     9:
         2:
             story: "Este código pregunta a los clientes de un restaurante si desean pedir postre. En caso afirmativo, les pregunta qué tipo de postre. Si piden tiramisú, se les dice que el tiramisú está agotado.\n¿Puedes hacer que el código funcione?\n"
-            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
+            code: "pedir = {ask} '¿Desea pedir postre?'\n{if} pedido = sí\n    postre = {ask} ¿Qué tipo de postre desea?\n    {if} postre = tiramisú\n        {print} \"Lo sentimos, no tenemos tiramisú.\"\n    {else}\n        {print} '¡Un ' postre ' enseguida!'\n{else}\n    {print} 'No quieres postre. No hay problema.'\n"
         1:
             story: "Este juego te dará tres tareas de matemáticas. Cada vez la pregunta es diferente. ¿Puedes averiguar el orden?\n"
             code: "números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    número = números {at} {random}\n    respuesta_correcta = 5 * número\n    respuesta = {ask} '¿Cuánto es 5 veces' número '?'\n    {if} respuesta = respuesta_correcta\n        {print} '¡Buen trabajo!'\n    {else}\n        {print} '¡No! La respuesta correcta es ' respuesta_correcta\n"
     12:
         1:
-            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
-            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+            code: "versos = 'Qué haremos con el marinero borracho', 'Ella se levanta de un camino de heno'\n{for} verso {in} versos\n    {for} contador {in} {range} 1 {to} 3\n        {print} verso\n    {print} 'Temprano en la mañana'\n"
+            story: "Canta la canción '¿Qué haremos con el marinero borracho?'. En caso de que no la conozcas, la canción dice así:\n\n¿Qué haremos con el marinero borracho?\n¿Qué haremos con el marinero borracho?\n¿Qué haremos con el marinero borracho?\nTemprano en la mañana\nElla se levanta de un camino de heno\nElla se levanta de un camino de heno\nElla se levanta de un camino de heno\nTemprano en la mañana\n"
         2:
-            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
-            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+            story: "¡Juega al Twister con nosotros! Primero define la variable persona, después las extremidades, después los colores.\n"
+            code: "gente = 'Jess', 'Nick', 'Winston'\nextremidades = 'mano izquierda', 'pie izquierdo', 'mano derecha', 'pie derecho'\ncolores = 'rojo', 'azul', 'verde', 'amarillo'\n{for} persona {in} gente\n    {print} persona ', pon tu ' extremidades {at} {random} ' en ' colores {at} {random}\n"
     11:
         1:
-            story: "Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.\n"
-            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+            story: "¡Crea un reloj para la cuenta atrás para Nochevieja! El programa debe mostrar los números de 10 a 1 durante 1 segundo y después desear un feliz año nuevo.\n"
+            code: "{for} número {in} {range} 10 {to} 1\n    {print} número\n    {sleep}\n    {clear}\n{print} '¡Feliz Año Nueva!'\n"
         2:
-            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
-            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"
+            story: "Crea un programa que te diga el resultado final de la feria de ciencia. Primero define la variable concursantes, después la variable posición.\n**Pista** La línea 5 debe ser el comando dormir, y debes acabar diciendo enhorabuena.\n"
+            code: "{print} 'Y ahora conoceremos los resultados de la feria de ciencia'\nconcursantes = Vivienne, Paul, Trixy, Bianca, Katya\nposición = 5\n{for} concursante {in} concursantes\n    {sleep} 2\n    {print} 'La posición ' posición ' es para... ' concursante\n    posición = posición - 1\n{print} '¡Enhorabuena!'\n"

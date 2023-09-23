@@ -1042,7 +1042,7 @@ levels:
             hint: Hedy Lamarr의 이름을 따서 지었어요.
             question_score: '10'
         2:
-            question_text: 안녕하세요!라는 글자가 뜨려면 빈칸에 어느 것을 채워야 하나요?
+            question_text: 안녕하세요!라는 글자가 출력되려면 빈칸에 어느 것을 채워야 하나요?
             mp_choice_options:
             -   option: "`{echo}`\n"
                 feedback: '`{echo}`는 주어진 답을 반복한다.'
@@ -1058,7 +1058,7 @@ levels:
             code: |
                 ___ 안녕하세요!
         3:
-            question_text: 어떤 사람이 좋아하는 색이 무엇인지 어떻게 물어요?
+            question_text: 좋아하는 색이 무엇인지 물어보고 싶어요?
             mp_choice_options:
             -   option: "```\n{print} 무슨 색깔을 좋아하세요?\n```\n"
                 feedback: "`{print}` 텍스트는 출력 하지만 질문이 없습니다."
@@ -1659,14 +1659,14 @@ levels:
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
             question_text: Hedy라는 이름을 입력하면 출력 화면에 무엇이 표시됩니까?
-            code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'"
+            code: "name {is} {ask} '너는 이름이 무엇이니?'\n{if} name {is} Hedy {print} '재밌네요' {else} {print} '별로인 것 같아'"
             mp_choice_options:
-            -   option: fun
+            -   option: 재밌네요
                 feedback: 그렇구나!
-            -   option: less fun
-                feedback: If the name is Hedy, it will say 'fun''
+            -   option: 별로인 것 같아
+                feedback: If the name is Hedy, it will say '재밌네요''
             -   option: Hedy
-                feedback: No, it doesn't print the name
+                feedback: 아니오, 이것은 이름을 출력하지 않습니다
             -   option: Error
                 feedback: 천만다행이다!
             correct_answer: A
@@ -1674,82 +1674,82 @@ levels:
             question_score: '10'
         3:
             question_text: 올바른 암호는 무엇입니까?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "password {is} {ask} '암호가 무엇이에요?'\n{if} password {is} SECRET {print} '맞아요!'\n{else} {print} '알람! 침입자다!'"
             mp_choice_options:
-            -   option: Correct!
-                feedback: 올바른 암호를 입력하면 print됩니다
+            -   option: 맞아요!
+                feedback: 올바른 암호를 입력하면 출력됩니다
             -   option: SECRET
                 feedback: 맞아요!'
             -   option: password
                 feedback: password는 암호가 아닙니다...
-            -   option: ALARM INTRUDER
+            -   option: 알람 침입자다
                 feedback: 비밀번호를 잘못 입력하면 출력됩니다!
             correct_answer: B
-            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
+            hint: "`{if}` password `{is}` ... `{print}` '맞아요!'!'"
             question_score: '10'
         4:
             question_text: 당신이 비밀번호를 잘못 입력하면 Hedy는 무엇을 출력하나요?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "password {is} {ask} '암호가 무엇이에요?'\n{if} password {is} SECRET {print} '맞아요!'\n{else} {print} '알람! 침입자다!'"
             mp_choice_options:
-            -   option: Correct
-                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: 맞아요
+                feedback: That's printed if the 맞아요 answer is given, not the wrong one...
             -   option: SECRET
                 feedback: 정답이 아닙니다
             -   option: Wrong!
                 feedback: No, this is not what Hedy will print
-            -   option: ALARM! INTRUDER!
+            -   option: 알람! 침입자다!
                 feedback: 정말 잘했어!
             correct_answer: D
-            hint: Your computer will sound the alarm for intruders!
+            hint: 당신의 컴퓨터가 침입자를 위한 알람을 울립니다!
             question_score: '10'
         5:
-            question_text: "'비밀'이라고 입력하면 왜 Hedy는 'ALARM! INTRUDER'라고 말하는 걸까요?"
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            question_text: "'secret'이라고 입력하면 왜 Hedy는 '알람! 침입자다'라고 말하는 걸까요?"
+            code: "password {is} {ask} '암호가 무엇이에요?'\n{if} password {is} SECRET {print} '맞아요!'\n{else} {print} '알람! 침입자다!'"
             mp_choice_options:
-            -   option: Because it needs to be in capitals, so SECRET
+            -   option: 왜냐하면 대문자로 입력해야해요, SECRET 라구요
                 feedback: 맞췄어요!
-            -   option: Because the password is alarm
-                feedback: No, this is not the password.
-            -   option: Because it's spelled wrong.
+            -   option: 왜냐하면 암호는 알람이에요
+                feedback: 아니오, 이것은 암호가 아니에요.
+            -   option: 왜냐하면 철자가 틀려서에요.
                 feedback: 비밀은 그런 식으로 말하는게 아니야
-            -   option: Because Hedy makes a mistake
-                feedback: No, Hedy is right
+            -   option: 왜냐하면 Hedy 가 실수했기 때문이에요
+                feedback: 아니오, Hedy 는 맞아요
             correct_answer: A
-            hint: The spelling of the word has to be exactly the same.
+            hint: 그 단어의 철자는 정확히 같아야 합니다.
             question_score: '10'
         6:
             question_text: 마지막 줄의 물음표 자리에 어떤 단어가 있어야 하나요?
-            code: "{print} 'Im Hedy the football fortune teller!'\n{print} 'I will predict what place your team will end up!'\nclub is {ask} 'Which club is your favorite?'\n{if} club {is} ajax {print} 'Ajax is going to win of course!'\n_?_ {print} 'Sorry, your club is gonna be in last place...'"
+            code: "{print} '나는 Hedy 입니다 축구 예언가!'\n{print} '당신의 팀이 어떤 우승할지 예측하겠습니다!'\nclub is {ask} '어떤 축구팀을 좋아하시나요?'\n{if} club {is} ajax {print} 'Ajax 은 이길거에요!'\n_?_ {print} '미안해요, 당신의 축구클럽은 질거에요...'"
             mp_choice_options:
             -   option: "```\n{if}\n```\n"
                 feedback: '`{if}`이(가) 이미 위의 행에 있습니다'
             -   option: "```\n{at} {random}\n```\n"
-                feedback: No, you need `{else}`.
+                feedback: 아니오, 당신은 `{else}` 가 필요해요.
             -   option: "```\n{else}\n```\n"
                 feedback: 좋았어!
             -   option: "```\n{print}\n```\n"
-                feedback: '`{print}` is already there, we need a word before it!'
+                feedback: '`{print}` 는 이미 있어요, 우리는 그전에 필요한 단어가 있어요!'
             correct_answer: C
-            hint: '`{if}` goes together with...?'
+            hint: '`{if}` 와 함께 쓰려면...?'
             question_score: '10'
         7:
             question_text: 물음표 대신에 어떤 단어가 있어야 할까요?
-            code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _?_ 'Unfortunately... No big money for you.'"
+            code: "{print} '나는 당신이 백만장자가 될 것인지 아닌지 예측할 수 있습니다!'\nname {is} {ask} '당신의 이름은 무엇이죠?'\n{if} name {is} Hedy {print} '당신은 백만장자가 될거에요!'\n{else} _?_ '안타깝지만... 큰돈을 벌기 힘들겠네요.'"
             mp_choice_options:
             -   option: "`{if}`\n"
                 feedback: '`{if}`는 위쪽 라인에 있다.'
             -   option: "`{at}` `{random}`\n"
-                feedback: No, you don't need `{at} {random}`.
+                feedback: 아니오, 당신은 `{at} {random}` 가 필요없어요.
             -   option: "`{else}`\n"
                 feedback: '`{else}` 명령이 이미 있습니다'
             -   option: "`{print}`\n"
                 feedback: 아주 좋아요!
             correct_answer: D
-            hint: After `{else}` a `{print}` command follows
+            hint: 음 `{else}` 뒤에 `{print}` 명령어가 따라와요
             question_score: '10'
         8:
             question_text: 물음표의 자리에 어떤 단어가 있어야 할까요?
-            code: "animal {is} {ask} 'What is your favorite animal?'\n{if} _?_ {is} penguin {print} 'Thats my favorite animal too!'\n{else} {print} 'Cool! I like penguins.'"
+            code: "animal {is} {ask} '좋아하는 동물은 무엇이에요?'\n{if} _?_ {is} 펭귄 {print} '그건 저도 좋아하는 동물이에요!'\n{else} {print} '멋져요! 나는 펭귄을 좋아해요.'"
             mp_choice_options:
             -   option: "```\nfavorite animal\n```\n"
                 feedback: 그건 변수명이 아니야.
@@ -1758,39 +1758,39 @@ levels:
             -   option: "`{if}`\n"
                 feedback: '`{if}`이(가) 이미 있습니다'
             -   option: "`{print}`\n"
-                feedback: No, that's not it.
+                feedback: 아니오, 이건 아니에요.
             correct_answer: B
-            hint: What the variable name?
+            hint: 변수명은 무엇일까요?
             question_score: '10'
         9:
             question_text: 탈출하려면 어느 문을 선택해야 합니까??
-            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            code: "{print} '유령의 집에서 탈출하기!'\n{print} '앞에 3개의 문이 있습니다'\ndoor {is} {ask} '어느 문을 선택하겠습니까?'\nmonsters {is} 뱀파이어, 늑대인간, 거대한거미\n{if} door {is} 2 {print} '예, 당신을 탈출할수 있어요!'\n{else} {print} '당신은 잡아먹혔어요... ' 괴물출현 {at} {random}"
             mp_choice_options:
             -   option: '1'
                 feedback: 나쁜 선택! 잡아먹히는 거야
-            -   option: 'should'
+            -   option: '2'
                 feedback: 좋았어! 탈출했어!
             -   option: '3'
                 feedback: 나쁜 선택이야! 잡아먹히는 거야.
-            -   option: It's a trap, you will always be eaten!
+            -   option: 함정입니다. 당신은 항상 잡아 먹힐 겁니다!
                 feedback: 운이 좋진 않네요!
             correct_answer: B
-            hint: One of the doors will keep you safe..
+            hint: 그 문들 중 하나가 당신을 안전하게 지켜줄 겁니다..
             question_score: '10'
         10:
             question_text: 1번 문 뒤에 어떤 괴물이 서 있나요?
-            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            code: "{print} '유령의 집에서 탈출하기!'\n{print} '앞에 3개의 문이 있습니다'\ndoor {is} {ask} '어느 문을 선택하겠습니까?'\nmonsters {is} 뱀파이어, 늑대인간, 거대한거미\n{if} door {is} 2 {print} '예, 당신을 탈출할수 있어요!'\n{else} {print} '당신은 잡아먹혔어요... ' 괴물출현 {at} {random}"
             mp_choice_options:
-            -   option: Hedy picks a random monster each time.
+            -   option: Hedy 는 매번 랜덤으로 괴물을 고르네요.
                 feedback: 아주 좋아요!
-            -   option: vampire
+            -   option: 뱀파이어
                 feedback: 항상 그런 건 아닌데...
-            -   option: werewolf
+            -   option: 늑대인간
                 feedback: 항상 그런 건 아닌데...
-            -   option: giant spider
+            -   option: 거대한거미
                 feedback: 항상 그런 건 아닌데...
             correct_answer: A
-            hint: Mind the last 3 words... monsters `{at} {random}`...
+            hint: 마지막 세 단어를 조심하세요... 괴물출현 `{at} {random}`...
             question_score: '10'
     12:
         1:
@@ -2005,7 +2005,7 @@ levels:
             question_score: '10'
         5:
             question_text: 이 코드에 대한 설명으로 옳은 것은?
-            code: "{if} name = 'Cinderella' {and} shoe_size = '38'\n    {print} 'You are my one true love!'"
+            code: "{if} name = 'Cinderella' {and} shoe_size = 38\n    {print} 'You are my one true love!'"
             mp_choice_options:
             -   option: Every person with shoe size 38 is this prince's one true love
                 feedback: 왕자님은 그것보다 좀 더 까다롭군요!
