@@ -310,7 +310,7 @@ adventures:
                     Deze code werkt nog niet, omdat je nog geen variabelen gebruikt hebt.
                     Verander de `{ask}` en `{echo}` commando's in jouw code naar de juiste vorm, die je in dit level geleerd hebt.
 
-                    **Extra** Voeg een slaapcommando toe aan jouw code om spanning in het verhaal op te bouwen.
+                    **Extra** Voeg een {sleep} commando toe aan jouw code om spanning in het verhaal op te bouwen.
                 example_code: |-
                     ```
                     naam {is} {ask} Hoe heet de hoofdpersoon?
@@ -428,7 +428,8 @@ adventures:
                     In dit level kun je je verhaal écht interactief maken! In dit level is het `{if}` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `{if}`. Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
 
                     ### Opdracht 1
-                    In de voorbeeldcode zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! **(extra)** Maak het verhaal nog langer. Wat gebeurt er verder? Je kan ook een tweede vraag toevoegen met een tweede keuze.
+                    In de voorbeeldcode zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! 
+                    **Extra** Maak het verhaal nog langer. Wat gebeurt er verder? Je kan ook een tweede `{ask}` toevoegen met een tweede keuze.
 
                     ### Opdracht 2
                     Oefen met het inspringen. Ga terug naar level 5, zoek je verhaalprogramma op. Maak dan je goede én slechte einde ieder minstens drie regels.
@@ -491,13 +492,12 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
-                story_text: |
+                story_text: |-
+                    Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
 
-                      Aanhalingstekens zijn nu nodig om woorden op te slaan in een variabele, voor en achter ieder element in de lijst.
-
-                      ### Opdracht
-                      Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
-                      Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
+                    ### Opdracht
+                    Zoek een verhaal op uit een eerder level, je mag zelf kiezen welk level.
+                    Zorg dan dat alles weer in orde is door op de juiste plekken aanhalingstekens toe te voegen.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
@@ -1365,10 +1365,10 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
             3:
                 story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                      In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen.
-                      Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
-                      Zo kun je de computer laten kiezen uit steen, papier en schaar.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     keuzes {is} steen, papier, schaar
@@ -1628,15 +1628,15 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             13:
-                story_text: |
+                story_text: |2
 
                       ### Opdracht 1
-                      Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
+                    Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
-                      ### Opdracht 2 (extra)
-                      Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
-                      Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
-                      Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
+                    ### Opdracht 2 (extra)
+                    Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
+                    Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
+                    Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
 
                 example_code: |
                     ```
@@ -1718,17 +1718,15 @@ adventures:
                     In dit level kun je een variabele gebruiken en het `{at} {random}` commando om Hedy antwoorden te laten kiezen op je vraag.
                     Kijk maar naar dit voorbeeld:
                 example_code: |
-
-                      In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
-                      ```
-                      {print} Hoi Ik ben Hedy de Waarzegger
-                      vraag {is} {ask} Wat wil je weten?
-                      {print} vraag
-                      antwoorden {is} ja, nee, misschien
-                      {print} Mijn glazen bol zegt...
-                      {sleep} 2
-                      {print} antwoorden {at} {random}
-                      ```
+                    ```
+                    {print} Hoi Ik ben Hedy de Waarzegger
+                    vraag {is} {ask} Wat wil je weten?
+                    {print} vraag
+                    antwoorden {is} ja, nee, misschien
+                    {print} Mijn glazen bol zegt...
+                    {sleep} 2
+                    {print} antwoorden {at} {random}
+                    ```
                 story_text_2: |
                     ### Opdracht
                     Er zijn nu maar 3 antwoordopties waar Hedy uit kan kiezen, kun jij er meer toevoegen? Bijvoorbeeld: zeker weten, geen idee of probeer het nog eens!
@@ -1982,22 +1980,20 @@ adventures:
                 story_text: |
                     In dit level kun je in je restaurant prijzen toevoegen en berekenen!
                 example_code: |
-
-                      Je kunt een simpel restaurant maken:
-                        ```
-                        {print} 'Welkom bij McHedy'
-                        {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                        {print} 'U krijgt frietjes en drinken bij uw bestelling. '
-                        eten = {ask} 'Wat wilt u bestellen?'
-                        prijs = 0
-                        {if} eten {is} hamburger prijs = 8
-                        {if} eten {is} kroket prijs = 6
-                        {if} eten {is} kaassoufle prijs = 5
-                        {print} 'U heeft een ' eten ' besteld'
-                        {print} 'Dat is dan ' prijs ' euro, alstublieft!'
-                        {print} 'Bedankt en eet smakelijk!'
-                        ```
-                        In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
+                    Je kunt een simpel restaurant maken:
+                    ```
+                    {print} 'Welkom bij McHedy'
+                    {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
+                    {print} 'U krijgt frietjes en drinken bij uw bestelling. '
+                    eten = {ask} 'Wat wilt u bestellen?'
+                    prijs = 0
+                    {if} eten {is} hamburger prijs = 8
+                    {if} eten {is} kroket prijs = 6
+                    {if} eten {is} kaassoufle prijs = 5
+                    {print} 'U heeft een ' eten ' besteld'
+                    {print} 'Dat is dan ' prijs ' euro, alstublieft!'
+                    {print} 'Bedankt en eet smakelijk!'
+                    ```
                 start_code: "{print} 'Welkom'"
             7:
                 story_text: |
@@ -2671,7 +2667,7 @@ adventures:
     ask_command:
         levels:
             1:
-                example_code_2: "```\n{print} Hallo!\n{ask} Hoe heet je? \n{echo} hello\n```\n"
+                example_code_2: "```\n{print} Hallo!\n{ask} Hoe heet je? \n{echo} Hoi\n```\n"
                 example_code_3: "```\n_ Hoe gaat het?\n_\n```\n"
                 story_text: "## Het vraag commando\nNu je het`{print}` commando onder de knie hebt, is het tijd voor een nieuw commando: `{ask}`. Met het`{ask}` commando, kun je een vraag stellen. Kijk maar:\n"
                 example_code: "```\n{print} Hallo!\n{ask} Wat is jouw naam?\n```\n"
@@ -2682,7 +2678,7 @@ adventures:
                 story_text: "## Het vraag commando\nNu we **variabelen** in onze codes kunnen gebruiken, hebben we het `{echo}` commando niet langer nodig.\nWe kunnen variabelen gebruiken om antwoorden in op te slaan. Hierdoor kunnen we antwoorden op meerdere vragen gebruiken in onze codes.\nKijk maar eens naar het voorbeeld:\n\nOp deze manier worden je programma's steeds interactiever!\n"
                 example_code: "```\nnaam {is} {ask} Wat is je naam?\n{print} Hoi naam\nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar oud\n```\n"
                 story_text_2: "### Opdracht\nJe hebt in het vorige avontuur al geleerd hoe je variabelen kunt instellen met het`{is}` commando.\nDaar heb je minstens 3 variabelen gemaakt en ze gebruikt met een print commando.\nNu gaan we de variabelen interactief maken in plaats van ze in te stellen, zoals we deden in ons voorbeeld. \n\nKopieer je code van het vorige avontuur en maak de variabelen interactief door `{ask}` commando's te gebruiken.\n"
-                example_code_2: "```\nlievelingsdier is ask Wat is je lievelingsdier?\nprint Ik hou van lievelingsdier\n```\n"
+                example_code_2: "```\nlievelingsdier {is} {ask} Wat is je lievelingsdier?\n{print} Ik hou van lievelingsdier\n```\n"
                 start_code: "naam {is} {ask} Hoe heet je?\n{print} Hoi naam\nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar oud."
         name: "{ask}"
         description: Introduction ask command
@@ -2724,7 +2720,7 @@ adventures:
                     score = 25
                     {print} 'Jij hebt ' score ' gehaald!'
                     ```
-                start_code: "name = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'"
+                start_code: "name = {ask} 'Wie ben jij?'\n{if} name = 'Hedy de Robot'\n    {print} 'Hoi!'"
             4:
                 story_text: |
                     ## 'Aanhalingstekens'
@@ -2845,8 +2841,8 @@ adventures:
                     {print} '5 keer 5 is ' 5 * 5
                     {print} '5 gedeeld door 5 is ' 5 / 5
                     ```
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                story_text_2: "We gaan het opslaan van een variabele veranderen! Vanaf nu mag je `=` gebruiken in plaats van `{is}` om een woord of een getal in een variabele op te slaan, dat ziet er zo uit:\n"
+                example_code_2: "```\nnaam = Hedy\nantwoord = 20 + 4\n```\n"
             12:
                 story_text: |-
                     **Rekenen met woorden**
@@ -2997,6 +2993,9 @@ adventures:
             2:
                 story_text: |
                     Nog een nieuw commando in dit level is `{sleep}`, waarmee je het programma een tijdje kunt pauzeren.Als je een getal achter {sleep} zet, wacht het programma zoveel seconden.
+
+                    ### Opdracht
+                    Ga met dit nieuwe commando oefenen door je eigen code te schrijven waarin je 3 keer het {sleep} commando gebruikt. Bij elk {sleep} commando moet de wachtttijd verschillend zijn.
                 example_code: |
                     ```
                     {print} Mijn favoriete kleur is...
@@ -3163,16 +3162,16 @@ adventures:
                     Let op! Gebruik bij het `{clear}` commando ook altijd een `{sleep}` anders wist Hedy je scherm zo vlug dat je de tekst niet eens gezien hebt!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'VERRASSING!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'VERRASSING!'
                     ```
     harry_potter:
         name: Harry Potter
