@@ -4,7 +4,7 @@
 
 var Sk = Sk || {};
 
-Sk.Breakpoint = function(filename, lineno, colno) {
+Sk.Breakpoint = function (filename, lineno, colno) {
     this.filename = filename;
     this.lineno = lineno;
     this.colno = colno;
@@ -25,9 +25,18 @@ Sk.Debugger = class {
         this.filename = filename;
         this.editor_ref = editor_ref;
         this.code = "";
+        this.program_data = null;
         this.resolveCallback = null;
         this.rejectCallback = null;
     }
+    set_program_data(program_data) {
+        this.program_data = program_data;
+    }
+
+    get_program_data() {
+        return this.program_data;
+    }
+
     set_code(code) {
         this.code = code;
     }
@@ -96,6 +105,7 @@ Sk.Debugger = class {
         }
         return false;
     }
+
     get_breakpoints_list() {
         return this.dbg_breakpoints;
     }
@@ -186,7 +196,7 @@ Sk.Debugger = class {
             this.tmp_breakpoints[key] = true;
         }
     }
-    // aplicar tecnica de MiscEval en Skilpt aqui
+
     suspension_handler(susp) {
         return new Promise(function (resolve, reject) {
             try {
@@ -208,7 +218,8 @@ Sk.Debugger = class {
                                 reject(e);
                             }
                         };
-                        var resumeWithError = function rejected(e) {;
+                        var resumeWithError = function rejected(e) {
+                            ;
                             try {
                                 r.data["error"] = e;
                                 resume();
@@ -257,11 +268,11 @@ Sk.Debugger = class {
         if (this.suspension_stack.length === 0) {
             return Promise.resolve();
         } else {
-            console.log(promise)
-            var promise = this.suspension_handler(this.get_active_suspension());          
+            var promise = this.suspension_handler(this.get_active_suspension());
             return promise
         }
     }
+
     pop_suspension_stack() {
         this.suspension_stack.pop();
         this.current_suspension -= 1;
@@ -269,13 +280,12 @@ Sk.Debugger = class {
 
     success(r) {
         if (r instanceof Sk.misceval.Suspension) {
-            console.log('We are in 274 success')
             if (r.data['type'] === 'Sk.promise') {
                 var promise = this.suspension_handler(r);
                 promise.then(this.success.bind(this), this.error.bind(this));
             }
             this.set_suspension(r);
-        } else {;
+        } else {
             if (this.suspension_stack.length > 0) {
                 // Current suspension needs to be popped of the stack
                 this.pop_suspension_stack();
@@ -308,8 +318,8 @@ Sk.Debugger = class {
     asyncToPromise(suspendablefn, suspHandlers, debugger_obj) {
         return new Promise(function (resolve, reject) {
             try {
-                debugger_obj.resolveCallback = resolve;                
-                debugger_obj.resolveCallback = reject;                
+                debugger_obj.resolveCallback = resolve;
+                debugger_obj.resolveCallback = reject;
                 var r = suspendablefn();
 
                 (function handleResponse(r) {
@@ -330,7 +340,7 @@ Sk.Debugger = class {
                                 reject(e);
                             }
                         };
-                        var resumeWithError = function rejected(e) {;
+                        var resumeWithError = function rejected(e) {
                             try {
                                 r.data["error"] = e;
                                 resume();
