@@ -845,10 +845,6 @@ adventures:
                 example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n_ Hello!\n```\n"
                 start_code: "{print} Welcome to Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
@@ -956,6 +952,10 @@ adventures:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
                 story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         name: "{for}"
         description: for command
         default_save_name: for

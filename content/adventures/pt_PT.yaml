@@ -1310,10 +1310,6 @@ adventures:
                 story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         name: "{print}"
         description: Introduction print command
         default_save_name: print
@@ -1386,6 +1382,10 @@ adventures:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
                 story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         name: "{for}"
         description: for command
         default_save_name: for
