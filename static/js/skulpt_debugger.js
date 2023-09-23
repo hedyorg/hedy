@@ -13,7 +13,7 @@ Sk.Breakpoint = function (filename, lineno, colno) {
 };
 
 Sk.Debugger = class {
-    constructor(filename, output_callback, editor_ref) {
+    constructor(filename, output_callback) {
         this.dbg_breakpoints = {};
         this.tmp_breakpoints = {};
         this.suspension_stack = [];
@@ -23,7 +23,6 @@ Sk.Debugger = class {
         this.output_callback = output_callback;
         this.step_mode = false;
         this.filename = filename;
-        this.editor_ref = editor_ref;
         this.source_code_lines = [];
         this.program_data = null;
         this.resolveCallback = null;
@@ -38,7 +37,7 @@ Sk.Debugger = class {
         return this.program_data;
     }
 
-    set_code(code) {
+    set_code_lines(code) {
         this.source_code_lines = code;
     }
 
@@ -205,7 +204,11 @@ Sk.Debugger = class {
         }
 
         suspension = parent;
-
+        try {
+            this.output_callback();            
+        } catch (error) {
+            console.error(error)
+        }
         this.print_suspension_info(suspension);
     }
 

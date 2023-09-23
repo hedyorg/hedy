@@ -1,4 +1,4 @@
-import { runit } from "./app";
+import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 
 let theGlobalEditor: HedyEditor;
@@ -221,8 +221,6 @@ export function startDebug() {
     continueButton.show();
     stopButton.show();
     resetButton.show();
-
-    incrementDebugLine();
   }
 }
 
@@ -273,21 +271,16 @@ function clearDebugVariables() {
 }
 
 export function incrementDebugLine() {
-  var storage = window.localStorage;
-  var debugLine = storage.getItem("debugLine");
-
-  const nextDebugLine = debugLine == null
-    ? 0
-    : parseInt(debugLine, 10) + 1;
-
-  storage.setItem("debugLine", nextDebugLine.toString());
-  markCurrentDebuggerLine();
-
-  var lengthOfEntireEditor = theGlobalEditor.contents.split("\n").filter(e => e).length;
-  if (nextDebugLine < lengthOfEntireEditor) {
-    debugRun();
-  } else {
-    stopDebug();
+  console.log('We are in increment debug line');
+  let active_suspension = theGlobalDebugger.get_active_suspension();
+  let lineNumber = active_suspension.$lineno;
+  for (let [_, statement] of Object.entries(theGlobalSourcemap)) {
+    const pythonLine = statement.python_range.from_line;
+    console.log(`Python Line ${pythonLine + 98 - 1}`);
+    console.log(`Debugger Line${lineNumber}`);
+    if (lineNumber == pythonLine + 98 - 1) {
+      theGlobalEditor.setDebuggerCurrentLine(statement.hedy_range.from_line - 1);
+    }
   }
 }
 

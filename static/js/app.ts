@@ -9,7 +9,7 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints } from './debugging';
+import { incrementDebugLine, initializeDebugger, load_variables, returnLinesWithoutBreakpoints, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
@@ -1051,7 +1051,10 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
     
   } else if (run_type === "debug") {
-    theGlobalDebugger = new Sk.Debugger('<stdin>', outf);
+    
+    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine);
+    theGlobalSourcemap = sourceMap;
+    
     Sk.configure({
       output: outf,
       read: builtinRead,
@@ -1071,8 +1074,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
       }
     }    
-    $('#debug_continue').show();
-    theGlobalDebugger.set_code(code.split('\n'));
+    
+    theGlobalDebugger.set_code_lines(code.split('\n'));
     theGlobalDebugger.set_program_data({
       Code: code,
       source_map: sourceMap,
@@ -1080,6 +1083,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_pygame: hasPygame,
       Warning: hasWarnings
     });
+    
+    startDebug();
+
     return theGlobalDebugger.asyncToPromise(() => Sk.importMainWithBody("<stdin>", true, code, true), {}, theGlobalDebugger).then(
       theGlobalDebugger.success.bind(theGlobalDebugger)
     ).catch(function(err: any) {
