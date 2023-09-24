@@ -1098,8 +1098,7 @@ adventures:
                     {print} 'toplam puan ' puan ' oldu'
                     ```
                 example_code_2: |2
-
-                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                     Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1330,7 +1329,7 @@ adventures:
                     ```
 
                 start_code: "{print} 'Hesap makinesine hoş geldiniz!'"
-                story_text_3: "\n        **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n        Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
+                story_text_3: "\n**Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\nBu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
             9:
                 story_text: |
                     Seviye 6'da bir hesap makinesi oluşturmuştunuz, bu seviyede bu kodu birden fazla soru soracak şekilde genişletebilirsiniz.
@@ -2755,9 +2754,9 @@ adventures:
                 story_text: "Gerçek Python koduna ulaştık! Yani bu, bundan sonra `{print}` ve `{range}` ile beraber artık bir de parantez kullanmamız gerektiği anlamına geliyor.\nBu aynı zamanda İngilizce komutları kullandığınız sürece bu seviyedeki Hedy kodunu herhangi bir Python ortamında kullanabileceğiniz anlamına gelir. Şimdiye kadar kullanmadıysanız, bunu yapmak için komutlar menüsünden geçişi değiştirebilirsiniz."
                 example_code: "```\n{print}('Merhaba!')\n{for} i {in} {range}(1, 10):\n    {print}('Bu, satır ', i)\n```\n"
                 story_text_2: Birden fazla öğe yazdırmak istiyorsanız, bunları virgülle ayırmanız gerekir.
-                example_code_2: "```\nsıcaklık = 25\n{print}('Hava dışarıda ', temperature, ' derece')\n```\n"
+                example_code_2: "```\nsıcaklık = 25\n{print}('Hava dışarıda ', sıcaklık, ' derece')\n```\n"
                 story_text_3: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
-                example_code_3: "```\n{print}('Benim adım Hedy!')\nisim = {input}('Senin adın ne?')\n{print}('Demek senin ismin ', name)\n```\n"
+                example_code_3: "```\n{print}('Benim adım Hedy!')\nisim = {input}('Senin adın ne?')\n{print}('Demek senin ismin ', isim)\n```\n"
     ask_command:
         name: "{ask}"
         description: sor komutuna giriş

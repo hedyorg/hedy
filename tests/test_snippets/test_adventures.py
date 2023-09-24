@@ -1,3 +1,8 @@
+# Can be used to catch more languages with example codes in the story_text
+# feedback = f"Example code in story text {lang}, {adventure_name},
+# {level_number}, not recommended!"
+# print(feedback)
+
 import os
 from app import translate_error, app
 from flask_babel import force_locale
@@ -10,7 +15,7 @@ import utils
 from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
-fix_error = True
+fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
@@ -21,7 +26,6 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 
 filtered_language = None
 level = None
-
 
 def collect_snippets(path, filtered_language=None):
     Hedy_snippets = []
@@ -43,82 +47,41 @@ def collect_snippets(path, filtered_language=None):
                             level = adventure['levels'][level_number]
                             adventure_name = adventure['name']
 
-                            code_snippet_counter = 0
-                            # code snippets inside story_text
-                            for tag in utils.markdown_to_html_tags(level['story_text']):
-                                if tag.name != 'pre' or not tag.contents[0]:
-                                    continue
-                                # Can be used to catch more languages with example codes in the story_text
-                                # feedback = f"Example code in story text {lang}, {adventure_name},
-                                # {level_number}, not recommended!"
-                                # print(feedback)
-                                code_snippet_counter += 1
-                                try:
-                                    code = tag.contents[0].contents[0]
-                                except BaseException:
-                                    print("Code container is empty...")
-                                    continue
+                            for adventure_part, text in level.items():
+                                is_markdown = adventure_part != 'start_code'
 
-                                snippet = Snippet(
-                                    filename=f,
-                                    level=level_number,
-                                    field_name="story_text",
-                                    code=code,
-                                    adventure_name=adventure_name,
-                                    key=key)
-                                Hedy_snippets.append(snippet)
+                                if is_markdown:
+                                    # If we have Markdown, there can be multiple code blocks inside it
+                                    codes = [tag.contents[0].contents[0]
+                                             for tag in utils.markdown_to_html_tags(text)
+                                             if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+                                else:
+                                    # If we don't have Markdown, the entire field is a single code
+                                    # block
+                                    codes = [text]
 
-                            # code snippets inside start_code
-                            try:
-                                start_code = level['start_code']
-                                snippet = Snippet(
-                                    filename=f,
-                                    level=level_number,
-                                    field_name='start_code',
-                                    code=start_code,
-                                    adventure_name=adventure_name,
-                                    key=key)
-                                Hedy_snippets.append(snippet)
-
-                            except KeyError:
-                                print(f'Problem reading startcode for {lang} level {level}')
-                                pass
-                            # Code snippets inside example code
-                            try:
-                                example_code = utils.markdown_to_html_tags(level['example_code'])
-                                for tag in example_code:
-                                    if tag.name != 'pre' or not tag.contents[0]:
-                                        continue
-                                    code_snippet_counter += 1
-                                    try:
-                                        code = tag.contents[0].contents[0]
-                                    except BaseException:
-                                        print("Code container is empty...")
-                                        continue
-
-                                    snippet = Snippet(
+                                for i, code in enumerate(codes):
+                                    Hedy_snippets.append(Snippet(
                                         filename=f,
                                         level=level_number,
-                                        field_name="example_code",
+                                        field_name=adventure_part,
                                         code=code,
+                                        adventure_name=adventure_name,
                                         key=key,
-                                        adventure_name=adventure_name)
-                                    Hedy_snippets.append(snippet)
-                            except Exception as E:
-                                print(E)
+                                        counter=1))
 
     return Hedy_snippets
 
-filtered_language = 'es'
+# filtered_language = 'tr'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language)]
 
-level = 1
-if level:
-    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+# level = 6
+# if level:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
