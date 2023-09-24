@@ -17,12 +17,13 @@ from hedy_sourcemap import SourceRange
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None):
         self.filename = filename
         self.level = level
         self.field_name = field_name
         self.code = code
         self.error = error
+        self.key = key
         filename_shorter = os.path.basename(filename)
         if language is None:
             self.language = filename_shorter.split(".")[0]
