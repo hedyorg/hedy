@@ -638,17 +638,17 @@ levels:
                     ```
                     {print} Im very excited to take this quiz!
                     ```
-                feedback: "`{ask}` needs quotation marks too!"
+                feedback: "{print} now needs quotation marks!"
             -   option: |
                     ```
                     {print} 'I'm very excited to take this quiz!'
                     ```
-                feedback: "`{at} {random}` still works"
+                feedback: "do not use apostrophe or use backticks instead"
             -   option: |
                     ```
                     {print} 'I'm very excited to take this quiz!
                     ```
-                feedback: "No, but 2 other commands do."
+                feedback: "careful when using quotes and apostrophe"
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
             question_score: '10'
@@ -911,7 +911,7 @@ levels:
             -   option: "ALARM INTRUDER"
                 feedback: "This is printed when you type in the incorrect password!"
             correct_answer: "B"
-            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
+            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'"
             question_score: '10'
         4:
             question_text: "What does Hedy print when you type in the wrong password?"
@@ -950,7 +950,7 @@ levels:
             hint: "The spelling of the word has to be exactly the same."
             question_score: '10'
         6:
-            question_text: "Which word should be on the place of the question mark in the last line?"
+            question_text: "Which word should be on the place of the blank in the last line?"
             code: |-
                 {print} 'Im Hedy the football fortune teller!'
                 {print} 'I will predict what place your team will end up!'
@@ -982,7 +982,7 @@ levels:
             hint: "`{if}` goes together with...?"
             question_score: '10'
         7:
-            question_text: "Which word should be in the place of the question mark?"
+            question_text: "Which word should be in the place of the blank?"
             code: |-
                 {print} 'I can predict if you will be a millionair or not!'
                 name {is} {ask} 'Whats your name?'
@@ -1005,7 +1005,7 @@ levels:
             hint: "After `{else}` a `{print}` command follows"
             question_score: '10'
         8:
-            question_text: "Which word should be on the place of the question mark?"
+            question_text: "Which word should be on the place of the blank?"
             code: |-
                 animal {is} {ask} 'What is your favorite animal?'
                 {if} _ {is} penguin {print} 'Thats my favorite animal too!'
@@ -1671,7 +1671,7 @@ levels:
                     Welcome to restaurant Hedy
                     Pancakes
                     Pancakes
-                feedback:  "Well done!"
+                feedback: "Well done!"
             correct_answer: "D"
             hint: "The first sentence and question will not be repeated"
             question_score: '10'
@@ -2601,7 +2601,7 @@ levels:
                     {print} 'I would like a ' flavors {at} {random} ' cake.'
                     ```
                 feedback: "Alright!"
-            -   option: |4
+            -   option: |2
 
                     ```
                     flavors = 'vanilla, strawberry, chocolate'
@@ -3096,9 +3096,9 @@ levels:
         1:
             question_text: "Which symbol should be used on the blank?"
             code: |
-              name _ {ask} 'Who are you?'
-              {if} name == 'Hedy'
-                  {print} 'Me too!'
+                name _ {ask} 'Who are you?'
+                {if} name == 'Hedy'
+                    {print} 'Me too!'
             mp_choice_options:
             -   option: "`=>`"
                 feedback: "This is not a symbol."
@@ -3149,13 +3149,13 @@ levels:
         4:
             question_text: "What's wrong with this code?"
             code: |
-              price = 10
-              money = {ask} How much money do you have?
-              buy = {ask} 'Would you like to buy this teddy bear?'
-              {if} money >= price and buy == 'yes'
-                  {print} 'You can buy the bear!'
-              {else}
-                  {print} 'You cannot buy this bear!'
+                price = 10
+                money = {ask} How much money do you have?
+                buy = {ask} 'Would you like to buy this teddy bear?'
+                {if} money >= price and buy == 'yes'
+                    {print} 'You can buy the bear!'
+                {else}
+                    {print} 'You cannot buy this bear!'
             mp_choice_options:
             -   option: "In line 1 == should be used instead of ="
                 feedback: "No that's not it"
@@ -3171,12 +3171,12 @@ levels:
         5:
             question_text: "Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? "
             code: |
-              age = {ask} 'How old are you?'
-              ticket = {ask} 'Do you have a ticket?'
-              {if} age _ and ticket == 'yes'
-                  {print} 'You can enter the movie theater.'
-              {else}
-                  {print} 'You are not allowed to come in!'
+                age = {ask} 'How old are you?'
+                ticket = {ask} 'Do you have a ticket?'
+                {if} age _ and ticket == 'yes'
+                    {print} 'You can enter the movie theater.'
+                {else}
+                    {print} 'You are not allowed to come in!'
             mp_choice_options:
             -   option: "`> 12`"
                 feedback: "12 year olds are allowed too"
@@ -3192,12 +3192,12 @@ levels:
         6:
             question_text: "How many times do you have to say you are annoyed before this annoying game stops?"
             code: |
-              lives = 2
-              {repeat} 10 times
-                  {if} lives != 0
-                      answer = {ask} 'Are you annoyed yet?'
-                  {if} answer == 'yes'
-                      lives = lives - 1
+                lives = 2
+                {repeat} 10 times
+                    {if} lives != 0
+                        answer = {ask} 'Are you annoyed yet?'
+                    {if} answer == 'yes'
+                        lives = lives - 1
             mp_choice_options:
             -   option: "10 times"
                 feedback: "It stops after 2 times"
@@ -3213,20 +3213,20 @@ levels:
         7:
             question_text: "What should be filled in on the three blanks?"
             code: |
-              {print} 'Guess which number'
-              numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-              number = numbers {at} {random}
-              game = 'on'
-              {for} i {in} {range} 1 {to} 10
-                  {if} game == 'on'
-                      guess = {ask} 'Which number do you think it is?'
-                      {if} guess < number
-                          {print} _
-                      {if} guess > number
-                          {print} _
-                      {if} guess == number
-                          {print} _
-                          game = 'over'
+                {print} 'Guess which number'
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                number = numbers {at} {random}
+                game = 'on'
+                {for} i {in} {range} 1 {to} 10
+                    {if} game == 'on'
+                        guess = {ask} 'Which number do you think it is?'
+                        {if} guess < number
+                            {print} _
+                        {if} guess > number
+                            {print} _
+                        {if} guess == number
+                            {print} _
+                            game = 'over'
             mp_choice_options:
             -   option: "`'Lower'` and `'Higher'` and `'You win!'`"
                 feedback: "That's not quite right."
@@ -3242,11 +3242,11 @@ levels:
         8:
             question_text: "Which statement is true about this roller coaster?"
             code: |
-              length = {ask} 'Please fill in your length in cm'
-              {if} length < 120
-                  {print} 'Sorry, you cannot go on this roller coaster.'
-              {else}
-                  {print} 'Enjoy the ride'
+                length = {ask} 'Please fill in your length in cm'
+                {if} length < 120
+                    {print} 'Sorry, you cannot go on this roller coaster.'
+                {else}
+                    {print} 'Enjoy the ride'
             mp_choice_options:
             -   option: "You must be taller than 120 cm to go on the roller coaster"
                 feedback: "True!"
@@ -3262,13 +3262,13 @@ levels:
         9:
             question_text: "How many pieces of chocolate will give you a stomach ache according to this fitbit?"
             code: |
-              chocolate = {ask} 'How many pieces of chocolate have you eaten?'
-                {if} chocolate <= 2
-                    {print} 'That is a healthy amount'
-                {if} chocolate > 2 and chocolate =< 8
-                    {print} 'That is a bit much'
-                {if} chocolate > 8
-                    {print} 'You will get a stomach ache!'
+                chocolate = {ask} 'How many pieces of chocolate have you eaten?'
+                  {if} chocolate <= 2
+                      {print} 'That is a healthy amount'
+                  {if} chocolate > 2 and chocolate =< 8
+                      {print} 'That is a bit much'
+                  {if} chocolate > 8
+                      {print} 'You will get a stomach ache!'
             mp_choice_options:
             -   option: "1 or more"
                 feedback: "No"
@@ -3301,13 +3301,12 @@ levels:
             question_score: "10"
     15:
         1:
-            question_text: "Which symbol should be used on the blank? 
-            Tip: You must keep guessing until you get it right."
+            question_text: "Which symbol should be used on the blank? Tip: You must keep guessing until you get it right."
             code: |
-              answer = 0
-              while answer _ 'Amsterdam'
-                  answer = ask 'What is the capital city of the Netherlands?'
-              print 'You have given the correct answer'
+                answer = 0
+                while answer _ 'Amsterdam'
+                    answer = ask 'What is the capital city of the Netherlands?'
+                print 'You have given the correct answer'
             mp_choice_options:
             -   option: "`=!`"
                 feedback: "That is not right."
@@ -3324,24 +3323,24 @@ levels:
             question_text: "Which of these codes has used the correct symbol(s)?"
             mp_choice_options:
             -   option: |
-                  ```
-                  {while} name = Hedy
-                  ```
+                    ```
+                    {while} name = Hedy
+                    ```
                 feedback: "No"
             -   option: |
-                  ```
-                  {while} age = 24
-                  ```
+                    ```
+                    {while} age = 24
+                    ```
                 feedback: "No"
             -   option: |
-                  ```
-                  {while} time > 0
-                  ```
+                    ```
+                    {while} time > 0
+                    ```
                 feedback: "Yes!"
             -   option: |
-                  ```
-                  {while} answer == yes'
-                  ```
+                    ```
+                    {while} answer == yes'
+                    ```
                 feedback: "A quotation mark is missing"
             correct_answer: "C"
             hint: "When you are comparing two answers you should use =="
@@ -3349,8 +3348,8 @@ levels:
         3:
             question_text: "Which command should be filled in on the two blanks?"
             code: |
-              _ age >= 18
-                print 'you are not allowed in this bar'
+                _ age >= 18
+                  print 'you are not allowed in this bar'
             mp_choice_options:
             -   option: "`{in}`"
                 feedback: "That's not it"
@@ -3366,15 +3365,15 @@ levels:
         4:
             question_text: "What's wrong with this code?"
             code: |
-              options = 1, 2, 3, 4, 5, 6
-              print 'Throw 6 as fast as you can!'
-              thrown = 0
-              tries = 0
-              while thrown == 6
-                  thrown = options at random
-                  print 'You threw ' thrown
-                  tries = tries + 1
-              print 'Yes! You have thrown 6 in ' tries ' tries.'
+                options = 1, 2, 3, 4, 5, 6
+                print 'Throw 6 as fast as you can!'
+                thrown = 0
+                tries = 0
+                while thrown == 6
+                    thrown = options at random
+                    print 'You threw ' thrown
+                    tries = tries + 1
+                print 'Yes! You have thrown 6 in ' tries ' tries.'
             mp_choice_options:
             -   option: "In line 1 == should be used instead of ="
                 feedback: "No that's not it"
@@ -3390,14 +3389,14 @@ levels:
         5:
             question_text: "What should be placed on the blank to make this program work correctly?"
             code: |
-              wetness = 10
-              while wetness != 0
-                  print 'Your hair is still wet, hair dryer on!'
-                  sleep 1
-                  clear
-                  wetness _
-              
-              print 'All dry!'
+                wetness = 10
+                while wetness != 0
+                    print 'Your hair is still wet, hair dryer on!'
+                    sleep 1
+                    clear
+                    wetness _
+
+                print 'All dry!'
             mp_choice_options:
             -   option: "= wetness"
                 feedback: "That will not change anything"
@@ -3413,11 +3412,11 @@ levels:
         6:
             question_text: "What is wrong with this code?"
             code: |
-              lives = 100
-                  {while} lives != 0
-                  answer = {ask} 'Are you annoyed yet?'
-              {if} answer == 'yes'
-                  lives = lives - 1
+                lives = 100
+                    {while} lives != 0
+                    answer = {ask} 'Are you annoyed yet?'
+                {if} answer == 'yes'
+                    lives = lives - 1
             mp_choice_options:
             -   option: "while should be if"
                 feedback: "No that is not right"
@@ -3433,19 +3432,19 @@ levels:
         7:
             question_text: "How should this program be changed to that it works?"
             code: |
-              {print} 'Guess which number'
-              numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-              number = numbers {at} {random}
-              game = 'on'
-              {if} game == 'on'
-                  guess = {ask} 'Which number do you think it is?'
-                  {if} guess < number
-                      {print} _
-                  {if} guess > number
-                      {print} _
-                  {if} guess == number
-                      {print} _
-                      game = 'over'
+                {print} 'Guess which number'
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                number = numbers {at} {random}
+                game = 'on'
+                {if} game == 'on'
+                    guess = {ask} 'Which number do you think it is?'
+                    {if} guess < number
+                        {print} _
+                    {if} guess > number
+                        {print} _
+                    {if} guess == number
+                        {print} _
+                        game = 'over'
             mp_choice_options:
             -   option: "... change the first {if} into a {while}"
                 feedback: "Perfect!"
@@ -3461,12 +3460,12 @@ levels:
         8:
             question_text: "Which statement is true about this automated toilet system?"
             code: |
-              while toilet == 'occupied'
-                  lights = 'on'
-                  air_freshener_sprays = 'yes'
-                  sleep 60
-              else
-                  lights = 'off'
+                while toilet == 'occupied'
+                    lights = 'on'
+                    air_freshener_sprays = 'yes'
+                    sleep 60
+                else
+                    lights = 'off'
             mp_choice_options:
             -   option: "The lights and air freshener will turn off after 1 minute"
                 feedback: "False!"
@@ -3482,13 +3481,13 @@ levels:
         9:
             question_text: "What will the diet app say if you have eaten 1600 calories today?"
             code: |
-              calories = {ask} 'How many calories have you eaten today?'
-                {while} calories <= 1000
-                    {print} 'You could eat some more'
-                {while} calories > 1000 and calories =< 2000
-                    {print} 'That is alright'
-                {while} calories > 2000
-                    {print} 'You have had enough for today'
+                calories = {ask} 'How many calories have you eaten today?'
+                  {while} calories <= 1000
+                      {print} 'You could eat some more'
+                  {while} calories > 1000 and calories =< 2000
+                      {print} 'That is alright'
+                  {while} calories > 2000
+                      {print} 'You have had enough for today'
             mp_choice_options:
             -   option: "Nothing. 1600 is not programmed into the app."
                 feedback: "No"
