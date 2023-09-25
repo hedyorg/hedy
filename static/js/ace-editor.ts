@@ -231,7 +231,7 @@ export class HedyAceEditor implements HedyEditor {
     }
   }
 
-  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
+  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: any) {
     const ret = this.editorEvent.on(key, handler);
     // This particular event needs to be attached to the session
     if (key == 'changeBreakpoint'){

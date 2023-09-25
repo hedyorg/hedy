@@ -123,9 +123,4 @@ export interface HedyEditor {
    * Set the current line in the debugger
    */
   setDebuggerCurrentLine(line: number | undefined): void;
-
-  /**
-   * Mark the given set of lines as currently struck through
-   */
-  strikethroughLines(lines: number[]): void;
 }

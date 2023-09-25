@@ -1,3 +1,4 @@
+import { HedyAceEditor } from "./ace-editor";
 import { runit } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 
@@ -140,7 +141,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 }
 
 function initializeBreakpoints(editor: HedyEditor) {
-  
+
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
     const target = e.domEvent.target as HTMLElement;
 
@@ -188,8 +189,12 @@ function initializeBreakpoints(editor: HedyEditor) {
       .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
       .map(([line, _]) => line)
       .map(x => parseInt(x, 10));
-
-    theGlobalEditor.strikethroughLines(disabledLines);
+    // This event handler will actually not be executed or attached
+    // If the editor is CodeMirror, so this won't be even executed
+    // This function only really makes sense in Ace
+      if (theGlobalEditor instanceof HedyAceEditor) {
+      theGlobalEditor.strikethroughLines(disabledLines);
+    }
   });
 }
 
