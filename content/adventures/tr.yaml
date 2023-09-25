@@ -15,7 +15,7 @@ adventures:
 
                 example_code: |
                     **Uyarı! Bu kod çalışmaz!**
-                    Hedy'de komutlar arada değişecektir. Örneğin `yankıla` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
+                    Hedy'de komutlar arada değişecektir. Örneğin `{echo}` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
                     ```
                     {print} Hedy's 'e Hoş Geldiniz
                     {ask} Ne yemek istersiniz?
@@ -257,7 +257,10 @@ adventures:
                 start_code: |-
                     {print} 'Hadi bir sonraki seviyeye geçelim!'
                 story_text: |
-                    Hedy'nin son seviyesine neredeyse ulaşmak üzeresiniz, aferin! Bu seviyede `{print}` kullanmanın gerçek bir Python yolunu öğreneceksiniz.
+                    Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
+
+                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{ elif }`. `{elif}` {else} {if}'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
+                    Şuna bir bakın!
             18:
                 start_code: |-
                     {print} ('Harika iş çıkardınız!!!')
@@ -727,15 +730,20 @@ adventures:
                     Sarhoş Denizci de bu seviyede hızlı bir şekilde yapılır. Tüm şarkı için sadece 8 satıra ihtiyacınız var, bir göz atın!
                 example_code: |
                     ```
-                    hayvanlar = ['eşek', 'köpek', 'inek']
+                    hayvanlar = ['eşekleri', 'köpekleri', 'inekleri']
                     sesler = ['ai', 'hav', 'möö']
                     {for} i {in} {range} 1 {to} 3
                         hayvan = hayvanlar[i]
                         ses = sesler[i]
                         {print} 'Ali Babanın bir çiftliği var'
+                        {print} '...'
                         {print} 'çiftliğinde ' hayvan ' var'
+                        {print} '...'
                         {print} ses ses ' diye bağırır'
+                        {print} '...'
+                        {print} '...'
                         {print} 'çiftliğinde Ali Babanın'
+                        {print} '...'
                     ```
 
                     ```
@@ -1091,7 +1099,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                                Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1322,7 +1330,7 @@ adventures:
                     ```
 
                 start_code: "{print} 'Hesap makinesine hoş geldiniz!'"
-                story_text_3: "\n    **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n    Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
+                story_text_3: "\n        **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n        Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
             9:
                 story_text: |
                     Seviye 6'da bir hesap makinesi oluşturmuştunuz, bu seviyede bu kodu birden fazla soru soracak şekilde genişletebilirsiniz.
@@ -1433,7 +1441,7 @@ adventures:
                 example_code: "```\nsayı = 10\n{for} i {in} {range} 1 şuraya 10\n    {print} i * sayı\n```\n"
             13:
                 example_code: "```\ncevap1 = {ask} '10 kere 7 kaç eder?'\ncevap2 = {ask} '6 kere 7 kaç eder?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
-                story_text: "\n### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
+                story_text: "\n    ### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
                 start_code: '# Kodunuzu buraya yazın'
     restaurant:
         name: "Restoran"
@@ -1899,7 +1907,7 @@ adventures:
                         {print} isim ' evcil hayvan olarak ' pets {at} {random} ' besleyecek.'
                         {sleep}
                     ```
-                start_code: "# place your code here"
+                start_code: "# kodunuzu buraya yazın"
             12:
                 story_text: |-
                     12. seviyeden itibaren artık, listelerde her öğeden önce ve sonra tırnak işareti kullanmanız gerekecektir.
@@ -2684,7 +2692,7 @@ adventures:
     repeat_command:
         name: "{repeat}"
         description: tekrarla komutu
-        default_save_name: repeat_command
+        default_save_name: tekrarla_komutu
         levels:
             7:
                 story_text: "## Tekrarla! Tekrarla! Tekrarla!\nSeviye 7 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:\n\n### Alıştırma\nTekrarla komutu ile oynayın. Mutlu yıllar şarkısını şimdi 4 yerine sadece 3 satır kodla yapabilir misiniz?\n"
@@ -2742,10 +2750,6 @@ adventures:
                 example_code: "```\n{print} Merhaba, programcı!\n{print} Hedy'ye hoş geldin!\n```\n"
                 example_code_2: "```\n_ Merhaba!\n```\n"
                 start_code: "{print} Hedy'ye hoş geldin!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'"
-                story_text: "Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'\n```\n"
             18:
                 start_code: "isim = 'Hedy'\n{print}('Benim adım ', isim)"
                 story_text: "Gerçek Python koduna ulaştık! Yani bu, bundan sonra `{print}` ve `{range}` ile beraber artık bir de parantez kullanmamız gerektiği anlamına geliyor.\nBu aynı zamanda İngilizce komutları kullandığınız sürece bu seviyedeki Hedy kodunu herhangi bir Python ortamında kullanabileceğiniz anlamına gelir. Şimdiye kadar kullanmadıysanız, bunu yapmak için komutlar menüsünden geçişi değiştirebilirsiniz."
@@ -2757,7 +2761,7 @@ adventures:
     ask_command:
         name: "{ask}"
         description: sor komutuna giriş
-        default_save_name: ask_command
+        default_save_name: sor_komutu
         levels:
             1:
                 story_text: "## sor komutu\nArtık `{print}` komutunu kullanabildiğinize göre, bir sonraki komutu öğrenmeye hazırsınız: `{ask}`. `{ask}` komutunu kullanarak bir soru sorabilirsiniz. Şuna bir bakın:\n"
@@ -2769,18 +2773,18 @@ adventures:
                 start_code: "{print} Merhaba!\n{ask} Senin adın ne?\n{echo} merhaba\n"
             2:
                 story_text: "## sor komutu\nArtık kodlarımızda **değişkenleri** kullanabildiğimize göre, `{echo}` komutuna artık ihtiyacımız yok.\nSorularımızın cevaplarını saklamak için değişkenler kullanabiliriz ve bu şekilde kodlarımızda birden fazla sorunun cevabını kullanabiliriz.\nŞuna bir bakın:\n\nBu şekilde kodunuz etkileşimli hale geliyor!\n"
-                example_code: "```\nisim {is} {ask} Senin adın ne?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} isim age yaşındadır.\n```\n"
+                example_code: "```\nisim {is} {ask} Senin adın ne?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} isim yaş yaşındadır.\n```\n"
                 story_text_2: "### Alıştırma\nÖnceki sekmede `{is}` komutu ile değişkenleri ayarlama alıştırması yaptınız.\nEn az 3 değişken oluşturdunuz ve bunları bir yazdır komutu ile kullandınız.\nŞimdi, değişkenleri ayarlamak yerine, örneğimizde yaptığımız gibi değişkenleri etkileşimli hale getirmenizi istiyoruz.\n\nKodunuzu önceki sekmeden kopyalayın ve `{ask}` komutlarını kullanarak değişkenleri etkileşimli hale getirin.\n"
                 example_code_2: "```\nfavori_hayvan {is} {ask} En sevdiğin hayvan hangisi?\n{print} En sevdiğim hayvan favori_hayvan\n```\n"
                 start_code: "isim {is} {ask} Senin adın ne?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} name age yaşındadır."
     is_command:
         name: "{is}"
         description: eşit komutuna giriş
-        default_save_name: is_command
+        default_save_name: eşit_komutu
         levels:
             2:
                 story_text: "## Değişkenler\nBir kelimeyi `{is}` ile isimlendirebilirsiniz. Buna bir **değişken** denir. Bu örnekte isim adında bir değişken ile yaş adında bir değişken oluşturduk. Kodunuzun herhangi bir yerinde isim kelimesini kullanabilirsiniz ve Hedy bu kelimeyi değiştirilecektir, bunun gibi:\n"
-                example_code: "```\nisim {is} Hedy\nyaş {is} 15\n{print} isim age yaşındadır\n```\n"
+                example_code: "```\nisim {is} Hedy\nyaş {is} 15\n{print} isim yaş yaşındadır\n```\n"
                 story_text_2: "### Alıştırma\nKendi değişkenlerinizi oluşturma zamanı!\nÖrnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir yazdır komutunda kullandık.\nÖncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni {is} komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi {print} komutu ile kullanın.\n"
                 example_code_2: "```\nfavori_hayvan eşit _\n{print} En sevdiğim havyan favori_hayvan\n```\n"
                 start_code: "isim {is} Hedy\nyaş {is} 15\n{print} name age yaşındadır"
@@ -2795,7 +2799,7 @@ adventures:
     random_command:
         name: "{random}"
         description: şurada rastgele komutuna giriş
-        default_save_name: random_command
+        default_save_name: restgele_komutu
         levels:
             3:
                 story_text: "## şurada rastgele\nBu seviyede `{is}` komutunu kullanarak bir liste oluşturabileceksiniz. Bilgisayarın bu listeden rastgele bir öğe seçmesini sağlayabilirsiniz. Bunu `{at} {random}` ile yaparsınız.\n"
@@ -2812,7 +2816,7 @@ adventures:
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: ekle şuraya ve çıkar şuradan komutlarına giriş
-        default_save_name: add_remove_command
+        default_save_name: ekle_çıkar_komutu
         levels:
             3:
                 story_text: "## ekle şuraya\nListeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.\n"
@@ -2825,7 +2829,7 @@ adventures:
     sleep_command:
         name: "{sleep}"
         description: uyku komutuna giriş
-        default_save_name: sleep_command
+        default_save_name: uyu_komutu
         levels:
             2:
                 story_text: "Bu seviyede kullanabileceğiniz bir diğer yeni komut, programınızı bir saniyeliğine duraklatan `{sleep}` komutudur. Eğer {sleep} komutunun arkasına bir sayı yazarsanız, program o kadar saniye duraklar.\n\n### Alıştırma\nBu yeni komutu, {sleep} komutunu en az 3 kez kullandığınız kendi kodunuzu oluşturarak uygulayın. Her {sleep} komutunda duraklama süresi farklı olsun.\n"
@@ -2834,7 +2838,7 @@ adventures:
     if_command:
         name: "{if} & {else}"
         description: eğer komutuna giriş
-        default_save_name: if_command
+        default_save_name: eğer_komutu
         levels:
             5:
                 story_text: "## eğer... değilse....\n5. seviyede sizin için yeni bir şey var, `{if}`! `{if}` ile iki farklı seçenek arasında seçim yapabilirsiniz.\nBu kod, isim olarak Hedy girerseniz güzel, başka bir şey girerseniz böö! yazdırır.\n`{ask}` ve `{print}` hala 4. seviyede olduğu gibi çalışmaya devam ediyorlar.\n"
@@ -2851,7 +2855,7 @@ adventures:
     in_command:
         name: "{in}"
         description: içinde komutuna giriş
-        default_save_name: in_command
+        default_save_name: içinde_komutu
         levels:
             5:
                 story_text: "## Listeler\nBir şeyin bir listede olup olmadığını kontrol etmek istediğimizde, artık `{in}` komutunu kullanabiliriz.\nBu kod, yeşili veya sarıyı seçerseniz güzel, aksi takdirde eh işte yazdırır.\n"
@@ -2883,7 +2887,7 @@ adventures:
     repeat_command_2:
         name: "{repeat} 2"
         description: tekrarla komutu 2
-        default_save_name: repeat_command_2
+        default_save_name: tekrarla_komutu_2
         levels:
             7:
                 story_text: "## tekrarla ile diğer komutlar ve değişkenler\n`{print}` komutu ile birlikte `{repeat}` komutunu yeterince uyguladınız, ancak `{repeat}` ile başka komutlar da kullanabileceğinizi biliyor muydunuz?\nBu örnek kodda `{repeat}` komutunun bir `{ask}`, `{if}` veya `{else}` komutuyla da kullanılabileceğini görebilirsiniz.\n"
@@ -2908,10 +2912,14 @@ adventures:
                 start_code: "{for} sayaç {in} {range} 1 {to} 5\n    {print} sayaç"
                 story_text: "Bu seviyede, `{for}` in yeni bir şeklini ekliyoruz. Daha önceki seviyelerde `{for}` i bir liste ile kullanmıştık, ancak `{for}` ni sayılarla da kullanabiliriz.\nBunu bir değişken adı ve ardından `{in}` `{range}` ekleyerek yaparız. Daha sonra ilk başlanacak sayıyı, ardından `{to}`, ve sonra bitecek sayıyı yazıyoruz.\n\nNe olduğunu görmek için örneği deneyin! Bu seviyede de yine, `{for}` ifadelerinin altındaki satırlarda girintiler kullanmanız gerekecektir."
                 example_code: "```\n{for} sayaç {in} {range} 1 {to} 5\n    {print} sayaç\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'"
+                story_text: "Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'\n```\n"
     while_command:
         name: "{while}"
         description: iken
-        default_save_name: while_command
+        default_save_name: iken_komutu
         levels:
             15:
                 start_code: "cevap = 0\n{while} cevap != 25\n    cevap = {ask} '5 kere 5 kaç eder?'\n{print} 'Doğru cevap verilmiştir'"
@@ -2938,7 +2946,7 @@ adventures:
     clear_command:
         name: '{clear}'
         description: temizle komutu
-        default_save_name: clear_command
+        default_save_name: temizle_komutu
         levels:
             4:
                 start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SÜRPRİZ!'\n"

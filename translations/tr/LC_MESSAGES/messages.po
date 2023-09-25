@@ -1,2366 +1,1886 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 08:37-0400\n"
-"PO-Revision-Date: 2023-09-13 10:18+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language: tr\n"
+"POT-Creation-Date: 2023-09-22 21:29+0200\n"
+"PO-Revision-Date: 2023-09-24 03:31+0000\n"
+"Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
 "Language-Team: tr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "Generated-By: Babel 2.11.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
 msgstr ""
-"You tried to use the variable {name} on line {access_line_number}, but "
-"you set it on line {definition_line_number}. Set a variable before using "
-"it."
+"{name} değişkenini {access_line_number} numaralı satırda kullanmaya "
+"çalıştınız, ancak {definition_line_number} numaralı satırda ayarladınız. "
+"Bir değişkeni, onu kullanmadan önce ayarlayın."
 
-#, fuzzy
 msgid "Cyclic Var Definition"
 msgstr ""
-"The name {variable} needs to be set before you can use it on the right-"
-"hand side of the is command"
+"{is} komutunun sağ tarafında kullanabilmeniz için {variable} adının daha "
+"önceden ayarlanması gerekir."
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr ""
-"Your code is incomplete. It contains blanks that you have to replace with"
-" code."
+msgstr "Kodunuz tamamlanmamış. Kod ile değiştirmeniz gereken boşluklar var."
 
-#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
-"text behind {incomplete_command}."
+"Oops! Bir kod parçasını unuttunuz! {line_number} numaralı satırda, "
+"{incomplete_command} satırının arkasına metin girmeniz gerekir."
 
-#, fuzzy
 msgid "Incomplete Repeat"
 msgstr ""
-"It looks like you forgot to use {command} with the repeat command you "
-"used on line {line_number}."
+"Görünüşe göre {line_number} numaralı satırda kullandığınız {repeat} "
+"komutuyla birlikte bir komut kullanmayı unutmuşsunuz."
 
-#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} is not a Hedy level {level} command. Did you mean "
-"{guessed_command}?"
+"{invalid_command} bir Hedy seviye {level} komutu değildir. "
+"{guessed_command} demek mi istediniz?"
 
-#, fuzzy
 msgid "Invalid Argument"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument} . Try "
-"changing {invalid_argument} to {allowed_types}."
+"{command} komutunu {invalid_argument} ile kullanamazsınız. "
+"{invalid_argument} 'ı {allowed_types} olarak değiştirmeyi deneyin."
 
-#, fuzzy
 msgid "Invalid Argument Type"
 msgstr ""
-"You cannot use {command} with {invalid_argument} because it is "
-"{invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+"{command} komutu ile birlikte {invalid_argument} kullanamazsınız çünkü bu"
+" bir {invalid_type}. {invalid_argument} 'ı {allowed_types} olarak "
+"değiştirmeyi deneyin."
 
-#, fuzzy
 msgid "Invalid At Command"
 msgstr ""
-"The {at} command may not be used from level 16 onward. You can use square"
-" brackets to use an element from a list, for example `friends[i]`, "
-"`lucky_numbers[{random}]`."
+"{at} komutu 16. seviyeden itibaren kullanılamaz. Bir listeden bir öğe "
+"kullanmak için köşeli parantez kullanabilirsiniz, örneğin "
+"`arkadaşlar[i]`, `şanslı_sayılar[{random}]`."
 
-#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! You started a line with a space on line {line_number}. Spaces "
-"confuse computers, can you remove it?"
+"Oops! {line_number} numaralı satır boşlukla başladınız. Boşluklar "
+"bilgisayarların kafasını karıştırır, kaldırabilir misiniz?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
 msgstr ""
-"You cannot use {invalid_argument} and {invalid_argument_2} with {command}"
-" because one is {invalid_type} and the other is {invalid_type_2}. Try "
-"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} "
-"to {invalid_type}."
+"{command} komutu ile {invalid_argument} ve {invalid_argument_2} "
+"kullanamazsınız çünkü biri bir {invalid_type} diğeri bir "
+"{invalid_type_2}. {invalid_argument} 'ı {invalid_type_2} olarak ya da "
+"{invalid_argument_2} 'ı {invalid_type} olarak değiştirmeyi deneyin."
 
-#, fuzzy
 msgid "Locked Language Feature"
 msgstr ""
-"You are using {concept}! That is awesome, but {concept} is not unlocked "
-"yet! It will be unlocked in a later level."
+"{concept} kullanıyorsunuz! Bu harika, ancak {concept} kilidi henüz "
+"açılmadı! Bunun kullanımı daha sonraki bir seviyede açılacak."
 
-#, fuzzy
 msgid "Lonely Echo"
 msgstr ""
-"You used an echo before an ask, or an echo without an ask. First ask for "
-"input, then echo."
+"Bir {ask}'dan önce bir {echo} veya {ask} olmadan bir {echo} kullandınız. "
+"{echo}'dan önce bir {ask} yerleştirin."
 
-#, fuzzy
 msgid "Lonely Text"
 msgstr ""
-"It looks like you forgot to use a command with the text you put in line "
-"{line_number}"
+"Görünüşe göre {line_number} numaralı satırda kullandığınız metinle "
+"birlikte bir komut kullanmayı unutmuşsunuz"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr ""
+"Görünüşe göre {line_number} numaralı satırda bir komut kullanmayı "
+"unutmuşsunuz."
 
-#, fuzzy
 msgid "Missing Inner Command"
 msgstr ""
-"It looks like you forgot to use a command with the {command} statement "
-"you used on line {line_number}."
+"Görünüşe göre {line_number} satırında kullandığınız {command} deyimiyle "
+"bir komut kullanmayı unutmuşsunuz."
 
-#, fuzzy
 msgid "No Indentation"
 msgstr ""
-"You used too few spaces in line {line_number}. You used {leading_spaces} "
-"spaces, which is not enough. Start every new block with {indent_size} "
-"spaces more than the line before."
+"{line_number} numaralı satırda çok az boşluk kullandınız. "
+"{leading_spaces} boşluk kullandınız, ama bu yeterli değil. Her yeni bloğu"
+" bir önceki satırdan {indent_size} boşluk daha fazla içeride olacak "
+"şekilde başlatın."
 
-#, fuzzy
 msgid "Parse"
 msgstr ""
-"The code you entered is not valid Hedy code. There is a mistake on line "
-"{location[0]}, at position {location[1]}. You typed {character_found}, "
-"but that is not allowed."
+"Girdiğiniz kod geçerli bir Hedy kodu değil. {location[0]} numaralı "
+"satırda, {location[1]} numaralı konumda bir hata var. {character_found} "
+"yazdınız, ancak buna izin verilmez."
 
-#, fuzzy
 msgid "Pressit Missing Else"
 msgstr ""
-"You forgot to add what happens when you press a different key, add an "
-"{else} to your code"
+"Farklı bir tuşa bastığınızda ne olacağını eklemeyi unuttunuz, kodunuza "
+"bir {else} ekleyin"
 
-#, fuzzy
 msgid "Too Big"
 msgstr ""
-"Wow! Your program has an impressive {lines_of_code} lines of code! But we"
-" can only process {max_lines} lines in this level. Make your program "
-"smaller and try again."
+"Vay canına! Programınızda etkileyici sayıda {lines_of_code} kod satırı "
+"var! Ancak bu seviyede yalnızca {max_lines} satır işleyebiliyoruz. "
+"Programınızı biraz küçültün ve tekrar deneyin."
 
-#, fuzzy
 msgid "Unexpected Indentation"
 msgstr ""
-"You used too many spaces in line {line_number}. You used {leading_spaces}"
-" spaces, which is too much. Start every new block with {indent_size} "
-"spaces more than the line before."
+"{line_number} satırında çok fazla boşluk kullandınız. {leading_spaces} "
+"boşluk kullandınız, ama bu çok fazla. Her yeni bloğu bir önceki satırdan "
+"{indent_size} boşluk daha fazla olacak şekilde başlatın."
 
-#, fuzzy
 msgid "Unquoted Assignment"
 msgstr ""
-"From this level, you need to place texts to the right of the `is` between"
-" quotes. You forgot that for the text {text}."
+"Bu seviyeden itibaren, `eşit` ifadesinin sağındaki metinleri tırnak "
+"işaretleri arasında yerleştirmeniz gerekir. Bunu {text} metni için "
+"unuttunuz."
 
-#, fuzzy
 msgid "Unquoted Equality Check"
 msgstr ""
-"If you want to check if a variable is equal to multiple words, the words "
-"should be surrounded by quotation marks!"
+"Bir değişkenin birden fazla kelimeden oluşan bir ifadeye eşit olup "
+"olmadığını kontrol etmek istiyorsanız, kelimeler tırnak işaretleriyle "
+"çevrelenmelidir!"
 
-#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Be careful. If you ask or print something the text should start and "
-"finish with a quotation mark. You forgot one somewhere."
+"Dikkatli olun. Bir şeyi {ask} veya {print} yaparsanız, artık bu metin "
+"tırnak işaretiyle başlamalı ve bitmelidir. Bunu {unquotedtext} metni için"
+" unuttunuz."
 
-#, fuzzy
 msgid "Unsupported Float"
 msgstr ""
-"Non-integer numbers are not supported yet but they will be in a few "
-"levels. For now change {value} to an integer."
+"Tamsayı-olmayan sayılar bu seviyede desteklenmemektedir, ancak birkaç "
+"seviye sonra desteklenecektir. Şimdilik {value} öğesini bir tamsayı "
+"olarak değiştirin."
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain {invalid_value}."
+msgstr "Metin değerleri {invalid_value} içeremez."
 
-#, fuzzy
 msgid "Var Undefined"
 msgstr ""
-"You tried to use the variable {name}, but you did not set it. It is also "
-"possible that you were trying to use the word {name} but forgot quotation"
-" marks."
+"{name} değişkenini kullanmaya çalıştınız, ancak bunu ayarlamadınız. "
+"Ayrıca {name} kelimesini kullanmaya çalışmış ancak tırnak işaretlerini "
+"unutmuş olmanız da mümkündür."
 
-#, fuzzy
 msgid "Wrong Level"
 msgstr ""
-"That was correct Hedy code, but not at the right level. You wrote "
-"{offending_keyword} for level {working_level}. Tip: {tip}"
+"Bu doğru bir Hedy koduydu, ancak kullanımı doğru seviyede değildi. Seviye"
+" {working_level} için {offending_keyword} yazmışsınız. İpucu: {tip}"
 
-#, fuzzy
 msgid "account_overview"
-msgstr "Account overview"
+msgstr "Hesaba genel bakış"
 
-#, fuzzy
 msgid "accounts_created"
-msgstr "Accounts where successfully created."
+msgstr "Hesaplar başarıyla oluşturuldu."
 
-#, fuzzy
 msgid "accounts_intro"
 msgstr ""
-"On this page you can create accounts for multiple students at the same "
-"time. It is also possible to directly add them to one of your classes. By"
-" pressing the green + on the bottom right of the page you can add extra "
-"rows. You can delete a row by pressing the corresponding red cross. Make "
-"sure no rows are empty when you press \"Create accounts\". Please keep in"
-" mind that every username and mail address needs to be unique and the "
-"password needs to be <b>at least</b> 6 characters."
+"Bu sayfada aynı anda birden fazla öğrenci için hesap oluşturabilirsiniz. "
+"Bunlar otomatik olarak mevcut sınıfa eklenir, bu nedenle yukarıda "
+"gösterilen sınıfın doğru sınıf olduğundan emin olun! Her kullanıcı adının"
+" tüm Hedy sistemi içinde benzersiz olması gerekir. Sınıf adınızı tüm "
+"hesaplara eklemek için 'sınıf ismi soneki' kullanabilirsiniz. Parolaları "
+"elle giriyorsanız, bunların <b>en az</b> 6 karakter olması gerekir."
 
-#, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "Bir başarım kazandın!"
 
-#, fuzzy
 msgid "achievements"
-msgstr "achievements"
+msgstr "Başarımlar"
 
-#, fuzzy
 msgid "achievements_check_icon_alt"
-msgstr "You've earned an achievement!"
+msgstr "Başarım kontrol simgesi"
 
-#, fuzzy
 msgid "achievements_logo_alt"
-msgstr "achievements"
+msgstr "Başarım logosu"
 
-#, fuzzy
 msgid "add_students"
-msgstr "students"
+msgstr "Öğrenci ekleyin"
 
-#, fuzzy
 msgid "add_students_options"
-msgstr "Create student accounts"
+msgstr "Öğrenci seçenekleri ekleyin"
 
-#, fuzzy
 msgid "admin"
-msgstr "Admin"
+msgstr "Yönetici"
 
-#, fuzzy
 msgid "advance_button"
-msgstr "Go to level {level}"
+msgstr "{level}. seviye git"
 
-#, fuzzy
 msgid "adventure"
-msgstr "Adventure"
+msgstr "Macera"
 
-#, fuzzy
 msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
+msgstr "Bu isimle bir maceranız zaten var."
 
-#, fuzzy
 msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
+msgstr "Bir macera ismi girmediniz!"
 
-#, fuzzy
 msgid "adventure_exp_1"
 msgstr ""
-"Type your adventure of choice on the right-hand side. After creating your"
-" adventure you can include it in one of your classes under "
-"\"customizations\". If you want to include a command in your adventure "
-"please use code anchors like this:"
+"Seçtiğiniz macerayı sağ tarafa yazın. Maceranızı oluşturduktan sonra "
+"\"özelleştirmeler\" altındaki sınıflarınızdan birine dahil edebilirsiniz."
+" Eğer maceranıza bir komut eklemek istiyorsanız lütfen aşağıdaki gibi kod"
+" çapaları kullanın:"
 
-#, fuzzy
 msgid "adventure_exp_2"
 msgstr ""
-"If you want to show actual code snippets, for example to give student a "
-"template or example of the code. Please use pre anchors like this:"
+"Gerçek kod parçacıklarını göstermek istiyorsanız, örneğin öğrencilere bir"
+" şablon veya kod örneği vermek için, lütfen bunun gibi ön çapalar "
+"kullanın:"
 
-#, fuzzy
 msgid "adventure_exp_3"
 msgstr ""
-"You can use the \"preview\" button to view a styled version of your "
-"adventure. To view the adventure on a dedicated page, select \"view\" "
-"from the teachers page."
+"Anahtar kelimeleri her zaman { } ile çevrelediğinizden emin olun, böylece"
+" doğru şekilde tanınırlar. Maceranızın işlenmiş şeklini görüntülemek için"
+" \"önizleme\" düğmesini kullanabilirsiniz. Macerayı, ona özel bir sayfada"
+" görüntülemek için öğretmenler sayfasından \"görüntüle\"yi seçin."
 
-#, fuzzy
 msgid "adventure_id_invalid"
-msgstr "This adventure id is invalid."
+msgstr "Bu macera kimliği geçersiz."
 
-#, fuzzy
 msgid "adventure_length"
-msgstr "Your adventure has to be at least 20 characters."
+msgstr "Maceranız en az 20 karakterden oluşmalıdır."
 
-#, fuzzy
 msgid "adventure_name_invalid"
-msgstr "This adventure name is invalid."
+msgstr "Bu macera ismi geçersiz."
 
-#, fuzzy
 msgid "adventure_prompt"
-msgstr "Please enter the name of the adventure"
+msgstr "Lütfen maceranın ismini girin"
 
-#, fuzzy
 msgid "adventure_terms"
-msgstr "I agree that my adventure might be made publicly available on Hedy."
+msgstr "Maceramın Hedy'de herkese açık hale getirilebileceğini kabul ediyorum."
 
-#, fuzzy
 msgid "adventure_updated"
-msgstr "The adventure has been updated!"
+msgstr "Macera güncellendi!"
 
-#, fuzzy
 msgid "adventures"
-msgstr "Available Adventures"
+msgstr "Mevcut Maceralar"
 
-#, fuzzy
 msgid "adventures_restored"
-msgstr "The default adventures have been restored!"
+msgstr "Varsayılan maceralar geri yüklendi."
 
-#, fuzzy
 msgid "ago"
-msgstr "{timestamp} ago"
+msgstr "{timestamp} önce"
 
-#, fuzzy
 msgid "agree_invalid"
-msgstr "You have to agree with the privacy terms."
+msgstr "Gizlilik koşullarını kabul etmeniz gerekir."
 
-#, fuzzy
-msgid "agree_third_party"
-msgstr ""
-"I consent to being contacted by partners of Leiden University with sales "
-"opportunities (optional)"
-
-#, fuzzy
 msgid "agree_with"
-msgstr "I agree to the"
+msgstr "Kabul ediyorum:"
 
-#, fuzzy
 msgid "ajax_error"
-msgstr "There was an error, please try again."
+msgstr "Bir hata oluştu, lütfen tekrar deneyin."
 
-#, fuzzy
 msgid "all"
-msgstr "All"
+msgstr "Tümü"
 
-#, fuzzy
 msgid "all_class_highscores"
-msgstr "All students visible in class highscores"
+msgstr "Tüm öğrenciler sınıfın yüksek puanlarında görünür"
 
-#, fuzzy
 msgid "already_account"
-msgstr "Already have an account?"
+msgstr "Zaten bir hesabınız var mı?"
 
-#, fuzzy
 msgid "already_program_running"
-msgstr "Start programming"
+msgstr "Şu anda çalışan bir program var, önce onu bitirin."
 
-#, fuzzy
 msgid "already_teacher"
-msgstr "You already have a teacher account."
+msgstr "Zaten bir öğretmen hesabınız var."
 
-#, fuzzy
 msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
+msgstr "Zaten bekleyen bir öğretmen talebiniz var."
 
-#, fuzzy
 msgid "amount_created"
-msgstr "programs created"
+msgstr "oluşturulan programlar"
 
-#, fuzzy
 msgid "amount_saved"
-msgstr "programs saved"
+msgstr "kaydedilen programlar"
 
-#, fuzzy
 msgid "amount_submitted"
-msgstr "programs submitted"
+msgstr "teslim edilen programlar"
 
-#, fuzzy
 msgid "are_you_sure"
-msgstr "Are you sure? You cannot revert this action."
+msgstr "Emin misiniz? Bu işlemi geri alamazsınız."
 
-#, fuzzy
 msgid "ask_needs_var"
 msgstr ""
-"Starting in level 2, ask needs to be used with a variable. Example: name "
-"is ask What are you called?"
+"2. seviyeden itibaren, {ask} bir değişkenle birlikte kullanılmalıdır. "
+"Örnek: isim {is} {ask} Senin adın ne?"
 
-#, fuzzy
 msgid "back_to_class"
-msgstr "Go back to class"
+msgstr "Sınıfına geri dön"
 
-#, fuzzy
 msgid "back_to_teachers_page"
-msgstr "Go back to teachers page"
+msgstr "Öğretmenler sayfasına geri dönün"
 
-#, fuzzy
 msgid "become_a_sponsor"
-msgstr "Become a sponsor"
+msgstr "Sponsor olun"
 
-#, fuzzy
 msgid "birth_year"
-msgstr "Birth year"
+msgstr "Doğum yılı"
 
-#, fuzzy
 msgid "by"
-msgstr "by"
+msgstr "tarafından"
 
-#, fuzzy
 msgid "cancel"
-msgstr "Cancel"
+msgstr "İptal"
 
-#, fuzzy
 msgid "cant_parse_exception"
-msgstr "Couldn't parse the program"
+msgstr "Program ayrıştırılamadı"
 
-#, fuzzy
 msgid "catch_index_exception"
 msgstr ""
-"You tried to access the list {list_name} but it is either empty or the "
-"index is not there."
+"{list_name} listesine erişmeye çalıştınız ancak liste ya boş ya da "
+"istenen dizin orada değil."
 
-#, fuzzy
 msgid "certificate"
-msgstr "Certificate of Completion"
+msgstr "Tamamlama Sertifikası"
 
-#, fuzzy
 msgid "certified_teacher"
-msgstr "Certified teacher"
+msgstr "Sertifikalı öğretmen"
 
-#, fuzzy
 msgid "change_password"
-msgstr "Change password"
+msgstr "Şifre değiştirme"
 
-#, fuzzy
 msgid "cheatsheet_title"
-msgstr "Hide cheatsheet"
+msgstr "Kopyakağıdı"
 
-#, fuzzy
 msgid "class_already_joined"
-msgstr "You are already a student of class"
+msgstr "Siz zaten bir sınıfın öğrencisisiniz"
 
-#, fuzzy
 msgid "class_customize_success"
-msgstr "Class successfully customized."
+msgstr "Sınıf başarıyla özelleştirildi."
 
-#, fuzzy
 msgid "class_live"
-msgstr "Live statistics"
+msgstr "Canlı istatistikler"
 
-#, fuzzy
 msgid "class_name_duplicate"
-msgstr "You already have a class with this name."
+msgstr "Bu isimde bir sınıfınız zaten var."
 
-#, fuzzy
 msgid "class_name_empty"
-msgstr "You didn't enter a class name!"
+msgstr "Bir sınıf ismi girmediniz!"
 
-#, fuzzy
 msgid "class_name_invalid"
-msgstr "This class name is invalid."
+msgstr "Bu sınıf ismi geçersiz."
 
-#, fuzzy
 msgid "class_name_prompt"
-msgstr "Please enter the name of the class"
+msgstr "Lütfen yeni sınıfın ismini girin"
 
-#, fuzzy
 msgid "class_overview"
-msgstr "Class overview"
+msgstr "Sınıfa genel bakış"
 
-#, fuzzy
 msgid "close"
-msgstr "Sluiten"
+msgstr "Kapat"
 
-#, fuzzy
 msgid "comma"
-msgstr "a comma"
+msgstr "bir virgül"
 
-#, fuzzy
 msgid "command_not_available_yet_exception"
-msgstr "Command not available yet"
+msgstr "Komut henüz kullanılabilir değil"
 
-#, fuzzy
 msgid "command_unavailable_exception"
-msgstr "Command not correct anymore"
+msgstr "Komut artık geçerli değil"
 
-#, fuzzy
 msgid "commands"
-msgstr "Commands"
+msgstr "Komutlar"
 
-#, fuzzy
 msgid "common_errors"
-msgstr "Common errors"
+msgstr "Yaygın hatalar"
 
-#, fuzzy
 msgid "congrats_message"
-msgstr "Congratulations, {username}, you have completed Hedy!"
+msgstr "Tebrikler {username}, Hedy ile aşağıdaki sonuçlara ulaştınız!"
 
-#, fuzzy
 msgid "content_invalid"
-msgstr "This adventure is invalid."
+msgstr "Bu macera geçersiz."
 
-#, fuzzy
 msgid "contributor"
-msgstr "Contributor"
+msgstr "Katılımcı"
 
-#, fuzzy
 msgid "copy_clipboard"
-msgstr "Successfully copied to clipboard"
+msgstr "Panoya başarıyla kopyalandı"
 
-#, fuzzy
 msgid "copy_join_link"
-msgstr "Please copy and paste this link into a new tab:"
+msgstr "Katılma bağlantısını kopyala"
 
-#, fuzzy
 msgid "copy_link_success"
-msgstr "Copy link to share"
+msgstr "Katılma bağlantısı panoya başarıyla kopyalandı"
 
-#, fuzzy
 msgid "copy_link_to_share"
-msgstr "Copy link to share"
+msgstr "Paylaşmak için bağlantıyı kopyalayın"
 
-#, fuzzy
 msgid "copy_mail_link"
-msgstr "Please copy and paste this link into a new tab:"
+msgstr "Lütfen bu bağlantıyı kopyalayıp yeni bir sekmeye yapıştırın:"
 
-#, fuzzy
 msgid "correct_answer"
-msgstr "The correct answer is"
+msgstr "Doğru cevap şudur"
 
-#, fuzzy
 msgid "country"
-msgstr "Country"
+msgstr "Ülke"
 
-#, fuzzy
 msgid "country_invalid"
-msgstr "Please select a valid country."
+msgstr "Lütfen geçerli bir ülke seçin."
 
-#, fuzzy
 msgid "country_title"
-msgstr "Please select a valid country."
+msgstr "Ülke"
 
 msgid "create_account"
 msgstr "Hesap oluştur"
 
-#, fuzzy
 msgid "create_accounts"
-msgstr "Create multiple accounts"
+msgstr "Çoklu hesaplar oluştur"
 
-#, fuzzy
 msgid "create_accounts_prompt"
-msgstr "Are you sure you want to create these accounts?"
+msgstr "Bu hesapları oluşturmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "create_adventure"
-msgstr "Create adventure"
+msgstr "Macera oluşturun"
 
-#, fuzzy
 msgid "create_class"
-msgstr "Create a new class"
+msgstr "Yeni bir sınıf oluşturun"
 
-#, fuzzy
 msgid "create_multiple_accounts"
-msgstr "Create multiple accounts"
+msgstr "Birden fazla hesap oluşturun"
 
-#, fuzzy
 msgid "create_public_profile"
-msgstr "Public profile"
+msgstr "Herkese açık profil oluşturun"
 
-#, fuzzy
 msgid "create_question"
-msgstr "Do you want to create one?"
+msgstr "Bir tane oluşturmak ister misiniz?"
 
-#, fuzzy
 msgid "create_student_account"
-msgstr "Create an account"
+msgstr "Bir hesap oluşturun"
 
-#, fuzzy
 msgid "create_student_account_explanation"
-msgstr "You can save your own programs with an account."
+msgstr "Bir hesap ile kendi programlarınızı kaydedebilirsiniz."
 
-#, fuzzy
 msgid "create_teacher_account"
-msgstr "Create a teacher account"
+msgstr "Bir öğretmen hesabı oluşturun"
 
-#, fuzzy
 msgid "create_teacher_account_explanation"
 msgstr ""
-"With a teacher account, you can save your programs and see the results of"
-" your students."
+"Bir öğretmen hesabı ile programlarınızı kaydedebilir ve öğrencilerinizin "
+"sonuçlarını görebilirsiniz."
 
-#, fuzzy
 msgid "creator"
-msgstr "Creator"
+msgstr "Oluşturucu"
 
-#, fuzzy
 msgid "current_password"
-msgstr "Current password"
+msgstr "Geçerli şifre"
 
-#, fuzzy
 msgid "customization_deleted"
-msgstr "Customizations successfully deleted."
+msgstr "Özelleştirmeler başarıyla silindi."
 
-#, fuzzy
 msgid "customize_adventure"
-msgstr "Customize adventure"
+msgstr "Macerayı özelleştirin"
 
-#, fuzzy
 msgid "customize_class"
-msgstr "Customize class"
+msgstr "Sınıfı özelleştirin"
 
-#, fuzzy
 msgid "dash"
-msgstr "a dash"
+msgstr "bir çizgi"
 
-#, fuzzy
 msgid "default_403"
-msgstr "Looks like you aren't authorized..."
+msgstr "Görünüşe göre yetkiniz yok..."
 
-#, fuzzy
 msgid "default_404"
-msgstr "We could not find that page..."
+msgstr "O sayfayı bulamadık..."
 
-#, fuzzy
 msgid "default_500"
-msgstr "Something went wrong..."
+msgstr "Bir şeyler ters gitti..."
 
-#, fuzzy
 msgid "delete"
-msgstr "Delete"
+msgstr "Sil"
 
-#, fuzzy
 msgid "delete_adventure_prompt"
-msgstr "Are you sure you want to remove this adventure?"
+msgstr "Bu macerayı kaldırmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "delete_class_prompt"
-msgstr "Are you sure you want to delete the class?"
+msgstr "Sınıfı silmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "delete_confirm"
-msgstr "Are you sure you want to delete the program?"
+msgstr "Programı silmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "delete_invite"
-msgstr "Delete invitation"
+msgstr "Davetiyeyi sil"
 
-#, fuzzy
 msgid "delete_invite_prompt"
-msgstr "Are you sure you want to remove this class invitation?"
+msgstr "Bu sınıf davetini kaldırmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "delete_public"
-msgstr "Delete public profile"
+msgstr "Herkese açık profili sil"
 
-#, fuzzy
 msgid "delete_success"
-msgstr "Program deleted successfully."
+msgstr "Program başarıyla silindi."
 
-#, fuzzy
 msgid "destroy_profile"
-msgstr "Delete profile"
+msgstr "Profili sil"
 
-#, fuzzy
 msgid "developers_mode"
-msgstr "Programmer's mode"
+msgstr "Programcı kipi"
 
-#, fuzzy
 msgid "directly_available"
-msgstr "Directly open"
+msgstr "Doğrudan açın"
 
-#, fuzzy
 msgid "disable"
-msgstr "Disable"
+msgstr "Devre dışı bırak"
 
-#, fuzzy
 msgid "disabled"
-msgstr "Disabled"
+msgstr "Devre dışı"
 
-#, fuzzy
 msgid "disabled_button_locked"
-msgstr "Your teacher hasn't unlocked this level yet"
+msgstr "Öğretmeniniz henüz bu seviyenin kilidini açmadı"
 
-#, fuzzy
 msgid "disabled_button_quiz"
-msgstr "Your quiz score is below the threshold, try again!"
+msgstr "Sınav puanınız barajın altında, tekrar deneyin!"
 
-#, fuzzy
 msgid "discord_server"
-msgstr "Discord server"
+msgstr "Discord sunucusu"
 
-#, fuzzy
 msgid "distinguished_user"
-msgstr "Distinguished user"
+msgstr "Seçkin kullanıcı"
 
-#, fuzzy
 msgid "double quotes"
-msgstr "double quotes"
+msgstr "çift tırnak"
 
-#, fuzzy
 msgid "download"
-msgstr "Download"
+msgstr "İndir"
 
-#, fuzzy
 msgid "download_login_credentials"
-msgstr "Do you want to download the login credentials after the accounts creation?"
+msgstr ""
+"Hesaplar oluşturulduktan sonra oturum açma kimlik bilgilerini indirmek "
+"istiyor musunuz?"
 
-#, fuzzy
 msgid "duplicate"
-msgstr "Duplicate"
+msgstr "Yinele"
 
-#, fuzzy
 msgid "echo_and_ask_mismatch_exception"
-msgstr "Echo and ask mismatch"
+msgstr "yankıla ve sor uyuşmazlığı"
 
-#, fuzzy
 msgid "echo_out"
 msgstr ""
-"Starting in level 2 echo is no longer needed. You can repeat an answer "
-"with ask and print now. Example: name is ask What are you called? print "
-"hello name"
+"2. seviyeden itibaren, {echo} artık gerekli değildir. Şimdi bir cevabı "
+"{ask} ve {print} kullanarak tekrarlayabilirsiniz. Örnek: isim {ask} Senin"
+" adın ne? {print} merhaba isim"
 
-#, fuzzy
 msgid "edit_code_button"
-msgstr "Edit code"
+msgstr "Kodu düzenle"
 
-#, fuzzy
 msgid "email"
-msgstr "Email"
+msgstr "E-posta"
 
-#, fuzzy
 msgid "email_invalid"
-msgstr "Please enter a valid email."
+msgstr "Lütfen geçerli bir e-posta girin."
 
-#, fuzzy
 msgid "end_quiz"
-msgstr "Quiz end"
+msgstr "Sınav sonu"
 
-#, fuzzy
 msgid "english"
-msgstr "English"
+msgstr "İngilizce"
 
-#, fuzzy
 msgid "enter"
-msgstr "Enter"
+msgstr "Girin"
 
-#, fuzzy
 msgid "enter_password"
-msgstr "Enter a new password for"
+msgstr "Şunun için yeni bir şifre girin"
 
-#, fuzzy
 msgid "enter_text"
-msgstr "Enter your answer here..."
+msgstr "Cevabınızı buraya girin..."
 
-#, fuzzy
 msgid "error_logo_alt"
-msgstr "Error logo"
+msgstr "Hata logosu"
 
-#, fuzzy
 msgid "exclamation mark"
-msgstr "an exclamation mark"
+msgstr "bir ünlem işareti"
 
-#, fuzzy
 msgid "exercise"
-msgstr "Exercise"
+msgstr "Alıştırma"
 
-#, fuzzy
 msgid "exercise_doesnt_exist"
-msgstr "This exercise doesn't exist"
+msgstr "Bu alıştırma mevcut değil"
 
-#, fuzzy
 msgid "exists_email"
-msgstr "That email is already in use."
+msgstr "Bu e-posta zaten kullanılıyor."
 
-#, fuzzy
 msgid "exists_username"
-msgstr "That username is already in use."
+msgstr "Bu kullanıcı adı zaten kullanılıyor."
 
-#, fuzzy
 msgid "experience_invalid"
-msgstr "Please select a valid experience, choose (Yes, No)."
+msgstr "Lütfen geçerli bir deneyim seçin, (Evet, Hayır) seçeneğini işaretleyin."
 
-#, fuzzy
 msgid "expiration_date"
-msgstr "Expiration date"
+msgstr "Son kullanma tarihi"
 
-#, fuzzy
 msgid "explore_explanation"
 msgstr ""
-"On this page you can look through programs created by other Hedy users. "
-"You can filter on both a Hedy level and adventure. Click on \"View "
-"program\" to open a program and run it. Programs with a red header "
-"contain a mistake. You can still open the program, but running it will "
-"result in an error. You can of course try to fix it! If the creator has a"
-" public profile you can click their username to visit their profile. "
-"There you will find all their shared programs and much more!"
+"Bu sayfada diğer Hedy kullanıcıları tarafından oluşturulan programlara "
+"bakabilirsiniz. Hem Hedy seviyesine hem de maceraya göre filtreleme "
+"yapabilirsiniz. Bir programı açmak ve çalıştırmak için \"Programı "
+"görüntüle \"ye tıklayın. Kırmızı başlıklı programlar bir hata içerir. "
+"Programı yine de açabilirsiniz, ancak çalıştırmak bir hatayla "
+"sonuçlanacaktır. Elbette düzeltmeyi deneyebilirsiniz! Oluşturan kişinin "
+"herkese açık bir profili varsa, profilini ziyaret etmek için kullanıcı "
+"adına tıklayabilirsiniz. Orada tüm paylaşılan programlarını ve çok daha "
+"fazlasını bulacaksınız!"
 
-#, fuzzy
 msgid "explore_programs"
-msgstr "Explore programs"
+msgstr "Programları keşfet"
 
-#, fuzzy
 msgid "explore_programs_logo_alt"
-msgstr "Explore programs"
+msgstr "Programları keşfet simgesi"
 
-#, fuzzy
 msgid "favorite_program"
-msgstr "Favorite program"
+msgstr "Favori program"
 
-#, fuzzy
 msgid "favourite_confirm"
-msgstr "Are you sure you want to set this program as your favourite?"
+msgstr ""
+"Bu programı favori programınız olarak ayarlamak istediğinizden emin "
+"misiniz?"
 
-#, fuzzy
 msgid "favourite_program"
-msgstr "Favourite program"
+msgstr "Favori program"
 
-#, fuzzy
 msgid "favourite_program_invalid"
-msgstr "Your chosen favourite program is invalid."
+msgstr "Seçtiğiniz favori program geçersiz."
 
-#, fuzzy
 msgid "favourite_success"
-msgstr "Your program is set as favourite."
+msgstr "Programınız favori olarak ayarlanmıştır."
 
-#, fuzzy
 msgid "female"
-msgstr "Female"
+msgstr "Kadın"
 
-#, fuzzy
 msgid "float"
-msgstr "a number"
+msgstr "bir sayı"
 
-#, fuzzy
 msgid "for_teachers"
-msgstr "For teachers"
+msgstr "Öğretmenler için"
 
 msgid "forgot_password"
-msgstr "Parolanızı mı unuttunuz?"
+msgstr "Şifrenizi mi unuttunuz?"
 
-#, fuzzy
 msgid "from_another_teacher"
-msgstr "From another teacher"
+msgstr "Başka bir öğretmenden"
 
-#, fuzzy
 msgid "from_magazine_website"
-msgstr "From a magazine or website"
+msgstr "Bir dergiden veya web sitesinden"
 
-#, fuzzy
 msgid "from_video"
-msgstr "From a video"
+msgstr "Bir videodan"
 
-#, fuzzy
 msgid "fun_statistics_msg"
-msgstr "Here are some fun statistics!"
+msgstr "İşte bazı eğlenceli istatistikler!"
 
-#, fuzzy
 msgid "gender"
-msgstr "Gender"
+msgstr "Cinsiyet"
 
-#, fuzzy
 msgid "gender_invalid"
-msgstr "Please select a valid gender, choose (Female, Male, Other)."
+msgstr "Lütfen geçerli bir cinsiyet seçin (Kadın, Erkek, Diğer)."
 
-#, fuzzy
 msgid "general"
-msgstr "Gender"
+msgstr "Genel"
 
-#, fuzzy
 msgid "general_settings"
-msgstr "General settings"
+msgstr "Genel ayarlar"
 
-#, fuzzy
 msgid "generate_passwords"
-msgstr "Generate passwords"
+msgstr "Şifreler oluşturma"
 
-#, fuzzy
 msgid "get_certificate"
-msgstr "Get your certificate!"
+msgstr "Sertifikanızı alın!"
 
-#, fuzzy
 msgid "give_link_to_teacher"
-msgstr "Give the following link to your teacher:"
+msgstr "Aşağıdaki bağlantıyı öğretmeninize verin:"
 
-#, fuzzy
 msgid "go_back_to_main"
-msgstr "Go back to main page"
+msgstr "Ana sayfaya geri dön"
 
-#, fuzzy
 msgid "go_to_question"
-msgstr "Go to question"
+msgstr "Soruya git"
 
-#, fuzzy
 msgid "go_to_quiz_result"
-msgstr "Go to quiz result"
+msgstr "Kısa sınav sonucuna git"
 
-#, fuzzy
 msgid "goto_profile"
-msgstr "Go to my profile"
+msgstr "Profilime git"
 
-#, fuzzy
 msgid "grid_overview"
-msgstr "Overview of programs per adventure"
+msgstr "Macera başına programlara genel bakış"
 
-#, fuzzy
 msgid "hand_in"
-msgstr "Hand in"
+msgstr "Teslim et"
 
-#, fuzzy
 msgid "hand_in_exercise"
-msgstr "Hand in exercise"
+msgstr "Alıştırmayı teslim et"
 
-#, fuzzy
 msgid "heard_about_hedy"
-msgstr "How have you heard about Hedy?"
+msgstr "Hedy'yi nereden duydunuz?"
 
-#, fuzzy
 msgid "heard_about_invalid"
-msgstr "Please select a valid way you heard about us."
+msgstr "Lütfen bizden haberdar olduğunuz geçerli bir yolu seçin."
 
-#, fuzzy
 msgid "hedy_achievements"
-msgstr "My achievements"
+msgstr "Hedy başarımları"
 
-#, fuzzy
 msgid "hedy_choice_title"
-msgstr "Hedy's Choice"
+msgstr "Hedy'nin Seçimi"
 
-#, fuzzy
 msgid "hedy_logo_alt"
-msgstr "Hedy logo"
+msgstr "Hedy logosu"
 
-#, fuzzy
 msgid "hedy_on_github"
-msgstr "Hedy on Github"
+msgstr "Github'da Hedy"
 
-#, fuzzy
 msgid "hedy_tutorial_logo_alt"
-msgstr "Start hedy tutorial"
+msgstr "Hedy öğretici simgesi"
 
 msgid "hello_logo"
-msgstr "Merhaba!"
+msgstr "Merhaba"
 
-#, fuzzy
 msgid "hello_world"
-msgstr "Hello world!"
+msgstr "Merhaba dünya!"
 
-#, fuzzy
 msgid "hidden"
-msgstr "Hint?"
+msgstr "Gizli"
 
-#, fuzzy
 msgid "hide_cheatsheet"
-msgstr "Hide cheatsheet"
+msgstr "Kopya kağıdını gizle"
 
-#, fuzzy
 msgid "hide_keyword_switcher"
-msgstr "Hide keyword switcher"
+msgstr "Anahtar kelime değiştiriciyi gizle"
 
-#, fuzzy
 msgid "hide_parsons"
-msgstr "Hide parsons"
+msgstr "Bulmacayı gizle"
 
-#, fuzzy
 msgid "hide_quiz"
-msgstr "Hide quiz"
+msgstr "Kısa sınavı gizle"
 
-#, fuzzy
 msgid "highest_level_reached"
-msgstr "Highest level reached"
+msgstr "Ulaşılan en yüksek seviye"
 
-#, fuzzy
 msgid "highest_quiz_score"
-msgstr "Highest quiz score"
+msgstr "En yüksek kısa sınav puanı"
 
-#, fuzzy
 msgid "highscore_explanation"
 msgstr ""
-"On this page you can look through programs created by other Hedy users. "
-"You can filter on both a Hedy level and adventure. Click on \"View "
-"program\" to open a program and run it. Programs with a red header "
-"contain a mistake. You can still open the program, but running it will "
-"result in an error. You can of course try to fix it! If the creator has a"
-" public profile you can click their username to visit their profile. "
-"There you will find all their shared programs and much more!"
+"Bu sayfada, toplanan başarımların miktarına bağlı olarak, mevcut Yüksek "
+"Puanları görüntüleyebilirsiniz. Tüm kullanıcıların, ülkenizin veya "
+"sınıfınızın sıralamasını görüntüleyin. Herkese açık profilini "
+"görüntülemek için bir kullanıcı ismine tıklayın."
 
-#, fuzzy
 msgid "highscore_no_public_profile"
 msgstr ""
-"You don't have a public profile and are therefore not listed on the "
-"highscores. Do you wish to create one?"
+"Herkese açık bir profiliniz yok ve bu nedenle yüksek skorlarda "
+"listelenmiyorsunuz. Bir tane oluşturmak ister misiniz?"
 
-#, fuzzy
 msgid "highscores"
-msgstr "Score"
+msgstr "Yüksek puanlar"
 
-#, fuzzy
 msgid "hint"
-msgstr "Hint?"
+msgstr "İpucu?"
 
-#, fuzzy
 msgid "ill_work_some_more"
-msgstr "I'll work on it a little longer"
+msgstr "Üzerinde biraz daha çalışacağım"
 
-#, fuzzy
 msgid "image_invalid"
-msgstr "Your chosen image is invalid."
+msgstr "Seçtiğiniz resim geçersiz."
 
-#, fuzzy
 msgid "incomplete_command_exception"
-msgstr "Incomplete Command"
+msgstr "Tamamlanmamış Komut"
 
-#, fuzzy
 msgid "incorrect_handling_of_quotes_exception"
-msgstr "Incorrect handling of quotes"
+msgstr "Tırnak işaretlerinin yanlış kullanımı"
 
-#, fuzzy
 msgid "incorrect_use_of_types_exception"
-msgstr "Incorrect use of types"
+msgstr "Tiplerin yanlış kullanımı"
 
-#, fuzzy
 msgid "incorrect_use_of_variable_exception"
-msgstr "Incorrect use of variable"
+msgstr "Değişkenin yanlış kullanımı"
 
-#, fuzzy
 msgid "indentation_exception"
-msgstr "Incorrect Indentation"
+msgstr "Yanlış Girintileme"
 
-#, fuzzy
 msgid "input"
-msgstr "input from ask"
+msgstr "{ask}'dan alınan girdi"
 
-#, fuzzy
 msgid "integer"
-msgstr "a number"
+msgstr "bir sayı"
 
-#, fuzzy
 msgid "invalid_class_link"
-msgstr "Invalid link for joining the class."
+msgstr "Sınıfa katılmak için geçersiz bağlantı."
 
-#, fuzzy
 msgid "invalid_command_exception"
-msgstr "Invalid command"
+msgstr "Geçersiz komut"
 
-#, fuzzy
 msgid "invalid_teacher_invitation_code"
 msgstr ""
-"The teacher invitation code is invalid. To become a teacher, reach out to"
-" hello@hedy.org."
+"Öğretmen davet kodu geçersizdir. Öğretmen olmak için, hello@hedy.org "
+"adresine ulaşın."
 
-#, fuzzy
 msgid "invalid_tutorial_step"
-msgstr "Invalid tutorial step"
+msgstr "Geçersiz eğitici adımı"
 
-#, fuzzy
 msgid "invalid_username_password"
-msgstr "Invalid username/password."
+msgstr "Geçersiz kullanıcı adı/şifre."
 
-#, fuzzy
 msgid "invite_by_username"
-msgstr "All usernames need to be unique."
+msgstr "Kullanıcı adına göre davet et"
 
-#, fuzzy
 msgid "invite_date"
-msgstr "Invite date"
+msgstr "Davet tarihi"
 
-#, fuzzy
 msgid "invite_message"
-msgstr "You have received an invitation to join class"
+msgstr "Sınıfa katılmak için bir davetiye aldınız"
 
-#, fuzzy
 msgid "invite_prompt"
-msgstr "Enter a username"
+msgstr "Bir kullanıcı adı girin"
 
-#, fuzzy
 msgid "join_class"
-msgstr "Join class"
+msgstr "Sınıfa katılın"
 
-#, fuzzy
 msgid "join_prompt"
-msgstr "You need to have an account to join a class. Would you like to login now?"
+msgstr ""
+"Bir sınıfa katılmak için bir hesabınızın olması gerekir. Şimdi giriş "
+"yapmak ister misiniz?"
 
-#, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
-"Please select a valid keyword language (select English or your own "
-"language)."
+"Lütfen geçerli bir anahtar kelime dili seçin (İngilizce, Türkçe veya "
+"kendi dilinizi seçin)."
 
-#, fuzzy
+msgid "language"
+msgstr "Dil"
+
 msgid "language_invalid"
-msgstr "Please select a valid language."
+msgstr "Lütfen geçerli bir dil seçin."
 
-#, fuzzy
 msgid "languages"
-msgstr "Which of these programming languages have you used before?"
+msgstr "Daha önce bu programlama dillerinden hangilerini kullandınız?"
 
-#, fuzzy
 msgid "last_achievement"
-msgstr "Last earned achievement"
+msgstr "Son kazanılan başarım"
 
-#, fuzzy
 msgid "last_edited"
-msgstr "Last edited"
+msgstr "Son düzenleme"
 
-#, fuzzy
 msgid "last_error"
-msgstr "Last error"
+msgstr "Son hata"
 
-#, fuzzy
 msgid "last_login"
-msgstr "Last login"
+msgstr "Son giriş"
 
-#, fuzzy
 msgid "last_program"
-msgstr "Last program"
+msgstr "Son program"
 
-#, fuzzy
 msgid "last_update"
-msgstr "Last update"
+msgstr "Son güncelleme"
 
-#, fuzzy
 msgid "lastname"
-msgstr "Name"
+msgstr "Soyadı"
 
-#, fuzzy
 msgid "leave_class"
-msgstr "Leave class"
+msgstr "Sınıftan ayrılın"
 
-#, fuzzy
 msgid "level"
-msgstr "Level"
+msgstr "Seviye"
 
-#, fuzzy
 msgid "level_accessible"
-msgstr "Level is open to students"
+msgstr "Seviye öğrencilere açıktır"
 
-#, fuzzy
 msgid "level_disabled"
-msgstr "Level disabled"
+msgstr "Seviye devre dışı"
 
-#, fuzzy
 msgid "level_future"
-msgstr "This level will open automatically after the opening date"
+msgstr "Bu seviye otomatik olarak açılacak "
 
-#, fuzzy
 msgid "level_invalid"
-msgstr "This Hedy level in invalid."
+msgstr "Bu Hedy seviyesi geçersiz."
 
-#, fuzzy
 msgid "level_not_class"
-msgstr "You're in a class where this level has not been made available yet"
+msgstr "Bu seviye henüz sınıfınızda kullanıma açılmadı"
 
-#, fuzzy
 msgid "level_title"
-msgstr "Level"
+msgstr "Seviye"
 
-#, fuzzy
 msgid "link"
-msgstr "Oturum aç"
+msgstr "Bağlantı"
 
-#, fuzzy
 msgid "list"
-msgstr "a list"
+msgstr "bir liste"
 
-#, fuzzy
 msgid "live_dashboard"
-msgstr "Live Dashboard"
+msgstr "Canlı Yazı Tahtası"
 
-#, fuzzy
 msgid "logged_in_to_share"
-msgstr "You must be logged in to save and share a program."
+msgstr "Bir programı kaydetmek ve paylaşmak için oturum açmış olmanız gerekir."
 
 msgid "login"
-msgstr "Oturum aç"
+msgstr "Giriş yap"
 
 msgid "login_long"
-msgstr "Hesabınızda oturum açın"
+msgstr "Hesabınıza giriş yapın"
 
-#, fuzzy
 msgid "login_to_save_your_work"
-msgstr "Log in to save your work"
+msgstr "Çalışmanızı kaydetmek için giriş yapın"
 
-#, fuzzy
 msgid "logout"
-msgstr "Log out"
+msgstr "Oturumu kapatın"
 
-#, fuzzy
 msgid "longest_program"
-msgstr "Longest program"
+msgstr "En uzun program"
 
-#, fuzzy
 msgid "mail_change_password_body"
-msgstr "Change password"
+msgstr ""
+"Hedy şifreniz değiştirildi. Eğer bunu siz yaptıysanız, her şey yolunda "
+"demektir.\n"
+"Şifrenizi siz değiştirmediyseniz, lütfen bu e-postayı yanıtlayarak hemen "
+"bizimle iletişime geçin."
 
-#, fuzzy
 msgid "mail_change_password_subject"
-msgstr "Change password"
+msgstr "Hedy şifreniz değiştirildi"
 
-#, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
-"Something went wrong when sending a validation mail, the changes are "
-"still correctly processed."
+"Doğrulama postası gönderilirken bir şeyler yanlış gitti, yine de "
+"değişiklikler doğru şekilde kaydedildi."
 
-#, fuzzy
 msgid "mail_goodbye"
 msgstr ""
-"Thank you!\n"
-"The Hedy team"
+"Programlamaya devam edin!\n"
+"Hedy ekibi"
 
-#, fuzzy
 msgid "mail_hello"
-msgstr "Hi {username}!"
+msgstr "Merhaba {username}!"
 
-#, fuzzy
 msgid "mail_recover_password_body"
-msgstr "Request a password reset"
+msgstr ""
+"Bu bağlantıya tıklayarak yeni bir Hedy şifresi belirleyebilirsiniz. Bu "
+"bağlantı <b>4</b> saat süreyle geçerlidir.\n"
+"Şifre sıfırlama talebiniz olmadıysa lütfen bu e-postayı dikkate almayın: "
+"{link}"
 
-#, fuzzy
 msgid "mail_recover_password_subject"
-msgstr "Request a password reset"
+msgstr "Şifre sıfırlama talebinde bulunun."
 
-#, fuzzy
 msgid "mail_reset_password_body"
-msgstr "Reset password"
+msgstr ""
+"Hedy şifreniz yeni bir şifre ile sıfırlandı. Eğer bunu siz yaptıysanız, "
+"her şey yolunda demektir.\n"
+"Şifrenizi siz değiştirmediyseniz, lütfen bu e-postayı yanıtlayarak hemen "
+"bizimle iletişime geçin."
 
-#, fuzzy
 msgid "mail_reset_password_subject"
-msgstr "Reset password"
+msgstr "Hedy şifreniz sıfırlandı"
 
-#, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
-"<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the "
-"world wide community of Hedy teachers!\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your "
-"students can than join your classes and you can see their progress. "
-"Classes are made and managed though the for <a "
-"href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements!"
-" You can share those ideas with us on the <a "
-"href=\"https://github.com/hedyorg/hedy/discussions/categories/ideas\">Ideas"
-" Discussion</a>.\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a "
-"href=\"https://github.com/hedyorg/hedy/discussions/categories/q-a\">Q&A "
-"discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an "
-"email</a>.\n"
-"Keep programming!"
+"<strong>Hoş geldiniz!</strong>\n"
+"Yepyeni Hedy öğretmen hesabınız için tebrikler. Hedy öğretmenlerinin "
+"dünya çapındaki topluluğuna hoş geldiniz!\n"
+"\n"
+"<strong>Öğretmen hesapları neler yapabilir</strong>\n"
+"Artık sizin için açılmış bir dizi ek seçenek var.\n"
+"\n"
+"1. Ek açıklamalar <a href=\"https://hedy.org/for-"
+"teachers/manual\">öğretmen kılavuzu</a> 'da bulunabilir.\n"
+"2. Öğretmen hesabınızla sınıflar oluşturabilirsiniz. Öğrencileriniz daha "
+"sonra sınıflarınıza katılabilir ve ilerlemelerini görebilirsiniz. "
+"Sınıflar, öğretmen hesabı üzerinden yapılır ve <a "
+"href=\"https://hedycode.com/for-teachers\">öğretmen sayfası</a> 'ndan "
+"yönetilir..\n"
+"3. Sınıflarınızı tamamen özelleştirebilirsiniz, örneğin seviyeleri açıp "
+"kapatabilir, maceraları etkinleştirebilir veya devre dışı bırakabilir ve "
+"kendi maceralarınızı yazabilirsiniz!\n"
+"\n"
+"<strong>Çevrimiçi topluluğumuza katılın!</strong>\n"
+"Tüm Hedy öğretmenleri, programcıları ve diğer hayranları <a "
+"href=\"https://discord.gg/8yY7dEme9r\">Discord sunucumuza</a> katılmaya "
+"davetlidir. Burası Hedy hakkında sohbet etmek için ideal bir yer: harika "
+"projelerinizi ve derslerinizi gösterebileceğiniz kanallarımız, hataları "
+"bildirebileceğiniz kanallarımız ve diğer öğretmenlerle ve Hedy ekibiyle "
+"sohbet edebileceğiniz kanallarımız var.\n"
+"\n"
+"<strong>Nasıl yardım istenir </strong>\n"
+"Anlaşılmayan bir şey varsa, Discord'da bize bildirebilir veya <a "
+"href=\"mailto: hello@hedy.org\">bize bir e-posta gönderebilirsiniz</a>.\n"
+"\n"
+"<strong>Hatalar nasıl bildirilir</strong>\n"
+"Discord'da, hataları bildirmek için #bugs adında bir kanalımız var. "
+"Karşılaştığınız sorunları bize bildirmek için mükemmel bir yer. GitHub'ı "
+"nasıl kullanacağınızı biliyorsanız, orada bir <a "
+"href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">sorun"
+" bildirimi (issue)</a> açabilirsiniz.\n"
 
-#, fuzzy
 msgid "mail_welcome_teacher_subject"
-msgstr "Your Hedy teacher account is ready"
+msgstr "Hedy öğretmen hesabınız hazır"
 
-#, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
-"Your Hedy account has been created successfully. Welcome!\n"
-"Please click on this link to verify your email address: {link}"
+"Hedy hesabınız başarıyla oluşturuldu. Hoş geldiniz!\n"
+"E-posta adresinizi doğrulamak için lütfen bu bağlantıya tıklayın: {link}"
 
-#, fuzzy
 msgid "mail_welcome_verify_subject"
-msgstr "Welcome to Hedy"
+msgstr "Hedy'ye Hoş Geldiniz"
 
-#, fuzzy
 msgid "mailing_title"
-msgstr "Title"
+msgstr "Hedy haber bültenine abone olun"
 
-#, fuzzy
 msgid "main_subtitle"
-msgstr "programs submitted"
+msgstr "Sınıf için metinsel programlama"
 
-#, fuzzy
 msgid "main_title"
-msgstr "Title"
+msgstr "Hedy"
 
-#, fuzzy
 msgid "make_sure_you_are_done"
 msgstr ""
-"Make sure you are done! You will not be able to change your program "
-"anymore after you click \"Hand in\"."
+"İşinizin tamamen bittiğinden emin olun! \"Teslim Et\" düğmesine "
+"tıkladıktan sonra artık programınızı değiştiremeyeceksiniz."
 
-#, fuzzy
 msgid "male"
-msgstr "Male"
+msgstr "Erkek"
 
-#, fuzzy
 msgid "mandatory_mode"
-msgstr "Mandatory developer's mode"
+msgstr "Zorunlu geliştirici kipi"
 
-#, fuzzy
 msgid "my_account"
-msgstr "My account"
+msgstr "Hesabım"
 
-#, fuzzy
 msgid "my_achievements"
-msgstr "My achievements"
+msgstr "Başarımlarım"
 
-#, fuzzy
 msgid "my_adventures"
-msgstr "My adventures"
+msgstr "Maceralarım"
 
-#, fuzzy
 msgid "my_classes"
-msgstr "My classes"
+msgstr "Sınıflarım"
 
-#, fuzzy
 msgid "my_messages"
-msgstr "My messages"
+msgstr "Mesajlarım"
 
 msgid "my_public_profile"
-msgstr ""
+msgstr "Herkese açık profilim"
 
-#, fuzzy
 msgid "name"
-msgstr "Name"
+msgstr "İsim"
 
-#, fuzzy
 msgid "nav_explore"
-msgstr "Explore"
+msgstr "Keşfet"
 
-#, fuzzy
 msgid "nav_hedy"
 msgstr "Hedy"
 
-#, fuzzy
 msgid "nav_learn_more"
-msgstr "Learn more"
+msgstr "Daha fazla bilgi edinin"
 
-#, fuzzy
 msgid "nav_start"
-msgstr "Home"
+msgstr "Ana sayfa"
 
-#, fuzzy
 msgid "nested blocks"
-msgstr "a block in a block"
+msgstr "bir blok içinde bir blok"
 
-#, fuzzy
 msgid "new_password"
-msgstr "New password"
+msgstr "Yeni şifre"
 
-#, fuzzy
 msgid "newline"
-msgstr "a new line"
+msgstr "yeni bir satır"
 
-#, fuzzy
 msgid "next_exercise"
-msgstr "Next exercise"
+msgstr "Sonraki alıştırma"
 
-#, fuzzy
 msgid "next_page"
-msgstr "Next page"
+msgstr "Sonraki sayfa"
 
-#, fuzzy
 msgid "next_step_tutorial"
-msgstr "Next step >>>"
+msgstr "Sonraki adım >>>"
 
-#, fuzzy
 msgid "no"
-msgstr "No"
+msgstr "Hayır"
 
 msgid "no_account"
-msgstr "Henüz hesabınız yok mu?"
+msgstr "Hesabınız yok mu?"
 
-#, fuzzy
 msgid "no_accounts"
-msgstr "There are no accounts to create."
+msgstr "Oluşturulacak hesap bulunamadı."
 
-#, fuzzy
 msgid "no_certificate"
-msgstr "This user hasn't earned the Hedy Certificate of Completion"
+msgstr "Bu kullanıcı Hedy Tamamlama Sertifikasını henüz kazanmadı"
 
-#, fuzzy
 msgid "no_more_flat_if"
 msgstr ""
-"Starting in level 8, the code after {if} needs to be placed on the next "
-"line and start with 4 spaces."
+"8. seviyeden itibaren, {if}'den sonraki kodun bir sonraki satıra "
+"yerleştirilmesi ve satırın 4 boşlukla başlaması gerekir."
 
-#, fuzzy
 msgid "no_programs"
-msgstr "You have no programs yet."
+msgstr "Henüz hiç bir programınız yok."
 
-#, fuzzy
 msgid "no_public_profile"
-msgstr "Public profile"
+msgstr "Henüz herkese açık bir profil metniniz yok..."
 
-#, fuzzy
 msgid "no_shared_programs"
-msgstr "has no shared programs..."
+msgstr "paylaşılan programı yok..."
 
-#, fuzzy
 msgid "no_such_adventure"
-msgstr "This adventure doesn't exist!"
+msgstr "Böyle bir macera bulunmuyor!"
 
-#, fuzzy
 msgid "no_such_class"
-msgstr "No such Hedy class"
+msgstr "Böyle bir Hedy sınıfı yok."
 
-#, fuzzy
 msgid "no_such_highscore"
-msgstr "No such Hedy level!"
+msgstr "Yüksek puanlar"
 
-#, fuzzy
 msgid "no_such_level"
-msgstr "No such Hedy level!"
+msgstr "Böyle bir Hedy seviyesi yok!"
 
-#, fuzzy
 msgid "no_such_program"
-msgstr "No such Hedy program!"
+msgstr "Böyle bir Hedy programı yok!"
 
-#, fuzzy
 msgid "not_enrolled"
-msgstr "Looks like you are not in this class!"
+msgstr "Görünüşe göre bu sınıfta değilsiniz!"
 
-#, fuzzy
 msgid "not_in_class_no_handin"
-msgstr "You are not in a class, so there's no need for you to hand in anything."
+msgstr ""
+"Bir sınıfta değilsiniz, bu yüzden herhangi bir şey teslim etmenize gerek "
+"yok."
 
-#, fuzzy
 msgid "not_logged_in_cantsave"
-msgstr "Your program will not be saved."
+msgstr "Programınız kaydedilmeyecektir."
 
-#, fuzzy
 msgid "not_logged_in_handin"
-msgstr "You must be logged in to hand in an assignment."
+msgstr "Bir ödevi teslim etmek için oturum açmış olmanız gerekir."
 
-#, fuzzy
 msgid "not_teacher"
-msgstr "Looks like you are not a teacher!"
+msgstr "Görünüşe göre bir öğretmen değilsiniz!"
 
-#, fuzzy
 msgid "number"
-msgstr "a number"
+msgstr "bir sayı"
 
-#, fuzzy
 msgid "number_achievements"
-msgstr "Number of achievements"
+msgstr "Başarımların sayısı"
 
-#, fuzzy
 msgid "number_lines"
-msgstr "Number of lines"
+msgstr "Satırların sayısı"
 
-#, fuzzy
 msgid "number_programs"
-msgstr "Number of programs"
+msgstr "Çalıştırılan programların sayısı"
 
-#, fuzzy
 msgid "ok"
-msgstr "OK"
+msgstr "TAMAM"
 
-#, fuzzy
 msgid "only_you_can_see"
-msgstr "Only you can see this program."
+msgstr "Bu programı sadece siz görebilirsiniz."
 
-#, fuzzy
 msgid "open"
-msgstr "Open"
+msgstr "Aç"
 
-#, fuzzy
 msgid "opening_date"
-msgstr "Opening date"
+msgstr "Açılış tarihi"
 
-#, fuzzy
 msgid "opening_dates"
-msgstr "Opening dates"
+msgstr "Açılış tarihleri"
 
-#, fuzzy
 msgid "option"
-msgstr "Option"
+msgstr "Seçenek"
 
 msgid "or"
 msgstr "veya"
 
-#, fuzzy
 msgid "other"
-msgstr "Other"
+msgstr "Diğer"
 
-#, fuzzy
 msgid "other_block"
-msgstr "Another block language"
+msgstr "Başka bir blok programlama dili"
 
-#, fuzzy
 msgid "other_settings"
-msgstr "Other settings"
+msgstr "Diğer ayarlar"
 
-#, fuzzy
 msgid "other_source"
-msgstr "Other"
+msgstr "Diğer"
 
-#, fuzzy
 msgid "other_text"
-msgstr "Another text language"
+msgstr "Başka bir metin dili"
 
-#, fuzzy
 msgid "overwrite_warning"
 msgstr ""
-"You already have a program with this name, saving this program will "
-"overwrite the old one. Are you sure?"
+"Bu isimde bir programınız zaten var, bu programı kaydederseniz eskisinin "
+"yerini alacaktır, ve eskisi silinecektir. Emin misiniz?"
 
-#, fuzzy
 msgid "page"
-msgstr "page"
+msgstr "sayfa"
 
-#, fuzzy
 msgid "page_not_found"
-msgstr "We could not find that page!"
+msgstr "Aradığın sayfayı bulamadık!"
 
-#, fuzzy
 msgid "parsons_title"
-msgstr "Title"
+msgstr "Bulmaca"
 
 msgid "password"
-msgstr "Parola"
+msgstr "Şifre"
 
-#, fuzzy
 msgid "password_change_not_allowed"
-msgstr "You're not allowed to change the password of this user."
+msgstr "Bu kullanıcının parolasını değiştirme izniniz yok."
 
-#, fuzzy
 msgid "password_change_prompt"
-msgstr "Are you sure you want to change this password?"
+msgstr "Bu şifreyi değiştirmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "password_change_success"
-msgstr "Password of your student is successfully changed."
+msgstr "Öğrencinizin şifresi başarıyla değiştirilmiştir."
 
-#, fuzzy
 msgid "password_invalid"
-msgstr "Your password is invalid."
+msgstr "Şifreniz geçersiz."
 
-#, fuzzy
 msgid "password_repeat"
-msgstr "Repeat password"
+msgstr "Şifreyi yinele"
 
-#, fuzzy
 msgid "password_resetted"
-msgstr ""
-"Your password has been successfully reset. You are being redirected to "
-"the login page."
+msgstr "Şifreniz başarıyla sıfırlandı. Giriş sayfasına yönlendiriliyorsunuz."
 
-#, fuzzy
 msgid "password_six"
-msgstr "Your password must contain at least six characters."
+msgstr "Parolanız en az altı karakter içermelidir."
 
-#, fuzzy
 msgid "password_updated"
-msgstr "Password updated."
+msgstr "Şifre güncellendi."
 
-#, fuzzy
 msgid "passwords_six"
-msgstr "All passwords need to be six characters or longer."
+msgstr "Tüm parolaların altı karakter veya daha uzun olması gerekir."
 
-#, fuzzy
 msgid "pending_invites"
-msgstr "Pending invites"
+msgstr "Bekleyen davetler"
 
-#, fuzzy
 msgid "people_with_a_link"
 msgstr ""
-"Other people with a link can see this program. It also can be found on "
-"the \"Explore\" page."
+"Bağlantıya sahip olan diğer kişiler bu programı doğrudan görebilir. "
+"Ayrıca \"Keşfet\" sayfasında da aranıp bulunabilir."
 
-#, fuzzy
 msgid "percentage"
-msgstr "percentage"
+msgstr "yüzde"
 
-#, fuzzy
 msgid "percentage_achieved"
-msgstr "Achieved by {percentage}% of the users"
+msgstr "Kullanıcıların {percentage}% kadarı tarafından başarılmıştır"
 
-#, fuzzy
 msgid "period"
-msgstr "a period"
+msgstr "bir nokta"
 
-#, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "Kişisel metin"
 
-#, fuzzy
 msgid "personal_text_invalid"
-msgstr "Your personal text is invalid."
+msgstr "Kişisel metniniz geçersizdir."
 
-#, fuzzy
 msgid "postfix_classname"
-msgstr "Postfix classname"
+msgstr "Sınıf adı son eki"
 
-#, fuzzy
 msgid "preferred_keyword_language"
-msgstr "Preferred keyword language"
+msgstr "Tercih edilen anahtar kelime dili"
 
-#, fuzzy
 msgid "preferred_language"
-msgstr "Preferred language"
+msgstr "Tercih edilen dil"
 
-#, fuzzy
 msgid "preview"
-msgstr "Preview"
+msgstr "Önizleme"
 
-#, fuzzy
 msgid "previous_campaigns"
-msgstr "View previous campaigns"
+msgstr "Önceki bültenleri görüntüle"
 
 msgid "print_logo"
 msgstr "yazdır"
 
-#, fuzzy
 msgid "privacy_terms"
-msgstr "privacy terms"
+msgstr "Gizlilik koşulları"
 
-#, fuzzy
 msgid "private"
-msgstr "Private"
+msgstr "Özel"
 
-#, fuzzy
 msgid "profile_logo_alt"
-msgstr "Profile updated."
+msgstr "Profil simgesi."
 
-#, fuzzy
 msgid "profile_picture"
-msgstr "Profile picture"
+msgstr "Profil resmi"
 
-#, fuzzy
 msgid "profile_updated"
-msgstr "Profile updated."
+msgstr "Profil güncellendi."
 
-#, fuzzy
 msgid "profile_updated_reload"
-msgstr "Profile updated, page will be re-loaded."
+msgstr "Profil güncellendi, sayfa yeniden yüklenecek."
 
-#, fuzzy
 msgid "program_contains_error"
-msgstr "This program contains an error, are you sure you want to share it?"
+msgstr "Bu program bir hata içeriyor, paylaşmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "program_header"
-msgstr "My programs"
+msgstr "Programlarım"
 
-#, fuzzy
 msgid "program_too_large_exception"
-msgstr "Programs too large"
+msgstr "Programlar çok büyük"
 
-#, fuzzy
 msgid "programming_experience"
-msgstr "Do you have programming experience?"
+msgstr "Programlama deneyiminiz var mı?"
 
-#, fuzzy
 msgid "programming_invalid"
-msgstr "Please select a valid programming language."
+msgstr "Lütfen geçerli bir programlama dili seçin."
 
-#, fuzzy
 msgid "programs"
-msgstr "Programs"
+msgstr "Programlar"
 
-#, fuzzy
 msgid "programs_created"
-msgstr "My programs"
+msgstr "Oluşturulan programlar"
 
-#, fuzzy
 msgid "programs_saved"
-msgstr "Programs"
+msgstr "Kaydedilen programlar"
 
-#, fuzzy
 msgid "programs_submitted"
-msgstr "programs submitted"
+msgstr "Teslim edilen programlar"
 
-#, fuzzy
 msgid "prompt_join_class"
-msgstr "Do you want to join this class?"
+msgstr "Bu sınıfa katılmak istiyor musunuz?"
 
-#, fuzzy
 msgid "public"
-msgstr "Public"
+msgstr "Herkese açık"
 
-#, fuzzy
 msgid "public_invalid"
-msgstr "This agreement selection is invalid"
+msgstr "Bu anlaşma seçimi geçersizdir"
 
-#, fuzzy
 msgid "public_profile"
-msgstr "Public profile"
+msgstr "Herkese açık profil"
 
-#, fuzzy
 msgid "public_profile_info"
 msgstr ""
-"By selecting this box I make my profile visible for everyone. Be careful "
-"not to share personal information like your name or home address, because"
-" everyone will be able to see it!"
+"Bu kutuyu seçerek profilimi herkes için görünür hale getiriyorum. Adınız "
+"veya ev adresiniz gibi kişisel bilgilerinizi paylaşmamaya dikkat edin, "
+"çünkü bunları herkes görebilecektir!"
 
-#, fuzzy
 msgid "public_profile_updated"
-msgstr "Public profile updated."
+msgstr "Herkese açık profiliniz güncellendi, sayfa yeniden yüklenecek."
 
-#, fuzzy
 msgid "pygame_waiting_for_input"
-msgstr "Waiting for a button press..."
+msgstr "Bir düğmeye basılmasını bekliyorum..."
 
-#, fuzzy
 msgid "question mark"
-msgstr "a question mark"
+msgstr "bir soru işareti"
 
-#, fuzzy
 msgid "quiz_logo_alt"
-msgstr "Quiz logo"
+msgstr "Kısa sınav logosu"
 
-#, fuzzy
 msgid "quiz_score"
-msgstr "Quiz score"
+msgstr "Kısa sınav puanı"
 
-#, fuzzy
 msgid "quiz_tab"
-msgstr "Quiz"
+msgstr "Kısa sınav"
 
-#, fuzzy
 msgid "quiz_threshold_not_reached"
-msgstr "Quiz threshold not reached to unlock this level"
+msgstr ""
+"Bu seviyenin kilidini açmak için gereken kısa sınav puan eşiğine "
+"ulaşılmadı"
 
-#, fuzzy
 msgid "read_code_label"
-msgstr "Read aloud"
+msgstr "Yüksek sesle oku"
 
-#, fuzzy
 msgid "recent"
-msgstr "My recent programs"
+msgstr "Son uğraştığım programlarım"
 
-#, fuzzy
 msgid "recover_password"
-msgstr "Request a password reset"
+msgstr "Şifre sıfırlama isteğinde bulunun"
 
-#, fuzzy
 msgid "regress_button"
-msgstr "Go back to level {level}"
+msgstr "{level}. seviyeye geri dönün"
 
-#, fuzzy
 msgid "remove"
-msgstr "Remove"
+msgstr "Kaldır"
 
-#, fuzzy
 msgid "remove_customization"
-msgstr "Remove customization"
+msgstr "Özelleştirmeyi kaldırın"
 
-#, fuzzy
 msgid "remove_customizations_prompt"
-msgstr "Are you sure you want to remove this class their customizations?"
+msgstr "Bu sınıfın özelleştirmelerini kaldırmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "remove_student_prompt"
-msgstr "Are you sure you want to remove the student from the class?"
+msgstr "Öğrenciyi bu sınıftan çıkarmak istediğinize emin misiniz?"
 
-#, fuzzy
 msgid "repair_program_logo_alt"
-msgstr "Repair program icon"
+msgstr "Program onarım simgesi"
 
-#, fuzzy
 msgid "repeat_match_password"
-msgstr "The repeated password does not match."
+msgstr "Yinelenen şifre eşleşmiyor."
 
-#, fuzzy
 msgid "repeat_new_password"
-msgstr "Repeat new password"
+msgstr "Yeni şifreyi yineleyin"
 
-#, fuzzy
 msgid "report_failure"
-msgstr "This program does not exist or is not public"
+msgstr "Bu program mevcut değil veya herkese açık değil"
 
-#, fuzzy
 msgid "report_program"
-msgstr "Are you sure you want to report this program?"
+msgstr "Bu programı bildirmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "report_success"
-msgstr "This program has been reported"
+msgstr "Bu program rapor edilmiştir"
 
-#, fuzzy
 msgid "request_teacher"
-msgstr "Would you like to apply for a teacher's account?"
+msgstr "Öğretmen hesabı için başvurmak ister misiniz?"
 
-#, fuzzy
 msgid "request_teacher_account"
-msgstr "Request teacher account"
+msgstr "Öğretmen hesabı için başvurun"
 
-#, fuzzy
 msgid "required_field"
-msgstr "Fields marked with an * are required"
+msgstr "* ile işaretlenmiş alanlar zorunludur"
 
-#, fuzzy
 msgid "reset_adventure_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "Seçilen tüm maceraları sıfırlamak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "reset_adventures"
-msgstr "Reset selected adventures"
+msgstr "Seçili maceraları sıfırla"
 
-#, fuzzy
 msgid "reset_button"
-msgstr "Reset"
+msgstr "Sıfırla"
 
-#, fuzzy
 msgid "reset_password"
-msgstr "Reset password"
+msgstr "Şifreyi sıfırla"
 
-#, fuzzy
 msgid "reset_view"
-msgstr "Reset"
+msgstr "Sıfırla"
 
-#, fuzzy
 msgid "retrieve_adventure_error"
-msgstr "You're not allowed to view this adventure!"
+msgstr "Bu macerayı görüntülemenize izin verilmiyor!"
 
-#, fuzzy
 msgid "retrieve_class_error"
-msgstr "Only teachers can retrieve classes"
+msgstr "Sadece öğretmenler sınıfları geri alabilir"
 
-#, fuzzy
 msgid "run_code_button"
-msgstr "Run code"
+msgstr "Kodu çalıştır"
 
-#, fuzzy
 msgid "runs_over_time"
-msgstr "Runs over time"
+msgstr "Şimdiye kadar ki çalıştırmalar"
 
-#, fuzzy
 msgid "save"
-msgstr "Save"
+msgstr "Kaydet"
 
-#, fuzzy
 msgid "save_parse_warning"
-msgstr "This program contains an error, are you sure you want to save it?"
+msgstr "Bu program bir hata içeriyor, kaydetmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "save_prompt"
 msgstr ""
-"You need to have an account to save your program. Would you like to login"
-" now?"
+"Programınızı kaydetmek için bir hesabınızın olması gerekir. Şimdi giriş "
+"yapmak ister misiniz?"
 
-#, fuzzy
 msgid "save_success_detail"
-msgstr "Program saved successfully."
+msgstr "Program başarıyla kaydedildi."
 
-#, fuzzy
 msgid "score"
-msgstr "Score"
+msgstr "Puan"
 
-#, fuzzy
 msgid "search"
-msgstr "Search..."
+msgstr "Ara..."
 
-#, fuzzy
 msgid "search_button"
-msgstr "Save & share code"
+msgstr "Ara"
 
-#, fuzzy
 msgid "see_certificate"
-msgstr "See {username} certificate!"
+msgstr "{username} sertifikasına bakın!"
 
-#, fuzzy
 msgid "select"
-msgstr "Select"
+msgstr "Seçin"
 
-#, fuzzy
 msgid "select_adventures"
-msgstr "Select adventures"
+msgstr "Maceraları seçin ve sıralayın"
 
-#, fuzzy
 msgid "self_removal_prompt"
-msgstr "Are you sure you want to leave this class?"
+msgstr "Bu sınıftan ayrılmak istediğinize emin misiniz?"
 
-#, fuzzy
 msgid "send_password_recovery"
-msgstr "Send me a password recovery link"
+msgstr "Bana bir şifre kurtarma bağlantısı gönder"
 
-#, fuzzy
 msgid "sent_by"
-msgstr "This invitation is sent by"
+msgstr "Bu davetiye şu kişi tarafından gönderilmiştir"
 
-#, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
-"You should soon receive an email with instructions on how to reset your "
-"password."
+"Yakında şifrenizi nasıl sıfırlayacağınıza ilişkin talimatları içeren bir "
+"e-posta alacaksınız."
 
-#, fuzzy
 msgid "settings"
-msgstr "My personal settings"
+msgstr "Kişisel ayarlarım"
 
-#, fuzzy
 msgid "share"
-msgstr "Share"
+msgstr "Paylaş"
 
-#, fuzzy
 msgid "share_by_giving_link"
-msgstr "Show your program to other people by giving them the link below:"
+msgstr "Aşağıdaki bağlantıyı vererek programınızı diğer insanlara gösterin:"
 
-#, fuzzy
 msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "Programı herkese açık yapmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "share_success_detail"
-msgstr "Program shared successfully."
+msgstr "Program başarıyla paylaşıldı."
 
-#, fuzzy
 msgid "share_your_program"
-msgstr "Share your program"
+msgstr "Programınızı paylaşın"
 
-#, fuzzy
 msgid "signup_student_or_teacher"
-msgstr "Are you a student or a teacher?"
+msgstr "Öğrenci misiniz yoksa öğretmen mi?"
 
-#, fuzzy
 msgid "single quotes"
-msgstr "a single quote"
+msgstr "bir tek tırnak"
 
-#, fuzzy
 msgid "slash"
-msgstr "a slash"
+msgstr "bir sağa eğik çizgi"
 
-#, fuzzy
 msgid "social_media"
-msgstr "Social media"
+msgstr "Sosyal medya"
 
-#, fuzzy
 msgid "something_went_wrong_keyword_parsing"
 msgstr ""
-"There is a mistake in your adventure, are all keywords correctly "
-"surrounded with { }?"
+"Maceranızda bir hata var, tüm anahtar kelimeler { } ile doğru şekilde "
+"çevrelenmiş mi?"
 
-#, fuzzy
 msgid "space"
-msgstr "a space"
+msgstr "bir boşluk"
 
-#, fuzzy
 msgid "star"
-msgstr "a star"
+msgstr "bir yıldız"
 
-#, fuzzy
 msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
+msgstr "Hedy öğreticisini başlat"
 
-#, fuzzy
 msgid "start_programming"
-msgstr "Directly start programming"
+msgstr "Programlamaya başlayın"
 
-#, fuzzy
 msgid "start_programming_logo_alt"
-msgstr "Directly start programming"
+msgstr "Programlamayı başlat simgesi"
 
-#, fuzzy
 msgid "start_quiz"
-msgstr "Start quiz"
+msgstr "Kısa sınavı başlatın"
 
-#, fuzzy
 msgid "start_teacher_tutorial"
-msgstr "Start teacher tutorial"
+msgstr "Öğretmen öğreticisini başlatın"
 
-#, fuzzy
 msgid "step_title"
-msgstr "Assignment"
+msgstr "Ödev"
 
-#, fuzzy
 msgid "stop_code_button"
-msgstr "Save code"
+msgstr "Programı durdur"
 
-#, fuzzy
 msgid "string"
-msgstr "text"
+msgstr "metin"
 
-#, fuzzy
 msgid "student_already_in_class"
-msgstr "This student is already in your class."
+msgstr "Bu öğrenci zaten sizin sınıfınızda."
 
-#, fuzzy
 msgid "student_already_invite"
-msgstr "This student already has a pending invitation."
+msgstr "Bu öğrencinin zaten bekleyen bir daveti var."
 
 msgid "student_details"
 msgstr ""
 
-#, fuzzy
 msgid "student_list"
-msgstr "Student list"
+msgstr "Öğrenci listesi"
 
-#, fuzzy
 msgid "student_not_existing"
-msgstr "This username doesn't exist."
+msgstr "Bu kullanıcı adı mevcut değil."
 
-#, fuzzy
 msgid "student_signup_header"
-msgstr "Student"
+msgstr "Öğrenci"
 
-#, fuzzy
 msgid "students"
-msgstr "students"
+msgstr "öğrenciler"
 
-#, fuzzy
 msgid "submission_time"
-msgstr "Handed in at"
+msgstr "Teslim edilme zamanı"
 
-#, fuzzy
 msgid "submit_answer"
-msgstr "Answer question"
+msgstr "Soruyu cevaplayın"
 
-#, fuzzy
 msgid "submit_program"
-msgstr "Submit"
+msgstr "Teslim edin"
 
-#, fuzzy
 msgid "submit_warning"
-msgstr "Are you sure you want to submit this program?"
+msgstr "Bu programı teslim etmek istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "submitted"
-msgstr "Submitted"
+msgstr "Teslim edildi"
 
-#, fuzzy
 msgid "submitted_header"
-msgstr "This is a submitted program and can't be altered."
+msgstr "Bu teslim edilmiş bir programdır ve üzerinde değişiklik yapılamaz."
 
-#, fuzzy
 msgid "subscribe"
-msgstr "Subscribe to the newsletter"
+msgstr "Abone Olun"
 
-#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Subscribe to the newsletter"
+msgstr "Haber bültenine abone olun"
 
-#, fuzzy
 msgid "surname"
-msgstr "Kullanıcı adı"
+msgstr "İlk Adınız"
 
-#, fuzzy
 msgid "teacher"
-msgstr "Looks like you are not a teacher!"
+msgstr "Öğretmen"
 
-#, fuzzy
 msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
+msgstr "Bekleyen bir öğretmen hesabı talebiniz var"
 
-#, fuzzy
 msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
+msgstr "Bir öğretmen hesabı talebiniz başarıyla alındı."
 
-#, fuzzy
 msgid "teacher_invalid"
-msgstr "Your teacher value is invalid."
+msgstr "Öğretmen değeriniz geçersiz."
 
-#, fuzzy
 msgid "teacher_invitation_require_login"
 msgstr ""
-"To set up your profile as a teacher we will need you to log in. If you "
-"don't have an account, please create one."
+"Bir öğretmen olarak profilinizi oluşturmak için oturum açmanız "
+"gerekmektedir. Eğer bir hesabınız yoksa, lütfen bir hesap oluşturun."
 
-#, fuzzy
 msgid "teacher_manual"
-msgstr "Teacher manual"
+msgstr "Öğretmen kılavuzu"
 
-#, fuzzy
 msgid "teacher_signup_header"
-msgstr "Teacher"
+msgstr "Öğretmen"
 
-#, fuzzy
 msgid "teacher_tutorial_logo_alt"
-msgstr "You have received an invitation to join class"
+msgstr "Öğretmen öğretici simgesi"
 
-#, fuzzy
 msgid "teacher_welcome"
 msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+"Hedy'ye hoş geldiniz! Artık sınıflar oluşturmanıza ve öğrencileri davet "
+"etmenize olanak tanıyan bir öğretmen hesabının gururlu sahibisiniz."
 
-#, fuzzy
 msgid "template_code"
 msgstr ""
-"This is the explanation of my adventure!\n"
+"Bu benim maceramın açıklaması!\n"
 "\n"
-"This way I can show a command: <code>print</code>\n"
+"Bir komutu bu şekilde gösterebilirim: <code>{print}</code>\n"
 "\n"
-"But sometimes I might want to show a piece of code, like this:\n"
+"Ama bazen de bir kod parçası göstermek isteyebilirim, bunun gibi:\n"
 "<pre>\n"
-"ask What's your name?\n"
-"echo so your name is \n"
+"{ask} Adın ne senin?\n"
+"{echo} Demek senin adın \n"
 "</pre>"
 
-#, fuzzy
 msgid "this_turns_in_assignment"
-msgstr "This turns in your assignment to your teacher."
+msgstr "Bu, ödevinizi öğretmeninize teslim etmenizi sağlar."
 
-#, fuzzy
 msgid "title"
-msgstr "Title"
+msgstr "Bulmaca"
 
-#, fuzzy
 msgid "title_achievements"
-msgstr "Hedy - My achievements"
+msgstr "Hedy - Başarılarım"
 
-#, fuzzy
 msgid "title_admin"
-msgstr "Hedy - Administrator page"
+msgstr "Hedy - Yönetici sayfası"
 
-#, fuzzy
 msgid "title_class grid_overview"
-msgstr "Hedy - Grid overview"
+msgstr "Hedy - Izgara görünümü"
 
-#, fuzzy
 msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
+msgstr "Hedy - Canlı İstatistikler"
 
-#, fuzzy
 msgid "title_class logs"
-msgstr "Hedy - Join class"
+msgstr "Hedy - Günlükler"
 
-#, fuzzy
 msgid "title_class statistics"
-msgstr "My statistics"
+msgstr "İstatistiklerim"
 
-#, fuzzy
 msgid "title_class-overview"
-msgstr "Hedy - Class overview"
+msgstr "Hedy - Sınıfa genel bakış"
 
-#, fuzzy
 msgid "title_customize-adventure"
-msgstr "Hedy - Customize adventure"
+msgstr "Hedy - Macerayı özelleştirin"
 
-#, fuzzy
 msgid "title_customize-class"
-msgstr "Hedy - Customize class"
+msgstr "Hedy - Sınıfı özelleştirin"
 
-#, fuzzy
 msgid "title_explore"
-msgstr "Hedy - Explore"
+msgstr "Hedy - Keşfet"
 
-#, fuzzy
 msgid "title_for-teacher"
-msgstr "Hedy - For teachers"
+msgstr "Hedy - Öğretmenler için"
 
-#, fuzzy
 msgid "title_join-class"
-msgstr "Hedy - Join class"
+msgstr "Hedy - Sınıfa katılın"
 
-#, fuzzy
 msgid "title_landing-page"
-msgstr "Welcome to Hedy!"
+msgstr "Hedy'ye hoş geldiniz!"
 
-#, fuzzy
 msgid "title_learn-more"
-msgstr "Hedy - Learn more"
+msgstr "Hedy - Daha fazlasını öğrenin"
 
-#, fuzzy
 msgid "title_login"
-msgstr "Hedy - Login"
+msgstr "Hedy - Giriş"
 
-#, fuzzy
 msgid "title_my-profile"
-msgstr "Hedy - My account"
+msgstr "Hedy - Hesabım"
 
-#, fuzzy
 msgid "title_privacy"
-msgstr "Hedy - Privacy terms"
+msgstr "Hedy - Gizlilik koşulları"
 
-#, fuzzy
 msgid "title_programs"
-msgstr "Hedy - My programs"
+msgstr "Hedy - Programlarım"
 
-#, fuzzy
 msgid "title_recover"
-msgstr "Hedy - Recover account"
+msgstr "Hedy - Hesabı kurtar"
 
-#, fuzzy
 msgid "title_reset"
-msgstr "Hedy - Reset password"
+msgstr "Hedy - Şifreyi sıfırla"
 
-#, fuzzy
 msgid "title_signup"
-msgstr "Hedy - Create an account"
+msgstr "Hedy - Bir hesap oluşturun"
 
-#, fuzzy
 msgid "title_start"
-msgstr "Hedy - A gradual programming language"
+msgstr "Hedy - Metinsel programlama kolaylaştı"
 
-#, fuzzy
 msgid "title_view-adventure"
-msgstr "Hedy - View adventure"
+msgstr "Hedy - Macerayı görüntüle"
 
-#, fuzzy
 msgid "token_invalid"
-msgstr "Your token is invalid."
+msgstr "Bağlanma jeton dizesi geçersiz."
 
-#, fuzzy
 msgid "translate_error"
 msgstr ""
-"Something went wrong while translating the code. Try running the code to "
-"see if it has an error. Code with errors can not be translated."
+"Kodu çevirirken bir şeyler yanlış gitti. Hata olup olmadığını görmek için "
+"kodu çalıştırmayı deneyin. Hata içeren kod çevrilemez."
 
-#, fuzzy
 msgid "translating_hedy"
-msgstr "Translating Hedy"
+msgstr "Hedy'nin çevirisini yapmak"
 
-#, fuzzy
+msgid "translator"
+msgstr "Çevirmen"
+
 msgid "try_it"
-msgstr "Try"
+msgstr "Hadi Deneyin"
 
-#, fuzzy
 msgid "tutorial"
-msgstr "Tutorial"
+msgstr "Öğretici"
 
-#, fuzzy
 msgid "tutorial_code_snippet"
-msgstr "Hide cheatsheet"
+msgstr ""
+"{print} Merhaba dünya!\n"
+"{print} Hedy'yi kullanmayı öğretici ile öğreniyorum!"
 
-#, fuzzy
 msgid "tutorial_message_not_found"
-msgstr "You have received an invitation to join class"
+msgstr "İstenen öğretici adımı bulamadık..."
 
-#, fuzzy
 msgid "tutorial_title_not_found"
-msgstr "We could not find that page!"
+msgstr "Öğretici adım bulunamadı"
 
-#, fuzzy
 msgid "unauthorized"
-msgstr "You don't have access rights for this page"
+msgstr "Bu sayfa için erişim izniniz yok"
 
-#, fuzzy
 msgid "unique_usernames"
-msgstr "All usernames need to be unique."
+msgstr "Tüm kullanıcı adlarının benzersiz olması gerekir."
 
-#, fuzzy
 msgid "unlock_thresholds"
-msgstr "Unlock level thresholds"
+msgstr "Seviye eşiklerinin kilidini aç"
 
-#, fuzzy
 msgid "unsaved_class_changes"
-msgstr "There are unsaved changes, are you sure you want to leave this page?"
+msgstr ""
+"Kaydedilmemiş değişiklikler var, bu sayfadan ayrılmak istediğinize emin "
+"misiniz?"
 
-#, fuzzy
 msgid "unshare"
-msgstr "Unshare"
+msgstr "Paylaşımı kaldır"
 
-#, fuzzy
 msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
+msgstr "Programı tekrar size özel yapmak istediğinizden emin misiniz?"
 
-#, fuzzy
 msgid "unshare_success_detail"
-msgstr "Program unshared successfully."
+msgstr "Programın paylaşılması başarıyla kaldırıldı."
 
-#, fuzzy
 msgid "update_adventure_prompt"
-msgstr "Are you sure you want to update this adventure?"
+msgstr "Bu macerayı güncellemek istediğinize emin misiniz?"
 
-#, fuzzy
 msgid "update_profile"
-msgstr "Update profile"
+msgstr "Profili güncelle"
 
-#, fuzzy
 msgid "update_public"
-msgstr "Update public profile"
+msgstr "Herkese açık profili güncelle"
 
-#, fuzzy
 msgid "updating_indicator"
-msgstr "Updating"
+msgstr "Güncelleniyor"
 
-#, fuzzy
 msgid "use_of_blanks_exception"
-msgstr "Use of blanks in programs"
+msgstr "Programlarda boşlukların kullanılması"
 
-#, fuzzy
 msgid "use_of_nested_functions_exception"
-msgstr "Use of nested functions"
+msgstr "İç içe fonksiyonların kullanımı"
 
-#, fuzzy
 msgid "user"
-msgstr "Kullanıcı adı"
+msgstr "kullanıcı"
 
-#, fuzzy
 msgid "user_inexistent"
-msgstr "This user doesn't exist"
+msgstr "Bu kullanıcı mevcut değil"
 
-#, fuzzy
 msgid "user_not_private"
-msgstr "This user doesn't exist or doesn't have a public profile"
+msgstr "Bu kullanıcı ya mevcut değil ya da herkese açık bir profili yok"
 
 msgid "username"
-msgstr "Kullanıcı adı"
+msgstr "Kullanıcı Adı"
 
-#, fuzzy
 msgid "username_empty"
-msgstr "You didn't enter an username!"
+msgstr "Bir kullanıcı adı girmediniz!"
 
-#, fuzzy
 msgid "username_invalid"
-msgstr "Your username is invalid."
+msgstr "Kullanıcı adınız geçersiz."
 
-#, fuzzy
 msgid "username_special"
-msgstr "Username cannot contain `:` or `@`."
+msgstr "Kullanıcı adı `:` veya `@` içeremez."
 
-#, fuzzy
 msgid "username_three"
-msgstr "Username must contain at least three characters."
+msgstr "Kullanıcı adı en az üç karakter içermelidir."
 
-#, fuzzy
 msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgstr "Bir veya daha fazla kullanıcı adı zaten kullanımda."
 
-#, fuzzy
 msgid "value"
-msgstr "Value"
+msgstr "Değer"
 
-#, fuzzy
 msgid "variables"
-msgstr "Variables"
+msgstr "Değişkenler"
 
-#, fuzzy
 msgid "view_program"
-msgstr "View program"
+msgstr "Programı görüntüle"
 
-#, fuzzy
 msgid "welcome"
-msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+msgstr "Hoş geldiniz"
 
-#, fuzzy
 msgid "welcome_back"
-msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+msgstr "Tekrar hoş geldiniz"
 
-#, fuzzy
+msgid "what_is_your_role"
+msgstr "Göreviniz nedir?"
+
 msgid "what_should_my_code_do"
-msgstr "What should my code do?"
+msgstr "Kodumun ne yapması gerekiyor?"
 
-#, fuzzy
 msgid "whole_world"
-msgstr "The world"
+msgstr "Dünya"
 
-#, fuzzy
 msgid "write_first_program"
-msgstr "Write your first program!"
+msgstr "İlk programınızı yazın!"
 
-#, fuzzy
 msgid "year_invalid"
-msgstr "Please enter a year between 1900 and {current_year}."
+msgstr "Lütfen 1900 ile {current_year} arasında bir yıl girin."
 
-#, fuzzy
 msgid "yes"
-msgstr "Yes"
+msgstr "Evet"
 
-#, fuzzy
 msgid "your_account"
-msgstr "Henüz hesabınız yok mu?"
+msgstr "Profiliniz"
 
-#, fuzzy
 msgid "your_class"
-msgstr "My classes"
+msgstr "Sınıfınız"
 
-#, fuzzy
 msgid "your_last_program"
-msgstr "Favourite program"
+msgstr "Son kaydettiğiniz program"
 
-#, fuzzy
 msgid "your_personal_text"
-msgstr "Your personal text..."
+msgstr "Kişisel metniniz..."
 
-#, fuzzy
 msgid "your_program"
-msgstr "Your program"
+msgstr "Programınız"
+
+#~ msgid "class_logs"
+#~ msgstr "Last login"
+
+#~ msgid "class_stats"
+#~ msgstr "Show class statistics"
+
+#~ msgid "visit_own_public_profile"
+#~ msgstr "Public profile"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "Having your own account allows you to save your programs."
 
 #~ msgid "only_teacher_create_class"
 #~ msgstr "Only teachers are allowed to create classes!"
-
-#~ msgid "language"
-#~ msgstr "Which of these programming languages have you used before?"
 
 #~ msgid "keyword_support"
 #~ msgstr "Translated keywords"
@@ -2463,13 +1983,3 @@ msgstr "Your program"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
-
-#~ msgid "class_logs"
-#~ msgstr "Last login"
-
-#~ msgid "class_stats"
-#~ msgstr "Show class statistics"
-
-#~ msgid "visit_own_public_profile"
-#~ msgstr "Public profile"
-

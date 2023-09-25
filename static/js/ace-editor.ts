@@ -268,11 +268,18 @@ export class HedyAceEditor implements HedyEditor {
     // If we get here we know there is a column -> dynamically get the length of the error string
     // As we assume the error is supposed to target a specific word we get row[column, whitespace].
     const length = this._editor.session.getLine(row - 1).slice(col - 1).split(/(\s+)/)[0].length;
-
-    // If there is a column, only highlight the relevant text
-    this.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
-      "editor-error", "text"
-    );
+    if (length > 0) {
+      // If there is a column, only highlight the relevant text
+      this.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
+        "editor-error", "text"
+      );
+    } else {
+      // If we can't find the word to highlight, highlight the whole line
+      this.addMarker(
+        new ace.Range(row - 1, 1, row - 1, 2),
+        "editor-error", "fullLine"
+      );
+    }
   }
 
 

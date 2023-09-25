@@ -233,7 +233,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     17: [
         'default',
-        'print_command',
+        'for_command',
         'elif_command',
         'tic',
         'blackjack'

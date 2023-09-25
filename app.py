@@ -1603,6 +1603,11 @@ def main_page():
                            current_page='start', content=content)
 
 
+@app.route('/subscribe')
+def subscribe():
+    return render_template('subscribe.html', current_page='subscribe')
+
+
 @app.route('/learn-more')
 def learn_more():
     learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
@@ -1665,12 +1670,16 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(
+    programs = DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
-        adventure_filter=adventure))
-    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
+        adventure_filter=adventure)
+    favourite_programs = DATABASE.get_hedy_choices()
+
+    # Do 'normalize_public_programs' on both sets at once, to save database calls
+    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
+    programs, favourite_programs = split_at(len(programs), normalized)
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
@@ -1688,7 +1697,7 @@ def explore():
         current_page='explore')
 
 
-def normalize_explore_programs(programs):
+def normalize_public_programs(programs):
     """Normalize the content for all programs in the given array, for showing on the /explore page.
 
     Does the following thing:
@@ -2260,6 +2269,11 @@ def analyze_memory_snapshot(start_snapshot, end_snapshot):
         print("%s other: %.1f KiB" % (len(other), size / 1024))
     total = sum(stat.size for stat in top_stats)
     print("Total allocated size: %.1f KiB" % (total / 1024))
+
+
+def split_at(n, xs):
+    """Split a collection at an index."""
+    return xs[:n], xs[n:]
 
 
 if __name__ == '__main__':
