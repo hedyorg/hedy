@@ -259,7 +259,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
+    theGlobalEditor.clearIncorrectLines();
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -309,23 +309,31 @@ function attachMainEditorEvents(editor: HedyEditor) {
     }
   });
 
-  // Removed until we can fix the skip lines feature
-  // We show the error message when clicking on the skipped code
-  // this._editor.on("click", function(e) {
-  //   let position = e.getDocumentPosition()
-  //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
+  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
+    let className = e.target.className;
 
-  //   let element = document.elementFromPoint(position.pageX, position.pageY)
-  //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-  //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-  //     let mapError = theGlobalSourcemap[mapIndex];
+    // Only do this if skipping faulty is used
+    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
+      if (className === 'ace_content') {
+        // Hide error, warning or okbox
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+      } else {
+        // Show error for this line
+        let mapIndex = className;
+        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+        mapIndex = mapIndex.replace('ace_start ace_br15', '');
+        let mapError = theGlobalSourcemap[Number(mapIndex)];
 
-  //     $('#okbox').hide ();
-  //     $('#warningbox').hide();
-  //     $('#errorbox').hide();
-  //     error.show(ClientMessages['Transpile_error'], mapError.error);
-  //   }
-  // });
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+        error.show(ClientMessages['Transpile_error'], mapError.error);
+      }
+    }
+  });
 }
 
 export interface InitializeViewProgramPageOptions {
@@ -524,21 +532,15 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         save_name: saveNameFromInput(),
       };
 
+      let errorsFoundTimeout = setTimeout(function () {
+        error.showWarningSpinner();
+        error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+      }, 500)
+
       let response = await postJsonWithAchievements('/parse', data);
+      clearTimeout(errorsFoundTimeout);
       console.log('Response', response);
-
-      if (response.Warning && $('#editor').is(":visible")) {
-        //storeFixedCode(response, level);
-        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
-      }
-
-      // if (!data.skip_faulty && response.Error) {
-      //   data.skip_faulty = true;
-      //   error.showWarningSpinner();
-      //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-      //   response = await postJsonWithAchievements('/parse', data);
-      //   error.hide(true);
-      // }
+      error.hide();
 
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
@@ -820,21 +822,21 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   let outputDiv = $('#output');
 
   if (sourceMap){
-    // theGlobalSourcemap = sourceMap;
-    // let Range = ace.require("ace/range").Range
+    theGlobalSourcemap = sourceMap;
+    let Range = ace.require("ace/range").Range
 
-    // // We loop through the mappings and underline a mapping if it contains an error
-    // for (const index in sourceMap) {
-    //   const map = sourceMap[index];
-    //   const range = new Range(
-    //     map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-    //     map.hedy_range.to_line-1, map.hedy_range.to_column-1
-    //   )
+    // We loop through the mappings and underline a mapping if it contains an error
+    for (const index in sourceMap) {
+      const map = sourceMap[index];
+      const range = new Range(
+        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+        map.hedy_range.to_line-1, map.hedy_range.to_column-1
+      )
 
-    //   if (map.error != null){
-    //     theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
-    //   }
-    // }
+      if (map.error != null){
+        theGlobalEditor.setIncorrectLine(range, Number(index));
+      }
+    }
   }
 
   //Saving the variable button because sk will overwrite the output div
