@@ -473,6 +473,7 @@ def echo_session_vars_main():
 
 
 @app.route('/parse', methods=['POST'])
+@querylog.timed_as('parse_handler')
 def parse():
     body = request.json
     if not body:
@@ -557,10 +558,12 @@ def parse():
         except Exception:
             pass
 
-        try:
-            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-        except BaseException:
-            pass
+        with querylog.log_time('detect_sleep'):
+            try:
+                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
+            except BaseException:
+                pass
+
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
                     username, code, level, response):

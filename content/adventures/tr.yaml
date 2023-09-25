@@ -15,7 +15,7 @@ adventures:
 
                 example_code: |
                     **Uyarı! Bu kod çalışmaz!**
-                    Hedy'de komutlar arada değişecektir. Örneğin `yankıla` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
+                    Hedy'de komutlar arada değişecektir. Örneğin `{echo}` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
                     ```
                     {print} Hedy's 'e Hoş Geldiniz
                     {ask} Ne yemek istersiniz?
@@ -257,7 +257,10 @@ adventures:
                 start_code: |-
                     {print} 'Hadi bir sonraki seviyeye geçelim!'
                 story_text: |
-                    Hedy'nin son seviyesine neredeyse ulaşmak üzeresiniz, aferin! Bu seviyede `{print}` kullanmanın gerçek bir Python yolunu öğreneceksiniz.
+                    Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
+
+                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{ elif }`. `{elif}` {else} {if}'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
+                    Şuna bir bakın!
             18:
                 start_code: |-
                     {print} ('Harika iş çıkardınız!!!')
@@ -1096,7 +1099,7 @@ adventures:
                     ```
                 example_code_2: |2
 
-                                        Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1327,7 +1330,7 @@ adventures:
                     ```
 
                 start_code: "{print} 'Hesap makinesine hoş geldiniz!'"
-                story_text_3: "\n    **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n    Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
+                story_text_3: "\n        **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n        Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
             9:
                 story_text: |
                     Seviye 6'da bir hesap makinesi oluşturmuştunuz, bu seviyede bu kodu birden fazla soru soracak şekilde genişletebilirsiniz.
@@ -1438,7 +1441,7 @@ adventures:
                 example_code: "```\nsayı = 10\n{for} i {in} {range} 1 şuraya 10\n    {print} i * sayı\n```\n"
             13:
                 example_code: "```\ncevap1 = {ask} '10 kere 7 kaç eder?'\ncevap2 = {ask} '6 kere 7 kaç eder?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
-                story_text: "\n### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
+                story_text: "\n    ### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
                 start_code: '# Kodunuzu buraya yazın'
     restaurant:
         name: "Restoran"
