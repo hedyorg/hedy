@@ -9,12 +9,9 @@ describe('Is able to type in the editor box', () => {
     it(`Language ${language} should run`, () => {
       cy.visit(`${Cypress.env('hedy_page')}?language=${language}#default`);
 
-      // click on textaread to get focus
+      // click on textaread to get focus, then clear it
       aceContent().click();
-
-      // Empty textarea and wait for the clear() to come through
-      clearViaDel();
-      aceContent().should('have.text', '');
+      clearViaBackspace();
 
       cy.focused().type('print Hello world');
       aceContent().should('have.text', 'print Hello world');
@@ -28,15 +25,8 @@ describe('Test editor box functionality', () => {
   beforeEach(() => {
     cy.visit(`${Cypress.env('hedy_page')}#default`);
 
-    // click on textaread to get focus
-    cy.get('#editor > .ace_scroller > .ace_content').click();
-    cy.wait(500);
-
-    cy.focused().clear();
-    cy.wait(500);
-
-    cy.focused().clear();
-    cy.wait(500);
+    aceContent().click();
+    clearViaBackspace();
   });
 
   it('Ask modal should hold input and the answer should be shown in output', () => {
@@ -98,10 +88,16 @@ describe('Test editor box functionality', () => {
 });
 
 /**
- * Clear the input via sending {backspace} keystrokes
+ * Clear the input via sending a whole bunch of {backspace} keystrokes
+ *
+ * We tried all kinds of `.clear()` invocations, all of them worked on our
+ * desktops and never on GitHub Actions. The current invocation does
+ * seem to work consistently on GHA, and we collectively have no idea
+ * why ¯\_(ツ)_/¯.
  */
-function clearViaDel() {
-  cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(30));
+function clearViaBackspace() {
+  cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(40));
+  aceContent().should('have.text', '');
 }
 
 function aceContent() {
