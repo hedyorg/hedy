@@ -11,8 +11,12 @@ describe('Is able to type in the editor box', () => {
 
       // click on textaread to get focus
       cy.get('#editor > .ace_scroller > .ace_content').click();
-      // empty textarea
-      typeIntoAce('{selectAll}{del}print Hello world');
+
+      // Empty textarea and wait for the clear() to come through
+      cy.focused().clear();
+      cy.get('#editor > .ace_scroller > .ace_content').should('have.text', '');
+
+      cy.focused().type('print Hello world');
       cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello world');
       cy.get('#runit').click();
       cy.get('#output').should('contain.text', 'Hello world');
@@ -23,25 +27,32 @@ describe('Is able to type in the editor box', () => {
 describe('Test editor box functionality', () => {
   beforeEach(() => {
     cy.visit(`${Cypress.env('hedy_page')}#default`);
+
+    // click on textaread to get focus
     cy.get('#editor > .ace_scroller > .ace_content').click();
-    // empty textarea
-    cy.get('#editor textarea').clear()
+    cy.wait(500);
+
+    cy.focused().clear();
+    cy.wait(500);
+
+    cy.focused().clear();
+    cy.wait(500);
   });
-  
+
   it('Ask modal should hold input and the answer should be shown in output', () => {
-    typeIntoAce('{selectAll}{del}print Hello world\nask Hello!\necho');
+    cy.focused().type('print Hello world\nask Hello!\necho');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!echo');
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
     cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');      
+    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
     cy.get('#ask-modal > form > div > input[type="submit"]').click();
     cy.get('#output').should('contain.text', 'Hedy!');
   });
 
   it('Ask modal shpuld be shown even when editing the program after clicking run and not answering the modal', () => {
     // First we write and run the program and leave the ask modal unanswered
-    typeIntoAce('{selectAll}{del}print Hello world\nask Hello!');
+    cy.focused().type('print Hello world\nask Hello!');
     // the \n is not shown as a charecter when you get the text
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!');
     cy.get('#runit').click();
@@ -52,9 +63,9 @@ describe('Test editor box functionality', () => {
     cy.get('#editor > .ace_scroller > .ace_content').click();
     // TODO: replace this wait. The editor takes a while to be focused
     cy.wait(500)
-    cy.focused().clear();      
-    typeIntoAce('{selectAll}{del}print Hello world\nask Hello!');
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!');      
+    cy.focused().clear();
+    cy.focused().type('print Hello world\nask Hello!');
+    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!');
     cy.get('#ask-modal').should('not.be.visible');
 
     // Running program again and it should show the modal
@@ -64,7 +75,7 @@ describe('Test editor box functionality', () => {
   });
 
   it ('When making an error the error modal should be shown', () => {
-    typeIntoAce('{selectAll}{del}echo');
+    cy.focused().type('echo');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'echo');
     cy.get('#runit').click();
 
@@ -74,7 +85,7 @@ describe('Test editor box functionality', () => {
   });
 
   it ('When making an error the keywords must be highligted', () => {
-    typeIntoAce('{selectAll}{del}prin Hello world');
+    cy.focused().type('prin Hello world');
     cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'prin Hello world');
     cy.get('#runit').click();
 
@@ -85,19 +96,3 @@ describe('Test editor box functionality', () => {
 
   });
 });
-
-/**
- * Wait for the Ace editor to finish initializing all the HTML elements and attach the listeners
- * 
- * If we start typing in the editor immediately, it may happen before the editor has
- * loaded. Waiting for HTML elements that are created as the editor loads will fix that.
- */
-function waitForAceToLoad() {
-  cy.get('#editor > .ace_scroller > .ace_content').should('be.visible');
-}
-
-function typeIntoAce(text) {
-  // https://github.com/cypress-io/cypress/issues/1818#issuecomment-500792891
-  cy.get("#editor .ace_text-input").first().focus().type(text);
-
-}
