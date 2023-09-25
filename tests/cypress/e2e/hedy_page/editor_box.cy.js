@@ -10,14 +10,15 @@ describe('Is able to type in the editor box', () => {
       cy.visit(`${Cypress.env('hedy_page')}?language=${language}#default`);
 
       // click on textaread to get focus
-      cy.get('#editor > .ace_scroller > .ace_content').click();
+      aceContent().click();
 
       // Empty textarea and wait for the clear() to come through
+      cy.wait(500);
       cy.focused().clear();
-      cy.get('#editor > .ace_scroller > .ace_content').should('have.text', '');
+      aceContent().should('have.text', '');
 
       cy.focused().type('print Hello world');
-      cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello world');
+      aceContent().should('have.text', 'print Hello world');
       cy.get('#runit').click();
       cy.get('#output').should('contain.text', 'Hello world');
     });
@@ -41,7 +42,7 @@ describe('Test editor box functionality', () => {
 
   it('Ask modal should hold input and the answer should be shown in output', () => {
     cy.focused().type('print Hello world\nask Hello!\necho');
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!echo');
+    aceContent().should('have.text', 'print Hello worldask Hello!echo');
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
     cy.get('#ask-modal').should('be.visible');
@@ -54,18 +55,18 @@ describe('Test editor box functionality', () => {
     // First we write and run the program and leave the ask modal unanswered
     cy.focused().type('print Hello world\nask Hello!');
     // the \n is not shown as a charecter when you get the text
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!');
+    aceContent().should('have.text', 'print Hello worldask Hello!');
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
     cy.get('#ask-modal').should('be.visible');
 
     // Now we edit the program and the ask modal should be hidden
-    cy.get('#editor > .ace_scroller > .ace_content').click();
+    aceContent().click();
     // TODO: replace this wait. The editor takes a while to be focused
     cy.wait(500)
     cy.focused().clear();
     cy.focused().type('print Hello world\nask Hello!');
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'print Hello worldask Hello!');
+    aceContent().should('have.text', 'print Hello worldask Hello!');
     cy.get('#ask-modal').should('not.be.visible');
 
     // Running program again and it should show the modal
@@ -76,7 +77,7 @@ describe('Test editor box functionality', () => {
 
   it ('When making an error the error modal should be shown', () => {
     cy.focused().type('echo');
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'echo');
+    aceContent().should('have.text', 'echo');
     cy.get('#runit').click();
 
     cy.get('#errorbox').should('be.visible');
@@ -86,7 +87,7 @@ describe('Test editor box functionality', () => {
 
   it ('When making an error the keywords must be highligted', () => {
     cy.focused().type('prin Hello world');
-    cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'prin Hello world');
+    aceContent().should('have.text', 'prin Hello world');
     cy.get('#runit').click();
 
     cy.get('#errorbox').should('be.visible');
@@ -96,3 +97,7 @@ describe('Test editor box functionality', () => {
 
   });
 });
+
+function aceContent() {
+  return cy.get('#editor > .ace_scroller > .ace_content');
+}
