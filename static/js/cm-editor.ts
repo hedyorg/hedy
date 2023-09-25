@@ -295,14 +295,4 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         effect = addDebugLine.of({row: line});
         this.view.dispatch({effects: effect});
     }
-
-    /**
-     * Mark the given set of lines as currently struck through
-     * 
-     * It doesn't make sense to use this method in CodeMirror
-     * since it works differently, need to remove this methi
-     */
-    strikethroughLines(_: number[]) {
-        // pass
-    }
 }
