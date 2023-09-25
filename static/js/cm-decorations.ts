@@ -1,5 +1,5 @@
-import { Decoration, DecorationSet, EditorView, } from '@codemirror/view'
-import { StateEffect, StateField } from '@codemirror/state'
+import { Decoration, DecorationSet, EditorView, GutterMarker, gutter, } from '@codemirror/view'
+import { RangeSet, StateEffect, StateField } from '@codemirror/state'
 
 
 export const addErrorLine = StateEffect.define<{row: number}>();
@@ -13,17 +13,17 @@ export const errorLineField = StateField.define<DecorationSet>({
     create() {
       return Decoration.none;
     },
-    update(errors, tr) {
-      errors = errors.map(tr.changes);
-      for (let e of tr.effects) {
+    update(errors, transaction) {
+      errors = errors.map(transaction.changes);
+      for (let e of transaction.effects) {
         if (e.is(addErrorLine)) {
             // Get line given the row number
-            const line = tr.state.doc.line(e.value.row);
+            const line = transaction.state.doc.line(e.value.row);
             errors = errors.update({
                 add: [errorHighlightLine.range(line.from, line.from)]
             });
         } else if(e.is(addErrorWord)) {
-            const line = tr.state.doc.line(e.value.row);
+            const line = transaction.state.doc.line(e.value.row);
             const length = line.text.slice(e.value.col - 1).split(/(\s+)/)[0].length;
             if (length > 0) {
                 errors = errors.update({
@@ -83,3 +83,92 @@ export const decorationsTheme = EditorView.theme({
         backgroundColor: "#2D6099"
     },
 });
+
+const breakpointGutterEffect = StateEffect.define<{pos: number, on: boolean}>({
+    map: (val, mapping) => ({pos: mapping.mapPos(val.pos), on: val.on})
+});
+
+const deactivateLineEffect = StateEffect.define<{pos: number, on: boolean}>({
+    map: (val, mapping) => ({pos: mapping.mapPos(val.pos), on: val.on})
+});
+
+const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
+    create() { return RangeSet.empty },
+    update(set, transaction) {
+        set = set.map(transaction.changes)
+        for (let e of transaction.effects) {
+            if (e.is(breakpointGutterEffect)) {
+                if (e.value.on)
+                    set = set.update({add: [deactivateGutterMarker.range(e.value.pos)]})
+                else
+                    set = set.update({filter: from => from != e.value.pos})
+            }
+        }
+        return set
+    }
+});
+
+const deactivateLineState = StateField.define<DecorationSet>({
+    create() { return Decoration.none },
+    update(set, transaction) {
+        set = set.map(transaction.changes);
+        for (let e of transaction.effects) {
+            if (e.is(deactivateLineEffect)) {
+                if (e.value.on) {
+                    set = set.update({
+                        add: [deactivateLineMarker.range(e.value.pos, e.value.pos)]
+                    });
+                } else {
+                    set = set.update({
+                        filter: from => from != e.value.pos
+                    });
+                }
+            }
+        }
+        return set
+    },
+    provide: f => EditorView.decorations.from(f)
+});
+
+const deactivateGutterMarker = new class extends GutterMarker {
+    toDOM() { return document.createTextNode("😴") }
+}
+
+const deactivateLineMarker = Decoration.line({class: "cm-disabled-line"})
+
+function toggleLine(view: EditorView, pos: number) {
+    let breakpoints = view.state.field(breakpointGutterState)
+    let isDeactivated = false
+    breakpoints.between(pos, pos, () => {isDeactivated = true})
+    view.dispatch({
+        effects: [
+            breakpointGutterEffect.of({pos, on: !isDeactivated}),
+            deactivateLineEffect.of({pos, on: !isDeactivated})
+        ]
+    })
+}
+
+export const breakpointGutter = [
+    breakpointGutterState,
+    deactivateLineState,
+    gutter({
+      class: "cm-breakpoint-gutter",
+      markers: v => v.state.field(breakpointGutterState),
+      initialSpacer: () => deactivateGutterMarker,
+      domEventHandlers: {
+        mousedown(view, line) {
+          toggleLine(view, line.from)
+          return true
+        }
+      }
+    }),
+    EditorView.baseTheme({
+      ".cm-breakpoint-gutter .cm-gutterElement": {
+        paddingLeft: "5px",
+        cursor: "default"
+      },
+      ".cm-disabled-line": {    
+        textDecoration: "line-through"
+      }
+    })
+  ]
