@@ -484,6 +484,9 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
+    # TODO: Once we figure out whats wrong with the skip faulty code, we need to reinstantiate this
+    # if 'skip_faulty' not in body:
+    #     return "body.skip_faulty must be a boolean", 400
 
     error_check = False
     if 'error_check' in body:
@@ -491,6 +494,7 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
+    skip_faulty = False  # bool(body['skip_faulty'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -511,7 +515,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, skip_faulty)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -531,18 +535,18 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
-            source_map_result = transpile_result.source_map.get_result()
+            # source_map_result = transpile_result.source_map.get_result()
 
-            for i, mapping in source_map_result.items():
-                if mapping['error'] is not None:
-                    source_map_result[i]['error'] = translate_error(
-                        source_map_result[i]['error'].error_code,
-                        source_map_result[i]['error'].arguments,
-                        keyword_lang
-                    )
+            # for i, mapping in source_map_result.items():
+            #     if mapping['error'] is not None:
+            #         source_map_result[i]['error'] = translate_error(
+            #             source_map_result[i]['error'].error_code,
+            #             source_map_result[i]['error'].arguments,
+            #             keyword_lang
+            #         )
 
-            response['source_map'] = source_map_result
-
+            # response['source_map'] = source_map_result
+            response['source_map'] = transpile_result.source_map.get_result()
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
@@ -712,11 +716,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, skip_faulty):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, skip_faulty)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -1701,7 +1705,7 @@ def explore():
 
 
 def normalize_public_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore page.
+    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
 
     Does the following thing:
 
@@ -2128,23 +2132,27 @@ def public_user_page(username):
     if not user:
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
+    page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username)
+        user_programs = DATABASE.public_programs_for_user(username,
+                                                          limit=10,
+                                                          pagination_token=page)
+        next_page_token = user_programs.next_page_token
+        user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
             favourite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
-        if len(user_programs) >= 5:
-            user_programs = user_programs[:5]
 
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
-
+        next_page_url = url_for('public_user_page', username=username, **dict(request.args,
+                                page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2154,7 +2162,8 @@ def public_user_page(username):
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
-            certificate_message=certificate_message)
+            certificate_message=certificate_message,
+            next_page_url=next_page_url)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
