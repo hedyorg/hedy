@@ -114,11 +114,13 @@ class TestsAdventurePrograms(HedyTester):
                 if fix_error:
                     # Read English yaml file
                     original_yaml = YamlFile.for_file('../../content/adventures/en.yaml')
-                    original_text = original_yaml['adventures'][snippet.key]['levels'][snippet.level][snippet.field_name]
+                    original_text_part_1 = original_yaml['adventures'][snippet.key]['levels']
+                    original_text = original_text_part_1[snippet.level][snippet.field_name]
 
                     # Read broken yaml file
                     broken_yaml = utils.load_yaml_rt(snippet.filename)
-                    broken_yaml['adventures'][snippet.key]['levels'][snippet.level][snippet.field_name] = original_text
+                    broken_yaml['adventures'][snippet.key]['levels'][snippet.level][snippet.field_name] = \
+                        original_text
 
                     with open(snippet.filename, 'w') as file:
                         file.write(utils.dump_yaml_rt(broken_yaml))
