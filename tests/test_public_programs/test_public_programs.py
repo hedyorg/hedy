@@ -20,7 +20,7 @@ with open(most_recent_file_name, 'r') as public_programs_file:
 for p in public_programs:
     s = Snippet(filename='file',
                 level=int(p['level']),
-                field_name='field',
+                field_name=None,
                 code=p['code'],
                 language=p['language'],
                 error=p['error']
