@@ -27,6 +27,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 filtered_language = None
 level = None
 
+
 def collect_snippets(path, filtered_language=None):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -89,6 +90,7 @@ if os.getenv('CI') and (filtered_language or level):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
+
 
 class TestsAdventurePrograms(HedyTester):
 
