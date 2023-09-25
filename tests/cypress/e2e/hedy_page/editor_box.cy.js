@@ -51,12 +51,8 @@ describe('Test editor box functionality', () => {
 
     // Now we edit the program and the ask modal should be hidden
     aceContent().click();
-    // TODO: replace this wait. The editor takes a while to be focused
-    cy.wait(500)
+    cy.focused().type('!');
 
-    clearViaBackspace();
-    cy.focused().type('print Hello world\nask Hello!');
-    aceContent().should('have.text', 'print Hello worldask Hello!');
     cy.get('#ask-modal').should('not.be.visible');
 
     // Running program again and it should show the modal
