@@ -473,6 +473,7 @@ def echo_session_vars_main():
 
 
 @app.route('/parse', methods=['POST'])
+@querylog.timed_as('parse_handler')
 def parse():
     body = request.json
     if not body:
@@ -554,10 +555,12 @@ def parse():
         except Exception:
             pass
 
-        try:
-            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-        except BaseException:
-            pass
+        with querylog.log_time('detect_sleep'):
+            try:
+                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
+            except BaseException:
+                pass
+
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
                     username, code, level, response):
@@ -1607,6 +1610,11 @@ def main_page():
                            current_page='start', content=content)
 
 
+@app.route('/subscribe')
+def subscribe():
+    return render_template('subscribe.html', current_page='subscribe')
+
+
 @app.route('/learn-more')
 def learn_more():
     learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
@@ -1669,12 +1677,16 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_public_programs(DATABASE.get_public_programs(
+    programs = DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
-        adventure_filter=adventure))
-    favourite_programs = normalize_public_programs(DATABASE.get_hedy_choices())
+        adventure_filter=adventure)
+    favourite_programs = DATABASE.get_hedy_choices()
+
+    # Do 'normalize_public_programs' on both sets at once, to save database calls
+    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
+    programs, favourite_programs = split_at(len(programs), normalized)
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
@@ -2270,6 +2282,11 @@ def analyze_memory_snapshot(start_snapshot, end_snapshot):
         print("%s other: %.1f KiB" % (len(other), size / 1024))
     total = sum(stat.size for stat in top_stats)
     print("Total allocated size: %.1f KiB" % (total / 1024))
+
+
+def split_at(n, xs):
+    """Split a collection at an index."""
+    return xs[:n], xs[n:]
 
 
 if __name__ == '__main__':
