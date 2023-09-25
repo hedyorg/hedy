@@ -11,7 +11,7 @@ from website.yaml_file import YamlFile
 
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
-fix_error = True
+fix_error = False
 if os.getenv('fix_for_weblate'):
     fix_error = True
 
@@ -47,12 +47,13 @@ def collect_snippets(path):
 
     return Hedy_snippets
 
-
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/parsons')]
 
 level = 1
 if level:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+
+Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 
 class TestsParsonsPrograms(HedyTester):
@@ -76,11 +77,11 @@ class TestsParsonsPrograms(HedyTester):
                 if fix_error:
                     # Read English yaml file
                     original_yaml = YamlFile.for_file('../../content/parsons/en.yaml')
-                    original_text = original_yaml['levels'][snippet.level][snippet.field_name]
+                    original_text = original_yaml['levels'][snippet.level][int(snippet.field_name)]
 
                     # Read broken yaml file
                     broken_yaml = utils.load_yaml_rt(snippet.filename)
-                    broken_yaml['levels'][snippet.level][snippet.field_name] = original_text
+                    broken_yaml['levels'][snippet.level][int(snippet.field_name)] = original_text
 
                     with open(snippet.filename, 'w') as file:
                         file.write(utils.dump_yaml_rt(broken_yaml))
