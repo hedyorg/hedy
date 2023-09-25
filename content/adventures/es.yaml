@@ -257,7 +257,7 @@ adventures:
                     animales {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} ¿Qué piensas qué es?
                     {add} animal {to_list} animales
-                    {print} fue un animals {at} {random}
+                    {print} fue un animales {at} {random}
                     ```
                 story_text_3: |
                     Este es un ejemplo del comando `{remove}` en tu historia
@@ -668,7 +668,7 @@ adventures:
                     ```
 
                 start_code: "{print} '¿Qué salió esta vez?'"
-                example_code_2: "\n        ¿Conseguiste calcular la puntuación para 8 dados? Esto requería un montón de cortar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
+                example_code_2: "\n¿Conseguiste calcular la puntuación para 8 dados? Esto requería un montón de cortar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!\n"
             5:
                 story_text: |
                     Vamos a añadir los comandos `{if}` y `{else}` a nuestros dados!
@@ -920,7 +920,7 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} '¡Bienvenido a tu propia calculadora!'"
-                story_text_3: "\n        **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\n        Así eliges un número de tablas para practicar, y de ahí siempre obtienes una suma diferente:\n"
+                story_text_3: "\n**Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\nAsí eliges un número de tablas para practicar, y de ahí siempre obtienes una suma diferente:\n"
             14:
                 story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
                 example_code: "```\n{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'en marcha'\n{for} i {in} {range} 1 {to} 10\n    {if} juego == 'en marcha'\n        intento = {ask} '¿Que número piensas que es?'\n        {if} intento > número\n            {print} '¡Muy alto!'\n        {if} intento < número\n            {print} '!Muy bajo!'\n        {if} intento == número\n            {print} '¡Ganaste!'\n            juego = 'terminó'\n```\n"
