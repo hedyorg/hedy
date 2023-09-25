@@ -13,8 +13,7 @@ describe('Is able to type in the editor box', () => {
       aceContent().click();
 
       // Empty textarea and wait for the clear() to come through
-      cy.wait(500);
-      cy.focused().clear();
+      clearViaDel();
       aceContent().should('have.text', '');
 
       cy.focused().type('print Hello world');
@@ -97,6 +96,13 @@ describe('Test editor box functionality', () => {
 
   });
 });
+
+/**
+ * Clear the input via sending {del} keystrokes
+ */
+function clearViaDel() {
+  cy.focused().type('{moveToStart}' + '{del}'.repeat(30));
+}
 
 function aceContent() {
   return cy.get('#editor > .ace_scroller > .ace_content');
