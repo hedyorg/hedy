@@ -354,7 +354,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "In this level you can use the quotation marks to save multiple words in a variable.\n"
-                example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
+                example_code: "```\nnama = 'Ratu Inggris'\n{print} nama ' sedang memakan sepotong kue, tiba-tiba...'\n```\n"
                 start_code: '# place your code here'
             8:
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '💥ZAP!💥'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!🦖'\n```\n"
@@ -844,13 +844,11 @@ adventures:
 
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             3:
-                story_text: |2-
+                story_text: |
+                    Kamu bisa menggunakan `{at} {random}` perintah untuk membiarkan komputer mengambil batu, kertas atau gunting!
 
-                    Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
-
-                    Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
-
-                    Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
+                    ### Latihan
+                    Selesaikan kode menggunakan `{at} {random}` perintah.
 
                 example_code: |
                     ```
@@ -1602,10 +1600,6 @@ adventures:
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         name: "{print}"
     ask_command:
         default_save_name: ask_command
@@ -1613,7 +1607,7 @@ adventures:
             1:
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
-                story_text_2: "## The echo command\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                story_text_2: "## The echo command\nIf you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.\n"
                 story_text_3: "### Exercise\nTry out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.\nThen ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
@@ -1747,6 +1741,10 @@ adventures:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
                 story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
         default_save_name: for
     and_or_command:
         default_save_name: and or

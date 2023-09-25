@@ -2,23 +2,23 @@ adventures:
     tic:
         levels:
             17:
-                story_text: "이전 레벨에서 틱택토 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 레벨에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\nHedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
+                story_text: "이전 레벨에서 Tic Tac Toe 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.\n이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 레벨에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.\nHedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.\n\n예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.\n46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.\n이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
             13:
                 start_code: '# 코드를 여기에 입력하세요'
-                story_text: "In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\n\n### 연습문제 1\nThe game works, but it has some issues. For example, any player can pick any field, even one already taken! Use an `{if}` whether the spot is taken, and if so, warn the player.\n\n### 연습문제 2\nThe game also does not decide who has won. You need to add this by checking whether 3 spots in a row have the same same symbol.\n\n### 연습문제 3 Extra\nYou don't always have a friend to play with. Can you create a computer opponent?\n"
+                story_text: "이 모험에서 당신은 Tic Tac Toe 게임을 프로그래밍 할 수 있습니다. 당신은 두명과 함께 게임을 할 수 있습니다. 교대로 기호(x 또는 o)를 달고 싶은 점(1 - 9)의 번호를 선택합니다.\n3개(가로, 세로, 대각선) 연속으로 획득한 첫 번째 플레이어가 승리합니다!\n\n### 연습문제 1\n게임은 작동하지만 몇 가지 문제가 있습니다. 예를 들어, 어떤 플레이어든 이미 선택된 필드라도 선택할 수 있습니다! 자리를 잡았는지 아닌지 `{if}`를 사용하고, 만약 그렇다면 플레이어에게 경고하십시오.\n\n### 연습문제 2\n게임 또한 누가 이겼는지를 결정하지 않습니다. 3개의 자리가 같은 기호인지 확인하여 추가해야 합니다.\n\n### 연습문제 3 Extra\n당신은 항상 같이 놀 친구가 있는 것은 아닙니다. 당신은 컴퓨터 상대를 만들 수 있습니까?\n"
                 example_code: "```\nplayer = 'x'\nfield = '.', '.', '.', '.', '.', '.', '.', '.', '.'\n\n{for} i {in} {range} 1 {to} 9\n    choice = {ask} 'Player ' player ' what spot do you choose?'\n    field {at} choice = player\n    {clear}\n    {print} field {at} 1 field {at} 2 field {at} 3\n    {print} field {at} 4 field {at} 5 field {at} 6\n    {print} field {at} 7 field {at} 8 field {at} 9\n    {if} player = 'x'\n        player = 'o'\n    {else}\n        player = 'x'\n```\n"
             14:
                 start_code: '# 코드를 여기에 입력하세요'
-                story_text: "In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Tic Tac Toe game, like this:\n"
+                story_text: "이전 레벨에서는 Tic Tac Toe 게임을 만들었지만 이제 = 기호, == 기호 및 != 기호를 사용하는 방법에 대해 배웠습니다.\n이 지식을 당신의 새로운 틱택토 게임에 사용할 수 있습니다, 이렇게요:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
             15:
-                story_text: "이 레벨에서 {while} 루프로 틱택토 게임을 향상시킬 수 있다. 이 루프로 `{if} game != 'over'`와 `{for} i {in} {range} 1 {to} 9`를 하나의 간단한 행으로 결합할 수 있다.\n확인해보세요:\n"
+                story_text: "이 레벨에서 {while} 루프로 Tic Tac Toe 게임을 향상시킬 수 있다. 이 루프로 `{if} game != 'over'`와 `{for} i {in} {range} 1 {to} 9`를 하나의 간단한 행으로 결합할 수 있다.\n확인해보세요:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
         name: Tic Tac Toe
-        description: Play a game of Tic Tac Toe!
+        description: Tic Tac Toe 를 해보자!
         default_save_name: Tic
     default:
         levels:
@@ -208,7 +208,7 @@ adventures:
                 example_code_2: "```\ndirection {is} {ask} 'Do you want to go left, right, or straight ahead?'\n{if} direction {is} left {turn} _\n{if} direction {is} right {turn} _\n{forward} 100\n```\n"
                 story_text_2: "### 연습문제\nFill in the correct numbers in this code to get it to work.\nAfter you've done that, you can try to add the option backwards.\n\n**Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.\nThis way you could add even more directions like Northeast and Southwest etc.\n"
             1:
-                story_text: "You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### 연습문제\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "여러분은 또한 Hedy를 그림을 그리기 위해 사용할 수 있습니다. 회전과 선을 결합함으로써, 여러분은 사각형이나 계단을 만들 수 있습니다!\n\n`{forward}`을 사용하면 앞으로 선을 그립니다. 뒤에 있는 숫자에 따라 거북이가 걸어갈 거리가 결정됩니다.`{turn} {right}`는 시계 방향으로 1/4회전, `{turn} {left}`는 시계 반대 방향으로 회전합니다.\n\n뒤로 가려면 `{forward}` 명령을 사용하지만 음수가 됩니다. 따라서 예를 들어 `{forward} -100`\n\n### ### 연습문제\n작은 시작 단계입니다. 계단을 5개로 만들 수 있나요?\n"
                 example_code: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
@@ -283,7 +283,7 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
                 story_text: "In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.\n### 연습문제\nCopy your code from the previous level and make it work by using quotation marks after each `{print}` or `{ask}` command.\n"
             1:
-                story_text: "In level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
+                story_text: "1단계에서는 가위바위보 게임으로 시작할 수 있습니다.\n\n`{ask}`를 사용하면 선택을 할 수 있고, `{echo}`를 사용하면 선택을 반복할 수 있습니다.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\n"
                 start_code: '{print} Welcome to your own rock scissors paper!
 
@@ -479,7 +479,7 @@ adventures:
     haunted:
         levels:
             1:
-                story_text: "In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but if not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.\n"
+                story_text: "이 모험에서 여러분은 올바른 문을 선택하여 유령의 집에서 탈출해야 하는 게임을 만들기 위해 노력하고 있습니다.\n오른쪽 문을 선택하면 살아남겠지만, 끔찍한 괴물이 아니라면...\n\n레벨 1에서는 무서운 이야기를 지어내는 것으로 유령의 집 게임을 시작하고 플레이어에게 유령의 집에서 어떤 괴물을 보게 될지 물어봅니다.\n"
                 example_code: "```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n"
                 story_text_2: "### 연습문제\nCopy the example code to your input screen by clicking the yellow button.\nNow finish the story by adding at least 5 lines of code.\nRemember to start each line of codes with a `{print}` command.\n"
                 start_code: '{print} How did I get here?'
@@ -556,14 +556,14 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 start_code: '# 코드를 여기에 입력하세요'
     blackjack:
-        default_save_name: Blackjack
+        default_save_name: 블랙잭
         levels:
             17:
                 start_code: '# 코드를 여기에 입력하세요'
-                story_text: "Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
+                story_text: "블랙잭은 당신이 가능한 한 21점에 근접해야 하는 단순한 카드 게임입니다. 당신은 두 장의 카드를 받습니다. 각각의 카드는 숫자만큼 가치가 있고, 페이스 카드(잭, 퀸, 킹)는 10점의 가치가 있습니다.\n에이스는 1점 또는 11점의 가치가 있습니다. (선택하실 수 있습니다.) 딜러, 상대방도 2장의 카드를 받습니다.\n당신이 원한다면 다른 카드를 얻을 수 있고, 그 카드의 포인트는 당신의 총합에 추가됩니다. 딜러는 다른 카드를 가져가기를 선택할 수도 있습니다.\n하지만 21점 이상 받지 않도록 조심하세요, 그러면 지는 거니까요!\n넘어가지 않고 21에 가장 근접한 선수가 승리!\n\n즐겁게 보내세요!\n"
                 example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    {print} 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
-        name: Blackjack
-        description: Try to get as close to 21 as you can
+        name: 블랙잭
+        description: 숫자 21에 근접하도록 노력해보세요
     parrot:
         name: 앵무새
         description: 당신의 말을 따라할 당신만의 온라인 애완 앵무새를 만들어 보세요!
@@ -687,10 +687,6 @@ adventures:
                 example_code: "```\n{print} 안녕, 프로그래머 여러분!\n{print} Hedy에 오신걸 환영해요!\n```\n"
                 example_code_2: "```\n_ 안녕하세요!\n```\n"
                 start_code: "{print} Hedy에 오신걸 환영해요!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "이제 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다 우리는 들여쓰기 앞 줄에 `:`가 필요하다.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "진짜 파이썬 코드에 도착했어! 이제부터는 `{print}`와 `{range}`가 있는 괄호를 써야 한다는 얘기다.\n영어 명령어만 사용하면 파이썬 환경에서 이 레벨의 Hedy 코드를 사용할 수 있다는 의미도 있다. 지금까지 사용하지 않았다면 명령어 메뉴의 토글을 전환하여 사용할 수 있다."
@@ -704,12 +700,12 @@ adventures:
         levels:
             1:
                 story_text_3: "### 연습문제\n`{ask}` 명령어와 `{echo}` 명령어를 사용해 보세요. 먼저 빈칸을 채워야 이 프로그램이 작동합니다.\n그런 다음 `{ask}` 명령을 사용하여 2개의 질문을 더 하고, 각 {ask}가 {echo}를 사용하여 답을 화면에 출력합니다.\n"
-                example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
-                example_code_3: "```\n_ How are you doing?\n_\n```\n"
-                start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
+                example_code_2: "```\n{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n{echo} 안녕하세요\n```\n"
+                example_code_3: "```\n_ 너는 요즘 어때?\n_\n```\n"
+                start_code: "{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n{echo} 안녕하세요\n"
                 story_text: "## ask 명령어\n이제 `{print}` 명령어를 사용할 수 있게 되었으므로 다음 명령어인 `{ask}`를 배울 준비가 되었다. `{ask}` 명령어를 사용하면 질문을 할 수 있다. 다음을 확인해 보자:\n"
-                example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## echo 명령어\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                example_code: "```\n{print} 안녕하세요!\n{ask} 너는 이름이 무엇이니?\n```\n"
+                story_text_2: "## echo 명령어\n컴퓨터가 나의 답변을 또 다시 출력하도록 하려면 `{echo}` 명령을 사용하면 됩니다. 대답은 문장 끝에 다시 나오니 이점을 명심해주시고 \"안녕하세요\" 예문을 참고해주세요.\n"
             2:
                 story_text: "## The ask command\n이제 코드에서 **variable**를 사용할 수 있게 되었으므로 `{echo}` 명령어가 더 이상 필요하지 않습니다.\n우리는 질문에 대한 답을 저장하기 위해 변수를 사용할 수 있고, 이 방법으로 우리는 코드에 있는 여러 질문에 대한 답을 사용할 수 있다.\n확인해보세요:\n\n이런 식으로 코드가 상호작용하고 있어요!\n"
                 example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
@@ -838,6 +834,10 @@ adventures:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
                 story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "이제 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다 우리는 들여쓰기 앞 줄에 `:`가 필요하다.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
     and_or_command:
         levels:
             13:
@@ -859,8 +859,8 @@ adventures:
     elif_command:
         levels:
             17:
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-                start_code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+                example_code: "```\nprices = ['백만달러', '사과파이', '아무것도없음']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '백만달러' :\n    {print} '예! 너는 부자야!'\n{elif} your_price == '사과파이' :\n    {print} 'Lovely, 사과파이!'\n{else}:\n    {print} '다음 기회를..'\n```\n"
+                start_code: "prices = ['백만달러', '사과파이', '아무것도없음']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '백만달러' :\n    {print} '예! 너는 부자야!'\n{elif} your_price == '사과파이' :\n    {print} 'Lovely, 사과파이!'\n{else}:\n    {print} '다음 기회를..'"
                 story_text: "이 레벨에서는 새 명령어 `{elif}`를 사용할 수도 있습니다. `{elif}`는 `{else}` `{if}`의 줄임말로, 3개 이상의 옵션을 만들 때 필요합니다.\n한번 봐봐!\n"
         name: "{elif}"
         description: elif
@@ -942,8 +942,8 @@ adventures:
     clear_command:
         levels:
             4:
-                example_code: "```\n{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SURPRISE!'\n```\n"
-                start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} 'SURPRISE!'\n"
+                example_code: "```\n{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} '서프라이즈!'\n```\n"
+                start_code: "{print} '3'\n{sleep}\n{clear}\n{print} '2'\n{sleep}\n{clear}\n{print} '1'\n{sleep}\n{clear}\n{print} '서프라이즈!'\n"
                 story_text: "새로운 명령어가 필요합니다. `{clear}`을(를) 사용하면 출력된 화면의 모든 텍스트를 지울 수 있습니다. 이렇게 하면 화면에 텍스트가 너무 차는 것을 방지할 수 있습니다.\n조심하세요! 만약 `{clear}` 명령을 사용하고 있다면, 그 위에 `{sleep}`을 사용하는 것을 기억하세요. 그렇지 않으면 Hedy는 읽을 시간을 주지 않고 화면을 지울 것입니다!\n"
         name: '{clear}'
         description: clear 명령어

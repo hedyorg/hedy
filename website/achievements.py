@@ -6,6 +6,7 @@ from hedyweb import AchievementTranslations
 from safe_format import safe_format
 from website import database
 from website.auth import current_user, requires_login
+from website import querylog
 
 from .website_module import WebsiteModule, route
 
@@ -99,6 +100,7 @@ class Achievements:
         else:
             return None
 
+    @querylog.timed
     def verify_run_achievements(self, username, code=None, level=None, response=None):
         self.initialize_user_data_if_necessary()
         if session["run_programs"] < self.ACHIEVEMENTS_THRESHOLD:

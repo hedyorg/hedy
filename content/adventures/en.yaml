@@ -19,7 +19,7 @@ adventures:
                     For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
                     **Warning! This code does not work!**
-                    In Hedy commands will change sometimes. `echo` for example only works in level 1. In this level you'll learn a better way to echo answers back.
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
                     {print} Welcome at Hedy's
                     {ask} What would you like to eat?
@@ -253,7 +253,10 @@ adventures:
                 start_code: "{print} 'Lets go to the next tab!'"
             17:
                 story_text: |
-                    You have almost reached the last level of Hedy, well done! In this level you will learn a real Python way to use `{print}`.
+                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
+
+                    In this level you can also use a new command: `{ elif }`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
+                    Check it out!
                 start_code: "{print} 'Lets go to the next level!'"
             18:
                 story_text: |
@@ -288,19 +291,6 @@ adventures:
                     ```
                 start_code: |
                     {print} Welcome to Hedy!
-            17:
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
-                story_text: |
-                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
-                example_code: |
-                    ```
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
-                    ```
             18:
                 start_code: |-
                     name = 'Hedy'
@@ -345,7 +335,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## The echo command
-                    If you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.
+                    If you want the computer to repeat the answer back to you, you can use the `{echo}` command. The answer will be echoed back at the end of the sentence, so in this example after hello.
                 story_text_3: |
                     ### Exercise
                     Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
@@ -415,8 +405,8 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
-                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
+                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a `{print}` command.
+                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
 
                 example_code_2: |
                     ```
@@ -887,6 +877,19 @@ adventures:
                     ```
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
+                    ```
+            17:
+                start_code: |-
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Ready or not, here I come!'
+                story_text: |
+                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
+                example_code: |
+                    ```
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Ready or not, here I come!'
                     ```
     maths:
         name: "maths"
@@ -2055,9 +2058,8 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are ' points ' points'
                     ```
-                example_code_2: |2
-
-                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                example_code_2: |
+                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2179,7 +2181,7 @@ adventures:
                     Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
                 example_code: |
                     ```
-                    choice is _
+                    choice {is} _
                     {print} I choose choice
                     ```
                 start_code: "# place your code here"
@@ -2218,9 +2220,9 @@ adventures:
                     ### Exercise
                     Finish the code by filling in the **variable** on the blanks.
                     This game is not very interactive, but no worries! In the next tab you'll learn how to use variables with the `{ask}` command to make your game interactive!
-                example_code: |
+                example_code: |-
                     ```
-                    choice is rock
+                    choice {is} rock
                     {print} I choose _
                     ```
                 start_code: "# place your code here"
@@ -2382,11 +2384,10 @@ adventures:
                     {if} answer {is} _ {print} 'good job!'
                     {else} {print} 'Wrong! It was ' _
                     ```
-                story_text_3: |2
-
-                      **Extra** You can also let the computer do random sums on its own using random.
-
-                      This is how you choose a number of tables to practice, and from that you always get a different sum:
+                story_text_3: |
+                    **Extra** You can also let the computer do random sums on its own using random.
+                    
+                    This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: "{print} 'Welcome to this calculator!'"
             9:
                 story_text: |
@@ -2470,14 +2471,13 @@ adventures:
                 start_code: "# place your code here"
             13:
                 story_text: |
-
-                      ### Exercise 1
-                      Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
-
-                      ### Exercise 2 Extra
-                      Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                      Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                      Empty the programming field and create your own solution.
+                    ### Exercise 1
+                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    
+                    ### Exercise 2 Extra
+                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                    Empty the programming field and create your own solution.
 
                 example_code: |
                     ```
@@ -3017,7 +3017,7 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                start_code: ""
+                start_code: "# place your code here"
             12:
                 story_text: |-
                     From level 12 on, you will also have to use quotation marks in lists, before and after each item.
