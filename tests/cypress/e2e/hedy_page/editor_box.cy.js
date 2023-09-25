@@ -53,7 +53,8 @@ describe('Test editor box functionality', () => {
     aceContent().click();
     // TODO: replace this wait. The editor takes a while to be focused
     cy.wait(500)
-    cy.focused().clear();
+
+    clearViaBackspace();
     cy.focused().type('print Hello world\nask Hello!');
     aceContent().should('have.text', 'print Hello worldask Hello!');
     cy.get('#ask-modal').should('not.be.visible');
