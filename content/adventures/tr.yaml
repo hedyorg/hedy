@@ -1097,9 +1097,8 @@ adventures:
                     {if} atılan {is} solucan puan = puan + 5 {else} puan = puan + atılan
                     {print} 'toplam puan ' puan ' oldu'
                     ```
-                example_code_2: |2
-
-                            Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                example_code_2: |
+                    Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
                 start_code: "{print} 'Bu sefer zar kaçı gösterecek?'"
             7:
                 story_text: |
@@ -1169,9 +1168,9 @@ adventures:
                     Boşluklardaki **değişkeni** doldurarak kodu tamamlayın.
                     Bu oyun çok etkileşimli değil, ama endişelenmeyin! Bir sonraki sekmede oyununuzu etkileşimli hale getirmek için değişkenleri `{ask}` komutu ile birlikte nasıl kullanacağınızı öğreneceksiniz!
 
-                example_code: |
+                example_code: |-
                     ```
-                    seçim eşit taş
+                    seçim {is} taş
                     {print} Benim seçimim _
                     ```
                 start_code: "# kodunuzu buraya yazın"
@@ -1330,7 +1329,7 @@ adventures:
                     ```
 
                 start_code: "{print} 'Hesap makinesine hoş geldiniz!'"
-                story_text_3: "\n        **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\n        Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
+                story_text_3: "**Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\nBu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
             9:
                 story_text: |
                     Seviye 6'da bir hesap makinesi oluşturmuştunuz, bu seviyede bu kodu birden fazla soru soracak şekilde genişletebilirsiniz.
@@ -1441,7 +1440,7 @@ adventures:
                 example_code: "```\nsayı = 10\n{for} i {in} {range} 1 şuraya 10\n    {print} i * sayı\n```\n"
             13:
                 example_code: "```\ncevap1 = {ask} '10 kere 7 kaç eder?'\ncevap2 = {ask} '6 kere 7 kaç eder?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
-                story_text: "\n    ### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
+                story_text: "### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
                 start_code: '# Kodunuzu buraya yazın'
     restaurant:
         name: "Restoran"
@@ -2785,7 +2784,7 @@ adventures:
             2:
                 story_text: "## Değişkenler\nBir kelimeyi `{is}` ile isimlendirebilirsiniz. Buna bir **değişken** denir. Bu örnekte isim adında bir değişken ile yaş adında bir değişken oluşturduk. Kodunuzun herhangi bir yerinde isim kelimesini kullanabilirsiniz ve Hedy bu kelimeyi değiştirilecektir, bunun gibi:\n"
                 example_code: "```\nisim {is} Hedy\nyaş {is} 15\n{print} isim yaş yaşındadır\n```\n"
-                story_text_2: "### Alıştırma\nKendi değişkenlerinizi oluşturma zamanı!\nÖrnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir yazdır komutunda kullandık.\nÖncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni {is} komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi {print} komutu ile kullanın.\n"
+                story_text_2: "### Alıştırma\nKendi değişkenlerinizi oluşturma zamanı!\nÖrnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir `{print}` komutunda kullandık.\nÖncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni `{is}` komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi `{print}` komutu ile kullanın.\n"
                 example_code_2: "```\nfavori_hayvan eşit _\n{print} En sevdiğim havyan favori_hayvan\n```\n"
                 start_code: "isim {is} Hedy\nyaş {is} 15\n{print} name age yaşındadır"
             14:
@@ -2941,7 +2940,7 @@ adventures:
         levels:
             2:
                 story_text: "Artık `{ask}` komutunu nasıl kullanacağınızı öğrendiğinize göre, taş, kağıt, makas kodunuzu da etkileşimli hale getirebilirsiniz!\n\n### Alıştırma\nTaş, kağıt, makas kodunuza `{ask}` komutu ile bir soru ekleyerek kodu etkileşimli hale getirin.\n"
-                example_code: "```\nseçim eşit _\n{print} Benim seçimim seçim\n```\n"
+                example_code: "```\nseçim {is} _\n{print} Benim seçimim seçim\n```\n"
                 start_code: "# kodunuzu buraya yazın"
     clear_command:
         name: '{clear}'
