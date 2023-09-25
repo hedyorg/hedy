@@ -98,10 +98,10 @@ describe('Test editor box functionality', () => {
 });
 
 /**
- * Clear the input via sending {del} keystrokes
+ * Clear the input via sending {backspace} keystrokes
  */
 function clearViaDel() {
-  cy.focused().type('{moveToStart}' + '{del}'.repeat(30));
+  cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(30));
 }
 
 function aceContent() {
