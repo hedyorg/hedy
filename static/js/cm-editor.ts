@@ -7,7 +7,7 @@ import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
-    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers
+    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, breakpointGutter
 } from "./cm-decorations";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
@@ -86,6 +86,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const state = EditorState.create({
             doc: '',
             extensions: [
+                breakpointGutter,
                 basicSetup,
                 EditorView.theme(cursorStyle),
                 oneDark,
@@ -93,7 +94,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
                 debugLineField,
-                Prec.high(decorationsTheme)
+                Prec.high(decorationsTheme),
             ]
         });
         this.view = new EditorView({
@@ -297,9 +298,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
     /**
      * Mark the given set of lines as currently struck through
+     * 
+     * It doesn't make sense to use this method in CodeMirror
+     * since it works differently, need to remove this methi
      */
-    strikethroughLines(lines: number[]) {
+    strikethroughLines(_: number[]) {
         // pass
-        console.log(lines);
     }
 }
