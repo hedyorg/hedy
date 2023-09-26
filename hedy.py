@@ -3007,12 +3007,23 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
+    def next_non_empty_line(lines, start_line_number):
+        if start_line_number > len(lines):
+            return ''  # end of code, return empty so that starts_with doesnt find anything
+        else:
+            for i in range(start_line_number + 1, len(lines)):
+                if lines[i] == '':
+                    continue
+                else:
+                    return lines[i]
+
+        return ''  # nothing found? return empty so that starts_with doesnt find anything
+
     for i in range(len(lines) - 1):
         line = lines[i]
-        next_line = lines[i + 1]
 
-        # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
             excluded_commands = ["pressed"]

@@ -435,6 +435,22 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_if_equality_print_linebreaks_else_print(self):
+        # line break before else is allowed
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy print 'leuk'\n\n       
+        else print 'minder leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if naam == 'Hedy':
+          print(f'leuk')
+        else:
+          print(f'minder leuk')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
     def test_if_equality_linebreak_print_else_print(self):
         # line break after if-condition is allowed
         code = textwrap.dedent("""\
