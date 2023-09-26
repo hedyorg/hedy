@@ -183,6 +183,8 @@ class TestsLevel5(HedyTester):
             max_level=7
         )
 
+
+
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
@@ -434,6 +436,27 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk')""")
 
         self.single_level_tester(code=code, expected=expected)
+
+
+    def test_if_equality_print_linebreaks_else_print(self):
+        # line break before else is allowed
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy print 'leuk'
+        
+        
+        else print 'minder leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if naam == 'Hedy':
+          print(f'leuk')
+        else:
+          print(f'minder leuk')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+
 
     def test_if_equality_linebreak_print_else_print(self):
         # line break after if-condition is allowed
