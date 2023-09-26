@@ -633,11 +633,11 @@ levels:
             -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!'\n```\n"
                 feedback: "Eso es cierto"
             -   option: "```\n{print} ¡Tengo muchas ganas de hacer este cuestionario!\n```\n"
-                feedback: "¡`{ask}` también necesita comillas!"
+                feedback: "¡Ahora {print} necesita comillas!"
             -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!'\n```\n"
-                feedback: "`{at} {random}` todavía funciona"
+                feedback: "no utilices apóstrofe o utiliza contracita en su lugar"
             -   option: "```\n{print} '¡Tengo muchas ganas de hacer este cuestionario!\n```\n"
-                feedback: "No, pero otros 2 comandos sí."
+                feedback: "cuidado al usar comillas y apóstrofe"
             correct_answer: "A"
             hint: "En el nivel 4 necesitas comillas para 2 comandos."
             question_score: '10'
@@ -893,7 +893,7 @@ levels:
             -   option: "ALARM INTRUDER"
                 feedback: "¡Esto se imprime cuando escribes la contraseña incorrecta!"
             correct_answer: "B"
-            hint: "`{if}` contraseña `{is}` ... `{print}` '¡Correcto!'!'"
+            hint: "`{if}` contraseña `{is}` ... `{print}` '¡Correcto!'"
             question_score: '10'
         4:
             question_text: "¿Qué imprimirá Hedy cuando escribas la contraseña incorrecta?"
@@ -932,7 +932,7 @@ levels:
             hint: "La ortografía de la palabra tiene que ser exactamente la misma."
             question_score: '10'
         6:
-            question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación en la última línea?"
+            question_text: "¿Qué palabra debe ir en el lugar del espacio en blanco en la última línea?"
             code: |-
                 {print} '¡Soy Hedy, el advino de fútbol!'
                 {print} '¡Voy a predecir en que posición acabará tu equipo!'
@@ -964,7 +964,7 @@ levels:
             hint: "`{if}` va junto con...?"
             question_score: '10'
         7:
-            question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación?"
+            question_text: "¿Qué palabra debe ir en el lugar del espacio en blanco?"
             code: |-
                 {print} '¡Puedo predecir si serás millonario o no!'
                 nombre {is} {ask} '¿Cómo te llamas?'
@@ -987,7 +987,7 @@ levels:
             hint: "Tras `{else}` le sigue un comando `{print}`"
             question_score: '10'
         8:
-            question_text: "¿Qué palabra debe ir en el lugar del signo de interrogación?"
+            question_text: "¿Qué palabra debe ir en el lugar del espacio en blanco?"
             code: |-
                 animal {is} {ask} '¿Cuál es tu animal favorito?'
                 {if} _ {is} pingüino {print} '¡También es mi animal favorito!'
@@ -2640,7 +2640,7 @@ levels:
         5:
             correct_answer: C
             question_text: ¿Qué afirmación es cierta sobre este código?
-            code: "{if} nombre = 'Cenicienta' {and} talla_calzado = '38'\n    {print} '¡Eres mi único amor verdadero!'"
+            code: "{if} name = 'Cenicienta' {and} shoe_size = 38\n    {print} '¡Tú eres mi único y verdadero amor!'"
             mp_choice_options:
             -   option: Toda persona con una talla 38 de calzado es el verdadero amor del príncipe
                 feedback: ¡El príncipe es un poco más exigente que eso!

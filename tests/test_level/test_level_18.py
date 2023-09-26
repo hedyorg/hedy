@@ -3,7 +3,8 @@ import textwrap
 from parameterized import parameterized
 
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel18(HedyTester):
@@ -342,4 +343,16 @@ class TestsLevel18(HedyTester):
                 print(1)
         simple_function()""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.NestedFunctionException)
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 35), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
