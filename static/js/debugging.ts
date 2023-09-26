@@ -246,6 +246,8 @@ export function stopDebug() {
     var resetButton = $("#debug_restart");
     var runButtonContainer = $("#runButtonContainer");
 
+    $('#stopit').hide();
+    $('#runit').show()
     runButtonContainer.show();
     continueButton.hide();
     stopButton.hide();

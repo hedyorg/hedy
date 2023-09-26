@@ -13,7 +13,7 @@ Sk.Breakpoint = function (filename, lineno, colno) {
 };
 
 Sk.Debugger = class {
-    constructor(filename, output_callback) {
+    constructor(filename, output_callback, stop_callback) {
         this.dbg_breakpoints = {};
         this.tmp_breakpoints = {};
         this.suspension_stack = [];
@@ -27,6 +27,7 @@ Sk.Debugger = class {
         this.program_data = null;
         this.resolveCallback = null;
         this.rejectCallback = null;
+        this.stop_callback = stop_callback;
     }
 
     set_program_data(program_data) {
@@ -209,7 +210,7 @@ Sk.Debugger = class {
         } catch (error) {
             console.error(error)
         }
-        this.print_suspension_info(suspension);
+        // this.print_suspension_info(suspension);
     }
 
     add_breakpoint(filename, lineno, colno, temporary) {
@@ -290,9 +291,11 @@ Sk.Debugger = class {
         // Reset the suspension stack to the topmost
         this.current_suspension = this.suspension_stack.length - 1;
         if (this.suspension_stack.length === 0) {
-            return Promise.resolve();
+            return Promise.resolve().then(this.stop_callback());
         } else {
             var promise = this.suspension_handler(this.get_active_suspension());
+            console.log(this.get_active_suspension().child);
+            console.log(this.get_active_suspension().child instanceof Sk.misceval.Suspension)
             return promise
         }
     }
@@ -314,7 +317,13 @@ Sk.Debugger = class {
                 // Current suspension needs to be popped of the stack
                 this.pop_suspension_stack();
 
+                // We don't care about suspensions in the stack that are complete suspensions
+                while (this.suspension_stack.length >0 && this.get_active_suspension().child instanceof Sk.misceval.Suspension) {
+                    this.pop_suspension_stack();
+                }
+
                 if (this.suspension_stack.length === 0) {
+                    this.stop_callback();
                     return;
                 }
 

@@ -508,7 +508,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     editor.clearErrors()
     removeBulb();
-    console.log('Original program:\n', code);
+    // console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
     let program_data;
@@ -1052,7 +1052,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     
   } else if (run_type === "debug") {
     
-    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine);
+    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine, stopDebug);
     theGlobalSourcemap = sourceMap;
     
     Sk.configure({
