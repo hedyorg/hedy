@@ -3009,7 +3009,7 @@ def preprocess_ifs(code, lang='en'):
 
     def next_non_empty_line(lines, start_line_number):
         if start_line_number > len(lines):
-            return '' #end of code, return empty so that starts_with doesnt find anything
+            return ''  # end of code, return empty so that starts_with doesnt find anything
         else:
             for i in range(start_line_number + 1, len(lines)):
                 if lines[i] == '':
@@ -3017,9 +3017,7 @@ def preprocess_ifs(code, lang='en'):
                 else:
                     return lines[i]
 
-        return '' #nothing found? return empty so that starts_with doesnt find anything
-
-
+        return ''  # nothing found? return empty so that starts_with doesnt find anything
 
     for i in range(len(lines) - 1):
         line = lines[i]
