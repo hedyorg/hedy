@@ -442,9 +442,7 @@ class TestsLevel5(HedyTester):
         # line break before else is allowed
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk'
-        
-        
+        if naam is Hedy print 'leuk'\n\n       
         else print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
