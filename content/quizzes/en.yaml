@@ -1271,7 +1271,7 @@ levels:
             -   option: "infinite"
                 feedback: "In this level you can only repeat one line at a time"
             correct_answer: "B"
-            hint: "You can only repeat 1 line at a time"
+            hint: "You can only repeat one line at a time"
             question_score: '10'
         2:
             question_text: "Which code is right?"
@@ -1297,7 +1297,7 @@ levels:
                     ```
                 feedback: "That's right!"
             correct_answer: "D"
-            hint: "First the repeat command, then the `{print}` command"
+            hint: "First the `{repeat}` command, then the `{print}` command"
             question_score: '10'
         3:
             question_text: "Is this code right or wrong?"
@@ -1335,7 +1335,7 @@ levels:
                     `{times}`
                 feedback: "`{times}` is spelled correctly"
             correct_answer: "A"
-            hint: "I'm is wrong, you can't use apostrophes"
+            hint: "I'm is wrong, you can't use apostrophes in a sentence"
             question_score: '10'
         5:
             question_text: "Is this code right or wrong?"
@@ -1497,7 +1497,7 @@ levels:
             -   option: |
                     ```
                     {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
+                    {repeat} 2 {times} 'clap your hands'
                     {print} 'and you really want to show it'
                     {print} 'clap your hands'
                     ```
@@ -1548,7 +1548,7 @@ levels:
             -   option: "This `{print}` command has to be removed."
                 feedback: "No, you need it."
             -   option: "There is a spelling mistake in the `{repeat}` command."
-                feedback: "No, repeat is the correct spelling"
+                feedback: "No, `{repeat}` is the correct spelling"
             -   option: "The second line needs to start with 4 spaces as indentation."
                 feedback: "Correct!"
             correct_answer: "D"
@@ -1586,7 +1586,7 @@ levels:
                     Baby shark
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
-            hint: "What is being repeated and what is not?."
+            hint: "What is being repeated and what is not?"
             question_score: '10'
         4:
             question_text: "Which output is correct?"
@@ -1685,9 +1685,9 @@ levels:
                 {if} food {is} pizza
                     topping = {ask} 'What topping would you like?'
                     {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                {print} 'Thank you for your order'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
+            -   option: "Nothing. This code is correct!"
                 feedback: "Something is wrong!"
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
                 feedback: "You are!"
@@ -2603,10 +2603,10 @@ levels:
                 feedback: "Alright!"
             -   option: |2
 
-                      ```
-                      flavors = 'vanilla, strawberry, chocolate'
-                      {print} 'I would like a ' flavors {at} {random} ' cake.'
-                      ```
+                            ```
+                            flavors = 'vanilla, strawberry, chocolate'
+                            {print} 'I would like a ' flavors {at} {random} ' cake.'
+                            ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
             hint: "The second line is the same in each code, pay attention to the first line"
