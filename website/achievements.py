@@ -18,11 +18,11 @@ class Achievements:
     def __init__(self, db: database.Database, translations: AchievementTranslations):
         self.db = db
         self.translations = translations
-        self.all_Hedy_commands = self.all_Hedy_commands()
+        self.all_Hedy_commands = self.get_Hedy_commands()
         self.total_users = 0
         self.statistics = self.get_global_statistics()
 
-    def all_Hedy_commands(self):
+    def get_Hedy_commands(self):
         commands = []
         for i in range(1, hedy.HEDY_MAX_LEVEL + 1):
             for command in hedy.commands_per_level.get(i):
