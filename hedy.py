@@ -357,9 +357,9 @@ def get_list_keywords(commands, to_lang):
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
-            if command == 'ifpressed': # TODO: this is a bit of a hack
+            if command == 'ifpressed':  # TODO: this is a bit of a hack
                 command = 'pressed'    # since in the yamls they are called pressed
-            if command == 'assign_button': # but in the grammar 'ifpressed'
+            if command == 'assign_button':  # but in the grammar 'ifpressed'
                 command = 'button'         # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
@@ -1075,7 +1075,6 @@ def all_commands(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
-
 
 
 @v_args(meta=True)
