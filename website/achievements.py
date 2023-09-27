@@ -18,11 +18,11 @@ class Achievements:
     def __init__(self, db: database.Database, translations: AchievementTranslations):
         self.db = db
         self.translations = translations
-        self.all_commands = self.get_all_commands()
+        self.all_Hedy_commands = self.get_Hedy_commands()
         self.total_users = 0
         self.statistics = self.get_global_statistics()
 
-    def get_all_commands(self):
+    def get_Hedy_commands(self):
         commands = []
         for i in range(1, hedy.HEDY_MAX_LEVEL + 1):
             for command in hedy.commands_per_level.get(i):
@@ -62,7 +62,7 @@ class Achievements:
             if "commands" in achievements_data:
                 # We convert the list to a set perform intersection with all commands and convert to set again
                 # This to prevent "faulty" commands being kept from relic code (such as "multiplication")
-                session["commands"] = list(set(achievements_data["commands"]).intersection(self.all_commands))
+                session["commands"] = list(set(achievements_data["commands"]).intersection(self.all_Hedy_commands))
             else:
                 session["commands"] = []
             if "run_programs" in achievements_data:
@@ -101,13 +101,13 @@ class Achievements:
             return None
 
     @querylog.timed
-    def verify_run_achievements(self, username, code=None, level=None, response=None):
+    def verify_run_achievements(self, username, code=None, level=None, response=None, commands_in_code=[]):
         self.initialize_user_data_if_necessary()
         if session["run_programs"] < self.ACHIEVEMENTS_THRESHOLD:
             return
         self.check_programs_run()
         if code and level:
-            self.check_code_achievements(code, level)
+            self.check_code_achievements(code, level, commands_in_code)
         if code and response:
             self.check_response_achievements(code, response)
 
@@ -211,26 +211,25 @@ class Achievements:
         if "deadline_daredevil_III" not in session["achieved"] and session["submitted_programs"] >= 10:
             session["new_achieved"].append("deadline_daredevil_III")
 
-    def check_code_achievements(self, code, level):
+    def check_code_achievements(self, code, level, commands_in_code):
         self.initialize_user_data_if_necessary()
-        commands_in_code = hedy.all_commands(code, level, session["lang"])
         if "trying_is_key" not in session["achieved"]:
             for command in list(set(commands_in_code)):  # To remove duplicates
-                if command not in session["commands"] and command in self.all_commands:
+                if command not in session["commands"] and command in self.all_Hedy_commands:
                     session["new_commands"].append(command)
-            if set(session["commands"]).union(set(session["new_commands"])) == self.all_commands:
+            if set(session["commands"]).union(set(session["new_commands"])) == self.all_Hedy_commands:
                 session["new_achieved"].append("trying_is_key")
-        if "did_you_say_please" not in session["achieved"] and "ask" in hedy.all_commands(code, level, session["lang"]):
+        if "did_you_say_please" not in session["achieved"] and "ask" in commands_in_code:
             session["new_achieved"].append("did_you_say_please")
         if (
             "talk-talk-talk" not in session["achieved"]
-            and hedy.all_commands(code, level, session["lang"]).count("ask") >= 5
+            and commands_in_code.count("ask") >= 5
         ):
             session["new_achieved"].append("talk-talk-talk")
         if "hedy_honor" not in session["achieved"] and "Hedy" in code:
             session["new_achieved"].append("hedy_honor")
         if "hedy-ious" not in session["achieved"]:
-            all_print_arguments = hedy.all_print_arguments(code, level, session["lang"])
+            all_print_arguments = [x for x in commands_in_code if x == "print"]
             for argument in all_print_arguments:
                 if all_print_arguments.count(argument) >= 10:
                     session["new_achieved"].append("hedy-ious")

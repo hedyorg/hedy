@@ -553,13 +553,13 @@ def parse():
 
         with querylog.log_time('detect_sleep'):
             try:
-                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
+                response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
