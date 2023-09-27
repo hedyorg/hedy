@@ -532,15 +532,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         save_name: saveNameFromInput(),
       };
 
-      let errorsFoundTimeout = setTimeout(function () {
-        error.showWarningSpinner();
-        error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-      }, 500)
-
       let response = await postJsonWithAchievements('/parse', data);
-      clearTimeout(errorsFoundTimeout);
       console.log('Response', response);
-      error.hide();
 
       showAchievements(response.achievements, false, "");
       if (adventure && response.save_info) {
@@ -820,6 +813,8 @@ window.onerror = function reportClientException(message, source, line_number, co
 export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
+  let skip_faulty_found_errors = false;
+  let warning_box_shown = false;
 
   if (sourceMap){
     theGlobalSourcemap = sourceMap;
@@ -833,8 +828,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         map.hedy_range.to_line-1, map.hedy_range.to_column-1
       )
 
-      if (map.error != null){
+      if (map.error != null) {
+        skip_faulty_found_errors = true;
         theGlobalEditor.setIncorrectLine(range, Number(index));
+      }
+      
+      // Only show the warning box for the first error shown
+      if (skip_faulty_found_errors && !warning_box_shown) {
+        error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        warning_box_shown = true;
       }
     }
   }
@@ -1029,7 +1031,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
       return;
     }
-    if (!hasWarnings && code !== last_code && !debug) {
+    // Do not show success message if we found errors that we skipped
+    if (!hasWarnings && code !== last_code && !debug && !skip_faulty_found_errors) {
         showSuccesMessage();
         last_code = code;
     }
