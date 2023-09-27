@@ -235,7 +235,7 @@ sections:
                 solution_code: |
                     {ask} Quel est votre nom ?
                     {echo} Ton nom est
-        -   title: "Les élèves veulent que leur \"dis mot\" (variable) se trouve au milieu d'une phrase"
+        -   title: "Les élèves veulent que le mot répété (variable) se trouve au milieu d'une phrase"
             example:
                 error_text: |
                     Et ils ont raison ! C'est pourquoi ils apprendront à utiliser les variables au niveau suivant.
@@ -291,18 +291,18 @@ sections:
                     Dans ce niveau, tu dois dire à Hedy où enregistrer ta réponse pour qu'elle puisse être utilisée plus tard. C'est ce qu'on appelle une variable.
                 solution_code: |
                     demande Qu'aimeriez-vous manger?
-        -   title: "Les élèves essaient d'utiliser la commande dis. "
+        -   title: "Les élèves essaient d'utiliser la commande `{echo}` "
             example:
                 error_text: |
-                    Pour certains élèves, il peut être frustrant d'apprendre que la commande dis ne fonctionne plus. C'est pourquoi il est très important d'expliquer les avantages de l'utilisation des variables. Par exemple, vous pouvez utiliser plusieurs variables dans un code, et vous pouvez les placer où vous voulez dans une phrase!
+                    Pour certains élèves, il peut être frustrant d'apprendre que la commande `{echo}` ne fonctionne plus. C'est pourquoi il est très important d'expliquer les avantages de l'utilisation des variables. Par exemple, vous pouvez utiliser plusieurs variables dans un code, et vous pouvez les placer où vous voulez dans une phrase !
                 error_code: |
-                    réponse est demande Pourquoi dis ne fonctionne plus?!
-                    dis
+                    réponse {is} {ask} Pourquoi {echo} ne fonctionne plus?!
+                    {echo}
                 solution_text: |
                     Utilise plutôt une variable.
                 solution_code: |
-                    réponse est demande Pourquoi dis ne fonctionne-t-il plus ?
-                    affiche réponse
+                    réponse {is} {ask} Pourquoi {echo} ne fonctionne-t-il plus ?
+                    {print} réponse
         -   title: "Les élèves utilisent un nom de variable ou un mot normal"
             example:
                 error_text: |
@@ -385,19 +385,19 @@ sections:
                     oiseaux est moineau, mouette, corneille
                     affiche oiseaux hasard
                 solution_text: |
-                    Ce problème est résolu en ajoutant le mot "au".
+                    Ce problème est résolu en ajoutant le mot `{at}`
                 solution_code: |
-                    oiseaux est moineau, mouette, corneille
-                    affiche oiseaux au hasard
+                    oiseaux {is} moineau, mouette, corneille
+                    {print} oiseaux {at} {random}
         -   title: "Les élèves oublient d'utiliser la commande `{print}` quand ils utilisent aussi la commande `{at}` `{random}`"
             example:
                 error_text: |
-                    Ou alors ils vont quelques fois mettre `{at}` au début d'une ligne.
+                    Ou alors ils vont parfois mettre `{at}` `{random}` au début d'une ligne.
                 error_code: |
-                    fruit est pomme, cerise, banane
-                    fruit au hasard
+                    fruit {is} pomme, cerise, banane
+                    fruit {at} {random}
                 solution_text: |
-                    Insistez auprès de vos élèves sur le fait que vous avez toujours besoin de la commande affiche pour afficher un texte.
+                    Insistez auprès de vos élèves sur le fait que vous avez toujours besoin de la commande `{print}` pour afficher un texte.
                 solution_code: |
                     fruit {is} pomme, cerise, banane
                     {print} fruit {at} {random}
@@ -413,7 +413,7 @@ sections:
                 solution_code: |
                     pizzas {is} champignons, thon, quatre saisons
                     {print} pizzas {at} {random}
-        -   title: "Les élèves essaient d'utiliser `{at}` `{random}` sans une liste"
+        -   title: "Les élèves essaient d'utiliser `{at}` `{random}` avec autre chose qu'une liste"
             example:
                 error_text: |
                     Par exemple
@@ -430,21 +430,21 @@ sections:
                 error_text: |
                     Dans l'exemple ci-dessous, "noms" n'est pas une liste, mais une variable. Vous ne pouvez rien y ajouter.
                 error_code: |
-                    noms {is} Jake
+                    noms {is} Jacques
                     ton_nom {is} {ask} Qui es-tu ?
                     {add} ton_nom {to} noms
                     {print} noms {at} {random}
                 solution_text: |
                     Il faut d'abord qu'il y ait une liste, donc vous devez ajouter un deuxième nom pour transformer les noms en liste, par exemple Amy. Si vous ne voulez pas d'Amy dans votre liste, vous pouvez utiliser remove pour la supprimer ensuite.
                 solution_code: |
-                    noms {is} Jake, Amy
-                    ton_nom {is} {ask} Qui es-tu ?
+                    noms {is} Jacques, Amy
+                    ton_nom {is} {ask} Qui es-tu ?
                     {add} ton_nom {to} noms
                     {print} noms {at} {random}
-        -   title: "Les élèves oublient d'utiliser à/de dans ajoute/supprime"
+        -   title: "Les élèves oublient d'utiliser `{to}`/`{from}` dans `{add}`/`{remove}`"
             example:
                 error_text: |
-                    Sans à/de, la commande ajoute/supprime ne marchera pas..
+                    Sans `{to}`/`{from}`, la commande `{add}`/`{remove}` ne marchera pas.
                 error_code: |
                     aventures {is} histoire, perroquet, dé
                     choix {is} Quelle aventure tu préfères?
@@ -454,11 +454,11 @@ sections:
                 solution_text: |
                     Hedy doit savoir à quelle liste l'élément doit être ajouté/supprimé.
                 solution_code: |
-                    aventures est histoire, perroquet, dé
-                    choix est Quelle aventure préférez-vous ?
-                    ajoute choix à aventures
-                    supprime dé de aventures
-                    affiche J'aime aventures au hasard
+                    aventures {is} histoire, perroquet, dé
+                    choix {is} Quelle aventure préférez-vous ?
+                    {add} choix {to} aventures
+                    {remove} dé {from} aventures
+                    {print} J'aime aventures {at} {random}
     -   level: '4'
         sections:
         -   title: "Les élèves oublient d'utiliser les guillemets des deux côtés du texte"

@@ -15,7 +15,7 @@ adventures:
                 start_code: "{print} bonjour le monde !"
             2:
                 story_text: |
-                    Bravo ! Tu as atteint le niveau 2. Avec un peu de chance, tu as déjà écrit des super codes !
+                    Bravo ! Tu as atteint le niveau 2. Avec un peu de chance, tu as déjà écrit des super codes !
                     Dans le premier niveau, tu as peut-être remarqué que la commande `{echo}` ne peut se rappeler qu'une seule information à la fois.
                     Par exemple, dans l'aventure du restaurant, tu peux re-dire ce que le client voulait manger ou ce qu'il voulait boire, mais pas les deux en une seule phrase.
                 start_code: "{print} bonjour le monde !"
@@ -621,7 +621,7 @@ adventures:
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
-                    À ce niveau, tu peux utiliser des variables pour rendre la tortue interactive. Par exemple, tu peux demander au joueur combien de pas la tortue doit avancer.
+                    À ce niveau, tu peux utiliser des variables pour rendre la tortue interactive. Par exemple, tu peux demander au joueur de combien de pas la tortue doit avancer.
                 example_code: |
                     ```
                     réponse {is} {ask} De combien de pas la tortue doit-elle avancer ?
@@ -1251,7 +1251,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Au niveau 1 tu peux faire ton propre restaurant virtuel et prendre les commandes de tes invités.
+                    Au niveau 1 tu peux faire ton propre restaurant virtuel et prendre les commandes de tes clients.
                 example_code: |
                     ```
                     {print} Bienvenu au restaurant Chez Hedy 🍟
@@ -2493,7 +2493,7 @@ adventures:
             2:
                 story_text_2: "### Exercice\nDans l'onglet précédent tu t'es entraîné à attribuer des valeurs aux variables avec la commande `{is}`.\nTu as créé au moins 3 variables et les a utilisées avec la commande `{print}`.\nMaintenant, au lieu de simplement attribuer une valeur fixe aux variables, nous voulons les rendre interactives, comme dans l'exemple.\n\nCopie le code de l'onglet précédent et rend les variables interactives en utilisant la commande `{ask}`.\n"
                 example_code_2: "```\nanimaux_préférés {is} {ask} Quel est ton animal préféré ?\n{print} J'aime les animaux_préférés\n```\n"
-                story_text: "## La commande `{ask}`\nMaintenant que l'on peut utiliser les **variables** dans nos codes, la commande `{echo}` n'est plus utile.\nOn peut utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes.\nVérifie-le :\n\nDe cette façon notre code devient interactif !\n"
+                story_text: "## La commande `{ask}`\nMaintenant que l'on peut utiliser les **variables** dans nos codes, la commande `{echo}` n'est plus utile.\nOn peut utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes.\nVérifie-le :\n\nDe cette façon ton code devient interactif !\n"
                 example_code: "```\nnom {is} {ask} Quel est ton nom ?\n{print} Bonjour nom\nâge {is} {ask} Quel âge as-tu ?\n{print} nom a âge ans.\n```\n"
                 start_code: "nom {is} {ask} Quel est ton nom ?\n{print} Bonjour nom\nâge {is} {ask} Quel âge as-tu ?\n{print} nom a âge ans."
             1:
@@ -2514,7 +2514,7 @@ adventures:
                 story_text: "## Les variables\nTu peux donner une valeur à un mot avec `{is}`. C'est ce que l'on appelle une **variable**. Dans cet exemple, nous avons défini une variable qui s'appelle « nom » et une variable qui s'appelle « âge ». Tu peux utiliser le mot « nom » n'importe où dans ton code et il sera remplacé par « Hedy », comme ceci :\n"
                 example_code: "```\nnom {is} Hedy\nâge {is} 15\n{print} nom a âge ans\n```\n"
                 story_text_2: "### Exercice\nIl est temps de faire tes propres variables !\nDans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.\nPour commencer, termine notre exemple en remplissant l'espace blanc avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.\n"
-                example_code_2: "```\nanimaux_préférés is _\n{print} J'aime les animaux_préférés\n```\n"
+                example_code_2: "```\nanimaux_préférés {is} _\n{print} J'aime les animaux_préférés\n```\n"
                 start_code: "nom {is} Hedy\nâge {is} 15\n{print} nom a âge ans"
             14:
                 start_code: "âge = {ask} \"Quel âge as-tu ?\"\n{if} âge < 13\n    {print} \"Tu es plus jeune que moi !\"\n{else}\n    {print} \"Tu es plus âgé que moi !\""

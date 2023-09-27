@@ -76,7 +76,7 @@ sections:
     -   title: Introducción
         text: "Puedes empezar tus clases activando los conocimientos previos de tus alumnos: ¿Qué saben ya sobre el tema?, ¿Qué aprendieron en la lección anterior? y ¿qué errores cometieron de lo que han aprendido hasta ahora?\nDe este modo, todos los comandos aprendidos previamente y los errores cometidos con frecuencia estarán frescos en la memoria de tus alumnos cuando empieces a introducir la nueva lección.\n"
     -   title: Introducción de nuevos conceptos y comandos
-        text: "Los nuevos conceptos y comandos pueden ser muy difíciles de comprender para algunos alumnos.\nPor eso es importante dar un modelo del uso correcto de los comandos a los alumnos.\nEspecialmente en los niveles iniciales cuando un alumno no tiene experiencia alguna en programación, puede ser difícil para ellos comprender los conceptos abstractos.\nMostrar varios ejemplos hace que un concepto abstracto (por ejemplo, '¿Qué es una variable?') sea más fácil de reconocer y entender ('¡Mira!, la variable a cambiado a perro').\n"
+        text: "Los nuevos conceptos y comandos pueden ser muy difíciles de entender para algunos alumnos.\nPor eso es importante enseñar a los alumnos el uso correcto de los nuevos comandos.\nEspecialmente en los niveles más bajos, donde algunos estudiantes no tienen ninguna experiencia con la programación, puede ser difícil para ellos entender los nuevos conceptos.\nMostrar muchos ejemplos hace que un concepto (por ejemplo: \"¿Qué es una variable?\") sea más reconocible y fácil de entender (\"Mira, la variable mascota se ha convertido en perro\"). Nuestras diapositivas pueden ayudarte con eso.\n"
     -   title: Vamos a trabajar
         text: "Cada nivel contiene diferentes aventuras que podrás encontrar en las pestañas rosas. La primera pestaña rosa explica los nuevos comandos del nivel.\nLas siguientes pestañas son las aventuras que tus alumnos pueden probar y hacer por sí mismos.\nLas aventuras están ordenadas de fácil a difícil, así que recomendamos empezar por la izquierda hacia la derecha.\nLa última pestaña da una pequeña pista de que aprenderás en el siguiente nivel. Por supuesto, puedes seleccionar las aventuras que quieras que tus alumnos hagan en cada nivel.\nNo siempre tienen que hacer todas las aventuras. Cada aventura contiene un código de ejemplo que los alumnos pueden probar con el botón verde.\nEl código de ejemplo se copia en el area de trabajo, donde los alumnos pueden probar y ajustar a su gusto.\nAnima a tus alumnos a convertir los ejemplos en sus propios proyectos, añadiendo sus propias ideas e introduciendo variaciones a las aventuras.\n"
     -   title: Concursos y rompecabezas
@@ -187,12 +187,12 @@ sections:
                 error_code: "preguntar ¿Qué te gustaría comer?\n"
                 solution_text: "En este nivel tienes que decirle a Hedy dónde debe guardar tu respuesta para ser usada luego. Esto se llama una variable.\n"
                 solution_code: "ordenar es preguntar ¿Que te gustaría comer?\n"
-        -   title: 'Los estudiantes intentan usar el comando echo. '
+        -   title: 'Los estudiantes intentan usar el comando `{echo}`. '
             example:
-                error_text: "Para algunos estudiantes, puede ser frustrante aprender que el comando echo ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!\n"
-                error_code: "la respuesta es pregunta ¡¿Por qué ya no funciona echo?!\necho\n"
+                error_text: "Para algunos estudiantes, puede ser frustrante aprender que el comando `{echo}` ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!\n"
+                error_code: "respuesta {is} {ask} ¡¿Por qué ya no funciona {echo}?!\n{echo}\n"
                 solution_text: "En su lugar, utiliza una variable.\n"
-                solution_code: "la respuesta es preguntar ¿¡Por qué ya no funciona 'echo'?!\nprint answer\n"
+                solution_code: "respuesta {is} {ask} ¿¡Por qué ya no funciona {echo}?!\n{print} respuesta\n"
         -   title: Los estudiantes usan el nombre de una variable o como una palabra normal
             example:
                 error_text: "En el siguiente ejemplo, se usa la palabra 'nombre' como una variable, pero también como un texto normal. El resultado de este código será 'Hola mi Hedy es Hedy'.\n"

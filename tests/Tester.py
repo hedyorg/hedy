@@ -275,7 +275,7 @@ class HedyTester(unittest.TestCase):
                                 in_english, from_lang="en", to_lang=lang, level=self.level)
                             self.assert_translated_code_equal(code, back_in_org)
 
-                    all_commands = hedy.all_commands(code, level, lang)
+                    all_commands = result.commands
                     if expected_commands is not None:
                         self.assertEqual(expected_commands, all_commands)
                     # <- use this to run tests locally with unittest
