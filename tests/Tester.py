@@ -17,20 +17,27 @@ from hedy_sourcemap import SourceRange
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0):
         self.filename = filename
         self.level = level
-        self.field_name = field_name
+        self.field_name = field_name if field_name is not None else ''
         self.code = code
         self.error = error
+        self.key = key if key is not None else ''
         filename_shorter = os.path.basename(filename)
         if language is None:
             self.language = filename_shorter.split(".")[0]
         else:
             self.language = language
         self.adventure_name = adventure_name
-        self.name = f'{self.language}-{self.level}-{self.field_name}'
+        self.name = f'{self.language}-{self.level}-{self.key}-{self.field_name}'
         self.hash = md5digest(self.code)
+        self.counter = counter
+        if counter > 0:
+            self.name += f'-{self.counter + 1}'
+
+    def __repr__(self):
+        return f'Snippet({self.name})'
 
 
 class SkippedMapping:
