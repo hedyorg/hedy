@@ -790,5 +790,9 @@ class TestsHypothesisLevel1(HedyTester):
             expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
                                  Command.print, Command.print, Command.print, Command.turn, Command.turn]
 
+            # TODO, FH sept 2023: all_commands parses and thus is expensive
+            # we should get the commands list back from the parser instead (parseresult.commands)
+            # since we don't use many single_level_tester features
+            # we can transpile and check the python "manually"
             all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
             self.assertEqual(expected_commands, all_commands)
