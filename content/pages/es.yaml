@@ -187,12 +187,12 @@ sections:
                 error_code: "preguntar ¿Qué te gustaría comer?\n"
                 solution_text: "En este nivel tienes que decirle a Hedy dónde debe guardar tu respuesta para ser usada luego. Esto se llama una variable.\n"
                 solution_code: "ordenar es preguntar ¿Que te gustaría comer?\n"
-        -   title: 'Los estudiantes intentan usar el comando echo. '
+        -   title: 'Los estudiantes intentan usar el comando `{echo}`. '
             example:
-                error_text: "Para algunos estudiantes, puede ser frustrante aprender que el comando echo ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!\n"
-                error_code: "la respuesta es pregunta ¡¿Por qué ya no funciona echo?!\necho\n"
+                error_text: "Para algunos estudiantes, puede ser frustrante aprender que el comando `{echo}` ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!\n"
+                error_code: "respuesta {is} {ask} ¡¿Por qué ya no funciona {echo}?!\n{echo}\n"
                 solution_text: "En su lugar, utiliza una variable.\n"
-                solution_code: "la respuesta es preguntar ¿¡Por qué ya no funciona 'echo'?!\nprint answer\n"
+                solution_code: "respuesta {is} {ask} ¿¡Por qué ya no funciona {echo}?!\n{print} respuesta\n"
         -   title: Los estudiantes usan el nombre de una variable o como una palabra normal
             example:
                 error_text: "En el siguiente ejemplo, se usa la palabra 'nombre' como una variable, pero también como un texto normal. El resultado de este código será 'Hola mi Hedy es Hedy'.\n"
