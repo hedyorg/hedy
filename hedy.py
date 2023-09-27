@@ -978,40 +978,6 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class UsesTurtle(Transformer):
-    def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
-            return False
-        else:
-            return any(isinstance(c, bool) and c is True for c in children)
-
-    # returns true if Forward or Turn are in the tree, false otherwise
-    def forward(self, args):
-        return True
-
-    def color(self, args):
-        return True
-
-    def turn(self, args):
-        return True
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return False
-
-    def NAME(self, args):
-        return False
-
-    def NUMBER(self, args):
-        return False
-
-    def POSITIVE_NUMBER(self, args):
-        return False
-
-    def NEGATIVE_NUMBER(self, args):
-        return False
-
-
 class UsesPyGame(Transformer):
     command_prefix = (f"""\
 pygame_end = False
@@ -2710,7 +2676,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
@@ -2772,6 +2738,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
     try:
         source_map.set_skip_faulty(False)
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+
     except Exception as original_error:
         if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
@@ -3271,8 +3238,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
-        uses_turtle = UsesTurtle()
-        has_turtle = uses_turtle.transform(abstract_syntax_tree)
+        # note to self, we still parse twice, we can also pass all_commands the ast!
+        commands = all_commands(input_string, level, lang)
+
+        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
 
         uses_pygame = UsesPyGame()
         has_pygame = uses_pygame.transform(abstract_syntax_tree)
@@ -3280,7 +3249,8 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame)
+
+        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
