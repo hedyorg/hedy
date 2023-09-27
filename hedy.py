@@ -1077,48 +1077,6 @@ def all_commands(input_string, level, lang='en'):
     return AllCommands(level).transform(program_root)
 
 
-class AllPrintArguments(Transformer):
-    def __init__(self, level):
-        self.level = level
-
-    def __default__(self, args, children, meta):
-        leaves = flatten_list_of_lists_to_list(children)
-
-        if args == 'print':
-            return children
-        else:
-            return leaves  # 'pop up' the children
-
-    def program(self, args):
-        return flatten_list_of_lists_to_list(args)
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return []
-
-    def NAME(self, args):
-        return []
-
-    def NUMBER(self, args):
-        return []
-
-    def POSITIVE_NUMBER(self, args):
-        return []
-
-    def NEGATIVE_NUMBER(self, args):
-        return []
-
-    def text(self, args):
-        return ''.join(args)
-
-# TODO in this PR: should be removed everywhere
-# not just in achievements
-def all_print_arguments(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level, lang)
-    program_root = parse_input(input_string, level, lang)
-
-    return AllPrintArguments(level).transform(program_root)
-
 
 @v_args(meta=True)
 class IsValid(Filter):

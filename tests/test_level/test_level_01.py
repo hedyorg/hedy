@@ -38,8 +38,8 @@ class TestsLevel1(HedyTester):
             expected=expected,
             output=output,
             expected_commands=expected_commands
+
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
@@ -53,7 +53,7 @@ class TestsLevel1(HedyTester):
             output=output,
             expected_commands=expected_commands
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
+
 
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
@@ -83,7 +83,6 @@ class TestsLevel1(HedyTester):
         Mooi hoor""")
 
         self.single_level_tester(code=code, expected=expected, output=output)
-        self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView!'"
@@ -518,8 +517,6 @@ class TestsLevel1(HedyTester):
             output=output,
             expected_commands=[Command.print]
         )
-
-        self.assertEqual(['Hallo welkom bij Hedy! '], hedy.all_print_arguments(code, self.level))
 
     #
     # combined commands tests
