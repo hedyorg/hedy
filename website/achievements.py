@@ -229,7 +229,7 @@ class Achievements:
         if "hedy_honor" not in session["achieved"] and "Hedy" in code:
             session["new_achieved"].append("hedy_honor")
         if "hedy-ious" not in session["achieved"]:
-            all_print_arguments = hedy.all_print_arguments(code, level, session["lang"])
+            all_print_arguments = [x for x in commands_in_code if x == "print"]
             for argument in all_print_arguments:
                 if all_print_arguments.count(argument) >= 10:
                     session["new_achieved"].append("hedy-ious")
