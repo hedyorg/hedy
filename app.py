@@ -473,6 +473,7 @@ def echo_session_vars_main():
 
 
 @app.route('/parse', methods=['POST'])
+@querylog.timed_as('parse_handler')
 def parse():
     body = request.json
     if not body:
@@ -483,9 +484,6 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
-    # TODO: Once we figure out whats wrong with the skip faulty code, we need to reinstantiate this
-    # if 'skip_faulty' not in body:
-    #     return "body.skip_faulty must be a boolean", 400
 
     error_check = False
     if 'error_check' in body:
@@ -493,7 +491,6 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
-    skip_faulty = False  # bool(body['skip_faulty'])
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -514,7 +511,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang, skip_faulty)
+                transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -534,18 +531,18 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
-            # source_map_result = transpile_result.source_map.get_result()
+            source_map_result = transpile_result.source_map.get_result()
 
-            # for i, mapping in source_map_result.items():
-            #     if mapping['error'] is not None:
-            #         source_map_result[i]['error'] = translate_error(
-            #             source_map_result[i]['error'].error_code,
-            #             source_map_result[i]['error'].arguments,
-            #             keyword_lang
-            #         )
+            for i, mapping in source_map_result.items():
+                if mapping['error'] is not None:
+                    source_map_result[i]['error'] = translate_error(
+                        source_map_result[i]['error'].error_code,
+                        source_map_result[i]['error'].arguments,
+                        keyword_lang
+                    )
 
-            # response['source_map'] = source_map_result
-            response['source_map'] = transpile_result.source_map.get_result()
+            response['source_map'] = source_map_result
+
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
@@ -554,10 +551,12 @@ def parse():
         except Exception:
             pass
 
-        try:
-            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-        except BaseException:
-            pass
+        with querylog.log_time('detect_sleep'):
+            try:
+                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
+            except BaseException:
+                pass
+
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
                     username, code, level, response):
@@ -713,11 +712,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_, skip_faulty):
+def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_, skip_faulty)
+        result = hedy.transpile(code, level, lang_)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -747,6 +746,7 @@ def translate_error(code, arguments, keyword_lang):
         'allowed_types',
         'invalid_type',
         'invalid_type_2',
+        'offending_keyword',
         'character_found',
         'concept',
         'tip',
@@ -763,6 +763,7 @@ def translate_error(code, arguments, keyword_lang):
         'guessed_command',
         'invalid_argument',
         'invalid_argument_2',
+        'offending_keyword',
         'variable',
         'invalid_value',
         'print',

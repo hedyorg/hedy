@@ -5,7 +5,7 @@ from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, getenv
 
 import warnings
 import hedy
@@ -2757,36 +2757,32 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=False):
+def transpile(input_string, level, lang="en", skip_faulty=True):
     """
     Function that transpiles the Hedy code to Python
 
-    The first time the client will try to execute the code without skipping faulty code
-    If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
+    The first time we try to transpile the code without skipping faulty code
+    If an exception is caught (the Hedy code contains faults) an exception is raised
 
-    The second time, after an Error is received by the client, the client will re-POST the code
-    with skipping faulty enabled, after that we either return the partially correct code or raise the original error
+    The second time, after the non-skipping approach raised an exception,
+    we try transpile the code with skipping faulty code, if skip_faulty is True.
+    After that either the partial program is returned or the original error
     """
 
-    if not skip_faulty:
-        try:
-            source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
-        except Exception as original_error:
-            source_map.exception_found_during_parsing = original_error  # store original exception
+    try:
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+    except Exception as original_error:
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
+            if isinstance(original_error, source_map.exceptions_not_to_skip):
+                raise original_error
+            try:
+                source_map.set_skip_faulty(True)
+                transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            except Exception:
+                raise original_error  # we could not skip faulty code, raise original exception
+        else:
             raise original_error
-    else:
-        original_error = source_map.exception_found_during_parsing
-        source_map.clear()
-
-        if isinstance(original_error, source_map.exceptions_not_to_skip):
-            raise original_error
-
-        try:
-            source_map.set_skip_faulty(True)
-            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
-        except Exception:
-            raise original_error  # we could not skip faulty code, raise original exception
 
     return transpile_result
 
@@ -3011,12 +3007,23 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
+    def next_non_empty_line(lines, start_line_number):
+        if start_line_number > len(lines):
+            return ''  # end of code, return empty so that starts_with doesnt find anything
+        else:
+            for i in range(start_line_number + 1, len(lines)):
+                if lines[i] == '':
+                    continue
+                else:
+                    return lines[i]
+
+        return ''  # nothing found? return empty so that starts_with doesnt find anything
+
     for i in range(len(lines) - 1):
         line = lines[i]
-        next_line = lines[i + 1]
 
-        # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
             excluded_commands = ["pressed"]

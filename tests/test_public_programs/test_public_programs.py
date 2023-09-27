@@ -42,7 +42,8 @@ class TestsPublicPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
-                    translate=False
+                    translate=False,
+                    skip_faulty=False
                 )
 
                 # useful code if you want to test what erroneous snippets are now passing
@@ -81,5 +82,6 @@ class TestsPublicPrograms(HedyTester):
                 level=int(snippet.level),
                 lang=snippet.language,
                 translate=False,
-                exception=exceptions.HedyException
+                exception=exceptions.HedyException,
+                skip_faulty=False
             )

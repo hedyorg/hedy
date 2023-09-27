@@ -86,6 +86,8 @@ class HedyTester(unittest.TestCase):
         cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
         cls.snippet_hashes_original_len = len(cls.snippet_hashes)
 
+        os.environ["ENABLE_SKIP_FAULTY"] = 'True'  # Always test with skipping faulty enabled
+
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -178,12 +180,14 @@ class HedyTester(unittest.TestCase):
             max_level=hedy.HEDY_MAX_LEVEL,
             expected=None,
             exception=None,
-            skipped_mappings: list[SkippedMapping] = None,
+            skipped_mappings: 'list[SkippedMapping]' = None,
             extra_check_function=None,
             expected_commands=None,
             lang='en',
             translate=True,
-            output=None):
+            output=None,
+            skip_faulty=True
+    ):
         # used to test the same code snippet over multiple levels
         # Use exception to check for an exception
 
@@ -212,7 +216,8 @@ class HedyTester(unittest.TestCase):
                 expected_commands=expected_commands,
                 lang=lang,
                 translate=translate,
-                output=output)
+                output=output,
+                skip_faulty=skip_faulty)
             print(f'Passed for level {level}')
 
     def single_level_tester(
@@ -220,18 +225,20 @@ class HedyTester(unittest.TestCase):
             code,
             level=None,
             exception=None,
-            skipped_mappings: list[SkippedMapping] = None,
+            skipped_mappings: 'list[SkippedMapping]' = None,
             expected=None,
             extra_check_function=None,
             output=None,
             expected_commands=None,
             lang='en',
-            translate=True):
+            translate=True,
+            skip_faulty=True,
+    ):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
         if not self.snippet_already_tested_with_current_hedy_version(code, level):
             if skipped_mappings is not None:
-                result = hedy.transpile(code, level, lang, skip_faulty=True)
+                result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                 for skipped in skipped_mappings:
                     result_error = result.source_map.get_error_from_hedy_source_range(skipped.source_range)
                     self.assertEqual(expected, result.code)
@@ -241,11 +248,11 @@ class HedyTester(unittest.TestCase):
             else:
                 if exception is not None:
                     with self.assertRaises(exception) as context:
-                        result = hedy.transpile(code, level, lang)
+                        result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 

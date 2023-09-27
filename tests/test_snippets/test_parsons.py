@@ -67,7 +67,8 @@ class TestsParsonsPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
-                    translate=False
+                    translate=False,
+                    skip_faulty=False
                 )
 
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
