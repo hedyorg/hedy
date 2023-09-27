@@ -1,8 +1,3 @@
-# Can be used to catch more languages with example codes in the story_text
-# feedback = f"Example code in story text {lang}, {adventure_name},
-# {level_number}, not recommended!"
-# print(feedback)
-
 import os
 from app import translate_error, app
 from flask_babel import force_locale
@@ -20,6 +15,8 @@ fix_error = False
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
     fix_error = True
+
+check_stories = False
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
@@ -57,9 +54,18 @@ def collect_snippets(path, filtered_language=None):
                                              for tag in utils.markdown_to_html_tags(text)
                                              if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
                                 else:
-                                    # If we don't have Markdown, the entire field is a single code
-                                    # block
+                                    # If we don't have Markdown (this happensin the start_code field)
+                                    # the entire field is a single code block
                                     codes = [text]
+
+                                if check_stories and adventure_part == 'story_text' and codes != []:
+                                    # Can be used to catch languages with example codes in the story_text
+                                    # at once point in time, this was the default and some languages still use this old
+                                    # structure
+
+                                    feedback = f"Example code in story text {lang}, {adventure_name},\
+                                    {level_number}, not recommended!"
+                                    raise Exception(feedback)
 
                                 for i, code in enumerate(codes):
                                     Hedy_snippets.append(Snippet(
