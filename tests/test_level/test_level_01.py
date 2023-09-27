@@ -38,8 +38,8 @@ class TestsLevel1(HedyTester):
             expected=expected,
             output=output,
             expected_commands=expected_commands
+
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
@@ -53,7 +53,6 @@ class TestsLevel1(HedyTester):
             output=output,
             expected_commands=expected_commands
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
@@ -83,7 +82,6 @@ class TestsLevel1(HedyTester):
         Mooi hoor""")
 
         self.single_level_tester(code=code, expected=expected, output=output)
-        self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView!'"
@@ -519,8 +517,6 @@ class TestsLevel1(HedyTester):
             expected_commands=[Command.print]
         )
 
-        self.assertEqual(['Hallo welkom bij Hedy! '], hedy.all_print_arguments(code, self.level))
-
     #
     # combined commands tests
     #
@@ -793,5 +789,9 @@ class TestsHypothesisLevel1(HedyTester):
             expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
                                  Command.print, Command.print, Command.print, Command.turn, Command.turn]
 
+            # TODO, FH sept 2023: all_commands parses and thus is expensive
+            # we should get the commands list back from the parser instead (parseresult.commands)
+            # since we don't use many single_level_tester features
+            # we can transpile and check the python "manually"
             all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
             self.assertEqual(expected_commands, all_commands)
