@@ -178,18 +178,18 @@ levels:
             mp_choice_options:
             -   option: |
                     Are you ready to go to level 2?
-                feedback: "There are two echo commands"
+                feedback: "There are two `{echo}` commands"
             -   option: |
                     Yes!
                     Yes!
                 feedback: "Great job!"
             -   option: |
                     Yes!
-                feedback: "There are two echo commands"
+                feedback: "There are two `{echo}` commands"
             -   option: |
                     Are you ready to go to level 2?
                     Yes!
-                feedback: "There are two echo commands"
+                feedback: "There are two `{echo}` commands"
             correct_answer: "B"
             hint: "Let's go!"
             question_score: '10'
@@ -2603,10 +2603,10 @@ levels:
                 feedback: "Alright!"
             -   option: |2
 
-                    ```
-                    flavors = 'vanilla, strawberry, chocolate'
-                    {print} 'I would like a ' flavors {at} {random} ' cake.'
-                    ```
+                      ```
+                      flavors = 'vanilla, strawberry, chocolate'
+                      {print} 'I would like a ' flavors {at} {random} ' cake.'
+                      ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
             hint: "The second line is the same in each code, pay attention to the first line"
