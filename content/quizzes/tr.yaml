@@ -1242,137 +1242,131 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: "How many lines can you repeat at once with the repeat command at this level?"
+            question_text: "Bu seviyede tekrarla komutu ile aynı anda kaç satırı tekrarlayabilirsiniz?"
             mp_choice_options:
             -   option: "0"
-                feedback: "No you can repeat a line."
+                feedback: "Hayır, bir satırı tekrar edebilirsin."
             -   option: "1"
-                feedback: "Correct, one line at a time"
-            -   option: "2"
-                feedback: "In this level only one line at a time"
-            -   option: "infinite"
-                feedback: "In this level you can only repeat one line at a time"
+                feedback: "Doğru, her seferinde bir satır"
+            -   option: "3"
+                feedback: "Bu seviyede her seferinde sadece bir satır"
+            -   option: "Sonsuz"
+                feedback: "Bu seviyede her seferinde sadece bir satırı tekrarlayabilirsiniz"
             correct_answer: "B"
-            hint: "You can only repeat 1 line at a time"
+            hint: "Her seferinde yalnızca bir satırı tekrarlayabilirsiniz"
             question_score: '10'
         2:
-            question_text: "Which code is right?"
+            question_text: "Hangi kod doğrudur?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 100 {times} 'hello'
+                    {print} 100 {times} 'merhaba'
                     ```
-                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'merhaba'"
             -   option: |
                     ```
-                    {print} {repeat} 100 {times} 'hello'
+                    {print} {repeat} 100 {times} 'merhaba'
                     ```
-                feedback: "{repeat} 100 {times} {print} 'hello'"
+                feedback: "{repeat} 100 {times} {print} 'merhaba'"
             -   option: |
                     ```
-                    {repeat} 'hello' 100 {times}
+                    {repeat} 'merhaba' 100 {times}
                     ```
-                feedback: "{repeat} 100 {times} {print} 'hello'"
+                feedback: "{repeat} 100 {times} {print} 'merhaba'"
             -   option: |
                     ```
-                    {repeat} 100 {times} {print} 'hello'
+                    {repeat} 100 {times} {print} 'merhaba'
                     ```
-                feedback: "That's right!"
+                feedback: "Bu doğru!"
             correct_answer: "D"
-            hint: "First the repeat command, then the `{print}` command"
+            hint: "Önce `{repeat}` komutu, ardından `{print}` komutu"
             question_score: '10'
         3:
-            question_text: "Is this code right or wrong?"
-            code: "{repeat} 100 {times} 'Hello!'"
+            question_text: "Bu kod doğru mu yoksa yanlış mı?"
+            code: "{repeat} 100 {times} 'Merhaba!'"
             mp_choice_options:
-            -   option: "Right"
-                feedback: "No, a word is missing"
-            -   option: "Wrong, the word `{repeat}` is missing"
-                feedback: "The word `{repeat}` is there, another word is missing"
-            -   option: "Wrong, the word `{times}` is missing"
-                feedback: "The word `{times}` is there, another word is missing."
-            -   option: "Wrong, the word `{print}` is missing"
-                feedback: "Correct"
+            -   option: "Doğru"
+                feedback: "Hayır, bir kelime eksik"
+            -   option: "Yanlış, `{repeat}` kelimesi eksik"
+                feedback: "`{repeat}` kelimesi var, başka bir kelime eksik"
+            -   option: "Yanlış, `{times}` kelimesi eksik"
+                feedback: "`{times}` kelimesi var, başka bir kelime eksik."
+            -   option: "Yanlış, `{print}` kelimesi eksik"
+                feedback: "Doğru"
             correct_answer: "D"
-            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            hint: "Şöyle olmalı: `{repeat}` 100 `{times}` `{print}` 'Merhaba'"
             question_score: '10'
         4:
-            question_text: "Which word is wrong in the code?"
+            question_text: "Kodda hangi kelime yanlıştır?"
             code: |-
-                {print} 'I'm blue'
+                {print} 'Ben mavi'yim.'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |
                     ```
-                    I'm
+                    mavi'yim
                     ```
-                feedback: "That's right!"
+                feedback: "Bu doğru!"
             -   option: |
-                    ```
-                    {print}
-                    ```
-                feedback: "`{print}` is spelled correctly"
+                    `{print}`
+                feedback: "`{print}` doğru yazılmıştır"
             -   option: |
-                    ```
-                    {repeat}
-                    ```
-                feedback: "`{repeat}` is spelled correctly"
+                    `{repeat}`
+                feedback: "`{repeat}` doğru yazılmıştır"
             -   option: |
-                    ```
-                    {times}
-                    ```
-                feedback: "`{times}` is spelled correctly"
+                    `{times}`
+                feedback: "`{times}` doğru yazılmıştır"
             correct_answer: "A"
-            hint: "I'm is wrong, you can't use apostrophes"
+            hint: "mavi'yim hatalıdır, cümle içinde kesme işareti kullanamazsın"
             question_score: '10'
         5:
-            question_text: "Is this code right or wrong?"
+            question_text: "Bu kod doğru mu yanlış mı?"
             code: |-
-                {repeat} 100 {times} {print} 'Hedy is awesome!'
+                {repeat} 100 {times} {print} 'Hedy harika!'
             mp_choice_options:
-            -   option: "Correct"
-                feedback: "That's right!"
-            -   option: "Wrong"
-                feedback: "That's not it"
+            -   option: "Doğru"
+                feedback: "Bu doğru!"
+            -   option: "Yanlış"
+                feedback: "Bu değil"
             correct_answer: "A"
-            hint: "The code is correct!"
+            hint: "Bu kod doğrudur!"
             question_score: '10'
         6:
-            question_text: "What will be the output from this code?"
+            question_text: "Bu kodun çıktısı ne olacaktır?"
             code: |-
-                {print} 'The wheels on the bus go'
-                {repeat} 3 {times} {print} ' round and round'
+                {print} 'Otobüsün tekerlekleri'
+                {repeat} 3 {times} {print} ' dönüyor ve dönüyor'
             mp_choice_options:
-            -   option: "the wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
-            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
-            -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
-                feedback: "Only the second line is repeated 3 times"
-            -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
-                feedback: "All though the town! Perfect!"
+            -   option: "Otobüsün tekerlekleri\n dönüyor ve dönüyor"
+                feedback: "Sadece ikinci satır 3 kez tekrarlanır"
+            -   option: "Otobüsün tekerlekleri\nOtobüsün tekerlekleri\nOtobüsün tekerlekleri\n dönüyor ve dönüyor"
+                feedback: "Sadece ikinci satır 3 kez tekrarlanır"
+            -   option: "Otobüsün tekerlekleri\n dönüyor ve dönüyor\nOtobüsün tekerlekleri\n dönüyor ve dönüyor\nOtobüsün tekerlekleri\n dönüyor ve dönüyor"
+                feedback: "Sadece ikinci satır 3 kez tekrarlanır"
+            -   option: "Otobüsün tekerlekleri\n dönüyor ve dönüyor\n dönüyor ve dönüyor\n dönüyor ve dönüyor"
+                feedback: "Tüm şehir boyunca! Mükemmel!"
             correct_answer: "D"
-            hint: "Only 'round and round' is repeated 3 times."
+            hint: "Sadece ' dönüyor ve dönüyor' 3 kez tekrarlanır."
             question_score: '10'
         7:
-            question_text: "What will be the output from this code?"
+            question_text: "Bu kodun çıktısı ne olacaktır?"
             code: |-
                 {repeat} 2 {times} {print} 'We will'
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: "We will We will\nROCK YOU!"
-                feedback: "'We will' won't appear twice in the same line"
+                feedback: "'We will' ifadesi aynı satırda iki kez yer almayacak"
             -   option: "We will\nWe will\nROCK YOU!"
-                feedback: "Great!"
+                feedback: "Harika!"
             -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
-                feedback: "ROCK YOU! won't be repeated"
+                feedback: "ROCK YOU! tekrarlanmayacak"
             -   option: "We will\nROCK YOU!"
-                feedback: "Mind the repeat command"
+                feedback: "Tekrarla komutuna dikkat edin"
             correct_answer: "B"
-            hint: "Mind the `{repeat}` command."
+            hint: "`{repeat}` komutuna dikkat edin."
             question_score: '10'
         8:
-            question_text: "Welke Hedy code hoort bij dit resultaat"
+            question_text: "Bu çıktı hangi Hedy koduna aittir?"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: |
@@ -1383,13 +1377,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Perfect, je kan het `{repeat}` commando hier niet gebruiken."
+                feedback: "Harika, burada `{repeat}` komutunu kullanacak satır yok."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
-                    {print} 'Its alright'"
-                feedback: "Waar is de 'Do do do do' gebleven?"
+                    {print} 'Its alright'
+                feedback: "'Do do do do!' nerede kaldı?"
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1397,332 +1391,332 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
+                feedback: "Bu doğru sıra değil."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {repeat} 2 {times} {print} 'Do do'
                     {print} 'And I say'
-                    {print} 'Its alright'"
+                    {print} 'Its alright'
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
-            hint: "`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
+                feedback: "Bu doğru sıra değil."
+            hint: "`{repeat}` yalnızca aynı satırı arka arkaya birden çok kez çalıştırmak istediğinizde kullanılabilir."
             correct_answer: "A"
             question_score: '10'
         9:
-            question_text: "Welke Hedy code hoort bij dit resultaat ?"
+            question_text: "Bu çıktı hangi Hedy koduna aittir?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Batman Gotham'da uçuyordu.
+                Birden birinin çığlık attığını duydu...
+                Yardım edin!
+                Yardım edin!
+                Yardım edin!
+                Lütfen bana yardım edin!
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} 'Batman Gotham'da uçuyordu.'
+                    {print} 'Birden birinin çığlık attığını duydu...'
+                    {print} 'Yardım edin!'
+                    {repeat} 3 {times} {print} 'Lütfen bana yardım edin!'
                     ```
-                feedback: "Je herhaalt de verkeerde regel"
+                feedback: "Tekrarladığınız satır yanlış."
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman Gotham'da uçuyordu.'
+                    {print} 'Birden birinin çığlık attığını duydu...'
+                    {repeat} 3 {times} 'Yardım edin!'
+                    {print} 'Lütfen bana yardım edin!'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "Satır 3'te `{print}` komutu eksik."
             -   option: |
                     ```
-                    {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {print} Batman Gotham'da uçuyordu.
+                    {print} Birden birinin çığlık attığını duydu...
+                    {repeat} 3 {times} {print} Yardım edin!
+                    {print} Lütfen bana yardım edin!
                     ```
-                feedback: "Je vergeet de aanhalingstekens"
+                feedback: "Tırnak işaretlerini unutuyorsun"
             -   option: |
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman Gotham'da uçuyordu.'
+                    {print} 'Birden birinin çığlık attığını duydu...'
+                    {repeat} 3 {times} {print} 'Yardım edin!'
+                    {print} 'Lütfen bana yardım edin!'
                     ```
-                feedback: "Perfect"
+                feedback: "Mükemmel"
             question_score: '10'
-            hint: "'Help !' wordt 3x herhaald."
+            hint: "\"Yardım edin!\" 3 kez tekrarlanıyor."
             correct_answer: "D"
         10:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Bu çıktı hangi koda aittir?"
             code: |-
-                if youre happy and you know it clap your hands
-                if youre happy and you know it clap your hands
-                if youre happy and you know it and you really want to show it
-                if youre happy and you know it clap your hands
+                mutluysanız ve bunu biliyorsanız ellerinizi çırpın
+                mutluysanız ve bunu biliyorsanız ellerinizi çırpın
+                eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız
+                mutluysanız ve bunu biliyorsanız ellerinizi çırpın
             mp_choice_options:
             -   option: |
                     ```
-                    {repeat} 2 {times} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
-                    {print} 'if youre happy and you know it clap your hands'
+                    {repeat} 2 {times} 'mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
+                    {print} 'mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
                     ```
-                feedback: "Almost! the first line needs an extra word"
+                feedback: "Neredeyse! İlk satırın fazladan bir kelimeye ihtiyacı var"
             -   option: |
                     ```
-                    {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
-                    {print} 'if youre happy and you know it clap your hands'
+                    {repeat} 2 {times} {print} 'mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
+                    {print} 'mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
                     ```
-                feedback: "Great!"
+                feedback: "Harika!"
             -   option: |
                     ```
-                    {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
+                    {repeat} 3 {times} {print} 'mutluysanız ve bunu biliyorsanız ellerinizi çırpın.'
+                    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
                     ```
-                feedback: "This is not in the right order."
+                feedback: "Bu doğru sırada değil."
             -   option: |
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'eğer mutluysan ve bunu biliyorsan'
+                    {repeat} 2 {times} 'ellerini çırp'
+                    {print} 've bunu gerçekten göstermek istiyorsan'
+                    {print} 'ellerini çırp'
                     ```
-                feedback: "This is not in the right order."
+                feedback: "Bu doğru sırada değil."
             correct_answer: "B"
-            hint: "Mind the order of the sentences."
+            hint: "Cümlelerin sırasına dikkat edin."
             question_score: '10'
     8:
         1:
-            question_text: "Which output will be produced by this code?"
+            question_text: "Bu kod hangi çıktıyı üretecektir?"
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} 'Merhaba'
+                    {print} 'Ben Hedy!'
             mp_choice_options:
-            -   option: "Hello\nIm Hedy!\n"
-                feedback: "Everything is printed twice."
-            -   option: "Hello\nHello\nIm Hedy\n"
-                feedback: "The second line is repeated twice as well."
-            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!\n"
-                feedback: "Super!"
-            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!\n"
-                feedback: "Everything is printed twice"
+            -   option: "Merhaba\nBen Hedy!\n"
+                feedback: "Her şey iki kez basılır."
+            -   option: "Merhaba\nMerhaba\nBen Hedy!\n"
+                feedback: "İkinci satır da iki kez tekrarlanmaktadır."
+            -   option: "Merhaba\nBen Hedy!\nMerhaba\nBen Hedy!\n"
+                feedback: "Süper!"
+            -   option: "Merhaba\nMerhaba\nBen Hedy!\nBen Hedy!\n"
+                feedback: "Her şey iki kez basılır"
             correct_answer: "C"
-            hint: "Both lines are repeated twice."
+            hint: "Her iki satır da iki kez tekrarlanır."
             question_score: '10'
         2:
-            question_text: "What is wrong with this code?"
+            question_text: "Bu kodun nesi var?"
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} 'Hedy havalı!'
             mp_choice_options:
-            -   option: "This should be only one line, not 2."
-                feedback: "No it should be 2 lines."
-            -   option: "This `{print}` command has to go"
-                feedback: "No, you need it."
-            -   option: "There is a spelling mistake in the `{repeat}` command."
-                feedback: "Nee, repeat is de goede spelling"
-            -   option: "The second line need to start with 4 spaces as indentation."
-                feedback: "Correct!"
+            -   option: "Bu sadece bir satırda olmalı, 2 değil."
+                feedback: "Hayır, iki satır olmalı."
+            -   option: "Bu `{print}` komutu kaldırılmalıdır."
+                feedback: "Hayır, ona ihtiyacın var."
+            -   option: "`{repeat}` komutunda bir yazım hatası var."
+                feedback: "Hayır, `{repeat}` doğru yazımdır"
+            -   option: "İkinci satırın girinti olarak 4 boşlukla başlaması gerekir."
+                feedback: "Doğru!"
             correct_answer: "D"
-            hint: "Something is missing in the second line?"
+            hint: "İkinci satırda eksik bir şey mi var?"
             question_score: '10'
         3:
-            question_text: "What output will be produced when you run this program?"
+            question_text: "Bu programı çalıştırdığınızda hangi çıktı üretilecek?"
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Baby shark tututudutudu'
-                {print} 'Baby shark'
+                    {print} 'Bebek köpekbalığı tututudutudu'
+                {print} 'Bebek köpekbalığı'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu\nBaby shark\n"
-                feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
-                feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
-                feedback: "Right!"
-            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
-                feedback: "What is being repeated and what isn't."
+            -   option: "Bebek köpekbalığı tututudutudu\nBebek köpekbalığı\n"
+                feedback: "`{repeat}` komutuna dikkat edin!"
+            -   option: "Bebek köpekbalığı tututudutudu\nBebek köpekbalığı\nBebek köpekbalığı tututudutudu\nBebek köpekbalığı\nBebek köpekbalığı tututudutudu\nBebek köpekbalığı\n"
+                feedback: "Son satırda girinti yok, bu yüzden tekrarlanmıyor."
+            -   option: "Bebek köpekbalığı tututudutudu\nBebek köpekbalığı tututudutudu\nBebek köpekbalığı tututudutudu\nBebek köpekbalığı\n"
+                feedback: "Doğru ya!"
+            -   option: "Bebek köpekbalığı tututudutudu\nBebek köpekbalığı\nBebek köpekbalığı\nBebek köpekbalığı\n"
+                feedback: "Neler tekrarlanıyor ve neler tekrarlanmıyor."
             correct_answer: "C"
-            hint: "What is being repeated and what is not?."
+            hint: "Neler tekrarlanıyor ve neler tekrarlanmıyor?"
             question_score: '10'
         4:
-            question_text: "Which output is correct?"
+            question_text: "Hangi çıktı doğru?"
             code: |-
-                {print} 'The children went:'
+                {print} 'Çocuklar sevindiler:'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} 'Yaşasın!'
+                    {print} 'Tatile çıkıyoruz!'
             mp_choice_options:
-            -   option: "The children went:\nYay!\nWere going on holiday!\n"
-                feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!\n"
-                feedback: "Correct!"
-            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!\n"
-                feedback: "This order is incorrect."
-            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\n"
-                feedback: "The last line is repeated too."
+            -   option: "Çocuklar sevindiler:\nYaşasın!\nTatile çıkıyoruz!\n"
+                feedback: "`{repeat}` komutuna dikkat edin!"
+            -   option: "Çocuklar sevindiler:\nYaşasın!\nTatile çıkıyoruz!\nYaşasın!\nTatile çıkıyoruz!\n"
+                feedback: "Doğru!"
+            -   option: "Çocuklar sevindiler:\nYaşasın!\nYaşasın!\nTatile çıkıyoruz!\nTatile çıkıyoruz!\n"
+                feedback: "Bu sıra yanlış."
+            -   option: "Çocuklar sevindiler:\nYaşasın!\nYaşasın!\nTatile çıkıyoruz!\n"
+                feedback: "Son satır da tekrarlanmaktadır."
             correct_answer: "B"
-            hint: "The block under the `{repeat}` command is repeated twice."
+            hint: "`{repeat}` komutunun altındaki blok iki kez tekrarlanır."
             question_score: '10'
         5:
-            question_text: "What is wrong with this code?"
+            question_text: "Bu kodun ne sorunu var?"
             code: |-
-                end = {ask} 'Do you want a happy or a sad ending?'
-                {if} end {is} happy {print} 'They lived happily ever after'
-                {else} {print} 'The world exploded. The end.'
+                son = {ask} 'Mutlu bir son mu yoksa hüzünlü bir son mu istiyorsunuz?'
+                {if} son {is} mutlu {print} 'Sonsuza kadar mutlu yaşadılar.'
+                {else} {print} 'Dünya patladı. Son.'
             mp_choice_options:
-            -   option: "The `{print}` commands on the last two lines should start on new lines en start with 4 spaces."
-                feedback: "That's right!"
-            -   option: "`{else}` is not a command!"
-                feedback: "It is!"
-            -   option: "Lines that start with `{if}` should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "`{ask}` is no longer a command"
-                feedback: "That's not true"
+            -   option: "Son iki satırdaki `{print}` komutları yeni satırlarda ve baştan 4 boşlukla başlamalıdır."
+                feedback: "Bu doğru!"
+            -   option: "`{else}` bir komut değildir!"
+                feedback: "Öyledir!"
+            -   option: "`{if}` ile başlayan satırlar 4 boşlukla başlamalıdır"
+                feedback: "Bu doğru değil"
+            -   option: "`{ask}` artık bir komut değil"
+                feedback: "Bu doğru değil"
             correct_answer: "A"
-            hint: "Something is wrong with indentation"
+            hint: "Girintilemede bir sorun var"
             question_score: '10'
         6:
-            question_text: "What will be the output of this code when we enter pancakes?"
+            question_text: "Cevabı \"Krep\" girdiğimizde bu kodun çıktısı ne olacaktır?"
             code: |-
-                {print} 'Welcome to restaurant Hedy'
+                {print} 'Hedy restoranına hoş geldiniz'
                 {repeat} 2 {times}
-                    food {is} {ask} 'What do you want to eat?'
-                    {print} food
+                    yemek {is} {ask} 'Ne yemek istersiniz?'
+                    {print} yemek
             mp_choice_options:
             -   option: |
-                    Welcome to restaurant Hedy
-                    Pancakes
-                feedback: "There is no repetition in this answer."
+                    Hedy restoranına hoş geldiniz
+                    Krep
+                feedback: "Bu cevapta hiç tekrarlama yok."
             -   option: |
-                    Welcome to restaurant Hedy
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: "This answer also repeats the welcome message"
+                    Hedy restoranına hoş geldiniz
+                    Hedy restoranına hoş geldiniz
+                    Krep
+                    Krep
+                feedback: "Bu yanıt karşılama mesajını da tekrarlıyor"
             -   option: |
-                    Welcome to restaurant Hedy
-                    What do you want to eat?
-                    What do you want to eat?
-                    Pancakes
-                    Pancakes
-                feedback: "Almost! But look at the question, it is not repeated."
+                    Hedy restoranına hoş geldiniz
+                    Ne yemek istersiniz?
+                    Ne yemek istersiniz?
+                    Krep
+                    Krep
+                feedback: "Neredeyse! Ama soruya bakın, tekrarlanmıyor."
             -   option: |
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: "Well done!"
+                    Hedy restoranına hoş geldiniz
+                    Krep
+                    Krep
+                feedback: "Aferin sana!"
             correct_answer: "D"
-            hint: "The first sentence and question will not be repeated"
+            hint: "İlk cümle ve soru tekrar edilmeyecektir"
             question_score: '10'
         7:
-            question_text: "What is wrong with this code?"
+            question_text: "Bu kodun ne sorunu var?"
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                yemek = {ask} 'Ne yemek istersiniz?'
+                {if} yemek {is} kızartma
+                sos = {ask} 'Hangi sosu istersiniz?'
+                    {print} 'Bir kızartma ve sos olarak ' sos
+                {if} yemek {is} pizza
+                    malzeme = {ask} 'Hangi malzemeyi istersiniz?'
+                    {print} 'Bir ' malzeme ' pizza'
+                {print} 'Siparişiniz için teşekkür ederiz'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
-                feedback: "Something is wrong!."
-            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
-            -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
-                feedback: "You always have to use indentation."
-            -   option: "The indentation is wrong in the first `{if}` command."
-                feedback: "That's right."
+            -   option: "Bir sorunu yok. Bu kod doğru!"
+                feedback: "Ama bir sorun var!"
+            -   option: "Bir `{ask}` komutundan sonra `{if}` komutunu kullanmanıza izin verilmez."
+                feedback: "İzin verilir!"
+            -   option: "İki kez girinti kullanmak zorunda değilsiniz. Sadece ilk `{if}` komutunda gerekir."
+                feedback: "Her zaman girinti kullanmanız gerekir."
+            -   option: "İlk `{if}` komutundan sonra girinti yanlış."
+                feedback: "Bu doğru."
             correct_answer: "D"
-            hint: "Take a careful look at the indentation."
+            hint: "Girintilere dikkatlice bakın."
             question_score: '10'
         8:
-            question_text: "In which of the codes is the indentation done right?"
+            question_text: "Kodlardan hangisinde girintileme doğru yapılmıştır?"
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} cevap {is} 32
+                       {print} 'Sen...'
+                          {sleep}
+                              {print} 'haklısın!'
                           {else}
-                              {print} You are wrong!
+                              {print} 'Yanılıyorsun!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Yanılıyorsun!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} cevap {is} 32
+                    {print} 'Sen...'
+                    {sleep}
+                    {print} 'haklısın!'
                     {else}
-                    {print} You are wrong!
+                    {print} 'Yanılıyorsun!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Yanılıyorsun!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} cevap {is} 32
+                        {print} 'Sen...'
+                        {sleep}
+                        {print} 'haklısın!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Yanılıyorsun!'
                     ```
-                feedback: "You are... right!"
+                feedback: "Sen... haklısın!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} cevap {is} 32
+                        {print} 'Sen...'
+                        {sleep}
+                    {print} 'haklısın!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Yanılıyorsun!'
                     ```
-                feedback: "You are wrong!"
+                feedback: "Yanılıyorsun!"
             correct_answer: "C"
-            hint: "What should happen if the person is right? And what else?"
+            hint: "Kişi haklıysa ne olmalıdır? Peki değilse ne olacak?"
             question_score: '10'
         9:
-            question_text: "What line(s) in this code should start with 4 spaces?"
+            question_text: "Bu koddaki hangi satır(lar) 4 boşlukla başlamalıdır?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                1 müzik = {ask} 'En sevdiğiniz müzik türü nedir?'
+                2 {if} müzik {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
             mp_choice_options:
-            -   option: "Line 2 and 4"
-                feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
-            -   option: "Only line 3"
-                feedback: "Not only 3..."
-            -   option: "Line 3, 4 and 5"
-                feedback: "Line 4 shouldn't"
-            -   option: "Line 3 and 5"
-                feedback: "Great job!"
+            -   option: "Satır 2 ve 4"
+                feedback: "`{if}` ve `{else}` komutlarından sonraki satırlar 4 boşlukla başlamalıdır"
+            -   option: "Sadece 3. satır"
+                feedback: "Sadece 3 değil..."
+            -   option: "Satır 3, 4 ve 5"
+                feedback: "Satır 4 olmamalı"
+            -   option: "Satır 3 ve 5"
+                feedback: "İyi işti!"
             correct_answer: "D"
-            hint: "The lines after an `{if}` or `{else}` command should start with 4 spaces."
+            hint: "Bir `{if}` veya `{else}` komutundan sonraki satırlar 4 boşlukla başlamalıdır."
             question_score: '10'
         10:
-            question_text: "Which statement is true?"
+            question_text: "Hangi ifade doğrudur?"
             code: |-
-                1 level = {ask} 'What level are you on?"
-                2 {if} level {is} 8
-                3 {print} Great job!
+                1 seviye = {ask} 'Hangi seviyedesin?'
+                2 {if} seviye {is} 8
+                3 {print} 'İyi işti!'
             mp_choice_options:
-            -   option: "All lines should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 2 and 3 should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 2 should start with 4 spaces"
-                feedback: "That's not true"
-            -   option: "Line 3 should start with 4 spaces"
-                feedback: "You are correct!"
+            -   option: "Tüm satırlar 4 boşlukla başlamalıdır"
+                feedback: "Bu doğru değil"
+            -   option: "Satır 2 ve 3'ün 4 boşlukla başlaması gerekir"
+                feedback: "Bu doğru değil"
+            -   option: "Satır 2'nin 4 boşlukla başlaması gerekir"
+                feedback: "Bu doğru değil"
+            -   option: "Satır 3'ün 4 boşlukla başlaması gerekir"
+                feedback: "Haklısın!"
             correct_answer: "D"
-            hint: "Only one line starts with 4 spaces, but which one...?"
+            hint: "Sadece bir satır 4 boşlukla başlıyor, ama hangisi...?"
             question_score: '10'
     9:
         1:

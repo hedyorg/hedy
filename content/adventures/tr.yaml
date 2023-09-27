@@ -238,21 +238,22 @@ adventures:
                     Bu seviyede gerçek Python koduna doğru biraz daha yakınlaşacağız. Ayrıca iki listeyi nasıl eşleştireceğinizi de öğreneceksiniz.
                     Bu şekilde, doğru hayvanın doğru sesle eşleştirildiği bir kod programlayabilirsiniz.
                     Çünkü aşağıdaki iki kod... açıkça saçmalıyorlar!
-                example_code: |
+                example_code: |-
                     ```
                     hayvanlar = 'tavuk', 'köpek', 'inek'
-                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    sesler = 'gıtgıdak', 'havhav', 'möö'
                     {for} hayvan {in} hayvanlar
                         {print} 'Bir ' hayvan ' ses çıkarıyor ' sesler {at} {random}
                     ```
-                    You could also try to make it work this way, but....
+                    Bu şu şekilde de deneyebilirdiniz, ama...
                     ```
                     hayvanlar = 'tavuk', 'köpek', 'inek'
-                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    sesler = 'gıtgıdak', 'havhav', 'möö'
                     {for} hayvan {in} hayvanlar
                         {for} ses {in} sesler
                             {print} 'Bir ' hayvan ' ses çıkarıyor ' ses
                     ```
+                    Not: Bu kodlar, bu bölümde bu haldeyken çalışmaz. Neresini düzelteceğinizi görmek için sonraki sekmeye gidin.
             17:
                 start_code: |-
                     {print} 'Hadi bir sonraki seviyeye geçelim!'

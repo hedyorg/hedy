@@ -318,18 +318,18 @@ sections:
                     In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
                 solution_code: |
                     order is ask What would you like to eat?
-        -   title: "Students try to use the echo command "
+        -   title: "Students try to use the `{echo}` command "
             example:
                 error_text: |
-                    For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
+                    For some students it might be frustrating to learn that the `{echo}` command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
                 error_code: |
-                    answer is ask Why doesn't echo work anymore?!
-                    echo
+                    answer {is} {ask} Why doesn't {echo} work anymore?!
+                    {echo}
                 solution_text: |
                     Use a varible instead.
                 solution_code: |
-                    answer is ask Why doens't echo work anymore?!
-                    print answer
+                    answer {is} {ask} Why doens't {echo} work anymore?!
+                    {print} answer
         -   title: "Students use a variable name or as a normal word"
             example:
                 error_text: |

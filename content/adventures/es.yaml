@@ -122,7 +122,7 @@ adventures:
             16:
                 start_code: "{print} '¡Vayamos a la siguiente pestaña!'"
                 story_text: "En este nivel creceremos un poco más hacia código real de Python. También aprenderás como hacer que dos listas coincidan.\nAsí puedes programar un código en el que el animal correcto coincide con el sonido correcto.\nPorque los dos código de abajo... !Obviamente no tienen sentido!\n"
-                example_code: "```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cacarear', 'relinchar', 'mugir'\n{for} animal {in} animales\n    {print} 'Un ' animal ' dice ' sonidos {at} {random}\n```\nTambién puedes intentar hacer que funcione de esta manera, pero....\n```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cacarear', 'relinchar', 'mugir'\n{for} animal {in} animales\n    {for} sonido {in} sonidos\n        {print} 'Un ' animal ' dice ' sonido\n```\n"
+                example_code: "```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cluck', 'neigh', 'moo'\n{for} animal {in} animales\n    {print} 'Un ' animal ' dice ' sonidos {at} {random}\n```\nTambién puedes intentar que funcione así, pero....\n```\nanimales = 'gallina', 'caballo', 'vaca'\nsonidos = 'cluck', 'neigh', 'moo'\n{for} animal {in} animales\n    {for} sonido {in} sonidos\n        {print} 'Un ' animal ' dice ' sonido\n```\nNota: Estos códigos no funcionarán así en este nivel. Dirígete a la siguiente pestaña para ver qué partes necesitas corregir."
             17:
                 start_code: "{print} '¡Vayamos al siguiente nivel!'"
                 story_text: "Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.\n\nEn este nivel también se puede utilizar un nuevo comando: `{ elif }`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.\n¡Compruébalo!\n"
@@ -1399,7 +1399,7 @@ adventures:
                 story_text: "## Variables\nPuedes nombrar una palabra con `{is}`. A esto se le llama **variable**. En este ejemplo creamos una variable llamada nombre y una variable llamada edad. Puedes usar la palabra nombre en cualquier parte de tu código y será reemplazada por Hedy, tal que así:\n"
                 example_code: "```\nnombre {is} Hedy\nedad {is} 15\n{print} nombre tiene edad años\n```\n"
                 story_text_2: "### Ejercicio\n¡Hora de crear tus propias variables!\nEn el código de ejemplo hicimos un ejemplo de la variable `favorite_animals`. En la línea 1 se crea la variable, y en la línea 2 usamos la variable en un comando `{print}`.\nLo primero de todo, termina nuestro ejemplo rellenando tu animal favorito en el hueco en blanco. Después haz 3 códigos como estos por ti mismo. Elige una variable, y establece la variable con el comando `{is}`. Entonces úsala con un comando `{print}`, como hicimos.\n"
-                example_code_2: "```\nanimales_favoritos es _\n{print} me gusta animales_favoritos\n```\n"
+                example_code_2: "```\nanimales_favoritos {is} _\n{print} me gusta animales_favoritos\n```\n"
                 start_code: "nombre {is} Hedy\nedad {is} 15\n{print} nombre tiene edad años"
             14:
                 start_code: "edad = {ask} '¿Cuántos años tienes?'\n{if} edad < 13\n    {print} '¡Eres más joven que yo!'\n{else}\n    {print} '¡Eres mayor que yo!'"
@@ -1513,7 +1513,7 @@ adventures:
         default_save_name: piedra_2
         levels:
             2:
-                story_text: "Ahora que has aprendido como usar el comando `{ask}, ¡también puedes hacer tu código interactivo de piedra, papel, tijeras!\n\n### Ejercicio\nHaz el código interactivo de piedra, papel, tijeras añadiendo el comando `{ask}` y una pregunta a tu código de piedra, papel, tijeras.\n"
+                story_text: "Ahora que has aprendido como usar el comando `{ask}`, ¡también puedes hacer tu código interactivo de piedra, papel, tijeras!\n\n### Ejercicio\nHaz el código interactivo de piedra, papel, tijeras añadiendo el comando `{ask}` y una pregunta a tu código de piedra, papel, tijeras.\n"
                 example_code: "```\nopción {is} _\n{print} Yo elijo opción\n```\n"
                 start_code: "# pon tu código aquí"
     harry_potter:

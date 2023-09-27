@@ -235,7 +235,7 @@ adventures:
                     In this level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
                     This way you can program a code in which the correct animal is matched to the right sound.
                     Because the two codes below... Are obviously nonsense!
-                example_code: |
+                example_code: |-
                     ```
                     animals = 'chicken', 'horse', 'cow'
                     sounds = 'cluck', 'neigh', 'moo'
@@ -250,6 +250,7 @@ adventures:
                         {for} sound {in} sounds
                             {print} 'A ' animal ' says ' sound
                     ```
+                    Note: These codes will not work like this in this level. Head to the next tab to see which parts you need to correct.
                 start_code: "{print} 'Lets go to the next tab!'"
             17:
                 story_text: |
@@ -405,12 +406,12 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a `{print}` command.
+                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
                     Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
 
                 example_code_2: |
                     ```
-                    favorite_animals is _
+                    favorite_animals {is} _
                     {print} I like favorite_animals
                     ```
                 start_code: |-
@@ -2059,7 +2060,7 @@ adventures:
                     {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
-                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -2175,7 +2176,7 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!
+                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interavtive too!
 
                     ### Exercise
                     Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
@@ -2386,7 +2387,7 @@ adventures:
                     ```
                 story_text_3: |
                     **Extra** You can also let the computer do random sums on its own using random.
-                    
+
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: "{print} 'Welcome to this calculator!'"
             9:
@@ -2473,7 +2474,7 @@ adventures:
                 story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
-                    
+
                     ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
