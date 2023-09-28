@@ -3564,25 +3564,33 @@ levels:
               {for} i {in} {range} 1 {to} 3
                   {print}  friends[i] has to do chores[i]
             mp_choice_options:
-            -   option_code: |
+            -   option: |
+                  ```
                   Wesley has to do the cooking
                   Eric has to do the cleaning
                   Kaylee has to do nothing
+                  ```
                 feedback: "Super!"
-            -   option_code: |
+            -   option: |
+                  ```
                   Kaylee has to do the cooking
                   Wesley has to do the cleaning
                   Eric has to do nothing
+                  ```
                 feedback: "No, it is not random."
-            -   option_code: |
+            -   option: |
+                  ```
                   Wesley has to do the cooking
                   Wesley has to do the cleaning
                   Wesley has to do the nothing
+                  ```
                 feedback: "Poor Wesley!"
-            -   option_code: |
+            -   option: |
+                  ```
                   Wesley has to do the cooking
                   Wesley has to do the cooking
                   Wesley has to do the cooking
+                  ```
                 feedback: "That's not it"
             correct_answer: "A"
             hint: "It's not random..."
