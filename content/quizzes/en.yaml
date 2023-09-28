@@ -3519,7 +3519,190 @@ levels:
             correct_answer: "A"
             hint: "You win the game by having the most points. Your name should appear on the screen"
             question_score: "10"
-
+    16:
+      1:
+            question_text: "Which command should be filled in on the blanks to print a random snack?"
+            code: |
+              snacks = nachos, chips, cucumber, sweets
+              {print} _
+            mp_choice_options:
+            -   option: "`snacks {at} {random}`"
+                feedback: "This is the old way."
+            -   option: "`[{random} snack]`"
+                feedback: "The order is wrong."
+            -   option: "`snacks[{random}]` "
+                feedback: "Correct"
+            -   option: "`snacks[{at} {random}]`"
+                feedback: "We do not need `at`anymore"
+            correct_answer: "C"
+            hint: "We no longer use {at}"
+            question_score: "10"
+      2:
+            question_text: "What should be filled in on the blanks if you want a list of what chores are done by whom?"
+            code: |
+              friends = ['Wesley', 'Eric', 'Kaylee']
+              chores = [the cooking, the cleaning, nothing]
+              {for} i {in} {range} 1 {to} 3
+                  {print}  _
+            mp_choice_options:
+            -   option: "friends[i] has to do chores [i]"
+                feedback: "Mind the spacing."
+            -   option: "friends[1] has to do chores[1]"
+                feedback: "It will print 3 times that Wesley has to do the cooking"
+            -   option: "chores[i] has to do friends[random]"
+                feedback: "The person has to do the chore, not the other way around"
+            -   option: "friends[i] has to do chores[i]"
+                feedback: "Fantastic!"
+            correct_answer: "D"
+            hint: "`i` tells us what item in the list it is. So friend 1 does chore 1 etc."
+            question_score: "10"
+      3:
+            question_text: "What is a possible output for this program"
+            code: |
+              friends = ['Wesley', 'Eric', 'Kaylee']
+              chore = [the cooking, the cleaning, nothing]
+              {for} i {in} {range} 1 {to} 3
+                  {print}  friends[i] has to do chores[i]
+            mp_choice_options:
+            -   option_code: |
+                  Wesley has to do the cooking
+                  Eric has to do the cleaning
+                  Kaylee has to do nothing
+                feedback: "Super!"
+            -   option_code: |
+                  Kaylee has to do the cooking
+                  Wesley has to do the cleaning
+                  Eric has to do nothing
+                feedback: "No, it is not random."
+            -   option_code: |
+                  Wesley has to do the cooking
+                  Wesley has to do the cleaning
+                  Wesley has to do the nothing
+                feedback: "Poor Wesley!"
+            -   option_code: |
+                  Wesley has to do the cooking
+                  Wesley has to do the cooking
+                  Wesley has to do the cooking
+                feedback: "That's not it"
+            correct_answer: "A"
+            hint: "It's not random..."
+            question_score: "10"
+      4:
+            question_text: "What is wrong with this code?"
+            code: |
+              friends = ['Jaylee', 'Erin', 'Fay']
+              lucky_numbers = [15, 18, 6]
+              {for} i {in} {range} 0 {to} 3
+                  print 'the lucky number of ' friends[i]
+                  print 'is ' lucky_numbers[i]
+            mp_choice_options:
+            -   option: "The variable in line 4 should be 'friend[i]', not 'friends[i]'"
+                feedback: "That is not right."
+            -   option: "Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'"
+                feedback: "Good catch!"
+            -   option: "Line 4 should say 'lucky_number', not 'lucky number"
+                feedback: "It's not a variable, it's just text. "
+            -   option: "{in} in line 3 should be removed"
+                feedback: "That's not it"
+            correct_answer: "B"
+            hint: "There's nothing wrong with line 4"
+            question_score: "10"
+      5:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
+      6:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
+      7:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
+      8:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
+    9:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
+      10:
+            question_text: "test"
+            code: |
+              test
+            mp_choice_options:
+            -   option: "test"
+                feedback: "That is not right."
+            -   option: "test"
+                feedback: "You don't have to keep guessing if you've given the right answer."
+            -   option: "test"
+                feedback: "Correct"
+            -   option: "test"
+                feedback: "That's not it"
+            correct_answer: "C"
+            hint: "test"
+            question_score: "10"
 # Empty format for a question to use later
 #        10:
 #            question_text:
