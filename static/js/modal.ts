@@ -233,24 +233,6 @@ export const error = {
     editor = e;
   },
 
-  // hide(fade: boolean = false) {
-  //   // Remove the fading immediately
-  //   $("#errorbox").stop().fadeOut();
-  //   $("#warningbox").stop().fadeOut();
-  //   $("#warningbox_spinner").stop().fadeOut();
-
-  //   if (!fade) {
-  //     $('#errorbox').hide();
-  //     $('#warningbox').hide();
-  //     $('#warningbox_spinner').hide();
-  //   } else {
-  //     $('#errorbox').fadeOut(2500);
-  //     $('#warningbox').fadeOut(2500);
-  //     $('#warningbox_spinner').fadeOut(2500);
-  //   }
-
-  //   editor?.resize();
-  // },
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
@@ -265,22 +247,20 @@ export const error = {
     editor?.resize(height);
   },
 
-  // showWarningSpinner(){
-  //   $('#warningbox_icon').hide();
-  //   $('#warningbox_spinner').show();
-  // },
-
-  // hideWarningSpinner(){
-  //   $('#warningbox_icon').show();
-  //   $('#warningbox_spinner').hide();
-  // },
-
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').html(message);    
     $('#errorbox').show();
     const height = computeEditorHeight('errorbox');
     editor?.resize(height);
+  },
+
+  showFadingWarning(caption: string, message: string) {
+    error.showWarning(caption, message);    
+    setTimeout(function(){
+      $('#warningbox').fadeOut();
+      editor?.resize(); 
+    }, 10000);
   }
 }
 

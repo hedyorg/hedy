@@ -334,7 +334,7 @@ adventures:
                 story_text_2: "### 연습문제\nThe calculator above will calculate the answer for you, but you can also make a program to test your own maths skills, like this:\nFill in the blanks to make it complete!\n"
                 example_code_2: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} _ {print} 'good job!'\n{else} {print} 'Wrong! It was ' _\n```\n"
                 start_code: "{print} 'Welcome to this calculator!'"
-                story_text_3: "\n    **Extra** You can also let the computer do random sums on its own using random.\n\n    This is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                story_text_3: "\n**Extra** You can also let the computer do random sums on its own using random.\n\n    This is how you choose a number of tables to practice, and from that you always get a different sum:\n"
             9:
                 story_text: "In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.\n\n### 연습문제 1\nCan you finish line 10 to make to program work?\n\n### 연습문제 2\nGive the player feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} _ {is} _\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
@@ -621,7 +621,7 @@ adventures:
             6:
                 story_text: "You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n\n### 연습문제\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw ' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are ' points ' points'\n```\n"
-                example_code_2: "\n    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                example_code_2: "\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: "You can also make a dice again in this level. With the `{repeat}` code you can easily roll a whole hand of dice.\n\n### 연습문제\nTry to finish the sample code!  **Extra** Think of a game you know that involves a dice and program that using a `{repeat}`.\n"
@@ -930,6 +930,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     clear_command:
         levels:
             4:

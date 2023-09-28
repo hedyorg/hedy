@@ -119,7 +119,7 @@ adventures:
                 story_text_2: "Kommandoen `{add}` kan også være nyttig i historien din.\n"
                 example_code_2: "```\n{print} Han hører en lyd\ndyrene {is} 🐿, 🦔, 🦇, 🦉\ndyret {is} {ask} Hva tror du det er?\n{add} dyret {to_list} dyrene\n{print} det var en dyrene {at} {random}\n```\n"
                 story_text_3: "Dette er et eksempel på `{remove}` kommandoen i historien din\n"
-                example_code_3: "```\n{print} Ryggsekken hans ble alt for tung.\n{print} Inni den var en vannflaske, en lommelykt og en murstein.\nryggsek {is} vannflaske, lommelykt, murstein\ndump {is} {ask} Hvilken ting skal han legge igjen?\n{remove} dump {from} ryggsekk\n```\n"
+                example_code_3: "```\n{print} Ryggsekken hans ble alt for tung.\n{print} Inni den var en vannflaske, en lommelykt og en murstein.\nryggsekk {is} vannflaske, lommelykt, murstein\ndump {is} {ask} Hvilken ting skal han legge igjen?\n{remove} dump {from} ryggsekk\n```\n"
                 start_code: '{print} Fortellingen din'
             15:
                 story_text: "Ved hjelp av `{while}` løkke kan man gjøre historier mer interessante. For eksempel kan du bruke `{while} spillet {is} 'i gang'`så du kan spille til spillet er over.\nEller så kan du bruke `{while} sverd {is} 'mistet'` så spilleren ikke kan fortsette før de har funnet noe.\n"
@@ -329,7 +329,7 @@ adventures:
                 story_text: "Har du problemer med å bestemme hva du vil ha til middag? Du kan la Hedy bestemme for deg!\nLag en liste over dine favorittmåltid og Hedy kan tilfeldig plukke ut en middag til deg.\nDu kan også ha litt gøy ved å la Hedy velge prisen for middagen også. Hva blir det til middag i dag?`\n"
                 example_code: "```\n{print} Velkommen til Hedys Tilfeldige Restaurant!\n{print} Den eneste restauranten som tilfeldig velger hva du får servert og hva det vil koste!\nforretter {is} salat, suppe, carpaccio\nhovedretter {is} pizza, rosenkål, spaghetti\ndesserter {is} brownies, iskrem, franske oster\ndrikker {is} cola, øl, vann\npriser {is} 10 kroner, 100 kroner, 1000 kroner\n{print} Du vil begynne med: forretter {at} {random}\n{print} Og så vil vi servere: hovedretter {at} {random}\n{print} Og til slutt: desserter {at} {random}\n{print} Til maten vil du få drikker {at} {random} å drikke\n{print} Det vil koste deg: priser {at} {random}\n{print} Takk og vel bekomme!\n```\n"
                 story_text_2: "Har dine gjester noen allergier eller noen retter de ikke liker? Da kan du bruke `{remove}`-kommandoen til å fjerne ting fra menyen.\n"
-                example_code_2: "```\n{print} Mysteriemilkshake\nsmaker {is} jordbær, sjokolader, vanilje\nallergier {is} {ask} Er du allergisk til en av smakene?\n{remove} allergier {from} smaker\n{print} Du vil få en flavors {at} {random} milkshake\n```\n"
+                example_code_2: "```\n{print} Mysteriemilkshake\nsmaker {is} jordbær, sjokolader, vanilje\nallergier {is} {ask} Er du allergisk til en av smakene?\n{remove} allergier {from} smaker\n{print} Du vil få en smaker {at} {random} milkshake\n```\n"
                 start_code: '# skriv koden din her'
             15:
                 story_text: "Med `{while}` kan du sørge for at kundene dine kan fortsette å bestille til de er ferdig.\n"
@@ -528,7 +528,7 @@ adventures:
                 story_text: "Hvor ofte må hver ta oppvasken? Er det rettferdig? Du kan telle det på dette nivået.\n"
                 example_code: "```\nfamilie = mamma, pappa, Emma, Sofie\nemma_vasker = 0\noppvasker = familie {at} {random}\n{print} 'Den som tar oppvasken er ' oppvasker\n{if} oppvasker {is} Emma emma_vasker = emma_vasker + 1\n{print} 'Emma tar oppvasken ' emma_vasker ' ganger denne uken'\n```\n\nDu kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.\nLager du koden for hele uken?\n"
                 story_text_2: "Om du er ekstremt uheldig så kan det forrige programmet velge deg til å gjøre oppvasken hele uken! Det er ikke rettferdig!\nFor å lage et mer rettferdig system så kan du bruke `{remove}`-kommandoen for å fjerne en gitt person fra listen. På denne måten trenger du ikke å ta oppvasken igjen før alle har tatt sin tur.\n\nMandag og tirsdag er klar for deg! Kan du legge til resten av uken?\nOg.. kan du komme på en løsning dersom listen er tom?\n"
-                example_code_2: "```\nfamilie = mamma, pappa, Emma, Sofie\noppvasker = familie {at} {random}\n{print} 'Mandag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = people {at} {random}\n{print} 'Tirsdag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = familie {at} {random}\n```\n"
+                example_code_2: "```\nfamilie = mamma, pappa, Emma, Sofie\noppvasker = familie {at} {random}\n{print} 'Mandag blir oppvasken tatt av: ' oppvasker\n{remove} oppvasker {from} familie\noppvasker = familie {at} {random}\n{print} 'Tirsdag blir oppvasken tatt av: ' oppvasker\n{remove} oppvasker {from} familie\noppvasker = familie {at} {random}\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             5:
                 story_text: "Med `{if}`kan du nå ha det mer gøy med valg i programmet. Du kan få programmet til å respondere med det valget maskinen har tatt.\n\nKan du fullføre koden så det skriver ut 'det var dumt' når det er din tur og 'jippi!' ellers?\nIkke glem fnutter!\n"
@@ -878,6 +878,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
         description: Introducing maths
         default_save_name: maths
     and_or_command:

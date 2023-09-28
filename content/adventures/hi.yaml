@@ -276,16 +276,16 @@ adventures:
                 example_code_2: |-
                     ```
                     {print} वह एक आवाज सुनता है
-                    जानवरों {is}🐿, 🦔, 🦇, 🦉
-                    जानवर {is} {ask} आपको क्या लगता है कि यह क्या है?
-                    {add} जानवर {to_list} जानवरों
+                    जानवरों {is} 🐿, 🦔, 🦇, 🦉
+                    जानवर_extra {is} {ask} आपको क्या लगता है कि यह क्या है?
+                    {add} जानवर_extra {to_list} जानवरों
                     {print} यह एक था जानवरों {at} {random}
                     ```
                 story_text_3: |-
                     यह आपकी कहानी में `{remove}` आदेश का एक उदाहरण है
                 example_code_3: |
                     ```
-                    {print} उनका बैग बहुत भारी हो गया था।
+                    {print} उनका बै ग बहुत भारी हो गया था।
                     {print} अंदर पानी की एक बोतल, एक टॉर्च और एक ईंट थी।
                     बैग {is} पानी, टॉर्च, ईंट
                     डंप {is} {ask} उसे कौन सी वस्तु गिराना चाहिए?
@@ -2396,6 +2396,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers।"
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
         name: maths
     elif_command:
         name: "{elif}"

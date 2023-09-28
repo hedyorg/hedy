@@ -494,7 +494,7 @@ adventures:
                 story_text_2: "Komenda `{add}` może się przydać w historyjce.\n"
                 example_code_2: "```\n{print} On słyszy odgłos\nzwierzęta {is} 🐿, 🦔, 🦇, 🦉\nzwierzę {is} {ask} Co to było?\n{add} zwierzę {to_list} zwierzęta\n{print} To był odgłos zwierzęta {at} {random}\n```\n"
                 story_text_3: "To jest przykład polecenia `{remove}` w twojej opowieści.\n\n### Ćwiczenie\nSkopiuj swoją opowieść z poprzednich poziomów na ten poziom.\nNa tym poziomie nauczyłeś się 3 nowych komend `{at} {random}`, `{add} {to}` i `{remove} {from}`.\nDodaj nowe wiersze kodu do swojej historii, aby wszystkie nowe polecenia znalazły się w niej przynajmniej raz.\n"
-                example_code_3: "```\n{print} Jego plecak stał się zbyt ciężki.\n{print} W środku była butelka wody, latarka i cegła.\nplecak {is} woda, latarka, cegła\nwyrzuc {is} {ask} Który przedmiot powinien wyrzucić?\n{remove} wyrzuc {from} plecak\n```\n"
+                example_code_3: "```\n{print} Jego stał się zbyt ciężki.\n{print} W środku była butelka wody, latarka i cegła.\nplecak {is} woda, latarka, cegła\nwyrzuc {is} {ask} Który przedmiot powinien wyrzucić?\n{remove} wyrzuc {from} plecak\n```\n"
                 start_code: '{print} Twoja histora'
             15:
                 story_text: "Przy użyciu pętli `{while}` możesz stworzyć jeszcze bardziej wciągające opowieści. Na przykład, możesz użyć `{while} gra {is} 'działa'` żeby kontynuować grę aż się zakończy.\nAlternatywnie możesz napisać `{while} miecz {is} 'zagubiony'` żeby nie pozwolić graczowi kontynuować zanim znajdą miecz.\n"
@@ -999,6 +999,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or

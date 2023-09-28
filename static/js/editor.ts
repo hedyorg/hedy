@@ -110,9 +110,14 @@ export interface HedyEditor {
   highlightError(row: number, col?: number): void;
 
   /**
+   * set incorrect line
+   */
+  setIncorrectLine(range: AceAjax.Range, lineIndex: number): void;
+
+  /**
    * Remove all incorrect lines markers
    */
-  // clearIncorrectLines(): void => for Skip Faulty
+  clearIncorrectLines(): void;
 
   /**
    * Set the current line in the debugger

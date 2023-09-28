@@ -304,9 +304,9 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Slyší zvuk
-                    zvirata {is} 🐿, 🦔, 🦇, 🦉
+                    zvířata {is} 🐿, 🦔, 🦇, 🦉
                     zvire {is} {ask} Co si myslíš, že to je?
-                    {add} zvire {to_list} zvirata
+                    {add} zvire {to_list} zvířata
                     {print} to byla zvířata {at} {random}
                     ```
                 story_text_3: |
@@ -978,6 +978,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     elif_command:
         default_save_name: elif
         levels:

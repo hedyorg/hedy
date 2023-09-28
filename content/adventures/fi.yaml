@@ -79,7 +79,7 @@ adventures:
                 story_text: "In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
                 example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} He now hears the sound of an animals {at} {random}\n```\n"
                 story_text_2: "The command `{add}` can also come in handy in your story.\n"
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animal {at} {random}\n```\n"
+                example_code_2: "```\n{print} He hears a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n\n### Exercise\nCan you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
             15:
@@ -806,6 +806,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     while_command:
         levels:
             15:

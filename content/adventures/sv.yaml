@@ -192,7 +192,7 @@ adventures:
                 story_text: "Sånger innehåller ofta många upprepningar. Ibland bygger upprepningarna också på räkning.\nTill exempel i den välkända sången 'Bottles of beer'. Du kan programmera den låten med lite matematik.\n\nTips: Använd funktionen för högläsning för att låta Hedy sjunga sången för dig!\n\n### Övning\nDu kan nu upprepa raderna 2 till 7 hur många gånger som helst genom att kopiera raderna.\n"
                 example_code: "```\nvers = 99\n{print} vers ' ölflaskor på väggen'\n{print} vers ' ölflaskor'\n{print} 'Ta en ner, skicka runt den'\nvers = vers - 1\n{print} vers ' ölflaskor på väggen'\n{sleep}\n```\n"
                 story_text_2: "Denna barnvisa räknar ner från fem små apor till en apa.\nOm du kopierar rad 2–7 och klistrar in dem under koden kan du sjunga hela sången!\n"
-                example_code_2: "```\nantal = 6\nantal = antal - 1\n{print} antal ' små apor som hoppar på sängen'.\n{print} 'En av dem ramla ner av och slog huvudet.'\n{print} 'Mamma ringde till doktorn och doktorn sa'\n{print} 'INGA FLER APOR SOM HOPPAR PÅ SÄNGEN!'\n{sleep}\n```\n"
+                example_code_2: "```\nantal = 6\nantal = antal - 1\n{print} antal ' små apor som hoppar på sängen.'\n{print} 'En av dem ramla ner av och slog huvudet.'\n{print} 'Mamma ringde till doktorn och doktorn sa'\n{print} 'INGA FLER APOR SOM HOPPAR PÅ SÄNGEN!'\n{sleep}\n```\n"
             7:
                 story_text: "Sånger innehåller ofta många upprepningar. Till exempel ... Baby Shark! Om du sjunger den sjunger du samma sak hela tiden:\n\nBaby Shark tututududutudu <br>\nBaby Shark tututududutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\n### Övning\nKan du skriva ut låten Baby Shark med `{repeat}`? Avsluta koden genom att ersätta tomrummen i koden?\n**Extra** Efter Baby Shark kan du naturligtvis också programmera andra låtar. Det finns många låtar med upprepning!\nKan du komma på en sång  tilloch skriva ut den?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n"
@@ -789,6 +789,15 @@ adventures:
                 start_code: "{print} 'decimaltal behöver nu använda en punkt'\n{print} 2.5 + 2.5"
                 story_text: "**Decimaltal**\nHittills har Hedy inte tillåtit decimaltal som 1.5, men nu tillåter vi det. Tänk på att datorer använder `.` för decimaltal."
                 example_code: "```\n{print} 'Två och en halv plus två och en halv är …'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     while_command:
         name: "{while}"
         description: så länge

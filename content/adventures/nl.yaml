@@ -1628,9 +1628,9 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             13:
-                story_text: |2
+                story_text: |
 
-                      ### Opdracht 1
+                    ### Opdracht 1
                     Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
                     ### Opdracht 2 (extra)
@@ -2845,18 +2845,25 @@ adventures:
                 example_code_2: "```\nnaam = Hedy\nantwoord = 20 + 4\n```\n"
             12:
                 story_text: |-
-                    **Rekenen met woorden**
-                    In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
+                    **Kommagetallen**
+                    Tot nu toe mocht je in Hedy geen kommagetallen gebruiken zoals 1.5, maar vanaf nu mag dat wel! Let op dat je een punt moet gebruiken in plaats van een komma. Kijk maar:
                 example_code: |
                     ```
+                    {print} 'Anderhalf plus anderhalf is...'
+                    {print} 1.5 + 1.5
+                    ```
+                start_code: |
+                    {print} 'Kommagetallen gebruiken een punt'
+                    {print} 2.5 + 2.5
+                story_text_2: |-
+                    **Rekenen met woorden**
+                    In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
+                example_code_2: |
+                    ```
                     a = 'Hallo '
                     b = 'wereld!'
                     {print} a + b
                     ```
-                start_code: |
-                    a = 'Hallo '
-                    b = 'wereld!'
-                    {print} a + b
         name: Rekenen
         description: Introducing maths
         default_save_name: maths

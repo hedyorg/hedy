@@ -75,9 +75,9 @@ adventures:
     story:
         levels:
             3:
-                example_code_3: "```\n{print} Njegov ranac je postao previše težak.\n{print} Unutra je bila flaša sa vodom, baterijska lampa i cigla.\nranac {is} vida, lampa, cigla\notpad {is} {ask} Šta bi iz torbe trebalo izbaciti?\n{remove} otpad {from} ranac\n```\n"
+                example_code_3: "```\n{print} Njegov je postao previše težak.\n{print} Unutra je bila flaša sa vodom, baterijska lampa i cigla.\nranac {is} vida, lampa, cigla\notpad {is} {ask} Šta bi iz torbe trebalo izbaciti?\n{remove} otpad {from} ranac\n```\n"
                 start_code: '{print} Tvoja priča'
-                example_code_2: "```\n{print} On čuje zvuk\nživotinje {is} 🐿, 🦔, 🦇, 🦉\nživotinja {is} {ask} Šta misliš da je to?\n{add} životinja {to_list} životinje\n{print} to je bila životinjal {at} {random}\n```\n"
+                example_code_2: "```\n{print} On čuje zvuk\nživotinje {is} 🐿, 🦔, 🦇, 🦉\nživotinja {is} {ask} Šta misliš da je to?\n{add} životinja {to_list} životinje\n{print} to je bila životinje {at} {random}\n```\n"
                 story_text: "U nivou 3 možeš osmisliti priču da bude još zanimljivija. Možeš odabrati bilo koje čudovište, životinju ili bilo koju drugu prepreku, ovako:\n"
                 example_code: "```\nživotinje {is} 🦔, 🐿, 🦉, 🦇\n{print} On sada cuje zvuk životinje {at} {random}\n```\n"
                 story_text_2: "Komanda `{add}` ti takodje može biti korisna u tvojoj priči.\n"
@@ -891,6 +891,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or

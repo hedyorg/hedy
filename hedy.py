@@ -5,7 +5,7 @@ from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, getenv
 
 import warnings
 import hedy
@@ -258,20 +258,20 @@ commands_per_level = {
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -357,6 +357,10 @@ def get_list_keywords(commands, to_lang):
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
+            if command == 'ifpressed':  # TODO: this is a bit of a hack
+                command = 'pressed'    # since in the yamls they are called pressed
+            if command == 'assign_button':  # but in the grammar 'ifpressed'
+                command = 'button'         # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
             except Exception:
@@ -978,40 +982,6 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class UsesTurtle(Transformer):
-    def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
-            return False
-        else:
-            return any(isinstance(c, bool) and c is True for c in children)
-
-    # returns true if Forward or Turn are in the tree, false otherwise
-    def forward(self, args):
-        return True
-
-    def color(self, args):
-        return True
-
-    def turn(self, args):
-        return True
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return False
-
-    def NAME(self, args):
-        return False
-
-    def NUMBER(self, args):
-        return False
-
-    def POSITIVE_NUMBER(self, args):
-        return False
-
-    def NEGATIVE_NUMBER(self, args):
-        return False
-
-
 class UsesPyGame(Transformer):
     command_prefix = (f"""\
 pygame_end = False
@@ -1022,21 +992,6 @@ while not pygame_end:
     pygame_end = True
     pygame.quit()
     break""")
-
-    def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
-            return False
-        else:
-            return any(isinstance(c, bool) and c is True for c in children)
-
-    def ifpressed(self, args):
-        return True
-
-    def ifpressed_else(self, args):
-        return True
-
-    def assign_button(self, args):
-        return True
 
 
 class AllCommands(Transformer):
@@ -1077,10 +1032,12 @@ class AllCommands(Transformer):
         # if we are matching a rule that is a command
         production_rule_name = self.translate_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
-        # for the achievements we want to be able to also detct which operators were used by a kid
+        # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
+            # ifpressed_else is not in the yamls, upsetting lookup code to get an alternative later
+            # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
             return [production_rule_name] + leaves
@@ -1118,48 +1075,6 @@ def all_commands(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
-
-
-class AllPrintArguments(Transformer):
-    def __init__(self, level):
-        self.level = level
-
-    def __default__(self, args, children, meta):
-        leaves = flatten_list_of_lists_to_list(children)
-
-        if args == 'print':
-            return children
-        else:
-            return leaves  # 'pop up' the children
-
-    def program(self, args):
-        return flatten_list_of_lists_to_list(args)
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return []
-
-    def NAME(self, args):
-        return []
-
-    def NUMBER(self, args):
-        return []
-
-    def POSITIVE_NUMBER(self, args):
-        return []
-
-    def NEGATIVE_NUMBER(self, args):
-        return []
-
-    def text(self, args):
-        return ''.join(args)
-
-
-def all_print_arguments(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level, lang)
-    program_root = parse_input(input_string, level, lang)
-
-    return AllPrintArguments(level).transform(program_root)
 
 
 @v_args(meta=True)
@@ -2710,7 +2625,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
@@ -2757,36 +2672,33 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=False):
+def transpile(input_string, level, lang="en", skip_faulty=True):
     """
     Function that transpiles the Hedy code to Python
 
-    The first time the client will try to execute the code without skipping faulty code
-    If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
+    The first time we try to transpile the code without skipping faulty code
+    If an exception is caught (the Hedy code contains faults) an exception is raised
 
-    The second time, after an Error is received by the client, the client will re-POST the code
-    with skipping faulty enabled, after that we either return the partially correct code or raise the original error
+    The second time, after the non-skipping approach raised an exception,
+    we try transpile the code with skipping faulty code, if skip_faulty is True.
+    After that either the partial program is returned or the original error
     """
 
-    if not skip_faulty:
-        try:
-            source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
-        except Exception as original_error:
-            source_map.exception_found_during_parsing = original_error  # store original exception
-            raise original_error
-    else:
-        original_error = source_map.exception_found_during_parsing
-        source_map.clear()
+    try:
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
 
-        if isinstance(original_error, source_map.exceptions_not_to_skip):
+    except Exception as original_error:
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
+            if isinstance(original_error, source_map.exceptions_not_to_skip):
+                raise original_error
+            try:
+                source_map.set_skip_faulty(True)
+                transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            except Exception:
+                raise original_error  # we could not skip faulty code, raise original exception
+        else:
             raise original_error
-
-        try:
-            source_map.set_skip_faulty(True)
-            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
-        except Exception:
-            raise original_error  # we could not skip faulty code, raise original exception
 
     return transpile_result
 
@@ -3011,12 +2923,23 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
+    def next_non_empty_line(lines, start_line_number):
+        if start_line_number > len(lines):
+            return ''  # end of code, return empty so that starts_with doesnt find anything
+        else:
+            for i in range(start_line_number + 1, len(lines)):
+                if lines[i] == '':
+                    continue
+                else:
+                    return lines[i]
+
+        return ''  # nothing found? return empty so that starts_with doesnt find anything
+
     for i in range(len(lines) - 1):
         line = lines[i]
-        next_line = lines[i + 1]
 
-        # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
             excluded_commands = ["pressed"]
@@ -3264,16 +3187,16 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
-        uses_turtle = UsesTurtle()
-        has_turtle = uses_turtle.transform(abstract_syntax_tree)
+        # note to self, we still parse twice, we can also pass all_commands the ast!
+        commands = all_commands(input_string, level, lang)
 
-        uses_pygame = UsesPyGame()
-        has_pygame = uses_pygame.transform(abstract_syntax_tree)
+        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
+        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame)
+        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
