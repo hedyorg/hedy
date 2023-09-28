@@ -831,9 +831,20 @@ adventures:
                 story_text: "## For\n이 레벨에서 우리는 `{for}`라는 새로운 코드를 배운다. `{for}`를 사용하면 목록을 만들고 모든 요소를 사용할 수 있다.\n`{for}`는 `{repeat}`와 `{if}`와 같은 블록을 생성하므로 블록의 모든 행은 4개의 공백으로 시작해야 한다."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: |-
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                story_text: |-
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                example_code: |
+                    ```
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                    ```
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "이제 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다 우리는 들여쓰기 앞 줄에 `:`가 필요하다.\n"
