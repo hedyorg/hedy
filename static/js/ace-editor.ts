@@ -3,6 +3,12 @@ import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } f
 import { EventEmitter } from "./event-emitter";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
+
+/**
+ * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
+ */
+const BP_DISABLED_LINE = 'ace_breakpoint';
+
 export class HedyAceEditorCreator implements HedyEditorCreator {
   /**
    * This function should initialize the editor and set up all the required
@@ -210,7 +216,7 @@ export class HedyAceEditor implements HedyEditor {
  * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
  * but can be something you pick yourself.
  */
-  getBreakpoints(): Breakpoints {
+  getDeactivatedLines(): Breakpoints {
     return this._editor.session.getBreakpoints() as unknown as Breakpoints;
   }
 
@@ -361,9 +367,24 @@ export class HedyAceEditor implements HedyEditor {
       .filter(([_, k]) => k === klass)
       .map(([id, _]) => id);
   }
+  public getActiveContents(debugLine: string | null): string {
+    let code = this._editor.session.getValue();
+    const breakpoints = this.getDeactivatedLines();
+    
+    if (code) {
+      let lines = code.split('\n');
+      if(debugLine != null){
+        lines = lines.slice(0, parseInt(debugLine) + 1);
+      }
+      for (let i = 0; i < lines.length; i++) {
+        if (breakpoints[i] == BP_DISABLED_LINE) {
+          lines[i] = '';
+        }
+      }
+      code = lines.join('\n');
+    }
   
-  public get session() {
-    return this._editor.session;
+    return code;
   }
 }
 

@@ -83,11 +83,6 @@ export interface HedyEditor {
   clearBreakpoints(): void;
 
   /**
-   * Returns the breakpoints as a map-to-css-class
-   */
-  getBreakpoints(): Breakpoints;
-
-  /**
    * An event handler for the HedyEditor 
    * @param key the event
    * @param handler  the event handler function
@@ -123,4 +118,11 @@ export interface HedyEditor {
    * Set the current line in the debugger
    */
   setDebuggerCurrentLine(line: number | undefined): void;
+  
+  /** 
+   * Return the contents of the lines that are active as a string, meaning they don't have a marker
+   * in the gutter. 
+   * @param debugLine the current debug line, if there is one
+   */
+  getActiveContents(debugLine?: string | null): string;
 }
