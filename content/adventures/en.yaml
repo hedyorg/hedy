@@ -1041,39 +1041,6 @@ adventures:
                     {print} 'SURPRISE!'
                     ```
 
-    functions_2:
-        name: "functions 2"
-        description: functions 2
-        default_save_name: functions_2
-        levels:
-            13:
-                story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could use multiple arguments in one function?
-                    And did you know you could combine them with {ask} commands as well?
-
-                    Here is an example of using multiple arguments combined with {ask} commands.
-                example_code: |
-                    ```
-                    define welcome_message with title, last_name, country
-                        print 'Welcome to Hotel Hedy, ' title ' ' last_name
-                        print 'We hope you have had a nice trip from ' country
-
-                    title = ask 'What is your title (mr, mrs, ms, dr, etc.)?'
-                    name = ask 'What is you last name?'
-                    homecountry = ask 'What country do you come from?'
-
-                    call welcome_message with title, name, homecountry
-                    ```
-                start_code: |
-                    define welcome_message with title, last_name, country
-                        print 'Welcome to Hotel Hedy, ' title ' ' last_name
-                        print 'We hope you have had a nice trip from ' country
-
-                    title = ask 'What is your title (mr, mrs, ms, dr, etc.)?'
-                    name = ask 'What is you last name?'
-                    homecountry = ask 'What country do you come from?'
-
-                    call welcome_message with title, name, homecountry
     functions:
         name: functions
         description: functions
@@ -1161,8 +1128,10 @@ adventures:
                     You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
 
                     For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-##                  Note to Felienne: Now i've used different words for the same amount (amount = old price, persentage = discount) because you could use different words. Is it better to use the same words?
 
+                    ## Exercise
+                    Finish this code. We have already made the variable new_price for you, you only need to set it.
+                    You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
                     ```
                     define calculate_new_price with amount, percentage
@@ -1172,10 +1141,12 @@ adventures:
 
                     old_price = ask 'How much is on the price tag?'
                     discount = ask 'What percentage is the discount?'
-                    new_price = call calculate_new_price with old_price, discount
-                    print 'The new price is ' new_price ' dollar'
+
+                    new_price = _
+                    print 'The new price is ' new_price 'dollar'
                     ```
                 start_code: |
+                    ```
                     define calculate_new_price with amount, percentage
                         percentage = percentage / 100
                         discount_amount = amount * percentage
@@ -1184,8 +1155,143 @@ adventures:
                     old_price = ask 'How much is on the price tag?'
                     discount = ask 'What percentage is the discount?'
 
-                    new_price = call calculate_new_price with old_price, discount
-                    print 'The new price is ' new_price ' dollar'
+                    new_price = _
+                    print 'The new price is ' new_price 'dollar'
+                    ```
+    functions_2:
+        name: "functions 2"
+        description: functions 2
+        default_save_name: functions_2
+        levels:
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                example_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
+                    ```
+                start_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
+                    ```
+            14:
+                story_text: |
+                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra feautues.
+
+                    ## Exercise 1
+                    Fill in the blanks to get the calculator to work.
+                    * Start with the fourth line, add a question to figure out what grade the student got.
+                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
+                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Lastly we finish the code by calling the function in line 8.
+
+                    Did you get it? Awesome!
+                example_code: |
+                    ```
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
+                    ```
+                start_code: |
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
+    functions_3:
+        name: "functions 3"
+        description: functions 3
+        default_save_name: functions_3
+        levels:
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
+                    You might have wondered why you would use functions, because the functions in the example were only one line of code.
+                    Now we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.
+                    Here is an example of a function with arguments combined with {ask} commands.
+                example_code: |
+                    ```
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
+                    ```
+                start_code: |
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
+            14:
+                example_code: |
+                    ```
+                    # Use your own code from the previous adventure.
+                    ```
+                start_code: |
+                    # Use your own code from the previous adventure.
+                story_text: |
+                    ## Exercise 2
+                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
+                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
+                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
+                    * Change the 4 in line 4 to the new argument amount_of_tests.
+                    * Lastly, change the 4 in line 6 to amount_of_tests
+
+                    Try out your new program. Does it work?
+
+                    ## Exercise 3
+                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
 
     story:
         name: "Story"
