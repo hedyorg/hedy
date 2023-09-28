@@ -141,6 +141,10 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 }
 
 function initializeBreakpoints(editor: HedyEditor) {
+  /**
+   * Both of these events listener only are executed for Ace
+   * CodeMirror doesn't need them
+   */
 
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
     const target = e.domEvent.target as HTMLElement;
@@ -183,16 +187,13 @@ function initializeBreakpoints(editor: HedyEditor) {
  * (Breakpoints mean "disabled lines" in Hedy).
  * */
   editor.on('changeBreakpoint', function() {
-    const breakpoints = theGlobalEditor.getBreakpoints();
-
-    const disabledLines = Object.entries(breakpoints)
-      .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-      .map(([line, _]) => line)
-      .map(x => parseInt(x, 10));
-    // This event handler will actually not be executed or attached
-    // If the editor is CodeMirror, so this won't be even executed
-    // This function only really makes sense in Ace
-      if (theGlobalEditor instanceof HedyAceEditor) {
+    if (theGlobalEditor instanceof HedyAceEditor) {
+      const breakpoints = theGlobalEditor.getDeactivatedLines();
+      const disabledLines = Object.entries(breakpoints)
+        .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
+        .map(([line, _]) => line)
+        .map(x => parseInt(x, 10));
+      
       theGlobalEditor.strikethroughLines(disabledLines);
     }
   });
@@ -286,10 +287,10 @@ export function incrementDebugLine() {
     : parseInt(debugLine, 10) + 1;
 
   storage.setItem("debugLine", nextDebugLine.toString());
-  markCurrentDebuggerLine();
-
   var lengthOfEntireEditor = theGlobalEditor.contents.split("\n").filter(e => e).length;
+
   if (nextDebugLine < lengthOfEntireEditor) {
+    markCurrentDebuggerLine();
     debugRun();
   } else {
     stopDebug();
@@ -308,30 +309,6 @@ function markCurrentDebuggerLine() {
   } else {
     theGlobalEditor.setDebuggerCurrentLine(undefined);
   }
-}
-
-export function returnLinesWithoutBreakpoints(editor: HedyEditor) {
-
-  // ignore the lines with a breakpoint in it.
-  let code = editor.contents;
-  const breakpoints = editor.getBreakpoints();
-  const storage = window.localStorage;
-  const debugLines = storage.getItem('debugLine');
-
-  if (code) {
-    let lines = code.split('\n');
-    if(debugLines != null){
-      lines = lines.slice(0, parseInt(debugLines) + 1);
-    }
-    for (let i = 0; i < lines.length; i++) {
-      if (breakpoints[i] == BP_DISABLED_LINE) {
-        lines[i] = '';
-      }
-    }
-    code = lines.join('\n');
-  }
-
-  return code;
 }
 
 /**
