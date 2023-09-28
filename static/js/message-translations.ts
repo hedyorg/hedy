@@ -277,7 +277,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "CheckInternet": "Have a look if your Internet connection is working properly.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "You made a mistake! Don't worry, we still ran the program",
     "Execute_error": "Something went wrong while running the program.",
     "Other_error": "Oops! Maybe we made a little mistake.",
     "Program_repair": "This could be the correct code, can you fix it?",

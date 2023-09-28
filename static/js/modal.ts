@@ -229,8 +229,6 @@ export const error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    $('#warningbox_spinner').hide();
-
     editor?.resize();
   },
   showWarning(caption: string, message: string) {
@@ -240,21 +238,19 @@ export const error = {
     editor?.resize();
   },
 
-  showWarningSpinner(){
-    $('#warningbox_icon').hide();
-    $('#warningbox_spinner').show();
-  },
-
-  hideWarningSpinner(){
-    $('#warningbox_icon').show();
-    $('#warningbox_spinner').hide();
-  },
-
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').html(message);
     $('#errorbox').show();
     editor?.resize();
+  },
+
+  showFadingWarning(caption: string, message: string) {
+    error.showWarning(caption, message);    
+    setTimeout(function(){
+      $('#warningbox').fadeOut();
+      editor?.resize(); 
+    }, 10000);
   }
 }
 
