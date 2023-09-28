@@ -2594,9 +2594,17 @@ adventures:
                 example_code: "```\nanimaux {is} chiens, chats, méduses\n{for} animal {in} animaux\n    {print} \"J'aime les \" animal\n```\n"
                 story_text: "## Pour\nÀ ce niveau nous apprenons une nouvelle commande appelée `{for}`. Avec `{for}` tu peux répéter quelque chose pour tous les éléments d'une liste\n`{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces devant toutes les lignes du bloc."
             11:
-                start_code: "{for} compteur {in} {range} 1 {to} 5\n    {print} compteur"
+                start_code: |-
+                    {for} compteur {in} {range} 1 {to} 10
+                        {print} compteur
+                    {print} 'Attention, j'arrive !!'
+                example_code: |
+                    ```
+                    {for} compteur {in} {range} 1 {to} 10
+                        {print} compteur
+                    {print} 'Attention, j'arrive !!'
+                    ```
                 story_text: "À ce niveau, nous ajoutons une nouvelle forme pour le `{for}`. Aux niveaux précédents, nous avons utilisé `{for}`avec une liste, mais nous pouvons aussi utiliser `{for}` avec des nombres.\nNous le faisons en ajoutant un nom de variable, suivi par `{in}``{range}`. Nous écrivons ensuite le nombre de départ, puis `{to}`, et enfin le nombre d'arrivé.\n\nEssaye l'exemple pour voir ce qui se passe ! À ce niveau aussi, tu devras utilise les indentations pour les lignes en dessous de l'instruction `{for}`."
-                example_code: "```\n{for} compteur {in} {range} 1 {to} 5\n    {print} compteur\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} \"Caché ou pas, j'arrive !\""
                 story_text: "Maintenant, nous allons un petit peu changer l'indentation. Chaque fois que nous avons une nouvelle indentation, nous devons ajouter `:` au début de la ligne précédente.\n"
