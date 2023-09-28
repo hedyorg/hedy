@@ -238,21 +238,22 @@ adventures:
                     Bu seviyede gerçek Python koduna doğru biraz daha yakınlaşacağız. Ayrıca iki listeyi nasıl eşleştireceğinizi de öğreneceksiniz.
                     Bu şekilde, doğru hayvanın doğru sesle eşleştirildiği bir kod programlayabilirsiniz.
                     Çünkü aşağıdaki iki kod... açıkça saçmalıyorlar!
-                example_code: |
+                example_code: |-
                     ```
                     hayvanlar = 'tavuk', 'köpek', 'inek'
-                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    sesler = 'gıtgıdak', 'havhav', 'möö'
                     {for} hayvan {in} hayvanlar
                         {print} 'Bir ' hayvan ' ses çıkarıyor ' sesler {at} {random}
                     ```
-                    You could also try to make it work this way, but....
+                    Bu şu şekilde de deneyebilirdiniz, ama...
                     ```
                     hayvanlar = 'tavuk', 'köpek', 'inek'
-                    sesler = 'gıtgıdak, 'havhav, 'möö'
+                    sesler = 'gıtgıdak', 'havhav', 'möö'
                     {for} hayvan {in} hayvanlar
                         {for} ses {in} sesler
                             {print} 'Bir ' hayvan ' ses çıkarıyor ' ses
                     ```
+                    Not: Bu kodlar, bu bölümde bu haldeyken çalışmaz. Neresini düzelteceğinizi görmek için sonraki sekmeye gidin.
             17:
                 start_code: |-
                     {print} 'Hadi bir sonraki seviyeye geçelim!'
@@ -2763,9 +2764,9 @@ adventures:
                 story_text: "Gerçek Python koduna ulaştık! Yani bu, bundan sonra `{print}` ve `{range}` ile beraber artık bir de parantez kullanmamız gerektiği anlamına geliyor.\nBu aynı zamanda İngilizce komutları kullandığınız sürece bu seviyedeki Hedy kodunu herhangi bir Python ortamında kullanabileceğiniz anlamına gelir. Şimdiye kadar kullanmadıysanız, bunu yapmak için komutlar menüsünden geçişi değiştirebilirsiniz."
                 example_code: "```\n{print}('Merhaba!')\n{for} i {in} {range}(1, 10):\n    {print}('Bu, satır ', i)\n```\n"
                 story_text_2: Birden fazla öğe yazdırmak istiyorsanız, bunları virgülle ayırmanız gerekir.
-                example_code_2: "```\nsıcaklık = 25\n{print}('Hava dışarıda ', temperature, ' derece')\n```\n"
+                example_code_2: "```\nsıcaklık = 25\n{print}('Hava dışarıda ', sıcaklık, ' derece')\n```\n"
                 story_text_3: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
-                example_code_3: "```\n{print}('Benim adım Hedy!')\nisim = {input}('Senin adın ne?')\n{print}('Demek senin ismin ', name)\n```\n"
+                example_code_3: "```\n{print}('Benim adım Hedy!')\nisim = {input}('Senin adın ne?')\n{print}('Demek senin ismin ', isim)\n```\n"
     ask_command:
         name: "{ask}"
         description: sor komutuna giriş
