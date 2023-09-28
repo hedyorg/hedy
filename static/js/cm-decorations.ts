@@ -92,7 +92,7 @@ const deactivateLineEffect = StateEffect.define<{pos: number, on: boolean}>({
     map: (val, mapping) => ({pos: mapping.mapPos(val.pos), on: val.on})
 });
 
-const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
+export const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
     create() { return RangeSet.empty },
     update(set, transaction) {
         set = set.map(transaction.changes)

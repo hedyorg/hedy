@@ -1,4 +1,4 @@
-import { HedyEditor, EditorType, Breakpoints, HedyEditorCreator, EditorEvent } from "./editor";
+import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent } from "./editor";
 import { basicSetup } from 'codemirror';
 import { EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
@@ -7,7 +7,8 @@ import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace } from '@codemirror/commands'
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
-    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, breakpointGutter
+    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
+    breakpointGutterState, breakpointGutter
 } from "./cm-decorations";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
@@ -208,16 +209,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // pass
     }
 
-    /**
-   * The '@types/ace' package has the type of breakpoints incorrect
-   *
-   * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
-   * but can be something you pick yourself.
-   */
-    getBreakpoints(): Breakpoints {
-        return {} as Breakpoints;
-    }
-
     getHighlighter(level: number): string {
         return `${level}`;
     }
@@ -294,5 +285,39 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         let effect: StateEffect<{row: number}>;
         effect = addDebugLine.of({row: line});
         this.view.dispatch({effects: effect});
+    }
+
+    getActiveContents(debugLine: string | null): string {
+        // Do nothing if the code is empty
+        const currentContent = this.view.state.doc.toString();
+        if (currentContent === '') {
+            return '';
+        }
+        const gutterMarkers = this.view.state.field(breakpointGutterState);
+        const deactivatedLines: number[] = []
+        let to: number;
+        let lines: string[];
+        if (debugLine === null) {
+            to = this.view.state.doc.length;
+            lines = currentContent.split('\n');
+        } else {
+            // After getting rid of Ace, we can start indexing debugLine 1-based
+            const currentDebugLine = parseInt(debugLine, 10) + 1;
+            to = this.view.state.doc.line(currentDebugLine).to;
+            lines = currentContent.split('\n').slice(0, currentDebugLine);
+        }
+        gutterMarkers.between(0, to, (from: number) => {
+            deactivatedLines.push(this.view.state.doc.lineAt(from).number);
+        });        
+        const resultingLines = [];
+        for (let i = 0; i < lines.length; i++) {
+            if (deactivatedLines.includes(i + 1)) {
+                resultingLines.push('');
+            } else {
+                resultingLines.push(lines[i]);
+            }
+        }
+        const code = resultingLines.join('\n');
+        return code;
     }
 }
