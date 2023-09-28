@@ -9,7 +9,7 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints } from './debugging';
+import { initializeDebugger, load_variables } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
@@ -1399,8 +1399,10 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-  theGlobalEditor.trimTrailingSpace()
-  return returnLinesWithoutBreakpoints(theGlobalEditor);
+  theGlobalEditor.trimTrailingSpace();
+  const storage = window.localStorage;
+  const debugLine = storage.getItem("debugLine");
+  return theGlobalEditor.getActiveContents(debugLine);
 }
 
 export function confetti_cannon(){
