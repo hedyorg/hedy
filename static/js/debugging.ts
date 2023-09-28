@@ -8,6 +8,32 @@ let theLanguage: string;
 //Feature flag for variable and values view
 let variable_view = false;
 let step_debugger = false;
+const fullLineCommands = [
+  'print',
+  'echo',
+  'assign',
+  'sleep',
+  'assign_list',
+  'add',
+  'remove',
+  'ask',
+  'command', // the turtle and clear commands get put in the source map as 'command'
+]
+
+const blockCommands = [
+  'ifs',
+  'ifelse',
+  'ifpressed_else',
+  'repeat',
+  'ifpressed',
+  'elses',
+  'ifpressed_elses',
+  'for_list',
+  'for_loop',
+  'while_loop',
+  'elifs',
+  'ifpressed_elifs',
+]
 
 /**
  * Add types for the gutter event
@@ -272,18 +298,34 @@ function clearDebugVariables() {
   }
 }
 
-export function incrementDebugLine() {
-  console.log('We are in increment debug line');
-  let active_suspension = theGlobalDebugger.get_active_suspension();
-  let lineNumber = active_suspension.$lineno;
-  for (let [_, statement] of Object.entries(theGlobalSourcemap)) {
-    const pythonLine = statement.python_range.from_line;
-    console.log(`Python Line ${pythonLine + 98 - 1}`);
-    console.log(`Debugger Line${lineNumber}`);
-    if (lineNumber == pythonLine + 98 - 1) {
-      theGlobalEditor.setDebuggerCurrentLine(statement.hedy_range.from_line - 1);
+export function incrementDebugLine() {  
+  const active_suspension = theGlobalDebugger.get_active_suspension();
+  const lineNumber = active_suspension.$lineno;
+  if (!lineNumber) return;
+  console.log('-'.repeat(40))
+  for (const [_, map] of Object.entries(theGlobalSourcemap)) {
+    const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
+    const finishingLine = map.python_range.to_line + theGlobalDebugger.get_code_starting_line();
+    // Maybe we hit the correct mapping for this line
+    if (lineNumber >= startingLine && lineNumber <= finishingLine) {
+      // Highlight whole line if it's a full command
+      if(fullLineCommands.includes(map.command)){
+        // lines in ace start at 0
+        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+        break;
+      } else if (theLevel >= 7 && blockCommands.includes(map.command)) { // these commands always come up in the tree
+        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+        break;
+        // const hedy_line = theGlobalEditor.contents.split('\n')[map.hedy_range.from_line - 1];
+        // // get the first non-blank space word
+        // // we can guarantee that this will always be non-null
+        // const first_word = hedy_line.match(/\S+/)![0];
+        // if (['repeat', 'while', 'for'].includes(first_word)) {
+        // }
+      }
     }
   }
+  console.log('-'.repeat(40))
 }
 
 function markCurrentDebuggerLine() {

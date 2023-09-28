@@ -28,6 +28,15 @@ Sk.Debugger = class {
         this.resolveCallback = null;
         this.rejectCallback = null;
         this.stop_callback = stop_callback;
+        this.code_starting_line = 0;
+    }
+
+    set_code_starting_line(code_starting_line) {
+        this.code_starting_line = code_starting_line;
+    }
+
+    get_code_starting_line() {
+        return this.code_starting_line;
     }
 
     set_program_data(program_data) {
@@ -294,8 +303,6 @@ Sk.Debugger = class {
             return Promise.resolve().then(this.stop_callback());
         } else {
             var promise = this.suspension_handler(this.get_active_suspension());
-            console.log(this.get_active_suspension().child);
-            console.log(this.get_active_suspension().child instanceof Sk.misceval.Suspension)
             return promise
         }
     }

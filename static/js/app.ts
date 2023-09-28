@@ -1065,7 +1065,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
       execLimit: null
     });
-    
+    console.log(code);
+    console.log(sourceMap);
     let lines = code.split('\n');
     for (let i = 0; i < lines.length; i++) {
       // lines with dummy variable name are not meant to be shown to the user, skip them.
@@ -1073,8 +1074,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // breakpoints are 1-indexed
         theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
       }
-    }    
-    
+    }
+
+    theGlobalDebugger.set_code_starting_line(code_prefix.split('\n').length - 1);
     theGlobalDebugger.set_code_lines(code.split('\n'));
     theGlobalDebugger.set_program_data({
       Code: code,
