@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     Willkommen bei  Hedy! In Level 1 kannst du anfangen eine Geschichte auszugeben.
 
-                    Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem Programmierfeld aus.
+                    Probiere den Code selbst mit der grünen Schaltfläche 'Programm ausführen' unter dem Programmierfeld aus.
 
                     Bereit? Dann gehe zum nächsten Tab um deinen ersten Befehl zu lernen!
                 start_code: "{print} Hallo Welt!"
@@ -381,7 +381,7 @@ adventures:
                     Füge neue Zeilen Code zu deiner Geschichte hinzu, sodass alle neuen Befehle mindestens ein Mal in deiner Geschichte vorkommen.
                 example_code_3: |
                     ```
-                    {print} Sein Rucksack wurde viel zu schwer.
+                    {print} Sein Ruck sack wurde viel zu schwer.
                     {print} Drinnen waren eine Flasche Wasser, eine Taschenlampe und ein Ziegelstein.
                     Rucksack {is} Wasser, Taschenlampe, Ziegelstein
                     rauswerfen {is} {ask} Welchen Gegenstand soll er rauswerfen?
@@ -1208,10 +1208,10 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
                 story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                      In this level we can enter lists and choose things from them.
-                      You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                      For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
 
                 example_code: |
                     ```
@@ -1580,21 +1580,20 @@ adventures:
                     In diesem Level kannst du Mathe verwenden um den Gesamtpreis einer Bestellung auszurechnen. Da macht dein virtuelles Restaurant realistischer.
 
                 example_code: |
-
-                      Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
-                      ```
-                      {print} 'Willkommen im Restaurant Chez Hedy'
-                      {print} 'Hier ist unsere Karte:'
-                      {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
-                      haupt = {ask} 'Welches Hauptgericht möchten Sie?'
-                      preis = 0
-                      {if} haupt {is} Pizza preis = 10
-                      {if} haupt {is} Lasagne preis = 12
-                      {if} haupt {is} Spaghetti preis = 8
-                      {print} 'Sie bestellten ' haupt
-                      {print} 'Das kostet ' preis ' Euro, bitte'
-                      {print} 'Danke, genießen Sie Ihre Mahlzeit!'
-                      ```
+                    Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
+                    ```
+                    {print} 'Willkommen im Restaurant Chez Hedy'
+                    {print} 'Hier ist unsere Karte:'
+                    {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
+                    haupt = {ask} 'Welches Hauptgericht möchten Sie?'
+                    preis = 0
+                    {if} haupt {is} Pizza preis = 10
+                    {if} haupt {is} Lasagne preis = 12
+                    {if} haupt {is} Spaghetti preis = 8
+                    {print} 'Sie bestellten ' haupt
+                    {print} 'Das kostet ' preis ' Euro, bitte'
+                    {print} 'Danke, genießen Sie Ihre Mahlzeit!'
+                    ```
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
@@ -1874,17 +1873,15 @@ adventures:
                     In diesem Level kannst du Variablen und den `{at} {random}` Befehl benutzen, um Hedy wirklich eine Antwort für dich auswählen zu lassen. Schau dir zum Beispiel diesen Code an:
 
                 example_code: |
-
-                      In diesem Beispiel kann die Spielerin Hedy eine Ja-Nein-Frage {ask} und Hedy wird eine zufällige Antwort für dich aussuchen.
-                      ```
-                      {print} Ich bin Hedy, die Wahrsagerin!
-                      Frage {is} {ask} Was würdest du gerne wissen?
-                      {print} Das würdest du gerne wissen: Frage
-                      Antworten {is} ja, nein, vielleicht
-                      {print} Meine Kristallkugel sagt...
-                      {sleep} 2
-                      {print} Antworten {at} {random}
-                      ```
+                    ```
+                    {print} Ich bin Hedy, die Wahrsagerin!
+                    Frage {is} {ask} Was würdest du gerne wissen?
+                    {print} Das würdest du gerne wissen: Frage
+                    Antworten {is} ja, nein, vielleicht
+                    {print} Meine Kristallkugel sagt...
+                    {sleep} 2
+                    {print} Antworten {at} {random}
+                    ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "### Übung\nBis hierhin konnte Hedy nur mit ja, nein oder vielleicht antworten. Kannst du Hedy mit zusätzlichen Antwortmöglichkeiten ausstatten, wie zum Beispiel 'auf jeden Fall' oder 'frag nochmal'?\n"
     haunted:
@@ -2390,15 +2387,11 @@ adventures:
         default_save_name: print
         levels:
             1:
-                story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"
-                story_text_2: "### Exercise\nIn Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.\nIn this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.\n\nFill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.\nHave fun!\n"
+                story_text: "## Der Drucken Befehl\nMit Hilfe des  `{print}`  Befehls kannst du den Text auf dem Bildschirm anzeigen.\n"
+                story_text_2: "### Übung\nIn Hedy findest du Übungen in jedem Abenteuer. Eine Übung erlaubt dir, neue Befehle und Konzepte zu üben und Beispielprogrammen deinen eigenen Schwung zu geben.\nIn dieser Übung wirst du eine pinke leere Fläche sehen. Du musst die leere Fläche mit etwas befüllen, bevor du das Programm ausführen kannst.\n\nFüge den `{print}`  Befehl in die leere Fläche ein und dann noch fünf weitere Codezeilen. Jede Zeile muss mit dem `{print}` Befehl beginnen.\nViel Spaß!\n"
                 example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n_ Hello!\n```\n"
                 start_code: "{print} Welcome to Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
@@ -2493,10 +2486,10 @@ adventures:
         default_save_name: ask_command
         levels:
             1:
-                story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
+                story_text: "## Der frage Befehl\nJetzt, wo du den  `{print}` Befehl verwenden kannst, bist du bereit, den nächsten Befehl zu lernen:  `{ask}`. Mit dem `{ask}` Befehl kannst du Fragen stellen. Probiere es aus:\n"
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## The echo command\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
-                story_text_3: "### Exercise\nTry out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.\nThen ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.\n"
+                story_text_2: "## Der echo Befehl\nWenn du möchtest, dass der Computer die Antwort für dich wiederholt, kannst du den `{echo}` Befehl verwenden. Beachte, dass die Antwort am Ende des Satzes wiederholt wird - also in diesem Beispiel nach hello.\n"
+                story_text_3: "### Übung\nProbiere die `{ask}` und `{echo}` Befehle aus. Zuerst fülle die Lücken, damit das Programm funktioniert.\nDann frage 2 weitere Fragen mit dem `{ask}` Befehl. Nach jedem `{ask}` benutze ein `{echo}` um die Antwort auf dem Bildschirm auszugeben.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
                 start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
@@ -2596,6 +2589,10 @@ adventures:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
                 story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
     maths:
         name: maths
         description: Introducing maths
@@ -2611,6 +2608,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or

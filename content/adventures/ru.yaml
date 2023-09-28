@@ -87,7 +87,7 @@ adventures:
         name: История
         levels:
             3:
-                example_code_2: "```\n{print} Он слышит звук\nживотные {is} 🐿, 🦔, 🦇, 🦉\nживотные {is} {ask} Как ты думаешь, что это?\n{add} животное {to_list} животные\n{print} это было животное {at} {random}\n```\n"
+                example_code_2: "```\n{print} Он слышит звук\nживотные {is} 🐿, 🦔, 🦇, 🦉\nживотное {is} {ask} Как ты думаешь, что это?\n{add} животное {to_list} животные\n{print} это было животные {at} {random}\n```\n"
                 story_text_3: "Вот пример команды `{remove}` в вашей истории\n\nМожете ли вы использовать 3 новые команды `{at} {random}`, `{add} {to}` и `{remove} {from}` в своей собственной истории?\n"
                 start_code: '{print} Ваша история'
                 story_text: "На уровне 3 вы можете сделать свою историю более увлекательной. Вы можете использовать случайность для любого монстра, животного или другого препятствия, например, так:\n"
@@ -201,13 +201,13 @@ adventures:
                 start_code: "{print} 'Кто моет посуду?'"
             5:
                 story_text: "С помощью сайта `{if}` вы можете получить больше удовольствия от выбора в программе. Вы можете сделать так, чтобы ваша программа реагировала на выбор, который сделал компьютер.\n\nМожете ли вы дописать код так, чтобы он печатал \"жаль\", когда наступает ваша очередь, а в противном случае - \"да!\"?\nНе забывайте о кавычках!\n"
-                example_code: "```\nлюди {is} мама, папа, Эмма, Софи\nпосудомоечная машина {is} люди {at} {random}\n{if} посудомоечная машина {is} Софи {print} _ слишком плохо, что я должна мыть посуду _ \n{else} {print} 'к счастью, посуды нет, потому что' _ 'уже моет посуду'\n```\n"
+                example_code: "```\nлюди {is} мама, папа, Эмма, Софи\nпосудомоечная_машина {is} люди {at} {random}\n{if} посудомоечная_машина {is} Софи {print} _ слишком плохо, что я должна мыть посуду _ \n{else} {print} 'к счастью, посуды нет, потому что' _ 'уже моет посуду'\n```\n"
                 start_code: "{print} 'Кто моет посуду?'"
             6:
                 story_text: "Как часто каждый будет мыть посуду? Справедливо ли это? Вы можете посчитать это на этом уровне.\n"
                 example_code: "```\nлюди = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = люди {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
                 story_text_2: "Если вам крайне не повезло, предыдущая программа может выбрать вас для мытья посуды на всю неделю! Это несправедливо!\nЧтобы создать более справедливую систему, вы можете использовать команду `{remove}`, чтобы удалить выбранного человека из списка. Таким образом, вам не придется снова мыть посуду до тех пор, пока все не отмоют свою очередь.\n\nПонедельник и вторник готовы! Можете ли вы добавить остальные дни недели?\nИ... можете ли вы придумать решение для случая, когда список пуст?\n"
-                example_code_2: "```\nлюди = мама, папа, Эмма, Софи\nпосудомоечная машина = люди {at} {random}\n{print} 'В понедельник посуду моет: ' посудомоечная машина\n{remove} посудомоечная машина {from} люди\nпосудомоечная машина = люди {at} {random}\n{print} 'Вторник посуду моет: ' посудомоечная машина\n{remove} посудомоечная машина {from} люди\nпосудомоечная машина = люди {at} {random}\n```\n"
+                example_code_2: "```\nлюди = мама, папа, Эмма, Софи\nпосудомоечная_машина = люди {at} {random}\n{print} 'В понедельник посуду моет: ' посудомоечная_машина\n{remove} посудомоечная_машина {from} люди\nпосудомоечная_машина = люди {at} {random}\n{print} 'Вторник посуду моет: ' посудомоечная_машина\n{remove} посудомоечная_машина {from} люди\nпосудомоечная_машина = люди {at} {random}\n```\n"
                 start_code: "{print} 'Кто моет посуду?'"
             7:
                 story_text: "На сайте `{repeat}` вы можете повторять фрагменты кода. С его помощью можно рассчитать, кто будет мыть посуду в течение всей недели.\n"
@@ -431,7 +431,7 @@ adventures:
                 example_code: "```\nстих = 99\n{print} стих ' бутылки пива на стене '\n{print} стих ' бутылки пива'\n{print} 'Возьми одну, передай по кругу'\nстих = стих - 1\n{print} стих ' бутылки пива на стене'\n{sleep}\n```\n"
                 start_code: "{print} 'Давай петь!'"
                 story_text_2: "Эта детская песенка отсчитывает время от 5 маленьких обезьянок до 1 обезьянки.\nЕсли вы скопируете строки 2 - 7 и вставите их под кодом, вы сможете спеть всю песню!\n"
-                example_code_2: "```\nчисло = 6\nчисло = число - 1\nprint number ' Маленькие обезьянки прыгают по кровати'\nprint 'Один упал и ударился головой'\nprint 'Мама позвонила доктору, и доктор сказал'\nprint 'Больше никаких обезьян, прыгающих на кровати!\nsleep\n```\n"
+                example_code_2: "```\nчисло = 6\nчисло = число - 1\nprint число ' Маленькие обезьянки прыгают по кровати'\nprint 'Один упал и ударился головой'\nprint 'Мама позвонила доктору, и доктор сказал'\nprint 'Больше никаких обезьян, прыгающих на кровати!'\nsleep\n```\n"
             7:
                 story_text: "Песни часто содержат много повторений. Например... Детеныш акулы! Если вы поете ее, вы продолжаете петь одно и то же:\n\nBaby Shark tututudutudu <br>\nBaby Shark tutututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nВы можете сделать эту песню намного короче с помощью `{repeat}`! Вы можете закончить код?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
@@ -797,10 +797,6 @@ adventures:
                 example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n_ Hello!\n```\n"
                 start_code: "{print} Welcome to Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
@@ -819,7 +815,7 @@ adventures:
             1:
                 story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## The echo command\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                story_text_2: "## The echo command\nIf you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.\n"
                 story_text_3: "### Exercise\nTry out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.\nThen ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
@@ -881,6 +877,15 @@ adventures:
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
@@ -1006,6 +1011,10 @@ adventures:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
                 story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or
