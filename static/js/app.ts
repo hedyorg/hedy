@@ -287,15 +287,11 @@ function attachMainEditorEvents(editor: HedyEditor) {
       const index = theGlobalEditor.indexOfErrorInPos(pos)
       if (index == null) {
         // Hide error, warning or okbox
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
+        error.hide();
       } else {
         // Show error for this line
         let mapError = theGlobalSourcemap[index];
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
+        error.hide();
         error.show(ClientMessages['Transpile_error'], mapError.error);
       }
     }
