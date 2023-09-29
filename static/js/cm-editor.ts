@@ -1,6 +1,6 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { basicSetup } from 'codemirror';
-import { Decoration, EditorView, ViewUpdate } from '@codemirror/view'
+import { EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
