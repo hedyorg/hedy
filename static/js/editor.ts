@@ -22,7 +22,8 @@ export interface SourceRange {
 export interface EditorEvent {
   readonly change: string;
   readonly guttermousedown: string;
-  readonly changeBreakpoint: string
+  readonly changeBreakpoint: string;
+  readonly click: string
 }
 
 export interface HedyEditorCreator {  
