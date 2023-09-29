@@ -17,7 +17,7 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyAceEditorCreator } from './ace-editor';
-import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from './cm-editor';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -279,6 +279,27 @@ function attachMainEditorEvents(editor: HedyEditor) {
     //removing the debugging state when loading in the editor
     stopDebug();
   });
+
+  editor.on('click', (event: MouseEvent) => {
+    if (theGlobalEditor instanceof HedyCodeMirrorEditor) {
+      const pos = theGlobalEditor.getPosFromCoord(event.x, event.y);
+      if (pos == null) return;
+      const index = theGlobalEditor.indexOfErrorInPos(pos)
+      if (index == null) {
+        // Hide error, warning or okbox
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+      } else {
+        // Show error for this line
+        let mapError = theGlobalSourcemap[index];
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+        error.show(ClientMessages['Transpile_error'], mapError.error);
+      }
+    }
+  })
 
   // *** KEYBOARD SHORTCUTS ***
 
