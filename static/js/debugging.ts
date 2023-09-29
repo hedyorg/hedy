@@ -23,7 +23,6 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-// TODO: not working with CodeMirror
 function hide_if_no_variables(){
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
