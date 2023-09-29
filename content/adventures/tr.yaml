@@ -2918,9 +2918,17 @@ adventures:
                 story_text: "## için\nBu seviyede `{for}` adında yeni bir kod öğreniyoruz. `{for}` ile bir liste oluşturabilir ve onun tüm öğelerini kullanabilirsiniz.\n`{for}`, `{repeat}` ve `{if}` gibi bir blok oluşturur, bu nedenle bloktaki tüm satırların 4 boşlukla başlaması gerekir."
                 example_code: "```\nhayvanlar {is} köpek, kedi, balık\n{for} hayvan {in} hayvanlar\n    {print} 'Benim sevdiğim ' hayvan\n```\n"
             11:
-                start_code: "{for} sayaç {in} {range} 1 {to} 5\n    {print} sayaç"
+                start_code: |-
+                    {for} sayaç {in} {range} 1 {to} 10
+                        {print} sayaç
+                    {print} 'önüm arkam sağım solum sobe!'
+                example_code: |
+                    ```
+                    {for} sayaç {in} {range} 1 {to} 10
+                        {print} sayaç
+                    {print} 'önüm arkam sağım solum sobe!'
+                    ```
                 story_text: "Bu seviyede, `{for}` in yeni bir şeklini ekliyoruz. Daha önceki seviyelerde `{for}` i bir liste ile kullanmıştık, ancak `{for}` ni sayılarla da kullanabiliriz.\nBunu bir değişken adı ve ardından `{in}` `{range}` ekleyerek yaparız. Daha sonra ilk başlanacak sayıyı, ardından `{to}`, ve sonra bitecek sayıyı yazıyoruz.\n\nNe olduğunu görmek için örneği deneyin! Bu seviyede de yine, `{for}` ifadelerinin altındaki satırlarda girintiler kullanmanız gerekecektir."
-                example_code: "```\n{for} sayaç {in} {range} 1 {to} 5\n    {print} sayaç\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'"
                 story_text: "Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.\n"

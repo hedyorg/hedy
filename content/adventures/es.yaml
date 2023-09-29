@@ -1603,9 +1603,17 @@ adventures:
                 story_text: "## Para\nEn este nivel aprendemos un nuevo código llamado `{for}`. Con `{for}` puedes hacer una lista y usar todos los elementos.\n`{for}` crea un bloque, como `{repeat}` y `{if}` así todas las líneas dentro del bloque necesita empezar con 4 espacios."
                 example_code: "```\nanimales {is} perro, gato, pez globo\n{for} animal {in} animales\n    {print} 'Yo amo ' animal\n```\n"
             11:
-                start_code: "{for} contador {in} {range} 1 {to} 5\n    {print} contador"
+                start_code: |
+                    {for} contador {in} {range} 1 {to} 10
+                        {print} contador
+                    {print} 'Listos o no, allí voy.'
                 story_text: "En este nivel, añadimos una nueva forma del `{for}`. En niveles anteriores, usamos `{for}` con una lista, pero también podemos usar `{for}` con números.\nEsto lo hacemos añadiendo un nombre de variable, seguido por `{in}` `{range}`. Entonces escribimos el número en el que empezar, `{to}` y el número en el que terminar.\n\n¡Prueba este ejemplo a ver qué pasa! Otra vez en este nivel, tendrás que usar sangrías en las líneas situadas debajo de las sentencias `{for}`."
-                example_code: "```\n{for} contador {in} {range} 1 {to} 5\n    {print} contador\n```\n"
+                example_code: |
+                    ```
+                    {for} contador {in} {range} 1 {to} 10
+                        {print} contador
+                    {print} 'Listos o no, allí voy.'
+                    ```
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} '¡Preparado o no, allá voy!'"
                 story_text: "Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos `:` en la línea antes de la sangría.\n"

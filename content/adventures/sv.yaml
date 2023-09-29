@@ -905,9 +905,17 @@ adventures:
                 story_text: "## För\nPå den här nivån lär vi oss ett nytt kommando som heter `{for}`. Med `{for}` kan du skapa en lista och gå igenom alla element.\n`{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste börja med fyra mellanslag."
                 example_code: "```\ndjur {is} hund, katt, marulk\n{for} djuret {in} djur\n    {print} 'Jag älskar ' djuret\n```\n"
             11:
-                start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
+                start_code: |-
+                    {for} räknare {in} {range} 1 {to} 10
+                        {print} räknare
+                    {print} 'Redo eller icke, nu kommer jag!'
+                example_code: |
+                    ```
+                    {for} räknare {in} {range} 1 {to} 10
+                        {print} räknare
+                    {print} 'Redo eller icke, nu kommer jag!'
+                    ```
                 story_text: "På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.\nDet gör vi genom att lägga till ett variabelnamn, följt av `{in}` `{range}`. Vi skriver sedan talet vi vill börja på, `{to}` och talet vi vill sluta på.\n\nProva exemplet för att se vad som händer! På den här nivån måste alltid använda indrag på raderna under `{for}`-satserna."
-                example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller inte, här kommer jag!'"
                 story_text: "Nu ska vi ändra reglerna för indragning lite. Varje gång vi behöver en indragning måste vi ha `:` på raden före indragningen.\n"
