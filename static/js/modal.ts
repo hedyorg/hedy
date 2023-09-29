@@ -240,6 +240,7 @@ export const error = {
     editor?.resize(height);
   },
   showWarning(caption: string, message: string) {
+    this.hide();
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
@@ -258,8 +259,12 @@ export const error = {
   showFadingWarning(caption: string, message: string) {
     error.showWarning(caption, message);    
     setTimeout(function(){
-      $('#warningbox').fadeOut();
-      editor?.resize(); 
+      $('#warningbox').fadeOut({
+        complete: () => {
+          const height = computeEditorHeight('warningbox');
+          editor?.resize(height);
+        }
+      });
     }, 10000);
   }
 }
@@ -281,6 +286,5 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
 function computeEditorHeight(boxId: string): number {
   const editorHeight = document.getElementById('editor')!.clientHeight;
   const boxHeight = document.getElementById(boxId)!.offsetHeight!;
-
   return editorHeight - boxHeight;
 }
