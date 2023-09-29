@@ -18,8 +18,8 @@ const deactivateLineEffect = StateEffect.define<{pos: number, on: boolean}>({
 });
 
 
-export const addIncorrectLineEffect = StateEffect.define<{from: number, to: number, id: number}>({
-    map: (val, maping) => ({from: maping.mapPos(val.from), to: maping.mapPos(val.to), id: val.id})
+export const addIncorrectLineEffect = StateEffect.define<{from: number, to: number}>({
+    map: (val, maping) => ({from: maping.mapPos(val.from), to: maping.mapPos(val.to) })
 });
 
 export const removeIncorrectLineEffect = StateEffect.define<void>();
