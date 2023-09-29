@@ -365,4 +365,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         incorrectLineSet.between(pos, pos, (from: number, to: number) => { index = this.incorrectLineMapping[`${from}-${to}`] });
         return index;
     }
+
+    hasIncorrectLinesDecorations(): boolean {
+        const incorrectLineSet = this.view.state.field(incorrectLineField);
+        let hasIncorrectLines = false;
+        incorrectLineSet.between(0, this.view.state.doc.length, () => { hasIncorrectLines = true });        
+        return hasIncorrectLines
+    }
 }

@@ -282,6 +282,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('click', (event: MouseEvent) => {
     if (theGlobalEditor instanceof HedyCodeMirrorEditor) {
+      if (!theGlobalEditor.hasIncorrectLinesDecorations()) return;
       const pos = theGlobalEditor.getPosFromCoord(event.x, event.y);
       if (pos == null) return;
       const index = theGlobalEditor.indexOfErrorInPos(pos)
