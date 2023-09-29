@@ -1,6 +1,6 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { basicSetup } from 'codemirror';
-import { EditorView, ViewUpdate } from '@codemirror/view'
+import { Decoration, EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
@@ -57,9 +57,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private editorEvent = new EventEmitter<EditorEvent>({
         change: true,
         guttermousedown: true,
-        changeBreakpoint: true
+        changeBreakpoint: true,
+        click: true
     });
     private currentDebugLine?: number;
+    private incorrectLineMapping: Record<string, number> = {};
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
         console.log(editorType, dir);
@@ -233,6 +235,12 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 }))
             })
             this.view.dispatch(transaction);
+        } else if (key === 'click') {
+            const eventHandler = EditorView.domEventHandlers({
+                click:  handler
+            });
+            const effect = StateEffect.appendConfig.of(eventHandler);
+            this.view.dispatch({effects: effect});
         }
     }
 
@@ -331,12 +339,30 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         let to = endLine.from + range.endColumn - 1;
         // Sometimes to exceeds the length of the line
         to = to > endLine.to ? endLine.to : to;
-        let effect = addIncorrectLineEffect.of({from, to, id: lineIndex});
+        this.incorrectLineMapping[`${from}-${to}`] = lineIndex;
+        let effect = addIncorrectLineEffect.of({from, to});
         this.view.dispatch({effects: effect});
     }
 
     clearIncorrectLines(): void {
+        this.incorrectLineMapping = {};
         const effect = removeIncorrectLineEffect.of();
         this.view.dispatch({effects: effect});
+    }
+
+    getPosFromCoord(x: number, y: number): number | null {
+        return this.view.posAtCoords({x, y});
+    }
+
+    /**
+     * Returns index of the error in the source map for this position
+     * null if there's no error here
+     * @param pos      
+     */
+    indexOfErrorInPos(pos: number): number | null {
+        const incorrectLineSet = this.view.state.field(incorrectLineField);
+        let index = null;
+        incorrectLineSet.between(pos, pos, (from: number, to: number) => { index = this.incorrectLineMapping[`${from}-${to}`] });
+        return index;
     }
 }
