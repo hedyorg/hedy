@@ -12,6 +12,13 @@ export enum EditorType {
 type EditorEventEmitter = EventEmitter<EditorEvent>;
 type OnEditorEventParameters = Parameters<EditorEventEmitter['on']>;
 
+export interface SourceRange {
+  readonly startLine: number;
+  readonly startColumn: number;
+  readonly endLine: number;
+  readonly endColumn: number;
+}
+
 export interface EditorEvent {
   readonly change: string;
   readonly guttermousedown: string;
@@ -112,7 +119,7 @@ export interface HedyEditor {
   /**
    * set incorrect line
    */
-  setIncorrectLine(range: AceAjax.Range, lineIndex: number): void;
+  setIncorrectLine(range: SourceRange, lineIndex: number): void;
 
   /**
    * Remove all incorrect lines markers

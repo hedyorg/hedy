@@ -16,8 +16,8 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
-import {  HedyCodeMirrorEditorCreator } from './cm-editor';
 import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -260,8 +260,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    theGlobalEditor.clearIncorrectLines();
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -276,6 +275,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
     askPromptOpen = false;
     $('#runit').css('background-color', '');
     theGlobalEditor.clearErrors();
+    theGlobalEditor.clearIncorrectLines();
     //removing the debugging state when loading in the editor
     stopDebug();
   });
@@ -822,15 +822,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (sourceMap){
     theGlobalSourcemap = sourceMap;
-    let Range = ace.require("ace/range").Range
-
     // We loop through the mappings and underline a mapping if it contains an error
     for (const index in sourceMap) {
       const map = sourceMap[index];
-      const range = new Range(
-        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-        map.hedy_range.to_line-1, map.hedy_range.to_column-1
-      )
+
+      const range = {
+        startLine: map.hedy_range.from_line,
+        startColumn: map.hedy_range.from_column,
+        endLine: map.hedy_range.to_line,
+        endColumn: map.hedy_range.to_column
+      }
 
       if (map.error != null) {
         skip_faulty_found_errors = true;

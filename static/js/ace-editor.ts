@@ -1,5 +1,5 @@
 import { theLevel } from "./app";
-import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } from "./editor";
+import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent, SourceRange } from "./editor";
 import { EventEmitter } from "./event-emitter";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
@@ -290,14 +290,20 @@ export class HedyAceEditor implements HedyEditor {
 
 
   /**
-   * Set incorrect line marker => Part of skip line feature
+   * Set incorrect line marker
    */
-  public setIncorrectLine(range: AceAjax.Range, lineIndex: number){
-    this.addMarker(range, `ace_incorrect_hedy_code_${lineIndex}`, "text", true);
+  public setIncorrectLine(range: SourceRange, lineIndex: number){
+    // Positions in Ace are 0-based
+    const aceRange = new ace.Range(
+      range.startLine - 1, range.startColumn - 1,
+      range.endLine - 1, range.endColumn - 1
+    );
+
+    this.addMarker(aceRange, `ace_incorrect_hedy_code_${lineIndex}`, "text", true);
   }
 
   /**
-   * Remove all incorrect lines markers => Part of skip line feature
+   * Remove all incorrect lines
    */
   public clearIncorrectLines() {
     const markers = this._editor.session.getMarkers(true);
