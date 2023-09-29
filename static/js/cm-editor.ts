@@ -1,4 +1,4 @@
-import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent } from "./editor";
+import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { basicSetup } from 'codemirror';
 import { EditorView, ViewUpdate } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
@@ -8,7 +8,9 @@ import { deleteTrailingWhitespace } from '@codemirror/commands'
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
     addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
-    breakpointGutterState, breakpointGutter
+    breakpointGutterState, breakpointGutter, addIncorrectLineEffect,
+    incorrectLineField,
+    removeIncorrectLineEffect
 } from "./cm-decorations";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
@@ -95,6 +97,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
                 debugLineField,
+                incorrectLineField,
                 Prec.high(decorationsTheme),
             ]
         });
@@ -319,5 +322,21 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         }
         const code = resultingLines.join('\n');
         return code;
+    }
+
+    setIncorrectLine(range: SourceRange, lineIndex: number): void {
+        const startLine = this.view.state.doc.line(range.startLine);
+        const endLine = this.view.state.doc.line(range.endLine);
+        const from = startLine.from + range.startColumn - 1;
+        let to = endLine.from + range.endColumn - 1;
+        // Sometimes to exceeds the length of the line
+        to = to > endLine.to ? endLine.to : to;
+        let effect = addIncorrectLineEffect.of({from, to, id: lineIndex});
+        this.view.dispatch({effects: effect});
+    }
+
+    clearIncorrectLines(): void {
+        const effect = removeIncorrectLineEffect.of();
+        this.view.dispatch({effects: effect});
     }
 }
