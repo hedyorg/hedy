@@ -319,18 +319,18 @@ sections:
                     Bu seviyede Hedy'ye cevabınızı nereye kaydedeceğinizi söylemeniz gerekir, böylece onu daha sonra kullanılabilirsiniz. Buna değişken denir.
                 solution_code: |
                     sipariş eşit sor Ne yemek istersiniz?
-        -   title: "Öğrenciler echo komutunu kullanmayı deniyor olabilirler "
+        -   title: "Öğrenciler `{echo}` komutunu kullanmayı deniyor olabilirler "
             example:
                 error_text: |
-                    Bazı öğrenciler için yankıla komutunun artık çalışmadığını öğrenmek biraz sinir bozucu olabilir. Bu yüzden değişken kullanmanın avantajlarını açıklamak çok önemlidir. Örneğin, bir kodda birden fazla değişken kullanabilir ve bunları bir cümle içinde istediğiniz yere koyabilirsiniz!
+                    Bazı öğrenciler için `{echo}` komutunun artık çalışmadığını öğrenmek biraz sinir bozucu olabilir. Bu yüzden değişken kullanmanın avantajlarını açıklamak çok önemlidir. Örneğin, bir kodda birden fazla değişken kullanabilir ve bunları bir cümle içinde istediğiniz yere koyabilirsiniz!
                 error_code: |
-                    cevap eşit sor yankıla neden artık çalışmıyor?!
-                    yankıla
+                    cevap {is} {ask} {echo} neden artık çalışmıyor?!
+                    {echo}
                 solution_text: |
                     Bunun yerine bir değişken kullanın.
                 solution_code: |
-                    cevap eşit sor yankı komutu neden artık çalışmıyor?!
-                    yazdır cevap
+                    cevap {is} {ask} {echo} komutu neden artık çalışmıyor?!
+                    {print} cevap
         -   title: "Öğrenciler bir değişken adını normal bir kelime gibi olarak kullanmaya çalışır"
             example:
                 error_text: |

@@ -267,10 +267,8 @@ adventures:
                     ```
             3:
                 start_code: print A te történeted
-                story_text: |2
-
-                    Hozzáadhatsz valami véletlenszerűt is a történetéhez. Bármilyen szörnyet, állatot vagy
-                    más akadályt.
+                story_text: |
+                    In level 3 you can make your story more fun. Hozzáadhatsz valami véletlenszerűt is a történetéhez. Bármilyen szörnyet, állatot vagy más akadályt.
 
                 example_code: |
                     ```
@@ -280,13 +278,13 @@ adventures:
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
 
-                example_code_2: |2
-
+                example_code_2: |
+                    ```
                     {print} He hears a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} What do you think it is?
                     {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} it was an animals {at} {random}
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
@@ -495,12 +493,10 @@ adventures:
                     ```
             4:
                 start_code: print 'Ki mosogat?'
-                story_text: |2-
-
+                story_text: |
                     Az idézőjelek segítségével szebbé teheted a mosogatás tervezését.
                     Ezúttal a minta kód nem egészen teljes.
-                    Ki tudod egészíteni a kódot a helyes parancsok vagy karakterek pontokra történő
-                    beírásával?
+                    Ki tudod egészíteni a kódot a helyes parancsok vagy karakterek pontokra történő beírásával?
                     Minden üres helyet egy paranccsal kell kicserélni.
                     Tipp: Ne felejtsd el az idézőjeleket.
                 example_code: |-
@@ -981,8 +977,7 @@ adventures:
                     Szórakozhatsz egy kicsit, ha hagyod, hogy Hedy megválassza a vacsora árát is! Mit fogsz kapni?
 
 
-                example_code: |2-
-
+                example_code: |
                     ```
                     print Üdvözöljük a Hedy's Random étteremben!
                     print Az egyetlen étterem amely véletlenszerűen kiválasztja az étkezést és annak árát az Ön számára!
@@ -1195,7 +1190,7 @@ adventures:
         default_save_name: Jósnő
         levels:
             1:
-                start_code: print Szia, Hedy, a jósnő vagyok!
+                start_code: '# place your code here'
                 story_text: |-
                     Voltál már fesztiválon, és egy jósnő megjósolta a jövődet? Vagy játszottál már varázslatos nyolc labdával?
                     Akkor valószínűleg tudod, hogy nem igazán tudják megjósolni a jövődet, de ettől még szórakoztató játszani!
@@ -1219,23 +1214,21 @@ adventures:
                 story_text_2: "### Exercise\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
             8:
                 start_code: |-
-                    print 'Hedy a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést.'
+                    # place your code here
                 story_text: |-
                     Az 5. szinten megtanultad, hogyan kell használni az ismétlést, hogy a jósnő 3 kérdésre válaszoljon egymás után, de problémánk adódott a kérdések kiíratásával.
                     A 7. szinten ez a probléma megoldódott az ismétlés parancs új módjának köszönhetően.
                     A következő példában a jósnő 3 kérdést tehet fel, és kiírathatja őket!
 
-                example_code: |2-
-
+                example_code: |
                     ```
                     print 'Hedy a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést.'
                     valasz is igen, nem, talán
                     repeat 3 times
-                       kerdes is ask 'Mit akarsz tudni?'
-                       print kerdes
-                       print 'A kristálygömböm azt mondja...' valasz at random
+                        kerdes is ask 'Mit akarsz tudni?'
+                        print kerdes
+                        print 'A kristálygömböm azt mondja...' valasz at random
                     ```
             7:
                 story_text: |-
@@ -1251,10 +1244,8 @@ adventures:
 
                     A 7. szinten az ismétlés parancs elrendezése megváltozik, ami lehetővé teszi több sor ismétlését egyszerre.
                 start_code: |-
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést!'
-                example_code: |2-
-
+                    # place your code here
+                example_code: |
                     ```
                     print 'Hedy, a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést!'
@@ -1268,10 +1259,8 @@ adventures:
                     Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
 
                 start_code: |-
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
-                example_code: |2-
-
+                    # place your code here
+                example_code: |
                     ```
                     print 'Hedy, a jósnő vagyok!'
                     print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
@@ -1310,9 +1299,8 @@ adventures:
                     Ezeb az elven különféle programokat lehet készíteni, csak légy kreatív! Például létrehozhatsz egy olyan gépet, amely megjósolja, hogy kedvenc sportcsapatod legyőzi az összes versenytársat!
                     Vagy elkészítheted Hófehérke varázslatos tükrét a falon, hogy elmondd mindenkinek, hogy te vagy a legbecsületesebb!
                     Hagyd, hogy a fantáziád végezze a munkádat!
-                start_code: print 'Szia, Hedy, a jósnő vagyok!'
-                example_code: |2-
-
+                start_code: '# place your code here'
+                example_code: |
                     ```
                     print 'Szia, Hedy, a jósnő vagyok'
                     print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
@@ -1320,7 +1308,7 @@ adventures:
                     if szemely is Hedy print 'Bizonyosan nyerni fogsz!' else print 'Balszerencse! Valaki más nyer!'
                     ```
             4:
-                start_code: print 'Szia, Hedy, a jósnő vagyok!'
+                start_code: '# place your code here'
                 story_text: |-
                     A 3. szint nem tartalmaz új funkciókat, de lehetővé teszi az idézőjelek használatának gyakorlását.
                     Újra elkészítheted a 2. szintű kódot, és ügyelj arra, hogy az idézőjeleket a megfelelő helyre írd!
@@ -1330,8 +1318,7 @@ adventures:
 
                     Fontos! Ne feledd, hogy most, amikor idézőjeleket használunk, Hedy összezavarodik, amikor az aposztrófot más szövegösszefüggésben használod.
 
-                example_code: |2-
-
+                example_code: |
                     ```
                     print 'Szia, Hedy, a jósnő vagyok!'
                     kerdes is ask 'Mit akarsz tudni?'
@@ -1400,8 +1387,7 @@ adventures:
 
 
                 start_code: print 'Szabadulj ki a kísértetházból'
-                example_code: |2-
-
+                example_code: |
                     ```
                     print 'Szabadulj ki a kísértetházból'
                     jatekos is elo
@@ -1440,12 +1426,12 @@ adventures:
                     if valasztottajto is helyesajto print 'Nagyszerű! Kiszabadultál!'
                     else print 'Jaj ne! Megevett a ...' szornyek at random
                     ```
-                start_code: print 'Szabadulj ki a kísértetházból'
+                start_code: '# place your code here'
             4:
                 story_text: |-
                     A 3. szinten megtanulod használni az idézőjeleket a játékaidban.
                     Át tudod alakítani a kisértetház játékot úgy, hogy megfeleljen a 3. szintnek?
-                start_code: print 'Szabadulj ki a kísértetházból'
+                start_code: '# place your code here'
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
             3:
                 story_text: |-
@@ -1459,7 +1445,7 @@ adventures:
 
                     Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
                     Meg tudod csinálni?
-                start_code: print 'Szabadulj ki a kísértetházból'
+                start_code: '# place your code here'
                 example_code: "```\n_ Escape from the haunted house!\n_ There are 3 doors in front of you...\n_ _ _ Which door do you choose?\n_ You picked door ... choice\nmonsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED\n_ You see...\n{sleep}\n_ _ _ _\n```\n"
             14:
                 story_text: "In this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
@@ -1709,6 +1695,10 @@ adventures:
                 example_code_3: "```\nanswer {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Great job!'\n_ _ 'No 2 + 2 = 4'\n```\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
         default_save_name: if_command
         name: "{if} & {else}"
         description: Introducing the if command
@@ -1797,9 +1787,7 @@ adventures:
         levels:
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
@@ -1882,6 +1870,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
