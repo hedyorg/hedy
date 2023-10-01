@@ -1,7 +1,9 @@
 #!/bin/bash
 # Run pylint against all Python code
 
-# TODO Do we still need this with flake8 in place?
+# TODO - JW 2023-10-03 for PR #4574
+# Do we still need this with flake8 in place?
+
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir/../..
