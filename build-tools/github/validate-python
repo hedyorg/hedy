@@ -1,5 +1,7 @@
 #!/bin/bash
 # Run pylint against all Python code
+
+# TODO Do we still need this with flake8 in place?
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir/../..
