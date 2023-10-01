@@ -1,0 +1,24 @@
+# We enforce coding standards locally via a pre-commit hook.
+#
+# By using the pre-commit github action, we can re-use all of that logic
+# and have identical checks in Github Actions as we have locally.
+#
+# There is then no need to run e.g. the flake8 linter with a manually
+# created github workflow.
+#
+# Any new linters/autoformatters should be configured in the file
+# .pre-commit-config.json
+#
+# This was rewritten when we introduced the yaml rewriter for the /content/
+# directory.
+
+name: linting and autoformatting
+
+on: [push, pull_request]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pre-commit/action@v3.0.0

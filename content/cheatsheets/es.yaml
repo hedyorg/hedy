@@ -1,129 +1,149 @@
 1:
--   name: "{print}"
-    explanation: "Imprime algo con `{print}`."
-    demo_code: "{print} ¡Hola bienvenido a Hedy!"
--   name: "{ask}"
-    explanation: "Pregunta algo con `{ask}`."
-    demo_code: "{ask} ¿Cuál es tu color favorito?"
--   name: "{echo}"
-    explanation: "Repite algo usando `{echo}`."
+-   name: '{print}'
+    explanation: Imprime algo con `{print}`.
+    demo_code: '{print} ¡Hola bienvenido a Hedy!'
+-   name: '{ask}'
+    explanation: Pregunta algo con `{ask}`.
+    demo_code: '{ask} ¿Cuál es tu color favorito?'
+-   name: '{echo}'
+    explanation: Repite algo usando `{echo}`.
     demo_code: |-
         {ask} ¿Cuál es tu color favorito?
         {echo} entonces tu color favorito es
--   demo_code: '{print} 🙋 🌍 ❗'
-    name: '{print} emojis'
+-   name: '{print} emojis'
     explanation: Imprime un emoji con `{print}`.
+    demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    demo_code: '{forward} 100'
     explanation: Dibuja una línea con `{forward}`.
--   explanation: Gira la tortuga de dibujo con `{turn}`.
-    name: '{turn}'
-    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: Gira la tortuga de dibujo con `{turn}`.
+    demo_code: |-
+        {forward} 25
+        {turn} {left}
+        {forward} 25
+        {turn} {right}
 2:
--   name: "{is}"
-    explanation: "Asigna un nombre a una palabra para usar en el programa con `{is}`. Puedes elegir el nombre tú mismo."
+-   name: '{is}'
+    explanation: Asigna un nombre a una palabra para usar en el programa con `{is}`. Puedes elegir el nombre tú mismo.
     demo_code: |-
         nombre {is} Hedy
         {print} Bienvenido nombre
--   name: "{ask}"
-    explanation: "Pregunta algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`."
+-   name: '{ask}'
+    explanation: Pregunta algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`.
     demo_code: |-
         color {is} {ask} ¿Cuál es tu color favorito?
         {print} El color es tú favorito!
--   explanation: '`{sleep}` Permite a Hedy tomar una pausa por un (par de) segundo(s).'
-    name: '{sleep}'
-    demo_code: "{print} Déjame pensar por un segundo...\n{sleep}\n{print} Hmm.. Necesito 3 segundos más...\n{sleep} 3\n{print} ¡Eureka! ¡Lo tengo!"
+-   name: '{sleep}'
+    explanation: '`{sleep}` Permite a Hedy tomar una pausa por un (par de) segundo(s).'
+    demo_code: |-
+        {print} Déjame pensar por un segundo...
+        {sleep}
+        {print} Hmm.. Necesito 3 segundos más...
+        {sleep} 3
+        {print} ¡Eureka! ¡Lo tengo!
 -   name: '{is} con tortuga'
-    demo_code: "ángulo {is} 90\n{turn} ángulo\n{forward} 100"
     explanation: Dale un nombre a un número usando `{is}`. Puedes escoger el nombre tú mismo.
+    demo_code: |-
+        ángulo {is} 90
+        {turn} ángulo
+        {forward} 100
 3:
--   name: "Elige al azar"
-    explanation: "Selecciona una palabra aleatoria de un grupo usando `{at}` y `{random}`."
+-   name: Elige al azar
+    explanation: Selecciona una palabra aleatoria de un grupo usando `{at}` y `{random}`.
     demo_code: |-
         animales {is} perro, gato, canguro
         {print} animales {at} {random}
--   demo_code: "animales {is} vaca, gato\n{add} perro {to_list} animales"
+-   name: '{add}'
     explanation: '`{add}` un elemento `{to_list}` una lista.'
-    name: '{add}'
+    demo_code: |-
+        animales {is} vaca, gato
+        {add} perro {to_list} animales
 -   name: '{remove}'
     explanation: '`{remove}` un elemento `{from}` una lista.'
-    demo_code: "animales {is} gato, perro, vaca\n{remove} perro {from} animales"
+    demo_code: |-
+        animales {is} gato, perro, vaca
+        {remove} perro {from} animales
 4:
--   name: "{print}"
-    explanation: "Imprimir exactamente usando comillas."
-    demo_code: "{print} 'Hola bienvenido a Hedy.'"
--   name: "{is}"
-    explanation: "Dar un nombre al texto e `{print}` sin comillas simples."
+-   name: '{print}'
+    explanation: Imprimir exactamente usando comillas.
+    demo_code: '{print} ''Hola bienvenido a Hedy.'''
+-   name: '{is}'
+    explanation: Dar un nombre al texto e `{print}` sin comillas simples.
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
--   name: "{ask}"
-    explanation: "Preguntar algo con `{ask}`."
+-   name: '{ask}'
+    explanation: Preguntar algo con `{ask}`.
     demo_code: |-
         color {is} {ask} '¿Cuál es tu color favorito?'
         {print} 'Tu color favorito es ' color
 5:
--   name: "{print}"
-    explanation: "Imprimir un texto literal usando comillas."
-    demo_code: "{print} 'Hola bienvenido a Hedy.'"
--   name: "{ask}"
-    explanation: "Pregunta algo con `{ask}`."
+-   name: '{print}'
+    explanation: Imprimir un texto literal usando comillas.
+    demo_code: '{print} ''Hola bienvenido a Hedy.'''
+-   name: '{ask}'
+    explanation: Pregunta algo con `{ask}`.
     demo_code: |-
         color {is} {ask} '¿Cuál es tu color favorito?'
         {print} 'Tu color favorito es ' color
--   name: "{if}"
-    explanation: "Elige una opción con `{if}`."
+-   name: '{if}'
+    explanation: Elige una opción con `{if}`.
     demo_code: |-
         color {is} {ask} '¿Cuál es tu color favorito?'
         {if} color {is} verde {print} 'qué bonito!' {else} {print} 'no es tan bonito'
--   demo_code: "respuesta {is} {ask} '¿Cuán lejos debería caminar?'\n{if} respuesta {is} lejos {forward} 100 {else} {forward} 5"
-    name: '{if} con tortuga'
+-   name: '{if} con tortuga'
     explanation: Haz una elección con `{if}`.
+    demo_code: |-
+        respuesta {is} {ask} '¿Cuán lejos debería caminar?'
+        {if} respuesta {is} lejos {forward} 100 {else} {forward} 5
 -   name: '{in}'
     explanation: Comprobar elementos con `{in}`.
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    demo_code: |-
+        pretty_colors {is} green, yellow
+        color {is} {ask} 'What {is} your favorite color?'
+        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} '¡Presionas A!' {else} {print} '¡Presionaste otra tecla!'"
+    demo_code: '{if} a {is} {pressed} {print} ''¡Presionas A!'' {else} {print} ''¡Presionaste otra tecla!'''
 6:
--   name: "{print}"
-    explanation: "Imprime un texto literal con usando comillas simples."
-    demo_code: "{print} '5 multiplicado por 5 es ' 5 * 5"
--   name: "{ask}"
-    explanation: "Pregunta por una operación y comprueba que sea correcta."
+-   name: '{print}'
+    explanation: Imprime un texto literal con usando comillas simples.
+    demo_code: '{print} ''5 multiplicado por 5 es '' 5 * 5'
+-   name: '{ask}'
+    explanation: Pregunta por una operación y comprueba que sea correcta.
     demo_code: |-
         resultado = {ask} '¿Cuánto es 10 más 10?'
         {if} resultado {is} 20 {print} '¡¡Correcto!!' {else} {print} '¡Casi!, inténtalo otra vez'
--   name: "`{ask}` y `{if}` con tortuga"
-    explanation: "Pregunta al usuario cuántos ángulos quiere."
+-   name: '`{ask}` y `{if}` con tortuga'
+    explanation: Pregunta al usuario cuántos ángulos quiere.
     demo_code: |-
         ángulos = {ask} '¿Cuántos ángulos?'
         ángulo = 360 / ángulos
         {forward} 50
 7:
--   name: "{print}"
-    explanation: "Imprimir un texto literal usando comillas simples."
-    demo_code: "{print} 'Hola bienvenido a Hedy.'"
--   name: "{ask}"
-    explanation: "Pregunta algo con `{ask}`."
+-   name: '{print}'
+    explanation: Imprimir un texto literal usando comillas simples.
+    demo_code: '{print} ''Hola bienvenido a Hedy.'''
+-   name: '{ask}'
+    explanation: Pregunta algo con `{ask}`.
     demo_code: |-
         color = {ask} '¿Cuál es tu color favorito?'
         {print} 'Tu color favorito es el ' color
--   name: "{if}"
-    explanation: "Toma una decisión con `{if}`."
+-   name: '{if}'
+    explanation: Toma una decisión con `{if}`.
     demo_code: |-
         color = {ask} '¿Cuál es tu color favorito?'
         {if} color {is} verde {print} '¡qué bonito!' {else} {print} 'no es tan bonito'
--   name: "{repeat} con la tortuga"
-    explanation: "Repite una línea de código con `{repeat}`."
-    demo_code: |-
-        {repeat} 3 {times} {forward} 10
+-   name: '{repeat} con la tortuga'
+    explanation: Repite una línea de código con `{repeat}`.
+    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
--   name: "{print}"
-    explanation: "Imprime algo. Recuerda usar las comillas simples para imprimir el texto literal."
-    demo_code: "{print} '5 multiplicado por 5 es ' 5 * 5"
--   name: "{ask}"
-    explanation: "Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos imprimir 2 líneas."
+-   name: '{print}'
+    explanation: Imprime algo. Recuerda usar las comillas simples para imprimir el texto literal.
+    demo_code: '{print} ''5 multiplicado por 5 es '' 5 * 5'
+-   name: '{ask}'
+    explanation: Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos imprimir 2 líneas.
     demo_code: |-
         resultado = {ask} '¿Cuánto es 5 más 5?'
         {if} resultado {is} 10
@@ -133,14 +153,21 @@
             {print} '¡Ups!'
             {print} 'La respuesta es 10'
 -   name: '{repeat} con tortuga'
-    explanation: 'Repite varias líneas.'
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    explanation: Repite varias líneas.
+    demo_code: |-
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 -   name: '{pressed}'
     explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} '¡Presionaste A!'\n{else}\n    {print} '¡Presionaste otra tecla!'"
+    demo_code: |-
+        {if} a {is} {pressed}
+            {print} '¡Presionaste A!'
+        {else}
+            {print} '¡Presionaste otra tecla!'
 9:
--   name: "{if} con varias líneas"
-    explanation: "La respuesta a una pregunta de sumas con `{ask}` y ve si está correcto. Ahora muestra dos líneas."
+-   name: '{if} con varias líneas'
+    explanation: La respuesta a una pregunta de sumas con `{ask}` y ve si está correcto. Ahora muestra dos líneas.
     demo_code: |-
         respuesta = {ask} '¿Cuánto es 10 más 10?'
         {if} respuesta {is} 20
@@ -149,30 +176,30 @@
         {else}
             {print} 'Mal'
             {print} 'La respuesta es 20'
--   name: "{repeat} con tortuga"
-    explanation: "Repite varias líneas."
+-   name: '{repeat} con tortuga'
+    explanation: Repite varias líneas.
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
--   name: "{print}"
-    explanation: "Imprime algo. Recuerda usar una comilla para para imprimir literalmente."
-    demo_code: "{print} '5 por 5 es ' 5 * 5"
--   name: "{for} con una lista"
-    explanation: "Muestra todas las cosas en una lista."
+-   name: '{print}'
+    explanation: Imprime algo. Recuerda usar una comilla para para imprimir literalmente.
+    demo_code: '{print} ''5 por 5 es '' 5 * 5'
+-   name: '{for} con una lista'
+    explanation: Muestra todas las cosas en una lista.
     demo_code: |-
         animales {is} perros, gatos, peces globo
         {for} animal {in} animales
           {print} 'Me encantan los ' animal
 11:
--   name: "Bucle {for}"
-    explanation: "Podemos usar `{for}` con un `{range}`."
+-   name: Bucle {for}
+    explanation: Podemos usar `{for}` con un `{range}`.
     demo_code: |-
         {for} contador {in} {range} 1 {to} 5
             {print} contador
--   name: "{ask}"
-    explanation: "Pregunta por la respuesta de una suma y verifica si es correcta. Ahora podemos imprimir 2 líneas."
+-   name: '{ask}'
+    explanation: Pregunta por la respuesta de una suma y verifica si es correcta. Ahora podemos imprimir 2 líneas.
     demo_code: |-
         respuesta = {ask} '¿Cuánto es 5 más 5?'
         {if} respuesta {is} 10
@@ -182,31 +209,31 @@
             {print} 'Oh no'
             {print} 'La respuesta es 10'
 12:
--   name: "directamente número de coma flotante"
-    explanation: "Números decimales."
+-   name: directamente número de coma flotante
+    explanation: Números decimales.
     demo_code: |-
         {print} '¡Calcula!'
         {print} 'Dos y medio más dos y medio es...'
         {print} 2.5 + 2.5
--   name: "asignar texto"
-    explanation: "Texto con comillas simples luego de `=`"
+-   name: asignar texto
+    explanation: Texto con comillas simples luego de `=`
     demo_code: |-
         nombre = 'Hedy el Robot'
         {print} 'Hola ' nombre
--   name: "comillas después de la comparación con `{if}`"
-    explanation: "Texto con comillas simples luego de `{if}`."
+-   name: comillas después de la comparación con `{if}`
+    explanation: Texto con comillas simples luego de `{if}`.
     demo_code: |-
         nombre = {ask} '¿Quién eres?'
         {if} nombre = 'Hedy'
             {print} '¡Hola!'
--   name: "comillas en una lista"
-    explanation: "Una lista con comillas simples."
+-   name: comillas en una lista
+    explanation: Una lista con comillas simples.
     demo_code: |-
         superhéroes = 'Iron Man', 'Batman', 'Superman'
         {print} superhéroes {at} {random}
 13:
--   name: "{and}"
-    explanation: "Ambas partes necesitan ser correctas."
+-   name: '{and}'
+    explanation: Ambas partes necesitan ser correctas.
     demo_code: |-
         respuesta1 = {ask} '¿Cuánto es 3+2?'
         respuesta2 = {ask} '¿Cuánto es 2+2?'
@@ -214,8 +241,8 @@
             {print} '¡Ambas respuestas están bien!'
         {else}
             {print} '¡Al menos una de las respuestas está equivocada!'
--   name: "{or}"
-    explanation: "Al menos 1 de ambas partes necesita ser correcta. Si ambas son correctas, también está bien."
+-   name: '{or}'
+    explanation: Al menos 1 de ambas partes necesita ser correcta. Si ambas son correctas, también está bien.
     demo_code: |-
         respuesta1 = {ask} '¿Cuánto es 3+2?'
         respuesta2 = {ask} '¿Cuánto es 2+2?'
@@ -224,54 +251,52 @@
         {else}
             {print} '¡Ambas respuestas están equivocadas!'
 14:
--   name: "Más pequeño"
-    explanation: "Usamos el `<` para comprobar si el primer número es más pequeño que el segundo."
+-   name: Más pequeño
+    explanation: Usamos el `<` para comprobar si el primer número es más pequeño que el segundo.
     demo_code: |-
         edad = {ask} '¿Qué edad tienes?'
         {if} edad < 13
             {print} '¡Eres más pequeño que yo!'
--   name: "Más grande"
-    explanation: "Usamos el `>` para comprobar si el primer número es mayor que el segundo."
+-   name: Más grande
+    explanation: Usamos el `>` para comprobar si el primer número es mayor que el segundo.
     demo_code: |-
         edad = {ask} '¿Qué edad tienes?'
         {if} edad > 13
             {print} '¡Eres más mayor que yo!'
--   name: "Iguales"
-    explanation: "Usamos el `==` para comprobar si dos cosas son la misma."
+-   name: Iguales
+    explanation: Usamos el `==` para comprobar si dos cosas son la misma.
     demo_code: |-
         respuesta = {ask} '¿Cuánto es 5 * 5?'
         {if} respuesta == 25
             {print} '¡Eso es correcto!'
--   name: "No igual"
-    explanation: "Usamos `!=` para verificar si dos cosas no son iguales."
+-   name: No igual
+    explanation: Usamos `!=` para verificar si dos cosas no son iguales.
     demo_code: |-
         respuesta = {ask} '¿Cuánto es 5 * 5?'
         {if} respuesta != 25
             {print} '¡Eso no es correcto!'
-
--   name: "Más pequeño o igual"
-    explanation: "Usamos el `<=` para comprobar si el primer número es más pequeño o igual al segundo número."
+-   name: Más pequeño o igual
+    explanation: Usamos el `<=` para comprobar si el primer número es más pequeño o igual al segundo número.
     demo_code: |-
         edad = {ask} '¿Cuántos años tienes?'
         {if} edad <= 12
             {print} '¡Eres más joven que yo!'
-
--   name: "Mayor o igual"
-    explanation: "Usamos el `>=` para comprobar si el primer número es mayor o igual al segundo número."
+-   name: Mayor o igual
+    explanation: Usamos el `>=` para comprobar si el primer número es mayor o igual al segundo número.
     demo_code: |-
         edad = {ask} '¿Cuántos años tienes?'
         {if} edad >= 14
             {print} 'Eres mayor que yo!'
 15:
--   name: "{while}"
-    explanation: "Podemos usar el bucle `{while}` con no igual."
+-   name: '{while}'
+    explanation: Podemos usar el bucle `{while}` con no igual.
     demo_code: |-
         respuesta = 0
         {while} respuesta != 25
             respuesta = {ask} '¿Cuánto es 5 veces 5?'
         {print} 'Se ha dado una respuesta correcta'
--   name: "Menor {while}"
-    explanation: "También podemos usar el bucle `{while}` con `<` y `>`."
+-   name: Menor {while}
+    explanation: También podemos usar el bucle `{while}` con `<` y `>`.
     demo_code: |-
         contador = 1
         {while} contador < 3
@@ -279,26 +304,26 @@
             contador = contador + 1
         {print} 'Hemos terminado'
 16:
--   name: "corchetes"
-    explanation: "Listas con corchetes."
+-   name: corchetes
+    explanation: Listas con corchetes.
     demo_code: |-
         fruta = ['manzana', 'plátano', 'cereza']
         {print} fruta
--   name: "Coge un elemento de una lista"
-    explanation: "Para coger un elemento de una lista usamos [número] así que fruta[1] significa, ¡elige la primera fruta de la lista!"
+-   name: Coge un elemento de una lista
+    explanation: Para coger un elemento de una lista usamos [número] así que fruta[1] significa, ¡elige la primera fruta de la lista!
     demo_code: |-
         fruta = ['plátano', 'manzana', 'cereza']
         primerafruta = fruta[1]
         {print} primerafruta
--   name: "Coge un elemento aleatorio de una lista"
-    explanation: "Para coger un elemento aleatorio de una lista usamos [aleatorio] así que fruta[aleatorio] significa, ¡coge una fruta aleatoria de la lista!"
+-   name: Coge un elemento aleatorio de una lista
+    explanation: Para coger un elemento aleatorio de una lista usamos [aleatorio] así que fruta[aleatorio] significa, ¡coge una fruta aleatoria de la lista!
     demo_code: |-
         fruta = ['plátano', 'manzana', 'cereza']
         fruta_aleatoria = fruta[{random}]
         {print} fruta_aleatoria
 17:
--   name: "{elif}"
-    explanation: "`{elif}`"
+-   name: '{elif}'
+    explanation: '`{elif}`'
     demo_code: |-
         a = 2
         {if} a == 1:
@@ -307,14 +332,14 @@
             {print} 'a es 2'
         {else}:
             {print} 'a no es 1 o 2'
--   name: "{print}"
-    explanation: "Cuando usamos un `{for}`, ¡tenemos que poner un `:` tras la sentencia  `{for}`!"
+-   name: '{print}'
+    explanation: Cuando usamos un `{for}`, ¡tenemos que poner un `:` tras la sentencia  `{for}`!
     demo_code: |-
         {for} i {in} {range} 1 {to} 12:
             {print} i
         {print} 'Preparado o no, ¡aquí llego!'
--   name: "{if}"
-    explanation: "Necesitamos hacer lo mismo con todas nuestras declaraciones `{if}`."
+-   name: '{if}'
+    explanation: Necesitamos hacer lo mismo con todas nuestras declaraciones `{if}`.
     demo_code: |-
         color = {ask} '¿Cuál es tu color favorito?'
         {if} color == 'verde':
@@ -322,18 +347,21 @@
         {else}:
             {print} 'Tu color favorito no es verde'
 18:
--   name: "{print}"
-    explanation: "Después de `{print}` necesita usar paréntesis."
-    demo_code: |-
-        {print}('¡hola!')
--   name: "{range}"
-    explanation: "Después de `{range}` necesita usar paréntesis."
+-   name: '{print}'
+    explanation: Después de `{print}` necesita usar paréntesis.
+    demo_code: '{print}(''¡hola!'')'
+-   name: '{range}'
+    explanation: Después de `{range}` necesita usar paréntesis.
     demo_code: |-
         {for} i {in} {range} (1,10):
             {print}('Hola, veces ', i)
 -   name: '{print} con var'
     explanation: Con `{print}` necesita usar paréntesis y comas si imprime más elementos.
-    demo_code: "nombre = 'Hedy'\n{print}('mi nombre es ', nombre)"
+    demo_code: |-
+        nombre = 'Hedy'
+        {print}('mi nombre es ', nombre)
 -   name: pregunta algo con {input}
     explanation: Use `{input}` en lugar de `{ask}` para preguntar algo.
-    demo_code: "nombre = {input}('¿Cómo te llamas?')\n{print}('Así que tu nombre es ', nombre)"
+    demo_code: |-
+        nombre = {input}('¿Cómo te llamas?')
+        {print}('Así que tu nombre es ', nombre)
