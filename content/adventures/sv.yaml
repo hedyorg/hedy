@@ -738,6 +738,10 @@ adventures:
                 start_code: "namn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n"
                 example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n```\n"
                 story_text: "## Om … Annars …\nDu har lärt dig att upprepa ett block med kodrader efter ett `{repeat}`-kommando.\nNu kan du också använda indrag för att skapa block efter ett {if}- eller {else}-kommando.\nKolla in exempelkoden.\n\n### Övning\nLägg till ett {else}-kommando till exempelkoden. Gör ett kodblock med indrag. Det gör du genom att börja varje rad med fyra mellanslag.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     quotation_marks:
         levels:
             12:
@@ -783,8 +787,6 @@ adventures:
                 start_code: "{print} '5 gånger 5 är ' 5 * 5"
                 story_text: "## 1 + 1\nPå den här nivån lär du dig något nytt: du kan nu också räkna ut saker.\n\nPlus är enkelt, du skriver det som med matematik: `5 + 5` till exempel. Minus fungerar också bra, det är `5 - 5`.\n\nGånger är lite annorlunda, eftersom det inte finns någon gångersymbol på tangentbordet. Sök bara, det finns verkligen inte!\nDet är därför vi multiplicerar med asterisken till vänster om ä: `5 * 5`. Läs det som '5 gånger 5' – det är bästa minnesregeln.\n"
                 example_code: "```\n{print} '5 plus 5 är ' 5 + 5\n{print} '5 minus 5 är ' 5 - 5\n{print} '5 gånger 5 är ' 5 * 5\n```\n"
-                story_text_2: "Vi ändrar också hur man sparar ett ord i en variabel! Du kan nu använda `=` istället för `{is}` när vi sparar ett namn eller ett tal i en variabel, så här:\n"
-                example_code_2: "```\nnamn = Hedy\nsvar = 20 + 4\n```\n"
             12:
                 start_code: "{print} 'decimaltal behöver nu använda en punkt'\n{print} 2.5 + 2.5"
                 story_text: "**Decimaltal**\nHittills har Hedy inte tillåtit decimaltal som 1.5, men nu tillåter vi det. Tänk på att datorer använder `.` för decimaltal."
@@ -854,6 +856,10 @@ adventures:
                 example_code_2: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn == 'Hedy'\n    {print} 'Du är cool!'\n```\n"
                 story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:\n"
                 example_code_3: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: introduktion till lägg till och ta bort

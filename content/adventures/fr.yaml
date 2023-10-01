@@ -2524,6 +2524,10 @@ adventures:
                 example_code_2: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom == \"Hedy\"\n    {print} \"Tu es cool !\"\n```\n"
                 story_text_3: "Tu peux aussi comparer si une chose n'est *pas* égale à une autre chose en utilisant `!=` comme ceci :\n"
                 example_code_3: "```\nnom = {ask} \"Quel est ton nom ?\"\n{if} nom != \"Hedy\"\n    {print} \"Tu n'es pas Hedy\"\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     random_command:
         name: "{random}"
         description: Introduction de la commande `{at} {random}`
@@ -2555,6 +2559,10 @@ adventures:
                 start_code: "nom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n"
                 example_code: "```\nnom {is} {ask} \"Quel est ton nom ?\"\n{if} nom {is} Hedy\n    {print} \"Bienvenue Hedy\"\n    {print} \"Tu peux jouer sur ton ordinateur !\"\n```\n"
                 story_text: "## Si… Sinon…\nTu as appris à répéter un bloc de ligne de code après une commande `{repeat}`.\nMaintenant, tu peux aussi utiliser l'indentation pour faire un bloc après une commande `{if}` ou `{else}`.\nRegarde l'exemple de code.\n\n### Exercice\nAjoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
         name: "{if} & {else}"
         description: Introduction à la commande `{if}`
         default_save_name: if_command
@@ -2608,8 +2616,6 @@ adventures:
                 start_code: "{print} \"5 fois 5 est \" 5 * 5"
                 story_text: "## 1 + 1\nDans ce niveau tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.\n\nL'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.\n\nLa multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !\nVoilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.\n"
                 example_code: "```\n{print} \"5 plus 5 fait \" 5 + 5\n{print} \"5 moins 5 fait \" 5 - 5\n{print} \"5 fois 5 fait \" 5 * 5\n```\n"
-                story_text_2: "Nous faisons aussi un changement pour enregistrer un mot dans une variable ! Tu peux maintenant utiliser `=` à la place de `{is}` quand tu enregistres un nom ou un nombre dans une variable, comme ceci :\n"
-                example_code_2: "```\nnom = Hedy\nréponse = 20 + 4\n```\n"
             12:
                 start_code: "{print} \"Les nombres décimaux ont maintenant besoin d'utiliser un point\"\n{print} 2.5 + 2.5"
                 story_text: "**Nombres décimaux**\nJusqu'à présent, Hedy ne te permettait pas d'utiliser les nombres décimaux comme 1.5, mais maintenant nous les autorisons. Attention, les langages de programmation utilisent le point pour les nombres décimaux et non la virgule."

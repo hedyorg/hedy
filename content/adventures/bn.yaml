@@ -947,8 +947,7 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |2
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
@@ -1022,11 +1021,11 @@ adventures:
                     ```
                 start_code: "# place your code here"
             3:
-                story_text: |2
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
 
                 example_code: |
                     ```
@@ -1381,11 +1380,10 @@ adventures:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |2
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -1465,9 +1463,11 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |2
-
+                story_text_2: |
+                    ### Exercise
                     Of course, you could also order for multiple people!
+                    Can you add the correct amount of indentation before each line to make the code work properly?
+                    Tip: some lines don't need any indentation at all.
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -1578,9 +1578,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |2
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2509,6 +2507,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
         name: "{is}"
         description: introducing is command
         default_save_name: is_command
@@ -2565,6 +2567,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
         name: "{if} & {else}"
         description: Introducing the if command
         default_save_name: if_command
@@ -2715,8 +2721,6 @@ adventures:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers।"

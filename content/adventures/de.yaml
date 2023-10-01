@@ -214,7 +214,7 @@ adventures:
                     {print} Name hat Angst, dass es in diesem Wald spukt.
                     ```
                 start_code: "{print} Deine Geschichte"
-                story_text_2: "### Übung\nNun ist es an der Zeit Variablen zu deiner eigenen Geschichte aus dem vorigen Level hinzu zu fügen.\nGehe zu \"Meine Programme\", suche dein Level 1 Geschichten-Abenteuer und kopiere den Code. Füge den Code in den Eingabebereich in diesem Level ein.\n\nDieser Code wird nicht funktionieren, weil du noch keine Variablen benutzt hast.\nÄndere den `{ask}` Befehl und den `{echo}` Befehl in deinem Code in die richtige Form, die du in diesem Level gelernt hast.\n\n**Extra** Füge deinem Code den warte-Befehl hinzu, um Spannung in deiner Geschichte aufzubauen.\n"
+                story_text_2: "### Übung\nNun ist es an der Zeit Variablen zu deiner eigenen Geschichte aus dem vorigen Level hinzu zu fügen.\nGehe zu \"Meine Programme\", suche dein Level 1 Geschichten-Abenteuer und kopiere den Code. Füge den Code in den Eingabebereich in diesem Level ein.\n\nDieser Code wird nicht funktionieren, weil du noch keine Variablen benutzt hast.\nBringe den `{ask}` Befehl und den `{echo}` Befehl in deinem Code in die richtige Form, die du in diesem Level gelernt hast.\n\n**Extra** Füge deinem Code den `{sleep}`-Befehl hinzu, um Spannung in deiner Geschichte aufzubauen.\n"
             12:
                 story_text: |-
                     In diesem Level werden Anführungszeichen benötigt, um mehrere Wörter in einer Variablen zu speichern.
@@ -2406,9 +2406,9 @@ adventures:
         default_save_name: is_command
         levels:
             2:
-                story_text: "## Variables\nYou can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n"
+                story_text: "## Variablen\nDu kannst einem Wort mit `{is}` einen Wert geben. Dieses Wort nennt man eine **Variable**. In diesem Beispiel haben wir eine Variable namens name und eine Variable names age benutzt. Du kannst das Wort name irgendwo in deinem Code verwenden. Es wird von Hedy automatisch ersetzt, wie hier:\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "### Exercise\nTime to make your own variables!\nIn the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.\nFirstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.\n"
+                story_text_2: "### Übung\nEs ist Zeit, deine eigenen Variablen zu definieren.\nIm Beispiel-Code zeigen wir ein Beispiel mit der Variable `favorite_animals`. In Zeile 1 wird die Variable gesetzt, und in Zeile 2 verwenden wir die Variable in einem `{print}` Befehl.\nZuerst, vervollständige unser Beispiel, in dem du dein Lieblingstier in die Leerstelle einträgst. Dann denke dir mindestens 3 eigene Code-Beispiele aus. Wähle eine Variable und gib der Variable mit dem `{is}` Befehl einen Wert. Dann verwenden den `{print}` Befehl, so wie wir es gezeigt haben.\n"
                 example_code_2: "```\nfavorite_animals is _\n{print} I like favorite_animals\n```\n"
                 start_code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
             14:
@@ -2419,6 +2419,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     random_command:
         levels:
             16:
@@ -2426,12 +2430,12 @@ adventures:
                 story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nWe use square brackets to point out a place in a list. The {at} {random} command can not be used anymore."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
             3:
-                story_text: "## At random\nIn this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.\n"
+                story_text: "## An zufällig\nIn diesem Level kannst du eine Liste mit dem `{is}` Befehl erstellen. Du kannst den Computer einen zufälligen Eintrag aus dieser Liste auswählen lassen. Das machst du mit `{at} {random}`.\n"
                 example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
                 story_text_2: "You can use the `{at} {random}` command in a sentence as well.\n"
                 example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
                 start_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n"
-                story_text_3: "### Exercise\nTry out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it? We have already put the first lines into the example code.\n"
+                story_text_3: "### Übung\nProbiere den `{at} {random}` Befehl aus und erschaffe deine eigene Spielesendung (wie die im Fernsehen), wo du eine Tür order einen Koffer auswählst und sich dort ein großer Preis versteckt!\nKannst du es tun? Wir haben schon mal die ersten Zeilen in den Beispielcode eingefügt.\n"
                 example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\nchosen {is} {ask} Which suitcase do you choose?\nprices {is} _\n_\n```\n"
         name: "{random}"
         description: introducing at random command
@@ -2442,7 +2446,7 @@ adventures:
         default_save_name: sleep_command
         levels:
             2:
-                story_text: "## The sleep command\nAnother new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+                story_text: "Ein weiterer neuer Befehl in diesem Level ist der `{sleep}` Befehl. Er pausiert dein Programm für eine Sekunde. Wenn du eine Zahl hinter den {sleep} Befehl schreibst, pausiert dein Programm für diese Anzahl an Sekunden.\n\n### Übung\nÜbe den neuen Befehl, in dem du dir eigenen Code ausdenkst, der mindestens 3 mal den Befehl {sleep} verwendet. Mit jeden {sleep} Befehl soll die Pausierzeit anders sein.\n"
                 example_code: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
                 start_code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
     repeat_command:
@@ -2468,7 +2472,7 @@ adventures:
         default_save_name: rock_2
         levels:
             2:
-                story_text: "Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!\n\n### Exercise\nMake the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.\n"
+                story_text: "Jetzt, da du gelernt hast, wie man den `{ask}` Befehl einsetzt, kannst du den Stein, Schere, Papier Code auch interaktiv machen!\n\n### Übung\nMache den Stein, Schere, Papier Code interaktiv, in dem du den `{ask}` Befehl und eine Frage zu deinem Stein, Schere, Papier Code hinzufügst.\n"
                 example_code: "```\nchoice is _\n{print} I choose choice\n```\n"
                 start_code: "# place your code here"
     harry_potter:
@@ -2494,9 +2498,9 @@ adventures:
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
                 start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
             2:
-                story_text: "## The ask command\nNow that we can use **variables** in our codes, we no longer need the `{echo}` command.\nWe can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.\nCheck it out:\n\nThis way your code is becoming interactive!\n"
+                story_text: "## Der frage Befehl\nJetzt, wo du **Variablen** in deinen Programmen benutzen kannst, brauchen wir den `{echo}` Befehl nicht mehr.\nWir können Variablen verwenden, um die Antworten auf unsere Fragen zu speichern. Dadurch können wir die Antwort an mehreren Stellen im Code verwenden.\nProbiere es aus:\n\nDamit wird dein Code viel interaktiver!\n"
                 example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
-                story_text_2: "### Exercise\nIn the previous tab you have practised with setting variables with the `{is}` command.\nYou have created at least 3 variables and used them with a print command.\nNow, instead of setting the variables we want you to make the variables interactive, like we did in our example.\n\nCopy your code from the previous tab and make the variables interactive by using `{ask}` commands.\n"
+                story_text_2: "### Übung\nIn vorherigen Übung hast du das Setzen von Variablen mit dem `{is}` Befehl geübt.\nDu hast mindestens 3 Variablen definiert und sie im print Befehl verwendet.\nJetzt wollen wir die Variablen wie unserem Beispiel interaktiv machen, statt sie zu setzen.\n\nKopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.\n"
                 example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
                 start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
     add_remove_command:
@@ -2529,6 +2533,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     in_command:
         name: "{in}"
         description: Introducing the in command
@@ -2613,8 +2621,6 @@ adventures:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."

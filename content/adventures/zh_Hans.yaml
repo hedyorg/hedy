@@ -602,8 +602,7 @@ adventures:
                 story_text: |
                     在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
 
-                example_code: |2
-
+                example_code: |
                     你可以写一段简单的餐厅代码，像这样：
                     ```
                     {print} '欢迎来到海蒂餐厅'
@@ -821,8 +820,7 @@ adventures:
                 story_text: |
                     在上一级，你创造了你的第一台算命机器，但海蒂不会算任何东西，只会“{echo}”。
                     在这一级，你可以用变量和`{at} {random}`命令来真正让海蒂为你选择一个答案。比如看看这段代码：
-                example_code: |2
-
+                example_code: |
                     在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
                     ```
                     {print} 我是海蒂半仙！
@@ -1387,11 +1385,9 @@ adventures:
         default_save_name: maths
         levels:
             6:
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
@@ -1482,6 +1478,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
@@ -1521,6 +1521,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     in_command:
         name: "{in}"
         description: Introducing the in command
