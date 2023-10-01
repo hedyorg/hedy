@@ -1855,16 +1855,16 @@ levels:
                 case = {ask} 'Which case will you pick? 1 or 2?'
                 {if} case {is} 1
                      action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
+                     {if} action {is} sell
+                         {print} 'You sell your case for 10 dollars'
+                     {if} action {is} open
+                         {print} 'You open the case and win an apple pie'
                 {if} case {is} 2
                      action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                     {if} action {is} sell
+                         {print} 'You sell the case for 500 dollars'
+                     {if} action {is} open
+                         {print} 'You open the case and win a million dollars!'
             mp_choice_options:
             -   option: "case 1, sell"
                 feedback: "You don't win a million!"
@@ -1954,7 +1954,7 @@ levels:
             -   option: "`{if}` `{else}` `{repeat}`"
                 feedback: "Keep it up!"
             -   option: "`{if}` `{else}` `{repeat}` `{print}`"
-                feedback: "Not with print"
+                feedback: "Not with {print}"
             correct_answer: "C"
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
@@ -2002,7 +2002,7 @@ levels:
             hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
         8:
-            question_text: "What is wrong is this code?"
+            question_text: "What is wrong in this code?"
             code: |-
                 age = {ask} 'Happy Birthday! How old are you?'
                 singing = {ask} 'Would you like us to sing?'
@@ -2014,7 +2014,7 @@ levels:
                 feedback: "Yes you can."
             -   option: "The variable called 'age' is later on used as 'years'"
                 feedback: "Keen eye! Good job!"
-            -   option: "You're not allowed to start with 8 spaces, like line 4 and 5 do"
+            -   option: "You're not allowed to start with 8 spaces, like line 5 does"
                 feedback: "You actually must start like that."
             -   option: "A code must always start with a `{print}` command in the first line"
                 feedback: "That's not true."
@@ -2055,7 +2055,7 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "What word should be at the place of the question mark?"
+            question_text: "What word should be at the place of the blank?"
             code: |-
                 {for} i {in} _ 1 {to} 10
                     {print} i
@@ -2158,7 +2158,7 @@ levels:
                 feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
             -   option: |
                     ```
-                    {for} i {in} {range} 0 to 10
+                    {for} i {in} {range} 0 {to} 10
                         {print} - i
                     ```
                 feedback: "Hedy would print negative numbers in this case."
@@ -2212,7 +2212,7 @@ levels:
             hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
         7:
-            question_text: "What should be on the place of the question mark?"
+            question_text: "What should be on the place of the blank?"
             code: |-
                 {print} 'Welcome to Hedys diner'
                 people = {ask} 'How many people will be eating here tonight?'
@@ -2540,18 +2540,18 @@ levels:
         10:
             question_text: "What is true about this code?"
             code: |-
-                prices = 1 million dollars, car, sandwich
+                prizes = 1 million dollars, car, sandwich
                 names = Bob, Patrick, Sandy, Larry
-                {for} price {in} prices
-                    {print} 'The ' price 'is won by ' names {at} {random}
+                {for} prize {in} prizes
+                    {print} 'The ' prize 'is won by ' names {at} {random}
             mp_choice_options:
-            -   option: "Everybody will always win a price."
-                feedback: "That is not true, you could end up without a price."
-            -   option: "All the prices always go to one single person."
-                feedback: "That is not true. All the prices are given away, but to random people"
-            -   option: "Larry will never win a price"
+            -   option: "Everybody will always win a prize."
+                feedback: "That is not true, you could end up without a prize."
+            -   option: "All the prizes always go to one single person."
+                feedback: "That is not true. All the prizes are given away, but to random people"
+            -   option: "Larry will never win a prize"
                 feedback: "That is not true. Larry has the same odds as the others"
-            -   option: "Someone might win with two prices"
+            -   option: "Someone might win two prizes"
                 feedback: "You get it!"
             correct_answer: "D"
             hint: "Try to imagine the output of this code."
@@ -2603,10 +2603,10 @@ levels:
                 feedback: "Alright!"
             -   option: |2
 
-                            ```
-                            flavors = 'vanilla, strawberry, chocolate'
-                            {print} 'I would like a ' flavors {at} {random} ' cake.'
-                            ```
+                              ```
+                              flavors = 'vanilla, strawberry, chocolate'
+                              {print} 'I would like a ' flavors {at} {random} ' cake.'
+                              ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
             hint: "The second line is the same in each code, pay attention to the first line"
