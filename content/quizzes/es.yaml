@@ -2458,15 +2458,15 @@ levels:
                 premios = 1 millón dólares, coche, sandwich
                 nombres = Bob, Patrick, Sandy, Larry
                 {for} premio {in} premios
-                    {print} 'El ' premio 'lo gana ' nombres {at} {random}
+                	{print} 'El ' premio 'lo gana ' nombres {at} {random}
             mp_choice_options:
             -   option: "Todo el mundo siempre ganará un premio."
                 feedback: "Eso no es cierto, puede que acabes sin llevarte un premio."
             -   option: "Todos los premios siempre van a la misma persona."
                 feedback: "Eso no es cierto. Todos los premios se reparten, pero a gente al azar"
-            -   option: "Larry nunca ganará con un premio"
+            -   option: "Larry nunca ganará un premio"
                 feedback: "Eso no es cierto. Larry tiene las mismas probabilidades que los otros"
-            -   option: "Alguno podría ganar con dos premios"
+            -   option: "Alguno podría ganar dos premios"
                 feedback: "¡Lo conseguiste!"
             correct_answer: "D"
             hint: "Intenta imaginar el resultado de este código."
