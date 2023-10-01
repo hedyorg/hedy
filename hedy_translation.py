@@ -5,12 +5,14 @@ import operator
 import yaml
 from os import path
 import hedy_content
+from functools import cache
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
 
+@cache
 def keywords_to_dict(lang="nl"):
     """ "Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
@@ -32,6 +34,7 @@ def keywords_to_dict_single_choice(lang):
     return {k: v[0] for (k, v) in command_combinations.items()}
 
 
+@cache
 def all_keywords_to_dict():
     """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
     keyword_dict = {}
