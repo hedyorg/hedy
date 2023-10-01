@@ -364,7 +364,7 @@ adventures:
                 story_text: "每个人洗了多少次碗？是否公平？在这一级你可以进行统计。\n"
                 story_text_2: "如果你运气特别差，上一个程序可能每天都选你去洗碗！这不公平！\n为了创造一个更公平的系统，你可以用`{remove}`命令把选中的人从列表中移除。这样除非所有人都被轮到过一次，不然你不用再洗碗。\n\n周一和周二已经帮你写好了！你能把这周剩下的加上吗？\n另外……当列表里空了的时候，你有办法解决吗？\n"
                 example_code: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n艾玛洗碗 = 0\n洗碗的 = 人们 {at} {random}\n{print} '洗碗的人是' 洗碗的\n{if} 洗碗的 {is} 艾玛 艾玛洗碗 = 艾玛洗碗 + 1\n{print} '艾玛这周要洗' 艾玛洗碗 '次碗'\n```\n\n现在你需要将第3到第5行复制几次（比如，复制7次表示一周）来计算一整周。\n你能写出一整周用的代码吗？\n"
-                example_code_2: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 = 人们 {at} {random}\n{print} '周一洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们\n洗碗的 = 人们 {at} {random}\n{print} '周二洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们菲\n洗碗的 = 人们 {at} {random}\n```\n"
+                example_code_2: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 = 人们 {at} {random}\n{print} '周一洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们\n洗碗的 = 人们 {at} {random}\n{print} '周二洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们\n洗碗的 = 人们 {at} {random}\n```\n"
                 start_code: "{print} '谁负责洗碗？'"
             4:
                 story_text: "使用引号，可以使你的洗碗程序更加出色。\n\n### 练习\n首先，在空白处填写正确的符号或命令，以使此示例程序正常工作。\n你明白了吗？太好了！现在从上一个级别复制你自己的代码，并通过在正确的位置添加引号使其在此级别中正常工作。\n"
@@ -602,8 +602,7 @@ adventures:
                 story_text: |
                     在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
 
-                example_code: |2
-
+                example_code: |
                     你可以写一段简单的餐厅代码，像这样：
                     ```
                     {print} '欢迎来到海蒂餐厅'
@@ -698,7 +697,7 @@ adventures:
                     全餐 = 前菜, 主菜, 甜点
                     {for} 餐品 {in} 全餐
                         {print} '你的上菜顺序是 ' 餐品 '?'
-                        _ 
+                        _
                         _
                     ```
                 story_text_2: |
@@ -712,8 +711,8 @@ adventures:
                     客人们 = 丁满, 彭彭
                     {for} 客人 {in} 客人们
                         {for} 餐品 {in} 全餐
-                        食物 = {ask} 客人 '，你想要吃什么' 餐品 '？'
-                        {print} 客人 '点了' 食物 '作为' 餐品
+                            食物 = {ask} 客人 '，你想要吃什么' 餐品 '？'
+                            {print} 客人 '点了' 食物 '作为' 餐品
                     ```
                 start_code: "全餐 = 前菜, 主菜, 甜点"
             11:
@@ -821,8 +820,7 @@ adventures:
                 story_text: |
                     在上一级，你创造了你的第一台算命机器，但海蒂不会算任何东西，只会“{echo}”。
                     在这一级，你可以用变量和`{at} {random}`命令来真正让海蒂为你选择一个答案。比如看看这段代码：
-                example_code: |2
-
+                example_code: |
                     在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
                     ```
                     {print} 我是海蒂半仙！
@@ -1387,15 +1385,22 @@ adventures:
         default_save_name: maths
         levels:
             6:
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
         name: maths
         description: Introducing maths
     rock_2:
@@ -1427,10 +1432,6 @@ adventures:
                 example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n_ Hello!\n```\n"
                 start_code: "{print} Welcome to Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
@@ -1447,7 +1448,7 @@ adventures:
             1:
                 story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## The echo command\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                story_text_2: "## The echo command\nIf you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.\n"
                 story_text_3: "### Exercise\nTry out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.\nThen ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
@@ -1477,6 +1478,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: introducing add to and remove from
@@ -1516,6 +1521,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     in_command:
         name: "{in}"
         description: Introducing the in command
@@ -1569,9 +1578,24 @@ adventures:
                 story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: |-
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                story_text: |-
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                example_code: |
+                    ```
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                    ```
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
     and_or_command:
         name: "{and} & {or}"
         description: introducing and or

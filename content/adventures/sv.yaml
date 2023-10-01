@@ -192,7 +192,7 @@ adventures:
                 story_text: "Sånger innehåller ofta många upprepningar. Ibland bygger upprepningarna också på räkning.\nTill exempel i den välkända sången 'Bottles of beer'. Du kan programmera den låten med lite matematik.\n\nTips: Använd funktionen för högläsning för att låta Hedy sjunga sången för dig!\n\n### Övning\nDu kan nu upprepa raderna 2 till 7 hur många gånger som helst genom att kopiera raderna.\n"
                 example_code: "```\nvers = 99\n{print} vers ' ölflaskor på väggen'\n{print} vers ' ölflaskor'\n{print} 'Ta en ner, skicka runt den'\nvers = vers - 1\n{print} vers ' ölflaskor på väggen'\n{sleep}\n```\n"
                 story_text_2: "Denna barnvisa räknar ner från fem små apor till en apa.\nOm du kopierar rad 2–7 och klistrar in dem under koden kan du sjunga hela sången!\n"
-                example_code_2: "```\nantal = 6\nantal = antal - 1\n{print} antal ' små apor som hoppar på sängen'.\n{print} 'En av dem ramla ner av och slog huvudet.'\n{print} 'Mamma ringde till doktorn och doktorn sa'\n{print} 'INGA FLER APOR SOM HOPPAR PÅ SÄNGEN!'\n{sleep}\n```\n"
+                example_code_2: "```\nantal = 6\nantal = antal - 1\n{print} antal ' små apor som hoppar på sängen.'\n{print} 'En av dem ramla ner av och slog huvudet.'\n{print} 'Mamma ringde till doktorn och doktorn sa'\n{print} 'INGA FLER APOR SOM HOPPAR PÅ SÄNGEN!'\n{sleep}\n```\n"
             7:
                 story_text: "Sånger innehåller ofta många upprepningar. Till exempel ... Baby Shark! Om du sjunger den sjunger du samma sak hela tiden:\n\nBaby Shark tututududutudu <br>\nBaby Shark tututududutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\n### Övning\nKan du skriva ut låten Baby Shark med `{repeat}`? Avsluta koden genom att ersätta tomrummen i koden?\n**Extra** Efter Baby Shark kan du naturligtvis också programmera andra låtar. Det finns många låtar med upprepning!\nKan du komma på en sång  tilloch skriva ut den?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n"
@@ -738,6 +738,10 @@ adventures:
                 start_code: "namn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n"
                 example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n```\n"
                 story_text: "## Om … Annars …\nDu har lärt dig att upprepa ett block med kodrader efter ett `{repeat}`-kommando.\nNu kan du också använda indrag för att skapa block efter ett {if}- eller {else}-kommando.\nKolla in exempelkoden.\n\n### Övning\nLägg till ett {else}-kommando till exempelkoden. Gör ett kodblock med indrag. Det gör du genom att börja varje rad med fyra mellanslag.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     quotation_marks:
         levels:
             12:
@@ -783,12 +787,19 @@ adventures:
                 start_code: "{print} '5 gånger 5 är ' 5 * 5"
                 story_text: "## 1 + 1\nPå den här nivån lär du dig något nytt: du kan nu också räkna ut saker.\n\nPlus är enkelt, du skriver det som med matematik: `5 + 5` till exempel. Minus fungerar också bra, det är `5 - 5`.\n\nGånger är lite annorlunda, eftersom det inte finns någon gångersymbol på tangentbordet. Sök bara, det finns verkligen inte!\nDet är därför vi multiplicerar med asterisken till vänster om ä: `5 * 5`. Läs det som '5 gånger 5' – det är bästa minnesregeln.\n"
                 example_code: "```\n{print} '5 plus 5 är ' 5 + 5\n{print} '5 minus 5 är ' 5 - 5\n{print} '5 gånger 5 är ' 5 * 5\n```\n"
-                story_text_2: "Vi ändrar också hur man sparar ett ord i en variabel! Du kan nu använda `=` istället för `{is}` när vi sparar ett namn eller ett tal i en variabel, så här:\n"
-                example_code_2: "```\nnamn = Hedy\nsvar = 20 + 4\n```\n"
             12:
                 start_code: "{print} 'decimaltal behöver nu använda en punkt'\n{print} 2.5 + 2.5"
                 story_text: "**Decimaltal**\nHittills har Hedy inte tillåtit decimaltal som 1.5, men nu tillåter vi det. Tänk på att datorer använder `.` för decimaltal."
                 example_code: "```\n{print} 'Två och en halv plus två och en halv är …'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
     while_command:
         name: "{while}"
         description: så länge
@@ -818,10 +829,6 @@ adventures:
                 example_code: "```\n{print} Hej, programmerare!\n{print} Välkommen till Hedy!\n```\n"
                 example_code_2: "```\n_ Hej!\n```\n"
                 start_code: "{print} Välkommen till Hedy!\n"
-            17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller inte, här kommer jag!'"
-                story_text: "Nu ska vi ändra reglerna för indragning lite. Varje gång vi behöver en indragning måste vi ha `:` på raden före indragningen.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller inte, här kommer jag!'\n```\n"
             18:
                 start_code: "namn = 'Hedy'\n{print}('Jag heter ', namn)"
                 story_text: "Vi har kommit fram till riktig Python-kod! Det betyder att vi måste använda parenteser med `{print}` och `{range}` från och med nu.\nDet betyder också att du kan använda Hedy-kod från den här nivån i vilken Python-miljö som helst så länge du använder de engelska nyckelorden. Om du inte har gjort det hittils kan du ställa om det i kommandomenyn."
@@ -849,6 +856,10 @@ adventures:
                 example_code_2: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn == 'Hedy'\n    {print} 'Du är cool!'\n```\n"
                 story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:\n"
                 example_code_3: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         name: "{add} {to} & {remove} {from}"
         description: introduktion till lägg till och ta bort
@@ -900,9 +911,21 @@ adventures:
                 story_text: "## För\nPå den här nivån lär vi oss ett nytt kommando som heter `{for}`. Med `{for}` kan du skapa en lista och gå igenom alla element.\n`{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste börja med fyra mellanslag."
                 example_code: "```\ndjur {is} hund, katt, marulk\n{for} djuret {in} djur\n    {print} 'Jag älskar ' djuret\n```\n"
             11:
-                start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
+                start_code: |-
+                    {for} räknare {in} {range} 1 {to} 10
+                        {print} räknare
+                    {print} 'Redo eller icke, nu kommer jag!'
+                example_code: |
+                    ```
+                    {for} räknare {in} {range} 1 {to} 10
+                        {print} räknare
+                    {print} 'Redo eller icke, nu kommer jag!'
+                    ```
                 story_text: "På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.\nDet gör vi genom att lägga till ett variabelnamn, följt av `{in}` `{range}`. Vi skriver sedan talet vi vill börja på, `{to}` och talet vi vill sluta på.\n\nProva exemplet för att se vad som händer! På den här nivån måste alltid använda indrag på raderna under `{for}`-satserna."
-                example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
+            17:
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller inte, här kommer jag!'"
+                story_text: "Nu ska vi ändra reglerna för indragning lite. Varje gång vi behöver en indragning måste vi ha `:` på raden före indragningen.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller inte, här kommer jag!'\n```\n"
     and_or_command:
         name: "{and} & {or}"
         description: introduktion och eller

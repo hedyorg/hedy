@@ -1,5 +1,4 @@
 from collections import namedtuple
-from datetime import date
 from enum import Enum
 
 from flask import g, jsonify, request
@@ -35,75 +34,6 @@ class StatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("stats", __name__)
         self.db = db
-
-    @route("/stats/class/<class_id>", methods=["GET"])
-    @requires_login
-    def render_class_stats(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        students = sorted(class_.get("students", []))
-        return render_template(
-            "class-stats.html",
-            class_info={"id": class_id, "students": students},
-            current_page="my-profile",
-            page_title=gettext("title_class statistics"),
-            javascript_page_options=dict(page='class-stats'),
-        )
-
-    @route("/logs/class/<class_id>", methods=["GET"])
-    @requires_login
-    def render_class_logs(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        students = sorted(class_.get("students", []))
-        return render_template(
-            "class-logs.html",
-            class_info={"id": class_id, "students": students},
-            current_page="my-profile",
-            page_title=gettext("title_class logs"),
-        )
-
-    @route("/class-stats/<class_id>", methods=["GET"])
-    @requires_login
-    def get_class_stats(self, user, class_id):
-        start_date = request.args.get("start", default=None, type=str)
-        end_date = request.args.get("end", default=None, type=str)
-
-        cls = self.db.get_class(class_id)
-        students = cls.get("students", [])
-        if not cls or not students or (cls["teacher"] != user["username"] and not is_admin(user)):
-            return "No such class or class empty", 403
-
-        program_data = self.db.get_program_stats(students, start_date, end_date)
-        quiz_data = self.db.get_quiz_stats(students, start_date, end_date)
-        data = program_data + quiz_data
-
-        per_level_data = _aggregate_for_keys(data, [level_key])
-        per_week_data = _aggregate_for_keys(data, [week_key, level_key])
-        per_level_per_student = _aggregate_for_keys(data, [username_key, level_key])
-        per_week_per_student = _aggregate_for_keys(data, [username_key, week_key])
-
-        response = {
-            "class": {
-                "per_level": _to_response_per_level(per_level_data),
-                "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
-            },
-            "students": {
-                "per_level": _to_response(per_level_per_student, "level", lambda e: e["id"], _to_response_level_name),
-                "per_week": _to_response(per_week_per_student, "week", lambda e: e["id"]),
-            },
-        }
-        return jsonify(response)
 
     @route("/grid_overview/class/<class_id>", methods=["GET"])
     @requires_login
@@ -376,7 +306,15 @@ class LiveStatisticsModule(WebsiteModule):
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        # For authorization purposes only admins can do this lookup by the class teacher,
+        # more or less impersonating the teacher. We can consider doing the lookup by the
+        # teacher field in any case if we don't care about security in this private method.
+        if is_admin(user):
+            teacher_name = class_["teacher"]
+        else:
+            teacher_name = user["username"]
+        teacher_adventures = self.db.get_teacher_adventures(teacher_name)
         customizations = get_customizations(self.db, class_id)
         # Array where (index-1) is the level, and the values are lists of the current adventures of the students
         last_adventures = []
@@ -1175,7 +1113,7 @@ def _get_available_adventures(adventures, teacher_adventures, customizations, la
     for level, adventure_list in customizations['sorted_adventures'].items():
         adventures_for_level = []
         for adventure in list(adventure_list):
-            if adventure['name'] == 'next':
+            if adventure['name'] == 'next' or adventure['name'] not in adventure_names:
                 continue
             adventure_key = adventure['name']
 
@@ -1298,30 +1236,6 @@ def _collect_graph_data(data, window_size=5):
     slice = window_size if len(graph_data) > window_size else 0
 
     return graph_data[-slice:], labels[-slice:]
-
-
-def get_general_class_stats(students):
-    # g.db instead of self.db since this function is not on a class
-    current_week = g.db.to_year_week(date.today())
-    data = g.db.get_program_stats(students, None, None)
-    successes = 0
-    errors = 0
-    weekly_successes = 0
-    weekly_errors = 0
-
-    for entry in data:
-        entry_successes = int(entry.get("successful_runs", 0))
-        entry_errors = sum([v for k, v in entry.items() if k.lower().endswith("exception")])
-        successes += entry_successes
-        errors += entry_errors
-        if entry.get("week") == current_week:
-            weekly_successes += entry_successes
-            weekly_errors += entry_errors
-
-    return {
-        "week": {"runs": weekly_successes + weekly_errors, "fails": weekly_errors},
-        "total": {"runs": successes + errors, "fails": errors},
-    }
 
 
 def get_customizations(db, class_id):

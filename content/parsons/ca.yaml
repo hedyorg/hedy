@@ -22,22 +22,22 @@ levels:
             code: "equips = vermell, groc, blau\n{print} \"Vermell, groc o blau?\"\n{repeat} 5 {times}\n     {print} \"Esteu seleccionat a l'equip...\"\n     {print} equips {at} {random}\n     dormir 2"
     1:
         1:
-            story: "Ets client de la fleca Hedy.\nEntres a la fleca i ets benvingut pel forner.\nLi pregunta quin tipus de pastís voleu demanar.\nA continuació, s'està preparant la teva comanda.\n"
-            code: "{print} Benvingut a la fleca Hedy!\n{ask} Quin tipus de pastís voleu demanar?\n{echo} Així que vols\n{print} La teva comanda s'està preparant!"
+            story: "Els puzles són exercicis en què les línies de codi ja estan escrites per a tu. Només heu de col·locar les línies en l'ordre correcte. Arrossegueu les línies de codi a la pantalla d'entrada i executeu el codi. Pots fer que el programa funcioni?\n\nEts client de la fleca Hedy.\nEntres a la fleca i el forner et dona la benvinguda.\nEt pregunta quin tipus de pastís vols demanar.\nAleshores et repeteix la teva resposta.\nFinalment, la teva comanda es prepara.\n"
+            code: "{print} Benvingut a la fleca Hedy!\n{ask} Quin pastís vols?\n{echo} Doncs, tu vols\n{print} La teva comanda s'està preparant!"
         2:
             story: "Ets a la cabina de DJ demanant una cançó. Creeu un programa que us demani si esteu preparats per a la festa i, a continuació, us pregunti quina cançó us agradaria escoltar.\n"
-            code: "{print} Aquest és DJ Hedy\n{ask} Esteu preparats per a la festa?\n{ask} Quina cançó t'agradaria escoltar?\n{echo} Bona elecció! estimo"
+            code: "{print} Aquest és DJ Hedy\n{ask} Esteu preparats per a la festa?\n{ask} Quina cançó t'agradaria escoltar?\n{echo} Bona elecció! m'encanta la cançó."
     2:
         1:
             story: "Tu i els teus amics veureu Netflix.\nMostra quina pel·lícula estàs a punt de veure i desitja molta diversió als espectadors!\n"
-            code: "{print} És hora d'una nit de Netflix\nel_film {is} Sonic the Hedgehog 2\n{print} Veurem el_film\n{print} Diverteix-te molt!"
+            code: "{print} És hora d'una nit de Netflix\npeli {is} Sonic the Hedgehog 2\n{print} Veurem peli\n{print} Gaudeix-la!"
         2:
             story: "Aquesta és la botiga web d'una botiga de joguines. Creeu un programa on els clients puguin afegir un article al seu carretó de la compra.\n"
-            code: "{print} Benvingut a la nostra botiga de joguines\njoguina {is} {ask} Què t'agradaria comprar?\n{print} La joguina s'afegeix a la cistella de la compra.\n{print} Gràcies per comprar amb nosaltres!"
+            code: "{print} Benvingut a la nostra botiga de joguines\njoguina {is} {ask} Què t'agradaria comprar?\n{print} joguina s'ha afegit a la teva cistella.\n{print} Gràcies per comprar amb nosaltres!"
     3:
         1:
-            story: "Comença el nou curs escolar a Hogwarts!\nLa feina del barret de classificació és classificar-te en una de les cases.\nA quina casa us ubicaran?\nEts Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nDeixeu que el programa esperi un breu període abans de revelar la vostra casa.\n"
-            code: "{print} El nou curs escolar a Hogwarts comença!\n{print} El barret de classificació està llest per classificar-vos a una casa de Hogwarts.\ncases {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} I són cases {at} {random}"
+            story: "Comença el nou curs escolar a Hogwarts!\nLa feina del barret que tria és classificar-te en una de les cases.\nA quina casa us ubicaran? Ets un Gryffindor, un Hufflepuff, un Ravenclaw o un Slytherin?\nAbans que el barret que tria reveli la vostra casa, podeu demanar-li que no triï una de les cases.\n"
+            code: "{print} El barret que tria està llest per classificar-vos a una casa de Hogwarts.\ncases {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndesagrada {is} {ask} Hi ha alguna casa de la qual no en vulguis formar part?\n{remove} desagrada {from} cases\n{print} No desagrada, eh? Doncs que sigui... cases {at} {random}"
         2:
             story: "Creeu un programa que esculli un àpat a l'atzar per a vosaltres. Fes una llista de menjar i una llista de complements i deixa que el programa decideixi què tindràs!\n"
             code: "el_menjar {is} pizza, gelat, amanida, sandvitx\nla_cobertura {is} xocolata, formatge, tonyina, ruixats\n{print} El vostre àpat aleatori d'avui és...\n{sleep} 2\n{print} el_menjar {at} {random} amb la_cobertura {at} {random}"

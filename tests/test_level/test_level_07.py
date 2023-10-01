@@ -78,27 +78,49 @@ class TestsLevel7(HedyTester):
 
     def test_missing_body(self):
         code = "repeat 5 times"
+        expected = "pass"
 
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.MissingInnerCommandException,
-                                max_level=8)
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.MissingInnerCommandException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=8
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 17), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
         code = f"print {q}hedy 123"
+        expected = "pass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 17), hedy.exceptions.UnquotedTextException),
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     def test_repeat_with_string_variable_gives_type_error(self):
