@@ -1,268 +1,371 @@
+title: Документация на Хеди
+home-sections:
+-   title: Textual programming made easy!
+    text: |-
+        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to
+        Scratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.
+
+        Python however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.
+        Hedy is the easy way to get started with textual programming languages! Hedy is free to use, open source, and unlike any other textual programming language in three ways.
+
+        1. Hedy is multi-lingual, you can use Hedy in your own language
+        2. Hedy is gradual, so you can learn one concept and its syntax a time
+        3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience
+-   title: Multi-lingual programming
+    text: While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a
+        a new translation.
+-   title: Step by step learning
+    text: Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven
+        way to learn!
+-   title: Built for the classroom
+    text: |-
+        Hedy is suitable for kids aged 10 and up and designed for classroom use.
+        Teachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.
+-   title: Programming in context
+    text: Hedy shows programming in the broadest way possible, and can be used in variety of exciting ways. Hedy allows for the creation of digital and interactive stories, colorful drawings that can be shown on the screen but also drawn with a pen plotter or embroidered on a shirt, and can be used to
+        create games or apps with buttons and keyboard actions.
+-   title: Is Hedy free?
+    text: |-
+        Yes! Hedy is 'Open source', which means that everyone can help us make Hedy better.
+        You can find our code on [GitHub](https://github.com/hedyorg/hedy).
+        If you like Hedy and want to contribute, we accept (and are very grateful for) [donations](https://github.com/sponsors/hedyorg)!
+-   title: Do I need to install anything?
+    text: No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
+-   title: Do I need programming experience to teach with Hedy?
+    text: |-
+        No, that is not needed. All concepts are explained in the slides and in the interface for learners.
+        If you create a free teacher's account, you also get access to the teacher's manual with information on how to teach
+        and frequently made mistakes.
+join-sections:
+-   title: Supporting Hedy
+    text: '# There are three ways in which you can support Hedy!'
+-   title: Improving the language
+    text: |-
+        The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.
+        Find those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).
+-   title: Translating Hedy
+    text: |-
+        Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)
+
+        This is the current status, help us complete a language, or add a new one!
+        <a href="https://hosted.weblate.org/engage/hedy/">
+        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" /></a>
+-   title: Help teachers get started
+    text: |-
+        Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.
+        If you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).
+learn-more-sections:
+-   title: Do you like Hedy?
+    text: |-
+        We love to hear from you!
+
+        [Click here to send us a message](mailto:hello@hedy.org "About Hedy")
+-   title: Found a bug?
+    text: '[Let us know on GitHub](https://github.com/hedyorg/hedy/issues/new/choose)'
+-   title: Want to help?
+    text: |-
+        The easiest way is to help with [translating Hedy](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)
+
+        Below the current status, help us complete a language, or add a new one.
+        <a href="https://hosted.weblate.org/engage/hedy/">
+        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" /></a>
 sections:
 -   title: Въведение
     key: intro
     subsections:
     -   title: Какво е Хеди?
-        text: "Хеди е текстов език за програмиране, специално създаден за младежи (на възраст между между 10 и 15 години).\nЗа разлика от езиците за програмиране за деца (като Scratch) Хеди използва текстов код вместо блокове от код.\nТака че с Хеди ще се научите как да пишете код като истинските програмисти, но на малки стъпки със забавни упражнения.\nПо този начин Хеди функционира като преход към реалните езици за програмиране като Python по достъпен и много забавен начин!\nТук може да видите видео [video](https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s) за развитието на Хеди като език за програмиране.\n"
+        text: |-
+            Хеди е текстов език за програмиране, специално създаден за младежи (на възраст между между 10 и 15 години).
+            За разлика от езиците за програмиране за деца (като Scratch) Хеди използва текстов код вместо блокове от код.
+            Така че с Хеди ще се научите как да пишете код като истинските програмисти, но на малки стъпки със забавни упражнения.
+            По този начин Хеди функционира като преход към реалните езици за програмиране като Python по достъпен и много забавен начин!
+            Тук може да видите видео [video](https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s) за развитието на Хеди като език за програмиране.
     -   title: Целева аудитория
-        text: "Хеди е разработен за учениците в началното и средното училище (10-15 годишни).\nВажно е учениците да могат да четат добре. Препоръчваме ви да не започвате със Хеди преди учениците да са достигнали поне трети клас.\nУчениците (и учителите!) нямат нужда от предварителни знания по програмиране преди да започнат с Хеди.\n"
+        text: |-
+            Хеди е разработен за учениците в началното и средното училище (10-15 годишни).
+            Важно е учениците да могат да четат добре. Препоръчваме ви да не започвате със Хеди преди учениците да са достигнали поне трети клас.
+            Учениците (и учителите!) нямат нужда от предварителни знания по програмиране преди да започнат с Хеди.
     -   title: Как работи Хеди?
-        text: "Хеди е разделена на нива, в които се преподават нови команди. Всяко ниво съдържа разнообразни приключения за практикуване на научените команди.\nКато учител вие решавате кои приключения да бъдат достъпни за вашите ученици. Дали в това ниво те ще правят ресторант, калкулатор или къща с призраци? Във всяко ниво приключенията са подредени от най-лесните към най-трудните.\nТака че учениците ви ще продължават да бъдат предизвикани. Приключенията могат да бъдат изпълнявани от учениците индивидуално или можете да ги използвате за работа в клас.\n\nПриключенията включват и пример за код, за да може и по-слабо запознатите с цифровите технологии учители да използват Хеди!\nРазбира се Хеди е подходяща и за креативните учители, които обичат да правят свои собствени планове на уроци и приключения!\n\nСлед като програмирате всички приключения от определено ниво, учениците ви могат да проверят знанията си във викторината.\nМожете да проследявате работата на учениците и техния напредък на страницата на класа.\n"
+        text: |-
+            Хеди е разделена на нива, в които се преподават нови команди. Всяко ниво съдържа разнообразни приключения за практикуване на научените команди.
+            Като учител вие решавате кои приключения да бъдат достъпни за вашите ученици. Дали в това ниво те ще правят ресторант, калкулатор или къща с призраци? Във всяко ниво приключенията са подредени от най-лесните към най-трудните.
+            Така че учениците ви ще продължават да бъдат предизвикани. Приключенията могат да бъдат изпълнявани от учениците индивидуално или можете да ги използвате за работа в клас.
+
+            Приключенията включват и пример за код, за да може и по-слабо запознатите с цифровите технологии учители да използват Хеди!
+            Разбира се Хеди е подходяща и за креативните учители, които обичат да правят свои собствени планове на уроци и приключения!
+
+            След като програмирате всички приключения от определено ниво, учениците ви могат да проверят знанията си във викторината.
+            Можете да проследявате работата на учениците и техния напредък на страницата на класа.
     -   title: Устройства
-        text: "Хеди е уеб базиран, което означава, че работи на всяко устройство с браузър(Google Chrome, Firefox, Edge и т.н.) като лаптопи, хромбук, таблети и дори смарт телефони.\nНяма нужда да инсталирате нищо преди да работите с Хеди, просто отворете уебсайта и сте готови!\n"
+        text: |-
+            Хеди е уеб базиран, което означава, че работи на всяко устройство с браузър(Google Chrome, Firefox, Edge и т.н.) като лаптопи, хромбук, таблети и дори смарт телефони.
+            Няма нужда да инсталирате нищо преди да работите с Хеди, просто отворете уебсайта и сте готови!
     -   title: Общността на Хеди
-        text: "Всички учители, програмисти и други фенове на Хеди са добре дошли да се присъединят към нашия [Discord сървър](https://discord.gg/8yY7dEme9r). Това е идеалното място за разговори за Хеди : имаме канали, в които можете да покажете страхотните си проекти и уроци, канали за докладване на грешки и канали за разговори с други учители и с екипа на Хеди.\n"
--   title: "Tutorial"
-    key: "tutorial"
+        text: 'Всички учители, програмисти и други фенове на Хеди са добре дошли да се присъединят към нашия [Discord сървър](https://discord.gg/8yY7dEme9r). Това е идеалното място за разговори за Хеди : имаме канали, в които можете да покажете страхотните си проекти и уроци, канали за докладване на грешки
+            и канали за разговори с други учители и с екипа на Хеди.'
+-   title: Tutorial
+    key: tutorial
     subsections:
-    -   title: "Tutorial"
-        text: |
-            Do you want to follow the tutorial (again)? Click [here](https://hedy.org/tutorial)
+    -   title: Tutorial
+        text: Do you want to follow the tutorial (again)? Click [here](https://hedy.org/tutorial)
 -   title: Подготовка
     key: подготовка
     subsections:
-    -   title: "For teachers"
-        text: |
-            You can prepare your classes at the <a href="https://hedy.org/for-teachers" target="_blank">For Teachers page</a>. On this page you'll find everything you'll need to teach with Hedy, like your classes, your adventures and slides. All the functionalities of the for teachers page are explained below.
+    -   title: For teachers
+        text: You can prepare your classes at the <a href="https://hedy.org/for-teachers" target="_blank">For Teachers page</a>. On this page you'll find everything you'll need to teach with Hedy, like your classes, your adventures and slides. All the functionalities of the for teachers page are explained
+            below.
     -   title: Създаване на клас
-        text: "Като учител може да създадете клас за своите ученици. В този клас вие може да виждате профилите на учениците и техните програми, както и да наблюдавате техния прогрес.\nМоже да персонализирате вашия клас и да избирате кои предизвикателства са достъпни. По този начин учениците няма да се чувстват пренатоварени от предизвикателства и нива и ще могат да се фокусират върху предизвикателства, които вие предпочитате.\n"
+        text: |-
+            Като учител може да създадете клас за своите ученици. В този клас вие може да виждате профилите на учениците и техните програми, както и да наблюдавате техния прогрес.
+            Може да персонализирате вашия клас и да избирате кои предизвикателства са достъпни. По този начин учениците няма да се чувстват пренатоварени от предизвикателства и нива и ще могат да се фокусират върху предизвикателства, които вие предпочитате.
     -   title: Профили на ученици
-        text: "Вашите ученици могат да се включат в класа по два начина: сами да си създадат профили или вие да създадете профилите на тях.\n\n**Ученици, които сами създават профила си**\nВашите ученици модат да отварят сайта на Хеди и сами да си създадат профил, точно както вие създадохте собствения си профил. За да се включат в класа, те само трябва да кликнат на клинка с покана за включване.\nЛинкът с поканата за включване се намира на страницата на класа, оттам може да го копирате и пратите на учениците. Имайте предвид, че учениците трябва да са влезли в профила си преди да кликнат на линка, за да работи безпроблемно.\n\n**Ученици, за които вие създавате профил**\nПонякога е по-лесно да направите всички акаунти за учениците си. Това става като кликнете на бутона \"Създаване на профил за ученици\" и попълните потребителските имена и пароли.\nУчениците могат да влязат в профилите си като използват потребителските имена и пароли, които вие сте задали. По-късно вие може да промените името или паролата, ако някой пожелае, като ученикът ще продължи да е записан в класа.\n"
+        text: |-
+            Вашите ученици могат да се включат в класа по два начина: сами да си създадат профили или вие да създадете профилите на тях.
+
+            **Ученици, които сами създават профила си**
+            Вашите ученици модат да отварят сайта на Хеди и сами да си създадат профил, точно както вие създадохте собствения си профил. За да се включат в класа, те само трябва да кликнат на клинка с покана за включване.
+            Линкът с поканата за включване се намира на страницата на класа, оттам може да го копирате и пратите на учениците. Имайте предвид, че учениците трябва да са влезли в профила си преди да кликнат на линка, за да работи безпроблемно.
+
+            **Ученици, за които вие създавате профил**
+            Понякога е по-лесно да направите всички акаунти за учениците си. Това става като кликнете на бутона "Създаване на профил за ученици" и попълните потребителските имена и пароли.
+            Учениците могат да влязат в профилите си като използват потребителските имена и пароли, които вие сте задали. По-късно вие може да промените името или паролата, ако някой пожелае, като ученикът ще продължи да е записан в класа.
     -   title: Задаване на предпочитан език
-        text: "Когато учениците създават профили, те трябва да изберат \"предпочитан език\". Хеди винаги ще се зарежда на избрания език.\nПромяната на избрания език винаги може да бъде направена по-късно, като се отидете на \"Моят профил\" и оттам в \"Моите лични настройки\".\nОт декември 2021 г. задаването на предпочитан език е задължително за всеки профил в Хеди.\nКогато Вашият акаунт или акаунтите на Вашите ученици са създадени по-рано от тази дата, ще получите съобщение, че липсва предпочитан език.\nНе се притеснявайте! Отидете в \"Моят профил\" и задайте език в настройките на профила си.\nДокато не зададете език, Хеди ще се показва на езика на Вашия браузър, а когато този език не се поддържа - на английски език.\n\n**За хора, които не говорят английски език**\nМожете не само да промените езика на приключенията на собствения си език. Можете също така да изберете на какъв език да бъдат ключовите думи (например \"отпечатай\" или \"попитай\").\nПо този начин можете да научите учениците си да програмират с английски ключови думи, но можете и да им позволите да програмират на собствения си език. Например холандските ученици могат да използват командата 'vraag' вместо 'ask'.\n"
+        text: |-
+            Когато учениците създават профили, те трябва да изберат "предпочитан език". Хеди винаги ще се зарежда на избрания език.
+            Промяната на избрания език винаги може да бъде направена по-късно, като се отидете на "Моят профил" и оттам в "Моите лични настройки".
+            От декември 2021 г. задаването на предпочитан език е задължително за всеки профил в Хеди.
+            Когато Вашият акаунт или акаунтите на Вашите ученици са създадени по-рано от тази дата, ще получите съобщение, че липсва предпочитан език.
+            Не се притеснявайте! Отидете в "Моят профил" и задайте език в настройките на профила си.
+            Докато не зададете език, Хеди ще се показва на езика на Вашия браузър, а когато този език не се поддържа - на английски език.
+
+            **За хора, които не говорят английски език**
+            Можете не само да промените езика на приключенията на собствения си език. Можете също така да изберете на какъв език да бъдат ключовите думи (например "отпечатай" или "попитай").
+            По този начин можете да научите учениците си да програмират с английски ключови думи, но можете и да им позволите да програмират на собствения си език. Например холандските ученици могат да използват командата 'vraag' вместо 'ask'.
     -   title: Запазване на програми
-        text: "Тъй като вече сте влезли в системата, ще видите син банер с Моят профил и Моите програми.\nТези табове съществуват и за вашите ученици. В Моите програми можете да намерите всички кодове, които сте запазили.\n\nМожете лесно да запазвате проектите си като дадете име на проекта си в бялата лента и натиснете зеления бутон Запази кода.\nВие (и вашите ученици) можете също така да споделяте програми. Тези програми ще бъдат публикувани на нашата страница за изследване, за да могат всички да ги видят и използват.\nАко искате да отмените споделянето на програмата си, отидете в \"Моите програми\" и натиснете \"Отменете споделянето\".\n"
-    -   text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for your students too. In My programs you can find all the codes that you've saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\nYou (and your students) can also share programs. These programs will be posted on our [explore page](https://hedy.org/explore), for everybody to see and use.\nIf you want to unshare your program, go to 'My programs' and click 'Unshare'.\n"
-        title: Storing programs
+        text: |-
+            Тъй като вече сте влезли в системата, ще видите син банер с Моят профил и Моите програми.
+            Тези табове съществуват и за вашите ученици. В Моите програми можете да намерите всички кодове, които сте запазили.
+
+            Можете лесно да запазвате проектите си като дадете име на проекта си в бялата лента и натиснете зеления бутон Запази кода.
+            Вие (и вашите ученици) можете също така да споделяте програми. Тези програми ще бъдат публикувани на нашата страница за изследване, за да могат всички да ги видят и използват.
+            Ако искате да отмените споделянето на програмата си, отидете в "Моите програми" и натиснете "Отменете споделянето".
+    -   title: Storing programs
+        text: |-
+            Because you are now logged in, you'll see the blue banner with My profile and My programs.
+            These tabs exist for your students too. In My programs you can find all the codes that you've saved.
+
+            You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
+            You (and your students) can also share programs. These programs will be posted on our [explore page](https://hedy.org/explore), for everybody to see and use.
+            If you want to unshare your program, go to 'My programs' and click 'Unshare'.
 -   title: Преподаване с Хеди
     key: преподаване
     subsections:
-    -   text: "Хеди съдържа много различни нива, всяко от които е за ново умение. Ние препоръчваме да преподавате по едно ниво на урок. Това дава време на учениците напълно да усвоят всяка нова команда или концепция преди да продължите към следващото ниво.\nНие използваме следната структура в нашите уроци:\n"
-        title: 'Teaching with Hedy'
-    -   title: "Slides"
-        text: |
+    -   title: Teaching with Hedy
+        text: |-
+            Хеди съдържа много различни нива, всяко от които е за ново умение. Ние препоръчваме да преподавате по едно ниво на урок. Това дава време на учениците напълно да усвоят всяка нова команда или концепция преди да продължите към следващото ниво.
+            Ние използваме следната структура в нашите уроци:
+    -   title: Slides
+        text: |-
             When giving instructions you might want to use our slides. Our slides are available on the 'For teachers' page. There is a set of slides for each level. In the slides all the new commands for that level are explained. We have aimed to explain why these changes are nessecary or how the new commands come in handy.
             We also give some examples of how the new commands can be used. You could of course also use your own slides, or just open Hedy and show your students around the website. Whichever you prefer to give the best Hedy lessons!
     -   title: Introduction
-        text: "You can start your lessons by activating your students' prior knowledge: What do they already know about the subject, what did they learn in the previous lesson and which mistakes did they make that they've now learned from?\nThis way all the previously learned commands and frequently made mistakes are fresh in your students' memories, when you strat introducing the new lesson.\n"
+        text: |-
+            You can start your lessons by activating your students' prior knowledge: What do they already know about the subject, what did they learn in the previous lesson and which mistakes did they make that they've now learned from?
+            This way all the previously learned commands and frequently made mistakes are fresh in your students' memories, when you strat introducing the new lesson.
     -   title: Въведение в новите концепции и команди
-        text: "The new concepts and commands can be very hard for some students to fully understand.\nThat's why it's of importance to model the proper use of the new commands to your students.\nEspecially in the lower levels, where some students have no experience whith programming at all, it can be hard for them to understand the new abstract concepts.\nShowing a lot of examples makes an abstract concept (for instance: 'What is a variable?') more recognizable and easier to understand ('Look, the variable pet changed into dog'). Our slides could help you with that.\n"
+        text: |-
+            The new concepts and commands can be very hard for some students to fully understand.
+            That's why it's of importance to model the proper use of the new commands to your students.
+            Especially in the lower levels, where some students have no experience whith programming at all, it can be hard for them to understand the new abstract concepts.
+            Showing a lot of examples makes an abstract concept (for instance: 'What is a variable?') more recognizable and easier to understand ('Look, the variable pet changed into dog'). Our slides could help you with that.
     -   title: Нека започнем работа
-        text: "Each level contains different adventures that you can find in the pink tabs. The first pink tab explains the new commands in this level.\nThe following tabs are adventures that the students can try out and make their own.\nThe adventures are arranged from easiest to hardest, so we recommend to start on the left and your your way to the right.\nThe last tab 'what's next' gives a little teaser of what you'll learn in the next level. Of course, you can select the adventures you want your students to do for each level.\nThey don't always have to make every adventure. Every adventure contains an example code, that the students can try out with the green button.\nThe example code gets copied to the workfield, where the students can try out the code and adjust it to make it their own.\nStimulate your students to turn the example codes into their own projects by adding their own ideas and making their own variation of the adventure.\n"
+        text: |-
+            Each level contains different adventures that you can find in the pink tabs. The first pink tab explains the new commands in this level.
+            The following tabs are adventures that the students can try out and make their own.
+            The adventures are arranged from easiest to hardest, so we recommend to start on the left and your your way to the right.
+            The last tab 'what's next' gives a little teaser of what you'll learn in the next level. Of course, you can select the adventures you want your students to do for each level.
+            They don't always have to make every adventure. Every adventure contains an example code, that the students can try out with the green button.
+            The example code gets copied to the workfield, where the students can try out the code and adjust it to make it their own.
+            Stimulate your students to turn the example codes into their own projects by adding their own ideas and making their own variation of the adventure.
     -   title: Тест
-        text: "To test whether your students have picked up all the new info in the level, you can let them make the quiz.\nThe quiz contains 10 multiple choice questions about the new concepts and command to that level.\nNot every level has a quiz yet, as we are still building the quizzes.\n"
+        text: |-
+            To test whether your students have picked up all the new info in the level, you can let them make the quiz.
+            The quiz contains 10 multiple choice questions about the new concepts and command to that level.
+            Not every level has a quiz yet, as we are still building the quizzes.
     -   title: Оценяване
-        text: "Round up your lesson by having a brief evaluation. What did the students learn? Which hardships did they come across?\nHow did they learn from their mistakes? And of course: What did they create?\nStudents are often very proud of their own creations, so it's nice to save a little time and gove your students the opportunity to show their work to their classmates.\n"
--   title: "Extra Hedy features"
-    key: "features"
+        text: |-
+            Round up your lesson by having a brief evaluation. What did the students learn? Which hardships did they come across?
+            How did they learn from their mistakes? And of course: What did they create?
+            Students are often very proud of their own creations, so it's nice to save a little time and gove your students the opportunity to show their work to their classmates.
+-   title: Extra Hedy features
+    key: features
     subsections:
-    -   title: "Teacher Statistics"
-        text: |
-            This [video](https://www.youtube.com/watch?v=iwHVG4NRKI4&t=5s) shows you more information on how to use the teacher statistics in your class.
-    -   title: "Make your own adventure"
-        text: |
-            It is also possible for teachers to create your own adventure. [This video](https://www.youtube.com/watch?v=A0zbXpxX4q4) shows you how to create your own adventure as a teacher and add it to your class(es).
-    -   title: "Explore page"
-        text: |
+    -   title: Teacher Statistics
+        text: This [video](https://www.youtube.com/watch?v=iwHVG4NRKI4&t=5s) shows you more information on how to use the teacher statistics in your class.
+    -   title: Make your own adventure
+        text: It is also possible for teachers to create your own adventure. [This video](https://www.youtube.com/watch?v=A0zbXpxX4q4) shows you how to create your own adventure as a teacher and add it to your class(es).
+    -   title: Explore page
+        text: |-
             On the [explore](https://hedy.org/explore) page you can view the work of other Hedy users. You can try out their programs and use them as inspiration to create something cool yourself.
             You can also add a program you've made to the explore page yourself by clicking 'Save and share code' in the coding screen or go to My Programs and click 'Share'.
             Don't want to share your work anymore? Simply go to 'My Programs' and click 'Unshare'.
             If you want more information about the explore page, check out this [video](https://www.youtube.com/watch?v=26boFjqvS5Q).
-    -   title: "My achievements"
-        text: |
+    -   title: My achievements
+        text: |-
             If you click on your username in the topright corner of your screen, you can go to [My achievements](https://hedy.org/my-achievements). On this page you achievements are collected. Your students have such a page as well.
             When you hover over the badge with your mouse, you'll see how to earn the badge. There are hidden badges too, of which you'll have to find out yourself how to earn them.
             If you want more information on the achievements, check out this [video](https://www.youtube.com/watch?v=-FjmKejukCs).
-    -   title: "High Scores"
-        text: |
+    -   title: High Scores
+        text: |-
             On [this page](https://hedy.org/highscores) you can see the high scores of all Hedy users.
             In this [video](https://www.youtube.com/watch?v=IqTiUkBVTo8) you can learn some more about the high scores.
-    -   title: "Debugger"
-        text: |
+    -   title: Debugger
+        text: |-
             Is your (student's) code not working? There must be a bug (coding mistake) in it! You can use the debugger to find the mistake.
             The debugger is the ladybig button in your coding screen. If you press it, you can run your code line by line to find your mistake.
             Have you found the mistake? Press the red stop button and the debugger will shut off.
-    -   title: "Read aloud"
-        text: |
-            Do you want the output of your program to be read aloud? Then you can use the read aloud function that is found under the 'run code' button in your coding screen.
-    -   title: "Programmers mode"
-        text: |
+    -   title: Read aloud
+        text: Do you want the output of your program to be read aloud? Then you can use the read aloud function that is found under the 'run code' button in your coding screen.
+    -   title: Programmers mode
+        text: |-
             Distracted by all the adventures, or do you want to make a long program? Then check out the 'Programmers Mode' switch at the bottom of your coding screen.
             Programmers mode allows you and your students to use a bigger coding screen.
-    -   title: "Cheat sheets"
-        text: |
+    -   title: Cheat sheets
+        text: |-
             In every level there is a button with this emoji 🤔. You and your students can find the "cheat sheets" there. On this cheat sheet, you can find all the commands that are usable in this level in their correct form.
             So if you've forgotten how a command works, simply take a peek at the cheat sheet!
-    -   title: "Other useful features"
-        text: |
-            This [video](https://www.youtube.com/watch?v=c4MntPPgl1Y) shows you even more features of Hedy, like the cheatsheets and the keyword switcher.
--   title: "Answers to the exercises"
+    -   title: Other useful features
+        text: This [video](https://www.youtube.com/watch?v=c4MntPPgl1Y) shows you even more features of Hedy, like the cheatsheets and the keyword switcher.
+-   title: Answers to the exercises
     key: answers
-    intro: |
+    intro: |-
         The answers to all the exercises can be found on the public profile of the useraccount 'Hedy_answers'. We often encourage students to use their own creativity in their answers, so these answers are merely a guideline as to what a possible correct answer could look like.
 
         To go to the 'Hedy_answers' profile, please click <a href="https://hedy.org/user/hedy_answers" target="_blank">here</a>.
--   levels:
+-   title: Common mistakes
+    levels:
     -   level: '1'
         sections:
-        -   title: "Students forget to type commandos"
+        -   title: Students forget to type commandos
             example:
-                error_text: |
-                    For example they type a sentence without using print.
-                error_code: |
-                    Hedy can't print this
-                solution_text: |
-                    Teach your students to always start a line of code with a command.
-                solution_code: |
-                    print Hedy can print this!
-        -   title: "Students use capitals when typing commands"
+                error_text: For example they type a sentence without using print.
+                error_code: Hedy can't print this
+                solution_text: Teach your students to always start a line of code with a command.
+                solution_code: print Hedy can print this!
+        -   title: Students use capitals when typing commands
             example:
-                error_text: |
-                    Commands won't work if they are in capitals.
-                error_code: |
+                error_text: Commands won't work if they are in capitals.
+                error_code: |-
                     Ask Why does my code fail?
                     Print Because I'm using capitals.
-                solution_text: |
-                    Remove the capitals.
-                solution_code: |
+                solution_text: Remove the capitals.
+                solution_code: |-
                     ask Why does my code work now?
                     print Because I removed the capitals!
-        -   title: "Students use echo without ask"
+        -   title: Students use echo without ask
             example:
-                error_text: |
-                    Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
-                error_code: |
-                    echo Your name is
-                solution_text: |
-                    Add an ask command to make it work.
-                solution_code: |
+                error_text: Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
+                error_code: echo Your name is
+                solution_text: Add an ask command to make it work.
+                solution_code: |-
                     ask What's your name?
                     echo Your name is
-        -   title: "Students want their echo word (variable) to be in the middle of a sentence"
+        -   title: Students want their echo word (variable) to be in the middle of a sentence
             example:
-                error_text: |
-                    And they are right! That's why they will learn to use proper variables in the next level.
-                error_code: |
+                error_text: And they are right! That's why they will learn to use proper variables in the next level.
+                error_code: |-
                     ask Which programming language is the most fun?
                     echo is the best!
-                solution_text: |
-                    In level 1 we have to keep it at this:
-                solution_code: |
+                solution_text: 'In level 1 we have to keep it at this:'
+                solution_code: |-
                     ask Which programming language is the most fun?
                     echo The best is...
-        -   title: "Turtle: Students let the turtle walk off of the screen"
+        -   title: 'Turtle: Students let the turtle walk off of the screen'
             example:
-                error_text: |
-                    Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.
-                error_code: |
+                error_text: Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.
+                error_code: |-
                     forward 300
                     turn 90
-                solution_text: |
-                    In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.
-                solution_code: |
+                solution_text: In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.
+                solution_code: |-
                     forward 100
                     turn 90
-        -   title: "Turtle: Students use the command backward, but that doesn't exist"
+        -   title: 'Turtle: Students use the command backward, but that doesn''t exist'
             example:
-                error_text: |
-                    Backward is not a command.
-                error_code: |
-                    backward 100
-                solution_text: |
-                    To make the turtle go backwards, you use the forward command and a negative number. For example:
-                solution_code: |
-                    forward -100
+                error_text: Backward is not a command.
+                error_code: backward 100
+                solution_text: 'To make the turtle go backwards, you use the forward command and a negative number. For example:'
+                solution_code: forward -100
     -   level: '2'
         sections:
-        -   title: "Students make typos in their commands"
+        -   title: Students make typos in their commands
             example:
-                error_text: |
-                    Hedy can't recognize a command with a typo.
-                error_code: |
-                    prinnt Don't make typos!
-                solution_text: |
-                    Teach your students to read the error messages. This way they can find out themselves what went wrong.
-                solution_code: |
-                    print Don't make typos!
-        -   title: "Students forget that the ask command has changed"
+                error_text: Hedy can't recognize a command with a typo.
+                error_code: prinnt Don't make typos!
+                solution_text: Teach your students to read the error messages. This way they can find out themselves what went wrong.
+                solution_code: print Don't make typos!
+        -   title: Students forget that the ask command has changed
             example:
-                error_text: |
-                    In this level students learn about variables. The ask command requires a variable as well, but students forget this.
-                error_code: |
-                    ask what would you like to eat?
-                solution_text: |
-                    In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
-                solution_code: |
-                    order is ask What would you like to eat?
-        -   title: "Students try to use the echo command "
+                error_text: In this level students learn about variables. The ask command requires a variable as well, but students forget this.
+                error_code: ask what would you like to eat?
+                solution_text: In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
+                solution_code: order is ask What would you like to eat?
+        -   title: Students try to use the echo command
             example:
-                error_text: |
-                    For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
-                error_code: |
+                error_text: For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
+                error_code: |-
                     answer is ask Why doesn't echo work anymore?!
                     echo
-                solution_text: |
-                    Use a varible instead.
-                solution_code: |
+                solution_text: Use a varible instead.
+                solution_code: |-
                     answer is ask Why doens't echo work anymore?!
                     print answer
-        -   title: "Students use a variable name or as a normal word"
+        -   title: Students use a variable name or as a normal word
             example:
-                error_text: |
-                    In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.
-                error_code: |
+                error_text: In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.
+                error_code: |-
                     name is Hedy
                     print Hi my name is name
-                solution_text: |
-                    So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.
-                solution_code: |
+                solution_text: So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.
+                solution_code: |-
                     name is Hedy
                     print Hi I'm name
-        -   title: "Students use long variable names containing two words."
+        -   title: Students use long variable names containing two words.
             example:
-                error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
-                error_code: |
-                    chosen door is ask Which door do you pick?
-                solution_text: |
-                    Add an underscore.
-                solution_code: |
-                    chosen_door is ask which door do you pick?
-        -   title: "Students might use two different names for the same variable"
+                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_code: chosen door is ask Which door do you pick?
+                solution_text: Add an underscore.
+                solution_code: chosen_door is ask which door do you pick?
+        -   title: Students might use two different names for the same variable
             example:
-                error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
-                error_code: |
+                error_text: In this example the student has used 'horse' and 'name' for the same variables.
+                error_code: |-
                     horse is ask What is your horse called?
                     print Your horse is called name
-                solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
-                solution_code: |
+                solution_text: Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                solution_code: |-
                     name is ask What is your horse called?
                     print Your horse is called name
     -   level: '3'
         sections:
-        -   title: "Students try to print whole lists"
+        -   title: Students try to print whole lists
             example:
-                error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
-                error_code: |
+                error_text: A list can't be printed. You can only print one item from the list with at random.
+                error_code: |-
                     groceries is apples, milk, chocolate
                     print groceries
-                solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
-                solution_code: |
+                solution_text: To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
+                solution_code: |-
                     print apples, milk, chocolate
 
                     or
 
                     groceries is apples, milk, chocolate
                     print groceries at random
-        -   title: "Students use the name of a variable or list as regular text"
+        -   title: Students use the name of a variable or list as regular text
             example:
-                error_text: |
-                    This problem probably occured in level 2 as well. Now it can happen with lists too.
-                error_code: |
+                error_text: This problem probably occured in level 2 as well. Now it can happen with lists too.
+                error_code: |-
                     name is Hedy
                     print Hi my name is name
 
@@ -270,9 +373,8 @@ sections:
 
                     animal is rhino, bee, swan
                     print The best animal is... animal at random
-                solution_text: |
-                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
-                solution_code: |
+                solution_text: Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
+                solution_code: |-
                     name is Hedy
                     print Hi I'm name
 
@@ -280,83 +382,71 @@ sections:
 
                     animals is rhino, bee, swan
                     print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+        -   title: Students forget at in at random
             example:
-                error_text: |
-                    Like in the example
-                error_code: |
+                error_text: Like in the example
+                error_code: |-
                     birds is sparrow, seagull, robin
                     print birds random
-                solution_text: |
-                    This problem is solved by adding the word at.
-                solution_code: |
+                solution_text: This problem is solved by adding the word at.
+                solution_code: |-
                     birds is sparrow, seagull, robin
                     print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+        -   title: Students forget to use the print command when also using the at random command
             example:
-                error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
-                error_code: |
+                error_text: Or they will sometimes put at random at the beginning of the line.
+                error_code: |-
                     fruit is apple, cherry, banana
                     fruit at random
-                solution_text: |
-                    Emphasize to your students that you always need a print to print text.
-                solution_code: |
+                solution_text: Emphasize to your students that you always need a print to print text.
+                solution_code: |-
                     fruit is apple, cherry, banana
                     print fruit at random
-        -   title: "Students forget to use commas in their lists"
+        -   title: Students forget to use commas in their lists
             example:
-                error_text: |
-                    In a list items are seperated with a comma.
-                error_code: |
+                error_text: In a list items are seperated with a comma.
+                error_code: |-
                     pizzas is funghi tonno quattro stagioni
                     print pizzas at random
-                solution_text: |
-                    After each item on your list, there should be a comma
-                solution_code: |
+                solution_text: After each item on your list, there should be a comma
+                solution_code: |-
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-        -   title: "Students try to use at random without a list"
+        -   title: Students try to use at random without a list
             example:
-                error_text: |
-                    For example
-                error_code: |
+                error_text: For example
+                error_code: |-
                     clubs is Manchester United
                     print clubs at random
-                solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
-                solution_code: |
+                solution_text: Hedy can't print anything at random, because there is no list to choose from.
+                solution_code: |-
                     clubs is Manchester United, Bayrn Munchen, FC Barcelona
                     print clubs at random
-        -   title: "Students try to use add/remove without a list "
+        -   title: Students try to use add/remove without a list
             example:
-                error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
-                error_code: |
+                error_text: In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                error_code: |-
                     names is Jake
                     your_name is ask Who are you?
                     add your_name to names
                     print names at random
-                solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
-                solution_code: |
+                solution_text: There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                solution_code: |-
                     names is Jake, Amy
                     your_name is ask Who are you?
                     add your_name to names
                     print names at random
-        -   title: "Students forget to use to/from in add/remove"
+        -   title: Students forget to use to/from in add/remove
             example:
-                error_text: |
-                    Without to/from the add/remove command won't work.
-                error_code: |
+                error_text: Without to/from the add/remove command won't work.
+                error_code: |-
                     adventures is story, parrot, dice
                     choice is Which adventure do you like best?
                     add choice
                     remove dice
                     print I love adventures at random
-                solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
-                solution_code: |
+                solution_text: Hedy has to know which list the item should be added to/removed from.
+                solution_code: |-
                     adventures is story, parrot, dice
                     choice is Which adventure do you like best?
                     add choice to adventures
@@ -364,113 +454,92 @@ sections:
                     print I love adventures at random
     -   level: '4'
         sections:
-        -   title: "Students forget to use quotation marks on both sides of the text"
+        -   title: Students forget to use quotation marks on both sides of the text
             example:
-                error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
-                error_code: |
+                error_text: In this level print and ask need a set of quotation marks. One before of the text and one after.
+                error_code: |-
                     print Hello
                     mood is ask 'How are you?
-                solution_text: |
-                    Add the correct quotation marks.
-                solution_code: |
+                solution_text: Add the correct quotation marks.
+                solution_code: |-
                     print 'Hello'
                     mood is ask 'How are you?'
-        -   title: "Students use the wrong quotation marks"
+        -   title: Students use the wrong quotation marks
             example:
-                error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
-                error_code: |
+                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                error_code: |-
                     print `Welcome to the restaurant`
                     food is ask "What would you like to order?"
-                solution_text: |
-                    These are the correct quotation marks:
-                solution_code: |
+                solution_text: 'These are the correct quotation marks:'
+                solution_code: |-
                     print 'Welcome to the restaurant'
                     food is ask 'What would you like to order?'
-        -   title: "Students use an apostrophe in their text"
+        -   title: Students use an apostrophe in their text
             example:
-                error_text: |
-                    From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
-                error_code: |
-                    print 'You're not allowed to type this'
-                solution_text: |
-                    You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
-                solution_code: |
+                error_text: From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
+                error_code: print 'You're not allowed to type this'
+                solution_text: You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
+                solution_code: |-
                     print 'Youre allowed to type this'
                     print 'And you`re able to do this'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: Students forget to use print in an if command
             example:
-                error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
-                error_code: |
+                error_text: After students use if or else they forget to use a second command like print or ask.
+                error_code: |-
                     if name is Hedy 'Great!'
                     else 'Hedy is better!'
-                solution_text: |
-                    Add the print command to fix it.
-                solution_code: |
+                solution_text: Add the print command to fix it.
+                solution_code: |-
                     if name is Hedy print 'Great!'
                     else print 'Hedy is better!'
-        -   title: "Students might use two different names for the same variable"
+        -   title: Students might use two different names for the same variable
             example:
-                error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
-                error_code: |
+                error_text: In this example the student has used 'horse' and 'name' for the same variables.
+                error_code: |-
                     horse is ask 'What is your horse called?'
                     if name is Bonfire print 'cool'
                     else print 'less cool!'
-                solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
-                solution_code: |
+                solution_text: Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                solution_code: |-
                     horse is ask 'What is your horse called'
                     if horse is Bonfire print 'cool!'
                     else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides"
+        -   title: Students still forget the quotes on both sides
             example:
-                error_text: |
-                    Codes using the `if` commando can get very long and students tend to forget to use quotes.
-                error_code: |
+                error_text: Codes using the `if` commando can get very long and students tend to forget to use quotes.
+                error_code: |-
                     if name is Hedy print fun
                     else print 'meh!
-                solution_text: |
-                    Always use 2 quotes in a print command.
-                solution_code: |
+                solution_text: Always use 2 quotes in a print command.
+                solution_code: |-
                     if name is Hedy print 'fun'
                     else print 'meh!'
-        -   title: "Students use quotes around variable names"
+        -   title: Students use quotes around variable names
             example:
-                error_text: |
-                    In this level there are no quotes around variable names.
-                error_code: |
+                error_text: In this level there are no quotes around variable names.
+                error_code: |-
                     if 'name' is 'Hedy' print 'fun'
                     else print 'meh!'
-                solution_text: |
-                    Remove the quotes to get the code to work.
-                solution_code: |
+                solution_text: Remove the quotes to get the code to work.
+                solution_code: |-
                     if name is Hedy print 'fun'
                     else print 'meh!
-        -   title: "Students use long variable names containing two words"
+        -   title: Students use long variable names containing two words
             example:
-                error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
-                error_code: |
-                    chosen door is ask 'Which door do you pick?'
-                solution_text: |
-                    Add an underscore.
-                solution_code: |
-                    chosen_door is ask 'which door do you pick?'
-        -   title: "Students want multiple answers to be correct"
+                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_code: chosen door is ask 'Which door do you pick?'
+                solution_text: Add an underscore.
+                solution_code: chosen_door is ask 'which door do you pick?'
+        -   title: Students want multiple answers to be correct
             example:
-                error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
-                error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
-                solution_text: |
+                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                error_code: if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
+                solution_text: |-
                     You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
                     Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
-                solution_code: |
+                solution_code: |-
                     friends is Jesse, David, Souf
                     name is ask 'Who are you?'
                     if name in friends print 'You are funny'
@@ -482,42 +551,34 @@ sections:
                     if naam is Jesse print 'You are funny'
                     if naam is David print 'You are funny'
                     if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+        -   title: The students make the variable name the same as the value in the if statement
             example:
-                error_text: |
-                    In the example below the password is 'password'. This will result in it always being correct.
-                error_code: |
+                error_text: In the example below the password is 'password'. This will result in it always being correct.
+                error_code: |-
                     password is ask 'What is the password?'
                     if password is password print 'Access granted'
                     else print 'Acces denied!'
-                solution_text: |
-                    Pick a different name for your variable.
-                solution_code: |
+                solution_text: Pick a different name for your variable.
+                solution_code: |-
                     secret_password is ask 'What is the password'
                     if secret_password is password print 'Access granted!'
                     else print 'Access denied!'
     -   level: '6'
         sections:
-        -   title: "Students struggle with quotation marks"
+        -   title: Students struggle with quotation marks
             example:
-                error_text: |
-                    Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
-                error_code: |
-                    print '5 + 5'
-                solution_text: |
-                    In this code the output screen will print '10'.
-                solution_code: |
-                    print 5 + 5
-        -   title: "Students struggle with the concept of doing maths with a variable"
+                error_text: Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
+                error_code: print '5 + 5'
+                solution_text: In this code the output screen will print '10'.
+                solution_code: print 5 + 5
+        -   title: Students struggle with the concept of doing maths with a variable
             example:
-                error_text: |
-                    Some students will find it hard to do maths with variables. Try to show them very simple examples, like:
-                error_code: |
+                error_text: 'Some students will find it hard to do maths with variables. Try to show them very simple examples, like:'
+                error_code: |-
                     age = ask 'How old are you?'
                     print 'Next year you will be ' age + 1
-                solution_text: |
-                    Or take it a step further like this.
-                solution_code: |
+                solution_text: Or take it a step further like this.
+                solution_code: |-
                     price = 0
                     print 'Welcome to our burger restaurant'
                     burger = ask 'Would you like a burger?'
@@ -527,118 +588,103 @@ sections:
                     print 'That will be ' price ' euros please'
     -   level: '7'
         sections:
-        -   title: "Students forget one of the word of the repeat command, or they forget the print command"
+        -   title: Students forget one of the word of the repeat command, or they forget the print command
             example:
-                error_text: |
-                    Make sure that the students know to use both the full repeat command and the print command.
-                error_code: |
+                error_text: Make sure that the students know to use both the full repeat command and the print command.
+                error_code: |-
                     repeat 3 times 'For he`s a jolly good fellow'
                     repeat 3 print 'Which nobody can deny!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     repeat 3 times print 'For he`s a jolly good fellow'
                     repeat 3 times print 'Which nobody can deny!'
-        -   title: "Students try to repeat multiple lines"
+        -   title: Students try to repeat multiple lines
             example:
-                error_text: |
-                    In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
-                error_code: |
+                error_text: In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
+                error_code: |-
                     repeat 3 times drink = ask 'What would you like to drink?'
                     print drink
-                solution_text: |
-                    You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
-                solution_code: |
+                solution_text: You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                solution_code: |-
                     drink = ask 'What would you like to drink?'
                     print drink
                     drink = ask 'What would you like to drink?'
                     print drink
                     drink = ask 'What would you like to drink?'
                     print drink
-        -   title: "Students make programs that take too long to run"
+        -   title: Students make programs that take too long to run
             example:
-                error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: |
-                    repeat 100 times print 'How many times can I repeat this?'
-                solution_text: |
-                    Make sure the codes aren't too long
-                solution_code: |
-                    repeat 20 times print 'This is enough'
+                error_text: In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                error_code: repeat 100 times print 'How many times can I repeat this?'
+                solution_text: Make sure the codes aren't too long
+                solution_code: repeat 20 times print 'This is enough'
     -   level: '8'
         sections:
-        -   title: "Students use the indentation wrong"
+        -   title: Students use the indentation wrong
             example:
-                error_text: |
-                    Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
-                error_code: |
+                error_text: Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
+                error_code: |-
                     repeat 3 times
                     print 'hello'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     repeat 3 times
                         print 'hello'
-        -   title: "Students only repeat 1 line when they wanted to repeat multiple lines"
+        -   title: Students only repeat 1 line when they wanted to repeat multiple lines
             example:
-                error_text: |
-                    For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
-                error_code: |
+                error_text: For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
+                error_code: |-
                     repeat 3 times
                         drink = ask 'What would you like to drink?'
                     print drink
-                solution_text: |
+                solution_text: |-
                     In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
                     Showing your students these differences can help them understand why we need indentation to make our programs work.
-                solution_code: |
+                solution_code: |-
                     repeat 3 times
                         drink = ask 'What would you like to drink?'
                         print drink
-        -   title: "Students want to nest if statements, or put if statements inside a loop"
+        -   title: Students want to nest if statements, or put if statements inside a loop
             example:
-                error_text: |
+                error_text: |-
                     In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
                     In the next level this is allowed.
-                error_code: |
+                error_code: |-
                     birthday = ask 'Is it you birthday?'
                     if birthday = yes
                         repeat 3 times
                             print 'Hip Hip Hooray!'
-                solution_text: |
-                    This is the correct code for this level:
-                solution_code: |
+                solution_text: 'This is the correct code for this level:'
+                solution_code: |-
                     birthday = ask 'Is it you birthday?'
                     if birthday = yes
                         print 'Hip Hip Hooray!'
                         print 'Hip Hip Hooray!'
                         print 'Hip Hip Hooray!'
-        -   title: "Students make programs that take too long to run"
+        -   title: Students make programs that take too long to run
             example:
-                error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: |
+                error_text: In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                error_code: |-
                     repeat 100 times
                         print 'How many times can I repeat this?'
-                solution_text: |
-                    Make sure the codes aren't too long
-                solution_code: |
+                solution_text: Make sure the codes aren't too long
+                solution_code: |-
                     repeat 20 times
                         print 'This is enough'
-        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+        -   title: Students use the if command to check if the variable value is the same as the variable name
             example:
-                error_text: |
+                error_text: |-
                     We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
                     In line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.
                     So with this code the answer will always be 'You can come in' no matter what the player fills in.
-                error_code: |
+                error_code: |-
                     password is ask 'What is the password?'
                     if password is password
                         print 'You can come in'
                     else
                         print 'You are not allowed'
-                solution_text: |
-                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
-                solution_code: |
+                solution_text: You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
+                solution_code: |-
                     password is ask 'What is the password?'
                     if password is 'password'
                         print 'You can come in'
@@ -646,11 +692,10 @@ sections:
                         print 'You are not allowed'
     -   level: '9'
         sections:
-        -   title: "Students make mistakes with indentation"
+        -   title: Students make mistakes with indentation
             example:
-                error_text: |
-                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
-                error_code: |
+                error_text: The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                error_code: |-
                     print 'Robin is walking downtown'
                     location = ask 'Is Robin going into a shop, or does she go home?'
                     if location is shop
@@ -663,9 +708,8 @@ sections:
                         print 'Robin leaves the shop and goes home'
                     else
                         print 'Robin goes home'
-                solution_text: |
-                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
-                solution_code: |
+                solution_text: This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
+                solution_code: |-
                     print 'Robin is walking downtown'
                     location = ask 'Is Robin going into a shop, or does she go home?'
                     if location is shop
@@ -678,269 +722,231 @@ sections:
                             print 'Robin leaves the shop and goes home'
                     else
                         print 'Robin goes home'
-
     -   level: '10'
         sections:
-        -   title: "Students so not use the for command correctly"
+        -   title: Students so not use the for command correctly
             example:
-                error_text: |
-                    We often see that students try to print the list (in the example animals) instead of the items of the list.
-                error_code: |
+                error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
+                error_code: |-
                     animals is dog, cat, blobfish
                     for animal in animals
                       print 'I love ' animals
-                solution_text: |
-                    The word animals in the last line should be changed into animal.
-                solution_code: |
+                solution_text: The word animals in the last line should be changed into animal.
+                solution_code: |-
                     animals is dog, cat, blobfish
                     for animal in animals
                       print 'I love ' animal
-        -   title: "Students forget the indentation"
+        -   title: Students forget the indentation
             example:
-                error_text: |
-                    Students tend to forget to use indentation after a for command.
-                error_code: |
+                error_text: Students tend to forget to use indentation after a for command.
+                error_code: |-
                     animals is dog, cat, blobfish
                     for animal in animals
                     print 'I love ' animals
-                solution_text: |
-                    You should use indentation after a for command.
-                solution_code: |
+                solution_text: You should use indentation after a for command.
+                solution_code: |-
                     animals is dog, cat, blobfish
                     for animal in animals
                       print 'I love ' animal
     -   level: '11'
         sections:
-        -   title: "Students forget to use indentation"
+        -   title: Students forget to use indentation
             example:
-                error_text: |
-                    Make sure that the students use indentation.
-                error_code: |
+                error_text: Make sure that the students use indentation.
+                error_code: |-
                     for i in range 1 to 5
                     print i
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     for i in range 1 to 5
                         print i
-        -   title: "Students don't understand the i"
+        -   title: Students don't understand the i
             example:
-                error_text: |
+                error_text: |-
                     Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
                     For example, this code:
-                error_code: |
+                error_code: |-
                     for i in range 1 to 5
                     print i
-                solution_text: |
-                    Could just as well be replaced with this code. It works the same.
-                solution_code: |
+                solution_text: Could just as well be replaced with this code. It works the same.
+                solution_code: |-
                     for banana in range 1 to 5
                         print banana
     -   level: '12'
         sections:
-        -   title: "Students forget quotation marks"
+        -   title: Students forget quotation marks
             example:
-                error_text: |
-                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
-                error_code: |
+                error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
+                error_code: |-
                     superheroes = Spiderman, Batman, Iron Man
                     superhero = superheroes at random
                     if superhero = Batman
                         print 'IM BATMAN!'
-
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     superheroes = 'Spiderman', 'Batman', 'Iron Man'
                     superhero = superheroes at random
                     if superhero is 'Batman'
                         print 'IM BATMAN!'
-        -   title: "Students use quotation marks on numbers they want to use for calculations"
+        -   title: Students use quotation marks on numbers they want to use for calculations
             example:
-                error_text: |
+                error_text: |-
                     You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
                     In the example below, you can't do maths with the number 25, because it's in quotation marks.
-                error_code: |
+                error_code: |-
                     score = '25'
                     answer is ask 'Do you want a point?'
                     if answer is 'yes'
                         score = score + 1
                         print score
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     score = 25
                     answer is ask 'Do you want a point?'
                     if answer is 'yes'
                         score = score + 1
                         print score
-        -   title: "Students use commas instead of periods in decimal numbers"
+        -   title: Students use commas instead of periods in decimal numbers
             example:
-                error_text: |
-                    Decimal numbers can be used from this level on, but you can't use commas.
-                error_code: |
-                    print 2,5 + 2,5
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    print 2.5 + 2.5
+                error_text: Decimal numbers can be used from this level on, but you can't use commas.
+                error_code: print 2,5 + 2,5
+                solution_text: 'This is the correct code:'
+                solution_code: print 2.5 + 2.5
     -   level: '13'
         sections:
-        -   title: "Students confuse `and` with `or`"
+        -   title: Students confuse `and` with `or`
             example:
-                error_text: |
-                    Both commands might appear similar, but their functions are very different.
-                error_code: |
+                error_text: Both commands might appear similar, but their functions are very different.
+                error_code: |-
                     game is ask 'Do you want to play a game?'
                     time is ask 'Do you have time to play?'
                     if game is 'yes' or time is 'yes'
                         print 'Lets play!'
-                solution_text: |
-                    In this case, the person should answer yes on both questions, so you should use `and`.
-                solution_code: |
+                solution_text: In this case, the person should answer yes on both questions, so you should use `and`.
+                solution_code: |-
                     game is ask 'Do you want to play a game?'
                     time is ask 'Do you have time to play?'
                     if game is 'yes' and time is 'yes'
                         print 'Lets play!'
     -   level: '14'
         sections:
-        -   title: "Students confuse the < and > signs"
+        -   title: Students confuse the < and > signs
             example:
-                error_text: |
-                    Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
-                error_code: |
+                error_text: Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                error_code: |-
                     age = ask 'How old are you?'
                     if age < 12
                         print 'You are older than I am!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     age = ask 'How old are you?'
                     if age > 12
                         print 'You are older than I am!'
-        -   title: "Students use the wrong signs for `!=` `<=` and `>=`"
+        -   title: Students use the wrong signs for `!=` `<=` and `>=`
             example:
-                error_text: |
-                    These signs are probably new for most students. Make sure to explain these signs to your students.
-                error_code: |
+                error_text: These signs are probably new for most students. Make sure to explain these signs to your students.
+                error_code: |-
                     name = ask 'What is your name?'
                     if name =< 'Hedy'
                         print 'You are not Hedy'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     name = ask 'What is your name?'
                     if name != 'Hedy'
                         print 'You are not Hedy'
-        -   title: "Students forget to use the == sign"
+        -   title: Students forget to use the == sign
             example:
-                error_text: |
-                    In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
-                error_code: |
+                error_text: In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                error_code: |-
                     name = ask 'What is your name?'
                     if name = 'Hedy'
                         print 'You are cool!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     name = ask 'What is your name?'
                     if name == 'Hedy'
                         print 'You are cool!'
     -   level: '15'
         sections:
-        -   title: "Students forget indentation in the while loop"
+        -   title: Students forget indentation in the while loop
             example:
-                error_text: |
-                    Indentation is often hard for students.
-                error_code: |
+                error_text: Indentation is often hard for students.
+                error_code: |-
                     answer = 0
                     while answer != 25
                     answer = ask 'What is 5 times 5?'
                     print 'A correct answer has been given'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     answer = 0
                     while answer != 25
                         answer = ask 'What is 5 times 5?'
                     print 'A correct answer has been given'
     -   level: '16'
         sections:
-        -   title: "Students forget the brackets"
+        -   title: Students forget the brackets
             example:
-                error_text: |
-                    From this level on lists should be in brackets.
-                error_code: |
+                error_text: From this level on lists should be in brackets.
+                error_code: |-
                     icecream = 'starwberry', 'chocolate'
                     print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
-        -   title: "Students use the wrong brackets"
+        -   title: Students use the wrong brackets
             example:
-                error_text: |
-                    From this level on lists should be in brackets.
-                error_code: |
+                error_text: From this level on lists should be in brackets.
+                error_code: |-
                     icecream = ('starwberry', 'chocolate'}
                     print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+        -   title: Students forget the quotation marks while focussing on the brackets
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
+                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |-
                     icecream = [starwberry, chocolate]
                     print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
-        -   title: "Students still use the old at random command"
+        -   title: Students still use the old at random command
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
+                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |-
                     icecream = [starwberry, chocolate]
                     print 'I love ' icecream at random ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+        -   title: Students forget the quotation marks while focussing on the brackets
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
+                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |-
                     icecream = [starwberry, chocolate]
                     print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
     -   level: '17'
         sections:
-        -   title: "Students use elif like else, so without a condition"
+        -   title: Students use elif like else, so without a condition
             example:
-                error_text: |
-                    The elif command needs a condition behind it. It cannot be used like else, without a condition.
-                error_code: |
+                error_text: The elif command needs a condition behind it. It cannot be used like else, without a condition.
+                error_code: |-
                     color = ask 'What is your favorite color?'
                     if color == 'green':
                         print 'green is nice'
                     elif:
                         print 'I like green'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     color = ask 'What is your favorite color?'
                     if color == 'green':
                         print 'green is nice'
@@ -948,11 +954,10 @@ sections:
                         print 'yellow is alright'
                     else:
                         print 'I like green'
-        -   title: "Students forget the colon"
+        -   title: Students forget the colon
             example:
-                error_text: |
-                    After each command that requires indentation, a colon should be used.
-                error_code: |
+                error_text: After each command that requires indentation, a colon should be used.
+                error_code: |-
                     answer = ask 'How are you doing?'
                     if answer is 'great'
                         print 'Me too!'
@@ -960,9 +965,8 @@ sections:
                         print 'Let me cheer you up!'
                     else
                         print 'Im great!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     answer = ask 'How are you doing?'
                     if answer is 'great':
                         print 'Me too!'
@@ -972,108 +976,36 @@ sections:
                         print 'Im great!'
     -   level: '18'
         sections:
-        -   title: "Students forget to use the brackets"
+        -   title: Students forget to use the brackets
             example:
-                error_text: |
-                    Students will forget to put brackets around their text.
-                error_code: |
-                    print 'my name is Hedy!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    print('my name is Hedy!')
-        -   title: "Students will still use the ask command"
+                error_text: Students will forget to put brackets around their text.
+                error_code: print 'my name is Hedy!'
+                solution_text: 'This is the correct code:'
+                solution_code: print('my name is Hedy!')
+        -   title: Students will still use the ask command
             example:
-                error_text: |
-                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
-                error_code: |
+                error_text: The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                error_code: |-
                     print('My name is Hedy!')
                     name = ask('What is your name?')
                     print('So your name is ', name)
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     print('My name is Hedy!')
                     name = input('What is your name?')
                     print('So your name is ', name)
-        -   title: "Students might use the brackets as quotation marks"
+        -   title: Students might use the brackets as quotation marks
             example:
-                error_text: |
-                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
-                error_code: |
+                error_text: They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                error_code: |-
                     temperature = 25
                     print('It is ') temperature ('degrees outside')
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: 'This is the correct code:'
+                solution_code: |-
                     temperature = 25
                     print('It is ', temperature, 'degrees outside')-
-    title: Common mistakes
     key: common_mistakes
-    intro: "You can learn from your mistakes, especially in coding!\nMaking mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!\nEspecially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.\n"
-title: Документация на Хеди
-learn-more-sections:
--   title: "Do you like Hedy?"
-    text: |
-        We love to hear from you!
-
-        [Click here to send us a message](mailto:hello@hedy.org "About Hedy")
--   title: "Found a bug?"
-    text: |
-        [Let us know on GitHub](https://github.com/hedyorg/hedy/issues/new/choose)
--   title: "Want to help?"
-    text: |
-        The easiest way is to help with [translating Hedy](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)
-
-        Below the current status, help us complete a language, or add a new one.
-        <a href="https://hosted.weblate.org/engage/hedy/">
-        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" /></a>
-start-sections:
--   title: "Textual programming made easy!"
-    text: |
-        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to
-        Scratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.
-
-        Python however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.
-        Hedy is the easy way to get started with textual programming languages! Hedy is free to use, open source, and unlike any other textual programming language in three ways.
-
-        1. Hedy is multi-lingual, you can use Hedy in your own language
-        2. Hedy is gradual, so you can learn one concept and its syntax a time
-        3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience
--   title: "Multi-lingual programming"
-    text: |
-        While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a a new translation.
--   title: "Step by step learning"
-    text: |
-        Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven way to learn!
--   title: "Built for the classroom"
-    text: |
-        Hedy is suitable for kids aged 10 and up and designed for classroom use.
-        Teachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.
--   title: "Programming in context"
-    text: |
-        Hedy shows programming in the broadest way possible, and can be used in variety of exciting ways. Hedy allows for the creation of digital and interactive stories, colorful drawings that can be shown on the screen but also drawn with a pen plotter or embroidered on a shirt, and can be used to create games or apps with buttons and keyboard actions.
--   title: "Is Hedy free?"
-    text: |
-        Yes! Hedy is 'Open source', which means that everyone can help us make Hedy better.
-        You can find our code on [GitHub](https://github.com/hedyorg/hedy).
-        If you like Hedy and want to contribute, we accept (and are very grateful for) [donations](https://github.com/sponsors/hedyorg)!
-
--   title: "Do I need to install anything?"
-    text: |-
-        No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
--   title: "Do I need programming experience to teach with Hedy?"
-    text: |-
-        No, that is not needed. All concepts are explained in the slides and in the interface for learners.
-        If you create a free teacher's account, you also get access to the teacher's manual with information on how to teach
-        and frequently made mistakes.
-
-join-sections:
--   text: "# There are three ways in which you can support Hedy!\n"
-    title: Supporting Hedy
--   title: Improving the language
-    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
--   title: Translating Hedy
-    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Help teachers get started
-    text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"
+    intro: |-
+        You can learn from your mistakes, especially in coding!
+        Making mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!
+        Especially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.

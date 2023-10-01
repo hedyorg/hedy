@@ -7,7 +7,9 @@
     demo_code: '{ask} Vilken är din favoritfärg?'
 -   name: '{echo}'
     explanation: Repetera något med `{echo}`.
-    demo_code: "{ask} Vilken är din favoritfärg?\n{echo} så din favoritfärg är"
+    demo_code: |-
+        {ask} Vilken är din favoritfärg?
+        {echo} så din favoritfärg är
 -   name: '{print} emojis'
     explanation: Skriv en emoji med `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
@@ -16,192 +18,350 @@
     demo_code: '{forward} 100'
 -   name: '{turn}'
     explanation: Sväng ritsköldpaddan med `{turn}`.
-    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    demo_code: |-
+        {forward} 25
+        {turn} {left}
+        {forward} 25
+        {turn} {right}
 2:
 -   name: '{is}'
     explanation: För att använda ett ord i programmet kan du namnge det med `{is}`. Du kan välja namnet själv.
-    demo_code: "namn {is} Hedy\n{print} välkommen namn"
+    demo_code: |-
+        namn {is} Hedy
+        {print} välkommen namn
 -   name: '{ask}'
     explanation: Fråga något med `{ask}`. Se upp! Du behöver namnge svaret med `{is}`.
-    demo_code: "färg {is} {ask} Vilken är din favoritfärg?\n{print} färg är din favorit!"
+    demo_code: |-
+        färg {is} {ask} Vilken är din favoritfärg?
+        {print} färg är din favorit!
 -   name: '{sleep}'
     explanation: '`{sleep}` låter Hedy vila en (eller flera) sekund(er).'
-    demo_code: "{print} Låt mig tänka i en sekund\n{sleep}\n{print} Hmm.. Jag behöver 3 sekunder till...\n{sleep} 3\n{print} Ahaa! Nu vet jag!"
+    demo_code: |-
+        {print} Låt mig tänka i en sekund
+        {sleep}
+        {print} Hmm.. Jag behöver 3 sekunder till...
+        {sleep} 3
+        {print} Ahaa! Nu vet jag!
 -   name: '{is} med sköldpadda'
     explanation: Namnge ett nummer med `{is}`. Du kan välja namnet själv.
-    demo_code: "vinkel {is} 90\n{turn} vinkel\n{forward} 100"
+    demo_code: |-
+        vinkel {is} 90
+        {turn} vinkel
+        {forward} 100
 3:
--   demo_code: "djur {is} hund, katt, kängru\n{print} djur {at} {random}"
-    name: Välj slumpmässig
+-   name: Välj slumpmässig
     explanation: Välj ett slumpmässigt ord från en grupp med `{at}` och `{random}`.
+    demo_code: |-
+        djur {is} hund, katt, kängru
+        {print} djur {at} {random}
 -   name: '{add}'
     explanation: '`{add}` lägg till en sak `{to_list}` en lista.'
-    demo_code: "djur {is} ko, katt\n{add} hund {to_list} djur"
+    demo_code: |-
+        djur {is} ko, katt
+        {add} hund {to_list} djur
 -   name: '{remove}'
     explanation: '`{remove}` en sak `{from}` en lista.'
-    demo_code: "djur {is} katt, hund, ko\n{remove} hund {from} djur"
+    demo_code: |-
+        djur {is} katt, hund, ko
+        {remove} hund {from} djur
 4:
 -   name: '{print}'
     explanation: Skriv exakt med hjälp av citationstecken.
-    demo_code: "{print} 'Hej och välkommen till Hedy.'"
+    demo_code: '{print} ''Hej och välkommen till Hedy.'''
 -   name: '{is}'
     explanation: Namnge en text och `{print}` utan citationstecken.
-    demo_code: "namn {is} Hedy\n{print} 'mitt namn är ' namn"
--   explanation: Fråga något med `{ask}`.
-    demo_code: "färg {is} {ask} 'Vilken är din favoritfärg?'\n{print} färg ' är din favorit!'"
-    name: '{ask}'
+    demo_code: |-
+        namn {is} Hedy
+        {print} 'mitt namn är ' namn
+-   name: '{ask}'
+    explanation: Fråga något med `{ask}`.
+    demo_code: |-
+        färg {is} {ask} 'Vilken är din favoritfärg?'
+        {print} färg ' är din favorit!'
 5:
 -   name: '{print}'
     explanation: Skriv ut exakt med hjälp av citationstecken.
-    demo_code: "{print} 'Hej och välkommen till Hedy.'"
+    demo_code: '{print} ''Hej och välkommen till Hedy.'''
 -   name: '{ask}'
     explanation: Fråga något med `{ask}`.
-    demo_code: "färg {is} {ask} 'Vilken är din favoritfärg?'\n{print} färg ' är din favorit!'"
+    demo_code: |-
+        färg {is} {ask} 'Vilken är din favoritfärg?'
+        {print} färg ' är din favorit!'
 -   name: '{if}'
     explanation: Gör ett val med `{if}`.
-    demo_code: "färg {is} {ask} 'Vilken är din favoritfärg?'\n{if} färg {is} grön {print} 'fin!' {else} {print} 'sådär'"
+    demo_code: |-
+        färg {is} {ask} 'Vilken är din favoritfärg?'
+        {if} färg {is} grön {print} 'fin!' {else} {print} 'sådär'
 -   name: '{if} med sköldpadda'
     explanation: Gör ett val med `{if}`.
-    demo_code: "svar {is} {ask} 'Hur långt ska jag gå?'\n{if} svar {is} långt {forward} 100 {else} {forward} 5"
--   demo_code: "snygga_färger {is} grönt, gult\nfärg {is} {ask} 'Vad {is} din favoritfärg?'\n{if} färg {in} snygga_färger {print} 'snyggt!' {else} {print} 'meh'"
-    name: '{in}'
+    demo_code: |-
+        svar {is} {ask} 'Hur långt ska jag gå?'
+        {if} svar {is} långt {forward} 100 {else} {forward} 5
+-   name: '{in}'
     explanation: Kolla element med `{in}`.
+    demo_code: |-
+        snygga_färger {is} grönt, gult
+        färg {is} {ask} 'Vad {is} din favoritfärg?'
+        {if} färg {in} snygga_färger {print} 'snyggt!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Kontrollera om en viss tangent är `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'Du tryckte på A!' {else} {print} 'Du tryckte på en annan tangent!'"
+    demo_code: '{if} a {is} {pressed} {print} ''Du tryckte på A!'' {else} {print} ''Du tryckte på en annan tangent!'''
 6:
 -   name: '{print}'
     explanation: Skriv ut exakt med citattecken.
-    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
--   demo_code: "svar = {ask} 'Vad är 10 plus 10?'\n{if} svar {is} 20 {print} 'Ja!' {else} {print} 'Hoppsan'"
-    name: '{ask}'
+    demo_code: '{print} ''5 gånger 5 är '' 5 * 5'
+-   name: '{ask}'
     explanation: Be om en uträkning och kolla om den stämmer.
+    demo_code: |-
+        svar = {ask} 'Vad är 10 plus 10?'
+        {if} svar {is} 20 {print} 'Ja!' {else} {print} 'Hoppsan'
 -   name: '`{ask}` och `{if}` med sköldpadda'
     explanation: Fråga användaren hur många vinklar den vill ha.
-    demo_code: "vinklar = {ask} 'Hur många vinklar?'\nvinkel = 360 / vinklar\n{forward} 50"
-9:
--   explanation: Fråga efter svaret på en addition med `{ask}` och se om det är korrekt. Nu skriver vi ut två rader.
-    demo_code: "svar = {ask} 'Vad är 10 plus 10?'\n{if} svar {is} 20\n    {print} 'Bra jobbat!!'\n    {print} 'Svaret är faktiskt ' svar\n{else}\n    {print} 'Fel'\n    {print} 'Svaret är 20'"
-    name: '{if} med flera rader'
--   name: '{repeat} med sköldpadda'
-    explanation: Upprepa flera rader.
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
-12:
--   name: flyt direkt
-    explanation: Decimaltal.
-    demo_code: "{print} 'Räkna på!'\n{print} 'Två och en halv plus två och en halv är...'\n{print} 2.5 + 2.5"
--   name: tilldela text
-    explanation: Text med citattecken efter `=`
-    demo_code: "namn = 'Roboten Hedy'\n{print} 'Hej ' namn"
--   name: citattecken efter `{if}`-jämförelse
-    explanation: Text med citattecken efter `{if}`.
-    demo_code: "namn = {ask} 'Vem är du?'\n{if} namn = 'Hedy'\n    {print} 'Hallå där!'"
--   name: citattecken i lista
-    explanation: En lista med citattecken.
-    demo_code: "superhjältar = 'Iron Man', 'Batman', 'Stålmannen'\n{print} superhjältar {at} {random}"
-13:
--   name: '{and}'
-    explanation: Två delar som båda måste vara rätt.
-    demo_code: "svar1 = {ask} 'Vad är 3+2?'\nsvar2 = {ask} 'Vad är 2+2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Båda svaren är rätt!'\n{else}\n    {print} 'Minst ett svar är fel!'"
--   name: '{or}'
-    explanation: Minst ett av de två delarna måste vara rätt. Om båda är rätt går det också bra.
-    demo_code: "svar1 = {ask} 'Vad är 3+2?'\nsvar2 = {ask} 'Vad är 2+2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Minst ett svar är rätt!'\n{else}\n    {print} 'Båda svaren är fel!'"
-14:
--   name: Mindre än
-    explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
-    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder < 13\n    {print} 'Du är yngre än jag!'"
--   name: Större än
-    explanation: Vi använder `>` för att kolla om det första talet är större än det andra talet.
-    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder > 13\n    {print} 'Du är äldre än jag!'"
--   name: Lika med
-    explanation: Vi använder `==` för att kolla om två saker är lika.
-    demo_code: "svar = {ask} 'Vad är 5 * 5?'\n{if} svar == 25\n    {print} 'Det stämmer!'"
--   name: Olika
-    explanation: Vi använder `!=` för att kolla om två saker är olika.
-    demo_code: "svar = {ask} 'Vad är 5 * 5?'\n{if} svar != 25\n    {print} 'Det stämmer inte!'"
--   name: Mindre än eller lika med
-    explanation: Vi använder `<=` för att kolla om det första talet är mindre än eller lika med det andra talet.
-    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder <= 12\n    {print} 'Du är yngre än jag!'"
--   name: Större än eller lika med
-    explanation: Vi använder `>=` för att kolla om det första talet är större än eller lika med det andra talet.
-    demo_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder >= 14\n    {print} 'Du är äldre än jag!'"
-15:
--   name: '{while}'
-    explanation: Vi kan använda `{while}` med skilt från.
-    demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Vad är 5 gånger 5?'\n{print} 'Rätt svar har getts'"
--   demo_code: "antal = 1\n{while} antal < 3\n    {print} 'Vi gör det här ' 3 - antal ' gånger till'\n    antal = antal + 1\n{print} 'Nu är det klart'"
-    name: Mindre än {while}
-    explanation: Vi kan också använda `{while}` med `<` och `>`.
-16:
--   name: hakparenteser
-    explanation: Listor med hakparenteser.
-    demo_code: "frukt = ['äpple', 'banan', 'körsbär']\n{print} frukt"
--   name: Hämta ett element från en lista
-    explanation: För att hämta ett element från en lista använder vi [tal] så frukt[1] betyder att hämta den första frukten från listan!
-    demo_code: "frukt = ['banan', 'äpple', 'körsbär']\nförsta_frukten = frukt[1]\n{print} första_frukten"
--   name: Hämta ett slumpmässigt element från en lista
-    explanation: För att få ett slumpmässigt element från en lista använder vi [slump] så frukt[slump] betyder att hämta en slumpmässig frukt från listan!
-    demo_code: "frukt = ['banan', 'äpple', 'körsbär']\nslumpad_frukt = frukt[{random}]\n{print} slumpad_frukt"
-17:
--   name: '{elif}'
-    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a är 1'\n{elif} a == 2:\n    {print} 'a är 2'\n{else}:\n    {print} 'a är inte 1 eller 2'"
-    explanation: '`{elif}`'
--   name: '{print}'
-    explanation: När vi använder `{for}` måste vi ha ett `:` efter `{for}`-satsen!
-    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Redo eller inte, här kommer jag!'"
--   name: '{if}'
-    explanation: Vi behöver göra samma sak med alla våra `{if}`-satser.
-    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{if} färg == 'grönt':\n    {print} 'Din favoritfärg är grönt'\n{else}:\n    {print} 'Din favoritfärg är inte grönt'"
-18:
--   name: '{print}'
-    explanation: Efter `{print}` behöver du ha parenteser.
-    demo_code: "{print}('hej!')"
--   name: '{range}'
-    explanation: Efter `{range}` behöver du ha parenteser.
-    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hej, gånger ', i)"
--   name: '{print} med var'
-    explanation: Med `{print}` behöver du använda parenteser och kommatecken om du skriver ut fler saker.
-    demo_code: "namn = 'Hedy'\n{print}('Jag heter ', namn)"
--   name: fråga något med {input}
-    explanation: Använd `{input}` istället för `{ask}` för att fråga något.
-    demo_code: "namn = {input}('Vad heter du?')\n{print}('Så du heter ', namn)"
+    demo_code: |-
+        vinklar = {ask} 'Hur många vinklar?'
+        vinkel = 360 / vinklar
+        {forward} 50
 7:
 -   name: '{print}'
     explanation: Skriv ut exakt med citattecken.
-    demo_code: "{print} 'Hej och välkommen till Hedy.'"
+    demo_code: '{print} ''Hej och välkommen till Hedy.'''
 -   name: '{ask}'
     explanation: Fråga något med `{ask}`.
-    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{print} färg ' är din favorit!'"
+    demo_code: |-
+        färg = {ask} 'Vilken är din favoritfärg?'
+        {print} färg ' är din favorit!'
 -   name: '{if}'
     explanation: Välj ett alternativ `{if}`.
-    demo_code: "färg = {ask} 'Vilken är din favoritfärg?'\n{if} färg {is} grönt {print} 'fint!' {else} {print} 'meh'"
+    demo_code: |-
+        färg = {ask} 'Vilken är din favoritfärg?'
+        {if} färg {is} grönt {print} 'fint!' {else} {print} 'meh'
 -   name: '{repeat} med sköldpadda'
     explanation: Upprepa en kodrad med `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Skriv ut något. Kom ihåg att använda citattecken för att skriva ut exakt.
-    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
+    demo_code: '{print} ''5 gånger 5 är '' 5 * 5'
 -   name: '{ask}'
     explanation: Fråga efter svaret på en addition och kontrollera om det är korrekt. Vi kan nu skriva ut två rader.
-    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!'\n    {print} 'Svaret var faktiskt ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
+    demo_code: |-
+        svar = {ask} 'Vad är 5 plus 5?'
+        {if} svar {is} 10
+            {print} 'Bra jobbat!'
+            {print} 'Svaret var faktiskt ' svar
+        {else}
+            {print} 'Hoppsan!'
+            {print} 'Svaret är 10'
 -   name: '{repeat} med sköldpadda'
     explanation: Upprepa flera rader.
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    demo_code: |-
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 -   name: '{pressed}'
     explanation: Kontrollera om en viss tangent är `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'Du tryckte på A!'\n{else}\n    {print} 'Du tryckte på en annan tangent'"
+    demo_code: |-
+        {if} a {is} {pressed}
+            {print} 'Du tryckte på A!'
+        {else}
+            {print} 'Du tryckte på en annan tangent'
+9:
+-   name: '{if} med flera rader'
+    explanation: Fråga efter svaret på en addition med `{ask}` och se om det är korrekt. Nu skriver vi ut två rader.
+    demo_code: |-
+        svar = {ask} 'Vad är 10 plus 10?'
+        {if} svar {is} 20
+            {print} 'Bra jobbat!!'
+            {print} 'Svaret är faktiskt ' svar
+        {else}
+            {print} 'Fel'
+            {print} 'Svaret är 20'
+-   name: '{repeat} med sköldpadda'
+    explanation: Upprepa flera rader.
+    demo_code: |-
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 10:
 -   name: '{print}'
     explanation: Skriv ut något. Kom ihåg att använda citattecken för exakt utskrift.
-    demo_code: "{print} '5 gånger 5 är ' 5 * 5"
+    demo_code: '{print} ''5 gånger 5 är '' 5 * 5'
 -   name: '{for} med en lista'
     explanation: Skriv ut alla saker i en lista.
-    demo_code: "alla_djur {is} hund, katt, marulk\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
+    demo_code: |-
+        alla_djur {is} hund, katt, marulk
+        {for} djur {in} alla_djur
+          {print} 'Jag älskar ' djur
 11:
 -   name: '{for}-loop'
     explanation: Vi kan använda `{for}` med ett `{range}`.
-    demo_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
+    demo_code: |-
+        {for} räknare {in} {range} 1 {to} 5
+            {print} räknare
 -   name: '{ask}'
     explanation: Fråga efter svaret på en addition och kolla om det är korrekt. Vi kan nu skriva ut två rader.
-    demo_code: "svar = {ask} 'Vad är 5 plus 5?'\n{if} svar {is} 10\n    {print} 'Bra jobbat!'\n    {print} 'Ja, svaret var ' svar\n{else}\n    {print} 'Hoppsan!'\n    {print} 'Svaret är 10'"
+    demo_code: |-
+        svar = {ask} 'Vad är 5 plus 5?'
+        {if} svar {is} 10
+            {print} 'Bra jobbat!'
+            {print} 'Ja, svaret var ' svar
+        {else}
+            {print} 'Hoppsan!'
+            {print} 'Svaret är 10'
+12:
+-   name: flyt direkt
+    explanation: Decimaltal.
+    demo_code: |-
+        {print} 'Räkna på!'
+        {print} 'Två och en halv plus två och en halv är...'
+        {print} 2.5 + 2.5
+-   name: tilldela text
+    explanation: Text med citattecken efter `=`
+    demo_code: |-
+        namn = 'Roboten Hedy'
+        {print} 'Hej ' namn
+-   name: citattecken efter `{if}`-jämförelse
+    explanation: Text med citattecken efter `{if}`.
+    demo_code: |-
+        namn = {ask} 'Vem är du?'
+        {if} namn = 'Hedy'
+            {print} 'Hallå där!'
+-   name: citattecken i lista
+    explanation: En lista med citattecken.
+    demo_code: |-
+        superhjältar = 'Iron Man', 'Batman', 'Stålmannen'
+        {print} superhjältar {at} {random}
+13:
+-   name: '{and}'
+    explanation: Två delar som båda måste vara rätt.
+    demo_code: |-
+        svar1 = {ask} 'Vad är 3+2?'
+        svar2 = {ask} 'Vad är 2+2?'
+        {if} svar1 {is} 5 {and} svar2 {is} 4
+            {print} 'Båda svaren är rätt!'
+        {else}
+            {print} 'Minst ett svar är fel!'
+-   name: '{or}'
+    explanation: Minst ett av de två delarna måste vara rätt. Om båda är rätt går det också bra.
+    demo_code: |-
+        svar1 = {ask} 'Vad är 3+2?'
+        svar2 = {ask} 'Vad är 2+2?'
+        {if} svar1 {is} 5 {or} svar2 {is} 4
+            {print} 'Minst ett svar är rätt!'
+        {else}
+            {print} 'Båda svaren är fel!'
+14:
+-   name: Mindre än
+    explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
+    demo_code: |-
+        ålder = {ask} 'Hur gammal är du?'
+        {if} ålder < 13
+            {print} 'Du är yngre än jag!'
+-   name: Större än
+    explanation: Vi använder `>` för att kolla om det första talet är större än det andra talet.
+    demo_code: |-
+        ålder = {ask} 'Hur gammal är du?'
+        {if} ålder > 13
+            {print} 'Du är äldre än jag!'
+-   name: Lika med
+    explanation: Vi använder `==` för att kolla om två saker är lika.
+    demo_code: |-
+        svar = {ask} 'Vad är 5 * 5?'
+        {if} svar == 25
+            {print} 'Det stämmer!'
+-   name: Olika
+    explanation: Vi använder `!=` för att kolla om två saker är olika.
+    demo_code: |-
+        svar = {ask} 'Vad är 5 * 5?'
+        {if} svar != 25
+            {print} 'Det stämmer inte!'
+-   name: Mindre än eller lika med
+    explanation: Vi använder `<=` för att kolla om det första talet är mindre än eller lika med det andra talet.
+    demo_code: |-
+        ålder = {ask} 'Hur gammal är du?'
+        {if} ålder <= 12
+            {print} 'Du är yngre än jag!'
+-   name: Större än eller lika med
+    explanation: Vi använder `>=` för att kolla om det första talet är större än eller lika med det andra talet.
+    demo_code: |-
+        ålder = {ask} 'Hur gammal är du?'
+        {if} ålder >= 14
+            {print} 'Du är äldre än jag!'
+15:
+-   name: '{while}'
+    explanation: Vi kan använda `{while}` med skilt från.
+    demo_code: |-
+        svar = 0
+        {while} svar != 25
+            svar = {ask} 'Vad är 5 gånger 5?'
+        {print} 'Rätt svar har getts'
+-   name: Mindre än {while}
+    explanation: Vi kan också använda `{while}` med `<` och `>`.
+    demo_code: |-
+        antal = 1
+        {while} antal < 3
+            {print} 'Vi gör det här ' 3 - antal ' gånger till'
+            antal = antal + 1
+        {print} 'Nu är det klart'
+16:
+-   name: hakparenteser
+    explanation: Listor med hakparenteser.
+    demo_code: |-
+        frukt = ['äpple', 'banan', 'körsbär']
+        {print} frukt
+-   name: Hämta ett element från en lista
+    explanation: För att hämta ett element från en lista använder vi [tal] så frukt[1] betyder att hämta den första frukten från listan!
+    demo_code: |-
+        frukt = ['banan', 'äpple', 'körsbär']
+        första_frukten = frukt[1]
+        {print} första_frukten
+-   name: Hämta ett slumpmässigt element från en lista
+    explanation: För att få ett slumpmässigt element från en lista använder vi [slump] så frukt[slump] betyder att hämta en slumpmässig frukt från listan!
+    demo_code: |-
+        frukt = ['banan', 'äpple', 'körsbär']
+        slumpad_frukt = frukt[{random}]
+        {print} slumpad_frukt
+17:
+-   name: '{elif}'
+    explanation: '`{elif}`'
+    demo_code: |-
+        a = 2
+        {if} a == 1:
+            {print} 'a är 1'
+        {elif} a == 2:
+            {print} 'a är 2'
+        {else}:
+            {print} 'a är inte 1 eller 2'
+-   name: '{print}'
+    explanation: När vi använder `{for}` måste vi ha ett `:` efter `{for}`-satsen!
+    demo_code: |-
+        {for} i {in} {range} 1 {to} 12:
+            {print} i
+        {print} 'Redo eller inte, här kommer jag!'
+-   name: '{if}'
+    explanation: Vi behöver göra samma sak med alla våra `{if}`-satser.
+    demo_code: |-
+        färg = {ask} 'Vilken är din favoritfärg?'
+        {if} färg == 'grönt':
+            {print} 'Din favoritfärg är grönt'
+        {else}:
+            {print} 'Din favoritfärg är inte grönt'
+18:
+-   name: '{print}'
+    explanation: Efter `{print}` behöver du ha parenteser.
+    demo_code: '{print}(''hej!'')'
+-   name: '{range}'
+    explanation: Efter `{range}` behöver du ha parenteser.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hej, gånger ', i)
+-   name: '{print} med var'
+    explanation: Med `{print}` behöver du använda parenteser och kommatecken om du skriver ut fler saker.
+    demo_code: |-
+        namn = 'Hedy'
+        {print}('Jag heter ', namn)
+-   name: fråga något med {input}
+    explanation: Använd `{input}` istället för `{ask}` för att fråga något.
+    demo_code: |-
+        namn = {input}('Vad heter du?')
+        {print}('Så du heter ', namn)

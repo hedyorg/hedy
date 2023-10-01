@@ -1,21 +1,15 @@
 levels:
     1:
         1:
-            story: |
-                In de sleeppuzzels zijn de regels code al voor je geschreven. Je hoeft ze alleen nog maar in de juiste volgorde te plaatsen! Sleep de regels code in je invoerscherm en voer de code uit. Kun jij het programma aan de praat krijgen?
-
-
-                Je bent een klant bij bakkerij Hedy. 
-                Je loopt de bakkerij binnen en wordt verwelkomd door de bakker.
-                Hij vraagt wat voor taart je wil bestellen en herhaalt het antwoord.
-                Daarna wordt je bestelling klaargezet.
+            story: "In de sleeppuzzels zijn de regels code al voor je geschreven. Je hoeft ze alleen nog maar in de juiste volgorde te plaatsen! Sleep de regels code in je invoerscherm en voer de code uit. Kun jij het programma aan de praat krijgen?\n\n\nJe bent een klant bij bakkerij Hedy. \nJe loopt\
+                \ de bakkerij binnen en wordt verwelkomd door de bakker.\nHij vraagt wat voor taart je wil bestellen en herhaalt het antwoord.\nDaarna wordt je bestelling klaargezet."
             code: |-
                 {print} Welkom bij bakkerij Hedy!
                 {ask} Welke taart wilt u bestellen?
                 {echo} Dus u wilt
                 {print} De bestelling wordt klaargezet!
         2:
-            story: "Je staat bij de DJ om een liedje aan te vragen. Maak een programma dat vraagt of je klaar bent voor een feestje en daarna vraagt welk liedje je wilt horen.\n"
+            story: Je staat bij de DJ om een liedje aan te vragen. Maak een programma dat vraagt of je klaar bent voor een feestje en daarna vraagt welk liedje je wilt horen.
             code: |-
                 {print} Hier is DJ Hedy
                 {ask} Klaar voor een feestje?
@@ -23,16 +17,16 @@ levels:
                 {echo} Prima keuze! I houd van het lied
     2:
         1:
-            story: |
+            story: |-
                 Jij en je vrienden gaan Netflix kijken.
                 Laat zien welke film jullie gaan kijken en wens de kijkers veel plezier!
-            code: |
+            code: |-
                 {print} Het is tijd voor een avondje Netflix
                 film {is} Sonic the Hedgehog 2
                 {print} We gaan kijken naar film
                 {print} Heel veel plezier!
         2:
-            story: "Dit is de webshop van een speelgoedwinkel. Maak een programma waarin klanten een artikel aan hun winkelwagentje kunnen toevoegen.\n"
+            story: Dit is de webshop van een speelgoedwinkel. Maak een programma waarin klanten een artikel aan hun winkelwagentje kunnen toevoegen.
             code: |-
                 {print} Welkom in onze speelgoedwinkel
                 speelgoed {is} {ask} Wat wilt u kopen?
@@ -40,12 +34,8 @@ levels:
                 {print} Bedankt voor het winkelen bij ons!
     3:
         1:
-            story: |
-                Het nieuwe schooljaar op Zweinstein gaat van start! 
-                Het is de taak van de sorteerhoed om jou in te delen in een van de afdelingen. 
-                Bij welke afdeling zou jij willen?
-                Ben jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. 
-                Voordat de sorteerhoed zijn keuze bekend maakt, kun je aangeven bij welk huis je niet terecht wil komen.
+            story: "Het nieuwe schooljaar op Zweinstein gaat van start! \nHet is de taak van de sorteerhoed om jou in te delen in een van de afdelingen. \nBij welke afdeling zou jij willen?\nBen jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. \nVoordat de sorteerhoed zijn keuze bekend maakt,\
+                \ kun je aangeven bij welk huis je niet terecht wil komen."
             code: |-
                 {print} De sorteerhoed is er klaar voor om jou in te delen op Zweinstein.
                 afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
@@ -53,7 +43,7 @@ levels:
                 {remove} liever_niet {from} afdelingen
                 {print} Niet bij liever_niet he? Dan wordt het maar... afdelingen {at} {random}
         2:
-            story: "Maak een programma dat een willekeurige maaltijd voor je kiest. Maak een lijst met eten en een lijst met toppings en laat het programma beslissen wat je krijgt!\n"
+            story: Maak een programma dat een willekeurige maaltijd voor je kiest. Maak een lijst met eten en een lijst met toppings en laat het programma beslissen wat je krijgt!
             code: |-
                 eten {is} pizza, ijs, salade, sandwich
                 topping {is} chocolade, kaas, tonijn, hagelslag
@@ -61,11 +51,11 @@ levels:
                 {sleep} 2
                 {print} eten {at} {random} met topping {at} {random}
         3:
-            story: |
+            story: |-
                 In een schaaktoernooi zijn nog drie spelers over.
                 Maak een programma dat beslist welke twee spelers als eerst tegen elkaar mogen schaken.
                 Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
-            code: |
+            code: |-
                 spelers {is} Freek, Bart, Emma
                 speler_1 {is} spelers {at} {random}
                 {remove} speler_1 {from} spelers
@@ -75,69 +65,62 @@ levels:
                 {print} 'De winnaar speelt tegen ' spelers {at} {random}
     4:
         1:
-            story: |
+            story: |-
                 Jij bent de nieuwste Pokémon trainer Pallet Town!
                 Maak een programma dat jouw eerste Pokémon uitkiest.
                 Laat het programma weer even wachten voordat hij jouw eerste pokémon onthult.
-            code: |
+            code: |-
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'Dit wordt jouw eerste Pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: |
+            story: |-
                 Maak een loterij waarbij je zelf een prijs mag bedenken.
                 Begin met het lijstje prijzen op regel 1.
-            code: |
+            code: |-
                 prijzen {is} auto, hamster, miljoen euro
                 prijs {is} {ask} 'Wat zou je willen winnen?'
                 {add} prijs {to_list} prijzen
                 {print} 'Je wint een ' prijzen {at} {random}
     5:
         1:
-            story: |
+            story: |-
                 Maak een programma dat kijkt of jouw lievelingsfilm al in het lijstje van de computer staat opgeslagen.
                 Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst.
-            code: |
+            code: |-
                 favoriete_films {is} Batman, Spiderman, The Avengers, Jurassic Park
                 film {is} {ask} 'Wat is jouw lievelingsfilm?'
                 {if} film {in} favoriete_films {print} 'Jij hebt een goede smaak!'
                 {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
                 {add} film {to_list} favoriete_films
         2:
-            story: |
-                Maak dit rekenspelletje.
-            code: |
+            story: Maak dit rekenspelletje.
+            code: |-
                 {print} 'Los deze som op'
                 antwoord {is} {ask} '88 - 16 = ?'
                 {if} antwoord {is} 72 {print} 'Correct!'
                 {else} {print} 'Fout! Het was 72'
     6:
         1:
-            story: |
-                Maak een programma dat voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.
-                Vraag eerst de leeftijd van de gebruiker en rekenen maar. 
-                **Bereken eerst de hondenjaren en dan de kattenjaren.**
-                Laat de gebruiker de nieuwe leeftijden zien!
-            code: |
+            story: "Maak een programma dat voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.\nVraag eerst de leeftijd van de gebruiker en rekenen maar. \n**Bereken eerst de hondenjaren en dan de kattenjaren.**\nLaat de gebruiker de nieuwe leeftijden zien!"
+            code: |-
                 leeftijd = {ask} 'Hoe oud ben je?'
                 hond_leeftijd = leeftijd * 7
                 kat_leeftijd = leeftijd * 5
                 {print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
                 {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
         2:
-            story: |
-                Maak een programma dat je helpt berekenen hoeveel taarten je moet kopen voor iemands verjaardag.
-            code: |
+            story: Maak een programma dat je helpt berekenen hoeveel taarten je moet kopen voor iemands verjaardag.
+            code: |-
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
                 cakes_amount = people/8
                 {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
-            story: |
-                Maak het baby shark liedje compleet. Eerst komt baby, dan mama tot slot papa haai.
-            code: |
+            story: Maak het baby shark liedje compleet. Eerst komt baby, dan mama tot slot papa haai.
+            code: |-
                 {repeat} 3 {times} {print} 'Baby shark tututututudu'
                 {print} 'Baby shark'
                 {repeat} 3 {times} {print} 'Mommy shark tututututudu'
@@ -146,17 +129,17 @@ levels:
                 {print} 'Daddy shark'
         2:
             story: Maak het liedje 'de wielen van de bus'
-            code: |
+            code: |-
                 {print} 'De wielen van de bus gaan'
                 {repeat} 3 {times} {print} 'rond en rond'
                 {print} 'De wielen van de bus gaan rond en rond'
                 {print} 'als de bus gaat rijden'
     8:
         1:
-            story: |
+            story: |-
                 Jij en je vrienden spelen Pokémon Go! Maak een programma dat bepaalt in welke kleur alle teams komen:
                 rood, geel of blauw! Pauzeer na iedere indeling eventjes.
-            code: |
+            code: |-
                 teams = rood, blauw, geel
                 {print} 'Rood, geel of blauw?'
                 {repeat} 5 {times}
@@ -164,9 +147,8 @@ levels:
                     {print} teams {at} {random}
                     {sleep} 2
         2:
-            story: |
-                Laat de computer aftellen voor een potje verstoppertje
-            code: |
+            story: Laat de computer aftellen voor een potje verstoppertje
+            code: |-
                 teller = 11
                 {repeat} 10 {times}
                   teller = teller - 1
@@ -175,9 +157,8 @@ levels:
                 {print} 'Wie niet weg is, is gezien! Ik kom!'
     9:
         1:
-            story: |
-                Dit spelletje geeft je 3 verschillende rekensommen. Kun jij het spelletje aan de praat krijgen?
-            code: |
+            story: Dit spelletje geeft je 3 verschillende rekensommen. Kun jij het spelletje aan de praat krijgen?
+            code: |-
                 nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
                     nummer = nummers {at} {random}
@@ -188,10 +169,10 @@ levels:
                     {else}
                         {print} 'Nee! Het antwoord is ' correct_antwoord
         2:
-            story: |
+            story: |-
                 Deze code vraagt aan klanten in een restaurant of ze een toetje willen bestellen. Als ze dat willen wordt er gevraagd welk toetje. Willen ze tiramisu, dan wordt er gezegd dat dat helaas op is.
                 Kun jij de volgorde van de regels bepalen?
-            code: |
+            code: |-
                 bestelling = {ask} 'Wilt u een toetje?'
                 {if} bestelling = ja
                     toetje = {ask} 'Wat voor toetje wilt u?'
@@ -203,10 +184,10 @@ levels:
                     {print} 'Geen toetje? Geen probleem!'
     10:
         1:
-            story: |
+            story: |-
                 Help deze familie een schema te maken voor wie wanneer wat moet koken. Zorg met de {remove} commando's dat er nooit twee dagen hetzelfde wordt gegeten en dat iedereen maar één keer hoeft te koken.
                 **Let op!** De volgorde van de variabelen is eerst dagen, daarna mensen en als laatste diner_opties. Deze volgorde geldt ook bij de {remove} commando's.
-            code: |
+            code: |-
                 dagen = maandag, dinsdag, woensdag, donderdag, vrijdag
                 mensen = mama, papa, Martin, Abby, Jesse
                 diner_opties = pizza, tacos, pannenkoeken, een salade, lasagne
@@ -217,10 +198,10 @@ levels:
                     {remove} gekozen_persoon {from} mensen
                     {remove} gekozen_diner {from} diner_opties
         2:
-            story: |
+            story: |-
                 This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
                 **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
-            code: |
+            code: |-
                 mensen = Betty, Amanda, Marc
                 haarstijl = een kaal hoofd, een hanekam, een paardenstaart, stekeltjes
                 {for} mens {in} mensen
@@ -232,19 +213,18 @@ levels:
                         {print} 'We proberen het opniew... ' mens ' krijgt ' haarstijl {at} {random}
     11:
         1:
-            story: |
-                Maak een aftelklok voor oudjaarsavond! Het programma moet de getallen van 10 tot 1 één seconde tonen en je dan een gelukkig nieuwjaar wensen!
-            code: |
+            story: Maak een aftelklok voor oudjaarsavond! Het programma moet de getallen van 10 tot 1 één seconde tonen en je dan een gelukkig nieuwjaar wensen!
+            code: |-
                 {for} getal {in} {range} 10 {to} 1
                     {print} getal
                     {sleep}
                     {clear}
                 {print} 'Gelukkig nieuwjaar!'
         2:
-            story: |
+            story: |-
                 Maak een programma dat ons de uitslag van de wetenschapswedstrijd kan vertellen. Definieer eerst de variabele deelnemers en daarna de variabele plek.
                 **Tip** Regel 5 is het {sleep} commando en je eindigt met een felicitatie naar de deelnemers.
-            code: |
+            code: |-
                 {print} 'En dan nu.. de resultaten van de wetenschapswedstrijd'
                 deelnemers = Vivienne, Paul, Trixy, Bianca, Katya
                 plek = 5
@@ -255,7 +235,7 @@ levels:
                 {print} 'Gefeliciteerd!'
     12:
         1:
-            story: |
+            story: |-
                 Zing het lied 'De dronken zeeman'. Dit is de songtekst:
 
                 Wat zullen we doen met de dronken zeeman?
@@ -267,17 +247,15 @@ levels:
                 Hela hup, daar gaat ie
                 Hela hup, daar gaat ie
                 's Morgens in de vroegte
-
-            code: |
+            code: |-
                 coupletten = 'Wat zullen we doen met de dronken zeeman', 'Hela hup daar gaat ie'
                 {for} couplet {in} coupletten
                     {for} teller {in} {range} 1 {to} 3
                         {print} couplet
                     {print} 's Morgens in de vroegte'
         2:
-            story: |
-                Speel een potje Twister! Stel de variabele mensen eerst in, daarna ledematen en tot slot kleuren.
-            code: |
+            story: Speel een potje Twister! Stel de variabele mensen eerst in, daarna ledematen en tot slot kleuren.
+            code: |-
                 mensen = 'Jess', 'Nick', 'Winston'
                 ledematen = 'linkerhand', 'linkervoet', 'rechterhand', 'rechtervoet'
                 kleuren = 'rood', 'blauw', 'groen', 'geel'
