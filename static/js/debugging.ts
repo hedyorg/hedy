@@ -308,11 +308,11 @@ export function incrementDebugLine() {
     // Maybe we hit the correct mapping for this line
     if (lineNumber >= startingLine && lineNumber <= finishingLine) {
       // Highlight whole line if it's a full command
-      if(fullLineCommands.includes(map.command)){
+      if(fullLineCommands.includes(map.command) || theLevel <= 7 && blockCommands.includes(map.command)){
         // lines in ace start at 0
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;        
-      } else if (theLevel >= 7 && blockCommands.includes(map.command)) { // these commands always come up in the tree
+      } else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;
       }
