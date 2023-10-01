@@ -949,7 +949,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             7:
                 story_text: |
@@ -1024,9 +1024,9 @@ adventures:
             3:
                 story_text: |2
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                      In this level we can enter lists and choose things from them.
+                      You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                      For example, you can let the computer pick from rock, paper and scissors.
 
                 example_code: |
                     ```
@@ -1383,20 +1383,20 @@ adventures:
 
                 example_code: |2
 
-                    You can make a simple restaurant code, like this:
-                    ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
+                      You can make a simple restaurant code, like this:
+                      ```
+                      {print} 'Welcome to Hedys restaurant'
+                      {print} 'Here is our menu:'
+                      {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                      main = {ask} 'Which main course would you like?'
+                      price = 0
+                      {if} main {is} pizza price = 10
+                      {if} main {is} lasagne price = 12
+                      {if} main {is} spaghetti price = 8
+                      {print} 'You have ordered ' main
+                      {print} 'That will be ' price ' dollars, please'
+                      {print} 'Thank you, enjoy your meal!'
+                      ```
                 start_code: "# place your code here"
             7:
                 story_text: |
@@ -1467,7 +1467,7 @@ adventures:
                     ```
                 story_text_2: |2
 
-                    Of course, you could also order for multiple people!
+                      Of course, you could also order for multiple people!
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -1580,16 +1580,16 @@ adventures:
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |2
 
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
-                    ```
-                    {print} I’m Hedy the fortune teller!
-                    question {is} {ask} What do you want to know?
-                    {print} This is what you want to know: question
-                    answers {is} yes, no, maybe
-                    {print} My crystal ball says...
-                    {sleep} 2
-                    {print} answers {at} {random}
-                    ```
+                      In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                      ```
+                      {print} I’m Hedy the fortune teller!
+                      question {is} {ask} What do you want to know?
+                      {print} This is what you want to know: question
+                      answers {is} yes, no, maybe
+                      {print} My crystal ball says...
+                      {sleep} 2
+                      {print} answers {at} {random}
+                      ```
                 story_text_2: |
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
                 start_code: "# place your code here"
@@ -2715,8 +2715,6 @@ adventures:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers।"
