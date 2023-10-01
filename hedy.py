@@ -1,4 +1,5 @@
 import textwrap
+from functools import cache
 
 import lark
 from flask_babel import gettext
@@ -11,7 +12,6 @@ import warnings
 import hedy
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
 from collections import namedtuple
 import re
 import regex
@@ -2471,7 +2471,7 @@ def get_remaining_rules(orig_def, sub_def):
     return result_cmd_list
 
 
-def create_grammar(level, lang="en"):
+def create_grammar(level, lang, skip_faulty):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
     keywords = get_keywords_for_language(lang)
@@ -2483,7 +2483,7 @@ def create_grammar(level, lang="en"):
         result = merge_grammars(result, grammar_text_i, i)
 
     # Change the grammar if skipping faulty is enabled
-    if source_map.skip_faulty:
+    if skip_faulty:
         # Make sure to change the meaning of error_invalid
         # this way more text will be 'catched'
         error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
@@ -2613,20 +2613,12 @@ def get_keywords_for_language(language):
     return keywords
 
 
-PARSER_CACHE = {}
-
-
-def get_parser(level, lang="en", keep_all_tokens=False):
+@cache
+def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
-    existing = PARSER_CACHE.get(key)
-    if existing and not utils.is_debug_mode():
-        return existing
-    grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
-    PARSER_CACHE[key] = ret
-    return ret
+    grammar = create_grammar(level, lang, skip_faulty)
+    return Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
@@ -3004,7 +2996,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True, pre
 
 
 def parse_input(input_string, level, lang):
-    parser = get_parser(level, lang)
+    parser = get_parser(level, lang, skip_faulty=source_map.skip_faulty)
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
