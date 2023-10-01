@@ -906,7 +906,7 @@ adventures:
                     número_1 = {ask} 'Rellena el primer número:'
                     número_2 = {ask} 'Escribe el segundo número:'
                     respuesta_correcta = número_1 * número_2
-                    {print} número_1 ' por ' número_2 ' es ' la respuesta_correcta
+                    {print} número_1 ' por ' número_2 ' es ' respuesta_correcta
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -919,7 +919,7 @@ adventures:
                     {if} respuesta {is} _ {print} '¡Buen trabajo!'
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
-                start_code: "número_1 = {ask} 'Introduce el primer número:'\nnúmero_2 = {ask} Escribe el segundo número:'\nrespuesta_correcta = número_1 * número_2\n{print} número_1 ' por ' número_2 ' es ' la respuesta_correcta\n"
+                start_code: "número_1 = {ask} 'Introduce el primer número:'\nnúmero_2 = {ask} Escribe el segundo número:'\nrespuesta_correcta = número_1 * número_2\n{print} número_1 ' por ' número_2 ' es ' respuesta_correcta\n"
                 story_text_3: "**Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.\n\nAsí eliges un número de tablas para practicar, y de ahí siempre obtienes una suma diferente:\n"
             14:
                 story_text: "En este nivel puedes programar el juego 'Adivina el número'\n"
@@ -940,7 +940,7 @@ adventures:
             11:
                 example_code: "```\nnúmero = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * número\n```\n"
                 story_text: "Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.\n\n### Ejercicio 1\nMejora el código de ejemplo para que\n\n### Ejercicio 2\nVuelve al código de multiplicación del nivel 10, y modifícalo para que use un `{for}` y `{range}`.\n"
-                start_code: "número = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number\n"
+                start_code: "número = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * número\n"
             13:
                 story_text: |
                     ### Ejercicio 1
@@ -1094,7 +1094,7 @@ adventures:
                     Así:
 
                 start_code: "# pon tu código aquí"
-                example_code: "```\n_¡Hola, soy Hedy la adivina!\n_¿Quién eres tú?\n_Déjame echar un vistazo en mi bola de cristal.\n_Veo... Veo...\n_Tu nombre es\n```\n"
+                example_code: "```\n_¡Hola, soy Hedy la adivina!\n_ ¿Quién eres tú?\n_ Déjame echar un vistazo en mi bola de cristal.\n_ Veo... Veo...\n_ Tu nombre es\n```\n"
                 story_text_2: "### Ejercicio\nCopia el código de ejemplo en tu pantalla de entrada y rellena los espacios en blanco para hacer que tu código funcione.\n**Extra** Cambia el código y deja que el adivino no sólo prediga tu nombre, sino también tu edad, tu equipo favorito de deporte o cualquier otra cosa sobre ti mismo.\n"
             3:
                 story_text: |
@@ -1453,9 +1453,9 @@ adventures:
                 example_code: "```\nnombre {is} {ask} '¿Cómo te llamas?'\n{if} nombre {is} Hedy\n    {print} 'Bienvenido Hedy'\n    {print} '¡Puedes jugar en tu ordenador!'\n```\n"
                 story_text: "## Si… Sino…\nHas aprendido a repetir un bloque de líneas de código tras un comando `{repeat}`.\nAhora puedes usar la sangría para hacer bloques tras un comando {if} o {else}.\nComprueba el código de ejemplo.\n\n### Ejercicio\nAñade un comando {else} al código de ejemplo. Haz un bloque de línea usando sangría. Haz esto empezando cada línea con 4 espacios.\n"
             9:
-                start_code: "continuar = {ask} '¿Deseas continuar?'\n{if} continuar = sí\n    seguro = {ask} '¿Está seguro?'\n    {if} seguro {is} sí\n        {print} 'Continuaremos'\n    {else}\n        {print} 'No estás seguro'\n{else}\n    {print} 'No deseas continuar'.\n"
+                start_code: "continuar = {ask} '¿Deseas continuar?'\n{if} continuar = sí\n    seguro = {ask} '¿Está seguro?'\n    {if} seguro {is} sí\n        {print} 'Continuaremos'\n    {else}\n        {print} 'No estás seguro'\n{else}\n    {print} 'No deseas continuar'\n"
                 story_text: "En este nivel también puedes poner un comando {if} dentro de otro comando {if}.\n"
-                example_code: "continuar = {ask} \"¿Deseas continuar?\n{if} continuar = sí\n    seguro = {ask} '¿Estás seguro?'\n    {if} seguro {is} sí\n        {print} 'Continuamos' \n    {else}\n        {print} 'No estás seguro'\n{else}\n    {print} 'No deseas continuar'.\n"
+                example_code: "continuar = {ask} \"¿Deseas continuar?\n{if} continuar = sí\n    seguro = {ask} '¿Estás seguro?'\n    {if} seguro {is} sí\n        {print} 'Continuamos' \n    {else}\n        {print} 'No estás seguro'\n{else}\n    {print} 'No deseas continuar'\n"
     repeat_command:
         name: "{repeat}"
         description: comando repetir
@@ -1590,7 +1590,7 @@ adventures:
                 story_text_2: "## Contracciones\n¡Importante! Ten en cuenta que estamos usando comillas, Hedy se confundirá cuando uses el apóstrofe para contracciones como I'm o What's.\nAsegúrate de eliminar esos apóstrofes y cambia la ortografía a I am o What is.\nComprueba el código de ejemplo para ver la forma incorrecta de usar los apóstrofes.\n"
                 example_code: "```\n{print} '¡A partir de ahora tienes que usar las comillas!'\nrespuesta {is} {ask} '¿Qué tienes que usar a partir de ahora?'\n{print} 'Tenemos que usar ' respuesta\n```\n"
                 example_code_2: "```\n_ Esta es la manera incorrecta de usar apóstrofes _\n{print} 'I'm babysitting my sister's kids'\n{print} 'What's more fun than that?'\n```\n"
-                start_code: "{print} '¡Debes usar comillas a partir de ahora!'\nanswer {is} {ask} ¿Qué tenemos que usar a partir de ahora?\n{print} 'Necesitamos usar ' answer 'de ahora en adelante'"
+                start_code: "{print} '¡Debes usar comillas a partir de ahora!'\nanswer {is} {ask} '¿Qué tenemos que usar a partir de ahora?'\n{print} 'Necesitamos usar ' answer 'de ahora en adelante'"
             12:
                 story_text: "**Todos los textos tienen que ir entre comillas**\nPara este nivel también tendrás que usar comillas cuando almacenes un texto con `=`:\n"
                 example_code: "```\nnombre = 'El Robot Hedy'\n{print} 'Hola ' nombre\n```\n"
