@@ -20,7 +20,7 @@ with open(most_recent_file_name, 'r') as public_programs_file:
 for p in public_programs:
     s = Snippet(filename='file',
                 level=int(p['level']),
-                field_name='field',
+                field_name=None,
                 code=p['code'],
                 language=p['language'],
                 error=p['error']
@@ -42,7 +42,8 @@ class TestsPublicPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
-                    translate=False
+                    translate=False,
+                    skip_faulty=False
                 )
 
                 # useful code if you want to test what erroneous snippets are now passing
@@ -81,5 +82,6 @@ class TestsPublicPrograms(HedyTester):
                 level=int(snippet.level),
                 lang=snippet.language,
                 translate=False,
-                exception=exceptions.HedyException
+                exception=exceptions.HedyException,
+                skip_faulty=False
             )

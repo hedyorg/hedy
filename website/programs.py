@@ -30,6 +30,7 @@ class ProgramsLogic:
         self.db = db
         self.achievements = achievements
 
+    @querylog.timed
     def store_user_program(self,
                            user,
                            level: int,

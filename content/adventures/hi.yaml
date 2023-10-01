@@ -276,16 +276,16 @@ adventures:
                 example_code_2: |-
                     ```
                     {print} वह एक आवाज सुनता है
-                    जानवरों {is}🐿, 🦔, 🦇, 🦉
-                    जानवर {is} {ask} आपको क्या लगता है कि यह क्या है?
-                    {add} जानवर {to_list} जानवरों
+                    जानवरों {is} 🐿, 🦔, 🦇, 🦉
+                    जानवर_extra {is} {ask} आपको क्या लगता है कि यह क्या है?
+                    {add} जानवर_extra {to_list} जानवरों
                     {print} यह एक था जानवरों {at} {random}
                     ```
                 story_text_3: |-
                     यह आपकी कहानी में `{remove}` आदेश का एक उदाहरण है
                 example_code_3: |
                     ```
-                    {print} उनका बैग बहुत भारी हो गया था।
+                    {print} उनका बै ग बहुत भारी हो गया था।
                     {print} अंदर पानी की एक बोतल, एक टॉर्च और एक ईंट थी।
                     बैग {is} पानी, टॉर्च, ईंट
                     डंप {is} {ask} उसे कौन सी वस्तु गिराना चाहिए?
@@ -2190,10 +2190,6 @@ adventures:
         default_save_name: Pressed
     print_command:
         levels:
-            17:
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
-                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
             1:
                 story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"
                 story_text_2: "### Exercise\nIn Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.\nIn this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.\n\nFill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.\nHave fun!\n"
@@ -2219,7 +2215,7 @@ adventures:
             1:
                 story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
                 example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
-                story_text_2: "## The echo command\nIf you want the computer to repeat the answer back to you, you can use the `{echo}` command. Mind that the answer is echoed back at the end of the sentence, so it this example after hello.\n"
+                story_text_2: "## The echo command\nIf you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.\n"
                 example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
                 example_code_3: "```\n_ How are you doing?\n_\n```\n"
                 start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
@@ -2377,9 +2373,24 @@ adventures:
                 story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces।"
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements।"
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: |-
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                story_text: |-
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                example_code: |
+                    ```
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                    ```
+            17:
+                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
         name: "{for}"
         description: for command
     maths:
@@ -2396,6 +2407,15 @@ adventures:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers।"
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: |-
+                    **Maths with words**
+                    In this level you can also do addition with words like this:
+                example_code_2: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
         name: maths
     elif_command:
         name: "{elif}"

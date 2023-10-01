@@ -152,24 +152,24 @@ levels:
         10:
             question_text: "Quelle sortie sera affichée par ce code ?"
             code: |
-                {ask} Are you ready to go to level 2?
+                {ask} Es-tu prêt pour aller au niveau 2 ?
                 {echo}
                 {echo}
             mp_choice_options:
             -   option: |
                     Are you ready to go to level 2?
-                feedback: "There are two echo commands"
+                feedback: "Il y a deux commandes `{echo}`"
             -   option: |
                     Yes!
                     Yes!
                 feedback: "Great job!"
             -   option: |
                     Yes!
-                feedback: "There are two echo commands"
+                feedback: "Il y a deux commandes `{echo}`"
             -   option: |
                     Are you ready to go to level 2?
                     Yes!
-                feedback: "There are two echo commands"
+                feedback: "Il y a deux commandes `{echo}`"
             correct_answer: "B"
             hint: "Let's go!"
             question_score: '10'
@@ -2174,7 +2174,7 @@ levels:
                 feedback: The prince is a little more picky than that!
             correct_answer: C
             question_text: Which statement is true about this code?
-            code: "if name = 'Cinderella' and shoe_size = '38'\n    print 'You are my one true love!'"
+            code: "if name = 'Cinderella' and shoe_size = 38\n    print 'You are my one true love!'"
             hint: Both statements have to be true
             question_score: '10'
         6:
