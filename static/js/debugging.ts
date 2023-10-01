@@ -302,7 +302,6 @@ export function incrementDebugLine() {
   const active_suspension = theGlobalDebugger.get_active_suspension();
   const lineNumber = active_suspension.$lineno;
   if (!lineNumber) return;
-  console.log('-'.repeat(40))
   for (const [_, map] of Object.entries(theGlobalSourcemap)) {
     const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
     const finishingLine = map.python_range.to_line + theGlobalDebugger.get_code_starting_line();
@@ -312,20 +311,13 @@ export function incrementDebugLine() {
       if(fullLineCommands.includes(map.command)){
         // lines in ace start at 0
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
-        break;
+        break;        
       } else if (theLevel >= 7 && blockCommands.includes(map.command)) { // these commands always come up in the tree
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;
-        // const hedy_line = theGlobalEditor.contents.split('\n')[map.hedy_range.from_line - 1];
-        // // get the first non-blank space word
-        // // we can guarantee that this will always be non-null
-        // const first_word = hedy_line.match(/\S+/)![0];
-        // if (['repeat', 'while', 'for'].includes(first_word)) {
-        // }
       }
     }
   }
-  console.log('-'.repeat(40))
 }
 
 function markCurrentDebuggerLine() {
