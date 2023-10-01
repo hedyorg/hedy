@@ -1,4 +1,5 @@
 import re
+import textwrap
 import exceptions
 from os import path
 from lark import Tree
@@ -133,6 +134,8 @@ class SourceMap:
     def set_python_output(self, python_code):
         self.python_code = python_code
         python_code_mapped = list()
+        hedy_lines = self.hedy_code.split('\n')
+        indent_size = find_program_indent_length(hedy_lines)
 
         def line_col(context, idx):
             return context.count('\n', 0, idx) + 1, idx - context.rfind('\n', 0, idx)
@@ -141,11 +144,15 @@ class SourceMap:
             if hedy_source_code.error is not None or python_source_code.code == '':
                 continue
 
-            start_index = python_code.find(python_source_code.code)
+            number_of_indents = find_indent_length(
+                hedy_lines[hedy_source_code.source_range.from_line - 1]) // indent_size
+
+            python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
+            start_index = python_code.find(python_statement_code)
             code_char_length = len(python_source_code.code)
 
-            for i in range(python_code_mapped.count(python_source_code.code)):
-                start_index = python_code.find(python_source_code.code, start_index+code_char_length)
+            for i in range(python_code_mapped.count(python_statement_code)):
+                start_index = python_code.find(python_statement_code, start_index+code_char_length)
                 start_index = max(0, start_index)  # not found (-1) means that start_index = 0
 
             end_index = start_index + code_char_length
@@ -316,3 +323,29 @@ def source_map_transformer(source_map: SourceMap):
         return cls
 
     return decorate
+
+
+def find_indent_length(line):
+    number_of_spaces = 0
+    for x in line:
+        if x == ' ':
+            number_of_spaces += 1
+        else:
+            break
+    return number_of_spaces
+
+
+def find_program_indent_length(program_lines):
+    indent_size = 4
+    found_indent_size = False
+    for line in program_lines:
+        leading_spaces = find_indent_length(line)
+        # continue if line is just spaces
+        if leading_spaces == len(line):
+            continue
+
+        if not found_indent_size and leading_spaces > 0:
+            indent_size = leading_spaces
+            found_indent_size = True
+
+    return indent_size
