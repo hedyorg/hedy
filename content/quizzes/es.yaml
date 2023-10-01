@@ -1253,7 +1253,7 @@ levels:
             -   option: "infinito"
                 feedback: "En este nivel sólo puedes repetir una línea cada vez"
             correct_answer: "B"
-            hint: "Sólo puedes repetir 1 línea cada vez"
+            hint: "Sólo se puede repetir una línea a la vez"
             question_score: '10'
         2:
             question_text: "¿Qué código es correcto?"
@@ -1279,7 +1279,7 @@ levels:
                     ```
                 feedback: "¡Eso es!"
             correct_answer: "D"
-            hint: "Primero el comando repetir, después el comando `{print}`"
+            hint: "Primero el comando `{repeat}`, luego el comando `{print}`"
             question_score: '10'
         3:
             question_text: "¿Este código está bien o mal?"
@@ -1317,7 +1317,7 @@ levels:
                     `{times}`
                 feedback: "`{times}` está mal escrito"
             correct_answer: "A"
-            hint: "Yo soy es incorrecto, no puedes usar apóstrofes"
+            hint: "Estoy equivocado, no puedes usar apóstrofes en una oración"
             question_score: '10'
         5:
             question_text: "¿Este código está bien o mal?"
@@ -1478,8 +1478,8 @@ levels:
                 feedback: "Esto no está en el orden correcto."
             -   option: |
                     ```
-                    {repeat} 4 {times} 'si estás feliz y lo sabes'
-                    {repeat} 2 veces 'aplaude'
+                    {repeat} 4 {times} 'si eres feliz y lo sabes'
+                    {repeat} 2 {times} 'aplaude'
                     {print} 'y realmente quieres mostrarlo'
                     {print} 'aplaude'
                     ```
@@ -1517,7 +1517,7 @@ levels:
             -   option: "Este comando `{print}` se tiene que eliminar."
                 feedback: "No, lo necesitas."
             -   option: "Hay una falta de ortografía en el comando `{repeat}`."
-                feedback: "No, la ortografía correcta es repetir"
+                feedback: "No, `{repeat}` es la ortografía correcta"
             -   option: "La segunda línea tiene que empezar con 4 espacios de sangría."
                 feedback: "¡Correcto!"
             correct_answer: "D"
@@ -1539,7 +1539,7 @@ levels:
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
                 feedback: "Qué se repite y qué no."
             correct_answer: "C"
-            hint: "¿Qué se repite y qué no?."
+            hint: "¿Qué se está repitiendo y qué no?"
             question_score: '10'
         4:
             question_text: "¿Qué resultado es correcto?"
@@ -1619,11 +1619,11 @@ levels:
                 salsa = {ask} '¿Qué salsa quieres?'
                     {print} 'Unas patatas fritas con ' salsa
                 {if} comida {is} pizza
-                    ingrediente = {ask} '¿Qué ingrediente le gustaría?'
+                    ingrediente = {ask} '¿Qué ingrediente te gustaría?'
                     {print} 'Una pizza con ' ingrediente
-                {print} 'Gracias por su pedido'
+                {print} 'Gracias por tu pedido'
             mp_choice_options:
-            -   option: "¡Nada de este código es correcto!"
+            -   option: "Nada. ¡Este código es correcto!"
                 feedback: "¡Algo falla!"
             -   option: "No se permite usar un comando `{if}` tras un comando `{ask}`."
                 feedback: "¡Lo eres!"
@@ -1769,20 +1769,20 @@ levels:
         3:
             question_text: "¿Qué caso deberías elegir para ganar un millón de dólares?"
             code: |-
-                {print} '¡Elige la caja correcta y gana!'
-                caja = {ask} '¿Qué caja elegirás? 1 o 2?'
-                {if} caja {is} 1
-                     acción = {ask} '¿La abres o la vendes?'
-                         {if} acción {is} vender
-                             {print} 'Vendes tu caja por 10 dólares'
-                         {if} acción {is} abrir
-                             {print} 'Abres la caja y ganas una tarta de manzana'
-                {if} caja {is} 2
-                     acción = {ask} '¿La abres o la vendes?'
-                         {if} acción {is} vender
-                             {print} 'Vendes la caja por 500 dólares'
-                         {if} acción {is} abrir
-                             {print} '¡Abres la caja y ganas un millón de dólares!'
+                {print} '¡Elige el caso correcto y gana!'
+                caso = {ask} '¿Qué caso escogerás? 1 o 2?'
+                {if} caso {is} 1
+                     acción = {ask} '¿Abrirlo o venderlo?'
+                     {if} acción {is} vender
+                         {print} 'Vendes tu caso por 10 dólares'
+                     {if} acción {is} abierta
+                         {print} 'Abres el caso y ganas una tarta de manzana'
+                {if} caso {is} 2
+                     acción = {ask} '¿Abrirlo o venderlo?'
+                     {if} acción {is} vender
+                         {print} 'Vendes el estuche por 500 dólares'
+                     {if} acción {is} abierta
+                         {print} '¡Abre el caso y gana un millón de dólares!'
             mp_choice_options:
             -   option: "caso 1, vende"
                 feedback: "¡No ganas un millón!"
@@ -1869,7 +1869,7 @@ levels:
             -   option: "`{if}` `{else}` `{repeat}`"
                 feedback: "¡Sigue así!"
             -   option: "`{if}` `{else}` `{repeat}` `{print}`"
-                feedback: "No con imprimir"
+                feedback: "No con {print}"
             correct_answer: "C"
             hint: "La sangría ocurre en la línea inferior de algunos comandos"
             question_score: '10'
@@ -1917,7 +1917,7 @@ levels:
             hint: "Tras cada comando `{if}`, la línea de debajo debe tener sangría"
             question_score: '10'
         8:
-            question_text: "¿Qué falla en este código?"
+            question_text: "¿Qué es lo que falla en este código?"
             code: |-
                 edad = {ask} '¡Feliz cumpleaños! ¿Qué edad tienes?'
                 cantar = {ask} '¿Quieres que cantemos?'
@@ -1929,7 +1929,7 @@ levels:
                 feedback: "Sí puedes."
             -   option: "La variable llamada 'edad' se usa después como 'años'"
                 feedback: "¡Buen ojo! ¡Buen trabajo!"
-            -   option: "No está permitido empezar con 8 espacios, como pasa en las líneas 4 y 5"
+            -   option: "No puedes empezar con 8 espacios, como la línea 5"
                 feedback: "De hecho debes empezar así."
             -   option: "Un código siempre debe empezar con un comando `{print}` en la primera línea"
                 feedback: "Eso no es cierto."
@@ -1970,7 +1970,7 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "¿Qué palabra debería ir en el lugar del interrogante?"
+            question_text: "¿Qué palabra debe ir en el lugar del espacio en blanco?"
             code: |-
                 {for} i {in} _ 1 {to} 10
                     {print} i
@@ -2073,7 +2073,7 @@ levels:
                 feedback: "Ahora Hedy imprime los números del 0 al 10 en vez de de 10 a 0."
             -   option: |
                     ```
-                    {for} i {in} {range} 0 to 10
+                    {for} i {in} {range} 0 {to} 10
                         {print} - i
                     ```
                 feedback: "Hedy imprimiría números negativos en este caso."
@@ -2127,7 +2127,7 @@ levels:
             hint: "0 también cuenta. Así que 0,1,2 son 3 veces."
             question_score: '10'
         7:
-            question_text: "¿Qué debería ir en lugar del interrogante?"
+            question_text: "¿Qué debe haber en el lugar del espacio en blanco?"
             code: |-
                 {print} 'Bienvenido a la cena de Hedys'
                 gente = {ask} '¿Cuántas personas comerán aquí esta noche?'
@@ -2497,7 +2497,7 @@ levels:
                 feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             -   option: "```\nsabores = 'vainilla, fresa, chocolate'\n{print} 'Me gustaría tomar una tarta de ' sabores {at} {random}\n```"
                 feedback: ¡Muy bien!
-            -   option: "\n```\nsabores = 'vainilla, fresa, chocolate'\n{print} 'Me gustaría tomar una tarta de ' sabores {at} {random} \n```\n"
+            -   option: "\n          ```\n          sabores = 'vainilla, fresa, chocolate'\n          {print} 'Me gustaría un pastel de ' sabores {at} {random} '.'\n          ```\n"
                 feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             correct_answer: C
             hint: La segunda línea es la misma en cada código, presta atención a la primera línea
