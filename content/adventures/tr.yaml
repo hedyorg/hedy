@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: "Hedy'ye hoş geldiniz! Seviye 1'de, bir hikaye yazdırarak başlayabilirsiniz.\n\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.\n\nHazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!\n"
-                start_code: '{print} Merhaba Dünya!'
+                start_code: '`{print}` Merhaba Dünya!'
             2:
                 story_text: |
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
@@ -39,7 +39,7 @@ adventures:
 
                 start_code: "{print} Merhaba Dünya!"
             4:
-                start_code: "{print} 'Merhaba Dünya'"
+                start_code: "adım {is} Sophie\n{print} Benim adım adım\n"
                 story_text: |
                     Önceki seviyelerde değişkenlerle pratik yaptınız, ancak bu problemle karşılaşmış olabilirsiniz.
                     Bunun gibi bir kodu çalıştırmayı denemiş olabilirsiniz:
@@ -175,7 +175,7 @@ adventures:
                     ```
             13:
                 start_code: |-
-                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
                 story_text: |
                     Önceki seviyelerde iki `{if}` komutunu birbirinin içine nasıl yerleştireceğinizi öğrendiniz. Bu sorunsuz çalışır, ancak size bunun gibi çok uzun ve kullanışsız kodlar verir:
 
@@ -195,8 +195,12 @@ adventures:
                         {print} 'Erişim reddedildi!'
                     ```
             14:
-                start_code: |-
-                    {print} 'Hadi bir sonraki sekmeye geçelim'
+                start_code: |
+                    cevap = {ask} 'Daha fazlasını öğrenmek ister misiniz?'
+                    {if} cevap == 'evet.'
+                        {print} 'Bir sonraki maceraya gidin!'
+                    {if} cevap != 'evet.'
+                        {print} 'Burada biraz daha pratik yapın'
                 story_text: |
                     Aşağıdaki program ile okulda bir dersi geçip geçmediğinizi hesaplayabilirsiniz (yani, altı yada daha yüksek bir not).
                     Bu kodun, 5. satırdaki çok uzun kod nedeniyle son derece verimsiz olduğunu görebilirsiniz.
@@ -214,7 +218,7 @@ adventures:
                     ```
             15:
                 start_code: |-
-                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
                 story_text: |
                     Aşağıdaki bu oyunda, oyuncunun istediği kadar oynayabilmesini sağlamak için bir kod yapılmıştır...
                     Ancak kod etkisiz ve çok uzun. Ayrıca, oyuncu 100 yerine 101 oyun oynamak isterse ne olacak?
@@ -256,7 +260,7 @@ adventures:
                     Not: Bu kodlar, bu bölümde bu haldeyken çalışmaz. Neresini düzelteceğinizi görmek için sonraki sekmeye gidin.
             17:
                 start_code: |-
-                    {print} 'Hadi bir sonraki seviyeye geçelim!'
+                    {print} 'Hadi bir sonraki sekmeye geçelim!'
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
 
@@ -309,7 +313,7 @@ adventures:
                     {print} isim buranın perili bir orman olmasından korkuyor
                     ```
                 start_code: "{print} Sizin hikayeniz"
-                story_text_2: "### Alıştırma\nŞimdi sırada bir önceki seviyede oluşturduğunuz kendi hikayenize değişkenler ekleme zamanı.\n'Programlarım'a gidin, 1. seviye hikaye maceranızı bulun ve kodunuzu kopyalayın. Kodu bu seviyedeki giriş ekranınıza yapıştırın.\n\nBu kod bu seviyede çalışmayacaktır, çünkü henüz değişkenleri kullanmadınız.\nKodunuzdaki `{ask}` komutlarını ve `{echo}` komutlarını bu seviyede öğrendiğiniz doğru şekilleriyle değiştirin.\n\n**Ekleme** Hikayenizde gerilim oluşturmak için kodunuza bir {sleep} komutu ekleyin.\n"
+                story_text_2: "### Alıştırma\nŞimdi sırada bir önceki seviyede oluşturduğunuz kendi hikayenize değişkenler ekleme zamanı.\n'Programlarım'a gidin, 1. seviye hikaye maceranızı bulun ve kodunuzu kopyalayın. Kodu bu seviyedeki giriş ekranınıza yapıştırın.\n\nBu kod bu seviyede çalışmayacaktır, çünkü henüz değişkenleri kullanmadınız.\nKodunuzdaki `{ask}` komutlarını ve `{echo}` komutlarını bu seviyede öğrendiğiniz doğru şekilleriyle değiştirin.\n\n**Ekleme** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.\n"
             3:
                 story_text: |
                     3. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
@@ -1035,7 +1039,7 @@ adventures:
                     {for} gün {in} günler
                         {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak'
                     ```
-                start_code: "# kodunuzu buraya yazın"
+                start_code: "günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar\nisimler = anne, baba., Emma, Sophie\n{for} gün {in} günler\n    {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak'\n"
     dice:
         name: "Zar"
         description: "Kendi zarınızı yapın"
@@ -1052,9 +1056,9 @@ adventures:
                 example_code: |
                     ```
                     seçimler {is} 1, 2, 3, 4, 5, solucan
-                    {print} Attığın zar _ {at} {random}
+                    {print} Attığın zar _ {at} {random} !
                     ```
-                start_code: "{print} Bu sefer zar kaçı gösterecek?"
+                start_code: "seçimler {is} 1, 2, 3, 4, 5, solucan\n{print} Attığın zar _ {at} {random} !\n"
                 example_code_2: "```\nseçimler {is} _\n```\n"
                 story_text_2: "### Alıştırma\nYukarıdaki örnekteki zarlar belirli bir oyun için zarlardır. Normal bir zar yapabilir misiniz?\nYa da farklı bir oyundaki diğer özel zarları?\n"
             4:
@@ -1312,8 +1316,8 @@ adventures:
                     Artık matematik yapabildiğinize göre, kendi başınıza bir hesap makinesi yapabilirsiniz!
                 example_code: |
                     ```
-                    sayı_1 {is} {ask} 'İlk sayıyı girin:'
-                    sayı_2 {is} {ask} 'İkinci sayıyı girin:'
+                    sayı_1 = {ask} 'İlk sayıyı girin:'
+                    sayı_2 = {ask} 'İkinci sayıyı girin:'
                     doğru_cevap = sayı_1 * sayı_2
                     {print} sayı_1 ' kere ' sayı_2 ' eder ' doğru_cevap
                     ```
@@ -1329,7 +1333,7 @@ adventures:
                     {else} {print} 'Yanlış! doğru cevap ' _
                     ```
 
-                start_code: "{print} 'Hesap makinesine hoş geldiniz!'"
+                start_code: "sayı_1 = {ask} 'İlk numarayı girin:'\nsayı_2 = {ask} 'İkinci numarayı girin:'\ndoğru_cevap = sayı_1 * sayı_2\n{print} sayı_1 ' kere ' sayı_2 ' eder ' doğru_cevap\n"
                 story_text_3: "**Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.\n\nBu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:\n"
             9:
                 story_text: |
@@ -1437,8 +1441,8 @@ adventures:
                 start_code: "# kodunuzu buraya yazın"
             11:
                 story_text: "Bir `{for}` ile çarpım tablosu alıştırma programını basitleştirebilirsiniz.\n\n### Alıştırma 1\nÖrnek kodu güzel bir çarpım tablosu yazdıracak şekilde geliştirin: <br> \"1 kere 10 eder 10\", \"2 kere 10 eder 20\" gibi.\n\n### Alıştırma 2\nSeviye 10'daki çarpma kodunuza geri dönün ve kodu `{for}` ve `{range}` kullanacak şekilde değiştirin.\n"
-                start_code: '# kodunuzu buraya yazın'
-                example_code: "```\nsayı = 10\n{for} i {in} {range} 1 şuraya 10\n    {print} i * sayı\n```\n"
+                start_code: "sayı = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * sayı\n"
+                example_code: "```\nsayı = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * sayı\n```\n"
             13:
                 example_code: "```\ncevap1 = {ask} '10 kere 7 kaç eder?'\ncevap2 = {ask} '6 kere 7 kaç eder?'\n{if} _ _ _ _ _ _ _\n    {print} _\n```\n"
                 story_text: "### Alıştırma 1\nAlıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.\n\n### Alıştırma 2 Ekleme\nBazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, \"Hangi sayı 10'u böler?\" sorusunu hem 2 hem de 5 cevaplanabilir.\nBirden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.\nProgramlama alanını temizleyin ve kendi çözümünüzü oluşturun.\n"
@@ -2722,9 +2726,9 @@ adventures:
                     {print} a + b
                     ```
             6:
-                start_code: "{print} '5 kere 5 eder ' 5 * 5"
+                start_code: "{print} '5 artı 5 eder ' 5 + 5\n{print} '5 eksi 5 eder ' 5 - 5\n{print} '5 çarpı 5 eder ' 5 * 5\n{print} '5 bölü 5 eder ' 5 / 5\n"
                 story_text: "## 1 + 1\nBu seviyede yeni bir şey öğreniyorsunuz: artık hesaplama da yapabileceksiniz.\n\nToplama kolaydır, matematikte olduğu gibi yazarsınız: Örneğin `5 + 5`. Çıkarma da iyi çalışır, `5 - 5` şeklindedir.\n\nÇarpma biraz farklıdır, çünkü klavyenizde çarpma simgesi yoktur. Arayın bakın, özel klavye değilse gerçekten yoktur!\nBu yüzden çarpmayı sayıların yanındaki yıldız işaretiyle yapıyoruz: `5 * 5`. Bunu \"5 çarpı 5\" olarak okuyun, en iyi şekilde böyle hatırlamanıza yardımcı olur.\n"
-                example_code: "```\n{print} '5 artı 5 eder ' 5 + 5\n{print} '5 eksi 5 eder ' 5 - 5\n{print} '5 çarpı 5 eder ' 5 * 5\n```\n"
+                example_code: "```\n{print} '5 artı 5 eder ' 5 + 5\n{print} '5 eksi 5 eder ' 5 - 5\n{print} '5 çarpı 5 eder ' 5 * 5\n{print} '5 bölü 5 eder ' 5 / 5\n```\n"
         name: matematik
         description: matematiğe giriş
         default_save_name: matematik
@@ -2804,9 +2808,9 @@ adventures:
                 story_text_3: "Bir şeyin başka bir şeye eşit *olmadığını* `!=` kullanarak karşılaştırabilirsiniz:\n"
                 example_code_3: "```\nisim = {ask} 'Senin adın ne?'\n{if} isim != 'Hedy'\n    {print} 'Sen Hedy değilsin.'\n```\n"
             6:
-                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
-                start_code: "name = Hedy\nanswer = 20 + 4\n"
+                story_text: "Bir kelimeyi bir değişkende saklama konusunda da bir değişiklik yapıyoruz! Artık bir değişkende bir isim veya sayı sakladığımızda `{is}` yerine `=` kullanabilirsiniz, bunun gibi:\n"
+                example_code: "```\nisim = Hedy\ncevap = 20 + 4\n```\n"
+                start_code: "isim = Hedy\ncevap = 20 + 4\n"
     random_command:
         name: "{random}"
         description: şurada rastgele komutuna giriş
@@ -2821,7 +2825,7 @@ adventures:
                 story_text_3: "### Alıştırma\nBir kapı veya bir bavul seçtiğiniz ve içinde büyük bir ödül bulunan kendi oyun programınızı (televizyondakiler gibi) yapmak için `{at} {random}` komutunu deneyin!\nBunu yapabilir misiniz? İlk satırları sizin için örnek koda zaten koyduk.\n"
                 example_code_3: "```\n{print} Büyük oyun gösterisi!\n{print} Önünüzde 3 bavul var...\nseçim {is} {ask} Hangi bavulu seçiyorsunuz?\nödüller {is} _\n_\n```\n"
             16:
-                start_code: "meyve = ['elma', 'muz', 'kiraz']\n{print} meyve[rastgele]"
+                start_code: "arkadaşlar = ['Ahmet', 'Beren', 'Ceyda']\nşanslı_sayılar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} arkadaşlar[i] ' için şanslı sayı'\n    {print} şanslı_sayılar[i]"
                 story_text: "Şimdi Python yöntemiyle listeler yapacağız, bu listelerin etrafında köşeli parantezler olacak! Ayrıca önceki seviyelerde öğrendiğimiz gibi her öğenin etrafında tırnak işaretlerini koyuyoruz.\nKöşeli parantezleri listedeki bir yeri belirtmek için kullanırız. {at} {random} komutu bu bölümde artık kullanılamaz."
                 example_code: "```\narkadaşlar = ['Ahmet', 'Betül', 'Ceyda']\nşanslı_sayılar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} arkadaşlar[i] ' için şanslı sayı'\n    {print} şanslı_sayılar[i] ' sayısıdır' \n```\n"
     add_remove_command:
@@ -2864,9 +2868,9 @@ adventures:
                 example_code: "```\nisim {is} {ask} 'Senin adın ne?'\n{if} isim {is} Hedy\n    {print} 'Hoşgeldin Hedy'\n    {print} 'Bilgisayarında oynayabilirsin!'\n```\n"
                 story_text: "## eğer... değilse...\nBir `{repeat}` komutundan sonra bir kod satır bloğunu tekrarlamayı öğrendiniz.\nŞimdi artık bir {if} veya {else} komutundan sonra bloklar oluşturmak için girinti de kullanabilirsiniz.\nÖrnek koda göz atın.\n\n### Alıştırma\nÖrnek koda bir {else} komutu ekleyin. Girinti kullanarak bir satır bloğu oluşturun. Bunu her satırı 4 boşlukla başlatarak yaparsınız.\n"
             9:
-                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
-                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
-                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                start_code: "devam = {ask} 'Devam etmek istiyor musun?'\n{if} devam = evet\n    emin = {ask} 'Emin misin?'\n    {if} emin {is} evet\n        {print} 'Devam edeceğiz'\n    {else}\n        {print} 'Emin değilsin'\n{else}\n    {print} 'Devam etmek istemiyorsun'\n"
+                story_text: "Bu seviyede bir {if} komutunu başka bir {if} komutunun içine de koyabilirsiniz.\n"
+                example_code: "devam = {ask} 'Devam etmek istiyor musun?'\n{if} devam = evet\n    emin = {ask} 'Emin misin?'\n    {if} emin {is} evet\n        {print} 'Devam edeceğiz'\n    {else}\n        {print} 'Emin değilsin'\n{else}\n    {print} 'Devam etmek istemiyorsun'\n"
     in_command:
         name: "{in}"
         description: içinde komutuna giriş
@@ -2888,7 +2892,7 @@ adventures:
                 story_text_2: "## Kısaltmalar\nÖnemli! Artık tırnak işareti kullandığımıza göre, Hedy'nin veya TC'de gibi kısaltmalar için kesme işareti kullandığınızda Hedy'nin kafasının karışacağını unutmayın.\nBu kesme işaretlerini kaldırdığınızdan ve yazım şeklini \"Hedy nin\" veya \"TC de\" olarak değiştirdiğinizden emin olun. (Tek tırnak için şimdilik başka çözümümüz yok).\nKesme işaretlerinin yanlış kullanım şeklini görmek için örnek koda göz atın.\n"
                 example_code: "```\n{print} 'Şu andan itibaren tırnak işareti kullanmanız gerekiyor!'\ncevap {is} {ask} 'Bundan sonra ne kullanmamız gerekiyor?'\n{print} 'Kullanmamız gereken ' cevap\n```\n"
                 example_code_2: "```\n_ Kesme işaretlerini kullanmanın yanlış yolu budur _\n{print} 'Ayşe'nin çocuklarına bakıyorum.'\n{print} 'Çocuklarla oyun'dan daha eğlenceli ne olabilir ki?'\n```\n"
-                start_code: "{print} 'Şu andan itibaren tırnak işareti kullanmanız gerekiyor!'\ncevap {is} {ask} 'Bundan sonra ne kullanmamız gerekiyor?'\n{print} 'Kullanmamız gereken ' cevap"
+                start_code: "{print} 'Şu andan itibaren tırnak işareti kullanmanız gerekiyor!'\ncevap {is} {ask} 'Bundan sonra ne kullanmamız gerekiyor?'\n{print} 'Bundan sonra ' cevap ' kullanmamız gerekiyor'"
             12:
                 story_text: "**Tüm metinlerin tırnak içinde olması gerekir**\nBu seviyeden itibaren bir metni `=` ile kaydederken tırnak işaretlerini de kullanmanız gerekecektir:\n"
                 example_code: "```\nisim = 'Robot Hedy'\n{print} 'Merhaba ' isim\n```\n"

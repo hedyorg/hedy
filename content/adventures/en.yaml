@@ -214,11 +214,11 @@ adventures:
                         {print} 'Great! You have passed the subject!'
                     ```
                 start_code: |
-                    answer = ask 'Do you want to learn more?'
-                    if answer == 'yes'
-                        print 'Go to the next adventure!'
-                    if answer != 'yes'
-                        print 'That is a shame!'
+                    answer = {ask} 'Do you want to learn more?'
+                    {if} answer == 'yes'
+                        {print} 'Go to the next adventure!'
+                    {if} answer != 'yes'
+                        {print} 'That is a shame!'
             15:
                 story_text: |
                     In this game below a code has been made to make sure the player can play on as long as they want...
@@ -654,25 +654,25 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
             9:
                 start_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
                 example_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
     in_command:
@@ -2497,12 +2497,12 @@ adventures:
                 example_code: |
                     ```
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
                     ```
                 start_code: |
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
             12:
                 story_text: |

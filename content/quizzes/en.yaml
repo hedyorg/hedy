@@ -264,7 +264,7 @@ levels:
             -   option: "Hi my Hedy is name"
                 feedback: "The variable name is replaced with Hedy"
             -   option: "Hi my Hedy is Hedy"
-                feedback: "Correct, this mistake will be fixed in level 3!"
+                feedback: "Correct, this mistake will be fixed in level 4!"
             correct_answer: "D"
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
@@ -2603,10 +2603,10 @@ levels:
                 feedback: "Alright!"
             -   option: |2
 
-                              ```
-                              flavors = 'vanilla, strawberry, chocolate'
-                              {print} 'I would like a ' flavors {at} {random} ' cake.'
-                              ```
+                                  ```
+                                  flavors = 'vanilla, strawberry, chocolate'
+                                  {print} 'I would like a ' flavors {at} {random} ' cake.'
+                                  ```
                 feedback: "All the different values of flavors should be in quotation marks."
             correct_answer: "C"
             hint: "The second line is the same in each code, pay attention to the first line"
@@ -2666,9 +2666,9 @@ levels:
                 password {is} {ask} 'What is the password?'
                 {if} password {is} 'TOPSECRET'
                     b {is} 'tomorrow at 02.00'
-                else
+                {else}
                     b {is} 'today at 10.00'
-                print a + b
+                {print} a + b
             mp_choice_options:
             -   option: "Go to the train station today at 10.00"
                 feedback: "The agent won't be catching any bad guys here"
@@ -2811,7 +2811,7 @@ levels:
                     ```
                     'prizes' = 'one million dollars', 'nothing'
                     ```
-                feedback: "You one nothing"
+                feedback: "You won nothing"
             correct_answer: "C"
             hint: "The items on the list should be in quotation marks"
             question_score: '10'
@@ -2820,7 +2820,7 @@ levels:
             code: |-
                 actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                 ???
-                    {for} i {in} range 0 {to} 1
+                    {for} i {in} {range} 0 {to} 1
                         {print} 'if youre happy and you know it'
                         {print} action
                     {print} 'if youre happy and you know it and you really want to show it'
@@ -3152,7 +3152,7 @@ levels:
                 price = 10
                 money = {ask} How much money do you have?
                 buy = {ask} 'Would you like to buy this teddy bear?'
-                {if} money >= price and buy == 'yes'
+                {if} money >= price {and} buy == 'yes'
                     {print} 'You can buy the bear!'
                 {else}
                     {print} 'You cannot buy this bear!'
@@ -3173,7 +3173,7 @@ levels:
             code: |
                 age = {ask} 'How old are you?'
                 ticket = {ask} 'Do you have a ticket?'
-                {if} age _ and ticket == 'yes'
+                {if} age _ {and} ticket == 'yes'
                     {print} 'You can enter the movie theater.'
                 {else}
                     {print} 'You are not allowed to come in!'
@@ -3193,7 +3193,7 @@ levels:
             question_text: "How many times do you have to say you are annoyed before this annoying game stops?"
             code: |
                 lives = 2
-                {repeat} 10 times
+                {repeat} 10 {times}
                     {if} lives != 0
                         answer = {ask} 'Are you annoyed yet?'
                     {if} answer == 'yes'
@@ -3265,7 +3265,7 @@ levels:
                 chocolate = {ask} 'How many pieces of chocolate have you eaten?'
                   {if} chocolate <= 2
                       {print} 'That is a healthy amount'
-                  {if} chocolate > 2 and chocolate =< 8
+                  {if} chocolate > 2 {and} chocolate =< 8
                       {print} 'That is a bit much'
                   {if} chocolate > 8
                       {print} 'You will get a stomach ache!'
@@ -3304,9 +3304,9 @@ levels:
             question_text: "Which symbol should be used on the blank? Tip: You must keep guessing until you get it right."
             code: |
                 answer = 0
-                while answer _ 'Amsterdam'
-                    answer = ask 'What is the capital city of the Netherlands?'
-                print 'You have given the correct answer'
+                {while} answer _ 'Amsterdam'
+                    answer = {ask} 'What is the capital city of the Netherlands?'
+                {print} 'You have given the correct answer'
             mp_choice_options:
             -   option: "`=!`"
                 feedback: "That is not right."
@@ -3346,10 +3346,10 @@ levels:
             hint: "When you are comparing two answers you should use =="
             question_score: "10"
         3:
-            question_text: "Which command should be filled in on the two blanks?"
+            question_text: "Which command should be filled in on the blank?"
             code: |
-                _ age >= 18
-                  print 'you are not allowed in this bar'
+                _ age < 18
+                  {print} 'you are not allowed in this bar'
             mp_choice_options:
             -   option: "`{in}`"
                 feedback: "That's not it"
@@ -3366,20 +3366,20 @@ levels:
             question_text: "What's wrong with this code?"
             code: |
                 options = 1, 2, 3, 4, 5, 6
-                print 'Throw 6 as fast as you can!'
+                {print} 'Throw 6 as fast as you can!'
                 thrown = 0
                 tries = 0
-                while thrown == 6
-                    thrown = options at random
-                    print 'You threw ' thrown
+                {while} thrown == 6
+                    thrown = options {at} {random}
+                    {print} 'You threw ' thrown
                     tries = tries + 1
-                print 'Yes! You have thrown 6 in ' tries ' tries.'
+                {print} 'Yes! You have thrown 6 in ' tries ' tries.'
             mp_choice_options:
             -   option: "In line 1 == should be used instead of ="
                 feedback: "No that's not it"
             -   option: "Line 2 misses quotation marks"
                 feedback: "That's not right"
-            -   option: "In line 5 if should have been used instead of while"
+            -   option: "In line 5 {if} should have been used instead of {while}"
                 feedback: "That's not it"
             -   option: "In line 5 != should have been used instead of =="
                 feedback: "You are correct"
@@ -3390,13 +3390,13 @@ levels:
             question_text: "What should be placed on the blank to make this program work correctly?"
             code: |
                 wetness = 10
-                while wetness != 0
-                    print 'Your hair is still wet, hair dryer on!'
-                    sleep 1
-                    clear
+                {while} wetness != 0
+                    {print} 'Your hair is still wet, hair dryer on!'
+                    {sleep} 1
+                    {clear}
                     wetness _
 
-                print 'All dry!'
+                {print} 'All dry!'
             mp_choice_options:
             -   option: "= wetness"
                 feedback: "That will not change anything"
@@ -3415,12 +3415,12 @@ levels:
                 lives = 100
                     {while} lives != 0
                     answer = {ask} 'Are you annoyed yet?'
-                {if} answer == 'yes'
-                    lives = lives - 1
+                    {if} answer == 'yes'
+                        lives = lives - 1
             mp_choice_options:
-            -   option: "while should be if"
+            -   option: "{while} should be {if}"
                 feedback: "No that is not right"
-            -   option: "if should be while"
+            -   option: "{if} should be {while}"
                 feedback: "No that is not right"
             -   option: "Line 3 should start with more indentation"
                 feedback: "No that's not right"
@@ -3430,7 +3430,7 @@ levels:
             hint: "Look closely at the indentation"
             question_score: "10"
         7:
-            question_text: "How should this program be changed to that it works?"
+            question_text: "How should this program be changed so that it works?"
             code: |
                 {print} 'Guess which number'
                 numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -3460,11 +3460,11 @@ levels:
         8:
             question_text: "Which statement is true about this automated toilet system?"
             code: |
-                while toilet == 'occupied'
+                {while} toilet == 'occupied'
                     lights = 'on'
                     air_freshener_sprays = 'yes'
-                    sleep 60
-                else
+                    {sleep} 60
+                {else}
                     lights = 'off'
             mp_choice_options:
             -   option: "The lights and air freshener will turn off after 1 minute"
@@ -3476,7 +3476,7 @@ levels:
             -   option: "The lights will always stay on."
                 feedback: "That wouldn't be right."
             correct_answer: "B"
-            hint: "The block after the while command keeps happening while the toilet is occupied."
+            hint: "The block after the {while} command keeps happening while the toilet is occupied."
             question_score: "10"
         9:
             question_text: "What will the diet app say if you have eaten 1600 calories today?"
@@ -3484,7 +3484,7 @@ levels:
                 calories = {ask} 'How many calories have you eaten today?'
                   {while} calories <= 1000
                       {print} 'You could eat some more'
-                  {while} calories > 1000 and calories =< 2000
+                  {while} calories > 1000 {and} calories =< 2000
                       {print} 'That is alright'
                   {while} calories > 2000
                       {print} 'You have had enough for today'

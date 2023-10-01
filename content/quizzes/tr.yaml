@@ -264,7 +264,7 @@ levels:
             -   option: "Merhaba benim Hedy adım!"
                 feedback: "adım değişkeni Hedy ile değiştirilir"
             -   option: "Merhaba benim Hedy Hedy!"
-                feedback: "Doğru, ve bu hatayı düzeltmeyi 3. seviyede göreceksin!"
+                feedback: "Doğru, ve bu hatayı düzeltmeyi 4. seviyede göreceksin!"
             correct_answer: "D"
             hint: "'adım' kelimesi her iki yerde de 'Hedy' ile değiştirilir"
             question_score: '10'
@@ -2474,601 +2474,601 @@ levels:
     12:
         2:
             correct_answer: C
-            question_text: Which of these codes is correct?
+            question_text: Bu kodlardan hangisi doğrudur?
             mp_choice_options:
-            -   option: "```\nflavors {is} vanilla, strawberry, chocolate\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
-                feedback: All the different values of flavors should be in quotation marks.
-            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
-                feedback: Alright!
-            -   option: "\n```\nflavors = 'vanilla, strawberry, chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```\n"
-                feedback: All the different values of flavors should be in quotation marks.
-            hint: The second line is the same in each code, pay attention to the first line
+            -   option: "```\nçeşitler {is} vanilyalı, çilekli, çikolatalı\n{print} 'Benim istediğim ' çeşitler {at} {random} ' kek.'\n```"
+                feedback: Tüm farklı aroma çeşitleri tırnak işareti içinde olmalıdır.
+            -   option: "```\n'çeşitler = vanilyalı, çilekli, çikolatalı'\n{print} 'Benim istediğim ' çeşitler {at} {random} ' kek.'\n```"
+                feedback: Tüm farklı aroma çeşitleri tırnak işareti içinde olmalıdır.
+            -   option: "```\nçeşitler = 'vanilyalı', 'çilekli', 'çikolatalı'\n{print} 'Benim istediğim ' çeşitler {at} {random} ' kek.'\n```"
+                feedback: Tamamdır!
+            -   option: "\n```\nçeşitler = 'vanilyalı, çilekli, çikolatalı'\n{print} 'Benim istediğim ' çeşitler {at} {random} ' kek.'\n```\n"
+                feedback: Tüm farklı aroma çeşitleri tırnak işareti içinde olmalıdır.
+            hint: İkinci satır her kodda aynıdır, ilk satıra dikkat edin
             question_score: '10'
         3:
             mp_choice_options:
-            -   option: "The name of the variable is different in line 1 than in line 2.\n"
-                feedback: Correct!
-            -   option: "The quotation marks aren't used correctly in line 2\n"
-                feedback: That's not true
-            -   feedback: That's not true
-                option: "You can't use the = sign when using an {ask} command\n"
-            -   option: "Nothing is wrong.\n"
-                feedback: That's not true
-            hint: The quotation marks are used correctly
+            -   option: "Değişkenin adı 1. satırda 2. satırdakinden farklıdır.\n"
+                feedback: Doğru!
+            -   option: "Satır 2'de tırnak işaretleri doğru kullanılmamış\n"
+                feedback: Bu doğru değil
+            -   feedback: Bu doğru değil
+                option: "Bir {ask} komutu kullanırken = işaretini kullanamazsınız\n"
+            -   option: "Hiçbir sorun yok\n"
+                feedback: Bu doğru değil
+            hint: Tırnak işaretleri doğru kullanılmış
             question_score: '10'
             question_text: Bu kodun ne sorunu var?
-            code: "favorite_animal = {ask} 'What is your favorite animal?'\n{print} 'I like ' favoriteanimal ' too!'"
+            code: "favori_hayvan = {ask} 'En sevdiğin hayvan hangisi?'\n{print} 'Ben de ' favorihayvan ' seviyorum!'"
             correct_answer: A
         4:
             mp_choice_options:
-            -   feedback: No
-                option: "Line 1 and 2\n"
-            -   option: "Line 1, 2 and 3\n"
-                feedback: No
-            -   option: "Line 1, 2 and 4\n"
-                feedback: No
-            -   option: "All of the lines\n"
-                feedback: Perfect!
-            question_text: In which lines are quotation marks needed to get the code to work?
-            code: "{print} Welcome to the online shoe shop\ncategory = {ask} What kind of shoes are you looking for?\n{if} category = high heels\n    {print} High heels are 50% off now!"
+            -   feedback: Hayır
+                option: "Satır 1 ve 2\n"
+            -   option: "Satır 1, 2 ve 3\n"
+                feedback: Hayır
+            -   option: "Satır 1, 2 ve 4\n"
+                feedback: Hayır
+            -   option: "Tüm satırlarda\n"
+                feedback: Mükemmel!
+            question_text: Kodun çalışması için hangi satırlarda tırnak işareti gerekiyor?
+            code: "{print} Online ayakkabı mağazasına hoş geldiniz\nkategori = {ask} Ne tür bir ayakkabı arıyorsunuz?\n{if} kategori = yüksek topuklu\n    {print} Yüksek topuklar şimdi %50 indirimli!"
             correct_answer: D
-            hint: Does line 3 need quotation marks too?
+            hint: 3. satırın da tırnak işaretine ihtiyacı var mı?
             question_score: '10'
         5:
-            question_text: What output does Agent007 get when they put in the correct password?
-            code: "name {is} {ask} 'What is your name?'\n{if} name {is} 'Agent007'\n    a {is} 'Go to the airport '\nelse\n    a {is} 'Go to the train station '\npassword {is} {ask} 'What is the password?'\n{if} password {is} 'TOPSECRET'\n    b {is} 'tomorrow at 02.00'\nelse\n    b {is} 'today at 10.00'\nprint a + b"
+            question_text: Ajan007 doğru şifreyi girdiğinde hangi gizli bilgiyi alır?
+            code: "isim {is} {ask} 'Adınız nedir?'\n{if} isim {is} 'Ajan007'\n    yer {is} 'Havaalanına git '\nelse\n    yer {is} 'Tren istasyonuna git'\nşifre {is} {ask} 'Şifre nedir?'\n{if} şifre {is} 'ÇOKGİZLİ'\n    zaman {is} 'Yarın saat 02.00 de, '\n{else}\n    zaman {is} 'Bugün saat 10.00 da, '\n{print} zaman + yer"
             mp_choice_options:
-            -   option: Go to the train station today at 10.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 02.00
-                feedback: You've cracked the code!
-            -   option: Go to the train station tomorrow at 02.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 10.00
-                feedback: The agent won't be catching any bad guys here
+            -   option: Bugün saat 10.00 da, Tren istasyonuna git
+                feedback: Ajan burada kötü adamları yakalayamayacak
+            -   option: Yarın saat 02.00 de, Havaalanına git
+                feedback: Şifreyi çözdün!
+            -   option: Yarın saat 02.00 de, Tren istasyonuna git
+                feedback: Ajan burada kötü adamları yakalayamayacak
+            -   option: Yarın saat 10.00 da, Havaalanına git
+                feedback: Ajan burada kötü adamları yakalayamayacak
             correct_answer: B
-            hint: The correct password is TOPSECRET
+            hint: Doğru şifre ÇOKGİZLİ'dir
             question_score: '10'
         9:
             mp_choice_options:
-            -   option: "```\nprices = 'one' 'million' 'dollars', 'nothing'\n```"
-                feedback: You won nothing
-            -   feedback: You won nothing
-                option: "```\nprices = 'one million dollars, nothing'\n```"
-            -   option: "```\nprices = 'one million dollars', 'nothing'\n```"
-                feedback: Winner!
-            -   option: "```\n'prices' = 'one million dollars', 'nothing'\n```"
-                feedback: You one nothing
-            question_text: Which code should be filled in in line 1 at the ???
-            code: "???\n{print} 'You won ' prizes {at} {random} '!'"
+            -   option: "```\nödüller = 'bir' 'milyon' 'dolar', 'hiçbir şey'\n```"
+                feedback: Hiçbir şey kazanamadın
+            -   feedback: Hiçbir şey kazanamadın
+                option: "```\nödüller = 'bir milyon dolar, hiçbir şey'\n```"
+            -   option: "```\nödüller = 'bir milyon dolar', 'hiçbir şey'\n```"
+                feedback: Kazanan!
+            -   option: "```\n'ödüller' = 'bir milyon dolar', 'hiçbir şey'\n```"
+                feedback: Hiçbir şey kazanamadın
+            question_text: Satır 1'de ??? ile gösterilen yere hangi kod doldurulmalıdır?
+            code: "???\n{print} 'Kazandığınız ödül ' ödüller {at} {random} '!'"
             correct_answer: C
-            hint: The items on the list should be in quotation marks
+            hint: Listedeki maddeler tırnak içinde olmalıdır
             question_score: '10'
         1:
             question_text: Hangi çıktı doğrudur?
-            code: "{print} 'three and a half plus one and a half is...'\n{print} 3.5 + 1.5"
+            code: "{print} 'üç buçuk artı bir buçuk...'\n{print} 3.5 + 1.5"
             mp_choice_options:
             -   option: "5\n"
-                feedback: Don't forget the first line of code!
+                feedback: Kodun ilk satırını unutmayın!
             -   option: "3.5 + 1.5\n"
-                feedback: This is not the one!
-            -   option: "thee and a half plus one and a half is...\nfive\n"
-                feedback: Take a close look at the second line...
-            -   option: "three and a half plus one and a half is...\n5\n"
-                feedback: Great job!
+                feedback: Bu doğru değil!
+            -   option: "üç buçuk artı bir buçuk...\nbeş\n"
+                feedback: İkinci satıra yakından bakın...
+            -   option: "üç buçuk artı bir buçuk...\n5\n"
+                feedback: İyi işti!
             correct_answer: D
-            hint: Both lines are printed!
+            hint: Her iki satır da yazılıyor!
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
-            code: "{print} 'Welcome to McHedy!'\norder = {ask} 'Would you like a hamburger or fries?'\n{if} order = 'hamburger'\n    price = 12\n{if} order = 'fries'\n    price = 4\ndrinks = {ask} 'Would you like a drink with that for 2 dollars?'\n{if} drinks = 'yes'\n    ???\n{print} 'That will be ' price ' dollar please'\n"
+            question_text: ??? ile gösterilen yere hangi satır doldurulmalıdır
+            code: "{print} 'McHedy'e hoş geldiniz!'\nsipariş = {ask} 'Hamburger mi yoksa patates kızartması mı istersiniz?'\n{if} sipariş = 'hamburger'\n    ücret = 12\n{if} sipariş = 'kızartma'\n    ücret = 4\niçecek = {ask} 'Yanında 2 dolara bir içecek ister misin?'\n{if} içecek = 'evet'\n    ???\n{print} 'Toplam ' ücret ' lira, lütfen'\n"
             mp_choice_options:
-            -   option: "```\nprice = 14\n```\n"
-                feedback: What if you only order fries and a drink?
-            -   option: "```\nprice = '14'\n```"
-                feedback: What if you only order fries and a drink?
-            -   option: "```\nprice = price + 2\n```"
-                feedback: Excellent!
-            -   option: "```\nprice = + 2\n```"
-                feedback: Almost there!
+            -   option: "```\nücret = 14\n```\n"
+                feedback: Ya sadece patates kızartması ve içecek sipariş ederseniz?
+            -   option: "```\nücret = '14'\n```"
+                feedback: Ya sadece patates kızartması ve içecek sipariş ederseniz?
+            -   option: "```\nücret = ücret + 2\n```"
+                feedback: Mükemmel!
+            -   option: "```\nücret = + 2\n```"
+                feedback: Neredeyse olacaktı!
             correct_answer: C
-            hint: What if you only order fries and a drink?
+            hint: Ya sadece patates kızartması ve içecek sipariş ederseniz?
             question_score: '10'
         7:
-            question_text: Which output does a vegan get?
-            code: "menu = 'cookies', 'cheese', 'grapes'\n{print} \"It's my birthday! I`ve brought some snacks!\"\ndiet = {ask} 'Do you have any dietary restrictions?'\n{if} diet = 'gluten free'\n    {remove} 'cookies' {from} menu\n{if} diet = 'vegan'\n    {remove} 'cheese' {from} menu\n{print} 'For you I have brought: '\n{for} snack {in} menu\n    {print} snack"
+            question_text: Bir vegan hangi çıktıyı alır?
+            code: "menü = 'kurabiye', 'peynir', 'üzüm'\n{print} 'Bugün benim doğum günüm! Biraz atıştırmalık getirdim!'\ndiyet = {ask} 'Herhangi bir diyet kısıtlamanız var mı?'\n{if} diyet = 'glütensiz'\n    {remove} 'kurabiye' {from} menü\n{if} diyet = 'vegan'\n    {remove} 'peynir' {from} menü\n{print} 'Senin için de şunu getirdim: '\n{for} atıştırmalık {in} menü\n    {print} atıştırmalık"
             mp_choice_options:
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
-                feedback: Terrific!
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes"
-                feedback: There's more options than just one
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncheese\ngrapes"
-                feedback: A vegan person can't have cheese
-            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes\ncookies"
-                feedback: Almost there, but look at the order of snacks in the list
+            -   option: "Bugün benim doğum günüm! Biraz atıştırmalık getirdim!\nSenin için de şunu getirdim:\nkurabiye\nüzüm"
+                feedback: Müthiş!
+            -   option: "Bugün benim doğum günüm! Biraz atıştırmalık getirdim!\nSenin için de şunu getirdim:\nüzüm"
+                feedback: Sadece bir taneden daha fazla seçenek var
+            -   option: "Bugün benim doğum günüm! Biraz atıştırmalık getirdim!\nSenin için de şunu getirdim:\npeynir\nüzüm"
+                feedback: Vegan bir insan peynir yiyemez
+            -   option: "Bugün benim doğum günüm! Biraz atıştırmalık getirdim!\nSenin için de şunu getirdim:\nüzüm\nkurabiye"
+                feedback: Neredeyse oldu, ama listedeki atıştırmalıkların sırasına bakın
             correct_answer: A
-            hint: What item is removed from the list when you answer 'vegan'?
+            hint: "'vegan' cevabını verdiğinizde listeden hangi madde çıkarılır?"
             question_score: '10'
         8:
-            question_text: Which code was used to create this output?
+            question_text: Bu çıktıyı oluşturmak için hangi kod kullanılmıştır?
             code: '3.5'
             mp_choice_options:
             -   option: "```\n{print} '7 / 2'\n```"
-                feedback: No
+                feedback: Hayır
             -   option: "```\n{print} 7 / 2\n```"
-                feedback: That is right!
+                feedback: Bu doğru!
             -   option: "```\n{print} 7 : 2\n```"
-                feedback: No
+                feedback: Hayır
             -   option: "```\n{print} 7 * 2\n```"
-                feedback: No
+                feedback: Hayır
             correct_answer: B
-            hint: 7 devided by 2 is 3.5
+            hint: 7 bölü 2, 3,5 eder
             question_score: '10'
         10:
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    {for} i {in} range 0 {to} 1\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action"
+            question_text: Şarkıyı tamamlamak için ??? ile gösterilen yere hangi kod satırı doldurulmalıdır?
+            code: "eylemler = 'ellerinizi çırpın', 'ayaklarınızı yere vurun', 'Yaşasın diye bağırın!\n???\n    {for} i {in} {range} 0 {to} 1\n        {print} 'eğer mutluysan ve bunu biliyorsan'\n        {print} eylem\n    {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'\n    {print} 'eğer mutluysan ve bunu biliyorsan'\n    {print} eylem"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: "```\n{for} action {in} actions\n```"
-                feedback: You are amazing!
+                feedback: Bu zor bir soru! Listedeki tüm eylemler şarkıda yer almalıdır.
+            -   option: "```\n{for} eylem {in} eylemler\n```"
+                feedback: Sen harikasın!
             -   option: "```\n{repeat} 3 {times}\n```"
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: "```\n{print} actions {at} {random}\n```"
-                feedback: This is a hard one! All the actions on the list must be in the song.
+                feedback: Bu zor bir soru! Listedeki tüm eylemler şarkıda yer almalıdır.
+            -   option: "```\n{print} eylemler {at} {random}\n```"
+                feedback: Bu zor bir soru! Listedeki tüm eylemler şarkıda yer almalıdır.
             correct_answer: B
-            hint: This is a hard one! All the actions on the list must be in the song.
+            hint: Bu zor bir soru! Listedeki tüm eylemler şarkıda yer almalıdır.
             question_score: '10'
     13:
         2:
             question_score: '10'
-            question_text: Which command is missing in the code at the place of the ??? ?
-            code: "menu = 'cheese', 'sausage rolls', 'cookies'\ndiet = {ask} 'Do you have any dietary restrictions?'\n{if} diet = 'vegan' ??? diet = 'halal'\n    {remove} 'sausage rolls' {from} menu"
+            question_text: Kodda ??? ile gösterilen yerde hangi komut eksik?
+            code: "menü = 'peynir', 'domuz sosis', 'kurabiyeler'\ndiyet = {ask} 'Herhangi bir diyet kısıtlamanız var mı?'\n{if} diyet = 'vegan' ??? diyet = 'helal'\n    {remove} 'domuz sosis' {from} menü"
             mp_choice_options:
             -   option: '`{and}`'
-                feedback: You don't have to be vegan and muslim
+                feedback: Hem vegan hem de müslüman olmak zorunda değilsiniz
             -   option: '`{or}`'
-                feedback: Great thinking!
+                feedback: Harika bir düşünce!
             -   option: ' `+` '
-                feedback: No
+                feedback: Hayır
             -   option: '`{print}`'
-                feedback: No
+                feedback: Hayır
             correct_answer: B
-            hint: Neither vegans nor muslims can eat sausage rolls.
+            hint: Ne veganlar ne de müslümanlar domuz sosisi yiyebilir.
         7:
             mp_choice_options:
-            -   option: The grey cat is called Abby
-                feedback: This is true!
-            -   option: Milo the orange cat eats 4 scoops of cat nibbles
-                feedback: This is true
-            -   feedback: Great job!
-                option: The black hamster needs to be fed a piece of carrot
-            -   option: The yellow bird was fed this morning
-                feedback: This is true
-            question_text: Which statement is false?
-            code: "{print} 'Thank you for helping me take care of my pets'\n{print} 'Here is a program to help feed them'\nanimal = {ask} 'What kind of animal are they?'\ncolor = {ask} 'What colour are they?'\n{if} animal = 'cat' {and} color = 'grey'\n    {print} 'That is Abby. She eats 3 scoops of cat nibbles'\n{if} animal = 'cat' {and} color = 'orange'\n    {print} 'That is Milo. He eats 4 scoops of cat nibbles'\n{if} animal = 'bird' {or} color = 'black'\n    {print} 'I fed them this moring! They do not need more food today'\n{if} animal = 'hamster' {and} color = 'brown'\n    {print} 'You can feed them a piece of carrot'"
+            -   option: Gri kedinin adı Abby
+                feedback: Bu doğru!
+            -   option: Turuncu kedi Milo 4 kaşık kedi maması yiyor
+                feedback: Bu doğru
+            -   feedback: İyi işti!
+                option: Siyah hamster bir parça havuçla beslenmesi gerekiyor
+            -   option: Sarı kuş bu sabah beslendi
+                feedback: Bu doğru
+            question_text: Hangi ifade yanlıştır?
+            code: "{print} 'Evcil hayvanlarıma bakmama yardımcı olduğunuz için teşekkür ederim'\n{print} 'İşte onları beslemeye yardımcı olacak bir program'\nhayvan = {ask} 'Ne tür bir hayvan bunlar?'\nrenk = {ask} 'Ne renk bunlar?'\n{if} hayvan = 'kedi' {and} renk = 'gri'\n    {print} 'Bu Abby. 3 kaşık kedi maması yiyor.'\n{if} hayvan = 'kedi' {and} renk = 'turuncu'\n    {print} 'Bu Milo. 4 kaşık kedi maması yiyor.'\n{if} hayvan = 'kuş' {or} renk = 'siyah'\n    {print} 'Onları bu sabah besledim! Bugün daha fazla yiyeceğe ihtiyaçları yok'\n{if} hayvan = 'hamster' {and} renk = 'kahverengi'\n    {print} 'Onları bir parça havuçla besleyebilirsiniz'"
             correct_answer: C
-            hint: Read the last 4 lines carefully
+            hint: Son 4 satırı dikkatlice okuyun
             question_score: '10'
         1:
-            question_text: Which code should be filled in at the ??? ?
-            code: "name = {ask} 'What is your name?'\nsong = {ask} 'Whould you like to hear a song?'\nbirthday = {ask} 'Is today your birthday?'\n???\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday dear ' name\n    {print} 'Happy Birthday to you!'"
+            question_text: ??? ile gösterilen yere hangi kod doldurulmalıdır?
+            code: "isim = {ask} 'Adın ne?'\nşarkı = {ask} 'Bir şarkı dinlemek ister misin?'\ndoğumgünü = {ask} 'Bugün doğum günün mü?'\n???\n    {print} 'Mutlu yıllar sana!'\n    {print} 'Mutlu yıllar sana!'\n    {print} 'Mutlu Yıllar sevgili ' isim\n    {print} 'Mutlu yıllar sana!'"
             mp_choice_options:
-            -   option: "```\n{if} birthday {and} song = 'yes'\n```"
-                feedback: Almost there
-            -   option: "```\n{if} birthday = 'yes' {and} name = 'Hedy'\n```"
-                feedback: Hedy only sings for you if you like to hear a song
-            -   option: "```\n{if} song = 'yes' {and} birthday = 'yes'\n```"
-                feedback: Super!
-            -   option: "```\n{if} song = 'yes' {or} birthday = 'yes'\n```"
-                feedback: Hedy only sings if both answers are yes
+            -   option: "```\n{if} doğumgünü {and} şarkı = 'evet'\n```"
+                feedback: Neredeyse olacak
+            -   option: "```\n{if} doğumgünü = 'evet' {and} isim = 'Hedy'\n```"
+                feedback: Hedy, sadece şarkı dinlemek isterseniz sizin için şarkı söyler
+            -   option: "```\n{if} şarkı = 'evet' {and} doğumgünü = 'evet'\n```"
+                feedback: Süper!
+            -   option: "```\n{if} şarkı = 'evet' {or} doğumgünü = 'evet'\n```"
+                feedback: Hedy sadece her iki cevap da evet ise şarkı söyler
             correct_answer: C
-            hint: Hedy sings if you want to hear a song and it's you birthday
+            hint: Hedy, eğer bir şarkı duymak istiyorsanız ve bugün doğum gününüzse size şarkı söylüyor
             question_score: '10'
         3:
-            question_text: Which output is given to a member without a discount code?
-            code: "member = {ask} 'Do you have a membership card?'\ndiscount = {ask} 'Do you have a discount code?'\n{if} member = 'yes' {or} discount = 'yes'\n    {print} 'You get a free apple pie!'\n{else}\n    {print} 'That will be 5 dollars please'"
+            question_text: İndirim kodu olmayan bir üyeye hangi çıktı verilir?
+            code: "üye = {ask} 'Üyelik kartınız var mı?'\nindirim = {ask} 'İndirim kodunuz var mı?'\n{if} üye = 'evet' {or} indirim = 'evet'\n    {print} 'Bedava elmalı turta alacaksın!'\n{else}\n    {print} 'Toplam 5 dolar lütfen'"
             mp_choice_options:
-            -   option: You get a free pie!
-                feedback: Great job!
-            -   option: That will be 5 dollars please
-                feedback: That is not true
-            -   option: This code won't work, so there is no output
-                feedback: There is nothing wrong with the code
-            -   option: There is no way of knowing
-                feedback: There is! Read the question carefully
+            -   option: Bedava elmalı turta alacaksın!
+                feedback: İyi işti!
+            -   option: Toplam 5 dolar lütfen
+                feedback: Bu doğru değil
+            -   option: Bu kod çalışmaz, bu nedenle çıktı yoktur
+                feedback: Kodda yanlış bir şey yok
+            -   option: Bunu bilmenin hiçbir yolu yok
+                feedback: Evet var! Soruyu dikkatlice okuyun
             correct_answer: A
-            hint: Mind the command `{or}` in line 3
+            hint: Satır 3'teki `{or}` komutuna dikkat edin
             question_score: '10'
         4:
-            question_text: Which line of code should follow this line in rock-paper-scissors game?
-            code: "{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'"
+            question_text: Taş-kağıt-makas oyununda bu satırı hangi kod satırı takip etmelidir?
+            code: "{if} bilgisayarın_seçimi {is} 'taş' {and} senin_seçimin {is} 'kağıt'"
             mp_choice_options:
-            -   option: "```\n{print} 'you win'\n```"
-                feedback: You win!
-            -   option: "```\n{print} 'you lose'\n```"
-                feedback: You lose!
-            -   option: "```\n{print} 'tie'\n```"
-                feedback: It's only a tie if both choices are the same
-            -   option: "```\n{print} 'try again'\n```"
-                feedback: Try again!
+            -   option: "```\n{print} 'kazandın'\n```"
+                feedback: Sen kazandın!
+            -   option: "```\n{print} 'kaybettin'\n```"
+                feedback: Kaybettin!
+            -   option: "```\n{print} 'berabere'\n```"
+                feedback: Sadece iki seçenek de aynı olursa eşitlik olur
+            -   option: "```\n{print} 'tekrar deneyin'\n```"
+                feedback: Tekrar deneyin!
             correct_answer: A
-            hint: Paper beats rock
+            hint: Kağıt taşı yener
             question_score: '10'
         5:
-            question_text: Which statement is true about this code?
-            code: "{if} name = 'Cinderella' {and} shoe_size = 38\n    {print} 'You are my one true love!'"
+            question_text: Bu kodla ilgili hangi ifade doğrudur?
+            code: "{if} isim = 'Sindirella' {and} ayakkabı_numarası = 38\n    {print} 'Sen benim tek gerçek aşkımsın!'"
             mp_choice_options:
-            -   option: Every person with shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person named Cinderella is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person that is named Cinderella and has shoe size 38 is this prince's one true love
-                feedback: Fantastic!
-            -   option: Every person that's not named Cinderella and does not have shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
+            -   option: Ayakkabı numarası 38 olan herkes bu prensin tek gerçek aşkıdır
+                feedback: Prens bundan biraz daha seçicidir!
+            -   option: Sindirella adındaki herkes bu prensin tek gerçek aşkıdır
+                feedback: Prens bundan biraz daha seçicidir!
+            -   option: Adı Sindirella olan ve ayakkabı numarası 38 olan herkes bu prensin tek gerçek aşkıdır
+                feedback: Harika!
+            -   option: Adı Sindirella olmayan ve ayakkabı numarası 38 olmayan herkes bu prensin tek gerçek aşkıdır
+                feedback: Prens bundan biraz daha seçicidir!
             correct_answer: C
-            hint: Both statements have to be true
+            hint: Her iki ifade de doğru olmalıdır
             question_score: '10'
         6:
             question_text: Bu kodla ilgili ifadelerden hangisi doğrudur?
-            code: "{print} 'Let me guess which family member you are!'\nglasses = {ask} 'Do you wear glasses?'\nfemale = {ask} 'Are you female?'\n{if} glasses = 'yes' {and} female = 'yes'\n    {print} 'You must be Sophie!'\n{if} glasses = 'no' {and} female = 'yes'\n   {print} 'You must be Marleen!'\n{if} glasses = 'yes' {and} female = 'no'\n    {print} 'You must be Wouter!'\n{if} glasses = 'no' {and} female = 'no'\n    {print} 'You must be Michael!'"
+            code: "{print} 'Hangi aile üyesi olduğunuzu tahmin edeyim!'\ngözlük = {ask} 'Gözlük takıyor musun?'\nkadın = {ask} 'Kadın mısınız?'\n{if} gözlük = 'evet' {and} kadın = 'evet'\n    {print} 'Sen Sophie olmalısın!'\n{if} gözlük = 'hayır' {and} kadın = 'evet'\n   {print} 'Sen Marleen olmalısın!'\n{if} gözlük = 'evet' {and} kadın = 'hayır'\n    {print} 'Sen Wouter olmalısın!'\n{if} gözlük = 'hayır' {and} kadın = 'hayır'\n    {print} 'Sen Michael olmalısın!'"
             mp_choice_options:
-            -   option: Michael is a boy with glasses
-                feedback: Try again
-            -   option: Marleen is a girl with glasses
-                feedback: Try again
-            -   option: Wouter is a boy without glasses
-                feedback: Try again
-            -   option: Sophie is a girl with glasses
-                feedback: Great job!
+            -   option: Michael gözlüklü bir erkek
+                feedback: Tekrar deneyin
+            -   option: Marleen gözlüklü bir kız
+                feedback: Tekrar deneyin
+            -   option: Wouter gözlüksüz bir erkek
+                feedback: Tekrar deneyin
+            -   option: Sophie gözlüklü bir kız
+                feedback: İyi işti!
             correct_answer: D
-            hint: Take a good look! Or do you need glasses?
+            hint: İyi bakın! Yoksa gözlüğe mi ihtiyacınız var?
             question_score: '10'
         8:
-            question_text: What output do you get if you order popcorn but no drink?
-            code: "{print} 'Welcome to the movie theater'\npopcorn = {ask} 'Would you like some popcorn?'\ndrink = {ask} 'Would you like a drink?'\n{if} popcorn = 'yes' {and} drink = 'yes'\n    {print} 'That will be 8 dollars please'\n{if} popcorn = 'no' {and} drink = 'yes'\n   {print} 'That will be 3 dollars please'\n{if} popcorn = 'yes' {and} drink = 'no'\n    {print} 'That will be 5 dollars please'\n{if} popcorn = 'no' {and} drink = 'no'\n    {print} 'Ok'\n{print} 'Enjoy the movie'"
+            question_text: Patlamış mısır sipariş edip içecek almazsanız hangi çıktıyı alırsınız?
+            code: "{print} 'Sinema salonuna hoş geldiniz'\nmısır = {ask} 'Patlamış mısır ister misin?'\niçecek = {ask} 'İçecek bir şey ister misin?'\n{if} mısır = 'evet' {and} içecek = 'evet'\n    {print} '8 dolar lütfen.'\n{if} mısır = 'hayır' {and} içecek = 'evet'\n   {print} '3 dolar lütfen.'\n{if} mısır = 'evet' {and} içecek = 'hayır'\n    {print} '5 dolar lütfen.'\n{if} mısır = 'hayır' {and} içecek = 'hayır'\n    {print} 'Tamamdır'\n{print} 'Filmin tadını çıkarın'"
             mp_choice_options:
-            -   option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
-                feedback: You have paid too much!
-            -   option: "Welcome to the movie theater\nThat will be 5 dollars please\nEnjoy the movie"
+            -   option: "Sinema salonuna hoş geldiniz\n8 dolar lütfen\nFilmin tadını çıkarın"
+                feedback: Çok fazla ödeme yaptınız!
+            -   option: "Sinema salonuna hoş geldiniz\n5 dolar lütfen\nFilmin tadını çıkarın"
                 feedback: İnanılmaz!
-            -   option: "Welcome to the movie theater\nThat will be 3 dollars please\nEnjoy the movie"
-                feedback: That's not enough money!
-            -   option: "Welcome to the movie theater\nOk\nEnjoy the movie"
-                feedback: You have to pay for your popcorn!
+            -   option: "Sinema salonuna hoş geldiniz\n3 dolar lütfen\nFilmin tadını çıkarın"
+                feedback: Bu para yeterli değil!
+            -   option: "Sinema salonuna hoş geldiniz\nTamamdır\nFilmin tadını çıkarın"
+                feedback: Patlamış mısırın parasını ödemek zorundasın!
             correct_answer: B
-            hint: popcorn = yes and drink = no
+            hint: mısır = evet ve içecek = hayır
             question_score: '10'
         9:
             question_text: Bu kodun ne sorunu var?
-            code: "1  chocolate = {ask} 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = {ask} 'Would you like sprinkles on your ice cream?'\n3  {if} chocolate {and} sprinkles = 'yes'\n4      {print} 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  {if} chocolate = 'yes' {and} sprinkles = 'no'\n6      {print} 'Ice cream with chocolate sauce, coming up!'\n7  {if} chocolate = 'no' {and} sprinkles = 'yes'\n8      {print} 'Ice cream with sprinkles, coming up'\n9  {if} chocolate = 'no' {and} sprinkles = 'no'\n10     {print} 'Just plain icecream, coming up!'"
+            code: "1  çikolata = {ask} 'Dondurmanızın üzerine çikolata sosu ister misiniz?'\n2  serpme = {ask} 'Dondurmanızın üzerine renkli serpme ister misiniz?'\n3  {if} çikolata {and} serpme = 'evet'\n4      {print} 'Çikolata soslu ve serpmeli dondurma geliyor!'\n5  {if} çikolata = 'evet' {and} serpme = 'hayır'\n6      {print} 'Çikolata soslu dondurma, geliyor!'\n7  {if} çikolata = 'hayır' {and} serpme = 'evet'\n8      {print} 'Serpmeli dondurma, geliyor'\n9  {if} çikolata = 'hayır' {and} serpme = 'hayır'\n10     {print} 'Sade dondurma, geliyor!'"
             mp_choice_options:
-            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
-                feedback: Correct!
-            -   option: "Line 3 should be:\n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```\n"
-                feedback: This is not what I ordered!
-            -   option: "Line 5 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```\n"
-                feedback: This is not what I ordered!
-            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```\n"
-                feedback: This is not what I ordered!
+            -   option: "3. satır şöyle olmalı:\n```\n{if} çikolata = 'evet' {and} serpme = 'evet'\n```\n"
+                feedback: Doğru!
+            -   option: "3. satır şöyle olmalı: \n```\n{if} çikolata = 'hayır' {and} serpme = 'hayır'\n```\n"
+                feedback: Sipariş ettiğim şey bu değildi!
+            -   option: "5. satır şöyle olmalı:\n```\n{if} çikolata = 'evet' {and} serpme = 'evet'\n```\n"
+                feedback: Sipariş ettiğim şey bu değildi!
+            -   option: "7. satır şöyle olmalı:\n```\n{if} çikolata = 'evet' {and} serpme = 'hayır'\n```\n"
+                feedback: Sipariş ettiğim şey bu değildi!
             correct_answer: A
-            hint: There is a mistake in line 3
+            hint: Satır 3'te bir hata var
             question_score: '10'
         10:
-            question_text: Which command needs to be in line 8 at the place of the ??? ?
-            code: "{print} 'Welcome to the product finder of this supermarkt'\nitem = {ask} 'What product are you looking for?'\nbakery = 'bread', 'buns', 'muffins'\ndrinks = 'soda', 'water', 'lemonade'\nsnacks = 'chips', 'nuts', 'dips'\nfrozen = 'fries', 'icecream', 'pizza'\nfruit = 'bananas', 'apples', 'oranges'\n{if} item {in} snacks ??? item {in} drinks\n    {print} 'This item is in aisle 3'\n{if} item {in} bakery {or} item {in} bakery\n    {print} 'This item in in the back of the store'\n{if} item {in} fruit\n    {print} 'The fruit is sold near the register'"
+            question_text: 8. satırda ???'nin yerinde hangi komutun olması gerekir?
+            code: "{print} 'Bu süpermarketin ürün bulucusuna hoş geldiniz'\nürün = {ask} 'Hangi ürünü arıyorsunuz?'\nfırın = 'ekmek', 'çörekler', 'kekler'\niçecek = 'soda', 'su', 'limonata'\natıştırmalık = 'cips', 'kuruyemiş', 'dip sos'\ndonmuş = 'patates kızartması', 'dondurma', 'pizza'\nmeyve = 'muzlar', 'elmalar', 'portakallar'\n{if} ürün {in} atıştırmalık ??? ürün {in} içecek\n    {print} 'Bu ürün 3. koridorda'\n{if} ürün {in} fırın {or} ürün {in} fırın\n    {print} 'Bu ürün mağazanın arka tarafında'\n{if} ürün {in} meyve\n    {print} 'Meyveler kasanın yanında satılıyor'"
             mp_choice_options:
             -   option: '`{and}`'
-                feedback: There are no items that are both the list of snacks and the list of drinks
+                feedback: Hem atıştırmalık listesinde hem de içecek listesinde olan hiçbir öğe yoktur
             -   option: '`{or}`'
-                feedback: Great job!
+                feedback: İyi işti!
             -   option: '`{in}`'
-                feedback: No
+                feedback: Hayır
             -   option: '`{if}`'
-                feedback: No
+                feedback: Hayır
             correct_answer: B
-            hint: The item is either in the list of snacks, or in the list of drinks
+            hint: Ürün ya atıştırmalıklar listesindedir ya da içecekler listesindedir
             question_score: '10'
     14:
         2:
             mp_choice_options:
-            -   option: '{if} name = Hedy'
-                feedback: No
-            -   option: '{if} age = 24'
-                feedback: No
-            -   option: answer = {ask} 'What is your answer'
-                feedback: Yes!
-            -   option: answer == {ask} 'How are you doing?'
-                feedback: No
-            question_text: Which of these codes has used the correct = or == symbol?
+            -   option: '{if} isim = Hedy'
+                feedback: Hayır
+            -   option: '{if} yaş = 24'
+                feedback: Hayır
+            -   option: cevap = {ask} 'Cevabınız nedir?'
+                feedback: Evet!
+            -   option: cevap == {ask} 'Nasılsınız?'
+                feedback: Hayır
+            question_text: Bu kodlardan hangisi = veya == sembolünü doğru şekilde kullanmıştır?
             correct_answer: C
-            hint: When you are comparing two answers you should use ==
+            hint: İki yanıtı karşılaştırırken == kullanmalısınız
             question_score: '10'
         3:
             correct_answer: C
-            hint: There are 130 people allowed in the club
-            question_text: Which symbols should be filled in on the two blanks?
-            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'\n"
+            hint: Kulübe 130 kişinin girmesine izin verilmektedir
+            question_text: Gösterilen iki boşluğa hangi semboller doldurulmalıdır?
+            code: "misafirler = {ask} 'Partide kaç kişi var?'\n{if} misafirler _ 130\n    {print} 'İçeri gelebilirsiniz!'\n{if} misafirler _ 130\n    {print} 'Üzgünüm, kulüp dolu.'\n    {print} 'Bir misafirin gitmesini beklemek zorundasınız'\n"
             mp_choice_options:
-            -   option: '`>` and `<`'
-                feedback: That's not it
-            -   option: '`=` and `>=`'
-                feedback: That's not it
-            -   option: '`<` and `>=`'
-                feedback: You are right
-            -   option: ' `+` and `==`'
-            feedback: That's not it
+            -   option: '`>` ve `<`'
+                feedback: Bu doğru değil
+            -   option: '`=` ve `>=`'
+                feedback: Bu doğru değil
+            -   option: '`<` ve `>=`'
+                feedback: Haklısın
+            -   option: ' `+` ve `==`'
+            feedback: Bu doğru değil
             question_score: '10'
         6:
             mp_choice_options:
-            -   feedback: It stops after 2 times
-                option: 10 times
-            -   option: 0 times
-                feedback: It stops after 2 times
-            -   option: 1 time
-                feedback: It stops after 2 times
-            -   feedback: That is correct
-                option: 2 times
+            -   feedback: 2 kez denedikten sonra duruyor
+                option: 10 kere
+            -   option: 0 kere
+                feedback: 2 kez denedikten sonra duruyor
+            -   option: 1 kere
+                feedback: 2 kez denedikten sonra duruyor
+            -   feedback: Bu doğru
+                option: 2 kere
             correct_answer: D
-            code: "lives = 2\n{repeat} 10 times\n    {if} lives != 0\n        answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1\n"
-            question_text: How many times do you have to say you are annoyed before this annoying game stops?
-            hint: "!= means 'is not'"
+            code: "canlar = 2\n{repeat} 10 {times}\n    {if} canlar != 0\n        cevap = {ask} 'Daha sinirlenmedin mi?'\n    {if} cevap == 'evet'\n        canlar = canlar - 1\n"
+            question_text: Bu sinir bozucu oyunun durması için daha kaç kez rahatsız olduğunuzu söylemeniz gerekiyor?
+            hint: "!= simgesi 'eşit değildir' anlamına gelir"
             question_score: '10'
         7:
             mp_choice_options:
-            -   feedback: That's not quite right.
-                option: "`'Lower'` and `'Higher'` and `'You win!'`"
-            -   option: "`'Higher'` and `'Lower'` and `'You win!'`"
-                feedback: You win!
-            -   option: "`'You win!'` and `'Lower!'` and `'Higher'`"
-                feedback: That's not quite right.
-            -   option: "`'Lower!'` and `'You win!'` and `'Higher!'`"
-                feedback: That's not quite right.
+            -   feedback: Bu tam olarak doğru değil.
+                option: "`'Aşağı'` ve `'Yukarı'` ve `'Kazandın!'`"
+            -   option: "`'Yukarı'` ve `'Aşağı'` ve `'Kazandın!'`"
+                feedback: Kazandın!
+            -   option: "`'Kazandın!'` ve `'Aşağı!'` ve `'Yukarı'`"
+                feedback: Bu tam olarak doğru değil.
+            -   option: "`'Aşağı!'` ve `'Kazandın!'` ve `'Yukarı!'`"
+                feedback: Bu tam olarak doğru değil.
             correct_answer: B
-            question_text: What should be filled in on the three blanks?
-            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'\n"
-            hint: The last one should say you win.
+            question_text: Üç boşluğa neler doldurulmalıdır?
+            code: "{print} 'Tahmin et hangi sayı'\nsayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nsayı = sayılar {at} {random}\noyun = 'devam'\n{for} i {in} {range} 1 {to} 10\n    {if} oyun == 'devam'\n        tahmin = {ask} 'Sence hangi numara?'\n        {if} tahmin < sayı\n            {print} _\n        {if} tahmin > sayı\n            {print} _\n        {if} tahmin == sayı\n            {print} _\n            oyun = 'tamam'\n"
+            hint: Sonuncusu senin kazandığını söylemeli.
             question_score: '10'
         9:
             mp_choice_options:
-            -   option: 1 or more
-                feedback: No
-            -   option: 2 or more
-                feedback: No
-            -   option: 8 or more
-                feedback: Almost
-            -   option: 9 or more
-                feedback: Great!
-            question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
-            code: "chocolate = {ask} 'How many pieces of chocolate have you eaten?'\n  {if} chocolate <= 2\n      {print} 'That is a healthy amount'\n  {if} chocolate > 2 and chocolate =< 8\n      {print} 'That is a bit much'\n  {if} chocolate > 8\n      {print} 'You will get a stomach ache!'\n"
+            -   option: 1 veya daha fazla
+                feedback: Hayır
+            -   option: 2 veya daha fazla
+                feedback: Hayır
+            -   option: 8 veya daha fazla
+                feedback: Neredeyse
+            -   option: 9 veya daha fazla
+                feedback: Harika!
+            question_text: Bu fitbit'e göre kaç parça çikolata midenizi ağrıtacak?
+            code: "çikolata = {ask} 'Kaç parça çikolata yedin?'\n  {if} çikolata <= 2\n      {print} 'Bu sağlıklı bir miktar'\n  {if} çikolata > 2 {and} çikolata =< 8\n      {print} 'Bu biraz fazla oldu.'\n  {if} çikolata > 8\n      {print} 'Karnın ağrıyacak!'\n"
             correct_answer: D
-            hint: '> 8 means more than 8'
+            hint: '> 8, 8''den fazla anlamına gelir'
             question_score: '10'
         1:
-            question_text: Which symbol should be used on the blank?
-            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'\n"
+            question_text: Boşlukta hangi sembol kullanılmalıdır?
+            code: "isim _ {ask} 'Kimsin sen?'\n{if} isim == 'Hedy'\n    {print} 'Ben de!'\n"
             mp_choice_options:
             -   option: '`=>`'
-                feedback: This is not a symbol.
+                feedback: Bu bir sembol değil.
             -   option: '`==`'
-                feedback: We are not comparing anything, just asking.
+                feedback: Hiçbir şeyi karşılaştırmıyoruz, sadece soruyoruz.
             -   option: '`!=`'
-                feedback: We are not comparing anything, just asking
+                feedback: Hiçbir şeyi karşılaştırmıyoruz, sadece soruyoruz
             -   option: '`=`'
-                feedback: Right!
+                feedback: Doğru!
             correct_answer: D
-            hint: We are not comparing anything, we are just asking a name.
+            hint: Hiçbir şeyi karşılaştırmıyoruz, sadece bir isim soruyoruz.
             question_score: '10'
         4:
             question_text: Bu kodun ne sorunu var?
-            code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price and buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'\n"
+            code: "fiyat = 10\npara = {ask} Ne kadar paran var?\nsatış = {ask} 'Bu oyuncak ayıyı satın almak ister misiniz?'\n{if} para >= fiyat {and} satış == 'evet'\n    {print} 'Ayıyı satın alabilirsin!'\n{else}\n    {print} 'Bu ayıyı satın alamazsınız!'\n"
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: You are correct
-            -   option: In line 4 = should have been used instead of ==
-                feedback: No that's not it
-            -   option: In line 4 <= should have been used instead of >=
-                feedback: No that's not it
+            -   option: 1. satırda = yerine == kullanılmalıdır
+                feedback: Hayır, öyle olmaz
+            -   option: 2. satırda tırnak işaretleri eksik
+                feedback: Haklısın
+            -   option: 4. satırda == yerine = kullanılmalıydı
+                feedback: Hayır, öyle olmaz
+            -   option: 4. satırda >= yerine <= kullanılmalıydı
+                feedback: Hayır, öyle olmaz
             correct_answer: B
-            hint: The symbols are right
+            hint: Semboller doğru
             question_score: '10'
         5:
             mp_choice_options:
             -   option: '`> 12`'
-                feedback: 12 year olds are allowed too
-            -   feedback: Great!
+                feedback: 12 yaşındakilere de izin var
+            -   feedback: Harika!
                 option: '`>= 12`'
             -   option: '`< 12`'
-                feedback: These kids are too young!
+                feedback: Bu çocuklar çok küçük!
             -   option: '`<= 12`'
-                feedback: These kids are too young
-            question_text: 'Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up? '
-            code: "age = {ask} 'How old are you?'\nticket = {ask} 'Do you have a ticket?'\n{if} age _ and ticket == 'yes'\n    {print} 'You can enter the movie theater.'\n{else}\n    {print} 'You are not allowed to come in!'\n"
+                feedback: Bu çocuklar çok küçük
+            question_text: 'Film 12 yaş ve üzeri çocuklar için uygunsa boşluklara hangi semboller doldurulmalıdır? '
+            code: "yaş = {ask} 'Kaç yaşındasınız?'\nbilet = {ask} 'Biletiniz var mı?'\n{if} yaş _ {and} bilet == 'evet'\n    {print} 'Sinemaya girebilirsiniz.'\n{else}\n    {print} 'İçeri giremezsiniz!'\n"
             correct_answer: B
-            hint: '> means greater than'
+            hint: '> simgesi büyüktür anlamına gelir'
             question_score: '10'
         8:
-            question_text: Which statement is true about this roller coaster?
-            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'\n"
+            question_text: Bu hız treni hakkında hangi ifade doğrudur?
+            code: "boy = {ask} 'Lütfen boyunuzu cm cinsinden girin'\n{if} boy < 120\n    {print} 'Üzgünüm, bu hız trenine binemezsiniz.'\n{else}\n    {print} 'Yolculuğun tadını çıkarın'\n"
             mp_choice_options:
-            -   option: You must be taller than 120 cm to go on the roller coaster
-                feedback: True!
-            -   option: You must be taller than 119 cm to go on the roller coaster
-                feedback: If you are 120 cm you won't get in
-            -   feedback: '> means greater than'
-                option: You must be shorter than 120 cm to go on the roller coaster
-            -   option: There are no length restrictions to go on the roller coaster
-                feedback: There are.
+            -   option: Hız trenine binmek için 120 cm'den uzun olmalısınız
+                feedback: Doğru!
+            -   option: Hız trenine binmek için 119 cm'den uzun olmalısınız
+                feedback: Ama eğer 120 cm iseniz içeri giremezsiniz
+            -   feedback: '> simgesi büyüktür anlamına gelir'
+                option: Hız trenine binmek için 120 cm'den kısa olmalısınız
+            -   option: Hız trenine binmek için herhangi bir boy sınırlaması yoktur
+                feedback: Hayır, var.
             correct_answer: A
-            hint: '> means greater than'
+            hint: '> simgesi büyüktür anlamına gelir'
             question_score: '10'
         10:
             mp_choice_options:
-            -   option: "'player 1 wins'"
-                feedback: Look at who has the highest score!
-            -   option: "'player 2 wins'"
-                feedback: Yes!
-            -   option: "'player 2 loses'"
-                feedback: Look at who has the highest score!
-            -   option: "'It is a tie'"
-                feedback: No it's not, one player has a higher score
-            question_text: What should be filled in in the blanks?
-            code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _\n"
+            -   option: "'oyuncu 1 kazanır'"
+                feedback: En yüksek puanı kimin aldığına bakın!
+            -   option: "'oyuncu 2 kazanır'"
+                feedback: Evet!
+            -   option: "'oyuncu 2 kaybeder'"
+                feedback: En yüksek puanı kimin aldığına bakın!
+            -   option: "'Bu bir beraberlik'"
+                feedback: Hayır değil, bir oyuncunun puanı daha yüksek
+            question_text: Boşluklara ne doldurulmalıdır?
+            code: "{print} 'En çok puanı alan kazanır!'\n{if} puanlar_oyuncu_1 < puanlar_oyuncu_2\n    {print} _\n"
             correct_answer: B
-            hint: You win the game by having the most points
+            hint: En çok puana sahip olunca oyunu kazanırsınız
             question_score: '10'
     15:
         1:
-            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
-            code: "answer = 0\nwhile answer _ 'Amsterdam'\n    answer = ask 'What is the capital city of the Netherlands?'\nprint 'You have given the correct answer'\n"
+            question_text: 'Boşlukta hangi sembol kullanılmalıdır? İpucu: Doğruyu bulana kadar tahmin etmeye devam etmelisiniz.'
+            code: "cevap = 0\n{while} cevap _ 'Ankara'\n    cevap = {ask} 'Türkiye`nin başkenti neresidir?'\n{print} 'Doğru cevabı verdiniz'\n"
             mp_choice_options:
-            -   feedback: That is not right.
+            -   feedback: Bu doğru değil.
                 option: '`=!`'
             -   option: '`==`'
-                feedback: You don't have to keep guessing if you've given the right answer.
+                feedback: Doğru cevabı verirseniz tahmin etmeye devam etmek zorunda değilsiniz.
             -   option: '`!=`'
-                feedback: Correct
+                feedback: Doğru
             -   option: '`=`'
-                feedback: That's not it
-            hint: Keep guessing until you say Amsterdam
+                feedback: Bu doğru değil
+            hint: Sen Ankara diyene kadar tahmin etmeye devam edersin
             question_score: '10'
             correct_answer: C
         2:
-            question_text: Which of these codes has used the correct symbol(s)?
+            question_text: Bu kodlardan hangisinde doğru sembol(ler) kullanılmıştır?
             mp_choice_options:
-            -   option: "```\n{while} name = Hedy\n```\n"
-                feedback: No
-            -   option: "```\n{while} age = 24\n```\n"
-                feedback: No
-            -   option: "```\n{while} time > 0\n```\n"
-                feedback: Yes!
-            -   option: "```\n{while} answer == yes'\n```\n"
-                feedback: A quotation mark is missing
+            -   option: "```\n{while} isim = Hedy\n```\n"
+                feedback: Hayır
+            -   option: "```\n{while} yaş = 24\n```\n"
+                feedback: Hayır
+            -   option: "```\n{while} zaman > 0\n```\n"
+                feedback: Evet!
+            -   option: "```\n{while} cevap == evet'\n```\n"
+                feedback: Bir tırnak işareti eksik
             correct_answer: C
-            hint: When you are comparing two answers you should use ==
+            hint: İki yanıtı karşılaştırırken == kullanmalısınız
             question_score: '10'
         3:
-            question_text: Which command should be filled in on the two blanks?
-            code: "_ age >= 18\n  print 'you are not allowed in this bar'\n"
+            question_text: Boşluğa hangi komut doldurulmalıdır?
+            code: "_ yaş < 18\n  {print} 'Bu bara giremezsin.'\n"
             mp_choice_options:
             -   option: '`{in}`'
-                feedback: That's not it
+                feedback: Bu doğru değil
             -   option: '`{while}`'
-                feedback: You are right
+                feedback: Haklısın
             -   option: '`{for}`'
-                feedback: That's not it
+                feedback: Bu doğru değil
             -   option: '`{range}`'
-                feedback: That's not it
-            hint: You are not allowed in the bar as long as you are 17 or younger
+                feedback: Bu doğru değil
+            hint: Yaşınız 17 veya daha küçük olduğu sürece bara giremezsiniz
             question_score: '10'
             correct_answer: B
         4:
             question_text: Bu kodun ne sorunu var?
-            code: "options = 1, 2, 3, 4, 5, 6\nprint 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\nwhile thrown == 6\n    thrown = options at random\n    print 'You threw ' thrown\n    tries = tries + 1\nprint 'Yes! You have thrown 6 in ' tries ' tries.'\n"
+            code: "seçenekler = 1, 2, 3, 4, 5, 6\n{print} 'Atabildiğin kadar hızlı 6 at!'\natılan = 0\ndeneme = 0\n{while} atılan == 6\n    atılan = seçenekler {at} {random}\n    {print} 'Attığın sayı' atılan\n    deneme = deneme + 1\n{print} 'Evet! ' deneme ' denemede 6 atmayı başardın.'\n"
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: That's not right
-            -   option: In line 5 if should have been used instead of while
-                feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
-                feedback: You are correct
+            -   option: 1. satırda = yerine == kullanılmalıdır
+                feedback: Hayır, bu değil
+            -   option: 2. satırda tırnak işaretleri eksik
+                feedback: Bu doğru değil
+            -   option: 5. satırda {while} yerine {if} kullanılmalıydı
+                feedback: Bu doğru değil
+            -   option: 5. satırda == yerine != kullanılmalıydı
+                feedback: Haklısın
             correct_answer: D
-            hint: There is something wrong in line 5
+            hint: Satır 5'te yanlış bir şey var
             question_score: '10'
         5:
-            question_text: What should be placed on the blank to make this program work correctly?
-            code: "wetness = 10\nwhile wetness != 0\n    print 'Your hair is still wet, hair dryer on!'\n    sleep 1\n    clear\n    wetness _\n\nprint 'All dry!'\n"
+            question_text: Bu programın doğru çalışması için boşluğa ne yerleştirilmelidir?
+            code: "ıslaklık = 10\n{while} ıslaklık != 0\n    {print} 'Saçın hala ıslak, saç kurutma makinesi açık!'\n    {sleep} 1\n    {clear}\n    ıslaklık _\n\n{print} 'Hepsi kurudu!'\n"
             mp_choice_options:
-            -   option: = wetness
-                feedback: That will not change anything
-            -   option: = wetness = 1
-                feedback: You can't have two times = in one line
-            -   option: = wetness - 1
-                feedback: You are correct!
-            -   option: = wetness + 1
-                feedback: The program should count down
+            -   option: = ıslaklık
+                feedback: Bu hiçbir şeyi değiştirmeyecek
+            -   option: = ıslaklık = 1
+                feedback: Bir satırda iki kere = olamaz
+            -   option: = ıslaklık - 1
+                feedback: Haklısın!
+            -   option: = ıslaklık + 1
+                feedback: Program geri doğru saymalıdır
             correct_answer: C
-            hint: wetness should get less each time
+            hint: ıslaklık her seferinde azalmalıdır
             question_score: '10'
         6:
             mp_choice_options:
-            -   option: while should be if
-                feedback: No that is not right
-            -   option: if should be while
-                feedback: No that is not right
-            -   option: Line 3 should start with more indentation
-                feedback: No that's not right
-            -   option: Line 2 should start with less indentation
-                feedback: That is correct
+            -   option: '{while}, {if} olmalıdır'
+                feedback: Hayır, bu doğru değil
+            -   option: '{if}, {while} olmalıdır'
+                feedback: Hayır, bu doğru değil
+            -   option: 3. satır daha fazla girinti ile başlamalıdır
+                feedback: Hayır, bu doğru değil
+            -   option: Satır 2 daha az girintiyle başlamalıdır
+                feedback: Bu doğru
             question_text: Bu kodun ne sorunu var?
-            code: "lives = 100\n    {while} lives != 0\n    answer = {ask} 'Are you annoyed yet?'\n{if} answer == 'yes'\n    lives = lives - 1\n"
+            code: "canlar = 100\n    {while} canlar != 0\n    cevap = {ask} 'Daha sinirlenmedin mi?'\n    {if} cevap == 'evet'\n        canlar = canlar - 1\n"
             correct_answer: D
-            hint: Look closely at the indentation
+            hint: Girintilere yakından bakın
             question_score: '10'
         7:
-            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'\n"
+            code: "{print} 'Tahmin et hangi sayı'\nsayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nsayı = sayılar {at} {random}\noyun = 'devam'\n{if} oyun == 'devam'\n    tahmin = {ask} 'Sence hangi sayı?'\n    {if} tahmin < sayı\n        {print} _\n    {if} tahmin > sayı\n        {print} _\n    {if} tahmin == sayı\n        {print} _\n        oyun = 'bitti'\n"
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
-                feedback: Perfect!
-            -   option: '... change the second {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the third {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the fourth {if} into a {while}'
-                feedback: That's not quite right.
+            -   option: '... ilk {if}''i {while} olarak değiştirin'
+                feedback: Mükemmel!
+            -   option: '... ikinci {if}''i {while} olarak değiştirin'
+                feedback: Bu tam olarak doğru değil.
+            -   option: '... üçüncü {if}''i {while} olarak değiştirin'
+                feedback: Bu tam olarak doğru değil.
+            -   option: '... dördüncü {if}''i {while} olarak değiştirin'
+                feedback: Bu tam olarak doğru değil.
             correct_answer: A
-            hint: The last one should say you win.
+            hint: Sonuncusu senin kazandığını söylemeli.
             question_score: '10'
-            question_text: How should this program be changed to that it works?
+            question_text: Bu programın çalışması için nasıl değiştirilmelidir?
         8:
-            question_text: Which statement is true about this automated toilet system?
-            code: "while toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    sleep 60\nelse\n    lights = 'off'\n"
+            question_text: Bu otomatik tuvalet sistemi hakkında hangi ifade doğrudur?
+            code: "{while} tuvalet == 'dolu'\n    ışıklar = 'açık'\n    hava_tazeleyici_sprey = 'evet'\n    {sleep} 60\n{else}\n    ışıklar = 'kapalı'\n"
             mp_choice_options:
-            -   option: The lights and air freshener will turn off after 1 minute
-                feedback: False!
-            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
-                feedback: Great job
-            -   option: The air freshener sprays once you leave the toilet.
-                feedback: It only sprays when you're in there.
-            -   option: The lights will always stay on.
-                feedback: That wouldn't be right.
+            -   option: Işıklar ve oda spreyi 1 dakika sonra kapanacaktır
+                feedback: Yanlış!
+            -   option: Oda spreyi her dakika bir kez püskürtülür ve tuvaletteyken ışıklar sürekli açık kalır
+                feedback: Harika bir iş
+            -   option: Oda spreyi tuvaletten çıktığınızda püskürüyor.
+                feedback: Sadece siz oradayken püskürüyor.
+            -   option: Işıklar her zaman açık kalacaktır.
+                feedback: Bu doğru olmazdı.
             correct_answer: B
-            hint: The block after the while command keeps happening while the toilet is occupied.
+            hint: '{while} komutundan sonraki blok, tuvalet dolu olduğu sürece devam eder.'
             question_score: '10'
         9:
-            question_text: What will the diet app say if you have eaten 1600 calories today?
-            code: "chocolate = {ask} 'How many calories have you eaten today?'\n  {while} calories <= 1000\n      {print} 'You could eat some more'\n  {while} calories > 1000 and calories =< 2000\n      {print} 'That is alright'\n  {while} calories > 2000\n      {print} 'You have had enough for today'\n"
+            question_text: Bugün 1600 kalori yediyseniz diyet uygulaması ne söyleyecek?
+            code: "kalori= {ask} 'Bugün kaç kalori aldınız?'\n  {while} kalori <= 1000\n      {print} 'Biraz daha yiyebilirsin.'\n  {while} kalori > 1000 {and} kalori =< 2000\n      {print} 'Sorun değil'\n  {while} kalori > 2000\n      {print} 'Bugünlük bu kadar yeter.'\n"
             mp_choice_options:
-            -   option: Nothing. 1600 is not programmed into the app.
-                feedback: No
-            -   option: you could eat some more
-                feedback: No
-            -   option: That is alright
-                feedback: Yes!
-            -   option: You have eaten enough for today
-                feedback: No
+            -   option: Hiçbir şey. 1600 uygulamaya programlanmamıştır.
+                feedback: Hayır
+            -   option: Biraz daha yiyebilirsin
+                feedback: Hayır
+            -   option: Sorun değil
+                feedback: Evet!
+            -   option: Bugünlük bu kadar yeter
+                feedback: Hayır
             correct_answer: C
-            hint: 1600 is between 1000 and 2000
+            hint: 1600, 1000 ile 2000 arasındadır
             question_score: '10'
         10:
-            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
-            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'\n"
+            question_text: 'Boşluğa ne gelmelidir? İpucu: En çok puan alan oyuncu liderdir.'
+            code: "isim_oyuncu_1 = {ask} 'İsim oyuncu 1:'\nisim_oyuncu_2 = {ask} 'İsim oyuncu 2:'\n{while} puan_oyuncu_1 > puan_oyuncu_2\n    {print} _ ' şu anda lider durumda!'\n"
             mp_choice_options:
-            -   option: name_player_1
-                feedback: You are right!
-            -   option: name_player_2
-                feedback: No they are losing!
-            -   option: points_player_1
-                feedback: You should fill in a name, not a number
-            -   option: points_player_2
-                feedback: You should fill in a name, not a number
+            -   option: isim_oyuncu_1
+                feedback: Haklısın!
+            -   option: isim_oyuncu_2
+                feedback: Hayır, o kaybediyor!
+            -   option: puan_oyuncu_1
+                feedback: Bir sayı değil, bir isim girmelisiniz
+            -   option: puan_oyuncu_2
+                feedback: Bir sayı değil, bir isim girmelisiniz
             correct_answer: A
-            hint: You win the game by having the most points. Your name should appear on the screen
+            hint: En çok puana sahip olarak oyunu kazanırsınız. Adınız ekranda görünmelidir
             question_score: '10'
