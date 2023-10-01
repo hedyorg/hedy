@@ -2803,6 +2803,10 @@ adventures:
                 example_code_2: "```\nisim = {ask} 'Senin adın ne?'\n{if} isim == 'Hedy'\n    {print} 'Çok havalısın!'\n```\n"
                 story_text_3: "Bir şeyin başka bir şeye eşit *olmadığını* `!=` kullanarak karşılaştırabilirsiniz:\n"
                 example_code_3: "```\nisim = {ask} 'Senin adın ne?'\n{if} isim != 'Hedy'\n    {print} 'Sen Hedy değilsin.'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     random_command:
         name: "{random}"
         description: şurada rastgele komutuna giriş
@@ -2859,6 +2863,10 @@ adventures:
                 start_code: "isim {is} {ask} 'Senin adın ne?'\n{if} isim {is} Hedy\n    {print} 'Hoşgeldin Hedy'\n    {print} 'Bilgisayarında oynayabilirsin!'\n"
                 example_code: "```\nisim {is} {ask} 'Senin adın ne?'\n{if} isim {is} Hedy\n    {print} 'Hoşgeldin Hedy'\n    {print} 'Bilgisayarında oynayabilirsin!'\n```\n"
                 story_text: "## eğer... değilse...\nBir `{repeat}` komutundan sonra bir kod satır bloğunu tekrarlamayı öğrendiniz.\nŞimdi artık bir {if} veya {else} komutundan sonra bloklar oluşturmak için girinti de kullanabilirsiniz.\nÖrnek koda göz atın.\n\n### Alıştırma\nÖrnek koda bir {else} komutu ekleyin. Girinti kullanarak bir satır bloğu oluşturun. Bunu her satırı 4 boşlukla başlatarak yaparsınız.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     in_command:
         name: "{in}"
         description: içinde komutuna giriş

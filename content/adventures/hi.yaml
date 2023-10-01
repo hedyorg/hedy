@@ -828,7 +828,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |2
 
-                      Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                        Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
             15:
                 story_text: |
@@ -925,9 +925,9 @@ adventures:
             3:
                 story_text: |2
 
-                      In this level we can enter lists and choose things from them.
-                      You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                      For example, you can let the computer pick from rock, paper and scissors.
+                        In this level we can enter lists and choose things from them.
+                        You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                        For example, you can let the computer pick from rock, paper and scissors.
                 start_code: '{print} Welcome to your own rock scissors paper!'
                 example_code: |
                     ```
@@ -1230,20 +1230,20 @@ adventures:
 
                 example_code: |2
 
-                      You can make a simple restaurant code, like this:
-                      ```
-                      {print} 'Welcome to Hedys restaurant'
-                      {print} 'Here is our menu:'
-                      {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                      main = {ask} 'Which main course would you like?'
-                      price = 0
-                      {if} main {is} pizza price = 10
-                      {if} main {is} lasagne price = 12
-                      {if} main {is} spaghetti price = 8
-                      {print} 'You have ordered ' main
-                      {print} 'That will be ' price ' dollars, please'
-                      {print} 'Thank you, enjoy your meal!'
-                      ```
+                        You can make a simple restaurant code, like this:
+                        ```
+                        {print} 'Welcome to Hedys restaurant'
+                        {print} 'Here is our menu:'
+                        {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                        main = {ask} 'Which main course would you like?'
+                        price = 0
+                        {if} main {is} pizza price = 10
+                        {if} main {is} lasagne price = 12
+                        {if} main {is} spaghetti price = 8
+                        {print} 'You have ordered ' main
+                        {print} 'That will be ' price ' dollars, please'
+                        {print} 'Thank you, enjoy your meal!'
+                        ```
                 start_code: "# place your code here"
             7:
                 story_text: |
@@ -1314,7 +1314,7 @@ adventures:
                     ```
                 story_text_2: |2
 
-                      Of course, you could also order for multiple people!
+                        Of course, you could also order for multiple people!
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -2245,6 +2245,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     random_command:
         description: introducing at random command
         default_save_name: random_command
@@ -2301,6 +2305,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     in_command:
         name: "{in}"
         description: Introducing the in command

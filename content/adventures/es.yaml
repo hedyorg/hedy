@@ -1409,6 +1409,10 @@ adventures:
                 example_code_2: "```\nnombre = {ask} '¿Cómo te llamas?'\n{if} nombre == 'Hedy'\n    {print} '¡Cómo molas!'\n```\n"
                 story_text_3: "También puedes comparar si algo *no* es igual a otra cosa usando `!=` tal que así:\n"
                 example_code_3: "```\nnombre = {ask} '¿Cómo te llamas?'\n{if} nombre != 'Hedy'\n    {print} 'Tu no eres Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     add_remove_command:
         levels:
             3:
@@ -1448,6 +1452,10 @@ adventures:
                 start_code: "nombre {is} {ask} '¿Cómo te llamas?'\n{if} nombre {is} Hedy\n    {print} 'Bienvenido Hedy'\n    {print} '¡Puedes jugar en tu ordenador!'\n"
                 example_code: "```\nnombre {is} {ask} '¿Cómo te llamas?'\n{if} nombre {is} Hedy\n    {print} 'Bienvenido Hedy'\n    {print} '¡Puedes jugar en tu ordenador!'\n```\n"
                 story_text: "## Si… Sino…\nHas aprendido a repetir un bloque de líneas de código tras un comando `{repeat}`.\nAhora puedes usar la sangría para hacer bloques tras un comando {if} o {else}.\nComprueba el código de ejemplo.\n\n### Ejercicio\nAñade un comando {else} al código de ejemplo. Haz un bloque de línea usando sangría. Haz esto empezando cada línea con 4 espacios.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     repeat_command:
         name: "{repeat}"
         description: comando repetir
